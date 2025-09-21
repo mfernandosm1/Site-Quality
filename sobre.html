@@ -3,78 +3,54 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sobre - Quality Celulares</title>
+  <title>Sobre nós - Quality Celulares</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-  <link rel="icon" type="image/png" href="images/favicon.png">
+  <link rel="stylesheet" href="css/style.css">
 </head>
 <body class="bg-gray-50 text-gray-800">
 
   <!-- Header -->
-  <header class="fixed top-0 left-0 w-full bg-white shadow-md z-50">
-    <div class="bg-red-600 text-white w-full px-4 py-3 flex items-center justify-between">
+  <header class="site-header">
+    <div class="bg-red-600 text-white w-full px-4 py-4 flex items-center justify-between">
       <a href="index.html">
-        <img src="images/logo.png" alt="Logo Quality Celulares" class="h-12 w-auto sm:h-16">
+        <img src="images/logo.png" alt="Logo Quality Celulares" class="h-16 w-auto">
       </a>
-      <button id="menu-toggle" class="sm:hidden text-2xl">
-        <i class="fas fa-bars"></i>
-      </button>
-      <nav id="menu" class="hidden sm:flex items-center gap-8">
-        <a href="index.html#smartphones" class="hover:underline">Smartphones</a>
-        <a href="index.html#acessorios" class="hover:underline">Acessórios</a>
-        <a href="https://wa.me/5555991407824?text=ol%C3%A1%20vim%20atrav%C3%A9s%20do%20site" 
-           class="bg-green-500 text-white px-4 py-2 rounded-lg font-medium hover:bg-green-600 transition">
-          WhatsApp
-        </a>
+      <nav class="flex items-center gap-8">
+        <a href="index.html#smartphones" class="menu-link">Smartphones</a>
+        <a href="index.html#acessorios" class="menu-link">Acessórios</a>
+        <a href="https://wa.me/5555991407824" class="btn-whatsapp">WhatsApp</a>
       </nav>
     </div>
-    <nav id="mobile-menu" class="hidden flex-col bg-red-700 text-white sm:hidden px-4 py-3">
-      <a href="index.html#smartphones" class="py-2 hover:underline">Smartphones</a>
-      <a href="index.html#acessorios" class="py-2 hover:underline">Acessórios</a>
-      <a href="https://wa.me/5555991407824?text=ol%C3%A1%20vim%20atrav%C3%A9s%20do%20site" 
-         class="bg-green-500 text-white px-4 py-2 mt-2 rounded-lg font-medium hover:bg-green-600 transition">
-        WhatsApp
-      </a>
-    </nav>
   </header>
 
-  <!-- Conteúdo -->
-  <main class="pt-28 max-w-4xl mx-auto px-4">
+  <!-- Main -->
+  <main class="pt-28 max-w-4xl mx-auto px-4 py-12">
     <h1 class="text-3xl font-bold mb-6 text-center">Sobre a Quality Celulares</h1>
-    <p class="text-lg leading-relaxed text-gray-700 mb-6">
+    <p class="text-lg text-gray-700 text-center">
       Vendemos celulares, notebooks, videogames, smartwatches, tablets, caixas de som e acessórios em geral.
-      Também oferecemos assistência técnica em celulares, sempre prezando pela qualidade no atendimento
-      e pela confiança dos nossos clientes.
-    </p>
-    <p class="text-lg leading-relaxed text-gray-700">
-      Nosso objetivo é proporcionar a melhor experiência de compra e suporte, com produtos de qualidade,
-      preços competitivos e um atendimento que faz a diferença. Estamos sempre à disposição para ajudar
-      você a encontrar o que precisa.
+      Também oferecemos assistência técnica em celulares.
     </p>
   </main>
 
-  <!-- Rodapé -->
-  <footer class="bg-gray-900 text-gray-300 py-8 mt-12">
-    <div class="max-w-6xl mx-auto px-4 text-center">
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="text-center">
       <a href="index.html">
-        <img src="images/logo.png" alt="Logo Quality Celulares" class="h-20 w-auto mb-4 mx-auto">
+        <img src="images/logo.png" alt="Logo Quality Celulares" class="h-20 w-auto mb-4">
       </a>
-      <p class="font-semibold text-lg mb-2">Informações</p>
-      <div class="flex justify-center gap-6 mb-6">
-        <a href="sobre.html" class="hover:underline">Sobre nós</a>
-        <a href="formas-de-pagamento.html" class="hover:underline">Formas de pagamento e envio</a>
+    </div>
+    <div class="text-white text-center mb-4">
+      <p class="font-semibold text-lg">Informações</p>
+      <div class="flex justify-center gap-6 mt-2">
+        <a href="sobre.html" class="footer-link">Sobre nós</a>
+        <a href="formas-de-pagamento.html" class="footer-link">Formas de pagamento e envio</a>
       </div>
-      <p class="text-gray-500 text-sm">© 2025 Quality Celulares. Todos os direitos reservados.</p>
+    </div>
+    <div class="footer-copy">
+      © 2025 Quality Celulares. Todos os direitos reservados.
     </div>
   </footer>
 
-  <!-- Script Menu -->
-  <script>
-    const toggleBtn = document.getElementById('menu-toggle');
-    const mobileMenu = document.getElementById('mobile-menu');
-    toggleBtn.addEventListener('click', () => {
-      mobileMenu.classList.toggle('hidden');
-    });
-  </script>
 </body>
 </html>

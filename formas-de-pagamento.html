@@ -6,86 +6,87 @@
   <title>Formas de Pagamento e Envio - Quality Celulares</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-  <link rel="icon" type="image/png" href="images/favicon.png">
+  <link rel="stylesheet" href="css/style.css">
 </head>
 <body class="bg-gray-50 text-gray-800">
 
   <!-- Header -->
-  <header class="fixed top-0 left-0 w-full bg-white shadow-md z-50">
-    <div class="bg-red-600 text-white w-full px-4 py-3 flex items-center justify-between">
+  <header class="site-header">
+    <div class="bg-red-600 text-white w-full px-4 py-4 flex items-center justify-between">
       <a href="index.html">
-        <img src="images/logo.png" alt="Logo Quality Celulares" class="h-12 w-auto sm:h-16">
+        <img src="images/logo.png" alt="Logo Quality Celulares" class="h-16 w-auto">
       </a>
-      <button id="menu-toggle" class="sm:hidden text-2xl">
-        <i class="fas fa-bars"></i>
-      </button>
-      <nav id="menu" class="hidden sm:flex items-center gap-8">
-        <a href="index.html#smartphones" class="hover:underline">Smartphones</a>
-        <a href="index.html#acessorios" class="hover:underline">Acessórios</a>
-        <a href="https://wa.me/5555991407824?text=ol%C3%A1%20vim%20atrav%C3%A9s%20do%20site" 
-           class="bg-green-500 text-white px-4 py-2 rounded-lg font-medium hover:bg-green-600 transition">
-          WhatsApp
-        </a>
+      <nav class="flex items-center gap-8">
+        <a href="index.html#smartphones" class="menu-link">Smartphones</a>
+        <a href="index.html#acessorios" class="menu-link">Acessórios</a>
+        <a href="https://wa.me/5555991407824" class="btn-whatsapp">WhatsApp</a>
       </nav>
     </div>
-    <nav id="mobile-menu" class="hidden flex-col bg-red-700 text-white sm:hidden px-4 py-3">
-      <a href="index.html#smartphones" class="py-2 hover:underline">Smartphones</a>
-      <a href="index.html#acessorios" class="py-2 hover:underline">Acessórios</a>
-      <a href="https://wa.me/5555991407824?text=ol%C3%A1%20vim%20atrav%C3%A9s%20do%20site" 
-         class="bg-green-500 text-white px-4 py-2 mt-2 rounded-lg font-medium hover:bg-green-600 transition">
-        WhatsApp
-      </a>
-    </nav>
   </header>
 
-  <!-- Conteúdo -->
-  <main class="pt-28 max-w-4xl mx-auto px-4">
-    <h1 class="text-3xl font-bold mb-6 text-center">Formas de Pagamento e Envio</h1>
+  <!-- Banner -->
+  <section class="pt-28 bg-gradient-to-r from-red-600 to-red-500 text-white text-center py-16">
+    <h1 class="text-3xl md:text-4xl font-bold mb-4">Formas de Pagamento & Envios</h1>
+    <p class="text-lg md:text-xl max-w-2xl mx-auto">Pagamentos rápidos e frete grátis para compras acima de <strong>R$120,00</strong> no RS!</p>
+  </section>
 
-    <!-- Pagamento -->
-    <section class="mb-12">
-      <h2 class="text-2xl font-semibold mb-4">Formas de Pagamento</h2>
-      <ul class="list-disc pl-6 text-lg text-gray-700 space-y-2">
-        <li>Cartão de crédito (Visa, MasterCard, Elo, American Express)</li>
-        <li>Boleto bancário</li>
-        <li>PIX</li>
-      </ul>
+  <!-- Main -->
+  <main class="max-w-6xl mx-auto px-4 py-12 space-y-12">
+    <section class="grid md:grid-cols-3 gap-6">
+      <div class="bg-white rounded-xl shadow-lg p-6 text-center hover:shadow-2xl transition">
+        <i class="fa-solid fa-credit-card text-4xl text-red-600 mb-4"></i>
+        <h2 class="text-xl font-bold mb-2">Cartão de Crédito</h2>
+        <p>Visa, MasterCard, Elo, American Express</p>
+      </div>
+      <div class="bg-white rounded-xl shadow-lg p-6 text-center hover:shadow-2xl transition">
+        <i class="fa-solid fa-file-invoice text-4xl text-yellow-500 mb-4"></i>
+        <h2 class="text-xl font-bold mb-2">Boleto Bancário</h2>
+        <p>Pague de forma segura diretamente pelo banco</p>
+      </div>
+      <div class="bg-white rounded-xl shadow-lg p-6 text-center hover:shadow-2xl transition">
+        <i class="fa-brands fa-pix text-4xl text-green-500 mb-4"></i>
+        <h2 class="text-xl font-bold mb-2">PIX</h2>
+        <p>Transferência instantânea e segura</p>
+      </div>
     </section>
 
-    <!-- Envio -->
-    <section>
-      <h2 class="text-2xl font-semibold mb-4">Envios</h2>
-      <p class="text-lg text-gray-700 leading-relaxed">
-        Os envios são realizados via Correios ou Transportadora.<br>
-        Oferecemos <span class="font-semibold">frete grátis para todo o Rio Grande do Sul</span> 
-        em compras acima de <span class="font-semibold">R$120,00</span>. <br>
-        Para as demais regiões do Brasil, o valor do frete é calculado no momento da compra.
-      </p>
+    <section class="bg-white rounded-xl shadow-lg p-6 flex flex-col md:flex-row items-center gap-6">
+      <div class="flex-1 text-center md:text-left">
+        <i class="fa-solid fa-truck-fast text-5xl text-green-600 mb-4"></i>
+        <h2 class="text-2xl font-bold mb-2">ENVIOS:</h2>
+        <p class="text-lg">Via <strong>Correios ou Transportadora</strong>.</p>
+        <p class="text-lg mt-2">
+          Frete grátis para compras acima de <strong>R$120,00</strong> no <strong>RS</strong>.
+          Para as demais regiões, o valor do frete será calculado conforme a região de entrega.
+        </p>
+        <a href="https://wa.me/5555991407824" class="mt-4 inline-block bg-green-500 text-white px-6 py-3 rounded-lg hover:bg-green-600 font-medium">
+          Entrar em contato via WhatsApp
+        </a>
+      </div>
+      <div class="flex-1 text-center">
+        <img src="https://i.imgur.com/3XyV7Wn.jpeg" alt="Entrega rápida" class="rounded-xl shadow-md">
+      </div>
     </section>
   </main>
 
-  <!-- Rodapé -->
-  <footer class="bg-gray-900 text-gray-300 py-8 mt-12">
-    <div class="max-w-6xl mx-auto px-4 text-center">
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="text-center">
       <a href="index.html">
-        <img src="images/logo.png" alt="Logo Quality Celulares" class="h-20 w-auto mb-4 mx-auto">
+        <img src="images/logo.png" alt="Logo Quality Celulares" class="h-20 w-auto mb-4">
       </a>
-      <p class="font-semibold text-lg mb-2">Informações</p>
-      <div class="flex justify-center gap-6 mb-6">
-        <a href="sobre.html" class="hover:underline">Sobre nós</a>
-        <a href="formas-de-pagamento.html" class="hover:underline">Formas de pagamento e envio</a>
+    </div>
+    <div class="text-white text-center mb-4">
+      <p class="font-semibold text-lg">Informações</p>
+      <div class="flex justify-center gap-6 mt-2">
+        <a href="sobre.html" class="footer-link">Sobre nós</a>
+        <a href="formas-de-pagamento.html" class="footer-link">Formas de pagamento e envio</a>
       </div>
-      <p class="text-gray-500 text-sm">© 2025 Quality Celulares. Todos os direitos reservados.</p>
+    </div>
+    <div class="footer-copy">
+      © 2025 Quality Celulares. Todos os direitos reservados.
     </div>
   </footer>
 
-  <!-- Script Menu -->
-  <script>
-    const toggleBtn = document.getElementById('menu-toggle');
-    const mobileMenu = document.getElementById('mobile-menu');
-    toggleBtn.addEventListener('click', () => {
-      mobileMenu.classList.toggle('hidden');
-    });
-  </script>
 </body>
 </html>

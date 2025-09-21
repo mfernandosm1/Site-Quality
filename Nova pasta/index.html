@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quality Celulares</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+  <link rel="icon" type="image/png" href="https://mfernandosm1.github.io/Site-Quality/images/favicon.png">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-gray-50 text-gray-800">
+
+  <header class="fixed top-0 left-0 w-full bg-white shadow-md z-50">
+    <div class="bg-red-600 text-white w-full px-4 py-4 flex items-center justify-between">
+      <a href="index.html">
+        <img src="https://mfernandosm1.github.io/Site-Quality/images/logo.png" alt="Logo Quality Celulares" class="h-16 w-auto">
+      </a>
+      <button id="menu-toggle" class="menu-toggle sm:hidden">
+        <i class="fas fa-bars"></i>
+      </button>
+      <nav class="hidden sm:flex items-center gap-8">
+        <a href="#smartphones" class="text-white hover:text-gray-100 font-medium">Smartphones</a>
+        <a href="#acessorios" class="text-white hover:text-gray-100 font-medium">Acessórios</a>
+        <a href="https://wa.me/5555991407824?text=ol%C3%A1%20vim%20atrav%C3%A9s%20do%20site" class="bg-green-500 text-white px-4 py-2 rounded-lg font-medium hover:bg-green-600 transition">
+          WhatsApp
+        </a>
+      </nav>
+    </div>
+    <div id="mobile-menu" class="mobile-menu sm:hidden">
+      <a href="#smartphones">Smartphones</a>
+      <a href="#acessorios">Acessórios</a>
+      <a href="https://wa.me/5555991407824?text=ol%C3%A1%20vim%20atrav%C3%A9s%20do%20site">WhatsApp</a>
+    </div>
+  </header>
+
+  <section id="hero" class="mt-20 w-full z-40">
+    <div id="banner-carousel" class="relative">
+      <div class="carousel-container overflow-hidden">
+        <div class="carousel-inner flex">
+          <div class="carousel-item w-full flex-shrink-0">
+            <img src="images/banner1.png" alt="Promoção de celulares" class="w-full h-auto">
+          </div>
+          <div class="carousel-item w-full flex-shrink-0 hidden">
+            <img src="images/banner2.png" alt="Acessórios com desconto" class="w-full h-auto">
+          </div>
+          <div class="carousel-item w-full flex-shrink-0 hidden">
+            <img src="images/banner3.png" alt="Assistência técnica de qualidade" class="w-full h-auto">
+          </div>
+        </div>
+      </div>
+
+      <div class="absolute top-1/2 left-0 right-0 flex justify-between px-4">
+        <button id="prev" class="bg-black text-white px-4 py-2 rounded-full hover:bg-gray-800">
+          <i class="fas fa-chevron-left"></i>
+        </button>
+        <button id="next" class="bg-black text-white px-4 py-2 rounded-full hover:bg-gray-800">
+          <i class="fas fa-chevron-right"></i>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- restante do conteúdo aqui (catálogo, footer, etc) -->
+
+  <script src="main.js"></script>
+</body>
+</html>
