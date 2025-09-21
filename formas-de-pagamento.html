@@ -5,46 +5,45 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Formas de Pagamento e Envio - Quality</title>
   <link rel="stylesheet" href="css/style.css">
+  <script defer src="js/main.js"></script>
 </head>
 <body>
-  <header>
+  <header class="navbar">
     <div class="logo">
-      <img src="images/logo.png" alt="Quality Logo">
+      <img src="images/logo.png" alt="Logo Quality">
     </div>
-    <nav class="desktop-menu">
-      <a href="index.html">Início</a>
-      <a href="index.html#smartphones">Smartphones</a>
-      <a href="index.html#acessorios">Acessórios</a>
-      <input type="text" placeholder="Buscar">
-      <a href="https://wa.me/5500000000000" target="_blank" class="whatsapp-btn">WhatsApp</a>
+    <nav class="menu-desktop">
+      <ul>
+        <li><a href="index.html">Início</a></li>
+        <li><a href="index.html#smartphones">Smartphones</a></li>
+        <li><a href="index.html#acessorios">Acessórios</a></li>
+        <li><input type="text" placeholder="Buscar" class="search-bar"></li>
+        <li><a href="https://wa.me/5500000000000" target="_blank">WhatsApp</a></li>
+      </ul>
     </nav>
-    <div class="mobile-menu-toggle" onclick="toggleMobileMenu()">☰</div>
-    <nav class="mobile-menu">
-      <a href="index.html">Início</a>
-      <a href="index.html#smartphones">Smartphones</a>
-      <a href="index.html#acessorios">Acessórios</a>
-    </nav>
+    <div class="menu-mobile-icon" onclick="toggleMobileMenu()">☰</div>
   </header>
 
-  <main class="page-content">
+  <main class="conteudo">
     <h1>Formas de Pagamento e Envio</h1>
-    <p>Aceitamos cartões de crédito, débito, Pix e boleto bancário.</p>
-    <p>Realizamos envios para todo o Brasil com segurança e rapidez.</p>
+    <h2>Pagamentos</h2>
+    <p>Aceitamos cartões de crédito, débito, Pix e boletos.</p>
+    <h2>Envios</h2>
+    <p>Realizamos envios para todo o Brasil via transportadoras e Correios.</p>
   </main>
 
   <footer>
-    <p>&copy; 2025 Quality - CNPJ: 20.375.910/0001-66</p>
+    <ul>
+      <li><a href="sobre.html">Sobre</a></li>
+      <li><a href="formas-de-pagamento.html">Formas de Pagamento e Envio</a></li>
+    </ul>
     <div class="social-icons">
       <a href="#"><img src="images/icon-facebook.png" alt="Facebook"></a>
       <a href="#"><img src="images/icon-instagram.png" alt="Instagram"></a>
       <a href="#"><img src="images/icon-whatsapp.png" alt="WhatsApp"></a>
       <a href="#"><img src="images/icon-location.png" alt="Localização"></a>
     </div>
-    <div class="footer-links">
-      <a href="sobre.html">Sobre</a> | 
-      <a href="formas-de-pagamento.html">Formas de Pagamento e Envio</a>
-    </div>
+    <p>CNPJ: 00.000.000/0000-00</p>
   </footer>
-  <script src="js/main.js"></script>
 </body>
 </html>

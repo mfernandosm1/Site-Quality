@@ -5,67 +5,77 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Quality - Início</title>
   <link rel="stylesheet" href="css/style.css">
+  <script defer src="js/main.js"></script>
 </head>
 <body>
-  <header>
+  <header class="navbar">
     <div class="logo">
-      <img src="images/logo.png" alt="Quality Logo">
+      <img src="images/logo.png" alt="Logo Quality">
     </div>
-    <nav class="desktop-menu">
-      <a href="index.html">Início</a>
-      <a href="#smartphones">Smartphones</a>
-      <a href="#acessorios">Acessórios</a>
-      <input type="text" placeholder="Buscar">
-      <a href="https://wa.me/5500000000000" target="_blank" class="whatsapp-btn">WhatsApp</a>
+    <nav class="menu-desktop">
+      <ul>
+        <li><a href="index.html">Início</a></li>
+        <li><a href="index.html#smartphones">Smartphones</a></li>
+        <li><a href="index.html#acessorios">Acessórios</a></li>
+        <li><input type="text" placeholder="Buscar" class="search-bar"></li>
+        <li><a href="https://wa.me/5500000000000" target="_blank">WhatsApp</a></li>
+      </ul>
     </nav>
-    <div class="mobile-menu-toggle" onclick="toggleMobileMenu()">☰</div>
-    <nav class="mobile-menu">
-      <a href="index.html">Início</a>
-      <a href="#smartphones">Smartphones</a>
-      <a href="#acessorios">Acessórios</a>
-    </nav>
+    <div class="menu-mobile-icon" onclick="toggleMobileMenu()">☰</div>
   </header>
 
-  <!-- Carrossel -->
-  <section class="carousel">
-    <div class="slides">
-      <img src="images/banner1-mobile.png" alt="Banner 1">
-      <img src="images/banner2-mobile.png" alt="Banner 2">
-      <img src="images/banner3-mobile.png" alt="Banner 3">
-    </div>
-    <button class="prev" onclick="moveSlide(-1)">&#10094;</button>
-    <button class="next" onclick="moveSlide(1)">&#10095;</button>
-  </section>
+  <nav class="menu-mobile" id="mobileMenu">
+    <ul>
+      <li><a href="index.html">Início</a></li>
+      <li><a href="index.html#smartphones">Smartphones</a></li>
+      <li><a href="index.html#acessorios">Acessórios</a></li>
+    </ul>
+  </nav>
 
-  <!-- Produtos -->
-  <section id="smartphones" class="produtos">
-    <div class="produto">
-      <img src="images/pocox7pro.png" alt="Poco X7 Pro">
-      <h3>Poco X7 Pro</h3>
-      <p>Smartphone potente com ótimo custo-benefício.</p>
-      <a href="https://wa.me/5500000000000" target="_blank" class="btn-comprar">Comprar no WhatsApp</a>
-    </div>
-    <div class="produto">
-      <img src="images/redmi14c.png" alt="Redmi 14C">
-      <h3>Redmi 14C</h3>
-      <p>Qualidade e preço justo para o dia a dia.</p>
-      <a href="https://wa.me/5500000000000" target="_blank" class="btn-comprar">Comprar no WhatsApp</a>
-    </div>
-  </section>
+  <main>
+    <section class="carrossel">
+      <div class="slides">
+        <img src="images/banner1.png" alt="Banner 1" class="banner desktop-banner active">
+        <img src="images/banner2.png" alt="Banner 2" class="banner desktop-banner">
+        <img src="images/banner3.png" alt="Banner 3" class="banner desktop-banner">
+
+        <img src="images/banner1-mobile.png" alt="Banner 1 Mobile" class="banner mobile-banner">
+        <img src="images/banner2-mobile.png" alt="Banner 2 Mobile" class="banner mobile-banner">
+        <img src="images/banner3-mobile.png" alt="Banner 3 Mobile" class="banner mobile-banner">
+      </div>
+      <button class="prev" onclick="moveSlide(-1)">❮</button>
+      <button class="next" onclick="moveSlide(1)">❯</button>
+    </section>
+
+    <section id="smartphones" class="produtos">
+      <h2>Smartphones</h2>
+      <div class="produto">
+        <img src="images/pocox7pro.png" alt="Poco X7 Pro">
+        <h3>Poco X7 Pro</h3>
+        <p>Desempenho incrível e câmera de alta qualidade.</p>
+        <a href="https://wa.me/5500000000000" class="btn-whatsapp">Comprar no WhatsApp</a>
+      </div>
+      <div class="produto">
+        <img src="images/redmi14c.png" alt="Redmi 14C">
+        <h3>Redmi 14C</h3>
+        <p>Bateria de longa duração e ótimo custo-benefício.</p>
+        <a href="https://wa.me/5500000000000" class="btn-whatsapp">Comprar no WhatsApp</a>
+      </div>
+    </section>
+  </main>
 
   <footer>
-    <p>&copy; 2025 Quality - CNPJ: 20.375.910/0001-66</p>
+    <ul>
+      <li><a href="sobre.html">Sobre</a></li>
+      <li><a href="formas-de-pagamento.html">Formas de Pagamento e Envio</a></li>
+    </ul>
     <div class="social-icons">
       <a href="#"><img src="images/icon-facebook.png" alt="Facebook"></a>
       <a href="#"><img src="images/icon-instagram.png" alt="Instagram"></a>
       <a href="#"><img src="images/icon-whatsapp.png" alt="WhatsApp"></a>
       <a href="#"><img src="images/icon-location.png" alt="Localização"></a>
     </div>
-    <div class="footer-links">
-      <a href="sobre.html">Sobre</a> | 
-      <a href="formas-de-pagamento.html">Formas de Pagamento e Envio</a>
-    </div>
+    <p>CNPJ: 00.000.000/0000-00</p>
   </footer>
-  <script src="js/main.js"></script>
 </body>
 </html>
