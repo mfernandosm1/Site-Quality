@@ -1,1 +1,4 @@
-/* CSS como mostrado acima, resumido para o zip */
+
+body {
+  scroll-behavior: smooth;
+}
