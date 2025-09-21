@@ -5,74 +5,64 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Quality Celulares</title>
   <script src="https://cdn.tailwindcss.com"></script>
-  <!-- Font Awesome -->
+  <!-- Font Awesome para os ícones -->
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+
   <!-- Favicon -->
-  <link rel="icon" type="image/png" href="logo-quality.png">
-  <style>
-    /* animação simples do menu mobile */
-    .menu-mobile {
-      max-height: 0;
-      overflow: hidden;
-      transition: max-height 0.3s ease;
-    }
-    .menu-mobile.open {
-      max-height: 500px;
-    }
-  </style>
+  <link rel="icon" type="image/png" href="https://mfernandosm1.github.io/Site-Quality/images/favicon.png">
 </head>
 <body class="bg-gray-50 text-gray-800">
 
   <!-- Header -->
   <header class="fixed top-0 left-0 w-full bg-white shadow-md z-50">
-    <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
-      <div class="flex items-center gap-3">
-        <img src="logo-quality.png" alt="Quality Celulares" class="h-10 md:h-12">
-        <h1 class="text-lg md:text-xl font-bold text-red-600">Quality Celulares</h1>
-      </div>
-      
-      <!-- Menu desktop -->
-      <nav class="hidden md:flex items-center gap-6">
-        <a href="index.html" class="hover:text-red-600">Início</a>
-        <a href="sobre.html" class="hover:text-red-600">Sobre</a>
-        <a href="formas-de-pagamento.html" class="hover:text-red-600">Pagamentos</a>
-        <a href="https://wa.me/5555991407824?text=Olá%20vim%20através%20do%20site" 
-           class="bg-green-500 text-white px-4 py-2 rounded-lg font-medium hover:bg-green-600 transition">
-          WhatsApp
-        </a>
-      </nav>
+    <!-- Barra vermelha com logo e Menu principal dentro do cabeçalho -->
+    <div class="bg-red-600 text-white w-full px-4 py-4 flex items-center justify-between">
+      <!-- Logo com link para a página inicial -->
+      <a href="index.html">
+        <img src="https://mfernandosm1.github.io/Site-Quality/images/logo.png" alt="Logo Quality Celulares" class="h-16 w-auto">
+      </a>
 
-      <!-- Botão menu mobile -->
-      <button id="menu-btn" class="md:hidden text-2xl text-gray-700">
-        <i class="fas fa-bars"></i>
-      </button>
-    </div>
-
-    <!-- Menu mobile -->
-    <div id="menu-mobile" class="menu-mobile bg-white border-t md:hidden">
-      <nav class="flex flex-col p-4 gap-3">
-        <a href="index.html" class="hover:text-red-600">Início</a>
-        <a href="sobre.html" class="hover:text-red-600">Sobre</a>
-        <a href="formas-de-pagamento.html" class="hover:text-red-600">Pagamentos</a>
-        <a href="https://wa.me/5555991407824?text=Olá%20vim%20através%20do%20site" 
-           class="bg-green-500 text-white px-4 py-2 rounded-lg font-medium hover:bg-green-600 text-center">
+      <!-- Menu de Navegação principal -->
+      <nav class="flex items-center gap-8">
+        <!-- Itens do Menu -->
+        <a href="#smartphones" class="text-white hover:text-gray-100 font-medium">Smartphones</a>
+        <a href="#acessorios" class="text-white hover:text-gray-100 font-medium">Acessórios</a>
+        <a href="https://wa.me/5555991407824?text=ol%C3%A1%20vim%20atrav%C3%A9s%20do%20site" class="bg-green-500 text-white px-4 py-2 rounded-lg font-medium hover:bg-green-600 transition">
           WhatsApp
         </a>
       </nav>
     </div>
   </header>
 
-  <!-- Hero com banner -->
-  <section class="pt-20">
-    <div class="w-full">
-      <img src="https://i.imgur.com/1mW3S7y.jpeg" alt="Banner Quality Celulares" class="w-full h-48 sm:h-72 md:h-96 object-cover">
-    </div>
-    <div class="text-center px-4 py-8">
-      <h2 class="text-2xl md:text-4xl font-bold text-red-600 mb-3">Tecnologia ao seu alcance</h2>
-      <p class="text-gray-600 text-base md:text-lg mb-6">Celulares, acessórios e assistência técnica com qualidade e confiança.</p>
-      <a href="#catalogo" class="bg-red-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-red-700 transition">
-        Ver catálogo
-      </a>
+  <!-- Banner com Slider (começando imediatamente abaixo do cabeçalho) -->
+  <section id="hero" class="mt-20 w-full z-40">
+    <div id="banner-carousel" class="relative">
+      <div class="carousel-container overflow-hidden">
+        <div class="carousel-inner flex">
+          <!-- Banner 1 -->
+          <div class="carousel-item w-full flex-shrink-0">
+            <img src="https://mfernandosm1.github.io/Site-Quality/images/banner1.png" alt="Promoção de celulares" class="w-full h-auto">
+          </div>
+          <!-- Banner 2 -->
+          <div class="carousel-item w-full flex-shrink-0">
+            <img src="https://mfernandosm1.github.io/Site-Quality/images/banner2.png" alt="Acessórios com desconto" class="w-full h-auto">
+          </div>
+          <!-- Banner 3 -->
+          <div class="carousel-item w-full flex-shrink-0">
+            <img src="https://mfernandosm1.github.io/Site-Quality/images/banner3.png" alt="Assistência técnica de qualidade" class="w-full h-auto">
+          </div>
+        </div>
+      </div>
+
+      <!-- Controles de navegação -->
+      <div class="absolute top-1/2 left-0 right-0 flex justify-between px-4">
+        <button id="prev" class="bg-black text-white px-4 py-2 rounded-full hover:bg-gray-800">
+          <i class="fas fa-chevron-left"></i>
+        </button>
+        <button id="next" class="bg-black text-white px-4 py-2 rounded-full hover:bg-gray-800">
+          <i class="fas fa-chevron-right"></i>
+        </button>
+      </div>
     </div>
   </section>
 
@@ -80,46 +70,50 @@
   <section id="catalogo" class="py-12 px-4 max-w-6xl mx-auto">
     <h3 class="text-2xl font-bold text-center mb-8">Catálogo</h3>
     <div class="grid gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-      
       <!-- Produto 1 -->
       <div class="bg-white rounded-xl shadow hover:shadow-lg transition p-4 flex flex-col">
-        <img src="https://i.imgur.com/1mW3S7y.jpeg" alt="Poco X7 Pro" class="rounded-md mb-4 h-48 w-full object-cover">
+        <img src="https://mfernandosm1.github.io/Site-Quality/images/pocox7pro.png" alt="Poco X7 Pro" class="rounded-md mb-4">
         <h4 class="font-semibold mb-2">Poco X7 Pro</h4>
         <p class="text-sm text-gray-600 mb-4">256GB • Alto desempenho</p>
-        <a href="https://wa.me/5555991407824?text=Olá%20vim%20através%20do%20site" class="mt-auto bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600 text-center">
-          Comprar no WhatsApp
+        <a href="https://wa.me/5555991407824?text=ol%C3%A1%20vim%20atrav%C3%A9s%20do%20site" class="mt-auto bg-green-500 text-white px-5 py-3 rounded-lg flex items-center justify-center gap-3 font-semibold hover:bg-green-600 transition">
+          <i class="fas fa-shopping-cart"></i> Comprar no WhatsApp
         </a>
       </div>
 
       <!-- Produto 2 -->
       <div class="bg-white rounded-xl shadow hover:shadow-lg transition p-4 flex flex-col">
-        <img src="https://i.imgur.com/nMyu6sC.jpeg" alt="Redmi 14C" class="rounded-md mb-4 h-48 w-full object-cover">
+        <img src="https://mfernandosm1.github.io/Site-Quality/images/redmi14c.png" alt="Redmi 14C" class="rounded-md mb-4">
         <h4 class="font-semibold mb-2">Redmi 14C</h4>
         <p class="text-sm text-gray-600 mb-4">128GB • 4GB RAM</p>
-        <a href="https://wa.me/5555991407824?text=Olá%20vim%20através%20do%20site" class="mt-auto bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600 text-center">
-          Comprar no WhatsApp
+        <a href="https://wa.me/5555991407824?text=ol%C3%A1%20vim%20atrav%C3%A9s%20do%20site" class="mt-auto bg-green-500 text-white px-5 py-3 rounded-lg flex items-center justify-center gap-3 font-semibold hover:bg-green-600 transition">
+          <i class="fas fa-shopping-cart"></i> Comprar no WhatsApp
         </a>
       </div>
 
     </div>
   </section>
 
-  <!-- Conecte-se -->
+  <!-- Conecte-se conosco moderno -->
   <section class="py-12 bg-gray-50 text-center">
     <h3 class="text-2xl font-bold mb-6">Conecte-se conosco</h3>
     <div class="flex justify-center gap-6">
+      <!-- Instagram Perfil 1 -->
       <a href="https://www.instagram.com/qualitycelulares_ibi/" target="_blank" class="flex items-center justify-center w-14 h-14 bg-gradient-to-tr from-pink-500 to-yellow-400 rounded-full text-white text-2xl hover:scale-110 transition">
         <i class="fab fa-instagram"></i>
       </a>
+      <!-- Instagram Perfil 2 -->
       <a href="https://www.instagram.com/quality_celulares/" target="_blank" class="flex items-center justify-center w-14 h-14 bg-gradient-to-tr from-pink-500 to-yellow-400 rounded-full text-white text-2xl hover:scale-110 transition">
         <i class="fab fa-instagram"></i>
       </a>
+      <!-- Facebook -->
       <a href="#" target="_blank" class="flex items-center justify-center w-14 h-14 bg-blue-600 rounded-full text-white text-2xl hover:scale-110 transition">
         <i class="fab fa-facebook-f"></i>
       </a>
-      <a href="https://wa.me/5555991407824?text=Olá%20vim%20através%20do%20site" target="_blank" class="flex items-center justify-center w-14 h-14 bg-green-500 rounded-full text-white text-2xl hover:scale-110 transition">
+      <!-- WhatsApp -->
+      <a href="https://wa.me/5555991407824?text=ol%C3%A1%20vim%20atrav%C3%A9s%20do%20site" target="_blank" class="flex items-center justify-center w-14 h-14 bg-green-500 rounded-full text-white text-2xl hover:scale-110 transition">
         <i class="fab fa-whatsapp"></i>
       </a>
+      <!-- Localização -->
       <a href="https://maps.google.com" target="_blank" class="flex items-center justify-center w-14 h-14 bg-gray-700 rounded-full text-white text-2xl hover:scale-110 transition">
         <i class="fas fa-map-marker-alt"></i>
       </a>
@@ -128,27 +122,52 @@
 
   <!-- Rodapé -->
   <footer class="bg-gray-900 text-gray-300 py-8 mt-12">
-    <div class="max-w-6xl mx-auto px-4 flex flex-col md:flex-row md:justify-start md:gap-8 text-left">
-      <a href="index.html" class="font-bold text-red-600 text-xl mb-2 inline-block">Quality Celulares</a>
-      <div class="flex flex-col gap-1">
-        <a href="sobre.html" class="text-white underline">Sobre nós</a>
-        <a href="formas-de-pagamento.html" class="text-white underline">Formas de pagamento e envio</a>
+    <div class="max-w-6xl mx-auto px-4">
+      <div class="text-center">
+        <a href="index.html">
+          <img src="https://mfernandosm1.github.io/Site-Quality/images/logo.png" alt="Logo Quality Celulares" class="h-20 w-auto mb-4">
+        </a>
       </div>
-    </div>
-    <div class="max-w-6xl mx-auto px-4 text-center mt-6 text-gray-500 text-sm">
-      © 2025 Quality Celulares. Todos os direitos reservados.
+
+      <div class="text-white text-center mb-4">
+        <p class="font-semibold text-lg">Informações</p>
+        <div class="flex justify-center gap-6 mt-2">
+          <a href="sobre.html" class="text-white hover:underline">Sobre nós</a>
+          <a href="formas-de-pagamento.html" class="text-white hover:underline">Formas de pagamento e envio</a>
+        </div>
+      </div>
+
+      <div class="max-w-6xl mx-auto px-4 text-center mt-6 text-gray-500 text-sm">
+        © 2025 Quality Celulares. Todos os direitos reservados.
+      </div>
     </div>
   </footer>
 
-  <!-- Script menu mobile -->
+  <!-- Scripts de Navegação do Carrossel -->
   <script>
-    const menuBtn = document.getElementById("menu-btn");
-    const menuMobile = document.getElementById("menu-mobile");
+    let currentIndex = 0;
+    const items = document.querySelectorAll('.carousel-item');
+    const prevBtn = document.getElementById('prev');
+    const nextBtn = document.getElementById('next');
 
-    menuBtn.addEventListener("click", () => {
-      menuMobile.classList.toggle("open");
+    function showItem(index) {
+      items.forEach((item, i) => {
+        item.classList.toggle('block', i === index);
+        item.classList.toggle('hidden', i !== index);
+      });
+    }
+
+    prevBtn.addEventListener('click', () => {
+      currentIndex = (currentIndex === 0) ? items.length - 1 : currentIndex - 1;
+      showItem(currentIndex);
     });
-  </script>
 
+    nextBtn.addEventListener('click', () => {
+      currentIndex = (currentIndex === items.length - 1) ? 0 : currentIndex + 1;
+      showItem(currentIndex);
+    });
+
+    showItem(currentIndex); // Exibir o item inicial
+  </script>
 </body>
 </html>
