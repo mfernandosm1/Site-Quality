@@ -1,20 +1,41 @@
-
-document.addEventListener('DOMContentLoaded', function(){
-  // Carousel
-  const inner = document.querySelector('.carousel-inner');
-  const slides = Array.from(document.querySelectorAll('.slide'));
-  let idx = 0;
-  const total = slides.length;
-  function show(i){ inner.style.transform = `translateX(-${i*100}%)`; }
-  document.getElementById('prev')?.addEventListener('click', ()=>{ idx = (idx-1+total)%total; show(idx); });
-  document.getElementById('next')?.addEventListener('click', ()=>{ idx = (idx+1)%total; show(idx); });
-  show(0);
-  setInterval(()=>{ idx = (idx+1)%total; show(idx); }, 4000);
-
-  // Drawer mobile
+document.addEventListener("DOMContentLoaded", () => {
+  let currentIndex = 0;
+  const items = document.querySelectorAll('.carousel-item');
+  const prevBtn = document.getElementById('prev');
+  const nextBtn = document.getElementById('next');
   const menuBtn = document.getElementById('menu-btn');
-  const closeBtn = document.getElementById('close-menu');
-  const drawer = document.getElementById('mobile-menu');
-  menuBtn?.addEventListener('click', ()=> drawer.classList.add('open'));
-  closeBtn?.addEventListener('click', ()=> drawer.classList.remove('open'));
+  const closeMenu = document.getElementById('close-menu');
+  const mobileMenu = document.getElementById('mobile-menu');
+
+  function showItem(index) {
+    items.forEach((item, i) => {
+      item.style.display = i === index ? 'block' : 'none';
+    });
+  }
+
+  prevBtn.addEventListener('click', () => {
+    currentIndex = (currentIndex === 0) ? items.length - 1 : currentIndex - 1;
+    showItem(currentIndex);
+  });
+
+  nextBtn.addEventListener('click', () => {
+    currentIndex = (currentIndex === items.length - 1) ? 0 : currentIndex + 1;
+    showItem(currentIndex);
+  });
+
+  setInterval(() => {
+    currentIndex = (currentIndex === items.length - 1) ? 0 : currentIndex + 1;
+    showItem(currentIndex);
+  }, 4000);
+
+  showItem(currentIndex);
+
+  // Menu mobile
+  menuBtn.addEventListener('click', () => {
+    mobileMenu.classList.remove('translate-x-full');
+  });
+
+  closeMenu.addEventListener('click', () => {
+    mobileMenu.classList.add('translate-x-full');
+  });
 });
