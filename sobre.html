@@ -1,1 +1,49 @@
-<!-- sobre padronizado -->
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sobre - Site Quality</title>
+  <link rel="stylesheet" href="css/style.css">
+  <script defer src="js/main.js"></script>
+</head>
+<body>
+  <header class="navbar">
+    <div class="logo"><a href="index.html"><img src="images/logo.png" alt="Logo"></a></div>
+    <nav class="menu">
+      <ul>
+        <li><a href="index.html#smartphones">Smartphones</a></li>
+        <li><a href="index.html#acessorios">Acessórios</a></li>
+      </ul>
+    </nav>
+    <div class="menu-mobile-icon" onclick="toggleMenu()">☰</div>
+  </header>
+  <div id="mobileMenu" class="mobile-menu">
+    <ul>
+      <li><a href="index.html#smartphones" onclick="closeMenu()">Smartphones</a></li>
+      <li><a href="index.html#acessorios" onclick="closeMenu()">Acessórios</a></li>
+      <li><a href="https://wa.me/55XXXXXXXXXX" target="_blank">WhatsApp</a></li>
+    </ul>
+  </div>
+
+  <main class="conteudo-pagina">
+    <h1>Sobre Nós</h1>
+    <p>Somos especializados em smartphones e acessórios de alta qualidade.</p>
+    <p>Nosso compromisso é com a satisfação e confiança dos clientes.</p>
+  </main>
+
+  <footer>
+    <div class="footer-links">
+      <a href="sobre.html">Sobre</a>
+      <a href="formas-de-pagamento.html">Formas de Pagamento e Envio</a>
+    </div>
+    <div class="social-icons">
+      <a href="#"><i class="fab fa-facebook"></i></a>
+      <a href="#"><i class="fab fa-instagram"></i></a>
+      <a href="#"><i class="fab fa-whatsapp"></i></a>
+    </div>
+    <p>CNPJ: 20.375.910/0001-66</p>
+    <p>&copy; 2025 Site Quality</p>
+  </footer>
+</body>
+</html>
