@@ -9,7 +9,7 @@
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
 
   <!-- Favicon -->
-  <link rel="icon" type="image/png" href="favicon.png">
+  <link rel="icon" type="image/png" href="https://mfernandosm1.github.io/Site-Quality/images/favicon.png">
 </head>
 <body class="bg-gray-50 text-gray-800">
 
@@ -19,7 +19,7 @@
     <div class="bg-red-600 text-white w-full px-4 py-4 flex items-center justify-between">
       <!-- Logo com link para a página inicial -->
       <a href="index.html">
-        <img src="logosemfundo.png" alt="Logo Quality Celulares" class="h-16 w-auto">
+        <img src="https://mfernandosm1.github.io/Site-Quality/images/logo.png" alt="Logo Quality Celulares" class="h-16 w-auto">
       </a>
 
       <!-- Menu de Navegação principal -->
@@ -35,7 +35,7 @@
   </header>
 
   <!-- Banner com Slider (começando imediatamente abaixo do cabeçalho) -->
-  <section id="hero" class="mt-32 w-full">
+  <section id="hero" class="mt-20 w-full z-40">
     <div id="banner-carousel" class="relative">
       <div class="carousel-container overflow-hidden">
         <div class="carousel-inner flex">
@@ -125,7 +125,7 @@
     <div class="max-w-6xl mx-auto px-4">
       <div class="text-center">
         <a href="index.html">
-          <img src="logosemfundo.png" alt="Logo Quality Celulares" class="h-20 w-auto mb-4">
+          <img src="https://mfernandosm1.github.io/Site-Quality/images/logo.png" alt="Logo Quality Celulares" class="h-20 w-auto mb-4">
         </a>
       </div>
 
@@ -143,43 +143,31 @@
     </div>
   </footer>
 
+  <!-- Scripts de Navegação do Carrossel -->
   <script>
-    // Script para o slider de banners
     let currentIndex = 0;
     const items = document.querySelectorAll('.carousel-item');
-    const totalItems = items.length;
+    const prevBtn = document.getElementById('prev');
+    const nextBtn = document.getElementById('next');
 
-    // Função para mudar o slide
-    function changeSlide() {
-      items.forEach((item, index) => {
-        item.classList.add('hidden');
-        if (index === currentIndex) {
-          item.classList.remove('hidden');
-        }
+    function showItem(index) {
+      items.forEach((item, i) => {
+        item.classList.toggle('block', i === index);
+        item.classList.toggle('hidden', i !== index);
       });
     }
 
-    // Avançar slide
-    document.getElementById('next').addEventListener('click', () => {
-      currentIndex = (currentIndex + 1) % totalItems;
-      changeSlide();
+    prevBtn.addEventListener('click', () => {
+      currentIndex = (currentIndex === 0) ? items.length - 1 : currentIndex - 1;
+      showItem(currentIndex);
     });
 
-    // Voltar slide
-    document.getElementById('prev').addEventListener('click', () => {
-      currentIndex = (currentIndex - 1 + totalItems) % totalItems;
-      changeSlide();
+    nextBtn.addEventListener('click', () => {
+      currentIndex = (currentIndex === items.length - 1) ? 0 : currentIndex + 1;
+      showItem(currentIndex);
     });
 
-    // Mudar automaticamente a cada 5 segundos
-    setInterval(() => {
-      currentIndex = (currentIndex + 1) % totalItems;
-      changeSlide();
-    }, 5000);
-
-    // Inicializar o slide
-    changeSlide();
+    showItem(currentIndex); // Exibir o item inicial
   </script>
-
 </body>
 </html>
