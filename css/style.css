@@ -18,7 +18,15 @@ body{font-family:Inter,Arial,sans-serif;margin:0;background:#f8fafc;color:#0f172
 .mobile-header{display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #e6e6e6;padding-bottom:12px;margin-bottom:12px}
 .mobile-logo{height:44px}
 
-/* carousel */
+/* carousel visibility: desktop only / mobile only */
+.desktop-carousel{display:block}
+.mobile-carousel{display:none}
+@media (max-width:768px){
+  .desktop-carousel{display:none}
+  .mobile-carousel{display:block}
+}
+
+/* carousel layout */
 .carousel-wrap{margin-top:78px}
 .desktop-carousel,.mobile-carousel{position:relative;overflow:hidden}
 .carousel-track{display:flex;transition:transform .55s ease}

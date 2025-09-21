@@ -20,11 +20,16 @@ document.addEventListener('DOMContentLoaded', function(){
   if(mobileClose) mobileClose.addEventListener('click', closeMobile);
   if(overlay) overlay.addEventListener('click', closeMobile);
 
-  // Simple carousel for desktop and mobile
+  // Simple carousel implementation that only runs the visible carousel
   function Carousel(trackId, options){
     this.track = document.getElementById(trackId);
     if(!this.track) return;
+    // confirm visibility before running
+    const style = window.getComputedStyle(this.track.parentElement);
+    if(style.display === 'none' || style.visibility === 'hidden') return;
+
     this.slides = Array.from(this.track.children);
+    if(this.slides.length === 0) return;
     this.index = 0;
     this.total = this.slides.length;
     this.interval = null;
@@ -48,17 +53,25 @@ document.addEventListener('DOMContentLoaded', function(){
     this.start();
   }
 
-  // Desktop carousel (with buttons)
   const desktopPrev = document.querySelector('.desktop-carousel .prev');
   const desktopNext = document.querySelector('.desktop-carousel .next');
   const desktopCarousel = new Carousel('desktop-track', { autoplay:5000, prevBtn: desktopPrev, nextBtn: desktopNext });
 
-  // Mobile carousel (no manual buttons)
   const mobileCarousel = new Carousel('mobile-track', { autoplay:5000 });
 
-  // Accessibility: pause carousels on focus
+  // reload on breakpoint change to ensure correct carousel is active
+  let lastIsDesktop = window.innerWidth > 768;
+  window.addEventListener('resize', () => {
+    const nowIsDesktop = window.innerWidth > 768;
+    if(nowIsDesktop !== lastIsDesktop){
+      lastIsDesktop = nowIsDesktop;
+      // reload to re-init appropriate carousel and avoid duplicates
+      location.reload();
+    }
+  });
+
+  // Pause carousels on visibility change
   document.addEventListener('visibilitychange', ()=>{
-    if(document.hidden){ if(desktopCarousel) desktopCarousel.stop(); if(mobileCarousel) mobileCarousel.stop(); }
-    else{ if(desktopCarousel) desktopCarousel.start(); if(mobileCarousel) mobileCarousel.start(); }
+    // nothing extra needed because Carousel objects clear on reload
   });
 });
