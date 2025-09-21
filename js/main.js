@@ -1,21 +1,3 @@
-let currentSlide = 0;
-const slides = document.querySelectorAll('.carousel-slide');
-const totalSlides = slides.length;
-
-function showSlide(index) {
-  const container = document.querySelector('.carousel-container');
-  if (index >= totalSlides) currentSlide = 0;
-  else if (index < 0) currentSlide = totalSlides - 1;
-  else currentSlide = index;
-  container.style.transform = `translateX(-${currentSlide * 100}%)`;
-}
-
-function nextSlide() { showSlide(currentSlide + 1); }
-function prevSlide() { showSlide(currentSlide - 1); }
-
-setInterval(nextSlide, 5000);
-
-function toggleMenu() {
-  const menu = document.getElementById('mobileMenu');
-  menu.style.display = menu.style.display === 'flex' ? 'none' : 'flex';
-}
+const swiper = new Swiper('.swiper', { loop: true, autoplay: { delay: 3000 }, navigation: { nextEl: '.swiper-button-next', prevEl: '.swiper-button-prev', }, });
+document.getElementById('menu-toggle').addEventListener('click', () => {document.getElementById('mobile-menu').classList.remove('-translate-x-full');});
+document.getElementById('menu-close').addEventListener('click', () => {document.getElementById('mobile-menu').classList.add('-translate-x-full');});
