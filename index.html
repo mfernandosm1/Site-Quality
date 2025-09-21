@@ -19,7 +19,7 @@
     <div class="bg-red-600 text-white w-full px-4 py-4 flex items-center justify-between">
       <!-- Logo com link para a página inicial -->
       <a href="index.html">
-        <img src="https://mfernandosm1.github.io/Site-Quality/images/logosemfundo.png" alt="Logo Quality Celulares" class="h-16 w-auto">
+        <img src="https://mfernandosm1.github.io/Site-Quality/images/logo.png" alt="Logo Quality Celulares" class="h-16 w-auto">
       </a>
 
       <!-- Menu de Navegação principal -->
@@ -41,15 +41,15 @@
         <div class="carousel-inner flex">
           <!-- Banner 1 -->
           <div class="carousel-item w-full flex-shrink-0">
-            <img src="https://mfernandosm1.github.io/Site-Quality/images/banner1.png" alt="Promoção de celulares" class="w-full h-auto">
+            <img src="images/banner1.png" alt="Promoção de celulares" class="w-full h-auto">
           </div>
           <!-- Banner 2 -->
           <div class="carousel-item w-full flex-shrink-0">
-            <img src="https://mfernandosm1.github.io/Site-Quality/images/banner2.png" alt="Acessórios com desconto" class="w-full h-auto">
+            <img src="images/banner2.png" alt="Acessórios com desconto" class="w-full h-auto">
           </div>
           <!-- Banner 3 -->
           <div class="carousel-item w-full flex-shrink-0">
-            <img src="https://mfernandosm1.github.io/Site-Quality/images/banner3.png" alt="Assistência técnica de qualidade" class="w-full h-auto">
+            <img src="images/banner3.png" alt="Assistência técnica de qualidade" class="w-full h-auto">
           </div>
         </div>
       </div>
@@ -72,7 +72,7 @@
     <div class="grid gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
       <!-- Produto 1 -->
       <div class="bg-white rounded-xl shadow hover:shadow-lg transition p-4 flex flex-col">
-        <img src="https://mfernandosm1.github.io/Site-Quality/images/pocox7pro.png" alt="Poco X7 Pro" class="rounded-md mb-4">
+        <img src="images/pocox7pro.png" alt="Poco X7 Pro" class="rounded-md mb-4">
         <h4 class="font-semibold mb-2">Poco X7 Pro</h4>
         <p class="text-sm text-gray-600 mb-4">256GB • Alto desempenho</p>
         <a href="https://wa.me/5555991407824?text=ol%C3%A1%20vim%20atrav%C3%A9s%20do%20site" class="mt-auto bg-green-500 text-white px-5 py-3 rounded-lg flex items-center justify-center gap-3 font-semibold hover:bg-green-600 transition">
@@ -82,7 +82,7 @@
 
       <!-- Produto 2 -->
       <div class="bg-white rounded-xl shadow hover:shadow-lg transition p-4 flex flex-col">
-        <img src="https://mfernandosm1.github.io/Site-Quality/images/redmi14c.png" alt="Redmi 14C" class="rounded-md mb-4">
+        <img src="images/redmi14c.png" alt="Redmi 14C" class="rounded-md mb-4">
         <h4 class="font-semibold mb-2">Redmi 14C</h4>
         <p class="text-sm text-gray-600 mb-4">128GB • 4GB RAM</p>
         <a href="https://wa.me/5555991407824?text=ol%C3%A1%20vim%20atrav%C3%A9s%20do%20site" class="mt-auto bg-green-500 text-white px-5 py-3 rounded-lg flex items-center justify-center gap-3 font-semibold hover:bg-green-600 transition">
@@ -125,7 +125,7 @@
     <div class="max-w-6xl mx-auto px-4">
       <div class="text-center">
         <a href="index.html">
-          <img src="https://mfernandosm1.github.io/Site-Quality/images/logosemfundo.png" alt="Logo Quality Celulares" class="h-20 w-auto mb-4">
+          <img src="https://mfernandosm1.github.io/Site-Quality/images/logo.png" alt="Logo Quality Celulares" class="h-20 w-auto mb-4">
         </a>
       </div>
 
@@ -143,43 +143,31 @@
     </div>
   </footer>
 
+  <!-- Scripts de Navegação do Carrossel -->
   <script>
-    // Script para o slider de banners
     let currentIndex = 0;
     const items = document.querySelectorAll('.carousel-item');
-    const totalItems = items.length;
+    const prevBtn = document.getElementById('prev');
+    const nextBtn = document.getElementById('next');
 
-    // Função para mudar o slide
-    function changeSlide() {
-      items.forEach((item, index) => {
-        item.classList.add('hidden');
-        if (index === currentIndex) {
-          item.classList.remove('hidden');
-        }
+    function showItem(index) {
+      items.forEach((item, i) => {
+        item.classList.toggle('block', i === index);
+        item.classList.toggle('hidden', i !== index);
       });
     }
 
-    // Avançar slide
-    document.getElementById('next').addEventListener('click', () => {
-      currentIndex = (currentIndex + 1) % totalItems;
-      changeSlide();
+    prevBtn.addEventListener('click', () => {
+      currentIndex = (currentIndex === 0) ? items.length - 1 : currentIndex - 1;
+      showItem(currentIndex);
     });
 
-    // Voltar slide
-    document.getElementById('prev').addEventListener('click', () => {
-      currentIndex = (currentIndex - 1 + totalItems) % totalItems;
-      changeSlide();
+    nextBtn.addEventListener('click', () => {
+      currentIndex = (currentIndex === items.length - 1) ? 0 : currentIndex + 1;
+      showItem(currentIndex);
     });
 
-    // Mudar automaticamente a cada 5 segundos
-    setInterval(() => {
-      currentIndex = (currentIndex + 1) % totalItems;
-      changeSlide();
-    }, 5000);
-
-    // Inicializar o slide
-    changeSlide();
+    showItem(currentIndex); // Exibir o item inicial
   </script>
-
 </body>
 </html>
