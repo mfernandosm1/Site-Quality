@@ -1,30 +1,20 @@
-// Mobile menu toggle
-const menuToggle = document.getElementById('menu-toggle');
-const menuClose = document.getElementById('menu-close');
-const mobileMenu = document.getElementById('mobile-menu');
+document.addEventListener("DOMContentLoaded", () => {
+  const desktopBanners = document.querySelectorAll(".desktop-banner");
+  const mobileBanners = document.querySelectorAll(".mobile-banner");
+  let current = 0;
 
-if(menuToggle){
-  menuToggle.addEventListener('click', () => {
-    mobileMenu.style.transform = 'translateX(0)';
-  });
-}
+  function showBanner(banners) {
+    banners.forEach((b, i) => {
+      b.classList.toggle("active", i === current);
+    });
+  }
 
-if(menuClose){
-  menuClose.addEventListener('click', () => {
-    mobileMenu.style.transform = 'translateX(100%)';
-  });
-}
+  function rotateBanners() {
+    const banners = window.innerWidth <= 768 ? mobileBanners : desktopBanners;
+    if (banners.length === 0) return;
+    current = (current + 1) % banners.length;
+    showBanner(banners);
+  }
 
-// Swiper carousels
-const desktopSwiper = new Swiper('.desktop-banners', {
-  loop: true,
-  autoplay: { delay: 3000 },
-  navigation: { nextEl: '.swiper-button-next', prevEl: '.swiper-button-prev' },
-  pagination: { el: '.swiper-pagination', clickable: true }
-});
-
-const mobileSwiper = new Swiper('.mobile-banners', {
-  loop: true,
-  autoplay: { delay: 3000 },
-  pagination: { el: '.swiper-pagination', clickable: true }
+  setInterval(rotateBanners, 5000);
 });

@@ -3,109 +3,48 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Quality Celulares</title>
-  <link href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" rel="stylesheet"/>
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+  <title>Início - Loja</title>
   <link rel="stylesheet" href="css/style.css">
+  <script src="js/main.js" defer></script>
 </head>
 <body>
-  <!-- Header -->
-  <header class="header">
-    <div class="container">
-      <a href="index.html" class="logo">
-        <img src="images/logo.png" alt="Quality Celulares">
+  <header>
+    <div class="logo">
+      <a href="index.html">
+        <img src="images/logo.png" alt="Logo da Loja">
       </a>
-      <nav class="menu-desktop">
-        <a href="index.html">Início</a>
-        <a href="#smartphones">Smartphones</a>
-        <a href="#acessorios">Acessórios</a>
-        <input type="text" placeholder="Buscar" class="search-bar">
-        <a href="https://wa.me/5555991407824?text=Olá%20vim%20através%20do%20site" class="whatsapp-btn">
-          <i class="fa-brands fa-whatsapp"></i> WhatsApp
-        </a>
-      </nav>
-      <button id="menu-toggle" class="menu-toggle"><i class="fa-solid fa-bars"></i></button>
     </div>
+    <nav class="desktop-menu">
+      <ul>
+        <li><a href="index.html">Início</a></li>
+        <li><a href="#">Smartphones</a></li>
+        <li><a href="#">Acessórios</a></li>
+        <li><input type="text" placeholder="Buscar"></li>
+        <li><a href="https://wa.me/55SEUNUMERO" target="_blank">WhatsApp</a></li>
+      </ul>
+    </nav>
   </header>
 
-  <!-- Mobile menu -->
-  <div id="mobile-menu" class="mobile-menu">
-    <div class="mobile-header">
-      <img src="images/logo.png" alt="Quality Celulares">
-      <button id="menu-close"><i class="fa-solid fa-xmark"></i></button>
-    </div>
-    <nav>
-      <a href="index.html">Início</a>
-      <a href="#smartphones">Smartphones</a>
-      <a href="#acessorios">Acessórios</a>
-      <input type="text" placeholder="Buscar" class="search-bar">
-      <a href="https://wa.me/5555991407824?text=Olá%20vim%20através%20do%20site" class="whatsapp-btn">
-        <i class="fa-brands fa-whatsapp"></i> WhatsApp
-      </a>
-    </nav>
-  </div>
+  <main>
+    <section class="banner">
+      <div class="carousel">
+        <img src="images/banner1.png" alt="Banner 1" class="active desktop-banner">
+        <img src="images/banner2.png" alt="Banner 2" class="desktop-banner">
+        <img src="images/banner3.png" alt="Banner 3" class="desktop-banner">
 
-  <!-- Carrossel -->
-  <section class="carousel-section">
-    <!-- Desktop banners -->
-    <div class="swiper desktop-banners">
-      <div class="swiper-wrapper">
-        <div class="swiper-slide"><img src="images/banner1.png" alt="Banner 1"></div>
-        <div class="swiper-slide"><img src="images/banner2.png" alt="Banner 2"></div>
-        <div class="swiper-slide"><img src="images/banner3.png" alt="Banner 3"></div>
+        <img src="images/banner1-mobile.png" alt="Banner Mobile 1" class="active mobile-banner">
+        <img src="images/banner2-mobile.png" alt="Banner Mobile 2" class="mobile-banner">
+        <img src="images/banner3-mobile.png" alt="Banner Mobile 3" class="mobile-banner">
       </div>
-      <div class="swiper-pagination"></div>
-      <div class="swiper-button-prev"></div>
-      <div class="swiper-button-next"></div>
-    </div>
-
-    <!-- Mobile banners -->
-    <div class="swiper mobile-banners">
-      <div class="swiper-wrapper">
-        <div class="swiper-slide"><img src="images/banner1-mobile.png" alt="Banner 1"></div>
-        <div class="swiper-slide"><img src="images/banner2-mobile.png" alt="Banner 2"></div>
-        <div class="swiper-slide"><img src="images/banner3-mobile.png" alt="Banner 3"></div>
-      </div>
-      <div class="swiper-pagination"></div>
-    </div>
-  </section>
-
-  <!-- Produtos -->
-  <main class="container">
-    <h2 id="smartphones">Smartphones</h2>
-    <div class="products">
-      <div class="product">
-        <img src="images/pocox7pro.png" alt="Poco X7 Pro">
-        <h3>Poco X7 Pro</h3>
-      </div>
-      <div class="product">
-        <img src="images/redmi14c.png" alt="Redmi 14C">
-        <h3>Redmi 14C</h3>
-      </div>
-    </div>
-
-    <h2 id="acessorios">Acessórios</h2>
-    <p>Em breve...</p>
+    </section>
   </main>
 
-  <!-- Rodapé -->
-  <footer class="footer">
-    <div class="container">
-      <img src="images/logo.png" alt="Quality Celulares" class="footer-logo">
-      <div class="footer-links">
-        <a href="sobre.html">Sobre nós</a>
-        <a href="formas-de-pagamento.html">Formas de pagamento e envio</a>
-      </div>
-      <div class="social-icons">
-        <a href="#"><i class="fa-brands fa-facebook"></i></a>
-        <a href="#"><i class="fa-brands fa-instagram"></i></a>
-        <a href="#"><i class="fa-brands fa-twitter"></i></a>
-      </div>
-    </div>
-    <p class="footer-copy">© 2025 Quality Celulares. CNPJ: 20.375.910/0001-66</p>
+  <footer>
+    <p>&copy; 2025 Loja Exemplo - CNPJ: 20.375.910/0001-66</p>
+    <ul class="footer-links">
+      <li><a href="sobre.html">Sobre</a></li>
+      <li><a href="formas-de-pagamento.html">Formas de Pagamento e Envio</a></li>
+    </ul>
   </footer>
-
-  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-  <script src="js/main.js"></script>
 </body>
 </html>
