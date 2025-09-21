@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -6,50 +7,57 @@
   <title>Quality Celulares - Início</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-  <style>
-    html { scroll-behavior: smooth; }
-    .carousel img { height: 420px; } /* desktop */
-    @media (max-width: 768px) {
-      .carousel img { height: 220px; object-fit: cover; }
-    }
-  </style>
+  <style>html { scroll-behavior: smooth; }</style>
 </head>
 <body class="bg-gray-50 text-gray-800">
 
-  <!-- Header -->
-  <header class="fixed top-0 left-0 w-full bg-red-600 text-white shadow-md z-50">
-    <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
-      <a href="index.html">
-        <img src="images/logo.png" alt="Quality Celulares" class="h-10 md:h-12">
-      </a>
-      <nav class="hidden md:flex gap-6 font-medium">
-        <a href="#smartphones" class="hover:underline">Smartphones</a>
-        <a href="#acessorios" class="hover:underline">Acessórios</a>
-        <a href="https://wa.me/5555991407824?text=Olá%20vim%20através%20do%20site" target="_blank" class="hover:underline">WhatsApp</a>
-      </nav>
-    </div>
-  </header>
+<!-- Header -->
+<header class="fixed top-0 left-0 w-full bg-red-600 shadow-md z-50">
+  <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between text-white">
+    <a href="index.html">
+      <img src="images/logo.png" alt="Quality Celulares" class="h-10 md:h-12">
+    </a>
+    <!-- Menu Desktop -->
+    <nav class="hidden md:flex gap-6 font-medium">
+      <a href="index.html#smartphones" class="hover:underline">Smartphones</a>
+      <a href="index.html#acessorios" class="hover:underline">Acessórios</a>
+      <a href="https://wa.me/5555991407824?text=Ol%C3%A1%20vim%20atrav%C3%A9s%20do%20site" target="_blank" class="hover:underline">WhatsApp</a>
+    </nav>
+    <!-- Botão Mobile -->
+    <button id="menu-toggle" class="md:hidden text-2xl"><i class="fas fa-bars"></i></button>
+  </div>
+  <!-- Menu Mobile Off-Canvas -->
+  <div id="mobile-menu" class="fixed top-0 right-[-100%] w-64 h-full bg-red-700 text-white flex flex-col p-6 gap-6 transition-all duration-300 z-50">
+    <button id="menu-close" class="self-end text-2xl"><i class="fas fa-times"></i></button>
+    <a href="index.html#smartphones" class="hover:underline">Smartphones</a>
+    <a href="index.html#acessorios" class="hover:underline">Acessórios</a>
+    <a href="https://wa.me/5555991407824?text=Ol%C3%A1%20vim%20atrav%C3%A9s%20do%20site" target="_blank" class="bg-green-500 px-4 py-2 rounded-lg font-medium hover:bg-green-600 transition">WhatsApp</a>
+  </div>
+</header>
 
-  <!-- Banners -->
-  <section class="carousel relative overflow-hidden pt-20">
-    <div class="slides flex transition-transform duration-700 ease-in-out">
-      <img src="images/banner1.png" class="w-full flex-shrink-0" alt="Banner 1">
-      <img src="images/banner2.png" class="w-full flex-shrink-0" alt="Banner 2">
-      <img src="images/banner3.png" class="w-full flex-shrink-0" alt="Banner 3">
+
+  <!-- Banner principal (Carrossel) -->
+  <section class="pt-20 relative w-full overflow-hidden">
+    <div class="carousel relative w-full h-[200px] md:h-[400px]">
+      <div class="slides flex transition-transform duration-700">
+        <img src="images/banner1.png" alt="Banner 1" class="w-full object-cover">
+        <img src="images/banner2.png" alt="Banner 2" class="w-full object-cover">
+        <img src="images/banner3.png" alt="Banner 3" class="w-full object-cover">
+      </div>
     </div>
   </section>
 
   <!-- Smartphones -->
   <section id="smartphones" class="max-w-6xl mx-auto px-4 py-12">
     <h2 class="text-2xl font-bold mb-6">Smartphones</h2>
-    <div class="grid md:grid-cols-2 gap-6">
-      <div class="bg-white rounded-xl shadow-lg p-4 text-center">
-        <img src="images/pocox7pro.png" alt="Poco X7 Pro" class="mx-auto h-40 mb-4">
-        <h3 class="font-semibold">Poco X7 Pro</h3>
+    <div class="grid grid-cols-2 md:grid-cols-3 gap-6">
+      <div class="bg-white rounded-xl shadow p-4 text-center">
+        <img src="images/pocox7pro.png" alt="Poco X7 Pro" class="h-40 mx-auto mb-4">
+        <h3 class="font-bold">Poco X7 Pro</h3>
       </div>
-      <div class="bg-white rounded-xl shadow-lg p-4 text-center">
-        <img src="images/redmi14c.png" alt="Redmi 14C" class="mx-auto h-40 mb-4">
-        <h3 class="font-semibold">Redmi 14C</h3>
+      <div class="bg-white rounded-xl shadow p-4 text-center">
+        <img src="images/redmi14c.png" alt="Redmi 14C" class="h-40 mx-auto mb-4">
+        <h3 class="font-bold">Redmi 14C</h3>
       </div>
     </div>
   </section>
@@ -57,40 +65,47 @@
   <!-- Acessórios -->
   <section id="acessorios" class="max-w-6xl mx-auto px-4 py-12">
     <h2 class="text-2xl font-bold mb-6">Acessórios</h2>
-    <p>Em breve, novidades em acessórios!</p>
+    <p class="text-gray-600">Em breve novidades!</p>
   </section>
 
-  <!-- Rodapé -->
-  <footer class="bg-gray-900 text-gray-300 py-8 mt-12">
-    <div class="max-w-6xl mx-auto px-4 grid md:grid-cols-3 gap-8 items-center">
-      <a href="index.html" class="inline-block">
-        <img src="images/logo.png" alt="Quality Celulares" class="h-10">
-      </a>
-      <div class="flex justify-center gap-4 text-2xl">
-        <a href="#" class="text-pink-500 hover:text-pink-600"><i class="fab fa-instagram"></i></a>
-        <a href="https://wa.me/5555991407824" target="_blank" class="text-green-500 hover:text-green-600"><i class="fab fa-whatsapp"></i></a>
-        <a href="#" class="text-blue-600 hover:text-blue-700"><i class="fab fa-facebook"></i></a>
-        <a href="#" class="text-gray-400 hover:text-gray-500"><i class="fas fa-map-marker-alt"></i></a>
-      </div>
-      <div class="flex flex-col gap-1 text-center md:text-right">
-        <a href="sobre.html" class="hover:underline">Sobre nós</a>
-        <a href="formas-de-pagamento.html" class="hover:underline">Formas de pagamento e envio</a>
-      </div>
+
+<!-- Rodapé -->
+<footer class="bg-gray-900 text-gray-300 py-8 mt-12">
+  <div class="max-w-6xl mx-auto px-4 flex flex-col md:flex-row md:justify-between md:items-center gap-6">
+    <a href="index.html" class="inline-block">
+      <img src="images/logo.png" alt="Quality Celulares" class="h-10">
+    </a>
+    <div class="flex gap-4 text-2xl">
+      <a href="https://instagram.com" target="_blank" class="p-3 rounded-full text-white bg-gradient-to-tr from-yellow-400 via-pink-500 to-purple-600 hover:scale-110 transition"><i class="fab fa-instagram"></i></a>
+      <a href="https://facebook.com" target="_blank" class="p-3 rounded-full text-white bg-[#1877F2] hover:scale-110 transition"><i class="fab fa-facebook-f"></i></a>
+      <a href="https://wa.me/5555991407824" target="_blank" class="p-3 rounded-full text-white bg-[#25D366] hover:scale-110 transition"><i class="fab fa-whatsapp"></i></a>
+      <a href="https://goo.gl/maps" target="_blank" class="p-3 rounded-full text-white bg-gray-600 hover:scale-110 transition"><i class="fas fa-map-marker-alt"></i></a>
     </div>
-    <div class="max-w-6xl mx-auto px-4 text-center mt-6 text-gray-500 text-sm">
-      © 2025 Quality Celulares. Todos os direitos reservados. <br>CNPJ: 20.375.910/0001-66
+    <div class="flex flex-col gap-1 text-sm">
+      <a href="sobre.html" class="hover:underline">Sobre nós</a>
+      <a href="formas-de-pagamento.html" class="hover:underline">Formas de pagamento e envio</a>
     </div>
-  </footer>
+  </div>
+  <div class="max-w-6xl mx-auto px-4 text-center mt-6 text-gray-500 text-sm">
+    © 2025 Quality Celulares. Todos os direitos reservados. <br>
+    CNPJ: 20.375.910/0001-66
+  </div>
+</footer>
+
 
   <script>
-    let index = 0;
+    // Carrossel automático
     const slides = document.querySelector('.slides');
-    const total = slides.children.length;
-    setInterval(() => {
-      index = (index + 1) % total;
-      slides.style.transform = `translateX(-${index * 100}%)`;
-    }, 4000);
-  </script>
+    let index = 0;
+    setInterval(() => { index = (index + 1) % 3; slides.style.transform = `translateX(${-index * 100}%)`; }, 3000);
 
+    // Menu mobile
+    const menuToggle = document.getElementById('menu-toggle');
+    const menuClose = document.getElementById('menu-close');
+    const mobileMenu = document.getElementById('mobile-menu');
+
+    menuToggle.addEventListener('click', () => { mobileMenu.style.right = '0'; });
+    menuClose.addEventListener('click', () => { mobileMenu.style.right = '-100%'; });
+  </script>
 </body>
 </html>

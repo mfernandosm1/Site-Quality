@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -9,80 +10,86 @@
 </head>
 <body class="bg-gray-50 text-gray-800">
 
-  <!-- Header -->
-  <header class="fixed top-0 left-0 w-full bg-red-600 text-white shadow-md z-50">
-    <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
-      <a href="index.html">
-        <img src="images/logo.png" alt="Quality Celulares" class="h-10 md:h-12">
-      </a>
-      <nav class="hidden md:flex gap-6 font-medium">
-        <a href="index.html#smartphones" class="hover:underline">Smartphones</a>
-        <a href="index.html#acessorios" class="hover:underline">Acessórios</a>
-        <a href="https://wa.me/5555991407824?text=Olá%20vim%20através%20do%20site" target="_blank" class="hover:underline">WhatsApp</a>
-      </nav>
-    </div>
-  </header>
+<!-- Header -->
+<header class="fixed top-0 left-0 w-full bg-red-600 shadow-md z-50">
+  <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between text-white">
+    <a href="index.html">
+      <img src="images/logo.png" alt="Quality Celulares" class="h-10 md:h-12">
+    </a>
+    <!-- Menu Desktop -->
+    <nav class="hidden md:flex gap-6 font-medium">
+      <a href="index.html#smartphones" class="hover:underline">Smartphones</a>
+      <a href="index.html#acessorios" class="hover:underline">Acessórios</a>
+      <a href="https://wa.me/5555991407824?text=Ol%C3%A1%20vim%20atrav%C3%A9s%20do%20site" target="_blank" class="hover:underline">WhatsApp</a>
+    </nav>
+    <!-- Botão Mobile -->
+    <button id="menu-toggle" class="md:hidden text-2xl"><i class="fas fa-bars"></i></button>
+  </div>
+  <!-- Menu Mobile Off-Canvas -->
+  <div id="mobile-menu" class="fixed top-0 right-[-100%] w-64 h-full bg-red-700 text-white flex flex-col p-6 gap-6 transition-all duration-300 z-50">
+    <button id="menu-close" class="self-end text-2xl"><i class="fas fa-times"></i></button>
+    <a href="index.html#smartphones" class="hover:underline">Smartphones</a>
+    <a href="index.html#acessorios" class="hover:underline">Acessórios</a>
+    <a href="https://wa.me/5555991407824?text=Ol%C3%A1%20vim%20atrav%C3%A9s%20do%20site" target="_blank" class="bg-green-500 px-4 py-2 rounded-lg font-medium hover:bg-green-600 transition">WhatsApp</a>
+  </div>
+</header>
 
-  <!-- Conteúdo principal -->
-  <main class="pt-28 max-w-6xl mx-auto px-4 py-12 space-y-12">
-
-    <!-- Formas de Pagamento -->
+  <main class="max-w-6xl mx-auto px-4 py-28 space-y-12">
     <section class="grid md:grid-cols-3 gap-6">
-      <div class="bg-white rounded-xl shadow-lg p-6 text-center hover:shadow-2xl transition">
+      <div class="bg-white rounded-xl shadow-lg p-6 text-center">
         <i class="fa-solid fa-credit-card text-4xl text-red-600 mb-4"></i>
         <h2 class="text-xl font-bold mb-2">Cartão de Crédito</h2>
         <p>Visa, MasterCard, Elo, American Express</p>
       </div>
-      <div class="bg-white rounded-xl shadow-lg p-6 text-center hover:shadow-2xl transition">
+      <div class="bg-white rounded-xl shadow-lg p-6 text-center">
         <i class="fa-solid fa-file-invoice text-4xl text-yellow-500 mb-4"></i>
         <h2 class="text-xl font-bold mb-2">Boleto Bancário</h2>
         <p>Pague de forma segura diretamente pelo banco</p>
       </div>
-      <div class="bg-white rounded-xl shadow-lg p-6 text-center hover:shadow-2xl transition">
+      <div class="bg-white rounded-xl shadow-lg p-6 text-center">
         <i class="fa-brands fa-pix text-4xl text-green-500 mb-4"></i>
         <h2 class="text-xl font-bold mb-2">PIX</h2>
         <p>Transferência instantânea e segura</p>
       </div>
     </section>
-
-    <!-- Envios -->
-    <section class="bg-white rounded-xl shadow-lg p-6 flex flex-col md:flex-row items-center gap-6">
-      <div class="flex-1 text-center md:text-left">
-        <i class="fa-solid fa-truck-fast text-5xl text-green-600 mb-4"></i>
-        <h2 class="text-2xl font-bold mb-2">ENVIOS:</h2>
-        <p class="text-lg">
-          Via <strong>Correios ou Transportadora</strong>.
-        </p>
-        <p class="text-lg mt-2">
-          Frete grátis para compras acima de <strong>R$120,00</strong> no <strong>RS</strong>.  
-          Para as demais regiões, o valor do frete será calculado conforme a região de entrega.
-        </p>
-      </div>
+    <section class="bg-white rounded-xl shadow-lg p-6 text-center">
+      <i class="fa-solid fa-truck-fast text-5xl text-green-600 mb-4"></i>
+      <h2 class="text-2xl font-bold mb-2">Envios</h2>
+      <p class="text-lg">Via <strong>Correios ou Transportadora</strong>.</p>
+      <p class="text-lg mt-2">Frete grátis para compras acima de <strong>R$120,00</strong> no RS.  
+      Para as demais regiões, o valor do frete será calculado conforme a região de entrega.</p>
     </section>
-
   </main>
 
-  <!-- Rodapé -->
-  <footer class="bg-gray-900 text-gray-300 py-8 mt-12">
-    <div class="max-w-6xl mx-auto px-4 grid md:grid-cols-3 gap-8 items-center">
-      <a href="index.html" class="inline-block">
-        <img src="images/logo.png" alt="Quality Celulares" class="h-10">
-      </a>
-      <div class="flex justify-center gap-4 text-2xl">
-        <a href="#" class="text-pink-500 hover:text-pink-600"><i class="fab fa-instagram"></i></a>
-        <a href="https://wa.me/5555991407824" target="_blank" class="text-green-500 hover:text-green-600"><i class="fab fa-whatsapp"></i></a>
-        <a href="#" class="text-blue-600 hover:text-blue-700"><i class="fab fa-facebook"></i></a>
-        <a href="#" class="text-gray-400 hover:text-gray-500"><i class="fas fa-map-marker-alt"></i></a>
-      </div>
-      <div class="flex flex-col gap-1 text-center md:text-right">
-        <a href="sobre.html" class="hover:underline">Sobre nós</a>
-        <a href="formas-de-pagamento.html" class="hover:underline">Formas de pagamento e envio</a>
-      </div>
+<!-- Rodapé -->
+<footer class="bg-gray-900 text-gray-300 py-8 mt-12">
+  <div class="max-w-6xl mx-auto px-4 flex flex-col md:flex-row md:justify-between md:items-center gap-6">
+    <a href="index.html" class="inline-block">
+      <img src="images/logo.png" alt="Quality Celulares" class="h-10">
+    </a>
+    <div class="flex gap-4 text-2xl">
+      <a href="https://instagram.com" target="_blank" class="p-3 rounded-full text-white bg-gradient-to-tr from-yellow-400 via-pink-500 to-purple-600 hover:scale-110 transition"><i class="fab fa-instagram"></i></a>
+      <a href="https://facebook.com" target="_blank" class="p-3 rounded-full text-white bg-[#1877F2] hover:scale-110 transition"><i class="fab fa-facebook-f"></i></a>
+      <a href="https://wa.me/5555991407824" target="_blank" class="p-3 rounded-full text-white bg-[#25D366] hover:scale-110 transition"><i class="fab fa-whatsapp"></i></a>
+      <a href="https://goo.gl/maps" target="_blank" class="p-3 rounded-full text-white bg-gray-600 hover:scale-110 transition"><i class="fas fa-map-marker-alt"></i></a>
     </div>
-    <div class="max-w-6xl mx-auto px-4 text-center mt-6 text-gray-500 text-sm">
-      © 2025 Quality Celulares. Todos os direitos reservados. <br>CNPJ: 20.375.910/0001-66
+    <div class="flex flex-col gap-1 text-sm">
+      <a href="sobre.html" class="hover:underline">Sobre nós</a>
+      <a href="formas-de-pagamento.html" class="hover:underline">Formas de pagamento e envio</a>
     </div>
-  </footer>
+  </div>
+  <div class="max-w-6xl mx-auto px-4 text-center mt-6 text-gray-500 text-sm">
+    © 2025 Quality Celulares. Todos os direitos reservados. <br>
+    CNPJ: 20.375.910/0001-66
+  </div>
+</footer>
 
+  <script>
+    const menuToggle = document.getElementById('menu-toggle');
+    const menuClose = document.getElementById('menu-close');
+    const mobileMenu = document.getElementById('mobile-menu');
+    menuToggle.addEventListener('click', () => { mobileMenu.style.right = '0'; });
+    menuClose.addEventListener('click', () => { mobileMenu.style.right = '-100%'; });
+  </script>
 </body>
 </html>
