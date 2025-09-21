@@ -1,1 +1,27 @@
-/* style.css com ajustes */
+body {margin:0; font-family:Arial, sans-serif; background:#fff; color:#333;}
+.top-bar {display:flex; align-items:center; justify-content:space-between; padding:10px; background:#b30000; color:#fff;}
+.top-bar .logo img {height:50px;}
+.desktop-menu {display:flex; gap:15px; align-items:center;}
+.desktop-menu a {color:#fff; text-decoration:none;}
+.desktop-menu .search {padding:5px;}
+.menu-toggle {display:none; font-size:24px; background:none; border:none; color:#fff; cursor:pointer;}
+.mobile-menu {display:none; flex-direction:column; background:#fff; position:fixed; top:0; right:0; width:70%; height:100%; padding:20px; box-shadow:-2px 0 5px rgba(0,0,0,.3);}
+.mobile-menu a {margin:10px 0; text-decoration:none; color:#333;}
+.carousel {width:100%; overflow:hidden; position:relative;}
+.carousel img {width:100%; display:none;}
+.carousel img.active {display:block;}
+.produtos {display:flex; gap:20px; padding:20px;}
+.produto {flex:1; text-align:center; border:1px solid #ddd; border-radius:8px; padding:10px;}
+.produto img {width:100%; max-width:200px;}
+.whatsapp-btn {display:inline-block; padding:10px 20px; background:#25d366; color:#fff; text-decoration:none; border-radius:5px;}
+footer {background:#222; color:#fff; padding:20px; text-align:center;}
+footer .social img {width:30px; margin:0 5px;}
+footer .links {margin:10px 0;}
+footer .links a {color:#fff; margin:0 10px; text-decoration:none;}
+@media (max-width:768px){
+  .desktop-menu {display:none;}
+  .menu-toggle {display:block;}
+  .produtos {flex-direction:column; align-items:center;}
+  .mobile-banner {display:block;}
+  .desktop-banner {display:none;}
+}
