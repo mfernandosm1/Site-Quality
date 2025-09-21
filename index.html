@@ -1,50 +1,107 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Início - Loja</title>
-  <link rel="stylesheet" href="css/style.css">
-  <script src="js/main.js" defer></script>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Quality Celulares</title>
+<link rel="icon" href="images/favicon.png" />
+<link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
-  <header>
-    <div class="logo">
-      <a href="index.html">
-        <img src="images/logo.png" alt="Logo da Loja">
-      </a>
-    </div>
-    <nav class="desktop-menu">
-      <ul>
-        <li><a href="index.html">Início</a></li>
-        <li><a href="#">Smartphones</a></li>
-        <li><a href="#">Acessórios</a></li>
-        <li><input type="text" placeholder="Buscar"></li>
-        <li><a href="https://wa.me/55SEUNUMERO" target="_blank">WhatsApp</a></li>
-      </ul>
+<header class="site-header" role="banner">
+  <div class="header-inner">
+    <a class="logo-link" href="index.html"><img src="images/logo.png" alt="Quality Celulares" id="site-logo"></a>
+    <nav class="nav-desktop" aria-label="Menu principal">
+      <a href="index.html">Início</a>
+      <a href="#smartphones">Smartphones</a>
+      <a href="#acessorios">Acessórios</a>
+      <input class="search" type="search" placeholder="Buscar" aria-label="Buscar">
+      <a class="btn-whats" href="https://wa.me/5555991407824" target="_blank" rel="noopener">WhatsApp</a>
     </nav>
-  </header>
+    <button id="hamburger" class="hamburger" aria-label="Abrir menu">☰</button>
+  </div>
+</header>
 
-  <main>
-    <section class="banner">
-      <div class="carousel">
-        <img src="images/banner1.png" alt="Banner 1" class="active desktop-banner">
-        <img src="images/banner2.png" alt="Banner 2" class="desktop-banner">
-        <img src="images/banner3.png" alt="Banner 3" class="desktop-banner">
+<!-- overlay for closing mobile menu -->
+<div id="overlay" class="overlay hidden" tabindex="-1"></div>
 
-        <img src="images/banner1-mobile.png" alt="Banner Mobile 1" class="active mobile-banner">
-        <img src="images/banner2-mobile.png" alt="Banner Mobile 2" class="mobile-banner">
-        <img src="images/banner3-mobile.png" alt="Banner Mobile 3" class="mobile-banner">
+<!-- mobile off-canvas menu (right) -->
+<aside id="mobile-menu" class="mobile-menu" aria-hidden="true">
+  <div class="mobile-header">
+    <a href="index.html"><img src="images/logo.png" alt="Quality" class="mobile-logo"></a>
+    <button id="mobile-close" class="mobile-close" aria-label="Fechar menu">×</button>
+  </div>
+  <div class="mobile-body">
+    <input class="search" type="search" placeholder="Buscar" aria-label="Buscar">
+    <a href="index.html">Início</a>
+    <a href="#smartphones">Smartphones</a>
+    <a href="#acessorios">Acessórios</a>
+    <a class="btn-whats" href="https://wa.me/5555991407824" target="_blank" rel="noopener">WhatsApp</a>
+  </div>
+</aside>
+
+<main id="main" class="main">
+  <!-- Carousel (desktop) -->
+  <section class="carousel-wrap">
+    <div class="carousel desktop-carousel" aria-roledescription="carousel">
+      <button class="carousel-btn prev" aria-label="Anterior">‹</button>
+      <div class="carousel-track" id="desktop-track">
+        <div class="slide"><img src="images/banner1.png" alt="Banner 1"></div>
+        <div class="slide"><img src="images/banner2.png" alt="Banner 2"></div>
+        <div class="slide"><img src="images/banner3.png" alt="Banner 3"></div>
       </div>
-    </section>
-  </main>
+      <button class="carousel-btn next" aria-label="Próximo">›</button>
+    </div>
 
-  <footer>
-    <p>&copy; 2025 Loja Exemplo - CNPJ: 20.375.910/0001-66</p>
-    <ul class="footer-links">
-      <li><a href="sobre.html">Sobre</a></li>
-      <li><a href="formas-de-pagamento.html">Formas de Pagamento e Envio</a></li>
-    </ul>
-  </footer>
+    <!-- Carousel (mobile) -->
+    <div class="carousel mobile-carousel" aria-roledescription="carousel">
+      <div class="carousel-track" id="mobile-track">
+        <div class="slide"><img src="images/banner1-mobile.png" alt="Banner mobile 1"></div>
+        <div class="slide"><img src="images/banner2-mobile.png" alt="Banner mobile 2"></div>
+        <div class="slide"><img src="images/banner3-mobile.png" alt="Banner mobile 3"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Products -->
+  <section id="smartphones" class="container products-section">
+    <h2>Smartphones</h2>
+    <div class="products-grid">
+      <article class="product-card">
+        <img src="images/pocox7pro.png" alt="Poco X7 Pro">
+        <h3>Poco X7 Pro</h3>
+        <a class="buy-whats" href="https://wa.me/5555991407824" target="_blank">Comprar no WhatsApp</a>
+      </article>
+      <article class="product-card">
+        <img src="images/redmi14c.png" alt="Redmi 14C">
+        <h3>Redmi 14C</h3>
+        <a class="buy-whats" href="https://wa.me/5555991407824" target="_blank">Comprar no WhatsApp</a>
+      </article>
+    </div>
+  </section>
+
+  <section id="acessorios" class="container">
+    <h2>Acessórios</h2>
+    <p class="muted">Em breve...</p>
+  </section>
+</main>
+
+<footer class="site-footer" role="contentinfo">
+  <div class="footer-inner">
+    <a href="index.html"><img src="images/logo.png" alt="Quality" class="footer-logo"></a>
+    <nav class="footer-links">
+      <a href="sobre.html">Sobre nós</a>
+      <a href="formas-de-pagamento.html">Formas de pagamento e envio</a>
+    </nav>
+    <div class="footer-socials">
+      <a href="#" aria-label="Instagram" class="social instagram"></a>
+      <a href="#" aria-label="WhatsApp" class="social whatsapp"></a>
+      <a href="#" aria-label="Facebook" class="social facebook"></a>
+    </div>
+  </div>
+  <div class="footer-copy">© 2025 Quality Celulares • CNPJ: 20.375.910/0001-66</div>
+</footer>
+
+<script src="js/main.js"></script>
 </body>
 </html>

@@ -1,43 +1,23 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt-BR">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sobre - Loja</title>
-  <link rel="stylesheet" href="css/style.css">
-  <script src="js/main.js" defer></script>
-</head>
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Sobre - Quality Celulares</title>
+<link rel="stylesheet" href="css/style.css"></head>
 <body>
-  <header>
-    <div class="logo">
-      <a href="index.html">
-        <img src="images/logo.png" alt="Logo da Loja">
-      </a>
-    </div>
-    <nav class="desktop-menu">
-      <ul>
-        <li><a href="index.html">Início</a></li>
-        <li><a href="#">Smartphones</a></li>
-        <li><a href="#">Acessórios</a></li>
-        <li><input type="text" placeholder="Buscar"></li>
-        <li><a href="https://wa.me/55SEUNUMERO" target="_blank">WhatsApp</a></li>
-      </ul>
-    </nav>
-  </header>
-
-  <main>
-    <section class="sobre">
-      <h1>Sobre Nós</h1>
-      <p>Aqui vai o conteúdo da página Sobre...</p>
-    </section>
-  </main>
-
-  <footer>
-    <p>&copy; 2025 Loja Exemplo - CNPJ: 20.375.910/0001-66</p>
-    <ul class="footer-links">
-      <li><a href="sobre.html">Sobre</a></li>
-      <li><a href="formas-de-pagamento.html">Formas de Pagamento e Envio</a></li>
-    </ul>
-  </footer>
+<header class="site-header"><div class="header-inner">
+  <a class="logo-link" href="index.html"><img src="images/logo.png" id="site-logo" alt="Quality"></a>
+  <nav class="nav-desktop">
+    <a href="index.html">Início</a><a href="index.html#smartphones">Smartphones</a><a href="index.html#acessorios">Acessórios</a>
+    <input class="search" type="search" placeholder="Buscar"><a class="btn-whats" href="https://wa.me/5555991407824">WhatsApp</a>
+  </nav>
+  <button id="hamburger" class="hamburger">☰</button>
+</div></header>
+<div id="overlay" class="overlay hidden"></div>
+<aside id="mobile-menu" class="mobile-menu" aria-hidden="true">
+  <div class="mobile-header"><a href="index.html"><img src="images/logo.png" class="mobile-logo"></a><button id="mobile-close" class="mobile-close">×</button></div>
+  <div class="mobile-body"><input class="search" placeholder="Buscar"><a href="index.html">Início</a><a href="index.html#smartphones">Smartphones</a><a href="index.html#acessorios">Acessórios</a><a class="btn-whats" href="https://wa.me/5555991407824">WhatsApp</a></div>
+</aside>
+<main class="container"><h1>Sobre a Quality Celulares</h1><p class="muted">Vendemos celulares, notebooks, videogames, smartwatches, tablets, caixas de som e acessórios em geral. Também oferecemos assistência técnica em celulares.</p></main>
+<footer class="site-footer"><div class="footer-inner"><a href="index.html"><img src="images/logo.png" class="footer-logo"></a><nav class="footer-links"><a href="sobre.html">Sobre nós</a><a href="formas-de-pagamento.html">Formas de pagamento e envio</a></nav><div class="footer-socials"><a class="social instagram"></a><a class="social whatsapp"></a><a class="social facebook"></a></div></div><div class="footer-copy">© 2025 Quality Celulares • CNPJ: 20.375.910/0001-66</div></footer>
+<script src="js/main.js"></script>
 </body>
 </html>
