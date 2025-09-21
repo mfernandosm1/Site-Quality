@@ -1,18 +1,1 @@
-body { font-family: Arial, sans-serif; margin:0; padding:0; }
-.navbar { display:flex; justify-content:space-between; align-items:center; background:#c00; color:#fff; padding:10px; position:fixed; width:100%; top:0; z-index:1000; }
-.navbar .logo img { height:40px; }
-.menu-desktop ul { list-style:none; display:flex; gap:20px; margin:0; padding:0; }
-.menu-desktop input { padding:5px; }
-.menu-mobile { display:none; position:fixed; right:0; top:0; width:200px; height:100%; background:#fff; box-shadow:-2px 0 5px rgba(0,0,0,.5); padding:20px; }
-.menu-mobile.active { display:block; }
-.carousel { position:relative; margin-top:60px; }
-.carousel img { width:100%; display:none; }
-.carousel img.active { display:block; }
-.carousel button { position:absolute; top:50%; transform:translateY(-50%); background:rgba(0,0,0,0.5); color:#fff; border:none; font-size:24px; padding:10px; cursor:pointer; }
-.carousel .prev { left:10px; }
-.carousel .next { right:10px; }
-.products { display:flex; gap:20px; padding:20px; flex-wrap:wrap; }
-.product { border:1px solid #ccc; padding:10px; width:200px; text-align:center; }
-.btn-buy { display:block; margin-top:10px; background:#25D366; color:#fff; padding:10px; text-decoration:none; border-radius:5px; }
-footer { background:#333; color:#fff; text-align:center; padding:20px; margin-top:40px; }
-.social-icons img { width:30px; margin:0 5px; }
+body { font-family: Arial, sans-serif; }
