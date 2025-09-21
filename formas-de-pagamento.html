@@ -3,53 +3,61 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Formas de Pagamento e Envio - Quality Celulares</title>
+  <title>Formas de Pagamento e Envio - Site Quality</title>
   <link rel="stylesheet" href="css/style.css">
   <script defer src="js/main.js"></script>
 </head>
 <body>
-  <header class="site-header">
-    <div class="logo"><img src="images/logo.png" alt="Quality Celulares"></div>
-    <nav class="desktop-nav">
-      <a href="index.html#catalogo">Smartphones</a>
-      <a href="index.html#catalogo">Acessórios</a>
-      <input type="text" placeholder="Buscar" class="search-input">
-      <a href="https://wa.me/5555991407824" class="btn-whats">WhatsApp</a>
+  <header class="navbar">
+    <div class="logo"><img src="./images/logo.png" alt="Logo"></div>
+    <nav class="menu-desktop">
+      <ul>
+        <li><a href="index.html">Início</a></li>
+        <li><a href="#smartphones">Smartphones</a></li>
+        <li><a href="#acessorios">Acessórios</a></li>
+        <li><input type="text" placeholder="Buscar" class="search-bar"></li>
+      </ul>
     </nav>
-    <button class="mobile-menu-btn">☰</button>
+    <div class="menu-mobile">
+      <button id="menu-toggle">☰</button>
+    </div>
   </header>
 
-  <aside class="mobile-drawer">
-    <input type="text" placeholder="Buscar">
-    <a href="index.html#catalogo">Smartphones</a>
-    <a href="index.html#catalogo">Acessórios</a>
-    <a href="https://wa.me/5555991407824">WhatsApp</a>
+  <aside id="sidebar">
+    <button id="close-sidebar">×</button>
+    <input type="text" placeholder="Buscar" class="search-bar">
+    <a href="#smartphones">Smartphones</a>
+    <a href="#acessorios">Acessórios</a>
+    <a href="https://wa.me/55SEUNUMERO" target="_blank">WhatsApp</a>
   </aside>
 
   <main>
     <h1>Formas de Pagamento</h1>
     <ul>
-      <li>💳 Cartão de Crédito (Visa, MasterCard, Elo, Amex)</li>
-      <li>📄 Boleto Bancário</li>
-      <li>⚡ PIX</li>
+      <li>Pix</li>
+      <li>Cartão de Crédito</li>
+      <li>Boleto Bancário</li>
     </ul>
 
-    <h2>Envios</h2>
-    <p>Via Correios ou Transportadora.</p>
-    <p>Frete grátis para compras acima de R$120,00 no RS. Para as demais regiões, o valor do frete será calculado conforme a região de entrega.</p>
+    <h1>Formas de Envio</h1>
+    <ul>
+      <li>Correios</li>
+      <li>Transportadora</li>
+      <li>Retirada em Loja</li>
+    </ul>
   </main>
 
-  <footer class="site-footer">
+  <footer>
+    <div class="social-icons">
+      <a href="#"><i class="fab fa-facebook"></i></a>
+      <a href="#"><i class="fab fa-instagram"></i></a>
+      <a href="#"><i class="fab fa-whatsapp"></i></a>
+    </div>
     <div class="footer-links">
-      <a href="sobre.html">Sobre nós</a> | 
+      <a href="sobre.html">Sobre</a> |
       <a href="formas-de-pagamento.html">Formas de pagamento e envio</a>
     </div>
-    <div class="social-icons">
-      <i class="fab fa-facebook"></i>
-      <i class="fab fa-instagram"></i>
-      <i class="fab fa-whatsapp"></i>
-    </div>
-    <div class="cnpj">CNPJ: 20.375.910/0001-66</div>
+    <p>CNPJ: 20.375.910/0001-66</p>
   </footer>
 </body>
 </html>

@@ -1,20 +1,14 @@
-body { margin:0; font-family:Arial, sans-serif; }
-.site-header { display:flex; align-items:center; justify-content:space-between; background:#c00; color:#fff; padding:10px; position:fixed; top:0; width:100%; z-index:1000; }
-.logo img { height:56px; }
-.desktop-nav { display:flex; gap:15px; align-items:center; }
-.desktop-nav a, .desktop-nav input { color:#fff; text-decoration:none; }
-.search-input { padding:5px; border-radius:4px; border:none; }
-.mobile-menu-btn { display:none; background:none; border:none; font-size:24px; color:#fff; }
-.mobile-drawer { display:none; position:fixed; top:0; right:0; width:250px; height:100%; background:#fff; box-shadow:-2px 0 5px rgba(0,0,0,0.5); padding:20px; z-index:2000; flex-direction:column; gap:10px; }
-.carousel { margin-top:80px; overflow:hidden; }
-.carousel-item img { width:100%; display:block; }
-.produto { border:1px solid #ddd; padding:10px; margin:10px; display:inline-block; }
-.btn-whats { background:#25d366; color:#fff; padding:5px 10px; border-radius:5px; text-decoration:none; }
-.site-footer { background:#111; color:#fff; text-align:center; padding:20px; margin-top:40px; }
-.footer-links a { color:#fff; margin:0 10px; }
-.social-icons i { font-size:28px; margin:0 10px; }
-.cnpj { margin-top:10px; font-size:14px; }
-@media(max-width:768px){
-  .desktop-nav { display:none; }
-  .mobile-menu-btn { display:block; }
-}
+
+body { font-family: Arial, sans-serif; margin:0; padding:0; }
+.navbar { background:#b30000; color:#fff; padding:10px; display:flex; align-items:center; justify-content:space-between; }
+.menu-desktop ul { list-style:none; display:flex; gap:15px; margin:0; padding:0; }
+.menu-desktop a { color:white; text-decoration:none; }
+.search-bar { padding:5px; border-radius:5px; border:1px solid #ccc; }
+.menu-mobile button { font-size:24px; background:none; border:none; color:white; cursor:pointer; }
+#sidebar { position:fixed; top:0; right:-300px; width:250px; height:100%; background:#333; color:white; display:flex; flex-direction:column; padding:20px; transition:0.3s; }
+#sidebar a, #sidebar input { margin:10px 0; color:white; text-decoration:none; }
+#sidebar.active { right:0; }
+.carousel img { display:none; width:100%; height:auto; }
+.carousel img.active { display:block; }
+footer { background:#222; color:white; padding:20px; text-align:center; }
+footer .social-icons i { font-size:24px; margin:0 10px; }

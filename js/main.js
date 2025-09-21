@@ -1,22 +1,18 @@
-document.addEventListener("DOMContentLoaded", () => {
-  // Drawer mobile
-  const btn = document.querySelector(".mobile-menu-btn");
-  const drawer = document.querySelector(".mobile-drawer");
-  btn.addEventListener("click", () => {
-    drawer.style.display = drawer.style.display === "flex" ? "none" : "flex";
-  });
 
-  // Carousel simples
-  const items = document.querySelectorAll(".carousel-item");
-  let index = 0;
-  function showSlide(i){
-    items.forEach((item, idx)=>{
-      item.style.display = idx===i ? "block" : "none";
-    });
-  }
-  showSlide(index);
-  setInterval(()=>{
-    index = (index+1)%items.length;
-    showSlide(index);
+document.addEventListener("DOMContentLoaded", () => {
+  const toggle = document.getElementById("menu-toggle");
+  const sidebar = document.getElementById("sidebar");
+  const close = document.getElementById("close-sidebar");
+
+  toggle.addEventListener("click", () => sidebar.classList.add("active"));
+  close.addEventListener("click", () => sidebar.classList.remove("active"));
+
+  // Carousel
+  let current = 0;
+  const slides = document.querySelectorAll(".carousel img");
+  setInterval(() => {
+    slides[current].classList.remove("active");
+    current = (current + 1) % slides.length;
+    slides[current].classList.add("active");
   }, 5000);
 });

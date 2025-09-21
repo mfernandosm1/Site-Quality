@@ -3,65 +3,67 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Quality Celulares - Início</title>
+  <title>Site Quality - Início</title>
   <link rel="stylesheet" href="css/style.css">
   <script defer src="js/main.js"></script>
 </head>
 <body>
-  <!-- Header -->
-  <header class="site-header">
-    <div class="logo"><img src="images/logo.png" alt="Quality Celulares"></div>
-    <nav class="desktop-nav">
-      <a href="#catalogo">Smartphones</a>
-      <a href="#catalogo">Acessórios</a>
-      <input type="text" placeholder="Buscar" class="search-input">
-      <a href="https://wa.me/5555991407824" class="btn-whats">WhatsApp</a>
+  <header class="navbar">
+    <div class="logo"><img src="./images/logo.png" alt="Logo"></div>
+    <nav class="menu-desktop">
+      <ul>
+        <li><a href="index.html">Início</a></li>
+        <li><a href="#smartphones">Smartphones</a></li>
+        <li><a href="#acessorios">Acessórios</a></li>
+        <li><input type="text" placeholder="Buscar" class="search-bar"></li>
+      </ul>
     </nav>
-    <button class="mobile-menu-btn">☰</button>
+    <div class="menu-mobile">
+      <button id="menu-toggle">☰</button>
+    </div>
   </header>
 
-  <!-- Mobile Menu Drawer -->
-  <aside class="mobile-drawer">
-    <input type="text" placeholder="Buscar">
-    <a href="#catalogo">Smartphones</a>
-    <a href="#catalogo">Acessórios</a>
-    <a href="https://wa.me/5555991407824">WhatsApp</a>
+  <aside id="sidebar">
+    <button id="close-sidebar">×</button>
+    <input type="text" placeholder="Buscar" class="search-bar">
+    <a href="#smartphones">Smartphones</a>
+    <a href="#acessorios">Acessórios</a>
+    <a href="https://wa.me/55SEUNUMERO" target="_blank">WhatsApp</a>
   </aside>
 
-  <!-- Banner / Carrossel -->
-  <section class="carousel">
-    <div class="carousel-item"><img src="images/banner1.png" alt="Banner 1"></div>
-    <div class="carousel-item"><img src="images/banner2.png" alt="Banner 2"></div>
-    <div class="carousel-item"><img src="images/banner3.png" alt="Banner 3"></div>
-  </section>
+  <main>
+    <section id="banner-carousel">
+      <div class="carousel">
+        <img src="./images/banner1.png" class="active" alt="Banner 1">
+        <img src="./images/banner2.png" alt="Banner 2">
+        <img src="./images/banner3.png" alt="Banner 3">
+      </div>
+    </section>
 
-  <!-- Catálogo -->
-  <section id="catalogo">
-    <h2>Produtos</h2>
-    <div class="produto">
-      <img src="images/pocox7pro.png" alt="POCO X7 Pro">
-      <p>POCO X7 Pro</p>
-      <a href="https://wa.me/5555991407824" class="btn-whats">Comprar pelo WhatsApp</a>
-    </div>
-    <div class="produto">
-      <img src="images/redmi14c.png" alt="Redmi 14C">
-      <p>Redmi 14C</p>
-      <a href="https://wa.me/5555991407824" class="btn-whats">Comprar pelo WhatsApp</a>
-    </div>
-  </section>
+    <section id="smartphones">
+      <h2>Smartphones</h2>
+      <div class="produto">
+        <img src="./images/pocox7pro.png" alt="Poco X7 Pro">
+        <button>Comprar no WhatsApp</button>
+      </div>
+      <div class="produto">
+        <img src="./images/redmi14c.png" alt="Redmi 14C">
+        <button>Comprar no WhatsApp</button>
+      </div>
+    </section>
+  </main>
 
-  <!-- Footer -->
-  <footer class="site-footer">
+  <footer>
+    <div class="social-icons">
+      <a href="#"><i class="fab fa-facebook"></i></a>
+      <a href="#"><i class="fab fa-instagram"></i></a>
+      <a href="#"><i class="fab fa-whatsapp"></i></a>
+    </div>
     <div class="footer-links">
-      <a href="sobre.html">Sobre nós</a> | 
+      <a href="sobre.html">Sobre</a> |
       <a href="formas-de-pagamento.html">Formas de pagamento e envio</a>
     </div>
-    <div class="social-icons">
-      <i class="fab fa-facebook"></i>
-      <i class="fab fa-instagram"></i>
-      <i class="fab fa-whatsapp"></i>
-    </div>
-    <div class="cnpj">CNPJ: 20.375.910/0001-66</div>
+    <p>CNPJ: 20.375.910/0001-66</p>
   </footer>
 </body>
 </html>
