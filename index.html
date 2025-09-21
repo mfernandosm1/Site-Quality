@@ -1,110 +1,13 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt-BR">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Quality Celulares</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-</head>
-<body class="bg-gray-50 text-gray-800">
-
-  <!-- Header -->
-  <header class="fixed top-0 left-0 w-full bg-red-600 text-white shadow-md z-50">
-    <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
-      <a href="index.html">
-        <img src="images/logo.png" alt="Quality Celulares" class="h-10 md:h-12">
-      </a>
-      <nav class="hidden md:flex items-center gap-6 font-medium">
-        <a href="#produtos" class="hover:underline">Smartphones</a>
-        <a href="#produtos" class="hover:underline">Acessórios</a>
-        <a href="https://wa.me/5555991407824?text=ol%C3%A1%20vim%20atrav%C3%A9s%20do%20site" 
-           class="bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600 transition">
-          WhatsApp
-        </a>
-      </nav>
-      <button class="md:hidden text-white text-2xl" onclick="document.getElementById('mobileMenu').classList.toggle('hidden')">
-        <i class="fa-solid fa-bars"></i>
-      </button>
-    </div>
-  </header>
-
-  <!-- Mobile Menu -->
-  <div id="mobileMenu" class="fixed top-0 right-0 w-64 h-full bg-white shadow-lg z-50 hidden">
-    <div class="p-4 flex justify-between items-center border-b">
-      <span class="font-bold text-lg">Menu</span>
-      <button onclick="document.getElementById('mobileMenu').classList.add('hidden')" class="text-gray-600 text-2xl">&times;</button>
-    </div>
-    <nav class="flex flex-col p-4 gap-4 text-gray-700">
-      <a href="#produtos" class="hover:text-red-600">Smartphones</a>
-      <a href="#produtos" class="hover:text-red-600">Acessórios</a>
-      <a href="https://wa.me/5555991407824?text=ol%C3%A1%20vim%20atrav%C3%A9s%20do%20site" class="flex items-center gap-2 text-green-600 font-medium">
-        <i class="fa-brands fa-whatsapp text-2xl"></i> WhatsApp
-      </a>
-    </nav>
-  </div>
-
-  <!-- Banner Carrossel -->
-  <section class="pt-20">
-    <div class="relative w-full overflow-hidden">
-      <div class="flex transition-transform duration-700 ease-in-out" id="carousel">
-        <img src="images/banner1.png" alt="Banner 1" class="w-full object-cover h-[500px] md:h-[600px] hidden md:block">
-        <img src="images/banner2.png" alt="Banner 2" class="w-full object-cover h-[500px] md:h-[600px] hidden md:block">
-        <img src="images/banner3.png" alt="Banner 3" class="w-full object-cover h-[500px] md:h-[600px] hidden md:block">
-        <!-- Mobile banners -->
-        <img src="images/banner1.png" alt="Banner Mobile 1" class="w-full object-cover h-[250px] md:hidden">
-        <img src="images/banner2.png" alt="Banner Mobile 2" class="w-full object-cover h-[250px] md:hidden">
-        <img src="images/banner3.png" alt="Banner Mobile 3" class="w-full object-cover h-[250px] md:hidden">
-      </div>
-    </div>
-  </section>
-
-  <!-- Produtos -->
-  <main id="produtos" class="max-w-6xl mx-auto px-4 py-12">
-    <h2 class="text-2xl font-bold text-center mb-8">Nossos Produtos</h2>
-    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-      <div class="bg-white rounded-xl shadow-lg p-6 text-center">
-        <img src="images/pocox7pro.png" alt="Poco X7 Pro" class="mx-auto h-40 mb-4">
-        <h3 class="text-lg font-bold">Poco X7 Pro</h3>
-        <p class="text-gray-600">Smartphone de última geração.</p>
-      </div>
-      <div class="bg-white rounded-xl shadow-lg p-6 text-center">
-        <img src="images/redmi14c.png" alt="Redmi 14C" class="mx-auto h-40 mb-4">
-        <h3 class="text-lg font-bold">Redmi 14C</h3>
-        <p class="text-gray-600">Smartphone moderno e acessível.</p>
-      </div>
-    </div>
-  </main>
-
-  <!-- Rodapé -->
-  <footer class="bg-gray-900 text-gray-300 py-8 mt-12">
-    <div class="max-w-6xl mx-auto px-4 flex flex-col md:flex-row md:justify-between items-center gap-6">
-      <a href="index.html" class="inline-block">
-        <img src="images/logo.png" alt="Quality Celulares" class="h-10">
-      </a>
-      <div class="flex gap-6 text-2xl">
-        <a href="#" class="hover:text-red-500"><i class="fa-brands fa-facebook"></i></a>
-        <a href="#" class="hover:text-red-500"><i class="fa-brands fa-instagram"></i></a>
-        <a href="#" class="hover:text-red-500"><i class="fa-brands fa-tiktok"></i></a>
-      </div>
-    </div>
-    <div class="text-center mt-6 text-sm text-gray-500">
-      © 2025 Quality Celulares | CNPJ: 20.375.910/0001-66
-    </div>
-  </footer>
-
-  <script>
-    let current = 0;
-    const slides = document.querySelectorAll('#carousel img');
-    function showSlide(index) {
-      slides.forEach((slide, i) => slide.style.display = i === index ? 'block' : 'none');
-    }
-    function nextSlide() {
-      current = (current + 1) % slides.length;
-      showSlide(current);
-    }
-    setInterval(nextSlide, 3000);
-    showSlide(current);
-  </script>
-</body>
-</html>
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Quality Celulares</title><link rel="icon" href="images/favicon.png"><link href="style.css" rel="stylesheet"></head>
+<body>
+<header class="header"><div class="wrap"><a href="index.html"><img src="images/logo.png" class="logo" alt="Logo"></a><nav class="nav"><a href="#produtos">Smartphones</a><a href="#produtos">Acessórios</a><a class="whatsapp-btn" href="https://wa.me/5555991407824">WhatsApp</a></nav><button class="menu-btn" aria-label="Abrir menu">&#9776;</button></div></header>
+<div class="mobile-menu" id="mobileMenu"><button class="close">&times;</button><nav><a href="#produtos">Smartphones</a><a href="#produtos">Acessórios</a><a class="whatsapp-btn" href="https://wa.me/5555991407824">WhatsApp</a></nav></div>
+<main>
+<section class="hero"><div class="carousel"><div class="carousel-inner"><div class="slide"><picture><source media="(max-width:768px)" srcset="images/banner1-mobile.png"><img src="images/banner1.png" alt="Banner 1"></picture></div><div class="slide"><picture><source media="(max-width:768px)" srcset="images/banner2-mobile.png"><img src="images/banner2.png" alt="Banner 2"></picture></div><div class="slide"><picture><source media="(max-width:768px)" srcset="images/banner3-mobile.png"><img src="images/banner3.png" alt="Banner 3"></picture></div></div><button id="prev" class="prev-btn" aria-label="Anterior">&#10094;</button><button id="next" class="next-btn" aria-label="Próximo">&#10095;</button></div></section>
+<section class="container" id="produtos"><h2 style="text-align:center;font-size:24px;margin-bottom:18px">Produtos em destaque</h2><div class="grid"><div class="card"><img src="images/pocox7pro.png" alt="Poco X7 Pro"><h4>Poco X7 Pro</h4><p style="color:#6b7280">256GB • Alto desempenho</p></div><div class="card"><img src="images/redmi14c.png" alt="Redmi 14C"><h4>Redmi 14C</h4><p style="color:#6b7280">128GB • 4GB RAM</p></div></div></section>
+<section class="container" style="text-align:center;margin-top:28px"><h3>Conecte-se conosco</h3><div class="socials" style="margin-top:12px"><a class="social instagram" href="#"><i class="fab fa-instagram"></i></a><a class="social whatsapp" href="https://wa.me/5555991407824"><i class="fab fa-whatsapp"></i></a><a class="social facebook" href="#"><i class="fab fa-facebook-f"></i></a><a class="social map" href="#"><i class="fas fa-map-marker-alt"></i></a></div></section>
+</main>
+<footer class="footer"><div class="wrap"><div class="col"><img src="images/logo.png" alt="Logo" style="height:52px"></div><div class="col"><strong>Informações</strong><br><a href="sobre.html">Sobre nós</a><br><a href="formas-de-pagamento.html">Formas de pagamento e envio</a></div><div class="col"><strong>Siga-nos</strong><div style="margin-top:8px" class="socials"><a class="social instagram" href="#"><i class="fab fa-instagram"></i></a><a class="social whatsapp" href="https://wa.me/5555991407824"><i class="fab fa-whatsapp"></i></a></div></div></div><div style="text-align:center;margin-top:16px;color:#9ca3af">© 2025 Quality Celulares • CNPJ: 20.375.910/0001-66</div></footer>
+<script src="scripts.js"></script></body></html>
