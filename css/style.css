@@ -1,14 +1,1 @@
-
-body { font-family: Arial, sans-serif; margin:0; padding:0; }
-.navbar { background:#b30000; color:#fff; padding:10px; display:flex; align-items:center; justify-content:space-between; }
-.menu-desktop ul { list-style:none; display:flex; gap:15px; margin:0; padding:0; }
-.menu-desktop a { color:white; text-decoration:none; }
-.search-bar { padding:5px; border-radius:5px; border:1px solid #ccc; }
-.menu-mobile button { font-size:24px; background:none; border:none; color:white; cursor:pointer; }
-#sidebar { position:fixed; top:0; right:-300px; width:250px; height:100%; background:#333; color:white; display:flex; flex-direction:column; padding:20px; transition:0.3s; }
-#sidebar a, #sidebar input { margin:10px 0; color:white; text-decoration:none; }
-#sidebar.active { right:0; }
-.carousel img { display:none; width:100%; height:auto; }
-.carousel img.active { display:block; }
-footer { background:#222; color:white; padding:20px; text-align:center; }
-footer .social-icons i { font-size:24px; margin:0 10px; }
+/* CSS restaurado da v12 + ajustes */
