@@ -1,115 +1,97 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Quality Celulares</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Quality Celulares</title>
+<link rel="icon" href="images/favicon.png" />
+<link rel="stylesheet" href="css/style.css" />
 </head>
-<body class="bg-gray-50 text-gray-800">
+<body>
+<header class="site-header" role="banner">
+  <div class="header-inner">
+    <a class="logo-link" href="index.html"><img src="images/logo.png" alt="Quality Celulares" id="site-logo"></a>
+    <nav class="nav-desktop" aria-label="Menu principal">
+      <a href="index.html">Início</a>
+      <a href="#smartphones">Smartphones</a>
+      <a href="#acessorios">Acessórios</a>
+      <input class="search" type="search" placeholder="Buscar" aria-label="Buscar">
+      <a class="btn-whats" href="https://wa.me/5555991407824" target="_blank" rel="noopener">WhatsApp</a>
+    </nav>
+    <button id="hamburger" class="hamburger" aria-label="Abrir menu">☰</button>
+  </div>
+</header>
 
-  <!-- Header -->
-  <header class="fixed top-0 left-0 w-full bg-gradient-to-r from-red-600 to-red-500 shadow-md z-50">
-    <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
-      <a href="index.html">
-        <img src="images/logo.png" alt="Quality Celulares" class="h-10 md:h-12">
-      </a>
-      <!-- Desktop menu -->
-      <nav class="hidden md:flex items-center gap-6">
-        <a href="index.html" class="text-white font-medium hover:underline">Início</a>
-        <a href="#smartphones" class="text-white font-medium hover:underline">Smartphones</a>
-        <a href="#acessorios" class="text-white font-medium hover:underline">Acessórios</a>
-        <div class="relative">
-          <input type="text" placeholder="Buscar" class="px-3 py-1 rounded-lg text-sm">
-        </div>
-        <a href="https://wa.me/5555991407824?text=Olá%20vim%20através%20do%20site" 
-           class="flex items-center gap-2 bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-full transition">
-          <i class="fa-brands fa-whatsapp text-lg"></i> WhatsApp
-        </a>
-      </nav>
-      <!-- Mobile menu button -->
-      <button id="menu-toggle" class="md:hidden text-white text-2xl">
-        <i class="fa-solid fa-bars"></i>
-      </button>
-    </div>
-    <!-- Mobile off-canvas menu -->
-    <div id="mobile-menu" class="fixed top-0 left-0 h-full w-64 bg-white shadow-lg transform -translate-x-full transition-transform z-50">
-      <div class="p-4 flex justify-between items-center border-b">
-        <img src="images/logo.png" alt="Quality Celulares" class="h-10">
-        <button id="menu-close" class="text-gray-600 text-2xl"><i class="fa-solid fa-xmark"></i></button>
+<div id="overlay" class="overlay hidden" tabindex="-1"></div>
+
+<aside id="mobile-menu" class="mobile-menu" aria-hidden="true">
+  <div class="mobile-header">
+    <a href="index.html"><img src="images/logo.png" alt="Quality" class="mobile-logo"></a>
+    <button id="mobile-close" class="mobile-close" aria-label="Fechar menu">×</button>
+  </div>
+  <div class="mobile-body">
+    <input class="search" type="search" placeholder="Buscar" aria-label="Buscar">
+    <a href="index.html">Início</a>
+    <a href="#smartphones">Smartphones</a>
+    <a href="#acessorios">Acessórios</a>
+    <a class="btn-whats" href="https://wa.me/5555991407824" target="_blank" rel="noopener">WhatsApp</a>
+  </div>
+</aside>
+
+<main id="main" class="main">
+  <section class="carousel-wrap">
+    <div class="carousel desktop-carousel" aria-roledescription="carousel">
+      <button class="carousel-btn prev" aria-label="Anterior">‹</button>
+      <div class="carousel-track" id="desktop-track">
+        <div class="slide"><img src="images/banner1.png" alt="Banner 1"></div>
+        <div class="slide"><img src="images/banner2.png" alt="Banner 2"></div>
+        <div class="slide"><img src="images/banner3.png" alt="Banner 3"></div>
       </div>
-      <nav class="flex flex-col p-4 gap-4">
-        <a href="index.html" class="text-gray-800 font-medium hover:text-red-600">Início</a>
-        <a href="#smartphones" class="text-gray-800 font-medium hover:text-red-600">Smartphones</a>
-        <a href="#acessorios" class="text-gray-800 font-medium hover:text-red-600">Acessórios</a>
-        <a href="sobre.html" class="text-gray-800 font-medium hover:text-red-600">Sobre</a>
-        <a href="formas-de-pagamento.html" class="text-gray-800 font-medium hover:text-red-600">Formas de Pagamento</a>
-        <a href="https://wa.me/5555991407824?text=Olá%20vim%20através%20do%20site" 
-           class="flex items-center gap-2 bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-full transition">
-          <i class="fa-brands fa-whatsapp text-lg"></i> WhatsApp
-        </a>
-      </nav>
+      <button class="carousel-btn next" aria-label="Próximo">›</button>
     </div>
-  </header>
 
-<!-- Banner Carousel -->
-<section class="pt-20 relative">
-  <div class="swiper w-full">
-    <div class="swiper-wrapper">
-      <div class="swiper-slide block md:hidden"><img src="images/banner1-mobile.png" alt="Banner 1 Mobile" class="w-full h-[250px] object-cover"></div>
-      <div class="swiper-slide block md:hidden"><img src="images/banner2-mobile.png" alt="Banner 2 Mobile" class="w-full h-[250px] object-cover"></div>
-      <div class="swiper-slide block md:hidden"><img src="images/banner3-mobile.png" alt="Banner 3 Mobile" class="w-full h-[250px] object-cover"></div>
-      <div class="swiper-slide hidden md:block"><img src="images/banner1.png" alt="Banner 1" class="w-full h-[450px] object-cover"></div>
-      <div class="swiper-slide hidden md:block"><img src="images/banner2.png" alt="Banner 2" class="w-full h-[450px] object-cover"></div>
-      <div class="swiper-slide hidden md:block"><img src="images/banner3.png" alt="Banner 3" class="w-full h-[450px] object-cover"></div>
+    <div class="carousel mobile-carousel" aria-roledescription="carousel">
+      <div class="carousel-track" id="mobile-track">
+        <div class="slide"><img src="images/banner1-mobile.png" alt="Banner mobile 1"></div>
+        <div class="slide"><img src="images/banner2-mobile.png" alt="Banner mobile 2"></div>
+        <div class="slide"><img src="images/banner3-mobile.png" alt="Banner mobile 3"></div>
+      </div>
     </div>
-    <div class="swiper-button-next"></div>
-    <div class="swiper-button-prev"></div>
-    <div class="swiper-pagination"></div>
-  </div>
-</section>
+  </section>
 
-<!-- Produtos -->
-<main class="max-w-6xl mx-auto px-4 py-12">
-  <h2 id="smartphones" class="text-2xl font-bold mb-6 text-center">Smartphones</h2>
-  <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-    <div class="bg-white rounded-xl shadow-lg p-4 text-center">
-      <img src="images/pocox7pro.png" alt="Poco X7 Pro" class="mx-auto h-40 object-contain">
-      <h3 class="font-bold mt-2">Poco X7 Pro</h3>
+  <section id="smartphones" class="container products-section">
+    <h2>Smartphones</h2>
+    <div class="products-grid">
+      <article class="product-card">
+        <img src="images/pocox7pro.png" alt="Poco X7 Pro">
+        <h3>Poco X7 Pro</h3>
+        <a class="buy-whats" href="https://wa.me/5555991407824" target="_blank">Comprar no WhatsApp</a>
+      </article>
+      <article class="product-card">
+        <img src="images/redmi14c.png" alt="Redmi 14C">
+        <h3>Redmi 14C</h3>
+        <a class="buy-whats" href="https://wa.me/5555991407824" target="_blank">Comprar no WhatsApp</a>
+      </article>
     </div>
-    <div class="bg-white rounded-xl shadow-lg p-4 text-center">
-      <img src="images/redmi14c.png" alt="Redmi 14C" class="mx-auto h-40 object-contain">
-      <h3 class="font-bold mt-2">Redmi 14C</h3>
-    </div>
-  </div>
-  <h2 id="acessorios" class="text-2xl font-bold my-6 text-center">Acessórios</h2>
-  <p class="text-center text-gray-600">Em breve...</p>
+  </section>
 </main>
 
-<!-- Rodapé -->
-<footer class="bg-gray-900 text-gray-300 py-8 mt-12">
-  <div class="max-w-6xl mx-auto px-4 flex flex-col md:flex-row md:justify-between items-start gap-6">
-    <a href="index.html">
-      <img src="images/logo.png" alt="Quality Celulares" class="h-8">
-    </a>
-    <div class="flex flex-col gap-1">
-      <a href="sobre.html" class="text-white hover:underline">Sobre nós</a>
-      <a href="formas-de-pagamento.html" class="text-white hover:underline">Formas de pagamento e envio</a>
-    </div>
-    <div class="flex gap-4 text-2xl">
-      <a href="#" class="text-white hover:text-red-500"><i class="fa-brands fa-facebook"></i></a>
-      <a href="#" class="text-white hover:text-pink-500"><i class="fa-brands fa-instagram"></i></a>
-      <a href="#" class="text-white hover:text-sky-400"><i class="fa-brands fa-twitter"></i></a>
+<footer class="site-footer" role="contentinfo">
+  <div class="footer-inner">
+    <a href="index.html"><img src="images/logo.png" alt="Quality" class="footer-logo"></a>
+    <nav class="footer-links">
+      <a href="sobre.html">Sobre nós</a>
+      <a href="formas-de-pagamento.html">Formas de pagamento e envio</a>
+    </nav>
+    <div class="footer-socials">
+      <a href="#" aria-label="Instagram" class="social instagram"></a>
+      <a href="#" aria-label="WhatsApp" class="social whatsapp"></a>
+      <a href="#" aria-label="Facebook" class="social facebook"></a>
     </div>
   </div>
-  <div class="max-w-6xl mx-auto px-4 text-center mt-6 text-gray-500 text-sm">
-    © 2025 Quality Celulares. Todos os direitos reservados. <br>CNPJ: 20.375.910/0001-66
-  </div>
+  <div class="footer-copy">© 2025 Quality Celulares • CNPJ: 20.375.910/0001-66</div>
 </footer>
 
-<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 <script src="js/main.js"></script>
 </body>
 </html>
