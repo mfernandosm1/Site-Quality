@@ -1,21 +1,41 @@
-document.addEventListener('DOMContentLoaded', () => {
-  // Carousel
+document.addEventListener("DOMContentLoaded", () => {
+  let currentIndex = 0;
   const items = document.querySelectorAll('.carousel-item');
-  let index = 0;
-  function showSlide(i) {
-    items.forEach((el, idx) => el.classList.toggle('active', idx === i));
-  }
-  function nextSlide() {
-    index = (index + 1) % items.length;
-    showSlide(index);
-  }
-  showSlide(index);
-  setInterval(nextSlide, 4000);
+  const prevBtn = document.getElementById('prev');
+  const nextBtn = document.getElementById('next');
+  const menuBtn = document.getElementById('menu-btn');
+  const closeMenu = document.getElementById('close-menu');
+  const mobileMenu = document.getElementById('mobile-menu');
 
-  // Mobile menu
-  const toggle = document.querySelector('.menu-toggle');
-  const menu = document.querySelector('.menu');
-  if (toggle && menu) {
-    toggle.addEventListener('click', () => menu.classList.toggle('open'));
+  function showItem(index) {
+    items.forEach((item, i) => {
+      item.style.display = i === index ? 'block' : 'none';
+    });
   }
+
+  prevBtn.addEventListener('click', () => {
+    currentIndex = (currentIndex === 0) ? items.length - 1 : currentIndex - 1;
+    showItem(currentIndex);
+  });
+
+  nextBtn.addEventListener('click', () => {
+    currentIndex = (currentIndex === items.length - 1) ? 0 : currentIndex + 1;
+    showItem(currentIndex);
+  });
+
+  setInterval(() => {
+    currentIndex = (currentIndex === items.length - 1) ? 0 : currentIndex + 1;
+    showItem(currentIndex);
+  }, 4000);
+
+  showItem(currentIndex);
+
+  // Menu mobile
+  menuBtn.addEventListener('click', () => {
+    mobileMenu.classList.remove('translate-x-full');
+  });
+
+  closeMenu.addEventListener('click', () => {
+    mobileMenu.classList.add('translate-x-full');
+  });
 });
