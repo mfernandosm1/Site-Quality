@@ -3,30 +3,30 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Quality Celulares</title>
+  <title>Quality Celulares - Início</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
 </head>
 <body class="bg-gray-50 text-gray-800">
 
   <!-- Header -->
   <header class="fixed top-0 left-0 w-full bg-gradient-to-r from-red-600 to-red-500 shadow-md z-50">
     <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
-      <a href="index.html" class="flex items-center">
-        <img src="images/logo.png" alt="Quality Celulares" class="h-10 md:h-12 object-contain">
+      <a href="index.html">
+        <img src="images/logo.png" alt="Quality Celulares" class="h-10 md:h-12">
       </a>
       <!-- Desktop menu -->
-      <nav class="hidden md:flex items-center gap-6 text-white font-medium">
+      <nav class="hidden md:flex items-center gap-6 text-white">
         <a href="index.html">Início</a>
         <a href="#smartphones">Smartphones</a>
         <a href="#acessorios">Acessórios</a>
         <div class="relative">
-          <input type="text" placeholder="Buscar" class="rounded-full px-4 py-1 text-gray-700 text-sm">
+          <input type="text" placeholder="Buscar" class="rounded-full px-4 py-1 text-black">
         </div>
         <a href="https://wa.me/5555991407824?text=ol%C3%A1%20vim%20atrav%C3%A9s%20do%20site" 
-           class="flex items-center gap-2 bg-green-500 hover:bg-green-600 px-4 py-2 rounded-full">
-          <i class="fa-brands fa-whatsapp"></i> WhatsApp
+           class="flex items-center gap-2 bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-full transition">
+          <i class="fa-brands fa-whatsapp text-lg"></i> WhatsApp
         </a>
       </nav>
       <!-- Mobile menu button -->
@@ -34,7 +34,7 @@
         <i class="fa-solid fa-bars"></i>
       </button>
     </div>
-    <!-- Mobile menu -->
+    <!-- Mobile off-canvas menu -->
     <div id="mobile-menu" class="fixed top-0 left-0 h-full w-64 bg-white shadow-lg transform -translate-x-full transition-transform z-50">
       <div class="p-4 flex justify-between items-center border-b">
         <img src="images/logo.png" alt="Quality Celulares" class="h-10">
@@ -48,15 +48,15 @@
     </div>
   </header>
 
-  <!-- Banner -->
+  <!-- Banner Carousel -->
   <section class="pt-20 relative">
     <div class="swiper w-full">
       <div class="swiper-wrapper">
-        <div class="swiper-slide"><img src="images/banner1.png" class="w-full h-[250px] md:h-[450px] object-cover"></div>
-        <div class="swiper-slide"><img src="images/banner2.png" class="w-full h-[250px] md:h-[450px] object-cover"></div>
-        <div class="swiper-slide"><img src="images/banner3.png" class="w-full h-[250px] md:h-[450px] object-cover"></div>
+        <div class="swiper-slide"><img src="images/banner1.png" alt="Banner 1" class="w-full h-[250px] md:h-[450px] object-cover"></div>
+        <div class="swiper-slide"><img src="images/banner2.png" alt="Banner 2" class="w-full h-[250px] md:h-[450px] object-cover"></div>
+        <div class="swiper-slide"><img src="images/banner3.png" alt="Banner 3" class="w-full h-[250px] md:h-[450px] object-cover"></div>
       </div>
-      <!-- botões -->
+      <!-- Botões de navegação -->
       <div class="swiper-button-next"></div>
       <div class="swiper-button-prev"></div>
     </div>
@@ -69,24 +69,28 @@
       <div class="bg-white rounded-xl shadow-lg p-4 text-center">
         <img src="images/pocox7pro.png" alt="Poco X7 Pro" class="mx-auto h-40 object-contain">
         <h3 class="font-bold mt-2">Poco X7 Pro</h3>
-        <a href="https://wa.me/5555991407824?text=ol%C3%A1%20vim%20atrav%C3%A9s%20do%20site" class="mt-3 inline-block bg-green-500 text-white px-4 py-2 rounded-full hover:bg-green-600">Comprar no WhatsApp</a>
+        <a href="https://wa.me/5555991407824?text=ol%C3%A1%20vim%20atrav%C3%A9s%20do%20site" 
+           class="mt-3 inline-block bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-full">Comprar no WhatsApp</a>
       </div>
       <div class="bg-white rounded-xl shadow-lg p-4 text-center">
         <img src="images/redmi14c.png" alt="Redmi 14C" class="mx-auto h-40 object-contain">
         <h3 class="font-bold mt-2">Redmi 14C</h3>
-        <a href="https://wa.me/5555991407824?text=ol%C3%A1%20vim%20atrav%C3%A9s%20do%20site" class="mt-3 inline-block bg-green-500 text-white px-4 py-2 rounded-full hover:bg-green-600">Comprar no WhatsApp</a>
+        <a href="https://wa.me/5555991407824?text=ol%C3%A1%20vim%20atrav%C3%A9s%20do%20site" 
+           class="mt-3 inline-block bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-full">Comprar no WhatsApp</a>
       </div>
     </div>
+    <h2 id="acessorios" class="text-2xl font-bold my-6 text-center">Acessórios</h2>
+    <p class="text-center text-gray-600">Em breve...</p>
   </main>
 
   <!-- Rodapé -->
   <footer class="bg-gray-900 text-gray-300 py-8 mt-12">
-    <div class="max-w-6xl mx-auto px-4 flex flex-col md:flex-row md:justify-between gap-6">
-      <div class="flex flex-col gap-1">
-        <a href="sobre.html" class="text-white hover:underline">Sobre nós</a>
-        <a href="formas-de-pagamento.html" class="text-white hover:underline">Formas de pagamento e envio</a>
+    <div class="max-w-6xl mx-auto px-4 flex flex-col md:flex-row md:justify-between items-center gap-6">
+      <div class="flex flex-col gap-1 text-center md:text-left">
+        <a href="sobre.html" class="hover:underline">Sobre nós</a>
+        <a href="formas-de-pagamento.html" class="hover:underline">Formas de pagamento e envio</a>
       </div>
-      <div class="flex gap-6 text-2xl justify-center md:justify-end">
+      <div class="flex gap-6 text-2xl">
         <a href="#" class="hover:text-blue-500"><i class="fa-brands fa-facebook"></i></a>
         <a href="#" class="hover:text-pink-500"><i class="fa-brands fa-instagram"></i></a>
         <a href="https://wa.me/5555991407824?text=ol%C3%A1%20vim%20atrav%C3%A9s%20do%20site" class="hover:text-green-500"><i class="fa-brands fa-whatsapp"></i></a>
@@ -97,7 +101,22 @@
     </div>
   </footer>
 
-<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-<script src="js/main.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+  <script>
+    const swiper = new Swiper('.swiper', { 
+      loop: true, 
+      autoplay: { delay: 5000 },
+      navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev'
+      }
+    });
+    document.getElementById('menu-toggle').addEventListener('click', () => {
+      document.getElementById('mobile-menu').classList.remove('-translate-x-full');
+    });
+    document.getElementById('menu-close').addEventListener('click', () => {
+      document.getElementById('mobile-menu').classList.add('-translate-x-full');
+    });
+  </script>
 </body>
 </html>
