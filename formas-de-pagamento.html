@@ -10,8 +10,8 @@
 <body class="bg-gray-50 text-gray-800">
 
   <!-- Header -->
-  <header class="fixed top-0 left-0 w-full bg-red-600 shadow-md z-50">
-    <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between text-white">
+  <header class="fixed top-0 left-0 w-full bg-red-600 text-white shadow-md z-50">
+    <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
       <a href="index.html">
         <img src="images/logo.png" alt="Quality Celulares" class="h-10 md:h-12">
       </a>
@@ -20,18 +20,13 @@
         <a href="index.html#acessorios" class="hover:underline">Acessórios</a>
         <a href="https://wa.me/5555991407824?text=Olá%20vim%20através%20do%20site" target="_blank" class="hover:underline">WhatsApp</a>
       </nav>
-      <div class="md:hidden">
-        <a href="https://wa.me/5555991407824?text=Olá%20vim%20através%20do%20site" target="_blank"
-           class="bg-green-500 text-white px-3 py-2 rounded-lg font-medium hover:bg-green-600 transition">
-          WhatsApp
-        </a>
-      </div>
     </div>
   </header>
 
-
+  <!-- Conteúdo principal -->
   <main class="pt-28 max-w-6xl mx-auto px-4 py-12 space-y-12">
 
+    <!-- Formas de Pagamento -->
     <section class="grid md:grid-cols-3 gap-6">
       <div class="bg-white rounded-xl shadow-lg p-6 text-center hover:shadow-2xl transition">
         <i class="fa-solid fa-credit-card text-4xl text-red-600 mb-4"></i>
@@ -50,6 +45,7 @@
       </div>
     </section>
 
+    <!-- Envios -->
     <section class="bg-white rounded-xl shadow-lg p-6 flex flex-col md:flex-row items-center gap-6">
       <div class="flex-1 text-center md:text-left">
         <i class="fa-solid fa-truck-fast text-5xl text-green-600 mb-4"></i>
@@ -62,30 +58,31 @@
           Para as demais regiões, o valor do frete será calculado conforme a região de entrega.
         </p>
       </div>
-      <div class="flex-1 text-center">
-        <img src="images/banner1.png" alt="Entrega rápida" class="rounded-xl shadow-md">
-      </div>
     </section>
 
   </main>
 
   <!-- Rodapé -->
   <footer class="bg-gray-900 text-gray-300 py-8 mt-12">
-    <div class="max-w-6xl mx-auto px-4 flex flex-col md:flex-row md:justify-between md:items-center gap-6">
+    <div class="max-w-6xl mx-auto px-4 grid md:grid-cols-3 gap-8 items-center">
       <a href="index.html" class="inline-block">
         <img src="images/logo.png" alt="Quality Celulares" class="h-10">
       </a>
-      <div class="flex gap-6 text-xl">
-        <a href="#" class="hover:text-white"><i class="fab fa-facebook"></i></a>
-        <a href="#" class="hover:text-white"><i class="fab fa-instagram"></i></a>
-        <a href="#" class="hover:text-white"><i class="fab fa-whatsapp"></i></a>
+      <div class="flex justify-center gap-4 text-2xl">
+        <a href="#" class="text-pink-500 hover:text-pink-600"><i class="fab fa-instagram"></i></a>
+        <a href="https://wa.me/5555991407824" target="_blank" class="text-green-500 hover:text-green-600"><i class="fab fa-whatsapp"></i></a>
+        <a href="#" class="text-blue-600 hover:text-blue-700"><i class="fab fa-facebook"></i></a>
+        <a href="#" class="text-gray-400 hover:text-gray-500"><i class="fas fa-map-marker-alt"></i></a>
+      </div>
+      <div class="flex flex-col gap-1 text-center md:text-right">
+        <a href="sobre.html" class="hover:underline">Sobre nós</a>
+        <a href="formas-de-pagamento.html" class="hover:underline">Formas de pagamento e envio</a>
       </div>
     </div>
     <div class="max-w-6xl mx-auto px-4 text-center mt-6 text-gray-500 text-sm">
-      © 2025 Quality Celulares. Todos os direitos reservados.
+      © 2025 Quality Celulares. Todos os direitos reservados. <br>CNPJ: 20.375.910/0001-66
     </div>
   </footer>
-
 
 </body>
 </html>
