@@ -1,55 +1,51 @@
-<!-- formas-de-pagamento.html v27 -->
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
-  <title>Formas de Pagamento - Quality Celulares</title>
-  <link rel="stylesheet" href="./css/style.css">
-  <link rel="icon" type="image/png" href="./images/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Formas de pagamento e envio</title>
+  <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-  <header class="menu">
-    <div class="logo"><img src="./images/logo.png" alt="Quality Celulares"></div>
-    <nav class="links">
-      <a href="index.html#smartphones">Smartphones</a>
-      <a href="index.html#acessorios">Acessórios</a>
-      <a href="https://wa.me/5555991407824" class="whatsapp">WhatsApp</a>
+  <header>
+    <div class="logo"><img src="images/logo.png" alt="Logo"></div>
+    <nav class="desktop-menu">
+      <ul>
+        <li><a href="index.html#smartphones">Smartphones</a></li>
+        <li><a href="index.html#acessorios">Acessórios</a></li>
+        <li><input type="text" placeholder="Buscar" class="search-bar"></li>
+        <li><a href="https://wa.me/5511999999999" class="whats">WhatsApp</a></li>
+      </ul>
     </nav>
-    <div class="search"><input type="text" placeholder="Buscar"></div>
-    <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+    <div class="mobile-menu-button">☰</div>
   </header>
 
-  <aside id="mobileMenu" class="mobile-menu">
-    <input type="text" placeholder="Buscar" class="mobile-search">
+  <div class="mobile-sidebar">
+    <input type="text" placeholder="Buscar">
     <a href="index.html#smartphones">Smartphones</a>
     <a href="index.html#acessorios">Acessórios</a>
-    <a href="https://wa.me/5555991407824" class="whatsapp">WhatsApp</a>
-  </aside>
+    <a href="https://wa.me/5511999999999">WhatsApp</a>
+  </div>
 
   <main>
-    <h1>Formas de Pagamento & Envios</h1>
-    <section class="pagamentos">
-      <div>Cartão de Crédito (Visa, MasterCard, Elo, Amex)</div>
-      <div>Boleto Bancário</div>
-      <div>PIX</div>
-    </section>
-    <section class="envios">
-      <h2>Envios</h2>
-      <p>Via Correios ou Transportadora.</p>
-      <p>Frete grátis para compras acima de R$120,00 no RS.
-      Para demais regiões, o valor do frete é calculado conforme a região.</p>
-    </section>
+    <h1>Formas de pagamento e envio</h1>
+    <h2>Pagamentos</h2>
+    <p>Aceitamos cartões, PIX e boleto bancário.</p>
+    <h2>Envios</h2>
+    <p>Realizamos envios por Correios e transportadoras parceiras. Frete grátis acima de R$ 300,00.</p>
   </main>
 
   <footer>
-    <p>© 2025 Quality Celulares - CNPJ 20.375.910/0001-66</p>
-    <div class="socials">
-      <a href="#"><i class="fab fa-facebook"></i></a>
-      <a href="#"><i class="fab fa-instagram"></i></a>
-      <a href="#"><i class="fab fa-whatsapp"></i></a>
+    <div class="social-icons">
+      <a href="#"><i class="icon-facebook"></i></a>
+      <a href="#"><i class="icon-instagram"></i></a>
+      <a href="#"><i class="icon-twitter"></i></a>
     </div>
+    <ul>
+      <li><a href="sobre.html">Sobre</a></li>
+      <li><a href="formas-de-pagamento.html">Formas de pagamento e envio</a></li>
+    </ul>
+    <p>CNPJ: 20.375.910/0001-66</p>
   </footer>
-
-  <script src="./js/main.js"></script>
 </body>
 </html>
