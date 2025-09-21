@@ -1,45 +1,32 @@
-
 let currentIndex = 0;
-const items = document.querySelectorAll('.carousel-item');
-const prevBtn = document.getElementById('prev');
-const nextBtn = document.getElementById('next');
-let autoPlayInterval;
+const images = document.querySelector('.carousel-images');
+const total = images.children.length;
 
-function showItem(index) {
-  items.forEach((item, i) => {
-    item.classList.toggle('block', i === index);
-    item.classList.toggle('hidden', i !== index);
-  });
+function showSlide(index) {
+  images.style.transform = `translateX(-${index * 100}%)`;
 }
 
-function nextItem() {
-  currentIndex = (currentIndex === items.length - 1) ? 0 : currentIndex + 1;
-  showItem(currentIndex);
-}
-
-function prevItem() {
-  currentIndex = (currentIndex === 0) ? items.length - 1 : currentIndex - 1;
-  showItem(currentIndex);
-}
-
-function startAutoPlay() {
-  stopAutoPlay();
-  autoPlayInterval = setInterval(nextItem, 5000);
-}
-
-function stopAutoPlay() {
-  if (autoPlayInterval) clearInterval(autoPlayInterval);
-}
-
-prevBtn?.addEventListener('click', () => {
-  prevItem();
-  startAutoPlay();
+document.querySelector('.prev').addEventListener('click', () => {
+  currentIndex = (currentIndex - 1 + total) % total;
+  showSlide(currentIndex);
+  resetAutoSlide();
 });
 
-nextBtn?.addEventListener('click', () => {
-  nextItem();
-  startAutoPlay();
+document.querySelector('.next').addEventListener('click', () => {
+  currentIndex = (currentIndex + 1) % total;
+  showSlide(currentIndex);
+  resetAutoSlide();
 });
 
-showItem(currentIndex);
-startAutoPlay();
+let autoSlide = setInterval(() => {
+  currentIndex = (currentIndex + 1) % total;
+  showSlide(currentIndex);
+}, 5000);
+
+function resetAutoSlide() {
+  clearInterval(autoSlide);
+  autoSlide = setInterval(() => {
+    currentIndex = (currentIndex + 1) % total;
+    showSlide(currentIndex);
+  }, 5000);
+}
