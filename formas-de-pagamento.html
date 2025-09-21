@@ -3,94 +3,109 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Quality Celulares</title>
+  <title>Formas de Pagamento - Quality Celulares</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+  <style>
+    .carousel-item { display: none; }
+    .carousel-item.active { display: block; }
+  </style>
 </head>
 <body class="bg-gray-50 text-gray-800">
 
   <!-- Header -->
-  <header class="fixed top-0 left-0 w-full bg-gradient-to-r from-red-600 to-red-500 shadow-md z-50">
-    <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
+  <header class="fixed top-0 left-0 w-full bg-red-600 shadow-md z-50">
+    <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between text-white">
       <a href="index.html">
         <img src="images/logo.png" alt="Quality Celulares" class="h-10 md:h-12">
       </a>
-      <nav class="hidden md:flex gap-6 text-white font-medium">
-        <a href="#smartphones" class="hover:text-gray-200 transition">Smartphones</a>
-        <a href="#acessorios" class="hover:text-gray-200 transition">Acessórios</a>
+      <nav class="hidden md:flex items-center gap-6 font-medium">
+        <a href="#produtos" class="hover:underline">Smartphones</a>
+        <a href="#produtos" class="hover:underline">Acessórios</a>
+        <a href="https://wa.me/5555991407824?text=Olá%20vim%20através%20do%20site" class="bg-green-500 px-3 py-2 rounded-lg hover:bg-green-600 transition">WhatsApp</a>
       </nav>
-      <a href="https://wa.me/5555991407824?text=ol%C3%A1%20vim%20atrav%C3%A9s%20do%20site"
-         class="hidden md:inline-flex items-center gap-2 bg-gradient-to-r from-green-500 to-green-600 text-white px-5 py-2 rounded-full font-medium shadow hover:opacity-90 transition">
-        <i class="fab fa-whatsapp text-xl"></i> WhatsApp
-      </a>
+      <!-- Mobile menu button -->
+      <button id="mobile-menu-button" class="md:hidden text-white text-2xl">
+        <i class="fa-solid fa-bars"></i>
+      </button>
+    </div>
+    <!-- Mobile menu -->
+    <div id="mobile-menu" class="hidden bg-red-700 md:hidden flex-col px-4 py-3 text-white space-y-2">
+      <a href="#produtos" class="block">Smartphones</a>
+      <a href="#produtos" class="block">Acessórios</a>
+      <a href="https://wa.me/5555991407824?text=Olá%20vim%20através%20do%20site" class="block bg-green-500 px-3 py-2 rounded-lg hover:bg-green-600 transition">WhatsApp</a>
     </div>
   </header>
 
-  <!-- Banner principal -->
-  <section class="pt-24">
+  <!-- Banner / Carrossel -->
+  <section class="pt-20">
     <div class="relative w-full overflow-hidden">
-      <div class="carousel relative w-full">
-        <div class="carousel-item w-full">
-          <picture>
-            <source media="(max-width: 768px)" srcset="images/banner1-mobile.png">
-            <img src="images/banner1.png" class="w-full object-cover">
-          </picture>
-        </div>
-        <div class="carousel-item w-full">
-          <picture>
-            <source media="(max-width: 768px)" srcset="images/banner2-mobile.png">
-            <img src="images/banner2.png" class="w-full object-cover">
-          </picture>
-        </div>
-        <div class="carousel-item w-full">
-          <picture>
-            <source media="(max-width: 768px)" srcset="images/banner3-mobile.png">
-            <img src="images/banner3.png" class="w-full object-cover">
-          </picture>
-        </div>
+      <div class="carousel-item active">
+        <img src="images/banner1.png" alt="Banner 1" class="w-full h-[220px] md:h-[500px] object-cover">
+      </div>
+      <div class="carousel-item">
+        <img src="images/banner2.png" alt="Banner 2" class="w-full h-[220px] md:h-[500px] object-cover">
+      </div>
+      <div class="carousel-item">
+        <img src="images/banner3.png" alt="Banner 3" class="w-full h-[220px] md:h-[500px] object-cover">
       </div>
     </div>
   </section>
 
-  <!-- Conteúdo de exemplo -->
-  <main class="max-w-6xl mx-auto px-4 py-12">
-    <h1 class="text-3xl font-bold text-center mb-8">Formas de Pagamento e Envio</h1>
-    <p class="text-lg text-center text-gray-600">Aceitamos pagamentos por cartão de crédito, PIX e boleto bancário. Enviamos via Correios ou Transportadora. Frete grátis para compras acima de R$120,00 no RS.</p>
+  <!-- Produtos -->
+  <main id="produtos" class="max-w-6xl mx-auto px-4 py-12">
+    <h2 class="text-2xl font-bold mb-6 text-center">Produtos em Destaque</h2>
+    <div class="grid md:grid-cols-2 gap-6">
+      <div class="bg-white shadow-lg rounded-xl p-6 text-center">
+        <img src="images/pocox7pro.png" alt="Poco X7 Pro" class="h-40 mx-auto mb-4">
+        <h3 class="text-lg font-semibold">Poco X7 Pro</h3>
+      </div>
+      <div class="bg-white shadow-lg rounded-xl p-6 text-center">
+        <img src="images/redmi14c.png" alt="Redmi 14C" class="h-40 mx-auto mb-4">
+        <h3 class="text-lg font-semibold">Redmi 14C</h3>
+      </div>
+    </div>
   </main>
 
   <!-- Rodapé -->
-  <footer class="bg-gray-900 text-gray-300 py-10 mt-12">
-    <div class="max-w-6xl mx-auto px-4 flex flex-col md:flex-row md:justify-between items-center gap-6">
-      <a href="index.html">
-        <img src="images/logo.png" alt="Quality Celulares" class="h-10">
-      </a>
-      <div class="flex gap-6 text-2xl">
-        <a href="#" class="text-pink-500 hover:scale-110 transition"><i class="fab fa-instagram"></i></a>
-        <a href="https://wa.me/5555991407824" class="text-green-500 hover:scale-110 transition"><i class="fab fa-whatsapp"></i></a>
-        <a href="#" class="text-blue-500 hover:scale-110 transition"><i class="fab fa-facebook"></i></a>
-        <a href="#" class="text-gray-400 hover:scale-110 transition"><i class="fas fa-map-marker-alt"></i></a>
+  <footer class="bg-gray-900 text-gray-300 py-10">
+    <div class="max-w-6xl mx-auto px-4 grid md:grid-cols-3 gap-8">
+      <div>
+        <img src="images/logo.png" alt="Quality Celulares" class="h-10 mb-4">
+        <p class="text-sm">© 2025 Quality Celulares<br>CNPJ: 20.375.910/0001-66</p>
       </div>
-      <div class="flex flex-col gap-1 text-sm text-center md:text-left">
-        <a href="sobre.html" class="hover:underline">Sobre nós</a>
-        <a href="formas-de-pagamento.html" class="hover:underline">Formas de pagamento e envio</a>
-        <span class="text-gray-400">CNPJ: 20.375.910/0001-66</span>
+      <div>
+        <h3 class="font-semibold mb-2 text-white">Links rápidos</h3>
+        <ul class="space-y-1 text-sm">
+          <li><a href="sobre.html" class="hover:underline">Sobre nós</a></li>
+          <li><a href="formas-de-pagamento.html" class="hover:underline">Formas de pagamento e envio</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3 class="font-semibold mb-2 text-white">Siga-nos</h3>
+        <div class="flex space-x-4 text-xl">
+          <a href="#" class="hover:text-white"><i class="fab fa-facebook"></i></a>
+          <a href="#" class="hover:text-white"><i class="fab fa-instagram"></i></a>
+          <a href="#" class="hover:text-white"><i class="fab fa-whatsapp"></i></a>
+        </div>
       </div>
     </div>
-    <div class="text-center text-gray-500 text-xs mt-6">© 2025 Quality Celulares. Todos os direitos reservados.</div>
   </footer>
 
   <script>
-    // Simples carrossel automático
-    let index = 0;
+    // Carrossel automático
+    let currentIndex = 0;
     const items = document.querySelectorAll('.carousel-item');
-    function showNextSlide() {
-      items.forEach((item, i) => {
-        item.style.display = (i === index) ? 'block' : 'none';
-      });
-      index = (index + 1) % items.length;
-    }
-    showNextSlide();
-    setInterval(showNextSlide, 4000);
+    setInterval(() => {
+      items[currentIndex].classList.remove('active');
+      currentIndex = (currentIndex + 1) % items.length;
+      items[currentIndex].classList.add('active');
+    }, 4000);
+
+    // Mobile menu toggle
+    document.getElementById('mobile-menu-button').addEventListener('click', () => {
+      document.getElementById('mobile-menu').classList.toggle('hidden');
+    });
   </script>
 
 </body>
