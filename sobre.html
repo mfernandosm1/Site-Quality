@@ -3,84 +3,58 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Quality Celulares</title>
+  <title>Sobre nós - Quality Celulares</title>
   <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="stylesheet" href="css/style.css">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-  <link rel="icon" type="image/png" href="images/favicon.png">
 </head>
 <body class="bg-gray-50 text-gray-800">
 
   <!-- Header -->
-  <header class="fixed top-0 left-0 w-full bg-white shadow-md z-50">
-    <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
+  <header class="fixed top-0 left-0 w-full bg-red-600 shadow-md z-50">
+    <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between text-white">
       <a href="index.html">
         <img src="images/logo.png" alt="Quality Celulares" class="h-10 md:h-12">
       </a>
-      <nav class="hidden md:flex gap-6 font-medium text-gray-700">
-        <a href="sobre.html" class="hover:text-red-600">Sobre nós</a>
-        <a href="formas-de-pagamento.html" class="hover:text-red-600">Formas de pagamento</a>
+      <nav class="hidden md:flex gap-6 font-medium">
+        <a href="index.html#smartphones" class="hover:underline">Smartphones</a>
+        <a href="index.html#acessorios" class="hover:underline">Acessórios</a>
+        <a href="https://wa.me/5555991407824?text=Olá%20vim%20através%20do%20site" target="_blank" class="hover:underline">WhatsApp</a>
       </nav>
-      <a href="https://wa.me/5555991407824?text=Olá%20vim%20através%20do%20site" 
-         class="bg-green-500 text-white px-4 py-2 rounded-lg font-medium hover:bg-green-600 transition">
-        WhatsApp
-      </a>
+      <div class="md:hidden">
+        <a href="https://wa.me/5555991407824?text=Olá%20vim%20através%20do%20site" target="_blank"
+           class="bg-green-500 text-white px-3 py-2 rounded-lg font-medium hover:bg-green-600 transition">
+          WhatsApp
+        </a>
+      </div>
     </div>
   </header>
 
-  <!-- Banner -->
-  <section class="pt-24 relative">
-    <div class="carousel relative overflow-hidden rounded-lg shadow-lg">
-      <div class="carousel-images flex transition-transform duration-700">
-        <img src="images/banner1.png" class="w-full flex-shrink-0" alt="Banner 1">
-        <img src="images/banner2.png" class="w-full flex-shrink-0" alt="Banner 2">
-        <img src="images/banner3.png" class="w-full flex-shrink-0" alt="Banner 3">
-      </div>
-      <button class="prev absolute top-1/2 left-4 transform -translate-y-1/2 bg-black text-white px-3 py-2 rounded-full opacity-70 hover:opacity-100">❮</button>
-      <button class="next absolute top-1/2 right-4 transform -translate-y-1/2 bg-black text-white px-3 py-2 rounded-full opacity-70 hover:opacity-100">❯</button>
-    </div>
-  </section>
 
-  
-  <main class="max-w-6xl mx-auto px-4 py-12">
-    <h2 class="text-2xl font-bold mb-6 text-center">Destaques</h2>
-    <div class="grid md:grid-cols-2 gap-6">
-      <div class="bg-white rounded-xl shadow-lg p-6 text-center">
-        <img src="images/pocox7pro.png" alt="Poco X7 Pro" class="h-40 mx-auto mb-4">
-        <h3 class="text-lg font-bold">Poco X7 Pro</h3>
-      </div>
-      <div class="bg-white rounded-xl shadow-lg p-6 text-center">
-        <img src="images/redmi14c.png" alt="Redmi 14C" class="h-40 mx-auto mb-4">
-        <h3 class="text-lg font-bold">Redmi 14C</h3>
-      </div>
-    </div>
+  <main class="pt-28 max-w-4xl mx-auto px-4 py-12">
+    <h1 class="text-3xl font-bold mb-6 text-center">Sobre a Quality Celulares</h1>
+    <p class="text-lg text-gray-700 text-center">
+      Vendemos celulares, notebooks, videogames, smartwatches, tablets, caixas de som e acessórios em geral.  
+      Também oferecemos assistência técnica em celulares.
+    </p>
   </main>
 
-  <!-- Footer -->
-  <footer class="bg-gray-900 text-gray-300 py-10 mt-12">
-    <div class="max-w-6xl mx-auto px-4 grid md:grid-cols-3 gap-8 text-center md:text-left">
-      <div>
-        <a href="index.html"><img src="images/logo.png" alt="Quality Celulares" class="h-12 mx-auto md:mx-0 mb-4"></a>
-        <p class="text-sm">© 2025 Quality Celulares. Todos os direitos reservados.</p>
+  <!-- Rodapé -->
+  <footer class="bg-gray-900 text-gray-300 py-8 mt-12">
+    <div class="max-w-6xl mx-auto px-4 flex flex-col md:flex-row md:justify-between md:items-center gap-6">
+      <a href="index.html" class="inline-block">
+        <img src="images/logo.png" alt="Quality Celulares" class="h-10">
+      </a>
+      <div class="flex gap-6 text-xl">
+        <a href="#" class="hover:text-white"><i class="fab fa-facebook"></i></a>
+        <a href="#" class="hover:text-white"><i class="fab fa-instagram"></i></a>
+        <a href="#" class="hover:text-white"><i class="fab fa-whatsapp"></i></a>
       </div>
-      <div>
-        <h4 class="font-bold mb-3">Informações</h4>
-        <ul class="space-y-2">
-          <li><a href="sobre.html" class="hover:text-white">Sobre nós</a></li>
-          <li><a href="formas-de-pagamento.html" class="hover:text-white">Formas de pagamento</a></li>
-        </ul>
-      </div>
-      <div>
-        <h4 class="font-bold mb-3">Siga-nos</h4>
-        <div class="flex justify-center md:justify-start gap-4">
-          <a href="https://www.instagram.com/qualitycelulares_ibi/" target="_blank" class="flex items-center justify-center w-12 h-12 bg-gradient-to-tr from-pink-500 to-yellow-400 rounded-full text-white text-2xl hover:scale-110 transition"><i class="fab fa-instagram"></i></a>
-          <a href="https://www.facebook.com" target="_blank" class="flex items-center justify-center w-12 h-12 bg-blue-600 rounded-full text-white text-2xl hover:scale-110 transition"><i class="fab fa-facebook-f"></i></a>
-          <a href="https://wa.me/5555991407824" target="_blank" class="flex items-center justify-center w-12 h-12 bg-green-500 rounded-full text-white text-2xl hover:scale-110 transition"><i class="fab fa-whatsapp"></i></a>
-        </div>
-      </div>
+    </div>
+    <div class="max-w-6xl mx-auto px-4 text-center mt-6 text-gray-500 text-sm">
+      © 2025 Quality Celulares. Todos os direitos reservados.
     </div>
   </footer>
 
-  <script src="js/main.js"></script>
+
 </body>
 </html>
