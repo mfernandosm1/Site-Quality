@@ -1,19 +1,30 @@
-document.addEventListener('DOMContentLoaded',()=>{
-  const toggle = document.querySelector('.menu-toggle');
-  const mobileMenu = document.querySelector('.mobile-menu');
-  toggle.addEventListener('click',()=>{
-    mobileMenu.style.display = mobileMenu.style.display === 'flex' ? 'none' : 'flex';
-  });
+// Mobile menu toggle
+const menuToggle = document.getElementById('menu-toggle');
+const menuClose = document.getElementById('menu-close');
+const mobileMenu = document.getElementById('mobile-menu');
 
-  // Carousel
-  const slides = document.querySelectorAll('.carousel img');
-  let index = 0;
-  function showSlide(i){
-    slides.forEach((img,idx)=> img.classList.toggle('active', idx===i));
-  }
-  showSlide(index);
-  setInterval(()=>{
-    index = (index+1) % slides.length;
-    showSlide(index);
-  },5000);
+if(menuToggle){
+  menuToggle.addEventListener('click', () => {
+    mobileMenu.style.transform = 'translateX(0)';
+  });
+}
+
+if(menuClose){
+  menuClose.addEventListener('click', () => {
+    mobileMenu.style.transform = 'translateX(100%)';
+  });
+}
+
+// Swiper carousels
+const desktopSwiper = new Swiper('.desktop-banners', {
+  loop: true,
+  autoplay: { delay: 3000 },
+  navigation: { nextEl: '.swiper-button-next', prevEl: '.swiper-button-prev' },
+  pagination: { el: '.swiper-pagination', clickable: true }
+});
+
+const mobileSwiper = new Swiper('.mobile-banners', {
+  loop: true,
+  autoplay: { delay: 3000 },
+  pagination: { el: '.swiper-pagination', clickable: true }
 });
