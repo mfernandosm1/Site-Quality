@@ -1,16 +1,12 @@
-let currentSlide = 0;
-function showSlide(index) {
-  const slides = document.querySelectorAll('.carousel-item');
-  if (index >= slides.length) currentSlide = 0;
-  else if (index < 0) currentSlide = slides.length - 1;
-  else currentSlide = index;
-  const offset = -currentSlide * 100;
-  document.querySelector('.carousel-container').style.transform = `translateX(${offset}%)`;
-}
-function nextSlide() { showSlide(currentSlide + 1); }
-function prevSlide() { showSlide(currentSlide - 1); }
-setInterval(() => { nextSlide(); }, 5000);
-function toggleMobileMenu() {
-  const menu = document.getElementById('mobileMenu');
-  menu.style.display = menu.style.display === 'flex' ? 'none' : 'flex';
-}
+const swiper = new Swiper('.swiper', { 
+  loop: true, 
+  autoplay: { delay: 3000 }, 
+  pagination: { el: '.swiper-pagination', clickable: true }, 
+  navigation: { nextEl: '.swiper-button-next', prevEl: '.swiper-button-prev' } 
+});
+document.getElementById('menu-toggle').addEventListener('click', () => {
+  document.getElementById('mobile-menu').classList.remove('-translate-x-full');
+});
+document.getElementById('menu-close').addEventListener('click', () => {
+  document.getElementById('mobile-menu').classList.add('-translate-x-full');
+});
