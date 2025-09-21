@@ -1,61 +1,48 @@
-
-<!doctype html>
+<!DOCTYPE html>
 <html lang="pt-BR">
-<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Sobre - Quality Celulares</title>
-<link rel="icon" href="./images/favicon.png">
-<link rel="stylesheet" href="./css/style.css">
-<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sobre nós - Quality Celulares</title>
+  <link rel="stylesheet" href="css/style.css">
+  <script defer src="js/main.js"></script>
 </head>
 <body>
-<header class="header">
-  <div class="wrap">
-    <a href="./index.html" class="logo"><img src="./images/logo.png" alt="Quality"></a>
-    <nav class="nav" aria-label="Main navigation">
-      <a href="./index.html#smartphones">Smartphones</a>
-      <a href="./index.html#acessorios">Acessórios</a>
-      <input class="search-input" type="search" placeholder="Buscar" aria-label="Buscar">
-      <a class="nav-whats" href="https://wa.me/5555991407824" target="_blank">WhatsApp</a>
+  <header class="site-header">
+    <div class="logo"><img src="images/logo.png" alt="Quality Celulares"></div>
+    <nav class="desktop-nav">
+      <a href="index.html#catalogo">Smartphones</a>
+      <a href="index.html#catalogo">Acessórios</a>
+      <input type="text" placeholder="Buscar" class="search-input">
+      <a href="https://wa.me/5555991407824" class="btn-whats">WhatsApp</a>
     </nav>
-    <button id="menu-toggle" class="menu-toggle" aria-label="Abrir menu"><i class="fas fa-bars"></i></button>
-  </div>
-</header>
+    <button class="mobile-menu-btn">☰</button>
+  </header>
 
-<aside id="mobile-menu" class="drawer" role="dialog" aria-hidden="true">
-  <button id="mobile-close" class="close" aria-label="Fechar">&times;</button>
-  <div class="search"><input type="search" placeholder="Buscar" aria-label="Buscar"></div>
-  <nav class="mobile-nav" style="margin-top:12px">
-    <a href="./index.html#smartphones">Smartphones</a>
-    <a href="./index.html#acessorios">Acessórios</a>
-    <a href="https://wa.me/5555991407824" class="buy-btn" style="display:inline-block;margin-top:12px;text-align:center">WhatsApp</a>
-  </nav>
-</aside>
+  <aside class="mobile-drawer">
+    <input type="text" placeholder="Buscar">
+    <a href="index.html#catalogo">Smartphones</a>
+    <a href="index.html#catalogo">Acessórios</a>
+    <a href="https://wa.me/5555991407824">WhatsApp</a>
+  </aside>
 
-<main class="container" style="padding-top:24px">
-  <div class="breadcrumb"><a href="./index.html">Início</a> &gt; Sobre nós</div>
-  <h1 style="text-align:center">Sobre a Quality Celulares</h1>
-  <p style="text-align:center;color:#64748b;max-width:720px;margin:12px auto">Vendemos celulares, notebooks, videogames, smartwatches, tablets e acessórios. Também oferecemos assistência técnica especializada em celulares, com compromisso de qualidade e suporte rápido.</p>
-</main>
+  <main>
+    <h1>Sobre a Quality Celulares</h1>
+    <p>Vendemos celulares, notebooks, videogames, smartwatches, tablets, caixas de som e acessórios em geral.
+    Também oferecemos assistência técnica em celulares.</p>
+  </main>
 
-<footer class="footer">
-  <div class="wrap">
-    <div class="col text-center"><a href="./index.html"><img src="./images/logo.png" alt="Quality" style="height:56px"></a></div>
-    <div class="col text-center">
-      <p class="font-semibold">Informações</p>
-      <div style="margin-top:8px">
-        <a href="./sobre.html">Sobre nós</a> &nbsp;|&nbsp; <a href="./formas-de-pagamento.html">Formas de pagamento e envio</a>
-      </div>
+  <footer class="site-footer">
+    <div class="footer-links">
+      <a href="sobre.html">Sobre nós</a> | 
+      <a href="formas-de-pagamento.html">Formas de pagamento e envio</a>
     </div>
-    <div class="col text-center">
-      <div class="socials" style="margin-top:8px">
-        <a class="social instagram" href="#"><i class="fab fa-instagram"></i></a>
-        <a class="social whatsapp" href="https://wa.me/5555991407824"><i class="fab fa-whatsapp"></i></a>
-        <a class="social facebook" href="#"><i class="fab fa-facebook-f"></i></a>
-      </div>
+    <div class="social-icons">
+      <i class="fab fa-facebook"></i>
+      <i class="fab fa-instagram"></i>
+      <i class="fab fa-whatsapp"></i>
     </div>
-  </div>
-  <div style="text-align:center;margin-top:16px;color:#94a3b8">© 2025 Quality Celulares • CNPJ: 20.375.910/0001-66</div>
-</footer>
-
-<script src="./js/main.js"></script>
+    <div class="cnpj">CNPJ: 20.375.910/0001-66</div>
+  </footer>
 </body>
 </html>
