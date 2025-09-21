@@ -1,160 +1,90 @@
-<!DOCTYPE html>
+
+<!doctype html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Quality Celulares</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-  <link rel="icon" type="image/png" href="images/favicon.png">
+  <link rel="icon" href="images/favicon.png">
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></script>
   <script defer src="main.js"></script>
 </head>
-<body class="bg-gray-50 text-gray-800">
-
-  <!-- Header -->
-  <header class="fixed top-0 left-0 w-full bg-white shadow-md z-50">
-    <div class="bg-red-600 text-white w-full px-4 py-4 flex items-center justify-between">
-      <!-- Logo -->
-      <a href="index.html">
-        <img src="images/logo.png" alt="Logo Quality Celulares" class="h-14 w-auto">
-      </a>
-
-      <!-- Menu desktop -->
-      <nav class="hidden md:flex items-center gap-8">
-        <a href="#smartphones" class="hover:underline">Smartphones</a>
-        <a href="#acessorios" class="hover:underline">Acessórios</a>
-        <a href="https://wa.me/5555991407824?text=Olá%20vim%20através%20do%20site"
-           class="bg-green-500 text-white px-4 py-2 rounded-lg font-medium hover:bg-green-600 transition">
-          WhatsApp
-        </a>
+<body>
+  <header class="header">
+    <div class="wrap">
+      <div class="logo"><a href="index.html"><img src="images/logo.png" alt="Logo"></a></div>
+      <nav class="nav" role="navigation">
+        <a href="#smartphones">Smartphones</a>
+        <a href="#acessorios">Acessórios</a>
+        <a class="whatsapp" href="https://wa.me/5555991407824">WhatsApp</a>
       </nav>
-
-      <!-- Botão mobile -->
-      <button id="menu-btn" class="md:hidden text-white text-3xl">
-        <i class="fas fa-bars"></i>
-      </button>
+      <button id="menu-btn" class="menu-btn" aria-label="Abrir menu">&#9776;</button>
     </div>
   </header>
 
-  <!-- Menu mobile lateral -->
-  <aside id="mobile-menu"
-         class="fixed top-0 right-0 h-full w-64 bg-white shadow-lg transform translate-x-full transition-transform z-50">
-    <div class="p-4 flex justify-between items-center border-b">
-      <h2 class="text-lg font-bold text-gray-800">Menu</h2>
-      <button id="close-menu" class="text-2xl text-gray-600">&times;</button>
-    </div>
-    <nav class="flex flex-col p-4 gap-4 text-gray-700">
-      <a href="#smartphones" class="hover:text-red-600">Smartphones</a>
-      <a href="#acessorios" class="hover:text-red-600">Acessórios</a>
-      <a href="https://wa.me/5555991407824?text=Olá%20vim%20através%20do%20site"
-         class="bg-green-500 text-white px-4 py-2 rounded-lg text-center font-medium hover:bg-green-600 transition">
-        WhatsApp
-      </a>
+  <aside id="mobile-menu" class="drawer" aria-hidden="true">
+    <button id="close-menu" class="close" aria-label="Fechar">&times;</button>
+    <nav class="mt-6">
+      <a href="#smartphones">Smartphones</a><br>
+      <a href="#acessorios">Acessórios</a><br>
+      <a href="https://wa.me/5555991407824" class="whatsapp">WhatsApp</a>
     </nav>
   </aside>
 
-  <!-- Espaço abaixo do header -->
-  <div class="h-24"></div>
-
-  <!-- Banner -->
-  <section id="hero" class="w-full">
-    <div id="banner-carousel" class="relative">
-      <div class="carousel-container overflow-hidden">
-        <div class="carousel-inner flex">
-          <div class="carousel-item w-full flex-shrink-0">
-            <img src="images/banner1.png" alt="Promoção de celulares" class="w-full h-[500px] object-cover md:h-[550px]">
+  <main>
+    <section class="hero" aria-label="Banner">
+      <div class="carousel">
+        <div class="carousel-inner">
+          <div class="slide">
+            <picture>
+              <source media="(max-width:768px)" srcset="images/banner1-mobile.png">
+              <img src="images/banner1.png" alt="Banner 1">
+            </picture>
           </div>
-          <div class="carousel-item w-full flex-shrink-0">
-            <img src="images/banner2.png" alt="Acessórios com desconto" class="w-full h-[500px] object-cover md:h-[550px]">
+          <div class="slide">
+            <picture>
+              <source media="(max-width:768px)" srcset="images/banner2-mobile.png">
+              <img src="images/banner2.png" alt="Banner 2">
+            </picture>
           </div>
-          <div class="carousel-item w-full flex-shrink-0">
-            <img src="images/banner3.png" alt="Assistência técnica de qualidade" class="w-full h-[500px] object-cover md:h-[550px]">
+          <div class="slide">
+            <picture>
+              <source media="(max-width:768px)" srcset="images/banner3-mobile.png">
+              <img src="images/banner3.png" alt="Banner 3">
+            </picture>
           </div>
         </div>
+        <button id="prev" class="prev" aria-label="Anterior">&#10094;</button>
+        <button id="next" class="next" aria-label="Próximo">&#10095;</button>
       </div>
-      <div class="absolute top-1/2 left-0 right-0 flex justify-between px-4">
-        <button id="prev" class="bg-black text-white px-4 py-2 rounded-full hover:bg-gray-800">
-          <i class="fas fa-chevron-left"></i>
-        </button>
-        <button id="next" class="bg-black text-white px-4 py-2 rounded-full hover:bg-gray-800">
-          <i class="fas fa-chevron-right"></i>
-        </button>
-      </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- Catálogo -->
-  <section id="catalogo" class="py-12 px-4 max-w-6xl mx-auto">
-    <h3 class="text-2xl font-bold text-center mb-8">Catálogo</h3>
-    <div class="grid gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-      <div class="bg-white rounded-xl shadow hover:shadow-lg transition p-4 flex flex-col">
-        <img src="images/pocox7pro.png" alt="Poco X7 Pro" class="rounded-md mb-4">
-        <h4 class="font-semibold mb-2">Poco X7 Pro</h4>
-        <p class="text-sm text-gray-600 mb-4">256GB • Alto desempenho</p>
-        <a href="https://wa.me/5555991407824?text=Olá%20vim%20através%20do%20site"
-           class="mt-auto bg-green-500 text-white px-5 py-3 rounded-lg flex items-center justify-center gap-3 font-semibold hover:bg-green-600 transition">
-          <i class="fas fa-shopping-cart"></i> Comprar no WhatsApp
-        </a>
+    <section id="smartphones" class="container">
+      <h2 style="text-align:center">Smartphones</h2>
+      <div class="grid">
+        <div class="card"><img src="images/pocox7pro.png" alt=""><h4>Poco X7 Pro</h4></div>
+        <div class="card"><img src="images/redmi14c.png" alt=""><h4>Redmi 14C</h4></div>
       </div>
-      <div class="bg-white rounded-xl shadow hover:shadow-lg transition p-4 flex flex-col">
-        <img src="images/redmi14c.png" alt="Redmi 14C" class="rounded-md mb-4">
-        <h4 class="font-semibold mb-2">Redmi 14C</h4>
-        <p class="text-sm text-gray-600 mb-4">128GB • 4GB RAM</p>
-        <a href="https://wa.me/5555991407824?text=Olá%20vim%20através%20do%20site"
-           class="mt-auto bg-green-500 text-white px-5 py-3 rounded-lg flex items-center justify-center gap-3 font-semibold hover:bg-green-600 transition">
-          <i class="fas fa-shopping-cart"></i> Comprar no WhatsApp
-        </a>
-      </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- Redes sociais -->
-  <section class="py-12 bg-gray-50 text-center">
-    <h3 class="text-2xl font-bold mb-6">Conecte-se conosco</h3>
-    <div class="flex justify-center gap-6 flex-wrap">
-      <a href="https://www.instagram.com/qualitycelulares_ibi/" target="_blank"
-         class="flex items-center justify-center w-14 h-14 bg-gradient-to-tr from-pink-500 to-yellow-400 rounded-full text-white text-2xl hover:scale-110 transition">
-        <i class="fab fa-instagram"></i>
-      </a>
-      <a href="https://www.instagram.com/quality_celulares/" target="_blank"
-         class="flex items-center justify-center w-14 h-14 bg-gradient-to-tr from-pink-500 to-yellow-400 rounded-full text-white text-2xl hover:scale-110 transition">
-        <i class="fab fa-instagram"></i>
-      </a>
-      <a href="#" target="_blank"
-         class="flex items-center justify-center w-14 h-14 bg-blue-600 rounded-full text-white text-2xl hover:scale-110 transition">
-        <i class="fab fa-facebook-f"></i>
-      </a>
-      <a href="https://wa.me/5555991407824?text=Olá%20vim%20através%20do%20site" target="_blank"
-         class="flex items-center justify-center w-14 h-14 bg-green-500 rounded-full text-white text-2xl hover:scale-110 transition">
-        <i class="fab fa-whatsapp"></i>
-      </a>
-      <a href="https://maps.google.com" target="_blank"
-         class="flex items-center justify-center w-14 h-14 bg-gray-700 rounded-full text-white text-2xl hover:scale-110 transition">
-        <i class="fas fa-map-marker-alt"></i>
-      </a>
-    </div>
-  </section>
+    <section class="container">
+      <h3 style="text-align:center">Conecte-se conosco</h3>
+      <div class="socials" style="margin-top:12px">
+        <a class="social instagram" href="#"><i class="fab fa-instagram"></i></a>
+        <a class="social whatsapp" href="https://wa.me/5555991407824"><i class="fab fa-whatsapp"></i></a>
+        <a class="social facebook" href="#"><i class="fab fa-facebook-f"></i></a>
+        <a class="social map" href="#"><i class="fas fa-map-marker-alt"></i></a>
+      </div>
+    </section>
+  </main>
 
-  <!-- Rodapé -->
-  <footer class="bg-gray-900 text-gray-300 py-8 mt-12">
-    <div class="max-w-6xl mx-auto px-4">
-      <div class="text-center">
-        <a href="index.html">
-          <img src="images/logo.png" alt="Logo Quality Celulares" class="h-20 w-auto mb-4 mx-auto">
-        </a>
-      </div>
-      <div class="text-white text-center mb-4">
-        <p class="font-semibold text-lg">Informações</p>
-        <div class="flex justify-center gap-6 mt-2">
-          <a href="sobre.html" class="hover:underline">Sobre nós</a>
-          <a href="formas-de-pagamento.html" class="hover:underline">Formas de pagamento e envio</a>
-        </div>
-      </div>
-      <div class="text-center mt-6 text-gray-500 text-sm">
-        © 2025 Quality Celulares. Todos os direitos reservados. <br>
-        CNPJ: 20.375.910/0001-66
-      </div>
+  <footer class="footer">
+    <div class="wrap">
+      <div class="col"><img src="images/logo.png" alt="" style="height:56px"></div>
+      <div class="col"><strong>Informações</strong><br><a href="sobre.html">Sobre nós</a><br><a href="formas-de-pagamento.html">Formas de pagamento e envio</a></div>
+      <div class="col"><strong>Siga-nos</strong><div style="margin-top:8px" class="socials"><a class="social instagram" href="#"><i class="fab fa-instagram"></i></a><a class="social whatsapp" href="#"><i class="fab fa-whatsapp"></i></a></div></div>
     </div>
+    <div style="text-align:center;margin-top:16px;color:#94a3b8">© 2025 Quality Celulares • CNPJ: 20.375.910/0001-66</div>
   </footer>
 </body>
 </html>
