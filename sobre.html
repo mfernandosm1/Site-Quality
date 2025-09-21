@@ -1,42 +1,57 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sobre - Loja</title>
-  <link rel="stylesheet" href="style.css">
-  <script defer src="main.js"></script>
-</head>
-<body>
-  <header class="navbar">
-    <div class="logo"><a href="index.html"><img src="images/logo.png" alt="Logo"></a></div>
-    <nav class="menu">
-      <a href="index.html#smartphones">Smartphones</a>
-      <a href="index.html#acessorios">Acessórios</a>
-      <a href="sobre.html" class="active">Sobre</a>
-      <a href="formas-de-pagamento.html">Formas de Pagamento</a>
-      <a href="https://wa.me/5599999999999" target="_blank" class="whatsapp">WhatsApp</a>
-    </nav>
-    <button class="menu-toggle">☰</button>
+<!DOCTYPE html><html lang='pt-BR'><head><meta charset='UTF-8'><meta name='viewport' content='width=device-width, initial-scale=1.0'><title>Sobre nós</title><script src='https://cdn.tailwindcss.com'></script><link href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css' rel='stylesheet'></head><body class='bg-gray-50 text-gray-800'>  <!-- Header -->
+  <header class="fixed top-0 left-0 w-full bg-gradient-to-r from-red-600 to-red-500 shadow-md z-50">
+    <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
+      <a href="index.html">
+        <img src="images/logo.png" alt="Quality Celulares" class="h-10 md:h-12">
+      </a>
+      <!-- Desktop menu -->
+      <nav class="hidden md:flex items-center gap-6">
+        <a href="#smartphones" class="text-white font-medium hover:underline">Smartphones</a>
+        <a href="#acessorios" class="text-white font-medium hover:underline">Acessórios</a>
+        <a href="https://wa.me/5555991407824?text=ol%C3%A1%20vim%20atrav%C3%A9s%20do%20site" 
+           class="flex items-center gap-2 bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-full transition">
+          <i class="fa-brands fa-whatsapp text-lg"></i> WhatsApp
+        </a>
+      </nav>
+      <!-- Mobile menu button -->
+      <button id="menu-toggle" class="md:hidden text-white text-2xl">
+        <i class="fa-solid fa-bars"></i>
+      </button>
+    </div>
+    <!-- Mobile off-canvas menu -->
+    <div id="mobile-menu" class="fixed top-0 left-0 h-full w-64 bg-white shadow-lg transform -translate-x-full transition-transform z-50">
+      <div class="p-4 flex justify-between items-center border-b">
+        <img src="images/logo.png" alt="Quality Celulares" class="h-10">
+        <button id="menu-close" class="text-gray-600 text-2xl"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+      <nav class="flex flex-col p-4 gap-4">
+        <a href="#smartphones" class="text-gray-800 font-medium hover:text-red-600">Smartphones</a>
+        <a href="#acessorios" class="text-gray-800 font-medium hover:text-red-600">Acessórios</a>
+        <a href="https://wa.me/5555991407824?text=ol%C3%A1%20vim%20atrav%C3%A9s%20do%20site" 
+           class="flex items-center gap-2 bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-full transition">
+          <i class="fa-brands fa-whatsapp text-lg"></i> WhatsApp
+        </a>
+      </nav>
+    </div>
   </header>
-
-  <main class="conteudo">
-    <h1>Sobre Nós</h1>
-    <p>Somos uma loja especializada em smartphones e acessórios, trazendo sempre as melhores ofertas e produtos de qualidade.</p>
-    <p>Missão: oferecer tecnologia de ponta a preços acessíveis.</p>
-  </main>
-
-  <footer>
-    <div class="social">
-      <a href="#"><i class="fab fa-facebook"></i></a>
-      <a href="#"><i class="fab fa-instagram"></i></a>
-      <a href="#"><i class="fab fa-whatsapp"></i></a>
+<main class='pt-28 max-w-4xl mx-auto px-4 py-12'><h1 class='text-3xl font-bold mb-6 text-center'>Sobre a Quality Celulares</h1><p class='text-lg text-gray-700 text-center'>Vendemos celulares, notebooks, videogames, smartwatches, tablets, caixas de som e acessórios em geral.<br>Também oferecemos assistência técnica em celulares.</p></main>  <!-- Rodapé -->
+  <footer class="bg-gray-900 text-gray-300 py-8 mt-12">
+    <div class="max-w-6xl mx-auto px-4 flex flex-col md:flex-row md:justify-between items-start gap-6">
+      <a href="index.html">
+        <img src="images/logo.png" alt="Quality Celulares" class="h-8">
+      </a>
+      <div class="flex flex-col gap-1">
+        <a href="sobre.html" class="text-white hover:underline">Sobre nós</a>
+        <a href="formas-de-pagamento.html" class="text-white hover:underline">Formas de pagamento e envio</a>
+      </div>
+      <div class="flex gap-4 text-2xl">
+        <a href="#" class="text-white hover:text-red-500"><i class="fa-brands fa-facebook-f"></i></a>
+        <a href="#" class="text-white hover:text-pink-500"><i class="fa-brands fa-instagram"></i></a>
+        <a href="#" class="text-white hover:text-sky-400"><i class="fa-brands fa-twitter"></i></a>
+      </div>
     </div>
-    <div class="links">
-      <a href="sobre.html">Sobre</a> | 
-      <a href="formas-de-pagamento.html">Formas de Pagamento e Envio</a>
+    <div class="max-w-6xl mx-auto px-4 text-center mt-6 text-gray-500 text-sm">
+      © 2025 Quality Celulares. Todos os direitos reservados. <br>CNPJ: 20.375.910/0001-66
     </div>
-    <p>CNPJ: 20.375.910/0001-66</p>
   </footer>
-</body>
-</html>
+<script>document.getElementById('menu-toggle').addEventListener('click', () => {document.getElementById('mobile-menu').classList.remove('-translate-x-full');});document.getElementById('menu-close').addEventListener('click', () => {document.getElementById('mobile-menu').classList.add('-translate-x-full');});</script></body></html>
