@@ -1,1 +1,1 @@
-// JS restaurado da v12 + ajustes
+// main.js corrigido
