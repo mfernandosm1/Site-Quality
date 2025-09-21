@@ -1,37 +1,11 @@
-let currentSlide = 0;
-let slides = document.querySelectorAll('.carrossel .slides .banner');
-let autoSlideInterval;
-
-function showSlide(index) {
-  slides.forEach((slide, i) => {
-    slide.classList.remove('active');
-    if (i === index) slide.classList.add('active');
-  });
-  currentSlide = index;
-}
-
-function moveSlide(step) {
-  let newIndex = (currentSlide + step + slides.length) % slides.length;
-  showSlide(newIndex);
-}
-
-function startAutoSlide() {
-  autoSlideInterval = setInterval(() => {
-    moveSlide(1);
-  }, 5000);
-}
-
-function stopAutoSlide() {
-  clearInterval(autoSlideInterval);
-}
-
-document.addEventListener('DOMContentLoaded', () => {
-  slides = document.querySelectorAll('.carrossel .slides .banner');
-  showSlide(0);
-  startAutoSlide();
+const swiper = new Swiper('.swiper', {
+  loop: true,
+  autoplay: { delay: 3000 },
+  navigation: { nextEl: '.swiper-button-next', prevEl: '.swiper-button-prev' }
 });
-
-function toggleMobileMenu() {
-  const menu = document.getElementById('mobileMenu');
-  menu.style.display = (menu.style.display === 'block') ? 'none' : 'block';
-}
+document.getElementById('menu-toggle').addEventListener('click', () => {
+  document.getElementById('mobile-menu').classList.remove('-translate-x-full');
+});
+document.getElementById('menu-close').addEventListener('click', () => {
+  document.getElementById('mobile-menu').classList.add('-translate-x-full');
+});
