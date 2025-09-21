@@ -1,2 +1,5 @@
-// main.js v26
-console.log('Main JS carregado - carrossel e menu mobile funcionando');
+// main.js v27
+function toggleMenu() {
+  const menu = document.getElementById('mobileMenu');
+  menu.style.display = (menu.style.display === 'block') ? 'none' : 'block';
+}

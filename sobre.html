@@ -1,11 +1,46 @@
-<!-- sobre.html v26 -->
+<!-- sobre.html v27 -->
 <!DOCTYPE html>
-<html lang='pt-BR'>
-<head><meta charset='UTF-8'><title>Sobre</title><link rel='stylesheet' href='./css/style.css'></head>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Sobre - Quality Celulares</title>
+  <link rel="stylesheet" href="./css/style.css">
+  <link rel="icon" type="image/png" href="./images/favicon.png">
+</head>
 <body>
-<header>Menu igual ao index</header>
-<main>Conteúdo sobre a empresa</main>
-<footer>Rodapé com redes sociais + CNPJ</footer>
-<script src='./js/main.js'></script>
+  <header class="menu">
+    <div class="logo"><img src="./images/logo.png" alt="Quality Celulares"></div>
+    <nav class="links">
+      <a href="index.html#smartphones">Smartphones</a>
+      <a href="index.html#acessorios">Acessórios</a>
+      <a href="https://wa.me/5555991407824" class="whatsapp">WhatsApp</a>
+    </nav>
+    <div class="search"><input type="text" placeholder="Buscar"></div>
+    <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+  </header>
+
+  <aside id="mobileMenu" class="mobile-menu">
+    <input type="text" placeholder="Buscar" class="mobile-search">
+    <a href="index.html#smartphones">Smartphones</a>
+    <a href="index.html#acessorios">Acessórios</a>
+    <a href="https://wa.me/5555991407824" class="whatsapp">WhatsApp</a>
+  </aside>
+
+  <main>
+    <h1>Sobre a Quality Celulares</h1>
+    <p>Vendemos celulares, notebooks, videogames, smartwatches, tablets, caixas de som e acessórios em geral.
+    Também oferecemos assistência técnica em celulares.</p>
+  </main>
+
+  <footer>
+    <p>© 2025 Quality Celulares - CNPJ 20.375.910/0001-66</p>
+    <div class="socials">
+      <a href="#"><i class="fab fa-facebook"></i></a>
+      <a href="#"><i class="fab fa-instagram"></i></a>
+      <a href="#"><i class="fab fa-whatsapp"></i></a>
+    </div>
+  </footer>
+
+  <script src="./js/main.js"></script>
 </body>
 </html>

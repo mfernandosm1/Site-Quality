@@ -1,11 +1,61 @@
-<!-- index.html v26 -->
+<!-- index.html v27 -->
 <!DOCTYPE html>
-<html lang='pt-BR'>
-<head><meta charset='UTF-8'><title>Index</title><link rel='stylesheet' href='./css/style.css'></head>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Quality Celulares</title>
+  <link rel="stylesheet" href="./css/style.css">
+  <link rel="icon" type="image/png" href="./images/favicon.png">
+</head>
 <body>
-<header>Menu e logo</header>
-<main>Carrossel automático e produtos</main>
-<footer>Rodapé com redes sociais + CNPJ</footer>
-<script src='./js/main.js'></script>
+  <header class="menu">
+    <div class="logo"><img src="./images/logo.png" alt="Quality Celulares"></div>
+    <nav class="links">
+      <a href="#smartphones">Smartphones</a>
+      <a href="#acessorios">Acessórios</a>
+      <a href="https://wa.me/5555991407824" class="whatsapp">WhatsApp</a>
+    </nav>
+    <div class="search"><input type="text" placeholder="Buscar"></div>
+    <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+  </header>
+
+  <aside id="mobileMenu" class="mobile-menu">
+    <input type="text" placeholder="Buscar" class="mobile-search">
+    <a href="#smartphones">Smartphones</a>
+    <a href="#acessorios">Acessórios</a>
+    <a href="https://wa.me/5555991407824" class="whatsapp">WhatsApp</a>
+  </aside>
+
+  <main>
+    <section class="banners">
+      <img src="./images/banner1.png" alt="Banner 1">
+      <img src="./images/banner2.png" alt="Banner 2">
+      <img src="./images/banner3.png" alt="Banner 3">
+    </section>
+
+    <section id="smartphones" class="produtos">
+      <div class="produto-card">
+        <img src="./images/pocox7pro.png" alt="Poco X7 Pro">
+        <h3>Poco X7 Pro</h3>
+        <a href="https://wa.me/5555991407824" class="btn">Comprar no WhatsApp</a>
+      </div>
+      <div class="produto-card">
+        <img src="./images/redmi14c.png" alt="Redmi 14C">
+        <h3>Redmi 14C</h3>
+        <a href="https://wa.me/5555991407824" class="btn">Comprar no WhatsApp</a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>© 2025 Quality Celulares - CNPJ 20.375.910/0001-66</p>
+    <div class="socials">
+      <a href="#"><i class="fab fa-facebook"></i></a>
+      <a href="#"><i class="fab fa-instagram"></i></a>
+      <a href="#"><i class="fab fa-whatsapp"></i></a>
+    </div>
+  </footer>
+
+  <script src="./js/main.js"></script>
 </body>
 </html>
