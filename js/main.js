@@ -1,1 +1,21 @@
-document.addEventListener('DOMContentLoaded',()=>{const inner=document.querySelector('.carousel-inner');const slides=document.querySelectorAll('.slide');let index=0;const total=slides.length;function show(i){inner.style.transform=`translateX(-${i*100}%)`}document.getElementById('prev')?.addEventListener('click',()=>{index=(index-1+total)%total;show(index)});document.getElementById('next')?.addEventListener('click',()=>{index=(index+1)%total;show(index)});show(0);setInterval(()=>{index=(index+1)%total;show(index)},3500);const menuBtns=document.querySelectorAll('.menu-btn');const mobileMenus=document.querySelectorAll('.mobile-menu');menuBtns.forEach(btn=>btn.addEventListener('click',()=>{mobileMenus.forEach(m=>m.classList.add('open'))}));document.querySelectorAll('.mobile-menu .close').forEach(c=>c.addEventListener('click',()=>{mobileMenus.forEach(m=>m.classList.remove('open'))}));});
+document.addEventListener('DOMContentLoaded', () => {
+  // Carousel
+  const items = document.querySelectorAll('.carousel-item');
+  let index = 0;
+  function showSlide(i) {
+    items.forEach((el, idx) => el.classList.toggle('active', idx === i));
+  }
+  function nextSlide() {
+    index = (index + 1) % items.length;
+    showSlide(index);
+  }
+  showSlide(index);
+  setInterval(nextSlide, 4000);
+
+  // Mobile menu
+  const toggle = document.querySelector('.menu-toggle');
+  const menu = document.querySelector('.menu');
+  if (toggle && menu) {
+    toggle.addEventListener('click', () => menu.classList.toggle('open'));
+  }
+});
