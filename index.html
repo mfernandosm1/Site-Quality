@@ -2,258 +2,249 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Quality Celulares</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-    rel="stylesheet"
-  />
   <link rel="stylesheet" href="css/style.css" />
-  <link
-    rel="stylesheet"
-    href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
-  />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
   <style>
-    /* Social icons modernized */
+    /* Estilo para os ícones de redes sociais no rodapé */
     .footer-socials {
       display: flex;
       justify-content: center;
-      gap: 24px;
-      margin-bottom: 16px;
+      gap: 30px;
+      margin-bottom: 20px;
     }
 
     .footer-socials a {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 48px;
-      height: 48px;
-      background: #222;
-      border-radius: 50%;
       color: white;
-      font-size: 28px;
-      transition: all 0.3s ease;
-      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+      font-size: 32px; /* tamanho maior */
+      transition: color 0.3s ease;
     }
 
     .footer-socials a:hover {
-      transform: scale(1.15);
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
-    }
-
-    .footer-socials a.facebook:hover {
-      background-color: #3b5998;
-      color: white;
-    }
-
-    .footer-socials a.instagram:hover {
-      background: radial-gradient(
-        circle at 30% 107%,
-        #fdf497 0%,
-        #fdf497 5%,
-        #fd5949 45%,
-        #d6249f 60%,
-        #285aeb 90%
-      );
-      color: white;
-    }
-
-    .footer-socials a.twitter:hover {
-      background-color: #1da1f2;
-      color: white;
-    }
-
-    .footer-socials a.whatsapp:hover {
-      background-color: #25d366;
-      color: white;
-    }
-
-    .footer-socials a.location:hover {
-      background-color: #c90000;
-      color: white;
+      color: #c90000; /* vermelho da marca */
     }
   </style>
 </head>
-<body class="bg-gray-50 text-gray-800">
+<body>
+
   <!-- Header -->
-  <header
-    class="fixed top-0 left-0 w-full bg-gradient-to-r from-red-600 to-red-500 shadow-md z-50"
-  >
-    <div
-      class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between"
-    >
+  <header class="header">
+    <div class="header-container">
       <a href="index.html">
-        <img src="images/logo.png" alt="Quality Celulares" class="h-10 md:h-12" />
+        <img src="images/logo.png" alt="Quality Celulares" class="logo" />
       </a>
-      <!-- Desktop menu -->
-      <nav class="hidden md:flex items-center gap-6">
-        <a href="index.html" class="text-white font-medium hover:underline"
-          >Início</a
-        >
-        <a href="#smartphones" class="text-white font-medium hover:underline"
-          >Smartphones</a
-        >
-        <a href="#acessorios" class="text-white font-medium hover:underline"
-          >Acessórios</a
-        >
-        <div class="relative">
-          <input
-            type="text"
-            placeholder="Buscar"
-            class="px-3 py-1 rounded-full text-sm"
-          />
+      <nav class="nav-desktop">
+        <a href="index.html">Início</a>
+        <a href="#smartphones">Smartphones</a>
+        <a href="#acessorios">Acessórios</a>
+        <div class="search-wrapper">
+          <input type="text" id="search-input" placeholder="Buscar..." />
+          <button id="search-button" aria-label="Buscar"><i class="fa fa-search"></i></button>
         </div>
-        <a
-          href="https://wa.me/5555991407824?text=Olá%20vim%20através%20do%20site"
-          class="flex items-center gap-2 bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-full transition"
-          ><i class="fa-brands fa-whatsapp text-lg"></i> WhatsApp</a
-        >
+        <a href="https://wa.me/5555991407824?text=Olá%20vim%20através%20do%20site" class="btn-whatsapp">
+          <i class="fa-brands fa-whatsapp"></i> WhatsApp
+        </a>
       </nav>
-      <!-- Mobile menu button -->
-      <button id="menu-toggle" class="md:hidden text-white text-2xl">
+      <button id="menu-toggle" class="menu-toggle">
         <i class="fa-solid fa-bars"></i>
       </button>
     </div>
-    <!-- Mobile off-canvas menu -->
-    <div
-      id="mobile-menu"
-      class="fixed top-0 left-0 h-full w-64 bg-white shadow-lg transform -translate-x-full transition-transform z-50"
-    >
-      <div class="p-4 flex justify-between items-center border-b">
-        <img src="images/logo.png" alt="Quality Celulares" class="h-10" />
-        <button id="menu-close" class="text-gray-600 text-2xl">
+
+    <div id="mobile-menu" class="mobile-menu">
+      <div class="mobile-menu-header">
+        <img src="images/logo.png" alt="Quality Celulares" class="logo" />
+        <button id="menu-close" class="menu-close" aria-label="Fechar menu">
           <i class="fa-solid fa-xmark"></i>
         </button>
       </div>
-      <nav class="flex flex-col p-4 gap-4">
-        <a
-          href="index.html"
-          class="text-gray-800 font-medium hover:text-red-600"
-          >Início</a
-        >
-        <a
-          href="#smartphones"
-          class="text-gray-800 font-medium hover:text-red-600"
-          >Smartphones</a
-        >
-        <a
-          href="#acessorios"
-          class="text-gray-800 font-medium hover:text-red-600"
-          >Acessórios</a
-        >
-        <a
-          href="https://wa.me/5555991407824?text=Olá%20vim%20através%20do%20site"
-          class="flex items-center gap-2 bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-full transition"
-          ><i class="fa-brands fa-whatsapp text-lg"></i> WhatsApp</a
-        >
+      <div class="search-wrapper-mobile">
+        <input type="text" id="search-input-mobile" placeholder="Buscar..." />
+        <button id="search-button-mobile" aria-label="Buscar"><i class="fa fa-search"></i></button>
+      </div>
+      <nav class="mobile-nav">
+        <a href="index.html">Início</a>
+        <a href="#smartphones">Smartphones</a>
+        <a href="#acessorios">Acessórios</a>
+        <a href="https://wa.me/5555991407824?text=Olá%20vim%20através%20do%20site" class="btn-whatsapp">
+          <i class="fa-brands fa-whatsapp"></i> WhatsApp
+        </a>
       </nav>
     </div>
   </header>
 
-  <main class="max-w-6xl mx-auto px-4 py-28 space-y-12">
-    <section class="grid md:grid-cols-3 gap-6">
-      <div
-        class="bg-white rounded-xl shadow-lg p-6 text-center hover:shadow-2xl transition"
-      >
-        <i class="fa-solid fa-credit-card text-4xl text-red-600 mb-4"></i>
-        <h2 class="text-xl font-bold mb-2">Cartão de Crédito</h2>
-        <p>Visa, MasterCard, Elo, American Express</p>
+  <!-- Banner -->
+  <section class="banner">
+    <div class="swiper">
+      <div class="swiper-wrapper">
+        <div class="swiper-slide">
+          <picture>
+            <source media="(max-width: 767px)" srcset="images/banner1-mobile.png" />
+            <img src="images/banner1.png" alt="Banner 1" class="banner-img" />
+          </picture>
+        </div>
+        <div class="swiper-slide">
+          <picture>
+            <source media="(max-width: 767px)" srcset="images/banner2-mobile.png" />
+            <img src="images/banner2.png" alt="Banner 2" class="banner-img" />
+          </picture>
+        </div>
+        <div class="swiper-slide">
+          <picture>
+            <source media="(max-width: 767px)" srcset="images/banner3-mobile.png" />
+            <img src="images/banner3.png" alt="Banner 3" class="banner-img" />
+          </picture>
+        </div>
       </div>
-      <div
-        class="bg-white rounded-xl shadow-lg p-6 text-center hover:shadow-2xl transition"
-      >
-        <i class="fa-solid fa-file-invoice text-4xl text-yellow-500 mb-4"></i>
-        <h2 class="text-xl font-bold mb-2">Boleto Bancário</h2>
-        <p>Pague de forma segura diretamente pelo banco</p>
+      <div class="swiper-button-next"></div>
+      <div class="swiper-button-prev"></div>
+    </div>
+  </section>
+
+  <!-- Produtos -->
+  <main class="main">
+    <h2 id="smartphones">Smartphones</h2>
+    <div id="products" class="products">
+      <div class="product-card">
+        <img src="images/pocox7pro.png" alt="Poco X7 Pro" />
+        <h3>Poco X7 Pro</h3>
+        <a href="https://wa.me/5555991407824?text=Olá%20vim%20através%20do%20site" class="btn-whatsapp">
+          <i class="fa-brands fa-whatsapp"></i> Comprar no WhatsApp
+        </a>
       </div>
-      <div
-        class="bg-white rounded-xl shadow-lg p-6 text-center hover:shadow-2xl transition"
-      >
-        <i class="fa-brands fa-pix text-4xl text-green-500 mb-4"></i>
-        <h2 class="text-xl font-bold mb-2">PIX</h2>
-        <p>Transferência instantânea e segura</p>
+      <div class="product-card">
+        <img src="images/redmi14c.png" alt="Redmi 14C" />
+        <h3>Redmi 14C</h3>
+        <a href="https://wa.me/5555991407824?text=Olá%20vim%20através%20do%20site" class="btn-whatsapp">
+          <i class="fa-brands fa-whatsapp"></i> Comprar no WhatsApp
+        </a>
       </div>
-    </section>
-    <section class="bg-white rounded-xl shadow-lg p-6 text-center">
-      <i class="fa-solid fa-truck-fast text-5xl text-green-600 mb-4"></i>
-      <h2 class="text-2xl font-bold mb-2">ENVIOS:</h2>
-      <p class="text-lg">
-        Via <strong>Correios ou Transportadora</strong>.
-      </p>
-      <p class="text-lg mt-2">
-        Frete grátis para compras acima de <strong>R$120,00</strong> no
-        <strong>RS</strong>. Para as demais regiões, o valor do frete será
-        calculado conforme a região de entrega.
-      </p>
-      <a
-        href="https://wa.me/5555991407824?text=Olá%20vim%20através%20do%20site"
-        class="mt-4 inline-block bg-green-500 text-white px-6 py-3 rounded-lg hover:bg-green-600 font-medium"
-        >Entrar em contato via WhatsApp</a
-      >
-    </section>
+    </div>
+    <p id="no-results" class="em-breve" style="display:none;">Nenhum produto encontrado.</p>
+
+    <h2 id="acessorios">Acessórios</h2>
+    <p class="em-breve">Em breve...</p>
   </main>
 
   <!-- Rodapé -->
-  <footer class="bg-gray-900 text-gray-300 py-8 mt-12">
-    <div
-      class="max-w-6xl mx-auto px-4 flex flex-col md:flex-row md:justify-between items-center gap-6"
-    >
-      <div class="flex flex-col gap-1 text-center md:text-left">
-        <a href="sobre.html" class="text-white hover:underline">Sobre nós</a>
-        <a
-          href="formas-de-pagamento.html"
-          class="text-white hover:underline"
-          >Formas de pagamento e envio</a
-        >
-      </div>
-      <div class="footer-socials">
-        <a
-          href="#"
-          class="facebook"
-          aria-label="Facebook"
-          target="_blank"
-          rel="noopener noreferrer"
-          ><i class="fa-brands fa-facebook-f"></i
-        ></a>
-        <a
-          href="https://www.instagram.com/qualitycelulares_ibi/"
-          class="instagram"
-          aria-label="Instagram"
-          target="_blank"
-          rel="noopener noreferrer"
-          ><i class="fa-brands fa-instagram"></i
-        ></a>
-        <a
-          href="#"
-          class="twitter"
-          aria-label="Twitter"
-          target="_blank"
-          rel="noopener noreferrer"
-          ><i class="fa-brands fa-twitter"></i
-        ></a>
-        <a
-          href="https://wa.me/5555991407824"
-          class="whatsapp"
-          aria-label="WhatsApp"
-          target="_blank"
-          rel="noopener noreferrer"
-          ><i class="fa-brands fa-whatsapp"></i
-        ></a>
-        <a href="#" class="location" aria-label="Localização"
-          ><i class="fa-solid fa-location-dot"></i
-        ></a>
-      </div>
+  <footer class="footer">
+    <div class="footer-links">
+      <a href="sobre.html">Sobre nós</a>
+      <a href="formas-de-pagamento.html">Formas de pagamento e envio</a>
     </div>
-    <div
-      class="max-w-6xl mx-auto px-4 text-center mt-6 text-gray-500 text-sm"
-    >
+    <div class="footer-socials">
+      <a href="https://www.facebook.com/qualitycelulares" target="_blank" aria-label="Facebook" rel="noopener noreferrer">
+        <i class="fa-brands fa-facebook-f"></i>
+      </a>
+      <a href="https://www.instagram.com/qualitycelulares_ibi/" target="_blank" aria-label="Instagram" rel="noopener noreferrer">
+        <i class="fa-brands fa-instagram"></i>
+      </a>
+      <a href="https://twitter.com/qualitycelulares" target="_blank" aria-label="Twitter" rel="noopener noreferrer">
+        <i class="fa-brands fa-twitter"></i>
+      </a>
+      <a href="https://wa.me/5555991407824" target="_blank" aria-label="WhatsApp" rel="noopener noreferrer">
+        <i class="fa-brands fa-whatsapp"></i>
+      </a>
+    </div>
+    <div class="footer-copy">
       © 2025 Quality Celulares. Todos os direitos reservados. <br />
       CNPJ: 20.375.910/0001-66
     </div>
   </footer>
 
+  <!-- Scripts -->
   <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-  <script src="js/main.js"></script>
+  <script>
+    const swiper = new Swiper('.swiper', {
+      loop: true,
+      navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev'
+      },
+      autoplay: {
+        delay: 5000, // troca a cada 5 segundos
+        disableOnInteraction: false,
+      },
+    });
+
+    document.getElementById("menu-toggle").onclick = () => {
+      document.getElementById("mobile-menu").style.transform = "translateX(0)";
+    };
+    document.getElementById("menu-close").onclick = () => {
+      document.getElementById("mobile-menu").style.transform = "translateX(-100%)";
+    };
+
+    // Função para filtrar produtos pela busca e retornar o primeiro produto encontrado (ou null)
+    function filterProducts(query) {
+      const products = document.querySelectorAll("#products .product-card");
+      let found = false;
+      let firstFoundProduct = null;
+
+      products.forEach(product => {
+        const title = product.querySelector("h3").textContent.toLowerCase();
+        if (title.includes(query.toLowerCase())) {
+          product.style.display = "";
+          if (!firstFoundProduct) firstFoundProduct = product;
+          found = true;
+        } else {
+          product.style.display = "none";
+        }
+      });
+
+      document.getElementById("no-results").style.display = found ? "none" : "block";
+
+      return firstFoundProduct;
+    }
+
+    // Busca desktop
+    const searchInput = document.getElementById("search-input");
+    const searchButton = document.getElementById("search-button");
+    searchButton.addEventListener("click", () => {
+      filterProducts(searchInput.value.trim());
+    });
+    searchInput.addEventListener("keyup", (e) => {
+      if(e.key === "Enter"){
+        filterProducts(searchInput.value.trim());
+      }
+      if(searchInput.value.trim() === ""){
+        filterProducts(""); // reseta busca
+        document.getElementById("no-results").style.display = "none";
+      }
+    });
+
+    // Busca mobile
+    const searchInputMobile = document.getElementById("search-input-mobile");
+    const searchButtonMobile = document.getElementById("search-button-mobile");
+
+    searchButtonMobile.addEventListener("click", () => {
+      const firstProduct = filterProducts(searchInputMobile.value.trim());
+      document.getElementById("mobile-menu").style.transform = "translateX(-100%)";
+
+      if(firstProduct) {
+        firstProduct.scrollIntoView({ behavior: "smooth", block: "start" });
+      } else {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
+    });
+
+    searchInputMobile.addEventListener("keyup", (e) => {
+      if(e.key === "Enter"){
+        const firstProduct = filterProducts(searchInputMobile.value.trim());
+        document.getElementById("mobile-menu").style.transform = "translateX(-100%)";
+
+        if(firstProduct) {
+          firstProduct.scrollIntoView({ behavior: "smooth", block: "start" });
+        } else {
+          window.scrollTo({ top: 0, behavior: "smooth" });
+        }
+      }
+      if(searchInputMobile.value.trim() === ""){
+        filterProducts("");
+        document.getElementById("no-results").style.display = "none";
+      }
+    });
+  </script>
+
 </body>
 </html>

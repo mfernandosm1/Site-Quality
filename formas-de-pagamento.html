@@ -2,131 +2,258 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Quality Celulares</title>
-
-  <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
-
-  <!-- Font Awesome -->
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-
-  <!-- Swiper CSS -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
-
-  <!-- Seu CSS personalizado -->
+  <link
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    rel="stylesheet"
+  />
   <link rel="stylesheet" href="css/style.css" />
+  <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
+  />
+  <style>
+    /* Social icons modernized */
+    .footer-socials {
+      display: flex;
+      justify-content: center;
+      gap: 24px;
+      margin-bottom: 16px;
+    }
+
+    .footer-socials a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 48px;
+      height: 48px;
+      background: #222;
+      border-radius: 50%;
+      color: white;
+      font-size: 28px;
+      transition: all 0.3s ease;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    }
+
+    .footer-socials a:hover {
+      transform: scale(1.15);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+    }
+
+    .footer-socials a.facebook:hover {
+      background-color: #3b5998;
+      color: white;
+    }
+
+    .footer-socials a.instagram:hover {
+      background: radial-gradient(
+        circle at 30% 107%,
+        #fdf497 0%,
+        #fdf497 5%,
+        #fd5949 45%,
+        #d6249f 60%,
+        #285aeb 90%
+      );
+      color: white;
+    }
+
+    .footer-socials a.twitter:hover {
+      background-color: #1da1f2;
+      color: white;
+    }
+
+    .footer-socials a.whatsapp:hover {
+      background-color: #25d366;
+      color: white;
+    }
+
+    .footer-socials a.location:hover {
+      background-color: #c90000;
+      color: white;
+    }
+  </style>
 </head>
 <body class="bg-gray-50 text-gray-800">
-  
   <!-- Header -->
-  <header class="fixed top-0 left-0 w-full bg-gradient-to-r from-red-600 to-red-500 shadow-md z-50">
-    <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
+  <header
+    class="fixed top-0 left-0 w-full bg-gradient-to-r from-red-600 to-red-500 shadow-md z-50"
+  >
+    <div
+      class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between"
+    >
       <a href="index.html">
-        <img src="images/logo.png" alt="Quality Celulares" class="h-10 md:h-12">
+        <img src="images/logo.png" alt="Quality Celulares" class="h-10 md:h-12" />
       </a>
       <!-- Desktop menu -->
       <nav class="hidden md:flex items-center gap-6">
-        <a href="index.html" class="text-white font-medium hover:underline">Início</a>
-        <a href="#smartphones" class="text-white font-medium hover:underline">Smartphones</a>
-        <a href="#acessorios" class="text-white font-medium hover:underline">Acessórios</a>
+        <a href="index.html" class="text-white font-medium hover:underline"
+          >Início</a
+        >
+        <a href="#smartphones" class="text-white font-medium hover:underline"
+          >Smartphones</a
+        >
+        <a href="#acessorios" class="text-white font-medium hover:underline"
+          >Acessórios</a
+        >
         <div class="relative">
-          <input type="text" placeholder="Buscar" class="px-3 py-1 rounded-full text-sm" />
+          <input
+            type="text"
+            placeholder="Buscar"
+            class="px-3 py-1 rounded-full text-sm"
+          />
         </div>
-        <a href="https://wa.me/5555991407824?text=Olá%20vim%20através%20do%20site" 
-           class="flex items-center gap-2 bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-full transition">
-          <i class="fa-brands fa-whatsapp text-lg"></i> WhatsApp
-        </a>
+        <a
+          href="https://wa.me/5555991407824?text=Olá%20vim%20através%20do%20site"
+          class="flex items-center gap-2 bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-full transition"
+          ><i class="fa-brands fa-whatsapp text-lg"></i> WhatsApp</a
+        >
       </nav>
       <!-- Mobile menu button -->
       <button id="menu-toggle" class="md:hidden text-white text-2xl">
         <i class="fa-solid fa-bars"></i>
       </button>
     </div>
-
-    <!-- Mobile menu -->
-    <div id="mobile-menu" class="fixed top-0 left-0 h-full w-64 bg-white shadow-lg transform -translate-x-full transition-transform z-50">
+    <!-- Mobile off-canvas menu -->
+    <div
+      id="mobile-menu"
+      class="fixed top-0 left-0 h-full w-64 bg-white shadow-lg transform -translate-x-full transition-transform z-50"
+    >
       <div class="p-4 flex justify-between items-center border-b">
         <img src="images/logo.png" alt="Quality Celulares" class="h-10" />
-        <button id="menu-close" class="text-gray-600 text-2xl"><i class="fa-solid fa-xmark"></i></button>
+        <button id="menu-close" class="text-gray-600 text-2xl">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
       </div>
       <nav class="flex flex-col p-4 gap-4">
-        <a href="index.html" class="text-gray-800 font-medium hover:text-red-600">Início</a>
-        <a href="#smartphones" class="text-gray-800 font-medium hover:text-red-600">Smartphones</a>
-        <a href="#acessorios" class="text-gray-800 font-medium hover:text-red-600">Acessórios</a>
-        <a href="https://wa.me/5555991407824?text=Olá%20vim%20através%20do%20site" 
-           class="flex items-center gap-2 bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-full transition">
-          <i class="fa-brands fa-whatsapp text-lg"></i> WhatsApp
-        </a>
+        <a
+          href="index.html"
+          class="text-gray-800 font-medium hover:text-red-600"
+          >Início</a
+        >
+        <a
+          href="#smartphones"
+          class="text-gray-800 font-medium hover:text-red-600"
+          >Smartphones</a
+        >
+        <a
+          href="#acessorios"
+          class="text-gray-800 font-medium hover:text-red-600"
+          >Acessórios</a
+        >
+        <a
+          href="https://wa.me/5555991407824?text=Olá%20vim%20através%20do%20site"
+          class="flex items-center gap-2 bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-full transition"
+          ><i class="fa-brands fa-whatsapp text-lg"></i> WhatsApp</a
+        >
       </nav>
     </div>
   </header>
 
-  <!-- Conteúdo principal -->
   <main class="max-w-6xl mx-auto px-4 py-28 space-y-12">
-    <!-- Pagamento -->
     <section class="grid md:grid-cols-3 gap-6">
-      <div class="bg-white rounded-xl shadow-lg p-6 text-center hover:shadow-2xl transition">
+      <div
+        class="bg-white rounded-xl shadow-lg p-6 text-center hover:shadow-2xl transition"
+      >
         <i class="fa-solid fa-credit-card text-4xl text-red-600 mb-4"></i>
         <h2 class="text-xl font-bold mb-2">Cartão de Crédito</h2>
         <p>Visa, MasterCard, Elo, American Express</p>
       </div>
-      <div class="bg-white rounded-xl shadow-lg p-6 text-center hover:shadow-2xl transition">
+      <div
+        class="bg-white rounded-xl shadow-lg p-6 text-center hover:shadow-2xl transition"
+      >
         <i class="fa-solid fa-file-invoice text-4xl text-yellow-500 mb-4"></i>
         <h2 class="text-xl font-bold mb-2">Boleto Bancário</h2>
         <p>Pague de forma segura diretamente pelo banco</p>
       </div>
-      <div class="bg-white rounded-xl shadow-lg p-6 text-center hover:shadow-2xl transition">
+      <div
+        class="bg-white rounded-xl shadow-lg p-6 text-center hover:shadow-2xl transition"
+      >
         <i class="fa-brands fa-pix text-4xl text-green-500 mb-4"></i>
         <h2 class="text-xl font-bold mb-2">PIX</h2>
         <p>Transferência instantânea e segura</p>
       </div>
     </section>
-
-    <!-- Envio -->
     <section class="bg-white rounded-xl shadow-lg p-6 text-center">
       <i class="fa-solid fa-truck-fast text-5xl text-green-600 mb-4"></i>
       <h2 class="text-2xl font-bold mb-2">ENVIOS:</h2>
-      <p class="text-lg">Via <strong>Correios ou Transportadora</strong>.</p>
-      <p class="text-lg mt-2">Frete grátis para compras acima de <strong>R$120,00</strong> no <strong>RS</strong>. Para as demais regiões, o valor do frete será calculado conforme a região de entrega.</p>
-      <a href="https://wa.me/5555991407824?text=Olá%20vim%20através%20do%20site" 
-         class="mt-4 inline-block bg-green-500 text-white px-6 py-3 rounded-lg hover:bg-green-600 font-medium">
-        Entrar em contato via WhatsApp
-      </a>
+      <p class="text-lg">
+        Via <strong>Correios ou Transportadora</strong>.
+      </p>
+      <p class="text-lg mt-2">
+        Frete grátis para compras acima de <strong>R$120,00</strong> no
+        <strong>RS</strong>. Para as demais regiões, o valor do frete será
+        calculado conforme a região de entrega.
+      </p>
+      <a
+        href="https://wa.me/5555991407824?text=Olá%20vim%20através%20do%20site"
+        class="mt-4 inline-block bg-green-500 text-white px-6 py-3 rounded-lg hover:bg-green-600 font-medium"
+        >Entrar em contato via WhatsApp</a
+      >
     </section>
   </main>
 
   <!-- Rodapé -->
-  <footer class="bg-gray-900 text-gray-300 py-10 mt-12">
-    <div class="max-w-6xl mx-auto px-4 text-center space-y-6">
-      <div class="space-y-2">
-        <a href="sobre.html" class="block text-white hover:underline">Sobre nós</a>
-        <a href="formas-de-pagamento.html" class="block text-white hover:underline">Formas de pagamento e envio</a>
+  <footer class="bg-gray-900 text-gray-300 py-8 mt-12">
+    <div
+      class="max-w-6xl mx-auto px-4 flex flex-col md:flex-row md:justify-between items-center gap-6"
+    >
+      <div class="flex flex-col gap-1 text-center md:text-left">
+        <a href="sobre.html" class="text-white hover:underline">Sobre nós</a>
+        <a
+          href="formas-de-pagamento.html"
+          class="text-white hover:underline"
+          >Formas de pagamento e envio</a
+        >
       </div>
-      <div class="flex justify-center gap-6 text-2xl">
-        <a href="#" class="hover:text-blue-600"><i class="fa-brands fa-facebook"></i></a>
-        <a href="#" class="hover:text-pink-500"><i class="fa-brands fa-instagram"></i></a>
-        <a href="#" class="hover:text-sky-400"><i class="fa-brands fa-twitter"></i></a>
-        <a href="https://wa.me/5555991407824" class="hover:text-green-500"><i class="fa-brands fa-whatsapp"></i></a>
-        <a href="#" class="hover:text-red-500"><i class="fa-solid fa-location-dot"></i></a>
+      <div class="footer-socials">
+        <a
+          href="#"
+          class="facebook"
+          aria-label="Facebook"
+          target="_blank"
+          rel="noopener noreferrer"
+          ><i class="fa-brands fa-facebook-f"></i
+        ></a>
+        <a
+          href="https://www.instagram.com/qualitycelulares_ibi/"
+          class="instagram"
+          aria-label="Instagram"
+          target="_blank"
+          rel="noopener noreferrer"
+          ><i class="fa-brands fa-instagram"></i
+        ></a>
+        <a
+          href="#"
+          class="twitter"
+          aria-label="Twitter"
+          target="_blank"
+          rel="noopener noreferrer"
+          ><i class="fa-brands fa-twitter"></i
+        ></a>
+        <a
+          href="https://wa.me/5555991407824"
+          class="whatsapp"
+          aria-label="WhatsApp"
+          target="_blank"
+          rel="noopener noreferrer"
+          ><i class="fa-brands fa-whatsapp"></i
+        ></a>
+        <a href="#" class="location" aria-label="Localização"
+          ><i class="fa-solid fa-location-dot"></i
+        ></a>
       </div>
-      <p class="text-sm text-gray-500">
-        © 2025 Quality Celulares. Todos os direitos reservados.<br />
-        CNPJ: 20.375.910/0001-66
-      </p>
+    </div>
+    <div
+      class="max-w-6xl mx-auto px-4 text-center mt-6 text-gray-500 text-sm"
+    >
+      © 2025 Quality Celulares. Todos os direitos reservados. <br />
+      CNPJ: 20.375.910/0001-66
     </div>
   </footer>
 
-  <!-- Scripts -->
   <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-  <script>
-    // Menu toggle
-    document.getElementById('menu-toggle').onclick = () => {
-      document.getElementById('mobile-menu').style.transform = 'translateX(0)';
-    };
-    document.getElementById('menu-close').onclick = () => {
-      document.getElementById('mobile-menu').style.transform = 'translateX(-100%)';
-    };
-  </script>
+  <script src="js/main.js"></script>
 </body>
 </html>
