@@ -20,7 +20,10 @@
         <a href="index.html">Início</a>
         <a href="#smartphones">Smartphones</a>
         <a href="#acessorios">Acessórios</a>
-        <input type="text" placeholder="Buscar..." class="search-input" />
+        <div class="search-wrapper">
+          <input type="text" id="search-input" placeholder="Buscar..." />
+          <button id="search-button" aria-label="Buscar"><i class="fa fa-search"></i></button>
+        </div>
         <a href="https://wa.me/5555991407824?text=Olá%20vim%20através%20do%20site" class="btn-whatsapp">
           <i class="fa-brands fa-whatsapp"></i> WhatsApp
         </a>
@@ -33,11 +36,14 @@
     <div id="mobile-menu" class="mobile-menu">
       <div class="mobile-menu-header">
         <img src="images/logo.png" alt="Quality Celulares" class="logo" />
-        <button id="menu-close" class="menu-close">
+        <button id="menu-close" class="menu-close" aria-label="Fechar menu">
           <i class="fa-solid fa-xmark"></i>
         </button>
       </div>
-      <input type="text" placeholder="Buscar..." class="search-input" />
+      <div class="search-wrapper-mobile">
+        <input type="text" id="search-input-mobile" placeholder="Buscar..." />
+        <button id="search-button-mobile" aria-label="Buscar"><i class="fa fa-search"></i></button>
+      </div>
       <nav class="mobile-nav">
         <a href="index.html">Início</a>
         <a href="#smartphones">Smartphones</a>
@@ -80,7 +86,7 @@
   <!-- Produtos -->
   <main class="main">
     <h2 id="smartphones">Smartphones</h2>
-    <div class="products">
+    <div id="products" class="products">
       <div class="product-card">
         <img src="images/pocox7pro.png" alt="Poco X7 Pro" />
         <h3>Poco X7 Pro</h3>
@@ -96,6 +102,7 @@
         </a>
       </div>
     </div>
+    <p id="no-results" class="em-breve" style="display:none;">Nenhum produto encontrado.</p>
 
     <h2 id="acessorios">Acessórios</h2>
     <p class="em-breve">Em breve...</p>
@@ -136,6 +143,54 @@
     document.getElementById("menu-close").onclick = () => {
       document.getElementById("mobile-menu").style.transform = "translateX(-100%)";
     };
+
+    // Função para filtrar produtos pela busca
+    function filterProducts(query) {
+      const products = document.querySelectorAll("#products .product-card");
+      let found = false;
+      products.forEach(product => {
+        const title = product.querySelector("h3").textContent.toLowerCase();
+        if (title.includes(query.toLowerCase())) {
+          product.style.display = "block";
+          found = true;
+        } else {
+          product.style.display = "none";
+        }
+      });
+      document.getElementById("no-results").style.display = found ? "none" : "block";
+    }
+
+    // Busca desktop
+    const searchInput = document.getElementById("search-input");
+    const searchButton = document.getElementById("search-button");
+    searchButton.addEventListener("click", () => {
+      filterProducts(searchInput.value.trim());
+    });
+    searchInput.addEventListener("keyup", (e) => {
+      if(e.key === "Enter"){
+        filterProducts(searchInput.value.trim());
+      }
+      if(searchInput.value.trim() === ""){
+        filterProducts(""); // reseta busca
+        document.getElementById("no-results").style.display = "none";
+      }
+    });
+
+    // Busca mobile
+    const searchInputMobile = document.getElementById("search-input-mobile");
+    const searchButtonMobile = document.getElementById("search-button-mobile");
+    searchButtonMobile.addEventListener("click", () => {
+      filterProducts(searchInputMobile.value.trim());
+    });
+    searchInputMobile.addEventListener("keyup", (e) => {
+      if(e.key === "Enter"){
+        filterProducts(searchInputMobile.value.trim());
+      }
+      if(searchInputMobile.value.trim() === ""){
+        filterProducts("");
+        document.getElementById("no-results").style.display = "none";
+      }
+    });
   </script>
 
 </body>
