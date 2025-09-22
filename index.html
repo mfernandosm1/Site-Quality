@@ -4,11 +4,75 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Quality Celulares</title>
-  <link rel="stylesheet" href="css/style.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
   <style>
-    /* Estilo para os ícones de redes sociais no rodapé */
+    /* Reset básico e fonte */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      background: #fff;
+      color: #222;
+    }
+
+    /* Container produtos */
+    .products {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      justify-content: center;
+      padding: 20px 10px;
+    }
+
+    .product-card {
+      flex: 1 1 300px; /* largura base desktop */
+      max-width: 300px;
+      box-sizing: border-box;
+      text-align: center;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      padding: 16px;
+      background: #fafafa;
+      transition: box-shadow 0.2s ease;
+    }
+
+    .product-card:hover {
+      box-shadow: 0 0 10px rgba(0,0,0,0.15);
+    }
+
+    .product-card img {
+      width: 100%;
+      height: auto;
+      max-height: 250px;
+      object-fit: contain;
+      margin-bottom: 10px;
+    }
+
+    .product-card h3 {
+      font-size: 18px;
+      margin-bottom: 10px;
+    }
+
+    .product-card .btn-whatsapp {
+      font-size: 14px;
+      padding: 8px 12px;
+      width: 100%;
+      justify-content: center;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background-color: #25d366;
+      color: white;
+      border-radius: 4px;
+      text-decoration: none;
+      transition: background-color 0.3s ease;
+    }
+
+    .product-card .btn-whatsapp:hover {
+      background-color: #128c4a;
+    }
+
+    /* Ícones redes sociais rodapé */
     .footer-socials {
       display: flex;
       justify-content: center;
@@ -20,10 +84,51 @@
       color: white;
       font-size: 32px; /* tamanho maior */
       transition: color 0.3s ease;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
     }
 
     .footer-socials a:hover {
       color: #c90000; /* vermelho da marca */
+    }
+
+    /* Rodapé */
+    .footer {
+      background-color: #222;
+      color: white;
+      padding: 30px 10px;
+      text-align: center;
+    }
+
+    .footer-links a {
+      color: white;
+      margin: 0 15px;
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.3s ease;
+    }
+
+    .footer-links a:hover {
+      color: #c90000;
+    }
+
+    .footer-copy {
+      font-size: 14px;
+      margin-top: 15px;
+      line-height: 1.4;
+    }
+
+    /* Mobile */
+    @media (max-width: 767px) {
+      .product-card {
+        flex: 1 1 45%; /* 2 cards por linha no mobile */
+        max-width: 45%;
+      }
+
+      .product-card img {
+        max-height: 180px;
+      }
     }
   </style>
 </head>
@@ -52,7 +157,7 @@
       </button>
     </div>
 
-    <div id="mobile-menu" class="mobile-menu">
+    <div id="mobile-menu" class="mobile-menu" style="transform: translateX(-100%); transition: transform 0.3s ease;">
       <div class="mobile-menu-header">
         <img src="images/logo.png" alt="Quality Celulares" class="logo" />
         <button id="menu-close" class="menu-close" aria-label="Fechar menu">
@@ -104,27 +209,27 @@
 
   <!-- Produtos -->
   <main class="main">
-    <h2 id="smartphones">Smartphones</h2>
+    <h2 id="smartphones" style="text-align:center; margin-top: 40px;">Smartphones</h2>
     <div id="products" class="products">
       <div class="product-card">
         <img src="images/pocox7pro.png" alt="Poco X7 Pro" />
         <h3>Poco X7 Pro</h3>
-        <a href="https://wa.me/5555991407824?text=Olá%20vim%20através%20do%20site" class="btn-whatsapp">
+        <a href="https://wa.me/5555991407824?text=Olá%20vim%20através%20do%20site" class="btn-whatsapp" target="_blank" rel="noopener noreferrer">
           <i class="fa-brands fa-whatsapp"></i> Comprar no WhatsApp
         </a>
       </div>
       <div class="product-card">
         <img src="images/redmi14c.png" alt="Redmi 14C" />
         <h3>Redmi 14C</h3>
-        <a href="https://wa.me/5555991407824?text=Olá%20vim%20através%20do%20site" class="btn-whatsapp">
+        <a href="https://wa.me/5555991407824?text=Olá%20vim%20através%20do%20site" class="btn-whatsapp" target="_blank" rel="noopener noreferrer">
           <i class="fa-brands fa-whatsapp"></i> Comprar no WhatsApp
         </a>
       </div>
     </div>
-    <p id="no-results" class="em-breve" style="display:none;">Nenhum produto encontrado.</p>
+    <p id="no-results" class="em-breve" style="display:none; text-align:center; margin-top:20px;">Nenhum produto encontrado.</p>
 
-    <h2 id="acessorios">Acessórios</h2>
-    <p class="em-breve">Em breve...</p>
+    <h2 id="acessorios" style="text-align:center; margin-top: 60px;">Acessórios</h2>
+    <p class="em-breve" style="text-align:center;">Em breve...</p>
   </main>
 
   <!-- Rodapé -->
@@ -175,7 +280,6 @@
       document.getElementById("mobile-menu").style.transform = "translateX(-100%)";
     };
 
-    // Função para filtrar produtos pela busca e retornar o primeiro produto encontrado (ou null)
     function filterProducts(query) {
       const products = document.querySelectorAll("#products .product-card");
       let found = false;
@@ -208,7 +312,7 @@
         filterProducts(searchInput.value.trim());
       }
       if(searchInput.value.trim() === ""){
-        filterProducts(""); // reseta busca
+        filterProducts("");
         document.getElementById("no-results").style.display = "none";
       }
     });
