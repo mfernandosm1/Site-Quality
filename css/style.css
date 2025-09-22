@@ -154,17 +154,18 @@ body {
 
 .products {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 24px;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); /* menor no desktop */
+  gap: 20px;
 }
 
 .product-card {
   border: 1px solid #ddd;
   border-radius: 6px;
-  padding: 16px;
+  padding: 12px; /* menor padding */
   text-align: center;
   transition: box-shadow 0.2s ease;
   background: #fafafa;
+  font-size: 14px;
 }
 
 .product-card:hover {
@@ -174,12 +175,12 @@ body {
 .product-card img {
   max-width: 100%;
   height: auto;
-  margin-bottom: 10px;
+  margin-bottom: 6px;
 }
 
 .product-card h3 {
-  font-size: 18px;
-  margin-bottom: 10px;
+  font-size: 16px;
+  margin-bottom: 8px;
 }
 
 .product-card .btn-whatsapp {
@@ -208,11 +209,14 @@ body {
 .footer-links,
 .footer-socials {
   margin-bottom: 10px;
+  justify-content: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
 }
 
 .footer-links a {
   color: white;
-  margin: 0 10px;
   text-decoration: none;
 }
 
@@ -221,7 +225,6 @@ body {
 }
 
 .footer-socials i {
-  margin: 0 8px;
   font-size: 20px;
   cursor: pointer;
 }
@@ -233,6 +236,6 @@ body {
   }
 
   .products {
-    flex-direction: column;
+    grid-template-columns: 1fr;
   }
 }
