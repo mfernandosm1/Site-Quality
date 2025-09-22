@@ -144,20 +144,26 @@
       document.getElementById("mobile-menu").style.transform = "translateX(-100%)";
     };
 
-    // Função para filtrar produtos pela busca
+    // Função para filtrar produtos pela busca e retornar o primeiro produto encontrado (ou null)
     function filterProducts(query) {
       const products = document.querySelectorAll("#products .product-card");
       let found = false;
+      let firstFoundProduct = null;
+
       products.forEach(product => {
         const title = product.querySelector("h3").textContent.toLowerCase();
         if (title.includes(query.toLowerCase())) {
-          product.style.display = "block";
+          product.style.display = "";
+          if (!firstFoundProduct) firstFoundProduct = product;
           found = true;
         } else {
           product.style.display = "none";
         }
       });
+
       document.getElementById("no-results").style.display = found ? "none" : "block";
+
+      return firstFoundProduct;
     }
 
     // Busca desktop
@@ -179,12 +185,28 @@
     // Busca mobile
     const searchInputMobile = document.getElementById("search-input-mobile");
     const searchButtonMobile = document.getElementById("search-button-mobile");
+
     searchButtonMobile.addEventListener("click", () => {
-      filterProducts(searchInputMobile.value.trim());
+      const firstProduct = filterProducts(searchInputMobile.value.trim());
+      document.getElementById("mobile-menu").style.transform = "translateX(-100%)";
+
+      if(firstProduct) {
+        firstProduct.scrollIntoView({ behavior: "smooth", block: "start" });
+      } else {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
     });
+
     searchInputMobile.addEventListener("keyup", (e) => {
       if(e.key === "Enter"){
-        filterProducts(searchInputMobile.value.trim());
+        const firstProduct = filterProducts(searchInputMobile.value.trim());
+        document.getElementById("mobile-menu").style.transform = "translateX(-100%)";
+
+        if(firstProduct) {
+          firstProduct.scrollIntoView({ behavior: "smooth", block: "start" });
+        } else {
+          window.scrollTo({ top: 0, behavior: "smooth" });
+        }
       }
       if(searchInputMobile.value.trim() === ""){
         filterProducts("");
