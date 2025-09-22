@@ -53,9 +53,24 @@
   <section class="banner">
     <div class="swiper">
       <div class="swiper-wrapper">
-        <div class="swiper-slide"><img src="images/banner1.png" alt="Banner 1" class="banner-img" /></div>
-        <div class="swiper-slide"><img src="images/banner2.png" alt="Banner 2" class="banner-img" /></div>
-        <div class="swiper-slide"><img src="images/banner3.png" alt="Banner 3" class="banner-img" /></div>
+        <div class="swiper-slide">
+          <picture>
+            <source media="(max-width: 767px)" srcset="images/banner1-mobile.png" />
+            <img src="images/banner1.png" alt="Banner 1" class="banner-img" />
+          </picture>
+        </div>
+        <div class="swiper-slide">
+          <picture>
+            <source media="(max-width: 767px)" srcset="images/banner2-mobile.png" />
+            <img src="images/banner2.png" alt="Banner 2" class="banner-img" />
+          </picture>
+        </div>
+        <div class="swiper-slide">
+          <picture>
+            <source media="(max-width: 767px)" srcset="images/banner3-mobile.png" />
+            <img src="images/banner3.png" alt="Banner 3" class="banner-img" />
+          </picture>
+        </div>
       </div>
       <div class="swiper-button-next"></div>
       <div class="swiper-button-prev"></div>
