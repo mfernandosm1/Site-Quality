@@ -32,7 +32,7 @@ body {
 }
 
 .logo {
-  height: 8px;
+  height: 40px;
 }
 
 .nav-desktop {
@@ -133,4 +133,87 @@ body {
 .main {
   max-width: 1200px;
   margin: 0 auto;
-  padding
+  padding: 2rem 1rem;
+}
+
+.main h2 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.products {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .products {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .products {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.product-card {
+  background-color: #fff;
+  border-radius: 1rem;
+  padding: 1rem;
+  text-align: center;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.product-card img {
+  height: 160px;
+  object-fit: contain;
+  margin: 0 auto;
+}
+
+.product-card h3 {
+  margin-top: 0.75rem;
+  font-weight: bold;
+}
+
+/* Em breve */
+.em-breve {
+  text-align: center;
+  color: #6b7280;
+  margin-top: 2rem;
+}
+
+/* Footer */
+.footer {
+  background-color: #111827;
+  color: #d1d5db;
+  padding: 2rem 1rem;
+  text-align: center;
+}
+
+.footer-links a {
+  color: white;
+  text-decoration: none;
+  margin: 0 0.5rem;
+}
+
+.footer-links a:hover {
+  text-decoration: underline;
+}
+
+.footer-socials {
+  margin: 1rem 0;
+  font-size: 1.5rem;
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+}
+
+.footer-copy {
+  font-size: 0.875rem;
+  color: #9ca3af;
+}
