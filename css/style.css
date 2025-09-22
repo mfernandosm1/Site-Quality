@@ -15,7 +15,7 @@ body {
 
 /* Header */
 .header {
-  background-color: #007bff;
+  background-color: #c90000; /* vermelho */
   color: #fff;
   padding: 15px 20px;
   position: sticky;
@@ -90,7 +90,7 @@ body {
   position: fixed;
   top: 0;
   left: 0;
-  background-color: #007bff;
+  background-color: #c90000; /* vermelho */
   width: 250px;
   height: 100vh;
   transform: translateX(-100%);
@@ -200,7 +200,7 @@ body {
 
 /* Rodapé */
 .footer {
-  background-color: #007bff;
+  background-color: #000; /* preto */
   color: white;
   padding: 20px;
   text-align: center;
