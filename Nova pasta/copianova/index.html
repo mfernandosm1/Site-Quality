@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Quality Celulares</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="header">
+    <div class="header-container">
+      <a href="index.html">
+        <img src="images/logo.png" alt="Quality Celulares" class="logo" />
+      </a>
+      <nav class="nav-desktop">
+        <a href="index.html">Início</a>
+        <a href="#smartphones">Smartphones</a>
+        <a href="#acessorios">Acessórios</a>
+        <div class="search-wrapper">
+          <input type="text" id="search-input" placeholder="Buscar..." />
+          <button id="search-button" aria-label="Buscar"><i class="fa fa-search"></i></button>
+        </div>
+        <a href="https://wa.me/5555991407824?text=Olá%20vim%20através%20do%20site" class="btn-whatsapp">
+          <i class="fa-brands fa-whatsapp"></i> WhatsApp
+        </a>
+      </nav>
+      <button id="menu-toggle" class="menu-toggle">
+        <i class="fa-solid fa-bars"></i>
+      </button>
+    </div>
+
+    <div id="mobile-menu" class="mobile-menu">
+      <div class="mobile-menu-header">
+        <img src="images/logo.png" alt="Quality Celulares" class="logo" />
+        <button id="menu-close" class="menu-close" aria-label="Fechar menu">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+      <div class="search-wrapper-mobile">
+        <input type="text" id="search-input-mobile" placeholder="Buscar..." />
+        <button id="search-button-mobile" aria-label="Buscar"><i class="fa fa-search"></i></button>
+      </div>
+      <nav class="mobile-nav">
+        <a href="index.html">Início</a>
+        <a href="#smartphones">Smartphones</a>
+        <a href="#acessorios">Acessórios</a>
+        <a href="https://wa.me/5555991407824?text=Olá%20vim%20através%20do%20site" class="btn-whatsapp">
+          <i class="fa-brands fa-whatsapp"></i> WhatsApp
+        </a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Banner -->
+  <section class="banner">
+    <div class="swiper">
+      <div class="swiper-wrapper">
+        <div class="swiper-slide">
+          <picture>
+            <source media="(max-width: 767px)" srcset="images/banner1-mobile.png" />
+            <img src="images/banner1.png" alt="Banner 1" class="banner-img" />
+          </picture>
+        </div>
+        <div class="swiper-slide">
+          <picture>
+            <source media="(max-width: 767px)" srcset="images/banner2-mobile.png" />
+            <img src="images/banner2.png" alt="Banner 2" class="banner-img" />
+          </picture>
+        </div>
+        <div class="swiper-slide">
+          <picture>
+            <source media="(max-width: 767px)" srcset="images/banner3-mobile.png" />
+            <img src="images/banner3.png" alt="Banner 3" class="banner-img" />
+          </picture>
+        </div>
+      </div>
+      <div class="swiper-button-next"></div>
+      <div class="swiper-button-prev"></div>
+    </div>
+  </section>
+
+  <!-- Produtos -->
+  <main class="main">
+    <h2 id="smartphones">Smartphones</h2>
+    <div id="products" class="products">
+      <div class="product-card">
+        <img src="images/pocox7pro.png" alt="Poco X7 Pro" />
+        <h3>Poco X7 Pro</h3>
+        <a href="https://wa.me/5555991407824?text=Olá%20vim%20através%20do%20site" class="btn-whatsapp">
+          <i class="fa-brands fa-whatsapp"></i> Comprar no WhatsApp
+        </a>
+      </div>
+      <div class="product-card">
+        <img src="images/redmi14c.png" alt="Redmi 14C" />
+        <h3>Redmi 14C</h3>
+        <a href="https://wa.me/5555991407824?text=Olá%20vim%20através%20do%20site" class="btn-whatsapp">
+          <i class="fa-brands fa-whatsapp"></i> Comprar no WhatsApp
+        </a>
+      </div>
+    </div>
+    <p id="no-results" class="em-breve" style="display:none;">Nenhum produto encontrado.</p>
+
+    <h2 id="acessorios">Acessórios</h2>
+    <p class="em-breve">Em breve...</p>
+  </main>
+
+  <!-- Rodapé -->
+  <footer class="footer">
+    <div class="footer-links">
+      <a href="sobre.html">Sobre nós</a>
+      <a href="formas-de-pagamento.html">Formas de pagamento e envio</a>
+    </div>
+    <div class="footer-socials">
+      <i class="fa-brands fa-facebook"></i>
+      <i class="fa-brands fa-instagram"></i>
+      <i class="fa-brands fa-twitter"></i>
+      <i class="fa-brands fa-whatsapp"></i>
+    </div>
+    <div class="footer-copy">
+      © 2025 Quality Celulares. Todos os direitos reservados. <br />
+      CNPJ: 20.375.910/0001-66
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+  <script>
+    const swiper = new Swiper('.swiper', {
+      loop: true,
+      navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev'
+      }
+    });
+
+    document.getElementById("menu-toggle").onclick = () => {
+      document.getElementById("mobile-menu").style.transform = "translateX(0)";
+    };
+    document.getElementById("menu-close").onclick = () => {
+      document.getElementById("mobile-menu").style.transform = "translateX(-100%)";
+    };
+
+    // Função para filtrar produtos pela busca e retornar o primeiro produto encontrado (ou null)
+    function filterProducts(query) {
+      const products = document.querySelectorAll("#products .product-card");
+      let found = false;
+      let firstFoundProduct = null;
+
+      products.forEach(product => {
+        const title = product.querySelector("h3").textContent.toLowerCase();
+        if (title.includes(query.toLowerCase())) {
+          product.style.display = "";
+          if (!firstFoundProduct) firstFoundProduct = product;
+          found = true;
+        } else {
+          product.style.display = "none";
+        }
+      });
+
+      document.getElementById("no-results").style.display = found ? "none" : "block";
+
+      return firstFoundProduct;
+    }
+
+    // Busca desktop
+    const searchInput = document.getElementById("search-input");
+    const searchButton = document.getElementById("search-button");
+    searchButton.addEventListener("click", () => {
+      filterProducts(searchInput.value.trim());
+    });
+    searchInput.addEventListener("keyup", (e) => {
+      if(e.key === "Enter"){
+        filterProducts(searchInput.value.trim());
+      }
+      if(searchInput.value.trim() === ""){
+        filterProducts(""); // reseta busca
+        document.getElementById("no-results").style.display = "none";
+      }
+    });
+
+    // Busca mobile
+    const searchInputMobile = document.getElementById("search-input-mobile");
+    const searchButtonMobile = document.getElementById("search-button-mobile");
+
+    searchButtonMobile.addEventListener("click", () => {
+      const firstProduct = filterProducts(searchInputMobile.value.trim());
+      document.getElementById("mobile-menu").style.transform = "translateX(-100%)";
+
+      if(firstProduct) {
+        firstProduct.scrollIntoView({ behavior: "smooth", block: "start" });
+      } else {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
+    });
+
+    searchInputMobile.addEventListener("keyup", (e) => {
+      if(e.key === "Enter"){
+        const firstProduct = filterProducts(searchInputMobile.value.trim());
+        document.getElementById("mobile-menu").style.transform = "translateX(-100%)";
+
+        if(firstProduct) {
+          firstProduct.scrollIntoView({ behavior: "smooth", block: "start" });
+        } else {
+          window.scrollTo({ top: 0, behavior: "smooth" });
+        }
+      }
+      if(searchInputMobile.value.trim() === ""){
+        filterProducts("");
+        document.getElementById("no-results").style.display = "none";
+      }
+    });
+  </script>
+
+</body>
+</html>
