@@ -172,7 +172,7 @@ body {
 }
 
 .product-card img {
-  max-width: 100%;
+  max-width: 60%;
   height: auto;
   margin-bottom: 10px;
 }
