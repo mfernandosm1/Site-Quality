@@ -19,26 +19,25 @@
     }
 
     /* -------------------
-       Logo
+       Logo com fundo branco
     --------------------*/
-    .logo {
+    .logo-wrapper {
+      background: white;
+      padding: 8px 12px;
+      border-radius: 12px;
+      display: inline-block;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    }
+
+    .logo-wrapper img {
       max-height: 90px;
       width: auto;
       display: block;
-      /* sombra branca intensa */
-      filter: drop-shadow(0 0 3px white)
-              drop-shadow(0 0 3px white)
-              drop-shadow(0 0 3px white)
-              drop-shadow(0 0 3px white);
     }
 
     @media (max-width: 767px) {
-      .logo {
+      .logo-wrapper img {
         max-height: 80px;
-        filter: drop-shadow(0 0 3px white)
-                drop-shadow(0 0 3px white)
-                drop-shadow(0 0 3px white)
-                drop-shadow(0 0 3px white);
       }
     }
 
@@ -260,7 +259,6 @@
       background-color: #128c4a;
     }
 
-    /* Mensagem nenhum produto */
     .em-breve {
       color: #999;
       font-style: italic;
@@ -334,7 +332,7 @@
   <!-- Header -->
   <header class="header">
     <div class="header-container">
-      <a href="index.html">
+      <a href="index.html" class="logo-wrapper">
         <img src="images/logo.png" alt="Quality Celulares" class="logo" />
       </a>
       <nav class="nav-desktop">
@@ -356,7 +354,9 @@
 
     <div id="mobile-menu" class="mobile-menu" aria-hidden="true">
       <div class="mobile-menu-header">
-        <img src="images/logo.png" alt="Quality Celulares" class="logo" />
+        <div class="logo-wrapper">
+          <img src="images/logo.png" alt="Quality Celulares" class="logo" />
+        </div>
         <button id="menu-close" class="menu-close" aria-label="Fechar menu">
           <i class="fa-solid fa-xmark"></i>
         </button>
@@ -461,6 +461,7 @@
       autoplay: { delay: 5000, disableOnInteraction: false },
     });
 
+    // Menu open/close + fechar ao clicar em link
     const menuToggle = document.getElementById("menu-toggle");
     const menuClose = document.getElementById("menu-close");
     const mobileMenu = document.getElementById("mobile-menu");
@@ -475,6 +476,7 @@
       mobileMenu.setAttribute("aria-hidden", "true");
     });
 
+    // Fechar ao clicar em qualquer link dentro do menu mobile
     document.querySelectorAll('#mobile-menu .mobile-nav a').forEach(link => {
       link.addEventListener('click', () => {
         mobileMenu.style.transform = "translateX(-100%)";
