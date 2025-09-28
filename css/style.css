@@ -90,7 +90,9 @@ body {
   color: #fff;
 }
 
-/* Mobile menu */
+/* -------------------
+   Mobile menu
+--------------------*/
 .mobile-menu {
   position: fixed;
   top: 0;
@@ -165,6 +167,16 @@ body {
   display: block;
 }
 
+/* Ajuste para mobile: evita distorção */
+@media (max-width: 767px) {
+  .banner-img {
+    object-fit: contain; /* mantém proporção da imagem */
+    max-height: 250px;   /* altura ajustada para mobile */
+    width: 100%;
+    height: auto;
+  }
+}
+
 /* -------------------
    Produtos
 --------------------*/
@@ -186,6 +198,9 @@ body {
   padding: 16px;
   background: #fafafa;
   transition: box-shadow 0.2s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .product-card:hover {
@@ -195,7 +210,7 @@ body {
 .product-card img {
   width: 100%;
   height: auto;
-  max-height: 320px; /* aumentei de 250px para 320px */
+  max-height: 320px; /* altura dos produtos aumentada */
   object-fit: contain;
   margin-bottom: 10px;
 }
