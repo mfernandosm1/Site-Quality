@@ -223,7 +223,7 @@ body {
    Produtos
 --------------------*/
 
-.products {
+#products {
   display: flex;
   flex-wrap: wrap;
   gap: 20px;
@@ -241,11 +241,7 @@ body {
   padding: 16px;
   background: #fafafa;
   transition: box-shadow 0.2s ease;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between; /* garante que o botão fique dentro */
 }
-
 
 .product-card:hover {
   box-shadow: 0 0 10px rgba(0,0,0,0.15);
@@ -265,20 +261,21 @@ body {
 }
 
 .product-card .btn-whatsapp {
+  display: block;       /* Corrige largura do botão */
+  width: 100%;          /* Ocupa toda largura do card */
+  box-sizing: border-box;
+  text-align: center;   /* Centraliza conteúdo */
+  padding: 10px 0;      /* Padding vertical */
   font-size: 14px;
-  padding: 8px 12px;
-  width: 100%; /* ocupa 100% do card */
-  max-width: 100%; /* garante não extrapolar */
-  box-sizing: border-box; /* inclui padding na largura */
-  display: flex;
-  justify-content: center; /* centraliza ícone e texto */
-  align-items: center;
-  gap: 8px;
   background-color: #25d366;
   color: white !important;
   border-radius: 4px;
   text-decoration: none;
   transition: background-color 0.3s ease;
+}
+
+.product-card .btn-whatsapp i {
+  margin-right: 6px;    /* Espaço entre ícone e texto */
 }
 
 .product-card .btn-whatsapp:hover {
