@@ -13,7 +13,7 @@ body {
    Logo
 --------------------*/
 .logo {
-  max-height: 70px;
+  max-height: 90px;
   width: auto;
   display: block;
   filter: drop-shadow(0 0 6px rgba(0,0,0,0.45)); /* sombra mais forte */
@@ -21,7 +21,7 @@ body {
 
 @media (max-width: 767px) {
   .logo {
-    max-height: 60px;
+    max-height: 80px;
     filter: drop-shadow(0 0 5px rgba(0,0,0,0.4)); /* ajuste proporcional no mobile */
   }
 }
