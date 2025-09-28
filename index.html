@@ -26,6 +26,7 @@
       width: auto;
       display: block;
     }
+
     @media (max-width: 767px) {
       .logo {
         max-height: 40px;
@@ -98,7 +99,9 @@
       color: #fff;
     }
 
-    /* Mobile menu */
+    /* -------------------
+       Mobile menu
+    --------------------*/
     .mobile-menu {
       position: fixed;
       top: 0;
@@ -173,6 +176,16 @@
       display: block;
     }
 
+    /* Ajuste para mobile: evita distorção */
+    @media (max-width: 767px) {
+      .banner-img {
+        object-fit: contain; /* mantém proporção */
+        max-height: 250px;   /* altura ajustada para mobile */
+        width: 100%;
+        height: auto;
+      }
+    }
+
     /* -------------------
        Produtos
     --------------------*/
@@ -206,7 +219,7 @@
     .product-card img {
       width: 100%;
       height: auto;
-      max-height: 320px; /* aumento para desktop */
+      max-height: 320px; /* altura dos produtos aumentada */
       object-fit: contain;
       margin-bottom: 10px;
     }
@@ -233,6 +246,13 @@
 
     .product-card .btn-whatsapp:hover {
       background-color: #128c4a;
+    }
+
+    /* Mensagem nenhum produto */
+    .em-breve {
+      color: #999;
+      font-style: italic;
+      font-size: 16px;
     }
 
     /* -------------------
@@ -284,26 +304,16 @@
     }
 
     /* -------------------
-       Responsividade Mobile
+       Responsividade
     --------------------*/
     @media (max-width: 767px) {
-      .banner .swiper {
-        max-height: 250px; /* altura fixa para mobile */
-      }
-
-      .banner-img {
-        width: 100%;
-        height: 250px; /* altura fixa */
-        object-fit: cover; /* mantém proporção sem distorcer */
-      }
-
       .product-card {
         flex: 1 1 45%;
         max-width: 45%;
       }
 
       .product-card img {
-        max-height: 220px;
+        max-height: 220px; /* ajuste proporcional para mobile */
       }
     }
   </style>
