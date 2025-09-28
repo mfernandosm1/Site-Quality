@@ -25,20 +25,26 @@
       max-height: 90px;
       width: auto;
       display: block;
-      filter: drop-shadow(0 2px 4px rgba(255,255,255,0.8)); /* sombra mais forte */
+      /* sombra branca intensa */
+      filter: drop-shadow(0 0 3px white)
+              drop-shadow(0 0 3px white)
+              drop-shadow(0 0 3px white)
+              drop-shadow(0 0 3px white);
     }
 
     @media (max-width: 767px) {
       .logo {
         max-height: 80px;
-        filter: drop-shadow(0 2px 4px rgba(255,255,255,0.8)); /* ajuste proporcional no mobile */
+        filter: drop-shadow(0 0 3px white)
+                drop-shadow(0 0 3px white)
+                drop-shadow(0 0 3px white)
+                drop-shadow(0 0 3px white);
       }
     }
 
     /* -------------------
        Header e Navegação
     --------------------*/
-    /* troquei background-color por gradiente para igualar o outro arquivo */
     .header {
       background: linear-gradient(90deg, #dc2626 0%, #ef4444 100%);
       position: fixed;
@@ -183,11 +189,10 @@
       display: block;
     }
 
-    /* Ajuste para mobile: evita distorção */
     @media (max-width: 767px) {
       .banner-img {
-        object-fit: contain; /* mantém proporção */
-        max-height: 250px;   /* altura ajustada para mobile */
+        object-fit: contain;
+        max-height: 250px;
         width: 100%;
         height: auto;
       }
@@ -226,7 +231,7 @@
     .product-card img {
       width: 100%;
       height: auto;
-      max-height: 320px; /* altura dos produtos aumentada */
+      max-height: 320px;
       object-fit: contain;
       margin-bottom: 10px;
     }
@@ -320,7 +325,7 @@
       }
 
       .product-card img {
-        max-height: 220px; /* ajuste proporcional para mobile */
+        max-height: 220px;
       }
     }
   </style>
@@ -456,24 +461,20 @@
       autoplay: { delay: 5000, disableOnInteraction: false },
     });
 
-    // Menu open/close + fechar ao clicar em link (correção aplicada)
     const menuToggle = document.getElementById("menu-toggle");
     const menuClose = document.getElementById("menu-close");
     const mobileMenu = document.getElementById("mobile-menu");
 
     menuToggle?.addEventListener("click", () => {
-      // abrir
       mobileMenu.style.transform = "translateX(0)";
       mobileMenu.setAttribute("aria-hidden", "false");
     });
 
     menuClose?.addEventListener("click", () => {
-      // fechar
       mobileMenu.style.transform = "translateX(-100%)";
       mobileMenu.setAttribute("aria-hidden", "true");
     });
 
-    // fechar ao clicar em qualquer link dentro do menu mobile
     document.querySelectorAll('#mobile-menu .mobile-nav a').forEach(link => {
       link.addEventListener('click', () => {
         mobileMenu.style.transform = "translateX(-100%)";

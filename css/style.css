@@ -16,13 +16,20 @@ body {
   max-height: 90px;
   width: auto;
   display: block;
-  filter: drop-shadow(0 2px 4px rgba(255,255,255,0.8)); /* sombra mais forte */
+  /* sombra branca intensa */
+  filter: drop-shadow(0 0 3px white)
+          drop-shadow(0 0 3px white)
+          drop-shadow(0 0 3px white)
+          drop-shadow(0 0 3px white);
 }
 
 @media (max-width: 767px) {
   .logo {
     max-height: 80px;
-    filter: drop-shadow(0 2px 4px rgba(255,255,255,0.8)); /* ajuste proporcional no mobile */
+    filter: drop-shadow(0 0 3px white)
+            drop-shadow(0 0 3px white)
+            drop-shadow(0 0 3px white)
+            drop-shadow(0 0 3px white);
   }
 }
 
