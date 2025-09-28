@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Quality Celulares</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+  <style>
+    /* ========== Logo ========== */
+    .logo {
+      max-height: 50px;
+      width: auto;
+      display: block;
+    }
+    @media (max-width: 767px) {
+      .logo {
+        max-height: 40px;
+      }
+    }
+
+    /* ========== Reset e Body ========== */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      background: #fff;
+      color: #222;
+      padding-top: 80px; /* espaço para header fixo */
+    }
+
+    /* ========== Header ========== */
+    .header {
+      background-color: #c90000;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 1000;
+      padding: 10px 20px;
+      box-sizing: border-box;
+    }
+    .header-container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .nav-desktop {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+    .nav-desktop a {
+      color: #fff;
+      text-decoration: none;
+      font-weight: 500;
+    }
+    .nav-desktop a:hover {
+      text-decoration: underline;
+    }
+    .search-wrapper {
+      display: flex;
+      align-items: center;
+      background: #fff;
+      border-radius: 4px;
+      overflow: hidden;
+    }
+    .search-wrapper input {
+      border: none;
+      padding: 6px 8px;
+      outline: none;
+    }
+    .search-wrapper button {
+      background: #c90000;
+      color: #fff;
+      border: none;
+      padding: 6px 10px;
+      cursor: pointer;
+    }
+    .menu-toggle {
+      display: none;
+      background: none;
+      border: none;
+      font-size: 24px;
+      color: #fff;
+    }
+
+    /* ========== Mobile Menu ========== */
+    .mobile-menu {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 80%;
+      max-width: 300px;
+      height: 100%;
+      background: #fff;
+      z-index: 2000;
+      box-shadow: 2px 0 6px rgba(0,0,0,0.2);
+      padding: 20px;
+      transform: translateX(-100%);
+      transition: transform 0.3s ease;
+    }
+    .mobile-menu-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .mobile-nav {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      margin-top: 20px;
+    }
+    .mobile-nav a {
+      color: #222;
+      text-decoration: none;
+      font-weight: 500;
+    }
+    .mobile-nav a:hover {
+      color: #c90000;
+    }
+    .menu-close {
+      background: none;
+      border: none;
+      font-size: 24px;
+      color: #222;
+    }
+    @media (max-width: 991px) {
+      .nav-desktop {
+        display: none;
+      }
+      .menu-toggle {
+        display: block;
+      }
+    }
+
+    /* ========== Banner ========== */
+    .banner {
+      margin-top: 0;
+    }
+    .banner .swiper {
+      width: 100%;
+      max-height: 400px;
+      overflow: hidden;
+    }
+    .banner-img {
+      width: 100%;
+      height: auto;
+      object-fit: cover;
+      display: block;
+    }
+
+    /* ========== Produtos ========== */
+    .products {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      justify-content: center;
+      padding: 20px 10px;
+    }
+
+    .product-card {
+      flex: 1 1 300px;
+      max-width: 300px;
+      box-sizing: border-box;
+      text-align: center;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      padding: 16px;
+      background: #fafafa;
+      transition: box-shadow 0.2s ease;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .product-card:hover {
+      box-shadow: 0 0 10px rgba(0,0,0,0.15);
+    }
+    .product-card img {
+      width: 100%;
+      height: auto;
+      max-height: 250px;
+      object-fit: contain;
+      margin-bottom: 10px;
+    }
+    .product-card h3 {
+      font-size: 18px;
+      margin-bottom: 10px;
+    }
+    .product-card .btn-whatsapp {
+      font-size: 14px;
+      padding: 8px 12px;
+      width: 100%;
+      max-width: 100%;
+      box-sizing: border-box;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 8px;
+      background-color: #25d366;
+      color: white;
+      border-radius: 4px;
+      text-decoration: none;
+      transition: background-color 0.3s ease;
+    }
+    .product-card .btn-whatsapp:hover {
+      background-color: #128c4a;
+    }
+
+    /* ========== Rodapé ========== */
+    .footer {
+      background-color: #222;
+      color: white;
+      padding: 30px 10px;
+      text-align: center;
+    }
+    .footer-links a {
+      color: white;
+      margin: 0 15px;
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.3s ease;
+    }
+    .footer-links a:hover {
+      color: #c90000;
+    }
+    .footer-socials {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      margin-bottom: 20px;
+    }
+    .footer-socials a {
+      color: white;
+      font-size: 32px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      transition: color 0.3s ease;
+    }
+    .footer-socials a:hover {
+      color: #c90000;
+    }
+    .footer-copy {
+      font-size: 14px;
+      margin-top: 15px;
+      line-height: 1.4;
+    }
+
+    /* ========== Responsividade ========== */
+    @media (max-width: 767px) {
+      .product-card {
+        flex: 1 1 45%;
+        max-width: 45%;
+      }
+      .product-card img {
+        max-height: 180px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header class="header">
+    <div class="header-container">
+      <a href="index.html">
+        <img src="images/logo.png" alt="Quality Celulares" class="logo" />
+      </a>
+      <nav class="nav-desktop">
+        <a href="index.html">Início</a>
+        <a href="#smartphones">Smartphones</a>
+        <a href="#acessorios">Acessórios</a>
+        <div class="search-wrapper">
+          <input type="text" id="search-input" placeholder="Buscar..." />
+          <button id="search-button" aria-label="Buscar"><i class="fa fa-search"></i></button>
+        </div>
+        <a href="https://wa.me/5555991407824?text=Olá%20vim%20através%20do%20site" class="btn-whatsapp">
+          <i class="fa-brands fa-whatsapp"></i> WhatsApp
+        </a>
+      </nav>
+      <button id="menu-toggle" class="menu-toggle">
+        <i class="fa-solid fa-bars"></i>
+      </button>
+    </div>
+
+    <div id="mobile-menu" class="mobile-menu">
+      <div class="mobile-menu-header">
+        <img src="images/logo.png" alt="Quality Celulares" class="logo" />
+        <button id="menu-close" class="menu-close" aria-label="Fechar menu">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+      <div class="search-wrapper-mobile">
+        <input type="text" id="search-input-mobile" placeholder="Buscar..." />
+        <button id="search-button-mobile" aria-label="Buscar"><i class="fa fa-search"></i></button>
+      </div>
+      <nav class="mobile-nav">
+        <a href="index.html">Início</a>
+        <a href="#smartphones">Smartphones</a>
+        <a href="#acessorios">Acessórios</a>
+        <a href="https://wa.me/5555991407824?text=Olá%20vim%20através%20do%20site" class="btn-whatsapp">
+          <i class="fa-brands fa-whatsapp"></i> WhatsApp
+        </a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Banner -->
+  <section class="banner">
+    <div class="swiper">
+      <div class="swiper-wrapper">
+        <div class="swiper-slide">
+          <picture>
+            <source media="(max-width: 767px)" srcset="images/banner1-mobile.png" />
+            <img src="images/banner1.png" alt="Banner 1" class="banner-img" />
+          </picture>
+        </div>
+        <div class="swiper-slide">
+          <picture>
+            <source media="(max-width: 767px)" srcset="images/banner2-mobile.png" />
+            <img src="images/banner2.png" alt="Banner 2" class="banner-img" />
+          </picture>
+        </div>
+        <div class="swiper-slide">
+          <picture>
+            <source media="(max-width: 767px)" srcset="images/banner3-mobile.png" />
+            <img src="images/banner3.png" alt="Banner 3" class="banner-img" />
+          </picture>
+        </div>
+      </div>
+      <div class="swiper-button-next"></div>
+      <div class="swiper-button-prev"></div>
+    </div>
+  </section>
+
+  <!-- Produtos -->
+  <main class="main">
+    <h2 id="smartphones" style="text-align:center; margin-top: 40px;">Smartphones</h2>
+    <div id="products" class="products">
+      <div class="product-card">
+        <img src="images/pocox7pro.png" alt="Poco X7 Pro" />
+        <h3>Poco X7 Pro</h3>
+        <a href="https://wa.me/5555991407824?text=Olá%20vim%20através%20do%20site" class="btn-whatsapp" target="_blank">
+          <i class="fa-brands fa-whatsapp"></i> Comprar no WhatsApp
+        </a>
+      </div>
+      <div class="product-card">
+        <img src="images/redmi14c.png" alt="Redmi 14C" />
+        <h3>Redmi 14C</h3>
+        <a href="https://wa.me/5555991407824?text=Olá%20vim%20através%20do%20site" class="btn-whatsapp" target="_blank">
+          <i class="fa-brands fa-whatsapp"></i> Comprar no WhatsApp
+        </a>
+      </div>
+    </div>
+    <p id="no-results" class="em-breve" style="display:none; text-align:center; margin-top:20px;">Nenhum produto encontrado.</p>
+
+    <h2 id="acessorios" style="text-align:center; margin-top: 60px;">Acessórios</h2>
+    <p class="em-breve" style="text-align:center;">Em breve...</p>
+  </main>
+
+  <!-- Rodapé -->
+  <footer class="footer">
+    <div class="footer-links">
+      <a href="sobre.html">Sobre nós</a>
+      <a href="formas-de-pagamento.html">Formas de pagamento e envio</a>
+    </div>
+    <div class="footer-socials">
+      <a href="https://www.facebook.com/qualitycelulares" target="_blank">
+        <i class="fa-brands fa-facebook-f"></i>
+      </a>
+      <a href="https://www.instagram.com/qualitycelulares_ibi/" target="_blank">
+        <i class="fa-brands fa-instagram"></i>
+      </a>
+      <a href="https://wa.me/5555991407824" target="_blank">
+        <i class="fa-brands fa-whatsapp"></i>
+      </a>
+    </div>
+    <div class="footer-copy">
+      © 2025 Quality Celulares. Todos os direitos reservados. <br />
+      CNPJ: 20.375.910/0001-66
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+  <script>
+    const swiper = new Swiper('.swiper', {
+      loop: true,
+      navigation: { nextEl: '.swiper-button-next', prevEl: '.swiper-button-prev' },
+      autoplay: { delay: 5000, disableOnInteraction: false },
+    });
+
+    document.getElementById("menu-toggle").onclick = () => {
+      document.getElementById("mobile-menu").style.transform = "translateX(0)";
+    };
+    document.getElementById("menu-close").onclick = () => {
+      document.getElementById("mobile-menu").style.transform = "translateX(-100%)";
+    };
+  </script>
+</body>
+</html>

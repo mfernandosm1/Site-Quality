@@ -1,17 +1,18 @@
 /* -------------------
    Estilos Gerais
 --------------------*/
+
 body {
   font-family: Arial, sans-serif;
   margin: 0;
   background: #fff;
   color: #222;
-  padding-top: 80px; /* espaço para header fixo */
 }
 
 /* -------------------
    Logo
 --------------------*/
+
 .logo {
   max-height: 50px;
   width: auto;
@@ -27,21 +28,21 @@ body {
 /* -------------------
    Header e Navegação
 --------------------*/
+
 .header {
-  background-color: #c90000;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  z-index: 1000;
+  background-color: #c90000; /* vermelho da marca */
   padding: 10px 20px;
-  box-sizing: border-box;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
 }
 
 .header-container {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 .nav-desktop {
@@ -53,55 +54,83 @@ body {
 .nav-desktop a {
   color: #fff;
   text-decoration: none;
-  font-weight: 500;
+  font-weight: 600;
+  padding: 8px 10px;
+  transition: color 0.3s ease;
 }
 
 .nav-desktop a:hover {
-  text-decoration: underline;
+  color: #ffdede;
 }
 
 .search-wrapper {
-  display: flex;
-  align-items: center;
-  background: #fff;
-  border-radius: 4px;
-  overflow: hidden;
+  position: relative;
 }
 
 .search-wrapper input {
-  border: none;
-  padding: 6px 8px;
+  padding: 6px 30px 6px 10px;
+  border-radius: 4px;
+  border: 1px solid #fff;
+  font-size: 14px;
   outline: none;
+  width: 180px;
 }
 
 .search-wrapper button {
-  background: #c90000;
-  color: #fff;
+  position: absolute;
+  right: 4px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: transparent;
   border: none;
-  padding: 6px 10px;
+  color: #fff;
+  font-size: 16px;
   cursor: pointer;
+  padding: 0 6px;
 }
 
+.btn-whatsapp {
+  font-size: 14px;
+  padding: 8px 12px;
+  background-color: #25d366;
+  color: white !important;
+  border-radius: 4px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+}
+
+.btn-whatsapp:hover {
+  background-color: #128c4a;
+}
+
+/* -------------------
+   Mobile Menu
+--------------------*/
+
 .menu-toggle {
-  display: none;
   background: none;
   border: none;
   font-size: 24px;
+  cursor: pointer;
+  display: none; /* escondido no desktop */
   color: #fff;
 }
 
-/* Mobile menu */
 .mobile-menu {
   position: fixed;
   top: 0;
   left: 0;
-  width: 80%;
-  max-width: 300px;
+  width: 260px;
   height: 100%;
-  background: #fff;
-  z-index: 2000;
-  box-shadow: 2px 0 6px rgba(0,0,0,0.2);
+  background-color: #c90000; /* vermelho igual ao header */
+  box-shadow: 2px 0 12px rgba(0,0,0,0.15);
+  z-index: 1500;
   padding: 20px;
+  display: flex;
+  flex-direction: column;
   transform: translateX(-100%);
   transition: transform 0.3s ease;
 }
@@ -110,70 +139,96 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
-}
-
-.mobile-nav {
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-  margin-top: 20px;
-}
-
-.mobile-nav a {
-  color: #222;
-  text-decoration: none;
-  font-weight: 500;
-}
-
-.mobile-nav a:hover {
-  color: #c90000;
+  margin-bottom: 20px;
 }
 
 .menu-close {
   background: none;
   border: none;
   font-size: 24px;
-  color: #222;
+  cursor: pointer;
+  color: #fff;
 }
 
-@media (max-width: 991px) {
-  .nav-desktop {
-    display: none;
-  }
-  .menu-toggle {
-    display: block;
-  }
+.search-wrapper-mobile {
+  display: flex;
+  margin-bottom: 20px;
+}
+
+.search-wrapper-mobile input {
+  flex: 1;
+  padding: 6px 10px;
+  border-radius: 4px 0 0 4px;
+  border: none;
+  font-size: 14px;
+  outline: none;
+}
+
+.search-wrapper-mobile button {
+  padding: 6px 12px;
+  background-color: #fff;
+  border: none;
+  border-radius: 0 4px 4px 0;
+  cursor: pointer;
+  font-size: 16px;
+  color: #c90000;
+}
+
+.mobile-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.mobile-nav a {
+  color: #fff;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 16px;
+  padding: 8px 10px;
+  border-radius: 4px;
+  transition: background-color 0.2s ease;
+}
+
+.mobile-nav a:hover {
+  background-color: rgba(255, 255, 255, 0.15);
+}
+
+.mobile-nav .btn-whatsapp {
+  margin-top: 10px;
+  background-color: #25d366;
 }
 
 /* -------------------
    Banner Swiper
 --------------------*/
-.banner {
-  margin-top: 0;
-}
 
 .banner .swiper {
   width: 100%;
-  max-height: 400px;
+  max-height: 350px;
   overflow: hidden;
+  margin: 0 auto 40px;
 }
 
 .banner-img {
   width: 100%;
   height: auto;
-  object-fit: cover;
   display: block;
+  margin: 0 auto;
+  object-fit: contain; /* centraliza sem cortar */
+  max-height: 350px;
 }
 
 /* -------------------
    Produtos
 --------------------*/
+
 .products {
   display: flex;
   flex-wrap: wrap;
   gap: 20px;
   justify-content: center;
-  padding: 20px 10px;
+  padding: 0 10px 40px;
 }
 
 .product-card {
@@ -195,7 +250,7 @@ body {
 .product-card img {
   width: 100%;
   height: auto;
-  max-height: 320px; /* aumentei de 250px para 320px */
+  max-height: 250px;
   object-fit: contain;
   margin-bottom: 10px;
 }
@@ -209,12 +264,12 @@ body {
   font-size: 14px;
   padding: 8px 12px;
   width: 100%;
+  display: flex; /* alterado de inline-flex para flex */
   justify-content: center;
-  display: inline-flex;
   align-items: center;
   gap: 8px;
   background-color: #25d366;
-  color: white;
+  color: white !important;
   border-radius: 4px;
   text-decoration: none;
   transition: background-color 0.3s ease;
@@ -234,11 +289,18 @@ body {
 /* -------------------
    Rodapé
 --------------------*/
+
 .footer {
   background-color: #222;
   color: white;
   padding: 30px 10px;
   text-align: center;
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+.footer-links {
+  margin-bottom: 15px;
 }
 
 .footer-links a {
@@ -273,15 +335,10 @@ body {
   color: #c90000;
 }
 
-.footer-copy {
-  font-size: 14px;
-  margin-top: 15px;
-  line-height: 1.4;
-}
-
 /* -------------------
    Responsividade
 --------------------*/
+
 @media (max-width: 767px) {
   .product-card {
     flex: 1 1 45%;
@@ -289,6 +346,14 @@ body {
   }
 
   .product-card img {
-    max-height: 220px; /* ajuste proporcional para mobile */
+    max-height: 180px;
+  }
+
+  .nav-desktop {
+    display: none;
+  }
+
+  .menu-toggle {
+    display: block;
   }
 }
