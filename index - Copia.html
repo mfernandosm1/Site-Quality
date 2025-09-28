@@ -19,26 +19,36 @@
     }
 
     /* -------------------
-       Logo
+       Logo moderna com fundo elegante
     --------------------*/
-    .logo {
-      max-height: 50px;
+    .logo-wrapper {
+      background: linear-gradient(135deg, #ffffff 0%, #f2f2f2 100%);
+      padding: 4px 6px;
+      border-radius: 12px;
+      display: inline-block;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    }
+
+    .logo-wrapper img {
+      max-height: 60px;
       width: auto;
       display: block;
-      filter: drop-shadow(0 0 6px rgba(0,0,0,0.45)); /* sombra mais forte */
+    }
+
+    .logo-wrapper:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.22);
     }
 
     @media (max-width: 767px) {
-      .logo {
-        max-height: 40px;
-        filter: drop-shadow(0 0 5px rgba(0,0,0,0.4)); /* ajuste proporcional no mobile */
+      .logo-wrapper img {
+        max-height: 80px;
       }
     }
 
     /* -------------------
        Header e Navegação
     --------------------*/
-    /* troquei background-color por gradiente para igualar o outro arquivo */
     .header {
       background: linear-gradient(90deg, #dc2626 0%, #ef4444 100%);
       position: fixed;
@@ -183,11 +193,10 @@
       display: block;
     }
 
-    /* Ajuste para mobile: evita distorção */
     @media (max-width: 767px) {
       .banner-img {
-        object-fit: contain; /* mantém proporção */
-        max-height: 250px;   /* altura ajustada para mobile */
+        object-fit: contain;
+        max-height: 250px;
         width: 100%;
         height: auto;
       }
@@ -226,7 +235,7 @@
     .product-card img {
       width: 100%;
       height: auto;
-      max-height: 320px; /* altura dos produtos aumentada */
+      max-height: 320px;
       object-fit: contain;
       margin-bottom: 10px;
     }
@@ -255,7 +264,6 @@
       background-color: #128c4a;
     }
 
-    /* Mensagem nenhum produto */
     .em-breve {
       color: #999;
       font-style: italic;
@@ -263,18 +271,22 @@
     }
 
     /* -------------------
-       Rodapé
+       Rodapé Moderno
     --------------------*/
     .footer {
-      background-color: #222;
-      color: white;
-      padding: 30px 10px;
+      background-color: #111;
+      color: #ccc;
+      padding: 40px 20px;
       text-align: center;
     }
 
+    .footer-links {
+      margin-bottom: 20px;
+    }
+
     .footer-links a {
-      color: white;
-      margin: 0 15px;
+      color: #fff;
+      margin: 0 12px;
       text-decoration: none;
       font-weight: 500;
       transition: color 0.3s ease;
@@ -287,27 +299,32 @@
     .footer-socials {
       display: flex;
       justify-content: center;
-      gap: 30px;
+      gap: 20px;
       margin-bottom: 20px;
     }
 
     .footer-socials a {
-      color: white;
-      font-size: 32px;
-      transition: color 0.3s ease;
-      display: inline-flex;
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      background: #222;
+      color: #fff;
+      font-size: 20px;
+      display: flex;
       align-items: center;
       justify-content: center;
+      transition: all 0.3s ease;
     }
 
     .footer-socials a:hover {
-      color: #c90000;
+      background: #c90000;
+      transform: scale(1.1);
     }
 
     .footer-copy {
       font-size: 14px;
-      margin-top: 15px;
       line-height: 1.4;
+      color: #888;
     }
 
     /* -------------------
@@ -320,7 +337,7 @@
       }
 
       .product-card img {
-        max-height: 220px; /* ajuste proporcional para mobile */
+        max-height: 220px;
       }
     }
   </style>
@@ -329,7 +346,7 @@
   <!-- Header -->
   <header class="header">
     <div class="header-container">
-      <a href="index.html">
+      <a href="index.html" class="logo-wrapper">
         <img src="images/logo.png" alt="Quality Celulares" class="logo" />
       </a>
       <nav class="nav-desktop">
@@ -351,7 +368,9 @@
 
     <div id="mobile-menu" class="mobile-menu" aria-hidden="true">
       <div class="mobile-menu-header">
-        <img src="images/logo.png" alt="Quality Celulares" class="logo" />
+        <div class="logo-wrapper">
+          <img src="images/logo.png" alt="Quality Celulares" class="logo" />
+        </div>
         <button id="menu-close" class="menu-close" aria-label="Fechar menu">
           <i class="fa-solid fa-xmark"></i>
         </button>
@@ -424,22 +443,17 @@
     <p class="em-breve" style="text-align:center;">Em breve...</p>
   </main>
 
-  <!-- Rodapé -->
+  <!-- Rodapé Moderno -->
   <footer class="footer">
     <div class="footer-links">
       <a href="sobre.html">Sobre nós</a>
       <a href="formas-de-pagamento.html">Formas de pagamento e envio</a>
     </div>
     <div class="footer-socials">
-      <a href="https://www.facebook.com/qualitycelulares" target="_blank">
-        <i class="fa-brands fa-facebook-f"></i>
-      </a>
-      <a href="https://www.instagram.com/qualitycelulares_ibi/" target="_blank">
-        <i class="fa-brands fa-instagram"></i>
-      </a>
-      <a href="https://wa.me/5555991407824" target="_blank">
-        <i class="fa-brands fa-whatsapp"></i>
-      </a>
+      <a href="https://www.facebook.com/qualitycelulares" target="_blank" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+      <a href="https://www.instagram.com/qualitycelulares_ibi/" target="_blank" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+      <a href="https://wa.me/5555991407824" target="_blank" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+      <a href="#" aria-label="Localização"><i class="fa-solid fa-location-dot"></i></a>
     </div>
     <div class="footer-copy">
       © 2025 Quality Celulares. Todos os direitos reservados. <br />
@@ -456,24 +470,21 @@
       autoplay: { delay: 5000, disableOnInteraction: false },
     });
 
-    // Menu open/close + fechar ao clicar em link (correção aplicada)
+    // Menu open/close + fechar ao clicar em link
     const menuToggle = document.getElementById("menu-toggle");
     const menuClose = document.getElementById("menu-close");
     const mobileMenu = document.getElementById("mobile-menu");
 
     menuToggle?.addEventListener("click", () => {
-      // abrir
       mobileMenu.style.transform = "translateX(0)";
       mobileMenu.setAttribute("aria-hidden", "false");
     });
 
     menuClose?.addEventListener("click", () => {
-      // fechar
       mobileMenu.style.transform = "translateX(-100%)";
       mobileMenu.setAttribute("aria-hidden", "true");
     });
 
-    // fechar ao clicar em qualquer link dentro do menu mobile
     document.querySelectorAll('#mobile-menu .mobile-nav a').forEach(link => {
       link.addEventListener('click', () => {
         mobileMenu.style.transform = "translateX(-100%)";
