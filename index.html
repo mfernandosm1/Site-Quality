@@ -22,16 +22,18 @@
        Logo
     --------------------*/
     .logo {
-      max-height: 50px;
-      width: auto;
-      display: block;
-    }
+  max-height: 50px;
+  width: auto;
+  display: block;
+  filter: drop-shadow(0 0 6px rgba(0,0,0,0.45)); /* sombra mais forte */
+}
 
-    @media (max-width: 767px) {
-      .logo {
-        max-height: 40px;
-      }
-    }
+@media (max-width: 767px) {
+  .logo {
+    max-height: 40px;
+    filter: drop-shadow(0 0 5px rgba(0,0,0,0.4)); /* ajuste proporcional no mobile */
+  }
+}
 
     /* -------------------
        Header e Navegação
