@@ -154,7 +154,7 @@ body {
 
 .banner .swiper {
   width: 100%;
-  max-height: 400px;
+  max-height: 400px; /* Desktop mantém altura máxima */
   overflow: hidden;
 }
 
@@ -163,6 +163,22 @@ body {
   height: auto;
   object-fit: cover;
   display: block;
+}
+
+/* Banner Mobile */
+@media (max-width: 767px) {
+  .banner .swiper {
+    max-height: none;
+    height: auto;
+  }
+
+  .banner-img {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 16 / 9; /* Mantém proporção sem distorcer */
+    object-fit: cover;
+    display: block;
+  }
 }
 
 /* -------------------
@@ -198,7 +214,7 @@ body {
 .product-card img {
   width: 100%;
   height: auto;
-  max-height: 320px; /* desktop */
+  max-height: 320px; /* Smartphone imagem maior */
   object-fit: contain;
   margin-bottom: 10px;
 }
@@ -283,19 +299,9 @@ body {
 }
 
 /* -------------------
-   Responsividade Mobile
+   Responsividade
 --------------------*/
 @media (max-width: 767px) {
-  .banner .swiper {
-    max-height: 250px; /* altura fixa para mobile */
-  }
-
-  .banner-img {
-    width: 100%;
-    height: 250px; /* altura fixa */
-    object-fit: cover; /* mantém proporção sem distorcer */
-  }
-
   .product-card {
     flex: 1 1 45%;
     max-width: 45%;
