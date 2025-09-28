@@ -1,0 +1,21 @@
+/ (raiz do projeto)
+│
+├── index.html                   → Página inicial
+├── sobre.html                   → Página "Sobre"
+├── formas-de-pagamento.html    → Página de formas de pagamento
+│
+├── js/
+│   └── main.js                 → Scripts JavaScript do site
+│
+├── css/
+│   └── style.css              → Estilos CSS do site
+│
+└── images/
+    ├── banner1.png
+    ├── banner2.png
+    ├── banner3.png
+    ├── banner1-mobile.png
+    ├── banner2-mobile.png
+    ├── banner3-mobile.png
+    ├── logo.png
+    └── favicon.png

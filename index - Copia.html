@@ -7,30 +7,30 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
   <style>
-    /* ========== Logo ========== */
+    /* Ajuste para logo */
     .logo {
       max-height: 50px;
       width: auto;
       display: block;
     }
+
     @media (max-width: 767px) {
       .logo {
         max-height: 40px;
       }
     }
 
-    /* ========== Reset e Body ========== */
+    /* Reset básico e fonte */
     body {
       font-family: Arial, sans-serif;
       margin: 0;
       background: #fff;
       color: #222;
-      padding-top: 80px; /* espaço para header fixo */
     }
 
-    /* ========== Header ========== */
+    /* ========== HEADER ========== */
     .header {
-      background-color: #c90000;
+      background-color: #c90000; /* vermelho da marca */
       position: fixed;
       top: 0;
       left: 0;
@@ -39,24 +39,29 @@
       padding: 10px 20px;
       box-sizing: border-box;
     }
+
     .header-container {
       display: flex;
       align-items: center;
       justify-content: space-between;
     }
+
     .nav-desktop {
       display: flex;
       align-items: center;
       gap: 20px;
     }
+
     .nav-desktop a {
       color: #fff;
       text-decoration: none;
       font-weight: 500;
     }
+
     .nav-desktop a:hover {
       text-decoration: underline;
     }
+
     .search-wrapper {
       display: flex;
       align-items: center;
@@ -64,11 +69,13 @@
       border-radius: 4px;
       overflow: hidden;
     }
+
     .search-wrapper input {
       border: none;
       padding: 6px 8px;
       outline: none;
     }
+
     .search-wrapper button {
       background: #c90000;
       color: #fff;
@@ -76,6 +83,7 @@
       padding: 6px 10px;
       cursor: pointer;
     }
+
     .menu-toggle {
       display: none;
       background: none;
@@ -84,7 +92,7 @@
       color: #fff;
     }
 
-    /* ========== Mobile Menu ========== */
+    /* Mobile menu */
     .mobile-menu {
       position: fixed;
       top: 0;
@@ -96,34 +104,38 @@
       z-index: 2000;
       box-shadow: 2px 0 6px rgba(0,0,0,0.2);
       padding: 20px;
-      transform: translateX(-100%);
-      transition: transform 0.3s ease;
     }
+
     .mobile-menu-header {
       display: flex;
       align-items: center;
       justify-content: space-between;
     }
+
     .mobile-nav {
       display: flex;
       flex-direction: column;
       gap: 15px;
       margin-top: 20px;
     }
+
     .mobile-nav a {
       color: #222;
       text-decoration: none;
       font-weight: 500;
     }
+
     .mobile-nav a:hover {
       color: #c90000;
     }
+
     .menu-close {
       background: none;
       border: none;
       font-size: 24px;
       color: #222;
     }
+
     @media (max-width: 991px) {
       .nav-desktop {
         display: none;
@@ -133,15 +145,22 @@
       }
     }
 
-    /* ========== Banner ========== */
+    /* ====== Ajuste para o body com header fixo ====== */
+    body {
+      padding-top: 80px; /* espaço para não cobrir o banner */
+    }
+
+    /* ========== BANNER ========== */
     .banner {
       margin-top: 0;
     }
+
     .banner .swiper {
       width: 100%;
       max-height: 400px;
       overflow: hidden;
     }
+
     .banner-img {
       width: 100%;
       height: auto;
@@ -149,7 +168,7 @@
       display: block;
     }
 
-    /* ========== Produtos ========== */
+    /* Container produtos */
     .products {
       display: flex;
       flex-wrap: wrap;
@@ -159,7 +178,7 @@
     }
 
     .product-card {
-      flex: 1 1 300px;
+      flex: 1 1 300px; /* largura base desktop */
       max-width: 300px;
       box-sizing: border-box;
       text-align: center;
@@ -168,13 +187,12 @@
       padding: 16px;
       background: #fafafa;
       transition: box-shadow 0.2s ease;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
     }
+
     .product-card:hover {
       box-shadow: 0 0 10px rgba(0,0,0,0.15);
     }
+
     .product-card img {
       width: 100%;
       height: auto;
@@ -182,18 +200,18 @@
       object-fit: contain;
       margin-bottom: 10px;
     }
+
     .product-card h3 {
       font-size: 18px;
       margin-bottom: 10px;
     }
+
     .product-card .btn-whatsapp {
       font-size: 14px;
       padding: 8px 12px;
       width: 100%;
-      max-width: 100%;
-      box-sizing: border-box;
-      display: flex;
       justify-content: center;
+      display: inline-flex;
       align-items: center;
       gap: 8px;
       background-color: #25d366;
@@ -202,17 +220,40 @@
       text-decoration: none;
       transition: background-color 0.3s ease;
     }
+
     .product-card .btn-whatsapp:hover {
       background-color: #128c4a;
     }
 
-    /* ========== Rodapé ========== */
+    /* Ícones redes sociais rodapé */
+    .footer-socials {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      margin-bottom: 20px;
+    }
+
+    .footer-socials a {
+      color: white;
+      font-size: 32px; /* tamanho maior */
+      transition: color 0.3s ease;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .footer-socials a:hover {
+      color: #c90000; /* vermelho da marca */
+    }
+
+    /* Rodapé */
     .footer {
       background-color: #222;
       color: white;
       padding: 30px 10px;
       text-align: center;
     }
+
     .footer-links a {
       color: white;
       margin: 0 15px;
@@ -220,38 +261,24 @@
       font-weight: 500;
       transition: color 0.3s ease;
     }
+
     .footer-links a:hover {
       color: #c90000;
     }
-    .footer-socials {
-      display: flex;
-      justify-content: center;
-      gap: 30px;
-      margin-bottom: 20px;
-    }
-    .footer-socials a {
-      color: white;
-      font-size: 32px;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      transition: color 0.3s ease;
-    }
-    .footer-socials a:hover {
-      color: #c90000;
-    }
+
     .footer-copy {
       font-size: 14px;
       margin-top: 15px;
       line-height: 1.4;
     }
 
-    /* ========== Responsividade ========== */
+    /* Mobile */
     @media (max-width: 767px) {
       .product-card {
-        flex: 1 1 45%;
+        flex: 1 1 45%; /* 2 cards por linha no mobile */
         max-width: 45%;
       }
+
       .product-card img {
         max-height: 180px;
       }
@@ -282,7 +309,7 @@
       </button>
     </div>
 
-    <div id="mobile-menu" class="mobile-menu">
+    <div id="mobile-menu" class="mobile-menu" style="transform: translateX(-100%); transition: transform 0.3s ease;">
       <div class="mobile-menu-header">
         <img src="images/logo.png" alt="Quality Celulares" class="logo" />
         <button id="menu-close" class="menu-close" aria-label="Fechar menu">
@@ -339,14 +366,14 @@
       <div class="product-card">
         <img src="images/pocox7pro.png" alt="Poco X7 Pro" />
         <h3>Poco X7 Pro</h3>
-        <a href="https://wa.me/5555991407824?text=Olá%20vim%20através%20do%20site" class="btn-whatsapp" target="_blank">
+        <a href="https://wa.me/5555991407824?text=Olá%20vim%20através%20do%20site" class="btn-whatsapp" target="_blank" rel="noopener noreferrer">
           <i class="fa-brands fa-whatsapp"></i> Comprar no WhatsApp
         </a>
       </div>
       <div class="product-card">
         <img src="images/redmi14c.png" alt="Redmi 14C" />
         <h3>Redmi 14C</h3>
-        <a href="https://wa.me/5555991407824?text=Olá%20vim%20através%20do%20site" class="btn-whatsapp" target="_blank">
+        <a href="https://wa.me/5555991407824?text=Olá%20vim%20através%20do%20site" class="btn-whatsapp" target="_blank" rel="noopener noreferrer">
           <i class="fa-brands fa-whatsapp"></i> Comprar no WhatsApp
         </a>
       </div>
@@ -364,13 +391,16 @@
       <a href="formas-de-pagamento.html">Formas de pagamento e envio</a>
     </div>
     <div class="footer-socials">
-      <a href="https://www.facebook.com/qualitycelulares" target="_blank">
+      <a href="https://www.facebook.com/qualitycelulares" target="_blank" aria-label="Facebook" rel="noopener noreferrer">
         <i class="fa-brands fa-facebook-f"></i>
       </a>
-      <a href="https://www.instagram.com/qualitycelulares_ibi/" target="_blank">
+      <a href="https://www.instagram.com/qualitycelulares_ibi/" target="_blank" aria-label="Instagram" rel="noopener noreferrer">
         <i class="fa-brands fa-instagram"></i>
       </a>
-      <a href="https://wa.me/5555991407824" target="_blank">
+      <a href="https://twitter.com/qualitycelulares" target="_blank" aria-label="Twitter" rel="noopener noreferrer">
+        <i class="fa-brands fa-twitter"></i>
+      </a>
+      <a href="https://wa.me/5555991407824" target="_blank" aria-label="WhatsApp" rel="noopener noreferrer">
         <i class="fa-brands fa-whatsapp"></i>
       </a>
     </div>
@@ -385,8 +415,14 @@
   <script>
     const swiper = new Swiper('.swiper', {
       loop: true,
-      navigation: { nextEl: '.swiper-button-next', prevEl: '.swiper-button-prev' },
-      autoplay: { delay: 5000, disableOnInteraction: false },
+      navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev'
+      },
+      autoplay: {
+        delay: 5000,
+        disableOnInteraction: false,
+      },
     });
 
     document.getElementById("menu-toggle").onclick = () => {
@@ -395,6 +431,75 @@
     document.getElementById("menu-close").onclick = () => {
       document.getElementById("mobile-menu").style.transform = "translateX(-100%)";
     };
+
+    function filterProducts(query) {
+      const products = document.querySelectorAll("#products .product-card");
+      let found = false;
+      let firstFoundProduct = null;
+
+      products.forEach(product => {
+        const title = product.querySelector("h3").textContent.toLowerCase();
+        if (title.includes(query.toLowerCase())) {
+          product.style.display = "";
+          if (!firstFoundProduct) firstFoundProduct = product;
+          found = true;
+        } else {
+          product.style.display = "none";
+        }
+      });
+
+      document.getElementById("no-results").style.display = found ? "none" : "block";
+
+      return firstFoundProduct;
+    }
+
+    // Busca desktop
+    const searchInput = document.getElementById("search-input");
+    const searchButton = document.getElementById("search-button");
+    searchButton.addEventListener("click", () => {
+      filterProducts(searchInput.value.trim());
+    });
+    searchInput.addEventListener("keyup", (e) => {
+      if(e.key === "Enter"){
+        filterProducts(searchInput.value.trim());
+      }
+      if(searchInput.value.trim() === ""){
+        filterProducts("");
+        document.getElementById("no-results").style.display = "none";
+      }
+    });
+
+    // Busca mobile
+    const searchInputMobile = document.getElementById("search-input-mobile");
+    const searchButtonMobile = document.getElementById("search-button-mobile");
+
+    searchButtonMobile.addEventListener("click", () => {
+      const firstProduct = filterProducts(searchInputMobile.value.trim());
+      document.getElementById("mobile-menu").style.transform = "translateX(-100%)";
+
+      if(firstProduct) {
+        firstFoundProduct.scrollIntoView({ behavior: "smooth", block: "start" });
+      } else {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
+    });
+
+    searchInputMobile.addEventListener("keyup", (e) => {
+      if(e.key === "Enter"){
+        const firstProduct = filterProducts(searchInputMobile.value.trim());
+        document.getElementById("mobile-menu").style.transform = "translateX(-100%)";
+
+        if(firstProduct) {
+          firstFoundProduct.scrollIntoView({ behavior: "smooth", block: "start" });
+        } else {
+          window.scrollTo({ top: 0, behavior: "smooth" });
+        }
+      }
+      if(searchInputMobile.value.trim() === ""){
+        filterProducts("");
+        document.getElementById("no-results").style.display = "none";
+      }
+    });
   </script>
 </body>
 </html>
