@@ -7,19 +7,9 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
   <style>
-    /* ========== Logo ========== */
-    .logo {
-      max-height: 50px;
-      width: auto;
-      display: block;
-    }
-    @media (max-width: 767px) {
-      .logo {
-        max-height: 40px;
-      }
-    }
-
-    /* ========== Reset e Body ========== */
+    /* -------------------
+       Estilos Gerais
+    --------------------*/
     body {
       font-family: Arial, sans-serif;
       margin: 0;
@@ -28,9 +18,29 @@
       padding-top: 80px; /* espaço para header fixo */
     }
 
-    /* ========== Header ========== */
+    /* -------------------
+       Logo
+    --------------------*/
+    .logo {
+      max-height: 50px;
+      width: auto;
+      display: block;
+      filter: drop-shadow(0 0 6px rgba(0,0,0,0.45)); /* sombra mais forte */
+    }
+
+    @media (max-width: 767px) {
+      .logo {
+        max-height: 40px;
+        filter: drop-shadow(0 0 5px rgba(0,0,0,0.4)); /* ajuste proporcional no mobile */
+      }
+    }
+
+    /* -------------------
+       Header e Navegação
+    --------------------*/
+    /* troquei background-color por gradiente para igualar o outro arquivo */
     .header {
-      background-color: #c90000;
+      background: linear-gradient(90deg, #dc2626 0%, #ef4444 100%);
       position: fixed;
       top: 0;
       left: 0;
@@ -39,24 +49,29 @@
       padding: 10px 20px;
       box-sizing: border-box;
     }
+
     .header-container {
       display: flex;
       align-items: center;
       justify-content: space-between;
     }
+
     .nav-desktop {
       display: flex;
       align-items: center;
       gap: 20px;
     }
+
     .nav-desktop a {
       color: #fff;
       text-decoration: none;
       font-weight: 500;
     }
+
     .nav-desktop a:hover {
       text-decoration: underline;
     }
+
     .search-wrapper {
       display: flex;
       align-items: center;
@@ -64,11 +79,13 @@
       border-radius: 4px;
       overflow: hidden;
     }
+
     .search-wrapper input {
       border: none;
       padding: 6px 8px;
       outline: none;
     }
+
     .search-wrapper button {
       background: #c90000;
       color: #fff;
@@ -76,6 +93,7 @@
       padding: 6px 10px;
       cursor: pointer;
     }
+
     .menu-toggle {
       display: none;
       background: none;
@@ -84,7 +102,9 @@
       color: #fff;
     }
 
-    /* ========== Mobile Menu ========== */
+    /* -------------------
+       Mobile menu
+    --------------------*/
     .mobile-menu {
       position: fixed;
       top: 0;
@@ -99,31 +119,41 @@
       transform: translateX(-100%);
       transition: transform 0.3s ease;
     }
+
+    .mobile-menu.open {
+      transform: translateX(0);
+    }
+
     .mobile-menu-header {
       display: flex;
       align-items: center;
       justify-content: space-between;
     }
+
     .mobile-nav {
       display: flex;
       flex-direction: column;
       gap: 15px;
       margin-top: 20px;
     }
+
     .mobile-nav a {
       color: #222;
       text-decoration: none;
       font-weight: 500;
     }
+
     .mobile-nav a:hover {
       color: #c90000;
     }
+
     .menu-close {
       background: none;
       border: none;
       font-size: 24px;
       color: #222;
     }
+
     @media (max-width: 991px) {
       .nav-desktop {
         display: none;
@@ -133,15 +163,19 @@
       }
     }
 
-    /* ========== Banner ========== */
+    /* -------------------
+       Banner Swiper
+    --------------------*/
     .banner {
       margin-top: 0;
     }
+
     .banner .swiper {
       width: 100%;
       max-height: 400px;
       overflow: hidden;
     }
+
     .banner-img {
       width: 100%;
       height: auto;
@@ -149,7 +183,19 @@
       display: block;
     }
 
-    /* ========== Produtos ========== */
+    /* Ajuste para mobile: evita distorção */
+    @media (max-width: 767px) {
+      .banner-img {
+        object-fit: contain; /* mantém proporção */
+        max-height: 250px;   /* altura ajustada para mobile */
+        width: 100%;
+        height: auto;
+      }
+    }
+
+    /* -------------------
+       Produtos
+    --------------------*/
     .products {
       display: flex;
       flex-wrap: wrap;
@@ -172,28 +218,30 @@
       flex-direction: column;
       align-items: center;
     }
+
     .product-card:hover {
       box-shadow: 0 0 10px rgba(0,0,0,0.15);
     }
+
     .product-card img {
       width: 100%;
       height: auto;
-      max-height: 250px;
+      max-height: 320px; /* altura dos produtos aumentada */
       object-fit: contain;
       margin-bottom: 10px;
     }
+
     .product-card h3 {
       font-size: 18px;
       margin-bottom: 10px;
     }
+
     .product-card .btn-whatsapp {
       font-size: 14px;
       padding: 8px 12px;
       width: 100%;
-      max-width: 100%;
-      box-sizing: border-box;
-      display: flex;
       justify-content: center;
+      display: inline-flex;
       align-items: center;
       gap: 8px;
       background-color: #25d366;
@@ -202,17 +250,28 @@
       text-decoration: none;
       transition: background-color 0.3s ease;
     }
+
     .product-card .btn-whatsapp:hover {
       background-color: #128c4a;
     }
 
-    /* ========== Rodapé ========== */
+    /* Mensagem nenhum produto */
+    .em-breve {
+      color: #999;
+      font-style: italic;
+      font-size: 16px;
+    }
+
+    /* -------------------
+       Rodapé
+    --------------------*/
     .footer {
       background-color: #222;
       color: white;
       padding: 30px 10px;
       text-align: center;
     }
+
     .footer-links a {
       color: white;
       margin: 0 15px;
@@ -220,40 +279,48 @@
       font-weight: 500;
       transition: color 0.3s ease;
     }
+
     .footer-links a:hover {
       color: #c90000;
     }
+
     .footer-socials {
       display: flex;
       justify-content: center;
       gap: 30px;
       margin-bottom: 20px;
     }
+
     .footer-socials a {
       color: white;
       font-size: 32px;
+      transition: color 0.3s ease;
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      transition: color 0.3s ease;
     }
+
     .footer-socials a:hover {
       color: #c90000;
     }
+
     .footer-copy {
       font-size: 14px;
       margin-top: 15px;
       line-height: 1.4;
     }
 
-    /* ========== Responsividade ========== */
+    /* -------------------
+       Responsividade
+    -------------------*/
     @media (max-width: 767px) {
       .product-card {
         flex: 1 1 45%;
         max-width: 45%;
       }
+
       .product-card img {
-        max-height: 180px;
+        max-height: 220px; /* ajuste proporcional para mobile */
       }
     }
   </style>
@@ -277,12 +344,12 @@
           <i class="fa-brands fa-whatsapp"></i> WhatsApp
         </a>
       </nav>
-      <button id="menu-toggle" class="menu-toggle">
+      <button id="menu-toggle" class="menu-toggle" aria-label="Abrir menu">
         <i class="fa-solid fa-bars"></i>
       </button>
     </div>
 
-    <div id="mobile-menu" class="mobile-menu">
+    <div id="mobile-menu" class="mobile-menu" aria-hidden="true">
       <div class="mobile-menu-header">
         <img src="images/logo.png" alt="Quality Celulares" class="logo" />
         <button id="menu-close" class="menu-close" aria-label="Fechar menu">
@@ -389,12 +456,30 @@
       autoplay: { delay: 5000, disableOnInteraction: false },
     });
 
-    document.getElementById("menu-toggle").onclick = () => {
-      document.getElementById("mobile-menu").style.transform = "translateX(0)";
-    };
-    document.getElementById("menu-close").onclick = () => {
-      document.getElementById("mobile-menu").style.transform = "translateX(-100%)";
-    };
+    // Menu open/close + fechar ao clicar em link (correção aplicada)
+    const menuToggle = document.getElementById("menu-toggle");
+    const menuClose = document.getElementById("menu-close");
+    const mobileMenu = document.getElementById("mobile-menu");
+
+    menuToggle?.addEventListener("click", () => {
+      // abrir
+      mobileMenu.style.transform = "translateX(0)";
+      mobileMenu.setAttribute("aria-hidden", "false");
+    });
+
+    menuClose?.addEventListener("click", () => {
+      // fechar
+      mobileMenu.style.transform = "translateX(-100%)";
+      mobileMenu.setAttribute("aria-hidden", "true");
+    });
+
+    // fechar ao clicar em qualquer link dentro do menu mobile
+    document.querySelectorAll('#mobile-menu .mobile-nav a').forEach(link => {
+      link.addEventListener('click', () => {
+        mobileMenu.style.transform = "translateX(-100%)";
+        mobileMenu.setAttribute("aria-hidden", "true");
+      });
+    });
   </script>
 </body>
 </html>
