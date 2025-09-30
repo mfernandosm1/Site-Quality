@@ -270,62 +270,7 @@
       font-size: 16px;
     }
 
-    /* -------------------
-       Rodapé Moderno
-    --------------------*/
-    .footer {
-      background-color: #111;
-      color: #ccc;
-      padding: 40px 20px;
-      text-align: center;
-    }
-
-    .footer-links {
-      margin-bottom: 20px;
-    }
-
-    .footer-links a {
-      color: #fff;
-      margin: 0 12px;
-      text-decoration: none;
-      font-weight: 500;
-      transition: color 0.3s ease;
-    }
-
-    .footer-links a:hover {
-      color: #c90000;
-    }
-
-    .footer-socials {
-      display: flex;
-      justify-content: center;
-      gap: 20px;
-      margin-bottom: 20px;
-    }
-
-    .footer-socials a {
-      width: 45px;
-      height: 45px;
-      border-radius: 50%;
-      background: #222;
-      color: #fff;
-      font-size: 20px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: all 0.3s ease;
-    }
-
-    .footer-socials a:hover {
-      background: #c90000;
-      transform: scale(1.1);
-    }
-
-    .footer-copy {
-      font-size: 14px;
-      line-height: 1.4;
-      color: #888;
-    }
+  
 
     /* -------------------
        Responsividade
@@ -452,46 +397,46 @@
       document.getElementById("footer-placeholder").innerHTML = data;
     });
 </script>
-  <!-- Rodapé Moderno -->
- <div id="footer-placeholder"></div>
+  <!-- Rodapé Moderno (Dinamicamente carregado) -->
+<div id="footer-placeholder"></div>
+
+<!-- Scripts -->
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 <script>
+  const swiper = new Swiper('.swiper', {
+    loop: true,
+    navigation: { nextEl: '.swiper-button-next', prevEl: '.swiper-button-prev' },
+    autoplay: { delay: 5000, disableOnInteraction: false },
+  });
+
+  // Menu open/close + fechar ao clicar em link
+  const menuToggle = document.getElementById("menu-toggle");
+  const menuClose = document.getElementById("menu-close");
+  const mobileMenu = document.getElementById("mobile-menu");
+
+  menuToggle?.addEventListener("click", () => {
+    mobileMenu.style.transform = "translateX(0)";
+    mobileMenu.setAttribute("aria-hidden", "false");
+  });
+
+  menuClose?.addEventListener("click", () => {
+    mobileMenu.style.transform = "translateX(-100%)";
+    mobileMenu.setAttribute("aria-hidden", "true");
+  });
+
+  document.querySelectorAll('#mobile-menu .mobile-nav a').forEach(link => {
+    link.addEventListener('click', () => {
+      mobileMenu.style.transform = "translateX(-100%)";
+      mobileMenu.setAttribute("aria-hidden", "true");
+    });
+  });
+
+  // Carregar footer.html dinamicamente
   fetch("footer.html")
     .then(response => response.text())
     .then(data => {
       document.getElementById("footer-placeholder").innerHTML = data;
     });
 </script>
-
-  <!-- Scripts -->
-  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-  <script>
-    const swiper = new Swiper('.swiper', {
-      loop: true,
-      navigation: { nextEl: '.swiper-button-next', prevEl: '.swiper-button-prev' },
-      autoplay: { delay: 5000, disableOnInteraction: false },
-    });
-
-    // Menu open/close + fechar ao clicar em link
-    const menuToggle = document.getElementById("menu-toggle");
-    const menuClose = document.getElementById("menu-close");
-    const mobileMenu = document.getElementById("mobile-menu");
-
-    menuToggle?.addEventListener("click", () => {
-      mobileMenu.style.transform = "translateX(0)";
-      mobileMenu.setAttribute("aria-hidden", "false");
-    });
-
-    menuClose?.addEventListener("click", () => {
-      mobileMenu.style.transform = "translateX(-100%)";
-      mobileMenu.setAttribute("aria-hidden", "true");
-    });
-
-    document.querySelectorAll('#mobile-menu .mobile-nav a').forEach(link => {
-      link.addEventListener('click', () => {
-        mobileMenu.style.transform = "translateX(-100%)";
-        mobileMenu.setAttribute("aria-hidden", "true");
-      });
-    });
-  </script>
 </body>
 </html>
