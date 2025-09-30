@@ -342,15 +342,6 @@
     }
   </style>
 </head>
-<!-- Rodapé carregado dinamicamente -->
-<div id="footer-placeholder"></div>
-<script>
-  fetch("footer.html")
-    .then(response => response.text())
-    .then(data => {
-      document.getElementById("footer-placeholder").innerHTML = data;
-    });
-</script>
 <body>
   <!-- Header -->
   <header class="header">
@@ -451,7 +442,16 @@
     <h2 id="acessorios" style="text-align:center; margin-top: 60px;">Acessórios</h2>
     <p class="em-breve" style="text-align:center;">Em breve...</p>
   </main>
-
+  
+<!-- Rodapé carregado dinamicamente -->
+<div id="footer-placeholder"></div>
+<script>
+  fetch("footer.html")
+    .then(response => response.text())
+    .then(data => {
+      document.getElementById("footer-placeholder").innerHTML = data;
+    });
+</script>
   <!-- Rodapé Moderno -->
  <div id="footer-placeholder"></div>
 <script>
