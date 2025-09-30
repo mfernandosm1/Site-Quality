@@ -16,7 +16,6 @@ body {
   max-height: 80px;
   width: auto;
   display: block;
-  /* sombra branca intensa */
   filter: drop-shadow(0 0 3px white)
           drop-shadow(0 0 3px white)
           drop-shadow(0 0 3px white)
@@ -163,7 +162,7 @@ body {
 
 .banner .swiper {
   width: 100%;
-  max-height: 400px; /* Desktop mantém altura máxima */
+  max-height: 400px;
   overflow: hidden;
 }
 
@@ -174,7 +173,6 @@ body {
   display: block;
 }
 
-/* Banner Mobile */
 @media (max-width: 767px) {
   .banner .swiper {
     max-height: none;
@@ -184,7 +182,7 @@ body {
   .banner-img {
     width: 100%;
     height: auto;
-    aspect-ratio: 16 / 9; /* Mantém proporção sem distorcer */
+    aspect-ratio: 16 / 9;
     object-fit: cover;
     display: block;
   }
@@ -223,7 +221,7 @@ body {
 .product-card img {
   width: 100%;
   height: auto;
-  max-height: 320px; /* Smartphone imagem maior */
+  max-height: 320px;
   object-fit: contain;
   margin-bottom: 10px;
 }
@@ -252,7 +250,6 @@ body {
   background-color: #128c4a;
 }
 
-/* Mensagem nenhum produto */
 .em-breve {
   color: #999;
   font-style: italic;
@@ -260,7 +257,7 @@ body {
 }
 
 /* -------------------
-   Rodapé
+   Footer (parte interna da página)
 --------------------*/
 .footer {
   background-color: #222;
@@ -286,6 +283,7 @@ body {
   justify-content: center;
   gap: 24px;
   margin-bottom: 16px;
+  flex-wrap: wrap;
 }
 
 .footer-socials a {
@@ -309,27 +307,22 @@ body {
 
 .footer-socials a.facebook:hover {
   background-color: #3b5998;
-  color: white;
 }
 
 .footer-socials a.instagram:hover {
-  background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285aeb 90%);
-  color: white;
+  background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fd5949 45%, #d6249f 60%, #285aeb 90%);
 }
 
 .footer-socials a.twitter:hover {
   background-color: #1da1f2;
-  color: white;
 }
 
 .footer-socials a.whatsapp:hover {
   background-color: #25d366;
-  color: white;
 }
 
 .footer-socials a.location:hover {
   background-color: #c90000;
-  color: white;
 }
 
 .footer-copy {
@@ -350,4 +343,27 @@ body {
   .product-card img {
     max-height: 220px;
   }
+
+  .footer-socials {
+    gap: 16px;
+  }
+
+  .footer-socials a {
+    width: 40px;
+    height: 40px;
+    font-size: 22px;
+  }
+
+  .footer-links a {
+    margin: 0 10px;
+    font-size: 14px;
+  }
+
+  .footer-copy {
+    font-size: 12px;
+  }
 }
+
+/* -------------------
+   Fim do CSS
+--------------------*/
