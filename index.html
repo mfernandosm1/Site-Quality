@@ -270,65 +270,6 @@
       font-size: 16px;
     }
 
-    /* Social icons modernized */
-    .footer-socials {
-      display: flex;
-      justify-content: center;
-      gap: 24px;
-      margin-bottom: 16px;
-    }
-
-    .footer-socials a {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 48px;
-      height: 48px;
-      background: #222;
-      border-radius: 50%;
-      color: white;
-      font-size: 28px;
-      transition: all 0.3s ease;
-      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
-    }
-
-    .footer-socials a:hover {
-      transform: scale(1.15);
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
-    }
-
-    .footer-socials a.facebook:hover {
-      background-color: #3b5998;
-      color: white;
-    }
-
-    .footer-socials a.instagram:hover {
-      background: radial-gradient(
-        circle at 30% 107%,
-        #fdf497 0%,
-        #fdf497 5%,
-        #fd5949 45%,
-        #d6249f 60%,
-        #285aeb 90%
-      );
-      color: white;
-    }
-
-    .footer-socials a.twitter:hover {
-      background-color: #1da1f2;
-      color: white;
-    }
-
-    .footer-socials a.whatsapp:hover {
-      background-color: #25d366;
-      color: white;
-    }
-
-    .footer-socials a.location:hover {
-      background-color: #c90000;
-      color: white;
-    }
-
     /* -------------------
        Responsividade
     -------------------*/
@@ -444,56 +385,93 @@
     <h2 id="acessorios" style="text-align:center; margin-top: 60px;">Acessórios</h2>
     <p class="em-breve" style="text-align:center;">Em breve...</p>
   </main>
-  
-<!-- Rodapé carregado dinamicamente -->
-<div id="footer-placeholder"></div>
-<script>
-  fetch("footer.html")
-    .then(response => response.text())
-    .then(data => {
-      document.getElementById("footer-placeholder").innerHTML = data;
+
+  <!-- Rodapé Simplificado -->
+  <footer class="footer" style="background-color: #333; color: #fff; text-align: center; padding: 20px 10px; font-size: 14px;">
+    © 2025 Quality Celulares. Todos os direitos reservados.
+  </footer>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+  <script>
+    const swiper = new Swiper('.swiper', {
+      loop: true,
+      navigation: { nextEl: '.swiper-button-next', prevEl: '.swiper-button-prev' },
+      autoplay: { delay: 5000, disableOnInteraction: false },
     });
-</script>
-  <!-- Rodapé Moderno (Dinamicamente carregado) -->
-<div id="footer-placeholder"></div>
 
-<!-- Scripts -->
-<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-<script>
-  const swiper = new Swiper('.swiper', {
-    loop: true,
-    navigation: { nextEl: '.swiper-button-next', prevEl: '.swiper-button-prev' },
-    autoplay: { delay: 5000, disableOnInteraction: false },
-  });
+    // Menu open/close + fechar ao clicar em link
+    const menuToggle = document.getElementById("menu-toggle");
+    const menuClose = document.getElementById("menu-close");
+    const mobileMenu = document.getElementById("mobile-menu");
 
-  // Menu open/close + fechar ao clicar em link
-  const menuToggle = document.getElementById("menu-toggle");
-  const menuClose = document.getElementById("menu-close");
-  const mobileMenu = document.getElementById("mobile-menu");
+    menuToggle.addEventListener("click", () => {
+      mobileMenu.classList.add("open");
+      mobileMenu.setAttribute("aria-hidden", "false");
+    });
 
-  menuToggle?.addEventListener("click", () => {
-    mobileMenu.style.transform = "translateX(0)";
-    mobileMenu.setAttribute("aria-hidden", "false");
-  });
-
-  menuClose?.addEventListener("click", () => {
-    mobileMenu.style.transform = "translateX(-100%)";
-    mobileMenu.setAttribute("aria-hidden", "true");
-  });
-
-  document.querySelectorAll('#mobile-menu .mobile-nav a').forEach(link => {
-    link.addEventListener('click', () => {
-      mobileMenu.style.transform = "translateX(-100%)";
+    menuClose.addEventListener("click", () => {
+      mobileMenu.classList.remove("open");
       mobileMenu.setAttribute("aria-hidden", "true");
     });
-  });
 
-  // Carregar footer.html dinamicamente
-  fetch("footer.html")
-    .then(response => response.text())
-    .then(data => {
-      document.getElementById("footer-placeholder").innerHTML = data;
+    // Fechar menu ao clicar fora
+    document.addEventListener("click", (e) => {
+      if (!mobileMenu.contains(e.target) && !menuToggle.contains(e.target)) {
+        mobileMenu.classList.remove("open");
+        mobileMenu.setAttribute("aria-hidden", "true");
+      }
     });
-</script>
+
+    // Busca simples de produtos (desktop e mobile)
+    const searchInput = document.getElementById("search-input");
+    const searchButton = document.getElementById("search-button");
+    const searchInputMobile = document.getElementById("search-input-mobile");
+    const searchButtonMobile = document.getElementById("search-button-mobile");
+    const productsContainer = document.getElementById("products");
+    const noResults = document.getElementById("no-results");
+
+    function searchProducts(term) {
+      term = term.toLowerCase();
+      const cards = productsContainer.querySelectorAll(".product-card");
+      let found = false;
+
+      cards.forEach(card => {
+        const title = card.querySelector("h3").textContent.toLowerCase();
+        if (title.includes(term)) {
+          card.style.display = "";
+          found = true;
+        } else {
+          card.style.display = "none";
+        }
+      });
+
+      noResults.style.display = found ? "none" : "block";
+    }
+
+    searchButton.addEventListener("click", () => {
+      searchProducts(searchInput.value);
+    });
+
+    searchInput.addEventListener("keydown", (e) => {
+      if (e.key === "Enter") {
+        searchProducts(searchInput.value);
+      }
+    });
+
+    searchButtonMobile.addEventListener("click", () => {
+      searchProducts(searchInputMobile.value);
+      mobileMenu.classList.remove("open");
+      mobileMenu.setAttribute("aria-hidden", "true");
+    });
+
+    searchInputMobile.addEventListener("keydown", (e) => {
+      if (e.key === "Enter") {
+        searchProducts(searchInputMobile.value);
+        mobileMenu.classList.remove("open");
+        mobileMenu.setAttribute("aria-hidden", "true");
+      }
+    });
+  </script>
 </body>
 </html>
