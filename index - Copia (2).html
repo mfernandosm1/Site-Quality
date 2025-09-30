@@ -342,15 +342,6 @@
     }
   </style>
 </head>
-<!-- Rodapé carregado dinamicamente -->
-<div id="footer-placeholder"></div>
-<script>
-  fetch("footer.html")
-    .then(response => response.text())
-    .then(data => {
-      document.getElementById("footer-placeholder").innerHTML = data;
-    });
-</script>
 <body>
   <!-- Header -->
   <header class="header">
@@ -453,14 +444,22 @@
   </main>
 
   <!-- Rodapé Moderno -->
- <div id="footer-placeholder"></div>
-<script>
-  fetch("footer.html")
-    .then(response => response.text())
-    .then(data => {
-      document.getElementById("footer-placeholder").innerHTML = data;
-    });
-</script>
+  <footer class="footer">
+    <div class="footer-links">
+      <a href="sobre.html">Sobre nós</a>
+      <a href="formas-de-pagamento.html">Formas de pagamento e envio</a>
+    </div>
+    <div class="footer-socials">
+      <a href="https://www.facebook.com/qualitycelulares" target="_blank" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+      <a href="https://www.instagram.com/qualitycelulares_ibi/" target="_blank" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+      <a href="https://wa.me/5555991407824" target="_blank" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+      <a href="#" aria-label="Localização"><i class="fa-solid fa-location-dot"></i></a>
+    </div>
+    <div class="footer-copy">
+      © 2025 Quality Celulares. Todos os direitos reservados. <br />
+      CNPJ: 20.375.910/0001-66
+    </div>
+  </footer>
 
   <!-- Scripts -->
   <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
