@@ -257,18 +257,32 @@ body {
 }
 
 /* -------------------
-   Footer (parte interna da página)
+   Footer
 --------------------*/
 .footer {
   background-color: #222;
   color: white;
-  padding: 30px 10px;
-  text-align: center;
+  padding: 30px 20px;
+}
+
+.footer-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
 }
 
 .footer-links a {
   color: white;
-  margin: 0 15px;
   text-decoration: none;
   font-weight: 500;
   transition: color 0.3s ease;
@@ -282,7 +296,6 @@ body {
   display: flex;
   justify-content: center;
   gap: 24px;
-  margin-bottom: 16px;
   flex-wrap: wrap;
 }
 
@@ -295,7 +308,7 @@ body {
   background: #222;
   border-radius: 50%;
   color: white;
-  font-size: 28px;
+  font-size: 22px;
   transition: all 0.3s ease;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
 }
@@ -308,59 +321,44 @@ body {
 .footer-socials a.facebook:hover {
   background-color: #3b5998;
 }
-
 .footer-socials a.instagram:hover {
   background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fd5949 45%, #d6249f 60%, #285aeb 90%);
 }
-
 .footer-socials a.twitter:hover {
   background-color: #1da1f2;
 }
-
 .footer-socials a.whatsapp:hover {
   background-color: #25d366;
 }
-
 .footer-socials a.location:hover {
   background-color: #c90000;
 }
 
 .footer-copy {
   font-size: 14px;
-  margin-top: 15px;
   line-height: 1.4;
+  text-align: center;
+  color: #aaa;
 }
 
 /* -------------------
-   Responsividade
+   Responsividade Footer
 --------------------*/
-@media (max-width: 767px) {
-  .product-card {
-    flex: 1 1 45%;
-    max-width: 45%;
+@media (min-width: 768px) {
+  .footer-container {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    text-align: left;
   }
 
-  .product-card img {
-    max-height: 220px;
-  }
-
-  .footer-socials {
-    gap: 16px;
-  }
-
-  .footer-socials a {
-    width: 40px;
-    height: 40px;
-    font-size: 22px;
-  }
-
-  .footer-links a {
-    margin: 0 10px;
-    font-size: 14px;
+  .footer-links {
+    justify-content: flex-start;
   }
 
   .footer-copy {
-    font-size: 12px;
+    text-align: right;
+    margin-top: 0;
   }
 }
 
