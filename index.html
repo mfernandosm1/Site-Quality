@@ -387,9 +387,8 @@
   </main>
 
   <!-- Rodapé Simplificado -->
-  <footer class="footer" style="background-color: #333; color: #fff; text-align: center; padding: 20px 10px; font-size: 14px;">
-    © 2025 Quality Celulares. Todos os direitos reservados.
-  </footer>
+  <!-- Footer (dinâmico) -->
+  <div id="footer-container"></div>
 
   <!-- Scripts -->
   <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
@@ -471,12 +470,14 @@
         mobileMenu.classList.remove("open");
         mobileMenu.setAttribute("aria-hidden", "true");
       }
-	   // Carregar footer.html dinamicamente
-  fetch("footer.html")
-    .then(response => response.text())
-    .then(data => {
-      document.getElementById("footer-placeholder").innerHTML = data;
-    });
+	  
+	  // Carrega o rodapé dinamicamente
+    fetch('footer.html')
+      .then(response => response.text())
+      .then(data => {
+        document.getElementById('footer-container').innerHTML = data;
+      })
+      .catch(error => console.error('Erro ao carregar o rodapé:', error));
 	  
     });
   </script>
