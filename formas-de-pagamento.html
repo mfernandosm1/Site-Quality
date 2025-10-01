@@ -9,41 +9,49 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
   <link rel="stylesheet" href="css/style.css" />
+  <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body>
   <!-- Header padrão -->
   <div id="header"></div>
 
   <!-- Conteúdo -->
-  <main class="main" style="max-width: 1000px; margin: 0 auto; padding: 100px 20px 40px;">
-    <h1 style="text-align:center; margin-bottom:40px;">Formas de Pagamento e Envio</h1>
+  <main class="max-w-6xl mx-auto px-4 py-28 space-y-12">
+    <!-- Título -->
+    <h1 class="text-3xl font-bold text-center mb-8 text-red-600">Formas de Pagamento e Envio</h1>
 
-    <section class="products" style="gap:30px;">
-      <div class="product-card">
+    <!-- Cartões de pagamento -->
+    <section class="grid md:grid-cols-3 gap-6">
+      <div class="bg-white rounded-xl shadow-lg p-6 text-center hover:shadow-2xl transition">
         <i class="fa-solid fa-credit-card text-4xl text-red-600 mb-4"></i>
-        <h2>Cartão de Crédito</h2>
-        <p>Visa, MasterCard, Elo, American Express</p>
+        <h2 class="text-xl font-bold mb-2">Cartão de Crédito</h2>
+        <p class="text-gray-600">Visa, MasterCard, Elo, American Express</p>
       </div>
-      <div class="product-card">
+
+      <div class="bg-white rounded-xl shadow-lg p-6 text-center hover:shadow-2xl transition">
         <i class="fa-solid fa-file-invoice text-4xl text-yellow-500 mb-4"></i>
-        <h2>Boleto Bancário</h2>
-        <p>Pague de forma segura diretamente pelo banco</p>
+        <h2 class="text-xl font-bold mb-2">Boleto Bancário</h2>
+        <p class="text-gray-600">Pague de forma segura diretamente pelo banco</p>
       </div>
-      <div class="product-card">
+
+      <div class="bg-white rounded-xl shadow-lg p-6 text-center hover:shadow-2xl transition">
         <i class="fa-brands fa-pix text-4xl text-green-500 mb-4"></i>
-        <h2>PIX</h2>
-        <p>Transferência instantânea e segura</p>
+        <h2 class="text-xl font-bold mb-2">PIX</h2>
+        <p class="text-gray-600">Transferência instantânea e segura</p>
       </div>
     </section>
 
-    <section class="product-card" style="margin-top:40px;">
+    <!-- Envio -->
+    <section class="bg-white rounded-xl shadow-lg p-6 text-center hover:shadow-2xl transition">
       <i class="fa-solid fa-truck-fast text-5xl text-green-600 mb-4"></i>
-      <h2>Envios</h2>
-      <p>Via <strong>Correios</strong> ou <strong>Transportadora</strong>.</p>
-      <p style="margin-top:10px;">Frete grátis para compras acima de <strong>R$120,00</strong> no RS.  
-        Para demais regiões, calculado conforme endereço de entrega.</p>
+      <h2 class="text-2xl font-bold mb-4">Envios</h2>
+      <p class="text-lg text-gray-700">Via <strong>Correios</strong> ou <strong>Transportadora</strong>.</p>
+      <p class="text-lg text-gray-700 mt-2">
+        Frete grátis para compras acima de <strong>R$120,00</strong> no <strong>RS</strong>.
+      </p>
+      <p class="text-lg text-gray-700">Para as demais regiões, o valor será calculado conforme a entrega.</p>
       <a href="https://wa.me/5555991407824?text=Olá%20vim%20através%20do%20site"
-         class="btn-whatsapp" target="_blank" style="margin-top:20px; max-width:300px;">
+         class="mt-6 inline-block bg-green-500 text-white px-6 py-3 rounded-lg hover:bg-green-600 font-medium transition">
         <i class="fa-brands fa-whatsapp"></i> Entrar em contato via WhatsApp
       </a>
     </section>

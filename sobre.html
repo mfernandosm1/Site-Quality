@@ -3,80 +3,79 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Quality Celulares</title>
+  <title>Quality Celulares - Sobre Nós</title>
+
+  <!-- FontAwesome + Swiper + CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+  <link rel="stylesheet" href="css/style.css" />
   <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
 </head>
 <body class="bg-gray-50 text-gray-800">
-  <!-- Header -->
-  <header class="fixed top-0 left-0 w-full bg-gradient-to-r from-red-600 to-red-500 shadow-md z-50">
-    <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
-      <a href="index.html">
-        <img src="images/logo.png" alt="Quality Celulares" class="h-10 md:h-12">
-      </a>
-      <!-- Desktop menu -->
-      <nav class="hidden md:flex items-center gap-6">
-        <a href="index.html" class="text-white font-medium hover:underline">Início</a>
-        <a href="#smartphones" class="text-white font-medium hover:underline">Smartphones</a>
-        <a href="#acessorios" class="text-white font-medium hover:underline">Acessórios</a>
-        <div class="relative">
-          <input type="text" placeholder="Buscar" class="px-3 py-1 rounded-full text-sm">
+  <!-- Header padrão -->
+  <div id="header"></div>
+
+  <!-- Conteúdo -->
+  <main class="pt-28 max-w-6xl mx-auto px-4 py-12 space-y-16">
+    <!-- Introdução -->
+    <section class="text-center">
+      <h1 class="text-4xl font-bold mb-6 text-red-600">Sobre a Quality Celulares</h1>
+      <p class="text-lg text-gray-700 leading-relaxed">
+        A <strong>Quality Celulares</strong> é especializada na venda de celulares, notebooks, videogames, smartwatches,
+        tablets, caixas de som e acessórios em geral.  
+        Também oferecemos <strong>assistência técnica profissional</strong> para garantir que seu dispositivo esteja sempre em perfeito funcionamento.
+      </p>
+    </section>
+
+    <!-- Missão, Visão e Valores -->
+    <section class="grid md:grid-cols-3 gap-6 text-center">
+      <div class="bg-white rounded-xl shadow-lg p-6 hover:shadow-2xl transition">
+        <i class="fa-solid fa-bullseye text-4xl text-red-600 mb-4"></i>
+        <h2 class="text-xl font-bold mb-2">Missão</h2>
+        <p class="text-gray-600">Oferecer tecnologia de qualidade com atendimento humanizado, buscando sempre a satisfação do cliente.</p>
+      </div>
+
+      <div class="bg-white rounded-xl shadow-lg p-6 hover:shadow-2xl transition">
+        <i class="fa-solid fa-eye text-4xl text-blue-500 mb-4"></i>
+        <h2 class="text-xl font-bold mb-2">Visão</h2>
+        <p class="text-gray-600">Ser referência em tecnologia e confiança no mercado de eletrônicos e assistência técnica.</p>
+      </div>
+
+      <div class="bg-white rounded-xl shadow-lg p-6 hover:shadow-2xl transition">
+        <i class="fa-solid fa-handshake text-4xl text-green-500 mb-4"></i>
+        <h2 class="text-xl font-bold mb-2">Valores</h2>
+        <p class="text-gray-600">Ética, transparência, inovação, confiança e respeito aos clientes e colaboradores.</p>
+      </div>
+    </section>
+
+    <!-- Diferenciais -->
+    <section class="text-center">
+      <h2 class="text-3xl font-bold mb-8 text-red-600">Por que escolher a Quality Celulares?</h2>
+      <div class="grid md:grid-cols-2 gap-8">
+        <div class="bg-white rounded-xl shadow-lg p-6 flex items-center gap-4 hover:shadow-2xl transition">
+          <i class="fa-solid fa-shield-halved text-3xl text-red-600"></i>
+          <p class="text-gray-700 text-lg">Garantia em todos os produtos e serviços prestados.</p>
         </div>
-        <a href="https://wa.me/5555991407824?text=Olá%20vim%20através%20do%20site" 
-           class="flex items-center gap-2 bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-full transition">
-          <i class="fa-brands fa-whatsapp text-lg"></i> WhatsApp
-        </a>
-      </nav>
-      <!-- Mobile menu button -->
-      <button id="menu-toggle" class="md:hidden text-white text-2xl">
-        <i class="fa-solid fa-bars"></i>
-      </button>
-    </div>
-    <!-- Mobile off-canvas menu -->
-    <div id="mobile-menu" class="fixed top-0 left-0 h-full w-64 bg-white shadow-lg transform -translate-x-full transition-transform z-50">
-      <div class="p-4 flex justify-between items-center border-b">
-        <img src="images/logo.png" alt="Quality Celulares" class="h-10">
-        <button id="menu-close" class="text-gray-600 text-2xl"><i class="fa-solid fa-xmark"></i></button>
+        <div class="bg-white rounded-xl shadow-lg p-6 flex items-center gap-4 hover:shadow-2xl transition">
+          <i class="fa-solid fa-truck-fast text-3xl text-green-600"></i>
+          <p class="text-gray-700 text-lg">Envio rápido e seguro para todo o Brasil.</p>
+        </div>
+        <div class="bg-white rounded-xl shadow-lg p-6 flex items-center gap-4 hover:shadow-2xl transition">
+          <i class="fa-brands fa-whatsapp text-3xl text-green-500"></i>
+          <p class="text-gray-700 text-lg">Atendimento via WhatsApp para maior praticidade.</p>
+        </div>
+        <div class="bg-white rounded-xl shadow-lg p-6 flex items-center gap-4 hover:shadow-2xl transition">
+          <i class="fa-solid fa-screwdriver-wrench text-3xl text-blue-600"></i>
+          <p class="text-gray-700 text-lg">Assistência técnica especializada em celulares.</p>
+        </div>
       </div>
-      <nav class="flex flex-col p-4 gap-4">
-        <a href="index.html" class="text-gray-800 font-medium hover:text-red-600">Início</a>
-        <a href="#smartphones" class="text-gray-800 font-medium hover:text-red-600">Smartphones</a>
-        <a href="#acessorios" class="text-gray-800 font-medium hover:text-red-600">Acessórios</a>
-        <a href="https://wa.me/5555991407824?text=Olá%20vim%20através%20do%20site" 
-           class="flex items-center gap-2 bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-full transition">
-          <i class="fa-brands fa-whatsapp text-lg"></i> WhatsApp
-        </a>
-      </nav>
-    </div>
-  </header>
+    </section>
+  </main>
 
-<main class='pt-28 max-w-4xl mx-auto px-4 py-12'>
-  <h1 class='text-3xl font-bold mb-6 text-center'>Sobre a Quality Celulares</h1>
-  <p class='text-lg text-gray-700 text-center'>Vendemos celulares, notebooks, videogames, smartwatches, tablets, caixas de som e acessórios em geral.<br>Também oferecemos assistência técnica em celulares.</p>
-</main>
+  <!-- Footer padrão -->
+  <div id="footer"></div>
 
-  <!-- Rodapé -->
-  <footer class="bg-gray-900 text-gray-300 py-8 mt-12">
-    <div class="max-w-6xl mx-auto px-4 flex flex-col md:flex-row md:justify-between items-start gap-6">
-      <div class="flex flex-col gap-1">
-        <a href="sobre.html" class="text-white hover:underline">Sobre nós</a>
-        <a href="formas-de-pagamento.html" class="text-white hover:underline">Formas de pagamento e envio</a>
-      </div>
-      <div class="flex gap-6 text-2xl justify-center md:justify-start w-full">
-        <a href="#" class="hover:text-blue-600"><i class="fa-brands fa-facebook"></i></a>
-        <a href="#" class="hover:text-pink-500"><i class="fa-brands fa-instagram"></i></a>
-        <a href="#" class="hover:text-sky-400"><i class="fa-brands fa-twitter"></i></a>
-        <a href="https://wa.me/5555991407824" class="hover:text-green-500"><i class="fa-brands fa-whatsapp"></i></a>
-        <a href="#" class="hover:text-red-600"><i class="fa-solid fa-location-dot"></i></a>
-      </div>
-    </div>
-    <div class="max-w-6xl mx-auto px-4 text-center mt-6 text-gray-500 text-sm">
-      © 2025 Quality Celulares. Todos os direitos reservados. <br>CNPJ: 20.375.910/0001-66
-    </div>
-  </footer>
-
+  <!-- Scripts -->
   <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
   <script src="js/main.js"></script>
 </body>
