@@ -257,7 +257,7 @@ body {
 }
 
 /* -------------------
-   Footer (corrigido - responsive)
+   Footer (padronizado)
 --------------------*/
 .footer {
   background-color: #222;
@@ -277,15 +277,7 @@ body {
   width: 100%;
 }
 
-/* cada coluna ocupa espaço igual no desktop */
-.footer-links,
-.footer-socials,
-.footer-copy {
-  flex: 1 1 auto;
-  min-width: 0;
-}
-
-/* links */
+/* Links */
 .footer-links {
   display: flex;
   gap: 20px;
@@ -303,7 +295,7 @@ body {
 
 .footer-links a:hover { color: #c90000; }
 
-/* social icons (círculos) */
+/* Social icons */
 .footer-socials {
   display: flex;
   justify-content: center;
@@ -324,6 +316,7 @@ body {
   font-size: 20px;
   transition: transform 0.25s ease, box-shadow 0.25s ease;
   box-shadow: 0 2px 6px rgba(0,0,0,0.35);
+  text-decoration: none;
 }
 
 .footer-socials a:hover {
@@ -331,14 +324,14 @@ body {
   box-shadow: 0 6px 18px rgba(0,0,0,0.45);
 }
 
-/* cores hover */
+/* Hover de cores */
 .footer-socials a.facebook:hover { background-color: #3b5998; }
 .footer-socials a.instagram:hover { background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fd5949 45%, #d6249f 60%, #285aeb 90%); }
 .footer-socials a.twitter:hover { background-color: #1da1f2; }
 .footer-socials a.whatsapp:hover { background-color: #25d366; }
 .footer-socials a.location:hover { background-color: #c90000; }
 
-/* copyright / copy */
+/* Copy */
 .footer-copy {
   font-size: 14px;
   color: #aaa;
@@ -346,7 +339,7 @@ body {
   line-height: 1.4;
 }
 
-/* Desktop: 3 colunas (links | sociais | copy) */
+/* Desktop layout */
 @media (min-width: 768px) {
   .footer-container {
     flex-direction: row;
@@ -357,11 +350,5 @@ body {
 
   .footer-links { justify-content: flex-start; }
   .footer-socials { justify-content: center; }
-  .footer-copy { justify-content: flex-end; text-align: right; }
+  .footer-copy { text-align: right; }
 }
-
-}
-
-/* -------------------
-   Fim do CSS
---------------------*/
