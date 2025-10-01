@@ -9,53 +9,13 @@
   <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
-  <!-- Header -->
-  <header class="header">
-    <div class="header-container">
-      <a href="index.html" class="logo-wrapper">
-        <img src="images/logo.png" alt="Quality Celulares" class="logo" />
-      </a>
-      <nav class="nav-desktop">
-        <a href="index.html">Início</a>
-        <a href="#smartphones">Smartphones</a>
-        <a href="#acessorios">Acessórios</a>
-        <div class="search-wrapper">
-          <input type="text" id="search-input" placeholder="Buscar..." />
-          <button id="search-button" aria-label="Buscar"><i class="fa fa-search"></i></button>
-        </div>
-        <a href="https://wa.me/5555991407824?text=Olá%20vim%20através%20do%20site" class="btn-whatsapp">
-          <i class="fa-brands fa-whatsapp"></i> WhatsApp
-        </a>
-      </nav>
-      <button id="menu-toggle" class="menu-toggle" aria-label="Abrir menu">
-        <i class="fa-solid fa-bars"></i>
-      </button>
-    </div>
-
-    <!-- Mobile menu -->
-    <div id="mobile-menu" class="mobile-menu" aria-hidden="true">
-      <div class="mobile-menu-header">
-        <div class="logo-wrapper">
-          <img src="images/logo.png" alt="Quality Celulares" class="logo" />
-        </div>
-        <button id="menu-close" class="menu-close" aria-label="Fechar menu">
-          <i class="fa-solid fa-xmark"></i>
-        </button>
-      </div>
-      <div class="search-wrapper-mobile">
-        <input type="text" id="search-input-mobile" placeholder="Buscar..." />
-        <button id="search-button-mobile" aria-label="Buscar"><i class="fa fa-search"></i></button>
-      </div>
-      <nav class="mobile-nav">
-        <a href="index.html">Início</a>
-        <a href="#smartphones">Smartphones</a>
-        <a href="#acessorios">Acessórios</a>
-        <a href="https://wa.me/5555991407824?text=Olá%20vim%20através%20do%20site" class="btn-whatsapp">
-          <i class="fa-brands fa-whatsapp"></i> WhatsApp
-        </a>
-      </nav>
-    </div>
-  </header>
+  <!-- Header padrão -->
+  <div id="header"></div>
+  <script>
+    fetch("header.html")
+      .then(res => res.text())
+      .then(data => document.getElementById("header").innerHTML = data);
+  </script>
 
   <!-- Banner -->
   <section class="banner">
@@ -110,7 +70,7 @@
     <p class="em-breve" style="text-align:center;">Em breve...</p>
   </main>
 
-  <!-- Rodapé padrão -->
+  <!-- Footer padrão -->
   <div id="footer"></div>
   <script>
     fetch("footer.html")
@@ -125,28 +85,6 @@
       loop: true,
       navigation: { nextEl: '.swiper-button-next', prevEl: '.swiper-button-prev' },
       autoplay: { delay: 5000, disableOnInteraction: false },
-    });
-
-    // Menu open/close + fechar ao clicar em link
-    const menuToggle = document.getElementById("menu-toggle");
-    const menuClose = document.getElementById("menu-close");
-    const mobileMenu = document.getElementById("mobile-menu");
-
-    menuToggle?.addEventListener("click", () => {
-      mobileMenu.style.transform = "translateX(0)";
-      mobileMenu.setAttribute("aria-hidden", "false");
-    });
-
-    menuClose?.addEventListener("click", () => {
-      mobileMenu.style.transform = "translateX(-100%)";
-      mobileMenu.setAttribute("aria-hidden", "true");
-    });
-
-    document.querySelectorAll('#mobile-menu .mobile-nav a').forEach(link => {
-      link.addEventListener('click', () => {
-        mobileMenu.style.transform = "translateX(-100%)";
-        mobileMenu.setAttribute("aria-hidden", "true");
-      });
     });
   </script>
 </body>

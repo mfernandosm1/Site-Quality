@@ -1,0 +1,79 @@
+<header class="header">
+  <div class="header-container">
+    <!-- Logo -->
+    <a href="index.html" class="logo-wrapper">
+      <img src="images/logo.png" alt="Quality Celulares" class="logo" />
+    </a>
+
+    <!-- Navegação Desktop -->
+    <nav class="nav-desktop">
+      <a href="index.html">Início</a>
+      <a href="#smartphones">Smartphones</a>
+      <a href="#acessorios">Acessórios</a>
+      <a href="sobre.html">Sobre nós</a>
+      <a href="formas-de-pagamento.html">Pagamento e Envio</a>
+      <a href="https://wa.me/5555991407824?text=Olá%20vim%20através%20do%20site" class="btn-whatsapp">
+        <i class="fa-brands fa-whatsapp"></i> WhatsApp
+      </a>
+    </nav>
+
+    <!-- Botão Menu Mobile -->
+    <button id="menu-toggle" class="menu-toggle" aria-label="Abrir menu">
+      <i class="fa-solid fa-bars"></i>
+    </button>
+  </div>
+
+  <!-- Menu Mobile -->
+  <div id="mobile-menu" class="mobile-menu" aria-hidden="true">
+    <div class="mobile-menu-header">
+      <a href="index.html" class="logo-wrapper">
+        <img src="images/logo.png" alt="Quality Celulares" class="logo" />
+      </a>
+      <button id="menu-close" class="menu-close" aria-label="Fechar menu">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+    </div>
+
+    <!-- Busca no mobile -->
+    <div class="search-wrapper-mobile">
+      <input type="text" id="search-input-mobile" placeholder="Buscar..." />
+      <button id="search-button-mobile" aria-label="Buscar"><i class="fa fa-search"></i></button>
+    </div>
+
+    <!-- Navegação Mobile -->
+    <nav class="mobile-nav">
+      <a href="index.html">Início</a>
+      <a href="#smartphones">Smartphones</a>
+      <a href="#acessorios">Acessórios</a>
+      <a href="sobre.html">Sobre nós</a>
+      <a href="formas-de-pagamento.html">Pagamento e Envio</a>
+      <a href="https://wa.me/5555991407824?text=Olá%20vim%20através%20do%20site" class="btn-whatsapp">
+        <i class="fa-brands fa-whatsapp"></i> WhatsApp
+      </a>
+    </nav>
+  </div>
+</header>
+
+<script>
+  // Menu open/close + fechar ao clicar em link
+  const menuToggle = document.getElementById("menu-toggle");
+  const menuClose = document.getElementById("menu-close");
+  const mobileMenu = document.getElementById("mobile-menu");
+
+  menuToggle?.addEventListener("click", () => {
+    mobileMenu.style.transform = "translateX(0)";
+    mobileMenu.setAttribute("aria-hidden", "false");
+  });
+
+  menuClose?.addEventListener("click", () => {
+    mobileMenu.style.transform = "translateX(-100%)";
+    mobileMenu.setAttribute("aria-hidden", "true");
+  });
+
+  document.querySelectorAll('#mobile-menu .mobile-nav a').forEach(link => {
+    link.addEventListener('click', () => {
+      mobileMenu.style.transform = "translateX(-100%)";
+      mobileMenu.setAttribute("aria-hidden", "true");
+    });
+  });
+</script>
