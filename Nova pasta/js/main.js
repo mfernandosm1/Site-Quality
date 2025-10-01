@@ -1,11 +1,12 @@
 // ----------------------------
-// Função utilitária: carrega fragmentos HTML
+// Função para carregar fragmentos HTML (header/footer)
 // ----------------------------
 async function loadFragment(containerId, url, afterLoad) {
   const container = document.getElementById(containerId);
   if (!container) return;
 
   try {
+    // Cache-busting para evitar versão antiga no GitHub Pages
     const bust = `cb=${Date.now()}`;
     const sep = url.includes("?") ? "&" : "?";
     const finalUrl = `${url}${sep}${bust}`;
@@ -18,21 +19,23 @@ async function loadFragment(containerId, url, afterLoad) {
     container.innerHTML = html;
     console.log(`✅ ${url} carregado em #${containerId}`);
 
-    if (afterLoad) afterLoad(); // roda callback se houver
+    if (afterLoad) afterLoad(); // executa callback se existir
   } catch (err) {
     console.error(`❌ Erro ao carregar ${url}:`, err);
   }
 }
 
 // ----------------------------
-// Inicialização principal
+// Inicialização
 // ----------------------------
 document.addEventListener("DOMContentLoaded", () => {
-  // Header só ativa eventos DEPOIS do fetch
+  // Header com eventos
   loadFragment("header", "header.html", initHeaderEvents);
+
+  // Footer simples
   loadFragment("footer", "footer.html");
 
-  // Swiper banners
+  // Swiper (carrossel)
   initSwiper();
 });
 
@@ -45,23 +48,23 @@ function initHeaderEvents() {
   const mobileMenu = document.getElementById("mobile-menu");
 
   if (!menuToggle || !menuClose || !mobileMenu) {
-    console.warn("⚠️ IDs do header não encontrados no DOM");
+    console.warn("⚠️ Elementos do menu não encontrados no header.");
     return;
   }
 
-  // abrir menu
+  // Abrir menu
   menuToggle.addEventListener("click", () => {
     mobileMenu.style.transform = "translateX(0)";
     mobileMenu.setAttribute("aria-hidden", "false");
   });
 
-  // fechar menu
+  // Fechar menu
   menuClose.addEventListener("click", () => {
     mobileMenu.style.transform = "translateX(-100%)";
     mobileMenu.setAttribute("aria-hidden", "true");
   });
 
-  // fechar ao clicar em link
+  // Fechar ao clicar em qualquer link do menu mobile
   document.querySelectorAll("#mobile-menu .mobile-nav a").forEach(link => {
     link.addEventListener("click", () => {
       mobileMenu.style.transform = "translateX(-100%)";
@@ -69,14 +72,14 @@ function initHeaderEvents() {
     });
   });
 
-  // busca desktop
+  // Busca desktop
   const searchInput = document.getElementById("search-input");
   const searchBtn = document.getElementById("search-button");
   searchBtn?.addEventListener("click", () => {
     doSearch(searchInput.value);
   });
 
-  // busca mobile
+  // Busca mobile
   const searchInputMob = document.getElementById("search-input-mobile");
   const searchBtnMob = document.getElementById("search-button-mobile");
   searchBtnMob?.addEventListener("click", () => {
@@ -114,16 +117,20 @@ function doSearch(query) {
 }
 
 // ----------------------------
-// Swiper Banners
+// Swiper - Carrossel de Banners
 // ----------------------------
 function initSwiper() {
   if (typeof Swiper === "undefined") {
-    console.warn("⚠️ Swiper não encontrado");
+    console.warn("⚠️ Swiper não encontrado. Verifique se o script está incluso.");
     return;
   }
   new Swiper(".swiper", {
     loop: true,
     autoplay: { delay: 5000, disableOnInteraction: false },
-    navigation: { nextEl: ".swiper-button-next", prevEl: ".swiper-button-prev" },
+    navigation: {
+      nextEl: ".swiper-button-next",
+      prevEl: ".swiper-button-prev",
+    },
+    effect: "slide",
   });
 }
