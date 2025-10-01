@@ -350,3 +350,7 @@ body {
   .footer-copy    { flex: 1; text-align: center;          order: 0; }
   .footer-socials { flex: 1; justify-content: flex-end; gap: 20px; order: 0; }
 }
+/* Evitar quebra da palavra "reservados" no rodapé */
+.footer-copy span.nobreak {
+  white-space: nowrap;
+}
