@@ -13,11 +13,6 @@
 <body>
   <!-- Header padrão -->
   <div id="header"></div>
-  <script>
-    fetch("header.html")
-      .then(res => res.text())
-      .then(data => document.getElementById("header").innerHTML = data);
-  </script>
 
   <!-- Banner -->
   <section class="banner">
@@ -76,20 +71,9 @@
 
   <!-- Footer padrão -->
   <div id="footer"></div>
-  <script>
-    fetch("footer.html")
-      .then(res => res.text())
-      .then(data => document.getElementById("footer").innerHTML = data);
-  </script>
 
   <!-- Scripts -->
   <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-  <script>
-    const swiper = new Swiper('.swiper', {
-      loop: true,
-      navigation: { nextEl: '.swiper-button-next', prevEl: '.swiper-button-prev' },
-      autoplay: { delay: 5000, disableOnInteraction: false },
-    });
-  </script>
+  <script src="js/main.js"></script>
 </body>
 </html>

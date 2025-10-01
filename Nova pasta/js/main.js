@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", () => {
       .then(res => res.text())
       .then(data => {
         headerContainer.innerHTML = data;
-        initHeaderEvents(); // ativa eventos depois que header carrega
+        initHeaderEvents(); // ativa eventos assim que header carrega
       });
   }
 
@@ -29,45 +29,55 @@ document.addEventListener("DOMContentLoaded", () => {
 // Eventos do Header
 // ----------------------------
 function initHeaderEvents() {
-  const menuToggle = document.getElementById("menu-toggle");
-  const menuClose = document.getElementById("menu-close");
-  const mobileMenu = document.getElementById("mobile-menu");
+  // dá um pequeno atraso para garantir que os elementos foram injetados
+  setTimeout(() => {
+    const menuToggle = document.getElementById("menu-toggle");
+    const menuClose = document.getElementById("menu-close");
+    const mobileMenu = document.getElementById("mobile-menu");
 
-  // abrir menu (entra na tela)
-  menuToggle?.addEventListener("click", () => {
-    mobileMenu.style.transform = "translateX(0)";
-    mobileMenu.setAttribute("aria-hidden", "false");
-  });
+    if (!menuToggle || !menuClose || !mobileMenu) {
+      console.warn("⚠️ Elementos do menu mobile não encontrados ainda.");
+      return;
+    }
 
-  // fechar menu (sai para a esquerda)
-  menuClose?.addEventListener("click", () => {
-    mobileMenu.style.transform = "translateX(-100%)";
-    mobileMenu.setAttribute("aria-hidden", "true");
-  });
+    // abrir menu
+    menuToggle.addEventListener("click", () => {
+      mobileMenu.style.transform = "translateX(0)";
+      mobileMenu.setAttribute("aria-hidden", "false");
+    });
 
-  // fechar ao clicar em qualquer link
-  document.querySelectorAll("#mobile-menu .mobile-nav a").forEach(link => {
-    link.addEventListener("click", () => {
+    // fechar menu
+    menuClose.addEventListener("click", () => {
       mobileMenu.style.transform = "translateX(-100%)";
       mobileMenu.setAttribute("aria-hidden", "true");
     });
-  });
 
-  // busca desktop
-  const searchInput = document.getElementById("search-input");
-  const searchBtn = document.getElementById("search-button");
-  searchBtn?.addEventListener("click", () => {
-    doSearch(searchInput.value);
-  });
+    // fechar ao clicar em qualquer link
+    document.querySelectorAll("#mobile-menu .mobile-nav a").forEach(link => {
+      link.addEventListener("click", () => {
+        mobileMenu.style.transform = "translateX(-100%)";
+        mobileMenu.setAttribute("aria-hidden", "true");
+      });
+    });
 
-  // busca mobile
-  const searchInputMob = document.getElementById("search-input-mobile");
-  const searchBtnMob = document.getElementById("search-button-mobile");
-  searchBtnMob?.addEventListener("click", () => {
-    doSearch(searchInputMob.value);
-    mobileMenu.style.transform = "translateX(-100%)";
-    mobileMenu.setAttribute("aria-hidden", "true");
-  });
+    // busca desktop
+    const searchInput = document.getElementById("search-input");
+    const searchBtn = document.getElementById("search-button");
+    searchBtn?.addEventListener("click", () => {
+      doSearch(searchInput.value);
+    });
+
+    // busca mobile
+    const searchInputMob = document.getElementById("search-input-mobile");
+    const searchBtnMob = document.getElementById("search-button-mobile");
+    searchBtnMob?.addEventListener("click", () => {
+      doSearch(searchInputMob.value);
+      mobileMenu.style.transform = "translateX(-100%)";
+      mobileMenu.setAttribute("aria-hidden", "true");
+    });
+
+    console.log("✅ Eventos do header inicializados");
+  }, 100);
 }
 
 // ----------------------------
