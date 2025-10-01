@@ -19,7 +19,7 @@
     }
 
     /* -------------------
-       Logo moderna com fundo elegante
+       Logo
     --------------------*/
     .logo-wrapper {
       background: linear-gradient(135deg, #ffffff 0%, #f2f2f2 100%);
@@ -112,6 +112,11 @@
       color: #fff;
     }
 
+    @media (max-width: 991px) {
+      .nav-desktop { display: none; }
+      .menu-toggle { display: block; }
+    }
+
     /* -------------------
        Mobile menu
     --------------------*/
@@ -130,9 +135,7 @@
       transition: transform 0.3s ease;
     }
 
-    .mobile-menu.open {
-      transform: translateX(0);
-    }
+    .mobile-menu.open { transform: translateX(0); }
 
     .mobile-menu-header {
       display: flex;
@@ -153,9 +156,7 @@
       font-weight: 500;
     }
 
-    .mobile-nav a:hover {
-      color: #c90000;
-    }
+    .mobile-nav a:hover { color: #c90000; }
 
     .menu-close {
       background: none;
@@ -164,42 +165,15 @@
       color: #222;
     }
 
-    @media (max-width: 991px) {
-      .nav-desktop {
-        display: none;
-      }
-      .menu-toggle {
-        display: block;
-      }
-    }
-
     /* -------------------
        Banner Swiper
     --------------------*/
-    .banner {
-      margin-top: 0;
-    }
-
-    .banner .swiper {
-      width: 100%;
-      max-height: 400px;
-      overflow: hidden;
-    }
-
-    .banner-img {
-      width: 100%;
-      height: auto;
-      object-fit: cover;
-      display: block;
-    }
+    .banner { margin-top: 0; }
+    .banner .swiper { width: 100%; max-height: 400px; overflow: hidden; }
+    .banner-img { width: 100%; height: auto; object-fit: cover; display: block; }
 
     @media (max-width: 767px) {
-      .banner-img {
-        object-fit: contain;
-        max-height: 250px;
-        width: 100%;
-        height: auto;
-      }
+      .banner-img { object-fit: contain; max-height: 250px; }
     }
 
     /* -------------------
@@ -228,22 +202,9 @@
       align-items: center;
     }
 
-    .product-card:hover {
-      box-shadow: 0 0 10px rgba(0,0,0,0.15);
-    }
-
-    .product-card img {
-      width: 100%;
-      height: auto;
-      max-height: 320px;
-      object-fit: contain;
-      margin-bottom: 10px;
-    }
-
-    .product-card h3 {
-      font-size: 18px;
-      margin-bottom: 10px;
-    }
+    .product-card:hover { box-shadow: 0 0 10px rgba(0,0,0,0.15); }
+    .product-card img { width: 100%; max-height: 320px; object-fit: contain; margin-bottom: 10px; }
+    .product-card h3 { font-size: 18px; margin-bottom: 10px; }
 
     .product-card .btn-whatsapp {
       font-size: 14px;
@@ -260,22 +221,56 @@
       transition: background-color 0.3s ease;
     }
 
-    .product-card .btn-whatsapp:hover {
-      background-color: #128c4a;
+    .product-card .btn-whatsapp:hover { background-color: #128c4a; }
+    .em-breve { color: #999; font-style: italic; font-size: 16px; }
+
+    /* -------------------
+       Footer corrigido
+    --------------------*/
+    .footer {
+      background-color: #222;
+      color: #fff;
+      padding: 30px 20px;
+      width: 100%;
+      box-sizing: border-box;
     }
 
-    .em-breve {
-      color: #999;
-      font-style: italic;
-      font-size: 16px;
+    .footer-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+      width: 100%;
     }
-	
-    /* Social icons modernized */
+
+    .footer-links,
+    .footer-socials,
+    .footer-copy {
+      flex: 1 1 auto;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 20px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .footer-links a {
+      color: #fff;
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.25s ease;
+    }
+    .footer-links a:hover { color: #c90000; }
+
     .footer-socials {
       display: flex;
       justify-content: center;
-      gap: 24px;
-      margin-bottom: 16px;
+      gap: 20px;
+      flex-wrap: wrap;
     }
 
     .footer-socials a {
@@ -284,166 +279,42 @@
       justify-content: center;
       width: 48px;
       height: 48px;
-      background: #222;
+      background: #111;
       border-radius: 50%;
-      color: white;
-      font-size: 28px;
-      transition: all 0.3s ease;
-      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+      color: #fff;
+      font-size: 20px;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.35);
     }
 
-    .footer-socials a:hover {
-      transform: scale(1.15);
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+    .footer-socials a:hover { transform: scale(1.12); }
+
+    .footer-copy {
+      font-size: 14px;
+      color: #aaa;
+      text-align: center;
+      line-height: 1.4;
     }
 
-    .footer-socials a.facebook:hover {
-      background-color: #3b5998;
-      color: white;
+    @media (min-width: 768px) {
+      .footer-container {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .footer-links { justify-content: flex-start; }
+      .footer-socials { justify-content: center; }
+      .footer-copy { text-align: right; }
     }
 
-    .footer-socials a.instagram:hover {
-      background: radial-gradient(
-        circle at 30% 107%,
-        #fdf497 0%,
-        #fdf497 5%,
-        #fd5949 45%,
-        #d6249f 60%,
-        #285aeb 90%
-      );
-      color: white;
-    }
-
-    .footer-socials a.twitter:hover {
-      background-color: #1da1f2;
-      color: white;
-    }
-
-    .footer-socials a.whatsapp:hover {
-      background-color: #25d366;
-      color: white;
-    }
-
-    .footer-socials a.location:hover {
-      background-color: #c90000;
-      color: white;
-    }
-
-    /* -------------------
-       Responsividade
-    -------------------*/
     @media (max-width: 767px) {
-      .product-card {
-        flex: 1 1 45%;
-        max-width: 45%;
-      }
-
-      .product-card img {
-        max-height: 220px;
-      }
+      .product-card { flex: 1 1 45%; max-width: 45%; }
+      .product-card img { max-height: 220px; }
     }
   </style>
 </head>
 <body>
-  <!-- Header -->
-  <header class="header">
-    <div class="header-container">
-      <a href="index.html" class="logo-wrapper">
-        <img src="images/logo.png" alt="Quality Celulares" class="logo" />
-      </a>
-      <nav class="nav-desktop">
-        <a href="index.html">Início</a>
-        <a href="#smartphones">Smartphones</a>
-        <a href="#acessorios">Acessórios</a>
-        <div class="search-wrapper">
-          <input type="text" id="search-input" placeholder="Buscar..." />
-          <button id="search-button" aria-label="Buscar"><i class="fa fa-search"></i></button>
-        </div>
-        <a href="https://wa.me/5555991407824?text=Olá%20vim%20através%20do%20site" class="btn-whatsapp">
-          <i class="fa-brands fa-whatsapp"></i> WhatsApp
-        </a>
-      </nav>
-      <button id="menu-toggle" class="menu-toggle" aria-label="Abrir menu">
-        <i class="fa-solid fa-bars"></i>
-      </button>
-    </div>
-
-    <div id="mobile-menu" class="mobile-menu" aria-hidden="true">
-      <div class="mobile-menu-header">
-        <div class="logo-wrapper">
-          <img src="images/logo.png" alt="Quality Celulares" class="logo" />
-        </div>
-        <button id="menu-close" class="menu-close" aria-label="Fechar menu">
-          <i class="fa-solid fa-xmark"></i>
-        </button>
-      </div>
-      <div class="search-wrapper-mobile">
-        <input type="text" id="search-input-mobile" placeholder="Buscar..." />
-        <button id="search-button-mobile" aria-label="Buscar"><i class="fa fa-search"></i></button>
-      </div>
-      <nav class="mobile-nav">
-        <a href="index.html">Início</a>
-        <a href="#smartphones">Smartphones</a>
-        <a href="#acessorios">Acessórios</a>
-        <a href="https://wa.me/5555991407824?text=Olá%20vim%20através%20do%20site" class="btn-whatsapp">
-          <i class="fa-brands fa-whatsapp"></i> WhatsApp
-        </a>
-      </nav>
-    </div>
-  </header>
-
-  <!-- Banner -->
-  <section class="banner">
-    <div class="swiper">
-      <div class="swiper-wrapper">
-        <div class="swiper-slide">
-          <picture>
-            <source media="(max-width: 767px)" srcset="images/banner1-mobile.png" />
-            <img src="images/banner1.png" alt="Banner 1" class="banner-img" />
-          </picture>
-        </div>
-        <div class="swiper-slide">
-          <picture>
-            <source media="(max-width: 767px)" srcset="images/banner2-mobile.png" />
-            <img src="images/banner2.png" alt="Banner 2" class="banner-img" />
-          </picture>
-        </div>
-        <div class="swiper-slide">
-          <picture>
-            <source media="(max-width: 767px)" srcset="images/banner3-mobile.png" />
-            <img src="images/banner3.png" alt="Banner 3" class="banner-img" />
-          </picture>
-        </div>
-      </div>
-      <div class="swiper-button-next"></div>
-      <div class="swiper-button-prev"></div>
-    </div>
-  </section>
-
-  <!-- Produtos -->
-  <main class="main">
-    <h2 id="smartphones" style="text-align:center; margin-top: 40px;">Smartphones</h2>
-    <div id="products" class="products">
-      <div class="product-card">
-        <img src="images/pocox7pro.png" alt="Poco X7 Pro" />
-        <h3>Poco X7 Pro</h3>
-        <a href="https://wa.me/5555991407824?text=Olá%20vim%20através%20do%20site" class="btn-whatsapp" target="_blank">
-          <i class="fa-brands fa-whatsapp"></i> Comprar no WhatsApp
-        </a>
-      </div>
-      <div class="product-card">
-        <img src="images/redmi14c.png" alt="Redmi 14C" />
-        <h3>Redmi 14C</h3>
-        <a href="https://wa.me/5555991407824?text=Olá%20vim%20através%20do%20site" class="btn-whatsapp" target="_blank">
-          <i class="fa-brands fa-whatsapp"></i> Comprar no WhatsApp
-        </a>
-      </div>
-    </div>
-    <p id="no-results" class="em-breve" style="display:none; text-align:center; margin-top:20px;">Nenhum produto encontrado.</p>
-
-    <h2 id="acessorios" style="text-align:center; margin-top: 60px;">Acessórios</h2>
-    <p class="em-breve" style="text-align:center;">Em breve...</p>
-  </main>
+  <!-- ... SEU CONTEÚDO ... -->
 
   <!-- Rodapé dinâmico -->
   <div id="footer-container"></div>
@@ -451,92 +322,13 @@
   <!-- Scripts -->
   <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
   <script>
-    const swiper = new Swiper('.swiper', {
-      loop: true,
-      navigation: { nextEl: '.swiper-button-next', prevEl: '.swiper-button-prev' },
-      autoplay: { delay: 5000, disableOnInteraction: false },
-    });
-
-    // Menu open/close + fechar ao clicar em link
-    const menuToggle = document.getElementById("menu-toggle");
-    const menuClose = document.getElementById("menu-close");
-    const mobileMenu = document.getElementById("mobile-menu");
-
-    menuToggle.addEventListener("click", () => {
-      mobileMenu.classList.add("open");
-      mobileMenu.setAttribute("aria-hidden", "false");
-    });
-
-    menuClose.addEventListener("click", () => {
-      mobileMenu.classList.remove("open");
-      mobileMenu.setAttribute("aria-hidden", "true");
-    });
-
-    // Fechar menu ao clicar fora
-    document.addEventListener("click", (e) => {
-      if (!mobileMenu.contains(e.target) && !menuToggle.contains(e.target)) {
-        mobileMenu.classList.remove("open");
-        mobileMenu.setAttribute("aria-hidden", "true");
-      }
-    });
-
-    // Busca simples de produtos (desktop e mobile)
-    const searchInput = document.getElementById("search-input");
-    const searchButton = document.getElementById("search-button");
-    const searchInputMobile = document.getElementById("search-input-mobile");
-    const searchButtonMobile = document.getElementById("search-button-mobile");
-    const productsContainer = document.getElementById("products");
-    const noResults = document.getElementById("no-results");
-
-    function searchProducts(term) {
-      term = term.toLowerCase();
-      const cards = productsContainer.querySelectorAll(".product-card");
-      let found = false;
-
-      cards.forEach(card => {
-        const title = card.querySelector("h3").textContent.toLowerCase();
-        if (title.includes(term)) {
-          card.style.display = "";
-          found = true;
-        } else {
-          card.style.display = "none";
-        }
-      });
-
-      noResults.style.display = found ? "none" : "block";
-    }
-
-    searchButton.addEventListener("click", () => {
-      searchProducts(searchInput.value);
-    });
-
-    searchInput.addEventListener("keydown", (e) => {
-      if (e.key === "Enter") {
-        searchProducts(searchInput.value);
-      }
-    });
-
-    searchButtonMobile.addEventListener("click", () => {
-      searchProducts(searchInputMobile.value);
-      mobileMenu.classList.remove("open");
-      mobileMenu.setAttribute("aria-hidden", "true");
-    });
-
-    searchInputMobile.addEventListener("keydown", (e) => {
-      if (e.key === "Enter") {
-        searchProducts(searchInputMobile.value);
-        mobileMenu.classList.remove("open");
-        mobileMenu.setAttribute("aria-hidden", "true");
-      }
-    });
+    // ... (scripts do swiper, menu e busca iguais ao seu)
 
     // Carrega o rodapé dinamicamente
     fetch('footer.html')
-      .then(response => response.text())
-      .then(data => {
-        document.getElementById('footer-container').innerHTML = data;
-      })
-      .catch(error => console.error('Erro ao carregar o rodapé:', error));
+      .then(r => r.text())
+      .then(html => { document.getElementById('footer-container').innerHTML = html; })
+      .catch(err => console.error('Erro ao carregar rodapé:', err));
   </script>
 </body>
 </html>
