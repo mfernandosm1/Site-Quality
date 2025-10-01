@@ -257,60 +257,60 @@ body {
 }
 
 /* -------------------
-   Footer (padronizado)
+   Footer (padronizado formas-de-pagamento)
 --------------------*/
 .footer {
-  background-color: #222;
+  background-color: #111; /* barra escura */
   color: #fff;
   padding: 30px 20px;
-  width: 100%;
-  box-sizing: border-box;
 }
 
 .footer-container {
-  max-width: 1200px;
-  margin: 0 auto;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 20px;
-  width: 100%;
+  text-align: center;
 }
 
 /* Links */
 .footer-links {
   display: flex;
   gap: 20px;
-  justify-content: center;
-  align-items: center;
   flex-wrap: wrap;
+  justify-content: center;
 }
-
 .footer-links a {
   color: #fff;
   text-decoration: none;
   font-weight: 500;
   transition: color 0.25s ease;
 }
-
 .footer-links a:hover { color: #c90000; }
 
-/* Social icons */
-.footer-socials {
-  display: flex;
-  justify-content: center;
-  gap: 20px;
-  flex-wrap: wrap;
-  align-items: center;
+/* Copy */
+.footer-copy {
+  font-size: 14px;
+  color: #aaa;
+  line-height: 1.4;
+  order: 2; /* mobile: copy no meio */
 }
 
+/* Sociais */
+.footer-socials {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  flex-wrap: wrap;
+  order: 3;
+}
 .footer-socials a {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   width: 48px;
   height: 48px;
-  background: #111;
+  background: #222;
   border-radius: 50%;
   color: #fff;
   font-size: 20px;
@@ -318,26 +318,15 @@ body {
   box-shadow: 0 2px 6px rgba(0,0,0,0.35);
   text-decoration: none;
 }
-
 .footer-socials a:hover {
   transform: scale(1.12);
   box-shadow: 0 6px 18px rgba(0,0,0,0.45);
 }
-
-/* Hover de cores */
 .footer-socials a.facebook:hover { background-color: #3b5998; }
 .footer-socials a.instagram:hover { background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fd5949 45%, #d6249f 60%, #285aeb 90%); }
 .footer-socials a.twitter:hover { background-color: #1da1f2; }
 .footer-socials a.whatsapp:hover { background-color: #25d366; }
 .footer-socials a.location:hover { background-color: #c90000; }
-
-/* Copy */
-.footer-copy {
-  font-size: 14px;
-  color: #aaa;
-  text-align: center;
-  line-height: 1.4;
-}
 
 /* Desktop layout */
 @media (min-width: 768px) {
@@ -347,8 +336,8 @@ body {
     align-items: center;
     text-align: left;
   }
-
-  .footer-links { justify-content: flex-start; }
-  .footer-socials { justify-content: center; }
-  .footer-copy { text-align: right; }
+  .footer-links { flex: 1; justify-content: flex-start; }
+  .footer-copy { flex: 1; text-align: center; order: 0; }
+  .footer-socials { flex: 1; justify-content: flex-end; order: 0; }
 }
+
