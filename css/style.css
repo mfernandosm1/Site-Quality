@@ -55,7 +55,7 @@ body {
 }
 .nav-desktop a:hover { text-decoration: underline; }
 
-/* Campo de busca */
+/* Campo de busca desktop */
 .search-wrapper {
   display: flex;
   align-items: center;
@@ -127,6 +127,8 @@ body {
   font-size: 24px;
   color: #222;
 }
+
+/* Campo de busca Mobile */
 .search-wrapper-mobile {
   display: flex;
   align-items: center;
@@ -134,18 +136,24 @@ body {
   background: #f5f5f5;
   border-radius: 4px;
   overflow: hidden;
+  width: 100%;
 }
 .search-wrapper-mobile input {
   flex: 1;
   border: none;
-  padding: 6px 8px;
+  padding: 10px 12px;   /* mais espaço */
+  font-size: 16px;      /* evita zoom no iOS */
   outline: none;
+  min-width: 0;         /* evita rolagem lateral */
+  box-sizing: border-box;
 }
 .search-wrapper-mobile button {
+  flex-shrink: 0;       /* botão não some */
   background: #c90000;
   color: #fff;
   border: none;
-  padding: 6px 10px;
+  padding: 10px 14px;
+  font-size: 16px;      /* mantém alinhado */
   cursor: pointer;
 }
 
