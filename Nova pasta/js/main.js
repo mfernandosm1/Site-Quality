@@ -33,22 +33,22 @@ function initHeaderEvents() {
   const menuClose = document.getElementById("menu-close");
   const mobileMenu = document.getElementById("mobile-menu");
 
-  // abrir menu
+  // abrir menu (entra na tela)
   menuToggle?.addEventListener("click", () => {
     mobileMenu.style.transform = "translateX(0)";
     mobileMenu.setAttribute("aria-hidden", "false");
   });
 
-  // fechar menu
+  // fechar menu (sai para a esquerda)
   menuClose?.addEventListener("click", () => {
-    mobileMenu.style.transform = "translateX(100%)";
+    mobileMenu.style.transform = "translateX(-100%)";
     mobileMenu.setAttribute("aria-hidden", "true");
   });
 
   // fechar ao clicar em qualquer link
   document.querySelectorAll("#mobile-menu .mobile-nav a").forEach(link => {
     link.addEventListener("click", () => {
-      mobileMenu.style.transform = "translateX(100%)";
+      mobileMenu.style.transform = "translateX(-100%)";
       mobileMenu.setAttribute("aria-hidden", "true");
     });
   });
@@ -65,7 +65,7 @@ function initHeaderEvents() {
   const searchBtnMob = document.getElementById("search-button-mobile");
   searchBtnMob?.addEventListener("click", () => {
     doSearch(searchInputMob.value);
-    mobileMenu.style.transform = "translateX(100%)";
+    mobileMenu.style.transform = "translateX(-100%)";
     mobileMenu.setAttribute("aria-hidden", "true");
   });
 }
