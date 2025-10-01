@@ -1,129 +1,139 @@
-// ----------------------------
-// Função para carregar fragmentos HTML (header/footer)
-// ----------------------------
-async function loadFragment(containerId, url, afterLoad) {
-  const container = document.getElementById(containerId);
-  if (!container) return;
-
-  try {
-    // Cache-busting para evitar versão antiga no GitHub Pages
-    const bust = `cb=${Date.now()}`;
-    const sep = url.includes("?") ? "&" : "?";
-    const finalUrl = `${url}${sep}${bust}`;
-
-    console.log(`🛰️ Carregando: ${finalUrl}`);
-    const res = await fetch(finalUrl, { cache: "no-store" });
-    if (!res.ok) throw new Error(`${url} retornou ${res.status}`);
-
-    const html = await res.text();
-    container.innerHTML = html;
-    console.log(`✅ ${url} carregado em #${containerId}`);
-
-    if (afterLoad) afterLoad(); // executa callback se existir
-  } catch (err) {
-    console.error(`❌ Erro ao carregar ${url}:`, err);
-  }
-}
-
-// ----------------------------
-// Inicialização
-// ----------------------------
+// Aguarda DOM estar pronto
 document.addEventListener("DOMContentLoaded", () => {
-  // Header com eventos
-  loadFragment("header", "header.html", initHeaderEvents);
+  // Carregar header
+  const headerContainer = document.getElementById("header");
+  if (headerContainer) {
+    fetch("header.html")
+      .then(res => res.text())
+      .then(data => {
+        headerContainer.innerHTML = data;
+        initHeaderEvents(); // ativa eventos assim que header carrega
+      })
+      .catch(err => console.error("Erro ao carregar header:", err));
+  }
 
-  // Footer simples
-  loadFragment("footer", "footer.html");
+  // Carregar footer
+  const footerContainer = document.getElementById("footer");
+  if (footerContainer) {
+    fetch("footer.html")
+      .then(res => res.text())
+      .then(data => {
+        footerContainer.innerHTML = data;
+      })
+      .catch(err => console.error("Erro ao carregar footer:", err));
+  }
 
-  // Swiper (carrossel)
+  // Iniciar carrossel de banners
   initSwiper();
 });
 
 // ----------------------------
-// Eventos do Header (menu/busca)
+// Eventos do Header
 // ----------------------------
 function initHeaderEvents() {
   const menuToggle = document.getElementById("menu-toggle");
   const menuClose = document.getElementById("menu-close");
   const mobileMenu = document.getElementById("mobile-menu");
 
-  if (!menuToggle || !menuClose || !mobileMenu) {
-    console.warn("⚠️ Elementos do menu não encontrados no header.");
-    return;
+  // cria overlay dinamicamente
+  let overlay = document.querySelector(".mobile-overlay");
+  if (!overlay) {
+    overlay = document.createElement("div");
+    overlay.classList.add("mobile-overlay");
+    document.body.appendChild(overlay);
   }
 
-  // Abrir menu
-  menuToggle.addEventListener("click", () => {
+  // abrir menu
+  menuToggle?.addEventListener("click", () => {
     mobileMenu.style.transform = "translateX(0)";
     mobileMenu.setAttribute("aria-hidden", "false");
+    overlay.classList.add("active");
   });
 
-  // Fechar menu
-  menuClose.addEventListener("click", () => {
+  // função para fechar menu
+  function closeMenu() {
     mobileMenu.style.transform = "translateX(-100%)";
     mobileMenu.setAttribute("aria-hidden", "true");
-  });
+    overlay.classList.remove("active");
+  }
 
-  // Fechar ao clicar em qualquer link do menu mobile
+  // fechar com X ou overlay
+  menuClose?.addEventListener("click", closeMenu);
+  overlay?.addEventListener("click", closeMenu);
+
+  // fechar ao clicar em qualquer link do menu
   document.querySelectorAll("#mobile-menu .mobile-nav a").forEach(link => {
-    link.addEventListener("click", () => {
-      mobileMenu.style.transform = "translateX(-100%)";
-      mobileMenu.setAttribute("aria-hidden", "true");
-    });
+    link.addEventListener("click", closeMenu);
   });
 
-  // Busca desktop
+  // ----------------------------
+  // Busca Desktop
+  // ----------------------------
   const searchInput = document.getElementById("search-input");
   const searchBtn = document.getElementById("search-button");
+
   searchBtn?.addEventListener("click", () => {
     doSearch(searchInput.value);
   });
 
-  // Busca mobile
+  searchInput?.addEventListener("keypress", (e) => {
+    if (e.key === "Enter") {
+      doSearch(searchInput.value);
+    }
+  });
+
+  // ----------------------------
+  // Busca Mobile
+  // ----------------------------
   const searchInputMob = document.getElementById("search-input-mobile");
   const searchBtnMob = document.getElementById("search-button-mobile");
+
   searchBtnMob?.addEventListener("click", () => {
     doSearch(searchInputMob.value);
-    mobileMenu.style.transform = "translateX(-100%)";
-    mobileMenu.setAttribute("aria-hidden", "true");
+    closeMenu();
+  });
+
+  searchInputMob?.addEventListener("keypress", (e) => {
+    if (e.key === "Enter") {
+      doSearch(searchInputMob.value);
+      closeMenu();
+    }
   });
 
   console.log("✅ Eventos do header inicializados");
 }
 
 // ----------------------------
-// Busca simples nos produtos
+// Lógica de busca simples
 // ----------------------------
 function doSearch(query) {
   const products = document.querySelectorAll(".product-card");
   const noResults = document.getElementById("no-results");
-  const text = (query || "").trim().toLowerCase();
 
-  if (!text) {
+  if (!query || query.trim() === "") {
     products.forEach(p => (p.style.display = "flex"));
-    if (noResults) noResults.style.display = "none";
+    noResults.style.display = "none";
     return;
   }
 
-  let found = 0;
+  let found = false;
   products.forEach(card => {
-    const title = (card.querySelector("h3")?.textContent || "").toLowerCase();
-    const match = title.includes(text);
-    card.style.display = match ? "flex" : "none";
-    if (match) found++;
+    const title = card.querySelector("h3").textContent.toLowerCase();
+    if (title.includes(query.toLowerCase())) {
+      card.style.display = "flex";
+      found = true;
+    } else {
+      card.style.display = "none";
+    }
   });
 
-  if (noResults) noResults.style.display = found ? "none" : "block";
+  noResults.style.display = found ? "none" : "block";
 }
 
 // ----------------------------
 // Swiper - Carrossel de Banners
 // ----------------------------
 function initSwiper() {
-  if (typeof Swiper === "undefined") {
-    console.warn("⚠️ Swiper não encontrado. Verifique se o script está incluso.");
-    return;
-  }
   new Swiper(".swiper", {
     loop: true,
     autoplay: { delay: 5000, disableOnInteraction: false },
