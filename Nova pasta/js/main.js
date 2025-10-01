@@ -1,24 +1,38 @@
 // Aguarda DOM estar pronto
 document.addEventListener("DOMContentLoaded", () => {
+  console.log("📂 DOM carregado, iniciando fetch de header/footer...");
+
   // Carregar header
   const headerContainer = document.getElementById("header");
   if (headerContainer) {
     fetch("header.html")
-      .then(res => res.text())
+      .then(res => {
+        console.log("🔎 Resposta header:", res);
+        if (!res.ok) throw new Error("Não conseguiu carregar header.html");
+        return res.text();
+      })
       .then(data => {
         headerContainer.innerHTML = data;
+        console.log("✅ Header carregado com sucesso");
         initHeaderEvents(); // ativa eventos assim que header carrega
-      });
+      })
+      .catch(err => console.error("❌ Erro ao carregar header:", err));
   }
 
   // Carregar footer
   const footerContainer = document.getElementById("footer");
   if (footerContainer) {
     fetch("footer.html")
-      .then(res => res.text())
+      .then(res => {
+        console.log("🔎 Resposta footer:", res);
+        if (!res.ok) throw new Error("Não conseguiu carregar footer.html");
+        return res.text();
+      })
       .then(data => {
         footerContainer.innerHTML = data;
-      });
+        console.log("✅ Footer carregado com sucesso");
+      })
+      .catch(err => console.error("❌ Erro ao carregar footer:", err));
   }
 
   // Iniciar carrossel de banners
@@ -40,14 +54,18 @@ function initHeaderEvents() {
       return;
     }
 
+    console.log("✅ Eventos do header inicializados");
+
     // abrir menu
     menuToggle.addEventListener("click", () => {
+      console.log("👉 Clicou para abrir o menu mobile");
       mobileMenu.style.transform = "translateX(0)";
       mobileMenu.setAttribute("aria-hidden", "false");
     });
 
     // fechar menu
     menuClose.addEventListener("click", () => {
+      console.log("👉 Clicou para fechar o menu mobile");
       mobileMenu.style.transform = "translateX(-100%)";
       mobileMenu.setAttribute("aria-hidden", "true");
     });
@@ -55,6 +73,7 @@ function initHeaderEvents() {
     // fechar ao clicar em qualquer link
     document.querySelectorAll("#mobile-menu .mobile-nav a").forEach(link => {
       link.addEventListener("click", () => {
+        console.log("👉 Clicou em um link, fechando menu mobile");
         mobileMenu.style.transform = "translateX(-100%)";
         mobileMenu.setAttribute("aria-hidden", "true");
       });
@@ -64,6 +83,7 @@ function initHeaderEvents() {
     const searchInput = document.getElementById("search-input");
     const searchBtn = document.getElementById("search-button");
     searchBtn?.addEventListener("click", () => {
+      console.log("🔍 Busca desktop:", searchInput.value);
       doSearch(searchInput.value);
     });
 
@@ -71,12 +91,11 @@ function initHeaderEvents() {
     const searchInputMob = document.getElementById("search-input-mobile");
     const searchBtnMob = document.getElementById("search-button-mobile");
     searchBtnMob?.addEventListener("click", () => {
+      console.log("🔍 Busca mobile:", searchInputMob.value);
       doSearch(searchInputMob.value);
       mobileMenu.style.transform = "translateX(-100%)";
       mobileMenu.setAttribute("aria-hidden", "true");
     });
-
-    console.log("✅ Eventos do header inicializados");
   }, 100);
 }
 
