@@ -260,7 +260,6 @@ body {
   gap: 20px;
   text-align: center;
 }
-/* Links */
 .footer-links {
   display: flex;
   gap: 20px;
@@ -271,69 +270,30 @@ body {
   color: #fff;
   text-decoration: none;
   font-weight: 500;
-  transition: color 0.25s ease;
 }
-.footer-links a:hover { color: #c90000; }
-/* Copy */
 .footer-copy {
   font-size: 14px;
   color: #aaa;
   line-height: 1.4;
-  order: 3;
+  text-align: center;
+  white-space: normal;
+  word-break: keep-all; /* não quebra palavras */
 }
-/* Sociais */
 .footer-socials {
   display: flex;
-  gap: 16px;
+  gap: 20px;
   justify-content: center;
   flex-wrap: wrap;
-  order: 2;
 }
 .footer-socials a {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 42px;
-  height: 42px;
+  width: 48px;
+  height: 48px;
   background: #222;
   border-radius: 50%;
   color: #fff;
-  font-size: 18px;
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.35);
-  text-decoration: none;
+  font-size: 20px;
 }
-.footer-socials a:hover {
-  transform: scale(1.12);
-  box-shadow: 0 6px 18px rgba(0,0,0,0.45);
-}
-.footer-socials a.facebook:hover { background-color: #3b5998; }
-.footer-socials a.instagram:hover { background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fd5949 45%, #d6249f 60%, #285aeb 90%); }
-.footer-socials a.tiktok:hover { background-color: #000; }
-.footer-socials a.whatsapp:hover { background-color: #25d366; }
-.footer-socials a.location:hover { background-color: #c90000; }
-
-/* Mobile compact icons */
-@media (max-width: 480px) {
-  .footer-socials {
-    gap: 12px;
-  }
-  .footer-socials a {
-    width: 48px;
-    height: 48px;
-    font-size: 24px;
-  }
-}
-
-/* Desktop layout */
-@media (min-width: 768px) {
-  .footer-container {
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    text-align: left;
-  }
-  .footer-links { flex: 1; justify-content: flex-start; }
-  .footer-copy { flex: 1; text-align: center; order: 0; }
-  .footer-socials { flex: 1; justify-content: flex-end; order: 0; }
-}
+.footer-socials a:hover { transform: scale(1.12); }
