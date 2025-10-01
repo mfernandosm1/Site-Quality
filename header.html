@@ -12,7 +12,9 @@
       <a href="#acessorios">Acessórios</a>
       <div class="search-wrapper">
         <input type="text" id="search-input" placeholder="Buscar..." />
-        <button id="search-button" aria-label="Buscar"><i class="fa fa-search"></i></button>
+        <button id="search-button" aria-label="Buscar">
+          <i class="fa fa-search"></i>
+        </button>
       </div>
     </nav>
 
@@ -22,7 +24,7 @@
     </button>
   </div>
 
-  <!-- Menu Mobile (direita) -->
+  <!-- Menu Mobile (abre pela direita) -->
   <div id="mobile-menu" class="mobile-menu" aria-hidden="true">
     <div class="mobile-menu-header">
       <a href="index.html" class="logo-wrapper">
@@ -32,10 +34,16 @@
         <i class="fa-solid fa-xmark"></i>
       </button>
     </div>
+
+    <!-- Campo de busca Mobile -->
     <div class="search-wrapper-mobile">
       <input type="text" id="search-input-mobile" placeholder="Buscar..." />
-      <button id="search-button-mobile" aria-label="Buscar"><i class="fa fa-search"></i></button>
+      <button id="search-button-mobile" aria-label="Buscar">
+        <i class="fa fa-search"></i>
+      </button>
     </div>
+
+    <!-- Navegação Mobile -->
     <nav class="mobile-nav">
       <a href="index.html">Início</a>
       <a href="#smartphones">Smartphones</a>
@@ -43,77 +51,3 @@
     </nav>
   </div>
 </header>
-
-<script>
-  // Menu lateral (abre pela direita)
-  const menuToggle = document.getElementById("menu-toggle");
-  const menuClose = document.getElementById("menu-close");
-  const mobileMenu = document.getElementById("mobile-menu");
-
-  menuToggle?.addEventListener("click", () => {
-    mobileMenu.style.transform = "translateX(0)";
-    mobileMenu.setAttribute("aria-hidden", "false");
-  });
-
-  menuClose?.addEventListener("click", () => {
-    mobileMenu.style.transform = "translateX(100%)";
-    mobileMenu.setAttribute("aria-hidden", "true");
-  });
-
-  document.querySelectorAll('#mobile-menu .mobile-nav a').forEach(link => {
-    link.addEventListener('click', () => {
-      mobileMenu.style.transform = "translateX(100%)";
-      mobileMenu.setAttribute("aria-hidden", "true");
-    });
-  });
-
-  // Função de busca (desktop + mobile)
-  function executarBusca(termo) {
-    termo = termo.toLowerCase();
-    const cards = document.querySelectorAll(".product-card");
-    const msg = document.getElementById("no-results");
-    let encontrados = 0;
-
-    cards.forEach(card => {
-      const nome = card.querySelector("h3").textContent.toLowerCase();
-      if (nome.includes(termo)) {
-        card.style.display = "flex";
-        encontrados++;
-      } else {
-        card.style.display = "none";
-      }
-    });
-
-    if (msg) {
-      msg.style.display = encontrados === 0 ? "block" : "none";
-    }
-  }
-
-  // Eventos de busca desktop
-  document.getElementById("search-button")?.addEventListener("click", () => {
-    const termo = document.getElementById("search-input").value;
-    executarBusca(termo);
-  });
-
-  document.getElementById("search-input")?.addEventListener("keypress", (e) => {
-    if (e.key === "Enter") {
-      executarBusca(e.target.value);
-    }
-  });
-
-  // Eventos de busca mobile
-  document.getElementById("search-button-mobile")?.addEventListener("click", () => {
-    const termo = document.getElementById("search-input-mobile").value;
-    executarBusca(termo);
-    mobileMenu.style.transform = "translateX(100%)"; // fecha após buscar
-    mobileMenu.setAttribute("aria-hidden", "true");
-  });
-
-  document.getElementById("search-input-mobile")?.addEventListener("keypress", (e) => {
-    if (e.key === "Enter") {
-      executarBusca(e.target.value);
-      mobileMenu.style.transform = "translateX(100%)";
-      mobileMenu.setAttribute("aria-hidden", "true");
-    }
-  });
-</script>
