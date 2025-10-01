@@ -55,7 +55,7 @@ body {
 }
 .nav-desktop a:hover { text-decoration: underline; }
 
-/* Campo de busca */
+/* Campo de busca (desktop) */
 .search-wrapper {
   display: flex;
   align-items: center;
@@ -84,13 +84,18 @@ body {
   color: #fff;
 }
 
+@media (max-width: 991px) {
+  .nav-desktop { display: none; }
+  .menu-toggle { display: block; }
+}
+
 /* -------------------
    Mobile menu (abre pela esquerda)
 --------------------*/
 .mobile-menu {
   position: fixed;
   top: 0;
-  left: 0;
+  left: 0;                 /* abre pela esquerda */
   width: 80%;
   max-width: 300px;
   height: 100%;
@@ -98,11 +103,11 @@ body {
   z-index: 2000;
   box-shadow: 2px 0 6px rgba(0,0,0,0.2);
   padding: 20px;
-  transform: translateX(-100%);
+  transform: translateX(-100%); /* escondido */
   transition: transform 0.3s ease;
 }
 .mobile-menu.open {
-  transform: translateX(0);
+  transform: translateX(0);     /* visível */
 }
 .mobile-menu-header {
   display: flex;
@@ -127,6 +132,8 @@ body {
   font-size: 24px;
   color: #222;
 }
+
+/* Busca mobile */
 .search-wrapper-mobile {
   display: flex;
   align-items: center;
@@ -138,15 +145,15 @@ body {
 .search-wrapper-mobile input {
   flex: 1;
   border: none;
-  padding: 6px 8px;
+  padding: 8px 10px;
   outline: none;
-  font-size: 16px; /* evita zoom no mobile */
+  font-size: 16px; /* evita zoom no iOS/Android */
 }
 .search-wrapper-mobile button {
   background: #c90000;
   color: #fff;
   border: none;
-  padding: 6px 10px;
+  padding: 8px 12px;
   cursor: pointer;
 }
 
@@ -158,14 +165,7 @@ body {
   z-index: 1500;
   display: none;
 }
-.menu-overlay.active {
-  display: block;
-}
-
-@media (max-width: 991px) {
-  .nav-desktop { display: none; }
-  .menu-toggle { display: block; }
-}
+.menu-overlay.active { display: block; }
 
 /* -------------------
    Banner Swiper
@@ -246,7 +246,7 @@ body {
 }
 
 /* -------------------
-   Footer
+   Footer (padronizado + mobile OK)
 --------------------*/
 .footer {
   background-color: #111;
@@ -254,13 +254,18 @@ body {
   padding: 30px 20px;
 }
 .footer-container {
+  max-width: 1200px;
+  margin: 0 auto;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 20px;
   text-align: center;
 }
+
+/* Links (sempre primeiro no mobile) */
 .footer-links {
+  order: 1;
   display: flex;
   gap: 20px;
   flex-wrap: wrap;
@@ -270,20 +275,18 @@ body {
   color: #fff;
   text-decoration: none;
   font-weight: 500;
+  transition: color .25s ease;
 }
-.footer-copy {
-  font-size: 14px;
-  color: #aaa;
-  line-height: 1.4;
-  text-align: center;
-  white-space: normal;
-  word-break: keep-all; /* não quebra palavras */
-}
+.footer-links a:hover { color: #c90000; }
+
+/* Ícones sociais (segundo no mobile, sem quebra de linha) */
 .footer-socials {
+  order: 2;
   display: flex;
-  gap: 20px;
+  gap: 12px;                /* gap menor p/ caber em 320px */
   justify-content: center;
-  flex-wrap: wrap;
+  align-items: center;
+  flex-wrap: nowrap;        /* não quebra linha */
 }
 .footer-socials a {
   display: inline-flex;
@@ -295,5 +298,55 @@ body {
   border-radius: 50%;
   color: #fff;
   font-size: 20px;
+  box-shadow: 0 2px 6px rgba(0,0,0,.35);
+  transition: transform .25s ease, box-shadow .25s ease, background-color .25s ease;
+  text-decoration: none !important;   /* garante sem sublinhado */
+  line-height: 1;                     /* evita linha sob ícone */
 }
-.footer-socials a:hover { transform: scale(1.12); }
+.footer-socials a i {
+  text-decoration: none !important;   /* garante sem sublinhado no <i> */
+  line-height: 1;
+  display: block;
+}
+.footer-socials a:hover {
+  transform: scale(1.12);
+  box-shadow: 0 6px 18px rgba(0,0,0,.45);
+  text-decoration: none !important;
+}
+.footer-socials a:focus,
+.footer-socials a:active {
+  text-decoration: none !important;
+}
+
+/* cores hover específicas */
+.footer-socials a.facebook:hover { background-color: #3b5998; }
+.footer-socials a.instagram:hover {
+  background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fd5949 45%, #d6249f 60%, #285aeb 90%);
+}
+.footer-socials a.tiktok:hover { background-color: #000; }
+.footer-socials a.whatsapp:hover { background-color: #25d366; }
+.footer-socials a.location:hover { background-color: #c90000; }
+
+/* Copyright (terceiro no mobile) */
+.footer-copy {
+  order: 3;
+  font-size: 14px;
+  color: #aaa;
+  line-height: 1.4;
+  text-align: center;
+  white-space: normal;
+  word-break: keep-all; /* não quebra palavras ao meio */
+}
+
+/* Desktop: 3 colunas (links | copy | sociais) */
+@media (min-width: 768px) {
+  .footer-container {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    text-align: left;
+  }
+  .footer-links   { flex: 1; justify-content: flex-start; order: 0; }
+  .footer-copy    { flex: 1; text-align: center;          order: 0; }
+  .footer-socials { flex: 1; justify-content: flex-end; gap: 20px; order: 0; }
+}
