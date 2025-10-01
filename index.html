@@ -313,6 +313,35 @@
     @media (max-width: 767px) {
       .product-card { flex: 1 1 45%; max-width: 45%; }
       .product-card img { max-height: 220px; }
+	  
+	  /* Remove possíveis underlines/bordas/pseudo-elements nos ícones sociais */
+.footer-socials a {
+  text-decoration: none !important; /* remove underline herdado */
+  border: none !important;          /* remove borda inferior se existir */
+  outline: none !important;
+  display: inline-flex;             /* evita gaps de linha e centraliza */
+  align-items: center;
+  justify-content: center;
+  vertical-align: middle;
+}
+
+/* Garante que o ícone não gere espaço extra por causa da linha-base */
+.footer-socials a i,
+.footer-socials a .fa {
+  display: inline-block;
+  line-height: 1;
+  font-size: 20px; /* ajuste se quiser maior/menor */
+}
+
+/* Elimina pseudo-elementos que possam adicionar traços */
+.footer-socials a::before,
+.footer-socials a::after {
+  content: none !important;
+}
+
+/* Em casos extremos (regra global forte) */
+.footer-socials { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+
     }
   </style>
 </head>
