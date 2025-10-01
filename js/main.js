@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", () => {
       .then(res => res.text())
       .then(data => {
         headerContainer.innerHTML = data;
-        initHeaderEvents(); // ativa eventos assim que header carrega
+        initHeaderEvents(); // ativa eventos do header
       });
   }
 
@@ -26,66 +26,56 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 // ----------------------------
-// Funções de abrir/fechar menu
-// ----------------------------
-function openMenu() {
-  const mobileMenu = document.getElementById("mobile-menu");
-  if (mobileMenu) {
-    mobileMenu.classList.add("open");
-    mobileMenu.setAttribute("aria-hidden", "false");
-  }
-}
-
-function closeMenu() {
-  const mobileMenu = document.getElementById("mobile-menu");
-  if (mobileMenu) {
-    mobileMenu.classList.remove("open");
-    mobileMenu.setAttribute("aria-hidden", "true");
-  }
-}
-
-// ----------------------------
 // Eventos do Header
 // ----------------------------
 function initHeaderEvents() {
   const menuToggle = document.getElementById("menu-toggle");
   const menuClose = document.getElementById("menu-close");
   const mobileMenu = document.getElementById("mobile-menu");
+  const overlay = document.getElementById("menu-overlay");
 
   if (!menuToggle || !menuClose || !mobileMenu) {
-    console.warn("⚠️ Elementos do menu mobile não encontrados ainda.");
+    console.warn("⚠️ Elementos do menu não encontrados.");
     return;
   }
 
-  // abrir/fechar menu
+  const openMenu = () => {
+    mobileMenu.classList.add("open");
+    mobileMenu.setAttribute("aria-hidden", "false");
+    overlay?.classList.add("active");
+  };
+
+  const closeMenu = () => {
+    mobileMenu.classList.remove("open");
+    mobileMenu.setAttribute("aria-hidden", "true");
+    overlay?.classList.remove("active");
+  };
+
   menuToggle.addEventListener("click", openMenu);
   menuClose.addEventListener("click", closeMenu);
+  overlay?.addEventListener("click", closeMenu);
 
-  // fechar ao clicar em qualquer link
+  // Fechar ao clicar em link
   document.querySelectorAll("#mobile-menu .mobile-nav a").forEach(link => {
     link.addEventListener("click", closeMenu);
   });
 
-  // busca desktop
+  // Busca desktop
   const searchInput = document.getElementById("search-input");
   const searchBtn = document.getElementById("search-button");
-  searchBtn?.addEventListener("click", () => {
-    doSearch(searchInput.value);
-  });
-  searchInput?.addEventListener("keypress", (e) => {
-    if (e.key === "Enter") {
-      doSearch(searchInput.value);
-    }
+  searchBtn?.addEventListener("click", () => doSearch(searchInput.value));
+  searchInput?.addEventListener("keypress", e => {
+    if (e.key === "Enter") doSearch(searchInput.value);
   });
 
-  // busca mobile
+  // Busca mobile
   const searchInputMob = document.getElementById("search-input-mobile");
   const searchBtnMob = document.getElementById("search-button-mobile");
   searchBtnMob?.addEventListener("click", () => {
     doSearch(searchInputMob.value);
     closeMenu();
   });
-  searchInputMob?.addEventListener("keypress", (e) => {
+  searchInputMob?.addEventListener("keypress", e => {
     if (e.key === "Enter") {
       doSearch(searchInputMob.value);
       closeMenu();
@@ -101,6 +91,7 @@ function initHeaderEvents() {
 function doSearch(query) {
   const products = document.querySelectorAll(".product-card");
   const noResults = document.getElementById("no-results");
+  if (!products.length) return;
 
   if (!query || query.trim() === "") {
     products.forEach(p => (p.style.display = "flex"));

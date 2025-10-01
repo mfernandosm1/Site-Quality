@@ -55,7 +55,7 @@ body {
 }
 .nav-desktop a:hover { text-decoration: underline; }
 
-/* Campo de busca desktop */
+/* Campo de busca */
 .search-wrapper {
   display: flex;
   align-items: center;
@@ -67,6 +67,7 @@ body {
   border: none;
   padding: 6px 8px;
   outline: none;
+  font-size: 16px; /* evita zoom no iOS */
 }
 .search-wrapper button {
   background: #c90000;
@@ -85,12 +86,12 @@ body {
 }
 
 /* -------------------
-   Mobile menu (abre pela ESQUERDA)
+   Mobile menu
 --------------------*/
 .mobile-menu {
   position: fixed;
   top: 0;
-  left: 0; /* abre pela esquerda */
+  left: 0;
   width: 80%;
   max-width: 300px;
   height: 100%;
@@ -98,11 +99,11 @@ body {
   z-index: 2000;
   box-shadow: 2px 0 6px rgba(0,0,0,0.2);
   padding: 20px;
-  transform: translateX(-100%); /* escondido */
+  transform: translateX(-100%);
   transition: transform 0.3s ease;
 }
 .mobile-menu.open {
-  transform: translateX(0); /* aparece */
+  transform: translateX(0);
 }
 .mobile-menu-header {
   display: flex;
@@ -127,8 +128,6 @@ body {
   font-size: 24px;
   color: #222;
 }
-
-/* Campo de busca Mobile */
 .search-wrapper-mobile {
   display: flex;
   align-items: center;
@@ -136,30 +135,37 @@ body {
   background: #f5f5f5;
   border-radius: 4px;
   overflow: hidden;
-  width: 100%;
 }
 .search-wrapper-mobile input {
   flex: 1;
   border: none;
-  padding: 10px 12px;   /* mais espaço */
-  font-size: 16px;      /* evita zoom no iOS */
+  padding: 10px;
   outline: none;
-  min-width: 0;         /* evita rolagem lateral */
-  box-sizing: border-box;
+  font-size: 16px; /* evita zoom no iOS */
 }
 .search-wrapper-mobile button {
-  flex-shrink: 0;       /* botão não some */
   background: #c90000;
   color: #fff;
   border: none;
-  padding: 10px 14px;
-  font-size: 16px;      /* mantém alinhado */
+  padding: 10px 12px;
   cursor: pointer;
 }
 
 @media (max-width: 991px) {
   .nav-desktop { display: none; }
   .menu-toggle { display: block; }
+}
+
+/* Overlay */
+.menu-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.5);
+  z-index: 1500;
+  display: none;
+}
+.menu-overlay.active {
+  display: block;
 }
 
 /* -------------------
@@ -241,7 +247,7 @@ body {
 }
 
 /* -------------------
-   Footer (padronizado formas-de-pagamento)
+   Footer
 --------------------*/
 .footer {
   background-color: #111;
@@ -269,14 +275,20 @@ body {
   transition: color 0.25s ease;
 }
 .footer-links a:hover { color: #c90000; }
-
+/* Copy */
+.footer-copy {
+  font-size: 14px;
+  color: #aaa;
+  line-height: 1.4;
+  order: 2;
+}
 /* Sociais */
 .footer-socials {
   display: flex;
   gap: 20px;
   justify-content: center;
   flex-wrap: wrap;
-  order: 2; /* mobile: ícones acima do texto */
+  order: 1; /* agora ícones ficam acima do texto no mobile */
 }
 .footer-socials a {
   display: inline-flex;
@@ -302,14 +314,6 @@ body {
 .footer-socials a.whatsapp:hover { background-color: #25d366; }
 .footer-socials a.location:hover { background-color: #c90000; }
 
-/* Copy */
-.footer-copy {
-  font-size: 14px;
-  color: #aaa;
-  line-height: 1.4;
-  order: 3; /* mobile: texto por último */
-}
-
 /* Desktop layout */
 @media (min-width: 768px) {
   .footer-container {
@@ -318,7 +322,7 @@ body {
     align-items: center;
     text-align: left;
   }
-  .footer-links { flex: 1; justify-content: flex-start; order: 0; }
+  .footer-links { flex: 1; justify-content: flex-start; }
   .footer-copy { flex: 1; text-align: center; order: 0; }
   .footer-socials { flex: 1; justify-content: flex-end; order: 0; }
 }
