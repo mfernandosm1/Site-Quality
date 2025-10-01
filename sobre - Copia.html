@@ -16,15 +16,9 @@
 </head>
 <body class="bg-gray-50 text-gray-800">
 
-  <!-- Header padrão -->
+  <!-- Header centralizado -->
   <div id="header"></div>
-  <script>
-    fetch("header.html")
-      .then(res => res.text())
-      .then(data => document.getElementById("header").innerHTML = data);
-  </script>
 
-  <!-- Conteúdo -->
   <main class="pt-28 max-w-6xl mx-auto px-4 py-12 space-y-12">
     <!-- Introdução -->
     <section class="text-center">
@@ -69,13 +63,8 @@
     </section>
   </main>
 
-  <!-- Footer padrão -->
+  <!-- Footer centralizado -->
   <div id="footer"></div>
-  <script>
-    fetch("footer.html")
-      .then(res => res.text())
-      .then(data => document.getElementById("footer").innerHTML = data);
-  </script>
 
   <!-- Scripts -->
   <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
