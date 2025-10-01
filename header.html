@@ -10,20 +10,19 @@
       <a href="index.html">Início</a>
       <a href="#smartphones">Smartphones</a>
       <a href="#acessorios">Acessórios</a>
-      <a href="sobre.html">Sobre nós</a>
-      <a href="formas-de-pagamento.html">Pagamento e Envio</a>
-      <a href="https://wa.me/5555991407824?text=Olá%20vim%20através%20do%20site" class="btn-whatsapp">
-        <i class="fa-brands fa-whatsapp"></i> WhatsApp
-      </a>
+      <div class="search-wrapper">
+        <input type="text" id="search-input" placeholder="Buscar..." />
+        <button id="search-button" aria-label="Buscar"><i class="fa fa-search"></i></button>
+      </div>
     </nav>
 
-    <!-- Botão Menu Mobile -->
+    <!-- Botão Mobile -->
     <button id="menu-toggle" class="menu-toggle" aria-label="Abrir menu">
       <i class="fa-solid fa-bars"></i>
     </button>
   </div>
 
-  <!-- Menu Mobile -->
+  <!-- Menu Mobile (direita) -->
   <div id="mobile-menu" class="mobile-menu" aria-hidden="true">
     <div class="mobile-menu-header">
       <a href="index.html" class="logo-wrapper">
@@ -33,29 +32,20 @@
         <i class="fa-solid fa-xmark"></i>
       </button>
     </div>
-
-    <!-- Busca no mobile -->
     <div class="search-wrapper-mobile">
       <input type="text" id="search-input-mobile" placeholder="Buscar..." />
       <button id="search-button-mobile" aria-label="Buscar"><i class="fa fa-search"></i></button>
     </div>
-
-    <!-- Navegação Mobile -->
     <nav class="mobile-nav">
       <a href="index.html">Início</a>
       <a href="#smartphones">Smartphones</a>
       <a href="#acessorios">Acessórios</a>
-      <a href="sobre.html">Sobre nós</a>
-      <a href="formas-de-pagamento.html">Pagamento e Envio</a>
-      <a href="https://wa.me/5555991407824?text=Olá%20vim%20através%20do%20site" class="btn-whatsapp">
-        <i class="fa-brands fa-whatsapp"></i> WhatsApp
-      </a>
     </nav>
   </div>
 </header>
 
 <script>
-  // Menu open/close + fechar ao clicar em link
+  // Menu lateral (abre pela direita)
   const menuToggle = document.getElementById("menu-toggle");
   const menuClose = document.getElementById("menu-close");
   const mobileMenu = document.getElementById("mobile-menu");
@@ -66,14 +56,64 @@
   });
 
   menuClose?.addEventListener("click", () => {
-    mobileMenu.style.transform = "translateX(-100%)";
+    mobileMenu.style.transform = "translateX(100%)";
     mobileMenu.setAttribute("aria-hidden", "true");
   });
 
   document.querySelectorAll('#mobile-menu .mobile-nav a').forEach(link => {
     link.addEventListener('click', () => {
-      mobileMenu.style.transform = "translateX(-100%)";
+      mobileMenu.style.transform = "translateX(100%)";
       mobileMenu.setAttribute("aria-hidden", "true");
     });
+  });
+
+  // Função de busca (desktop + mobile)
+  function executarBusca(termo) {
+    termo = termo.toLowerCase();
+    const cards = document.querySelectorAll(".product-card");
+    const msg = document.getElementById("no-results");
+    let encontrados = 0;
+
+    cards.forEach(card => {
+      const nome = card.querySelector("h3").textContent.toLowerCase();
+      if (nome.includes(termo)) {
+        card.style.display = "flex";
+        encontrados++;
+      } else {
+        card.style.display = "none";
+      }
+    });
+
+    if (msg) {
+      msg.style.display = encontrados === 0 ? "block" : "none";
+    }
+  }
+
+  // Eventos de busca desktop
+  document.getElementById("search-button")?.addEventListener("click", () => {
+    const termo = document.getElementById("search-input").value;
+    executarBusca(termo);
+  });
+
+  document.getElementById("search-input")?.addEventListener("keypress", (e) => {
+    if (e.key === "Enter") {
+      executarBusca(e.target.value);
+    }
+  });
+
+  // Eventos de busca mobile
+  document.getElementById("search-button-mobile")?.addEventListener("click", () => {
+    const termo = document.getElementById("search-input-mobile").value;
+    executarBusca(termo);
+    mobileMenu.style.transform = "translateX(100%)"; // fecha após buscar
+    mobileMenu.setAttribute("aria-hidden", "true");
+  });
+
+  document.getElementById("search-input-mobile")?.addEventListener("keypress", (e) => {
+    if (e.key === "Enter") {
+      executarBusca(e.target.value);
+      mobileMenu.style.transform = "translateX(100%)";
+      mobileMenu.setAttribute("aria-hidden", "true");
+    }
   });
 </script>
