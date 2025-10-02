@@ -95,7 +95,7 @@ body {
 .mobile-menu {
   position: fixed;
   top: 0;
-  left: 0;                 /* abre pela esquerda */
+  left: 0;
   width: 80%;
   max-width: 300px;
   height: 100%;
@@ -103,11 +103,11 @@ body {
   z-index: 2000;
   box-shadow: 2px 0 6px rgba(0,0,0,0.2);
   padding: 20px;
-  transform: translateX(-100%); /* escondido */
+  transform: translateX(-100%);
   transition: transform 0.3s ease;
 }
 .mobile-menu.open {
-  transform: translateX(0);     /* visível */
+  transform: translateX(0);
 }
 .mobile-menu-header {
   display: flex;
@@ -263,7 +263,7 @@ body {
   text-align: center;
 }
 
-/* Links (sempre primeiro no mobile) */
+/* Links */
 .footer-links {
   order: 1;
   display: flex;
@@ -279,14 +279,14 @@ body {
 }
 .footer-links a:hover { color: #c90000; }
 
-/* Ícones sociais (segundo no mobile, sem quebra de linha) */
+/* Ícones sociais */
 .footer-socials {
   order: 2;
   display: flex;
-  gap: 12px;                /* gap menor p/ caber em 320px */
+  gap: 12px;
   justify-content: center;
   align-items: center;
-  flex-wrap: nowrap;        /* não quebra linha */
+  flex-wrap: nowrap;
 }
 .footer-socials a {
   display: inline-flex;
@@ -300,11 +300,11 @@ body {
   font-size: 20px;
   box-shadow: 0 2px 6px rgba(0,0,0,.35);
   transition: transform .25s ease, box-shadow .25s ease, background-color .25s ease;
-  text-decoration: none !important;   /* garante sem sublinhado */
-  line-height: 1;                     /* evita linha sob ícone */
+  text-decoration: none !important;
+  line-height: 1;
 }
 .footer-socials a i {
-  text-decoration: none !important;   /* garante sem sublinhado no <i> */
+  text-decoration: none !important;
   line-height: 1;
   display: block;
 }
@@ -318,7 +318,7 @@ body {
   text-decoration: none !important;
 }
 
-/* cores hover específicas */
+/* cores hover */
 .footer-socials a.facebook:hover { background-color: #3b5998; }
 .footer-socials a.instagram:hover {
   background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fd5949 45%, #d6249f 60%, #285aeb 90%);
@@ -327,18 +327,28 @@ body {
 .footer-socials a.whatsapp:hover { background-color: #25d366; }
 .footer-socials a.location:hover { background-color: #c90000; }
 
-/* Copyright (terceiro no mobile) */
+/* Copyright */
 .footer-copy {
   order: 3;
   font-size: 14px;
   color: #aaa;
   line-height: 1.4;
   text-align: center;
-  white-space: normal;
-  word-break: keep-all; /* não quebra palavras ao meio */
+  white-space: normal !important;
+  word-break: normal !important;
+  overflow-wrap: normal !important;
+  display: inline-block;
+  max-width: 100%;
+}
+.footer-copy span.nobreak {
+  white-space: nowrap;
+}
+.footer-copy br {
+  display: block;
+  margin-top: 4px;
 }
 
-/* Desktop: 3 colunas (links | copy | sociais) */
+/* Desktop: 3 colunas */
 @media (min-width: 768px) {
   .footer-container {
     flex-direction: row;
@@ -347,10 +357,6 @@ body {
     text-align: left;
   }
   .footer-links   { flex: 1; justify-content: flex-start; order: 0; }
-  .footer-copy    { flex: 1; text-align: center;          order: 0; }
+  .footer-copy    { flex: 1; text-align: center; order: 0; }
   .footer-socials { flex: 1; justify-content: flex-end; gap: 20px; order: 0; }
-}
-/* Evitar quebra da palavra "reservados" no rodapé */
-.footer-copy span.nobreak {
-  white-space: nowrap;
 }
