@@ -300,18 +300,17 @@ body {
   font-size: 20px;
   box-shadow: 0 2px 6px rgba(0,0,0,.35);
   transition: transform .25s ease, box-shadow .25s ease, background-color .25s ease;
-  text-decoration: none !important;   /* garante sem sublinhado */
-  line-height: 1;                     /* evita linha sob ícone */
+  text-decoration: none !important;
+  line-height: 1;
 }
 .footer-socials a i {
-  text-decoration: none !important;   /* garante sem sublinhado no <i> */
+  text-decoration: none !important;
   line-height: 1;
   display: block;
 }
 .footer-socials a:hover {
   transform: scale(1.12);
   box-shadow: 0 6px 18px rgba(0,0,0,.45);
-  text-decoration: none !important;
 }
 .footer-socials a:focus,
 .footer-socials a:active {
@@ -334,8 +333,14 @@ body {
   color: #aaa;
   line-height: 1.4;
   text-align: center;
-  white-space: normal;
-  word-break: keep-all; /* não quebra palavras ao meio */
+  white-space: normal !important;
+  word-break: keep-all !important;
+  display: inline-block;
+  max-width: 100%;
+}
+.footer-copy br {
+  display: block;
+  margin-top: 4px;
 }
 
 /* Desktop: 3 colunas (links | copy | sociais) */
@@ -349,8 +354,4 @@ body {
   .footer-links   { flex: 1; justify-content: flex-start; order: 0; }
   .footer-copy    { flex: 1; text-align: center;          order: 0; }
   .footer-socials { flex: 1; justify-content: flex-end; gap: 20px; order: 0; }
-}
-/* Evitar quebra da palavra "reservados" no rodapé */
-.footer-copy span.nobreak {
-  white-space: nowrap;
 }
