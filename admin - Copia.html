@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Painel Administrativo - Quality Celulares</title>
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    body { font-family: Arial, sans-serif; padding: 20px; background: #f5f5f5; }
+    h1 { color: #c90000; margin-bottom: 20px; }
+    .section { margin-bottom: 30px; padding: 20px; background: #fff; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+    label { display: block; margin-top: 10px; font-weight: bold; }
+    input, textarea, select { width: 100%; padding: 8px; margin-top: 5px; border: 1px solid #ccc; border-radius: 5px; }
+    button { margin-top: 10px; padding: 10px 15px; background: #c90000; color: white; border: none; cursor: pointer; border-radius: 5px; }
+    button:hover { background: #a00000; }
+    .item { padding: 10px; border-bottom: 1px solid #eee; }
+    .preview { border: 1px solid #ccc; padding: 10px; margin-top: 10px; }
+    .row { display: flex; gap: 20px; flex-wrap: wrap; }
+    .col { flex: 1; min-width: 300px; }
+  </style>
+</head>
+<body>
+  <h1>⚙️ Painel Administrativo</h1>
+
+  <!-- ===============================
+       VISUALIZAÇÃO / ESTILO
+  ================================ -->
+  <div class="section">
+    <h2>🎨 Estilo do Site</h2>
+    <div class="row">
+      <div class="col">
+        <label>Cor primária</label>
+        <input type="color" id="cor-primaria">
+        <label>Cor secundária</label>
+        <input type="color" id="cor-secundaria">
+        <label>Fonte (Google Fonts)</label>
+        <select id="fonte-site">
+          <option value="Arial">Arial</option>
+          <option value="Roboto">Roboto</option>
+          <option value="Poppins">Poppins</option>
+          <option value="Open Sans">Open Sans</option>
+        </select>
+        <button onclick="salvarEstilo()">Salvar Estilo</button>
+      </div>
+      <div class="col">
+        <h3>Pré-visualização</h3>
+        <div class="preview" id="preview-desktop">
+          <p style="font-size:18px;">🖥️ Desktop</p>
+          <div style="background:#c90000; color:#fff; padding:10px;">Header</div>
+          <p>Texto exemplo</p>
+        </div>
+        <div class="preview" id="preview-mobile">
+          <p style="font-size:18px;">📱 Mobile</p>
+          <div style="background:#c90000; color:#fff; padding:10px;">Header</div>
+          <p>Texto exemplo</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===============================
+       BANNERS
+  ================================ -->
+  <div class="section">
+    <h2>🖼️ Banners</h2>
+    <button onclick="listarBanners()">Listar Banners</button>
+    <button onclick="novoBanner()">➕ Novo Banner</button>
+    <div id="lista-banners"></div>
+  </div>
+
+  <!-- ===============================
+       CATEGORIAS
+  ================================ -->
+  <div class="section">
+    <h2>📂 Categorias</h2>
+    <button onclick="listarCategorias()">Listar Categorias</button>
+    <button onclick="novaCategoria()">➕ Nova Categoria</button>
+    <div id="lista-categorias"></div>
+  </div>
+
+  <!-- ===============================
+       MENUS
+  ================================ -->
+  <div class="section">
+    <h2>📑 Menu do Header</h2>
+    <button onclick="listarMenu()">Listar Menu</button>
+    <button onclick="novoMenu()">➕ Novo Link</button>
+    <div id="lista-menu"></div>
+  </div>
+
+  <!-- ===============================
+       PÁGINAS ESTÁTICAS
+  ================================ -->
+  <div class="section">
+    <h2>📄 Páginas Estáticas</h2>
+    <button onclick="editarPagina('sobre')">✏️ Editar Sobre</button>
+    <button onclick="editarPagina('formasDePagamento')">✏️ Editar Formas de Pagamento</button>
+    <div id="pagina-editor"></div>
+  </div>
+
+  <!-- ===============================
+       ÍCONES SOCIAIS
+  ================================ -->
+  <div class="section">
+    <h2>🌐 Ícones Sociais</h2>
+    <button onclick="listarSociais()">Listar Ícones</button>
+    <button onclick="novoSocial()">➕ Novo Ícone</button>
+    <div id="lista-sociais"></div>
+  </div>
+
+  <script>
+    const API = "http://localhost:3000/api";
+
+    // ========= ESTILO =========
+    function salvarEstilo() {
+      const corPrimaria = document.getElementById("cor-primaria").value;
+      const corSecundaria = document.getElementById("cor-secundaria").value;
+      const fonte = document.getElementById("fonte-site").value;
+      alert("Salvar estilo com: " + corPrimaria + ", " + corSecundaria + ", " + fonte);
+      // aqui faria um fetch POST/PUT para o /settings
+    }
+
+    // ========= BANNERS =========
+    async function listarBanners() {
+      const res = await fetch(`${API}/banners`);
+      const banners = await res.json();
+      const container = document.getElementById("lista-banners");
+      container.innerHTML = "";
+      banners.forEach(b => {
+        container.innerHTML += `
+          <div class="item">
+            <p><strong>Desktop:</strong> <img src="${b.desktop}" style="max-width:200px;"></p>
+            <p><strong>Mobile:</strong> <img src="${b.mobile}" style="max-width:100px;"></p>
+            <button onclick="editarBanner('${b.id}')">Editar</button>
+            <button onclick="removerBanner('${b.id}')">Excluir</button>
+          </div>
+        `;
+      });
+    }
+
+    function novoBanner() { alert("Formulário para criar banner com desktop + mobile"); }
+    function editarBanner(id) { alert("Editar banner " + id); }
+    function removerBanner(id) { alert("Excluir banner " + id); }
+
+    // ========= CATEGORIAS =========
+    async function listarCategorias() {
+      const res = await fetch(`${API}/categories`);
+      const categorias = await res.json();
+      const container = document.getElementById("lista-categorias");
+      container.innerHTML = "";
+      categorias.forEach(c => {
+        container.innerHTML += `
+          <div class="item">
+            ${c.nome}
+            <button onclick="editarCategoria('${c.id}')">Editar</button>
+            <button onclick="removerCategoria('${c.id}')">Excluir</button>
+          </div>
+        `;
+      });
+    }
+    function novaCategoria() { alert("Criar nova categoria"); }
+    function editarCategoria(id) { alert("Editar categoria " + id); }
+    function removerCategoria(id) { alert("Excluir categoria " + id); }
+
+    // ========= MENU =========
+    async function listarMenu() {
+      const res = await fetch(`${API}/menu`);
+      const menu = await res.json();
+      const container = document.getElementById("lista-menu");
+      container.innerHTML = "";
+      menu.forEach(m => {
+        container.innerHTML += `
+          <div class="item">
+            ${m.texto} - ${m.link}
+            <button onclick="editarMenu('${m.id}')">Editar</button>
+            <button onclick="removerMenu('${m.id}')">Excluir</button>
+          </div>
+        `;
+      });
+    }
+    function novoMenu() { alert("Novo link de menu"); }
+    function editarMenu(id) { alert("Editar menu " + id); }
+    function removerMenu(id) { alert("Excluir menu " + id); }
+
+    // ========= PÁGINAS =========
+    async function editarPagina(key) {
+      const res = await fetch(`${API}/settings`);
+      const s = await res.json();
+      const pagina = s.paginas[key];
+      document.getElementById("pagina-editor").innerHTML = `
+        <h3>Editando página: ${pagina.titulo}</h3>
+        <textarea id="conteudo-pagina" rows="10">${pagina.conteudo}</textarea>
+        <button onclick="salvarPagina('${key}')">Salvar</button>
+      `;
+    }
+    function salvarPagina(key) {
+      const conteudo = document.getElementById("conteudo-pagina").value;
+      alert("Salvar página " + key + " com novo conteúdo:\n" + conteudo);
+    }
+
+    // ========= SOCIAIS =========
+    async function listarSociais() {
+      const res = await fetch(`${API}/settings`);
+      const s = await res.json();
+      const icones = s.footer.icones;
+      const container = document.getElementById("lista-sociais");
+      container.innerHTML = "";
+      Object.entries(icones).forEach(([nome, url]) => {
+        container.innerHTML += `
+          <div class="item">
+            <strong>${nome}</strong>: ${url}
+            <button onclick="editarSocial('${nome}')">Editar</button>
+            <button onclick="removerSocial('${nome}')">Excluir</button>
+          </div>
+        `;
+      });
+    }
+    function novoSocial() { alert("Adicionar novo ícone social"); }
+    function editarSocial(nome) { alert("Editar link do social " + nome); }
+    function removerSocial(nome) { alert("Excluir social " + nome); }
+  </script>
+</body>
+</html>
