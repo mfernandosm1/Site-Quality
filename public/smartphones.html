@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Smartphones - Quality Celulares</title>
+
+  <!-- FontAwesome + CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <!-- Header -->
+  <div id="header"></div>
+
+  <!-- Conteúdo -->
+  <main class="main">
+    <h1 style="text-align:center; margin: 40px 0;">Smartphones</h1>
+    <div id="products-smartphones" class="products"></div>
+    <p id="no-results-smartphones" class="em-breve"
+       style="display:none; text-align:center; margin-top:20px;">
+      Nenhum smartphone encontrado.
+    </p>
+  </main>
+
+  <!-- Footer -->
+  <div id="footer"></div>
+
+  <!-- Scripts -->
+  <script src="js/main.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      loadProducts("smartphones", "products-smartphones", "no-results-smartphones");
+    });
+  </script>
+</body>
+</html>

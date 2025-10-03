@@ -1,0 +1,60 @@
+{
+  "cores": {
+    "header": "#c90000",
+    "botoes": "#c90000",
+    "footer": "#111111",
+    "texto": "#222222"
+  },
+  "fonte": "Arial",
+  "tamanhoFonte": "16px",
+
+  "banners": [
+    {
+      "desktop": "images/banner1.png",
+      "mobile": "images/banner1-mobile.png"
+    },
+    {
+      "desktop": "images/banner2.png",
+      "mobile": "images/banner2-mobile.png"
+    }
+  ],
+
+  "menu": [
+    { "texto": "Início", "link": "index.html" },
+    { "texto": "Smartphones", "link": "categoria.html?tipo=smartphones" },
+    { "texto": "Acessórios", "link": "categoria.html?tipo=acessorios" }
+  ],
+
+  "categories": [
+    { "nome": "Smartphones", "slug": "smartphones" },
+    { "nome": "Acessórios", "slug": "acessorios" },
+    { "nome": "Notebooks", "slug": "notebooks" }
+  ],
+
+  "paginas": {
+    "sobre": {
+      "titulo": "Sobre nós",
+      "conteudo": "Somos apaixonados por tecnologia e oferecemos os melhores smartphones, notebooks, videogames e acessórios."
+    },
+    "formas": {
+      "titulo": "Formas de Pagamento",
+      "conteudo": "Aceitamos PIX, Boleto e Cartão de Crédito em até 12x sem juros."
+    }
+  },
+
+  "footer": {
+    "texto": "© 2025 Quality Celulares. Todos os direitos reservados.",
+    "cnpj": "20.375.910/0001-66",
+    "links": [
+      { "texto": "Sobre nós", "link": "sobre.html" },
+      { "texto": "Formas de pagamento e envio", "link": "formas-de-pagamento.html" }
+    ],
+    "icones": {
+      "facebook": "https://facebook.com/qualitycelulares",
+      "instagram": "https://www.instagram.com/qualitycelulares_ibi/",
+      "whatsapp": "https://wa.me/5555991407824",
+      "tiktok": "#",
+      "location": "#"
+    }
+  }
+}

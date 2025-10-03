@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Painel Administrativo - Quality Celulares</title>
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    body { font-family: Arial, sans-serif; margin: 0; background: #f5f5f5; display: flex; }
+    h1 { color: #c90000; margin-bottom: 20px; }
+    .container { flex: 1; padding: 20px; }
+    .section { margin-bottom: 15px; background: #fff; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+    .section-header { padding: 15px; cursor: pointer; background: #eee; border-radius: 10px 10px 0 0; }
+    .section-header h2 { margin: 0; font-size: 18px; }
+    .section-content { display: none; padding: 20px; }
+    label { display: block; margin-top: 10px; font-weight: bold; }
+    small { display: block; color: #666; margin-top: 2px; margin-bottom: 8px; }
+    input, textarea, select { width: 100%; padding: 8px; margin-top: 5px; border: 1px solid #ccc; border-radius: 5px; }
+    button { margin-top: 10px; padding: 8px 12px; background: #c90000; color: white; border: none; cursor: pointer; border-radius: 5px; }
+    button:hover { background: #a00000; }
+    .item { padding: 10px; border-bottom: 1px solid #eee; }
+    .preview { border: 1px solid #ccc; padding: 10px; margin-top: 10px; }
+    .row { display: flex; gap: 20px; flex-wrap: wrap; }
+    .col { flex: 1; min-width: 300px; }
+    img.preview-img { max-width: 200px; display: block; margin: 5px 0; border-radius: 6px; }
+    /* sidebar */
+    .sidebar { width: 220px; background: #222; color: #fff; height: 100vh; padding: 20px; box-sizing: border-box; }
+    .sidebar h2 { font-size: 18px; margin-bottom: 15px; color: #c90000; }
+    .sidebar a { display: block; padding: 10px; margin: 5px 0; color: #fff; text-decoration: none; border-radius: 5px; }
+    .sidebar a:hover { background: #c90000; }
+  </style>
+</head>
+<body>
+  <div class="sidebar">
+    <h2>Admin</h2>
+    <a href="#estilo">🎨 Estilo</a>
+    <a href="#menu">📑 Menu</a>
+    <a href="#categorias">📂 Categorias</a>
+    <a href="#banners">🖼️ Banners</a>
+    <a href="#produtos">📦 Produtos</a>
+    <a href="#footer">⬇️ Footer</a>
+    <a href="#paginas">📄 Páginas</a>
+  </div>
+
+  <div class="container">
+    <h1>⚙️ Painel Administrativo</h1>
+
+    <!-- ===============================
+         ESTILO
+    ================================ -->
+    <div class="section" id="estilo">
+      <div class="section-header" onclick="toggleSection(this)">
+        <h2>🎨 Estilo do Site</h2>
+      </div>
+      <div class="section-content">
+        <div class="row">
+          <div class="col">
+            <label>Cor do Header</label>
+            <input type="color" id="cor-header">
+            <small>Define a cor de fundo do cabeçalho do site.</small>
+
+            <label>Cor dos Botões</label>
+            <input type="color" id="cor-botoes">
+            <small>Cor principal usada nos botões de ação.</small>
+
+            <label>Cor do Rodapé</label>
+            <input type="color" id="cor-footer">
+            <small>Cor de fundo do rodapé.</small>
+
+            <label>Cor do Texto</label>
+            <input type="color" id="cor-texto">
+            <small>Cor padrão dos textos do site.</small>
+
+            <label>Fonte (Google Fonts)</label>
+            <select id="fonte-site">
+              <option value="Arial">Arial</option>
+              <option value="Roboto">Roboto</option>
+              <option value="Poppins">Poppins</option>
+              <option value="Open Sans">Open Sans</option>
+            </select>
+
+            <label>Tamanho da fonte</label>
+            <select id="tamanho-fonte">
+              <option value="14px">Pequeno</option>
+              <option value="16px" selected>Médio</option>
+              <option value="18px">Grande</option>
+              <option value="20px">Muito grande</option>
+            </select>
+
+            <button onclick="salvarEstilo()">Salvar Estilo</button>
+          </div>
+          <div class="col">
+            <h3>Pré-visualização</h3>
+            <div class="preview" id="preview-desktop">
+              <p>🖥️ Desktop</p>
+              <div id="preview-header" style="background:#c90000; color:#fff; padding:10px;">Header</div>
+              <button style="background:#c90000; color:#fff; padding:5px 10px; border:none; border-radius:5px;">Botão</button>
+              <p id="preview-texto">Texto exemplo</p>
+              <div id="preview-footer" style="background:#111; color:#fff; padding:10px;">Rodapé</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===============================
+         MENU
+    ================================ -->
+    <div class="section" id="menu">
+      <div class="section-header" onclick="toggleSection(this)">
+        <h2>📑 Menu do Header</h2>
+      </div>
+      <div class="section-content">
+        <button onclick="novoMenu()">➕ Novo Link</button>
+        <button onclick="salvarMenu()">💾 Salvar Menu</button>
+        <div id="lista-menu"></div>
+      </div>
+    </div>
+
+    <!-- ===============================
+         CATEGORIAS
+    ================================ -->
+    <div class="section" id="categorias">
+      <div class="section-header" onclick="toggleSection(this)">
+        <h2>📂 Categorias</h2>
+      </div>
+      <div class="section-content">
+        <button onclick="novaCategoria()">➕ Nova Categoria</button>
+        <button onclick="salvarCategorias()">💾 Salvar Categorias</button>
+        <div id="lista-categorias"></div>
+      </div>
+    </div>
+
+    <!-- ===============================
+         BANNERS
+    ================================ -->
+    <div class="section" id="banners">
+      <div class="section-header" onclick="toggleSection(this)">
+        <h2>🖼️ Banners</h2>
+      </div>
+      <div class="section-content">
+        <button onclick="novoBanner()">➕ Novo Banner</button>
+        <button onclick="salvarBanners()">💾 Salvar Banners</button>
+        <div id="lista-banners"></div>
+      </div>
+    </div>
+
+    <!-- ===============================
+         PRODUTOS
+    ================================ -->
+    <div class="section" id="produtos">
+      <div class="section-header" onclick="toggleSection(this)">
+        <h2>📦 Produtos</h2>
+      </div>
+      <div class="section-content">
+        <p>Gerencie seus produtos em uma página dedicada.</p>
+        <a href="admin-produtos.html"><button>👉 Ir para Gerenciar Produtos</button></a>
+      </div>
+    </div>
+
+    <!-- ===============================
+         FOOTER
+    ================================ -->
+    <div class="section" id="footer">
+      <div class="section-header" onclick="toggleSection(this)">
+        <h2>⬇️ Footer</h2>
+      </div>
+      <div class="section-content">
+        <div id="footer-editor"></div>
+        <h3>🔗 Links Extras</h3>
+        <button onclick="novoFooterLink()">➕ Novo Link</button>
+        <div id="footer-links-list"></div>
+        <h3>🌐 Ícones Sociais</h3>
+        <button onclick="novoSocial()">➕ Novo Ícone</button>
+        <div id="footer-sociais-list"></div>
+      </div>
+    </div>
+
+    <!-- ===============================
+         PÁGINAS ESTÁTICAS
+    ================================ -->
+    <div class="section" id="paginas">
+      <div class="section-header" onclick="toggleSection(this)">
+        <h2>📄 Páginas Estáticas</h2>
+      </div>
+      <div class="section-content">
+        <div id="lista-paginas"></div>
+        <div id="pagina-editor"></div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const API = "http://localhost:3000/api";
+
+    function toggleSection(header) {
+      const content = header.nextElementSibling;
+      content.style.display = content.style.display === "block" ? "none" : "block";
+    }
+
+    // ========= ESTILO =========
+    async function salvarEstilo() {
+      const res = await fetch(`${API}/settings`);
+      const settings = await res.json();
+      settings.cores = {
+        header: document.getElementById("cor-header").value,
+        botoes: document.getElementById("cor-botoes").value,
+        footer: document.getElementById("cor-footer").value,
+        texto: document.getElementById("cor-texto").value
+      };
+      settings.fonte = document.getElementById("fonte-site").value;
+      settings.tamanhoFonte = document.getElementById("tamanho-fonte").value;
+
+      await fetch(`${API}/settings`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(settings)
+      });
+      alert("Estilo salvo!");
+    }
+
+    // ========= BANNERS =========
+    let bannersTemp = [];
+    async function listarBanners() {
+      const res = await fetch(`${API}/banners`);
+      bannersTemp = await res.json();
+      renderBanners();
+    }
+    function renderBanners() {
+      const container = document.getElementById("lista-banners");
+      container.innerHTML = "";
+      if (!bannersTemp.length) {
+        container.innerHTML = "<p style='color:#777'>Nenhum banner cadastrado.</p>";
+        return;
+      }
+      bannersTemp.forEach((b, idx) => {
+        container.innerHTML += `
+          <div class="item">
+            <label>Desktop</label>
+            <input type="text" value="${b.desktop}" onchange="updateBanner(${idx}, 'desktop', this.value)">
+            <img src="${b.desktop}" class="preview-img">
+            <label>Mobile</label>
+            <input type="text" value="${b.mobile}" onchange="updateBanner(${idx}, 'mobile', this.value)">
+            <img src="${b.mobile}" class="preview-img">
+            <button onclick="removerBanner(${idx})">🗑️ Remover</button>
+          </div>
+        `;
+      });
+    }
+    function novoBanner() { bannersTemp.push({ desktop: "", mobile: "" }); renderBanners(); }
+    function updateBanner(index, field, value) { bannersTemp[index][field] = value; }
+    function removerBanner(index) { bannersTemp.splice(index, 1); renderBanners(); }
+    async function salvarBanners() {
+      await fetch(`${API}/banners`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(bannersTemp)
+      });
+      alert("Banners salvos!");
+      listarBanners();
+    }
+
+    // ========= CATEGORIAS =========
+    let categoriasTemp = [];
+    async function listarCategorias() {
+      const res = await fetch(`${API}/categories`);
+      categoriasTemp = await res.json();
+      renderCategorias();
+    }
+    function renderCategorias() {
+      const container = document.getElementById("lista-categorias");
+      container.innerHTML = "";
+      if (!categoriasTemp.length) {
+        container.innerHTML = "<p style='color:#777'>Nenhuma categoria cadastrada.</p>";
+        return;
+      }
+      categoriasTemp.forEach((c, idx) => {
+        container.innerHTML += `
+          <div class="item">
+            <label>Nome</label>
+            <input type="text" value="${c.nome}" onchange="updateCategoria(${idx}, 'nome', this.value)">
+            <label>Slug (URL)</label>
+            <input type="text" value="${c.slug}" onchange="updateCategoria(${idx}, 'slug', this.value)">
+            <button onclick="removerCategoria(${idx})">🗑️ Remover</button>
+          </div>
+        `;
+      });
+    }
+    function novaCategoria() { categoriasTemp.push({ nome: "Nova Categoria", slug: "nova-categoria" }); renderCategorias(); }
+    function updateCategoria(index, field, value) { categoriasTemp[index][field] = value; }
+    function removerCategoria(index) { categoriasTemp.splice(index, 1); renderCategorias(); }
+    async function salvarCategorias() {
+      await fetch(`${API}/categories`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(categoriasTemp)
+      });
+      alert("Categorias salvas!");
+      listarCategorias();
+    }
+
+    // ========= MENU =========
+    let menuTemp = [];
+    async function listarMenu() {
+      const res = await fetch(`${API}/menu`);
+      menuTemp = await res.json();
+      renderMenu();
+    }
+    function renderMenu() {
+      const container = document.getElementById("lista-menu");
+      container.innerHTML = "";
+      if (!menuTemp.length) {
+        container.innerHTML = "<p style='color:#777'>Nenhum item de menu cadastrado.</p>";
+        return;
+      }
+      menuTemp.forEach((m, idx) => {
+        container.innerHTML += `
+          <div class="item">
+            <label>Texto</label>
+            <input type="text" value="${m.texto}" onchange="updateMenu(${idx}, 'texto', this.value)">
+            <label>Link</label>
+            <input type="text" value="${m.link}" onchange="updateMenu(${idx}, 'link', this.value)">
+            <button onclick="removerMenu(${idx})">🗑️ Remover</button>
+          </div>
+        `;
+      });
+    }
+    function novoMenu() { menuTemp.push({ texto: "Novo Link", link: "#" }); renderMenu(); }
+    function updateMenu(index, field, value) { menuTemp[index][field] = value; }
+    function removerMenu(index) { menuTemp.splice(index, 1); renderMenu(); }
+    async function salvarMenu() {
+      await fetch(`${API}/menu`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(menuTemp)
+      });
+      alert("Menu salvo!");
+      listarMenu();
+    }
+
+    // ========= PÁGINAS =========
+    let paginasTemp = {};
+    async function listarPaginas() {
+      const res = await fetch(`${API}/settings`);
+      const s = await res.json();
+      paginasTemp = s.paginas || {};
+      renderPaginas();
+    }
+    function renderPaginas() {
+      const container = document.getElementById("lista-paginas");
+      container.innerHTML = "";
+      Object.entries(paginasTemp).forEach(([key, pagina]) => {
+        container.innerHTML += `
+          <div class="item">
+            <strong>${pagina.titulo}</strong>
+            <button onclick="editarPagina('${key}')">✏️ Editar</button>
+          </div>
+        `;
+      });
+    }
+    function editarPagina(key) {
+      const pagina = paginasTemp[key];
+      document.getElementById("pagina-editor").innerHTML = `
+        <h3>Editando página: ${pagina.titulo}</h3>
+        <textarea id="conteudo-pagina" rows="10">${pagina.conteudo}</textarea>
+        <button onclick="salvarPagina('${key}')">Salvar</button>
+      `;
+    }
+    async function salvarPagina(key) {
+      const conteudo = document.getElementById("conteudo-pagina").value;
+      paginasTemp[key].conteudo = conteudo;
+      const res = await fetch(`${API}/settings`);
+      const s = await res.json();
+      s.paginas = paginasTemp;
+      await fetch(`${API}/settings`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(s)
+      });
+      alert("Página salva!");
+    }
+
+    // ========= FOOTER =========
+    let footerLinksTemp = [];
+    let footerSociaisTemp = {};
+
+    async function carregarFooter() {
+      const res = await fetch(`${API}/settings`);
+      const s = await res.json();
+
+      document.getElementById("footer-editor").innerHTML = `
+        <label>Texto</label>
+        <input type="text" id="footer-texto" value="${s.footer.texto || ""}">
+        <label>CNPJ</label>
+        <input type="text" id="footer-cnpj" value="${s.footer.cnpj || ""}">
+        <button onclick="salvarFooter()">Salvar Footer</button>
+      `;
+
+      footerLinksTemp = s.footer.links || [];
+      footerSociaisTemp = s.footer.icones || {};
+      renderFooterLinks();
+      renderFooterSociais();
+    }
+
+    function renderFooterLinks() {
+      const container = document.getElementById("footer-links-list");
+      container.innerHTML = "";
+      if (!footerLinksTemp.length) {
+        container.innerHTML = "<p style='color:#777'>Nenhum link no footer.</p>";
+        return;
+      }
+      footerLinksTemp.forEach((l, idx) => {
+        container.innerHTML += `
+          <div class="item">
+            <label>Texto</label>
+            <input type="text" value="${l.texto}" onchange="updateFooterLink(${idx}, 'texto', this.value)">
+            <label>URL</label>
+            <input type="text" value="${l.link}" onchange="updateFooterLink(${idx}, 'link', this.value)">
+            <button onclick="removerFooterLink(${idx})">🗑️ Remover</button>
+          </div>
+        `;
+      });
+    }
+    function novoFooterLink() { footerLinksTemp.push({ texto: "Novo link", link: "#" }); renderFooterLinks(); }
+    function updateFooterLink(index, field, value) { footerLinksTemp[index][field] = value; }
+    function removerFooterLink(index) { footerLinksTemp.splice(index, 1); renderFooterLinks(); }
+
+    function renderFooterSociais() {
+      const container = document.getElementById("footer-sociais-list");
+      container.innerHTML = "";
+      if (!Object.keys(footerSociaisTemp).length) {
+        container.innerHTML = "<p style='color:#777'>Nenhum ícone social cadastrado.</p>";
+        return;
+      }
+      Object.entries(footerSociaisTemp).forEach(([nome, url]) => {
+        container.innerHTML += `
+          <div class="item">
+            <label>Nome</label>
+            <input type="text" value="${nome}" disabled>
+            <label>URL</label>
+            <input type="text" value="${url}" onchange="updateSocial('${nome}', this.value)">
+            <button onclick="removerSocial('${nome}')">🗑️ Remover</button>
+          </div>
+        `;
+      });
+    }
+    function novoSocial() {
+      const nome = prompt("Digite o nome do ícone (facebook, instagram, whatsapp...)");
+      if (nome && !footerSociaisTemp[nome]) {
+        footerSociaisTemp[nome] = "#";
+        renderFooterSociais();
+      }
+    }
+    function updateSocial(nome, url) { footerSociaisTemp[nome] = url; }
+    function removerSocial(nome) { delete footerSociaisTemp[nome]; renderFooterSociais(); }
+
+    async function salvarFooter() {
+      const res = await fetch(`${API}/settings`);
+      const s = await res.json();
+      s.footer = {
+        texto: document.getElementById("footer-texto").value,
+        cnpj: document.getElementById("footer-cnpj").value,
+        links: footerLinksTemp,
+        icones: footerSociaisTemp
+      };
+      await fetch(`${API}/settings`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(s)
+      });
+      alert("Footer salvo!");
+      carregarFooter();
+    }
+
+    // ===== Inicialização =====
+    listarBanners();
+    listarCategorias();
+    listarMenu();
+    listarPaginas();
+    carregarFooter();
+  </script>
+</body>
+</html>
