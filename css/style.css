@@ -147,7 +147,7 @@ body {
   border: none;
   padding: 8px 10px;
   outline: none;
-  font-size: 16px;
+  font-size: 16px; /* evita zoom no iOS/Android */
 }
 .search-wrapper-mobile button {
   background: #c90000;
@@ -246,7 +246,7 @@ body {
 }
 
 /* -------------------
-   Footer
+   Footer (padronizado + mobile OK)
 --------------------*/
 .footer {
   background-color: #111;
@@ -303,11 +303,22 @@ body {
   text-decoration: none !important;
   line-height: 1;
 }
-.footer-socials a i { line-height: 1; display: block; }
+.footer-socials a i {
+  text-decoration: none !important;
+  line-height: 1;
+  display: block;
+}
 .footer-socials a:hover {
   transform: scale(1.12);
   box-shadow: 0 6px 18px rgba(0,0,0,.45);
+  text-decoration: none !important;
 }
+.footer-socials a:focus,
+.footer-socials a:active {
+  text-decoration: none !important;
+}
+
+/* cores hover */
 .footer-socials a.facebook:hover { background-color: #3b5998; }
 .footer-socials a.instagram:hover {
   background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fd5949 45%, #d6249f 60%, #285aeb 90%);
@@ -323,10 +334,21 @@ body {
   color: #aaa;
   line-height: 1.4;
   text-align: center;
+  white-space: normal !important;
+  word-break: normal !important;
+  overflow-wrap: normal !important;
+  display: inline-block;
+  max-width: 100%;
 }
-.footer-copy span.nobreak { white-space: nowrap; }
-.footer-copy br { display: block; margin-top: 4px; }
+.footer-copy span.nobreak {
+  white-space: nowrap;
+}
+.footer-copy br {
+  display: block;
+  margin-top: 4px;
+}
 
+/* Desktop: 3 colunas */
 @media (min-width: 768px) {
   .footer-container {
     flex-direction: row;
@@ -334,33 +356,7 @@ body {
     align-items: center;
     text-align: left;
   }
-  .footer-links   { flex: 1; justify-content: flex-start; }
-  .footer-copy    { flex: 1; text-align: center; }
-  .footer-socials { flex: 1; justify-content: flex-end; gap: 20px; }
+  .footer-links   { flex: 1; justify-content: flex-start; order: 0; }
+  .footer-copy    { flex: 1; text-align: center; order: 0; }
+  .footer-socials { flex: 1; justify-content: flex-end; gap: 20px; order: 0; }
 }
-
-/* -------------------
-   Páginas Estáticas
---------------------*/
-.page-content {
-  font-size: 1.1rem;
-  line-height: 1.7;
-  color: #333;
-}
-.page-content h2 {
-  font-size: 1.5rem;
-  font-weight: bold;
-  margin-top: 1.5rem;
-  margin-bottom: .75rem;
-  color: #c90000;
-}
-.page-content h3 {
-  font-size: 1.25rem;
-  margin-top: 1.2rem;
-  margin-bottom: .5rem;
-}
-.page-content p { margin-bottom: .75rem; }
-.page-content ul { list-style: disc; margin: 1rem 0 1rem 1.5rem; }
-.page-content li { margin-bottom: .4rem; }
-.page-content strong { color: #111; }
-.page-content img { max-width: 100%; border-radius: 8px; margin: 1rem 0; }

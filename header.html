@@ -2,11 +2,21 @@
   <div class="header-container">
     <!-- Logo -->
     <a href="index.html" class="logo-wrapper">
-      <img id="site-logo" src="" alt="Quality Celulares" class="logo" />
+      <img src="images/logo.png" alt="Quality Celulares" class="logo" />
     </a>
 
     <!-- Navegação Desktop -->
-    <nav id="nav-desktop" class="nav-desktop"></nav>
+    <nav class="nav-desktop">
+      <a href="index.html">Início</a>
+      <a href="index.html#smartphones">Smartphones</a>
+      <a href="index.html#acessorios">Acessórios</a>
+      <div class="search-wrapper">
+        <input type="text" id="search-input" placeholder="Buscar..." />
+        <button id="search-button" aria-label="Buscar">
+          <i class="fa fa-search"></i>
+        </button>
+      </div>
+    </nav>
 
     <!-- Botão Mobile -->
     <button id="menu-toggle" class="menu-toggle" aria-label="Abrir menu">
@@ -18,7 +28,7 @@
   <div id="mobile-menu" class="mobile-menu" aria-hidden="true">
     <div class="mobile-menu-header">
       <a href="index.html" class="logo-wrapper">
-        <img id="site-logo-mobile" src="" alt="Quality Celulares" class="logo" />
+        <img src="images/logo.png" alt="Quality Celulares" class="logo" />
       </a>
       <button id="menu-close" class="menu-close" aria-label="Fechar menu">
         <i class="fa-solid fa-xmark"></i>
@@ -34,9 +44,19 @@
     </div>
 
     <!-- Navegação Mobile -->
-    <nav id="nav-mobile" class="mobile-nav"></nav>
+    <nav class="mobile-nav">
+      <a href="index.html">Início</a>
+      <a href="index.html#smartphones">Smartphones</a>
+      <a href="index.html#acessorios">Acessórios</a>
+    </nav>
   </div>
 
   <!-- Overlay (fecha o menu ao clicar fora) -->
   <div id="menu-overlay" class="menu-overlay"></div>
 </header>
+
+<script src="js/main.js"></script>
+
+<script src="js/header-runtime.js"></script>
+
+<script src="js/footer-runtime.js"></script>
