@@ -18,6 +18,8 @@ router.get("/", (req, res) => {
 });
 
 router.post("/salvar", (req, res) => {
+  console.log("📥 Recebido:", req.body);
+
   const file = path.join(SITE_DIR, "formas-de-pagamento.html");
   const backup = path.join(
     BACKUP_DIR,
@@ -32,24 +34,22 @@ router.post("/salvar", (req, res) => {
       : "";
     fs.writeFileSync(backup, original, "utf-8");
 
-  // Aceita tanto o campo "html" quanto "content" vindos do painel
-const newContent = req.body.html || req.body.content || "";
+    const newContent = req.body.html || req.body.content || "";
 
-if (/<\s*main[\s\S]*?>[\s\S]*?<\s*\/\s*main\s*>/i.test(original)) {
-  const out = original.replace(
-    /(<\s*main[\s\S]*?>)[\s\S]*?(<\s*\/\s*main\s*>)/i,
-    `$1${newContent}$2`
-  );
-
-  fs.writeFileSync(file, out, "utf-8");
-}
- else {
-      const out = `<!doctype html><html><head><meta charset="utf-8"></head><body>${req.body.html || ""}</body></html>`;
+    if (/<\s*main[\s\S]*?>[\s\S]*?<\s*\/\s*main\s*>/i.test(original)) {
+      const out = original.replace(
+        /(<\s*main[\s\S]*?>)[\s\S]*?(<\s*\/\s*main\s*>)/i,
+        `$1${newContent}$2`
+      );
       fs.writeFileSync(file, out, "utf-8");
+      console.log("✅ formas-de-pagamento.html atualizado com sucesso");
+    } else {
+      console.warn("⚠️ Tag <main> não encontrada em formas-de-pagamento.html");
     }
+
     res.redirect("/pagamentos");
   } catch (e) {
-    console.error("Erro ao salvar formas de pagamento:", e);
+    console.error("❌ Erro ao salvar formas de pagamento:", e);
     res.status(500).send("Erro ao salvar formas-de-pagamento.html");
   }
 });

@@ -18,7 +18,7 @@ router.get("/", (req, res) => {
 });
 
 router.post("/salvar", (req, res) => {
-  console.log("📥 Recebido:", req.body); // 🔍 log de debug
+  console.log("📥 Recebido:", req.body);
 
   const file = path.join(SITE_DIR, "sobre.html");
   const backup = path.join(
@@ -33,20 +33,21 @@ router.post("/salvar", (req, res) => {
     fs.writeFileSync(backup, original, "utf-8");
 
     const newContent = req.body.html || req.body.content || "";
-   if (/<\s*main[\s\S]*?>[\s\S]*?<\s*\/\s*main\s*>/i.test(original)) {
-  const out = original.replace(
-    /(<\s*main[\s\S]*?>)[\s\S]*?(<\s*\/\s*main\s*>)/i,
-    `$1${newContent}$2`
-  );
 
+    if (/<\s*main[\s\S]*?>[\s\S]*?<\s*\/\s*main\s*>/i.test(original)) {
+      const out = original.replace(
+        /(<\s*main[\s\S]*?>)[\s\S]*?(<\s*\/\s*main\s*>)/i,
+        `$1${newContent}$2`
+      );
       fs.writeFileSync(file, out, "utf-8");
+      console.log("✅ sobre.html atualizado com sucesso");
     } else {
-      const out = `<!doctype html><html><head><meta charset="utf-8"></head><body>${newContent}</body></html>`;
-      fs.writeFileSync(file, out, "utf-8");
+      console.warn("⚠️ Tag <main> não encontrada em sobre.html");
     }
+
     res.redirect("/sobre");
   } catch (e) {
-    console.error("Erro ao salvar sobre:", e);
+    console.error("❌ Erro ao salvar sobre:", e);
     res.status(500).send("Erro ao salvar sobre.html");
   }
 });
