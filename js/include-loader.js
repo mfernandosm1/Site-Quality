@@ -1,5 +1,5 @@
 
-// include-loader.js
+// include-loader.js - carrega header e footer dinamicamente
 document.addEventListener("DOMContentLoaded", () => {
   const header = document.getElementById("header");
   const footer = document.getElementById("footer");
