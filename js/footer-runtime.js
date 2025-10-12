@@ -22,7 +22,7 @@
           window.__panelFooterInjected = true;
         }
       }
-    } catch(e){}
+    } catch(e){ console.warn('[footer-runtime] erro:', e); }
     dedupeFooters();
     setTimeout(dedupeFooters, 50);
     setTimeout(dedupeFooters, 250);
