@@ -44,9 +44,34 @@
   </section>
 
   <!-- Produtos -->
-  <main class="main"><!-- PANEL:BEGIN editable="main" -->
-<h2>Smartphones blablalaksdj</h2><p><img src="images/pocox7pro.png" alt="Poco X7 Pro"></p><h3>Poco X7 Pro</h3><p><a href="https://wa.me/5555991407824?text=Olá%20vim%20através%20do%20site">Comprar no WhatsApp </a></p><p><img src="images/redmi14c.png" alt="Redmi 14C"></p><h3>Redmi 14C</h3><p><a href="https://wa.me/5555991407824?text=Olá%20vim%20através%20do%20site">Comprar no WhatsApp </a></p><p>Nenhum produto encontrado.</p><h2>Acessórios</h2><p>Em breve...</p>
-<!-- PANEL:END editable="main" --></main>
+  <main class="main">
+    <h2 id="smartphones" style="text-align:center; margin-top: 40px;">Smartphones</h2>
+    <div id="products" class="products">
+      <div class="product-card">
+        <img src="images/pocox7pro.png" alt="Poco X7 Pro" />
+        <h3>Poco X7 Pro</h3>
+        <a href="https://wa.me/5555991407824?text=Olá%20vim%20através%20do%20site"
+           class="btn-whatsapp" target="_blank">
+          <i class="fa-brands fa-whatsapp"></i> Comprar no WhatsApp
+        </a>
+      </div>
+      <div class="product-card">
+        <img src="images/redmi14c.png" alt="Redmi 14C" />
+        <h3>Redmi 14C</h3>
+        <a href="https://wa.me/5555991407824?text=Olá%20vim%20através%20do%20site"
+           class="btn-whatsapp" target="_blank">
+          <i class="fa-brands fa-whatsapp"></i> Comprar no WhatsApp
+        </a>
+      </div>
+    </div>
+    <p id="no-results" class="em-breve"
+       style="display:none; text-align:center; margin-top:20px;">
+      Nenhum produto encontrado.
+    </p>
+
+    <h2 id="acessorios" style="text-align:center; margin-top: 60px;">Acessórios</h2>
+    <p class="em-breve" style="text-align:center;">Em breve...</p>
+  </main>
 
   <!-- Footer -->
   <div id="footer"></div>
