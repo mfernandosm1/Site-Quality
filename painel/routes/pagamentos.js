@@ -36,13 +36,17 @@ router.post("/salvar", (req, res) => {
 
     const newContent = req.body.html || req.body.content || "";
 
-    if (/<\s*main[\s\S]*?>[\s\S]*?<\s*\/\s*main\s*>/i.test(original)) {
-      const out = original.replace(
-        /(<\s*main[\s\S]*?>)[\s\S]*?(<\s*\/\s*main\s*>)/i,
-        `$1${newContent}$2`
-      );
+    const lower = original.toLowerCase();
+    const startIndex = lower.indexOf("<main");
+    const endIndex = lower.indexOf("</main>");
+
+    if (startIndex !== -1 && endIndex !== -1) {
+      const openTagEnd = original.indexOf(">", startIndex) + 1;
+      const before = original.substring(0, openTagEnd);
+      const after = original.substring(endIndex + 7);
+      const out = before + "\n" + newContent + "\n" + after;
       fs.writeFileSync(file, out, "utf-8");
-      console.log("✅ formas-de-pagamento.html atualizado com sucesso");
+      console.log("✅ formas-de-pagamento.html substituído com sucesso");
     } else {
       console.warn("⚠️ Tag <main> não encontrada em formas-de-pagamento.html");
     }

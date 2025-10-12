@@ -7,7 +7,6 @@ function P(app) {
   return app.locals.paths;
 }
 
-// Caminhos fixos conforme informado
 const SITE_DIR = "C:\\Site";
 const BACKUP_DIR = "C:\\Site\\Backup";
 
@@ -32,7 +31,6 @@ router.get("/", (req, res) => {
   });
 });
 
-// Página editar index
 router.get("/paginas/edit", (req, res) => {
   const file = path.join(SITE_DIR, "index.html");
   let html = "";
@@ -62,14 +60,18 @@ router.post("/paginas/save", (req, res) => {
 
     const newContent = req.body.html || req.body.content || "";
 
-    // Regex compatível com indentação e espaços
-    if (/<\s*main[\s\S]*?>[\s\S]*?<\s*\/\s*main\s*>/i.test(original)) {
-      const out = original.replace(
-        /(<\s*main[\s\S]*?>)[\s\S]*?(<\s*\/\s*main\s*>)/i,
-        `$1${newContent}$2`
-      );
+    // 🔧 Substituição sem regex (totalmente confiável)
+    const lower = original.toLowerCase();
+    const startIndex = lower.indexOf("<main");
+    const endIndex = lower.indexOf("</main>");
+
+    if (startIndex !== -1 && endIndex !== -1) {
+      const openTagEnd = original.indexOf(">", startIndex) + 1;
+      const before = original.substring(0, openTagEnd);
+      const after = original.substring(endIndex + 7);
+      const out = before + "\n" + newContent + "\n" + after;
       fs.writeFileSync(file, out, "utf-8");
-      console.log("✅ index.html atualizado com sucesso");
+      console.log("✅ index.html substituído com sucesso");
     } else {
       console.warn("⚠️ Tag <main> não encontrada em index.html");
     }
