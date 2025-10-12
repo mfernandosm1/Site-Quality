@@ -1,5 +1,18 @@
 {
   "text": "",
   "cnpj": "",
-  "social": []
+  "social": [
+    {
+      "label": "Sobre nós",
+      "icon": "Sobre nós",
+      "url": "sobre.html",
+      "order": 1
+    },
+    {
+      "label": "Formas de pagamento e envio",
+      "icon": "Formas de pagamento e envio",
+      "url": "formas-de-pagamento.html",
+      "order": 2
+    }
+  ]
 }
