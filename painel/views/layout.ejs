@@ -1,40 +1,29 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Painel Quality</title>
-  <link rel="stylesheet" href="/public/css/painel.css" />
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
-</head>
-<body>
-  <header class="topbar">
-    <div class="brand">Painel <strong>Quality</strong></div>
-    <nav class="top-actions">
-      <a class="btn small" href="/publicar">📤 Publicar</a>
-      <a class="btn small ghost" href="/">🔍 Ver site</a>
-    </nav>
-  </header>
-
-  <aside class="sidebar">
-    <a href="/" class="item">🏠 Dashboard</a>
-    <a href="/produtos" class="item">🛍️ Produtos</a>
-    <a href="/categorias" class="item">🗂️ Categorias</a>
-    <a href="/banners" class="item">🖼️ Banners</a>
-    <a href="/aparencia" class="item">🎨 Aparência</a>
-    <a href="/estilos" class="item">🧩 Estilos</a>
-    <a href="/paginas" class="item active">📄 Páginas</a>
-  </aside>
-
-  <main class="content">
-    <% if (typeof flash !== 'undefined' && flash) { %>
-      <div class="notice"><%= flash %></div>
-    <% } %>
-    <%- body %>
-  </main>
-
-  <script src="/public/js/painel.js"></script>
-</body>
-</html>
+<!doctype html>
+<html lang="pt-BR"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Painel Quality</title>
+<link rel="stylesheet" href="/public/css/painel.css">
+<script src="https://cdn.ckeditor.com/4.25.1-lts/full/ckeditor.js"></script>
+</head><body>
+<div class='topbar'>
+  <div class='brand'>Painel Quality</div>
+  <nav>
+    <a href='/'>Dashboard</a>
+    <a href='/produtos'>Produtos</a>
+    <a href='/categorias'>Categorias</a>
+    <a href='/banners'>Banners</a>
+    <a href='/aparencia'>Aparência</a>
+    <a href='/estilos'>Estilos</a>
+    <a href='/paginas'>Páginas</a>
+  </nav>
+  <div class='actions'>
+    <form method='post' action='/publicar'><button class='btn primary' type='submit'>📤 Publicar</button></form>
+    <a class='btn secondary' href='/site/view/index.html' target='_blank'>👁️ Ver site</a>
+  </div>
+</div>
+<div class='container'>
+  <% if (flash) { %><div class='notice'><%= flash %></div><% } %>
+  <%- body %>
+</div>
+<script src='/public/js/painel.js'></script>
+</body></html>

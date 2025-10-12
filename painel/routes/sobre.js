@@ -1,56 +1,50 @@
-import express from 'express';
-import fs from 'fs';
-import path from 'path';
+import express from "express";
+import fs from "fs";
+import path from "path";
 const router = express.Router();
 
-function P(app) { return app.locals.paths; }
-function extractBetweenMarkers(fullText, markerName = 'main') {
-  const re = new RegExp(`<!--\\s*PANEL:BEGIN\\s*editable="${markerName}"\\s*-->[\\r\\n]*([\\s\\S]*?)[\\r\\n]*<!--\\s*PANEL:END\\s*editable="${markerName}"\\s*-->`);
-  const m = re.exec(fullText);
-  return m ? m[1] : null;
-}
-function replaceBetweenMarkers(fullText, newInner, markerName = 'main') {
-  const re = new RegExp(`(<!--\\s*PANEL:BEGIN\\s*editable="${markerName}"\\s*-->)[\\r\\n]*([\\s\\S]*?)[\\r\\n]*(<!--\\s*PANEL:END\\s*editable="${markerName}"\\s*-->)`);
-  if (!re.test(fullText)) return null;
-  return fullText.replace(re, `$1\n${newInner}\n$3`);
-}
+const SITE_DIR = "C:\\Site";
+const BACKUP_DIR = "C:\\Site\\Backup";
 
-// Página "Sobre"
-router.get('/', (req, res) => {
-  const file = path.join(P(req.app).SITE_DIR, 'sobre.html');
-  let html = '';
-  try { html = fs.readFileSync(file, 'utf-8'); } catch (e) { }
-
-  let inner = extractBetweenMarkers(html, 'main');
-  if (inner === null) {
-    const m = /<body[^>]*>([\s\S]*?)<\/body>/i.exec(html);
-    inner = m ? m[1] : html;
-  }
-
-  res.render('editar_sobre', { html: inner, flash: null });
+router.get("/", (req, res) => {
+  const file = path.join(SITE_DIR, "sobre.html");
+  let html = "";
+  try {
+    html = fs.readFileSync(file, "utf-8");
+  } catch (e) {}
+  const m = /<main[\s\S]*?>([\s\S]*?)<\/main>/i.exec(html);
+  const body = m ? m[1] : html;
+  res.render("editar_sobre", { html: body, flash: null });
 });
 
-router.post('/salvar', (req, res) => {
-  const { SITE_DIR } = P(req.app);
-  const file = path.join(SITE_DIR, 'sobre.html');
+router.post("/salvar", (req, res) => {
+  const file = path.join(SITE_DIR, "sobre.html");
+  const backup = path.join(
+    BACKUP_DIR,
+    "sobre_" + new Date().toISOString().replace(/[:.]/g, "-") + ".html"
+  );
 
-  const backupDir = path.join(SITE_DIR, 'backups');
-  if (!fs.existsSync(backupDir)) fs.mkdirSync(backupDir, { recursive: true });
-  const backupPath = path.join(backupDir, `sobre.html.${new Date().toISOString().replace(/[:.]/g, '-')}.bak`);
+  try {
+    const original = fs.existsSync(file)
+      ? fs.readFileSync(file, "utf-8")
+      : "";
+    fs.writeFileSync(backup, original, "utf-8");
 
-  let original = '';
-  try { original = fs.readFileSync(file, 'utf-8'); } catch { }
-  fs.writeFileSync(backupPath, original, 'utf-8');
-
-  const newInner = req.body.html || '';
-  let replaced = replaceBetweenMarkers(original, newInner, 'main');
-  if (replaced === null) {
-    const bodyMatch = /(<body[^>]*>)[\s\S]*?(<\/body>)/i.exec(original);
-    replaced = bodyMatch ? original.replace(bodyMatch[0], `$1${newInner}$2`) : newInner;
+    if (/<main[\s\S]*?>[\s\S]*?<\/main>/i.test(original)) {
+      const out = original.replace(
+        /(<main[\s\S]*?>)[\s\S]*?(<\/main>)/i,
+        `$1${req.body.html || ""}$2`
+      );
+      fs.writeFileSync(file, out, "utf-8");
+    } else {
+      const out = `<!doctype html><html><head><meta charset="utf-8"></head><body>${req.body.html || ""}</body></html>`;
+      fs.writeFileSync(file, out, "utf-8");
+    }
+    res.redirect("/sobre");
+  } catch (e) {
+    console.error("Erro ao salvar sobre:", e);
+    res.status(500).send("Erro ao salvar sobre.html");
   }
-
-  fs.writeFileSync(file, replaced, 'utf-8');
-  res.redirect('/sobre');
 });
 
 export default router;

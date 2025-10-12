@@ -1,10 +1,2 @@
 <% layout('layout') -%>
-<div class="card">
-  <h3>📄 Páginas</h3>
-  <p class="muted">Clique para editar o conteúdo visual do &lt;main&gt;.</p>
-  <ul class="list">
-    <% pages.forEach(p => { %>
-      <li><a class="link" href="/paginas/edit?file=<%= encodeURIComponent(p) %>">✏️ <%= p %></a></li>
-    <% }) %>
-  </ul>
-</div>
+<div class='card'><h3>📄 Páginas</h3><ul><% pages.forEach(p=>{ %><li><a href='/paginas/edit?file=<%= p %>'><%= p %></a></li><% }) %></ul></div>
