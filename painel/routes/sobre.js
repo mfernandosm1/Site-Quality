@@ -1,25 +1,19 @@
 import express from 'express';
 import fs from 'fs';
 import path from 'path';
+import { loadMainOnly, injectMainOnly } from './main_utils.js';
 const router = express.Router();
 function P(app){ return app.locals.paths; }
 
 function decodeHTML(str) {
   if (!str) return '';
-  return str
-    .replace(/&lt;/g, "<")
-    .replace(/&gt;/g, ">")
-    .replace(/&amp;/g, "&")
-    .replace(/&quot;/g, '"')
-    .replace(/&#39;/g, "'");
+  return str.replace(/&lt;/g, "<").replace(/&gt;/g, ">").replace(/&amp;/g, "&").replace(/&quot;/g, '"').replace(/&#39;/g, "'");
 }
 
 router.get('/', (req,res)=>{
-  const t = path.join(P(req.app).SITE_DIR, 'sobre.html');
-  let c=''; try{ c = fs.readFileSync(t,'utf-8'); }catch(e){}
-  const m = /<body[^>]*>([\s\S]*?)<\/body>/i.exec(c);
-  const body = m ? m[1] : c;
-  res.render('editar_sobre', { html: body, flash: null });
+  const file = path.join(P(req.app).SITE_DIR, 'sobre.html');
+  const { innerMain, area } = loadMainOnly(file);
+  res.render('editar_sobre', { html: innerMain, flash:null, area });
 });
 
 router.post('/salvar', (req,res)=>{
@@ -27,19 +21,14 @@ router.post('/salvar', (req,res)=>{
   const BACKUPS_DIR = P(req.app).BACKUPS_DIR;
   const file = path.join(SITE_DIR, 'sobre.html');
   const backup = path.join(BACKUPS_DIR, 'sobre.html.'+new Date().toISOString().replace(/[:.]/g,'-'));
-  try{
+  try {
     const prev = fs.existsSync(file)?fs.readFileSync(file,'utf-8'):'';
     fs.writeFileSync(backup, prev, 'utf-8');
-  }catch(e){}
-  let original=''; try{ original = fs.readFileSync(file,'utf-8'); }catch(e){}
+  } catch(e){}
+  const { htmlCompleto, area } = loadMainOnly(file);
   const safeHTML = decodeHTML(req.body.html || '');
-  if (/<body[^>]*>[\s\S]*?<\/body>/i.test(original)) {
-    const out = original.replace(/(<body[^>]*>)[\s\S]*?(<\/body>)/i, `$1${safeHTML}$2`);
-    fs.writeFileSync(file, out, 'utf-8');
-  } else {
-    const out = `<!doctype html><html><head><meta charset="utf-8"></head><body>${safeHTML}</body></html>`;
-    fs.writeFileSync(file, out, 'utf-8');
-  }
+  const result = injectMainOnly(htmlCompleto, area, safeHTML);
+  fs.writeFileSync(file, result, 'utf-8');
   res.redirect('/sobre');
 });
 

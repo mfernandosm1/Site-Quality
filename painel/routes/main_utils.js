@@ -1,58 +1,37 @@
-import fs from 'fs';
-import path from 'path';
 import * as cheerio from 'cheerio';
+import fs from 'fs';
 
-
-export function readFileUtf8(p){
-  try{ return fs.readFileSync(p,'utf-8'); }catch(e){ return ''; }
-}
-
-export function writeFileUtf8(p, content){
-  fs.writeFileSync(p, content, 'utf-8');
-}
-
-// Extract the inner HTML of <main> (fallback to body if not found)
-export function extractMain(html){
-  const $ = cheerio.load(html, { decodeEntities: false });
-  const $main = $('main').first();
-  if ($main.length) return $main.html() || '';
-  return $('body').html() || '';
-}
-
-// Replace only the inner HTML of <main> (fallback to body if not found)
-export function replaceMain(html, newMainInner){
-  const $ = cheerio.load(html, { decodeEntities: false });
-  const $main = $('main').first();
-  if ($main.length){
-    $main.html(newMainInner);
-  } else {
-    const $body = $('body').first();
-    if ($body.length) $body.html(newMainInner);
-  }
-  return $.html();
-}
-
-// INDEX helpers (safe fields only)
-export function extractIndexFields(html){
-  const $ = cheerio.load(html, { decodeEntities: false });
+/**
+ * Lê o conteúdo HTML e extrai apenas o conteúdo do <main>, se existir.
+ * Retorna {htmlCompleto, innerMain, area}
+ */
+export function loadMainOnly(filePath) {
+  let html = '';
+  try { html = fs.readFileSync(filePath, 'utf-8'); } catch (e) { return {htmlCompleto:'', innerMain:'', area:'raw'}; }
+  const $ = cheerio.load(html);
   const main = $('main').first();
-  const h2Smartphones = main.find('h2#smartphones').first().text().trim();
-  const h2Acessorios = main.find('h2#acessorios').first().text().trim();
-  const emBreve = main.find('p.em-breve').first().text().trim();
-  return { h2Smartphones, h2Acessorios, emBreve };
+  if (main.length > 0) {
+    return { htmlCompleto: html, innerMain: main.html() || '', area: 'main' };
+  }
+  const body = $('body').first();
+  if (body.length > 0) {
+    return { htmlCompleto: html, innerMain: body.html() || '', area: 'body' };
+  }
+  return { htmlCompleto: html, innerMain: html, area: 'raw' };
 }
 
-export function applyIndexFields(html, fields){
-  const $ = cheerio.load(html, { decodeEntities: false });
-  const main = $('main').first();
-  if (fields.h2Smartphones !== undefined){
-    main.find('h2#smartphones').first().text(fields.h2Smartphones);
+/**
+ * Substitui o conteúdo do <main> (ou <body>) no HTML original e retorna o resultado.
+ */
+export function injectMainOnly(htmlOriginal, area, newInner) {
+  const $ = cheerio.load(htmlOriginal);
+  if (area === 'main') {
+    const main = $('main').first();
+    if (main.length > 0) { main.html(newInner); return $.html(); }
   }
-  if (fields.h2Acessorios !== undefined){
-    main.find('h2#acessorios').first().text(fields.h2Acessorios);
+  if (area === 'body') {
+    const body = $('body').first();
+    if (body.length > 0) { body.html(newInner); return $.html(); }
   }
-  if (fields.emBreve !== undefined){
-    main.find('p.em-breve').first().text(fields.emBreve);
-  }
-  return $.html();
+  return newInner;
 }
