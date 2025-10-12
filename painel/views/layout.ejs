@@ -1,39 +1,29 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Painel Quality</title>
-  <link rel="stylesheet" href="/public/css/painel.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-</head>
-<body>
-  <!-- Cabeçalho -->
-  <header class="topbar">
-    <div class="brand">Painel Quality</div>
-    <nav class="menu">
-      <a href="/">Dashboard</a>
-      <a href="/produtos">Produtos</a>
-      <a href="/categorias">Categorias</a>
-      <a href="/banners">Banners</a>
-      <a href="/aparencia">Aparência</a>
-      <a href="/estilos">Estilos</a>
-      <a href="/paginas">Páginas</a>
-    </nav>
-    <div class="actions">
-      <a href="/publicar" class="btn primary">📤 Publicar</a>
-      <a href="/site/index.html" target="_blank" class="btn warn">🔎 Ver site</a>
-    </div>
-  </header>
-
-  <!-- Conteúdo -->
-  <div class="container">
-    <% if (typeof flash !== 'undefined' && flash) { %>
-      <div class="notice"><%= flash %></div>
-    <% } %>
-    <%- body %>
+<!doctype html>
+<html lang="pt-BR"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Painel Quality</title>
+<link rel="stylesheet" href="/public/css/painel.css">
+<script src="https://cdn.ckeditor.com/4.25.1-lts/full/ckeditor.js"></script>
+</head><body>
+<div class='topbar'>
+  <div class='brand'>Painel Quality</div>
+  <nav>
+    <a href='/'>Dashboard</a>
+    <a href='/produtos'>Produtos</a>
+    <a href='/categorias'>Categorias</a>
+    <a href='/banners'>Banners</a>
+    <a href='/aparencia'>Aparência</a>
+    <a href='/estilos'>Estilos</a>
+    <a href='/paginas'>Páginas</a>
+  </nav>
+  <div class='actions'>
+    <form method='post' action='/publicar'><button class='btn primary' type='submit'>📤 Publicar</button></form>
+    <a class='btn secondary' href='/site/view/index.html' target='_blank'>👁️ Ver site</a>
   </div>
-
-  <script src="/public/js/painel.js"></script>
-</body>
-</html>
+</div>
+<div class='container'>
+  <% if (flash) { %><div class='notice'><%= flash %></div><% } %>
+  <%- body %>
+</div>
+<script src='/public/js/painel.js'></script>
+</body></html>

@@ -3,6 +3,7 @@
   <h3>🏠 Página Inicial (Visual)</h3>
   <p class="muted mb-2">Edite o conteúdo visualmente abaixo ou use o modo código. O botão "Recarregar" importa o conteúdo atual do arquivo HTML.</p>
 
+  <!-- Editor visual -->
   <textarea id="editorVisual"><%- content %></textarea>
   <div style="margin-top:10px;display:flex;gap:8px;">
     <button id="saveVisual" class="btn primary">💾 Salvar (Visual)</button>
@@ -11,6 +12,7 @@
 
   <hr style="margin:25px 0;">
 
+  <!-- Editor código -->
   <form method="post" action="/paginas/save">
     <input type="hidden" name="file" value="<%= file %>">
     <label>Modo Código (HTML)</label>
@@ -19,6 +21,7 @@
   </form>
 </div>
 
+<!-- CKEditor moderno -->
 <script src="https://cdn.ckeditor.com/ckeditor5/41.4.2/classic/ckeditor.js"></script>
 <script>
 let editor;
@@ -44,8 +47,6 @@ ClassicEditor.create(document.querySelector('#editorVisual'), {
       body: new URLSearchParams({ file: '<%= file %>', content: conteudo })
     });
     alert(resp.ok ? '✅ Página salva com sucesso!' : '❌ Erro ao salvar.');
-if(resp.ok) window.location.href = window.location.href + "?t=" + Date.now();
-
   });
 }).catch(console.error);
 </script>

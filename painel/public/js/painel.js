@@ -1,1 +1,1 @@
-// scripts do painel podem ir aqui
+// painel js

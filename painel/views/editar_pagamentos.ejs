@@ -18,6 +18,7 @@
   </form>
 </div>
 
+<!-- CKEditor moderno -->
 <script src="https://cdn.ckeditor.com/ckeditor5/41.4.2/classic/ckeditor.js"></script>
 <script>
 let editorPagto;
@@ -36,8 +37,6 @@ ClassicEditor.create(document.querySelector('#editorPagto'), {
       body: new URLSearchParams({ html: conteudo })
     });
     alert(resp.ok ? '✅ Página de Pagamentos salva!' : '❌ Erro ao salvar.');
-    if(resp.ok) window.location.href = window.location.href + "?t=" + Date.now();
-
   });
-}).catch(console.error);
+});
 </script>
