@@ -11,22 +11,36 @@ const app = express();
 app.engine('ejs', ejsMate);
 const PORT = 3000;
 
+// ========================
+// 🔧 Caminhos do sistema
+// ========================
 const ROOT = path.resolve(__dirname, '..');
-const SITE_DIR = path.join(ROOT, 'Site_with_content');
+const SITE_DIR = "C:\\Site";              // <-- Caminho fixo do site real
+const BACKUPS_DIR = "C:\\Site\\Backup";   // <-- Caminho fixo do backup
 const CONTENT_DIR = path.join(SITE_DIR, 'content');
-const BACKUPS_DIR = path.join(SITE_DIR, 'backups');
 const VIEWS_DIR = path.join(__dirname, 'views');
 const PUBLIC_DIR = path.join(__dirname, 'public');
 
 app.locals.paths = { ROOT, SITE_DIR, CONTENT_DIR, BACKUPS_DIR };
 
+// ========================
+// 🔧 Configurações Express
+// ========================
 app.set('view engine', 'ejs');
 app.set('views', VIEWS_DIR);
-app.use(bodyParser.urlencoded({extended:true}));
+
+// ✅ Parsers que garantem leitura de req.body.html / req.body.content
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+
+// ✅ Arquivos públicos
 app.use('/public', express.static(PUBLIC_DIR));
 
-// Routes
+// ========================
+// 🔧 Rotas
+// ========================
 import indexRouter from './routes/index.js';
 import headerRouter from './routes/header.js';
 import footerRouter from './routes/footer.js';
@@ -59,6 +73,13 @@ app.use('/aparencia', aparenciaRouter);
 app.use('/estilos', estilosRouter);
 app.use('/site', sitePreviewRouter);
 
+// ✅ Libera o site real para pré-visualização
 app.use('/site', express.static(SITE_DIR));
 
-app.listen(PORT, ()=> console.log(`Painel Quality V7.3 em http://localhost:${PORT}`));
+// ========================
+// 🔧 Inicialização
+// ========================
+app.listen(PORT, () => {
+  console.log(`Painel Quality V7.3 em http://localhost:${PORT}`);
+  console.log(`🚀 Editando arquivos em: ${SITE_DIR}`);
+});
