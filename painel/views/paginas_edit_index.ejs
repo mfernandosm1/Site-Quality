@@ -1,0 +1,23 @@
+<% layout('layout') -%>
+<header><div class="brand container">Páginas → Index (Campos)</div></header>
+<div class="container">
+  <div class="card">
+    <form method="post" action="/paginas-index/save">
+      <div style="display:grid;gap:12px;grid-template-columns:1fr;">
+        <label><strong>Título da seção Smartphones (H2)</strong><br/>
+          <input type="text" name="h2Smartphones" value="<%= h2Smartphones %>" style="width:100%;padding:8px;border:1px solid #ddd;border-radius:8px;">
+        </label>
+        <label><strong>Título da seção Acessórios (H2)</strong><br/>
+          <input type="text" name="h2Acessorios" value="<%= h2Acessorios %>" style="width:100%;padding:8px;border:1px solid #ddd;border-radius:8px;">
+        </label>
+        <label><strong>Texto “Em breve...”</strong><br/>
+          <input type="text" name="emBreve" value="<%= emBreve %>" style="width:100%;padding:8px;border:1px solid #ddd;border-radius:8px;">
+        </label>
+      </div>
+      <div class="mt-4">
+        <button class="btn primary" type="submit">💾 Salvar</button>
+        <a class="btn" href="/paginas">Voltar</a>
+      </div>
+    </form>
+  </div>
+</div>

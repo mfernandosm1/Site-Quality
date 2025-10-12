@@ -103,7 +103,7 @@ router.post("/", async (req, res) => {
     }
 
     console.log("✅ Publicação concluída (sem exclusões).");
-    res.json({ success: true, message: "Backup criado, conteúdo adicionado/atualizado e git commit/push executado (sem remover arquivos).", backup: zipName });
+    res.render('publicar', { flash: { ok: true, message: 'Backup criado e sync concluído (sem excluir arquivos).', backup: zipName } });
   } catch (err) {
     console.error("❌ Erro na publicação:", err);
     res.status(500).json({ success: false, message: "Erro ao publicar site.", error: err.message });
