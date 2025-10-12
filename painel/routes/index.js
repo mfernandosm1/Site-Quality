@@ -7,6 +7,7 @@ function P(app) {
   return app.locals.paths;
 }
 
+// Caminhos fixos conforme informado
 const SITE_DIR = "C:\\Site";
 const BACKUP_DIR = "C:\\Site\\Backup";
 
@@ -31,6 +32,7 @@ router.get("/", (req, res) => {
   });
 });
 
+// Página editar index
 router.get("/paginas/edit", (req, res) => {
   const file = path.join(SITE_DIR, "index.html");
   let html = "";
@@ -60,25 +62,32 @@ router.post("/paginas/save", (req, res) => {
 
     const newContent = req.body.html || req.body.content || "";
 
-    // 🔧 Substituição sem regex (totalmente confiável)
-    const lower = original.toLowerCase();
-    const startIndex = lower.indexOf("<main");
-    const endIndex = lower.indexOf("</main>");
+    const lines = original.split(/\r?\n/);
+    let insideMain = false;
+    const newLines = [];
 
-    if (startIndex !== -1 && endIndex !== -1) {
-      const openTagEnd = original.indexOf(">", startIndex) + 1;
-      const before = original.substring(0, openTagEnd);
-      const after = original.substring(endIndex + 7);
-      const out = before + "\n" + newContent + "\n" + after;
-      fs.writeFileSync(file, out, "utf-8");
-      console.log("✅ index.html substituído com sucesso");
-    } else {
-      console.warn("⚠️ Tag <main> não encontrada em index.html");
+    for (const line of lines) {
+      if (!insideMain) {
+        newLines.push(line);
+        if (/<\s*main[\s\S]*?>/i.test(line)) {
+          insideMain = true;
+          newLines.push(newContent); // insere novo conteúdo
+        }
+      } else {
+        if (/<\s*\/\s*main\s*>/i.test(line)) {
+          newLines.push(line);
+          insideMain = false;
+        }
+      }
     }
+
+    const out = newLines.join("\n");
+    fs.writeFileSync(file, out, "utf-8");
+    console.log("✅ Substituição concluída em", file);
 
     res.redirect("/?flash=Página+Index+salva+com+sucesso!");
   } catch (e) {
-    console.error("❌ Erro ao salvar index:", e);
+    console.error("❌ Erro ao salvar:", e);
     res.status(500).send("Erro ao salvar a página index.");
   }
 });

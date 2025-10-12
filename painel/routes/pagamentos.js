@@ -36,24 +36,32 @@ router.post("/salvar", (req, res) => {
 
     const newContent = req.body.html || req.body.content || "";
 
-    const lower = original.toLowerCase();
-    const startIndex = lower.indexOf("<main");
-    const endIndex = lower.indexOf("</main>");
+    const lines = original.split(/\r?\n/);
+    let insideMain = false;
+    const newLines = [];
 
-    if (startIndex !== -1 && endIndex !== -1) {
-      const openTagEnd = original.indexOf(">", startIndex) + 1;
-      const before = original.substring(0, openTagEnd);
-      const after = original.substring(endIndex + 7);
-      const out = before + "\n" + newContent + "\n" + after;
-      fs.writeFileSync(file, out, "utf-8");
-      console.log("✅ formas-de-pagamento.html substituído com sucesso");
-    } else {
-      console.warn("⚠️ Tag <main> não encontrada em formas-de-pagamento.html");
+    for (const line of lines) {
+      if (!insideMain) {
+        newLines.push(line);
+        if (/<\s*main[\s\S]*?>/i.test(line)) {
+          insideMain = true;
+          newLines.push(newContent);
+        }
+      } else {
+        if (/<\s*\/\s*main\s*>/i.test(line)) {
+          newLines.push(line);
+          insideMain = false;
+        }
+      }
     }
+
+    const out = newLines.join("\n");
+    fs.writeFileSync(file, out, "utf-8");
+    console.log("✅ Substituição concluída em", file);
 
     res.redirect("/pagamentos");
   } catch (e) {
-    console.error("❌ Erro ao salvar formas de pagamento:", e);
+    console.error("❌ Erro ao salvar:", e);
     res.status(500).send("Erro ao salvar formas-de-pagamento.html");
   }
 });
