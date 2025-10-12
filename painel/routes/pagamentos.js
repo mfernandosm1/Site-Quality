@@ -32,13 +32,17 @@ router.post("/salvar", (req, res) => {
       : "";
     fs.writeFileSync(backup, original, "utf-8");
 
-    if (/<main[\s\S]*?>[\s\S]*?<\/main>/i.test(original)) {
-      const out = original.replace(
-        /(<main[\s\S]*?>)[\s\S]*?(<\/main>)/i,
-        `$1${req.body.html || ""}$2`
-      );
-      fs.writeFileSync(file, out, "utf-8");
-    } else {
+  // Aceita tanto o campo "html" quanto "content" vindos do painel
+const newContent = req.body.html || req.body.content || "";
+
+if (/<main[\s\S]*?>[\s\S]*?<\/main>/i.test(original)) {
+  const out = original.replace(
+    /(<main[\s\S]*?>)[\s\S]*?(<\/main>)/i,
+    `$1${newContent}$2`
+  );
+  fs.writeFileSync(file, out, "utf-8");
+}
+ else {
       const out = `<!doctype html><html><head><meta charset="utf-8"></head><body>${req.body.html || ""}</body></html>`;
       fs.writeFileSync(file, out, "utf-8");
     }
