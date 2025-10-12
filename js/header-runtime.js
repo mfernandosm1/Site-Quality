@@ -1,34 +1,89 @@
 (function(){
-  function ready(fn){ if(document.readyState !== 'loading'){ fn(); } else { document.addEventListener('DOMContentLoaded', fn); } }
-  function dedupeHeaders(){
-    try{
-      var hs = document.querySelectorAll('header');
-      if (hs.length > 1){
-        for (var i=1;i<hs.length;i++){ hs[i].parentNode && hs[i].parentNode.removeChild(hs[i]); }
-      }
-    }catch(e){}
+  function ready(fn){ 
+    if(document.readyState!=='loading') fn(); 
+    else document.addEventListener('DOMContentLoaded', fn); 
   }
-  ready(async function(){
+
+  async function ensureHeader(){
     try {
-      var hasHeader = document.querySelector('header, [data-site-header], .site-header');
-      if (!hasHeader && !window.__panelHeaderInjected){
-        var res = await fetch('header.html', { cache: 'no-store' });
-        if (res.ok) {
-          var html = await res.text();
+      // Preferir preencher o contêiner #header se existir
+      var headerContainer = document.getElementById('header');
+      var hasRealHeader = document.querySelector('header.header');
+      if (headerContainer && !hasRealHeader){
+        var res1 = await fetch('header.html', { cache: 'no-store' });
+        if (res1.ok){
+          headerContainer.innerHTML = await res1.text();
+          console.log('[header-runtime] header inserido em #header');
+          return;
+        }
+      }
+      // Caso não exista #header, injeta no topo do body (evita duplicações)
+      if (!document.querySelector('header.header') && !window.__panelHeaderInjected){
+        var res2 = await fetch('header.html', { cache: 'no-store' });
+        if (res2.ok){
+          var html = await res2.text();
           var wrap = document.createElement('div');
-          wrap.setAttribute('data-panel-injected','header');
           wrap.innerHTML = html;
           document.body.insertBefore(wrap, document.body.firstChild);
           window.__panelHeaderInjected = true;
+          console.log('[header-runtime] header inserido no topo do body');
         }
       }
-    } catch(e){}
-    dedupeHeaders();
-    setTimeout(dedupeHeaders, 50);
-    setTimeout(dedupeHeaders, 250);
-    try{
-      var obs = new MutationObserver(function(){ dedupeHeaders(); });
-      obs.observe(document.body, {childList:true, subtree:true});
-    }catch(e){}
+    } catch(e){ console.warn('[header-runtime] erro ao injetar header:', e); }
+  }
+
+  // Delegação global de eventos — funciona mesmo após recarregar o header
+  function bindDelegatedMenu(){
+    if (window.__menuDelegatedBound) return;
+    window.__menuDelegatedBound = true;
+
+    document.addEventListener('click', function(ev){
+      var t = ev.target;
+      var toggle = t.closest && t.closest('#menu-toggle');
+      var closeBtn = t.closest && (t.closest('#menu-close') || t.closest('#menu-overlay') || t.closest('.mobile-nav a'));
+      var sidebar = document.getElementById('mobile-menu');
+      var overlay = document.getElementById('menu-overlay');
+      if (!sidebar) return;
+
+      function open(){
+        sidebar.classList.add('open');
+        overlay && overlay.classList.add('active');
+        document.body.classList.add('menu-open');
+      }
+      function close(){
+        sidebar.classList.remove('open');
+        overlay && overlay.classList.remove('active');
+        document.body.classList.remove('menu-open');
+      }
+
+      if (toggle){
+        ev.preventDefault();
+        sidebar.classList.contains('open') ? close() : open();
+      }
+      if (closeBtn){
+        ev.preventDefault();
+        close();
+      }
+    });
+
+    // ESC fecha
+    document.addEventListener('keydown', function(e){
+      if (e.key === 'Escape'){
+        var sidebar = document.getElementById('mobile-menu');
+        var overlay = document.getElementById('menu-overlay');
+        if (sidebar && sidebar.classList.contains('open')){
+          sidebar.classList.remove('open');
+          overlay && overlay.classList.remove('active');
+          document.body.classList.remove('menu-open');
+        }
+      }
+    });
+
+    console.log('[header-runtime] delegação de eventos do menu ativa');
+  }
+
+  ready(async function(){
+    await ensureHeader();
+    bindDelegatedMenu();
   });
 })();

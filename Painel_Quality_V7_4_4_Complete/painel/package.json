@@ -1,0 +1,14 @@
+{
+  "name": "painel-quality",
+  "version": "7.4.4",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "archiver": "^6.0.2",
+    "ejs": "^3.1.10",
+    "express": "^4.19.2"
+  }
+}

@@ -1,0 +1,20 @@
+<% layout('layout') -%>
+<div class='card'><h3>💳 Formas de Pagamento (Visual)</h3><form method='post' action='/pagamentos/salvar'><textarea name='html' id='editor_pagto'><%- html %></textarea><div style='margin-top:10px'><button class='btn primary'>Salvar</button></div></form></div>
+<script>
+  if (window.CKEDITOR) {
+    CKEDITOR.replace('editor_pagto', {
+      extraAllowedContent: '*(*);*{*};a[!href];img[!src,alt,width,height]',
+      removePlugins: 'cloudservices,easyimage',
+      fullPage: true,
+      allowedContent: true
+    });
+  }
+</script>
+
+<div class="card">
+  <h3>Importar do arquivo atual</h3>
+  <form method="get" action="/pagamentos">
+    <button class="btn">Recarregar do HTML</button>
+  </form>
+  <p class="muted">Traz o conteúdo atual do arquivo sem precisar mexer em código.</p>
+</div>

@@ -1,0 +1,33 @@
+<% layout('layout') -%>
+<div class="grid">
+  <div class="card">
+    <h2>Categorias</h2>
+    <form method="post" action="/categorias/add" class="row">
+      <input name="name" placeholder="Nome" />
+      <input name="slug" placeholder="Slug/Link" />
+      <button class="btn">Adicionar</button>
+    </form>
+  </div>
+  <div class="card">
+    <h3>Importar (header+footer)</h3>
+    <form method="post" action="/categorias/import2">
+      <button class="btn">Importar</button>
+    </form>
+  </div>
+  <div class="card">
+    <table class="table">
+      <thead><tr><th>Nome</th><th>Slug</th><th></th></tr></thead>
+      <tbody>
+        <% (items||[]).forEach(it=>{ %>
+          <tr>
+            <td><%= it.name %></td>
+            <td><%= it.slug %></td>
+            <td>
+              <form method="post" action="/categorias/delete"><input type="hidden" name="id" value="<%= it.id %>"><button class="btn danger">Excluir</button></form>
+            </td>
+          </tr>
+        <% }) %>
+      </tbody>
+    </table>
+  </div>
+</div>

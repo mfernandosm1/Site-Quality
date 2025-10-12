@@ -1,129 +1,77 @@
-// Aguarda DOM estar pronto
-document.addEventListener("DOMContentLoaded", () => {
-  // Carregar header
+// main.js — robusto para index.html com delegação de eventos
+document.addEventListener("DOMContentLoaded", async () => {
+  console.log("🚀 Iniciando carregamento global (index)...");
+
+  // Detecta caminho base automaticamente
+  const base = window.location.pathname.includes("/Site-Quality/")
+    ? "/Site-Quality"
+    : "";
+
+  // Carregar HEADER no contêiner #header
   const headerContainer = document.getElementById("header");
-  if (headerContainer) {
-    fetch("header.html")
-      .then(res => res.text())
-      .then(data => {
-        headerContainer.innerHTML = data;
-        initHeaderEvents(); // ativa eventos do header
-      });
+  if (headerContainer && !document.querySelector('header.header')) {
+    try {
+      const res = await fetch(`${base}/header.html`, { cache: "no-store" });
+      if (res.ok) {
+        headerContainer.innerHTML = await res.text();
+        console.log("✅ Header carregado (index)");
+      }
+    } catch (e) {
+      console.error("❌ Erro ao carregar header:", e);
+    }
   }
 
-  // Carregar footer
+  // Delegação global — não depende do momento de injeção
+  if (!window.__menuDelegatedBound){
+    window.__menuDelegatedBound = true;
+    document.addEventListener('click', function(ev){
+      const t = ev.target;
+      const toggle = t.closest && t.closest('#menu-toggle');
+      const closeBtn = t.closest && (t.closest('#menu-close') || t.closest('#menu-overlay') || t.closest('.mobile-nav a'));
+      const sidebar = document.getElementById('mobile-menu');
+      const overlay = document.getElementById('menu-overlay');
+      if (!sidebar) return;
+
+      const open = () => { sidebar.classList.add('open'); overlay && overlay.classList.add('active'); document.body.classList.add('menu-open'); };
+      const close = () => { sidebar.classList.remove('open'); overlay && overlay.classList.remove('active'); document.body.classList.remove('menu-open'); };
+
+      if (toggle){ ev.preventDefault(); sidebar.classList.contains('open') ? close() : open(); }
+      if (closeBtn){ ev.preventDefault(); close(); }
+    });
+    document.addEventListener('keydown', function(e){
+      if (e.key === 'Escape'){
+        const sidebar = document.getElementById('mobile-menu');
+        const overlay = document.getElementById('menu-overlay');
+        if (sidebar && sidebar.classList.contains('open')){
+          sidebar.classList.remove('open'); overlay && overlay.classList.remove('active'); document.body.classList.remove('menu-open');
+        }
+      }
+    });
+    console.log("✅ Delegação de eventos do menu ativa (index)");
+  }
+
+  // Carregar FOOTER
   const footerContainer = document.getElementById("footer");
-  if (footerContainer) {
-    fetch("footer.html")
-      .then(res => res.text())
-      .then(data => {
-        footerContainer.innerHTML = data;
-      });
+  if (footerContainer && !document.querySelector('footer')) {
+    try {
+      const res = await fetch(`${base}/footer.html`, { cache: "no-store" });
+      if (res.ok) {
+        footerContainer.innerHTML = await res.text();
+        console.log("✅ Footer carregado (index)");
+      }
+    } catch (e) {
+      console.error("❌ Erro ao carregar footer:", e);
+    }
   }
 
-  // Iniciar carrossel de banners
-  initSwiper();
+  // Inicializar Swiper (banners)
+  if (typeof Swiper !== "undefined") {
+    new Swiper(".swiper", {
+      loop: true,
+      autoplay: { delay: 5000, disableOnInteraction: false },
+      navigation: { nextEl: ".swiper-button-next", prevEl: ".swiper-button-prev" },
+      effect: "slide",
+    });
+    console.log("✅ Swiper inicializado");
+  }
 });
-
-// ----------------------------
-// Eventos do Header
-// ----------------------------
-function initHeaderEvents() {
-  const menuToggle = document.getElementById("menu-toggle");
-  const menuClose = document.getElementById("menu-close");
-  const mobileMenu = document.getElementById("mobile-menu");
-  const overlay = document.getElementById("menu-overlay");
-
-  if (!menuToggle || !menuClose || !mobileMenu) {
-    console.warn("⚠️ Elementos do menu não encontrados.");
-    return;
-  }
-
-  const openMenu = () => {
-    mobileMenu.classList.add("open");
-    mobileMenu.setAttribute("aria-hidden", "false");
-    overlay?.classList.add("active");
-  };
-
-  const closeMenu = () => {
-    mobileMenu.classList.remove("open");
-    mobileMenu.setAttribute("aria-hidden", "true");
-    overlay?.classList.remove("active");
-  };
-
-  menuToggle.addEventListener("click", openMenu);
-  menuClose.addEventListener("click", closeMenu);
-  overlay?.addEventListener("click", closeMenu);
-
-  // Fechar ao clicar em link
-  document.querySelectorAll("#mobile-menu .mobile-nav a").forEach(link => {
-    link.addEventListener("click", closeMenu);
-  });
-
-  // Busca desktop
-  const searchInput = document.getElementById("search-input");
-  const searchBtn = document.getElementById("search-button");
-  searchBtn?.addEventListener("click", () => doSearch(searchInput.value));
-  searchInput?.addEventListener("keypress", e => {
-    if (e.key === "Enter") doSearch(searchInput.value);
-  });
-
-  // Busca mobile
-  const searchInputMob = document.getElementById("search-input-mobile");
-  const searchBtnMob = document.getElementById("search-button-mobile");
-  searchBtnMob?.addEventListener("click", () => {
-    doSearch(searchInputMob.value);
-    closeMenu();
-  });
-  searchInputMob?.addEventListener("keypress", e => {
-    if (e.key === "Enter") {
-      doSearch(searchInputMob.value);
-      closeMenu();
-    }
-  });
-
-  console.log("✅ Eventos do header inicializados");
-}
-
-// ----------------------------
-// Lógica de busca simples
-// ----------------------------
-function doSearch(query) {
-  const products = document.querySelectorAll(".product-card");
-  const noResults = document.getElementById("no-results");
-  if (!products.length) return;
-
-  if (!query || query.trim() === "") {
-    products.forEach(p => (p.style.display = "flex"));
-    noResults.style.display = "none";
-    return;
-  }
-
-  let found = false;
-  products.forEach(card => {
-    const title = card.querySelector("h3").textContent.toLowerCase();
-    if (title.includes(query.toLowerCase())) {
-      card.style.display = "flex";
-      found = true;
-    } else {
-      card.style.display = "none";
-    }
-  });
-
-  noResults.style.display = found ? "none" : "block";
-}
-
-// ----------------------------
-// Swiper - Carrossel de Banners
-// ----------------------------
-function initSwiper() {
-  new Swiper(".swiper", {
-    loop: true,
-    autoplay: { delay: 5000, disableOnInteraction: false },
-    navigation: {
-      nextEl: ".swiper-button-next",
-      prevEl: ".swiper-button-prev",
-    },
-    effect: "slide",
-  });
-}

@@ -1,0 +1,28 @@
+<% layout('layout') -%>
+<div class="grid">
+  <a class="card" href="/paginas/edit?file=index.html"><h3>🏠 Index</h3><p>Página inicial</p></a>
+  <a class="card" href="/sobre"><h3>🧾 Sobre</h3><p>Editor visual</p></a>
+  <a class="card" href="/pagamentos"><h3>💳 Pagamento</h3><p>Editor visual</p></a>
+  <a class="card" href="/banners"><h3>🖼️ Banners</h3><p>Gerenciar slides</p></a>
+  <a class="card" href="/produtos"><h3>📦 Produtos</h3><p>Lista e CRUD</p></a>
+  <a class="card" href="/categorias"><h3>🗂️ Categorias</h3><p>Lista e CRUD</p></a>
+  <a class="card" href="/header"><h3>🟣 Cabeçalho</h3><p>Desktop & Mobile</p></a>
+  <a class="card" href="/footer"><h3>🔻 Footer</h3><p>Texto e sociais</p></a>
+  <a class="card" href="/aparencia"><h3>🎨 Aparência</h3><p>Cores & fonte</p></a>
+  <a class="card" href="/css"><h3>🧶 CSS</h3><p>Avançado</p></a>
+  <div class="card"><h3>🛠️ Manutenção</h3>
+    <div class="stat"><span>Status:</span> <b><%= maint.active ? 'ATIVA' : 'DESATIVADA' %></b></div>
+    <form method="post" action="/manutencao/ativar?from=/"><button class="btn warn" type="submit">Ativar</button></form>
+    <form method="post" action="/manutencao/desativar?from=/"><button class="btn" type="submit">Desativar</button></form>
+  </div>
+  <div class="card"><h3>📤 Publicação</h3>
+    <div class="stat"><span>Última:</span> <b><%= publish.last_publish || '—' %></b></div>
+    <form method="post" action="/publicar"><button class="btn primary" type="submit">Publicar agora</button></form>
+  </div>
+</div>
+<div class='kit'>
+  <a href='/site/index.html' target='_blank'>Abrir site</a>
+  <a href='/paginas'>Gerenciar páginas</a>
+  <a href='/footer'>Editar rodapé</a>
+  <a href='/header'>Editar cabeçalho</a>
+</div>

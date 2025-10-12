@@ -1,0 +1,71 @@
+<% layout('layout') -%>
+<div class="card">
+  <h3>🟣 Cabeçalho — Estilo & Comportamento</h3><p class='notice'>Salve a seção desejada. Campos "Mobile:" afetam apenas mobile.</p>
+  <p class="notice">As opções sem o prefixo "Mobile" valem para desktop e mobile. As opções com "Mobile:" afetam apenas o mobile.</p>
+  <form method="post" action="/header/save-style">
+    <div class="row">
+      <div><label>Cor de fundo</label><input type="text" name="background" value="<%= style.background || '#c90000' %>"></div>
+      <div><label>Cor do texto</label><input type="text" name="textColor" value="<%= style.textColor || '#ffffff' %>"></div>
+      <div><label>Cor hover</label><input type="text" name="hoverColor" value="<%= style.hoverColor || '#ffeeee' %>"></div>
+      <div><label>Cor ativo</label><input type="text" name="activeColor" value="<%= style.activeColor || '#ffffff' %>"></div>
+    </div>
+    <div class="row">
+      <div><label>Alinhamento</label><select name="align"><option value="left" <%= (style.align||'left')==='left'?'selected':'' %>>Esquerda</option><option value="center" <%= style.align==='center'?'selected':'' %>>Centro</option><option value="right" <%= style.align==='right'?'selected':'' %>>Direita</option></select></div>
+      <div><label>Gap (px)</label><input type="number" name="gap" value="<%= style.gap ?? 16 %>"></div>
+      <div><label>Padding X (px)</label><input type="number" name="spacingX" value="<%= style.spacingX ?? 16 %>"></div>
+      <div><label>Altura (px)</label><input type="number" name="height" value="<%= style.height ?? 60 %>"></div>
+    </div>
+    <div class="row">
+      <div><label>Tamanho da fonte</label><input type="text" name="fontSize" value="<%= style.fontSize || '15px' %>"></div>
+      <div><label>Peso da fonte</label><select name="fontWeight"><option value="400" <%= (style.fontWeight||'600')==='400'?'selected':'' %>>400</option><option value="500" <%= style.fontWeight==='500'?'selected':'' %>>500</option><option value="600" <%= (style.fontWeight||'600')==='600'?'selected':'' %>>600</option><option value="700" <%= style.fontWeight==='700'?'selected':'' %>>700</option></select></div>
+      <div><label>Logo máx (px)</label><input type="number" name="logoMaxHeight" value="<%= style.logoMaxHeight ?? 40 %>"></div>
+      <div><label>Sticky</label><select name="sticky"><option value="true" <%= (style.sticky ?? true) ? 'selected' : '' %>>Ativo</option><option value="false" <%= (style.sticky===false) ? 'selected' : '' %>>Desativado</option></select></div>
+    </div>
+    <div class="row">
+      <div><label>Sombra</label><select name="shadow"><option value="true" <%= (style.shadow ?? true) ? 'selected' : '' %>>Ativa</option><option value="false" <%= (style.shadow===false) ? 'selected' : '' %>>Desativada</option></select></div>
+      <div><label>Encolher ao rolar</label><select name="scrollShrink"><option value="true" <%= style.scrollShrink ? 'selected' : '' %>>Sim</option><option value="false" <%= !style.scrollShrink ? 'selected' : '' %>>Não</option></select></div>
+      <div><label>Mobile: comportamento</label><select name="mobileBehavior"><option value="slide" <%= (style.mobileBehavior||'slide')==='slide'?'selected':'' %>>Slide</option><option value="dropdown" <%= style.mobileBehavior==='dropdown'?'selected':'' %>>Dropdown</option></select></div>
+      <div><label>Mobile: breakpoint (px)</label><input type="number" name="mobileBreakpoint" value="<%= style.mobileBreakpoint ?? 768 %>"></div>
+    </div>
+    <div class="row">
+      <div><label>Mobile: overlay</label><select name="mobileOverlay"><option value="true" <%= (style.mobileOverlay ?? true) ? 'selected' : '' %>>Ativo</option><option value="false" <%= (style.mobileOverlay===false) ? 'selected' : '' %>>Desativado</option></select></div>
+      <div><label>Mobile: fechar ao clicar</label><select name="mobileCloseOnClick"><option value="true" <%= (style.mobileCloseOnClick ?? true) ? 'selected' : '' %>>Sim</option><option value="false" <%= (style.mobileCloseOnClick===false) ? 'selected' : '' %>>Não</option></select></div>
+      <div><label>Mobile: hambúrguer</label><select name="hamburgerAlign"><option value="left" <%= style.hamburgerAlign==='left'?'selected':'' %>>Esquerda</option><option value="right" <%= (style.hamburgerAlign||'right')==='right'?'selected':'' %>>Direita</option></select></div>
+      <div></div>
+    </div>
+    <div class="row">
+      <div><label>Mostrar CTA</label><select name="showCTA"><option value="true" <%= style.showCTA ? 'selected' : '' %>>Sim</option><option value="false" <%= !style.showCTA ? 'selected' : '' %>>Não</option></select></div>
+      <div><label>CTA texto</label><input type="text" name="ctaLabel" value="<%= style.ctaLabel || 'Comprar' %>"></div>
+      <div><label>CTA link</label><input type="text" name="ctaHref" value="<%= style.ctaHref || '#' %>"></div>
+      <div><label>CTA estilo</label><select name="ctaStyle"><option value="solid" <%= (style.ctaStyle||'solid')==='solid'?'selected':'' %>>Sólido</option><option value="outline" <%= style.ctaStyle==='outline'?'selected':'' %>>Contorno</option></select></div>
+    </div>
+    <div class="row">
+      <div><label>Mostrar telefone</label><select name="showPhone"><option value="true" <%= style.showPhone ? 'selected' : '' %>>Sim</option><option value="false" <%= !style.showPhone ? 'selected' : '' %>>Não</option></select></div>
+      <div><label>Telefone (texto)</label><input type="text" name="phoneText" value="<%= style.phoneText || '(00) 00000-0000' %>"></div>
+      <div><label>Telefone (link)</label><input type="text" name="phoneHref" value="<%= style.phoneHref || 'tel:+550000000000' %>"></div>
+      <div style="align-self:end"><button class="btn primary" type="submit">Salvar estilo</button></div>
+    </div>
+  </form>
+</div>
+
+<div class="card">
+  <h3>Itens de Menu</h3>
+  <form method="post" action="/header/add-menu" class="row">
+    <div><label>Título</label><input type="text" name="label" placeholder="Início"></div>
+    <div><label>Link</label><input type="text" name="href" placeholder="index.html"></div>
+    <div><label>Ordem</label><input type="number" name="order" placeholder="1"></div>
+    <div style="align-self:end"><button class="btn" type="submit">Adicionar</button></div>
+  </form>
+  <table class="table"><thead><tr><th>Ordem</th><th>Título</th><th>Link</th><th></th></tr></thead><tbody>
+    <% (menu||[]).sort((a,b)=> (a.order||0)-(b.order||0)).forEach((m,idx)=>{ %>
+      <tr>
+        <td><span class="badge"><%= m.order %></span></td>
+        <td><%= m.label %></td>
+        <td><%= m.href %></td>
+        <td>
+          <form method="post" action="/header/del-menu"><input type="hidden" name="index" value="<%= idx %>"><button class="btn" type="submit">Excluir</button></form>
+        </td>
+      </tr>
+    <% }) %>
+  </tbody></table>
+</div>

@@ -1,0 +1,13 @@
+<% layout('layout') -%>
+<div class='card'><h3>✏️ Editar: <%= file %></h3><div class='row' style='grid-template-columns:1fr auto;align-items:center'><div class='notice'>Modo Visual (recomendado) usa CKEditor. Modo código fica abaixo.</div><button class='btn ghost' type='button' onclick="CKEDITOR.instances['editor_visual']&&CKEDITOR.instances['editor_visual'].updateElement();document.getElementById('form_visual').submit();">Salvar Visual</button></div><form id='form_visual' method='post' action='/paginas/save'><input type='hidden' name='file' value='<%= file %>'><textarea id='editor_visual' name='content'><%- content %></textarea></form>
+<script>
+  if (window.CKEDITOR) {
+    CKEDITOR.replace('editor_visual', {
+      extraAllowedContent: '*(*);*{*};a[!href];img[!src,alt,width,height]',
+      removePlugins: 'cloudservices,easyimage',
+      fullPage: true,
+      allowedContent: true
+    });
+  }
+</script>
+<hr/><form method='post' action='/paginas/save'><input type='hidden' name='file' value='<%= file %>'><label>Modo código (HTML)</label><textarea name='content'><%- content %></textarea><div style='margin-top:10px'><button class='btn'>Salvar (código)</button></div></form></div>

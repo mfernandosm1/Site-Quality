@@ -1,0 +1,6 @@
+/* css/patch-menu.css — aplique DEPOIS de css/style.css */
+.header{ z-index:3000; }
+.menu-toggle{ position:relative; z-index:4001; pointer-events:auto; }
+.banner{ position:relative; z-index:0; }
+.swiper{ position:relative; z-index:0; }
+.swiper-button-next,.swiper-button-prev{ z-index:900; }
