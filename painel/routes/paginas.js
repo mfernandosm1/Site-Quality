@@ -42,8 +42,11 @@ router.post('/save', (req,res)=>{
   const newInner = req.body.content || '';
   let replaced = replaceBetweenMarkers(original, newInner, 'main');
   if (replaced === null) {
-    if (/<body[^>]*>[\s\S]*?<\/body>/i.test(original)){ replaced = original.replace(/(<body[^>]*>)[\s\S]*?(<\/body>)/i, `$1${newInner}$2`); }
-    else { replaced = `<!doctype html><html><head><meta charset="utf-8"></head><body>${newInner}</body></html>`; }
+    if (/<body[^>]*>[\s\S]*?<\/body>/i.test(original)){
+      replaced = original.replace(/(<body[^>]*>)[\s\S]*?(<\/body>)/i, `$1${newInner}$2`);
+    } else {
+      replaced = `<!doctype html><html><head><meta charset="utf-8"></head><body>${newInner}</body></html>`;
+    }
   }
   fs.writeFileSync(full, replaced, 'utf-8');
   res.redirect('/paginas/edit?file=' + encodeURIComponent(file));

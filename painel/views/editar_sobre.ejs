@@ -1,20 +1,19 @@
 <% layout('layout') -%>
 <div class="card">
-  <h3>🧾 Sobre (Visual)</h3>
-  <p class="muted mb-2">Somente o conteúdo do &lt;main&gt; é editado. Scripts, header e footer são preservados.</p>
-
+  <h3>🧾 Sobre</h3>
+  <p class="muted">Edite o conteúdo principal. O restante do HTML fica preservado.</p>
   <textarea id="editorSobre"><%- html %></textarea>
-  <div style="margin-top:10px;display:flex;gap:8px;">
+  <div class="actions">
     <button id="saveSobre" class="btn primary">💾 Salvar (Visual)</button>
     <a href="/sobre" class="btn ghost">🔄 Recarregar do arquivo</a>
   </div>
 </div>
 
-<div class="card mt-3">
+<div class="card">
   <h4>Modo Código (HTML do &lt;main&gt;)</h4>
   <form method="post" action="/sobre/salvar">
-    <textarea name="html" rows="14" class="w-full border p-2 font-mono"><%- html %></textarea>
-    <button class="btn mt-2">Salvar (Código)</button>
+    <textarea name="html" rows="14" class="code"><%- html %></textarea>
+    <button class="btn">Salvar (Código)</button>
   </form>
 </div>
 
@@ -28,9 +27,7 @@ ClassicEditor.create(document.querySelector('#editorSobre'), {
   ],
   htmlEmbed: { showPreviews: true },
   htmlSupport: {
-    allow: [
-      { name: /.*/, attributes: true, classes: true, styles: true }
-    ]
+    allow: [ { name: /.*/, attributes: true, classes: true, styles: true } ]
   }
 }).then(e=>{
   editorSobre = e;
@@ -42,6 +39,7 @@ ClassicEditor.create(document.querySelector('#editorSobre'), {
       body: new URLSearchParams({ html: conteudo })
     });
     alert(resp.ok ? '✅ Salvo!' : '❌ Erro ao salvar.');
+    if (resp.ok) location.href = '/sobre';
   });
 }).catch(console.error);
 </script>

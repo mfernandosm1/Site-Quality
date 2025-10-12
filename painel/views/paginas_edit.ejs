@@ -1,21 +1,20 @@
 <% layout('layout') -%>
 <div class="card">
-  <h3>🏠 Editar: <%= file %></h3>
-  <p class="muted mb-2">Somente o conteúdo do &lt;main&gt; é editado. Scripts, header e footer são preservados.</p>
-
+  <h3>✏️ Editar: <%= file %></h3>
+  <p class="muted">Somente o conteúdo do &lt;main&gt; é editado. Estrutura, scripts, header e footer ficam preservados.</p>
   <textarea id="editorVisual"><%- content %></textarea>
-  <div style="margin-top:10px;display:flex;gap:8px;">
+  <div class="actions">
     <button id="saveVisual" class="btn primary">💾 Salvar (Visual)</button>
     <a href="/paginas/edit?file=<%= file %>" class="btn ghost">🔄 Recarregar do arquivo</a>
   </div>
+</div>
 
-  <hr style="margin:20px 0;">
-
+<div class="card">
+  <h4>Modo Código (HTML do &lt;main&gt;)</h4>
   <form method="post" action="/paginas/save">
     <input type="hidden" name="file" value="<%= file %>">
-    <label>Modo Código (HTML do &lt;main&gt;)</label>
-    <textarea name="content" rows="14" class="w-full border p-2 font-mono"><%- content %></textarea>
-    <button class="btn mt-2">Salvar (Código)</button>
+    <textarea name="content" rows="14" class="code"><%- content %></textarea>
+    <button class="btn">Salvar (Código)</button>
   </form>
 </div>
 
@@ -43,6 +42,7 @@ ClassicEditor.create(document.querySelector('#editorVisual'), {
       body: new URLSearchParams({ file: '<%= file %>', content: conteudo })
     });
     alert(resp.ok ? '✅ Salvo!' : '❌ Erro ao salvar.');
+    if (resp.ok) location.href = '/paginas/edit?file=' + encodeURIComponent('<%= file %>');
   });
 }).catch(console.error);
 </script>
