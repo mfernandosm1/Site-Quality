@@ -18,6 +18,8 @@ router.get("/", (req, res) => {
 });
 
 router.post("/salvar", (req, res) => {
+  console.log("📥 Recebido:", req.body); // 🔍 log de debug
+
   const file = path.join(SITE_DIR, "sobre.html");
   const backup = path.join(
     BACKUP_DIR,
@@ -30,14 +32,16 @@ router.post("/salvar", (req, res) => {
       : "";
     fs.writeFileSync(backup, original, "utf-8");
 
-    if (/<main[\s\S]*?>[\s\S]*?<\/main>/i.test(original)) {
-      const out = original.replace(
-        /(<main[\s\S]*?>)[\s\S]*?(<\/main>)/i,
-        `$1${req.body.html || ""}$2`
-      );
+    const newContent = req.body.html || req.body.content || "";
+   if (/<\s*main[\s\S]*?>[\s\S]*?<\s*\/\s*main\s*>/i.test(original)) {
+  const out = original.replace(
+    /(<\s*main[\s\S]*?>)[\s\S]*?(<\s*\/\s*main\s*>)/i,
+    `$1${newContent}$2`
+  );
+
       fs.writeFileSync(file, out, "utf-8");
     } else {
-      const out = `<!doctype html><html><head><meta charset="utf-8"></head><body>${req.body.html || ""}</body></html>`;
+      const out = `<!doctype html><html><head><meta charset="utf-8"></head><body>${newContent}</body></html>`;
       fs.writeFileSync(file, out, "utf-8");
     }
     res.redirect("/sobre");

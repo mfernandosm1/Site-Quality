@@ -35,11 +35,12 @@ router.post("/salvar", (req, res) => {
   // Aceita tanto o campo "html" quanto "content" vindos do painel
 const newContent = req.body.html || req.body.content || "";
 
-if (/<main[\s\S]*?>[\s\S]*?<\/main>/i.test(original)) {
+if (/<\s*main[\s\S]*?>[\s\S]*?<\s*\/\s*main\s*>/i.test(original)) {
   const out = original.replace(
-    /(<main[\s\S]*?>)[\s\S]*?(<\/main>)/i,
+    /(<\s*main[\s\S]*?>)[\s\S]*?(<\s*\/\s*main\s*>)/i,
     `$1${newContent}$2`
   );
+
   fs.writeFileSync(file, out, "utf-8");
 }
  else {

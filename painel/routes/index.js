@@ -46,12 +46,12 @@ router.get("/paginas/edit", (req, res) => {
 
 // Salvar conteúdo da <main> da index
 router.post("/paginas/save", (req, res) => {
+  console.log("📥 Recebido:", req.body); // 🔍 log de debug
+
   const file = path.join(SITE_DIR, "index.html");
   const backup = path.join(
     BACKUP_DIR,
-    "index_" +
-      new Date().toISOString().replace(/[:.]/g, "-") +
-      ".html"
+    "index_" + new Date().toISOString().replace(/[:.]/g, "-") + ".html"
   );
 
   try {
@@ -60,14 +60,16 @@ router.post("/paginas/save", (req, res) => {
       : "";
     fs.writeFileSync(backup, original, "utf-8");
 
-    if (/<main[\s\S]*?>[\s\S]*?<\/main>/i.test(original)) {
-      const out = original.replace(
-        /(<main[\s\S]*?>)[\s\S]*?(<\/main>)/i,
-        `$1${req.body.content || ""}$2`
-      );
+    const newContent = req.body.html || req.body.content || "";
+   if (/<\s*main[\s\S]*?>[\s\S]*?<\s*\/\s*main\s*>/i.test(original)) {
+  const out = original.replace(
+    /(<\s*main[\s\S]*?>)[\s\S]*?(<\s*\/\s*main\s*>)/i,
+    `$1${newContent}$2`
+  );
+
       fs.writeFileSync(file, out, "utf-8");
     } else {
-      const out = `<!doctype html><html><head><meta charset="utf-8"></head><body>${req.body.content || ""}</body></html>`;
+      const out = `<!doctype html><html><head><meta charset="utf-8"></head><body>${newContent}</body></html>`;
       fs.writeFileSync(file, out, "utf-8");
     }
     res.redirect("/?flash=Página+Index+salva+com+sucesso!");
