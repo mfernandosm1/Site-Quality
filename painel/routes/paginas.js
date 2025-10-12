@@ -20,12 +20,11 @@ router.get('/', (req,res)=>{
   const pages = ['index.html','sobre.html','formas-de-pagamento.html'].filter(f=>fs.existsSync(path.join(dir,f)));
   res.render('paginas_list', { pages, flash:null });
 });
-
 router.get('/edit', (req,res)=>{
   const { SITE_DIR } = P(req.app);
   const file = req.query.file || 'index.html';
   const full = path.join(SITE_DIR, file);
-  let html=''; try { html = fs.readFileSync(full, 'utf-8'); } catch(e){}
+  let html=''; try { html = fs.readFileSync(full,'utf-8'); } catch(e){}
   let inner = extractBetweenMarkers(html, 'main');
   if (inner === null) {
     const m = /<body[^>]*>([\s\S]*?)<\/body>/i.exec(html);
@@ -33,7 +32,6 @@ router.get('/edit', (req,res)=>{
   }
   res.render('paginas_edit', { file, content: inner, flash:null });
 });
-
 router.post('/save', (req,res)=>{
   const { SITE_DIR, BACKUPS_DIR } = P(req.app);
   const file = req.body.file || 'index.html';
@@ -44,14 +42,10 @@ router.post('/save', (req,res)=>{
   const newInner = req.body.content || '';
   let replaced = replaceBetweenMarkers(original, newInner, 'main');
   if (replaced === null) {
-    if (/<body[^>]*>[\s\S]*?<\/body>/i.test(original)){
-      replaced = original.replace(/(<body[^>]*>)[\s\S]*?(<\/body>)/i, `$1${newInner}$2`);
-    } else {
-      replaced = `<!doctype html><html><head><meta charset="utf-8"></head><body>${newInner}</body></html>`;
-    }
+    if (/<body[^>]*>[\s\S]*?<\/body>/i.test(original)){ replaced = original.replace(/(<body[^>]*>)[\s\S]*?(<\/body>)/i, `$1${newInner}$2`); }
+    else { replaced = `<!doctype html><html><head><meta charset="utf-8"></head><body>${newInner}</body></html>`; }
   }
   fs.writeFileSync(full, replaced, 'utf-8');
   res.redirect('/paginas/edit?file=' + encodeURIComponent(file));
 });
-
 export default router;

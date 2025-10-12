@@ -1,40 +1,36 @@
 <% layout('layout') -%>
 <div class="card">
-  <h3>🏠 Página Inicial (Visual)</h3>
-  <p class="muted mb-2">Edite o conteúdo visualmente abaixo ou use o modo código. O botão "Recarregar" importa o conteúdo atual do arquivo HTML.</p>
+  <h3>🏠 Editar: <%= file %></h3>
+  <p class="muted mb-2">Somente o conteúdo do &lt;main&gt; é editado. Scripts, header e footer são preservados.</p>
 
-  <!-- Editor visual -->
   <textarea id="editorVisual"><%- content %></textarea>
   <div style="margin-top:10px;display:flex;gap:8px;">
     <button id="saveVisual" class="btn primary">💾 Salvar (Visual)</button>
-    <a href="/paginas/edit?file=<%= file %>" class="btn ghost">🔄 Recarregar do HTML</a>
+    <a href="/paginas/edit?file=<%= file %>" class="btn ghost">🔄 Recarregar do arquivo</a>
   </div>
 
-  <hr style="margin:25px 0;">
+  <hr style="margin:20px 0;">
 
-  <!-- Editor código -->
   <form method="post" action="/paginas/save">
     <input type="hidden" name="file" value="<%= file %>">
-    <label>Modo Código (HTML)</label>
-    <textarea name="content" rows="15" class="w-full border p-2 font-mono"><%- content %></textarea>
+    <label>Modo Código (HTML do &lt;main&gt;)</label>
+    <textarea name="content" rows="14" class="w-full border p-2 font-mono"><%- content %></textarea>
     <button class="btn mt-2">Salvar (Código)</button>
   </form>
 </div>
 
-<!-- CKEditor moderno -->
 <script src="https://cdn.ckeditor.com/ckeditor5/41.4.2/classic/ckeditor.js"></script>
 <script>
 let editor;
 ClassicEditor.create(document.querySelector('#editorVisual'), {
   toolbar: [
     'heading','|','bold','italic','underline','link','bulletedList','numberedList','blockQuote',
-    '|','insertTable','imageUpload','mediaEmbed','undo','redo','sourceEditing'
+    '|','insertTable','undo','redo','sourceEditing'
   ],
-  heading: {
-    options: [
-      { model: 'paragraph', title: 'Parágrafo', class: 'ck-heading_paragraph' },
-      { model: 'heading2', view: 'h2', title: 'Título 2', class: 'ck-heading_heading2' },
-      { model: 'heading3', view: 'h3', title: 'Título 3', class: 'ck-heading_heading3' }
+  htmlEmbed: { showPreviews: true },
+  htmlSupport: {
+    allow: [
+      { name: /.*/, attributes: true, classes: true, styles: true }
     ]
   }
 }).then(e => {
@@ -46,7 +42,7 @@ ClassicEditor.create(document.querySelector('#editorVisual'), {
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
       body: new URLSearchParams({ file: '<%= file %>', content: conteudo })
     });
-    alert(resp.ok ? '✅ Página salva com sucesso!' : '❌ Erro ao salvar.');
+    alert(resp.ok ? '✅ Salvo!' : '❌ Erro ao salvar.');
   });
 }).catch(console.error);
 </script>

@@ -1,32 +1,37 @@
 <% layout('layout') -%>
 <div class="card">
   <h3>💳 Formas de Pagamento (Visual)</h3>
-  <p class="muted mb-2">Edite os ícones, textos e instruções abaixo. O botão salva diretamente em <code>formas-de-pagamento.html</code>.</p>
+  <p class="muted mb-2">Somente o conteúdo do &lt;main&gt; é editado. Scripts, header e footer são preservados.</p>
 
   <textarea id="editorPagto"><%- html %></textarea>
   <div style="margin-top:10px;display:flex;gap:8px;">
     <button id="savePagto" class="btn primary">💾 Salvar (Visual)</button>
-    <a href="/pagamentos" class="btn ghost">🔄 Recarregar do HTML</a>
+    <a href="/pagamentos" class="btn ghost">🔄 Recarregar do arquivo</a>
   </div>
 </div>
 
 <div class="card mt-3">
-  <h4>Modo Código (HTML)</h4>
+  <h4>Modo Código (HTML do &lt;main&gt;)</h4>
   <form method="post" action="/pagamentos/salvar">
-    <textarea name="html" rows="15" class="w-full border p-2 font-mono"><%- html %></textarea>
+    <textarea name="html" rows="14" class="w-full border p-2 font-mono"><%- html %></textarea>
     <button class="btn mt-2">Salvar (Código)</button>
   </form>
 </div>
 
-<!-- CKEditor moderno -->
 <script src="https://cdn.ckeditor.com/ckeditor5/41.4.2/classic/ckeditor.js"></script>
 <script>
 let editorPagto;
 ClassicEditor.create(document.querySelector('#editorPagto'), {
   toolbar: [
     'heading','|','bold','italic','underline','link','bulletedList','numberedList','blockQuote',
-    '|','insertTable','imageUpload','mediaEmbed','undo','redo','sourceEditing'
-  ]
+    '|','insertTable','undo','redo','sourceEditing'
+  ],
+  htmlEmbed: { showPreviews: true },
+  htmlSupport: {
+    allow: [
+      { name: /.*/, attributes: true, classes: true, styles: true }
+    ]
+  }
 }).then(e=>{
   editorPagto = e;
   document.getElementById('savePagto').addEventListener('click', async ()=>{
@@ -36,7 +41,7 @@ ClassicEditor.create(document.querySelector('#editorPagto'), {
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
       body: new URLSearchParams({ html: conteudo })
     });
-    alert(resp.ok ? '✅ Página de Pagamentos salva!' : '❌ Erro ao salvar.');
+    alert(resp.ok ? '✅ Salvo!' : '❌ Erro ao salvar.');
   });
-});
+}).catch(console.error);
 </script>
