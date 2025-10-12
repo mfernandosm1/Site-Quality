@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Formas de Pagamento - Quality Celulares</title>
+
+  <!-- Tailwind primeiro -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- FontAwesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <!-- Swiper -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+  <!-- Seu CSS por último -->
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body class="bg-gray-50 text-gray-800">
+  <!-- Header padrão -->
+  <div id="header"></div>
+  <script>
+    fetch("header.html")
+      .then(res => res.text())
+      .then(data => document.getElementById("header").innerHTML = data);
+  </script>
+
+  <!-- Conteúdo -->
+  <main class="max-w-6xl mx-auto px-4 py-28 space-y-12"><!-- PANEL:BEGIN editable="main" -->
+<h2>Formas de Pagamento &amp; Envio</h2><h2>Cartão de Crédito</h2><p>Visa, MasterCard, Elo, American Express</p><h2>Boleto Bancário AAAA</h2><p>Pague de forma segura diretamente pelo banco</p><h2>PIX</h2><p>Transferência instantânea e segura</p><h2>Envios</h2><p>Via <strong>Correios ou Transportadora</strong>.</p><p>Frete grátis para compras acima de <strong>R<!-- PANEL:BEGIN editable="main" -->20,00</strong> no <strong>RS</strong>.</p>
+<!-- PANEL:END editable="main" --></main>
+
+  <!-- Footer padrão -->
+  <div id="footer"></div>
+  <script>
+    fetch("footer.html")
+      .then(res => res.text())
+      .then(data => document.getElementById("footer").innerHTML = data);
+  </script>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

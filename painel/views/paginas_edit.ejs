@@ -1,48 +1,25 @@
 <% layout('layout') -%>
-<div class="card">
-  <h3>✏️ Editar: <%= file %></h3>
-  <p class="muted">Somente o conteúdo do &lt;main&gt; é editado. Estrutura, scripts, header e footer ficam preservados.</p>
-  <textarea id="editorVisual"><%- content %></textarea>
-  <div class="actions">
-    <button id="saveVisual" class="btn primary">💾 Salvar (Visual)</button>
-    <a href="/paginas/edit?file=<%= file %>" class="btn ghost">🔄 Recarregar do arquivo</a>
-  </div>
-</div>
 
-<div class="card">
-  <h4>Modo Código (HTML do &lt;main&gt;)</h4>
-  <form method="post" action="/paginas/save">
+<div class="editor-card">
+  <h2>📝 Editando: <%= file %></h2>
+  <form action="/paginas/save" method="POST">
     <input type="hidden" name="file" value="<%= file %>">
-    <textarea name="content" rows="14" class="code"><%- content %></textarea>
-    <button class="btn">Salvar (Código)</button>
+
+    <textarea name="content" id="editor" style="width:100%;height:600px;"><%- content %></textarea>
+
+    <div class="actions">
+      <button type="submit" class="btn-salvar">💾 Salvar Alterações</button>
+      <a href="/paginas" class="btn-voltar">⬅ Voltar</a>
+    </div>
   </form>
 </div>
 
-<script src="https://cdn.ckeditor.com/ckeditor5/41.4.2/classic/ckeditor.js"></script>
 <script>
-let editor;
-ClassicEditor.create(document.querySelector('#editorVisual'), {
-  toolbar: [
-    'heading','|','bold','italic','underline','link','bulletedList','numberedList','blockQuote',
-    '|','insertTable','undo','redo','sourceEditing'
-  ],
-  htmlEmbed: { showPreviews: true },
-  htmlSupport: {
-    allow: [
-      { name: /.*/, attributes: true, classes: true, styles: true }
-    ]
-  }
-}).then(e => {
-  editor = e;
-  document.getElementById('saveVisual').addEventListener('click', async () => {
-    const conteudo = editor.getData();
-    const resp = await fetch('/paginas/save', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      body: new URLSearchParams({ file: '<%= file %>', content: conteudo })
-    });
-    alert(resp.ok ? '✅ Salvo!' : '❌ Erro ao salvar.');
-    if (resp.ok) location.href = '/paginas/edit?file=' + encodeURIComponent('<%= file %>');
+  CKEDITOR.replace('editor', {
+    allowedContent: true,
+    extraAllowedContent: '*[*]{*}(*)',
+    height: 600,
+    removeButtons: '',
+    language: 'pt-br'
   });
-}).catch(console.error);
 </script>
