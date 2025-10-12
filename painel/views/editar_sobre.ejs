@@ -25,7 +25,7 @@ let editorSobre;
 ClassicEditor.create(document.querySelector('#editorSobre'), {
   toolbar: [
     'heading','|','bold','italic','underline','link','bulletedList','numberedList','blockQuote',
-    '|','insertTable','imageUpload','mediaEmbed','undo','redo','sourceEditing'
+    '|','insertTable','mediaEmbed','undo','redo','sourceEditing'
   ]
 }).then(e=>{
   editorSobre = e;
@@ -37,6 +37,7 @@ ClassicEditor.create(document.querySelector('#editorSobre'), {
       body: new URLSearchParams({ html: conteudo })
     });
     alert(resp.ok ? '✅ Página "Sobre" salva!' : '❌ Erro ao salvar.');
+    if(resp.ok) location.reload();
   });
-});
+}).catch(console.error);
 </script>
