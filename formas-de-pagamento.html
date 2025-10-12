@@ -4,64 +4,29 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Formas de Pagamento - Quality Celulares</title>
+
+  <!-- Tailwind primeiro -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- FontAwesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <!-- Swiper -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+  <!-- Seu CSS por último -->
   <link rel="stylesheet" href="css/style.css" />
 </head>
 <body class="bg-gray-50 text-gray-800">
-  <header class="header">
-  <div class="header-container">
-    <a href="index.html" class="logo-wrapper">
-      <img src="images/logo.png" alt="Quality Celulares" class="logo" />
-    </a>
-    <nav class="nav-desktop">
-      <a href="index.html">Início</a>
-      <a href="index.html#smartphones">Smartphones</a>
-      <a href="index.html#acessorios">Acessórios</a>
-      <a href="sobre.html">Sobre</a>
-      <a href="formas-de-pagamento.html">Formas de Pagamento</a>
-      <div class="search-wrapper">
-        <input type="text" id="search-input" placeholder="Buscar..." />
-        <button id="search-button" aria-label="Buscar"><i class="fa fa-search"></i></button>
-      </div>
-    </nav>
-    <button id="menu-toggle" class="menu-toggle" aria-label="Abrir menu"
-            aria-controls="mobile-menu" aria-expanded="false" type="button">
-      <i class="fa-solid fa-bars"></i>
-    </button>
-  </div>
+  <!-- Header padrão -->
+  <div id="header"></div>
+  <script>
+    fetch("header.html")
+      .then(res => res.text())
+      .then(data => document.getElementById("header").innerHTML = data);
+  </script>
 
-  <div id="mobile-menu" class="mobile-menu" aria-hidden="true">
-    <div class="mobile-menu-header">
-      <a href="index.html" class="logo-wrapper">
-        <img src="images/logo.png" alt="Quality Celulares" class="logo" />
-      </a>
-      <button id="menu-close" class="menu-close" aria-label="Fechar menu" type="button">
-        <i class="fa-solid fa-xmark"></i>
-      </button>
-    </div>
-
-    <div class="search-wrapper-mobile">
-      <input type="text" id="search-input-mobile" placeholder="Buscar..." />
-      <button id="search-button-mobile" aria-label="Buscar" type="button">
-        <i class="fa fa-search"></i>
-      </button>
-    </div>
-
-    <nav class="mobile-nav">
-      <a href="index.html">Início</a>
-      <a href="index.html#smartphones">Smartphones</a>
-      <a href="index.html#acessorios">Acessórios</a>
-      <a href="sobre.html">Sobre</a>
-      <a href="formas-de-pagamento.html">Formas de Pagamento</a>
-    </nav>
-  </div>
-
-  <div id="menu-overlay" class="menu-overlay"></div>
-</header>
-
+  <!-- Conteúdo -->
   <main class="max-w-6xl mx-auto px-4 py-28 space-y-12">
     <h1 class="text-3xl font-bold text-center text-red-600 mb-10">Formas de Pagamento & Envio</h1>
+    
     <section class="grid md:grid-cols-3 gap-6">
       <div class="bg-white rounded-xl shadow-lg p-6 text-center hover:shadow-2xl transition">
         <i class="fa-solid fa-credit-card text-4xl text-red-600 mb-4"></i>
@@ -79,26 +44,25 @@
         <p>Transferência instantânea e segura</p>
       </div>
     </section>
-  </main>
-  <footer class="footer">
-  <div class="footer-container">
-    <div class="footer-links">
-      <a href="index.html">Início</a>
-      <a href="sobre.html">Sobre</a>
-      <a href="formas-de-pagamento.html">Formas de Pagamento</a>
-    </div>
-    <div class="footer-copy">
-      <span class="nobreak">© Quality Celulares</span> — Todos os direitos reservados.
-    </div>
-    <div class="footer-socials">
-      <a class="facebook" href="#" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
-      <a class="instagram" href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
-      <a class="whatsapp" href="#" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
-    </div>
-  </div>
-</footer>
 
+    <section class="bg-white rounded-xl shadow-lg p-6 text-center">
+      <i class="fa-solid fa-truck-fast text-5xl text-green-600 mb-4"></i>
+      <h2 class="text-2xl font-bold mb-2">Envios</h2>
+      <p class="text-lg">Via <strong>Correios ou Transportadora</strong>.</p>
+      <p class="text-lg mt-2">Frete grátis para compras acima de <strong>R$120,00</strong> no <strong>RS</strong>.</p>
+    </section>
+  </main>
+
+  <!-- Footer padrão -->
+  <div id="footer"></div>
+  <script>
+    fetch("footer.html")
+      .then(res => res.text())
+      .then(data => document.getElementById("footer").innerHTML = data);
+  </script>
+
+  <!-- Scripts -->
   <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-  <script src="js/menu.js?v=3"></script>
+  <script src="js/main.js"></script>
 </body>
 </html>
