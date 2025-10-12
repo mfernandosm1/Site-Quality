@@ -103,7 +103,7 @@ router.post("/", async (req,res)=>{
     await gitCommitPush();
 
     console.log("✅ Publicação concluída (sem exclusões).");
-    res.redirect(`/?flash=${encodeURIComponent("✅ Conteúdo adicionado/atualizado e push realizado (sem remover arquivos).")}`);
+    res.redirect(`/?flash=${encodeURIComponent("✅ Conteúdo adicionado/atualizado e push realizado.")}`);
   }catch(err){
     console.error("❌ Erro na publicação:", err);
     res.redirect(`/?flash=${encodeURIComponent("❌ Erro ao publicar site. Verifique o console.")}`);

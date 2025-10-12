@@ -1,20 +1,42 @@
 <% layout('layout') -%>
-<div class='card'><h3>💳 Formas de Pagamento (Visual)</h3><form method='post' action='/pagamentos/salvar'><textarea name='html' id='editor_pagto'><%- html %></textarea><div style='margin-top:10px'><button class='btn primary'>Salvar</button></div></form></div>
-<script>
-  if (window.CKEDITOR) {
-    CKEDITOR.replace('editor_pagto', {
-      extraAllowedContent: '*(*);*{*};a[!href];img[!src,alt,width,height]',
-      removePlugins: 'cloudservices,easyimage',
-      fullPage: true,
-      allowedContent: true
-    });
-  }
-</script>
-
 <div class="card">
-  <h3>Importar do arquivo atual</h3>
-  <form method="get" action="/pagamentos">
-    <button class="btn">Recarregar do HTML</button>
-  </form>
-  <p class="muted">Traz o conteúdo atual do arquivo sem precisar mexer em código.</p>
+  <h3>💳 Formas de Pagamento (Visual)</h3>
+  <p class="muted mb-2">Edite os ícones, textos e instruções abaixo. O botão salva diretamente em <code>formas-de-pagamento.html</code>.</p>
+
+  <textarea id="editorPagto"><%- html %></textarea>
+  <div style="margin-top:10px;display:flex;gap:8px;">
+    <button id="savePagto" class="btn primary">💾 Salvar (Visual)</button>
+    <a href="/pagamentos" class="btn ghost">🔄 Recarregar do HTML</a>
+  </div>
 </div>
+
+<div class="card mt-3">
+  <h4>Modo Código (HTML)</h4>
+  <form method="post" action="/pagamentos/salvar">
+    <textarea name="html" rows="15" class="w-full border p-2 font-mono"><%- html %></textarea>
+    <button class="btn mt-2">Salvar (Código)</button>
+  </form>
+</div>
+
+<!-- CKEditor moderno -->
+<script src="https://cdn.ckeditor.com/ckeditor5/41.4.2/classic/ckeditor.js"></script>
+<script>
+let editorPagto;
+ClassicEditor.create(document.querySelector('#editorPagto'), {
+  toolbar: [
+    'heading','|','bold','italic','underline','link','bulletedList','numberedList','blockQuote',
+    '|','insertTable','imageUpload','mediaEmbed','undo','redo','sourceEditing'
+  ]
+}).then(e=>{
+  editorPagto = e;
+  document.getElementById('savePagto').addEventListener('click', async ()=>{
+    const conteudo = editorPagto.getData();
+    const resp = await fetch('/pagamentos/salvar', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: new URLSearchParams({ html: conteudo })
+    });
+    alert(resp.ok ? '✅ Página de Pagamentos salva!' : '❌ Erro ao salvar.');
+  });
+});
+</script>
