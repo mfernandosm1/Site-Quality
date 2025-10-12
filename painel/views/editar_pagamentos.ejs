@@ -36,7 +36,8 @@ ClassicEditor.create(document.querySelector('#editorPagto'), {
       body: new URLSearchParams({ html: conteudo })
     });
     alert(resp.ok ? '✅ Página de Pagamentos salva!' : '❌ Erro ao salvar.');
-    if(resp.ok) location.reload();
+    if(resp.ok) window.location.href = window.location.href + "?t=" + Date.now();
+
   });
 }).catch(console.error);
 </script>

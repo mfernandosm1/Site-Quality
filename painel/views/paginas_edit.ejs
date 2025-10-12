@@ -44,7 +44,8 @@ ClassicEditor.create(document.querySelector('#editorVisual'), {
       body: new URLSearchParams({ file: '<%= file %>', content: conteudo })
     });
     alert(resp.ok ? '✅ Página salva com sucesso!' : '❌ Erro ao salvar.');
-    if(resp.ok) location.reload();
+if(resp.ok) window.location.href = window.location.href + "?t=" + Date.now();
+
   });
 }).catch(console.error);
 </script>
