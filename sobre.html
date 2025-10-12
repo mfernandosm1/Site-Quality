@@ -18,11 +18,13 @@
 
   <!-- Header padrão -->
   <div id="header"></div>
-  <script>
+  <!-- [CKEDITOR_PROTECT_START] -->
+<script>
     fetch("header.html")
       .then(res => res.text())
       .then(data => document.getElementById("header").innerHTML = data);
   </script>
+<!-- [CKEDITOR_PROTECT_END] -->
 
   <!-- Conteúdo -->
   <main class="pt-28 max-w-6xl mx-auto px-4 py-12 space-y-12">
@@ -71,11 +73,13 @@
 
   <!-- Footer padrão -->
   <div id="footer"></div>
-  <script>
+  <!-- [CKEDITOR_PROTECT_START] -->
+<script>
     fetch("footer.html")
       .then(res => res.text())
       .then(data => document.getElementById("footer").innerHTML = data);
   </script>
+<!-- [CKEDITOR_PROTECT_END] -->
 
   <!-- Scripts -->
   <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
