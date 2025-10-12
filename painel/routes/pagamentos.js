@@ -35,29 +35,20 @@ router.post("/salvar", (req, res) => {
     fs.writeFileSync(backup, original, "utf-8");
 
     const newContent = req.body.html || req.body.content || "";
+    const lower = original.toLowerCase();
+    const mainStart = lower.indexOf("<main");
+    const mainOpenEnd = lower.indexOf(">", mainStart);
+    const mainClose = lower.indexOf("</main>");
 
-    const lines = original.split(/\r?\n/);
-    let insideMain = false;
-    const newLines = [];
-
-    for (const line of lines) {
-      if (!insideMain) {
-        newLines.push(line);
-        if (/<\s*main[\s\S]*?>/i.test(line)) {
-          insideMain = true;
-          newLines.push(newContent);
-        }
-      } else {
-        if (/<\s*\/\s*main\s*>/i.test(line)) {
-          newLines.push(line);
-          insideMain = false;
-        }
-      }
+    if (mainStart !== -1 && mainOpenEnd !== -1 && mainClose !== -1) {
+      const before = original.substring(0, mainOpenEnd + 1);
+      const after = original.substring(mainClose);
+      const out = before + "\n" + newContent + "\n" + after;
+      fs.writeFileSync(file, out, "utf-8");
+      console.log("✅", path.basename(file), "atualizado com sucesso");
+    } else {
+      console.warn("⚠️ Tags <main> não encontradas em", file);
     }
-
-    const out = newLines.join("\n");
-    fs.writeFileSync(file, out, "utf-8");
-    console.log("✅ Substituição concluída em", file);
 
     res.redirect("/pagamentos");
   } catch (e) {
