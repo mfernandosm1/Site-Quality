@@ -1,29 +1,29 @@
 import express from 'express';
 import fs from 'fs';
 import path from 'path';
+
 const router = express.Router();
 function P(app){ return app.locals.paths; }
 
-router.get('/', (req,res)=>{
-  const file = path.join(P(req.app).SITE_DIR, 'formas-de-pagamento.html');
-  let html=''; try { html = fs.readFileSync(file,'utf-8'); } catch(e){}
-  const m = /<body[^>]*>([\s\S]*?)<\/body>/i.exec(html);
-  const body = m ? m[1] : html;
-  res.render('editar_pagamentos', { html: body, flash:null });
+/**
+ * ROTA LEGADA: /pagamentos
+ * Antes: lia/gravava HTML e renderizava 'editar_pagamentos' (modo visual).
+ * Agora: SEM editar HTML aqui. Redireciona para o editor SEGURO de campos.
+ */
+
+// GET /pagamentos  -> vai para o editor seguro
+router.get('/', (req, res) => {
+  return res.redirect('/paginas-formas');
 });
-router.post('/salvar', (req,res)=>{
-  const { SITE_DIR, BACKUPS_DIR } = P(req.app);
-  const file = path.join(SITE_DIR, 'formas-de-pagamento.html');
-  const backup = path.join(BACKUPS_DIR, 'formas-de-pagamento.html.'+new Date().toISOString().replace(/[:.]/g,'-'));
-  try { const prev = fs.existsSync(file)?fs.readFileSync(file,'utf-8'):''; fs.writeFileSync(backup, prev, 'utf-8'); } catch(e){}
-  let original=''; try{ original = fs.readFileSync(file,'utf-8'); }catch(e){}
-  if (/<body[^>]*>[\s\S]*?<\/body>/i.test(original)){
-    const out = original.replace(/(<body[^>]*>)[\s\S]*?(<\/body>)/i, `$1${req.body.html||''}$2`);
-    fs.writeFileSync(file, out, 'utf-8');
-  } else {
-    const out = `<!doctype html><html><head><meta charset="utf-8"></head><body>${req.body.html||''}</body></html>`;
-    fs.writeFileSync(file, out, 'utf-8');
-  }
-  res.redirect('/pagamentos');
+
+// POST /pagamentos/salvar  -> compatibilidade: também redireciona
+router.post('/salvar', (req, res) => {
+  return res.redirect('/paginas-formas');
 });
+
+// (Opcional) Qualquer outra subrota legada em /pagamentos/* -> redireciona
+router.all('*', (req, res) => {
+  return res.redirect('/paginas-formas');
+});
+
 export default router;

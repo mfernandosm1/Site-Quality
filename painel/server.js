@@ -22,7 +22,7 @@ app.locals.paths = { ROOT, SITE_DIR, CONTENT_DIR, BACKUPS_DIR };
 
 app.set('view engine', 'ejs');
 app.set('views', VIEWS_DIR);
-app.use(bodyParser.urlencoded({extended:true}));
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use('/public', express.static(PUBLIC_DIR));
 
@@ -35,6 +35,9 @@ import pagamentosRouter from './routes/pagamentos.js';
 import produtosRouter from './routes/produtos.js';
 import categoriasRouter from './routes/categorias.js';
 import paginasRouter from './routes/paginas.js';
+import paginasIndexRouter from './routes/paginas_index.js';
+import paginasSobreRouter from './routes/paginas_sobre.js';
+import paginasFormasRouter from './routes/paginas_formas.js';
 import manutencaoRouter from './routes/manutencao.js';
 import publicarRouter from './routes/publicar.js';
 import cssRouter from './routes/css.js';
@@ -51,6 +54,9 @@ app.use('/pagamentos', pagamentosRouter);
 app.use('/produtos', produtosRouter);
 app.use('/categorias', categoriasRouter);
 app.use('/paginas', paginasRouter);
+app.use('/paginas-index', paginasIndexRouter);
+app.use('/paginas-sobre', paginasSobreRouter);
+app.use('/paginas-formas', paginasFormasRouter);
 app.use('/manutencao', manutencaoRouter);
 app.use('/publicar', publicarRouter);
 app.use('/css', cssRouter);
@@ -61,4 +67,6 @@ app.use('/site', sitePreviewRouter);
 
 app.use('/site', express.static(SITE_DIR));
 
-app.listen(PORT, ()=> console.log(`Painel Quality V7.3 em http://localhost:${PORT}`));
+app.listen(PORT, () =>
+  console.log(`Painel Quality V7.3 em http://localhost:${PORT}`)
+);
