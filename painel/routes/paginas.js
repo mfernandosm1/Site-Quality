@@ -1,75 +1,35 @@
-import express from "express";
-import fs from "fs";
-import path from "path";
-import { loadMainOnly, injectMainOnly } from "./main_utils.js";
-
+import express from 'express';
+import fs from 'fs';
+import path from 'path';
 const router = express.Router();
-function P(app) {
-  return app.locals.paths;
-}
+function P(app){ return app.locals.paths; }
 
-function decodeHTML(str) {
-  if (!str) return "";
-  return str
-    .replace(/&lt;/g, "<")
-    .replace(/&gt;/g, ">")
-    .replace(/&amp;/g, "&")
-    .replace(/&quot;/g, '"')
-    .replace(/&#39;/g, "'");
-}
-
-// ===============================
-//  GET /paginas/edit?file=index.html
-// ===============================
-router.get("/edit", (req, res) => {
-  const SITE_DIR = P(req.app).SITE_DIR;
-  const fileName = req.query.file || "index.html";
-  const filePath = path.join(SITE_DIR, fileName);
-
-  if (!fs.existsSync(filePath)) {
-    return res.status(404).send("Arquivo não encontrado: " + fileName);
-  }
-
-  const { innerMain, area } = loadMainOnly(filePath);
-  res.render("paginas_edit", {
-    file: fileName,
-    content: innerMain,
-    flash: null,
-    area,
-  });
+router.get('/', (req,res)=>{
+  const pages = ['index.html','sobre.html','formas-de-pagamento.html','header.html','footer.html'];
+  res.render('paginas_list', { pages, flash:null });
 });
-
-// ===============================
-//  POST /paginas/salvar
-// ===============================
-router.post("/salvar", (req, res) => {
-  const SITE_DIR = P(req.app).SITE_DIR;
-  const BACKUPS_DIR = P(req.app).BACKUPS_DIR;
-  const fileName = req.body.file || "index.html";
-  const filePath = path.join(SITE_DIR, fileName);
-  const backupPath = path.join(
-    BACKUPS_DIR,
-    fileName + "." + new Date().toISOString().replace(/[:.]/g, "-")
-  );
-
-  try {
-    if (fs.existsSync(filePath)) {
-      fs.writeFileSync(
-        backupPath,
-        fs.readFileSync(filePath, "utf-8"),
-        "utf-8"
-      );
-    }
-  } catch (e) {
-    console.error("Falha ao criar backup:", e);
-  }
-
-  const { htmlCompleto, area } = loadMainOnly(filePath);
-  const safeHTML = decodeHTML(req.body.html || "");
-  const newHTML = injectMainOnly(htmlCompleto, area, safeHTML);
-
-  fs.writeFileSync(filePath, newHTML, "utf-8");
-  res.redirect(`/paginas/edit?file=${fileName}`);
+router.get('/edit', (req,res)=>{
+  const f = req.query.file || 'index.html';
+  const t = path.join(P(req.app).SITE_DIR, f);
+  let c=''; try{ c = fs.readFileSync(t,'utf-8'); }catch(e){}
+  const m = /<body[^>]*>([\s\S]*?)<\/body>/i.exec(c);
+  const body = m ? m[1] : c;
+  res.render('paginas_edit', { file: f, content: body, flash:null });
 });
-
+router.post('/save', (req,res)=>{
+  const { SITE_DIR, BACKUPS_DIR } = P(req.app);
+  const f = req.body.file || 'index.html';
+  const t = path.join(SITE_DIR, f);
+  const b = path.join(BACKUPS_DIR, f.replace(/[\/]/g,'_')+'-'+new Date().toISOString().replace(/[:.]/g,'-'));
+  try{ const prev = fs.existsSync(t) ? fs.readFileSync(t,'utf-8') : ''; fs.writeFileSync(b, prev,'utf-8'); }catch(e){}
+  let original=''; try{ original = fs.readFileSync(t,'utf-8'); }catch(e){}
+  if (/<body[^>]*>[\s\S]*?<\/body>/i.test(original)){
+    const out = original.replace(/(<body[^>]*>)[\s\S]*?(<\/body>)/i, `$1${req.body.content||''}$2`);
+    fs.writeFileSync(t, out, 'utf-8');
+  } else {
+    const out = `<!doctype html><html><head><meta charset="utf-8"></head><body>${req.body.content||''}</body></html>`;
+    fs.writeFileSync(t, out, 'utf-8');
+  }
+  res.redirect('/paginas/edit?file='+encodeURIComponent(f));
+});
 export default router;
