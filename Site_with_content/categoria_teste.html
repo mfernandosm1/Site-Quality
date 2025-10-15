@@ -16,8 +16,7 @@
     </a>
 
     <!-- Navegação Desktop -->
-    <nav class="nav-desktop"><a href="categoria_smartphone.html">smartphone</a>
-</nav>
+    <nav class="nav-desktop" id="nav-desktop"></nav>
 
     <!-- Botão Mobile -->
     <button id="menu-toggle" class="menu-toggle" aria-label="Abrir menu">
@@ -45,16 +44,46 @@
     </div>
 
     <!-- Navegação Mobile -->
-    <nav class="mobile-nav">
+    <nav class="mobile-nav" id="nav-mobile">
       <a href="index.html">Início</a>
-      <a href="index.html#smartphones">Smartphones</a>
-      <a href="index.html#acessorios">Acessórios</a>
+      <!-- categorias serão injetadas aqui -->
     </nav>
   </div>
 
   <!-- Overlay (fecha o menu ao clicar fora) -->
   <div id="menu-overlay" class="menu-overlay"></div>
 </header>
+
+<script>
+/* === Carregar categorias dinâmicas do arquivo JSON === */
+fetch("content/categories.json")
+  .then((r) => r.json())
+  .then((data) => {
+    const categorias = data.items || [];
+    const navDesktop = document.getElementById("nav-desktop");
+    const navMobile = document.getElementById("nav-mobile");
+
+    // Remove links antigos se existirem
+    navDesktop.querySelectorAll("a.cat-link").forEach((a) => a.remove());
+    navMobile.querySelectorAll("a.cat-link").forEach((a) => a.remove());
+
+    // Insere novas categorias
+    categorias.forEach((cat) => {
+      const linkD = document.createElement("a");
+      linkD.href = `categoria-${cat.slug}.html`;
+      linkD.textContent = cat.name;
+      linkD.className = "cat-link";
+      navDesktop.insertBefore(linkD, navDesktop.querySelector(".search-wrapper"));
+
+      const linkM = document.createElement("a");
+      linkM.href = `categoria-${cat.slug}.html`;
+      linkM.textContent = cat.name;
+      linkM.className = "cat-link";
+      navMobile.appendChild(linkM);
+    });
+  })
+  .catch((err) => console.error("Erro ao carregar categorias:", err));
+</script>
 </body></html>
 <main class="main">
   <h1 style="text-align:center;margin-top:30px;">teste</h1>
