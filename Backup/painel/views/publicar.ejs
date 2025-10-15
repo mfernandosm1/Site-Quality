@@ -1,0 +1,43 @@
+<% layout('layout') -%>
+<div class="row">
+  <div class="card">
+    <h2>Publicar com Segurança</h2>
+    <p>Antes de qualquer publicação, gere um backup completo. Depois, exporte um pacote pronto para o GitHub Pages ou publique direto no repositório local.</p>
+  </div>
+
+  <div class="card">
+    <h3>1) Backup completo do site</h3>
+    <form method="post" action="/publicar/backup">
+      <button class="btn">Criar backup agora</button>
+    </form>
+    <% if (backups && backups.length) { %>
+      <p style="margin-top:8px">Backups recentes:</p>
+      <ul>
+        <% backups.slice(0,5).forEach(b => { %>
+          <li><%= b %> — <a href="/publicar/download-backup/<%= b %>">baixar .zip</a></li>
+        <% }) %>
+      </ul>
+    <% } %>
+  </div>
+
+  <div class="card">
+    <h3>2) Exportar pacote (ZIP) p/ GitHub Pages</h3>
+    <form method="post" action="/publicar/export-zip">
+      <button class="btn">Gerar e baixar ZIP</button>
+    </form>
+    <p class="muted">O pacote vem com caminhos relativos, runtimes de header/footer e <code>.nojekyll</code>.</p>
+  </div>
+
+  <div class="card">
+    <h3>3) Publicar no repositório local</h3>
+    <% if (repo) { %>
+      <p>Repositório detectado em: <code><%= repo %></code></p>
+      <form method="post" action="/publicar/publish-git">
+        <button class="btn">Exportar + Commit + Push</button>
+      </form>
+      <p class="muted">Usa seu Git configurado localmente (sem salvar token). Branch: <code>main</code>.</p>
+    <% } else { %>
+      <p class="muted">Nenhum repositório Git detectado. Abra o painel dentro da pasta do repositório para habilitar o push direto.</p>
+    <% } %>
+  </div>
+</div>

@@ -1,0 +1,67 @@
+<% layout('layout') -%>
+<header><div class="brand container">Páginas → Index (Campos)</div></header>
+<div class="container">
+
+  <!-- Banner de sucesso (escondido de verdade) -->
+  <div id="flash-box" style="display:none;margin-bottom:12px;padding:10px 12px;border-radius:8px;
+    background:#e8f7ee;border:1px solid #bfe8cc;color:#165f2a;align-items:center;gap:8px;font-weight:500;">
+    ✅ Salvo com sucesso!
+  </div>
+
+  <div class="card">
+    <form method="post" action="/paginas-index/save">
+      <div style="display:grid;gap:12px;grid-template-columns:1fr;">
+        <label><strong>Título da seção Smartphones (H2)</strong><br/>
+          <input type="text" name="h2Smartphones" value="<%= h2Smartphones %>" style="width:100%;padding:8px;border:1px solid #ddd;border-radius:8px;">
+        </label>
+        <label><strong>Título da seção Acessórios (H2)</strong><br/>
+          <input type="text" name="h2Acessorios" value="<%= h2Acessorios %>" style="width:100%;padding:8px;border:1px solid #ddd;border-radius:8px;">
+        </label>
+        <label><strong>Texto “Em breve...”</strong><br/>
+          <input type="text" name="emBreve" value="<%= emBreve %>" style="width:100%;padding:8px;border:1px solid #ddd;border-radius:8px;">
+        </label>
+      </div>
+      <div class="mt-4">
+        <button class="btn primary" type="submit">💾 Salvar</button>
+        <a class="btn" href="/paginas">Voltar</a>
+      </div>
+    </form>
+  </div>
+</div>
+
+<script>
+(function(){
+  const flashBox = document.getElementById('flash-box');
+  const serverFlash = <%- JSON.stringify(flash || "") %>;
+
+  function show(msg){
+    flashBox.style.display = 'flex';
+    flashBox.textContent = '✅ ' + (msg || 'Salvo com sucesso!');
+  }
+
+  // Remove "saved" da URL para não reaparecer em novos acessos
+  function clearSavedParam(){
+    const url = new URL(window.location.href);
+    if (url.searchParams.has('saved')) {
+      url.searchParams.delete('saved');
+      history.replaceState(null, '', url.pathname + (url.search ? '?' + url.searchParams.toString() : '') + url.hash);
+    }
+  }
+
+  // 1) Se o servidor passou flash, mostra uma vez e limpa param
+  if (serverFlash) {
+    show(serverFlash);
+    clearSavedParam();
+    return;
+  }
+
+  // 2) Se veio com ?saved=1, mostra e limpa param
+  const params = new URLSearchParams(location.search);
+  if (params.get('saved') === '1') {
+    show();
+    clearSavedParam();
+  }
+
+  // Sem localStorage: não há outra condição para exibir
+})();
+</script>

@@ -1,0 +1,50 @@
+<% layout('layout') -%>
+<div class="card">
+  <h3>🔻 Rodapé — Texto, CNPJ e Sociais</h3>
+  <form method="post" action="/footer/save" class="row" style="grid-template-columns:1fr 1fr;">
+    <div><label>Texto</label><input type="text" name="text" value="<%= (footer && footer.text) || '' %>"></div>
+    <div><label>CNPJ</label><input type="text" name="cnpj" value="<%= (footer && footer.cnpj) || '' %>"></div>
+    <div style="grid-column:1/-1;align-self:end"><button class="btn primary" type="submit">Salvar</button></div>
+  </form>
+</div>
+
+<div class="card">
+  <h3>Ícones Sociais</h3>
+  <form method="post" action="/footer/add-social" class="row">
+    <div><label>Ícone/Label</label><input type="text" name="label" placeholder="Instagram"></div>
+    <div><label>URL</label><input type="url" name="url" placeholder="https://instagram.com/seuuser"></div>
+    <div><label>Ordem</label><input type="number" name="order" placeholder="1"></div>
+    <div style="align-self:end"><button class="btn" type="submit">Adicionar</button></div>
+  </form>
+  <table class="table">
+    <thead><tr><th>#</th><th>Título</th><th>URL</th><th>Ordem</th><th>Ações</th></tr></thead>
+    <tbody>
+      <% (footer.social||[]).forEach((s,idx)=>{ %>
+        <tr>
+          <td><span class="badge"><%= idx+1 %></span></td>
+          <td>
+            <form method="post" action="/footer/update-social">
+              <input type="hidden" name="index" value="<%= idx %>">
+              <input type="text" name="label" value="<%= s.label || s.icon %>">
+          </td>
+          <td><input type="url" name="url" value="<%= s.url %>"></td>
+          <td><input type="number" name="order" value="<%= s.order || (idx+1) %>"></td>
+          <td>
+              <button class="btn primary" type="submit">Salvar</button>
+            </form>
+            <form method="post" action="/footer/del-social" style="display:inline">
+              <input type="hidden" name="index" value="<%= idx %>">
+              <button class="btn" type="submit">Excluir</button>
+            </form>
+          </td>
+        </tr>
+      <% }) %>
+    </tbody>
+  </table>
+</div>
+
+<div class="card">
+  <h3>Importar</h3>
+  <p class="notice">Tenta ler links sociais do <code>footer.html</code> do site.</p>
+  <form method="post" action="/footer/import"><button class="btn">Importar do footer.html</button></form>
+</div>

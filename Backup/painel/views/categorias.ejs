@@ -1,0 +1,33 @@
+<% layout('layout') -%>
+<div class="card">
+  <h3>🗂️ Categorias</h3>
+  <form method="post" action="/categorias/add" class="row">
+    <div><label>Nome</label><input type="text" name="name"></div>
+    <div><label>Slug</label><input type="text" name="slug" placeholder="ex.: camisas"></div>
+    <div><label>Ordem</label><input type="number" name="order" placeholder="1"></div>
+    <div style="align-self:end"><button class="btn" type="submit">Adicionar</button></div>
+  </form>
+  <table class="table">
+    <thead><tr><th>#</th><th>Nome</th><th>Slug</th><th>Ordem</th><th>Ações</th></tr></thead>
+    <tbody>
+      <% (items||[]).forEach((c,idx)=>{ %>
+        <tr>
+          <td><span class="badge"><%= idx+1 %></span></td>
+          <td><input form="f<%=c.id%>" type="text" name="name" value="<%= c.name %>"></td>
+          <td><input form="f<%=c.id%>" type="text" name="slug" value="<%= c.slug %>"></td>
+          <td><input form="f<%=c.id%>" type="number" name="order" value="<%= c.order || (idx+1) %>"></td>
+          <td>
+            <form id="f<%=c.id%>" method="post" action="/categorias/update"><input type="hidden" name="id" value="<%= c.id %>"><button class="btn primary">Salvar</button></form>
+            <form method="post" action="/categorias/del" style="display:inline"><input type="hidden" name="id" value="<%= c.id %>"><button class="btn">Excluir</button></form>
+          </td>
+        </tr>
+      <% }) %>
+    </tbody>
+  </table>
+</div>
+
+<div class="card">
+  <h3>Importar</h3>
+  <p class="notice">Tenta ler itens do &lt;nav&gt; do <code>header.html</code> (textos viram nome; href vira slug).</p>
+  <form method="post" action="/categorias/import"><button class="btn">Importar do header.html</button></form>
+</div>

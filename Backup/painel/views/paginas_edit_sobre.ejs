@@ -1,0 +1,63 @@
+<% layout('layout') -%>
+<header><div class="brand container">Páginas → Sobre (Campos)</div></header>
+<div class="container">
+
+  <!-- Banner de sucesso (começa escondido de verdade) -->
+  <div id="flash-box" style="display:none;margin-bottom:12px;padding:10px 12px;border-radius:8px;
+    background:#e8f7ee;border:1px solid #bfe8cc;color:#165f2a;align-items:center;gap:8px;font-weight:500;">
+    ✅ Salvo com sucesso!
+  </div>
+
+  <div class="card">
+    <form method="post" action="/paginas-sobre/save">
+      <label><small>Título (H1)</small><input type="text" name="titulo" value="<%= titulo %>"></label>
+      <label><small>Introdução</small><textarea name="intro" rows="3"><%= intro %></textarea></label>
+      <div style="display:grid;gap:10px;grid-template-columns:repeat(3,1fr)">
+        <label><small>Missão (texto do card)</small><textarea name="missao" rows="3"><%= missao %></textarea></label>
+        <label><small>Visão (texto do card)</small><textarea name="visao" rows="3"><%= visao %></textarea></label>
+        <label><small>Valores (texto do card)</small><textarea name="valores" rows="3"><%= valores %></textarea></label>
+      </div>
+      <label><small>“Por que escolher…” (H2)</small><input type="text" name="difTitulo" value="<%= difTitulo %>"></label>
+      <label><small>Lista (apenas &lt;li&gt;)</small><textarea name="difListaHTML" rows="5"><%= difListaHTML %></textarea></label>
+      <div style="margin-top:10px;display:flex;gap:8px">
+        <button class="btn" type="submit">Salvar</button>
+        <a class="btn secondary" href="/paginas">Voltar</a>
+      </div>
+    </form>
+  </div>
+</div>
+
+<script>
+(function(){
+  const flashBox = document.getElementById('flash-box');
+  function show(msg){
+    flashBox.style.display = 'flex';
+    flashBox.textContent = '✅ ' + (msg || 'Salvo com sucesso!');
+  }
+
+  // 1) Se o servidor passou 'flash'
+  const hasServerFlash = <%= (typeof flash !== 'undefined' && flash) ? 'true' : 'false' %>;
+  if (hasServerFlash) { show(<%- JSON.stringify(flash || '') %>); return; }
+
+  // 2) Se veio com ?saved=1
+  const params = new URLSearchParams(location.search);
+  if (params.get('saved') === '1') { show(); return; }
+
+  // 3) Fallback: localStorage flag
+  const KEY = 'flash_paginas_sobre';
+  if (localStorage.getItem(KEY) === '1') {
+    localStorage.removeItem(KEY);
+    show();
+  }
+
+  // Marca antes de enviar o form
+  window.addEventListener('DOMContentLoaded', function(){
+    const form = document.querySelector('form[action="/paginas-sobre/save"]');
+    if (form) {
+      form.addEventListener('submit', function(){
+        try { localStorage.setItem(KEY, '1'); } catch(e){}
+      });
+    }
+  });
+})();
+</script>
