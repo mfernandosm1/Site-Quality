@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Smartphones – Quality Celulares</title>
+  <title>smartphones – Quality Celulares</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="stylesheet" href="css/style.css"><!-- caminho relativo -->
 </head>
@@ -56,7 +56,7 @@
 </header>
 </body></html>
 <main class="main">
-  <h1 style="text-align:center;margin-top:30px;">Smartphones</h1>
+  <h1 style="text-align:center;margin-top:30px;">smartphones</h1>
   <div id="produtos-container" class="products" style="margin-top:40px;"></div>
 </main>
 <footer class="footer bg-gray-900 text-gray-300 py-8 mt-12">
@@ -90,7 +90,7 @@ fetch('content/products.json')
   .then(data=>{
     const container=document.getElementById('produtos-container');
     const slugLower='smartphones'.toLowerCase();
-    const nameLower='Smartphones'.toLowerCase();
+    const nameLower='smartphones'.toLowerCase();
 
     const prods=(data.items||[]).filter(p=>{
       const cat=(p.category||'').toString().toLowerCase();

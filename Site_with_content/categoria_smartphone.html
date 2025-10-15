@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>smartphone – Quality Celulares</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="css/style.css"><!-- caminho relativo -->
+</head>
+<body>
+<html><head></head><body><header class="header">
+  <div class="header-container">
+    <!-- Logo -->
+    <a href="index.html" class="logo-wrapper">
+      <img src="images/logo.png" alt="Quality Celulares" class="logo">
+    </a>
+
+    <!-- Navegação Desktop -->
+    <nav class="nav-desktop"></nav>
+
+    <!-- Botão Mobile -->
+    <button id="menu-toggle" class="menu-toggle" aria-label="Abrir menu">
+      <i class="fa-solid fa-bars"></i>
+    </button>
+  </div>
+
+  <!-- Menu Mobile -->
+  <div id="mobile-menu" class="mobile-menu" aria-hidden="true">
+    <div class="mobile-menu-header">
+      <a href="index.html" class="logo-wrapper">
+        <img src="images/logo.png" alt="Quality Celulares" class="logo">
+      </a>
+      <button id="menu-close" class="menu-close" aria-label="Fechar menu">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+    </div>
+
+    <!-- Campo de busca Mobile -->
+    <div class="search-wrapper-mobile">
+      <input type="text" id="search-input-mobile" placeholder="Buscar...">
+      <button id="search-button-mobile" aria-label="Buscar">
+        <i class="fa fa-search"></i>
+      </button>
+    </div>
+
+    <!-- Navegação Mobile -->
+    <nav class="mobile-nav">
+      <a href="index.html">Início</a>
+      <a href="index.html#smartphones">Smartphones</a>
+      <a href="index.html#acessorios">Acessórios</a>
+    </nav>
+  </div>
+
+  <!-- Overlay (fecha o menu ao clicar fora) -->
+  <div id="menu-overlay" class="menu-overlay"></div>
+</header>
+</body></html>
+<main class="main">
+  <h1 style="text-align:center;margin-top:30px;">smartphone</h1>
+  <div id="produtos-container" class="products" style="margin-top:40px;"></div>
+</main>
+<footer class="footer bg-gray-900 text-gray-300 py-8 mt-12">
+  <div class="footer-container max-w-6xl mx-auto px-4">
+    <!-- Links -->
+    <div class="footer-links">
+      <a href="sobre.html">Sobre nós</a>
+      <a href="formas-de-pagamento.html">Formas de pagamento e envio</a>
+    </div>
+
+    <!-- Copy -->
+    <div class="footer-copy">
+      <span class="nobreak">© 2025 Quality Celulares. Todos os direitos reservados.</span><br />
+      CNPJ: 20.375.910/0001-66
+    </div>
+
+    <!-- Ícones sociais -->
+    <div class="footer-socials">
+      <a href="#" class="facebook" aria-label="Facebook" target="_blank"><i class="fa-brands fa-facebook-f"></i></a>
+      <a href="https://www.instagram.com/qualitycelulares_ibi/" class="instagram" aria-label="Instagram" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+      <a href="#" class="tiktok" aria-label="TikTok" target="_blank"><i class="fa-brands fa-tiktok"></i></a>
+      <a href="https://wa.me/5555991407824" class="whatsapp" aria-label="WhatsApp" target="_blank"><i class="fa-brands fa-whatsapp"></i></a>
+      <a href="#" class="location" aria-label="Localização"><i class="fa-solid fa-location-dot"></i></a>
+    </div>
+  </div>
+</footer>
+
+<script>
+fetch('content/products.json')
+  .then(r=>r.json())
+  .then(data=>{
+    const container=document.getElementById('produtos-container');
+    const slugLower='smartphone'.toLowerCase();
+    const nameLower='smartphone'.toLowerCase();
+
+    const prods=(data.items||[]).filter(p=>{
+      const cat=(p.category||'').toString().toLowerCase();
+      return cat===slugLower || cat===nameLower; // aceita slug ou nome
+    });
+
+    if(prods.length===0){
+      container.innerHTML='<p class="em-breve" style="text-align:center;">Nenhum produto nesta categoria ainda.</p>';
+      return;
+    }
+
+    prods.forEach(p=>{
+      const price = (typeof p.price==='number' ? p.price : Number(p.price||0));
+      const priceStr = isNaN(price) ? '' : 'R$ '+price.toFixed(2).replace('.',',');
+      const card=document.createElement('div');
+      card.className='product-card';
+      card.innerHTML=`
+        <img src="${p.image||''}" alt="${p.name||''}">
+        <h3>${p.name||''}</h3>
+        ${priceStr ? '<p>'+priceStr+'</p>' : ''}
+        <a href="https://wa.me/5555991407824?text='+encodeURIComponent('Olá! Tenho interesse em '+(p.name||'produto'))+'" 
+           class="btn-whatsapp" target="_blank">
+           <i class="fa-brands fa-whatsapp"></i> Comprar no WhatsApp
+        </a>
+      `;
+      container.appendChild(card);
+    });
+  });
+</script>
+</body>
+</html>

@@ -1,33 +1,23 @@
 {
   "items": [
     {
-      "id": 1760568072436,
-      "name": "novo teste",
+      "id": 1760568958873,
+      "name": "14c xiaomi",
+      "price": null,
+      "image": "images/redmi14c.png",
+      "category": "",
+      "showPrice": true,
+      "featured": true,
+      "active": true
+    },
+    {
+      "id": 1760568966866,
+      "name": "x7",
       "price": null,
       "image": "images/pocox7pro.png",
       "category": "",
       "showPrice": true,
       "featured": true,
-      "active": true
-    },
-    {
-      "id": 1760568087468,
-      "name": "novo",
-      "price": null,
-      "image": "images/redmi14c.png",
-      "category": "smartphones",
-      "showPrice": true,
-      "featured": true,
-      "active": true
-    },
-    {
-      "id": 1760568107277,
-      "name": "novo teste 3",
-      "price": null,
-      "image": "",
-      "category": "",
-      "showPrice": true,
-      "featured": false,
       "active": true
     }
   ]
