@@ -167,7 +167,7 @@ export function applyFormasFields(html, fields){
 export function generateCategoryPage(name, slug, siteDir) {
   const header = readFileUtf8(path.join(siteDir, 'header.html'));
   const footer = readFileUtf8(path.join(siteDir, 'footer.html'));
-  const target = path.join(siteDir, `categoria_${slug}.html`);
+  const target = path.join(siteDir, `categoria-${slug}.html`);
 
   const html = `<!DOCTYPE html>
 <html lang="pt-BR">
@@ -176,7 +176,7 @@ export function generateCategoryPage(name, slug, siteDir) {
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>${name} – Quality Celulares</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <link rel="stylesheet" href="css/style.css"><!-- caminho relativo -->
+  <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 ${header}
@@ -192,17 +192,14 @@ fetch('content/products.json')
     const container=document.getElementById('produtos-container');
     const slugLower='${slug}'.toLowerCase();
     const nameLower='${name}'.toLowerCase();
-
     const prods=(data.items||[]).filter(p=>{
       const cat=(p.category||'').toString().toLowerCase();
-      return cat===slugLower || cat===nameLower; // aceita slug ou nome
+      return cat===slugLower || cat===nameLower;
     });
-
     if(prods.length===0){
       container.innerHTML='<p class="em-breve" style="text-align:center;">Nenhum produto nesta categoria ainda.</p>';
       return;
     }
-
     prods.forEach(p=>{
       const price = (typeof p.price==='number' ? p.price : Number(p.price||0));
       const priceStr = isNaN(price) ? '' : 'R$ '+price.toFixed(2).replace('.',',');
@@ -226,24 +223,39 @@ fetch('content/products.json')
   writeFileUtf8(target, html);
 }
 
-// === Atualiza o menu principal com as categorias existentes ===
+// === Atualiza o menu principal com as categorias existentes (corrigido) ===
 export function updateHeaderMenu(categories, siteDir) {
   const headerPath = path.join(siteDir, 'header.html');
   let headerHtml = readFileUtf8(headerPath);
   if (!headerHtml.includes('<nav')) return;
 
   const $ = cheerio.load(headerHtml, { decodeEntities: false });
-  const nav = $('nav').first();
-  nav.empty();
+  const navDesktop = $('#nav-desktop');
+  const navMobile = $('#nav-mobile');
 
-  categories
-    .sort((a, b) => (a.order||0) - (b.order||0))
-    .forEach((c) => {
-      const slug = (c.slug || c.name || '').toString().trim();
-      const name = (c.name || slug).toString().trim();
-      if(!slug) return;
-      nav.append(`<a href="categoria_${slug}.html">${name}</a>\n`);
-    });
+  if (!navDesktop.length || !navMobile.length) return;
+
+  // Remove apenas links antigos de categoria
+  navDesktop.find('a.cat-link').remove();
+  navMobile.find('a.cat-link').remove();
+
+  const sorted = [...(categories || [])].sort((a, b) => (a.order || 0) - (b.order || 0));
+  const searchWrapper = navDesktop.find('.search-wrapper').first();
+
+  sorted.forEach((c) => {
+    const slug = (c.slug || c.name || '').toString().trim();
+    const name = (c.name || slug).toString().trim();
+    if (!slug || !name) return;
+
+    const linkD = `<a href="categoria-${slug}.html" class="cat-link">${name}</a>`;
+    const linkM = `<a href="categoria-${slug}.html" class="cat-link">${name}</a>`;
+
+    if (searchWrapper.length) searchWrapper.before(linkD);
+    else navDesktop.append(linkD);
+
+    navMobile.append(linkM);
+  });
 
   writeFileUtf8(headerPath, $.html());
+  console.log(`✅ Header atualizado com ${sorted.length} categorias.`);
 }
