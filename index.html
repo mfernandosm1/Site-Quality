@@ -43,34 +43,20 @@
     </div>
   </section>
 
-  <!-- Produtos -->
+  <!-- Produtos em destaque -->
   <main class="main">
-    <h2 id="smartphones" style="text-align:center; margin-top: 40px;">Smartphones</h2>
-    <div id="products" class="products">
-      <div class="product-card">
-        <img src="images/pocox7pro.png" alt="Poco X7 Pro" />
-        <h3>Poco X7 Pro</h3>
-        <a href="https://wa.me/5555991407824?text=Olá%20vim%20através%20do%20site"
-           class="btn-whatsapp" target="_blank">
-          <i class="fa-brands fa-whatsapp"></i> Comprar no WhatsApp
-        </a>
-      </div>
-      <div class="product-card">
-        <img src="images/redmi14c.png" alt="Redmi 14C" />
-        <h3>Redmi 14C</h3>
-        <a href="https://wa.me/5555991407824?text=Olá%20vim%20através%20do%20site"
-           class="btn-whatsapp" target="_blank">
-          <i class="fa-brands fa-whatsapp"></i> Comprar no WhatsApp
-        </a>
-      </div>
-    </div>
-    <p id="no-results" class="em-breve"
-       style="display:none; text-align:center; margin-top:20px;">
-      Nenhum produto encontrado.
-    </p>
+    <h2 style="text-align:center; margin-top: 40px;">Produtos em Destaque</h2>
 
-    <h2 id="acessorios" style="text-align:center; margin-top: 60px;">Acessórios</h2>
-    <p class="em-breve" style="text-align:center;">Em breve...</p>
+    <!-- Carrossel horizontal -->
+    <div class="carousel-container">
+      <button class="carousel-arrow left" onclick="scrollCarousel(-1)">&#10094;</button>
+      <div class="carousel-track" id="carousel1"></div>
+      <button class="carousel-arrow right" onclick="scrollCarousel(1)">&#10095;</button>
+    </div>
+
+    <p id="no-results" class="em-breve" style="display:none; text-align:center; margin-top:20px;">
+      Nenhum produto na vitrine ainda.
+    </p>
   </main>
 
   <!-- Footer -->
@@ -78,6 +64,65 @@
 
   <!-- Scripts -->
   <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-  <script src="js/main.js"></script>
+  <script>
+  // === Swiper Banners ===
+  new Swiper('.swiper', {
+    loop: true,
+    autoplay: { delay: 4000 },
+    navigation: {
+      nextEl: '.swiper-button-next',
+      prevEl: '.swiper-button-prev',
+    },
+  });
+
+  // === Scroll do carrossel ===
+  function scrollCarousel(dir) {
+    const track = document.getElementById('carousel1');
+    track.scrollBy({ left: dir * 300, behavior: 'smooth' });
+  }
+
+  // === Header e Footer dinâmicos ===
+  fetch('header.html').then(r => r.text()).then(t => document.getElementById('header').innerHTML = t);
+  fetch('footer.html').then(r => r.text()).then(t => document.getElementById('footer').innerHTML = t);
+
+  // === Carregar produtos da vitrine ===
+  fetch('content/products.json')
+    .then(r => r.json())
+    .then(data => {
+      const track = document.getElementById('carousel1');
+      const produtos = (data.items || []).filter(p =>
+        p.active !== false && p.featured === true
+      );
+
+      if (produtos.length === 0) {
+        document.getElementById('no-results').style.display = 'block';
+        return;
+      }
+
+      produtos.forEach(p => {
+        const card = document.createElement('div');
+        card.className = 'produto-card';
+
+        const precoHTML = (p.showPrice === false)
+          ? ''
+          : `<p>R$ ${(Number(p.price) || 0).toFixed(2).replace('.', ',')}</p>`;
+
+        card.innerHTML = `
+          <img src="${p.image || 'images/sem-imagem.png'}" alt="${p.name}">
+          <h3>${p.name}</h3>
+          ${precoHTML}
+          <a href="https://wa.me/5555991407824?text=Olá!%20Tenho%20interesse%20em%20${encodeURIComponent(p.name)}"
+             class="btn" target="_blank">
+             <i class="fa-brands fa-whatsapp"></i> Comprar
+          </a>
+        `;
+        track.appendChild(card);
+      });
+    })
+    .catch(err => {
+      console.error('Erro ao carregar produtos:', err);
+      document.getElementById('no-results').style.display = 'block';
+    });
+  </script>
 </body>
 </html>
