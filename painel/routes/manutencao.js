@@ -6,17 +6,45 @@ const router = express.Router();
 function P(app){ return app.locals.paths; }
 
 /**
- * Gera o HTML de manutenção com engrenagens animadas (SVG + CSS).
- * Não depende de nenhuma lib externa e fica lindo no desktop e mobile.
+ * Converte um arquivo de imagem em data URI (base64).
+ * Retorna null se não existir.
+ */
+function readImageAsDataURI(absPath) {
+  try {
+    if (!fs.existsSync(absPath)) return null;
+    const ext = path.extname(absPath).toLowerCase();
+    const buf = fs.readFileSync(absPath);
+    let mime = 'image/png';
+    if (ext === '.svg' || ext === '.svgz') mime = 'image/svg+xml';
+    else if (ext === '.jpg' || ext === '.jpeg') mime = 'image/jpeg';
+    else if (ext === '.webp') mime = 'image/webp';
+    else if (ext === '.gif') mime = 'image/gif';
+    const b64 = buf.toString('base64');
+    return `data:${mime};base64,${b64}`;
+  } catch {
+    return null;
+  }
+}
+
+/**
+ * Gera o HTML de manutenção com engrenagens animadas (SVG + CSS) e LOGO.
+ * A logo é inline (data URI), então funciona local e no GitHub Pages.
  */
 function buildMaintenanceHTML({
   title = 'Voltamos em breve',
   subtitle = 'Estamos realizando atualizações para melhorar sua experiência.',
   detail = 'Normalmente concluímos em algumas horas. Obrigado pela compreensão!',
   brand = 'Quality Celulares',
-  whatsapp = '55991407824', // 👈 seu contato (somente números)
+  whatsapp = '55991407824', // seu contato (somente números)
+  logoDataURI = null,        // data:image/...;base64,...
 } = {}) {
   const waLink = `https://wa.me/${whatsapp}`;
+  const logoBlock = logoDataURI ? `
+    <div class="logo-wrap">
+      <img src="${logoDataURI}" alt="${brand} Logo" class="logo">
+    </div>
+  ` : '';
+
   return `<!doctype html>
 <html lang="pt-br">
 <head>
@@ -50,7 +78,13 @@ function buildMaintenanceHTML({
   .grid{ display:grid; grid-template-columns: 360px 1fr; gap:26px; align-items:center; }
   @media (max-width:860px){ .grid{ grid-template-columns:1fr; gap:20px; text-align:center } }
 
-  h1{ margin:0 0 6px; font-size: clamp(24px, 4vw, 34px); letter-spacing:.3px; }
+  .logo-wrap{ text-align:center; margin: 0 0 18px; }
+  .logo{
+    max-width: 420px; width: 90%; height: auto;
+    filter: drop-shadow(0 4px 18px rgba(0,0,0,.35));
+  }
+
+  h1{ margin:0 0 6px; font-size: clamp(24px, 4vw, 36px); letter-spacing:.3px; }
   p{ margin:6px 0; color:var(--muted); font-size:16px; }
   .btn{
     display:inline-flex; gap:10px; align-items:center; padding:11px 16px; border-radius:10px;
@@ -95,6 +129,7 @@ function buildMaintenanceHTML({
 </head>
 <body>
   <main class="wrap">
+    ${logoBlock}
     <div class="grid">
       <!-- Lado esquerdo: engrenagens -->
       <div class="stage" aria-hidden="true">
@@ -106,11 +141,7 @@ function buildMaintenanceHTML({
             </linearGradient>
           </defs>
           <circle cx="50" cy="50" r="32" fill="url(#lg1)" stroke="#0b1220" stroke-width="2"/>
-          <!-- dentes -->
-          ${Array.from({length:12}).map((_,i)=>{
-            const a = (i*30); // 360/12
-            return `<rect x="48" y="-2" width="4" height="14" rx="1" ry="1" fill="#d1d5db" transform="rotate(${a} 50 50) translate(0 12)"/>`
-          }).join('')}
+          ${Array.from({length:12}).map((_,i)=>`<rect x="48" y="-2" width="4" height="14" rx="1" ry="1" fill="#d1d5db" transform="rotate(${i*30} 50 50) translate(0 12)"/>`).join('')}
           <circle cx="50" cy="50" r="10" fill="#0b1220"/>
         </svg>
 
@@ -122,10 +153,7 @@ function buildMaintenanceHTML({
             </linearGradient>
           </defs>
           <circle cx="50" cy="50" r="24" fill="url(#lg2)" stroke="#0b1220" stroke-width="2"/>
-          ${Array.from({length:10}).map((_,i)=>{
-            const a = (i*36);
-            return `<rect x="49" y="-2" width="2" height="10" rx="1" ry="1" fill="#93c5fd" transform="rotate(${a} 50 50) translate(0 16)"/>`
-          }).join('')}
+          ${Array.from({length:10}).map((_,i)=>`<rect x="49" y="-2" width="2" height="10" rx="1" ry="1" fill="#93c5fd" transform="rotate(${i*36} 50 50) translate(0 16)"/>`).join('')}
           <circle cx="50" cy="50" r="8" fill="#0b1220"/>
         </svg>
 
@@ -137,10 +165,7 @@ function buildMaintenanceHTML({
             </linearGradient>
           </defs>
           <circle cx="50" cy="50" r="20" fill="url(#lg3)" stroke="#0b1220" stroke-width="2"/>
-          ${Array.from({length:8}).map((_,i)=>{
-            const a = (i*45);
-            return `<rect x="49" y="-2" width="2" height="8" rx="1" ry="1" fill="#6ee7b7" transform="rotate(${a} 50 50) translate(0 16)"/>`
-          }).join('')}
+          ${Array.from({length:8}).map((_,i)=>`<rect x="49" y="-2" width="2" height="8" rx="1" ry="1" fill="#6ee7b7" transform="rotate(${i*45} 50 50) translate(0 16)"/>`).join('')}
           <circle cx="50" cy="50" r="6" fill="#0b1220"/>
         </svg>
 
@@ -155,7 +180,7 @@ function buildMaintenanceHTML({
         <a class="btn" href="${waLink}" target="_blank" rel="noopener" aria-label="Falar no WhatsApp">
           🟢 Falar no WhatsApp
         </a>
-        <div class="footer">© ${new Date().getFullYear()} ${brand}. Todos os direitos reservados.</div>
+        <div class="footer">© Rede Quality Celulares. Todos os direitos reservados.</div>
       </div>
     </div>
   </main>
@@ -165,7 +190,7 @@ function buildMaintenanceHTML({
 
 // ===== ROTAS =====
 
-// Status (opcional): mostra se está ativo (usa sua view se existir)
+// Status (opcional)
 router.get('/', (req, res) => {
   const enabled = fs.existsSync(path.join(P(req.app).SITE_DIR, 'maintenance.flag'));
   try {
@@ -175,7 +200,7 @@ router.get('/', (req, res) => {
   }
 });
 
-// Ativar modo manutenção (gera flag + maintenance.html)
+// Ativar modo manutenção (gera flag + maintenance.html com LOGO)
 router.post('/ativar', (req, res) => {
   const { SITE_DIR } = P(req.app);
   const flagPath = path.join(SITE_DIR, 'maintenance.flag');
@@ -183,13 +208,20 @@ router.post('/ativar', (req, res) => {
 
   try {
     fs.writeFileSync(flagPath, String(Date.now()), 'utf-8');
+
+    // Lê a logo da pasta images (inline para funcionar local e no GitHub Pages)
+    const logoPath = path.join(SITE_DIR, 'images', 'logo.png');
+    const logoDataURI = readImageAsDataURI(logoPath);
+
     const html = buildMaintenanceHTML({
       title: 'Voltamos em breve',
       subtitle: 'Estamos realizando atualizações para melhorar sua experiência.',
       detail: 'Normalmente concluímos em algumas horas. Obrigado pela compreensão!',
       brand: 'Quality Celulares',
-      whatsapp: '55991407824', // 👈 seu número
+      whatsapp: '55991407824',
+      logoDataURI, // se não achar, simplesmente não mostra a logo
     });
+
     fs.writeFileSync(htmlPath, html, 'utf-8');
   } catch (e) {
     console.error('Falha ao ativar manutenção:', e);
