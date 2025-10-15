@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>teste – Quality Celulares</title>
+  <title>tttt2 – Quality Celulares</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="stylesheet" href="css/style.css"><!-- caminho relativo -->
 </head>
@@ -16,7 +16,8 @@
     </a>
 
     <!-- Navegação Desktop -->
-    <nav class="nav-desktop" id="nav-desktop"></nav>
+    <nav class="nav-desktop" id="nav-desktop"><a href="categoria_teste.html">teste</a>
+</nav>
 
     <!-- Botão Mobile -->
     <button id="menu-toggle" class="menu-toggle" aria-label="Abrir menu">
@@ -86,7 +87,7 @@ fetch("content/categories.json")
 </script>
 </body></html>
 <main class="main">
-  <h1 style="text-align:center;margin-top:30px;">teste</h1>
+  <h1 style="text-align:center;margin-top:30px;">tttt2</h1>
   <div id="produtos-container" class="products" style="margin-top:40px;"></div>
 </main>
 <footer class="footer bg-gray-900 text-gray-300 py-8 mt-12">
@@ -119,8 +120,8 @@ fetch('content/products.json')
   .then(r=>r.json())
   .then(data=>{
     const container=document.getElementById('produtos-container');
-    const slugLower='teste'.toLowerCase();
-    const nameLower='teste'.toLowerCase();
+    const slugLower='tttt2'.toLowerCase();
+    const nameLower='tttt2'.toLowerCase();
 
     const prods=(data.items||[]).filter(p=>{
       const cat=(p.category||'').toString().toLowerCase();
