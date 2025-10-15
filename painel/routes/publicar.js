@@ -6,12 +6,16 @@ import simpleGit from "simple-git";
 
 const router = express.Router();
 
-const REPO_DIR  = 'C:\\Site';                    // raiz do repo
+const REPO_DIR  = 'C:\\Site';                    // raiz do repo (onde você dá o push)
 const SITE_DIR  = 'C:\\Site\\Site_with_content'; // fonte do site
 const BACKUP_DIR= path.join(REPO_DIR, 'Backup');
 const BRANCH    = process.env.GIT_BRANCH || "main";
 const TZ        = 'America/Sao_Paulo';
 const KEEP_BACKUPS = 5;
+
+// ============ [ NOVO ]: caminhos de manutenção ============
+const MAINT_FLAG = path.join(SITE_DIR, 'maintenance.flag');
+const MAINT_HTML = path.join(SITE_DIR, 'maintenance.html');
 
 // utils
 function nowSP(){
@@ -93,13 +97,43 @@ async function gitCommitPush(){
 
 router.post("/", async (req,res)=>{
   try{
-    console.log("🚀 Publicação (ADD/UPDATE somente)…");
+    console.log("🚀 Publicação iniciada…");
     await criarBackupLocal();
     limparBackupsAntigos();
     registrarPublishJSON();
 
-    syncDirContents(SITE_DIR, REPO_DIR); // sem deletar nada
+    // =================== MODO MANUTENÇÃO ===================
+    if (fs.existsSync(MAINT_FLAG) && fs.existsSync(MAINT_HTML)) {
+      console.log("🛠️ Modo manutenção DETECTADO: publicando site mínimo…");
 
+      const html = fs.readFileSync(MAINT_HTML, "utf-8");
+
+      // 1) escreve/atualiza index.html e 404.html na raiz do repositório
+      fs.writeFileSync(path.join(REPO_DIR, "index.html"), html, "utf-8");
+      fs.writeFileSync(path.join(REPO_DIR, "404.html"),  html, "utf-8");
+
+      // 2) (opcional) bloquear indexação durante manutenção
+      fs.writeFileSync(path.join(REPO_DIR, "robots.txt"), "User-agent: *\nDisallow: /\n", "utf-8");
+
+      // 3) (opcional) preservar CNAME se você usa domínio custom
+      const cnameSite = path.join(SITE_DIR, "CNAME");
+      const cnameRepo = path.join(REPO_DIR, "CNAME");
+      try {
+        if (fs.existsSync(cnameSite)) {
+          fs.copyFileSync(cnameSite, cnameRepo);
+        }
+      } catch (e) {
+        console.warn("⚠️ CNAME: ", e.message);
+      }
+
+      await gitCommitPush();
+      console.log("✅ Publicação (modo manutenção) concluída.");
+      return res.redirect(`/?flash=${encodeURIComponent("✅ Publicado em modo manutenção (index & 404 atualizados).")}`);
+    }
+
+    // =================== PUBLICAÇÃO NORMAL ===================
+    console.log("🌐 Modo normal: sincronizando SITE_DIR → REPO_DIR (add/update)...");
+    syncDirContents(SITE_DIR, REPO_DIR); // sem deletar nada
     await gitCommitPush();
 
     console.log("✅ Publicação concluída (sem exclusões).");

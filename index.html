@@ -1,83 +1,135 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
+<!doctype html>
+<html lang="pt-br">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Quality Celulares</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Quality Celulares — Manutenção</title>
+<style>
+  :root{
+    --bg1:#0f172a; --bg2:#0b1220; --card:rgba(255,255,255,.04); --border:rgba(255,255,255,.08);
+    --acc:#22c55e; --muted:#94a3b8; --txt:#e2e8f0;
+  }
+  *{box-sizing:border-box}
+  html,body{height:100%}
+  body{
+    margin:0; min-height:100vh; color:var(--txt);
+    background:
+      radial-gradient(1000px 600px at 10% -10%, #1f2937 0%, transparent 60%),
+      radial-gradient(900px 600px at 120% 0%, #111827 0%, transparent 55%),
+      linear-gradient(180deg, var(--bg1), var(--bg2));
+    display:flex; align-items:center; justify-content:center; padding:24px;
+    font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, "Helvetica Neue", Arial, "Noto Sans";
+  }
+  .wrap{
+    width:min(980px, 96vw);
+    background: var(--card);
+    border:1px solid var(--border);
+    border-radius:22px; padding:28px; backdrop-filter: blur(8px);
+    box-shadow: 0 10px 30px rgba(0,0,0,.25);
+  }
+  .grid{ display:grid; grid-template-columns: 360px 1fr; gap:26px; align-items:center; }
+  @media (max-width:860px){ .grid{ grid-template-columns:1fr; gap:20px; text-align:center } }
 
-  <!-- FontAwesome + Swiper + CSS -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
-  <link rel="stylesheet" href="css/style.css" />
+  h1{ margin:0 0 6px; font-size: clamp(24px, 4vw, 34px); letter-spacing:.3px; }
+  p{ margin:6px 0; color:var(--muted); font-size:16px; }
+  .btn{
+    display:inline-flex; gap:10px; align-items:center; padding:11px 16px; border-radius:10px;
+    background: var(--acc); color:#06250f; text-decoration:none; font-weight:700; margin-top:16px;
+    box-shadow: 0 8px 20px rgba(34,197,94,.25); transition: transform .15s ease;
+  }
+  .btn:hover{ transform: translateY(-1px); }
+  .footer{ margin-top:18px; border-top:1px solid var(--border); padding-top:14px; color:#9aa4b2; font-size:13px; }
+
+  /* ===== Engrenagens ===== */
+  .stage{
+    position: relative;
+    aspect-ratio: 1.2 / 1; /* responsivo */
+    max-width: 360px; margin-inline:auto;
+  }
+  .gear{
+    position:absolute; inset:auto;
+    left:50%; top:50%;
+    transform: translate(-50%,-50%);
+    opacity:.95;
+    filter: drop-shadow(0 8px 20px rgba(0,0,0,.35));
+  }
+  svg{ display:block }
+  .g-1{ width:200px; height:200px; animation: spin 12s linear infinite; }
+  .g-2{ width:130px; height:130px; animation: spinRev 10s linear infinite; left:22%; top:26%; }
+  .g-3{ width:90px;  height:90px;  animation: pulse 2.8s ease-in-out infinite; right:10%; top:68%; left:auto; }
+  .core{
+    position:absolute; left:50%; top:50%; transform:translate(-50%,-50%);
+    width:84px; height:84px; border-radius:18px;
+    background: radial-gradient(120px 120px at 30% 30%, #22c55e 0%, #10b981 45%, rgba(16,185,129,.2) 100%);
+    border:1px solid #1b7e57;
+    display:flex; align-items:center; justify-content:center; color:#052b1d; font-weight:800; letter-spacing:.3px;
+  }
+
+  @keyframes spin { to { transform: translate(-50%,-50%) rotate(360deg); } }
+  @keyframes spinRev { to { transform: translate(-50%,-50%) rotate(-360deg); } }
+  @keyframes pulse {
+    0%,100%{ transform: translate(-50%,-50%) scale(1); }
+    50%{ transform: translate(-50%,-50%) scale(1.06); }
+  }
+</style>
 </head>
 <body>
-  <!-- Header -->
-  <div id="header"></div>
+  <main class="wrap">
+    <div class="grid">
+      <!-- Lado esquerdo: engrenagens -->
+      <div class="stage" aria-hidden="true">
+        <!-- Gear 1 -->
+        <svg class="gear g-1" viewBox="0 0 100 100" fill="none">
+          <defs>
+            <linearGradient id="lg1" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0" stop-color="#94a3b8"/><stop offset="1" stop-color="#e5e7eb"/>
+            </linearGradient>
+          </defs>
+          <circle cx="50" cy="50" r="32" fill="url(#lg1)" stroke="#0b1220" stroke-width="2"/>
+          <!-- dentes -->
+          <rect x="48" y="-2" width="4" height="14" rx="1" ry="1" fill="#d1d5db" transform="rotate(0 50 50) translate(0 12)"/><rect x="48" y="-2" width="4" height="14" rx="1" ry="1" fill="#d1d5db" transform="rotate(30 50 50) translate(0 12)"/><rect x="48" y="-2" width="4" height="14" rx="1" ry="1" fill="#d1d5db" transform="rotate(60 50 50) translate(0 12)"/><rect x="48" y="-2" width="4" height="14" rx="1" ry="1" fill="#d1d5db" transform="rotate(90 50 50) translate(0 12)"/><rect x="48" y="-2" width="4" height="14" rx="1" ry="1" fill="#d1d5db" transform="rotate(120 50 50) translate(0 12)"/><rect x="48" y="-2" width="4" height="14" rx="1" ry="1" fill="#d1d5db" transform="rotate(150 50 50) translate(0 12)"/><rect x="48" y="-2" width="4" height="14" rx="1" ry="1" fill="#d1d5db" transform="rotate(180 50 50) translate(0 12)"/><rect x="48" y="-2" width="4" height="14" rx="1" ry="1" fill="#d1d5db" transform="rotate(210 50 50) translate(0 12)"/><rect x="48" y="-2" width="4" height="14" rx="1" ry="1" fill="#d1d5db" transform="rotate(240 50 50) translate(0 12)"/><rect x="48" y="-2" width="4" height="14" rx="1" ry="1" fill="#d1d5db" transform="rotate(270 50 50) translate(0 12)"/><rect x="48" y="-2" width="4" height="14" rx="1" ry="1" fill="#d1d5db" transform="rotate(300 50 50) translate(0 12)"/><rect x="48" y="-2" width="4" height="14" rx="1" ry="1" fill="#d1d5db" transform="rotate(330 50 50) translate(0 12)"/>
+          <circle cx="50" cy="50" r="10" fill="#0b1220"/>
+        </svg>
 
-  <!-- Banner -->
-  <section class="banner">
-    <div class="swiper">
-      <div class="swiper-wrapper">
-        <div class="swiper-slide">
-          <picture>
-            <source media="(max-width: 767px)" srcset="images/banner1-mobile.png" />
-            <img src="images/banner1.png" alt="Banner 1" class="banner-img" />
-          </picture>
-        </div>
-        <div class="swiper-slide">
-          <picture>
-            <source media="(max-width: 767px)" srcset="images/banner2-mobile.png" />
-            <img src="images/banner2.png" alt="Banner 2" class="banner-img" />
-          </picture>
-        </div>
-        <div class="swiper-slide">
-          <picture>
-            <source media="(max-width: 767px)" srcset="images/banner3-mobile.png" />
-            <img src="images/banner3.png" alt="Banner 3" class="banner-img" />
-          </picture>
-        </div>
+        <!-- Gear 2 -->
+        <svg class="gear g-2" viewBox="0 0 100 100" fill="none">
+          <defs>
+            <linearGradient id="lg2" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0" stop-color="#60a5fa"/><stop offset="1" stop-color="#c7d2fe"/>
+            </linearGradient>
+          </defs>
+          <circle cx="50" cy="50" r="24" fill="url(#lg2)" stroke="#0b1220" stroke-width="2"/>
+          <rect x="49" y="-2" width="2" height="10" rx="1" ry="1" fill="#93c5fd" transform="rotate(0 50 50) translate(0 16)"/><rect x="49" y="-2" width="2" height="10" rx="1" ry="1" fill="#93c5fd" transform="rotate(36 50 50) translate(0 16)"/><rect x="49" y="-2" width="2" height="10" rx="1" ry="1" fill="#93c5fd" transform="rotate(72 50 50) translate(0 16)"/><rect x="49" y="-2" width="2" height="10" rx="1" ry="1" fill="#93c5fd" transform="rotate(108 50 50) translate(0 16)"/><rect x="49" y="-2" width="2" height="10" rx="1" ry="1" fill="#93c5fd" transform="rotate(144 50 50) translate(0 16)"/><rect x="49" y="-2" width="2" height="10" rx="1" ry="1" fill="#93c5fd" transform="rotate(180 50 50) translate(0 16)"/><rect x="49" y="-2" width="2" height="10" rx="1" ry="1" fill="#93c5fd" transform="rotate(216 50 50) translate(0 16)"/><rect x="49" y="-2" width="2" height="10" rx="1" ry="1" fill="#93c5fd" transform="rotate(252 50 50) translate(0 16)"/><rect x="49" y="-2" width="2" height="10" rx="1" ry="1" fill="#93c5fd" transform="rotate(288 50 50) translate(0 16)"/><rect x="49" y="-2" width="2" height="10" rx="1" ry="1" fill="#93c5fd" transform="rotate(324 50 50) translate(0 16)"/>
+          <circle cx="50" cy="50" r="8" fill="#0b1220"/>
+        </svg>
+
+        <!-- Gear 3 (decor) -->
+        <svg class="gear g-3" viewBox="0 0 100 100" fill="none">
+          <defs>
+            <linearGradient id="lg3" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0" stop-color="#34d399"/><stop offset="1" stop-color="#86efac"/>
+            </linearGradient>
+          </defs>
+          <circle cx="50" cy="50" r="20" fill="url(#lg3)" stroke="#0b1220" stroke-width="2"/>
+          <rect x="49" y="-2" width="2" height="8" rx="1" ry="1" fill="#6ee7b7" transform="rotate(0 50 50) translate(0 16)"/><rect x="49" y="-2" width="2" height="8" rx="1" ry="1" fill="#6ee7b7" transform="rotate(45 50 50) translate(0 16)"/><rect x="49" y="-2" width="2" height="8" rx="1" ry="1" fill="#6ee7b7" transform="rotate(90 50 50) translate(0 16)"/><rect x="49" y="-2" width="2" height="8" rx="1" ry="1" fill="#6ee7b7" transform="rotate(135 50 50) translate(0 16)"/><rect x="49" y="-2" width="2" height="8" rx="1" ry="1" fill="#6ee7b7" transform="rotate(180 50 50) translate(0 16)"/><rect x="49" y="-2" width="2" height="8" rx="1" ry="1" fill="#6ee7b7" transform="rotate(225 50 50) translate(0 16)"/><rect x="49" y="-2" width="2" height="8" rx="1" ry="1" fill="#6ee7b7" transform="rotate(270 50 50) translate(0 16)"/><rect x="49" y="-2" width="2" height="8" rx="1" ry="1" fill="#6ee7b7" transform="rotate(315 50 50) translate(0 16)"/>
+          <circle cx="50" cy="50" r="6" fill="#0b1220"/>
+        </svg>
+
+        <div class="core">⚙️</div>
       </div>
-      <!-- Botões do carrossel -->
-      <div class="swiper-button-next"></div>
-      <div class="swiper-button-prev"></div>
-    </div>
-  </section>
 
-  <!-- Produtos -->
-  <main class="main">
-    <h2 id="smartphones" style="text-align:center; margin-top: 40px;">Smartphones</h2>
-    <div id="products" class="products">
-      <div class="product-card">
-        <img src="images/pocox7pro.png" alt="Poco X7 Pro" />
-        <h3>Poco X7 Pro</h3>
-        <a href="https://wa.me/5555991407824?text=Olá%20vim%20através%20do%20site"
-           class="btn-whatsapp" target="_blank">
-          <i class="fa-brands fa-whatsapp"></i> Comprar no WhatsApp
+      <!-- Lado direito: mensagens -->
+      <div>
+        <h1>Voltamos em breve</h1>
+        <p>Estamos realizando atualizações para melhorar sua experiência.</p>
+        <p>Normalmente concluímos em algumas horas. Obrigado pela compreensão!</p>
+        <a class="btn" href="https://wa.me/55991407824" target="_blank" rel="noopener" aria-label="Falar no WhatsApp">
+          🟢 Falar no WhatsApp
         </a>
-      </div>
-      <div class="product-card">
-        <img src="images/redmi14c.png" alt="Redmi 14C" />
-        <h3>Redmi 14C</h3>
-        <a href="https://wa.me/5555991407824?text=Olá%20vim%20através%20do%20site"
-           class="btn-whatsapp" target="_blank">
-          <i class="fa-brands fa-whatsapp"></i> Comprar no WhatsApp
-        </a>
+        <div class="footer">© 2025 Quality Celulares. Todos os direitos reservados.</div>
       </div>
     </div>
-    <p id="no-results" class="em-breve"
-       style="display:none; text-align:center; margin-top:20px;">
-      Nenhum produto encontrado.
-    </p>
-
-    <h2 id="acessorios" style="text-align:center; margin-top: 60px;">Acessórios</h2>
-    <p class="em-breve" style="text-align:center;">Em breve...</p>
   </main>
-
-  <!-- Footer -->
-  <div id="footer"></div>
-
-  <!-- Scripts -->
-  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-  <script src="js/main.js"></script>
 </body>
 </html>

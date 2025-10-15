@@ -3,6 +3,7 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 import bodyParser from 'body-parser';
 import ejsMate from 'ejs-mate';
+import fs from 'fs'; // 👈 necessário para checar o flag
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -63,8 +64,35 @@ app.use('/css', cssRouter);
 app.use('/banners', bannersRouter);
 app.use('/aparencia', aparenciaRouter);
 app.use('/estilos', estilosRouter);
-app.use('/site', sitePreviewRouter);
 
+// ===== MODO MANUTENÇÃO: intercepta TUDO em /site =====
+const MAINT_FLAG = path.join(SITE_DIR, 'maintenance.flag');
+const MAINT_HTML = path.join(SITE_DIR, 'maintenance.html');
+
+/**
+ * Este middleware vem ANTES de qualquer outro handler de /site.
+ * Se o flag existir, qualquer URL de /site responderá com maintenance.html,
+ * impedindo a navegação pelas abas do site.
+ *
+ * Se quiser responder como 503 (Service Unavailable) para SEO/CDN,
+ * descomente as duas linhas de status e header abaixo.
+ */
+app.use('/site', (req, res, next) => {
+  try {
+    if (fs.existsSync(MAINT_FLAG) && fs.existsSync(MAINT_HTML)) {
+      // res.status(503); // opcional: HTTP 503
+      // res.set('Retry-After', '3600'); // opcional: 1h
+      res.set('Cache-Control', 'no-store, no-cache, must-revalidate');
+      return res.sendFile(MAINT_HTML);
+    }
+  } catch (_) {
+    // se algo falhar, segue fluxo normal
+  }
+  return next();
+});
+
+// Se NÃO estiver em manutenção, segue para o preview/estático do site
+app.use('/site', sitePreviewRouter);
 app.use('/site', express.static(SITE_DIR));
 
 app.listen(PORT, () =>
