@@ -1,14 +1,21 @@
-<html><head></head><body><header class="header">
+<header class="header">
   <div class="header-container">
     <!-- Logo -->
     <a href="index.html" class="logo-wrapper">
-      <img src="images/logo.png" alt="Quality Celulares" class="logo">
+      <img src="images/logo.png" alt="Quality Celulares" class="logo" />
     </a>
 
     <!-- Navegação Desktop -->
-    <nav class="nav-desktop"><a href="categoria_smartphone.html">smartphone</a>
-<a href="categoria_teste.html">teste</a>
-</nav>
+    <nav class="nav-desktop" id="nav-desktop">
+      <a href="index.html">Início</a>
+      <!-- categorias serão injetadas aqui -->
+      <div class="search-wrapper">
+        <input type="text" id="search-input" placeholder="Buscar..." />
+        <button id="search-button" aria-label="Buscar">
+          <i class="fa fa-search"></i>
+        </button>
+      </div>
+    </nav>
 
     <!-- Botão Mobile -->
     <button id="menu-toggle" class="menu-toggle" aria-label="Abrir menu">
@@ -20,7 +27,7 @@
   <div id="mobile-menu" class="mobile-menu" aria-hidden="true">
     <div class="mobile-menu-header">
       <a href="index.html" class="logo-wrapper">
-        <img src="images/logo.png" alt="Quality Celulares" class="logo">
+        <img src="images/logo.png" alt="Quality Celulares" class="logo" />
       </a>
       <button id="menu-close" class="menu-close" aria-label="Fechar menu">
         <i class="fa-solid fa-xmark"></i>
@@ -29,21 +36,50 @@
 
     <!-- Campo de busca Mobile -->
     <div class="search-wrapper-mobile">
-      <input type="text" id="search-input-mobile" placeholder="Buscar...">
+      <input type="text" id="search-input-mobile" placeholder="Buscar..." />
       <button id="search-button-mobile" aria-label="Buscar">
         <i class="fa fa-search"></i>
       </button>
     </div>
 
     <!-- Navegação Mobile -->
-    <nav class="mobile-nav">
+    <nav class="mobile-nav" id="nav-mobile">
       <a href="index.html">Início</a>
-      <a href="index.html#smartphones">Smartphones</a>
-      <a href="index.html#acessorios">Acessórios</a>
+      <!-- categorias serão injetadas aqui -->
     </nav>
   </div>
 
   <!-- Overlay (fecha o menu ao clicar fora) -->
   <div id="menu-overlay" class="menu-overlay"></div>
 </header>
-</body></html>
+
+<script>
+/* === Carregar categorias dinâmicas do arquivo JSON === */
+fetch("content/categories.json")
+  .then((r) => r.json())
+  .then((data) => {
+    const categorias = data.items || [];
+    const navDesktop = document.getElementById("nav-desktop");
+    const navMobile = document.getElementById("nav-mobile");
+
+    // Remove links antigos se existirem
+    navDesktop.querySelectorAll("a.cat-link").forEach((a) => a.remove());
+    navMobile.querySelectorAll("a.cat-link").forEach((a) => a.remove());
+
+    // Insere novas categorias
+    categorias.forEach((cat) => {
+      const linkD = document.createElement("a");
+      linkD.href = `categoria-${cat.slug}.html`;
+      linkD.textContent = cat.name;
+      linkD.className = "cat-link";
+      navDesktop.insertBefore(linkD, navDesktop.querySelector(".search-wrapper"));
+
+      const linkM = document.createElement("a");
+      linkM.href = `categoria-${cat.slug}.html`;
+      linkM.textContent = cat.name;
+      linkM.className = "cat-link";
+      navMobile.appendChild(linkM);
+    });
+  })
+  .catch((err) => console.error("Erro ao carregar categorias:", err));
+</script>
