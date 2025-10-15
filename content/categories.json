@@ -1,10 +1,16 @@
 {
   "items": [
     {
-      "id": 1760564811233,
-      "name": "Smartphones",
-      "slug": "smartphones",
+      "id": 1760568939008,
+      "name": "smartphone",
+      "slug": "smartphone",
       "order": 1
+    },
+    {
+      "id": 1760568943554,
+      "name": "teste",
+      "slug": "teste",
+      "order": 2
     }
   ]
 }

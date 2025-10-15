@@ -65,64 +65,74 @@
   <!-- Scripts -->
   <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
   <script>
-  // === Swiper Banners ===
-  new Swiper('.swiper', {
-    loop: true,
-    autoplay: { delay: 4000 },
-    navigation: {
-      nextEl: '.swiper-button-next',
-      prevEl: '.swiper-button-prev',
-    },
-  });
-
   // === Scroll do carrossel ===
   function scrollCarousel(dir) {
     const track = document.getElementById('carousel1');
     track.scrollBy({ left: dir * 300, behavior: 'smooth' });
   }
 
-  // === Header e Footer dinâmicos ===
-  fetch('header.html').then(r => r.text()).then(t => document.getElementById('header').innerHTML = t);
-  fetch('footer.html').then(r => r.text()).then(t => document.getElementById('footer').innerHTML = t);
+  // === Carregar Header e Footer ===
+  Promise.all([
+    fetch('header.html').then(r => r.text()),
+    fetch('footer.html').then(r => r.text())
+  ]).then(([header, footer]) => {
+    document.getElementById('header').innerHTML = header;
+    document.getElementById('footer').innerHTML = footer;
 
-  // === Carregar produtos da vitrine ===
-  fetch('content/products.json')
-    .then(r => r.json())
-    .then(data => {
-      const track = document.getElementById('carousel1');
-      const produtos = (data.items || []).filter(p =>
-        p.active !== false && p.featured === true
-      );
+    // Carrega o script principal (menu, overlay, etc.)
+    const mainScript = document.createElement('script');
+    mainScript.src = 'js/main.js';
+    document.body.appendChild(mainScript);
 
-      if (produtos.length === 0) {
-        document.getElementById('no-results').style.display = 'block';
-        return;
-      }
-
-      produtos.forEach(p => {
-        const card = document.createElement('div');
-        card.className = 'produto-card';
-
-        const precoHTML = (p.showPrice === false)
-          ? ''
-          : `<p>R$ ${(Number(p.price) || 0).toFixed(2).replace('.', ',')}</p>`;
-
-        card.innerHTML = `
-          <img src="${p.image || 'images/sem-imagem.png'}" alt="${p.name}">
-          <h3>${p.name}</h3>
-          ${precoHTML}
-          <a href="https://wa.me/5555991407824?text=Olá!%20Tenho%20interesse%20em%20${encodeURIComponent(p.name)}"
-             class="btn" target="_blank">
-             <i class="fa-brands fa-whatsapp"></i> Comprar
-          </a>
-        `;
-        track.appendChild(card);
-      });
-    })
-    .catch(err => {
-      console.error('Erro ao carregar produtos:', err);
-      document.getElementById('no-results').style.display = 'block';
+    // === Swiper Banners (só depois que o header já estiver no DOM) ===
+    new Swiper('.swiper', {
+      loop: true,
+      autoplay: { delay: 4000 },
+      navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+      },
     });
+
+    // === Carregar produtos da vitrine ===
+    fetch('content/products.json')
+      .then(r => r.json())
+      .then(data => {
+        const track = document.getElementById('carousel1');
+        const produtos = (data.items || []).filter(p =>
+          p.active !== false && p.featured === true
+        );
+
+        if (produtos.length === 0) {
+          document.getElementById('no-results').style.display = 'block';
+          return;
+        }
+
+        produtos.forEach(p => {
+          const card = document.createElement('div');
+          card.className = 'produto-card';
+
+          const precoHTML = (p.showPrice === false)
+            ? ''
+            : `<p>R$ ${(Number(p.price) || 0).toFixed(2).replace('.', ',')}</p>`;
+
+          card.innerHTML = `
+            <img src="${p.image || 'images/sem-imagem.png'}" alt="${p.name}">
+            <h3>${p.name}</h3>
+            ${precoHTML}
+            <a href="https://wa.me/5555991407824?text=Olá!%20Tenho%20interesse%20em%20${encodeURIComponent(p.name)}"
+               class="btn" target="_blank">
+               <i class="fa-brands fa-whatsapp"></i> Comprar
+            </a>
+          `;
+          track.appendChild(card);
+        });
+      })
+      .catch(err => {
+        console.error('Erro ao carregar produtos:', err);
+        document.getElementById('no-results').style.display = 'block';
+      });
+  });
   </script>
 </body>
 </html>
