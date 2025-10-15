@@ -71,20 +71,9 @@
     track.scrollBy({ left: dir * 300, behavior: 'smooth' });
   }
 
-  // === Carregar Header e Footer ===
-  Promise.all([
-    fetch('header.html').then(r => r.text()),
-    fetch('footer.html').then(r => r.text())
-  ]).then(([header, footer]) => {
-    document.getElementById('header').innerHTML = header;
-    document.getElementById('footer').innerHTML = footer;
-
-    // Carrega o script principal (menu, overlay, etc.)
-    const mainScript = document.createElement('script');
-    mainScript.src = 'js/main.js';
-    document.body.appendChild(mainScript);
-
-    // === Swiper Banners (só depois que o header já estiver no DOM) ===
+  // === Inicialização principal ===
+  function initPage() {
+    // Swiper banners
     new Swiper('.swiper', {
       loop: true,
       autoplay: { delay: 4000 },
@@ -94,7 +83,7 @@
       },
     });
 
-    // === Carregar produtos da vitrine ===
+    // Produtos da vitrine
     fetch('content/products.json')
       .then(r => r.json())
       .then(data => {
@@ -111,11 +100,9 @@
         produtos.forEach(p => {
           const card = document.createElement('div');
           card.className = 'produto-card';
-
           const precoHTML = (p.showPrice === false)
             ? ''
             : `<p>R$ ${(Number(p.price) || 0).toFixed(2).replace('.', ',')}</p>`;
-
           card.innerHTML = `
             <img src="${p.image || 'images/sem-imagem.png'}" alt="${p.name}">
             <h3>${p.name}</h3>
@@ -132,6 +119,22 @@
         console.error('Erro ao carregar produtos:', err);
         document.getElementById('no-results').style.display = 'block';
       });
+  }
+
+  // === Header/Footer + main.js carregado de forma segura ===
+  Promise.all([
+    fetch('header.html').then(r => r.text()),
+    fetch('footer.html').then(r => r.text())
+  ]).then(([header, footer]) => {
+    document.getElementById('header').innerHTML = header;
+    document.getElementById('footer').innerHTML = footer;
+
+    // carrega main.js e só inicia página após ele terminar de carregar
+    const script = document.createElement('script');
+    script.src = 'js/main.js';
+    script.defer = true;
+    script.onload = initPage;
+    document.body.appendChild(script);
   });
   </script>
 </body>
