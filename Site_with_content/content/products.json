@@ -5,8 +5,8 @@
       "name": "dfasdffds",
       "price": null,
       "image": "images/pocox7pro.png",
-      "category": "abab",
-      "showPrice": false,
+      "category": "qweqwe",
+      "showPrice": true,
       "featured": true,
       "active": true
     },
@@ -15,7 +15,17 @@
       "name": "dfasdfafs",
       "price": null,
       "image": "images/redmi14c.png",
-      "category": "vvvvv",
+      "category": "qqqqqqqqqq",
+      "showPrice": true,
+      "featured": true,
+      "active": true
+    },
+    {
+      "id": 1760571441122,
+      "name": "aaaaa",
+      "price": null,
+      "image": "",
+      "category": "",
       "showPrice": true,
       "featured": true,
       "active": true
