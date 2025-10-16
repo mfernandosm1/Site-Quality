@@ -145,7 +145,7 @@ body {
   border: none;
   padding: 8px 10px;
   outline: none;
-  font-size: 16px;
+  font-size: 16px; /* evita zoom no iOS/Android */
 }
 .search-wrapper-mobile button {
   background: #c90000;
@@ -191,44 +191,40 @@ body {
 }
 
 /* -------------------
-   Produtos (páginas de categoria)
+   Produtos
 --------------------*/
 .products {
   display: flex;
   flex-wrap: wrap;
-  gap: 30px;
+  gap: 20px;
   justify-content: center;
-  padding: 30px 20px;
+  padding: 20px 10px;
 }
 .product-card {
-  flex: 1 1 340px;
-  max-width: 380px;
+  flex: 1 1 300px;
+  max-width: 300px;
   text-align: center;
   border: 1px solid #ddd;
-  border-radius: 10px;
-  padding: 22px;
+  border-radius: 6px;
+  padding: 16px;
   background: #fafafa;
-  transition: box-shadow 0.25s ease, transform 0.25s ease;
+  transition: box-shadow 0.2s ease;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
-.product-card:hover {
-  box-shadow: 0 4px 16px rgba(0,0,0,0.15);
-  transform: translateY(-4px);
-}
+.product-card:hover { box-shadow: 0 0 10px rgba(0,0,0,0.15); }
 .product-card img {
   width: 100%;
   height: auto;
-  max-height: 380px;
+  max-height: 320px;
   object-fit: contain;
-  margin-bottom: 15px;
+  margin-bottom: 10px;
 }
-.product-card h3 { font-size: 20px; margin-bottom: 10px; color: #111; }
-.product-card p { font-size: 17px; font-weight: 600; margin-bottom: 16px; color: #222; }
+.product-card h3 { font-size: 18px; margin-bottom: 10px; }
 .product-card .btn-whatsapp {
-  font-size: 15px;
-  padding: 10px 16px;
+  font-size: 14px;
+  padding: 8px 12px;
   width: 100%;
   justify-content: center;
   display: inline-flex;
@@ -236,24 +232,19 @@ body {
   gap: 8px;
   background-color: #25d366;
   color: white;
-  border-radius: 6px;
+  border-radius: 4px;
   text-decoration: none;
-  transition: background-color 0.3s ease, transform 0.2s ease;
+  transition: background-color 0.3s ease;
 }
-.product-card .btn-whatsapp:hover {
-  background-color: #128c4a;
-  transform: scale(1.03);
-}
+.product-card .btn-whatsapp:hover { background-color: #128c4a; }
 .em-breve {
   color: #999;
   font-style: italic;
-  font-size: 17px;
-  text-align: center;
-  margin-top: 20px;
+  font-size: 16px;
 }
 
 /* -------------------
-   Footer (restaurado)
+   Footer (original restaurado)
 --------------------*/
 .footer {
   background-color: #111;
@@ -306,9 +297,18 @@ body {
   text-decoration: none !important;
   line-height: 1;
 }
+.footer-socials a i {
+  text-decoration: none !important;
+  line-height: 1;
+  display: block;
+}
 .footer-socials a:hover {
   transform: scale(1.12);
   box-shadow: 0 6px 18px rgba(0,0,0,.45);
+  text-decoration: none !important;
+}
+.footer-socials a:focus,
+.footer-socials a:active {
   text-decoration: none !important;
 }
 .footer-socials a.facebook:hover { background-color: #3b5998; }
@@ -339,122 +339,78 @@ body {
     align-items: center;
     text-align: left;
   }
-  .footer-links   { flex: 1; justify-content: flex-start; }
-  .footer-copy    { flex: 1; text-align: center; }
-  .footer-socials { flex: 1; justify-content: flex-end; gap: 20px; }
+  .footer-links   { flex: 1; justify-content: flex-start; order: 0; }
+  .footer-copy    { flex: 1; text-align: center; order: 0; }
+  .footer-socials { flex: 1; justify-content: flex-end; gap: 20px; order: 0; }
 }
 
 /* -------------------
-   Carrossel de produtos (vitrine index)
+   Ajustes mobile para cards e produtos
 --------------------*/
-.carousel-container {
-  position: relative;
-  width: 100%;
-  overflow: hidden;
-  padding: 40px 20px;
-  box-sizing: border-box;
-}
-.carousel-track {
-  display: flex;
-  overflow-x: auto;
-  scroll-behavior: smooth;
-  gap: 32px;
-  padding: 10px;
-}
-.carousel-track::-webkit-scrollbar { display: none; }
-.carousel-item {
-  flex: 0 0 auto;
-  display: flex;
-  justify-content: center;
-}
-.produto-card {
-  background: #fff;
-  border: 1px solid #ddd;
-  border-radius: 14px;
-  text-align: center;
-  padding: 22px;
-  width: 300px;
-  box-shadow: 0 6px 14px rgba(0,0,0,0.1);
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
-}
-.produto-card:hover {
-  transform: scale(1.05);
-  box-shadow: 0 8px 22px rgba(0,0,0,0.15);
-}
-.produto-card img {
-  max-width: 100%;
-  height: 250px;
-  object-fit: contain;
-  margin-bottom: 15px;
-}
-.produto-card h3 {
-  font-size: 19px;
-  font-weight: 600;
-  color: #111;
-  margin: 6px 0;
-}
-.produto-card p {
-  font-size: 17px;
-  font-weight: 500;
-  color: #333;
-  margin: 8px 0;
-}
-.produto-card .btn {
-  background-color: #25d366;
-  color: white;
-  text-decoration: none;
-  padding: 12px 14px;
-  border-radius: 6px;
-  font-size: 15px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 6px;
-  width: 100%;
-  transition: background-color 0.3s ease, transform 0.2s ease;
-}
-.produto-card .btn:hover {
-  background-color: #128c4a;
-  transform: scale(1.03);
-}
-.carousel-arrow {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  background: #c90000;
-  color: white;
-  border: none;
-  font-size: 24px;
-  cursor: pointer;
-  padding: 12px 14px;
-  border-radius: 50%;
-  opacity: 0.85;
-  z-index: 10;
-}
-.carousel-arrow.left { left: 10px; }
-.carousel-arrow.right { right: 10px; }
-.carousel-arrow:hover { opacity: 1; }
+@media (max-width: 767px) {
+  /* Cards da vitrine index */
+  .carousel-item {
+    flex: 0 0 60vw !important;
+    scroll-snap-align: center;
+  }
 
-/* 📱 Mobile ajustes finais */
-@media only screen and (max-width: 767px) {
-  .carousel-item { flex: 0 0 92vw !important; }
   .produto-card {
     width: 100% !important;
-    max-width: 100% !important;
-    padding: 22px 18px !important;
-    border-radius: 14px;
+    max-width: 60vw !important;
+    padding: 18px 14px !important;
+    border-radius: 12px;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.08);
   }
+
   .produto-card img {
     width: 100% !important;
-    height: 310px !important;
+    max-height: 220px !important;
     object-fit: contain !important;
-    margin-bottom: 18px;
+    margin-bottom: 12px !important;
   }
-  .produto-card h3 { font-size: 18px; margin-bottom: 6px; }
-  .produto-card p { font-size: 16px; margin-bottom: 10px; }
-  .produto-card .btn { font-size: 16px; padding: 12px; }
+
+  .produto-card h3 {
+    font-size: 16px !important;
+    margin-bottom: 6px !important;
+  }
+
+  .produto-card p {
+    font-size: 15px !important;
+    margin-bottom: 8px !important;
+  }
+
+  .produto-card .btn {
+    font-size: 15px !important;
+    padding: 10px !important;
+  }
+
+  /* Cards das páginas de produtos (categoria) */
+  .product-card {
+    flex: 1 1 60vw !important;
+    max-width: 60vw !important;
+    margin: 0 auto !important;
+    padding: 18px 12px !important;
+    border-radius: 10px !important;
+  }
+
+  .product-card img {
+    width: 100% !important;
+    max-height: 220px !important;
+    object-fit: contain !important;
+    margin-bottom: 12px !important;
+  }
+
+  .product-card h3 {
+    font-size: 16px !important;
+    margin-bottom: 8px !important;
+  }
+
+  .product-card p {
+    font-size: 15px !important;
+  }
+
+  .product-card .btn-whatsapp {
+    font-size: 14px !important;
+    padding: 10px !important;
+  }
 }
