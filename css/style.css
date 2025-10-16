@@ -106,7 +106,9 @@ body {
   transform: translateX(-100%);
   transition: transform 0.3s ease;
 }
-.mobile-menu.open { transform: translateX(0); }
+.mobile-menu.open {
+  transform: translateX(0);
+}
 .mobile-menu-header {
   display: flex;
   align-items: center;
@@ -244,7 +246,7 @@ body {
 }
 
 /* -------------------
-   Footer (original restaurado)
+   Footer (padronizado + mobile OK)
 --------------------*/
 .footer {
   background-color: #111;
@@ -260,6 +262,8 @@ body {
   gap: 20px;
   text-align: center;
 }
+
+/* Links */
 .footer-links {
   order: 1;
   display: flex;
@@ -274,6 +278,8 @@ body {
   transition: color .25s ease;
 }
 .footer-links a:hover { color: #c90000; }
+
+/* Ícones sociais */
 .footer-socials {
   order: 2;
   display: flex;
@@ -311,6 +317,8 @@ body {
 .footer-socials a:active {
   text-decoration: none !important;
 }
+
+/* cores hover */
 .footer-socials a.facebook:hover { background-color: #3b5998; }
 .footer-socials a.instagram:hover {
   background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fd5949 45%, #d6249f 60%, #285aeb 90%);
@@ -318,6 +326,8 @@ body {
 .footer-socials a.tiktok:hover { background-color: #000; }
 .footer-socials a.whatsapp:hover { background-color: #25d366; }
 .footer-socials a.location:hover { background-color: #c90000; }
+
+/* Copyright */
 .footer-copy {
   order: 3;
   font-size: 14px;
@@ -330,8 +340,15 @@ body {
   display: inline-block;
   max-width: 100%;
 }
-.footer-copy span.nobreak { white-space: nowrap; }
-.footer-copy br { display: block; margin-top: 4px; }
+.footer-copy span.nobreak {
+  white-space: nowrap;
+}
+.footer-copy br {
+  display: block;
+  margin-top: 4px;
+}
+
+/* Desktop: 3 colunas */
 @media (min-width: 768px) {
   .footer-container {
     flex-direction: row;
@@ -342,75 +359,4 @@ body {
   .footer-links   { flex: 1; justify-content: flex-start; order: 0; }
   .footer-copy    { flex: 1; text-align: center; order: 0; }
   .footer-socials { flex: 1; justify-content: flex-end; gap: 20px; order: 0; }
-}
-
-/* -------------------
-   Ajustes mobile para cards e produtos
---------------------*/
-@media (max-width: 767px) {
-  /* Cards da vitrine index */
-  .carousel-item {
-    flex: 0 0 60vw !important;
-    scroll-snap-align: center;
-  }
-
-  .produto-card {
-    width: 100% !important;
-    max-width: 60vw !important;
-    padding: 18px 14px !important;
-    border-radius: 12px;
-    box-shadow: 0 3px 8px rgba(0,0,0,0.08);
-  }
-
-  .produto-card img {
-    width: 100% !important;
-    max-height: 220px !important;
-    object-fit: contain !important;
-    margin-bottom: 12px !important;
-  }
-
-  .produto-card h3 {
-    font-size: 16px !important;
-    margin-bottom: 6px !important;
-  }
-
-  .produto-card p {
-    font-size: 15px !important;
-    margin-bottom: 8px !important;
-  }
-
-  .produto-card .btn {
-    font-size: 15px !important;
-    padding: 10px !important;
-  }
-
-  /* Cards das páginas de produtos (categoria) */
-  .product-card {
-    flex: 1 1 60vw !important;
-    max-width: 60vw !important;
-    margin: 0 auto !important;
-    padding: 18px 12px !important;
-    border-radius: 10px !important;
-  }
-
-  .product-card img {
-    width: 100% !important;
-    max-height: 220px !important;
-    object-fit: contain !important;
-    margin-bottom: 12px !important;
-  }
-
-  .product-card h3 {
-    font-size: 16px !important;
-    margin-bottom: 8px !important;
-  }
-
-  .product-card p {
-    font-size: 15px !important;
-  }
-
-  .product-card .btn-whatsapp {
-    font-size: 14px !important;
-    padding: 10px !important;
-  }
 }
