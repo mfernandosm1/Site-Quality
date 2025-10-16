@@ -163,7 +163,7 @@ export function applyFormasFields(html, fields){
    🆕 NOVAS FUNÇÕES PARA CATEGORIAS (Painel V7.3)
 ========================================================= */
 
-// === Cria uma nova página de categoria segura ===
+// === Cria uma nova página de categoria segura (corrigida p/ hífen) ===
 export function generateCategoryPage(name, slug, siteDir) {
   const header = readFileUtf8(path.join(siteDir, 'header.html'));
   const footer = readFileUtf8(path.join(siteDir, 'footer.html'));
@@ -223,7 +223,7 @@ fetch('content/products.json')
   writeFileUtf8(target, html);
 }
 
-// === Atualiza o menu principal com as categorias existentes (corrigido) ===
+// === Atualiza o menu principal com as categorias existentes ===
 export function updateHeaderMenu(categories, siteDir) {
   const headerPath = path.join(siteDir, 'header.html');
   let headerHtml = readFileUtf8(headerPath);
@@ -235,7 +235,6 @@ export function updateHeaderMenu(categories, siteDir) {
 
   if (!navDesktop.length || !navMobile.length) return;
 
-  // Remove apenas links antigos de categoria
   navDesktop.find('a.cat-link').remove();
   navMobile.find('a.cat-link').remove();
 
@@ -258,4 +257,28 @@ export function updateHeaderMenu(categories, siteDir) {
 
   writeFileUtf8(headerPath, $.html());
   console.log(`✅ Header atualizado com ${sorted.length} categorias.`);
+}
+
+/* =========================================================
+   🧩 EXTRA: Conversor de arquivos antigos (categoria_ → categoria-)
+========================================================= */
+export function convertOldCategoryFiles(siteDir) {
+  const files = fs.readdirSync(siteDir).filter(f => /^categoria_/.test(f));
+  let converted = 0;
+
+  for (const file of files) {
+    const oldPath = path.join(siteDir, file);
+    const newName = file.replace(/^categoria_/, 'categoria-');
+    const newPath = path.join(siteDir, newName);
+
+    const html = readFileUtf8(oldPath).replace(/categoria_/g, 'categoria-');
+    writeFileUtf8(newPath, html);
+    fs.unlinkSync(oldPath);
+    converted++;
+  }
+
+  if (converted > 0)
+    console.log(`🔄 Convertidos ${converted} arquivos de categoria para o novo padrão.`);
+  else
+    console.log('✅ Nenhum arquivo antigo encontrado.');
 }

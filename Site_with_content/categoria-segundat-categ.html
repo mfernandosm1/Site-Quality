@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>segundat categ – Quality Celulares</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<html><head></head><body><header class="header">
+  <div class="header-container">
+    <!-- Logo -->
+    <a href="index.html" class="logo-wrapper">
+      <img src="images/logo.png" alt="Quality Celulares" class="logo">
+    </a>
+
+    <!-- Navegação Desktop -->
+    <nav class="nav-desktop" id="nav-desktop">
+      <a href="index.html">Início</a>
+      <!-- categorias serão injetadas aqui -->
+      <a href="categoria-nova-categ.html" class="cat-link">nova categ</a><div class="search-wrapper">
+        <input type="text" id="search-input" placeholder="Buscar...">
+        <button id="search-button" aria-label="Buscar">
+          <i class="fa fa-search"></i>
+        </button>
+      </div>
+    </nav>
+
+    <!-- Botão Mobile -->
+    <button id="menu-toggle" class="menu-toggle" aria-label="Abrir menu">
+      <i class="fa-solid fa-bars"></i>
+    </button>
+  </div>
+
+  <!-- Menu Mobile -->
+  <div id="mobile-menu" class="mobile-menu" aria-hidden="true">
+    <div class="mobile-menu-header">
+      <a href="index.html" class="logo-wrapper">
+        <img src="images/logo.png" alt="Quality Celulares" class="logo">
+      </a>
+      <button id="menu-close" class="menu-close" aria-label="Fechar menu">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+    </div>
+
+    <!-- Busca Mobile -->
+    <div class="search-wrapper-mobile">
+      <input type="text" id="search-input-mobile" placeholder="Buscar...">
+      <button id="search-button-mobile" aria-label="Buscar">
+        <i class="fa fa-search"></i>
+      </button>
+    </div>
+
+    <!-- Navegação Mobile -->
+    <nav class="mobile-nav" id="nav-mobile">
+      <a href="index.html">Início</a>
+      <!-- categorias serão injetadas aqui -->
+    <a href="categoria-nova-categ.html" class="cat-link">nova categ</a></nav>
+  </div>
+
+  <!-- Overlay -->
+  <div id="menu-overlay" class="menu-overlay"></div>
+</header>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  fetch("/content/categories.json")
+    .then(r => r.json())
+    .then(data => {
+      const categorias = data.items || [];
+      const navDesktop = document.getElementById("nav-desktop");
+      const navMobile = document.getElementById("nav-mobile");
+      if (!navDesktop || !navMobile) return;
+
+      navDesktop.querySelectorAll("a.cat-link").forEach(a => a.remove());
+      navMobile.querySelectorAll("a.cat-link").forEach(a => a.remove());
+
+      const searchWrapper = navDesktop.querySelector(".search-wrapper");
+
+      categorias
+        .sort((a,b)=>(a.order||0)-(b.order||0))
+        .forEach(cat => {
+          const linkD = document.createElement("a");
+          linkD.href = `categoria-${cat.slug}.html`;
+          linkD.textContent = cat.name;
+          linkD.className = "cat-link";
+          if (searchWrapper) navDesktop.insertBefore(linkD, searchWrapper);
+          else navDesktop.appendChild(linkD);
+
+          const linkM = document.createElement("a");
+          linkM.href = `categoria-${cat.slug}.html`;
+          linkM.textContent = cat.name;
+          linkM.className = "cat-link";
+          navMobile.appendChild(linkM);
+        });
+    })
+    .catch(err => console.error("Erro ao carregar categorias:", err));
+
+  // Menu mobile
+  const toggle = document.getElementById("menu-toggle");
+  const close = document.getElementById("menu-close");
+  const menu = document.getElementById("mobile-menu");
+  const overlay = document.getElementById("menu-overlay");
+
+  if (toggle && menu && overlay) {
+    const abrir = () => {
+      menu.classList.add("open");
+      overlay.classList.add("show");
+      menu.setAttribute("aria-hidden", "false");
+    };
+    const fechar = () => {
+      menu.classList.remove("open");
+      overlay.classList.remove("show");
+      menu.setAttribute("aria-hidden", "true");
+    };
+    toggle.addEventListener("click", abrir);
+    close?.addEventListener("click", fechar);
+    overlay.addEventListener("click", fechar);
+  }
+});
+</script>
+</body></html>
+<main class="main">
+  <h1 style="text-align:center;margin-top:30px;">segundat categ</h1>
+  <div id="produtos-container" class="products" style="margin-top:40px;"></div>
+</main>
+<footer class="footer bg-gray-900 text-gray-300 py-8 mt-12">
+  <div class="footer-container max-w-6xl mx-auto px-4">
+    <!-- Links -->
+    <div class="footer-links">
+      <a href="sobre.html">Sobre nós</a>
+      <a href="formas-de-pagamento.html">Formas de pagamento e envio</a>
+    </div>
+
+    <!-- Copy -->
+    <div class="footer-copy">
+      <span class="nobreak">© 2025 Quality Celulares. Todos os direitos reservados.</span><br />
+      CNPJ: 20.375.910/0001-66
+    </div>
+
+    <!-- Ícones sociais -->
+    <div class="footer-socials">
+      <a href="#" class="facebook" aria-label="Facebook" target="_blank"><i class="fa-brands fa-facebook-f"></i></a>
+      <a href="https://www.instagram.com/qualitycelulares_ibi/" class="instagram" aria-label="Instagram" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+      <a href="#" class="tiktok" aria-label="TikTok" target="_blank"><i class="fa-brands fa-tiktok"></i></a>
+      <a href="https://wa.me/5555991407824" class="whatsapp" aria-label="WhatsApp" target="_blank"><i class="fa-brands fa-whatsapp"></i></a>
+      <a href="#" class="location" aria-label="Localização"><i class="fa-solid fa-location-dot"></i></a>
+    </div>
+  </div>
+</footer>
+
+<script>
+fetch('content/products.json')
+  .then(r=>r.json())
+  .then(data=>{
+    const container=document.getElementById('produtos-container');
+    const slugLower='segundat-categ'.toLowerCase();
+    const nameLower='segundat categ'.toLowerCase();
+    const prods=(data.items||[]).filter(p=>{
+      const cat=(p.category||'').toString().toLowerCase();
+      return cat===slugLower || cat===nameLower;
+    });
+    if(prods.length===0){
+      container.innerHTML='<p class="em-breve" style="text-align:center;">Nenhum produto nesta categoria ainda.</p>';
+      return;
+    }
+    prods.forEach(p=>{
+      const price = (typeof p.price==='number' ? p.price : Number(p.price||0));
+      const priceStr = isNaN(price) ? '' : 'R$ '+price.toFixed(2).replace('.',',');
+      const card=document.createElement('div');
+      card.className='product-card';
+      card.innerHTML=`
+        <img src="${p.image||''}" alt="${p.name||''}">
+        <h3>${p.name||''}</h3>
+        ${priceStr ? '<p>'+priceStr+'</p>' : ''}
+        <a href="https://wa.me/5555991407824?text='+encodeURIComponent('Olá! Tenho interesse em '+(p.name||'produto'))+'" 
+           class="btn-whatsapp" target="_blank">
+           <i class="fa-brands fa-whatsapp"></i> Comprar no WhatsApp
+        </a>
+      `;
+      container.appendChild(card);
+    });
+  });
+</script>
+</body>
+</html>

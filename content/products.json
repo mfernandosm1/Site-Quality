@@ -1,8 +1,8 @@
 {
   "items": [
     {
-      "id": 1760572058427,
-      "name": "aswerqeewr",
+      "id": 1760572977990,
+      "name": "asddfasfasf",
       "price": null,
       "image": "images/redmi14c.png",
       "category": "",
@@ -11,8 +11,8 @@
       "active": true
     },
     {
-      "id": 1760572067348,
-      "name": "pppppppppp",
+      "id": 1760572985666,
+      "name": "qweqweqwe123123",
       "price": null,
       "image": "images/pocox7pro.png",
       "category": "",
@@ -21,23 +21,43 @@
       "active": true
     },
     {
-      "id": 1760572075996,
-      "name": "uuuuuuuuu",
+      "id": 1760572991492,
+      "name": "123123arqrq",
       "price": null,
       "image": "",
-      "category": "aaaaa",
+      "category": "nova-categ",
       "showPrice": true,
       "featured": false,
       "active": true
     },
     {
-      "id": 1760572093132,
-      "name": "yyyyyyyy",
+      "id": 1760572996355,
+      "name": "eqwewqerttyuiolknbvcx",
       "price": null,
       "image": "",
-      "category": "bbbbbbb",
+      "category": "segundat-categ",
       "showPrice": true,
       "featured": false,
+      "active": true
+    },
+    {
+      "id": 1760573020039,
+      "name": "vvvvv",
+      "price": null,
+      "image": "images/redmi14c.png",
+      "category": "",
+      "showPrice": true,
+      "featured": true,
+      "active": true
+    },
+    {
+      "id": 1760573026662,
+      "name": "xzczxczxcxzc",
+      "price": null,
+      "image": "images/redmi14c.png",
+      "category": "",
+      "showPrice": true,
+      "featured": true,
       "active": true
     }
   ]

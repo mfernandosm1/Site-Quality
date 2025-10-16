@@ -65,9 +65,29 @@ router.post('/del', (req,res)=>{
   const file = path.join(CONTENT_DIR, 'categories.json');
   const data = readJson(file);
   const id = Number(req.body.id);
+  const cat = (data.items||[]).find(c=> Number(c.id)===id);
+
+  // Remove do JSON
   data.items = (data.items||[]).filter(c=> Number(c.id)!==id);
   writeJson(file, data);
+
+  // Atualiza o menu do header
   try { updateHeaderMenu(data.items, SITE_DIR); } catch(e){}
+
+  // Remove o arquivo HTML da categoria (sem tocar nos produtos)
+  try {
+    if (cat && cat.slug) {
+      const fileSlug = `categoria-${cat.slug}.html`;
+      const target = path.join(SITE_DIR, fileSlug);
+      if (fs.existsSync(target)) {
+        fs.unlinkSync(target);
+        console.log(`🗑️ Categoria "${cat.name}" removida e arquivo ${fileSlug} excluído.`);
+      }
+    }
+  } catch (err) {
+    console.error('Erro ao remover arquivo da categoria:', err);
+  }
+
   res.redirect('/categorias');
 });
 
