@@ -55,7 +55,6 @@ body {
 }
 .nav-desktop a:hover { text-decoration: underline; }
 
-/* Busca desktop */
 .search-wrapper {
   display: flex;
   align-items: center;
@@ -131,7 +130,6 @@ body {
   color: #222;
 }
 
-/* Busca mobile */
 .search-wrapper-mobile {
   display: flex;
   align-items: center;
@@ -155,7 +153,6 @@ body {
   cursor: pointer;
 }
 
-/* Overlay */
 .menu-overlay {
   position: fixed;
   inset: 0;
@@ -195,7 +192,7 @@ body {
   justify-content: center;
   margin: 20px auto;
   width: 100%;
-  overflow: hidden;
+  overflow: visible;
 }
 
 .carousel-track {
@@ -204,12 +201,10 @@ body {
   scroll-snap-type: x mandatory;
   -webkit-overflow-scrolling: touch;
   gap: 20px;
-  padding: 20px 10px;
+  padding: 20px 50px;
+  scroll-padding-right: 60px;
 }
-
-.carousel-track::-webkit-scrollbar {
-  height: 0;
-}
+.carousel-track::-webkit-scrollbar { height: 0; }
 
 .produto-card {
   flex: 0 0 260px;
@@ -232,15 +227,8 @@ body {
   object-fit: contain;
   margin-bottom: 10px;
 }
-.produto-card h3 {
-  font-size: 18px;
-  margin-bottom: 10px;
-}
-.produto-card p {
-  font-weight: bold;
-  color: #333;
-  margin: 5px 0;
-}
+.produto-card h3 { font-size: 18px; margin-bottom: 10px; }
+.produto-card p { font-weight: bold; color: #333; margin: 5px 0; }
 .produto-card .btn,
 .produto-card .btn-whatsapp {
   font-size: 14px;
@@ -259,31 +247,39 @@ body {
 .produto-card .btn:hover,
 .produto-card .btn-whatsapp:hover { background-color: #128c4a; }
 
+/* -------------------
+   Botões Carrossel - estilo moderno branco com sombra e seta vermelha
+--------------------*/
 .carousel-arrow {
-  background: #c90000;
-  color: #fff;
+  background: #fff;
+  color: #c90000;
   border: none;
   font-size: 22px;
-  width: 36px;
-  height: 36px;
+  width: 50px;
+  height: 50px;
   border-radius: 50%;
   cursor: pointer;
-  transition: background-color 0.3s ease;
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
   z-index: 10;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
 }
-.carousel-arrow:hover { background: #a80000; }
-.carousel-arrow.left { left: 10px; }
-.carousel-arrow.right { right: 10px; }
+.carousel-arrow:hover {
+  transform: translateY(-50%) scale(1.1);
+  box-shadow: 0 6px 16px rgba(0,0,0,0.35);
+  filter: brightness(1.1);
+}
+.carousel-arrow.left { left: 15px; }
+.carousel-arrow.right { right: 15px; }
 
 @media (max-width: 767px) {
   .carousel-track { gap: 10px; padding: 10px; }
-  .produto-card {
-    flex: 0 0 80%;
-    max-width: 80%;
-  }
+  .produto-card { flex: 0 0 80%; max-width: 80%; }
   .carousel-arrow { display: none; }
 }
 
