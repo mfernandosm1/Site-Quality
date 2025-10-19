@@ -139,4 +139,38 @@ router.post('/import2', (req,res)=>{
   res.redirect('/categorias');
 });
 
+
+
+// ====== LIMPAR CATEGORIAS EM DESUSO ======
+/**
+ * Remove arquivos categoria-*.html que não correspondem às categorias ativas
+ * listadas em content/categories.json.
+ */
+router.post('/limpar', (req, res) => {
+  try {
+    const paths = P(req.app);
+    const CONTENT_DIR = paths.CONTENT_DIR;
+    const SITE_DIR = paths.SITE_DIR || paths.SITE_WITH_CONTENT || paths.SITE || paths.PUBLIC_DIR;
+
+    const data = readJson(path.join(CONTENT_DIR, 'categories.json'));
+    const ativos = new Set((data.items || []).map(c => `categoria-${c.slug}.html`));
+
+    const files = fs.readdirSync(SITE_DIR);
+    let removed = 0;
+    for (const f of files) {
+      if (/^categoria[-_].+\.html$/i.test(f) && !ativos.has(f)) {
+        try {
+          fs.unlinkSync(path.join(SITE_DIR, f));
+          removed++;
+        } catch (e) {
+          console.error('Falhou ao remover', f, e);
+        }
+      }
+    }
+    res.json({ success: true, removed });
+  } catch (err) {
+    console.error('Erro ao limpar categorias:', err);
+    res.status(500).json({ success: false, error: 'internal_error' });
+  }
+});
 export default router;

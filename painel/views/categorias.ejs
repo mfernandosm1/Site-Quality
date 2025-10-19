@@ -31,3 +31,29 @@
   <p class="notice">Tenta ler itens do &lt;nav&gt; do <code>header.html</code> (textos viram nome; href vira slug).</p>
   <form method="post" action="/categorias/import"><button class="btn">Importar do header.html</button></form>
 </div>
+
+
+<div class="card">
+  <h3>🧹 Limpar categorias em desuso</h3>
+  <p class="notice">Remove arquivos <code>categoria-*.html</code> que não correspondem às categorias ativas listadas.</p>
+  <button id="btn-limpar-categorias" class="btn">🧹 Limpar categorias em desuso</button>
+</div>
+
+<script>
+(function(){
+  const btn = document.getElementById('btn-limpar-categorias');
+  if(!btn) return;
+  btn.addEventListener('click', async ()=>{
+    if(!confirm('Tem certeza que deseja limpar as categorias em desuso?')) return;
+    try {
+      const res = await fetch('/categorias/limpar', { method: 'POST' });
+      const data = await res.json();
+      alert(`✅ Limpeza concluída: ${data.removed || 0} arquivo(s) removido(s).`);
+      location.reload();
+    } catch (e) {
+      console.error(e);
+      alert('⚠️ Erro ao executar a limpeza. Veja o console para detalhes.');
+    }
+  });
+})();
+</script>
