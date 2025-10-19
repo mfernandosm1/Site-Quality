@@ -55,7 +55,7 @@ body {
 }
 .nav-desktop a:hover { text-decoration: underline; }
 
-/* Campo de busca */
+/* Campo de busca (desktop) */
 .search-wrapper {
   display: flex;
   align-items: center;
@@ -75,6 +75,7 @@ body {
   padding: 6px 10px;
   cursor: pointer;
 }
+
 .menu-toggle {
   display: none;
   background: none;
@@ -82,13 +83,14 @@ body {
   font-size: 24px;
   color: #fff;
 }
+
 @media (max-width: 991px) {
   .nav-desktop { display: none; }
   .menu-toggle { display: block; }
 }
 
 /* -------------------
-   Menu Mobile
+   Mobile menu (abre pela esquerda)
 --------------------*/
 .mobile-menu {
   position: fixed;
@@ -104,7 +106,9 @@ body {
   transform: translateX(-100%);
   transition: transform 0.3s ease;
 }
-.mobile-menu.open { transform: translateX(0); }
+.mobile-menu.open {
+  transform: translateX(0);
+}
 .mobile-menu-header {
   display: flex;
   align-items: center;
@@ -128,6 +132,8 @@ body {
   font-size: 24px;
   color: #222;
 }
+
+/* Busca mobile */
 .search-wrapper-mobile {
   display: flex;
   align-items: center;
@@ -150,6 +156,8 @@ body {
   padding: 8px 12px;
   cursor: pointer;
 }
+
+/* Overlay escuro atrás do menu mobile */
 .menu-overlay {
   position: fixed;
   inset: 0;
@@ -178,7 +186,9 @@ body {
   .banner .swiper { max-height: none; height: auto; }
   .banner-img {
     width: 100%;
+    height: auto;
     aspect-ratio: 16 / 9;
+    object-fit: cover;
   }
 }
 
@@ -191,72 +201,83 @@ body {
   gap: 20px;
   justify-content: center;
   padding: 20px 10px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
 }
+
 .product-card {
-  flex: 1 1 280px;
-  max-width: 280px;
+  flex: 1 1 300px;
+  max-width: 300px;
   text-align: center;
   border: 1px solid #ddd;
-  border-radius: 8px;
-  padding: 18px;
+  border-radius: 6px;
+  padding: 16px;
   background: #fafafa;
-  transition: box-shadow 0.2s ease, transform 0.2s ease;
+  transition: box-shadow 0.2s ease;
   display: flex;
   flex-direction: column;
   align-items: center;
-}
-.product-card:hover {
-  box-shadow: 0 0 10px rgba(0,0,0,0.15);
-  transform: translateY(-3px);
+  scroll-snap-align: start;
 }
 
-/* Imagens ajustadas (um pouco maiores que antes) */
+.product-card:hover { 
+  box-shadow: 0 0 10px rgba(0,0,0,0.15); 
+}
+
 .product-card img {
   width: 100%;
   height: auto;
-  max-height: 260px;
+  max-height: 320px;
   object-fit: contain;
-  margin-bottom: 12px;
-  border-radius: 8px;
-}
-
-.product-card h3 {
-  font-size: 17px;
-  margin-bottom: 8px;
-  font-weight: 600;
-}
-.product-card p {
-  font-size: 15px;
   margin-bottom: 10px;
-  color: #444;
 }
 
-/* Botão Comprar — bonito e responsivo */
+.product-card h3 { 
+  font-size: 18px; 
+  margin-bottom: 10px; 
+}
+
 .product-card .btn-whatsapp {
+  font-size: 14px;
+  padding: 8px 12px;
+  width: 80%;
+  justify-content: center;
   display: inline-flex;
   align-items: center;
-  justify-content: center;
   gap: 8px;
-  width: 100%;
-  padding: 10px 0;
-  font-size: 15px;
-  font-weight: 600;
-  color: #fff;
   background-color: #25d366;
-  border: none;
-  border-radius: 8px;
+  color: white;
+  border-radius: 4px;
   text-decoration: none;
-  transition: all 0.25s ease;
-  box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+  transition: background-color 0.3s ease;
+  margin-top: 10px;
+  text-align: center;
 }
-.product-card .btn-whatsapp:hover {
-  background-color: #1ebe5a;
-  transform: translateY(-2px);
-  box-shadow: 0 5px 10px rgba(0,0,0,0.15);
+
+.product-card .btn-whatsapp:hover { 
+  background-color: #128c4a; 
+}
+
+.em-breve {
+  color: #999;
+  font-style: italic;
+  font-size: 16px;
+}
+
+/* Mobile: rolagem horizontal e ajuste dos cards */
+@media (max-width: 767px) {
+  .products {
+    flex-wrap: nowrap;
+  }
+
+  .product-card {
+    flex: 0 0 80%;
+    margin-right: 10px;
+  }
 }
 
 /* -------------------
-   Footer (inalterado)
+   Footer
 --------------------*/
 .footer {
   background-color: #111;
@@ -272,6 +293,8 @@ body {
   gap: 20px;
   text-align: center;
 }
+
+/* Links */
 .footer-links {
   order: 1;
   display: flex;
@@ -286,6 +309,8 @@ body {
   transition: color .25s ease;
 }
 .footer-links a:hover { color: #c90000; }
+
+/* Ícones sociais */
 .footer-socials {
   order: 2;
   display: flex;
@@ -307,11 +332,21 @@ body {
   box-shadow: 0 2px 6px rgba(0,0,0,.35);
   transition: transform .25s ease, box-shadow .25s ease, background-color .25s ease;
   text-decoration: none !important;
+  line-height: 1;
 }
 .footer-socials a:hover {
   transform: scale(1.12);
   box-shadow: 0 6px 18px rgba(0,0,0,.45);
 }
+.footer-socials a.facebook:hover { background-color: #3b5998; }
+.footer-socials a.instagram:hover {
+  background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fd5949 45%, #d6249f 60%, #285aeb 90%);
+}
+.footer-socials a.tiktok:hover { background-color: #000; }
+.footer-socials a.whatsapp:hover { background-color: #25d366; }
+.footer-socials a.location:hover { background-color: #c90000; }
+
+/* Copyright */
 .footer-copy {
   order: 3;
   font-size: 14px;
@@ -319,36 +354,28 @@ body {
   line-height: 1.4;
   text-align: center;
   white-space: normal !important;
+  word-break: normal !important;
+  overflow-wrap: normal !important;
+  display: inline-block;
+  max-width: 100%;
 }
+.footer-copy span.nobreak {
+  white-space: nowrap;
+}
+.footer-copy br {
+  display: block;
+  margin-top: 4px;
+}
+
+/* Desktop: 3 colunas */
 @media (min-width: 768px) {
   .footer-container {
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+    text-align: left;
   }
-  .footer-links   { flex: 1; justify-content: flex-start; }
-  .footer-copy    { flex: 1; text-align: center; }
-  .footer-socials { flex: 1; justify-content: flex-end; gap: 20px; }
-}
-
-/* -------------------
-   Mobile Ajustes
---------------------*/
-@media (max-width: 767px) {
-  .product-card {
-    flex: 0 0 60%;
-    max-width: 60%;
-    scroll-snap-align: center;
-    border-radius: 10px;
-    background: #fff;
-    box-shadow: 0 3px 8px rgba(0,0,0,0.1);
-    padding: 14px;
-  }
-  .product-card img {
-    max-height: 200px;
-  }
-  .product-card .btn-whatsapp {
-    font-size: 14px;
-    padding: 9px 0;
-  }
+  .footer-links   { flex: 1; justify-content: flex-start; order: 0; }
+  .footer-copy    { flex: 1; text-align: center; order: 0; }
+  .footer-socials { flex: 1; justify-content: flex-end; gap: 20px; order: 0; }
 }
