@@ -2,21 +2,15 @@
   "items": [
     {
       "id": 1760572959143,
-      "name": "nova categ",
+      "name": "Smartphones",
       "slug": "nova-categ",
       "order": 1
     },
     {
       "id": 1760572965515,
-      "name": "segundat categ",
+      "name": "Acessórios",
       "slug": "segundat-categ",
       "order": 2
-    },
-    {
-      "id": 1760881915410,
-      "name": "3 categ teste",
-      "slug": "3-categ-teste",
-      "order": 3
     }
   ]
 }
