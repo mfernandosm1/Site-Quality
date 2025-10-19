@@ -55,7 +55,7 @@ body {
 }
 .nav-desktop a:hover { text-decoration: underline; }
 
-/* Campo de busca (desktop) */
+/* Campo de busca */
 .search-wrapper {
   display: flex;
   align-items: center;
@@ -75,7 +75,6 @@ body {
   padding: 6px 10px;
   cursor: pointer;
 }
-
 .menu-toggle {
   display: none;
   background: none;
@@ -89,7 +88,7 @@ body {
 }
 
 /* -------------------
-   Mobile menu (abre pela esquerda)
+   Menu Mobile
 --------------------*/
 .mobile-menu {
   position: fixed;
@@ -129,8 +128,6 @@ body {
   font-size: 24px;
   color: #222;
 }
-
-/* Busca mobile */
 .search-wrapper-mobile {
   display: flex;
   align-items: center;
@@ -153,8 +150,6 @@ body {
   padding: 8px 12px;
   cursor: pointer;
 }
-
-/* Overlay escuro atrás do menu mobile */
 .menu-overlay {
   position: fixed;
   inset: 0;
@@ -183,9 +178,7 @@ body {
   .banner .swiper { max-height: none; height: auto; }
   .banner-img {
     width: 100%;
-    height: auto;
     aspect-ratio: 16 / 9;
-    object-fit: cover;
   }
 }
 
@@ -200,49 +193,66 @@ body {
   padding: 20px 10px;
 }
 .product-card {
-  flex: 1 1 calc(25% - 20px);
+  flex: 1 1 280px;
   max-width: 280px;
   text-align: center;
   border: 1px solid #ddd;
   border-radius: 8px;
-  padding: 16px;
+  padding: 18px;
   background: #fafafa;
-  transition: box-shadow 0.2s ease;
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
-.product-card:hover { box-shadow: 0 0 10px rgba(0,0,0,0.15); }
+.product-card:hover {
+  box-shadow: 0 0 10px rgba(0,0,0,0.15);
+  transform: translateY(-3px);
+}
 
+/* Imagens ajustadas (um pouco maiores que antes) */
 .product-card img {
   width: 100%;
   height: auto;
-  max-height: 300px;
+  max-height: 260px;
   object-fit: contain;
-  margin-bottom: 10px;
+  margin-bottom: 12px;
+  border-radius: 8px;
 }
 
 .product-card h3 {
-  font-size: 18px;
+  font-size: 17px;
+  margin-bottom: 8px;
+  font-weight: 600;
+}
+.product-card p {
+  font-size: 15px;
   margin-bottom: 10px;
+  color: #444;
 }
 
+/* Botão Comprar — bonito e responsivo */
 .product-card .btn-whatsapp {
-  font-size: 15px;
-  padding: 10px 14px;
-  width: 100%;
-  justify-content: center;
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 8px;
+  width: 100%;
+  padding: 10px 0;
+  font-size: 15px;
+  font-weight: 600;
+  color: #fff;
   background-color: #25d366;
-  color: white;
-  border-radius: 6px;
+  border: none;
+  border-radius: 8px;
   text-decoration: none;
-  transition: background-color 0.3s ease;
+  transition: all 0.25s ease;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.1);
 }
 .product-card .btn-whatsapp:hover {
-  background-color: #128c4a;
+  background-color: #1ebe5a;
+  transform: translateY(-2px);
+  box-shadow: 0 5px 10px rgba(0,0,0,0.15);
 }
 
 /* -------------------
@@ -306,14 +316,15 @@ body {
   order: 3;
   font-size: 14px;
   color: #aaa;
+  line-height: 1.4;
   text-align: center;
+  white-space: normal !important;
 }
 @media (min-width: 768px) {
   .footer-container {
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    text-align: left;
   }
   .footer-links   { flex: 1; justify-content: flex-start; }
   .footer-copy    { flex: 1; text-align: center; }
@@ -321,19 +332,9 @@ body {
 }
 
 /* -------------------
-   Ajustes MOBILE (produtos)
+   Mobile Ajustes
 --------------------*/
 @media (max-width: 767px) {
-  .products {
-    display: flex;
-    flex-wrap: nowrap;
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    gap: 12px;
-    padding: 10px;
-  }
-  .products::-webkit-scrollbar { display: none; }
-
   .product-card {
     flex: 0 0 60%;
     max-width: 60%;
@@ -343,29 +344,11 @@ body {
     box-shadow: 0 3px 8px rgba(0,0,0,0.1);
     padding: 14px;
   }
-
   .product-card img {
-    width: 100%;
-    max-height: 220px;
-    object-fit: contain;
+    max-height: 200px;
   }
-
-  .product-card h3 {
-    font-size: 16px;
-    margin-bottom: 6px;
-  }
-
   .product-card .btn-whatsapp {
-    font-size: 15px;
-    padding: 10px;
-    background: #25d366;
-    color: #fff;
-    border-radius: 5px;
-    width: 100%;
-    text-decoration: none;
-  }
-
-  .product-card .btn-whatsapp:hover {
-    background: #128c4a;
+    font-size: 14px;
+    padding: 9px 0;
   }
 }
