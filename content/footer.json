@@ -13,6 +13,18 @@
       "icon": "Formas de pagamento e envio",
       "url": "formas-de-pagamento.html",
       "order": 2
+    },
+    {
+      "label": "Sobre nós",
+      "icon": "Sobre nós",
+      "url": "sobre.html",
+      "order": 3
+    },
+    {
+      "label": "Formas de pagamento e envio",
+      "icon": "Formas de pagamento e envio",
+      "url": "formas-de-pagamento.html",
+      "order": 4
     }
   ]
 }
