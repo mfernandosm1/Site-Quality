@@ -1,42 +1,32 @@
 {
   "items": [
     {
-      "id": 1760877848321,
-      "name": "XXXXXXX",
-      "price": null,
-      "image": "images/redmi14c.png",
-      "category": "",
-      "showPrice": true,
-      "featured": true,
-      "active": true
-    },
-    {
-      "id": 1760877857205,
-      "name": "BBBBBBBBB",
+      "id": 1760889376843,
+      "name": "Smartphone Xiaomi Poco X7 pro 256gb",
       "price": null,
       "image": "images/pocox7pro.png",
-      "category": "",
-      "showPrice": true,
+      "category": "nova-categ",
+      "showPrice": false,
       "featured": true,
       "active": true
     },
     {
-      "id": 1760877869038,
-      "name": "UUUUUU",
+      "id": 1760889402231,
+      "name": "Smartphone Xiaomi Redmi 14c 128gb",
       "price": null,
       "image": "images/redmi14c.png",
-      "category": "",
-      "showPrice": true,
+      "category": "nova-categ",
+      "showPrice": false,
       "featured": true,
       "active": true
     },
     {
-      "id": 1760881931048,
-      "name": "AAA",
+      "id": 1760889615859,
+      "name": "Iphone 13 128gb novo lacrado",
       "price": null,
-      "image": "images/pocox7pro.png",
-      "category": "3-categ-teste",
-      "showPrice": true,
+      "image": "images/iphone13.jpg",
+      "category": "nova-categ",
+      "showPrice": false,
       "featured": true,
       "active": true
     }

@@ -206,12 +206,13 @@ body {
 }
 .carousel-track::-webkit-scrollbar { height: 0; }
 
+/* 🔧 Correção: padronização dos cards e imagens */
 .produto-card {
   flex: 0 0 260px;
   scroll-snap-align: start;
   text-align: center;
   border: 1px solid #ddd;
-  border-radius: 6px;
+  border-radius: 10px;
   padding: 16px;
   background: #fafafa;
   transition: all 0.3s ease;
@@ -225,21 +226,20 @@ body {
 }
 .produto-card img {
   width: 100%;
-  height: auto;
-  max-height: 280px;
-  object-fit: contain;
+  height: 240px;        /* altura fixa igual para todas */
+  object-fit: contain;  /* mantém proporção sem cortar */
   margin-bottom: 10px;
 }
-
-/* Aumenta imagem apenas no desktop */
-@media (min-width: 768px) {
-  .produto-card img {
-    max-height: 290px;
-  }
+.produto-card h3 {
+  font-size: 16px;
+  margin: 10px 0 5px;
+  min-height: 40px;     /* evita desalinhamento de títulos */
 }
-
-.produto-card h3 { font-size: 18px; margin-bottom: 10px; }
-.produto-card p { font-weight: bold; color: #333; margin: 5px 0; }
+.produto-card p {
+  font-weight: bold;
+  color: #333;
+  margin: 5px 0;
+}
 .produto-card .btn,
 .produto-card .btn-whatsapp {
   font-size: 14px;
