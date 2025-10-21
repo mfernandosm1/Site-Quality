@@ -163,7 +163,7 @@ export function applyFormasFields(html, fields){
    🆕 NOVAS FUNÇÕES PARA CATEGORIAS (Painel V7.3)
 ========================================================= */
 
-// === Cria uma nova página de categoria segura (corrigida p/ hífen) ===
+// === Cria uma nova página de categoria segura (com controle de exibição de preço) ===
 export function generateCategoryPage(name, slug, siteDir) {
   const header = readFileUtf8(path.join(siteDir, 'header.html'));
   const footer = readFileUtf8(path.join(siteDir, 'footer.html'));
@@ -186,6 +186,10 @@ ${header}
 </main>
 ${footer}
 <script>
+function shouldShowPrice(p){
+  const v = (p.showPrice ?? p.mostrar_preco ?? p.show_price ?? p.mostrarPreco ?? p.priceVisible ?? '').toString().toLowerCase();
+  return v === 'sim' || v === 'yes' || v === 'true' || v === '1' || v === 'on' || v === true;
+}
 fetch('content/products.json')
   .then(r=>r.json())
   .then(data=>{
@@ -201,8 +205,9 @@ fetch('content/products.json')
       return;
     }
     prods.forEach(p=>{
-      const price = (typeof p.price==='number' ? p.price : Number(p.price||0));
-      const priceStr = isNaN(price) ? '' : 'R$ '+price.toFixed(2).replace('.',',');
+      const show = shouldShowPrice(p);
+      const priceNum = (typeof p.price==='number' ? p.price : Number(p.price||0));
+      const priceStr = (!show || isNaN(priceNum)) ? '' : 'R$ '+priceNum.toFixed(2).replace('.',',');
       const card=document.createElement('div');
       card.className='product-card';
       card.innerHTML=\`

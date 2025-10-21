@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>nova categ – Quality Celulares</title>
+  <title>Acessórios – Quality Celulares</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="stylesheet" href="css/style.css">
 </head>
@@ -19,7 +19,7 @@
     <nav class="nav-desktop" id="nav-desktop">
       <a href="index.html">Início</a>
       <!-- categorias serão injetadas aqui -->
-      <div class="search-wrapper">
+      <a href="categoria-smartphones.html" class="cat-link">Smartphones</a><div class="search-wrapper">
         <input type="text" id="search-input" placeholder="Buscar...">
         <button id="search-button" aria-label="Buscar">
           <i class="fa fa-search"></i>
@@ -56,7 +56,7 @@
     <nav class="mobile-nav" id="nav-mobile">
       <a href="index.html">Início</a>
       <!-- categorias serão injetadas aqui -->
-    </nav>
+    <a href="categoria-smartphones.html" class="cat-link">Smartphones</a></nav>
   </div>
 
   <!-- Overlay -->
@@ -122,7 +122,7 @@ document.addEventListener("DOMContentLoaded", () => {
 </script>
 </body></html>
 <main class="main">
-  <h1 style="text-align:center;margin-top:30px;">nova categ</h1>
+  <h1 style="text-align:center;margin-top:30px;">Acessórios</h1>
   <div id="produtos-container" class="products" style="margin-top:40px;"></div>
 </main>
 <footer class="footer bg-gray-900 text-gray-300 py-8 mt-12">
@@ -140,23 +140,50 @@ document.addEventListener("DOMContentLoaded", () => {
     </div>
 
     <!-- Ícones sociais -->
-    <div class="footer-socials">
-      <a href="#" class="facebook" aria-label="Facebook" target="_blank"><i class="fa-brands fa-facebook-f"></i></a>
-      <a href="https://www.instagram.com/qualitycelulares_ibi/" class="instagram" aria-label="Instagram" target="_blank"><i class="fa-brands fa-instagram"></i></a>
-      <a href="#" class="tiktok" aria-label="TikTok" target="_blank"><i class="fa-brands fa-tiktok"></i></a>
-      <a href="https://wa.me/5555991407824" class="whatsapp" aria-label="WhatsApp" target="_blank"><i class="fa-brands fa-whatsapp"></i></a>
-      <a href="#" class="location" aria-label="Localização"><i class="fa-solid fa-location-dot"></i></a>
-    </div>
+<div class="footer-socials">
+  <a href="#" class="facebook" aria-label="Facebook" target="_blank"><i class="fa-brands fa-facebook-f"></i></a>
+
+  <!-- Instagram 1: Ibirubá -->
+  <a href="https://www.instagram.com/qualitycelulares_ibi/" 
+     class="instagram" aria-label="Instagram Quality Ibirubá"
+     target="_blank" title="Quality Celulares Ibirubá">
+     <i class="fa-brands fa-instagram"></i>
+  </a>
+
+  <!-- Instagram 2: Oficial -->
+  <a href="https://www.instagram.com/quality_celulares/" 
+     class="instagram" aria-label="Instagram Quality Oficial"
+     target="_blank" title="Quality Celulares Oficial">
+     <i class="fa-brands fa-instagram"></i>
+  </a>
+
+  <!-- TikTok -->
+<a href="https://www.tiktok.com/@quality_celulares?lang=en"
+   class="tiktok" aria-label="TikTok" target="_blank" rel="noopener">
+  <i class="fa-brands fa-tiktok"></i>
+</a>
+
+<!-- Localização (Google Maps) -->
+<a href="https://www.google.com/maps/place/Quality+Celulares/@-28.3998065,-53.0951354,17z/data=!3m1!4b1!4m6!3m5!1s0x94fd142bd7e83fcf:0x28cba94eec608ef!8m2!3d-28.3998065!4d-53.0951354!16s%2Fg%2F11hcz_j2q3?entry=ttu&g_ep=EgoyMDI1MTAxNC4wIKXMDSoASAFQAw%3D%3D"
+   class="location" aria-label="Localização" target="_blank" rel="noopener">
+  <i class="fa-solid fa-location-dot"></i>
+</a>
+
+</div>
   </div>
 </footer>
 
 <script>
+function shouldShowPrice(p){
+  const v = (p.showPrice ?? p.mostrar_preco ?? p.show_price ?? p.mostrarPreco ?? p.priceVisible ?? '').toString().toLowerCase();
+  return v === 'sim' || v === 'yes' || v === 'true' || v === '1' || v === 'on' || v === true;
+}
 fetch('content/products.json')
   .then(r=>r.json())
   .then(data=>{
     const container=document.getElementById('produtos-container');
-    const slugLower='nova-categ'.toLowerCase();
-    const nameLower='nova categ'.toLowerCase();
+    const slugLower='acessrios'.toLowerCase();
+    const nameLower='Acessórios'.toLowerCase();
     const prods=(data.items||[]).filter(p=>{
       const cat=(p.category||'').toString().toLowerCase();
       return cat===slugLower || cat===nameLower;
@@ -166,8 +193,9 @@ fetch('content/products.json')
       return;
     }
     prods.forEach(p=>{
-      const price = (typeof p.price==='number' ? p.price : Number(p.price||0));
-      const priceStr = isNaN(price) ? '' : 'R$ '+price.toFixed(2).replace('.',',');
+      const show = shouldShowPrice(p);
+      const priceNum = (typeof p.price==='number' ? p.price : Number(p.price||0));
+      const priceStr = (!show || isNaN(priceNum)) ? '' : 'R$ '+priceNum.toFixed(2).replace('.',',');
       const card=document.createElement('div');
       card.className='product-card';
       card.innerHTML=`

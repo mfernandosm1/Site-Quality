@@ -1,31 +1,61 @@
 {
   "items": [
     {
-      "id": 1760889376843,
+      "id": 1761055615915,
       "name": "Smartphone Xiaomi Poco X7 pro 256gb",
       "price": null,
       "image": "images/pocox7pro.png",
-      "category": "nova-categ",
+      "category": "smartphones",
       "showPrice": false,
       "featured": true,
       "active": true
     },
     {
-      "id": 1760889402231,
+      "id": 1761055676621,
       "name": "Smartphone Xiaomi Redmi 14c 128gb",
       "price": null,
       "image": "images/redmi14c.png",
-      "category": "nova-categ",
+      "category": "smartphones",
       "showPrice": false,
       "featured": true,
       "active": true
     },
     {
-      "id": 1760889615859,
+      "id": 1761055701696,
       "name": "Iphone 13 128gb novo lacrado",
       "price": null,
       "image": "images/iphone13.jpg",
-      "category": "nova-categ",
+      "category": "smartphones",
+      "showPrice": false,
+      "featured": true,
+      "active": true
+    },
+    {
+      "id": 1761055722586,
+      "name": "Iphone 14 128gb novo lacrado",
+      "price": null,
+      "image": "images/iphone14.jpg",
+      "category": "smartphones",
+      "showPrice": false,
+      "featured": true,
+      "active": true
+    },
+    {
+      "id": 1761055764334,
+      "name": "Iphone 15 128gb novo lacrado",
+      "price": null,
+      "image": "images/iphone15.jpg",
+      "category": "smartphones",
+      "showPrice": false,
+      "featured": true,
+      "active": true
+    },
+    {
+      "id": 1761055784959,
+      "name": "Controle PS4",
+      "price": null,
+      "image": "images/controlePS4.jpg",
+      "category": "acessrios",
       "showPrice": false,
       "featured": true,
       "active": true

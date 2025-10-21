@@ -206,7 +206,6 @@ body {
 }
 .carousel-track::-webkit-scrollbar { height: 0; }
 
-/* 🔧 Correção: padronização dos cards e imagens */
 .produto-card {
   flex: 0 0 260px;
   scroll-snap-align: start;
@@ -226,14 +225,14 @@ body {
 }
 .produto-card img {
   width: 100%;
-  height: 240px;        /* altura fixa igual para todas */
-  object-fit: contain;  /* mantém proporção sem cortar */
+  height: 240px;
+  object-fit: contain;
   margin-bottom: 10px;
 }
 .produto-card h3 {
   font-size: 16px;
   margin: 10px 0 5px;
-  min-height: 40px;     /* evita desalinhamento de títulos */
+  min-height: 40px;
 }
 .produto-card p {
   font-weight: bold;
@@ -259,7 +258,7 @@ body {
 .produto-card .btn-whatsapp:hover { background-color: #128c4a; }
 
 /* -------------------
-   Botões Carrossel - maiores (60px) brancos com sombra e seta vermelha
+   Botões Carrossel
 --------------------*/
 .carousel-arrow {
   background: #fff;
@@ -295,7 +294,33 @@ body {
 }
 
 /* -------------------
-   Footer (mantido original)
+   Categorias
+--------------------*/
+.produtos-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  padding: 20px 10px;
+}
+.produtos-container .produto-card {
+  flex: 0 0 240px;
+  margin: 10px;
+  box-sizing: border-box;
+}
+@media (max-width: 767px) {
+  .produtos-container {
+    flex-direction: column;
+    align-items: center;
+  }
+  .produtos-container .produto-card {
+    width: 80%;
+    max-width: 320px;
+  }
+}
+
+/* -------------------
+   Footer
 --------------------*/
 .footer {
   background-color: #111;
@@ -387,7 +412,89 @@ body {
   .footer-socials { flex: 1; justify-content: flex-end; gap: 20px; order: 0; }
 }
 
-/* Ajuste leve: espaçamento entre os dois ícones do Instagram no rodapé */
-.footer-socials a.instagram + a.instagram {
-  margin-left: 8px;
+/* Ajuste leve */
+.footer-socials a.instagram + a.instagram { margin-left: 8px; }
+
+/* ===================
+   Compatibilidade p/ categorias antigas (products/#produtos-container/product-card)
+   Garante layout lado a lado mesmo para páginas já geradas antes do patch.
+=================== */
+.products, #produtos-container, .produtos-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  padding: 20px 10px;
+}
+
+.products .product-card,
+#produtos-container .product-card,
+.produtos-container .produto-card {
+  flex: 0 0 240px;
+  margin: 10px;
+  box-sizing: border-box;
+  text-align: center;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  padding: 16px;
+  background: #fafafa;
+  transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.products .product-card img,
+#produtos-container .product-card img,
+.produtos-container .produto-card img {
+  width: 100%;
+  height: 240px;
+  object-fit: contain;
+  margin-bottom: 10px;
+}
+
+.products .product-card h3,
+.produtos-container .produto-card h3 {
+  font-size: 16px;
+  margin: 10px 0 5px;
+  min-height: 40px;
+}
+
+.products .product-card p,
+.produtos-container .produto-card p {
+  font-weight: bold;
+  color: #333;
+  margin: 5px 0;
+}
+
+.products .product-card .btn-whatsapp,
+.produtos-container .produto-card .btn-whatsapp {
+  font-size: 14px;
+  padding: 8px 12px;
+  width: 80%;
+  justify-content: center;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background-color: #25d366;
+  color: #fff;
+  border-radius: 4px;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+}
+
+.products .product-card .btn-whatsapp:hover,
+.produtos-container .produto-card .btn-whatsapp:hover { background-color: #128c4a; }
+
+@media (max-width: 767px) {
+  .products, #produtos-container, .produtos-container {
+    flex-direction: column;
+    align-items: center;
+  }
+  .products .product-card,
+  #produtos-container .product-card,
+  .produtos-container .produto-card {
+    width: 80%;
+    max-width: 320px;
+  }
 }
