@@ -60,27 +60,50 @@ function initHeaderEvents() {
     link.addEventListener("click", closeMenu);
   });
 
+  // ----------------------------
   // Busca desktop
+  // ----------------------------
   const searchInput = document.getElementById("search-input");
   const searchBtn = document.getElementById("search-button");
-  searchBtn?.addEventListener("click", () => doSearch(searchInput.value));
-  searchInput?.addEventListener("keypress", e => {
-    if (e.key === "Enter") doSearch(searchInput.value);
-  });
 
+  if (searchBtn && searchInput) {
+    searchBtn.addEventListener("click", () => doSearch(searchInput.value));
+    searchInput.addEventListener("keypress", e => {
+      if (e.key === "Enter") doSearch(searchInput.value);
+    });
+  }
+
+  // ----------------------------
   // Busca mobile
+  // ----------------------------
   const searchInputMob = document.getElementById("search-input-mobile");
   const searchBtnMob = document.getElementById("search-button-mobile");
-  searchBtnMob?.addEventListener("click", () => {
-    doSearch(searchInputMob.value);
-    closeMenu();
-  });
-  searchInputMob?.addEventListener("keypress", e => {
-    if (e.key === "Enter") {
+
+  if (searchBtnMob && searchInputMob) {
+    searchBtnMob.addEventListener("click", () => {
       doSearch(searchInputMob.value);
       closeMenu();
-    }
-  });
+    });
+    searchInputMob.addEventListener("keypress", e => {
+      if (e.key === "Enter") {
+        doSearch(searchInputMob.value);
+        closeMenu();
+      }
+    });
+  }
+
+  // ----------------------------
+  // 🆕 Corrigir busca ao reinjetar header (garante que eventos se liguem mesmo após reload)
+  // ----------------------------
+  setTimeout(() => {
+    const searchBtn2 = document.querySelectorAll("#search-button, #search-button-mobile");
+    searchBtn2.forEach(btn => {
+      btn.addEventListener("click", () => {
+        const input = btn.previousElementSibling;
+        if (input && input.value) doSearch(input.value);
+      });
+    });
+  }, 500);
 
   console.log("✅ Eventos do header inicializados");
 }
@@ -95,13 +118,13 @@ function doSearch(query) {
 
   if (!query || query.trim() === "") {
     products.forEach(p => (p.style.display = "flex"));
-    noResults.style.display = "none";
+    if (noResults) noResults.style.display = "none";
     return;
   }
 
   let found = false;
   products.forEach(card => {
-    const title = card.querySelector("h3").textContent.toLowerCase();
+    const title = card.querySelector("h3")?.textContent?.toLowerCase() || "";
     if (title.includes(query.toLowerCase())) {
       card.style.display = "flex";
       found = true;
@@ -110,7 +133,7 @@ function doSearch(query) {
     }
   });
 
-  noResults.style.display = found ? "none" : "block";
+  if (noResults) noResults.style.display = found ? "none" : "block";
 }
 
 // ----------------------------
