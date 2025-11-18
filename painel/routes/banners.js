@@ -1,103 +1,222 @@
+// routes/banners.js
 import express from 'express';
 import fs from 'fs';
 import path from 'path';
+
+import {
+  readFileUtf8,
+  ensureDirSync,
+  backupWriteJson,
+  parseBannersFromIndex,
+  buildSlidesFromCrud,
+} from './main_utils.js';
+
 const router = express.Router();
-function P(app){ return app.locals.paths; }
-function readJson(p){ try { return JSON.parse(fs.readFileSync(p,'utf-8')); } catch(e){ return {items:[]}; } }
-function writeJson(p, data){ fs.writeFileSync(p, JSON.stringify(data,null,2), 'utf-8'); }
+function P(app) { return app.locals.paths; }
 
-router.get('/', (req,res)=>{
-  const file = path.join(P(req.app).CONTENT_DIR, 'banners.json');
-  const data = readJson(file);
-  res.render('banners', { items: data.items || [], flash:null });
-});
-
-router.post('/add', (req,res)=>{
-  const { CONTENT_DIR } = P(req.app);
-  const file = path.join(CONTENT_DIR, 'banners.json');
-  const data = readJson(file);
-  data.items = data.items || [];
-  data.items.push({ image: req.body.image||'', link: req.body.link||'', title: req.body.title||'', subtitle: req.body.subtitle||'', order: Number(req.body.order||data.items.length+1) });
-  writeJson(file, data); res.redirect('/banners');
-});
-router.post('/update', (req,res)=>{
-  const { CONTENT_DIR } = P(req.app);
-  const file = path.join(CONTENT_DIR, 'banners.json');
-  const data = readJson(file);
-  const i = Number(req.body.index);
-  if (data.items && data.items[i]){
-    data.items[i].image = req.body.image || data.items[i].image;
-    data.items[i].link = req.body.link || data.items[i].link;
-    data.items[i].title = req.body.title || data.items[i].title;
-    data.items[i].subtitle = req.body.subtitle || data.items[i].subtitle;
-    data.items[i].order = Number(req.body.order || data.items[i].order || (i+1));
+// ---------------- helpers ----------------
+function loadJsonSafe(p, fallback = {}) {
+  try {
+    if (!fs.existsSync(p)) return fallback;
+    const txt = fs.readFileSync(p, 'utf-8');
+    return JSON.parse(txt || '{}');
+  } catch {
+    return fallback;
   }
-  writeJson(file, data); res.redirect('/banners');
-});
-router.post('/del', (req,res)=>{
-  const { CONTENT_DIR } = P(req.app);
-  const file = path.join(CONTENT_DIR, 'banners.json');
-  const data = readJson(file);
-  const i = Number(req.body.index);
-  if (data.items && data.items[i]) data.items.splice(i,1);
-  writeJson(file, data); res.redirect('/banners');
-});
-export default router;
+}
 
-router.post('/import',(req,res)=>{
-  const { SITE_DIR, CONTENT_DIR } = P(req.app);
-  const file = path.join(CONTENT_DIR, 'banners.json');
-  const data = readJson(file); data.items = data.items || [];
-  try {
-    const html = fs.readFileSync(path.join(SITE_DIR,'index.html'),'utf-8');
-    // very naive: find big images near words banner/carousel or first hero image
-    const re = /<img[^>]*src\s*=\s*"([^"]+)"[^>]*>/gi;
-    let m, order = (data.items.length||0)+1, pushed=0;
-    while ((m = re.exec(html)) !== null && pushed<5) {
-      const src = m[1];
-      if (src && !src.lower().endswith('.svg')){
-        data.items.push({ image: src, link: '#', title: '', subtitle: '', order: order++ });
-        pushed += 1;
-      }
+function saveJsonWithBackup(targetFile, data, backupsDir, label) {
+  ensureDirSync(path.dirname(targetFile));
+  backupWriteJson(targetFile, data, backupsDir, label);
+}
+
+function normalizeItem(raw = {}) {
+  return {
+    src: (raw.src ?? '').toString().trim(),
+    mobileSrc: (raw.mobileSrc ?? '').toString().trim(),
+    title: (raw.title ?? '').toString().trim(),
+    href: (raw.href ?? raw.link ?? '').toString().trim(),
+    order: Number.isFinite(+raw.order) ? +raw.order : 0,
+  };
+}
+
+function uniqBySrc(list = []) {
+  const seen = new Set();
+  const out = [];
+  for (const it of list) {
+    const key = `${it.src}|${it.mobileSrc}`;
+    if (it.src && !seen.has(key)) {
+      seen.add(key);
+      out.push(it);
     }
-    writeJson(file, data);
-  } catch(e){}
-  res.redirect('/banners');
+  }
+  return out;
+}
+
+// pequena função compartilhada para exclusão
+async function deleteAtIndex(idx, siteDir, backupsDir) {
+  const storeFile = path.join(siteDir, 'content', 'banners.json');
+  const store = loadJsonSafe(storeFile, { items: [] });
+  let items = Array.isArray(store.items) ? store.items : [];
+
+  if (Number.isInteger(idx) && idx >= 0 && idx < items.length) {
+    items.splice(idx, 1);
+    items = items
+      .map((it, i) => ({ ...it, order: Number.isFinite(+it.order) ? +it.order : i }))
+      .sort((a, b) => a.order - b.order);
+
+    saveJsonWithBackup(storeFile, { items }, backupsDir, 'banners.json');
+    await buildSlidesFromCrud(siteDir);
+    return true;
+  }
+  return false;
+}
+
+// ---------------- rotas ------------------
+
+// GET /banners
+router.get('/', async (req, res) => {
+  const { SITE_DIR } = P(req.app);
+
+  const storeFile = path.join(SITE_DIR, 'content', 'banners.json');
+  const indexPath = path.join(SITE_DIR, 'index.html');
+
+  const store = loadJsonSafe(storeFile, { items: [] });
+  const items = Array.isArray(store.items) ? store.items : [];
+
+  const indexHtml = readFileUtf8(indexPath);
+  const detected = parseBannersFromIndex(indexHtml);
+
+  // compat: algumas views usam 'flashes', outras 'flash'
+  const flashes = [];
+  if (req.query.saved)    flashes.push('Banner salvo com sucesso.');
+  if (req.query.deleted)  flashes.push('Banner excluído com sucesso.');
+  if (req.query.imported) flashes.push('Banners importados do index.html.');
+  if (req.query.merged)   flashes.push('Banners detectados adicionados ao CRUD.');
+
+  res.render('banners', {
+    items,
+    detected,
+    flashes,
+    flash: flashes[0] || '',
+  });
 });
 
-// robust import
-router.post('/import2',(req,res)=>{
-  const { SITE_DIR, CONTENT_DIR } = P(req.app);
-  const file = path.join(CONTENT_DIR, 'banners.json');
-  const data = readJson(file); data.items = data.items || [];
-  try {
-    const html = fs.readFileSync(path.join(SITE_DIR,'index.html'),'utf-8');
-    const blocks = [];
-    const sections = html.match(/<section[\s\S]*?<\/section>/gi) || [];
-    const divs = html.match(/<div[\s\S]*?<\/div>/gi) || [];
-    (sections.concat(divs)).forEach(b=>{
-      if (/(banner|hero|carousel|slider|swiper|slick)/i.test(b)) blocks.push(b);
+// POST /banners/add
+router.post('/add', async (req, res) => {
+  const { SITE_DIR, BACKUPS_DIR } = P(req.app);
+  const storeFile = path.join(SITE_DIR, 'content', 'banners.json');
+
+  const store = loadJsonSafe(storeFile, { items: [] });
+  const items = Array.isArray(store.items) ? store.items : [];
+
+  const payload = normalizeItem({
+    src: req.body.src || req.body.imgDesktop || req.body.desktop,
+    mobileSrc: req.body.mobileSrc || req.body.imgMobile || req.body.mobile,
+    title: req.body.title,
+    href: req.body.href || req.body.link,
+    order: req.body.order,
+  });
+
+  items.push(payload);
+
+  saveJsonWithBackup(storeFile, { items }, BACKUPS_DIR, 'banners.json');
+  await buildSlidesFromCrud(SITE_DIR);
+
+  res.redirect('/banners?saved=1');
+});
+
+// POST /banners/:idx/save
+router.post('/:idx/save', async (req, res) => {
+  const { SITE_DIR, BACKUPS_DIR } = P(req.app);
+  const storeFile = path.join(SITE_DIR, 'content', 'banners.json');
+
+  const idx = Number(req.params.idx);
+  const store = loadJsonSafe(storeFile, { items: [] });
+  const items = Array.isArray(store.items) ? store.items : [];
+
+  if (Number.isInteger(idx) && idx >= 0 && idx < items.length) {
+    const current = items[idx] || {};
+    const updated = normalizeItem({
+      src: req.body.src ?? req.body.imgDesktop ?? current.src,
+      mobileSrc: req.body.mobileSrc ?? req.body.imgMobile ?? current.mobileSrc,
+      title: req.body.title ?? current.title,
+      href: req.body.href ?? req.body.link ?? current.href,
+      order: req.body.order ?? current.order,
     });
-    const reImg = /<img[^>]*src\s*=\s*"([^"]+)"[^>]*alt\s*=\s*"([^"]*)"/gi;
-    let m, order=(data.items.length||0)+1, pushed=0;
-    for (const block of blocks){
-      while ((m = reImg.exec(block)) !== null && pushed<10){
-        const src=m[1], alt=m[2];
-        data.items.push({ image: src, link:'#', title: alt||'', subtitle:'', order: order++ });
-        pushed++;
-      }
-    }
-    if (pushed===0){
-      const reAnyImg = /<img[^>]*src\s*=\s*"([^"]+)"[^>]*>/gi; let mm;
-      let count=0, order2=(data.items.length||0)+1;
-      while ((mm = reAnyImg.exec(html)) !== null && count<5){
-        const src=mm[1]; if (!/\.svg$/i.test(src)){
-          data.items.push({ image: src, link:'#', title:'', subtitle:'', order: order2++ });
-          count++;
-        }
-      }
-    }
-    writeJson(file, data);
-  } catch(e){}
-  res.redirect('/banners');
+    items[idx] = updated;
+
+    saveJsonWithBackup(storeFile, { items }, BACKUPS_DIR, 'banners.json');
+    await buildSlidesFromCrud(SITE_DIR);
+  }
+
+  res.redirect('/banners?saved=1');
 });
+
+// ✅ DELETE – aceita POST em **/:idx/delete** (como antes)…
+router.post('/:idx/delete', async (req, res) => {
+  const { SITE_DIR, BACKUPS_DIR } = P(req.app);
+  const ok = await deleteAtIndex(Number(req.params.idx), SITE_DIR, BACKUPS_DIR);
+  res.redirect(ok ? '/banners?deleted=1' : '/banners');
+});
+
+// ✅ …e também POST em **/delete/:idx** (forma que seu formulário está usando)
+router.post('/delete/:idx', async (req, res) => {
+  const { SITE_DIR, BACKUPS_DIR } = P(req.app);
+  const ok = await deleteAtIndex(Number(req.params.idx), SITE_DIR, BACKUPS_DIR);
+  res.redirect(ok ? '/banners?deleted=1' : '/banners');
+});
+
+// (opcional) aceita GET em /delete/:idx para casos de link simples
+router.get('/delete/:idx', async (req, res) => {
+  const { SITE_DIR, BACKUPS_DIR } = P(req.app);
+  const ok = await deleteAtIndex(Number(req.params.idx), SITE_DIR, BACKUPS_DIR);
+  res.redirect(ok ? '/banners?deleted=1' : '/banners');
+});
+
+// POST /banners/import/replace
+router.post('/import/replace', async (req, res) => {
+  const { SITE_DIR, BACKUPS_DIR } = P(req.app);
+  const storeFile = path.join(SITE_DIR, 'content', 'banners.json');
+  const indexPath = path.join(SITE_DIR, 'index.html');
+
+  const indexHtml = readFileUtf8(indexPath);
+  const detected = parseBannersFromIndex(indexHtml);
+
+  const items = detected
+    .map(d => normalizeItem({
+      src: d.src,
+      mobileSrc: d.mobileSrc,
+      title: d.title,
+      href: d.href,
+      order: d.order,
+    }))
+    .sort((a, b) => a.order - b.order);
+
+  saveJsonWithBackup(storeFile, { items }, BACKUPS_DIR, 'banners.json');
+  await buildSlidesFromCrud(SITE_DIR);
+
+  res.redirect('/banners?imported=1');
+});
+
+// POST /banners/import/merge
+router.post('/import/merge', async (req, res) => {
+  const { SITE_DIR, BACKUPS_DIR } = P(req.app);
+  const storeFile = path.join(SITE_DIR, 'content', 'banners.json');
+  const indexPath = path.join(SITE_DIR, 'index.html');
+
+  const store = loadJsonSafe(storeFile, { items: [] });
+  const current = Array.isArray(store.items) ? store.items.map(normalizeItem) : [];
+
+  const indexHtml = readFileUtf8(indexPath);
+  const detected = parseBannersFromIndex(indexHtml).map(d => normalizeItem(d));
+
+  const merged = uniqBySrc([...current, ...detected]).sort((a, b) => a.order - b.order);
+
+  saveJsonWithBackup(storeFile, { items: merged }, BACKUPS_DIR, 'banners.json');
+  await buildSlidesFromCrud(SITE_DIR);
+
+  res.redirect('/banners?merged=1');
+});
+
+export default router;

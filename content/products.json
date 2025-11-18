@@ -99,6 +99,66 @@
       "showPrice": false,
       "featured": true,
       "active": true
+    },
+    {
+      "id": 1763504317936,
+      "name": "Smartphone Xiaomi Redmi Note 14 256gb verde",
+      "price": null,
+      "image": "images/Redmi note 14 verde.jpeg",
+      "category": "smartphones",
+      "showPrice": false,
+      "featured": false,
+      "active": true
+    },
+    {
+      "id": 1763504404711,
+      "name": "Smartphone Xiaomi Redmi 15c 128gb azul",
+      "price": null,
+      "image": "images/Redmi 15c azul.jpeg",
+      "category": "smartphones",
+      "showPrice": false,
+      "featured": false,
+      "active": true
+    },
+    {
+      "id": 1763504737051,
+      "name": "Iphone 16 128gb novo lacrado",
+      "price": null,
+      "image": "images/Iphone 16 preto.jpeg",
+      "category": "smartphones",
+      "showPrice": false,
+      "featured": false,
+      "active": true
+    },
+    {
+      "id": 1763504760533,
+      "name": "Iphone 17 256gb novo lacrado",
+      "price": null,
+      "image": "images/Iphone 17 branco.jpeg",
+      "category": "smartphones",
+      "showPrice": false,
+      "featured": false,
+      "active": true
+    },
+    {
+      "id": 1763504982114,
+      "name": "Iphone 17 pro 256gb novo lacrado",
+      "price": null,
+      "image": "images/Iphone 17 pro azul.jpeg",
+      "category": "smartphones",
+      "showPrice": false,
+      "featured": true,
+      "active": true
+    },
+    {
+      "id": 1763505019906,
+      "name": "Iphone 17 pro max 256gb novo lacrado",
+      "price": null,
+      "image": "images/iphone 17 pro max laranja.jpeg",
+      "category": "smartphones",
+      "showPrice": false,
+      "featured": true,
+      "active": true
     }
   ]
 }

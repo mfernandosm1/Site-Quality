@@ -9,6 +9,10 @@ export function readFileUtf8(p){
   try { return fs.readFileSync(p, 'utf-8'); }
   catch { return ''; }
 }
+export function writeFileUtf8(p, content){
+  fs.writeFileSync(p, content, 'utf-8');
+}
+function load$(html){ return cheerio.load(html, { decodeEntities:false }); }
 
 export function extractMain(html){
   const $ = cheerio.load(html, { decodeEntities: false });
@@ -16,7 +20,6 @@ export function extractMain(html){
   if ($main.length) return $main.html() || '';
   return $('body').html() || '';
 }
-
 export function replaceMain(html, newMainInner){
   const $ = cheerio.load(html, { decodeEntities: false });
   const $main = $('main').first();
@@ -29,12 +32,6 @@ export function replaceMain(html, newMainInner){
   return $.html();
 }
 
-export function writeFileUtf8(p, content){
-  fs.writeFileSync(p, content, 'utf-8');
-}
-
-function load$(html){ return cheerio.load(html, { decodeEntities:false }); }
-
 /* =========================================================
    🏠 INDEX (mantém ids existentes)
 ========================================================= */
@@ -46,7 +43,6 @@ export function extractIndexFields(html){
   const emBreve = main.find('p.em-breve').first().text().trim();
   return { h2Smartphones, h2Acessorios, emBreve };
 }
-
 export function applyIndexFields(html, fields){
   const $ = load$(html);
   const main = $('main').first();
@@ -84,7 +80,6 @@ export function extractSobreFields(html){
 
   return { titulo, intro, missao, visao, valores, difTitulo, difListaHTML };
 }
-
 export function applySobreFields(html, fields){
   const $ = load$(html);
   const main = $('main').first();
@@ -131,7 +126,6 @@ export function extractFormasFields(html){
 
   return { titulo, cartaoTitulo, cartaoTexto, boletoTitulo, boletoTexto, pixTitulo, pixTexto, enviosTitulo, enviosLinha1, enviosLinha2 };
 }
-
 export function applyFormasFields(html, fields){
   const $ = load$(html);
   const main = $('main').first();
@@ -160,10 +154,8 @@ export function applyFormasFields(html, fields){
 }
 
 /* =========================================================
-   🆕 NOVAS FUNÇÕES PARA CATEGORIAS (Painel V7.3)
+   🆕 CATEGORIAS
 ========================================================= */
-
-// === Cria uma nova página de categoria segura (com controle de exibição de preço) ===
 export function generateCategoryPage(name, slug, siteDir) {
   const header = readFileUtf8(path.join(siteDir, 'header.html'));
   const footer = readFileUtf8(path.join(siteDir, 'footer.html'));
@@ -175,8 +167,8 @@ export function generateCategoryPage(name, slug, siteDir) {
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>${name} – Quality Celulares</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
 ${header}
@@ -228,7 +220,6 @@ fetch('content/products.json')
   writeFileUtf8(target, html);
 }
 
-// === Atualiza o menu principal com as categorias existentes ===
 export function updateHeaderMenu(categories, siteDir) {
   const headerPath = path.join(siteDir, 'header.html');
   let headerHtml = readFileUtf8(headerPath);
@@ -236,7 +227,7 @@ export function updateHeaderMenu(categories, siteDir) {
 
   const $ = cheerio.load(headerHtml, { decodeEntities: false });
   const navDesktop = $('#nav-desktop');
-  const navMobile = $('#nav-mobile');
+  const navMobile  = $('#nav-mobile');
 
   if (!navDesktop.length || !navMobile.length) return;
 
@@ -264,26 +255,189 @@ export function updateHeaderMenu(categories, siteDir) {
   console.log(`✅ Header atualizado com ${sorted.length} categorias.`);
 }
 
-/* =========================================================
-   🧩 EXTRA: Conversor de arquivos antigos (categoria_ → categoria-)
-========================================================= */
 export function convertOldCategoryFiles(siteDir) {
   const files = fs.readdirSync(siteDir).filter(f => /^categoria_/.test(f));
   let converted = 0;
-
   for (const file of files) {
     const oldPath = path.join(siteDir, file);
     const newName = file.replace(/^categoria_/, 'categoria-');
     const newPath = path.join(siteDir, newName);
-
     const html = readFileUtf8(oldPath).replace(/categoria_/g, 'categoria-');
     writeFileUtf8(newPath, html);
     fs.unlinkSync(oldPath);
     converted++;
   }
+  console.log(converted>0
+    ? `🔄 Convertidos ${converted} arquivos de categoria para o novo padrão.`
+    : '✅ Nenhum arquivo antigo encontrado.');
+}
 
-  if (converted > 0)
-    console.log(`🔄 Convertidos ${converted} arquivos de categoria para o novo padrão.`);
-  else
-    console.log('✅ Nenhum arquivo antigo encontrado.');
+/* =========================================================
+   🖼️ BANNERS
+========================================================= */
+export function ensureDirSync(dir){
+  try { fs.mkdirSync(dir, { recursive: true }); } catch {}
+}
+export function backupWriteJson(targetFile, data, backupsDir, label){
+  try {
+    const prev = fs.existsSync(targetFile) ? fs.readFileSync(targetFile, 'utf-8') : '';
+    if (prev) {
+      const ts = new Date().toISOString().replace(/[:.]/g,'-');
+      const bakName = `${label}.${ts}.bak.json`;
+      if (backupsDir) ensureDirSync(backupsDir);
+      fs.writeFileSync(path.join(backupsDir, bakName), prev, 'utf-8');
+    }
+    fs.writeFileSync(targetFile, JSON.stringify(data, null, 2), 'utf-8');
+  } catch {}
+}
+function norm(v){ return (v||'').toString().trim(); }
+function firstFromSrcset(v){
+  if (!v) return '';
+  const t = v.split(',')[0].trim();
+  return t.split(/\s+/)[0];
+}
+function deriveMobile(desktop){
+  if (!desktop) return '';
+  if (/-mob(?:ile)?\.[a-z0-9]+$/i.test(desktop)) return desktop;
+  return desktop.replace(/(\.[a-z0-9]+)$/i, '-mob$1');
+}
+/** Prefixa 'images/' quando o valor parece só um nome de arquivo (ex.: desk1.png). */
+function normalizeBannerPath(p){
+  const x = norm(p);
+  if (!x) return '';
+  if (/^https?:\/\//i.test(x)) return x;
+  if (x.startsWith('/')) return x;
+  // se não tem barra, assume pasta images/
+  if (!x.includes('/')) return `images/${x}`;
+  return x;
+}
+
+/** Lê banners no index.html e retorna objetos: { src, mobileSrc, alt, href, title, text, order } */
+export function parseBannersFromIndex(indexHtml){
+  if (!indexHtml) return [];
+  const $ = cheerio.load(indexHtml, { decodeEntities:false });
+
+  const items = [];
+
+  // Caso principal do seu site: section.banner > .swiper > .swiper-wrapper > .swiper-slide > picture > source/img
+  $('section.banner .swiper-slide picture').each((i, pic)=>{
+    const $pic = $(pic);
+    const $img = $pic.find('img').first();
+    if (!$img.length) return;
+
+    const desktop = normalizeBannerPath($img.attr('data-src') || $img.attr('src'));
+    const $srcMobile = $pic.find('source[media*="max-width"][srcset]').first().length
+      ? $pic.find('source[media*="max-width"][srcset]').first()
+      : $pic.find('source[srcset]').first();
+    let mobile = $srcMobile.length ? normalizeBannerPath(firstFromSrcset($srcMobile.attr('srcset'))) : '';
+    if (!mobile) mobile = normalizeBannerPath($img.attr('data-src-mobile') || $img.attr('data-mobile'));
+    if (!mobile) mobile = normalizeBannerPath(deriveMobile(desktop));
+    if (!desktop) return;
+
+    items.push({
+      src: desktop,
+      mobileSrc: mobile || '',
+      alt: norm($img.attr('alt')),
+      href: '',
+      title: norm($img.attr('title') || $pic.attr('title')),
+      text: '',
+      order: items.length
+    });
+  });
+
+  // Fallback: <img> direto
+  $('section.banner .swiper-slide img').each((i, img)=>{
+    const $img = $(img);
+    const desktop = normalizeBannerPath($img.attr('data-src') || $img.attr('src'));
+    if (!desktop) return;
+    if (items.some(it => it.src === desktop)) return;
+    let mobile = normalizeBannerPath($img.attr('data-src-mobile') || $img.attr('data-mobile'));
+    if (!mobile) mobile = normalizeBannerPath(deriveMobile(desktop));
+    items.push({
+      src: desktop,
+      mobileSrc: mobile || '',
+      alt: norm($img.attr('alt')),
+      href: '',
+      title: norm($img.attr('title')),
+      text: '',
+      order: items.length
+    });
+  });
+
+  // Fallback adicional: elementos com background
+  $('.swiper-slide, .carousel-item, .banner, [class*="hero"], [class*="slide"], [class*="banner"]').each((i, el)=>{
+    const s = norm($(el).attr('style'));
+    const m = /background-image\s*:\s*url\(["']?([^"')]+)["']?\)/i.exec(s);
+    const desktop = m && m[1] ? normalizeBannerPath(m[1]) : '';
+    if (!desktop) return;
+    if (items.some(it => it.src === desktop)) return;
+    const mobileData = $(el).attr('data-bg-mobile') || $(el).attr('data-background-mobile');
+    const mobile = normalizeBannerPath(mobileData || deriveMobile(desktop));
+    items.push({
+      src: desktop,
+      mobileSrc: mobile || '',
+      alt: '',
+      href: '',
+      title: norm($(el).attr('title')),
+      text: '',
+      order: items.length
+    });
+  });
+
+  // Dedup por src
+  const seen = new Set();
+  const out = [];
+  for (const it of items){
+    if (it.src && !seen.has(it.src)){ seen.add(it.src); out.push(it); }
+  }
+  return out;
+}
+
+/** Reescreve os slides do index.html com base em content/banners.json (CRUD). */
+export function buildSlidesFromCrud(siteDir){
+  const idxPath = path.join(siteDir, 'index.html');
+  const jsonPath= path.join(siteDir, 'content', 'banners.json');
+  const html    = readFileUtf8(idxPath);
+  if (!html) return;
+
+  const $ = cheerio.load(html, { decodeEntities:false });
+  const $wrap = $('section.banner .swiper .swiper-wrapper').first();
+  if (!$wrap.length) return;
+
+  let items = [];
+  try {
+    const raw = JSON.parse(readFileUtf8(jsonPath) || '{}');
+    items = Array.isArray(raw.items) ? raw.items : [];
+  } catch { items = []; }
+
+  // Normaliza e ordena
+  const normItems = items.map((it, i) => {
+    const desktop = normalizeBannerPath(it.src || it.image || '');
+    let mobile = normalizeBannerPath(it.mobileSrc || it.mobile || '');
+    if (!mobile) mobile = normalizeBannerPath(deriveMobile(desktop));
+    return {
+      src: desktop,
+      mobileSrc: mobile || '',
+      alt: norm(it.alt),
+      href: norm(it.link || it.href),
+      title: norm(it.title || it.text),
+      order: Number(it.order ?? i) || 0
+    };
+  }).sort((a,b)=>a.order-b.order);
+
+  // Reescreve o conteúdo
+  $wrap.empty();
+  normItems.forEach(it=>{
+    const slide = `
+      <div class="swiper-slide">
+        <picture>
+          ${it.mobileSrc ? `<source media="(max-width: 767px)" srcset="${it.mobileSrc}">` : ''}
+          <img src="${it.src}" alt="${it.alt || ''}" class="banner-img">
+        </picture>
+      </div>`;
+    $wrap.append(slide);
+  });
+
+  writeFileUtf8(idxPath, $.html());
+  console.log(`🖼️ index.html atualizado com ${normItems.length} banner(s).`);
 }
