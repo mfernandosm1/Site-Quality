@@ -17,7 +17,7 @@
       "image": "images/redmi14c.png",
       "category": "smartphones",
       "showPrice": false,
-      "featured": true,
+      "featured": false,
       "active": true
     },
     {
@@ -158,6 +158,46 @@
       "category": "smartphones",
       "showPrice": false,
       "featured": true,
+      "active": true
+    },
+    {
+      "id": 1763510143145,
+      "name": "Alexa Echo Pop Preta",
+      "price": null,
+      "image": "images/Alexa echo pop preta (2).jpeg",
+      "category": "acessrios",
+      "showPrice": false,
+      "featured": true,
+      "active": true
+    },
+    {
+      "id": 1763510200924,
+      "name": "Alexa Echo Dot 5 Branca",
+      "price": null,
+      "image": "images/Alexa echo dot branca.jpeg",
+      "category": "acessrios",
+      "showPrice": false,
+      "featured": false,
+      "active": true
+    },
+    {
+      "id": 1763510500879,
+      "name": "Smartwatch Xiaomi Amazfit Bip 5 Rosa",
+      "price": null,
+      "image": "images/Xiaomi amazfit bip 5 rosa.jpeg",
+      "category": "acessrios",
+      "showPrice": false,
+      "featured": false,
+      "active": true
+    },
+    {
+      "id": 1763510724859,
+      "name": "Suporte de Celular Veicular",
+      "price": null,
+      "image": "images/Suporte Veicular Multilaser.jpeg",
+      "category": "acessrios",
+      "showPrice": false,
+      "featured": false,
       "active": true
     }
   ]
