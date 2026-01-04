@@ -205,11 +205,15 @@ fetch('content/products.json')
       card.innerHTML=\`
         <img src="\${p.image||''}" alt="\${p.name||''}">
         <h3>\${p.name||''}</h3>
-        \${priceStr ? '<p>'+priceStr+'</p>' : ''}
-        <a href="https://wa.me/5555991407824?text='+encodeURIComponent('Olá! Tenho interesse em '+(p.name||'produto'))+'" 
-           class="btn-whatsapp" target="_blank">
-           <i class="fa-brands fa-whatsapp"></i> Comprar no WhatsApp
-        </a>
+        \${priceStr ? '<p>'+priceStr+'</p>' : ''}  /* =========================================================
+   🆕 Texto que é enviado no whatsapp ao clicar no botão comprar nos produtos
+========================================================= */
+        <a href="https://wa.me/5555991407824?text=\${encodeURIComponent(
+  'Olá! Vim através do site e tenho interesse em ' + (p.name || 'produto')
+)}"
+   class="btn-whatsapp" target="_blank">
+   <i class="fa-brands fa-whatsapp"></i> Comprar no WhatsApp
+</a>
       \`;
       container.appendChild(card);
     });
