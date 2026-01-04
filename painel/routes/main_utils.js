@@ -355,8 +355,12 @@ export function parseBannersFromIndex(indexHtml){
     const desktop = normalizeBannerPath($img.attr('data-src') || $img.attr('src'));
     if (!desktop) return;
     if (items.some(it => it.src === desktop)) return;
-    let mobile = normalizeBannerPath($img.attr('data-src-mobile') || $img.attr('data-mobile'));
-    if (!mobile) mobile = normalizeBannerPath(deriveMobile(desktop));
+    let mobile = normalizeBannerPath(it.mobileSrc || it.mobile || '');
+
+// ⚠️ Só usa fallback automático se NÃO vier do CRUD
+if (!mobile && !it.mobileSrc) {
+  mobile = '';
+}
     items.push({
       src: desktop,
       mobileSrc: mobile || '',
