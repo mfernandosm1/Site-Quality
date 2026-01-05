@@ -1,6 +1,13 @@
 {
   "items": [
     {
+      "src": "images/banner1.png",
+      "mobileSrc": "images/banner1-mobile.png",
+      "title": "",
+      "href": "",
+      "order": 0
+    },
+    {
       "src": "images/banner2.png",
       "mobileSrc": "images/banner2-mobile.png",
       "title": "",
@@ -19,7 +26,7 @@
       "mobileSrc": "Banner-sitemobile.jpg",
       "title": "",
       "href": "",
-      "order": 3
+      "order": 4
     }
   ]
 }
