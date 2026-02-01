@@ -209,6 +209,46 @@
       "showPrice": false,
       "featured": false,
       "active": true
+    },
+    {
+      "id": 1769989097776,
+      "name": "Carregador Veicular USB / USB-C",
+      "price": null,
+      "image": "images/Carregador veicular.jpeg",
+      "category": "acessrios",
+      "showPrice": false,
+      "featured": false,
+      "active": true
+    },
+    {
+      "id": 1769989352309,
+      "name": "Câmera Inteligente Intelbras Interna",
+      "price": null,
+      "image": "images/Camera intelbras interna.jpeg",
+      "category": "acessrios",
+      "showPrice": false,
+      "featured": false,
+      "active": true
+    },
+    {
+      "id": 1769989886741,
+      "name": "Tablet Xiaomi Redmi Pad 2 128GB/4GB ram 11\" polegadas",
+      "price": null,
+      "image": "images/Tablet Xiaomi Redmi pad2.jpeg",
+      "category": "acessrios",
+      "showPrice": false,
+      "featured": true,
+      "active": true
+    },
+    {
+      "id": 1769989919633,
+      "name": "Apple iPad 11 128gb - 11'' polegadas",
+      "price": null,
+      "image": "images/Ipad 11 rosa.jpeg",
+      "category": "acessrios",
+      "showPrice": false,
+      "featured": false,
+      "active": true
     }
   ]
 }
