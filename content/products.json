@@ -2,7 +2,7 @@
   "items": [
     {
       "id": 1761055615915,
-      "name": "Smartphone Xiaomi Poco X7 pro 256gb",
+      "name": "Xiaomi Poco X7 pro 256gb",
       "price": null,
       "image": "images/pocox7pro.png",
       "category": "smartphones",
@@ -12,7 +12,7 @@
     },
     {
       "id": 1761055676621,
-      "name": "Smartphone Xiaomi Redmi 14c 128gb",
+      "name": "Xiaomi Redmi 14c 128gb",
       "price": null,
       "image": "images/redmi14c.png",
       "category": "smartphones",
@@ -102,7 +102,7 @@
     },
     {
       "id": 1763504317936,
-      "name": "Smartphone Xiaomi Redmi Note 14 256gb verde",
+      "name": "Xiaomi Redmi Note 14 256gb verde",
       "price": null,
       "image": "images/Redmi note 14 verde.jpeg",
       "category": "smartphones",
@@ -112,7 +112,7 @@
     },
     {
       "id": 1763504404711,
-      "name": "Smartphone Xiaomi Redmi 15c 128gb azul",
+      "name": "Xiaomi Redmi 15c 128gb azul",
       "price": null,
       "image": "images/Redmi 15c azul.jpeg",
       "category": "smartphones",
@@ -246,6 +246,36 @@
       "price": null,
       "image": "images/Ipad 11 rosa.jpeg",
       "category": "acessrios",
+      "showPrice": false,
+      "featured": false,
+      "active": true
+    },
+    {
+      "id": 1769990813874,
+      "name": "Samsung A17 128gb / 4gb Ram Tela 6.7\"",
+      "price": null,
+      "image": "images/Samsung a17.jpeg",
+      "category": "smartphones",
+      "showPrice": false,
+      "featured": false,
+      "active": true
+    },
+    {
+      "id": 1769990967110,
+      "name": "Playstation 5 Digital 1TB",
+      "price": null,
+      "image": "images/Playstation 5.jpeg",
+      "category": "acessrios",
+      "showPrice": false,
+      "featured": true,
+      "active": true
+    },
+    {
+      "id": 1769991520959,
+      "name": "Motorola Moto G35 5G 128gb 4GB Ram+8GB Ram Boost",
+      "price": null,
+      "image": "images/Moto G35.jpeg",
+      "category": "smartphones",
       "showPrice": false,
       "featured": false,
       "active": true
