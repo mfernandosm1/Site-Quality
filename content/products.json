@@ -7,7 +7,7 @@
       "image": "images/pocox7pro.png",
       "category": "smartphones",
       "showPrice": false,
-      "featured": true,
+      "featured": false,
       "active": true
     },
     {
@@ -326,6 +326,16 @@
       "price": null,
       "image": "images/Notebook Lenovo ideapad1-7520u.jpeg",
       "category": "",
+      "showPrice": false,
+      "featured": true,
+      "active": true
+    },
+    {
+      "id": 1780360199477,
+      "name": "Xiaomi Poco X8 Pro 512gb 12gb Ram",
+      "price": null,
+      "image": "images/xiaomi poco x8 pro.jpeg",
+      "category": "smartphones",
       "showPrice": false,
       "featured": true,
       "active": true
