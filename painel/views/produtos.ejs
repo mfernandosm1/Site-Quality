@@ -8,12 +8,12 @@
 
     <div>
       <label>Imagem</label>
-      <select name="image">
-        <option value="">Selecione...</option>
+      <input type="text" name="image" id="add-product-image" list="imagens-list" placeholder="Selecione ou digite o nome..." onfocus="sincronizarImagensAuto()" autocomplete="off">
+      <datalist id="imagens-list">
         <% (imagens || []).forEach(img => { %>
           <option value="images/<%= img %>"><%= img %></option>
         <% }) %>
-      </select>
+      </datalist>
     </div>
 
     <div>
@@ -55,7 +55,6 @@
     </div>
   </form>
 
-  <!-- BARRA DE PESQUISA E FILTROS COMPATÍVEL COM O SEU DESIGN -->
   <div style="margin: 25px 0 15px 0; display: flex; gap: 15px; background: #fafafa; padding: 12px; border-radius: 6px; border: 1px solid #eaeaea;">
     <div style="flex: 1;">
       <input type="text" id="panel-search-input" placeholder="🔍 Buscar produto pelo nome..." style="width: 100%; padding: 8px 12px; border: 1px solid #ccc; border-radius: 4px; font-size: 14px;">
@@ -124,7 +123,7 @@
           </td>
 
           <td>
-            <select form="f<%=p.id%>" name="image">
+            <select form="f<%=p.id%>" name="image" class="prod-image-select" data-current-val="<%= p.image %>">
               <option value="">Selecione...</option>
               <% (imagens || []).forEach(img => { %>
                 <option value="images/<%= img %>" <%= p.image === ('images/' + img) ? 'selected' : '' %>><%= img %></option>
@@ -148,7 +147,6 @@
   </table>
 </div>
 
-<!-- LÓGICA DE FILTRAGEM DINÂMICA VIA JAVASCRIPT -->
 <script>
 document.addEventListener("DOMContentLoaded", () => {
   const searchInput = document.getElementById("panel-search-input");
@@ -160,27 +158,23 @@ document.addEventListener("DOMContentLoaded", () => {
     const selectedCategory = categoryFilter.value;
 
     rows.forEach(row => {
-      // Captura o valor de dentro do input de texto do nome
       const nameInput = row.querySelector(".prod-name-input");
       const productName = nameInput ? nameInput.value.toLowerCase() : "";
 
-      // Captura o valor selecionado dentro do seletor de categorias da linha
       const categorySelect = row.querySelector(".prod-category-select");
       const productCategory = categorySelect ? categorySelect.value : "";
 
-      // Regras de correspondência
       const matchesSearch = productName.includes(searchText);
       
       let matchesCategory = false;
       if (selectedCategory === "") {
-        matchesCategory = true; // Se selecionar 'Todas', exibe tudo
+        matchesCategory = true;
       } else if (selectedCategory === "[vitrine]") {
-        matchesCategory = (productCategory === ""); // Caso seja a vitrine inicial (vazia)
+        matchesCategory = (productCategory === "");
       } else {
         matchesCategory = (productCategory === selectedCategory);
       }
 
-      // Aplica a visibilidade na linha da tabela de forma limpa
       if (matchesSearch && matchesCategory) {
         row.style.display = "";
       } else {
@@ -189,8 +183,54 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // Executa a função sempre que você digitar ou mudar a categoria
   searchInput.addEventListener("input", filterTable);
   categoryFilter.addEventListener("change", filterTable);
 });
+
+// FUNÇÃO INTELIGENTE: SINCRONIZA AUTOMATICAMENTE SEM BOTÕES CHATOS
+function sincronizarImagensAuto() {
+  fetch(window.location.href)
+    .then(res => res.text())
+    .then(htmlStr => {
+      const parser = new DOMParser();
+      const doc = parser.parseFromString(htmlStr, 'text/html');
+      
+      const tabelaSelects = doc.querySelector(".prod-image-select");
+      if (!tabelaSelects) return;
+
+      const opcoesImagem = Array.from(tabelaSelects.options)
+        .map(opt => opt.value.replace("images/", "").trim())
+        .filter(val => val !== "");
+
+      // 1. Atualiza a lista de autocompletar (Datalist) do cadastro principal
+      const dataList = document.getElementById("imagens-list");
+      if (dataList) {
+        dataList.innerHTML = "";
+        opcoesImagem.forEach(img => {
+          const opt = document.createElement("option");
+          opt.value = "images/" + img;
+          opt.textContent = img;
+          dataList.appendChild(opt);
+        });
+      }
+
+      // 2. Mantém os seletores das linhas inferiores atualizados em segundo plano
+      const linhaSelects = document.querySelectorAll(".prod-image-select");
+      linhaSelects.forEach(select => {
+        const valorAtual = select.value || select.getAttribute("data-current-val") || "";
+        select.innerHTML = '<option value="">Selecione...</option>';
+        
+        opcoesImagem.forEach(img => {
+          const opt = document.createElement("option");
+          opt.value = "images/" + img;
+          opt.textContent = img;
+          if ("images/" + img === valorAtual) opt.selected = true;
+          select.appendChild(opt);
+        });
+        
+        select.setAttribute("data-current-val", valorAtual);
+      });
+    })
+    .catch(err => console.error("Erro na sincronização automática de fotos:", err));
+}
 </script>
