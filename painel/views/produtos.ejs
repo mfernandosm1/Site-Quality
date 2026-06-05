@@ -55,6 +55,22 @@
     </div>
   </form>
 
+  <!-- BARRA DE PESQUISA E FILTROS COMPATÍVEL COM O SEU DESIGN -->
+  <div style="margin: 25px 0 15px 0; display: flex; gap: 15px; background: #fafafa; padding: 12px; border-radius: 6px; border: 1px solid #eaeaea;">
+    <div style="flex: 1;">
+      <input type="text" id="panel-search-input" placeholder="🔍 Buscar produto pelo nome..." style="width: 100%; padding: 8px 12px; border: 1px solid #ccc; border-radius: 4px; font-size: 14px;">
+    </div>
+    <div style="width: 220px;">
+      <select id="panel-category-filter" style="width: 100%; padding: 8px 12px; border: 1px solid #ccc; border-radius: 4px; font-size: 14px; background: #fff;">
+        <option value="">📂 Todas as Categorias</option>
+        <option value="[vitrine]">Início (vitrine)</option>
+        <% (categorias || []).forEach(c => { %>
+          <option value="<%= c.slug %>"><%= c.name %></option>
+        <% }) %>
+      </select>
+    </div>
+  </div>
+
   <table class="table">
     <thead>
       <tr>
@@ -69,16 +85,16 @@
         <th>Ações</th>
       </tr>
     </thead>
-    <tbody>
+    <tbody id="products-table-body">
       <% (items || []).forEach((p, idx) => { %>
-        <tr>
+        <tr class="product-row">
           <td><span class="badge"><%= idx + 1 %></span></td>
 
-          <td><input form="f<%=p.id%>" type="text" name="name" value="<%= p.name %>"></td>
+          <td><input form="f<%=p.id%>" type="text" name="name" value="<%= p.name %>" class="prod-name-input"></td>
           <td><input form="f<%=p.id%>" type="number" step="0.01" min="0" name="price" value="<%= p.price || '' %>"></td>
 
           <td>
-            <select form="f<%=p.id%>" name="category">
+            <select form="f<%=p.id%>" name="category" class="prod-category-select">
               <option value="">Início (vitrine)</option>
               <% (categorias || []).forEach(c => { %>
                 <option value="<%= c.slug %>" <%= p.category === c.slug ? 'selected' : '' %>><%= c.name %></option>
@@ -131,3 +147,50 @@
     </tbody>
   </table>
 </div>
+
+<!-- LÓGICA DE FILTRAGEM DINÂMICA VIA JAVASCRIPT -->
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const searchInput = document.getElementById("panel-search-input");
+  const categoryFilter = document.getElementById("panel-category-filter");
+  const rows = document.querySelectorAll("#products-table-body .product-row");
+
+  function filterTable() {
+    const searchText = searchInput.value.toLowerCase().trim();
+    const selectedCategory = categoryFilter.value;
+
+    rows.forEach(row => {
+      // Captura o valor de dentro do input de texto do nome
+      const nameInput = row.querySelector(".prod-name-input");
+      const productName = nameInput ? nameInput.value.toLowerCase() : "";
+
+      // Captura o valor selecionado dentro do seletor de categorias da linha
+      const categorySelect = row.querySelector(".prod-category-select");
+      const productCategory = categorySelect ? categorySelect.value : "";
+
+      // Regras de correspondência
+      const matchesSearch = productName.includes(searchText);
+      
+      let matchesCategory = false;
+      if (selectedCategory === "") {
+        matchesCategory = true; // Se selecionar 'Todas', exibe tudo
+      } else if (selectedCategory === "[vitrine]") {
+        matchesCategory = (productCategory === ""); // Caso seja a vitrine inicial (vazia)
+      } else {
+        matchesCategory = (productCategory === selectedCategory);
+      }
+
+      // Aplica a visibilidade na linha da tabela de forma limpa
+      if (matchesSearch && matchesCategory) {
+        row.style.display = "";
+      } else {
+        row.style.display = "none";
+      }
+    });
+  }
+
+  // Executa a função sempre que você digitar ou mudar a categoria
+  searchInput.addEventListener("input", filterTable);
+  categoryFilter.addEventListener("change", filterTable);
+});
+</script>
