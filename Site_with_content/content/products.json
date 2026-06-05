@@ -42,7 +42,7 @@
     },
     {
       "id": 1761056785061,
-      "name": "Smartwatch Xiaomi Amazfit Bip 6",
+      "name": "Relógio Smartwatch Xiaomi Amazfit Bip 6",
       "price": null,
       "image": "images/Smartwatch Xiaomi Amazfit Bip 6.jpg",
       "category": "acessrios",
@@ -162,7 +162,7 @@
     },
     {
       "id": 1763510500879,
-      "name": "Smartwatch Xiaomi Amazfit Bip 5 Rosa",
+      "name": "Relógio Smartwatch Xiaomi Amazfit Bip 5 Rosa",
       "price": null,
       "image": "images/Xiaomi amazfit bip 5 rosa.jpeg",
       "category": "acessrios",
@@ -385,6 +385,16 @@
       "name": "Carregador TurboPower™ 30W - Cabo USB-C",
       "price": null,
       "image": "images/Carregador 30w usb C.jpeg",
+      "category": "acessrios",
+      "showPrice": false,
+      "featured": false,
+      "active": true
+    },
+    {
+      "id": 1780622237724,
+      "name": "Relógio Smartwatch Amazfit Bip 5 Branco",
+      "price": null,
+      "image": "images/Relogio Xiaomi amazfit bip 5 branco.jpeg",
       "category": "acessrios",
       "showPrice": false,
       "featured": false,
