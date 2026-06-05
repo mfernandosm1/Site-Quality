@@ -429,6 +429,16 @@
       "showPrice": false,
       "featured": false,
       "active": true
+    },
+    {
+      "id": 1780623277269,
+      "name": "Samsung Galaxy S26 5G, 256GB, 12GB RAM, Galaxy AI, Tela 6.3",
+      "price": null,
+      "image": "images/Samsung S26.jpeg",
+      "category": "smartphones",
+      "showPrice": false,
+      "featured": true,
+      "active": true
     }
   ]
 }
