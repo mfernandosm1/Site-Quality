@@ -349,6 +349,26 @@
       "showPrice": false,
       "featured": true,
       "active": true
+    },
+    {
+      "id": 1780620735223,
+      "name": "Bateria Apple MagSafe",
+      "price": null,
+      "image": "images/Bateria MagSafe.jpeg",
+      "category": "acessrios",
+      "showPrice": false,
+      "featured": false,
+      "active": true
+    },
+    {
+      "id": 1780620964604,
+      "name": "Cartão De Memória MicroSD SanDisk Ultra 128gb",
+      "price": null,
+      "image": "images/Cartao_Sandisk_128gb.jpeg",
+      "category": "acessrios",
+      "showPrice": false,
+      "featured": false,
+      "active": true
     }
   ]
 }
