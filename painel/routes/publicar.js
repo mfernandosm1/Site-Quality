@@ -40,20 +40,27 @@ function aplicarDadosNoFooterHTML() {
 
     // 1. Lê os dados atuais salvos pelo painel
     const footerData = JSON.parse(fs.readFileSync(footerJsonPath, 'utf-8'));
-    const textoRodape = footerData.text || "© 2026 Quality Celulares. Todos os direitos reservados.";
+    
+    // Alvo principal: Tenta ler 'texto' ou 'text' para garantir o ano (2014 - 2026) que você digitar no painel
+    const textoRodape = footerData.texto || footerData.text || "© 2014 - 2026 Quality Celulares. Todos os direitos reservados.";
     
     // Evita duplicar a palavra CNPJ caso o usuário já tenha digitado no painel
     let cnpjRodape = footerData.cnpj || "";
-    if (cnpjRodape && !cnpjRodape.toUpperCase().startsWith("CNPJ:")) {
+    if (cnpjRodape) {
+      cnpjRodape = cnpjRodape.replace(/^CNPJ:\s*/i, ''); // Remove se o painel já mandou com "CNPJ:" no começo
       cnpjRodape = `CNPJ: ${cnpjRodape}`;
     }
+
+    // Links institucionais dinâmicos (Usará o do painel quando forem criados, ou o padrão se não existirem)
+    const urlSobre = footerData.urlSobre || "sobre.html";
+    const urlPagamento = footerData.urlPagamento || "formas-de-pagamento.html";
 
     const redesSociais = footerData.social || [];
 
     // 2. Ordena as redes sociais conforme a ordem do painel
     redesSociais.sort((a, b) => Number(a.order || 0) - Number(b.order || 0));
 
-    // 3. Monta o bloco de ícones sociais dinamicamente
+    // 3. Monta o bloco de ícones sociais dinamicamente (Código intocado que você validou)
     let htmlRedes = '\n    <div class="footer-socials">';
     redesSociais.forEach(rede => {
       let classeIcone = "fa-brands fa-instagram"; // Ícone padrão
@@ -77,12 +84,12 @@ function aplicarDadosNoFooterHTML() {
     });
     htmlRedes += '\n    </div>';
 
-    // 4. Estrutura original do teu footer.html (com links de texto fixos e ícones dinâmicos)
+    // 4. Estrutura montada injetando dinamicamente os novos links e o texto corrigido
     const novoConteudoHTML = `<footer class="footer bg-gray-900 text-gray-300 py-8 mt-12">
   <div class="footer-container max-w-6xl mx-auto px-4">
     <div class="footer-links">
-      <a href="sobre.html">Sobre nós</a>
-      <a href="formas-de-pagamento.html">Formas de pagamento e envio</a>
+      <a href="${urlSobre}">Sobre nós</a>
+      <a href="${urlPagamento}">Formas de pagamento e envio</a>
     </div>
 
     <div class="footer-copy">
@@ -96,7 +103,7 @@ function aplicarDadosNoFooterHTML() {
 
     // 5. Grava o resultado atualizado diretamente na fonte do site antes de enviar
     fs.writeFileSync(footerHtmlPath, novoConteudoHTML, 'utf-8');
-    console.log("🛠️ [Footer Dinâmico] footer.html atualizado e recalibrado com sucesso!");
+    console.log("🛠️ [Footer Dinâmico] footer.html atualizado (Texto, CNPJ e Links) com sucesso!");
 
   } catch (error) {
     console.error("❌ Erro ao processar footer dinâmico:", error.message);
