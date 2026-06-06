@@ -13,6 +13,7 @@ const BRANCH    = process.env.GIT_BRANCH || "main";
 const TZ        = 'America/Sao_Paulo';
 const KEEP_BACKUPS = 5;
 
+// Caminhos de manutenção
 const MAINT_FLAG = path.join(SITE_DIR, 'maintenance.flag');
 const MAINT_HTML = path.join(SITE_DIR, 'maintenance.html');
 
@@ -26,7 +27,7 @@ function nowSP(){
   };
 }
 
-// ============== [ MÁGICA DO RODAPÉ DINÂMICO ] ==============
+// ============== [ COMPILADOR DO RODAPÉ DINÂMICO ] ==============
 function aplicarDadosNoFooterHTML() {
   try {
     const footerJsonPath = path.join(REPO_DIR, 'content', 'footer.json');
@@ -39,27 +40,35 @@ function aplicarDadosNoFooterHTML() {
 
     // 1. Lê os dados atuais salvos pelo painel
     const footerData = JSON.parse(fs.readFileSync(footerJsonPath, 'utf-8'));
-    const textoRodape = footerData.text || "© 2025 Quality Celulares. Todos os direitos reservados.";
-    const cnpjRodape = footerData.cnpj ? `CNPJ: ${footerData.cnpj}` : "";
+    const textoRodape = footerData.text || "© 2026 Quality Celulares. Todos os direitos reservados.";
+    
+    // Evita duplicar a palavra CNPJ caso o usuário já tenha digitado no painel
+    let cnpjRodape = footerData.cnpj || "";
+    if (cnpjRodape && !cnpjRodape.toUpperCase().startsWith("CNPJ:")) {
+      cnpjRodape = `CNPJ: ${cnpjRodape}`;
+    }
+
     const redesSociais = footerData.social || [];
 
-    // 2. Ordena as redes sociais conforme definido no painel
+    // 2. Ordena as redes sociais conforme a ordem do painel
     redesSociais.sort((a, b) => Number(a.order || 0) - Number(b.order || 0));
 
     // 3. Monta o bloco de ícones sociais dinamicamente
     let htmlRedes = '\n    <div class="footer-socials">';
     redesSociais.forEach(rede => {
-      let classeIcone = "fa-brands fa-instagram"; // padrão
+      let classeIcone = "fa-brands fa-instagram"; // Ícone padrão
       let classeLink = "instagram";
 
-      const nomeLimpo = (rede.label || "").toLowerCase();
+      // Limpa acentos e coloca em minúsculo para comparar sem erros de digitação
+      const nomeLimpo = (rede.label || "").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+
       if (nomeLimpo.includes("facebook")) {
         classeIcone = "fa-brands fa-facebook-f";
         classeLink = "facebook";
       } else if (nomeLimpo.includes("tiktok")) {
         classeIcone = "fa-brands fa-tiktok";
         classeLink = "tiktok";
-      } else if (nomeLimpo.includes("localiza") || nomeLimpo.includes("mapa") || nomeLimpo.includes("onde")) {
+      } else if (nomeLimpo.includes("localiza") || nomeLimpo.includes("mapa") || nomeLimpo.includes("onde") || nomeLimpo.includes("endereco")) {
         classeIcone = "fa-solid fa-location-dot";
         classeLink = "location";
       }
@@ -68,7 +77,7 @@ function aplicarDadosNoFooterHTML() {
     });
     htmlRedes += '\n    </div>';
 
-    // 4. Monta a estrutura exata e original do footer.html com os dados novos do painel
+    // 4. Estrutura original do teu footer.html (com links de texto fixos e ícones dinâmicos)
     const novoConteudoHTML = `<footer class="footer bg-gray-900 text-gray-300 py-8 mt-12">
   <div class="footer-container max-w-6xl mx-auto px-4">
     <div class="footer-links">
@@ -85,9 +94,9 @@ function aplicarDadosNoFooterHTML() {
   </div>
 </footer>`;
 
-    // 5. Grava o resultado atualizado diretamente na fonte do site antes da sincronização
+    // 5. Grava o resultado atualizado diretamente na fonte do site antes de enviar
     fs.writeFileSync(footerHtmlPath, novoConteudoHTML, 'utf-8');
-    console.log("🛠️ [Footer Dinâmico] footer.html atualizado com dados do painel antes do Push!");
+    console.log("🛠️ [Footer Dinâmico] footer.html atualizado e recalibrado com sucesso!");
 
   } catch (error) {
     console.error("❌ Erro ao processar footer dinâmico:", error.message);
@@ -167,7 +176,7 @@ router.post("/", async (req,res)=>{
   try{
     console.log("🚀 Publicação iniciada…");
     
-    // 💥 APLICA OS LINKS DO PAINEL NO FOOTER ANTES DE TUDO
+    // Executa a montagem do rodapé dinâmico antes de sincronizar as pastas
     aplicarDadosNoFooterHTML();
 
     await criarBackupLocal();
@@ -191,7 +200,7 @@ router.post("/", async (req,res)=>{
 
     // =================== PUBLICAÇÃO NORMAL ===================
     console.log("🌐 Modo normal: sincronizando SITE_DIR → REPO_DIR (add/update)...");
-    syncDirContents(SITE_DIR, REPO_DIR); // Copia o footer já atualizado para o repositório
+    syncDirContents(SITE_DIR, REPO_DIR); 
     await gitCommitPush();
 
     console.log("✅ Publicação concluída (sem exclusões).");
