@@ -1,12 +1,12 @@
 {
-  "text": "© 2025 Quality Celulares. Todos os direitos reservados",
+  "text": "© 2025 Quality Celulares. Todos os direitos reservados.",
   "cnpj": "CNPJ: 20.375.910/0001-66",
   "social": [
     {
       "label": "Instagram ibiruba",
       "icon": "Instagram ibiruba",
       "url": "https://www.instagram.com/qualitycelulares_ibi/",
-      "order": 2
+      "order": 1
     },
     {
       "label": "Instagram Saldanha",
@@ -29,8 +29,8 @@
     {
       "label": "Facebook",
       "icon": "Facebook",
-      "url": "https://www.facebook.com/share/17KnAHN57D/?mibextid=wwXIfr",
-      "order": 1
+      "url": "#",
+      "order": 5
     }
   ]
 }

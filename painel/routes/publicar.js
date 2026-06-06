@@ -13,7 +13,6 @@ const BRANCH    = process.env.GIT_BRANCH || "main";
 const TZ        = 'America/Sao_Paulo';
 const KEEP_BACKUPS = 5;
 
-// ============ [ NOVO ]: caminhos de manutenção ============
 const MAINT_FLAG = path.join(SITE_DIR, 'maintenance.flag');
 const MAINT_HTML = path.join(SITE_DIR, 'maintenance.html');
 
@@ -26,6 +25,75 @@ function nowSP(){
     tag: `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}_${pad(d.getHours())}${pad(d.getMinutes())}`
   };
 }
+
+// ============== [ MÁGICA DO RODAPÉ DINÂMICO ] ==============
+function aplicarDadosNoFooterHTML() {
+  try {
+    const footerJsonPath = path.join(REPO_DIR, 'content', 'footer.json');
+    const footerHtmlPath = path.join(SITE_DIR, 'footer.html');
+
+    if (!fs.existsSync(footerJsonPath) || !fs.existsSync(footerHtmlPath)) {
+      console.log("⚠️ Arquivo footer.json ou footer.html não localizado para compilação.");
+      return;
+    }
+
+    // 1. Lê os dados atuais salvos pelo painel
+    const footerData = JSON.parse(fs.readFileSync(footerJsonPath, 'utf-8'));
+    const textoRodape = footerData.text || "© 2025 Quality Celulares. Todos os direitos reservados.";
+    const cnpjRodape = footerData.cnpj ? `CNPJ: ${footerData.cnpj}` : "";
+    const redesSociais = footerData.social || [];
+
+    // 2. Ordena as redes sociais conforme definido no painel
+    redesSociais.sort((a, b) => Number(a.order || 0) - Number(b.order || 0));
+
+    // 3. Monta o bloco de ícones sociais dinamicamente
+    let htmlRedes = '\n    <div class="footer-socials">';
+    redesSociais.forEach(rede => {
+      let classeIcone = "fa-brands fa-instagram"; // padrão
+      let classeLink = "instagram";
+
+      const nomeLimpo = (rede.label || "").toLowerCase();
+      if (nomeLimpo.includes("facebook")) {
+        classeIcone = "fa-brands fa-facebook-f";
+        classeLink = "facebook";
+      } else if (nomeLimpo.includes("tiktok")) {
+        classeIcone = "fa-brands fa-tiktok";
+        classeLink = "tiktok";
+      } else if (nomeLimpo.includes("localiza") || nomeLimpo.includes("mapa") || nomeLimpo.includes("onde")) {
+        classeIcone = "fa-solid fa-location-dot";
+        classeLink = "location";
+      }
+
+      htmlRedes += `\n      <a href="${rede.url}" class="${classeLink}" aria-label="${rede.label}" target="_blank" title="${rede.label}"><i class="${classeIcone}"></i></a>`;
+    });
+    htmlRedes += '\n    </div>';
+
+    // 4. Monta a estrutura exata e original do footer.html com os dados novos do painel
+    const novoConteudoHTML = `<footer class="footer bg-gray-900 text-gray-300 py-8 mt-12">
+  <div class="footer-container max-w-6xl mx-auto px-4">
+    <div class="footer-links">
+      <a href="sobre.html">Sobre nós</a>
+      <a href="formas-de-pagamento.html">Formas de pagamento e envio</a>
+    </div>
+
+    <div class="footer-copy">
+      <span class="nobreak">${textoRodape}</span><br />
+      ${cnpjRodape}
+    </div>
+
+    ${htmlRedes}
+  </div>
+</footer>`;
+
+    // 5. Grava o resultado atualizado diretamente na fonte do site antes da sincronização
+    fs.writeFileSync(footerHtmlPath, novoConteudoHTML, 'utf-8');
+    console.log("🛠️ [Footer Dinâmico] footer.html atualizado com dados do painel antes do Push!");
+
+  } catch (error) {
+    console.error("❌ Erro ao processar footer dinâmico:", error.message);
+  }
+}
+// ===========================================================
 
 function syncDirContents(src, dst){
   const IGNORE = new Set([".git",".github","node_modules","Backup","backups"]);
@@ -83,7 +151,7 @@ function registrarPublishJSON(){
     fs.writeFileSync(path.join(contentDir,"publish.json"),
       JSON.stringify({ last_publish: nowSP().date.toISOString() }, null, 2),
       "utf-8");
-    console.log("📝 content/publish.json atualizado");
+    console.log("📝 content/publish.json updated");
   }catch(e){ console.warn(`⚠️ publish.json: ${e.message}`); }
 }
 
@@ -98,6 +166,10 @@ async function gitCommitPush(){
 router.post("/", async (req,res)=>{
   try{
     console.log("🚀 Publicação iniciada…");
+    
+    // 💥 APLICA OS LINKS DO PAINEL NO FOOTER ANTES DE TUDO
+    aplicarDadosNoFooterHTML();
+
     await criarBackupLocal();
     limparBackupsAntigos();
     registrarPublishJSON();
@@ -105,27 +177,13 @@ router.post("/", async (req,res)=>{
     // =================== MODO MANUTENÇÃO ===================
     if (fs.existsSync(MAINT_FLAG) && fs.existsSync(MAINT_HTML)) {
       console.log("🛠️ Modo manutenção DETECTADO: publicando site mínimo…");
-
       const html = fs.readFileSync(MAINT_HTML, "utf-8");
-
-      // 1) escreve/atualiza index.html e 404.html na raiz do repositório
       fs.writeFileSync(path.join(REPO_DIR, "index.html"), html, "utf-8");
       fs.writeFileSync(path.join(REPO_DIR, "404.html"),  html, "utf-8");
-
-      // 2) (opcional) bloquear indexação durante manutenção
       fs.writeFileSync(path.join(REPO_DIR, "robots.txt"), "User-agent: *\nDisallow: /\n", "utf-8");
-
-      // 3) (opcional) preservar CNAME se você usa domínio custom
       const cnameSite = path.join(SITE_DIR, "CNAME");
       const cnameRepo = path.join(REPO_DIR, "CNAME");
-      try {
-        if (fs.existsSync(cnameSite)) {
-          fs.copyFileSync(cnameSite, cnameRepo);
-        }
-      } catch (e) {
-        console.warn("⚠️ CNAME: ", e.message);
-      }
-
+      try { if (fs.existsSync(cnameSite)) fs.copyFileSync(cnameSite, cnameRepo); } catch (e) { console.warn("⚠️ CNAME: ", e.message); }
       await gitCommitPush();
       console.log("✅ Publicação (modo manutenção) concluída.");
       return res.redirect(`/?flash=${encodeURIComponent("✅ Publicado em modo manutenção (index & 404 atualizados).")}`);
@@ -133,7 +191,7 @@ router.post("/", async (req,res)=>{
 
     // =================== PUBLICAÇÃO NORMAL ===================
     console.log("🌐 Modo normal: sincronizando SITE_DIR → REPO_DIR (add/update)...");
-    syncDirContents(SITE_DIR, REPO_DIR); // sem deletar nada
+    syncDirContents(SITE_DIR, REPO_DIR); // Copia o footer já atualizado para o repositório
     await gitCommitPush();
 
     console.log("✅ Publicação concluída (sem exclusões).");

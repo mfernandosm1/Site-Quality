@@ -10,7 +10,7 @@ function stamp(){ return new Date().toISOString().replace(/[:.]/g,'-'); }
 router.get('/', (req,res)=>{
   const file = path.join(P(req.app).CONTENT_DIR, 'footer.json');
   const footer = readJson(file); footer.social = footer.social || [];
-  res.render('editar_footer', { footer, flash:null });
+  res.render('editar_footer', { footer, flash: null, sucessoRodape: null });
 });
 
 router.post('/save', (req,res)=>{
@@ -20,7 +20,9 @@ router.post('/save', (req,res)=>{
   try { fs.writeFileSync(path.join(BACKUPS_DIR, 'footer-'+stamp()+'.json'), JSON.stringify(prev,null,2),'utf-8'); } catch(e){}
   const footer = { text: req.body.text || '', cnpj: req.body.cnpj || '', social: prev.social || [] };
   writeJson(file, footer);
-  res.redirect('/footer');
+  
+  console.log('💾 Dados do rodapé (Texto/CNPJ) salvos com sucesso no footer.json!');
+  res.render('editar_footer', { footer, flash: null, Admin: null, sucessoRodape: 'Rodapé salvo com sucesso!' });
 });
 
 router.post('/add-social', (req,res)=>{
@@ -29,7 +31,10 @@ router.post('/add-social', (req,res)=>{
   const data = readJson(file); data.social = data.social || [];
   data.social.push({ label:req.body.label||'link', icon:req.body.label||'link', url:req.body.url||'#', order:Number(req.body.order||data.social.length+1) });
   try { fs.writeFileSync(path.join(BACKUPS_DIR, 'footer-'+stamp()+'.json'), JSON.stringify(data,null,2),'utf-8'); } catch(e){}
-  writeJson(file, data); res.redirect('/footer');
+  writeJson(file, data); 
+  
+  console.log(`✨ Nova rede social "${req.body.label}" adicionada com sucesso!`);
+  res.render('editar_footer', { footer: data, flash: null, sucessoRodape: 'Ícone social adicionado com sucesso!' });
 });
 
 router.post('/update-social', (req,res)=>{
@@ -44,7 +49,10 @@ router.post('/update-social', (req,res)=>{
     data.social[i].order = Number(req.body.order || data.social[i].order || (i+1));
   }
   try { fs.writeFileSync(path.join(BACKUPS_DIR, 'footer-'+stamp()+'.json'), JSON.stringify(data,null,2),'utf-8'); } catch(e){}
-  writeJson(file, data); res.redirect('/footer');
+  writeJson(file, data); 
+  
+  console.log('🔄 Lista de ícones sociais atualizada na tabela.');
+  res.render('editar_footer', { footer: data, flash: null, sucessoRodape: 'Alteração salva com sucesso!' });
 });
 
 router.post('/del-social', (req,res)=>{
@@ -53,15 +61,17 @@ router.post('/del-social', (req,res)=>{
   const data = readJson(file); data.social = data.social || [];
   const i = Number(req.body.index); if (data.social[i]) data.social.splice(i,1);
   try { fs.writeFileSync(path.join(BACKUPS_DIR, 'footer-'+stamp()+'.json'), JSON.stringify(data,null,2),'utf-8'); } catch(e){}
-  writeJson(file, data); res.redirect('/footer');
+  writeJson(file, data); 
+  
+  console.log('❌ Um ícone social foi removido do rodapé.');
+  res.render('editar_footer', { footer: data, flash: null, sucessoRodape: 'Ícone removido com sucesso!' });
 });
-
-export default router;
 
 router.post('/import',(req,res)=>{
   const { SITE_DIR, CONTENT_DIR } = P(req.app);
   const file = path.join(CONTENT_DIR, 'footer.json');
   const data = readJson(file); data.social = data.social || [];
+  let msg = 'Links importados do footer.html com sucesso!';
   try {
     const html = fs.readFileSync(path.join(SITE_DIR,'footer.html'),'utf-8');
     const footerNav = html;
@@ -75,6 +85,12 @@ router.post('/import',(req,res)=>{
       }
     }
     writeJson(file, data);
-  } catch(e){}
-  res.redirect('/footer');
+    console.log('📥 Links importados do footer.html com sucesso.');
+  } catch(e){
+    msg = 'Erro ao tentar importar do arquivo.';
+    console.log('⚠️ Falha ao tentar importar links do footer.html.');
+  }
+  res.render('editar_footer', { footer: data, flash: null, sucessoRodape: msg });
 });
+
+export default router;

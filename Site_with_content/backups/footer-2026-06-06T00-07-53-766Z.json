@@ -1,36 +1,42 @@
 {
-  "text": "© 2025 Quality Celulares. Todos os direitos reservados",
+  "text": "© 2025 Quality Celulares. Todos os direitos reservados.",
   "cnpj": "CNPJ: 20.375.910/0001-66",
   "social": [
+    {
+      "label": "Sobre nós",
+      "icon": "Sobre nós",
+      "url": "sobre.html",
+      "order": 3
+    },
+    {
+      "label": "Formas de pagamento e envio",
+      "icon": "Formas de pagamento e envio",
+      "url": "formas-de-pagamento.html",
+      "order": 4
+    },
     {
       "label": "Instagram ibiruba",
       "icon": "Instagram ibiruba",
       "url": "https://www.instagram.com/qualitycelulares_ibi/",
-      "order": 2
+      "order": 5
     },
     {
       "label": "Instagram Saldanha",
       "icon": "Instagram Saldanha",
       "url": "https://www.instagram.com/quality_celulares/",
-      "order": 3
+      "order": 6
     },
     {
       "label": "Tiktok",
       "icon": "Tiktok",
       "url": "https://www.tiktok.com/@quality_celulares?lang=en",
-      "order": 4
+      "order": 7
     },
     {
       "label": "Localização",
       "icon": "Localização",
       "url": "https://www.google.com/maps/place/Quality+Celulares/@-28.3998065,-53.0951354,17z/data=!3m1!4b1!4m6!3m5!1s0x94fd142bd7e83fcf:0x28cba94eec608ef!8m2!3d-28.3998065!4d-53.0951354!16s%2Fg%2F11hcz_j2q3?entry=ttu&g_ep=EgoyMDI2MDYwMS4wIKXMDSoASAFQAw%3D%3D",
-      "order": 5
-    },
-    {
-      "label": "Facebook",
-      "icon": "Facebook",
-      "url": "https://www.facebook.com/share/17KnAHN57D/?mibextid=wwXIfr",
-      "order": 1
+      "order": 8
     }
   ]
 }

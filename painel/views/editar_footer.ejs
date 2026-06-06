@@ -1,6 +1,13 @@
 <% layout('layout') -%>
+
+<% if (typeof sucessoRodape !== 'undefined' && sucessoRodape) { %>
+  <div class="notice" style="background-color: #d4edda; color: #155724; border-color: #c3e6cb; padding: 12px; margin-bottom: 20px; border-radius: 6px; border: 1px solid #c3e6cb; font-weight: 500;">
+    ✅ <%= sucessoRodape %>
+  </div>
+<% } %>
+
 <div class="card">
-  <h3>🔻 Rodapé — Texto, CNPJ e Sociais</h3>
+  <h3>🔻 Rodapé — Texto e CNPJ</h3>
   <form method="post" action="/footer/save" class="row" style="grid-template-columns:1fr 1fr;">
     <div><label>Texto</label><input type="text" name="text" value="<%= (footer && footer.text) || '' %>"></div>
     <div><label>CNPJ</label><input type="text" name="cnpj" value="<%= (footer && footer.cnpj) || '' %>"></div>
@@ -11,8 +18,8 @@
 <div class="card">
   <h3>Ícones Sociais</h3>
   <form method="post" action="/footer/add-social" class="row">
-    <div><label>Ícone/Label</label><input type="text" name="label" placeholder="Instagram"></div>
-    <div><label>URL</label><input type="url" name="url" placeholder="https://instagram.com/seuuser"></div>
+    <div><label>Nome do Ícone</label><input type="text" name="label" placeholder="Ex: Instagram Oficial"></div>
+    <div><label>Link/URL</label><input type="url" name="url" placeholder="https://instagram.com/..."></div>
     <div><label>Ordem</label><input type="number" name="order" placeholder="1"></div>
     <div style="align-self:end"><button class="btn" type="submit">Adicionar</button></div>
   </form>
