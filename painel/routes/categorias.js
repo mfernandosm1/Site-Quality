@@ -23,6 +23,28 @@ function uniqueSlug(base, items, excludeId){
   return `${s}-${i}`;
 }
 
+function removeCategoryHtmlFiles(siteDir){
+  try {
+    if (!siteDir || !fs.existsSync(siteDir)) return 0;
+    let removed = 0;
+    for (const f of fs.readdirSync(siteDir)) {
+      if (/^categoria[-_].+\.html$/i.test(f)) {
+        fs.unlinkSync(path.join(siteDir, f));
+        removed++;
+      }
+    }
+    return removed;
+  } catch (e) {
+    console.warn(`⚠️ Falha ao remover arquivos antigos de categoria: ${e.message}`);
+    return 0;
+  }
+}
+
+function rebuildCategoryStructure(items, siteDir){
+  generateCategoryPage('', '', siteDir); // agora gera apenas categoria.html
+  updateHeaderMenu(items || [], siteDir);
+}
+
 // ====== LISTAR ======
 router.get('/', (req,res)=>{
   const file = path.join(P(req.app).CONTENT_DIR, 'categories.json');
@@ -46,16 +68,16 @@ router.post('/add', (req,res)=>{
   slug = uniqueSlug(slug, data.items);
 
   const order = Number(req.body.order || data.items.length + 1);
-  const newCat = { id: Date.now(), name, slug, order };
+  const icon = (req.body.icon || '').trim();
+  const newCat = { id: Date.now(), name, slug, order, icon };
   data.items.push(newCat);
   writeJson(file, data);
 
   try {
-    generateCategoryPage(name, slug, SITE_DIR);
-    updateHeaderMenu(data.items, SITE_DIR);
+    rebuildCategoryStructure(data.items, SITE_DIR);
     console.log(`✅ Categoria "${name}" criada com sucesso (slug: ${slug}).`);
   } catch (err) {
-    console.error('Erro ao gerar categoria:', err);
+    console.error('Erro ao atualizar estrutura de categorias:', err);
   }
 
   res.redirect('/categorias?saved=1');
@@ -80,28 +102,14 @@ router.post('/update', (req,res)=>{
     let newSlug = slugInput && slugInput !== oldSlug ? slugInput : (newName !== oldName ? autoFromName : oldSlug);
     newSlug = uniqueSlug(newSlug, data.items, it.id);
 
-    const oldFile = path.join(SITE_DIR, `categoria-${oldSlug}.html`);
-    const newFile = path.join(SITE_DIR, `categoria-${newSlug}.html`);
-
-    try {
-      if (oldSlug !== newSlug && fs.existsSync(oldFile)) {
-        fs.renameSync(oldFile, newFile);
-        console.log(`🔄 Renomeado: categoria-${oldSlug}.html → categoria-${newSlug}.html`);
-      } else if (oldSlug !== newSlug && !fs.existsSync(oldFile)) {
-        generateCategoryPage(newName, newSlug, SITE_DIR);
-        console.log(`📄 Gerado novo arquivo categoria-${newSlug}.html`);
-      }
-    } catch (err) {
-      console.error('❌ Erro ao renomear/gerar arquivo da categoria:', err);
-    }
-
     it.name = newName;
     it.slug = newSlug;
     it.order = Number(req.body.order || it.order || 1);
+    it.icon = (req.body.icon || '').trim();
   }
 
   writeJson(file, data);
-  try { updateHeaderMenu(data.items, SITE_DIR); } catch(e){}
+  try { rebuildCategoryStructure(data.items, SITE_DIR); } catch(e){ console.error('Erro ao atualizar header/categoria.html:', e); }
   res.redirect('/categorias?saved=1');
 });
 
@@ -113,51 +121,25 @@ router.post('/del', (req,res)=>{
   const file = path.join(CONTENT_DIR, 'categories.json');
   const data = readJson(file);
   const id = Number(req.body.id);
-  const cat = (data.items||[]).find(c=> Number(c.id)===id);
 
   data.items = (data.items||[]).filter(c=> Number(c.id)!==id);
   writeJson(file, data);
-  try { updateHeaderMenu(data.items, SITE_DIR); } catch(e){}
 
-  try {
-    if (cat && cat.slug) {
-      const fileSlug = `categoria-${cat.slug}.html`;
-      const target = path.join(SITE_DIR, fileSlug);
-      if (fs.existsSync(target)) {
-        fs.unlinkSync(target);
-        console.log(`🗑️ Categoria "${cat.name}" removida e arquivo ${fileSlug} excluído.`);
-      }
-    }
-  } catch (err) {
-    console.error('Erro ao remover arquivo da categoria:', err);
-  }
+  try { rebuildCategoryStructure(data.items, SITE_DIR); } catch(e){ console.error('Erro ao atualizar header/categoria.html:', e); }
 
   res.redirect('/categorias?saved=1');
 });
 
-// ====== LIMPAR E RECRIAR CATEGORIAS ======
+// ====== LIMPAR CATEGORIAS ANTIGAS E RECRIAR PÁGINA ÚNICA ======
 router.post('/limpar', (req, res) => {
   try {
     const paths = P(req.app);
     const CONTENT_DIR = paths.CONTENT_DIR;
     const SITE_DIR = paths.SITE_DIR || paths.SITE_WITH_CONTENT || paths.SITE || paths.PUBLIC_DIR;
     const data = readJson(path.join(CONTENT_DIR, 'categories.json'));
-    const ativos = new Set((data.items || []).map(c => `categoria-${c.slug}.html`));
 
-    const files = fs.readdirSync(SITE_DIR);
-    let removed = 0;
-    for (const f of files) {
-      if (/^categoria[-_].+\.html$/i.test(f) && !ativos.has(f)) {
-        fs.unlinkSync(path.join(SITE_DIR, f));
-        removed++;
-      }
-    }
-
-    // 🆕 recria todos os arquivos com modelo atualizado
-    (data.items || []).forEach(c => {
-      try { generateCategoryPage(c.name, c.slug, SITE_DIR); }
-      catch(e){ console.error('Erro ao recriar', c.slug, e); }
-    });
+    const removed = removeCategoryHtmlFiles(SITE_DIR);
+    rebuildCategoryStructure(data.items || [], SITE_DIR);
 
     res.json({ success: true, removed });
   } catch (err) {

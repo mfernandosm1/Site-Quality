@@ -3,6 +3,7 @@ import fs from "fs";
 import path from "path";
 import archiver from "archiver";
 import simpleGit from "simple-git";
+import { generateCategoryPage, updateHeaderMenu, convertOldCategoryFiles } from "./main_utils.js";
 
 const router = express.Router();
 
@@ -111,6 +112,44 @@ function aplicarDadosNoFooterHTML() {
 }
 // ===========================================================
 
+function limparArquivosCategoriasAntigos(...dirs){
+  let removed = 0;
+  for (const dir of dirs) {
+    try {
+      if (!dir || !fs.existsSync(dir)) continue;
+      for (const f of fs.readdirSync(dir)) {
+        if (/^categoria[-_].+\.html$/i.test(f)) {
+          fs.unlinkSync(path.join(dir, f));
+          removed++;
+          console.log(`🧹 Arquivo antigo de categoria removido: ${path.join(dir, f)}`);
+        }
+      }
+    } catch (e) {
+      console.warn(`⚠️ Falha ao limpar categorias antigas em ${dir}: ${e.message}`);
+    }
+  }
+  if (removed > 0) console.log(`✅ ${removed} arquivo(s) antigo(s) de categoria removido(s).`);
+}
+
+
+function readJsonSafe(file, fallback = { items: [] }){
+  try { return JSON.parse(fs.readFileSync(file, 'utf-8')); }
+  catch { return fallback; }
+}
+
+function prepararCategoriasParaPublicacao(){
+  try {
+    const categoriesPath = path.join(REPO_DIR, 'content', 'categories.json');
+    const data = readJsonSafe(categoriesPath, { items: [] });
+    updateHeaderMenu(data.items || [], SITE_DIR);
+    generateCategoryPage('', '', SITE_DIR);
+    convertOldCategoryFiles(SITE_DIR);
+    console.log('✅ Categorias preparadas para página única categoria.html.');
+  } catch (e) {
+    console.warn(`⚠️ Falha ao preparar categorias: ${e.message}`);
+  }
+}
+
 function syncDirContents(src, dst){
   const IGNORE = new Set([".git",".github","node_modules","Backup","backups"]);
   function walk(curSrc, curDst){
@@ -206,12 +245,14 @@ router.post("/", async (req,res)=>{
     }
 
     // =================== PUBLICAÇÃO NORMAL ===================
-    console.log("🌐 Modo normal: sincronizando SITE_DIR → REPO_DIR (add/update)...");
-    syncDirContents(SITE_DIR, REPO_DIR); 
+    console.log("🌐 Modo normal: preparando categoria.html, limpando categorias antigas e sincronizando SITE_DIR → REPO_DIR...");
+    prepararCategoriasParaPublicacao();
+    limparArquivosCategoriasAntigos(SITE_DIR, REPO_DIR);
+    syncDirContents(SITE_DIR, REPO_DIR);
     await gitCommitPush();
 
-    console.log("✅ Publicação concluída (sem exclusões).");
-    res.redirect(`/?flash=${encodeURIComponent("✅ Conteúdo adicionado/atualizado e push realizado.")}`);
+    console.log("✅ Publicação concluída.");
+    res.redirect(`/?flash=${encodeURIComponent("✅ Conteúdo atualizado, categorias antigas limpas e push realizado.")}`);
   }catch(err){
     console.error("❌ Erro na publicação:", err);
     res.redirect(`/?flash=${encodeURIComponent("❌ Erro ao publicar site. Verifique o console.")}`);

@@ -1,16 +1,18 @@
 {
   "items": [
     {
-      "id": 1761055588889,
+      "id": 1780850034586,
       "name": "Smartphones",
       "slug": "smartphones",
-      "order": 1
+      "order": 1,
+      "icon": ""
     },
     {
-      "id": 1761055594824,
+      "id": 1780850064307,
       "name": "Acessórios",
-      "slug": "acessrios",
-      "order": 2
+      "slug": "acessorios",
+      "order": 2,
+      "icon": ""
     }
   ]
 }

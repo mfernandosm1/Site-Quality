@@ -20,7 +20,6 @@ function writeJson(p, data) {
   fs.writeFileSync(p, JSON.stringify(data, null, 2), 'utf-8');
 }
 
-// ====== FUNÇÃO: Listar todas as imagens da pasta /site/images ======
 function getAllImages(baseDir, prefix = '') {
   let results = [];
   if (!fs.existsSync(baseDir)) return results;
@@ -40,7 +39,22 @@ function getAllImages(baseDir, prefix = '') {
   return results;
 }
 
-// ====== LISTAR ======
+function wantsJson(req) {
+  return req.xhr || (req.headers.accept || '').includes('application/json');
+}
+
+function productFromBody(body, current = {}) {
+  return {
+    name: (body.name || current.name || '').trim(),
+    price: body.price ? Number(body.price) : null,
+    image: (body.image || current.image || '').trim(),
+    category: (body.category ?? current.category ?? '').toString().trim(),
+    showPrice: body.showPrice === true || body.showPrice === 'true',
+    featured: body.featured === true || body.featured === 'true',
+    active: body.active === true || body.active === 'true'
+  };
+}
+
 router.get('/', (req, res) => {
   const contentDir = P(req.app).CONTENT_DIR;
   const file = path.join(contentDir, 'products.json');
@@ -49,71 +63,116 @@ router.get('/', (req, res) => {
   const catsFile = path.join(contentDir, 'categories.json');
   const cats = readJson(catsFile);
 
-  // Caminho da pasta de imagens dentro do site
   const imagesDir = path.join(P(req.app).SITE_DIR, 'images');
   const imagens = getAllImages(imagesDir);
+
+  let flash = null;
+  if (req.query.saved === 'produto') flash = '✅ Produto salvo com sucesso.';
+  if (req.query.saved === 'all') flash = '✅ Alterações salvas com sucesso.';
+  if (req.query.saved === 'bulk') flash = '✅ Categoria aplicada nos produtos selecionados.';
+  if (req.query.deleted === '1') flash = '🗑️ Produto excluído com sucesso.';
 
   res.render('produtos', {
     items: data.items || [],
     categorias: cats.items || [],
     imagens,
-    flash: null
+    flash
   });
 });
 
-// ====== ADICIONAR ======
 router.post('/add', (req, res) => {
   const file = path.join(P(req.app).CONTENT_DIR, 'products.json');
   const data = readJson(file);
   data.items = data.items || [];
 
-  const name = (req.body.name || '').trim();
-  const price = req.body.price ? Number(req.body.price) : null;
-  const image = (req.body.image || '').trim();
-  const category = (req.body.category || '').trim();
-  const showPrice = req.body.showPrice === 'true';
-  const featured = req.body.featured === 'true';
-  const active = req.body.active === 'true';
+  const novo = productFromBody(req.body);
+  novo.id = Date.now();
 
-  data.items.push({
-    id: Date.now(),
-    name,
-    price,
-    image,
-    category,
-    showPrice,
-    featured,
-    active
-  });
+  data.items.push(novo);
 
   writeJson(file, data);
-  console.log(`✅ Produto "${name}" adicionado.`);
-  res.redirect('/produtos');
+  console.log(`✅ Produto "${novo.name}" adicionado.`);
+  res.redirect('/produtos?saved=produto');
 });
 
-// ====== ATUALIZAR ======
 router.post('/update', (req, res) => {
   const file = path.join(P(req.app).CONTENT_DIR, 'products.json');
   const data = readJson(file);
   const id = Number(req.body.id);
   const item = (data.items || []).find(p => Number(p.id) === id);
 
-  if (item) {
-    item.name = req.body.name || item.name;
-    item.price = req.body.price ? Number(req.body.price) : null;
-    item.image = req.body.image || item.image;
-    item.category = req.body.category || item.category;
-    item.showPrice = req.body.showPrice === 'true';
-    item.featured = req.body.featured === 'true';
-    item.active = req.body.active === 'true';
+  if (!item) {
+    if (wantsJson(req)) return res.status(404).json({ success: false, message: 'Produto não encontrado.' });
+    return res.redirect('/produtos?error=not_found');
   }
 
+  Object.assign(item, productFromBody(req.body, item));
+
   writeJson(file, data);
-  console.log(`✏️ Produto atualizado: ${item?.name || id}`);
-  res.redirect('/produtos');
+  console.log(`✏️ Produto atualizado: ${item.name || id}`);
+
+  if (wantsJson(req)) {
+    return res.json({ success: true, message: '✅ Produto salvo com sucesso.', item });
+  }
+
+  res.redirect('/produtos?saved=produto');
 });
 
-// ====== EXCLUIR ======
+router.post('/update-all', (req, res) => {
+  const file = path.join(P(req.app).CONTENT_DIR, 'products.json');
+  const data = readJson(file);
+  data.items = data.items || [];
+
+  const ids = Array.isArray(req.body.id) ? req.body.id : (req.body.id ? [req.body.id] : []);
+
+  ids.forEach((rawId, index) => {
+    const id = Number(rawId);
+    const item = data.items.find(p => Number(p.id) === id);
+    if (!item) return;
+
+    const getField = (field) => {
+      const value = req.body[field];
+      return Array.isArray(value) ? value[index] : value;
+    };
+
+    Object.assign(item, productFromBody({
+      name: getField('name'),
+      price: getField('price'),
+      image: getField('image'),
+      category: getField('category'),
+      showPrice: getField('showPrice'),
+      featured: getField('featured'),
+      active: getField('active')
+    }, item));
+  });
+
+  writeJson(file, data);
+  console.log(`💾 Alterações em massa salvas: ${ids.length} produto(s).`);
+  res.redirect('/produtos?saved=all');
+});
+
+router.post('/bulk-category', (req, res) => {
+  const file = path.join(P(req.app).CONTENT_DIR, 'products.json');
+  const data = readJson(file);
+  data.items = data.items || [];
+
+  const ids = Array.isArray(req.body.selectedIds) ? req.body.selectedIds : (req.body.selectedIds ? [req.body.selectedIds] : []);
+  const selectedIds = ids.map(Number);
+  const category = (req.body.bulkCategory ?? '').toString().trim();
+
+  let updated = 0;
+  data.items.forEach(item => {
+    if (selectedIds.includes(Number(item.id))) {
+      item.category = category;
+      updated++;
+    }
+  });
+
+  writeJson(file, data);
+  console.log(`⚡ Categoria aplicada em massa: ${updated} produto(s).`);
+  res.redirect('/produtos?saved=bulk');
+});
+
 router.post('/del', (req, res) => {
   const file = path.join(P(req.app).CONTENT_DIR, 'products.json');
   const data = readJson(file);
@@ -123,7 +182,7 @@ router.post('/del', (req, res) => {
   writeJson(file, data);
 
   console.log(`🗑️ Produto ${id} excluído.`);
-  res.redirect('/produtos');
+  res.redirect('/produtos?deleted=1');
 });
 
 export default router;

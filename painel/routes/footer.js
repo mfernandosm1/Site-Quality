@@ -2,6 +2,7 @@ import express from 'express';
 import fs from 'fs';
 import path from 'path';
 const router = express.Router();
+
 function P(app){ return app.locals.paths; }
 function readJson(p){ try { return JSON.parse(fs.readFileSync(p,'utf-8')); } catch(e){ return {}; } }
 function writeJson(p, data){ fs.writeFileSync(p, JSON.stringify(data,null,2), 'utf-8'); }
@@ -9,7 +10,12 @@ function stamp(){ return new Date().toISOString().replace(/[:.]/g,'-'); }
 
 router.get('/', (req,res)=>{
   const file = path.join(P(req.app).CONTENT_DIR, 'footer.json');
-  const footer = readJson(file); footer.social = footer.social || [];
+  const footer = readJson(file); 
+  footer.social = footer.social || [];
+  // Garante valores padrão caso seja a primeira vez abrindo
+  footer.urlSobre = footer.urlSobre || 'sobre.html';
+  footer.urlPagamento = footer.urlPagamento || 'formas-de-pagamento.html';
+  
   res.render('editar_footer', { footer, flash: null, sucessoRodape: null });
 });
 
@@ -17,12 +23,23 @@ router.post('/save', (req,res)=>{
   const { CONTENT_DIR, BACKUPS_DIR } = P(req.app);
   const file = path.join(CONTENT_DIR, 'footer.json');
   const prev = readJson(file);
+  
+  // Cria backup antes de salvar
   try { fs.writeFileSync(path.join(BACKUPS_DIR, 'footer-'+stamp()+'.json'), JSON.stringify(prev,null,2),'utf-8'); } catch(e){}
-  const footer = { text: req.body.text || '', cnpj: req.body.cnpj || '', social: prev.social || [] };
+  
+  // Monta o objeto com os novos campos inclusos
+  const footer = { 
+    text: req.body.text || '', 
+    cnpj: req.body.cnpj || '', 
+    urlSobre: req.body.urlSobre || 'sobre.html',
+    urlPagamento: req.body.urlPagamento || 'formas-de-pagamento.html',
+    social: prev.social || [] 
+  };
+  
   writeJson(file, footer);
   
-  console.log('💾 Dados do rodapé (Texto/CNPJ) salvos com sucesso no footer.json!');
-  res.render('editar_footer', { footer, flash: null, Admin: null, sucessoRodape: 'Rodapé salvo com sucesso!' });
+  console.log('💾 Dados do rodapé (Texto, CNPJ e Links) salvos com sucesso no footer.json!');
+  res.render('editar_footer', { footer, flash: null, Admin: null, sucessoRodape: 'Rodapé e Links salvos com sucesso!' });
 });
 
 router.post('/add-social', (req,res)=>{

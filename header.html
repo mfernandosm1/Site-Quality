@@ -24,7 +24,7 @@
           <!-- categorias serão injetadas aqui -->
           
           
-          <a href="categoria-smartphones.html" class="cat-link">Smartphones</a><a href="categoria-acessrios.html" class="cat-link">Acessórios</a><div class="search-wrapper">
+          <a href="categoria.html?slug=smartphones" class="cat-link">Smartphones</a><a href="categoria.html?slug=acessrios" class="cat-link">Acessórios</a><div class="search-wrapper">
             <input type="text" id="search-input" placeholder="Buscar...">
             <button id="search-button" aria-label="Buscar">
               <i class="fa fa-search"></i>
@@ -63,7 +63,7 @@
           <!-- categorias serão injetadas aqui -->
           
           
-        <a href="categoria-smartphones.html" class="cat-link">Smartphones</a><a href="categoria-acessrios.html" class="cat-link">Acessórios</a></nav>
+        <a href="categoria.html?slug=smartphones" class="cat-link">Smartphones</a><a href="categoria.html?slug=acessrios" class="cat-link">Acessórios</a></nav>
       </div>
 
       <!-- Overlay -->
@@ -89,16 +89,30 @@
               .sort((a, b) => (a.order || 0) - (b.order || 0))
               .forEach(cat => {
                 const linkD = document.createElement("a");
-                linkD.href = `categoria-${cat.slug}.html`;
-                linkD.textContent = cat.name;
+                linkD.href = `categoria.html?slug=${encodeURIComponent(cat.slug)}`;
+                if (cat.icon) {
+                  const iconD = document.createElement("i");
+                  iconD.className = cat.icon;
+                  iconD.setAttribute("aria-hidden", "true");
+                  linkD.appendChild(iconD);
+                  linkD.appendChild(document.createTextNode(" "));
+                }
+                linkD.appendChild(document.createTextNode(cat.name));
                 linkD.className = "cat-link";
                 if (searchWrapper)
                   navDesktop.insertBefore(linkD, searchWrapper);
                 else navDesktop.appendChild(linkD);
 
                 const linkM = document.createElement("a");
-                linkM.href = `categoria-${cat.slug}.html`;
-                linkM.textContent = cat.name;
+                linkM.href = `categoria.html?slug=${encodeURIComponent(cat.slug)}`;
+                if (cat.icon) {
+                  const iconM = document.createElement("i");
+                  iconM.className = cat.icon;
+                  iconM.setAttribute("aria-hidden", "true");
+                  linkM.appendChild(iconM);
+                  linkM.appendChild(document.createTextNode(" "));
+                }
+                linkM.appendChild(document.createTextNode(cat.name));
                 linkM.className = "cat-link";
                 navMobile.appendChild(linkM);
               });

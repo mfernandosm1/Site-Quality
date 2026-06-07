@@ -156,77 +156,183 @@ export function applyFormasFields(html, fields){
 /* =========================================================
    🆕 CATEGORIAS
 ========================================================= */
-export function generateCategoryPage(name, slug, siteDir) {
-  const header = readFileUtf8(path.join(siteDir, 'header.html'));
-  const footer = readFileUtf8(path.join(siteDir, 'footer.html'));
-  const target = path.join(siteDir, `categoria-${slug}.html`);
-
-  const html = `<!DOCTYPE html>
+function categoryPageHtml(header, footer){
+  return `<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>${name} – Quality Celulares</title>
+  <title>Categorias – Quality Celulares</title>
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
 ${header}
 <main class="main">
-  <h1 style="text-align:center;margin-top:30px;">${name}</h1>
+  <h1 id="categoria-titulo" style="text-align:center;margin-top:30px;display:flex;justify-content:center;align-items:center;gap:10px;flex-wrap:wrap;">Categoria</h1>
   <div id="produtos-container" class="products" style="margin-top:40px;"></div>
 </main>
 ${footer}
 <script>
-function shouldShowPrice(p){
-  const v = (p.showPrice ?? p.mostrar_preco ?? p.show_price ?? p.mostrarPreco ?? p.priceVisible ?? '').toString().toLowerCase();
-  return v === 'sim' || v === 'yes' || v === 'true' || v === '1' || v === 'on' || v === true;
-}
-fetch('content/products.json')
-  .then(r=>r.json())
-  .then(data=>{
-    const container=document.getElementById('produtos-container');
-    const slugLower='${slug}'.toLowerCase();
-    const nameLower='${name}'.toLowerCase();
-    const prods=(data.items||[]).filter(p=>{
-      const cat=(p.category||'').toString().toLowerCase();
-      return cat===slugLower || cat===nameLower;
+(function(){
+  function normalizeText(v){
+    return (v || '').toString().trim().toLowerCase();
+  }
+
+  function shouldShowPrice(p){
+    const raw = p.showPrice ?? p.mostrar_preco ?? p.show_price ?? p.mostrarPreco ?? p.priceVisible ?? false;
+    if (raw === true) return true;
+    const v = raw.toString().toLowerCase();
+    return v === 'sim' || v === 'yes' || v === 'true' || v === '1' || v === 'on';
+  }
+
+  function formatPrice(value){
+    const priceNum = (typeof value === 'number' ? value : Number(value || 0));
+    if (isNaN(priceNum)) return '';
+    return 'R$ ' + priceNum.toFixed(2).replace('.', ',');
+  }
+
+  function escapeHtml(value){
+    return (value || '').toString()
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#039;');
+  }
+
+  function normalizeIcon(icon){
+    icon = (icon || '').toString().trim();
+    if (!icon) return '';
+    return icon.includes('fa-') ? icon : '';
+  }
+
+  function setCategoryTitle(titleEl, name, icon){
+    if (!titleEl) return;
+    titleEl.innerHTML = '';
+    const iconClass = normalizeIcon(icon);
+    if (iconClass) {
+      const i = document.createElement('i');
+      i.className = iconClass;
+      i.setAttribute('aria-hidden', 'true');
+      titleEl.appendChild(i);
+    }
+    titleEl.appendChild(document.createTextNode(name));
+  }
+
+  function showMessage(text){
+    const container = document.getElementById('produtos-container');
+    if (container) container.innerHTML = '<p class="em-breve" style="text-align:center;">' + escapeHtml(text) + '</p>';
+  }
+
+  const params = new URLSearchParams(window.location.search);
+  const currentSlug = normalizeText(params.get('slug'));
+  const titleEl = document.getElementById('categoria-titulo');
+
+  if (!currentSlug) {
+    setCategoryTitle(titleEl, 'Categoria não encontrada', '');
+    showMessage('Nenhuma categoria foi informada.');
+    return;
+  }
+
+  Promise.all([
+    fetch('content/categories.json').then(r => r.json()).catch(() => ({ items: [] })),
+    fetch('content/products.json').then(r => r.json()).catch(() => ({ items: [] }))
+  ]).then(([categoriesData, productsData]) => {
+    const categories = categoriesData.items || [];
+    const category = categories.find(c => normalizeText(c.slug) === currentSlug);
+    const categoryName = category ? (category.name || category.slug || currentSlug) : currentSlug;
+    const categoryNameLower = normalizeText(categoryName);
+
+    setCategoryTitle(titleEl, categoryName, category ? category.icon : '');
+    document.title = categoryName + ' – Quality Celulares';
+
+    const products = (productsData.items || []).filter(p => {
+      if (p.active === false) return false;
+      const cat = normalizeText(p.category ?? p.categoria ?? p.categorySlug ?? p.categoriaSlug);
+      return cat === currentSlug || cat === categoryNameLower;
     });
-    if(prods.length===0){
-      container.innerHTML='<p class="em-breve" style="text-align:center;">Nenhum produto nesta categoria ainda.</p>';
+
+    if (products.length === 0) {
+      showMessage('Nenhum produto nesta categoria ainda.');
       return;
     }
-    prods.forEach(p=>{
-      const show = shouldShowPrice(p);
-      const priceNum = (typeof p.price==='number' ? p.price : Number(p.price||0));
-      const priceStr = (!show || isNaN(priceNum)) ? '' : 'R$ '+priceNum.toFixed(2).replace('.',',');
-      const card=document.createElement('div');
-      card.className='product-card';
-      card.innerHTML=\`
-        <img src="\${p.image||''}" alt="\${p.name||''}">
-        <h3>\${p.name||''}</h3>
-        \${priceStr ? '<p>'+priceStr+'</p>' : ''}  /* =========================================================
-   🆕 Texto que é enviado no whatsapp ao clicar no botão comprar nos produtos
-========================================================= */
-        <a href="https://wa.me/5555991407824?text=\${encodeURIComponent(
-  'Olá! Vim através do site e tenho interesse em ' + (p.name || 'produto')
-)}"
-   class="btn-whatsapp" target="_blank">
-   <i class="fa-brands fa-whatsapp"></i> Comprar no WhatsApp
-</a>
-      \`;
+
+    const container = document.getElementById('produtos-container');
+    container.innerHTML = '';
+    products.forEach(p => {
+      const priceStr = shouldShowPrice(p) ? formatPrice(p.price ?? p.preco) : '';
+      const productName = p.name || p.nome || '';
+      const productImage = p.image || p.imagem || '';
+      const whatsappText = encodeURIComponent('Olá! Vim através do site e tenho interesse em ' + (productName || 'produto'));
+      const card = document.createElement('div');
+      card.className = 'product-card';
+      card.innerHTML =
+        '<img src="' + escapeHtml(productImage) + '" alt="' + escapeHtml(productName) + '">' +
+        '<h3>' + escapeHtml(productName) + '</h3>' +
+        (priceStr ? '<p>' + escapeHtml(priceStr) + '</p>' : '') +
+        '<a href="https://wa.me/5555991407824?text=' + whatsappText + '" class="btn-whatsapp" target="_blank">' +
+        '<i class="fa-brands fa-whatsapp"></i> Comprar no WhatsApp</a>';
       container.appendChild(card);
     });
+  }).catch(() => {
+    setCategoryTitle(titleEl, 'Erro ao carregar categoria', '');
+    showMessage('Não foi possível carregar os produtos desta categoria.');
   });
+})();
 </script>
 </body>
 </html>`;
-  writeFileUtf8(target, html);
+}
+
+export function generateCategoryPage(name, slug, siteDir) {
+  const header = readFileUtf8(path.join(siteDir, 'header.html'));
+  const footer = readFileUtf8(path.join(siteDir, 'footer.html'));
+  const target = path.join(siteDir, 'categoria.html');
+  writeFileUtf8(target, categoryPageHtml(header, footer));
+  console.log('✅ Página única categoria.html atualizada.');
+}
+
+function fixHeaderCategoryScript(headerHtml){
+  let html = headerHtml || '';
+
+  // Corrige o JS antigo do header para apontar para a página única.
+  html = html
+    .replace(/linkD\.href\s*=\s*`categoria-\$\{cat\.slug\}\.html`;?/g, "linkD.href = `categoria.html?slug=${encodeURIComponent(cat.slug)}`;")
+    .replace(/linkM\.href\s*=\s*`categoria-\$\{cat\.slug\}\.html`;?/g, "linkM.href = `categoria.html?slug=${encodeURIComponent(cat.slug)}`;");
+
+  // Corrige o JS antigo do header para montar ícone + texto sem usar innerHTML.
+  html = html
+    .replace(/linkD\.textContent\s*=\s*cat\.name;?/g, `if (cat.icon) {\n                  const iconD = document.createElement("i");\n                  iconD.className = cat.icon;\n                  iconD.setAttribute("aria-hidden", "true");\n                  linkD.appendChild(iconD);\n                  linkD.appendChild(document.createTextNode(" "));\n                }\n                linkD.appendChild(document.createTextNode(cat.name));`)
+    .replace(/linkM\.textContent\s*=\s*cat\.name;?/g, `if (cat.icon) {\n                  const iconM = document.createElement("i");\n                  iconM.className = cat.icon;\n                  iconM.setAttribute("aria-hidden", "true");\n                  linkM.appendChild(iconM);\n                  linkM.appendChild(document.createTextNode(" "));\n                }\n                linkM.appendChild(document.createTextNode(cat.name));`);
+
+  return html;
+}
+
+function escapeAttr(value){
+  return (value || '').toString()
+    .replace(/&/g, '&amp;')
+    .replace(/"/g, '&quot;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;');
+}
+
+function escapeText(value){
+  return (value || '').toString()
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;');
+}
+
+function iconHtml(icon){
+  const cls = (icon || '').toString().trim();
+  if (!cls || !cls.includes('fa-')) return '';
+  return `<i class="${escapeAttr(cls)}" aria-hidden="true"></i> `;
 }
 
 export function updateHeaderMenu(categories, siteDir) {
   const headerPath = path.join(siteDir, 'header.html');
-  let headerHtml = readFileUtf8(headerPath);
+  let headerHtml = fixHeaderCategoryScript(readFileUtf8(headerPath));
   if (!headerHtml.includes('<nav')) return;
 
   const $ = cheerio.load(headerHtml, { decodeEntities: false });
@@ -244,10 +350,13 @@ export function updateHeaderMenu(categories, siteDir) {
   sorted.forEach((c) => {
     const slug = (c.slug || c.name || '').toString().trim();
     const name = (c.name || slug).toString().trim();
+    const icon = (c.icon || '').toString().trim();
     if (!slug || !name) return;
 
-    const linkD = `<a href="categoria-${slug}.html" class="cat-link">${name}</a>`;
-    const linkM = `<a href="categoria-${slug}.html" class="cat-link">${name}</a>`;
+    const href = `categoria.html?slug=${encodeURIComponent(slug)}`;
+    const label = `${iconHtml(icon)}${escapeText(name)}`;
+    const linkD = `<a href="${href}" class="cat-link">${label}</a>`;
+    const linkM = `<a href="${href}" class="cat-link">${label}</a>`;
 
     if (searchWrapper.length) searchWrapper.before(linkD);
     else navDesktop.append(linkD);
@@ -260,20 +369,21 @@ export function updateHeaderMenu(categories, siteDir) {
 }
 
 export function convertOldCategoryFiles(siteDir) {
-  const files = fs.readdirSync(siteDir).filter(f => /^categoria_/.test(f));
-  let converted = 0;
+  if (!fs.existsSync(siteDir)) return;
+  const files = fs.readdirSync(siteDir).filter(f => /^categoria[_-].+\.html$/i.test(f));
+  let removed = 0;
   for (const file of files) {
-    const oldPath = path.join(siteDir, file);
-    const newName = file.replace(/^categoria_/, 'categoria-');
-    const newPath = path.join(siteDir, newName);
-    const html = readFileUtf8(oldPath).replace(/categoria_/g, 'categoria-');
-    writeFileUtf8(newPath, html);
-    fs.unlinkSync(oldPath);
-    converted++;
+    const fullPath = path.join(siteDir, file);
+    try {
+      fs.unlinkSync(fullPath);
+      removed++;
+    } catch (e) {
+      console.warn(`⚠️ Não foi possível remover ${file}: ${e.message}`);
+    }
   }
-  console.log(converted>0
-    ? `🔄 Convertidos ${converted} arquivos de categoria para o novo padrão.`
-    : '✅ Nenhum arquivo antigo encontrado.');
+  console.log(removed > 0
+    ? `🧹 Removidos ${removed} arquivos antigos de categoria.`
+    : '✅ Nenhum arquivo antigo de categoria encontrado.');
 }
 
 /* =========================================================

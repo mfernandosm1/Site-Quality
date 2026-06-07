@@ -1,14 +1,54 @@
 <% layout('layout') -%>
+<%
+  const iconOptions = [
+    { value: '', label: 'Sem ícone' },
+    { value: 'fa-solid fa-mobile-screen-button', label: '📱 Smartphones' },
+    { value: 'fa-solid fa-headphones', label: '🎧 Acessórios / Fones' },
+    { value: 'fa-solid fa-laptop', label: '💻 Notebooks' },
+    { value: 'fa-solid fa-tablet-screen-button', label: '📲 Tablets' },
+    { value: 'fa-solid fa-clock', label: '⌚ Smartwatch' },
+    { value: 'fa-solid fa-gamepad', label: '🎮 Games / Videogames' },
+    { value: 'fa-solid fa-volume-high', label: '🔊 Caixas de som' },
+    { value: 'fa-solid fa-plug', label: '🔌 Carregadores / Cabos' },
+    { value: 'fa-solid fa-camera', label: '📷 Câmeras' },
+    { value: 'fa-solid fa-tv', label: '📺 TVs' },
+    { value: 'fa-solid fa-memory', label: '💾 Memória / Pendrive' },
+    { value: 'fa-solid fa-keyboard', label: '⌨️ Periféricos' },
+    { value: 'fa-solid fa-battery-full', label: '🔋 Baterias' },
+    { value: 'fa-solid fa-shield-screen', label: '🛡️ Películas / Proteção' },
+    { value: 'fa-solid fa-tag', label: '🏷️ Ofertas / Geral' }
+  ];
+%>
+
 <div class="card">
   <h3>🗂️ Categorias</h3>
+
   <form method="post" action="/categorias/add" class="row">
-    <div><label>Nome</label><input type="text" name="name"></div>
-    <div><label>Slug</label><input type="text" name="slug" placeholder="ex.: camisas"></div>
+    <div><label>Nome</label><input type="text" name="name" required></div>
+    <div><label>Slug</label><input type="text" name="slug" placeholder="ex.: smartphones"></div>
     <div><label>Ordem</label><input type="number" name="order" placeholder="1"></div>
+    <div>
+      <label>Ícone</label>
+      <select name="icon">
+        <% iconOptions.forEach(opt => { %>
+          <option value="<%= opt.value %>"><%= opt.label %></option>
+        <% }) %>
+      </select>
+    </div>
     <div style="align-self:end"><button class="btn" type="submit">Adicionar</button></div>
   </form>
+
   <table class="table">
-    <thead><tr><th>#</th><th>Nome</th><th>Slug</th><th>Ordem</th><th>Ações</th></tr></thead>
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Nome</th>
+        <th>Slug</th>
+        <th>Ordem</th>
+        <th>Ícone</th>
+        <th>Ações</th>
+      </tr>
+    </thead>
     <tbody>
       <% (items||[]).forEach((c,idx)=>{ %>
         <tr>
@@ -17,8 +57,24 @@
           <td><input form="f<%=c.id%>" type="text" name="slug" value="<%= c.slug %>"></td>
           <td><input form="f<%=c.id%>" type="number" name="order" value="<%= c.order || (idx+1) %>"></td>
           <td>
-            <form id="f<%=c.id%>" method="post" action="/categorias/update"><input type="hidden" name="id" value="<%= c.id %>"><button class="btn primary">Salvar</button></form>
-            <form method="post" action="/categorias/del" style="display:inline"><input type="hidden" name="id" value="<%= c.id %>"><button class="btn">Excluir</button></form>
+            <select form="f<%=c.id%>" name="icon">
+              <% iconOptions.forEach(opt => { %>
+                <option value="<%= opt.value %>" <%= (c.icon || '') === opt.value ? 'selected' : '' %>><%= opt.label %></option>
+              <% }) %>
+            </select>
+            <% if (c.icon) { %>
+              <span class="badge" title="Prévia do ícone"><i class="<%= c.icon %>"></i></span>
+            <% } %>
+          </td>
+          <td>
+            <form id="f<%=c.id%>" method="post" action="/categorias/update">
+              <input type="hidden" name="id" value="<%= c.id %>">
+              <button class="btn primary">Salvar</button>
+            </form>
+            <form method="post" action="/categorias/del" style="display:inline">
+              <input type="hidden" name="id" value="<%= c.id %>">
+              <button class="btn">Excluir</button>
+            </form>
           </td>
         </tr>
       <% }) %>
@@ -32,10 +88,9 @@
   <form method="post" action="/categorias/import"><button class="btn">Importar do header.html</button></form>
 </div>
 
-
 <div class="card">
   <h3>🧹 Limpar categorias em desuso</h3>
-  <p class="notice">Remove arquivos <code>categoria-*.html</code> que não correspondem às categorias ativas listadas.</p>
+  <p class="notice">Remove arquivos antigos <code>categoria-*.html</code>. A página nova continua sendo apenas <code>categoria.html</code>.</p>
   <button id="btn-limpar-categorias" class="btn">🧹 Limpar categorias em desuso</button>
 </div>
 
@@ -44,7 +99,7 @@
   const btn = document.getElementById('btn-limpar-categorias');
   if(!btn) return;
   btn.addEventListener('click', async ()=>{
-    if(!confirm('Tem certeza que deseja limpar as categorias em desuso?')) return;
+    if(!confirm('Tem certeza que deseja limpar as categorias antigas em desuso?')) return;
     try {
       const res = await fetch('/categorias/limpar', { method: 'POST' });
       const data = await res.json();

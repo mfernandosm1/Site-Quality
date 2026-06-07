@@ -7,11 +7,27 @@
 <% } %>
 
 <div class="card">
-  <h3>🔻 Rodapé — Texto e CNPJ</h3>
-  <form method="post" action="/footer/save" class="row" style="grid-template-columns:1fr 1fr;">
-    <div><label>Texto</label><input type="text" name="text" value="<%= (footer && footer.text) || '' %>"></div>
-    <div><label>CNPJ</label><input type="text" name="cnpj" value="<%= (footer && footer.cnpj) || '' %>"></div>
-    <div style="grid-column:1/-1;align-self:end"><button class="btn primary" type="submit">Salvar</button></div>
+  <h3>🔻 Rodapé — Texto, CNPJ e Links</h3>
+  <form method="post" action="/footer/save" class="row" style="grid-template-columns: 1fr 1fr; gap: 15px;">
+    <div>
+      <label>Texto do Rodapé</label>
+      <input type="text" name="text" value="<%= (footer && footer.text) || '' %>" placeholder="Ex: © 2014 - 2026 Quality Celulares.">
+    </div>
+    <div>
+      <label>CNPJ</label>
+      <input type="text" name="cnpj" value="<%= (footer && footer.cnpj) || '' %>" placeholder="Ex: 20.375.910/0001-66">
+    </div>
+    <div>
+      <label>Link: Sobre nós</label>
+      <input type="text" name="urlSobre" value="<%= (footer && footer.urlSobre) || 'sobre.html' %>" placeholder="sobre.html">
+    </div>
+    <div>
+      <label>Link: Formas de pagamento</label>
+      <input type="text" name="urlPagamento" value="<%= (footer && footer.urlPagamento) || 'formas-de-pagamento.html' %>" placeholder="formas-de-pagamento.html">
+    </div>
+    <div style="grid-column: 1 / -1; align-self: end; text-align: right;">
+      <button class="btn primary" type="submit">Salvar Alterações</button>
+    </div>
   </form>
 </div>
 
@@ -48,10 +64,4 @@
       <% }) %>
     </tbody>
   </table>
-</div>
-
-<div class="card">
-  <h3>Importar</h3>
-  <p class="notice">Tenta ler links sociais do <code>footer.html</code> do site.</p>
-  <form method="post" action="/footer/import"><button class="btn">Importar do footer.html</button></form>
 </div>
