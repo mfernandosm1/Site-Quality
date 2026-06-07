@@ -2,6 +2,356 @@
 <div class="card">
   <h3>📦 Produtos</h3>
 
+
+  <style>
+  /* Layout moderno e compacto da página Produtos */
+  .quality-panel-header{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:12px;
+    flex-wrap:wrap;
+    margin-bottom:14px;
+  }
+
+  .quality-compact-gallery textarea{
+    min-height:52px !important;
+    max-height:70px !important;
+  }
+
+  .quality-controls-grid{
+    display:grid;
+    grid-template-columns:1.1fr .9fr;
+    gap:12px;
+    margin:22px 0 14px 0;
+  }
+
+  .quality-control-box{
+    background:#fafafa;
+    border:1px solid #e5e7eb;
+    border-radius:12px;
+    padding:12px;
+  }
+
+  .quality-control-title{
+    display:flex;
+    align-items:center;
+    gap:6px;
+    font-weight:800;
+    margin-bottom:10px;
+  }
+
+  .quality-search-row,
+  .quality-bulk-row{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    flex-wrap:wrap;
+  }
+
+  .quality-search-row input{ flex:1 1 320px; }
+  .quality-search-row select{ flex:0 0 220px; }
+
+  .quality-bulk-box{
+    display:flex !important;
+    align-items:center;
+    gap:8px;
+    flex-wrap:wrap;
+    background:transparent !important;
+    border:none !important;
+    padding:0 !important;
+    margin:0 !important;
+  }
+
+  .quality-bulk-box form{
+    display:flex !important;
+    align-items:center;
+    gap:8px;
+    flex-wrap:wrap;
+    margin:0 !important;
+  }
+
+  .quality-bulk-box select{
+    width:auto !important;
+    min-width:220px !important;
+    max-width:100% !important;
+  }
+
+  .quality-bulk-box .btn,
+  .quality-control-box .btn{
+    padding:8px 10px !important;
+    font-size:12px !important;
+    border-radius:9px !important;
+  }
+
+  .quality-table-toolbar{
+    display:flex;
+    justify-content:flex-end;
+    margin:12px 0;
+  }
+
+  .quality-table-wrap{
+    width:100%;
+    overflow-x:auto;
+    padding-bottom:10px;
+  }
+
+  .quality-table-wrap .table{
+    width:100% !important;
+    min-width:0 !important;
+    table-layout:fixed !important;
+    border-collapse:collapse;
+  }
+
+  .quality-table-wrap .table th,
+  .quality-table-wrap .table td{
+    min-width:0 !important;
+    max-width:none !important;
+    padding:7px !important;
+    font-size:11px !important;
+    vertical-align:top;
+  }
+
+  .quality-table-wrap .table th:nth-child(1),
+  .quality-table-wrap .table td:nth-child(1){ width:2.5%; }
+  .quality-table-wrap .table th:nth-child(2),
+  .quality-table-wrap .table td:nth-child(2){ width:3%; }
+  .quality-table-wrap .table th:nth-child(3),
+  .quality-table-wrap .table td:nth-child(3){ width:18%; }
+  .quality-table-wrap .table th:nth-child(4),
+  .quality-table-wrap .table td:nth-child(4){ width:6%; }
+  .quality-table-wrap .table th:nth-child(5),
+  .quality-table-wrap .table td:nth-child(5){ width:7%; }
+  .quality-table-wrap .table th:nth-child(6),
+  .quality-table-wrap .table td:nth-child(6){ width:5%; }
+  .quality-table-wrap .table th:nth-child(7),
+  .quality-table-wrap .table td:nth-child(7){ width:5%; }
+  .quality-table-wrap .table th:nth-child(8),
+  .quality-table-wrap .table td:nth-child(8){ width:5%; }
+  .quality-table-wrap .table th:nth-child(9),
+  .quality-table-wrap .table td:nth-child(9){ width:6%; }
+  .quality-table-wrap .table th:nth-child(10),
+  .quality-table-wrap .table td:nth-child(10){ width:17%; }
+  .quality-table-wrap .table th:nth-child(11),
+  .quality-table-wrap .table td:nth-child(11){ width:7%; }
+  .quality-table-wrap .table th:nth-child(12),
+  .quality-table-wrap .table td:nth-child(12){ width:9%; }
+  .quality-table-wrap .table th:nth-child(13),
+  .quality-table-wrap .table td:nth-child(13){ width:9.5%; }
+
+  .quality-table-wrap input,
+  .quality-table-wrap select,
+  .quality-table-wrap textarea{
+    width:100% !important;
+    min-width:0 !important;
+    max-width:100% !important;
+    font-size:11px !important;
+    padding:7px 8px !important;
+  }
+
+  .quality-table-wrap textarea{
+    min-height:44px !important;
+    max-height:62px !important;
+  }
+
+  .quality-table-wrap th:last-child,
+  .quality-table-wrap td:last-child{
+    position:static !important;
+    right:auto !important;
+    box-shadow:none !important;
+    z-index:auto !important;
+  }
+
+  .quality-gallery-cell,
+  .quality-actions{
+    min-width:0 !important;
+    max-width:none !important;
+  }
+
+  .gallery-hidden-textarea{
+    display:none !important;
+  }
+
+  .gallery-summary{
+    display:flex;
+    flex-direction:column;
+    gap:5px;
+  }
+
+  .gallery-count-badge{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    width:100%;
+    border:1px solid #e5e7eb;
+    background:#f9fafb;
+    color:#374151;
+    border-radius:999px;
+    padding:5px 7px;
+    font-weight:800;
+    font-size:11px;
+  }
+
+  .manage-gallery-btn,
+  .quality-actions .btn{
+    display:block;
+    width:100% !important;
+    padding:7px 8px !important;
+    font-size:10.5px !important;
+    border-radius:8px !important;
+    margin-bottom:5px;
+  }
+
+  .row-save-status{
+    display:block !important;
+    margin:2px 0 5px 0 !important;
+    font-size:11px !important;
+  }
+
+  .quality-modal-backdrop{
+    position:fixed;
+    inset:0;
+    background:rgba(17,24,39,.55);
+    display:none;
+    align-items:center;
+    justify-content:center;
+    z-index:999;
+    padding:18px;
+  }
+
+  .quality-modal-backdrop.open{
+    display:flex;
+  }
+
+  .quality-gallery-modal{
+    width:min(680px, 96vw);
+    max-height:88vh;
+    overflow:auto;
+    background:#fff;
+    border-radius:16px;
+    border:1px solid #e5e7eb;
+    box-shadow:0 22px 80px rgba(0,0,0,.25);
+  }
+
+  .quality-gallery-modal-header{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:12px;
+    padding:14px 16px;
+    border-bottom:1px solid #e5e7eb;
+  }
+
+  .quality-gallery-modal-header strong{
+    font-size:15px;
+  }
+
+  .quality-gallery-modal-body{
+    padding:16px;
+  }
+
+  .modal-gallery-list{
+    display:flex;
+    flex-direction:column;
+    gap:8px;
+    margin-bottom:14px;
+  }
+
+  .modal-gallery-item{
+    display:grid;
+    grid-template-columns:58px 1fr auto;
+    align-items:center;
+    gap:10px;
+    background:#f9fafb;
+    border:1px solid #e5e7eb;
+    border-radius:12px;
+    padding:8px;
+  }
+
+  .modal-gallery-thumb{
+    width:54px;
+    height:54px;
+    border-radius:10px;
+    border:1px solid #e5e7eb;
+    background:#fff;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    overflow:hidden;
+    font-size:22px;
+  }
+
+  .modal-gallery-thumb img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+  }
+
+  .modal-gallery-name{
+    font-size:12px;
+    color:#374151;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap;
+  }
+
+  .modal-gallery-empty{
+    color:#6b7280;
+    font-size:13px;
+    background:#f9fafb;
+    border:1px dashed #d1d5db;
+    border-radius:12px;
+    padding:14px;
+    margin-bottom:14px;
+  }
+
+  .modal-gallery-actions{
+    display:grid;
+    grid-template-columns:1fr auto;
+    gap:8px;
+    align-items:center;
+    margin-top:8px;
+  }
+
+  .modal-gallery-actions input[type="url"]{
+    width:100%;
+  }
+
+  .quality-close-btn{
+    border:none;
+    background:#f3f4f6;
+    border-radius:999px;
+    width:34px;
+    height:34px;
+    cursor:pointer;
+    font-weight:900;
+  }
+
+  @media (max-width:1200px){
+    .quality-table-wrap .table{ min-width:1180px !important; }
+    .quality-controls-grid{ grid-template-columns:1fr; }
+  }
+
+
+  .add-gallery-manager{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    flex-wrap:wrap;
+  }
+
+  .add-gallery-manager .gallery-count-badge{
+    width:auto;
+    min-width:130px;
+  }
+
+  .add-gallery-hidden-textarea{
+    display:none !important;
+  }
+
+</style>
+
+
   <% if (flash) { %>
     <div id="flash-message" style="margin: 10px 0 18px 0; padding: 12px 14px; border-radius: 6px; background: #e8f7ee; border: 1px solid #b8e6c8; color: #087a31; font-weight: 600;">
       <%= flash %>
@@ -58,53 +408,86 @@
       </select>
     </div>
 
+    <div>
+      <label>Ver detalhes</label>
+      <select name="detailsEnabled">
+        <option value="false" selected>Não</option>
+        <option value="true">Sim</option>
+      </select>
+    </div>
+
+    <div class="quality-compact-gallery" style="grid-column: 1 / -1; border:1px solid #e5e7eb; border-radius:8px; padding:10px; background:#fafafa;">
+      <label>Galeria do produto <small style="font-weight:400;color:#6b7280;">(máx. 4 itens: fotos ou vídeo do YouTube)</small></label>
+      <textarea name="gallery" id="add-product-gallery" class="add-gallery-hidden-textarea"></textarea>
+      <div class="add-gallery-manager">
+        <span class="gallery-count-badge" id="add-gallery-count">📷 0 item(ns)</span>
+        <button class="btn" type="button" id="add-manage-gallery-btn">Gerenciar galeria</button>
+      </div>
+      <small style="display:block; margin-top:6px; color:#6b7280;">Use o gerenciador para adicionar fotos ou vídeo. Depois clique em <strong>Adicionar</strong> para salvar o produto.</small>
+    </div>
+
+    <div style="grid-column: 1 / -1;">
+      <label>Descrição curta</label>
+      <input type="text" name="descriptionShort" placeholder="Ex.: Novo, lacrado, 128GB, garantia...">
+    </div>
+
+    <div style="grid-column: 1 / -1;">
+      <label>Descrição completa</label>
+      <textarea name="descriptionLong" rows="3" placeholder="Detalhes do produto, características, garantia, conteúdo da caixa..." style="width:100%; padding:8px 12px; border:1px solid #ccc; border-radius:4px;"></textarea>
+    </div>
+
     <div style="align-self:end">
       <button class="btn primary" type="submit">Adicionar</button>
     </div>
   </form>
 
-  <div style="margin: 25px 0 15px 0; display: flex; gap: 15px; background: #fafafa; padding: 12px; border-radius: 6px; border: 1px solid #eaeaea;">
-    <div style="flex: 1;">
-      <input type="text" id="panel-search-input" placeholder="🔍 Buscar produto pelo nome..." style="width: 100%; padding: 8px 12px; border: 1px solid #ccc; border-radius: 4px; font-size: 14px;">
-    </div>
-    <div style="width: 220px;">
-      <select id="panel-category-filter" style="width: 100%; padding: 8px 12px; border: 1px solid #ccc; border-radius: 4px; font-size: 14px; background: #fff;">
-        <option value="">📂 Todas as Categorias</option>
-        <option value="[vitrine]">Início (vitrine)</option>
-        <% (categorias || []).forEach(c => { %>
-          <option value="<%= c.slug %>"><%= c.name %></option>
-        <% }) %>
-      </select>
-    </div>
-  </div>
-
-  <div style="margin: 15px 0; background: #fff7e6; border: 1px solid #ffd899; border-radius: 6px; padding: 12px;">
-    <strong>⚡ Ação em massa:</strong>
-    <span id="selected-count">0</span> produto(s) selecionado(s)
-
-    <form id="bulk-category-form" method="post" action="/produtos/bulk-category" style="margin-top: 10px;">
-      <div id="bulk-selected-container"></div>
-
-      <select name="bulkCategory" id="bulk-category-select" style="width: 100%; padding: 8px 12px; border: 1px solid #ccc; border-radius: 4px; background:#fff;">
-        <option value="">Mover para Início (vitrine)</option>
-        <% (categorias || []).forEach(c => { %>
-          <option value="<%= c.slug %>">Mover para <%= c.name %></option>
-        <% }) %>
-      </select>
-
-      <div style="margin-top: 10px; display:flex; gap:8px; flex-wrap:wrap;">
-        <button class="btn primary" type="submit">Aplicar nos selecionados</button>
-        <button class="btn" type="button" id="select-all-products">Selecionar todos</button>
-        <button class="btn" type="button" id="clear-selection">Limpar seleção</button>
+  <div class="quality-controls-grid">
+    <div class="quality-control-box">
+      <div class="quality-control-title">🔎 Busca e filtros</div>
+      <div class="quality-search-row">
+        <input type="text" id="panel-search-input" placeholder="Buscar produto pelo nome...">
+        <select id="panel-category-filter">
+          <option value="">Todas as Categorias</option>
+          <option value="[vitrine]">Início (vitrine)</option>
+          <% (categorias || []).forEach(c => { %>
+            <option value="<%= c.slug %>"><%= c.name %></option>
+          <% }) %>
+        </select>
       </div>
-    </form>
+    </div>
+
+    <div class="quality-control-box">
+      <div class="quality-control-title">⚡ Ação em massa: <span id="selected-count">0</span> selecionado(s)</div>
+      <div class="quality-bulk-box">
+        <form id="bulk-category-form" method="post" action="/produtos/bulk-category">
+          <div id="bulk-selected-container"></div>
+          <select name="bulkCategory" id="bulk-category-select">
+            <option value="">Mover para Início (vitrine)</option>
+            <% (categorias || []).forEach(c => { %>
+              <option value="<%= c.slug %>">Mover para <%= c.name %></option>
+            <% }) %>
+          </select>
+          <button class="btn primary" type="submit">Aplicar</button>
+          <button class="btn" type="button" id="select-all-products">Selecionar todos</button>
+          <button class="btn" type="button" id="clear-selection">Limpar</button>
+        </form>
+
+        <form id="bulk-details-form" method="post" action="/produtos/bulk-details">
+          <div id="bulk-details-selected-container"></div>
+          <input type="hidden" name="detailsAction" id="details-action-input" value="">
+          <button class="btn primary" type="button" id="enable-details-selected">Detalhes ON</button>
+          <button class="btn" type="button" id="disable-details-selected">Detalhes OFF</button>
+        </form>
+      </div>
+    </div>
   </div>
 
   <form id="update-all-form" method="post" action="/produtos/update-all">
-    <div style="text-align:right; margin: 12px 0;">
+    <div class="quality-table-toolbar">
       <button class="btn primary" type="submit">💾 Salvar todas as alterações da tabela</button>
     </div>
 
+    <div class="quality-table-wrap">
     <table class="table">
       <thead>
         <tr>
@@ -116,7 +499,10 @@
           <th>Mostrar Preço</th>
           <th>Vitrine</th>
           <th>Ativo</th>
+          <th>Ver detalhes</th>
+          <th>Descrição curta</th>
           <th>Imagem</th>
+          <th>Galeria</th>
           <th>Ações</th>
         </tr>
       </thead>
@@ -163,6 +549,18 @@
             </td>
 
             <td>
+              <select name="detailsEnabled">
+                <option value="true" <%= p.detailsEnabled ? 'selected' : '' %>>Sim</option>
+                <option value="false" <%= !p.detailsEnabled ? 'selected' : '' %>>Não</option>
+              </select>
+            </td>
+
+            <td>
+              <input type="text" name="descriptionShort" value="<%= p.descriptionShort || '' %>" placeholder="Descrição curta...">
+              <textarea name="descriptionLong" rows="2" placeholder="Descrição completa..." style="margin-top:6px; width:100%; padding:6px 8px; border:1px solid #ccc; border-radius:4px;"><%= p.descriptionLong || '' %></textarea>
+            </td>
+
+            <td>
               <select name="image" class="prod-image-select" data-current-val="<%= p.image %>">
                 <option value="">Selecione...</option>
                 <% (imagens || []).forEach(img => { %>
@@ -171,19 +569,60 @@
               </select>
             </td>
 
-            <td>
+            <td class="quality-gallery-cell">
+              <textarea name="gallery" class="gallery-textarea gallery-hidden-textarea"><%= Array.isArray(p.gallery) ? p.gallery.join('\n') : (p.gallery || '') %></textarea>
+              <div class="gallery-summary">
+                <span class="gallery-count-badge">📷 0 item(ns)</span>
+                <button class="btn manage-gallery-btn" type="button">Gerenciar</button>
+              </div>
+            </td>
+
+            <td class="quality-actions">
               <button class="btn primary save-product-btn" type="button">💾 Salvar produto</button>
               <span class="row-save-status" style="display:none; margin-left:8px; font-weight:600; color:#087a31; white-space:nowrap;">✅ Salvo</span>
-              <form method="post" action="/produtos/del" style="display:inline">
-                <input type="hidden" name="id" value="<%= p.id %>">
-                <button class="btn" type="submit">Excluir</button>
-              </form>
+              <button class="btn" type="submit" form="delete-form-<%= p.id %>" onclick="return confirm('Excluir este produto?')">Excluir</button>
             </td>
           </tr>
         <% }) %>
       </tbody>
     </table>
+    </div>
   </form>
+
+  <% (items || []).forEach((p) => { %>
+    <form id="delete-form-<%= p.id %>" method="post" action="/produtos/del" style="display:none;">
+      <input type="hidden" name="id" value="<%= p.id %>">
+    </form>
+  <% }) %>
+
+  <div class="quality-modal-backdrop" id="gallery-modal-backdrop" aria-hidden="true">
+    <div class="quality-gallery-modal" role="dialog" aria-modal="true" aria-labelledby="gallery-modal-title">
+      <div class="quality-gallery-modal-header">
+        <strong id="gallery-modal-title">📷 Gerenciar galeria</strong>
+        <button class="quality-close-btn" type="button" id="gallery-modal-close">×</button>
+      </div>
+      <div class="quality-gallery-modal-body">
+        <div id="modal-gallery-product" style="font-weight:800; margin-bottom:10px;"></div>
+        <div id="modal-gallery-list" class="modal-gallery-list"></div>
+
+        <div style="border-top:1px solid #e5e7eb; padding-top:12px; margin-top:12px;">
+          <label>Adicionar fotos</label>
+          <div class="modal-gallery-actions">
+            <input type="file" id="modal-gallery-file-input" accept="image/*" multiple>
+            <button class="btn" type="button" id="modal-gallery-upload-btn">📷 Enviar fotos</button>
+          </div>
+
+          <label style="margin-top:12px;">Adicionar vídeo do YouTube</label>
+          <div class="modal-gallery-actions">
+            <input type="url" id="modal-youtube-url" placeholder="Cole o link do YouTube">
+            <button class="btn" type="button" id="modal-youtube-btn">▶️ Adicionar</button>
+          </div>
+
+          <small style="display:block; margin-top:10px; color:#6b7280;">A galeria aceita no máximo 4 itens entre fotos e vídeos. As alterações são salvas automaticamente.</small>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 
 <script>
@@ -193,10 +632,26 @@ document.addEventListener("DOMContentLoaded", () => {
   const rows = document.querySelectorAll("#products-table-body .product-row");
   const selectedCount = document.getElementById("selected-count");
   const bulkContainer = document.getElementById("bulk-selected-container");
+  const bulkDetailsContainer = document.getElementById("bulk-details-selected-container");
   const selectAllCheckbox = document.getElementById("select-all-checkbox");
   const selectAllBtn = document.getElementById("select-all-products");
   const clearBtn = document.getElementById("clear-selection");
   const flashMessage = document.getElementById("flash-message");
+
+  const galleryModal = document.getElementById("gallery-modal-backdrop");
+  const galleryModalClose = document.getElementById("gallery-modal-close");
+  const modalGalleryProduct = document.getElementById("modal-gallery-product");
+  const modalGalleryList = document.getElementById("modal-gallery-list");
+  const modalGalleryFileInput = document.getElementById("modal-gallery-file-input");
+  const modalGalleryUploadBtn = document.getElementById("modal-gallery-upload-btn");
+  const modalYoutubeUrl = document.getElementById("modal-youtube-url");
+  const modalYoutubeBtn = document.getElementById("modal-youtube-btn");
+
+  const addGalleryTextarea = document.getElementById("add-product-gallery");
+  const addGalleryCount = document.getElementById("add-gallery-count");
+  const addManageGalleryBtn = document.getElementById("add-manage-gallery-btn");
+
+  let activeGalleryContext = null;
 
   function showMessage(text, type = "success") {
     if (!flashMessage) return;
@@ -212,21 +667,237 @@ document.addEventListener("DOMContentLoaded", () => {
     }, 3500);
   }
 
+  function getGalleryItems(textarea) {
+    return (textarea?.value || "").split(/\r?\n/).map(v => v.trim()).filter(Boolean);
+  }
+
+  function setGalleryItems(textarea, items) {
+    if (!textarea) return;
+    textarea.value = items.slice(0, 4).join("\n");
+    textarea.dispatchEvent(new Event("input", { bubbles: true }));
+  }
+
+  function isYoutubeUrl(url) {
+    return /^(https?:\/\/)?(www\.)?(youtube\.com|youtu\.be)\//i.test(url || "");
+  }
+
+  function mediaLabel(value) {
+    if (!value) return "";
+    if (isYoutubeUrl(value)) return "YouTube: " + value;
+    return value.split("/").pop() || value;
+  }
+
+  function gallerySummaryText(items) {
+    const photos = items.filter(item => !isYoutubeUrl(item)).length;
+    const videos = items.filter(item => isYoutubeUrl(item)).length;
+    if (!items.length) return "📷 0 item(ns)";
+    return `📷 ${photos} foto(s)${videos ? ` + ${videos} vídeo(s)` : ""}`;
+  }
+
+  function updateAddGallerySummary() {
+    if (!addGalleryCount || !addGalleryTextarea) return;
+    addGalleryCount.textContent = gallerySummaryText(getGalleryItems(addGalleryTextarea));
+  }
+
+  function updateGallerySummary(row) {
+    if (!row) return;
+    const textarea = row.querySelector(".gallery-textarea");
+    const badge = row.querySelector(".gallery-count-badge");
+    if (badge) badge.textContent = gallerySummaryText(getGalleryItems(textarea));
+  }
+
+  function addGalleryItem(textarea, item) {
+    const items = getGalleryItems(textarea);
+    if (items.length >= 4) {
+      alert("A galeria permite no máximo 4 itens.");
+      return false;
+    }
+    if (item && !items.includes(item)) items.push(item);
+    setGalleryItems(textarea, items);
+    return true;
+  }
+
+  function makeGalleryContextFromRow(row) {
+    return {
+      mode: "row",
+      row,
+      textarea: row.querySelector(".gallery-textarea"),
+      title: row.querySelector(".prod-name-input")?.value || "Produto"
+    };
+  }
+
+  function makeGalleryContextFromAddForm() {
+    return {
+      mode: "add",
+      row: null,
+      textarea: addGalleryTextarea,
+      title: "Novo produto"
+    };
+  }
+
+  async function saveActiveGalleryContext() {
+    if (!activeGalleryContext) return;
+
+    if (activeGalleryContext.mode === "row" && activeGalleryContext.row) {
+      markRowDirty(activeGalleryContext.row);
+      await saveProductRow(activeGalleryContext.row);
+      updateGallerySummary(activeGalleryContext.row);
+    } else {
+      updateAddGallerySummary();
+    }
+  }
+
+  function renderGalleryModal(context = activeGalleryContext) {
+    if (!context || !modalGalleryList) return;
+
+    const items = getGalleryItems(context.textarea);
+    if (modalGalleryProduct) modalGalleryProduct.textContent = context.title || "Produto";
+    modalGalleryList.innerHTML = "";
+
+    if (!items.length) {
+      const empty = document.createElement("div");
+      empty.className = "modal-gallery-empty";
+      empty.textContent = "Nenhuma foto ou vídeo adicionado ainda.";
+      modalGalleryList.appendChild(empty);
+      return;
+    }
+
+    items.forEach((item, index) => {
+      const line = document.createElement("div");
+      line.className = "modal-gallery-item";
+
+      const thumb = document.createElement("div");
+      thumb.className = "modal-gallery-thumb";
+      if (isYoutubeUrl(item)) {
+        thumb.textContent = "▶️";
+      } else {
+        const img = document.createElement("img");
+        img.src = item;
+        img.alt = mediaLabel(item);
+        thumb.appendChild(img);
+      }
+
+      const text = document.createElement("div");
+      text.className = "modal-gallery-name";
+      text.textContent = mediaLabel(item);
+      text.title = item;
+
+      const remove = document.createElement("button");
+      remove.type = "button";
+      remove.className = "btn";
+      remove.style.background = "#fee2e2";
+      remove.style.color = "#991b1b";
+      remove.textContent = "Excluir";
+      remove.addEventListener("click", async () => {
+        const updated = getGalleryItems(context.textarea).filter((_, i) => i !== index);
+        setGalleryItems(context.textarea, updated);
+        await saveActiveGalleryContext();
+        renderGalleryModal(context);
+        showMessage(context.mode === "row" ? "✅ Item removido da galeria e produto salvo." : "✅ Item removido da galeria.");
+      });
+
+      line.appendChild(thumb);
+      line.appendChild(text);
+      line.appendChild(remove);
+      modalGalleryList.appendChild(line);
+    });
+  }
+
+  function openGalleryModal(context) {
+    activeGalleryContext = context;
+    renderGalleryModal(context);
+    galleryModal?.classList.add("open");
+    galleryModal?.setAttribute("aria-hidden", "false");
+    if (modalGalleryFileInput) modalGalleryFileInput.value = "";
+    if (modalYoutubeUrl) modalYoutubeUrl.value = "";
+  }
+
+  function closeGalleryModal() {
+    galleryModal?.classList.remove("open");
+    galleryModal?.setAttribute("aria-hidden", "true");
+    activeGalleryContext = null;
+  }
+
+  async function uploadGalleryImages(input, textarea, btn, row = null) {
+    if (!input || !textarea || !input.files.length) {
+      alert("Selecione uma ou mais fotos.");
+      return;
+    }
+
+    const current = getGalleryItems(textarea);
+    const available = 4 - current.length;
+    if (available <= 0) {
+      alert("A galeria já tem 4 itens.");
+      input.value = "";
+      return;
+    }
+
+    const files = Array.from(input.files).slice(0, available);
+    const formData = new FormData();
+    files.forEach(file => formData.append("galleryFiles", file));
+
+    const oldText = btn ? btn.textContent : "";
+    if (btn) {
+      btn.disabled = true;
+      btn.textContent = "Enviando...";
+    }
+
+    try {
+      const res = await fetch("/produtos/upload-gallery", { method: "POST", body: formData });
+      const json = await res.json();
+      if (!res.ok || !json.success) throw new Error(json.message || "Erro ao enviar imagens.");
+
+      const updated = current.concat(json.files || []).slice(0, 4);
+      setGalleryItems(textarea, updated);
+
+      if (row) {
+        markRowDirty(row);
+        await saveProductRow(row);
+        updateGallerySummary(row);
+        showMessage("✅ Foto enviada e galeria salva.");
+      } else {
+        updateAddGallerySummary();
+        showMessage("✅ Fotos enviadas para a galeria.");
+      }
+
+      if (activeGalleryContext) renderGalleryModal(activeGalleryContext);
+    } catch (err) {
+      console.error(err);
+      showMessage("⚠️ Erro ao enviar fotos da galeria.", "error");
+    } finally {
+      if (btn) {
+        btn.disabled = false;
+        btn.textContent = oldText;
+      }
+      input.value = "";
+    }
+  }
+
   function visibleRows() {
     return Array.from(rows).filter(row => row.style.display !== "none");
   }
 
   function updateSelectionCount() {
     const checked = document.querySelectorAll(".product-check:checked");
-    selectedCount.textContent = checked.length;
+    if (selectedCount) selectedCount.textContent = checked.length;
 
     bulkContainer.innerHTML = "";
+    if (bulkDetailsContainer) bulkDetailsContainer.innerHTML = "";
+
     checked.forEach(chk => {
       const input = document.createElement("input");
       input.type = "hidden";
       input.name = "selectedIds";
       input.value = chk.value;
       bulkContainer.appendChild(input);
+
+      if (bulkDetailsContainer) {
+        const input2 = document.createElement("input");
+        input2.type = "hidden";
+        input2.name = "selectedIds";
+        input2.value = chk.value;
+        bulkDetailsContainer.appendChild(input2);
+      }
     });
 
     if (selectAllCheckbox) {
@@ -236,26 +907,18 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function filterTable() {
-    const searchText = searchInput.value.toLowerCase().trim();
-    const selectedCategory = categoryFilter.value;
+    const searchText = (searchInput?.value || "").toLowerCase().trim();
+    const selectedCategory = categoryFilter?.value || "";
 
     rows.forEach(row => {
-      const nameInput = row.querySelector(".prod-name-input");
-      const productName = nameInput ? nameInput.value.toLowerCase() : "";
-
-      const categorySelect = row.querySelector(".prod-category-select");
-      const productCategory = categorySelect ? categorySelect.value : "";
-
+      const productName = row.querySelector(".prod-name-input")?.value.toLowerCase() || "";
+      const productCategory = row.querySelector(".prod-category-select")?.value || "";
       const matchesSearch = productName.includes(searchText);
 
       let matchesCategory = false;
-      if (selectedCategory === "") {
-        matchesCategory = true;
-      } else if (selectedCategory === "[vitrine]") {
-        matchesCategory = (productCategory === "");
-      } else {
-        matchesCategory = (productCategory === selectedCategory);
-      }
+      if (selectedCategory === "") matchesCategory = true;
+      else if (selectedCategory === "[vitrine]") matchesCategory = productCategory === "";
+      else matchesCategory = productCategory === selectedCategory;
 
       row.style.display = (matchesSearch && matchesCategory) ? "" : "none";
     });
@@ -277,7 +940,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const data = new URLSearchParams();
     data.append("id", row.dataset.id);
 
-    row.querySelectorAll("input[name], select[name]").forEach(el => {
+    row.querySelectorAll("input[name], select[name], textarea[name]").forEach(el => {
       if (el.name === "id") return;
       data.append(el.name, el.value);
     });
@@ -300,28 +963,23 @@ document.addEventListener("DOMContentLoaded", () => {
       });
 
       const json = await res.json();
-      if (!res.ok || !json.success) {
-        throw new Error(json.message || "Erro ao salvar produto.");
-      }
+      if (!res.ok || !json.success) throw new Error(json.message || "Erro ao salvar produto.");
 
       markRowClean(row);
+      updateGallerySummary(row);
 
       const status = row.querySelector(".row-save-status");
       if (status) {
         status.textContent = "✅ Produto salvo";
         status.style.color = "#087a31";
         status.style.display = "inline-block";
-
         clearTimeout(status.__hideTimer);
-        status.__hideTimer = setTimeout(() => {
-          status.style.display = "none";
-        }, 3500);
+        status.__hideTimer = setTimeout(() => { status.style.display = "none"; }, 3500);
       } else {
         showMessage("✅ Produto salvo com sucesso.");
       }
     } catch (err) {
       console.error(err);
-
       const status = row.querySelector(".row-save-status");
       if (status) {
         status.textContent = "⚠️ Erro ao salvar";
@@ -338,53 +996,108 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  searchInput.addEventListener("input", filterTable);
-  categoryFilter.addEventListener("change", filterTable);
+  galleryModalClose?.addEventListener("click", closeGalleryModal);
+  galleryModal?.addEventListener("click", (event) => {
+    if (event.target === galleryModal) closeGalleryModal();
+  });
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") closeGalleryModal();
+  });
+
+  modalGalleryUploadBtn?.addEventListener("click", () => {
+    if (!activeGalleryContext) return;
+    uploadGalleryImages(
+      modalGalleryFileInput,
+      activeGalleryContext.textarea,
+      modalGalleryUploadBtn,
+      activeGalleryContext.row
+    );
+  });
+
+  modalYoutubeBtn?.addEventListener("click", async () => {
+    if (!activeGalleryContext) return;
+    const url = (modalYoutubeUrl?.value || "").trim();
+
+    if (!isYoutubeUrl(url)) {
+      alert("Cole um link válido do YouTube.");
+      return;
+    }
+
+    if (addGalleryItem(activeGalleryContext.textarea, url)) {
+      modalYoutubeUrl.value = "";
+      await saveActiveGalleryContext();
+      renderGalleryModal(activeGalleryContext);
+      showMessage(activeGalleryContext.mode === "row" ? "✅ Vídeo adicionado e produto salvo." : "✅ Vídeo adicionado na galeria.");
+    }
+  });
+
+  addManageGalleryBtn?.addEventListener("click", () => {
+    openGalleryModal(makeGalleryContextFromAddForm());
+  });
+  addGalleryTextarea?.addEventListener("input", updateAddGallerySummary);
+
+  searchInput?.addEventListener("input", filterTable);
+  categoryFilter?.addEventListener("change", filterTable);
 
   document.querySelectorAll(".product-check").forEach(chk => {
     chk.addEventListener("change", updateSelectionCount);
   });
 
   rows.forEach(row => {
-    row.querySelectorAll("input[name], select[name]").forEach(el => {
+    row.querySelectorAll("input[name], select[name], textarea[name]").forEach(el => {
       if (el.name === "id") return;
       el.addEventListener("change", () => markRowDirty(row));
       el.addEventListener("input", () => markRowDirty(row));
     });
 
-    const btn = row.querySelector(".save-product-btn");
-    if (btn) {
-      btn.addEventListener("click", () => saveProductRow(row));
-    }
+    row.querySelector(".save-product-btn")?.addEventListener("click", () => saveProductRow(row));
+    row.querySelector(".manage-gallery-btn")?.addEventListener("click", () => openGalleryModal(makeGalleryContextFromRow(row)));
+
+    const galleryTextarea = row.querySelector(".gallery-textarea");
+    galleryTextarea?.addEventListener("input", () => updateGallerySummary(row));
+    updateGallerySummary(row);
   });
 
-  if (selectAllCheckbox) {
-    selectAllCheckbox.addEventListener("change", () => {
-      visibleRows().forEach(row => {
-        const chk = row.querySelector(".product-check");
-        if (chk) chk.checked = selectAllCheckbox.checked;
-      });
-      updateSelectionCount();
+  selectAllCheckbox?.addEventListener("change", () => {
+    visibleRows().forEach(row => {
+      const chk = row.querySelector(".product-check");
+      if (chk) chk.checked = selectAllCheckbox.checked;
     });
+    updateSelectionCount();
+  });
+
+  selectAllBtn?.addEventListener("click", () => {
+    visibleRows().forEach(row => {
+      const chk = row.querySelector(".product-check");
+      if (chk) chk.checked = true;
+    });
+    updateSelectionCount();
+  });
+
+  clearBtn?.addEventListener("click", () => {
+    document.querySelectorAll(".product-check").forEach(chk => chk.checked = false);
+    updateSelectionCount();
+  });
+
+  const enableDetailsBtn = document.getElementById("enable-details-selected");
+  const disableDetailsBtn = document.getElementById("disable-details-selected");
+  const detailsActionInput = document.getElementById("details-action-input");
+  const bulkDetailsForm = document.getElementById("bulk-details-form");
+
+  function submitDetailsAction(action) {
+    const checked = document.querySelectorAll(".product-check:checked");
+    if (!checked.length) {
+      alert("Selecione pelo menos um produto.");
+      return;
+    }
+    detailsActionInput.value = action;
+    bulkDetailsForm.submit();
   }
 
-  if (selectAllBtn) {
-    selectAllBtn.addEventListener("click", () => {
-      visibleRows().forEach(row => {
-        const chk = row.querySelector(".product-check");
-        if (chk) chk.checked = true;
-      });
-      updateSelectionCount();
-    });
-  }
+  enableDetailsBtn?.addEventListener("click", () => submitDetailsAction("enable"));
+  disableDetailsBtn?.addEventListener("click", () => submitDetailsAction("disable"));
 
-  if (clearBtn) {
-    clearBtn.addEventListener("click", () => {
-      document.querySelectorAll(".product-check").forEach(chk => chk.checked = false);
-      updateSelectionCount();
-    });
-  }
-
+  updateAddGallerySummary();
   updateSelectionCount();
 
   if (flashMessage && flashMessage.textContent.trim()) {

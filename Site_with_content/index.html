@@ -3,53 +3,48 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Quality Celulares</title>
 
-  <!-- FontAwesome + Swiper + CSS -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
   <link rel="stylesheet" href="css/style.css">
-<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-9HPD9XCELH"></script><script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-9HPD9XCELH');
-</script></head>
-<!-- Google tag (gtag.js) -->
-
-
+  <script async="" src="https://www.googletagmanager.com/gtag/js?id=G-9HPD9XCELH"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-9HPD9XCELH');
+  </script>
+</head>
 
 <body>
-  <!-- Header -->
   <div id="header"></div>
 
-  <!-- Banner -->
   <section class="banner">
     <div class="swiper">
       <div class="swiper-wrapper">
-      <div class="swiper-slide">
-        <picture>
-          <source media="(max-width: 767px)" srcset="images/banner2-mobile.png">
-          <img src="images/banner2.png" alt="" class="banner-img">
-        </picture>
+        <div class="swiper-slide">
+          <picture>
+            <source media="(max-width: 767px)" srcset="images/banner2-mobile.png">
+            <img src="images/banner2.png" alt="" class="banner-img">
+          </picture>
+        </div>
+        <div class="swiper-slide">
+          <picture>
+            <source media="(max-width: 767px)" srcset="images/banner3-mobile.png">
+            <img src="images/banner3.png" alt="" class="banner-img">
+          </picture>
+        </div>
+        <div class="swiper-slide">
+          <picture>
+            <source media="(max-width: 767px)" srcset="images/Banner-sitemobile.jpg">
+            <img src="images/Bannerpdesktop.jpg" alt="" class="banner-img">
+          </picture>
+        </div>
       </div>
-      <div class="swiper-slide">
-        <picture>
-          <source media="(max-width: 767px)" srcset="images/banner3-mobile.png">
-          <img src="images/banner3.png" alt="" class="banner-img">
-        </picture>
-      </div>
-      <div class="swiper-slide">
-        <picture>
-          <source media="(max-width: 767px)" srcset="images/Banner-sitemobile.jpg">
-          <img src="images/Bannerpdesktop.jpg" alt="" class="banner-img">
-        </picture>
-      </div></div>
       <div class="swiper-button-next"></div>
       <div class="swiper-button-prev"></div>
     </div>
   </section>
 
-  <!-- Produtos em destaque -->
   <main class="main">
     <h2 style="text-align:center; margin-top: 40px;">Produtos em Destaque</h2>
 
@@ -64,38 +59,29 @@
     </p>
   </main>
 
-  <!-- Footer -->
   <div id="footer"></div>
 
-  <!-- Scripts -->
   <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-  <!-- ✅ carrega o main.js (onde vivem os listeners do menu) -->
   <script src="js/main.js"></script>
 
   <script>
-  // Swiper banners
   new Swiper('.swiper', {
     loop: true,
     autoplay: { delay: 4000 },
     navigation: { nextEl: '.swiper-button-next', prevEl: '.swiper-button-prev' },
   });
 
-  // Scroll do carrossel
   function scrollCarousel(dir) {
     const track = document.getElementById('carousel1');
     track.scrollBy({ left: dir * 300, behavior: 'smooth' });
   }
 
-  // Injetar Header e Footer
   fetch('header.html')
     .then(r => r.text())
     .then(t => {
       document.getElementById('header').innerHTML = t;
-
-      // Chama inicialização do seu main.js, se existir
       if (window.initHeader) window.initHeader();
 
-      // Fallback: se o main.js não anexou, conectamos aqui
       const toggle = document.getElementById('menu-toggle');
       const close  = document.getElementById('menu-close');
       const menu   = document.getElementById('mobile-menu');
@@ -105,7 +91,6 @@
       function closeMenu() { menu.classList.remove('open'); overlay.classList.remove('active'); }
 
       if (toggle && close && menu && overlay) {
-        // Para evitar duplo-bind, remove e adiciona novamente
         toggle.onclick = openMenu;
         close.onclick  = closeMenu;
         overlay.onclick= closeMenu;
@@ -116,7 +101,19 @@
     .then(r => r.text())
     .then(t => document.getElementById('footer').innerHTML = t);
 
-  // Carregar produtos da vitrine
+  function escapeHtml(value){
+    return (value || '').toString()
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#039;');
+  }
+
+  function hasGallery(p){
+    return Array.isArray(p.gallery) && p.gallery.filter(Boolean).length > 0;
+  }
+
   fetch('content/products.json')
     .then(r => r.json())
     .then(data => {
@@ -130,19 +127,24 @@
 
       produtos.forEach(p => {
         const card = document.createElement('div');
-        card.className = 'produto-card';
+        card.className = 'produto-card product-card';
 
         const precoHTML = (p.showPrice === false) ? '' :
           `<p>R$ ${(Number(p.price) || 0).toFixed(2).replace('.', ',')}</p>`;
 
+        const detalhesHTML = (p.detailsEnabled || hasGallery(p))
+          ? `<a href="produto.html?id=${encodeURIComponent(p.id)}" class="btn btn-details">Ver detalhes</a>`
+          : '';
+
         card.innerHTML = `
-          <img src="${p.image || 'images/sem-imagem.png'}" alt="${p.name}">
-          <h3>${p.name}</h3>
+          <img src="${escapeHtml(p.image || 'images/sem-imagem.png')}" alt="${escapeHtml(p.name || '')}">
+          <h3>${escapeHtml(p.name || '')}</h3>
           ${precoHTML}
-          <a href="https://wa.me/5555991407824?text=Olá!%20Vim%20através%20do%20site%20e%20tenho%20interesse%20em%20${encodeURIComponent(p.name)}"
-   class="btn" target="_blank">
-   <i class="fa-brands fa-whatsapp"></i> Comprar
-</a>
+          ${detalhesHTML}
+          <a href="https://wa.me/5555991407824?text=Olá!%20Vim%20através%20do%20site%20e%20tenho%20interesse%20em%20${encodeURIComponent(p.name || 'produto')}"
+             class="btn" target="_blank">
+             <i class="fa-brands fa-whatsapp"></i> Comprar
+          </a>
         `;
         track.appendChild(card);
       });
@@ -151,6 +153,4 @@
       document.getElementById('no-results').style.display = 'block';
     });
   </script>
-
-
 </body></html>

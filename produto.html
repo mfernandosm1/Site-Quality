@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Produto – Quality Celulares</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <style>
+    .produto-layout {
+      display: grid;
+      grid-template-columns: 520px 1fr;
+      gap: 42px;
+      align-items: start;
+    }
+
+    .produto-galeria {
+      display: grid;
+      grid-template-columns: 74px 1fr;
+      gap: 16px;
+      align-items: start;
+    }
+
+    .galeria-miniaturas {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      max-height: 470px;
+      overflow-y: auto;
+      padding-right: 4px;
+    }
+
+    .galeria-thumb {
+      width: 64px;
+      height: 64px;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      background: #fff;
+      cursor: pointer;
+      padding: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .galeria-thumb.ativa {
+      border: 2px solid #2563eb;
+    }
+
+    .galeria-thumb img {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+    }
+
+    .galeria-thumb-video {
+      font-size: 22px;
+      color: #2563eb;
+    }
+
+    .galeria-principal {
+      background: #fff;
+      border-radius: 12px;
+      padding: 18px;
+      text-align: center;
+      min-height: 430px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .galeria-principal img {
+      max-width: 100%;
+      height: auto;
+      max-height: 430px;
+      object-fit: contain;
+    }
+
+    .galeria-principal iframe {
+      width: 100%;
+      height: 360px;
+      border: 0;
+      border-radius: 10px;
+    }
+
+    .produto-info h1 {
+      margin-top: 0;
+      font-size: 26px;
+    }
+
+    .produto-descricao-box {
+      margin: 24px 0;
+      padding: 18px;
+      border-radius: 10px;
+      background: #f7f7f7;
+      line-height: 1.6;
+    }
+
+    .produto-descricao-box h2 {
+      margin-top: 0;
+      font-size: 20px;
+    }
+
+    .btn-whatsapp {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+      background: #25d366;
+      color: #fff !important;
+      padding: 10px 18px;
+      border-radius: 6px;
+      text-decoration: none !important;
+      font-weight: 700;
+      font-size: 15px;
+      border: none;
+      margin-top: 10px;
+    }
+
+    .btn-whatsapp:hover {
+      background: #1ebe5d;
+      color: #fff !important;
+      text-decoration: none !important;
+    }
+
+    @media (max-width: 900px) {
+      .produto-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .produto-galeria {
+        grid-template-columns: 1fr;
+      }
+
+      .galeria-miniaturas {
+        flex-direction: row;
+        max-height: none;
+        overflow-x: auto;
+      }
+
+      .galeria-principal {
+        min-height: 320px;
+      }
+    }
+  </style>
+
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-9HPD9XCELH"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-9HPD9XCELH');
+  </script>
+</head>
+<body>
+<div id="header"></div>
+
+<main class="main">
+  <section id="produto-detalhe" style="max-width:1100px;margin:35px auto;padding:0 16px;">
+    <p class="em-breve" style="text-align:center;">Carregando produto...</p>
+  </section>
+</main>
+
+<div id="footer"></div>
+<script src="js/main.js"></script>
+<script>
+(function(){
+  function escapeHtml(value){
+    return (value || '').toString()
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#039;');
+  }
+
+  function nl2br(value){
+    return escapeHtml(value).replace(/\n/g, '<br>');
+  }
+
+  function shouldShowPrice(p){
+    const raw = p.showPrice ?? false;
+    if (raw === true) return true;
+    const v = raw.toString().toLowerCase();
+    return v === 'sim' || v === 'yes' || v === 'true' || v === '1' || v === 'on';
+  }
+
+  function detailsEnabled(p){
+    const raw = p.detailsEnabled ?? false;
+    if (raw === true) return true;
+    const v = raw.toString().toLowerCase();
+    return v === 'sim' || v === 'yes' || v === 'true' || v === '1' || v === 'on';
+  }
+
+  function formatPrice(value){
+    const priceNum = (typeof value === 'number' ? value : Number(value || 0));
+    if (isNaN(priceNum)) return '';
+    return 'R$ ' + priceNum.toFixed(2).replace('.', ',');
+  }
+
+  function isYoutube(url){
+    return /youtube\.com|youtu\.be/i.test(url || '');
+  }
+
+  function youtubeEmbed(url){
+    if (!url) return '';
+
+    let videoId = '';
+
+    if (url.includes('youtu.be/')) {
+      videoId = url.split('youtu.be/')[1].split(/[?&]/)[0];
+    } else if (url.includes('watch?v=')) {
+      videoId = url.split('watch?v=')[1].split('&')[0];
+    } else if (url.includes('/shorts/')) {
+      videoId = url.split('/shorts/')[1].split(/[?&]/)[0];
+    } else if (url.includes('/embed/')) {
+      videoId = url.split('/embed/')[1].split(/[?&]/)[0];
+    }
+
+    return videoId ? 'https://www.youtube.com/embed/' + videoId : '';
+  }
+
+  const params = new URLSearchParams(window.location.search);
+  const id = params.get('id');
+  const box = document.getElementById('produto-detalhe');
+
+  if (!id) {
+    box.innerHTML = '<p class="em-breve" style="text-align:center;">Produto não informado.</p>';
+    return;
+  }
+
+  fetch('content/products.json')
+    .then(r => r.json())
+    .then(data => {
+      const product = (data.items || []).find(p => String(p.id) === String(id));
+
+      if (!product || product.active === false) {
+        box.innerHTML = '<p class="em-breve" style="text-align:center;">Produto não encontrado.</p>';
+        return;
+      }
+
+      const name = product.name || 'Produto';
+      const image = product.image || 'images/sem-imagem.png';
+      const gallery = Array.isArray(product.gallery) ? product.gallery : [];
+      const medias = [image, ...gallery].filter(Boolean);
+
+      const shortDesc = product.descriptionShort || '';
+      const longDesc = product.descriptionLong || '';
+      const price = shouldShowPrice(product) ? formatPrice(product.price) : '';
+      const whatsappText = encodeURIComponent('Olá! Vim através do site e tenho interesse em ' + name);
+
+      document.title = name + ' – Quality Celulares';
+
+      const thumbsHtml = medias.map((media, index) => {
+        if (isYoutube(media)) {
+          return `
+            <button class="galeria-thumb ${index === 0 ? 'ativa' : ''}" type="button" data-media="${escapeHtml(media)}">
+              <span class="galeria-thumb-video"><i class="fa-brands fa-youtube"></i></span>
+            </button>
+          `;
+        }
+
+        return `
+          <button class="galeria-thumb ${index === 0 ? 'ativa' : ''}" type="button" data-media="${escapeHtml(media)}">
+            <img src="${escapeHtml(media)}" alt="${escapeHtml(name)}">
+          </button>
+        `;
+      }).join('');
+
+      const descricaoHtml = detailsEnabled(product) ? `
+        <div class="produto-descricao-box">
+          <h2>Descrição</h2>
+          <p>${longDesc ? nl2br(longDesc) : 'Descrição em breve.'}</p>
+        </div>
+      ` : '';
+
+      box.innerHTML = `
+        <div class="produto-layout">
+          <div class="produto-galeria">
+            <div class="galeria-miniaturas">
+              ${thumbsHtml}
+            </div>
+
+            <div class="galeria-principal" id="galeria-principal">
+              <img src="${escapeHtml(medias[0] || image)}" alt="${escapeHtml(name)}">
+            </div>
+          </div>
+
+          <div class="produto-info">
+            <h1>${escapeHtml(name)}</h1>
+            ${price ? `<p style="font-size:24px;font-weight:700;margin:12px 0;">${escapeHtml(price)}</p>` : ''}
+            ${shortDesc ? `<p style="font-size:17px;line-height:1.5;">${escapeHtml(shortDesc)}</p>` : ''}
+
+            ${descricaoHtml}
+
+            <a href="https://wa.me/5555991407824?text=${whatsappText}" class="btn-whatsapp" target="_blank">
+              <i class="fa-brands fa-whatsapp"></i> Comprar no WhatsApp
+            </a>
+          </div>
+        </div>
+      `;
+
+      const principal = document.getElementById('galeria-principal');
+
+      document.querySelectorAll('.galeria-thumb').forEach(btn => {
+        btn.addEventListener('click', () => {
+          document.querySelectorAll('.galeria-thumb').forEach(b => b.classList.remove('ativa'));
+          btn.classList.add('ativa');
+
+          const media = btn.getAttribute('data-media');
+
+          if (isYoutube(media)) {
+            const embed = youtubeEmbed(media);
+            principal.innerHTML = embed
+              ? `<iframe src="${escapeHtml(embed)}" allowfullscreen></iframe>`
+              : '<p>Vídeo inválido.</p>';
+          } else {
+            principal.innerHTML = `<img src="${escapeHtml(media)}" alt="${escapeHtml(name)}">`;
+          }
+        });
+      });
+    })
+    .catch(() => {
+      box.innerHTML = '<p class="em-breve" style="text-align:center;">Erro ao carregar produto.</p>';
+    });
+})();
+</script>
+</body>
+</html>

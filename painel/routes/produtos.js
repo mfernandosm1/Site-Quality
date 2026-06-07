@@ -1,6 +1,7 @@
 import express from 'express';
 import fs from 'fs';
 import path from 'path';
+import multer from 'multer';
 
 const router = express.Router();
 
@@ -23,6 +24,7 @@ function writeJson(p, data) {
 function getAllImages(baseDir, prefix = '') {
   let results = [];
   if (!fs.existsSync(baseDir)) return results;
+
   const files = fs.readdirSync(baseDir);
 
   for (const file of files) {
@@ -43,17 +45,89 @@ function wantsJson(req) {
   return req.xhr || (req.headers.accept || '').includes('application/json');
 }
 
+function galleryFromBody(value, current = []) {
+  if (value === undefined || value === null) return current || [];
+
+  let list = [];
+
+  if (Array.isArray(value)) {
+    list = value;
+  } else {
+    list = value.toString().split(/\r?\n|,/);
+  }
+
+  return list
+    .map(item => item.toString().trim())
+    .filter(Boolean)
+    .slice(0, 4);
+}
+
 function productFromBody(body, current = {}) {
+  const priceValue = body.price !== undefined && body.price !== ''
+    ? Number(body.price)
+    : null;
+
   return {
     name: (body.name || current.name || '').trim(),
-    price: body.price ? Number(body.price) : null,
+    price: priceValue,
     image: (body.image || current.image || '').trim(),
+    gallery: galleryFromBody(body.gallery, current.gallery),
     category: (body.category ?? current.category ?? '').toString().trim(),
     showPrice: body.showPrice === true || body.showPrice === 'true',
     featured: body.featured === true || body.featured === 'true',
-    active: body.active === true || body.active === 'true'
+    active: body.active === true || body.active === 'true',
+    detailsEnabled: body.detailsEnabled === true || body.detailsEnabled === 'true',
+    descriptionShort: (body.descriptionShort ?? current.descriptionShort ?? '').toString().trim(),
+    descriptionLong: (body.descriptionLong ?? current.descriptionLong ?? '').toString().trim()
   };
 }
+
+function ensureDir(dir) {
+  if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
+}
+
+const storage = multer.diskStorage({
+  destination(req, file, cb) {
+    const uploadDir = path.join(P(req.app).SITE_DIR, 'images', 'produtos');
+    ensureDir(uploadDir);
+    cb(null, uploadDir);
+  },
+  filename(req, file, cb) {
+    const ext = path.extname(file.originalname).toLowerCase();
+    const base = path
+      .basename(file.originalname, ext)
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, '')
+      .replace(/[^a-zA-Z0-9]+/g, '-')
+      .replace(/^-+|-+$/g, '')
+      .toLowerCase();
+
+    cb(null, `${Date.now()}-${base || 'foto'}${ext}`);
+  }
+});
+
+const upload = multer({
+  storage,
+  limits: {
+    files: 4,
+    fileSize: 8 * 1024 * 1024
+  },
+  fileFilter(req, file, cb) {
+    if (!file.mimetype.startsWith('image/')) {
+      return cb(new Error('Apenas imagens são permitidas.'));
+    }
+    cb(null, true);
+  }
+});
+
+router.post('/upload-gallery', upload.array('galleryFiles', 4), (req, res) => {
+  const files = (req.files || []).map(file => `images/produtos/${file.filename}`);
+
+  return res.json({
+    success: true,
+    files
+  });
+});
 
 router.get('/', (req, res) => {
   const contentDir = P(req.app).CONTENT_DIR;
@@ -70,6 +144,8 @@ router.get('/', (req, res) => {
   if (req.query.saved === 'produto') flash = '✅ Produto salvo com sucesso.';
   if (req.query.saved === 'all') flash = '✅ Alterações salvas com sucesso.';
   if (req.query.saved === 'bulk') flash = '✅ Categoria aplicada nos produtos selecionados.';
+  if (req.query.saved === 'details_on') flash = '✅ Detalhes ativados nos produtos selecionados.';
+  if (req.query.saved === 'details_off') flash = '✅ Detalhes desativados nos produtos selecionados.';
   if (req.query.deleted === '1') flash = '🗑️ Produto excluído com sucesso.';
 
   res.render('produtos', {
@@ -88,6 +164,10 @@ router.post('/add', (req, res) => {
   const novo = productFromBody(req.body);
   novo.id = Date.now();
 
+  if (!novo.name) {
+    return res.redirect('/produtos?error=name');
+  }
+
   data.items.push(novo);
 
   writeJson(file, data);
@@ -102,7 +182,10 @@ router.post('/update', (req, res) => {
   const item = (data.items || []).find(p => Number(p.id) === id);
 
   if (!item) {
-    if (wantsJson(req)) return res.status(404).json({ success: false, message: 'Produto não encontrado.' });
+    if (wantsJson(req)) {
+      return res.status(404).json({ success: false, message: 'Produto não encontrado.' });
+    }
+
     return res.redirect('/produtos?error=not_found');
   }
 
@@ -123,7 +206,11 @@ router.post('/update-all', (req, res) => {
   const data = readJson(file);
   data.items = data.items || [];
 
-  const ids = Array.isArray(req.body.id) ? req.body.id : (req.body.id ? [req.body.id] : []);
+  const ids = Array.isArray(req.body.id)
+    ? req.body.id
+    : req.body.id
+      ? [req.body.id]
+      : [];
 
   ids.forEach((rawId, index) => {
     const id = Number(rawId);
@@ -135,15 +222,23 @@ router.post('/update-all', (req, res) => {
       return Array.isArray(value) ? value[index] : value;
     };
 
-    Object.assign(item, productFromBody({
+    const updated = productFromBody({
       name: getField('name'),
       price: getField('price'),
       image: getField('image'),
+      gallery: getField('gallery'),
       category: getField('category'),
       showPrice: getField('showPrice'),
       featured: getField('featured'),
-      active: getField('active')
-    }, item));
+      active: getField('active'),
+      detailsEnabled: getField('detailsEnabled'),
+      descriptionShort: getField('descriptionShort'),
+      descriptionLong: getField('descriptionLong')
+    }, item);
+
+    if (!updated.name) updated.name = item.name;
+
+    Object.assign(item, updated);
   });
 
   writeJson(file, data);
@@ -156,11 +251,17 @@ router.post('/bulk-category', (req, res) => {
   const data = readJson(file);
   data.items = data.items || [];
 
-  const ids = Array.isArray(req.body.selectedIds) ? req.body.selectedIds : (req.body.selectedIds ? [req.body.selectedIds] : []);
+  const ids = Array.isArray(req.body.selectedIds)
+    ? req.body.selectedIds
+    : req.body.selectedIds
+      ? [req.body.selectedIds]
+      : [];
+
   const selectedIds = ids.map(Number);
   const category = (req.body.bulkCategory ?? '').toString().trim();
 
   let updated = 0;
+
   data.items.forEach(item => {
     if (selectedIds.includes(Number(item.id))) {
       item.category = category;
@@ -171,6 +272,34 @@ router.post('/bulk-category', (req, res) => {
   writeJson(file, data);
   console.log(`⚡ Categoria aplicada em massa: ${updated} produto(s).`);
   res.redirect('/produtos?saved=bulk');
+});
+
+router.post('/bulk-details', (req, res) => {
+  const file = path.join(P(req.app).CONTENT_DIR, 'products.json');
+  const data = readJson(file);
+  data.items = data.items || [];
+
+  const ids = Array.isArray(req.body.selectedIds)
+    ? req.body.selectedIds
+    : req.body.selectedIds
+      ? [req.body.selectedIds]
+      : [];
+
+  const selectedIds = ids.map(Number);
+  const enable = req.body.detailsAction === 'enable';
+
+  let updated = 0;
+
+  data.items.forEach(item => {
+    if (selectedIds.includes(Number(item.id))) {
+      item.detailsEnabled = enable;
+      updated++;
+    }
+  });
+
+  writeJson(file, data);
+  console.log(`${enable ? '✅' : '🚫'} Detalhes ${enable ? 'ativados' : 'desativados'} em ${updated} produto(s).`);
+  res.redirect(`/produtos?saved=${enable ? 'details_on' : 'details_off'}`);
 });
 
 router.post('/del', (req, res) => {
