@@ -20,82 +20,588 @@
   ];
 %>
 
+<style>
+  html, body {
+    overflow-x: hidden !important;
+  }
+
+  .card {
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+
+  .cat-page-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 14px;
+    margin-bottom: 18px;
+  }
+
+  .cat-page-header h3 {
+    margin: 0;
+  }
+
+  .cat-subtitle {
+    color: #64748b;
+    font-size: 13px;
+    margin-top: 4px;
+  }
+
+  .cat-create-box {
+    display: none;
+    border: 1px solid #e5e7eb;
+    background: #f9fafb;
+    border-radius: 14px;
+    padding: 14px;
+    margin: 12px 0 18px;
+  }
+
+  .cat-create-box.open {
+    display: block;
+  }
+
+  .cat-create-grid {
+    display: grid;
+    grid-template-columns: minmax(160px, 1.2fr) minmax(140px, 1fr) 90px minmax(190px, 1fr) auto;
+    gap: 10px;
+    align-items: end;
+  }
+
+  .cat-list {
+    display: grid;
+    gap: 10px;
+    width: 100%;
+  }
+
+  .cat-list-head,
+  .cat-row {
+    display: grid;
+    grid-template-columns: 44px minmax(170px, 1.3fr) minmax(120px, .9fr) 74px minmax(120px, .8fr) 116px;
+    gap: 10px;
+    align-items: center;
+  }
+
+  .cat-list-head {
+    padding: 0 8px 10px;
+    border-bottom: 1px solid #e5e7eb;
+    color: #111827;
+    font-weight: 800;
+    font-size: 13px;
+  }
+
+  .cat-row {
+    padding: 12px 8px;
+    border-bottom: 1px solid #e5e7eb;
+  }
+
+  .cat-row:last-child {
+    border-bottom: 0;
+  }
+
+  .cat-index {
+    width: 28px;
+    height: 28px;
+    border-radius: 999px;
+    background: #f3f4f6;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: #475569;
+    font-weight: 700;
+    font-size: 13px;
+  }
+
+  .cat-name {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-width: 0;
+  }
+
+  .cat-icon-preview {
+    width: 42px;
+    height: 42px;
+    flex: 0 0 42px;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: #fff;
+    color: #2563eb;
+    font-size: 18px;
+  }
+
+  .cat-name-main {
+    font-weight: 800;
+    color: #111827;
+    line-height: 1.2;
+    word-break: break-word;
+  }
+
+  .cat-muted {
+    color: #64748b;
+    font-size: 12px;
+    margin-top: 2px;
+    word-break: break-word;
+  }
+
+  .cat-slug {
+    font-size: 13px;
+    color: #111827;
+    word-break: break-word;
+  }
+
+  .cat-order-badge {
+    width: 34px;
+    height: 34px;
+    border-radius: 10px;
+    border: 1px solid #e5e7eb;
+    background: #fff;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+  }
+
+  .cat-icon-pill {
+    max-width: 100%;
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    padding: 7px 10px;
+    border-radius: 999px;
+    background: #f3f4f6;
+    color: #334155;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 12px;
+  }
+
+  .cat-icon-pill i {
+    color: #111827;
+  }
+
+  .cat-actions {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: center;
+    gap: 6px;
+  }
+
+  .cat-action-btn {
+    min-width: 0;
+    height: 36px;
+    padding: 0 12px;
+    border-radius: 10px;
+    border: 1px solid #dbe2ea;
+    background: #fff;
+    cursor: pointer;
+    font-weight: 800;
+    color: #2563eb;
+  }
+
+  .cat-action-btn:hover {
+    background: #eff6ff;
+  }
+
+  .cat-delete-row {
+    margin: 0;
+    padding: 0;
+  }
+
+  .cat-delete-btn {
+    background: none;
+    border: none;
+    color: #dc2626;
+    font-weight: 800;
+    cursor: pointer;
+    padding: 4px 6px;
+    border-radius: 8px;
+  }
+
+  .cat-delete-btn:hover {
+    background: #fef2f2;
+  }
+
+  .cat-modal-backdrop {
+    position: fixed;
+    inset: 0;
+    z-index: 9998;
+    background: rgba(15, 23, 42, .55);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 18px;
+  }
+
+  .cat-modal-backdrop.open {
+    display: flex;
+  }
+
+  .cat-modal {
+    width: min(560px, 100%);
+    background: #fff;
+    border-radius: 18px;
+    box-shadow: 0 22px 60px rgba(0,0,0,.25);
+    overflow: hidden;
+  }
+
+  .cat-modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 18px 20px;
+    border-bottom: 1px solid #e5e7eb;
+  }
+
+  .cat-modal-header h4 {
+    margin: 0;
+    font-size: 18px;
+  }
+
+  .cat-modal-body {
+    padding: 18px 20px 20px;
+  }
+
+  .cat-modal-grid {
+    display: grid;
+    grid-template-columns: 1fr 120px;
+    gap: 14px;
+  }
+
+  .cat-modal-grid .full {
+    grid-column: 1 / -1;
+  }
+
+  .cat-modal-footer {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    padding-top: 16px;
+  }
+
+  .cat-modal-footer-left,
+  .cat-modal-footer-right {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+  }
+
+  .cat-delete-inline {
+    margin-top: 10px;
+  }
+
+  .cat-close-btn {
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+    border: 1px solid #e5e7eb;
+    background: #fff;
+    cursor: pointer;
+  }
+
+  @media (max-width: 980px) {
+    .cat-list-head {
+      display: none;
+    }
+
+    .cat-row {
+      grid-template-columns: 36px 1fr auto;
+      grid-template-areas:
+        "idx name action"
+        "idx meta action";
+      gap: 8px 10px;
+      align-items: center;
+    }
+
+    .cat-cell-idx { grid-area: idx; }
+    .cat-cell-name { grid-area: name; }
+    .cat-cell-slug {
+      grid-area: meta;
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+    .cat-cell-order,
+    .cat-cell-icon {
+      display: none;
+    }
+    .cat-cell-actions { grid-area: action; }
+
+    .cat-slug::before {
+      content: "Slug: ";
+      color: #64748b;
+      font-weight: 700;
+    }
+
+    .cat-action-btn {
+      width: 40px;
+      padding: 0;
+      font-size: 0;
+    }
+
+    .cat-action-btn::before {
+      content: "✏️";
+      font-size: 16px;
+    }
+
+    .cat-delete-btn {
+      font-size: 0;
+      width: 40px;
+      padding: 4px 0;
+    }
+
+    .cat-delete-btn::before {
+      content: "🗑";
+      font-size: 16px;
+    }
+
+    .cat-create-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .cat-create-submit {
+      grid-column: 1 / -1;
+    }
+  }
+
+  @media (max-width: 620px) {
+    .cat-page-header {
+      flex-direction: column;
+    }
+
+    .cat-create-grid,
+    .cat-modal-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .cat-row {
+      grid-template-columns: 32px 1fr 44px;
+    }
+
+    .cat-icon-preview {
+      display: none;
+    }
+
+    .cat-muted {
+      display: none;
+    }
+  }
+</style>
+
 <div class="card">
-  <h3>🗂️ Categorias</h3>
-
-  <form method="post" action="/categorias/add" class="row">
-    <div><label>Nome</label><input type="text" name="name" required></div>
-    <div><label>Slug</label><input type="text" name="slug" placeholder="ex.: smartphones"></div>
-    <div><label>Ordem</label><input type="number" name="order" placeholder="1"></div>
+  <div class="cat-page-header">
     <div>
-      <label>Ícone</label>
-      <select name="icon">
-        <% iconOptions.forEach(opt => { %>
-          <option value="<%= opt.value %>"><%= opt.label %></option>
-        <% }) %>
-      </select>
+      <h3>✨ 🗂️ Categorias</h3>
+      <div class="cat-subtitle">Gerencie as categorias do menu e da página única <code>categoria.html</code>.</div>
     </div>
-    <div style="align-self:end"><button class="btn" type="submit">Adicionar</button></div>
-  </form>
 
-  <table class="table">
-    <thead>
-      <tr>
-        <th>#</th>
-        <th>Nome</th>
-        <th>Slug</th>
-        <th>Ordem</th>
-        <th>Ícone</th>
-        <th>Ações</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% (items||[]).forEach((c,idx)=>{ %>
-        <tr>
-          <td><span class="badge"><%= idx+1 %></span></td>
-          <td><input form="f<%=c.id%>" type="text" name="name" value="<%= c.name %>"></td>
-          <td><input form="f<%=c.id%>" type="text" name="slug" value="<%= c.slug %>"></td>
-          <td><input form="f<%=c.id%>" type="number" name="order" value="<%= c.order || (idx+1) %>"></td>
-          <td>
-            <select form="f<%=c.id%>" name="icon">
-              <% iconOptions.forEach(opt => { %>
-                <option value="<%= opt.value %>" <%= (c.icon || '') === opt.value ? 'selected' : '' %>><%= opt.label %></option>
-              <% }) %>
-            </select>
-            <% if (c.icon) { %>
-              <span class="badge" title="Prévia do ícone"><i class="<%= c.icon %>"></i></span>
-            <% } %>
-          </td>
-          <td>
-            <form id="f<%=c.id%>" method="post" action="/categorias/update">
-              <input type="hidden" name="id" value="<%= c.id %>">
-              <button class="btn primary">Salvar</button>
-            </form>
-            <form method="post" action="/categorias/del" style="display:inline">
-              <input type="hidden" name="id" value="<%= c.id %>">
-              <button class="btn">Excluir</button>
-            </form>
-          </td>
-        </tr>
-      <% }) %>
-    </tbody>
-  </table>
+    <button type="button" class="btn primary" id="btn-toggle-create">+ Nova Categoria</button>
+  </div>
+
+  <div class="cat-create-box" id="cat-create-box">
+    <form method="post" action="/categorias/add" class="cat-create-grid">
+      <div>
+        <label>Nome</label>
+        <input type="text" name="name" required placeholder="Ex.: Smartphones">
+      </div>
+      <div>
+        <label>Slug</label>
+        <input type="text" name="slug" placeholder="ex.: smartphones">
+      </div>
+      <div>
+        <label>Ordem</label>
+        <input type="number" name="order" placeholder="1">
+      </div>
+      <div>
+        <label>Ícone</label>
+        <select name="icon">
+          <% iconOptions.forEach(opt => { %>
+            <option value="<%= opt.value %>"><%= opt.label %></option>
+          <% }) %>
+        </select>
+      </div>
+      <div class="cat-create-submit">
+        <button class="btn primary" type="submit">Adicionar</button>
+      </div>
+    </form>
+  </div>
+
+  <div class="cat-list">
+    <div class="cat-list-head">
+      <div>#</div>
+      <div>Categoria</div>
+      <div>Slug</div>
+      <div>Ordem</div>
+      <div>Ícone</div>
+      <div style="text-align:right;">Ações</div>
+    </div>
+
+    <% (items||[]).forEach((c,idx)=>{ 
+      const selectedIcon = iconOptions.find(opt => opt.value === (c.icon || ''));
+      const iconLabel = selectedIcon ? selectedIcon.label : 'Personalizado';
+    %>
+      <div class="cat-row">
+        <div class="cat-cell-idx"><span class="cat-index"><%= idx+1 %></span></div>
+
+        <div class="cat-cell-name cat-name">
+          <span class="cat-icon-preview">
+            <% if (c.icon) { %><i class="<%= c.icon %>"></i><% } else { %>🗂️<% } %>
+          </span>
+          <div>
+            <div class="cat-name-main"><%= c.name %></div>
+            <div class="cat-muted">ID: <%= c.id %></div>
+          </div>
+        </div>
+
+        <div class="cat-cell-slug">
+          <code class="cat-slug"><%= c.slug %></code>
+        </div>
+
+        <div class="cat-cell-order">
+          <span class="cat-order-badge"><%= c.order || (idx+1) %></span>
+        </div>
+
+        <div class="cat-cell-icon">
+          <span class="cat-icon-pill">
+            <% if (c.icon) { %><i class="<%= c.icon %>"></i><% } %>
+            <%= iconLabel %>
+          </span>
+        </div>
+
+        <div class="cat-cell-actions cat-actions">
+          <button type="button" class="cat-action-btn" data-open-modal="cat-modal-<%= c.id %>">✏️ Editar</button>
+
+          <form method="post" action="/categorias/del" class="cat-delete-row" onsubmit="return confirm('Excluir esta categoria?');">
+            <input type="hidden" name="id" value="<%= c.id %>">
+            <button type="submit" class="cat-delete-btn">🗑 Excluir</button>
+          </form>
+        </div>
+      </div>
+    <% }) %>
+  </div>
 </div>
 
+<% (items||[]).forEach((c,idx)=>{ %>
+  <div class="cat-modal-backdrop" id="cat-modal-<%= c.id %>" aria-hidden="true">
+    <div class="cat-modal" role="dialog" aria-modal="true" aria-labelledby="cat-modal-title-<%= c.id %>">
+      <div class="cat-modal-header">
+        <h4 id="cat-modal-title-<%= c.id %>">Editar categoria</h4>
+        <button type="button" class="cat-close-btn" data-close-modal title="Fechar">✕</button>
+      </div>
+
+      <div class="cat-modal-body">
+        <form id="f<%=c.id%>" method="post" action="/categorias/update">
+          <input type="hidden" name="id" value="<%= c.id %>">
+
+          <div class="cat-modal-grid">
+            <div class="full">
+              <label>Nome</label>
+              <input type="text" name="name" value="<%= c.name %>" required>
+            </div>
+
+            <div>
+              <label>Slug</label>
+              <input type="text" name="slug" value="<%= c.slug %>">
+            </div>
+
+            <div>
+              <label>Ordem</label>
+              <input type="number" name="order" value="<%= c.order || (idx+1) %>">
+            </div>
+
+            <div class="full">
+              <label>Ícone</label>
+              <select name="icon">
+                <% iconOptions.forEach(opt => { %>
+                  <option value="<%= opt.value %>" <%= (c.icon || '') === opt.value ? 'selected' : '' %>><%= opt.label %></option>
+                <% }) %>
+              </select>
+            </div>
+          </div>
+
+          <div class="cat-modal-footer">
+            <div class="cat-modal-footer-left">
+              <button type="button" class="btn" data-close-modal>Cancelar</button>
+            </div>
+            <div class="cat-modal-footer-right">
+              <button class="btn primary" type="submit">Salvar alterações</button>
+            </div>
+          </div>
+        </form>
+
+        <form method="post" action="/categorias/del" class="cat-delete-inline" onsubmit="return confirm('Excluir esta categoria?');">
+          <input type="hidden" name="id" value="<%= c.id %>">
+          <button class="btn" type="submit">Excluir categoria</button>
+        </form>
+      </div>
+    </div>
+  </div>
+<% }) %>
+
 <div class="card">
-  <h3>Importar</h3>
+  <h3>✨ Importar</h3>
   <p class="notice">Tenta ler itens do &lt;nav&gt; do <code>header.html</code> (textos viram nome; href vira slug).</p>
   <form method="post" action="/categorias/import"><button class="btn">Importar do header.html</button></form>
 </div>
 
 <div class="card">
-  <h3>🧹 Limpar categorias em desuso</h3>
+  <h3>✨ 🧹 Limpar categorias em desuso</h3>
   <p class="notice">Remove arquivos antigos <code>categoria-*.html</code>. A página nova continua sendo apenas <code>categoria.html</code>.</p>
   <button id="btn-limpar-categorias" class="btn">🧹 Limpar categorias em desuso</button>
 </div>
 
 <script>
 (function(){
+  const createBtn = document.getElementById('btn-toggle-create');
+  const createBox = document.getElementById('cat-create-box');
+
+  if (createBtn && createBox) {
+    createBtn.addEventListener('click', () => {
+      createBox.classList.toggle('open');
+      createBtn.textContent = createBox.classList.contains('open') ? 'Fechar criação' : '+ Nova Categoria';
+    });
+  }
+
+  function openModal(id) {
+    const modal = document.getElementById(id);
+    if (!modal) return;
+    modal.classList.add('open');
+    modal.setAttribute('aria-hidden', 'false');
+  }
+
+  function closeModal(modal) {
+    if (!modal) return;
+    modal.classList.remove('open');
+    modal.setAttribute('aria-hidden', 'true');
+  }
+
+  document.querySelectorAll('[data-open-modal]').forEach(btn => {
+    btn.addEventListener('click', () => openModal(btn.getAttribute('data-open-modal')));
+  });
+
+  document.querySelectorAll('[data-close-modal]').forEach(btn => {
+    btn.addEventListener('click', () => closeModal(btn.closest('.cat-modal-backdrop')));
+  });
+
+  document.querySelectorAll('.cat-modal-backdrop').forEach(backdrop => {
+    backdrop.addEventListener('click', (e) => {
+      if (e.target === backdrop) closeModal(backdrop);
+    });
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      document.querySelectorAll('.cat-modal-backdrop.open').forEach(closeModal);
+    }
+  });
+
   const btn = document.getElementById('btn-limpar-categorias');
   if(!btn) return;
   btn.addEventListener('click', async ()=>{
