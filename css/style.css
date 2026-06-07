@@ -239,7 +239,7 @@ body {
   color: #333;
   margin: 5px 0;
 }
-.produto-card .btn,
+.produto-card .btn:not(.btn-details),
 .produto-card .btn-whatsapp {
   font-size: 14px;
   padding: 8px 12px;
@@ -254,7 +254,7 @@ body {
   text-decoration: none;
   transition: background-color 0.3s ease;
 }
-.produto-card .btn:hover,
+.produto-card .btn:not(.btn-details):hover,
 .produto-card .btn-whatsapp:hover { background-color: #128c4a; }
 
 /* -------------------
@@ -497,4 +497,147 @@ body {
     width: 80%;
     max-width: 320px;
   }
+  
+}
+
+
+/* -------------------
+   Botão Ver detalhes
+   Deve ficar separado do botão verde do WhatsApp.
+--------------------*/
+.btn-details,
+a.btn-details,
+.produto-card .btn-details,
+.produto-card a.btn-details,
+.products .product-card .btn-details,
+.products .product-card a.btn-details,
+#produtos-container .product-card .btn-details,
+#produtos-container .product-card a.btn-details,
+.produtos-container .produto-card .btn-details,
+.produtos-container .produto-card a.btn-details {
+  width: 80%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  background: #2563eb;
+  color: #fff !important;
+  padding: 8px 12px;
+  border-radius: 6px;
+  border: none;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 1.2;
+  text-decoration: none !important;
+  margin: 6px 0 8px;
+  transition: background-color .25s ease, transform .2s ease;
+}
+
+.btn-details:hover,
+a.btn-details:hover,
+.produto-card .btn-details:hover,
+.produto-card a.btn-details:hover,
+.products .product-card .btn-details:hover,
+.products .product-card a.btn-details:hover,
+#produtos-container .product-card .btn-details:hover,
+#produtos-container .product-card a.btn-details:hover,
+.produtos-container .produto-card .btn-details:hover,
+.produtos-container .produto-card a.btn-details:hover {
+  background: #1d4ed8;
+  color: #fff !important;
+  text-decoration: none !important;
+  transform: translateY(-1px);
+}
+
+/* Garante que o botão do WhatsApp continue verde */
+.products .product-card .btn-whatsapp,
+#produtos-container .product-card .btn-whatsapp,
+.produtos-container .produto-card .btn-whatsapp,
+.produto-card .btn-whatsapp,
+.produto-card .btn:not(.btn-details) {
+  background-color: #25d366;
+  color: #fff !important;
+  text-decoration: none !important;
+}
+
+.products .product-card .btn-whatsapp:hover,
+#produtos-container .product-card .btn-whatsapp:hover,
+.produtos-container .produto-card .btn-whatsapp:hover,
+.produto-card .btn-whatsapp:hover,
+.produto-card .btn:not(.btn-details):hover {
+  background-color: #128c4a;
+  color: #fff !important;
+  text-decoration: none !important;
+}
+
+/* ===================
+   Patch Quality - consistência dos cards entre index e categoria
+   Mantém "Ver detalhes" azul e WhatsApp verde.
+=================== */
+.products .product-card,
+#produtos-container .product-card,
+.produtos-container .produto-card,
+.carousel-track .produto-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.products .product-card .btn,
+#produtos-container .product-card .btn,
+.produtos-container .produto-card .btn,
+.carousel-track .produto-card .btn {
+  width: 80%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 8px 12px;
+  border-radius: 6px;
+  text-decoration: none !important;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 1.2;
+  margin: 6px 0;
+  box-sizing: border-box;
+}
+
+.products .product-card .btn-details,
+#produtos-container .product-card .btn-details,
+.produtos-container .produto-card .btn-details,
+.carousel-track .produto-card .btn-details {
+  background-color: #2563eb !important;
+  color: #fff !important;
+}
+
+.products .product-card .btn-details:hover,
+#produtos-container .product-card .btn-details:hover,
+.produtos-container .produto-card .btn-details:hover,
+.carousel-track .produto-card .btn-details:hover {
+  background-color: #1d4ed8 !important;
+  color: #fff !important;
+}
+
+.products .product-card .btn-whatsapp,
+#produtos-container .product-card .btn-whatsapp,
+.produtos-container .produto-card .btn-whatsapp,
+.carousel-track .produto-card .btn-whatsapp,
+.products .product-card .btn:not(.btn-details),
+#produtos-container .product-card .btn:not(.btn-details),
+.produtos-container .produto-card .btn:not(.btn-details),
+.carousel-track .produto-card .btn:not(.btn-details) {
+  background-color: #25d366 !important;
+  color: #fff !important;
+}
+
+.products .product-card .btn-whatsapp:hover,
+#produtos-container .product-card .btn-whatsapp:hover,
+.produtos-container .produto-card .btn-whatsapp:hover,
+.carousel-track .produto-card .btn-whatsapp:hover,
+.products .product-card .btn:not(.btn-details):hover,
+#produtos-container .product-card .btn:not(.btn-details):hover,
+.produtos-container .produto-card .btn:not(.btn-details):hover,
+.carousel-track .produto-card .btn:not(.btn-details):hover {
+  background-color: #128c4a !important;
+  color: #fff !important;
 }
