@@ -273,14 +273,31 @@
       const productName = p.name || p.nome || '';
       const productImage = p.image || p.imagem || '';
       const whatsappText = encodeURIComponent('Olá! Vim através do site e tenho interesse em ' + (productName || 'produto'));
+      const hasGallery = Array.isArray(p.gallery) && p.gallery.filter(Boolean).length > 0;
+      const hasVideo = !!(p.youtube || p.youtubeUrl || p.video || p.videoUrl);
+      const hasDescription = !!(p.description || p.descricao || p.desc);
+      const detailsRaw = p.detailsEnabled ?? p.detalhesAtivo ?? p.details_enabled ?? p.verDetalhes ?? p.showDetails;
+      const detailsEnabled =
+        detailsRaw === true ||
+        String(detailsRaw || '').toLowerCase() === 'true' ||
+        String(detailsRaw || '').toLowerCase() === 'sim' ||
+        String(detailsRaw || '').toLowerCase() === '1' ||
+        String(detailsRaw || '').toLowerCase() === 'on';
+      const productId = p.id || p.slug || p._id || '';
+      const detalhesHTML =
+        (detailsEnabled || hasGallery || hasVideo || hasDescription) && productId
+          ? '<a href="produto.html?id=' + encodeURIComponent(productId) + '" class="btn btn-details">Ver detalhes</a>'
+          : '';
+
       const card = document.createElement('div');
-      card.className = 'product-card';
+      card.className = 'produto-card product-card';
       card.innerHTML =
-        '<img src="' + escapeHtml(productImage) + '" alt="' + escapeHtml(productName) + '">' +
+        '<img src="' + escapeHtml(productImage || 'images/sem-imagem.png') + '" alt="' + escapeHtml(productName) + '">' +
         '<h3>' + escapeHtml(productName) + '</h3>' +
         (priceStr ? '<p>' + escapeHtml(priceStr) + '</p>' : '') +
-        '<a href="https://wa.me/5555991407824?text=' + whatsappText + '" class="btn-whatsapp" target="_blank">' +
-        '<i class="fa-brands fa-whatsapp"></i> Comprar no WhatsApp</a>';
+        detalhesHTML +
+        '<a href="https://wa.me/5555991407824?text=' + whatsappText + '" class="btn btn-whatsapp" target="_blank">' +
+        '<i class="fa-brands fa-whatsapp"></i> Comprar</a>';
       container.appendChild(card);
     });
   }).catch(() => {
