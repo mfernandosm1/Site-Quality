@@ -165,6 +165,12 @@ function categoryPageHtml(header, footer){
   <title>Categorias – Quality Celulares</title>
   <meta name="description" content="Confira as categorias de produtos da Quality Celulares. Smartphones, acessórios e tecnologia com atendimento pelo WhatsApp.">
   <meta name="robots" content="index, follow">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Categorias – Quality Celulares">
+  <meta property="og:description" content="Confira as categorias de produtos da Quality Celulares. Smartphones, acessórios e tecnologia com atendimento pelo WhatsApp.">
+  <meta property="og:image" content="https://www.qualitycel.com.br/images/logo.png">
+  <meta property="og:url" content="https://www.qualitycel.com.br/categoria.html">
+  <meta name="twitter:card" content="summary_large_image">
   <link rel="canonical" href="https://www.qualitycel.com.br/categoria.html">
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -266,6 +272,24 @@ ${footer}
       document.head.appendChild(canonical);
     }
     canonical.setAttribute('href', window.location.origin + window.location.pathname + '?slug=' + encodeURIComponent(currentSlug));
+
+    function setOg(property, content){
+      let tag = document.querySelector('meta[property="' + property + '"]');
+      if (!tag) {
+        tag = document.createElement('meta');
+        tag.setAttribute('property', property);
+        document.head.appendChild(tag);
+      }
+      tag.setAttribute('content', content);
+    }
+
+    const categoryUrl = window.location.origin + window.location.pathname + '?slug=' + encodeURIComponent(currentSlug);
+    setOg('og:type', 'website');
+    setOg('og:title', categoryName + ' – Quality Celulares');
+    setOg('og:description', metaDescriptionText);
+    setOg('og:url', categoryUrl);
+    setOg('og:image', window.location.origin + '/images/logo.png');
+
 
     const products = (productsData.items || []).filter(p => {
       if (p.active === false) return false;
@@ -425,9 +449,44 @@ export function convertOldCategoryFiles(siteDir) {
 
 
 /* =========================================================
-   🔎 SEO: Sitemap + Robots.txt
+   🔎 SEO AVANÇADO: Config, Sitemap, Robots e Schema Base
 ========================================================= */
-const SITE_BASE_URL = 'https://www.qualitycel.com.br';
+const DEFAULT_SITE_BASE_URL = 'https://www.qualitycel.com.br';
+
+export function defaultSeoConfig(){
+  return {
+    siteTitle: 'Quality Celulares',
+    siteDescription: 'Loja especializada em smartphones, acessórios, notebooks, games e eletrônicos com atendimento pelo WhatsApp.',
+    siteUrl: DEFAULT_SITE_BASE_URL,
+    analyticsId: 'G-9HPD9XCELH',
+    searchConsoleVerification: '',
+    defaultOgImage: 'images/logo.png',
+    enableSitemap: true,
+    enableRobots: true,
+    enableSchemaProducts: true,
+    enableSchemaOrganization: true,
+    enableOpenGraph: true,
+    enableCanonical: true,
+    enableBreadcrumbs: true
+  };
+}
+
+export function loadSeoConfig(siteDir){
+  const fallback = defaultSeoConfig();
+
+  try {
+    const seoPath = path.join(siteDir, 'content', 'seo.json');
+    if (!fs.existsSync(seoPath)) return fallback;
+
+    const data = JSON.parse(fs.readFileSync(seoPath, 'utf-8'));
+    const seo = { ...fallback, ...data };
+
+    seo.siteUrl = cleanBaseUrl(seo.siteUrl || fallback.siteUrl);
+    return seo;
+  } catch {
+    return fallback;
+  }
+}
 
 function xmlEscape(value){
   return (value || '').toString()
@@ -438,16 +497,48 @@ function xmlEscape(value){
     .replace(/'/g, '&apos;');
 }
 
+function cleanBaseUrl(url){
+  return (url || DEFAULT_SITE_BASE_URL).toString().trim().replace(/\/+$/, '');
+}
+
 function normalizeUrlPath(pathname){
-  return pathname.replace(/^\//, '');
+  return (pathname || '').toString().replace(/^\//, '');
 }
 
-function makeAbsoluteUrl(pathname){
-  return `${SITE_BASE_URL}/${normalizeUrlPath(pathname)}`;
+function makeAbsoluteUrl(pathname, baseUrl = DEFAULT_SITE_BASE_URL){
+  return `${cleanBaseUrl(baseUrl)}/${normalizeUrlPath(pathname)}`;
 }
 
-export function generateSeoFiles(siteDir) {
+function readJsonSafe(file, fallback = { items: [] }){
+  try { return JSON.parse(fs.readFileSync(file, 'utf-8')); }
+  catch { return fallback; }
+}
+
+function productHasDetails(p){
+  const truthy = v => {
+    if (v === true) return true;
+    if (v === false || v === null || v === undefined) return false;
+    const s = v.toString().trim().toLowerCase();
+    return s === 'sim' || s === 'yes' || s === 'true' || s === '1' || s === 'on';
+  };
+
+  return truthy(p.detailsEnabled) ||
+    (Array.isArray(p.gallery) && p.gallery.filter(Boolean).length > 0) ||
+    !!(p.youtube || p.youtubeUrl || p.video || p.videoUrl) ||
+    !!(p.description || p.descricao || p.desc || p.descriptionLong || p.descriptionShort);
+}
+
+function imageAbsoluteUrl(image, baseUrl){
+  const img = (image || '').toString().trim() || 'images/logo.png';
+  if (/^https?:\/\//i.test(img)) return img;
+  return makeAbsoluteUrl(img, baseUrl);
+}
+
+export function generateSeoFiles(siteDir, seoConfig = null) {
   try {
+    const seo = seoConfig || loadSeoConfig(siteDir);
+    const baseUrl = cleanBaseUrl(seo.siteUrl);
+
     const contentDir = path.join(siteDir, 'content');
     const categories = readJsonSafe(path.join(contentDir, 'categories.json'), { items: [] }).items || [];
     const products = readJsonSafe(path.join(contentDir, 'products.json'), { items: [] }).items || [];
@@ -460,21 +551,22 @@ export function generateSeoFiles(siteDir) {
       urls.push({ loc, priority, changefreq });
     }
 
-    addUrl(makeAbsoluteUrl('index.html'), '1.0', 'weekly');
-    addUrl(makeAbsoluteUrl('sobre.html'), '0.5', 'monthly');
-    addUrl(makeAbsoluteUrl('formas-de-pagamento.html'), '0.5', 'monthly');
+    addUrl(`${baseUrl}/`, '1.0', 'weekly');
+    addUrl(makeAbsoluteUrl('index.html', baseUrl), '1.0', 'weekly');
+    addUrl(makeAbsoluteUrl('sobre.html', baseUrl), '0.5', 'monthly');
+    addUrl(makeAbsoluteUrl('formas-de-pagamento.html', baseUrl), '0.5', 'monthly');
 
     categories
       .filter(c => c && c.slug)
       .sort((a, b) => Number(a.order || 0) - Number(b.order || 0))
       .forEach(c => {
-        addUrl(`${makeAbsoluteUrl('categoria.html')}?slug=${encodeURIComponent(c.slug)}`, '0.8', 'weekly');
+        addUrl(`${makeAbsoluteUrl('categoria.html', baseUrl)}?slug=${encodeURIComponent(c.slug)}`, '0.8', 'weekly');
       });
 
     products
-      .filter(p => p && p.active !== false && p.id)
+      .filter(p => p && p.active !== false && p.id && productHasDetails(p))
       .forEach(p => {
-        addUrl(`${makeAbsoluteUrl('produto.html')}?id=${encodeURIComponent(p.id)}`, '0.7', 'weekly');
+        addUrl(`${makeAbsoluteUrl('produto.html', baseUrl)}?id=${encodeURIComponent(p.id)}`, '0.75', 'weekly');
       });
 
     const uniqueUrls = [];
@@ -485,7 +577,8 @@ export function generateSeoFiles(siteDir) {
       uniqueUrls.push(u);
     });
 
-    const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
+    if (seo.enableSitemap !== false) {
+      const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 ${uniqueUrls.map(u => `  <url>
     <loc>${xmlEscape(u.loc)}</loc>
@@ -496,26 +589,41 @@ ${uniqueUrls.map(u => `  <url>
 </urlset>
 `;
 
-    const robots = `User-agent: *
+      writeFileUtf8(path.join(siteDir, 'sitemap.xml'), sitemap);
+    }
+
+    if (seo.enableRobots !== false) {
+      const robots = `User-agent: *
 Allow: /
 
-Sitemap: ${SITE_BASE_URL}/sitemap.xml
+Sitemap: ${baseUrl}/sitemap.xml
 `;
 
-    writeFileUtf8(path.join(siteDir, 'sitemap.xml'), sitemap);
-    writeFileUtf8(path.join(siteDir, 'robots.txt'), robots);
+      writeFileUtf8(path.join(siteDir, 'robots.txt'), robots);
+    }
 
-    console.log(`✅ SEO atualizado: sitemap.xml (${uniqueUrls.length} URLs) e robots.txt.`);
+    if (seo.enableSchemaOrganization !== false) {
+      const organizationSchema = {
+        '@context': 'https://schema.org',
+        '@type': 'Store',
+        name: seo.siteTitle || 'Quality Celulares',
+        url: baseUrl,
+        logo: imageAbsoluteUrl(seo.defaultOgImage || 'images/logo.png', baseUrl),
+        description: seo.siteDescription || 'Loja especializada em smartphones e acessórios.',
+        sameAs: []
+      };
+
+      writeFileUtf8(
+        path.join(siteDir, 'content', 'organization.schema.json'),
+        JSON.stringify(organizationSchema, null, 2)
+      );
+    }
+
+    console.log(`✅ SEO atualizado: sitemap/robots gerados com ${uniqueUrls.length} URL(s).`);
   } catch (e) {
     console.warn(`⚠️ Falha ao gerar SEO: ${e.message}`);
   }
 }
-
-function readJsonSafe(file, fallback = { items: [] }){
-  try { return JSON.parse(fs.readFileSync(file, 'utf-8')); }
-  catch { return fallback; }
-}
-
 
 /* =========================================================
    🖼️ BANNERS

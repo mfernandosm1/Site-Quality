@@ -6,6 +6,12 @@
   <title>Produto – Quality Celulares</title>
   <meta name="description" content="Confira detalhes do produto na Quality Celulares. Atendimento pelo WhatsApp.">
   <meta name="robots" content="index, follow">
+  <meta property="og:type" content="product">
+  <meta property="og:title" content="Produto – Quality Celulares">
+  <meta property="og:description" content="Confira detalhes do produto na Quality Celulares. Atendimento pelo WhatsApp.">
+  <meta property="og:image" content="https://www.qualitycel.com.br/images/logo.png">
+  <meta property="og:url" content="https://www.qualitycel.com.br/produto.html">
+  <meta name="twitter:card" content="summary_large_image">
   <link rel="canonical" href="https://www.qualitycel.com.br/produto.html">
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -254,50 +260,150 @@
     tag.setAttribute('href', url);
   }
 
-  function applyProductSeo(product, name, image, priceValue, showPrice){
-    const description = stripHtml(product.descriptionShort || product.descriptionLong || ('Confira ' + name + ' na Quality Celulares.'));
-    const canonicalUrl = window.location.origin + window.location.pathname + '?id=' + encodeURIComponent(product.id);
-
-    document.title = name + ' – Quality Celulares';
-    setMetaTag('description', description.slice(0, 160));
-    setCanonical(canonicalUrl);
-
-    const schema = {
-      '@context': 'https://schema.org',
-      '@type': 'Product',
-      name: name,
-      image: [absoluteUrl(image)],
-      description: description,
-      sku: String(product.id),
-      brand: {
-        '@type': 'Brand',
-        name: (product.brand || product.marca || name.split(' ')[0] || 'Quality Celulares')
-      },
-      offers: {
-        '@type': 'Offer',
-        url: canonicalUrl,
-        priceCurrency: 'BRL',
-        availability: product.active === false ? 'https://schema.org/OutOfStock' : 'https://schema.org/InStock',
-        itemCondition: 'https://schema.org/NewCondition',
-        seller: {
-          '@type': 'Organization',
-          name: 'Quality Celulares'
-        }
-      }
-    };
-
-    if (showPrice && !isNaN(Number(priceValue)) && Number(priceValue) > 0) {
-      schema.offers.price = Number(priceValue).toFixed(2);
+  function setOg(property, content){
+    let tag = document.querySelector('meta[property="' + property + '"]');
+    if (!tag) {
+      tag = document.createElement('meta');
+      tag.setAttribute('property', property);
+      document.head.appendChild(tag);
     }
+    tag.setAttribute('content', content);
+  }
 
-    let script = document.getElementById('product-schema-jsonld');
+  function setTwitter(name, content){
+    let tag = document.querySelector('meta[name="' + name + '"]');
+    if (!tag) {
+      tag = document.createElement('meta');
+      tag.setAttribute('name', name);
+      document.head.appendChild(tag);
+    }
+    tag.setAttribute('content', content);
+  }
+
+  function setJsonLd(id, data){
+    let script = document.getElementById(id);
     if (!script) {
       script = document.createElement('script');
       script.type = 'application/ld+json';
-      script.id = 'product-schema-jsonld';
+      script.id = id;
       document.head.appendChild(script);
     }
-    script.textContent = JSON.stringify(schema);
+    script.textContent = JSON.stringify(data);
+  }
+
+  function defaultSeoConfig(){
+    return {
+      siteTitle: 'Quality Celulares',
+      siteDescription: 'Loja especializada em smartphones, acessórios, notebooks, games e eletrônicos com atendimento pelo WhatsApp.',
+      siteUrl: window.location.origin,
+      analyticsId: 'G-9HPD9XCELH',
+      defaultOgImage: 'images/logo.png',
+      enableSchemaProducts: true,
+      enableSchemaOrganization: true,
+      enableOpenGraph: true,
+      enableCanonical: true,
+      enableBreadcrumbs: true
+    };
+  }
+
+  function applyProductSeo(product, name, image, priceValue, showPrice, seoConfig){
+    const seo = Object.assign(defaultSeoConfig(), seoConfig || {});
+    const description = stripHtml(product.descriptionShort || product.descriptionLong || ('Confira ' + name + ' na Quality Celulares.'));
+    const canonicalUrl = window.location.origin + window.location.pathname + '?id=' + encodeURIComponent(product.id);
+    const absoluteImage = absoluteUrl(image);
+    const safeDescription = description.slice(0, 160);
+
+    document.title = name + ' – Quality Celulares';
+    setMetaTag('description', safeDescription);
+
+    if (seo.enableCanonical !== false) {
+      setCanonical(canonicalUrl);
+    }
+
+    if (seo.enableOpenGraph !== false) {
+      setOg('og:type', 'product');
+      setOg('og:title', name + ' – Quality Celulares');
+      setOg('og:description', safeDescription);
+      setOg('og:image', absoluteImage);
+      setOg('og:url', canonicalUrl);
+      setTwitter('twitter:card', 'summary_large_image');
+      setTwitter('twitter:title', name + ' – Quality Celulares');
+      setTwitter('twitter:description', safeDescription);
+      setTwitter('twitter:image', absoluteImage);
+    }
+
+    if (seo.enableSchemaProducts !== false) {
+      const schema = {
+        '@context': 'https://schema.org',
+        '@type': 'Product',
+        name: name,
+        image: [absoluteImage],
+        description: description,
+        sku: String(product.id),
+        brand: {
+          '@type': 'Brand',
+          name: (product.brand || product.marca || name.split(' ')[0] || 'Quality Celulares')
+        },
+        offers: {
+          '@type': 'Offer',
+          url: canonicalUrl,
+          priceCurrency: 'BRL',
+          availability: product.active === false ? 'https://schema.org/OutOfStock' : 'https://schema.org/InStock',
+          itemCondition: 'https://schema.org/NewCondition',
+          seller: {
+            '@type': 'Organization',
+            name: 'Quality Celulares'
+          }
+        }
+      };
+
+      if (showPrice && !isNaN(Number(priceValue)) && Number(priceValue) > 0) {
+        schema.offers.price = Number(priceValue).toFixed(2);
+      }
+
+      setJsonLd('product-schema-jsonld', schema);
+    }
+
+    if (seo.enableSchemaOrganization !== false) {
+      const org = {
+        '@context': 'https://schema.org',
+        '@type': 'Store',
+        name: seo.siteTitle || 'Quality Celulares',
+        url: seo.siteUrl || window.location.origin,
+        logo: absoluteUrl(seo.defaultOgImage || 'images/logo.png'),
+        description: seo.siteDescription || 'Loja especializada em smartphones e acessórios.'
+      };
+      setJsonLd('organization-schema-jsonld', org);
+    }
+
+    if (seo.enableBreadcrumbs !== false) {
+      const category = product.category || product.categoria || 'produtos';
+      const breadcrumb = {
+        '@context': 'https://schema.org',
+        '@type': 'BreadcrumbList',
+        itemListElement: [
+          {
+            '@type': 'ListItem',
+            position: 1,
+            name: 'Início',
+            item: window.location.origin + '/index.html'
+          },
+          {
+            '@type': 'ListItem',
+            position: 2,
+            name: category,
+            item: window.location.origin + '/categoria.html?slug=' + encodeURIComponent(category)
+          },
+          {
+            '@type': 'ListItem',
+            position: 3,
+            name: name,
+            item: canonicalUrl
+          }
+        ]
+      };
+      setJsonLd('breadcrumb-schema-jsonld', breadcrumb);
+    }
   }
 
   const params = new URLSearchParams(window.location.search);
@@ -309,9 +415,11 @@
     return;
   }
 
-  fetch('content/products.json')
-    .then(r => r.json())
-    .then(data => {
+  Promise.all([
+    fetch('content/products.json').then(r => r.json()),
+    fetch('content/seo.json').then(r => r.json()).catch(() => ({}))
+  ])
+    .then(([data, seoConfig]) => {
       const product = (data.items || []).find(p => String(p.id) === String(id));
 
       if (!product || product.active === false) {
@@ -330,7 +438,7 @@
       const price = showPrice ? formatPrice(product.price) : '';
       const whatsappText = encodeURIComponent('Olá! Vim através do site e tenho interesse em ' + name);
 
-      applyProductSeo(product, name, image, product.price, showPrice);
+      applyProductSeo(product, name, image, product.price, showPrice, seoConfig);
 
       const thumbsHtml = medias.map((media, index) => {
         if (isYoutube(media)) {

@@ -3,7 +3,7 @@ import fs from "fs";
 import path from "path";
 import archiver from "archiver";
 import simpleGit from "simple-git";
-import { generateCategoryPage, updateHeaderMenu, convertOldCategoryFiles, generateSeoFiles } from "./main_utils.js";
+import { generateCategoryPage, updateHeaderMenu, convertOldCategoryFiles, generateSeoFiles, loadSeoConfig } from "./main_utils.js";
 
 const router = express.Router();
 
@@ -247,7 +247,7 @@ router.post("/", async (req,res)=>{
     // =================== PUBLICAÇÃO NORMAL ===================
     console.log("🌐 Modo normal: preparando categoria.html, limpando categorias antigas e sincronizando SITE_DIR → REPO_DIR...");
     prepararCategoriasParaPublicacao();
-    generateSeoFiles(SITE_DIR);
+    generateSeoFiles(SITE_DIR, loadSeoConfig(SITE_DIR));
     limparArquivosCategoriasAntigos(SITE_DIR, REPO_DIR);
     syncDirContents(SITE_DIR, REPO_DIR);
     await gitCommitPush();
