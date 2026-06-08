@@ -45,6 +45,7 @@ import cssRouter from './routes/css.js';
 import bannersRouter from './routes/banners.js';
 import aparenciaRouter from './routes/aparencia.js';
 import estilosRouter from './routes/estilos.js';
+import seoRouter from './routes/seo.js';
 import sitePreviewRouter from './routes/sitepreview.js';
 
 app.use('/', indexRouter);
@@ -64,6 +65,7 @@ app.use('/css', cssRouter);
 app.use('/banners', bannersRouter);
 app.use('/aparencia', aparenciaRouter);
 app.use('/estilos', estilosRouter);
+app.use('/seo', seoRouter);
 
 // ===== MODO MANUTENÇÃO: intercepta TUDO em /site =====
 const MAINT_FLAG = path.join(SITE_DIR, 'maintenance.flag');

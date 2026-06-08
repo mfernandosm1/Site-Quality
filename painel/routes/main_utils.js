@@ -163,6 +163,9 @@ function categoryPageHtml(header, footer){
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Categorias – Quality Celulares</title>
+  <meta name="description" content="Confira as categorias de produtos da Quality Celulares. Smartphones, acessórios e tecnologia com atendimento pelo WhatsApp.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://www.qualitycel.com.br/categoria.html">
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
@@ -246,6 +249,23 @@ ${footer}
 
     setCategoryTitle(titleEl, categoryName, category ? category.icon : '');
     document.title = categoryName + ' – Quality Celulares';
+
+    const metaDescriptionText = 'Confira ' + categoryName + ' disponíveis na Quality Celulares. Atendimento pelo WhatsApp.';
+    let metaDescription = document.querySelector('meta[name="description"]');
+    if (!metaDescription) {
+      metaDescription = document.createElement('meta');
+      metaDescription.setAttribute('name', 'description');
+      document.head.appendChild(metaDescription);
+    }
+    metaDescription.setAttribute('content', metaDescriptionText);
+
+    let canonical = document.querySelector('link[rel="canonical"]');
+    if (!canonical) {
+      canonical = document.createElement('link');
+      canonical.setAttribute('rel', 'canonical');
+      document.head.appendChild(canonical);
+    }
+    canonical.setAttribute('href', window.location.origin + window.location.pathname + '?slug=' + encodeURIComponent(currentSlug));
 
     const products = (productsData.items || []).filter(p => {
       if (p.active === false) return false;
@@ -402,6 +422,100 @@ export function convertOldCategoryFiles(siteDir) {
     ? `🧹 Removidos ${removed} arquivos antigos de categoria.`
     : '✅ Nenhum arquivo antigo de categoria encontrado.');
 }
+
+
+/* =========================================================
+   🔎 SEO: Sitemap + Robots.txt
+========================================================= */
+const SITE_BASE_URL = 'https://www.qualitycel.com.br';
+
+function xmlEscape(value){
+  return (value || '').toString()
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&apos;');
+}
+
+function normalizeUrlPath(pathname){
+  return pathname.replace(/^\//, '');
+}
+
+function makeAbsoluteUrl(pathname){
+  return `${SITE_BASE_URL}/${normalizeUrlPath(pathname)}`;
+}
+
+export function generateSeoFiles(siteDir) {
+  try {
+    const contentDir = path.join(siteDir, 'content');
+    const categories = readJsonSafe(path.join(contentDir, 'categories.json'), { items: [] }).items || [];
+    const products = readJsonSafe(path.join(contentDir, 'products.json'), { items: [] }).items || [];
+    const now = new Date().toISOString().split('T')[0];
+
+    const urls = [];
+
+    function addUrl(loc, priority = '0.7', changefreq = 'weekly'){
+      if (!loc) return;
+      urls.push({ loc, priority, changefreq });
+    }
+
+    addUrl(makeAbsoluteUrl('index.html'), '1.0', 'weekly');
+    addUrl(makeAbsoluteUrl('sobre.html'), '0.5', 'monthly');
+    addUrl(makeAbsoluteUrl('formas-de-pagamento.html'), '0.5', 'monthly');
+
+    categories
+      .filter(c => c && c.slug)
+      .sort((a, b) => Number(a.order || 0) - Number(b.order || 0))
+      .forEach(c => {
+        addUrl(`${makeAbsoluteUrl('categoria.html')}?slug=${encodeURIComponent(c.slug)}`, '0.8', 'weekly');
+      });
+
+    products
+      .filter(p => p && p.active !== false && p.id)
+      .forEach(p => {
+        addUrl(`${makeAbsoluteUrl('produto.html')}?id=${encodeURIComponent(p.id)}`, '0.7', 'weekly');
+      });
+
+    const uniqueUrls = [];
+    const seen = new Set();
+    urls.forEach(u => {
+      if (seen.has(u.loc)) return;
+      seen.add(u.loc);
+      uniqueUrls.push(u);
+    });
+
+    const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+${uniqueUrls.map(u => `  <url>
+    <loc>${xmlEscape(u.loc)}</loc>
+    <lastmod>${now}</lastmod>
+    <changefreq>${u.changefreq}</changefreq>
+    <priority>${u.priority}</priority>
+  </url>`).join('\n')}
+</urlset>
+`;
+
+    const robots = `User-agent: *
+Allow: /
+
+Sitemap: ${SITE_BASE_URL}/sitemap.xml
+`;
+
+    writeFileUtf8(path.join(siteDir, 'sitemap.xml'), sitemap);
+    writeFileUtf8(path.join(siteDir, 'robots.txt'), robots);
+
+    console.log(`✅ SEO atualizado: sitemap.xml (${uniqueUrls.length} URLs) e robots.txt.`);
+  } catch (e) {
+    console.warn(`⚠️ Falha ao gerar SEO: ${e.message}`);
+  }
+}
+
+function readJsonSafe(file, fallback = { items: [] }){
+  try { return JSON.parse(fs.readFileSync(file, 'utf-8')); }
+  catch { return fallback; }
+}
+
 
 /* =========================================================
    🖼️ BANNERS

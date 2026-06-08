@@ -1,0 +1,248 @@
+<% layout('layout') -%>
+
+<style>
+  .seo-header {
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+    gap:16px;
+    margin-bottom:16px;
+  }
+
+  .seo-header h3 { margin:0; }
+
+  .seo-muted {
+    color:#64748b;
+    font-size:13px;
+    margin-top:4px;
+    line-height:1.45;
+  }
+
+  .seo-grid {
+    display:grid;
+    grid-template-columns: 1fr 1fr;
+    gap:16px;
+  }
+
+  .seo-section {
+    border:1px solid #e5e7eb;
+    border-radius:14px;
+    padding:16px;
+    background:#fff;
+  }
+
+  .seo-section h4 {
+    margin:0 0 12px;
+  }
+
+  .seo-full {
+    grid-column:1 / -1;
+  }
+
+  .seo-checks {
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:10px 18px;
+    margin-top:8px;
+  }
+
+  .seo-check {
+    display:flex;
+    align-items:center;
+    gap:8px;
+    font-weight:600;
+  }
+
+  .seo-preview {
+    border:1px solid #dbeafe;
+    background:#eff6ff;
+    border-radius:14px;
+    padding:14px;
+  }
+
+  .seo-preview-title {
+    font-weight:800;
+    color:#1d4ed8;
+    font-size:17px;
+    margin-bottom:6px;
+  }
+
+  .seo-preview-url {
+    color:#15803d;
+    font-size:13px;
+    margin-bottom:6px;
+    word-break:break-all;
+  }
+
+  .seo-preview-desc {
+    color:#334155;
+    font-size:14px;
+    line-height:1.45;
+  }
+
+  .seo-alert {
+    display:none;
+    margin-top:12px;
+    border-radius:10px;
+    padding:10px 12px;
+    font-weight:700;
+  }
+
+  .seo-alert.ok {
+    display:block;
+    background:#ecfdf5;
+    color:#047857;
+  }
+
+  .seo-alert.warn {
+    display:block;
+    background:#fff7ed;
+    color:#c2410c;
+  }
+
+  .seo-actions {
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
+    margin-top:16px;
+  }
+
+  @media(max-width:800px) {
+    .seo-grid { grid-template-columns:1fr; }
+    .seo-checks { grid-template-columns:1fr; }
+    .seo-header { flex-direction:column; }
+  }
+</style>
+
+<div class="card">
+  <div class="seo-header">
+    <div>
+      <h3>📈 SEO</h3>
+      <div class="seo-muted">
+        Controle Google Analytics, Search Console, Sitemap, Robots, Schema Markup e prévia social do site.
+      </div>
+    </div>
+  </div>
+
+  <form method="post" action="/seo/save" id="seo-form">
+    <div class="seo-grid">
+      <div class="seo-section seo-full">
+        <h4>🌐 Configurações gerais</h4>
+        <label>Título padrão do site</label>
+        <input type="text" name="siteTitle" id="siteTitle" value="<%= seo.siteTitle || '' %>" placeholder="Quality Celulares">
+
+        <label>Descrição padrão</label>
+        <textarea name="siteDescription" id="siteDescription" rows="3" placeholder="Descrição que aparece no Google e compartilhamentos."><%= seo.siteDescription || '' %></textarea>
+
+        <label>URL principal</label>
+        <input type="url" name="siteUrl" id="siteUrl" value="<%= seo.siteUrl || '' %>" placeholder="https://www.qualitycel.com.br">
+      </div>
+
+      <div class="seo-section">
+        <h4>📊 Google Analytics</h4>
+        <label>ID da métrica</label>
+        <input type="text" name="analyticsId" id="analyticsId" value="<%= seo.analyticsId || '' %>" placeholder="G-XXXXXXXXXX">
+        <p class="seo-muted">Exemplo correto: <code>G-9HPD9XCELH</code></p>
+      </div>
+
+      <div class="seo-section">
+        <h4>🔎 Google Search Console</h4>
+        <label>Código de verificação</label>
+        <input type="text" name="searchConsoleVerification" id="searchConsoleVerification" value="<%= seo.searchConsoleVerification || '' %>" placeholder="google-site-verification=... ou somente o código">
+        <p class="seo-muted">Cole aqui o código fornecido pelo Google para validar a propriedade do site.</p>
+      </div>
+
+      <div class="seo-section">
+        <h4>📲 Social Preview</h4>
+        <label>Imagem padrão de compartilhamento</label>
+        <input type="text" name="defaultOgImage" id="defaultOgImage" value="<%= seo.defaultOgImage || '' %>" placeholder="images/logo.png">
+        <p class="seo-muted">Usado como <code>og:image</code> quando alguém compartilhar o site no WhatsApp ou Facebook.</p>
+      </div>
+
+      <div class="seo-section">
+        <h4>⚙️ Recursos automáticos</h4>
+        <div class="seo-checks">
+          <label class="seo-check"><input type="checkbox" name="enableSitemap" <%= seo.enableSitemap !== false ? 'checked' : '' %>> Gerar sitemap.xml</label>
+          <label class="seo-check"><input type="checkbox" name="enableRobots" <%= seo.enableRobots !== false ? 'checked' : '' %>> Gerar robots.txt</label>
+          <label class="seo-check"><input type="checkbox" name="enableSchemaProducts" <%= seo.enableSchemaProducts !== false ? 'checked' : '' %>> Schema de produtos</label>
+          <label class="seo-check"><input type="checkbox" name="enableSchemaOrganization" <%= seo.enableSchemaOrganization !== false ? 'checked' : '' %>> Schema da loja</label>
+          <label class="seo-check"><input type="checkbox" name="enableOpenGraph" <%= seo.enableOpenGraph !== false ? 'checked' : '' %>> Open Graph</label>
+        </div>
+      </div>
+
+      <div class="seo-section seo-full">
+        <h4>👀 Prévia no Google / Social</h4>
+        <div class="seo-preview">
+          <div class="seo-preview-title" id="preview-title"><%= seo.siteTitle || 'Quality Celulares' %></div>
+          <div class="seo-preview-url" id="preview-url"><%= seo.siteUrl || 'https://www.qualitycel.com.br' %></div>
+          <div class="seo-preview-desc" id="preview-desc"><%= seo.siteDescription || 'Loja especializada em smartphones e acessórios.' %></div>
+        </div>
+
+        <div id="seo-validation" class="seo-alert"></div>
+      </div>
+    </div>
+
+    <div class="seo-actions">
+      <button class="btn primary" type="submit">💾 Salvar SEO</button>
+      <button class="btn" type="button" id="btn-validar-seo">🔍 Validar SEO</button>
+    </div>
+  </form>
+
+  <form method="post" action="/seo/generate" class="seo-actions">
+    <button class="btn" type="submit">🔄 Gerar Sitemap e Robots Agora</button>
+  </form>
+</div>
+
+<script>
+(function(){
+  const title = document.getElementById('siteTitle');
+  const desc = document.getElementById('siteDescription');
+  const url = document.getElementById('siteUrl');
+  const analytics = document.getElementById('analyticsId');
+  const validation = document.getElementById('seo-validation');
+
+  const previewTitle = document.getElementById('preview-title');
+  const previewUrl = document.getElementById('preview-url');
+  const previewDesc = document.getElementById('preview-desc');
+
+  function updatePreview(){
+    previewTitle.textContent = title.value || 'Quality Celulares';
+    previewUrl.textContent = url.value || 'https://www.qualitycel.com.br';
+    previewDesc.textContent = desc.value || 'Loja especializada em smartphones e acessórios.';
+  }
+
+  [title, desc, url].forEach(el => el.addEventListener('input', updatePreview));
+
+  document.getElementById('btn-validar-seo').addEventListener('click', () => {
+    const problems = [];
+
+    if (!/^https:\/\/.+/i.test(url.value.trim())) {
+      problems.push('A URL principal deve começar com https://');
+    }
+
+    if (url.value.trim().endsWith('/')) {
+      problems.push('Recomendado remover a barra final da URL principal.');
+    }
+
+    if (analytics.value.trim() && !/^G-[A-Z0-9]+$/i.test(analytics.value.trim())) {
+      problems.push('O ID do Google Analytics deve começar com G-.');
+    }
+
+    if ((title.value || '').trim().length < 10) {
+      problems.push('O título do site está curto demais.');
+    }
+
+    if ((desc.value || '').trim().length < 50) {
+      problems.push('A descrição padrão poderia ser mais completa.');
+    }
+
+    if (problems.length) {
+      validation.className = 'seo-alert warn';
+      validation.innerHTML = '⚠️ Ajustes recomendados:<br>' + problems.map(p => '• ' + p).join('<br>');
+    } else {
+      validation.className = 'seo-alert ok';
+      validation.textContent = '✅ SEO validado. Configurações principais parecem corretas.';
+    }
+  });
+})();
+</script>
