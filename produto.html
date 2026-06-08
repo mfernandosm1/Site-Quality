@@ -4,6 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Produto – Quality Celulares</title>
+  <meta name="description" content="Confira detalhes do produto na Quality Celulares. Atendimento pelo WhatsApp.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://www.qualitycel.com.br/produto.html">
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   
@@ -221,6 +224,82 @@
     return videoId ? 'https://www.youtube.com/embed/' + videoId : '';
   }
 
+  function stripHtml(value){
+    return (value || '').toString().replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ').trim();
+  }
+
+  function absoluteUrl(path){
+    if (!path) return window.location.origin + '/images/sem-imagem.png';
+    if (/^https?:\/\//i.test(path)) return path;
+    return window.location.origin + '/' + path.replace(/^\//, '');
+  }
+
+  function setMetaTag(name, content){
+    let tag = document.querySelector('meta[name="' + name + '"]');
+    if (!tag) {
+      tag = document.createElement('meta');
+      tag.setAttribute('name', name);
+      document.head.appendChild(tag);
+    }
+    tag.setAttribute('content', content);
+  }
+
+  function setCanonical(url){
+    let tag = document.querySelector('link[rel="canonical"]');
+    if (!tag) {
+      tag = document.createElement('link');
+      tag.setAttribute('rel', 'canonical');
+      document.head.appendChild(tag);
+    }
+    tag.setAttribute('href', url);
+  }
+
+  function applyProductSeo(product, name, image, priceValue, showPrice){
+    const description = stripHtml(product.descriptionShort || product.descriptionLong || ('Confira ' + name + ' na Quality Celulares.'));
+    const canonicalUrl = window.location.origin + window.location.pathname + '?id=' + encodeURIComponent(product.id);
+
+    document.title = name + ' – Quality Celulares';
+    setMetaTag('description', description.slice(0, 160));
+    setCanonical(canonicalUrl);
+
+    const schema = {
+      '@context': 'https://schema.org',
+      '@type': 'Product',
+      name: name,
+      image: [absoluteUrl(image)],
+      description: description,
+      sku: String(product.id),
+      brand: {
+        '@type': 'Brand',
+        name: (product.brand || product.marca || name.split(' ')[0] || 'Quality Celulares')
+      },
+      offers: {
+        '@type': 'Offer',
+        url: canonicalUrl,
+        priceCurrency: 'BRL',
+        availability: product.active === false ? 'https://schema.org/OutOfStock' : 'https://schema.org/InStock',
+        itemCondition: 'https://schema.org/NewCondition',
+        seller: {
+          '@type': 'Organization',
+          name: 'Quality Celulares'
+        }
+      }
+    };
+
+    if (showPrice && !isNaN(Number(priceValue)) && Number(priceValue) > 0) {
+      schema.offers.price = Number(priceValue).toFixed(2);
+    }
+
+    let script = document.getElementById('product-schema-jsonld');
+    if (!script) {
+      script = document.createElement('script');
+      script.type = 'application/ld+json';
+      script.id = 'product-schema-jsonld';
+      document.head.appendChild(script);
+    }
+    script.textContent = JSON.stringify(schema);
+  }
+
   const params = new URLSearchParams(window.location.search);
   const id = params.get('id');
   const box = document.getElementById('produto-detalhe');
@@ -247,10 +326,11 @@
 
       const shortDesc = product.descriptionShort || '';
       const longDesc = product.descriptionLong || '';
-      const price = shouldShowPrice(product) ? formatPrice(product.price) : '';
+      const showPrice = shouldShowPrice(product);
+      const price = showPrice ? formatPrice(product.price) : '';
       const whatsappText = encodeURIComponent('Olá! Vim através do site e tenho interesse em ' + name);
 
-      document.title = name + ' – Quality Celulares';
+      applyProductSeo(product, name, image, product.price, showPrice);
 
       const thumbsHtml = medias.map((media, index) => {
         if (isYoutube(media)) {
