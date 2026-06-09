@@ -564,7 +564,7 @@ export function generateSeoFiles(siteDir, seoConfig = null) {
       });
 
     products
-      .filter(p => p && p.active !== false && p.id && productHasDetails(p))
+       .filter(p => p && p.active !== false && p.id)
       .forEach(p => {
         addUrl(`${makeAbsoluteUrl('produto.html', baseUrl)}?id=${encodeURIComponent(p.id)}`, '0.75', 'weekly');
       });
