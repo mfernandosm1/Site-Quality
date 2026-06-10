@@ -235,7 +235,10 @@ ${footer}
   }
 
   const params = new URLSearchParams(window.location.search);
-  const currentSlug = normalizeText(params.get('slug'));
+  const pathParts = window.location.pathname.split('/').filter(Boolean);
+  const lastPath = normalizeText(pathParts[pathParts.length - 1] || '');
+  const pathSlug = ['categoria.html', 'index.html'].includes(lastPath) ? '' : lastPath;
+  const currentSlug = normalizeText(params.get('slug') || pathSlug);
   const titleEl = document.getElementById('categoria-titulo');
 
   if (!currentSlug) {
@@ -245,8 +248,8 @@ ${footer}
   }
 
   Promise.all([
-    fetch('content/categories.json').then(r => r.json()).catch(() => ({ items: [] })),
-    fetch('content/products.json').then(r => r.json()).catch(() => ({ items: [] }))
+    fetch('/content/categories.json').then(r => r.json()).catch(() => ({ items: [] })),
+    fetch('/content/products.json').then(r => r.json()).catch(() => ({ items: [] }))
   ]).then(([categoriesData, productsData]) => {
     const categories = categoriesData.items || [];
     const category = categories.find(c => normalizeText(c.slug) === currentSlug);
@@ -271,7 +274,7 @@ ${footer}
       canonical.setAttribute('rel', 'canonical');
       document.head.appendChild(canonical);
     }
-    canonical.setAttribute('href', window.location.origin + window.location.pathname + '?slug=' + encodeURIComponent(currentSlug));
+    canonical.setAttribute('href', window.location.origin + '/' + encodeURIComponent(currentSlug) + '/');
 
     function setOg(property, content){
       let tag = document.querySelector('meta[property="' + property + '"]');
@@ -283,7 +286,7 @@ ${footer}
       tag.setAttribute('content', content);
     }
 
-    const categoryUrl = window.location.origin + window.location.pathname + '?slug=' + encodeURIComponent(currentSlug);
+    const categoryUrl = window.location.origin + '/' + encodeURIComponent(currentSlug) + '/';
     setOg('og:type', 'website');
     setOg('og:title', categoryName + ' – Quality Celulares');
     setOg('og:description', metaDescriptionText);
@@ -320,9 +323,10 @@ ${footer}
         String(detailsRaw || '').toLowerCase() === '1' ||
         String(detailsRaw || '').toLowerCase() === 'on';
       const productId = p.id || p.slug || p._id || '';
+      const productSlug = p.slug || productId;
       const detalhesHTML =
-        (detailsEnabled || hasGallery || hasVideo || hasDescription) && productId
-          ? '<a href="produto.html?id=' + encodeURIComponent(productId) + '" class="btn btn-details">Ver detalhes</a>'
+        (detailsEnabled || hasGallery || hasVideo || hasDescription) && productSlug
+          ? '<a href="/produto/' + encodeURIComponent(productSlug) + '/" class="btn btn-details">Ver detalhes</a>'
           : '';
 
       const card = document.createElement('div');
@@ -359,8 +363,8 @@ function fixHeaderCategoryScript(headerHtml){
 
   // Corrige o JS antigo do header para apontar para a página única.
   html = html
-    .replace(/linkD\.href\s*=\s*`categoria-\$\{cat\.slug\}\.html`;?/g, "linkD.href = `categoria.html?slug=${encodeURIComponent(cat.slug)}`;")
-    .replace(/linkM\.href\s*=\s*`categoria-\$\{cat\.slug\}\.html`;?/g, "linkM.href = `categoria.html?slug=${encodeURIComponent(cat.slug)}`;");
+    .replace(/linkD\.href\s*=\s*`categoria-\$\{cat\.slug\}\.html`;?/g, "linkD.href = `/${encodeURIComponent(cat.slug)}/`;")
+    .replace(/linkM\.href\s*=\s*`categoria-\$\{cat\.slug\}\.html`;?/g, "linkM.href = `/${encodeURIComponent(cat.slug)}/`;");
 
   // Corrige o JS antigo do header para montar ícone + texto sem usar innerHTML.
   html = html
@@ -414,7 +418,7 @@ export function updateHeaderMenu(categories, siteDir) {
     const icon = (c.icon || '').toString().trim();
     if (!slug || !name) return;
 
-    const href = `categoria.html?slug=${encodeURIComponent(slug)}`;
+    const href = `/${encodeURIComponent(slug)}/`;
     const label = `${iconHtml(icon)}${escapeText(name)}`;
     const linkD = `<a href="${href}" class="cat-link">${label}</a>`;
     const linkM = `<a href="${href}" class="cat-link">${label}</a>`;
@@ -560,13 +564,14 @@ export function generateSeoFiles(siteDir, seoConfig = null) {
       .filter(c => c && c.slug)
       .sort((a, b) => Number(a.order || 0) - Number(b.order || 0))
       .forEach(c => {
-        addUrl(`${makeAbsoluteUrl('categoria.html', baseUrl)}?slug=${encodeURIComponent(c.slug)}`, '0.8', 'weekly');
+        addUrl(`${baseUrl}/${encodeURIComponent(c.slug)}/`, '0.8', 'weekly');
       });
 
     products
-       .filter(p => p && p.active !== false && p.id)
+      .filter(p => p && p.active !== false && (p.slug || p.id))
       .forEach(p => {
-        addUrl(`${makeAbsoluteUrl('produto.html', baseUrl)}?id=${encodeURIComponent(p.id)}`, '0.75', 'weekly');
+        const productSlug = p.slug || p.id;
+        addUrl(`${baseUrl}/produto/${encodeURIComponent(productSlug)}/`, '0.75', 'weekly');
       });
 
     const uniqueUrls = [];
@@ -797,4 +802,125 @@ export function buildSlidesFromCrud(siteDir){
 
   writeFileUtf8(idxPath, $.html());
   console.log(`🖼️ index.html atualizado com ${normItems.length} banner(s).`);
+}
+
+
+/* =========================================================
+   🔗 URLS AMIGÁVEIS (GitHub Pages): categorias e produtos
+========================================================= */
+function ensureCleanDir(dir){
+  try {
+    if (fs.existsSync(dir)) fs.rmSync(dir, { recursive: true, force: true });
+    fs.mkdirSync(dir, { recursive: true });
+  } catch (e) {
+    console.warn(`⚠️ Falha ao preparar pasta ${dir}: ${e.message}`);
+  }
+}
+
+function injectBaseHref(html){
+  if (!html || html.includes('<base href="/">')) return html;
+  return html.replace(/<head(.*?)>/i, '<head$1>\n  <base href="/">');
+}
+
+function patchProdutoHtmlForFriendlyUrls(html){
+  let out = injectBaseHref(html || '');
+
+  out = out
+    .replace(/fetch\('content\/products\.json'\)/g, "fetch('/content/products.json')")
+    .replace(/fetch\('content\/seo\.json'\)/g, "fetch('/content/seo.json')")
+    .replace(/<link rel="canonical" href="https:\/\/www\.qualitycel\.com\.br\/produto\.html">/g, '<link rel="canonical" href="https://www.qualitycel.com.br/produto/">')
+    .replace(/<meta property="og:url" content="https:\/\/www\.qualitycel\.com\.br\/produto\.html">/g, '<meta property="og:url" content="https://www.qualitycel.com.br/produto/">');
+
+  out = out.replace(
+`const canonicalUrl = window.location.origin + window.location.pathname + '?id=' + encodeURIComponent(product.id);`,
+`const productSlug = product.slug || product.id;
+    const canonicalUrl = window.location.origin + '/produto/' + encodeURIComponent(productSlug) + '/';`
+  );
+
+  out = out.replace(
+`item: window.location.origin + '/categoria.html?slug=' + encodeURIComponent(category)`,
+`item: window.location.origin + '/' + encodeURIComponent(category) + '/'`
+  );
+
+  out = out.replace(
+`const params = new URLSearchParams(window.location.search);
+  const id = params.get('id');
+  const box = document.getElementById('produto-detalhe');`,
+`const params = new URLSearchParams(window.location.search);
+  const pathParts = window.location.pathname.split('/').filter(Boolean);
+  const lastPath = pathParts[pathParts.length - 1] || '';
+  const pathSlug = ['produto.html', 'index.html', 'produto'].includes(lastPath.toLowerCase()) ? '' : lastPath;
+  const id = params.get('id') || params.get('slug') || pathSlug;
+  const box = document.getElementById('produto-detalhe');`
+  );
+
+  out = out.replace(
+`const product = (data.items || []).find(p => String(p.id) === String(id));`,
+`const product = (data.items || []).find(p => String(p.id) === String(id) || String(p.slug || '') === String(id));`
+  );
+
+  return out;
+}
+
+function patchIndexFriendlyLinks(siteDir){
+  const indexPath = path.join(siteDir, 'index.html');
+  if (!fs.existsSync(indexPath)) return;
+
+  let html = readFileUtf8(indexPath);
+  html = html.replace(
+    /<a href="produto\.html\?id=\$\{encodeURIComponent\(p\.id\)\}" class="btn btn-details">Ver detalhes<\/a>/g,
+    '<a href="/produto/${encodeURIComponent(p.slug || p.id)}/" class="btn btn-details">Ver detalhes</a>'
+  );
+
+  writeFileUtf8(indexPath, html);
+  console.log('✅ index.html atualizado para links de produtos amigáveis.');
+}
+
+export function generateFriendlyUrlPages(siteDir){
+  try {
+    const contentDir = path.join(siteDir, 'content');
+    const categories = readJsonSafe(path.join(contentDir, 'categories.json'), { items: [] }).items || [];
+    const products = readJsonSafe(path.join(contentDir, 'products.json'), { items: [] }).items || [];
+
+    const header = readFileUtf8(path.join(siteDir, 'header.html'));
+    const footer = readFileUtf8(path.join(siteDir, 'footer.html'));
+    const produtoTemplate = patchProdutoHtmlForFriendlyUrls(readFileUtf8(path.join(siteDir, 'produto.html')));
+
+    // Gera páginas físicas de categoria: /smartphones/index.html, /acessorios/index.html...
+    categories
+      .filter(c => c && c.slug)
+      .forEach(c => {
+        const slug = c.slug.toString().trim();
+        if (!slug) return;
+
+        const dir = path.join(siteDir, slug);
+        ensureCleanDir(dir);
+        let html = injectBaseHref(categoryPageHtml(header, footer));
+        html = html.replace('<title>Categorias – Quality Celulares</title>', `<title>${escapeText(c.name || slug)} – Quality Celulares</title>`);
+        html = html.replace('content="https://www.qualitycel.com.br/categoria.html"', `content="https://www.qualitycel.com.br/${encodeURIComponent(slug)}/"`);
+        html = html.replace('href="https://www.qualitycel.com.br/categoria.html"', `href="https://www.qualitycel.com.br/${encodeURIComponent(slug)}/"`);
+        writeFileUtf8(path.join(dir, 'index.html'), html);
+      });
+
+    // Gera páginas físicas de produto: /produto/slug/index.html
+    const productRoot = path.join(siteDir, 'produto');
+    if (!fs.existsSync(productRoot)) fs.mkdirSync(productRoot, { recursive: true });
+
+    products
+      .filter(p => p && p.active !== false && (p.slug || p.id))
+      .forEach(p => {
+        const slug = (p.slug || p.id).toString().trim();
+        if (!slug) return;
+
+        const dir = path.join(productRoot, slug);
+        ensureCleanDir(dir);
+        writeFileUtf8(path.join(dir, 'index.html'), produtoTemplate);
+      });
+
+    patchIndexFriendlyLinks(siteDir);
+
+    console.log(`✅ URLs amigáveis geradas: ${categories.filter(c => c && c.slug).length} categoria(s) e ${products.filter(p => p && p.active !== false && (p.slug || p.id)).length} produto(s).`);
+  } catch (e) {
+    console.warn(`⚠️ Falha ao gerar URLs amigáveis: ${e.message}`);
+  }
 }

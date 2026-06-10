@@ -62,6 +62,34 @@ function galleryFromBody(value, current = []) {
     .slice(0, 4);
 }
 
+function gerarSlug(texto) {
+  return String(texto || '')
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .toLowerCase()
+    .trim()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '');
+}
+
+function slugUnico(slugBase, items = [], ignoreId = null) {
+  let base = slugBase || 'produto';
+  let slug = base;
+  let contador = 2;
+
+  while (
+    items.some(p =>
+      p.slug === slug &&
+      Number(p.id) !== Number(ignoreId)
+    )
+  ) {
+    slug = `${base}-${contador}`;
+    contador++;
+  }
+
+  return slug;
+}
+
 function productFromBody(body, current = {}) {
   const priceValue = body.price !== undefined && body.price !== ''
     ? Number(body.price)
@@ -69,6 +97,7 @@ function productFromBody(body, current = {}) {
 
   return {
     name: (body.name || current.name || '').trim(),
+    slug: gerarSlug(body.slug || current.slug || body.name || current.name || ''),
     price: priceValue,
     image: (body.image || current.image || '').trim(),
     gallery: galleryFromBody(body.gallery, current.gallery),
@@ -168,18 +197,26 @@ router.post('/add', (req, res) => {
     return res.redirect('/produtos?error=name');
   }
 
+  novo.slug = slugUnico(
+    gerarSlug(req.body.slug || novo.slug || novo.name),
+    data.items,
+    novo.id
+  );
+
   data.items.push(novo);
 
   writeJson(file, data);
-  console.log(`✅ Produto "${novo.name}" adicionado.`);
+  console.log(`✅ Produto "${novo.name}" adicionado com slug "${novo.slug}".`);
   res.redirect('/produtos?saved=produto');
 });
 
 router.post('/update', (req, res) => {
   const file = path.join(P(req.app).CONTENT_DIR, 'products.json');
   const data = readJson(file);
+  data.items = data.items || [];
+
   const id = Number(req.body.id);
-  const item = (data.items || []).find(p => Number(p.id) === id);
+  const item = data.items.find(p => Number(p.id) === id);
 
   if (!item) {
     if (wantsJson(req)) {
@@ -191,8 +228,14 @@ router.post('/update', (req, res) => {
 
   Object.assign(item, productFromBody(req.body, item));
 
+  item.slug = slugUnico(
+    gerarSlug(req.body.slug || item.slug || item.name),
+    data.items,
+    item.id
+  );
+
   writeJson(file, data);
-  console.log(`✏️ Produto atualizado: ${item.name || id}`);
+  console.log(`✏️ Produto atualizado: ${item.name || id} | slug: ${item.slug}`);
 
   if (wantsJson(req)) {
     return res.json({ success: true, message: '✅ Produto salvo com sucesso.', item });
@@ -224,6 +267,7 @@ router.post('/update-all', (req, res) => {
 
     const updated = productFromBody({
       name: getField('name'),
+      slug: getField('slug'),
       price: getField('price'),
       image: getField('image'),
       gallery: getField('gallery'),
@@ -239,6 +283,12 @@ router.post('/update-all', (req, res) => {
     if (!updated.name) updated.name = item.name;
 
     Object.assign(item, updated);
+
+    item.slug = slugUnico(
+      gerarSlug(getField('slug') || item.slug || item.name),
+      data.items,
+      item.id
+    );
   });
 
   writeJson(file, data);

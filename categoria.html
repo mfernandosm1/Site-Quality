@@ -43,7 +43,7 @@
           <!-- categorias serão injetadas aqui -->
           
           
-          <a href="categoria.html?slug=smartphones" class="cat-link">Smartphones</a><a href="categoria.html?slug=acessorios" class="cat-link">Acessórios</a><div class="search-wrapper">
+          <a href="/smartphones/" class="cat-link">Smartphones</a><a href="/acessorios/" class="cat-link">Acessórios</a><div class="search-wrapper">
             <input type="text" id="search-input" placeholder="Buscar...">
             <button id="search-button" aria-label="Buscar">
               <i class="fa fa-search"></i>
@@ -82,7 +82,7 @@
           <!-- categorias serão injetadas aqui -->
           
           
-        <a href="categoria.html?slug=smartphones" class="cat-link">Smartphones</a><a href="categoria.html?slug=acessorios" class="cat-link">Acessórios</a></nav>
+        <a href="/smartphones/" class="cat-link">Smartphones</a><a href="/acessorios/" class="cat-link">Acessórios</a></nav>
       </div>
 
       <!-- Overlay -->
@@ -243,7 +243,10 @@
   }
 
   const params = new URLSearchParams(window.location.search);
-  const currentSlug = normalizeText(params.get('slug'));
+  const pathParts = window.location.pathname.split('/').filter(Boolean);
+  const lastPath = normalizeText(pathParts[pathParts.length - 1] || '');
+  const pathSlug = ['categoria.html', 'index.html'].includes(lastPath) ? '' : lastPath;
+  const currentSlug = normalizeText(params.get('slug') || pathSlug);
   const titleEl = document.getElementById('categoria-titulo');
 
   if (!currentSlug) {
@@ -253,8 +256,8 @@
   }
 
   Promise.all([
-    fetch('content/categories.json').then(r => r.json()).catch(() => ({ items: [] })),
-    fetch('content/products.json').then(r => r.json()).catch(() => ({ items: [] }))
+    fetch('/content/categories.json').then(r => r.json()).catch(() => ({ items: [] })),
+    fetch('/content/products.json').then(r => r.json()).catch(() => ({ items: [] }))
   ]).then(([categoriesData, productsData]) => {
     const categories = categoriesData.items || [];
     const category = categories.find(c => normalizeText(c.slug) === currentSlug);
@@ -279,7 +282,7 @@
       canonical.setAttribute('rel', 'canonical');
       document.head.appendChild(canonical);
     }
-    canonical.setAttribute('href', window.location.origin + window.location.pathname + '?slug=' + encodeURIComponent(currentSlug));
+    canonical.setAttribute('href', window.location.origin + '/' + encodeURIComponent(currentSlug) + '/');
 
     function setOg(property, content){
       let tag = document.querySelector('meta[property="' + property + '"]');
@@ -291,7 +294,7 @@
       tag.setAttribute('content', content);
     }
 
-    const categoryUrl = window.location.origin + window.location.pathname + '?slug=' + encodeURIComponent(currentSlug);
+    const categoryUrl = window.location.origin + '/' + encodeURIComponent(currentSlug) + '/';
     setOg('og:type', 'website');
     setOg('og:title', categoryName + ' – Quality Celulares');
     setOg('og:description', metaDescriptionText);
@@ -328,9 +331,10 @@
         String(detailsRaw || '').toLowerCase() === '1' ||
         String(detailsRaw || '').toLowerCase() === 'on';
       const productId = p.id || p.slug || p._id || '';
+      const productSlug = p.slug || productId;
       const detalhesHTML =
-        (detailsEnabled || hasGallery || hasVideo || hasDescription) && productId
-          ? '<a href="produto.html?id=' + encodeURIComponent(productId) + '" class="btn btn-details">Ver detalhes</a>'
+        (detailsEnabled || hasGallery || hasVideo || hasDescription) && productSlug
+          ? '<a href="/produto/' + encodeURIComponent(productSlug) + '/" class="btn btn-details">Ver detalhes</a>'
           : '';
 
       const card = document.createElement('div');
