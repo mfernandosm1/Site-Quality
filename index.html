@@ -133,7 +133,7 @@
           `<p>R$ ${(Number(p.price) || 0).toFixed(2).replace('.', ',')}</p>`;
 
         const detalhesHTML = (p.detailsEnabled || hasGallery(p))
-          ? `<a href="produto.html?id=${encodeURIComponent(p.id)}" class="btn btn-details">Ver detalhes</a>`
+          ? `<a href="/produto/${encodeURIComponent(p.slug || p.id)}/" class="btn btn-details">Ver detalhes</a>`
           : '';
 
         card.innerHTML = `
