@@ -10,6 +10,10 @@ document.addEventListener("DOMContentLoaded", () => {
         carregarCategoriasNoHeader();
         initHeaderEvents();
       });
+  } else {
+    // Em páginas geradas fisicamente, como /smartphones/ e /acessorios/,
+    // o header já vem pronto no HTML. Então precisamos apenas ativar os eventos.
+    initHeaderEvents();
   }
 
   // Carregar footer
@@ -86,6 +90,9 @@ function carregarCategoriasNoHeader() {
 // Eventos do Header
 // ----------------------------
 function initHeaderEvents() {
+  if (window.__qualityHeaderEventsReady) return;
+  window.__qualityHeaderEventsReady = true;
+
   const menuToggle = document.getElementById("menu-toggle");
   const menuClose = document.getElementById("menu-close");
   const mobileMenu = document.getElementById("mobile-menu");
