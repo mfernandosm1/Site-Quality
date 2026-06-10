@@ -90,6 +90,38 @@ function slugUnico(slugBase, items = [], ignoreId = null) {
   return slug;
 }
 
+function loadCategories(app) {
+  try {
+    const file = path.join(P(app).CONTENT_DIR, 'categories.json');
+    const data = readJson(file);
+    return data.items || [];
+  } catch (e) {
+    return [];
+  }
+}
+
+function normalizeCategoryValue(value, categories = []) {
+  const raw = (value ?? '').toString().trim();
+  if (!raw) return '';
+
+  const normalized = raw
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .toLowerCase()
+    .trim();
+
+  const found = (categories || []).find(c => {
+    const id = (c.id ?? '').toString().trim();
+    const slug = (c.slug ?? '').toString().trim();
+    const name = (c.name ?? '').toString().trim();
+    const slugNorm = gerarSlug(slug);
+    const nameNorm = gerarSlug(name);
+    return raw === id || raw === slug || raw === name || normalized === slugNorm || normalized === nameNorm;
+  });
+
+  return found ? (found.slug || gerarSlug(found.name) || raw).toString().trim() : gerarSlug(raw);
+}
+
 function productFromBody(body, current = {}) {
   const priceValue = body.price !== undefined && body.price !== ''
     ? Number(body.price)
@@ -190,8 +222,10 @@ router.post('/add', (req, res) => {
   const data = readJson(file);
   data.items = data.items || [];
 
+  const categorias = loadCategories(req.app);
   const novo = productFromBody(req.body);
   novo.id = Date.now();
+  novo.category = normalizeCategoryValue(novo.category, categorias);
 
   if (!novo.name) {
     return res.redirect('/produtos?error=name');
@@ -226,7 +260,9 @@ router.post('/update', (req, res) => {
     return res.redirect('/produtos?error=not_found');
   }
 
+  const categorias = loadCategories(req.app);
   Object.assign(item, productFromBody(req.body, item));
+  item.category = normalizeCategoryValue(item.category, categorias);
 
   item.slug = slugUnico(
     gerarSlug(req.body.slug || item.slug || item.name),
@@ -248,6 +284,8 @@ router.post('/update-all', (req, res) => {
   const file = path.join(P(req.app).CONTENT_DIR, 'products.json');
   const data = readJson(file);
   data.items = data.items || [];
+
+  const categorias = loadCategories(req.app);
 
   const ids = Array.isArray(req.body.id)
     ? req.body.id
@@ -283,6 +321,7 @@ router.post('/update-all', (req, res) => {
     if (!updated.name) updated.name = item.name;
 
     Object.assign(item, updated);
+    item.category = normalizeCategoryValue(item.category, categorias);
 
     item.slug = slugUnico(
       gerarSlug(getField('slug') || item.slug || item.name),
@@ -308,7 +347,8 @@ router.post('/bulk-category', (req, res) => {
       : [];
 
   const selectedIds = ids.map(Number);
-  const category = (req.body.bulkCategory ?? '').toString().trim();
+  const categorias = loadCategories(req.app);
+  const category = normalizeCategoryValue((req.body.bulkCategory ?? '').toString().trim(), categorias);
 
   let updated = 0;
 

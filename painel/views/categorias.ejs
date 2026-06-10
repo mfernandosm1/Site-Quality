@@ -602,6 +602,44 @@
     }
   });
 
+
+
+  function slugifyCategory(value) {
+    return (value || '')
+      .toString()
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, '')
+      .toLowerCase()
+      .trim()
+      .replace(/[^a-z0-9]+/g, '-')
+      .replace(/^-+|-+$/g, '');
+  }
+
+  function bindAutoSlug(form) {
+    const nameInput = form.querySelector('input[name="name"]');
+    const slugInput = form.querySelector('input[name="slug"]');
+    if (!nameInput || !slugInput) return;
+
+    let slugEditedManually = !!slugInput.value.trim();
+
+    slugInput.addEventListener('input', () => {
+      slugEditedManually = true;
+      slugInput.value = slugifyCategory(slugInput.value);
+    });
+
+    nameInput.addEventListener('input', () => {
+      if (!slugEditedManually || !slugInput.value.trim()) {
+        slugInput.value = slugifyCategory(nameInput.value);
+      }
+    });
+
+    slugInput.addEventListener('blur', () => {
+      slugInput.value = slugifyCategory(slugInput.value || nameInput.value);
+    });
+  }
+
+  document.querySelectorAll('form[action="/categorias/add"], form[action="/categorias/update"]').forEach(bindAutoSlug);
+
   const btn = document.getElementById('btn-limpar-categorias');
   if(!btn) return;
   btn.addEventListener('click', async ()=>{

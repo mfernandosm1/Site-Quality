@@ -172,7 +172,8 @@ function categoryPageHtml(header, footer){
   <meta property="og:url" content="https://www.qualitycel.com.br/categoria.html">
   <meta name="twitter:card" content="summary_large_image">
   <link rel="canonical" href="https://www.qualitycel.com.br/categoria.html">
-  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/site/css/style.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
@@ -185,7 +186,7 @@ ${footer}
 <script>
 (function(){
   function normalizeText(v){
-    return (v || '').toString().trim().toLowerCase();
+    return (v || '').toString().trim().normalize('NFD').replace(/[\\u0300-\\u036f]/g, '').toLowerCase();
   }
 
   function shouldShowPrice(p){
@@ -234,11 +235,48 @@ ${footer}
     if (container) container.innerHTML = '<p class="em-breve" style="text-align:center;">' + escapeHtml(text) + '</p>';
   }
 
+  function assetUrl(path){
+    const p = (path || '').toString().trim();
+    if (!p) return assetUrl('images/sem-imagem.png');
+    if (/^https?:\/\//i.test(p)) return p;
+
+    const clean = p.replace(/^\/+/, '');
+    const isLocalPreview = window.location.hostname === 'localhost' && window.location.port === '3000';
+
+    if (isLocalPreview) {
+      return clean.startsWith('site/') ? '/' + clean : '/site/' + clean;
+    }
+
+    return '/' + clean;
+  }
+
+  function imageFallback(path){
+    const p = (path || '').toString().trim();
+    if (!p) return '/site/images/sem-imagem.png';
+    if (/^https?:\/\//i.test(p)) return p;
+    const clean = p.replace(/^\/+/, '').replace(/^site\//, '');
+    return '/site/' + clean;
+  }
+
+  async function fetchJson(paths){
+    let lastError = null;
+    for (const url of paths) {
+      try {
+        const res = await fetch(url, { cache: 'no-store' });
+        if (res.ok) return await res.json();
+      } catch (err) {
+        lastError = err;
+      }
+    }
+    if (lastError) throw lastError;
+    throw new Error('Arquivo JSON não encontrado.');
+  }
+
   const params = new URLSearchParams(window.location.search);
   const pathParts = window.location.pathname.split('/').filter(Boolean);
   const lastPath = normalizeText(pathParts[pathParts.length - 1] || '');
   const pathSlug = ['categoria.html', 'index.html'].includes(lastPath) ? '' : lastPath;
-  const currentSlug = normalizeText(params.get('slug') || pathSlug);
+  const currentSlug = normalizeText(params.get('slug') || params.get('cat') || pathSlug);
   const titleEl = document.getElementById('categoria-titulo');
 
   if (!currentSlug) {
@@ -248,13 +286,20 @@ ${footer}
   }
 
   Promise.all([
-    fetch('/content/categories.json').then(r => r.json()).catch(() => ({ items: [] })),
-    fetch('/content/products.json').then(r => r.json()).catch(() => ({ items: [] }))
+    fetchJson(['/content/categories.json', '/site/content/categories.json']).catch(() => ({ items: [] })),
+    fetchJson(['/content/products.json', '/site/content/products.json']).catch(() => ({ items: [] }))
   ]).then(([categoriesData, productsData]) => {
     const categories = categoriesData.items || [];
-    const category = categories.find(c => normalizeText(c.slug) === currentSlug);
+    const category = categories.find(c =>
+      normalizeText(c.slug) === currentSlug ||
+      normalizeText(c.name) === currentSlug ||
+      normalizeText(c.id) === currentSlug
+    );
+
     const categoryName = category ? (category.name || category.slug || currentSlug) : currentSlug;
     const categoryNameLower = normalizeText(categoryName);
+    const categorySlugLower = normalizeText(category ? category.slug : currentSlug);
+    const categoryIdLower = normalizeText(category ? category.id : '');
 
     setCategoryTitle(titleEl, categoryName, category ? category.icon : '');
     document.title = categoryName + ' – Quality Celulares';
@@ -274,7 +319,7 @@ ${footer}
       canonical.setAttribute('rel', 'canonical');
       document.head.appendChild(canonical);
     }
-    canonical.setAttribute('href', window.location.origin + '/' + encodeURIComponent(currentSlug) + '/');
+    canonical.setAttribute('href', window.location.origin + '/' + encodeURIComponent(categorySlugLower || currentSlug) + '/');
 
     function setOg(property, content){
       let tag = document.querySelector('meta[property="' + property + '"]');
@@ -286,18 +331,17 @@ ${footer}
       tag.setAttribute('content', content);
     }
 
-    const categoryUrl = window.location.origin + '/' + encodeURIComponent(currentSlug) + '/';
+    const categoryUrl = window.location.origin + '/' + encodeURIComponent(categorySlugLower || currentSlug) + '/';
     setOg('og:type', 'website');
     setOg('og:title', categoryName + ' – Quality Celulares');
     setOg('og:description', metaDescriptionText);
     setOg('og:url', categoryUrl);
     setOg('og:image', window.location.origin + '/images/logo.png');
 
-
     const products = (productsData.items || []).filter(p => {
       if (p.active === false) return false;
-      const cat = normalizeText(p.category ?? p.categoria ?? p.categorySlug ?? p.categoriaSlug);
-      return cat === currentSlug || cat === categoryNameLower;
+      const cat = normalizeText(p.category ?? p.categoria ?? p.categorySlug ?? p.categoriaSlug ?? p.categoryId ?? p.categoriaId);
+      return cat === currentSlug || cat === categorySlugLower || cat === categoryNameLower || (categoryIdLower && cat === categoryIdLower);
     });
 
     if (products.length === 0) {
@@ -310,11 +354,13 @@ ${footer}
     products.forEach(p => {
       const priceStr = shouldShowPrice(p) ? formatPrice(p.price ?? p.preco) : '';
       const productName = p.name || p.nome || '';
-      const productImage = p.image || p.imagem || '';
+      const productImageRaw = p.image || p.imagem || '';
+      const productImage = assetUrl(productImageRaw);
+      const productImageFallback = imageFallback(productImageRaw);
       const whatsappText = encodeURIComponent('Olá! Vim através do site e tenho interesse em ' + (productName || 'produto'));
       const hasGallery = Array.isArray(p.gallery) && p.gallery.filter(Boolean).length > 0;
       const hasVideo = !!(p.youtube || p.youtubeUrl || p.video || p.videoUrl);
-      const hasDescription = !!(p.description || p.descricao || p.desc);
+      const hasDescription = !!(p.description || p.descricao || p.desc || p.descriptionLong || p.descriptionShort);
       const detailsRaw = p.detailsEnabled ?? p.detalhesAtivo ?? p.details_enabled ?? p.verDetalhes ?? p.showDetails;
       const detailsEnabled =
         detailsRaw === true ||
@@ -332,7 +378,7 @@ ${footer}
       const card = document.createElement('div');
       card.className = 'produto-card product-card';
       card.innerHTML =
-        '<img src="' + escapeHtml(productImage || 'images/sem-imagem.png') + '" alt="' + escapeHtml(productName) + '">' +
+        '<img src="' + escapeHtml(productImage) + '" onerror="this.onerror=null;this.src=\'' + escapeHtml(productImageFallback) + '\';" alt="' + escapeHtml(productName) + '">' +
         '<h3>' + escapeHtml(productName) + '</h3>' +
         (priceStr ? '<p>' + escapeHtml(priceStr) + '</p>' : '') +
         detalhesHTML +
@@ -349,6 +395,7 @@ ${footer}
 </body>
 </html>`;
 }
+
 
 export function generateCategoryPage(name, slug, siteDir) {
   const header = readFileUtf8(path.join(siteDir, 'header.html'));
@@ -397,41 +444,86 @@ function iconHtml(icon){
 
 export function updateHeaderMenu(categories, siteDir) {
   const headerPath = path.join(siteDir, 'header.html');
-  let headerHtml = fixHeaderCategoryScript(readFileUtf8(headerPath));
-  if (!headerHtml.includes('<nav')) return;
+  const sorted = [...(categories || [])].sort((a, b) => (Number(a.order || 0) - Number(b.order || 0)));
 
-  const $ = cheerio.load(headerHtml, { decodeEntities: false });
-  const navDesktop = $('#nav-desktop');
-  const navMobile  = $('#nav-mobile');
-
-  if (!navDesktop.length || !navMobile.length) return;
-
-  navDesktop.find('a.cat-link').remove();
-  navMobile.find('a.cat-link').remove();
-
-  const sorted = [...(categories || [])].sort((a, b) => (a.order || 0) - (b.order || 0));
-  const searchWrapper = navDesktop.find('.search-wrapper').first();
-
-  sorted.forEach((c) => {
+  const catLinksDesktop = sorted.map(c => {
     const slug = (c.slug || c.name || '').toString().trim();
     const name = (c.name || slug).toString().trim();
     const icon = (c.icon || '').toString().trim();
-    if (!slug || !name) return;
+    if (!slug || !name) return '';
+    return `          <a href="/${encodeURIComponent(slug)}/" class="cat-link">${iconHtml(icon)}${escapeText(name)}</a>`;
+  }).filter(Boolean).join('\n');
 
-    const href = `/${encodeURIComponent(slug)}/`;
-    const label = `${iconHtml(icon)}${escapeText(name)}`;
-    const linkD = `<a href="${href}" class="cat-link">${label}</a>`;
-    const linkM = `<a href="${href}" class="cat-link">${label}</a>`;
+  const catLinksMobile = sorted.map(c => {
+    const slug = (c.slug || c.name || '').toString().trim();
+    const name = (c.name || slug).toString().trim();
+    const icon = (c.icon || '').toString().trim();
+    if (!slug || !name) return '';
+    return `          <a href="/${encodeURIComponent(slug)}/" class="cat-link">${iconHtml(icon)}${escapeText(name)}</a>`;
+  }).filter(Boolean).join('\n');
 
-    if (searchWrapper.length) searchWrapper.before(linkD);
-    else navDesktop.append(linkD);
+  const headerHtml = `<header class="header">
+  <div class="header-container">
+    <a href="/" class="logo-wrapper" data-home-link>
+      <img src="/images/logo.png" onerror="this.onerror=null;this.src='/site/images/logo.png';" alt="Quality Celulares" class="logo">
+    </a>
 
-    navMobile.append(linkM);
-  });
+    <nav class="nav-desktop" id="nav-desktop">
+      <a href="/" data-home-link>Início</a>
+${catLinksDesktop}
+      <div class="search-wrapper">
+        <input type="text" id="search-input" placeholder="Buscar...">
+        <button id="search-button" aria-label="Buscar">
+          <i class="fa fa-search"></i>
+        </button>
+      </div>
+    </nav>
 
-  writeFileUtf8(headerPath, $.html());
+    <button id="menu-toggle" class="menu-toggle" aria-label="Abrir menu">
+      <i class="fa-solid fa-bars"></i>
+    </button>
+  </div>
+
+  <div id="mobile-menu" class="mobile-menu" aria-hidden="true">
+    <div class="mobile-menu-header">
+      <a href="/" class="logo-wrapper" data-home-link>
+        <img src="/images/logo.png" onerror="this.onerror=null;this.src='/site/images/logo.png';" alt="Quality Celulares" class="logo">
+      </a>
+      <button id="menu-close" class="menu-close" aria-label="Fechar menu">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+    </div>
+
+    <div class="search-wrapper-mobile">
+      <input type="text" id="search-input-mobile" placeholder="Buscar...">
+      <button id="search-button-mobile" aria-label="Buscar">
+        <i class="fa fa-search"></i>
+      </button>
+    </div>
+
+    <nav class="mobile-nav" id="nav-mobile">
+      <a href="/" data-home-link>Início</a>
+${catLinksMobile}
+    </nav>
+  </div>
+
+  <div id="menu-overlay" class="menu-overlay"></div>
+</header>
+<script>
+(function(){
+  var isLocalPreview = window.location.hostname === 'localhost' && window.location.port === '3000';
+  if (isLocalPreview) {
+    document.querySelectorAll('[data-home-link]').forEach(function(a){
+      a.setAttribute('href', '/site/view/index.html');
+    });
+  }
+})();
+</script>`;
+
+  writeFileUtf8(headerPath, headerHtml);
   console.log(`✅ Header atualizado com ${sorted.length} categorias.`);
 }
+
 
 export function convertOldCategoryFiles(siteDir) {
   if (!fs.existsSync(siteDir)) return;

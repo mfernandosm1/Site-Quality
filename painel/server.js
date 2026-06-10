@@ -67,6 +67,23 @@ app.use('/aparencia', aparenciaRouter);
 app.use('/estilos', estilosRouter);
 app.use('/seo', seoRouter);
 
+
+// ===== ASSETS DO SITE NO PREVIEW LOCAL =====
+// Permite que URLs amigáveis (/eletronicos/ e /produto/slug/) carreguem CSS, JS, imagens e JSON do site.
+app.get('/css/style.css', (req, res) => {
+  res.sendFile(path.join(SITE_DIR, 'css', 'style.css'));
+});
+app.use('/content', express.static(path.join(SITE_DIR, 'content')));
+app.use('/images', express.static(path.join(SITE_DIR, 'images')));
+app.use('/js', express.static(path.join(SITE_DIR, 'js')));
+app.get('/header.html', (req, res) => {
+  res.sendFile(path.join(SITE_DIR, 'header.html'));
+});
+app.get('/footer.html', (req, res) => {
+  res.sendFile(path.join(SITE_DIR, 'footer.html'));
+});
+
+
 // ===== MODO MANUTENÇÃO: intercepta TUDO em /site =====
 const MAINT_FLAG = path.join(SITE_DIR, 'maintenance.flag');
 const MAINT_HTML = path.join(SITE_DIR, 'maintenance.html');
@@ -96,6 +113,24 @@ app.use('/site', (req, res, next) => {
 // Se NÃO estiver em manutenção, segue para o preview/estático do site
 app.use('/site', sitePreviewRouter);
 app.use('/site', express.static(SITE_DIR));
+
+
+// ===== URLs AMIGÁVEIS NO PREVIEW LOCAL =====
+app.get('/produto/:slug/', (req, res) => {
+  res.sendFile(path.join(SITE_DIR, 'produto.html'));
+});
+
+app.get('/produto/:slug', (req, res) => {
+  res.sendFile(path.join(SITE_DIR, 'produto.html'));
+});
+
+app.get('/:slug/', (req, res) => {
+  res.sendFile(path.join(SITE_DIR, 'categoria.html'));
+});
+
+app.get('/:slug', (req, res) => {
+  res.sendFile(path.join(SITE_DIR, 'categoria.html'));
+});
 
 app.listen(PORT, () =>
   console.log(`Painel Quality V7.3 em http://localhost:${PORT}`)

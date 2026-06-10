@@ -1,26 +1,38 @@
 import express from 'express';
 import fs from 'fs';
 import path from 'path';
-import { generateCategoryPage, updateHeaderMenu } from './main_utils.js';
 
 const router = express.Router();
+
 function P(app){ return app.locals.paths; }
 function readJson(p){ try { return JSON.parse(fs.readFileSync(p,'utf-8')); } catch(e){ return {items:[]}; } }
 function writeJson(p, data){ fs.writeFileSync(p, JSON.stringify(data,null,2), 'utf-8'); }
 
 function slugify(s){
-  return (s||'').toString().trim()
+  return String(s || '')
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
     .toLowerCase()
-    .replace(/\s+/g,'-')
-    .replace(/[^\w-]/g,'');
+    .trim()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '') || 'categoria';
 }
-function uniqueSlug(base, items, excludeId){
-  let s = base || 'categoria';
-  const used = new Set((items||[]).filter(it => Number(it.id)!==Number(excludeId)).map(it => (it.slug||'').trim()));
-  if (!used.has(s)) return s;
+
+function uniqueSlug(base, items = [], excludeId = null){
+  const cleanBase = slugify(base || 'categoria');
+  let slug = cleanBase;
   let i = 2;
-  while (used.has(`${s}-${i}`)) i++;
-  return `${s}-${i}`;
+  const used = new Set(
+    (items || [])
+      .filter(it => Number(it.id) !== Number(excludeId))
+      .map(it => String(it.slug || '').trim().toLowerCase())
+      .filter(Boolean)
+  );
+  while (used.has(slug)) {
+    slug = `${cleanBase}-${i}`;
+    i++;
+  }
+  return slug;
 }
 
 function removeCategoryHtmlFiles(siteDir){
@@ -40,9 +52,360 @@ function removeCategoryHtmlFiles(siteDir){
   }
 }
 
+function sortedCategories(items = []){
+  return [...(items || [])].sort((a,b) => Number(a.order || 0) - Number(b.order || 0));
+}
+
+function generateHeader(items = [], siteDir){
+  const initialLinks = sortedCategories(items).map(cat => {
+    const slug = slugify(cat.slug || cat.name);
+    const name = String(cat.name || slug);
+    const icon = String(cat.icon || '').trim();
+    const iconHtml = icon ? `<i class="${icon}" aria-hidden="true"></i> ` : '';
+    return `<a href="/${slug}/" class="cat-link">${iconHtml}${name}</a>`;
+  }).join('');
+
+  const html = `<header class="header">
+  <div class="header-container">
+    <a href="/site/view/index.html" class="logo-wrapper">
+      <img src="/site/images/logo.png" alt="Quality Celulares" class="logo">
+    </a>
+
+    <nav class="nav-desktop" id="nav-desktop">
+      <a href="/site/view/index.html">Início</a>
+      ${initialLinks}
+      <div class="search-wrapper">
+        <input type="text" id="search-input" placeholder="Buscar...">
+        <button id="search-button" aria-label="Buscar"><i class="fa fa-search"></i></button>
+      </div>
+    </nav>
+
+    <button id="menu-toggle" class="menu-toggle" aria-label="Abrir menu">
+      <i class="fa-solid fa-bars"></i>
+    </button>
+  </div>
+
+  <div id="mobile-menu" class="mobile-menu" aria-hidden="true">
+    <div class="mobile-menu-header">
+      <a href="/site/view/index.html" class="logo-wrapper">
+        <img src="/site/images/logo.png" alt="Quality Celulares" class="logo">
+      </a>
+      <button id="menu-close" class="menu-close" aria-label="Fechar menu">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+    </div>
+
+    <div class="search-wrapper-mobile">
+      <input type="text" id="search-input-mobile" placeholder="Buscar...">
+      <button id="search-button-mobile" aria-label="Buscar"><i class="fa fa-search"></i></button>
+    </div>
+
+    <nav class="mobile-nav" id="nav-mobile">
+      <a href="/site/view/index.html">Início</a>
+      ${initialLinks}
+    </nav>
+  </div>
+
+  <div id="menu-overlay" class="menu-overlay"></div>
+</header>
+
+<script>
+(function(){
+  function escapeHtml(value){
+    return (value || '').toString()
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#039;');
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    fetch('/site/content/categories.json')
+      .then(r => r.json())
+      .then(data => {
+        const categorias = data.items || [];
+        const navDesktop = document.getElementById('nav-desktop');
+        const navMobile = document.getElementById('nav-mobile');
+        if (!navDesktop || !navMobile) return;
+
+        navDesktop.querySelectorAll('a.cat-link').forEach(a => a.remove());
+        navMobile.querySelectorAll('a.cat-link').forEach(a => a.remove());
+
+        const searchWrapper = navDesktop.querySelector('.search-wrapper');
+
+        categorias
+          .sort((a, b) => Number(a.order || 0) - Number(b.order || 0))
+          .forEach(cat => {
+            const slug = encodeURIComponent(cat.slug || cat.name || 'categoria');
+            const icon = (cat.icon || '').toString().trim();
+
+            const linkD = document.createElement('a');
+            linkD.href = '/' + slug + '/';
+            linkD.className = 'cat-link';
+            if (icon && icon.includes('fa-')) {
+              const iconD = document.createElement('i');
+              iconD.className = icon;
+              iconD.setAttribute('aria-hidden', 'true');
+              linkD.appendChild(iconD);
+              linkD.appendChild(document.createTextNode(' '));
+            }
+            linkD.appendChild(document.createTextNode(cat.name || cat.slug || 'Categoria'));
+            if (searchWrapper) navDesktop.insertBefore(linkD, searchWrapper);
+            else navDesktop.appendChild(linkD);
+
+            const linkM = document.createElement('a');
+            linkM.href = '/' + slug + '/';
+            linkM.className = 'cat-link';
+            if (icon && icon.includes('fa-')) {
+              const iconM = document.createElement('i');
+              iconM.className = icon;
+              iconM.setAttribute('aria-hidden', 'true');
+              linkM.appendChild(iconM);
+              linkM.appendChild(document.createTextNode(' '));
+            }
+            linkM.appendChild(document.createTextNode(cat.name || cat.slug || 'Categoria'));
+            navMobile.appendChild(linkM);
+          });
+      })
+      .catch(err => console.error('Erro ao carregar categorias:', err));
+  });
+})();
+</script>`;
+
+  fs.writeFileSync(path.join(siteDir, 'header.html'), html, 'utf-8');
+}
+
+function generateCategoryPage(siteDir){
+  const html = `<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Categorias – Quality Celulares</title>
+  <meta name="description" content="Confira as categorias de produtos da Quality Celulares. Smartphones, acessórios e tecnologia com atendimento pelo WhatsApp.">
+  <meta name="robots" content="index, follow">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Categorias – Quality Celulares">
+  <meta property="og:description" content="Confira as categorias de produtos da Quality Celulares. Smartphones, acessórios e tecnologia com atendimento pelo WhatsApp.">
+  <meta property="og:image" content="https://www.qualitycel.com.br/images/logo.png">
+  <meta property="og:url" content="https://www.qualitycel.com.br/categoria.html">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="canonical" href="https://www.qualitycel.com.br/categoria.html">
+  <link rel="stylesheet" href="/site/css/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-9HPD9XCELH"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-9HPD9XCELH');
+  </script>
+</head>
+<body>
+<div id="header"></div>
+
+<main class="main">
+  <h1 id="categoria-titulo" style="text-align:center;margin-top:30px;display:flex;justify-content:center;align-items:center;gap:10px;flex-wrap:wrap;">Categoria</h1>
+  <div id="produtos-container" class="products" style="margin-top:40px;"></div>
+  <p id="no-results" class="em-breve" style="display:none;text-align:center;margin-top:20px;">Nenhum produto encontrado.</p>
+</main>
+
+<div id="footer"></div>
+<script src="/site/js/main.js"></script>
+<script>
+(function(){
+  function normalizeText(v){
+    return (v || '').toString()
+      .normalize('NFD')
+      .replace(/[\\u0300-\\u036f]/g, '')
+      .trim()
+      .toLowerCase();
+  }
+
+  function shouldShowPrice(p){
+    const raw = p.showPrice ?? p.mostrar_preco ?? p.show_price ?? p.mostrarPreco ?? p.priceVisible ?? false;
+    if (raw === true) return true;
+    const v = raw.toString().toLowerCase();
+    return v === 'sim' || v === 'yes' || v === 'true' || v === '1' || v === 'on';
+  }
+
+  function formatPrice(value){
+    const priceNum = (typeof value === 'number' ? value : Number(value || 0));
+    if (isNaN(priceNum)) return '';
+    return 'R$ ' + priceNum.toFixed(2).replace('.', ',');
+  }
+
+  function escapeHtml(value){
+    return (value || '').toString()
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#039;');
+  }
+
+  function normalizeIcon(icon){
+    icon = (icon || '').toString().trim();
+    return icon.includes('fa-') ? icon : '';
+  }
+
+  function setCategoryTitle(titleEl, name, icon){
+    if (!titleEl) return;
+    titleEl.innerHTML = '';
+    const iconClass = normalizeIcon(icon);
+    if (iconClass) {
+      const i = document.createElement('i');
+      i.className = iconClass;
+      i.setAttribute('aria-hidden', 'true');
+      titleEl.appendChild(i);
+    }
+    titleEl.appendChild(document.createTextNode(name));
+  }
+
+  function showMessage(text){
+    const noResults = document.getElementById('no-results');
+    if (noResults) {
+      noResults.textContent = text;
+      noResults.style.display = 'block';
+    }
+  }
+
+  const params = new URLSearchParams(window.location.search);
+  const pathParts = window.location.pathname.split('/').filter(Boolean);
+  const lastPath = normalizeText(pathParts[pathParts.length - 1] || '');
+  const pathSlug = ['categoria.html', 'index.html', 'site', 'view'].includes(lastPath) ? '' : lastPath;
+  const currentSlug = normalizeText(params.get('slug') || params.get('cat') || pathSlug);
+  const titleEl = document.getElementById('categoria-titulo');
+
+  if (!currentSlug) {
+    setCategoryTitle(titleEl, 'Categoria não encontrada', '');
+    showMessage('Nenhuma categoria foi informada.');
+    return;
+  }
+
+  Promise.all([
+    fetch('/site/content/categories.json').then(r => r.json()).catch(() => ({ items: [] })),
+    fetch('/site/content/products.json').then(r => r.json()).catch(() => ({ items: [] }))
+  ]).then(([categoriesData, productsData]) => {
+    const categories = categoriesData.items || [];
+    const category = categories.find(c => normalizeText(c.slug) === currentSlug);
+    const categoryName = category ? (category.name || category.slug || currentSlug) : currentSlug;
+    const categoryId = category ? String(category.id || '') : '';
+    const categoryNameLower = normalizeText(categoryName);
+
+    setCategoryTitle(titleEl, categoryName, category ? category.icon : '');
+    document.title = categoryName + ' – Quality Celulares';
+
+    const metaDescriptionText = 'Confira ' + categoryName + ' disponíveis na Quality Celulares. Atendimento pelo WhatsApp.';
+    let metaDescription = document.querySelector('meta[name="description"]');
+    if (!metaDescription) {
+      metaDescription = document.createElement('meta');
+      metaDescription.setAttribute('name', 'description');
+      document.head.appendChild(metaDescription);
+    }
+    metaDescription.setAttribute('content', metaDescriptionText);
+
+    let canonical = document.querySelector('link[rel="canonical"]');
+    if (!canonical) {
+      canonical = document.createElement('link');
+      canonical.setAttribute('rel', 'canonical');
+      document.head.appendChild(canonical);
+    }
+    canonical.setAttribute('href', window.location.origin + '/' + encodeURIComponent(currentSlug) + '/');
+
+    function setOg(property, content){
+      let tag = document.querySelector('meta[property="' + property + '"]');
+      if (!tag) {
+        tag = document.createElement('meta');
+        tag.setAttribute('property', property);
+        document.head.appendChild(tag);
+      }
+      tag.setAttribute('content', content);
+    }
+
+    const categoryUrl = window.location.origin + '/' + encodeURIComponent(currentSlug) + '/';
+    setOg('og:type', 'website');
+    setOg('og:title', categoryName + ' – Quality Celulares');
+    setOg('og:description', metaDescriptionText);
+    setOg('og:url', categoryUrl);
+    setOg('og:image', window.location.origin + '/site/images/logo.png');
+
+    const products = (productsData.items || []).filter(p => {
+      if (p.active === false) return false;
+      const values = [
+        p.category,
+        p.categoria,
+        p.categorySlug,
+        p.categoriaSlug,
+        p.categoryId,
+        p.categoriaId
+      ].map(v => normalizeText(v));
+      return values.includes(currentSlug) || values.includes(categoryNameLower) || (categoryId && values.includes(normalizeText(categoryId)));
+    });
+
+    if (products.length === 0) {
+      showMessage('Nenhum produto nesta categoria ainda.');
+      return;
+    }
+
+    const container = document.getElementById('produtos-container');
+    const noResults = document.getElementById('no-results');
+    if (noResults) noResults.style.display = 'none';
+    container.innerHTML = '';
+
+    products.forEach(p => {
+      const priceStr = shouldShowPrice(p) ? formatPrice(p.price ?? p.preco) : '';
+      const productName = p.name || p.nome || '';
+      const productImage = p.image || p.imagem || '';
+      const whatsappText = encodeURIComponent('Olá! Vim através do site e tenho interesse em ' + (productName || 'produto'));
+      const hasGallery = Array.isArray(p.gallery) && p.gallery.filter(Boolean).length > 0;
+      const hasVideo = !!(p.youtube || p.youtubeUrl || p.video || p.videoUrl);
+      const hasDescription = !!(p.description || p.descricao || p.desc || p.descriptionShort || p.descriptionLong);
+      const detailsRaw = p.detailsEnabled ?? p.detalhesAtivo ?? p.details_enabled ?? p.verDetalhes ?? p.showDetails;
+      const detailsEnabled =
+        detailsRaw === true ||
+        String(detailsRaw || '').toLowerCase() === 'true' ||
+        String(detailsRaw || '').toLowerCase() === 'sim' ||
+        String(detailsRaw || '').toLowerCase() === '1' ||
+        String(detailsRaw || '').toLowerCase() === 'on';
+      const productId = p.id || p.slug || p._id || '';
+      const productSlug = p.slug || productId;
+      const detalhesHTML =
+        (detailsEnabled || hasGallery || hasVideo || hasDescription) && productSlug
+          ? '<a href="/produto/' + encodeURIComponent(productSlug) + '/" class="btn btn-details">Ver detalhes</a>'
+          : '';
+
+      const imageSrc = productImage
+        ? '/' + productImage.replace(/^\\/+/, '')
+        : '/images/sem-imagem.png';
+
+      const card = document.createElement('div');
+      card.className = 'produto-card product-card';
+      card.innerHTML =
+        '<img src="' + escapeHtml(imageSrc) + '" alt="' + escapeHtml(productName) + '">' +
+        '<h3>' + escapeHtml(productName) + '</h3>' +
+        (priceStr ? '<p>' + escapeHtml(priceStr) + '</p>' : '') +
+        detalhesHTML +
+        '<a href="https://wa.me/5555991407824?text=' + whatsappText + '" class="btn btn-whatsapp" target="_blank">' +
+        '<i class="fa-brands fa-whatsapp"></i> Comprar no WhatsApp</a>';
+      container.appendChild(card);
+    });
+  }).catch(() => {
+    setCategoryTitle(titleEl, 'Erro ao carregar categoria', '');
+    showMessage('Não foi possível carregar os produtos desta categoria.');
+  });
+})();
+</script>
+</body>
+</html>`;
+
+  fs.writeFileSync(path.join(siteDir, 'categoria.html'), html, 'utf-8');
+}
+
 function rebuildCategoryStructure(items, siteDir){
-  generateCategoryPage('', '', siteDir); // agora gera apenas categoria.html
-  updateHeaderMenu(items || [], siteDir);
+  generateCategoryPage(siteDir);
+  generateHeader(items || [], siteDir);
 }
 
 // ====== LISTAR ======
@@ -63,10 +426,9 @@ router.post('/add', (req,res)=>{
   data.items = data.items || [];
 
   const name = (req.body.name||'').trim();
-  let slugIn = (req.body.slug||'').trim();
-  let slug = slugIn || slugify(name);
-  slug = uniqueSlug(slug, data.items);
+  if (!name) return res.redirect('/categorias?error=name');
 
+  const slug = uniqueSlug(req.body.slug || name, data.items);
   const order = Number(req.body.order || data.items.length + 1);
   const icon = (req.body.icon || '').trim();
   const newCat = { id: Date.now(), name, slug, order, icon };
@@ -90,20 +452,16 @@ router.post('/update', (req,res)=>{
   const CONTENT_DIR = paths.CONTENT_DIR;
   const file = path.join(CONTENT_DIR, 'categories.json');
   const data = readJson(file);
+  data.items = data.items || [];
   const id = Number(req.body.id);
-  const it = (data.items||[]).find(c=> Number(c.id)===id);
+  const it = data.items.find(c=> Number(c.id)===id);
 
   if (it) {
-    const oldName = it.name;
-    const oldSlug = (it.slug||'').trim();
-    const newName = (req.body.name||oldName).trim();
-    const slugInput = (req.body.slug||'').trim();
-    const autoFromName = slugify(newName);
-    let newSlug = slugInput && slugInput !== oldSlug ? slugInput : (newName !== oldName ? autoFromName : oldSlug);
-    newSlug = uniqueSlug(newSlug, data.items, it.id);
+    const newName = (req.body.name || it.name || '').trim();
+    const slugInput = (req.body.slug || '').trim();
 
     it.name = newName;
-    it.slug = newSlug;
+    it.slug = uniqueSlug(slugInput || newName || it.slug, data.items, it.id);
     it.order = Number(req.body.order || it.order || 1);
     it.icon = (req.body.icon || '').trim();
   }
