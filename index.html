@@ -7,7 +7,7 @@
 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
-  <link rel="stylesheet" href="/site/css/style.css">
+  <link rel="stylesheet" href="/css/style.css?v=20260610">
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-9HPD9XCELH"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -25,20 +25,20 @@
       <div class="swiper-wrapper">
         <div class="swiper-slide">
           <picture>
-            <source media="(max-width: 767px)" srcset="/site/images/banner2-mobile.png">
-            <img src="/site/images/banner2.png" alt="" class="banner-img">
+            <source media="(max-width: 767px)" srcset="/images/banner2-mobile.png">
+            <img src="/images/banner2.png" alt="" class="banner-img">
           </picture>
         </div>
         <div class="swiper-slide">
           <picture>
-            <source media="(max-width: 767px)" srcset="/site/images/banner3-mobile.png">
-            <img src="/site/images/banner3.png" alt="" class="banner-img">
+            <source media="(max-width: 767px)" srcset="/images/banner3-mobile.png">
+            <img src="/images/banner3.png" alt="" class="banner-img">
           </picture>
         </div>
         <div class="swiper-slide">
           <picture>
-            <source media="(max-width: 767px)" srcset="/site/images/Banner-sitemobile.jpg">
-            <img src="/site/images/Bannerpdesktop.jpg" alt="" class="banner-img">
+            <source media="(max-width: 767px)" srcset="/images/Banner-sitemobile.jpg">
+            <img src="/images/Bannerpdesktop.jpg" alt="" class="banner-img">
           </picture>
         </div>
       </div>
@@ -64,7 +64,7 @@
   <div id="footer"></div>
 
   <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-  <script src="/site/js/main.js"></script>
+  <script src="/js/main.js?v=20260610"></script>
 
   <script>
   function scrollCarousel(dir) {
@@ -93,12 +93,12 @@
   }
 
   function productImagePath(path){
-    if (!path) return '/site/images/sem-imagem.png';
+    if (!path) return '/images/sem-imagem.png';
     if (/^https?:\/\//i.test(path)) return path;
-    return '/site/' + path.replace(/^\//, '');
+    return '/' + path.replace(/^\//, '');
   }
 
-  fetch('/site/content/products.json')
+  fetch('/content/products.json')
     .then(r => r.json())
     .then(data => {
       const track = document.getElementById('carousel1');
