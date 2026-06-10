@@ -392,6 +392,8 @@ ${footer}
   });
 })();
 </script>
+<script src="/js/main.js"></script>
+<script src="/site/js/main.js"></script>
 </body>
 </html>`;
 }

@@ -376,14 +376,10 @@ function generateCategoryPage(siteDir){
           ? '<a href="/produto/' + encodeURIComponent(productSlug) + '/" class="btn btn-details">Ver detalhes</a>'
           : '';
 
-      const imageSrc = productImage
-        ? '/' + productImage.replace(/^\\/+/, '')
-        : '/images/sem-imagem.png';
-
       const card = document.createElement('div');
       card.className = 'produto-card product-card';
       card.innerHTML =
-        '<img src="' + escapeHtml(imageSrc) + '" alt="' + escapeHtml(productName) + '">' +
+        '<img src="' + escapeHtml(productImage || '/site/images/sem-imagem.png') + '" alt="' + escapeHtml(productName) + '">' +
         '<h3>' + escapeHtml(productName) + '</h3>' +
         (priceStr ? '<p>' + escapeHtml(priceStr) + '</p>' : '') +
         detalhesHTML +
