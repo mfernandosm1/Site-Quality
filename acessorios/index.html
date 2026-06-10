@@ -14,157 +14,70 @@
   <meta property="og:url" content="https://www.qualitycel.com.br/acessorios/">
   <meta name="twitter:card" content="summary_large_image">
   <link rel="canonical" href="https://www.qualitycel.com.br/acessorios/">
-  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/site/css/style.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
-<html><head>
-    
-  <script async="" src="https://www.googletagmanager.com/gtag/js?id=G-9HPD9XCELH"></script><script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+<header class="header">
+  <div class="header-container">
+    <a href="/" class="logo-wrapper" data-home-link>
+      <img src="/images/logo.png" onerror="this.onerror=null;this.src='/site/images/logo.png';" alt="Quality Celulares" class="logo">
+    </a>
 
-  gtag('config', 'G-9HPD9XCELH');
-</script></head>
-<!-- Google tag (gtag.js) -->
-
-
-  <body>
-    <header class="header">
-      <div class="header-container">
-        <!-- Logo -->
-        <a href="index.html" class="logo-wrapper">
-          <img src="images/logo.png" alt="Quality Celulares" class="logo">
-        </a>
-
-        <!-- Navegação Desktop -->
-        <nav class="nav-desktop" id="nav-desktop">
-          <a href="index.html">Início</a>
-          <!-- categorias serão injetadas aqui -->
-          
-          
-          <a href="/smartphones/" class="cat-link">Smartphones</a><a href="/acessorios/" class="cat-link">Acessórios</a><div class="search-wrapper">
-            <input type="text" id="search-input" placeholder="Buscar...">
-            <button id="search-button" aria-label="Buscar">
-              <i class="fa fa-search"></i>
-            </button>
-          </div>
-        </nav>
-
-        <!-- Botão Mobile -->
-        <button id="menu-toggle" class="menu-toggle" aria-label="Abrir menu">
-          <i class="fa-solid fa-bars"></i>
+    <nav class="nav-desktop" id="nav-desktop">
+      <a href="/" data-home-link>Início</a>
+          <a href="/smartphones/" class="cat-link">Smartphones</a>
+          <a href="/acessorios/" class="cat-link">Acessórios</a>
+      <div class="search-wrapper">
+        <input type="text" id="search-input" placeholder="Buscar...">
+        <button id="search-button" aria-label="Buscar">
+          <i class="fa fa-search"></i>
         </button>
       </div>
+    </nav>
 
-      <!-- Menu Mobile -->
-      <div id="mobile-menu" class="mobile-menu" aria-hidden="true">
-        <div class="mobile-menu-header">
-          <a href="index.html" class="logo-wrapper">
-            <img src="images/logo.png" alt="Quality Celulares" class="logo">
-          </a>
-          <button id="menu-close" class="menu-close" aria-label="Fechar menu">
-            <i class="fa-solid fa-xmark"></i>
-          </button>
-        </div>
+    <button id="menu-toggle" class="menu-toggle" aria-label="Abrir menu">
+      <i class="fa-solid fa-bars"></i>
+    </button>
+  </div>
 
-        <!-- Busca Mobile -->
-        <div class="search-wrapper-mobile">
-          <input type="text" id="search-input-mobile" placeholder="Buscar...">
-          <button id="search-button-mobile" aria-label="Buscar">
-            <i class="fa fa-search"></i>
-          </button>
-        </div>
+  <div id="mobile-menu" class="mobile-menu" aria-hidden="true">
+    <div class="mobile-menu-header">
+      <a href="/" class="logo-wrapper" data-home-link>
+        <img src="/images/logo.png" onerror="this.onerror=null;this.src='/site/images/logo.png';" alt="Quality Celulares" class="logo">
+      </a>
+      <button id="menu-close" class="menu-close" aria-label="Fechar menu">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+    </div>
 
-        <!-- Navegação Mobile -->
-        <nav class="mobile-nav" id="nav-mobile">
-          <a href="index.html">Início</a>
-          <!-- categorias serão injetadas aqui -->
-          
-          
-        <a href="/smartphones/" class="cat-link">Smartphones</a><a href="/acessorios/" class="cat-link">Acessórios</a></nav>
-      </div>
+    <div class="search-wrapper-mobile">
+      <input type="text" id="search-input-mobile" placeholder="Buscar...">
+      <button id="search-button-mobile" aria-label="Buscar">
+        <i class="fa fa-search"></i>
+      </button>
+    </div>
 
-      <!-- Overlay -->
-      <div id="menu-overlay" class="menu-overlay"></div>
-    </header>
+    <nav class="mobile-nav" id="nav-mobile">
+      <a href="/" data-home-link>Início</a>
+          <a href="/smartphones/" class="cat-link">Smartphones</a>
+          <a href="/acessorios/" class="cat-link">Acessórios</a>
+    </nav>
+  </div>
 
-    <script>
-      document.addEventListener("DOMContentLoaded", () => {
-        fetch("/content/categories.json")
-          .then(r => r.json())
-          .then(data => {
-            const categorias = data.items || [];
-            const navDesktop = document.getElementById("nav-desktop");
-            const navMobile = document.getElementById("nav-mobile");
-            if (!navDesktop || !navMobile) return;
-
-            navDesktop.querySelectorAll("a.cat-link").forEach(a => a.remove());
-            navMobile.querySelectorAll("a.cat-link").forEach(a => a.remove());
-
-            const searchWrapper = navDesktop.querySelector(".search-wrapper");
-
-            categorias
-              .sort((a, b) => (a.order || 0) - (b.order || 0))
-              .forEach(cat => {
-                const linkD = document.createElement("a");
-                linkD.href = `categoria.html?slug=${encodeURIComponent(cat.slug)}`;
-                if (cat.icon) {
-                  const iconD = document.createElement("i");
-                  iconD.className = cat.icon;
-                  iconD.setAttribute("aria-hidden", "true");
-                  linkD.appendChild(iconD);
-                  linkD.appendChild(document.createTextNode(" "));
-                }
-                linkD.appendChild(document.createTextNode(cat.name));
-                linkD.className = "cat-link";
-                if (searchWrapper)
-                  navDesktop.insertBefore(linkD, searchWrapper);
-                else navDesktop.appendChild(linkD);
-
-                const linkM = document.createElement("a");
-                linkM.href = `categoria.html?slug=${encodeURIComponent(cat.slug)}`;
-                if (cat.icon) {
-                  const iconM = document.createElement("i");
-                  iconM.className = cat.icon;
-                  iconM.setAttribute("aria-hidden", "true");
-                  linkM.appendChild(iconM);
-                  linkM.appendChild(document.createTextNode(" "));
-                }
-                linkM.appendChild(document.createTextNode(cat.name));
-                linkM.className = "cat-link";
-                navMobile.appendChild(linkM);
-              });
-          })
-          .catch(err => console.error("Erro ao carregar categorias:", err));
-
-        // Menu mobile
-        const toggle = document.getElementById("menu-toggle");
-        const close = document.getElementById("menu-close");
-        const menu = document.getElementById("mobile-menu");
-        const overlay = document.getElementById("menu-overlay");
-
-        if (toggle && menu && overlay) {
-          const abrir = () => {
-            menu.classList.add("open");
-            overlay.classList.add("show");
-            menu.setAttribute("aria-hidden", "false");
-          };
-          const fechar = () => {
-            menu.classList.remove("open");
-            overlay.classList.remove("show");
-            menu.setAttribute("aria-hidden", "true");
-          };
-          toggle.addEventListener("click", abrir);
-          close?.addEventListener("click", fechar);
-          overlay.addEventListener("click", fechar);
-        }
-      });
-    </script>
-  
-
-</body></html>
+  <div id="menu-overlay" class="menu-overlay"></div>
+</header>
+<script>
+(function(){
+  var isLocalPreview = window.location.hostname === 'localhost' && window.location.port === '3000';
+  if (isLocalPreview) {
+    document.querySelectorAll('[data-home-link]').forEach(function(a){
+      a.setAttribute('href', '/site/view/index.html');
+    });
+  }
+})();
+</script>
 <main class="main">
   <h1 id="categoria-titulo" style="text-align:center;margin-top:30px;display:flex;justify-content:center;align-items:center;gap:10px;flex-wrap:wrap;">Categoria</h1>
   <div id="produtos-container" class="products" style="margin-top:40px;"></div>
@@ -194,7 +107,7 @@
 <script>
 (function(){
   function normalizeText(v){
-    return (v || '').toString().trim().toLowerCase();
+    return (v || '').toString().trim().normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
   }
 
   function shouldShowPrice(p){
@@ -243,11 +156,48 @@
     if (container) container.innerHTML = '<p class="em-breve" style="text-align:center;">' + escapeHtml(text) + '</p>';
   }
 
+  function assetUrl(path){
+    const p = (path || '').toString().trim();
+    if (!p) return assetUrl('images/sem-imagem.png');
+    if (/^https?:///i.test(p)) return p;
+
+    const clean = p.replace(/^/+/, '');
+    const isLocalPreview = window.location.hostname === 'localhost' && window.location.port === '3000';
+
+    if (isLocalPreview) {
+      return clean.startsWith('site/') ? '/' + clean : '/site/' + clean;
+    }
+
+    return '/' + clean;
+  }
+
+  function imageFallback(path){
+    const p = (path || '').toString().trim();
+    if (!p) return '/site/images/sem-imagem.png';
+    if (/^https?:///i.test(p)) return p;
+    const clean = p.replace(/^/+/, '').replace(/^site//, '');
+    return '/site/' + clean;
+  }
+
+  async function fetchJson(paths){
+    let lastError = null;
+    for (const url of paths) {
+      try {
+        const res = await fetch(url, { cache: 'no-store' });
+        if (res.ok) return await res.json();
+      } catch (err) {
+        lastError = err;
+      }
+    }
+    if (lastError) throw lastError;
+    throw new Error('Arquivo JSON não encontrado.');
+  }
+
   const params = new URLSearchParams(window.location.search);
   const pathParts = window.location.pathname.split('/').filter(Boolean);
   const lastPath = normalizeText(pathParts[pathParts.length - 1] || '');
   const pathSlug = ['categoria.html', 'index.html'].includes(lastPath) ? '' : lastPath;
-  const currentSlug = normalizeText(params.get('slug') || pathSlug);
+  const currentSlug = normalizeText(params.get('slug') || params.get('cat') || pathSlug);
   const titleEl = document.getElementById('categoria-titulo');
 
   if (!currentSlug) {
@@ -257,13 +207,20 @@
   }
 
   Promise.all([
-    fetch('/content/categories.json').then(r => r.json()).catch(() => ({ items: [] })),
-    fetch('/content/products.json').then(r => r.json()).catch(() => ({ items: [] }))
+    fetchJson(['/content/categories.json', '/site/content/categories.json']).catch(() => ({ items: [] })),
+    fetchJson(['/content/products.json', '/site/content/products.json']).catch(() => ({ items: [] }))
   ]).then(([categoriesData, productsData]) => {
     const categories = categoriesData.items || [];
-    const category = categories.find(c => normalizeText(c.slug) === currentSlug);
+    const category = categories.find(c =>
+      normalizeText(c.slug) === currentSlug ||
+      normalizeText(c.name) === currentSlug ||
+      normalizeText(c.id) === currentSlug
+    );
+
     const categoryName = category ? (category.name || category.slug || currentSlug) : currentSlug;
     const categoryNameLower = normalizeText(categoryName);
+    const categorySlugLower = normalizeText(category ? category.slug : currentSlug);
+    const categoryIdLower = normalizeText(category ? category.id : '');
 
     setCategoryTitle(titleEl, categoryName, category ? category.icon : '');
     document.title = categoryName + ' – Quality Celulares';
@@ -283,7 +240,7 @@
       canonical.setAttribute('rel', 'canonical');
       document.head.appendChild(canonical);
     }
-    canonical.setAttribute('href', window.location.origin + '/' + encodeURIComponent(currentSlug) + '/');
+    canonical.setAttribute('href', window.location.origin + '/' + encodeURIComponent(categorySlugLower || currentSlug) + '/');
 
     function setOg(property, content){
       let tag = document.querySelector('meta[property="' + property + '"]');
@@ -295,18 +252,17 @@
       tag.setAttribute('content', content);
     }
 
-    const categoryUrl = window.location.origin + '/' + encodeURIComponent(currentSlug) + '/';
+    const categoryUrl = window.location.origin + '/' + encodeURIComponent(categorySlugLower || currentSlug) + '/';
     setOg('og:type', 'website');
     setOg('og:title', categoryName + ' – Quality Celulares');
     setOg('og:description', metaDescriptionText);
     setOg('og:url', categoryUrl);
     setOg('og:image', window.location.origin + '/images/logo.png');
 
-
     const products = (productsData.items || []).filter(p => {
       if (p.active === false) return false;
-      const cat = normalizeText(p.category ?? p.categoria ?? p.categorySlug ?? p.categoriaSlug);
-      return cat === currentSlug || cat === categoryNameLower;
+      const cat = normalizeText(p.category ?? p.categoria ?? p.categorySlug ?? p.categoriaSlug ?? p.categoryId ?? p.categoriaId);
+      return cat === currentSlug || cat === categorySlugLower || cat === categoryNameLower || (categoryIdLower && cat === categoryIdLower);
     });
 
     if (products.length === 0) {
@@ -319,11 +275,13 @@
     products.forEach(p => {
       const priceStr = shouldShowPrice(p) ? formatPrice(p.price ?? p.preco) : '';
       const productName = p.name || p.nome || '';
-      const productImage = p.image || p.imagem || '';
+      const productImageRaw = p.image || p.imagem || '';
+      const productImage = assetUrl(productImageRaw);
+      const productImageFallback = imageFallback(productImageRaw);
       const whatsappText = encodeURIComponent('Olá! Vim através do site e tenho interesse em ' + (productName || 'produto'));
       const hasGallery = Array.isArray(p.gallery) && p.gallery.filter(Boolean).length > 0;
       const hasVideo = !!(p.youtube || p.youtubeUrl || p.video || p.videoUrl);
-      const hasDescription = !!(p.description || p.descricao || p.desc);
+      const hasDescription = !!(p.description || p.descricao || p.desc || p.descriptionLong || p.descriptionShort);
       const detailsRaw = p.detailsEnabled ?? p.detalhesAtivo ?? p.details_enabled ?? p.verDetalhes ?? p.showDetails;
       const detailsEnabled =
         detailsRaw === true ||
@@ -341,7 +299,7 @@
       const card = document.createElement('div');
       card.className = 'produto-card product-card';
       card.innerHTML =
-        '<img src="' + escapeHtml(productImage || 'images/sem-imagem.png') + '" alt="' + escapeHtml(productName) + '">' +
+        '<img src="' + escapeHtml(productImage) + '" onerror="this.onerror=null;this.src='' + escapeHtml(productImageFallback) + '';" alt="' + escapeHtml(productName) + '">' +
         '<h3>' + escapeHtml(productName) + '</h3>' +
         (priceStr ? '<p>' + escapeHtml(priceStr) + '</p>' : '') +
         detalhesHTML +

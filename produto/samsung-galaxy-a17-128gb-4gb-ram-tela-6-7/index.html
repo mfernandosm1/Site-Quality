@@ -14,7 +14,7 @@
   <meta property="og:url" content="https://www.qualitycel.com.br/produto/">
   <meta name="twitter:card" content="summary_large_image">
   <link rel="canonical" href="https://www.qualitycel.com.br/produto/">
-  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="/css/style.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   
   <style>
@@ -173,7 +173,7 @@
 </main>
 
 <div id="footer"></div>
-<script src="js/main.js"></script>
+<script src="/js/main.js"></script>
 <script>
 (function(){
   function escapeHtml(value){
@@ -239,6 +239,25 @@
     if (!path) return window.location.origin + '/images/sem-imagem.png';
     if (/^https?:\/\//i.test(path)) return path;
     return window.location.origin + '/' + path.replace(/^\//, '');
+  }
+
+  function assetPath(path){
+    if (!path) return '/images/sem-imagem.png';
+    if (/^https?:\/\//i.test(path)) return path;
+    return '/' + path.replace(/^\//, '');
+  }
+
+  function normalizeText(value){
+    return (value || '').toString().trim().toLowerCase();
+  }
+
+  function getSlugFromPath(){
+    const parts = window.location.pathname.split('/').filter(Boolean);
+    const produtoIndex = parts.indexOf('produto');
+    if (produtoIndex >= 0 && parts[produtoIndex + 1]) {
+      return decodeURIComponent(parts[produtoIndex + 1]);
+    }
+    return '';
   }
 
   function setMetaTag(name, content){
@@ -311,7 +330,9 @@
     const seo = Object.assign(defaultSeoConfig(), seoConfig || {});
     const description = stripHtml(product.descriptionShort || product.descriptionLong || ('Confira ' + name + ' na Quality Celulares.'));
     const productSlug = product.slug || product.id;
-    const canonicalUrl = window.location.origin + '/produto/' + encodeURIComponent(productSlug) + '/';
+    const canonicalUrl = productSlug
+      ? window.location.origin + '/produto/' + encodeURIComponent(productSlug) + '/'
+      : window.location.origin + window.location.pathname + '?id=' + encodeURIComponent(product.id);
     const absoluteImage = absoluteUrl(image);
     const safeDescription = description.slice(0, 160);
 
@@ -409,13 +430,12 @@
   }
 
   const params = new URLSearchParams(window.location.search);
-  const pathParts = window.location.pathname.split('/').filter(Boolean);
-  const lastPath = pathParts[pathParts.length - 1] || '';
-  const pathSlug = ['produto.html', 'index.html', 'produto'].includes(lastPath.toLowerCase()) ? '' : lastPath;
-  const id = params.get('id') || params.get('slug') || pathSlug;
+  const id = params.get('id');
+  const slug = params.get('slug') || getSlugFromPath();
+  const productKey = id || slug;
   const box = document.getElementById('produto-detalhe');
 
-  if (!id) {
+  if (!productKey) {
     box.innerHTML = '<p class="em-breve" style="text-align:center;">Produto não informado.</p>';
     return;
   }
@@ -425,7 +445,11 @@
     fetch('/content/seo.json').then(r => r.json()).catch(() => ({}))
   ])
     .then(([data, seoConfig]) => {
-      const product = (data.items || []).find(p => String(p.id) === String(id) || String(p.slug || '') === String(id));
+      const product = (data.items || []).find(p => {
+        const productId = String(p.id || '');
+        const productSlug = String(p.slug || '');
+        return productId === String(productKey) || normalizeText(productSlug) === normalizeText(productKey);
+      });
 
       if (!product || product.active === false) {
         box.innerHTML = '<p class="em-breve" style="text-align:center;">Produto não encontrado.</p>';
@@ -433,8 +457,8 @@
       }
 
       const name = product.name || 'Produto';
-      const image = product.image || 'images/sem-imagem.png';
-      const gallery = Array.isArray(product.gallery) ? product.gallery : [];
+      const image = assetPath(product.image || 'images/sem-imagem.png');
+      const gallery = Array.isArray(product.gallery) ? product.gallery.map(assetPath) : [];
       const medias = [image, ...gallery].filter(Boolean);
 
       const shortDesc = product.descriptionShort || '';

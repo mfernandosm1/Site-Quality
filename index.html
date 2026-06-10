@@ -1,12 +1,14 @@
-<!DOCTYPE html><html lang="pt-BR"><head>
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Quality Celulares</title>
 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
-  <link rel="stylesheet" href="css/style.css">
-  <script async="" src="https://www.googletagmanager.com/gtag/js?id=G-9HPD9XCELH"></script>
+  <link rel="stylesheet" href="/site/css/style.css">
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-9HPD9XCELH"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
@@ -23,20 +25,20 @@
       <div class="swiper-wrapper">
         <div class="swiper-slide">
           <picture>
-            <source media="(max-width: 767px)" srcset="images/banner2-mobile.png">
-            <img src="images/banner2.png" alt="" class="banner-img">
+            <source media="(max-width: 767px)" srcset="/site/images/banner2-mobile.png">
+            <img src="/site/images/banner2.png" alt="" class="banner-img">
           </picture>
         </div>
         <div class="swiper-slide">
           <picture>
-            <source media="(max-width: 767px)" srcset="images/banner3-mobile.png">
-            <img src="images/banner3.png" alt="" class="banner-img">
+            <source media="(max-width: 767px)" srcset="/site/images/banner3-mobile.png">
+            <img src="/site/images/banner3.png" alt="" class="banner-img">
           </picture>
         </div>
         <div class="swiper-slide">
           <picture>
-            <source media="(max-width: 767px)" srcset="images/Banner-sitemobile.jpg">
-            <img src="images/Bannerpdesktop.jpg" alt="" class="banner-img">
+            <source media="(max-width: 767px)" srcset="/site/images/Banner-sitemobile.jpg">
+            <img src="/site/images/Bannerpdesktop.jpg" alt="" class="banner-img">
           </picture>
         </div>
       </div>
@@ -62,44 +64,13 @@
   <div id="footer"></div>
 
   <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-  <script src="js/main.js"></script>
+  <script src="/site/js/main.js"></script>
 
   <script>
-  new Swiper('.swiper', {
-    loop: true,
-    autoplay: { delay: 4000 },
-    navigation: { nextEl: '.swiper-button-next', prevEl: '.swiper-button-prev' },
-  });
-
   function scrollCarousel(dir) {
     const track = document.getElementById('carousel1');
-    track.scrollBy({ left: dir * 300, behavior: 'smooth' });
+    if (track) track.scrollBy({ left: dir * 300, behavior: 'smooth' });
   }
-
-  fetch('header.html')
-    .then(r => r.text())
-    .then(t => {
-      document.getElementById('header').innerHTML = t;
-      if (window.initHeader) window.initHeader();
-
-      const toggle = document.getElementById('menu-toggle');
-      const close  = document.getElementById('menu-close');
-      const menu   = document.getElementById('mobile-menu');
-      const overlay= document.getElementById('menu-overlay');
-
-      function openMenu()  { menu.classList.add('open'); overlay.classList.add('active'); }
-      function closeMenu() { menu.classList.remove('open'); overlay.classList.remove('active'); }
-
-      if (toggle && close && menu && overlay) {
-        toggle.onclick = openMenu;
-        close.onclick  = closeMenu;
-        overlay.onclick= closeMenu;
-      }
-    });
-
-  fetch('footer.html')
-    .then(r => r.text())
-    .then(t => document.getElementById('footer').innerHTML = t);
 
   function escapeHtml(value){
     return (value || '').toString()
@@ -114,13 +85,26 @@
     return Array.isArray(p.gallery) && p.gallery.filter(Boolean).length > 0;
   }
 
-  fetch('content/products.json')
+  function shouldShowPrice(p){
+    const raw = p.showPrice ?? p.mostrar_preco ?? p.show_price ?? p.mostrarPreco ?? p.priceVisible ?? false;
+    if (raw === true) return true;
+    const v = raw.toString().toLowerCase();
+    return v === 'sim' || v === 'yes' || v === 'true' || v === '1' || v === 'on';
+  }
+
+  function productImagePath(path){
+    if (!path) return '/site/images/sem-imagem.png';
+    if (/^https?:\/\//i.test(path)) return path;
+    return '/site/' + path.replace(/^\//, '');
+  }
+
+  fetch('/site/content/products.json')
     .then(r => r.json())
     .then(data => {
       const track = document.getElementById('carousel1');
       const produtos = (data.items || []).filter(p => p.active !== false && p.featured === true);
 
-      if (produtos.length === 0) {
+      if (!track || produtos.length === 0) {
         document.getElementById('no-results').style.display = 'block';
         return;
       }
@@ -129,15 +113,16 @@
         const card = document.createElement('div');
         card.className = 'produto-card product-card';
 
-        const precoHTML = (p.showPrice === false) ? '' :
-          `<p>R$ ${(Number(p.price) || 0).toFixed(2).replace('.', ',')}</p>`;
+        const precoHTML = shouldShowPrice(p)
+          ? `<p>R$ ${(Number(p.price) || 0).toFixed(2).replace('.', ',')}</p>`
+          : '';
 
         const detalhesHTML = (p.detailsEnabled || hasGallery(p))
           ? `<a href="/produto/${encodeURIComponent(p.slug || p.id)}/" class="btn btn-details">Ver detalhes</a>`
           : '';
 
         card.innerHTML = `
-          <img src="${escapeHtml(p.image || 'images/sem-imagem.png')}" alt="${escapeHtml(p.name || '')}">
+          <img src="${escapeHtml(productImagePath(p.image || 'images/sem-imagem.png'))}" alt="${escapeHtml(p.name || '')}">
           <h3>${escapeHtml(p.name || '')}</h3>
           ${precoHTML}
           ${detalhesHTML}
@@ -153,4 +138,5 @@
       document.getElementById('no-results').style.display = 'block';
     });
   </script>
-</body></html>
+</body>
+</html>
