@@ -3,7 +3,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // Carregar header
   const headerContainer = document.getElementById("header");
   if (headerContainer) {
-    fetch("/site/header.html")
+    fetch("/header.html")
       .then(res => res.text())
       .then(data => {
         headerContainer.innerHTML = data;
@@ -15,7 +15,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // Carregar footer
   const footerContainer = document.getElementById("footer");
   if (footerContainer) {
-    fetch("/site/footer.html")
+    fetch("/footer.html")
       .then(res => res.text())
       .then(data => {
         footerContainer.innerHTML = data;
@@ -30,7 +30,7 @@ document.addEventListener("DOMContentLoaded", () => {
 // Categorias dinâmicas no Header
 // ----------------------------
 function carregarCategoriasNoHeader() {
-  fetch("/site/content/categories.json")
+  fetch("/content/categories.json")
     .then(r => r.json())
     .then(data => {
       const categorias = data.items || [];
@@ -200,8 +200,8 @@ function doSearch(query) {
 
   // Se não encontrou na página, procura no catálogo inteiro e redireciona
   Promise.all([
-    fetch("/site/content/products.json").then(r => r.json()).catch(() => ({ items: [] })),
-    fetch("/site/content/categories.json").then(r => r.json()).catch(() => ({ items: [] }))
+    fetch("/content/products.json").then(r => r.json()).catch(() => ({ items: [] })),
+    fetch("/content/categories.json").then(r => r.json()).catch(() => ({ items: [] }))
   ]).then(([productsData, categoriesData]) => {
     const produtos = productsData.items || [];
     const categorias = categoriesData.items || [];
