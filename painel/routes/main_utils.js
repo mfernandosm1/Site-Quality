@@ -238,9 +238,9 @@ ${footer}
   function assetUrl(path){
     const p = (path || '').toString().trim();
     if (!p) return assetUrl('images/sem-imagem.png');
-    if (/^https?:\/\//i.test(p)) return p;
+    if (/^https?:\\/\\//i.test(p)) return p;
 
-    const clean = p.replace(/^\/+/, '');
+    const clean = p.replace(/^\\/+/, '');
     const isLocalPreview = window.location.hostname === 'localhost' && window.location.port === '3000';
 
     if (isLocalPreview) {
@@ -253,8 +253,8 @@ ${footer}
   function imageFallback(path){
     const p = (path || '').toString().trim();
     if (!p) return '/site/images/sem-imagem.png';
-    if (/^https?:\/\//i.test(p)) return p;
-    const clean = p.replace(/^\/+/, '').replace(/^site\//, '');
+    if (/^https?:\\/\\//i.test(p)) return p;
+    const clean = p.replace(/^\\/+/, '').replace(/^site\\//, '');
     return '/site/' + clean;
   }
 
@@ -378,7 +378,7 @@ ${footer}
       const card = document.createElement('div');
       card.className = 'produto-card product-card';
       card.innerHTML =
-        '<img src="' + escapeHtml(productImage) + '" onerror="this.onerror=null;this.src=\'' + escapeHtml(productImageFallback) + '\';" alt="' + escapeHtml(productName) + '">' +
+        '<img src="' + escapeHtml(productImage) + '" onerror="this.onerror=null;this.src=\\'' + escapeHtml(productImageFallback) + '\\';" alt="' + escapeHtml(productName) + '">' +
         '<h3>' + escapeHtml(productName) + '</h3>' +
         (priceStr ? '<p>' + escapeHtml(priceStr) + '</p>' : '') +
         detalhesHTML +
