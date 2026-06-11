@@ -646,21 +646,6 @@
       "slug": "samsung-galaxy-s26-5g-256gb-12gb-ram-galaxy-ai-tela-6-3"
     },
     {
-      "id": 1780623277269,
-      "name": "Pen Drive Sandisk Cruzer Blade 128gb",
-      "price": null,
-      "image": "images/pen drive Sandisk 128gb.jpeg",
-      "category": "acessorios",
-      "showPrice": false,
-      "featured": false,
-      "active": true,
-      "gallery": [],
-      "detailsEnabled": false,
-      "descriptionShort": "",
-      "descriptionLong": "",
-      "slug": "pen-drive-sandisk-cruzer-blade-128gb"
-    },
-    {
       "id": 1780693602729,
       "name": "Pen Drive Sandisk Cruzer Blade 128gb",
       "price": null,
@@ -738,6 +723,36 @@
       "descriptionShort": "",
       "descriptionLong": "Especificações:\r\n\r\n- Design ergonômico\r\n\r\n- Ambidestro\r\n\r\n- Estrutura resistente\r\n\r\n- Botões de alta qualidade\r\n\r\nTecnologia Free Smart Link.\r\n\r\nSensor óptico\r\n\r\nModos de DPI Selecionáveis através de botão.\r\n\r\nResoluções: 500/800/1000 DPI\r\n\r\nRaio de transmissão de até 12 metros\r\n\r\nAlta economia das pilhas.\r\n\r\n2 Pilhas AAA\r\n\r\nDesligamento automático.\r\n\r\nModo de Operação: 2.4GHz bidirecional\r\n\r\nConteúdo da embalagem:\r\n\r\n1 Mouse sem fio\r\n1 RC Nano conector",
       "id": 1781123111679
+    },
+    {
+      "name": "Caixa de som JBL Boombox 3",
+      "slug": "caixa-de-som-jbl-boombox-3",
+      "price": null,
+      "image": "images/JBL-boombox3-camuflada.jpeg",
+      "gallery": [],
+      "category": "eletronicos",
+      "showPrice": false,
+      "featured": true,
+      "active": true,
+      "detailsEnabled": true,
+      "descriptionShort": "",
+      "descriptionLong": "Som potente e graves mais profundos\r\nBateria com até 24 horas de reprodução\r\nIP67 à prova de poeira e água\r\nEntrada auxiliar cabo de áudio 3,5 mm",
+      "id": 1781196214682
+    },
+    {
+      "name": "Caixa De Som Bluetooth À Prova D'água Ipx6 Portátil",
+      "slug": "caixa-de-som-bluetooth-ipx6",
+      "price": null,
+      "image": "images/Caixa_de-som_altomex.jpeg",
+      "gallery": [],
+      "category": "eletronicos",
+      "showPrice": false,
+      "featured": false,
+      "active": true,
+      "detailsEnabled": true,
+      "descriptionShort": "",
+      "descriptionLong": "Potência de saída de 15 W para um som potente e claro.\r\nAutonomia máxima da bateria de 4 horas para uso prolongado.\r\nTempo de carregamento de apenas 2 horas para conveniência.\r\nDesign cilíndrico portátil, ideal para levar a qualquer lugar.\r\nÀ prova d'água com classificação IPX6, perfeito para uso externo.\r\nConexão Bluetooth para streaming sem fio fácil e rápido.",
+      "id": 1781196414711
     }
   ]
 }
