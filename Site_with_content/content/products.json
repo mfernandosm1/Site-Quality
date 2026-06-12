@@ -798,6 +798,38 @@
       "descriptionShort": "",
       "descriptionLong": "",
       "id": 1781260067474
+    },
+    {
+      "name": "Tablet Samsung Galaxy Tab A11, 64gb, 4gb Ram, Tela De 8.7, Bateria 5.100mah",
+      "slug": "tablet-samsung-galaxy-tab-a11-64gb-4gbram",
+      "price": null,
+      "image": "images/Tablet_Samsung_tabA11.jpeg",
+      "gallery": [
+        "images/produtos/1781271923190-tablet-samsung-taba11-2.jpeg"
+      ],
+      "category": "eletronicos",
+      "showPrice": false,
+      "featured": false,
+      "active": true,
+      "detailsEnabled": true,
+      "descriptionShort": "",
+      "descriptionLong": "companheiro ideal, com capacidade de sobra para cada uma das suas atividades. O design fino, compacto e portátil, com facilidade para segurar com a mão, o torna uma combinação perfeita de desempenho e versatilidade.\n\nSistema operacional: Android 15.0\nResolução da tela de 1340px x 800px\nCom leitor micro-SD\nPossui GPS\nPesa apenas 335g",
+      "id": 1781272005592
+    },
+    {
+      "name": "Celular Nokia 4G Dual Sim P/ Idoso",
+      "slug": "celular-nokia-4g-dual-sim-idoso",
+      "price": null,
+      "image": "images/nokia_2660_idoso.jpeg",
+      "gallery": [],
+      "category": "smartphones",
+      "showPrice": false,
+      "featured": false,
+      "active": true,
+      "detailsEnabled": false,
+      "descriptionShort": "",
+      "descriptionLong": "",
+      "id": 1781272093569
     }
   ]
 }
