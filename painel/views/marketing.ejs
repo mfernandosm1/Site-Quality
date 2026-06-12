@@ -1,0 +1,472 @@
+<% layout('layout') -%>
+<div class="card">
+  <div class="marketing-ia-header">
+    <div>
+      <h3>✨ Marketing IA</h3>
+      <div class="marketing-ia-subtitle">Crie textos para Story/Status, grupos, Instagram/Facebook e ideias de foto/vídeo em poucos segundos.</div>
+    </div>
+    <% if (!hasGeminiKey) { %>
+      <span class="badge">⚠️ Gemini não configurado</span>
+    <% } else { %>
+      <span class="badge">✅ Gemini configurado</span>
+    <% } %>
+  </div>
+
+  <% if (!hasGeminiKey) { %>
+    <div class="notice">
+      Para gerar com IA, crie um arquivo <strong>.env</strong> na pasta <strong>painel</strong> com:<br>
+      <code>GEMINI_API_KEY=sua_chave_aqui</code><br>
+      Opcional: <code>GEMINI_MODEL=gemini-2.5-flash-lite</code>
+    </div>
+  <% } %>
+
+  <div class="marketing-tabs">
+    <button class="marketing-tab-btn active" type="button" data-tab="gerador">🚀 Gerador</button>
+    <button class="marketing-tab-btn" type="button" data-tab="referencias">🧠 Referências</button>
+    <button class="marketing-tab-btn" type="button" data-tab="historico">📜 Histórico</button>
+  </div>
+
+  <section class="marketing-tab-panel active" id="tab-gerador">
+    <div class="marketing-prompt-box">
+      <label>O que deseja criar?</label>
+      <textarea id="marketing-prompt" placeholder="Ex.: Samsung A16 128GB preto. Quero divulgar nos stories e grupos, destacar garantia, parcelamento e envio rápido."></textarea>
+
+      <div class="marketing-quick-buttons" id="marketing-quick-buttons">
+        <% (quickButtons || []).forEach(btn => { %>
+          <button type="button" data-add="<%= btn.text %>"><%= btn.label %></button>
+        <% }) %>
+      </div>
+
+      <details class="marketing-quick-editor">
+        <summary>⚙️ Editar botões rápidos</summary>
+        <form method="post" action="/marketing/quick-buttons/save">
+          <div class="marketing-quick-editor-list">
+            <% (quickButtons || []).forEach(btn => { %>
+              <div class="marketing-quick-editor-item">
+                <input type="hidden" name="id" value="<%= btn.id %>">
+                <div>
+                  <label>Botão</label>
+                  <input type="text" name="label" value="<%= btn.label %>" placeholder="Ex.: 📱 Produto">
+                </div>
+                <div>
+                  <label>Frase rápida</label>
+                  <input type="text" name="text" value="<%= btn.text %>" placeholder="Texto que será adicionado ao campo principal">
+                </div>
+                <label class="marketing-remove-check">
+                  <input type="checkbox" name="removeId" value="<%= btn.id %>"> Excluir
+                </label>
+              </div>
+            <% }) %>
+          </div>
+
+          <div class="marketing-quick-editor-item new">
+            <div>
+              <label>Novo botão</label>
+              <input type="text" name="newLabel" placeholder="Ex.: 🔥 Queima de estoque">
+            </div>
+            <div>
+              <label>Nova frase rápida</label>
+              <input type="text" name="newText" placeholder="Ex.: Quero divulgar uma queima de estoque com urgência e emojis.">
+            </div>
+          </div>
+
+          <button class="btn primary" type="submit">💾 Salvar botões rápidos</button>
+        </form>
+      </details>
+
+      <div class="marketing-actions-row">
+        <button class="btn primary" type="button" id="marketing-generate-btn">🚀 Gerar Conteúdo</button>
+        <button class="btn primary" type="button" id="marketing-regenerate-top-btn" style="display:none;">🔄 Gerar novamente tudo</button>
+        <button class="btn" type="button" id="marketing-clear-btn">Limpar</button>
+        <span class="marketing-status" id="marketing-status"></span>
+      </div>
+    </div>
+
+    <div class="marketing-results-grid" id="marketing-results" style="display:none;">
+      <div class="marketing-result-card">
+        <div class="marketing-result-title">📱 Story / Status WhatsApp</div>
+        <textarea id="result-story"></textarea>
+        <div class="marketing-card-actions">
+          <button class="btn" type="button" data-copy="result-story">📋 Copiar</button>
+          <button class="btn" type="button" data-rewrite="result-story" data-channel="Story/Status">✨ Melhorar/Reformular</button>
+        </div>
+      </div>
+
+      <div class="marketing-result-card">
+        <div class="marketing-result-title">👥 Grupos WhatsApp</div>
+        <textarea id="result-grupo"></textarea>
+        <div class="marketing-card-actions">
+          <button class="btn" type="button" data-copy="result-grupo">📋 Copiar</button>
+          <button class="btn" type="button" data-rewrite="result-grupo" data-channel="Grupos WhatsApp">✨ Melhorar/Reformular</button>
+        </div>
+      </div>
+
+      <div class="marketing-result-card">
+        <div class="marketing-result-title">📸 Instagram/Facebook</div>
+        <textarea id="result-instagram"></textarea>
+        <div class="marketing-card-actions">
+          <button class="btn" type="button" data-copy="result-instagram">📋 Copiar</button>
+          <button class="btn" type="button" data-rewrite="result-instagram" data-channel="Instagram/Facebook">✨ Melhorar/Reformular</button>
+        </div>
+      </div>
+
+      <div class="marketing-result-card">
+        <div class="marketing-result-title">🎥 Ideia de foto/vídeo</div>
+        <textarea id="result-videoIdea"></textarea>
+        <div class="marketing-card-actions">
+          <button class="btn" type="button" data-copy="result-videoIdea">📋 Copiar</button>
+          <button class="btn" type="button" data-rewrite="result-videoIdea" data-channel="Ideia de foto/vídeo">✨ Melhorar/Reformular</button>
+        </div>
+      </div>
+
+      <div class="marketing-result-card full">
+        <div class="marketing-result-title">🔄 Gerar outra versão</div>
+        <p style="margin:0 0 10px 0;color:#6b7280;font-size:13px;">Use este botão para refazer todos os textos com o mesmo pedido principal.</p>
+        <button class="btn primary" type="button" id="marketing-regenerate-btn">🔄 Gerar novamente tudo</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="marketing-tab-panel" id="tab-referencias">
+    <form method="post" action="/marketing/references/add" class="marketing-reference-form">
+      <textarea name="text" placeholder="Cole aqui um texto que você gostou. Pode ser do ChatGPT, Gemini, campanha antiga, concorrente ou texto que vendeu bem. A IA usará apenas como inspiração, sem copiar."></textarea>
+      <div>
+        <label>Categoria</label>
+        <input type="text" name="category" placeholder="Ex.: iPhone, Samsung, Promoção" value="Geral">
+      </div>
+      <button class="btn primary" type="submit">⭐ Salvar referência</button>
+    </form>
+
+    <% if (!references.length) { %>
+      <div class="marketing-empty">Nenhuma referência salva ainda.</div>
+    <% } else { %>
+      <div class="marketing-list">
+        <% references.forEach(ref => { %>
+          <div class="marketing-list-item">
+            <div class="marketing-list-meta">
+              <strong>🏷️ <%= ref.category || 'Geral' %></strong>
+              <form method="post" action="/marketing/references/delete" onsubmit="return confirm('Excluir esta referência?')">
+                <input type="hidden" name="id" value="<%= ref.id %>">
+                <button class="btn" type="submit">Excluir</button>
+              </form>
+            </div>
+            <div class="marketing-list-text"><%= ref.text %></div>
+          </div>
+        <% }) %>
+      </div>
+    <% } %>
+  </section>
+
+  <section class="marketing-tab-panel" id="tab-historico">
+    <div class="marketing-actions-row" style="margin-bottom:12px;">
+      <input type="text" id="marketing-history-search" placeholder="Buscar no histórico..." style="max-width:360px;">
+      <form method="post" action="/marketing/history/clear" onsubmit="return confirm('Limpar todo o histórico?')">
+        <button class="btn" type="submit">🗑️ Limpar todo histórico</button>
+      </form>
+    </div>
+
+    <div class="marketing-empty" id="marketing-history-empty" style="<%= history.length ? 'display:none;' : '' %>">Nenhum conteúdo gerado ainda.</div>
+
+    <div class="marketing-list" id="marketing-history-list" style="<%= history.length ? '' : 'display:none;' %>">
+      <% (history || []).forEach(item => { %>
+        <div class="marketing-list-item marketing-history-item" data-search="<%= ((item.prompt || '') + ' ' + (item.output?.story || '') + ' ' + (item.output?.grupo || '') + ' ' + (item.output?.instagram || '')).toLowerCase() %>">
+          <div class="marketing-list-meta">
+            <strong>📝 <%= item.prompt %></strong>
+            <div style="display:flex;gap:8px;align-items:center;">
+              <span><%= new Date(item.createdAt).toLocaleString('pt-BR') %></span>
+              <form method="post" action="/marketing/history/delete" onsubmit="return confirm('Excluir este item do histórico?')">
+                <input type="hidden" name="id" value="<%= item.id %>">
+                <button class="btn" type="submit">Excluir</button>
+              </form>
+            </div>
+          </div>
+          <div class="marketing-list-text"><strong>Story/Status:</strong><br><%= item.output?.story || '' %></div>
+          <div class="marketing-list-text"><strong>Grupo:</strong><br><%= item.output?.grupo || '' %></div>
+          <div class="marketing-list-text"><strong>Instagram/Facebook:</strong><br><%= item.output?.instagram || '' %></div>
+        </div>
+      <% }) %>
+    </div>
+  </section>
+</div>
+
+<style>
+.marketing-quick-editor{
+  margin-top:12px;
+  border:1px solid #e5e7eb;
+  border-radius:12px;
+  padding:10px 12px;
+  background:#fafafa;
+}
+
+.marketing-quick-editor summary{
+  cursor:pointer;
+  font-weight:800;
+  color:#374151;
+}
+
+.marketing-quick-editor-list{
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+  margin-top:12px;
+}
+
+.marketing-quick-editor-item{
+  display:grid;
+  grid-template-columns:220px 1fr 90px;
+  gap:10px;
+  align-items:end;
+}
+
+.marketing-quick-editor-item.new{
+  grid-template-columns:220px 1fr;
+  margin:12px 0;
+}
+
+.marketing-remove-check{
+  margin:0;
+  color:#991b1b;
+  font-weight:700;
+}
+
+.marketing-card-actions{
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+}
+
+.marketing-result-card textarea{
+  white-space:pre-wrap;
+}
+
+@media (max-width:800px){
+  .marketing-quick-editor-item,
+  .marketing-quick-editor-item.new{
+    grid-template-columns:1fr;
+  }
+}
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const tabButtons = document.querySelectorAll('.marketing-tab-btn');
+  const tabPanels = document.querySelectorAll('.marketing-tab-panel');
+  const promptInput = document.getElementById('marketing-prompt');
+  const generateBtn = document.getElementById('marketing-generate-btn');
+  const regenerateBtn = document.getElementById('marketing-regenerate-btn');
+  const regenerateTopBtn = document.getElementById('marketing-regenerate-top-btn');
+  const clearBtn = document.getElementById('marketing-clear-btn');
+  const statusEl = document.getElementById('marketing-status');
+  const resultsBox = document.getElementById('marketing-results');
+  const historyList = document.getElementById('marketing-history-list');
+  const historyEmpty = document.getElementById('marketing-history-empty');
+
+  const fields = {
+    story: document.getElementById('result-story'),
+    grupo: document.getElementById('result-grupo'),
+    instagram: document.getElementById('result-instagram'),
+    videoIdea: document.getElementById('result-videoIdea')
+  };
+
+  function setStatus(text, type = 'normal') {
+    if (!statusEl) return;
+    statusEl.textContent = text || '';
+    statusEl.style.color = type === 'error' ? '#a40000' : '#374151';
+  }
+
+  function escapeHtml(value) {
+    return String(value || '')
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#039;');
+  }
+
+  function addHistoryItem(item) {
+    if (!item || !historyList) return;
+
+    if (historyEmpty) historyEmpty.style.display = 'none';
+    historyList.style.display = '';
+
+    const output = item.output || {};
+    const search = `${item.prompt || ''} ${output.story || ''} ${output.grupo || ''} ${output.instagram || ''}`.toLowerCase();
+    const div = document.createElement('div');
+    div.className = 'marketing-list-item marketing-history-item';
+    div.dataset.search = search;
+
+    const createdAt = item.createdAt ? new Date(item.createdAt).toLocaleString('pt-BR') : new Date().toLocaleString('pt-BR');
+
+    div.innerHTML = `
+      <div class="marketing-list-meta">
+        <strong>📝 ${escapeHtml(item.prompt || '')}</strong>
+        <div style="display:flex;gap:8px;align-items:center;">
+          <span>${escapeHtml(createdAt)}</span>
+          <form method="post" action="/marketing/history/delete" onsubmit="return confirm('Excluir este item do histórico?')">
+            <input type="hidden" name="id" value="${escapeHtml(item.id || '')}">
+            <button class="btn" type="submit">Excluir</button>
+          </form>
+        </div>
+      </div>
+      <div class="marketing-list-text"><strong>Story/Status:</strong><br>${escapeHtml(output.story || '')}</div>
+      <div class="marketing-list-text"><strong>Grupo:</strong><br>${escapeHtml(output.grupo || '')}</div>
+      <div class="marketing-list-text"><strong>Instagram/Facebook:</strong><br>${escapeHtml(output.instagram || '')}</div>
+    `;
+
+    historyList.prepend(div);
+  }
+
+  tabButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const tab = btn.dataset.tab;
+      tabButtons.forEach(b => b.classList.remove('active'));
+      tabPanels.forEach(p => p.classList.remove('active'));
+      btn.classList.add('active');
+      document.getElementById('tab-' + tab)?.classList.add('active');
+    });
+  });
+
+  document.querySelectorAll('.marketing-quick-buttons button').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const add = btn.dataset.add || '';
+      const current = promptInput.value.trim();
+      promptInput.value = current ? current + '\n' + add : add;
+      promptInput.focus();
+    });
+  });
+
+  async function generateMarketing() {
+    const prompt = promptInput.value.trim();
+    if (!prompt) {
+      alert('Digite o que deseja criar.');
+      return;
+    }
+
+    const oldText = generateBtn.textContent;
+    generateBtn.disabled = true;
+    if (regenerateBtn) regenerateBtn.disabled = true;
+    if (regenerateTopBtn) regenerateTopBtn.disabled = true;
+    generateBtn.textContent = 'Gerando...';
+    setStatus('⏳ Gerando conteúdo com IA...');
+
+    try {
+      const res = await fetch('/marketing/generate', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify({ prompt })
+      });
+
+      const json = await res.json();
+      if (!res.ok || !json.success) throw new Error(json.message || 'Erro ao gerar conteúdo.');
+
+      const output = json.output || {};
+      fields.story.value = output.story || '';
+      fields.grupo.value = output.grupo || '';
+      fields.instagram.value = output.instagram || '';
+      fields.videoIdea.value = output.videoIdea || '';
+      resultsBox.style.display = 'grid';
+      if (regenerateTopBtn) regenerateTopBtn.style.display = 'inline-flex';
+      addHistoryItem(json.historyItem);
+      setStatus('✅ Conteúdo gerado. Você pode editar antes de copiar.');
+    } catch (err) {
+      console.error(err);
+      setStatus('⚠️ ' + err.message, 'error');
+    } finally {
+      generateBtn.disabled = false;
+      if (regenerateBtn) regenerateBtn.disabled = false;
+      if (regenerateTopBtn) regenerateTopBtn.disabled = false;
+      generateBtn.textContent = oldText;
+    }
+  }
+
+  async function rewriteField(fieldId, channel, btn) {
+    const field = document.getElementById(fieldId);
+    if (!field || !field.value.trim()) {
+      alert('Não há texto para reformular.');
+      return;
+    }
+
+    const instruction = window.prompt('Como quer melhorar este texto?', 'Manter a ideia, deixar mais vendedor, natural, com emojis e boas quebras de linha.');
+    if (instruction === null) return;
+
+    const oldText = btn.textContent;
+    btn.disabled = true;
+    btn.textContent = 'Reformulando...';
+    setStatus('⏳ Reformulando texto com IA...');
+
+    try {
+      const res = await fetch('/marketing/rewrite', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify({
+          originalPrompt: promptInput.value.trim(),
+          channel,
+          text: field.value,
+          instruction
+        })
+      });
+
+      const json = await res.json();
+      if (!res.ok || !json.success) throw new Error(json.message || 'Erro ao reformular texto.');
+
+      field.value = json.text || field.value;
+      setStatus('✅ Texto reformulado. Você pode editar antes de copiar.');
+    } catch (err) {
+      console.error(err);
+      setStatus('⚠️ ' + err.message, 'error');
+    } finally {
+      btn.disabled = false;
+      btn.textContent = oldText;
+    }
+  }
+
+  generateBtn?.addEventListener('click', generateMarketing);
+  regenerateBtn?.addEventListener('click', generateMarketing);
+  regenerateTopBtn?.addEventListener('click', generateMarketing);
+
+  clearBtn?.addEventListener('click', () => {
+    promptInput.value = '';
+    Object.values(fields).forEach(field => field.value = '');
+    resultsBox.style.display = 'none';
+    if (regenerateTopBtn) regenerateTopBtn.style.display = 'none';
+    setStatus('');
+  });
+
+  document.querySelectorAll('[data-copy]').forEach(btn => {
+    btn.addEventListener('click', async () => {
+      const id = btn.dataset.copy;
+      const field = document.getElementById(id);
+      if (!field) return;
+      try {
+        await navigator.clipboard.writeText(field.value || '');
+        const oldText = btn.textContent;
+        btn.textContent = '✅ Copiado';
+        setTimeout(() => { btn.textContent = oldText; }, 1300);
+      } catch (_) {
+        field.select();
+        document.execCommand('copy');
+      }
+    });
+  });
+
+  document.querySelectorAll('[data-rewrite]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      rewriteField(btn.dataset.rewrite, btn.dataset.channel || 'geral', btn);
+    });
+  });
+
+  const historySearch = document.getElementById('marketing-history-search');
+  historySearch?.addEventListener('input', () => {
+    const term = historySearch.value.toLowerCase().trim();
+    document.querySelectorAll('.marketing-history-item').forEach(item => {
+      item.style.display = item.dataset.search.includes(term) ? '' : 'none';
+    });
+  });
+});
+</script>
