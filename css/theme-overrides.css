@@ -1,1 +1,28 @@
-:root{}
+:root{
+  --q-primary:#c90000;
+  --q-text:#111827;
+  --q-bg:#ffffff;
+  --q-radius:10px;
+  --q-font:Inter, system-ui, sans-serif;
+}
+
+body{
+  font-family:var(--q-font);
+  color:var(--q-text);
+  background:var(--q-bg);
+}
+
+button,
+.btn,
+.card,
+.product-card,
+.category-card{
+  border-radius:var(--q-radius);
+}
+
+a,
+.price,
+.section-title,
+.logo-text{
+  color:var(--q-primary);
+}

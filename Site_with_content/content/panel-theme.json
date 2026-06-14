@@ -1,0 +1,15 @@
+{
+  "brand": "#c90000",
+  "bg": "#f6f8fc",
+  "card": "#ffffff",
+  "line": "#e5e7eb",
+  "muted": "#6b7280",
+  "text": "#111827",
+  "button": "#2563eb",
+  "radius": "14",
+  "font": "Inter, system-ui, sans-serif",
+  "cardPadding": "16",
+  "buttonPaddingY": "9",
+  "buttonPaddingX": "13",
+  "menuSize": "14"
+}

@@ -9,21 +9,16 @@
   <a class="card" href="/seo"><h3>📈 SEO</h3><p>Google, Sitemap & Schema</p></a>
   <a class="card" href="/header"><h3>🟣 Cabeçalho</h3><p>Desktop & Mobile</p></a>
   <a class="card" href="/footer"><h3>🔻 Footer</h3><p>Texto e sociais</p></a>
-  <a class="card" href="/aparencia"><h3>🎨 Aparência</h3><p>Cores & fonte</p></a>
-  <a class="card" href="/css"><h3>🧶 CSS</h3><p>Avançado</p></a>
+  <a class="card" href="/personalizacao"><h3>🎨 Personalização</h3><p>Site, painel e CSS avançado</p></a>
+
   <div class="card"><h3>🛠️ Manutenção</h3>
     <div class="stat"><span>Status:</span> <b><%= maint.active ? 'ATIVA' : 'DESATIVADA' %></b></div>
     <form method="post" action="/manutencao/ativar?from=/"><button class="btn warn" type="submit">Ativar</button></form>
     <form method="post" action="/manutencao/desativar?from=/"><button class="btn" type="submit">Desativar</button></form>
   </div>
+
   <div class="card"><h3>📤 Publicação</h3>
     <div class="stat"><span>Última:</span> <b><%= publish.last_publish || '—' %></b></div>
     <form method="post" action="/publicar"><button class="btn primary" type="submit">Publicar agora</button></form>
   </div>
-</div>
-<div class='kit'>
-  <a href='/site/index.html' target='_blank'>Abrir site</a>
-  <a href='/paginas'>Gerenciar páginas</a>
-  <a href='/footer'>Editar rodapé</a>
-  <a href='/header'>Editar cabeçalho</a>
 </div>

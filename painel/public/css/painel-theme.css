@@ -1,0 +1,119 @@
+:root{
+  --brand:#c90000;
+  --bg:#f6f8fc;
+  --card:#ffffff;
+  --line:#e5e7eb;
+  --muted:#6b7280;
+  --text:#111827;
+  --blue:#2563eb;
+  --panel-radius:14px;
+  --panel-font:Inter, system-ui, sans-serif;
+  --panel-card-padding:16px;
+  --panel-btn-padding-y:9px;
+  --panel-btn-padding-x:13px;
+  --panel-menu-size:14px;
+}
+
+body{
+  font-family:var(--panel-font);
+}
+
+.card{
+  border-radius:var(--panel-radius);
+  padding:var(--panel-card-padding);
+}
+
+.btn{
+  border-radius:calc(var(--panel-radius) - 2px);
+  padding:var(--panel-btn-padding-y) var(--panel-btn-padding-x);
+}
+
+.topbar nav a{
+  font-size:var(--panel-menu-size);
+}
+
+input[type="text"],
+input[type="url"],
+input[type="number"],
+select,
+textarea{
+  background:var(--card) !important;
+  color:var(--text) !important;
+  border-color:var(--line) !important;
+}
+
+input[type="color"]{
+  background:var(--card) !important;
+  border:1px solid var(--line) !important;
+  border-radius:8px;
+  padding:2px;
+}
+
+input::placeholder,
+textarea::placeholder{
+  color:var(--muted) !important;
+  opacity:.85;
+}
+
+label,
+.card p,
+.marketing-ia-subtitle,
+.gallery-help,
+.history-item span{
+  color:var(--muted) !important;
+}
+
+.table th,
+.table td,
+.quality-table-wrap th:last-child,
+.quality-table-wrap td:last-child{
+  background:var(--card) !important;
+  color:var(--text) !important;
+  border-color:var(--line) !important;
+}
+
+.table th{
+  color:var(--text) !important;
+}
+
+.notice{
+  background:color-mix(in srgb, var(--blue, #2563eb) 12%, var(--card)) !important;
+  color:var(--text) !important;
+  border-color:var(--line) !important;
+}
+
+.badge,
+.btn.ghost,
+.btn:not(.primary):not(.secondary):not(.warn),
+.kit a,
+.palette-btn,
+.marketing-tab-btn,
+.marketing-quick-buttons button{
+  background:color-mix(in srgb, var(--card) 88%, var(--text)) !important;
+  color:var(--text) !important;
+  border-color:var(--line) !important;
+}
+
+.personalizacao-tab{
+  background:var(--card) !important;
+  color:var(--text) !important;
+  border-color:var(--line) !important;
+}
+
+.personalizacao-tab.active{
+  background:var(--brand) !important;
+  color:#fff !important;
+  border-color:var(--brand) !important;
+}
+
+.history-item,
+.marketing-result-card,
+.marketing-list-item{
+  background:var(--card) !important;
+  color:var(--text) !important;
+  border-color:var(--line) !important;
+}
+
+.marketing-list-text{
+  color:var(--text) !important;
+}

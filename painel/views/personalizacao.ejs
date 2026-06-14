@@ -1,0 +1,140 @@
+<% layout('layout') -%>
+
+<div class="personalizacao-page">
+  <div class="personalizacao-header">
+    <div>
+      <h2>🎨 Personalização</h2>
+      <p>Controle separado para design do site, design do painel e CSS avançado.</p>
+    </div>
+    <form method="post" action="/personalizacao/restaurar-padrao" onsubmit="return confirm('Restaurar as cores e tamanhos padrão?')">
+      <button class="btn warn" type="submit">↩️ Restaurar padrão</button>
+    </form>
+  </div>
+
+  <div class="personalizacao-layout">
+    <div class="personalizacao-controls">
+      <div class="personalizacao-tabs">
+        <button class="personalizacao-tab <%= activeTab === 'site' ? 'active' : '' %>" type="button" data-personalizacao-tab="site">🌐 Site</button>
+        <button class="personalizacao-tab <%= activeTab === 'painel' ? 'active' : '' %>" type="button" data-personalizacao-tab="painel">🖥️ Painel</button>
+        <button class="personalizacao-tab <%= activeTab === 'avancado' ? 'active' : '' %>" type="button" data-personalizacao-tab="avancado">🧶 Avançado</button>
+        <button class="personalizacao-tab <%= activeTab === 'historico' ? 'active' : '' %>" type="button" data-personalizacao-tab="historico">📝 Histórico</button>
+      </div>
+
+      <section class="personalizacao-panel <%= activeTab === 'site' ? 'active' : '' %>" data-personalizacao-panel="site">
+        <div class="card">
+          <h3>Design do site</h3>
+          <p class="notice">Altera o arquivo <code>css/theme-overrides.css</code> do site público.</p>
+
+          <div class="palette-row">
+            <button type="button" class="palette-btn" data-site-palette='{"primary":"#c90000","text":"#111827","bg":"#ffffff","radius":"10","font":"Inter, system-ui, sans-serif"}'>Vermelho</button>
+            <button type="button" class="palette-btn" data-site-palette='{"primary":"#2563eb","text":"#0f172a","bg":"#ffffff","radius":"14","font":"Inter, system-ui, sans-serif"}'>Azul moderno</button>
+            <button type="button" class="palette-btn" data-site-palette='{"primary":"#ef4444","text":"#f9fafb","bg":"#111827","radius":"14","font":"Inter, system-ui, sans-serif"}'>Escuro</button>
+            <button type="button" class="palette-btn" data-site-palette='{"primary":"#b91c1c","text":"#111827","bg":"#f8fafc","radius":"18","font":"Inter, system-ui, sans-serif"}'>Claro premium</button>
+          </div>
+
+          <form method="post" action="/personalizacao/site/salvar" class="row personalizacao-form" data-preview-scope="site">
+            <div><label>Cor primária</label><input type="color" name="primary" value="<%= siteTheme.primary %>"></div>
+            <div><label>Cor do texto</label><input type="color" name="text" value="<%= siteTheme.text %>"></div>
+            <div><label>Cor de fundo</label><input type="color" name="bg" value="<%= siteTheme.bg %>"></div>
+            <div><label>Bordas / raio (px)</label><input type="number" name="radius" value="<%= siteTheme.radius %>"></div>
+            <div style="grid-column:1/-1"><label>Fonte</label><input type="text" name="font" value="<%= siteTheme.font %>"></div>
+            <div><button class="btn primary" type="submit">Salvar design do site</button></div>
+          </form>
+        </div>
+      </section>
+
+      <section class="personalizacao-panel <%= activeTab === 'painel' ? 'active' : '' %>" data-personalizacao-panel="painel">
+        <div class="card">
+          <h3>Design do painel</h3>
+          <p class="notice">Altera somente o painel administrativo, sem mexer no visual do site público.</p>
+
+          <div class="palette-row">
+            <button type="button" class="palette-btn" data-panel-palette='{"brand":"#c90000","bg":"#f6f8fc","card":"#ffffff","line":"#e5e7eb","muted":"#6b7280","text":"#111827","button":"#2563eb","radius":"14","cardPadding":"16","buttonPaddingY":"9","buttonPaddingX":"13","menuSize":"14"}'>Vermelho</button>
+            <button type="button" class="palette-btn" data-panel-palette='{"brand":"#2563eb","bg":"#f8fafc","card":"#ffffff","line":"#dbeafe","muted":"#64748b","text":"#0f172a","button":"#0ea5e9","radius":"16","cardPadding":"16","buttonPaddingY":"9","buttonPaddingX":"14","menuSize":"14"}'>Azul moderno</button>
+            <button type="button" class="palette-btn" data-panel-palette='{"brand":"#111827","bg":"#0f172a","card":"#111827","line":"#334155","muted":"#cbd5e1","text":"#f8fafc","button":"#ef4444","radius":"14","cardPadding":"16","buttonPaddingY":"9","buttonPaddingX":"13","menuSize":"14"}'>Escuro</button>
+            <button type="button" class="palette-btn" data-panel-palette='{"brand":"#991b1b","bg":"#f9fafb","card":"#ffffff","line":"#e5e7eb","muted":"#6b7280","text":"#111827","button":"#b91c1c","radius":"18","cardPadding":"18","buttonPaddingY":"10","buttonPaddingX":"15","menuSize":"14"}'>Claro premium</button>
+          </div>
+
+          <form method="post" action="/personalizacao/painel/salvar" class="row personalizacao-form" data-preview-scope="painel">
+            <div><label>Cor do menu</label><input type="color" name="brand" value="<%= panelTheme.brand %>"></div>
+            <div><label>Fundo do painel</label><input type="color" name="bg" value="<%= panelTheme.bg %>"></div>
+            <div><label>Cards</label><input type="color" name="card" value="<%= panelTheme.card %>"></div>
+            <div><label>Linhas / bordas</label><input type="color" name="line" value="<%= panelTheme.line %>"></div>
+            <div><label>Texto secundário</label><input type="color" name="muted" value="<%= panelTheme.muted %>"></div>
+            <div><label>Texto principal</label><input type="color" name="text" value="<%= panelTheme.text %>"></div>
+            <div><label>Botão principal</label><input type="color" name="button" value="<%= panelTheme.button %>"></div>
+            <div><label>Bordas / raio (px)</label><input type="number" name="radius" value="<%= panelTheme.radius %>"></div>
+            <div style="grid-column:1/-1"><label>Fonte do painel</label><input type="text" name="font" value="<%= panelTheme.font %>"></div>
+            <div><label>Tamanho dos cards</label><input type="number" name="cardPadding" value="<%= panelTheme.cardPadding %>"></div>
+            <div><label>Altura dos botões</label><input type="number" name="buttonPaddingY" value="<%= panelTheme.buttonPaddingY %>"></div>
+            <div><label>Largura dos botões</label><input type="number" name="buttonPaddingX" value="<%= panelTheme.buttonPaddingX %>"></div>
+            <div><label>Tamanho do menu</label><input type="number" name="menuSize" value="<%= panelTheme.menuSize %>"></div>
+            <div><button class="btn primary" type="submit">Salvar design do painel</button></div>
+          </form>
+        </div>
+      </section>
+
+      <section class="personalizacao-panel <%= activeTab === 'avancado' ? 'active' : '' %>" data-personalizacao-panel="avancado">
+        <div class="card">
+          <h3>CSS avançado</h3>
+          <p class="notice">Use somente para ajustes finos. Antes de salvar, o sistema cria backup do <code>style.css</code>.</p>
+          <details>
+            <summary>Mostrar editor avançado</summary>
+            <form method="post" action="/personalizacao/css/salvar">
+              <label>css/style.css</label>
+              <textarea class="css-avancado-textarea" name="css"><%- css %></textarea>
+              <div style="margin-top:10px">
+                <button class="btn primary" type="submit">Salvar CSS avançado</button>
+              </div>
+            </form>
+          </details>
+        </div>
+      </section>
+
+      <section class="personalizacao-panel <%= activeTab === 'historico' ? 'active' : '' %>" data-personalizacao-panel="historico">
+        <div class="card">
+          <h3>Histórico de alterações</h3>
+          <% if (!history || !history.length) { %>
+            <p>Nenhuma alteração registrada ainda.</p>
+          <% } %>
+          <% if (history && history.length) { %>
+            <div class="history-list">
+              <% history.forEach(item => { %>
+                <div class="history-item">
+                  <b><%= item.action %></b>
+                  <span><%= item.date %></span>
+                </div>
+              <% }) %>
+            </div>
+          <% } %>
+        </div>
+      </section>
+    </div>
+
+    <aside class="personalizacao-preview">
+      <div class="preview-sticky">
+        <h3>👀 Prévia em tempo real</h3>
+        <div class="preview-frame" id="personalizacaoPreview">
+          <div class="preview-topbar">
+            <b>Painel</b>
+            <span>Produtos</span>
+            <span>Marketing</span>
+            <span>SEO</span>
+          </div>
+          <div class="preview-body">
+            <div class="preview-card">
+              <h4>Card de exemplo</h4>
+              <p>Veja cores, fonte, bordas e tamanhos antes de salvar.</p>
+              <button class="preview-button" type="button">Botão principal</button>
+            </div>
+            <div class="preview-mini-grid">
+              <div></div><div></div><div></div>
+            </div>
+          </div>
+        </div>
+
+        <a class="btn secondary preview-site-link" href="/site/index.html" target="_blank">👁️ Abrir site</a>
+      </div>
+    </aside>
+  </div>
+</div>

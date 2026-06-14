@@ -1,0 +1,81 @@
+# Marketing IA
+
+Módulo responsável pela geração de conteúdo de marketing utilizando IA.
+
+Objetivo:
+Reduzir o tempo gasto na criação de conteúdo para:
+
+- Stories
+- Grupos WhatsApp
+- Instagram/Facebook
+- Reels
+- Campanhas
+
+Estrutura de Arquivos
+routes/marketing.js
+
+Responsável por:
+
+Rotas do módulo
+Comunicação com Gemini
+Histórico
+Referências
+Configurações
+views/marketing.ejs
+
+Responsável por:
+
+Interface visual
+Botões
+Histórico
+Referências
+data/marketing-history.json
+
+Armazena:
+
+Conteúdos gerados
+Data
+Prompt utilizado
+data/marketing-references.json
+
+Armazena:
+
+Referências cadastradas
+Categoria
+Data
+Rotas
+GET /marketing
+
+Carrega a tela.
+
+POST /marketing/generate
+
+Gera conteúdo.
+
+POST /marketing/references/add
+
+Adiciona referência.
+
+POST /marketing/references/delete
+
+Remove referência.
+
+POST /marketing/history/clear
+
+Limpa histórico.
+
+Roadmap
+V1
+Gerador
+Referências
+Histórico
+Gemini
+V2
+Melhorias visuais
+Copiar
+Regenerar
+V3
+Story otimizado
+Enquete
+Roteiro Reels
+Botões IA

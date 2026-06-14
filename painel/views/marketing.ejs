@@ -3,8 +3,9 @@
   <div class="marketing-ia-header">
     <div>
       <h3>✨ Marketing IA</h3>
-      <div class="marketing-ia-subtitle">Crie textos para Story/Status, grupos, Instagram/Facebook e ideias de foto/vídeo em poucos segundos.</div>
+      <div class="marketing-ia-subtitle">Crie Story, enquete, grupos, Instagram/Facebook e roteiro de Reels em poucos segundos.</div>
     </div>
+	
     <% if (!hasGeminiKey) { %>
       <span class="badge">⚠️ Gemini não configurado</span>
     <% } else { %>
@@ -24,21 +25,48 @@
     <button class="marketing-tab-btn active" type="button" data-tab="gerador">🚀 Gerador</button>
     <button class="marketing-tab-btn" type="button" data-tab="referencias">🧠 Referências</button>
     <button class="marketing-tab-btn" type="button" data-tab="historico">📜 Histórico</button>
+    <button class="marketing-tab-btn" type="button" data-tab="chat">💬 Chat IA</button>
+    <button class="marketing-tab-btn" type="button" data-tab="campanhas">💡 Campanhas</button>
+    <button class="marketing-tab-btn" type="button" data-tab="calendario">🗓️ Calendário</button>
+    <button class="marketing-tab-btn" type="button" data-tab="configuracoes">⚙️ Configurações</button>
   </div>
 
   <section class="marketing-tab-panel active" id="tab-gerador">
     <div class="marketing-prompt-box">
+      <div class="marketing-product-box">
+        <label>Produto cadastrado</label>
+        <div class="marketing-product-row">
+          <select id="marketing-product-select">
+            <option value="">Selecionar produto do painel...</option>
+            <% (marketingProducts || []).forEach(product => { %>
+              <option value="<%= product.id %>"><%= product.name %><%= product.category ? ' — ' + product.category : '' %></option>
+            <% }) %>
+          </select>
+          <button class="btn" type="button" id="marketing-use-product-btn">📦 Usar produto</button>
+          <button class="btn" type="button" id="marketing-clear-product-btn">Limpar produto</button>
+        </div>
+        <div class="marketing-product-preview" id="marketing-product-preview" style="display:none;"></div>
+      </div>
+
       <label>O que deseja criar?</label>
       <textarea id="marketing-prompt" placeholder="Ex.: Samsung A16 128GB preto. Quero divulgar nos stories e grupos, destacar garantia, parcelamento e envio rápido."></textarea>
 
-      <div class="marketing-quick-buttons" id="marketing-quick-buttons">
+      <div class="marketing-template-header">
+        <div>
+          <strong>⚡ Templates rápidos avançados</strong>
+          <span>Escolha um modelo e ele preenche o pedido automaticamente.</span>
+        </div>
+        <button class="btn" type="button" id="marketing-clear-template-btn">Limpar texto</button>
+      </div>
+
+      <div class="marketing-quick-buttons advanced" id="marketing-quick-buttons">
         <% (quickButtons || []).forEach(btn => { %>
-          <button type="button" data-add="<%= btn.text %>"><%= btn.label %></button>
+          <button type="button" data-add="<%= btn.text %>" title="<%= btn.text %>"><%= btn.label %></button>
         <% }) %>
       </div>
 
       <details class="marketing-quick-editor">
-        <summary>⚙️ Editar botões rápidos</summary>
+        <summary>⚙️ Adicionar ou editar templates rápidos avançados</summary>
         <form method="post" action="/marketing/quick-buttons/save">
           <div class="marketing-quick-editor-list">
             <% (quickButtons || []).forEach(btn => { %>
@@ -62,11 +90,11 @@
           <div class="marketing-quick-editor-item new">
             <div>
               <label>Novo botão</label>
-              <input type="text" name="newLabel" placeholder="Ex.: 🔥 Queima de estoque">
+              <input type="text" name="newLabel" placeholder="Ex.: 🧨 Queima de estoque">
             </div>
             <div>
               <label>Nova frase rápida</label>
-              <input type="text" name="newText" placeholder="Ex.: Quero divulgar uma queima de estoque com urgência e emojis.">
+              <input type="text" name="newText" placeholder="Ex.: Criar campanha de queima de estoque com urgência, sem inventar quantidade.">
             </div>
           </div>
 
@@ -83,12 +111,33 @@
     </div>
 
     <div class="marketing-results-grid" id="marketing-results" style="display:none;">
+      <div class="marketing-result-card full marketing-copy-all-card">
+        <div>
+          <div class="marketing-result-title">📋 Copiar tudo</div>
+          <p style="margin:0;color:#6b7280;font-size:13px;">Copia Story, Enquete, Grupos, Instagram/Facebook e Reels em um clique.</p>
+        </div>
+        <button class="btn primary" type="button" id="marketing-copy-all-btn">📋 Copiar tudo</button>
+      </div>
+
       <div class="marketing-result-card">
-        <div class="marketing-result-title">📱 Story / Status WhatsApp</div>
+        <div class="marketing-result-title">📱 Story</div>
         <textarea id="result-story"></textarea>
         <div class="marketing-card-actions">
           <button class="btn" type="button" data-copy="result-story">📋 Copiar</button>
-          <button class="btn" type="button" data-rewrite="result-story" data-channel="Story/Status">✨ Melhorar/Reformular</button>
+          <% (actionButtons || []).forEach(action => { %>
+            <button class="btn" type="button" data-rewrite="result-story" data-channel="Story" data-action="<%= action.instruction %>"><%= action.label %></button>
+          <% }) %>
+        </div>
+      </div>
+
+      <div class="marketing-result-card">
+        <div class="marketing-result-title">📊 Enquete / Interação Story</div>
+        <textarea id="result-enquete"></textarea>
+        <div class="marketing-card-actions">
+          <button class="btn" type="button" data-copy="result-enquete">📋 Copiar</button>
+          <% (actionButtons || []).forEach(action => { %>
+            <button class="btn" type="button" data-rewrite="result-enquete" data-channel="Enquete Story" data-action="<%= action.instruction %>"><%= action.label %></button>
+          <% }) %>
         </div>
       </div>
 
@@ -97,7 +146,9 @@
         <textarea id="result-grupo"></textarea>
         <div class="marketing-card-actions">
           <button class="btn" type="button" data-copy="result-grupo">📋 Copiar</button>
-          <button class="btn" type="button" data-rewrite="result-grupo" data-channel="Grupos WhatsApp">✨ Melhorar/Reformular</button>
+          <% (actionButtons || []).forEach(action => { %>
+            <button class="btn" type="button" data-rewrite="result-grupo" data-channel="Grupos WhatsApp" data-action="<%= action.instruction %>"><%= action.label %></button>
+          <% }) %>
         </div>
       </div>
 
@@ -106,23 +157,30 @@
         <textarea id="result-instagram"></textarea>
         <div class="marketing-card-actions">
           <button class="btn" type="button" data-copy="result-instagram">📋 Copiar</button>
-          <button class="btn" type="button" data-rewrite="result-instagram" data-channel="Instagram/Facebook">✨ Melhorar/Reformular</button>
+          <% (actionButtons || []).forEach(action => { %>
+            <button class="btn" type="button" data-rewrite="result-instagram" data-channel="Instagram/Facebook" data-action="<%= action.instruction %>"><%= action.label %></button>
+          <% }) %>
         </div>
       </div>
 
-      <div class="marketing-result-card">
-        <div class="marketing-result-title">🎥 Ideia de foto/vídeo</div>
-        <textarea id="result-videoIdea"></textarea>
+      <div class="marketing-result-card full">
+        <div class="marketing-result-title">🎥 Roteiro Reels</div>
+        <textarea id="result-reels"></textarea>
         <div class="marketing-card-actions">
-          <button class="btn" type="button" data-copy="result-videoIdea">📋 Copiar</button>
-          <button class="btn" type="button" data-rewrite="result-videoIdea" data-channel="Ideia de foto/vídeo">✨ Melhorar/Reformular</button>
+          <button class="btn" type="button" data-copy="result-reels">📋 Copiar</button>
+          <% (actionButtons || []).forEach(action => { %>
+            <button class="btn" type="button" data-rewrite="result-reels" data-channel="Roteiro Reels" data-action="<%= action.instruction %>"><%= action.label %></button>
+          <% }) %>
         </div>
       </div>
 
       <div class="marketing-result-card full">
         <div class="marketing-result-title">🔄 Gerar outra versão</div>
-        <p style="margin:0 0 10px 0;color:#6b7280;font-size:13px;">Use este botão para refazer todos os textos com o mesmo pedido principal.</p>
-        <button class="btn primary" type="button" id="marketing-regenerate-btn">🔄 Gerar novamente tudo</button>
+        <p style="margin:0 0 10px 0;color:#6b7280;font-size:13px;">Use estes botões para reaproveitar, favoritar ou refazer a geração atual.</p>
+        <div class="marketing-card-actions">
+          <button class="btn primary" type="button" id="marketing-regenerate-btn">🔄 Gerar novamente tudo</button>
+          <button class="btn" type="button" id="marketing-current-favorite-btn">⭐ Favoritar</button>
+        </div>
       </div>
     </div>
   </section>
@@ -160,6 +218,7 @@
   <section class="marketing-tab-panel" id="tab-historico">
     <div class="marketing-actions-row" style="margin-bottom:12px;">
       <input type="text" id="marketing-history-search" placeholder="Buscar no histórico..." style="max-width:360px;">
+      <button class="btn" type="button" id="marketing-show-favorites-btn" data-only-favorites="0">⭐ Ver favoritos</button>
       <form method="post" action="/marketing/history/clear" onsubmit="return confirm('Limpar todo o histórico?')">
         <button class="btn" type="submit">🗑️ Limpar todo histórico</button>
       </form>
@@ -169,27 +228,271 @@
 
     <div class="marketing-list" id="marketing-history-list" style="<%= history.length ? '' : 'display:none;' %>">
       <% (history || []).forEach(item => { %>
-        <div class="marketing-list-item marketing-history-item" data-search="<%= ((item.prompt || '') + ' ' + (item.output?.story || '') + ' ' + (item.output?.grupo || '') + ' ' + (item.output?.instagram || '')).toLowerCase() %>">
+        <div class="marketing-list-item marketing-history-item <%= item.favorite ? 'is-favorite' : '' %>" data-id="<%= item.id %>" data-favorite="<%= item.favorite ? '1' : '0' %>" data-feedback="<%= item.feedback || '' %>" data-search="<%= ((item.prompt || '') + ' ' + (item.output?.story || '') + ' ' + (item.output?.enquete || '') + ' ' + (item.output?.grupo || '') + ' ' + (item.output?.instagram || '') + ' ' + (item.output?.reels || '')).toLowerCase() %>">
+          <script type="application/json" id="history-output-<%= item.id %>"><%- JSON.stringify(item.output || {}).replace(/</g, '\\u003c') %></script>
           <div class="marketing-list-meta">
-            <strong>📝 <%= item.prompt %></strong>
-            <div style="display:flex;gap:8px;align-items:center;">
+            <strong><span class="marketing-fav-star"><%= item.favorite ? '⭐' : '📝' %></span> <%= item.prompt %></strong>
+            <div class="marketing-history-top-actions">
               <span><%= new Date(item.createdAt).toLocaleString('pt-BR') %></span>
+              <button class="btn" type="button" data-history-reuse="<%= item.id %>" data-prompt="<%= item.prompt %>">♻️ Reutilizar</button>
+              <button class="btn" type="button" data-copy-history-all="<%= item.id %>">📋 Copiar tudo</button>
+              <button class="btn" type="button" data-history-favorite="<%= item.id %>"><%= item.favorite ? '⭐ Favorito' : '☆ Favoritar' %></button>
               <form method="post" action="/marketing/history/delete" onsubmit="return confirm('Excluir este item do histórico?')">
                 <input type="hidden" name="id" value="<%= item.id %>">
                 <button class="btn" type="submit">Excluir</button>
               </form>
             </div>
           </div>
-          <div class="marketing-list-text"><strong>Story/Status:</strong><br><%= item.output?.story || '' %></div>
-          <div class="marketing-list-text"><strong>Grupo:</strong><br><%= item.output?.grupo || '' %></div>
-          <div class="marketing-list-text"><strong>Instagram/Facebook:</strong><br><%= item.output?.instagram || '' %></div>
+
+          <div class="marketing-history-copy-grid">
+            <div class="marketing-list-text" data-history-text="story"><strong>Story:</strong><br><%= item.output?.story || '' %></div>
+            <button class="btn" type="button" data-copy-history="story">📋 Copiar Story</button>
+
+            <div class="marketing-list-text" data-history-text="grupo"><strong>Grupo:</strong><br><%= item.output?.grupo || '' %></div>
+            <button class="btn" type="button" data-copy-history="grupo">📋 Copiar Grupo</button>
+
+            <div class="marketing-list-text" data-history-text="instagram"><strong>Instagram/Facebook:</strong><br><%= item.output?.instagram || '' %></div>
+            <button class="btn" type="button" data-copy-history="instagram">📋 Copiar Instagram</button>
+
+            <div class="marketing-list-text" data-history-text="enquete"><strong>Enquete:</strong><br><%= item.output?.enquete || '' %></div>
+            <button class="btn" type="button" data-copy-history="enquete">📋 Copiar Enquete</button>
+
+            <div class="marketing-list-text" data-history-text="reels"><strong>Reels:</strong><br><%= item.output?.reels || item.output?.videoIdea || '' %></div>
+            <button class="btn" type="button" data-copy-history="reels">📋 Copiar Reels</button>
+          </div>
         </div>
       <% }) %>
+    </div>
+  </section>
+
+
+  <section class="marketing-tab-panel" id="tab-chat">
+    <div class="marketing-ai-tool-card marketing-chat-card">
+      <div class="marketing-chat-head">
+        <div>
+          <h3>💬 Chat IA interno</h3>
+          <p>Agora o chat mantém o contexto da conversa e usa as configurações da empresa como base.</p>
+        </div>
+        <button class="btn" type="button" id="marketing-chat-clear-btn">🧹 Limpar Chat</button>
+      </div>
+
+      <div class="marketing-chat-window" id="marketing-chat-window">
+        <div class="marketing-chat-empty">Faça uma pergunta para começar. Ex.: “O que posso postar hoje no domingo?”</div>
+      </div>
+
+      <div class="marketing-chat-typing" id="marketing-chat-typing" style="display:none;">✨ IA digitando...</div>
+
+      <textarea id="marketing-chat-message" placeholder="Ex.: Me dê uma ideia simples para vender mais iPhones essa semana nos stories e grupos."></textarea>
+      <div class="marketing-actions-row">
+        <button class="btn primary" type="button" id="marketing-chat-send-btn">💬 Enviar pergunta</button>
+        <button class="btn" type="button" id="marketing-chat-copy-btn" style="display:none;">📋 Copiar última resposta</button>
+        <span class="marketing-status" id="marketing-chat-status"></span>
+      </div>
+      <div class="marketing-ai-output" id="marketing-chat-output" style="display:none;"></div>
+    </div>
+  </section>
+
+  <section class="marketing-tab-panel" id="tab-campanhas">
+    <div class="marketing-ai-tool-card">
+      <h3>💡 Sugestões automáticas de campanhas</h3>
+      <p>A IA usa suas configurações, produtos cadastrados e histórico recente para sugerir campanhas fáceis de executar.</p>
+      <textarea id="marketing-campaign-focus" placeholder="Ex.: Quero campanhas para vender smartphones, acessórios e divulgar 60x no boleto."></textarea>
+      <div class="marketing-actions-row">
+        <button class="btn primary" type="button" id="marketing-campaign-btn">💡 Gerar sugestões</button>
+        <button class="btn" type="button" id="marketing-campaign-copy-btn" style="display:none;">📋 Copiar sugestões</button>
+        <span class="marketing-status" id="marketing-campaign-status"></span>
+      </div>
+      <div class="marketing-ai-output" id="marketing-campaign-output" style="display:none;"></div>
+    </div>
+  </section>
+
+  <section class="marketing-tab-panel" id="tab-calendario">
+    <div class="marketing-ai-tool-card">
+      <h3>🗓️ Calendário de conteúdo</h3>
+      <p>Gere um plano simples para postar todos os dias com Story, Reels, Status, grupos e feed.</p>
+      <div class="row">
+        <div>
+          <label>Quantidade de dias</label>
+          <select id="marketing-calendar-days">
+            <option value="7">7 dias</option>
+            <option value="14">14 dias</option>
+            <option value="30">30 dias</option>
+          </select>
+        </div>
+      </div>
+      <textarea id="marketing-calendar-focus" placeholder="Ex.: Calendário para uma semana focado em celulares, acessórios, assistência e frete grátis regional."></textarea>
+      <div class="marketing-actions-row">
+        <button class="btn primary" type="button" id="marketing-calendar-btn">🗓️ Gerar calendário</button>
+        <button class="btn" type="button" id="marketing-calendar-copy-btn" style="display:none;">📋 Copiar calendário</button>
+        <span class="marketing-status" id="marketing-calendar-status"></span>
+      </div>
+      <div class="marketing-ai-output" id="marketing-calendar-output" style="display:none;"></div>
+    </div>
+  </section>
+
+  <section class="marketing-tab-panel" id="tab-configuracoes">
+  <div class="marketing-config-grid">
+    <div class="marketing-config-card">
+      <h3>🏢 Dados da empresa</h3>
+
+      <form method="post" action="/marketing/settings/save">
+        <div class="row">
+          <div>
+            <label>Nome da empresa</label>
+            <input type="text" name="companyName" value="<%= marketingSettings.companyName || '' %>" placeholder="Ex.: Quality Celulares">
+          </div>
+
+          <div>
+            <label>Segmento</label>
+            <input type="text" name="segment" value="<%= marketingSettings.segment || '' %>" placeholder="Ex.: Eletrônicos e assistência técnica">
+          </div>
+        </div>
+
+        <div class="row" style="margin-top:10px;">
+          <div>
+            <label>Cidade / região</label>
+            <input type="text" name="city" value="<%= marketingSettings.city || '' %>" placeholder="Ex.: Saldanha Marinho - RS">
+          </div>
+
+          <div>
+            <label>Personalidade opcional</label>
+
+            <select name="personality">
+              <option value="automatico" <%= marketingSettings.personality === 'automatico' ? 'selected' : '' %>>Automático</option>
+              <option value="autoridade" <%= marketingSettings.personality === 'autoridade' ? 'selected' : '' %>>Autoridade</option>
+              <option value="urgencia" <%= marketingSettings.personality === 'urgencia' ? 'selected' : '' %>>Urgência/Oportunidade</option>
+              <option value="consultivo" <%= marketingSettings.personality === 'consultivo' ? 'selected' : '' %>>Consultivo/Amigável</option>
+              <option value="premium" <%= marketingSettings.personality === 'premium' ? 'selected' : '' %>>Premium</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="row" style="margin-top:10px;">
+          <div>
+            <label>WhatsApp</label>
+            <input type="text" name="whatsapp" value="<%= marketingSettings.whatsapp || '' %>" placeholder="Opcional">
+          </div>
+
+          <div>
+            <label>Instagram</label>
+            <input type="text" name="instagram" value="<%= marketingSettings.instagram || '' %>" placeholder="Opcional">
+          </div>
+        </div>
+
+        <div style="margin-top:10px;">
+          <label>Site</label>
+          <input type="text" name="site" value="<%= marketingSettings.site || '' %>" placeholder="Opcional">
+        </div>
+
+        <div style="margin-top:10px;">
+          <label>Produtos principais</label>
+
+          <textarea name="mainProducts" placeholder="Ex.: iPhone, Samsung, Xiaomi, JBL, PlayStation, notebooks..."><%= marketingSettings.mainProducts || '' %></textarea>
+        </div>
+
+        <div style="margin-top:10px;">
+          <label>Serviços principais</label>
+
+          <textarea name="mainServices" placeholder="Ex.: troca de tela, bateria, formatação, assistência notebook..."><%= marketingSettings.mainServices || '' %></textarea>
+        </div>
+
+        <button class="btn primary" type="submit" style="margin-top:12px;">
+          💾 Salvar configurações
+        </button>
+      </form>
+
+    </div>
+
+      <div class="marketing-config-card">
+        <h3>⚡ Ações IA personalizadas</h3>
+        <p style="color:#6b7280;font-size:13px;margin-top:0;">Esses botões aparecem em todos os cards gerados. Você pode criar ações como 😂 Mais divertido, 💰 Mais premium ou ⚡ Mais agressivo.</p>
+
+        <form method="post" action="/marketing/action-buttons/save">
+          <div class="marketing-quick-editor-list">
+            <% (actionButtons || []).forEach(action => { %>
+              <div class="marketing-action-editor-item">
+                <input type="hidden" name="id" value="<%= action.id %>">
+                <div>
+                  <label>Nome do botão</label>
+                  <input type="text" name="label" value="<%= action.label %>" placeholder="Ex.: 😂 Mais divertido">
+                </div>
+                <div>
+                  <label>Instrução da IA</label>
+                  <input type="text" name="instruction" value="<%= action.instruction %>" placeholder="Ex.: Deixe mais descontraído.">
+                </div>
+                <label class="marketing-remove-check">
+                  <input type="checkbox" name="removeId" value="<%= action.id %>"> Excluir
+                </label>
+              </div>
+            <% }) %>
+          </div>
+
+          <div class="marketing-action-editor-item new">
+            <div>
+              <label>Novo botão</label>
+              <input type="text" name="newLabel" placeholder="Ex.: 😂 Mais divertido">
+            </div>
+            <div>
+              <label>Nova instrução</label>
+              <input type="text" name="newInstruction" placeholder="Ex.: Deixe o texto mais animado, leve e divertido.">
+            </div>
+          </div>
+
+          <button class="btn primary" type="submit">💾 Salvar ações IA</button>
+        </form>
+      </div>
     </div>
   </section>
 </div>
 
 <style>
+.marketing-template-header{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+  margin:12px 0 8px;
+}
+
+.marketing-template-header strong{
+  display:block;
+  color:#111827;
+  font-size:14px;
+}
+
+.marketing-template-header span{
+  display:block;
+  color:#6b7280;
+  font-size:12px;
+  margin-top:2px;
+}
+
+.marketing-quick-buttons.advanced{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  padding:10px;
+  border:1px solid #e5e7eb;
+  border-radius:14px;
+  background:#f9fafb;
+}
+
+.marketing-quick-buttons.advanced button{
+  border:1px solid #d1d5db;
+  background:#fff;
+  border-radius:999px;
+  padding:8px 11px;
+  font-weight:800;
+  cursor:pointer;
+  transition:.15s ease;
+}
+
+.marketing-quick-buttons.advanced button:hover{
+  transform:translateY(-1px);
+  border-color:#c90000;
+  box-shadow:0 5px 14px rgba(17,24,39,.10);
+}
+
 .marketing-quick-editor{
   margin-top:12px;
   border:1px solid #e5e7eb;
@@ -211,14 +514,16 @@
   margin-top:12px;
 }
 
-.marketing-quick-editor-item{
+.marketing-quick-editor-item,
+.marketing-action-editor-item{
   display:grid;
   grid-template-columns:220px 1fr 90px;
   gap:10px;
   align-items:end;
 }
 
-.marketing-quick-editor-item.new{
+.marketing-quick-editor-item.new,
+.marketing-action-editor-item.new{
   grid-template-columns:220px 1fr;
   margin:12px 0;
 }
@@ -233,22 +538,280 @@
   display:flex;
   gap:8px;
   flex-wrap:wrap;
+  margin-top:9px;
+}
+
+.marketing-card-actions .btn{
+  padding:7px 9px;
+  font-size:11px;
 }
 
 .marketing-result-card textarea{
   white-space:pre-wrap;
 }
 
-@media (max-width:800px){
-  .marketing-quick-editor-item,
-  .marketing-quick-editor-item.new{
+.marketing-config-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:14px;
+}
+
+.marketing-config-card{
+  border:1px solid #e5e7eb;
+  background:#fff;
+  border-radius:14px;
+  padding:14px;
+}
+
+.marketing-config-card h3{
+  margin-top:0;
+}
+
+
+.marketing-history-top-actions{
+  display:flex;
+  gap:8px;
+  align-items:center;
+  flex-wrap:wrap;
+  justify-content:flex-end;
+}
+
+.marketing-history-copy-grid{
+  display:grid;
+  grid-template-columns:1fr auto;
+  gap:8px;
+  align-items:start;
+}
+
+.marketing-history-copy-grid .btn{
+  white-space:nowrap;
+}
+
+.marketing-history-item.is-favorite{
+  position:relative;
+  border:2px solid #f59e0b;
+  background:linear-gradient(180deg,#fffbeb 0%,#fef3c7 100%);
+  box-shadow:0 8px 22px rgba(245,158,11,.22);
+}
+
+.marketing-history-item.is-favorite::before{
+  content:'⭐ FAVORITO';
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  width:max-content;
+  margin-bottom:8px;
+  padding:4px 10px;
+  border-radius:999px;
+  background:#f59e0b;
+  color:#fff;
+  font-size:11px;
+  font-weight:900;
+  letter-spacing:.3px;
+}
+
+.marketing-history-item.is-favorite .marketing-list-meta strong{
+  color:#92400e;
+}
+
+.marketing-history-item.is-favorite [data-history-favorite],
+#marketing-current-favorite-btn.is-favorite-current{
+  background:#f59e0b;
+  border-color:#d97706;
+  color:#fff;
+  font-weight:900;
+}
+
+
+.marketing-product-box{
+  border:1px solid #e5e7eb;
+  background:#f9fafb;
+  border-radius:14px;
+  padding:12px;
+  margin-bottom:12px;
+}
+
+.marketing-product-row{
+  display:grid;
+  grid-template-columns:1fr auto auto;
+  gap:8px;
+  align-items:center;
+}
+
+.marketing-product-preview{
+  margin-top:10px;
+  padding:10px;
+  border-radius:12px;
+  background:#fff;
+  color:#374151;
+  font-size:13px;
+  border:1px dashed #d1d5db;
+}
+
+.marketing-copy-all-card{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+}
+
+@media (max-width:1000px){
+  .marketing-config-grid{
     grid-template-columns:1fr;
   }
 }
+
+@media (max-width:800px){
+  .marketing-history-copy-grid,
+  .marketing-product-row{
+    grid-template-columns:1fr;
+  }
+
+  .marketing-copy-all-card{
+    align-items:flex-start;
+    flex-direction:column;
+  }
+
+  .marketing-quick-editor-item,
+  .marketing-quick-editor-item.new,
+  .marketing-action-editor-item,
+  .marketing-action-editor-item.new{
+    grid-template-columns:1fr;
+  }
+}
+
+.marketing-ai-tool-card{
+  border:1px solid #e5e7eb;
+  background:#fff;
+  border-radius:14px;
+  padding:14px;
+}
+
+.marketing-ai-tool-card h3{
+  margin:0 0 6px 0;
+}
+
+.marketing-ai-tool-card p{
+  margin:0 0 12px 0;
+  color:#6b7280;
+  font-size:13px;
+}
+
+.marketing-ai-output{
+  margin-top:12px;
+  border:1px solid #e5e7eb;
+  border-radius:14px;
+  background:#f9fafb;
+  padding:12px;
+  white-space:pre-wrap;
+  color:#111827;
+  line-height:1.5;
+}
+
+.marketing-ai-output .idea-card,
+.marketing-ai-output .calendar-card{
+  border:1px solid #e5e7eb;
+  background:#fff;
+  border-radius:12px;
+  padding:10px;
+  margin-bottom:10px;
+}
+
+.marketing-ai-output .idea-card strong,
+.marketing-ai-output .calendar-card strong{
+  display:block;
+  margin-bottom:4px;
+}
+
+.marketing-chat-head{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-start;
+  gap:12px;
+  margin-bottom:12px;
+}
+
+.marketing-chat-window{
+  border:1px solid #e5e7eb;
+  border-radius:14px;
+  background:#f9fafb;
+  padding:12px;
+  min-height:260px;
+  max-height:470px;
+  overflow:auto;
+  margin-bottom:10px;
+}
+
+.marketing-chat-empty{
+  color:#6b7280;
+  font-size:13px;
+  text-align:center;
+  padding:52px 10px;
+}
+
+.marketing-chat-message-row{
+  display:flex;
+  margin:8px 0;
+}
+
+.marketing-chat-message-row.user{
+  justify-content:flex-end;
+}
+
+.marketing-chat-message-row.model{
+  justify-content:flex-start;
+}
+
+.marketing-chat-bubble{
+  max-width:78%;
+  border-radius:16px;
+  padding:10px 12px;
+  line-height:1.5;
+  white-space:pre-wrap;
+  font-size:13px;
+  border:1px solid #e5e7eb;
+}
+
+.marketing-chat-message-row.user .marketing-chat-bubble{
+  background:#dc2626;
+  color:#fff;
+  border-color:#dc2626;
+  border-bottom-right-radius:5px;
+}
+
+.marketing-chat-message-row.model .marketing-chat-bubble{
+  background:#fff;
+  color:#111827;
+  border-bottom-left-radius:5px;
+}
+
+.marketing-chat-typing{
+  color:#6b7280;
+  font-weight:700;
+  font-size:13px;
+  margin:8px 0;
+}
+
+@media (max-width:800px){
+  .marketing-chat-head{
+    flex-direction:column;
+  }
+
+  .marketing-chat-bubble{
+    max-width:92%;
+  }
+}
+
 </style>
 
 <script>
 document.addEventListener('DOMContentLoaded', () => {
+const flashMessage = document.querySelector('.notice');
+if (flashMessage) {
+  setTimeout(() => {
+    flashMessage.style.display = 'none';
+  }, 3500);
+}
   const tabButtons = document.querySelectorAll('.marketing-tab-btn');
   const tabPanels = document.querySelectorAll('.marketing-tab-panel');
   const promptInput = document.getElementById('marketing-prompt');
@@ -260,13 +823,120 @@ document.addEventListener('DOMContentLoaded', () => {
   const resultsBox = document.getElementById('marketing-results');
   const historyList = document.getElementById('marketing-history-list');
   const historyEmpty = document.getElementById('marketing-history-empty');
+  const showFavoritesBtn = document.getElementById('marketing-show-favorites-btn');
+  const currentFavoriteBtn = document.getElementById('marketing-current-favorite-btn');
+  const productSelect = document.getElementById('marketing-product-select');
+  const useProductBtn = document.getElementById('marketing-use-product-btn');
+  const clearProductBtn = document.getElementById('marketing-clear-product-btn');
+  const productPreview = document.getElementById('marketing-product-preview');
+  const copyAllBtn = document.getElementById('marketing-copy-all-btn');
+  const clearTemplateBtn = document.getElementById('marketing-clear-template-btn');
+  const marketingProducts = <%- JSON.stringify(marketingProducts || []).replace(/</g, '\\u003c') %>;
+  const productsById = new Map((marketingProducts || []).map(product => [String(product.id), product]));
+  let currentHistoryId = null;
+
+  const chatMessage = document.getElementById('marketing-chat-message');
+  const chatSendBtn = document.getElementById('marketing-chat-send-btn');
+  const chatCopyBtn = document.getElementById('marketing-chat-copy-btn');
+  const chatStatus = document.getElementById('marketing-chat-status');
+  const chatOutput = document.getElementById('marketing-chat-output');
+  const chatWindow = document.getElementById('marketing-chat-window');
+  const chatTyping = document.getElementById('marketing-chat-typing');
+  const chatClearBtn = document.getElementById('marketing-chat-clear-btn');
+  let chatItems = [];
+  let lastChatReply = '';
+  const campaignFocus = document.getElementById('marketing-campaign-focus');
+  const campaignBtn = document.getElementById('marketing-campaign-btn');
+  const campaignCopyBtn = document.getElementById('marketing-campaign-copy-btn');
+  const campaignStatus = document.getElementById('marketing-campaign-status');
+  const campaignOutput = document.getElementById('marketing-campaign-output');
+  const calendarDays = document.getElementById('marketing-calendar-days');
+  const calendarFocus = document.getElementById('marketing-calendar-focus');
+  const calendarBtn = document.getElementById('marketing-calendar-btn');
+  const calendarCopyBtn = document.getElementById('marketing-calendar-copy-btn');
+  const calendarStatus = document.getElementById('marketing-calendar-status');
+  const calendarOutput = document.getElementById('marketing-calendar-output');
+
 
   const fields = {
     story: document.getElementById('result-story'),
+    enquete: document.getElementById('result-enquete'),
     grupo: document.getElementById('result-grupo'),
     instagram: document.getElementById('result-instagram'),
-    videoIdea: document.getElementById('result-videoIdea')
+    reels: document.getElementById('result-reels')
   };
+
+
+  function setMiniStatus(el, text, type = 'normal') {
+    if (!el) return;
+    el.textContent = text || '';
+    el.style.color = type === 'error' ? '#a40000' : '#374151';
+  }
+
+  function textFromHtml(el) {
+    return (el?.innerText || el?.textContent || '').trim();
+  }
+
+  function renderIdeas(ideas = []) {
+    return ideas.map(idea => `
+      <div class="idea-card">
+        <strong>💡 ${escapeHtml(idea.title || '')}</strong>
+        <div><b>Canal:</b> ${escapeHtml(idea.channel || '')}</div>
+        <div>${escapeHtml(idea.description || '')}</div>
+        <div><b>CTA:</b> ${escapeHtml(idea.cta || '')}</div>
+      </div>
+    `).join('');
+  }
+
+  function renderCalendar(days = []) {
+    return days.map(day => `
+      <div class="calendar-card">
+        <strong>🗓️ ${escapeHtml(day.day || '')} — ${escapeHtml(day.title || '')}</strong>
+        <div><b>Canal:</b> ${escapeHtml(day.channel || '')}</div>
+        <div><b>Objetivo:</b> ${escapeHtml(day.objective || '')}</div>
+        <div>${escapeHtml(day.content || '')}</div>
+      </div>
+    `).join('');
+  }
+
+  function renderChatMessages(items = []) {
+    if (!chatWindow) return;
+    chatWindow.innerHTML = '';
+
+    if (!items.length) {
+      chatWindow.innerHTML = '<div class="marketing-chat-empty">Faça uma pergunta para começar. Ex.: “O que posso postar hoje no domingo?”</div>';
+      return;
+    }
+
+    items.forEach(item => {
+      const row = document.createElement('div');
+      row.className = 'marketing-chat-message-row ' + (item.role === 'model' ? 'model' : 'user');
+
+      const bubble = document.createElement('div');
+      bubble.className = 'marketing-chat-bubble';
+      const text = typeof item.text === 'object' && item.text !== null
+        ? (item.text.reply || item.text.resposta || item.text.message || item.text.text || JSON.stringify(item.text))
+        : (item.text || '');
+      bubble.textContent = text;
+
+      row.appendChild(bubble);
+      chatWindow.appendChild(row);
+    });
+
+    chatWindow.scrollTop = chatWindow.scrollHeight;
+  }
+
+  async function loadChatHistory() {
+    try {
+      const res = await fetch('/marketing/chat/history', { headers: { 'Accept': 'application/json' } });
+      const json = await res.json().catch(() => ({}));
+      if (!res.ok || !json.success) return;
+      chatItems = Array.isArray(json.items) ? json.items : [];
+      lastChatReply = [...chatItems].reverse().find(item => item.role === 'model')?.text || '';
+      renderChatMessages(chatItems);
+      if (chatCopyBtn) chatCopyBtn.style.display = lastChatReply ? 'inline-flex' : 'none';
+    } catch (_) {}
+  }
 
   function setStatus(text, type = 'normal') {
     if (!statusEl) return;
@@ -283,38 +953,158 @@ document.addEventListener('DOMContentLoaded', () => {
       .replace(/'/g, '&#039;');
   }
 
+  function getOutputFromFields() {
+    return {
+      story: fields.story?.value || '',
+      enquete: fields.enquete?.value || '',
+      grupo: fields.grupo?.value || '',
+      instagram: fields.instagram?.value || '',
+      reels: fields.reels?.value || ''
+    };
+  }
+
+  function selectedProduct() {
+    if (!productSelect || !productSelect.value) return null;
+    return productsById.get(String(productSelect.value)) || null;
+  }
+
+  function updateProductPreview() {
+    const product = selectedProduct();
+    if (!productPreview) return;
+
+    if (!product) {
+      productPreview.style.display = 'none';
+      productPreview.innerHTML = '';
+      return;
+    }
+
+    const desc = product.descriptionShort || product.descriptionLong || 'Sem descrição cadastrada.';
+    productPreview.style.display = '';
+    productPreview.innerHTML = `
+      <strong>📦 ${escapeHtml(product.name || '')}</strong><br>
+      Categoria: ${escapeHtml(product.category || 'Não informada')}<br>
+      ${product.priceFormatted && product.showPrice ? 'Preço: ' + escapeHtml(product.priceFormatted) + '<br>' : ''}
+      <span>${escapeHtml(desc).slice(0, 260)}${desc.length > 260 ? '...' : ''}</span>
+    `;
+  }
+
+  function fillPromptWithProduct() {
+    const product = selectedProduct();
+    if (!product) {
+      alert('Selecione um produto cadastrado primeiro.');
+      return;
+    }
+
+    const base = `Criar divulgação para o produto cadastrado: ${product.name}.`;
+    const current = promptInput.value.trim();
+
+    if (!current) {
+      promptInput.value = base + '\nQuero textos vendedores, curtos, com emojis e CTA para chamar no WhatsApp.';
+    } else if (!current.includes(product.name)) {
+      promptInput.value = `${base}\n${current}`;
+    }
+
+    promptInput.focus();
+    updateProductPreview();
+    setStatus('📦 Produto carregado. Agora é só clicar em Gerar Conteúdo.');
+  }
+
+  function applyOutputToFields(output = {}, prompt = '') {
+    fields.story.value = output.story || '';
+    fields.enquete.value = output.enquete || '';
+    fields.grupo.value = output.grupo || '';
+    fields.instagram.value = output.instagram || '';
+    fields.reels.value = output.reels || output.videoIdea || '';
+    if (prompt) promptInput.value = prompt;
+    resultsBox.style.display = 'grid';
+    if (regenerateTopBtn) regenerateTopBtn.style.display = 'inline-flex';
+    document.querySelector('[data-tab="gerador"]')?.click();
+    setStatus('♻️ Geração antiga carregada. Você pode editar, copiar ou gerar nova versão.');
+  }
+
+  function safeJsonForScript(obj) {
+    return JSON.stringify(obj || {}).replace(/</g, '\\u003c');
+  }
+
   function addHistoryItem(item) {
     if (!item || !historyList) return;
 
+    currentHistoryId = item.id || null;
     if (historyEmpty) historyEmpty.style.display = 'none';
     historyList.style.display = '';
 
     const output = item.output || {};
-    const search = `${item.prompt || ''} ${output.story || ''} ${output.grupo || ''} ${output.instagram || ''}`.toLowerCase();
+    const search = `${item.prompt || ''} ${output.story || ''} ${output.enquete || ''} ${output.grupo || ''} ${output.instagram || ''} ${output.reels || ''}`.toLowerCase();
     const div = document.createElement('div');
     div.className = 'marketing-list-item marketing-history-item';
+    div.dataset.id = item.id || '';
+    div.dataset.favorite = item.favorite ? '1' : '0';
+    div.dataset.feedback = item.feedback || '';
     div.dataset.search = search;
 
     const createdAt = item.createdAt ? new Date(item.createdAt).toLocaleString('pt-BR') : new Date().toLocaleString('pt-BR');
 
     div.innerHTML = `
+      <script type="application/json" id="history-output-${escapeHtml(item.id || '')}">${safeJsonForScript(output)}<\/script>
       <div class="marketing-list-meta">
-        <strong>📝 ${escapeHtml(item.prompt || '')}</strong>
-        <div style="display:flex;gap:8px;align-items:center;">
+        <strong><span class="marketing-fav-star">📝</span> ${escapeHtml(item.prompt || '')}</strong>
+        <div class="marketing-history-top-actions">
           <span>${escapeHtml(createdAt)}</span>
+          <button class="btn" type="button" data-history-reuse="${escapeHtml(item.id || '')}" data-prompt="${escapeHtml(item.prompt || '')}">♻️ Reutilizar</button>
+          <button class="btn" type="button" data-copy-history-all="${escapeHtml(item.id || '')}">📋 Copiar tudo</button>
+          <button class="btn" type="button" data-history-favorite="${escapeHtml(item.id || '')}">☆ Favoritar</button>
           <form method="post" action="/marketing/history/delete" onsubmit="return confirm('Excluir este item do histórico?')">
             <input type="hidden" name="id" value="${escapeHtml(item.id || '')}">
             <button class="btn" type="submit">Excluir</button>
           </form>
         </div>
       </div>
-      <div class="marketing-list-text"><strong>Story/Status:</strong><br>${escapeHtml(output.story || '')}</div>
-      <div class="marketing-list-text"><strong>Grupo:</strong><br>${escapeHtml(output.grupo || '')}</div>
-      <div class="marketing-list-text"><strong>Instagram/Facebook:</strong><br>${escapeHtml(output.instagram || '')}</div>
+      <div class="marketing-history-copy-grid">
+        <div class="marketing-list-text" data-history-text="story"><strong>Story:</strong><br>${escapeHtml(output.story || '')}</div>
+        <button class="btn" type="button" data-copy-history="story">📋 Copiar Story</button>
+        <div class="marketing-list-text" data-history-text="grupo"><strong>Grupo:</strong><br>${escapeHtml(output.grupo || '')}</div>
+        <button class="btn" type="button" data-copy-history="grupo">📋 Copiar Grupo</button>
+        <div class="marketing-list-text" data-history-text="instagram"><strong>Instagram/Facebook:</strong><br>${escapeHtml(output.instagram || '')}</div>
+        <button class="btn" type="button" data-copy-history="instagram">📋 Copiar Instagram</button>
+        <div class="marketing-list-text" data-history-text="enquete"><strong>Enquete:</strong><br>${escapeHtml(output.enquete || '')}</div>
+        <button class="btn" type="button" data-copy-history="enquete">📋 Copiar Enquete</button>
+        <div class="marketing-list-text" data-history-text="reels"><strong>Reels:</strong><br>${escapeHtml(output.reels || '')}</div>
+        <button class="btn" type="button" data-copy-history="reels">📋 Copiar Reels</button>
+      </div>
     `;
 
     historyList.prepend(div);
   }
+
+  async function postHistoryAction(url, payload = {}) {
+    const res = await fetch(url, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify(payload)
+    });
+    const json = await res.json().catch(() => ({}));
+    if (!res.ok || !json.success) throw new Error(json.message || 'Erro ao atualizar histórico.');
+    return json;
+  }
+
+  async function copyPlainText(text, btn) {
+    try {
+      await navigator.clipboard.writeText(text || '');
+      if (btn) {
+        const oldText = btn.textContent;
+        btn.textContent = '✅ Copiado';
+        setTimeout(() => { btn.textContent = oldText; }, 1300);
+      }
+    } catch (_) {
+      const temp = document.createElement('textarea');
+      temp.value = text || '';
+      document.body.appendChild(temp);
+      temp.select();
+      document.execCommand('copy');
+      temp.remove();
+    }
+  }
+
 
   tabButtons.forEach(btn => {
     btn.addEventListener('click', () => {
@@ -332,13 +1122,21 @@ document.addEventListener('DOMContentLoaded', () => {
       const current = promptInput.value.trim();
       promptInput.value = current ? current + '\n' + add : add;
       promptInput.focus();
+      setStatus('⚡ Template rápido adicionado. Você pode editar antes de gerar.');
     });
+  });
+
+  clearTemplateBtn?.addEventListener('click', () => {
+    promptInput.value = '';
+    promptInput.focus();
+    setStatus('');
   });
 
   async function generateMarketing() {
     const prompt = promptInput.value.trim();
-    if (!prompt) {
-      alert('Digite o que deseja criar.');
+    const productId = productSelect?.value || '';
+    if (!prompt && !productId) {
+      alert('Digite o que deseja criar ou selecione um produto cadastrado.');
       return;
     }
 
@@ -356,7 +1154,7 @@ document.addEventListener('DOMContentLoaded', () => {
           'Content-Type': 'application/json',
           'Accept': 'application/json'
         },
-        body: JSON.stringify({ prompt })
+        body: JSON.stringify({ prompt, productId })
       });
 
       const json = await res.json();
@@ -364,11 +1162,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
       const output = json.output || {};
       fields.story.value = output.story || '';
+      fields.enquete.value = output.enquete || '';
       fields.grupo.value = output.grupo || '';
       fields.instagram.value = output.instagram || '';
-      fields.videoIdea.value = output.videoIdea || '';
+      fields.reels.value = output.reels || output.videoIdea || '';
       resultsBox.style.display = 'grid';
       if (regenerateTopBtn) regenerateTopBtn.style.display = 'inline-flex';
+      currentHistoryId = json.historyItem?.id || null;
+      currentFavoriteBtn?.classList.remove('is-favorite-current');
+      if (currentFavoriteBtn) currentFavoriteBtn.textContent = '⭐ Favoritar';
       addHistoryItem(json.historyItem);
       setStatus('✅ Conteúdo gerado. Você pode editar antes de copiar.');
     } catch (err) {
@@ -382,15 +1184,14 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  async function rewriteField(fieldId, channel, btn) {
+  async function rewriteField(fieldId, channel, action, btn) {
     const field = document.getElementById(fieldId);
     if (!field || !field.value.trim()) {
       alert('Não há texto para reformular.');
       return;
     }
 
-    const instruction = window.prompt('Como quer melhorar este texto?', 'Manter a ideia, deixar mais vendedor, natural, com emojis e boas quebras de linha.');
-    if (instruction === null) return;
+    const instruction = action || 'Melhorar mantendo a mesma ideia.';
 
     const oldText = btn.textContent;
     btn.disabled = true;
@@ -426,15 +1227,67 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
+  function buildAllText(sourceOutput = null) {
+    const output = sourceOutput || getOutputFromFields();
+    return [
+      '===== STORY =====',
+      output.story,
+      '',
+      '===== ENQUETE / INTERAÇÃO STORY =====',
+      output.enquete,
+      '',
+      '===== GRUPOS WHATSAPP =====',
+      output.grupo,
+      '',
+      '===== INSTAGRAM / FACEBOOK =====',
+      output.instagram,
+      '',
+      '===== ROTEIRO REELS =====',
+      output.reels
+    ].join('\n').trim();
+  }
+
+  productSelect?.addEventListener('change', updateProductPreview);
+  useProductBtn?.addEventListener('click', fillPromptWithProduct);
+  clearProductBtn?.addEventListener('click', () => {
+    if (productSelect) productSelect.value = '';
+    updateProductPreview();
+    setStatus('');
+  });
+
+  copyAllBtn?.addEventListener('click', async () => {
+    const text = buildAllText();
+    if (!text) return;
+
+    try {
+      await navigator.clipboard.writeText(text);
+      const oldText = copyAllBtn.textContent;
+      copyAllBtn.textContent = '✅ Tudo copiado';
+      setTimeout(() => { copyAllBtn.textContent = oldText; }, 1300);
+    } catch (_) {
+      const temp = document.createElement('textarea');
+      temp.value = text;
+      document.body.appendChild(temp);
+      temp.select();
+      document.execCommand('copy');
+      temp.remove();
+    }
+  });
+
   generateBtn?.addEventListener('click', generateMarketing);
   regenerateBtn?.addEventListener('click', generateMarketing);
   regenerateTopBtn?.addEventListener('click', generateMarketing);
 
   clearBtn?.addEventListener('click', () => {
     promptInput.value = '';
+    if (productSelect) productSelect.value = '';
+    updateProductPreview();
     Object.values(fields).forEach(field => field.value = '');
     resultsBox.style.display = 'none';
     if (regenerateTopBtn) regenerateTopBtn.style.display = 'none';
+    currentHistoryId = null;
+    currentFavoriteBtn?.classList.remove('is-favorite-current');
+    if (currentFavoriteBtn) currentFavoriteBtn.textContent = '⭐ Favoritar';
     setStatus('');
   });
 
@@ -443,30 +1296,233 @@ document.addEventListener('DOMContentLoaded', () => {
       const id = btn.dataset.copy;
       const field = document.getElementById(id);
       if (!field) return;
-      try {
-        await navigator.clipboard.writeText(field.value || '');
-        const oldText = btn.textContent;
-        btn.textContent = '✅ Copiado';
-        setTimeout(() => { btn.textContent = oldText; }, 1300);
-      } catch (_) {
-        field.select();
-        document.execCommand('copy');
-      }
+      await copyPlainText(field.value || '', btn);
     });
   });
 
   document.querySelectorAll('[data-rewrite]').forEach(btn => {
     btn.addEventListener('click', () => {
-      rewriteField(btn.dataset.rewrite, btn.dataset.channel || 'geral', btn);
+      rewriteField(btn.dataset.rewrite, btn.dataset.channel || 'geral', btn.dataset.action || 'Melhorar mantendo a mesma ideia.', btn);
     });
   });
 
+
+  historyList?.addEventListener('click', async (event) => {
+    const btn = event.target.closest('button');
+    if (!btn) return;
+    const itemEl = btn.closest('.marketing-history-item');
+    if (!itemEl) return;
+
+    try {
+      if (btn.dataset.historyReuse) {
+        const script = document.getElementById('history-output-' + btn.dataset.historyReuse);
+        const output = script ? JSON.parse(script.textContent || '{}') : {};
+        currentHistoryId = btn.dataset.historyReuse;
+        applyOutputToFields(output, btn.dataset.prompt || itemEl.querySelector('.marketing-list-meta strong')?.textContent?.replace(/^⭐|^📝/, '').trim() || '');
+      }
+
+      if (btn.dataset.copyHistory) {
+        const channel = btn.dataset.copyHistory;
+        const script = document.getElementById('history-output-' + itemEl.dataset.id);
+        const output = script ? JSON.parse(script.textContent || '{}') : {};
+        await copyPlainText(output[channel] || '', btn);
+      }
+
+      if (btn.dataset.copyHistoryAll) {
+        const script = document.getElementById('history-output-' + itemEl.dataset.id);
+        const output = script ? JSON.parse(script.textContent || '{}') : {};
+        await copyPlainText(buildAllText(output), btn);
+      }
+
+      if (btn.dataset.historyFavorite) {
+        const json = await postHistoryAction('/marketing/history/favorite', { id: btn.dataset.historyFavorite });
+        itemEl.dataset.favorite = json.favorite ? '1' : '0';
+        itemEl.classList.toggle('is-favorite', Boolean(json.favorite));
+        itemEl.querySelector('.marketing-fav-star').textContent = json.favorite ? '⭐' : '📝';
+        btn.textContent = json.favorite ? '⭐ Favorito' : '☆ Favoritar';
+        if (currentHistoryId && String(currentHistoryId) === String(btn.dataset.historyFavorite)) {
+          currentFavoriteBtn?.classList.toggle('is-favorite-current', Boolean(json.favorite));
+          if (currentFavoriteBtn) currentFavoriteBtn.textContent = json.favorite ? '⭐ Favorito' : '⭐ Favoritar';
+        }
+        setStatus(json.favorite ? '⭐ Geração favoritada e destacada em amarelo.' : '☆ Geração removida dos favoritos.');
+      }
+    } catch (err) {
+      console.error(err);
+      setStatus('⚠️ ' + err.message, 'error');
+    }
+  });
+
+  showFavoritesBtn?.addEventListener('click', () => {
+    const only = showFavoritesBtn.dataset.onlyFavorites !== '1';
+    showFavoritesBtn.dataset.onlyFavorites = only ? '1' : '0';
+    showFavoritesBtn.textContent = only ? '📜 Ver todo histórico' : '⭐ Ver favoritos';
+    document.querySelectorAll('.marketing-history-item').forEach(item => {
+      item.style.display = only && item.dataset.favorite !== '1' ? 'none' : '';
+    });
+  });
+
+  currentFavoriteBtn?.addEventListener('click', async () => {
+    if (!currentHistoryId) return alert('Gere um conteúdo primeiro.');
+    const json = await postHistoryAction('/marketing/history/favorite', { id: currentHistoryId });
+    const itemEl = document.querySelector(`.marketing-history-item[data-id="${currentHistoryId}"]`);
+    if (itemEl) {
+      itemEl.dataset.favorite = json.favorite ? '1' : '0';
+      itemEl.classList.toggle('is-favorite', Boolean(json.favorite));
+      itemEl.querySelector('.marketing-fav-star').textContent = json.favorite ? '⭐' : '📝';
+      const favBtn = itemEl.querySelector('[data-history-favorite]');
+      if (favBtn) favBtn.textContent = json.favorite ? '⭐ Favorito' : '☆ Favoritar';
+    }
+    currentFavoriteBtn?.classList.toggle('is-favorite-current', Boolean(json.favorite));
+    if (currentFavoriteBtn) currentFavoriteBtn.textContent = json.favorite ? '⭐ Favorito' : '⭐ Favoritar';
+    setStatus(json.favorite ? '⭐ Geração atual favoritada e destacada em amarelo.' : '☆ Geração atual removida dos favoritos.');
+  });
+
   const historySearch = document.getElementById('marketing-history-search');
+
+  chatSendBtn?.addEventListener('click', async () => {
+    const message = chatMessage?.value.trim() || '';
+    if (!message) return alert('Digite uma pergunta para o Chat IA.');
+
+    const oldText = chatSendBtn.textContent;
+    chatSendBtn.disabled = true;
+    chatSendBtn.textContent = 'Pensando...';
+    if (chatTyping) chatTyping.style.display = '';
+    setMiniStatus(chatStatus, '⏳ IA digitando...');
+
+    const tempUserMessage = { role: 'user', text: message, createdAt: new Date().toISOString() };
+    renderChatMessages([...chatItems, tempUserMessage]);
+
+    try {
+      const res = await fetch('/marketing/chat', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify({ message })
+      });
+      const json = await res.json();
+      if (!res.ok || !json.success) throw new Error(json.message || 'Erro no Chat IA.');
+
+      chatItems = Array.isArray(json.items) ? json.items : [...chatItems, tempUserMessage, { role: 'model', text: json.reply || '', createdAt: new Date().toISOString() }];
+      lastChatReply = json.reply || '';
+      renderChatMessages(chatItems);
+
+      if (chatOutput) chatOutput.textContent = lastChatReply;
+      if (chatCopyBtn) chatCopyBtn.style.display = lastChatReply ? 'inline-flex' : 'none';
+      if (chatMessage) chatMessage.value = '';
+      setMiniStatus(chatStatus, '✅ Resposta gerada com memória da conversa.');
+    } catch (err) {
+      console.error(err);
+      renderChatMessages(chatItems);
+      setMiniStatus(chatStatus, '⚠️ ' + err.message, 'error');
+    } finally {
+      if (chatTyping) chatTyping.style.display = 'none';
+      chatSendBtn.disabled = false;
+      chatSendBtn.textContent = oldText;
+    }
+  });
+
+  chatMessage?.addEventListener('keydown', event => {
+    if (event.key === 'Enter' && (event.ctrlKey || event.metaKey)) {
+      event.preventDefault();
+      chatSendBtn?.click();
+    }
+  });
+
+  chatClearBtn?.addEventListener('click', async () => {
+    if (!confirm('Limpar a conversa do Chat IA?')) return;
+    try {
+      const res = await fetch('/marketing/chat/clear', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify({})
+      });
+      const json = await res.json().catch(() => ({}));
+      if (!res.ok || !json.success) throw new Error(json.message || 'Erro ao limpar chat.');
+      chatItems = [];
+      lastChatReply = '';
+      renderChatMessages(chatItems);
+      if (chatCopyBtn) chatCopyBtn.style.display = 'none';
+      setMiniStatus(chatStatus, '🧹 Chat limpo.');
+    } catch (err) {
+      setMiniStatus(chatStatus, '⚠️ ' + err.message, 'error');
+    }
+  });
+
+  chatCopyBtn?.addEventListener('click', async () => {
+    await copyPlainText(lastChatReply || textFromHtml(chatOutput), chatCopyBtn);
+  });
+
+  campaignBtn?.addEventListener('click', async () => {
+    const focus = campaignFocus?.value.trim() || '';
+    const oldText = campaignBtn.textContent;
+    campaignBtn.disabled = true;
+    campaignBtn.textContent = 'Gerando...';
+    setMiniStatus(campaignStatus, '⏳ Gerando sugestões...');
+
+    try {
+      const res = await fetch('/marketing/campaign-suggestions', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify({ focus })
+      });
+      const json = await res.json();
+      if (!res.ok || !json.success) throw new Error(json.message || 'Erro ao gerar sugestões.');
+      campaignOutput.innerHTML = renderIdeas(json.ideas || []);
+      campaignOutput.style.display = '';
+      campaignCopyBtn.style.display = 'inline-flex';
+      setMiniStatus(campaignStatus, '✅ Sugestões geradas.');
+    } catch (err) {
+      console.error(err);
+      setMiniStatus(campaignStatus, '⚠️ ' + err.message, 'error');
+    } finally {
+      campaignBtn.disabled = false;
+      campaignBtn.textContent = oldText;
+    }
+  });
+
+  campaignCopyBtn?.addEventListener('click', async () => {
+    await copyPlainText(textFromHtml(campaignOutput), campaignCopyBtn);
+  });
+
+  calendarBtn?.addEventListener('click', async () => {
+    const focus = calendarFocus?.value.trim() || '';
+    const days = calendarDays?.value || '7';
+    const oldText = calendarBtn.textContent;
+    calendarBtn.disabled = true;
+    calendarBtn.textContent = 'Gerando...';
+    setMiniStatus(calendarStatus, '⏳ Gerando calendário...');
+
+    try {
+      const res = await fetch('/marketing/content-calendar', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify({ focus, days })
+      });
+      const json = await res.json();
+      if (!res.ok || !json.success) throw new Error(json.message || 'Erro ao gerar calendário.');
+      calendarOutput.innerHTML = renderCalendar(json.days || []);
+      calendarOutput.style.display = '';
+      calendarCopyBtn.style.display = 'inline-flex';
+      setMiniStatus(calendarStatus, '✅ Calendário gerado.');
+    } catch (err) {
+      console.error(err);
+      setMiniStatus(calendarStatus, '⚠️ ' + err.message, 'error');
+    } finally {
+      calendarBtn.disabled = false;
+      calendarBtn.textContent = oldText;
+    }
+  });
+
+  calendarCopyBtn?.addEventListener('click', async () => {
+    await copyPlainText(textFromHtml(calendarOutput), calendarCopyBtn);
+  });
+
   historySearch?.addEventListener('input', () => {
     const term = historySearch.value.toLowerCase().trim();
     document.querySelectorAll('.marketing-history-item').forEach(item => {
       item.style.display = item.dataset.search.includes(term) ? '' : 'none';
     });
   });
+  loadChatHistory();
+
 });
 </script>

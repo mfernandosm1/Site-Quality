@@ -19,7 +19,7 @@ const BACKUPS_DIR = path.join(SITE_DIR, 'backups');
 const VIEWS_DIR = path.join(__dirname, 'views');
 const PUBLIC_DIR = path.join(__dirname, 'public');
 
-app.locals.paths = { ROOT, SITE_DIR, CONTENT_DIR, BACKUPS_DIR };
+app.locals.paths = { ROOT, SITE_DIR, CONTENT_DIR, BACKUPS_DIR, PUBLIC_DIR };
 
 app.set('view engine', 'ejs');
 app.set('views', VIEWS_DIR);
@@ -45,6 +45,7 @@ import publicarRouter from './routes/publicar.js';
 import cssRouter from './routes/css.js';
 import bannersRouter from './routes/banners.js';
 import aparenciaRouter from './routes/aparencia.js';
+import personalizacaoRouter from './routes/personalizacao.js';
 import estilosRouter from './routes/estilos.js';
 import seoRouter from './routes/seo.js';
 import sitePreviewRouter from './routes/sitepreview.js';
@@ -66,6 +67,7 @@ app.use('/publicar', publicarRouter);
 app.use('/css', cssRouter);
 app.use('/banners', bannersRouter);
 app.use('/aparencia', aparenciaRouter);
+app.use('/personalizacao', personalizacaoRouter);
 app.use('/estilos', estilosRouter);
 app.use('/seo', seoRouter);
 
