@@ -7,6 +7,7 @@ document.addEventListener("DOMContentLoaded", () => {
       .then(res => res.text())
       .then(data => {
         headerContainer.innerHTML = data;
+        corrigirLinksHomePreview();
         carregarCategoriasNoHeader();
         initHeaderEvents();
       });
@@ -29,6 +30,21 @@ document.addEventListener("DOMContentLoaded", () => {
   // Iniciar carrossel de banners somente se existir Swiper na página
   initSwiper();
 });
+
+// ----------------------------
+// Corrige links do preview local
+// ----------------------------
+function corrigirLinksHomePreview() {
+  const isLocalPreview =
+    window.location.hostname === "localhost" &&
+    window.location.port === "3000";
+
+  if (!isLocalPreview) return;
+
+  document.querySelectorAll("[data-home-link]").forEach(link => {
+    link.setAttribute("href", "/site/view/index.html");
+  });
+}
 
 // ----------------------------
 // Categorias dinâmicas no Header

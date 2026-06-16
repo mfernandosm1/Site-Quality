@@ -210,6 +210,28 @@
     return 'R$ ' + priceNum.toFixed(2).replace('.', ',');
   }
 
+  function parsePriceForSchema(value){
+    if (value === null || value === undefined || value === '') return null;
+
+    if (typeof value === 'number') {
+      return value > 0 ? value.toFixed(2) : null;
+    }
+
+    let raw = value.toString().trim();
+    if (!raw) return null;
+
+    raw = raw.replace(/[^0-9,\.]/g, '');
+
+    if (raw.includes(',') && raw.includes('.')) {
+      raw = raw.replace(/\./g, '').replace(',', '.');
+    } else if (raw.includes(',')) {
+      raw = raw.replace(',', '.');
+    }
+
+    const priceNum = Number(raw);
+    return !isNaN(priceNum) && priceNum > 0 ? priceNum.toFixed(2) : null;
+  }
+
   function isYoutube(url){
     return /youtube\.com|youtu\.be/i.test(url || '');
   }
@@ -367,22 +389,24 @@
         brand: {
           '@type': 'Brand',
           name: (product.brand || product.marca || name.split(' ')[0] || 'Quality Celulares')
-        },
-        offers: {
+        }
+      };
+
+      const schemaPrice = showPrice ? parsePriceForSchema(priceValue) : null;
+
+      if (schemaPrice) {
+        schema.offers = {
           '@type': 'Offer',
           url: canonicalUrl,
           priceCurrency: 'BRL',
+          price: schemaPrice,
           availability: product.active === false ? 'https://schema.org/OutOfStock' : 'https://schema.org/InStock',
           itemCondition: 'https://schema.org/NewCondition',
           seller: {
             '@type': 'Organization',
             name: 'Quality Celulares'
           }
-        }
-      };
-
-      if (showPrice && !isNaN(Number(priceValue)) && Number(priceValue) > 0) {
-        schema.offers.price = Number(priceValue).toFixed(2);
+        };
       }
 
       setJsonLd('product-schema-jsonld', schema);
