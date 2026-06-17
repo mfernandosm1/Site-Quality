@@ -122,6 +122,76 @@ function normalizeCategoryValue(value, categories = []) {
   return found ? (found.slug || gerarSlug(found.name) || raw).toString().trim() : gerarSlug(raw);
 }
 
+
+function linesFromBody(value) {
+  if (value === undefined || value === null) return [];
+  if (Array.isArray(value)) return value.map(v => String(v || '').trim()).filter(Boolean);
+  return String(value || '')
+    .split(/\r?\n|,/)
+    .map(v => v.trim())
+    .filter(Boolean);
+}
+
+function parseVariationColors(value) {
+  return linesFromBody(value).map(line => {
+    const parts = line.split('|').map(v => v.trim());
+    const name = parts[0] || '';
+    const hex = parts[1] || '';
+    const image = parts[2] || '';
+    return { name, hex, image };
+  }).filter(c => c.name);
+}
+
+
+function parseVariationCombinations(value) {
+  return linesFromBody(value).map(line => {
+    const parts = line.split('|').map(v => v.trim());
+    return {
+      color: parts[0] || '',
+      storage: parts[1] || '',
+      ram: parts[2] || '',
+      condition: parts[3] || '',
+      image: parts[4] || ''
+    };
+  }).filter(c => c.color || c.storage || c.ram || c.condition);
+}
+
+function variationsFromBody(body, current = {}) {
+  const currentVariations = current.variations || {};
+  const enabledRaw = body.variationsEnabled ?? currentVariations.enabled ?? false;
+
+  const colors = parseVariationColors(body.variationColors ?? currentVariations.colorsText ?? '');
+  const storage = linesFromBody(body.variationStorage ?? currentVariations.storageText ?? '');
+  const ram = linesFromBody(body.variationRam ?? currentVariations.ramText ?? '');
+  const condition = linesFromBody(body.variationCondition ?? currentVariations.conditionText ?? '');
+  const combinations = parseVariationCombinations(body.variationCombinations ?? currentVariations.combinationsText ?? '');
+
+  const hasAnyVariation = colors.length || storage.length || ram.length || condition.length || combinations.length;
+  const enabled = enabledRaw === true || enabledRaw === 'true' || enabledRaw === 'on' || enabledRaw === '1' || !!hasAnyVariation;
+
+  return {
+    enabled,
+    colors,
+    storage,
+    ram,
+    condition,
+    combinations
+  };
+}
+
+
+function variationsToText(variations = {}) {
+  const colors = Array.isArray(variations.colors) ? variations.colors.map(c => [c.name, c.hex, c.image].filter(Boolean).join('|')).join('\n') : '';
+  const combinations = Array.isArray(variations.combinations) ? variations.combinations.map(c => [c.color, c.storage, c.ram, c.condition, c.image].filter((v, i) => i < 4 || v).join('|')).join('\n') : '';
+  return {
+    colorsText: colors,
+    storageText: Array.isArray(variations.storage) ? variations.storage.join('\n') : '',
+    ramText: Array.isArray(variations.ram) ? variations.ram.join('\n') : '',
+    conditionText: Array.isArray(variations.condition) ? variations.condition.join('\n') : '',
+    combinationsText: combinations
+  };
+}
+
 function productFromBody(body, current = {}) {
   const priceValue = body.price !== undefined && body.price !== ''
     ? Number(body.price)
@@ -139,7 +209,11 @@ function productFromBody(body, current = {}) {
     active: body.active === true || body.active === 'true',
     detailsEnabled: body.detailsEnabled === true || body.detailsEnabled === 'true',
     descriptionShort: (body.descriptionShort ?? current.descriptionShort ?? '').toString().trim(),
-    descriptionLong: (body.descriptionLong ?? current.descriptionLong ?? '').toString().trim()
+    descriptionLong: (body.descriptionLong ?? current.descriptionLong ?? '').toString().trim(),
+    variations: Object.assign(
+      variationsFromBody(body, current),
+      variationsToText(variationsFromBody(body, current))
+    )
   };
 }
 
@@ -315,7 +389,13 @@ router.post('/update-all', (req, res) => {
       active: getField('active'),
       detailsEnabled: getField('detailsEnabled'),
       descriptionShort: getField('descriptionShort'),
-      descriptionLong: getField('descriptionLong')
+      descriptionLong: getField('descriptionLong'),
+      variationsEnabled: getField('variationsEnabled'),
+      variationColors: getField('variationColors'),
+      variationStorage: getField('variationStorage'),
+      variationRam: getField('variationRam'),
+      variationCondition: getField('variationCondition'),
+      variationCombinations: getField('variationCombinations')
     }, item);
 
     if (!updated.name) updated.name = item.name;

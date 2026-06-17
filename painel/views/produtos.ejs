@@ -385,6 +385,48 @@
     .product-add-form .field-category{ grid-column:1 / -1; }
   }
 
+
+
+  /* Variações V3 - visual, sem quebrar slug/galeria */
+  .quality-variations-box{
+    grid-column:1 / -1;
+    border:1px solid #e5e7eb;
+    border-radius:12px;
+    padding:14px;
+    background:#fbfdff;
+    margin-top:8px;
+  }
+  .quality-variations-title{display:flex;justify-content:space-between;gap:10px;align-items:center;margin-bottom:12px;font-weight:900;}
+  .quality-variations-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;}
+  .quality-variations-box.variations-disabled .quality-variations-grid{display:none !important;}
+  .variation-disabled-note{display:none;margin-top:10px;padding:10px 12px;border:1px dashed #cbd5e1;border-radius:10px;background:#f8fafc;color:#64748b;font-size:12px;}
+  .quality-variations-box.variations-disabled .variation-disabled-note{display:block;}
+  .quality-var-card{background:#fff;border:1px solid #e5e7eb;border-radius:12px;padding:10px;min-height:120px;}
+  .quality-var-card strong{display:block;margin-bottom:8px;}
+  .quality-var-actions{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px;}
+  .quality-var-actions .btn{padding:6px 8px !important;font-size:11px !important;}
+  .quality-var-list{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px;min-height:28px;}
+  .quality-var-pill{display:inline-flex;align-items:center;gap:6px;border:1px solid #d1d5db;background:#f9fafb;border-radius:999px;padding:5px 8px;font-size:11px;font-weight:700;}
+  .quality-var-pill button{border:none;background:transparent;color:#991b1b;font-weight:900;cursor:pointer;padding:0;}
+  .quality-var-dot{width:14px;height:14px;border-radius:50%;border:1px solid #cbd5e1;display:inline-block;background:#e5e7eb;}
+  .variation-hidden-data{display:none !important;}
+  .variation-summary{font-size:11px;color:#374151;line-height:1.4;margin-top:4px;}
+  .manage-variations-btn{margin-top:6px;width:100% !important;font-size:10.5px !important;padding:7px 8px !important;}
+  .quality-variation-modal{width:min(760px,96vw);max-height:88vh;overflow:auto;background:#fff;border-radius:16px;border:1px solid #e5e7eb;box-shadow:0 22px 80px rgba(0,0,0,.25);}
+  .quality-variation-modal-body{padding:16px;}
+  .variation-modal-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+  .variation-form-row{display:grid;grid-template-columns:1fr 120px 1fr auto;gap:6px;align-items:end;}
+  .variation-form-row input,.variation-form-row select{width:100% !important;}
+  .variation-simple-row{display:grid;grid-template-columns:1fr 1fr auto;gap:6px;align-items:end;}
+  .variation-help{display:block;margin-top:5px;color:#6b7280;font-size:11px;}
+  .quality-combo-card{grid-column:1 / -1;background:#fff;border:1px solid #dbeafe !important;}
+  .variation-combo-row{display:grid;grid-template-columns:1fr 1fr 1fr 1fr 1fr auto;gap:6px;align-items:end;}
+  .quality-combo-list{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px;}
+  .quality-combo-pill{display:inline-flex;align-items:center;gap:6px;border:1px solid #bfdbfe;background:#eff6ff;border-radius:999px;padding:5px 8px;font-size:11px;font-weight:800;}
+  .quality-combo-pill button{border:none;background:transparent;color:#991b1b;cursor:pointer;font-weight:900;}
+
+  @media (max-width:1000px){.quality-variations-grid,.variation-modal-grid{grid-template-columns:1fr;}.variation-form-row,.variation-simple-row,.variation-combo-row{grid-template-columns:1fr;}}
+
 </style>
 
 
@@ -473,6 +515,71 @@
         <button class="btn" type="button" id="add-manage-gallery-btn">Gerenciar galeria</button>
       </div>
       <small style="display:block; margin-top:6px; color:#6b7280;">Use o gerenciador para adicionar fotos ou vídeo. Depois clique em <strong>Adicionar</strong> para salvar o produto.</small>
+    </div>
+
+    <div class="quality-variations-box" id="add-variations-box">
+      <div class="quality-variations-title">
+        <span>🎛️ Variações do produto <small style="font-weight:400;color:#6b7280;">(opcional)</small></span>
+        <small style="font-weight:400;color:#6b7280;">Use só quando o produto tiver cor, GB, RAM ou estado.</small>
+      </div>
+      <label>Ativar variações</label>
+      <select name="variationsEnabled" class="variation-enabled-select" style="max-width:220px;margin-bottom:10px;">
+        <option value="false" selected>Sem variações</option>
+        <option value="true">Com variações</option>
+      </select>
+      <div class="variation-disabled-note">As opções de cor, armazenamento, RAM, estado e grade ficam escondidas enquanto o produto estiver marcado como <strong>Sem variações</strong>.</div>
+      <textarea name="variationColors" class="variation-hidden-data" data-var-type="colors"></textarea>
+      <textarea name="variationStorage" class="variation-hidden-data" data-var-type="storage"></textarea>
+      <textarea name="variationRam" class="variation-hidden-data" data-var-type="ram"></textarea>
+      <textarea name="variationCondition" class="variation-hidden-data" data-var-type="condition"></textarea>
+      <textarea name="variationCombinations" class="variation-hidden-data" data-var-type="combinations"></textarea>
+      <div class="quality-variations-grid">
+        <div class="quality-var-card" data-var-card="colors">
+          <strong>🎨 Cores</strong>
+          <div class="variation-form-row">
+            <input type="text" class="var-color-name" placeholder="Nome: Preto">
+            <input type="color" class="var-color-hex" value="#111111">
+            <input type="text" class="var-color-image" list="imagens-list" placeholder="Imagem opcional">
+            <button class="btn add-var-color" type="button">Adicionar</button>
+          </div>
+          <div class="quality-var-actions">
+            <button class="btn var-preset" type="button" data-type="colors" data-values="Preto|#111111\nBranco|#f8fafc\nAzul|#2563eb">Preto / Branco / Azul</button>
+            <button class="btn var-preset" type="button" data-type="colors" data-values="Preto|#111111\nVerde|#22c55e\nAzul|#2563eb">Preto / Verde / Azul</button>
+          </div>
+          <div class="quality-var-list" data-var-list="colors"></div>
+        </div>
+        <div class="quality-var-card" data-var-card="storage">
+          <strong>💾 Armazenamento</strong>
+          <div class="variation-simple-row"><select class="var-simple-select" data-type="storage"><option>64GB</option><option>128GB</option><option>256GB</option><option>512GB</option><option>1TB</option></select><input type="text" class="var-simple-custom" data-type="storage" placeholder="Outro: 2TB"><button class="btn add-var-simple" type="button" data-type="storage">Adicionar</button></div><small class="variation-help">Escolha da lista ou digite uma opção nova.</small>
+          <div class="quality-var-actions"><button class="btn var-preset" type="button" data-type="storage" data-values="128GB\n256GB\n512GB">128 / 256 / 512GB</button><button class="btn var-preset" type="button" data-type="storage" data-values="64GB\n128GB\n256GB">64 / 128 / 256GB</button></div>
+          <div class="quality-var-list" data-var-list="storage"></div>
+        </div>
+        <div class="quality-var-card" data-var-card="ram">
+          <strong>⚡ Memória RAM</strong>
+          <div class="variation-simple-row"><select class="var-simple-select" data-type="ram"><option>4GB</option><option>6GB</option><option>8GB</option><option>12GB</option><option>16GB</option><option>24GB</option></select><input type="text" class="var-simple-custom" data-type="ram" placeholder="Outro: 32GB"><button class="btn add-var-simple" type="button" data-type="ram">Adicionar</button></div><small class="variation-help">Ex.: 16GB, 24GB, 32GB ou RAM Boost.</small>
+          <div class="quality-var-actions"><button class="btn var-preset" type="button" data-type="ram" data-values="4GB\n8GB\n12GB">4 / 8 / 12GB</button><button class="btn var-preset" type="button" data-type="ram" data-values="6GB\n8GB">6 / 8GB</button></div>
+          <div class="quality-var-list" data-var-list="ram"></div>
+        </div>
+        <div class="quality-var-card" data-var-card="condition">
+          <strong>⭐ Estado</strong>
+          <div class="variation-simple-row"><select class="var-simple-select" data-type="condition"><option>Novo</option><option>Excelente</option><option>Muito Bom</option><option>Com marcas de uso</option></select><input type="text" class="var-simple-custom" data-type="condition" placeholder="Outro estado"><button class="btn add-var-simple" type="button" data-type="condition">Adicionar</button></div><small class="variation-help">Ex.: Seminovo, Vitrine, Caixa aberta.</small>
+          <div class="quality-var-actions"><button class="btn var-preset" type="button" data-type="condition" data-values="Novo">Novo</button><button class="btn var-preset" type="button" data-type="condition" data-values="Excelente\nMuito Bom\nCom marcas de uso">Usados padrão</button></div>
+          <div class="quality-var-list" data-var-list="condition"></div>
+        </div>
+        <div class="quality-var-card quality-combo-card" data-var-card="combinations">
+          <strong>🧩 Grade de combinações</strong>
+          <small class="variation-help">Opcional. Ex.: Preto + 128GB + 4GB. Ao clicar numa cor no site, ele puxa automaticamente a combinação cadastrada.</small>
+          <div class="variation-combo-row">
+            <select class="var-combo-select" data-combo="color"><option value="">Cor</option></select>
+            <select class="var-combo-select" data-combo="storage"><option value="">GB</option></select>
+            <select class="var-combo-select" data-combo="ram"><option value="">RAM</option></select>
+            <select class="var-combo-select" data-combo="condition"><option value="">Estado</option></select>
+            <input type="text" class="var-combo-image" list="imagens-list" placeholder="Imagem opcional">
+            <button class="btn add-var-combo" type="button">Adicionar</button>
+          </div>
+          <div class="quality-combo-list" data-var-list="combinations"></div>
+        </div>
+      </div>
     </div>
 
     <div style="grid-column: 1 / -1;">
@@ -631,6 +738,15 @@
             </td>
 
             <td class="quality-actions">
+              <% const v = p.variations || {}; const vColors = Array.isArray(v.colors) ? v.colors.map(c => [c.name, c.hex, c.image].filter(Boolean).join('|')).join('\n') : (v.colorsText || ''); %>
+              <input type="hidden" name="variationsEnabled" class="row-variations-enabled" value="<%= v.enabled ? 'true' : 'false' %>">
+              <textarea name="variationColors" class="variation-hidden-data row-variation-colors"><%= vColors %></textarea>
+              <textarea name="variationStorage" class="variation-hidden-data row-variation-storage"><%= Array.isArray(v.storage) ? v.storage.join('\n') : (v.storageText || '') %></textarea>
+              <textarea name="variationRam" class="variation-hidden-data row-variation-ram"><%= Array.isArray(v.ram) ? v.ram.join('\n') : (v.ramText || '') %></textarea>
+              <textarea name="variationCondition" class="variation-hidden-data row-variation-condition"><%= Array.isArray(v.condition) ? v.condition.join('\n') : (v.conditionText || '') %></textarea>
+              <textarea name="variationCombinations" class="variation-hidden-data row-variation-combinations"><%= Array.isArray(v.combinations) ? v.combinations.map(c => [c.color, c.storage, c.ram, c.condition, c.image].filter((x, i) => i < 4 || x).join('|')).join('\n') : (v.combinationsText || '') %></textarea>
+              <button class="btn manage-variations-btn" type="button">🎛️ Variações</button>
+              <div class="variation-summary">Sem variações</div>
               <button class="btn primary save-product-btn" type="button">💾 Salvar produto</button>
               <span class="row-save-status" style="display:none; margin-left:8px; font-weight:600; color:#087a31; white-space:nowrap;">✅ Salvo</span>
               <button class="btn" type="submit" form="delete-form-<%= p.id %>" onclick="return confirm('Excluir este produto?')">Excluir</button>
@@ -676,6 +792,65 @@
       </div>
     </div>
   </div>
+
+  <div class="quality-modal-backdrop" id="variation-modal-backdrop" aria-hidden="true">
+    <div class="quality-variation-modal" role="dialog" aria-modal="true">
+      <div class="quality-gallery-modal-header">
+        <strong>🎛️ Variações - <span id="variation-modal-product">Produto</span></strong>
+        <button class="quality-close-btn" type="button" id="variation-modal-close">×</button>
+      </div>
+      <div class="quality-variation-modal-body">
+        <div class="quality-variations-box" id="modal-variations-box">
+          <label>Ativar variações</label>
+          <select name="variationsEnabled" class="variation-enabled-select" style="max-width:220px;margin-bottom:10px;">
+            <option value="false">Sem variações</option>
+            <option value="true">Com variações</option>
+          </select>
+          <div class="variation-disabled-note">Este produto está sem variações. Troque para <strong>Com variações</strong> para editar cor, GB, RAM, estado e grade.</div>
+          <textarea class="variation-hidden-data" data-var-type="colors"></textarea>
+          <textarea class="variation-hidden-data" data-var-type="storage"></textarea>
+          <textarea class="variation-hidden-data" data-var-type="ram"></textarea>
+          <textarea class="variation-hidden-data" data-var-type="condition"></textarea>
+          <textarea class="variation-hidden-data" data-var-type="combinations"></textarea>
+          <div class="quality-variations-grid">
+            <div class="quality-var-card" data-var-card="colors"><strong>🎨 Cores</strong><div class="variation-form-row"><input type="text" class="var-color-name" placeholder="Nome: Preto"><input type="color" class="var-color-hex" value="#111111"><input type="text" class="var-color-image" list="imagens-list" placeholder="Imagem opcional"><button class="btn add-var-color" type="button">Adicionar</button></div><div class="quality-var-actions"><button class="btn var-preset" type="button" data-type="colors" data-values="Preto|#111111
+Branco|#f8fafc
+Azul|#2563eb">Preto / Branco / Azul</button><button class="btn var-preset" type="button" data-type="colors" data-values="Preto|#111111
+Verde|#22c55e
+Azul|#2563eb">Preto / Verde / Azul</button></div><div class="quality-var-list" data-var-list="colors"></div></div>
+            <div class="quality-var-card" data-var-card="storage"><strong>💾 Armazenamento</strong><div class="variation-simple-row"><select class="var-simple-select" data-type="storage"><option>64GB</option><option>128GB</option><option>256GB</option><option>512GB</option><option>1TB</option></select><input type="text" class="var-simple-custom" data-type="storage" placeholder="Outro: 2TB"><button class="btn add-var-simple" type="button" data-type="storage">Adicionar</button></div><small class="variation-help">Escolha da lista ou digite uma opção nova.</small><div class="quality-var-actions"><button class="btn var-preset" type="button" data-type="storage" data-values="128GB
+256GB
+512GB">128 / 256 / 512GB</button><button class="btn var-preset" type="button" data-type="storage" data-values="64GB
+128GB
+256GB">64 / 128 / 256GB</button></div><div class="quality-var-list" data-var-list="storage"></div></div>
+            <div class="quality-var-card" data-var-card="ram"><strong>⚡ Memória RAM</strong><div class="variation-simple-row"><select class="var-simple-select" data-type="ram"><option>4GB</option><option>6GB</option><option>8GB</option><option>12GB</option><option>16GB</option><option>24GB</option></select><input type="text" class="var-simple-custom" data-type="ram" placeholder="Outro: 32GB"><button class="btn add-var-simple" type="button" data-type="ram">Adicionar</button></div><small class="variation-help">Ex.: 16GB, 24GB, 32GB ou RAM Boost.</small><div class="quality-var-actions"><button class="btn var-preset" type="button" data-type="ram" data-values="4GB
+8GB
+12GB">4 / 8 / 12GB</button><button class="btn var-preset" type="button" data-type="ram" data-values="6GB
+8GB">6 / 8GB</button></div><div class="quality-var-list" data-var-list="ram"></div></div>
+            <div class="quality-var-card" data-var-card="condition"><strong>⭐ Estado</strong><div class="variation-simple-row"><select class="var-simple-select" data-type="condition"><option>Novo</option><option>Excelente</option><option>Muito Bom</option><option>Com marcas de uso</option></select><input type="text" class="var-simple-custom" data-type="condition" placeholder="Outro estado"><button class="btn add-var-simple" type="button" data-type="condition">Adicionar</button></div><small class="variation-help">Ex.: Seminovo, Vitrine, Caixa aberta.</small><div class="quality-var-actions"><button class="btn var-preset" type="button" data-type="condition" data-values="Novo">Novo</button><button class="btn var-preset" type="button" data-type="condition" data-values="Excelente
+Muito Bom
+Com marcas de uso">Usados padrão</button></div><div class="quality-var-list" data-var-list="condition"></div></div>
+            
+        <div class="quality-var-card quality-combo-card" data-var-card="combinations">
+          <strong>🧩 Grade de combinações</strong>
+          <small class="variation-help">Opcional. Use para definir combinações exatas, exemplo: Preto + 128GB + 4GB. Ao clicar numa cor no site, ele puxa automaticamente a combinação cadastrada.</small>
+          <div class="variation-combo-row">
+            <select class="var-combo-select" data-combo="color"><option value="">Cor</option></select>
+            <select class="var-combo-select" data-combo="storage"><option value="">GB</option></select>
+            <select class="var-combo-select" data-combo="ram"><option value="">RAM</option></select>
+            <select class="var-combo-select" data-combo="condition"><option value="">Estado</option></select>
+            <input type="text" class="var-combo-image" list="imagens-list" placeholder="Imagem opcional">
+            <button class="btn add-var-combo" type="button">Adicionar</button>
+          </div>
+          <div class="quality-combo-list" data-var-list="combinations"></div>
+        </div>
+          </div>
+        </div>
+        <div style="display:flex;justify-content:flex-end;gap:8px;margin-top:14px;"><button class="btn primary" type="button" id="variation-modal-save">Salvar variações</button></div>
+      </div>
+    </div>
+  </div>
+
 </div>
 
 <script>
@@ -1149,10 +1324,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
     row.querySelector(".save-product-btn")?.addEventListener("click", () => saveProductRow(row));
     row.querySelector(".manage-gallery-btn")?.addEventListener("click", () => openGalleryModal(makeGalleryContextFromRow(row)));
+    row.querySelector(".manage-variations-btn")?.addEventListener("click", () => openVariationModal(row));
 
     const galleryTextarea = row.querySelector(".gallery-textarea");
     galleryTextarea?.addEventListener("input", () => updateGallerySummary(row));
     updateGallerySummary(row);
+    updateVariationSummary(row);
   });
 
   selectAllCheckbox?.addEventListener("change", () => {
@@ -1194,6 +1371,275 @@ document.addEventListener("DOMContentLoaded", () => {
   enableDetailsBtn?.addEventListener("click", () => submitDetailsAction("enable"));
   disableDetailsBtn?.addEventListener("click", () => submitDetailsAction("disable"));
 
+
+
+  // ----------------------------
+  // Variações V3 - cadastro visual
+  // ----------------------------
+  const variationModal = document.getElementById("variation-modal-backdrop");
+  const variationModalClose = document.getElementById("variation-modal-close");
+  const variationModalSave = document.getElementById("variation-modal-save");
+  const variationModalProduct = document.getElementById("variation-modal-product");
+  const modalVariationsBox = document.getElementById("modal-variations-box");
+  let activeVariationRow = null;
+
+  function parseLines(value) {
+    return (value || "").split(/\r?\n/).map(v => v.trim()).filter(Boolean);
+  }
+
+  function uniquePush(list, value) {
+    if (value && !list.includes(value)) list.push(value);
+    return list;
+  }
+
+  function getVarTextarea(box, type) {
+    return box?.querySelector(`[data-var-type="${type}"]`);
+  }
+
+  function updateVariationVisibility(box) {
+    if (!box) return;
+    const enabled = box.querySelector(".variation-enabled-select")?.value === "true";
+    box.classList.toggle("variations-disabled", !enabled);
+  }
+
+  function renderVariationBox(box) {
+    if (!box) return;
+    updateVariationVisibility(box);
+    ["colors", "storage", "ram", "condition"].forEach(type => {
+      const textarea = getVarTextarea(box, type);
+      const listBox = box.querySelector(`[data-var-list="${type}"]`);
+      if (!textarea || !listBox) return;
+      const lines = parseLines(textarea.value);
+      listBox.innerHTML = "";
+      lines.forEach((line, index) => {
+        const parts = line.split("|").map(v => v.trim());
+        const pill = document.createElement("span");
+        pill.className = "quality-var-pill";
+        if (type === "colors") {
+          const dot = document.createElement("span");
+          dot.className = "quality-var-dot";
+          dot.style.background = parts[1] || "#e5e7eb";
+          pill.appendChild(dot);
+          pill.appendChild(document.createTextNode(parts[0] || line));
+        } else {
+          pill.textContent = line;
+        }
+        const remove = document.createElement("button");
+        remove.type = "button";
+        remove.textContent = "×";
+        remove.addEventListener("click", () => {
+          const updated = parseLines(textarea.value).filter((_, i) => i !== index);
+          textarea.value = updated.join("\n");
+          textarea.dispatchEvent(new Event("input", { bubbles:true }));
+          renderVariationBox(box);
+        });
+        pill.appendChild(remove);
+        listBox.appendChild(pill);
+      });
+    });
+
+    renderComboTools(box);
+  }
+
+
+  function comboLineLabel(line) {
+    const p = (line || '').split('|').map(v => v.trim());
+    return [p[0], p[1], p[2], p[3]].filter(Boolean).join(' + ') + (p[4] ? ' 🖼️' : '');
+  }
+
+  function colorNameFromLine(line) { return (line || '').split('|')[0].trim(); }
+
+  function setSelectOptions(select, values, placeholder) {
+    if (!select) return;
+    const old = select.value;
+    select.innerHTML = '';
+    const opt0 = document.createElement('option');
+    opt0.value = '';
+    opt0.textContent = placeholder;
+    select.appendChild(opt0);
+    values.forEach(v => {
+      const opt = document.createElement('option');
+      opt.value = v;
+      opt.textContent = v;
+      select.appendChild(opt);
+    });
+    if (values.includes(old)) select.value = old;
+  }
+
+  function renderComboTools(box) {
+    if (!box) return;
+    const colors = parseLines(getVarTextarea(box, 'colors')?.value).map(colorNameFromLine).filter(Boolean);
+    const storage = parseLines(getVarTextarea(box, 'storage')?.value);
+    const ram = parseLines(getVarTextarea(box, 'ram')?.value);
+    const condition = parseLines(getVarTextarea(box, 'condition')?.value);
+    setSelectOptions(box.querySelector('.var-combo-select[data-combo="color"]'), colors, 'Cor');
+    setSelectOptions(box.querySelector('.var-combo-select[data-combo="storage"]'), storage, 'GB');
+    setSelectOptions(box.querySelector('.var-combo-select[data-combo="ram"]'), ram, 'RAM');
+    setSelectOptions(box.querySelector('.var-combo-select[data-combo="condition"]'), condition, 'Estado');
+
+    const comboTextarea = getVarTextarea(box, 'combinations');
+    const comboList = box.querySelector('[data-var-list="combinations"]');
+    if (!comboTextarea || !comboList) return;
+    comboList.innerHTML = '';
+    parseLines(comboTextarea.value).forEach((line, index) => {
+      const pill = document.createElement('span');
+      pill.className = 'quality-combo-pill';
+      pill.appendChild(document.createTextNode(comboLineLabel(line)));
+      const remove = document.createElement('button');
+      remove.type = 'button';
+      remove.textContent = '×';
+      remove.addEventListener('click', () => {
+        const updated = parseLines(comboTextarea.value).filter((_, i) => i !== index);
+        comboTextarea.value = updated.join('\n');
+        comboTextarea.dispatchEvent(new Event('input', { bubbles:true }));
+        renderVariationBox(box);
+      });
+      pill.appendChild(remove);
+      comboList.appendChild(pill);
+    });
+  }
+
+  function initVariationBox(box) {
+    if (!box || box.dataset.variationReady === "1") return;
+    box.dataset.variationReady = "1";
+
+    box.querySelectorAll(".add-var-color").forEach(btn => {
+      btn.addEventListener("click", () => {
+        const nameInput = box.querySelector(".var-color-name");
+        const hexInput = box.querySelector(".var-color-hex");
+        const imageInput = box.querySelector(".var-color-image");
+        const name = (nameInput?.value || "").trim();
+        if (!name) return alert("Digite o nome da cor.");
+        const line = [name, (hexInput?.value || "").trim(), (imageInput?.value || "").trim()].filter(Boolean).join("|");
+        const textarea = getVarTextarea(box, "colors");
+        const list = parseLines(textarea.value);
+        uniquePush(list, line);
+        textarea.value = list.join("\n");
+        textarea.dispatchEvent(new Event("input", { bubbles:true }));
+        if (nameInput) nameInput.value = "";
+        if (imageInput) imageInput.value = "";
+        renderVariationBox(box);
+      });
+    });
+
+    box.querySelectorAll(".add-var-simple").forEach(btn => {
+      btn.addEventListener("click", () => {
+        const type = btn.dataset.type;
+        const select = box.querySelector(`.var-simple-select[data-type="${type}"]`);
+        const custom = box.querySelector(`.var-simple-custom[data-type="${type}"]`);
+        const customValue = (custom?.value || "").trim();
+        const value = customValue || (select?.value || "").trim();
+        if (!value) return alert("Informe a variação que deseja adicionar.");
+        const textarea = getVarTextarea(box, type);
+        const list = parseLines(textarea.value);
+        uniquePush(list, value);
+        textarea.value = list.join("\n");
+        textarea.dispatchEvent(new Event("input", { bubbles:true }));
+        if (custom) custom.value = "";
+        renderVariationBox(box);
+      });
+    });
+
+    box.querySelectorAll(".add-var-combo").forEach(btn => {
+      btn.addEventListener("click", () => {
+        const color = box.querySelector('.var-combo-select[data-combo="color"]')?.value || '';
+        const storage = box.querySelector('.var-combo-select[data-combo="storage"]')?.value || '';
+        const ram = box.querySelector('.var-combo-select[data-combo="ram"]')?.value || '';
+        const condition = box.querySelector('.var-combo-select[data-combo="condition"]')?.value || '';
+        const image = (box.querySelector('.var-combo-image')?.value || '').trim();
+        if (!color && !storage && !ram && !condition) return alert('Escolha pelo menos uma opção para a combinação.');
+        const line = [color, storage, ram, condition, image].join('|').replace(/\|+$/,'');
+        const textarea = getVarTextarea(box, 'combinations');
+        const list = parseLines(textarea.value);
+        uniquePush(list, line);
+        textarea.value = list.join("\n");
+        textarea.dispatchEvent(new Event("input", { bubbles:true }));
+        const imageInput = box.querySelector('.var-combo-image');
+        if (imageInput) imageInput.value = '';
+        renderVariationBox(box);
+      });
+    });
+
+    box.querySelectorAll(".var-preset").forEach(btn => {
+      btn.addEventListener("click", () => {
+        const type = btn.dataset.type;
+        const textarea = getVarTextarea(box, type);
+        const current = parseLines(textarea.value);
+        parseLines((btn.dataset.values || "").replace(/\\n/g, "\n")).forEach(v => uniquePush(current, v));
+        textarea.value = current.join("\n");
+        textarea.dispatchEvent(new Event("input", { bubbles:true }));
+        renderVariationBox(box);
+      });
+    });
+
+    box.querySelectorAll("textarea, select, input").forEach(el => {
+      el.addEventListener("input", () => renderVariationBox(box));
+      el.addEventListener("change", () => renderVariationBox(box));
+    });
+
+    renderVariationBox(box);
+  }
+
+  function copyRowVariationsToModal(row) {
+    if (!row || !modalVariationsBox) return;
+    modalVariationsBox.querySelector(".variation-enabled-select").value = row.querySelector(".row-variations-enabled")?.value || "false";
+    getVarTextarea(modalVariationsBox, "colors").value = row.querySelector(".row-variation-colors")?.value || "";
+    getVarTextarea(modalVariationsBox, "storage").value = row.querySelector(".row-variation-storage")?.value || "";
+    getVarTextarea(modalVariationsBox, "ram").value = row.querySelector(".row-variation-ram")?.value || "";
+    getVarTextarea(modalVariationsBox, "condition").value = row.querySelector(".row-variation-condition")?.value || "";
+    getVarTextarea(modalVariationsBox, "combinations").value = row.querySelector(".row-variation-combinations")?.value || "";
+    renderVariationBox(modalVariationsBox);
+  }
+
+  function copyModalVariationsToRow(row) {
+    if (!row || !modalVariationsBox) return;
+    row.querySelector(".row-variations-enabled").value = modalVariationsBox.querySelector(".variation-enabled-select")?.value || "false";
+    row.querySelector(".row-variation-colors").value = getVarTextarea(modalVariationsBox, "colors")?.value || "";
+    row.querySelector(".row-variation-storage").value = getVarTextarea(modalVariationsBox, "storage")?.value || "";
+    row.querySelector(".row-variation-ram").value = getVarTextarea(modalVariationsBox, "ram")?.value || "";
+    row.querySelector(".row-variation-condition").value = getVarTextarea(modalVariationsBox, "condition")?.value || "";
+    row.querySelector(".row-variation-combinations").value = getVarTextarea(modalVariationsBox, "combinations")?.value || "";
+    markRowDirty(row);
+    updateVariationSummary(row);
+  }
+
+  function updateVariationSummary(row) {
+    const summary = row.querySelector(".variation-summary");
+    if (!summary) return;
+    const enabled = row.querySelector(".row-variations-enabled")?.value === "true";
+    if (!enabled) { summary.textContent = "Sem variações"; return; }
+    const c = parseLines(row.querySelector(".row-variation-colors")?.value).length;
+    const s = parseLines(row.querySelector(".row-variation-storage")?.value).length;
+    const r = parseLines(row.querySelector(".row-variation-ram")?.value).length;
+    const e = parseLines(row.querySelector(".row-variation-condition")?.value).length;
+    const g = parseLines(row.querySelector(".row-variation-combinations")?.value).length;
+    summary.textContent = `Variações: ${c} cor(es), ${s} GB, ${r} RAM, ${e} estado(s), ${g} combinação(ões)`;
+  }
+
+  function openVariationModal(row) {
+    activeVariationRow = row;
+    if (variationModalProduct) variationModalProduct.textContent = row.querySelector(".prod-name-input")?.value || "Produto";
+    initVariationBox(modalVariationsBox);
+    copyRowVariationsToModal(row);
+    variationModal?.classList.add("open");
+    variationModal?.setAttribute("aria-hidden", "false");
+  }
+
+  function closeVariationModal() {
+    variationModal?.classList.remove("open");
+    variationModal?.setAttribute("aria-hidden", "true");
+    activeVariationRow = null;
+  }
+
+  initVariationBox(document.getElementById("add-variations-box"));
+  variationModalClose?.addEventListener("click", closeVariationModal);
+  variationModal?.addEventListener("click", e => { if (e.target === variationModal) closeVariationModal(); });
+  variationModalSave?.addEventListener("click", async () => {
+    if (!activeVariationRow) return;
+    copyModalVariationsToRow(activeVariationRow);
+    await saveProductRow(activeVariationRow);
+    closeVariationModal();
+  });
   updateAddGallerySummary();
   updateSelectionCount();
 

@@ -930,6 +930,43 @@
       "descriptionShort": "",
       "descriptionLong": "O Samsung Galaxy A57 é a escolha ideal para quem não quer escolher entre desempenho e armazenamento\r\n\r\nEspaço de sobra: 256GB para você nunca mais se preocupar em apagar arquivos importantes.\r\nPerformance Fluida: Processador otimizado que garante agilidade para multitarefas e jogos.\r\nFotos de Alta Qualidade: Conjunto de câmeras avançado para registrar cada momento com cores vivas e nitidez impressionante, mesmo em ambientes com pouca luz.\r\nDesign Moderno e Durável: Acabamento sofisticado com a qualidade de construção que só a Samsung oferece.\r\nTela Imersiva: Cores intensas e brilho equilibrado para uma experiência visual de cinema na palma da mão.",
       "id": 1781455522062
+    },
+    {
+      "name": "Impressora Multifuncional Epson EcoTank L3250, Colorida, Wifi",
+      "slug": "impressora-multifuncional-epson-ecotank-l3250-wifi",
+      "price": null,
+      "image": "images/epson-l3250.jpeg",
+      "gallery": [
+        "images/produtos/1781655174152-epson-l3250-2.jpeg",
+        "images/produtos/1781655183486-epson-l3250-3.jpeg"
+      ],
+      "category": "eletronicos",
+      "showPrice": false,
+      "featured": false,
+      "active": true,
+      "detailsEnabled": true,
+      "descriptionShort": "",
+      "descriptionLong": "A Epson EcoTank L3250 é a multifuncional 3-em-1 (imprime, copia e digitaliza) ideal para famílias, estudantes e profissionais em home office. Graças ao sistema 100% sem cartuchos, você economiza até 90% em tinta, imprimindo milhares de páginas com um único kit de garrafas originais Epson.Com conectividade Wi-Fi avançada, você envia seus documentos e fotos direto do celular ou tablet usando o aplicativo Epson Smart Panel. É a praticidade que o seu dia a dia precisa, com o menor custo por página do mercado.\nRendimento: Até 4.500 páginas em preto ou até 7.500 páginas coloridas",
+      "variations": {
+        "enabled": true,
+        "colors": [
+          {
+            "name": "Preto",
+            "hex": "#111111",
+            "image": ""
+          }
+        ],
+        "storage": [],
+        "ram": [],
+        "condition": [],
+        "combinations": [],
+        "colorsText": "Preto|#111111",
+        "storageText": "",
+        "ramText": "",
+        "conditionText": "",
+        "combinationsText": ""
+      },
+      "id": 1781655355785
     }
   ]
 }
