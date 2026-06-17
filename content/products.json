@@ -740,7 +740,7 @@
       "id": 1781196214682
     },
     {
-      "name": "Caixa De Som Bluetooth À Prova D'água Ipx6 Portátil",
+      "name": "Mini Caixa De Som Bluetooth À Prova D'água Ipx6 Portátil",
       "slug": "caixa-de-som-bluetooth-ipx6",
       "price": null,
       "image": "images/Caixa_de-som_altomex.jpeg",
@@ -751,8 +751,21 @@
       "active": true,
       "detailsEnabled": true,
       "descriptionShort": "",
-      "descriptionLong": "Potência de saída de 15 W para um som potente e claro.\r\nAutonomia máxima da bateria de 4 horas para uso prolongado.\r\nTempo de carregamento de apenas 2 horas para conveniência.\r\nDesign cilíndrico portátil, ideal para levar a qualquer lugar.\r\nÀ prova d'água com classificação IPX6, perfeito para uso externo.\r\nConexão Bluetooth para streaming sem fio fácil e rápido.",
-      "id": 1781196414711
+      "descriptionLong": "Potência de saída de 15 W para um som potente e claro.\nAutonomia máxima da bateria de 4 horas para uso prolongado.\nTempo de carregamento de apenas 2 horas para conveniência.\nDesign cilíndrico portátil, ideal para levar a qualquer lugar.\nÀ prova d'água com classificação IPX6, perfeito para uso externo.\nConexão Bluetooth para streaming sem fio fácil e rápido.",
+      "id": 1781196414711,
+      "variations": {
+        "enabled": false,
+        "colors": [],
+        "storage": [],
+        "ram": [],
+        "condition": [],
+        "combinations": [],
+        "colorsText": "",
+        "storageText": "",
+        "ramText": "",
+        "conditionText": "",
+        "combinationsText": ""
+      }
     },
     {
       "name": "Motorola Edge 70 5g - 256gb 24gb (8gb + 16gb Ram Boost), Ultrafino, 3 Cameras 50mp, Tela 6.7\"",
