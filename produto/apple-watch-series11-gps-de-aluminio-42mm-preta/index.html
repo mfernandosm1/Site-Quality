@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <base href="/">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Produto – Quality Celulares</title>
+  <link rel="icon" href="/images/favicon_otimizado.ico?v=3">
+<link rel="shortcut icon" href="/images/favicon_otimizado.ico?v=3">
+  <meta name="description" content="Confira detalhes do produto na Quality Celulares. Atendimento pelo WhatsApp.">
+  <meta name="robots" content="index, follow">
+  <meta property="og:type" content="product">
+  <meta property="og:title" content="Produto – Quality Celulares">
+  <meta property="og:description" content="Confira detalhes do produto na Quality Celulares. Atendimento pelo WhatsApp.">
+  <meta property="og:image" content="https://www.qualitycel.com.br/images/logo.png">
+  <meta property="og:url" content="https://www.qualitycel.com.br/produto/">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="canonical" href="https://www.qualitycel.com.br/produto/">
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <style>
+    .produto-layout {
+      display: grid;
+      grid-template-columns: 520px 1fr;
+      gap: 42px;
+      align-items: start;
+    }
+
+    .produto-galeria {
+      display: grid;
+      grid-template-columns: 74px 1fr;
+      gap: 16px;
+      align-items: start;
+    }
+
+    .galeria-miniaturas {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      max-height: 470px;
+      overflow-y: auto;
+      padding-right: 4px;
+    }
+
+    .galeria-thumb {
+      width: 64px;
+      height: 64px;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      background: #fff;
+      cursor: pointer;
+      padding: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .galeria-thumb.ativa {
+      border: 2px solid #2563eb;
+    }
+
+    .galeria-thumb img {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+    }
+
+    .galeria-thumb-video {
+      font-size: 22px;
+      color: #2563eb;
+    }
+
+    .galeria-principal {
+      background: #fff;
+      border-radius: 12px;
+      padding: 18px;
+      text-align: center;
+      min-height: 430px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .galeria-principal img {
+      max-width: 100%;
+      height: auto;
+      max-height: 430px;
+      object-fit: contain;
+    }
+
+    .galeria-principal iframe {
+      width: 100%;
+      height: 360px;
+      border: 0;
+      border-radius: 10px;
+    }
+
+    .produto-info h1 {
+      margin-top: 0;
+      font-size: 26px;
+    }
+
+    .produto-descricao-box {
+      margin: 24px 0;
+      padding: 18px;
+      border-radius: 10px;
+      background: #f7f7f7;
+      line-height: 1.6;
+    }
+
+    .produto-descricao-box h2 {
+      margin-top: 0;
+      font-size: 20px;
+    }
+
+    .btn-whatsapp {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+      background: #25d366;
+      color: #fff !important;
+      padding: 10px 18px;
+      border-radius: 6px;
+      text-decoration: none !important;
+      font-weight: 700;
+      font-size: 15px;
+      border: none;
+      margin-top: 10px;
+    }
+
+    .btn-whatsapp:hover {
+      background: #1ebe5d;
+      color: #fff !important;
+      text-decoration: none !important;
+    }
+
+
+
+    .produto-variacoes-box{margin:16px 0 18px 0;display:flex;flex-direction:column;gap:12px;}
+    .produto-variacao-grupo{display:flex;flex-direction:column;gap:7px;}
+    .produto-variacao-titulo{font-weight:700;font-size:14px;color:#111827;}
+    .produto-variacao-opcoes{display:flex;flex-wrap:wrap;gap:8px;}
+    .produto-variacao-btn{border:1px solid #d1d5db;background:#fff;border-radius:8px;padding:8px 11px;cursor:pointer;font-weight:700;display:inline-flex;align-items:center;gap:7px;}
+    .produto-variacao-btn.ativa{border-color:#2563eb;box-shadow:0 0 0 1px #2563eb;color:#111827;}
+    .produto-cor-bolinha{width:18px;height:18px;border-radius:50%;border:1px solid #cbd5e1;background:#e5e7eb;display:inline-block;}
+    @media (max-width: 900px) {
+      .produto-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .produto-galeria {
+        grid-template-columns: 1fr;
+      }
+
+      .galeria-miniaturas {
+        flex-direction: row;
+        max-height: none;
+        overflow-x: auto;
+      }
+
+      .galeria-principal {
+        min-height: 320px;
+      }
+    }
+  </style>
+
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-9HPD9XCELH"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-9HPD9XCELH');
+  </script>
+</head>
+<body>
+<div id="header"></div>
+
+<main class="main">
+  <section id="produto-detalhe" style="max-width:1100px;margin:35px auto;padding:0 16px;">
+    <p class="em-breve" style="text-align:center;">Carregando produto...</p>
+  </section>
+</main>
+
+<div id="footer"></div>
+<script src="/js/main.js"></script>
+<script>
+(function(){
+  function escapeHtml(value){
+    return (value || '').toString()
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#039;');
+  }
+
+  function nl2br(value){
+    return escapeHtml(value).replace(/\n/g, '<br>');
+  }
+
+  function shouldShowPrice(p){
+    const raw = p.showPrice ?? false;
+    if (raw === true) return true;
+    const v = raw.toString().toLowerCase();
+    return v === 'sim' || v === 'yes' || v === 'true' || v === '1' || v === 'on';
+  }
+
+  function detailsEnabled(p){
+    const raw = p.detailsEnabled ?? false;
+    if (raw === true) return true;
+    const v = raw.toString().toLowerCase();
+    return v === 'sim' || v === 'yes' || v === 'true' || v === '1' || v === 'on';
+  }
+
+  function formatPrice(value){
+    const priceNum = (typeof value === 'number' ? value : Number(value || 0));
+    if (isNaN(priceNum)) return '';
+    return 'R$ ' + priceNum.toFixed(2).replace('.', ',');
+  }
+
+  function parsePriceForSchema(value){
+    if (value === null || value === undefined || value === '') return null;
+
+    if (typeof value === 'number') {
+      return value > 0 ? value.toFixed(2) : null;
+    }
+
+    let raw = value.toString().trim();
+    if (!raw) return null;
+
+    raw = raw.replace(/[^0-9,\.]/g, '');
+
+    if (raw.includes(',') && raw.includes('.')) {
+      raw = raw.replace(/\./g, '').replace(',', '.');
+    } else if (raw.includes(',')) {
+      raw = raw.replace(',', '.');
+    }
+
+    const priceNum = Number(raw);
+    return !isNaN(priceNum) && priceNum > 0 ? priceNum.toFixed(2) : null;
+  }
+
+  function isYoutube(url){
+    return /youtube\.com|youtu\.be/i.test(url || '');
+  }
+
+  function youtubeEmbed(url){
+    if (!url) return '';
+
+    let videoId = '';
+
+    if (url.includes('youtu.be/')) {
+      videoId = url.split('youtu.be/')[1].split(/[?&]/)[0];
+    } else if (url.includes('watch?v=')) {
+      videoId = url.split('watch?v=')[1].split('&')[0];
+    } else if (url.includes('/shorts/')) {
+      videoId = url.split('/shorts/')[1].split(/[?&]/)[0];
+    } else if (url.includes('/embed/')) {
+      videoId = url.split('/embed/')[1].split(/[?&]/)[0];
+    }
+
+    return videoId ? 'https://www.youtube.com/embed/' + videoId : '';
+  }
+
+  function stripHtml(value){
+    return (value || '').toString().replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ').trim();
+  }
+
+  function absoluteUrl(path){
+    if (!path) return window.location.origin + '/images/sem-imagem.png';
+    if (/^https?:\/\//i.test(path)) return path;
+    return window.location.origin + '/' + path.replace(/^\//, '');
+  }
+
+  function assetPath(path){
+    if (!path) return '/images/sem-imagem.png';
+    if (/^https?:\/\//i.test(path)) return path;
+    return '/' + path.replace(/^\//, '');
+  }
+
+  function normalizeText(value){
+    return (value || '').toString().trim().toLowerCase();
+  }
+
+
+  function lines(value){
+    if (Array.isArray(value)) return value.map(v => String(v || '').trim()).filter(Boolean);
+    return (value || '').toString().split(/\r?\n|,/).map(v => v.trim()).filter(Boolean);
+  }
+
+  function normalizeVariations(product){
+    const v = product.variations || {};
+    const colors = Array.isArray(v.colors) ? v.colors : lines(v.colorsText).map(line => {
+      const parts = line.split('|').map(p => p.trim());
+      return { name: parts[0] || '', hex: parts[1] || '', image: parts[2] || '' };
+    }).filter(c => c.name);
+    return {
+      enabled: v.enabled === true || v.enabled === 'true',
+      colors,
+      storage: Array.isArray(v.storage) ? v.storage : lines(v.storageText),
+      ram: Array.isArray(v.ram) ? v.ram : lines(v.ramText),
+      condition: Array.isArray(v.condition) ? v.condition : lines(v.conditionText),
+      combinations: Array.isArray(v.combinations) ? v.combinations : lines(v.combinationsText).map(line => { const parts = line.split('|').map(p => p.trim()); return { color: parts[0] || '', storage: parts[1] || '', ram: parts[2] || '', condition: parts[3] || '', image: parts[4] || '' }; }).filter(c => c.color || c.storage || c.ram || c.condition)
+    };
+  }
+
+  function variationGroupHtml(title, type, items){
+    if (!items || !items.length) return '';
+    const buttons = items.map((item, index) => {
+      if (type === 'colors') {
+        const name = item.name || '';
+        const hex = item.hex || '#e5e7eb';
+        const image = item.image ? assetPath(item.image) : '';
+        return `<button class="produto-variacao-btn ${index === 0 ? 'ativa' : ''}" type="button" data-var-type="colors" data-var-value="${escapeHtml(name)}" data-image="${escapeHtml(image)}"><span class="produto-cor-bolinha" style="background:${escapeHtml(hex)}"></span>${escapeHtml(name)}</button>`;
+      }
+      return `<button class="produto-variacao-btn ${index === 0 ? 'ativa' : ''}" type="button" data-var-type="${escapeHtml(type)}" data-var-value="${escapeHtml(item)}">${escapeHtml(item)}</button>`;
+    }).join('');
+    return `<div class="produto-variacao-grupo"><div class="produto-variacao-titulo">${escapeHtml(title)}</div><div class="produto-variacao-opcoes">${buttons}</div></div>`;
+  }
+
+  function variationsHtml(product){
+    const v = normalizeVariations(product);
+    const hasAnyVariation = (v.colors && v.colors.length) || (v.storage && v.storage.length) || (v.ram && v.ram.length) || (v.condition && v.condition.length);
+    if (!v.enabled && !hasAnyVariation) return '';
+    const html = [
+      variationGroupHtml('Cor', 'colors', v.colors),
+      variationGroupHtml('Armazenamento', 'storage', v.storage),
+      variationGroupHtml('Memória RAM', 'ram', v.ram),
+      variationGroupHtml('Estado', 'condition', v.condition)
+    ].filter(Boolean).join('');
+    return html ? `<div class="produto-variacoes-box">${html}</div>` : '';
+  }
+
+  function getSlugFromPath(){
+    const parts = window.location.pathname.split('/').filter(Boolean);
+    const produtoIndex = parts.indexOf('produto');
+    if (produtoIndex >= 0 && parts[produtoIndex + 1]) {
+      return decodeURIComponent(parts[produtoIndex + 1]);
+    }
+    return '';
+  }
+
+  function setMetaTag(name, content){
+    let tag = document.querySelector('meta[name="' + name + '"]');
+    if (!tag) {
+      tag = document.createElement('meta');
+      tag.setAttribute('name', name);
+      document.head.appendChild(tag);
+    }
+    tag.setAttribute('content', content);
+  }
+
+  function setCanonical(url){
+    let tag = document.querySelector('link[rel="canonical"]');
+    if (!tag) {
+      tag = document.createElement('link');
+      tag.setAttribute('rel', 'canonical');
+      document.head.appendChild(tag);
+    }
+    tag.setAttribute('href', url);
+  }
+
+  function setOg(property, content){
+    let tag = document.querySelector('meta[property="' + property + '"]');
+    if (!tag) {
+      tag = document.createElement('meta');
+      tag.setAttribute('property', property);
+      document.head.appendChild(tag);
+    }
+    tag.setAttribute('content', content);
+  }
+
+  function setTwitter(name, content){
+    let tag = document.querySelector('meta[name="' + name + '"]');
+    if (!tag) {
+      tag = document.createElement('meta');
+      tag.setAttribute('name', name);
+      document.head.appendChild(tag);
+    }
+    tag.setAttribute('content', content);
+  }
+
+  function setJsonLd(id, data){
+    let script = document.getElementById(id);
+    if (!script) {
+      script = document.createElement('script');
+      script.type = 'application/ld+json';
+      script.id = id;
+      document.head.appendChild(script);
+    }
+    script.textContent = JSON.stringify(data);
+  }
+
+  function defaultSeoConfig(){
+    return {
+      siteTitle: 'Quality Celulares',
+      siteDescription: 'Loja especializada em smartphones, acessórios, notebooks, games e eletrônicos com atendimento pelo WhatsApp.',
+      siteUrl: window.location.origin,
+      analyticsId: 'G-9HPD9XCELH',
+      defaultOgImage: 'images/logo.png',
+      enableSchemaProducts: true,
+      enableSchemaOrganization: true,
+      enableOpenGraph: true,
+      enableCanonical: true,
+      enableBreadcrumbs: true
+    };
+  }
+
+  function applyProductSeo(product, name, image, priceValue, showPrice, seoConfig){
+    const seo = Object.assign(defaultSeoConfig(), seoConfig || {});
+    const description = stripHtml(product.descriptionShort || product.descriptionLong || ('Confira ' + name + ' na Quality Celulares.'));
+    const productSlug = product.slug || product.id;
+    const canonicalUrl = productSlug
+      ? window.location.origin + '/produto/' + encodeURIComponent(productSlug) + '/'
+      : window.location.origin + window.location.pathname + '?id=' + encodeURIComponent(product.id);
+    const absoluteImage = absoluteUrl(image);
+    const safeDescription = description.slice(0, 160);
+
+    document.title = name + ' – Quality Celulares';
+    setMetaTag('description', safeDescription);
+
+    if (seo.enableCanonical !== false) {
+      setCanonical(canonicalUrl);
+    }
+
+    if (seo.enableOpenGraph !== false) {
+      setOg('og:type', 'product');
+      setOg('og:title', name + ' – Quality Celulares');
+      setOg('og:description', safeDescription);
+      setOg('og:image', absoluteImage);
+      setOg('og:url', canonicalUrl);
+      setTwitter('twitter:card', 'summary_large_image');
+      setTwitter('twitter:title', name + ' – Quality Celulares');
+      setTwitter('twitter:description', safeDescription);
+      setTwitter('twitter:image', absoluteImage);
+    }
+
+    if (seo.enableSchemaProducts !== false) {
+      const schema = {
+        '@context': 'https://schema.org',
+        '@type': 'Product',
+        name: name,
+        image: [absoluteImage],
+        description: description,
+        sku: String(product.id),
+        brand: {
+          '@type': 'Brand',
+          name: (product.brand || product.marca || name.split(' ')[0] || 'Quality Celulares')
+        }
+      };
+
+      const schemaPrice = showPrice ? parsePriceForSchema(priceValue) : null;
+
+      if (schemaPrice) {
+        schema.offers = {
+          '@type': 'Offer',
+          url: canonicalUrl,
+          priceCurrency: 'BRL',
+          price: schemaPrice,
+          availability: product.active === false ? 'https://schema.org/OutOfStock' : 'https://schema.org/InStock',
+          itemCondition: 'https://schema.org/NewCondition',
+          seller: {
+            '@type': 'Organization',
+            name: 'Quality Celulares'
+          }
+        };
+      }
+
+      setJsonLd('product-schema-jsonld', schema);
+    }
+
+    if (seo.enableSchemaOrganization !== false) {
+      const org = {
+        '@context': 'https://schema.org',
+        '@type': 'Store',
+        name: seo.siteTitle || 'Quality Celulares',
+        url: seo.siteUrl || window.location.origin,
+        logo: absoluteUrl(seo.defaultOgImage || 'images/logo.png'),
+        description: seo.siteDescription || 'Loja especializada em smartphones e acessórios.'
+      };
+      setJsonLd('organization-schema-jsonld', org);
+    }
+
+    if (seo.enableBreadcrumbs !== false) {
+      const category = product.category || product.categoria || 'produtos';
+      const breadcrumb = {
+        '@context': 'https://schema.org',
+        '@type': 'BreadcrumbList',
+        itemListElement: [
+          {
+            '@type': 'ListItem',
+            position: 1,
+            name: 'Início',
+            item: window.location.origin + '/index.html'
+          },
+          {
+            '@type': 'ListItem',
+            position: 2,
+            name: category,
+            item: window.location.origin + '/' + encodeURIComponent(category) + '/'
+          },
+          {
+            '@type': 'ListItem',
+            position: 3,
+            name: name,
+            item: canonicalUrl
+          }
+        ]
+      };
+      setJsonLd('breadcrumb-schema-jsonld', breadcrumb);
+    }
+  }
+
+  const params = new URLSearchParams(window.location.search);
+  const id = params.get('id');
+  const slug = params.get('slug') || getSlugFromPath();
+  const productKey = id || slug;
+  const box = document.getElementById('produto-detalhe');
+
+  if (!productKey) {
+    box.innerHTML = '<p class="em-breve" style="text-align:center;">Produto não informado.</p>';
+    return;
+  }
+
+  Promise.all([
+    fetch('/content/products.json').then(r => r.json()),
+    fetch('/content/seo.json').then(r => r.json()).catch(() => ({}))
+  ])
+    .then(([data, seoConfig]) => {
+      const product = (data.items || []).find(p => {
+        const productId = String(p.id || '');
+        const productSlug = String(p.slug || '');
+        return productId === String(productKey) || normalizeText(productSlug) === normalizeText(productKey);
+      });
+
+      if (!product || product.active === false) {
+        box.innerHTML = '<p class="em-breve" style="text-align:center;">Produto não encontrado.</p>';
+        return;
+      }
+
+      const name = product.name || 'Produto';
+      const image = assetPath(product.image || 'images/sem-imagem.png');
+      const gallery = Array.isArray(product.gallery) ? product.gallery.map(assetPath) : [];
+      const medias = [image, ...gallery].filter(Boolean);
+
+      const shortDesc = product.descriptionShort || '';
+      const longDesc = product.descriptionLong || '';
+      const showPrice = shouldShowPrice(product);
+      const price = showPrice ? formatPrice(product.price) : '';
+      const whatsappText = encodeURIComponent('Olá! Vim através do site e tenho interesse em ' + name);
+      const variacoesHtml = variationsHtml(product);
+      const variacoesNormalizadas = normalizeVariations(product);
+
+      applyProductSeo(product, name, image, product.price, showPrice, seoConfig);
+
+      const thumbsHtml = medias.map((media, index) => {
+        if (isYoutube(media)) {
+          return `
+            <button class="galeria-thumb ${index === 0 ? 'ativa' : ''}" type="button" data-media="${escapeHtml(media)}">
+              <span class="galeria-thumb-video"><i class="fa-brands fa-youtube"></i></span>
+            </button>
+          `;
+        }
+
+        return `
+          <button class="galeria-thumb ${index === 0 ? 'ativa' : ''}" type="button" data-media="${escapeHtml(media)}">
+            <img src="${escapeHtml(media)}" alt="${escapeHtml(name)}">
+          </button>
+        `;
+      }).join('');
+
+      const descricaoHtml = detailsEnabled(product) ? `
+        <div class="produto-descricao-box">
+          <h2>Descrição</h2>
+          <p>${longDesc ? nl2br(longDesc) : 'Descrição em breve.'}</p>
+        </div>
+      ` : '';
+
+      box.innerHTML = `
+        <div class="produto-layout">
+          <div class="produto-galeria">
+            <div class="galeria-miniaturas">
+              ${thumbsHtml}
+            </div>
+
+            <div class="galeria-principal" id="galeria-principal">
+              <img src="${escapeHtml(medias[0] || image)}" alt="${escapeHtml(name)}">
+            </div>
+          </div>
+
+          <div class="produto-info">
+            <h1>${escapeHtml(name)}</h1>
+            ${price ? `<p style="font-size:24px;font-weight:700;margin:12px 0;">${escapeHtml(price)}</p>` : ''}
+            ${shortDesc ? `<p style="font-size:17px;line-height:1.5;">${escapeHtml(shortDesc)}</p>` : ''}
+            ${variacoesHtml}
+
+            ${descricaoHtml}
+
+            <a href="https://wa.me/5555991407824?text=${whatsappText}" class="btn-whatsapp" target="_blank">
+              <i class="fa-brands fa-whatsapp"></i> Comprar no WhatsApp
+            </a>
+          </div>
+        </div>
+      `;
+
+      const principal = document.getElementById('galeria-principal');
+
+      function getSelectedVariationValue(type) {
+        return document.querySelector('.produto-variacao-btn[data-var-type="' + type + '"].ativa')?.getAttribute('data-var-value') || '';
+      }
+
+      function activateVariationButton(type, value) {
+        if (!value) return;
+        const buttons = Array.from(document.querySelectorAll('.produto-variacao-btn[data-var-type="' + type + '"]'));
+        const found = buttons.find(b => (b.getAttribute('data-var-value') || b.textContent.trim()) === value);
+        if (!found) return;
+        buttons.forEach(b => b.classList.remove('ativa'));
+        found.classList.add('ativa');
+      }
+
+      function updateMainImageByVariation(imageVariation, fallbackButton) {
+        if (!principal) return;
+        if (!imageVariation && fallbackButton) {
+          const colorButtons = Array.from(document.querySelectorAll('.produto-variacao-btn[data-var-type="colors"]'));
+          const colorIndex = colorButtons.indexOf(fallbackButton);
+          imageVariation = medias[colorIndex] || '';
+        }
+        if (imageVariation) {
+          principal.innerHTML = `<img src="${escapeHtml(imageVariation)}" alt="${escapeHtml(name)}">`;
+          document.querySelectorAll('.galeria-thumb').forEach((thumb, thumbIndex) => {
+            thumb.classList.toggle('ativa', medias[thumbIndex] === imageVariation);
+          });
+        }
+      }
+
+      function applyCombinationFromClick(type, clickedBtn) {
+        const combos = Array.isArray(variacoesNormalizadas.combinations) ? variacoesNormalizadas.combinations : [];
+        if (!combos.length) return false;
+        const clickedValue = clickedBtn.getAttribute('data-var-value') || clickedBtn.textContent.trim();
+        const selected = {
+          color: getSelectedVariationValue('colors'),
+          storage: getSelectedVariationValue('storage'),
+          ram: getSelectedVariationValue('ram'),
+          condition: getSelectedVariationValue('condition')
+        };
+        const keyMap = { colors: 'color', storage: 'storage', ram: 'ram', condition: 'condition' };
+        selected[keyMap[type]] = clickedValue;
+        const combo = combos.find(c => {
+          if (selected.color && c.color && c.color !== selected.color) return false;
+          if (selected.storage && c.storage && c.storage !== selected.storage) return false;
+          if (selected.ram && c.ram && c.ram !== selected.ram) return false;
+          if (selected.condition && c.condition && c.condition !== selected.condition) return false;
+          return true;
+        }) || combos.find(c => c[keyMap[type]] === clickedValue);
+        if (!combo) return false;
+        activateVariationButton('colors', combo.color);
+        activateVariationButton('storage', combo.storage);
+        activateVariationButton('ram', combo.ram);
+        activateVariationButton('condition', combo.condition);
+        const activeColorBtn = document.querySelector('.produto-variacao-btn[data-var-type="colors"].ativa');
+        updateMainImageByVariation(combo.image ? assetPath(combo.image) : (activeColorBtn?.getAttribute('data-image') || ''), activeColorBtn);
+        return true;
+      }
+
+      document.querySelectorAll('.produto-variacao-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const type = btn.getAttribute('data-var-type');
+          document.querySelectorAll('.produto-variacao-btn[data-var-type="' + type + '"]').forEach(b => b.classList.remove('ativa'));
+          btn.classList.add('ativa');
+          const usedCombo = applyCombinationFromClick(type, btn);
+          if (!usedCombo && type === 'colors') {
+            updateMainImageByVariation(btn.getAttribute('data-image'), btn);
+          }
+        });
+      });
+
+      document.querySelectorAll('.galeria-thumb').forEach(btn => {
+        btn.addEventListener('click', () => {
+          document.querySelectorAll('.galeria-thumb').forEach(b => b.classList.remove('ativa'));
+          btn.classList.add('ativa');
+
+          const media = btn.getAttribute('data-media');
+
+          if (isYoutube(media)) {
+            const embed = youtubeEmbed(media);
+            principal.innerHTML = embed
+              ? `<iframe src="${escapeHtml(embed)}" allowfullscreen></iframe>`
+              : '<p>Vídeo inválido.</p>';
+          } else {
+            principal.innerHTML = `<img src="${escapeHtml(media)}" alt="${escapeHtml(name)}">`;
+          }
+        });
+      });
+    })
+    .catch(() => {
+      box.innerHTML = '<p class="em-breve" style="text-align:center;">Erro ao carregar produto.</p>';
+    });
+})();
+</script>
+</body>
+</html>

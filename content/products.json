@@ -980,6 +980,82 @@
         "combinationsText": ""
       },
       "id": 1781655355785
+    },
+    {
+      "name": "Apple Watch Series 11 GPS Cinza espacial de Alumínio 42mm Pulseira Esportiva Preta",
+      "slug": "apple-watch-series11-gps-de-aluminio-42mm-preta",
+      "price": null,
+      "image": "images/Apple watch series 11_cinzaespacial.jpeg",
+      "gallery": [],
+      "category": "eletronicos",
+      "showPrice": false,
+      "featured": true,
+      "active": true,
+      "detailsEnabled": true,
+      "descriptionShort": "",
+      "descriptionLong": "O Apple Watch Series 11 combina design elegante e tecnologia avançada. Com caixa leve de alumínio de 42mm na cor cinza-espacial e pulseira esportiva preta, oferece tela Retina Sempre Ativa, recursos inteligentes de saúde — incluindo monitoramento de sono e sinais vitais — e conectividade integrada para o seu dia a dia. Performance e estilo em um só dispositivo.\n\nProcessador: Chip S10 de 2 núcleos (mais rápido e eficiente).\nTela: Retina Sempre Ativa (até 2000 nits de brilho).\nDurabilidade: Vidro Ion-X (2x mais resistente a arranhões) e resistência à água (50m).\nBateria: Até 24 horas de uso normal (recarga rápida: 80% em 30 min).\nSaúde: ECG, monitoramento de oxigênio no sangue, temperatura e qualidade do sono.\nSegurança: Detecção de queda e de acidentes graves com chamada de emergência automática.\nCapacidade: 64 GB para apps, músicas e podcasts.",
+      "variations": {
+        "enabled": false,
+        "colors": [],
+        "storage": [],
+        "ram": [],
+        "condition": [],
+        "combinations": [],
+        "colorsText": "",
+        "storageText": "",
+        "ramText": "",
+        "conditionText": "",
+        "combinationsText": ""
+      },
+      "id": 1781824479005
+    },
+    {
+      "name": "Apple 2026 MacBook Neo chip A18 Pro, IA e Apple Intelligence, Tela 13 pol. Liquid Retina, 8 GB de memória unificada",
+      "slug": "apple-2026-macbook-neo-a18pro-ia-apple-intelligence-tela13-8gbram-ssd512",
+      "price": null,
+      "image": "images/Macbook_neo_A18pro.jpeg",
+      "gallery": [
+        "images/produtos/1781825435823-macbook-neo-a18pro-2.jpeg",
+        "images/produtos/1781825435829-macbook-neo-a18pro-3.jpeg",
+        "images/produtos/1781825435831-macbook-neo-a18pro-4.jpeg"
+      ],
+      "category": "eletronicos",
+      "showPrice": false,
+      "featured": false,
+      "active": true,
+      "detailsEnabled": true,
+      "descriptionShort": "",
+      "descriptionLong": "O MacBook Neo une design ultraportátil e alta performance. Equipado com o chip A18 Pro e recursos de Apple Intelligence, ele entrega velocidade e inteligência para elevar sua produtividade a um novo nível.\r\n\r\nChip: A18 Pro (CPU de 6 núcleos, GPU de 5 núcleos, Neural Engine de 16 núcleos)\r\nApple Intelligence: Ferramentas inteligentes que facilitam o seu dia a dia.\r\nTela Liquid Retina de 13\"\r\nArmazenamento versões: 256gb e 512GB de SSD.\r\nMemória: 8GB de memória unificada.\r\nBateria: Longa duração (até 16h de reprodução de vídeo)\r\nTeclado: Magic Keyboard com Touch ID\r\nConteúdo da caixa: MacBook Neo, cabo carregador USB-C (trançado) e adaptador de energia USB-C de 20W.",
+      "variations": {
+        "enabled": true,
+        "colors": [
+          {
+            "name": "Silver (Prateado)",
+            "hex": "#a19b9b",
+            "image": ""
+          },
+          {
+            "name": "Indigo (Azul escuro)",
+            "hex": "#0b3142",
+            "image": ""
+          }
+        ],
+        "storage": [
+          "256GB",
+          "512GB"
+        ],
+        "ram": [
+          "8GB"
+        ],
+        "condition": [],
+        "combinations": [],
+        "colorsText": "Silver (Prateado)|#a19b9b\nIndigo (Azul escuro)|#0b3142",
+        "storageText": "256GB\n512GB",
+        "ramText": "8GB",
+        "conditionText": "",
+        "combinationsText": ""
+      },
+      "id": 1781826340965
     }
   ]
 }
