@@ -397,7 +397,7 @@
     margin-top:8px;
   }
   .quality-variations-title{display:flex;justify-content:space-between;gap:10px;align-items:center;margin-bottom:12px;font-weight:900;}
-  .quality-variations-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;}
+  .quality-variations-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;}
   .quality-variations-box.variations-disabled .quality-variations-grid{display:none !important;}
   .variation-disabled-note{display:none;margin-top:10px;padding:10px 12px;border:1px dashed #cbd5e1;border-radius:10px;background:#f8fafc;color:#64748b;font-size:12px;}
   .quality-variations-box.variations-disabled .variation-disabled-note{display:block;}
@@ -412,12 +412,17 @@
   .variation-hidden-data{display:none !important;}
   .variation-summary{font-size:11px;color:#374151;line-height:1.4;margin-top:4px;}
   .manage-variations-btn{margin-top:6px;width:100% !important;font-size:10.5px !important;padding:7px 8px !important;}
-  .quality-variation-modal{width:min(760px,96vw);max-height:88vh;overflow:auto;background:#fff;border-radius:16px;border:1px solid #e5e7eb;box-shadow:0 22px 80px rgba(0,0,0,.25);}
+  .quality-variation-modal{width:min(920px,96vw);max-height:88vh;overflow:auto;background:#fff;border-radius:16px;border:1px solid #e5e7eb;box-shadow:0 22px 80px rgba(0,0,0,.25);}
   .quality-variation-modal-body{padding:16px;}
   .variation-modal-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
-  .variation-form-row{display:grid;grid-template-columns:1fr 120px 1fr auto;gap:6px;align-items:end;}
-  .variation-form-row input,.variation-form-row select{width:100% !important;}
-  .variation-simple-row{display:grid;grid-template-columns:1fr 1fr auto;gap:6px;align-items:end;}
+  .variation-form-row{display:grid;grid-template-columns:1fr 80px 1.3fr auto;gap:8px;align-items:end;}
+  .variation-form-row input,.variation-form-row select{width:100% !important;min-height:38px !important;}
+  .variation-simple-row{display:grid;grid-template-columns:1fr 1.2fr auto;gap:8px;align-items:end;}
+  .variation-simple-row input,.variation-simple-row select{min-height:38px !important;}
+  .variation-labels-box{grid-column:1 / -1;background:#fff;border:1px solid #e5e7eb;border-radius:12px;padding:10px;margin-bottom:10px;}
+  .variation-labels-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;}
+  .variation-labels-grid label{font-size:11px;font-weight:800;color:#374151;}
+  .variation-labels-grid input{width:100% !important;min-height:36px !important;}
   .variation-help{display:block;margin-top:5px;color:#6b7280;font-size:11px;}
   .quality-combo-card{grid-column:1 / -1;background:#fff;border:1px solid #dbeafe !important;}
   .variation-combo-row{display:grid;grid-template-columns:1fr 1fr 1fr 1fr 1fr auto;gap:6px;align-items:end;}
@@ -532,8 +537,19 @@
       <textarea name="variationStorage" class="variation-hidden-data" data-var-type="storage"></textarea>
       <textarea name="variationRam" class="variation-hidden-data" data-var-type="ram"></textarea>
       <textarea name="variationCondition" class="variation-hidden-data" data-var-type="condition"></textarea>
+      <textarea name="variationLabels" class="variation-hidden-data" data-var-type="labels"></textarea>
       <textarea name="variationCombinations" class="variation-hidden-data" data-var-type="combinations"></textarea>
       <div class="quality-variations-grid">
+        <div class="variation-labels-box">
+          <strong>🏷️ Nome dos grupos</strong>
+          <small class="variation-help">Opcional. Use quando quiser trocar "Armazenamento" por "Tipo de serviço", por exemplo.</small>
+          <div class="variation-labels-grid">
+            <label>Cor<input type="text" class="variation-label-input" data-label-type="colors" placeholder="Cor"></label>
+            <label>Armazenamento<input type="text" class="variation-label-input" data-label-type="storage" placeholder="Armazenamento"></label>
+            <label>RAM<input type="text" class="variation-label-input" data-label-type="ram" placeholder="Memória RAM"></label>
+            <label>Estado<input type="text" class="variation-label-input" data-label-type="condition" placeholder="Estado"></label>
+          </div>
+        </div>
         <div class="quality-var-card" data-var-card="colors">
           <strong>🎨 Cores</strong>
           <div class="variation-form-row">
@@ -744,6 +760,7 @@
               <textarea name="variationStorage" class="variation-hidden-data row-variation-storage"><%= Array.isArray(v.storage) ? v.storage.join('\n') : (v.storageText || '') %></textarea>
               <textarea name="variationRam" class="variation-hidden-data row-variation-ram"><%= Array.isArray(v.ram) ? v.ram.join('\n') : (v.ramText || '') %></textarea>
               <textarea name="variationCondition" class="variation-hidden-data row-variation-condition"><%= Array.isArray(v.condition) ? v.condition.join('\n') : (v.conditionText || '') %></textarea>
+              <textarea name="variationLabels" class="variation-hidden-data row-variation-labels"><%= v.labels ? JSON.stringify(v.labels) : (v.labelsText || '') %></textarea>
               <textarea name="variationCombinations" class="variation-hidden-data row-variation-combinations"><%= Array.isArray(v.combinations) ? v.combinations.map(c => [c.color, c.storage, c.ram, c.condition, c.image].filter((x, i) => i < 4 || x).join('|')).join('\n') : (v.combinationsText || '') %></textarea>
               <button class="btn manage-variations-btn" type="button">🎛️ Variações</button>
               <div class="variation-summary">Sem variações</div>
@@ -811,8 +828,19 @@
           <textarea class="variation-hidden-data" data-var-type="storage"></textarea>
           <textarea class="variation-hidden-data" data-var-type="ram"></textarea>
           <textarea class="variation-hidden-data" data-var-type="condition"></textarea>
+          <textarea class="variation-hidden-data" data-var-type="labels"></textarea>
           <textarea class="variation-hidden-data" data-var-type="combinations"></textarea>
           <div class="quality-variations-grid">
+            <div class="variation-labels-box">
+              <strong>🏷️ Nome dos grupos</strong>
+              <small class="variation-help">Opcional. Ex.: use <strong>Tipo de serviço</strong> no campo Armazenamento para listar Troca de bateria, Conector de carga etc.</small>
+              <div class="variation-labels-grid">
+                <label>Cor<input type="text" class="variation-label-input" data-label-type="colors" placeholder="Cor"></label>
+                <label>Armazenamento<input type="text" class="variation-label-input" data-label-type="storage" placeholder="Armazenamento"></label>
+                <label>RAM<input type="text" class="variation-label-input" data-label-type="ram" placeholder="Memória RAM"></label>
+                <label>Estado<input type="text" class="variation-label-input" data-label-type="condition" placeholder="Estado"></label>
+              </div>
+            </div>
             <div class="quality-var-card" data-var-card="colors"><strong>🎨 Cores</strong><div class="variation-form-row"><input type="text" class="var-color-name" placeholder="Nome: Preto"><input type="color" class="var-color-hex" value="#111111"><input type="text" class="var-color-image" list="imagens-list" placeholder="Imagem opcional"><button class="btn add-var-color" type="button">Adicionar</button></div><div class="quality-var-actions"><button class="btn var-preset" type="button" data-type="colors" data-values="Preto|#111111
 Branco|#f8fafc
 Azul|#2563eb">Preto / Branco / Azul</button><button class="btn var-preset" type="button" data-type="colors" data-values="Preto|#111111
@@ -1396,6 +1424,39 @@ document.addEventListener("DOMContentLoaded", () => {
     return box?.querySelector(`[data-var-type="${type}"]`);
   }
 
+  function parseVariationLabels(value) {
+    try {
+      const obj = JSON.parse(value || '{}');
+      return obj && typeof obj === 'object' ? obj : {};
+    } catch (e) {
+      return {};
+    }
+  }
+
+  function labelsFromInputs(box) {
+    const labels = {};
+    box?.querySelectorAll('.variation-label-input').forEach(input => {
+      const type = input.dataset.labelType;
+      const value = (input.value || '').trim();
+      if (type && value) labels[type] = value;
+    });
+    return labels;
+  }
+
+  function syncLabelInputs(box) {
+    if (!box) return;
+    const labels = parseVariationLabels(getVarTextarea(box, 'labels')?.value || '{}');
+    box.querySelectorAll('.variation-label-input').forEach(input => {
+      input.value = labels[input.dataset.labelType] || '';
+    });
+  }
+
+  function syncLabelsTextarea(box) {
+    const textarea = getVarTextarea(box, 'labels');
+    if (!textarea) return;
+    textarea.value = JSON.stringify(labelsFromInputs(box));
+  }
+
   function updateVariationVisibility(box) {
     if (!box) return;
     const enabled = box.querySelector(".variation-enabled-select")?.value === "true";
@@ -1405,6 +1466,7 @@ document.addEventListener("DOMContentLoaded", () => {
   function renderVariationBox(box) {
     if (!box) return;
     updateVariationVisibility(box);
+    syncLabelsTextarea(box);
     ["colors", "storage", "ram", "condition"].forEach(type => {
       const textarea = getVarTextarea(box, type);
       const listBox = box.querySelector(`[data-var-list="${type}"]`);
@@ -1577,6 +1639,7 @@ document.addEventListener("DOMContentLoaded", () => {
       el.addEventListener("change", () => renderVariationBox(box));
     });
 
+    syncLabelInputs(box);
     renderVariationBox(box);
   }
 
@@ -1587,7 +1650,9 @@ document.addEventListener("DOMContentLoaded", () => {
     getVarTextarea(modalVariationsBox, "storage").value = row.querySelector(".row-variation-storage")?.value || "";
     getVarTextarea(modalVariationsBox, "ram").value = row.querySelector(".row-variation-ram")?.value || "";
     getVarTextarea(modalVariationsBox, "condition").value = row.querySelector(".row-variation-condition")?.value || "";
+    getVarTextarea(modalVariationsBox, "labels").value = row.querySelector(".row-variation-labels")?.value || "";
     getVarTextarea(modalVariationsBox, "combinations").value = row.querySelector(".row-variation-combinations")?.value || "";
+    syncLabelInputs(modalVariationsBox);
     renderVariationBox(modalVariationsBox);
   }
 
@@ -1598,6 +1663,7 @@ document.addEventListener("DOMContentLoaded", () => {
     row.querySelector(".row-variation-storage").value = getVarTextarea(modalVariationsBox, "storage")?.value || "";
     row.querySelector(".row-variation-ram").value = getVarTextarea(modalVariationsBox, "ram")?.value || "";
     row.querySelector(".row-variation-condition").value = getVarTextarea(modalVariationsBox, "condition")?.value || "";
+    row.querySelector(".row-variation-labels").value = getVarTextarea(modalVariationsBox, "labels")?.value || "";
     row.querySelector(".row-variation-combinations").value = getVarTextarea(modalVariationsBox, "combinations")?.value || "";
     markRowDirty(row);
     updateVariationSummary(row);
@@ -1613,7 +1679,11 @@ document.addEventListener("DOMContentLoaded", () => {
     const r = parseLines(row.querySelector(".row-variation-ram")?.value).length;
     const e = parseLines(row.querySelector(".row-variation-condition")?.value).length;
     const g = parseLines(row.querySelector(".row-variation-combinations")?.value).length;
-    summary.textContent = `Variações: ${c} cor(es), ${s} GB, ${r} RAM, ${e} estado(s), ${g} combinação(ões)`;
+    const labels = parseVariationLabels(row.querySelector(".row-variation-labels")?.value || "{}");
+    const storageName = labels.storage || "GB";
+    const ramName = labels.ram || "RAM";
+    const conditionName = labels.condition || "estado(s)";
+    summary.textContent = `Variações: ${c} cor(es), ${s} ${storageName}, ${r} ${ramName}, ${e} ${conditionName}, ${g} combinação(ões)`;
   }
 
   function openVariationModal(row) {

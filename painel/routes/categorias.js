@@ -379,7 +379,7 @@ function generateCategoryPage(siteDir){
       const card = document.createElement('div');
       card.className = 'produto-card product-card';
       card.innerHTML =
-        '<img src="' + escapeHtml(productImage || '/site/images/sem-imagem.png') + '" alt="' + escapeHtml(productName) + '">' +
+        '<img src="' + escapeHtml(productImage ? (productImage.charAt(0) === "/" ? productImage : "/" + productImage) : "/images/sem-imagem.png") + '" alt="' + escapeHtml(productName) + '">' +
         '<h3>' + escapeHtml(productName) + '</h3>' +
         (priceStr ? '<p>' + escapeHtml(priceStr) + '</p>' : '') +
         detalhesHTML +

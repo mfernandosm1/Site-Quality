@@ -156,9 +156,23 @@ function parseVariationCombinations(value) {
   }).filter(c => c.color || c.storage || c.ram || c.condition);
 }
 
+
+function parseVariationLabels(value) {
+  if (!value) return {};
+
+  if (typeof value === 'object' && !Array.isArray(value)) return value;
+
+  try {
+    return JSON.parse(String(value || '{}'));
+  } catch (e) {
+    return {};
+  }
+}
+
 function variationsFromBody(body, current = {}) {
   const currentVariations = current.variations || {};
   const enabledRaw = body.variationsEnabled ?? currentVariations.enabled ?? false;
+  const labels = parseVariationLabels(body.variationLabels ?? currentVariations.labelsText ?? currentVariations.labels ?? {});
 
   const colors = parseVariationColors(body.variationColors ?? currentVariations.colorsText ?? '');
   const storage = linesFromBody(body.variationStorage ?? currentVariations.storageText ?? '');
@@ -175,7 +189,8 @@ function variationsFromBody(body, current = {}) {
     storage,
     ram,
     condition,
-    combinations
+    combinations,
+    labels
   };
 }
 
@@ -188,6 +203,7 @@ function variationsToText(variations = {}) {
     storageText: Array.isArray(variations.storage) ? variations.storage.join('\n') : '',
     ramText: Array.isArray(variations.ram) ? variations.ram.join('\n') : '',
     conditionText: Array.isArray(variations.condition) ? variations.condition.join('\n') : '',
+    labelsText: variations.labels ? JSON.stringify(variations.labels) : '',
     combinationsText: combinations
   };
 }
@@ -395,6 +411,7 @@ router.post('/update-all', (req, res) => {
       variationStorage: getField('variationStorage'),
       variationRam: getField('variationRam'),
       variationCondition: getField('variationCondition'),
+      variationLabels: getField('variationLabels'),
       variationCombinations: getField('variationCombinations')
     }, item);
 

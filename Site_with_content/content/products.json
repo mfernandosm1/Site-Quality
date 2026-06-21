@@ -1101,6 +1101,45 @@
         "combinationsText": ""
       },
       "id": 1781828065854
+    },
+    {
+      "name": "Troca de Tela de Celulares",
+      "slug": "troca-de-tela-de-celulares",
+      "price": null,
+      "image": "images/Troca_de-Tela_card.png",
+      "gallery": [
+        "images/produtos/1782071417602-troca-de-bateria.png"
+      ],
+      "category": "assistencia-tecnica",
+      "showPrice": false,
+      "featured": false,
+      "active": true,
+      "detailsEnabled": true,
+      "descriptionShort": "Troca de telas para iPhone, Samsung, Motorola e Xiaomi, com serviço rápido, instalação profissional e garantia.",
+      "descriptionLong": "Assistência técnica especializada em troca de telas para iPhone, Samsung, Motorola e Xiaomi. Utilizamos peças de qualidade e realizamos a substituição com cuidado técnico, buscando devolver ao aparelho sua melhor aparência e funcionalidade. Serviço rápido, instalação profissional e garantia.",
+      "variations": {
+        "enabled": true,
+        "colors": [],
+        "storage": [
+          "Troca de Bateria",
+          "Troca de Entrada de Energia",
+          "Reparo na Placa"
+        ],
+        "ram": [],
+        "condition": [],
+        "combinations": [],
+        "labels": {
+          "colors": "Cor",
+          "storage": "Serviços"
+        },
+        "colorsText": "",
+        "storageText": "Troca de Bateria\nTroca de Entrada de Energia\nReparo na Placa",
+        "ramText": "",
+        "conditionText": "",
+        "labelsText": "{\"colors\":\"Cor\",\"storage\":\"Serviços\"}",
+        "combinationsText": ""
+      },
+      "id": 1782068543631
     }
   ]
 }
