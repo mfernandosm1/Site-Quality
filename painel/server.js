@@ -119,6 +119,12 @@ app.use('/site', sitePreviewRouter);
 app.use('/site', express.static(SITE_DIR));
 
 
+// Redireciona index.html para a raiz
+app.get('/index.html', (req, res) => {
+  res.redirect(301, '/');
+});
+
+
 // ===== URLs AMIGÁVEIS NO PREVIEW LOCAL =====
 app.get('/produto/:slug/', (req, res) => {
   res.sendFile(path.join(SITE_DIR, 'produto.html'));
