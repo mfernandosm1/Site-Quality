@@ -1170,6 +1170,120 @@
         "combinationsText": ""
       },
       "id": 1782677744401
+    },
+    {
+      "name": "Tablet Samsung Galaxy Tab S10 FE 128 Gb",
+      "slug": "tablet-samsung-galaxy-tab-s10-fe-128gb",
+      "price": null,
+      "image": "images/Tablet Samsung S10fe.jpeg",
+      "gallery": [],
+      "category": "eletronicos",
+      "showPrice": false,
+      "featured": false,
+      "active": true,
+      "detailsEnabled": true,
+      "descriptionShort": "",
+      "descriptionLong": "* Tela: LCD de 10,9 polegadas com taxa de atualização de 90Hz.\r\n* Processador: Octa-Core Exynos 1580.\r\n* Câmera Traseira: 13 MP com gravação de vídeo em até 4K.\r\n* Câmera Frontal: 12 MP Ultra Wide ideal para videochamadas.\r\n* Bateria: 8.000 mAh com suporte a carregamento rápido de 45W.\r\n* Sistema Operacional: Android com interface One UI e recursos de inteligência artificial.\r\n* Conectividade: Versões com Wi-Fi 6 ou suporte a redes móveis 5G, além de Bluetooth 5.3 e GPS.\r\n* Áudio: Alto-falantes duplos com tecnologia Dolby Atmos.\r\n* Construção: Design fino e elegante com certificação IP68 de resistência a água e poeira.\r\n* Diferencial: Caneta S Pen inclusa na caixa para escrita e desenhos.",
+      "variations": {
+        "enabled": false,
+        "colors": [],
+        "storage": [],
+        "ram": [],
+        "condition": [],
+        "combinations": [],
+        "labels": {},
+        "colorsText": "",
+        "storageText": "",
+        "ramText": "",
+        "conditionText": "",
+        "labelsText": "{}",
+        "combinationsText": ""
+      },
+      "id": 1782679096916
+    },
+    {
+      "name": "Garrafa de Tinta Epson T544",
+      "slug": "garrafa-de-tinta-epson-t544",
+      "price": null,
+      "image": "images/Garrafa de tinta epson 544 preto.jpeg",
+      "gallery": [
+        "images/produtos/1782679478860-garrafa-de-tinta-epson-544-amarelo.jpeg",
+        "images/produtos/1782679478864-garrafa-de-tinta-epson-544-ciano.jpeg",
+        "images/produtos/1782679478873-garrafa-de-tinta-epson-544-magenta.jpeg"
+      ],
+      "category": "eletronicos",
+      "showPrice": false,
+      "featured": false,
+      "active": true,
+      "detailsEnabled": true,
+      "descriptionShort": "",
+      "descriptionLong": "Compatibilidade: Impressoras Epson EcoTank L3110, L3150, L3210, L3250, L5190, L5290 e modelos similares.\r\nRefil: 65 ml por garrafa.\r\nRendimento Estimado: Até 4.500 páginas em preto ou 7.500 páginas em cores\r\nDiferencial: Sistema de abastecimento Ecofit que evita derramamentos e erros de cor",
+      "variations": {
+        "enabled": true,
+        "colors": [
+          {
+            "name": "Preto",
+            "hex": "#111111",
+            "image": ""
+          },
+          {
+            "name": "Magenta",
+            "hex": "#ff00ff",
+            "image": ""
+          },
+          {
+            "name": "Ciano",
+            "hex": "#0019ff",
+            "image": ""
+          },
+          {
+            "name": "Amarelo",
+            "hex": "#fff700",
+            "image": ""
+          }
+        ],
+        "storage": [],
+        "ram": [],
+        "condition": [],
+        "combinations": [
+          {
+            "color": "Preto",
+            "storage": "",
+            "ram": "",
+            "condition": "",
+            "image": "images/Garrafa de tinta epson 544 preto.jpeg"
+          },
+          {
+            "color": "Magenta",
+            "storage": "",
+            "ram": "",
+            "condition": "",
+            "image": "images/Garrafa de tinta epson 544 magenta.jpeg"
+          },
+          {
+            "color": "Ciano",
+            "storage": "",
+            "ram": "",
+            "condition": "",
+            "image": "images/Garrafa de tinta epson 544 ciano.jpeg"
+          },
+          {
+            "color": "Amarelo",
+            "storage": "",
+            "ram": "",
+            "condition": "",
+            "image": "images/Garrafa de tinta epson 544 amarelo.jpeg"
+          }
+        ],
+        "labels": {},
+        "colorsText": "Preto|#111111\nMagenta|#ff00ff\nCiano|#0019ff\nAmarelo|#fff700",
+        "storageText": "",
+        "ramText": "",
+        "conditionText": "",
+        "labelsText": "{}",
+        "combinationsText": "Preto||||images/Garrafa de tinta epson 544 preto.jpeg\nMagenta||||images/Garrafa de tinta epson 544 magenta.jpeg\nCiano||||images/Garrafa de tinta epson 544 ciano.jpeg\nAmarelo||||images/Garrafa de tinta epson 544 amarelo.jpeg"
+      },
+      "id": 1782679964152
     }
   ]
 }
