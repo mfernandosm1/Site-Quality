@@ -460,10 +460,25 @@
       "featured": true,
       "active": true,
       "gallery": [],
-      "detailsEnabled": false,
+      "detailsEnabled": true,
       "descriptionShort": "",
-      "descriptionLong": "",
-      "slug": "notebook-lenovo-ideapad-1-amd-ryzen-5-7520u-8gb-512gb-ssd-win-11"
+      "descriptionLong": "Especificações:\n\nSistema e Performance:\n- Sistema Operacional: Windows 11 Home Single Language\n- Processador: AMD Ryzen 5 7520U (4 núcleos, 8 threads, até 4.3GHz)\n- Memória RAM: 8GB Soldado LPDDR5-5500\n- Armazenamento: 512GB SSD M.2 2242 PCIe Gen4\n- Placa de Vídeo: Gráficos Integrados AMD Radeon™ 610M\n\nTela:\n- Polegadas: 15.6\"\n- Resolução: HD (1366 x 768)\n- Painel: TN, Antirreflexo\n- Brilho: 220 nits\n- Formato: 16:9 Widescreen\n\nConectividade:\n- Wireless: Wi-Fi® 6, 802.11ax 2x2\n- Bluetooth: Bluetooth 5.2\n- Portas: 1x USB 2.0, 1x USB 3.2 Gen 1, 1x USB-C® 3.2 Gen 1 (suporta apenas transferência de dados), 1x HDMI® 1.4b, 1x Combo fone/microfone (3,5 mm), 1x Leitor de Cartão SD, 1x Conector de Energia\n\nRecursos:\n- Áudio: Alto-falantes Estéreo (1,5W x2) com Dolby Audio™\n- Câmera: HD 720p com Obturador de Privacidade\n- Microfone: Array com 2 microfones direcionais\n- Teclado: Padrão Brasileiro",
+      "slug": "notebook-lenovo-ideapad-1-amd-ryzen-5-7520u-8gb-512gb-ssd-win-11",
+      "variations": {
+        "enabled": false,
+        "colors": [],
+        "storage": [],
+        "ram": [],
+        "condition": [],
+        "combinations": [],
+        "labels": {},
+        "colorsText": "",
+        "storageText": "",
+        "ramText": "",
+        "conditionText": "",
+        "labelsText": "{}",
+        "combinationsText": ""
+      }
     },
     {
       "id": 1773001450741,
