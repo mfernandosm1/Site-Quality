@@ -1232,7 +1232,7 @@
       "active": true,
       "detailsEnabled": true,
       "descriptionShort": "",
-      "descriptionLong": "Compatibilidade: Impressoras Epson EcoTank L3110, L3150, L3210, L3250, L5190, L5290 e modelos similares.\nRefil: 65 ml por garrafa.\nRendimento Estimado: Até 4.500 páginas em preto ou até 7.500 páginas em cores\nDiferencial: Sistema de abastecimento Ecofit que evita derramamentos e erros de cor",
+      "descriptionLong": "<b>Compatibilidade:</b> Impressoras Epson EcoTank L3110, L3150, L3210, L3250, L5190, L5290 e modelos similares.\nRefil: 65 ml por garrafa.\nRendimento Estimado: Até 4.500 páginas em preto ou até 7.500 páginas em cores\nDiferencial: Sistema de abastecimento Ecofit que evita derramamentos e erros de cor",
       "variations": {
         "enabled": true,
         "colors": [
@@ -1266,28 +1266,32 @@
             "storage": "",
             "ram": "",
             "condition": "",
-            "image": "images/Garrafa de tinta epson 544 preto.jpeg"
+            "image": "images/Garrafa de tinta epson 544 preto.jpeg",
+            "stock": null
           },
           {
             "color": "Magenta",
             "storage": "",
             "ram": "",
             "condition": "",
-            "image": "images/Garrafa de tinta epson 544 magenta.jpeg"
+            "image": "images/Garrafa de tinta epson 544 magenta.jpeg",
+            "stock": null
           },
           {
             "color": "Ciano",
             "storage": "",
             "ram": "",
             "condition": "",
-            "image": "images/Garrafa de tinta epson 544 ciano.jpeg"
+            "image": "images/Garrafa de tinta epson 544 ciano.jpeg",
+            "stock": null
           },
           {
             "color": "Amarelo",
             "storage": "",
             "ram": "",
             "condition": "",
-            "image": "images/Garrafa de tinta epson 544 amarelo.jpeg"
+            "image": "images/Garrafa de tinta epson 544 amarelo.jpeg",
+            "stock": null
           }
         ],
         "labels": {},
@@ -1298,7 +1302,42 @@
         "labelsText": "{}",
         "combinationsText": "Preto||||images/Garrafa de tinta epson 544 preto.jpeg\nMagenta||||images/Garrafa de tinta epson 544 magenta.jpeg\nCiano||||images/Garrafa de tinta epson 544 ciano.jpeg\nAmarelo||||images/Garrafa de tinta epson 544 amarelo.jpeg"
       },
-      "id": 1782679964152
+      "id": 1782679964152,
+      "stock": null
+    },
+    {
+      "name": "Monitor Aoc 23,8 Led Full-hd 100hz",
+      "slug": "monitor-aoc-23-8-led-full-hd-100hz",
+      "price": null,
+      "stock": null,
+      "image": "images/monitorAOC23.8.jpeg",
+      "gallery": [
+        "images/produtos/1782947345059-2-monitoraoc23-8.jpeg",
+        "images/produtos/1782947345060-3-monitoraoc23-8.jpeg"
+      ],
+      "category": "eletronicos",
+      "showPrice": false,
+      "featured": false,
+      "active": true,
+      "detailsEnabled": true,
+      "descriptionShort": "",
+      "descriptionLong": "<div>O Monitor AOC Gaming 24B30HM2 combina alta performance e conforto visual num design ultrafino com bordas infinitas em 3 lados. Perfeito para jogos, trabalho e setups multi-monitores, oferece a fluidez que precisas com imagens nítidas de qualquer ângulo.</div><div><br></div><div><b>Destaques do Produto:</b></div><div>* Máxima Fluidez: Taxa de atualização de 100Hz e tempo de resposta de 1ms para uma jogabilidade rápida e sem rastros.</div><div>* Gráficos Perfeitos: Tecnologia Adaptive-Sync que elimina cortes e rasgos de imagem (tearing).</div><div>* Imagens Impressionantes: Painel VA com resolução Full HD e amplo ângulo de visão de 178°.</div><div>* Proteção para os Olhos: Tecnologias Flicker-Free e Low Blue Mode que reduzem a fadiga ocular em longos períodos de uso.</div><div><br></div><div><b>Especificações Técnicas:</b></div><div>* Tela: 23,8\" Widescreen VA (Bordas Ultrafinas)</div><div>* Resolução: 1920 x 1080 Full HD</div><div>* Taxa de Atualização: 100Hz</div><div>* Tempo de Resposta: 1ms</div><div>* Conexões: 1x HDMI 1.4 | 1x VGA</div><div>* Tecnologias: Adaptive-Sync, Flicker-Free, Low Blue Mode e Modo HDR</div><div>* Fixação VESA: Sim (compatível com suportes de parede/braços articulados)</div><div>* Voltagem: Bivolt</div><div><br></div><div><b>Conteúdo da Embalagem:</b></div><div>Monitor AOC 23,8\", Cabo de Força, Cabo HDMI e Base.</div>",
+      "variations": {
+        "enabled": false,
+        "colors": [],
+        "storage": [],
+        "ram": [],
+        "condition": [],
+        "combinations": [],
+        "labels": {},
+        "colorsText": "",
+        "storageText": "",
+        "ramText": "",
+        "conditionText": "",
+        "labelsText": "{}",
+        "combinationsText": ""
+      },
+      "id": 1782947479539
     }
   ]
 }

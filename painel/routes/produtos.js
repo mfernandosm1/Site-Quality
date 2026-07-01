@@ -151,7 +151,8 @@ function parseVariationCombinations(value) {
       storage: parts[1] || '',
       ram: parts[2] || '',
       condition: parts[3] || '',
-      image: parts[4] || ''
+      image: parts[4] || '',
+      stock: parts[5] !== undefined && parts[5] !== '' ? Number(parts[5]) : null
     };
   }).filter(c => c.color || c.storage || c.ram || c.condition);
 }
@@ -213,10 +214,15 @@ function productFromBody(body, current = {}) {
     ? Number(body.price)
     : null;
 
+  const stockValue = body.stock !== undefined && body.stock !== ''
+    ? Math.max(0, Number(body.stock))
+    : null;
+
   return {
     name: (body.name || current.name || '').trim(),
     slug: gerarSlug(body.slug || current.slug || body.name || current.name || ''),
     price: priceValue,
+    stock: Number.isFinite(stockValue) ? stockValue : null,
     image: (body.image || current.image || '').trim(),
     gallery: galleryFromBody(body.gallery, current.gallery),
     category: (body.category ?? current.category ?? '').toString().trim(),
@@ -397,6 +403,7 @@ router.post('/update-all', (req, res) => {
       name: getField('name'),
       slug: getField('slug'),
       price: getField('price'),
+      stock: getField('stock'),
       image: getField('image'),
       gallery: getField('gallery'),
       category: getField('category'),

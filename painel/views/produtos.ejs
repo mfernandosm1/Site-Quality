@@ -329,6 +329,79 @@
     font-weight:900;
   }
 
+
+  .description-editor-summary{
+    display:flex;
+    flex-direction:column;
+    gap:6px;
+  }
+  .description-preview{
+    min-height:32px;
+    max-height:48px;
+    overflow:hidden;
+    border:1px solid #e5e7eb;
+    background:#f9fafb;
+    border-radius:9px;
+    padding:7px 8px;
+    font-size:11px;
+    color:#374151;
+    line-height:1.35;
+  }
+  .manage-description-btn{
+    width:100% !important;
+    padding:7px 8px !important;
+    font-size:10.5px !important;
+    border-radius:8px !important;
+  }
+  .quality-description-modal{
+    width:min(860px,96vw);
+    max-height:88vh;
+    overflow:auto;
+    background:#fff;
+    border-radius:16px;
+    border:1px solid #e5e7eb;
+    box-shadow:0 22px 80px rgba(0,0,0,.25);
+  }
+  .quality-description-modal-body{padding:16px;}
+  .description-editor-field{margin-bottom:12px;}
+  .description-editor-field label{font-weight:800;font-size:12px;display:block;margin-bottom:6px;}
+  .description-toolbar{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:8px;}
+  .description-toolbar button{border:1px solid #d1d5db;background:#f9fafb;border-radius:8px;padding:7px 10px;font-weight:800;cursor:pointer;}
+  .description-rich-editor{
+    min-height:260px;
+    border:1px solid #cbd5e1;
+    border-radius:12px;
+    padding:12px;
+    background:#fff;
+    line-height:1.6;
+    outline:none;
+    overflow:auto;
+  }
+  .description-rich-editor:focus{border-color:#2563eb;box-shadow:0 0 0 1px #2563eb;}
+  .quality-image-suggest{
+    position:fixed;
+    z-index:2000;
+    max-height:230px;
+    overflow:auto;
+    background:#fff;
+    border:1px solid #cbd5e1;
+    border-radius:10px;
+    box-shadow:0 12px 30px rgba(0,0,0,.18);
+    display:none;
+  }
+  .quality-image-suggest button{
+    display:flex;
+    width:100%;
+    border:0;
+    background:#fff;
+    text-align:left;
+    padding:8px 10px;
+    font-size:12px;
+    cursor:pointer;
+    border-bottom:1px solid #f1f5f9;
+  }
+  .quality-image-suggest button:hover{background:#eff6ff;}
+
   @media (max-width:1200px){
     .quality-table-wrap .table{ min-width:1180px !important; }
     .quality-controls-grid{ grid-template-columns:1fr; }
@@ -417,6 +490,7 @@
   .variation-modal-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
   .variation-form-row{display:grid;grid-template-columns:1fr 80px 1.3fr auto;gap:8px;align-items:end;}
   .variation-form-row input,.variation-form-row select{width:100% !important;min-height:38px !important;}
+  .stock-input-small{max-width:120px !important;}
   .variation-simple-row{display:grid;grid-template-columns:1fr 1.2fr auto;gap:8px;align-items:end;}
   .variation-simple-row input,.variation-simple-row select{min-height:38px !important;}
   .variation-labels-box{grid-column:1 / -1;background:#fff;border:1px solid #e5e7eb;border-radius:12px;padding:10px;margin-bottom:10px;}
@@ -425,7 +499,7 @@
   .variation-labels-grid input{width:100% !important;min-height:36px !important;}
   .variation-help{display:block;margin-top:5px;color:#6b7280;font-size:11px;}
   .quality-combo-card{grid-column:1 / -1;background:#fff;border:1px solid #dbeafe !important;}
-  .variation-combo-row{display:grid;grid-template-columns:1fr 1fr 1fr 1fr 1fr auto;gap:6px;align-items:end;}
+  .variation-combo-row{display:grid;grid-template-columns:1fr 1fr 1fr 1fr 1.2fr .7fr auto;gap:6px;align-items:end;}
   .quality-combo-list{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px;}
   .quality-combo-pill{display:inline-flex;align-items:center;gap:6px;border:1px solid #bfdbfe;background:#eff6ff;border-radius:999px;padding:5px 8px;font-size:11px;font-weight:800;}
   .quality-combo-pill button{border:none;background:transparent;color:#991b1b;cursor:pointer;font-weight:900;}
@@ -458,6 +532,11 @@
     <div class="field-small">
       <label>Preço</label>
       <input type="number" name="price" step="0.01" min="0" placeholder="opcional">
+    </div>
+
+    <div class="field-small">
+      <label>Estoque</label>
+      <input type="number" name="stock" step="1" min="0" placeholder="opcional">
     </div>
 
     <div class="field-image">
@@ -555,7 +634,7 @@
           <div class="variation-form-row">
             <input type="text" class="var-color-name" placeholder="Nome: Preto">
             <input type="color" class="var-color-hex" value="#111111">
-            <input type="text" class="var-color-image" list="imagens-list" placeholder="Imagem opcional">
+            <input type="text" class="var-color-image quality-image-picker" list="imagens-list" placeholder="Imagem opcional" onfocus="sincronizarImagensAuto()" autocomplete="off">
             <button class="btn add-var-color" type="button">Adicionar</button>
           </div>
           <div class="quality-var-actions">
@@ -590,7 +669,8 @@
             <select class="var-combo-select" data-combo="storage"><option value="">GB</option></select>
             <select class="var-combo-select" data-combo="ram"><option value="">RAM</option></select>
             <select class="var-combo-select" data-combo="condition"><option value="">Estado</option></select>
-            <input type="text" class="var-combo-image" list="imagens-list" placeholder="Imagem opcional">
+            <input type="text" class="var-combo-image quality-image-picker" list="imagens-list" placeholder="Imagem opcional" onfocus="sincronizarImagensAuto()" autocomplete="off">
+            <input type="number" class="var-combo-stock stock-input-small" min="0" step="1" placeholder="Estoque">
             <button class="btn add-var-combo" type="button">Adicionar</button>
           </div>
           <div class="quality-combo-list" data-var-list="combinations"></div>
@@ -668,6 +748,7 @@
           <th>Nome</th>
           <th>Slug</th>
           <th>Preço</th>
+          <th>Estoque</th>
           <th>Categoria</th>
           <th>Mostrar Preço</th>
           <th>Vitrine</th>
@@ -693,6 +774,7 @@
               <input type="text" name="slug" value="<%= p.slug || '' %>" class="prod-slug-input" placeholder="slug-do-produto">
             </td>
             <td><input type="number" step="0.01" min="0" name="price" value="<%= p.price || '' %>"></td>
+            <td><input type="number" step="1" min="0" name="stock" value="<%= (p.stock ?? '') %>" placeholder="Qtd."></td>
 
             <td>
               <select name="category" class="prod-category-select">
@@ -732,8 +814,12 @@
             </td>
 
             <td>
-              <input type="text" name="descriptionShort" value="<%= p.descriptionShort || '' %>" placeholder="Descrição curta...">
-              <textarea name="descriptionLong" rows="2" placeholder="Descrição completa..." style="margin-top:6px; width:100%; padding:6px 8px; border:1px solid #ccc; border-radius:4px;"><%= p.descriptionLong || '' %></textarea>
+              <textarea name="descriptionShort" class="row-description-short" placeholder="Descrição curta..." style="display:none;"><%= p.descriptionShort || '' %></textarea>
+              <textarea name="descriptionLong" class="row-description-long" placeholder="Descrição completa..." style="display:none;"><%= p.descriptionLong || '' %></textarea>
+              <div class="description-editor-summary">
+                <div class="description-preview"><%= (p.descriptionShort || p.descriptionLong || 'Sem descrição cadastrada').replace(/<[^>]*>/g, '').slice(0, 95) %><%= ((p.descriptionShort || p.descriptionLong || '').replace(/<[^>]*>/g, '').length > 95 ? '...' : '') %></div>
+                <button class="btn manage-description-btn" type="button">Editar descrição</button>
+              </div>
             </td>
 
             <td>
@@ -761,7 +847,7 @@
               <textarea name="variationRam" class="variation-hidden-data row-variation-ram"><%= Array.isArray(v.ram) ? v.ram.join('\n') : (v.ramText || '') %></textarea>
               <textarea name="variationCondition" class="variation-hidden-data row-variation-condition"><%= Array.isArray(v.condition) ? v.condition.join('\n') : (v.conditionText || '') %></textarea>
               <textarea name="variationLabels" class="variation-hidden-data row-variation-labels"><%= v.labels ? JSON.stringify(v.labels) : (v.labelsText || '') %></textarea>
-              <textarea name="variationCombinations" class="variation-hidden-data row-variation-combinations"><%= Array.isArray(v.combinations) ? v.combinations.map(c => [c.color, c.storage, c.ram, c.condition, c.image].filter((x, i) => i < 4 || x).join('|')).join('\n') : (v.combinationsText || '') %></textarea>
+              <textarea name="variationCombinations" class="variation-hidden-data row-variation-combinations"><%= Array.isArray(v.combinations) ? v.combinations.map(c => [c.color, c.storage, c.ram, c.condition, c.image, c.stock].filter((x, i) => i < 4 || x !== undefined && x !== null && x !== '').join('|')).join('\n') : (v.combinationsText || '') %></textarea>
               <button class="btn manage-variations-btn" type="button">🎛️ Variações</button>
               <div class="variation-summary">Sem variações</div>
               <button class="btn primary save-product-btn" type="button">💾 Salvar produto</button>
@@ -841,7 +927,7 @@
                 <label>Estado<input type="text" class="variation-label-input" data-label-type="condition" placeholder="Estado"></label>
               </div>
             </div>
-            <div class="quality-var-card" data-var-card="colors"><strong>🎨 Cores</strong><div class="variation-form-row"><input type="text" class="var-color-name" placeholder="Nome: Preto"><input type="color" class="var-color-hex" value="#111111"><input type="text" class="var-color-image" list="imagens-list" placeholder="Imagem opcional"><button class="btn add-var-color" type="button">Adicionar</button></div><div class="quality-var-actions"><button class="btn var-preset" type="button" data-type="colors" data-values="Preto|#111111
+            <div class="quality-var-card" data-var-card="colors"><strong>🎨 Cores</strong><div class="variation-form-row"><input type="text" class="var-color-name" placeholder="Nome: Preto"><input type="color" class="var-color-hex" value="#111111"><input type="text" class="var-color-image quality-image-picker" list="imagens-list" placeholder="Imagem opcional" onfocus="sincronizarImagensAuto()" autocomplete="off"><button class="btn add-var-color" type="button">Adicionar</button></div><div class="quality-var-actions"><button class="btn var-preset" type="button" data-type="colors" data-values="Preto|#111111
 Branco|#f8fafc
 Azul|#2563eb">Preto / Branco / Azul</button><button class="btn var-preset" type="button" data-type="colors" data-values="Preto|#111111
 Verde|#22c55e
@@ -867,7 +953,8 @@ Com marcas de uso">Usados padrão</button></div><div class="quality-var-list" da
             <select class="var-combo-select" data-combo="storage"><option value="">GB</option></select>
             <select class="var-combo-select" data-combo="ram"><option value="">RAM</option></select>
             <select class="var-combo-select" data-combo="condition"><option value="">Estado</option></select>
-            <input type="text" class="var-combo-image" list="imagens-list" placeholder="Imagem opcional">
+            <input type="text" class="var-combo-image quality-image-picker" list="imagens-list" placeholder="Imagem opcional" onfocus="sincronizarImagensAuto()" autocomplete="off">
+            <input type="number" class="var-combo-stock stock-input-small" min="0" step="1" placeholder="Estoque">
             <button class="btn add-var-combo" type="button">Adicionar</button>
           </div>
           <div class="quality-combo-list" data-var-list="combinations"></div>
@@ -880,6 +967,41 @@ Com marcas de uso">Usados padrão</button></div><div class="quality-var-list" da
   </div>
 
 </div>
+
+
+<div class="quality-modal-backdrop" id="description-modal" aria-hidden="true">
+  <div class="quality-description-modal">
+    <div class="quality-gallery-modal-header">
+      <strong>📝 Editar descrição do produto</strong>
+      <button class="quality-close-btn" type="button" id="description-modal-close">×</button>
+    </div>
+    <div class="quality-description-modal-body">
+      <div class="description-editor-field">
+        <label>Descrição curta</label>
+        <textarea id="description-modal-short" rows="3" placeholder="Resumo curto para cards e buscas..." style="width:100%;padding:10px 12px;border:1px solid #cbd5e1;border-radius:10px;"></textarea>
+      </div>
+      <div class="description-editor-field">
+        <label>Descrição completa</label>
+        <div class="description-toolbar">
+          <button type="button" data-desc-cmd="bold"><b>B</b></button>
+          <button type="button" data-desc-cmd="italic"><i>I</i></button>
+          <button type="button" data-desc-cmd="insertUnorderedList">Lista</button>
+          <button type="button" data-desc-cmd="formatBlock" data-desc-value="h3">Título</button>
+          <button type="button" data-desc-cmd="formatBlock" data-desc-value="p">Texto</button>
+          <button type="button" id="description-clear-format">Limpar formatação</button>
+        </div>
+        <div id="description-modal-long" class="description-rich-editor" contenteditable="true"></div>
+        <small class="variation-help">Dica: você pode colar texto pronto aqui e usar negrito, títulos e listas.</small>
+      </div>
+      <div class="modal-gallery-actions" style="grid-template-columns:auto auto;justify-content:end;">
+        <button class="btn" type="button" id="description-modal-cancel">Cancelar</button>
+        <button class="btn" type="button" id="description-modal-save">Salvar descrição</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="quality-image-suggest" class="quality-image-suggest"></div>
 
 <script>
 document.addEventListener("DOMContentLoaded", () => {
@@ -1506,7 +1628,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function comboLineLabel(line) {
     const p = (line || '').split('|').map(v => v.trim());
-    return [p[0], p[1], p[2], p[3]].filter(Boolean).join(' + ') + (p[4] ? ' 🖼️' : '');
+    return [p[0], p[1], p[2], p[3]].filter(Boolean).join(' + ') + (p[4] ? ' 🖼️' : '') + (p[5] ? ' • Est: ' + p[5] : '');
   }
 
   function colorNameFromLine(line) { return (line || '').split('|')[0].trim(); }
@@ -1609,15 +1731,18 @@ document.addEventListener("DOMContentLoaded", () => {
         const ram = box.querySelector('.var-combo-select[data-combo="ram"]')?.value || '';
         const condition = box.querySelector('.var-combo-select[data-combo="condition"]')?.value || '';
         const image = (box.querySelector('.var-combo-image')?.value || '').trim();
+        const stock = (box.querySelector('.var-combo-stock')?.value || '').trim();
         if (!color && !storage && !ram && !condition) return alert('Escolha pelo menos uma opção para a combinação.');
-        const line = [color, storage, ram, condition, image].join('|').replace(/\|+$/,'');
+        const line = [color, storage, ram, condition, image, stock].join('|').replace(/\|+$/,'');
         const textarea = getVarTextarea(box, 'combinations');
         const list = parseLines(textarea.value);
         uniquePush(list, line);
         textarea.value = list.join("\n");
         textarea.dispatchEvent(new Event("input", { bubbles:true }));
         const imageInput = box.querySelector('.var-combo-image');
+        const stockInput = box.querySelector('.var-combo-stock');
         if (imageInput) imageInput.value = '';
+        if (stockInput) stockInput.value = '';
         renderVariationBox(box);
       });
     });
@@ -1637,6 +1762,10 @@ document.addEventListener("DOMContentLoaded", () => {
     box.querySelectorAll("textarea, select, input").forEach(el => {
       el.addEventListener("input", () => renderVariationBox(box));
       el.addEventListener("change", () => renderVariationBox(box));
+    });
+
+    box.querySelectorAll(".quality-image-picker").forEach(el => {
+      el.addEventListener("focus", () => sincronizarImagensAuto());
     });
 
     syncLabelInputs(box);
@@ -1710,6 +1839,129 @@ document.addEventListener("DOMContentLoaded", () => {
     await saveProductRow(activeVariationRow);
     closeVariationModal();
   });
+
+
+  const descriptionModal = document.getElementById("description-modal");
+  const descriptionModalClose = document.getElementById("description-modal-close");
+  const descriptionModalCancel = document.getElementById("description-modal-cancel");
+  const descriptionModalSave = document.getElementById("description-modal-save");
+  const descriptionModalShort = document.getElementById("description-modal-short");
+  const descriptionModalLong = document.getElementById("description-modal-long");
+  let activeDescriptionRow = null;
+
+  function stripTagsForPreview(html){
+    const div = document.createElement("div");
+    div.innerHTML = html || "";
+    return (div.textContent || div.innerText || "").trim();
+  }
+
+  function sanitizeDescriptionHtml(html){
+    const allowed = ["B","STRONG","I","EM","BR","P","DIV","UL","OL","LI","H3","H4"];
+    const tpl = document.createElement("template");
+    tpl.innerHTML = html || "";
+    tpl.content.querySelectorAll("*").forEach(el => {
+      if (!allowed.includes(el.tagName)) {
+        el.replaceWith(document.createTextNode(el.textContent || ""));
+        return;
+      }
+      Array.from(el.attributes).forEach(attr => el.removeAttribute(attr.name));
+    });
+    return tpl.innerHTML.trim();
+  }
+
+  function updateDescriptionPreview(row){
+    const shortVal = row.querySelector(".row-description-short")?.value || "";
+    const longVal = row.querySelector(".row-description-long")?.value || "";
+    const text = stripTagsForPreview(shortVal || longVal) || "Sem descrição cadastrada";
+    const preview = row.querySelector(".description-preview");
+    if (preview) preview.textContent = text.length > 95 ? text.slice(0,95) + "..." : text;
+  }
+
+  function openDescriptionModal(row){
+    activeDescriptionRow = row;
+    descriptionModalShort.value = row.querySelector(".row-description-short")?.value || "";
+    descriptionModalLong.innerHTML = row.querySelector(".row-description-long")?.value || "";
+    descriptionModal?.classList.add("open");
+    descriptionModal?.setAttribute("aria-hidden", "false");
+    setTimeout(() => descriptionModalShort?.focus(), 50);
+  }
+
+  function closeDescriptionModal(){
+    descriptionModal?.classList.remove("open");
+    descriptionModal?.setAttribute("aria-hidden", "true");
+    activeDescriptionRow = null;
+  }
+
+  document.querySelectorAll(".manage-description-btn").forEach(btn => {
+    btn.addEventListener("click", () => openDescriptionModal(btn.closest("tr")));
+  });
+  descriptionModalClose?.addEventListener("click", closeDescriptionModal);
+  descriptionModalCancel?.addEventListener("click", closeDescriptionModal);
+  descriptionModal?.addEventListener("click", e => { if (e.target === descriptionModal) closeDescriptionModal(); });
+  document.querySelectorAll("[data-desc-cmd]").forEach(btn => {
+    btn.addEventListener("click", () => {
+      descriptionModalLong?.focus();
+      document.execCommand(btn.dataset.descCmd, false, btn.dataset.descValue || null);
+    });
+  });
+  document.getElementById("description-clear-format")?.addEventListener("click", () => {
+    const text = stripTagsForPreview(descriptionModalLong?.innerHTML || "");
+    if (descriptionModalLong) descriptionModalLong.textContent = text;
+  });
+  descriptionModalSave?.addEventListener("click", async () => {
+    if (!activeDescriptionRow) return;
+    const shortEl = activeDescriptionRow.querySelector(".row-description-short");
+    const longEl = activeDescriptionRow.querySelector(".row-description-long");
+    if (shortEl) shortEl.value = descriptionModalShort.value.trim();
+    if (longEl) longEl.value = sanitizeDescriptionHtml(descriptionModalLong.innerHTML);
+    updateDescriptionPreview(activeDescriptionRow);
+    markRowDirty(activeDescriptionRow);
+    await saveProductRow(activeDescriptionRow);
+    closeDescriptionModal();
+  });
+
+  function getImageOptions(){
+    const dl = document.getElementById("imagens-list");
+    return Array.from(dl?.options || []).map(o => o.value || o.textContent || "").filter(Boolean);
+  }
+
+  const imageSuggest = document.getElementById("quality-image-suggest");
+  function renderImageSuggestions(input){
+    if (!imageSuggest || !input) return;
+    const term = (input.value || "").toLowerCase().replace(/^images\//, "");
+    const options = getImageOptions();
+    const matches = options.filter(v => v.toLowerCase().includes(term)).slice(0, 30);
+    if (!matches.length) { imageSuggest.style.display = "none"; return; }
+    const rect = input.getBoundingClientRect();
+    imageSuggest.style.left = rect.left + "px";
+    imageSuggest.style.top = (rect.bottom + 4) + "px";
+    imageSuggest.style.width = Math.max(rect.width, 260) + "px";
+    imageSuggest.innerHTML = matches.map(v => `<button type="button" data-img-value="${v.replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;')}">${v.replace(/^images\//,'')}</button>`).join("");
+    imageSuggest.style.display = "block";
+    imageSuggest.querySelectorAll("button").forEach(btn => {
+      btn.addEventListener("mousedown", e => {
+        e.preventDefault();
+        input.value = btn.dataset.imgValue || "";
+        input.dispatchEvent(new Event("change", { bubbles:true }));
+        imageSuggest.style.display = "none";
+      });
+    });
+  }
+  document.addEventListener("input", e => {
+    if (e.target?.classList?.contains("quality-image-picker")) renderImageSuggestions(e.target);
+  });
+  document.addEventListener("focusin", e => {
+    if (e.target?.classList?.contains("quality-image-picker")) {
+      sincronizarImagensAuto();
+      setTimeout(() => renderImageSuggestions(e.target), 150);
+    }
+  });
+  document.addEventListener("click", e => {
+    if (!e.target?.classList?.contains("quality-image-picker") && !imageSuggest?.contains(e.target)) {
+      if (imageSuggest) imageSuggest.style.display = "none";
+    }
+  });
+
   updateAddGallerySummary();
   updateSelectionCount();
 
