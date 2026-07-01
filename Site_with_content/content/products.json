@@ -1338,6 +1338,39 @@
         "combinationsText": ""
       },
       "id": 1782947479539
+    },
+    {
+      "name": "Antena Starlink Mini, Internet Via Satélite de Alta Velocidade, Portátil, WIFI 5",
+      "slug": "antena-starlink-mini-internet-via-satelite-portatil-wifi5",
+      "price": null,
+      "stock": null,
+      "image": "images/Starlink_mini.jpeg",
+      "gallery": [
+        "images/produtos/1782950185963-starlink-mini-2.png"
+      ],
+      "category": "eletronicos",
+      "showPrice": false,
+      "featured": false,
+      "active": true,
+      "detailsEnabled": true,
+      "descriptionShort": "",
+      "descriptionLong": "<p>A Starlink Mini é a solução definitiva de conectividade ultraportátil, projetada para entregar internet de alta velocidade e baixa latência em qualquer lugar do planeta. Com design compacto que cabe na mochila, ela traz o roteador Wi-Fi 5 integrado diretamente no corpo da antena, reduzindo cabos e simplificando a instalação</p><p><b>Destaques do Produto:</b></p><ul><li><p><b>Mobilidade Total:</b> Design ultraleve (apenas 1,1 kg) e compacto, feito para levar na mochila.</p></li><li><p><b>Roteador Wi-Fi 5 Integrado:</b> Dispensa roteador externo, conecta até 128 dispositivos e cobre até 112 m².</p></li><li><p><b>Alta Performance:</b> Velocidades acima de 100 Mbps para streaming, jogos e videochamadas sem travar.</p></li><li><p><b>Resistência Extrema:</b> Certificação IP67 (totalmente à prova de poeira e resistente à água).</p></li><li><p><b>Alimentação Flexível:</b> Funciona na tomada padrão ou via fontes portáteis/powerbanks (USB-C PD de 100W).</p></li></ul><p><b>Especificações Técnicas:</b></p><ul><li><p><b>Modelo:</b> Starlink Mini com Wi-Fi embutido</p></li><li><p><b>Tecnologia Sem Fio:</b> Wi-Fi 5 (Dual Band 3x3 MU-MIMO)</p></li><li><p><b>Velocidade Média:</b> Acima de 100 Mbps</p></li><li><p><b>Conectividade:</b> 1x Porta Ethernet LAN (com vedação)</p></li><li><p><b>Proteção:</b> Classificação IP67 (resistente a chuva e poeira)</p></li><li><p><b>Dimensões e Peso:</b> 29,8 x 25,9 cm | 1,1 kg</p></li></ul><p><b>Conteúdo da Embalagem:</b>\r\nAntena Starlink Mini, Apoio de Mesa, Adaptador de Tubo, Cabo de Alimentação CC (15m) e Fonte de Alimentação.</p>",
+      "variations": {
+        "enabled": false,
+        "colors": [],
+        "storage": [],
+        "ram": [],
+        "condition": [],
+        "combinations": [],
+        "labels": {},
+        "colorsText": "",
+        "storageText": "",
+        "ramText": "",
+        "conditionText": "",
+        "labelsText": "{}",
+        "combinationsText": ""
+      },
+      "id": 1782950375032
     }
   ]
 }

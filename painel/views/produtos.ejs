@@ -506,6 +506,81 @@
 
   @media (max-width:1000px){.quality-variations-grid,.variation-modal-grid{grid-template-columns:1fr;}.variation-form-row,.variation-simple-row,.variation-combo-row{grid-template-columns:1fr;}}
 
+
+  /* V3.1 - tabela mais limpa: corrige largura após adicionar estoque e deixa tudo visível sem rolar para a direita */
+  .quality-table-wrap{overflow-x:visible !important;}
+  .quality-table-wrap .table{min-width:0 !important;width:100% !important;table-layout:fixed !important;}
+  .quality-table-wrap .table th,
+  .quality-table-wrap .table td{padding:6px !important;font-size:10.5px !important;}
+  .quality-table-wrap .table th:nth-child(1), .quality-table-wrap .table td:nth-child(1){width:2.4% !important;}
+  .quality-table-wrap .table th:nth-child(2), .quality-table-wrap .table td:nth-child(2){width:2.8% !important;}
+  .quality-table-wrap .table th:nth-child(3), .quality-table-wrap .table td:nth-child(3){width:15.5% !important;}
+  .quality-table-wrap .table th:nth-child(4), .quality-table-wrap .table td:nth-child(4){width:12.5% !important;}
+  .quality-table-wrap .table th:nth-child(5), .quality-table-wrap .table td:nth-child(5){width:5% !important;}
+  .quality-table-wrap .table th:nth-child(6), .quality-table-wrap .table td:nth-child(6){width:5% !important;}
+  .quality-table-wrap .table th:nth-child(7), .quality-table-wrap .table td:nth-child(7){width:5.5% !important;}
+  .quality-table-wrap .table th:nth-child(8), .quality-table-wrap .table td:nth-child(8){width:4.8% !important;}
+  .quality-table-wrap .table th:nth-child(9), .quality-table-wrap .table td:nth-child(9){width:4.8% !important;}
+  .quality-table-wrap .table th:nth-child(10), .quality-table-wrap .table td:nth-child(10){width:4.8% !important;}
+  .quality-table-wrap .table th:nth-child(11), .quality-table-wrap .table td:nth-child(11){width:7% !important;}
+  .quality-table-wrap .table th:nth-child(12), .quality-table-wrap .table td:nth-child(12){width:8.5% !important;}
+  .quality-table-wrap .table th:nth-child(13), .quality-table-wrap .table td:nth-child(13){width:6.5% !important;}
+  .quality-table-wrap .table th:nth-child(14), .quality-table-wrap .table td:nth-child(14){width:7% !important;}
+  .quality-table-wrap .table th:nth-child(15), .quality-table-wrap .table td:nth-child(15){width:8.4% !important;}
+  .quality-table-wrap select,
+  .quality-table-wrap input,
+  .quality-table-wrap textarea{font-size:10.5px !important;padding:6px 7px !important;}
+  .quality-table-wrap select[name="detailsEnabled"]{max-width:100% !important;}
+  .description-preview{max-height:34px !important;min-height:30px !important;overflow:hidden !important;}
+  .manage-description-btn,.manage-gallery-btn,.manage-variations-btn,.quality-actions .btn{padding:6px 7px !important;font-size:10px !important;}
+  .variation-summary{max-height:34px;overflow:hidden;font-size:10.5px !important;}
+  .row-save-status{font-size:10px !important;white-space:normal !important;}
+  @media (max-width:1200px){.quality-table-wrap{overflow-x:auto !important;}.quality-table-wrap .table{min-width:1120px !important;}}
+
+  .add-description-editor-wrap{grid-column:1 / -1;border:1px solid #e5e7eb;border-radius:12px;background:#fafafa;padding:12px;}
+  .add-description-editor-wrap .description-rich-editor{background:#fff;min-height:150px;}
+  .add-description-editor-wrap .description-toolbar button{font-size:12px;}
+
+
+
+  /* V7.4.1 - Etapa 1: tabela resumo, limpa e sem rolagem horizontal */
+  .quality-table-wrap{overflow-x:visible !important;}
+  .quality-products-summary-table{width:100% !important;min-width:0 !important;table-layout:fixed !important;border-collapse:collapse;}
+  .quality-products-summary-table th,.quality-products-summary-table td{padding:10px 8px !important;font-size:12px !important;vertical-align:middle !important;border-bottom:1px solid #e5e7eb;}
+  .quality-products-summary-table th:nth-child(1),.quality-products-summary-table td:nth-child(1){width:3.5% !important;text-align:center;}
+  .quality-products-summary-table th:nth-child(2),.quality-products-summary-table td:nth-child(2){width:4% !important;text-align:center;}
+  .quality-products-summary-table th:nth-child(3),.quality-products-summary-table td:nth-child(3){width:31% !important;}
+  .quality-products-summary-table th:nth-child(4),.quality-products-summary-table td:nth-child(4){width:14% !important;}
+  .quality-products-summary-table th:nth-child(5),.quality-products-summary-table td:nth-child(5){width:8% !important;}
+  .quality-products-summary-table th:nth-child(6),.quality-products-summary-table td:nth-child(6){width:15% !important;}
+  .quality-products-summary-table th:nth-child(7),.quality-products-summary-table td:nth-child(7){width:14% !important;}
+  .quality-products-summary-table th:nth-child(8),.quality-products-summary-table td:nth-child(8){width:10.5% !important;}
+  .quality-product-cell{display:grid;grid-template-columns:54px 1fr;gap:10px;align-items:center;}
+  .quality-product-thumb{width:50px;height:50px;border:1px solid #e5e7eb;border-radius:12px;background:#fff;display:flex;align-items:center;justify-content:center;overflow:hidden;}
+  .quality-product-thumb img{width:100%;height:100%;object-fit:contain;}
+  .quality-product-main{display:flex;flex-direction:column;gap:6px;min-width:0;}
+  .quality-product-main .prod-name-input{font-weight:800;font-size:13px !important;}
+  .quality-product-meta{display:grid;grid-template-columns:1fr .72fr;gap:6px;}
+  .quality-product-meta input{font-size:10.5px !important;}
+  .quality-compact-field{display:flex;flex-direction:column;gap:4px;margin-bottom:6px;}
+  .quality-compact-field label{font-size:10px;color:#6b7280;font-weight:800;text-transform:uppercase;letter-spacing:.02em;}
+  .quality-status-stack{display:grid;grid-template-columns:1fr 1fr;gap:6px;}
+  .quality-status-stack select,.quality-products-summary-table select,.quality-products-summary-table input{font-size:11px !important;padding:7px 8px !important;border-radius:10px !important;}
+  .quality-resource-stack{display:flex;flex-direction:column;gap:6px;}
+  .quality-resource-row{display:grid;grid-template-columns:1fr 1fr;gap:6px;}
+  .quality-resource-stack .gallery-count-badge{font-size:10.5px !important;padding:6px 7px !important;}
+  .quality-resource-stack .description-preview{display:none !important;}
+  .quality-resource-stack .manage-description-btn,.quality-resource-stack .manage-gallery-btn,.quality-resource-stack .manage-variations-btn{width:100% !important;margin:0 !important;font-size:10.5px !important;padding:7px 8px !important;}
+  .quality-resource-stack .variation-summary{font-size:10.5px !important;max-height:30px;overflow:hidden;color:#475569;}
+  .quality-row-actions{display:flex;flex-direction:column;gap:6px;align-items:stretch;}
+  .quality-row-actions .btn{width:100% !important;margin:0 !important;font-size:10.5px !important;padding:7px 8px !important;}
+  .quality-hidden-admin-field{display:none !important;}
+  .quality-image-compact-select{font-size:10.5px !important;}
+  @media (max-width:1200px){
+    .quality-table-wrap{overflow-x:auto !important;}
+    .quality-products-summary-table{min-width:980px !important;}
+  }
+
 </style>
 
 
@@ -683,9 +758,19 @@
       <input type="text" name="descriptionShort" placeholder="Ex.: Novo, lacrado, 128GB, garantia...">
     </div>
 
-    <div style="grid-column: 1 / -1;">
+    <div class="add-description-editor-wrap">
       <label>Descrição completa</label>
-      <textarea name="descriptionLong" rows="3" placeholder="Detalhes do produto, características, garantia, conteúdo da caixa..." style="width:100%; padding:8px 12px; border:1px solid #ccc; border-radius:4px;"></textarea>
+      <textarea name="descriptionLong" id="add-description-long-hidden" style="display:none;"></textarea>
+      <div class="description-toolbar" style="margin-top:8px;">
+        <button type="button" data-add-desc-cmd="bold"><b>B</b></button>
+        <button type="button" data-add-desc-cmd="italic"><i>I</i></button>
+        <button type="button" data-add-desc-cmd="insertUnorderedList">Lista</button>
+        <button type="button" data-add-desc-cmd="formatBlock" data-add-desc-value="h3">Título</button>
+        <button type="button" data-add-desc-cmd="formatBlock" data-add-desc-value="p">Texto</button>
+        <button type="button" id="add-description-clear-format">Limpar formatação</button>
+      </div>
+      <div id="add-description-long-editor" class="description-rich-editor" contenteditable="true" data-placeholder="Detalhes do produto, características, garantia, conteúdo da caixa..."></div>
+      <small class="variation-help">Agora o cadastro novo também aceita negrito, títulos e listas. Ao clicar em Adicionar, o texto é salvo automaticamente.</small>
     </div>
 
     <div style="align-self:end">
@@ -740,23 +825,16 @@
     </div>
 
     <div class="quality-table-wrap">
-    <table class="table">
+    <table class="table quality-products-summary-table">
       <thead>
         <tr>
           <th><input type="checkbox" id="select-all-checkbox" title="Selecionar todos"></th>
           <th>#</th>
-          <th>Nome</th>
-          <th>Slug</th>
-          <th>Preço</th>
-          <th>Estoque</th>
+          <th>Produto</th>
           <th>Categoria</th>
-          <th>Mostrar Preço</th>
-          <th>Vitrine</th>
-          <th>Ativo</th>
-          <th>Ver detalhes</th>
-          <th>Descrição curta</th>
-          <th>Imagem</th>
-          <th>Galeria</th>
+          <th>Estoque</th>
+          <th>Status</th>
+          <th>Recursos</th>
           <th>Ações</th>
         </tr>
       </thead>
@@ -768,13 +846,19 @@
 
             <td>
               <input type="hidden" name="id" value="<%= p.id %>">
-              <input type="text" name="name" value="<%= p.name %>" class="prod-name-input">
+              <div class="quality-product-cell">
+                <div class="quality-product-thumb">
+                  <img src="/<%= p.image || 'images/sem-imagem.png' %>" alt="" onerror="this.onerror=null;this.src='/images/sem-imagem.png';">
+                </div>
+                <div class="quality-product-main">
+                  <input type="text" name="name" value="<%= p.name %>" class="prod-name-input" placeholder="Nome do produto">
+                  <div class="quality-product-meta">
+                    <input type="text" name="slug" value="<%= p.slug || '' %>" class="prod-slug-input" placeholder="slug-do-produto">
+                    <input type="number" step="0.01" min="0" name="price" value="<%= p.price || '' %>" placeholder="Preço opcional">
+                  </div>
+                </div>
+              </div>
             </td>
-            <td>
-              <input type="text" name="slug" value="<%= p.slug || '' %>" class="prod-slug-input" placeholder="slug-do-produto">
-            </td>
-            <td><input type="number" step="0.01" min="0" name="price" value="<%= p.price || '' %>"></td>
-            <td><input type="number" step="1" min="0" name="stock" value="<%= (p.stock ?? '') %>" placeholder="Qtd."></td>
 
             <td>
               <select name="category" class="prod-category-select">
@@ -786,73 +870,88 @@
             </td>
 
             <td>
-              <select name="showPrice">
-                <option value="true" <%= p.showPrice !== false ? 'selected' : '' %>>Sim</option>
-                <option value="false" <%= p.showPrice === false ? 'selected' : '' %>>Não</option>
-              </select>
+              <input type="number" step="1" min="0" name="stock" value="<%= (p.stock ?? '') %>" placeholder="Qtd.">
             </td>
 
             <td>
-              <select name="featured">
-                <option value="true" <%= p.featured ? 'selected' : '' %>>Sim</option>
-                <option value="false" <%= !p.featured ? 'selected' : '' %>>Não</option>
-              </select>
-            </td>
-
-            <td>
-              <select name="active">
-                <option value="true" <%= p.active ? 'selected' : '' %>>Sim</option>
-                <option value="false" <%= !p.active ? 'selected' : '' %>>Não</option>
-              </select>
-            </td>
-
-            <td>
-              <select name="detailsEnabled">
-                <option value="true" <%= p.detailsEnabled ? 'selected' : '' %>>Sim</option>
-                <option value="false" <%= !p.detailsEnabled ? 'selected' : '' %>>Não</option>
-              </select>
-            </td>
-
-            <td>
-              <textarea name="descriptionShort" class="row-description-short" placeholder="Descrição curta..." style="display:none;"><%= p.descriptionShort || '' %></textarea>
-              <textarea name="descriptionLong" class="row-description-long" placeholder="Descrição completa..." style="display:none;"><%= p.descriptionLong || '' %></textarea>
-              <div class="description-editor-summary">
-                <div class="description-preview"><%= (p.descriptionShort || p.descriptionLong || 'Sem descrição cadastrada').replace(/<[^>]*>/g, '').slice(0, 95) %><%= ((p.descriptionShort || p.descriptionLong || '').replace(/<[^>]*>/g, '').length > 95 ? '...' : '') %></div>
-                <button class="btn manage-description-btn" type="button">Editar descrição</button>
+              <div class="quality-status-stack">
+                <div class="quality-compact-field">
+                  <label>Ativo</label>
+                  <select name="active">
+                    <option value="true" <%= p.active ? 'selected' : '' %>>Sim</option>
+                    <option value="false" <%= !p.active ? 'selected' : '' %>>Não</option>
+                  </select>
+                </div>
+                <div class="quality-compact-field">
+                  <label>Vitrine</label>
+                  <select name="featured">
+                    <option value="true" <%= p.featured ? 'selected' : '' %>>Sim</option>
+                    <option value="false" <%= !p.featured ? 'selected' : '' %>>Não</option>
+                  </select>
+                </div>
+                <div class="quality-compact-field">
+                  <label>Preço</label>
+                  <select name="showPrice">
+                    <option value="true" <%= p.showPrice !== false ? 'selected' : '' %>>Mostrar</option>
+                    <option value="false" <%= p.showPrice === false ? 'selected' : '' %>>Ocultar</option>
+                  </select>
+                </div>
+                <div class="quality-compact-field">
+                  <label>Detalhes</label>
+                  <select name="detailsEnabled">
+                    <option value="true" <%= p.detailsEnabled ? 'selected' : '' %>>Sim</option>
+                    <option value="false" <%= !p.detailsEnabled ? 'selected' : '' %>>Não</option>
+                  </select>
+                </div>
               </div>
             </td>
 
             <td>
-              <select name="image" class="prod-image-select" data-current-val="<%= p.image %>">
-                <option value="">Selecione...</option>
-                <% (imagens || []).forEach(img => { %>
-                  <option value="images/<%= img %>" <%= p.image === ('images/' + img) ? 'selected' : '' %>><%= img %></option>
-                <% }) %>
-              </select>
-            </td>
+              <div class="quality-resource-stack">
+                <textarea name="descriptionShort" class="row-description-short" placeholder="Descrição curta..." style="display:none;"><%= p.descriptionShort || '' %></textarea>
+                <textarea name="descriptionLong" class="row-description-long" placeholder="Descrição completa..." style="display:none;"><%= p.descriptionLong || '' %></textarea>
 
-            <td class="quality-gallery-cell">
-              <textarea name="gallery" class="gallery-textarea gallery-hidden-textarea"><%= Array.isArray(p.gallery) ? p.gallery.join('\n') : (p.gallery || '') %></textarea>
-              <div class="gallery-summary">
-                <span class="gallery-count-badge">📷 0 item(ns)</span>
-                <button class="btn manage-gallery-btn" type="button">Gerenciar</button>
+                <select name="image" class="prod-image-select quality-image-compact-select" data-current-val="<%= p.image %>">
+                  <option value="">Imagem...</option>
+                  <% (imagens || []).forEach(img => { %>
+                    <option value="images/<%= img %>" <%= p.image === ('images/' + img) ? 'selected' : '' %>><%= img %></option>
+                  <% }) %>
+                </select>
+
+                <div class="quality-resource-row">
+                  <div class="description-editor-summary">
+                    <div class="description-preview"><%= (p.descriptionShort || p.descriptionLong || 'Sem descrição cadastrada').replace(/<[^>]*>/g, '').slice(0, 95) %><%= ((p.descriptionShort || p.descriptionLong || '').replace(/<[^>]*>/g, '').length > 95 ? '...' : '') %></div>
+                    <button class="btn manage-description-btn" type="button">📝 Descrição</button>
+                  </div>
+
+                  <div class="quality-gallery-cell">
+                    <textarea name="gallery" class="gallery-textarea gallery-hidden-textarea"><%= Array.isArray(p.gallery) ? p.gallery.join('\n') : (p.gallery || '') %></textarea>
+                    <div class="gallery-summary">
+                      <span class="gallery-count-badge">📷 0</span>
+                      <button class="btn manage-gallery-btn" type="button">Galeria</button>
+                    </div>
+                  </div>
+                </div>
+
+                <% const v = p.variations || {}; const vColors = Array.isArray(v.colors) ? v.colors.map(c => [c.name, c.hex, c.image].filter(Boolean).join('|')).join('\n') : (v.colorsText || ''); %>
+                <input type="hidden" name="variationsEnabled" class="row-variations-enabled" value="<%= v.enabled ? 'true' : 'false' %>">
+                <textarea name="variationColors" class="variation-hidden-data row-variation-colors"><%= vColors %></textarea>
+                <textarea name="variationStorage" class="variation-hidden-data row-variation-storage"><%= Array.isArray(v.storage) ? v.storage.join('\n') : (v.storageText || '') %></textarea>
+                <textarea name="variationRam" class="variation-hidden-data row-variation-ram"><%= Array.isArray(v.ram) ? v.ram.join('\n') : (v.ramText || '') %></textarea>
+                <textarea name="variationCondition" class="variation-hidden-data row-variation-condition"><%= Array.isArray(v.condition) ? v.condition.join('\n') : (v.conditionText || '') %></textarea>
+                <textarea name="variationLabels" class="variation-hidden-data row-variation-labels"><%= v.labels ? JSON.stringify(v.labels) : (v.labelsText || '') %></textarea>
+                <textarea name="variationCombinations" class="variation-hidden-data row-variation-combinations"><%= Array.isArray(v.combinations) ? v.combinations.map(c => [c.color, c.storage, c.ram, c.condition, c.image, c.stock].filter((x, i) => i < 4 || x !== undefined && x !== null && x !== '').join('|')).join('\n') : (v.combinationsText || '') %></textarea>
+                <button class="btn manage-variations-btn" type="button">🎛️ Variações</button>
+                <div class="variation-summary">Sem variações</div>
               </div>
             </td>
 
             <td class="quality-actions">
-              <% const v = p.variations || {}; const vColors = Array.isArray(v.colors) ? v.colors.map(c => [c.name, c.hex, c.image].filter(Boolean).join('|')).join('\n') : (v.colorsText || ''); %>
-              <input type="hidden" name="variationsEnabled" class="row-variations-enabled" value="<%= v.enabled ? 'true' : 'false' %>">
-              <textarea name="variationColors" class="variation-hidden-data row-variation-colors"><%= vColors %></textarea>
-              <textarea name="variationStorage" class="variation-hidden-data row-variation-storage"><%= Array.isArray(v.storage) ? v.storage.join('\n') : (v.storageText || '') %></textarea>
-              <textarea name="variationRam" class="variation-hidden-data row-variation-ram"><%= Array.isArray(v.ram) ? v.ram.join('\n') : (v.ramText || '') %></textarea>
-              <textarea name="variationCondition" class="variation-hidden-data row-variation-condition"><%= Array.isArray(v.condition) ? v.condition.join('\n') : (v.conditionText || '') %></textarea>
-              <textarea name="variationLabels" class="variation-hidden-data row-variation-labels"><%= v.labels ? JSON.stringify(v.labels) : (v.labelsText || '') %></textarea>
-              <textarea name="variationCombinations" class="variation-hidden-data row-variation-combinations"><%= Array.isArray(v.combinations) ? v.combinations.map(c => [c.color, c.storage, c.ram, c.condition, c.image, c.stock].filter((x, i) => i < 4 || x !== undefined && x !== null && x !== '').join('|')).join('\n') : (v.combinationsText || '') %></textarea>
-              <button class="btn manage-variations-btn" type="button">🎛️ Variações</button>
-              <div class="variation-summary">Sem variações</div>
-              <button class="btn primary save-product-btn" type="button">💾 Salvar produto</button>
-              <span class="row-save-status" style="display:none; margin-left:8px; font-weight:600; color:#087a31; white-space:nowrap;">✅ Salvo</span>
-              <button class="btn" type="submit" form="delete-form-<%= p.id %>" onclick="return confirm('Excluir este produto?')">Excluir</button>
+              <div class="quality-row-actions">
+                <button class="btn primary save-product-btn" type="button">💾 Salvar</button>
+                <span class="row-save-status" style="display:none; font-weight:600; color:#087a31;">✅ Salvo</span>
+                <button class="btn" type="submit" form="delete-form-<%= p.id %>" onclick="return confirm('Excluir este produto?')">Excluir</button>
+              </div>
             </td>
           </tr>
         <% }) %>
@@ -1868,6 +1967,30 @@ document.addEventListener("DOMContentLoaded", () => {
     });
     return tpl.innerHTML.trim();
   }
+
+
+
+  const addProductFormEl = document.getElementById("add-product-form");
+  const addDescHidden = document.getElementById("add-description-long-hidden");
+  const addDescEditor = document.getElementById("add-description-long-editor");
+
+  document.querySelectorAll("[data-add-desc-cmd]").forEach(btn => {
+    btn.addEventListener("click", () => {
+      addDescEditor?.focus();
+      document.execCommand(btn.dataset.addDescCmd, false, btn.dataset.addDescValue || null);
+    });
+  });
+
+  document.getElementById("add-description-clear-format")?.addEventListener("click", () => {
+    const text = stripTagsForPreview(addDescEditor?.innerHTML || "");
+    if (addDescEditor) addDescEditor.textContent = text;
+  });
+
+  addProductFormEl?.addEventListener("submit", () => {
+    if (addDescHidden && addDescEditor) {
+      addDescHidden.value = sanitizeDescriptionHtml(addDescEditor.innerHTML);
+    }
+  });
 
   function updateDescriptionPreview(row){
     const shortVal = row.querySelector(".row-description-short")?.value || "";
