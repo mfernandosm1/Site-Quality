@@ -199,6 +199,22 @@
     return escapeHtml(value).replace(/\n/g, '<br>');
   }
 
+
+  function safeDescriptionHtml(value){
+    const allowed = ['B','STRONG','I','EM','BR','P','DIV','UL','OL','LI','H3','H4'];
+    const tpl = document.createElement('template');
+    tpl.innerHTML = value || '';
+    tpl.content.querySelectorAll('*').forEach(el => {
+      if (!allowed.includes(el.tagName)) {
+        el.replaceWith(document.createTextNode(el.textContent || ''));
+        return;
+      }
+      Array.from(el.attributes).forEach(attr => el.removeAttribute(attr.name));
+    });
+    const html = tpl.innerHTML.trim();
+    return html || nl2br(value || '');
+  }
+
   function shouldShowPrice(p){
     const raw = p.showPrice ?? false;
     if (raw === true) return true;
@@ -313,7 +329,7 @@
       ram: Array.isArray(v.ram) ? v.ram : lines(v.ramText),
       condition: Array.isArray(v.condition) ? v.condition : lines(v.conditionText),
       labels: parseVariationLabels(v.labels || v.labelsText),
-      combinations: Array.isArray(v.combinations) ? v.combinations : lines(v.combinationsText).map(line => { const parts = line.split('|').map(p => p.trim()); return { color: parts[0] || '', storage: parts[1] || '', ram: parts[2] || '', condition: parts[3] || '', image: parts[4] || '' }; }).filter(c => c.color || c.storage || c.ram || c.condition)
+      combinations: Array.isArray(v.combinations) ? v.combinations : lines(v.combinationsText).map(line => { const parts = line.split('|').map(p => p.trim()); return { color: parts[0] || '', storage: parts[1] || '', ram: parts[2] || '', condition: parts[3] || '', image: parts[4] || '', stock: parts[5] !== undefined && parts[5] !== '' ? Number(parts[5]) : null }; }).filter(c => c.color || c.storage || c.ram || c.condition)
     };
   }
 
@@ -586,7 +602,7 @@
       const descricaoHtml = detailsEnabled(product) ? `
         <div class="produto-descricao-box">
           <h2>Descrição</h2>
-          <p>${longDesc ? nl2br(longDesc) : 'Descrição em breve.'}</p>
+          <div>${longDesc ? safeDescriptionHtml(longDesc) : 'Descrição em breve.'}</div>
         </div>
       ` : '';
 

@@ -17,6 +17,10 @@
     gtag('js', new Date());
     gtag('config', 'G-9HPD9XCELH');
   </script>
+  <style>
+    .product-variation-tags{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;margin:8px 0 10px;}
+    .product-variation-tags span{border:1px solid #e5e7eb;background:#f9fafb;border-radius:999px;padding:4px 8px;font-size:12px;font-weight:700;color:#374151;}
+  </style>
 </head>
 
 <body>
@@ -100,6 +104,22 @@
     return '/' + path.replace(/^\//, '');
   }
 
+
+  function variationOptionsHtml(p){
+    const v = p.variations || {};
+    const lines = value => Array.isArray(value)
+      ? value.map(x => (x || '').toString().trim()).filter(Boolean)
+      : (value || '').toString().split(/\r?\n|,/).map(x => x.trim()).filter(Boolean);
+    const colors = Array.isArray(v.colors) ? v.colors.map(c => c.name || '').filter(Boolean) : lines(v.colorsText).map(line => line.split('|')[0].trim()).filter(Boolean);
+    const storage = Array.isArray(v.storage) ? v.storage : lines(v.storageText);
+    const ram = Array.isArray(v.ram) ? v.ram : lines(v.ramText);
+    const condition = Array.isArray(v.condition) ? v.condition : lines(v.conditionText);
+    const options = [...colors, ...storage, ...ram, ...condition].filter(Boolean);
+    const unique = [...new Set(options)].slice(0, 8);
+    if (!unique.length) return '';
+    return '<div class="product-variation-tags">' + unique.map(opt => '<span>' + escapeHtml(opt) + '</span>').join('') + '</div>';
+  }
+
   fetch('/content/products.json')
     .then(r => r.json())
     .then(data => {
@@ -126,6 +146,7 @@
         card.innerHTML = `
           <img src="${escapeHtml(productImagePath(p.image || 'images/sem-imagem.png'))}" alt="${escapeHtml(p.name || '')}">
           <h3>${escapeHtml(p.name || '')}</h3>
+          ${variationOptionsHtml(p)}
           ${precoHTML}
           ${detalhesHTML}
           <a href="https://wa.me/5555991407824?text=Olá!%20Vim%20através%20do%20site%20e%20tenho%20interesse%20em%20${encodeURIComponent(p.name || 'produto')}"
