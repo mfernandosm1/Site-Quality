@@ -543,42 +543,65 @@
 
 
 
-  /* V7.4.1 - Etapa 1: tabela resumo, limpa e sem rolagem horizontal */
-  .quality-table-wrap{overflow-x:visible !important;}
-  .quality-products-summary-table{width:100% !important;min-width:0 !important;table-layout:fixed !important;border-collapse:collapse;}
-  .quality-products-summary-table th,.quality-products-summary-table td{padding:10px 8px !important;font-size:12px !important;vertical-align:middle !important;border-bottom:1px solid #e5e7eb;}
-  .quality-products-summary-table th:nth-child(1),.quality-products-summary-table td:nth-child(1){width:3.5% !important;text-align:center;}
+  /* V7.4.2 - Refinamento visual da tabela de produtos */
+  .quality-table-wrap{overflow-x:visible !important;background:#fff;border:1px solid #eef2f7;border-radius:16px;}
+  .quality-products-summary-table{width:100% !important;min-width:0 !important;table-layout:fixed !important;border-collapse:separate !important;border-spacing:0;}
+  .quality-products-summary-table th{padding:14px 10px !important;font-size:11px !important;color:#0f172a;font-weight:900;border-bottom:1px solid #e5e7eb;background:#fff;}
+  .quality-products-summary-table td{padding:16px 10px !important;font-size:12px !important;vertical-align:middle !important;border-bottom:1px solid #e5e7eb;background:#fff;}
+  .quality-products-summary-table tr:hover td{background:#fcfdff;}
+  .quality-products-summary-table th:nth-child(1),.quality-products-summary-table td:nth-child(1){width:3.2% !important;text-align:center;}
   .quality-products-summary-table th:nth-child(2),.quality-products-summary-table td:nth-child(2){width:4% !important;text-align:center;}
-  .quality-products-summary-table th:nth-child(3),.quality-products-summary-table td:nth-child(3){width:31% !important;}
-  .quality-products-summary-table th:nth-child(4),.quality-products-summary-table td:nth-child(4){width:14% !important;}
-  .quality-products-summary-table th:nth-child(5),.quality-products-summary-table td:nth-child(5){width:8% !important;}
-  .quality-products-summary-table th:nth-child(6),.quality-products-summary-table td:nth-child(6){width:15% !important;}
-  .quality-products-summary-table th:nth-child(7),.quality-products-summary-table td:nth-child(7){width:14% !important;}
-  .quality-products-summary-table th:nth-child(8),.quality-products-summary-table td:nth-child(8){width:10.5% !important;}
-  .quality-product-cell{display:grid;grid-template-columns:54px 1fr;gap:10px;align-items:center;}
-  .quality-product-thumb{width:50px;height:50px;border:1px solid #e5e7eb;border-radius:12px;background:#fff;display:flex;align-items:center;justify-content:center;overflow:hidden;}
+  .quality-products-summary-table th:nth-child(3),.quality-products-summary-table td:nth-child(3){width:34% !important;}
+  .quality-products-summary-table th:nth-child(4),.quality-products-summary-table td:nth-child(4){width:17% !important;}
+  .quality-products-summary-table th:nth-child(5),.quality-products-summary-table td:nth-child(5){width:13% !important;}
+  .quality-products-summary-table th:nth-child(6),.quality-products-summary-table td:nth-child(6){width:18% !important;}
+  .quality-products-summary-table th:nth-child(7),.quality-products-summary-table td:nth-child(7){width:10.8% !important;}
+
+  .quality-product-cell{display:grid;grid-template-columns:68px 1fr;gap:14px;align-items:center;min-width:0;}
+  .quality-product-thumb{width:62px;height:62px;border:1px solid #e5e7eb;border-radius:14px;background:#fff;display:flex;align-items:center;justify-content:center;overflow:hidden;box-shadow:0 2px 8px rgba(15,23,42,.04);}
   .quality-product-thumb img{width:100%;height:100%;object-fit:contain;}
-  .quality-product-main{display:flex;flex-direction:column;gap:6px;min-width:0;}
-  .quality-product-main .prod-name-input{font-weight:800;font-size:13px !important;}
-  .quality-product-meta{display:grid;grid-template-columns:1fr .72fr;gap:6px;}
-  .quality-product-meta input{font-size:10.5px !important;}
-  .quality-compact-field{display:flex;flex-direction:column;gap:4px;margin-bottom:6px;}
-  .quality-compact-field label{font-size:10px;color:#6b7280;font-weight:800;text-transform:uppercase;letter-spacing:.02em;}
-  .quality-status-stack{display:grid;grid-template-columns:1fr 1fr;gap:6px;}
-  .quality-status-stack select,.quality-products-summary-table select,.quality-products-summary-table input{font-size:11px !important;padding:7px 8px !important;border-radius:10px !important;}
-  .quality-resource-stack{display:flex;flex-direction:column;gap:6px;}
-  .quality-resource-row{display:grid;grid-template-columns:1fr 1fr;gap:6px;}
-  .quality-resource-stack .gallery-count-badge{font-size:10.5px !important;padding:6px 7px !important;}
+  .quality-product-main{display:flex;flex-direction:column;gap:7px;min-width:0;}
+  .quality-product-main .prod-name-input{font-weight:900;font-size:14px !important;color:#0f172a;}
+  .quality-product-meta{display:grid;grid-template-columns:1fr .68fr;gap:7px;}
+  .quality-product-meta input{font-size:11px !important;color:#475569;}
+
+  .quality-products-summary-table input,
+  .quality-products-summary-table select{font-size:12px !important;padding:9px 10px !important;border-radius:11px !important;border:1px solid #dbe3ef !important;background:#fff !important;min-height:39px;}
+  .quality-category-stock{display:flex;flex-direction:column;gap:9px;max-width:230px;}
+  .quality-category-stock select{width:100% !important;}
+  .quality-stock-box{display:grid;grid-template-columns:1fr;gap:5px;}
+  .quality-stock-label{font-size:10px;text-transform:uppercase;letter-spacing:.04em;color:#64748b;font-weight:900;}
+  .quality-stock-line{display:flex;align-items:center;gap:8px;}
+  .quality-stock-line input{max-width:98px !important;}
+  .quality-stock-badge{display:inline-flex;align-items:center;gap:5px;border-radius:999px;padding:5px 9px;font-size:11px;font-weight:900;border:1px solid #bbf7d0;background:#f0fdf4;color:#15803d;white-space:nowrap;}
+  .quality-stock-badge.zero{border-color:#fecaca;background:#fef2f2;color:#b91c1c;}
+  .quality-stock-badge.empty{border-color:#e5e7eb;background:#f8fafc;color:#64748b;}
+
+  .quality-status-stack{display:grid;grid-template-columns:1fr;gap:7px;max-width:150px;}
+  .quality-compact-field{display:grid;grid-template-columns:62px 1fr;align-items:center;gap:7px;margin:0;}
+  .quality-compact-field label{font-size:10px;color:#64748b;font-weight:900;text-transform:uppercase;letter-spacing:.03em;}
+  .quality-compact-field select{min-height:34px !important;padding:7px 8px !important;font-size:11px !important;}
+
+  .quality-resource-stack{display:flex;flex-direction:column;gap:8px;min-width:0;}
+  .quality-image-compact-select{width:100% !important;font-size:11px !important;}
+  .quality-resource-row{display:grid;grid-template-columns:1fr 1fr;gap:7px;}
   .quality-resource-stack .description-preview{display:none !important;}
-  .quality-resource-stack .manage-description-btn,.quality-resource-stack .manage-gallery-btn,.quality-resource-stack .manage-variations-btn{width:100% !important;margin:0 !important;font-size:10.5px !important;padding:7px 8px !important;}
-  .quality-resource-stack .variation-summary{font-size:10.5px !important;max-height:30px;overflow:hidden;color:#475569;}
-  .quality-row-actions{display:flex;flex-direction:column;gap:6px;align-items:stretch;}
-  .quality-row-actions .btn{width:100% !important;margin:0 !important;font-size:10.5px !important;padding:7px 8px !important;}
+  .quality-resource-stack .gallery-count-badge{width:100% !important;font-size:11px !important;padding:8px 8px !important;border-radius:11px !important;}
+  .quality-resource-stack .manage-description-btn,
+  .quality-resource-stack .manage-gallery-btn,
+  .quality-resource-stack .manage-variations-btn{width:100% !important;margin:0 !important;font-size:11px !important;padding:8px 9px !important;border-radius:11px !important;background:#f1f5f9 !important;color:#0f172a !important;border:1px solid #e2e8f0 !important;}
+  .quality-resource-stack .manage-variations-btn{max-width:145px;}
+  .quality-resource-stack .variation-summary{font-size:10.5px !important;max-height:30px;overflow:hidden;color:#64748b;line-height:1.25;}
+
+  .quality-row-actions{display:flex;flex-direction:column;gap:8px;align-items:stretch;}
+  .quality-row-actions .btn{width:100% !important;margin:0 !important;font-size:12px !important;padding:9px 10px !important;border-radius:12px !important;}
+  .quality-row-actions .save-product-btn{background:#2563eb !important;color:#fff !important;font-weight:900;}
+  .quality-row-actions .quality-delete-btn{background:#fff !important;color:#b91c1c !important;border:1px solid #fecaca !important;}
+  .row-save-status{text-align:center;font-size:11px !important;}
   .quality-hidden-admin-field{display:none !important;}
-  .quality-image-compact-select{font-size:10.5px !important;}
   @media (max-width:1200px){
     .quality-table-wrap{overflow-x:auto !important;}
-    .quality-products-summary-table{min-width:980px !important;}
+    .quality-products-summary-table{min-width:1040px !important;}
   }
 
 </style>
@@ -831,8 +854,7 @@
           <th><input type="checkbox" id="select-all-checkbox" title="Selecionar todos"></th>
           <th>#</th>
           <th>Produto</th>
-          <th>Categoria</th>
-          <th>Estoque</th>
+          <th>Categoria / Estoque</th>
           <th>Status</th>
           <th>Recursos</th>
           <th>Ações</th>
@@ -840,6 +862,7 @@
       </thead>
       <tbody id="products-table-body">
         <% (items || []).forEach((p, idx) => { %>
+          <% const stockValue = (p.stock ?? ''); const stockNum = Number(stockValue || 0); const stockClass = stockValue === '' ? 'empty' : (stockNum > 0 ? '' : 'zero'); const stockText = stockValue === '' ? 'Não informado' : (stockNum > 0 ? 'Em estoque' : 'Sem estoque'); %>
           <tr class="product-row" data-id="<%= p.id %>">
             <td><input type="checkbox" class="product-check" value="<%= p.id %>"></td>
             <td><span class="badge"><%= idx + 1 %></span></td>
@@ -861,16 +884,21 @@
             </td>
 
             <td>
-              <select name="category" class="prod-category-select">
-                <option value="">Início (vitrine)</option>
-                <% (categorias || []).forEach(c => { %>
-                  <option value="<%= c.slug %>" <%= p.category === c.slug ? 'selected' : '' %>><%= c.name %></option>
-                <% }) %>
-              </select>
-            </td>
-
-            <td>
-              <input type="number" step="1" min="0" name="stock" value="<%= (p.stock ?? '') %>" placeholder="Qtd.">
+              <div class="quality-category-stock">
+                <select name="category" class="prod-category-select">
+                  <option value="">Início (vitrine)</option>
+                  <% (categorias || []).forEach(c => { %>
+                    <option value="<%= c.slug %>" <%= p.category === c.slug ? 'selected' : '' %>><%= c.name %></option>
+                  <% }) %>
+                </select>
+                <div class="quality-stock-box">
+                  <span class="quality-stock-label">Estoque</span>
+                  <div class="quality-stock-line">
+                    <input type="number" step="1" min="0" name="stock" value="<%= stockValue %>" placeholder="Qtd.">
+                    <span class="quality-stock-badge <%= stockClass %>">📦 <%= stockText %></span>
+                  </div>
+                </div>
+              </div>
             </td>
 
             <td>
@@ -927,8 +955,8 @@
                   <div class="quality-gallery-cell">
                     <textarea name="gallery" class="gallery-textarea gallery-hidden-textarea"><%= Array.isArray(p.gallery) ? p.gallery.join('\n') : (p.gallery || '') %></textarea>
                     <div class="gallery-summary">
-                      <span class="gallery-count-badge">📷 0</span>
-                      <button class="btn manage-gallery-btn" type="button">Galeria</button>
+                      <span class="gallery-count-badge">📷 0 item(ns)</span>
+                      <button class="btn manage-gallery-btn" type="button">🖼️ Galeria</button>
                     </div>
                   </div>
                 </div>
@@ -948,9 +976,9 @@
 
             <td class="quality-actions">
               <div class="quality-row-actions">
-                <button class="btn primary save-product-btn" type="button">💾 Salvar</button>
+                <button class="btn primary save-product-btn" type="button">⚙️ Salvar</button>
                 <span class="row-save-status" style="display:none; font-weight:600; color:#087a31;">✅ Salvo</span>
-                <button class="btn" type="submit" form="delete-form-<%= p.id %>" onclick="return confirm('Excluir este produto?')">Excluir</button>
+                <button class="btn quality-delete-btn" type="submit" form="delete-form-<%= p.id %>" onclick="return confirm('Excluir este produto?')">🗑️ Excluir</button>
               </div>
             </td>
           </tr>
