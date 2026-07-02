@@ -745,7 +745,7 @@
     <div class="quality-indicator-card"><span>🔴 Inativos</span><strong><%= inativosProdutos %></strong></div>
     <div class="quality-indicator-card"><span>⭐ Vitrine</span><strong><%= vitrineProdutos %></strong></div>
     <div class="quality-indicator-card"><span>🎨 Variações</span><strong><%= variacaoProdutos %></strong></div>
-    <div class="quality-indicator-card"><span>📦 Estoque total</span><strong><%= estoqueTotalProdutos %></strong></div>
+    <div class="quality-indicator-card"><span>📦 Estoque total</span><strong id="quality-stock-total-indicator"><%= estoqueTotalProdutos %></strong></div>
   </div>
 
   <form method="post" action="/produtos/add" class="row product-add-form" id="add-product-form">
@@ -1770,6 +1770,7 @@ document.addEventListener("DOMContentLoaded", () => {
       if (json.item && json.item.stock !== undefined && json.item.stock !== null) {
         setRowField(row, 'input[name="stock"]', json.item.stock);
         updateStockBadge(row);
+        updateStockTotalIndicator();
       }
 
       markRowClean(row);
@@ -2528,6 +2529,18 @@ document.addEventListener("DOMContentLoaded", () => {
     activeEditRow = null;
   }
 
+
+  function updateStockTotalIndicator(){
+    const indicator = document.getElementById("quality-stock-total-indicator");
+    if (!indicator) return;
+    let total = 0;
+    document.querySelectorAll('input[name="stock"]').forEach(input => {
+      const value = input.value;
+      if (value !== "" && !Number.isNaN(Number(value))) total += Math.max(0, Number(value));
+    });
+    indicator.textContent = String(total);
+  }
+
   function updateStockBadge(row){
     const stockValue = getRowField(row, 'input[name="stock"]');
     const stockNum = Number(stockValue || 0);
@@ -2581,6 +2594,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (editProductThumb) editProductThumb.src = productImageUrl(newImage);
     if (editProductTitle) editProductTitle.textContent = getRowField(row, ".prod-name-input") || "Editar produto";
     updateStockBadge(row);
+    updateStockTotalIndicator();
     updateVariationSummary(row);
     markRowDirty(row);
   }

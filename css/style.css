@@ -641,3 +641,48 @@ a.btn-details:hover,
   background-color: #128c4a !important;
   color: #fff !important;
 }
+
+
+/* V7.5.2 - Variações no card do site (liga/desliga por produto) */
+.product-card-variations{
+  width:100%;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:7px;
+  margin:4px 0 10px;
+}
+.product-card-variation-colors{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:6px;
+  flex-wrap:wrap;
+  min-height:18px;
+}
+.product-card-color-dot{
+  width:16px;
+  height:16px;
+  border-radius:999px;
+  display:inline-block;
+  border:1px solid #cbd5e1;
+  background:linear-gradient(135deg,#f8fafc,#e2e8f0);
+  box-shadow:0 1px 3px rgba(15,23,42,.18);
+}
+.product-card-variation-tags{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:6px;
+  flex-wrap:wrap;
+}
+.product-card-variation-tags span{
+  border:1px solid #e5e7eb;
+  background:#fff;
+  color:#374151;
+  border-radius:999px;
+  padding:4px 8px;
+  font-size:12px;
+  font-weight:800;
+  line-height:1;
+}

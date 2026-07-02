@@ -13,7 +13,24 @@
       "detailsEnabled": false,
       "descriptionShort": "",
       "descriptionLong": "",
-      "slug": "controle-ps4"
+      "slug": "controle-ps4",
+      "stock": null,
+      "showVariationsOnCard": false,
+      "variations": {
+        "enabled": false,
+        "colors": [],
+        "storage": [],
+        "ram": [],
+        "condition": [],
+        "combinations": [],
+        "labels": {},
+        "colorsText": "",
+        "storageText": "",
+        "ramText": "",
+        "conditionText": "",
+        "labelsText": "{}",
+        "combinationsText": ""
+      }
     },
     {
       "id": 1761055784959,
@@ -958,13 +975,17 @@
         "ram": [],
         "condition": [],
         "combinations": [],
+        "labels": {},
         "colorsText": "Preto|#111111",
         "storageText": "",
         "ramText": "",
         "conditionText": "",
+        "labelsText": "{}",
         "combinationsText": ""
       },
-      "id": 1781655355785
+      "id": 1781655355785,
+      "stock": null,
+      "showVariationsOnCard": true
     },
     {
       "name": "Apple Watch Series 11 GPS Cinza espacial de Alumínio 42mm Pulseira Esportiva Preta",
@@ -1010,7 +1031,7 @@
       "active": true,
       "detailsEnabled": true,
       "descriptionShort": "",
-      "descriptionLong": "O MacBook Neo une design ultraportátil e alta performance. Equipado com o chip A18 Pro e recursos de Apple Intelligence, ele entrega velocidade e inteligência para elevar sua produtividade a um novo nível.\r\n\r\nChip: A18 Pro (CPU de 6 núcleos, GPU de 5 núcleos, Neural Engine de 16 núcleos)\r\nApple Intelligence: Ferramentas inteligentes que facilitam o seu dia a dia.\r\nTela Liquid Retina de 13\"\r\nArmazenamento versões: 256gb e 512GB de SSD.\r\nMemória: 8GB de memória unificada.\r\nBateria: Longa duração (até 16h de reprodução de vídeo)\r\nTeclado: Magic Keyboard com Touch ID\r\nConteúdo da caixa: MacBook Neo, cabo carregador USB-C (trançado) e adaptador de energia USB-C de 20W.",
+      "descriptionLong": "O MacBook Neo une design ultraportátil e alta performance. Equipado com o chip A18 Pro e recursos de Apple Intelligence, ele entrega velocidade e inteligência para elevar sua produtividade a um novo nível.\n\nChip: A18 Pro (CPU de 6 núcleos, GPU de 5 núcleos, Neural Engine de 16 núcleos)\nApple Intelligence: Ferramentas inteligentes que facilitam o seu dia a dia.\nTela Liquid Retina de 13\"\nArmazenamento versões: 256gb e 512GB de SSD.\nMemória: 8GB de memória unificada.\nBateria: Longa duração (até 16h de reprodução de vídeo)\nTeclado: Magic Keyboard com Touch ID\nConteúdo da caixa: MacBook Neo, cabo carregador USB-C (trançado) e adaptador de energia USB-C de 20W.",
       "variations": {
         "enabled": true,
         "colors": [
@@ -1034,13 +1055,17 @@
         ],
         "condition": [],
         "combinations": [],
+        "labels": {},
         "colorsText": "Silver (Prateado)|#a19b9b\nIndigo (Azul escuro)|#0b3142",
         "storageText": "256GB\n512GB",
         "ramText": "8GB",
         "conditionText": "",
+        "labelsText": "{}",
         "combinationsText": ""
       },
-      "id": 1781826340965
+      "id": 1781826340965,
+      "stock": null,
+      "showVariationsOnCard": false
     },
     {
       "name": "Teclado com Fio Multimídia USB KB-M11BK C3 Tech - Preto",
@@ -1288,7 +1313,8 @@
         "combinationsText": "Preto||||images/Garrafa de tinta epson 544 preto.jpeg\nMagenta||||images/Garrafa de tinta epson 544 magenta.jpeg\nCiano||||images/Garrafa de tinta epson 544 ciano.jpeg\nAmarelo||||images/Garrafa de tinta epson 544 amarelo.jpeg"
       },
       "id": 1782679964152,
-      "stock": null
+      "stock": null,
+      "showVariationsOnCard": true
     },
     {
       "name": "Monitor Aoc 23,8 Led Full-hd 100hz",
