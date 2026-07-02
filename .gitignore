@@ -1,3 +1,44 @@
+# ==========================
+# Arquivos de ambiente
+# ==========================
 .env
 painel/.env
-node_modules
+
+# ==========================
+# Dependências
+# ==========================
+node_modules/
+painel/node_modules/
+
+# ==========================
+# Backups
+# ==========================
+Backup/
+backup/
+
+# ==========================
+# Logs
+# ==========================
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# ==========================
+# Sistema
+# ==========================
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ==========================
+# Arquivos temporários
+# ==========================
+*.tmp
+*.temp
+
+# ==========================
+# Arquivos compactados
+# (opcional, caso você gere ZIPs no projeto)
+# ==========================
+*.zip
