@@ -192,6 +192,7 @@ function generateCategoryPage(siteDir){
   <meta property="og:url" content="https://www.qualitycel.com.br/categoria.html">
   <meta name="twitter:card" content="summary_large_image">
   <link rel="canonical" href="https://www.qualitycel.com.br/categoria.html">
+  <link rel="stylesheet" href="/css/style.css">
   <link rel="stylesheet" href="/site/css/style.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-9HPD9XCELH"></script>
@@ -212,7 +213,7 @@ function generateCategoryPage(siteDir){
 </main>
 
 <div id="footer"></div>
-<script src="/site/js/main.js"></script>
+<script src="/js/main.js"></script>
 <script>
 (function(){
   function normalizeText(v){
@@ -245,57 +246,31 @@ function generateCategoryPage(siteDir){
       .replace(/'/g, '&#039;');
   }
 
-
-  function shouldShowVariationsOnCard(p){
-    const raw = p.showVariationsOnCard ?? p.mostrarVariacoesNoCard ?? p.show_variations_on_card ?? false;
-    if (raw === true) return true;
-    const v = String(raw || '').toLowerCase();
-    return v === 'sim' || v === 'yes' || v === 'true' || v === '1' || v === 'on';
+  function assetUrl(path){
+    const p = (path || '').toString().trim();
+    if (!p) return '/images/sem-imagem.png';
+    if (/^https?:\\/\\//i.test(p)) return p;
+    const clean = p.replace(/^\\/+/, '').replace(/^site\\//, '');
+    const isLocalPreview = window.location.hostname === 'localhost' && window.location.port === '3000';
+    return isLocalPreview ? '/site/' + clean : '/' + clean;
   }
 
-  function productVariationsCardHtml(p){
-    if (!shouldShowVariationsOnCard(p)) return '';
-    const v = p.variations || {};
-    const lines = value => Array.isArray(value)
-      ? value.map(x => (x || '').toString().trim()).filter(Boolean)
-      : (value || '').toString().split(/\r?\n|,/).map(x => x.trim()).filter(Boolean);
-
-    const colorItems = Array.isArray(v.colors)
-      ? v.colors.map(c => ({ name: (c.name || '').trim(), hex: (c.hex || '').trim() })).filter(c => c.name)
-      : lines(v.colorsText).map(line => {
-          const parts = line.split('|').map(x => x.trim());
-          return { name: parts[0] || '', hex: parts[1] || '' };
-        }).filter(c => c.name);
-
-    const combos = Array.isArray(v.combinations)
-      ? v.combinations
-      : lines(v.combinationsText).map(line => {
-          const parts = line.split('|').map(x => x.trim());
-          return { color: parts[0] || '', storage: parts[1] || '', ram: parts[2] || '', condition: parts[3] || '' };
+  function fetchJson(paths){
+    let lastError = null;
+    return paths.reduce(function(promise, url){
+      return promise.catch(function(){
+        return fetch(url, { cache: 'no-store' }).then(function(res){
+          if (!res.ok) throw new Error('Falha ao carregar ' + url);
+          return res.json();
+        }).catch(function(err){
+          lastError = err;
+          throw err;
         });
-
-    const storage = (Array.isArray(v.storage) ? v.storage : lines(v.storageText)).concat(combos.map(c => c.storage || '')).filter(Boolean);
-    const ram = (Array.isArray(v.ram) ? v.ram : lines(v.ramText)).concat(combos.map(c => c.ram || '')).filter(Boolean);
-
-    const unique = arr => [...new Set(arr.map(x => (x || '').toString().trim()).filter(Boolean))];
-    const colors = unique(colorItems.map(c => c.name)).slice(0, 6).map(name => colorItems.find(c => c.name === name));
-    const tags = unique([...storage, ...ram]).slice(0, 6);
-
-    if (!colors.length && !tags.length) return '';
-
-    const dots = colors.length
-      ? '<div class="product-card-variation-colors">' + colors.map(c => {
-          const hex = /^#?[0-9a-f]{3,8}$/i.test(c.hex || '') ? (c.hex.charAt(0) === '#' ? c.hex : '#' + c.hex) : '';
-          const style = hex ? ' style="background:' + escapeHtml(hex) + '"' : '';
-          return '<span class="product-card-color-dot"' + style + ' title="' + escapeHtml(c.name) + '"></span>';
-        }).join('') + '</div>'
-      : '';
-
-    const chips = tags.length
-      ? '<div class="product-card-variation-tags">' + tags.map(opt => '<span>' + escapeHtml(opt) + '</span>').join('') + '</div>'
-      : '';
-
-    return '<div class="product-card-variations">' + dots + chips + '</div>';
+      });
+    }, Promise.reject()).catch(function(){
+      if (lastError) throw lastError;
+      throw new Error('Arquivo JSON não encontrado.');
+    });
   }
 
   function normalizeIcon(icon){
@@ -324,6 +299,61 @@ function generateCategoryPage(siteDir){
     }
   }
 
+  function shouldShowVariationsOnCard(p){
+    const raw = p.showVariationsOnCard ?? p.mostrarVariacoesNoCard ?? p.show_variations_on_card ?? false;
+    if (raw === true) return true;
+    const v = String(raw || '').toLowerCase();
+    return v === 'sim' || v === 'yes' || v === 'true' || v === '1' || v === 'on';
+  }
+
+  function productVariationsCardHtml(p){
+    if (!shouldShowVariationsOnCard(p)) return '';
+    const v = p.variations || {};
+    const lines = function(value){
+      return Array.isArray(value)
+        ? value.map(function(x){ return (x || '').toString().trim(); }).filter(Boolean)
+        : (value || '').toString().split(/\\r?\\n|,/).map(function(x){ return x.trim(); }).filter(Boolean);
+    };
+
+    const colorItems = Array.isArray(v.colors)
+      ? v.colors.map(function(c){ return { name: (c.name || '').trim(), hex: (c.hex || '').trim() }; }).filter(function(c){ return c.name; })
+      : lines(v.colorsText).map(function(line){
+          const parts = line.split('|').map(function(x){ return x.trim(); });
+          return { name: parts[0] || '', hex: parts[1] || '' };
+        }).filter(function(c){ return c.name; });
+
+    const combos = Array.isArray(v.combinations)
+      ? v.combinations
+      : lines(v.combinationsText).map(function(line){
+          const parts = line.split('|').map(function(x){ return x.trim(); });
+          return { color: parts[0] || '', storage: parts[1] || '', ram: parts[2] || '', condition: parts[3] || '' };
+        });
+
+    const storage = (Array.isArray(v.storage) ? v.storage : lines(v.storageText)).concat(combos.map(function(c){ return c.storage || ''; })).filter(Boolean);
+    const ram = (Array.isArray(v.ram) ? v.ram : lines(v.ramText)).concat(combos.map(function(c){ return c.ram || ''; })).filter(Boolean);
+
+    const unique = function(arr){ return Array.from(new Set(arr.map(function(x){ return (x || '').toString().trim(); }).filter(Boolean))); };
+    const colorNames = unique(colorItems.map(function(c){ return c.name; })).slice(0, 6);
+    const colors = colorNames.map(function(name){ return colorItems.find(function(c){ return c.name === name; }); }).filter(Boolean);
+    const tags = unique(storage.concat(ram)).slice(0, 6);
+
+    if (!colors.length && !tags.length) return '';
+
+    const dots = colors.length
+      ? '<div class="product-card-variation-colors">' + colors.map(function(c){
+          const hex = /^#?[0-9a-f]{3,8}$/i.test(c.hex || '') ? (c.hex.charAt(0) === '#' ? c.hex : '#' + c.hex) : '';
+          const style = hex ? ' style="background:' + escapeHtml(hex) + '"' : '';
+          return '<span class="product-card-color-dot"' + style + ' title="' + escapeHtml(c.name) + '"></span>';
+        }).join('') + '</div>'
+      : '';
+
+    const chips = tags.length
+      ? '<div class="product-card-variation-tags">' + tags.map(function(opt){ return '<span>' + escapeHtml(opt) + '</span>'; }).join('') + '</div>'
+      : '';
+
+    return '<div class="product-card-variations">' + dots + chips + '</div>';
+  }
+
   const params = new URLSearchParams(window.location.search);
   const pathParts = window.location.pathname.split('/').filter(Boolean);
   const lastPath = normalizeText(pathParts[pathParts.length - 1] || '');
@@ -338,14 +368,23 @@ function generateCategoryPage(siteDir){
   }
 
   Promise.all([
-    fetch('/site/content/categories.json').then(r => r.json()).catch(() => ({ items: [] })),
-    fetch('/site/content/products.json').then(r => r.json()).catch(() => ({ items: [] }))
-  ]).then(([categoriesData, productsData]) => {
+    fetchJson(['/content/categories.json', '/site/content/categories.json']).catch(function(){ return { items: [] }; }),
+    fetchJson(['/content/products.json', '/site/content/products.json']).catch(function(){ return { items: [] }; })
+  ]).then(function(results){
+    const categoriesData = results[0];
+    const productsData = results[1];
+
     const categories = categoriesData.items || [];
-    const category = categories.find(c => normalizeText(c.slug) === currentSlug);
+    const category = categories.find(function(c){
+      return normalizeText(c.slug) === currentSlug ||
+        normalizeText(c.name) === currentSlug ||
+        normalizeText(c.id) === currentSlug;
+    });
+
     const categoryName = category ? (category.name || category.slug || currentSlug) : currentSlug;
-    const categoryId = category ? String(category.id || '') : '';
     const categoryNameLower = normalizeText(categoryName);
+    const categorySlugLower = normalizeText(category ? category.slug : currentSlug);
+    const categoryIdLower = normalizeText(category ? category.id : '');
 
     setCategoryTitle(titleEl, categoryName, category ? category.icon : '');
     document.title = categoryName + ' – Quality Celulares';
@@ -365,7 +404,7 @@ function generateCategoryPage(siteDir){
       canonical.setAttribute('rel', 'canonical');
       document.head.appendChild(canonical);
     }
-    canonical.setAttribute('href', window.location.origin + '/' + encodeURIComponent(currentSlug) + '/');
+    canonical.setAttribute('href', window.location.origin + '/' + encodeURIComponent(categorySlugLower || currentSlug) + '/');
 
     function setOg(property, content){
       let tag = document.querySelector('meta[property="' + property + '"]');
@@ -377,14 +416,14 @@ function generateCategoryPage(siteDir){
       tag.setAttribute('content', content);
     }
 
-    const categoryUrl = window.location.origin + '/' + encodeURIComponent(currentSlug) + '/';
+    const categoryUrl = window.location.origin + '/' + encodeURIComponent(categorySlugLower || currentSlug) + '/';
     setOg('og:type', 'website');
     setOg('og:title', categoryName + ' – Quality Celulares');
     setOg('og:description', metaDescriptionText);
     setOg('og:url', categoryUrl);
-    setOg('og:image', window.location.origin + '/site/images/logo.png');
+    setOg('og:image', window.location.origin + '/images/logo.png');
 
-    const products = (productsData.items || []).filter(p => {
+    const products = (productsData.items || []).filter(function(p){
       if (p.active === false) return false;
       const values = [
         p.category,
@@ -393,21 +432,28 @@ function generateCategoryPage(siteDir){
         p.categoriaSlug,
         p.categoryId,
         p.categoriaId
-      ].map(v => normalizeText(v));
-      return values.includes(currentSlug) || values.includes(categoryNameLower) || (categoryId && values.includes(normalizeText(categoryId)));
+      ].map(function(v){ return normalizeText(v); });
+
+      return values.includes(currentSlug) ||
+        values.includes(categorySlugLower) ||
+        values.includes(categoryNameLower) ||
+        (categoryIdLower && values.includes(categoryIdLower));
     });
 
+    const container = document.getElementById('produtos-container');
+    if (!container) return;
+
     if (products.length === 0) {
+      container.innerHTML = '';
       showMessage('Nenhum produto nesta categoria ainda.');
       return;
     }
 
-    const container = document.getElementById('produtos-container');
     const noResults = document.getElementById('no-results');
     if (noResults) noResults.style.display = 'none';
     container.innerHTML = '';
 
-    products.forEach(p => {
+    products.forEach(function(p){
       const priceStr = shouldShowPrice(p) ? formatPrice(p.price ?? p.preco) : '';
       const productName = p.name || p.nome || '';
       const productImage = p.image || p.imagem || '';
@@ -432,16 +478,18 @@ function generateCategoryPage(siteDir){
       const card = document.createElement('div');
       card.className = 'produto-card product-card';
       card.innerHTML =
-        '<img src="' + escapeHtml(productImage ? (productImage.charAt(0) === "/" ? productImage : "/" + productImage) : "/images/sem-imagem.png") + '" alt="' + escapeHtml(productName) + '">' +
+        '<img src="' + escapeHtml(assetUrl(productImage)) + '" alt="' + escapeHtml(productName) + '">' +
         '<h3>' + escapeHtml(productName) + '</h3>' +
         productVariationsCardHtml(p) +
         (priceStr ? '<p>' + escapeHtml(priceStr) + '</p>' : '') +
         detalhesHTML +
         '<a href="https://wa.me/5555991407824?text=' + whatsappText + '" class="btn btn-whatsapp" target="_blank">' +
         '<i class="fa-brands fa-whatsapp"></i> Comprar no WhatsApp</a>';
+
       container.appendChild(card);
     });
-  }).catch(() => {
+  }).catch(function(err){
+    console.error('Erro ao carregar categoria:', err);
     setCategoryTitle(titleEl, 'Erro ao carregar categoria', '');
     showMessage('Não foi possível carregar os produtos desta categoria.');
   });
@@ -452,7 +500,6 @@ function generateCategoryPage(siteDir){
 
   fs.writeFileSync(path.join(siteDir, 'categoria.html'), html, 'utf-8');
 }
-
 function rebuildCategoryStructure(items, siteDir){
   generateCategoryPage(siteDir);
   generateHeader(items || [], siteDir);

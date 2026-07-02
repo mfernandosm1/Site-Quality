@@ -599,20 +599,133 @@ PRODUTOS CADASTRADOS ATIVOS:
 ${productsText || 'Nenhum produto cadastrado encontrado.'}`;
 }
 
-async function callGemini(prompt) {
+
+function geminiModelsToTry() {
+  const preferred = getEnvValue('GEMINI_MODEL') || '';
+  const fallback = [
+    'gemini-2.5-flash-lite',
+    'gemini-2.5-flash',
+    'gemini-2.0-flash-lite',
+    'gemini-2.0-flash',
+    'gemini-1.5-flash',
+    'gemini-1.5-flash-8b'
+  ];
+
+  return [...new Set([preferred, ...fallback].map(v => String(v || '').trim()).filter(Boolean))];
+}
+
+function isTemporaryGeminiError(message = '', status = 0) {
+  const text = String(message || '').toLowerCase();
+  return (
+    status === 429 ||
+    status === 500 ||
+    status === 502 ||
+    status === 503 ||
+    status === 504 ||
+    text.includes('high demand') ||
+    text.includes('overloaded') ||
+    text.includes('temporarily') ||
+    text.includes('try again later') ||
+    text.includes('unavailable') ||
+    text.includes('rate limit') ||
+    text.includes('quota')
+  );
+}
+
+function friendlyGeminiError(error) {
+  const msg = String(error?.message || error || '');
+
+  if (/GEMINI_API_KEY/i.test(msg) || msg.includes('Chave do Gemini')) {
+    return msg;
+  }
+
+  if (isTemporaryGeminiError(msg, error?.status)) {
+    return '⚠️ A IA está congestionada no momento. Aguarde alguns segundos e tente novamente.';
+  }
+
+  if (/not found|not supported|not available|invalid/i.test(msg)) {
+    return '⚠️ O modelo de IA configurado não respondeu corretamente. Verifique o GEMINI_MODEL no arquivo .env ou tente novamente.';
+  }
+
+  return msg || 'Erro ao chamar a IA.';
+}
+
+function wait(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+async function callGeminiApi({ body, responseJson = false }) {
   const apiKey = getEnvValue('GEMINI_API_KEY');
-  const model = getEnvValue('GEMINI_MODEL') || 'gemini-2.5-flash-lite';
 
   if (!apiKey) {
     throw new Error('Chave do Gemini não configurada. Crie um arquivo .env na pasta painel com GEMINI_API_KEY=sua_chave_aqui');
   }
 
-  const url = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${encodeURIComponent(apiKey)}`;
+  const models = geminiModelsToTry();
+  let lastError = null;
 
-  const response = await fetch(url, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({
+  for (let index = 0; index < models.length; index++) {
+    const model = models[index];
+    const url = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${encodeURIComponent(apiKey)}`;
+
+    try {
+      const requestBody = JSON.parse(JSON.stringify(body));
+      requestBody.generationConfig = requestBody.generationConfig || {};
+
+      if (responseJson) {
+        requestBody.generationConfig.responseMimeType = 'application/json';
+      }
+
+      const response = await fetch(url, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(requestBody)
+      });
+
+      const data = await response.json().catch(() => ({}));
+
+      if (!response.ok) {
+        const msg = data?.error?.message || `Erro ao chamar a API do Gemini (${response.status}).`;
+        const err = new Error(msg);
+        err.status = response.status;
+        err.model = model;
+        throw err;
+      }
+
+      const text = data?.candidates?.[0]?.content?.parts?.map(part => part.text || '').join('') || '';
+      if (!text) {
+        const err = new Error('A IA não retornou conteúdo. Tente novamente.');
+        err.model = model;
+        throw err;
+      }
+
+      if (index > 0) {
+        console.log(`✅ Gemini respondeu usando modelo alternativo: ${model}`);
+      }
+
+      return text;
+    } catch (error) {
+      lastError = error;
+      console.warn(`⚠️ Falha no Gemini (${model}): ${error.message}`);
+
+      if (!isTemporaryGeminiError(error.message, error.status) && index === 0 && getEnvValue('GEMINI_MODEL')) {
+        // Se o modelo do .env falhou por nome/configuração, ainda tenta os fallbacks abaixo.
+      }
+
+      if (index < models.length - 1) {
+        await wait(isTemporaryGeminiError(error.message, error.status) ? 900 : 250);
+        continue;
+      }
+    }
+  }
+
+  throw new Error(friendlyGeminiError(lastError));
+}
+
+async function callGemini(prompt) {
+  const text = await callGeminiApi({
+    responseJson: true,
+    body: {
       contents: [
         {
           role: 'user',
@@ -622,40 +735,19 @@ async function callGemini(prompt) {
       generationConfig: {
         temperature: 0.88,
         topP: 0.95,
-        maxOutputTokens: 1400,
-        responseMimeType: 'application/json'
+        maxOutputTokens: 1400
       }
-    })
+    }
   });
-
-  const data = await response.json().catch(() => ({}));
-
-  if (!response.ok) {
-    const msg = data?.error?.message || 'Erro ao chamar a API do Gemini.';
-    throw new Error(msg);
-  }
-
-  const text = data?.candidates?.[0]?.content?.parts?.[0]?.text || '';
-  if (!text) throw new Error('A IA não retornou conteúdo. Tente novamente.');
 
   return safeJsonFromText(text);
 }
 
 
 async function callGeminiChat({ systemInstruction, contents }) {
-  const apiKey = getEnvValue('GEMINI_API_KEY');
-  const model = getEnvValue('GEMINI_MODEL') || 'gemini-2.5-flash-lite';
-
-  if (!apiKey) {
-    throw new Error('Chave do Gemini não configurada. Crie um arquivo .env na pasta painel com GEMINI_API_KEY=sua_chave_aqui');
-  }
-
-  const url = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${encodeURIComponent(apiKey)}`;
-
-  const response = await fetch(url, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({
+  const text = await callGeminiApi({
+    responseJson: false,
+    body: {
       systemInstruction: {
         parts: [{ text: systemInstruction }]
       },
@@ -665,23 +757,14 @@ async function callGeminiChat({ systemInstruction, contents }) {
         topP: 0.95,
         maxOutputTokens: 1800
       }
-    })
+    }
   });
-
-  const data = await response.json().catch(() => ({}));
-
-  if (!response.ok) {
-    const msg = data?.error?.message || 'Erro ao chamar a API do Gemini.';
-    throw new Error(msg);
-  }
-
-  const text = data?.candidates?.[0]?.content?.parts?.map(part => part.text || '').join('') || '';
-  if (!text) throw new Error('A IA não retornou conteúdo. Tente novamente.');
 
   // Chat IA deve aceitar texto normal ou JSON.
   // Assim evitamos erro quando o Gemini responder de forma livre.
   return { reply: extractChatReplyFromText(text) };
 }
+
 
 router.get('/', (req, res) => {
   const referencesData = readJson(referencesFile(), { items: [] });
