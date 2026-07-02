@@ -198,7 +198,7 @@ function variationsFromBody(body, current = {}) {
 
 function variationsToText(variations = {}) {
   const colors = Array.isArray(variations.colors) ? variations.colors.map(c => [c.name, c.hex, c.image].filter(Boolean).join('|')).join('\n') : '';
-  const combinations = Array.isArray(variations.combinations) ? variations.combinations.map(c => [c.color, c.storage, c.ram, c.condition, c.image].filter((v, i) => i < 4 || v).join('|')).join('\n') : '';
+  const combinations = Array.isArray(variations.combinations) ? variations.combinations.map(c => [c.color, c.storage, c.ram, c.condition, c.image, c.stock].filter((v, i) => i < 4 || (v !== undefined && v !== null && v !== '')).join('|')).join('\n') : '';
   return {
     colorsText: colors,
     storageText: Array.isArray(variations.storage) ? variations.storage.join('\n') : '',
@@ -218,11 +218,23 @@ function productFromBody(body, current = {}) {
     ? Math.max(0, Number(body.stock))
     : null;
 
+  const variations = variationsFromBody(body, current);
+  const comboStocks = Array.isArray(variations.combinations)
+    ? variations.combinations
+        .map(c => c.stock)
+        .filter(v => v !== undefined && v !== null && v !== '' && Number.isFinite(Number(v)))
+        .map(v => Math.max(0, Number(v)))
+    : [];
+
+  const finalStock = variations.enabled && comboStocks.length
+    ? comboStocks.reduce((sum, value) => sum + value, 0)
+    : (Number.isFinite(stockValue) ? stockValue : null);
+
   return {
     name: (body.name || current.name || '').trim(),
     slug: gerarSlug(body.slug || current.slug || body.name || current.name || ''),
     price: priceValue,
-    stock: Number.isFinite(stockValue) ? stockValue : null,
+    stock: finalStock,
     image: (body.image || current.image || '').trim(),
     gallery: galleryFromBody(body.gallery, current.gallery),
     category: (body.category ?? current.category ?? '').toString().trim(),
@@ -230,11 +242,12 @@ function productFromBody(body, current = {}) {
     featured: body.featured === true || body.featured === 'true',
     active: body.active === true || body.active === 'true',
     detailsEnabled: body.detailsEnabled === true || body.detailsEnabled === 'true',
+    showVariationsOnCard: body.showVariationsOnCard === true || body.showVariationsOnCard === 'true',
     descriptionShort: (body.descriptionShort ?? current.descriptionShort ?? '').toString().trim(),
     descriptionLong: (body.descriptionLong ?? current.descriptionLong ?? '').toString().trim(),
     variations: Object.assign(
-      variationsFromBody(body, current),
-      variationsToText(variationsFromBody(body, current))
+      variations,
+      variationsToText(variations)
     )
   };
 }
@@ -299,6 +312,7 @@ router.get('/', (req, res) => {
 
   let flash = null;
   if (req.query.saved === 'produto') flash = '✅ Produto salvo com sucesso.';
+  if (req.query.saved === 'duplicate') flash = '📄 Produto duplicado com sucesso. Edite o novo produto criado como cópia.';
   if (req.query.saved === 'all') flash = '✅ Alterações salvas com sucesso.';
   if (req.query.saved === 'bulk') flash = '✅ Categoria aplicada nos produtos selecionados.';
   if (req.query.saved === 'details_on') flash = '✅ Detalhes ativados nos produtos selecionados.';
@@ -494,6 +508,54 @@ router.post('/bulk-details', (req, res) => {
   writeJson(file, data);
   console.log(`${enable ? '✅' : '🚫'} Detalhes ${enable ? 'ativados' : 'desativados'} em ${updated} produto(s).`);
   res.redirect(`/produtos?saved=${enable ? 'details_on' : 'details_off'}`);
+});
+
+
+router.post('/duplicate', (req, res) => {
+  const file = path.join(P(req.app).CONTENT_DIR, 'products.json');
+  const data = readJson(file);
+  data.items = data.items || [];
+
+  const id = Number(req.body.id);
+  const original = data.items.find(p => Number(p.id) === id);
+
+  if (!original) {
+    if (wantsJson(req)) {
+      return res.status(404).json({ success: false, message: 'Produto não encontrado.' });
+    }
+
+    return res.redirect('/produtos?error=not_found');
+  }
+
+  const novoId = Date.now();
+  const nomeCopia = `${original.name || 'Produto'} (Cópia)`;
+
+  const copia = JSON.parse(JSON.stringify(original));
+  copia.id = novoId;
+  copia.name = nomeCopia;
+  copia.slug = slugUnico(
+    gerarSlug(`${original.slug || original.name || 'produto'} copia`),
+    data.items,
+    novoId
+  );
+
+  // Quando o código interno QLT existir no futuro, ele não deve ser reaproveitado na cópia.
+  delete copia.code;
+  delete copia.internalCode;
+  delete copia.codigo;
+  delete copia.codigoInterno;
+  delete copia.qltCode;
+
+  data.items.push(copia);
+  writeJson(file, data);
+
+  console.log(`📄 Produto duplicado: ${original.name || id} -> ${copia.name} | slug: ${copia.slug}`);
+
+  if (wantsJson(req)) {
+    return res.json({ success: true, message: '📄 Produto duplicado com sucesso.', item: copia });
+  }
+
+  res.redirect('/produtos?saved=duplicate');
 });
 
 router.post('/del', (req, res) => {
