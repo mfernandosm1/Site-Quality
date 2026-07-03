@@ -87,6 +87,40 @@
       .replace(/'/g, '&#039;');
   }
 
+
+
+  function normalizeText(value){
+    return (value || '').toString()
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, '')
+      .trim()
+      .toLowerCase();
+  }
+
+  function productTagInfo(tag){
+    const label = String(tag || '').trim();
+    const key = normalizeText(label);
+    if (key.includes('oferta')) return { label, cls:'oferta', icon:'fa-solid fa-fire' };
+    if (key.includes('lancamento') || key.includes('lançamento')) return { label, cls:'lancamento', icon:'fa-solid fa-rocket' };
+    if (key.includes('mais vendido') || key.includes('vendido')) return { label, cls:'mais-vendido', icon:'fa-solid fa-star' };
+    if (key.includes('ultima') || key.includes('última')) return { label, cls:'ultimas', icon:'fa-solid fa-bolt' };
+    if (key.includes('preco') || key.includes('preço') || key.includes('baixou')) return { label, cls:'preco-baixou', icon:'fa-solid fa-tags' };
+    if (key.includes('frete')) return { label, cls:'frete', icon:'fa-solid fa-truck-fast' };
+    if (key.includes('novo') || key.includes('novidade')) return { label, cls:'novo', icon:'fa-solid fa-sparkles' };
+    if (key.includes('seminovo')) return { label, cls:'seminovo', icon:'fa-solid fa-shield-halved' };
+    return { label, cls:'padrao', icon:'fa-solid fa-tag' };
+  }
+
+  function productTagsHtml(p, limit){
+    const tags = Array.isArray(p.tags) ? p.tags : String(p.tags || '').split(/\r?\n|,/);
+    const clean = tags.map(t => String(t || '').trim()).filter(Boolean).slice(0, limit || 2);
+    if (!clean.length) return '';
+    return '<div class="quality-card-tags premium-card-tags">' + clean.map(t => {
+      const info = productTagInfo(t);
+      return '<span class="quality-product-tag tag-' + info.cls + '"><i class="' + info.icon + '"></i>' + escapeHtml(info.label) + '</span>';
+    }).join('') + '</div>';
+  }
+
   function hasGallery(p){
     return Array.isArray(p.gallery) && p.gallery.filter(Boolean).length > 0;
   }
@@ -181,7 +215,10 @@
           : '';
 
         card.innerHTML = `
-          <img src="${escapeHtml(productImagePath(p.image || 'images/sem-imagem.png'))}" alt="${escapeHtml(p.name || '')}">
+          <div class="quality-card-image-wrap">
+            ${productTagsHtml(p, 2)}
+            <img src="${escapeHtml(productImagePath(p.image || 'images/sem-imagem.png'))}" alt="${escapeHtml(p.name || '')}">
+          </div>
           <h3>${escapeHtml(p.name || '')}</h3>
           ${productVariationsCardHtml(p)}
           ${precoHTML}
