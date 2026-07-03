@@ -501,7 +501,10 @@ function generateCategoryPage(siteDir){
   fs.writeFileSync(path.join(siteDir, 'categoria.html'), html, 'utf-8');
 }
 function rebuildCategoryStructure(items, siteDir){
-  generateCategoryPage(siteDir);
+  // V7.7: não reescreve mais categoria.html automaticamente.
+  // O categoria.html agora é um arquivo fixo do site, para não perder melhorias
+  // como etiquetas, cards, filtros e ajustes de SEO ao criar/editar categorias.
+  // Mantemos apenas o header.html atualizado como compatibilidade/preview.
   generateHeader(items || [], siteDir);
 }
 

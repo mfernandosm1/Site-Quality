@@ -445,6 +445,52 @@
     font-size:11px;
   }
 
+
+  .quality-ai-fill-box{
+    margin:18px 0 16px;
+    border:1px solid #bfdbfe;
+    background:linear-gradient(135deg,#eff6ff,#ffffff);
+    border-radius:16px;
+    padding:14px;
+    box-shadow:0 8px 24px rgba(37,99,235,.06);
+  }
+  .quality-ai-fill-title{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:10px;
+    flex-wrap:wrap;
+    margin-bottom:10px;
+  }
+  .quality-ai-fill-title strong{font-size:15px;color:#0f172a;}
+  .quality-ai-fill-title small{color:#64748b;font-weight:700;}
+  .quality-ai-fill-row{display:grid;grid-template-columns:1fr;gap:8px;align-items:start;}
+  .quality-ai-fill-row input{width:100% !important;min-height:42px !important;border-radius:12px !important;border:1px solid #bfdbfe !important;background:#fff !important;padding:10px 12px !important;}
+  .quality-ai-fill-action{display:flex;align-items:center;gap:12px;flex-wrap:wrap;}
+  .quality-ai-fill-action .btn{min-height:42px !important;border-radius:12px !important;font-weight:900 !important;padding:9px 16px !important;background:#2563eb !important;color:#fff !important;border:1px solid #1d4ed8 !important;box-shadow:0 6px 14px rgba(37,99,235,.18);}
+  .quality-ai-fill-action .btn:hover{background:#1d4ed8 !important;}
+  .quality-ai-fill-help{color:#64748b;font-size:12px;font-weight:700;}
+  .quality-ai-fill-status{display:none;margin-top:9px;font-size:12px;font-weight:800;border-radius:10px;padding:8px 10px;}
+  .quality-ai-fill-status.ok{display:block;color:#15803d;background:#ecfdf5;border:1px solid #bbf7d0;}
+  .quality-ai-fill-status.error{display:block;color:#b91c1c;background:#fff7ed;border:1px solid #fed7aa;}
+  .quality-ai-fill-status.loading{display:block;color:#2563eb;background:#eff6ff;border:1px solid #bfdbfe;}
+  @media (max-width:800px){.quality-ai-fill-action .btn{width:100%;}.quality-ai-fill-help{width:100%;}}
+
+
+  .quality-tags-field{grid-column:1 / -1;border:1px solid #e5e7eb;background:#fff;border-radius:12px;padding:12px;}
+  .quality-tags-options{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px;}
+  .quality-tag-option{display:inline-flex;align-items:center;gap:6px;border:1px solid #dbe3ef;background:#f8fafc;border-radius:999px;padding:7px 10px;font-size:12px;font-weight:800;cursor:pointer;}
+  .quality-tag-option input{width:auto !important;min-height:auto !important;}
+  .quality-tags-custom{margin-top:10px;}
+  .quality-tags-custom input{width:100% !important;}
+  .quality-sales-field{grid-column:1 / -1;border:1px solid #dbeafe;background:#f8fbff;border-radius:12px;padding:12px;}
+  .quality-sales-field textarea{width:100% !important;min-height:86px !important;border-radius:10px !important;}
+  .quality-sales-tip{display:block;margin-top:6px;color:#64748b;font-size:11px;font-weight:700;}
+  .quality-tag-summary{font-size:10.5px;color:#64748b;max-height:18px;overflow:hidden;}
+  .quality-resource-stack .manage-tags-btn{width:100% !important;min-height:38px !important;margin:0 !important;font-size:12px !important;padding:8px 10px !important;border-radius:11px !important;font-weight:800 !important;background:#f1f5f9 !important;color:#0f172a !important;border:1px solid #e2e8f0 !important;display:flex !important;align-items:center !important;justify-content:center !important;gap:6px !important;white-space:nowrap !important;}
+  .quality-tags-modal{width:min(720px,96vw);max-height:88vh;overflow:auto;background:#fff;border-radius:16px;border:1px solid #e5e7eb;box-shadow:0 22px 80px rgba(0,0,0,.25);}
+  .quality-tags-modal-body{padding:16px;}
+
   .prod-slug-input{
     font-family:monospace;
     color:#374151;
@@ -748,6 +794,21 @@
     <div class="quality-indicator-card"><span>📦 Estoque total</span><strong id="quality-stock-total-indicator"><%= estoqueTotalProdutos %></strong></div>
   </div>
 
+  <div class="quality-ai-fill-box" id="quality-ai-fill-box">
+    <div class="quality-ai-fill-title">
+      <strong>✨ Cadastro inteligente com IA</strong>
+      <small>Digite o modelo, revise os campos e salve normalmente.</small>
+    </div>
+    <div class="quality-ai-fill-row">
+      <input type="text" id="ai-product-query" placeholder="Ex.: Samsung Galaxy A36 5G 256GB">
+      <div class="quality-ai-fill-action">
+        <button class="btn" type="button" id="ai-fill-product-btn">✨ Preencher cadastro</button>
+        <span class="quality-ai-fill-help">Digite o modelo, revise os campos e salve normalmente.</span>
+      </div>
+    </div>
+    <div class="quality-ai-fill-status" id="ai-fill-product-status"></div>
+  </div>
+
   <form method="post" action="/produtos/add" class="row product-add-form" id="add-product-form">
     <div class="field-name">
       <label>Nome</label>
@@ -907,6 +968,20 @@
           <div class="quality-combo-list" data-var-list="combinations"></div>
         </div>
       </div>
+    </div>
+
+
+    <div class="quality-tags-field">
+      <label>Etiquetas do produto</label>
+      <div class="quality-tags-options">
+        <% ['Lançamento','Oferta','Mais vendido','Últimas unidades','Preço Baixou','Frete grátis','Novo','Novidade','Seminovo','5G'].forEach(tag => { %>
+          <label class="quality-tag-option"><input type="checkbox" name="tags" value="<%= tag %>"> <%= tag %></label>
+        <% }) %>
+      </div>
+      <div class="quality-tags-custom">
+        <input type="text" name="tags" placeholder="Etiquetas extras separadas por vírgula. Ex.: Pronta entrega, Premium">
+      </div>
+      <small class="variation-help">As etiquetas aparecem no card e na página do produto. Use poucas para não poluir.</small>
     </div>
 
     <div style="grid-column: 1 / -1;">
@@ -1071,6 +1146,9 @@
               <div class="quality-resource-stack">
                 <textarea name="descriptionShort" class="row-description-short" placeholder="Descrição curta..." style="display:none;"><%= p.descriptionShort || '' %></textarea>
                 <textarea name="descriptionLong" class="row-description-long" placeholder="Descrição completa..." style="display:none;"><%= p.descriptionLong || '' %></textarea>
+                <textarea name="tags" class="row-product-tags" style="display:none;"><%= Array.isArray(p.tags) ? p.tags.join('\n') : (p.tags || '') %></textarea>
+                <textarea name="relatedManualIds" class="row-related-manual-ids" style="display:none;"><%= Array.isArray(p.relatedManualIds) ? p.relatedManualIds.join('\n') : (p.relatedManualIds || '') %></textarea>
+                <textarea name="crossSellIds" class="row-cross-sell-ids" style="display:none;"><%= Array.isArray(p.crossSellIds) ? p.crossSellIds.join('\n') : (p.crossSellIds || '') %></textarea>
 
                 <select name="image" class="prod-image-select quality-image-compact-select" data-current-val="<%= p.image %>">
                   <option value="">Imagem...</option>
@@ -1091,6 +1169,8 @@
                       <span class="gallery-count-badge">📷 0 item(ns)</span>
                       <button class="btn manage-gallery-btn" type="button">🖼️ Galeria</button>
                     </div>
+                    <button class="btn manage-tags-btn" type="button">🏷️ Etiquetas</button>
+                    <div class="quality-tag-summary">Sem etiquetas</div>
                   </div>
                 </div>
 
@@ -1235,6 +1315,12 @@ Com marcas de uso">Usados padrão</button></div><div class="quality-var-list" da
 </div>
 
 
+<datalist id="quality-product-reference-list">
+  <% (items || []).forEach(prodRef => { %>
+    <option value="<%= prodRef.slug || prodRef.id %>"><%= (prodRef.name || 'Produto') %> — QLT-<%= String(prodRef.id || '').slice(-6).padStart(6, '0') %></option>
+  <% }) %>
+</datalist>
+
 <div class="quality-modal-backdrop" id="description-modal" aria-hidden="true">
   <div class="quality-description-modal">
     <div class="quality-gallery-modal-header">
@@ -1285,6 +1371,7 @@ Com marcas de uso">Usados padrão</button></div><div class="quality-var-list" da
         <button class="quality-edit-tab active" type="button" data-edit-tab="dados">📋 Dados do produto</button>
         <button class="quality-edit-tab" type="button" data-edit-tab="estoque">📦 Estoque</button>
         <button class="quality-edit-tab" type="button" data-edit-tab="seo">🔎 SEO</button>
+        <button class="quality-edit-tab" type="button" data-edit-tab="vendas">📈 Marketing e Vendas</button>
       </div>
 
       <div class="quality-edit-panel active" data-edit-panel="dados">
@@ -1335,6 +1422,37 @@ Com marcas de uso">Usados padrão</button></div><div class="quality-var-list" da
             <select id="edit-showVariationsOnCard"><option value="false">Não</option><option value="true">Sim</option></select>
             <small class="quality-edit-help">Liga/desliga por produto. A exibição no site precisa do próximo arquivo da vitrine/categoria.</small>
           </div>
+
+        </div>
+      </div>
+
+      <div class="quality-edit-panel" data-edit-panel="vendas">
+        <div class="quality-edit-grid">
+          <div class="quality-edit-field" style="grid-column:1 / -1;">
+            <label>🏷️ Etiquetas premium</label>
+            <input type="text" id="edit-tags" placeholder="Ex.: Lançamento, Oferta, Últimas unidades">
+            <small class="quality-edit-help">Separe por vírgula. Aparece sobre a imagem do card e na página do produto.</small>
+          </div>
+
+          <div class="quality-edit-field" style="grid-column:1 / -1;">
+            <label>🛒 Quem viu este produto também comprou</label>
+            <div style="display:grid;grid-template-columns:1fr auto;gap:8px;margin-bottom:8px;">
+              <input type="text" id="edit-related-picker" list="quality-product-reference-list" placeholder="Digite para buscar produto...">
+              <button class="btn" type="button" id="edit-related-add">Adicionar</button>
+            </div>
+            <textarea id="edit-related-manual-ids" rows="4" placeholder="Opcional. Um slug ou ID por linha. Se deixar vazio, o site escolhe automaticamente."></textarea>
+            <small class="quality-edit-help">Use para forçar produtos semelhantes específicos. Ex.: outro Galaxy, iPhone ou aparelho parecido.</small>
+          </div>
+
+          <div class="quality-edit-field" style="grid-column:1 / -1;">
+            <label>➕ Leve junto</label>
+            <div style="display:grid;grid-template-columns:1fr auto;gap:8px;margin-bottom:8px;">
+              <input type="text" id="edit-cross-sell-picker" list="quality-product-reference-list" placeholder="Digite para buscar acessório/produto...">
+              <button class="btn" type="button" id="edit-cross-sell-add">Adicionar</button>
+            </div>
+            <textarea id="edit-cross-sell-ids" rows="4" placeholder="Opcional. Um slug ou ID por linha. Ex.: película, capinha, carregador, fone."></textarea>
+            <small class="quality-edit-help">Não misture serviços aqui. Use apenas acessórios/produtos que combinam com a compra.</small>
+          </div>
         </div>
       </div>
 
@@ -1380,6 +1498,39 @@ Com marcas de uso">Usados padrão</button></div><div class="quality-var-list" da
       <div class="quality-edit-actions">
         <button class="btn" type="button" id="edit-product-cancel">Cancelar</button>
         <button class="btn primary" type="button" id="edit-product-save">💾 Salvar alterações</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="quality-modal-backdrop" id="tags-modal" aria-hidden="true">
+  <div class="quality-tags-modal">
+    <div class="quality-gallery-modal-header">
+      <strong>🏷️ Etiquetas do produto</strong>
+      <button class="quality-close-btn" type="button" id="tags-modal-close">×</button>
+    </div>
+    <div class="quality-tags-modal-body">
+      <div class="quality-tags-options" id="tags-modal-options">
+        <label class="quality-tag-option"><input type="checkbox" value="Lançamento"> 🚀 Lançamento</label>
+        <label class="quality-tag-option"><input type="checkbox" value="Oferta"> 🔥 Oferta</label>
+        <label class="quality-tag-option"><input type="checkbox" value="Mais vendido"> ⭐ Mais vendido</label>
+        <label class="quality-tag-option"><input type="checkbox" value="Últimas unidades"> ⚡ Últimas unidades</label>
+        <label class="quality-tag-option"><input type="checkbox" value="Preço Baixou"> 💰 Preço Baixou</label>
+        <label class="quality-tag-option"><input type="checkbox" value="Frete grátis"> 🚚 Frete grátis</label>
+        <label class="quality-tag-option"><input type="checkbox" value="Novo"> ✨ Novo</label>
+        <label class="quality-tag-option"><input type="checkbox" value="Novidade"> 🆕 Novidade</label>
+        <label class="quality-tag-option"><input type="checkbox" value="Seminovo"> 🛡️ Seminovo</label>
+        <label class="quality-tag-option"><input type="checkbox" value="5G"> 📶 5G</label>
+      </div>
+      <div class="description-editor-field" style="margin-top:14px;">
+        <label>Etiquetas extras</label>
+        <input type="text" id="tags-modal-custom" placeholder="Ex.: Pronta entrega, Premium">
+        <small class="quality-edit-help">Separe por vírgula. Evite exagerar para o card não ficar poluído.</small>
+      </div>
+      <div class="modal-gallery-actions">
+        <button class="btn" type="button" id="tags-modal-cancel">Cancelar</button>
+        <button class="btn primary" type="button" id="tags-modal-save">Salvar etiquetas</button>
       </div>
     </div>
   </div>
@@ -1447,6 +1598,103 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("add-product-name"),
     document.getElementById("add-product-slug")
   );
+
+
+  function setAddField(name, value) {
+    const form = document.getElementById("add-product-form");
+    const field = form?.querySelector(`[name="${name}"]`);
+    if (!field || value === undefined || value === null) return;
+    field.value = String(value);
+    field.dispatchEvent(new Event("input", { bubbles: true }));
+    field.dispatchEvent(new Event("change", { bubbles: true }));
+  }
+
+  function setAiFillStatus(text, type = "loading") {
+    const status = document.getElementById("ai-fill-product-status");
+    if (!status) return;
+    status.textContent = text || "";
+    status.className = `quality-ai-fill-status ${type}`;
+  }
+
+  function applyAiProductDraft(draft = {}) {
+    const nameInput = document.getElementById("add-product-name");
+    const slugInput = document.getElementById("add-product-slug");
+    const editor = document.getElementById("add-description-long-editor");
+    const hidden = document.getElementById("add-description-long-hidden");
+
+    if (draft.name && nameInput) {
+      nameInput.value = draft.name;
+      nameInput.dispatchEvent(new Event("input", { bubbles: true }));
+    }
+
+    if (draft.slug && slugInput) {
+      slugInput.value = gerarSlugPainel(draft.slug);
+      slugInput.dataset.manual = "1";
+      slugInput.dispatchEvent(new Event("input", { bubbles: true }));
+    }
+
+    if (draft.category) setAddField("category", draft.category);
+    if (draft.descriptionShort) setAddField("descriptionShort", draft.descriptionShort);
+
+    if (draft.descriptionLong) {
+      const html = String(draft.descriptionLong);
+      if (editor) editor.innerHTML = html;
+      if (hidden) hidden.value = html;
+    }
+  }
+
+  async function fillProductWithAi() {
+    const input = document.getElementById("ai-product-query");
+    const btn = document.getElementById("ai-fill-product-btn");
+    const query = (input?.value || "").trim();
+
+    if (!query) {
+      setAiFillStatus("Digite o nome/modelo do produto primeiro.", "error");
+      input?.focus();
+      return;
+    }
+
+    const oldText = btn?.textContent || "✨ Preencher cadastro";
+    if (btn) {
+      btn.disabled = true;
+      btn.textContent = "⏳ Consultando IA...";
+    }
+    setAiFillStatus("Gerando nome, slug, categoria e descrição técnica...", "loading");
+
+    try {
+      const response = await fetch("/produtos/ai-fill", {
+        method: "POST",
+        headers: { "Content-Type": "application/json", "Accept": "application/json" },
+        body: JSON.stringify({ query })
+      });
+
+      const json = await response.json().catch(() => ({}));
+      if (!response.ok || !json.success) throw new Error(json.message || "Erro ao gerar cadastro com IA.");
+
+      applyAiProductDraft(json.draft || {});
+      if (json.warning) {
+        setAiFillStatus("⚠️ Gemini sem resposta/cota no momento. Preenchi um rascunho local com o que foi possível. Revise antes de salvar. Detalhe: " + json.warning, "error");
+      } else {
+        setAiFillStatus("✅ Cadastro preenchido. Revise os dados, escolha a imagem e clique em Adicionar.", "ok");
+      }
+    } catch (error) {
+      console.error(error);
+      setAiFillStatus(error.message || "Erro ao gerar cadastro com IA.", "error");
+    } finally {
+      if (btn) {
+        btn.disabled = false;
+        btn.textContent = oldText;
+      }
+    }
+  }
+
+  document.getElementById("ai-fill-product-btn")?.addEventListener("click", fillProductWithAi);
+  document.getElementById("ai-product-query")?.addEventListener("keydown", event => {
+    if (event.key === "Enter") {
+      event.preventDefault();
+      fillProductWithAi();
+    }
+  });
 
   function showMessage(text, type = "success") {
     if (!flashMessage) return;
@@ -2425,6 +2673,122 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
 
+
+  // V7.6.6 - Etiquetas
+  const defaultQualityTags = ["Lançamento","Oferta","Mais vendido","Novo","Seminovo","Últimas unidades","5G","Frete grátis"];
+  const tagsModal = document.getElementById("tags-modal");
+  const tagsModalClose = document.getElementById("tags-modal-close");
+  const tagsModalCancel = document.getElementById("tags-modal-cancel");
+  const tagsModalSave = document.getElementById("tags-modal-save");
+  const tagsModalCustom = document.getElementById("tags-modal-custom");
+  let activeTagsRow = null;
+
+  function parseTagsValue(value){
+    const seen = new Set();
+    return String(value || "")
+      .split(/\r?\n|,/)
+      .map(v => v.trim())
+      .filter(Boolean)
+      .filter(v => {
+        const key = v.toLowerCase();
+        if (seen.has(key)) return false;
+        seen.add(key);
+        return true;
+      })
+      .slice(0, 8);
+  }
+
+  function setTagsValue(row, tags){
+    const el = row?.querySelector(".row-product-tags");
+    if (!el) return;
+    el.value = (tags || []).filter(Boolean).join("\n");
+    el.dispatchEvent(new Event("change", { bubbles:true }));
+    updateTagsSummary(row);
+  }
+
+  function getTagsValue(row){
+    return parseTagsValue(row?.querySelector(".row-product-tags")?.value || "");
+  }
+
+  function parseIdListValue(value){
+    return String(value || "")
+      .split(/\r?\n|,|;/)
+      .map(v => String(v || "").trim().replace(/^QLT[-\s]*/i, ""))
+      .filter(Boolean)
+      .filter((v, i, arr) => arr.findIndex(x => x.toLowerCase() === v.toLowerCase()) === i)
+      .slice(0, 12);
+  }
+
+  function getListValue(row, selector){
+    return parseIdListValue(row?.querySelector(selector)?.value || "");
+  }
+
+  function setListValue(row, selector, values){
+    const el = row?.querySelector(selector);
+    if (!el) return;
+    el.value = parseIdListValue(Array.isArray(values) ? values.join("\n") : values).join("\n");
+    el.dispatchEvent(new Event("change", { bubbles:true }));
+  }
+
+  function addPickerValueToTextarea(inputId, textareaId){
+    const input = document.getElementById(inputId);
+    const textarea = document.getElementById(textareaId);
+    if (!input || !textarea) return;
+    const value = String(input.value || "").trim();
+    if (!value) return;
+    const values = parseIdListValue(textarea.value + "\n" + value);
+    textarea.value = values.join("\n");
+    input.value = "";
+  }
+
+  document.getElementById("edit-related-add")?.addEventListener("click", () => addPickerValueToTextarea("edit-related-picker", "edit-related-manual-ids"));
+  document.getElementById("edit-cross-sell-add")?.addEventListener("click", () => addPickerValueToTextarea("edit-cross-sell-picker", "edit-cross-sell-ids"));
+
+  function updateTagsSummary(row){
+    const box = row?.querySelector(".quality-tag-summary");
+    if (!box) return;
+    const tags = getTagsValue(row);
+    box.textContent = tags.length ? tags.join(" • ") : "Sem etiquetas";
+  }
+
+  function openTagsModal(row){
+    activeTagsRow = row;
+    const tags = getTagsValue(row);
+    tagsModal?.querySelectorAll('#tags-modal-options input[type="checkbox"]').forEach(input => {
+      input.checked = tags.some(t => t.toLowerCase() === input.value.toLowerCase());
+    });
+    const custom = tags.filter(t => !defaultQualityTags.some(d => d.toLowerCase() === t.toLowerCase()));
+    if (tagsModalCustom) tagsModalCustom.value = custom.join(", ");
+    tagsModal?.classList.add("open");
+    tagsModal?.setAttribute("aria-hidden", "false");
+  }
+
+  function closeTagsModal(){
+    tagsModal?.classList.remove("open");
+    tagsModal?.setAttribute("aria-hidden", "true");
+    activeTagsRow = null;
+  }
+
+  document.querySelectorAll(".manage-tags-btn").forEach(btn => {
+    btn.addEventListener("click", () => openTagsModal(btn.closest("tr")));
+  });
+
+  document.querySelectorAll(".product-row").forEach(updateTagsSummary);
+
+  tagsModalClose?.addEventListener("click", closeTagsModal);
+  tagsModalCancel?.addEventListener("click", closeTagsModal);
+  tagsModal?.addEventListener("click", e => { if (e.target === tagsModal) closeTagsModal(); });
+  tagsModalSave?.addEventListener("click", async () => {
+    if (!activeTagsRow) return;
+    const selected = Array.from(tagsModal?.querySelectorAll('#tags-modal-options input[type="checkbox"]:checked') || []).map(i => i.value);
+    const custom = parseTagsValue(tagsModalCustom?.value || "");
+    setTagsValue(activeTagsRow, [...selected, ...custom]);
+    markRowDirty(activeTagsRow);
+    await saveProductRow(activeTagsRow);
+    closeTagsModal();
+  });
+
+
   // V7.5 - Modal Editar Produto
   const editProductModal = document.getElementById("edit-product-modal");
   const editProductClose = document.getElementById("edit-product-close");
@@ -2510,6 +2874,11 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("edit-featured").value = getRowField(row, 'select[name="featured"]') || "false";
     document.getElementById("edit-detailsEnabled").value = getRowField(row, 'select[name="detailsEnabled"]') || "false";
     document.getElementById("edit-showVariationsOnCard").value = getRowField(row, '.row-show-variations-card') || "false";
+    document.getElementById("edit-tags").value = getTagsValue(row).join(", ");
+    const editRelatedManualIds = document.getElementById("edit-related-manual-ids");
+    const editCrossSellIds = document.getElementById("edit-cross-sell-ids");
+    if (editRelatedManualIds) editRelatedManualIds.value = getListValue(row, ".row-related-manual-ids").join("\n");
+    if (editCrossSellIds) editCrossSellIds.value = getListValue(row, ".row-cross-sell-ids").join("\n");
     document.getElementById("edit-stock").value = getRowField(row, 'input[name="stock"]');
     document.getElementById("edit-stock-min").value = "";
     document.getElementById("edit-seo-title").value = name;
@@ -2570,6 +2939,9 @@ document.addEventListener("DOMContentLoaded", () => {
     setRowField(row, 'select[name="featured"]', document.getElementById("edit-featured").value);
     setRowField(row, 'select[name="detailsEnabled"]', document.getElementById("edit-detailsEnabled").value);
     setRowField(row, '.row-show-variations-card', document.getElementById("edit-showVariationsOnCard").value);
+    setTagsValue(row, parseTagsValue(document.getElementById("edit-tags").value));
+    setListValue(row, ".row-related-manual-ids", document.getElementById("edit-related-manual-ids")?.value || "");
+    setListValue(row, ".row-cross-sell-ids", document.getElementById("edit-cross-sell-ids")?.value || "");
     setRowField(row, 'input[name="stock"]', document.getElementById("edit-stock").value);
 
     const seoSlug = document.getElementById("edit-seo-slug").value.trim();

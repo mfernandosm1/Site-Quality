@@ -234,16 +234,33 @@ function safeJsonFromText(text) {
     .replace(/```/g, '')
     .trim();
 
+  // 1) Tentativa principal: JSON puro.
   try {
     return JSON.parse(cleaned);
-  } catch (_) {
+  } catch (_) {}
+
+  // 2) Tentativa secundária: JSON no meio de algum texto.
+  try {
     const start = cleaned.indexOf('{');
     const end = cleaned.lastIndexOf('}');
     if (start >= 0 && end > start) {
       return JSON.parse(cleaned.slice(start, end + 1));
     }
-    throw new Error('A IA não retornou JSON válido. Tente gerar novamente.');
+  } catch (_) {}
+
+  // 3) Último recurso: se a IA respondeu texto comum, aproveita o conteúdo
+  // em vez de quebrar o painel com erro de JSON inválido.
+  if (cleaned) {
+    return {
+      story: cleaned,
+      enquete: '',
+      grupo: cleaned,
+      instagram: cleaned,
+      reels: cleaned
+    };
   }
+
+  throw new Error('A IA não retornou conteúdo. Tente novamente.');
 }
 
 function normalizeOutput(obj) {
