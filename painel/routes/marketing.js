@@ -263,15 +263,89 @@ function safeJsonFromText(text) {
   throw new Error('A IA não retornou conteúdo. Tente novamente.');
 }
 
+function tryParseMarketingJson(value) {
+  if (value === null || value === undefined) return null;
+  if (typeof value === 'object') return value;
+
+  const text = String(value || '')
+    .replace(/```json/gi, '')
+    .replace(/```/g, '')
+    .trim();
+
+  if (!text) return null;
+
+  try {
+    return JSON.parse(text);
+  } catch (_) {}
+
+  try {
+    const start = text.indexOf('{');
+    const end = text.lastIndexOf('}');
+    if (start >= 0 && end > start) {
+      return JSON.parse(text.slice(start, end + 1));
+    }
+  } catch (_) {}
+
+  return null;
+}
+
+function outputTextValue(value) {
+  if (value === null || value === undefined) return '';
+
+  if (typeof value === 'object') {
+    return String(
+      value.text ||
+      value.conteudo ||
+      value.content ||
+      value.value ||
+      value.resposta ||
+      value.reply ||
+      ''
+    ).trim();
+  }
+
+  return String(value || '').trim();
+}
+
 function normalizeOutput(obj) {
-  const story = String(obj.story || obj.stories || obj.status || obj.whatsappStatus || '').trim();
-  return {
-    story,
-    enquete: String(obj.enquete || obj.pollStory || obj.interacaoStory || obj.storyInteraction || '').trim(),
-    grupo: String(obj.grupo || obj.grupos || obj.whatsappGrupo || '').trim(),
-    instagram: String(obj.instagram || obj.facebook || obj.instagramFacebook || '').trim(),
-    reels: String(obj.reels || obj.reelsScript || obj.roteiroReels || obj.videoIdea || obj.ideiaVideo || obj.ideiaFotoVideo || '').trim()
+  let data = tryParseMarketingJson(obj) || obj || {};
+
+  // Corrige o caso em que a IA devolve JSON dentro de uma string,
+  // por exemplo: { story: "{\"story\":...}" }.
+  const possibleNestedJson = [
+    data.output,
+    data.result,
+    data.content,
+    data.text,
+    data.message,
+    data.story
+  ];
+
+  for (const candidate of possibleNestedJson) {
+    const parsed = tryParseMarketingJson(candidate);
+    if (parsed && (parsed.story || parsed.enquete || parsed.grupo || parsed.instagram || parsed.reels)) {
+      data = parsed;
+      break;
+    }
+  }
+
+  const output = {
+    story: outputTextValue(data.story || data.stories || data.status || data.whatsappStatus),
+    enquete: outputTextValue(data.enquete || data.pollStory || data.interacaoStory || data.storyInteraction),
+    grupo: outputTextValue(data.grupo || data.grupos || data.whatsappGrupo || data.whatsapp),
+    instagram: outputTextValue(data.instagram || data.facebook || data.instagramFacebook || data.feed),
+    reels: outputTextValue(data.reels || data.reelsScript || data.roteiroReels || data.videoIdea || data.ideiaVideo || data.ideiaFotoVideo)
   };
+
+  // Última proteção: se ainda sobrou JSON cru dentro de algum campo, tenta abrir de novo.
+  for (const value of Object.values(output)) {
+    const parsed = tryParseMarketingJson(value);
+    if (parsed && (parsed.story || parsed.enquete || parsed.grupo || parsed.instagram || parsed.reels)) {
+      return normalizeOutput(parsed);
+    }
+  }
+
+  return output;
 }
 
 function personalityLabel(value) {
