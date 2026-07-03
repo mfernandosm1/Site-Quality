@@ -198,5 +198,145 @@
       document.getElementById('no-results').style.display = 'block';
     });
   </script>
+
+  <script>
+  // V8.0.1 - Busca reforçada na Home sem mexer no main.js
+  (function(){
+    if (window.__qualityHomeSearchFixReady) return;
+    window.__qualityHomeSearchFixReady = true;
+
+    function normalizeSearch(value) {
+      return (value || '')
+        .toString()
+        .normalize('NFD')
+        .replace(/[\u0300-\u036f]/g, '')
+        .toLowerCase()
+        .trim();
+    }
+
+    function showSearchMessage(text) {
+      const noResults = document.getElementById('no-results');
+      if (noResults) {
+        noResults.textContent = text;
+        noResults.style.display = 'block';
+      } else {
+        alert(text);
+      }
+    }
+
+    function fetchJson(paths) {
+      let lastError = null;
+      return paths.reduce(function(promise, url){
+        return promise.catch(function(){
+          return fetch(url, { cache: 'no-store' }).then(function(res){
+            if (!res.ok) throw new Error('Falha ao carregar ' + url);
+            return res.json();
+          }).catch(function(err){
+            lastError = err;
+            throw err;
+          });
+        });
+      }, Promise.reject()).catch(function(){
+        if (lastError) throw lastError;
+        throw new Error('Arquivo JSON não encontrado.');
+      });
+    }
+
+    function qualityHomeSearch(query) {
+      const termo = normalizeSearch(query);
+      const noResults = document.getElementById('no-results');
+      const cards = document.querySelectorAll('.product-card');
+
+      if (!termo) {
+        cards.forEach(function(card){ card.style.display = 'flex'; });
+        if (noResults) noResults.style.display = 'none';
+        return;
+      }
+
+      Promise.all([
+        fetchJson(['/content/products.json', '/site/content/products.json']).catch(function(){ return { items: [] }; }),
+        fetchJson(['/content/categories.json', '/site/content/categories.json']).catch(function(){ return { items: [] }; })
+      ]).then(function(results){
+        const products = results[0].items || [];
+        const categories = results[1].items || [];
+
+        const product = products.find(function(p){
+          if (!p || p.active === false) return false;
+          const haystack = normalizeSearch([
+            p.name, p.nome, p.slug, p.category, p.categoria,
+            p.descriptionShort, p.descriptionLong
+          ].filter(Boolean).join(' '));
+          return haystack.includes(termo);
+        });
+
+        if (product) {
+          const slug = product.slug || product.id;
+          window.location.href = '/produto/' + encodeURIComponent(slug) + '/';
+          return;
+        }
+
+        const category = categories.find(function(c){
+          const haystack = normalizeSearch([c.name, c.nome, c.slug, c.id].filter(Boolean).join(' '));
+          return haystack.includes(termo);
+        });
+
+        if (category && category.slug) {
+          window.location.href = '/' + encodeURIComponent(category.slug) + '/';
+          return;
+        }
+
+        let foundOnPage = false;
+        cards.forEach(function(card){
+          const title = normalizeSearch(card.querySelector('h3')?.textContent || card.textContent || '');
+          const match = title.includes(termo);
+          card.style.display = match ? 'flex' : 'none';
+          if (match) foundOnPage = true;
+        });
+
+        if (foundOnPage) {
+          if (noResults) noResults.style.display = 'none';
+          return;
+        }
+
+        showSearchMessage('Nenhum produto encontrado.');
+      }).catch(function(){
+        showSearchMessage('Erro ao buscar produto.');
+      });
+    }
+
+    function bindSearch() {
+      const desktopInput = document.getElementById('search-input');
+      const desktopBtn = document.getElementById('search-button');
+      const mobileInput = document.getElementById('search-input-mobile');
+      const mobileBtn = document.getElementById('search-button-mobile');
+
+      function bind(input, btn) {
+        if (!input || !btn || btn.dataset.qualityHomeSearchFixed === '1') return;
+        btn.dataset.qualityHomeSearchFixed = '1';
+        btn.addEventListener('click', function(e){
+          e.preventDefault();
+          e.stopPropagation();
+          qualityHomeSearch(input.value);
+        }, true);
+        input.addEventListener('keydown', function(e){
+          if (e.key === 'Enter') {
+            e.preventDefault();
+            e.stopPropagation();
+            qualityHomeSearch(input.value);
+          }
+        }, true);
+      }
+
+      bind(desktopInput, desktopBtn);
+      bind(mobileInput, mobileBtn);
+    }
+
+    document.addEventListener('DOMContentLoaded', bindSearch);
+    setTimeout(bindSearch, 300);
+    setTimeout(bindSearch, 900);
+    setTimeout(bindSearch, 1600);
+  })();
+  </script>
+
 </body>
 </html>

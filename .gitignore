@@ -42,3 +42,6 @@ desktop.ini
 # (opcional, caso você gere ZIPs no projeto)
 # ==========================
 *.zip
+
+# historico de conversa com ia##
+painel/data/marketing-chat-history.json

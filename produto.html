@@ -200,6 +200,195 @@
   }
 
 
+
+  function productTagInfo(tag){
+    const label = String(tag || '').trim();
+    const key = normalizeText(label);
+    if (key.includes('oferta')) return { label, cls:'oferta', icon:'fa-solid fa-fire' };
+    if (key.includes('lancamento') || key.includes('lançamento')) return { label, cls:'lancamento', icon:'fa-solid fa-rocket' };
+    if (key.includes('mais vendido') || key.includes('vendido')) return { label, cls:'mais-vendido', icon:'fa-solid fa-star' };
+    if (key.includes('ultima') || key.includes('última')) return { label, cls:'ultimas', icon:'fa-solid fa-bolt' };
+    if (key.includes('preco') || key.includes('preço') || key.includes('baixou')) return { label, cls:'preco-baixou', icon:'fa-solid fa-tags' };
+    if (key.includes('frete')) return { label, cls:'frete', icon:'fa-solid fa-truck-fast' };
+    if (key.includes('novo') || key.includes('novidade')) return { label, cls:'novo', icon:'fa-solid fa-sparkles' };
+    if (key.includes('seminovo')) return { label, cls:'seminovo', icon:'fa-solid fa-shield-halved' };
+    return { label, cls:'padrao', icon:'fa-solid fa-tag' };
+  }
+
+  function productTagsHtml(p, limit, mode){
+    const tags = Array.isArray(p.tags) ? p.tags : String(p.tags || '').split(/\r?\n|,/);
+    const clean = tags.map(t => String(t || '').trim()).filter(Boolean).slice(0, limit || 6);
+    if (!clean.length) return '';
+    const cls = mode === 'overlay' ? 'quality-card-tags premium-card-tags' : 'produto-tags premium-detail-tags';
+    return '<div class="' + cls + '">' + clean.map(t => {
+      const info = productTagInfo(t);
+      return '<span class="quality-product-tag tag-' + info.cls + '"><i class="' + info.icon + '"></i>' + escapeHtml(info.label) + '</span>';
+    }).join('') + '</div>';
+  }
+
+  function productUrl(p){
+    const slug = p.slug || p.id || '';
+    return slug ? '/produto/' + encodeURIComponent(slug) + '/' : '#';
+  }
+
+  function productTokens(name){
+    return normalizeText(name || '')
+      .split(/[^a-z0-9]+/)
+      .filter(t => t.length >= 3 && !['com','para','novo','nova','gb','ram','tela','preto','branco','azul','verde','rosa'].includes(t));
+  }
+
+  function listField(value){
+    if (Array.isArray(value)) return value.map(v => String(v || '').trim()).filter(Boolean);
+    return String(value || '').split(/\r?\n|,|;/).map(v => v.trim()).filter(Boolean);
+  }
+
+  function qltCode(id){
+    const raw = String(id || '').replace(/\D/g, '');
+    return raw ? raw.slice(-6).padStart(6, '0') : '';
+  }
+
+  function sameProduct(a, b){
+    return String(a?.id || '') === String(b?.id || '') || String(a?.slug || '') === String(b?.slug || '');
+  }
+
+  function findProductsByRefs(refs, allProducts, current){
+    const result = [];
+    listField(refs).forEach(ref => {
+      const clean = String(ref || '').trim().replace(/^QLT[-\s]*/i, '').toLowerCase();
+      if (!clean) return;
+      const found = (allProducts || []).find(p => {
+        const id = String(p.id || '').toLowerCase();
+        const slug = String(p.slug || '').toLowerCase();
+        const code = qltCode(p.id).toLowerCase();
+        return id === clean || slug === clean || code === clean || ('qlt-' + code) === clean;
+      });
+      if (found && found.active !== false && !sameProduct(found, current) && !result.some(p => sameProduct(p, found))) result.push(found);
+    });
+    return result;
+  }
+
+  function brandOfProduct(p){
+    const n = normalizeText(p?.name || p?.nome || '');
+    if (n.includes('iphone') || n.includes('apple')) return 'apple';
+    if (n.includes('samsung') || n.includes('galaxy')) return 'samsung';
+    if (n.includes('xiaomi') || n.includes('redmi') || n.includes('poco')) return 'xiaomi';
+    if (n.includes('motorola') || n.includes('moto ')) return 'motorola';
+    if (n.includes('jbl')) return 'jbl';
+    if (n.includes('alexa') || n.includes('echo')) return 'amazon';
+    return '';
+  }
+
+  function hasTag(p, word){
+    const tags = Array.isArray(p.tags) ? p.tags : String(p.tags || '').split(/\r?\n|,/);
+    return tags.some(t => normalizeText(t).includes(normalizeText(word)));
+  }
+
+  function relatedScore(current, candidate){
+    if (!candidate || candidate.active === false || sameProduct(candidate, current)) return -1;
+    let score = 0;
+    if ((candidate.category || '') === (current.category || '')) score += 40;
+    if (brandOfProduct(candidate) && brandOfProduct(candidate) === brandOfProduct(current)) score += 35;
+    const a = new Set(productTokens(current.name || ''));
+    const b = new Set(productTokens(candidate.name || ''));
+    a.forEach(t => { if (b.has(t)) score += 12; });
+    if (candidate.featured) score += 8;
+    if (hasTag(candidate, 'lançamento') || hasTag(candidate, 'lancamento') || hasTag(candidate, 'mais vendido')) score += 8;
+    if (candidate.detailsEnabled) score += 3;
+    return score;
+  }
+
+  function productMiniCardHtml(p){
+    const n = p.name || p.nome || 'Produto';
+    const img = assetPath(p.image || p.imagem || 'images/sem-imagem.png');
+    return `
+      <a class="produto-relacionado-card" href="${productUrl(p)}">
+        <div class="quality-card-image-wrap related-image-wrap">
+          <img src="${escapeHtml(img)}" alt="${escapeHtml(n)}" onerror="this.onerror=null;this.src='/images/sem-imagem.png';">
+          ${productTagsHtml(p, 1, 'overlay')}
+        </div>
+        <strong>${escapeHtml(n)}</strong>
+      </a>
+    `;
+  }
+
+  function relatedProductsHtml(current, allProducts){
+    const manual = findProductsByRefs(current.relatedManualIds, allProducts, current);
+    const automatic = (allProducts || [])
+      .map(p => ({ item:p, score: relatedScore(current, p) }))
+      .filter(x => x.score > 0 && !manual.some(m => sameProduct(m, x.item)))
+      .sort((a,b) => b.score - a.score)
+      .map(x => x.item);
+
+    const related = [...manual, ...automatic].slice(0, 4);
+    if (!related.length) return '';
+
+    return `
+      <section class="produtos-relacionados quality-recommendation-block">
+        <div class="quality-section-heading">
+          <h2>Quem viu este produto também comprou</h2>
+        </div>
+        <div class="produtos-relacionados-grid">
+          ${related.map(productMiniCardHtml).join('')}
+        </div>
+      </section>
+    `;
+  }
+
+  function accessoryScore(current, candidate){
+    if (!candidate || candidate.active === false || sameProduct(candidate, current)) return -1;
+    const cName = normalizeText(candidate.name || candidate.nome || '');
+    const currentName = normalizeText(current.name || current.nome || '');
+    const currentCategory = normalizeText(current.category || '');
+    const candidateCategory = normalizeText(candidate.category || '');
+    if (candidateCategory.includes('assistencia') || cName.includes('troca de') || cName.includes('assistencia')) return -1;
+
+    let score = 0;
+    const isSmartphone = currentCategory.includes('smart') || /iphone|galaxy|redmi|poco|moto/.test(currentName);
+    const isGame = /playstation|ps4|ps5|xbox|nintendo/.test(currentName);
+    const isNotebook = /notebook|macbook|laptop/.test(currentName);
+    const isAlexa = /alexa|echo/.test(currentName);
+    const isWatch = /smartwatch|relogio|relógio|amazfit|watch/.test(currentName);
+
+    if (isSmartphone) {
+      if (/pelicula|película|capinha|capa|case/.test(cName)) score += 80;
+      if (/carregador|fonte|cabo|usb|power bank|fone|jbl|bluetooth/.test(cName)) score += 55;
+      if (brandOfProduct(candidate) && brandOfProduct(candidate) === brandOfProduct(current)) score += 15;
+    }
+    if (isGame && /controle|headset|fone|carregador|jogo|base/.test(cName)) score += 70;
+    if (isNotebook && /mouse|teclado|mochila|suporte|base|ssd|hub|cabo/.test(cName)) score += 70;
+    if (isAlexa && /lampada|lâmpada|tomada|smart plug|camera|câmera/.test(cName)) score += 70;
+    if (isWatch && /pulseira|pelicula|película|carregador|cabo/.test(cName)) score += 70;
+
+    if (candidate.featured) score += 8;
+    if (candidateCategory.includes('acessorio') || candidateCategory.includes('acessório')) score += 10;
+    return score;
+  }
+
+  function crossSellProductsHtml(current, allProducts){
+    const manual = findProductsByRefs(current.crossSellIds, allProducts, current);
+    const automatic = (allProducts || [])
+      .map(p => ({ item:p, score: accessoryScore(current, p) }))
+      .filter(x => x.score > 0 && !manual.some(m => sameProduct(m, x.item)))
+      .sort((a,b) => b.score - a.score)
+      .map(x => x.item);
+
+    const items = [...manual, ...automatic].slice(0, 4);
+    if (!items.length) return '';
+
+    return `
+      <section class="produtos-relacionados quality-cross-sell-block">
+        <div class="quality-section-heading">
+          <h2>Leve junto</h2>
+          <p>Acessórios que combinam com este produto</p>
+        </div>
+        <div class="produtos-relacionados-grid quality-cross-sell-grid">
+          ${items.map(productMiniCardHtml).join('')}
+        </div>
+      </section>
+    `;
+  }
+
+
   function safeDescriptionHtml(value){
     const allowed = ['B','STRONG','I','EM','BR','P','DIV','UL','OL','LI','H3','H4'];
     const tpl = document.createElement('template');
@@ -620,6 +809,7 @@
 
           <div class="produto-info">
             <h1>${escapeHtml(name)}</h1>
+            ${productTagsHtml(product, 6)}
             ${price ? `<p style="font-size:24px;font-weight:700;margin:12px 0;">${escapeHtml(price)}</p>` : ''}
             ${shortDesc ? `<p style="font-size:17px;line-height:1.5;">${escapeHtml(shortDesc)}</p>` : ''}
             ${variacoesHtml}
@@ -632,6 +822,9 @@
           </div>
         </div>
       `;
+
+      document.querySelectorAll('.produtos-relacionados').forEach(el => el.remove());
+      box.insertAdjacentHTML('afterend', relatedProductsHtml(product, data.items || []) + crossSellProductsHtml(product, data.items || []));
 
       const principal = document.getElementById('galeria-principal');
 
