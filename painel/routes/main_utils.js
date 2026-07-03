@@ -180,6 +180,15 @@ function categoryPageHtml(header, footer){
 ${header}
 <main class="main">
   <h1 id="categoria-titulo" style="text-align:center;margin-top:30px;display:flex;justify-content:center;align-items:center;gap:10px;flex-wrap:wrap;">Categoria</h1>
+  <div class="quality-category-toolbar">
+    <label for="quality-category-sort">Ordenar por:</label>
+    <select id="quality-category-sort">
+      <option value="featured">⭐ Destaques</option>
+      <option value="launch">🚀 Lançamentos</option>
+      <option value="az">🔤 Nome A-Z</option>
+      <option value="za">🔠 Nome Z-A</option>
+    </select>
+  </div>
   <div id="produtos-container" class="products" style="margin-top:40px;"></div>
 </main>
 ${footer}
@@ -209,6 +218,32 @@ ${footer}
       .replace(/>/g, '&gt;')
       .replace(/"/g, '&quot;')
       .replace(/'/g, '&#039;');
+  }
+
+
+
+  function productTagInfo(tag){
+    const label = String(tag || '').trim();
+    const key = normalizeText(label);
+    if (key.includes('oferta')) return { label, cls:'oferta', icon:'fa-solid fa-fire' };
+    if (key.includes('lancamento') || key.includes('lançamento')) return { label, cls:'lancamento', icon:'fa-solid fa-rocket' };
+    if (key.includes('mais vendido') || key.includes('vendido')) return { label, cls:'mais-vendido', icon:'fa-solid fa-star' };
+    if (key.includes('ultima') || key.includes('última')) return { label, cls:'ultimas', icon:'fa-solid fa-bolt' };
+    if (key.includes('preco') || key.includes('preço') || key.includes('baixou')) return { label, cls:'preco-baixou', icon:'fa-solid fa-tags' };
+    if (key.includes('frete')) return { label, cls:'frete', icon:'fa-solid fa-truck-fast' };
+    if (key.includes('novo') || key.includes('novidade')) return { label, cls:'novo', icon:'fa-solid fa-sparkles' };
+    if (key.includes('seminovo')) return { label, cls:'seminovo', icon:'fa-solid fa-shield-halved' };
+    return { label, cls:'padrao', icon:'fa-solid fa-tag' };
+  }
+
+  function productTagsHtml(p, limit){
+    const tags = Array.isArray(p.tags) ? p.tags : String(p.tags || '').split(/\\r?\\n|,/);
+    const clean = tags.map(t => String(t || '').trim()).filter(Boolean).slice(0, limit || 2);
+    if (!clean.length) return '';
+    return '<div class="quality-card-tags premium-card-tags">' + clean.map(t => {
+      const info = productTagInfo(t);
+      return '<span class="quality-product-tag tag-' + info.cls + '"><i class="' + info.icon + '"></i>' + escapeHtml(info.label) + '</span>';
+    }).join('') + '</div>';
   }
 
   function normalizeIcon(icon){
@@ -349,43 +384,76 @@ ${footer}
       return;
     }
 
-    const container = document.getElementById('produtos-container');
-    container.innerHTML = '';
-    products.forEach(p => {
-      const priceStr = shouldShowPrice(p) ? formatPrice(p.price ?? p.preco) : '';
-      const productName = p.name || p.nome || '';
-      const productImageRaw = p.image || p.imagem || '';
-      const productImage = assetUrl(productImageRaw);
-      const productImageFallback = imageFallback(productImageRaw);
-      const whatsappText = encodeURIComponent('Olá! Vim através do site e tenho interesse em ' + (productName || 'produto'));
-      const hasGallery = Array.isArray(p.gallery) && p.gallery.filter(Boolean).length > 0;
-      const hasVideo = !!(p.youtube || p.youtubeUrl || p.video || p.videoUrl);
-      const hasDescription = !!(p.description || p.descricao || p.desc || p.descriptionLong || p.descriptionShort);
-      const detailsRaw = p.detailsEnabled ?? p.detalhesAtivo ?? p.details_enabled ?? p.verDetalhes ?? p.showDetails;
-      const detailsEnabled =
-        detailsRaw === true ||
-        String(detailsRaw || '').toLowerCase() === 'true' ||
-        String(detailsRaw || '').toLowerCase() === 'sim' ||
-        String(detailsRaw || '').toLowerCase() === '1' ||
-        String(detailsRaw || '').toLowerCase() === 'on';
-      const productId = p.id || p.slug || p._id || '';
-      const productSlug = p.slug || productId;
-      const detalhesHTML =
-        (detailsEnabled || hasGallery || hasVideo || hasDescription) && productSlug
-          ? '<a href="/produto/' + encodeURIComponent(productSlug) + '/" class="btn btn-details">Ver detalhes</a>'
-          : '';
+    function hasTag(p, word){
+      const tags = Array.isArray(p.tags) ? p.tags : String(p.tags || '').split(/\\r?\\n|,/);
+      return tags.some(t => normalizeText(t).includes(normalizeText(word)));
+    }
 
-      const card = document.createElement('div');
-      card.className = 'produto-card product-card';
-      card.innerHTML =
-        '<img src="' + escapeHtml(productImage) + '" onerror="this.onerror=null;this.src=\\'' + escapeHtml(productImageFallback) + '\\';" alt="' + escapeHtml(productName) + '">' +
-        '<h3>' + escapeHtml(productName) + '</h3>' +
-        (priceStr ? '<p>' + escapeHtml(priceStr) + '</p>' : '') +
-        detalhesHTML +
-        '<a href="https://wa.me/5555991407824?text=' + whatsappText + '" class="btn btn-whatsapp" target="_blank">' +
-        '<i class="fa-brands fa-whatsapp"></i> Comprar no WhatsApp</a>';
-      container.appendChild(card);
-    });
+    function sortProducts(list, mode){
+      const arr = [...list];
+      if (mode === 'az') return arr.sort((a,b) => String(a.name || a.nome || '').localeCompare(String(b.name || b.nome || ''), 'pt-BR'));
+      if (mode === 'za') return arr.sort((a,b) => String(b.name || b.nome || '').localeCompare(String(a.name || a.nome || ''), 'pt-BR'));
+      if (mode === 'launch') return arr.sort((a,b) => {
+        const tagDiff = Number(hasTag(b, 'lançamento') || hasTag(b, 'lancamento') || hasTag(b, 'novo')) - Number(hasTag(a, 'lançamento') || hasTag(a, 'lancamento') || hasTag(a, 'novo'));
+        if (tagDiff) return tagDiff;
+        return Number(b.id || 0) - Number(a.id || 0);
+      });
+      return arr.sort((a,b) => {
+        const featuredDiff = Number(b.featured === true) - Number(a.featured === true);
+        if (featuredDiff) return featuredDiff;
+        const tagDiff = Number(Boolean(b.tags && String(b.tags).length)) - Number(Boolean(a.tags && String(a.tags).length));
+        if (tagDiff) return tagDiff;
+        return String(a.name || a.nome || '').localeCompare(String(b.name || b.nome || ''), 'pt-BR');
+      });
+    }
+
+    const container = document.getElementById('produtos-container');
+    const sortSelect = document.getElementById('quality-category-sort');
+
+    function renderProducts(mode){
+      container.innerHTML = '';
+      sortProducts(products, mode || 'featured').forEach(p => {
+        const priceStr = shouldShowPrice(p) ? formatPrice(p.price ?? p.preco) : '';
+        const productName = p.name || p.nome || '';
+        const productImageRaw = p.image || p.imagem || '';
+        const productImage = assetUrl(productImageRaw);
+        const productImageFallback = imageFallback(productImageRaw);
+        const whatsappText = encodeURIComponent('Olá! Vim através do site e tenho interesse em ' + (productName || 'produto'));
+        const hasGallery = Array.isArray(p.gallery) && p.gallery.filter(Boolean).length > 0;
+        const hasVideo = !!(p.youtube || p.youtubeUrl || p.video || p.videoUrl);
+        const hasDescription = !!(p.description || p.descricao || p.desc || p.descriptionLong || p.descriptionShort);
+        const detailsRaw = p.detailsEnabled ?? p.detalhesAtivo ?? p.details_enabled ?? p.verDetalhes ?? p.showDetails;
+        const detailsEnabled =
+          detailsRaw === true ||
+          String(detailsRaw || '').toLowerCase() === 'true' ||
+          String(detailsRaw || '').toLowerCase() === 'sim' ||
+          String(detailsRaw || '').toLowerCase() === '1' ||
+          String(detailsRaw || '').toLowerCase() === 'on';
+        const productId = p.id || p.slug || p._id || '';
+        const productSlug = p.slug || productId;
+        const detalhesHTML =
+          (detailsEnabled || hasGallery || hasVideo || hasDescription) && productSlug
+            ? '<a href="/produto/' + encodeURIComponent(productSlug) + '/" class="btn btn-details">Ver detalhes</a>'
+            : '';
+
+        const card = document.createElement('div');
+        card.className = 'produto-card product-card';
+        card.innerHTML =
+          '<div class="quality-card-image-wrap">' +
+          '<img src="' + escapeHtml(productImage) + '" onerror="this.onerror=null;this.src=\\'' + escapeHtml(productImageFallback) + '\\';" alt="' + escapeHtml(productName) + '">' +
+          productTagsHtml(p) +
+          '</div>' +
+          '<h3>' + escapeHtml(productName) + '</h3>' +
+          (priceStr ? '<p>' + escapeHtml(priceStr) + '</p>' : '') +
+          detalhesHTML +
+          '<a href="https://wa.me/5555991407824?text=' + whatsappText + '" class="btn btn-whatsapp" target="_blank">' +
+          '<i class="fa-brands fa-whatsapp"></i> Comprar no WhatsApp</a>';
+        container.appendChild(card);
+      });
+    }
+
+    renderProducts(sortSelect ? sortSelect.value : 'featured');
+    sortSelect?.addEventListener('change', () => renderProducts(sortSelect.value));
   }).catch(() => {
     setCategoryTitle(titleEl, 'Erro ao carregar categoria', '');
     showMessage('Não foi possível carregar os produtos desta categoria.');
