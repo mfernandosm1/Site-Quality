@@ -263,89 +263,80 @@ function safeJsonFromText(text) {
   throw new Error('A IA não retornou conteúdo. Tente novamente.');
 }
 
-function tryParseMarketingJson(value) {
-  if (value === null || value === undefined) return null;
-  if (typeof value === 'object') return value;
+function tryParseJsonObject(value) {
+  if (typeof value !== 'string') return null;
 
-  const text = String(value || '')
+  const cleaned = value
     .replace(/```json/gi, '')
     .replace(/```/g, '')
     .trim();
 
-  if (!text) return null;
+  if (!cleaned) return null;
 
   try {
-    return JSON.parse(text);
+    const parsed = JSON.parse(cleaned);
+    return parsed && typeof parsed === 'object' ? parsed : null;
   } catch (_) {}
 
   try {
-    const start = text.indexOf('{');
-    const end = text.lastIndexOf('}');
+    const start = cleaned.indexOf('{');
+    const end = cleaned.lastIndexOf('}');
     if (start >= 0 && end > start) {
-      return JSON.parse(text.slice(start, end + 1));
+      const parsed = JSON.parse(cleaned.slice(start, end + 1));
+      return parsed && typeof parsed === 'object' ? parsed : null;
     }
   } catch (_) {}
 
   return null;
 }
 
-function outputTextValue(value) {
+function deepMarketingObject(obj, depth = 0) {
+  if (!obj || typeof obj !== 'object' || depth > 4) return obj || {};
+
+  const keys = ['story', 'stories', 'status', 'whatsappStatus', 'grupo', 'grupos', 'instagram', 'facebook', 'reels', 'enquete'];
+
+  for (const key of keys) {
+    const parsed = tryParseJsonObject(obj[key]);
+    if (parsed) {
+      return deepMarketingObject({ ...parsed, ...obj, [key]: parsed[key] ?? obj[key] }, depth + 1);
+    }
+  }
+
+  // Caso clássico do bug: a IA coloca o JSON inteiro dentro de story e os outros campos vêm vazios.
+  const storyParsed = tryParseJsonObject(obj.story);
+  if (storyParsed) return deepMarketingObject(storyParsed, depth + 1);
+
+  return obj;
+}
+
+function cleanMarketingText(value) {
   if (value === null || value === undefined) return '';
 
   if (typeof value === 'object') {
-    return String(
-      value.text ||
-      value.conteudo ||
-      value.content ||
-      value.value ||
-      value.resposta ||
-      value.reply ||
-      ''
-    ).trim();
+    const normalized = normalizeOutput(value);
+    return normalized.story || normalized.grupo || normalized.instagram || normalized.reels || normalized.enquete || '';
   }
 
-  return String(value || '').trim();
+  const text = String(value).trim();
+  const parsed = tryParseJsonObject(text);
+  if (parsed) {
+    const normalized = normalizeOutput(parsed);
+    return normalized.story || normalized.grupo || normalized.instagram || normalized.reels || normalized.enquete || text;
+  }
+
+  return text;
 }
 
 function normalizeOutput(obj) {
-  let data = tryParseMarketingJson(obj) || obj || {};
+  const source = deepMarketingObject(obj);
 
-  // Corrige o caso em que a IA devolve JSON dentro de uma string,
-  // por exemplo: { story: "{\"story\":...}" }.
-  const possibleNestedJson = [
-    data.output,
-    data.result,
-    data.content,
-    data.text,
-    data.message,
-    data.story
-  ];
-
-  for (const candidate of possibleNestedJson) {
-    const parsed = tryParseMarketingJson(candidate);
-    if (parsed && (parsed.story || parsed.enquete || parsed.grupo || parsed.instagram || parsed.reels)) {
-      data = parsed;
-      break;
-    }
-  }
-
-  const output = {
-    story: outputTextValue(data.story || data.stories || data.status || data.whatsappStatus),
-    enquete: outputTextValue(data.enquete || data.pollStory || data.interacaoStory || data.storyInteraction),
-    grupo: outputTextValue(data.grupo || data.grupos || data.whatsappGrupo || data.whatsapp),
-    instagram: outputTextValue(data.instagram || data.facebook || data.instagramFacebook || data.feed),
-    reels: outputTextValue(data.reels || data.reelsScript || data.roteiroReels || data.videoIdea || data.ideiaVideo || data.ideiaFotoVideo)
+  return {
+    story: cleanMarketingText(source.story || source.stories || source.status || source.whatsappStatus || ''),
+    enquete: cleanMarketingText(source.enquete || source.pollStory || source.interacaoStory || source.storyInteraction || ''),
+    grupo: cleanMarketingText(source.grupo || source.grupos || source.whatsappGrupo || ''),
+    instagram: cleanMarketingText(source.instagram || source.facebook || source.instagramFacebook || ''),
+    reels: cleanMarketingText(source.reels || source.reelsScript || source.roteiroReels || source.videoIdea || source.ideiaVideo || source.ideiaFotoVideo || '')
   };
-
-  // Última proteção: se ainda sobrou JSON cru dentro de algum campo, tenta abrir de novo.
-  for (const value of Object.values(output)) {
-    const parsed = tryParseMarketingJson(value);
-    if (parsed && (parsed.story || parsed.enquete || parsed.grupo || parsed.instagram || parsed.reels)) {
-      return normalizeOutput(parsed);
-    }
-  }
-
-  return output;
 }
 
 function personalityLabel(value) {
