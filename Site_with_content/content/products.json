@@ -663,7 +663,7 @@
       "slug": "pen-drive-sandisk-cruzer-blade-128gb-2"
     },
     {
-      "name": "Xiaomi Poco X7 pro 5G 256gb 12gb ram",
+      "name": "Xiaomi Poco X7 pro 5G 512gb 12gb ram",
       "price": null,
       "image": "images/pocox7pro.png",
       "gallery": [
@@ -673,11 +673,31 @@
       "showPrice": false,
       "featured": false,
       "active": true,
-      "detailsEnabled": false,
-      "descriptionShort": "",
-      "descriptionLong": "",
+      "detailsEnabled": true,
+      "descriptionShort": "O Poco X7 Pro oferece desempenho de topo de linha com um preço que cabe no seu bolso. Equipado com o novíssimo processador MediaTek Dimensity 8400-Ultra e uma bateria gigante, ele é perfeito para quem busca velocidade máxima em jogos pesados, multitarefa extrema e fotos profissionais.",
+      "descriptionLong": "<div>🛠️ <b>Especificações Técnicas:</b></div><ul><li><p><b>Memória Interna:</b> 512GB (Espaço de sobra para milhares de fotos, vídeos e apps)</p></li><li><p><b>Memória RAM:</b> 12GB LPDDR5X (Fluidez extrema em multitarefas)</p></li><li><p><b>Processador:</b> MediaTek Dimensity 8400-Ultra (4nm) — Potência máxima com economia de energia</p></li><li><p><b>Tela:</b> AMOLED CrystalRes de 6.67\" 1.5K, 120Hz e proteção Gorilla Glass</p></li><li><p><b>Câmeras Traseiras:</b> Principal de 50 MP com Estabilização Óptica (OIS) + Ultra-Wide de 8 MP (Vídeos em 4K)</p></li><li><p><b>Câmera Frontal:</b> 20 MP para selfies nítidas</p></li><li><p><b>Bateria:</b> 6000mAh com Carregamento Turbo de 90W (Carrega 100% em cerca de 42 minutos)</p></li><li><p><b>Conectividade:</b> 5G, Wi-Fi 6, Bluetooth, NFC e Sensor de Digital na Tela</p></li><li><p><b>Sistema:</b> Android com a nova interface HyperOS da Xiaomi</p></li></ul>",
       "id": 1780867309549,
-      "slug": "xiaomi-poco-x7-pro-5g-256gb-12gb-ram"
+      "slug": "xiaomi-poco-x7-pro-5g-512gb-12gb-ram",
+      "stock": null,
+      "tags": [],
+      "relatedManualIds": [],
+      "crossSellIds": [],
+      "showVariationsOnCard": false,
+      "variations": {
+        "enabled": false,
+        "colors": [],
+        "storage": [],
+        "ram": [],
+        "condition": [],
+        "combinations": [],
+        "labels": {},
+        "colorsText": "",
+        "storageText": "",
+        "ramText": "",
+        "conditionText": "",
+        "labelsText": "{}",
+        "combinationsText": ""
+      }
     },
     {
       "name": "Samsung A56 5g 256gb 8gb ram 6.7\"",
