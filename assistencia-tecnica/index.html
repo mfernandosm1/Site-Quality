@@ -183,27 +183,64 @@
   function qualityRecentKey(){ return 'quality_vistos_recentemente_v811'; }
 
   function qualityIsFavorite(id){
-    if (!id) return false;
-    return qualityReadStorage(qualityFavoriteKey()).some(item => String(item.id || item.slug) === String(id));
+    const key = String(id || '').trim().toLowerCase();
+    if (!key) return false;
+    return qualityReadStorage(qualityFavoriteKey()).some(item => {
+      const itemKey = qualitySavedProductKey ? qualitySavedProductKey(item) : String(item.id || item.slug || '').toLowerCase();
+      return itemKey === key || String(item.id || item.slug || '').toLowerCase() === key;
+    });
   }
 
   function qualityToggleFavorite(product){
     const id = String(product.slug || product.id || '').trim();
-    if (!id) return false;
+    const key = qualitySavedProductKey(product);
+    if (!id && !key) return false;
     let items = qualityReadStorage(qualityFavoriteKey());
-    const exists = items.some(item => String(item.id || item.slug) === id);
-    if (exists) items = items.filter(item => String(item.id || item.slug) !== id);
-    else items.unshift({ ...product, id: product.id || id, slug: product.slug || id, savedAt: Date.now() });
+    const exists = items.some(item => {
+      const itemKey = qualitySavedProductKey(item);
+      return itemKey === key || String(item.id || item.slug || '') === id;
+    });
+    if (exists) {
+      items = items.filter(item => {
+        const itemKey = qualitySavedProductKey(item);
+        return itemKey !== key && String(item.id || item.slug || '') !== id;
+      });
+    } else {
+      items.unshift({ ...product, id: product.id || id || key, slug: product.slug || id || key, savedAt: Date.now() });
+    }
     qualityWriteStorage(qualityFavoriteKey(), items.slice(0, 60));
     return !exists;
   }
 
+  function qualitySavedProductKey(item){
+    return String(item?.slug || item?.id || item?.url || item?.name || '').trim().toLowerCase();
+  }
+
   function qualitySaveRecent(product){
     const id = String(product.slug || product.id || '').trim();
-    if (!id) return;
-    let items = qualityReadStorage(qualityRecentKey()).filter(item => String(item.id || item.slug) !== id);
-    items.unshift({ ...product, id: product.id || id, slug: product.slug || id, viewedAt: Date.now() });
+    const key = qualitySavedProductKey(product);
+    if (!id && !key) return;
+    let items = qualityReadStorage(qualityRecentKey()).filter(item => {
+      const itemKey = qualitySavedProductKey(item);
+      return itemKey && itemKey !== key && String(item.id || item.slug || '') !== id;
+    });
+    items.unshift({ ...product, id: product.id || id || key, slug: product.slug || id || key, viewedAt: Date.now() });
     qualityWriteStorage(qualityRecentKey(), items.slice(0, 20));
+  }
+
+  function qualityToast(message){
+    try {
+      let el = document.querySelector('.quality-fav-toast');
+      if (!el) {
+        el = document.createElement('div');
+        el.className = 'quality-fav-toast';
+        document.body.appendChild(el);
+      }
+      el.textContent = message;
+      el.classList.add('show');
+      clearTimeout(window.__qualityFavToastTimer);
+      window.__qualityFavToastTimer = setTimeout(() => el.classList.remove('show'), 1600);
+    } catch {}
   }
 
   function qualityUpdateFavoriteButtons(){
@@ -249,8 +286,8 @@
   }
 
   function qualityBindProductActions(){
-    if (window.__qualityProductActionsBound) { qualityUpdateFavoriteButtons(); return; }
-    window.__qualityProductActionsBound = true;
+    if (window.__qualityProductActionsBoundV8112) { qualityUpdateFavoriteButtons(); return; }
+    window.__qualityProductActionsBoundV8112 = true;
     document.addEventListener('click', function(ev){
       const fav = ev.target.closest('[data-quality-fav]');
       const share = ev.target.closest('[data-quality-share]');

@@ -1313,3 +1313,225 @@ a.btn-details:hover,
     right: 9px !important;
   }
 }
+
+/* ===================
+   V8.1.1.2 - Ajuste final desktop
+   Etiquetas à esquerda e Favoritar/Compartilhar à direita sem sobrepor.
+   Coração vermelho no padrão marketplace.
+=================== */
+@media (min-width: 768px) {
+  .produto-card .quality-card-image-wrap,
+  .product-card .quality-card-image-wrap,
+  .produto-relacionado-card .quality-card-image-wrap,
+  .produto-relacionado-card.related-image-wrap,
+  .related-image-wrap {
+    padding-top: 44px !important;
+  }
+
+  .produto-card .quality-card-image-wrap .premium-card-tags,
+  .product-card .quality-card-image-wrap .premium-card-tags,
+  .produto-relacionado-card .quality-card-image-wrap .premium-card-tags,
+  .related-image-wrap .premium-card-tags {
+    top: 10px !important;
+    left: 10px !important;
+    right: 82px !important;
+    max-width: calc(100% - 92px) !important;
+    overflow: hidden !important;
+    flex-wrap: nowrap !important;
+    z-index: 12 !important;
+  }
+
+  .produto-card .quality-card-image-wrap .premium-card-tags .quality-product-tag,
+  .product-card .quality-card-image-wrap .premium-card-tags .quality-product-tag,
+  .produto-relacionado-card .quality-card-image-wrap .premium-card-tags .quality-product-tag,
+  .related-image-wrap .premium-card-tags .quality-product-tag {
+    max-width: 100% !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    white-space: nowrap !important;
+  }
+
+  .produto-card .quality-card-image-wrap .quality-card-actions,
+  .product-card .quality-card-image-wrap .quality-card-actions,
+  .produto-relacionado-card .quality-card-image-wrap .quality-card-actions,
+  .related-image-wrap .quality-card-actions {
+    top: 8px !important;
+    right: 10px !important;
+    z-index: 16 !important;
+  }
+}
+
+.quality-card-action.quality-favorite-btn,
+.quality-detail-action.quality-favorite-btn {
+  color: #e00000 !important;
+}
+
+.quality-card-action.quality-favorite-btn.is-active,
+.quality-detail-action.quality-favorite-btn.is-active,
+.quality-favorite-btn.is-active,
+.quality-detail-action.is-active.quality-favorite-btn {
+  background: rgba(255,255,255,.96) !important;
+  color: #e00000 !important;
+}
+
+.quality-card-action.quality-favorite-btn.is-active i,
+.quality-detail-action.quality-favorite-btn.is-active i {
+  color: #e00000 !important;
+}
+
+.quality-card-action.quality-share-btn,
+.quality-detail-action.quality-share-btn {
+  color: #111 !important;
+}
+
+.quality-card-action.quality-favorite-btn:hover,
+.quality-detail-action.quality-favorite-btn:hover {
+  color: #c90000 !important;
+}
+
+
+/* ===================
+   V8.1.1.3 - Ajuste definitivo
+   Desktop: etiqueta compacta à esquerda e ações à direita, sem sobrepor.
+   Favoritar: coração vermelho e feedback visual ao clicar.
+=================== */
+@media (min-width: 768px) {
+  .produto-card .quality-card-image-wrap .premium-card-tags,
+  .product-card .quality-card-image-wrap .premium-card-tags,
+  .produto-relacionado-card .quality-card-image-wrap .premium-card-tags,
+  .related-image-wrap .premium-card-tags {
+    width: calc(100% - 108px) !important;
+    max-width: calc(100% - 108px) !important;
+    min-width: 0 !important;
+    overflow: hidden !important;
+    flex-wrap: nowrap !important;
+  }
+
+  .produto-card .quality-card-image-wrap .premium-card-tags .quality-product-tag,
+  .product-card .quality-card-image-wrap .premium-card-tags .quality-product-tag,
+  .produto-relacionado-card .quality-card-image-wrap .premium-card-tags .quality-product-tag,
+  .related-image-wrap .premium-card-tags .quality-product-tag {
+    max-width: 100% !important;
+    min-width: 0 !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    white-space: nowrap !important;
+    padding: 5px 8px !important;
+    font-size: 10px !important;
+  }
+
+  .produto-card .quality-card-image-wrap .quality-card-actions,
+  .product-card .quality-card-image-wrap .quality-card-actions,
+  .produto-relacionado-card .quality-card-image-wrap .quality-card-actions,
+  .related-image-wrap .quality-card-actions {
+    width: 70px !important;
+    min-width: 70px !important;
+    justify-content: flex-end !important;
+  }
+}
+
+.quality-card-action.quality-favorite-btn,
+.quality-detail-action.quality-favorite-btn {
+  color: #e00000 !important;
+}
+
+.quality-card-action.quality-favorite-btn.is-active,
+.quality-detail-action.quality-favorite-btn.is-active {
+  background: #fff !important;
+  color: #e00000 !important;
+  box-shadow: 0 4px 14px rgba(224,0,0,.22) !important;
+}
+
+.quality-card-action.quality-favorite-btn.is-active i,
+.quality-detail-action.quality-favorite-btn.is-active i {
+  color: #e00000 !important;
+}
+
+.quality-fav-toast {
+  position: fixed;
+  left: 50%;
+  bottom: 22px;
+  transform: translateX(-50%) translateY(12px);
+  background: #111;
+  color: #fff;
+  border-radius: 999px;
+  padding: 11px 16px;
+  font-size: 14px;
+  font-weight: 700;
+  z-index: 9999;
+  box-shadow: 0 8px 26px rgba(0,0,0,.28);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .2s ease, transform .2s ease;
+}
+
+.quality-fav-toast.show {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+/* ===================
+   V8.1.1.4 - Ajustes finais
+   - Desktop: etiqueta mais compacta para não bater nos botões
+   - Favoritos: coração vermelho sempre visível
+=================== */
+@media (min-width: 768px) {
+  .produto-card .quality-card-image-wrap .premium-card-tags,
+  .product-card .quality-card-image-wrap .premium-card-tags,
+  .produto-relacionado-card .quality-card-image-wrap .premium-card-tags,
+  .related-image-wrap .premium-card-tags {
+    left: 8px !important;
+    top: 10px !important;
+    width: calc(100% - 98px) !important;
+    max-width: calc(100% - 98px) !important;
+    right: 90px !important;
+    gap: 4px !important;
+    overflow: hidden !important;
+  }
+
+  .produto-card .quality-card-image-wrap .premium-card-tags .quality-product-tag,
+  .product-card .quality-card-image-wrap .premium-card-tags .quality-product-tag,
+  .produto-relacionado-card .quality-card-image-wrap .premium-card-tags .quality-product-tag,
+  .related-image-wrap .premium-card-tags .quality-product-tag {
+    font-size: 9px !important;
+    line-height: 1 !important;
+    padding: 5px 6px !important;
+    max-width: 100% !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    white-space: nowrap !important;
+  }
+
+  .produto-card .quality-card-image-wrap .quality-card-actions,
+  .product-card .quality-card-image-wrap .quality-card-actions,
+  .produto-relacionado-card .quality-card-image-wrap .quality-card-actions,
+  .related-image-wrap .quality-card-actions {
+    top: 8px !important;
+    right: 8px !important;
+    width: 66px !important;
+    min-width: 66px !important;
+    gap: 6px !important;
+  }
+
+  .produto-card .quality-card-image-wrap .quality-card-action,
+  .product-card .quality-card-image-wrap .quality-card-action,
+  .produto-relacionado-card .quality-card-image-wrap .quality-card-action,
+  .related-image-wrap .quality-card-action {
+    width: 29px !important;
+    height: 29px !important;
+    min-width: 29px !important;
+  }
+}
+
+.quality-card-action.quality-favorite-btn,
+.quality-card-action.quality-favorite-btn i,
+.quality-detail-action.quality-favorite-btn,
+.quality-detail-action.quality-favorite-btn i {
+  color: #e00000 !important;
+}
+
+.quality-card-action.quality-favorite-btn.is-active,
+.quality-detail-action.quality-favorite-btn.is-active {
+  background: #fff !important;
+  color: #e00000 !important;
+}
