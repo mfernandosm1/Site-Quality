@@ -131,11 +131,62 @@
       "showPrice": false,
       "featured": false,
       "active": true,
-      "gallery": [],
-      "detailsEnabled": false,
-      "descriptionShort": "",
-      "descriptionLong": "",
-      "slug": "iphone-16-128gb-novo-lacrado"
+      "gallery": [
+        "images/produtos/1783216405845-iphone-16-verde.jpeg",
+        "images/produtos/1783216405848-iphone-16-azul.jpeg",
+        "images/produtos/1783216405853-iphone-16-rosa.jpeg",
+        "images/produtos/1783216405858-iphone-16-branco.jpeg"
+      ],
+      "detailsEnabled": true,
+      "descriptionShort": "O iPhone 16 combina potência avançada e praticidade no tamanho ideal. Equipado com o novo chip A18, ele entrega desempenho ultraveloz com excelente economia de bateria. O grande destaque desta geração é o botão Controle da Câmera, que facilita o acesso instantâneo às suas fotos e vídeos. Perfeito para o dia a dia, jogos e redes sociais",
+      "descriptionLong": "<p><b>Destaques do Produto:</b></p><ul><li><p><b>Controle da Câmera:</b> Botão físico tátil para abrir, dar zoom e tirar fotos instantaneamente</p></li><li><p><b>Desempenho Inovador:</b> Processador A18, ultraveloz para jogos, tarefas pesadas e inteligência artificial</p></li><li><p><b>Fotos Profissionais:</b> Câmera de 48 MP com zoom óptico de 2x e lente macro integrada</p></li><li><p><b>Botão de Ação:</b> Atalho prático e personalizável para ativar suas funções favoritas num clique</p></li><li><p><b>Design de Ponta:</b> Acabamento em alumínio aeroespacial altamente resistente a quedas e riscos</p></li></ul><p><b>Especificações Técnicas:</b></p><ul><li><p><b>Tela:</b> 6,1\" Super Retina XDR OLED</p></li><li><p><b>Processador:</b> Apple A18 Chip</p></li><li><p><b>Armazenamento:</b> 128GB</p></li><li><p><b>Câmeras Traseiras:</b> 48 MP (Principal) + 12 MP (Ultrawide)</p></li><li><p><b>Conectividade:</b> USB-C, Wi-Fi 7 e 5G</p></li><li><p><b>Resistência:</b> Certificação IP68 (à prova d'água e poeira)</p></li></ul><p><b>Conteúdo da Embalagem:</b>\niPhone 16 128GB, Cabo USB-C para Recarga e Manuais</p>",
+      "slug": "iphone-16-128gb-novo-lacrado",
+      "stock": null,
+      "tags": [],
+      "relatedManualIds": [],
+      "crossSellIds": [],
+      "showVariationsOnCard": false,
+      "variations": {
+        "enabled": true,
+        "colors": [
+          {
+            "name": "Preto",
+            "hex": "#111111",
+            "image": "images/Iphone 16 preto.jpeg"
+          },
+          {
+            "name": "Branco",
+            "hex": "#ffffff",
+            "image": "images/Iphone 16 (branco).jpeg"
+          },
+          {
+            "name": "Ultramarine",
+            "hex": "#2730b0",
+            "image": "images/Iphone 16 (azul).jpeg"
+          },
+          {
+            "name": "Rosa",
+            "hex": "#f934f2",
+            "image": "images/Iphone 16 (rosa).jpeg"
+          },
+          {
+            "name": "Verde Acizentado",
+            "hex": "#39a24b",
+            "image": "images/Iphone 16 (verde).jpeg"
+          }
+        ],
+        "storage": [],
+        "ram": [],
+        "condition": [],
+        "combinations": [],
+        "labels": {},
+        "colorsText": "Preto|#111111|images/Iphone 16 preto.jpeg\nBranco|#ffffff|images/Iphone 16 (branco).jpeg\nUltramarine|#2730b0|images/Iphone 16 (azul).jpeg\nRosa|#f934f2|images/Iphone 16 (rosa).jpeg\nVerde Acizentado|#39a24b|images/Iphone 16 (verde).jpeg",
+        "storageText": "",
+        "ramText": "",
+        "conditionText": "",
+        "labelsText": "{}",
+        "combinationsText": ""
+      }
     },
     {
       "id": 1763504737051,
