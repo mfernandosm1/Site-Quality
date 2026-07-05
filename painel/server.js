@@ -23,8 +23,8 @@ app.locals.paths = { ROOT, SITE_DIR, CONTENT_DIR, BACKUPS_DIR, PUBLIC_DIR };
 
 app.set('view engine', 'ejs');
 app.set('views', VIEWS_DIR);
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true, limit: '15mb' }));
+app.use(bodyParser.json({ limit: '15mb' }));
 app.use('/public', express.static(PUBLIC_DIR));
 
 // Routes
@@ -49,6 +49,7 @@ import personalizacaoRouter from './routes/personalizacao.js';
 import estilosRouter from './routes/estilos.js';
 import seoRouter from './routes/seo.js';
 import sitePreviewRouter from './routes/sitepreview.js';
+import sorteiosRouter from './routes/sorteios.js';
 
 app.use('/', indexRouter);
 app.use('/header', headerRouter);
@@ -70,6 +71,7 @@ app.use('/aparencia', aparenciaRouter);
 app.use('/personalizacao', personalizacaoRouter);
 app.use('/estilos', estilosRouter);
 app.use('/seo', seoRouter);
+app.use('/sorteios', sorteiosRouter);
 
 
 // ===== ASSETS DO SITE NO PREVIEW LOCAL =====
