@@ -124,6 +124,115 @@
   function qualityFavoriteKey(){ return 'quality_favoritos_v811'; }
   function qualityRecentKey(){ return 'quality_vistos_recentemente_v811'; }
 
+  /* V8.2.2 - Acesso rápido aos favoritos no menu + contador discreto */
+  function qualityFavoriteItems(){
+    const seen = new Set();
+    return qualityReadStorage(qualityFavoriteKey()).filter(item => {
+      const key = qualitySavedProductKey(item);
+      if (!key || seen.has(key)) return false;
+      seen.add(key);
+      return true;
+    });
+  }
+
+  function qualityFavoriteCount(){
+    return qualityFavoriteItems().length;
+  }
+
+  function qualityMenuLinkHtml(count){
+    return '<i class="fa-solid fa-heart"></i><span>Favoritos</span><span class="quality-favorites-count">' + count + '</span>';
+  }
+
+  function qualityEnsureFavoritesMenu(){
+    const count = qualityFavoriteCount();
+    document.querySelectorAll('[data-quality-open-favorites]').forEach(link => {
+      if (!count) link.remove();
+    });
+    if (!count) return;
+
+    const targets = [
+      { nav: document.getElementById('nav-desktop'), mobile:false },
+      { nav: document.getElementById('nav-mobile'), mobile:true }
+    ];
+
+    targets.forEach(({ nav, mobile }) => {
+      if (!nav) return;
+      let link = nav.querySelector('[data-quality-open-favorites]');
+      if (!link) {
+        link = document.createElement('a');
+        link.href = '#favoritos';
+        link.className = 'quality-favorites-menu-link' + (mobile ? ' mobile' : '');
+        link.setAttribute('data-quality-open-favorites', '1');
+        link.setAttribute('aria-label', 'Abrir favoritos');
+        const search = nav.querySelector('.search-wrapper');
+        if (search && search.parentNode === nav) nav.insertBefore(link, search);
+        else nav.appendChild(link);
+      }
+      link.innerHTML = qualityMenuLinkHtml(count);
+    });
+  }
+
+  function qualityFavoriteImageUrl(path){
+    const p = String(path || '').trim();
+    if (!p) return '/images/sem-imagem.png';
+    if (/^https?:\/\//i.test(p)) return p;
+    return '/' + p.replace(/^\/+/, '').replace(/^site\//, '');
+  }
+
+  function qualityFavoriteItemHtml(item){
+    const name = item.name || item.nome || 'Produto';
+    const url = qualityCleanUrl(item.url || (item.slug ? '/produto/' + encodeURIComponent(item.slug) + '/' : '#'));
+    const key = qualitySavedProductKey(item);
+    return '<div class="quality-favorites-panel-item">' +
+      '<a class="quality-favorites-panel-img" href="' + escapeHtml(url) + '"><img src="' + escapeHtml(qualityFavoriteImageUrl(item.image || item.imagem)) + '" alt="' + escapeHtml(name) + '" onerror="this.onerror=null;this.src=\'/images/sem-imagem.png\';"></a>' +
+      '<div class="quality-favorites-panel-info">' +
+        '<a class="quality-favorites-panel-name" href="' + escapeHtml(url) + '">' + escapeHtml(name) + '</a>' +
+        '<div class="quality-favorites-panel-actions">' +
+          '<a href="' + escapeHtml(url) + '" class="btn-details quality-favorites-see">Ver detalhes</a>' +
+          '<button type="button" class="quality-favorites-remove" data-quality-remove-favorite="' + escapeHtml(key) + '">Remover</button>' +
+        '</div>' +
+      '</div>' +
+    '</div>';
+  }
+
+  function qualityRenderFavoritesPanel(){
+    let panel = document.querySelector('.quality-favorites-panel');
+    if (!panel) {
+      panel = document.createElement('div');
+      panel.className = 'quality-favorites-panel';
+      panel.innerHTML = '<div class="quality-favorites-panel-backdrop" data-quality-close-favorites></div>' +
+        '<aside class="quality-favorites-panel-box" aria-label="Meus favoritos">' +
+          '<div class="quality-favorites-panel-head"><strong>❤️ Meus favoritos</strong><button type="button" data-quality-close-favorites aria-label="Fechar">×</button></div>' +
+          '<div class="quality-favorites-panel-body"></div>' +
+        '</aside>';
+      document.body.appendChild(panel);
+    }
+    const body = panel.querySelector('.quality-favorites-panel-body');
+    const items = qualityFavoriteItems();
+    body.innerHTML = items.length
+      ? items.map(qualityFavoriteItemHtml).join('')
+      : '<p class="quality-favorites-empty">Você ainda não favoritou nenhum produto.</p>';
+    panel.classList.add('show');
+    document.body.classList.add('quality-favorites-open');
+  }
+
+  function qualityCloseFavoritesPanel(){
+    const panel = document.querySelector('.quality-favorites-panel');
+    if (panel) panel.classList.remove('show');
+    document.body.classList.remove('quality-favorites-open');
+  }
+
+  function qualityRefreshFavoritesUX(){
+    qualityEnsureFavoritesMenu();
+    const panel = document.querySelector('.quality-favorites-panel.show');
+    if (panel) {
+      const body = panel.querySelector('.quality-favorites-panel-body');
+      const items = qualityFavoriteItems();
+      if (body) body.innerHTML = items.length ? items.map(qualityFavoriteItemHtml).join('') : '<p class="quality-favorites-empty">Você ainda não favoritou nenhum produto.</p>';
+    }
+  }
+
+
   function qualityIsFavorite(id){
     const key = String(id || '').trim().toLowerCase();
     if (!key) return false;
@@ -228,19 +337,36 @@
   }
 
   function qualityBindProductActions(){
-    if (window.__qualityProductActionsBoundV8112) { qualityUpdateFavoriteButtons(); return; }
+    if (window.__qualityProductActionsBoundV8112) { qualityUpdateFavoriteButtons(); qualityRefreshFavoritesUX(); return; }
     window.__qualityProductActionsBoundV8112 = true;
     document.addEventListener('click', function(ev){
       const fav = ev.target.closest('[data-quality-fav]');
       const share = ev.target.closest('[data-quality-share]');
-      if (!fav && !share) return;
+      const openFavorites = ev.target.closest('[data-quality-open-favorites]');
+      const closeFavorites = ev.target.closest('[data-quality-close-favorites]');
+      const removeFavorite = ev.target.closest('[data-quality-remove-favorite]');
+      if (!fav && !share && !openFavorites && !closeFavorites && !removeFavorite) return;
       ev.preventDefault();
       ev.stopPropagation();
+
+      if (openFavorites) { qualityRenderFavoritesPanel(); return; }
+      if (closeFavorites) { qualityCloseFavoritesPanel(); return; }
+      if (removeFavorite) {
+        const removeKey = removeFavorite.getAttribute('data-quality-remove-favorite') || '';
+        const items = qualityFavoriteItems().filter(item => qualitySavedProductKey(item) !== removeKey);
+        qualityWriteStorage(qualityFavoriteKey(), items);
+        qualityUpdateFavoriteButtons();
+        qualityRefreshFavoritesUX();
+        qualityToast('Produto removido dos favoritos');
+        return;
+      }
+
       const btn = fav || share;
       const product = qualityProductPayloadFromButton(btn);
       if (fav) {
         const active = qualityToggleFavorite(product);
         qualityUpdateFavoriteButtons();
+        qualityRefreshFavoritesUX();
         btn.classList.add('quality-action-pulse');
         qualityToast(active ? 'Produto adicionado aos favoritos ❤️' : 'Produto removido dos favoritos');
         setTimeout(() => btn.classList.remove('quality-action-pulse'), 260);
@@ -249,6 +375,8 @@
       }
     }, true);
     qualityUpdateFavoriteButtons();
+    qualityRefreshFavoritesUX();
+    setTimeout(qualityRefreshFavoritesUX, 350);
   }
 
   function normalizeText(value){
