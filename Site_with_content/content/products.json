@@ -146,11 +146,65 @@
       "showPrice": false,
       "featured": false,
       "active": true,
-      "gallery": [],
-      "detailsEnabled": false,
-      "descriptionShort": "",
-      "descriptionLong": "",
-      "slug": "iphone-17-256gb-novo-lacrado"
+      "gallery": [
+        "images/produtos/1783215211712-iphone17preto.jpeg",
+        "images/produtos/1783215211715-iphone-17-azul.jpeg",
+        "images/produtos/1783215211720-iphone-17-lavanda.jpeg",
+        "images/produtos/1783215211721-iphone-17-verde.jpeg"
+      ],
+      "detailsEnabled": true,
+      "descriptionShort": "O iPhone 17 eleva o padrão da categoria com a chegada da tela Super Retina XDR de 6,3\" com ProMotion de 120Hz, garantindo uma navegação ultrafluida. Equipado com o potente chip A19 e construído para a inteligência artificial, ele oferece desempenho de sobra, câmeras aprimoradas e bateria de longa duração com conector USB-C",
+      "descriptionLong": "<p><b>Destaques do Produto:</b></p><ul><li><p><b>Tela Fluida:</b> Display OLED de 6,3 polegadas agora com tecnologia ProMotion de 120Hz.</p></li><li><p><b>Desempenho:</b> Processador A19 com máxima velocidade e eficiência de bateria</p></li><li><p><b>Fotografia Avançada:</b> Sistema de câmeras de 48 MP (Principal e Ultrawide) para fotos nítidas em qualquer luz.</p></li><li><p><b>Mais Resistência:</b> Tela protegida com Ceramic Shield, altamente resistente a quedas.</p></li><li><p><b>Carregamento Rápido:</b> Conector USB-C com suporte a carregamento rápido e MagSafe.</p></li></ul><p><b>Especificações Técnicas:</b></p><ul><li><p><b>Tela:</b> 6,3\" Super Retina XDR OLED (120Hz)</p></li><li><p><b>Processador:</b> Apple A19 Chip</p></li><li><p><b>Opções de Armazenamento:</b> 256GB ou 512GB</p></li><li><p><b>Câmeras Traseiras:</b> 48 MP + 48 MP | Câmera Frontal: 18 MP</p></li><li><p><b>Conectividade:</b> USB-C, Wi-Fi 7 e Bluetooth</p></li><li><p><b>Resistência:</b> Certificação IP68 (à prova d'água e poeira)</p></li></ul><p><b>Conteúdo da Embalagem:</b>\niPhone 17, Cabo USB-C para Recarga e Manuais</p>",
+      "slug": "iphone-17-256gb-novo-lacrado",
+      "stock": null,
+      "tags": [],
+      "relatedManualIds": [],
+      "crossSellIds": [],
+      "showVariationsOnCard": false,
+      "variations": {
+        "enabled": true,
+        "colors": [
+          {
+            "name": "Branco",
+            "hex": "#f5f5f5",
+            "image": "images/Iphone 17 branco.jpeg"
+          },
+          {
+            "name": "Preto",
+            "hex": "#0d0d0d",
+            "image": "images/Iphone17preto.jpeg"
+          },
+          {
+            "name": "Azul",
+            "hex": "#282dc8",
+            "image": "images/iphone 17 (azul).jpeg"
+          },
+          {
+            "name": "Lavanda",
+            "hex": "#a258df",
+            "image": "images/iphone 17 (lavanda).jpeg"
+          },
+          {
+            "name": "Verde",
+            "hex": "#5adf58",
+            "image": "images/iphone 17 (verde).jpeg"
+          }
+        ],
+        "storage": [
+          "256GB",
+          "512GB"
+        ],
+        "ram": [],
+        "condition": [],
+        "combinations": [],
+        "labels": {},
+        "colorsText": "Branco|#f5f5f5|images/Iphone 17 branco.jpeg\nPreto|#0d0d0d|images/Iphone17preto.jpeg\nAzul|#282dc8|images/iphone 17 (azul).jpeg\nLavanda|#a258df|images/iphone 17 (lavanda).jpeg\nVerde|#5adf58|images/iphone 17 (verde).jpeg",
+        "storageText": "256GB\n512GB",
+        "ramText": "",
+        "conditionText": "",
+        "labelsText": "{}",
+        "combinationsText": ""
+      }
     },
     {
       "id": 1763504760533,
