@@ -711,7 +711,7 @@
     },
     {
       "id": 1773000557522,
-      "name": "Samsung Galaxy S25 Fe 5G 256gb 12gb Ram",
+      "name": "Samsung Galaxy S25 Fe 5G 256gb 8gb Ram",
       "price": null,
       "image": "images/S25fe azul.jpeg",
       "category": "smartphones",
@@ -719,10 +719,30 @@
       "featured": true,
       "active": true,
       "gallery": [],
-      "detailsEnabled": false,
-      "descriptionShort": "",
-      "descriptionLong": "",
-      "slug": "samsung-galaxy-s25-fe-5g-256gb-12gb-ram"
+      "detailsEnabled": true,
+      "descriptionShort": "Equilibra especificações avançadas e preço competitivo, trazendo uma tela ampla, excelente desempenho com IA integrada e proteção contra água para o uso diário.",
+      "descriptionLong": "<p><b>Destaques do Produto:</b></p><ul><li><p><b>Performance Potente:</b> Processador <b>Exynos 2400</b> com 8GB de RAM, otimizado para navegação fluida, multitarefas e inteligência artificial.</p></li><li><p><b>Tela Ampla e Brilhante:</b> Painel de 6,7 polegadas com <b>taxa de 120Hz</b>, ideal para vídeos e jogos com transições suaves sob o sol.</p></li><li><p><b>Câmeras Otimizadas:</b> Sensor principal de 50 MP e motor <i>ProVisual Engine</i> com IA para melhorar fotos noturnas e edições rápidas.</p></li><li><p><b>Mais Proteção:</b> Acabamento em Gorilla Glass Victus+ e <b>certificação IP68</b> contra imersão em água e poeira.</p></li><li><p><b>Duas Opções de Espaço:</b> Disponível em <b>128GB</b> ou <b>256GB</b> de armazenamento interno</p></li></ul><p><b>Especificações Técnicas:</b></p><ul><li><p><b>Tela:</b> 6,7\" Dynamic AMOLED 2X FHD+ (120Hz)</p></li><li><p><b>Processador:</b> Samsung Exynos 2400</p></li><li><p><b>Memória RAM:</b> 8GB</p></li><li><p><b>Armazenamento:</b> 128GB ou 256GB</p></li><li><p><b>Câmera Traseira:</b> Tripla (50 MP + 12 MP + 8 MP) com Zoom Óptico e OIS</p></li><li><p><b>Bateria:</b> 4.900 mAh com suporte a carregamento rápido</p></li><li><p><b>Conectividade:</b> 5G, Wi-Fi, Bluetooth e Google Gemini integrado</p></li></ul>",
+      "slug": "samsung-galaxy-s25-fe-5g-256gb-8gb-ram",
+      "stock": null,
+      "tags": [],
+      "relatedManualIds": [],
+      "crossSellIds": [],
+      "showVariationsOnCard": false,
+      "variations": {
+        "enabled": false,
+        "colors": [],
+        "storage": [],
+        "ram": [],
+        "condition": [],
+        "combinations": [],
+        "labels": {},
+        "colorsText": "",
+        "storageText": "",
+        "ramText": "",
+        "conditionText": "",
+        "labelsText": "{}",
+        "combinationsText": ""
+      }
     },
     {
       "id": 1773000787931,

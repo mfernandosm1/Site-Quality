@@ -222,6 +222,130 @@ ${footer}
 
 
 
+
+
+  /* V8.1.1 - Favoritos e Compartilhar sem login */
+  function qualityProductKey(p){
+    return String(p?.slug || p?.id || p?._id || p?.name || p?.nome || '').trim();
+  }
+
+  function qualityCleanUrl(url){
+    if (!url || url === '#') return window.location.href;
+    try { return new URL(url, window.location.origin).href; }
+    catch { return window.location.href; }
+  }
+
+  function qualityProductPayloadFromButton(btn){
+    return {
+      id: btn.getAttribute('data-id') || '',
+      slug: btn.getAttribute('data-slug') || '',
+      name: btn.getAttribute('data-name') || 'Produto',
+      image: btn.getAttribute('data-image') || '',
+      url: qualityCleanUrl(btn.getAttribute('data-url') || '')
+    };
+  }
+
+  function qualityReadStorage(key){
+    try { return JSON.parse(localStorage.getItem(key) || '[]'); }
+    catch { return []; }
+  }
+
+  function qualityWriteStorage(key, items){
+    try { localStorage.setItem(key, JSON.stringify(items)); } catch {}
+  }
+
+  function qualityFavoriteKey(){ return 'quality_favoritos_v811'; }
+  function qualityRecentKey(){ return 'quality_vistos_recentemente_v811'; }
+
+  function qualityIsFavorite(id){
+    if (!id) return false;
+    return qualityReadStorage(qualityFavoriteKey()).some(item => String(item.id || item.slug) === String(id));
+  }
+
+  function qualityToggleFavorite(product){
+    const id = String(product.slug || product.id || '').trim();
+    if (!id) return false;
+    let items = qualityReadStorage(qualityFavoriteKey());
+    const exists = items.some(item => String(item.id || item.slug) === id);
+    if (exists) items = items.filter(item => String(item.id || item.slug) !== id);
+    else items.unshift({ ...product, id: product.id || id, slug: product.slug || id, savedAt: Date.now() });
+    qualityWriteStorage(qualityFavoriteKey(), items.slice(0, 60));
+    return !exists;
+  }
+
+  function qualitySaveRecent(product){
+    const id = String(product.slug || product.id || '').trim();
+    if (!id) return;
+    let items = qualityReadStorage(qualityRecentKey()).filter(item => String(item.id || item.slug) !== id);
+    items.unshift({ ...product, id: product.id || id, slug: product.slug || id, viewedAt: Date.now() });
+    qualityWriteStorage(qualityRecentKey(), items.slice(0, 20));
+  }
+
+  function qualityUpdateFavoriteButtons(){
+    document.querySelectorAll('[data-quality-fav]').forEach(btn => {
+      const id = btn.getAttribute('data-slug') || btn.getAttribute('data-id') || '';
+      const active = qualityIsFavorite(id);
+      btn.classList.toggle('is-active', active);
+      btn.setAttribute('aria-label', active ? 'Remover dos favoritos' : 'Favoritar produto');
+      btn.setAttribute('title', active ? 'Remover dos favoritos' : 'Favoritar');
+      if (btn.classList.contains('quality-detail-action')) {
+        btn.innerHTML = active ? '<i class="fa-solid fa-heart"></i> Favoritado' : '<i class="fa-regular fa-heart"></i> Favoritar';
+      } else {
+        btn.innerHTML = active ? '<i class="fa-solid fa-heart"></i>' : '<i class="fa-regular fa-heart"></i>';
+      }
+    });
+  }
+
+  async function qualityShareProduct(product){
+    const title = product.name || 'Produto Quality Celulares';
+    const url = qualityCleanUrl(product.url || '');
+    const text = 'Olha este produto da Quality Celulares: ' + title;
+    if (navigator.share) {
+      try { await navigator.share({ title, text, url }); return; } catch (e) { if (e && e.name === 'AbortError') return; }
+    }
+    try {
+      await navigator.clipboard.writeText(url);
+      alert('Link do produto copiado!');
+    } catch {
+      window.prompt('Copie o link do produto:', url);
+    }
+  }
+
+  function qualityProductActionsHtml(p, url){
+    const name = p.name || p.nome || 'Produto';
+    const img = p.image || p.imagem || 'images/sem-imagem.png';
+    const slug = p.slug || p.id || p._id || '';
+    const id = p.id || slug;
+    const detailUrl = url || (slug ? '/produto/' + encodeURIComponent(slug) + '/' : window.location.href);
+    return '<div class="quality-card-actions">' +
+      '<button type="button" class="quality-card-action quality-favorite-btn" data-quality-fav data-id="' + escapeHtml(id) + '" data-slug="' + escapeHtml(slug) + '" data-name="' + escapeHtml(name) + '" data-image="' + escapeHtml(img) + '" data-url="' + escapeHtml(detailUrl) + '" aria-label="Favoritar produto" title="Favoritar"><i class="fa-regular fa-heart"></i></button>' +
+      '<button type="button" class="quality-card-action quality-share-btn" data-quality-share data-id="' + escapeHtml(id) + '" data-slug="' + escapeHtml(slug) + '" data-name="' + escapeHtml(name) + '" data-image="' + escapeHtml(img) + '" data-url="' + escapeHtml(detailUrl) + '" aria-label="Compartilhar produto" title="Compartilhar"><i class="fa-solid fa-share-nodes"></i></button>' +
+    '</div>';
+  }
+
+  function qualityBindProductActions(){
+    if (window.__qualityProductActionsBound) { qualityUpdateFavoriteButtons(); return; }
+    window.__qualityProductActionsBound = true;
+    document.addEventListener('click', function(ev){
+      const fav = ev.target.closest('[data-quality-fav]');
+      const share = ev.target.closest('[data-quality-share]');
+      if (!fav && !share) return;
+      ev.preventDefault();
+      ev.stopPropagation();
+      const btn = fav || share;
+      const product = qualityProductPayloadFromButton(btn);
+      if (fav) {
+        qualityToggleFavorite(product);
+        qualityUpdateFavoriteButtons();
+        btn.classList.add('quality-action-pulse');
+        setTimeout(() => btn.classList.remove('quality-action-pulse'), 260);
+      } else {
+        qualityShareProduct(product);
+      }
+    }, true);
+    qualityUpdateFavoriteButtons();
+  }
+
   function productTagInfo(tag){
     const label = String(tag || '').trim();
     const key = normalizeText(label);
@@ -440,6 +564,7 @@ ${footer}
         card.className = 'produto-card product-card';
         card.innerHTML =
           '<div class="quality-card-image-wrap">' +
+          qualityProductActionsHtml(p, productSlug ? '/produto/' + encodeURIComponent(productSlug) + '/' : '#') +
           '<img src="' + escapeHtml(productImage) + '" onerror="this.onerror=null;this.src=\\'' + escapeHtml(productImageFallback) + '\\';" alt="' + escapeHtml(productName) + '">' +
           productTagsHtml(p) +
           '</div>' +
@@ -450,6 +575,7 @@ ${footer}
           '<i class="fa-brands fa-whatsapp"></i> Comprar no WhatsApp</a>';
         container.appendChild(card);
       });
+      qualityBindProductActions();
     }
 
     renderProducts(sortSelect ? sortSelect.value : 'featured');
