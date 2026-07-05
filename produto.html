@@ -1248,11 +1248,15 @@
         link.className = 'quality-favorites-menu-link';
         link.setAttribute('data-quality-open-favorites-menu', '1');
         link.setAttribute('aria-label', 'Abrir favoritos');
-
-        var search = findSearchInside(nav);
-        if (search && search.parentNode === nav) nav.insertBefore(link, search);
-        else nav.appendChild(link);
       }
+
+      // V8.2.2.6: padroniza a posição do Favoritos.
+      // Mesmo que o menu da home carregue categorias depois, cada atualização move o link
+      // para o final do menu, imediatamente antes da busca no desktop.
+      var search = findSearchInside(nav);
+      if (search && search.parentNode === nav) nav.insertBefore(link, search);
+      else nav.appendChild(link);
+
       link.innerHTML = menuHtml(count);
     });
   }
