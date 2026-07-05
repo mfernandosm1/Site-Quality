@@ -1535,3 +1535,163 @@ a.btn-details:hover,
   background: #fff !important;
   color: #e00000 !important;
 }
+
+
+/* ===================
+   V8.2 - Fechamento Favoritos/Vistos/Compartilhar
+   Ajuste final das etiquetas no desktop:
+   - etiqueta compacta e sem corte;
+   - ações à direita sem sobrepor;
+   - mobile preservado.
+=================== */
+@media (min-width: 768px) {
+  .produto-card .quality-card-image-wrap,
+  .product-card .quality-card-image-wrap,
+  .produto-relacionado-card .quality-card-image-wrap,
+  .produto-relacionado-card.related-image-wrap,
+  .related-image-wrap {
+    padding-top: 42px !important;
+  }
+
+  .produto-card .quality-card-image-wrap .premium-card-tags,
+  .product-card .quality-card-image-wrap .premium-card-tags,
+  .produto-relacionado-card .quality-card-image-wrap .premium-card-tags,
+  .related-image-wrap .premium-card-tags {
+    top: 9px !important;
+    left: 8px !important;
+    right: 62px !important;
+    width: auto !important;
+    max-width: calc(100% - 72px) !important;
+    min-width: 0 !important;
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    flex-wrap: nowrap !important;
+    gap: 4px !important;
+    overflow: visible !important;
+    z-index: 15 !important;
+  }
+
+  .produto-card .quality-card-image-wrap .premium-card-tags .quality-product-tag,
+  .product-card .quality-card-image-wrap .premium-card-tags .quality-product-tag,
+  .produto-relacionado-card .quality-card-image-wrap .premium-card-tags .quality-product-tag,
+  .related-image-wrap .premium-card-tags .quality-product-tag {
+    width: auto !important;
+    max-width: none !important;
+    min-width: 0 !important;
+    overflow: visible !important;
+    text-overflow: clip !important;
+    white-space: nowrap !important;
+    font-size: 8.5px !important;
+    line-height: 1 !important;
+    padding: 5px 5px !important;
+    letter-spacing: 0 !important;
+    border-radius: 7px !important;
+  }
+
+  .produto-card .quality-card-image-wrap .premium-card-tags .quality-product-tag i,
+  .product-card .quality-card-image-wrap .premium-card-tags .quality-product-tag i,
+  .produto-relacionado-card .quality-card-image-wrap .premium-card-tags .quality-product-tag i,
+  .related-image-wrap .premium-card-tags .quality-product-tag i {
+    font-size: 8px !important;
+  }
+
+  .produto-card .quality-card-image-wrap .quality-card-actions,
+  .product-card .quality-card-image-wrap .quality-card-actions,
+  .produto-relacionado-card .quality-card-image-wrap .quality-card-actions,
+  .related-image-wrap .quality-card-actions {
+    top: 7px !important;
+    right: 7px !important;
+    width: 54px !important;
+    min-width: 54px !important;
+    gap: 4px !important;
+    z-index: 18 !important;
+  }
+
+  .produto-card .quality-card-image-wrap .quality-card-action,
+  .product-card .quality-card-image-wrap .quality-card-action,
+  .produto-relacionado-card .quality-card-image-wrap .quality-card-action,
+  .related-image-wrap .quality-card-action {
+    width: 25px !important;
+    height: 25px !important;
+    min-width: 25px !important;
+    font-size: 12px !important;
+  }
+}
+
+.quality-card-action.quality-favorite-btn,
+.quality-card-action.quality-favorite-btn i,
+.quality-detail-action.quality-favorite-btn,
+.quality-detail-action.quality-favorite-btn i {
+  color: #e00000 !important;
+}
+
+.quality-card-action.quality-favorite-btn.is-active,
+.quality-detail-action.quality-favorite-btn.is-active {
+  background: #fff !important;
+  color: #e00000 !important;
+  box-shadow: 0 4px 14px rgba(224,0,0,.22) !important;
+}
+
+
+/* ===================
+   V8.2.1 - Etiqueta completa sem abreviar
+   Mantém "Últimas unidades" por extenso, compacta a etiqueta
+   e preserva o mobile como já estava aprovado.
+=================== */
+@media (min-width: 768px) {
+  .produto-card .quality-card-image-wrap,
+  .product-card .quality-card-image-wrap,
+  .produto-relacionado-card .quality-card-image-wrap,
+  .produto-relacionado-card.related-image-wrap,
+  .related-image-wrap {
+    padding-top: 44px !important;
+  }
+
+  .produto-card .quality-card-image-wrap .premium-card-tags,
+  .product-card .quality-card-image-wrap .premium-card-tags,
+  .produto-relacionado-card .quality-card-image-wrap .premium-card-tags,
+  .related-image-wrap .premium-card-tags {
+    top: 9px !important;
+    left: 7px !important;
+    right: 68px !important;
+    max-width: calc(100% - 76px) !important;
+    width: auto !important;
+    overflow: visible !important;
+    gap: 4px !important;
+  }
+
+  .produto-card .quality-card-image-wrap .premium-card-tags .quality-product-tag,
+  .product-card .quality-card-image-wrap .premium-card-tags .quality-product-tag,
+  .produto-relacionado-card .quality-card-image-wrap .premium-card-tags .quality-product-tag,
+  .related-image-wrap .premium-card-tags .quality-product-tag {
+    font-size: 8.25px !important;
+    line-height: 1 !important;
+    padding: 4px 4px !important;
+    border-radius: 7px !important;
+    letter-spacing: -.08px !important;
+    white-space: nowrap !important;
+    overflow: visible !important;
+    text-overflow: clip !important;
+    max-width: none !important;
+  }
+
+  .produto-card .quality-card-image-wrap .premium-card-tags .quality-product-tag i,
+  .product-card .quality-card-image-wrap .premium-card-tags .quality-product-tag i,
+  .produto-relacionado-card .quality-card-image-wrap .premium-card-tags .quality-product-tag i,
+  .related-image-wrap .premium-card-tags .quality-product-tag i {
+    font-size: 7.5px !important;
+    margin-right: 2px !important;
+  }
+
+  .produto-card .quality-card-image-wrap .quality-card-actions,
+  .product-card .quality-card-image-wrap .quality-card-actions,
+  .produto-relacionado-card .quality-card-image-wrap .quality-card-actions,
+  .related-image-wrap .quality-card-actions {
+    top: 7px !important;
+    right: 6px !important;
+    width: 54px !important;
+    min-width: 54px !important;
+    gap: 4px !important;
+  }
+}
