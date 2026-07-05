@@ -14,6 +14,36 @@ export function writeFileUtf8(p, content){
 }
 function load$(html){ return cheerio.load(html, { decodeEntities:false }); }
 
+
+/* =========================================================
+   Quality V8.2.2.5 - Proteção contra publicação sobrescrever o site
+   A publicação agora usa os arquivos atuais como template quando possível.
+   Assim favoritos, etiquetas e scripts validados não voltam para versão antiga.
+========================================================= */
+function readCurrentSiteTemplate(siteDir, fileName){
+  try {
+    const filePath = path.join(siteDir || '', fileName || '');
+    if (filePath && fs.existsSync(filePath)) {
+      const html = readFileUtf8(filePath);
+      if (html && html.includes('<body') && html.includes('</html>')) return html;
+    }
+  } catch {}
+  return '';
+}
+
+function replaceHeaderFooterInFullPage(html, header, footer){
+  let out = html || '';
+  if (header) {
+    // Páginas com header estático
+    out = out.replace(/<header class="header">[\s\S]*?<\/header>\s*<script>\s*\(function\(\)\{[\s\S]*?\}\)\(\);\s*<\/script>/i, header);
+    out = out.replace(/<header class="header">[\s\S]*?<\/header>/i, header);
+  }
+  if (footer) {
+    out = out.replace(/<footer class="footer[\s\S]*?<\/footer>/i, footer);
+  }
+  return out;
+}
+
 export function extractMain(html){
   const $ = cheerio.load(html, { decodeEntities: false });
   const $main = $('main').first();
@@ -156,7 +186,9 @@ export function applyFormasFields(html, fields){
 /* =========================================================
    🆕 CATEGORIAS
 ========================================================= */
-function categoryPageHtml(header, footer){
+function categoryPageHtml(header, footer, siteDir = null){
+  const currentTemplate = readCurrentSiteTemplate(siteDir, 'categoria.html');
+  if (currentTemplate) return replaceHeaderFooterInFullPage(currentTemplate, header, footer);
   return `<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -226,7 +258,7 @@ ${footer}
 
   /* V8.1.1 - Favoritos e Compartilhar sem login */
   function qualityProductKey(p){
-    return String(p?.slug || p?.id || p?._id || p?.name || p?.nome || '').trim();
+    return String(p?.slug || p?.id || p?._id || p?.url || p?.name || p?.nome || '').trim().toLowerCase();
   }
 
   function qualityCleanUrl(url){
@@ -261,8 +293,8 @@ ${footer}
     const key = String(id || '').trim().toLowerCase();
     if (!key) return false;
     return qualityReadStorage(qualityFavoriteKey()).some(item => {
-      const itemKey = qualitySavedProductKey ? qualitySavedProductKey(item) : String(item.id || item.slug || '').toLowerCase();
-      return itemKey === key || String(item.id || item.slug || '').toLowerCase() === key;
+      const itemKey = qualitySavedProductKey(item);
+      return itemKey === key || String(item.id || item.slug || item.url || item.name || '').trim().toLowerCase() === key;
     });
   }
 
@@ -320,8 +352,8 @@ ${footer}
 
   function qualityUpdateFavoriteButtons(){
     document.querySelectorAll('[data-quality-fav]').forEach(btn => {
-      const id = btn.getAttribute('data-slug') || btn.getAttribute('data-id') || '';
-      const active = qualityIsFavorite(id);
+      const probe = btn.getAttribute('data-slug') || btn.getAttribute('data-id') || btn.getAttribute('data-url') || btn.getAttribute('data-name') || '';
+      const active = qualityIsFavorite(probe);
       btn.classList.toggle('is-active', active);
       btn.setAttribute('aria-label', active ? 'Remover dos favoritos' : 'Favoritar produto');
       btn.setAttribute('title', active ? 'Remover dos favoritos' : 'Favoritar');
@@ -382,6 +414,11 @@ ${footer}
     }, true);
     qualityUpdateFavoriteButtons();
   }
+
+  window.qualityUpdateFavoriteButtons = qualityUpdateFavoriteButtons;
+  window.qualityRefreshFavoritesMenu = window.qualityRefreshFavoritesMenu || function(){};
+
+  window.qualityUpdateFavoriteButtons = qualityUpdateFavoriteButtons;
 
   function productTagInfo(tag){
     const label = String(tag || '').trim();
@@ -858,7 +895,7 @@ export function generateCategoryPage(name, slug, siteDir) {
   const header = readFileUtf8(path.join(siteDir, 'header.html'));
   const footer = readFileUtf8(path.join(siteDir, 'footer.html'));
   const target = path.join(siteDir, 'categoria.html');
-  writeFileUtf8(target, categoryPageHtml(header, footer));
+  writeFileUtf8(target, categoryPageHtml(header, footer, siteDir));
   console.log('✅ Página única categoria.html atualizada.');
 }
 
@@ -1444,7 +1481,7 @@ export function generateFriendlyUrlPages(siteDir){
 
         const dir = path.join(siteDir, slug);
         ensureCleanDir(dir);
-        let html = injectBaseHref(categoryPageHtml(header, footer));
+        let html = injectBaseHref(categoryPageHtml(header, footer, siteDir));
         html = html.replace('<title>Categorias – Quality Celulares</title>', `<title>${escapeText(c.name || slug)} – Quality Celulares</title>`);
         html = html.replace('content="https://www.qualitycel.com.br/categoria.html"', `content="https://www.qualitycel.com.br/${encodeURIComponent(slug)}/"`);
         html = html.replace('href="https://www.qualitycel.com.br/categoria.html"', `href="https://www.qualitycel.com.br/${encodeURIComponent(slug)}/"`);
