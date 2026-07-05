@@ -988,3 +988,99 @@ a.btn-details:hover,
   .produto-relacionado-card { min-height: 0; }
   .related-image-wrap img { height: 180px !important; }
 }
+
+
+/* =========================================================
+   Quality V8.0.3 - Cards premium: etiquetas fora da imagem
+   Objetivo: estilo mais próximo de marketplace, sem cobrir produtos altos.
+========================================================= */
+.produto-card .quality-card-image-wrap {
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 268px;
+  overflow: hidden;
+  padding-top: 0;
+}
+
+.produto-card .quality-card-image-wrap:has(.premium-card-tags) {
+  padding-top: 42px;
+}
+
+.produto-card .quality-card-image-wrap:has(.premium-card-tags) img {
+  height: 224px;
+}
+
+.quality-card-tags.premium-card-tags {
+  top: 10px;
+  left: 10px;
+  right: 10px;
+  max-width: none;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: 5px;
+  pointer-events: none;
+}
+
+.quality-card-tags.premium-card-tags .quality-product-tag {
+  pointer-events: auto;
+  max-width: 100%;
+  white-space: nowrap;
+}
+
+.quality-product-tag {
+  min-height: 22px;
+}
+
+/* Produtos relacionados: mantém a etiqueta bonita sem invadir a miniatura */
+.produto-relacionado-card .quality-card-image-wrap {
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 168px;
+}
+
+.produto-relacionado-card .quality-card-image-wrap:has(.premium-card-tags) {
+  padding-top: 30px;
+}
+
+.produto-relacionado-card .quality-card-image-wrap:has(.premium-card-tags) img {
+  height: 132px !important;
+}
+
+.produto-relacionado-card .premium-card-tags {
+  top: 7px;
+  left: 7px;
+  right: 7px;
+}
+
+@media (max-width: 767px) {
+  .produto-card .quality-card-image-wrap {
+    min-height: 258px;
+  }
+
+  .produto-card .quality-card-image-wrap:has(.premium-card-tags) {
+    padding-top: 46px;
+  }
+
+  .produto-card .quality-card-image-wrap:has(.premium-card-tags) img {
+    height: 212px;
+  }
+
+  .quality-card-tags.premium-card-tags {
+    top: 9px;
+    left: 9px;
+    right: 9px;
+    gap: 4px;
+  }
+
+  .quality-product-tag {
+    font-size: 10px;
+    padding: 5px 7px;
+  }
+}
