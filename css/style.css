@@ -1695,3 +1695,202 @@ a.btn-details:hover,
     gap: 4px !important;
   }
 }
+
+
+/* ===================
+   V8.2.2 - Favoritos no menu com contador discreto
+=================== */
+.quality-favorites-menu-link {
+  display: inline-flex !important;
+  align-items: center;
+  gap: 6px;
+  color: inherit;
+  text-decoration: none;
+  font-weight: 700;
+  position: relative;
+}
+
+.nav-desktop .quality-favorites-menu-link {
+  color: #fff;
+}
+
+.mobile-nav .quality-favorites-menu-link {
+  color: #222;
+}
+
+.quality-favorites-menu-link i {
+  color: #ffdddd;
+}
+
+.mobile-nav .quality-favorites-menu-link i {
+  color: #c90000;
+}
+
+.quality-favorites-count {
+  min-width: 18px;
+  height: 18px;
+  padding: 0 5px;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: #fff;
+  color: #c90000;
+  font-size: 11px;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.mobile-nav .quality-favorites-count {
+  background: #c90000;
+  color: #fff;
+}
+
+.quality-favorites-panel {
+  position: fixed;
+  inset: 0;
+  z-index: 9998;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .2s ease;
+}
+
+.quality-favorites-panel.show {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.quality-favorites-panel-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,.45);
+}
+
+.quality-favorites-panel-box {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: min(430px, 92vw);
+  height: 100%;
+  background: #fff;
+  box-shadow: -8px 0 28px rgba(0,0,0,.22);
+  transform: translateX(100%);
+  transition: transform .25s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.quality-favorites-panel.show .quality-favorites-panel-box {
+  transform: translateX(0);
+}
+
+.quality-favorites-panel-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  padding: 18px 18px 14px;
+  border-bottom: 1px solid #eee;
+  font-size: 18px;
+}
+
+.quality-favorites-panel-head button {
+  width: 34px;
+  height: 34px;
+  border: 0;
+  border-radius: 999px;
+  background: #f3f4f6;
+  cursor: pointer;
+  font-size: 24px;
+  line-height: 1;
+}
+
+.quality-favorites-panel-body {
+  padding: 14px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.quality-favorites-panel-item {
+  display: grid;
+  grid-template-columns: 76px 1fr;
+  gap: 12px;
+  padding: 10px;
+  border: 1px solid #eee;
+  border-radius: 12px;
+  background: #fff;
+}
+
+.quality-favorites-panel-img {
+  width: 76px;
+  height: 76px;
+  border-radius: 10px;
+  background: #fafafa;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.quality-favorites-panel-img img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+.quality-favorites-panel-info {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+
+.quality-favorites-panel-name {
+  color: #111;
+  font-weight: 800;
+  font-size: 14px;
+  line-height: 1.25;
+  text-decoration: none;
+}
+
+.quality-favorites-panel-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.quality-favorites-panel-actions .quality-favorites-see {
+  width: auto !important;
+  margin: 0 !important;
+  padding: 7px 10px !important;
+  font-size: 12px !important;
+}
+
+.quality-favorites-remove {
+  border: 0;
+  background: #f3f4f6;
+  color: #444;
+  padding: 7px 10px;
+  border-radius: 7px;
+  font-weight: 700;
+  cursor: pointer;
+  font-size: 12px;
+}
+
+.quality-favorites-remove:hover {
+  background: #fee2e2;
+  color: #c90000;
+}
+
+.quality-favorites-empty {
+  text-align: center;
+  color: #666;
+  padding: 28px 10px;
+  margin: 0;
+}
+
+body.quality-favorites-open {
+  overflow: hidden;
+}
