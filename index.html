@@ -273,13 +273,24 @@
     return { label, cls:'padrao', icon:'fa-solid fa-tag' };
   }
 
+
+  function qualityCompactCardTagLabel(label){
+    const text = String(label || '').trim();
+    const key = normalizeText(text);
+    if (key.includes('ultima') || key.includes('última')) return 'Últimas unidades';
+    if (key.includes('lancamento') || key.includes('lançamento')) return 'Lançamento';
+    if (key.includes('mais vendido') || key.includes('vendido')) return 'Mais vendido';
+    if (key.includes('preco') || key.includes('preço') || key.includes('baixou')) return 'Preço baixou';
+    return text;
+  }
+
   function productTagsHtml(p, limit){
     const tags = Array.isArray(p.tags) ? p.tags : String(p.tags || '').split(/\r?\n|,/);
     const clean = tags.map(t => String(t || '').trim()).filter(Boolean).slice(0, limit || 2);
     if (!clean.length) return '';
     return '<div class="quality-card-tags premium-card-tags">' + clean.map(t => {
       const info = productTagInfo(t);
-      return '<span class="quality-product-tag tag-' + info.cls + '"><i class="' + info.icon + '"></i>' + escapeHtml(info.label) + '</span>';
+      return '<span class="quality-product-tag tag-' + info.cls + '"><i class="' + info.icon + '"></i>' + escapeHtml(typeof qualityCompactCardTagLabel === 'function' ? qualityCompactCardTagLabel(info.label) : info.label) + '</span>';
     }).join('') + '</div>';
   }
 
