@@ -238,27 +238,64 @@
   function qualityRecentKey(){ return 'quality_vistos_recentemente_v811'; }
 
   function qualityIsFavorite(id){
-    if (!id) return false;
-    return qualityReadStorage(qualityFavoriteKey()).some(item => String(item.id || item.slug) === String(id));
+    const key = String(id || '').trim().toLowerCase();
+    if (!key) return false;
+    return qualityReadStorage(qualityFavoriteKey()).some(item => {
+      const itemKey = qualitySavedProductKey ? qualitySavedProductKey(item) : String(item.id || item.slug || '').toLowerCase();
+      return itemKey === key || String(item.id || item.slug || '').toLowerCase() === key;
+    });
   }
 
   function qualityToggleFavorite(product){
     const id = String(product.slug || product.id || '').trim();
-    if (!id) return false;
+    const key = qualitySavedProductKey(product);
+    if (!id && !key) return false;
     let items = qualityReadStorage(qualityFavoriteKey());
-    const exists = items.some(item => String(item.id || item.slug) === id);
-    if (exists) items = items.filter(item => String(item.id || item.slug) !== id);
-    else items.unshift({ ...product, id: product.id || id, slug: product.slug || id, savedAt: Date.now() });
+    const exists = items.some(item => {
+      const itemKey = qualitySavedProductKey(item);
+      return itemKey === key || String(item.id || item.slug || '') === id;
+    });
+    if (exists) {
+      items = items.filter(item => {
+        const itemKey = qualitySavedProductKey(item);
+        return itemKey !== key && String(item.id || item.slug || '') !== id;
+      });
+    } else {
+      items.unshift({ ...product, id: product.id || id || key, slug: product.slug || id || key, savedAt: Date.now() });
+    }
     qualityWriteStorage(qualityFavoriteKey(), items.slice(0, 60));
     return !exists;
   }
 
+  function qualitySavedProductKey(item){
+    return String(item?.slug || item?.id || item?.url || item?.name || '').trim().toLowerCase();
+  }
+
   function qualitySaveRecent(product){
     const id = String(product.slug || product.id || '').trim();
-    if (!id) return;
-    let items = qualityReadStorage(qualityRecentKey()).filter(item => String(item.id || item.slug) !== id);
-    items.unshift({ ...product, id: product.id || id, slug: product.slug || id, viewedAt: Date.now() });
+    const key = qualitySavedProductKey(product);
+    if (!id && !key) return;
+    let items = qualityReadStorage(qualityRecentKey()).filter(item => {
+      const itemKey = qualitySavedProductKey(item);
+      return itemKey && itemKey !== key && String(item.id || item.slug || '') !== id;
+    });
+    items.unshift({ ...product, id: product.id || id || key, slug: product.slug || id || key, viewedAt: Date.now() });
     qualityWriteStorage(qualityRecentKey(), items.slice(0, 20));
+  }
+
+  function qualityToast(message){
+    try {
+      let el = document.querySelector('.quality-fav-toast');
+      if (!el) {
+        el = document.createElement('div');
+        el.className = 'quality-fav-toast';
+        document.body.appendChild(el);
+      }
+      el.textContent = message;
+      el.classList.add('show');
+      clearTimeout(window.__qualityFavToastTimer);
+      window.__qualityFavToastTimer = setTimeout(() => el.classList.remove('show'), 1600);
+    } catch {}
   }
 
   function qualityUpdateFavoriteButtons(){
@@ -304,8 +341,8 @@
   }
 
   function qualityBindProductActions(){
-    if (window.__qualityProductActionsBound) { qualityUpdateFavoriteButtons(); return; }
-    window.__qualityProductActionsBound = true;
+    if (window.__qualityProductActionsBoundV8112) { qualityUpdateFavoriteButtons(); return; }
+    window.__qualityProductActionsBoundV8112 = true;
     document.addEventListener('click', function(ev){
       const fav = ev.target.closest('[data-quality-fav]');
       const share = ev.target.closest('[data-quality-share]');
@@ -318,6 +355,7 @@
         const active = qualityToggleFavorite(product);
         qualityUpdateFavoriteButtons();
         btn.classList.add('quality-action-pulse');
+        qualityToast(active ? 'Produto adicionado aos favoritos ❤️' : 'Produto removido dos favoritos');
         setTimeout(() => btn.classList.remove('quality-action-pulse'), 260);
       } else {
         qualityShareProduct(product);
@@ -515,19 +553,49 @@
   }
 
 
+  function uniqueSavedProductsFromStorage(storageKey, allProducts, current){
+    const savedItems = qualityReadStorage(storageKey);
+    const result = [];
+    const seen = new Set();
+    savedItems.forEach(saved => {
+      const savedKey = qualitySavedProductKey(saved);
+      const found = (allProducts || []).find(p => {
+        const keys = [p.slug, p.id, p._id, productUrl(p), p.name, p.nome].map(v => String(v || '').trim().toLowerCase()).filter(Boolean);
+        return savedKey && keys.includes(savedKey);
+      });
+      if (!found || (current && sameProduct(found, current))) return;
+      const key = qualitySavedProductKey({ slug: found.slug, id: found.id, url: productUrl(found), name: found.name || found.nome });
+      if (!key || seen.has(key)) return;
+      seen.add(key);
+      result.push(found);
+    });
+    return result;
+  }
+
   function recentlyViewedProductsHtml(current, allProducts){
-    const recent = qualityReadStorage(qualityRecentKey());
-    const items = recent.map(saved => (allProducts || []).find(p => {
-      const a = String(p.slug || p.id || '');
-      const b = String(saved.slug || saved.id || '');
-      return a && b && a === b;
-    })).filter(Boolean).filter(p => !sameProduct(p, current)).slice(0, 4);
+    const items = uniqueSavedProductsFromStorage(qualityRecentKey(), allProducts, current).slice(0, 4);
     if (!items.length) return '';
     return `
       <section class="produtos-relacionados quality-recently-viewed-block">
         <div class="quality-section-heading">
           <h2>Vistos recentemente</h2>
           <p>Produtos que você olhou neste navegador</p>
+        </div>
+        <div class="produtos-relacionados-grid">
+          ${items.map(productMiniCardHtml).join('')}
+        </div>
+      </section>
+    `;
+  }
+
+  function favoriteProductsHtml(current, allProducts){
+    const items = uniqueSavedProductsFromStorage(qualityFavoriteKey(), allProducts, current).slice(0, 4);
+    if (!items.length) return '';
+    return `
+      <section class="produtos-relacionados quality-favorites-block">
+        <div class="quality-section-heading">
+          <h2>Favoritos</h2>
+          <p>Produtos salvos neste navegador</p>
         </div>
         <div class="produtos-relacionados-grid">
           ${items.map(productMiniCardHtml).join('')}
@@ -982,7 +1050,7 @@
       `;
 
       document.querySelectorAll('.produtos-relacionados').forEach(el => el.remove());
-      box.insertAdjacentHTML('afterend', relatedProductsHtml(product, data.items || []) + crossSellProductsHtml(product, data.items || []) + recentlyViewedProductsHtml(product, data.items || []));
+      box.insertAdjacentHTML('afterend', relatedProductsHtml(product, data.items || []) + crossSellProductsHtml(product, data.items || []) + favoriteProductsHtml(product, data.items || []) + recentlyViewedProductsHtml(product, data.items || []));
       qualityBindProductActions();
 
       const principal = document.getElementById('galeria-principal');
