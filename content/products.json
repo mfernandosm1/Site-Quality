@@ -708,8 +708,8 @@
       "active": true,
       "gallery": [],
       "detailsEnabled": true,
-      "descriptionShort": "",
-      "descriptionLong": "Especificações:\n\nSistema e Performance:\n- Sistema Operacional: Windows 11 Home Single Language\n- Processador: AMD Ryzen 5 7520U (4 núcleos, 8 threads, até 4.3GHz)\n- Memória RAM: 8GB Soldado LPDDR5-5500\n- Armazenamento: 512GB SSD M.2 2242 PCIe Gen4\n- Placa de Vídeo: Gráficos Integrados AMD Radeon™ 610M\n\nTela:\n- Polegadas: 15.6\"\n- Resolução: HD (1366 x 768)\n- Painel: TN, Antirreflexo\n- Brilho: 220 nits\n- Formato: 16:9 Widescreen\n\nConectividade:\n- Wireless: Wi-Fi® 6, 802.11ax 2x2\n- Bluetooth: Bluetooth 5.2\n- Portas: 1x USB 2.0, 1x USB 3.2 Gen 1, 1x USB-C® 3.2 Gen 1 (suporta apenas transferência de dados), 1x HDMI® 1.4b, 1x Combo fone/microfone (3,5 mm), 1x Leitor de Cartão SD, 1x Conector de Energia\n\nRecursos:\n- Áudio: Alto-falantes Estéreo (1,5W x2) com Dolby Audio™\n- Câmera: HD 720p com Obturador de Privacidade\n- Microfone: Array com 2 microfones direcionais\n- Teclado: Padrão Brasileiro",
+      "descriptionShort": "Notebook ideal para quem busca agilidade nos estudos, trabalho e tarefas do dia a dia. Equipado com o processador AMD Ryzen 5 de última geração e um armazenamento ultraveloz em SSD de 512GB, ele liga em poucos segundos e roda seus aplicativos com excelente fluidez. Tudo isso em um design fino, leve e fácil de transportar.",
+      "descriptionLong": "<p><b>Destaques do Produto:</b></p><ul><li><p><b>Excelente Desempenho:</b> Processador Ryzen 5 e memória LPDDR5 garantem velocidade nas tarefas diárias e multitarefas.</p></li><li><p><b>Armazenamento Espaçoso:</b> SSD de 512GB com muito espaço para arquivos e inicialização ultrarrápida do Windows 11.</p></li><li><p><b>Conectividade Moderna:</b> Equipado com Wi-Fi 6 de alta velocidade e porta USB-C para transferência de dados.</p></li><li><p><b>Privacidade Garantida:</b> WebCam HD com obturador físico (basta deslizar para fechar a câmera).</p></li><li><p><b>Conforto no Uso:</b> Teclado completo no padrão brasileiro (ABNT2) com teclado numérico dedicado.</p></li></ul><p><b>Especificações Técnicas:</b></p><ul><li><p><b>Tela:</b> 15.6\" HD (1366 x 768) Antirreflexo</p></li><li><p><b>Processador:</b> AMD Ryzen 5 7520U (Até 4.3GHz)</p></li><li><p><b>Memória RAM:</b> 8GB LPDDR5</p></li><li><p><b>Armazenamento:</b> 512GB SSD NVMe PCIe</p></li><li><p><b>Placa de Vídeo:</b> AMD Radeon 610M (Integrada)</p></li><li><p><b>Sistema Operacional:</b> Windows 11</p></li></ul>",
       "slug": "notebook-lenovo-ideapad-1-amd-ryzen-5-7520u-8gb-512gb-ssd-win-11",
       "variations": {
         "enabled": false,
@@ -725,7 +725,12 @@
         "conditionText": "",
         "labelsText": "{}",
         "combinationsText": ""
-      }
+      },
+      "stock": null,
+      "tags": [],
+      "relatedManualIds": [],
+      "crossSellIds": [],
+      "showVariationsOnCard": false
     },
     {
       "id": 1773001450741,
