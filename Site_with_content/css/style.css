@@ -1844,3 +1844,47 @@ body.quality-favorites-open { overflow: hidden; }
 @media (max-width: 767px) {
   .quality-favorites-panel-box { width: 94vw; }
 }
+
+
+/* Quality V8.2.2.4 - Ajustes finais do painel/menu de favoritos */
+.quality-favorites-panel-top{
+  padding: 0 16px 10px;
+  display:flex;
+  justify-content:flex-end;
+}
+.quality-favorites-clear-all{
+  border:1px solid #fecaca;
+  background:#fff5f5;
+  color:#c90000;
+  font-weight:800;
+  font-size:12px;
+  border-radius:999px;
+  padding:8px 12px;
+  cursor:pointer;
+  display:inline-flex;
+  align-items:center;
+  gap:7px;
+}
+.quality-favorites-clear-all:hover{
+  background:#ffe4e6;
+}
+.quality-favorites-menu-link{
+  display:inline-flex !important;
+  align-items:center;
+  gap:7px;
+  white-space:nowrap;
+}
+.quality-favorites-menu-link .quality-favorites-count{
+  min-width:18px;
+  height:18px;
+  padding:0 6px;
+  border-radius:999px;
+  background:#fff;
+  color:#c90000;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  font-size:12px;
+  line-height:1;
+  font-weight:900;
+}
