@@ -9,7 +9,7 @@
   <meta property="og:type" content="website">
   <meta property="og:title" content="Smartphones | Quality Celulares">
   <meta property="og:description" content="📱 iPhones, Samsung, Motorola, Xiaomi e muito mais. Celulares novos e seminovos com garantia, frete grátis e atendimento especializado.">
-  <meta property="og:image" content="https://www.qualitycel.com.br/images/logo.png">
+  <meta property="og:image" content="https://www.qualitycel.com.br/categoria-smartphones.png">
   <meta property="og:url" content="https://www.qualitycel.com.br/smartphones/">
   <meta name="twitter:card" content="summary_large_image">
   <link rel="canonical" href="https://www.qualitycel.com.br/smartphones/">
@@ -71,6 +71,16 @@
 
   <div id="menu-overlay" class="menu-overlay"></div>
 </header>
+<script>
+(function(){
+  var isLocalPreview = window.location.hostname === 'localhost' && window.location.port === '3000';
+  if (isLocalPreview) {
+    document.querySelectorAll('[data-home-link]').forEach(function(a){
+      a.setAttribute('href', '/site/view/index.html');
+    });
+  }
+})();
+</script>
 <script>
 (function(){
   var isLocalPreview = window.location.hostname === 'localhost' && window.location.port === '3000';
