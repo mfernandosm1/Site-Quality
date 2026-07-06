@@ -1,16 +1,16 @@
 {
   "version": "8.3.0-analytics-lite",
   "createdAt": "2026-07-06T01:03:36.032Z",
-  "updatedAt": "2026-07-06T11:34:46.773Z",
+  "updatedAt": "2026-07-06T15:04:57.140Z",
   "counters": {
-    "product_view": 8,
-    "favorite": 12,
+    "product_view": 11,
+    "favorite": 32,
     "favorite_click": 0,
-    "whatsapp_click": 0,
-    "category_view": 6,
+    "whatsapp_click": 2,
+    "category_view": 18,
     "share_click": 0,
     "search": 3,
-    "page_view": 26
+    "page_view": 54
   },
   "products": {
     "fonte-original-apple-usb-c-20w": {
@@ -18,11 +18,11 @@
       "name": "Fonte Original Apple Usb C 20w",
       "image": "/images/Fonte Original Apple Usb C 20w.jpg",
       "url": "http://localhost:3000/produto/fonte-original-apple-usb-c-20w/",
-      "views": 6,
-      "favorites": 8,
+      "views": 9,
+      "favorites": 16,
       "whatsapp": 0,
       "shares": 0,
-      "lastAt": "2026-07-06T01:22:34.248Z"
+      "lastAt": "2026-07-06T15:04:55.676Z"
     },
     "samsung-galaxy-s25-fe-5g-256gb-8gb-ram": {
       "slug": "samsung-galaxy-s25-fe-5g-256gb-8gb-ram",
@@ -30,10 +30,10 @@
       "image": "images/S25fe azul.jpeg",
       "url": "/produto/samsung-galaxy-s25-fe-5g-256gb-8gb-ram/",
       "views": 0,
-      "favorites": 2,
+      "favorites": 6,
       "whatsapp": 0,
       "shares": 0,
-      "lastAt": "2026-07-06T01:22:16.049Z"
+      "lastAt": "2026-07-06T11:35:03.505Z"
     },
     "troca-de-tela-de-celulares": {
       "slug": "troca-de-tela-de-celulares",
@@ -56,6 +56,28 @@
       "whatsapp": 0,
       "shares": 0,
       "lastAt": "2026-07-06T01:22:38.861Z"
+    },
+    "motorola-moto-g55-5g-256gb-16gb-8gb-ram-8gb-ram-boost": {
+      "slug": "motorola-moto-g55-5g-256gb-16gb-8gb-ram-8gb-ram-boost",
+      "name": "Motorola Moto G55 5G 256GB 16GB (8GB RAM+8GB Ram Boost)",
+      "image": "images/Moto G55.jpeg",
+      "url": "/produto/motorola-moto-g55-5g-256gb-16gb-8gb-ram-8gb-ram-boost/",
+      "views": 0,
+      "favorites": 4,
+      "whatsapp": 0,
+      "shares": 0,
+      "lastAt": "2026-07-06T11:35:11.237Z"
+    },
+    "mini-game-portatil-400-jogos": {
+      "slug": "mini-game-portatil-400-jogos",
+      "name": "Mini game portátil 400 jogos",
+      "image": "/images/Mini game portátil 400 jogos e controle.jpg",
+      "url": "http://localhost:3000/site/view/index.html",
+      "views": 0,
+      "favorites": 4,
+      "whatsapp": 2,
+      "shares": 0,
+      "lastAt": "2026-07-06T15:04:49.318Z"
     }
   },
   "categories": {
@@ -63,22 +85,22 @@
       "slug": "smartphones",
       "name": "smartphones",
       "url": "http://localhost:3000/smartphones/",
-      "views": 2,
-      "lastAt": "2026-07-06T01:22:14.733Z"
+      "views": 8,
+      "lastAt": "2026-07-06T15:04:27.863Z"
     },
     "assistencia-tecnica": {
       "slug": "assistencia-tecnica",
       "name": "assistencia-tecnica",
       "url": "http://localhost:3000/assistencia-tecnica/",
-      "views": 2,
-      "lastAt": "2026-07-06T01:22:20.987Z"
+      "views": 4,
+      "lastAt": "2026-07-06T15:04:43.958Z"
     },
     "acessorios": {
       "slug": "acessorios",
       "name": "acessorios",
       "url": "http://localhost:3000/acessorios/",
-      "views": 2,
-      "lastAt": "2026-07-06T11:34:46.773Z"
+      "views": 6,
+      "lastAt": "2026-07-06T15:04:41.545Z"
     }
   },
   "searches": {
@@ -96,23 +118,23 @@
   "pages": {
     "http://localhost:3000/site/view/index.html": {
       "url": "http://localhost:3000/site/view/index.html",
-      "views": 19,
-      "lastAt": "2026-07-06T11:34:45.259Z"
+      "views": 47,
+      "lastAt": "2026-07-06T15:04:57.139Z"
     },
     "http://localhost:3000/produto/fonte-original-apple-usb-c-20w/": {
       "url": "http://localhost:3000/produto/fonte-original-apple-usb-c-20w/",
-      "views": 16,
-      "lastAt": "2026-07-06T01:22:37.880Z"
+      "views": 21,
+      "lastAt": "2026-07-06T15:04:55.676Z"
     },
     "http://localhost:3000/smartphones/": {
       "url": "http://localhost:3000/smartphones/",
-      "views": 6,
-      "lastAt": "2026-07-06T01:22:16.049Z"
+      "views": 26,
+      "lastAt": "2026-07-06T15:04:27.863Z"
     },
     "http://localhost:3000/assistencia-tecnica/": {
       "url": "http://localhost:3000/assistencia-tecnica/",
-      "views": 6,
-      "lastAt": "2026-07-06T01:22:22.820Z"
+      "views": 10,
+      "lastAt": "2026-07-06T15:04:43.958Z"
     },
     "http://localhost:3000/produto/xiaomi-poco-x7-pro-5g-512gb-12gb-ram/": {
       "url": "http://localhost:3000/produto/xiaomi-poco-x7-pro-5g-512gb-12gb-ram/",
@@ -121,8 +143,8 @@
     },
     "http://localhost:3000/acessorios/": {
       "url": "http://localhost:3000/acessorios/",
-      "views": 4,
-      "lastAt": "2026-07-06T11:34:46.773Z"
+      "views": 12,
+      "lastAt": "2026-07-06T15:04:41.545Z"
     }
   },
   "events": [
@@ -778,6 +800,804 @@
         "slug": "acessorios",
         "name": "acessorios"
       },
+      "term": ""
+    },
+    {
+      "at": "2026-07-06T11:35:00.292Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/smartphones/",
+      "referrer": "http://localhost:3000/acessorios/",
+      "device": "desktop",
+      "viewport": "1707x748",
+      "language": "pt-BR",
+      "term": ""
+    },
+    {
+      "at": "2026-07-06T11:35:00.304Z",
+      "type": "category_view",
+      "url": "http://localhost:3000/smartphones/",
+      "referrer": "http://localhost:3000/acessorios/",
+      "device": "desktop",
+      "viewport": "1707x748",
+      "language": "pt-BR",
+      "category": {
+        "slug": "smartphones",
+        "name": "Categoria"
+      },
+      "term": ""
+    },
+    {
+      "at": "2026-07-06T11:35:00.311Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/smartphones/",
+      "referrer": "http://localhost:3000/acessorios/",
+      "device": "desktop",
+      "viewport": "1707x748",
+      "language": "pt-BR",
+      "term": ""
+    },
+    {
+      "at": "2026-07-06T11:35:00.318Z",
+      "type": "category_view",
+      "url": "http://localhost:3000/smartphones/",
+      "referrer": "http://localhost:3000/acessorios/",
+      "device": "desktop",
+      "viewport": "1707x748",
+      "language": "pt-BR",
+      "category": {
+        "slug": "smartphones",
+        "name": "smartphones"
+      },
+      "term": ""
+    },
+    {
+      "at": "2026-07-06T11:35:02.379Z",
+      "type": "favorite",
+      "url": "http://localhost:3000/smartphones/",
+      "referrer": "http://localhost:3000/acessorios/",
+      "device": "desktop",
+      "viewport": "1707x748",
+      "language": "pt-BR",
+      "product": {
+        "slug": "samsung-galaxy-s25-fe-5g-256gb-8gb-ram",
+        "name": "Samsung Galaxy S25 Fe 5G 256gb 8gb Ram"
+      },
+      "term": ""
+    },
+    {
+      "at": "2026-07-06T11:35:02.468Z",
+      "type": "favorite",
+      "url": "http://localhost:3000/smartphones/",
+      "referrer": "http://localhost:3000/acessorios/",
+      "device": "desktop",
+      "viewport": "1707x748",
+      "language": "pt-BR",
+      "product": {
+        "slug": "samsung-galaxy-s25-fe-5g-256gb-8gb-ram",
+        "name": "Samsung Galaxy S25 Fe 5G 256gb 8gb Ram"
+      },
+      "term": ""
+    },
+    {
+      "at": "2026-07-06T11:35:03.423Z",
+      "type": "favorite",
+      "url": "http://localhost:3000/smartphones/",
+      "referrer": "http://localhost:3000/acessorios/",
+      "device": "desktop",
+      "viewport": "1707x748",
+      "language": "pt-BR",
+      "product": {
+        "slug": "samsung-galaxy-s25-fe-5g-256gb-8gb-ram",
+        "name": "Samsung Galaxy S25 Fe 5G 256gb 8gb Ram"
+      },
+      "term": ""
+    },
+    {
+      "at": "2026-07-06T11:35:03.505Z",
+      "type": "favorite",
+      "url": "http://localhost:3000/smartphones/",
+      "referrer": "http://localhost:3000/acessorios/",
+      "device": "desktop",
+      "viewport": "1707x748",
+      "language": "pt-BR",
+      "product": {
+        "slug": "samsung-galaxy-s25-fe-5g-256gb-8gb-ram",
+        "name": "Samsung Galaxy S25 Fe 5G 256gb 8gb Ram"
+      },
+      "term": ""
+    },
+    {
+      "at": "2026-07-06T11:35:04.543Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/site/view/index.html",
+      "referrer": "http://localhost:3000/smartphones/",
+      "device": "desktop",
+      "viewport": "1707x748",
+      "language": "pt-BR",
+      "term": ""
+    },
+    {
+      "at": "2026-07-06T11:35:04.695Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/site/view/index.html",
+      "referrer": "http://localhost:3000/smartphones/",
+      "device": "desktop",
+      "viewport": "1707x748",
+      "language": "pt-BR",
+      "term": ""
+    },
+    {
+      "at": "2026-07-06T11:35:06.683Z",
+      "type": "favorite",
+      "url": "http://localhost:3000/site/view/index.html",
+      "referrer": "http://localhost:3000/smartphones/",
+      "device": "desktop",
+      "viewport": "1707x748",
+      "language": "pt-BR",
+      "product": {
+        "slug": "fonte-original-apple-usb-c-20w",
+        "name": "Fonte Original Apple Usb C 20w"
+      },
+      "term": ""
+    },
+    {
+      "at": "2026-07-06T11:35:06.771Z",
+      "type": "favorite",
+      "url": "http://localhost:3000/site/view/index.html",
+      "referrer": "http://localhost:3000/smartphones/",
+      "device": "desktop",
+      "viewport": "1707x748",
+      "language": "pt-BR",
+      "product": {
+        "slug": "fonte-original-apple-usb-c-20w",
+        "name": "Fonte Original Apple Usb C 20w"
+      },
+      "term": ""
+    },
+    {
+      "at": "2026-07-06T11:35:07.411Z",
+      "type": "favorite",
+      "url": "http://localhost:3000/site/view/index.html",
+      "referrer": "http://localhost:3000/smartphones/",
+      "device": "desktop",
+      "viewport": "1707x748",
+      "language": "pt-BR",
+      "product": {
+        "slug": "fonte-original-apple-usb-c-20w",
+        "name": "Fonte Original Apple Usb C 20w"
+      },
+      "term": ""
+    },
+    {
+      "at": "2026-07-06T11:35:07.490Z",
+      "type": "favorite",
+      "url": "http://localhost:3000/site/view/index.html",
+      "referrer": "http://localhost:3000/smartphones/",
+      "device": "desktop",
+      "viewport": "1707x748",
+      "language": "pt-BR",
+      "product": {
+        "slug": "fonte-original-apple-usb-c-20w",
+        "name": "Fonte Original Apple Usb C 20w"
+      },
+      "term": ""
+    },
+    {
+      "at": "2026-07-06T11:35:09.247Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/smartphones/",
+      "referrer": "http://localhost:3000/site/view/index.html",
+      "device": "desktop",
+      "viewport": "1707x748",
+      "language": "pt-BR",
+      "term": ""
+    },
+    {
+      "at": "2026-07-06T11:35:09.252Z",
+      "type": "category_view",
+      "url": "http://localhost:3000/smartphones/",
+      "referrer": "http://localhost:3000/site/view/index.html",
+      "device": "desktop",
+      "viewport": "1707x748",
+      "language": "pt-BR",
+      "category": {
+        "slug": "smartphones",
+        "name": "Categoria"
+      },
+      "term": ""
+    },
+    {
+      "at": "2026-07-06T11:35:09.257Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/smartphones/",
+      "referrer": "http://localhost:3000/site/view/index.html",
+      "device": "desktop",
+      "viewport": "1707x748",
+      "language": "pt-BR",
+      "term": ""
+    },
+    {
+      "at": "2026-07-06T11:35:09.262Z",
+      "type": "category_view",
+      "url": "http://localhost:3000/smartphones/",
+      "referrer": "http://localhost:3000/site/view/index.html",
+      "device": "desktop",
+      "viewport": "1707x748",
+      "language": "pt-BR",
+      "category": {
+        "slug": "smartphones",
+        "name": "smartphones"
+      },
+      "term": ""
+    },
+    {
+      "at": "2026-07-06T11:35:10.694Z",
+      "type": "favorite",
+      "url": "http://localhost:3000/smartphones/",
+      "referrer": "http://localhost:3000/site/view/index.html",
+      "device": "desktop",
+      "viewport": "1707x748",
+      "language": "pt-BR",
+      "product": {
+        "slug": "motorola-moto-g55-5g-256gb-16gb-8gb-ram-8gb-ram-boost",
+        "name": "Motorola Moto G55 5G 256GB 16GB (8GB RAM+8GB Ram Boost)"
+      },
+      "term": ""
+    },
+    {
+      "at": "2026-07-06T11:35:10.773Z",
+      "type": "favorite",
+      "url": "http://localhost:3000/smartphones/",
+      "referrer": "http://localhost:3000/site/view/index.html",
+      "device": "desktop",
+      "viewport": "1707x748",
+      "language": "pt-BR",
+      "product": {
+        "slug": "motorola-moto-g55-5g-256gb-16gb-8gb-ram-8gb-ram-boost",
+        "name": "Motorola Moto G55 5G 256GB 16GB (8GB RAM+8GB Ram Boost)"
+      },
+      "term": ""
+    },
+    {
+      "at": "2026-07-06T11:35:11.150Z",
+      "type": "favorite",
+      "url": "http://localhost:3000/smartphones/",
+      "referrer": "http://localhost:3000/site/view/index.html",
+      "device": "desktop",
+      "viewport": "1707x748",
+      "language": "pt-BR",
+      "product": {
+        "slug": "motorola-moto-g55-5g-256gb-16gb-8gb-ram-8gb-ram-boost",
+        "name": "Motorola Moto G55 5G 256GB 16GB (8GB RAM+8GB Ram Boost)"
+      },
+      "term": ""
+    },
+    {
+      "at": "2026-07-06T11:35:11.237Z",
+      "type": "favorite",
+      "url": "http://localhost:3000/smartphones/",
+      "referrer": "http://localhost:3000/site/view/index.html",
+      "device": "desktop",
+      "viewport": "1707x748",
+      "language": "pt-BR",
+      "product": {
+        "slug": "motorola-moto-g55-5g-256gb-16gb-8gb-ram-8gb-ram-boost",
+        "name": "Motorola Moto G55 5G 256GB 16GB (8GB RAM+8GB Ram Boost)"
+      },
+      "term": ""
+    },
+    {
+      "at": "2026-07-06T11:35:12.221Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/site/view/index.html",
+      "referrer": "http://localhost:3000/smartphones/",
+      "device": "desktop",
+      "viewport": "1707x748",
+      "language": "pt-BR",
+      "term": ""
+    },
+    {
+      "at": "2026-07-06T11:35:12.229Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/site/view/index.html",
+      "referrer": "http://localhost:3000/smartphones/",
+      "device": "desktop",
+      "viewport": "1707x748",
+      "language": "pt-BR",
+      "term": ""
+    },
+    {
+      "at": "2026-07-06T11:35:13.791Z",
+      "type": "favorite",
+      "url": "http://localhost:3000/site/view/index.html",
+      "referrer": "http://localhost:3000/smartphones/",
+      "device": "desktop",
+      "viewport": "1707x748",
+      "language": "pt-BR",
+      "product": {
+        "slug": "fonte-original-apple-usb-c-20w",
+        "name": "Fonte Original Apple Usb C 20w"
+      },
+      "term": ""
+    },
+    {
+      "at": "2026-07-06T11:35:13.871Z",
+      "type": "favorite",
+      "url": "http://localhost:3000/site/view/index.html",
+      "referrer": "http://localhost:3000/smartphones/",
+      "device": "desktop",
+      "viewport": "1707x748",
+      "language": "pt-BR",
+      "product": {
+        "slug": "fonte-original-apple-usb-c-20w",
+        "name": "Fonte Original Apple Usb C 20w"
+      },
+      "term": ""
+    },
+    {
+      "at": "2026-07-06T11:35:14.261Z",
+      "type": "favorite",
+      "url": "http://localhost:3000/site/view/index.html",
+      "referrer": "http://localhost:3000/smartphones/",
+      "device": "desktop",
+      "viewport": "1707x748",
+      "language": "pt-BR",
+      "product": {
+        "slug": "fonte-original-apple-usb-c-20w",
+        "name": "Fonte Original Apple Usb C 20w"
+      },
+      "term": ""
+    },
+    {
+      "at": "2026-07-06T11:35:14.357Z",
+      "type": "favorite",
+      "url": "http://localhost:3000/site/view/index.html",
+      "referrer": "http://localhost:3000/smartphones/",
+      "device": "desktop",
+      "viewport": "1707x748",
+      "language": "pt-BR",
+      "product": {
+        "slug": "fonte-original-apple-usb-c-20w",
+        "name": "Fonte Original Apple Usb C 20w"
+      },
+      "term": ""
+    },
+    {
+      "at": "2026-07-06T11:35:17.320Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/acessorios/",
+      "referrer": "http://localhost:3000/site/view/index.html",
+      "device": "desktop",
+      "viewport": "1707x748",
+      "language": "pt-BR",
+      "term": ""
+    },
+    {
+      "at": "2026-07-06T11:35:17.325Z",
+      "type": "category_view",
+      "url": "http://localhost:3000/acessorios/",
+      "referrer": "http://localhost:3000/site/view/index.html",
+      "device": "desktop",
+      "viewport": "1707x748",
+      "language": "pt-BR",
+      "category": {
+        "slug": "acessorios",
+        "name": "Categoria"
+      },
+      "term": ""
+    },
+    {
+      "at": "2026-07-06T11:35:17.332Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/acessorios/",
+      "referrer": "http://localhost:3000/site/view/index.html",
+      "device": "desktop",
+      "viewport": "1707x748",
+      "language": "pt-BR",
+      "term": ""
+    },
+    {
+      "at": "2026-07-06T11:35:17.338Z",
+      "type": "category_view",
+      "url": "http://localhost:3000/acessorios/",
+      "referrer": "http://localhost:3000/site/view/index.html",
+      "device": "desktop",
+      "viewport": "1707x748",
+      "language": "pt-BR",
+      "category": {
+        "slug": "acessorios",
+        "name": "acessorios"
+      },
+      "term": ""
+    },
+    {
+      "at": "2026-07-06T15:04:26.650Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/site/view/index.html",
+      "referrer": "http://localhost:3000/",
+      "device": "desktop",
+      "viewport": "1707x748",
+      "language": "pt-BR",
+      "term": ""
+    },
+    {
+      "at": "2026-07-06T15:04:26.658Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/site/view/index.html",
+      "referrer": "http://localhost:3000/",
+      "device": "desktop",
+      "viewport": "1707x748",
+      "language": "pt-BR",
+      "term": ""
+    },
+    {
+      "at": "2026-07-06T15:04:27.843Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/smartphones/",
+      "referrer": "http://localhost:3000/site/view/index.html",
+      "device": "desktop",
+      "viewport": "1707x748",
+      "language": "pt-BR",
+      "term": ""
+    },
+    {
+      "at": "2026-07-06T15:04:27.851Z",
+      "type": "category_view",
+      "url": "http://localhost:3000/smartphones/",
+      "referrer": "http://localhost:3000/site/view/index.html",
+      "device": "desktop",
+      "viewport": "1707x748",
+      "language": "pt-BR",
+      "category": {
+        "slug": "smartphones",
+        "name": "Categoria"
+      },
+      "term": ""
+    },
+    {
+      "at": "2026-07-06T15:04:27.858Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/smartphones/",
+      "referrer": "http://localhost:3000/site/view/index.html",
+      "device": "desktop",
+      "viewport": "1707x748",
+      "language": "pt-BR",
+      "term": ""
+    },
+    {
+      "at": "2026-07-06T15:04:27.863Z",
+      "type": "category_view",
+      "url": "http://localhost:3000/smartphones/",
+      "referrer": "http://localhost:3000/site/view/index.html",
+      "device": "desktop",
+      "viewport": "1707x748",
+      "language": "pt-BR",
+      "category": {
+        "slug": "smartphones",
+        "name": "smartphones"
+      },
+      "term": ""
+    },
+    {
+      "at": "2026-07-06T15:04:29.648Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/site/view/index.html",
+      "referrer": "http://localhost:3000/smartphones/",
+      "device": "desktop",
+      "viewport": "1707x748",
+      "language": "pt-BR",
+      "term": ""
+    },
+    {
+      "at": "2026-07-06T15:04:29.743Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/site/view/index.html",
+      "referrer": "http://localhost:3000/smartphones/",
+      "device": "desktop",
+      "viewport": "1707x748",
+      "language": "pt-BR",
+      "term": ""
+    },
+    {
+      "at": "2026-07-06T15:04:41.519Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/acessorios/",
+      "referrer": "http://localhost:3000/site/view/index.html",
+      "device": "desktop",
+      "viewport": "1707x748",
+      "language": "pt-BR",
+      "term": ""
+    },
+    {
+      "at": "2026-07-06T15:04:41.524Z",
+      "type": "category_view",
+      "url": "http://localhost:3000/acessorios/",
+      "referrer": "http://localhost:3000/site/view/index.html",
+      "device": "desktop",
+      "viewport": "1707x748",
+      "language": "pt-BR",
+      "category": {
+        "slug": "acessorios",
+        "name": "Categoria"
+      },
+      "term": ""
+    },
+    {
+      "at": "2026-07-06T15:04:41.534Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/acessorios/",
+      "referrer": "http://localhost:3000/site/view/index.html",
+      "device": "desktop",
+      "viewport": "1707x748",
+      "language": "pt-BR",
+      "term": ""
+    },
+    {
+      "at": "2026-07-06T15:04:41.545Z",
+      "type": "category_view",
+      "url": "http://localhost:3000/acessorios/",
+      "referrer": "http://localhost:3000/site/view/index.html",
+      "device": "desktop",
+      "viewport": "1707x748",
+      "language": "pt-BR",
+      "category": {
+        "slug": "acessorios",
+        "name": "acessorios"
+      },
+      "term": ""
+    },
+    {
+      "at": "2026-07-06T15:04:42.718Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/site/view/index.html",
+      "referrer": "http://localhost:3000/acessorios/",
+      "device": "desktop",
+      "viewport": "1707x748",
+      "language": "pt-BR",
+      "term": ""
+    },
+    {
+      "at": "2026-07-06T15:04:42.792Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/site/view/index.html",
+      "referrer": "http://localhost:3000/acessorios/",
+      "device": "desktop",
+      "viewport": "1707x748",
+      "language": "pt-BR",
+      "term": ""
+    },
+    {
+      "at": "2026-07-06T15:04:43.939Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/assistencia-tecnica/",
+      "referrer": "http://localhost:3000/site/view/index.html",
+      "device": "desktop",
+      "viewport": "1707x748",
+      "language": "pt-BR",
+      "term": ""
+    },
+    {
+      "at": "2026-07-06T15:04:43.945Z",
+      "type": "category_view",
+      "url": "http://localhost:3000/assistencia-tecnica/",
+      "referrer": "http://localhost:3000/site/view/index.html",
+      "device": "desktop",
+      "viewport": "1707x748",
+      "language": "pt-BR",
+      "category": {
+        "slug": "assistencia-tecnica",
+        "name": "Categoria"
+      },
+      "term": ""
+    },
+    {
+      "at": "2026-07-06T15:04:43.951Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/assistencia-tecnica/",
+      "referrer": "http://localhost:3000/site/view/index.html",
+      "device": "desktop",
+      "viewport": "1707x748",
+      "language": "pt-BR",
+      "term": ""
+    },
+    {
+      "at": "2026-07-06T15:04:43.958Z",
+      "type": "category_view",
+      "url": "http://localhost:3000/assistencia-tecnica/",
+      "referrer": "http://localhost:3000/site/view/index.html",
+      "device": "desktop",
+      "viewport": "1707x748",
+      "language": "pt-BR",
+      "category": {
+        "slug": "assistencia-tecnica",
+        "name": "assistencia-tecnica"
+      },
+      "term": ""
+    },
+    {
+      "at": "2026-07-06T15:04:45.392Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/site/view/index.html",
+      "referrer": "http://localhost:3000/assistencia-tecnica/",
+      "device": "desktop",
+      "viewport": "1707x748",
+      "language": "pt-BR",
+      "term": ""
+    },
+    {
+      "at": "2026-07-06T15:04:45.397Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/site/view/index.html",
+      "referrer": "http://localhost:3000/assistencia-tecnica/",
+      "device": "desktop",
+      "viewport": "1707x748",
+      "language": "pt-BR",
+      "term": ""
+    },
+    {
+      "at": "2026-07-06T15:04:46.698Z",
+      "type": "favorite",
+      "url": "http://localhost:3000/site/view/index.html",
+      "referrer": "http://localhost:3000/assistencia-tecnica/",
+      "device": "desktop",
+      "viewport": "1707x748",
+      "language": "pt-BR",
+      "product": {
+        "slug": "mini-game-portatil-400-jogos",
+        "name": "Mini game portátil 400 jogos"
+      },
+      "term": ""
+    },
+    {
+      "at": "2026-07-06T15:04:46.776Z",
+      "type": "favorite",
+      "url": "http://localhost:3000/site/view/index.html",
+      "referrer": "http://localhost:3000/assistencia-tecnica/",
+      "device": "desktop",
+      "viewport": "1707x748",
+      "language": "pt-BR",
+      "product": {
+        "slug": "mini-game-portatil-400-jogos",
+        "name": "Mini game portátil 400 jogos"
+      },
+      "term": ""
+    },
+    {
+      "at": "2026-07-06T15:04:47.166Z",
+      "type": "favorite",
+      "url": "http://localhost:3000/site/view/index.html",
+      "referrer": "http://localhost:3000/assistencia-tecnica/",
+      "device": "desktop",
+      "viewport": "1707x748",
+      "language": "pt-BR",
+      "product": {
+        "slug": "mini-game-portatil-400-jogos",
+        "name": "Mini game portátil 400 jogos"
+      },
+      "term": ""
+    },
+    {
+      "at": "2026-07-06T15:04:47.261Z",
+      "type": "favorite",
+      "url": "http://localhost:3000/site/view/index.html",
+      "referrer": "http://localhost:3000/assistencia-tecnica/",
+      "device": "desktop",
+      "viewport": "1707x748",
+      "language": "pt-BR",
+      "product": {
+        "slug": "mini-game-portatil-400-jogos",
+        "name": "Mini game portátil 400 jogos"
+      },
+      "term": ""
+    },
+    {
+      "at": "2026-07-06T15:04:49.314Z",
+      "type": "whatsapp_click",
+      "url": "http://localhost:3000/site/view/index.html",
+      "referrer": "http://localhost:3000/assistencia-tecnica/",
+      "device": "desktop",
+      "viewport": "1707x748",
+      "language": "pt-BR",
+      "product": {
+        "slug": "",
+        "name": "Mini game portátil 400 jogos"
+      },
+      "term": ""
+    },
+    {
+      "at": "2026-07-06T15:04:49.318Z",
+      "type": "whatsapp_click",
+      "url": "http://localhost:3000/site/view/index.html",
+      "referrer": "http://localhost:3000/assistencia-tecnica/",
+      "device": "desktop",
+      "viewport": "1707x748",
+      "language": "pt-BR",
+      "product": {
+        "slug": "",
+        "name": "Mini game portátil 400 jogos"
+      },
+      "term": ""
+    },
+    {
+      "at": "2026-07-06T15:04:53.483Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/produto/fonte-original-apple-usb-c-20w/",
+      "referrer": "http://localhost:3000/site/view/index.html",
+      "device": "desktop",
+      "viewport": "1707x748",
+      "language": "pt-BR",
+      "term": ""
+    },
+    {
+      "at": "2026-07-06T15:04:53.489Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/produto/fonte-original-apple-usb-c-20w/",
+      "referrer": "http://localhost:3000/site/view/index.html",
+      "device": "desktop",
+      "viewport": "1707x748",
+      "language": "pt-BR",
+      "term": ""
+    },
+    {
+      "at": "2026-07-06T15:04:54.177Z",
+      "type": "product_view",
+      "url": "http://localhost:3000/produto/fonte-original-apple-usb-c-20w/",
+      "referrer": "http://localhost:3000/site/view/index.html",
+      "device": "desktop",
+      "viewport": "1707x748",
+      "language": "pt-BR",
+      "product": {
+        "slug": "fonte-original-apple-usb-c-20w",
+        "name": "Fonte Original Apple Usb C 20w"
+      },
+      "term": ""
+    },
+    {
+      "at": "2026-07-06T15:04:54.385Z",
+      "type": "product_view",
+      "url": "http://localhost:3000/produto/fonte-original-apple-usb-c-20w/",
+      "referrer": "http://localhost:3000/site/view/index.html",
+      "device": "desktop",
+      "viewport": "1707x748",
+      "language": "pt-BR",
+      "product": {
+        "slug": "fonte-original-apple-usb-c-20w",
+        "name": "Fonte Original Apple Usb C 20w"
+      },
+      "term": ""
+    },
+    {
+      "at": "2026-07-06T15:04:55.676Z",
+      "type": "product_view",
+      "url": "http://localhost:3000/produto/fonte-original-apple-usb-c-20w/",
+      "referrer": "http://localhost:3000/site/view/index.html",
+      "device": "desktop",
+      "viewport": "1707x748",
+      "language": "pt-BR",
+      "product": {
+        "slug": "fonte-original-apple-usb-c-20w",
+        "name": "Fonte Original Apple Usb C 20w"
+      },
+      "term": ""
+    },
+    {
+      "at": "2026-07-06T15:04:57.131Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/site/view/index.html",
+      "referrer": "http://localhost:3000/produto/fonte-original-apple-usb-c-20w/",
+      "device": "desktop",
+      "viewport": "1707x748",
+      "language": "pt-BR",
+      "term": ""
+    },
+    {
+      "at": "2026-07-06T15:04:57.139Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/site/view/index.html",
+      "referrer": "http://localhost:3000/produto/fonte-original-apple-usb-c-20w/",
+      "device": "desktop",
+      "viewport": "1707x748",
+      "language": "pt-BR",
       "term": ""
     }
   ]

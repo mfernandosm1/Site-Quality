@@ -68,6 +68,23 @@
     align-items: end;
   }
 
+  .cat-create-grid .full {
+    grid-column: 1 / -1;
+  }
+
+  .cat-seo-help {
+    color: #64748b;
+    font-size: 12px;
+    margin-top: 5px;
+    line-height: 1.35;
+  }
+
+  textarea.cat-seo-textarea {
+    width: 100%;
+    min-height: 76px;
+    resize: vertical;
+  }
+
   .cat-list {
     display: grid;
     gap: 10px;
@@ -427,6 +444,11 @@
           <% }) %>
         </select>
       </div>
+      <div class="full">
+        <label>Descrição SEO / WhatsApp</label>
+        <textarea class="cat-seo-textarea" name="seoDescription" placeholder="Ex.: 📱 iPhones, Samsung, Motorola, Xiaomi e muito mais. Celulares novos e seminovos com garantia, frete grátis e atendimento especializado."></textarea>
+        <div class="cat-seo-help">Esse texto aparece na descrição do Google e na prévia do WhatsApp quando possível.</div>
+      </div>
       <div class="cat-create-submit">
         <button class="btn primary" type="submit">Adicionar</button>
       </div>
@@ -523,6 +545,12 @@
                   <option value="<%= opt.value %>" <%= (c.icon || '') === opt.value ? 'selected' : '' %>><%= opt.label %></option>
                 <% }) %>
               </select>
+            </div>
+
+            <div class="full">
+              <label>Descrição SEO / WhatsApp</label>
+              <textarea class="cat-seo-textarea" name="seoDescription" placeholder="Texto que aparece no Google e na prévia do WhatsApp"><%= c.seoDescription || '' %></textarea>
+              <div class="cat-seo-help">Ex.: 📱 iPhones, Samsung, Motorola, Xiaomi e muito mais. Celulares novos e seminovos com garantia, frete grátis e atendimento especializado.</div>
             </div>
           </div>
 
