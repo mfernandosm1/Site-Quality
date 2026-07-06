@@ -76,19 +76,43 @@ function categorySeoDescription(cat){
   return `Confira ${name} na Quality Celulares. Produtos novos e seminovos com garantia, frete grátis e atendimento especializado.`;
 }
 
+function categorySeoTitle(cat){
+  const custom = String(cat?.seoTitle || cat?.seo_title || cat?.titleSeo || '').trim();
+  if (custom) return custom;
+  const name = String(cat?.name || 'Categoria').trim();
+  return `${name} | Quality Celulares`;
+}
+
+function categoryOgTitle(cat){
+  return String(cat?.ogTitle || cat?.og_title || '').trim() || categorySeoTitle(cat);
+}
+
+function categoryOgDescription(cat){
+  return String(cat?.ogDescription || cat?.og_description || '').trim() || categorySeoDescription(cat);
+}
+
+function categoryOgImage(cat){
+  const raw = String(cat?.ogImage || cat?.og_image || cat?.seoImage || '').trim();
+  if (!raw) return `${SITE_URL}/images/logo.png`;
+  if (/^https?:\/\//i.test(raw)) return raw;
+  return `${SITE_URL}/${raw.replace(/^\/+/, '')}`;
+}
+
 function patchCategoryHead(html, cat){
   const slug = slugify(cat.slug || cat.name);
   const name = String(cat.name || slug || 'Categoria').trim();
-  const title = `${name} – Quality Celulares`;
+  const title = categorySeoTitle(cat);
   const description = categorySeoDescription(cat);
+  const ogTitle = categoryOgTitle(cat);
+  const ogDescription = categoryOgDescription(cat);
   const url = `${SITE_URL}/${slug}/`;
-  const image = `${SITE_URL}/images/logo.png`;
+  const image = categoryOgImage(cat);
 
   const replacements = [
     [/<title>[\s\S]*?<\/title>/i, `<title>${escapeAttr(title)}</title>`],
     [/<meta\s+name=["']description["'][^>]*>/i, `<meta name="description" content="${escapeAttr(description)}">`],
-    [/<meta\s+property=["']og:title["'][^>]*>/i, `<meta property="og:title" content="${escapeAttr(title)}">`],
-    [/<meta\s+property=["']og:description["'][^>]*>/i, `<meta property="og:description" content="${escapeAttr(description)}">`],
+    [/<meta\s+property=["']og:title["'][^>]*>/i, `<meta property="og:title" content="${escapeAttr(ogTitle)}">`],
+    [/<meta\s+property=["']og:description["'][^>]*>/i, `<meta property="og:description" content="${escapeAttr(ogDescription)}">`],
     [/<meta\s+property=["']og:url["'][^>]*>/i, `<meta property="og:url" content="${escapeAttr(url)}">`],
     [/<meta\s+property=["']og:image["'][^>]*>/i, `<meta property="og:image" content="${escapeAttr(image)}">`],
     [/<link\s+rel=["']canonical["'][^>]*>/i, `<link rel="canonical" href="${escapeAttr(url)}">`]
@@ -596,8 +620,12 @@ router.post('/add', (req,res)=>{
   const slug = uniqueSlug(req.body.slug || name, data.items);
   const order = Number(req.body.order || data.items.length + 1);
   const icon = (req.body.icon || '').trim();
+  const seoTitle = (req.body.seoTitle || '').trim() || categorySeoTitle({ name });
   const seoDescription = (req.body.seoDescription || '').trim() || categorySeoDescription({ name });
-  const newCat = { id: Date.now(), name, slug, order, icon, seoDescription };
+  const ogTitle = (req.body.ogTitle || '').trim() || seoTitle;
+  const ogDescription = (req.body.ogDescription || '').trim() || seoDescription;
+  const ogImage = (req.body.ogImage || '').trim();
+  const newCat = { id: Date.now(), name, slug, order, icon, seoTitle, seoDescription, ogTitle, ogDescription, ogImage };
   data.items.push(newCat);
   writeJson(file, data);
 
@@ -630,7 +658,11 @@ router.post('/update', (req,res)=>{
     it.slug = uniqueSlug(slugInput || newName || it.slug, data.items, it.id);
     it.order = Number(req.body.order || it.order || 1);
     it.icon = (req.body.icon || '').trim();
+    it.seoTitle = (req.body.seoTitle || '').trim() || categorySeoTitle(it);
     it.seoDescription = (req.body.seoDescription || '').trim() || categorySeoDescription(it);
+    it.ogTitle = (req.body.ogTitle || '').trim() || it.seoTitle;
+    it.ogDescription = (req.body.ogDescription || '').trim() || it.seoDescription;
+    it.ogImage = (req.body.ogImage || '').trim();
   }
 
   writeJson(file, data);

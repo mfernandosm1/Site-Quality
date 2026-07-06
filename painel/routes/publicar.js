@@ -150,6 +150,98 @@ function prepararCategoriasParaPublicacao(){
   }
 }
 
+const SITE_URL = 'https://www.qualitycel.com.br';
+
+function slugifyCategory(s){
+  return String(s || '')
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .toLowerCase()
+    .trim()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '') || 'categoria';
+}
+
+function escapeAttr(value){
+  return String(value || '')
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#039;');
+}
+
+function categorySeoTitle(cat){
+  const custom = String(cat?.seoTitle || cat?.seo_title || cat?.titleSeo || '').trim();
+  if (custom) return custom;
+  return `${String(cat?.name || 'Categoria').trim()} | Quality Celulares`;
+}
+
+function categorySeoDescription(cat){
+  const custom = String(cat?.seoDescription || cat?.seo_description || cat?.descriptionSeo || cat?.metaDescription || '').trim();
+  if (custom) return custom;
+  return `Confira ${String(cat?.name || 'produtos').trim()} na Quality Celulares. Produtos novos e seminovos com garantia, frete grátis e atendimento especializado.`;
+}
+
+function categoryOgTitle(cat){
+  return String(cat?.ogTitle || cat?.og_title || '').trim() || categorySeoTitle(cat);
+}
+
+function categoryOgDescription(cat){
+  return String(cat?.ogDescription || cat?.og_description || '').trim() || categorySeoDescription(cat);
+}
+
+function categoryOgImage(cat){
+  const raw = String(cat?.ogImage || cat?.og_image || cat?.seoImage || '').trim();
+  if (!raw) return `${SITE_URL}/images/logo.png`;
+  if (/^https?:\/\//i.test(raw)) return raw;
+  return `${SITE_URL}/${raw.replace(/^\/+/, '')}`;
+}
+
+function patchMetaTag(html, selectorRegex, tagHtml){
+  if (selectorRegex.test(html)) return html.replace(selectorRegex, tagHtml);
+  return html.replace('</head>', `  ${tagHtml}\n</head>`);
+}
+
+function gerarHtmlEstaticoCategoriasPremium(){
+  try {
+    const categoriesPath = path.join(REPO_DIR, 'content', 'categories.json');
+    const baseFile = path.join(SITE_DIR, 'categoria.html');
+    if (!fs.existsSync(categoriesPath) || !fs.existsSync(baseFile)) return;
+
+    const data = readJsonSafe(categoriesPath, { items: [] });
+    const items = (data.items || []).sort((a,b) => Number(a.order || 0) - Number(b.order || 0));
+    const baseHtml = fs.readFileSync(baseFile, 'utf-8');
+
+    for (const cat of items) {
+      const slug = slugifyCategory(cat.slug || cat.name);
+      const url = `${SITE_URL}/${slug}/`;
+      const title = categorySeoTitle(cat);
+      const description = categorySeoDescription(cat);
+      const ogTitle = categoryOgTitle(cat);
+      const ogDescription = categoryOgDescription(cat);
+      const ogImage = categoryOgImage(cat);
+
+      let html = baseHtml;
+      html = patchMetaTag(html, /<title>[\s\S]*?<\/title>/i, `<title>${escapeAttr(title)}</title>`);
+      html = patchMetaTag(html, /<meta\s+name=["']description["'][^>]*>/i, `<meta name="description" content="${escapeAttr(description)}">`);
+      html = patchMetaTag(html, /<meta\s+property=["']og:title["'][^>]*>/i, `<meta property="og:title" content="${escapeAttr(ogTitle)}">`);
+      html = patchMetaTag(html, /<meta\s+property=["']og:description["'][^>]*>/i, `<meta property="og:description" content="${escapeAttr(ogDescription)}">`);
+      html = patchMetaTag(html, /<meta\s+property=["']og:image["'][^>]*>/i, `<meta property="og:image" content="${escapeAttr(ogImage)}">`);
+      html = patchMetaTag(html, /<meta\s+property=["']og:url["'][^>]*>/i, `<meta property="og:url" content="${escapeAttr(url)}">`);
+      html = patchMetaTag(html, /<link\s+rel=["']canonical["'][^>]*>/i, `<link rel="canonical" href="${escapeAttr(url)}">`);
+
+      const dir = path.join(SITE_DIR, slug);
+      fs.mkdirSync(dir, { recursive: true });
+      fs.writeFileSync(path.join(dir, 'index.html'), html, 'utf-8');
+      console.log(`✅ SEO premium da categoria gerado: /${slug}/`);
+    }
+  } catch (e) {
+    console.warn(`⚠️ Falha ao gerar SEO premium das categorias: ${e.message}`);
+  }
+}
+
+
 function syncDirContents(src, dst){
   const IGNORE = new Set([".git",".github","node_modules","Backup","backups"]);
   function walk(curSrc, curDst){
@@ -249,6 +341,7 @@ router.post("/", async (req,res)=>{
     prepararCategoriasParaPublicacao();
     generateSeoFiles(SITE_DIR, loadSeoConfig(SITE_DIR));
     generateFriendlyUrlPages(SITE_DIR);
+    gerarHtmlEstaticoCategoriasPremium();
     limparArquivosCategoriasAntigos(SITE_DIR, REPO_DIR);
     syncDirContents(SITE_DIR, REPO_DIR);
     await gitCommitPush();

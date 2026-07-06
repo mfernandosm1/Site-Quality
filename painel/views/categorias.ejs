@@ -432,9 +432,19 @@
         </select>
       </div>
       <div class="full">
+        <label>Título SEO / WhatsApp</label>
+        <input type="text" name="seoTitle" placeholder="Ex.: Smartphones | Quality Celulares">
+        <div class="cat-seo-help">Esse é o título que aparece no Google e na prévia do WhatsApp.</div>
+      </div>
+      <div class="full">
         <label>Descrição SEO / WhatsApp</label>
         <textarea name="seoDescription" rows="3" placeholder="Ex.: 📱 iPhones, Samsung, Motorola, Xiaomi e muito mais. Celulares novos e seminovos com garantia, frete grátis e atendimento especializado."></textarea>
         <div class="cat-seo-help">Esse texto aparece no Google e na prévia do WhatsApp/Facebook da categoria.</div>
+      </div>
+      <div class="full">
+        <label>Imagem de compartilhamento (opcional)</label>
+        <input type="text" name="ogImage" placeholder="Ex.: images/logo.png ou link completo da imagem">
+        <div class="cat-seo-help">Por enquanto pode deixar em branco para usar a logo. Depois podemos colocar banners por categoria.</div>
       </div>
       <div class="cat-create-submit">
         <button class="btn primary" type="submit">Adicionar</button>
@@ -535,9 +545,21 @@
             </div>
 
             <div class="full">
+              <label>Título SEO / WhatsApp</label>
+              <input type="text" name="seoTitle" value="<%= c.seoTitle || ((c.name || 'Categoria') + ' | Quality Celulares') %>" placeholder="Ex.: Smartphones | Quality Celulares">
+              <div class="cat-seo-help">Título que aparece no Google e na prévia do WhatsApp/Facebook.</div>
+            </div>
+
+            <div class="full">
               <label>Descrição SEO / WhatsApp</label>
               <textarea name="seoDescription" rows="4" placeholder="Texto que aparece no Google e na prévia do WhatsApp/Facebook"><%= c.seoDescription || '' %></textarea>
               <div class="cat-seo-help">Para Smartphones, use: 📱 iPhones, Samsung, Motorola, Xiaomi e muito mais. Celulares novos e seminovos com garantia, frete grátis e atendimento especializado.</div>
+            </div>
+
+            <div class="full">
+              <label>Imagem de compartilhamento (opcional)</label>
+              <input type="text" name="ogImage" value="<%= c.ogImage || '' %>" placeholder="Ex.: images/logo.png ou link completo da imagem">
+              <div class="cat-seo-help">Deixe em branco para usar a logo padrão. Mais adiante podemos usar um banner exclusivo por categoria.</div>
             </div>
           </div>
 

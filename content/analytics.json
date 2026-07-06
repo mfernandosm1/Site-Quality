@@ -1,16 +1,16 @@
 {
   "version": "8.3.0-analytics-lite",
   "createdAt": "2026-07-06T01:03:36.032Z",
-  "updatedAt": "2026-07-06T16:37:46.117Z",
+  "updatedAt": "2026-07-06T20:38:11.602Z",
   "counters": {
-    "product_view": 17,
-    "favorite": 40,
+    "product_view": 20,
+    "favorite": 44,
     "favorite_click": 0,
-    "whatsapp_click": 4,
-    "category_view": 24,
+    "whatsapp_click": 6,
+    "category_view": 26,
     "share_click": 0,
     "search": 5,
-    "page_view": 72
+    "page_view": 80
   },
   "products": {
     "fonte-original-apple-usb-c-20w": {
@@ -30,10 +30,10 @@
       "image": "images/S25fe azul.jpeg",
       "url": "/produto/samsung-galaxy-s25-fe-5g-256gb-8gb-ram/",
       "views": 0,
-      "favorites": 6,
+      "favorites": 8,
       "whatsapp": 0,
       "shares": 0,
-      "lastAt": "2026-07-06T11:35:03.505Z"
+      "lastAt": "2026-07-06T20:37:55.960Z"
     },
     "troca-de-tela-de-celulares": {
       "slug": "troca-de-tela-de-celulares",
@@ -63,10 +63,10 @@
       "image": "images/Moto G55.jpeg",
       "url": "/produto/motorola-moto-g55-5g-256gb-16gb-8gb-ram-8gb-ram-boost/",
       "views": 0,
-      "favorites": 4,
+      "favorites": 6,
       "whatsapp": 0,
       "shares": 0,
-      "lastAt": "2026-07-06T11:35:11.237Z"
+      "lastAt": "2026-07-06T20:37:57.339Z"
     },
     "mini-game-portatil-400-jogos": {
       "slug": "mini-game-portatil-400-jogos",
@@ -84,11 +84,11 @@
       "name": "Motorola Moto G35 5G 128gb 4GB Ram+8GB Ram Boost",
       "image": "/images/Moto G35.jpeg",
       "url": "http://localhost:3000/produto/motorola-moto-g35-5g-128gb-4gb-ram-8gb-ram-boost/",
-      "views": 3,
+      "views": 6,
       "favorites": 0,
-      "whatsapp": 0,
+      "whatsapp": 2,
       "shares": 0,
-      "lastAt": "2026-07-06T16:37:16.342Z"
+      "lastAt": "2026-07-06T20:38:07.885Z"
     },
     "adaptador-veicular-p2-bluetooth-receptor-de-musica": {
       "slug": "adaptador-veicular-p2-bluetooth-receptor-de-musica",
@@ -107,8 +107,8 @@
       "slug": "smartphones",
       "name": "smartphones",
       "url": "http://localhost:3000/smartphones/",
-      "views": 12,
-      "lastAt": "2026-07-06T16:37:11.645Z"
+      "views": 14,
+      "lastAt": "2026-07-06T20:37:53.526Z"
     },
     "assistencia-tecnica": {
       "slug": "assistencia-tecnica",
@@ -140,8 +140,8 @@
   "pages": {
     "http://localhost:3000/site/view/index.html": {
       "url": "http://localhost:3000/site/view/index.html",
-      "views": 61,
-      "lastAt": "2026-07-06T16:37:46.117Z"
+      "views": 65,
+      "lastAt": "2026-07-06T20:38:11.601Z"
     },
     "http://localhost:3000/produto/fonte-original-apple-usb-c-20w/": {
       "url": "http://localhost:3000/produto/fonte-original-apple-usb-c-20w/",
@@ -150,8 +150,8 @@
     },
     "http://localhost:3000/smartphones/": {
       "url": "http://localhost:3000/smartphones/",
-      "views": 34,
-      "lastAt": "2026-07-06T16:37:11.644Z"
+      "views": 42,
+      "lastAt": "2026-07-06T20:37:57.339Z"
     },
     "http://localhost:3000/assistencia-tecnica/": {
       "url": "http://localhost:3000/assistencia-tecnica/",
@@ -170,8 +170,8 @@
     },
     "http://localhost:3000/produto/motorola-moto-g35-5g-128gb-4gb-ram-8gb-ram-boost/": {
       "url": "http://localhost:3000/produto/motorola-moto-g35-5g-128gb-4gb-ram-8gb-ram-boost/",
-      "views": 5,
-      "lastAt": "2026-07-06T16:37:16.342Z"
+      "views": 12,
+      "lastAt": "2026-07-06T20:38:07.885Z"
     }
   },
   "events": [
@@ -2130,6 +2130,240 @@
       "type": "page_view",
       "url": "http://localhost:3000/site/view/index.html",
       "referrer": "http://localhost:3000/site/view/index.html",
+      "device": "desktop",
+      "viewport": "1707x748",
+      "language": "pt-BR",
+      "term": ""
+    },
+    {
+      "at": "2026-07-06T20:37:52.285Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/site/view/index.html",
+      "referrer": "http://localhost:3000/categorias",
+      "device": "desktop",
+      "viewport": "1707x748",
+      "language": "pt-BR",
+      "term": ""
+    },
+    {
+      "at": "2026-07-06T20:37:52.298Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/site/view/index.html",
+      "referrer": "http://localhost:3000/categorias",
+      "device": "desktop",
+      "viewport": "1707x748",
+      "language": "pt-BR",
+      "term": ""
+    },
+    {
+      "at": "2026-07-06T20:37:53.488Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/smartphones/",
+      "referrer": "http://localhost:3000/site/view/index.html",
+      "device": "desktop",
+      "viewport": "1707x748",
+      "language": "pt-BR",
+      "term": ""
+    },
+    {
+      "at": "2026-07-06T20:37:53.508Z",
+      "type": "category_view",
+      "url": "http://localhost:3000/smartphones/",
+      "referrer": "http://localhost:3000/site/view/index.html",
+      "device": "desktop",
+      "viewport": "1707x748",
+      "language": "pt-BR",
+      "category": {
+        "slug": "smartphones",
+        "name": "Categoria"
+      },
+      "term": ""
+    },
+    {
+      "at": "2026-07-06T20:37:53.517Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/smartphones/",
+      "referrer": "http://localhost:3000/site/view/index.html",
+      "device": "desktop",
+      "viewport": "1707x748",
+      "language": "pt-BR",
+      "term": ""
+    },
+    {
+      "at": "2026-07-06T20:37:53.526Z",
+      "type": "category_view",
+      "url": "http://localhost:3000/smartphones/",
+      "referrer": "http://localhost:3000/site/view/index.html",
+      "device": "desktop",
+      "viewport": "1707x748",
+      "language": "pt-BR",
+      "category": {
+        "slug": "smartphones",
+        "name": "smartphones"
+      },
+      "term": ""
+    },
+    {
+      "at": "2026-07-06T20:37:55.876Z",
+      "type": "favorite",
+      "url": "http://localhost:3000/smartphones/",
+      "referrer": "http://localhost:3000/site/view/index.html",
+      "device": "desktop",
+      "viewport": "1707x748",
+      "language": "pt-BR",
+      "product": {
+        "slug": "samsung-galaxy-s25-fe-5g-256gb-8gb-ram",
+        "name": "Samsung Galaxy S25 Fe 5G 256gb 8gb Ram"
+      },
+      "term": ""
+    },
+    {
+      "at": "2026-07-06T20:37:55.960Z",
+      "type": "favorite",
+      "url": "http://localhost:3000/smartphones/",
+      "referrer": "http://localhost:3000/site/view/index.html",
+      "device": "desktop",
+      "viewport": "1707x748",
+      "language": "pt-BR",
+      "product": {
+        "slug": "samsung-galaxy-s25-fe-5g-256gb-8gb-ram",
+        "name": "Samsung Galaxy S25 Fe 5G 256gb 8gb Ram"
+      },
+      "term": ""
+    },
+    {
+      "at": "2026-07-06T20:37:57.242Z",
+      "type": "favorite",
+      "url": "http://localhost:3000/smartphones/",
+      "referrer": "http://localhost:3000/site/view/index.html",
+      "device": "desktop",
+      "viewport": "1707x748",
+      "language": "pt-BR",
+      "product": {
+        "slug": "motorola-moto-g55-5g-256gb-16gb-8gb-ram-8gb-ram-boost",
+        "name": "Motorola Moto G55 5G 256GB 16GB (8GB RAM+8GB Ram Boost)"
+      },
+      "term": ""
+    },
+    {
+      "at": "2026-07-06T20:37:57.340Z",
+      "type": "favorite",
+      "url": "http://localhost:3000/smartphones/",
+      "referrer": "http://localhost:3000/site/view/index.html",
+      "device": "desktop",
+      "viewport": "1707x748",
+      "language": "pt-BR",
+      "product": {
+        "slug": "motorola-moto-g55-5g-256gb-16gb-8gb-ram-8gb-ram-boost",
+        "name": "Motorola Moto G55 5G 256GB 16GB (8GB RAM+8GB Ram Boost)"
+      },
+      "term": ""
+    },
+    {
+      "at": "2026-07-06T20:38:04.620Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/produto/motorola-moto-g35-5g-128gb-4gb-ram-8gb-ram-boost/",
+      "referrer": "http://localhost:3000/smartphones/",
+      "device": "desktop",
+      "viewport": "1707x748",
+      "language": "pt-BR",
+      "term": ""
+    },
+    {
+      "at": "2026-07-06T20:38:04.627Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/produto/motorola-moto-g35-5g-128gb-4gb-ram-8gb-ram-boost/",
+      "referrer": "http://localhost:3000/smartphones/",
+      "device": "desktop",
+      "viewport": "1707x748",
+      "language": "pt-BR",
+      "term": ""
+    },
+    {
+      "at": "2026-07-06T20:38:05.224Z",
+      "type": "product_view",
+      "url": "http://localhost:3000/produto/motorola-moto-g35-5g-128gb-4gb-ram-8gb-ram-boost/",
+      "referrer": "http://localhost:3000/smartphones/",
+      "device": "desktop",
+      "viewport": "1707x748",
+      "language": "pt-BR",
+      "product": {
+        "slug": "motorola-moto-g35-5g-128gb-4gb-ram-8gb-ram-boost",
+        "name": "Motorola Moto G35 5G 128gb 4GB Ram+8GB Ram Boost"
+      },
+      "term": ""
+    },
+    {
+      "at": "2026-07-06T20:38:05.402Z",
+      "type": "product_view",
+      "url": "http://localhost:3000/produto/motorola-moto-g35-5g-128gb-4gb-ram-8gb-ram-boost/",
+      "referrer": "http://localhost:3000/smartphones/",
+      "device": "desktop",
+      "viewport": "1707x748",
+      "language": "pt-BR",
+      "product": {
+        "slug": "motorola-moto-g35-5g-128gb-4gb-ram-8gb-ram-boost",
+        "name": "Motorola Moto G35 5G 128gb 4GB Ram+8GB Ram Boost"
+      },
+      "term": ""
+    },
+    {
+      "at": "2026-07-06T20:38:06.713Z",
+      "type": "product_view",
+      "url": "http://localhost:3000/produto/motorola-moto-g35-5g-128gb-4gb-ram-8gb-ram-boost/",
+      "referrer": "http://localhost:3000/smartphones/",
+      "device": "desktop",
+      "viewport": "1707x748",
+      "language": "pt-BR",
+      "product": {
+        "slug": "motorola-moto-g35-5g-128gb-4gb-ram-8gb-ram-boost",
+        "name": "Motorola Moto G35 5G 128gb 4GB Ram+8GB Ram Boost"
+      },
+      "term": ""
+    },
+    {
+      "at": "2026-07-06T20:38:07.879Z",
+      "type": "whatsapp_click",
+      "url": "http://localhost:3000/produto/motorola-moto-g35-5g-128gb-4gb-ram-8gb-ram-boost/",
+      "referrer": "http://localhost:3000/smartphones/",
+      "device": "desktop",
+      "viewport": "1707x748",
+      "language": "pt-BR",
+      "product": {
+        "slug": "motorola-moto-g35-5g-128gb-4gb-ram-8gb-ram-boost",
+        "name": "Motorola Moto G35 5G 128gb 4GB Ram+8GB Ram Boost"
+      },
+      "term": ""
+    },
+    {
+      "at": "2026-07-06T20:38:07.885Z",
+      "type": "whatsapp_click",
+      "url": "http://localhost:3000/produto/motorola-moto-g35-5g-128gb-4gb-ram-8gb-ram-boost/",
+      "referrer": "http://localhost:3000/smartphones/",
+      "device": "desktop",
+      "viewport": "1707x748",
+      "language": "pt-BR",
+      "product": {
+        "slug": "",
+        "name": "Motorola Moto G35 5G 128gb 4GB Ram+8GB Ram Boost"
+      },
+      "term": ""
+    },
+    {
+      "at": "2026-07-06T20:38:11.590Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/site/view/index.html",
+      "referrer": "http://localhost:3000/produto/motorola-moto-g35-5g-128gb-4gb-ram-8gb-ram-boost/",
+      "device": "desktop",
+      "viewport": "1707x748",
+      "language": "pt-BR",
+      "term": ""
+    },
+    {
+      "at": "2026-07-06T20:38:11.601Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/site/view/index.html",
+      "referrer": "http://localhost:3000/produto/motorola-moto-g35-5g-128gb-4gb-ram-8gb-ram-boost/",
       "device": "desktop",
       "viewport": "1707x748",
       "language": "pt-BR",

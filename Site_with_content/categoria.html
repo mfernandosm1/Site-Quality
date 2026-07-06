@@ -101,6 +101,16 @@
   }
 })();
 </script>
+<script>
+(function(){
+  var isLocalPreview = window.location.hostname === 'localhost' && window.location.port === '3000';
+  if (isLocalPreview) {
+    document.querySelectorAll('[data-home-link]').forEach(function(a){
+      a.setAttribute('href', '/site/view/index.html');
+    });
+  }
+})();
+</script>
 <main class="main">
   <h1 id="categoria-titulo" style="text-align:center;margin-top:30px;display:flex;justify-content:center;align-items:center;gap:10px;flex-wrap:wrap;">Categoria</h1>
   <div class="quality-category-toolbar">
@@ -456,7 +466,7 @@
     const categoryIdLower = normalizeText(category ? category.id : '');
 
     setCategoryTitle(titleEl, categoryName, category ? category.icon : '');
-    document.title = categoryName + ' – Quality Celulares';
+    document.title = (category && category.seoTitle) ? category.seoTitle : (categoryName + ' | Quality Celulares');
 
     const metaDescriptionText = (category && (category.seoDescription || category.seo_description || category.descriptionSeo || category.metaDescription)) ? String(category.seoDescription || category.seo_description || category.descriptionSeo || category.metaDescription).trim() : ('Confira ' + categoryName + ' na Quality Celulares. Produtos novos e seminovos com garantia, frete grátis e atendimento especializado.');
     let metaDescription = document.querySelector('meta[name="description"]');
@@ -487,10 +497,16 @@
 
     const categoryUrl = window.location.origin + '/' + encodeURIComponent(categorySlugLower || currentSlug) + '/';
     setOg('og:type', 'website');
-    setOg('og:title', categoryName + ' – Quality Celulares');
-    setOg('og:description', metaDescriptionText);
+    const ogTitleText = (category && (category.ogTitle || category.seoTitle)) ? String(category.ogTitle || category.seoTitle).trim() : ((categoryName || 'Categoria') + ' | Quality Celulares');
+    const ogDescriptionText = (category && (category.ogDescription || category.seoDescription || category.seo_description || category.descriptionSeo || category.metaDescription)) ? String(category.ogDescription || category.seoDescription || category.seo_description || category.descriptionSeo || category.metaDescription).trim() : metaDescriptionText;
+    let ogImageText = (category && (category.ogImage || category.og_image || category.seoImage)) ? String(category.ogImage || category.og_image || category.seoImage).trim() : '';
+    if (!ogImageText) ogImageText = window.location.origin + '/images/logo.png';
+    else if (!/^https?:\/\//i.test(ogImageText)) ogImageText = window.location.origin + '/' + ogImageText.replace(/^\/+/, '');
+
+    setOg('og:title', ogTitleText);
+    setOg('og:description', ogDescriptionText);
     setOg('og:url', categoryUrl);
-    setOg('og:image', window.location.origin + '/images/logo.png');
+    setOg('og:image', ogImageText);
 
     const products = (productsData.items || []).filter(p => {
       if (p.active === false) return false;
