@@ -68,22 +68,9 @@
     align-items: end;
   }
 
-  .cat-create-grid .full {
-    grid-column: 1 / -1;
-  }
+  .cat-create-grid .full { grid-column: 1 / -1; }
 
-  .cat-seo-help {
-    color: #64748b;
-    font-size: 12px;
-    margin-top: 5px;
-    line-height: 1.35;
-  }
-
-  textarea.cat-seo-textarea {
-    width: 100%;
-    min-height: 76px;
-    resize: vertical;
-  }
+  .cat-seo-help { color:#64748b; font-size:12px; margin-top:4px; line-height:1.35; }
 
   .cat-list {
     display: grid;
@@ -446,8 +433,8 @@
       </div>
       <div class="full">
         <label>Descrição SEO / WhatsApp</label>
-        <textarea class="cat-seo-textarea" name="seoDescription" placeholder="Ex.: 📱 iPhones, Samsung, Motorola, Xiaomi e muito mais. Celulares novos e seminovos com garantia, frete grátis e atendimento especializado."></textarea>
-        <div class="cat-seo-help">Esse texto aparece na descrição do Google e na prévia do WhatsApp quando possível.</div>
+        <textarea name="seoDescription" rows="3" placeholder="Ex.: 📱 iPhones, Samsung, Motorola, Xiaomi e muito mais. Celulares novos e seminovos com garantia, frete grátis e atendimento especializado."></textarea>
+        <div class="cat-seo-help">Esse texto aparece no Google e na prévia do WhatsApp/Facebook da categoria.</div>
       </div>
       <div class="cat-create-submit">
         <button class="btn primary" type="submit">Adicionar</button>
@@ -549,8 +536,8 @@
 
             <div class="full">
               <label>Descrição SEO / WhatsApp</label>
-              <textarea class="cat-seo-textarea" name="seoDescription" placeholder="Texto que aparece no Google e na prévia do WhatsApp"><%= c.seoDescription || '' %></textarea>
-              <div class="cat-seo-help">Ex.: 📱 iPhones, Samsung, Motorola, Xiaomi e muito mais. Celulares novos e seminovos com garantia, frete grátis e atendimento especializado.</div>
+              <textarea name="seoDescription" rows="4" placeholder="Texto que aparece no Google e na prévia do WhatsApp/Facebook"><%= c.seoDescription || '' %></textarea>
+              <div class="cat-seo-help">Para Smartphones, use: 📱 iPhones, Samsung, Motorola, Xiaomi e muito mais. Celulares novos e seminovos com garantia, frete grátis e atendimento especializado.</div>
             </div>
           </div>
 

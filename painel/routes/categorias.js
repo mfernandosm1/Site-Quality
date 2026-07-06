@@ -56,6 +56,10 @@ function sortedCategories(items = []){
   return [...(items || [])].sort((a,b) => Number(a.order || 0) - Number(b.order || 0));
 }
 
+
+const SITE_URL = 'https://www.qualitycel.com.br';
+const DEFAULT_CATEGORY_SEO = 'Confira produtos selecionados da Quality Celulares. Produtos novos e seminovos com garantia, frete grátis e atendimento especializado.';
+
 function escapeAttr(value){
   return String(value || '')
     .replace(/&/g, '&amp;')
@@ -65,44 +69,54 @@ function escapeAttr(value){
     .replace(/'/g, '&#039;');
 }
 
-function categorySeoTitle(cat){
-  const name = String(cat?.name || cat?.slug || 'Categoria').trim();
-  return String(cat?.seoTitle || `${name} – Quality Celulares`).trim();
-}
-
 function categorySeoDescription(cat){
-  const name = String(cat?.name || cat?.slug || 'produtos').trim();
-  return String(cat?.seoDescription || `Confira ${name} disponíveis na Quality Celulares. Atendimento pelo WhatsApp.`).trim();
+  const custom = String(cat?.seoDescription || cat?.seo_description || cat?.descriptionSeo || cat?.metaDescription || '').trim();
+  if (custom) return custom;
+  const name = String(cat?.name || 'produtos').trim();
+  return `Confira ${name} na Quality Celulares. Produtos novos e seminovos com garantia, frete grátis e atendimento especializado.`;
 }
 
-function upsertHeadTag(html, regex, replacement){
-  return regex.test(html) ? html.replace(regex, replacement) : html.replace('</head>', replacement + '\n</head>');
+function patchCategoryHead(html, cat){
+  const slug = slugify(cat.slug || cat.name);
+  const name = String(cat.name || slug || 'Categoria').trim();
+  const title = `${name} – Quality Celulares`;
+  const description = categorySeoDescription(cat);
+  const url = `${SITE_URL}/${slug}/`;
+  const image = `${SITE_URL}/images/logo.png`;
+
+  const replacements = [
+    [/<title>[\s\S]*?<\/title>/i, `<title>${escapeAttr(title)}</title>`],
+    [/<meta\s+name=["']description["'][^>]*>/i, `<meta name="description" content="${escapeAttr(description)}">`],
+    [/<meta\s+property=["']og:title["'][^>]*>/i, `<meta property="og:title" content="${escapeAttr(title)}">`],
+    [/<meta\s+property=["']og:description["'][^>]*>/i, `<meta property="og:description" content="${escapeAttr(description)}">`],
+    [/<meta\s+property=["']og:url["'][^>]*>/i, `<meta property="og:url" content="${escapeAttr(url)}">`],
+    [/<meta\s+property=["']og:image["'][^>]*>/i, `<meta property="og:image" content="${escapeAttr(image)}">`],
+    [/<link\s+rel=["']canonical["'][^>]*>/i, `<link rel="canonical" href="${escapeAttr(url)}">`]
+  ];
+
+  let out = html;
+  for (const [pattern, value] of replacements) {
+    if (pattern.test(out)) out = out.replace(pattern, value);
+  }
+  return out;
 }
 
-function generateIndividualCategoryPages(items = [], siteDir){
+function generateStaticCategoryPages(items = [], siteDir){
   try {
+    if (!siteDir || !fs.existsSync(siteDir)) return;
     const baseFile = path.join(siteDir, 'categoria.html');
     if (!fs.existsSync(baseFile)) return;
     const baseHtml = fs.readFileSync(baseFile, 'utf-8');
-    sortedCategories(items).forEach(cat => {
+
+    for (const cat of sortedCategories(items || [])) {
       const slug = slugify(cat.slug || cat.name);
-      if (!slug) return;
-      const title = escapeAttr(categorySeoTitle(cat));
-      const desc = escapeAttr(categorySeoDescription(cat));
-      const url = `https://www.qualitycel.com.br/${slug}/`;
-      let html = baseHtml;
-      html = upsertHeadTag(html, /<title>[\s\S]*?<\/title>/i, `<title>${title}</title>`);
-      html = upsertHeadTag(html, /<meta\s+name=["']description["'][^>]*>/i, `<meta name="description" content="${desc}">`);
-      html = upsertHeadTag(html, /<meta\s+property=["']og:title["'][^>]*>/i, `<meta property="og:title" content="${title}">`);
-      html = upsertHeadTag(html, /<meta\s+property=["']og:description["'][^>]*>/i, `<meta property="og:description" content="${desc}">`);
-      html = upsertHeadTag(html, /<meta\s+property=["']og:url["'][^>]*>/i, `<meta property="og:url" content="${url}">`);
-      html = upsertHeadTag(html, /<link\s+rel=["']canonical["'][^>]*>/i, `<link rel="canonical" href="${url}">`);
+      if (!slug) continue;
       const dir = path.join(siteDir, slug);
       fs.mkdirSync(dir, { recursive: true });
-      fs.writeFileSync(path.join(dir, 'index.html'), html, 'utf-8');
-    });
+      fs.writeFileSync(path.join(dir, 'index.html'), patchCategoryHead(baseHtml, cat), 'utf-8');
+    }
   } catch (e) {
-    console.warn(`⚠️ Falha ao gerar páginas SEO das categorias: ${e.message}`);
+    console.warn(`⚠️ Falha ao gerar HTML estático das categorias: ${e.message}`);
   }
 }
 
@@ -437,12 +451,9 @@ function generateCategoryPage(siteDir){
     const categoryIdLower = normalizeText(category ? category.id : '');
 
     setCategoryTitle(titleEl, categoryName, category ? category.icon : '');
-    const seoTitleText = category && category.seoTitle ? String(category.seoTitle).trim() : categoryName + ' – Quality Celulares';
-    document.title = seoTitleText;
+    document.title = categoryName + ' – Quality Celulares';
 
-    const metaDescriptionText = category && category.seoDescription
-      ? String(category.seoDescription).trim()
-      : 'Confira ' + categoryName + ' disponíveis na Quality Celulares. Atendimento pelo WhatsApp.';
+    const metaDescriptionText = 'Confira ' + categoryName + ' disponíveis na Quality Celulares. Atendimento pelo WhatsApp.';
     let metaDescription = document.querySelector('meta[name="description"]');
     if (!metaDescription) {
       metaDescription = document.createElement('meta');
@@ -471,7 +482,7 @@ function generateCategoryPage(siteDir){
 
     const categoryUrl = window.location.origin + '/' + encodeURIComponent(categorySlugLower || currentSlug) + '/';
     setOg('og:type', 'website');
-    setOg('og:title', seoTitleText);
+    setOg('og:title', categoryName + ' – Quality Celulares');
     setOg('og:description', metaDescriptionText);
     setOg('og:url', categoryUrl);
     setOg('og:image', window.location.origin + '/images/logo.png');
@@ -559,7 +570,7 @@ function rebuildCategoryStructure(items, siteDir){
   // como etiquetas, cards, filtros e ajustes de SEO ao criar/editar categorias.
   // Mantemos apenas o header.html atualizado como compatibilidade/preview.
   generateHeader(items || [], siteDir);
-  generateIndividualCategoryPages(items || [], siteDir);
+  generateStaticCategoryPages(items || [], siteDir);
 }
 
 // ====== LISTAR ======
@@ -585,7 +596,7 @@ router.post('/add', (req,res)=>{
   const slug = uniqueSlug(req.body.slug || name, data.items);
   const order = Number(req.body.order || data.items.length + 1);
   const icon = (req.body.icon || '').trim();
-  const seoDescription = (req.body.seoDescription || '').trim();
+  const seoDescription = (req.body.seoDescription || '').trim() || categorySeoDescription({ name });
   const newCat = { id: Date.now(), name, slug, order, icon, seoDescription };
   data.items.push(newCat);
   writeJson(file, data);
@@ -619,7 +630,7 @@ router.post('/update', (req,res)=>{
     it.slug = uniqueSlug(slugInput || newName || it.slug, data.items, it.id);
     it.order = Number(req.body.order || it.order || 1);
     it.icon = (req.body.icon || '').trim();
-    it.seoDescription = (req.body.seoDescription || '').trim();
+    it.seoDescription = (req.body.seoDescription || '').trim() || categorySeoDescription(it);
   }
 
   writeJson(file, data);

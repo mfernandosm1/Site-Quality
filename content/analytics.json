@@ -1,16 +1,16 @@
 {
   "version": "8.3.0-analytics-lite",
   "createdAt": "2026-07-06T01:03:36.032Z",
-  "updatedAt": "2026-07-06T15:04:57.140Z",
+  "updatedAt": "2026-07-06T16:37:46.117Z",
   "counters": {
-    "product_view": 11,
-    "favorite": 32,
+    "product_view": 17,
+    "favorite": 40,
     "favorite_click": 0,
-    "whatsapp_click": 2,
-    "category_view": 18,
+    "whatsapp_click": 4,
+    "category_view": 24,
     "share_click": 0,
-    "search": 3,
-    "page_view": 54
+    "search": 5,
+    "page_view": 72
   },
   "products": {
     "fonte-original-apple-usb-c-20w": {
@@ -50,12 +50,12 @@
       "slug": "xiaomi-poco-x7-pro-5g-512gb-12gb-ram",
       "name": "Xiaomi Poco X7 pro 5G 512gb 12gb ram",
       "image": "/images/pocox7pro.png",
-      "url": "/produto/xiaomi-poco-x7-pro-5g-512gb-12gb-ram/",
-      "views": 2,
+      "url": "http://localhost:3000/produto/xiaomi-poco-x7-pro-5g-512gb-12gb-ram/",
+      "views": 5,
       "favorites": 0,
-      "whatsapp": 0,
+      "whatsapp": 2,
       "shares": 0,
-      "lastAt": "2026-07-06T01:22:38.861Z"
+      "lastAt": "2026-07-06T16:37:40.214Z"
     },
     "motorola-moto-g55-5g-256gb-16gb-8gb-ram-8gb-ram-boost": {
       "slug": "motorola-moto-g55-5g-256gb-16gb-8gb-ram-8gb-ram-boost",
@@ -71,13 +71,35 @@
     "mini-game-portatil-400-jogos": {
       "slug": "mini-game-portatil-400-jogos",
       "name": "Mini game portátil 400 jogos",
-      "image": "/images/Mini game portátil 400 jogos e controle.jpg",
-      "url": "http://localhost:3000/site/view/index.html",
+      "image": "images/Mini game portátil 400 jogos e controle.jpg",
+      "url": "/produto/mini-game-portatil-400-jogos/",
       "views": 0,
-      "favorites": 4,
+      "favorites": 10,
       "whatsapp": 2,
       "shares": 0,
-      "lastAt": "2026-07-06T15:04:49.318Z"
+      "lastAt": "2026-07-06T16:37:20.985Z"
+    },
+    "motorola-moto-g35-5g-128gb-4gb-ram-8gb-ram-boost": {
+      "slug": "motorola-moto-g35-5g-128gb-4gb-ram-8gb-ram-boost",
+      "name": "Motorola Moto G35 5G 128gb 4GB Ram+8GB Ram Boost",
+      "image": "/images/Moto G35.jpeg",
+      "url": "http://localhost:3000/produto/motorola-moto-g35-5g-128gb-4gb-ram-8gb-ram-boost/",
+      "views": 3,
+      "favorites": 0,
+      "whatsapp": 0,
+      "shares": 0,
+      "lastAt": "2026-07-06T16:37:16.342Z"
+    },
+    "adaptador-veicular-p2-bluetooth-receptor-de-musica": {
+      "slug": "adaptador-veicular-p2-bluetooth-receptor-de-musica",
+      "name": "Adaptador Veicular P2 Bluetooth Receptor de Música",
+      "image": "images/Adaptador P2 Bluetooth Receptor de Música R1914-500x500.jpg",
+      "url": "/produto/adaptador-veicular-p2-bluetooth-receptor-de-musica/",
+      "views": 0,
+      "favorites": 2,
+      "whatsapp": 0,
+      "shares": 0,
+      "lastAt": "2026-07-06T16:37:29.511Z"
     }
   },
   "categories": {
@@ -85,8 +107,8 @@
       "slug": "smartphones",
       "name": "smartphones",
       "url": "http://localhost:3000/smartphones/",
-      "views": 8,
-      "lastAt": "2026-07-06T15:04:27.863Z"
+      "views": 12,
+      "lastAt": "2026-07-06T16:37:11.645Z"
     },
     "assistencia-tecnica": {
       "slug": "assistencia-tecnica",
@@ -99,8 +121,8 @@
       "slug": "acessorios",
       "name": "acessorios",
       "url": "http://localhost:3000/acessorios/",
-      "views": 6,
-      "lastAt": "2026-07-06T15:04:41.545Z"
+      "views": 8,
+      "lastAt": "2026-07-06T16:37:24.123Z"
     }
   },
   "searches": {
@@ -111,15 +133,15 @@
     },
     "x7": {
       "term": "x7",
-      "total": 2,
-      "lastAt": "2026-07-06T01:22:37.880Z"
+      "total": 4,
+      "lastAt": "2026-07-06T16:37:34.331Z"
     }
   },
   "pages": {
     "http://localhost:3000/site/view/index.html": {
       "url": "http://localhost:3000/site/view/index.html",
-      "views": 47,
-      "lastAt": "2026-07-06T15:04:57.139Z"
+      "views": 61,
+      "lastAt": "2026-07-06T16:37:46.117Z"
     },
     "http://localhost:3000/produto/fonte-original-apple-usb-c-20w/": {
       "url": "http://localhost:3000/produto/fonte-original-apple-usb-c-20w/",
@@ -128,8 +150,8 @@
     },
     "http://localhost:3000/smartphones/": {
       "url": "http://localhost:3000/smartphones/",
-      "views": 26,
-      "lastAt": "2026-07-06T15:04:27.863Z"
+      "views": 34,
+      "lastAt": "2026-07-06T16:37:11.644Z"
     },
     "http://localhost:3000/assistencia-tecnica/": {
       "url": "http://localhost:3000/assistencia-tecnica/",
@@ -138,13 +160,18 @@
     },
     "http://localhost:3000/produto/xiaomi-poco-x7-pro-5g-512gb-12gb-ram/": {
       "url": "http://localhost:3000/produto/xiaomi-poco-x7-pro-5g-512gb-12gb-ram/",
-      "views": 4,
-      "lastAt": "2026-07-06T01:22:38.861Z"
+      "views": 11,
+      "lastAt": "2026-07-06T16:37:40.214Z"
     },
     "http://localhost:3000/acessorios/": {
       "url": "http://localhost:3000/acessorios/",
-      "views": 12,
-      "lastAt": "2026-07-06T15:04:41.545Z"
+      "views": 20,
+      "lastAt": "2026-07-06T16:37:34.331Z"
+    },
+    "http://localhost:3000/produto/motorola-moto-g35-5g-128gb-4gb-ram-8gb-ram-boost/": {
+      "url": "http://localhost:3000/produto/motorola-moto-g35-5g-128gb-4gb-ram-8gb-ram-boost/",
+      "views": 5,
+      "lastAt": "2026-07-06T16:37:16.342Z"
     }
   },
   "events": [
@@ -1595,6 +1622,514 @@
       "type": "page_view",
       "url": "http://localhost:3000/site/view/index.html",
       "referrer": "http://localhost:3000/produto/fonte-original-apple-usb-c-20w/",
+      "device": "desktop",
+      "viewport": "1707x748",
+      "language": "pt-BR",
+      "term": ""
+    },
+    {
+      "at": "2026-07-06T15:12:30.426Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/smartphones/",
+      "referrer": "http://localhost:3000/site/view/index.html",
+      "device": "desktop",
+      "viewport": "1707x748",
+      "language": "pt-BR",
+      "term": ""
+    },
+    {
+      "at": "2026-07-06T15:12:30.451Z",
+      "type": "category_view",
+      "url": "http://localhost:3000/smartphones/",
+      "referrer": "http://localhost:3000/site/view/index.html",
+      "device": "desktop",
+      "viewport": "1707x748",
+      "language": "pt-BR",
+      "category": {
+        "slug": "smartphones",
+        "name": "Categoria"
+      },
+      "term": ""
+    },
+    {
+      "at": "2026-07-06T15:12:30.457Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/smartphones/",
+      "referrer": "http://localhost:3000/site/view/index.html",
+      "device": "desktop",
+      "viewport": "1707x748",
+      "language": "pt-BR",
+      "term": ""
+    },
+    {
+      "at": "2026-07-06T15:12:30.462Z",
+      "type": "category_view",
+      "url": "http://localhost:3000/smartphones/",
+      "referrer": "http://localhost:3000/site/view/index.html",
+      "device": "desktop",
+      "viewport": "1707x748",
+      "language": "pt-BR",
+      "category": {
+        "slug": "smartphones",
+        "name": "smartphones"
+      },
+      "term": ""
+    },
+    {
+      "at": "2026-07-06T16:37:08.156Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/site/view/index.html",
+      "referrer": "http://localhost:3000/",
+      "device": "desktop",
+      "viewport": "1707x748",
+      "language": "pt-BR",
+      "term": ""
+    },
+    {
+      "at": "2026-07-06T16:37:08.168Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/site/view/index.html",
+      "referrer": "http://localhost:3000/",
+      "device": "desktop",
+      "viewport": "1707x748",
+      "language": "pt-BR",
+      "term": ""
+    },
+    {
+      "at": "2026-07-06T16:37:11.623Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/smartphones/",
+      "referrer": "http://localhost:3000/site/view/index.html",
+      "device": "desktop",
+      "viewport": "1707x748",
+      "language": "pt-BR",
+      "term": ""
+    },
+    {
+      "at": "2026-07-06T16:37:11.632Z",
+      "type": "category_view",
+      "url": "http://localhost:3000/smartphones/",
+      "referrer": "http://localhost:3000/site/view/index.html",
+      "device": "desktop",
+      "viewport": "1707x748",
+      "language": "pt-BR",
+      "category": {
+        "slug": "smartphones",
+        "name": "Categoria"
+      },
+      "term": ""
+    },
+    {
+      "at": "2026-07-06T16:37:11.639Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/smartphones/",
+      "referrer": "http://localhost:3000/site/view/index.html",
+      "device": "desktop",
+      "viewport": "1707x748",
+      "language": "pt-BR",
+      "term": ""
+    },
+    {
+      "at": "2026-07-06T16:37:11.645Z",
+      "type": "category_view",
+      "url": "http://localhost:3000/smartphones/",
+      "referrer": "http://localhost:3000/site/view/index.html",
+      "device": "desktop",
+      "viewport": "1707x748",
+      "language": "pt-BR",
+      "category": {
+        "slug": "smartphones",
+        "name": "smartphones"
+      },
+      "term": ""
+    },
+    {
+      "at": "2026-07-06T16:37:14.139Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/produto/motorola-moto-g35-5g-128gb-4gb-ram-8gb-ram-boost/",
+      "referrer": "http://localhost:3000/smartphones/",
+      "device": "desktop",
+      "viewport": "1707x748",
+      "language": "pt-BR",
+      "term": ""
+    },
+    {
+      "at": "2026-07-06T16:37:14.148Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/produto/motorola-moto-g35-5g-128gb-4gb-ram-8gb-ram-boost/",
+      "referrer": "http://localhost:3000/smartphones/",
+      "device": "desktop",
+      "viewport": "1707x748",
+      "language": "pt-BR",
+      "term": ""
+    },
+    {
+      "at": "2026-07-06T16:37:14.852Z",
+      "type": "product_view",
+      "url": "http://localhost:3000/produto/motorola-moto-g35-5g-128gb-4gb-ram-8gb-ram-boost/",
+      "referrer": "http://localhost:3000/smartphones/",
+      "device": "desktop",
+      "viewport": "1707x748",
+      "language": "pt-BR",
+      "product": {
+        "slug": "motorola-moto-g35-5g-128gb-4gb-ram-8gb-ram-boost",
+        "name": "Motorola Moto G35 5G 128gb 4GB Ram+8GB Ram Boost"
+      },
+      "term": ""
+    },
+    {
+      "at": "2026-07-06T16:37:15.037Z",
+      "type": "product_view",
+      "url": "http://localhost:3000/produto/motorola-moto-g35-5g-128gb-4gb-ram-8gb-ram-boost/",
+      "referrer": "http://localhost:3000/smartphones/",
+      "device": "desktop",
+      "viewport": "1707x748",
+      "language": "pt-BR",
+      "product": {
+        "slug": "motorola-moto-g35-5g-128gb-4gb-ram-8gb-ram-boost",
+        "name": "Motorola Moto G35 5G 128gb 4GB Ram+8GB Ram Boost"
+      },
+      "term": ""
+    },
+    {
+      "at": "2026-07-06T16:37:16.342Z",
+      "type": "product_view",
+      "url": "http://localhost:3000/produto/motorola-moto-g35-5g-128gb-4gb-ram-8gb-ram-boost/",
+      "referrer": "http://localhost:3000/smartphones/",
+      "device": "desktop",
+      "viewport": "1707x748",
+      "language": "pt-BR",
+      "product": {
+        "slug": "motorola-moto-g35-5g-128gb-4gb-ram-8gb-ram-boost",
+        "name": "Motorola Moto G35 5G 128gb 4GB Ram+8GB Ram Boost"
+      },
+      "term": ""
+    },
+    {
+      "at": "2026-07-06T16:37:16.604Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/site/view/index.html",
+      "referrer": "http://localhost:3000/produto/motorola-moto-g35-5g-128gb-4gb-ram-8gb-ram-boost/",
+      "device": "desktop",
+      "viewport": "1707x748",
+      "language": "pt-BR",
+      "term": ""
+    },
+    {
+      "at": "2026-07-06T16:37:16.618Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/site/view/index.html",
+      "referrer": "http://localhost:3000/produto/motorola-moto-g35-5g-128gb-4gb-ram-8gb-ram-boost/",
+      "device": "desktop",
+      "viewport": "1707x748",
+      "language": "pt-BR",
+      "term": ""
+    },
+    {
+      "at": "2026-07-06T16:37:18.089Z",
+      "type": "favorite",
+      "url": "http://localhost:3000/site/view/index.html",
+      "referrer": "http://localhost:3000/produto/motorola-moto-g35-5g-128gb-4gb-ram-8gb-ram-boost/",
+      "device": "desktop",
+      "viewport": "1707x748",
+      "language": "pt-BR",
+      "product": {
+        "slug": "mini-game-portatil-400-jogos",
+        "name": "Mini game portátil 400 jogos"
+      },
+      "term": ""
+    },
+    {
+      "at": "2026-07-06T16:37:18.173Z",
+      "type": "favorite",
+      "url": "http://localhost:3000/site/view/index.html",
+      "referrer": "http://localhost:3000/produto/motorola-moto-g35-5g-128gb-4gb-ram-8gb-ram-boost/",
+      "device": "desktop",
+      "viewport": "1707x748",
+      "language": "pt-BR",
+      "product": {
+        "slug": "mini-game-portatil-400-jogos",
+        "name": "Mini game portátil 400 jogos"
+      },
+      "term": ""
+    },
+    {
+      "at": "2026-07-06T16:37:18.864Z",
+      "type": "favorite",
+      "url": "http://localhost:3000/site/view/index.html",
+      "referrer": "http://localhost:3000/produto/motorola-moto-g35-5g-128gb-4gb-ram-8gb-ram-boost/",
+      "device": "desktop",
+      "viewport": "1707x748",
+      "language": "pt-BR",
+      "product": {
+        "slug": "mini-game-portatil-400-jogos",
+        "name": "Mini game portátil 400 jogos"
+      },
+      "term": ""
+    },
+    {
+      "at": "2026-07-06T16:37:18.948Z",
+      "type": "favorite",
+      "url": "http://localhost:3000/site/view/index.html",
+      "referrer": "http://localhost:3000/produto/motorola-moto-g35-5g-128gb-4gb-ram-8gb-ram-boost/",
+      "device": "desktop",
+      "viewport": "1707x748",
+      "language": "pt-BR",
+      "product": {
+        "slug": "mini-game-portatil-400-jogos",
+        "name": "Mini game portátil 400 jogos"
+      },
+      "term": ""
+    },
+    {
+      "at": "2026-07-06T16:37:20.891Z",
+      "type": "favorite",
+      "url": "http://localhost:3000/site/view/index.html",
+      "referrer": "http://localhost:3000/produto/motorola-moto-g35-5g-128gb-4gb-ram-8gb-ram-boost/",
+      "device": "desktop",
+      "viewport": "1707x748",
+      "language": "pt-BR",
+      "product": {
+        "slug": "mini-game-portatil-400-jogos",
+        "name": "Mini game portátil 400 jogos"
+      },
+      "term": ""
+    },
+    {
+      "at": "2026-07-06T16:37:20.985Z",
+      "type": "favorite",
+      "url": "http://localhost:3000/site/view/index.html",
+      "referrer": "http://localhost:3000/produto/motorola-moto-g35-5g-128gb-4gb-ram-8gb-ram-boost/",
+      "device": "desktop",
+      "viewport": "1707x748",
+      "language": "pt-BR",
+      "product": {
+        "slug": "mini-game-portatil-400-jogos",
+        "name": "Mini game portátil 400 jogos"
+      },
+      "term": ""
+    },
+    {
+      "at": "2026-07-06T16:37:24.105Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/acessorios/",
+      "referrer": "http://localhost:3000/site/view/index.html",
+      "device": "desktop",
+      "viewport": "1707x748",
+      "language": "pt-BR",
+      "term": ""
+    },
+    {
+      "at": "2026-07-06T16:37:24.110Z",
+      "type": "category_view",
+      "url": "http://localhost:3000/acessorios/",
+      "referrer": "http://localhost:3000/site/view/index.html",
+      "device": "desktop",
+      "viewport": "1707x748",
+      "language": "pt-BR",
+      "category": {
+        "slug": "acessorios",
+        "name": "Categoria"
+      },
+      "term": ""
+    },
+    {
+      "at": "2026-07-06T16:37:24.116Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/acessorios/",
+      "referrer": "http://localhost:3000/site/view/index.html",
+      "device": "desktop",
+      "viewport": "1707x748",
+      "language": "pt-BR",
+      "term": ""
+    },
+    {
+      "at": "2026-07-06T16:37:24.123Z",
+      "type": "category_view",
+      "url": "http://localhost:3000/acessorios/",
+      "referrer": "http://localhost:3000/site/view/index.html",
+      "device": "desktop",
+      "viewport": "1707x748",
+      "language": "pt-BR",
+      "category": {
+        "slug": "acessorios",
+        "name": "acessorios"
+      },
+      "term": ""
+    },
+    {
+      "at": "2026-07-06T16:37:29.426Z",
+      "type": "favorite",
+      "url": "http://localhost:3000/acessorios/",
+      "referrer": "http://localhost:3000/site/view/index.html",
+      "device": "desktop",
+      "viewport": "1707x748",
+      "language": "pt-BR",
+      "product": {
+        "slug": "adaptador-veicular-p2-bluetooth-receptor-de-musica",
+        "name": "Adaptador Veicular P2 Bluetooth Receptor de Música"
+      },
+      "term": ""
+    },
+    {
+      "at": "2026-07-06T16:37:29.511Z",
+      "type": "favorite",
+      "url": "http://localhost:3000/acessorios/",
+      "referrer": "http://localhost:3000/site/view/index.html",
+      "device": "desktop",
+      "viewport": "1707x748",
+      "language": "pt-BR",
+      "product": {
+        "slug": "adaptador-veicular-p2-bluetooth-receptor-de-musica",
+        "name": "Adaptador Veicular P2 Bluetooth Receptor de Música"
+      },
+      "term": ""
+    },
+    {
+      "at": "2026-07-06T16:37:34.326Z",
+      "type": "search",
+      "url": "http://localhost:3000/acessorios/",
+      "referrer": "http://localhost:3000/site/view/index.html",
+      "device": "desktop",
+      "viewport": "1707x748",
+      "language": "pt-BR",
+      "term": "x7"
+    },
+    {
+      "at": "2026-07-06T16:37:34.331Z",
+      "type": "search",
+      "url": "http://localhost:3000/acessorios/",
+      "referrer": "http://localhost:3000/site/view/index.html",
+      "device": "desktop",
+      "viewport": "1707x748",
+      "language": "pt-BR",
+      "term": "x7"
+    },
+    {
+      "at": "2026-07-06T16:37:34.437Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/produto/xiaomi-poco-x7-pro-5g-512gb-12gb-ram/",
+      "referrer": "http://localhost:3000/acessorios/",
+      "device": "desktop",
+      "viewport": "1707x748",
+      "language": "pt-BR",
+      "term": ""
+    },
+    {
+      "at": "2026-07-06T16:37:34.444Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/produto/xiaomi-poco-x7-pro-5g-512gb-12gb-ram/",
+      "referrer": "http://localhost:3000/acessorios/",
+      "device": "desktop",
+      "viewport": "1707x748",
+      "language": "pt-BR",
+      "term": ""
+    },
+    {
+      "at": "2026-07-06T16:37:35.136Z",
+      "type": "product_view",
+      "url": "http://localhost:3000/produto/xiaomi-poco-x7-pro-5g-512gb-12gb-ram/",
+      "referrer": "http://localhost:3000/acessorios/",
+      "device": "desktop",
+      "viewport": "1707x748",
+      "language": "pt-BR",
+      "product": {
+        "slug": "xiaomi-poco-x7-pro-5g-512gb-12gb-ram",
+        "name": "Xiaomi Poco X7 pro 5G 512gb 12gb ram"
+      },
+      "term": ""
+    },
+    {
+      "at": "2026-07-06T16:37:35.339Z",
+      "type": "product_view",
+      "url": "http://localhost:3000/produto/xiaomi-poco-x7-pro-5g-512gb-12gb-ram/",
+      "referrer": "http://localhost:3000/acessorios/",
+      "device": "desktop",
+      "viewport": "1707x748",
+      "language": "pt-BR",
+      "product": {
+        "slug": "xiaomi-poco-x7-pro-5g-512gb-12gb-ram",
+        "name": "Xiaomi Poco X7 pro 5G 512gb 12gb ram"
+      },
+      "term": ""
+    },
+    {
+      "at": "2026-07-06T16:37:36.638Z",
+      "type": "product_view",
+      "url": "http://localhost:3000/produto/xiaomi-poco-x7-pro-5g-512gb-12gb-ram/",
+      "referrer": "http://localhost:3000/acessorios/",
+      "device": "desktop",
+      "viewport": "1707x748",
+      "language": "pt-BR",
+      "product": {
+        "slug": "xiaomi-poco-x7-pro-5g-512gb-12gb-ram",
+        "name": "Xiaomi Poco X7 pro 5G 512gb 12gb ram"
+      },
+      "term": ""
+    },
+    {
+      "at": "2026-07-06T16:37:40.210Z",
+      "type": "whatsapp_click",
+      "url": "http://localhost:3000/produto/xiaomi-poco-x7-pro-5g-512gb-12gb-ram/",
+      "referrer": "http://localhost:3000/acessorios/",
+      "device": "desktop",
+      "viewport": "1707x748",
+      "language": "pt-BR",
+      "product": {
+        "slug": "xiaomi-poco-x7-pro-5g-512gb-12gb-ram",
+        "name": "Xiaomi Poco X7 pro 5G 512gb 12gb ram"
+      },
+      "term": ""
+    },
+    {
+      "at": "2026-07-06T16:37:40.214Z",
+      "type": "whatsapp_click",
+      "url": "http://localhost:3000/produto/xiaomi-poco-x7-pro-5g-512gb-12gb-ram/",
+      "referrer": "http://localhost:3000/acessorios/",
+      "device": "desktop",
+      "viewport": "1707x748",
+      "language": "pt-BR",
+      "product": {
+        "slug": "",
+        "name": "Xiaomi Poco X7 pro 5G 512gb 12gb ram"
+      },
+      "term": ""
+    },
+    {
+      "at": "2026-07-06T16:37:43.882Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/site/view/index.html",
+      "referrer": "http://localhost:3000/produto/xiaomi-poco-x7-pro-5g-512gb-12gb-ram/",
+      "device": "desktop",
+      "viewport": "1707x748",
+      "language": "pt-BR",
+      "term": ""
+    },
+    {
+      "at": "2026-07-06T16:37:43.890Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/site/view/index.html",
+      "referrer": "http://localhost:3000/produto/xiaomi-poco-x7-pro-5g-512gb-12gb-ram/",
+      "device": "desktop",
+      "viewport": "1707x748",
+      "language": "pt-BR",
+      "term": ""
+    },
+    {
+      "at": "2026-07-06T16:37:46.106Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/site/view/index.html",
+      "referrer": "http://localhost:3000/site/view/index.html",
+      "device": "desktop",
+      "viewport": "1707x748",
+      "language": "pt-BR",
+      "term": ""
+    },
+    {
+      "at": "2026-07-06T16:37:46.117Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/site/view/index.html",
+      "referrer": "http://localhost:3000/site/view/index.html",
       "device": "desktop",
       "viewport": "1707x748",
       "language": "pt-BR",
