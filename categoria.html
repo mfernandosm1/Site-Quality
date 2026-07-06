@@ -91,6 +91,16 @@
   }
 })();
 </script>
+<script>
+(function(){
+  var isLocalPreview = window.location.hostname === 'localhost' && window.location.port === '3000';
+  if (isLocalPreview) {
+    document.querySelectorAll('[data-home-link]').forEach(function(a){
+      a.setAttribute('href', '/site/view/index.html');
+    });
+  }
+})();
+</script>
 <main class="main">
   <h1 id="categoria-titulo" style="text-align:center;margin-top:30px;display:flex;justify-content:center;align-items:center;gap:10px;flex-wrap:wrap;">Categoria</h1>
   <div class="quality-category-toolbar">
@@ -446,9 +456,12 @@
     const categoryIdLower = normalizeText(category ? category.id : '');
 
     setCategoryTitle(titleEl, categoryName, category ? category.icon : '');
-    document.title = categoryName + ' – Quality Celulares';
+    const seoTitleText = category && category.seoTitle ? String(category.seoTitle).trim() : categoryName + ' – Quality Celulares';
+    document.title = seoTitleText;
 
-    const metaDescriptionText = 'Confira ' + categoryName + ' disponíveis na Quality Celulares. Atendimento pelo WhatsApp.';
+    const metaDescriptionText = category && category.seoDescription
+      ? String(category.seoDescription).trim()
+      : 'Confira ' + categoryName + ' disponíveis na Quality Celulares. Atendimento pelo WhatsApp.';
     let metaDescription = document.querySelector('meta[name="description"]');
     if (!metaDescription) {
       metaDescription = document.createElement('meta');
@@ -477,7 +490,7 @@
 
     const categoryUrl = window.location.origin + '/' + encodeURIComponent(categorySlugLower || currentSlug) + '/';
     setOg('og:type', 'website');
-    setOg('og:title', categoryName + ' – Quality Celulares');
+    setOg('og:title', seoTitleText);
     setOg('og:description', metaDescriptionText);
     setOg('og:url', categoryUrl);
     setOg('og:image', window.location.origin + '/images/logo.png');
