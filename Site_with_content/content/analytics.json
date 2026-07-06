@@ -1,0 +1,832 @@
+{
+  "version": "8.3.0-analytics-lite",
+  "createdAt": "2026-07-06T01:03:36.032Z",
+  "updatedAt": "2026-07-06T11:35:00.319Z",
+  "counters": {
+    "product_view": 8,
+    "favorite": 12,
+    "favorite_click": 0,
+    "whatsapp_click": 0,
+    "category_view": 8,
+    "share_click": 0,
+    "search": 3,
+    "page_view": 28
+  },
+  "products": {
+    "fonte-original-apple-usb-c-20w": {
+      "slug": "fonte-original-apple-usb-c-20w",
+      "name": "Fonte Original Apple Usb C 20w",
+      "image": "/images/Fonte Original Apple Usb C 20w.jpg",
+      "url": "http://localhost:3000/produto/fonte-original-apple-usb-c-20w/",
+      "views": 6,
+      "favorites": 8,
+      "whatsapp": 0,
+      "shares": 0,
+      "lastAt": "2026-07-06T01:22:34.248Z"
+    },
+    "samsung-galaxy-s25-fe-5g-256gb-8gb-ram": {
+      "slug": "samsung-galaxy-s25-fe-5g-256gb-8gb-ram",
+      "name": "Samsung Galaxy S25 Fe 5G 256gb 8gb Ram",
+      "image": "images/S25fe azul.jpeg",
+      "url": "/produto/samsung-galaxy-s25-fe-5g-256gb-8gb-ram/",
+      "views": 0,
+      "favorites": 2,
+      "whatsapp": 0,
+      "shares": 0,
+      "lastAt": "2026-07-06T01:22:16.049Z"
+    },
+    "troca-de-tela-de-celulares": {
+      "slug": "troca-de-tela-de-celulares",
+      "name": "Troca de Tela de Celulares",
+      "image": "images/Troca_de-Tela_card.png",
+      "url": "/produto/troca-de-tela-de-celulares/",
+      "views": 0,
+      "favorites": 2,
+      "whatsapp": 0,
+      "shares": 0,
+      "lastAt": "2026-07-06T01:22:22.820Z"
+    },
+    "xiaomi-poco-x7-pro-5g-512gb-12gb-ram": {
+      "slug": "xiaomi-poco-x7-pro-5g-512gb-12gb-ram",
+      "name": "Xiaomi Poco X7 pro 5G 512gb 12gb ram",
+      "image": "/images/pocox7pro.png",
+      "url": "/produto/xiaomi-poco-x7-pro-5g-512gb-12gb-ram/",
+      "views": 2,
+      "favorites": 0,
+      "whatsapp": 0,
+      "shares": 0,
+      "lastAt": "2026-07-06T01:22:38.861Z"
+    }
+  },
+  "categories": {
+    "smartphones": {
+      "slug": "smartphones",
+      "name": "smartphones",
+      "url": "http://localhost:3000/smartphones/",
+      "views": 4,
+      "lastAt": "2026-07-06T11:35:00.318Z"
+    },
+    "assistencia-tecnica": {
+      "slug": "assistencia-tecnica",
+      "name": "assistencia-tecnica",
+      "url": "http://localhost:3000/assistencia-tecnica/",
+      "views": 2,
+      "lastAt": "2026-07-06T01:22:20.987Z"
+    },
+    "acessorios": {
+      "slug": "acessorios",
+      "name": "acessorios",
+      "url": "http://localhost:3000/acessorios/",
+      "views": 2,
+      "lastAt": "2026-07-06T11:34:46.773Z"
+    }
+  },
+  "searches": {
+    "17": {
+      "term": "17",
+      "total": 1,
+      "lastAt": "2026-07-06T01:22:31.949Z"
+    },
+    "x7": {
+      "term": "x7",
+      "total": 2,
+      "lastAt": "2026-07-06T01:22:37.880Z"
+    }
+  },
+  "pages": {
+    "http://localhost:3000/site/view/index.html": {
+      "url": "http://localhost:3000/site/view/index.html",
+      "views": 19,
+      "lastAt": "2026-07-06T11:34:45.259Z"
+    },
+    "http://localhost:3000/produto/fonte-original-apple-usb-c-20w/": {
+      "url": "http://localhost:3000/produto/fonte-original-apple-usb-c-20w/",
+      "views": 16,
+      "lastAt": "2026-07-06T01:22:37.880Z"
+    },
+    "http://localhost:3000/smartphones/": {
+      "url": "http://localhost:3000/smartphones/",
+      "views": 10,
+      "lastAt": "2026-07-06T11:35:00.318Z"
+    },
+    "http://localhost:3000/assistencia-tecnica/": {
+      "url": "http://localhost:3000/assistencia-tecnica/",
+      "views": 6,
+      "lastAt": "2026-07-06T01:22:22.820Z"
+    },
+    "http://localhost:3000/produto/xiaomi-poco-x7-pro-5g-512gb-12gb-ram/": {
+      "url": "http://localhost:3000/produto/xiaomi-poco-x7-pro-5g-512gb-12gb-ram/",
+      "views": 4,
+      "lastAt": "2026-07-06T01:22:38.861Z"
+    },
+    "http://localhost:3000/acessorios/": {
+      "url": "http://localhost:3000/acessorios/",
+      "views": 4,
+      "lastAt": "2026-07-06T11:34:46.773Z"
+    }
+  },
+  "events": [
+    {
+      "at": "2026-07-06T01:11:04.266Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/site/view/index.html",
+      "referrer": "",
+      "device": "desktop",
+      "viewport": "1707x748",
+      "language": "pt-BR",
+      "term": ""
+    },
+    {
+      "at": "2026-07-06T01:11:04.273Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/site/view/index.html",
+      "referrer": "",
+      "device": "desktop",
+      "viewport": "1707x748",
+      "language": "pt-BR",
+      "term": ""
+    },
+    {
+      "at": "2026-07-06T01:22:01.418Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/site/view/index.html",
+      "referrer": "http://localhost:3000/",
+      "device": "desktop",
+      "viewport": "1707x748",
+      "language": "pt-BR",
+      "term": ""
+    },
+    {
+      "at": "2026-07-06T01:22:01.449Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/site/view/index.html",
+      "referrer": "http://localhost:3000/",
+      "device": "desktop",
+      "viewport": "1707x748",
+      "language": "pt-BR",
+      "term": ""
+    },
+    {
+      "at": "2026-07-06T01:22:03.959Z",
+      "type": "favorite",
+      "url": "http://localhost:3000/site/view/index.html",
+      "referrer": "http://localhost:3000/",
+      "device": "desktop",
+      "viewport": "1707x748",
+      "language": "pt-BR",
+      "product": {
+        "slug": "fonte-original-apple-usb-c-20w",
+        "name": "Fonte Original Apple Usb C 20w"
+      },
+      "term": ""
+    },
+    {
+      "at": "2026-07-06T01:22:04.036Z",
+      "type": "favorite",
+      "url": "http://localhost:3000/site/view/index.html",
+      "referrer": "http://localhost:3000/",
+      "device": "desktop",
+      "viewport": "1707x748",
+      "language": "pt-BR",
+      "product": {
+        "slug": "fonte-original-apple-usb-c-20w",
+        "name": "Fonte Original Apple Usb C 20w"
+      },
+      "term": ""
+    },
+    {
+      "at": "2026-07-06T01:22:04.947Z",
+      "type": "favorite",
+      "url": "http://localhost:3000/site/view/index.html",
+      "referrer": "http://localhost:3000/",
+      "device": "desktop",
+      "viewport": "1707x748",
+      "language": "pt-BR",
+      "product": {
+        "slug": "fonte-original-apple-usb-c-20w",
+        "name": "Fonte Original Apple Usb C 20w"
+      },
+      "term": ""
+    },
+    {
+      "at": "2026-07-06T01:22:05.032Z",
+      "type": "favorite",
+      "url": "http://localhost:3000/site/view/index.html",
+      "referrer": "http://localhost:3000/",
+      "device": "desktop",
+      "viewport": "1707x748",
+      "language": "pt-BR",
+      "product": {
+        "slug": "fonte-original-apple-usb-c-20w",
+        "name": "Fonte Original Apple Usb C 20w"
+      },
+      "term": ""
+    },
+    {
+      "at": "2026-07-06T01:22:05.903Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/produto/fonte-original-apple-usb-c-20w/",
+      "referrer": "http://localhost:3000/site/view/index.html",
+      "device": "desktop",
+      "viewport": "1707x748",
+      "language": "pt-BR",
+      "term": ""
+    },
+    {
+      "at": "2026-07-06T01:22:05.914Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/produto/fonte-original-apple-usb-c-20w/",
+      "referrer": "http://localhost:3000/site/view/index.html",
+      "device": "desktop",
+      "viewport": "1707x748",
+      "language": "pt-BR",
+      "term": ""
+    },
+    {
+      "at": "2026-07-06T01:22:06.621Z",
+      "type": "product_view",
+      "url": "http://localhost:3000/produto/fonte-original-apple-usb-c-20w/",
+      "referrer": "http://localhost:3000/site/view/index.html",
+      "device": "desktop",
+      "viewport": "1707x748",
+      "language": "pt-BR",
+      "product": {
+        "slug": "fonte-original-apple-usb-c-20w",
+        "name": "Fonte Original Apple Usb C 20w"
+      },
+      "term": ""
+    },
+    {
+      "at": "2026-07-06T01:22:06.803Z",
+      "type": "product_view",
+      "url": "http://localhost:3000/produto/fonte-original-apple-usb-c-20w/",
+      "referrer": "http://localhost:3000/site/view/index.html",
+      "device": "desktop",
+      "viewport": "1707x748",
+      "language": "pt-BR",
+      "product": {
+        "slug": "fonte-original-apple-usb-c-20w",
+        "name": "Fonte Original Apple Usb C 20w"
+      },
+      "term": ""
+    },
+    {
+      "at": "2026-07-06T01:22:07.045Z",
+      "type": "favorite",
+      "url": "http://localhost:3000/produto/fonte-original-apple-usb-c-20w/",
+      "referrer": "http://localhost:3000/site/view/index.html",
+      "device": "desktop",
+      "viewport": "1707x748",
+      "language": "pt-BR",
+      "product": {
+        "slug": "fonte-original-apple-usb-c-20w",
+        "name": "Fonte Original Apple Usb C 20w"
+      },
+      "term": ""
+    },
+    {
+      "at": "2026-07-06T01:22:07.131Z",
+      "type": "favorite",
+      "url": "http://localhost:3000/produto/fonte-original-apple-usb-c-20w/",
+      "referrer": "http://localhost:3000/site/view/index.html",
+      "device": "desktop",
+      "viewport": "1707x748",
+      "language": "pt-BR",
+      "product": {
+        "slug": "fonte-original-apple-usb-c-20w",
+        "name": "Fonte Original Apple Usb C 20w"
+      },
+      "term": ""
+    },
+    {
+      "at": "2026-07-06T01:22:07.548Z",
+      "type": "favorite",
+      "url": "http://localhost:3000/produto/fonte-original-apple-usb-c-20w/",
+      "referrer": "http://localhost:3000/site/view/index.html",
+      "device": "desktop",
+      "viewport": "1707x748",
+      "language": "pt-BR",
+      "product": {
+        "slug": "fonte-original-apple-usb-c-20w",
+        "name": "Fonte Original Apple Usb C 20w"
+      },
+      "term": ""
+    },
+    {
+      "at": "2026-07-06T01:22:07.631Z",
+      "type": "favorite",
+      "url": "http://localhost:3000/produto/fonte-original-apple-usb-c-20w/",
+      "referrer": "http://localhost:3000/site/view/index.html",
+      "device": "desktop",
+      "viewport": "1707x748",
+      "language": "pt-BR",
+      "product": {
+        "slug": "fonte-original-apple-usb-c-20w",
+        "name": "Fonte Original Apple Usb C 20w"
+      },
+      "term": ""
+    },
+    {
+      "at": "2026-07-06T01:22:08.105Z",
+      "type": "product_view",
+      "url": "http://localhost:3000/produto/fonte-original-apple-usb-c-20w/",
+      "referrer": "http://localhost:3000/site/view/index.html",
+      "device": "desktop",
+      "viewport": "1707x748",
+      "language": "pt-BR",
+      "product": {
+        "slug": "fonte-original-apple-usb-c-20w",
+        "name": "Fonte Original Apple Usb C 20w"
+      },
+      "term": ""
+    },
+    {
+      "at": "2026-07-06T01:22:13.490Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/site/view/index.html",
+      "referrer": "http://localhost:3000/produto/fonte-original-apple-usb-c-20w/",
+      "device": "desktop",
+      "viewport": "1707x748",
+      "language": "pt-BR",
+      "term": ""
+    },
+    {
+      "at": "2026-07-06T01:22:13.498Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/site/view/index.html",
+      "referrer": "http://localhost:3000/produto/fonte-original-apple-usb-c-20w/",
+      "device": "desktop",
+      "viewport": "1707x748",
+      "language": "pt-BR",
+      "term": ""
+    },
+    {
+      "at": "2026-07-06T01:22:14.718Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/smartphones/",
+      "referrer": "http://localhost:3000/site/view/index.html",
+      "device": "desktop",
+      "viewport": "1707x748",
+      "language": "pt-BR",
+      "term": ""
+    },
+    {
+      "at": "2026-07-06T01:22:14.724Z",
+      "type": "category_view",
+      "url": "http://localhost:3000/smartphones/",
+      "referrer": "http://localhost:3000/site/view/index.html",
+      "device": "desktop",
+      "viewport": "1707x748",
+      "language": "pt-BR",
+      "category": {
+        "slug": "smartphones",
+        "name": "Categoria"
+      },
+      "term": ""
+    },
+    {
+      "at": "2026-07-06T01:22:14.729Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/smartphones/",
+      "referrer": "http://localhost:3000/site/view/index.html",
+      "device": "desktop",
+      "viewport": "1707x748",
+      "language": "pt-BR",
+      "term": ""
+    },
+    {
+      "at": "2026-07-06T01:22:14.733Z",
+      "type": "category_view",
+      "url": "http://localhost:3000/smartphones/",
+      "referrer": "http://localhost:3000/site/view/index.html",
+      "device": "desktop",
+      "viewport": "1707x748",
+      "language": "pt-BR",
+      "category": {
+        "slug": "smartphones",
+        "name": "smartphones"
+      },
+      "term": ""
+    },
+    {
+      "at": "2026-07-06T01:22:15.957Z",
+      "type": "favorite",
+      "url": "http://localhost:3000/smartphones/",
+      "referrer": "http://localhost:3000/site/view/index.html",
+      "device": "desktop",
+      "viewport": "1707x748",
+      "language": "pt-BR",
+      "product": {
+        "slug": "samsung-galaxy-s25-fe-5g-256gb-8gb-ram",
+        "name": "Samsung Galaxy S25 Fe 5G 256gb 8gb Ram"
+      },
+      "term": ""
+    },
+    {
+      "at": "2026-07-06T01:22:16.049Z",
+      "type": "favorite",
+      "url": "http://localhost:3000/smartphones/",
+      "referrer": "http://localhost:3000/site/view/index.html",
+      "device": "desktop",
+      "viewport": "1707x748",
+      "language": "pt-BR",
+      "product": {
+        "slug": "samsung-galaxy-s25-fe-5g-256gb-8gb-ram",
+        "name": "Samsung Galaxy S25 Fe 5G 256gb 8gb Ram"
+      },
+      "term": ""
+    },
+    {
+      "at": "2026-07-06T01:22:17.103Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/site/view/index.html",
+      "referrer": "http://localhost:3000/smartphones/",
+      "device": "desktop",
+      "viewport": "1707x748",
+      "language": "pt-BR",
+      "term": ""
+    },
+    {
+      "at": "2026-07-06T01:22:17.201Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/site/view/index.html",
+      "referrer": "http://localhost:3000/smartphones/",
+      "device": "desktop",
+      "viewport": "1707x748",
+      "language": "pt-BR",
+      "term": ""
+    },
+    {
+      "at": "2026-07-06T01:22:20.972Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/assistencia-tecnica/",
+      "referrer": "http://localhost:3000/site/view/index.html",
+      "device": "desktop",
+      "viewport": "1707x748",
+      "language": "pt-BR",
+      "term": ""
+    },
+    {
+      "at": "2026-07-06T01:22:20.976Z",
+      "type": "category_view",
+      "url": "http://localhost:3000/assistencia-tecnica/",
+      "referrer": "http://localhost:3000/site/view/index.html",
+      "device": "desktop",
+      "viewport": "1707x748",
+      "language": "pt-BR",
+      "category": {
+        "slug": "assistencia-tecnica",
+        "name": "Categoria"
+      },
+      "term": ""
+    },
+    {
+      "at": "2026-07-06T01:22:20.982Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/assistencia-tecnica/",
+      "referrer": "http://localhost:3000/site/view/index.html",
+      "device": "desktop",
+      "viewport": "1707x748",
+      "language": "pt-BR",
+      "term": ""
+    },
+    {
+      "at": "2026-07-06T01:22:20.987Z",
+      "type": "category_view",
+      "url": "http://localhost:3000/assistencia-tecnica/",
+      "referrer": "http://localhost:3000/site/view/index.html",
+      "device": "desktop",
+      "viewport": "1707x748",
+      "language": "pt-BR",
+      "category": {
+        "slug": "assistencia-tecnica",
+        "name": "assistencia-tecnica"
+      },
+      "term": ""
+    },
+    {
+      "at": "2026-07-06T01:22:22.735Z",
+      "type": "favorite",
+      "url": "http://localhost:3000/assistencia-tecnica/",
+      "referrer": "http://localhost:3000/site/view/index.html",
+      "device": "desktop",
+      "viewport": "1707x748",
+      "language": "pt-BR",
+      "product": {
+        "slug": "troca-de-tela-de-celulares",
+        "name": "Troca de Tela de Celulares"
+      },
+      "term": ""
+    },
+    {
+      "at": "2026-07-06T01:22:22.820Z",
+      "type": "favorite",
+      "url": "http://localhost:3000/assistencia-tecnica/",
+      "referrer": "http://localhost:3000/site/view/index.html",
+      "device": "desktop",
+      "viewport": "1707x748",
+      "language": "pt-BR",
+      "product": {
+        "slug": "troca-de-tela-de-celulares",
+        "name": "Troca de Tela de Celulares"
+      },
+      "term": ""
+    },
+    {
+      "at": "2026-07-06T01:22:26.792Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/site/view/index.html",
+      "referrer": "http://localhost:3000/assistencia-tecnica/",
+      "device": "desktop",
+      "viewport": "1707x748",
+      "language": "pt-BR",
+      "term": ""
+    },
+    {
+      "at": "2026-07-06T01:22:26.807Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/site/view/index.html",
+      "referrer": "http://localhost:3000/assistencia-tecnica/",
+      "device": "desktop",
+      "viewport": "1707x748",
+      "language": "pt-BR",
+      "term": ""
+    },
+    {
+      "at": "2026-07-06T01:22:31.949Z",
+      "type": "search",
+      "url": "http://localhost:3000/site/view/index.html",
+      "referrer": "http://localhost:3000/assistencia-tecnica/",
+      "device": "desktop",
+      "viewport": "1707x748",
+      "language": "pt-BR",
+      "term": "17"
+    },
+    {
+      "at": "2026-07-06T01:22:32.044Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/produto/fonte-original-apple-usb-c-20w/",
+      "referrer": "http://localhost:3000/site/view/index.html",
+      "device": "desktop",
+      "viewport": "1707x748",
+      "language": "pt-BR",
+      "term": ""
+    },
+    {
+      "at": "2026-07-06T01:22:32.049Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/produto/fonte-original-apple-usb-c-20w/",
+      "referrer": "http://localhost:3000/site/view/index.html",
+      "device": "desktop",
+      "viewport": "1707x748",
+      "language": "pt-BR",
+      "term": ""
+    },
+    {
+      "at": "2026-07-06T01:22:32.756Z",
+      "type": "product_view",
+      "url": "http://localhost:3000/produto/fonte-original-apple-usb-c-20w/",
+      "referrer": "http://localhost:3000/site/view/index.html",
+      "device": "desktop",
+      "viewport": "1707x748",
+      "language": "pt-BR",
+      "product": {
+        "slug": "fonte-original-apple-usb-c-20w",
+        "name": "Fonte Original Apple Usb C 20w"
+      },
+      "term": ""
+    },
+    {
+      "at": "2026-07-06T01:22:32.943Z",
+      "type": "product_view",
+      "url": "http://localhost:3000/produto/fonte-original-apple-usb-c-20w/",
+      "referrer": "http://localhost:3000/site/view/index.html",
+      "device": "desktop",
+      "viewport": "1707x748",
+      "language": "pt-BR",
+      "product": {
+        "slug": "fonte-original-apple-usb-c-20w",
+        "name": "Fonte Original Apple Usb C 20w"
+      },
+      "term": ""
+    },
+    {
+      "at": "2026-07-06T01:22:34.248Z",
+      "type": "product_view",
+      "url": "http://localhost:3000/produto/fonte-original-apple-usb-c-20w/",
+      "referrer": "http://localhost:3000/site/view/index.html",
+      "device": "desktop",
+      "viewport": "1707x748",
+      "language": "pt-BR",
+      "product": {
+        "slug": "fonte-original-apple-usb-c-20w",
+        "name": "Fonte Original Apple Usb C 20w"
+      },
+      "term": ""
+    },
+    {
+      "at": "2026-07-06T01:22:37.876Z",
+      "type": "search",
+      "url": "http://localhost:3000/produto/fonte-original-apple-usb-c-20w/",
+      "referrer": "http://localhost:3000/site/view/index.html",
+      "device": "desktop",
+      "viewport": "1707x748",
+      "language": "pt-BR",
+      "term": "x7"
+    },
+    {
+      "at": "2026-07-06T01:22:37.880Z",
+      "type": "search",
+      "url": "http://localhost:3000/produto/fonte-original-apple-usb-c-20w/",
+      "referrer": "http://localhost:3000/site/view/index.html",
+      "device": "desktop",
+      "viewport": "1707x748",
+      "language": "pt-BR",
+      "term": "x7"
+    },
+    {
+      "at": "2026-07-06T01:22:37.962Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/produto/xiaomi-poco-x7-pro-5g-512gb-12gb-ram/",
+      "referrer": "http://localhost:3000/produto/fonte-original-apple-usb-c-20w/",
+      "device": "desktop",
+      "viewport": "1707x748",
+      "language": "pt-BR",
+      "term": ""
+    },
+    {
+      "at": "2026-07-06T01:22:37.970Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/produto/xiaomi-poco-x7-pro-5g-512gb-12gb-ram/",
+      "referrer": "http://localhost:3000/produto/fonte-original-apple-usb-c-20w/",
+      "device": "desktop",
+      "viewport": "1707x748",
+      "language": "pt-BR",
+      "term": ""
+    },
+    {
+      "at": "2026-07-06T01:22:38.677Z",
+      "type": "product_view",
+      "url": "http://localhost:3000/produto/xiaomi-poco-x7-pro-5g-512gb-12gb-ram/",
+      "referrer": "http://localhost:3000/produto/fonte-original-apple-usb-c-20w/",
+      "device": "desktop",
+      "viewport": "1707x748",
+      "language": "pt-BR",
+      "product": {
+        "slug": "xiaomi-poco-x7-pro-5g-512gb-12gb-ram",
+        "name": "Xiaomi Poco X7 pro 5G 512gb 12gb ram"
+      },
+      "term": ""
+    },
+    {
+      "at": "2026-07-06T01:22:38.861Z",
+      "type": "product_view",
+      "url": "http://localhost:3000/produto/xiaomi-poco-x7-pro-5g-512gb-12gb-ram/",
+      "referrer": "http://localhost:3000/produto/fonte-original-apple-usb-c-20w/",
+      "device": "desktop",
+      "viewport": "1707x748",
+      "language": "pt-BR",
+      "product": {
+        "slug": "xiaomi-poco-x7-pro-5g-512gb-12gb-ram",
+        "name": "Xiaomi Poco X7 pro 5G 512gb 12gb ram"
+      },
+      "term": ""
+    },
+    {
+      "at": "2026-07-06T01:22:39.825Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/site/view/index.html",
+      "referrer": "http://localhost:3000/produto/xiaomi-poco-x7-pro-5g-512gb-12gb-ram/",
+      "device": "desktop",
+      "viewport": "1707x748",
+      "language": "pt-BR",
+      "term": ""
+    },
+    {
+      "at": "2026-07-06T01:22:39.922Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/site/view/index.html",
+      "referrer": "http://localhost:3000/produto/xiaomi-poco-x7-pro-5g-512gb-12gb-ram/",
+      "device": "desktop",
+      "viewport": "1707x748",
+      "language": "pt-BR",
+      "term": ""
+    },
+    {
+      "at": "2026-07-06T11:34:45.248Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/site/view/index.html",
+      "referrer": "http://localhost:3000/produtos?saved=produto",
+      "device": "desktop",
+      "viewport": "1707x748",
+      "language": "pt-BR",
+      "term": ""
+    },
+    {
+      "at": "2026-07-06T11:34:45.259Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/site/view/index.html",
+      "referrer": "http://localhost:3000/produtos?saved=produto",
+      "device": "desktop",
+      "viewport": "1707x748",
+      "language": "pt-BR",
+      "term": ""
+    },
+    {
+      "at": "2026-07-06T11:34:46.756Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/acessorios/",
+      "referrer": "http://localhost:3000/site/view/index.html",
+      "device": "desktop",
+      "viewport": "1707x748",
+      "language": "pt-BR",
+      "term": ""
+    },
+    {
+      "at": "2026-07-06T11:34:46.762Z",
+      "type": "category_view",
+      "url": "http://localhost:3000/acessorios/",
+      "referrer": "http://localhost:3000/site/view/index.html",
+      "device": "desktop",
+      "viewport": "1707x748",
+      "language": "pt-BR",
+      "category": {
+        "slug": "acessorios",
+        "name": "Categoria"
+      },
+      "term": ""
+    },
+    {
+      "at": "2026-07-06T11:34:46.768Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/acessorios/",
+      "referrer": "http://localhost:3000/site/view/index.html",
+      "device": "desktop",
+      "viewport": "1707x748",
+      "language": "pt-BR",
+      "term": ""
+    },
+    {
+      "at": "2026-07-06T11:34:46.773Z",
+      "type": "category_view",
+      "url": "http://localhost:3000/acessorios/",
+      "referrer": "http://localhost:3000/site/view/index.html",
+      "device": "desktop",
+      "viewport": "1707x748",
+      "language": "pt-BR",
+      "category": {
+        "slug": "acessorios",
+        "name": "acessorios"
+      },
+      "term": ""
+    },
+    {
+      "at": "2026-07-06T11:35:00.292Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/smartphones/",
+      "referrer": "http://localhost:3000/acessorios/",
+      "device": "desktop",
+      "viewport": "1707x748",
+      "language": "pt-BR",
+      "term": ""
+    },
+    {
+      "at": "2026-07-06T11:35:00.304Z",
+      "type": "category_view",
+      "url": "http://localhost:3000/smartphones/",
+      "referrer": "http://localhost:3000/acessorios/",
+      "device": "desktop",
+      "viewport": "1707x748",
+      "language": "pt-BR",
+      "category": {
+        "slug": "smartphones",
+        "name": "Categoria"
+      },
+      "term": ""
+    },
+    {
+      "at": "2026-07-06T11:35:00.311Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/smartphones/",
+      "referrer": "http://localhost:3000/acessorios/",
+      "device": "desktop",
+      "viewport": "1707x748",
+      "language": "pt-BR",
+      "term": ""
+    },
+    {
+      "at": "2026-07-06T11:35:00.318Z",
+      "type": "category_view",
+      "url": "http://localhost:3000/smartphones/",
+      "referrer": "http://localhost:3000/acessorios/",
+      "device": "desktop",
+      "viewport": "1707x748",
+      "language": "pt-BR",
+      "category": {
+        "slug": "smartphones",
+        "name": "smartphones"
+      },
+      "term": ""
+    }
+  ]
+}

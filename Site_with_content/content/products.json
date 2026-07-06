@@ -1927,6 +1927,41 @@
         "combinationsText": ""
       },
       "id": 1783102892175
+    },
+    {
+      "name": "Chip Vivo Pré Pago",
+      "slug": "chip-vivo-pre-pago",
+      "price": null,
+      "stock": null,
+      "image": "images/Chip_vivo.jpeg",
+      "gallery": [],
+      "category": "acessorios",
+      "tags": [],
+      "relatedManualIds": [],
+      "crossSellIds": [],
+      "showPrice": false,
+      "featured": false,
+      "active": true,
+      "detailsEnabled": true,
+      "showVariationsOnCard": false,
+      "descriptionShort": "Chip Vivo Pré Pago: Conecte-se com planos flexíveis e bônus exclusivos. A qualidade da rede Vivo na palma da sua mão para você falar e navegar sem preocupações.",
+      "descriptionLong": "<p><strong>Chip Vivo Pré Pago</strong> oferece conectividade confiável e planos flexíveis para você controlar seus gastos. Ideal para quem busca liberdade para falar e navegar, com a qualidade e cobertura da rede Vivo.</p><ul><li><strong>Operadora:</strong> Vivo</li><li><b>Formato:</b> Triplo corte (Ajustável em tamanho Mini, Micro e Nano Chip, compatível com qualquer celular)</li><li><strong>Tipo:</strong> Chip Pré Pago</li><li><strong>Cobertura:</strong> Nacional (verificar área de cobertura específica)</li><li><strong>Tecnologia:</strong> Compatível com redes 3G, 4G e 5G&nbsp;<br><br><br></li></ul>",
+      "variations": {
+        "enabled": false,
+        "colors": [],
+        "storage": [],
+        "ram": [],
+        "condition": [],
+        "combinations": [],
+        "labels": {},
+        "colorsText": "",
+        "storageText": "",
+        "ramText": "",
+        "conditionText": "",
+        "labelsText": "{}",
+        "combinationsText": ""
+      },
+      "id": 1783337681331
     }
   ]
 }

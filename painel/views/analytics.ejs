@@ -1,0 +1,12 @@
+<div class="row">
+  <div class="card" style="grid-column:1/-1">
+    <h2>📊 Inteligência da Loja</h2>
+    <p class="muted">Atualiza automaticamente a cada segundo. Registra visualizações, favoritos, WhatsApp, buscas e categorias.</p>
+    <div id="analytics-live-full"></div>
+    <form method="post" action="/analytics/reset" onsubmit="return confirm('Zerar todos os dados do analytics?')" style="margin-top:14px">
+      <button class="btn secondary" type="submit">🧹 Zerar analytics</button>
+    </form>
+  </div>
+</div>
+<script src="/public/js/analytics-live-card.js"></script>
+<script>window.QualityAnalyticsFullPage=true;</script>

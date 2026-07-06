@@ -1,7 +1,180 @@
-<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>Sorteio Quality</title><style>
-*{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#020617;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial;color:#fff}.stage{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:radial-gradient(circle at 50% -8%,rgba(250,204,21,.45),transparent 28%),radial-gradient(circle at 18% 27%,rgba(22,163,74,.50),transparent 32%),radial-gradient(circle at 82% 30%,rgba(220,38,38,.42),transparent 30%),linear-gradient(180deg,#062b16 0%,#03160b 54%,#020617 100%)}.stage:before{content:"";position:absolute;inset:0;background-image:radial-gradient(circle,rgba(255,255,255,.18) 1px,transparent 2px);background-size:32px 32px;opacity:.48}.light{position:absolute;top:-18%;width:42%;height:55%;background:radial-gradient(ellipse at top,rgba(255,255,255,.38),rgba(250,204,21,.10) 35%,transparent 68%);filter:blur(1px)}.light.l{left:-7%;transform:rotate(18deg)}.light.r{right:-7%;transform:rotate(-18deg)}.field{position:absolute;left:-22%;right:-22%;bottom:-9%;height:42%;background:radial-gradient(ellipse at center,rgba(34,197,94,.48),transparent 54%),linear-gradient(180deg,transparent,#06110a 68%)}.cupShadow{position:absolute;top:5.5vh;font-size:min(22vw,125px);filter:drop-shadow(0 18px 30px rgba(0,0,0,.5));opacity:.95}.card{position:relative;z-index:2;width:min(92vw,520px);height:min(91vh,960px);border:1px solid rgba(255,255,255,.22);border-radius:36px;padding:24px 18px 18px;background:linear-gradient(180deg,rgba(0,0,0,.50),rgba(0,0,0,.23));box-shadow:0 30px 120px rgba(0,0,0,.62);display:flex;flex-direction:column;align-items:center;text-align:center;overflow:hidden}.card:before{content:"";position:absolute;inset:0;background:linear-gradient(115deg,transparent 0 42%,rgba(255,255,255,.08) 50%,transparent 58%);transform:translateX(-90%);animation:shine 4.8s ease-in-out infinite}@keyframes shine{55%,100%{transform:translateX(90%)}}.logo{width:104px;background:#fff;border-radius:12px;padding:8px;margin:0 0 12px;box-shadow:0 12px 30px rgba(0,0,0,.24)}.tag{font-size:12px;letter-spacing:.20em;color:#fde68a;font-weight:1000;text-transform:uppercase}.title{font-size:min(10vw,46px);line-height:.94;margin:7px 0 4px;font-weight:1000;text-transform:uppercase;text-shadow:0 5px 22px rgba(0,0,0,.58)}.sub{font-size:13px;color:#bbf7d0;font-weight:900}.flags{display:flex;align-items:center;justify-content:center;gap:10px;margin:14px 0 10px}.flagbox{background:rgba(255,255,255,.10);border:1px solid rgba(255,255,255,.18);border-radius:12px;padding:8px 10px;font-weight:1000;display:flex;align-items:center;gap:7px}.versus{font-size:30px;color:#facc15;font-weight:1000}.meta{color:#dcfce7;font-size:13px;margin-bottom:10px}.prize{width:100%;background:rgba(255,255,255,.10);border:1px solid rgba(255,255,255,.18);border-radius:18px;padding:12px 10px;margin-bottom:13px;font-weight:900;color:#fff7ed}.prize small{display:block;color:#fde68a;margin-bottom:3px}.nameBox{width:100%;margin:auto 0 12px;background:linear-gradient(90deg,#fff,#fff4b7);color:#0f172a;border-radius:22px;padding:20px 10px;box-shadow:0 16px 45px rgba(0,0,0,.28);position:relative;z-index:3}.label{font-size:12px;color:#64748b;font-weight:1000;letter-spacing:.08em}.name{font-size:min(8vw,35px);line-height:1.08;font-weight:1000;word-break:break-word}.count{font-size:94px;line-height:1;font-weight:1000;color:#facc15;text-shadow:0 10px 40px rgba(0,0,0,.75);display:none;margin:auto 0}.participants{border:1px solid rgba(255,255,255,.20);background:rgba(0,0,0,.22);border-radius:14px;padding:8px 28px;margin-bottom:11px}.participants b{font-size:28px}.btns{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;position:relative;z-index:4}.btn{border:0;border-radius:999px;padding:13px 18px;font-size:15px;font-weight:1000;background:linear-gradient(135deg,#facc15,#f59e0b);color:#111827;box-shadow:0 14px 25px rgba(0,0,0,.28)}.btn.secondary{background:rgba(255,255,255,.18);color:#fff}.foot{position:relative;z-index:2;width:100%;display:flex;justify-content:space-between;gap:10px;font-size:10.5px;font-weight:900;color:rgba(255,255,255,.86);margin-top:10px}.confetti{position:absolute;inset:0;pointer-events:none;overflow:hidden;z-index:10}.confetti i{position:absolute;width:7px;height:13px;background:#facc15;top:-20px;animation:fall 2.9s linear forwards}.confetti i:nth-child(3n){background:#22c55e}.confetti i:nth-child(4n){background:#fff}.confetti i:nth-child(5n){background:#ef4444}@keyframes fall{to{transform:translateY(110vh) rotate(640deg)}}.hide{display:none!important}@media(orientation:landscape){.card{height:90vh;width:min(92vw,860px);padding:18px}.logo{width:82px}.title{font-size:38px}.flags{margin:8px 0}.name{font-size:38px}.prize{padding:9px}.participants{display:none}.foot{position:absolute;left:20px;right:20px;bottom:12px;width:auto}}
-</style></head><body><div class="stage"><div class="light l"></div><div class="light r"></div><div class="field"></div><div class="cupShadow">🏆</div><div class="confetti" id="confetti"></div><main class="card"><img class="logo" src="/public/LogoSemFundo.png"><div class="tag">Copa do Mundo FIFA 2026</div><h1 class="title"><%= data.campanha %></h1><div class="sub">Sorteio Oficial Quality</div><div class="flags"><div class="flagbox"><span>🇧🇷</span><span>Brasil</span></div><span class="versus">X</span><div class="flagbox"><span>🇳🇴</span><span>Noruega</span></div></div><div class="meta"><%= data.jogo %></div><div class="prize"><small>🎁 PRÊMIO</small><%= data.premio %></div><div class="participants"><b><%= data.participantes.length %></b><br><small>participante(s)</small></div><div id="count" class="count">3</div><div id="nameBox" class="nameBox"><div class="label">VENCEDOR(A)</div><div id="name" class="name">Toque em iniciar</div></div><div class="btns" id="btns"><button class="btn" onclick="start()">▶️ Iniciar sorteio</button><button class="btn secondary" onclick="full()">Tela cheia</button></div><div class="foot"><span>Quality Celulares</span><span>www.qualitycel.com.br</span></div></main></div><script>
-const participantes=<%- JSON.stringify(data.participantes || []) %>; const vencedor=<%- JSON.stringify(data.vencedor || null) %>; const nomes=participantes.map(p=>p.usuario||p.nome).filter(Boolean); const finalName=(vencedor&&(vencedor.usuario||vencedor.nome))||nomes[Math.floor(Math.random()*nomes.length)]||'Vencedor';
-function full(){document.documentElement.requestFullscreen?.().catch(()=>{});}function confetti(){const c=document.getElementById('confetti'); c.innerHTML=''; for(let i=0;i<130;i++){const e=document.createElement('i'); e.style.left=Math.random()*100+'%'; e.style.animationDelay=Math.random()*1.15+'s'; e.style.transform='rotate('+Math.random()*180+'deg)'; c.appendChild(e);} setTimeout(()=>c.innerHTML='',5200)}
-function start(){full(); const count=document.getElementById('count'), name=document.getElementById('name'), box=document.getElementById('nameBox'), btns=document.getElementById('btns'); btns.classList.add('hide'); let c=3; count.style.display='block'; box.style.display='none'; count.textContent=c; const cd=setInterval(()=>{c--; if(c>0){count.textContent=c}else{clearInterval(cd); count.style.display='none'; box.style.display='block'; let i=0,total=64; const timer=setInterval(()=>{name.textContent=nomes[i%nomes.length]||finalName; i++; if(i>total){clearInterval(timer); name.textContent='🎉 '+finalName; confetti();}},50+Math.min(i*4,155));}},820)}
-</script></body></html>
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,viewport-fit=cover">
+<title>Sorteio Quality</title>
+<style>
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;width:100%;height:100%;background:#020617;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;color:#fff;overflow:hidden}
+body{background:radial-gradient(circle at 50% -12%,rgba(250,204,21,.38),transparent 25%),linear-gradient(180deg,#063514 0%,#03170b 55%,#020617 100%)}
+.stage{position:relative;width:100%;height:100svh;display:flex;align-items:center;justify-content:center;padding:calc(env(safe-area-inset-top) + 8px) 10px calc(env(safe-area-inset-bottom) + 8px);overflow:hidden}
+.stage:before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at 50% 9%,rgba(255,255,255,.24),transparent 25%),radial-gradient(circle at 12% 18%,rgba(22,163,74,.48),transparent 28%),radial-gradient(circle at 88% 23%,rgba(250,204,21,.24),transparent 30%),linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px);background-size:auto,auto,auto,34px 34px,34px 34px}
+.stage:after{content:"";position:absolute;left:-15%;right:-15%;bottom:-8%;height:38%;background:radial-gradient(ellipse at center,rgba(34,197,94,.55),transparent 58%),linear-gradient(180deg,transparent,#020b05 70%)}
+.stadium{position:absolute;left:-10%;right:-10%;top:5%;height:22%;border-radius:50%;background:radial-gradient(ellipse at center,rgba(255,255,255,.32),rgba(255,255,255,.07) 14%,transparent 63%);opacity:.58}
+.stadium:before,.stadium:after{content:"";position:absolute;top:46%;width:44%;height:5px;border-radius:999px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.82),transparent);box-shadow:0 0 26px rgba(255,255,255,.65)}
+.stadium:before{left:2%;transform:rotate(-8deg)}.stadium:after{right:2%;transform:rotate(8deg)}
+.confetti{position:absolute;inset:0;z-index:80;pointer-events:none;overflow:hidden}.confetti i{position:absolute;top:-28px;width:8px;height:14px;border-radius:2px;background:#facc15;animation:fall 3.2s linear forwards}.confetti i:nth-child(3n){background:#22c55e}.confetti i:nth-child(4n){background:#fff}.confetti i:nth-child(5n){background:#ef4444}.confetti i:nth-child(6n){background:#2563eb}@keyframes fall{to{transform:translateY(112vh) rotate(780deg)}}
+.card{position:relative;z-index:2;width:min(94vw,500px);height:min(97svh,880px);border:1px solid rgba(255,255,255,.26);border-radius:28px;padding:13px 14px 12px;background:linear-gradient(180deg,rgba(2,28,13,.76),rgba(0,0,0,.46));box-shadow:0 30px 105px rgba(0,0,0,.72),inset 0 1px 0 rgba(255,255,255,.12);display:flex;flex-direction:column;align-items:center;text-align:center;overflow:hidden;backdrop-filter:blur(4px)}
+.card:before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 50% 5%,rgba(250,204,21,.20),transparent 22%),linear-gradient(112deg,transparent 0 38%,rgba(255,255,255,.10) 48%,transparent 58%);transform:translateX(-110%);animation:shine 5.2s ease-in-out infinite;pointer-events:none}@keyframes shine{55%,100%{transform:translateX(110%)}}
+.card.reveal{animation:revealShake .7s ease both}@keyframes revealShake{0%,100%{transform:scale(1)}18%{transform:scale(1.018) rotate(-.45deg)}38%{transform:scale(1.012) rotate(.45deg)}62%{transform:scale(1.02)}}
+.logo{position:absolute;z-index:5;top:13px;left:15px;width:min(29vw,125px);height:auto;filter:drop-shadow(0 8px 15px rgba(0,0,0,.68))}
+.badge{position:absolute;z-index:5;top:13px;right:14px;border:1.5px solid rgba(250,204,21,.78);border-radius:15px;padding:7px 10px;color:#fde68a;font-weight:1000;line-height:1.03;font-size:clamp(12px,3vw,16px);text-transform:uppercase;background:rgba(0,0,0,.22);box-shadow:0 10px 22px rgba(0,0,0,.24)}
+.trophy{position:relative;z-index:2;font-size:clamp(48px,13vw,78px);line-height:1;margin-top:clamp(42px,8svh,64px);filter:drop-shadow(0 16px 28px rgba(0,0,0,.65)) drop-shadow(0 0 20px rgba(250,204,21,.43));animation:trophyPulse 2.3s ease-in-out infinite}@keyframes trophyPulse{50%{transform:translateY(-3px) scale(1.035)}}
+.tag{position:relative;z-index:3;margin-top:3px;font-size:clamp(10px,2.45vw,14px);letter-spacing:.21em;color:#fde68a;font-weight:1000;text-transform:uppercase;text-shadow:0 3px 12px rgba(0,0,0,.74)}
+.title{position:relative;z-index:3;font-size:clamp(33px,8.9vw,52px);line-height:.92;margin:6px 0 3px;font-weight:1000;text-transform:uppercase;color:#facc15;text-shadow:0 3px 0 #7f1d1d,0 9px 24px rgba(0,0,0,.72)}
+.title .white{display:block;color:#fff;text-shadow:0 4px 0 rgba(0,0,0,.38),0 10px 28px rgba(0,0,0,.68)}
+.sub{position:relative;z-index:3;font-size:clamp(12px,2.95vw,16px);color:#bbf7d0;font-weight:1000;margin-top:1px}
+.flags{position:relative;z-index:3;display:flex;align-items:center;justify-content:center;gap:8px;margin:10px 0 6px;width:100%}.flagbox{min-width:0;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.22);border-radius:15px;padding:8px 10px;font-weight:1000;display:flex;align-items:center;justify-content:center;gap:7px;box-shadow:inset 0 1px 0 rgba(255,255,255,.12);font-size:clamp(14px,3.9vw,20px);text-transform:uppercase;flex:1;max-width:198px}.versus{font-size:clamp(30px,6.5vw,39px);color:#facc15;font-weight:1000;text-shadow:0 3px 14px rgba(0,0,0,.7)}
+.score{position:relative;z-index:3;color:#facc15;font-size:clamp(13px,3.35vw,19px);font-weight:1000;margin-bottom:8px;text-transform:uppercase;text-shadow:0 4px 12px rgba(0,0,0,.55)}
+.prize{position:relative;z-index:3;width:100%;border:1.4px solid rgba(34,197,94,.70);background:linear-gradient(180deg,rgba(0,0,0,.25),rgba(0,0,0,.16));border-radius:20px;padding:9px 9px 8px;margin-bottom:8px;box-shadow:0 13px 34px rgba(0,0,0,.28),inset 0 1px 0 rgba(255,255,255,.07)}
+.prize small{display:block;color:#fde68a;margin-bottom:3px;letter-spacing:.04em;font-size:clamp(13px,3vw,18px);font-weight:1000}.prizeText{font-size:clamp(16px,3.9vw,23px);line-height:1.12;font-weight:1000;color:#fff;text-shadow:0 3px 12px rgba(0,0,0,.75)}
+.products{height:clamp(74px,14.5svh,135px);display:flex;justify-content:center;align-items:flex-end;gap:clamp(7px,2.8vw,22px);margin-top:5px}.prodAlbum{height:100%;max-width:46%;object-fit:contain;filter:drop-shadow(0 17px 18px rgba(0,0,0,.48))}.prodPack{height:74%;max-width:48%;object-fit:contain;filter:drop-shadow(0 15px 17px rgba(0,0,0,.48))}
+.participants{position:relative;z-index:3;border:1px solid rgba(34,197,94,.65);background:linear-gradient(180deg,rgba(22,163,74,.65),rgba(21,128,61,.38));border-radius:16px;padding:6px 24px;margin-bottom:8px;min-width:190px;box-shadow:0 14px 30px rgba(0,0,0,.26)}.participants b{font-size:clamp(30px,7vw,42px);line-height:1}.participants small{color:#e2e8f0;font-size:clamp(12px,2.8vw,16px);font-weight:900}
+.nameBox{position:relative;z-index:4;width:100%;margin:auto 0 8px;background:linear-gradient(90deg,#fff,#fff2a8);color:#0f172a;border:2px solid rgba(255,255,255,.82);border-radius:22px;padding:15px 10px;box-shadow:0 18px 48px rgba(0,0,0,.36);cursor:pointer;overflow:hidden}.nameBox:after{content:"";position:absolute;inset:-1px;background:linear-gradient(100deg,transparent 0 35%,rgba(250,204,21,.34) 48%,transparent 63%);transform:translateX(-120%)}.nameBox.winner:after{animation:winnerShine 1.35s ease-in-out 2}@keyframes winnerShine{to{transform:translateX(120%)}}
+.label{font-size:clamp(11px,2.55vw,14px);color:#64748b;font-weight:1000;letter-spacing:.16em;text-transform:uppercase}.name{font-size:clamp(28px,7.4vw,44px);line-height:1.02;font-weight:1000;word-break:break-word}.count{font-size:clamp(80px,22vw,118px);line-height:1;font-weight:1000;color:#facc15;text-shadow:0 12px 45px rgba(0,0,0,.82),0 0 24px rgba(250,204,21,.5);display:none;margin:auto 0 10px;animation:countPop .62s ease infinite}@keyframes countPop{50%{transform:scale(1.08)}}.rolling{animation:pulse .12s alternate infinite}@keyframes pulse{to{transform:scale(1.023)}}
+.startBtn{position:relative;z-index:5;width:100%;border:0;border-radius:19px;padding:15px 14px;margin-top:1px;background:linear-gradient(180deg,#fff176 0%,#fde047 42%,#f59e0b 100%);color:#111827;font-size:clamp(19px,4.9vw,30px);font-weight:1000;text-transform:uppercase;box-shadow:0 18px 34px rgba(0,0,0,.38),inset 0 1px 0 rgba(255,255,255,.62);cursor:pointer;display:flex;align-items:center;justify-content:center;gap:12px;overflow:hidden}.startBtn:before{content:"";position:absolute;inset:0;background:linear-gradient(110deg,transparent 0 35%,rgba(255,255,255,.48) 50%,transparent 65%);transform:translateX(-120%);animation:btnShine 2.4s ease-in-out infinite}@keyframes btnShine{70%,100%{transform:translateX(120%)}}.startBtn:active{transform:scale(.985)}
+.site{position:relative;z-index:5;color:#facc15;text-shadow:0 2px 12px rgba(0,0,0,.8);font-size:clamp(12px,3vw,17px);font-weight:1000;margin-top:7px}.hide{display:none!important}
+@media(max-height:760px){.card{padding:10px 12px;border-radius:25px}.logo{width:108px;top:12px;left:13px}.badge{font-size:11px;padding:6px 8px}.trophy{font-size:52px;margin-top:39px}.tag{font-size:9px;margin-top:2px}.title{font-size:31px;margin:4px 0 2px}.sub{font-size:12px}.flags{margin:7px 0 5px}.flagbox{font-size:13px;padding:7px 8px}.versus{font-size:30px}.score{font-size:12px;margin-bottom:6px}.prize{padding:7px;margin-bottom:6px}.prize small{font-size:12px}.prizeText{font-size:15px}.products{height:68px;margin-top:3px}.participants{padding:5px 20px;margin-bottom:6px}.participants b{font-size:27px}.participants small{font-size:12px}.nameBox{padding:12px 8px;border-radius:18px}.name{font-size:27px}.startBtn{padding:12px 10px;font-size:18px}.site{font-size:12px;margin-top:5px}}
+@media(max-height:650px){.products{display:none}.participants{display:none}.trophy{font-size:46px;margin-top:35px}.title{font-size:28px}.nameBox{margin-top:5px}.startBtn{font-size:17px;padding:11px 10px}.site{margin-top:5px}}
+</style>
+</head>
+<body>
+<div class="stage">
+  <div class="stadium"></div>
+  <div class="confetti" id="confetti"></div>
+  <main class="card" id="card">
+    <img class="logo" src="/public/img/sorteios/quality-logo-transparente.png" alt="Quality Celulares">
+    <div class="badge">Copa do<br>Mundo<br>2026</div>
+    <div class="trophy">🏆</div>
+    <div class="tag">Copa do Mundo FIFA 2026</div>
+    <h1 class="title">Palpite Premiado <span class="white"><%= data.jogo || 'Brasil x Noruega' %></span></h1>
+    <div class="sub">Sorteio Oficial Quality</div>
+    <div class="flags">
+      <div class="flagbox"><span><%= data.flagA || '🇧🇷' %></span><span><%= data.timeA || 'Brasil' %></span></div>
+      <span class="versus">X</span>
+      <div class="flagbox"><span><%= data.flagB || '🇳🇴' %></span><span><%= data.timeB || 'Noruega' %></span></div>
+    </div>
+    <div class="score"><%= (data.placarCorreto || 'Brasil 2 x 1 Noruega') %></div>
+    <section class="prize">
+      <small>🎁 PRÊMIO</small>
+      <div class="prizeText"><%= data.premio || 'Álbum da Copa Capa Dura + 1 pacote de figurinhas' %></div>
+      <div class="products">
+        <img class="prodAlbum" src="/public/img/sorteios/album-copa-capa-dura.png" alt="Álbum da Copa Capa Dura">
+        <img class="prodPack" src="/public/img/sorteios/pacote-figurinhas.png" alt="Pacote de figurinhas">
+      </div>
+    </section>
+    <div class="participants"><b id="qtde"><%= (data.participantes || []).length %></b><br><small>participante(s)</small></div>
+    <div id="count" class="count">3</div>
+    <div id="nameBox" class="nameBox"><div class="label" id="label">VENCEDOR(A)</div><div id="name" class="name">Toque em iniciar</div></div>
+    <button class="startBtn" id="startBtn" type="button"><span>🏆</span><span>Iniciar Sorteio</span><span>→</span></button>
+    <div class="site">www.qualitycel.com.br</div>
+  </main>
+</div>
+<script>
+(function(){
+  const participantes = <%- JSON.stringify(data.participantes || []) %>;
+  const nomes = participantes.map(p => p.usuario || p.nome || p.name).filter(Boolean);
+  let ultimoVencedor = null;
+  let sorteando = false;
+
+  function pickWinner(){
+    if(!nomes.length) return 'Sem participantes';
+    if(nomes.length === 1){ ultimoVencedor = nomes[0]; return nomes[0]; }
+    let escolhido = nomes[Math.floor(Math.random() * nomes.length)];
+    let tentativas = 0;
+    while(escolhido === ultimoVencedor && tentativas < 30){
+      escolhido = nomes[Math.floor(Math.random() * nomes.length)];
+      tentativas++;
+    }
+    ultimoVencedor = escolhido;
+    return escolhido;
+  }
+
+  function confetti(){
+    const c = document.getElementById('confetti');
+    c.innerHTML = '';
+    for(let i = 0; i < 220; i++){
+      const e = document.createElement('i');
+      e.style.left = (Math.random() * 100) + '%';
+      e.style.animationDelay = (Math.random() * 0.9) + 's';
+      e.style.animationDuration = (2.4 + Math.random() * 1.5) + 's';
+      e.style.transform = 'rotate(' + (Math.random() * 180) + 'deg)';
+      c.appendChild(e);
+    }
+    setTimeout(() => { c.innerHTML = ''; }, 5200);
+  }
+
+  function start(){
+    if(sorteando) return;
+    sorteando = true;
+    try { document.documentElement.requestFullscreen?.(); } catch(e) {}
+
+    const finalName = pickWinner();
+    const count = document.getElementById('count');
+    const name = document.getElementById('name');
+    const box = document.getElementById('nameBox');
+    const label = document.getElementById('label');
+    const btn = document.getElementById('startBtn');
+    const card = document.getElementById('card');
+
+    btn.classList.add('hide');
+    box.classList.remove('winner');
+    card.classList.remove('reveal');
+    label.textContent = 'SORTEANDO...';
+    box.style.display = 'none';
+    count.style.display = 'block';
+
+    let c = 3;
+    count.textContent = c;
+    const cd = setInterval(() => {
+      c--;
+      if(c > 0){
+        count.textContent = c;
+        return;
+      }
+      clearInterval(cd);
+      count.style.display = 'none';
+      box.style.display = 'block';
+      box.classList.add('rolling');
+
+      const inicio = Date.now();
+      const duracao = 4100;
+      let i = Math.floor(Math.random() * Math.max(1, nomes.length));
+      function rolar(){
+        const progresso = Math.min(1, (Date.now() - inicio) / duracao);
+        const delay = 28 + Math.round(Math.pow(progresso, 2.4) * 210);
+        name.textContent = nomes.length ? nomes[i % nomes.length] : finalName;
+        i++;
+        if(progresso < 1){
+          setTimeout(rolar, delay);
+        }else{
+          box.classList.remove('rolling');
+          box.classList.add('winner');
+          card.classList.add('reveal');
+          label.textContent = 'VENCEDOR(A)';
+          name.textContent = '🎉 ' + finalName;
+          confetti();
+          btn.querySelectorAll('span')[1].textContent = 'Sortear novamente';
+          setTimeout(() => {
+            btn.classList.remove('hide');
+            sorteando = false;
+          }, 700);
+        }
+      }
+      rolar();
+    }, 650);
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    const btn = document.getElementById('startBtn');
+    const box = document.getElementById('nameBox');
+    btn.addEventListener('click', start);
+    btn.addEventListener('touchend', function(e){ e.preventDefault(); start(); }, {passive:false});
+    box.addEventListener('click', start);
+    box.addEventListener('touchend', function(e){ e.preventDefault(); start(); }, {passive:false});
+  });
+})();
+</script>
+</body>
+</html>
