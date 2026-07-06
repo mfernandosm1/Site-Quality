@@ -195,7 +195,31 @@ function categoryOgImage(cat){
   const raw = String(cat?.ogImage || cat?.og_image || cat?.seoImage || '').trim();
   if (!raw) return `${SITE_URL}/images/logo.png`;
   if (/^https?:\/\//i.test(raw)) return raw;
-  return `${SITE_URL}/${raw.replace(/^\/+/, '')}`;
+
+  // Aceita caminho digitado no painel de várias formas:
+  // images/banner.png
+  // /images/banner.png
+  // categoria-smartphones.png
+  // C:\Site\Site_with_content\images\categoria-smartphones.png
+  let clean = raw.replace(/\\/g, '/').trim();
+
+  const marker = '/Site_with_content/';
+  const markerIndex = clean.toLowerCase().indexOf(marker.toLowerCase());
+  if (markerIndex >= 0) {
+    clean = clean.slice(markerIndex + marker.length);
+  }
+
+  clean = clean.replace(/^\/+/, '');
+
+  if (!clean.includes('/')) {
+    clean = `images/${clean}`;
+  }
+
+  if (!/^images\//i.test(clean) && !/^content\//i.test(clean) && !/^uploads\//i.test(clean)) {
+    clean = `images/${clean.replace(/^\/+/, '')}`;
+  }
+
+  return `${SITE_URL}/${clean}`;
 }
 
 function patchMetaTag(html, selectorRegex, tagHtml){
