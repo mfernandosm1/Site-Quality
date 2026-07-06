@@ -193,6 +193,7 @@ function showSearchMessage(text) {
 
 function doSearch(query) {
   const termo = normalizeSearch(query);
+  if (termo && window.QualityAnalyticsTrack) window.QualityAnalyticsTrack("search", { term: termo });
   const productsOnPage = document.querySelectorAll(".product-card");
   const noResults = document.getElementById("no-results");
 
@@ -276,3 +277,160 @@ function initSwiper() {
     effect: "slide",
   });
 }
+
+
+/* =========================================================
+   Quality V8.3.2 - Analytics Lite (coleta real no site)
+   Registra: páginas, categorias, produtos, favoritos,
+   WhatsApp, compartilhar e buscas.
+========================================================= */
+(function(){
+  if (window.__qualityAnalyticsLiteReady) return;
+  window.__qualityAnalyticsLiteReady = true;
+
+  const TRACK_URL = '/analytics/track';
+  const sentOnce = new Set();
+
+  function safeText(value, max){
+    return String(value || '').trim().slice(0, max || 180);
+  }
+
+  function normalizeSlug(value){
+    return safeText(value, 140)
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, '')
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, '-')
+      .replace(/^-+|-+$/g, '');
+  }
+
+  function getDevice(){
+    const w = window.innerWidth || 0;
+    if (w <= 767) return 'mobile';
+    if (w <= 1024) return 'tablet';
+    return 'desktop';
+  }
+
+  function basePayload(extra){
+    return Object.assign({
+      url: window.location.href,
+      referrer: document.referrer || '',
+      device: getDevice(),
+      viewport: (window.innerWidth || 0) + 'x' + (window.innerHeight || 0),
+      language: navigator.language || ''
+    }, extra || {});
+  }
+
+  function track(type, payload, options){
+    try {
+      if (!type) return;
+      const body = basePayload(Object.assign({ type }, payload || {}));
+      const dedupeKey = options && options.once ? type + ':' + JSON.stringify(payload || {}) : '';
+      if (dedupeKey) {
+        if (sentOnce.has(dedupeKey)) return;
+        sentOnce.add(dedupeKey);
+      }
+
+      fetch(TRACK_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(body),
+        keepalive: true
+      }).catch(function(){});
+    } catch (_) {}
+  }
+
+  window.QualityAnalyticsTrack = track;
+
+  function productFromElement(el){
+    const holder = el && el.closest ? (el.closest('[data-quality-fav], [data-quality-share], .produto-card, .product-card, .quality-product-card, #produto-detalhe, .produto-info') || el) : document;
+    const btn = el && el.getAttribute ? el : null;
+    const slug =
+      btn?.getAttribute('data-slug') ||
+      holder?.getAttribute?.('data-slug') ||
+      normalizeSlug((window.location.pathname.match(/\/produto\/([^/]+)/) || [])[1] || '');
+    const id =
+      btn?.getAttribute('data-id') ||
+      holder?.getAttribute?.('data-id') ||
+      slug;
+    const name =
+      btn?.getAttribute('data-name') ||
+      holder?.getAttribute?.('data-name') ||
+      holder?.querySelector?.('h1,h2,h3')?.textContent ||
+      document.querySelector('#produto-detalhe h1, .produto-info h1, h1, h3')?.textContent ||
+      slug ||
+      'Produto';
+    const image =
+      btn?.getAttribute('data-image') ||
+      holder?.getAttribute?.('data-image') ||
+      holder?.querySelector?.('img')?.getAttribute('src') ||
+      document.querySelector('#produto-detalhe img, .produto-card img, .product-card img')?.getAttribute('src') ||
+      '';
+    const url =
+      btn?.getAttribute('data-url') ||
+      holder?.getAttribute?.('data-url') ||
+      (slug ? ('/produto/' + encodeURIComponent(slug) + '/') : window.location.href);
+
+    return { id: safeText(id,120), slug: safeText(slug || id,120), name: safeText(name,140), image: safeText(image,260), url: safeText(url,300) };
+  }
+
+  function detectInitialPage(){
+    const path = window.location.pathname;
+
+    track('page_view', {}, { once: true });
+
+    const productMatch = path.match(/\/produto\/([^/]+)/);
+    if (productMatch) {
+      setTimeout(function(){
+        const product = productFromElement(document.querySelector('#produto-detalhe') || document.body);
+        product.slug = product.slug || normalizeSlug(productMatch[1]);
+        track('product_view', { product, slug: product.slug, name: product.name }, { once: true });
+      }, 900);
+      return;
+    }
+
+    const ignored = new Set(['', 'site', 'view', 'index.html', 'header.html', 'footer.html', 'content', 'images', 'js', 'css']);
+    const clean = path.replace(/^\/+|\/+$/g, '');
+    const first = clean.split('/')[0] || '';
+    if (first && !ignored.has(first) && !path.includes('.')) {
+      const title = document.querySelector('#categoria-titulo, h1')?.textContent || first;
+      track('category_view', {
+        slug: normalizeSlug(first),
+        category: { slug: normalizeSlug(first), name: safeText(title,100), url: window.location.href }
+      }, { once: true });
+    }
+  }
+
+  document.addEventListener('click', function(ev){
+    const fav = ev.target.closest && ev.target.closest('[data-quality-fav], .quality-favorite-btn');
+    if (fav) {
+      const product = productFromElement(fav);
+      setTimeout(function(){
+        track('favorite', { product, slug: product.slug, name: product.name });
+      }, 80);
+      return;
+    }
+
+    const share = ev.target.closest && ev.target.closest('[data-quality-share], .quality-share-btn');
+    if (share) {
+      const product = productFromElement(share);
+      track('share_click', { product, slug: product.slug, name: product.name });
+      return;
+    }
+
+    const link = ev.target.closest && ev.target.closest('a[href]');
+    if (link) {
+      const href = link.getAttribute('href') || '';
+      if (/wa\.me|api\.whatsapp\.com|whatsapp/i.test(href)) {
+        const product = productFromElement(link);
+        track('whatsapp_click', { product, slug: product.slug, name: product.name });
+      }
+    }
+  }, true);
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', detectInitialPage);
+  } else {
+    detectInitialPage();
+  }
+})();
