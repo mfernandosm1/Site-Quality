@@ -1,0 +1,3 @@
+# Categorias
+
+Em construção.

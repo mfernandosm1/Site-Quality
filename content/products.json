@@ -1962,6 +1962,78 @@
         "combinationsText": ""
       },
       "id": 1783337681331
+    },
+    {
+      "name": "Capa TPU Antishock Premium, Diversos Modelos",
+      "slug": "capa-tpu-antishock-premium-diversos-modelos",
+      "price": null,
+      "stock": null,
+      "image": "images/Capa TPU Antishock Premium Samsung - Transparente-500x500.jpg",
+      "gallery": [],
+      "category": "acessorios",
+      "tags": [],
+      "relatedManualIds": [],
+      "crossSellIds": [],
+      "showPrice": false,
+      "featured": false,
+      "active": true,
+      "detailsEnabled": true,
+      "showVariationsOnCard": false,
+      "descriptionShort": "",
+      "descriptionLong": "<div>Seu material de silicone, super flexível, protege seu aparelho de quedas e arranhões com seus cantos anti shock absorvendo 90% do impacto.</div>",
+      "variations": {
+        "enabled": false,
+        "colors": [],
+        "storage": [],
+        "ram": [],
+        "condition": [],
+        "combinations": [],
+        "labels": {},
+        "colorsText": "",
+        "storageText": "",
+        "ramText": "",
+        "conditionText": "",
+        "labelsText": "{}",
+        "combinationsText": ""
+      },
+      "id": 1783429578989
+    },
+    {
+      "name": "Capa Carteira Diversos Modelos",
+      "slug": "capa-carteira-diversos-modelos",
+      "price": null,
+      "stock": null,
+      "image": "images/Book Cover PReta-500x500.jpg",
+      "gallery": [
+        "images/produtos/1783430239782-capa-carteira2.jpeg"
+      ],
+      "category": "acessorios",
+      "tags": [],
+      "relatedManualIds": [],
+      "crossSellIds": [],
+      "showPrice": false,
+      "featured": false,
+      "active": true,
+      "detailsEnabled": true,
+      "showVariationsOnCard": false,
+      "descriptionShort": "",
+      "descriptionLong": "<p>Proteja seu smartphone com estilo e praticidade. A Case Carteira possui acabamento moderno, encaixe perfeito para o aparelho e recortes precisos para câmera, botões e entradas.</p><p>✔ Fechamento magnético para maior segurança.<br>✔ Compartimentos internos para cartões.<br>✔ Proteção para tela e traseira do aparelho.<br>✔ Design elegante e funcional para o dia a dia.</p>",
+      "variations": {
+        "enabled": false,
+        "colors": [],
+        "storage": [],
+        "ram": [],
+        "condition": [],
+        "combinations": [],
+        "labels": {},
+        "colorsText": "",
+        "storageText": "",
+        "ramText": "",
+        "conditionText": "",
+        "labelsText": "{}",
+        "combinationsText": ""
+      },
+      "id": 1783430267700
     }
   ]
 }
