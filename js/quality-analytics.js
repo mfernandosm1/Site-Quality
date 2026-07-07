@@ -1,11 +1,19 @@
-/* Quality V8.3.3 - Analytics: coleta real no site
+/* Quality V8.3.5 - Analytics: coleta real no site
    Coleta silenciosa: visualizações, favoritos, WhatsApp, compartilhamento, buscas e categorias.
    Não altera layout nem comportamento do site. */
 (function(){
-  if (window.__qualityAnalyticsV833) return;
-  window.__qualityAnalyticsV833 = true;
+  if (window.__qualityAnalyticsV835) return;
+  window.__qualityAnalyticsV835 = true;
 
-  var ENDPOINT = '/analytics/track';
+  // Em localhost, usa o endpoint relativo do painel Node.
+  // No site publicado (GitHub Pages), envia para o Google Apps Script/Sheets.
+  // Pode ser sobrescrito antes deste script, se necessário:
+  // window.QUALITY_ANALYTICS_ENDPOINT = 'https://outro-endpoint/exec';
+  var DEFAULT_PUBLIC_ENDPOINT = 'https://script.google.com/macros/s/AKfycbwZQ01q5u5lRqE3Hk-nMutkTWcLA8r7127sO3Dt132Ti8L0Ci7DWoOyby5v92T_WY34/exec';
+  var IS_LOCAL = location.hostname === 'localhost' || location.hostname === '127.0.0.1';
+  var ENDPOINT = window.QUALITY_ANALYTICS_ENDPOINT || (IS_LOCAL ? '/analytics/track' : DEFAULT_PUBLIC_ENDPOINT);
+  var ANALYTICS_KEY = window.QUALITY_ANALYTICS_KEY || 'quality-analytics-v1';
+  var IS_APPS_SCRIPT = /script\.google\.com\/macros\/s\//i.test(ENDPOINT);
 
   function clean(v, max){
     return String(v == null ? '' : v).replace(/[<>]/g, '').trim().slice(0, max || 180);
@@ -71,10 +79,30 @@
 
   function send(type, data){
     try {
-      var body = JSON.stringify(payloadBase(Object.assign({ type: type }, data || {})));
+      var payload = payloadBase(Object.assign({ type: type, key: ANALYTICS_KEY }, data || {}));
+      var body = JSON.stringify(payload);
+
+      // Google Apps Script funciona melhor como requisição simples, sem preflight CORS.
+      if (IS_APPS_SCRIPT) {
+        if (navigator.sendBeacon) {
+          var blob = new Blob([body], { type: 'text/plain;charset=utf-8' });
+          if (navigator.sendBeacon(ENDPOINT, blob)) return;
+        }
+        fetch(ENDPOINT, {
+          method: 'POST',
+          mode: 'no-cors',
+          headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+          body: body,
+          keepalive: true,
+          cache: 'no-store'
+        }).catch(function(){});
+        return;
+      }
+
+      // Painel local Node/Express.
       if (navigator.sendBeacon) {
-        var blob = new Blob([body], { type: 'application/json' });
-        if (navigator.sendBeacon(ENDPOINT, blob)) return;
+        var localBlob = new Blob([body], { type: 'application/json' });
+        if (navigator.sendBeacon(ENDPOINT, localBlob)) return;
       }
       fetch(ENDPOINT, {
         method: 'POST',
@@ -97,9 +125,9 @@
     }
 
     if (slugFromPath()) {
-      // espera produto carregar por JS antes de pegar nome/imagem
-      setTimeout(function(){ send('product_view', { product: currentProduct() }); }, 700);
-      setTimeout(function(){ send('product_view', { product: currentProduct() }); }, 2200);
+      // Espera o produto carregar por JS antes de pegar nome/imagem.
+      // Apenas um disparo para evitar duplicação de product_view.
+      setTimeout(function(){ send('product_view', { product: currentProduct() }); }, 900);
     }
   }
 
