@@ -1,93 +1,88 @@
-# Analytics próprio - Plataforma Quality
+# Analytics Quality V8.4 — Dashboard profissional
 
 ## Objetivo
 
-Manter um Analytics simples, próprio e incremental para a Plataforma Quality, sem depender de reescrita do site e sem impactar o funcionamento do menu, busca, produtos ou publicação.
+Evoluir o Analytics próprio da Plataforma Quality sem reescrever a arquitetura atual.
 
-## Arquitetura atual
-
-```txt
-Site público / preview local
-  js/quality-analytics.js
-  ↓ envia eventos
-Painel Node
-  routes/analytics.js
-  ↓ grava
-content/analytics.json
-  ↓ exibe
-views/analytics.ejs
-```
-
-## Regra importante para GitHub Pages
-
-O GitHub Pages é estático. Ele não recebe `POST` nem grava arquivos. Por isso, o site publicado não consegue salvar Analytics sozinho.
-
-No localhost, o endpoint relativo funciona:
-
-```js
-/analytics/track
-```
-
-No site publicado, o endpoint precisa apontar para um backend público:
-
-```html
-<script>
-  window.QUALITY_ANALYTICS_ENDPOINT = 'https://seu-backend.com/analytics/track';
-</script>
-<script src="/js/quality-analytics.js"></script>
-```
-
-## Decisão técnica
-
-O coletor oficial do site é:
+## Arquitetura
 
 ```txt
-js/quality-analytics.js
+Site publicado no GitHub Pages
+↓
+quality-analytics.js
+↓
+Google Apps Script
+↓
+Google Sheets
+↓
+Painel local Node
+↓
+/analytics
 ```
 
-O arquivo `js/main.js` deve cuidar de comportamento geral do site, como:
+## Alterações desta versão
 
-- carregamento do header e footer;
-- menu mobile;
-- busca;
-- categorias no header;
-- carrossel Swiper.
+- Painel com aparência mais profissional.
+- Filtros por período:
+  - Hoje
+  - Últimos 7 dias
+  - Últimos 30 dias
+  - Todo período
+- KPIs principais:
+  - Produtos vistos
+  - Cliques WhatsApp
+  - Conversão WhatsApp
+  - Favoritos
+  - Buscas
+  - Categorias
+- Gráfico de evolução diária.
+- Produtos com clique no WhatsApp.
+- Conversão por produto.
+- Mais vistos.
+- Buscas dos clientes.
+- Categorias acessadas.
+- Origem do acesso.
+- Dispositivos.
+- Últimos eventos.
+- Correção do botão Zerar Analytics para limpar Google Sheets e JSON local.
 
-O bloco antigo de Analytics dentro do `main.js` foi removido para evitar eventos duplicados.
-
-## Eventos coletados
-
-- `page_view`
-- `category_view`
-- `product_view`
-- `favorite`
-- `whatsapp_click`
-- `share_click`
-- `search`
-
-## Arquivos envolvidos
+## Arquivos alterados
 
 ```txt
-Site_with_content/js/main.js
-Site_with_content/js/quality-analytics.js
 painel/routes/analytics.js
 painel/views/analytics.ejs
-Site_with_content/content/analytics.json
-docs/analytics.md
+Google Apps Script: Código.gs
 ```
 
-## Cuidados futuros
+## Observações importantes
 
-1. Não criar outro coletor de Analytics dentro do `main.js`.
-2. Antes de alterar eventos, verificar se já existe disparo em `quality-analytics.js`.
-3. Antes de publicar, testar se o endpoint configurado está acessível no domínio público.
-4. Evitar duplicação de `page_view` e `product_view`.
-5. Manter alterações pequenas e documentadas.
+O botão de zerar depende do Apps Script atualizado com suporte a:
 
-## Próximos passos recomendados
+```txt
+action: reset
+```
 
-1. Confirmar se `quality-analytics.js` é carregado em todas as páginas publicadas.
-2. Definir onde ficará o backend público do Analytics.
-3. Configurar `window.QUALITY_ANALYTICS_ENDPOINT` no site publicado.
-4. Testar eventos reais no domínio `www.qualitycel.com.br`.
-5. Verificar se `analytics.json` recebe apenas um evento por ação esperada.
+Se o Apps Script não estiver atualizado, o painel ainda zera o JSON local, mas pode não conseguir limpar a planilha.
+
+## Risco
+
+Baixo/médio.
+
+A coleta do site não foi alterada nesta etapa. A alteração fica concentrada no painel e na API do Google Sheets.
+
+## Recomendação
+
+Testar primeiro em localhost:
+
+```txt
+http://localhost:3000/analytics
+```
+
+Depois testar:
+
+```txt
+/analytics?period=today
+/analytics?period=7d
+/analytics?period=30d
+/analytics?period=all
+```

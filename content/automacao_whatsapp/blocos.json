@@ -1,0 +1,41 @@
+[
+  {
+    "id": "bloco_menu_inicial",
+    "nome": "Menu inicial",
+    "descricao": "Exemplo de bloco com texto, pausa e opções.",
+    "gatilho": "menu",
+    "ativo": true,
+    "criadoEm": "2026-07-08T18:58:37.832Z",
+    "atualizadoEm": "2026-07-08T18:58:37.832Z",
+    "etapas": [
+      {
+        "id": "etapa_mrcfy7pk_iyrsu2",
+        "tipo": "texto",
+        "texto": "Olá 😃\nEscolha uma opção:\n\n1️⃣ Smartphones\n2️⃣ Assistência",
+        "digitandoSegundos": 2
+      },
+      {
+        "id": "etapa_mrcfy7pk_sctl9x",
+        "tipo": "pausa",
+        "segundos": 3
+      },
+      {
+        "id": "etapa_mrcfy7pk_jjffz5",
+        "tipo": "opcoes",
+        "texto": "Responda com o número desejado:",
+        "opcoes": [
+          {
+            "label": "1️⃣ Smartphones",
+            "resposta": "1",
+            "proximoBloco": "Smartphones"
+          },
+          {
+            "label": "2️⃣ Assistência",
+            "resposta": "2",
+            "proximoBloco": "Assistência"
+          }
+        ]
+      }
+    ]
+  }
+]

@@ -51,6 +51,7 @@ import seoRouter from './routes/seo.js';
 import sitePreviewRouter from './routes/sitepreview.js';
 import sorteiosRouter from './routes/sorteios.js';
 import analyticsRouter from './routes/analytics.js';
+import automacaoWhatsappRouter from './routes/automacao_whatsapp.js';
 
 app.use('/', indexRouter);
 app.use('/header', headerRouter);
@@ -74,6 +75,7 @@ app.use('/estilos', estilosRouter);
 app.use('/seo', seoRouter);
 app.use('/sorteios', sorteiosRouter);
 app.use('/analytics', analyticsRouter);
+app.use('/automacao-whatsapp', automacaoWhatsappRouter);
 
 
 // ===== ASSETS DO SITE NO PREVIEW LOCAL =====

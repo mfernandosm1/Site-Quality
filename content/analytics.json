@@ -1,20 +1,127 @@
 {
-  "version": "8.3.0-analytics-lite",
-  "createdAt": "2026-07-07T23:43:34.411Z",
-  "updatedAt": "2026-07-07T23:43:34.411Z",
+  "version": "8.4.0-analytics-professional",
+  "createdAt": "2026-07-08T00:26:21.803Z",
+  "updatedAt": "2026-07-08T20:10:56.791Z",
+  "source": "local-json",
   "counters": {
     "product_view": 0,
-    "favorite": 0,
+    "favorite": 2,
     "favorite_click": 0,
     "whatsapp_click": 0,
-    "category_view": 0,
+    "category_view": 1,
     "share_click": 0,
     "search": 0,
-    "page_view": 0
+    "page_view": 3
   },
-  "products": {},
-  "categories": {},
+  "products": {
+    "mini-game-portatil-400-jogos": {
+      "slug": "mini-game-portatil-400-jogos",
+      "name": "Mini game portátil 400 jogos",
+      "image": "images/Mini game portátil 400 jogos e controle.jpg",
+      "url": "http://localhost:3000/produto/mini-game-portatil-400-jogos/",
+      "views": 0,
+      "favorites": 2,
+      "whatsapp": 0,
+      "shares": 0,
+      "lastAt": "2026-07-08T20:10:56.791Z"
+    }
+  },
+  "categories": {
+    "smartphones": {
+      "slug": "smartphones",
+      "name": "smartphones",
+      "url": "http://localhost:3000/smartphones/",
+      "views": 1,
+      "lastAt": "2026-07-08T20:10:53.245Z"
+    }
+  },
   "searches": {},
-  "pages": {},
-  "events": []
+  "pages": {
+    "http://localhost:3000/site/view/index.html": {
+      "url": "http://localhost:3000/site/view/index.html",
+      "views": 4,
+      "lastAt": "2026-07-08T20:10:56.791Z"
+    },
+    "http://localhost:3000/smartphones/": {
+      "url": "http://localhost:3000/smartphones/",
+      "views": 2,
+      "lastAt": "2026-07-08T20:10:53.245Z"
+    }
+  },
+  "devices": {},
+  "referrers": {},
+  "events": [
+    {
+      "at": "2026-07-08T20:10:51.938Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/site/view/index.html",
+      "referrer": "http://localhost:3000/categorias?saved=1",
+      "device": "desktop",
+      "viewport": "1821x798",
+      "language": "pt-PT",
+      "term": ""
+    },
+    {
+      "at": "2026-07-08T20:10:53.234Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/smartphones/",
+      "referrer": "http://localhost:3000/site/view/index.html",
+      "device": "desktop",
+      "viewport": "1821x798",
+      "language": "pt-PT",
+      "term": ""
+    },
+    {
+      "at": "2026-07-08T20:10:53.245Z",
+      "type": "category_view",
+      "url": "http://localhost:3000/smartphones/",
+      "referrer": "http://localhost:3000/site/view/index.html",
+      "device": "desktop",
+      "viewport": "1821x798",
+      "language": "pt-PT",
+      "category": {
+        "slug": "smartphones",
+        "name": "smartphones"
+      },
+      "term": ""
+    },
+    {
+      "at": "2026-07-08T20:10:54.622Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/site/view/index.html",
+      "referrer": "http://localhost:3000/smartphones/",
+      "device": "desktop",
+      "viewport": "1821x798",
+      "language": "pt-PT",
+      "term": ""
+    },
+    {
+      "at": "2026-07-08T20:10:56.410Z",
+      "type": "favorite",
+      "url": "http://localhost:3000/site/view/index.html",
+      "referrer": "http://localhost:3000/smartphones/",
+      "device": "desktop",
+      "viewport": "1821x798",
+      "language": "pt-PT",
+      "product": {
+        "slug": "mini-game-portatil-400-jogos",
+        "name": "Mini game portátil 400 jogos"
+      },
+      "term": ""
+    },
+    {
+      "at": "2026-07-08T20:10:56.791Z",
+      "type": "favorite",
+      "url": "http://localhost:3000/site/view/index.html",
+      "referrer": "http://localhost:3000/smartphones/",
+      "device": "desktop",
+      "viewport": "1821x798",
+      "language": "pt-PT",
+      "product": {
+        "slug": "mini-game-portatil-400-jogos",
+        "name": "Mini game portátil 400 jogos"
+      },
+      "term": ""
+    }
+  ]
 }

@@ -1,12 +1,380 @@
-<div class="row">
-  <div class="card" style="grid-column:1/-1">
-    <h2>📊 Inteligência da Loja</h2>
-    <p class="muted">Atualiza automaticamente a cada segundo. Registra visualizações, favoritos, WhatsApp, buscas e categorias.</p>
-    <div id="analytics-live-full"></div>
-    <form method="post" action="/analytics/reset" onsubmit="return confirm('Zerar todos os dados do analytics?')" style="margin-top:14px">
-      <button class="btn secondary" type="submit">🧹 Zerar analytics</button>
-    </form>
+<style>
+  :root{
+    --qa-bg:#f6f7fb;
+    --qa-card:#ffffff;
+    --qa-text:#111827;
+    --qa-muted:#6b7280;
+    --qa-line:#e5e7eb;
+    --qa-blue:#2563eb;
+    --qa-green:#16a34a;
+    --qa-orange:#f97316;
+    --qa-red:#dc2626;
+    --qa-purple:#7c3aed;
+    --qa-shadow:0 10px 30px rgba(15,23,42,.07);
+  }
+  .qa-wrap{display:block;background:var(--qa-bg);margin:-18px;padding:22px;min-height:calc(100vh - 70px);color:var(--qa-text)}
+  .qa-header{display:flex;justify-content:space-between;gap:16px;align-items:flex-start;margin-bottom:18px}
+  .qa-title h1{margin:0;font-size:28px;letter-spacing:-.03em}
+  .qa-title p{margin:7px 0 0;color:var(--qa-muted)}
+  .qa-source{display:flex;gap:10px;align-items:center;flex-wrap:wrap;justify-content:flex-end}
+  .qa-pill{border:1px solid var(--qa-line);background:#fff;border-radius:999px;padding:8px 12px;font-size:13px;color:#374151}
+  .qa-back{display:inline-flex;align-items:center;gap:7px;border:1px solid var(--qa-line);background:#111827;color:#fff;text-decoration:none;border-radius:999px;padding:9px 13px;font-size:13px;font-weight:800;box-shadow:0 8px 18px rgba(15,23,42,.12)}
+  .qa-back:hover{filter:brightness(1.08)}
+  .qa-pill strong{color:#111827}
+  .qa-flash{background:#ecfdf5;border:1px solid #bbf7d0;color:#166534;border-radius:14px;padding:12px 14px;margin-bottom:16px}
+  .qa-filters{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:18px}
+  .qa-filter{border:1px solid var(--qa-line);background:#fff;color:#374151;text-decoration:none;border-radius:12px;padding:10px 14px;font-weight:700;font-size:13px}
+  .qa-filter.active{background:#111827;color:#fff;border-color:#111827}
+  .qa-grid{display:grid;grid-template-columns:repeat(12,1fr);gap:14px}
+  .qa-card{background:var(--qa-card);border:1px solid var(--qa-line);border-radius:18px;padding:16px;box-shadow:var(--qa-shadow)}
+  .qa-kpi{grid-column:span 2;min-height:112px;position:relative;overflow:hidden}
+  .qa-kpi .icon{font-size:22px}
+  .qa-kpi .value{font-size:30px;font-weight:900;line-height:1;margin-top:12px}
+  .qa-kpi .label{color:var(--qa-muted);font-size:13px;margin-top:6px}
+  .qa-kpi .hint{font-size:12px;margin-top:10px;color:#64748b}
+  .qa-kpi:after{content:"";position:absolute;right:-28px;top:-28px;width:92px;height:92px;border-radius:999px;background:rgba(37,99,235,.08)}
+  .qa-span-8{grid-column:span 8}
+  .qa-span-7{grid-column:span 7}
+  .qa-span-6{grid-column:span 6}
+  .qa-span-5{grid-column:span 5}
+  .qa-span-4{grid-column:span 4}
+  .qa-span-3{grid-column:span 3}
+  .qa-card h2{font-size:17px;margin:0 0 12px;display:flex;align-items:center;gap:8px}
+  .qa-card .sub{color:var(--qa-muted);font-size:13px;margin:-6px 0 14px}
+  .qa-live{border-color:#fde68a;background:linear-gradient(180deg,#fff7ed,#fff);position:relative}
+  .qa-live .recommend{font-weight:800}
+  .qa-table{width:100%;border-collapse:collapse;font-size:13px}
+  .qa-table th{text-align:left;color:#6b7280;font-size:12px;padding:9px 8px;border-bottom:1px solid var(--qa-line);white-space:nowrap}
+  .qa-table td{padding:10px 8px;border-bottom:1px solid #f1f5f9;vertical-align:middle}
+  .qa-table tr:last-child td{border-bottom:0}
+  .qa-num{text-align:right;font-variant-numeric:tabular-nums}
+  .qa-product{font-weight:700}
+  .qa-muted{color:var(--qa-muted)}
+  .qa-bar{height:9px;background:#eef2ff;border-radius:999px;overflow:hidden;min-width:80px}
+  .qa-bar span{display:block;height:100%;background:linear-gradient(90deg,#2563eb,#7c3aed);border-radius:999px}
+  .qa-mini-list{display:flex;flex-direction:column;gap:10px}
+  .qa-mini-item{display:grid;grid-template-columns:1fr auto;gap:10px;align-items:center}
+  .qa-mini-item .name{font-weight:700;font-size:13px}
+  .qa-mini-item .value{font-weight:900}
+  .qa-alert{background:#fff7ed;border:1px solid #fed7aa;border-radius:14px;padding:12px;margin-top:10px}
+  .qa-alert strong{color:#9a3412}
+  .qa-empty{color:var(--qa-muted);padding:14px;border:1px dashed #d1d5db;border-radius:14px;background:#fafafa}
+  .qa-chart{width:100%;height:260px;display:block}
+  .qa-donut{display:grid;grid-template-columns:150px 1fr;gap:18px;align-items:center}
+  .qa-donut-svg{width:150px;height:150px;transform:rotate(-90deg)}
+  .qa-legend{display:flex;flex-direction:column;gap:10px}
+  .qa-dot{display:inline-block;width:10px;height:10px;border-radius:999px;margin-right:8px;background:#2563eb}
+  .qa-event{display:flex;gap:10px;align-items:flex-start;padding:9px 0;border-bottom:1px solid #f1f5f9}
+  .qa-event:last-child{border-bottom:0}
+  .qa-event .bullet{width:10px;height:10px;margin-top:5px;border-radius:999px;background:#2563eb;flex:0 0 auto}
+  .qa-actions{display:flex;justify-content:flex-end;margin-top:14px}
+  .qa-danger{border:0;background:#fee2e2;color:#991b1b;border-radius:12px;padding:10px 14px;font-weight:800;cursor:pointer}
+  .qa-small{font-size:12px;color:var(--qa-muted)}
+  @media(max-width:1100px){
+    .qa-kpi{grid-column:span 4}
+    .qa-span-8,.qa-span-7,.qa-span-6,.qa-span-5,.qa-span-4,.qa-span-3{grid-column:span 12}
+    .qa-header{flex-direction:column}
+    .qa-source{justify-content:flex-start}
+  }
+  @media(max-width:650px){
+    .qa-wrap{margin:-12px;padding:14px}
+    .qa-kpi{grid-column:span 6}
+    .qa-table{font-size:12px}
+    .qa-donut{grid-template-columns:1fr}
+  }
+</style>
+
+<div class="qa-wrap">
+  <div class="qa-header">
+    <div class="qa-title">
+      <h1>📊 Inteligência da Loja</h1>
+      <p>Analytics próprio com Google Sheets, conversão por produto, filtros e leitura comercial.</p>
+    </div>
+    <div class="qa-source">
+      <a class="qa-back" href="/">← Voltar ao Dashboard</a>
+      <span class="qa-pill">Fonte: <strong id="qa-source">...</strong></span>
+      <span class="qa-pill">Atualizado: <strong id="qa-updated">...</strong></span>
+    </div>
+  </div>
+
+  <% if (flash) { %>
+    <div class="qa-flash"><%= flash %></div>
+  <% } %>
+
+  <div class="qa-filters">
+    <a class="qa-filter" data-period="today" href="/analytics?period=today">Hoje</a>
+    <a class="qa-filter" data-period="7d" href="/analytics?period=7d">Últimos 7 dias</a>
+    <a class="qa-filter" data-period="30d" href="/analytics?period=30d">Últimos 30 dias</a>
+    <a class="qa-filter" data-period="all" href="/analytics?period=all">Todo período</a>
+  </div>
+
+  <div class="qa-grid">
+    <div class="qa-card qa-kpi">
+      <div class="icon">👁️</div>
+      <div class="value" id="kpi-product-views">0</div>
+      <div class="label">Produtos vistos</div>
+      <div class="hint">Interesse real em itens</div>
+    </div>
+    <div class="qa-card qa-kpi">
+      <div class="icon">💬</div>
+      <div class="value" id="kpi-whatsapp">0</div>
+      <div class="label">Cliques WhatsApp</div>
+      <div class="hint">Intenção forte de compra</div>
+    </div>
+    <div class="qa-card qa-kpi">
+      <div class="icon">📈</div>
+      <div class="value" id="kpi-conversion">0%</div>
+      <div class="label">Conversão WhatsApp</div>
+      <div class="hint">Cliques ÷ visualizações</div>
+    </div>
+    <div class="qa-card qa-kpi">
+      <div class="icon">❤️</div>
+      <div class="value" id="kpi-favorites">0</div>
+      <div class="label">Favoritos</div>
+      <div class="hint">Produtos salvos</div>
+    </div>
+    <div class="qa-card qa-kpi">
+      <div class="icon">🔎</div>
+      <div class="value" id="kpi-searches">0</div>
+      <div class="label">Buscas</div>
+      <div class="hint">Desejo declarado</div>
+    </div>
+    <div class="qa-card qa-kpi">
+      <div class="icon">📂</div>
+      <div class="value" id="kpi-categories">0</div>
+      <div class="label">Categorias</div>
+      <div class="hint">Navegação do catálogo</div>
+    </div>
+
+    <div class="qa-card qa-live qa-span-12" style="grid-column:1/-1">
+      <h2>🔥 Ao vivo / recomendação comercial</h2>
+      <div id="qa-recommendation" class="recommend">Carregando inteligência...</div>
+      <div class="qa-small" id="qa-period-label"></div>
+    </div>
+
+    <div class="qa-card qa-span-8">
+      <h2>📈 Evolução dos eventos</h2>
+      <p class="sub">Comparativo por dia: visualizações, produtos, WhatsApp e buscas.</p>
+      <svg id="qa-line-chart" class="qa-chart" viewBox="0 0 800 260" preserveAspectRatio="none" aria-label="Gráfico de eventos"></svg>
+    </div>
+
+    <div class="qa-card qa-span-4">
+      <h2>📱 Dispositivos</h2>
+      <p class="sub">Entenda se o cliente está comprando pelo celular ou desktop.</p>
+      <div id="qa-devices"></div>
+    </div>
+
+    <div class="qa-card qa-span-6">
+      <h2>💬 Produtos com clique no WhatsApp</h2>
+      <p class="sub">Mostra exatamente em quais produtos o cliente clicou para comprar.</p>
+      <div id="qa-whatsapp-products"></div>
+    </div>
+
+    <div class="qa-card qa-span-6">
+      <h2>❤️ Produtos favoritados</h2>
+      <p class="sub">Mostra quais produtos os clientes salvaram como favoritos.</p>
+      <div id="qa-favorite-products"></div>
+    </div>
+
+    <div class="qa-card qa-span-6">
+      <h2>🚦 Conversão por produto</h2>
+      <p class="sub">Visualização → clique no WhatsApp.</p>
+      <div id="qa-conversion-products"></div>
+    </div>
+
+    <div class="qa-card qa-span-6">
+      <h2>👁️ Mais vistos</h2>
+      <div id="qa-most-viewed"></div>
+    </div>
+
+    <div class="qa-card qa-span-6">
+      <h2>🔎 Buscas dos clientes</h2>
+      <p class="sub">Ajuda a decidir estoque, story e oferta.</p>
+      <div id="qa-searches"></div>
+    </div>
+
+    <div class="qa-card qa-span-6">
+      <h2>📂 Categorias acessadas</h2>
+      <div id="qa-categories"></div>
+    </div>
+
+    <div class="qa-card qa-span-6">
+      <h2>🌎 Origem do acesso</h2>
+      <div id="qa-referrers"></div>
+    </div>
+
+    <div class="qa-card qa-span-6">
+      <h2>⚠️ Muito visto sem WhatsApp</h2>
+      <p class="sub">Possível ajuste de preço, foto, oferta ou chamada.</p>
+      <div id="qa-attention"></div>
+    </div>
+
+    <div class="qa-card qa-span-6">
+      <h2>🕒 Últimos eventos</h2>
+      <div id="qa-events"></div>
+    </div>
+
+    <div class="qa-card" style="grid-column:1/-1">
+      <h2>🧹 Manutenção</h2>
+      <p class="sub">Zera o Analytics local e também a aba Eventos do Google Sheets, se o Apps Script estiver atualizado.</p>
+      <form class="qa-actions" method="post" action="/analytics/reset" onsubmit="return confirm('Zerar TODOS os dados do Analytics, incluindo Google Sheets? Esta ação não pode ser desfeita.')">
+        <button class="qa-danger" type="submit">Zerar analytics</button>
+      </form>
+    </div>
   </div>
 </div>
-<script src="/public/js/analytics-live-card.js"></script>
-<script>window.QualityAnalyticsFullPage=true;</script>
+
+<script>
+(function(){
+  var initialSummary = <%- JSON.stringify(summary || {}) %>;
+  var currentPeriod = "<%= period || 'all' %>";
+
+  function n(v){ return Number(v || 0); }
+  function fmt(v){ return n(v).toLocaleString('pt-BR'); }
+  function pct(v){ return (Number(v || 0)).toLocaleString('pt-BR', { maximumFractionDigits: 1 }) + '%'; }
+  function el(id){ return document.getElementById(id); }
+  function esc(v){ return String(v == null ? '' : v).replace(/[&<>"']/g, function(c){ return ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]); }); }
+  function periodName(p){
+    return p === 'today' ? 'Hoje' : p === '7d' ? 'Últimos 7 dias' : p === '30d' ? 'Últimos 30 dias' : 'Todo período';
+  }
+  function setActivePeriod(){
+    document.querySelectorAll('.qa-filter').forEach(function(a){
+      a.classList.toggle('active', a.getAttribute('data-period') === currentPeriod);
+    });
+  }
+  function listHtml(items, nameFn, valueFn, empty){
+    if(!items || !items.length) return '<div class="qa-empty">' + esc(empty || 'Sem dados ainda.') + '</div>';
+    var max = Math.max.apply(null, items.map(function(i){ return n(valueFn(i)); }).concat([1]));
+    return '<div class="qa-mini-list">' + items.map(function(item){
+      var value = n(valueFn(item));
+      var width = Math.max(4, Math.round((value / max) * 100));
+      return '<div class="qa-mini-item">' +
+        '<div><div class="name">' + esc(nameFn(item)) + '</div><div class="qa-bar"><span style="width:'+width+'%"></span></div></div>' +
+        '<div class="value">' + fmt(value) + '</div>' +
+      '</div>';
+    }).join('') + '</div>';
+  }
+  function tableProducts(items){
+    if(!items || !items.length) return '<div class="qa-empty">Sem produtos ainda.</div>';
+    return '<table class="qa-table"><thead><tr><th>Produto</th><th class="qa-num">Views</th><th class="qa-num">Fav.</th><th class="qa-num">WhatsApp</th><th class="qa-num">Conv.</th></tr></thead><tbody>' +
+      items.map(function(p){
+        return '<tr><td><div class="qa-product">' + esc(p.name || p.slug || 'Produto') + '</div></td>' +
+          '<td class="qa-num">' + fmt(p.views) + '</td>' +
+          '<td class="qa-num">' + fmt(p.favorites) + '</td>' +
+          '<td class="qa-num">' + fmt(p.whatsapp) + '</td>' +
+          '<td class="qa-num"><strong>' + pct(p.conversion) + '</strong></td></tr>';
+      }).join('') + '</tbody></table>';
+  }
+  function renderLineChart(summary){
+    var svg = el('qa-line-chart');
+    if(!svg) return;
+    var data = summary.timeline || [];
+    if(!data.length){
+      svg.innerHTML = '<text x="30" y="130" fill="#6b7280">Sem dados suficientes para gráfico.</text>';
+      return;
+    }
+    var W=800,H=260,pad=34;
+    var keys=['page_view','product_view','whatsapp_click','search'];
+    var labels={page_view:'Páginas',product_view:'Produtos',whatsapp_click:'WhatsApp',search:'Buscas'};
+    var max=1;
+    data.forEach(function(d){ keys.forEach(function(k){ max=Math.max(max,n(d[k])); }); });
+    function x(i){ return pad + (data.length === 1 ? 0 : i*(W-pad*2)/(data.length-1)); }
+    function y(v){ return H-pad - (n(v)*(H-pad*2)/max); }
+    var grid='';
+    for(var g=0; g<=4; g++){
+      var yy = pad + g*(H-pad*2)/4;
+      grid += '<line x1="'+pad+'" y1="'+yy+'" x2="'+(W-pad)+'" y2="'+yy+'" stroke="#e5e7eb" stroke-width="1"/>';
+    }
+    var colors=['#2563eb','#16a34a','#f97316','#7c3aed'];
+    var lines=keys.map(function(k,idx){
+      var pts=data.map(function(d,i){ return x(i)+','+y(d[k]); }).join(' ');
+      return '<polyline points="'+pts+'" fill="none" stroke="'+colors[idx]+'" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>' +
+        data.map(function(d,i){ return '<circle cx="'+x(i)+'" cy="'+y(d[k])+'" r="3.5" fill="'+colors[idx]+'"><title>'+esc(d.day+' - '+labels[k]+': '+fmt(d[k]))+'</title></circle>'; }).join('');
+    }).join('');
+    var xlabels=data.map(function(d,i){
+      if(data.length > 10 && i % Math.ceil(data.length/8) !== 0 && i !== data.length-1) return '';
+      return '<text x="'+x(i)+'" y="'+(H-8)+'" text-anchor="middle" font-size="11" fill="#6b7280">'+esc(d.day)+'</text>';
+    }).join('');
+    var legend=keys.map(function(k,idx){
+      return '<circle cx="'+(pad+idx*140)+'" cy="16" r="5" fill="'+colors[idx]+'"/><text x="'+(pad+idx*140+10)+'" y="20" font-size="12" fill="#374151">'+labels[k]+'</text>';
+    }).join('');
+    svg.innerHTML = grid + lines + xlabels + legend;
+  }
+  function renderDevices(summary){
+    var items = summary.devices || [];
+    if(!items.length){ el('qa-devices').innerHTML = '<div class="qa-empty">Sem dispositivos ainda.</div>'; return; }
+    el('qa-devices').innerHTML = '<div class="qa-mini-list">' + items.map(function(d){
+      return '<div class="qa-mini-item"><div><div class="name">' + esc(d.name || d.key) + '</div><div class="qa-bar"><span style="width:'+Math.max(4,n(d.percent))+'%"></span></div></div><div class="value">'+pct(d.percent)+'</div></div>';
+    }).join('') + '</div>';
+  }
+  function renderReferrers(summary){
+    var items = summary.referrers || [];
+    if(!items.length){ el('qa-referrers').innerHTML = '<div class="qa-empty">Sem origem ainda.</div>'; return; }
+    el('qa-referrers').innerHTML = '<div class="qa-mini-list">' + items.map(function(d){
+      return '<div class="qa-mini-item"><div><div class="name">' + esc(d.name || d.key) + '</div><div class="qa-bar"><span style="width:'+Math.max(4,n(d.percent))+'%"></span></div></div><div class="value">'+pct(d.percent)+'</div></div>';
+    }).join('') + '</div>';
+  }
+  function recommendation(summary){
+    var hot = (summary.hot || [])[0];
+    var attention = (summary.attention || [])[0];
+    var search = (summary.searches || [])[0];
+
+    if(hot && n(hot.score) > 0){
+      return 'Produto em destaque agora: <strong>' + esc(hot.name || hot.slug) + '</strong> — score ' + fmt(hot.score) + '. Recomendo observar para Story/oferta.';
+    }
+    if(attention){
+      return 'Atenção: <strong>' + esc(attention.name || attention.slug) + '</strong> teve visualizações, mas nenhum clique no WhatsApp.';
+    }
+    if(search){
+      return 'Busca mais forte: <strong>' + esc(search.term) + '</strong>. Pode indicar demanda.';
+    }
+    return 'Ainda sem dados suficientes. Abra produtos, faça buscas e clique no WhatsApp para alimentar o painel.';
+  }
+  function render(summary){
+    summary = summary || {};
+    var k = summary.kpis || {};
+    currentPeriod = summary.period || currentPeriod || 'all';
+    setActivePeriod();
+
+    el('qa-source').textContent = summary.source === 'google-sheets' ? 'Google Sheets' : 'JSON local';
+    el('qa-updated').textContent = summary.updatedAt ? new Date(summary.updatedAt).toLocaleString('pt-BR') : '-';
+    el('qa-period-label').textContent = 'Filtro ativo: ' + periodName(currentPeriod);
+
+    el('kpi-product-views').textContent = fmt(k.productViews);
+    el('kpi-whatsapp').textContent = fmt(k.whatsappClicks);
+    el('kpi-conversion').textContent = pct(k.conversionRate);
+    el('kpi-favorites').textContent = fmt(k.favorites);
+    el('kpi-searches').textContent = fmt(k.searches);
+    el('kpi-categories').textContent = fmt(k.categories);
+
+    el('qa-recommendation').innerHTML = recommendation(summary);
+    renderLineChart(summary);
+    renderDevices(summary);
+    renderReferrers(summary);
+
+    el('qa-whatsapp-products').innerHTML = tableProducts((summary.productsConversion || []).filter(function(p){ return n(p.whatsapp) > 0; }));
+    el('qa-favorite-products').innerHTML = tableProducts((summary.productsMostFavorited || []).filter(function(p){ return n(p.favorites) > 0; }));
+    el('qa-conversion-products').innerHTML = tableProducts(summary.productsConversion || []);
+    el('qa-most-viewed').innerHTML = listHtml(summary.productsMostViewed || [], function(p){ return p.name || p.slug || 'Produto'; }, function(p){ return p.views; }, 'Sem visualizações ainda.');
+    el('qa-searches').innerHTML = listHtml(summary.searches || [], function(s){ return s.term; }, function(s){ return s.total; }, 'Sem buscas ainda.');
+    el('qa-categories').innerHTML = listHtml(summary.categoriesMostViewed || [], function(c){ return c.name || c.slug; }, function(c){ return c.views; }, 'Sem categorias ainda.');
+    el('qa-attention').innerHTML = (summary.attention && summary.attention.length)
+      ? summary.attention.map(function(p){ return '<div class="qa-alert"><strong>' + esc(p.name || p.slug) + '</strong><br><span class="qa-muted">' + fmt(p.views) + ' visualizações e nenhum clique no WhatsApp.</span></div>'; }).join('')
+      : '<div class="qa-empty">Sem alertas ainda.</div>';
+
+    var events = summary.recentEvents || [];
+    el('qa-events').innerHTML = events.length ? events.slice(0,12).map(function(ev){
+      return '<div class="qa-event"><span class="bullet"></span><div><strong>' + esc(ev.label || ev.type) + '</strong><br><span class="qa-muted">' + esc(ev.device || '') + (ev.sourceName ? ' · ' + esc(ev.sourceName) : '') + '</span></div></div>';
+    }).join('') : '<div class="qa-empty">Sem eventos recentes.</div>';
+  }
+  function refresh(){
+    fetch('/analytics/summary?period=' + encodeURIComponent(currentPeriod), { cache: 'no-store' })
+      .then(function(r){ return r.json(); })
+      .then(function(payload){ if(payload && payload.success) render(payload.summary); })
+      .catch(function(){});
+  }
+
+  render(initialSummary);
+  setInterval(refresh, 5000);
+})();
+</script>

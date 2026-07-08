@@ -1,0 +1,202 @@
+<% layout('layout') -%>
+<style>
+  :root{--qw-bg:#f6f7fb;--qw-card:#fff;--qw-text:#111827;--qw-muted:#6b7280;--qw-line:#e5e7eb;--qw-red:#dc2626;--qw-green:#16a34a;--qw-blue:#2563eb;--qw-orange:#f97316;--qw-shadow:0 10px 30px rgba(15,23,42,.07)}
+  .qw-wrap{background:var(--qw-bg);margin:-18px;padding:22px;min-height:calc(100vh - 70px);color:var(--qw-text)}
+  .qw-header{display:flex;justify-content:space-between;align-items:flex-start;gap:18px;margin-bottom:18px}
+  .qw-title h1{margin:0;font-size:28px;letter-spacing:-.03em}.qw-title p{margin:7px 0 0;color:var(--qw-muted)}
+  .qw-actions{display:flex;gap:10px;flex-wrap:wrap;justify-content:flex-end}.qw-btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:1px solid var(--qw-line);border-radius:12px;background:#fff;color:#111827;text-decoration:none;padding:10px 14px;font-weight:800;cursor:pointer}.qw-btn.primary{background:#2563eb;color:#fff;border-color:#2563eb}.qw-btn.dark{background:#111827;color:#fff;border-color:#111827}.qw-btn.danger{background:#fee2e2;color:#991b1b;border-color:#fecaca}.qw-btn.success{background:#dcfce7;color:#166534;border-color:#bbf7d0}
+  .qw-flash{background:#ecfdf5;border:1px solid #bbf7d0;color:#166534;border-radius:14px;padding:12px 14px;margin-bottom:16px}
+  .qw-tabs{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 18px}.qw-tab{border:1px solid var(--qw-line);background:#fff;color:#374151;text-decoration:none;border-radius:12px;padding:10px 14px;font-weight:800;font-size:13px}.qw-tab.active{background:#111827;color:#fff;border-color:#111827}
+  .qw-grid{display:grid;grid-template-columns:repeat(12,1fr);gap:14px}.qw-card{background:var(--qw-card);border:1px solid var(--qw-line);border-radius:18px;padding:16px;box-shadow:var(--qw-shadow)}.qw-card h2{font-size:17px;margin:0 0 12px}.qw-card .sub{color:var(--qw-muted);font-size:13px;margin:-6px 0 14px}.qw-span-12{grid-column:span 12}.qw-span-8{grid-column:span 8}.qw-span-7{grid-column:span 7}.qw-span-6{grid-column:span 6}.qw-span-5{grid-column:span 5}.qw-span-4{grid-column:span 4}.qw-span-3{grid-column:span 3}
+  .qw-kpi{min-height:112px;position:relative;overflow:hidden}.qw-kpi .icon{font-size:22px}.qw-kpi .value{font-size:30px;font-weight:900;line-height:1;margin-top:12px}.qw-kpi .label{color:var(--qw-muted);font-size:13px;margin-top:6px}.qw-kpi:after{content:"";position:absolute;right:-28px;top:-28px;width:92px;height:92px;border-radius:999px;background:rgba(37,99,235,.08)}
+  .qw-status{display:flex;gap:10px;align-items:center;flex-wrap:wrap}.qw-pill{border:1px solid var(--qw-line);background:#fff;border-radius:999px;padding:8px 12px;font-size:13px;color:#374151}.qw-pill.green{background:#ecfdf5;color:#166534;border-color:#bbf7d0}.qw-pill.orange{background:#fff7ed;color:#9a3412;border-color:#fed7aa}.qw-pill.red{background:#fef2f2;color:#991b1b;border-color:#fecaca}
+  .qw-table{width:100%;border-collapse:collapse;font-size:13px}.qw-table th{text-align:left;color:#6b7280;font-size:12px;padding:9px 8px;border-bottom:1px solid var(--qw-line)}.qw-table td{padding:10px 8px;border-bottom:1px solid #f1f5f9;vertical-align:middle}.qw-table tr:last-child td{border-bottom:0}.qw-muted{color:var(--qw-muted)}
+  .qw-form{display:grid;gap:12px}.qw-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}.qw-field label{display:block;font-size:12px;font-weight:900;color:#374151;margin:0 0 6px}.qw-input,.qw-textarea,.qw-select{width:100%;box-sizing:border-box;border:1px solid var(--qw-line);border-radius:12px;background:#fff;padding:10px 12px;font:inherit}.qw-textarea{min-height:92px;resize:vertical}.qw-check{display:flex;gap:8px;align-items:center;font-weight:800;color:#374151}
+  .qw-builder{display:grid;gap:10px}.qw-step{border:1px solid var(--qw-line);border-radius:16px;background:#fff;padding:12px}.qw-step-head{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:10px}.qw-step-title{font-weight:900}.qw-step-grid{display:grid;grid-template-columns:150px 1fr 130px;gap:10px}.qw-step-actions{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}.qw-mini-btn{border:1px solid var(--qw-line);background:#f9fafb;border-radius:10px;padding:8px 10px;font-weight:800;cursor:pointer}.qw-mini-btn.danger{background:#fee2e2;color:#991b1b;border-color:#fecaca}.qw-addbar{display:flex;gap:8px;flex-wrap:wrap}.qw-empty{color:var(--qw-muted);padding:14px;border:1px dashed #d1d5db;border-radius:14px;background:#fafafa}.qw-preview{background:#0b1220;color:#e5e7eb;border-radius:16px;padding:14px;min-height:220px;white-space:pre-wrap;font-family:Consolas,monospace;font-size:13px;line-height:1.45}.qw-warning{background:#fff7ed;border:1px solid #fed7aa;border-radius:14px;padding:12px;color:#9a3412}.qw-info{background:#eff6ff;border:1px solid #bfdbfe;border-radius:14px;padding:12px;color:#1e40af}.qw-link{color:#2563eb;font-weight:900}.qw-options-box{display:grid;gap:8px;margin-top:8px}.qw-option-row{display:grid;grid-template-columns:1fr 90px 1fr auto;gap:8px}
+  @media(max-width:1100px){.qw-span-8,.qw-span-7,.qw-span-6,.qw-span-5,.qw-span-4,.qw-span-3{grid-column:span 12}.qw-header{flex-direction:column}.qw-actions{justify-content:flex-start}.qw-step-grid,.qw-row,.qw-option-row{grid-template-columns:1fr}.qw-kpi{grid-column:span 6}}
+</style>
+
+<div class="qw-wrap">
+  <div class="qw-header">
+    <div class="qw-title">
+      <h1>💬 Automação WhatsApp</h1>
+      <p>Blocos de resposta, simulação de fluxo, aniversariantes, logs e configurações. Versão <strong><%= version %></strong>.</p>
+    </div>
+    <div class="qw-actions">
+      <a class="qw-btn dark" href="/">← Voltar ao Dashboard</a>
+      <a class="qw-btn primary" href="/automacao-whatsapp?tab=blocos">Criar/editar blocos</a>
+    </div>
+  </div>
+
+  <% if (flash) { %><div class="qw-flash"><%= flash %></div><% } %>
+
+  <div class="qw-tabs">
+    <a class="qw-tab <%= tab === 'dashboard' ? 'active' : '' %>" href="/automacao-whatsapp">Dashboard</a>
+    <a class="qw-tab <%= tab === 'blocos' ? 'active' : '' %>" href="/automacao-whatsapp?tab=blocos">Blocos</a>
+    <a class="qw-tab <%= tab === 'simulador' ? 'active' : '' %>" href="/automacao-whatsapp?tab=simulador">Simulador</a>
+    <a class="qw-tab <%= tab === 'aniversariantes' ? 'active' : '' %>" href="/automacao-whatsapp?tab=aniversariantes">Aniversariantes</a>
+    <a class="qw-tab <%= tab === 'logs' ? 'active' : '' %>" href="/automacao-whatsapp?tab=logs">Logs</a>
+    <a class="qw-tab <%= tab === 'configuracoes' ? 'active' : '' %>" href="/automacao-whatsapp?tab=configuracoes">Configurações</a>
+  </div>
+
+  <% if (tab === 'dashboard') { %>
+    <div class="qw-grid">
+      <div class="qw-card qw-kpi qw-span-3"><div class="icon">📦</div><div class="value"><%= blocos.length %></div><div class="label">Blocos cadastrados</div></div>
+      <div class="qw-card qw-kpi qw-span-3"><div class="icon">🎂</div><div class="value"><%= fila.length %></div><div class="label">Fila atual</div></div>
+      <div class="qw-card qw-kpi qw-span-3"><div class="icon">📜</div><div class="value"><%= logs.length %></div><div class="label">Logs salvos</div></div>
+      <div class="qw-card qw-kpi qw-span-3"><div class="icon">⚙️</div><div class="value"><%= config.envioRealAtivo ? 'ON' : 'OFF' %></div><div class="label">Envio real</div></div>
+
+      <div class="qw-card qw-span-8">
+        <h2>🧭 Status do módulo</h2>
+        <div class="qw-status">
+          <span class="qw-pill orange">Fase 1: estrutura visual</span>
+          <span class="qw-pill red">WhatsApp ainda não conectado</span>
+          <span class="qw-pill green">Simulador disponível</span>
+        </div>
+        <p class="qw-muted" style="margin-top:12px">Nesta versão, o módulo já cria blocos, configura pausas/digitando, salva dados em JSON e simula o fluxo antes de qualquer envio real.</p>
+      </div>
+      <div class="qw-card qw-span-4">
+        <h2>🛡️ Segurança operacional</h2>
+        <p class="sub">Base inicial para evitar erro e reduzir risco de bloqueio.</p>
+        <div class="qw-warning">Envio real começa desligado. Primeiro simulamos, validamos fluxo, depois conectamos ao WhatsApp.</div>
+      </div>
+      <div class="qw-card qw-span-12">
+        <h2>📦 Últimos blocos</h2>
+        <% if (!blocos.length) { %><div class="qw-empty">Nenhum bloco ainda.</div><% } else { %>
+          <table class="qw-table"><thead><tr><th>Nome</th><th>Gatilho</th><th>Etapas</th><th>Status</th><th>Ações</th></tr></thead><tbody>
+          <% blocos.slice(0,8).forEach(function(b){ %>
+            <tr><td><strong><%= b.nome %></strong><br><span class="qw-muted"><%= b.descricao || 'Sem descrição' %></span></td><td><%= b.gatilho || '—' %></td><td><%= (b.etapas || []).length %></td><td><%= b.ativo ? 'Ativo' : 'Inativo' %></td><td><a class="qw-link" href="/automacao-whatsapp?tab=blocos&edit=<%= b.id %>">Editar</a></td></tr>
+          <% }) %>
+          </tbody></table>
+        <% } %>
+      </div>
+    </div>
+  <% } %>
+
+  <% if (tab === 'blocos') { const edit = blocoEdit || {}; %>
+    <div class="qw-grid">
+      <div class="qw-card qw-span-5">
+        <h2><%= blocoEdit ? '✏️ Editar bloco' : '➕ Novo bloco' %></h2>
+        <p class="sub">Configure textos, pausas, digitando, áudio, imagem e opções.</p>
+        <form class="qw-form" method="post" action="/automacao-whatsapp/blocos/salvar" onsubmit="return prepareSteps()">
+          <input type="hidden" name="id" value="<%= edit.id || '' %>">
+          <input type="hidden" name="etapasJson" id="etapasJson">
+          <div class="qw-field"><label>Nome do bloco</label><input class="qw-input" name="nome" value="<%= edit.nome || '' %>" placeholder="Ex: Como funciona boleto" required></div>
+          <div class="qw-field"><label>Descrição</label><textarea class="qw-textarea" name="descricao" placeholder="Uso interno"><%= edit.descricao || '' %></textarea></div>
+          <div class="qw-row">
+            <div class="qw-field"><label>Gatilho/atalho</label><input class="qw-input" name="gatilho" value="<%= edit.gatilho || '' %>" placeholder="Ex: boleto"></div>
+            <label class="qw-check" style="margin-top:22px"><input type="checkbox" name="ativo" <%= edit.ativo !== false ? 'checked' : '' %>> Ativo</label>
+          </div>
+          <h2 style="margin-top:8px">🧩 Etapas do bloco</h2>
+          <div class="qw-addbar">
+            <button class="qw-mini-btn" type="button" onclick="addStep('texto')">+ Texto</button>
+            <button class="qw-mini-btn" type="button" onclick="addStep('pausa')">+ Pausa</button>
+            <button class="qw-mini-btn" type="button" onclick="addStep('audio')">+ Áudio</button>
+            <button class="qw-mini-btn" type="button" onclick="addStep('imagem')">+ Imagem</button>
+            <button class="qw-mini-btn" type="button" onclick="addStep('arquivo')">+ Arquivo</button>
+            <button class="qw-mini-btn" type="button" onclick="addStep('opcoes')">+ Opções</button>
+          </div>
+          <div id="builder" class="qw-builder"></div>
+          <div class="qw-actions" style="justify-content:flex-start">
+            <button class="qw-btn primary" type="submit">Salvar bloco</button>
+            <button class="qw-btn success" type="button" onclick="simulateCurrent()">▶ Simular fluxo</button>
+          </div>
+        </form>
+      </div>
+      <div class="qw-card qw-span-7">
+        <h2>🧪 Simulação rápida</h2>
+        <p class="sub">Use antes de enviar qualquer sequência real para clientes.</p>
+        <div id="preview" class="qw-preview">Clique em “Simular fluxo” para visualizar a sequência.</div>
+      </div>
+      <div class="qw-card qw-span-12">
+        <h2>📚 Blocos cadastrados</h2>
+        <% if (!blocos.length) { %><div class="qw-empty">Nenhum bloco cadastrado.</div><% } else { %>
+          <table class="qw-table"><thead><tr><th>Nome</th><th>Gatilho</th><th>Etapas</th><th>Status</th><th>Ações</th></tr></thead><tbody>
+          <% blocos.forEach(function(b){ %>
+            <tr>
+              <td><strong><%= b.nome %></strong><br><span class="qw-muted"><%= b.descricao || 'Sem descrição' %></span></td>
+              <td><%= b.gatilho || '—' %></td><td><%= (b.etapas || []).length %></td><td><%= b.ativo ? 'Ativo' : 'Inativo' %></td>
+              <td style="display:flex;gap:8px;align-items:center;flex-wrap:wrap"><a class="qw-link" href="/automacao-whatsapp?tab=blocos&edit=<%= b.id %>">Editar</a><form method="post" action="/automacao-whatsapp/blocos/excluir/<%= b.id %>" onsubmit="return confirm('Excluir este bloco?')"><button class="qw-mini-btn danger" type="submit">Excluir</button></form></td>
+            </tr>
+          <% }) %>
+          </tbody></table>
+        <% } %>
+      </div>
+    </div>
+  <% } %>
+
+  <% if (tab === 'simulador') { %>
+    <div class="qw-grid"><div class="qw-card qw-span-12"><h2>▶ Simulador de fluxo</h2><p class="sub">Escolha um bloco salvo para conferir a ordem, pausas, digitando, áudio, imagem e opções.</p><div class="qw-row"><select class="qw-select" id="simulateSelect"><% blocos.forEach(function(b){ %><option value="<%= b.id %>"><%= b.nome %></option><% }) %></select><button class="qw-btn success" type="button" onclick="simulateSaved()">Simular bloco</button></div><div id="savedPreview" class="qw-preview" style="margin-top:14px">Escolha um bloco e clique em simular.</div></div></div>
+  <% } %>
+
+  <% if (tab === 'aniversariantes') { %>
+    <div class="qw-grid"><div class="qw-card qw-span-8"><h2>🎂 Aniversariantes</h2><p class="sub">Fase 1 preparada para receber dados do script WM10. Na próxima fase, criaremos o webhook interno e a fila de envio.</p><div class="qw-info">Fluxo previsto: WM10 → Painel Quality → fila Automação WhatsApp → envio controlado.</div></div><div class="qw-card qw-span-4"><h2>⏰ Horário atual</h2><div class="qw-pill green"><%= config.horarioAniversario || '08:00' %></div><p class="qw-muted">Configurável na aba Configurações.</p></div></div>
+  <% } %>
+
+  <% if (tab === 'logs') { %>
+    <div class="qw-grid"><div class="qw-card qw-span-12"><h2>📜 Logs</h2><p class="sub">Registro futuro de simulações, envios, falhas e aniversariantes.</p><% if (!logs.length) { %><div class="qw-empty">Sem logs ainda.</div><% } else { %><pre><%= JSON.stringify(logs, null, 2) %></pre><% } %></div></div>
+  <% } %>
+
+  <% if (tab === 'configuracoes') { %>
+    <div class="qw-grid"><div class="qw-card qw-span-8"><h2>⚙️ Configurações</h2><p class="sub">Controle de horário, limites e comportamento humano. Envio real permanece desligado nesta fase.</p><form class="qw-form" method="post" action="/automacao-whatsapp/configuracoes/salvar"><div class="qw-row"><div class="qw-field"><label>Horário dos aniversariantes</label><input class="qw-input" type="time" name="horarioAniversario" value="<%= config.horarioAniversario || '08:00' %>"></div><div class="qw-field"><label>Limite diário de mensagens</label><input class="qw-input" type="number" min="1" max="1000" name="limiteDiario" value="<%= config.limiteDiario || 40 %>"></div></div><div class="qw-row"><div class="qw-field"><label>Delay humano mínimo entre mensagens (segundos)</label><input class="qw-input" type="number" min="0" name="delayHumanoMin" value="<%= config.delayHumanoMin || 4 %>"></div><div class="qw-field"><label>Delay humano máximo entre mensagens (segundos)</label><input class="qw-input" type="number" min="0" name="delayHumanoMax" value="<%= config.delayHumanoMax || 12 %>"></div></div><div class="qw-row"><div class="qw-field"><label>Digitando padrão (segundos)</label><input class="qw-input" type="number" min="0" name="digitandoPadrao" value="<%= config.digitandoPadrao || 2 %>"></div><div class="qw-field"><label>Gravando áudio padrão (segundos)</label><input class="qw-input" type="number" min="0" name="gravandoAudioPadrao" value="<%= config.gravandoAudioPadrao || 2 %>"></div></div><label class="qw-check"><input type="checkbox" name="envioRealAtivo" <%= config.envioRealAtivo ? 'checked' : '' %>> Permitir envio real quando a conexão WhatsApp existir</label><button class="qw-btn primary" type="submit">Salvar configurações</button></form></div><div class="qw-card qw-span-4"><h2>🛡️ Nota</h2><div class="qw-warning">Mesmo marcado, o envio real ainda não funciona nesta versão. A opção já fica preparada para a próxima fase.</div></div></div>
+  <% } %>
+</div>
+
+<script>
+  const blocosSalvos = <%- JSON.stringify(blocos || []) %>;
+  const editSteps = <%- JSON.stringify((blocoEdit && blocoEdit.etapas) || []) %>;
+  let steps = Array.isArray(editSteps) ? editSteps : [];
+  function uid(){ return 'etapa_' + Date.now().toString(36) + '_' + Math.random().toString(36).slice(2,7); }
+  function esc(v){ return String(v == null ? '' : v).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c])); }
+  function defaultStep(tipo){
+    if(tipo === 'texto') return {id:uid(),tipo:'texto',texto:'',digitandoSegundos:2};
+    if(tipo === 'pausa') return {id:uid(),tipo:'pausa',segundos:3};
+    if(tipo === 'audio') return {id:uid(),tipo:'audio',caminho:'',gravandoSegundos:2,legenda:''};
+    if(tipo === 'imagem') return {id:uid(),tipo:'imagem',caminho:'',legenda:''};
+    if(tipo === 'arquivo') return {id:uid(),tipo:'arquivo',caminho:'',legenda:''};
+    if(tipo === 'opcoes') return {id:uid(),tipo:'opcoes',texto:'Escolha uma opção:',opcoes:[{label:'1️⃣ Smartphones',resposta:'1',proximoBloco:'Smartphones'},{label:'2️⃣ Assistência',resposta:'2',proximoBloco:'Assistência'}]};
+    return {id:uid(),tipo:'texto',texto:'',digitandoSegundos:0};
+  }
+  function addStep(tipo){ steps.push(defaultStep(tipo)); renderBuilder(); }
+  function removeStep(i){ steps.splice(i,1); renderBuilder(); }
+  function moveStep(i,dir){ const j=i+dir; if(j<0 || j>=steps.length) return; const tmp=steps[i]; steps[i]=steps[j]; steps[j]=tmp; renderBuilder(); }
+  function updateStep(i,key,value){ steps[i][key]=value; }
+  function updateOption(i, oi, key, value){ steps[i].opcoes = steps[i].opcoes || []; steps[i].opcoes[oi][key]=value; }
+  function addOption(i){ steps[i].opcoes = steps[i].opcoes || []; steps[i].opcoes.push({label:'',resposta:'',proximoBloco:''}); renderBuilder(); }
+  function removeOption(i,oi){ steps[i].opcoes.splice(oi,1); renderBuilder(); }
+  function renderBuilder(){
+    const b=document.getElementById('builder'); if(!b) return;
+    if(!steps.length){ b.innerHTML='<div class="qw-empty">Nenhuma etapa ainda. Adicione texto, pausa, áudio, imagem ou opções.</div>'; return; }
+    b.innerHTML=steps.map((s,i)=>{
+      let body='';
+      if(s.tipo==='texto') body=`<div class="qw-step-grid"><div><label>Tipo</label><select class="qw-select" onchange="steps[${i}]=defaultStep(this.value);renderBuilder()"><option value="texto" selected>Texto</option><option value="pausa">Pausa</option><option value="audio">Áudio</option><option value="imagem">Imagem</option><option value="arquivo">Arquivo</option><option value="opcoes">Opções</option></select></div><div><label>Mensagem</label><textarea class="qw-textarea" oninput="updateStep(${i},'texto',this.value)">${esc(s.texto||'')}</textarea></div><div><label>Digitando (s)</label><input class="qw-input" type="number" min="0" value="${esc(s.digitandoSegundos||0)}" oninput="updateStep(${i},'digitandoSegundos',this.value)"></div></div>`;
+      } else if(s.tipo==='pausa') body=`<div class="qw-step-grid"><div><label>Tipo</label><select class="qw-select" onchange="steps[${i}]=defaultStep(this.value);renderBuilder()"><option value="pausa" selected>Pausa</option><option value="texto">Texto</option><option value="audio">Áudio</option><option value="imagem">Imagem</option><option value="arquivo">Arquivo</option><option value="opcoes">Opções</option></select></div><div><label>Descrição</label><input class="qw-input" value="Aguardar antes da próxima etapa" readonly></div><div><label>Segundos</label><input class="qw-input" type="number" min="0" value="${esc(s.segundos||0)}" oninput="updateStep(${i},'segundos',this.value)"></div></div>`;
+      } else if(s.tipo==='audio') body=`<div class="qw-step-grid"><div><label>Tipo</label><select class="qw-select" onchange="steps[${i}]=defaultStep(this.value);renderBuilder()"><option value="audio" selected>Áudio</option><option value="texto">Texto</option><option value="pausa">Pausa</option><option value="imagem">Imagem</option><option value="arquivo">Arquivo</option><option value="opcoes">Opções</option></select></div><div><label>Caminho do áudio</label><input class="qw-input" value="${esc(s.caminho||'')}" placeholder="Ex: /public/uploads/audio.mp3" oninput="updateStep(${i},'caminho',this.value)"></div><div><label>Gravando (s)</label><input class="qw-input" type="number" min="0" value="${esc(s.gravandoSegundos||0)}" oninput="updateStep(${i},'gravandoSegundos',this.value)"></div></div><div class="qw-field" style="margin-top:8px"><label>Legenda/observação</label><input class="qw-input" value="${esc(s.legenda||'')}" oninput="updateStep(${i},'legenda',this.value)"></div>`;
+      } else if(s.tipo==='imagem' || s.tipo==='arquivo') body=`<div class="qw-step-grid"><div><label>Tipo</label><select class="qw-select" onchange="steps[${i}]=defaultStep(this.value);renderBuilder()"><option value="${s.tipo}" selected>${s.tipo==='imagem'?'Imagem':'Arquivo'}</option><option value="texto">Texto</option><option value="pausa">Pausa</option><option value="audio">Áudio</option><option value="imagem">Imagem</option><option value="arquivo">Arquivo</option><option value="opcoes">Opções</option></select></div><div><label>Caminho</label><input class="qw-input" value="${esc(s.caminho||'')}" placeholder="Ex: /public/uploads/foto.jpg" oninput="updateStep(${i},'caminho',this.value)"></div><div><label>Tipo</label><input class="qw-input" value="${s.tipo}" readonly></div></div><div class="qw-field" style="margin-top:8px"><label>Legenda</label><textarea class="qw-textarea" oninput="updateStep(${i},'legenda',this.value)">${esc(s.legenda||'')}</textarea></div>`;
+      } else if(s.tipo==='opcoes') {
+        const opts=(s.opcoes||[]).map((o,oi)=>`<div class="qw-option-row"><input class="qw-input" placeholder="Rótulo" value="${esc(o.label||'')}" oninput="updateOption(${i},${oi},'label',this.value)"><input class="qw-input" placeholder="Resposta" value="${esc(o.resposta||'')}" oninput="updateOption(${i},${oi},'resposta',this.value)"><input class="qw-input" placeholder="Próximo bloco" value="${esc(o.proximoBloco||'')}" oninput="updateOption(${i},${oi},'proximoBloco',this.value)"><button class="qw-mini-btn danger" type="button" onclick="removeOption(${i},${oi})">X</button></div>`).join('');
+        body=`<div class="qw-step-grid"><div><label>Tipo</label><select class="qw-select" onchange="steps[${i}]=defaultStep(this.value);renderBuilder()"><option value="opcoes" selected>Opções</option><option value="texto">Texto</option><option value="pausa">Pausa</option><option value="audio">Áudio</option><option value="imagem">Imagem</option><option value="arquivo">Arquivo</option></select></div><div><label>Texto acima das opções</label><input class="qw-input" value="${esc(s.texto||'')}" oninput="updateStep(${i},'texto',this.value)"></div><div><label>Ações</label><button class="qw-mini-btn" type="button" onclick="addOption(${i})">+ Opção</button></div></div><div class="qw-options-box">${opts}</div>`;
+      }
+      return `<div class="qw-step"><div class="qw-step-head"><div class="qw-step-title">#${i+1} · ${esc(s.tipo)}</div><div class="qw-step-actions"><button class="qw-mini-btn" type="button" onclick="moveStep(${i},-1)">↑</button><button class="qw-mini-btn" type="button" onclick="moveStep(${i},1)">↓</button><button class="qw-mini-btn danger" type="button" onclick="removeStep(${i})">Remover</button></div></div>${body}</div>`;
+    }).join('');
+  }
+  function prepareSteps(){ document.getElementById('etapasJson').value=JSON.stringify(steps); return true; }
+  function buildSimulation(items){
+    let t=0; let out=[];
+    out.push('SIMULAÇÃO DO FLUXO'); out.push('────────────────────');
+    (items||[]).forEach((s,i)=>{
+      out.push(`\n[${String(Math.floor(t/60)).padStart(2,'0')}:${String(t%60).padStart(2,'0')}] Etapa ${i+1}: ${String(s.tipo||'texto').toUpperCase()}`);
+      if(s.tipo==='texto') { const d=Number(s.digitandoSegundos||0); if(d){ out.push(`Digitando por ${d}s...`); t+=d; } out.push(`Enviar texto:\n${s.texto||'(vazio)'}`); }
+      if(s.tipo==='pausa') { const d=Number(s.segundos||0); out.push(`Aguardar ${d}s antes da próxima etapa.`); t+=d; }
+      if(s.tipo==='audio') { const d=Number(s.gravandoSegundos||0); if(d){ out.push(`Gravando áudio por ${d}s...`); t+=d; } out.push(`Enviar áudio: ${s.caminho||'(sem caminho)'}`); if(s.legenda) out.push(`Obs: ${s.legenda}`); }
+      if(s.tipo==='imagem') { out.push(`Enviar imagem: ${s.caminho||'(sem caminho)'}`); if(s.legenda) out.push(`Legenda: ${s.legenda}`); }
+      if(s.tipo==='arquivo') { out.push(`Enviar arquivo: ${s.caminho||'(sem caminho)'}`); if(s.legenda) out.push(`Legenda: ${s.legenda}`); }
+      if(s.tipo==='opcoes') { out.push(s.texto || 'Opções:'); (s.opcoes||[]).forEach(o=>out.push(`- ${o.label||''} | resposta: ${o.resposta||''} | próximo: ${o.proximoBloco||''}`)); }
+    });
+    out.push(`\nTempo mínimo estimado: ${t}s`);
+    return out.join('\n');
+  }
+  function simulateCurrent(){ const p=document.getElementById('preview'); if(p) p.textContent=buildSimulation(steps); }
+  function simulateSaved(){ const id=document.getElementById('simulateSelect')?.value; const b=blocosSalvos.find(x=>x.id===id); const p=document.getElementById('savedPreview'); if(p) p.textContent=b?buildSimulation(b.etapas||[]):'Bloco não encontrado.'; }
+  renderBuilder();
+</script>
