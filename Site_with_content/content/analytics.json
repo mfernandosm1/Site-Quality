@@ -1,17 +1,17 @@
 {
   "version": "8.4.0-analytics-professional",
   "createdAt": "2026-07-08T00:26:21.803Z",
-  "updatedAt": "2026-07-08T20:10:56.791Z",
+  "updatedAt": "2026-07-08T21:21:14.336Z",
   "source": "local-json",
   "counters": {
-    "product_view": 0,
+    "product_view": 1,
     "favorite": 2,
     "favorite_click": 0,
-    "whatsapp_click": 0,
-    "category_view": 1,
+    "whatsapp_click": 1,
+    "category_view": 2,
     "share_click": 0,
     "search": 0,
-    "page_view": 3
+    "page_view": 6
   },
   "products": {
     "mini-game-portatil-400-jogos": {
@@ -24,6 +24,17 @@
       "whatsapp": 0,
       "shares": 0,
       "lastAt": "2026-07-08T20:10:56.791Z"
+    },
+    "motorola-moto-g35-5g-128gb-4gb-ram-8gb-ram-boost": {
+      "slug": "motorola-moto-g35-5g-128gb-4gb-ram-8gb-ram-boost",
+      "name": "Motorola Moto G35 5G 128gb 4GB Ram+8GB Ram Boost",
+      "image": "/images/Moto G35.jpeg",
+      "url": "http://localhost:3000/produto/motorola-moto-g35-5g-128gb-4gb-ram-8gb-ram-boost/",
+      "views": 1,
+      "favorites": 0,
+      "whatsapp": 1,
+      "shares": 0,
+      "lastAt": "2026-07-08T21:21:14.336Z"
     }
   },
   "categories": {
@@ -31,21 +42,26 @@
       "slug": "smartphones",
       "name": "smartphones",
       "url": "http://localhost:3000/smartphones/",
-      "views": 1,
-      "lastAt": "2026-07-08T20:10:53.245Z"
+      "views": 2,
+      "lastAt": "2026-07-08T21:21:07.521Z"
     }
   },
   "searches": {},
   "pages": {
     "http://localhost:3000/site/view/index.html": {
       "url": "http://localhost:3000/site/view/index.html",
-      "views": 4,
-      "lastAt": "2026-07-08T20:10:56.791Z"
+      "views": 5,
+      "lastAt": "2026-07-08T21:21:06.248Z"
     },
     "http://localhost:3000/smartphones/": {
       "url": "http://localhost:3000/smartphones/",
-      "views": 2,
-      "lastAt": "2026-07-08T20:10:53.245Z"
+      "views": 4,
+      "lastAt": "2026-07-08T21:21:07.520Z"
+    },
+    "http://localhost:3000/produto/motorola-moto-g35-5g-128gb-4gb-ram-8gb-ram-boost/": {
+      "url": "http://localhost:3000/produto/motorola-moto-g35-5g-128gb-4gb-ram-8gb-ram-boost/",
+      "views": 3,
+      "lastAt": "2026-07-08T21:21:14.336Z"
     }
   },
   "devices": {},
@@ -120,6 +136,78 @@
       "product": {
         "slug": "mini-game-portatil-400-jogos",
         "name": "Mini game portátil 400 jogos"
+      },
+      "term": ""
+    },
+    {
+      "at": "2026-07-08T21:21:06.248Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/site/view/index.html",
+      "referrer": "http://localhost:3000/",
+      "device": "desktop",
+      "viewport": "1821x798",
+      "language": "pt-PT",
+      "term": ""
+    },
+    {
+      "at": "2026-07-08T21:21:07.513Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/smartphones/",
+      "referrer": "http://localhost:3000/site/view/index.html",
+      "device": "desktop",
+      "viewport": "1821x798",
+      "language": "pt-PT",
+      "term": ""
+    },
+    {
+      "at": "2026-07-08T21:21:07.521Z",
+      "type": "category_view",
+      "url": "http://localhost:3000/smartphones/",
+      "referrer": "http://localhost:3000/site/view/index.html",
+      "device": "desktop",
+      "viewport": "1821x798",
+      "language": "pt-PT",
+      "category": {
+        "slug": "smartphones",
+        "name": "smartphones"
+      },
+      "term": ""
+    },
+    {
+      "at": "2026-07-08T21:21:12.409Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/produto/motorola-moto-g35-5g-128gb-4gb-ram-8gb-ram-boost/",
+      "referrer": "http://localhost:3000/smartphones/",
+      "device": "desktop",
+      "viewport": "1821x798",
+      "language": "pt-PT",
+      "term": ""
+    },
+    {
+      "at": "2026-07-08T21:21:13.315Z",
+      "type": "product_view",
+      "url": "http://localhost:3000/produto/motorola-moto-g35-5g-128gb-4gb-ram-8gb-ram-boost/",
+      "referrer": "http://localhost:3000/smartphones/",
+      "device": "desktop",
+      "viewport": "1821x798",
+      "language": "pt-PT",
+      "product": {
+        "slug": "motorola-moto-g35-5g-128gb-4gb-ram-8gb-ram-boost",
+        "name": "Motorola Moto G35 5G 128gb 4GB Ram+8GB Ram Boost"
+      },
+      "term": ""
+    },
+    {
+      "at": "2026-07-08T21:21:14.336Z",
+      "type": "whatsapp_click",
+      "url": "http://localhost:3000/produto/motorola-moto-g35-5g-128gb-4gb-ram-8gb-ram-boost/",
+      "referrer": "http://localhost:3000/smartphones/",
+      "device": "desktop",
+      "viewport": "1821x798",
+      "language": "pt-PT",
+      "product": {
+        "slug": "",
+        "name": "Motorola Moto G35 5G 128gb 4GB Ram+8GB Ram Boost"
       },
       "term": ""
     }

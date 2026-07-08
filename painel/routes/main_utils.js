@@ -548,7 +548,9 @@ ${footer}
     setCategoryTitle(titleEl, categoryName, category ? category.icon : '');
     document.title = categoryName + ' – Quality Celulares';
 
-    const metaDescriptionText = 'Confira ' + categoryName + ' disponíveis na Quality Celulares. Atendimento pelo WhatsApp.';
+    const metaDescriptionText =(category && (category.ogDescription || category.seoDescription))
+    ? (category.ogDescription || category.seoDescription)
+    : 'Confira ' + categoryName + ' disponíveis na Quality Celulares. Atendimento pelo WhatsApp.';
     let metaDescription = document.querySelector('meta[name="description"]');
     if (!metaDescription) {
       metaDescription = document.createElement('meta');
@@ -577,7 +579,7 @@ ${footer}
 
     const categoryUrl = window.location.origin + '/' + encodeURIComponent(categorySlugLower || currentSlug) + '/';
     setOg('og:type', 'website');
-    setOg('og:title', categoryName + ' – Quality Celulares');
+    setOg('og:title', (category && (category.ogTitle || category.seoTitle)) ? (category.ogTitle || category.seoTitle) : categoryName + ' – Quality Celulares');
     setOg('og:description', metaDescriptionText);
     setOg('og:url', categoryUrl);
     setOg('og:image', window.location.origin + '/images/logo.png');
