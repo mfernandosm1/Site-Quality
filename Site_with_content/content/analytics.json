@@ -1,17 +1,17 @@
 {
   "version": "8.4.0-analytics-professional",
   "createdAt": "2026-07-08T00:26:21.803Z",
-  "updatedAt": "2026-07-09T23:46:05.198Z",
+  "updatedAt": "2026-07-09T23:54:08.295Z",
   "source": "local-json",
   "counters": {
-    "product_view": 5,
+    "product_view": 6,
     "favorite": 2,
     "favorite_click": 0,
     "whatsapp_click": 1,
-    "category_view": 16,
+    "category_view": 18,
     "share_click": 0,
     "search": 1,
-    "page_view": 35
+    "page_view": 38
   },
   "products": {
     "mini-game-portatil-400-jogos": {
@@ -57,6 +57,17 @@
       "whatsapp": 0,
       "shares": 0,
       "lastAt": "2026-07-09T23:37:47.931Z"
+    },
+    "ring-light-iluminador-led-12-polegadas-30cm-tripe-210cm": {
+      "slug": "ring-light-iluminador-led-12-polegadas-30cm-tripe-210cm",
+      "name": "Ring Light Iluminador Led 12 Polegadas 30cm + Tripé 210cm",
+      "image": "/images/Tripe_RingLight_12 (1).jpeg",
+      "url": "http://localhost:3000/produto/ring-light-iluminador-led-12-polegadas-30cm-tripe-210cm/",
+      "views": 1,
+      "favorites": 0,
+      "whatsapp": 0,
+      "shares": 0,
+      "lastAt": "2026-07-09T23:47:00.722Z"
     }
   },
   "categories": {
@@ -85,8 +96,8 @@
       "slug": "eletronicos",
       "name": "eletronicos",
       "url": "http://localhost:3000/eletronicos/",
-      "views": 2,
-      "lastAt": "2026-07-09T23:38:08.345Z"
+      "views": 4,
+      "lastAt": "2026-07-09T23:54:08.294Z"
     }
   },
   "searches": {
@@ -129,13 +140,18 @@
     },
     "http://localhost:3000/eletronicos/": {
       "url": "http://localhost:3000/eletronicos/",
-      "views": 4,
-      "lastAt": "2026-07-09T23:38:08.345Z"
+      "views": 8,
+      "lastAt": "2026-07-09T23:54:08.294Z"
     },
     "http://localhost:3000/produto/microfone-lapela-celular-bluetooth-tipo-c/": {
       "url": "http://localhost:3000/produto/microfone-lapela-celular-bluetooth-tipo-c/",
       "views": 2,
       "lastAt": "2026-07-09T23:37:47.931Z"
+    },
+    "http://localhost:3000/produto/ring-light-iluminador-led-12-polegadas-30cm-tripe-210cm/": {
+      "url": "http://localhost:3000/produto/ring-light-iluminador-led-12-polegadas-30cm-tripe-210cm/",
+      "views": 2,
+      "lastAt": "2026-07-09T23:47:00.722Z"
     }
   },
   "devices": {},
@@ -834,6 +850,78 @@
       "category": {
         "slug": "acessorios",
         "name": "acessorios"
+      },
+      "term": ""
+    },
+    {
+      "at": "2026-07-09T23:46:59.826Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/produto/ring-light-iluminador-led-12-polegadas-30cm-tripe-210cm/",
+      "referrer": "http://localhost:3000/acessorios/",
+      "device": "desktop",
+      "viewport": "1821x798",
+      "language": "pt-PT",
+      "term": ""
+    },
+    {
+      "at": "2026-07-09T23:47:00.722Z",
+      "type": "product_view",
+      "url": "http://localhost:3000/produto/ring-light-iluminador-led-12-polegadas-30cm-tripe-210cm/",
+      "referrer": "http://localhost:3000/acessorios/",
+      "device": "desktop",
+      "viewport": "1821x798",
+      "language": "pt-PT",
+      "product": {
+        "slug": "ring-light-iluminador-led-12-polegadas-30cm-tripe-210cm",
+        "name": "Ring Light Iluminador Led 12 Polegadas 30cm + Tripé 210cm"
+      },
+      "term": ""
+    },
+    {
+      "at": "2026-07-09T23:48:00.634Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/eletronicos/",
+      "referrer": "http://localhost:3000/produto/ring-light-iluminador-led-12-polegadas-30cm-tripe-210cm/",
+      "device": "desktop",
+      "viewport": "1821x798",
+      "language": "pt-PT",
+      "term": ""
+    },
+    {
+      "at": "2026-07-09T23:48:00.641Z",
+      "type": "category_view",
+      "url": "http://localhost:3000/eletronicos/",
+      "referrer": "http://localhost:3000/produto/ring-light-iluminador-led-12-polegadas-30cm-tripe-210cm/",
+      "device": "desktop",
+      "viewport": "1821x798",
+      "language": "pt-PT",
+      "category": {
+        "slug": "eletronicos",
+        "name": "eletronicos"
+      },
+      "term": ""
+    },
+    {
+      "at": "2026-07-09T23:54:08.267Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/eletronicos/",
+      "referrer": "http://localhost:3000/eletronicos/",
+      "device": "desktop",
+      "viewport": "1821x798",
+      "language": "pt-PT",
+      "term": ""
+    },
+    {
+      "at": "2026-07-09T23:54:08.294Z",
+      "type": "category_view",
+      "url": "http://localhost:3000/eletronicos/",
+      "referrer": "http://localhost:3000/eletronicos/",
+      "device": "desktop",
+      "viewport": "1821x798",
+      "language": "pt-PT",
+      "category": {
+        "slug": "eletronicos",
+        "name": "eletronicos"
       },
       "term": ""
     }
