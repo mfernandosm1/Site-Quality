@@ -1,17 +1,17 @@
 {
   "version": "8.4.0-analytics-professional",
   "createdAt": "2026-07-08T00:26:21.803Z",
-  "updatedAt": "2026-07-09T23:38:09.954Z",
+  "updatedAt": "2026-07-09T23:46:05.198Z",
   "source": "local-json",
   "counters": {
     "product_view": 5,
     "favorite": 2,
     "favorite_click": 0,
     "whatsapp_click": 1,
-    "category_view": 12,
+    "category_view": 16,
     "share_click": 0,
     "search": 1,
-    "page_view": 29
+    "page_view": 35
   },
   "products": {
     "mini-game-portatil-400-jogos": {
@@ -64,22 +64,22 @@
       "slug": "smartphones",
       "name": "smartphones",
       "url": "http://localhost:3000/smartphones/",
-      "views": 7,
-      "lastAt": "2026-07-09T23:38:09.954Z"
+      "views": 8,
+      "lastAt": "2026-07-09T23:38:16.831Z"
     },
     "assistencia-tecnica": {
       "slug": "assistencia-tecnica",
       "name": "assistencia-tecnica",
       "url": "http://localhost:3000/assistencia-tecnica/",
-      "views": 1,
-      "lastAt": "2026-07-08T21:22:46.979Z"
+      "views": 2,
+      "lastAt": "2026-07-09T23:38:17.028Z"
     },
     "acessorios": {
       "slug": "acessorios",
       "name": "acessorios",
       "url": "http://localhost:3000/acessorios/",
-      "views": 2,
-      "lastAt": "2026-07-09T23:37:42.310Z"
+      "views": 4,
+      "lastAt": "2026-07-09T23:46:05.197Z"
     },
     "eletronicos": {
       "slug": "eletronicos",
@@ -99,13 +99,13 @@
   "pages": {
     "http://localhost:3000/site/view/index.html": {
       "url": "http://localhost:3000/site/view/index.html",
-      "views": 15,
-      "lastAt": "2026-07-09T23:37:40.716Z"
+      "views": 17,
+      "lastAt": "2026-07-09T23:46:03.102Z"
     },
     "http://localhost:3000/smartphones/": {
       "url": "http://localhost:3000/smartphones/",
-      "views": 14,
-      "lastAt": "2026-07-09T23:38:09.954Z"
+      "views": 16,
+      "lastAt": "2026-07-09T23:38:16.842Z"
     },
     "http://localhost:3000/produto/motorola-moto-g35-5g-128gb-4gb-ram-8gb-ram-boost/": {
       "url": "http://localhost:3000/produto/motorola-moto-g35-5g-128gb-4gb-ram-8gb-ram-boost/",
@@ -114,8 +114,8 @@
     },
     "http://localhost:3000/assistencia-tecnica/": {
       "url": "http://localhost:3000/assistencia-tecnica/",
-      "views": 2,
-      "lastAt": "2026-07-08T21:22:46.979Z"
+      "views": 4,
+      "lastAt": "2026-07-09T23:38:17.028Z"
     },
     "http://localhost:3000/produto/motorola-moto-g17-128gb-4gb-ram-8gb-ram-boost/": {
       "url": "http://localhost:3000/produto/motorola-moto-g17-128gb-4gb-ram-8gb-ram-boost/",
@@ -124,8 +124,8 @@
     },
     "http://localhost:3000/acessorios/": {
       "url": "http://localhost:3000/acessorios/",
-      "views": 4,
-      "lastAt": "2026-07-09T23:37:42.310Z"
+      "views": 8,
+      "lastAt": "2026-07-09T23:46:05.197Z"
     },
     "http://localhost:3000/eletronicos/": {
       "url": "http://localhost:3000/eletronicos/",
@@ -718,6 +718,122 @@
       "category": {
         "slug": "smartphones",
         "name": "smartphones"
+      },
+      "term": ""
+    },
+    {
+      "at": "2026-07-09T23:38:16.798Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/site/view/index.html",
+      "referrer": "http://localhost:3000/produtos",
+      "device": "desktop",
+      "viewport": "1821x798",
+      "language": "pt-PT",
+      "term": ""
+    },
+    {
+      "at": "2026-07-09T23:38:16.831Z",
+      "type": "category_view",
+      "url": "http://localhost:3000/smartphones/",
+      "referrer": "http://localhost:3000/site/view/index.html",
+      "device": "desktop",
+      "viewport": "1821x798",
+      "language": "pt-PT",
+      "category": {
+        "slug": "smartphones",
+        "name": "smartphones"
+      },
+      "term": ""
+    },
+    {
+      "at": "2026-07-09T23:38:16.842Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/smartphones/",
+      "referrer": "http://localhost:3000/site/view/index.html",
+      "device": "desktop",
+      "viewport": "1821x798",
+      "language": "pt-PT",
+      "term": ""
+    },
+    {
+      "at": "2026-07-09T23:38:17.014Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/assistencia-tecnica/",
+      "referrer": "http://localhost:3000/site/view/index.html",
+      "device": "desktop",
+      "viewport": "1821x798",
+      "language": "pt-PT",
+      "term": ""
+    },
+    {
+      "at": "2026-07-09T23:38:17.028Z",
+      "type": "category_view",
+      "url": "http://localhost:3000/assistencia-tecnica/",
+      "referrer": "http://localhost:3000/site/view/index.html",
+      "device": "desktop",
+      "viewport": "1821x798",
+      "language": "pt-PT",
+      "category": {
+        "slug": "assistencia-tecnica",
+        "name": "assistencia-tecnica"
+      },
+      "term": ""
+    },
+    {
+      "at": "2026-07-09T23:38:37.776Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/acessorios/",
+      "referrer": "http://localhost:3000/site/view/index.html",
+      "device": "desktop",
+      "viewport": "1821x798",
+      "language": "pt-PT",
+      "term": ""
+    },
+    {
+      "at": "2026-07-09T23:38:37.783Z",
+      "type": "category_view",
+      "url": "http://localhost:3000/acessorios/",
+      "referrer": "http://localhost:3000/site/view/index.html",
+      "device": "desktop",
+      "viewport": "1821x798",
+      "language": "pt-PT",
+      "category": {
+        "slug": "acessorios",
+        "name": "acessorios"
+      },
+      "term": ""
+    },
+    {
+      "at": "2026-07-09T23:46:03.102Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/site/view/index.html",
+      "referrer": "http://localhost:3000/produtos?saved=produto",
+      "device": "desktop",
+      "viewport": "1821x798",
+      "language": "pt-PT",
+      "term": ""
+    },
+    {
+      "at": "2026-07-09T23:46:05.192Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/acessorios/",
+      "referrer": "http://localhost:3000/site/view/index.html",
+      "device": "desktop",
+      "viewport": "1821x798",
+      "language": "pt-PT",
+      "term": ""
+    },
+    {
+      "at": "2026-07-09T23:46:05.197Z",
+      "type": "category_view",
+      "url": "http://localhost:3000/acessorios/",
+      "referrer": "http://localhost:3000/site/view/index.html",
+      "device": "desktop",
+      "viewport": "1821x798",
+      "language": "pt-PT",
+      "category": {
+        "slug": "acessorios",
+        "name": "acessorios"
       },
       "term": ""
     }

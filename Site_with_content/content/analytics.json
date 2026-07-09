@@ -1,17 +1,17 @@
 {
   "version": "8.4.0-analytics-professional",
   "createdAt": "2026-07-08T00:26:21.803Z",
-  "updatedAt": "2026-07-09T23:38:17.029Z",
+  "updatedAt": "2026-07-09T23:46:05.198Z",
   "source": "local-json",
   "counters": {
     "product_view": 5,
     "favorite": 2,
     "favorite_click": 0,
     "whatsapp_click": 1,
-    "category_view": 14,
+    "category_view": 16,
     "share_click": 0,
     "search": 1,
-    "page_view": 32
+    "page_view": 35
   },
   "products": {
     "mini-game-portatil-400-jogos": {
@@ -78,8 +78,8 @@
       "slug": "acessorios",
       "name": "acessorios",
       "url": "http://localhost:3000/acessorios/",
-      "views": 2,
-      "lastAt": "2026-07-09T23:37:42.310Z"
+      "views": 4,
+      "lastAt": "2026-07-09T23:46:05.197Z"
     },
     "eletronicos": {
       "slug": "eletronicos",
@@ -99,8 +99,8 @@
   "pages": {
     "http://localhost:3000/site/view/index.html": {
       "url": "http://localhost:3000/site/view/index.html",
-      "views": 16,
-      "lastAt": "2026-07-09T23:38:16.798Z"
+      "views": 17,
+      "lastAt": "2026-07-09T23:46:03.102Z"
     },
     "http://localhost:3000/smartphones/": {
       "url": "http://localhost:3000/smartphones/",
@@ -124,8 +124,8 @@
     },
     "http://localhost:3000/acessorios/": {
       "url": "http://localhost:3000/acessorios/",
-      "views": 4,
-      "lastAt": "2026-07-09T23:37:42.310Z"
+      "views": 8,
+      "lastAt": "2026-07-09T23:46:05.197Z"
     },
     "http://localhost:3000/eletronicos/": {
       "url": "http://localhost:3000/eletronicos/",
@@ -776,6 +776,64 @@
       "category": {
         "slug": "assistencia-tecnica",
         "name": "assistencia-tecnica"
+      },
+      "term": ""
+    },
+    {
+      "at": "2026-07-09T23:38:37.776Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/acessorios/",
+      "referrer": "http://localhost:3000/site/view/index.html",
+      "device": "desktop",
+      "viewport": "1821x798",
+      "language": "pt-PT",
+      "term": ""
+    },
+    {
+      "at": "2026-07-09T23:38:37.783Z",
+      "type": "category_view",
+      "url": "http://localhost:3000/acessorios/",
+      "referrer": "http://localhost:3000/site/view/index.html",
+      "device": "desktop",
+      "viewport": "1821x798",
+      "language": "pt-PT",
+      "category": {
+        "slug": "acessorios",
+        "name": "acessorios"
+      },
+      "term": ""
+    },
+    {
+      "at": "2026-07-09T23:46:03.102Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/site/view/index.html",
+      "referrer": "http://localhost:3000/produtos?saved=produto",
+      "device": "desktop",
+      "viewport": "1821x798",
+      "language": "pt-PT",
+      "term": ""
+    },
+    {
+      "at": "2026-07-09T23:46:05.192Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/acessorios/",
+      "referrer": "http://localhost:3000/site/view/index.html",
+      "device": "desktop",
+      "viewport": "1821x798",
+      "language": "pt-PT",
+      "term": ""
+    },
+    {
+      "at": "2026-07-09T23:46:05.197Z",
+      "type": "category_view",
+      "url": "http://localhost:3000/acessorios/",
+      "referrer": "http://localhost:3000/site/view/index.html",
+      "device": "desktop",
+      "viewport": "1821x798",
+      "language": "pt-PT",
+      "category": {
+        "slug": "acessorios",
+        "name": "acessorios"
       },
       "term": ""
     }
