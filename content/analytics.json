@@ -1,17 +1,17 @@
 {
   "version": "8.4.0-analytics-professional",
   "createdAt": "2026-07-08T00:26:21.803Z",
-  "updatedAt": "2026-07-08T21:21:14.336Z",
+  "updatedAt": "2026-07-09T23:38:09.954Z",
   "source": "local-json",
   "counters": {
-    "product_view": 1,
+    "product_view": 5,
     "favorite": 2,
     "favorite_click": 0,
     "whatsapp_click": 1,
-    "category_view": 2,
+    "category_view": 12,
     "share_click": 0,
-    "search": 0,
-    "page_view": 6
+    "search": 1,
+    "page_view": 29
   },
   "products": {
     "mini-game-portatil-400-jogos": {
@@ -35,6 +35,28 @@
       "whatsapp": 1,
       "shares": 0,
       "lastAt": "2026-07-08T21:21:14.336Z"
+    },
+    "motorola-moto-g17-128gb-4gb-ram-8gb-ram-boost": {
+      "slug": "motorola-moto-g17-128gb-4gb-ram-8gb-ram-boost",
+      "name": "Motorola Moto g17 128GB  (4GB RAM + 8GB RAM Boost)",
+      "image": "/images/MotoG17 (2).jpeg",
+      "url": "http://localhost:3000/produto/motorola-moto-g17-128gb-4gb-ram-8gb-ram-boost/",
+      "views": 3,
+      "favorites": 0,
+      "whatsapp": 0,
+      "shares": 0,
+      "lastAt": "2026-07-09T23:21:22.560Z"
+    },
+    "microfone-lapela-celular-bluetooth-tipo-c": {
+      "slug": "microfone-lapela-celular-bluetooth-tipo-c",
+      "name": "Microfone Lapela Celular Bluetooth Tipo C",
+      "image": "/images/Microfone_bluetooth_lapela.jpeg",
+      "url": "http://localhost:3000/produto/microfone-lapela-celular-bluetooth-tipo-c/",
+      "views": 1,
+      "favorites": 0,
+      "whatsapp": 0,
+      "shares": 0,
+      "lastAt": "2026-07-09T23:37:47.931Z"
     }
   },
   "categories": {
@@ -42,26 +64,78 @@
       "slug": "smartphones",
       "name": "smartphones",
       "url": "http://localhost:3000/smartphones/",
+      "views": 7,
+      "lastAt": "2026-07-09T23:38:09.954Z"
+    },
+    "assistencia-tecnica": {
+      "slug": "assistencia-tecnica",
+      "name": "assistencia-tecnica",
+      "url": "http://localhost:3000/assistencia-tecnica/",
+      "views": 1,
+      "lastAt": "2026-07-08T21:22:46.979Z"
+    },
+    "acessorios": {
+      "slug": "acessorios",
+      "name": "acessorios",
+      "url": "http://localhost:3000/acessorios/",
       "views": 2,
-      "lastAt": "2026-07-08T21:21:07.521Z"
+      "lastAt": "2026-07-09T23:37:42.310Z"
+    },
+    "eletronicos": {
+      "slug": "eletronicos",
+      "name": "eletronicos",
+      "url": "http://localhost:3000/eletronicos/",
+      "views": 2,
+      "lastAt": "2026-07-09T23:38:08.345Z"
     }
   },
-  "searches": {},
+  "searches": {
+    "g17": {
+      "term": "g17",
+      "total": 1,
+      "lastAt": "2026-07-09T23:06:27.867Z"
+    }
+  },
   "pages": {
     "http://localhost:3000/site/view/index.html": {
       "url": "http://localhost:3000/site/view/index.html",
-      "views": 5,
-      "lastAt": "2026-07-08T21:21:06.248Z"
+      "views": 15,
+      "lastAt": "2026-07-09T23:37:40.716Z"
     },
     "http://localhost:3000/smartphones/": {
       "url": "http://localhost:3000/smartphones/",
-      "views": 4,
-      "lastAt": "2026-07-08T21:21:07.520Z"
+      "views": 14,
+      "lastAt": "2026-07-09T23:38:09.954Z"
     },
     "http://localhost:3000/produto/motorola-moto-g35-5g-128gb-4gb-ram-8gb-ram-boost/": {
       "url": "http://localhost:3000/produto/motorola-moto-g35-5g-128gb-4gb-ram-8gb-ram-boost/",
       "views": 3,
       "lastAt": "2026-07-08T21:21:14.336Z"
+    },
+    "http://localhost:3000/assistencia-tecnica/": {
+      "url": "http://localhost:3000/assistencia-tecnica/",
+      "views": 2,
+      "lastAt": "2026-07-08T21:22:46.979Z"
+    },
+    "http://localhost:3000/produto/motorola-moto-g17-128gb-4gb-ram-8gb-ram-boost/": {
+      "url": "http://localhost:3000/produto/motorola-moto-g17-128gb-4gb-ram-8gb-ram-boost/",
+      "views": 6,
+      "lastAt": "2026-07-09T23:21:22.560Z"
+    },
+    "http://localhost:3000/acessorios/": {
+      "url": "http://localhost:3000/acessorios/",
+      "views": 4,
+      "lastAt": "2026-07-09T23:37:42.310Z"
+    },
+    "http://localhost:3000/eletronicos/": {
+      "url": "http://localhost:3000/eletronicos/",
+      "views": 4,
+      "lastAt": "2026-07-09T23:38:08.345Z"
+    },
+    "http://localhost:3000/produto/microfone-lapela-celular-bluetooth-tipo-c/": {
+      "url": "http://localhost:3000/produto/microfone-lapela-celular-bluetooth-tipo-c/",
+      "views": 2,
+      "lastAt": "2026-07-09T23:37:47.931Z"
     }
   },
   "devices": {},
@@ -208,6 +282,442 @@
       "product": {
         "slug": "",
         "name": "Motorola Moto G35 5G 128gb 4GB Ram+8GB Ram Boost"
+      },
+      "term": ""
+    },
+    {
+      "at": "2026-07-08T21:22:45.422Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/site/view/index.html",
+      "referrer": "http://localhost:3000/?flash=%E2%9C%85%20Conte%C3%BAdo%20atualizado%2C%20categorias%20antigas%20limpas%20e%20push%20realizado.",
+      "device": "desktop",
+      "viewport": "1821x798",
+      "language": "pt-PT",
+      "term": ""
+    },
+    {
+      "at": "2026-07-08T21:22:46.973Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/assistencia-tecnica/",
+      "referrer": "http://localhost:3000/site/view/index.html",
+      "device": "desktop",
+      "viewport": "1821x798",
+      "language": "pt-PT",
+      "term": ""
+    },
+    {
+      "at": "2026-07-08T21:22:46.979Z",
+      "type": "category_view",
+      "url": "http://localhost:3000/assistencia-tecnica/",
+      "referrer": "http://localhost:3000/site/view/index.html",
+      "device": "desktop",
+      "viewport": "1821x798",
+      "language": "pt-PT",
+      "category": {
+        "slug": "assistencia-tecnica",
+        "name": "assistencia-tecnica"
+      },
+      "term": ""
+    },
+    {
+      "at": "2026-07-08T22:48:09.385Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/site/view/index.html",
+      "referrer": "http://localhost:3000/produtos",
+      "device": "desktop",
+      "viewport": "1821x798",
+      "language": "pt-PT",
+      "term": ""
+    },
+    {
+      "at": "2026-07-09T23:06:14.410Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/site/view/index.html",
+      "referrer": "http://localhost:3000/produtos",
+      "device": "desktop",
+      "viewport": "1821x798",
+      "language": "pt-PT",
+      "term": ""
+    },
+    {
+      "at": "2026-07-09T23:06:24.742Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/site/view/index.html",
+      "referrer": "http://localhost:3000/produtos",
+      "device": "desktop",
+      "viewport": "1821x798",
+      "language": "pt-PT",
+      "term": ""
+    },
+    {
+      "at": "2026-07-09T23:06:27.867Z",
+      "type": "search",
+      "url": "http://localhost:3000/site/view/index.html",
+      "referrer": "http://localhost:3000/produtos",
+      "device": "desktop",
+      "viewport": "1821x798",
+      "language": "pt-PT",
+      "term": "g17"
+    },
+    {
+      "at": "2026-07-09T23:14:19.319Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/site/view/index.html",
+      "referrer": "http://localhost:3000/produtos?saved=produto",
+      "device": "desktop",
+      "viewport": "1821x798",
+      "language": "pt-PT",
+      "term": ""
+    },
+    {
+      "at": "2026-07-09T23:14:25.369Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/smartphones/",
+      "referrer": "http://localhost:3000/site/view/index.html",
+      "device": "desktop",
+      "viewport": "1821x798",
+      "language": "pt-PT",
+      "term": ""
+    },
+    {
+      "at": "2026-07-09T23:14:25.377Z",
+      "type": "category_view",
+      "url": "http://localhost:3000/smartphones/",
+      "referrer": "http://localhost:3000/site/view/index.html",
+      "device": "desktop",
+      "viewport": "1821x798",
+      "language": "pt-PT",
+      "category": {
+        "slug": "smartphones",
+        "name": "smartphones"
+      },
+      "term": ""
+    },
+    {
+      "at": "2026-07-09T23:17:50.449Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/site/view/index.html",
+      "referrer": "http://localhost:3000/produtos?saved=produto",
+      "device": "desktop",
+      "viewport": "1821x798",
+      "language": "pt-PT",
+      "term": ""
+    },
+    {
+      "at": "2026-07-09T23:17:52.531Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/smartphones/",
+      "referrer": "http://localhost:3000/site/view/index.html",
+      "device": "desktop",
+      "viewport": "1821x798",
+      "language": "pt-PT",
+      "term": ""
+    },
+    {
+      "at": "2026-07-09T23:17:52.536Z",
+      "type": "category_view",
+      "url": "http://localhost:3000/smartphones/",
+      "referrer": "http://localhost:3000/site/view/index.html",
+      "device": "desktop",
+      "viewport": "1821x798",
+      "language": "pt-PT",
+      "category": {
+        "slug": "smartphones",
+        "name": "smartphones"
+      },
+      "term": ""
+    },
+    {
+      "at": "2026-07-09T23:17:57.579Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/produto/motorola-moto-g17-128gb-4gb-ram-8gb-ram-boost/",
+      "referrer": "http://localhost:3000/smartphones/",
+      "device": "desktop",
+      "viewport": "1821x798",
+      "language": "pt-PT",
+      "term": ""
+    },
+    {
+      "at": "2026-07-09T23:17:58.479Z",
+      "type": "product_view",
+      "url": "http://localhost:3000/produto/motorola-moto-g17-128gb-4gb-ram-8gb-ram-boost/",
+      "referrer": "http://localhost:3000/smartphones/",
+      "device": "desktop",
+      "viewport": "1821x798",
+      "language": "pt-PT",
+      "product": {
+        "slug": "motorola-moto-g17-128gb-4gb-ram-8gb-ram-boost",
+        "name": "Motorola Moto g17 128GB  (4GB RAM + 8GB RAM Boost)"
+      },
+      "term": ""
+    },
+    {
+      "at": "2026-07-09T23:18:04.302Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/produto/motorola-moto-g17-128gb-4gb-ram-8gb-ram-boost/",
+      "referrer": "http://localhost:3000/smartphones/",
+      "device": "desktop",
+      "viewport": "1821x798",
+      "language": "pt-PT",
+      "term": ""
+    },
+    {
+      "at": "2026-07-09T23:18:05.198Z",
+      "type": "product_view",
+      "url": "http://localhost:3000/produto/motorola-moto-g17-128gb-4gb-ram-8gb-ram-boost/",
+      "referrer": "http://localhost:3000/smartphones/",
+      "device": "desktop",
+      "viewport": "1821x798",
+      "language": "pt-PT",
+      "product": {
+        "slug": "motorola-moto-g17-128gb-4gb-ram-8gb-ram-boost",
+        "name": "Motorola Moto g17 128GB  (4GB RAM + 8GB RAM Boost)"
+      },
+      "term": ""
+    },
+    {
+      "at": "2026-07-09T23:18:06.946Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/smartphones/",
+      "referrer": "http://localhost:3000/produto/motorola-moto-g17-128gb-4gb-ram-8gb-ram-boost/",
+      "device": "desktop",
+      "viewport": "1821x798",
+      "language": "pt-PT",
+      "term": ""
+    },
+    {
+      "at": "2026-07-09T23:18:06.959Z",
+      "type": "category_view",
+      "url": "http://localhost:3000/smartphones/",
+      "referrer": "http://localhost:3000/produto/motorola-moto-g17-128gb-4gb-ram-8gb-ram-boost/",
+      "device": "desktop",
+      "viewport": "1821x798",
+      "language": "pt-PT",
+      "category": {
+        "slug": "smartphones",
+        "name": "smartphones"
+      },
+      "term": ""
+    },
+    {
+      "at": "2026-07-09T23:21:15.346Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/site/view/index.html",
+      "referrer": "http://localhost:3000/produtos?saved=produto",
+      "device": "desktop",
+      "viewport": "1821x798",
+      "language": "pt-PT",
+      "term": ""
+    },
+    {
+      "at": "2026-07-09T23:21:16.950Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/smartphones/",
+      "referrer": "http://localhost:3000/site/view/index.html",
+      "device": "desktop",
+      "viewport": "1821x798",
+      "language": "pt-PT",
+      "term": ""
+    },
+    {
+      "at": "2026-07-09T23:21:16.957Z",
+      "type": "category_view",
+      "url": "http://localhost:3000/smartphones/",
+      "referrer": "http://localhost:3000/site/view/index.html",
+      "device": "desktop",
+      "viewport": "1821x798",
+      "language": "pt-PT",
+      "category": {
+        "slug": "smartphones",
+        "name": "smartphones"
+      },
+      "term": ""
+    },
+    {
+      "at": "2026-07-09T23:21:21.662Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/produto/motorola-moto-g17-128gb-4gb-ram-8gb-ram-boost/",
+      "referrer": "http://localhost:3000/smartphones/",
+      "device": "desktop",
+      "viewport": "1821x798",
+      "language": "pt-PT",
+      "term": ""
+    },
+    {
+      "at": "2026-07-09T23:21:22.560Z",
+      "type": "product_view",
+      "url": "http://localhost:3000/produto/motorola-moto-g17-128gb-4gb-ram-8gb-ram-boost/",
+      "referrer": "http://localhost:3000/smartphones/",
+      "device": "desktop",
+      "viewport": "1821x798",
+      "language": "pt-PT",
+      "product": {
+        "slug": "motorola-moto-g17-128gb-4gb-ram-8gb-ram-boost",
+        "name": "Motorola Moto g17 128GB  (4GB RAM + 8GB RAM Boost)"
+      },
+      "term": ""
+    },
+    {
+      "at": "2026-07-09T23:23:35.361Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/site/view/index.html",
+      "referrer": "http://localhost:3000/produto/motorola-moto-g17-128gb-4gb-ram-8gb-ram-boost/",
+      "device": "desktop",
+      "viewport": "1821x798",
+      "language": "pt-PT",
+      "term": ""
+    },
+    {
+      "at": "2026-07-09T23:23:35.883Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/acessorios/",
+      "referrer": "http://localhost:3000/site/view/index.html",
+      "device": "desktop",
+      "viewport": "1821x798",
+      "language": "pt-PT",
+      "term": ""
+    },
+    {
+      "at": "2026-07-09T23:23:35.892Z",
+      "type": "category_view",
+      "url": "http://localhost:3000/acessorios/",
+      "referrer": "http://localhost:3000/site/view/index.html",
+      "device": "desktop",
+      "viewport": "1821x798",
+      "language": "pt-PT",
+      "category": {
+        "slug": "acessorios",
+        "name": "acessorios"
+      },
+      "term": ""
+    },
+    {
+      "at": "2026-07-09T23:23:41.108Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/eletronicos/",
+      "referrer": "http://localhost:3000/acessorios/",
+      "device": "desktop",
+      "viewport": "1821x798",
+      "language": "pt-PT",
+      "term": ""
+    },
+    {
+      "at": "2026-07-09T23:23:41.115Z",
+      "type": "category_view",
+      "url": "http://localhost:3000/eletronicos/",
+      "referrer": "http://localhost:3000/acessorios/",
+      "device": "desktop",
+      "viewport": "1821x798",
+      "language": "pt-PT",
+      "category": {
+        "slug": "eletronicos",
+        "name": "eletronicos"
+      },
+      "term": ""
+    },
+    {
+      "at": "2026-07-09T23:37:40.716Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/site/view/index.html",
+      "referrer": "http://localhost:3000/produtos?saved=produto",
+      "device": "desktop",
+      "viewport": "1821x798",
+      "language": "pt-PT",
+      "term": ""
+    },
+    {
+      "at": "2026-07-09T23:37:42.283Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/acessorios/",
+      "referrer": "http://localhost:3000/site/view/index.html",
+      "device": "desktop",
+      "viewport": "1821x798",
+      "language": "pt-PT",
+      "term": ""
+    },
+    {
+      "at": "2026-07-09T23:37:42.310Z",
+      "type": "category_view",
+      "url": "http://localhost:3000/acessorios/",
+      "referrer": "http://localhost:3000/site/view/index.html",
+      "device": "desktop",
+      "viewport": "1821x798",
+      "language": "pt-PT",
+      "category": {
+        "slug": "acessorios",
+        "name": "acessorios"
+      },
+      "term": ""
+    },
+    {
+      "at": "2026-07-09T23:37:47.054Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/produto/microfone-lapela-celular-bluetooth-tipo-c/",
+      "referrer": "http://localhost:3000/acessorios/",
+      "device": "desktop",
+      "viewport": "1821x798",
+      "language": "pt-PT",
+      "term": ""
+    },
+    {
+      "at": "2026-07-09T23:37:47.931Z",
+      "type": "product_view",
+      "url": "http://localhost:3000/produto/microfone-lapela-celular-bluetooth-tipo-c/",
+      "referrer": "http://localhost:3000/acessorios/",
+      "device": "desktop",
+      "viewport": "1821x798",
+      "language": "pt-PT",
+      "product": {
+        "slug": "microfone-lapela-celular-bluetooth-tipo-c",
+        "name": "Microfone Lapela Celular Bluetooth Tipo C"
+      },
+      "term": ""
+    },
+    {
+      "at": "2026-07-09T23:38:08.338Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/eletronicos/",
+      "referrer": "http://localhost:3000/acessorios/",
+      "device": "desktop",
+      "viewport": "1821x798",
+      "language": "pt-PT",
+      "term": ""
+    },
+    {
+      "at": "2026-07-09T23:38:08.345Z",
+      "type": "category_view",
+      "url": "http://localhost:3000/eletronicos/",
+      "referrer": "http://localhost:3000/acessorios/",
+      "device": "desktop",
+      "viewport": "1821x798",
+      "language": "pt-PT",
+      "category": {
+        "slug": "eletronicos",
+        "name": "eletronicos"
+      },
+      "term": ""
+    },
+    {
+      "at": "2026-07-09T23:38:09.945Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/smartphones/",
+      "referrer": "http://localhost:3000/produto/motorola-moto-g17-128gb-4gb-ram-8gb-ram-boost/",
+      "device": "desktop",
+      "viewport": "1821x798",
+      "language": "pt-PT",
+      "term": ""
+    },
+    {
+      "at": "2026-07-09T23:38:09.954Z",
+      "type": "category_view",
+      "url": "http://localhost:3000/smartphones/",
+      "referrer": "http://localhost:3000/produto/motorola-moto-g17-128gb-4gb-ram-8gb-ram-boost/",
+      "device": "desktop",
+      "viewport": "1821x798",
+      "language": "pt-PT",
+      "category": {
+        "slug": "smartphones",
+        "name": "smartphones"
       },
       "term": ""
     }
