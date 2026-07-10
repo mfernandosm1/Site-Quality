@@ -1,17 +1,17 @@
 {
   "version": "8.4.0-analytics-professional",
   "createdAt": "2026-07-08T00:26:21.803Z",
-  "updatedAt": "2026-07-09T23:54:08.295Z",
+  "updatedAt": "2026-07-10T00:10:18.492Z",
   "source": "local-json",
   "counters": {
-    "product_view": 6,
+    "product_view": 7,
     "favorite": 2,
     "favorite_click": 0,
     "whatsapp_click": 1,
-    "category_view": 18,
+    "category_view": 23,
     "share_click": 0,
     "search": 1,
-    "page_view": 38
+    "page_view": 47
   },
   "products": {
     "mini-game-portatil-400-jogos": {
@@ -68,6 +68,17 @@
       "whatsapp": 0,
       "shares": 0,
       "lastAt": "2026-07-09T23:47:00.722Z"
+    },
+    "garrafa-de-tinta-epson-t544": {
+      "slug": "garrafa-de-tinta-epson-t544",
+      "name": "Garrafa de Tinta Epson T544",
+      "image": "/images/Garrafa de tinta epson 544 preto.jpeg",
+      "url": "http://localhost:3000/produto/garrafa-de-tinta-epson-t544/",
+      "views": 1,
+      "favorites": 0,
+      "whatsapp": 0,
+      "shares": 0,
+      "lastAt": "2026-07-09T23:55:42.531Z"
     }
   },
   "categories": {
@@ -75,8 +86,8 @@
       "slug": "smartphones",
       "name": "smartphones",
       "url": "http://localhost:3000/smartphones/",
-      "views": 8,
-      "lastAt": "2026-07-09T23:38:16.831Z"
+      "views": 9,
+      "lastAt": "2026-07-10T00:04:42.184Z"
     },
     "assistencia-tecnica": {
       "slug": "assistencia-tecnica",
@@ -89,15 +100,15 @@
       "slug": "acessorios",
       "name": "acessorios",
       "url": "http://localhost:3000/acessorios/",
-      "views": 4,
-      "lastAt": "2026-07-09T23:46:05.197Z"
+      "views": 7,
+      "lastAt": "2026-07-10T00:10:18.492Z"
     },
     "eletronicos": {
       "slug": "eletronicos",
       "name": "eletronicos",
       "url": "http://localhost:3000/eletronicos/",
-      "views": 4,
-      "lastAt": "2026-07-09T23:54:08.294Z"
+      "views": 5,
+      "lastAt": "2026-07-09T23:55:26.395Z"
     }
   },
   "searches": {
@@ -110,13 +121,13 @@
   "pages": {
     "http://localhost:3000/site/view/index.html": {
       "url": "http://localhost:3000/site/view/index.html",
-      "views": 17,
-      "lastAt": "2026-07-09T23:46:03.102Z"
+      "views": 20,
+      "lastAt": "2026-07-10T00:10:16.712Z"
     },
     "http://localhost:3000/smartphones/": {
       "url": "http://localhost:3000/smartphones/",
-      "views": 16,
-      "lastAt": "2026-07-09T23:38:16.842Z"
+      "views": 18,
+      "lastAt": "2026-07-10T00:04:42.184Z"
     },
     "http://localhost:3000/produto/motorola-moto-g35-5g-128gb-4gb-ram-8gb-ram-boost/": {
       "url": "http://localhost:3000/produto/motorola-moto-g35-5g-128gb-4gb-ram-8gb-ram-boost/",
@@ -135,13 +146,13 @@
     },
     "http://localhost:3000/acessorios/": {
       "url": "http://localhost:3000/acessorios/",
-      "views": 8,
-      "lastAt": "2026-07-09T23:46:05.197Z"
+      "views": 14,
+      "lastAt": "2026-07-10T00:10:18.492Z"
     },
     "http://localhost:3000/eletronicos/": {
       "url": "http://localhost:3000/eletronicos/",
-      "views": 8,
-      "lastAt": "2026-07-09T23:54:08.294Z"
+      "views": 10,
+      "lastAt": "2026-07-09T23:55:26.395Z"
     },
     "http://localhost:3000/produto/microfone-lapela-celular-bluetooth-tipo-c/": {
       "url": "http://localhost:3000/produto/microfone-lapela-celular-bluetooth-tipo-c/",
@@ -152,6 +163,11 @@
       "url": "http://localhost:3000/produto/ring-light-iluminador-led-12-polegadas-30cm-tripe-210cm/",
       "views": 2,
       "lastAt": "2026-07-09T23:47:00.722Z"
+    },
+    "http://localhost:3000/produto/garrafa-de-tinta-epson-t544/": {
+      "url": "http://localhost:3000/produto/garrafa-de-tinta-epson-t544/",
+      "views": 2,
+      "lastAt": "2026-07-09T23:55:42.531Z"
     }
   },
   "devices": {},
@@ -922,6 +938,180 @@
       "category": {
         "slug": "eletronicos",
         "name": "eletronicos"
+      },
+      "term": ""
+    },
+    {
+      "at": "2026-07-09T23:55:22.740Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/site/view/index.html",
+      "referrer": "http://localhost:3000/produtos",
+      "device": "desktop",
+      "viewport": "1821x798",
+      "language": "pt-PT",
+      "term": ""
+    },
+    {
+      "at": "2026-07-09T23:55:26.390Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/eletronicos/",
+      "referrer": "http://localhost:3000/site/view/index.html",
+      "device": "desktop",
+      "viewport": "1821x798",
+      "language": "pt-PT",
+      "term": ""
+    },
+    {
+      "at": "2026-07-09T23:55:26.395Z",
+      "type": "category_view",
+      "url": "http://localhost:3000/eletronicos/",
+      "referrer": "http://localhost:3000/site/view/index.html",
+      "device": "desktop",
+      "viewport": "1821x798",
+      "language": "pt-PT",
+      "category": {
+        "slug": "eletronicos",
+        "name": "eletronicos"
+      },
+      "term": ""
+    },
+    {
+      "at": "2026-07-09T23:55:41.635Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/produto/garrafa-de-tinta-epson-t544/",
+      "referrer": "http://localhost:3000/eletronicos/",
+      "device": "desktop",
+      "viewport": "1821x798",
+      "language": "pt-PT",
+      "term": ""
+    },
+    {
+      "at": "2026-07-09T23:55:42.531Z",
+      "type": "product_view",
+      "url": "http://localhost:3000/produto/garrafa-de-tinta-epson-t544/",
+      "referrer": "http://localhost:3000/eletronicos/",
+      "device": "desktop",
+      "viewport": "1821x798",
+      "language": "pt-PT",
+      "product": {
+        "slug": "garrafa-de-tinta-epson-t544",
+        "name": "Garrafa de Tinta Epson T544"
+      },
+      "term": ""
+    },
+    {
+      "at": "2026-07-09T23:55:49.374Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/site/view/index.html",
+      "referrer": "http://localhost:3000/produto/garrafa-de-tinta-epson-t544/",
+      "device": "desktop",
+      "viewport": "1821x798",
+      "language": "pt-PT",
+      "term": ""
+    },
+    {
+      "at": "2026-07-10T00:04:42.176Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/smartphones/",
+      "referrer": "http://localhost:3000/eletronicos/",
+      "device": "desktop",
+      "viewport": "1821x798",
+      "language": "pt-PT",
+      "term": ""
+    },
+    {
+      "at": "2026-07-10T00:04:42.184Z",
+      "type": "category_view",
+      "url": "http://localhost:3000/smartphones/",
+      "referrer": "http://localhost:3000/eletronicos/",
+      "device": "desktop",
+      "viewport": "1821x798",
+      "language": "pt-PT",
+      "category": {
+        "slug": "smartphones",
+        "name": "smartphones"
+      },
+      "term": ""
+    },
+    {
+      "at": "2026-07-10T00:04:44.646Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/acessorios/",
+      "referrer": "http://localhost:3000/smartphones/",
+      "device": "desktop",
+      "viewport": "1821x798",
+      "language": "pt-PT",
+      "term": ""
+    },
+    {
+      "at": "2026-07-10T00:04:44.652Z",
+      "type": "category_view",
+      "url": "http://localhost:3000/acessorios/",
+      "referrer": "http://localhost:3000/smartphones/",
+      "device": "desktop",
+      "viewport": "1821x798",
+      "language": "pt-PT",
+      "category": {
+        "slug": "acessorios",
+        "name": "acessorios"
+      },
+      "term": ""
+    },
+    {
+      "at": "2026-07-10T00:08:43.348Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/acessorios/",
+      "referrer": "http://localhost:3000/site/view/index.html",
+      "device": "desktop",
+      "viewport": "1821x798",
+      "language": "pt-PT",
+      "term": ""
+    },
+    {
+      "at": "2026-07-10T00:08:43.354Z",
+      "type": "category_view",
+      "url": "http://localhost:3000/acessorios/",
+      "referrer": "http://localhost:3000/site/view/index.html",
+      "device": "desktop",
+      "viewport": "1821x798",
+      "language": "pt-PT",
+      "category": {
+        "slug": "acessorios",
+        "name": "acessorios"
+      },
+      "term": ""
+    },
+    {
+      "at": "2026-07-10T00:10:16.712Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/site/view/index.html",
+      "referrer": "http://localhost:3000/produtos?saved=produto",
+      "device": "desktop",
+      "viewport": "1821x798",
+      "language": "pt-PT",
+      "term": ""
+    },
+    {
+      "at": "2026-07-10T00:10:18.486Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/acessorios/",
+      "referrer": "http://localhost:3000/site/view/index.html",
+      "device": "desktop",
+      "viewport": "1821x798",
+      "language": "pt-PT",
+      "term": ""
+    },
+    {
+      "at": "2026-07-10T00:10:18.492Z",
+      "type": "category_view",
+      "url": "http://localhost:3000/acessorios/",
+      "referrer": "http://localhost:3000/site/view/index.html",
+      "device": "desktop",
+      "viewport": "1821x798",
+      "language": "pt-PT",
+      "category": {
+        "slug": "acessorios",
+        "name": "acessorios"
       },
       "term": ""
     }

@@ -1771,7 +1771,10 @@
       },
       "id": 1782679964152,
       "stock": null,
-      "showVariationsOnCard": true
+      "showVariationsOnCard": true,
+      "tags": [],
+      "relatedManualIds": [],
+      "crossSellIds": []
     },
     {
       "name": "Monitor Aoc 23,8 Led Full-hd 100hz",
@@ -2201,6 +2204,76 @@
         "combinationsText": ""
       },
       "id": 1783641240775
+    },
+    {
+      "name": "Carregador Turbo De Celular Tipo C 20w",
+      "slug": "carregador-turbo-de-celular-tipo-c-20w",
+      "price": null,
+      "stock": null,
+      "image": "images/Carregador Kaidi 20w.jpeg",
+      "gallery": [],
+      "category": "acessorios",
+      "tags": [],
+      "relatedManualIds": [],
+      "crossSellIds": [],
+      "showPrice": false,
+      "featured": false,
+      "active": true,
+      "detailsEnabled": true,
+      "showVariationsOnCard": false,
+      "descriptionShort": "O carregador Kaidi é a solução ideal para quem busca carregamento rápido e máxima segurança para o smartphone. Com potência de 20W na saída USB-C, ele é totalmente homologado pela Anatel e compatível com as principais marcas do mercado, garantindo uma recarga eficiente e protegida contra danos elétricos",
+      "descriptionLong": "<p><b>Destaques do Produto:</b></p><ul><li><p><b>Carregamento Turbo de 20W:</b> Velocidade otimizada para carregar a bateria do seu aparelho em muito menos tempo.</p></li><li><p><b>Homologado pela Anatel:</b> Certificação oficial (Nº 81902212308) que garante um produto testado, seguro e de alta qualidade.</p></li><li><p><b>Proteção Contra Sobrecarga:</b> Sistema inteligente que protege a bateria do celular contra superaquecimento, picos de tensão e curto-circuitos.</p></li><li><p><b>Cabo Tipo C Incluso:</b> Acompanha um cabo USB-C para USB-C de 1 metro, pronto para usar assim que tirar da embalagem.</p></li><li><p><b>Compatibilidade Universal:</b> Perfeito para dispositivos Apple (iPhone), Samsung, Motorola e Xiaomi que utilizam conexão Tipo C.</p></li></ul><p><b>Especificações Técnicas:</b></p><ul><li><p><b>Potência:</b> 20W</p></li><li><p><b>Conector de Saída:</b> USB-C (Tipo C)</p></li><li><p><b>Comprimento do Cabo:</b> 1 metro (Tipo C para Tipo C)</p></li></ul>",
+      "variations": {
+        "enabled": false,
+        "colors": [],
+        "storage": [],
+        "ram": [],
+        "condition": [],
+        "combinations": [],
+        "labels": {},
+        "colorsText": "",
+        "storageText": "",
+        "ramText": "",
+        "conditionText": "",
+        "labelsText": "{}",
+        "combinationsText": ""
+      },
+      "id": 1783641848880
+    },
+    {
+      "name": "Carregador Kaidi Turbo 20W - 1 Linha Iphones",
+      "slug": "carregador-kaidi-turbo-20w-iphones",
+      "price": null,
+      "stock": null,
+      "image": "images/kit_Carregador_kaidi-Lightning.jpg",
+      "gallery": [],
+      "category": "acessorios",
+      "tags": [],
+      "relatedManualIds": [],
+      "crossSellIds": [],
+      "showPrice": false,
+      "featured": false,
+      "active": true,
+      "detailsEnabled": true,
+      "showVariationsOnCard": false,
+      "descriptionShort": "O carregador Kaidi oferece carregamento de alta velocidade e máxima segurança para dispositivos Apple. Com potência de 20W e tecnologia Power Delivery (PD) na saída USB-C, este modelo vem acompanhado de um cabo USB-C para Lightning, sendo a escolha perfeita para recarregar iPhones e iPads de forma rápida e eficiente",
+      "descriptionLong": "<p><b>Destaques do Produto:</b></p><ul><li><p><b>Tecnologia Turbo Power Delivery (PD):</b> Entrega até <b>20W</b> de potência, permitindo carregar a bateria do iPhone muito mais rápido do que os carregadores convencionais.</p></li><li><p><b>Cabo Lightning Incluso:</b> Já vem com um cabo USB-C para Lightning de alta resistência, pronto para o uso imediato na linha Apple.</p></li><li><p><b>Proteção Elétrica Avançada:</b> Sistema inteligente com circuitos integrados que protegem o aparelho contra sobrecarga, picos de tensão e superaquecimento.</p></li><li><p><b>Construção Segura:</b> Fabricado com materiais de alta qualidade e resistência para garantir longa durabilidade no uso diário.</p></li><li><p><b>Design Compacto:</b> Formato leve e prático, ideal para levar na mochila, bolsa ou em viagens.</p></li></ul><p><b>Especificações Técnicas:</b></p><ul><li><p><b>Potência:</b> 20W com suporte a Power Delivery (PD)</p></li><li><p><b>Conector de Saída:</b> USB-C (Tipo C)</p></li><li><p><b>Cabo Incluso:</b> USB-C para Lightning (Compatível com iPhone/iPad)</p></li></ul>",
+      "variations": {
+        "enabled": false,
+        "colors": [],
+        "storage": [],
+        "ram": [],
+        "condition": [],
+        "combinations": [],
+        "labels": {},
+        "colorsText": "",
+        "storageText": "",
+        "ramText": "",
+        "conditionText": "",
+        "labelsText": "{}",
+        "combinationsText": ""
+      },
+      "id": 1783642212165
     }
   ]
 }
