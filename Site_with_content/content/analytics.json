@@ -1,7 +1,7 @@
 {
   "version": "8.4.0-analytics-professional",
   "createdAt": "2026-07-08T00:26:21.803Z",
-  "updatedAt": "2026-07-10T20:47:33.960Z",
+  "updatedAt": "2026-07-10T21:01:23.685Z",
   "source": "local-json",
   "counters": {
     "product_view": 13,
@@ -11,7 +11,7 @@
     "category_view": 40,
     "share_click": 0,
     "search": 4,
-    "page_view": 78
+    "page_view": 79
   },
   "products": {
     "mini-game-portatil-400-jogos": {
@@ -164,8 +164,8 @@
   "pages": {
     "http://localhost:3000/site/view/index.html": {
       "url": "http://localhost:3000/site/view/index.html",
-      "views": 29,
-      "lastAt": "2026-07-10T20:47:28.602Z"
+      "views": 30,
+      "lastAt": "2026-07-10T21:01:23.685Z"
     },
     "http://localhost:3000/smartphones/": {
       "url": "http://localhost:3000/smartphones/",
@@ -1842,6 +1842,16 @@
         "slug": "",
         "name": "Xiaomi Poco X7 pro 5G 512gb 12gb ram"
       },
+      "term": ""
+    },
+    {
+      "at": "2026-07-10T21:01:23.685Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/site/view/index.html",
+      "referrer": "http://localhost:3000/?flash=%E2%9C%85%20Conte%C3%BAdo%20atualizado%2C%20categorias%20antigas%20limpas%20e%20push%20realizado.",
+      "device": "desktop",
+      "viewport": "1821x798",
+      "language": "pt-PT",
       "term": ""
     }
   ]
