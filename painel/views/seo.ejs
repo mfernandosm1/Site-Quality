@@ -100,6 +100,11 @@
     color:#c2410c;
   }
 
+  .seo-counter { font-size:12px; margin-top:5px; color:#64748b; font-weight:700; }
+  .seo-counter.ok { color:#047857; }
+  .seo-counter.warn { color:#c2410c; }
+  .seo-page-note { margin:0 0 12px; color:#64748b; font-size:13px; }
+
   .seo-actions {
     display:flex;
     gap:10px;
@@ -129,13 +134,54 @@
       <div class="seo-section seo-full">
         <h4>🌐 Configurações gerais</h4>
         <label>Título padrão do site</label>
-        <input type="text" name="siteTitle" id="siteTitle" value="<%= seo.siteTitle || '' %>" placeholder="Quality Celulares">
+        <input type="text" name="siteTitle" id="siteTitle" value="<%= seo.siteTitle || '' %>" placeholder="Quality Celulares" data-seo-counter="title">
+        <div class="seo-counter" data-counter-for="siteTitle"></div>
 
         <label>Descrição padrão</label>
-        <textarea name="siteDescription" id="siteDescription" rows="3" placeholder="Descrição que aparece no Google e compartilhamentos."><%= seo.siteDescription || '' %></textarea>
+        <textarea name="siteDescription" id="siteDescription" rows="3" placeholder="Descrição que aparece no Google e compartilhamentos." data-seo-counter="description"><%= seo.siteDescription || '' %></textarea>
+        <div class="seo-counter" data-counter-for="siteDescription"></div>
 
         <label>URL principal</label>
         <input type="url" name="siteUrl" id="siteUrl" value="<%= seo.siteUrl || '' %>" placeholder="https://www.qualitycel.com.br">
+      </div>
+
+
+      <div class="seo-section seo-full">
+        <h4>🏠 SEO da Home</h4>
+        <p class="seo-page-note">Estes campos atualizam automaticamente o <code>index.html</code> ao salvar.</p>
+        <label>Título SEO da Home</label>
+        <input type="text" name="homeTitle" id="homeTitle" value="<%= seo.homeTitle || '' %>" data-seo-counter="title">
+        <div class="seo-counter" data-counter-for="homeTitle"></div>
+        <label>Descrição SEO da Home</label>
+        <textarea name="homeDescription" id="homeDescription" rows="3" data-seo-counter="description"><%= seo.homeDescription || '' %></textarea>
+        <div class="seo-counter" data-counter-for="homeDescription"></div>
+        <label>Título no WhatsApp / Facebook</label>
+        <input type="text" name="homeOgTitle" id="homeOgTitle" value="<%= seo.homeOgTitle || '' %>" data-seo-counter="title">
+        <div class="seo-counter" data-counter-for="homeOgTitle"></div>
+        <label>Descrição no WhatsApp / Facebook</label>
+        <textarea name="homeOgDescription" id="homeOgDescription" rows="3" data-seo-counter="description"><%= seo.homeOgDescription || '' %></textarea>
+        <div class="seo-counter" data-counter-for="homeOgDescription"></div>
+        <label>Imagem de compartilhamento</label>
+        <input type="text" name="homeOgImage" value="<%= seo.homeOgImage || seo.defaultOgImage || 'images/logo.png' %>" placeholder="images/logo.png">
+      </div>
+
+      <div class="seo-section seo-full">
+        <h4>ℹ️ SEO da página Sobre</h4>
+        <p class="seo-page-note">Estes campos atualizam automaticamente o <code>sobre.html</code> ao salvar.</p>
+        <label>Título SEO da página Sobre</label>
+        <input type="text" name="aboutTitle" id="aboutTitle" value="<%= seo.aboutTitle || '' %>" data-seo-counter="title">
+        <div class="seo-counter" data-counter-for="aboutTitle"></div>
+        <label>Descrição SEO da página Sobre</label>
+        <textarea name="aboutDescription" id="aboutDescription" rows="3" data-seo-counter="description"><%= seo.aboutDescription || '' %></textarea>
+        <div class="seo-counter" data-counter-for="aboutDescription"></div>
+        <label>Título no WhatsApp / Facebook</label>
+        <input type="text" name="aboutOgTitle" id="aboutOgTitle" value="<%= seo.aboutOgTitle || '' %>" data-seo-counter="title">
+        <div class="seo-counter" data-counter-for="aboutOgTitle"></div>
+        <label>Descrição no WhatsApp / Facebook</label>
+        <textarea name="aboutOgDescription" id="aboutOgDescription" rows="3" data-seo-counter="description"><%= seo.aboutOgDescription || '' %></textarea>
+        <div class="seo-counter" data-counter-for="aboutOgDescription"></div>
+        <label>Imagem de compartilhamento</label>
+        <input type="text" name="aboutOgImage" value="<%= seo.aboutOgImage || seo.defaultOgImage || 'images/logo.png' %>" placeholder="images/logo.png">
       </div>
 
       <div class="seo-section">
@@ -204,6 +250,26 @@
   const previewTitle = document.getElementById('preview-title');
   const previewUrl = document.getElementById('preview-url');
   const previewDesc = document.getElementById('preview-desc');
+
+
+  function updateCounter(input){
+    const target = document.querySelector('[data-counter-for="' + input.id + '"]');
+    if (!target) return;
+    const len = (input.value || '').trim().length;
+    const type = input.getAttribute('data-seo-counter');
+    const max = type === 'title' ? 60 : 160;
+    const min = type === 'title' ? 30 : 120;
+    let status = 'Pode ser mais completo';
+    target.className = 'seo-counter';
+    if (len >= min && len <= max) { status = 'Tamanho recomendado'; target.classList.add('ok'); }
+    else if (len > max) { status = 'Pode ser cortado pelo Google'; target.classList.add('warn'); }
+    target.textContent = len + ' / ' + max + ' caracteres — ' + status;
+  }
+
+  document.querySelectorAll('[data-seo-counter]').forEach(input => {
+    updateCounter(input);
+    input.addEventListener('input', () => updateCounter(input));
+  });
 
   function updatePreview(){
     previewTitle.textContent = title.value || 'Quality Celulares';

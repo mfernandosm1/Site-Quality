@@ -71,6 +71,9 @@
   .cat-create-grid .full { grid-column: 1 / -1; }
 
   .cat-seo-help { color:#64748b; font-size:12px; margin-top:4px; line-height:1.35; }
+  .cat-seo-counter { color:#64748b; font-size:12px; margin-top:5px; font-weight:700; }
+  .cat-seo-counter.ok { color:#047857; }
+  .cat-seo-counter.warn { color:#c2410c; }
 
   .cat-list {
     display: grid;
@@ -434,11 +437,13 @@
       <div class="full">
         <label>Título SEO / WhatsApp</label>
         <input type="text" name="seoTitle" placeholder="Ex.: Smartphones | Quality Celulares">
+        <div class="cat-seo-counter" data-counter-for="seoTitle"></div>
         <div class="cat-seo-help">Esse é o título que aparece no Google e na prévia do WhatsApp.</div>
       </div>
       <div class="full">
         <label>Descrição SEO / WhatsApp</label>
         <textarea name="seoDescription" rows="3" placeholder="Ex.: 📱 iPhones, Samsung, Motorola, Xiaomi e muito mais. Celulares novos e seminovos com garantia, frete grátis e atendimento especializado."></textarea>
+        <div class="cat-seo-counter" data-counter-for="seoDescription"></div>
         <div class="cat-seo-help">Esse texto aparece no Google e na prévia do WhatsApp/Facebook da categoria.</div>
       </div>
       <div class="full">
@@ -546,13 +551,15 @@
 
             <div class="full">
               <label>Título SEO / WhatsApp</label>
-              <input type="text" name="seoTitle" value="<%= c.seoTitle || ((c.name || 'Categoria') + ' | Quality Celulares') %>" placeholder="Ex.: Smartphones | Quality Celulares">
+              <input type="text" name="seoTitle" value="<%= c.seoTitle || ((c.name || 'Categoria') + ' | Quality Celulares') %>
+        <div class="cat-seo-counter" data-counter-for="seoTitle"></div>" placeholder="Ex.: Smartphones | Quality Celulares">
               <div class="cat-seo-help">Título que aparece no Google e na prévia do WhatsApp/Facebook.</div>
             </div>
 
             <div class="full">
               <label>Descrição SEO / WhatsApp</label>
               <textarea name="seoDescription" rows="4" placeholder="Texto que aparece no Google e na prévia do WhatsApp/Facebook"><%= c.seoDescription || '' %></textarea>
+        <div class="cat-seo-counter" data-counter-for="seoDescription"></div>
               <div class="cat-seo-help">Para Smartphones, use: 📱 iPhones, Samsung, Motorola, Xiaomi e muito mais. Celulares novos e seminovos com garantia, frete grátis e atendimento especializado.</div>
             </div>
 
@@ -676,6 +683,30 @@
   }
 
   document.querySelectorAll('form[action="/categorias/add"], form[action="/categorias/update"]').forEach(bindAutoSlug);
+
+
+
+  function bindSeoCounters(form) {
+    function bind(fieldName, max, min) {
+      const input = form.querySelector('[name="' + fieldName + '"]');
+      const output = form.querySelector('[data-counter-for="' + fieldName + '"]');
+      if (!input || !output) return;
+      function update() {
+        const len = (input.value || '').trim().length;
+        output.className = 'cat-seo-counter';
+        let status = 'Pode ser mais completo';
+        if (len >= min && len <= max) { status = 'Tamanho recomendado'; output.classList.add('ok'); }
+        else if (len > max) { status = 'Pode ser cortado'; output.classList.add('warn'); }
+        output.textContent = len + ' / ' + max + ' caracteres — ' + status;
+      }
+      input.addEventListener('input', update);
+      update();
+    }
+    bind('seoTitle', 60, 30);
+    bind('seoDescription', 160, 120);
+  }
+
+  document.querySelectorAll('form[action="/categorias/add"], form[action="/categorias/update"]').forEach(bindSeoCounters);
 
   const btn = document.getElementById('btn-limpar-categorias');
   if(!btn) return;

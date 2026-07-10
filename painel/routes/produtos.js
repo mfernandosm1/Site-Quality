@@ -1108,6 +1108,7 @@ router.post('/update-all', (req, res) => {
       featured: getField('featured'),
       active: getField('active'),
       detailsEnabled: getField('detailsEnabled'),
+      showVariationsOnCard: getField('showVariationsOnCard'),
       descriptionShort: getField('descriptionShort'),
       descriptionLong: getField('descriptionLong'),
       variationsEnabled: getField('variationsEnabled'),

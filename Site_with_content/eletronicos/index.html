@@ -16,6 +16,14 @@
   <link rel="stylesheet" href="/css/style.css">
   <link rel="stylesheet" href="/site/css/style.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <style id="quality-card-variations-style">
+    .product-card-variations{display:flex;flex-direction:column;align-items:center;gap:6px;margin:7px 0 10px;}
+    .product-card-variation-colors{display:flex;justify-content:center;gap:6px;flex-wrap:wrap;}
+    .product-card-color-dot{width:16px;height:16px;border-radius:50%;border:1px solid #cbd5e1;box-shadow:0 0 0 1px #fff inset;}
+    .product-card-variation-tags{display:flex;justify-content:center;gap:5px;flex-wrap:wrap;}
+    .product-card-variation-tags span{border:1px solid #e5e7eb;background:#f9fafb;border-radius:999px;padding:3px 7px;font-size:11px;font-weight:700;color:#374151;}
+  </style>
 </head>
 <body>
 <header class="header">
@@ -71,6 +79,16 @@
 
   <div id="menu-overlay" class="menu-overlay"></div>
 </header>
+<script>
+(function(){
+  var isLocalPreview = window.location.hostname === 'localhost' && window.location.port === '3000';
+  if (isLocalPreview) {
+    document.querySelectorAll('[data-home-link]').forEach(function(a){
+      a.setAttribute('href', '/site/view/index.html');
+    });
+  }
+})();
+</script>
 <script>
 (function(){
   var isLocalPreview = window.location.hostname === 'localhost' && window.location.port === '3000';
@@ -566,6 +584,67 @@
     throw new Error('Arquivo JSON não encontrado.');
   }
 
+
+
+  function shouldShowVariationsOnCard(p){
+    const raw = p.showVariationsOnCard ?? p.mostrarVariacoesNoCard ?? p.show_variations_on_card ?? false;
+    if (raw === true) return true;
+    const value = String(raw || '').toLowerCase();
+    return value === 'sim' || value === 'yes' || value === 'true' || value === '1' || value === 'on';
+  }
+
+  function productVariationsCardHtml(p){
+    if (!shouldShowVariationsOnCard(p)) return '';
+
+    const v = p.variations || {};
+    const lines = value => Array.isArray(value)
+      ? value.map(x => String(x || '').trim()).filter(Boolean)
+      : String(value || '').split(/\r?\n|,/).map(x => x.trim()).filter(Boolean);
+
+    const colorItems = Array.isArray(v.colors)
+      ? v.colors.map(c => ({
+          name: String(c?.name || '').trim(),
+          hex: String(c?.hex || '').trim()
+        })).filter(c => c.name)
+      : lines(v.colorsText).map(line => {
+          const parts = line.split('|').map(x => x.trim());
+          return { name: parts[0] || '', hex: parts[1] || '' };
+        }).filter(c => c.name);
+
+    const combos = Array.isArray(v.combinations) ? v.combinations : [];
+    const storage = (Array.isArray(v.storage) ? v.storage : lines(v.storageText))
+      .concat(combos.map(c => c?.storage || '')).filter(Boolean);
+    const ram = (Array.isArray(v.ram) ? v.ram : lines(v.ramText))
+      .concat(combos.map(c => c?.ram || '')).filter(Boolean);
+
+    const unique = arr => [...new Set(arr.map(x => String(x || '').trim()).filter(Boolean))];
+    const colors = unique(colorItems.map(c => c.name))
+      .slice(0, 6)
+      .map(name => colorItems.find(c => c.name === name))
+      .filter(Boolean);
+    const tags = unique([...storage, ...ram]).slice(0, 6);
+
+    if (!colors.length && !tags.length) return '';
+
+    const dots = colors.length
+      ? '<div class="product-card-variation-colors">' + colors.map(c => {
+          const hex = /^#?[0-9a-f]{3,8}$/i.test(c.hex || '')
+            ? (c.hex.startsWith('#') ? c.hex : '#' + c.hex)
+            : '';
+          const style = hex ? ' style="background:' + escapeHtml(hex) + '"' : '';
+          return '<span class="product-card-color-dot"' + style + ' title="' + escapeHtml(c.name) + '"></span>';
+        }).join('') + '</div>'
+      : '';
+
+    const chips = tags.length
+      ? '<div class="product-card-variation-tags">' + tags.map(opt =>
+          '<span>' + escapeHtml(opt) + '</span>'
+        ).join('') + '</div>'
+      : '';
+
+    return '<div class="product-card-variations">' + dots + chips + '</div>';
+  }
+
   const params = new URLSearchParams(window.location.search);
   const pathParts = window.location.pathname.split('/').filter(Boolean);
   const lastPath = normalizeText(pathParts[pathParts.length - 1] || '');
@@ -710,6 +789,7 @@
           productTagsHtml(p) +
           '</div>' +
           '<h3>' + escapeHtml(productName) + '</h3>' +
+          productVariationsCardHtml(p) +
           (priceStr ? '<p>' + escapeHtml(priceStr) + '</p>' : '') +
           detalhesHTML +
           '<a href="https://wa.me/5555991407824?text=' + whatsappText + '" class="btn btn-whatsapp" target="_blank">' +
