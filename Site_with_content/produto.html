@@ -144,6 +144,167 @@
     .produto-variacao-btn{border:1px solid #d1d5db;background:#fff;border-radius:8px;padding:8px 11px;cursor:pointer;font-weight:700;display:inline-flex;align-items:center;gap:7px;}
     .produto-variacao-btn.ativa{border-color:#2563eb;box-shadow:0 0 0 1px #2563eb;color:#111827;}
     .produto-cor-bolinha{width:18px;height:18px;border-radius:50%;border:1px solid #cbd5e1;background:#e5e7eb;display:inline-block;}
+
+
+    /* Quality V8.4 - Zoom premium da galeria de produto */
+    .galeria-principal {
+      position: relative;
+      overflow: hidden;
+      touch-action: pan-y;
+    }
+
+    .galeria-principal.is-zoomable img {
+      cursor: zoom-in;
+    }
+
+    .quality-zoom-lens {
+      position: absolute;
+      display: none;
+      pointer-events: none;
+      width: 38%;
+      height: 38%;
+      border: 1px solid rgba(37,99,235,.55);
+      background: rgba(219,234,254,.36);
+      box-shadow: 0 0 0 1px rgba(255,255,255,.7) inset;
+      z-index: 5;
+    }
+
+    .quality-zoom-result {
+      position: absolute;
+      display: none;
+      left: calc(100% + 42px);
+      top: 0;
+      width: min(520px, calc(100vw - 620px));
+      height: 520px;
+      min-width: 390px;
+      background-color: #fff;
+      background-repeat: no-repeat;
+      border: 1px solid #e5e7eb;
+      border-radius: 12px;
+      box-shadow: 0 18px 45px rgba(15,23,42,.18);
+      z-index: 40;
+    }
+
+    .produto-galeria.quality-zoom-active .quality-zoom-lens,
+    .produto-galeria.quality-zoom-active .quality-zoom-result {
+      display: block;
+    }
+
+    .quality-mobile-zoom-hint {
+      display: none;
+      position: absolute;
+      right: 12px;
+      bottom: 12px;
+      border: 0;
+      border-radius: 999px;
+      padding: 8px 11px;
+      background: rgba(17,24,39,.78);
+      color: #fff;
+      font-size: 12px;
+      font-weight: 700;
+      pointer-events: none;
+    }
+
+    .quality-gallery-viewer {
+      position: fixed;
+      inset: 0;
+      display: none;
+      flex-direction: column;
+      background: rgba(0,0,0,.96);
+      z-index: 9999;
+      overscroll-behavior: contain;
+    }
+
+    .quality-gallery-viewer.is-open { display: flex; }
+
+    .quality-gallery-viewer-head {
+      height: 58px;
+      padding: 0 10px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      color: #fff;
+      flex: 0 0 auto;
+    }
+
+    .quality-gallery-viewer-counter {
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .quality-gallery-viewer-close,
+    .quality-gallery-viewer-nav {
+      border: 0;
+      background: rgba(255,255,255,.14);
+      color: #fff;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 25px;
+      cursor: pointer;
+    }
+
+    .quality-gallery-viewer-stage {
+      position: relative;
+      flex: 1 1 auto;
+      min-height: 0;
+      overflow: hidden;
+      touch-action: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .quality-gallery-viewer-image {
+      max-width: 100%;
+      max-height: 100%;
+      width: auto;
+      height: auto;
+      object-fit: contain;
+      user-select: none;
+      -webkit-user-drag: none;
+      transform-origin: center center;
+      will-change: transform;
+    }
+
+    .quality-gallery-viewer-nav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 2;
+    }
+    .quality-gallery-viewer-prev { left: 10px; }
+    .quality-gallery-viewer-next { right: 10px; }
+
+    .quality-gallery-viewer-help {
+      flex: 0 0 auto;
+      color: rgba(255,255,255,.82);
+      font-size: 12px;
+      text-align: center;
+      padding: 9px 12px 14px;
+    }
+
+    body.quality-gallery-viewer-open { overflow: hidden !important; }
+
+    @media (hover: hover) and (pointer: fine) and (min-width: 901px) {
+      .produto-galeria { position: relative; }
+    }
+
+    @media (max-width: 900px), (hover: none), (pointer: coarse) {
+      .quality-zoom-lens,
+      .quality-zoom-result { display: none !important; }
+      .galeria-principal.is-zoomable img { cursor: zoom-in; }
+      .quality-mobile-zoom-hint { display: inline-flex; }
+      .galeria-principal { cursor: zoom-in; }
+    }
+
+    @media (min-width: 901px) {
+      .quality-gallery-viewer { display: none !important; }
+    }
+
     @media (max-width: 900px) {
       .produto-layout {
         grid-template-columns: 1fr;
@@ -1156,6 +1317,262 @@
           }
         });
       });
+
+      /* Quality V8.4 - Zoom desktop estilo marketplace + visualizador mobile */
+      function initQualityProductGalleryZoom(){
+        if (!principal || principal.__qualityZoomReady) return;
+        principal.__qualityZoomReady = true;
+
+        const galleryRoot = principal.closest('.produto-galeria');
+        const finePointer = window.matchMedia('(hover: hover) and (pointer: fine) and (min-width: 901px)');
+        let lens = null;
+        let result = null;
+        let observer = null;
+
+        function currentImage(){ return principal.querySelector('img'); }
+        function imageSources(){
+          return Array.from(document.querySelectorAll('.galeria-thumb[data-media]'))
+            .map(btn => btn.getAttribute('data-media') || '')
+            .filter(src => src && !isYoutube(src));
+        }
+        function currentImageIndex(){
+          const img = currentImage();
+          const sources = imageSources();
+          const src = img ? (img.getAttribute('src') || '') : '';
+          const idx = sources.indexOf(src);
+          return idx >= 0 ? idx : 0;
+        }
+
+        function ensureDesktopParts(){
+          if (!galleryRoot) return;
+          if (!lens) {
+            lens = document.createElement('span');
+            lens.className = 'quality-zoom-lens';
+            lens.setAttribute('aria-hidden', 'true');
+            principal.appendChild(lens);
+          }
+          if (!result) {
+            result = document.createElement('div');
+            result.className = 'quality-zoom-result';
+            result.setAttribute('aria-hidden', 'true');
+            galleryRoot.appendChild(result);
+          }
+        }
+
+        function deactivateDesktopZoom(){
+          galleryRoot?.classList.remove('quality-zoom-active');
+        }
+
+        function refreshZoomState(){
+          const img = currentImage();
+          const zoomable = !!img;
+          principal.classList.toggle('is-zoomable', zoomable);
+          principal.querySelector('.quality-mobile-zoom-hint')?.remove();
+          if (zoomable) {
+            const hint = document.createElement('span');
+            hint.className = 'quality-mobile-zoom-hint';
+            hint.innerHTML = '<i class="fa-solid fa-magnifying-glass-plus"></i> Toque para ampliar';
+            principal.appendChild(hint);
+          }
+          deactivateDesktopZoom();
+        }
+
+        function moveDesktopZoom(ev){
+          if (!finePointer.matches) return;
+          const img = currentImage();
+          if (!img || !galleryRoot) return;
+          ensureDesktopParts();
+
+          const rect = img.getBoundingClientRect();
+          if (!rect.width || !rect.height) return;
+          let x = ev.clientX - rect.left;
+          let y = ev.clientY - rect.top;
+          if (x < 0 || y < 0 || x > rect.width || y > rect.height) {
+            deactivateDesktopZoom();
+            return;
+          }
+
+          const lensW = Math.min(rect.width * .38, 190);
+          const lensH = Math.min(rect.height * .38, 190);
+          lens.style.width = lensW + 'px';
+          lens.style.height = lensH + 'px';
+
+          let left = x - lensW / 2;
+          let top = y - lensH / 2;
+          left = Math.max(0, Math.min(left, rect.width - lensW));
+          top = Math.max(0, Math.min(top, rect.height - lensH));
+
+          const principalRect = principal.getBoundingClientRect();
+          lens.style.left = (rect.left - principalRect.left + left) + 'px';
+          lens.style.top = (rect.top - principalRect.top + top) + 'px';
+
+          const px = rect.width > lensW ? (left / (rect.width - lensW)) * 100 : 50;
+          const py = rect.height > lensH ? (top / (rect.height - lensH)) * 100 : 50;
+          result.style.backgroundImage = 'url("' + img.currentSrc.replace(/"/g, '%22') + '")';
+          result.style.backgroundSize = '250% 250%';
+          result.style.backgroundPosition = px + '% ' + py + '%';
+          galleryRoot.classList.add('quality-zoom-active');
+        }
+
+        principal.addEventListener('mousemove', moveDesktopZoom);
+        principal.addEventListener('mouseenter', moveDesktopZoom);
+        principal.addEventListener('mouseleave', deactivateDesktopZoom);
+        finePointer.addEventListener?.('change', deactivateDesktopZoom);
+
+        let viewer = null;
+        let viewerImg = null;
+        let viewerCounter = null;
+        let viewerIndex = 0;
+        let scale = 1;
+        let translateX = 0;
+        let translateY = 0;
+        let pointers = new Map();
+        let pinchStartDistance = 0;
+        let pinchStartScale = 1;
+        let panStart = null;
+        let swipeStartX = 0;
+        let swipeStartY = 0;
+
+        function ensureViewer(){
+          if (viewer) return;
+          viewer = document.createElement('div');
+          viewer.className = 'quality-gallery-viewer';
+          viewer.setAttribute('role', 'dialog');
+          viewer.setAttribute('aria-modal', 'true');
+          viewer.setAttribute('aria-label', 'Galeria ampliada do produto');
+          viewer.innerHTML = `
+            <div class="quality-gallery-viewer-head">
+              <span class="quality-gallery-viewer-counter"></span>
+              <button type="button" class="quality-gallery-viewer-close" aria-label="Fechar">×</button>
+            </div>
+            <div class="quality-gallery-viewer-stage">
+              <button type="button" class="quality-gallery-viewer-nav quality-gallery-viewer-prev" aria-label="Imagem anterior">‹</button>
+              <img class="quality-gallery-viewer-image" alt="${escapeHtml(name)}">
+              <button type="button" class="quality-gallery-viewer-nav quality-gallery-viewer-next" aria-label="Próxima imagem">›</button>
+            </div>
+            <div class="quality-gallery-viewer-help">Use dois dedos para ampliar • deslize para trocar de foto</div>`;
+          document.body.appendChild(viewer);
+          viewerImg = viewer.querySelector('.quality-gallery-viewer-image');
+          viewerCounter = viewer.querySelector('.quality-gallery-viewer-counter');
+          const stage = viewer.querySelector('.quality-gallery-viewer-stage');
+
+          viewer.querySelector('.quality-gallery-viewer-close').addEventListener('click', closeViewer);
+          viewer.querySelector('.quality-gallery-viewer-prev').addEventListener('click', () => showViewerImage(viewerIndex - 1));
+          viewer.querySelector('.quality-gallery-viewer-next').addEventListener('click', () => showViewerImage(viewerIndex + 1));
+
+          stage.addEventListener('pointerdown', ev => {
+            pointers.set(ev.pointerId, {x:ev.clientX, y:ev.clientY});
+            stage.setPointerCapture?.(ev.pointerId);
+            if (pointers.size === 1) {
+              panStart = {x:ev.clientX, y:ev.clientY, tx:translateX, ty:translateY};
+              swipeStartX = ev.clientX;
+              swipeStartY = ev.clientY;
+            } else if (pointers.size === 2) {
+              const pts = Array.from(pointers.values());
+              pinchStartDistance = Math.hypot(pts[0].x-pts[1].x, pts[0].y-pts[1].y);
+              pinchStartScale = scale;
+            }
+          });
+
+          stage.addEventListener('pointermove', ev => {
+            if (!pointers.has(ev.pointerId)) return;
+            pointers.set(ev.pointerId, {x:ev.clientX, y:ev.clientY});
+            if (pointers.size === 2) {
+              const pts = Array.from(pointers.values());
+              const distance = Math.hypot(pts[0].x-pts[1].x, pts[0].y-pts[1].y);
+              if (pinchStartDistance) scale = Math.max(1, Math.min(4, pinchStartScale * distance / pinchStartDistance));
+              if (scale === 1) { translateX = 0; translateY = 0; }
+              applyViewerTransform();
+            } else if (pointers.size === 1 && scale > 1 && panStart) {
+              translateX = panStart.tx + ev.clientX - panStart.x;
+              translateY = panStart.ty + ev.clientY - panStart.y;
+              applyViewerTransform();
+            }
+          });
+
+          function endPointer(ev){
+            const wasSingle = pointers.size === 1;
+            pointers.delete(ev.pointerId);
+            if (wasSingle && scale === 1) {
+              const dx = ev.clientX - swipeStartX;
+              const dy = ev.clientY - swipeStartY;
+              if (Math.abs(dx) > 55 && Math.abs(dx) > Math.abs(dy) * 1.2) showViewerImage(viewerIndex + (dx < 0 ? 1 : -1));
+            }
+            if (!pointers.size) panStart = null;
+          }
+          stage.addEventListener('pointerup', endPointer);
+          stage.addEventListener('pointercancel', endPointer);
+
+          viewerImg.addEventListener('dblclick', () => {
+            scale = scale > 1 ? 1 : 2;
+            translateX = translateY = 0;
+            applyViewerTransform();
+          });
+        }
+
+        function applyViewerTransform(){
+          if (!viewerImg) return;
+          if (scale <= 1) { scale = 1; translateX = 0; translateY = 0; }
+          viewerImg.style.transform = `translate3d(${translateX}px,${translateY}px,0) scale(${scale})`;
+        }
+
+        function resetViewerTransform(){
+          scale = 1; translateX = 0; translateY = 0; pointers.clear();
+          applyViewerTransform();
+        }
+
+        function showViewerImage(index){
+          const sources = imageSources();
+          if (!sources.length) return;
+          viewerIndex = (index + sources.length) % sources.length;
+          resetViewerTransform();
+          viewerImg.src = sources[viewerIndex];
+          viewerCounter.textContent = (viewerIndex + 1) + ' / ' + sources.length;
+          const showNav = sources.length > 1;
+          viewer.querySelectorAll('.quality-gallery-viewer-nav').forEach(btn => btn.style.display = showNav ? 'inline-flex' : 'none');
+        }
+
+        function openViewer(){
+          if (finePointer.matches || !currentImage()) return;
+          ensureViewer();
+          showViewerImage(currentImageIndex());
+          viewer.classList.add('is-open');
+          document.body.classList.add('quality-gallery-viewer-open');
+        }
+
+        function closeViewer(){
+          viewer?.classList.remove('is-open');
+          document.body.classList.remove('quality-gallery-viewer-open');
+          resetViewerTransform();
+        }
+
+        principal.addEventListener('click', ev => {
+          if (ev.target.closest('iframe')) return;
+          openViewer();
+        });
+        document.addEventListener('keydown', ev => {
+          if (!viewer?.classList.contains('is-open')) return;
+          if (ev.key === 'Escape') closeViewer();
+          if (ev.key === 'ArrowLeft') showViewerImage(viewerIndex - 1);
+          if (ev.key === 'ArrowRight') showViewerImage(viewerIndex + 1);
+        });
+
+        observer = new MutationObserver(mutations => {
+          const mediaChanged = mutations.some(mutation => {
+            const nodes = [...mutation.addedNodes, ...mutation.removedNodes];
+            return nodes.some(node =>
+              node && node.nodeType === 1 &&
+              (node.matches?.('img, iframe') || node.querySelector?.('img, iframe'))
+            );
+          });
+          if (mediaChanged) refreshZoomState();
+        });
+        observer.observe(principal, {childList:true, subtree:false});
+        refreshZoomState();
+      }
+
+      initQualityProductGalleryZoom();
+
     })
     .catch(() => {
       box.innerHTML = '<p class="em-breve" style="text-align:center;">Erro ao carregar produto.</p>';

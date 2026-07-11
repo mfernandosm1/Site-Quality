@@ -1,17 +1,17 @@
 {
   "version": "8.4.0-analytics-professional",
   "createdAt": "2026-07-08T00:26:21.803Z",
-  "updatedAt": "2026-07-10T21:01:23.685Z",
+  "updatedAt": "2026-07-11T14:45:19.863Z",
   "source": "local-json",
   "counters": {
-    "product_view": 13,
+    "product_view": 18,
     "favorite": 2,
     "favorite_click": 0,
-    "whatsapp_click": 2,
-    "category_view": 40,
+    "whatsapp_click": 3,
+    "category_view": 42,
     "share_click": 0,
-    "search": 4,
-    "page_view": 79
+    "search": 6,
+    "page_view": 95
   },
   "products": {
     "mini-game-portatil-400-jogos": {
@@ -105,13 +105,57 @@
     "xiaomi-poco-x7-pro-5g-512gb-12gb-ram": {
       "slug": "xiaomi-poco-x7-pro-5g-512gb-12gb-ram",
       "name": "Xiaomi Poco X7 pro 5G 512gb 12gb ram",
-      "image": "",
-      "url": "http://localhost:3000/smartphones/",
-      "views": 0,
+      "image": "/images/pocox7pro.png",
+      "url": "http://localhost:3000/produto/xiaomi-poco-x7-pro-5g-512gb-12gb-ram/",
+      "views": 1,
       "favorites": 0,
       "whatsapp": 1,
       "shares": 0,
-      "lastAt": "2026-07-10T20:47:33.960Z"
+      "lastAt": "2026-07-11T14:45:13.954Z"
+    },
+    "pc-gamer-intel-i7-rtx-3050-ram-16gb-ssd-512gb-monitor-24": {
+      "slug": "pc-gamer-intel-i7-rtx-3050-ram-16gb-ssd-512gb-monitor-24",
+      "name": "Pc Gamer Completo Intel I7 Rtx 3050 Ram 16gb Ssd 512gb Monitor 24\"",
+      "image": "/images/Pc Gamer Intel I7 Rtx 3050 Ram 16gb Ssd 512gb Monitor 24 (1).jpeg",
+      "url": "http://localhost:3000/produto/pc-gamer-intel-i7-rtx-3050-ram-16gb-ssd-512gb-monitor-24/",
+      "views": 1,
+      "favorites": 0,
+      "whatsapp": 0,
+      "shares": 0,
+      "lastAt": "2026-07-11T13:49:50.302Z"
+    },
+    "motorola-moto-g55-5g-256gb-16gb-8gb-ram-8gb-ram-boost": {
+      "slug": "motorola-moto-g55-5g-256gb-16gb-8gb-ram-8gb-ram-boost",
+      "name": "Motorola Moto G55 5G 256GB 16GB (8GB RAM+8GB Ram Boost)",
+      "image": "/images/Moto G55.jpeg",
+      "url": "http://localhost:3000/produto/motorola-moto-g55-5g-256gb-16gb-8gb-ram-8gb-ram-boost/",
+      "views": 1,
+      "favorites": 0,
+      "whatsapp": 1,
+      "shares": 0,
+      "lastAt": "2026-07-11T14:45:08.325Z"
+    },
+    "fonte-original-apple-usb-c-20w": {
+      "slug": "fonte-original-apple-usb-c-20w",
+      "name": "Fonte Original Apple Usb C 20w",
+      "image": "/images/Fonte Original Apple Usb C 20w.jpg",
+      "url": "http://localhost:3000/produto/fonte-original-apple-usb-c-20w/",
+      "views": 1,
+      "favorites": 0,
+      "whatsapp": 0,
+      "shares": 0,
+      "lastAt": "2026-07-11T14:45:17.805Z"
+    },
+    "fone-jbl-tune-510bt-branco": {
+      "slug": "fone-jbl-tune-510bt-branco",
+      "name": "Fone JBL Tune 510bt Branco",
+      "image": "/images/Fone JBL Tune 510 Branco.jpg",
+      "url": "http://localhost:3000/produto/fone-jbl-tune-510bt-branco/",
+      "views": 1,
+      "favorites": 0,
+      "whatsapp": 0,
+      "shares": 0,
+      "lastAt": "2026-07-11T14:45:19.005Z"
     }
   },
   "categories": {
@@ -119,8 +163,8 @@
       "slug": "smartphones",
       "name": "smartphones",
       "url": "http://localhost:3000/smartphones/",
-      "views": 11,
-      "lastAt": "2026-07-10T20:47:29.195Z"
+      "views": 13,
+      "lastAt": "2026-07-11T14:44:24.161Z"
     },
     "assistencia-tecnica": {
       "slug": "assistencia-tecnica",
@@ -157,20 +201,20 @@
     },
     "x7": {
       "term": "x7",
-      "total": 2,
-      "lastAt": "2026-07-10T20:47:31.265Z"
+      "total": 4,
+      "lastAt": "2026-07-11T14:45:12.951Z"
     }
   },
   "pages": {
     "http://localhost:3000/site/view/index.html": {
       "url": "http://localhost:3000/site/view/index.html",
-      "views": 30,
-      "lastAt": "2026-07-10T21:01:23.685Z"
+      "views": 36,
+      "lastAt": "2026-07-11T14:45:19.863Z"
     },
     "http://localhost:3000/smartphones/": {
       "url": "http://localhost:3000/smartphones/",
-      "views": 25,
-      "lastAt": "2026-07-10T20:47:33.960Z"
+      "views": 29,
+      "lastAt": "2026-07-11T14:44:24.160Z"
     },
     "http://localhost:3000/produto/motorola-moto-g35-5g-128gb-4gb-ram-8gb-ram-boost/": {
       "url": "http://localhost:3000/produto/motorola-moto-g35-5g-128gb-4gb-ram-8gb-ram-boost/",
@@ -219,8 +263,33 @@
     },
     "http://localhost:3000/produto/relogio-smartwatch-xiaomi-amazfit-bip-6/": {
       "url": "http://localhost:3000/produto/relogio-smartwatch-xiaomi-amazfit-bip-6/",
+      "views": 3,
+      "lastAt": "2026-07-11T14:15:52.120Z"
+    },
+    "http://localhost:3000/produto/pc-gamer-intel-i7-rtx-3050-ram-16gb-ssd-512gb-monitor-24/": {
+      "url": "http://localhost:3000/produto/pc-gamer-intel-i7-rtx-3050-ram-16gb-ssd-512gb-monitor-24/",
+      "views": 3,
+      "lastAt": "2026-07-11T14:13:26.871Z"
+    },
+    "http://localhost:3000/produto/motorola-moto-g55-5g-256gb-16gb-8gb-ram-8gb-ram-boost/": {
+      "url": "http://localhost:3000/produto/motorola-moto-g55-5g-256gb-16gb-8gb-ram-8gb-ram-boost/",
+      "views": 6,
+      "lastAt": "2026-07-11T14:45:12.951Z"
+    },
+    "http://localhost:3000/produto/xiaomi-poco-x7-pro-5g-512gb-12gb-ram/": {
+      "url": "http://localhost:3000/produto/xiaomi-poco-x7-pro-5g-512gb-12gb-ram/",
       "views": 2,
-      "lastAt": "2026-07-10T20:47:10.785Z"
+      "lastAt": "2026-07-11T14:45:13.954Z"
+    },
+    "http://localhost:3000/produto/fonte-original-apple-usb-c-20w/": {
+      "url": "http://localhost:3000/produto/fonte-original-apple-usb-c-20w/",
+      "views": 2,
+      "lastAt": "2026-07-11T14:45:17.805Z"
+    },
+    "http://localhost:3000/produto/fone-jbl-tune-510bt-branco/": {
+      "url": "http://localhost:3000/produto/fone-jbl-tune-510bt-branco/",
+      "views": 2,
+      "lastAt": "2026-07-11T14:45:19.005Z"
     }
   },
   "devices": {},
@@ -1849,6 +1918,298 @@
       "type": "page_view",
       "url": "http://localhost:3000/site/view/index.html",
       "referrer": "http://localhost:3000/?flash=%E2%9C%85%20Conte%C3%BAdo%20atualizado%2C%20categorias%20antigas%20limpas%20e%20push%20realizado.",
+      "device": "desktop",
+      "viewport": "1821x798",
+      "language": "pt-PT",
+      "term": ""
+    },
+    {
+      "at": "2026-07-11T13:49:29.162Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/site/view/index.html",
+      "referrer": "http://localhost:3000/produtos",
+      "device": "desktop",
+      "viewport": "1821x798",
+      "language": "pt-PT",
+      "term": ""
+    },
+    {
+      "at": "2026-07-11T13:49:49.392Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/produto/pc-gamer-intel-i7-rtx-3050-ram-16gb-ssd-512gb-monitor-24/",
+      "referrer": "http://localhost:3000/site/view/index.html",
+      "device": "desktop",
+      "viewport": "1821x798",
+      "language": "pt-PT",
+      "term": ""
+    },
+    {
+      "at": "2026-07-11T13:49:50.302Z",
+      "type": "product_view",
+      "url": "http://localhost:3000/produto/pc-gamer-intel-i7-rtx-3050-ram-16gb-ssd-512gb-monitor-24/",
+      "referrer": "http://localhost:3000/site/view/index.html",
+      "device": "desktop",
+      "viewport": "1821x798",
+      "language": "pt-PT",
+      "product": {
+        "slug": "pc-gamer-intel-i7-rtx-3050-ram-16gb-ssd-512gb-monitor-24",
+        "name": "Pc Gamer Completo Intel I7 Rtx 3050 Ram 16gb Ssd 512gb Monitor 24\""
+      },
+      "term": ""
+    },
+    {
+      "at": "2026-07-11T14:13:26.871Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/produto/pc-gamer-intel-i7-rtx-3050-ram-16gb-ssd-512gb-monitor-24/",
+      "referrer": "http://localhost:3000/site/view/index.html",
+      "device": "desktop",
+      "viewport": "1821x798",
+      "language": "pt-PT",
+      "term": ""
+    },
+    {
+      "at": "2026-07-11T14:13:43.480Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/site/view/index.html",
+      "referrer": "http://localhost:3000/produtos",
+      "device": "desktop",
+      "viewport": "1821x798",
+      "language": "pt-PT",
+      "term": ""
+    },
+    {
+      "at": "2026-07-11T14:13:45.340Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/smartphones/",
+      "referrer": "http://localhost:3000/site/view/index.html",
+      "device": "desktop",
+      "viewport": "1821x798",
+      "language": "pt-PT",
+      "term": ""
+    },
+    {
+      "at": "2026-07-11T14:13:45.352Z",
+      "type": "category_view",
+      "url": "http://localhost:3000/smartphones/",
+      "referrer": "http://localhost:3000/site/view/index.html",
+      "device": "desktop",
+      "viewport": "1821x798",
+      "language": "pt-PT",
+      "category": {
+        "slug": "smartphones",
+        "name": "smartphones"
+      },
+      "term": ""
+    },
+    {
+      "at": "2026-07-11T14:13:47.289Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/produto/motorola-moto-g55-5g-256gb-16gb-8gb-ram-8gb-ram-boost/",
+      "referrer": "http://localhost:3000/smartphones/",
+      "device": "desktop",
+      "viewport": "1821x798",
+      "language": "pt-PT",
+      "term": ""
+    },
+    {
+      "at": "2026-07-11T14:15:49.307Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/site/view/index.html",
+      "referrer": "http://localhost:3000/produtos",
+      "device": "desktop",
+      "viewport": "1821x798",
+      "language": "pt-PT",
+      "term": ""
+    },
+    {
+      "at": "2026-07-11T14:15:52.120Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/produto/relogio-smartwatch-xiaomi-amazfit-bip-6/",
+      "referrer": "http://localhost:3000/site/view/index.html",
+      "device": "desktop",
+      "viewport": "1821x798",
+      "language": "pt-PT",
+      "term": ""
+    },
+    {
+      "at": "2026-07-11T14:44:22.811Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/site/view/index.html",
+      "referrer": "http://localhost:3000/produtos",
+      "device": "desktop",
+      "viewport": "1821x798",
+      "language": "pt-PT",
+      "term": ""
+    },
+    {
+      "at": "2026-07-11T14:44:24.151Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/smartphones/",
+      "referrer": "http://localhost:3000/site/view/index.html",
+      "device": "desktop",
+      "viewport": "1821x798",
+      "language": "pt-PT",
+      "term": ""
+    },
+    {
+      "at": "2026-07-11T14:44:24.161Z",
+      "type": "category_view",
+      "url": "http://localhost:3000/smartphones/",
+      "referrer": "http://localhost:3000/site/view/index.html",
+      "device": "desktop",
+      "viewport": "1821x798",
+      "language": "pt-PT",
+      "category": {
+        "slug": "smartphones",
+        "name": "smartphones"
+      },
+      "term": ""
+    },
+    {
+      "at": "2026-07-11T14:44:25.712Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/produto/motorola-moto-g55-5g-256gb-16gb-8gb-ram-8gb-ram-boost/",
+      "referrer": "http://localhost:3000/smartphones/",
+      "device": "desktop",
+      "viewport": "1821x798",
+      "language": "pt-PT",
+      "term": ""
+    },
+    {
+      "at": "2026-07-11T14:44:26.625Z",
+      "type": "product_view",
+      "url": "http://localhost:3000/produto/motorola-moto-g55-5g-256gb-16gb-8gb-ram-8gb-ram-boost/",
+      "referrer": "http://localhost:3000/smartphones/",
+      "device": "desktop",
+      "viewport": "1821x798",
+      "language": "pt-PT",
+      "product": {
+        "slug": "motorola-moto-g55-5g-256gb-16gb-8gb-ram-8gb-ram-boost",
+        "name": "Motorola Moto G55 5G 256GB 16GB (8GB RAM+8GB Ram Boost)"
+      },
+      "term": ""
+    },
+    {
+      "at": "2026-07-11T14:45:08.325Z",
+      "type": "whatsapp_click",
+      "url": "http://localhost:3000/produto/motorola-moto-g55-5g-256gb-16gb-8gb-ram-8gb-ram-boost/",
+      "referrer": "http://localhost:3000/smartphones/",
+      "device": "desktop",
+      "viewport": "1821x798",
+      "language": "pt-PT",
+      "product": {
+        "slug": "",
+        "name": "Motorola Moto G55 5G 256GB 16GB (8GB RAM+8GB Ram Boost)"
+      },
+      "term": ""
+    },
+    {
+      "at": "2026-07-11T14:45:12.944Z",
+      "type": "search",
+      "url": "http://localhost:3000/produto/motorola-moto-g55-5g-256gb-16gb-8gb-ram-8gb-ram-boost/",
+      "referrer": "http://localhost:3000/smartphones/",
+      "device": "desktop",
+      "viewport": "1821x798",
+      "language": "pt-PT",
+      "term": "x7"
+    },
+    {
+      "at": "2026-07-11T14:45:12.951Z",
+      "type": "search",
+      "url": "http://localhost:3000/produto/motorola-moto-g55-5g-256gb-16gb-8gb-ram-8gb-ram-boost/",
+      "referrer": "http://localhost:3000/smartphones/",
+      "device": "desktop",
+      "viewport": "1821x798",
+      "language": "pt-PT",
+      "term": "x7"
+    },
+    {
+      "at": "2026-07-11T14:45:13.054Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/produto/xiaomi-poco-x7-pro-5g-512gb-12gb-ram/",
+      "referrer": "http://localhost:3000/produto/motorola-moto-g55-5g-256gb-16gb-8gb-ram-8gb-ram-boost/",
+      "device": "desktop",
+      "viewport": "1821x798",
+      "language": "pt-PT",
+      "term": ""
+    },
+    {
+      "at": "2026-07-11T14:45:13.954Z",
+      "type": "product_view",
+      "url": "http://localhost:3000/produto/xiaomi-poco-x7-pro-5g-512gb-12gb-ram/",
+      "referrer": "http://localhost:3000/produto/motorola-moto-g55-5g-256gb-16gb-8gb-ram-8gb-ram-boost/",
+      "device": "desktop",
+      "viewport": "1821x798",
+      "language": "pt-PT",
+      "product": {
+        "slug": "xiaomi-poco-x7-pro-5g-512gb-12gb-ram",
+        "name": "Xiaomi Poco X7 pro 5G 512gb 12gb ram"
+      },
+      "term": ""
+    },
+    {
+      "at": "2026-07-11T14:45:15.022Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/site/view/index.html",
+      "referrer": "http://localhost:3000/produto/xiaomi-poco-x7-pro-5g-512gb-12gb-ram/",
+      "device": "desktop",
+      "viewport": "1821x798",
+      "language": "pt-PT",
+      "term": ""
+    },
+    {
+      "at": "2026-07-11T14:45:16.900Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/produto/fonte-original-apple-usb-c-20w/",
+      "referrer": "http://localhost:3000/site/view/index.html",
+      "device": "desktop",
+      "viewport": "1821x798",
+      "language": "pt-PT",
+      "term": ""
+    },
+    {
+      "at": "2026-07-11T14:45:17.805Z",
+      "type": "product_view",
+      "url": "http://localhost:3000/produto/fonte-original-apple-usb-c-20w/",
+      "referrer": "http://localhost:3000/site/view/index.html",
+      "device": "desktop",
+      "viewport": "1821x798",
+      "language": "pt-PT",
+      "product": {
+        "slug": "fonte-original-apple-usb-c-20w",
+        "name": "Fonte Original Apple Usb C 20w"
+      },
+      "term": ""
+    },
+    {
+      "at": "2026-07-11T14:45:18.111Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/produto/fone-jbl-tune-510bt-branco/",
+      "referrer": "http://localhost:3000/produto/fonte-original-apple-usb-c-20w/",
+      "device": "desktop",
+      "viewport": "1821x798",
+      "language": "pt-PT",
+      "term": ""
+    },
+    {
+      "at": "2026-07-11T14:45:19.005Z",
+      "type": "product_view",
+      "url": "http://localhost:3000/produto/fone-jbl-tune-510bt-branco/",
+      "referrer": "http://localhost:3000/produto/fonte-original-apple-usb-c-20w/",
+      "device": "desktop",
+      "viewport": "1821x798",
+      "language": "pt-PT",
+      "product": {
+        "slug": "fone-jbl-tune-510bt-branco",
+        "name": "Fone JBL Tune 510bt Branco"
+      },
+      "term": ""
+    },
+    {
+      "at": "2026-07-11T14:45:19.863Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/site/view/index.html",
+      "referrer": "http://localhost:3000/produto/fone-jbl-tune-510bt-branco/",
       "device": "desktop",
       "viewport": "1821x798",
       "language": "pt-PT",
