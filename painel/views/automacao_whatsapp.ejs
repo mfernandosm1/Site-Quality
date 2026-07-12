@@ -14,14 +14,13 @@
   .qw-form{display:grid;gap:12px}.qw-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}.qw-field label{display:block;font-size:12px;font-weight:900;color:#374151;margin:0 0 6px}.qw-input,.qw-textarea,.qw-select{width:100%;box-sizing:border-box;border:1px solid var(--qw-line);border-radius:12px;background:#fff;padding:10px 12px;font:inherit}.qw-textarea{min-height:92px;resize:vertical}.qw-check{display:flex;gap:8px;align-items:center;font-weight:800;color:#374151}
   .qw-builder{display:grid;gap:10px}.qw-step{border:1px solid var(--qw-line);border-radius:16px;background:#fff;padding:12px}.qw-step-head{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:10px}.qw-step-title{font-weight:900}.qw-step-grid{display:grid;grid-template-columns:150px 1fr 130px;gap:10px}.qw-step-actions{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}.qw-mini-btn{border:1px solid var(--qw-line);background:#f9fafb;border-radius:10px;padding:8px 10px;font-weight:800;cursor:pointer}.qw-mini-btn.danger{background:#fee2e2;color:#991b1b;border-color:#fecaca}.qw-addbar{display:flex;gap:8px;flex-wrap:wrap}.qw-empty{color:var(--qw-muted);padding:14px;border:1px dashed #d1d5db;border-radius:14px;background:#fafafa}.qw-preview{background:#0b1220;color:#e5e7eb;border-radius:16px;padding:14px;min-height:220px;white-space:pre-wrap;font-family:Consolas,monospace;font-size:13px;line-height:1.45}.qw-warning{background:#fff7ed;border:1px solid #fed7aa;border-radius:14px;padding:12px;color:#9a3412}.qw-info{background:#eff6ff;border:1px solid #bfdbfe;border-radius:14px;padding:12px;color:#1e40af}.qw-link{color:#2563eb;font-weight:900}.qw-options-box{display:grid;gap:8px;margin-top:8px}.qw-option-row{display:grid;grid-template-columns:1fr 90px 1fr auto;gap:8px}
   @media(max-width:1100px){.qw-span-8,.qw-span-7,.qw-span-6,.qw-span-5,.qw-span-4,.qw-span-3{grid-column:span 12}.qw-header{flex-direction:column}.qw-actions{justify-content:flex-start}.qw-step-grid,.qw-row,.qw-option-row{grid-template-columns:1fr}.qw-kpi{grid-column:span 6}}
-.qw-log-list{display:grid;gap:8px}.qw-log-item{border:1px solid var(--qw-line);border-radius:12px;padding:10px;background:#fff}.qw-inline-actions{display:flex;gap:8px;align-items:center;flex-wrap:wrap}.qw-media-preview{margin-top:8px;padding:10px;border:1px dashed var(--qw-line);border-radius:12px;background:#fafafa}.qw-media-preview img{max-width:220px;max-height:160px;border-radius:10px}.qw-upload{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-top:8px}
 </style>
 
 <div class="qw-wrap">
   <div class="qw-header">
     <div class="qw-title">
       <h1>💬 Automação WhatsApp</h1>
-      <p>Blocos de resposta, simulação de fluxo, aniversariantes, logs e configurações. Versão <strong><%= version %></strong> — CRUD e simulador funcional.</p>
+      <p>Blocos de resposta, simulação de fluxo, aniversariantes, logs e configurações. Versão <strong>0.2.1</strong> — correção do editor e simulador.</p>
     </div>
     <div class="qw-actions">
       <a class="qw-btn dark" href="/">← Voltar ao Dashboard</a>
@@ -50,7 +49,7 @@
       <div class="qw-card qw-span-8">
         <h2>🧭 Status do módulo</h2>
         <div class="qw-status">
-          <span class="qw-pill orange">Fase 2: blocos funcionais</span>
+          <span class="qw-pill orange">Fase 1: estrutura visual</span>
           <span class="qw-pill red">WhatsApp ainda não conectado</span>
           <span class="qw-pill green">Simulador disponível</span>
         </div>
@@ -117,7 +116,7 @@
             <tr>
               <td><strong><%= b.nome %></strong><br><span class="qw-muted"><%= b.descricao || 'Sem descrição' %></span></td>
               <td><%= b.gatilho || '—' %></td><td><%= (b.etapas || []).length %></td><td><%= b.ativo ? 'Ativo' : 'Inativo' %></td>
-              <td><div class="qw-inline-actions"><a class="qw-link" href="/automacao-whatsapp?tab=blocos&edit=<%= b.id %>">Editar</a><form method="post" action="/automacao-whatsapp/blocos/duplicar/<%= b.id %>"><button class="qw-mini-btn" type="submit">Duplicar</button></form><form method="post" action="/automacao-whatsapp/blocos/excluir/<%= b.id %>" onsubmit="return confirm('Excluir este bloco?')"><button class="qw-mini-btn danger" type="submit">Excluir</button></form></div></td>
+              <td style="display:flex;gap:8px;align-items:center;flex-wrap:wrap"><a class="qw-link" href="/automacao-whatsapp?tab=blocos&edit=<%= b.id %>">Editar</a><form method="post" action="/automacao-whatsapp/blocos/excluir/<%= b.id %>" onsubmit="return confirm('Excluir este bloco?')"><button class="qw-mini-btn danger" type="submit">Excluir</button></form></td>
             </tr>
           <% }) %>
           </tbody></table>
@@ -135,7 +134,7 @@
   <% } %>
 
   <% if (tab === 'logs') { %>
-    <div class="qw-grid"><div class="qw-card qw-span-12"><h2>📜 Logs</h2><p class="sub">Criação, edição, exclusão, duplicação, uploads e simulações.</p><% if (!logs.length) { %><div class="qw-empty">Sem logs ainda.</div><% } else { %><div class="qw-log-list"><% logs.slice(0,100).forEach(function(log){ %><div class="qw-log-item"><strong><%= log.message || log.type %></strong><br><span class="qw-muted"><%= log.at ? new Date(log.at).toLocaleString('pt-BR') : '' %> · <%= log.type || '' %></span></div><% }) %></div><% } %></div></div>
+    <div class="qw-grid"><div class="qw-card qw-span-12"><h2>📜 Logs</h2><p class="sub">Registro futuro de simulações, envios, falhas e aniversariantes.</p><% if (!logs.length) { %><div class="qw-empty">Sem logs ainda.</div><% } else { %><pre><%= JSON.stringify(logs, null, 2) %></pre><% } %></div></div>
   <% } %>
 
   <% if (tab === 'configuracoes') { %>
@@ -144,65 +143,313 @@
 </div>
 
 <script>
-  const blocosSalvos = <%- JSON.stringify(blocos || []) %>;
-  const editSteps = <%- JSON.stringify((blocoEdit && blocoEdit.etapas) || []) %>;
-  let steps = Array.isArray(editSteps) ? editSteps : [];
-  function uid(){ return 'etapa_' + Date.now().toString(36) + '_' + Math.random().toString(36).slice(2,7); }
-  function esc(v){ return String(v == null ? '' : v).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c])); }
-  function defaultStep(tipo){
-    if(tipo === 'texto') return {id:uid(),tipo:'texto',texto:'',digitandoSegundos:2};
-    if(tipo === 'pausa') return {id:uid(),tipo:'pausa',segundos:3};
-    if(tipo === 'audio') return {id:uid(),tipo:'audio',caminho:'',gravandoSegundos:2,legenda:''};
-    if(tipo === 'imagem') return {id:uid(),tipo:'imagem',caminho:'',legenda:''};
-    if(tipo === 'arquivo') return {id:uid(),tipo:'arquivo',caminho:'',legenda:''};
-    if(tipo === 'opcoes') return {id:uid(),tipo:'opcoes',texto:'Escolha uma opção:',opcoes:[{label:'1️⃣ Smartphones',resposta:'1',proximoBloco:'Smartphones'},{label:'2️⃣ Assistência',resposta:'2',proximoBloco:'Assistência'}]};
-    return {id:uid(),tipo:'texto',texto:'',digitandoSegundos:0};
+(function () {
+  'use strict';
+
+  var blocosSalvos = <%- JSON.stringify(blocos || []).replace(/</g, '\u003c') %>;
+  var editSteps = <%- JSON.stringify((blocoEdit && blocoEdit.etapas) || []).replace(/</g, '\u003c') %>;
+  var steps = Array.isArray(editSteps) ? editSteps : [];
+
+  function uid() {
+    return 'etapa_' + Date.now().toString(36) + '_' + Math.random().toString(36).slice(2, 7);
   }
-  function addStep(tipo){ steps.push(defaultStep(tipo)); renderBuilder(); }
-  function removeStep(i){ steps.splice(i,1); renderBuilder(); }
-  function moveStep(i,dir){ const j=i+dir; if(j<0 || j>=steps.length) return; const tmp=steps[i]; steps[i]=steps[j]; steps[j]=tmp; renderBuilder(); }
-  function updateStep(i,key,value){ steps[i][key]=value; }
-  function updateOption(i, oi, key, value){ steps[i].opcoes = steps[i].opcoes || []; steps[i].opcoes[oi][key]=value; }
-  function addOption(i){ steps[i].opcoes = steps[i].opcoes || []; steps[i].opcoes.push({label:'',resposta:'',proximoBloco:''}); renderBuilder(); }
-  function removeOption(i,oi){ steps[i].opcoes.splice(oi,1); renderBuilder(); }
-  async function uploadMedia(i,input){
-    const file=input.files&&input.files[0]; if(!file) return; const fd=new FormData(); fd.append('arquivo',file);
-    try{ const r=await fetch('/automacao-whatsapp/midias/upload',{method:'POST',body:fd}); const p=await r.json(); if(!r.ok||!p.success) throw new Error(p.message||'Falha no upload.'); steps[i].caminho=p.caminho; steps[i].tipo=p.tipo; renderBuilder(); }catch(e){ alert(e.message); }
+
+  function esc(value) {
+    return String(value == null ? '' : value).replace(/[&<>"]/g, function (char) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[char];
+    });
   }
-  function mediaPreview(s){ if(!s.caminho) return ''; if(s.tipo==='imagem') return `<div class="qw-media-preview"><img src="${esc(s.caminho)}" alt="Prévia"></div>`; if(s.tipo==='audio') return `<div class="qw-media-preview"><audio controls src="${esc(s.caminho)}"></audio></div>`; return `<div class="qw-media-preview"><a class="qw-link" href="${esc(s.caminho)}" target="_blank">Abrir arquivo</a></div>`; }
-  function renderBuilder(){
-    const b=document.getElementById('builder'); if(!b) return;
-    if(!steps.length){ b.innerHTML='<div class="qw-empty">Nenhuma etapa ainda. Adicione texto, pausa, áudio, imagem ou opções.</div>'; return; }
-    b.innerHTML=steps.map((s,i)=>{
-      let body='';
-      if(s.tipo==='texto') body=`<div class="qw-step-grid"><div><label>Tipo</label><select class="qw-select" onchange="steps[${i}]=defaultStep(this.value);renderBuilder()"><option value="texto" selected>Texto</option><option value="pausa">Pausa</option><option value="audio">Áudio</option><option value="imagem">Imagem</option><option value="arquivo">Arquivo</option><option value="opcoes">Opções</option></select></div><div><label>Mensagem</label><textarea class="qw-textarea" oninput="updateStep(${i},'texto',this.value)">${esc(s.texto||'')}</textarea></div><div><label>Digitando (s)</label><input class="qw-input" type="number" min="0" value="${esc(s.digitandoSegundos||0)}" oninput="updateStep(${i},'digitandoSegundos',this.value)"></div></div>`;
-      } else if(s.tipo==='pausa') body=`<div class="qw-step-grid"><div><label>Tipo</label><select class="qw-select" onchange="steps[${i}]=defaultStep(this.value);renderBuilder()"><option value="pausa" selected>Pausa</option><option value="texto">Texto</option><option value="audio">Áudio</option><option value="imagem">Imagem</option><option value="arquivo">Arquivo</option><option value="opcoes">Opções</option></select></div><div><label>Descrição</label><input class="qw-input" value="Aguardar antes da próxima etapa" readonly></div><div><label>Segundos</label><input class="qw-input" type="number" min="0" value="${esc(s.segundos||0)}" oninput="updateStep(${i},'segundos',this.value)"></div></div>`;
-      } else if(s.tipo==='audio') body=`<div class="qw-step-grid"><div><label>Tipo</label><select class="qw-select" onchange="steps[${i}]=defaultStep(this.value);renderBuilder()"><option value="audio" selected>Áudio</option><option value="texto">Texto</option><option value="pausa">Pausa</option><option value="imagem">Imagem</option><option value="arquivo">Arquivo</option><option value="opcoes">Opções</option></select></div><div><label>Caminho do áudio</label><input class="qw-input" value="${esc(s.caminho||'')}" placeholder="Ex: /public/uploads/audio.mp3" oninput="updateStep(${i},'caminho',this.value)"></div><div><label>Gravando (s)</label><input class="qw-input" type="number" min="0" value="${esc(s.gravandoSegundos||0)}" oninput="updateStep(${i},'gravandoSegundos',this.value)"></div></div><div class="qw-upload"><label class="qw-mini-btn">Selecionar áudio<input type="file" accept="audio/*" hidden onchange="uploadMedia(${i},this)"></label></div>${mediaPreview(s)}<div class="qw-field" style="margin-top:8px"><label>Legenda/observação</label><input class="qw-input" value="${esc(s.legenda||'')}" oninput="updateStep(${i},'legenda',this.value)"></div>`;
-      } else if(s.tipo==='imagem' || s.tipo==='arquivo') body=`<div class="qw-step-grid"><div><label>Tipo</label><select class="qw-select" onchange="steps[${i}]=defaultStep(this.value);renderBuilder()"><option value="${s.tipo}" selected>${s.tipo==='imagem'?'Imagem':'Arquivo'}</option><option value="texto">Texto</option><option value="pausa">Pausa</option><option value="audio">Áudio</option><option value="imagem">Imagem</option><option value="arquivo">Arquivo</option><option value="opcoes">Opções</option></select></div><div><label>Caminho</label><input class="qw-input" value="${esc(s.caminho||'')}" placeholder="Ex: /public/uploads/foto.jpg" oninput="updateStep(${i},'caminho',this.value)"></div><div><label>Tipo</label><input class="qw-input" value="${s.tipo}" readonly></div></div><div class="qw-upload"><label class="qw-mini-btn">Selecionar mídia<input type="file" hidden onchange="uploadMedia(${i},this)"></label></div>${mediaPreview(s)}<div class="qw-field" style="margin-top:8px"><label>Legenda</label><textarea class="qw-textarea" oninput="updateStep(${i},'legenda',this.value)">${esc(s.legenda||'')}</textarea></div>`;
-      } else if(s.tipo==='opcoes') {
-        const opts=(s.opcoes||[]).map((o,oi)=>`<div class="qw-option-row"><input class="qw-input" placeholder="Rótulo" value="${esc(o.label||'')}" oninput="updateOption(${i},${oi},'label',this.value)"><input class="qw-input" placeholder="Resposta" value="${esc(o.resposta||'')}" oninput="updateOption(${i},${oi},'resposta',this.value)"><input class="qw-input" placeholder="Próximo bloco" value="${esc(o.proximoBloco||'')}" oninput="updateOption(${i},${oi},'proximoBloco',this.value)"><button class="qw-mini-btn danger" type="button" onclick="removeOption(${i},${oi})">X</button></div>`).join('');
-        body=`<div class="qw-step-grid"><div><label>Tipo</label><select class="qw-select" onchange="steps[${i}]=defaultStep(this.value);renderBuilder()"><option value="opcoes" selected>Opções</option><option value="texto">Texto</option><option value="pausa">Pausa</option><option value="audio">Áudio</option><option value="imagem">Imagem</option><option value="arquivo">Arquivo</option></select></div><div><label>Texto acima das opções</label><input class="qw-input" value="${esc(s.texto||'')}" oninput="updateStep(${i},'texto',this.value)"></div><div><label>Ações</label><button class="qw-mini-btn" type="button" onclick="addOption(${i})">+ Opção</button></div></div><div class="qw-options-box">${opts}</div>`;
+
+  function defaultStep(tipo) {
+    if (tipo === 'texto') return { id: uid(), tipo: 'texto', texto: '', digitandoSegundos: 2 };
+    if (tipo === 'pausa') return { id: uid(), tipo: 'pausa', segundos: 3 };
+    if (tipo === 'audio') return { id: uid(), tipo: 'audio', caminho: '', gravandoSegundos: 2, legenda: '' };
+    if (tipo === 'imagem') return { id: uid(), tipo: 'imagem', caminho: '', legenda: '' };
+    if (tipo === 'arquivo') return { id: uid(), tipo: 'arquivo', caminho: '', legenda: '' };
+    if (tipo === 'opcoes') {
+      return {
+        id: uid(),
+        tipo: 'opcoes',
+        texto: 'Escolha uma opção:',
+        opcoes: [
+          { label: '1️⃣ Smartphones', resposta: '1', proximoBloco: 'Smartphones' },
+          { label: '2️⃣ Assistência', resposta: '2', proximoBloco: 'Assistência' }
+        ]
+      };
+    }
+    return { id: uid(), tipo: 'texto', texto: '', digitandoSegundos: 0 };
+  }
+
+  function addStep(tipo) {
+    steps.push(defaultStep(tipo));
+    renderBuilder();
+  }
+
+  function removeStep(index) {
+    steps.splice(index, 1);
+    renderBuilder();
+  }
+
+  function moveStep(index, direction) {
+    var target = index + direction;
+    if (target < 0 || target >= steps.length) return;
+    var current = steps[index];
+    steps[index] = steps[target];
+    steps[target] = current;
+    renderBuilder();
+  }
+
+  function updateStep(index, key, value) {
+    if (!steps[index]) return;
+    steps[index][key] = value;
+  }
+
+  function updateOption(stepIndex, optionIndex, key, value) {
+    if (!steps[stepIndex]) return;
+    steps[stepIndex].opcoes = steps[stepIndex].opcoes || [];
+    if (!steps[stepIndex].opcoes[optionIndex]) return;
+    steps[stepIndex].opcoes[optionIndex][key] = value;
+  }
+
+  function addOption(index) {
+    steps[index].opcoes = steps[index].opcoes || [];
+    steps[index].opcoes.push({ label: '', resposta: '', proximoBloco: '' });
+    renderBuilder();
+  }
+
+  function removeOption(stepIndex, optionIndex) {
+    steps[stepIndex].opcoes.splice(optionIndex, 1);
+    renderBuilder();
+  }
+
+  async function uploadMedia(index, input) {
+    var file = input.files && input.files[0];
+    if (!file) return;
+
+    var formData = new FormData();
+    formData.append('arquivo', file);
+
+    try {
+      var response = await fetch('/automacao-whatsapp/midias/upload', {
+        method: 'POST',
+        body: formData
+      });
+      var payload = await response.json();
+
+      if (!response.ok || !payload.success) {
+        throw new Error(payload.message || 'Falha no upload.');
       }
-      return `<div class="qw-step"><div class="qw-step-head"><div class="qw-step-title">#${i+1} · ${esc(s.tipo)}</div><div class="qw-step-actions"><button class="qw-mini-btn" type="button" onclick="moveStep(${i},-1)">↑</button><button class="qw-mini-btn" type="button" onclick="moveStep(${i},1)">↓</button><button class="qw-mini-btn danger" type="button" onclick="removeStep(${i})">Remover</button></div></div>${body}</div>`;
+
+      steps[index].caminho = payload.caminho;
+      steps[index].tipo = payload.tipo;
+      renderBuilder();
+    } catch (error) {
+      alert(error.message || 'Falha no upload.');
+    }
+  }
+
+  function mediaPreview(step) {
+    if (!step.caminho) return '';
+    if (step.tipo === 'imagem') {
+      return '<div class="qw-media-preview"><img src="' + esc(step.caminho) + '" alt="Prévia"></div>';
+    }
+    if (step.tipo === 'audio') {
+      return '<div class="qw-media-preview"><audio controls src="' + esc(step.caminho) + '"></audio></div>';
+    }
+    return '<div class="qw-media-preview"><a class="qw-link" href="' + esc(step.caminho) + '" target="_blank">Abrir arquivo</a></div>';
+  }
+
+  function typeSelect(index, selected) {
+    var types = [
+      ['texto', 'Texto'],
+      ['pausa', 'Pausa'],
+      ['audio', 'Áudio'],
+      ['imagem', 'Imagem'],
+      ['arquivo', 'Arquivo'],
+      ['opcoes', 'Opções']
+    ];
+
+    return '<select class="qw-select" onchange="changeStepType(' + index + ',this.value)">' +
+      types.map(function (item) {
+        return '<option value="' + item[0] + '"' + (item[0] === selected ? ' selected' : '') + '>' + item[1] + '</option>';
+      }).join('') +
+      '</select>';
+  }
+
+  function changeStepType(index, tipo) {
+    steps[index] = defaultStep(tipo);
+    renderBuilder();
+  }
+
+  function renderBuilder() {
+    var builder = document.getElementById('builder');
+    if (!builder) return;
+
+    if (!steps.length) {
+      builder.innerHTML = '<div class="qw-empty">Nenhuma etapa ainda. Clique em Texto, Pausa, Áudio, Imagem, Arquivo ou Opções.</div>';
+      return;
+    }
+
+    builder.innerHTML = steps.map(function (step, index) {
+      var body = '';
+
+      if (step.tipo === 'texto') {
+        body =
+          '<div class="qw-step-grid">' +
+            '<div><label>Tipo</label>' + typeSelect(index, step.tipo) + '</div>' +
+            '<div><label>Mensagem</label><textarea class="qw-textarea" oninput="updateStep(' + index + ',\'texto\',this.value)">' + esc(step.texto || '') + '</textarea></div>' +
+            '<div><label>Digitando (s)</label><input class="qw-input" type="number" min="0" value="' + esc(step.digitandoSegundos || 0) + '" oninput="updateStep(' + index + ',\'digitandoSegundos\',this.value)"></div>' +
+          '</div>';
+      } else if (step.tipo === 'pausa') {
+        body =
+          '<div class="qw-step-grid">' +
+            '<div><label>Tipo</label>' + typeSelect(index, step.tipo) + '</div>' +
+            '<div><label>Descrição</label><input class="qw-input" value="Aguardar antes da próxima etapa" readonly></div>' +
+            '<div><label>Segundos</label><input class="qw-input" type="number" min="0" value="' + esc(step.segundos || 0) + '" oninput="updateStep(' + index + ',\'segundos\',this.value)"></div>' +
+          '</div>';
+      } else if (step.tipo === 'audio') {
+        body =
+          '<div class="qw-step-grid">' +
+            '<div><label>Tipo</label>' + typeSelect(index, step.tipo) + '</div>' +
+            '<div><label>Caminho do áudio</label><input class="qw-input" value="' + esc(step.caminho || '') + '" oninput="updateStep(' + index + ',\'caminho\',this.value)"></div>' +
+            '<div><label>Gravando (s)</label><input class="qw-input" type="number" min="0" value="' + esc(step.gravandoSegundos || 0) + '" oninput="updateStep(' + index + ',\'gravandoSegundos\',this.value)"></div>' +
+          '</div>' +
+          '<div class="qw-upload"><label class="qw-mini-btn">Selecionar áudio<input type="file" accept="audio/*" hidden onchange="uploadMedia(' + index + ',this)"></label></div>' +
+          mediaPreview(step) +
+          '<div class="qw-field" style="margin-top:8px"><label>Legenda/observação</label><input class="qw-input" value="' + esc(step.legenda || '') + '" oninput="updateStep(' + index + ',\'legenda\',this.value)"></div>';
+      } else if (step.tipo === 'imagem' || step.tipo === 'arquivo') {
+        body =
+          '<div class="qw-step-grid">' +
+            '<div><label>Tipo</label>' + typeSelect(index, step.tipo) + '</div>' +
+            '<div><label>Caminho</label><input class="qw-input" value="' + esc(step.caminho || '') + '" oninput="updateStep(' + index + ',\'caminho\',this.value)"></div>' +
+            '<div><label>Formato</label><input class="qw-input" value="' + esc(step.tipo) + '" readonly></div>' +
+          '</div>' +
+          '<div class="qw-upload"><label class="qw-mini-btn">Selecionar mídia<input type="file" hidden onchange="uploadMedia(' + index + ',this)"></label></div>' +
+          mediaPreview(step) +
+          '<div class="qw-field" style="margin-top:8px"><label>Legenda</label><textarea class="qw-textarea" oninput="updateStep(' + index + ',\'legenda\',this.value)">' + esc(step.legenda || '') + '</textarea></div>';
+      } else if (step.tipo === 'opcoes') {
+        var options = (step.opcoes || []).map(function (option, optionIndex) {
+          return '<div class="qw-option-row">' +
+            '<input class="qw-input" placeholder="Rótulo" value="' + esc(option.label || '') + '" oninput="updateOption(' + index + ',' + optionIndex + ',\'label\',this.value)">' +
+            '<input class="qw-input" placeholder="Resposta" value="' + esc(option.resposta || '') + '" oninput="updateOption(' + index + ',' + optionIndex + ',\'resposta\',this.value)">' +
+            '<input class="qw-input" placeholder="Próximo bloco" value="' + esc(option.proximoBloco || '') + '" oninput="updateOption(' + index + ',' + optionIndex + ',\'proximoBloco\',this.value)">' +
+            '<button class="qw-mini-btn danger" type="button" onclick="removeOption(' + index + ',' + optionIndex + ')">X</button>' +
+          '</div>';
+        }).join('');
+
+        body =
+          '<div class="qw-step-grid">' +
+            '<div><label>Tipo</label>' + typeSelect(index, step.tipo) + '</div>' +
+            '<div><label>Texto acima das opções</label><input class="qw-input" value="' + esc(step.texto || '') + '" oninput="updateStep(' + index + ',\'texto\',this.value)"></div>' +
+            '<div><label>Ações</label><button class="qw-mini-btn" type="button" onclick="addOption(' + index + ')">+ Opção</button></div>' +
+          '</div>' +
+          '<div class="qw-options-box">' + options + '</div>';
+      }
+
+      return '<div class="qw-step">' +
+        '<div class="qw-step-head">' +
+          '<div class="qw-step-title">#' + (index + 1) + ' · ' + esc(step.tipo) + '</div>' +
+          '<div class="qw-step-actions">' +
+            '<button class="qw-mini-btn" type="button" onclick="moveStep(' + index + ',-1)">↑</button>' +
+            '<button class="qw-mini-btn" type="button" onclick="moveStep(' + index + ',1)">↓</button>' +
+            '<button class="qw-mini-btn danger" type="button" onclick="removeStep(' + index + ')">Remover</button>' +
+          '</div>' +
+        '</div>' +
+        body +
+      '</div>';
     }).join('');
   }
-  function prepareSteps(){ document.getElementById('etapasJson').value=JSON.stringify(steps); return true; }
-  function buildSimulation(items){
-    let t=0; let out=[];
-    out.push('SIMULAÇÃO DO FLUXO'); out.push('────────────────────');
-    (items||[]).forEach((s,i)=>{
-      out.push(`\n[${String(Math.floor(t/60)).padStart(2,'0')}:${String(t%60).padStart(2,'0')}] Etapa ${i+1}: ${String(s.tipo||'texto').toUpperCase()}`);
-      if(s.tipo==='texto') { const d=Number(s.digitandoSegundos||0); if(d){ out.push(`Digitando por ${d}s...`); t+=d; } out.push(`Enviar texto:\n${s.texto||'(vazio)'}`); }
-      if(s.tipo==='pausa') { const d=Number(s.segundos||0); out.push(`Aguardar ${d}s antes da próxima etapa.`); t+=d; }
-      if(s.tipo==='audio') { const d=Number(s.gravandoSegundos||0); if(d){ out.push(`Gravando áudio por ${d}s...`); t+=d; } out.push(`Enviar áudio: ${s.caminho||'(sem caminho)'}`); if(s.legenda) out.push(`Obs: ${s.legenda}`); }
-      if(s.tipo==='imagem') { out.push(`Enviar imagem: ${s.caminho||'(sem caminho)'}`); if(s.legenda) out.push(`Legenda: ${s.legenda}`); }
-      if(s.tipo==='arquivo') { out.push(`Enviar arquivo: ${s.caminho||'(sem caminho)'}`); if(s.legenda) out.push(`Legenda: ${s.legenda}`); }
-      if(s.tipo==='opcoes') { out.push(s.texto || 'Opções:'); (s.opcoes||[]).forEach(o=>out.push(`- ${o.label||''} | resposta: ${o.resposta||''} | próximo: ${o.proximoBloco||''}`)); }
-    });
-    out.push(`\nTempo mínimo estimado: ${t}s`);
-    return out.join('\n');
+
+  function prepareSteps() {
+    var hidden = document.getElementById('etapasJson');
+    if (!hidden) return false;
+
+    if (!steps.length) {
+      alert('Adicione pelo menos uma etapa antes de salvar o bloco.');
+      return false;
+    }
+
+    hidden.value = JSON.stringify(steps);
+    return true;
   }
-  function simulateCurrent(){ const p=document.getElementById('preview'); if(p) p.textContent=buildSimulation(steps); fetch('/automacao-whatsapp/simulador/log',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({nome:document.querySelector('input[name=\"nome\"]')?.value||'Bloco em edição'})}).catch(()=>{}); }
-  function simulateSaved(){ const id=document.getElementById('simulateSelect')?.value; const b=blocosSalvos.find(x=>x.id===id); const p=document.getElementById('savedPreview'); if(p) p.textContent=b?buildSimulation(b.etapas||[]):'Bloco não encontrado.'; if(b) fetch('/automacao-whatsapp/simulador/log',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({blocoId:b.id,nome:b.nome})}).catch(()=>{}); }
+
+  function buildSimulation(items) {
+    var totalSeconds = 0;
+    var output = ['SIMULAÇÃO DO FLUXO', '────────────────────'];
+
+    (items || []).forEach(function (step, index) {
+      output.push('
+Etapa ' + (index + 1) + ': ' + String(step.tipo || 'texto').toUpperCase());
+
+      if (step.tipo === 'texto') {
+        var typing = Number(step.digitandoSegundos || 0);
+        output.push('Digitando por ' + typing + ' segundo(s).');
+        output.push('Texto: ' + (step.texto || '(vazio)'));
+        totalSeconds += typing;
+      } else if (step.tipo === 'pausa') {
+        var pause = Number(step.segundos || 0);
+        output.push('Pausa de ' + pause + ' segundo(s).');
+        totalSeconds += pause;
+      } else if (step.tipo === 'audio') {
+        var recording = Number(step.gravandoSegundos || 0);
+        output.push('Gravando por ' + recording + ' segundo(s).');
+        output.push('Áudio: ' + (step.caminho || '(não selecionado)'));
+        totalSeconds += recording;
+      } else if (step.tipo === 'imagem') {
+        output.push('Imagem: ' + (step.caminho || '(não selecionada)'));
+      } else if (step.tipo === 'arquivo') {
+        output.push('Arquivo: ' + (step.caminho || '(não selecionado)'));
+      } else if (step.tipo === 'opcoes') {
+        output.push(step.texto || 'Opções:');
+        (step.opcoes || []).forEach(function (option) {
+          output.push('- ' + (option.label || '') + ' | resposta: ' + (option.resposta || '') + ' | próximo bloco: ' + (option.proximoBloco || ''));
+        });
+      }
+    });
+
+    output.push('
+Tempo estimado: ' + totalSeconds + ' segundo(s).');
+    return output.join('
+');
+  }
+
+  function simulateCurrent() {
+    var preview = document.getElementById('preview');
+    if (!preview) return;
+    preview.textContent = buildSimulation(steps);
+  }
+
+  function simulateSaved() {
+    var select = document.getElementById('simulateSelect');
+    var preview = document.getElementById('savedPreview');
+    if (!select || !preview) return;
+
+    var selected = null;
+    for (var index = 0; index < blocosSalvos.length; index += 1) {
+      if (blocosSalvos[index].id === select.value) {
+        selected = blocosSalvos[index];
+        break;
+      }
+    }
+
+    preview.textContent = selected
+      ? buildSimulation(selected.etapas || [])
+      : 'Bloco não encontrado.';
+  }
+
+  window.addStep = addStep;
+  window.removeStep = removeStep;
+  window.moveStep = moveStep;
+  window.updateStep = updateStep;
+  window.updateOption = updateOption;
+  window.addOption = addOption;
+  window.removeOption = removeOption;
+  window.changeStepType = changeStepType;
+  window.uploadMedia = uploadMedia;
+  window.prepareSteps = prepareSteps;
+  window.simulateCurrent = simulateCurrent;
+  window.simulateSaved = simulateSaved;
+
   renderBuilder();
+})();
 </script>
