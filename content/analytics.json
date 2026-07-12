@@ -1,17 +1,17 @@
 {
   "version": "8.4.0-analytics-professional",
   "createdAt": "2026-07-08T00:26:21.803Z",
-  "updatedAt": "2026-07-12T13:23:44.689Z",
+  "updatedAt": "2026-07-12T13:36:09.556Z",
   "source": "local-json",
   "counters": {
-    "product_view": 23,
+    "product_view": 24,
     "favorite": 2,
     "favorite_click": 0,
     "whatsapp_click": 3,
     "category_view": 43,
     "share_click": 0,
     "search": 6,
-    "page_view": 105
+    "page_view": 107
   },
   "products": {
     "mini-game-portatil-400-jogos": {
@@ -140,11 +140,11 @@
       "name": "Fonte Original Apple Usb C 20w",
       "image": "/images/Fonte Original Apple Usb C 20w.jpg",
       "url": "http://localhost:3000/produto/fonte-original-apple-usb-c-20w/",
-      "views": 5,
+      "views": 6,
       "favorites": 0,
       "whatsapp": 0,
       "shares": 0,
-      "lastAt": "2026-07-12T13:23:44.689Z"
+      "lastAt": "2026-07-12T13:36:09.556Z"
     },
     "fone-jbl-tune-510bt-branco": {
       "slug": "fone-jbl-tune-510bt-branco",
@@ -219,8 +219,8 @@
   "pages": {
     "http://localhost:3000/site/view/index.html": {
       "url": "http://localhost:3000/site/view/index.html",
-      "views": 40,
-      "lastAt": "2026-07-12T13:23:41.735Z"
+      "views": 41,
+      "lastAt": "2026-07-12T13:36:06.935Z"
     },
     "http://localhost:3000/smartphones/": {
       "url": "http://localhost:3000/smartphones/",
@@ -294,8 +294,8 @@
     },
     "http://localhost:3000/produto/fonte-original-apple-usb-c-20w/": {
       "url": "http://localhost:3000/produto/fonte-original-apple-usb-c-20w/",
-      "views": 10,
-      "lastAt": "2026-07-12T13:23:44.686Z"
+      "views": 12,
+      "lastAt": "2026-07-12T13:36:09.556Z"
     },
     "http://localhost:3000/produto/fone-jbl-tune-510bt-branco/": {
       "url": "http://localhost:3000/produto/fone-jbl-tune-510bt-branco/",
@@ -2403,6 +2403,40 @@
     },
     {
       "at": "2026-07-12T13:23:44.689Z",
+      "type": "product_view",
+      "url": "http://localhost:3000/produto/fonte-original-apple-usb-c-20w/",
+      "referrer": "http://localhost:3000/site/view/index.html",
+      "device": "desktop",
+      "viewport": "1821x798",
+      "language": "pt-PT",
+      "product": {
+        "slug": "fonte-original-apple-usb-c-20w",
+        "name": "Fonte Original Apple Usb C 20w"
+      },
+      "term": ""
+    },
+    {
+      "at": "2026-07-12T13:36:06.935Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/site/view/index.html",
+      "referrer": "http://localhost:3000/?flash=%E2%9C%85%20Conte%C3%BAdo%20atualizado%2C%20categorias%20antigas%20limpas%20e%20push%20realizado.",
+      "device": "desktop",
+      "viewport": "1821x798",
+      "language": "pt-PT",
+      "term": ""
+    },
+    {
+      "at": "2026-07-12T13:36:08.633Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/produto/fonte-original-apple-usb-c-20w/",
+      "referrer": "http://localhost:3000/site/view/index.html",
+      "device": "desktop",
+      "viewport": "1821x798",
+      "language": "pt-PT",
+      "term": ""
+    },
+    {
+      "at": "2026-07-12T13:36:09.556Z",
       "type": "product_view",
       "url": "http://localhost:3000/produto/fonte-original-apple-usb-c-20w/",
       "referrer": "http://localhost:3000/site/view/index.html",
