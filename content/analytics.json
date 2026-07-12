@@ -1,17 +1,17 @@
 {
   "version": "8.4.0-analytics-professional",
   "createdAt": "2026-07-08T00:26:21.803Z",
-  "updatedAt": "2026-07-12T14:23:30.946Z",
+  "updatedAt": "2026-07-12T16:33:23.480Z",
   "source": "local-json",
   "counters": {
     "product_view": 27,
     "favorite": 2,
     "favorite_click": 0,
     "whatsapp_click": 3,
-    "category_view": 45,
+    "category_view": 47,
     "share_click": 0,
     "search": 6,
-    "page_view": 116
+    "page_view": 119
   },
   "products": {
     "mini-game-portatil-400-jogos": {
@@ -199,8 +199,8 @@
       "slug": "acessorios",
       "name": "acessorios",
       "url": "http://localhost:3000/acessorios/",
-      "views": 12,
-      "lastAt": "2026-07-12T14:23:16.414Z"
+      "views": 14,
+      "lastAt": "2026-07-12T16:33:23.480Z"
     },
     "eletronicos": {
       "slug": "eletronicos",
@@ -230,8 +230,8 @@
   "pages": {
     "http://localhost:3000/site/view/index.html": {
       "url": "http://localhost:3000/site/view/index.html",
-      "views": 45,
-      "lastAt": "2026-07-12T14:23:15.274Z"
+      "views": 46,
+      "lastAt": "2026-07-12T16:18:30.504Z"
     },
     "http://localhost:3000/smartphones/": {
       "url": "http://localhost:3000/smartphones/",
@@ -255,8 +255,8 @@
     },
     "http://localhost:3000/acessorios/": {
       "url": "http://localhost:3000/acessorios/",
-      "views": 24,
-      "lastAt": "2026-07-12T14:23:16.414Z"
+      "views": 28,
+      "lastAt": "2026-07-12T16:33:23.480Z"
     },
     "http://localhost:3000/eletronicos/": {
       "url": "http://localhost:3000/eletronicos/",
@@ -2622,6 +2622,64 @@
       "product": {
         "slug": "carregador-indutivo-magnetico-kaidi-15w-carga-rapida-kd9092",
         "name": "Carregador Indutivo Magnético Kaidi 15w Carga Rápida"
+      },
+      "term": ""
+    },
+    {
+      "at": "2026-07-12T16:18:30.504Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/site/view/index.html",
+      "referrer": "http://localhost:3000/produtos",
+      "device": "desktop",
+      "viewport": "1517x665",
+      "language": "pt-PT",
+      "term": ""
+    },
+    {
+      "at": "2026-07-12T16:18:33.621Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/acessorios/",
+      "referrer": "http://localhost:3000/site/view/index.html",
+      "device": "desktop",
+      "viewport": "1517x665",
+      "language": "pt-PT",
+      "term": ""
+    },
+    {
+      "at": "2026-07-12T16:18:33.627Z",
+      "type": "category_view",
+      "url": "http://localhost:3000/acessorios/",
+      "referrer": "http://localhost:3000/site/view/index.html",
+      "device": "desktop",
+      "viewport": "1517x665",
+      "language": "pt-PT",
+      "category": {
+        "slug": "acessorios",
+        "name": "acessorios"
+      },
+      "term": ""
+    },
+    {
+      "at": "2026-07-12T16:33:23.471Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/acessorios/",
+      "referrer": "http://localhost:3000/acessorios/",
+      "device": "desktop",
+      "viewport": "1517x665",
+      "language": "pt-PT",
+      "term": ""
+    },
+    {
+      "at": "2026-07-12T16:33:23.480Z",
+      "type": "category_view",
+      "url": "http://localhost:3000/acessorios/",
+      "referrer": "http://localhost:3000/acessorios/",
+      "device": "desktop",
+      "viewport": "1517x665",
+      "language": "pt-PT",
+      "category": {
+        "slug": "acessorios",
+        "name": "acessorios"
       },
       "term": ""
     }
