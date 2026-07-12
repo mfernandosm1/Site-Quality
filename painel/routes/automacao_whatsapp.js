@@ -1,12 +1,15 @@
 import express from 'express';
 import fs from 'fs';
 import path from 'path';
+import multer from 'multer';
 
 const router = express.Router();
-const MODULE_VERSION = '0.1.1';
+const MODULE_VERSION = '0.2.0';
 
 function P(app){ return app.locals.paths; }
 function moduleDir(app){ return path.join(P(app).CONTENT_DIR, 'automacao_whatsapp'); }
+function uploadsDir(app){ return path.join(P(app).PUBLIC_DIR, 'uploads', 'automacao_whatsapp'); }
+function uploadUrl(filename){ return '/public/uploads/automacao_whatsapp/' + filename; }
 function filePath(app, name){ return path.join(moduleDir(app), name); }
 function ensureDir(dir){ if(!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive:true }); }
 function now(){ return new Date().toISOString(); }
@@ -33,6 +36,11 @@ function readJson(app, name, fallback){
 function writeJson(app, name, data){
   ensureDir(moduleDir(app));
   fs.writeFileSync(filePath(app, name), JSON.stringify(data, null, 2), 'utf-8');
+}
+function addLog(app, type, message, details={}){
+  const logs = readJson(app, 'logs.json', []);
+  logs.unshift({ id: makeId('log'), type: safeText(type, 50), message: safeText(message, 500), details, at: now() });
+  writeJson(app, 'logs.json', logs.slice(0, 500));
 }
 function defaults(){
   return {
@@ -132,6 +140,19 @@ function flash(res, url, msg){
   res.redirect(url + (url.includes('?') ? '&' : '?') + 'flash=' + encodeURIComponent(msg));
 }
 
+const storage = multer.diskStorage({
+  destination(req,file,cb){ try{ const dir=uploadsDir(req.app); ensureDir(dir); cb(null,dir); }catch(e){ cb(e); } },
+  filename(req,file,cb){
+    const ext=path.extname(file.originalname||'').toLowerCase().slice(0,12);
+    const base=path.basename(file.originalname||'arquivo',ext).normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-zA-Z0-9_-]+/g,'-').replace(/^-+|-+$/g,'').slice(0,60)||'arquivo';
+    cb(null, `${Date.now()}-${Math.random().toString(36).slice(2,8)}-${base}${ext}`);
+  }
+});
+const upload = multer({ storage, limits:{fileSize:25*1024*1024}, fileFilter(req,file,cb){
+  const ok=['image/jpeg','image/png','image/webp','image/gif','audio/mpeg','audio/ogg','audio/wav','audio/mp4','application/pdf','text/plain','application/vnd.openxmlformats-officedocument.wordprocessingml.document'];
+  ok.includes(file.mimetype)?cb(null,true):cb(new Error('Tipo de arquivo não permitido.'));
+}});
+
 router.get('/', (req,res)=>{
   const data = loadAll(req.app);
   const tab = safeText(req.query.tab || 'dashboard', 30);
@@ -165,15 +186,39 @@ router.post('/blocos/salvar', (req,res)=>{
   if(idx >= 0) data.blocos[idx] = bloco;
   else data.blocos.unshift(bloco);
   writeJson(req.app, 'blocos.json', data.blocos);
-  flash(res, '/automacao-whatsapp?tab=blocos', '💬 Bloco salvo com sucesso.');
+  addLog(req.app, existing ? 'bloco_editado' : 'bloco_criado', `${existing ? 'Bloco editado' : 'Bloco criado'}: ${bloco.nome}`, { blocoId:id });
+  flash(res, '/automacao-whatsapp?tab=blocos&edit=' + encodeURIComponent(id), '💬 Bloco salvo com sucesso.');
 });
 
 router.post('/blocos/excluir/:id', (req,res)=>{
   const data = loadAll(req.app);
   const id = safeText(req.params.id, 120);
+  const removido = data.blocos.find(b => b.id === id);
   writeJson(req.app, 'blocos.json', data.blocos.filter(b => b.id !== id));
+  if(removido) addLog(req.app, 'bloco_excluido', `Bloco excluído: ${removido.nome}`, { blocoId:id });
   flash(res, '/automacao-whatsapp?tab=blocos', '🗑️ Bloco removido.');
 });
+
+
+router.post('/blocos/duplicar/:id', (req,res)=>{
+  const data=loadAll(req.app); const original=data.blocos.find(b=>b.id===safeText(req.params.id,120));
+  if(!original) return flash(res,'/automacao-whatsapp?tab=blocos','⚠️ Bloco não encontrado.');
+  const copia={...original,id:makeId('bloco'),nome:safeText(original.nome+' (cópia)',160),gatilho:'',etapas:(original.etapas||[]).map(e=>({...e,id:makeId('etapa')})),criadoEm:now(),atualizadoEm:now()};
+  data.blocos.unshift(copia); writeJson(req.app,'blocos.json',data.blocos); addLog(req.app,'bloco_duplicado',`Bloco duplicado: ${original.nome}`,{blocoId:copia.id,origemId:original.id});
+  flash(res,'/automacao-whatsapp?tab=blocos&edit='+encodeURIComponent(copia.id),'📄 Bloco duplicado com sucesso.');
+});
+
+router.post('/midias/upload', (req,res)=>{
+  upload.single('arquivo')(req,res,(error)=>{
+    if(error) return res.status(400).json({success:false,message:error.message||'Falha no upload.'});
+    if(!req.file) return res.status(400).json({success:false,message:'Nenhum arquivo recebido.'});
+    const tipo=req.file.mimetype.startsWith('image/')?'imagem':req.file.mimetype.startsWith('audio/')?'audio':'arquivo';
+    const payload={success:true,tipo,caminho:uploadUrl(req.file.filename),nomeOriginal:req.file.originalname,tamanho:req.file.size,mime:req.file.mimetype};
+    addLog(req.app,'midia_upload',`Mídia adicionada: ${req.file.originalname}`,{caminho:payload.caminho,mime:payload.mime}); res.json(payload);
+  });
+});
+
+router.post('/simulador/log',(req,res)=>{ addLog(req.app,'simulacao',`Fluxo simulado: ${safeText(req.body?.nome||'Bloco em edição',160)}`,{blocoId:safeText(req.body?.blocoId||'',120)}); res.json({success:true}); });
 
 router.post('/configuracoes/salvar', (req,res)=>{
   const data = loadAll(req.app);
@@ -192,6 +237,7 @@ router.post('/configuracoes/salvar', (req,res)=>{
   };
   if(config.delayHumanoMax < config.delayHumanoMin) config.delayHumanoMax = config.delayHumanoMin;
   writeJson(req.app, 'config.json', config);
+  addLog(req.app, 'config_atualizada', 'Configurações da Automação WhatsApp atualizadas.');
   flash(res, '/automacao-whatsapp?tab=configuracoes', '⚙️ Configurações salvas.');
 });
 

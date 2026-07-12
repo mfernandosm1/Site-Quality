@@ -1,17 +1,17 @@
 {
   "version": "8.4.0-analytics-professional",
   "createdAt": "2026-07-08T00:26:21.803Z",
-  "updatedAt": "2026-07-11T14:45:19.863Z",
+  "updatedAt": "2026-07-12T13:23:44.689Z",
   "source": "local-json",
   "counters": {
-    "product_view": 18,
+    "product_view": 23,
     "favorite": 2,
     "favorite_click": 0,
     "whatsapp_click": 3,
-    "category_view": 42,
+    "category_view": 43,
     "share_click": 0,
     "search": 6,
-    "page_view": 95
+    "page_view": 105
   },
   "products": {
     "mini-game-portatil-400-jogos": {
@@ -140,11 +140,11 @@
       "name": "Fonte Original Apple Usb C 20w",
       "image": "/images/Fonte Original Apple Usb C 20w.jpg",
       "url": "http://localhost:3000/produto/fonte-original-apple-usb-c-20w/",
-      "views": 1,
+      "views": 5,
       "favorites": 0,
       "whatsapp": 0,
       "shares": 0,
-      "lastAt": "2026-07-11T14:45:17.805Z"
+      "lastAt": "2026-07-12T13:23:44.689Z"
     },
     "fone-jbl-tune-510bt-branco": {
       "slug": "fone-jbl-tune-510bt-branco",
@@ -156,6 +156,17 @@
       "whatsapp": 0,
       "shares": 0,
       "lastAt": "2026-07-11T14:45:19.005Z"
+    },
+    "impressora-multifuncional-hp-deskjet-2975-colorida-wifi": {
+      "slug": "impressora-multifuncional-hp-deskjet-2975-colorida-wifi",
+      "name": "Impressora Multifuncional HP DeskJet 2975 Colorida Wi-Fi",
+      "image": "/images/Impressora Multifuncional HP 2975  (1).jpeg",
+      "url": "http://localhost:3000/produto/impressora-multifuncional-hp-deskjet-2975-colorida-wifi/",
+      "views": 1,
+      "favorites": 0,
+      "whatsapp": 0,
+      "shares": 0,
+      "lastAt": "2026-07-12T13:18:11.069Z"
     }
   },
   "categories": {
@@ -184,8 +195,8 @@
       "slug": "eletronicos",
       "name": "eletronicos",
       "url": "http://localhost:3000/eletronicos/",
-      "views": 16,
-      "lastAt": "2026-07-10T20:47:16.366Z"
+      "views": 17,
+      "lastAt": "2026-07-12T13:18:04.325Z"
     }
   },
   "searches": {
@@ -208,8 +219,8 @@
   "pages": {
     "http://localhost:3000/site/view/index.html": {
       "url": "http://localhost:3000/site/view/index.html",
-      "views": 36,
-      "lastAt": "2026-07-11T14:45:19.863Z"
+      "views": 40,
+      "lastAt": "2026-07-12T13:23:41.735Z"
     },
     "http://localhost:3000/smartphones/": {
       "url": "http://localhost:3000/smartphones/",
@@ -238,8 +249,8 @@
     },
     "http://localhost:3000/eletronicos/": {
       "url": "http://localhost:3000/eletronicos/",
-      "views": 32,
-      "lastAt": "2026-07-10T20:47:16.366Z"
+      "views": 34,
+      "lastAt": "2026-07-12T13:18:04.325Z"
     },
     "http://localhost:3000/produto/microfone-lapela-celular-bluetooth-tipo-c/": {
       "url": "http://localhost:3000/produto/microfone-lapela-celular-bluetooth-tipo-c/",
@@ -283,13 +294,18 @@
     },
     "http://localhost:3000/produto/fonte-original-apple-usb-c-20w/": {
       "url": "http://localhost:3000/produto/fonte-original-apple-usb-c-20w/",
-      "views": 2,
-      "lastAt": "2026-07-11T14:45:17.805Z"
+      "views": 10,
+      "lastAt": "2026-07-12T13:23:44.686Z"
     },
     "http://localhost:3000/produto/fone-jbl-tune-510bt-branco/": {
       "url": "http://localhost:3000/produto/fone-jbl-tune-510bt-branco/",
       "views": 2,
       "lastAt": "2026-07-11T14:45:19.005Z"
+    },
+    "http://localhost:3000/produto/impressora-multifuncional-hp-deskjet-2975-colorida-wifi/": {
+      "url": "http://localhost:3000/produto/impressora-multifuncional-hp-deskjet-2975-colorida-wifi/",
+      "views": 2,
+      "lastAt": "2026-07-12T13:18:11.069Z"
     }
   },
   "devices": {},
@@ -2213,6 +2229,190 @@
       "device": "desktop",
       "viewport": "1821x798",
       "language": "pt-PT",
+      "term": ""
+    },
+    {
+      "at": "2026-07-11T14:52:07.882Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/site/view/index.html",
+      "referrer": "http://localhost:3000/?flash=%E2%9C%85%20Conte%C3%BAdo%20atualizado%2C%20categorias%20antigas%20limpas%20e%20push%20realizado.",
+      "device": "desktop",
+      "viewport": "1821x798",
+      "language": "pt-PT",
+      "term": ""
+    },
+    {
+      "at": "2026-07-11T14:52:12.966Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/produto/fonte-original-apple-usb-c-20w/",
+      "referrer": "http://localhost:3000/site/view/index.html",
+      "device": "desktop",
+      "viewport": "1821x798",
+      "language": "pt-PT",
+      "term": ""
+    },
+    {
+      "at": "2026-07-11T14:52:13.882Z",
+      "type": "product_view",
+      "url": "http://localhost:3000/produto/fonte-original-apple-usb-c-20w/",
+      "referrer": "http://localhost:3000/site/view/index.html",
+      "device": "desktop",
+      "viewport": "1821x798",
+      "language": "pt-PT",
+      "product": {
+        "slug": "fonte-original-apple-usb-c-20w",
+        "name": "Fonte Original Apple Usb C 20w"
+      },
+      "term": ""
+    },
+    {
+      "at": "2026-07-12T12:31:01.734Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/produto/fonte-original-apple-usb-c-20w/",
+      "referrer": "http://localhost:3000/site/view/index.html",
+      "device": "desktop",
+      "viewport": "1821x798",
+      "language": "pt-PT",
+      "term": ""
+    },
+    {
+      "at": "2026-07-12T12:31:02.077Z",
+      "type": "product_view",
+      "url": "http://localhost:3000/produto/fonte-original-apple-usb-c-20w/",
+      "referrer": "http://localhost:3000/site/view/index.html",
+      "device": "desktop",
+      "viewport": "1821x798",
+      "language": "pt-PT",
+      "product": {
+        "slug": "fonte-original-apple-usb-c-20w",
+        "name": "Fonte Original Apple Usb C 20w"
+      },
+      "term": ""
+    },
+    {
+      "at": "2026-07-12T13:18:02.784Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/site/view/index.html",
+      "referrer": "http://localhost:3000/produtos?saved=produto",
+      "device": "desktop",
+      "viewport": "1821x798",
+      "language": "pt-PT",
+      "term": ""
+    },
+    {
+      "at": "2026-07-12T13:18:04.319Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/eletronicos/",
+      "referrer": "http://localhost:3000/site/view/index.html",
+      "device": "desktop",
+      "viewport": "1821x798",
+      "language": "pt-PT",
+      "term": ""
+    },
+    {
+      "at": "2026-07-12T13:18:04.325Z",
+      "type": "category_view",
+      "url": "http://localhost:3000/eletronicos/",
+      "referrer": "http://localhost:3000/site/view/index.html",
+      "device": "desktop",
+      "viewport": "1821x798",
+      "language": "pt-PT",
+      "category": {
+        "slug": "eletronicos",
+        "name": "eletronicos"
+      },
+      "term": ""
+    },
+    {
+      "at": "2026-07-12T13:18:10.165Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/produto/impressora-multifuncional-hp-deskjet-2975-colorida-wifi/",
+      "referrer": "http://localhost:3000/eletronicos/",
+      "device": "desktop",
+      "viewport": "1821x798",
+      "language": "pt-PT",
+      "term": ""
+    },
+    {
+      "at": "2026-07-12T13:18:11.069Z",
+      "type": "product_view",
+      "url": "http://localhost:3000/produto/impressora-multifuncional-hp-deskjet-2975-colorida-wifi/",
+      "referrer": "http://localhost:3000/eletronicos/",
+      "device": "desktop",
+      "viewport": "1821x798",
+      "language": "pt-PT",
+      "product": {
+        "slug": "impressora-multifuncional-hp-deskjet-2975-colorida-wifi",
+        "name": "Impressora Multifuncional HP DeskJet 2975 Colorida Wi-Fi"
+      },
+      "term": ""
+    },
+    {
+      "at": "2026-07-12T13:19:01.257Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/site/view/index.html",
+      "referrer": "http://localhost:3000/",
+      "device": "desktop",
+      "viewport": "1821x798",
+      "language": "pt-PT",
+      "term": ""
+    },
+    {
+      "at": "2026-07-12T13:19:03.691Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/produto/fonte-original-apple-usb-c-20w/",
+      "referrer": "http://localhost:3000/site/view/index.html",
+      "device": "desktop",
+      "viewport": "1821x798",
+      "language": "pt-PT",
+      "term": ""
+    },
+    {
+      "at": "2026-07-12T13:19:04.596Z",
+      "type": "product_view",
+      "url": "http://localhost:3000/produto/fonte-original-apple-usb-c-20w/",
+      "referrer": "http://localhost:3000/site/view/index.html",
+      "device": "desktop",
+      "viewport": "1821x798",
+      "language": "pt-PT",
+      "product": {
+        "slug": "fonte-original-apple-usb-c-20w",
+        "name": "Fonte Original Apple Usb C 20w"
+      },
+      "term": ""
+    },
+    {
+      "at": "2026-07-12T13:23:41.735Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/site/view/index.html",
+      "referrer": "http://localhost:3000/",
+      "device": "desktop",
+      "viewport": "1821x798",
+      "language": "pt-PT",
+      "term": ""
+    },
+    {
+      "at": "2026-07-12T13:23:43.797Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/produto/fonte-original-apple-usb-c-20w/",
+      "referrer": "http://localhost:3000/site/view/index.html",
+      "device": "desktop",
+      "viewport": "1821x798",
+      "language": "pt-PT",
+      "term": ""
+    },
+    {
+      "at": "2026-07-12T13:23:44.689Z",
+      "type": "product_view",
+      "url": "http://localhost:3000/produto/fonte-original-apple-usb-c-20w/",
+      "referrer": "http://localhost:3000/site/view/index.html",
+      "device": "desktop",
+      "viewport": "1821x798",
+      "language": "pt-PT",
+      "product": {
+        "slug": "fonte-original-apple-usb-c-20w",
+        "name": "Fonte Original Apple Usb C 20w"
+      },
       "term": ""
     }
   ]

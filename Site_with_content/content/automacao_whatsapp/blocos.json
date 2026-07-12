@@ -1,5 +1,15 @@
 [
   {
+    "id": "bloco_mrhtmskh_uuito6",
+    "nome": "celulares",
+    "descricao": "aqui vamos para o primeiro teste",
+    "gatilho": "cel",
+    "ativo": true,
+    "etapas": [],
+    "criadoEm": "2026-07-12T13:20:30.498Z",
+    "atualizadoEm": "2026-07-12T13:20:30.498Z"
+  },
+  {
     "id": "bloco_menu_inicial",
     "nome": "Menu inicial",
     "descricao": "Exemplo de bloco com texto, pausa e opções.",
