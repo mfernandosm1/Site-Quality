@@ -1,5 +1,52 @@
 [
   {
+    "id": "log_mrhum2fv_duqc68",
+    "type": "bloco_editado",
+    "message": "Bloco editado: celulares",
+    "details": {
+      "blocoId": "bloco_mrhtmskh_uuito6"
+    },
+    "at": "2026-07-12T13:47:56.251Z"
+  },
+  {
+    "id": "log_mrhum0qf_cg69uy",
+    "type": "midia_upload",
+    "message": "Mídia adicionada: Celular_comobase_de_Entrada.mp3",
+    "details": {
+      "caminho": "/public/uploads/automacao_whatsapp/1783864074036-py9owv-Celular_comobase_de_Entrada.mp3",
+      "mime": "audio/mpeg"
+    },
+    "at": "2026-07-12T13:47:54.039Z"
+  },
+  {
+    "id": "log_mrhulqea_jcy8v7",
+    "type": "bloco_editado",
+    "message": "Bloco editado: celulares",
+    "details": {
+      "blocoId": "bloco_mrhtmskh_uuito6"
+    },
+    "at": "2026-07-12T13:47:40.642Z"
+  },
+  {
+    "id": "log_mrhullkm_y16n1t",
+    "type": "midia_upload",
+    "message": "Mídia adicionada: Alexa echo dot branca.jpeg",
+    "details": {
+      "caminho": "/public/uploads/automacao_whatsapp/1783864054384-g2hoyv-Alexa-echo-dot-branca.jpeg",
+      "mime": "image/jpeg"
+    },
+    "at": "2026-07-12T13:47:34.390Z"
+  },
+  {
+    "id": "log_mrhukcdm_9nlipr",
+    "type": "bloco_editado",
+    "message": "Bloco editado: celulares",
+    "details": {
+      "blocoId": "bloco_mrhtmskh_uuito6"
+    },
+    "at": "2026-07-12T13:46:35.818Z"
+  },
+  {
     "id": "log_mrhtmskl_uigkvz",
     "type": "bloco_criado",
     "message": "Bloco criado: celulares",

@@ -1,17 +1,17 @@
 {
   "version": "8.4.0-analytics-professional",
   "createdAt": "2026-07-08T00:26:21.803Z",
-  "updatedAt": "2026-07-12T13:36:09.556Z",
+  "updatedAt": "2026-07-12T14:23:30.946Z",
   "source": "local-json",
   "counters": {
-    "product_view": 24,
+    "product_view": 27,
     "favorite": 2,
     "favorite_click": 0,
     "whatsapp_click": 3,
-    "category_view": 43,
+    "category_view": 45,
     "share_click": 0,
     "search": 6,
-    "page_view": 107
+    "page_view": 116
   },
   "products": {
     "mini-game-portatil-400-jogos": {
@@ -96,11 +96,11 @@
       "name": "Relógio Smartwatch Xiaomi Amazfit Bip 6",
       "image": "/images/Smartwatch Xiaomi Amazfit Bip 6.jpg",
       "url": "http://localhost:3000/produto/relogio-smartwatch-xiaomi-amazfit-bip-6/",
-      "views": 1,
+      "views": 2,
       "favorites": 0,
       "whatsapp": 0,
       "shares": 0,
-      "lastAt": "2026-07-10T20:47:10.785Z"
+      "lastAt": "2026-07-12T13:37:13.068Z"
     },
     "xiaomi-poco-x7-pro-5g-512gb-12gb-ram": {
       "slug": "xiaomi-poco-x7-pro-5g-512gb-12gb-ram",
@@ -140,11 +140,11 @@
       "name": "Fonte Original Apple Usb C 20w",
       "image": "/images/Fonte Original Apple Usb C 20w.jpg",
       "url": "http://localhost:3000/produto/fonte-original-apple-usb-c-20w/",
-      "views": 6,
+      "views": 7,
       "favorites": 0,
       "whatsapp": 0,
       "shares": 0,
-      "lastAt": "2026-07-12T13:36:09.556Z"
+      "lastAt": "2026-07-12T13:36:49.397Z"
     },
     "fone-jbl-tune-510bt-branco": {
       "slug": "fone-jbl-tune-510bt-branco",
@@ -167,6 +167,17 @@
       "whatsapp": 0,
       "shares": 0,
       "lastAt": "2026-07-12T13:18:11.069Z"
+    },
+    "carregador-indutivo-magnetico-kaidi-15w-carga-rapida-kd9092": {
+      "slug": "carregador-indutivo-magnetico-kaidi-15w-carga-rapida-kd9092",
+      "name": "Carregador Indutivo Magnético Kaidi 15w Carga Rápida",
+      "image": "/images/Carregador Indutivo Magnético 15w Kaidi Kd-9092 (2).jpeg",
+      "url": "http://localhost:3000/produto/carregador-indutivo-magnetico-kaidi-15w-carga-rapida-kd9092/",
+      "views": 1,
+      "favorites": 0,
+      "whatsapp": 0,
+      "shares": 0,
+      "lastAt": "2026-07-12T14:23:30.946Z"
     }
   },
   "categories": {
@@ -188,8 +199,8 @@
       "slug": "acessorios",
       "name": "acessorios",
       "url": "http://localhost:3000/acessorios/",
-      "views": 10,
-      "lastAt": "2026-07-10T20:47:22.098Z"
+      "views": 12,
+      "lastAt": "2026-07-12T14:23:16.414Z"
     },
     "eletronicos": {
       "slug": "eletronicos",
@@ -219,8 +230,8 @@
   "pages": {
     "http://localhost:3000/site/view/index.html": {
       "url": "http://localhost:3000/site/view/index.html",
-      "views": 41,
-      "lastAt": "2026-07-12T13:36:06.935Z"
+      "views": 45,
+      "lastAt": "2026-07-12T14:23:15.274Z"
     },
     "http://localhost:3000/smartphones/": {
       "url": "http://localhost:3000/smartphones/",
@@ -244,8 +255,8 @@
     },
     "http://localhost:3000/acessorios/": {
       "url": "http://localhost:3000/acessorios/",
-      "views": 20,
-      "lastAt": "2026-07-10T20:47:22.098Z"
+      "views": 24,
+      "lastAt": "2026-07-12T14:23:16.414Z"
     },
     "http://localhost:3000/eletronicos/": {
       "url": "http://localhost:3000/eletronicos/",
@@ -274,8 +285,8 @@
     },
     "http://localhost:3000/produto/relogio-smartwatch-xiaomi-amazfit-bip-6/": {
       "url": "http://localhost:3000/produto/relogio-smartwatch-xiaomi-amazfit-bip-6/",
-      "views": 3,
-      "lastAt": "2026-07-11T14:15:52.120Z"
+      "views": 5,
+      "lastAt": "2026-07-12T13:37:13.068Z"
     },
     "http://localhost:3000/produto/pc-gamer-intel-i7-rtx-3050-ram-16gb-ssd-512gb-monitor-24/": {
       "url": "http://localhost:3000/produto/pc-gamer-intel-i7-rtx-3050-ram-16gb-ssd-512gb-monitor-24/",
@@ -294,8 +305,8 @@
     },
     "http://localhost:3000/produto/fonte-original-apple-usb-c-20w/": {
       "url": "http://localhost:3000/produto/fonte-original-apple-usb-c-20w/",
-      "views": 12,
-      "lastAt": "2026-07-12T13:36:09.556Z"
+      "views": 14,
+      "lastAt": "2026-07-12T13:36:49.397Z"
     },
     "http://localhost:3000/produto/fone-jbl-tune-510bt-branco/": {
       "url": "http://localhost:3000/produto/fone-jbl-tune-510bt-branco/",
@@ -306,6 +317,11 @@
       "url": "http://localhost:3000/produto/impressora-multifuncional-hp-deskjet-2975-colorida-wifi/",
       "views": 2,
       "lastAt": "2026-07-12T13:18:11.069Z"
+    },
+    "http://localhost:3000/produto/carregador-indutivo-magnetico-kaidi-15w-carga-rapida-kd9092/": {
+      "url": "http://localhost:3000/produto/carregador-indutivo-magnetico-kaidi-15w-carga-rapida-kd9092/",
+      "views": 2,
+      "lastAt": "2026-07-12T14:23:30.946Z"
     }
   },
   "devices": {},
@@ -2446,6 +2462,166 @@
       "product": {
         "slug": "fonte-original-apple-usb-c-20w",
         "name": "Fonte Original Apple Usb C 20w"
+      },
+      "term": ""
+    },
+    {
+      "at": "2026-07-12T13:36:46.193Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/site/view/index.html",
+      "referrer": "http://localhost:3000/produtos",
+      "device": "desktop",
+      "viewport": "1821x798",
+      "language": "pt-PT",
+      "term": ""
+    },
+    {
+      "at": "2026-07-12T13:36:48.489Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/produto/fonte-original-apple-usb-c-20w/",
+      "referrer": "http://localhost:3000/site/view/index.html",
+      "device": "desktop",
+      "viewport": "1821x798",
+      "language": "pt-PT",
+      "term": ""
+    },
+    {
+      "at": "2026-07-12T13:36:49.397Z",
+      "type": "product_view",
+      "url": "http://localhost:3000/produto/fonte-original-apple-usb-c-20w/",
+      "referrer": "http://localhost:3000/site/view/index.html",
+      "device": "desktop",
+      "viewport": "1821x798",
+      "language": "pt-PT",
+      "product": {
+        "slug": "fonte-original-apple-usb-c-20w",
+        "name": "Fonte Original Apple Usb C 20w"
+      },
+      "term": ""
+    },
+    {
+      "at": "2026-07-12T13:37:08.131Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/site/view/index.html",
+      "referrer": "http://localhost:3000/produto/fonte-original-apple-usb-c-20w/",
+      "device": "desktop",
+      "viewport": "1821x798",
+      "language": "pt-PT",
+      "term": ""
+    },
+    {
+      "at": "2026-07-12T13:37:12.161Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/produto/relogio-smartwatch-xiaomi-amazfit-bip-6/",
+      "referrer": "http://localhost:3000/site/view/index.html",
+      "device": "desktop",
+      "viewport": "1821x798",
+      "language": "pt-PT",
+      "term": ""
+    },
+    {
+      "at": "2026-07-12T13:37:13.068Z",
+      "type": "product_view",
+      "url": "http://localhost:3000/produto/relogio-smartwatch-xiaomi-amazfit-bip-6/",
+      "referrer": "http://localhost:3000/site/view/index.html",
+      "device": "desktop",
+      "viewport": "1821x798",
+      "language": "pt-PT",
+      "product": {
+        "slug": "relogio-smartwatch-xiaomi-amazfit-bip-6",
+        "name": "Relógio Smartwatch Xiaomi Amazfit Bip 6"
+      },
+      "term": ""
+    },
+    {
+      "at": "2026-07-12T13:49:51.670Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/site/view/index.html",
+      "referrer": "http://localhost:3000/automacao-whatsapp?tab=blocos&edit=bloco_mrhtmskh_uuito6",
+      "device": "desktop",
+      "viewport": "1707x748",
+      "language": "pt-PT",
+      "term": ""
+    },
+    {
+      "at": "2026-07-12T13:50:52.407Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/acessorios/",
+      "referrer": "http://localhost:3000/site/view/index.html",
+      "device": "desktop",
+      "viewport": "1707x748",
+      "language": "pt-PT",
+      "term": ""
+    },
+    {
+      "at": "2026-07-12T13:50:52.417Z",
+      "type": "category_view",
+      "url": "http://localhost:3000/acessorios/",
+      "referrer": "http://localhost:3000/site/view/index.html",
+      "device": "desktop",
+      "viewport": "1707x748",
+      "language": "pt-PT",
+      "category": {
+        "slug": "acessorios",
+        "name": "acessorios"
+      },
+      "term": ""
+    },
+    {
+      "at": "2026-07-12T14:23:15.274Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/site/view/index.html",
+      "referrer": "http://localhost:3000/produtos?saved=produto",
+      "device": "desktop",
+      "viewport": "1517x665",
+      "language": "pt-PT",
+      "term": ""
+    },
+    {
+      "at": "2026-07-12T14:23:16.407Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/acessorios/",
+      "referrer": "http://localhost:3000/site/view/index.html",
+      "device": "desktop",
+      "viewport": "1517x665",
+      "language": "pt-PT",
+      "term": ""
+    },
+    {
+      "at": "2026-07-12T14:23:16.414Z",
+      "type": "category_view",
+      "url": "http://localhost:3000/acessorios/",
+      "referrer": "http://localhost:3000/site/view/index.html",
+      "device": "desktop",
+      "viewport": "1517x665",
+      "language": "pt-PT",
+      "category": {
+        "slug": "acessorios",
+        "name": "acessorios"
+      },
+      "term": ""
+    },
+    {
+      "at": "2026-07-12T14:23:30.036Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/produto/carregador-indutivo-magnetico-kaidi-15w-carga-rapida-kd9092/",
+      "referrer": "http://localhost:3000/acessorios/",
+      "device": "desktop",
+      "viewport": "1517x665",
+      "language": "pt-PT",
+      "term": ""
+    },
+    {
+      "at": "2026-07-12T14:23:30.946Z",
+      "type": "product_view",
+      "url": "http://localhost:3000/produto/carregador-indutivo-magnetico-kaidi-15w-carga-rapida-kd9092/",
+      "referrer": "http://localhost:3000/acessorios/",
+      "device": "desktop",
+      "viewport": "1517x665",
+      "language": "pt-PT",
+      "product": {
+        "slug": "carregador-indutivo-magnetico-kaidi-15w-carga-rapida-kd9092",
+        "name": "Carregador Indutivo Magnético Kaidi 15w Carga Rápida"
       },
       "term": ""
     }

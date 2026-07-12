@@ -5,9 +5,34 @@
     "descricao": "aqui vamos para o primeiro teste",
     "gatilho": "cel",
     "ativo": true,
-    "etapas": [],
+    "etapas": [
+      {
+        "id": "etapa_mrhuk6g2_gvljf",
+        "tipo": "texto",
+        "texto": "vamo turma",
+        "digitandoSegundos": 2
+      },
+      {
+        "id": "etapa_mrhuke5m_10fl1",
+        "tipo": "pausa",
+        "segundos": 3
+      },
+      {
+        "id": "etapa_mrhukh6r_r6geb",
+        "tipo": "imagem",
+        "caminho": "/public/uploads/automacao_whatsapp/1783864054384-g2hoyv-Alexa-echo-dot-branca.jpeg",
+        "legenda": ""
+      },
+      {
+        "id": "etapa_mrhulspb_k4s90",
+        "tipo": "audio",
+        "caminho": "/public/uploads/automacao_whatsapp/1783864074036-py9owv-Celular_comobase_de_Entrada.mp3",
+        "gravandoSegundos": 2,
+        "legenda": ""
+      }
+    ],
     "criadoEm": "2026-07-12T13:20:30.498Z",
-    "atualizadoEm": "2026-07-12T13:20:30.498Z"
+    "atualizadoEm": "2026-07-12T13:47:56.248Z"
   },
   {
     "id": "bloco_menu_inicial",
