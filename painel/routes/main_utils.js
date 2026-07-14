@@ -1506,6 +1506,92 @@ function patchProdutoHtmlForFriendlyUrls(html){
   return out;
 }
 
+function stripHtmlText(value){
+  return String(value || '')
+    .replace(/<script[\s\S]*?<\/script>/gi, ' ')
+    .replace(/<style[\s\S]*?<\/style>/gi, ' ')
+    .replace(/<[^>]+>/g, ' ')
+    .replace(/&nbsp;/gi, ' ')
+    .replace(/&amp;/gi, '&')
+    .replace(/&quot;/gi, '"')
+    .replace(/&#039;|&apos;/gi, "'")
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
+function productSeoDescription(product){
+  const custom = stripHtmlText(
+    product?.seoDescription ||
+    product?.metaDescription ||
+    product?.descriptionShort ||
+    product?.descricaoCurta ||
+    ''
+  );
+
+  const name = stripHtmlText(product?.name || product?.nome || 'produto');
+  const fallback = `Confira ${name} na Quality Celulares. Consulte disponibilidade, garantia e condições pelo WhatsApp.`;
+  const text = custom || fallback;
+
+  if (text.length <= 180) return text;
+  return text.slice(0, 177).replace(/\s+\S*$/, '').trim() + '...';
+}
+
+function productSeoTitle(product){
+  const custom = stripHtmlText(product?.seoTitle || product?.metaTitle || '');
+  const name = stripHtmlText(product?.name || product?.nome || 'Produto');
+  return custom || `${name} | Quality Celulares`;
+}
+
+function productAbsoluteImage(product){
+  const raw = String(product?.ogImage || product?.seoImage || product?.image || product?.imagem || '').trim();
+  if (!raw) return 'https://www.qualitycel.com.br/images/logo.png';
+  if (/^https?:\/\//i.test(raw)) return raw;
+  return `https://www.qualitycel.com.br/${raw.replace(/^\/+/, '').replace(/^site\//, '')}`;
+}
+
+function patchProductHead(html, product){
+  const slug = String(product?.slug || product?.id || '').trim();
+  const url = `https://www.qualitycel.com.br/produto/${encodeURIComponent(slug)}/`;
+  const title = productSeoTitle(product);
+  const description = productSeoDescription(product);
+  const image = productAbsoluteImage(product);
+
+  const $ = cheerio.load(html || '', { decodeEntities: false });
+  $('title').first().text(title);
+
+  function setMeta(selector, attrs){
+    let el = $(selector).first();
+    if (!el.length) {
+      el = $('<meta>');
+      Object.entries(attrs).forEach(([key, value]) => el.attr(key, value));
+      $('head').append(el);
+    } else {
+      Object.entries(attrs).forEach(([key, value]) => el.attr(key, value));
+    }
+  }
+
+  setMeta('meta[name="description"]', { name: 'description', content: description });
+  setMeta('meta[property="og:type"]', { property: 'og:type', content: 'product' });
+  setMeta('meta[property="og:title"]', { property: 'og:title', content: title });
+  setMeta('meta[property="og:description"]', { property: 'og:description', content: description });
+  setMeta('meta[property="og:image"]', { property: 'og:image', content: image });
+  setMeta('meta[property="og:image:alt"]', { property: 'og:image:alt', content: stripHtmlText(product?.name || product?.nome || 'Produto Quality Celulares') });
+  setMeta('meta[property="og:url"]', { property: 'og:url', content: url });
+  setMeta('meta[name="twitter:card"]', { name: 'twitter:card', content: 'summary_large_image' });
+  setMeta('meta[name="twitter:title"]', { name: 'twitter:title', content: title });
+  setMeta('meta[name="twitter:description"]', { name: 'twitter:description', content: description });
+  setMeta('meta[name="twitter:image"]', { name: 'twitter:image', content: image });
+
+  let canonical = $('link[rel="canonical"]').first();
+  if (!canonical.length) {
+    canonical = $('<link rel="canonical">');
+    $('head').append(canonical);
+  }
+  canonical.attr('href', url);
+
+  return $.html();
+}
+
 function patchIndexFriendlyLinks(siteDir){
   const indexPath = path.join(siteDir, 'index.html');
   if (!fs.existsSync(indexPath)) return;
@@ -1558,7 +1644,8 @@ export function generateFriendlyUrlPages(siteDir){
 
         const dir = path.join(productRoot, slug);
         ensureCleanDir(dir);
-        writeFileUtf8(path.join(dir, 'index.html'), produtoTemplate);
+        const productHtml = patchProductHead(produtoTemplate, p);
+        writeFileUtf8(path.join(dir, 'index.html'), productHtml);
       });
 
     patchIndexFriendlyLinks(siteDir);

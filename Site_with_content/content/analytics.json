@@ -1,17 +1,17 @@
 {
   "version": "8.4.0-analytics-professional",
   "createdAt": "2026-07-08T00:26:21.803Z",
-  "updatedAt": "2026-07-14T00:28:18.928Z",
+  "updatedAt": "2026-07-14T00:58:59.227Z",
   "source": "local-json",
   "counters": {
-    "product_view": 28,
+    "product_view": 30,
     "favorite": 2,
     "favorite_click": 0,
     "whatsapp_click": 4,
     "category_view": 50,
     "share_click": 0,
     "search": 6,
-    "page_view": 129
+    "page_view": 134
   },
   "products": {
     "mini-game-portatil-400-jogos": {
@@ -140,11 +140,11 @@
       "name": "Fonte Original Apple Usb C 20w",
       "image": "/images/Fonte Original Apple Usb C 20w.jpg",
       "url": "http://localhost:3000/produto/fonte-original-apple-usb-c-20w/",
-      "views": 7,
+      "views": 8,
       "favorites": 0,
       "whatsapp": 0,
       "shares": 0,
-      "lastAt": "2026-07-12T13:36:49.397Z"
+      "lastAt": "2026-07-14T00:58:51.494Z"
     },
     "fone-jbl-tune-510bt-branco": {
       "slug": "fone-jbl-tune-510bt-branco",
@@ -189,6 +189,17 @@
       "whatsapp": 0,
       "shares": 0,
       "lastAt": "2026-07-14T00:16:18.755Z"
+    },
+    "bateria-apple-magsafe": {
+      "slug": "bateria-apple-magsafe",
+      "name": "Bateria Apple MagSafe",
+      "image": "/images/Bateria MagSafe.jpeg",
+      "url": "http://localhost:3000/produto/bateria-apple-magsafe/",
+      "views": 1,
+      "favorites": 0,
+      "whatsapp": 0,
+      "shares": 0,
+      "lastAt": "2026-07-14T00:58:55.679Z"
     }
   },
   "categories": {
@@ -241,8 +252,8 @@
   "pages": {
     "http://localhost:3000/site/view/index.html": {
       "url": "http://localhost:3000/site/view/index.html",
-      "views": 53,
-      "lastAt": "2026-07-14T00:28:15.692Z"
+      "views": 56,
+      "lastAt": "2026-07-14T00:58:59.227Z"
     },
     "http://localhost:3000/smartphones/": {
       "url": "http://localhost:3000/smartphones/",
@@ -316,8 +327,8 @@
     },
     "http://localhost:3000/produto/fonte-original-apple-usb-c-20w/": {
       "url": "http://localhost:3000/produto/fonte-original-apple-usb-c-20w/",
-      "views": 14,
-      "lastAt": "2026-07-12T13:36:49.397Z"
+      "views": 16,
+      "lastAt": "2026-07-14T00:58:51.493Z"
     },
     "http://localhost:3000/produto/fone-jbl-tune-510bt-branco/": {
       "url": "http://localhost:3000/produto/fone-jbl-tune-510bt-branco/",
@@ -338,6 +349,11 @@
       "url": "http://localhost:3000/produto/notebook-lenovo-ideapad-1-ryzen-3-7320u-4gb-256gb-ssd/",
       "views": 2,
       "lastAt": "2026-07-14T00:16:18.755Z"
+    },
+    "http://localhost:3000/produto/bateria-apple-magsafe/": {
+      "url": "http://localhost:3000/produto/bateria-apple-magsafe/",
+      "views": 2,
+      "lastAt": "2026-07-14T00:58:55.678Z"
     }
   },
   "devices": {},
@@ -2867,6 +2883,84 @@
         "slug": "eletronicos",
         "name": "eletronicos"
       },
+      "term": ""
+    },
+    {
+      "at": "2026-07-14T00:44:20.771Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/site/view/index.html",
+      "referrer": "http://localhost:3000/?flash=%E2%9C%85%20Conte%C3%BAdo%20atualizado%2C%20categorias%20antigas%20limpas%20e%20push%20realizado.",
+      "device": "desktop",
+      "viewport": "1517x665",
+      "language": "pt-PT",
+      "term": ""
+    },
+    {
+      "at": "2026-07-14T00:58:48.325Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/site/view/index.html",
+      "referrer": "http://localhost:3000/",
+      "device": "desktop",
+      "viewport": "1517x665",
+      "language": "pt-PT",
+      "term": ""
+    },
+    {
+      "at": "2026-07-14T00:58:50.589Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/produto/fonte-original-apple-usb-c-20w/",
+      "referrer": "http://localhost:3000/site/view/index.html",
+      "device": "desktop",
+      "viewport": "1517x665",
+      "language": "pt-PT",
+      "term": ""
+    },
+    {
+      "at": "2026-07-14T00:58:51.494Z",
+      "type": "product_view",
+      "url": "http://localhost:3000/produto/fonte-original-apple-usb-c-20w/",
+      "referrer": "http://localhost:3000/site/view/index.html",
+      "device": "desktop",
+      "viewport": "1517x665",
+      "language": "pt-PT",
+      "product": {
+        "slug": "fonte-original-apple-usb-c-20w",
+        "name": "Fonte Original Apple Usb C 20w"
+      },
+      "term": ""
+    },
+    {
+      "at": "2026-07-14T00:58:54.775Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/produto/bateria-apple-magsafe/",
+      "referrer": "http://localhost:3000/produto/fonte-original-apple-usb-c-20w/",
+      "device": "desktop",
+      "viewport": "1517x665",
+      "language": "pt-PT",
+      "term": ""
+    },
+    {
+      "at": "2026-07-14T00:58:55.679Z",
+      "type": "product_view",
+      "url": "http://localhost:3000/produto/bateria-apple-magsafe/",
+      "referrer": "http://localhost:3000/produto/fonte-original-apple-usb-c-20w/",
+      "device": "desktop",
+      "viewport": "1517x665",
+      "language": "pt-PT",
+      "product": {
+        "slug": "bateria-apple-magsafe",
+        "name": "Bateria Apple MagSafe"
+      },
+      "term": ""
+    },
+    {
+      "at": "2026-07-14T00:58:59.227Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/site/view/index.html",
+      "referrer": "http://localhost:3000/produto/bateria-apple-magsafe/",
+      "device": "desktop",
+      "viewport": "1517x665",
+      "language": "pt-PT",
       "term": ""
     }
   ]
