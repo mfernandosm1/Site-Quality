@@ -2,13 +2,36 @@ import express from 'express';
 import fs from 'fs';
 import path from 'path';
 import multer from 'multer';
+import qrcode from 'qrcode';
+import whatsappWeb from 'whatsapp-web.js';
+import { ensureInboxStorage, getInboxSummary, getCommercialDashboard, getInboxData, getConversationMessages, getInboxRevision, registerWhatsAppMessage, updateInboxContact, repairInboxIdentities, markConversationRead, markConversationUnread, getInboxMediaFile } from '../services/whatsapp_inbox.js';
 
+const { Client, LocalAuth, MessageMedia } = whatsappWeb;
 const router = express.Router();
-const MODULE_VERSION = '0.2.0';
+const MODULE_VERSION = '0.6.0';
+
+const waState = {
+  client: null,
+  app: null,
+  status: 'desconectado',
+  message: 'WhatsApp desconectado.',
+  qrDataUrl: null,
+  connectedNumber: null,
+  connectedName: null,
+  initialized: false,
+  starting: false,
+  lastEventAt: null,
+  lastError: null,
+  blockRunning: false
+};
 
 function P(app){ return app.locals.paths; }
 function moduleDir(app){ return path.join(P(app).CONTENT_DIR, 'automacao_whatsapp'); }
 function uploadsDir(app){ return path.join(P(app).PUBLIC_DIR, 'uploads', 'automacao_whatsapp'); }
+function blockMediaRoot(app){ return path.join(uploadsDir(app), 'blocos'); }
+function blockMediaDir(app, tipo='arquivos'){ return path.join(blockMediaRoot(app), tipo); }
+function blockMediaUrl(tipo, filename){ return '/public/uploads/automacao_whatsapp/blocos/' + tipo + '/' + filename; }
+function authDir(app){ return path.join(moduleDir(app), 'session'); }
 function uploadUrl(filename){ return '/public/uploads/automacao_whatsapp/' + filename; }
 function filePath(app, name){ return path.join(moduleDir(app), name); }
 function ensureDir(dir){ if(!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive:true }); }
@@ -24,6 +47,19 @@ function safeNumber(value, fallback=0, min=0, max=3600){
   if(!Number.isFinite(n)) return fallback;
   return Math.min(max, Math.max(min, Math.round(n)));
 }
+
+function safeConversationId(value){ return safeText(value, 80).replace(/[^a-zA-Z0-9_-]/g, ''); }
+function isGroupConversation(conversation){ return conversation?.conversationType === 'group' || String(conversation?.whatsappId || '').endsWith('@g.us'); }
+async function resolveInboxDestination(conversation){
+  if(!waState.client || waState.status !== 'conectado') throw new Error('Conecte o WhatsApp antes de enviar.');
+  if(isGroupConversation(conversation)){
+    if(!conversation.whatsappId || !String(conversation.whatsappId).endsWith('@g.us')) throw new Error('O grupo ainda não possui um identificador válido.');
+    return { digits:'', chatId:conversation.whatsappId, label:conversation.name || 'Grupo' };
+  }
+  if(!conversation.phoneResolved || !conversation.phone) throw new Error('O número real deste contato ainda não foi identificado.');
+  const result = await resolveChatId(conversation.phone);
+  return { ...result, label:conversation.name || result.digits };
+}
 function readJson(app, name, fallback){
   try {
     const fp = filePath(app, name);
@@ -38,9 +74,30 @@ function writeJson(app, name, data){
   fs.writeFileSync(filePath(app, name), JSON.stringify(data, null, 2), 'utf-8');
 }
 function addLog(app, type, message, details={}){
+  if(!app) return;
   const logs = readJson(app, 'logs.json', []);
   logs.unshift({ id: makeId('log'), type: safeText(type, 50), message: safeText(message, 500), details, at: now() });
   writeJson(app, 'logs.json', logs.slice(0, 500));
+}
+function setWaState(status, message, extra={}){
+  waState.status = status;
+  waState.message = message;
+  waState.lastEventAt = now();
+  Object.assign(waState, extra);
+}
+function publicWaState(){
+  return {
+    status: waState.status,
+    message: waState.message,
+    qrDataUrl: waState.qrDataUrl,
+    connectedNumber: waState.connectedNumber,
+    connectedName: waState.connectedName,
+    initialized: waState.initialized,
+    starting: waState.starting,
+    lastEventAt: waState.lastEventAt,
+    lastError: waState.lastError,
+    blockRunning: waState.blockRunning
+  };
 }
 function defaults(){
   return {
@@ -50,6 +107,8 @@ function defaults(){
         nome: 'Menu inicial',
         descricao: 'Exemplo de bloco com texto, pausa e opções.',
         gatilho: 'menu',
+        categoria: 'Geral',
+        favorito: true,
         ativo: true,
         criadoEm: now(),
         atualizadoEm: now(),
@@ -65,11 +124,13 @@ function defaults(){
     ],
     contatos: [],
     fila: [],
+    midias: [],
     logs: [],
     config: {
       version: MODULE_VERSION,
       whatsappConectado: false,
       envioRealAtivo: false,
+      numeroTeste: '',
       horarioAniversario: '08:00',
       limiteDiario: 40,
       delayHumanoMin: 4,
@@ -87,18 +148,40 @@ function ensureData(app){
   if(!fs.existsSync(filePath(app, 'blocos.json'))) writeJson(app, 'blocos.json', d.blocos);
   if(!fs.existsSync(filePath(app, 'contatos.json'))) writeJson(app, 'contatos.json', d.contatos);
   if(!fs.existsSync(filePath(app, 'fila.json'))) writeJson(app, 'fila.json', d.fila);
+  if(!fs.existsSync(filePath(app, 'midias.json'))) writeJson(app, 'midias.json', d.midias);
   if(!fs.existsSync(filePath(app, 'logs.json'))) writeJson(app, 'logs.json', d.logs);
   if(!fs.existsSync(filePath(app, 'config.json'))) writeJson(app, 'config.json', d.config);
+}
+function syncLegacyMediaCatalog(app, blocos, midias){
+  const list = Array.isArray(midias) ? [...midias] : [];
+  const knownPaths = new Set(list.map(m => m.caminho).filter(Boolean));
+  let changed = false;
+  for(const bloco of blocos || []){
+    for(const step of bloco.etapas || []){
+      if(!['imagem','audio','video','arquivo'].includes(step.tipo) || !step.caminho || knownPaths.has(step.caminho)) continue;
+      const absolute = localMediaPath(app, step.caminho);
+      let tamanho = 0;
+      try{ if(fs.existsSync(absolute)) tamanho = fs.statSync(absolute).size; }catch{}
+      const nome = path.basename(String(step.caminho).split('?')[0]) || 'Mídia antiga';
+      const media = { id:makeId('midia'), nome, tipo:step.tipo, categoria:step.tipo === 'imagem'?'imagens':step.tipo === 'audio'?'audios':step.tipo === 'video'?'videos':'arquivos', caminho:step.caminho, arquivo:nome, mime:'', tamanho, legado:true, criadoEm:now(), atualizadoEm:now() };
+      list.push(media); knownPaths.add(step.caminho); step.mediaId = media.id; changed = true;
+    }
+  }
+  if(changed){ writeJson(app, 'midias.json', list); writeJson(app, 'blocos.json', blocos); }
+  return list;
 }
 function loadAll(app){
   ensureData(app);
   const d = defaults();
+  const blocos = readJson(app, 'blocos.json', d.blocos);
+  const midias = syncLegacyMediaCatalog(app, blocos, readJson(app, 'midias.json', d.midias));
   return {
-    blocos: readJson(app, 'blocos.json', d.blocos),
+    blocos,
     contatos: readJson(app, 'contatos.json', d.contatos),
     fila: readJson(app, 'fila.json', d.fila),
+    midias,
     logs: readJson(app, 'logs.json', d.logs),
-    config: readJson(app, 'config.json', d.config)
+    config: { ...d.config, ...readJson(app, 'config.json', d.config), version: MODULE_VERSION }
   };
 }
 function normalizeSteps(raw){
@@ -110,26 +193,15 @@ function normalizeSteps(raw){
     const tipo = safeText(s.tipo || 'texto', 30);
     const base = { id: safeText(s.id || makeId('etapa'), 80), tipo };
 
-    if(tipo === 'texto'){
-      return { ...base, texto: safeText(s.texto, 4000), digitandoSegundos: safeNumber(s.digitandoSegundos, 0, 0, 180) };
-    }
-    if(tipo === 'pausa'){
-      return { ...base, segundos: safeNumber(s.segundos, 3, 0, 600) };
-    }
-    if(tipo === 'audio'){
-      return { ...base, caminho: safeText(s.caminho, 600), gravandoSegundos: safeNumber(s.gravandoSegundos, 2, 0, 180), legenda: safeText(s.legenda, 1000) };
-    }
-    if(tipo === 'imagem'){
-      return { ...base, caminho: safeText(s.caminho, 600), legenda: safeText(s.legenda, 1500) };
-    }
-    if(tipo === 'arquivo'){
-      return { ...base, caminho: safeText(s.caminho, 600), legenda: safeText(s.legenda, 1500) };
-    }
+    if(tipo === 'texto') return { ...base, texto: safeText(s.texto, 4000), digitandoSegundos: safeNumber(s.digitandoSegundos, 0, 0, 180) };
+    if(tipo === 'pausa') return { ...base, segundos: safeNumber(s.segundos, 3, 0, 600) };
+    if(tipo === 'audio') return { ...base, caminho: safeText(s.caminho, 600), mediaId: safeText(s.mediaId, 120), gravandoSegundos: safeNumber(s.gravandoSegundos, 2, 0, 180), legenda: safeText(s.legenda, 1000) };
+    if(tipo === 'imagem') return { ...base, caminho: safeText(s.caminho, 600), mediaId: safeText(s.mediaId, 120), legenda: safeText(s.legenda, 1500) };
+    if(tipo === 'video') return { ...base, caminho: safeText(s.caminho, 600), mediaId: safeText(s.mediaId, 120), legenda: safeText(s.legenda, 1500) };
+    if(tipo === 'arquivo') return { ...base, caminho: safeText(s.caminho, 600), mediaId: safeText(s.mediaId, 120), legenda: safeText(s.legenda, 1500) };
     if(tipo === 'opcoes'){
       const opcoes = Array.isArray(s.opcoes) ? s.opcoes.slice(0, 10).map(o => ({
-        label: safeText(o.label, 120),
-        resposta: safeText(o.resposta, 30),
-        proximoBloco: safeText(o.proximoBloco, 120)
+        label: safeText(o.label, 120), resposta: safeText(o.resposta, 30), proximoBloco: safeText(o.proximoBloco, 120)
       })).filter(o => o.label || o.resposta || o.proximoBloco) : [];
       return { ...base, texto: safeText(s.texto, 1500), opcoes };
     }
@@ -139,32 +211,529 @@ function normalizeSteps(raw){
 function flash(res, url, msg){
   res.redirect(url + (url.includes('?') ? '&' : '?') + 'flash=' + encodeURIComponent(msg));
 }
+function sleep(ms){ return new Promise(resolve => setTimeout(resolve, Math.max(0, ms))); }
+function detectChrome(){
+  const candidates = process.platform === 'win32' ? [
+    path.join(process.env.PROGRAMFILES || 'C:\\Program Files', 'Google', 'Chrome', 'Application', 'chrome.exe'),
+    path.join(process.env['PROGRAMFILES(X86)'] || 'C:\\Program Files (x86)', 'Google', 'Chrome', 'Application', 'chrome.exe'),
+    path.join(process.env.LOCALAPPDATA || '', 'Google', 'Chrome', 'Application', 'chrome.exe')
+  ] : [];
+  return candidates.find(candidate => candidate && fs.existsSync(candidate));
+}
+function normalizePhone(raw){
+  let digits = String(raw || '').replace(/\D/g, '');
+  if(digits.startsWith('00')) digits = digits.slice(2);
+  if((digits.length === 10 || digits.length === 11) && !digits.startsWith('55')) digits = '55' + digits;
+  if(!/^\d{12,13}$/.test(digits) || !digits.startsWith('55')) throw new Error('Informe um número brasileiro com DDD. Exemplo: 5599999999999.');
+  return digits;
+}
+async function resolveChatId(raw){
+  if(!waState.client || waState.status !== 'conectado') throw new Error('Conecte o WhatsApp antes de enviar.');
+  const digits = normalizePhone(raw);
+  const found = await waState.client.getNumberId(digits);
+  if(!found?._serialized) throw new Error('Este número não foi encontrado no WhatsApp.');
+  return { digits, chatId: found._serialized };
+}
+function localMediaPath(app, caminho){
+  const clean = String(caminho || '').split('?')[0];
+  if(clean.startsWith('/public/')) return path.join(P(app).PUBLIC_DIR, clean.replace(/^\/public\//, ''));
+  if(path.isAbsolute(clean)) return clean;
+  return path.join(P(app).PUBLIC_DIR, clean.replace(/^\/+/, ''));
+}
+async function sendMediaFromPath(app, chatId, caminho, caption='', options={}){
+  const absolute = localMediaPath(app, caminho);
+  if(!fs.existsSync(absolute)) throw new Error('Arquivo não encontrado: ' + caminho);
+  const media = MessageMedia.fromFilePath(absolute);
+  return waState.client.sendMessage(chatId, media, { caption: caption || undefined, ...options });
+}
+function optionsAsText(step){
+  const lines = [step.texto || 'Escolha uma opção:'];
+  for(const option of step.opcoes || []) lines.push(option.label || option.resposta || 'Opção');
+  return lines.filter(Boolean).join('\n');
+}
+async function executeBlockToChat(app, destination, bloco){
+  if(waState.blockRunning) throw new Error('Já existe um bloco em execução. Aguarde a conclusão.');
+  const { digits='', chatId, label='' } = destination;
+  waState.blockRunning = true;
+  addLog(app, 'bloco_envio_inicio', `Início do bloco: ${bloco.nome}`, { blocoId: bloco.id, numero: digits || null, destino: label || chatId });
+  try {
+    for(let index = 0; index < (bloco.etapas || []).length; index += 1){
+      const step = bloco.etapas[index] || {};
+      if(step.tipo === 'texto'){
+        const seconds = safeNumber(step.digitandoSegundos, 0, 0, 180);
+        if(seconds > 0){
+          const chat = await waState.client.getChatById(chatId);
+          await chat.sendStateTyping();
+          await sleep(seconds * 1000);
+          await chat.clearState();
+        }
+        if(step.texto) await waState.client.sendMessage(chatId, step.texto);
+      } else if(step.tipo === 'pausa'){
+        await sleep(safeNumber(step.segundos, 0, 0, 600) * 1000);
+      } else if(step.tipo === 'imagem' || step.tipo === 'video' || step.tipo === 'arquivo'){
+        await sendMediaFromPath(app, chatId, step.caminho, step.legenda || '');
+      } else if(step.tipo === 'audio'){
+        const seconds = safeNumber(step.gravandoSegundos, 0, 0, 180);
+        if(seconds > 0){
+          const chat = await waState.client.getChatById(chatId);
+          await chat.sendStateRecording();
+          await sleep(seconds * 1000);
+          await chat.clearState();
+        }
+        await sendMediaFromPath(app, chatId, step.caminho, '', { sendAudioAsVoice: true });
+        if(step.legenda) await waState.client.sendMessage(chatId, step.legenda);
+      } else if(step.tipo === 'opcoes'){
+        await waState.client.sendMessage(chatId, optionsAsText(step));
+      }
+      addLog(app, 'bloco_etapa_enviada', `Etapa ${index + 1} enviada: ${step.tipo}`, { blocoId: bloco.id, numero: digits || null, destino: label || chatId, etapaId: step.id });
+    }
+    addLog(app, 'bloco_envio_sucesso', `Bloco concluído: ${bloco.nome}`, { blocoId: bloco.id, numero: digits || null, destino: label || chatId });
+    return { digits, total: (bloco.etapas || []).length };
+  } finally {
+    waState.blockRunning = false;
+  }
+}
 
+async function executeBlock(app, rawNumber, bloco){
+  const { digits, chatId } = await resolveChatId(rawNumber);
+  return executeBlockToChat(app, { digits, chatId, label:digits }, bloco);
+}
+
+async function createClient(app){
+  if(waState.client || waState.starting) return;
+  ensureDir(authDir(app));
+  waState.starting = true;
+  waState.app = app;
+  setWaState('iniciando', 'Abrindo o WhatsApp Web...', { qrDataUrl: null, lastError: null });
+  addLog(app, 'whatsapp_iniciando', 'Inicialização do cliente WhatsApp solicitada.');
+
+  const chromePath = detectChrome();
+  const client = new Client({
+    authStrategy: new LocalAuth({ clientId: 'quality-teste', dataPath: authDir(app), rmMaxRetries: 5 }),
+    puppeteer: {
+      headless: true,
+      executablePath: chromePath || undefined,
+      args: ['--no-sandbox', '--disable-setuid-sandbox', '--disable-dev-shm-usage']
+    }
+  });
+  waState.client = client;
+
+  client.on('qr', async (qr) => {
+    try {
+      const qrDataUrl = await qrcode.toDataURL(qr, { width: 320, margin: 2, errorCorrectionLevel: 'M' });
+      setWaState('aguardando_qr', 'Escaneie o QR Code pelo WhatsApp do número de teste.', { qrDataUrl, starting: false });
+      addLog(app, 'whatsapp_qr', 'Novo QR Code gerado para conexão.');
+    } catch (error) {
+      setWaState('erro', 'Falha ao gerar a imagem do QR Code.', { lastError: error.message, starting: false });
+    }
+  });
+  client.on('authenticated', () => {
+    setWaState('autenticado', 'QR Code confirmado. Preparando a sessão...', { qrDataUrl: null });
+    addLog(app, 'whatsapp_autenticado', 'Sessão WhatsApp autenticada.');
+  });
+  client.on('ready', async () => {
+    const info = client.info || {};
+    const number = info.wid?.user || null;
+    const name = info.pushname || null;
+    setWaState('conectado', 'WhatsApp conectado e pronto para envios manuais.', {
+      qrDataUrl: null, connectedNumber: number, connectedName: name, initialized: true, starting: false, lastError: null
+    });
+    const data = loadAll(app);
+    writeJson(app, 'config.json', { ...data.config, whatsappConectado: true, atualizadoEm: now(), version: MODULE_VERSION });
+    addLog(app, 'whatsapp_conectado', 'WhatsApp conectado com sucesso.', { numero: number, nome: name });
+    try {
+      const repair = await repairInboxIdentities(app, client);
+      if(repair.migrated || repair.merged){
+        addLog(app, 'inbox_identidades_corrigidas', 'Conversas antigas foram vinculadas aos números reais.', repair);
+      } else if(repair.unresolved){
+        addLog(app, 'inbox_identidades_pendentes', 'Algumas conversas ainda aguardam identificação do número real.', repair);
+      }
+    } catch(error){
+      addLog(app, 'inbox_erro_migracao', 'Falha ao revisar identificadores antigos do Inbox.', { erro:error.message });
+    }
+  });
+  client.on('auth_failure', (message) => {
+    setWaState('erro', 'Falha de autenticação. Será necessário conectar novamente.', { lastError: String(message), starting: false, initialized: false });
+    addLog(app, 'whatsapp_auth_falhou', 'Falha na autenticação do WhatsApp.', { erro: String(message) });
+  });
+  client.on('disconnected', (reason) => {
+    setWaState('desconectado', 'WhatsApp desconectado.', { connectedNumber: null, connectedName: null, initialized: false, starting: false });
+    waState.client = null;
+    const data = loadAll(app);
+    writeJson(app, 'config.json', { ...data.config, whatsappConectado: false, atualizadoEm: now(), version: MODULE_VERSION });
+    addLog(app, 'whatsapp_desconectado', 'WhatsApp desconectado.', { motivo: String(reason || '') });
+  });
+  client.on('change_state', state => {
+    waState.lastEventAt = now();
+    addLog(app, 'whatsapp_estado', `Estado do WhatsApp: ${state}`);
+  });
+  client.on('message_create', async (message) => {
+    try {
+      const result = await registerWhatsAppMessage(app, message, client);
+      if(result?.saved){
+        addLog(app, 'inbox_mensagem_registrada', result.direction === 'incoming' ? 'Mensagem recebida e registrada no Inbox.' : 'Mensagem enviada e registrada no Inbox.', {
+          conversa: result.conversationId,
+          nome: result.name,
+          telefone: result.phoneResolved ? result.phone : null,
+          identificacaoResolvida: result.phoneResolved,
+          direcao: result.direction,
+          mensagem: result.preview
+        });
+      } else if(result?.reason === 'sem_identificador'){
+        addLog(app, 'inbox_numero_nao_resolvido', 'Mensagem ignorada porque o número real não pôde ser identificado.', {
+          whatsappId: result.whatsappId || null
+        });
+      }
+    } catch(error){
+      addLog(app, 'inbox_erro_registro', 'Falha ao registrar mensagem no Inbox.', { erro:error.message });
+    }
+  });
+
+  try {
+    await client.initialize();
+  } catch (error) {
+    waState.client = null;
+    setWaState('erro', 'Não foi possível abrir o WhatsApp Web.', { lastError: error.message, starting: false, initialized: false });
+    addLog(app, 'whatsapp_erro', 'Falha ao inicializar o WhatsApp.', { erro: error.message });
+    throw error;
+  }
+}
+
+export async function initializeWhatsApp(app){
+  waState.app = app;
+  ensureData(app);
+  ensureInboxStorage(app);
+  const sessionPath = path.join(authDir(app), 'session-quality-teste');
+  if(fs.existsSync(sessionPath)){
+    try { await createClient(app); } catch { /* erro já registrado */ }
+  }
+}
+
+export async function shutdownWhatsApp(){
+  if(!waState.client) return;
+  try { await waState.client.destroy(); } catch { /* encerramento do painel */ }
+  waState.client = null;
+  setWaState('desconectado', 'Cliente encerrado junto com o Painel Quality.', { initialized: false, starting: false });
+}
+
+function mediaKindFromMime(mime=''){
+  if(mime.startsWith('image/')) return 'imagens';
+  if(mime.startsWith('audio/')) return 'audios';
+  if(mime.startsWith('video/')) return 'videos';
+  return 'arquivos';
+}
+function stepTypeFromMime(mime=''){
+  if(mime.startsWith('image/')) return 'imagem';
+  if(mime.startsWith('audio/')) return 'audio';
+  if(mime.startsWith('video/')) return 'video';
+  return 'arquivo';
+}
+function mediaUsage(blocos, media){
+  const used = [];
+  for(const bloco of blocos || []){
+    const found = (bloco.etapas || []).some(e => (media.id && e.mediaId === media.id) || (media.caminho && e.caminho === media.caminho));
+    if(found) used.push({ id: bloco.id, nome: bloco.nome });
+  }
+  return used;
+}
 const storage = multer.diskStorage({
-  destination(req,file,cb){ try{ const dir=uploadsDir(req.app); ensureDir(dir); cb(null,dir); }catch(e){ cb(e); } },
+  destination(req,file,cb){
+    try{
+      const kind = mediaKindFromMime(file.mimetype || '');
+      const dir = blockMediaDir(req.app, kind);
+      ensureDir(dir);
+      req.qwMediaKind = kind;
+      cb(null,dir);
+    }catch(e){ cb(e); }
+  },
   filename(req,file,cb){
     const ext=path.extname(file.originalname||'').toLowerCase().slice(0,12);
     const base=path.basename(file.originalname||'arquivo',ext).normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-zA-Z0-9_-]+/g,'-').replace(/^-+|-+$/g,'').slice(0,60)||'arquivo';
     cb(null, `${Date.now()}-${Math.random().toString(36).slice(2,8)}-${base}${ext}`);
   }
 });
-const upload = multer({ storage, limits:{fileSize:25*1024*1024}, fileFilter(req,file,cb){
-  const ok=['image/jpeg','image/png','image/webp','image/gif','audio/mpeg','audio/ogg','audio/wav','audio/mp4','application/pdf','text/plain','application/vnd.openxmlformats-officedocument.wordprocessingml.document'];
+const upload = multer({ storage, limits:{fileSize:80*1024*1024}, fileFilter(req,file,cb){
+  const ok=[
+    'image/jpeg','image/png','image/webp','image/gif',
+    'audio/mpeg','audio/ogg','audio/wav','audio/mp4','audio/x-m4a',
+    'video/mp4','video/webm','video/quicktime',
+    'application/pdf','text/plain',
+    'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
+  ];
   ok.includes(file.mimetype)?cb(null,true):cb(new Error('Tipo de arquivo não permitido.'));
 }});
 
+const INBOX_ALLOWED_MIMES = new Set([
+  'image/jpeg','image/png','image/webp','image/gif',
+  'audio/ogg','audio/mpeg','audio/mp4','audio/webm','audio/wav',
+  'video/mp4','video/webm',
+  'application/pdf','text/plain','application/zip',
+  'application/msword','application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+  'application/vnd.ms-excel','application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+]);
+const inboxUpload = multer({
+  storage:multer.memoryStorage(),
+  limits:{ fileSize:40*1024*1024, files:1 },
+  fileFilter(req,file,cb){
+    const mime=String(file.mimetype||'').toLowerCase();
+    if(!INBOX_ALLOWED_MIMES.has(mime)) return cb(new Error('Tipo de arquivo não permitido no Inbox.'));
+    cb(null,true);
+  }
+});
+function inboxMediaOptions(mime=''){
+  const isAudio=String(mime).startsWith('audio/');
+  return { isAudio, options:isAudio ? { sendAudioAsVoice:true } : {} };
+}
+
+
+
 router.get('/', (req,res)=>{
   const data = loadAll(req.app);
+  ensureInboxStorage(req.app);
+  let inboxData = getInboxData(req.app);
+  const selectedConversationId = safeConversationId(req.query.conversation || '');
+  if(selectedConversationId){
+    try { markConversationRead(req.app, selectedConversationId); } catch {}
+    inboxData = getInboxData(req.app);
+  }
+  const inboxSummary = getInboxSummary(req.app);
+  const commercialDashboard = getCommercialDashboard(req.app);
+  const selectedConversation = inboxData.conversations.find(c => c.id === selectedConversationId) || null;
+  const selectedMessages = selectedConversation ? getConversationMessages(req.app, selectedConversation.id) : [];
   const tab = safeText(req.query.tab || 'dashboard', 30);
   const editId = safeText(req.query.edit || '', 120);
   const blocoEdit = data.blocos.find(b => b.id === editId) || null;
+  const midiasComUso = data.midias.map(m => ({ ...m, usos: mediaUsage(data.blocos, m) }));
   res.render('automacao_whatsapp', {
     flash: req.query.flash || null,
+    error: req.query.error || null,
     version: MODULE_VERSION,
     tab,
     blocoEdit,
-    ...data
+    whatsapp: publicWaState(),
+    inboxSummary,
+    commercialDashboard,
+    inboxConversations: inboxData.conversations,
+    inboxContacts: inboxData.contacts,
+    selectedConversation,
+    selectedMessages,
+    inboxRevision: getInboxRevision(req.app, selectedConversation?.id || ''),
+    settingsSection: safeText(req.query.section || 'geral', 30),
+    ...data,
+    midias: midiasComUso
   });
+});
+
+router.get('/inbox/state', (req,res)=>{
+  try {
+    const conversationId = safeText(req.query.conversation || '', 80).replace(/[^a-zA-Z0-9_-]/g, '');
+    res.set('Cache-Control', 'no-store');
+    res.json({ success:true, revision:getInboxRevision(req.app, conversationId) });
+  } catch(error) {
+    res.status(500).json({ success:false, message:error.message || 'Falha ao consultar o Inbox.' });
+  }
+});
+
+router.post('/inbox/marcar-nao-lida', (req,res)=>{
+  try {
+    const conversationId = safeConversationId(req.body?.conversationId);
+    markConversationUnread(req.app, conversationId);
+    res.json({ success:true, message:'Conversa marcada como não lida.' });
+  } catch(error){
+    res.status(400).json({ success:false, message:error.message || 'Não foi possível marcar a conversa.' });
+  }
+});
+
+
+router.post('/inbox/contato/atualizar', (req,res)=>{
+  try {
+    const conversationId = safeConversationId(req.body?.conversationId);
+    updateInboxContact(req.app, conversationId, {
+      name: req.body?.name,
+      commercialStatus: safeText(req.body?.commercialStatus, 40),
+      origin: safeText(req.body?.origin, 40),
+      interestProduct: req.body?.interestProduct,
+      saveContact: req.body?.saveContact === '1'
+    });
+    flash(res, `/automacao-whatsapp?tab=inbox&conversation=${encodeURIComponent(conversationId)}`, req.body?.saveContact === '1' ? 'Alterações salvas e contato incluído na agenda do Painel.' : 'Alterações da conversa salvas.');
+  } catch(error){
+    flash(res, `/automacao-whatsapp?tab=inbox`, error.message || 'Não foi possível atualizar o contato.');
+  }
+});
+
+
+router.post('/inbox/enviar-texto', async (req,res)=>{
+  try {
+    const conversationId = safeConversationId(req.body?.conversationId);
+    const texto = safeText(req.body?.texto, 4000);
+    if(!conversationId) throw new Error('Conversa não identificada.');
+    if(!texto) throw new Error('Digite uma mensagem antes de enviar.');
+
+    const inboxData = getInboxData(req.app);
+    const conversation = inboxData.conversations.find(item => item.id === conversationId);
+    if(!conversation) throw new Error('Conversa não encontrada.');
+    const destination = await resolveInboxDestination(conversation);
+    const { digits, chatId, label } = destination;
+    const sentMessage = await waState.client.sendMessage(chatId, texto);
+    addLog(req.app, 'inbox_texto_enviado', 'Mensagem manual enviada pelo Inbox.', {
+      conversa: conversation.id,
+      nome: conversation.name || label,
+      telefone: digits || null,
+      tipoConversa: conversation.conversationType || 'contact',
+      mensagem: texto.slice(0, 300),
+      whatsappMessageId: sentMessage?.id?._serialized || null
+    });
+    res.json({ success:true, message:'Mensagem enviada com sucesso.' });
+  } catch(error){
+    addLog(req.app, 'inbox_texto_erro', 'Falha ao enviar mensagem pelo Inbox.', {
+      conversa:safeText(req.body?.conversationId,80),
+      erro:error.message
+    });
+    res.status(400).json({ success:false, message:error.message || 'Falha ao enviar a mensagem.' });
+  }
+});
+
+router.post('/inbox/enviar-anexo', (req,res)=>{
+  inboxUpload.single('arquivo')(req,res,async(uploadError)=>{
+    if(uploadError) return res.status(400).json({success:false,message:uploadError.message || 'Falha no upload do anexo.'});
+    try {
+      const conversationId=safeConversationId(req.body?.conversationId);
+      const legenda=safeText(req.body?.legenda,1500);
+      if(!conversationId) throw new Error('Conversa não identificada.');
+      if(!req.file) throw new Error('Selecione um arquivo para enviar.');
+      const inboxData=getInboxData(req.app);
+      const conversation=inboxData.conversations.find(item=>item.id===conversationId);
+      if(!conversation) throw new Error('Conversa não encontrada.');
+      const destination=await resolveInboxDestination(conversation);
+      const { digits,chatId,label }=destination;
+      const media=new MessageMedia(req.file.mimetype,req.file.buffer.toString('base64'),safeText(req.file.originalname,180));
+      const setup=inboxMediaOptions(req.file.mimetype);
+      const sent=await waState.client.sendMessage(chatId,media,{...setup.options,caption:setup.isAudio?undefined:(legenda||undefined)});
+      if(setup.isAudio && legenda) await waState.client.sendMessage(chatId,legenda);
+      addLog(req.app,'inbox_anexo_enviado','Anexo manual enviado pelo Inbox.',{
+        conversa:conversation.id,nome:conversation.name||label,telefone:digits||null,tipoConversa:conversation.conversationType||'contact',arquivo:req.file.originalname,
+        mime:req.file.mimetype,tamanho:req.file.size,whatsappMessageId:sent?.id?._serialized||null
+      });
+      res.json({success:true,message:'Anexo enviado com sucesso.'});
+    } catch(error){
+      addLog(req.app,'inbox_anexo_erro','Falha ao enviar anexo pelo Inbox.',{conversa:safeText(req.body?.conversationId,80),erro:error.message});
+      res.status(400).json({success:false,message:error.message||'Falha ao enviar o anexo.'});
+    }
+  });
+});
+
+router.get('/inbox/media/:conversationId/:messageId', (req,res)=>{
+  try {
+    const found=getInboxMediaFile(req.app,req.params.conversationId,req.params.messageId);
+    if(!found) return res.status(404).send('Mídia não encontrada.');
+    const download=req.query.download==='1';
+    res.setHeader('X-Content-Type-Options','nosniff');
+    if(found.media?.mime) res.type(found.media.mime);
+    if(download) return res.download(found.absolute,found.media?.originalName||found.media?.filename||'arquivo');
+    res.sendFile(found.absolute);
+  } catch(error){ res.status(404).send('Mídia não encontrada.'); }
+});
+
+router.post('/inbox/executar-bloco', async (req,res)=>{
+  try {
+    const conversationId = safeConversationId(req.body?.conversationId);
+    const blocoId = safeText(req.body?.blocoId, 120);
+    if(!conversationId) throw new Error('Conversa não identificada.');
+    if(!blocoId) throw new Error('Selecione um bloco.');
+
+    const inboxData = getInboxData(req.app);
+    const conversation = inboxData.conversations.find(item => item.id === conversationId);
+    if(!conversation) throw new Error('Conversa não encontrada.');
+    const destination = await resolveInboxDestination(conversation);
+
+    const data = loadAll(req.app);
+    const bloco = data.blocos.find(item => item.id === blocoId);
+    if(!bloco) throw new Error('Bloco não encontrado.');
+    if(!bloco.ativo) throw new Error('Este bloco está inativo.');
+
+    const result = await executeBlockToChat(req.app, destination, bloco);
+    addLog(req.app, 'inbox_bloco_enviado', `Bloco “${bloco.nome}” executado manualmente pelo Inbox.`, {
+      conversa:conversation.id,
+      nome:conversation.name || result.label,
+      telefone:result.digits || null,
+      tipoConversa:conversation.conversationType || 'contact',
+      blocoId:bloco.id,
+      etapas:result.total
+    });
+    res.json({ success:true, message:`Bloco “${bloco.nome}” concluído com ${result.total} etapa(s).` });
+  } catch(error){
+    addLog(req.app, 'inbox_bloco_erro', 'Falha ao executar bloco pelo Inbox.', {
+      conversa:safeText(req.body?.conversationId,80),
+      blocoId:safeText(req.body?.blocoId,120),
+      erro:error.message
+    });
+    res.status(400).json({ success:false, message:error.message || 'Falha ao executar o bloco.' });
+  }
+});
+
+router.get('/whatsapp/status', (req,res)=> res.json({ success:true, whatsapp: publicWaState() }));
+router.post('/whatsapp/conectar', async (req,res)=>{
+  try {
+    await createClient(req.app);
+    res.json({ success:true, whatsapp: publicWaState() });
+  } catch(error){
+    res.status(500).json({ success:false, message:error.message || 'Falha ao conectar.', whatsapp: publicWaState() });
+  }
+});
+router.post('/whatsapp/desconectar', async (req,res)=>{
+  try {
+    if(waState.client) await waState.client.destroy();
+    waState.client = null;
+    setWaState('desconectado', 'WhatsApp desconectado manualmente. A sessão local foi preservada.', { qrDataUrl:null, connectedNumber:null, connectedName:null, initialized:false, starting:false });
+    const data = loadAll(req.app);
+    writeJson(req.app, 'config.json', { ...data.config, whatsappConectado:false, atualizadoEm:now(), version:MODULE_VERSION });
+    addLog(req.app, 'whatsapp_desconectado_manual', 'Cliente WhatsApp desconectado manualmente.');
+    res.json({ success:true, whatsapp: publicWaState() });
+  } catch(error){
+    res.status(500).json({ success:false, message:error.message || 'Falha ao desconectar.' });
+  }
+});
+router.post('/whatsapp/enviar', (req,res)=>{
+  upload.single('arquivo')(req,res,async(error)=>{
+    if(error) return res.status(400).json({success:false,message:error.message||'Falha no upload.'});
+    try {
+      const numero = safeText(req.body?.numero, 30);
+      const texto = safeText(req.body?.texto, 4000);
+      if(!texto && !req.file) throw new Error('Digite um texto ou selecione uma imagem/áudio/arquivo.');
+      const { digits, chatId } = await resolveChatId(numero);
+      if(req.file){
+        const media = MessageMedia.fromFilePath(req.file.path);
+        const isAudio = req.file.mimetype.startsWith('audio/');
+        await waState.client.sendMessage(chatId, media, { caption: isAudio ? undefined : (texto || undefined), sendAudioAsVoice: isAudio });
+        if(isAudio && texto) await waState.client.sendMessage(chatId, texto);
+        addLog(req.app, 'envio_manual_midia', `Mídia enviada manualmente para ${digits}.`, { numero:digits, arquivo:req.file.originalname, mime:req.file.mimetype });
+      } else {
+        await waState.client.sendMessage(chatId, texto);
+        addLog(req.app, 'envio_manual_texto', `Texto enviado manualmente para ${digits}.`, { numero:digits });
+      }
+      const data = loadAll(req.app);
+      writeJson(req.app, 'config.json', { ...data.config, numeroTeste:digits, atualizadoEm:now(), version:MODULE_VERSION });
+      res.json({ success:true, message:'Envio concluído com sucesso.', numero:digits });
+    } catch(sendError){
+      addLog(req.app, 'envio_manual_erro', 'Falha no envio manual.', { erro:sendError.message });
+      res.status(400).json({success:false,message:sendError.message||'Falha no envio.'});
+    }
+  });
+});
+router.post('/whatsapp/executar-bloco', async (req,res)=>{
+  try {
+    const data = loadAll(req.app);
+    const blocoId = safeText(req.body?.blocoId, 120);
+    const bloco = data.blocos.find(item => item.id === blocoId);
+    if(!bloco) throw new Error('Bloco não encontrado.');
+    if(!bloco.ativo) throw new Error('Este bloco está inativo.');
+    const result = await executeBlock(req.app, req.body?.numero, bloco);
+    writeJson(req.app, 'config.json', { ...data.config, numeroTeste:result.digits, atualizadoEm:now(), version:MODULE_VERSION });
+    res.json({ success:true, message:`Bloco “${bloco.nome}” concluído com ${result.total} etapa(s).` });
+  } catch(error){
+    addLog(req.app, 'bloco_envio_erro', 'Falha ao executar bloco.', { erro:error.message, blocoId:safeText(req.body?.blocoId,120) });
+    res.status(400).json({success:false,message:error.message||'Falha ao executar bloco.'});
+  }
 });
 
 router.post('/blocos/salvar', (req,res)=>{
@@ -177,17 +746,30 @@ router.post('/blocos/salvar', (req,res)=>{
     nome: safeText(body.nome, 160) || 'Bloco sem nome',
     descricao: safeText(body.descricao, 500),
     gatilho: safeText(body.gatilho, 120),
+    categoria: safeText(body.categoria || 'Geral', 80) || 'Geral',
+    favorito: body.favorito === 'on' || body.favorito === 'true' || existing?.favorito === true,
     ativo: body.ativo === 'on' || body.ativo === 'true',
     etapas: normalizeSteps(body.etapasJson),
     criadoEm: existing?.criadoEm || now(),
     atualizadoEm: now()
   };
   const idx = data.blocos.findIndex(b => b.id === id);
-  if(idx >= 0) data.blocos[idx] = bloco;
-  else data.blocos.unshift(bloco);
+  if(idx >= 0) data.blocos[idx] = bloco; else data.blocos.unshift(bloco);
   writeJson(req.app, 'blocos.json', data.blocos);
   addLog(req.app, existing ? 'bloco_editado' : 'bloco_criado', `${existing ? 'Bloco editado' : 'Bloco criado'}: ${bloco.nome}`, { blocoId:id });
   flash(res, '/automacao-whatsapp?tab=blocos&edit=' + encodeURIComponent(id), '💬 Bloco salvo com sucesso.');
+});
+
+router.post('/blocos/favorito/:id', (req,res)=>{
+  const data = loadAll(req.app);
+  const id = safeText(req.params.id, 120);
+  const bloco = data.blocos.find(b => b.id === id);
+  if(!bloco) return flash(res, '/automacao-whatsapp?tab=blocos', '⚠️ Bloco não encontrado.');
+  bloco.favorito = !bloco.favorito;
+  bloco.atualizadoEm = now();
+  writeJson(req.app, 'blocos.json', data.blocos);
+  addLog(req.app, 'bloco_favorito', `${bloco.favorito ? 'Bloco favoritado' : 'Bloco removido dos favoritos'}: ${bloco.nome}`, { blocoId:id });
+  flash(res, '/automacao-whatsapp?tab=blocos', bloco.favorito ? '⭐ Bloco adicionado aos favoritos.' : 'Bloco removido dos favoritos.');
 });
 
 router.post('/blocos/excluir/:id', (req,res)=>{
@@ -198,8 +780,6 @@ router.post('/blocos/excluir/:id', (req,res)=>{
   if(removido) addLog(req.app, 'bloco_excluido', `Bloco excluído: ${removido.nome}`, { blocoId:id });
   flash(res, '/automacao-whatsapp?tab=blocos', '🗑️ Bloco removido.');
 });
-
-
 router.post('/blocos/duplicar/:id', (req,res)=>{
   const data=loadAll(req.app); const original=data.blocos.find(b=>b.id===safeText(req.params.id,120));
   if(!original) return flash(res,'/automacao-whatsapp?tab=blocos','⚠️ Bloco não encontrado.');
@@ -207,24 +787,63 @@ router.post('/blocos/duplicar/:id', (req,res)=>{
   data.blocos.unshift(copia); writeJson(req.app,'blocos.json',data.blocos); addLog(req.app,'bloco_duplicado',`Bloco duplicado: ${original.nome}`,{blocoId:copia.id,origemId:original.id});
   flash(res,'/automacao-whatsapp?tab=blocos&edit='+encodeURIComponent(copia.id),'📄 Bloco duplicado com sucesso.');
 });
-
 router.post('/midias/upload', (req,res)=>{
   upload.single('arquivo')(req,res,(error)=>{
     if(error) return res.status(400).json({success:false,message:error.message||'Falha no upload.'});
     if(!req.file) return res.status(400).json({success:false,message:'Nenhum arquivo recebido.'});
-    const tipo=req.file.mimetype.startsWith('image/')?'imagem':req.file.mimetype.startsWith('audio/')?'audio':'arquivo';
-    const payload={success:true,tipo,caminho:uploadUrl(req.file.filename),nomeOriginal:req.file.originalname,tamanho:req.file.size,mime:req.file.mimetype};
-    addLog(req.app,'midia_upload',`Mídia adicionada: ${req.file.originalname}`,{caminho:payload.caminho,mime:payload.mime}); res.json(payload);
+    const data = loadAll(req.app);
+    const kind = req.qwMediaKind || mediaKindFromMime(req.file.mimetype);
+    const tipo = stepTypeFromMime(req.file.mimetype);
+    const media = {
+      id: makeId('midia'), nome: safeText(req.file.originalname, 180), tipo, categoria: kind,
+      caminho: blockMediaUrl(kind, req.file.filename), arquivo: req.file.filename,
+      mime: req.file.mimetype, tamanho: req.file.size, criadoEm: now(), atualizadoEm: now()
+    };
+    data.midias.unshift(media);
+    writeJson(req.app, 'midias.json', data.midias);
+    const payload={success:true,tipo,caminho:media.caminho,mediaId:media.id,nomeOriginal:req.file.originalname,tamanho:req.file.size,mime:req.file.mimetype};
+    addLog(req.app,'midia_upload',`Mídia oficial adicionada: ${req.file.originalname}`,{mediaId:media.id,caminho:payload.caminho,mime:payload.mime});
+    res.json(payload);
   });
 });
 
-router.post('/simulador/log',(req,res)=>{ addLog(req.app,'simulacao',`Fluxo simulado: ${safeText(req.body?.nome||'Bloco em edição',160)}`,{blocoId:safeText(req.body?.blocoId||'',120)}); res.json({success:true}); });
+router.get('/midias/download/:id', (req,res)=>{
+  const data = loadAll(req.app);
+  const id = safeText(req.params.id, 120);
+  const media = data.midias.find(m => m.id === id);
+  if(!media) return res.status(404).send('Mídia não encontrada.');
 
+  const absolute = localMediaPath(req.app, media.caminho);
+  if(!fs.existsSync(absolute)) return res.status(404).send('Arquivo físico não encontrado.');
+
+  const ext = path.extname(absolute);
+  const requestedName = safeText(media.nome || media.arquivo || ('midia' + ext), 180)
+    .replace(/[\\/:*?"<>|]+/g, '-')
+    .trim() || ('midia' + ext);
+
+  addLog(req.app, 'midia_download', `Download da mídia: ${requestedName}`, { mediaId:media.id });
+  return res.download(absolute, requestedName);
+});
+
+router.post('/midias/excluir/:id', (req,res)=>{
+  const data = loadAll(req.app);
+  const id = safeText(req.params.id, 120);
+  const media = data.midias.find(m => m.id === id);
+  if(!media) return flash(res, '/automacao-whatsapp?tab=midias', '⚠️ Mídia não encontrada.');
+  const usos = mediaUsage(data.blocos, media);
+  if(usos.length) return flash(res, '/automacao-whatsapp?tab=midias', `⚠️ Esta mídia está em uso por ${usos.length} bloco(s) e não pode ser excluída.`);
+  try{ const absolute = localMediaPath(req.app, media.caminho); if(fs.existsSync(absolute)) fs.unlinkSync(absolute); }catch{}
+  writeJson(req.app, 'midias.json', data.midias.filter(m => m.id !== id));
+  addLog(req.app, 'midia_excluida', `Mídia excluída: ${media.nome}`, { mediaId:id });
+  flash(res, '/automacao-whatsapp?tab=midias', '🗑️ Mídia excluída com segurança.');
+});
+router.post('/simulador/log',(req,res)=>{ addLog(req.app,'simulacao',`Fluxo simulado: ${safeText(req.body?.nome||'Bloco em edição',160)}`,{blocoId:safeText(req.body?.blocoId||'',120)}); res.json({success:true}); });
 router.post('/configuracoes/salvar', (req,res)=>{
   const data = loadAll(req.app);
   const body = req.body || {};
   const config = {
     ...data.config,
+    numeroTeste: safeText(body.numeroTeste || data.config.numeroTeste || '', 30).replace(/\D/g, ''),
     horarioAniversario: safeText(body.horarioAniversario || '08:00', 20),
     limiteDiario: safeNumber(body.limiteDiario, 40, 1, 1000),
     delayHumanoMin: safeNumber(body.delayHumanoMin, 4, 0, 600),
@@ -232,8 +851,8 @@ router.post('/configuracoes/salvar', (req,res)=>{
     digitandoPadrao: safeNumber(body.digitandoPadrao, 2, 0, 180),
     gravandoAudioPadrao: safeNumber(body.gravandoAudioPadrao, 2, 0, 180),
     envioRealAtivo: body.envioRealAtivo === 'on' || body.envioRealAtivo === 'true',
-    atualizadoEm: now(),
-    version: MODULE_VERSION
+    whatsappConectado: waState.status === 'conectado',
+    atualizadoEm: now(), version: MODULE_VERSION
   };
   if(config.delayHumanoMax < config.delayHumanoMin) config.delayHumanoMax = config.delayHumanoMin;
   writeJson(req.app, 'config.json', config);

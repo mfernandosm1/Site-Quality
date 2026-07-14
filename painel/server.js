@@ -51,7 +51,7 @@ import seoRouter from './routes/seo.js';
 import sitePreviewRouter from './routes/sitepreview.js';
 import sorteiosRouter from './routes/sorteios.js';
 import analyticsRouter from './routes/analytics.js';
-import automacaoWhatsappRouter from './routes/automacao_whatsapp.js';
+import automacaoWhatsappRouter, { initializeWhatsApp, shutdownWhatsApp } from './routes/automacao_whatsapp.js';
 
 app.use('/', indexRouter);
 app.use('/header', headerRouter);
@@ -148,6 +148,17 @@ app.get('/:slug', (req, res) => {
   res.sendFile(path.join(SITE_DIR, 'categoria.html'));
 });
 
-app.listen(PORT, () =>
-  console.log(`Painel Quality V7.3 em http://localhost:${PORT}`)
-);
+const server = app.listen(PORT, async () => {
+  console.log(`Painel Quality V7.3 em http://localhost:${PORT}`);
+  await initializeWhatsApp(app);
+});
+
+async function gracefulShutdown(signal) {
+  console.log(`\n${signal}: encerrando Painel Quality...`);
+  await shutdownWhatsApp();
+  server.close(() => process.exit(0));
+  setTimeout(() => process.exit(1), 5000).unref();
+}
+
+process.once('SIGINT', () => gracefulShutdown('SIGINT'));
+process.once('SIGTERM', () => gracefulShutdown('SIGTERM'));

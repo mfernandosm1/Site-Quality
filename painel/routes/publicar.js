@@ -267,21 +267,47 @@ function gerarHtmlEstaticoCategoriasPremium(){
 
 
 function syncDirContents(src, dst){
-  const IGNORE = new Set([".git",".github","node_modules","Backup","backups"]);
+  const IGNORE_NAMES = new Set([".git",".github","node_modules","Backup","backups",".wwebjs_cache"]);
+  const IGNORE_RELATIVE = [
+    "content/automacao_whatsapp",
+    "painel/.wwebjs_cache"
+  ];
+
+  function shouldIgnore(fullPath){
+    const relative = path.relative(src, fullPath).replace(/\\/g, "/");
+    return IGNORE_RELATIVE.some(prefix => relative === prefix || relative.startsWith(prefix + "/"));
+  }
+
   function walk(curSrc, curDst){
     if (!fs.existsSync(curDst)) fs.mkdirSync(curDst, { recursive:true });
+
     for (const ent of fs.readdirSync(curSrc, { withFileTypes:true })) {
-      if (IGNORE.has(ent.name)) continue;
+      if (IGNORE_NAMES.has(ent.name)) continue;
+
       const s = path.join(curSrc, ent.name);
       const d = path.join(curDst, ent.name);
+
+      if (shouldIgnore(s)) {
+        console.log(`🔒 Ignorado na publicação: ${path.relative(src, s)}`);
+        continue;
+      }
+
       if (ent.isDirectory()){
         walk(s, d);
       } else if (ent.isFile()){
-        fs.mkdirSync(path.dirname(d), { recursive:true });
-        fs.copyFileSync(s, d);
+        try {
+          fs.mkdirSync(path.dirname(d), { recursive:true });
+          fs.copyFileSync(s, d);
+        } catch (error) {
+          error.message = `Falha ao copiar "${s}" para "${d}": ${error.message}`;
+          error.path = error.path || s;
+          error.dest = error.dest || d;
+          throw error;
+        }
       }
     }
   }
+
   walk(src, dst);
 }
 
@@ -295,7 +321,17 @@ async function criarBackupLocal(){
       const archive = archiver("zip",{ zlib:{ level:9 }});
       out.on("close",()=>{ console.log(`[backup] ✅ ${nome} (${archive.pointer()} bytes)`); resolve(destino); });
       archive.on("error",reject);
-      archive.glob("**/*",{ cwd:SITE_DIR, dot:false, ignore:["node_modules/**","Backup/**","backups/**"]});
+      archive.glob("**/*",{
+        cwd:SITE_DIR,
+        dot:false,
+        ignore:[
+          "node_modules/**",
+          "Backup/**",
+          "backups/**",
+          "content/automacao_whatsapp/**",
+          "**/.wwebjs_cache/**"
+        ]
+      });
       archive.pipe(out); archive.finalize();
     }catch(e){ reject(e); }
   });
@@ -329,7 +365,11 @@ function registrarPublishJSON(){
 async function gitCommitPush(){
   const git = simpleGit({ baseDir: REPO_DIR });
   try{ await git.raw(["config","--global","--add","safe.directory", REPO_DIR]); }catch{}
-  await git.add(["."]);
+  await git.add([
+    ".",
+    ":!Site_with_content/content/automacao_whatsapp/**",
+    ":!painel/.wwebjs_cache/**"
+  ]);
   await git.commit(`chore: publish (${nowSP().date.toISOString()})`);
   await git.push("origin", BRANCH);
 }
@@ -373,7 +413,13 @@ router.post("/", async (req,res)=>{
     console.log("✅ Publicação concluída.");
     res.redirect(`/?flash=${encodeURIComponent("✅ Conteúdo atualizado, categorias antigas limpas e push realizado.")}`);
   }catch(err){
-    console.error("❌ Erro na publicação:", err);
+    console.error("❌ Erro na publicação:");
+    console.error("Mensagem:", err?.message);
+    console.error("Código:", err?.code);
+    console.error("Operação:", err?.syscall);
+    console.error("Caminho:", err?.path);
+    console.error("Destino:", err?.dest);
+    console.error("Erro completo:", err);
     res.redirect(`/?flash=${encodeURIComponent("❌ Erro ao publicar site. Verifique o console.")}`);
   }
 });

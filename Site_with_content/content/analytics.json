@@ -1,29 +1,29 @@
 {
   "version": "8.4.0-analytics-professional",
   "createdAt": "2026-07-08T00:26:21.803Z",
-  "updatedAt": "2026-07-12T16:33:23.480Z",
+  "updatedAt": "2026-07-14T00:28:18.928Z",
   "source": "local-json",
   "counters": {
-    "product_view": 27,
+    "product_view": 28,
     "favorite": 2,
     "favorite_click": 0,
-    "whatsapp_click": 3,
-    "category_view": 47,
+    "whatsapp_click": 4,
+    "category_view": 50,
     "share_click": 0,
     "search": 6,
-    "page_view": 119
+    "page_view": 129
   },
   "products": {
     "mini-game-portatil-400-jogos": {
       "slug": "mini-game-portatil-400-jogos",
       "name": "Mini game portátil 400 jogos",
       "image": "images/Mini game portátil 400 jogos e controle.jpg",
-      "url": "http://localhost:3000/produto/mini-game-portatil-400-jogos/",
+      "url": "http://localhost:3000/site/view/index.html",
       "views": 0,
       "favorites": 2,
-      "whatsapp": 0,
+      "whatsapp": 1,
       "shares": 0,
-      "lastAt": "2026-07-08T20:10:56.791Z"
+      "lastAt": "2026-07-12T18:06:14.793Z"
     },
     "motorola-moto-g35-5g-128gb-4gb-ram-8gb-ram-boost": {
       "slug": "motorola-moto-g35-5g-128gb-4gb-ram-8gb-ram-boost",
@@ -178,6 +178,17 @@
       "whatsapp": 0,
       "shares": 0,
       "lastAt": "2026-07-12T14:23:30.946Z"
+    },
+    "notebook-lenovo-ideapad-1-ryzen-3-7320u-4gb-256gb-ssd": {
+      "slug": "notebook-lenovo-ideapad-1-ryzen-3-7320u-4gb-256gb-ssd",
+      "name": "Notebook Lenovo IdeaPad 1 Ryzen 3 7320U 4GB 256GB SSD W11 15.6",
+      "image": "/images/Notebook Lenovo Ideapad 1 AMD Ryzen 3 4gb Ram 256gb (1).jpeg",
+      "url": "http://localhost:3000/produto/notebook-lenovo-ideapad-1-ryzen-3-7320u-4gb-256gb-ssd/",
+      "views": 1,
+      "favorites": 0,
+      "whatsapp": 0,
+      "shares": 0,
+      "lastAt": "2026-07-14T00:16:18.755Z"
     }
   },
   "categories": {
@@ -199,15 +210,15 @@
       "slug": "acessorios",
       "name": "acessorios",
       "url": "http://localhost:3000/acessorios/",
-      "views": 14,
-      "lastAt": "2026-07-12T16:33:23.480Z"
+      "views": 15,
+      "lastAt": "2026-07-12T17:06:50.741Z"
     },
     "eletronicos": {
       "slug": "eletronicos",
       "name": "eletronicos",
       "url": "http://localhost:3000/eletronicos/",
-      "views": 17,
-      "lastAt": "2026-07-12T13:18:04.325Z"
+      "views": 19,
+      "lastAt": "2026-07-14T00:28:18.928Z"
     }
   },
   "searches": {
@@ -230,8 +241,8 @@
   "pages": {
     "http://localhost:3000/site/view/index.html": {
       "url": "http://localhost:3000/site/view/index.html",
-      "views": 46,
-      "lastAt": "2026-07-12T16:18:30.504Z"
+      "views": 53,
+      "lastAt": "2026-07-14T00:28:15.692Z"
     },
     "http://localhost:3000/smartphones/": {
       "url": "http://localhost:3000/smartphones/",
@@ -255,13 +266,13 @@
     },
     "http://localhost:3000/acessorios/": {
       "url": "http://localhost:3000/acessorios/",
-      "views": 28,
-      "lastAt": "2026-07-12T16:33:23.480Z"
+      "views": 30,
+      "lastAt": "2026-07-12T17:06:50.739Z"
     },
     "http://localhost:3000/eletronicos/": {
       "url": "http://localhost:3000/eletronicos/",
-      "views": 34,
-      "lastAt": "2026-07-12T13:18:04.325Z"
+      "views": 38,
+      "lastAt": "2026-07-14T00:28:18.927Z"
     },
     "http://localhost:3000/produto/microfone-lapela-celular-bluetooth-tipo-c/": {
       "url": "http://localhost:3000/produto/microfone-lapela-celular-bluetooth-tipo-c/",
@@ -322,6 +333,11 @@
       "url": "http://localhost:3000/produto/carregador-indutivo-magnetico-kaidi-15w-carga-rapida-kd9092/",
       "views": 2,
       "lastAt": "2026-07-12T14:23:30.946Z"
+    },
+    "http://localhost:3000/produto/notebook-lenovo-ideapad-1-ryzen-3-7320u-4gb-256gb-ssd/": {
+      "url": "http://localhost:3000/produto/notebook-lenovo-ideapad-1-ryzen-3-7320u-4gb-256gb-ssd/",
+      "views": 2,
+      "lastAt": "2026-07-14T00:16:18.755Z"
     }
   },
   "devices": {},
@@ -2680,6 +2696,176 @@
       "category": {
         "slug": "acessorios",
         "name": "acessorios"
+      },
+      "term": ""
+    },
+    {
+      "at": "2026-07-12T17:06:49.198Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/site/view/index.html",
+      "referrer": "http://localhost:3000/automacao-whatsapp",
+      "device": "desktop",
+      "viewport": "1821x798",
+      "language": "pt-PT",
+      "term": ""
+    },
+    {
+      "at": "2026-07-12T17:06:50.731Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/acessorios/",
+      "referrer": "http://localhost:3000/site/view/index.html",
+      "device": "desktop",
+      "viewport": "1821x798",
+      "language": "pt-PT",
+      "term": ""
+    },
+    {
+      "at": "2026-07-12T17:06:50.741Z",
+      "type": "category_view",
+      "url": "http://localhost:3000/acessorios/",
+      "referrer": "http://localhost:3000/site/view/index.html",
+      "device": "desktop",
+      "viewport": "1821x798",
+      "language": "pt-PT",
+      "category": {
+        "slug": "acessorios",
+        "name": "acessorios"
+      },
+      "term": ""
+    },
+    {
+      "at": "2026-07-12T17:07:00.793Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/site/view/index.html",
+      "referrer": "http://localhost:3000/acessorios/",
+      "device": "desktop",
+      "viewport": "1821x798",
+      "language": "pt-PT",
+      "term": ""
+    },
+    {
+      "at": "2026-07-12T18:06:10.314Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/site/view/index.html",
+      "referrer": "http://localhost:3000/automacao-whatsapp?tab=midias",
+      "device": "desktop",
+      "viewport": "1821x798",
+      "language": "pt-PT",
+      "term": ""
+    },
+    {
+      "at": "2026-07-12T18:06:14.793Z",
+      "type": "whatsapp_click",
+      "url": "http://localhost:3000/site/view/index.html",
+      "referrer": "http://localhost:3000/automacao-whatsapp?tab=midias",
+      "device": "desktop",
+      "viewport": "1821x798",
+      "language": "pt-PT",
+      "product": {
+        "slug": "",
+        "name": "Mini game portátil 400 jogos"
+      },
+      "term": ""
+    },
+    {
+      "at": "2026-07-12T23:43:19.651Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/site/view/index.html",
+      "referrer": "http://localhost:3000/acessorios/",
+      "device": "desktop",
+      "viewport": "1517x665",
+      "language": "pt-PT",
+      "term": ""
+    },
+    {
+      "at": "2026-07-14T00:16:00.446Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/site/view/index.html",
+      "referrer": "http://localhost:3000/produtos?saved=produto",
+      "device": "desktop",
+      "viewport": "1517x665",
+      "language": "pt-PT",
+      "term": ""
+    },
+    {
+      "at": "2026-07-14T00:16:05.695Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/eletronicos/",
+      "referrer": "http://localhost:3000/site/view/index.html",
+      "device": "desktop",
+      "viewport": "1517x665",
+      "language": "pt-PT",
+      "term": ""
+    },
+    {
+      "at": "2026-07-14T00:16:05.701Z",
+      "type": "category_view",
+      "url": "http://localhost:3000/eletronicos/",
+      "referrer": "http://localhost:3000/site/view/index.html",
+      "device": "desktop",
+      "viewport": "1517x665",
+      "language": "pt-PT",
+      "category": {
+        "slug": "eletronicos",
+        "name": "eletronicos"
+      },
+      "term": ""
+    },
+    {
+      "at": "2026-07-14T00:16:17.854Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/produto/notebook-lenovo-ideapad-1-ryzen-3-7320u-4gb-256gb-ssd/",
+      "referrer": "http://localhost:3000/eletronicos/",
+      "device": "desktop",
+      "viewport": "1517x665",
+      "language": "pt-PT",
+      "term": ""
+    },
+    {
+      "at": "2026-07-14T00:16:18.755Z",
+      "type": "product_view",
+      "url": "http://localhost:3000/produto/notebook-lenovo-ideapad-1-ryzen-3-7320u-4gb-256gb-ssd/",
+      "referrer": "http://localhost:3000/eletronicos/",
+      "device": "desktop",
+      "viewport": "1517x665",
+      "language": "pt-PT",
+      "product": {
+        "slug": "notebook-lenovo-ideapad-1-ryzen-3-7320u-4gb-256gb-ssd",
+        "name": "Notebook Lenovo IdeaPad 1 Ryzen 3 7320U 4GB 256GB SSD W11 15.6"
+      },
+      "term": ""
+    },
+    {
+      "at": "2026-07-14T00:28:15.692Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/site/view/index.html",
+      "referrer": "http://localhost:3000/",
+      "device": "desktop",
+      "viewport": "1517x665",
+      "language": "pt-PT",
+      "term": ""
+    },
+    {
+      "at": "2026-07-14T00:28:18.919Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/eletronicos/",
+      "referrer": "http://localhost:3000/site/view/index.html",
+      "device": "desktop",
+      "viewport": "1517x665",
+      "language": "pt-PT",
+      "term": ""
+    },
+    {
+      "at": "2026-07-14T00:28:18.928Z",
+      "type": "category_view",
+      "url": "http://localhost:3000/eletronicos/",
+      "referrer": "http://localhost:3000/site/view/index.html",
+      "device": "desktop",
+      "viewport": "1517x665",
+      "language": "pt-PT",
+      "category": {
+        "slug": "eletronicos",
+        "name": "eletronicos"
       },
       "term": ""
     }
