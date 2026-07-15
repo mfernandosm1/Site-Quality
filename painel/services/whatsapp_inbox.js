@@ -145,6 +145,29 @@ export function getConversationMessages(app, conversationId){
   return listFrom(data,'messages').slice().sort((a,b)=>String(a.timestamp||'').localeCompare(String(b.timestamp||'')));
 }
 
+export function getConversationMessagesPage(app, conversationId, options={}){
+  const messages = getConversationMessages(app, conversationId);
+  const limit = Math.min(100, Math.max(10, Number(options.limit) || 50));
+  const before = safeText(options.before || '', 180);
+  const after = safeText(options.after || '', 180);
+  let end = messages.length;
+  let start = 0;
+
+  if(after){
+    const index = messages.findIndex(item => item.id === after);
+    start = index >= 0 ? index + 1 : Math.max(0, messages.length - limit);
+    const page = messages.slice(start, start + limit);
+    return { messages:page, hasMore:start + page.length < messages.length, total:messages.length };
+  }
+
+  if(before){
+    const index = messages.findIndex(item => item.id === before);
+    end = index >= 0 ? index : messages.length;
+  }
+  start = Math.max(0, end - limit);
+  return { messages:messages.slice(start,end), hasMore:start > 0, total:messages.length };
+}
+
 export function getInboxSummary(app){
   const data = getInboxData(app);
   const conversations = data.conversations.filter(c => c.conversationType !== 'group');
@@ -206,14 +229,17 @@ export function getInboxRevision(app, conversationId=''){
   const { conversations } = getInboxData(app);
   const selected = conversations.find(c => c.id === String(conversationId || ''));
   const messages = selected ? getConversationMessages(app, selected.id) : [];
-  return [
+  const listRevision = [
     conversations.length,
     conversations[0]?.lastMessageAt || '',
-    conversations.reduce((sum,c)=>sum + Number(c.unreadCount || 0),0),
+    conversations.reduce((sum,c)=>sum + Number(c.unreadCount || 0),0)
+  ].join('|');
+  const conversationRevision = [
     selected?.updatedAt || '',
     messages.length,
     messages[messages.length-1]?.id || ''
   ].join('|');
+  return { listRevision, conversationRevision, lastMessageId:messages[messages.length-1]?.id || '', totalMessages:messages.length };
 }
 
 async function contactFromChat(msg){

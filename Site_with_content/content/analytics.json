@@ -1,17 +1,17 @@
 {
   "version": "8.4.0-analytics-professional",
   "createdAt": "2026-07-08T00:26:21.803Z",
-  "updatedAt": "2026-07-15T16:17:09.001Z",
+  "updatedAt": "2026-07-15T18:20:12.289Z",
   "source": "local-json",
   "counters": {
-    "product_view": 36,
+    "product_view": 38,
     "favorite": 2,
     "favorite_click": 0,
     "whatsapp_click": 5,
-    "category_view": 53,
+    "category_view": 55,
     "share_click": 0,
     "search": 6,
-    "page_view": 146
+    "page_view": 152
   },
   "products": {
     "mini-game-portatil-400-jogos": {
@@ -233,6 +233,17 @@
       "whatsapp": 0,
       "shares": 0,
       "lastAt": "2026-07-15T16:16:13.400Z"
+    },
+    "iphone-17-pro-max-256gb-novo-lacrado": {
+      "slug": "iphone-17-pro-max-256gb-novo-lacrado",
+      "name": "Iphone 17 pro max 256gb novo lacrado",
+      "image": "/images/iphone 17 pro max laranja.jpeg",
+      "url": "http://localhost:3000/produto/iphone-17-pro-max-256gb-novo-lacrado/",
+      "views": 2,
+      "favorites": 0,
+      "whatsapp": 0,
+      "shares": 0,
+      "lastAt": "2026-07-15T18:20:12.288Z"
     }
   },
   "categories": {
@@ -240,8 +251,8 @@
       "slug": "smartphones",
       "name": "smartphones",
       "url": "http://localhost:3000/smartphones/",
-      "views": 16,
-      "lastAt": "2026-07-15T16:16:07.336Z"
+      "views": 18,
+      "lastAt": "2026-07-15T18:15:33.831Z"
     },
     "assistencia-tecnica": {
       "slug": "assistencia-tecnica",
@@ -285,13 +296,13 @@
   "pages": {
     "http://localhost:3000/site/view/index.html": {
       "url": "http://localhost:3000/site/view/index.html",
-      "views": 59,
-      "lastAt": "2026-07-15T16:17:04.128Z"
+      "views": 61,
+      "lastAt": "2026-07-15T18:15:31.609Z"
     },
     "http://localhost:3000/smartphones/": {
       "url": "http://localhost:3000/smartphones/",
-      "views": 35,
-      "lastAt": "2026-07-15T16:16:07.335Z"
+      "views": 39,
+      "lastAt": "2026-07-15T18:15:33.829Z"
     },
     "http://localhost:3000/produto/motorola-moto-g35-5g-128gb-4gb-ram-8gb-ram-boost/": {
       "url": "http://localhost:3000/produto/motorola-moto-g35-5g-128gb-4gb-ram-8gb-ram-boost/",
@@ -402,6 +413,11 @@
       "url": "http://localhost:3000/produto/iphone-17-256gb-novo-lacrado/",
       "views": 2,
       "lastAt": "2026-07-15T16:16:13.400Z"
+    },
+    "http://localhost:3000/produto/iphone-17-pro-max-256gb-novo-lacrado/": {
+      "url": "http://localhost:3000/produto/iphone-17-pro-max-256gb-novo-lacrado/",
+      "views": 4,
+      "lastAt": "2026-07-15T18:20:12.288Z"
     }
   },
   "devices": {},
@@ -3268,6 +3284,122 @@
       "product": {
         "slug": "",
         "name": "Fonte Original Apple Usb C 20w"
+      },
+      "term": ""
+    },
+    {
+      "at": "2026-07-15T16:17:33.830Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/site/view/index.html",
+      "referrer": "http://localhost:3000/produto/fonte-original-apple-usb-c-20w/",
+      "device": "desktop",
+      "viewport": "2049x898",
+      "language": "pt-PT",
+      "term": ""
+    },
+    {
+      "at": "2026-07-15T16:17:36.457Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/smartphones/",
+      "referrer": "http://localhost:3000/site/view/index.html",
+      "device": "desktop",
+      "viewport": "2049x898",
+      "language": "pt-PT",
+      "term": ""
+    },
+    {
+      "at": "2026-07-15T16:17:36.463Z",
+      "type": "category_view",
+      "url": "http://localhost:3000/smartphones/",
+      "referrer": "http://localhost:3000/site/view/index.html",
+      "device": "desktop",
+      "viewport": "2049x898",
+      "language": "pt-PT",
+      "category": {
+        "slug": "smartphones",
+        "name": "smartphones"
+      },
+      "term": ""
+    },
+    {
+      "at": "2026-07-15T18:15:31.609Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/site/view/index.html",
+      "referrer": "http://localhost:3000/produtos",
+      "device": "desktop",
+      "viewport": "1517x665",
+      "language": "pt-PT",
+      "term": ""
+    },
+    {
+      "at": "2026-07-15T18:15:33.823Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/smartphones/",
+      "referrer": "http://localhost:3000/site/view/index.html",
+      "device": "desktop",
+      "viewport": "1517x665",
+      "language": "pt-PT",
+      "term": ""
+    },
+    {
+      "at": "2026-07-15T18:15:33.831Z",
+      "type": "category_view",
+      "url": "http://localhost:3000/smartphones/",
+      "referrer": "http://localhost:3000/site/view/index.html",
+      "device": "desktop",
+      "viewport": "1517x665",
+      "language": "pt-PT",
+      "category": {
+        "slug": "smartphones",
+        "name": "smartphones"
+      },
+      "term": ""
+    },
+    {
+      "at": "2026-07-15T18:15:36.720Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/produto/iphone-17-pro-max-256gb-novo-lacrado/",
+      "referrer": "http://localhost:3000/smartphones/",
+      "device": "desktop",
+      "viewport": "1517x665",
+      "language": "pt-PT",
+      "term": ""
+    },
+    {
+      "at": "2026-07-15T18:15:37.616Z",
+      "type": "product_view",
+      "url": "http://localhost:3000/produto/iphone-17-pro-max-256gb-novo-lacrado/",
+      "referrer": "http://localhost:3000/smartphones/",
+      "device": "desktop",
+      "viewport": "1517x665",
+      "language": "pt-PT",
+      "product": {
+        "slug": "iphone-17-pro-max-256gb-novo-lacrado",
+        "name": "Iphone 17 pro max 256gb novo lacrado"
+      },
+      "term": ""
+    },
+    {
+      "at": "2026-07-15T18:20:11.378Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/produto/iphone-17-pro-max-256gb-novo-lacrado/",
+      "referrer": "http://localhost:3000/smartphones/",
+      "device": "desktop",
+      "viewport": "1517x665",
+      "language": "pt-PT",
+      "term": ""
+    },
+    {
+      "at": "2026-07-15T18:20:12.288Z",
+      "type": "product_view",
+      "url": "http://localhost:3000/produto/iphone-17-pro-max-256gb-novo-lacrado/",
+      "referrer": "http://localhost:3000/smartphones/",
+      "device": "desktop",
+      "viewport": "1517x665",
+      "language": "pt-PT",
+      "product": {
+        "slug": "iphone-17-pro-max-256gb-novo-lacrado",
+        "name": "Iphone 17 pro max 256gb novo lacrado"
       },
       "term": ""
     }

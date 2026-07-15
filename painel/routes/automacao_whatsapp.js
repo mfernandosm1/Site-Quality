@@ -4,11 +4,11 @@ import path from 'path';
 import multer from 'multer';
 import qrcode from 'qrcode';
 import whatsappWeb from 'whatsapp-web.js';
-import { ensureInboxStorage, getInboxSummary, getCommercialDashboard, getInboxData, getConversationMessages, getInboxRevision, registerWhatsAppMessage, updateInboxContact, repairInboxIdentities, markConversationRead, markConversationUnread, getInboxMediaFile, getInboxStorageReport, cleanInboxStorage } from '../services/whatsapp_inbox.js';
+import { ensureInboxStorage, getInboxSummary, getCommercialDashboard, getInboxData, getConversationMessages, getConversationMessagesPage, getInboxRevision, registerWhatsAppMessage, updateInboxContact, repairInboxIdentities, markConversationRead, markConversationUnread, getInboxMediaFile, getInboxStorageReport, cleanInboxStorage } from '../services/whatsapp_inbox.js';
 
 const { Client, LocalAuth, MessageMedia } = whatsappWeb;
 const router = express.Router();
-const MODULE_VERSION = '0.6.2';
+const MODULE_VERSION = '0.6.3.1';
 
 const waState = {
   client: null,
@@ -500,7 +500,8 @@ router.get('/', (req,res)=>{
   const commercialDashboard = getCommercialDashboard(req.app);
   const storageReport = getInboxStorageReport(req.app);
   const selectedConversation = inboxData.conversations.find(c => c.id === selectedConversationId) || null;
-  const selectedMessages = selectedConversation ? getConversationMessages(req.app, selectedConversation.id) : [];
+  const selectedMessagesPage = selectedConversation ? getConversationMessagesPage(req.app, selectedConversation.id, { limit:50 }) : { messages:[], hasMore:false, total:0 };
+  const selectedMessages = selectedMessagesPage.messages;
   const tab = safeText(req.query.tab || 'dashboard', 30);
   const editId = safeText(req.query.edit || '', 120);
   const blocoEdit = data.blocos.find(b => b.id === editId) || null;
@@ -519,6 +520,8 @@ router.get('/', (req,res)=>{
     inboxContacts: inboxData.contacts,
     selectedConversation,
     selectedMessages,
+    selectedMessagesHasMore:selectedMessagesPage.hasMore,
+    selectedMessagesTotal:selectedMessagesPage.total,
     inboxRevision: getInboxRevision(req.app, selectedConversation?.id || ''),
     settingsSection: safeText(req.query.section || 'geral', 30),
     ...data,
@@ -533,6 +536,22 @@ router.get('/inbox/state', (req,res)=>{
     res.json({ success:true, revision:getInboxRevision(req.app, conversationId) });
   } catch(error) {
     res.status(500).json({ success:false, message:error.message || 'Falha ao consultar o Inbox.' });
+  }
+});
+
+router.get('/inbox/messages', (req,res)=>{
+  try {
+    const conversationId=safeConversationId(req.query.conversation || '');
+    if(!conversationId) throw new Error('Conversa não identificada.');
+    const page=getConversationMessagesPage(req.app,conversationId,{
+      limit:safeNumber(req.query.limit,50,10,100),
+      before:safeText(req.query.before || '',180),
+      after:safeText(req.query.after || '',180)
+    });
+    res.set('Cache-Control','no-store');
+    res.json({success:true,...page});
+  } catch(error){
+    res.status(400).json({success:false,message:error.message || 'Falha ao carregar mensagens.'});
   }
 });
 
@@ -627,46 +646,101 @@ router.post('/inbox/enviar-anexo', (req,res)=>{
 function safeDownloadName(value='arquivo'){
   return safeText(value,180).replace(/[\\/:*?"<>|]+/g,'-').trim() || 'arquivo';
 }
-async function fetchInboxMediaFromWhatsApp(messageId){
-  if(!waState.client || waState.status !== 'conectado') throw new Error('Conecte o WhatsApp para visualizar esta mídia.');
-  if(typeof waState.client.getMessageById !== 'function') throw new Error('Esta versão do WhatsApp não permite recuperar a mídia sob demanda.');
-  const message = await waState.client.getMessageById(messageId);
-  if(!message?.hasMedia || typeof message.downloadMedia !== 'function') throw new Error('A mídia não está mais disponível no WhatsApp.');
-  const downloaded = await message.downloadMedia();
-  if(!downloaded?.data) throw new Error('O WhatsApp não retornou o conteúdo da mídia.');
-  return {
-    buffer:Buffer.from(downloaded.data,'base64'),
-    mime:safeText(downloaded.mimetype || message?._data?.mimetype || 'application/octet-stream',120),
-    filename:safeDownloadName(downloaded.filename || message?._data?.filename || 'arquivo')
+function mediaExtensionFromMime(mime=''){
+  const map={
+    'image/jpeg':'.jpg','image/png':'.png','image/webp':'.webp','image/gif':'.gif',
+    'audio/ogg':'.ogg','audio/mpeg':'.mp3','audio/mp4':'.m4a','audio/webm':'.webm','audio/wav':'.wav',
+    'video/mp4':'.mp4','video/webm':'.webm','application/pdf':'.pdf','text/plain':'.txt',
+    'application/zip':'.zip','application/msword':'.doc',
+    'application/vnd.openxmlformats-officedocument.wordprocessingml.document':'.docx',
+    'application/vnd.ms-excel':'.xls','application/vnd.openxmlformats-officedocument.spreadsheetml.sheet':'.xlsx'
   };
+  return map[String(mime||'').toLowerCase()]||'';
 }
-router.get('/inbox/media/:conversationId/:messageId', async (req,res)=>{
-  try {
+function decodedMediaBuffer(data=''){
+  let value=String(data||'').trim();
+  const dataUri=value.match(/^data:[^;,]+;base64,(.+)$/s);
+  if(dataUri) value=dataUri[1];
+  value=value.replace(/\s+/g,'');
+  if(!value) return Buffer.alloc(0);
+  const buffer=Buffer.from(value,'base64');
+  if(!buffer.length) return Buffer.alloc(0);
+  return buffer;
+}
+async function resolveRemoteMessage(messageId,conversationId=''){
+  if(!waState.client || waState.status !== 'conectado') throw new Error('Conecte o WhatsApp para visualizar esta mídia.');
+  let message=null;
+  if(typeof waState.client.getMessageById === 'function'){
+    try{ message=await waState.client.getMessageById(messageId); }catch{}
+  }
+  if(message?.hasMedia) return message;
+
+  // Fallback seguro para versões em que getMessageById não encontra mensagens já paginadas.
+  try{
+    const conversation=getInboxData(waState.app).conversations.find(item=>item.id===conversationId);
+    const chatId=conversation?.whatsappId;
+    if(chatId && typeof waState.client.getChatById==='function'){
+      const chat=await waState.client.getChatById(chatId);
+      if(chat && typeof chat.fetchMessages==='function'){
+        const recent=await chat.fetchMessages({limit:100});
+        message=(recent||[]).find(item=>(item?.id?._serialized||item?.id?.id||'')===messageId)||null;
+      }
+    }
+  }catch{}
+  if(!message?.hasMedia || typeof message.downloadMedia !== 'function') throw new Error('A mídia não está mais disponível no WhatsApp.');
+  return message;
+}
+async function fetchInboxMediaFromWhatsApp(messageId,conversationId=''){
+  const message=await resolveRemoteMessage(messageId,conversationId);
+  const downloaded=await message.downloadMedia();
+  if(!downloaded?.data) throw new Error('O WhatsApp não retornou o conteúdo da mídia.');
+  const mime=safeText(downloaded.mimetype || message?._data?.mimetype || 'application/octet-stream',120).toLowerCase();
+  const buffer=decodedMediaBuffer(downloaded.data);
+  if(!buffer.length) throw new Error('O WhatsApp retornou uma mídia vazia.');
+  let filename=safeDownloadName(downloaded.filename || message?._data?.filename || 'arquivo');
+  if(!path.extname(filename)) filename+=mediaExtensionFromMime(mime);
+  return {buffer,mime,filename};
+}
+function mediaUnavailableHtml(message){
+  const text=safeText(message||'Esta mídia não está mais disponível.',300);
+  return `<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Mídia indisponível</title><style>body{font-family:system-ui,sans-serif;background:#f8fafc;color:#0f172a;display:grid;place-items:center;min-height:100vh;margin:0}.box{max-width:520px;background:#fff;border:1px solid #e2e8f0;border-radius:16px;padding:28px;box-shadow:0 14px 35px rgba(15,23,42,.08)}h1{font-size:20px;margin:0 0 10px}p{color:#64748b;line-height:1.5;margin:0}</style></head><body><div class="box"><h1>📎 Mídia indisponível</h1><p>${text}</p></div></body></html>`;
+}
+async function serveInboxMedia(req,res){
+  try{
     const download=req.query.download==='1';
-    const found=getInboxMediaFile(req.app,req.params.conversationId,req.params.messageId);
+    const conversationId=safeConversationId(req.query.conversation || req.params.conversationId || '');
+    const messageId=safeText(req.query.message || req.params.messageId || '',180);
+    if(!conversationId || !messageId) throw new Error('Mídia não identificada.');
+
+    const found=getInboxMediaFile(req.app,conversationId,messageId);
     res.setHeader('X-Content-Type-Options','nosniff');
     res.setHeader('Cache-Control','private, max-age=300');
     if(found){
-      if(found.media?.mime) res.type(found.media.mime);
+      if(found.media?.mime) res.setHeader('Content-Type',found.media.mime);
       if(download) return res.download(found.absolute,safeDownloadName(found.media?.originalName||found.media?.filename||'arquivo'));
       return res.sendFile(found.absolute);
     }
 
-    const conversationId=safeConversationId(req.params.conversationId);
-    const messageId=safeText(req.params.messageId,180);
-    const message=getConversationMessages(req.app,conversationId).find(item=>item.id===messageId);
-    if(!message?.hasMedia) return res.status(404).send('Mídia não encontrada.');
-    const remote=await fetchInboxMediaFromWhatsApp(messageId);
-    const preferredName=safeDownloadName(message.media?.originalName || remote.filename || 'arquivo');
-    res.type(remote.mime || message.media?.mime || 'application/octet-stream');
+    const savedMessage=getConversationMessages(req.app,conversationId).find(item=>item.id===messageId);
+    if(!savedMessage?.hasMedia) throw new Error('Mídia não encontrada.');
+    const remote=await fetchInboxMediaFromWhatsApp(messageId,conversationId);
+    let preferredName=safeDownloadName(savedMessage.media?.originalName || remote.filename || 'arquivo');
+    if(!path.extname(preferredName)) preferredName+=mediaExtensionFromMime(remote.mime || savedMessage.media?.mime);
+    const mime=remote.mime || savedMessage.media?.mime || 'application/octet-stream';
+    res.status(200);
+    res.setHeader('Content-Type',mime);
     res.setHeader('Content-Length',String(remote.buffer.length));
-    res.setHeader('Content-Disposition',`${download?'attachment':'inline'}; filename*=UTF-8''${encodeURIComponent(preferredName)}`);
-    return res.send(remote.buffer);
-  } catch(error){
-    const status=/Conecte o WhatsApp/.test(error.message)?503:404;
-    return res.status(status).send(error.message || 'Mídia não encontrada.');
+    res.setHeader('Content-Disposition',`${download?'attachment':'inline'}; filename="${preferredName.replace(/["\\]/g,'-')}"; filename*=UTF-8''${encodeURIComponent(preferredName)}`);
+    return res.end(remote.buffer);
+  }catch(error){
+    const unavailable=/não está mais disponível|não retornou|vazia|não encontrada/i.test(error.message||'');
+    const status=/Conecte o WhatsApp/.test(error.message||'')?503:(unavailable?410:404);
+    if(req.query.download==='1') return res.status(status).type('text/plain; charset=utf-8').send(error.message||'Mídia não encontrada.');
+    return res.status(status).type('html; charset=utf-8').send(mediaUnavailableHtml(error.message));
   }
-});
+}
+router.get('/inbox/media',serveInboxMedia);
+router.get('/inbox/media/:conversationId/:messageId',serveInboxMedia);
 
 router.post('/inbox/executar-bloco', async (req,res)=>{
   try {
@@ -878,8 +952,15 @@ router.post('/armazenamento/limpar', (req,res)=>{
     const action=safeText(req.body?.action,30);
     const allowed=new Set(['orphans','groups','older30','older90','all_media','empty_dirs']);
     if(!allowed.has(action)) throw new Error('Ação de limpeza inválida.');
+    const startedAt=process.hrtime.bigint();
     const result=cleanInboxStorage(req.app,action);
-    addLog(req.app,'inbox_armazenamento_limpeza','Limpeza manual do armazenamento do Inbox executada.',result);
+    const elapsedSeconds=Number(process.hrtime.bigint()-startedAt)/1e9;
+    addLog(req.app,'inbox_armazenamento_limpeza','Limpeza manual do armazenamento do Inbox executada.',{...result,elapsedSeconds});
+    console.log('\n🧹 Central de Armazenamento');
+    console.log('Limpeza concluída');
+    console.log(`Arquivos removidos: ${result.removedFiles || 0}`);
+    console.log(`Espaço liberado: ${result.freedLabel || '0 B'}`);
+    console.log(`Tempo: ${elapsedSeconds.toFixed(2).replace('.',',')} s\n`);
     const details=result.removedFiles ? `${result.removedFiles} arquivo(s) removido(s), ${result.freedLabel} liberados.` : `${result.removedDirs||0} pasta(s) vazia(s) removida(s).`;
     flash(res,'/automacao-whatsapp?tab=configuracoes&section=armazenamento',`🧹 Limpeza concluída: ${details}`);
   } catch(error){
