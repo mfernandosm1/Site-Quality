@@ -1,17 +1,17 @@
 {
   "version": "8.4.0-analytics-professional",
   "createdAt": "2026-07-08T00:26:21.803Z",
-  "updatedAt": "2026-07-14T00:58:59.227Z",
+  "updatedAt": "2026-07-15T16:17:09.001Z",
   "source": "local-json",
   "counters": {
-    "product_view": 30,
+    "product_view": 36,
     "favorite": 2,
     "favorite_click": 0,
-    "whatsapp_click": 4,
-    "category_view": 50,
+    "whatsapp_click": 5,
+    "category_view": 53,
     "share_click": 0,
     "search": 6,
-    "page_view": 134
+    "page_view": 146
   },
   "products": {
     "mini-game-portatil-400-jogos": {
@@ -140,11 +140,11 @@
       "name": "Fonte Original Apple Usb C 20w",
       "image": "/images/Fonte Original Apple Usb C 20w.jpg",
       "url": "http://localhost:3000/produto/fonte-original-apple-usb-c-20w/",
-      "views": 8,
+      "views": 9,
       "favorites": 0,
-      "whatsapp": 0,
+      "whatsapp": 1,
       "shares": 0,
-      "lastAt": "2026-07-14T00:58:51.494Z"
+      "lastAt": "2026-07-15T16:17:09.001Z"
     },
     "fone-jbl-tune-510bt-branco": {
       "slug": "fone-jbl-tune-510bt-branco",
@@ -200,6 +200,39 @@
       "whatsapp": 0,
       "shares": 0,
       "lastAt": "2026-07-14T00:58:55.679Z"
+    },
+    "iphone-16-128gb-novo-lacrado": {
+      "slug": "iphone-16-128gb-novo-lacrado",
+      "name": "Iphone 16 128gb novo lacrado",
+      "image": "/images/Iphone 16 preto.jpeg",
+      "url": "http://localhost:3000/produto/iphone-16-128gb-novo-lacrado/",
+      "views": 1,
+      "favorites": 0,
+      "whatsapp": 0,
+      "shares": 0,
+      "lastAt": "2026-07-14T18:27:42.695Z"
+    },
+    "iphone-17-pro-256gb-novo-lacrado": {
+      "slug": "iphone-17-pro-256gb-novo-lacrado",
+      "name": "Iphone 17 pro 256gb novo lacrado",
+      "image": "/images/Iphone 17 pro azul.jpeg",
+      "url": "http://localhost:3000/produto/iphone-17-pro-256gb-novo-lacrado/",
+      "views": 3,
+      "favorites": 0,
+      "whatsapp": 0,
+      "shares": 0,
+      "lastAt": "2026-07-15T16:16:47.009Z"
+    },
+    "iphone-17-256gb-novo-lacrado": {
+      "slug": "iphone-17-256gb-novo-lacrado",
+      "name": "Iphone 17 256gb novo lacrado",
+      "image": "/images/Iphone 17 branco.jpeg",
+      "url": "http://localhost:3000/produto/iphone-17-256gb-novo-lacrado/",
+      "views": 1,
+      "favorites": 0,
+      "whatsapp": 0,
+      "shares": 0,
+      "lastAt": "2026-07-15T16:16:13.400Z"
     }
   },
   "categories": {
@@ -207,8 +240,8 @@
       "slug": "smartphones",
       "name": "smartphones",
       "url": "http://localhost:3000/smartphones/",
-      "views": 13,
-      "lastAt": "2026-07-11T14:44:24.161Z"
+      "views": 16,
+      "lastAt": "2026-07-15T16:16:07.336Z"
     },
     "assistencia-tecnica": {
       "slug": "assistencia-tecnica",
@@ -252,13 +285,13 @@
   "pages": {
     "http://localhost:3000/site/view/index.html": {
       "url": "http://localhost:3000/site/view/index.html",
-      "views": 56,
-      "lastAt": "2026-07-14T00:58:59.227Z"
+      "views": 59,
+      "lastAt": "2026-07-15T16:17:04.128Z"
     },
     "http://localhost:3000/smartphones/": {
       "url": "http://localhost:3000/smartphones/",
-      "views": 29,
-      "lastAt": "2026-07-11T14:44:24.160Z"
+      "views": 35,
+      "lastAt": "2026-07-15T16:16:07.335Z"
     },
     "http://localhost:3000/produto/motorola-moto-g35-5g-128gb-4gb-ram-8gb-ram-boost/": {
       "url": "http://localhost:3000/produto/motorola-moto-g35-5g-128gb-4gb-ram-8gb-ram-boost/",
@@ -327,8 +360,8 @@
     },
     "http://localhost:3000/produto/fonte-original-apple-usb-c-20w/": {
       "url": "http://localhost:3000/produto/fonte-original-apple-usb-c-20w/",
-      "views": 16,
-      "lastAt": "2026-07-14T00:58:51.493Z"
+      "views": 19,
+      "lastAt": "2026-07-15T16:17:09.001Z"
     },
     "http://localhost:3000/produto/fone-jbl-tune-510bt-branco/": {
       "url": "http://localhost:3000/produto/fone-jbl-tune-510bt-branco/",
@@ -354,6 +387,21 @@
       "url": "http://localhost:3000/produto/bateria-apple-magsafe/",
       "views": 2,
       "lastAt": "2026-07-14T00:58:55.678Z"
+    },
+    "http://localhost:3000/produto/iphone-16-128gb-novo-lacrado/": {
+      "url": "http://localhost:3000/produto/iphone-16-128gb-novo-lacrado/",
+      "views": 2,
+      "lastAt": "2026-07-14T18:27:42.695Z"
+    },
+    "http://localhost:3000/produto/iphone-17-pro-256gb-novo-lacrado/": {
+      "url": "http://localhost:3000/produto/iphone-17-pro-256gb-novo-lacrado/",
+      "views": 6,
+      "lastAt": "2026-07-15T16:16:47.009Z"
+    },
+    "http://localhost:3000/produto/iphone-17-256gb-novo-lacrado/": {
+      "url": "http://localhost:3000/produto/iphone-17-256gb-novo-lacrado/",
+      "views": 2,
+      "lastAt": "2026-07-15T16:16:13.400Z"
     }
   },
   "devices": {},
@@ -2961,6 +3009,266 @@
       "device": "desktop",
       "viewport": "1517x665",
       "language": "pt-PT",
+      "term": ""
+    },
+    {
+      "at": "2026-07-14T16:10:55.334Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/site/view/index.html",
+      "referrer": "http://localhost:3000/produto/bateria-apple-magsafe/",
+      "device": "desktop",
+      "viewport": "1517x665",
+      "language": "pt-PT",
+      "term": ""
+    },
+    {
+      "at": "2026-07-14T18:27:37.183Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/smartphones/",
+      "referrer": "http://localhost:3000/site/view/index.html",
+      "device": "desktop",
+      "viewport": "1517x665",
+      "language": "pt-PT",
+      "term": ""
+    },
+    {
+      "at": "2026-07-14T18:27:37.206Z",
+      "type": "category_view",
+      "url": "http://localhost:3000/smartphones/",
+      "referrer": "http://localhost:3000/site/view/index.html",
+      "device": "desktop",
+      "viewport": "1517x665",
+      "language": "pt-PT",
+      "category": {
+        "slug": "smartphones",
+        "name": "smartphones"
+      },
+      "term": ""
+    },
+    {
+      "at": "2026-07-14T18:27:41.783Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/produto/iphone-16-128gb-novo-lacrado/",
+      "referrer": "http://localhost:3000/smartphones/",
+      "device": "desktop",
+      "viewport": "1517x665",
+      "language": "pt-PT",
+      "term": ""
+    },
+    {
+      "at": "2026-07-14T18:27:42.695Z",
+      "type": "product_view",
+      "url": "http://localhost:3000/produto/iphone-16-128gb-novo-lacrado/",
+      "referrer": "http://localhost:3000/smartphones/",
+      "device": "desktop",
+      "viewport": "1517x665",
+      "language": "pt-PT",
+      "product": {
+        "slug": "iphone-16-128gb-novo-lacrado",
+        "name": "Iphone 16 128gb novo lacrado"
+      },
+      "term": ""
+    },
+    {
+      "at": "2026-07-14T18:56:10.937Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/smartphones/",
+      "referrer": "http://localhost:3000/produto/iphone-16-128gb-novo-lacrado/",
+      "device": "desktop",
+      "viewport": "1517x665",
+      "language": "pt-PT",
+      "term": ""
+    },
+    {
+      "at": "2026-07-14T18:56:10.953Z",
+      "type": "category_view",
+      "url": "http://localhost:3000/smartphones/",
+      "referrer": "http://localhost:3000/produto/iphone-16-128gb-novo-lacrado/",
+      "device": "desktop",
+      "viewport": "1517x665",
+      "language": "pt-PT",
+      "category": {
+        "slug": "smartphones",
+        "name": "smartphones"
+      },
+      "term": ""
+    },
+    {
+      "at": "2026-07-14T18:56:52.213Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/produto/iphone-17-pro-256gb-novo-lacrado/",
+      "referrer": "http://localhost:3000/smartphones/",
+      "device": "desktop",
+      "viewport": "1517x665",
+      "language": "pt-PT",
+      "term": ""
+    },
+    {
+      "at": "2026-07-14T18:56:53.106Z",
+      "type": "product_view",
+      "url": "http://localhost:3000/produto/iphone-17-pro-256gb-novo-lacrado/",
+      "referrer": "http://localhost:3000/smartphones/",
+      "device": "desktop",
+      "viewport": "1517x665",
+      "language": "pt-PT",
+      "product": {
+        "slug": "iphone-17-pro-256gb-novo-lacrado",
+        "name": "Iphone 17 pro 256gb novo lacrado"
+      },
+      "term": ""
+    },
+    {
+      "at": "2026-07-15T16:16:03.896Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/site/view/index.html",
+      "referrer": "http://localhost:3000/produtos",
+      "device": "desktop",
+      "viewport": "2049x898",
+      "language": "pt-PT",
+      "term": ""
+    },
+    {
+      "at": "2026-07-15T16:16:07.328Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/smartphones/",
+      "referrer": "http://localhost:3000/site/view/index.html",
+      "device": "desktop",
+      "viewport": "2049x898",
+      "language": "pt-PT",
+      "term": ""
+    },
+    {
+      "at": "2026-07-15T16:16:07.336Z",
+      "type": "category_view",
+      "url": "http://localhost:3000/smartphones/",
+      "referrer": "http://localhost:3000/site/view/index.html",
+      "device": "desktop",
+      "viewport": "2049x898",
+      "language": "pt-PT",
+      "category": {
+        "slug": "smartphones",
+        "name": "smartphones"
+      },
+      "term": ""
+    },
+    {
+      "at": "2026-07-15T16:16:12.502Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/produto/iphone-17-256gb-novo-lacrado/",
+      "referrer": "http://localhost:3000/smartphones/",
+      "device": "desktop",
+      "viewport": "2049x898",
+      "language": "pt-PT",
+      "term": ""
+    },
+    {
+      "at": "2026-07-15T16:16:13.400Z",
+      "type": "product_view",
+      "url": "http://localhost:3000/produto/iphone-17-256gb-novo-lacrado/",
+      "referrer": "http://localhost:3000/smartphones/",
+      "device": "desktop",
+      "viewport": "2049x898",
+      "language": "pt-PT",
+      "product": {
+        "slug": "iphone-17-256gb-novo-lacrado",
+        "name": "Iphone 17 256gb novo lacrado"
+      },
+      "term": ""
+    },
+    {
+      "at": "2026-07-15T16:16:18.559Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/produto/iphone-17-pro-256gb-novo-lacrado/",
+      "referrer": "http://localhost:3000/smartphones/",
+      "device": "desktop",
+      "viewport": "2049x898",
+      "language": "pt-PT",
+      "term": ""
+    },
+    {
+      "at": "2026-07-15T16:16:19.476Z",
+      "type": "product_view",
+      "url": "http://localhost:3000/produto/iphone-17-pro-256gb-novo-lacrado/",
+      "referrer": "http://localhost:3000/smartphones/",
+      "device": "desktop",
+      "viewport": "2049x898",
+      "language": "pt-PT",
+      "product": {
+        "slug": "iphone-17-pro-256gb-novo-lacrado",
+        "name": "Iphone 17 pro 256gb novo lacrado"
+      },
+      "term": ""
+    },
+    {
+      "at": "2026-07-15T16:16:46.110Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/produto/iphone-17-pro-256gb-novo-lacrado/",
+      "referrer": "http://localhost:3000/smartphones/",
+      "device": "desktop",
+      "viewport": "2049x898",
+      "language": "pt-PT",
+      "term": ""
+    },
+    {
+      "at": "2026-07-15T16:16:47.009Z",
+      "type": "product_view",
+      "url": "http://localhost:3000/produto/iphone-17-pro-256gb-novo-lacrado/",
+      "referrer": "http://localhost:3000/smartphones/",
+      "device": "desktop",
+      "viewport": "2049x898",
+      "language": "pt-PT",
+      "product": {
+        "slug": "iphone-17-pro-256gb-novo-lacrado",
+        "name": "Iphone 17 pro 256gb novo lacrado"
+      },
+      "term": ""
+    },
+    {
+      "at": "2026-07-15T16:17:04.128Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/site/view/index.html",
+      "referrer": "http://localhost:3000/",
+      "device": "desktop",
+      "viewport": "2049x898",
+      "language": "pt-PT",
+      "term": ""
+    },
+    {
+      "at": "2026-07-15T16:17:06.002Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/produto/fonte-original-apple-usb-c-20w/",
+      "referrer": "http://localhost:3000/site/view/index.html",
+      "device": "desktop",
+      "viewport": "2049x898",
+      "language": "pt-PT",
+      "term": ""
+    },
+    {
+      "at": "2026-07-15T16:17:06.898Z",
+      "type": "product_view",
+      "url": "http://localhost:3000/produto/fonte-original-apple-usb-c-20w/",
+      "referrer": "http://localhost:3000/site/view/index.html",
+      "device": "desktop",
+      "viewport": "2049x898",
+      "language": "pt-PT",
+      "product": {
+        "slug": "fonte-original-apple-usb-c-20w",
+        "name": "Fonte Original Apple Usb C 20w"
+      },
+      "term": ""
+    },
+    {
+      "at": "2026-07-15T16:17:09.001Z",
+      "type": "whatsapp_click",
+      "url": "http://localhost:3000/produto/fonte-original-apple-usb-c-20w/",
+      "referrer": "http://localhost:3000/site/view/index.html",
+      "device": "desktop",
+      "viewport": "2049x898",
+      "language": "pt-PT",
+      "product": {
+        "slug": "",
+        "name": "Fonte Original Apple Usb C 20w"
+      },
       "term": ""
     }
   ]

@@ -75,33 +75,21 @@ function mediaKind(type='', mime=''){
   if(String(mime).startsWith('video/') || type === 'video') return 'video';
   return 'document';
 }
-async function downloadAndStoreMedia(p, msg, conversationId, messageId, timestamp, type){
-  if(!msg?.hasMedia || typeof msg.downloadMedia !== 'function') return null;
-  try {
-    const downloaded = await msg.downloadMedia();
-    if(!downloaded?.data) throw new Error('WhatsApp não retornou o conteúdo da mídia.');
-    const mime = safeText(downloaded.mimetype || '',120).toLowerCase();
-    const originalName = safeText(downloaded.filename || msg?._data?.filename || '',180);
-    const date = new Date(timestamp || now());
-    const year = String(date.getFullYear());
-    const month = String(date.getMonth()+1).padStart(2,'0');
-    const relativeDir = path.join(safeFilePart(conversationId,'contato'),year,month);
-    const dir = path.join(p.mediaDir,relativeDir);
-    ensureDir(dir);
-    const ext = extensionFromMime(mime,originalName);
-    const base = safeFilePart(path.basename(originalName, path.extname(originalName)) || `${type || 'midia'}-${messageId}`,'midia');
-    const filename = `${base}-${safeFilePart(messageId,'msg').slice(-28)}${ext}`;
-    const absolute = path.join(dir,filename);
-    const buffer = Buffer.from(downloaded.data,'base64');
-    if(!fs.existsSync(absolute)) fs.writeFileSync(absolute,buffer);
-    return {
-      kind:mediaKind(type,mime), mime, originalName:originalName || filename, filename,
-      relativePath:path.join(relativeDir,filename).replace(/\\/g,'/'), size:buffer.length,
-      stored:true, error:null
-    };
-  } catch(error){
-    return { kind:mediaKind(type,''), mime:'', originalName:'', filename:'', relativePath:'', size:0, stored:false, error:safeText(error.message,300) };
-  }
+function describeMedia(msg, type=''){
+  const mime = safeText(msg?._data?.mimetype || msg?._data?.mediaData?.mimetype || '',120).toLowerCase();
+  const originalName = safeText(msg?._data?.filename || msg?._data?.mediaData?.filename || '',180);
+  const rawSize = Number(msg?._data?.size || msg?._data?.mediaData?.size || 0);
+  return {
+    kind:mediaKind(type,mime),
+    mime,
+    originalName:originalName || '',
+    filename:'',
+    relativePath:'',
+    size:Number.isFinite(rawSize) && rawSize > 0 ? rawSize : 0,
+    stored:false,
+    remote:true,
+    error:null
+  };
 }
 
 export function ensureInboxStorage(app){
@@ -520,7 +508,7 @@ export async function registerWhatsAppMessage(app, msg, client=null){
     }
   }
 
-  const media = Boolean(msg.hasMedia) ? await downloadAndStoreMedia(p,msg,conversation.id,id,timestamp,type) : null;
+  const media = Boolean(msg.hasMedia) ? describeMedia(msg,type) : null;
   messages.push({
     id, conversationId:conversation.id, conversationType:group?'group':'contact',
     direction:fromMe?'outgoing':'incoming', type, text, timestamp,
@@ -549,6 +537,163 @@ export function getInboxMediaFile(app, conversationId, messageId){
   if(absolute !== root && !absolute.startsWith(root + path.sep)) return null;
   if(!fs.existsSync(absolute) || !fs.statSync(absolute).isFile()) return null;
   return { absolute, message, media:message.media };
+}
+
+
+function walkFiles(root){
+  const files=[]; const dirs=[];
+  if(!fs.existsSync(root)) return {files,dirs};
+  const visit=(dir)=>{
+    dirs.push(dir);
+    let entries=[]; try{ entries=fs.readdirSync(dir,{withFileTypes:true}); }catch{return;}
+    for(const entry of entries){
+      const absolute=path.join(dir,entry.name);
+      if(entry.isDirectory()) visit(absolute);
+      else if(entry.isFile()){
+        try{ const stat=fs.statSync(absolute); files.push({absolute,size:stat.size,mtimeMs:stat.mtimeMs}); }catch{}
+      }
+    }
+  };
+  visit(root); return {files,dirs};
+}
+function relativeTo(root,absolute){ return path.relative(root,absolute).replace(/\\/g,'/'); }
+function directorySize(root){ return walkFiles(root).files.reduce((sum,item)=>sum+item.size,0); }
+function removeEmptyDirs(root){
+  if(!fs.existsSync(root)) return 0;
+  let removed=0;
+  const visit=(dir)=>{
+    let entries=[]; try{ entries=fs.readdirSync(dir,{withFileTypes:true}); }catch{return false;}
+    for(const entry of entries){ if(entry.isDirectory()) visit(path.join(dir,entry.name)); }
+    if(dir!==root){
+      try{ if(fs.readdirSync(dir).length===0){ fs.rmdirSync(dir); removed+=1; return true; } }catch{}
+    }
+    return false;
+  };
+  visit(root); return removed;
+}
+function collectMediaReferences(app){
+  const p=ensureInboxStorage(app);
+  const conversations=getInboxData(app).conversations;
+  const conversationMap=new Map(conversations.map(c=>[c.id,c]));
+  const references=[];
+  for(const file of walkFiles(p.messagesDir).files.filter(item=>item.absolute.endsWith('.json'))){
+    const data=readJson(file.absolute,{messages:[]});
+    for(const message of listFrom(data,'messages')){
+      const rel=String(message?.media?.relativePath||'').replace(/\\/g,'/');
+      if(!rel) continue;
+      references.push({
+        relativePath:rel,
+        conversationId:data.conversationId||message.conversationId||'',
+        messageId:message.id||'',
+        conversationType:message.conversationType||conversationMap.get(data.conversationId||message.conversationId||'')?.conversationType||'contact',
+        timestamp:message.timestamp||null,
+        stored:Boolean(message?.media?.stored)
+      });
+    }
+  }
+  return references;
+}
+function bytesLabel(bytes){
+  const value=Number(bytes)||0;
+  if(value<1024) return `${value} B`;
+  if(value<1024*1024) return `${(value/1024).toFixed(1).replace('.',',')} KB`;
+  if(value<1024*1024*1024) return `${(value/1024/1024).toFixed(1).replace('.',',')} MB`;
+  return `${(value/1024/1024/1024).toFixed(2).replace('.',',')} GB`;
+}
+export function getInboxStorageReport(app){
+  const p=ensureInboxStorage(app);
+  const inboxData=getInboxData(app);
+  const mediaWalk=walkFiles(p.mediaDir);
+  const messageWalk=walkFiles(p.messagesDir);
+  const backupWalk=walkFiles(p.backupsDir);
+  const rootWalk=walkFiles(p.root);
+  const references=collectMediaReferences(app);
+  const referencedSet=new Set(references.map(item=>item.relativePath));
+  const mediaFiles=mediaWalk.files.map(item=>({...item,relativePath:relativeTo(p.mediaDir,item.absolute)}));
+  const orphanFiles=mediaFiles.filter(item=>!referencedSet.has(item.relativePath));
+  const groupReferenceSet=new Set(references.filter(item=>item.conversationType==='group').map(item=>item.relativePath));
+  const groupFiles=mediaFiles.filter(item=>groupReferenceSet.has(item.relativePath));
+  const cutoff30=Date.now()-30*86400000;
+  const cutoff90=Date.now()-90*86400000;
+  const old30Files=mediaFiles.filter(item=>item.mtimeMs<cutoff30);
+  const old90Files=mediaFiles.filter(item=>item.mtimeMs<cutoff90);
+  const invalidJson=[];
+  for(const item of rootWalk.files.filter(file=>file.absolute.endsWith('.json'))){
+    try{ JSON.parse(fs.readFileSync(item.absolute,'utf-8')); }catch{ invalidJson.push(relativeTo(p.root,item.absolute)); }
+  }
+  const emptyDirs=mediaWalk.dirs.filter(dir=>dir!==p.mediaDir).filter(dir=>{ try{return fs.readdirSync(dir).length===0;}catch{return false;} });
+  let messageCount=0;
+  for(const item of messageWalk.files.filter(file=>file.absolute.endsWith('.json'))){
+    const data=readJson(item.absolute,{messages:[]}); messageCount+=listFrom(data,'messages').length;
+  }
+  const largestMedia=mediaFiles.slice().sort((a,b)=>b.size-a.size)[0]||null;
+  const report={
+    generatedAt:now(),
+    totalBytes:rootWalk.files.reduce((sum,item)=>sum+item.size,0),
+    mediaBytes:mediaFiles.reduce((sum,item)=>sum+item.size,0),
+    messagesBytes:messageWalk.files.reduce((sum,item)=>sum+item.size,0),
+    backupsBytes:backupWalk.files.reduce((sum,item)=>sum+item.size,0),
+    messageCount,
+    contacts:inboxData.conversations.filter(c=>c.conversationType!=='group').length,
+    groups:inboxData.conversations.filter(c=>c.conversationType==='group').length,
+    savedContacts:inboxData.contacts.length,
+    mediaFiles:mediaFiles.length,
+    folders:rootWalk.dirs.length,
+    backups:backupWalk.files.length,
+    orphanFiles:{count:orphanFiles.length,bytes:orphanFiles.reduce((sum,item)=>sum+item.size,0)},
+    groupFiles:{count:groupFiles.length,bytes:groupFiles.reduce((sum,item)=>sum+item.size,0)},
+    old30Files:{count:old30Files.length,bytes:old30Files.reduce((sum,item)=>sum+item.size,0)},
+    old90Files:{count:old90Files.length,bytes:old90Files.reduce((sum,item)=>sum+item.size,0)},
+    emptyDirs:emptyDirs.length,
+    invalidJson,
+    largestMedia:largestMedia?{name:path.basename(largestMedia.absolute),bytes:largestMedia.size,relativePath:largestMedia.relativePath}:null
+  };
+  report.labels={
+    total:bytesLabel(report.totalBytes), media:bytesLabel(report.mediaBytes), messages:bytesLabel(report.messagesBytes), backups:bytesLabel(report.backupsBytes),
+    orphan:bytesLabel(report.orphanFiles.bytes), groups:bytesLabel(report.groupFiles.bytes), old30:bytesLabel(report.old30Files.bytes), old90:bytesLabel(report.old90Files.bytes),
+    largest:bytesLabel(report.largestMedia?.bytes||0)
+  };
+  return report;
+}
+function clearStoredMediaMetadata(app,relativePaths){
+  const p=ensureInboxStorage(app); const target=new Set(relativePaths);
+  if(!target.size) return 0;
+  let updated=0;
+  for(const file of walkFiles(p.messagesDir).files.filter(item=>item.absolute.endsWith('.json'))){
+    const data=readJson(file.absolute,{messages:[]}); let changed=false;
+    for(const message of listFrom(data,'messages')){
+      const rel=String(message?.media?.relativePath||'').replace(/\\/g,'/');
+      if(!target.has(rel)) continue;
+      message.media={...message.media,stored:false,remote:true,relativePath:'',filename:'',size:Number(message.media?.size||0),error:null};
+      changed=true; updated+=1;
+    }
+    if(changed) atomicWriteJson(file.absolute,data);
+  }
+  return updated;
+}
+export function cleanInboxStorage(app,action){
+  const p=ensureInboxStorage(app); const report=getInboxStorageReport(app);
+  const mediaFiles=walkFiles(p.mediaDir).files.map(item=>({...item,relativePath:relativeTo(p.mediaDir,item.absolute)}));
+  const references=collectMediaReferences(app);
+  const referencedSet=new Set(references.map(item=>item.relativePath));
+  const groupSet=new Set(references.filter(item=>item.conversationType==='group').map(item=>item.relativePath));
+  const cutoff30=Date.now()-30*86400000, cutoff90=Date.now()-90*86400000;
+  let targets=[];
+  if(action==='orphans') targets=mediaFiles.filter(item=>!referencedSet.has(item.relativePath));
+  else if(action==='groups') targets=mediaFiles.filter(item=>groupSet.has(item.relativePath));
+  else if(action==='older30') targets=mediaFiles.filter(item=>item.mtimeMs<cutoff30);
+  else if(action==='older90') targets=mediaFiles.filter(item=>item.mtimeMs<cutoff90);
+  else if(action==='all_media') targets=mediaFiles;
+  else if(action==='empty_dirs'){
+    const removedDirs=removeEmptyDirs(p.mediaDir); return {action,removedFiles:0,removedDirs,freedBytes:0,freedLabel:bytesLabel(0),updatedMessages:0};
+  } else throw new Error('Ação de limpeza inválida.');
+  let removedFiles=0,freedBytes=0; const removedPaths=[];
+  for(const item of targets){
+    try{ if(fs.existsSync(item.absolute)){ fs.unlinkSync(item.absolute); removedFiles+=1; freedBytes+=item.size; removedPaths.push(item.relativePath); } }catch{}
+  }
+  const updatedMessages=clearStoredMediaMetadata(app,removedPaths);
+  const removedDirs=removeEmptyDirs(p.mediaDir);
+  return {action,removedFiles,removedDirs,freedBytes,freedLabel:bytesLabel(freedBytes),updatedMessages,before:report.labels.media};
 }
 
 export function markConversationRead(app, conversationId){

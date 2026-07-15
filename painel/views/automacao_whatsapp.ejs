@@ -187,6 +187,19 @@
   /* v0.6.0 — grupos no Inbox */
   .qw-inbox-type-filters{display:flex;gap:5px;margin-top:6px}.qw-type-filter{border:1px solid var(--qw-line);background:#fff;border-radius:8px;padding:5px 8px;font-size:10px;font-weight:900;cursor:pointer}.qw-type-filter.active{background:#111827;color:#fff;border-color:#111827}
   .qw-group-badge{font-size:10px;background:#ede9fe;color:#6d28d9;border-radius:999px;padding:3px 7px;margin-left:5px}.qw-message-author{font-size:11px;font-weight:900;color:#2563eb;margin-bottom:3px}.qw-group-header-icon{font-size:18px;margin-right:5px}
+  /* v0.6.1 — mídia temporária, sem cópia automática no painel */
+  .qw-remote-media{display:grid;gap:7px}.qw-remote-media-note{font-size:10px;color:#64748b;background:rgba(255,255,255,.58);border-radius:8px;padding:6px 8px}.qw-remote-media .qw-inbox-document{border:1px solid rgba(148,163,184,.35)}
+
+
+  /* v0.6.2 — Central de Armazenamento */
+  .qw-storage-kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-bottom:14px}
+  .qw-storage-kpi{background:#fff;border:1px solid var(--qw-line);border-radius:16px;padding:15px;box-shadow:var(--qw-shadow)}
+  .qw-storage-kpi .value{font-size:27px;font-weight:900;line-height:1}.qw-storage-kpi .label{font-size:12px;color:var(--qw-muted);margin-top:7px}.qw-storage-kpi .hint{font-size:10px;color:#94a3b8;margin-top:4px}
+  .qw-storage-layout{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(320px,.9fr);gap:14px}.qw-storage-stack{display:grid;gap:14px}
+  .qw-health-list{display:grid;gap:9px}.qw-health-row{display:flex;justify-content:space-between;gap:15px;align-items:center;padding:11px 12px;border:1px solid #eef2f7;border-radius:12px;background:#fff}.qw-health-row strong{white-space:nowrap}.qw-health-ok{color:#166534}.qw-health-warn{color:#b45309}.qw-health-bad{color:#b91c1c}
+  .qw-clean-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.qw-clean-action{border:1px solid var(--qw-line);border-radius:14px;padding:13px;background:#fff}.qw-clean-action h3{font-size:14px;margin:0 0 5px}.qw-clean-action p{font-size:11px;color:var(--qw-muted);min-height:31px;margin:0 0 10px}.qw-clean-action form{margin:0}.qw-clean-action .qw-btn{width:100%;font-size:12px;padding:9px}
+  .qw-storage-note{font-size:11px;color:var(--qw-muted);line-height:1.5}.qw-storage-path{font-family:Consolas,monospace;font-size:11px;background:#f8fafc;border:1px solid var(--qw-line);border-radius:10px;padding:9px;word-break:break-all}
+  @media(max-width:1000px){.qw-storage-kpis{grid-template-columns:repeat(2,1fr)}.qw-storage-layout{grid-template-columns:1fr}}@media(max-width:620px){.qw-storage-kpis,.qw-clean-grid{grid-template-columns:1fr}}
 
 </style>
 
@@ -220,6 +233,7 @@
       <a class="qw-settings-link <%= settingsSection === 'geral' ? 'active' : '' %>" href="/automacao-whatsapp?tab=configuracoes&section=geral">⚙️ Geral</a>
       <a class="qw-settings-link <%= settingsSection === 'conexao' ? 'active' : '' %>" href="/automacao-whatsapp?tab=configuracoes&section=conexao">🔗 Conexão</a>
       <a class="qw-settings-link <%= settingsSection === 'logs' ? 'active' : '' %>" href="/automacao-whatsapp?tab=configuracoes&section=logs">📜 Logs</a>
+      <a class="qw-settings-link <%= settingsSection === 'armazenamento' ? 'active' : '' %>" href="/automacao-whatsapp?tab=configuracoes&section=armazenamento">💾 Armazenamento</a>
     </div>
   <% } %>
 
@@ -362,7 +376,14 @@
                   <% if(media.kind==='video'){ %><video controls preload="metadata" src="<%= mediaUrl %>"></video><% } %>
                   <% if(media.kind==='document'){ %><a class="qw-inbox-document" href="<%= mediaUrl %>" target="_blank" rel="noopener"><span class="qw-inbox-document-icon">📄</span><span class="qw-inbox-document-info"><span class="qw-inbox-document-name"><%= media.originalName || media.filename || 'Documento' %></span><span class="qw-inbox-document-meta"><%= media.mime || 'Arquivo' %><%= media.size ? ' · '+Math.max(1,Math.round(media.size/1024))+' KB' : '' %></span></span></a><% } %>
                   <div class="qw-media-actions"><a class="qw-media-action" href="<%= mediaUrl %>" target="_blank" rel="noopener">Abrir</a><a class="qw-media-action" href="<%= mediaUrl %>?download=1">Baixar</a></div>
-                </div><% } else if(m.hasMedia){ %><div class="qw-media-error">📎 <%= media && media.error ? media.error : 'Mídia ainda não disponível localmente.' %></div><% } %>
+                </div><% } else if(m.hasMedia){ %><div class="qw-inbox-media qw-remote-media">
+                  <% if(media && media.kind==='image'){ %><a href="<%= mediaUrl %>" target="_blank" rel="noopener"><img src="<%= mediaUrl %>" alt="<%= media.originalName || 'Imagem recebida' %>" loading="lazy"></a><% } %>
+                  <% if(media && media.kind==='audio'){ %><audio controls preload="none" src="<%= mediaUrl %>"></audio><% } %>
+                  <% if(media && media.kind==='video'){ %><video controls preload="metadata" src="<%= mediaUrl %>"></video><% } %>
+                  <% if(!media || media.kind==='document'){ %><a class="qw-inbox-document" href="<%= mediaUrl %>" target="_blank" rel="noopener"><span class="qw-inbox-document-icon">📄</span><span class="qw-inbox-document-info"><span class="qw-inbox-document-name"><%= media && media.originalName ? media.originalName : 'Arquivo recebido' %></span><span class="qw-inbox-document-meta"><%= media && media.mime ? media.mime : 'Disponível pelo WhatsApp' %><%= media && media.size ? ' · '+Math.max(1,Math.round(media.size/1024))+' KB' : '' %></span></span></a><% } %>
+                  <div class="qw-remote-media-note">Visualização temporária pelo WhatsApp · nenhuma cópia automática no painel</div>
+                  <div class="qw-media-actions"><a class="qw-media-action" href="<%= mediaUrl %>" target="_blank" rel="noopener">Visualizar</a><a class="qw-media-action" href="<%= mediaUrl %>?download=1">Baixar no computador</a></div>
+                </div><% } %>
                 <% if(m.text){ %><div><%= m.text %></div><% } else if(!m.hasMedia){ %><div>[<%= m.type || 'mensagem' %>]</div><% } %><small><%= formatDateTime(m.timestamp) %></small></div><% }) %>
             </div>
             <div class="qw-inbox-composer">
@@ -626,6 +647,59 @@
 
   <% if (tab === 'configuracoes' && settingsSection === 'logs') { %>
     <div class="qw-grid"><div class="qw-card qw-span-12"><h2>📜 Logs</h2><p class="sub">Conexão, QR Code, envios manuais, etapas de blocos, falhas e simulações.</p><% if (!logs.length) { %><div class="qw-empty">Sem logs ainda.</div><% } else { %><div class="qw-log-list"><% logs.slice(0,200).forEach(function(log){ %><div class="qw-log-row"><strong><%= log.message %></strong><br><small><%= new Date(log.at).toLocaleString('pt-BR') %> · <%= log.type %></small><% if (log.details && Object.keys(log.details).length) { %><details><summary>Detalhes</summary><pre><%= JSON.stringify(log.details, null, 2) %></pre></details><% } %></div><% }) %></div><% } %></div></div>
+  <% } %>
+
+
+  <% if (tab === 'configuracoes' && settingsSection === 'armazenamento') { %>
+    <div class="qw-storage-kpis">
+      <div class="qw-storage-kpi"><div class="value"><%= storageReport.labels.total %></div><div class="label">Inbox completo</div><div class="hint">Mensagens, mídia local e backups</div></div>
+      <div class="qw-storage-kpi"><div class="value"><%= storageReport.labels.media %></div><div class="label">Mídias locais</div><div class="hint"><%= storageReport.mediaFiles %> arquivo(s)</div></div>
+      <div class="qw-storage-kpi"><div class="value"><%= storageReport.messageCount %></div><div class="label">Mensagens registradas</div><div class="hint"><%= storageReport.contacts %> contatos · <%= storageReport.groups %> grupos</div></div>
+      <div class="qw-storage-kpi"><div class="value"><%= storageReport.backups %></div><div class="label">Backups do Inbox</div><div class="hint"><%= storageReport.labels.backups %> ocupados</div></div>
+    </div>
+
+    <div class="qw-storage-layout">
+      <div class="qw-storage-stack">
+        <div class="qw-card">
+          <h2>🔍 Varredura do armazenamento</h2>
+          <p class="sub">Relatório somente leitura. Nenhum arquivo é alterado durante a análise.</p>
+          <div class="qw-health-list">
+            <div class="qw-health-row"><span>Arquivos órfãos</span><strong class="<%= storageReport.orphanFiles.count ? 'qw-health-warn':'qw-health-ok' %>"><%= storageReport.orphanFiles.count %> · <%= storageReport.labels.orphan %></strong></div>
+            <div class="qw-health-row"><span>Mídias antigas de grupos</span><strong class="<%= storageReport.groupFiles.count ? 'qw-health-warn':'qw-health-ok' %>"><%= storageReport.groupFiles.count %> · <%= storageReport.labels.groups %></strong></div>
+            <div class="qw-health-row"><span>Mídias com mais de 30 dias</span><strong class="<%= storageReport.old30Files.count ? 'qw-health-warn':'qw-health-ok' %>"><%= storageReport.old30Files.count %> · <%= storageReport.labels.old30 %></strong></div>
+            <div class="qw-health-row"><span>Mídias com mais de 90 dias</span><strong class="<%= storageReport.old90Files.count ? 'qw-health-warn':'qw-health-ok' %>"><%= storageReport.old90Files.count %> · <%= storageReport.labels.old90 %></strong></div>
+            <div class="qw-health-row"><span>Pastas vazias</span><strong class="<%= storageReport.emptyDirs ? 'qw-health-warn':'qw-health-ok' %>"><%= storageReport.emptyDirs %></strong></div>
+            <div class="qw-health-row"><span>Arquivos JSON inválidos</span><strong class="<%= storageReport.invalidJson.length ? 'qw-health-bad':'qw-health-ok' %>"><%= storageReport.invalidJson.length %></strong></div>
+          </div>
+          <div style="margin-top:12px;display:flex;gap:8px;flex-wrap:wrap"><a class="qw-btn primary" href="/automacao-whatsapp?tab=configuracoes&section=armazenamento">🔄 Executar nova varredura</a></div>
+        </div>
+
+        <div class="qw-card">
+          <h2>🧹 Limpeza manual</h2>
+          <p class="sub">As ações abaixo removem somente cópias locais em <code>inbox/media</code>. Mensagens e CRM permanecem intactos.</p>
+          <div class="qw-clean-grid">
+            <div class="qw-clean-action"><h3>Arquivos órfãos</h3><p>Arquivos locais sem referência em nenhuma mensagem.</p><form method="post" action="/automacao-whatsapp/armazenamento/limpar" onsubmit="return confirmStorageCleanup(this,'Remover <%= storageReport.orphanFiles.count %> arquivo(s) órfão(s) e liberar aproximadamente <%= storageReport.labels.orphan %>?')"><input type="hidden" name="action" value="orphans"><button class="qw-btn" type="submit" <%= storageReport.orphanFiles.count ? '' : 'disabled' %>>Limpar órfãos</button></form></div>
+            <div class="qw-clean-action"><h3>Mídias de grupos</h3><p>Remove somente mídias antigas que já foram gravadas localmente.</p><form method="post" action="/automacao-whatsapp/armazenamento/limpar" onsubmit="return confirmStorageCleanup(this,'Remover <%= storageReport.groupFiles.count %> mídia(s) local(is) de grupos e liberar aproximadamente <%= storageReport.labels.groups %>?')"><input type="hidden" name="action" value="groups"><button class="qw-btn" type="submit" <%= storageReport.groupFiles.count ? '' : 'disabled' %>>Limpar grupos</button></form></div>
+            <div class="qw-clean-action"><h3>Mais de 30 dias</h3><p>Apaga cópias locais antigas, mantendo o registro textual.</p><form method="post" action="/automacao-whatsapp/armazenamento/limpar" onsubmit="return confirmStorageCleanup(this,'Remover <%= storageReport.old30Files.count %> mídia(s) com mais de 30 dias e liberar aproximadamente <%= storageReport.labels.old30 %>?')"><input type="hidden" name="action" value="older30"><button class="qw-btn" type="submit" <%= storageReport.old30Files.count ? '' : 'disabled' %>>Limpar +30 dias</button></form></div>
+            <div class="qw-clean-action"><h3>Mais de 90 dias</h3><p>Opção mais conservadora para preservar arquivos recentes.</p><form method="post" action="/automacao-whatsapp/armazenamento/limpar" onsubmit="return confirmStorageCleanup(this,'Remover <%= storageReport.old90Files.count %> mídia(s) com mais de 90 dias e liberar aproximadamente <%= storageReport.labels.old90 %>?')"><input type="hidden" name="action" value="older90"><button class="qw-btn" type="submit" <%= storageReport.old90Files.count ? '' : 'disabled' %>>Limpar +90 dias</button></form></div>
+            <div class="qw-clean-action"><h3>Pastas vazias</h3><p>Remove apenas diretórios vazios deixados por limpezas anteriores.</p><form method="post" action="/automacao-whatsapp/armazenamento/limpar" onsubmit="return confirmStorageCleanup(this,'Remover as pastas vazias encontradas?')"><input type="hidden" name="action" value="empty_dirs"><button class="qw-btn" type="submit" <%= storageReport.emptyDirs ? '' : 'disabled' %>>Limpar pastas</button></form></div>
+            <div class="qw-clean-action" style="border-color:#fecaca;background:#fffafa"><h3>Limpeza completa da mídia</h3><p>Apaga todas as cópias locais do Inbox. Não apaga mensagens ou contatos.</p><form method="post" action="/automacao-whatsapp/armazenamento/limpar" onsubmit="return confirmStorageCleanup(this,'ATENÇÃO: remover todas as <%= storageReport.mediaFiles %> mídias locais e liberar aproximadamente <%= storageReport.labels.media %>?')"><input type="hidden" name="action" value="all_media"><button class="qw-btn danger" type="submit" <%= storageReport.mediaFiles ? '' : 'disabled' %>>Limpar toda a mídia</button></form></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="qw-storage-stack">
+        <div class="qw-card"><h2>📊 Detalhes</h2><div class="qw-health-list">
+          <div class="qw-health-row"><span>Arquivos de mensagens</span><strong><%= storageReport.labels.messages %></strong></div>
+          <div class="qw-health-row"><span>Contatos salvos</span><strong><%= storageReport.savedContacts %></strong></div>
+          <div class="qw-health-row"><span>Total de pastas</span><strong><%= storageReport.folders %></strong></div>
+          <div class="qw-health-row"><span>Maior mídia local</span><strong><%= storageReport.largestMedia ? storageReport.labels.largest : '—' %></strong></div>
+        </div><% if(storageReport.largestMedia){ %><p class="qw-storage-note" style="margin-top:10px">Maior arquivo: <strong><%= storageReport.largestMedia.name %></strong></p><% } %></div>
+        <div class="qw-card"><h2>🛡️ Regra de segurança</h2><div class="qw-info">Desde a v0.6.1, mídias novas são visualizadas temporariamente pelo WhatsApp e não são salvas automaticamente. Esta central serve principalmente para limpar arquivos antigos.</div><p class="qw-storage-note" style="margin-top:12px">A limpeza atualiza os metadados das mensagens para impedir links quebrados. Quando o WhatsApp ainda disponibilizar a mídia, ela poderá ser visualizada novamente de forma temporária.</p></div>
+        <div class="qw-card"><h2>📁 Área analisada</h2><div class="qw-storage-path">content/automacao_whatsapp/inbox</div><p class="qw-storage-note">A sessão do WhatsApp, a biblioteca oficial de blocos e as mídias cadastradas nos blocos ficam fora desta limpeza.</p></div>
+        <% if(storageReport.invalidJson.length){ %><div class="qw-card"><h2>⚠️ JSON inválidos</h2><div class="qw-warning"><%= storageReport.invalidJson.join(', ') %></div><p class="qw-storage-note">A central apenas informa estes arquivos. Não tenta corrigi-los ou excluí-los automaticamente.</p></div><% } %>
+      </div>
+    </div>
   <% } %>
 
   <% if (tab === 'configuracoes' && settingsSection === 'geral') { %>
@@ -1453,6 +1527,12 @@
     }, 2500);
   }
 
+  function confirmStorageCleanup(form,message){
+    if(!window.confirm(message+'\n\nAs mensagens, contatos e dados do CRM serão preservados.')) return false;
+    var button=form && form.querySelector('button[type="submit"]'); if(button){button.disabled=true;button.textContent='Limpando...';}
+    return true;
+  }
+
   window.sendInboxText = sendInboxText;
   window.sendInboxBlock = sendInboxBlock;
   window.toggleInboxPopover = toggleInboxPopover;
@@ -1465,8 +1545,10 @@
   window.openConversationMenu = openConversationMenu;
   window.closeConversationMenu = closeConversationMenu;
   window.markInboxUnread = markInboxUnread;
+  window.setInboxTypeFilter = setInboxTypeFilter;
   window.filterInboxConversations = filterInboxConversations;
   window.filterCommercialOpportunities = filterCommercialOpportunities;
+  window.confirmStorageCleanup = confirmStorageCleanup;
   window.addStep = addStep;
   window.removeStep = removeStep;
   window.moveStep = moveStep;
