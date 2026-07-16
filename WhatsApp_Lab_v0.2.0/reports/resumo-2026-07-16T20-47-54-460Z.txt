@@ -1,0 +1,25 @@
+Quality WhatsApp Lab v0.2.0
+Status: PARTIAL
+Início: 2026-07-16T20:46:18.435Z
+Fim: 2026-07-16T20:47:54.460Z
+Duração: 96025 ms
+
+[OK] Configuração da sessão (0 ms)
+[OK] Chrome detectado (0 ms)
+[OK] Biblioteca whatsapp-web.js (0 ms)
+[OK] Inicialização até ready (12764 ms)
+[OK] client.info (1 ms)
+[OK] Versões reais do ambiente (17 ms)
+[OK] Inspeção profunda imediatamente após ready (10 ms)
+[FALHA] client.getChats() imediatamente após ready (78 ms) - r
+[OK] Inspeção profunda após estabilização (22 ms)
+[FALHA] client.getChats() após estabilização (261 ms) - r
+[FALHA] client.getContacts() (30039 ms) - Tempo limite de 30000 ms em getContacts.
+[OK] client.getContactById() — próprio número (4410 ms)
+[FALHA] client.getChatById() — primeiro chat (2 ms) - Sem ID de chat válido porque getChats() não retornou dados.
+[FALHA] client.searchMessages() (30002 ms) - Tempo limite de 30000 ms em searchMessages.
+[FALHA] downloadMedia() — primeira mídia encontrada (0 ms) - Teste depende de getChats() após estabilização.
+[OK] Observação de eventos (5004 ms)
+[OK] Encerramento seguro (961 ms)
+
+Relatório completo: diagnostico-2026-07-16T20-47-54-460Z.json

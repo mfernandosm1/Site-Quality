@@ -4,11 +4,12 @@ import path from 'path';
 import multer from 'multer';
 import qrcode from 'qrcode';
 import whatsappWeb from 'whatsapp-web.js';
-import { ensureInboxStorage, getInboxSummary, getCommercialDashboard, getInboxData, getConversationMessages, getConversationMessagesPage, getInboxRevision, registerWhatsAppMessage, updateInboxContact, repairInboxIdentities, markConversationRead, markConversationUnread, getInboxMediaFile, getInboxStorageReport, cleanInboxStorage } from '../services/whatsapp_inbox.js';
+import WhatsAppProvider from '../services/whatsapp/WhatsAppProvider.js';
+import { ensureInboxStorage, getInboxSummary, getCommercialDashboard, getInboxData, getConversationMessages, getInboxRevision, registerWhatsAppMessage, updateInboxContact, repairInboxIdentities, repairInboxContactNames, markConversationRead, markConversationUnread, getInboxMediaFile, storeInboxMediaFile, repairInboxGroupNames, syncInboxFromWhatsApp, getInboxStorageReport, cleanInboxStorage } from '../services/whatsapp_inbox.js';
 
 const { Client, LocalAuth, MessageMedia } = whatsappWeb;
 const router = express.Router();
-const MODULE_VERSION = '0.6.3.1';
+const MODULE_VERSION = '0.6.3.3-provider-v1.0.1';
 
 const waState = {
   client: null,
@@ -22,7 +23,13 @@ const waState = {
   starting: false,
   lastEventAt: null,
   lastError: null,
-  blockRunning: false
+  blockRunning: false,
+  readyWatchdog: null,
+  recoveryAttempts: 0,
+  syncing:false,
+  lastSyncAt:null,
+  messageCache:new Map(),
+  provider:null
 };
 
 function P(app){ return app.locals.paths; }
@@ -79,11 +86,52 @@ function addLog(app, type, message, details={}){
   logs.unshift({ id: makeId('log'), type: safeText(type, 50), message: safeText(message, 500), details, at: now() });
   writeJson(app, 'logs.json', logs.slice(0, 500));
 }
+function ensureWhatsAppProvider(){
+  if(!waState.provider){
+    waState.provider = new WhatsAppProvider({
+      client:waState.client,
+      statusReader:() => ({ whatsappStatus:waState.status, initialized:waState.initialized }),
+      logger:(type,message,details={}) => addLog(waState.app,type,message,details)
+    });
+  } else {
+    waState.provider.setClient(waState.client);
+  }
+  return waState.provider;
+}
+
 function setWaState(status, message, extra={}){
   waState.status = status;
   waState.message = message;
   waState.lastEventAt = now();
   Object.assign(waState, extra);
+}
+function clearReadyWatchdog(){
+  if(waState.readyWatchdog){
+    clearTimeout(waState.readyWatchdog);
+    waState.readyWatchdog = null;
+  }
+}
+function armReadyWatchdog(app, client){
+  clearReadyWatchdog();
+  waState.readyWatchdog = setTimeout(async () => {
+    if(waState.client !== client || waState.status === 'conectado') return;
+    addLog(app, 'whatsapp_sessao_lenta', 'A sessão autenticou, mas não ficou pronta no tempo esperado.', { tentativa:waState.recoveryAttempts + 1 });
+    if(waState.recoveryAttempts >= 1){
+      setWaState('erro', 'A sessão foi autenticada, mas não concluiu a inicialização. Feche o painel e abra novamente.', {
+        lastError:'Tempo limite aguardando o evento ready.', starting:false, initialized:false
+      });
+      return;
+    }
+    waState.recoveryAttempts += 1;
+    try { await client.destroy(); } catch {}
+    if(waState.client === client) waState.client = null;
+    waState.starting = false;
+    setWaState('reiniciando', 'Sessão demorou para iniciar. Tentando novamente sem apagar os dados...', {
+      qrDataUrl:null, initialized:false, starting:false
+    });
+    await sleep(1500);
+    try { await createClient(app); } catch {}
+  }, 30000);
 }
 function publicWaState(){
   return {
@@ -96,7 +144,9 @@ function publicWaState(){
     starting: waState.starting,
     lastEventAt: waState.lastEventAt,
     lastError: waState.lastError,
-    blockRunning: waState.blockRunning
+    blockRunning: waState.blockRunning,
+    syncing:waState.syncing,
+    lastSyncAt:waState.lastSyncAt
   };
 }
 function defaults(){
@@ -299,6 +349,36 @@ async function executeBlock(app, rawNumber, bloco){
   return executeBlockToChat(app, { digits, chatId, label:digits }, bloco);
 }
 
+function cacheWhatsAppMessage(message){
+  const serialized=String(message?.id?._serialized || message?.id?.id || '');
+  if(!serialized) return;
+  const core=messageIdCore(serialized);
+  const variants=new Set([serialized,core]);
+  for(const value of messageIdVariants(serialized)) variants.add(value);
+  for(const key of variants){ if(key) waState.messageCache.set(key,message); }
+  while(waState.messageCache.size>2500){
+    const first=waState.messageCache.keys().next().value;
+    waState.messageCache.delete(first);
+  }
+}
+async function persistMessageMedia(app,message,result){
+  if(!result?.saved || !message?.hasMedia || typeof message.downloadMedia!=='function') return;
+  try{
+    const downloaded=await message.downloadMedia();
+    if(!downloaded?.data || !validBase64(downloaded.data)) return;
+    const buffer=Buffer.from(String(downloaded.data).replace(/\s+/g,''),'base64');
+    if(!buffer.length) return;
+    storeInboxMediaFile(app,result.conversationId,result.messageId,buffer,{
+      mime:downloaded.mimetype || message?._data?.mimetype || '',
+      originalName:downloaded.filename || message?._data?.filename || '',
+      kind:result.mediaKind || ''
+    });
+    addLog(app,'inbox_midia_armazenada','Mídia nova armazenada localmente.',{conversa:result.conversationId,mensagem:result.messageId,tamanho:buffer.length});
+  }catch(error){
+    addLog(app,'inbox_midia_nao_armazenada','A mídia nova foi registrada, mas não pôde ser armazenada localmente.',{conversa:result.conversationId,mensagem:result.messageId,erro:error?.message || String(error)});
+  }
+}
+
 async function createClient(app){
   if(waState.client || waState.starting) return;
   ensureDir(authDir(app));
@@ -317,6 +397,7 @@ async function createClient(app){
     }
   });
   waState.client = client;
+  ensureWhatsAppProvider().connect(client);
 
   client.on('qr', async (qr) => {
     try {
@@ -328,10 +409,13 @@ async function createClient(app){
     }
   });
   client.on('authenticated', () => {
-    setWaState('autenticado', 'QR Code confirmado. Preparando a sessão...', { qrDataUrl: null });
+    setWaState('autenticado', 'QR Code confirmado. Preparando a sessão...', { qrDataUrl: null, starting:true });
+    armReadyWatchdog(app, client);
     addLog(app, 'whatsapp_autenticado', 'Sessão WhatsApp autenticada.');
   });
   client.on('ready', async () => {
+    clearReadyWatchdog();
+    waState.recoveryAttempts = 0;
     const info = client.info || {};
     const number = info.wid?.user || null;
     const name = info.pushname || null;
@@ -341,6 +425,13 @@ async function createClient(app){
     const data = loadAll(app);
     writeJson(app, 'config.json', { ...data.config, whatsappConectado: true, atualizadoEm: now(), version: MODULE_VERSION });
     addLog(app, 'whatsapp_conectado', 'WhatsApp conectado com sucesso.', { numero: number, nome: name });
+    try{
+      waState.syncing=true;
+      const sync=await syncInboxFromWhatsApp(app,client,{chatLimit:120,messageLimit:60,onMessage:cacheWhatsAppMessage});
+      waState.lastSyncAt=now();
+      addLog(app,'inbox_sincronizacao_concluida','Conversas recentes foram sincronizadas com o WhatsApp.',sync);
+    }catch(error){ addLog(app,'inbox_erro_sincronizacao','Falha ao sincronizar conversas recentes.',{erro:error.message}); }
+    finally{ waState.syncing=false; }
     try {
       const repair = await repairInboxIdentities(app, client);
       if(repair.migrated || repair.merged){
@@ -351,14 +442,31 @@ async function createClient(app){
     } catch(error){
       addLog(app, 'inbox_erro_migracao', 'Falha ao revisar identificadores antigos do Inbox.', { erro:error.message });
     }
+    try {
+      const names = await repairInboxContactNames(app, client);
+      if(names.updated) addLog(app, 'inbox_nomes_corrigidos', 'Nomes automáticos dos contatos foram revisados com base no chat remoto.', names);
+      if(names.unresolved) addLog(app, 'inbox_nomes_pendentes', 'Alguns contatos ainda aguardam um nome remoto confiável.', names);
+    } catch(error){
+      addLog(app, 'inbox_erro_nomes', 'Falha ao revisar nomes automáticos dos contatos.', { erro:error.message });
+    }
+    try {
+      const groups = await repairInboxGroupNames(app, client);
+      if(groups.updated) addLog(app, 'inbox_grupos_corrigidos', 'Títulos reais dos grupos foram atualizados.', groups);
+      if(groups.unresolved) addLog(app, 'inbox_grupos_pendentes', 'Alguns grupos ainda aguardam título real do WhatsApp.', groups);
+    } catch(error){
+      addLog(app, 'inbox_erro_grupos', 'Falha ao revisar nomes dos grupos.', { erro:error.message });
+    }
   });
   client.on('auth_failure', (message) => {
+    clearReadyWatchdog();
     setWaState('erro', 'Falha de autenticação. Será necessário conectar novamente.', { lastError: String(message), starting: false, initialized: false });
     addLog(app, 'whatsapp_auth_falhou', 'Falha na autenticação do WhatsApp.', { erro: String(message) });
   });
   client.on('disconnected', (reason) => {
+    clearReadyWatchdog();
     setWaState('desconectado', 'WhatsApp desconectado.', { connectedNumber: null, connectedName: null, initialized: false, starting: false });
     waState.client = null;
+    if(waState.provider) waState.provider.setClient(null);
     const data = loadAll(app);
     writeJson(app, 'config.json', { ...data.config, whatsappConectado: false, atualizadoEm: now(), version: MODULE_VERSION });
     addLog(app, 'whatsapp_desconectado', 'WhatsApp desconectado.', { motivo: String(reason || '') });
@@ -369,7 +477,9 @@ async function createClient(app){
   });
   client.on('message_create', async (message) => {
     try {
+      cacheWhatsAppMessage(message);
       const result = await registerWhatsAppMessage(app, message, client);
+      if(result?.saved && message?.hasMedia) persistMessageMedia(app,message,result);
       if(result?.saved){
         addLog(app, 'inbox_mensagem_registrada', result.direction === 'incoming' ? 'Mensagem recebida e registrada no Inbox.' : 'Mensagem enviada e registrada no Inbox.', {
           conversa: result.conversationId,
@@ -410,9 +520,11 @@ export async function initializeWhatsApp(app){
 }
 
 export async function shutdownWhatsApp(){
+  clearReadyWatchdog();
   if(!waState.client) return;
   try { await waState.client.destroy(); } catch { /* encerramento do painel */ }
   waState.client = null;
+  if(waState.provider) waState.provider.setClient(null);
   setWaState('desconectado', 'Cliente encerrado junto com o Painel Quality.', { initialized: false, starting: false });
 }
 
@@ -500,8 +612,7 @@ router.get('/', (req,res)=>{
   const commercialDashboard = getCommercialDashboard(req.app);
   const storageReport = getInboxStorageReport(req.app);
   const selectedConversation = inboxData.conversations.find(c => c.id === selectedConversationId) || null;
-  const selectedMessagesPage = selectedConversation ? getConversationMessagesPage(req.app, selectedConversation.id, { limit:50 }) : { messages:[], hasMore:false, total:0 };
-  const selectedMessages = selectedMessagesPage.messages;
+  const selectedMessages = selectedConversation ? getConversationMessages(req.app, selectedConversation.id) : [];
   const tab = safeText(req.query.tab || 'dashboard', 30);
   const editId = safeText(req.query.edit || '', 120);
   const blocoEdit = data.blocos.find(b => b.id === editId) || null;
@@ -520,8 +631,6 @@ router.get('/', (req,res)=>{
     inboxContacts: inboxData.contacts,
     selectedConversation,
     selectedMessages,
-    selectedMessagesHasMore:selectedMessagesPage.hasMore,
-    selectedMessagesTotal:selectedMessagesPage.total,
     inboxRevision: getInboxRevision(req.app, selectedConversation?.id || ''),
     settingsSection: safeText(req.query.section || 'geral', 30),
     ...data,
@@ -536,22 +645,6 @@ router.get('/inbox/state', (req,res)=>{
     res.json({ success:true, revision:getInboxRevision(req.app, conversationId) });
   } catch(error) {
     res.status(500).json({ success:false, message:error.message || 'Falha ao consultar o Inbox.' });
-  }
-});
-
-router.get('/inbox/messages', (req,res)=>{
-  try {
-    const conversationId=safeConversationId(req.query.conversation || '');
-    if(!conversationId) throw new Error('Conversa não identificada.');
-    const page=getConversationMessagesPage(req.app,conversationId,{
-      limit:safeNumber(req.query.limit,50,10,100),
-      before:safeText(req.query.before || '',180),
-      after:safeText(req.query.after || '',180)
-    });
-    res.set('Cache-Control','no-store');
-    res.json({success:true,...page});
-  } catch(error){
-    res.status(400).json({success:false,message:error.message || 'Falha ao carregar mensagens.'});
   }
 });
 
@@ -646,101 +739,189 @@ router.post('/inbox/enviar-anexo', (req,res)=>{
 function safeDownloadName(value='arquivo'){
   return safeText(value,180).replace(/[\\/:*?"<>|]+/g,'-').trim() || 'arquivo';
 }
-function mediaExtensionFromMime(mime=''){
-  const map={
-    'image/jpeg':'.jpg','image/png':'.png','image/webp':'.webp','image/gif':'.gif',
-    'audio/ogg':'.ogg','audio/mpeg':'.mp3','audio/mp4':'.m4a','audio/webm':'.webm','audio/wav':'.wav',
-    'video/mp4':'.mp4','video/webm':'.webm','application/pdf':'.pdf','text/plain':'.txt',
-    'application/zip':'.zip','application/msword':'.doc',
-    'application/vnd.openxmlformats-officedocument.wordprocessingml.document':'.docx',
-    'application/vnd.ms-excel':'.xls','application/vnd.openxmlformats-officedocument.spreadsheetml.sheet':'.xlsx'
-  };
-  return map[String(mime||'').toLowerCase()]||'';
+function messageIdCore(value=''){
+  const raw=String(value||'').trim();
+  const decoded=(()=>{ try{return decodeURIComponent(raw);}catch{return raw;} })();
+  const hexParts=decoded.split('_').filter(part=>/^[A-F0-9]{16,}$/i.test(part));
+  if(hexParts.length) return hexParts[0];
+  return decoded;
 }
-function decodedMediaBuffer(data=''){
-  let value=String(data||'').trim();
-  const dataUri=value.match(/^data:[^;,]+;base64,(.+)$/s);
-  if(dataUri) value=dataUri[1];
-  value=value.replace(/\s+/g,'');
-  if(!value) return Buffer.alloc(0);
-  const buffer=Buffer.from(value,'base64');
-  if(!buffer.length) return Buffer.alloc(0);
-  return buffer;
-}
-async function resolveRemoteMessage(messageId,conversationId=''){
-  if(!waState.client || waState.status !== 'conectado') throw new Error('Conecte o WhatsApp para visualizar esta mídia.');
-  let message=null;
-  if(typeof waState.client.getMessageById === 'function'){
-    try{ message=await waState.client.getMessageById(messageId); }catch{}
+function messageIdVariants(value='', conversation=null, savedMessage=null){
+  const raw=String(value||'').trim();
+  const decoded=(()=>{ try{return decodeURIComponent(raw);}catch{return raw;} })();
+  const core=messageIdCore(decoded);
+  const values=new Set([raw,decoded,core]);
+  for(const item of [...values]){
+    const parts=item.split('_');
+    if(parts.length>1) values.add(parts[parts.length-1]);
+    const colon=item.split(':');
+    if(colon.length>1) values.add(colon[colon.length-1]);
   }
-  if(message?.hasMedia) return message;
-
-  // Fallback seguro para versões em que getMessageById não encontra mensagens já paginadas.
+  if(conversation && savedMessage && core){
+    const fromMe=savedMessage.direction==='outgoing';
+    const remotes=[conversation.whatsappId, conversation.phone?`${conversation.phone}@c.us`:''].filter(Boolean);
+    for(const remote of remotes) values.add(`${fromMe}_${remote}_${core}`);
+  }
+  return [...values].filter(Boolean);
+}
+function whatsappMessageId(message){
+  return String(message?.id?._serialized || message?.id?.id || '');
+}
+function idsMatch(candidate, saved){
+  const left=messageIdVariants(candidate);
+  const right=messageIdVariants(saved);
+  const leftCore=messageIdCore(candidate);
+  const rightCore=messageIdCore(saved);
+  if(leftCore && rightCore && leftCore===rightCore) return true;
+  return left.some(a=>right.some(b=>a===b || (a.length>=16 && b.endsWith(a)) || (b.length>=16 && a.endsWith(b))));
+}
+function validBase64(value=''){
+  const text=String(value||'').replace(/\s+/g,'');
+  if(text.length<8 || text.length%4===1 || !/^[A-Za-z0-9+/]*={0,2}$/.test(text)) return false;
+  return true;
+}
+function sameChatIdentity(chatId='', conversation={}){
+  const id=String(chatId||'');
+  if(!id) return false;
+  if(id===String(conversation.whatsappId||'')) return true;
+  if(conversation.conversationType==='group'){
+    return id.replace(/\D/g,'')===String(conversation.whatsappId||'').replace(/\D/g,'');
+  }
+  const phone=String(conversation.phone||'').replace(/\D/g,'');
+  if(phone && id.endsWith('@c.us') && id.replace(/\D/g,'')===phone) return true;
+  return false;
+}
+async function candidateChatsForConversation(conversation){
+  const result=[];
+  const seen=new Set();
+  const add=chat=>{ const id=String(chat?.id?._serialized||chat?.id||''); if(chat && id && !seen.has(id)){seen.add(id);result.push(chat);} };
+  const ids=[conversation?.whatsappId];
+  if(conversation?.conversationType!=='group' && conversation?.phone){
+    ids.push(`${conversation.phone}@c.us`);
+    try{ const found=await waState.client.getNumberId(conversation.phone); if(found?._serialized) ids.push(found._serialized); }catch{}
+  }
+  for(const id of [...new Set(ids.filter(Boolean))]){
+    try{ add(await waState.client.getChatById(id)); }catch{}
+  }
   try{
-    const conversation=getInboxData(waState.app).conversations.find(item=>item.id===conversationId);
-    const chatId=conversation?.whatsappId;
-    if(chatId && typeof waState.client.getChatById==='function'){
-      const chat=await waState.client.getChatById(chatId);
-      if(chat && typeof chat.fetchMessages==='function'){
-        const recent=await chat.fetchMessages({limit:100});
-        message=(recent||[]).find(item=>(item?.id?._serialized||item?.id?.id||'')===messageId)||null;
+    const chats=await waState.client.getChats();
+    for(const chat of chats||[]){
+      const id=String(chat?.id?._serialized||'');
+      if(sameChatIdentity(id,conversation)){ add(chat); continue; }
+      if(conversation?.conversationType!=='group' && conversation?.phone){
+        try{
+          const contact=chat?.getContact ? await chat.getContact() : null;
+          const number=String(contact?.number||'').replace(/\D/g,'');
+          if(number && number===String(conversation.phone).replace(/\D/g,'')) add(chat);
+        }catch{}
       }
     }
   }catch{}
-  if(!message?.hasMedia || typeof message.downloadMedia !== 'function') throw new Error('A mídia não está mais disponível no WhatsApp.');
-  return message;
+  return result;
 }
-async function fetchInboxMediaFromWhatsApp(messageId,conversationId=''){
-  const message=await resolveRemoteMessage(messageId,conversationId);
+async function findInboxWhatsAppMessage(conversation, savedMessage){
+  if(!waState.client || waState.status!=='conectado') throw new Error('Conecte o WhatsApp para visualizar esta mídia.');
+  const messageId=String(savedMessage?.id || '');
+  for(const candidate of messageIdVariants(messageId,conversation,savedMessage)){
+    const cached=waState.messageCache.get(candidate) || waState.messageCache.get(messageIdCore(candidate));
+    if(cached?.hasMedia) return cached;
+  }
+
+  if(typeof waState.client.getMessageById==='function'){
+    for(const candidate of messageIdVariants(messageId,conversation,savedMessage)){
+      try{
+        const direct=await waState.client.getMessageById(candidate);
+        if(direct?.hasMedia) return direct;
+      }catch{}
+    }
+  }
+
+  const chats=await candidateChatsForConversation(conversation);
+  const savedTime=Date.parse(savedMessage?.timestamp || '');
+  let fallback=null;
+  let fallbackDistance=Infinity;
+  for(const chat of chats){
+    if(!chat?.fetchMessages) continue;
+    for(const limit of [100,300,800]){
+      let messages=[];
+      try{ messages=await chat.fetchMessages({limit}); }catch{ break; }
+      for(const item of messages||[]){
+        if(!item?.hasMedia) continue;
+        if(idsMatch(whatsappMessageId(item),messageId)) return item;
+        const itemTime=Number(item.timestamp)*1000;
+        const distance=Number.isFinite(savedTime) && Number.isFinite(itemTime) ? Math.abs(itemTime-savedTime) : Infinity;
+        const sameDirection=Boolean(item.fromMe)===(savedMessage?.direction==='outgoing');
+        const savedKind=String(savedMessage?.media?.kind||savedMessage?.type||'');
+        const itemKind=String(item.type||'');
+        const sameType=!savedKind || !itemKind || savedKind===itemKind || (savedKind==='document' && itemKind==='document');
+        if(sameDirection && sameType && distance<=30000 && distance<fallbackDistance){ fallback=item; fallbackDistance=distance; }
+      }
+      if(fallback || (messages||[]).length<limit) break;
+    }
+  }
+  return fallback;
+}
+async function fetchInboxMediaFromWhatsApp(conversation,savedMessage){
+  const message=await findInboxWhatsAppMessage(conversation,savedMessage);
+  if(!message) throw new Error('A mensagem desta mídia não foi encontrada no WhatsApp.');
+  if(!message.hasMedia || typeof message.downloadMedia!=='function') throw new Error('A mídia não está mais disponível no WhatsApp.');
   const downloaded=await message.downloadMedia();
-  if(!downloaded?.data) throw new Error('O WhatsApp não retornou o conteúdo da mídia.');
-  const mime=safeText(downloaded.mimetype || message?._data?.mimetype || 'application/octet-stream',120).toLowerCase();
-  const buffer=decodedMediaBuffer(downloaded.data);
+  if(!downloaded?.data || !validBase64(downloaded.data)) throw new Error('O WhatsApp não retornou um arquivo de mídia válido.');
+  const buffer=Buffer.from(String(downloaded.data).replace(/\s+/g,''),'base64');
   if(!buffer.length) throw new Error('O WhatsApp retornou uma mídia vazia.');
-  let filename=safeDownloadName(downloaded.filename || message?._data?.filename || 'arquivo');
-  if(!path.extname(filename)) filename+=mediaExtensionFromMime(mime);
-  return {buffer,mime,filename};
+  return {
+    buffer,
+    mime:safeText(downloaded.mimetype || message?._data?.mimetype || 'application/octet-stream',120),
+    filename:safeDownloadName(downloaded.filename || message?._data?.filename || savedMessage?.media?.originalName || 'arquivo')
+  };
 }
-function mediaUnavailableHtml(message){
-  const text=safeText(message||'Esta mídia não está mais disponível.',300);
-  return `<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Mídia indisponível</title><style>body{font-family:system-ui,sans-serif;background:#f8fafc;color:#0f172a;display:grid;place-items:center;min-height:100vh;margin:0}.box{max-width:520px;background:#fff;border:1px solid #e2e8f0;border-radius:16px;padding:28px;box-shadow:0 14px 35px rgba(15,23,42,.08)}h1{font-size:20px;margin:0 0 10px}p{color:#64748b;line-height:1.5;margin:0}</style></head><body><div class="box"><h1>📎 Mídia indisponível</h1><p>${text}</p></div></body></html>`;
+function mediaErrorPage(message){
+  const safe=String(message||'Mídia não encontrada.').replace(/[&<>"']/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
+  return `<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Mídia indisponível</title><style>body{font-family:Arial,sans-serif;background:#f8fafc;color:#0f172a;display:grid;place-items:center;min-height:100vh;margin:0}.box{max-width:560px;background:#fff;border:1px solid #e2e8f0;border-radius:16px;padding:28px;text-align:center;box-shadow:0 12px 30px rgba(15,23,42,.08)}h1{font-size:22px;margin:0 0 10px}p{color:#64748b;line-height:1.5}.btn{display:inline-block;margin-top:10px;padding:10px 16px;border-radius:10px;background:#2563eb;color:#fff;text-decoration:none;font-weight:700}</style></head><body><div class="box"><h1>📎 Mídia indisponível</h1><p>${safe}</p><a class="btn" href="javascript:window.close()">Fechar</a></div></body></html>`;
 }
 async function serveInboxMedia(req,res){
-  try{
-    const download=req.query.download==='1';
-    const conversationId=safeConversationId(req.query.conversation || req.params.conversationId || '');
-    const messageId=safeText(req.query.message || req.params.messageId || '',180);
-    if(!conversationId || !messageId) throw new Error('Mídia não identificada.');
+  const conversationId=safeConversationId(req.params.conversationId || req.query.conversation);
+  const messageId=safeText(req.params.messageId || req.query.message,180);
+  const download=req.query.download==='1';
+  if(!conversationId || !messageId) return res.status(400).type('html').send(mediaErrorPage('Conversa ou mensagem não identificada.'));
 
+  try{
     const found=getInboxMediaFile(req.app,conversationId,messageId);
-    res.setHeader('X-Content-Type-Options','nosniff');
-    res.setHeader('Cache-Control','private, max-age=300');
     if(found){
-      if(found.media?.mime) res.setHeader('Content-Type',found.media.mime);
+      res.setHeader('X-Content-Type-Options','nosniff');
+      res.setHeader('Cache-Control','private, max-age=300');
+      if(found.media?.mime) res.type(found.media.mime);
       if(download) return res.download(found.absolute,safeDownloadName(found.media?.originalName||found.media?.filename||'arquivo'));
       return res.sendFile(found.absolute);
     }
 
-    const savedMessage=getConversationMessages(req.app,conversationId).find(item=>item.id===messageId);
-    if(!savedMessage?.hasMedia) throw new Error('Mídia não encontrada.');
-    const remote=await fetchInboxMediaFromWhatsApp(messageId,conversationId);
-    let preferredName=safeDownloadName(savedMessage.media?.originalName || remote.filename || 'arquivo');
-    if(!path.extname(preferredName)) preferredName+=mediaExtensionFromMime(remote.mime || savedMessage.media?.mime);
+    const inboxData=getInboxData(req.app);
+    const conversation=inboxData.conversations.find(item=>item.id===conversationId);
+    if(!conversation) throw new Error('Conversa não encontrada no Inbox.');
+    const savedMessage=getConversationMessages(req.app,conversationId).find(item=>item.id===messageId || idsMatch(item.id,messageId));
+    if(!savedMessage?.hasMedia) throw new Error('Esta mensagem não possui mídia registrada.');
+
+    const remote=await fetchInboxMediaFromWhatsApp(conversation,savedMessage);
+    const cached=storeInboxMediaFile(req.app,conversationId,savedMessage.id,remote.buffer,{ mime:remote.mime, originalName:savedMessage.media?.originalName || remote.filename, kind:savedMessage.media?.kind });
+    const preferredName=safeDownloadName(savedMessage.media?.originalName || remote.filename || 'arquivo');
     const mime=remote.mime || savedMessage.media?.mime || 'application/octet-stream';
+
     res.status(200);
+    res.setHeader('X-Content-Type-Options','nosniff');
+    res.setHeader('Cache-Control','private, no-store');
     res.setHeader('Content-Type',mime);
     res.setHeader('Content-Length',String(remote.buffer.length));
-    res.setHeader('Content-Disposition',`${download?'attachment':'inline'}; filename="${preferredName.replace(/["\\]/g,'-')}"; filename*=UTF-8''${encodeURIComponent(preferredName)}`);
+    res.setHeader('Content-Disposition',`${download?'attachment':'inline'}; filename*=UTF-8''${encodeURIComponent(preferredName)}`);
     return res.end(remote.buffer);
   }catch(error){
-    const unavailable=/não está mais disponível|não retornou|vazia|não encontrada/i.test(error.message||'');
-    const status=/Conecte o WhatsApp/.test(error.message||'')?503:(unavailable?410:404);
-    if(req.query.download==='1') return res.status(status).type('text/plain; charset=utf-8').send(error.message||'Mídia não encontrada.');
-    return res.status(status).type('html; charset=utf-8').send(mediaUnavailableHtml(error.message));
+    if(res.headersSent){ try{return res.end();}catch{return;} }
+    const text=error?.message || 'Mídia não encontrada.';
+    const status=/Conecte o WhatsApp/.test(text)?503:/não está mais disponível|não foi encontrada|não retornou/.test(text)?410:404;
+    return res.status(status).type('html').send(mediaErrorPage(text));
   }
 }
-router.get('/inbox/media',serveInboxMedia);
 router.get('/inbox/media/:conversationId/:messageId',serveInboxMedia);
+router.get('/inbox/media',serveInboxMedia);
 
 router.post('/inbox/executar-bloco', async (req,res)=>{
   try {
@@ -776,6 +957,37 @@ router.post('/inbox/executar-bloco', async (req,res)=>{
       erro:error.message
     });
     res.status(400).json({ success:false, message:error.message || 'Falha ao executar o bloco.' });
+  }
+});
+
+
+router.get('/whatsapp/provider/status', (req,res) => {
+  try{
+    const provider=ensureWhatsAppProvider();
+    return res.json({ success:true, provider:provider.status() });
+  }catch(error){
+    return res.status(500).json({ success:false, error:error?.message || String(error) });
+  }
+});
+
+router.post('/whatsapp/provider/testar-chats-safe', async (req,res) => {
+  try{
+    if(!waState.client || waState.status!=='conectado'){
+      return res.status(409).json({ success:false, error:'Conecte o WhatsApp antes de testar o Provider.' });
+    }
+    const provider=ensureWhatsAppProvider();
+    const result=await provider.getChatsSafe();
+    addLog(req.app,'provider_teste_concluido','Teste manual do WhatsApp Provider concluído.',result.stats);
+    return res.json({
+      success:true,
+      provider:provider.status(),
+      stats:result.stats,
+      errors:result.errors,
+      chats:result.chats
+    });
+  }catch(error){
+    addLog(req.app,'provider_teste_falhou','Falha no teste manual do WhatsApp Provider.',{erro:error?.message || String(error)});
+    return res.status(500).json({ success:false, error:error?.message || String(error) });
   }
 });
 
@@ -952,15 +1164,8 @@ router.post('/armazenamento/limpar', (req,res)=>{
     const action=safeText(req.body?.action,30);
     const allowed=new Set(['orphans','groups','older30','older90','all_media','empty_dirs']);
     if(!allowed.has(action)) throw new Error('Ação de limpeza inválida.');
-    const startedAt=process.hrtime.bigint();
     const result=cleanInboxStorage(req.app,action);
-    const elapsedSeconds=Number(process.hrtime.bigint()-startedAt)/1e9;
-    addLog(req.app,'inbox_armazenamento_limpeza','Limpeza manual do armazenamento do Inbox executada.',{...result,elapsedSeconds});
-    console.log('\n🧹 Central de Armazenamento');
-    console.log('Limpeza concluída');
-    console.log(`Arquivos removidos: ${result.removedFiles || 0}`);
-    console.log(`Espaço liberado: ${result.freedLabel || '0 B'}`);
-    console.log(`Tempo: ${elapsedSeconds.toFixed(2).replace('.',',')} s\n`);
+    addLog(req.app,'inbox_armazenamento_limpeza','Limpeza manual do armazenamento do Inbox executada.',result);
     const details=result.removedFiles ? `${result.removedFiles} arquivo(s) removido(s), ${result.freedLabel} liberados.` : `${result.removedDirs||0} pasta(s) vazia(s) removida(s).`;
     flash(res,'/automacao-whatsapp?tab=configuracoes&section=armazenamento',`🧹 Limpeza concluída: ${details}`);
   } catch(error){

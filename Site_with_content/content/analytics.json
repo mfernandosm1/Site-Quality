@@ -1,17 +1,17 @@
 {
   "version": "8.4.0-analytics-professional",
   "createdAt": "2026-07-08T00:26:21.803Z",
-  "updatedAt": "2026-07-15T18:20:12.289Z",
+  "updatedAt": "2026-07-16T23:32:22.696Z",
   "source": "local-json",
   "counters": {
-    "product_view": 38,
+    "product_view": 43,
     "favorite": 2,
     "favorite_click": 0,
     "whatsapp_click": 5,
-    "category_view": 55,
+    "category_view": 58,
     "share_click": 0,
     "search": 6,
-    "page_view": 152
+    "page_view": 161
   },
   "products": {
     "mini-game-portatil-400-jogos": {
@@ -217,11 +217,11 @@
       "name": "Iphone 17 pro 256gb novo lacrado",
       "image": "/images/Iphone 17 pro azul.jpeg",
       "url": "http://localhost:3000/produto/iphone-17-pro-256gb-novo-lacrado/",
-      "views": 3,
+      "views": 4,
       "favorites": 0,
       "whatsapp": 0,
       "shares": 0,
-      "lastAt": "2026-07-15T16:16:47.009Z"
+      "lastAt": "2026-07-15T18:40:31.547Z"
     },
     "iphone-17-256gb-novo-lacrado": {
       "slug": "iphone-17-256gb-novo-lacrado",
@@ -239,11 +239,33 @@
       "name": "Iphone 17 pro max 256gb novo lacrado",
       "image": "/images/iphone 17 pro max laranja.jpeg",
       "url": "http://localhost:3000/produto/iphone-17-pro-max-256gb-novo-lacrado/",
-      "views": 2,
+      "views": 4,
       "favorites": 0,
       "whatsapp": 0,
       "shares": 0,
-      "lastAt": "2026-07-15T18:20:12.288Z"
+      "lastAt": "2026-07-15T21:01:27.976Z"
+    },
+    "samsung-galaxy-s26-ultra-5g-256gb": {
+      "slug": "samsung-galaxy-s26-ultra-5g-256gb",
+      "name": "Samsung Galaxy S26 Ultra 5G 256gb 12gb ram",
+      "image": "/images/s26ultra.jpg",
+      "url": "http://localhost:3000/produto/samsung-galaxy-s26-ultra-5g-256gb/",
+      "views": 1,
+      "favorites": 0,
+      "whatsapp": 0,
+      "shares": 0,
+      "lastAt": "2026-07-16T23:26:06.931Z"
+    },
+    "apple-ipad-11-128gb-11-polegadas": {
+      "slug": "apple-ipad-11-128gb-11-polegadas",
+      "name": "Apple iPad 11 128gb - 11'' polegadas",
+      "image": "/images/Ipad 11 rosa.jpeg",
+      "url": "http://localhost:3000/produto/apple-ipad-11-128gb-11-polegadas/",
+      "views": 1,
+      "favorites": 0,
+      "whatsapp": 0,
+      "shares": 0,
+      "lastAt": "2026-07-16T23:32:22.696Z"
     }
   },
   "categories": {
@@ -265,15 +287,15 @@
       "slug": "acessorios",
       "name": "acessorios",
       "url": "http://localhost:3000/acessorios/",
-      "views": 15,
-      "lastAt": "2026-07-12T17:06:50.741Z"
+      "views": 16,
+      "lastAt": "2026-07-16T23:26:08.706Z"
     },
     "eletronicos": {
       "slug": "eletronicos",
       "name": "eletronicos",
       "url": "http://localhost:3000/eletronicos/",
-      "views": 19,
-      "lastAt": "2026-07-14T00:28:18.928Z"
+      "views": 21,
+      "lastAt": "2026-07-16T23:32:19.326Z"
     }
   },
   "searches": {
@@ -296,8 +318,8 @@
   "pages": {
     "http://localhost:3000/site/view/index.html": {
       "url": "http://localhost:3000/site/view/index.html",
-      "views": 61,
-      "lastAt": "2026-07-15T18:15:31.609Z"
+      "views": 62,
+      "lastAt": "2026-07-16T23:25:53.229Z"
     },
     "http://localhost:3000/smartphones/": {
       "url": "http://localhost:3000/smartphones/",
@@ -321,13 +343,13 @@
     },
     "http://localhost:3000/acessorios/": {
       "url": "http://localhost:3000/acessorios/",
-      "views": 30,
-      "lastAt": "2026-07-12T17:06:50.739Z"
+      "views": 32,
+      "lastAt": "2026-07-16T23:26:08.706Z"
     },
     "http://localhost:3000/eletronicos/": {
       "url": "http://localhost:3000/eletronicos/",
-      "views": 38,
-      "lastAt": "2026-07-14T00:28:18.927Z"
+      "views": 42,
+      "lastAt": "2026-07-16T23:32:19.325Z"
     },
     "http://localhost:3000/produto/microfone-lapela-celular-bluetooth-tipo-c/": {
       "url": "http://localhost:3000/produto/microfone-lapela-celular-bluetooth-tipo-c/",
@@ -406,8 +428,8 @@
     },
     "http://localhost:3000/produto/iphone-17-pro-256gb-novo-lacrado/": {
       "url": "http://localhost:3000/produto/iphone-17-pro-256gb-novo-lacrado/",
-      "views": 6,
-      "lastAt": "2026-07-15T16:16:47.009Z"
+      "views": 8,
+      "lastAt": "2026-07-15T18:40:31.542Z"
     },
     "http://localhost:3000/produto/iphone-17-256gb-novo-lacrado/": {
       "url": "http://localhost:3000/produto/iphone-17-256gb-novo-lacrado/",
@@ -416,8 +438,18 @@
     },
     "http://localhost:3000/produto/iphone-17-pro-max-256gb-novo-lacrado/": {
       "url": "http://localhost:3000/produto/iphone-17-pro-max-256gb-novo-lacrado/",
-      "views": 4,
-      "lastAt": "2026-07-15T18:20:12.288Z"
+      "views": 8,
+      "lastAt": "2026-07-15T21:01:27.975Z"
+    },
+    "http://localhost:3000/produto/samsung-galaxy-s26-ultra-5g-256gb/": {
+      "url": "http://localhost:3000/produto/samsung-galaxy-s26-ultra-5g-256gb/",
+      "views": 2,
+      "lastAt": "2026-07-16T23:26:06.929Z"
+    },
+    "http://localhost:3000/produto/apple-ipad-11-128gb-11-polegadas/": {
+      "url": "http://localhost:3000/produto/apple-ipad-11-128gb-11-polegadas/",
+      "views": 2,
+      "lastAt": "2026-07-16T23:32:22.696Z"
     }
   },
   "devices": {},
@@ -3400,6 +3432,208 @@
       "product": {
         "slug": "iphone-17-pro-max-256gb-novo-lacrado",
         "name": "Iphone 17 pro max 256gb novo lacrado"
+      },
+      "term": ""
+    },
+    {
+      "at": "2026-07-15T18:26:45.955Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/produto/iphone-17-pro-max-256gb-novo-lacrado/",
+      "referrer": "http://localhost:3000/smartphones/",
+      "device": "desktop",
+      "viewport": "1517x665",
+      "language": "pt-PT",
+      "term": ""
+    },
+    {
+      "at": "2026-07-15T18:26:46.791Z",
+      "type": "product_view",
+      "url": "http://localhost:3000/produto/iphone-17-pro-max-256gb-novo-lacrado/",
+      "referrer": "http://localhost:3000/smartphones/",
+      "device": "desktop",
+      "viewport": "1517x665",
+      "language": "pt-PT",
+      "product": {
+        "slug": "iphone-17-pro-max-256gb-novo-lacrado",
+        "name": "Iphone 17 pro max 256gb novo lacrado"
+      },
+      "term": ""
+    },
+    {
+      "at": "2026-07-15T18:40:30.651Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/produto/iphone-17-pro-256gb-novo-lacrado/",
+      "referrer": "http://localhost:3000/smartphones/",
+      "device": "desktop",
+      "viewport": "1517x665",
+      "language": "pt-PT",
+      "term": ""
+    },
+    {
+      "at": "2026-07-15T18:40:31.547Z",
+      "type": "product_view",
+      "url": "http://localhost:3000/produto/iphone-17-pro-256gb-novo-lacrado/",
+      "referrer": "http://localhost:3000/smartphones/",
+      "device": "desktop",
+      "viewport": "1517x665",
+      "language": "pt-PT",
+      "product": {
+        "slug": "iphone-17-pro-256gb-novo-lacrado",
+        "name": "Iphone 17 pro 256gb novo lacrado"
+      },
+      "term": ""
+    },
+    {
+      "at": "2026-07-15T21:01:26.550Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/produto/iphone-17-pro-max-256gb-novo-lacrado/",
+      "referrer": "http://localhost:3000/smartphones/",
+      "device": "desktop",
+      "viewport": "1821x798",
+      "language": "pt-PT",
+      "term": ""
+    },
+    {
+      "at": "2026-07-15T21:01:27.976Z",
+      "type": "product_view",
+      "url": "http://localhost:3000/produto/iphone-17-pro-max-256gb-novo-lacrado/",
+      "referrer": "http://localhost:3000/smartphones/",
+      "device": "desktop",
+      "viewport": "1821x798",
+      "language": "pt-PT",
+      "product": {
+        "slug": "iphone-17-pro-max-256gb-novo-lacrado",
+        "name": "Iphone 17 pro max 256gb novo lacrado"
+      },
+      "term": ""
+    },
+    {
+      "at": "2026-07-16T23:25:53.229Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/site/view/index.html",
+      "referrer": "http://localhost:3000/produtos",
+      "device": "desktop",
+      "viewport": "2049x898",
+      "language": "pt-PT",
+      "term": ""
+    },
+    {
+      "at": "2026-07-16T23:26:06.019Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/produto/samsung-galaxy-s26-ultra-5g-256gb/",
+      "referrer": "http://localhost:3000/site/view/index.html",
+      "device": "desktop",
+      "viewport": "2049x898",
+      "language": "pt-PT",
+      "term": ""
+    },
+    {
+      "at": "2026-07-16T23:26:06.931Z",
+      "type": "product_view",
+      "url": "http://localhost:3000/produto/samsung-galaxy-s26-ultra-5g-256gb/",
+      "referrer": "http://localhost:3000/site/view/index.html",
+      "device": "desktop",
+      "viewport": "2049x898",
+      "language": "pt-PT",
+      "product": {
+        "slug": "samsung-galaxy-s26-ultra-5g-256gb",
+        "name": "Samsung Galaxy S26 Ultra 5G 256gb 12gb ram"
+      },
+      "term": ""
+    },
+    {
+      "at": "2026-07-16T23:26:08.698Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/acessorios/",
+      "referrer": "http://localhost:3000/produto/samsung-galaxy-s26-ultra-5g-256gb/",
+      "device": "desktop",
+      "viewport": "2049x898",
+      "language": "pt-PT",
+      "term": ""
+    },
+    {
+      "at": "2026-07-16T23:26:08.706Z",
+      "type": "category_view",
+      "url": "http://localhost:3000/acessorios/",
+      "referrer": "http://localhost:3000/produto/samsung-galaxy-s26-ultra-5g-256gb/",
+      "device": "desktop",
+      "viewport": "2049x898",
+      "language": "pt-PT",
+      "category": {
+        "slug": "acessorios",
+        "name": "acessorios"
+      },
+      "term": ""
+    },
+    {
+      "at": "2026-07-16T23:26:25.491Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/eletronicos/",
+      "referrer": "http://localhost:3000/acessorios/",
+      "device": "desktop",
+      "viewport": "2049x898",
+      "language": "pt-PT",
+      "term": ""
+    },
+    {
+      "at": "2026-07-16T23:26:25.498Z",
+      "type": "category_view",
+      "url": "http://localhost:3000/eletronicos/",
+      "referrer": "http://localhost:3000/acessorios/",
+      "device": "desktop",
+      "viewport": "2049x898",
+      "language": "pt-PT",
+      "category": {
+        "slug": "eletronicos",
+        "name": "eletronicos"
+      },
+      "term": ""
+    },
+    {
+      "at": "2026-07-16T23:32:19.318Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/eletronicos/",
+      "referrer": "http://localhost:3000/acessorios/",
+      "device": "desktop",
+      "viewport": "1821x798",
+      "language": "pt-PT",
+      "term": ""
+    },
+    {
+      "at": "2026-07-16T23:32:19.326Z",
+      "type": "category_view",
+      "url": "http://localhost:3000/eletronicos/",
+      "referrer": "http://localhost:3000/acessorios/",
+      "device": "desktop",
+      "viewport": "1821x798",
+      "language": "pt-PT",
+      "category": {
+        "slug": "eletronicos",
+        "name": "eletronicos"
+      },
+      "term": ""
+    },
+    {
+      "at": "2026-07-16T23:32:21.796Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/produto/apple-ipad-11-128gb-11-polegadas/",
+      "referrer": "http://localhost:3000/eletronicos/",
+      "device": "desktop",
+      "viewport": "1821x798",
+      "language": "pt-PT",
+      "term": ""
+    },
+    {
+      "at": "2026-07-16T23:32:22.696Z",
+      "type": "product_view",
+      "url": "http://localhost:3000/produto/apple-ipad-11-128gb-11-polegadas/",
+      "referrer": "http://localhost:3000/eletronicos/",
+      "device": "desktop",
+      "viewport": "1821x798",
+      "language": "pt-PT",
+      "product": {
+        "slug": "apple-ipad-11-128gb-11-polegadas",
+        "name": "Apple iPad 11 128gb - 11'' polegadas"
       },
       "term": ""
     }

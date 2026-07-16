@@ -145,29 +145,6 @@ export function getConversationMessages(app, conversationId){
   return listFrom(data,'messages').slice().sort((a,b)=>String(a.timestamp||'').localeCompare(String(b.timestamp||'')));
 }
 
-export function getConversationMessagesPage(app, conversationId, options={}){
-  const messages = getConversationMessages(app, conversationId);
-  const limit = Math.min(100, Math.max(10, Number(options.limit) || 50));
-  const before = safeText(options.before || '', 180);
-  const after = safeText(options.after || '', 180);
-  let end = messages.length;
-  let start = 0;
-
-  if(after){
-    const index = messages.findIndex(item => item.id === after);
-    start = index >= 0 ? index + 1 : Math.max(0, messages.length - limit);
-    const page = messages.slice(start, start + limit);
-    return { messages:page, hasMore:start + page.length < messages.length, total:messages.length };
-  }
-
-  if(before){
-    const index = messages.findIndex(item => item.id === before);
-    end = index >= 0 ? index : messages.length;
-  }
-  start = Math.max(0, end - limit);
-  return { messages:messages.slice(start,end), hasMore:start > 0, total:messages.length };
-}
-
 export function getInboxSummary(app){
   const data = getInboxData(app);
   const conversations = data.conversations.filter(c => c.conversationType !== 'group');
@@ -229,17 +206,14 @@ export function getInboxRevision(app, conversationId=''){
   const { conversations } = getInboxData(app);
   const selected = conversations.find(c => c.id === String(conversationId || ''));
   const messages = selected ? getConversationMessages(app, selected.id) : [];
-  const listRevision = [
+  return [
     conversations.length,
     conversations[0]?.lastMessageAt || '',
-    conversations.reduce((sum,c)=>sum + Number(c.unreadCount || 0),0)
-  ].join('|');
-  const conversationRevision = [
+    conversations.reduce((sum,c)=>sum + Number(c.unreadCount || 0),0),
     selected?.updatedAt || '',
     messages.length,
     messages[messages.length-1]?.id || ''
   ].join('|');
-  return { listRevision, conversationRevision, lastMessageId:messages[messages.length-1]?.id || '', totalMessages:messages.length };
 }
 
 async function contactFromChat(msg){
@@ -267,6 +241,57 @@ async function lidMappings(client, ids=[]){
 
 function mappingPhone(mapping){ return normalizePhone(mapping?.pn || mapping?.phone || mapping?.number || ''); }
 function mappingLid(mapping){ return lidKey(mapping?.lid || mapping?.id || ''); }
+function trustworthyContactName(contact, chat, ownName=''){
+  const candidates=[chat?.name, chat?.formattedTitle, contact?.pushname, contact?.name, contact?.shortName]
+    .map(value=>safeText(value,160)).filter(Boolean);
+  return candidates.find(name=>!ownName || name.toLocaleLowerCase('pt-BR')!==String(ownName).toLocaleLowerCase('pt-BR')) || '';
+}
+
+async function browserChatSnapshots(client){
+  try{
+    const page=client?.pupPage;
+    if(!page?.evaluate) return [];
+    const result=await page.evaluate(() => {
+      const store=window.Store;
+      const models=store?.Chat?.getModelsArray ? store.Chat.getModelsArray() : [];
+      return (models || []).map(chat => {
+        const id=chat?.id?._serialized || chat?.id?.toString?.() || '';
+        const contact=chat?.contact || {};
+        return {
+          id,
+          isGroup:Boolean(chat?.isGroup || String(id).endsWith('@g.us')),
+          name:String(chat?.name || chat?.formattedTitle || chat?.groupMetadata?.subject || ''),
+          formattedTitle:String(chat?.formattedTitle || ''),
+          subject:String(chat?.groupMetadata?.subject || ''),
+          unreadCount:Number(chat?.unreadCount || 0),
+          timestamp:Number(chat?.t || chat?.timestamp || 0),
+          participantCount:Array.isArray(chat?.groupMetadata?.participants) ? chat.groupMetadata.participants.length : null,
+          contactNumber:String(contact?.number || ''),
+          contactId:String(contact?.id?._serialized || ''),
+          contactName:String(contact?.name || contact?.pushname || contact?.shortName || '')
+        };
+      }).filter(item => item.id && item.id !== 'status@broadcast');
+    });
+    return Array.isArray(result) ? result : [];
+  }catch{return [];}
+}
+
+async function getChatCatalog(client){
+  try{
+    const chats=await client.getChats();
+    if(Array.isArray(chats) && chats.length) return { chats, snapshots:[] };
+  }catch{}
+  const snapshots=await browserChatSnapshots(client);
+  return { chats:[], snapshots };
+}
+
+function canonicalIncomingMessageId(msg, rawChatId, fromMe){
+  const serialized=safeText(msg?.id?._serialized || '',180);
+  if(serialized) return serialized;
+  const short=safeText(msg?.id?.id || '',100);
+  if(!short) return '';
+  return `${fromMe}_${rawChatId}_${short}`;
+}
 
 async function resolvePhone(client, msg, chatId){
   const { chat, contact } = await contactFromChat(msg);
@@ -427,34 +452,53 @@ export async function repairInboxIdentities(app, client){
   return { migrated, merged, unresolved:conversations.filter(c=>!c.phoneResolved).length };
 }
 
-export async function registerWhatsAppMessage(app, msg, client=null){
+export async function registerWhatsAppMessage(app, msg, client=null, options={}){
   const p = ensureInboxStorage(app);
-  const id = safeText(msg?.id?._serialized || msg?.id?.id || '', 180);
-  if(!id) return { ignored:true, reason:'sem_id' };
   const fromMe = Boolean(msg.fromMe);
-  const rawChatId = fromMe ? String(msg.to || '') : String(msg.from || '');
+  const forcedChat=options?.chatOverride || null;
+  const forcedChatId=serializedId(forcedChat?.id);
+  const rawChatId = forcedChatId || (fromMe ? String(msg.to || '') : String(msg.from || ''));
   if(!rawChatId || rawChatId === 'status@broadcast') return { ignored:true, reason:'chat_nao_suportado' };
+  const id = canonicalIncomingMessageId(msg,rawChatId,fromMe);
+  if(!id) return { ignored:true, reason:'sem_id' };
 
-  const group = isGroup(rawChatId);
+  const group = Boolean(forcedChat?.isGroup) || isGroup(rawChatId);
   let phone='', chatId=rawChatId, conversationId='', resolved=null, chat=null, whatsappName='', participantCount=null;
   if(group){
     conversationId = groupConversationId(rawChatId);
     if(!conversationId) return { ignored:true, reason:'sem_identificador', whatsappId:rawChatId };
-    try { chat = await msg.getChat(); } catch {}
-    whatsappName = safeText(chat?.name || chat?.formattedTitle || msg?._data?.notifyName || 'Grupo do WhatsApp',160);
+    chat=forcedChat;
+    if(!chat){ try { chat = await msg.getChat(); } catch {} }
+    whatsappName = safeText(chat?.name || chat?.formattedTitle || '',160);
     participantCount = Array.isArray(chat?.participants) ? chat.participants.length : null;
   } else {
-    resolved = await resolvePhone(client,msg,rawChatId);
+    if(forcedChat){
+      let remoteContact=null;
+      try { if(forcedChat.getContact) remoteContact=await forcedChat.getContact(); } catch {}
+      const actualChatId=serializedId(forcedChat.id) || rawChatId;
+      let resolvedPhone='';
+      for(const candidate of [remoteContact?.number,serializedId(remoteContact?.id),actualChatId]){
+        resolvedPhone=normalizePhone(candidate); if(resolvedPhone) break;
+      }
+      if(!resolvedPhone && isLid(actualChatId)){
+        const mappings=await lidMappings(client,[actualChatId]);
+        resolvedPhone=mappingPhone(mappings.find(item=>mappingLid(item)===lidKey(actualChatId)) || mappings[0]);
+      }
+      resolved={phone:resolvedPhone || idDigits(actualChatId),resolved:Boolean(resolvedPhone),contact:remoteContact,chat:forcedChat,whatsappId:actualChatId};
+    } else resolved = await resolvePhone(client,msg,rawChatId);
     if(!resolved.phone) return { ignored:true, reason:'sem_identificador', whatsappId:resolved.whatsappId };
     phone = resolved.phone;
     chatId = resolved.whatsappId || rawChatId;
     conversationId = phone;
-    whatsappName = safeText(resolved.contact?.pushname || resolved.contact?.name || resolved.contact?.shortName || msg?._data?.notifyName || phone,160);
+    const ownName=safeText(client?.info?.pushname || '',160);
+    whatsappName = trustworthyContactName(resolved.contact,resolved.chat,ownName) || (!fromMe ? safeText(msg?._data?.notifyName || '',160) : '');
   }
 
   const timestamp = msg.timestamp ? new Date(Number(msg.timestamp)*1000).toISOString() : now();
-  const text = safeText(msg.body || '',6000);
-  const type = safeText(msg.type || 'chat',40);
+  const rawType = safeText(msg.type || 'chat',40);
+  const isCallNotice = rawType === 'e2e_notification' || rawType === 'call_log';
+  const type = isCallNotice ? 'call_notification' : rawType;
+  const text = isCallNotice ? '📞 Chamada pelo WhatsApp' : safeText(msg.body || '',6000);
   const conversationsData = readJson(p.conversationsFile,{version:4,conversations:[]});
   const conversations = listFrom(conversationsData,'conversations');
   let conversation = conversations.find(c => c.id === conversationId || (group && c.whatsappId === rawChatId));
@@ -522,7 +566,7 @@ export async function registerWhatsAppMessage(app, msg, client=null){
     }
   } else {
     conversation.lastIncomingAt=timestamp;
-    conversation.unreadCount=Number(conversation.unreadCount||0)+1;
+    if(!options?.historical) conversation.unreadCount=Number(conversation.unreadCount||0)+1;
     if(!group){
       if(!conversation.awaitingResponse) conversation.waitingSince=timestamp;
       conversation.awaitingResponse=true;
@@ -547,8 +591,150 @@ export async function registerWhatsAppMessage(app, msg, client=null){
     saved:true, conversationId:conversation.id, conversationType:group?'group':'contact',
     direction:fromMe?'outgoing':'incoming', phone:conversation.phone,
     phoneResolved:conversation.phoneResolved, name:conversation.name,
-    preview:text || `[${type}]`, authorName
+    preview:text || `[${type}]`, authorName, messageId:id, mediaKind:media?.kind || ''
   };
+}
+
+export async function repairInboxContactNames(app, client){
+  const p=ensureInboxStorage(app);
+  const data=readJson(p.conversationsFile,{version:4,conversations:[]});
+  const conversations=listFrom(data,'conversations');
+  const contacts=conversations.filter(c=>c.conversationType!=='group' && !isGroup(c.whatsappId));
+  if(!client || !contacts.length) return {updated:0,unresolved:contacts.length,total:contacts.length};
+  const ownName=safeText(client?.info?.pushname || '',160);
+  const catalog=await getChatCatalog(client);
+  const byId=new Map((catalog.chats||[]).map(chat=>[serializedId(chat?.id),chat]));
+  const snapshots=catalog.snapshots||[];
+  const snapById=new Map(snapshots.map(item=>[item.id,item]));
+  let updated=0, unresolved=0;
+  for(const conversation of contacts){
+    if(conversation.nameEdited) continue;
+    let realName='';
+    let chat=byId.get(conversation.whatsappId) || byId.get(`${conversation.phone}@c.us`) || null;
+    if(!chat && conversation.whatsappId){ try{ chat=await client.getChatById(conversation.whatsappId); }catch{} }
+    if(chat){
+      let contact=null; try{ contact=chat.getContact?await chat.getContact():null; }catch{}
+      realName=trustworthyContactName(contact,chat,ownName);
+    }
+    if(!realName){
+      const snap=snapById.get(conversation.whatsappId) || snapById.get(`${conversation.phone}@c.us`) || snapshots.find(item=>normalizePhone(item.contactNumber||item.contactId)===conversation.phone);
+      realName=safeText(snap?.contactName || snap?.formattedTitle || snap?.name || '',160);
+      if(realName && ownName && realName.toLowerCase()===ownName.toLowerCase()) realName='';
+    }
+    if(!realName){ unresolved+=1; continue; }
+    if(conversation.name!==realName){ conversation.name=realName; conversation.updatedAt=now(); updated+=1; }
+  }
+  if(updated) atomicWriteJson(p.conversationsFile,{version:4,conversations});
+  return {updated,unresolved,total:contacts.length};
+}
+
+export async function syncInboxFromWhatsApp(app,client,options={}){
+  ensureInboxStorage(app);
+  const chatLimit=Math.min(200,Math.max(20,Number(options.chatLimit)||120));
+  const messageLimit=Math.min(120,Math.max(20,Number(options.messageLimit)||60));
+  const catalog=await getChatCatalog(client);
+  let entries=[];
+  if(catalog.chats.length){
+    entries=catalog.chats.map(chat=>({id:serializedId(chat.id),chat,snapshot:null,timestamp:Number(chat?.timestamp||0)}));
+  }else{
+    entries=(catalog.snapshots||[]).map(snapshot=>({id:snapshot.id,chat:null,snapshot,timestamp:Number(snapshot.timestamp||0)}));
+  }
+  entries=entries.filter(item=>item.id&&item.id!=='status@broadcast').sort((a,b)=>b.timestamp-a.timestamp).slice(0,chatLimit);
+  let totalMessages=0,saved=0,errors=0,resolvedChats=0;
+  for(const entry of entries){
+    try{
+      let chat=entry.chat;
+      if(!chat){ try{ chat=await client.getChatById(entry.id); }catch{} }
+      if(!chat){ errors+=1; continue; }
+      resolvedChats+=1;
+      let fetched=chat.fetchMessages?await chat.fetchMessages({limit:messageLimit}):[];
+      fetched=(fetched||[]).slice().sort((a,b)=>Number(a?.timestamp||0)-Number(b?.timestamp||0));
+      totalMessages+=fetched.length;
+      for(const message of fetched){
+        if(typeof options.onMessage==='function') options.onMessage(message);
+        const result=await registerWhatsAppMessage(app,message,client,{historical:true,chatOverride:chat});
+        if(result?.saved) saved+=1;
+      }
+      const p=ensureInboxStorage(app);
+      const data=readJson(p.conversationsFile,{version:4,conversations:[]});
+      const conversations=listFrom(data,'conversations');
+      const sid=entry.id;
+      const group=Boolean(chat?.isGroup)||Boolean(entry.snapshot?.isGroup)||isGroup(sid);
+      let conversation=group
+        ? conversations.find(c=>c.id===groupConversationId(sid)||idDigits(c.whatsappId)===idDigits(sid))
+        : conversations.find(c=>c.whatsappId===sid || normalizePhone(c.phone)===normalizePhone(entry.snapshot?.contactNumber||entry.snapshot?.contactId||sid));
+      if(conversation){
+        conversation.whatsappId=sid;
+        if(group&&!conversation.nameEdited){
+          const title=safeText(entry.snapshot?.subject || entry.snapshot?.name || entry.snapshot?.formattedTitle || chat?.name || chat?.formattedTitle || '',160);
+          if(title) conversation.name=title;
+        }
+        if(!group&&!conversation.nameEdited){
+          let contact=null; try{ contact=chat.getContact?await chat.getContact():null; }catch{}
+          const remote=trustworthyContactName(contact,chat,safeText(client?.info?.pushname||'',160)) || safeText(entry.snapshot?.contactName || entry.snapshot?.formattedTitle || '',160);
+          if(remote) conversation.name=remote;
+        }
+        const count=entry.snapshot?.participantCount ?? (Array.isArray(chat?.participants)?chat.participants.length:null);
+        if(group&&Number.isFinite(Number(count))) conversation.groupParticipantCount=Number(count);
+        const unread=entry.snapshot?.unreadCount ?? chat?.unreadCount;
+        if(Number.isFinite(Number(unread))) conversation.unreadCount=Math.max(0,Number(unread));
+        conversation.updatedAt=now();
+        atomicWriteJson(p.conversationsFile,{version:4,conversations});
+      }
+    }catch{ errors+=1; }
+  }
+  return {chats:entries.length,resolvedChats,messages:totalMessages,saved,errors,source:catalog.chats.length?'public_api':'browser_store'};
+}
+
+export async function repairInboxGroupNames(app, client){
+  const p=ensureInboxStorage(app);
+  const data=readJson(p.conversationsFile,{version:4,conversations:[]});
+  const conversations=listFrom(data,'conversations');
+  const groups=conversations.filter(c=>c.conversationType==='group' || isGroup(c.whatsappId));
+  if(!client || !groups.length) return {updated:0,unresolved:groups.length,total:groups.length};
+  const catalog=await getChatCatalog(client);
+  const snapshots=catalog.snapshots||[];
+  const key=value=>String(value||'').replace(/\D/g,'');
+  const byExact=new Map(); const byKey=new Map();
+  for(const chat of catalog.chats||[]){ const id=serializedId(chat.id); byExact.set(id,{chat}); byKey.set(key(id),{chat}); }
+  for(const snapshot of snapshots){ byExact.set(snapshot.id,{snapshot}); byKey.set(key(snapshot.id),{snapshot}); }
+  let updated=0,unresolved=0;
+  for(const group of groups){
+    let found=byExact.get(group.whatsappId) || byKey.get(key(group.whatsappId)) || null;
+    let chat=found?.chat || null, snapshot=found?.snapshot || null;
+    if(!chat && group.whatsappId){ try{ chat=await client.getChatById(group.whatsappId); }catch{} }
+    const realName=safeText(snapshot?.subject || snapshot?.name || snapshot?.formattedTitle || chat?.name || chat?.formattedTitle || chat?._data?.name || '',160);
+    if(!realName){ unresolved+=1; continue; }
+    if(!group.nameEdited && group.name!==realName){ group.name=realName; group.updatedAt=now(); updated+=1; }
+    const actualId=snapshot?.id || serializedId(chat?.id);
+    if(actualId) group.whatsappId=actualId;
+    const count=snapshot?.participantCount ?? (Array.isArray(chat?.participants)?chat.participants.length:null);
+    if(Number.isFinite(Number(count))) group.groupParticipantCount=Number(count);
+  }
+  if(updated) atomicWriteJson(p.conversationsFile,{version:4,conversations});
+  return {updated,unresolved,total:groups.length,source:catalog.chats.length?'public_api':'browser_store'};
+}
+
+export function storeInboxMediaFile(app, conversationId, messageId, buffer, meta={}){
+  const p=ensureInboxStorage(app);
+  const cid=safeText(conversationId,80).replace(/[^a-zA-Z0-9_-]/g,'');
+  const mid=safeText(messageId,180);
+  if(!cid || !mid || !Buffer.isBuffer(buffer) || !buffer.length) return null;
+  const data=readJson(messageFile(p,cid),{version:4,conversationId:cid,messages:[]});
+  const messages=listFrom(data,'messages');
+  const message=messages.find(item=>item.id===mid);
+  if(!message) return null;
+  const originalName=safeText(meta.originalName || message.media?.originalName || 'arquivo',180);
+  const ext=extensionFromMime(meta.mime || message.media?.mime || '',originalName);
+  const filename=`${safeFilePart(mid,'midia')}${ext}`;
+  const folder=safeFilePart(cid,'conversa');
+  const relativePath=path.join(folder,filename).replace(/\\/g,'/');
+  const absolute=path.join(p.mediaDir,relativePath);
+  ensureDir(path.dirname(absolute));
+  fs.writeFileSync(absolute,buffer);
+  message.media={...(message.media||{}),kind:meta.kind || message.media?.kind || mediaKind(message.type,meta.mime),mime:safeText(meta.mime || message.media?.mime || '',120),originalName,filename,relativePath,size:buffer.length,stored:true,remote:false,error:null};
+  atomicWriteJson(messageFile(p,cid),{version:4,conversationId:cid,messages});
+  return {absolute,relativePath,media:message.media};
 }
 
 export function getInboxMediaFile(app, conversationId, messageId){

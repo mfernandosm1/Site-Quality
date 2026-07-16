@@ -1,0 +1,27 @@
+Quality WhatsApp Lab v0.2.0
+Status: PARTIAL
+Início: 2026-07-16T21:37:09.197Z
+Fim: 2026-07-16T21:38:44.351Z
+Duração: 95154 ms
+
+[OK] Configuração da sessão (0 ms)
+[OK] Chrome detectado (0 ms)
+[OK] Biblioteca whatsapp-web.js (0 ms)
+[OK] Inicialização até ready (14899 ms)
+[OK] client.info (1 ms)
+[OK] Versões reais do ambiente (10 ms)
+[OK] Inspeção profunda da página (13 ms)
+[OK] Assinaturas internas do window.WWebJS (3 ms)
+[FALHA] Controle: client.getChats() (87 ms) - r
+[FALHA] Direto: window.WWebJS.getChats() (61 ms) - Failed to execute 'get' on 'IDBObjectStore': No key or key range specified.
+ DataError: Failed to execute 'get' on 'IDBObjectStore': No key or key range specified.
+[FALHA] Direto: window.WWebJS.getContacts() (30003 ms) - Tempo limite de 30000 ms em WWebJS.getContacts.
+[OK] Captura de IDs por eventos (5016 ms)
+[OK] Direto: window.WWebJS.getChat(id real) (1563 ms)
+[FALHA] Direto: window.WWebJS.getContact(id real) (30019 ms) - Tempo limite de 30000 ms em WWebJS.getContact.
+[OK] Controle: client.getContactById(próprio número) (456 ms)
+[FALHA] Direto após estabilização: window.WWebJS.getChats() (101 ms) - Failed to execute 'get' on 'IDBObjectStore': No key or key range specified.
+ DataError: Failed to execute 'get' on 'IDBObjectStore': No key or key range specified.
+[OK] Encerramento seguro (866 ms)
+
+Relatório completo: diagnostico-2026-07-16T21-38-44-351Z.json
