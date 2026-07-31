@@ -1,0 +1,916 @@
+{
+  "version": "0.19.0",
+  "items": [
+    {
+      "id": "PUR-c627601b-3f67-48b7-a41c-cb2ab9bc697b",
+      "number": "COM-000009",
+      "status": "completed",
+      "createdAt": "2026-07-31T00:53:58.111Z",
+      "createdBy": "painel",
+      "supplierId": "FOR-1785107952037-ZF045",
+      "supplierName": "teste",
+      "supplierDocument": "01172199086",
+      "items": [
+        {
+          "id": "1781828065854",
+          "selectionId": "1781828065854",
+          "productId": "1781828065854",
+          "productName": "Adaptador Veicular P2 Bluetooth Receptor de Música",
+          "baseProductName": "Adaptador Veicular P2 Bluetooth Receptor de Música",
+          "variationLabel": "",
+          "productCode": "",
+          "sku": "",
+          "barcode": "",
+          "reference": "",
+          "brand": "",
+          "model": "",
+          "inventoryItemId": "PRD-1781828065854",
+          "stockControlled": true,
+          "quantity": 2,
+          "unitCost": 1,
+          "discount": 0,
+          "total": 2,
+          "fiscal": {
+            "supplierCode": "",
+            "ean": "",
+            "ncm": "",
+            "cest": "",
+            "cfop": "",
+            "unit": "",
+            "taxes": {}
+          }
+        }
+      ],
+      "productsTotal": 2,
+      "freight": 0,
+      "otherExpenses": 0,
+      "discount": 0,
+      "total": 2,
+      "invoiceNumber": "",
+      "invoiceSeries": "",
+      "accessKey": "",
+      "issueDate": "",
+      "entryDate": "2026-07-31",
+      "notes": "",
+      "costCenterId": "",
+      "accountId": "",
+      "cashboxId": "caixa-principal",
+      "paymentPlan": [
+        {
+          "paymentMethodId": "PM-DINHEIRO",
+          "value": 2,
+          "installmentCount": 1,
+          "firstDueDate": "2026-07-31"
+        }
+      ],
+      "fiscalDocument": {
+        "model": "55",
+        "xmlVersion": "4.00",
+        "protocol": "",
+        "issuer": null,
+        "taxes": {},
+        "relatedDocuments": []
+      },
+      "updatedAt": "2026-07-31T00:53:58.304Z",
+      "updatedBy": "painel",
+      "inventoryEffects": [
+        {
+          "itemId": "1781828065854",
+          "productId": "1781828065854",
+          "inventoryItemId": "PRD-1781828065854",
+          "quantity": 2,
+          "movement": {
+            "id": "MOV-20260730-000008",
+            "inventoryItemId": "PRD-1781828065854",
+            "locationId": "loja-principal",
+            "type": "ajuste",
+            "direction": "entrada",
+            "quantity": 2,
+            "signedQuantity": 2,
+            "previousPhysicalQuantity": 4,
+            "newPhysicalQuantity": 6,
+            "reservedQuantity": 0,
+            "availableQuantity": 6,
+            "origin": "estoque_operacao_manual",
+            "referenceType": "product",
+            "referenceId": "PUR-c627601b-3f67-48b7-a41c-cb2ab9bc697b",
+            "reason": "Compra COM-000009 · teste",
+            "reasonCode": "PURCHASE",
+            "classification": "purchase",
+            "createdBy": "painel",
+            "createdAt": "2026-07-31T00:53:58.209Z"
+          }
+        }
+      ],
+      "payableId": "PAY-1259c39e-3f15-4a1e-a4be-8c662e9bbc2e",
+      "immediatePaymentIds": [
+        "PYP-4441f67e-919f-40bc-ae81-714c88bfe3c5"
+      ],
+      "completedAt": "2026-07-31T00:53:58.304Z",
+      "completedBy": "painel"
+    },
+    {
+      "id": "PUR-3acce852-933c-4f77-a1c4-bc1eb274848b",
+      "number": "COM-000008",
+      "status": "completed",
+      "createdAt": "2026-07-30T23:25:31.520Z",
+      "createdBy": "painel",
+      "supplierId": "FOR-1785451156326-OPCE6",
+      "supplierName": "SST DISTRIBUIDORA E IMPORTADORA LTDA",
+      "supplierDocument": "31136659000101",
+      "items": [
+        {
+          "id": "PRD-1785451902034",
+          "selectionId": "PRD-1785451902034",
+          "productId": "PRD-1785451902034",
+          "productName": "Tela Frontal Iphone 12",
+          "baseProductName": "Tela Frontal Iphone 12",
+          "variationLabel": "",
+          "productCode": "9919",
+          "sku": "9919",
+          "barcode": "",
+          "reference": "",
+          "brand": "",
+          "model": "",
+          "inventoryItemId": "PRD-1785451902034",
+          "stockControlled": true,
+          "quantity": 2,
+          "unitCost": 160.9,
+          "discount": 0,
+          "total": 321.8,
+          "fiscal": {
+            "supplierCode": "9919",
+            "ean": "",
+            "ncm": "85171432",
+            "cest": "",
+            "cfop": "5102",
+            "unit": "un",
+            "taxes": {
+              "raw": "present"
+            }
+          }
+        }
+      ],
+      "productsTotal": 321.8,
+      "freight": 0,
+      "otherExpenses": 0,
+      "discount": 0,
+      "total": 321.8,
+      "invoiceNumber": "55069",
+      "invoiceSeries": "1",
+      "accessKey": "43260731136659000101550010000550691395367933",
+      "issueDate": "2026-07-27",
+      "entryDate": "2026-07-27",
+      "notes": "Importada da NF-e 55069 · Chave 43260731136659000101550010000550691395367933",
+      "costCenterId": "",
+      "accountId": "",
+      "cashboxId": "caixa-principal",
+      "paymentPlan": [
+        {
+          "paymentMethodId": "PM-CREDITO",
+          "value": 321.8,
+          "installmentCount": 1,
+          "firstDueDate": "2026-07-27"
+        }
+      ],
+      "fiscalDocument": {
+        "model": "55",
+        "xmlVersion": "4.00",
+        "protocol": "",
+        "issuer": null,
+        "taxes": {},
+        "relatedDocuments": []
+      },
+      "updatedAt": "2026-07-30T23:25:31.725Z",
+      "updatedBy": "painel",
+      "inventoryEffects": [
+        {
+          "itemId": "PRD-1785451902034",
+          "productId": "PRD-1785451902034",
+          "inventoryItemId": "PRD-1785451902034",
+          "quantity": 2,
+          "movement": {
+            "id": "MOV-20260730-000006",
+            "inventoryItemId": "PRD-1785451902034",
+            "locationId": "loja-principal",
+            "type": "entrada_inicial",
+            "direction": "entrada",
+            "quantity": 2,
+            "signedQuantity": 2,
+            "previousPhysicalQuantity": 0,
+            "newPhysicalQuantity": 2,
+            "reservedQuantity": 0,
+            "availableQuantity": 2,
+            "origin": "estoque_operacao_manual",
+            "referenceType": "product",
+            "referenceId": "PUR-3acce852-933c-4f77-a1c4-bc1eb274848b",
+            "reason": "Compra COM-000008 · SST DISTRIBUIDORA E IMPORTADORA LTDA",
+            "reasonCode": "PURCHASE",
+            "classification": "purchase",
+            "createdBy": "painel",
+            "createdAt": "2026-07-30T23:25:31.647Z"
+          }
+        }
+      ],
+      "payableId": "PAY-ed55b6db-7af9-4cf6-9b31-090938034913",
+      "immediatePaymentIds": [],
+      "completedAt": "2026-07-30T23:25:31.725Z",
+      "completedBy": "painel"
+    },
+    {
+      "id": "PUR-15502d17-9563-405c-91e2-41e6a9bbcc7f",
+      "number": "COM-000007",
+      "status": "completed",
+      "createdAt": "2026-07-30T23:21:05.844Z",
+      "createdBy": "painel",
+      "supplierId": "FOR-1785107952037-ZF045",
+      "supplierName": "teste",
+      "supplierDocument": "01172199086",
+      "items": [
+        {
+          "id": "1781828065854",
+          "selectionId": "1781828065854",
+          "productId": "1781828065854",
+          "productName": "Adaptador Veicular P2 Bluetooth Receptor de Música",
+          "baseProductName": "Adaptador Veicular P2 Bluetooth Receptor de Música",
+          "variationLabel": "",
+          "productCode": "",
+          "sku": "",
+          "barcode": "",
+          "reference": "",
+          "brand": "",
+          "model": "",
+          "inventoryItemId": "PRD-1781828065854",
+          "stockControlled": true,
+          "quantity": 1,
+          "unitCost": 1,
+          "discount": 0,
+          "total": 1,
+          "fiscal": {
+            "supplierCode": "",
+            "ean": "",
+            "ncm": "",
+            "cest": "",
+            "cfop": "",
+            "unit": "",
+            "taxes": {}
+          }
+        }
+      ],
+      "productsTotal": 1,
+      "freight": 0,
+      "otherExpenses": 0,
+      "discount": 0,
+      "total": 1,
+      "invoiceNumber": "",
+      "invoiceSeries": "",
+      "accessKey": "",
+      "issueDate": "",
+      "entryDate": "2026-07-30",
+      "notes": "",
+      "costCenterId": "",
+      "accountId": "",
+      "cashboxId": "caixa-principal",
+      "paymentPlan": [
+        {
+          "paymentMethodId": "PM-DINHEIRO",
+          "value": 1,
+          "installmentCount": 1,
+          "firstDueDate": "2026-07-30"
+        }
+      ],
+      "fiscalDocument": {
+        "model": "55",
+        "xmlVersion": "4.00",
+        "protocol": "",
+        "issuer": null,
+        "taxes": {},
+        "relatedDocuments": []
+      },
+      "updatedAt": "2026-07-30T23:21:06.023Z",
+      "updatedBy": "painel",
+      "inventoryEffects": [
+        {
+          "itemId": "1781828065854",
+          "productId": "1781828065854",
+          "inventoryItemId": "PRD-1781828065854",
+          "quantity": 1,
+          "movement": {
+            "id": "MOV-20260730-000005",
+            "inventoryItemId": "PRD-1781828065854",
+            "locationId": "loja-principal",
+            "type": "ajuste",
+            "direction": "entrada",
+            "quantity": 1,
+            "signedQuantity": 1,
+            "previousPhysicalQuantity": 4,
+            "newPhysicalQuantity": 5,
+            "reservedQuantity": 0,
+            "availableQuantity": 5,
+            "origin": "estoque_operacao_manual",
+            "referenceType": "product",
+            "referenceId": "PUR-15502d17-9563-405c-91e2-41e6a9bbcc7f",
+            "reason": "Compra COM-000007 · teste",
+            "reasonCode": "PURCHASE",
+            "classification": "purchase",
+            "createdBy": "painel",
+            "createdAt": "2026-07-30T23:21:05.934Z"
+          }
+        }
+      ],
+      "payableId": "PAY-aa0c044e-01b2-4dba-82f3-12ed90129418",
+      "immediatePaymentIds": [
+        "PYP-ddf3ea97-63d1-4e95-8c67-5d45b2735a55"
+      ],
+      "completedAt": "2026-07-30T23:21:06.023Z",
+      "completedBy": "painel"
+    },
+    {
+      "id": "PUR-048de528-d35e-43cd-b660-da40e646dcf6",
+      "number": "COM-000006",
+      "status": "completed",
+      "createdAt": "2026-07-30T22:53:13.212Z",
+      "createdBy": "painel",
+      "supplierId": "FOR-1785107952037-ZF045",
+      "supplierName": "teste",
+      "supplierDocument": "01172199086",
+      "items": [
+        {
+          "id": "1781828065854",
+          "selectionId": "1781828065854",
+          "productId": "1781828065854",
+          "productName": "Adaptador Veicular P2 Bluetooth Receptor de Música",
+          "baseProductName": "Adaptador Veicular P2 Bluetooth Receptor de Música",
+          "variationLabel": "",
+          "productCode": "",
+          "sku": "",
+          "barcode": "",
+          "reference": "",
+          "brand": "",
+          "model": "",
+          "inventoryItemId": "PRD-1781828065854",
+          "stockControlled": true,
+          "quantity": 1,
+          "unitCost": 1,
+          "discount": 0,
+          "total": 1,
+          "fiscal": {
+            "supplierCode": "",
+            "ean": "",
+            "ncm": "",
+            "cest": "",
+            "cfop": "",
+            "unit": "",
+            "taxes": {}
+          }
+        }
+      ],
+      "productsTotal": 1,
+      "freight": 0,
+      "otherExpenses": 0,
+      "discount": 0,
+      "total": 1,
+      "invoiceNumber": "",
+      "invoiceSeries": "",
+      "accessKey": "",
+      "issueDate": "",
+      "entryDate": "2026-07-30",
+      "notes": "",
+      "costCenterId": "",
+      "accountId": "",
+      "cashboxId": "caixa-principal",
+      "paymentPlan": [
+        {
+          "paymentMethodId": "PM-DINHEIRO",
+          "value": 1,
+          "installmentCount": 1,
+          "firstDueDate": "2026-07-30"
+        }
+      ],
+      "fiscalDocument": {
+        "model": "55",
+        "xmlVersion": "4.00",
+        "protocol": "",
+        "issuer": null,
+        "taxes": {},
+        "relatedDocuments": []
+      },
+      "updatedAt": "2026-07-30T23:20:08.463Z",
+      "updatedBy": "painel",
+      "inventoryEffects": [
+        {
+          "itemId": "1781828065854",
+          "productId": "1781828065854",
+          "inventoryItemId": "PRD-1781828065854",
+          "quantity": 1,
+          "movement": {
+            "id": "MOV-20260730-000001",
+            "inventoryItemId": "PRD-1781828065854",
+            "locationId": "loja-principal",
+            "type": "entrada_inicial",
+            "direction": "entrada",
+            "quantity": 1,
+            "signedQuantity": 1,
+            "previousPhysicalQuantity": 0,
+            "newPhysicalQuantity": 1,
+            "reservedQuantity": 0,
+            "availableQuantity": 1,
+            "origin": "estoque_operacao_manual",
+            "referenceType": "product",
+            "referenceId": "PUR-048de528-d35e-43cd-b660-da40e646dcf6",
+            "reason": "Reconciliação da compra COM-000006 · teste",
+            "reasonCode": "PURCHASE",
+            "classification": "purchase",
+            "createdBy": "painel",
+            "createdAt": "2026-07-30T23:20:08.458Z"
+          }
+        }
+      ],
+      "payableId": "PAY-fbeda6eb-13b5-4b96-a52b-f6798e3d4572",
+      "immediatePaymentIds": [
+        "PYP-af9dbbf5-f855-4cd1-bada-11bcf496f1d8"
+      ],
+      "completedAt": "2026-07-30T22:53:13.418Z",
+      "completedBy": "painel",
+      "inventoryReconciledAt": "2026-07-30T23:20:08.463Z",
+      "inventoryReconciledBy": "painel"
+    },
+    {
+      "id": "PUR-84f5ace9-a33e-42df-8e3b-c43a805a018e",
+      "number": "COM-000005",
+      "status": "completed",
+      "createdAt": "2026-07-30T22:20:33.561Z",
+      "createdBy": "painel",
+      "supplierId": "FOR-1785107952037-ZF045",
+      "supplierName": "teste",
+      "supplierDocument": "01172199086",
+      "items": [
+        {
+          "id": "1781828065854",
+          "productId": "1781828065854",
+          "productName": "Adaptador Veicular P2 Bluetooth Receptor de Música",
+          "productCode": "",
+          "sku": "",
+          "barcode": "",
+          "reference": "",
+          "brand": "",
+          "model": "",
+          "inventoryItemId": "PRD-1781828065854",
+          "stockControlled": true,
+          "quantity": 1,
+          "unitCost": 1,
+          "discount": 0,
+          "total": 1,
+          "fiscal": {
+            "supplierCode": "",
+            "ean": "",
+            "ncm": "",
+            "cest": "",
+            "cfop": "",
+            "unit": "",
+            "taxes": {}
+          },
+          "selectionId": "1781828065854",
+          "variationLabel": ""
+        }
+      ],
+      "productsTotal": 1,
+      "freight": 0,
+      "otherExpenses": 0,
+      "discount": 0,
+      "total": 1,
+      "invoiceNumber": "",
+      "invoiceSeries": "",
+      "accessKey": "",
+      "issueDate": "",
+      "entryDate": "2026-07-30",
+      "notes": "",
+      "costCenterId": "",
+      "accountId": "",
+      "cashboxId": "caixa-principal",
+      "paymentPlan": [
+        {
+          "paymentMethodId": "PM-DINHEIRO",
+          "value": 1,
+          "installmentCount": 1,
+          "firstDueDate": "2026-07-30"
+        }
+      ],
+      "fiscalDocument": {
+        "model": "55",
+        "xmlVersion": "4.00",
+        "protocol": "",
+        "issuer": null,
+        "taxes": {},
+        "relatedDocuments": []
+      },
+      "updatedAt": "2026-07-30T23:20:08.491Z",
+      "updatedBy": "painel",
+      "inventoryEffects": [
+        {
+          "itemId": "1781828065854",
+          "productId": "1781828065854",
+          "inventoryItemId": "PRD-1781828065854",
+          "quantity": 1,
+          "movement": {
+            "id": "MOV-20260730-000002",
+            "inventoryItemId": "PRD-1781828065854",
+            "locationId": "loja-principal",
+            "type": "ajuste",
+            "direction": "entrada",
+            "quantity": 1,
+            "signedQuantity": 1,
+            "previousPhysicalQuantity": 1,
+            "newPhysicalQuantity": 2,
+            "reservedQuantity": 0,
+            "availableQuantity": 2,
+            "origin": "estoque_operacao_manual",
+            "referenceType": "product",
+            "referenceId": "PUR-84f5ace9-a33e-42df-8e3b-c43a805a018e",
+            "reason": "Reconciliação da compra COM-000005 · teste",
+            "reasonCode": "PURCHASE",
+            "classification": "purchase",
+            "createdBy": "painel",
+            "createdAt": "2026-07-30T23:20:08.486Z"
+          }
+        }
+      ],
+      "payableId": "PAY-f9e85196-952d-48b0-8038-adbd003db3ed",
+      "immediatePaymentIds": [
+        "PYP-68cc232b-e1c9-4029-9f6e-31055151752e"
+      ],
+      "completedAt": "2026-07-30T22:20:33.770Z",
+      "completedBy": "painel",
+      "inventoryReconciledAt": "2026-07-30T23:20:08.491Z",
+      "inventoryReconciledBy": "painel"
+    },
+    {
+      "id": "PUR-89b7c579-2b16-461d-9519-df9e9d9aeb02",
+      "number": "COM-000004",
+      "status": "completed",
+      "createdAt": "2026-07-30T16:38:44.922Z",
+      "createdBy": "painel",
+      "supplierId": "FOR-1785107952037-ZF045",
+      "supplierName": "teste",
+      "supplierDocument": "01172199086",
+      "items": [
+        {
+          "id": "PUI-8f0c0c16-3563-43b7-82b9-4da6e2a3e776",
+          "productId": "1781828065854",
+          "productName": "Adaptador Veicular P2 Bluetooth Receptor de Música",
+          "productCode": "",
+          "sku": "",
+          "barcode": "",
+          "reference": "",
+          "brand": "",
+          "model": "",
+          "inventoryItemId": "PRD-1781828065854",
+          "stockControlled": true,
+          "quantity": 1,
+          "unitCost": 1,
+          "discount": 0,
+          "total": 1,
+          "fiscal": {
+            "supplierCode": "",
+            "ean": "",
+            "ncm": "",
+            "cest": "",
+            "cfop": "",
+            "unit": "",
+            "taxes": {}
+          },
+          "selectionId": "1781828065854",
+          "variationLabel": ""
+        }
+      ],
+      "productsTotal": 1,
+      "freight": 0,
+      "otherExpenses": 0,
+      "discount": 0,
+      "total": 1,
+      "invoiceNumber": "",
+      "invoiceSeries": "",
+      "accessKey": "",
+      "issueDate": "",
+      "entryDate": "2026-07-30",
+      "notes": "",
+      "costCenterId": "",
+      "accountId": "",
+      "cashboxId": "caixa-principal",
+      "paymentPlan": [
+        {
+          "paymentMethodId": "PM-DINHEIRO",
+          "value": 1,
+          "installmentCount": 1,
+          "firstDueDate": "2026-07-30"
+        }
+      ],
+      "fiscalDocument": {
+        "model": "55",
+        "xmlVersion": "4.00",
+        "protocol": "",
+        "issuer": null,
+        "taxes": {},
+        "relatedDocuments": []
+      },
+      "updatedAt": "2026-07-30T23:20:08.515Z",
+      "updatedBy": "painel",
+      "inventoryEffects": [
+        {
+          "itemId": "PUI-8f0c0c16-3563-43b7-82b9-4da6e2a3e776",
+          "productId": "1781828065854",
+          "inventoryItemId": "PRD-1781828065854",
+          "quantity": 1,
+          "movement": {
+            "id": "MOV-20260730-000003",
+            "inventoryItemId": "PRD-1781828065854",
+            "locationId": "loja-principal",
+            "type": "ajuste",
+            "direction": "entrada",
+            "quantity": 1,
+            "signedQuantity": 1,
+            "previousPhysicalQuantity": 2,
+            "newPhysicalQuantity": 3,
+            "reservedQuantity": 0,
+            "availableQuantity": 3,
+            "origin": "estoque_operacao_manual",
+            "referenceType": "product",
+            "referenceId": "PUR-89b7c579-2b16-461d-9519-df9e9d9aeb02",
+            "reason": "Reconciliação da compra COM-000004 · teste",
+            "reasonCode": "PURCHASE",
+            "classification": "purchase",
+            "createdBy": "painel",
+            "createdAt": "2026-07-30T23:20:08.511Z"
+          }
+        }
+      ],
+      "payableId": "PAY-19001a52-891e-4ded-986d-ea037dcf65ee",
+      "immediatePaymentIds": [
+        "PYP-f23ac425-e34a-43ee-89e3-f0454a9a6361"
+      ],
+      "completedAt": "2026-07-30T16:38:45.076Z",
+      "completedBy": "painel",
+      "inventoryReconciledAt": "2026-07-30T23:20:08.515Z",
+      "inventoryReconciledBy": "painel"
+    },
+    {
+      "id": "PUR-383d1d4e-eaad-400b-9110-1cc42e5d8110",
+      "number": "COM-000003",
+      "status": "completed",
+      "createdAt": "2026-07-30T16:13:14.388Z",
+      "createdBy": "painel",
+      "supplierId": "FOR-1785107952037-ZF045",
+      "supplierName": "teste",
+      "supplierDocument": "01172199086",
+      "items": [
+        {
+          "id": "PUI-cdb90436-8ca9-43e4-a5dd-e4a6ab337f15",
+          "productId": "1781828065854",
+          "productName": "Adaptador Veicular P2 Bluetooth Receptor de Música",
+          "productCode": "",
+          "sku": "",
+          "barcode": "",
+          "reference": "",
+          "brand": "",
+          "model": "",
+          "inventoryItemId": "PRD-1781828065854",
+          "stockControlled": true,
+          "quantity": 1,
+          "unitCost": 1,
+          "discount": 0,
+          "total": 1,
+          "fiscal": {
+            "supplierCode": "",
+            "ean": "",
+            "ncm": "",
+            "cest": "",
+            "cfop": "",
+            "unit": "",
+            "taxes": {}
+          },
+          "selectionId": "1781828065854",
+          "variationLabel": ""
+        }
+      ],
+      "productsTotal": 1,
+      "freight": 0,
+      "otherExpenses": 0,
+      "discount": 0,
+      "total": 1,
+      "invoiceNumber": "",
+      "invoiceSeries": "",
+      "accessKey": "",
+      "issueDate": "",
+      "entryDate": "2026-07-30",
+      "notes": "",
+      "costCenterId": "",
+      "accountId": "",
+      "cashboxId": "caixa-principal",
+      "paymentPlan": [
+        {
+          "paymentMethodId": "PM-DINHEIRO",
+          "value": 0.5,
+          "installmentCount": 1,
+          "firstDueDate": "2026-07-30"
+        },
+        {
+          "paymentMethodId": "PM-BOLETO",
+          "value": 0.5,
+          "installmentCount": 1,
+          "firstDueDate": "2026-07-30"
+        }
+      ],
+      "fiscalDocument": {
+        "model": "55",
+        "xmlVersion": "4.00",
+        "protocol": "",
+        "issuer": null,
+        "taxes": {},
+        "relatedDocuments": []
+      },
+      "updatedAt": "2026-07-30T23:20:08.541Z",
+      "updatedBy": "painel",
+      "inventoryEffects": [
+        {
+          "itemId": "PUI-cdb90436-8ca9-43e4-a5dd-e4a6ab337f15",
+          "productId": "1781828065854",
+          "inventoryItemId": "PRD-1781828065854",
+          "quantity": 1,
+          "movement": {
+            "id": "MOV-20260730-000004",
+            "inventoryItemId": "PRD-1781828065854",
+            "locationId": "loja-principal",
+            "type": "ajuste",
+            "direction": "entrada",
+            "quantity": 1,
+            "signedQuantity": 1,
+            "previousPhysicalQuantity": 3,
+            "newPhysicalQuantity": 4,
+            "reservedQuantity": 0,
+            "availableQuantity": 4,
+            "origin": "estoque_operacao_manual",
+            "referenceType": "product",
+            "referenceId": "PUR-383d1d4e-eaad-400b-9110-1cc42e5d8110",
+            "reason": "Reconciliação da compra COM-000003 · teste",
+            "reasonCode": "PURCHASE",
+            "classification": "purchase",
+            "createdBy": "painel",
+            "createdAt": "2026-07-30T23:20:08.536Z"
+          }
+        }
+      ],
+      "payableId": "PAY-58b166c1-a57c-45d8-b1ab-0d591ded3e45",
+      "completedAt": "2026-07-30T16:13:14.471Z",
+      "completedBy": "painel",
+      "inventoryReconciledAt": "2026-07-30T23:20:08.541Z",
+      "inventoryReconciledBy": "painel"
+    },
+    {
+      "id": "PUR-b6814d4f-8e74-462b-b9a3-785f591e7a80",
+      "number": "COM-000002",
+      "status": "open",
+      "createdAt": "2026-07-30T16:12:57.545Z",
+      "createdBy": "painel",
+      "supplierId": "FOR-1785107952037-ZF045",
+      "supplierName": "teste",
+      "supplierDocument": "01172199086",
+      "items": [
+        {
+          "id": "PUI-5e8f302a-4a45-4a37-9985-63a6816b50db",
+          "productId": "1781828065854",
+          "productName": "Adaptador Veicular P2 Bluetooth Receptor de Música",
+          "productCode": "",
+          "sku": "",
+          "barcode": "",
+          "reference": "",
+          "brand": "",
+          "model": "",
+          "inventoryItemId": "",
+          "stockControlled": false,
+          "quantity": 1,
+          "unitCost": 1,
+          "discount": 0,
+          "total": 1,
+          "fiscal": {
+            "supplierCode": "",
+            "ean": "",
+            "ncm": "",
+            "cest": "",
+            "cfop": "",
+            "unit": "",
+            "taxes": {}
+          }
+        }
+      ],
+      "productsTotal": 1,
+      "freight": 0,
+      "otherExpenses": 0,
+      "discount": 0,
+      "total": 1,
+      "invoiceNumber": "",
+      "invoiceSeries": "",
+      "accessKey": "",
+      "issueDate": "",
+      "entryDate": "2026-07-30",
+      "notes": "",
+      "costCenterId": "",
+      "accountId": "",
+      "cashboxId": "caixa-principal",
+      "paymentPlan": [
+        {
+          "paymentMethodId": "PM-DINHEIRO",
+          "value": 0.5,
+          "installmentCount": 1,
+          "firstDueDate": "2026-07-30"
+        },
+        {
+          "paymentMethodId": "PM-BOLETO",
+          "value": 0.4,
+          "installmentCount": 1,
+          "firstDueDate": "2026-07-30"
+        }
+      ],
+      "fiscalDocument": {
+        "model": "55",
+        "xmlVersion": "4.00",
+        "protocol": "",
+        "issuer": null,
+        "taxes": {},
+        "relatedDocuments": []
+      },
+      "updatedAt": "2026-07-30T16:12:57.610Z",
+      "updatedBy": "painel",
+      "completionError": "A composição financeira deve totalizar exatamente R$ 1,00."
+    },
+    {
+      "id": "PUR-794aa832-1a99-44cf-9567-99ad5752b9f2",
+      "number": "COM-000001",
+      "status": "open",
+      "createdAt": "2026-07-30T15:57:17.104Z",
+      "createdBy": "painel",
+      "supplierId": "FOR-1785107952037-ZF045",
+      "supplierName": "teste",
+      "supplierDocument": "01172199086",
+      "items": [
+        {
+          "id": "PUI-a03171c6-42dd-48df-8426-8859c07fa7f0",
+          "productId": "1781828065854",
+          "productName": "Adaptador Veicular P2 Bluetooth Receptor de Música",
+          "productCode": "",
+          "sku": "",
+          "barcode": "",
+          "reference": "",
+          "brand": "",
+          "model": "",
+          "inventoryItemId": "",
+          "stockControlled": false,
+          "quantity": 2,
+          "unitCost": 1,
+          "discount": 0,
+          "total": 2,
+          "fiscal": {
+            "supplierCode": "",
+            "ean": "",
+            "ncm": "",
+            "cest": "",
+            "cfop": "",
+            "unit": "",
+            "taxes": {}
+          }
+        }
+      ],
+      "productsTotal": 2,
+      "freight": 0,
+      "otherExpenses": 0,
+      "discount": 0,
+      "total": 2,
+      "invoiceNumber": "",
+      "invoiceSeries": "",
+      "accessKey": "",
+      "issueDate": "",
+      "entryDate": "2026-07-30",
+      "notes": "",
+      "costCenterId": "",
+      "accountId": "",
+      "cashboxId": "caixa-principal",
+      "paymentPlan": [
+        {
+          "paymentMethodId": "PM-BOLETO",
+          "value": 2,
+          "installmentCount": 1,
+          "firstDueDate": "2026-07-31"
+        }
+      ],
+      "fiscalDocument": {
+        "model": "55",
+        "xmlVersion": "4.00",
+        "protocol": "",
+        "issuer": null,
+        "taxes": {},
+        "relatedDocuments": []
+      },
+      "updatedAt": "2026-07-30T15:57:17.119Z",
+      "updatedBy": "painel"
+    }
+  ]
+}

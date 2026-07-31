@@ -1,0 +1,112 @@
+<% layout('layout') -%>
+<% const money = value => Number(value || 0).toLocaleString('pt-BR', { style:'currency', currency:'BRL' }); %>
+<% const dateTime = value => value ? new Date(value).toLocaleString('pt-BR') : '—'; %>
+<% const statusLabel = { open:'Em aberto', finalized:'Concluída', cancelled:'Cancelada' }; %>
+<% const filterParams = extra => new URLSearchParams({ q:filters.query || '', tipo:filters.type || 'all', situacao:filters.status || 'all', de:filters.dateFrom || '', ate:filters.dateTo || '', vendedor:filters.seller || '', caixa:filters.cashboxId || 'all', ordem:filters.sort || 'openedAt', direcao:filters.direction || 'desc', ...(extra || {}) }).toString(); %>
+<% const sortLink = key => `/erp/centro-operacoes?${filterParams({ ordem:key, direcao:(filters.sort===key && filters.direction==='asc')?'desc':'asc' })}`; %>
+<% const sortMark = key => filters.sort===key ? (filters.direction==='asc'?'↑':'↓') : '↕'; %>
+
+<section class="operations-hero">
+  <div><span class="erp-kicker">ERP v0.15.2</span><h1>Centro de Operações</h1><p>Vendas e ordens de serviço reunidas em uma consulta única.</p></div>
+  <div class="operations-quick-actions"><a class="btn btn-primary" href="/erp/pdv">+ Nova operação</a><a class="btn" href="/erp/pdv/caixa">Caixa</a></div>
+</section>
+
+<section class="operations-summary">
+  <a class="operations-summary-card <%= filters.status==='all'?'is-active':'' %>" data-save-scroll href="/erp/centro-operacoes?<%= filterParams({ situacao:'all' }) %>"><span>Encontradas</span><b><%= summary.total %></b></a>
+  <a class="operations-summary-card <%= filters.status==='open'?'is-active':'' %>" data-save-scroll href="/erp/centro-operacoes?<%= filterParams({ situacao:'open' }) %>"><span>Em aberto</span><b><%= summary.open %></b></a>
+  <a class="operations-summary-card <%= filters.status==='finalized'?'is-active':'' %>" data-save-scroll href="/erp/centro-operacoes?<%= filterParams({ situacao:'finalized' }) %>"><span>Concluídas</span><b><%= summary.finalized %></b></a>
+  <a class="operations-summary-card <%= filters.status==='cancelled'?'is-active':'' %>" data-save-scroll href="/erp/centro-operacoes?<%= filterParams({ situacao:'cancelled' }) %>"><span>Canceladas</span><b><%= summary.cancelled %></b></a>
+  <div class="operations-summary-card is-value"><span>Valor listado</span><b><%= money(summary.value) %></b></div>
+</section>
+
+<form class="operations-filters" method="get" action="/erp/centro-operacoes"><input type="hidden" name="ordem" value="<%= filters.sort || 'openedAt' %>"><input type="hidden" name="direcao" value="<%= filters.direction || 'desc' %>">
+  <label class="operations-search"><span>Busca rápida</span><input name="q" value="<%= filters.query %>" placeholder="Número, cliente, CPF/CNPJ, telefone ou produto"></label>
+  <label><span>Tipo</span><select name="tipo"><option value="all">Todos</option><option value="sale" <%= filters.type==='sale'?'selected':'' %>>Venda</option><option value="service_order" <%= filters.type==='service_order'?'selected':'' %>>O.S.</option></select></label>
+  <label><span>Situação</span><select name="situacao"><option value="all">Todas</option><option value="open" <%= filters.status==='open'?'selected':'' %>>Em aberto</option><option value="finalized" <%= filters.status==='finalized'?'selected':'' %>>Concluída</option><option value="cancelled" <%= filters.status==='cancelled'?'selected':'' %>>Cancelada</option></select></label>
+  <label><span>Caixa</span><select name="caixa"><option value="all">Todos</option><% cashboxes.forEach(c => { %><option value="<%= c.id %>" <%= filters.cashboxId===c.id?'selected':'' %>><%= c.name %></option><% }) %></select></label>
+  <div class="operations-period-filter">
+    <span class="operations-period-title">Período de abertura</span>
+    <div class="operations-period-inputs">
+      <label><span>De</span><span class="operations-date-field"><input type="date" name="de" id="operationsDateFrom" value="<%= filters.dateFrom %>"><button class="operations-period-trigger" type="button" data-quick-date-trigger="from" aria-label="Abrir períodos rápidos da data inicial" title="Períodos rápidos">▾</button></span></label>
+      <label><span>Até</span><span class="operations-date-field"><input type="date" name="ate" id="operationsDateTo" value="<%= filters.dateTo %>"><button class="operations-period-trigger" type="button" data-quick-date-trigger="to" aria-label="Abrir períodos rápidos da data final" title="Períodos rápidos">▾</button></span></label>
+    </div>
+  </div>
+  <label><span>Vendedor</span><input name="vendedor" value="<%= filters.seller %>" placeholder="Nome do vendedor"></label>
+  <div class="operations-filter-actions"><a class="btn" href="/erp/centro-operacoes">Limpar</a><button class="btn btn-primary" type="submit">Buscar</button></div>
+</form>
+
+<section class="operations-table-card">
+  <div class="operations-table-head"><h2>Operações</h2><span><%= operations.length %> registro(s)</span></div>
+  <div class="operations-table-wrap"><table class="operations-table"><thead><tr><th><a class="operations-sort" data-save-scroll href="<%= sortLink('number') %>">Número <span><%= sortMark('number') %></span></a></th><th>Tipo</th><th><a class="operations-sort" data-save-scroll href="<%= sortLink('customer') %>">Cliente <span><%= sortMark('customer') %></span></a></th><th>Vendedor</th><th><a class="operations-sort" data-save-scroll href="<%= sortLink('openedAt') %>">Abertura <span><%= sortMark('openedAt') %></span></a></th><th>Conclusão</th><th><a class="operations-sort" data-save-scroll href="<%= sortLink('total') %>">Total <span><%= sortMark('total') %></span></a></th><th>Situação</th><th></th></tr></thead><tbody>
+  <% if (!operations.length) { %><tr><td colspan="9" class="operations-empty">Nenhuma operação encontrada com os filtros informados.</td></tr><% } %>
+  <% operations.forEach(op => { %><tr>
+    <td><strong>#<%= op.number %></strong><small><%= op.id %></small></td><td><span class="operation-type"><%= op.displayType %></span></td><td><strong><%= op.displayCustomer %></strong><small><%= op.identifier || op.customer?.document || '' %></small></td><td><%= op.sellerNameSnapshot || '—' %></td><td><%= dateTime(op.dates?.openedAt) %></td><td><%= dateTime(op.dates?.finalizedAt || op.dates?.cancelledAt) %></td><td><strong><%= money(op.total) %></strong><small><%= op.itemCount %> item(ns)</small></td><td><span class="operation-status is-<%= op.status %>"><%= statusLabel[op.status] || op.status %></span></td>
+    <td class="operations-actions"><a class="btn btn-small" data-save-scroll href="/erp/centro-operacoes?<%= filterParams({ operacao:op.id }) %>">Ver ficha</a><% if(op.status==='open') { %><a class="btn btn-small <%= op.canOpenInPdv?'btn-primary':'' %>" href="<%= op.canOpenInPdv ? '/erp/pdv?caixa='+encodeURIComponent(op.cashboxId)+'&operacao='+encodeURIComponent(op.id) : '/erp/pdv/caixa?caixa='+encodeURIComponent(op.cashboxId) %>"><%= op.canOpenInPdv ? 'Abrir no PDV' : 'Abrir caixa' %></a><% } %></td>
+  </tr><% }) %></tbody></table></div>
+</section>
+
+<% if (selectedOperation) { const op = selectedOperation; %>
+<div class="operation-detail-backdrop" data-operation-backdrop><section class="operation-detail-panel" id="operationPrintArea">
+  <header><div><span><%= op.displayType %> #<%= op.number %></span><h2><%= op.displayCustomer %></h2><p><%= statusLabel[op.status] %> · <%= money(op.total) %></p></div><button class="operation-detail-close" type="button" data-operation-close aria-label="Fechar ficha">×</button></header>
+  <div class="operation-detail-actions">
+    <% if(op.status==='open') { %><a class="btn btn-primary" href="<%= op.canOpenInPdv ? '/erp/pdv?caixa='+encodeURIComponent(op.cashboxId)+'&operacao='+encodeURIComponent(op.id) : '/erp/pdv/caixa?caixa='+encodeURIComponent(op.cashboxId) %>"><%= op.canOpenInPdv ? 'Continuar no PDV' : 'Abrir caixa para continuar' %></a><% } %>
+    <% if(op.customerId) { %><a class="btn" href="/erp/clientes?abrir=<%= encodeURIComponent(op.customerId) %>">Abrir cliente</a><% } %>
+    <button class="btn" type="button" data-copy-operation="#<%= op.number %>">Copiar número</button>
+    <button class="btn" type="button" data-print-operation>Imprimir ficha</button>
+  </div>
+
+  <div class="operation-detail-grid">
+    <article><h3>Identificação</h3><dl><dt>Número</dt><dd>#<%= op.number %></dd><dt>Tipo</dt><dd><%= op.displayType %></dd><dt>Situação</dt><dd><%= statusLabel[op.status] %></dd><dt>Caixa</dt><dd><%= op.cashbox?.name || op.cashboxId %></dd><dt>Abertura</dt><dd><%= dateTime(op.dates?.openedAt) %></dd><dt>Atualização</dt><dd><%= dateTime(op.dates?.updatedAt) %></dd><dt>Finalização</dt><dd><%= dateTime(op.dates?.finalizedAt) %></dd><dt>Cancelamento</dt><dd><%= dateTime(op.dates?.cancelledAt) %></dd></dl></article>
+    <article><h3>Cliente e responsável</h3><dl><dt>Cliente</dt><dd><%= op.displayCustomer %></dd><dt>Documento</dt><dd><%= op.customer?.document || op.identifier || '—' %></dd><dt>Telefone</dt><dd><%= op.customer?.mobile || op.customer?.phone || '—' %></dd><dt>Vendedor</dt><dd><%= op.sellerNameSnapshot || '—' %></dd><dt>Criado por</dt><dd><%= op.createdBy || '—' %></dd><dt>Finalizado por</dt><dd><%= op.finalizedBy || '—' %></dd></dl></article>
+  </div>
+
+  <article class="operation-detail-section"><h3>Itens</h3><div class="detail-table-wrap"><table><thead><tr><th>Descrição</th><th>Qtd.</th><th>Unitário</th><th>Desconto</th><th>Total</th></tr></thead><tbody><% (op.items||[]).forEach(item => { %><tr><td><%= item.name %></td><td><%= item.quantity %></td><td><%= money(item.unitPrice) %></td><td><%= money(item.discount) %></td><td><%= money((Number(item.quantity)*Number(item.unitPrice))-Number(item.discount||0)) %></td></tr><% }) %></tbody></table></div><div class="operation-totals"><span>Subtotal <b><%= money(op.subtotal) %></b></span><span>Descontos <b><%= money(op.discountTotal) %></b></span><span>Total <b><%= money(op.total) %></b></span></div></article>
+
+  <article class="operation-detail-section"><h3>Pagamentos</h3><div class="detail-table-wrap"><table><thead><tr><th>Forma</th><th>Valor</th><th>Parcelas</th><th>Vencimento</th><th>Situação</th></tr></thead><tbody><% (op.payments||[]).forEach(pay => { %><tr><td><%= pay.methodName || pay.methodId %></td><td><%= money(pay.amount) %></td><td><%= pay.installments || 1 %>x</td><td><%= pay.dueDate || '—' %></td><td><%= pay.status==='paid'?'Pago':pay.status %></td></tr><% }) %></tbody></table></div></article>
+
+  <% if(op.type==='service_order') { %><article class="operation-detail-section"><h3>Ordem de Serviço</h3><div class="operation-detail-grid"><dl><dt>Equipamento</dt><dd><%= op.serviceOrder?.device || '—' %></dd><dt>Identificação/modelo</dt><dd><%= op.serviceOrder?.equipmentId || '—' %></dd><dt>Acessórios</dt><dd><%= op.serviceOrder?.accessories || '—' %></dd><dt>Técnico</dt><dd><%= op.serviceOrder?.technicianName || '—' %></dd></dl><dl><dt>Problema / diagnóstico</dt><dd><%= op.serviceOrder?.issue || '—' %></dd><dt>Serviço realizado</dt><dd><%= op.serviceOrder?.servicePerformed || '—' %></dd><dt>Fotos</dt><dd><%= (op.serviceOrder?.attachments||[]).length %></dd></dl></div></article><% } %>
+
+  <div class="operation-detail-grid">
+    <article><h3>Movimentação de caixa</h3><% if(!(op.cashMovements||[]).length){ %><p class="muted">Nenhuma movimentação vinculada.</p><% } %><% (op.cashMovements||[]).forEach(m => { %><div class="operation-movement"><span><%= m.description || m.type %><small><%= dateTime(m.createdAt) %> · <%= m.methodId %></small></span><b><%= money(m.signedAmount) %></b></div><% }) %></article>
+    <article><h3>Movimentação de estoque</h3><% if(!(op.inventoryMovements||[]).length){ %><p class="muted">Nenhuma movimentação vinculada.</p><% } %><% (op.inventoryMovements||[]).forEach(m => { %><div class="operation-movement"><span><%= m.reason || m.type %><small><%= dateTime(m.createdAt) %> · <%= m.inventoryItemId %></small></span><b><%= m.signedQuantity > 0 ? '+' : '' %><%= m.signedQuantity %></b></div><% }) %></article>
+  </div>
+
+  <article class="operation-detail-section"><h3>Histórico da operação</h3><div class="operation-timeline"><% (op.timeline||[]).forEach(event => { %><div><i></i><span><b><%= event.label %></b><small><%= dateTime(event.at) %> · <%= event.actor || 'painel' %></small></span></div><% }) %></div></article>
+</section></div>
+<% } %>
+
+<script src="/public/js/quick-date-picker.js?v=1.0.2"></script>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  window.QualityQuickDatePicker?.init({
+    wrapper: '.operations-period-filter',
+    from: '#operationsDateFrom',
+    to: '#operationsDateTo',
+    mode: 'operations'
+  });
+
+  const scrollKey = 'quality.operations.scrollY';
+  const savedScroll = Number(sessionStorage.getItem(scrollKey) || 0);
+  if (savedScroll > 0) requestAnimationFrame(() => window.scrollTo({ top:savedScroll, behavior:'auto' }));
+  sessionStorage.removeItem(scrollKey);
+  document.querySelectorAll('[data-save-scroll]').forEach(link => link.addEventListener('click', () => sessionStorage.setItem(scrollKey, String(window.scrollY))));
+
+  const closeDetail = () => {
+    document.querySelector('[data-operation-backdrop]')?.remove();
+    const url = new URL(window.location.href);
+    url.searchParams.delete('operacao');
+    history.replaceState({}, '', url.pathname + (url.search ? url.search : ''));
+  };
+  document.querySelector('[data-operation-close]')?.addEventListener('click', closeDetail);
+  document.querySelector('[data-operation-backdrop]')?.addEventListener('click', event => { if (event.target === event.currentTarget) closeDetail(); });
+  document.addEventListener('keydown', event => { if (event.key === 'Escape') closeDetail(); });
+
+  document.querySelector('[data-copy-operation]')?.addEventListener('click', async event => {
+    const value = event.currentTarget.dataset.copyOperation || '';
+    try { await navigator.clipboard.writeText(value); event.currentTarget.textContent = 'Número copiado'; }
+    catch (_) { window.prompt('Copie o número da operação:', value); }
+    setTimeout(() => { if (event.currentTarget) event.currentTarget.textContent = 'Copiar número'; }, 1600);
+  });
+  document.querySelector('[data-print-operation]')?.addEventListener('click', () => window.print());
+});
+</script>

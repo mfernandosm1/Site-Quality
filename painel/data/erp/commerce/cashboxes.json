@@ -1,0 +1,14 @@
+{
+  "version": "0.13.0",
+  "items": [
+    {
+      "id": "caixa-principal",
+      "name": "Caixa principal",
+      "active": true,
+      "openingMode": "manual",
+      "closingMode": "manual",
+      "carryPreviousBalance": true,
+      "createdAt": "2026-07-27T00:40:03.606Z"
+    }
+  ]
+}

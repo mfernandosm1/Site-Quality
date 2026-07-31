@@ -409,6 +409,16 @@
   }
 })();
 </script>
+<script>
+(function(){
+  var isLocalPreview = window.location.hostname === 'localhost' && window.location.port === '3000';
+  if (isLocalPreview) {
+    document.querySelectorAll('[data-home-link]').forEach(function(a){
+      a.setAttribute('href', '/site/view/index.html');
+    });
+  }
+})();
+</script>
 <main class="main">
   <h1 id="categoria-titulo" style="text-align:center;margin-top:30px;display:flex;justify-content:center;align-items:center;gap:10px;flex-wrap:wrap;">Categoria</h1>
   <div class="quality-category-toolbar">

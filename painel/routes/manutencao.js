@@ -194,7 +194,7 @@ function buildMaintenanceHTML({
 router.get('/', (req, res) => {
   const enabled = fs.existsSync(path.join(P(req.app).SITE_DIR, 'maintenance.flag'));
   try {
-    return res.render('manutencao', { enabled });
+    return res.render('manutencao', { enabled, flash: req.query.flash || null });
   } catch {
     return res.json({ enabled });
   }
@@ -208,6 +208,8 @@ router.post('/ativar', (req, res) => {
 
   try {
     fs.writeFileSync(flagPath, String(Date.now()), 'utf-8');
+    const maintenanceJson = path.join(P(req.app).CONTENT_DIR, 'maintenance.json');
+    fs.writeFileSync(maintenanceJson, JSON.stringify({ active:true, since:new Date().toISOString() }, null, 2), 'utf-8');
 
     // Lê a logo da pasta images (inline para funcionar local e no GitHub Pages)
     const logoPath = path.join(SITE_DIR, 'images', 'logo.png');
@@ -227,7 +229,7 @@ router.post('/ativar', (req, res) => {
     console.error('Falha ao ativar manutenção:', e);
   }
 
-  return res.redirect('/?flash=' + encodeURIComponent('Modo manutenção ativado.'));
+  return res.redirect('/manutencao?flash=' + encodeURIComponent('Modo manutenção ativado.'));
 });
 
 // Desativar modo manutenção (remove flag)
@@ -235,10 +237,14 @@ router.post('/desativar', (req, res) => {
   const { SITE_DIR } = P(req.app);
   const flagPath = path.join(SITE_DIR, 'maintenance.flag');
 
-  try { if (fs.existsSync(flagPath)) fs.unlinkSync(flagPath); } catch (e) {
+  try {
+    if (fs.existsSync(flagPath)) fs.unlinkSync(flagPath);
+    const maintenanceJson = path.join(P(req.app).CONTENT_DIR, 'maintenance.json');
+    fs.writeFileSync(maintenanceJson, JSON.stringify({ active:false, since:null }, null, 2), 'utf-8');
+  } catch (e) {
     console.error('Falha ao desativar manutenção:', e);
   }
-  return res.redirect('/?flash=' + encodeURIComponent('Modo manutenção desativado.'));
+  return res.redirect('/manutencao?flash=' + encodeURIComponent('Modo manutenção desativado.'));
 });
 
 export default router;

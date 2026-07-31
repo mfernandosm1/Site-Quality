@@ -1,0 +1,376 @@
+{
+  "version": "0.18.0",
+  "items": [
+    {
+      "id": "PEV-a2342cb7-4b15-4f2d-908d-1e8fb4db4454",
+      "payableId": "PAY-58b166c1-a57c-45d8-b1ab-0d591ded3e45",
+      "action": "reversed_action",
+      "at": "2026-07-31T15:40:52.217Z",
+      "actor": "painel",
+      "reason": ""
+    },
+    {
+      "id": "PEV-9d7abdbf-ab20-4b0a-ae85-8f265304c59e",
+      "payableId": "PAY-1259c39e-3f15-4a1e-a4be-8c662e9bbc2e",
+      "action": "paid",
+      "at": "2026-07-31T00:53:58.289Z",
+      "actor": "painel",
+      "paymentId": "PYP-4441f67e-919f-40bc-ae81-714c88bfe3c5",
+      "installmentId": "PIN-9b16c3ed-3719-4c1f-b2cd-d28a3f2c065b",
+      "value": 2,
+      "principalValue": 2,
+      "balanceAfter": 0
+    },
+    {
+      "id": "PEV-36911a1a-0f70-4df0-a364-f35fbdd066b1",
+      "payableId": "PAY-1259c39e-3f15-4a1e-a4be-8c662e9bbc2e",
+      "action": "created",
+      "at": "2026-07-31T00:53:58.235Z",
+      "actor": "painel",
+      "value": 2,
+      "installmentCount": 1,
+      "competencies": [
+        "2026-07"
+      ],
+      "cashboxId": "caixa-principal",
+      "paymentPlan": [
+        {
+          "paymentMethodId": "PM-DINHEIRO",
+          "value": 2,
+          "installmentCount": 1,
+          "firstDueDate": "2026-07-31"
+        }
+      ]
+    },
+    {
+      "id": "PEV-25e16d91-89a5-4b64-802c-9b82703e1a61",
+      "payableId": "PAY-ed55b6db-7af9-4cf6-9b31-090938034913",
+      "action": "created",
+      "at": "2026-07-30T23:25:31.691Z",
+      "actor": "painel",
+      "value": 321.8,
+      "installmentCount": 1,
+      "competencies": [
+        "2026-07"
+      ],
+      "cashboxId": "caixa-principal",
+      "paymentPlan": [
+        {
+          "paymentMethodId": "PM-CREDITO",
+          "value": 321.8,
+          "installmentCount": 1,
+          "firstDueDate": "2026-07-27"
+        }
+      ]
+    },
+    {
+      "id": "PEV-a6620503-4401-490c-8a89-e9c66a5bc63d",
+      "payableId": "PAY-aa0c044e-01b2-4dba-82f3-12ed90129418",
+      "action": "paid",
+      "at": "2026-07-30T23:21:06.010Z",
+      "actor": "painel",
+      "paymentId": "PYP-ddf3ea97-63d1-4e95-8c67-5d45b2735a55",
+      "installmentId": "PIN-db6b7942-c0ae-4646-9ea4-2ef6ed5721e1",
+      "value": 1,
+      "principalValue": 1,
+      "balanceAfter": 0
+    },
+    {
+      "id": "PEV-a423dda7-5c82-4bc1-8d5a-23211f499584",
+      "payableId": "PAY-aa0c044e-01b2-4dba-82f3-12ed90129418",
+      "action": "created",
+      "at": "2026-07-30T23:21:05.956Z",
+      "actor": "painel",
+      "value": 1,
+      "installmentCount": 1,
+      "competencies": [
+        "2026-07"
+      ],
+      "cashboxId": "caixa-principal",
+      "paymentPlan": [
+        {
+          "paymentMethodId": "PM-DINHEIRO",
+          "value": 1,
+          "installmentCount": 1,
+          "firstDueDate": "2026-07-30"
+        }
+      ]
+    },
+    {
+      "id": "PEV-71d5ae2e-193d-45bf-a88f-401672def496",
+      "payableId": "PAY-fbeda6eb-13b5-4b96-a52b-f6798e3d4572",
+      "action": "paid",
+      "at": "2026-07-30T22:53:13.403Z",
+      "actor": "painel",
+      "paymentId": "PYP-af9dbbf5-f855-4cd1-bada-11bcf496f1d8",
+      "installmentId": "PIN-5831f7ed-91b6-490a-8d16-421f3433fe59",
+      "value": 1,
+      "principalValue": 1,
+      "balanceAfter": 0
+    },
+    {
+      "id": "PEV-7018e24e-4d57-4099-8412-818e05a05cbb",
+      "payableId": "PAY-fbeda6eb-13b5-4b96-a52b-f6798e3d4572",
+      "action": "created",
+      "at": "2026-07-30T22:53:13.343Z",
+      "actor": "painel",
+      "value": 1,
+      "installmentCount": 1,
+      "competencies": [
+        "2026-07"
+      ],
+      "cashboxId": "caixa-principal",
+      "paymentPlan": [
+        {
+          "paymentMethodId": "PM-DINHEIRO",
+          "value": 1,
+          "installmentCount": 1,
+          "firstDueDate": "2026-07-30"
+        }
+      ]
+    },
+    {
+      "id": "PEV-cb767360-3dc3-4923-a6b4-64697aac545c",
+      "payableId": "PAY-f9e85196-952d-48b0-8038-adbd003db3ed",
+      "action": "paid",
+      "at": "2026-07-30T22:20:33.753Z",
+      "actor": "painel",
+      "paymentId": "PYP-68cc232b-e1c9-4029-9f6e-31055151752e",
+      "installmentId": "PIN-063f3c32-dd5e-47ac-91b4-f5f4544a020e",
+      "value": 1,
+      "principalValue": 1,
+      "balanceAfter": 0
+    },
+    {
+      "id": "PEV-7fec24b1-4121-45dc-b947-529d4bb73b6d",
+      "payableId": "PAY-f9e85196-952d-48b0-8038-adbd003db3ed",
+      "action": "created",
+      "at": "2026-07-30T22:20:33.658Z",
+      "actor": "painel",
+      "value": 1,
+      "installmentCount": 1,
+      "competencies": [
+        "2026-07"
+      ],
+      "cashboxId": "caixa-principal",
+      "paymentPlan": [
+        {
+          "paymentMethodId": "PM-DINHEIRO",
+          "value": 1,
+          "installmentCount": 1,
+          "firstDueDate": "2026-07-30"
+        }
+      ]
+    },
+    {
+      "id": "PEV-b0885355-d53f-4523-a357-32d457cd4e1b",
+      "payableId": "PAY-19001a52-891e-4ded-986d-ea037dcf65ee",
+      "action": "paid",
+      "at": "2026-07-30T16:38:45.064Z",
+      "actor": "painel",
+      "paymentId": "PYP-f23ac425-e34a-43ee-89e3-f0454a9a6361",
+      "installmentId": "PIN-d6602013-141b-4ee7-a437-769a9e6098c1",
+      "value": 1,
+      "principalValue": 1,
+      "balanceAfter": 0
+    },
+    {
+      "id": "PEV-92892241-cf8f-453f-913a-091981603eb5",
+      "payableId": "PAY-19001a52-891e-4ded-986d-ea037dcf65ee",
+      "action": "created",
+      "at": "2026-07-30T16:38:45.013Z",
+      "actor": "painel",
+      "value": 1,
+      "installmentCount": 1,
+      "competencies": [
+        "2026-07"
+      ],
+      "cashboxId": "caixa-principal",
+      "paymentPlan": [
+        {
+          "paymentMethodId": "PM-DINHEIRO",
+          "value": 1,
+          "installmentCount": 1,
+          "firstDueDate": "2026-07-30"
+        }
+      ]
+    },
+    {
+      "id": "PEV-674c680e-ada1-440e-aa1d-0684ed2af4f3",
+      "payableId": "PAY-58b166c1-a57c-45d8-b1ab-0d591ded3e45",
+      "action": "created",
+      "at": "2026-07-30T16:13:14.459Z",
+      "actor": "painel",
+      "value": 1,
+      "installmentCount": 2,
+      "competencies": [
+        "2026-07"
+      ],
+      "cashboxId": "caixa-principal",
+      "paymentPlan": [
+        {
+          "paymentMethodId": "PM-DINHEIRO",
+          "value": 0.5,
+          "installmentCount": 1,
+          "firstDueDate": "2026-07-30"
+        },
+        {
+          "paymentMethodId": "PM-BOLETO",
+          "value": 0.5,
+          "installmentCount": 1,
+          "firstDueDate": "2026-07-30"
+        }
+      ]
+    },
+    {
+      "id": "PEV-6ca993ac-b6c2-4ecb-9033-8494dc23c7c6",
+      "payableId": "PAY-b12f5b5d-881f-4973-a331-0cdafe53ffab",
+      "action": "partial_payment",
+      "at": "2026-07-30T03:00:49.995Z",
+      "actor": "painel",
+      "paymentId": "PYP-d0a75e82-e6cd-40aa-8b2e-a8ac6d3b25f6",
+      "installmentId": "PIN-601c1535-e9d3-445b-9111-9fde4ca5d84f",
+      "value": 4,
+      "principalValue": 4,
+      "balanceAfter": 8
+    },
+    {
+      "id": "PEV-33da0b36-b088-45fa-a065-1351e3a9fdf3",
+      "payableId": "PAY-b12f5b5d-881f-4973-a331-0cdafe53ffab",
+      "action": "created",
+      "at": "2026-07-30T03:00:19.784Z",
+      "actor": "painel",
+      "value": 12,
+      "installmentCount": 3,
+      "competencies": [
+        "2026-07",
+        "2026-08",
+        "2026-09"
+      ],
+      "paymentPlan": [
+        {
+          "paymentMethodId": "PM-BOLETO",
+          "value": 4,
+          "installmentCount": 1,
+          "firstDueDate": "2026-07-30"
+        },
+        {
+          "paymentMethodId": "PM-DINHEIRO",
+          "value": 4,
+          "installmentCount": 1,
+          "firstDueDate": "2026-07-30"
+        },
+        {
+          "paymentMethodId": "PM-CREDITO",
+          "value": 4,
+          "installmentCount": 1,
+          "firstDueDate": "2026-07-30"
+        }
+      ]
+    },
+    {
+      "id": "PEV-cd6b958b-d6d1-400e-832c-c33f68881704",
+      "payableId": "PAY-a46f52ae-a6f3-4c2f-afea-3dae63cb1012",
+      "action": "cash_reconciled",
+      "at": "2026-07-30T01:59:16.976Z",
+      "actor": "painel",
+      "paymentId": "PYP-917a1215-8937-4855-b58d-de0531f68bc3",
+      "cashMovementIds": [
+        "CXM-1785376756971-6FAGC"
+      ]
+    },
+    {
+      "id": "PEV-2194b3b7-030d-4e2e-a6ca-8b1ba5aa0ce0",
+      "payableId": "PAY-a46f52ae-a6f3-4c2f-afea-3dae63cb1012",
+      "action": "partial_payment",
+      "at": "2026-07-29T23:25:50.221Z",
+      "actor": "painel",
+      "paymentId": "PYP-917a1215-8937-4855-b58d-de0531f68bc3",
+      "installmentId": "PIN-9053ba6b-87c2-4e82-a8a2-1332f2a77bc4",
+      "value": 3,
+      "principalValue": 3,
+      "balanceAfter": 9
+    },
+    {
+      "id": "PEV-4bcbea70-921d-4bf3-a49b-36c97656cb4a",
+      "payableId": "PAY-a46f52ae-a6f3-4c2f-afea-3dae63cb1012",
+      "action": "installment_payment_method_updated",
+      "at": "2026-07-29T23:25:44.334Z",
+      "actor": "painel",
+      "installmentId": "PIN-9053ba6b-87c2-4e82-a8a2-1332f2a77bc4",
+      "installmentNumber": 1,
+      "previousPaymentMethodId": "PM-DINHEIRO",
+      "paymentMethodId": "PM-PIX"
+    },
+    {
+      "id": "PEV-76499425-88d7-43bb-a8b9-b8a42e630170",
+      "payableId": "PAY-a46f52ae-a6f3-4c2f-afea-3dae63cb1012",
+      "action": "created",
+      "at": "2026-07-29T23:23:38.112Z",
+      "actor": "painel",
+      "value": 12,
+      "installmentCount": 4,
+      "competencies": [
+        "2026-07",
+        "2026-08",
+        "2026-09",
+        "2026-10"
+      ]
+    },
+    {
+      "id": "PEV-a4f9abdf-3ae3-42e2-a0e5-2b013e9ff3f6",
+      "payableId": "PAY-bcb2f7e5-b0a7-41b9-b213-2580e0a5802c",
+      "action": "reversed_action",
+      "at": "2026-07-29T13:44:55.161Z",
+      "actor": "painel",
+      "reason": "teste"
+    },
+    {
+      "id": "PEV-b5829a30-9752-4e11-a86a-02b375c00665",
+      "payableId": "PAY-bcb2f7e5-b0a7-41b9-b213-2580e0a5802c",
+      "action": "installment_payment_method_updated",
+      "at": "2026-07-29T13:27:52.731Z",
+      "actor": "painel",
+      "installmentId": "PIN-d5a3cb81-65d0-4438-a037-d7dc33df5c17",
+      "installmentNumber": 1,
+      "previousPaymentMethodId": "",
+      "paymentMethodId": "PM-DINHEIRO"
+    },
+    {
+      "id": "PEV-8488d281-08b6-4980-81da-8e1ac9071355",
+      "payableId": "PAY-bcb2f7e5-b0a7-41b9-b213-2580e0a5802c",
+      "action": "created",
+      "at": "2026-07-29T13:01:55.047Z",
+      "actor": "painel",
+      "value": 8,
+      "installmentCount": 4,
+      "competencies": [
+        "2026-07",
+        "2026-08",
+        "2026-09",
+        "2026-10"
+      ]
+    },
+    {
+      "id": "PEV-f78db7ae-1cd1-46ab-aba6-a03d377c170a",
+      "payableId": "PAY-9d81bcb8-56c1-4d0f-a526-8ab9ef4f3956",
+      "action": "partial_payment",
+      "at": "2026-07-29T13:00:09.859Z",
+      "actor": "painel",
+      "paymentId": "PYP-b95b8ae1-6547-489c-b0f0-4a9d537994fb",
+      "installmentId": "PIN-d25497f9-e6d7-44f9-b5af-e0aef8161019",
+      "value": 0.5,
+      "principalValue": 0.5,
+      "balanceAfter": 0.5
+    },
+    {
+      "id": "PEV-e038dc5f-8fa9-4af1-952d-bb97c3492a18",
+      "payableId": "PAY-9d81bcb8-56c1-4d0f-a526-8ab9ef4f3956",
+      "action": "created",
+      "at": "2026-07-29T10:29:01.971Z",
+      "actor": "painel",
+      "value": 1,
+      "installmentCount": 1
+    }
+  ]
+}

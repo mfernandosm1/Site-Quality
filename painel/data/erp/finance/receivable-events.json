@@ -1,0 +1,281 @@
+{
+  "version": "0.16.2",
+  "items": [
+    {
+      "id": "REV-f28ddb06-4c4f-44d7-a8f0-475e9fd91bc3",
+      "receivableId": "REC-954feb6e-c4cb-4d43-952f-04fa62996214",
+      "action": "received",
+      "actor": "painel",
+      "at": "2026-07-29T00:54:31.933Z",
+      "receiptId": "RCP-cec6f19e-6944-484e-84b4-85e6e05b9cf3",
+      "receiptNumber": "000005",
+      "value": 2.25,
+      "principalValue": 0.5,
+      "balanceAfter": 4.5,
+      "allocations": [
+        {
+          "installmentId": "RIN-032295c6-90ee-4b3e-9a7d-579fc089d588",
+          "number": 1,
+          "value": 0.5,
+          "balanceAfter": 0
+        }
+      ],
+      "cashboxId": "caixa-principal",
+      "cashSessionId": "CXS-1785203781536-VZB50",
+      "cashMovementIds": [
+        "CXM-1785286471908-LAP3Y"
+      ],
+      "financeMovementIds": [
+        "FMV-1ee7cda1-d12b-4a82-a6b3-dbda5172a947"
+      ]
+    },
+    {
+      "id": "REV-f4ffd33b-a3ac-4978-aa9a-54e32cb552c0",
+      "receivableId": "REC-954feb6e-c4cb-4d43-952f-04fa62996214",
+      "action": "created",
+      "actor": "painel",
+      "at": "2026-07-29T00:53:26.062Z",
+      "title": {
+        "id": "REC-954feb6e-c4cb-4d43-952f-04fa62996214",
+        "number": "000004",
+        "customerId": "CLI-1785107913792-ZXBKD",
+        "customerName": "teste",
+        "customerDocument": "01172199086",
+        "origin": "sale",
+        "originLabel": "Venda #18",
+        "originId": "OP-1785286405976-AXNTK",
+        "originPaymentKey": "PAY-1785286405977-U5FOE",
+        "costCenterId": "CAT-VENDAS",
+        "accountId": "ACC-VENDAS",
+        "paymentMethodId": "PM-BOLETO",
+        "grossValue": 5,
+        "discount": 0,
+        "addition": 0,
+        "netValue": 5,
+        "openBalance": 5,
+        "status": "open",
+        "issueDate": "2026-07-29",
+        "competenceDate": "2026-07-29",
+        "firstDueDate": "2026-08-27",
+        "notes": "Gerado automaticamente pelo PDV.",
+        "installmentCount": 10,
+        "createdAt": "2026-07-29T00:53:26.053Z",
+        "createdBy": "painel",
+        "updatedAt": "2026-07-29T00:53:26.053Z",
+        "updatedBy": "painel"
+      }
+    },
+    {
+      "id": "REV-b0437ed0-3534-4ea7-bc19-57672db01e3c",
+      "receivableId": "REC-501a15b6-4507-460b-a341-23a4ed182fc3",
+      "action": "received",
+      "actor": "painel",
+      "at": "2026-07-29T00:34:40.624Z",
+      "receiptId": "RCP-5c0c4ed0-5841-44b0-b5f6-ebca7ce78db1",
+      "receiptNumber": "000004",
+      "value": 1.18,
+      "principalValue": 1.18,
+      "balanceAfter": 0,
+      "allocations": [
+        {
+          "installmentId": "RIN-aea95d2c-d1cf-4192-9b42-bbdfab8cd567",
+          "number": 3,
+          "value": 1.18,
+          "balanceAfter": 0
+        }
+      ],
+      "cashboxId": "caixa-principal",
+      "cashSessionId": "CXS-1785203781536-VZB50",
+      "cashMovementIds": [
+        "CXM-1785285280600-L8XWW"
+      ],
+      "financeMovementIds": [
+        "FMV-889098f5-d7d3-44c1-bd69-fdb0de8ece06"
+      ]
+    },
+    {
+      "id": "REV-afc230fb-5f16-434c-b33d-9252879d40f6",
+      "receivableId": "REC-501a15b6-4507-460b-a341-23a4ed182fc3",
+      "action": "received",
+      "actor": "painel",
+      "at": "2026-07-29T00:31:13.406Z",
+      "receiptId": "RCP-4b1d264c-e2e3-4315-92f2-5990540bef92",
+      "receiptNumber": "000003",
+      "value": 1.16,
+      "principalValue": 1.16,
+      "balanceAfter": 1.18,
+      "allocations": [
+        {
+          "installmentId": "RIN-7ce0fe05-5173-46c2-bbe3-33ba3fbbeda1",
+          "number": 2,
+          "value": 1.16,
+          "balanceAfter": 0
+        }
+      ],
+      "cashboxId": "caixa-principal",
+      "cashSessionId": "CXS-1785203781536-VZB50",
+      "cashMovementIds": [
+        "CXM-1785285073384-AS52O"
+      ],
+      "financeMovementIds": [
+        "FMV-946f245d-3832-4cb2-8304-27e71ca219d0"
+      ]
+    },
+    {
+      "id": "REV-b4d0d07c-af47-4b89-8ab8-e56cf20c9af1",
+      "receivableId": "REC-501a15b6-4507-460b-a341-23a4ed182fc3",
+      "action": "received",
+      "actor": "painel",
+      "at": "2026-07-29T00:31:03.830Z",
+      "receiptId": "RCP-2a2df9f5-e41c-4886-aa22-8db2ebdf6ca8",
+      "receiptNumber": "000002",
+      "value": 1.16,
+      "principalValue": 1.16,
+      "balanceAfter": 2.34,
+      "allocations": [
+        {
+          "installmentId": "RIN-f9b6b3d6-eea8-457b-ba1a-be5d5795ee06",
+          "number": 1,
+          "value": 1.16,
+          "balanceAfter": 0
+        }
+      ],
+      "cashboxId": "caixa-principal",
+      "cashSessionId": "CXS-1785203781536-VZB50",
+      "cashMovementIds": [
+        "CXM-1785285063809-1WFK1"
+      ],
+      "financeMovementIds": [
+        "FMV-7d9ce6b8-a89b-499a-b707-944a592f6f7e"
+      ]
+    },
+    {
+      "id": "REV-d34d3004-8097-420e-862c-93b6a8057bd3",
+      "receivableId": "REC-501a15b6-4507-460b-a341-23a4ed182fc3",
+      "action": "created",
+      "actor": "painel",
+      "at": "2026-07-29T00:29:43.015Z",
+      "title": {
+        "id": "REC-501a15b6-4507-460b-a341-23a4ed182fc3",
+        "number": "000003",
+        "customerId": "CLI-1785107913792-ZXBKD",
+        "customerName": "teste",
+        "customerDocument": "01172199086",
+        "origin": "sale",
+        "originLabel": "Venda #17",
+        "originId": "OP-1785284982958-M17I9",
+        "originPaymentKey": "PAY-1785284982958-XAKKS",
+        "costCenterId": "CAT-VENDAS",
+        "accountId": "ACC-VENDAS",
+        "paymentMethodId": "PM-BOLETO",
+        "grossValue": 3.5,
+        "discount": 0,
+        "addition": 0,
+        "netValue": 3.5,
+        "openBalance": 3.5,
+        "status": "open",
+        "issueDate": "2026-07-29",
+        "competenceDate": "2026-07-29",
+        "firstDueDate": "2026-08-27",
+        "notes": "Gerado automaticamente pelo PDV.",
+        "installmentCount": 3,
+        "createdAt": "2026-07-29T00:29:43.007Z",
+        "createdBy": "painel",
+        "updatedAt": "2026-07-29T00:29:43.007Z",
+        "updatedBy": "painel"
+      }
+    },
+    {
+      "id": "REV-6f9dcee7-1091-496c-9d4e-a99bc7e4ed5d",
+      "receivableId": "REC-44aa68d5-acca-4270-90bb-2bff5caee1a8",
+      "action": "received",
+      "actor": "painel",
+      "at": "2026-07-29T00:10:32.902Z",
+      "receiptId": "RCP-7d33e17e-f040-48fc-b177-97b078e27576",
+      "receiptNumber": "000001",
+      "value": 1,
+      "principalValue": 1,
+      "balanceAfter": 0,
+      "allocations": [
+        {
+          "installmentId": "RIN-da61d6f5-a75f-4087-a187-1edc46112dc1",
+          "number": 1,
+          "value": 1,
+          "balanceAfter": 0
+        }
+      ]
+    },
+    {
+      "id": "REV-fe833975-40bd-4402-9cbf-917072d6e461",
+      "receivableId": "REC-44aa68d5-acca-4270-90bb-2bff5caee1a8",
+      "action": "created",
+      "actor": "painel",
+      "at": "2026-07-28T22:53:05.146Z",
+      "title": {
+        "id": "REC-44aa68d5-acca-4270-90bb-2bff5caee1a8",
+        "number": "000002",
+        "customerId": "CLI-1785107913792-ZXBKD",
+        "customerName": "teste",
+        "customerDocument": "01172199086",
+        "origin": "sale",
+        "originLabel": "Venda #15",
+        "originId": "OP-1785279185078-F1PJN",
+        "originPaymentKey": "PAY-1785279185078-6POZ9",
+        "costCenterId": "CAT-VENDAS",
+        "accountId": "ACC-VENDAS",
+        "paymentMethodId": "PM-BOLETO",
+        "grossValue": 1,
+        "discount": 0,
+        "addition": 0,
+        "netValue": 1,
+        "openBalance": 1,
+        "status": "open",
+        "issueDate": "2026-07-28",
+        "competenceDate": "2026-07-28",
+        "firstDueDate": "2026-08-27",
+        "notes": "Gerado automaticamente pelo PDV.",
+        "installmentCount": 1,
+        "createdAt": "2026-07-28T22:53:05.138Z",
+        "createdBy": "painel",
+        "updatedAt": "2026-07-28T22:53:05.138Z",
+        "updatedBy": "painel"
+      }
+    },
+    {
+      "id": "REV-de80ee72-aab1-4b5f-b18e-6d5869f3cce8",
+      "receivableId": "REC-fd5b239d-00e9-4fb8-af99-a33af1eec57c",
+      "action": "created",
+      "actor": "painel",
+      "at": "2026-07-28T22:34:12.731Z",
+      "title": {
+        "id": "REC-fd5b239d-00e9-4fb8-af99-a33af1eec57c",
+        "number": "000001",
+        "customerId": "CLI-1785107913792-ZXBKD",
+        "customerName": "teste",
+        "customerDocument": "01172199086",
+        "origin": "sale",
+        "originLabel": "Venda #14",
+        "originId": "OP-1785277412959-UFE3P",
+        "originPaymentKey": "PAY-1785278052681-W5KY3",
+        "costCenterId": "CAT-VENDAS",
+        "accountId": "ACC-VENDAS",
+        "paymentMethodId": "PM-BOLETO",
+        "grossValue": 2,
+        "discount": 0,
+        "addition": 0,
+        "netValue": 2,
+        "openBalance": 2,
+        "status": "open",
+        "issueDate": "2026-07-28",
+        "competenceDate": "2026-07-28",
+        "firstDueDate": "2026-08-27",
+        "notes": "Gerado automaticamente pelo PDV.",
+        "installmentCount": 1,
+        "createdAt": "2026-07-28T22:34:12.724Z",
+        "createdBy": "painel",
+        "updatedAt": "2026-07-28T22:34:12.724Z",
+        "updatedBy": "painel"
+      }
+    }
+  ]
+}

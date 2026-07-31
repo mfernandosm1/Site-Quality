@@ -1,0 +1,47 @@
+{
+  "version": "0.16.0",
+  "items": [
+    {
+      "id": "ORG-MANUAL",
+      "name": "Lançamento manual",
+      "module": "financeiro",
+      "active": true,
+      "system": true
+    },
+    {
+      "id": "ORG-PDV",
+      "name": "PDV",
+      "module": "pdv",
+      "active": true,
+      "system": true
+    },
+    {
+      "id": "ORG-OS",
+      "name": "Ordem de serviço",
+      "module": "os",
+      "active": true,
+      "system": true
+    },
+    {
+      "id": "ORG-COMPRA",
+      "name": "Compra",
+      "module": "compras",
+      "active": true,
+      "system": true
+    },
+    {
+      "id": "ORG-CAIXA",
+      "name": "Caixa",
+      "module": "caixa",
+      "active": true,
+      "system": true
+    },
+    {
+      "id": "ORG-IMPORTACAO",
+      "name": "Importação",
+      "module": "importacao",
+      "active": true,
+      "system": true
+    }
+  ]
+}

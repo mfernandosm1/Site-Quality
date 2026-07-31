@@ -1,0 +1,47 @@
+{
+  "version": 1,
+  "labels": [
+    {
+      "id": "label_vip",
+      "name": "Cliente VIP",
+      "color": "#16a34a",
+      "createdAt": "2026-07-18T18:33:36.307Z",
+      "updatedAt": "2026-07-18T18:33:36.307Z"
+    },
+    {
+      "id": "label_garantia",
+      "name": "Garantia",
+      "color": "#eab308",
+      "createdAt": "2026-07-18T18:33:36.307Z",
+      "updatedAt": "2026-07-18T18:33:36.307Z"
+    },
+    {
+      "id": "label_orcamento",
+      "name": "Orçamento",
+      "color": "#2563eb",
+      "createdAt": "2026-07-18T18:33:36.307Z",
+      "updatedAt": "2026-07-18T18:33:36.307Z"
+    },
+    {
+      "id": "label_pos_venda",
+      "name": "Pós-venda",
+      "color": "#9333ea",
+      "createdAt": "2026-07-18T18:33:36.307Z",
+      "updatedAt": "2026-07-18T18:33:36.307Z"
+    },
+    {
+      "id": "label_urgente",
+      "name": "Urgente",
+      "color": "#dc2626",
+      "createdAt": "2026-07-18T18:33:36.307Z",
+      "updatedAt": "2026-07-18T18:33:36.307Z"
+    },
+    {
+      "id": "label_sem_potencial",
+      "name": "Sem potencial",
+      "color": "#475569",
+      "createdAt": "2026-07-18T18:33:36.307Z",
+      "updatedAt": "2026-07-18T18:33:36.307Z"
+    }
+  ]
+}

@@ -1,0 +1,46 @@
+{
+  "version": "0.12.0",
+  "nextCode": 2,
+  "items": [
+    {
+      "id": "CLI-1785107913792-ZXBKD",
+      "code": "000001",
+      "companyId": "quality-principal",
+      "personType": "pf",
+      "name": "teste",
+      "tradeName": "",
+      "document": "01172199086",
+      "stateRegistration": "",
+      "companyStatus": "",
+      "openingDate": "",
+      "legalNature": "",
+      "companySize": "",
+      "primaryCnae": "",
+      "birthDate": "",
+      "phone": "",
+      "mobile": "55999",
+      "email": "",
+      "zipCode": "",
+      "street": "",
+      "number": "",
+      "complement": "",
+      "district": "",
+      "city": "",
+      "state": "",
+      "classificationId": "none",
+      "origin": "",
+      "notes": "",
+      "active": true,
+      "links": {
+        "whatsappIds": [],
+        "quoteIds": [],
+        "saleIds": [],
+        "serviceOrderIds": []
+      },
+      "createdAt": "2026-07-26T23:18:33.792Z",
+      "updatedAt": "2026-07-28T22:34:03.851Z",
+      "createdBy": "painel",
+      "updatedBy": "painel"
+    }
+  ]
+}

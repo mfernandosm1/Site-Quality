@@ -1,0 +1,40 @@
+{
+  "version": "0.16.0",
+  "items": [
+    {
+      "id": "NAT-RECEITA",
+      "name": "Receita",
+      "direction": "entrada",
+      "active": true,
+      "system": true
+    },
+    {
+      "id": "NAT-DESPESA",
+      "name": "Despesa",
+      "direction": "saida",
+      "active": true,
+      "system": true
+    },
+    {
+      "id": "NAT-TRANSFERENCIA",
+      "name": "Transferência",
+      "direction": "neutra",
+      "active": true,
+      "system": true
+    },
+    {
+      "id": "NAT-AJUSTE",
+      "name": "Ajuste",
+      "direction": "neutra",
+      "active": true,
+      "system": true
+    },
+    {
+      "id": "NAT-ESTORNO",
+      "name": "Estorno",
+      "direction": "neutra",
+      "active": true,
+      "system": true
+    }
+  ]
+}

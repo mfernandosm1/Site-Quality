@@ -1,0 +1,38 @@
+<% layout('layout') -%>
+<section class="finance-hero finance-operations-hero">
+  <div><span class="erp-kicker">GESTÃO FINANCEIRA · v<%= version %></span><h1>Financeiro</h1><p>Acompanhe compromissos, recebimentos, movimentações e resultados da empresa.</p></div>
+  <div class="finance-hero-status"><b>Infraestrutura protegida</b><span>Integrações automáticas serão ativadas por etapas</span><small>PDV, O.S. e Caixa permanecem estáveis nesta versão.</small></div>
+</section>
+
+<section class="finance-summary" aria-label="Resumo financeiro">
+  <div><span>Entradas hoje</span><b><%= Number(dashboard?.today?.income || 0).toLocaleString('pt-BR',{style:'currency',currency:'BRL'}) %></b></div>
+  <div><span>Entradas no mês</span><b><%= Number(dashboard?.month?.income || 0).toLocaleString('pt-BR',{style:'currency',currency:'BRL'}) %></b></div>
+  <div><span>Saídas no mês</span><b><%= Number(dashboard?.month?.expense || 0).toLocaleString('pt-BR',{style:'currency',currency:'BRL'}) %></b></div>
+  <div><span>Saldo financeiro registrado</span><b><%= Number(dashboard?.balance || 0).toLocaleString('pt-BR',{style:'currency',currency:'BRL'}) %></b></div>
+</section>
+
+<section class="finance-operation-grid">
+  <% [
+    ['📊','Dashboard Financeiro','Visão geral de saldos, vencimentos e indicadores.','Em preparação'],
+    ['📥','Contas a Receber','Valores a receber, parcelas, baixas e atrasos.','Disponível','/erp/financeiro/contas-a-receber'],
+    ['📤','Contas a Pagar','Despesas, fornecedores, parcelas e pagamentos.','Disponível','/erp/financeiro/contas-a-pagar'],
+    ['💵','Caixa Operacional','Movimentações, saldo, entradas, saídas e turnos do mesmo caixa utilizado pelo PDV.','Disponível','/erp/pdv/caixa'],
+    ['💸','Fluxo de Caixa','Entradas e saídas reais por data de movimentação.','Base pronta'],
+    ['📈','DRE','Resultado por competência: receitas, custos e despesas.','Base pronta'],
+    ['🧾','DFC','Demonstração dos fluxos de caixa operacionais e financeiros.','Planejado'],
+    ['➕','Receitas','Lançamentos manuais de receitas não originadas no PDV.','Planejado'],
+    ['➖','Despesas','Lançamentos manuais e recorrentes com parcelamento.','Planejado'],
+    ['🔄','Transferências','Movimentações entre caixas e contas bancárias.','Planejado'],
+    ['📑','Relatórios Financeiros','Consultas por período, competência, origem e unidade.','Planejado']
+  ].forEach(function(item){ %>
+    <% if (item[4]) { %><a class="finance-operation-card finance-operation-link" href="<%= item[4] %>"><% } else { %><article class="finance-operation-card"><% } %>
+      <span class="finance-operation-icon"><%= item[0] %></span>
+      <div><h2><%= item[1] %></h2><p><%= item[2] %></p><small><%= item[3] %></small></div>
+    <% if (item[4]) { %></a><% } else { %></article><% } %>
+  <% }) %>
+</section>
+
+<section class="finance-configuration-link">
+  <div><b>Precisa alterar regras do Financeiro?</b><p>Formas de pagamento, plano de contas, centros de custo e demais parâmetros ficam separados da operação.</p></div>
+  <a class="btn btn-primary" href="/configuracoes/financeiro">Abrir Configurações Financeiras</a>
+</section>

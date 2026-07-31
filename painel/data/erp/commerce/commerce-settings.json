@@ -1,0 +1,36 @@
+{
+  "version": "0.13.0",
+  "defaultCashboxId": "caixa-principal",
+  "paymentMethods": [
+    {
+      "id": "dinheiro",
+      "name": "Dinheiro",
+      "active": true,
+      "kind": "cash"
+    },
+    {
+      "id": "pix",
+      "name": "Pix",
+      "active": true,
+      "kind": "instant"
+    },
+    {
+      "id": "cartao-credito",
+      "name": "Cartão de crédito",
+      "active": true,
+      "kind": "card"
+    },
+    {
+      "id": "cartao-debito",
+      "name": "Cartão de débito",
+      "active": true,
+      "kind": "card"
+    },
+    {
+      "id": "boleto-crediario",
+      "name": "Boleto / crediário",
+      "active": true,
+      "kind": "receivable"
+    }
+  ]
+}

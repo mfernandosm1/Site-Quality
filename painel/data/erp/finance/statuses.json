@@ -1,0 +1,54 @@
+{
+  "version": "0.16.0",
+  "items": [
+    {
+      "id": "STS-ABERTO",
+      "name": "Em aberto",
+      "key": "open",
+      "active": true,
+      "system": true
+    },
+    {
+      "id": "STS-PARCIAL",
+      "name": "Pago parcialmente",
+      "key": "partial",
+      "active": true,
+      "system": true
+    },
+    {
+      "id": "STS-PAGO",
+      "name": "Pago",
+      "key": "paid",
+      "active": true,
+      "system": true
+    },
+    {
+      "id": "STS-VENCIDO",
+      "name": "Vencido",
+      "key": "overdue",
+      "active": true,
+      "system": true
+    },
+    {
+      "id": "STS-CANCELADO",
+      "name": "Cancelado",
+      "key": "cancelled",
+      "active": true,
+      "system": true
+    },
+    {
+      "id": "STS-ESTORNADO",
+      "name": "Estornado",
+      "key": "reversed",
+      "active": true,
+      "system": true
+    },
+    {
+      "id": "STS-PROCESSANDO",
+      "name": "Em processamento",
+      "key": "processing",
+      "active": true,
+      "system": true
+    }
+  ]
+}

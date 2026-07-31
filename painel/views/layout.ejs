@@ -2,6 +2,14 @@
 <html lang="pt-BR"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Painel Quality</title>
+<script>
+(function(){
+  try{
+    var saved=localStorage.getItem('quality_panel_theme')||'light';
+    document.documentElement.setAttribute('data-panel-theme',saved);
+  }catch(e){}
+})();
+</script>
 <link rel="stylesheet" href="/public/css/painel.css">
 <link rel="stylesheet" href="/public/css/painel-theme.css">
 <script src="https://cdn.ckeditor.com/4.25.1-lts/full/ckeditor.js"></script>
@@ -9,26 +17,49 @@
 <div class='topbar'>
   <div class='brand'>Painel Quality</div>
   <nav>
-    <a href='/'>Dashboard</a>
-    <a href='/produtos'>Produtos</a>
+    <a href='/'>🏠 Dashboard</a>
+    <a href='/erp'>💼 ERP</a>
+    <a href='/categorias'>🗂️ Categorias</a>
+    <a href='/crm'>💬 CRM</a>
+    <a href='/site'>🌐 Site</a>
     <a href='/analytics'>📊 Analytics</a>
-    <a href='/marketing'>✨ Marketing IA</a>
-    <a href='/sorteios'>🎉 Promoções & Sorteios</a>
-    <a href='/categorias'>Categorias</a>
-    <a href='/banners'>Banners</a>
-    <a href='/personalizacao'>🎨 Personalização</a>
-    <a href='/seo'>SEO</a>
-    <a href='/paginas'>Páginas</a>
+    <a href='/marketing'>✨ Marketing</a>
+    <a href='/ferramentas'>🧰 Ferramentas</a>
+    <a href='/configuracoes'>⚙️ Configurações</a>
   </nav>
   <div class='actions'>
+    <div class='panel-theme-control' title='Tema do painel'>
+      <span aria-hidden='true'>🎨</span>
+      <select id='panelThemeSelect' aria-label='Escolher tema do painel'>
+        <option value='light'>Claro</option>
+        <option value='dark'>Escuro</option>
+        <option value='oled'>Black OLED</option>
+        <option value='blue'>Dark Blue</option>
+      </select>
+    </div>
     <form method='post' action='/publicar'><button class='btn primary' type='submit'>📤 Publicar</button></form>
     <a class='btn secondary' href='/site/view/index.html' target='_blank'>👁️ Ver site</a>
   </div>
 </div>
 <div class='container'>
-  <% if (flash) { %><div class='notice'><%= flash %></div><% } %>
+  <% if (typeof flash !== 'undefined' && flash) { %><div class='notice'><%= flash %></div><% } %>
   <%- body %>
 </div>
+<script>
+(function(){
+  var select=document.getElementById('panelThemeSelect');
+  if(!select)return;
+  var root=document.documentElement;
+  var current=root.getAttribute('data-panel-theme')||'light';
+  select.value=current;
+  select.addEventListener('change',function(){
+    root.setAttribute('data-panel-theme',this.value);
+    try{localStorage.setItem('quality_panel_theme',this.value);}catch(e){}
+  });
+})();
+</script>
 <script src='/public/js/painel.js'></script>
+<script src='/public/js/help-tips.js'></script>
 <script src='/public/js/analytics-live-card.js'></script>
+<script src='/public/js/kernel-tracker.js'></script>
 </body></html>

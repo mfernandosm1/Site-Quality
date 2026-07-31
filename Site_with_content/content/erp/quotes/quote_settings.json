@@ -1,0 +1,99 @@
+{
+  "version": 1,
+  "calculationMode": "gross-up",
+  "displayInstallments": [
+    12,
+    18
+  ],
+  "showCash": true,
+  "pricing": {
+    "roundToNine99": true
+  },
+  "rates": {
+    "pix": 5,
+    "cash": 5,
+    "debit": 6,
+    "card": {
+      "1": 6.9,
+      "2": 8.5,
+      "3": 9.3,
+      "4": 10,
+      "5": 11,
+      "6": 13.5,
+      "7": 12.5,
+      "8": 16,
+      "9": 16.5,
+      "10": 17.7,
+      "11": 17.5,
+      "12": 21,
+      "13": 20.5,
+      "14": 21,
+      "15": 21.5,
+      "16": 22,
+      "17": 22.5,
+      "18": 30
+    },
+    "credit": {
+      "1": 4,
+      "2": 6,
+      "3": 8,
+      "4": 10,
+      "5": 12,
+      "6": 14,
+      "7": 16,
+      "8": 18,
+      "9": 20,
+      "10": 22,
+      "11": 24,
+      "12": 26,
+      "13": 28,
+      "14": 30,
+      "15": 32,
+      "16": 34,
+      "17": 36,
+      "18": 38
+    }
+  },
+  "defaults": {
+    "importRate": 0,
+    "installments": 1,
+    "paymentMethod": "pix",
+    "dollarRate": 0,
+    "dollarAdd": 0.13,
+    "defaultProfit": 0,
+    "tableCashMode": "withFee",
+    "manualCashMode": "noFee"
+  },
+  "marginRules": [
+    {
+      "keywords": "iphone pro max",
+      "profit": 500
+    },
+    {
+      "keywords": "iphone pro",
+      "profit": 500
+    },
+    {
+      "keywords": "iphone",
+      "profit": 500
+    }
+  ],
+  "message": {
+    "header": "✨ Orçamento Quality Celulares ✨",
+    "footer": "",
+    "warranty": "✅ 1 ano de garantia e suporte conosco",
+    "shipping": "🚚 Frete grátis",
+    "offerTitle": "Ofertas de Julho Xiaomi",
+    "validUntil": "20/07 as 18h",
+    "productEmoji": "🎮",
+    "installmentEmoji": "💳",
+    "cashEmoji": "🔥",
+    "paymentLabels": {
+      "card": "no cartão",
+      "credit": "no boleto/crediário",
+      "cashWithFee": "à vista no Pix ou dinheiro",
+      "cashNoFee": "à vista no Pix ou dinheiro"
+    }
+  },
+  "updatedAt": "2026-07-24T13:55:59.752Z"
+}

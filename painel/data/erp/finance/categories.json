@@ -1,0 +1,81 @@
+{
+  "version": "0.16.0",
+  "items": [
+    {
+      "id": "CAT-VENDAS",
+      "name": "Vendas",
+      "nature": "receita",
+      "active": true,
+      "system": true
+    },
+    {
+      "id": "CAT-SERVICOS",
+      "name": "Serviços",
+      "nature": "receita",
+      "active": true,
+      "system": true
+    },
+    {
+      "id": "CAT-FORNECEDORES",
+      "name": "Fornecedores",
+      "nature": "despesa",
+      "active": true,
+      "system": true
+    },
+    {
+      "id": "CAT-OPERACIONAL",
+      "name": "Operacional",
+      "nature": "despesa",
+      "active": true,
+      "system": true
+    },
+    {
+      "id": "CAT-fdaa0a6e-e987-474f-b193-2d231ac6a0d0",
+      "name": "ee",
+      "code": "",
+      "active": false,
+      "nature": "despesa",
+      "parentId": null,
+      "updatedAt": "2026-07-28T18:42:02.665Z",
+      "updatedBy": "painel",
+      "createdAt": "2026-07-28T18:27:46.981Z",
+      "createdBy": "painel"
+    },
+    {
+      "id": "CAT-cdcc486c-d950-49ed-bbbc-e67ee3df53d4",
+      "name": "s",
+      "code": "",
+      "active": true,
+      "nature": "despesa",
+      "parentId": null,
+      "updatedAt": "2026-07-28T18:28:34.340Z",
+      "updatedBy": "painel",
+      "createdAt": "2026-07-28T18:28:34.340Z",
+      "createdBy": "painel"
+    },
+    {
+      "id": "CAT-15da980c-e475-4a6c-82d5-a30f877d304b",
+      "name": "teste",
+      "code": "",
+      "active": true,
+      "nature": "despesa",
+      "parentId": null,
+      "updatedAt": "2026-07-28T18:31:22.154Z",
+      "updatedBy": "painel",
+      "createdAt": "2026-07-28T18:31:22.154Z",
+      "createdBy": "painel"
+    },
+    {
+      "id": "CAT-39a718b3-7240-4d00-9492-cd9affc70d34",
+      "name": "testeaa",
+      "code": "",
+      "active": true,
+      "nature": "despesa",
+      "parentId": null,
+      "updatedAt": "2026-07-28T18:32:02.083Z",
+      "updatedBy": "painel",
+      "createdAt": "2026-07-28T18:32:02.083Z",
+      "createdBy": "painel"
+    }
+  ]
+}

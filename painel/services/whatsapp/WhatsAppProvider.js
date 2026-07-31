@@ -10,7 +10,8 @@ export class WhatsAppProvider {
   constructor({ client = null, statusReader = null, logger = null } = {}) {
     this.client = client;
     this.statusReader = typeof statusReader === 'function' ? statusReader : null;
-    this.adapter = new WWebJSAdapter({ client, logger });
+    this.messageCache = new Map();
+    this.adapter = new WWebJSAdapter({ client, logger, messageCache: this.messageCache });
   }
 
   connect(client) {
@@ -28,7 +29,7 @@ export class WhatsAppProvider {
   status() {
     const external = this.statusReader ? this.statusReader() : {};
     return {
-      providerVersion: '1.0.2',
+      providerVersion: '1.4.0',
       clientAttached: Boolean(this.client),
       pageAvailable: Boolean(this.client?.pupPage?.evaluate),
       ...external
@@ -40,10 +41,19 @@ export class WhatsAppProvider {
     return this.adapter.getChatsSafe();
   }
 
+  cacheMessage(message) {
+    return this.adapter.cacheMessage(message);
+  }
+
+  async downloadMediaSafe(options = {}) {
+    if (!this.client) throw new Error('WhatsApp Provider: cliente não conectado.');
+    return this.adapter.downloadMediaSafe(options);
+  }
+
   // Contratos reservados para as próximas entregas.
   async getContactsSafe() { throw new Error('getContactsSafe() ainda não implementado.'); }
   async getMessagesSafe() { throw new Error('getMessagesSafe() ainda não implementado.'); }
-  async downloadMedia() { throw new Error('downloadMedia() ainda não implementado.'); }
+  async downloadMedia(options = {}) { return this.downloadMediaSafe(options); }
   async sendMessage() { throw new Error('sendMessage() ainda não implementado.'); }
 }
 

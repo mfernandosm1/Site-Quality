@@ -1,4 +1,21 @@
 <% layout('layout') -%>
+<%
+  function formatDateTime(value) {
+    if (!value) return '—';
+    try {
+      var date = new Date(value);
+      if (Number.isNaN(date.getTime())) return '—';
+      return new Intl.DateTimeFormat('pt-BR', {
+        day: '2-digit',
+        month: '2-digit',
+        hour: '2-digit',
+        minute: '2-digit'
+      }).format(date);
+    } catch (error) {
+      return '—';
+    }
+  }
+%>
 <style>
   :root{--qw-bg:#f6f7fb;--qw-card:#fff;--qw-text:#111827;--qw-muted:#6b7280;--qw-line:#e5e7eb;--qw-red:#dc2626;--qw-green:#16a34a;--qw-blue:#2563eb;--qw-orange:#f97316;--qw-shadow:0 10px 30px rgba(15,23,42,.07)}
   .qw-wrap{background:var(--qw-bg);margin:-18px;padding:22px;min-height:calc(100vh - 70px);color:var(--qw-text)}
@@ -84,7 +101,7 @@
   .qw-inbox-shell{display:grid;grid-template-columns:360px minmax(0,1fr);gap:14px;min-height:620px}
   .qw-inbox-list{padding:0;overflow:hidden}.qw-inbox-list-head{padding:14px;border-bottom:1px solid var(--qw-line)}
   .qw-conversation-list{max-height:650px;overflow:auto}.qw-conversation-item{display:block;padding:13px 14px;border-bottom:1px solid #eef2f7;text-decoration:none;color:var(--qw-text);background:#fff}.qw-conversation-item:hover,.qw-conversation-item.active{background:#eff6ff}.qw-conversation-name{display:flex;justify-content:space-between;gap:8px;font-weight:900}.qw-conversation-snippet{color:var(--qw-muted);font-size:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-top:4px}.qw-conversation-meta{display:flex;gap:6px;flex-wrap:wrap;margin-top:7px}.qw-badge{font-size:10px;font-weight:900;border-radius:999px;padding:4px 7px;background:#f1f5f9;color:#475569}.qw-badge.wait{background:#fef2f2;color:#991b1b}.qw-badge.new{background:#eff6ff;color:#1d4ed8}
-  .qw-inbox-chat{padding:0;overflow:hidden}.qw-inbox-chat-head{padding:14px 16px;border-bottom:1px solid var(--qw-line);display:flex;justify-content:space-between;gap:12px;align-items:flex-start}.qw-inbox-chat-body{background:#efeae2;padding:18px;min-height:390px;max-height:540px;overflow:auto;display:flex;flex-direction:column;gap:8px}.qw-inbox-msg{max-width:min(78%,650px);padding:9px 11px;border-radius:12px;background:#fff;box-shadow:0 1px 1px rgba(0,0,0,.08);white-space:pre-wrap;word-break:break-word}.qw-inbox-msg.outgoing{align-self:flex-end;background:#d9fdd3;border-radius:12px 4px 12px 12px}.qw-inbox-msg.incoming{align-self:flex-start;border-radius:4px 12px 12px 12px}.qw-inbox-msg small{display:block;text-align:right;color:#667781;font-size:10px;margin-top:5px}.qw-inbox-media{display:grid;gap:6px;margin-bottom:5px}.qw-inbox-media img{display:block;max-width:100%;max-height:340px;border-radius:9px;object-fit:contain;background:#f8fafc}.qw-inbox-media video{display:block;width:min(420px,100%);max-height:340px;border-radius:9px;background:#111}.qw-inbox-media audio{display:block;width:min(340px,100%)}.qw-inbox-document{display:flex;align-items:center;gap:10px;padding:10px;border-radius:9px;background:rgba(255,255,255,.58);color:#111827;text-decoration:none}.qw-inbox-document-icon{font-size:26px}.qw-inbox-document-info{min-width:0;flex:1}.qw-inbox-document-name{font-weight:900;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.qw-inbox-document-meta{font-size:10px;color:#64748b}.qw-media-actions{display:flex;gap:6px;flex-wrap:wrap}.qw-media-action{font-size:10px;font-weight:900;color:#2563eb;text-decoration:none}.qw-call-notice{font-weight:900;color:#475569;padding:4px 2px}.qw-media-error{font-size:11px;color:#991b1b;background:#fee2e2;border-radius:8px;padding:7px}.qw-attach-item{border:0;width:100%;background:#fff;text-align:left;cursor:pointer}.qw-attach-item:hover{background:#eff6ff}.qw-attach-preview{display:none;margin-top:6px;padding:8px;background:#fff;border:1px solid var(--qw-line);border-radius:10px;font-size:11px}.qw-attach-preview.show{display:flex;align-items:center;justify-content:space-between;gap:8px}.qw-attach-preview-name{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.qw-attach-cancel{border:0;background:#fee2e2;color:#991b1b;border-radius:999px;width:24px;height:24px;cursor:pointer}.qw-contact-form{padding:14px 16px;border-top:1px solid var(--qw-line);background:#fff}.qw-contact-form-grid{display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:10px}.qw-contact-form-grid .wide{grid-column:span 2}.qw-inbox-placeholder{min-height:620px;display:grid;place-items:center;text-align:center;padding:30px}
+  .qw-inbox-chat{padding:0;overflow:hidden}.qw-inbox-chat-head{padding:14px 16px;border-bottom:1px solid var(--qw-line);display:flex;justify-content:space-between;gap:12px;align-items:flex-start}.qw-inbox-chat-body{background:#efeae2;padding:18px;min-height:390px;max-height:540px;overflow:auto;display:flex;flex-direction:column;gap:8px}.qw-inbox-msg{max-width:min(78%,650px);padding:9px 11px;border-radius:12px;background:#fff;box-shadow:0 1px 1px rgba(0,0,0,.08);white-space:pre-wrap;word-break:break-word}.qw-inbox-msg.outgoing{align-self:flex-end;background:#d9fdd3;border-radius:12px 4px 12px 12px}.qw-inbox-msg.incoming{align-self:flex-start;border-radius:4px 12px 12px 12px}.qw-inbox-msg small{display:block;text-align:right;color:#667781;font-size:10px;margin-top:5px}.qw-inbox-media{display:grid;gap:6px;margin-bottom:5px}.qw-inbox-media img{display:block;max-width:100%;max-height:340px;border-radius:9px;object-fit:contain;background:#f8fafc}.qw-inbox-media video{display:block;width:min(420px,100%);max-height:340px;border-radius:9px;background:#111}.qw-inbox-media audio{display:block;width:min(340px,100%)}.qw-inbox-document{display:flex;align-items:center;gap:10px;padding:10px;border-radius:9px;background:rgba(255,255,255,.58);color:#111827;text-decoration:none}.qw-inbox-document-icon{font-size:26px}.qw-inbox-document-info{min-width:0;flex:1}.qw-inbox-document-name{font-weight:900;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.qw-inbox-document-meta{font-size:10px;color:#64748b}.qw-media-actions{display:flex;gap:6px;flex-wrap:wrap}.qw-media-action{font-size:10px;font-weight:900;color:#2563eb;text-decoration:none}.qw-media-error{font-size:11px;color:#991b1b;background:#fee2e2;border-radius:8px;padding:7px}.qw-attach-item{border:0;width:100%;background:#fff;text-align:left;cursor:pointer}.qw-attach-item:hover{background:#eff6ff}.qw-attach-preview{display:none;margin-top:6px;padding:8px;background:#fff;border:1px solid var(--qw-line);border-radius:10px;font-size:11px}.qw-attach-preview.show{display:flex;align-items:center;justify-content:space-between;gap:8px}.qw-attach-preview-name{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.qw-attach-cancel{border:0;background:#fee2e2;color:#991b1b;border-radius:999px;width:24px;height:24px;cursor:pointer}.qw-contact-form{padding:14px 16px;border-top:1px solid var(--qw-line);background:#fff}.qw-contact-form-grid{display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:10px}.qw-contact-form-grid .wide{grid-column:span 2}.qw-inbox-placeholder{min-height:620px;display:grid;place-items:center;text-align:center;padding:30px}
   .qw-inbox-composer{padding:12px 14px;border-top:1px solid var(--qw-line);background:#f8fafc;display:grid;gap:10px}
   .qw-inbox-compose-row{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:9px;align-items:end}
   .qw-inbox-compose-text{min-height:46px;max-height:140px;resize:vertical}
@@ -96,7 +113,7 @@
   @media(max-width:950px){.qw-inbox-shell{grid-template-columns:1fr}.qw-conversation-list{max-height:340px}.qw-contact-form-grid{grid-template-columns:1fr}.qw-contact-form-grid .wide{grid-column:span 1}}
   @media(max-width:650px){.qw-inbox-compose-row,.qw-inbox-block-row{grid-template-columns:1fr}.qw-inbox-compose-row .qw-btn,.qw-inbox-block-row .qw-btn{width:100%}}
 
-  /* Inbox UX v0.5.5 — sincronização confiável v0.6.3.1 */
+  /* Inbox UX v0.5.5 */
   .qw-inbox-shell{grid-template-columns:340px minmax(0,1fr);gap:10px;min-height:660px}
   .qw-inbox-list,.qw-inbox-chat{border-radius:16px}
   .qw-inbox-list-head{padding:12px;background:#f8fafc}
@@ -120,11 +137,13 @@
   .qw-send-icon{background:#2563eb;color:#fff}.qw-send-icon:hover{background:#1d4ed8}
   .qw-popover{display:none;position:absolute;z-index:25;bottom:64px;left:10px;width:min(330px,calc(100% - 20px));background:#fff;border:1px solid var(--qw-line);border-radius:14px;box-shadow:0 16px 40px rgba(15,23,42,.18);padding:10px}.qw-popover.open{display:block}
   .qw-popover-title{font-weight:900;padding:5px 7px 10px}.qw-popover-list{max-height:300px;overflow:auto;display:grid;gap:4px}
-  .qw-popover-item{width:100%;border:0;background:#fff;border-radius:10px;padding:10px;text-align:left;cursor:pointer;font-weight:800}.qw-popover-item:hover{background:#eff6ff}.qw-popover-item small{display:block;color:#64748b;font-weight:400;margin-top:2px}
+  .qw-popover-item{width:100%;border:0;background:#fff;border-radius:10px;padding:10px;text-align:left;cursor:pointer;font-weight:800}.qw-popover-item:hover{background:#eff6ff}.qw-popover-item small{display:block;color:#64748b;font-weight:400;margin-top:2px}.qw-block-popover-search{position:sticky;top:0;z-index:2;background:#fff;padding:0 0 6px}.qw-block-popover-search .qw-input{height:34px;min-height:34px;padding:6px 9px;border-radius:9px;font-size:12px;line-height:1.2;border-color:#dbe2ea;box-shadow:none;transition:border-color .15s ease,box-shadow .15s ease,background-color .15s ease}.qw-block-popover-search .qw-input::placeholder{color:#94a3b8}.qw-block-popover-search .qw-input:focus{outline:none;border-color:#93c5fd;box-shadow:0 0 0 3px rgba(37,99,235,.10);background:#fff}.qw-popover-item[hidden]{display:none}.qw-block-search-empty{display:none;padding:12px;text-align:center;color:var(--qw-muted);font-size:12px}.qw-block-search-empty.show{display:block}
   .qw-attach-item{display:flex;gap:10px;align-items:center;padding:10px;border-radius:10px;color:#475569}.qw-attach-item.disabled{opacity:.55}.qw-attach-item span:first-child{font-size:20px}
   .qw-contact-drawer-backdrop{display:none;position:fixed;inset:0;background:rgba(15,23,42,.25);z-index:80}.qw-contact-drawer-backdrop.open{display:block}
-  .qw-contact-drawer{position:fixed;right:0;top:0;bottom:0;width:min(410px,100vw);background:#fff;box-shadow:-16px 0 40px rgba(15,23,42,.2);padding:18px;overflow:auto;transform:translateX(105%);transition:.2s;z-index:81}.qw-contact-drawer.open{transform:translateX(0)}
-  .qw-drawer-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px}.qw-drawer-head h2{margin:0}.qw-drawer-close{border:0;background:#f1f5f9;border-radius:999px;width:36px;height:36px;cursor:pointer}
+  .qw-contact-drawer{position:fixed;right:0;top:0;bottom:0;width:min(430px,100vw);background:#fff;box-shadow:-16px 0 40px rgba(15,23,42,.2);padding:18px;overflow:auto;transform:translateX(105%);transition:.22s ease;z-index:81}.qw-contact-drawer.open{transform:translateX(0)}
+  .qw-drawer-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;position:sticky;top:-18px;background:#fff;padding:18px 0 10px;z-index:2}.qw-drawer-head h2{margin:0}.qw-drawer-close{border:0;background:#f1f5f9;border-radius:999px;width:36px;height:36px;cursor:pointer}
+  .qw-crm-id{font-size:10px;color:#94a3b8;word-break:break-all;margin:-7px 0 13px}.qw-crm-section{border:1px solid var(--qw-line);border-radius:14px;padding:12px;margin-bottom:12px;background:#fff}.qw-crm-section h3{font-size:13px;margin:0 0 10px}.qw-crm-labels{display:flex;gap:7px;flex-wrap:wrap}.qw-crm-label{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--qw-line);border-radius:999px;padding:6px 9px;font-size:11px;font-weight:900;background:#fff}.qw-crm-label input{margin:0}.qw-label-dot{width:9px;height:9px;border-radius:50%;display:inline-block}.qw-crm-note{border-left:3px solid #cbd5e1;padding:8px 10px;background:#f8fafc;border-radius:0 10px 10px 0;margin-top:8px;font-size:12px;white-space:pre-wrap}.qw-crm-note small{display:block;color:#64748b;margin-top:5px}.qw-crm-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px}.qw-crm-grid .wide{grid-column:span 2}.qw-crm-new-label{display:grid;grid-template-columns:1fr 45px auto;gap:7px;align-items:end}.qw-color-input{width:45px;height:40px;padding:3px;border:1px solid var(--qw-line);border-radius:10px;background:#fff}.qw-crm-empty{font-size:12px;color:#64748b}.qw-crm-save{position:sticky;bottom:-18px;background:#fff;padding:12px 0 18px;margin-top:8px;border-top:1px solid #eef2f7}.qw-crm-save .qw-btn{width:100%}
+  @media(max-width:520px){.qw-crm-grid{grid-template-columns:1fr}.qw-crm-grid .wide{grid-column:span 1}}
   .qw-contact-form{padding:0;border:0}.qw-contact-form-grid{display:grid;grid-template-columns:1fr;gap:13px}.qw-contact-form-grid .wide{grid-column:span 1}
   .qw-conversation-menu{display:none;position:fixed;z-index:90;background:#fff;border:1px solid var(--qw-line);border-radius:12px;box-shadow:0 14px 36px rgba(15,23,42,.2);padding:6px;min-width:210px}.qw-conversation-menu.open{display:block}.qw-conversation-menu button{width:100%;border:0;background:#fff;text-align:left;padding:10px;border-radius:8px;cursor:pointer;font-weight:800}.qw-conversation-menu button:hover{background:#f1f5f9}
   .qw-chat-status-dot{width:9px;height:9px;border-radius:50%;display:inline-block;background:#22c55e;margin-right:5px}.qw-chat-status-dot.wait{background:#ef4444}
@@ -190,17 +209,25 @@
   /* v0.6.1 — mídia temporária, sem cópia automática no painel */
   .qw-remote-media{display:grid;gap:7px}.qw-remote-media-note{font-size:10px;color:#64748b;background:rgba(255,255,255,.58);border-radius:8px;padding:6px 8px}.qw-remote-media .qw-inbox-document{border:1px solid rgba(148,163,184,.35)}
 
+  /* v0.8.4 — refinamentos seguros de mídia */
+  .qw-media-actions{align-items:center;margin-top:2px}.qw-media-action{display:inline-flex;align-items:center;gap:4px;border:0;background:transparent;padding:3px 1px;cursor:pointer}
+  .qw-media-status{display:inline-flex;align-items:center;gap:4px;width:max-content;max-width:100%;font-size:9px;color:#64748b;background:rgba(255,255,255,.58);border-radius:999px;padding:4px 7px}
+  .qw-inbox-audio-card{display:grid;gap:6px;min-width:min(330px,70vw);padding:8px;border-radius:10px;background:rgba(255,255,255,.46)}
+  .qw-inbox-audio-head{display:flex;align-items:center;gap:7px;min-width:0}.qw-inbox-audio-icon{width:30px;height:30px;border-radius:50%;display:grid;place-items:center;background:#dcfce7;font-size:15px}.qw-inbox-audio-title{font-size:11px;font-weight:900;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .qw-inbox-sticker{display:grid;justify-items:start;gap:5px}.qw-inbox-sticker img{width:auto;max-width:190px;max-height:190px;border-radius:0;background:transparent;filter:drop-shadow(0 2px 3px rgba(15,23,42,.14))}.qw-inbox-sticker-label{font-size:9px;color:#64748b}
+  .qw-inbox-document{border:1px solid rgba(148,163,184,.25);min-width:min(300px,68vw)}.qw-inbox-document-icon{width:36px;height:36px;border-radius:9px;display:grid;place-items:center;background:rgba(255,255,255,.7);font-size:21px;flex:0 0 auto}
+  .qw-inbox-document-name{display:block}.qw-inbox-document-meta{display:block;margin-top:2px}.qw-media-error{line-height:1.35}
 
-  /* v0.6.2 — Central de Armazenamento */
-  .qw-storage-kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-bottom:14px}
-  .qw-storage-kpi{background:#fff;border:1px solid var(--qw-line);border-radius:16px;padding:15px;box-shadow:var(--qw-shadow)}
-  .qw-storage-kpi .value{font-size:27px;font-weight:900;line-height:1}.qw-storage-kpi .label{font-size:12px;color:var(--qw-muted);margin-top:7px}.qw-storage-kpi .hint{font-size:10px;color:#94a3b8;margin-top:4px}
-  .qw-storage-layout{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(320px,.9fr);gap:14px}.qw-storage-stack{display:grid;gap:14px}
-  .qw-health-list{display:grid;gap:9px}.qw-health-row{display:flex;justify-content:space-between;gap:15px;align-items:center;padding:11px 12px;border:1px solid #eef2f7;border-radius:12px;background:#fff}.qw-health-row strong{white-space:nowrap}.qw-health-ok{color:#166534}.qw-health-warn{color:#b45309}.qw-health-bad{color:#b91c1c}
-  .qw-clean-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.qw-clean-action{border:1px solid var(--qw-line);border-radius:14px;padding:13px;background:#fff}.qw-clean-action h3{font-size:14px;margin:0 0 5px}.qw-clean-action p{font-size:11px;color:var(--qw-muted);min-height:31px;margin:0 0 10px}.qw-clean-action form{margin:0}.qw-clean-action .qw-btn{width:100%;font-size:12px;padding:9px}
-  .qw-storage-note{font-size:11px;color:var(--qw-muted);line-height:1.5}.qw-storage-path{font-family:Consolas,monospace;font-size:11px;background:#f8fafc;border:1px solid var(--qw-line);border-radius:10px;padding:9px;word-break:break-all}
-  @media(max-width:1000px){.qw-storage-kpis{grid-template-columns:repeat(2,1fr)}.qw-storage-layout{grid-template-columns:1fr}}@media(max-width:620px){.qw-storage-kpis,.qw-clean-grid{grid-template-columns:1fr}}
 
+  /* v0.9.3 — lembretes internos do painel */
+  .qw-task-kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:10px 0 14px}.qw-task-kpi{border:1px solid var(--qw-line);border-radius:12px;padding:10px;background:#fff}.qw-task-kpi strong{display:block;font-size:22px}.qw-task-kpi span{font-size:11px;color:#64748b}.qw-task-list{display:grid;gap:8px}.qw-task-item{border:1px solid #e2e8f0;border-left:4px solid #eab308;border-radius:11px;padding:9px;background:#fff}.qw-task-item.high{border-left-color:#ef4444}.qw-task-item.low{border-left-color:#22c55e}.qw-task-item.completed{opacity:.65;border-left-color:#94a3b8}.qw-task-title{font-weight:900;font-size:12px}.qw-task-meta{font-size:10px;color:#64748b;margin-top:3px}.qw-task-actions{display:flex;gap:6px;margin-top:7px}.qw-task-actions form{margin:0}.qw-task-badge{display:inline-flex;align-items:center;gap:4px;margin-top:5px;padding:3px 6px;border-radius:999px;font-size:9px;font-weight:900;background:#fef3c7;color:#92400e}.qw-task-badge.overdue{background:#fee2e2;color:#991b1b}.qw-task-badge.today{background:#ffedd5;color:#9a3412}.qw-task-form{display:grid;gap:8px}.qw-task-form-row{display:grid;grid-template-columns:1fr 120px;gap:8px}.qw-conversation-task{display:inline-flex;align-items:center;gap:4px;margin-top:4px;font-size:9px;font-weight:900;border-radius:999px;padding:3px 6px;background:#fff7ed;color:#9a3412}.qw-conversation-task.overdue{background:#fee2e2;color:#991b1b}.qw-chat-reminder{padding:7px 12px;background:#fff7ed;border-bottom:1px solid #fed7aa;color:#9a3412;font-size:11px;font-weight:800}.qw-chat-reminder.overdue{background:#fef2f2;border-color:#fecaca;color:#991b1b}.qw-dashboard-task-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.qw-dashboard-task-col{border:1px solid var(--qw-line);border-radius:12px;padding:10px;min-height:130px}.qw-dashboard-task-col h3{font-size:13px;margin:0 0 8px}.qw-dashboard-task-row{display:flex;align-items:center;gap:8px;border-bottom:1px solid #f1f5f9;padding:7px 0}.qw-dashboard-task-row:last-child{border-bottom:0}.qw-dashboard-task-link{display:block;flex:1;min-width:0;text-decoration:none;color:inherit}.qw-dashboard-task-link strong{font-size:12px}.qw-dashboard-task-link small{display:block;color:#64748b;margin-top:2px}.qw-dashboard-task-complete{margin:0}.qw-dashboard-task-complete button,.qw-chat-reminder-complete{border:1px solid #bbf7d0;background:#f0fdf4;color:#166534;border-radius:8px;padding:5px 8px;font-size:10px;font-weight:900;cursor:pointer;white-space:nowrap}.qw-dashboard-task-complete button:hover,.qw-chat-reminder-complete:hover{background:#dcfce7}.qw-chat-reminder{display:flex;align-items:center;justify-content:space-between;gap:10px}.qw-chat-reminder-text{min-width:0}.qw-chat-reminder form{margin:0}.qw-task-empty{font-size:11px;color:#94a3b8;padding:8px 0}
+  @media(max-width:700px){.qw-dashboard-task-grid,.qw-task-kpis{grid-template-columns:1fr}.qw-task-form-row{grid-template-columns:1fr}}
+
+
+  .qw-sync-row{display:flex;gap:8px;align-items:center;margin-bottom:8px}.qw-sync-row .qw-input{flex:1}.qw-sync-btn{width:38px;height:38px;border:1px solid var(--qw-line);border-radius:10px;background:#fff;cursor:pointer;font-size:17px;font-weight:900}.qw-sync-btn.syncing{animation:qwSpin .9s linear infinite}.qw-sync-meta{font-size:10px;color:var(--qw-muted);margin-bottom:7px}.qw-attention-strip{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:12px}.qw-attention-card{border:1px solid var(--qw-line);border-radius:12px;background:#fff;padding:10px}.qw-attention-card strong{display:block;font-size:21px}.qw-attention-card span{font-size:11px;color:var(--qw-muted)}.qw-attention-card.warning{background:#fff7ed;border-color:#fed7aa}.qw-attention-card.critical{background:#fef2f2;border-color:#fecaca}.qw-next-action{font-size:11px;margin-top:5px;color:#475569}.qw-next-action strong{color:#111827}.qw-pending-chip{display:inline-flex;margin-top:5px;border-radius:999px;padding:3px 7px;background:#fff7ed;color:#9a3412;font-size:9px;font-weight:900}.qw-opportunity.critical{border-left:4px solid #dc2626}.qw-opportunity.warning{border-left:4px solid #f97316}.qw-smart-panel{display:grid;grid-template-columns:repeat(3,1fr);gap:9px}.qw-smart-metric{border:1px solid var(--qw-line);border-radius:12px;padding:10px}.qw-smart-metric strong{font-size:24px;display:block}.qw-smart-metric span{font-size:11px;color:var(--qw-muted)}@keyframes qwSpin{to{transform:rotate(360deg)}}@media(max-width:900px){.qw-attention-strip,.qw-smart-panel{grid-template-columns:1fr 1fr}}
+
+
+  .qw-attendance-badge{display:inline-flex;align-items:center;gap:6px;padding:5px 9px;border-radius:999px;font-size:11px;font-weight:900;background:#16351f;color:#8df0a8;border:1px solid #28673a}.qw-attendance-badge.closed{background:#372124;color:#ffb2b8;border-color:#71343a}.qw-attendance-actions{display:flex;align-items:center;gap:7px}.qw-close-form{display:flex;align-items:center;gap:7px}.qw-close-reason{max-width:170px}.qw-bulk-bar{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin:10px 0}.qw-opportunity-row{display:grid;grid-template-columns:24px 1fr;gap:8px;align-items:center}.qw-opportunity-row .qw-opportunity{width:100%}.qw-opportunity-check{width:17px;height:17px}.qw-closed-note{font-size:11px;color:#f0a0a6;font-weight:800}
 </style>
 
 <div class="qw-wrap <%= (tab === 'inbox' || tab === 'comercial') ? 'qw-operational' : '' %>">
@@ -233,14 +260,13 @@
       <a class="qw-settings-link <%= settingsSection === 'geral' ? 'active' : '' %>" href="/automacao-whatsapp?tab=configuracoes&section=geral">⚙️ Geral</a>
       <a class="qw-settings-link <%= settingsSection === 'conexao' ? 'active' : '' %>" href="/automacao-whatsapp?tab=configuracoes&section=conexao">🔗 Conexão</a>
       <a class="qw-settings-link <%= settingsSection === 'logs' ? 'active' : '' %>" href="/automacao-whatsapp?tab=configuracoes&section=logs">📜 Logs</a>
-      <a class="qw-settings-link <%= settingsSection === 'armazenamento' ? 'active' : '' %>" href="/automacao-whatsapp?tab=configuracoes&section=armazenamento">💾 Armazenamento</a>
     </div>
   <% } %>
 
   <% if (tab === 'dashboard') { %>
     <div class="qw-grid">
       <div class="qw-card qw-kpi qw-span-3"><div class="icon">📦</div><div class="value"><%= blocos.length %></div><div class="label">Blocos cadastrados</div></div>
-      <div class="qw-card qw-kpi qw-span-3"><div class="icon">🎂</div><div class="value"><%= fila.length %></div><div class="label">Fila atual</div></div>
+      <div class="qw-card qw-kpi qw-span-3"><div class="icon">🔔</div><div class="value"><%= taskOverview.totalOpen %></div><div class="label">Lembretes em aberto</div></div>
       <div class="qw-card qw-kpi qw-span-3"><div class="icon">📜</div><div class="value"><%= logs.length %></div><div class="label">Logs salvos</div></div>
       <div class="qw-card qw-kpi qw-span-3"><div class="icon">📱</div><div class="value" style="font-size:20px"><%= whatsapp.status === 'conectado' ? 'CONECTADO' : 'OFFLINE' %></div><div class="label">Sessão WhatsApp</div></div>
 
@@ -258,6 +284,18 @@
         <p class="sub">Base inicial para evitar erro e reduzir risco de bloqueio.</p>
         <div class="qw-warning">Nenhuma mensagem é disparada automaticamente. Cada texto, mídia ou bloco exige uma ação manual na aba “Conexão e teste”.</div>
       </div>
+
+      <div class="qw-card qw-span-12">
+        <h2>🔔 Lembretes do painel</h2>
+        <p class="sub">Acompanhamento interno de retornos, cobranças e compromissos com clientes.</p>
+        <div class="qw-task-kpis"><div class="qw-task-kpi"><strong><%= taskOverview.overdue.length %></strong><span>Atrasados</span></div><div class="qw-task-kpi"><strong><%= taskOverview.today.length %></strong><span>Para hoje</span></div><div class="qw-task-kpi"><strong><%= taskOverview.upcoming.length %></strong><span>Próximos</span></div></div>
+        <div class="qw-dashboard-task-grid">
+          <% [['overdue','🔴 Atrasados'],['today','🟠 Hoje'],['upcoming','🟢 Próximos']].forEach(function(group){ var list=taskOverview[group[0]]||[]; %>
+            <div class="qw-dashboard-task-col"><h3><%= group[1] %></h3><% if(!list.length){ %><div class="qw-task-empty">Nenhum lembrete.</div><% } %><% list.slice(0,8).forEach(function(task){ %><div class="qw-dashboard-task-row"><a class="qw-dashboard-task-link" href="/automacao-whatsapp?tab=inbox&conversation=<%= encodeURIComponent(task.conversationId||'') %>"><strong><%= task.title %></strong><small><%= formatDateTime(task.dueAt) %></small></a><form class="qw-dashboard-task-complete" method="post" action="/automacao-whatsapp/inbox/cliente/lembrete/concluir"><input type="hidden" name="conversationId" value="<%= task.conversationId||'' %>"><input type="hidden" name="taskId" value="<%= task.id %>"><input type="hidden" name="returnTo" value="/automacao-whatsapp"><button type="submit" title="Concluir lembrete">✓ Concluir</button></form></div><% }) %></div>
+          <% }) %>
+        </div>
+      </div>
+
       <div class="qw-card qw-span-12">
         <h2>📦 Últimos blocos</h2>
         <% if (!blocos.length) { %><div class="qw-empty">Nenhum bloco ainda.</div><% } else { %>
@@ -280,11 +318,12 @@
     const maxOrigin = Math.max(1,...Object.values(commercialDashboard.byOrigin||{}));
   %>
     <div class="qw-commercial-kpis">
-      <div class="qw-commercial-kpi"><div class="value"><%= commercialDashboard.total %></div><div class="label">Conversas comerciais</div><div class="hint">Base total já registrada</div></div>
-      <div class="qw-commercial-kpi"><div class="value"><%= commercialDashboard.activePipeline %></div><div class="label">Oportunidades abertas</div><div class="hint">Novos + andamento + pendentes</div></div>
-      <div class="qw-commercial-kpi"><div class="value"><%= commercialDashboard.awaitingResponse %></div><div class="label">Aguardando atendimento</div><div class="hint">Cliente enviou a última mensagem</div></div>
-      <div class="qw-commercial-kpi"><div class="value"><%= commercialDashboard.completedSales %></div><div class="label">Vendas concluídas</div><div class="hint">Status marcado no Inbox</div></div>
-      <div class="qw-commercial-kpi"><div class="value"><%= commercialDashboard.conversionRate %>%</div><div class="label">Conversão registrada</div><div class="hint">Vendas ÷ vendas + perdidos</div></div>
+      <div class="qw-commercial-kpi"><div class="value"><%= commercialDashboard.awaitingResponse %></div><div class="label">Sem resposta</div><div class="hint">Cliente enviou a última mensagem</div></div>
+      <div class="qw-commercial-kpi"><div class="value"><%= commercialDashboard.waitingOver30m %></div><div class="label">Mais de 30 min</div><div class="hint">Exigem atenção rápida</div></div>
+      <div class="qw-commercial-kpi"><div class="value"><%= commercialDashboard.waitingOver2h %></div><div class="label">Mais de 2 horas</div><div class="hint">Atendimentos críticos</div></div>
+      <div class="qw-commercial-kpi"><div class="value"><%= commercialDashboard.closedAttendances || 0 %></div><div class="label">Encerrados</div><div class="hint">Fora das oportunidades abertas</div></div>
+      <div class="qw-commercial-kpi"><div class="value"><%= commercialDashboard.structuredPending %></div><div class="label">Pendências</div><div class="hint">Foto, orçamento, estoque e outras</div></div>
+      <div class="qw-commercial-kpi"><div class="value"><%= commercialDashboard.withoutNextAction %></div><div class="label">Sem próxima ação</div><div class="hint">Oportunidades abertas sem direção</div></div>
     </div>
 
     <div class="qw-commercial-layout">
@@ -302,19 +341,22 @@
             <select class="qw-select" id="commercialStatusFilter" onchange="filterCommercialOpportunities()"><option value="">Todos os status</option><% Object.entries(statusLabelsCommercial).slice(0,3).forEach(function(entry){ %><option value="<%= entry[0] %>"><%= entry[1] %></option><% }) %></select>
             <select class="qw-select" id="commercialAttentionFilter" onchange="filterCommercialOpportunities()"><option value="">Todos</option><option value="waiting">Aguardando resposta</option><option value="answered">Respondidos</option></select>
           </div>
+          <form method="post" action="/automacao-whatsapp/inbox/atendimento/lote" onsubmit="return confirmBulkAttendanceClose(this)">
+            <input type="hidden" name="action" value="close">
+            <div class="qw-bulk-bar"><label class="qw-check"><input type="checkbox" onchange="toggleAllCommercial(this)"> Selecionar todos</label><select class="qw-select qw-close-reason" name="reason"><option value="completed">Atendimento concluído</option><option value="customer_bought">Cliente comprou</option><option value="customer_gave_up">Cliente desistiu</option><option value="will_think">Vai pensar</option><option value="no_interest">Sem interesse</option><option value="other">Outro</option></select><button class="qw-btn" type="submit">✓ Encerrar selecionados</button></div>
           <div class="qw-commercial-list" id="commercialOpportunityList">
             <% if(!commercialDashboard.opportunities.length){ %><div class="qw-commercial-empty">Nenhuma oportunidade aberta.</div><% } %>
             <% commercialDashboard.opportunities.forEach(function(c){ const search=String((c.name||'')+' '+(c.phone||'')+' '+(c.interestProduct||'')).toLowerCase(); %>
-              <a class="qw-opportunity" href="/automacao-whatsapp?tab=inbox&conversation=<%= c.id %>" data-search="<%= search %>" data-status="<%= c.commercialStatus || 'new' %>" data-attention="<%= c.awaitingResponse ? 'waiting':'answered' %>">
-                <div><div class="qw-opportunity-name"><%= c.name || c.phone %></div><div class="qw-opportunity-meta"><%= statusLabelsCommercial[c.commercialStatus] || 'Novo' %> · <%= originLabelsCommercial[c.origin] || 'Origem desconhecida' %><% if(c.interestProduct){ %> · Interesse: <%= c.interestProduct %><% } %></div></div>
+              <div class="qw-opportunity-row" data-commercial-row><input class="qw-opportunity-check" type="checkbox" name="conversationIds" value="<%= c.id %>" aria-label="Selecionar <%= c.name || c.phone %>"><a class="qw-opportunity <%= c.attentionLevel %>" href="/automacao-whatsapp?tab=inbox&conversation=<%= c.id %>" title="Abrir esta conversa no Inbox" data-search="<%= search %>" data-status="<%= c.commercialStatus || 'new' %>" data-attention="<%= c.awaitingResponse ? 'waiting':'answered' %>">
+                <div><div class="qw-opportunity-name"><%= c.name || c.phone %></div><div class="qw-opportunity-meta"><%= statusLabelsCommercial[c.commercialStatus] || 'Novo' %> · <%= originLabelsCommercial[c.origin] || 'Origem desconhecida' %><% if(c.interestProduct){ %> · Interesse: <%= c.interestProduct %><% } %></div><% if(c.nextAction){ %><div class="qw-next-action"><strong>Próxima ação:</strong> <%= c.nextAction %></div><% } %><% if(c.pendingType && c.pendingType!=='none'){ %><span class="qw-pending-chip">Pendência: <%= c.pendingNote || c.pendingType %></span><% } %></div>
                 <div class="qw-opportunity-side"><span class="<%= c.awaitingResponse?'qw-opportunity-wait':'qw-opportunity-ok' %>"><%= c.awaitingResponse?'Aguardando':'Respondido' %></span></div>
-              </a>
+              </a></div>
             <% }) %>
-          </div>
+          </div></form>
         </div>
       </div>
       <div class="qw-commercial-stack">
-        <div class="qw-card qw-commercial-card"><h2>⏱️ Atendimento</h2><p class="sub">Média calculada somente nas conversas que já possuem primeira resposta registrada.</p><div style="font-size:34px;font-weight:900;margin:14px 0 4px"><%= formatResponseTime(commercialDashboard.averageFirstResponseSeconds) %></div><div class="qw-muted" style="font-size:12px">Tempo médio até a primeira resposta</div></div>
+        <div class="qw-card qw-commercial-card"><h2>⏱️ Atendimento</h2><div class="qw-smart-panel"><div class="qw-smart-metric"><strong><%= formatResponseTime(commercialDashboard.averageFirstResponseSeconds) %></strong><span>Média da primeira resposta</span></div><div class="qw-smart-metric"><strong><%= commercialDashboard.overdueNextActions %></strong><span>Próximas ações vencidas</span></div><div class="qw-smart-metric"><strong><%= commercialDashboard.activePipeline %></strong><span>Oportunidades abertas</span></div></div></div>
         <div class="qw-card qw-commercial-card"><h2>🌎 Origem das conversas</h2><p class="sub">Origem automática ou corrigida manualmente no contato.</p><% Object.entries(originLabelsCommercial).forEach(function(entry){ const count=commercialDashboard.byOrigin[entry[0]]||0; %><div class="qw-origin-row"><span><%= entry[1] %></span><div class="qw-bar"><span style="width:<%= Math.round((count/maxOrigin)*100) %>%"></span></div><strong><%= count %></strong></div><% }) %></div>
         <div class="qw-card qw-commercial-card"><h2>📱 Produtos de interesse</h2><p class="sub">Interesses identificados ou preenchidos manualmente no Inbox.</p><% if(!commercialDashboard.topInterests.length){ %><div class="qw-commercial-empty">Nenhum produto de interesse registrado.</div><% } %><% commercialDashboard.topInterests.forEach(function(item){ %><div class="qw-interest-row"><span><%= item.name %></span><strong><%= item.total %></strong></div><% }) %></div>
       </div>
@@ -347,12 +389,12 @@
     <% } else { %>
       <div class="qw-inbox-shell">
         <div class="qw-card qw-inbox-list">
-          <div class="qw-inbox-list-head"><input class="qw-input" id="inboxSearch" placeholder="🔎 Buscar conversa" oninput="filterInboxConversations()"><div class="qw-inbox-type-filters"><button type="button" class="qw-type-filter active" data-inbox-type="all" onclick="setInboxTypeFilter('all',this)">Todos</button><button type="button" class="qw-type-filter" data-inbox-type="contact" onclick="setInboxTypeFilter('contact',this)">Contatos</button><button type="button" class="qw-type-filter" data-inbox-type="group" onclick="setInboxTypeFilter('group',this)">Grupos</button></div></div>
+          <div class="qw-inbox-list-head"><div class="qw-sync-row"><input class="qw-input" id="inboxSearch" placeholder="🔎 Buscar conversa" oninput="filterInboxConversations()"><button id="inboxSyncBtn" class="qw-sync-btn" type="button" title="Forçar sincronização do Inbox" onclick="syncInboxNow()">↻</button></div><div id="inboxSyncMeta" class="qw-sync-meta"><%= whatsapp.syncing ? 'Sincronizando agora...' : (whatsapp.lastSyncAt ? 'Última sincronização: '+formatDateTime(whatsapp.lastSyncAt) : 'Sincronização automática ao conectar') %></div><div class="qw-inbox-type-filters"><button type="button" class="qw-type-filter active" data-inbox-type="all" onclick="setInboxTypeFilter('all',this)">Todos</button><button type="button" class="qw-type-filter" data-inbox-type="contact" onclick="setInboxTypeFilter('contact',this)">Contatos</button><button type="button" class="qw-type-filter" data-inbox-type="group" onclick="setInboxTypeFilter('group',this)">Grupos</button></div></div>
           <div class="qw-conversation-list" id="inboxConversationList">
-            <% inboxConversations.forEach(function(c){ const selected = selectedConversation && selectedConversation.id === c.id; const unread=Number(c.unreadCount||0); %>
+            <% inboxConversations.forEach(function(c){ const selected = selectedConversation && selectedConversation.id === c.id; const unread=Number(c.unreadCount||0); const cTasks=(taskOverview.byConversation&&taskOverview.byConversation[c.id])||[]; const cTask=cTasks[0]||null; %>
               <a class="qw-conversation-item status-<%= c.commercialStatus || 'new' %> <%= unread ? 'has-unread':'' %> <%= selected ? 'active':'' %>" data-type="<%= c.conversationType || 'contact' %>" data-search="<%= String((c.name||'')+' '+(c.phone||'')+' '+(c.lastMessageAuthor||'')).toLowerCase() %>" href="/automacao-whatsapp?tab=inbox&conversation=<%= encodeURIComponent(c.id) %>">
                 <div class="qw-conversation-top"><span class="qw-conversation-title"><%= c.conversationType==='group' ? '👥 ' : '' %><%= c.name || c.phone %><% if(c.conversationType==='group'){ %><span class="qw-group-badge">Grupo</span><% } %></span><span class="qw-conversation-time"><%= relativeTime(c.lastMessageAt) %></span></div>
-                <div class="qw-conversation-bottom"><span class="qw-conversation-preview"><%= c.lastMessageDirection==='outgoing' ? '✓ ' : '' %><%= c.conversationType==='group' && c.lastMessageAuthor ? c.lastMessageAuthor+': ' : '' %><%= c.lastMessageText || 'Mídia' %></span><% if(unread){ %><span class="qw-unread-count"><%= unread > 99 ? '99+' : unread %></span><% } %></div>
+                <div class="qw-conversation-bottom"><span class="qw-conversation-preview"><%= c.lastMessageDirection==='outgoing' ? '✓ ' : '' %><%= c.conversationType==='group' && c.lastMessageAuthor ? c.lastMessageAuthor+': ' : '' %><%= c.lastMessageText || 'Mídia' %></span><% if(unread){ %><span class="qw-unread-count"><%= unread > 99 ? '99+' : unread %></span><% } %></div><% if(c.pendingType&&c.pendingType!=='none'){ %><span class="qw-pending-chip">⚠ <%= c.pendingNote||c.pendingType %></span><% } %><% if(c.nextAction){ %><div class="qw-next-action"><strong>Próxima:</strong> <%= c.nextAction %></div><% } %><% if(cTask){ %><div class="qw-conversation-task <%= cTask.bucket==='overdue'?'overdue':'' %>">📅 <%= cTask.bucket==='overdue'?'Atrasado':cTask.bucket==='today'?'Hoje':formatDateTime(cTask.dueAt) %> · <%= cTask.title %></div><% } %>
               </a>
             <% }) %>
           </div>
@@ -361,30 +403,28 @@
         <% if (selectedConversation) { %>
           <div class="qw-card qw-inbox-chat">
             <div class="qw-inbox-chat-head">
-              <div class="qw-contact-heading"><h2 style="margin:0"><%= selectedConversation.conversationType==='group' ? '👥 ' : '' %><%= selectedConversation.name || selectedConversation.phone %></h2><div class="qw-contact-sub"><% if(selectedConversation.conversationType==='group'){ %><%= selectedConversation.groupParticipantCount ? selectedConversation.groupParticipantCount+' participantes · ' : '' %>Grupo do WhatsApp<% } else { %><span class="qw-chat-status-dot <%= selectedConversation.awaitingResponse?'wait':'' %>"></span><%= selectedConversation.awaitingResponse?'Aguardando resposta':'Respondido' %> · <%= selectedConversation.phoneResolved ? ('+'+selectedConversation.phone) : 'número pendente' %><% } %></div></div>
+              <div class="qw-contact-heading"><h2 style="margin:0"><%= selectedConversation.conversationType==='group' ? '👥 ' : '' %><%= selectedConversation.name || selectedConversation.phone %></h2><div class="qw-contact-sub"><% if(selectedConversation.conversationType==='group'){ %><%= selectedConversation.groupParticipantCount ? selectedConversation.groupParticipantCount+' participantes · ' : '' %>Grupo do WhatsApp<% } else { %><span class="qw-chat-status-dot <%= selectedConversation.awaitingResponse?'wait':'' %>"></span><%= selectedConversation.awaitingResponse?'Aguardando resposta':'Respondido' %> · <%= selectedConversation.phoneResolved ? ('+'+selectedConversation.phone) : 'número pendente' %> · <span class="qw-attendance-badge <%= selectedConversation.attendanceState==='closed'?'closed':'' %>"><%= selectedConversation.attendanceState==='closed'?'Atendimento encerrado':'Atendimento aberto' %></span><% } %></div></div>
               <div class="qw-chat-toolbar">
-                <% if(selectedConversation.conversationType!=='group'){ %><button class="qw-icon-btn" type="button" title="Dados do contato" onclick="openContactDrawer()">👤</button><% } %>
+                <% if(selectedConversation.conversationType!=='group'){ %><div class="qw-attendance-actions"><% if(selectedConversation.attendanceState==='closed'){ %><form method="post" action="/automacao-whatsapp/inbox/atendimento"><input type="hidden" name="conversationId" value="<%= selectedConversation.id %>"><input type="hidden" name="action" value="reopen"><button class="qw-btn" type="submit">↻ Reabrir</button></form><% } else { %><form class="qw-close-form" method="post" action="/automacao-whatsapp/inbox/atendimento" onsubmit="return confirm('Encerrar este atendimento? Ele sairá do Painel Comercial, mas continuará no Inbox.')"><input type="hidden" name="conversationId" value="<%= selectedConversation.id %>"><input type="hidden" name="action" value="close"><select class="qw-select qw-close-reason" name="reason"><option value="completed">Atendimento concluído</option><option value="customer_bought">Cliente comprou</option><option value="customer_gave_up">Cliente desistiu</option><option value="will_think">Vai pensar</option><option value="no_interest">Sem interesse</option><option value="other">Outro</option></select><button class="qw-btn" type="submit">✓ Encerrar</button></form><% } %></div><button class="qw-icon-btn" type="button" title="Dados do contato" onclick="openContactDrawer()">👤</button><% } %>
                 <button class="qw-icon-btn" type="button" title="Mais ações" onclick="openConversationMenu(event)">⋮</button>
               </div>
             </div>
+            <% var selectedOpenTasks=(taskOverview.byConversation&&taskOverview.byConversation[selectedConversation.id])||[]; var selectedTopTask=selectedOpenTasks[0]||null; if(selectedTopTask){ %><div class="qw-chat-reminder <%= selectedTopTask.bucket==='overdue'?'overdue':'' %>"><div class="qw-chat-reminder-text">📅 <%= selectedTopTask.title %> · <%= formatDateTime(selectedTopTask.dueAt) %><% if(selectedOpenTasks.length>1){ %> · +<%= selectedOpenTasks.length-1 %> outro(s)<% } %></div><form method="post" action="/automacao-whatsapp/inbox/cliente/lembrete/concluir"><input type="hidden" name="conversationId" value="<%= selectedConversation.id %>"><input type="hidden" name="taskId" value="<%= selectedTopTask.id %>"><input type="hidden" name="returnTo" value="/automacao-whatsapp?tab=inbox&amp;conversation=<%= encodeURIComponent(selectedConversation.id) %>"><button class="qw-chat-reminder-complete" type="submit">✓ Concluir</button></form></div><% } %>
             <div class="qw-inbox-chat-body" id="inboxChatBody">
               <% if (!selectedMessages.length) { %><div class="qw-wait">Nenhuma mensagem salva.</div><% } %>
-              <% selectedMessages.forEach(function(m){ var media=m.media||null; var mediaUrl='/automacao-whatsapp/inbox/media/'+encodeURIComponent(selectedConversation.id)+'/'+encodeURIComponent(m.id); %><div class="qw-inbox-msg <%= m.direction %>"><% if(selectedConversation.conversationType==='group' && m.authorName){ %><div class="qw-message-author"><%= m.authorName %></div><% } %>
-                <% if(m.hasMedia && media && media.stored){ %><div class="qw-inbox-media">
-                  <% if(media.kind==='image'){ %><a href="<%= mediaUrl %>" target="_blank" rel="noopener"><img src="<%= mediaUrl %>" alt="<%= media.originalName || 'Imagem' %>" loading="lazy"></a><% } %>
-                  <% if(media.kind==='audio'){ %><audio controls preload="metadata" src="<%= mediaUrl %>"></audio><% } %>
+              <% selectedMessages.forEach(function(m){ var media=m.media||null; var mediaUrl='/automacao-whatsapp/inbox/media/'+encodeURIComponent(selectedConversation.id)+'/'+encodeURIComponent(m.id); var mediaName=(media&&(media.originalName||media.filename))||''; var isSticker=m.type==='sticker'||(media&&media.kind==='sticker'); var mime=String((media&&media.mime)||'').toLowerCase(); var lowerName=String(mediaName||'').toLowerCase(); var isPdf=mime==='application/pdf'||lowerName.endsWith('.pdf'); var docIcon=isPdf?'📕':(/\.docx?$/.test(lowerName)||mime.includes('word'))?'📘':(/\.xlsx?$/.test(lowerName)||mime.includes('excel')||mime.includes('spreadsheet'))?'📗':(/\.zip$/.test(lowerName)||mime.includes('zip'))?'🗜️':(/\.txt$/.test(lowerName)||mime==='text/plain')?'📝':'📄'; %><div class="qw-inbox-msg <%= m.direction %>"><% if(selectedConversation.conversationType==='group' && m.authorName){ %><div class="qw-message-author"><%= m.authorName %></div><% } %>
+                <% if(m.hasMedia && media && media.stored){ %><div class="qw-inbox-media <%= isSticker?'qw-inbox-sticker':'' %>">
+                  <% if(isSticker){ %><a href="<%= mediaUrl %>" target="_blank" rel="noopener"><img src="<%= mediaUrl %>" alt="Figurinha" loading="lazy"></a><span class="qw-inbox-sticker-label">Figurinha</span><% } else if(media.kind==='image'){ %><a href="<%= mediaUrl %>" target="_blank" rel="noopener"><img src="<%= mediaUrl %>" alt="<%= mediaName || 'Imagem' %>" loading="lazy"></a><% } %>
+                  <% if(media.kind==='audio'){ %><div class="qw-inbox-audio-card"><div class="qw-inbox-audio-head"><span class="qw-inbox-audio-icon">🎙️</span><span class="qw-inbox-audio-title"><%= mediaName || 'Áudio recebido' %></span></div><audio controls preload="metadata" src="<%= mediaUrl %>"></audio></div><% } %>
                   <% if(media.kind==='video'){ %><video controls preload="metadata" src="<%= mediaUrl %>"></video><% } %>
-                  <% if(media.kind==='document'){ %><a class="qw-inbox-document" href="<%= mediaUrl %>" target="_blank" rel="noopener"><span class="qw-inbox-document-icon">📄</span><span class="qw-inbox-document-info"><span class="qw-inbox-document-name"><%= media.originalName || media.filename || 'Documento' %></span><span class="qw-inbox-document-meta"><%= media.mime || 'Arquivo' %><%= media.size ? ' · '+Math.max(1,Math.round(media.size/1024))+' KB' : '' %></span></span></a><% } %>
-                  <div class="qw-media-actions"><a class="qw-media-action" href="<%= mediaUrl %>" target="_blank" rel="noopener">Abrir</a><a class="qw-media-action" href="<%= mediaUrl %>?download=1">Baixar</a></div>
-                </div><% } else if(m.hasMedia){ %><div class="qw-inbox-media qw-remote-media">
-                  <% if(media && media.kind==='image'){ %><a href="<%= mediaUrl %>" target="_blank" rel="noopener"><img src="<%= mediaUrl %>" alt="<%= media.originalName || 'Imagem recebida' %>" loading="lazy"></a><% } %>
-                  <% if(media && media.kind==='audio'){ %><audio controls preload="none" src="<%= mediaUrl %>"></audio><% } %>
-                  <% if(media && media.kind==='video'){ %><video controls preload="metadata" src="<%= mediaUrl %>"></video><% } %>
-                  <% if(!media || media.kind==='document'){ %><a class="qw-inbox-document" href="<%= mediaUrl %>" target="_blank" rel="noopener"><span class="qw-inbox-document-icon">📄</span><span class="qw-inbox-document-info"><span class="qw-inbox-document-name"><%= media && media.originalName ? media.originalName : 'Arquivo recebido' %></span><span class="qw-inbox-document-meta"><%= media && media.mime ? media.mime : 'Disponível pelo WhatsApp' %><%= media && media.size ? ' · '+Math.max(1,Math.round(media.size/1024))+' KB' : '' %></span></span></a><% } %>
-                  <div class="qw-remote-media-note">Visualização temporária pelo WhatsApp · nenhuma cópia automática no painel</div>
-                  <div class="qw-media-actions"><a class="qw-media-action" href="<%= mediaUrl %>" target="_blank" rel="noopener">Visualizar</a><a class="qw-media-action" href="<%= mediaUrl %>?download=1">Baixar no computador</a></div>
+                  <% if(media.kind==='document'){ %><a class="qw-inbox-document" href="<%= mediaUrl %>" target="_blank" rel="noopener"><span class="qw-inbox-document-icon"><%= docIcon %></span><span class="qw-inbox-document-info"><span class="qw-inbox-document-name"><%= mediaName || 'Documento' %></span><span class="qw-inbox-document-meta"><%= isPdf?'PDF':(media.mime || 'Arquivo') %><%= media.size ? ' · '+(media.size>=1048576?(media.size/1048576).toFixed(1)+' MB':Math.max(1,Math.round(media.size/1024))+' KB') : '' %></span></span></a><% } %>
+                  <span class="qw-media-status">✓ Salva localmente</span><div class="qw-media-actions"><a class="qw-media-action" href="<%= mediaUrl %>" target="_blank" rel="noopener">👁 <%= isPdf?'Abrir PDF':'Abrir' %></a><a class="qw-media-action" href="<%= mediaUrl %>?download=1">⬇ Baixar</a></div>
+                </div><% } else if(m.hasMedia){ var remoteKind=isSticker?'sticker':((media&&media.kind)||'document'); %><div class="qw-inbox-media qw-remote-media <%= remoteKind==='sticker'?'qw-inbox-sticker':'' %>" data-remote-media>
+                  <div class="qw-inbox-document" style="cursor:default"><span class="qw-inbox-document-icon"><%= remoteKind==='audio'?'🎙️':remoteKind==='sticker'?'🏷️':remoteKind==='image'?'🖼️':remoteKind==='video'?'🎬':docIcon %></span><span class="qw-inbox-document-info"><span class="qw-inbox-document-name"><%= mediaName || (remoteKind==='audio'?'Áudio':remoteKind==='sticker'?'Figurinha':remoteKind==='image'?'Imagem':remoteKind==='video'?'Vídeo':'Arquivo recebido') %></span><span class="qw-inbox-document-meta">☁ Disponível sob demanda</span></span></div>
+                  <div class="qw-remote-media-note">Será recuperada e salva localmente quando você abrir.</div>
+                  <div class="qw-media-actions"><button type="button" class="qw-media-action" data-url="<%= mediaUrl %>" data-kind="<%= remoteKind %>" data-name="<%= mediaName||'arquivo' %>" onclick="loadInboxRemoteMedia(this,this.dataset.url,this.dataset.kind,this.dataset.name)">👁 <%= remoteKind==='audio'?'Carregar áudio':remoteKind==='sticker'?'Abrir figurinha':remoteKind==='image'?'Abrir imagem':remoteKind==='video'?'Carregar vídeo':isPdf?'Abrir PDF':'Visualizar' %></button><a class="qw-media-action" href="<%= mediaUrl %>?download=1">⬇ Baixar</a></div>
                 </div><% } %>
-                <% if(m.type==='e2e_notification' || m.type==='call_notification' || m.type==='call_log'){ %><div class="qw-call-notice">📞 Chamada pelo WhatsApp</div><% } else if(m.text){ %><div><%= m.text %></div><% } else if(!m.hasMedia){ %><div>[<%= m.type || 'mensagem' %>]</div><% } %><small><%= formatDateTime(m.timestamp) %></small></div><% }) %>
+                <% if(m.text){ %><div><%= m.text %></div><% } else if(!m.hasMedia){ %><div>[<%= m.type || 'mensagem' %>]</div><% } %><small><%= formatDateTime(m.timestamp) %></small></div><% }) %>
             </div>
             <div class="qw-inbox-composer">
               <div id="inboxAttachPopover" class="qw-popover"><div class="qw-popover-title">➕ Anexar</div>
@@ -393,7 +433,7 @@
                 <button class="qw-attach-item" type="button" onclick="chooseInboxAttachment('.pdf,.doc,.docx,.xls,.xlsx,.txt,.zip')"><span>📄</span><span>Documento <small>PDF, Office, TXT ou ZIP</small></span></button>
                 <button class="qw-attach-item" type="button" onclick="chooseInboxAttachment('video/mp4,video/webm')"><span>🎬</span><span>Vídeo <small>MP4 ou WebM · até 40 MB</small></span></button>
               </div>
-              <div id="inboxBlockPopover" class="qw-popover"><div class="qw-popover-title">🧩 Executar bloco</div><div class="qw-popover-list"><% blocos.filter(function(b){return b.ativo;}).forEach(function(b){ %><button class="qw-popover-item" type="button" onclick="executeInboxBlockQuick('<%= b.id %>')"><%= b.nome %><small><%= (b.etapas||[]).length %> etapa(s) · <%= b.categoria || 'Geral' %></small></button><% }) %></div></div>
+              <div id="inboxBlockPopover" class="qw-popover"><div class="qw-popover-title">🧩 Executar bloco</div><div class="qw-block-popover-search"><input id="inboxBlockSearch" class="qw-input" placeholder="🔎 Buscar bloco" autocomplete="off" oninput="filterInboxBlocks()"></div><div class="qw-popover-list" id="inboxBlockList"><% blocos.filter(function(b){return b.ativo;}).forEach(function(b){ const blockSearch=String((b.nome||'')+' '+(b.categoria||'')+' '+(b.gatilho||'')).toLowerCase(); %><button class="qw-popover-item" type="button" data-search="<%= blockSearch %>" onclick="executeInboxBlockQuick('<%= b.id %>')"><%= b.nome %><small><%= (b.etapas||[]).length %> etapa(s) · <%= b.categoria || 'Geral' %></small></button><% }) %><div id="inboxBlockSearchEmpty" class="qw-block-search-empty">Nenhum bloco encontrado.</div></div></div>
               <form id="inboxTextForm" onsubmit="return sendInboxText(event)"><input type="hidden" name="conversationId" value="<%= selectedConversation.id %>"><div class="qw-composer-bar">
                 <button class="qw-icon-btn" type="button" title="Anexar" onclick="toggleInboxPopover('inboxAttachPopover')">＋</button>
                 <button class="qw-icon-btn" type="button" title="Executar bloco" onclick="toggleInboxPopover('inboxBlockPopover')">🧩</button>
@@ -406,18 +446,43 @@
             </div>
           </div>
 
-          <% if(selectedConversation.conversationType!=='group'){ %>
+          <% if(selectedConversation.conversationType!=='group'){ var crm=customerContext||{}; var customer=crm.customer||null; var customerLabels=(customer&&customer.labels)||[]; %>
           <div id="contactDrawerBackdrop" class="qw-contact-drawer-backdrop" onclick="closeContactDrawer()"></div>
-          <aside id="contactDrawer" class="qw-contact-drawer">
-            <div class="qw-drawer-head"><h2>👤 Dados do contato</h2><button class="qw-drawer-close" type="button" onclick="closeContactDrawer()">✕</button></div>
-            <form class="qw-contact-form" method="post" action="/automacao-whatsapp/inbox/contato/atualizar"><input type="hidden" name="conversationId" value="<%= selectedConversation.id %>"><div class="qw-contact-form-grid">
-              <div class="qw-field"><label>👤 Nome</label><input class="qw-input" name="name" value="<%= selectedConversation.name || '' %>" required></div>
-              <div class="qw-field"><label>📌 Status comercial</label><select class="qw-select" name="commercialStatus"><% Object.entries(statusLabels).forEach(function(entry){ %><option value="<%= entry[0] %>" <%= selectedConversation.commercialStatus===entry[0]?'selected':'' %>><%= entry[1] %></option><% }) %></select></div>
-              <div class="qw-field"><label>🌐 Origem</label><select class="qw-select" name="origin"><% Object.entries(originLabels).forEach(function(entry){ %><option value="<%= entry[0] %>" <%= selectedConversation.origin===entry[0]?'selected':'' %>><%= entry[1] %></option><% }) %></select></div>
-              <div class="qw-field"><label>📱 Produto de interesse</label><input class="qw-input" name="interestProduct" value="<%= selectedConversation.interestProduct || '' %>" placeholder="Ex: Samsung Galaxy S25"></div>
-              <div class="qw-field"><label class="qw-check"><input type="checkbox" name="saveContact" value="1" <%= selectedConversation.contactSaved ? 'checked' : '' %> <%= selectedConversation.phoneResolved ? '' : 'disabled' %>> 📇 Salvar na agenda do Painel</label></div>
-              <button class="qw-btn primary" type="submit">💾 Salvar alterações</button>
-            </div></form>
+          <aside id="contactDrawer" class="qw-contact-drawer" aria-label="Ficha do cliente">
+            <div class="qw-drawer-head"><div><h2>👤 Ficha do cliente</h2><div class="qw-muted" style="font-size:12px">Central do Cliente · CRM/ERP</div></div><button class="qw-drawer-close" type="button" title="Recolher ficha" onclick="closeContactDrawer()">✕</button></div>
+            <% if(customer){ %>
+              <div class="qw-crm-id">ID único: <%= customer.id %></div>
+              <form method="post" action="/automacao-whatsapp/inbox/cliente/atualizar">
+                <input type="hidden" name="conversationId" value="<%= selectedConversation.id %>"><input type="hidden" name="customerId" value="<%= customer.id %>">
+                <div class="qw-crm-section"><h3>Dados principais</h3><div class="qw-crm-grid">
+                  <div class="qw-field wide"><label>Nome</label><input class="qw-input" name="name" value="<%= customer.name||selectedConversation.name||'' %>" required></div>
+                  <div class="qw-field wide"><label>Telefone / WhatsApp</label><input class="qw-input" value="<%= selectedConversation.phoneResolved ? ('+'+selectedConversation.phone) : 'Número pendente' %>" disabled></div>
+                  <div class="qw-field wide"><label>E-mail</label><input class="qw-input" type="email" name="email" value="<%= customer.email||'' %>" placeholder="cliente@email.com"></div>
+                  <div class="qw-field"><label>CPF</label><input class="qw-input" name="cpf" value="<%= (customer.document&&customer.document.cpf)||'' %>"></div>
+                  <div class="qw-field"><label>CNPJ</label><input class="qw-input" name="cnpj" value="<%= (customer.document&&customer.document.cnpj)||'' %>"></div>
+                </div></div>
+                <div class="qw-crm-section"><h3>Comercial</h3><div class="qw-crm-grid">
+                  <div class="qw-field"><label>Etapa</label><select class="qw-select" name="commercialStage"><% Object.entries(statusLabels).forEach(function(entry){ %><option value="<%= entry[0] %>" <%= (customer.commercialStage||selectedConversation.commercialStatus)===entry[0]?'selected':'' %>><%= entry[1] %></option><% }) %></select></div>
+                  <div class="qw-field"><label>Origem</label><select class="qw-select" name="origin"><% Object.entries(originLabels).forEach(function(entry){ %><option value="<%= entry[0] %>" <%= selectedConversation.origin===entry[0]?'selected':'' %>><%= entry[1] %></option><% }) %></select></div>
+                  <div class="qw-field wide"><label>Produto de interesse</label><input class="qw-input" name="interestProduct" value="<%= customer.interestProduct||selectedConversation.interestProduct||'' %>" placeholder="Ex: Redmi Note 15"></div>
+                  <div class="qw-field"><label>Tipo de pendência</label><select class="qw-select" name="pendingType"><% [['none','Nenhuma'],['send_quote','Enviar orçamento'],['send_photo','Enviar foto/vídeo'],['check_stock','Verificar estoque'],['customer_reply','Aguardar cliente'],['supplier_reply','Aguardar fornecedor'],['payment','Pagamento'],['technical','Questão técnica'],['other','Outra']].forEach(function(item){ %><option value="<%= item[0] %>" <%= (selectedConversation.pendingType||'none')===item[0]?'selected':'' %>><%= item[1] %></option><% }) %></select></div>
+                  <div class="qw-field"><label>Prazo da próxima ação</label><input class="qw-input" type="datetime-local" name="nextActionDueAt" value="<%= selectedConversation.nextActionDueAt ? new Date(selectedConversation.nextActionDueAt).toISOString().slice(0,16) : '' %>"></div>
+                  <div class="qw-field wide"><label>Detalhe da pendência</label><input class="qw-input" name="pendingNote" value="<%= selectedConversation.pendingNote||'' %>" placeholder="Ex: cliente pediu foto da cor preta"></div>
+                  <div class="qw-field wide"><label>Próxima ação do atendimento</label><input class="qw-input" name="nextAction" value="<%= selectedConversation.nextAction||'' %>" placeholder="Ex: enviar orçamento atualizado e confirmar troca"></div>
+                  <div class="qw-field wide"><label>Responsável futuro</label><input class="qw-input" name="assignedTo" value="<%= customer.assignedTo||'' %>" placeholder="Opcional — preparado para multiusuário"></div>
+                  <div class="qw-field wide"><label class="qw-check"><input type="checkbox" name="saveContact" value="1" <%= selectedConversation.contactSaved?'checked':'' %> <%= selectedConversation.phoneResolved?'':'disabled' %>> Salvar na agenda do Painel</label></div>
+                </div></div>
+                <div class="qw-crm-section"><h3>Etiquetas</h3><div class="qw-crm-labels"><% (crm.labels||[]).forEach(function(label){ %><label class="qw-crm-label"><input type="checkbox" name="labels" value="<%= label.id %>" <%= customerLabels.includes(label.id)?'checked':'' %>><span class="qw-label-dot" style="background:<%= label.color %>"></span><%= label.name %></label><% }) %></div></div>
+                <div class="qw-crm-save"><button class="qw-btn primary" type="submit">💾 Salvar ficha do cliente</button></div>
+              </form>
+              <div class="qw-crm-section"><h3>Nova etiqueta</h3><form class="qw-crm-new-label" method="post" action="/automacao-whatsapp/inbox/cliente/etiqueta"><input type="hidden" name="conversationId" value="<%= selectedConversation.id %>"><div class="qw-field"><label>Nome</label><input class="qw-input" name="name" required placeholder="Ex: Retornar depois"></div><input class="qw-color-input" type="color" name="color" value="#64748b"><button class="qw-mini-btn" type="submit">Criar</button></form></div>
+              <div class="qw-crm-section"><h3>Notas internas</h3><form method="post" action="/automacao-whatsapp/inbox/cliente/nota"><input type="hidden" name="conversationId" value="<%= selectedConversation.id %>"><input type="hidden" name="customerId" value="<%= customer.id %>"><textarea class="qw-textarea" name="text" maxlength="2000" required placeholder="Esta nota não será enviada ao WhatsApp."></textarea><button class="qw-btn" type="submit" style="width:100%;margin-top:8px">＋ Adicionar nota</button></form><% if((crm.notes||[]).length){ crm.notes.forEach(function(note){ %><div class="qw-crm-note"><%= note.text %><small><%= formatDateTime(note.createdAt) %></small></div><% }) } else { %><div class="qw-crm-empty" style="margin-top:9px">Nenhuma nota interna registrada.</div><% } %></div>
+              <div class="qw-crm-section"><h3>🔔 Lembretes</h3>
+                <form class="qw-task-form" method="post" action="/automacao-whatsapp/inbox/cliente/lembrete"><input type="hidden" name="conversationId" value="<%= selectedConversation.id %>"><input type="hidden" name="customerId" value="<%= customer.id %>"><input class="qw-input" name="title" maxlength="180" required placeholder="Ex: Retornar orçamento"><textarea class="qw-textarea" name="description" maxlength="1000" placeholder="Descrição opcional" style="min-height:62px"></textarea><div class="qw-task-form-row"><input class="qw-input" type="datetime-local" name="dueAt" required><select class="qw-select" name="priority"><option value="low">Baixa</option><option value="medium" selected>Média</option><option value="high">Alta</option></select></div><button class="qw-btn" type="submit" style="width:100%">＋ Criar lembrete</button></form>
+                <div class="qw-task-list" style="margin-top:10px"><% var customerTasks=crm.tasks||[]; var openTasks=customerTasks.filter(function(t){return t.status!=='completed'}); var doneTasks=customerTasks.filter(function(t){return t.status==='completed'}); if(!openTasks.length){ %><div class="qw-crm-empty">Nenhum lembrete em aberto.</div><% } %><% openTasks.forEach(function(task){ var bucket=(taskOverview.byConversation[selectedConversation.id]||[]).find(function(t){return t.id===task.id}); %><div class="qw-task-item <%= task.priority %>"><div class="qw-task-title"><%= task.title %></div><div class="qw-task-meta"><%= formatDateTime(task.dueAt) %><% if(task.description){ %> · <%= task.description %><% } %></div><span class="qw-task-badge <%= bucket&&bucket.bucket||'' %>"><%= bucket&&bucket.bucket==='overdue'?'Atrasado':bucket&&bucket.bucket==='today'?'Hoje':'Próximo' %></span><div class="qw-task-actions"><form method="post" action="/automacao-whatsapp/inbox/cliente/lembrete/concluir"><input type="hidden" name="conversationId" value="<%= selectedConversation.id %>"><input type="hidden" name="taskId" value="<%= task.id %>"><button class="qw-mini-btn" type="submit">✓ Concluir</button></form><form method="post" action="/automacao-whatsapp/inbox/cliente/lembrete/excluir" onsubmit="return confirm('Excluir este lembrete?')"><input type="hidden" name="conversationId" value="<%= selectedConversation.id %>"><input type="hidden" name="taskId" value="<%= task.id %>"><button class="qw-mini-btn danger" type="submit">Excluir</button></form></div></div><% }) %><% if(doneTasks.length){ %><details style="margin-top:9px"><summary style="font-size:11px;font-weight:900;cursor:pointer">Concluídos (<%= doneTasks.length %>)</summary><% doneTasks.slice(0,10).forEach(function(task){ %><div class="qw-task-item completed"><div class="qw-task-title">✓ <%= task.title %></div><div class="qw-task-meta"><%= formatDateTime(task.completedAt||task.dueAt) %></div></div><% }) %></details><% } %></div>
+              </div>
+              <div class="qw-crm-section"><h3>Integrações futuras</h3><div class="qw-crm-empty">Compras, financeiro, garantias, assistência e histórico completo usarão este mesmo ID de cliente.</div></div>
+            <% } else { %><div class="qw-empty">Não foi possível criar a ficha central deste contato.</div><% } %>
           </aside>
           <% } %>
           <div id="conversationMenu" class="qw-conversation-menu"><button type="button" onclick="markInboxUnread('<%= selectedConversation.id %>')">● Marcar como não lida</button><% if(selectedConversation.conversationType!=='group'){ %><button type="button" onclick="openContactDrawer();closeConversationMenu()">👤 Dados do contato</button><% } %></div>
@@ -439,9 +504,13 @@
         </div>
         <div class="qw-actions" style="justify-content:flex-start;margin-top:12px">
           <button class="qw-btn success" type="button" id="waConnectBtn" onclick="connectWhatsApp()">Conectar</button>
-          <button class="qw-btn danger" type="button" onclick="disconnectWhatsApp()">Desconectar</button>
+          <button class="qw-btn" type="button" onclick="sessionAction('/automacao-whatsapp/whatsapp/reiniciar','Reiniciar a conexão agora?')">🔄 Reiniciar</button>
+          <button class="qw-btn danger" type="button" onclick="disconnectWhatsApp()">🔓 Desconectar</button>
+          <button class="qw-btn" type="button" onclick="sessionAction('/automacao-whatsapp/whatsapp/novo-qr','Isso removerá a sessão salva e exigirá novo QR Code. Continuar?')">📱 Novo QR</button>
+          <button class="qw-btn dark" type="button" onclick="runSessionDiagnostic()">🩺 Diagnóstico</button>
         </div>
-        <div class="qw-info" style="margin-top:12px">A sessão é salva localmente em <code>content/automacao_whatsapp/session</code>. Desconectar preserva essa sessão.</div>
+        <div id="waDiagnostic" class="qw-info" style="margin-top:12px;display:none"></div>
+        <div class="qw-info" style="margin-top:12px">A sessão é salva localmente em <code>content/automacao_whatsapp/session</code>. “Desconectar” preserva a sessão; “Novo QR” remove a autenticação local.</div>
       </div>
 
       <div class="qw-card">
@@ -649,59 +718,6 @@
     <div class="qw-grid"><div class="qw-card qw-span-12"><h2>📜 Logs</h2><p class="sub">Conexão, QR Code, envios manuais, etapas de blocos, falhas e simulações.</p><% if (!logs.length) { %><div class="qw-empty">Sem logs ainda.</div><% } else { %><div class="qw-log-list"><% logs.slice(0,200).forEach(function(log){ %><div class="qw-log-row"><strong><%= log.message %></strong><br><small><%= new Date(log.at).toLocaleString('pt-BR') %> · <%= log.type %></small><% if (log.details && Object.keys(log.details).length) { %><details><summary>Detalhes</summary><pre><%= JSON.stringify(log.details, null, 2) %></pre></details><% } %></div><% }) %></div><% } %></div></div>
   <% } %>
 
-
-  <% if (tab === 'configuracoes' && settingsSection === 'armazenamento') { %>
-    <div class="qw-storage-kpis">
-      <div class="qw-storage-kpi"><div class="value"><%= storageReport.labels.total %></div><div class="label">Inbox completo</div><div class="hint">Mensagens, mídia local e backups</div></div>
-      <div class="qw-storage-kpi"><div class="value"><%= storageReport.labels.media %></div><div class="label">Mídias locais</div><div class="hint"><%= storageReport.mediaFiles %> arquivo(s)</div></div>
-      <div class="qw-storage-kpi"><div class="value"><%= storageReport.messageCount %></div><div class="label">Mensagens registradas</div><div class="hint"><%= storageReport.contacts %> contatos · <%= storageReport.groups %> grupos</div></div>
-      <div class="qw-storage-kpi"><div class="value"><%= storageReport.backups %></div><div class="label">Backups do Inbox</div><div class="hint"><%= storageReport.labels.backups %> ocupados</div></div>
-    </div>
-
-    <div class="qw-storage-layout">
-      <div class="qw-storage-stack">
-        <div class="qw-card">
-          <h2>🔍 Varredura do armazenamento</h2>
-          <p class="sub">Relatório somente leitura. Nenhum arquivo é alterado durante a análise.</p>
-          <div class="qw-health-list">
-            <div class="qw-health-row"><span>Arquivos órfãos</span><strong class="<%= storageReport.orphanFiles.count ? 'qw-health-warn':'qw-health-ok' %>"><%= storageReport.orphanFiles.count %> · <%= storageReport.labels.orphan %></strong></div>
-            <div class="qw-health-row"><span>Mídias antigas de grupos</span><strong class="<%= storageReport.groupFiles.count ? 'qw-health-warn':'qw-health-ok' %>"><%= storageReport.groupFiles.count %> · <%= storageReport.labels.groups %></strong></div>
-            <div class="qw-health-row"><span>Mídias com mais de 30 dias</span><strong class="<%= storageReport.old30Files.count ? 'qw-health-warn':'qw-health-ok' %>"><%= storageReport.old30Files.count %> · <%= storageReport.labels.old30 %></strong></div>
-            <div class="qw-health-row"><span>Mídias com mais de 90 dias</span><strong class="<%= storageReport.old90Files.count ? 'qw-health-warn':'qw-health-ok' %>"><%= storageReport.old90Files.count %> · <%= storageReport.labels.old90 %></strong></div>
-            <div class="qw-health-row"><span>Pastas vazias</span><strong class="<%= storageReport.emptyDirs ? 'qw-health-warn':'qw-health-ok' %>"><%= storageReport.emptyDirs %></strong></div>
-            <div class="qw-health-row"><span>Arquivos JSON inválidos</span><strong class="<%= storageReport.invalidJson.length ? 'qw-health-bad':'qw-health-ok' %>"><%= storageReport.invalidJson.length %></strong></div>
-          </div>
-          <div style="margin-top:12px;display:flex;gap:8px;flex-wrap:wrap"><a class="qw-btn primary" href="/automacao-whatsapp?tab=configuracoes&section=armazenamento">🔄 Executar nova varredura</a></div>
-        </div>
-
-        <div class="qw-card">
-          <h2>🧹 Limpeza manual</h2>
-          <p class="sub">As ações abaixo removem somente cópias locais em <code>inbox/media</code>. Mensagens e CRM permanecem intactos.</p>
-          <div class="qw-clean-grid">
-            <div class="qw-clean-action"><h3>Arquivos órfãos</h3><p>Arquivos locais sem referência em nenhuma mensagem.</p><form method="post" action="/automacao-whatsapp/armazenamento/limpar" onsubmit="return confirmStorageCleanup(this,'Remover <%= storageReport.orphanFiles.count %> arquivo(s) órfão(s) e liberar aproximadamente <%= storageReport.labels.orphan %>?')"><input type="hidden" name="action" value="orphans"><button class="qw-btn" type="submit" <%= storageReport.orphanFiles.count ? '' : 'disabled' %>>Limpar órfãos</button></form></div>
-            <div class="qw-clean-action"><h3>Mídias de grupos</h3><p>Remove somente mídias antigas que já foram gravadas localmente.</p><form method="post" action="/automacao-whatsapp/armazenamento/limpar" onsubmit="return confirmStorageCleanup(this,'Remover <%= storageReport.groupFiles.count %> mídia(s) local(is) de grupos e liberar aproximadamente <%= storageReport.labels.groups %>?')"><input type="hidden" name="action" value="groups"><button class="qw-btn" type="submit" <%= storageReport.groupFiles.count ? '' : 'disabled' %>>Limpar grupos</button></form></div>
-            <div class="qw-clean-action"><h3>Mais de 30 dias</h3><p>Apaga cópias locais antigas, mantendo o registro textual.</p><form method="post" action="/automacao-whatsapp/armazenamento/limpar" onsubmit="return confirmStorageCleanup(this,'Remover <%= storageReport.old30Files.count %> mídia(s) com mais de 30 dias e liberar aproximadamente <%= storageReport.labels.old30 %>?')"><input type="hidden" name="action" value="older30"><button class="qw-btn" type="submit" <%= storageReport.old30Files.count ? '' : 'disabled' %>>Limpar +30 dias</button></form></div>
-            <div class="qw-clean-action"><h3>Mais de 90 dias</h3><p>Opção mais conservadora para preservar arquivos recentes.</p><form method="post" action="/automacao-whatsapp/armazenamento/limpar" onsubmit="return confirmStorageCleanup(this,'Remover <%= storageReport.old90Files.count %> mídia(s) com mais de 90 dias e liberar aproximadamente <%= storageReport.labels.old90 %>?')"><input type="hidden" name="action" value="older90"><button class="qw-btn" type="submit" <%= storageReport.old90Files.count ? '' : 'disabled' %>>Limpar +90 dias</button></form></div>
-            <div class="qw-clean-action"><h3>Pastas vazias</h3><p>Remove apenas diretórios vazios deixados por limpezas anteriores.</p><form method="post" action="/automacao-whatsapp/armazenamento/limpar" onsubmit="return confirmStorageCleanup(this,'Remover as pastas vazias encontradas?')"><input type="hidden" name="action" value="empty_dirs"><button class="qw-btn" type="submit" <%= storageReport.emptyDirs ? '' : 'disabled' %>>Limpar pastas</button></form></div>
-            <div class="qw-clean-action" style="border-color:#fecaca;background:#fffafa"><h3>Limpeza completa da mídia</h3><p>Apaga todas as cópias locais do Inbox. Não apaga mensagens ou contatos.</p><form method="post" action="/automacao-whatsapp/armazenamento/limpar" onsubmit="return confirmStorageCleanup(this,'ATENÇÃO: remover todas as <%= storageReport.mediaFiles %> mídias locais e liberar aproximadamente <%= storageReport.labels.media %>?')"><input type="hidden" name="action" value="all_media"><button class="qw-btn danger" type="submit" <%= storageReport.mediaFiles ? '' : 'disabled' %>>Limpar toda a mídia</button></form></div>
-          </div>
-        </div>
-      </div>
-
-      <div class="qw-storage-stack">
-        <div class="qw-card"><h2>📊 Detalhes</h2><div class="qw-health-list">
-          <div class="qw-health-row"><span>Arquivos de mensagens</span><strong><%= storageReport.labels.messages %></strong></div>
-          <div class="qw-health-row"><span>Contatos salvos</span><strong><%= storageReport.savedContacts %></strong></div>
-          <div class="qw-health-row"><span>Total de pastas</span><strong><%= storageReport.folders %></strong></div>
-          <div class="qw-health-row"><span>Maior mídia local</span><strong><%= storageReport.largestMedia ? storageReport.labels.largest : '—' %></strong></div>
-        </div><% if(storageReport.largestMedia){ %><p class="qw-storage-note" style="margin-top:10px">Maior arquivo: <strong><%= storageReport.largestMedia.name %></strong></p><% } %></div>
-        <div class="qw-card"><h2>🛡️ Regra de segurança</h2><div class="qw-info">Desde a v0.6.1, mídias novas são visualizadas temporariamente pelo WhatsApp e não são salvas automaticamente. Esta central serve principalmente para limpar arquivos antigos.</div><p class="qw-storage-note" style="margin-top:12px">A limpeza atualiza os metadados das mensagens para impedir links quebrados. Quando o WhatsApp ainda disponibilizar a mídia, ela poderá ser visualizada novamente de forma temporária.</p></div>
-        <div class="qw-card"><h2>📁 Área analisada</h2><div class="qw-storage-path">content/automacao_whatsapp/inbox</div><p class="qw-storage-note">A sessão do WhatsApp, a biblioteca oficial de blocos e as mídias cadastradas nos blocos ficam fora desta limpeza.</p></div>
-        <% if(storageReport.invalidJson.length){ %><div class="qw-card"><h2>⚠️ JSON inválidos</h2><div class="qw-warning"><%= storageReport.invalidJson.join(', ') %></div><p class="qw-storage-note">A central apenas informa estes arquivos. Não tenta corrigi-los ou excluí-los automaticamente.</p></div><% } %>
-      </div>
-    </div>
-  <% } %>
-
   <% if (tab === 'configuracoes' && settingsSection === 'geral') { %>
     <div class="qw-grid"><div class="qw-card qw-span-8"><h2>⚙️ Configurações gerais</h2><p class="sub">Controle de horário, limites e comportamento humano. Envio real permanece desligado nesta fase.</p><form class="qw-form" method="post" action="/automacao-whatsapp/configuracoes/salvar"><div class="qw-field"><label>Número de teste padrão</label><input class="qw-input" name="numeroTeste" inputmode="numeric" value="<%= config.numeroTeste || '' %>" placeholder="Ex: 5599999999999"></div><div class="qw-row"><div class="qw-field"><label>Horário dos aniversariantes</label><input class="qw-input" type="time" name="horarioAniversario" value="<%= config.horarioAniversario || '08:00' %>"></div><div class="qw-field"><label>Limite diário de mensagens</label><input class="qw-input" type="number" min="1" max="1000" name="limiteDiario" value="<%= config.limiteDiario || 40 %>"></div></div><div class="qw-row"><div class="qw-field"><label>Delay humano mínimo entre mensagens (segundos)</label><input class="qw-input" type="number" min="0" name="delayHumanoMin" value="<%= config.delayHumanoMin || 4 %>"></div><div class="qw-field"><label>Delay humano máximo entre mensagens (segundos)</label><input class="qw-input" type="number" min="0" name="delayHumanoMax" value="<%= config.delayHumanoMax || 12 %>"></div></div><div class="qw-row"><div class="qw-field"><label>Digitando padrão (segundos)</label><input class="qw-input" type="number" min="0" name="digitandoPadrao" value="<%= config.digitandoPadrao || 2 %>"></div><div class="qw-field"><label>Gravando áudio padrão (segundos)</label><input class="qw-input" type="number" min="0" name="gravandoAudioPadrao" value="<%= config.gravandoAudioPadrao || 2 %>"></div></div><label class="qw-check"><input type="checkbox" name="envioRealAtivo" <%= config.envioRealAtivo ? 'checked' : '' %>> Permitir envio real quando a conexão WhatsApp existir</label><button class="qw-btn primary" type="submit">Salvar configurações</button></form></div><div class="qw-card qw-span-4"><h2>🛡️ Nota</h2><div class="qw-warning">Na v0.5.0, o envio real existe apenas em Configurações → Conexão e sempre exige ação manual. Esta chave continua reservada para fases futuras.</div></div></div>
   <% } %>
@@ -738,6 +754,35 @@
     return payload;
   }
 
+  async function sessionAction(url,question){
+    if(question && !confirm(question)) return;
+    var box=document.getElementById('waDiagnostic');
+    try{
+      if(box){box.style.display='block';box.textContent='Executando...';}
+      var response=await fetch(url,{method:'POST',headers:{'Content-Type':'application/json'}});
+      var payload=await response.json();
+      if(!response.ok||!payload.success) throw new Error(payload.message||'Ação não concluída.');
+      if(box) box.textContent=payload.whatsapp?.message||'Ação concluída.';
+      setTimeout(function(){window.location.reload();},900);
+    }catch(error){if(box){box.style.display='block';box.textContent=error.message||'Falha na ação.';}}
+  }
+  async function runSessionDiagnostic(){
+    var box=document.getElementById('waDiagnostic');
+    if(!box)return;
+    box.style.display='block';box.textContent='Executando diagnóstico...';
+    try{
+      var response=await fetch('/automacao-whatsapp/whatsapp/diagnostico',{cache:'no-store'});
+      var payload=await response.json();
+      if(!response.ok||!payload.success)throw new Error(payload.message||'Diagnóstico indisponível.');
+      var a=payload.adapter||{},s=payload.session||{},m=payload.media||{};
+      box.innerHTML='<strong>Diagnóstico da sessão</strong><br>'+
+        'Cliente: '+(a.clientAttached?'OK':'indisponível')+' · Página: '+(a.pageAvailable?'OK':'indisponível')+'<br>'+
+        'WAWebCollections: '+(a.hasWAWebCollections?'OK':'não encontrado')+' · Msg Store: '+(a.hasMsgCollection?'OK':'não encontrada')+'<br>'+
+        'Download Manager: '+(a.hasDownloadManager?'OK':'não encontrado')+' · Mensagens carregadas: '+(a.messageModels||0)+'<br>'+
+        'Media Engine: '+(m.engineVersion||'—')+' · Cache: '+(s.messageCacheSize||0)+' mensagens'+
+        (a.webVersion?'<br>WhatsApp Web: '+a.webVersion:'')+(a.error?'<br>Erro: '+a.error:'');
+    }catch(error){box.textContent=error.message||'Falha no diagnóstico.';}
+  }
   async function connectWhatsApp() {
     waResult('Abrindo o WhatsApp Web...', true);
     try {
@@ -792,6 +837,8 @@
     return false;
   }
 
+  window.sessionAction = sessionAction;
+  window.runSessionDiagnostic = runSessionDiagnostic;
   window.connectWhatsApp = connectWhatsApp;
   window.disconnectWhatsApp = disconnectWhatsApp;
   window.sendManual = sendManual;
@@ -1458,20 +1505,22 @@
   }
 
   function closeInboxPopovers(){ document.querySelectorAll('.qw-popover.open').forEach(function(el){el.classList.remove('open');}); }
-  function toggleInboxPopover(id){ var target=document.getElementById(id); var opening=target && !target.classList.contains('open'); closeInboxPopovers(); if(opening) target.classList.add('open'); }
+  function toggleInboxPopover(id){ var target=document.getElementById(id); var opening=target && !target.classList.contains('open'); closeInboxPopovers(); if(opening){ target.classList.add('open'); if(id==='inboxBlockPopover'){ var search=document.getElementById('inboxBlockSearch'); if(search){ search.value=''; filterInboxBlocks(); setTimeout(function(){ search.focus(); },30); } } } }
+  function filterInboxBlocks(){ var query=String((document.getElementById('inboxBlockSearch')||{}).value||'').toLowerCase().trim(); var visible=0; document.querySelectorAll('#inboxBlockList .qw-popover-item').forEach(function(item){ var show=!query || String(item.dataset.search||'').includes(query); item.hidden=!show; if(show) visible+=1; }); var empty=document.getElementById('inboxBlockSearchEmpty'); if(empty) empty.classList.toggle('show',visible===0); }
   async function executeInboxBlockQuick(blocoId){
     var conversationId=<%- JSON.stringify(selectedConversation ? selectedConversation.id : '') %>;
     closeInboxPopovers(); showInboxSendResult('Executando bloco...',true);
     try{ var response=await fetch('/automacao-whatsapp/inbox/executar-bloco',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({conversationId:conversationId,blocoId:blocoId})}); var payload=await response.json(); if(!response.ok||!payload.success) throw new Error(payload.message||'Falha ao executar o bloco.'); showInboxSendResult(payload.message||'Bloco executado.',true); window.setTimeout(function(){window.location.reload();},700); }catch(error){showInboxSendResult(error.message||'Falha ao executar o bloco.',false);}
   }
-  function openContactDrawer(){ document.getElementById('contactDrawer')?.classList.add('open'); document.getElementById('contactDrawerBackdrop')?.classList.add('open'); closeConversationMenu(); }
-  function closeContactDrawer(){ document.getElementById('contactDrawer')?.classList.remove('open'); document.getElementById('contactDrawerBackdrop')?.classList.remove('open'); }
+  function openContactDrawer(){ document.getElementById('contactDrawer')?.classList.add('open'); document.getElementById('contactDrawerBackdrop')?.classList.add('open'); try{localStorage.setItem('quality.crmDrawerOpen','1');}catch{} closeConversationMenu(); }
+  function closeContactDrawer(){ document.getElementById('contactDrawer')?.classList.remove('open'); document.getElementById('contactDrawerBackdrop')?.classList.remove('open'); try{localStorage.setItem('quality.crmDrawerOpen','0');}catch{} }
+  function restoreContactDrawerPreference(){ try{ if(window.innerWidth>950 && localStorage.getItem('quality.crmDrawerOpen')==='1') openContactDrawer(); }catch{} }
   function openConversationMenu(event){ var menu=document.getElementById('conversationMenu'); if(!menu)return; event.stopPropagation(); menu.style.top=(event.clientY+8)+'px'; menu.style.left=Math.max(8,event.clientX-190)+'px'; menu.classList.add('open'); }
   function closeConversationMenu(){ document.getElementById('conversationMenu')?.classList.remove('open'); }
   async function markInboxUnread(conversationId){ try{ var response=await fetch('/automacao-whatsapp/inbox/marcar-nao-lida',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({conversationId:conversationId})}); var payload=await response.json(); if(!response.ok||!payload.success) throw new Error(payload.message); window.location.href='/automacao-whatsapp?tab=inbox'; }catch(error){showInboxSendResult(error.message||'Falha ao marcar como não lida.',false);} }
   document.addEventListener('click',function(event){ if(!event.target.closest('.qw-popover')&&!event.target.closest('.qw-icon-btn')) closeInboxPopovers(); if(!event.target.closest('.qw-conversation-menu')&&!event.target.closest('[title="Mais ações"]')) closeConversationMenu(); });
   document.addEventListener('keydown',function(event){ if(event.key==='Escape'){closeInboxPopovers();closeContactDrawer();closeConversationMenu();} });
-  var chatBody=document.getElementById('inboxChatBody'); if(chatBody) chatBody.scrollTop=chatBody.scrollHeight;
+  var chatBody=document.getElementById('inboxChatBody'); if(chatBody) chatBody.scrollTop=chatBody.scrollHeight; restoreContactDrawerPreference();
 
   var inboxComposerDirty = false;
   var inboxMessageText = document.getElementById('inboxMessageText');
@@ -1486,6 +1535,69 @@
     });
   }
 
+  async function loadInboxRemoteMedia(button,url,kind,name,options){
+    var box=button && button.closest('[data-remote-media]');
+    if(!box || button.disabled) return false;
+    options=options||{};
+    button.disabled=true;
+    var original=button.textContent;
+    button.textContent=options.automatic?'Sincronizando...':'Recuperando...';
+    try{
+      var response=await fetch(url,{cache:'no-store'});
+      if(!response.ok){
+        var text=await response.text();
+        throw new Error((text.match(/<p>(.*?)<\/p>/s)||[])[1]?.replace(/<[^>]+>/g,'') || 'Não foi possível recuperar esta mídia.');
+      }
+      var blob=await response.blob();
+      if(!blob.size) throw new Error('O WhatsApp retornou um arquivo vazio.');
+      var objectUrl=URL.createObjectURL(blob);
+      var viewer=null;
+      if(kind==='audio'){ viewer=document.createElement('audio'); viewer.controls=true; viewer.preload='metadata'; viewer.src=objectUrl; }
+      else if(kind==='video'){ viewer=document.createElement('video'); viewer.controls=true; viewer.preload='metadata'; viewer.src=objectUrl; }
+      else if(kind==='image'||kind==='sticker'){ viewer=document.createElement('img'); viewer.src=objectUrl; viewer.alt=kind==='sticker'?'Figurinha':(name||'Imagem'); viewer.loading='eager'; }
+      if(viewer){
+        var oldViewer=box.querySelector('audio,video,img,.qw-inbox-document');
+        if(oldViewer) oldViewer.replaceWith(viewer); else box.prepend(viewer);
+      }
+      var note=box.querySelector('.qw-remote-media-note');
+      if(note){ note.textContent='✓ Recuperada e salva localmente'; note.style.color=''; }
+      button.textContent='Carregada';
+      button.dataset.recovered='1';
+      return true;
+    }catch(error){
+      button.disabled=false;
+      button.textContent=original;
+      var note=box.querySelector('.qw-remote-media-note');
+      if(note){ note.textContent=error.message||'Falha ao recuperar a mídia.'; note.style.color='#b91c1c'; }
+      return false;
+    }
+  }
+
+  // Restaura o comportamento prático da v0.6.1 sem baixar o WhatsApp inteiro:
+  // ao abrir uma conversa, recupera sequencialmente apenas as mídias visíveis
+  // daquela conversa enquanto os objetos Message ainda estão carregados.
+  async function recoverVisibleInboxMedia(){
+    var buttons=Array.from(document.querySelectorAll('[data-remote-media] .qw-media-action[data-url]')).slice(0,40);
+    for(var i=0;i<buttons.length;i+=1){
+      var button=buttons[i];
+      if(button.dataset.recovered==='1') continue;
+      await loadInboxRemoteMedia(button,button.dataset.url,button.dataset.kind,button.dataset.name,{automatic:true});
+      await new Promise(function(resolve){setTimeout(resolve,250);});
+    }
+  }
+  window.setTimeout(recoverVisibleInboxMedia,1200);
+
+  async function syncInboxNow(){
+    var button=document.getElementById('inboxSyncBtn'); var meta=document.getElementById('inboxSyncMeta');
+    if(!button || button.disabled) return;
+    button.disabled=true; button.classList.add('syncing'); if(meta) meta.textContent='Sincronizando conversas e mensagens recentes...';
+    try{
+      var response=await fetch('/automacao-whatsapp/inbox/sincronizar',{method:'POST',headers:{'Content-Type':'application/json'}});
+      var payload=await response.json(); if(!response.ok||!payload.success) throw new Error(payload.message||'Falha ao sincronizar.');
+      if(meta) meta.textContent='Sincronização concluída. Atualizando Inbox...'; window.setTimeout(function(){window.location.reload();},500);
+    }catch(error){ if(meta) meta.textContent=error.message||'Falha ao sincronizar.'; button.disabled=false; button.classList.remove('syncing'); }
+  }
+
   function filterCommercialOpportunities(){
     var search=String(document.getElementById('commercialSearch')?.value||'').toLowerCase().trim();
     var status=document.getElementById('commercialStatusFilter')?.value||'';
@@ -1497,7 +1609,13 @@
   }
 
   var inboxTypeFilter = 'all';
-  function setInboxTypeFilter(type,button){ inboxTypeFilter=type||'all'; document.querySelectorAll('.qw-type-filter').forEach(function(item){item.classList.toggle('active',item===button);}); filterInboxConversations(); }
+  try{ inboxTypeFilter=localStorage.getItem('qualityInboxTypeFilter') || 'all'; }catch(_){}
+  function setInboxTypeFilter(type,button){
+    inboxTypeFilter=type||'all';
+    try{ localStorage.setItem('qualityInboxTypeFilter',inboxTypeFilter); }catch(_){}
+    document.querySelectorAll('.qw-type-filter').forEach(function(item){item.classList.toggle('active',item.dataset.inboxType===inboxTypeFilter);});
+    filterInboxConversations();
+  }
   function filterInboxConversations(){
     var input = document.getElementById('inboxSearch');
     var query = String(input ? input.value : '').toLowerCase().trim();
@@ -1506,6 +1624,11 @@
       var matchesType=inboxTypeFilter==='all' || item.dataset.type===inboxTypeFilter;
       item.style.display = matchesText && matchesType ? '' : 'none';
     });
+  }
+
+  if(document.getElementById('inboxConversationList')){
+    var initialButton=document.querySelector('.qw-type-filter[data-inbox-type="'+inboxTypeFilter+'"]') || document.querySelector('.qw-type-filter[data-inbox-type="all"]');
+    setInboxTypeFilter(inboxTypeFilter,initialButton);
   }
 
   var inboxInitialRevision = <%- JSON.stringify(typeof inboxRevision !== 'undefined' ? inboxRevision : '') %>;
@@ -1527,15 +1650,10 @@
     }, 2500);
   }
 
-  function confirmStorageCleanup(form,message){
-    if(!window.confirm(message+'\n\nAs mensagens, contatos e dados do CRM serão preservados.')) return false;
-    var button=form && form.querySelector('button[type="submit"]'); if(button){button.disabled=true;button.textContent='Limpando...';}
-    return true;
-  }
-
   window.sendInboxText = sendInboxText;
   window.sendInboxBlock = sendInboxBlock;
   window.toggleInboxPopover = toggleInboxPopover;
+  window.filterInboxBlocks = filterInboxBlocks;
   window.chooseInboxAttachment = chooseInboxAttachment;
   window.prepareInboxAttachment = prepareInboxAttachment;
   window.cancelInboxAttachment = cancelInboxAttachment;
@@ -1546,9 +1664,10 @@
   window.closeConversationMenu = closeConversationMenu;
   window.markInboxUnread = markInboxUnread;
   window.setInboxTypeFilter = setInboxTypeFilter;
+  window.loadInboxRemoteMedia = loadInboxRemoteMedia;
   window.filterInboxConversations = filterInboxConversations;
   window.filterCommercialOpportunities = filterCommercialOpportunities;
-  window.confirmStorageCleanup = confirmStorageCleanup;
+  window.syncInboxNow = syncInboxNow;
   window.addStep = addStep;
   window.removeStep = removeStep;
   window.moveStep = moveStep;
@@ -1577,4 +1696,7 @@
   var editorForm = document.getElementById('blockEditorForm');
   if (editorForm) editorForm.addEventListener('input', markUnsaved);
 })();
+
+  function toggleAllCommercial(source){document.querySelectorAll('#commercialOpportunityList .qw-opportunity-check').forEach(function(box){var row=box.closest('[data-commercial-row]');if(!row||row.style.display!=='none') box.checked=source.checked;});}
+  function confirmBulkAttendanceClose(form){var count=form.querySelectorAll('.qw-opportunity-check:checked').length;if(!count){alert('Selecione ao menos uma conversa.');return false;}return confirm('Encerrar '+count+' atendimento(s) selecionado(s)?');}
 </script>

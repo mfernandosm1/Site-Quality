@@ -1,0 +1,29 @@
+{
+  "version": "0.16.0",
+  "items": [
+    {
+      "id": "CC-GERAL",
+      "code": "01",
+      "name": "Operação geral",
+      "parentId": null,
+      "active": true,
+      "system": true
+    },
+    {
+      "id": "CC-LOJA",
+      "code": "01.01",
+      "name": "Loja",
+      "parentId": "CC-GERAL",
+      "active": true,
+      "system": true
+    },
+    {
+      "id": "CC-ASSISTENCIA",
+      "code": "01.02",
+      "name": "Assistência técnica",
+      "parentId": "CC-GERAL",
+      "active": true,
+      "system": true
+    }
+  ]
+}

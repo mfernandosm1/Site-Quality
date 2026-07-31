@@ -1,0 +1,262 @@
+{
+  "version": "0.19.0",
+  "items": [
+    {
+      "id": "PUE-b8ab2ef2-2065-4c84-b474-2015947699c9",
+      "purchaseId": "PUR-794aa832-1a99-44cf-9567-99ad5752b9f2",
+      "type": "created",
+      "actor": "painel",
+      "details": {
+        "status": "open",
+        "total": 2,
+        "itemCount": 1
+      },
+      "createdAt": "2026-07-30T15:57:17.125Z"
+    },
+    {
+      "id": "PUE-4966834d-ca5c-4cc2-908d-dadb3dcb68be",
+      "purchaseId": "PUR-b6814d4f-8e74-462b-b9a3-785f591e7a80",
+      "type": "created",
+      "actor": "painel",
+      "details": {
+        "status": "open",
+        "total": 1,
+        "itemCount": 1
+      },
+      "createdAt": "2026-07-30T16:12:57.554Z"
+    },
+    {
+      "id": "PUE-38f9f2e9-1d01-45e8-a9dc-d4d9750f604b",
+      "purchaseId": "PUR-b6814d4f-8e74-462b-b9a3-785f591e7a80",
+      "type": "completion_failed",
+      "actor": "painel",
+      "details": {
+        "message": "A composição financeira deve totalizar exatamente R$ 1,00."
+      },
+      "createdAt": "2026-07-30T16:12:57.612Z"
+    },
+    {
+      "id": "PUE-29b4182e-9504-495f-ad21-81350be31f3a",
+      "purchaseId": "PUR-383d1d4e-eaad-400b-9110-1cc42e5d8110",
+      "type": "created",
+      "actor": "painel",
+      "details": {
+        "status": "open",
+        "total": 1,
+        "itemCount": 1
+      },
+      "createdAt": "2026-07-30T16:13:14.395Z"
+    },
+    {
+      "id": "PUE-d15e41e7-fda6-41f3-8ae2-94ae33428b93",
+      "purchaseId": "PUR-383d1d4e-eaad-400b-9110-1cc42e5d8110",
+      "type": "completed",
+      "actor": "painel",
+      "details": {
+        "payableId": "PAY-58b166c1-a57c-45d8-b1ab-0d591ded3e45",
+        "inventoryMovements": []
+      },
+      "createdAt": "2026-07-30T16:13:14.474Z"
+    },
+    {
+      "id": "PUE-767fbcc2-b62a-4319-89ce-1a97802c9169",
+      "purchaseId": "PUR-89b7c579-2b16-461d-9519-df9e9d9aeb02",
+      "type": "created",
+      "actor": "painel",
+      "details": {
+        "status": "open",
+        "total": 1,
+        "itemCount": 1
+      },
+      "createdAt": "2026-07-30T16:38:44.934Z"
+    },
+    {
+      "id": "PUE-b43b1eb5-24a2-401d-bd31-891d821d6b6f",
+      "purchaseId": "PUR-89b7c579-2b16-461d-9519-df9e9d9aeb02",
+      "type": "completed",
+      "actor": "painel",
+      "details": {
+        "payableId": "PAY-19001a52-891e-4ded-986d-ea037dcf65ee",
+        "paymentIds": [
+          "PYP-f23ac425-e34a-43ee-89e3-f0454a9a6361"
+        ],
+        "inventoryMovements": []
+      },
+      "createdAt": "2026-07-30T16:38:45.080Z"
+    },
+    {
+      "id": "PUE-89d48e1a-a0b7-4534-b6b8-548128c07daa",
+      "purchaseId": "PUR-84f5ace9-a33e-42df-8e3b-c43a805a018e",
+      "type": "created",
+      "actor": "painel",
+      "details": {
+        "status": "open",
+        "total": 1,
+        "itemCount": 1
+      },
+      "createdAt": "2026-07-30T22:20:33.576Z"
+    },
+    {
+      "id": "PUE-605722a8-aad1-4398-8a4c-be70328b0b7e",
+      "purchaseId": "PUR-84f5ace9-a33e-42df-8e3b-c43a805a018e",
+      "type": "completed",
+      "actor": "painel",
+      "details": {
+        "payableId": "PAY-f9e85196-952d-48b0-8038-adbd003db3ed",
+        "paymentIds": [
+          "PYP-68cc232b-e1c9-4029-9f6e-31055151752e"
+        ],
+        "inventoryMovements": []
+      },
+      "createdAt": "2026-07-30T22:20:33.773Z"
+    },
+    {
+      "id": "PUE-291c7f75-8602-4434-880e-b37a4e3063ca",
+      "purchaseId": "PUR-048de528-d35e-43cd-b660-da40e646dcf6",
+      "type": "created",
+      "actor": "painel",
+      "details": {
+        "status": "open",
+        "total": 1,
+        "itemCount": 1
+      },
+      "createdAt": "2026-07-30T22:53:13.234Z"
+    },
+    {
+      "id": "PUE-5d337c90-960f-4e0f-b28e-61b9ef45ae0c",
+      "purchaseId": "PUR-048de528-d35e-43cd-b660-da40e646dcf6",
+      "type": "completed",
+      "actor": "painel",
+      "details": {
+        "payableId": "PAY-fbeda6eb-13b5-4b96-a52b-f6798e3d4572",
+        "paymentIds": [
+          "PYP-af9dbbf5-f855-4cd1-bada-11bcf496f1d8"
+        ],
+        "inventoryMovements": []
+      },
+      "createdAt": "2026-07-30T22:53:13.422Z"
+    },
+    {
+      "id": "PUE-dfd99d10-e153-45aa-891f-654c6604781c",
+      "purchaseId": "PUR-048de528-d35e-43cd-b660-da40e646dcf6",
+      "type": "inventory_reconciled",
+      "actor": "painel",
+      "details": {
+        "movements": 1
+      },
+      "createdAt": "2026-07-30T23:20:08.465Z"
+    },
+    {
+      "id": "PUE-68438687-609b-47c8-ad73-bf6f38925aea",
+      "purchaseId": "PUR-84f5ace9-a33e-42df-8e3b-c43a805a018e",
+      "type": "inventory_reconciled",
+      "actor": "painel",
+      "details": {
+        "movements": 2
+      },
+      "createdAt": "2026-07-30T23:20:08.492Z"
+    },
+    {
+      "id": "PUE-a995ae56-606e-48ac-aa4c-1b2a3a83d8b7",
+      "purchaseId": "PUR-89b7c579-2b16-461d-9519-df9e9d9aeb02",
+      "type": "inventory_reconciled",
+      "actor": "painel",
+      "details": {
+        "movements": 3
+      },
+      "createdAt": "2026-07-30T23:20:08.516Z"
+    },
+    {
+      "id": "PUE-2622554f-03ea-4fe6-9680-2e3b1c501e77",
+      "purchaseId": "PUR-383d1d4e-eaad-400b-9110-1cc42e5d8110",
+      "type": "inventory_reconciled",
+      "actor": "painel",
+      "details": {
+        "movements": 4
+      },
+      "createdAt": "2026-07-30T23:20:08.545Z"
+    },
+    {
+      "id": "PUE-c311ea08-68c5-4afa-bf48-181cf41c0a45",
+      "purchaseId": "PUR-15502d17-9563-405c-91e2-41e6a9bbcc7f",
+      "type": "created",
+      "actor": "painel",
+      "details": {
+        "status": "open",
+        "total": 1,
+        "itemCount": 1
+      },
+      "createdAt": "2026-07-30T23:21:05.862Z"
+    },
+    {
+      "id": "PUE-8d93f3b0-4fb1-42e1-9c29-c7b9cd538b8a",
+      "purchaseId": "PUR-15502d17-9563-405c-91e2-41e6a9bbcc7f",
+      "type": "completed",
+      "actor": "painel",
+      "details": {
+        "payableId": "PAY-aa0c044e-01b2-4dba-82f3-12ed90129418",
+        "paymentIds": [
+          "PYP-ddf3ea97-63d1-4e95-8c67-5d45b2735a55"
+        ],
+        "inventoryMovements": [
+          "MOV-20260730-000005"
+        ]
+      },
+      "createdAt": "2026-07-30T23:21:06.027Z"
+    },
+    {
+      "id": "PUE-069641c4-da32-496e-9e33-a9a9d27acbae",
+      "purchaseId": "PUR-3acce852-933c-4f77-a1c4-bc1eb274848b",
+      "type": "created",
+      "actor": "painel",
+      "details": {
+        "status": "open",
+        "total": 321.8,
+        "itemCount": 1
+      },
+      "createdAt": "2026-07-30T23:25:31.552Z"
+    },
+    {
+      "id": "PUE-cd939ff7-89f7-48fc-b252-da10ca02ea6b",
+      "purchaseId": "PUR-3acce852-933c-4f77-a1c4-bc1eb274848b",
+      "type": "completed",
+      "actor": "painel",
+      "details": {
+        "payableId": "PAY-ed55b6db-7af9-4cf6-9b31-090938034913",
+        "paymentIds": [],
+        "inventoryMovements": [
+          "MOV-20260730-000006"
+        ]
+      },
+      "createdAt": "2026-07-30T23:25:31.729Z"
+    },
+    {
+      "id": "PUE-101c88aa-2358-49b6-93df-4937929711ee",
+      "purchaseId": "PUR-c627601b-3f67-48b7-a41c-cb2ab9bc697b",
+      "type": "created",
+      "actor": "painel",
+      "details": {
+        "status": "open",
+        "total": 2,
+        "itemCount": 1
+      },
+      "createdAt": "2026-07-31T00:53:58.129Z"
+    },
+    {
+      "id": "PUE-8bdd0912-9a6a-483a-881f-87c2c457fb09",
+      "purchaseId": "PUR-c627601b-3f67-48b7-a41c-cb2ab9bc697b",
+      "type": "completed",
+      "actor": "painel",
+      "details": {
+        "payableId": "PAY-1259c39e-3f15-4a1e-a4be-8c662e9bbc2e",
+        "paymentIds": [
+          "PYP-4441f67e-919f-40bc-ae81-714c88bfe3c5"
+        ],
+        "inventoryMovements": [
+          "MOV-20260730-000008"
+        ]
+      },
+      "createdAt": "2026-07-31T00:53:58.307Z"
+    }
+  ]
+}

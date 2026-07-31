@@ -1,0 +1,149 @@
+<% layout('layout') -%>
+<% const money = value => Number(value || 0).toLocaleString('pt-BR',{style:'currency',currency:'BRL'}); %>
+<% const methodName = id => (paymentMethods.find(p=>p.id===id)?.name || id); %>
+<% const safeSelectedClosing = typeof selectedClosing !== 'undefined' ? selectedClosing : null; %>
+<% const safeClosedSessions = typeof closedSessions !== 'undefined' && Array.isArray(closedSessions) ? closedSessions : []; %>
+<% const safeViewedSession = typeof viewedSession !== 'undefined' ? viewedSession : openSession; %>
+<% const isClosingView = Boolean(safeSelectedClosing); %>
+<main class="cash-page">
+  <header class="cash-page-head">
+    <div>
+      <a class="cash-back" href="/erp/pdv?caixa=<%= encodeURIComponent(selectedCashboxId) %>">← Voltar ao PDV</a>
+      <h1>Caixa Operacional <small>v0.14.4</small></h1>
+      <p>Abertura, movimentações, conferência e histórico de fechamentos.</p>
+    </div>
+    <div class="cash-head-actions">
+      <label>Caixa
+        <select id="cashboxSelector"><% cashboxes.forEach(c=>{ %><option value="<%= c.id %>" <%= c.id===selectedCashboxId?'selected':'' %>><%= c.name %></option><% }) %></select>
+      </label>
+      <span class="cash-session-status <%= isClosingView?'closed':openSession?'open':'closed' %>"><%= isClosingView?'● Histórico fechado':openSession?'● Aberto':'● Fechado' %></span>
+    </div>
+  </header>
+
+  <% if (safeSelectedClosing) { const cs = safeSelectedClosing.closingSummary || safeSelectedClosing.summary || {}; %>
+    <section class="cash-closing-receipt" id="closingReceipt">
+      <div class="cash-closing-receipt-head">
+        <div><span>Fechamento concluído</span><h2><%= cashboxes.find(c=>c.id===safeSelectedClosing.cashboxId)?.name || 'Caixa' %></h2></div>
+        <span class="cash-type-badge closing">Fechado</span>
+      </div>
+      <div class="cash-closing-meta">
+        <div><span>Abertura</span><strong><%= new Date(safeSelectedClosing.openedAt).toLocaleString('pt-BR') %></strong></div>
+        <div><span>Fechamento</span><strong><%= new Date(safeSelectedClosing.closedAt).toLocaleString('pt-BR') %></strong></div>
+        <div><span>Responsável</span><strong><%= safeSelectedClosing.closedBy || safeSelectedClosing.openedBy || 'painel' %></strong></div>
+      </div>
+      <div class="cash-closing-values">
+        <div><span>Saldo inicial</span><strong><%= money(cs.openingBalance ?? safeSelectedClosing.openingBalance) %></strong></div>
+        <div><span>Suprimentos</span><strong><%= money(cs.supplies) %></strong></div>
+        <div><span>Entradas em dinheiro</span><strong><%= money(cs.cashReceived ?? cs.cashSales) %></strong><small>Vendas, O.S. e recebimentos</small></div>
+        <div><span>Sangrias / despesas</span><strong><%= money(cs.withdrawals) %></strong></div>
+        <div class="emphasis"><span>Dinheiro esperado</span><strong><%= money(safeSelectedClosing.expectedBalance) %></strong></div>
+        <div class="emphasis"><span>Dinheiro contado</span><strong><%= money(safeSelectedClosing.closingBalance) %></strong></div>
+        <div class="difference <%= Number(safeSelectedClosing.difference||0)===0?'ok':Number(safeSelectedClosing.difference||0)>0?'positive':'negative' %>"><span>Diferença</span><strong><%= money(safeSelectedClosing.difference) %></strong></div>
+      </div>
+      <% if (safeSelectedClosing.notes) { %><div class="cash-closing-notes"><span>Observação</span><p><%= safeSelectedClosing.notes %></p></div><% } %>
+      <div class="cash-closing-actions"><button class="btn primary" onclick="window.print()">🖨️ Imprimir fechamento</button><a class="btn" href="/erp/pdv/caixa?caixa=<%= encodeURIComponent(selectedCashboxId) %>">Voltar ao caixa</a><a class="btn" href="/erp/pdv?caixa=<%= encodeURIComponent(selectedCashboxId) %>">Abrir novo turno no PDV</a></div>
+    </section>
+  <% } %>
+
+  <% if (!safeViewedSession) { %>
+    <section class="cash-empty"><h2>Caixa fechado</h2><p>O PDV permanece bloqueado até uma nova abertura. Os fechamentos anteriores continuam disponíveis abaixo.</p><a class="btn primary" href="/erp/pdv?caixa=<%= encodeURIComponent(selectedCashboxId) %>">Abrir caixa no PDV</a></section>
+  <% } else { %>
+    <section class="cash-session-line">
+      <div><span>Aberto em</span><strong><%= new Date(safeViewedSession.openedAt).toLocaleString('pt-BR') %></strong></div>
+      <div><span>Responsável</span><strong><%= safeViewedSession.openedBy %></strong></div>
+      <div><span>Saldo inicial</span><strong><%= money(summary?.openingBalance) %></strong></div>
+    </section>
+
+    <% if (filtersActive) { %><div class="cash-filtered-summary-note">Resumo recalculado conforme os filtros ativos.</div><% } %>
+    <section class="cash-summary-grid cash-summary-grid-v144">
+      <article><span>🔓 Abertura</span><strong><%= money(summary?.openingBalance) %></strong><small>Saldo inicial do turno</small></article>
+      <article class="cash-card-primary" title="Saldo inicial + entradas em dinheiro + suprimentos − sangrias e despesas pagas em dinheiro"><span>💰 <%= filtersActive ? 'Saldo físico no filtro' : (isClosingView ? 'Saldo físico do fechamento' : 'Saldo físico atual') %></span><strong><%= money(summary?.expectedBalance) %></strong><small>Abertura + entradas − saídas em dinheiro</small></article>
+      <article class="cash-card-primary" title="Soma das vendas, O.S. e recebimentos em dinheiro, Pix, cartão, boleto e demais formas"><span>📥 <%= filtersActive ? 'Total recebido no filtro' : (isClosingView ? 'Total recebido no turno' : 'Total recebido hoje') %></span><strong><%= money(summary?.totalReceived ?? summary?.salesTotal) %></strong><small>Vendas, O.S. e recebimentos em todas as formas</small></article>
+      <article title="Somente valores que realmente entraram em espécie na gaveta"><span>💵 Entradas em dinheiro</span><strong><%= money(summary?.cashReceived ?? summary?.cashSales) %></strong><small>Vendas, O.S. e recebimentos em espécie</small></article>
+      <article><span>＋ Suprimentos</span><strong><%= money(summary?.supplies) %></strong><small>Entradas manuais</small></article>
+      <article><span>− Sangrias / despesas</span><strong><%= money(summary?.withdrawals) %></strong><small>Saídas físicas</small></article>
+    </section>
+
+    <% if (!isClosingView && openSession) { %>
+    <section class="cash-toolbar">
+      <button class="btn primary" data-movement="supply">＋ Suprimento</button>
+      <button class="btn warn" data-movement="withdrawal">− Sangria</button>
+      <button class="btn danger" id="openCloseCash">🔒 Fechar caixa</button>
+      <a class="btn" href="/erp/pdv?caixa=<%= encodeURIComponent(selectedCashboxId) %>">← Voltar ao PDV</a>
+    </section>
+    <% } %>
+
+    <section class="cash-methods">
+      <h2>Resumo por forma de pagamento</h2>
+      <div class="cash-method-grid">
+        <% (summary?.byMethod||[]).forEach(m=>{ %><article><span><%= methodName(m.methodId) %></span><strong><%= money(m.total) %></strong><small><%= m.count %> movimentação(ões)</small></article><% }) %>
+        <% if (!(summary?.byMethod||[]).length) { %><p class="cash-muted">Ainda não existem recebimentos neste turno.</p><% } %>
+      </div>
+    </section>
+
+    <section class="cash-history">
+      <div class="cash-history-head"><div><h2><%= isClosingView ? 'Movimentações deste fechamento' : 'Linha do tempo do turno' %></h2><p><%= isClosingView ? 'Somente os movimentos pertencentes ao turno selecionado.' : 'Todos os movimentos mantêm origem, referência, usuário e forma de pagamento.' %></p></div></div>
+      <form method="get" class="cash-filters cash-filters-expanded">
+        <input type="hidden" name="caixa" value="<%= selectedCashboxId %>">
+        <% if (isClosingView) { %><input type="hidden" name="fechamento" value="<%= safeSelectedClosing.id %>"><% } %>
+        <div class="cash-quick-periods" data-quick-periods>
+          <button type="button" data-period="today">Hoje</button><button type="button" data-period="yesterday">Ontem</button><button type="button" data-period="last7">Últimos 7 dias</button><button type="button" data-period="month">Este mês</button><button type="button" data-period="nextMonth">Próximo mês</button><button type="button" data-period="all">Tudo</button>
+        </div>
+        <label>Data inicial<input type="date" name="dataInicial" value="<%= filters.startDate %>"></label>
+        <label>Data final<input type="date" name="dataFinal" value="<%= filters.endDate %>"></label>
+        <label>Tipo<select name="tipo"><option value="all">Todos</option><option value="sale" <%= filters.type==='sale'?'selected':'' %>>Venda</option><option value="service_order" <%= filters.type==='service_order'?'selected':'' %>>O.S.</option><option value="supply" <%= filters.type==='supply'?'selected':'' %>>Suprimento</option><option value="withdrawal" <%= filters.type==='withdrawal'?'selected':'' %>>Sangria</option><option value="expense" <%= filters.type==='expense'?'selected':'' %>>Despesa</option><option value="refund" <%= filters.type==='refund'?'selected':'' %>>Estorno</option></select></label>
+        <label>Forma<select name="forma"><option value="all">Todas</option><% paymentMethods.forEach(p=>{ %><option value="<%= p.id %>" <%= filters.method===p.id?'selected':'' %>><%= p.name %></option><% }) %></select></label>
+        <label>Usuário<select name="usuario"><option value="">Todos</option><% users.forEach(u=>{ %><option value="<%= u %>" <%= filters.user===u?'selected':'' %>><%= u %></option><% }) %></select></label>
+        <label>Nº Venda/O.S.<input name="operacao" value="<%= filters.operationNumber %>" inputmode="numeric" placeholder="Ex.: 25"></label>
+        <label>Cliente<input name="cliente" value="<%= filters.customer %>" placeholder="Nome do cliente"></label>
+        <div class="cash-filter-actions"><button class="btn primary">Filtrar</button><a class="btn" href="/erp/pdv/caixa?caixa=<%= encodeURIComponent(selectedCashboxId) %><%= isClosingView ? '&fechamento='+encodeURIComponent(safeSelectedClosing.id) : '' %>">Limpar</a></div>
+      </form>
+      <div class="cash-table-wrap"><table class="cash-table"><thead><tr><th>Data / hora</th><th>Tipo</th><th>Referência / descrição</th><th>Cliente</th><th>Usuário</th><th>Forma</th><th class="num">Valor</th><th class="num">Saldo</th></tr></thead><tbody>
+        <tr class="opening"><td><%= new Date(safeViewedSession.openedAt).toLocaleString('pt-BR') %></td><td><span class="cash-type-badge opening">Abertura</span></td><td>Saldo inicial do turno</td><td>—</td><td><%= safeViewedSession.openedBy %></td><td>Dinheiro</td><td class="num positive"><%= money(safeViewedSession.openingBalance) %></td><td class="num"><%= money(safeViewedSession.openingBalance) %></td></tr>
+        <% movements.forEach(m=>{ const out=Number(m.signedAmount)<0; const isSale=m.type==='sale_receipt'&&m.operationType==='sale'; const isOS=m.type==='sale_receipt'&&m.operationType==='service_order'; const label=isSale?'🛒 Venda':isOS?'🛠️ O.S.':m.type==='receivable_receipt'?'💰 Recebimento':({supply:'📥 Suprimento',withdrawal:'📤 Sangria',expense:'📤 Despesa',refund:'↩️ Estorno'}[m.type]||m.type); const badge=isSale?'sale':isOS?'service-order':m.type; const reference=(isSale||isOS)?`${label} #${m.operationNumber || '—'}`:(m.description||'—'); %><tr><td><%= new Date(m.createdAt).toLocaleString('pt-BR') %></td><td><span class="cash-type-badge <%= badge %>"><%= label %></span></td><td><strong><%= reference %></strong><% if ((isSale||isOS) && m.description) { %><small class="cash-row-detail"><%= m.description %></small><% } %></td><td><%= m.customerName||'—' %></td><td><%= m.createdBy||'—' %></td><td><%= methodName(m.methodId) %></td><td class="num <%= out?'negative':'positive' %>"><%= out?'− ':'+ ' %><%= money(m.amount) %></td><td class="num"><%= m.balanceAfter===null||m.balanceAfter===undefined?'—':money(m.balanceAfter) %></td></tr><% }) %>
+        <% if (!movements.length) { %><tr><td colspan="8" class="cash-empty-row">Nenhuma movimentação encontrada para os filtros selecionados.</td></tr><% } %>
+      </tbody></table></div>
+    </section>
+  <% } %>
+
+  <% if (!isClosingView) { %>
+  <section class="cash-history cash-closing-history">
+    <div class="cash-history-head"><div><h2>Histórico de fechamentos</h2><p>Conferências anteriores do caixa selecionado.</p></div></div>
+    <div class="cash-table-wrap"><table class="cash-table"><thead><tr><th>Abertura</th><th>Fechamento</th><th>Responsável</th><th class="num">Esperado</th><th class="num">Contado</th><th class="num">Diferença</th><th></th></tr></thead><tbody>
+      <% safeClosedSessions.forEach(s=>{ %><tr><td><%= new Date(s.openedAt).toLocaleString('pt-BR') %></td><td><%= new Date(s.closedAt).toLocaleString('pt-BR') %></td><td><%= s.closedBy||s.openedBy||'painel' %></td><td class="num"><%= money(s.expectedBalance) %></td><td class="num"><%= money(s.closingBalance) %></td><td class="num <%= Number(s.difference||0)===0?'':Number(s.difference||0)>0?'positive':'negative' %>"><%= money(s.difference) %></td><td><a class="btn" href="/erp/pdv/caixa?caixa=<%= encodeURIComponent(selectedCashboxId) %>&fechamento=<%= encodeURIComponent(s.id) %>">Ver fechamento</a></td></tr><% }) %>
+      <% if (!safeClosedSessions.length) { %><tr><td colspan="7" class="cash-empty-row">Ainda não existem fechamentos registrados.</td></tr><% } %>
+    </tbody></table></div>
+  </section>
+  <% } %>
+</main>
+
+<% if (openSession && !isClosingView) { %>
+<div class="pdv-modal" id="closeCashModal" hidden><div class="pdv-modal-card cash-movement-modal"><button class="pdv-close" data-close-cash>×</button><h2>Fechamento inteligente</h2><p class="pdv-modal-help">Conte apenas o dinheiro físico da gaveta. Pix, cartão e boleto aparecem no resumo, mas não compõem o valor contado.</p><div class="cash-close-breakdown"><div><span>Saldo inicial</span><b><%= money(liveSummary?.openingBalance) %></b></div><div><span>Suprimentos</span><b>+ <%= money(liveSummary?.supplies) %></b></div><div><span>Entradas em dinheiro</span><b>+ <%= money(liveSummary?.cashReceived ?? liveSummary?.cashSales) %></b><small>Vendas, O.S. e recebimentos em espécie</small></div><div><span>Sangrias / despesas</span><b>− <%= money(liveSummary?.withdrawals) %></b></div></div><div class="cash-close-summary"><span>Dinheiro esperado</span><strong><%= money(liveSummary?.expectedBalance) %></strong></div><label>Dinheiro contado<input id="countedBalance" type="number" min="0" step="0.01" value="<%= Number(liveSummary?.expectedBalance||0).toFixed(2) %>"></label><div class="cash-close-difference"><span>Diferença</span><strong id="closingDifference">R$ 0,00</strong></div><label>Observação <small id="notesRequirement">Opcional quando não houver diferença</small><textarea id="closingNotes" maxlength="240" placeholder="Explique qualquer sobra ou falta encontrada"></textarea></label><div class="cash-modal-actions"><button class="btn" data-close-cash>Cancelar</button><button class="btn danger" id="confirmCloseCash">Confirmar fechamento</button></div></div></div>
+<div class="pdv-modal" id="movementModal" hidden><div class="pdv-modal-card cash-movement-modal"><button class="pdv-close" data-close>×</button><h2 id="movementTitle">Movimentação</h2><p class="pdv-modal-help" id="movementHelp"></p><label>Valor<input id="movementAmount" type="number" min="0.01" step="0.01" placeholder="0,00"></label><label>Motivo<input id="movementDescription" maxlength="160" placeholder="Informe o motivo"></label><div class="cash-modal-actions"><button class="btn" data-close>Cancelar</button><button class="btn primary" id="saveMovement">Registrar</button></div></div></div>
+<% } %>
+<script>
+(()=>{const $=s=>document.querySelector(s);const money=v=>Number(v||0).toLocaleString('pt-BR',{style:'currency',currency:'BRL'});async function api(url,body){const r=await fetch(url,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)});const j=await r.json();if(!r.ok)throw new Error(j.message||'Erro ao processar.');return j;}$('#cashboxSelector')?.addEventListener('change',e=>location.href='/erp/pdv/caixa?caixa='+encodeURIComponent(e.target.value));const modal=$('#movementModal');let type='supply';document.querySelectorAll('[data-movement]').forEach(b=>b.onclick=()=>{type=b.dataset.movement;$('#movementTitle').textContent=type==='supply'?'Registrar suprimento':'Registrar sangria';$('#movementHelp').textContent=type==='supply'?'Entrada manual de dinheiro na gaveta.':'Retirada manual de dinheiro da gaveta.';$('#movementAmount').value='';$('#movementDescription').value='';modal.hidden=false;setTimeout(()=>$('#movementAmount').focus(),50);});document.querySelectorAll('[data-close]').forEach(b=>b.onclick=()=>modal.hidden=true);const closeModal=$('#closeCashModal');const expectedBalance=Number('<%= Number(liveSummary?.expectedBalance||0) %>');const difference=()=>Math.round((Number($('#countedBalance')?.value||0)-expectedBalance)*100)/100;const updateDifference=()=>{const diff=difference(),el=$('#closingDifference'),hint=$('#notesRequirement');if(el){el.textContent=money(diff);el.classList.toggle('negative',diff<0);el.classList.toggle('positive',diff>0);el.classList.toggle('ok',diff===0);}if(hint)hint.textContent=Math.abs(diff)>=.01?'Obrigatória devido à diferença':'Opcional quando não houver diferença';};$('#openCloseCash')?.addEventListener('click',()=>{closeModal.hidden=false;updateDifference();setTimeout(()=>$('#countedBalance')?.focus(),50);});document.querySelectorAll('[data-close-cash]').forEach(b=>b.onclick=()=>closeModal.hidden=true);$('#countedBalance')?.addEventListener('input',updateDifference);$('#confirmCloseCash')?.addEventListener('click',async()=>{const countedBalance=Number($('#countedBalance').value),notes=$('#closingNotes').value.trim(),diff=difference();if(!Number.isFinite(countedBalance)||countedBalance<0)return alert('Informe um valor contado válido.');if(Math.abs(diff)>=.01&&!notes)return alert('Informe uma observação para justificar a diferença do fechamento.');if(!confirm(`Dinheiro esperado: ${money(expectedBalance)}\nDinheiro contado: ${money(countedBalance)}\nDiferença: ${money(diff)}\n\nConfirmar fechamento?`))return;try{$('#confirmCloseCash').disabled=true;const result=await api('/erp/pdv/caixa/fechar',{cashboxId:'<%= selectedCashboxId %>',countedBalance,notes});location.href=result.redirectUrl||'/erp/pdv/caixa?caixa=<%= encodeURIComponent(selectedCashboxId) %>';}catch(e){alert(e.message);$('#confirmCloseCash').disabled=false;}});$('#saveMovement')?.addEventListener('click',async()=>{const amount=Number($('#movementAmount').value||0),description=$('#movementDescription').value.trim();if(amount<=0)return alert('Informe um valor maior que zero.');if(!description)return alert('Informe o motivo da movimentação.');if(!confirm(`${type==='supply'?'Registrar suprimento':'Registrar sangria'} de ${money(amount)}?`))return;try{$('#saveMovement').disabled=true;await api('/erp/pdv/caixa/movimentar',{cashboxId:'<%= selectedCashboxId %>',type,amount,description});location.reload();}catch(e){alert(e.message);$('#saveMovement').disabled=false;}});})();
+</script>
+
+<script>
+(()=>{
+  const form=document.querySelector('.cash-filters-expanded');
+  const start=form?.querySelector('[name="dataInicial"]');
+  const end=form?.querySelector('[name="dataFinal"]');
+  if(!form||!start||!end)return;
+  const iso=d=>{const y=d.getFullYear(),m=String(d.getMonth()+1).padStart(2,'0'),day=String(d.getDate()).padStart(2,'0');return `${y}-${m}-${day}`;};
+  const submit=()=>form.requestSubmit ? form.requestSubmit() : form.submit();
+  document.querySelectorAll('[data-quick-periods] [data-period]').forEach(button=>button.addEventListener('click',()=>{
+    const now=new Date(); let from=new Date(now),to=new Date(now);
+    switch(button.dataset.period){
+      case 'yesterday': from.setDate(from.getDate()-1);to=new Date(from);break;
+      case 'last7': from.setDate(from.getDate()-6);break;
+      case 'month': from=new Date(now.getFullYear(),now.getMonth(),1);to=new Date(now.getFullYear(),now.getMonth()+1,0);break;
+      case 'nextMonth': from=new Date(now.getFullYear(),now.getMonth()+1,1);to=new Date(now.getFullYear(),now.getMonth()+2,0);break;
+      case 'all': start.value='';end.value='';submit();return;
+    }
+    start.value=iso(from);end.value=iso(to);submit();
+  }));
+  [start,end,form.querySelector('[name="tipo"]'),form.querySelector('[name="forma"]'),form.querySelector('[name="usuario"]')].filter(Boolean).forEach(el=>el.addEventListener('change',submit));
+})();
+</script>

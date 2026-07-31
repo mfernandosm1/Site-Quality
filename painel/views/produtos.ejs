@@ -1,9 +1,24 @@
 <% layout('layout') -%>
 <div class="card">
-  <h3>📦 Produtos</h3>
+  <h3>📦 Cadastro Mestre de Produtos</h3>
+  <div class="master-product-hero">
+    <div><strong>ERP · Produtos</strong><span>Cadastro mestre separado por ERP, Loja Virtual e Comercial, preparado para omnichannel.</span></div>
+    <a class="btn" href="/erp">← Voltar ao ERP</a>
+  </div>
 
 
   <style>
+  .master-product-hero{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;padding:14px 16px;margin:10px 0 16px;border:1px solid #bfdbfe;background:linear-gradient(135deg,#eff6ff,#fff);border-radius:14px}.master-product-hero div{display:flex;flex-direction:column;gap:3px}.master-product-hero strong{font-size:15px;color:#0f172a}.master-product-hero span{font-size:12px;color:#64748b}.commercial-policy-box{grid-column:1/-1;border:1px solid #dbeafe;background:#f8fbff;border-radius:12px;padding:12px}.commercial-policy-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}.commercial-policy-grid label{font-size:11px;font-weight:800;color:#374151}.commercial-policy-grid input,.commercial-policy-grid select{width:100%}.commercial-note{display:block;margin-top:8px;color:#64748b;font-size:11px}@media(max-width:900px){.commercial-policy-grid{grid-template-columns:1fr 1fr}}
+
+
+  .quality-inventory-config{grid-column:1/-1;border:1px solid #dbeafe;background:#f8fbff;border-radius:12px;padding:13px;margin-top:4px}
+  .quality-inventory-config-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-top:10px}
+  .quality-inventory-config label{font-size:11px;font-weight:800;color:#374151;display:flex;flex-direction:column;gap:5px}
+  .quality-inventory-config .inventory-check{flex-direction:row;align-items:center;border:1px solid #e5e7eb;background:#fff;border-radius:10px;padding:10px}
+  .quality-inventory-config .inventory-check input{width:auto!important;min-height:auto!important}
+  .quality-inventory-help{display:block;margin-top:8px;color:#64748b;font-size:11px}
+  @media(max-width:800px){.quality-inventory-config-grid{grid-template-columns:1fr}}
+
   /* Layout moderno e compacto da página Produtos */
   .quality-panel-header{
     display:flex;
@@ -83,6 +98,23 @@
     font-size:12px !important;
     border-radius:9px !important;
   }
+
+
+  .quality-bulk-center{display:flex;flex-direction:column;gap:12px;}
+  .quality-bulk-head{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;}
+  .quality-bulk-selection-actions{display:flex;gap:7px;flex-wrap:wrap;}
+  .quality-bulk-actions-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;}
+  .quality-bulk-action{border:1px solid #e5e7eb;background:#fff;border-radius:11px;padding:9px;display:flex;flex-direction:column;gap:7px;}
+  .quality-bulk-action-head{display:flex;align-items:center;gap:7px;font-size:12px;font-weight:900;color:#0f172a;cursor:pointer;}
+  .quality-bulk-action-head input{width:auto !important;margin:0;}
+  .quality-bulk-action-field{display:none;}
+  .quality-bulk-action.enabled .quality-bulk-action-field{display:block;}
+  .quality-bulk-action-field select,.quality-bulk-action-field input{width:100% !important;min-width:0 !important;}
+  .quality-bulk-field-help{display:block;margin-top:5px;color:#64748b;font-size:10.5px;line-height:1.35;font-weight:700;}
+  .quality-bulk-footer{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;padding-top:2px;}
+  .quality-bulk-summary{font-size:11px;color:#64748b;font-weight:700;}
+  .quality-bulk-apply{min-width:190px;}
+  @media(max-width:800px){.quality-bulk-actions-grid{grid-template-columns:1fr}.quality-bulk-apply{width:100%}}
 
   .quality-table-toolbar{
     display:flex;
@@ -766,6 +798,151 @@
   @media(max-width:1100px){.quality-indicators-grid{grid-template-columns:repeat(3,1fr);}}
   @media(max-width:640px){.quality-indicators-grid{grid-template-columns:repeat(2,1fr);}}
 
+
+  /* v0.10.2 - Workspace de Produto */
+  .product-workspace-toolbar{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin:14px 0 16px;padding:12px 14px;border:1px solid #dbe3ef;background:#fff;border-radius:14px;box-shadow:0 5px 16px rgba(15,23,42,.04)}
+  .product-workspace-toolbar-left{display:flex;gap:8px;flex-wrap:wrap}.product-workspace-toolbar .btn{min-height:38px;border-radius:10px;font-weight:800}.product-workspace-toolbar .btn.active{background:#2563eb!important;color:#fff!important;border-color:#1d4ed8!important}
+  .product-workspace-title strong{display:block;font-size:14px;color:#0f172a}.product-workspace-title span{display:block;margin-top:2px;font-size:11px;color:#64748b}
+  .product-workspace-section{display:none !important}.product-workspace-section.active{display:block !important}
+  .new-product-workspace{border:1px solid #dbeafe;background:#fff;border-radius:16px;padding:14px;margin-bottom:18px}
+  .new-product-heading{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:12px}.new-product-heading h2{margin:0;font-size:18px}.new-product-heading p{margin:3px 0 0;color:#64748b;font-size:12px}
+  .product-create-tabs{display:flex;gap:7px;flex-wrap:wrap;border-bottom:1px solid #e5e7eb;margin:2px 0 14px;padding-bottom:9px}.product-create-tab{border:1px solid #dbe3ef;background:#f8fafc;color:#334155;border-radius:999px;padding:8px 12px;font-weight:800;font-size:12px;cursor:pointer}.product-create-tab.active{background:#0f172a;color:#fff;border-color:#0f172a}
+  .product-create-panel{display:none}.product-create-panel.active{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:10px}.product-create-panel>*{min-width:0}.product-create-panel .field-name,.product-create-panel .field-slug,.product-create-panel .field-image,.product-create-panel .field-category{grid-column:span 2}.product-create-panel .quality-compact-gallery,.product-create-panel .quality-variations-box,.product-create-panel .quality-tags-field,.product-create-panel .add-description-editor-wrap,.product-create-panel .commercial-policy-box{grid-column:1/-1}
+  .product-create-footer{display:flex;justify-content:flex-end;gap:8px;margin-top:14px;padding-top:12px;border-top:1px solid #e5e7eb}.product-create-footer .btn{min-width:150px}
+  .workspace-list-heading{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;margin:8px 0 12px}.workspace-list-heading h2{margin:0;font-size:18px}.workspace-list-heading p{margin:3px 0 0;color:#64748b;font-size:12px}
+  .commercial-policy-box.workspace-commercial{background:linear-gradient(135deg,#f8fbff,#fff)}
+  @media(max-width:900px){.product-create-panel.active{grid-template-columns:1fr}.product-create-panel .field-name,.product-create-panel .field-slug,.product-create-panel .field-image,.product-create-panel .field-category{grid-column:1/-1}.product-workspace-title{width:100%}}
+
+
+
+  /* ===== Black OLED — modais de Produtos v0.12.3.12 =====
+     Mantido dentro do produtos.ejs para carregar depois dos estilos claros locais. */
+  html[data-panel-theme]:not([data-panel-theme="light"]) .quality-gallery-modal,
+  html[data-panel-theme]:not([data-panel-theme="light"]) .quality-description-modal,
+  html[data-panel-theme]:not([data-panel-theme="light"]) .quality-tags-modal,
+  html[data-panel-theme]:not([data-panel-theme="light"]) .quality-variation-modal,
+  html[data-panel-theme]:not([data-panel-theme="light"]) .quality-edit-modal,
+  html[data-panel-theme]:not([data-panel-theme="light"]) .quality-gallery-modal-header,
+  html[data-panel-theme]:not([data-panel-theme="light"]) .quality-gallery-modal-body,
+  html[data-panel-theme]:not([data-panel-theme="light"]) .quality-description-modal-body,
+  html[data-panel-theme]:not([data-panel-theme="light"]) .quality-tags-modal-body,
+  html[data-panel-theme]:not([data-panel-theme="light"]) .quality-variation-modal-body,
+  html[data-panel-theme]:not([data-panel-theme="light"]) .quality-edit-modal-header,
+  html[data-panel-theme]:not([data-panel-theme="light"]) .quality-edit-modal-body{
+    background:var(--card) !important;
+    color:var(--text) !important;
+    border-color:var(--line) !important;
+  }
+
+  html[data-panel-theme]:not([data-panel-theme="light"]) .quality-edit-tabs,
+  html[data-panel-theme]:not([data-panel-theme="light"]) .quality-edit-panel,
+  html[data-panel-theme]:not([data-panel-theme="light"]) .quality-edit-grid,
+  html[data-panel-theme]:not([data-panel-theme="light"]) .quality-edit-field,
+  html[data-panel-theme]:not([data-panel-theme="light"]) .quality-stock-variation-box,
+  html[data-panel-theme]:not([data-panel-theme="light"]) .quality-stock-variation-list,
+  html[data-panel-theme]:not([data-panel-theme="light"]) .variation-labels-box,
+  html[data-panel-theme]:not([data-panel-theme="light"]) .quality-var-card,
+  html[data-panel-theme]:not([data-panel-theme="light"]) .quality-combo-card,
+  html[data-panel-theme]:not([data-panel-theme="light"]) .variation-disabled-note,
+  html[data-panel-theme]:not([data-panel-theme="light"]) .quality-tags-options,
+  html[data-panel-theme]:not([data-panel-theme="light"]) .quality-tags-custom,
+  html[data-panel-theme]:not([data-panel-theme="light"]) .description-editor-field,
+  html[data-panel-theme]:not([data-panel-theme="light"]) .description-toolbar,
+  html[data-panel-theme]:not([data-panel-theme="light"]) .description-rich-editor{
+    background:var(--surface-soft) !important;
+    color:var(--text) !important;
+    border-color:var(--line) !important;
+  }
+
+  html[data-panel-theme]:not([data-panel-theme="light"]) .quality-edit-tab,
+  html[data-panel-theme]:not([data-panel-theme="light"]) .quality-tag-option,
+  html[data-panel-theme]:not([data-panel-theme="light"]) .quality-var-pill,
+  html[data-panel-theme]:not([data-panel-theme="light"]) .quality-combo-pill,
+  html[data-panel-theme]:not([data-panel-theme="light"]) .description-toolbar button,
+  html[data-panel-theme]:not([data-panel-theme="light"]) .quality-close-btn{
+    background:var(--surface-soft) !important;
+    color:var(--text) !important;
+    border-color:var(--line) !important;
+  }
+
+  html[data-panel-theme]:not([data-panel-theme="light"]) .quality-edit-tab.active,
+  html[data-panel-theme]:not([data-panel-theme="light"]) .quality-modal-backdrop .btn.primary{
+    background:var(--blue) !important;
+    color:#fff !important;
+    border-color:var(--blue) !important;
+  }
+
+  html[data-panel-theme]:not([data-panel-theme="light"]) .quality-modal-backdrop input,
+  html[data-panel-theme]:not([data-panel-theme="light"]) .quality-modal-backdrop select,
+  html[data-panel-theme]:not([data-panel-theme="light"]) .quality-modal-backdrop textarea,
+  html[data-panel-theme]:not([data-panel-theme="light"]) .quality-modal-backdrop [contenteditable="true"]{
+    background:var(--surface-soft) !important;
+    color:var(--text) !important;
+    border-color:var(--line) !important;
+  }
+
+  html[data-panel-theme]:not([data-panel-theme="light"]) .quality-modal-backdrop label,
+  html[data-panel-theme]:not([data-panel-theme="light"]) .quality-modal-backdrop strong,
+  html[data-panel-theme]:not([data-panel-theme="light"]) .quality-modal-backdrop h2,
+  html[data-panel-theme]:not([data-panel-theme="light"]) .quality-modal-backdrop h3{
+    color:var(--text) !important;
+  }
+
+  html[data-panel-theme]:not([data-panel-theme="light"]) .quality-modal-backdrop small,
+  html[data-panel-theme]:not([data-panel-theme="light"]) .quality-edit-help,
+  html[data-panel-theme]:not([data-panel-theme="light"]) .variation-help,
+  html[data-panel-theme]:not([data-panel-theme="light"]) .commercial-note{
+    color:var(--muted) !important;
+  }
+
+  html[data-panel-theme="oled"] .quality-gallery-modal,
+  html[data-panel-theme="oled"] .quality-description-modal,
+  html[data-panel-theme="oled"] .quality-tags-modal,
+  html[data-panel-theme="oled"] .quality-variation-modal,
+  html[data-panel-theme="oled"] .quality-edit-modal,
+  html[data-panel-theme="oled"] .quality-gallery-modal-header,
+  html[data-panel-theme="oled"] .quality-gallery-modal-body,
+  html[data-panel-theme="oled"] .quality-description-modal-body,
+  html[data-panel-theme="oled"] .quality-tags-modal-body,
+  html[data-panel-theme="oled"] .quality-variation-modal-body,
+  html[data-panel-theme="oled"] .quality-edit-modal-header,
+  html[data-panel-theme="oled"] .quality-edit-modal-body{
+    background:#101010 !important;
+    color:#f5f5f5 !important;
+    border-color:#303030 !important;
+  }
+
+  html[data-panel-theme="oled"] .quality-edit-tabs,
+  html[data-panel-theme="oled"] .quality-edit-panel,
+  html[data-panel-theme="oled"] .quality-edit-grid,
+  html[data-panel-theme="oled"] .quality-edit-field,
+  html[data-panel-theme="oled"] .quality-stock-variation-box,
+  html[data-panel-theme="oled"] .quality-stock-variation-list,
+  html[data-panel-theme="oled"] .variation-labels-box,
+  html[data-panel-theme="oled"] .quality-var-card,
+  html[data-panel-theme="oled"] .quality-combo-card,
+  html[data-panel-theme="oled"] .variation-disabled-note,
+  html[data-panel-theme="oled"] .quality-tags-options,
+  html[data-panel-theme="oled"] .quality-tags-custom,
+  html[data-panel-theme="oled"] .description-editor-field,
+  html[data-panel-theme="oled"] .description-toolbar,
+  html[data-panel-theme="oled"] .description-rich-editor,
+  html[data-panel-theme="oled"] .quality-modal-backdrop input,
+  html[data-panel-theme="oled"] .quality-modal-backdrop select,
+  html[data-panel-theme="oled"] .quality-modal-backdrop textarea,
+  html[data-panel-theme="oled"] .quality-modal-backdrop [contenteditable="true"]{
+    background:#181818 !important;
+    color:#f5f5f5 !important;
+    border-color:#303030 !important;
+  }
+
+  .quality-master-area{grid-column:1/-1;border:1px solid #2b2b2b;background:#101010;border-radius:14px;padding:14px}.quality-master-area-title{display:flex;justify-content:space-between;gap:10px;align-items:center;margin-bottom:12px}.quality-master-area-title small{opacity:.7}.quality-master-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}.quality-master-grid label{display:flex;flex-direction:column;gap:5px;font-size:11px;font-weight:800}.quality-master-grid .inventory-check{flex-direction:row;align-items:center}.quality-master-grid .inventory-check input{width:auto!important}@media(max-width:900px){.quality-master-grid{grid-template-columns:1fr 1fr}}@media(max-width:620px){.quality-master-grid{grid-template-columns:1fr}}
+html[data-panel-theme="light"] .quality-master-area,html[data-panel-theme="light"] .quality-inventory-config,html[data-panel-theme="light"] .commercial-policy-box,html[data-panel-theme="light"] .quality-control-box,html[data-panel-theme="light"] .quality-bulk-action,html[data-panel-theme="light"] .quality-gallery-modal,html[data-panel-theme="light"] .quality-edit-modal{background:#fff;color:#111827;border-color:#d7dde5}html[data-panel-theme="light"] .quality-master-area input,html[data-panel-theme="light"] .quality-master-area select,html[data-panel-theme="light"] .quality-edit-modal input,html[data-panel-theme="light"] .quality-edit-modal select,html[data-panel-theme="light"] .quality-edit-modal textarea{background:#fff;color:#111827;border-color:#cbd5e1}
+
+  .quality-channel-status{min-width:118px}
+  .quality-channel-help{display:block;font-size:11px;line-height:1.35;color:var(--muted,#6b7280);max-width:145px}
+  .quality-products-summary-table th:nth-child(5),.quality-products-summary-table th:nth-child(6){text-align:center}
+  body.theme-oled .quality-channel-help{color:#9ca3af}
 </style>
 
 
@@ -794,6 +971,29 @@
     <div class="quality-indicator-card"><span>📦 Estoque total</span><strong id="quality-stock-total-indicator"><%= estoqueTotalProdutos %></strong></div>
   </div>
 
+  <div class="product-workspace-toolbar">
+    <div class="product-workspace-title">
+      <strong>Workspace de Produtos</strong>
+      <span>Consulte a base ou abra um cadastro sem misturar as duas tarefas.</span>
+    </div>
+    <div class="product-workspace-toolbar-left">
+      <button class="btn active" type="button" data-product-workspace="list">📋 Produtos cadastrados</button>
+      <button class="btn primary" type="button" data-product-workspace="new">＋ Novo produto</button>
+    </div>
+  </div>
+
+  <section class="product-workspace-section new-product-workspace" id="product-workspace-new">
+    <div class="new-product-heading">
+      <div><h2>＋ Novo produto</h2><p>Preencha por etapas. Os campos continuam salvando no cadastro atual com segurança.</p></div>
+      <button class="btn" type="button" data-product-workspace="list">← Voltar à lista</button>
+    </div>
+    <div class="product-create-tabs" id="product-create-tabs">
+      <button type="button" class="product-create-tab active" data-create-tab="general">🏢 ERP</button>
+      <button type="button" class="product-create-tab" data-create-tab="commercial">💰 Comercial</button>
+      <button type="button" class="product-create-tab" data-create-tab="stock">📚 Estoque</button>
+      <button type="button" class="product-create-tab" data-create-tab="site">🌐 Loja Virtual</button>
+      <button type="button" class="product-create-tab" data-create-tab="variations">🎛️ Variações</button>
+    </div>
   <div class="quality-ai-fill-box" id="quality-ai-fill-box">
     <div class="quality-ai-fill-title">
       <strong>✨ Cadastro inteligente com IA</strong>
@@ -811,24 +1011,65 @@
 
   <form method="post" action="/produtos/add" class="row product-add-form" id="add-product-form">
     <div class="field-name">
-      <label>Nome</label>
-      <input type="text" name="name" id="add-product-name" placeholder="Ex.: iPhone 15 128GB">
+      <label>Nome interno ERP</label>
+      <input type="text" name="erpName" id="add-product-name" placeholder="Ex.: IPHONE 15 128GB PRETO">
     </div>
 
-    <div class="field-slug">
+    <div class="field-slug" data-create-section="site">
+      <label>Nome da Loja Virtual (Nome LV)</label>
+      <input type="text" name="lvName" id="add-product-lv-name" placeholder="Ex.: Apple iPhone 15 128GB">
+      <small class="slug-help">Pode ser mais comercial que o nome interno usado no ERP.</small>
+    </div>
+
+    <div class="field-slug" data-create-section="site">
       <label>Slug / URL amigável</label>
       <input type="text" name="slug" id="add-product-slug" placeholder="iphone-15-128gb">
-      <small class="slug-help">Preenche automático ao digitar o nome, mas você pode editar para SEO.</small>
+      <small class="slug-help">Preenche automático pelo nome e pode ser ajustado para SEO.</small>
     </div>
 
-    <div class="field-small">
-      <label>Preço</label>
-      <input type="number" name="price" step="0.01" min="0" placeholder="opcional">
+    <div class="field-small" data-create-section="commercial">
+      <label>Preço ERP</label>
+      <input type="number" name="erpPrice" step="0.01" min="0" placeholder="opcional">
+    </div>
+
+    <div class="field-small" data-create-section="site">
+      <label>Preço Loja Virtual</label>
+      <input type="number" name="lvPrice" step="0.01" min="0" placeholder="opcional">
     </div>
 
     <div class="field-small">
       <label>Estoque</label>
       <input type="number" name="stock" step="1" min="0" placeholder="opcional">
+    </div>
+
+    <div class="quality-master-area" data-create-section="general">
+      <div class="quality-master-area-title"><strong>🏢 Identificação ERP</strong><small>Campos internos usados por compras, estoque, PDV e relatórios.</small></div>
+      <div class="quality-master-grid">
+        <label>SKU<input type="text" name="sku" placeholder="SKU interno"></label>
+        <label>Código interno<input type="text" name="internalCode" placeholder="Código próprio"></label>
+        <label>Código do fornecedor<input type="text" name="supplierCode"></label>
+        <label>Código de barras<input type="text" name="barcode" inputmode="numeric"></label>
+        <label>Marca<input type="text" name="brand"></label>
+        <label>Unidade<select name="unit"><option value="UN">UN - Unidade</option><option value="CX">CX - Caixa</option><option value="PC">PC - Peça</option><option value="KIT">KIT</option><option value="SER">SER - Serviço</option></select></label>
+        <label>Categoria ERP<input type="text" name="erpCategory" placeholder="Ex.: Acessórios"></label>
+        <label>Subcategoria ERP<input type="text" name="erpSubcategory" placeholder="Ex.: Capas"></label>
+        <label>Fornecedor principal<input type="text" name="mainSupplierId" placeholder="Preparado para vínculo"></label>
+        <label>Fornecedor preferencial<input type="text" name="preferredSupplierId" placeholder="Preparado para vínculo"></label>
+        <label class="inventory-check"><input type="checkbox" name="erpActive" value="true" checked> Produto ativo no ERP</label>
+      </div>
+    </div>
+
+    <div class="quality-inventory-config" data-create-section="stock">
+      <strong>📦 Controle de estoque ERP</strong>
+      <div class="quality-inventory-config-grid">
+        <label class="inventory-check"><input type="checkbox" name="stockControlled" value="true" checked> Controlar estoque deste produto</label>
+        <label class="inventory-check"><input type="checkbox" name="allowNegative" value="true"> Permitir vender com estoque zerado/negativo</label>
+        <label>Estoque mínimo<input type="number" name="minimumQuantity" min="0" step="1" value="0"></label>
+        <label>Disponibilidade no site<select name="inventorySiteMode"><option value="shared" selected>Compartilhar saldo</option><option value="limited">Limitar quantidade</option><option value="disabled">Não disponibilizar</option></select></label>
+        <label>Limite do site<input type="number" name="siteLimit" min="0" step="1" placeholder="Opcional"></label>
+        <label>Reserva física da loja<input type="number" name="physicalSafety" min="0" step="1" value="0"></label>
+      </div>
+      <small class="quality-inventory-help">Nesta entrega, quantidade, controle, estoque mínimo e histórico já são gravados. As regras automáticas de venda pelo site serão conectadas em uma etapa futura.</small>
     </div>
 
     <div class="field-image">
@@ -842,12 +1083,19 @@
     </div>
 
     <div class="field-category">
-      <label>Categoria</label>
-      <select name="category">
+      <label>Categoria do site</label>
+      <select name="siteCategory" class="js-category-select" data-subcategory-target="add-product-subcategory">
         <option value="">Início (vitrine)</option>
         <% (categorias || []).forEach(c => { %>
           <option value="<%= c.slug %>"><%= c.name %></option>
         <% }) %>
+      </select>
+    </div>
+
+    <div class="field-category">
+      <label>Subcategoria do site</label>
+      <select name="siteSubcategory" id="add-product-subcategory" class="js-subcategory-select">
+        <option value="">Sem subcategoria</option>
       </select>
     </div>
 
@@ -867,12 +1115,13 @@
       </select>
     </div>
 
-    <div class="field-small">
-      <label>Ativo</label>
-      <select name="active">
-        <option value="true" selected>Sim</option>
-        <option value="false">Não</option>
+    <div class="field-small" data-create-section="site">
+      <label>Loja Virtual (LV)</label>
+      <select name="lvActive">
+        <option value="true" selected>Ativo</option>
+        <option value="false">Inativo</option>
       </select>
+      <small class="slug-help">A alteração entra no site somente ao usar o botão Publicar.</small>
     </div>
 
     <div class="field-small">
@@ -971,6 +1220,23 @@
     </div>
 
 
+
+    <div class="commercial-policy-box workspace-commercial" data-create-section="commercial">
+      <strong>💰 Comercial e política de desconto</strong>
+      <div class="commercial-policy-grid" style="margin-top:10px">
+        <label>Preço de custo<input type="number" name="costPrice" step="0.01" min="0" placeholder="0,00"></label>
+        <label>Preço à vista / PIX<input type="number" name="cashPrice" step="0.01" min="0" placeholder="0,00"></label>
+        <label>Preço parcelado<input type="number" name="installmentPrice" step="0.01" min="0" placeholder="0,00"></label>
+        <label>Preço mínimo<input type="number" name="minimumPrice" step="0.01" min="0" placeholder="0,00"></label>
+        <label>Margem mínima (%)<input type="number" name="minimumMarginPercent" step="0.01" min="0" placeholder="0"></label>
+        <label>Política de desconto<select name="discountPolicy"><option value="inherit">Herdar regra superior</option><option value="custom">Regra própria</option><option value="blocked">Sem desconto</option></select></label>
+        <label>Desconto máximo (%)<input type="number" name="maximumDiscountPercent" step="0.01" min="0" max="100" placeholder="0"></label>
+        <label>Desconto máximo (R$)<input type="number" name="maximumDiscountAmount" step="0.01" min="0" placeholder="0,00"></label>
+        <label>Exige autorização?<select name="requiresAuthorization"><option value="false">Não</option><option value="true">Sim</option></select></label>
+      </div>
+      <small class="commercial-note">O limite mais restritivo entre desconto, preço mínimo e margem mínima sempre prevalecerá.</small>
+    </div>
+
     <div class="quality-tags-field">
       <label>Etiquetas do produto</label>
       <div class="quality-tags-options">
@@ -1008,6 +1274,10 @@
       <button class="btn primary" type="submit">Adicionar</button>
     </div>
   </form>
+  </section>
+
+  <section class="product-workspace-section active" id="product-workspace-list">
+    <div class="workspace-list-heading"><div><h2>📋 Produtos cadastrados</h2><p>Pesquise, filtre, edite e acompanhe os principais estados da base.</p></div></div>
 
   <div class="quality-controls-grid">
     <div class="quality-control-box">
@@ -1025,28 +1295,87 @@
     </div>
 
     <div class="quality-control-box">
-      <div class="quality-control-title">⚡ Ação em massa: <span id="selected-count">0</span> selecionado(s)</div>
-      <div class="quality-bulk-box">
-        <form id="bulk-category-form" method="post" action="/produtos/bulk-category">
-          <div id="bulk-selected-container"></div>
-          <select name="bulkCategory" id="bulk-category-select">
-            <option value="">Mover para Início (vitrine)</option>
-            <% (categorias || []).forEach(c => { %>
-              <option value="<%= c.slug %>">Mover para <%= c.name %></option>
-            <% }) %>
-          </select>
-          <button class="btn primary" type="submit">Aplicar</button>
-          <button class="btn" type="button" id="select-all-products">Selecionar todos</button>
-          <button class="btn" type="button" id="clear-selection">Limpar</button>
-        </form>
+      <form id="bulk-actions-form" method="post" action="/produtos/bulk-actions" class="quality-bulk-center">
+        <div id="bulk-selected-container"></div>
 
-        <form id="bulk-details-form" method="post" action="/produtos/bulk-details">
-          <div id="bulk-details-selected-container"></div>
-          <input type="hidden" name="detailsAction" id="details-action-input" value="">
-          <button class="btn primary" type="button" id="enable-details-selected">Detalhes ON</button>
-          <button class="btn" type="button" id="disable-details-selected">Detalhes OFF</button>
-        </form>
-      </div>
+        <div class="quality-bulk-head">
+          <div class="quality-control-title" style="margin:0;">⚡ Central de Operações em Lote · <span id="selected-count">0</span> selecionado(s)</div>
+          <div class="quality-bulk-selection-actions">
+            <button class="btn" type="button" id="select-all-products">Selecionar resultados</button>
+            <button class="btn" type="button" id="invert-selection">Inverter seleção</button>
+            <button class="btn" type="button" id="clear-selection">Limpar</button>
+          </div>
+        </div>
+
+        <div class="quality-bulk-actions-grid">
+          <div class="quality-bulk-action" data-bulk-action="category">
+            <label class="quality-bulk-action-head"><input type="checkbox" name="enabledActions" value="category"> Alterar categoria</label>
+            <div class="quality-bulk-action-field">
+              <select name="bulkCategory" id="bulk-category-select" data-subcategory-target="bulk-subcategory-select">
+                <option value="">Início / sem categoria</option>
+                <% (categorias || []).forEach(c => { %><option value="<%= c.slug %>"><%= c.name %></option><% }) %>
+              </select>
+            </div>
+          </div>
+
+          <div class="quality-bulk-action" data-bulk-action="subcategory">
+            <label class="quality-bulk-action-head"><input type="checkbox" name="enabledActions" value="subcategory"> Alterar subcategoria</label>
+            <div class="quality-bulk-action-field">
+              <select name="bulkSubcategory" id="bulk-subcategory-select"><option value="">Sem subcategoria</option></select>
+            </div>
+          </div>
+
+          <div class="quality-bulk-action" data-bulk-action="erpActive">
+            <label class="quality-bulk-action-head"><input type="checkbox" name="enabledActions" value="erpActive"> Status ERP</label>
+            <div class="quality-bulk-action-field"><select name="bulkErpActive"><option value="true">Ativar ERP</option><option value="false">Desativar ERP</option></select></div>
+          </div>
+
+          <div class="quality-bulk-action" data-bulk-action="lvActive">
+            <label class="quality-bulk-action-head"><input type="checkbox" name="enabledActions" value="lvActive"> Status Loja Virtual (LV)</label>
+            <div class="quality-bulk-action-field"><select name="bulkLvActive"><option value="true">Ativar LV</option><option value="false">Desativar LV</option></select><small class="quality-bulk-field-help">Não publica automaticamente; será aplicado na próxima publicação.</small></div>
+          </div>
+
+          <div class="quality-bulk-action" data-bulk-action="showPrice">
+            <label class="quality-bulk-action-head"><input type="checkbox" name="enabledActions" value="showPrice"> Exibição do preço</label>
+            <div class="quality-bulk-action-field"><select name="bulkShowPrice"><option value="true">Mostrar preço</option><option value="false">Ocultar preço</option></select></div>
+          </div>
+
+          <div class="quality-bulk-action" data-bulk-action="detailsEnabled">
+            <label class="quality-bulk-action-head"><input type="checkbox" name="enabledActions" value="detailsEnabled"> Página de detalhes</label>
+            <div class="quality-bulk-action-field"><select name="bulkDetailsEnabled"><option value="true">Ativar detalhes</option><option value="false">Desativar detalhes</option></select></div>
+          </div>
+
+          <div class="quality-bulk-action" data-bulk-action="featured">
+            <label class="quality-bulk-action-head"><input type="checkbox" name="enabledActions" value="featured"> Destaque na vitrine</label>
+            <div class="quality-bulk-action-field"><select name="bulkFeatured"><option value="true">Colocar na vitrine</option><option value="false">Retirar da vitrine</option></select></div>
+          </div>
+
+
+          <div class="quality-bulk-action" data-bulk-action="stockControlled">
+            <label class="quality-bulk-action-head"><input type="checkbox" name="enabledActions" value="stockControlled"> Controle de estoque</label>
+            <div class="quality-bulk-action-field">
+              <select name="bulkStockControlled" id="bulk-stock-controlled">
+                <option value="true">Ativar controle</option>
+                <option value="false">Desativar controle</option>
+              </select>
+              <small class="quality-bulk-field-help">Ao desativar, o saldo e o histórico permanecem preservados.</small>
+            </div>
+          </div>
+
+          <div class="quality-bulk-action" data-bulk-action="minimumQuantity">
+            <label class="quality-bulk-action-head"><input type="checkbox" name="enabledActions" value="minimumQuantity"> Estoque mínimo</label>
+            <div class="quality-bulk-action-field">
+              <input type="number" name="bulkMinimumQuantity" id="bulk-minimum-quantity" min="0" step="1" value="0" placeholder="Ex.: 5">
+              <small class="quality-bulk-field-help">Define o mesmo mínimo para todos os produtos selecionados.</small>
+            </div>
+          </div>
+        </div>
+
+        <div class="quality-bulk-footer">
+          <span class="quality-bulk-summary" id="bulk-actions-summary">Marque apenas as informações que deseja alterar.</span>
+          <button class="btn primary quality-bulk-apply" type="submit">Aplicar alterações selecionadas</button>
+        </div>
+      </form>
     </div>
   </div>
 
@@ -1063,7 +1392,8 @@
           <th>#</th>
           <th>Produto</th>
           <th>Categoria / Estoque</th>
-          <th>Status</th>
+          <th>ERP</th>
+          <th>LV</th>
           <th>Recursos</th>
           <th>Ações</th>
         </tr>
@@ -1077,6 +1407,38 @@
 
             <td>
               <input type="hidden" name="id" value="<%= p.id %>">
+              <% const erpData = p.erp || {}; const lvData = p.virtualStore || {}; %>
+              <input type="hidden" name="sku" value="<%= erpData.sku || '' %>">
+              <input type="hidden" name="internalCode" value="<%= erpData.internalCode || '' %>">
+              <input type="hidden" name="supplierCode" value="<%= erpData.supplierCode || '' %>">
+              <input type="hidden" name="barcode" value="<%= erpData.barcode || '' %>">
+              <input type="hidden" name="brand" value="<%= erpData.brand || '' %>">
+              <input type="hidden" name="unit" value="<%= erpData.unit || 'UN' %>">
+              <input type="hidden" name="erpCategory" value="<%= erpData.category || '' %>">
+              <input type="hidden" name="erpSubcategory" value="<%= erpData.subcategory || '' %>">
+              <input type="hidden" name="lvName" value="<%= lvData.name || p.name || '' %>">
+              <input type="hidden" name="lvPrice" value="<%= lvData.price ?? p.price ?? '' %>">
+              <input type="hidden" name="seoTitle" value="<%= lvData.seoTitle || '' %>">
+              <input type="hidden" name="seoDescription" value="<%= lvData.seoDescription || '' %>">
+              <% const commercial = p.commercial || {}; %>
+              <input type="hidden" name="costPrice" value="<%= commercial.costPrice ?? '' %>"><input type="hidden" name="erpPrice" value="<%= commercial.erpPrice ?? '' %>"><input type="hidden" name="marketplacePrice" value="<%= commercial.marketplacePrice ?? '' %>"><input type="hidden" name="promotionalPrice" value="<%= commercial.promotionalPrice ?? '' %>"><input type="hidden" name="desiredMarginPercent" value="<%= commercial.desiredMarginPercent ?? '' %>"><input type="hidden" name="expectedProfit" value="<%= commercial.expectedProfit ?? '' %>"><input type="hidden" name="defaultCommissionPercent" value="<%= commercial.defaultCommissionPercent ?? '' %>">
+              <input type="hidden" name="cashPrice" value="<%= commercial.cashPrice ?? '' %>">
+              <input type="hidden" name="installmentPrice" value="<%= commercial.installmentPrice ?? '' %>">
+              <input type="hidden" name="minimumPrice" value="<%= commercial.minimumPrice ?? '' %>">
+              <input type="hidden" name="minimumMarginPercent" value="<%= commercial.minimumMarginPercent ?? '' %>">
+              <input type="hidden" name="discountPolicy" value="<%= commercial.discountPolicy || 'inherit' %>">
+              <input type="hidden" name="maximumDiscountPercent" value="<%= commercial.maximumDiscountPercent ?? '' %>">
+              <input type="hidden" name="maximumDiscountAmount" value="<%= commercial.maximumDiscountAmount ?? '' %>">
+              <input type="hidden" name="requiresAuthorization" value="<%= commercial.requiresAuthorization ? 'true' : 'false' %>">
+
+              <% const inventoryPolicy = p.inventory || {}; const siteInventory = inventoryPolicy.channelAvailability?.site || {}; %>
+              <input type="hidden" name="stockControlled" class="row-stock-controlled" value="<%= inventoryPolicy.stockControlled === true ? 'true' : 'false' %>">
+              <input type="hidden" name="allowNegative" class="row-allow-negative" value="<%= inventoryPolicy.allowNegative === true ? 'true' : 'false' %>">
+              <input type="hidden" name="minimumQuantity" class="row-minimum-quantity" value="<%= inventoryPolicy.minimumQuantity ?? 0 %>">
+              <input type="hidden" name="inventorySiteMode" class="row-inventory-site-mode" value="<%= siteInventory.mode || 'shared' %>">
+              <input type="hidden" name="siteLimit" class="row-site-limit" value="<%= siteInventory.limit ?? '' %>">
+              <input type="hidden" name="physicalSafety" class="row-physical-safety" value="<%= siteInventory.physicalSafety ?? 0 %>">
+
               <div class="quality-product-cell">
                 <div class="quality-product-thumb">
                   <img src="/<%= p.image || 'images/sem-imagem.png' %>" alt="" onerror="this.onerror=null;this.src='/images/sem-imagem.png';">
@@ -1093,11 +1455,14 @@
 
             <td>
               <div class="quality-category-stock">
-                <select name="category" class="prod-category-select">
+                <select name="category" class="prod-category-select js-category-select" data-subcategory-target="row-subcategory-<%= p.id %>">
                   <option value="">Início (vitrine)</option>
                   <% (categorias || []).forEach(c => { %>
                     <option value="<%= c.slug %>" <%= p.category === c.slug ? 'selected' : '' %>><%= c.name %></option>
                   <% }) %>
+                </select>
+                <select name="subcategory" id="row-subcategory-<%= p.id %>" class="prod-subcategory-select js-subcategory-select" data-current="<%= p.subcategory || p.subcategoria || '' %>">
+                  <option value="">Sem subcategoria</option>
                 </select>
                 <div class="quality-stock-box">
                   <span class="quality-stock-label">Estoque</span>
@@ -1110,12 +1475,27 @@
             </td>
 
             <td>
-              <div class="quality-status-stack">
+              <% const rawErpActive = erpData.active !== undefined ? erpData.active : p.active; const erpActiveValue = !['false', '0', 'off', 'inativo'].includes(String(rawErpActive).toLowerCase()) && rawErpActive !== false; %>
+              <div class="quality-status-stack quality-channel-status">
                 <div class="quality-compact-field">
-                  <label>Ativo</label>
-                  <select name="active">
-                    <option value="true" <%= p.active ? 'selected' : '' %>>Sim</option>
-                    <option value="false" <%= !p.active ? 'selected' : '' %>>Não</option>
+                  <label>ERP</label>
+                  <select name="erpActive" aria-label="Status ERP de <%= p.name %>">
+                    <option value="true" <%= erpActiveValue ? 'selected' : '' %>>Ativo</option>
+                    <option value="false" <%= !erpActiveValue ? 'selected' : '' %>>Inativo</option>
+                  </select>
+                </div>
+                <small class="quality-channel-help">PDV, estoque, compras e financeiro.</small>
+              </div>
+            </td>
+
+            <td>
+              <% const rawLvActive = lvData.active !== undefined ? lvData.active : p.active; const lvActiveValue = !['false', '0', 'off', 'inativo'].includes(String(rawLvActive).toLowerCase()) && rawLvActive !== false; %>
+              <div class="quality-status-stack quality-channel-status">
+                <div class="quality-compact-field">
+                  <label>Loja Virtual</label>
+                  <select name="lvActive" aria-label="Status LV de <%= p.name %>">
+                    <option value="true" <%= lvActiveValue ? 'selected' : '' %>>Ativo</option>
+                    <option value="false" <%= !lvActiveValue ? 'selected' : '' %>>Inativo</option>
                   </select>
                 </div>
                 <div class="quality-compact-field">
@@ -1139,6 +1519,7 @@
                     <option value="false" <%= !p.detailsEnabled ? 'selected' : '' %>>Não</option>
                   </select>
                 </div>
+                <small class="quality-channel-help">Sincroniza somente ao clicar em Publicar.</small>
               </div>
             </td>
 
@@ -1202,6 +1583,7 @@
     </table>
     </div>
   </form>
+  </section>
 
   <% (items || []).forEach((p) => { %>
     <form id="duplicate-form-<%= p.id %>" method="post" action="/produtos/duplicate" style="display:none;">
@@ -1368,9 +1750,10 @@ Com marcas de uso">Usados padrão</button></div><div class="quality-var-list" da
     </div>
     <div class="quality-edit-modal-body">
       <div class="quality-edit-tabs">
-        <button class="quality-edit-tab active" type="button" data-edit-tab="dados">📋 Dados do produto</button>
+        <button class="quality-edit-tab active" type="button" data-edit-tab="dados">🏢 ERP</button>
+        <button class="quality-edit-tab" type="button" data-edit-tab="comercial">💰 Comercial</button>
         <button class="quality-edit-tab" type="button" data-edit-tab="estoque">📦 Estoque</button>
-        <button class="quality-edit-tab" type="button" data-edit-tab="seo">🔎 SEO</button>
+        <button class="quality-edit-tab" type="button" data-edit-tab="seo">🌐 Loja Virtual / SEO</button>
         <button class="quality-edit-tab" type="button" data-edit-tab="vendas">📈 Marketing e Vendas</button>
       </div>
 
@@ -1380,18 +1763,31 @@ Com marcas de uso">Usados padrão</button></div><div class="quality-var-list" da
             <label>Nome do produto</label>
             <input type="text" id="edit-name" placeholder="Nome do produto">
           </div>
+          <div class="quality-edit-field"><label>SKU</label><input type="text" id="edit-sku"></div>
+          <div class="quality-edit-field"><label>Código interno</label><input type="text" id="edit-internalCode"></div>
+          <div class="quality-edit-field"><label>Código do fornecedor</label><input type="text" id="edit-supplierCode"></div>
+          <div class="quality-edit-field"><label>Código de barras</label><input type="text" id="edit-barcode"></div>
+          <div class="quality-edit-field"><label>Marca</label><input type="text" id="edit-brand"></div>
+          <div class="quality-edit-field"><label>Unidade</label><select id="edit-unit"><option value="UN">UN</option><option value="CX">CX</option><option value="PC">PC</option><option value="KIT">KIT</option><option value="SER">SER</option></select></div>
+          <div class="quality-edit-field"><label>Categoria ERP</label><input type="text" id="edit-erpCategory"></div>
+          <div class="quality-edit-field"><label>Subcategoria ERP</label><input type="text" id="edit-erpSubcategory"></div>
+          <div class="quality-edit-field"><label>Ativo no ERP</label><select id="edit-erpActive"><option value="true">Sim</option><option value="false">Não</option></select></div>
           <div class="quality-edit-field">
             <label>Slug / URL amigável</label>
             <input type="text" id="edit-slug" placeholder="slug-do-produto">
           </div>
           <div class="quality-edit-field">
             <label>Categoria</label>
-            <select id="edit-category">
+            <select id="edit-category" class="js-category-select" data-subcategory-target="edit-subcategory">
               <option value="">Início (vitrine)</option>
               <% (categorias || []).forEach(c => { %>
                 <option value="<%= c.slug %>"><%= c.name %></option>
               <% }) %>
             </select>
+          </div>
+          <div class="quality-edit-field">
+            <label>Subcategoria</label>
+            <select id="edit-subcategory" class="js-subcategory-select"><option value="">Sem subcategoria</option></select>
           </div>
           <div class="quality-edit-field">
             <label>Imagem principal</label>
@@ -1404,10 +1800,6 @@ Com marcas de uso">Usados padrão</button></div><div class="quality-var-list" da
           <div class="quality-edit-field">
             <label>Mostrar preço</label>
             <select id="edit-showPrice"><option value="true">Sim</option><option value="false">Não</option></select>
-          </div>
-          <div class="quality-edit-field">
-            <label>Ativo</label>
-            <select id="edit-active"><option value="true">Sim</option><option value="false">Não</option></select>
           </div>
           <div class="quality-edit-field">
             <label>Vitrine</label>
@@ -1456,28 +1848,50 @@ Com marcas de uso">Usados padrão</button></div><div class="quality-var-list" da
         </div>
       </div>
 
+      <div class="quality-edit-panel" data-edit-panel="comercial">
+        <div class="commercial-policy-box">
+          <strong>💰 Preços e política comercial</strong>
+          <div class="commercial-policy-grid" style="margin-top:10px">
+            <label>Preço de custo<input type="number" id="edit-costPrice" step="0.01" min="0"></label><label>Preço ERP<input type="number" id="edit-erpPrice" step="0.01" min="0"></label><label>Preço Marketplace<input type="number" id="edit-marketplacePrice" step="0.01" min="0"></label><label>Preço promocional<input type="number" id="edit-promotionalPrice" step="0.01" min="0"></label><label>Margem desejada (%)<input type="number" id="edit-desiredMarginPercent" step="0.01" min="0"></label><label>Lucro esperado<input type="number" id="edit-expectedProfit" step="0.01" min="0"></label><label>Comissão padrão (%)<input type="number" id="edit-defaultCommissionPercent" step="0.01" min="0"></label>
+            <label>Preço à vista<input type="number" id="edit-cashPrice" step="0.01" min="0"></label>
+            <label>Preço parcelado<input type="number" id="edit-installmentPrice" step="0.01" min="0"></label>
+            <label>Preço mínimo<input type="number" id="edit-minimumPrice" step="0.01" min="0"></label>
+            <label>Regra de desconto<select id="edit-discountPolicy"><option value="inherit">Herdar da categoria</option><option value="custom">Personalizada</option><option value="none">Não permitir desconto</option></select></label>
+            <label>Desconto máximo (%)<input type="number" id="edit-maximumDiscountPercent" step="0.01" min="0" max="100"></label>
+            <label>Desconto máximo (R$)<input type="number" id="edit-maximumDiscountAmount" step="0.01" min="0"></label>
+            <label>Margem mínima (%)<input type="number" id="edit-minimumMarginPercent" step="0.01" min="0" max="100"></label>
+            <label>Exigir autorização<select id="edit-requiresAuthorization"><option value="false">Não</option><option value="true">Sim</option></select></label>
+          </div>
+          <small class="commercial-note">O sistema usará sempre o limite mais restritivo entre desconto máximo, preço mínimo e margem mínima.</small>
+        </div>
+      </div>
+
       <div class="quality-edit-panel" data-edit-panel="estoque">
-        <div class="quality-edit-grid">
-          <div class="quality-edit-field">
-            <label>Estoque geral</label>
-            <input type="number" id="edit-stock" min="0" step="1" placeholder="Quantidade disponível">
-            <small class="quality-edit-help">Para produto sem variações, este é o estoque principal.</small>
+        <div class="quality-inventory-config" style="margin:0;">
+          <strong>📦 Controle de estoque ERP</strong>
+          <div class="quality-inventory-config-grid">
+            <label class="inventory-check"><input type="checkbox" id="edit-stock-controlled"> Controlar estoque deste produto</label>
+            <label class="inventory-check"><input type="checkbox" id="edit-allow-negative"> Permitir vender com estoque zerado/negativo</label>
+            <label>Estoque geral<input type="number" id="edit-stock" min="0" step="1" placeholder="Quantidade física"></label>
+            <label>Estoque mínimo<input type="number" id="edit-stock-min" min="0" step="1" value="0"></label>
+            <label>Disponibilidade no site<select id="edit-inventory-site-mode"><option value="shared">Compartilhar saldo</option><option value="limited">Limitar quantidade</option><option value="disabled">Não disponibilizar</option></select></label>
+            <label>Limite do site<input type="number" id="edit-site-limit" min="0" step="1" placeholder="Opcional"></label>
+            <label>Reserva física da loja<input type="number" id="edit-physical-safety" min="0" step="1" value="0"></label>
           </div>
-          <div class="quality-edit-field">
-            <label>Estoque mínimo</label>
-            <input type="number" id="edit-stock-min" min="0" step="1" placeholder="Em breve">
-            <small class="quality-edit-help">Campo visual preparado para alerta de baixo estoque.</small>
-          </div>
+          <small class="quality-inventory-help">Alterar o estoque e salvar gera uma movimentação de ajuste em vez de apagar o histórico anterior.</small>
         </div>
         <div class="quality-stock-variation-box">
           <strong>Estoque por variação</strong>
-          <small class="quality-edit-help" style="display:block;">Quando existir grade de combinações, edite o estoque de cada combinação aqui.</small>
+          <small class="quality-edit-help" style="display:block;">Quando existir grade de combinações, cada combinação recebe identidade própria no estoque.</small>
           <div id="edit-variation-stock-list" class="quality-stock-variation-list"></div>
         </div>
       </div>
 
       <div class="quality-edit-panel" data-edit-panel="seo">
         <div class="quality-edit-grid">
+          <div class="quality-edit-field"><label>Nome da Loja Virtual (Nome LV)</label><input type="text" id="edit-lvName"></div>
+          <div class="quality-edit-field"><label>Preço Loja Virtual</label><input type="number" id="edit-lvPrice" step="0.01" min="0"></div>
+          <div class="quality-edit-field"><label>Loja Virtual (LV)</label><select id="edit-lvActive"><option value="true">Ativo</option><option value="false">Inativo</option></select><small class="quality-edit-help">A alteração será refletida no site na próxima publicação.</small></div>
           <div class="quality-edit-field">
             <label>Título SEO</label>
             <input type="text" id="edit-seo-title" placeholder="Usa o nome do produto por enquanto">
@@ -1541,14 +1955,87 @@ Com marcas de uso">Usados padrão</button></div><div class="quality-var-list" da
 <script>
 document.addEventListener("DOMContentLoaded", () => {
   const searchInput = document.getElementById("panel-search-input");
+
+  const QUALITY_SUBCATEGORIES = <%- JSON.stringify(subcategorias || []).replace(/</g, '\u003c') %>;
+  const QUALITY_CATEGORIES = <%- JSON.stringify(categorias || []).replace(/</g, '\u003c') %>;
+  function refreshSubcategorySelect(categorySelect, preferredValue = '') {
+    if (!categorySelect) return;
+    const targetId = categorySelect.dataset.subcategoryTarget;
+    const target = targetId ? document.getElementById(targetId) : null;
+    if (!target) return;
+    const category = QUALITY_CATEGORIES.find(c => String(c.slug || '') === String(categorySelect.value || ''));
+    const current = preferredValue || target.dataset.current || target.value || '';
+    target.innerHTML = '<option value="">Sem subcategoria</option>';
+    if (category) {
+      QUALITY_SUBCATEGORIES.filter(s => Number(s.categoryId) === Number(category.id) && s.active !== false)
+        .sort((a,b) => Number(a.order||0)-Number(b.order||0))
+        .forEach(s => { const o=document.createElement('option'); o.value=s.slug; o.textContent=s.name; if(String(s.slug)===String(current)) o.selected=true; target.appendChild(o); });
+    }
+    target.dataset.current = '';
+  }
+  document.querySelectorAll('.js-category-select').forEach(select => {
+    refreshSubcategorySelect(select);
+    select.addEventListener('change', () => refreshSubcategorySelect(select, ''));
+  });
+
+
+  const bulkCategorySelect = document.getElementById('bulk-category-select');
+  const bulkSubcategorySelect = document.getElementById('bulk-subcategory-select');
+
+  function selectedProductsCommonCategory() {
+    const selectedRows = Array.from(document.querySelectorAll('.product-check:checked'))
+      .map(check => check.closest('.product-row'))
+      .filter(Boolean);
+    const values = [...new Set(selectedRows.map(row => row.querySelector('.prod-category-select')?.value || ''))];
+    return values.length === 1 ? values[0] : null;
+  }
+
+  function refreshBulkSubcategories() {
+    if (!bulkCategorySelect || !bulkSubcategorySelect) return;
+    const categoryActionEnabled = Boolean(document.querySelector('.quality-bulk-action input[value="category"]:checked'));
+    const categoryValue = categoryActionEnabled ? bulkCategorySelect.value : selectedProductsCommonCategory();
+    const category = QUALITY_CATEGORIES.find(c => String(c.slug || '') === String(categoryValue || ''));
+    const current = bulkSubcategorySelect.value || '';
+    bulkSubcategorySelect.innerHTML = '<option value="">Sem subcategoria</option>';
+    if (category) {
+      QUALITY_SUBCATEGORIES
+        .filter(s => Number(s.categoryId) === Number(category.id) && s.active !== false)
+        .sort((a,b) => Number(a.order || 0) - Number(b.order || 0))
+        .forEach(s => {
+          const option = document.createElement('option');
+          option.value = s.slug;
+          option.textContent = s.name;
+          if (String(s.slug) === String(current)) option.selected = true;
+          bulkSubcategorySelect.appendChild(option);
+        });
+    }
+  }
+
+  bulkCategorySelect?.addEventListener('change', refreshBulkSubcategories);
+  refreshBulkSubcategories();
+
+  document.querySelectorAll('.quality-bulk-action input[name="enabledActions"]').forEach(check => {
+    const card = check.closest('.quality-bulk-action');
+    const sync = () => card?.classList.toggle('enabled', check.checked);
+    check.addEventListener('change', () => {
+      sync();
+      if (check.value === 'category' || check.value === 'subcategory') refreshBulkSubcategories();
+    });
+    sync();
+  });
+
   const categoryFilter = document.getElementById("panel-category-filter");
   const rows = document.querySelectorAll("#products-table-body .product-row");
   const selectedCount = document.getElementById("selected-count");
   const bulkContainer = document.getElementById("bulk-selected-container");
-  const bulkDetailsContainer = document.getElementById("bulk-details-selected-container");
   const selectAllCheckbox = document.getElementById("select-all-checkbox");
   const selectAllBtn = document.getElementById("select-all-products");
   const clearBtn = document.getElementById("clear-selection");
+  const invertSelectionBtn = document.getElementById("invert-selection");
+  const bulkActionsForm = document.getElementById("bulk-actions-form");
+  const bulkActionsSummary = document.getElementById("bulk-actions-summary");
+  const bulkStockControlled = document.getElementById("bulk-stock-controlled");
+  const bulkMinimumQuantity = document.getElementById("bulk-minimum-quantity");
   const flashMessage = document.getElementById("flash-message");
   const updateAllForm = document.getElementById("update-all-form");
   const saveDirtyProductsBtn = document.getElementById("save-dirty-products-btn");
@@ -1925,7 +2412,6 @@ document.addEventListener("DOMContentLoaded", () => {
     if (selectedCount) selectedCount.textContent = checked.length;
 
     bulkContainer.innerHTML = "";
-    if (bulkDetailsContainer) bulkDetailsContainer.innerHTML = "";
 
     checked.forEach(chk => {
       const input = document.createElement("input");
@@ -1934,14 +2420,9 @@ document.addEventListener("DOMContentLoaded", () => {
       input.value = chk.value;
       bulkContainer.appendChild(input);
 
-      if (bulkDetailsContainer) {
-        const input2 = document.createElement("input");
-        input2.type = "hidden";
-        input2.name = "selectedIds";
-        input2.value = chk.value;
-        bulkDetailsContainer.appendChild(input2);
-      }
     });
+
+    refreshBulkSubcategories();
 
     if (selectAllCheckbox) {
       const all = visibleRows().map(row => row.querySelector(".product-check"));
@@ -1988,6 +2469,11 @@ document.addEventListener("DOMContentLoaded", () => {
       data.append(el.name, el.value);
     });
 
+    // Captura os estados antes de qualquer resposta do backend. Eles são
+    // persistidos novamente por uma rota dedicada após o salvamento completo.
+    const submittedErpActive = row.querySelector('select[name="erpActive"]')?.value === 'false' ? 'false' : 'true';
+    const submittedLvActive = row.querySelector('select[name="lvActive"]')?.value === 'false' ? 'false' : 'true';
+
     const btn = row.querySelector(".save-product-btn");
     const oldText = btn ? btn.textContent : "";
     if (btn) {
@@ -2008,6 +2494,31 @@ document.addEventListener("DOMContentLoaded", () => {
       const json = await res.json();
       if (!res.ok || !json.success) throw new Error(json.message || "Erro ao salvar produto.");
 
+      const statusData = new URLSearchParams();
+      statusData.append('id', row.dataset.id);
+      statusData.append('erpActive', submittedErpActive);
+      statusData.append('lvActive', submittedLvActive);
+
+      const statusResponse = await fetch('/produtos/update-channel-status', {
+        method: 'POST',
+        body: statusData.toString(),
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
+        }
+      });
+      const statusJson = await statusResponse.json();
+      if (!statusResponse.ok || !statusJson.success) {
+        throw new Error(statusJson.message || 'Erro ao salvar os status ERP/LV.');
+      }
+
+      // A resposta da rota dedicada é a fonte final dos dois estados.
+      if (statusJson.item) {
+        json.item.erp = statusJson.item.erp;
+        json.item.active = statusJson.item.active;
+        json.item.virtualStore = statusJson.item.virtualStore;
+      }
+
       if (json.item && json.item.slug) {
         const slugInput = row.querySelector(".prod-slug-input");
         if (slugInput) {
@@ -2019,6 +2530,19 @@ document.addEventListener("DOMContentLoaded", () => {
         setRowField(row, 'input[name="stock"]', json.item.stock);
         updateStockBadge(row);
         updateStockTotalIndicator();
+      }
+
+      // Usa os valores canônicos devolvidos pelo backend. Assim o painel confirma
+      // visualmente o que realmente foi persistido, inclusive quando o valor é false.
+      if (json.item) {
+        const savedErpActive = json.item.erp && json.item.erp.active !== undefined
+          ? json.item.erp.active
+          : json.item.active !== false;
+        const savedLvActive = json.item.virtualStore && json.item.virtualStore.active !== undefined
+          ? json.item.virtualStore.active
+          : json.item.active !== false;
+        setRowField(row, 'select[name="erpActive"]', savedErpActive === false ? 'false' : 'true');
+        setRowField(row, 'select[name="lvActive"]', savedLvActive === false ? 'false' : 'true');
       }
 
       markRowClean(row);
@@ -2049,6 +2573,73 @@ document.addEventListener("DOMContentLoaded", () => {
         btn.disabled = false;
         btn.textContent = oldText;
       }
+    }
+  }
+
+
+  async function saveChannelStatus(row) {
+    const erpSelect = row.querySelector('select[name="erpActive"]');
+    const lvSelect = row.querySelector('select[name="lvActive"]');
+    const status = row.querySelector(".row-save-status");
+    const erpValue = erpSelect?.value === 'false' ? 'false' : 'true';
+    const lvValue = lvSelect?.value === 'false' ? 'false' : 'true';
+
+    if (erpSelect) erpSelect.disabled = true;
+    if (lvSelect) lvSelect.disabled = true;
+    if (status) {
+      status.textContent = "Salvando status...";
+      status.style.color = "#2563eb";
+      status.style.display = "inline-block";
+    }
+
+    try {
+      const payload = new URLSearchParams({
+        id: String(row.dataset.id || ''),
+        erpActive: erpValue,
+        lvActive: lvValue
+      });
+      const response = await fetch('/produtos/update-channel-status', {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
+        },
+        body: payload.toString()
+      });
+
+      const raw = await response.text();
+      let json = {};
+      try { json = raw ? JSON.parse(raw) : {}; } catch (_) {}
+      if (!response.ok || !json.success) {
+        throw new Error(json.message || raw || `Falha HTTP ${response.status}`);
+      }
+
+      const savedErp = json.item?.erp?.active === false ? 'false' : 'true';
+      const savedLv = json.item?.virtualStore?.active === false ? 'false' : 'true';
+      if (erpSelect) erpSelect.value = savedErp;
+      if (lvSelect) lvSelect.value = savedLv;
+
+      markRowClean(row);
+      if (status) {
+        status.textContent = "✅ Status salvo";
+        status.style.color = "#087a31";
+        clearTimeout(status.__hideTimer);
+        status.__hideTimer = setTimeout(() => { status.style.display = "none"; }, 3000);
+      }
+      return true;
+    } catch (error) {
+      console.error('Erro ao salvar ERP/LV:', error);
+      if (erpSelect) erpSelect.value = erpSelect.dataset.savedValue || erpValue;
+      if (lvSelect) lvSelect.value = lvSelect.dataset.savedValue || lvValue;
+      if (status) {
+        status.textContent = `⚠️ ${error.message || 'Erro ao salvar status'}`;
+        status.style.color = "#a40000";
+        status.style.display = "inline-block";
+      }
+      return false;
+    } finally {
+      if (erpSelect) { erpSelect.disabled = false; erpSelect.dataset.savedValue = erpSelect.value; }
+      if (lvSelect) { lvSelect.disabled = false; lvSelect.dataset.savedValue = lvSelect.value; }
     }
   }
 
@@ -2154,9 +2745,17 @@ document.addEventListener("DOMContentLoaded", () => {
 
     row.querySelectorAll("input[name], select[name], textarea[name]").forEach(el => {
       if (el.name === "id") return;
+      if (el.name === "erpActive" || el.name === "lvActive") return;
       el.addEventListener("change", () => markRowDirty(row));
       el.addEventListener("input", () => markRowDirty(row));
     });
+
+    const erpStatusSelect = row.querySelector('select[name="erpActive"]');
+    const lvStatusSelect = row.querySelector('select[name="lvActive"]');
+    if (erpStatusSelect) erpStatusSelect.dataset.savedValue = erpStatusSelect.value;
+    if (lvStatusSelect) lvStatusSelect.dataset.savedValue = lvStatusSelect.value;
+    erpStatusSelect?.addEventListener('change', () => saveChannelStatus(row));
+    lvStatusSelect?.addEventListener('change', () => saveChannelStatus(row));
 
     row.querySelector(".save-product-btn")?.addEventListener("click", () => saveProductRow(row));
     row.querySelector(".manage-gallery-btn")?.addEventListener("click", () => openGalleryModal(makeGalleryContextFromRow(row)));
@@ -2184,28 +2783,72 @@ document.addEventListener("DOMContentLoaded", () => {
     updateSelectionCount();
   });
 
+  invertSelectionBtn?.addEventListener("click", () => {
+    visibleRows().forEach(row => {
+      const chk = row.querySelector(".product-check");
+      if (chk) chk.checked = !chk.checked;
+    });
+    updateSelectionCount();
+  });
+
   clearBtn?.addEventListener("click", () => {
     document.querySelectorAll(".product-check").forEach(chk => chk.checked = false);
     updateSelectionCount();
   });
 
-  const enableDetailsBtn = document.getElementById("enable-details-selected");
-  const disableDetailsBtn = document.getElementById("disable-details-selected");
-  const detailsActionInput = document.getElementById("details-action-input");
-  const bulkDetailsForm = document.getElementById("bulk-details-form");
+  bulkActionsForm?.addEventListener("submit", event => {
+    const checkedProducts = document.querySelectorAll(".product-check:checked");
+    const enabled = Array.from(bulkActionsForm.querySelectorAll('input[name="enabledActions"]:checked'));
 
-  function submitDetailsAction(action) {
-    const checked = document.querySelectorAll(".product-check:checked");
-    if (!checked.length) {
+    if (!checkedProducts.length) {
+      event.preventDefault();
       alert("Selecione pelo menos um produto.");
       return;
     }
-    detailsActionInput.value = action;
-    bulkDetailsForm.submit();
-  }
 
-  enableDetailsBtn?.addEventListener("click", () => submitDetailsAction("enable"));
-  disableDetailsBtn?.addEventListener("click", () => submitDetailsAction("disable"));
+    if (!enabled.length) {
+      event.preventDefault();
+      alert("Marque pelo menos uma operação em lote.");
+      return;
+    }
+
+    const labels = enabled.map(input => input.closest('.quality-bulk-action')?.querySelector('.quality-bulk-action-head')?.textContent.trim()).filter(Boolean);
+    if (bulkActionsSummary) bulkActionsSummary.textContent = `${checkedProducts.length} produto(s) · ${labels.join(' · ')}`;
+
+    const categoryEnabled = enabled.some(input => input.value === 'category');
+    const subcategoryEnabled = enabled.some(input => input.value === 'subcategory');
+    if (subcategoryEnabled && !categoryEnabled && bulkSubcategorySelect?.value && selectedProductsCommonCategory() === null) {
+      event.preventDefault();
+      alert('Para alterar somente a subcategoria, selecione produtos de uma única categoria. Caso queira mover produtos de categorias diferentes, marque também Alterar categoria.');
+      return;
+    }
+    const categoryName = bulkCategorySelect?.selectedOptions?.[0]?.textContent || 'sem categoria';
+    const subcategoryName = bulkSubcategorySelect?.selectedOptions?.[0]?.textContent || 'sem subcategoria';
+
+    const stockControlledEnabled = enabled.some(input => input.value === 'stockControlled');
+    const minimumQuantityEnabled = enabled.some(input => input.value === 'minimumQuantity');
+
+    if (minimumQuantityEnabled) {
+      const minimumValue = Number(bulkMinimumQuantity?.value);
+      if (!Number.isFinite(minimumValue) || minimumValue < 0 || !Number.isInteger(minimumValue)) {
+        event.preventDefault();
+        alert('Informe um estoque mínimo válido, usando um número inteiro igual ou maior que zero.');
+        bulkMinimumQuantity?.focus();
+        return;
+      }
+    }
+
+    let detail = labels.join(', ');
+    if (categoryEnabled) detail += `\nCategoria: ${categoryName}`;
+    if (subcategoryEnabled) detail += `\nSubcategoria: ${subcategoryName}`;
+    if (stockControlledEnabled) detail += `\nControle de estoque: ${bulkStockControlled?.value === 'true' ? 'ATIVAR' : 'DESATIVAR'}`;
+    if (minimumQuantityEnabled) detail += `\nEstoque mínimo: ${bulkMinimumQuantity?.value || 0}`;
+    detail += '\n\nUm backup automático do products.json será criado antes da alteração.';
+
+    if (!confirm(`Aplicar as alterações em ${checkedProducts.length} produto(s)?\n\n${detail}`)) {
+      event.preventDefault();
+    }
+  });
 
 
 
@@ -2865,12 +3508,39 @@ document.addEventListener("DOMContentLoaded", () => {
     if (editProductThumb) editProductThumb.src = productImageUrl(image);
 
     document.getElementById("edit-name").value = name;
+    document.getElementById("edit-sku").value = getRowField(row, 'input[name="sku"]');
+    document.getElementById("edit-internalCode").value = getRowField(row, 'input[name="internalCode"]');
+    document.getElementById("edit-supplierCode").value = getRowField(row, 'input[name="supplierCode"]');
+    document.getElementById("edit-barcode").value = getRowField(row, 'input[name="barcode"]');
+    document.getElementById("edit-brand").value = getRowField(row, 'input[name="brand"]');
+    document.getElementById("edit-unit").value = getRowField(row, 'input[name="unit"]') || "UN";
+    document.getElementById("edit-erpCategory").value = getRowField(row, 'input[name="erpCategory"]');
+    document.getElementById("edit-erpSubcategory").value = getRowField(row, 'input[name="erpSubcategory"]');
+    document.getElementById("edit-erpActive").value = getRowField(row, 'select[name="erpActive"]') || "true";
+    document.getElementById("edit-lvName").value = getRowField(row, 'input[name="lvName"]') || name;
+    document.getElementById("edit-lvPrice").value = getRowField(row, 'input[name="lvPrice"]');
     document.getElementById("edit-slug").value = getRowField(row, ".prod-slug-input");
     document.getElementById("edit-category").value = getRowField(row, ".prod-category-select");
+    refreshSubcategorySelect(document.getElementById("edit-category"), getRowField(row, ".prod-subcategory-select"));
     document.getElementById("edit-image").value = image;
     document.getElementById("edit-price").value = getRowField(row, 'input[name="price"]');
+    document.getElementById("edit-costPrice").value = getRowField(row, 'input[name="costPrice"]');
+    document.getElementById("edit-erpPrice").value = getRowField(row, 'input[name="erpPrice"]');
+    document.getElementById("edit-marketplacePrice").value = getRowField(row, 'input[name="marketplacePrice"]');
+    document.getElementById("edit-promotionalPrice").value = getRowField(row, 'input[name="promotionalPrice"]');
+    document.getElementById("edit-desiredMarginPercent").value = getRowField(row, 'input[name="desiredMarginPercent"]');
+    document.getElementById("edit-expectedProfit").value = getRowField(row, 'input[name="expectedProfit"]');
+    document.getElementById("edit-defaultCommissionPercent").value = getRowField(row, 'input[name="defaultCommissionPercent"]');
+    document.getElementById("edit-cashPrice").value = getRowField(row, 'input[name="cashPrice"]');
+    document.getElementById("edit-installmentPrice").value = getRowField(row, 'input[name="installmentPrice"]');
+    document.getElementById("edit-minimumPrice").value = getRowField(row, 'input[name="minimumPrice"]');
+    document.getElementById("edit-minimumMarginPercent").value = getRowField(row, 'input[name="minimumMarginPercent"]');
+    document.getElementById("edit-discountPolicy").value = getRowField(row, 'input[name="discountPolicy"]') || "inherit";
+    document.getElementById("edit-maximumDiscountPercent").value = getRowField(row, 'input[name="maximumDiscountPercent"]');
+    document.getElementById("edit-maximumDiscountAmount").value = getRowField(row, 'input[name="maximumDiscountAmount"]');
+    document.getElementById("edit-requiresAuthorization").value = getRowField(row, 'input[name="requiresAuthorization"]') || "false";
     document.getElementById("edit-showPrice").value = getRowField(row, 'select[name="showPrice"]') || "false";
-    document.getElementById("edit-active").value = getRowField(row, 'select[name="active"]') || "true";
+    document.getElementById("edit-lvActive").value = getRowField(row, 'select[name="lvActive"]') || "true";
     document.getElementById("edit-featured").value = getRowField(row, 'select[name="featured"]') || "false";
     document.getElementById("edit-detailsEnabled").value = getRowField(row, 'select[name="detailsEnabled"]') || "false";
     document.getElementById("edit-showVariationsOnCard").value = getRowField(row, '.row-show-variations-card') || "false";
@@ -2880,7 +3550,12 @@ document.addEventListener("DOMContentLoaded", () => {
     if (editRelatedManualIds) editRelatedManualIds.value = getListValue(row, ".row-related-manual-ids").join("\n");
     if (editCrossSellIds) editCrossSellIds.value = getListValue(row, ".row-cross-sell-ids").join("\n");
     document.getElementById("edit-stock").value = getRowField(row, 'input[name="stock"]');
-    document.getElementById("edit-stock-min").value = "";
+    document.getElementById("edit-stock-controlled").checked = getRowField(row, '.row-stock-controlled') === "true";
+    document.getElementById("edit-allow-negative").checked = getRowField(row, '.row-allow-negative') === "true";
+    document.getElementById("edit-stock-min").value = getRowField(row, '.row-minimum-quantity') || "0";
+    document.getElementById("edit-inventory-site-mode").value = getRowField(row, '.row-inventory-site-mode') || "shared";
+    document.getElementById("edit-site-limit").value = getRowField(row, '.row-site-limit');
+    document.getElementById("edit-physical-safety").value = getRowField(row, '.row-physical-safety') || "0";
     document.getElementById("edit-seo-title").value = name;
     document.getElementById("edit-seo-slug").value = getRowField(row, ".prod-slug-input");
     document.getElementById("edit-seo-description").value = getRowField(row, ".row-description-short");
@@ -2930,12 +3605,40 @@ document.addEventListener("DOMContentLoaded", () => {
   function applyEditModalToRow(row){
     if (!row) return;
     setRowField(row, ".prod-name-input", document.getElementById("edit-name").value.trim());
+    setRowField(row, 'input[name="sku"]', document.getElementById("edit-sku").value.trim());
+    setRowField(row, 'input[name="internalCode"]', document.getElementById("edit-internalCode").value.trim());
+    setRowField(row, 'input[name="supplierCode"]', document.getElementById("edit-supplierCode").value.trim());
+    setRowField(row, 'input[name="barcode"]', document.getElementById("edit-barcode").value.trim());
+    setRowField(row, 'input[name="brand"]', document.getElementById("edit-brand").value.trim());
+    setRowField(row, 'input[name="unit"]', document.getElementById("edit-unit").value);
+    setRowField(row, 'input[name="erpCategory"]', document.getElementById("edit-erpCategory").value.trim());
+    setRowField(row, 'input[name="erpSubcategory"]', document.getElementById("edit-erpSubcategory").value.trim());
+    setRowField(row, 'select[name="erpActive"]', document.getElementById("edit-erpActive").value);
+    setRowField(row, 'input[name="lvName"]', document.getElementById("edit-lvName").value.trim());
+    setRowField(row, 'input[name="lvPrice"]', document.getElementById("edit-lvPrice").value);
+    setRowField(row, 'input[name="price"]', document.getElementById("edit-lvPrice").value);
     setRowField(row, ".prod-slug-input", gerarSlugPainel(document.getElementById("edit-slug").value.trim()));
     setRowField(row, ".prod-category-select", document.getElementById("edit-category").value);
+    setRowField(row, ".prod-subcategory-select", document.getElementById("edit-subcategory").value);
     setRowField(row, ".prod-image-select", document.getElementById("edit-image").value.trim());
     setRowField(row, 'input[name="price"]', document.getElementById("edit-price").value);
+    setRowField(row, 'input[name="costPrice"]', document.getElementById("edit-costPrice").value);
+    setRowField(row, 'input[name="erpPrice"]', document.getElementById("edit-erpPrice").value);
+    setRowField(row, 'input[name="marketplacePrice"]', document.getElementById("edit-marketplacePrice").value);
+    setRowField(row, 'input[name="promotionalPrice"]', document.getElementById("edit-promotionalPrice").value);
+    setRowField(row, 'input[name="desiredMarginPercent"]', document.getElementById("edit-desiredMarginPercent").value);
+    setRowField(row, 'input[name="expectedProfit"]', document.getElementById("edit-expectedProfit").value);
+    setRowField(row, 'input[name="defaultCommissionPercent"]', document.getElementById("edit-defaultCommissionPercent").value);
+    setRowField(row, 'input[name="cashPrice"]', document.getElementById("edit-cashPrice").value);
+    setRowField(row, 'input[name="installmentPrice"]', document.getElementById("edit-installmentPrice").value);
+    setRowField(row, 'input[name="minimumPrice"]', document.getElementById("edit-minimumPrice").value);
+    setRowField(row, 'input[name="minimumMarginPercent"]', document.getElementById("edit-minimumMarginPercent").value);
+    setRowField(row, 'input[name="discountPolicy"]', document.getElementById("edit-discountPolicy").value);
+    setRowField(row, 'input[name="maximumDiscountPercent"]', document.getElementById("edit-maximumDiscountPercent").value);
+    setRowField(row, 'input[name="maximumDiscountAmount"]', document.getElementById("edit-maximumDiscountAmount").value);
+    setRowField(row, 'input[name="requiresAuthorization"]', document.getElementById("edit-requiresAuthorization").value);
     setRowField(row, 'select[name="showPrice"]', document.getElementById("edit-showPrice").value);
-    setRowField(row, 'select[name="active"]', document.getElementById("edit-active").value);
+    setRowField(row, 'select[name="lvActive"]', document.getElementById("edit-lvActive").value);
     setRowField(row, 'select[name="featured"]', document.getElementById("edit-featured").value);
     setRowField(row, 'select[name="detailsEnabled"]', document.getElementById("edit-detailsEnabled").value);
     setRowField(row, '.row-show-variations-card', document.getElementById("edit-showVariationsOnCard").value);
@@ -2943,6 +3646,12 @@ document.addEventListener("DOMContentLoaded", () => {
     setListValue(row, ".row-related-manual-ids", document.getElementById("edit-related-manual-ids")?.value || "");
     setListValue(row, ".row-cross-sell-ids", document.getElementById("edit-cross-sell-ids")?.value || "");
     setRowField(row, 'input[name="stock"]', document.getElementById("edit-stock").value);
+    setRowField(row, '.row-stock-controlled', document.getElementById("edit-stock-controlled").checked ? "true" : "false");
+    setRowField(row, '.row-allow-negative', document.getElementById("edit-allow-negative").checked ? "true" : "false");
+    setRowField(row, '.row-minimum-quantity', document.getElementById("edit-stock-min").value || "0");
+    setRowField(row, '.row-inventory-site-mode', document.getElementById("edit-inventory-site-mode").value || "shared");
+    setRowField(row, '.row-site-limit', document.getElementById("edit-site-limit").value);
+    setRowField(row, '.row-physical-safety', document.getElementById("edit-physical-safety").value || "0");
 
     const seoSlug = document.getElementById("edit-seo-slug").value.trim();
     if (seoSlug) setRowField(row, ".prod-slug-input", gerarSlugPainel(seoSlug));
@@ -3046,4 +3755,78 @@ function sincronizarImagensAuto() {
     })
     .catch(err => console.error("Erro na sincronização automática de fotos:", err));
 }
+</script>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const listSection = document.getElementById('product-workspace-list');
+  const newSection = document.getElementById('product-workspace-new');
+  const addForm = document.getElementById('add-product-form');
+  const aiBox = document.getElementById('quality-ai-fill-box');
+  if (!listSection || !newSection || !addForm) return;
+
+  function setWorkspace(view, updateUrl = true) {
+    const isNew = view === 'new';
+    listSection.classList.toggle('active', !isNew);
+    newSection.classList.toggle('active', isNew);
+    document.querySelectorAll('[data-product-workspace]').forEach(btn => {
+      btn.classList.toggle('active', btn.dataset.productWorkspace === view);
+    });
+    if (updateUrl && history.replaceState) {
+      const url = new URL(window.location.href);
+      if (isNew) url.searchParams.set('workspace', 'new'); else url.searchParams.delete('workspace');
+      history.replaceState({}, '', url);
+    }
+    const targetSection = isNew ? newSection : listSection;
+    window.scrollTo({top: Math.max(0, targetSection.offsetTop - 90), behavior: 'smooth'});
+  }
+  document.querySelectorAll('[data-product-workspace]').forEach(btn => btn.addEventListener('click', () => setWorkspace(btn.dataset.productWorkspace)));
+
+  // Organiza o formulário existente em abas sem alterar nomes, rotas ou salvamento.
+  const nodes = Array.from(addForm.children);
+  const submitWrap = nodes.find(el => el.querySelector?.('button[type="submit"]'));
+  const panels = {};
+  ['general','commercial','stock','site','variations'].forEach(key => {
+    const panel = document.createElement('div');
+    panel.className = 'product-create-panel' + (key === 'general' ? ' active' : '');
+    panel.dataset.createPanel = key;
+    panels[key] = panel;
+    addForm.appendChild(panel);
+  });
+  const footer = document.createElement('div');
+  footer.className = 'product-create-footer';
+
+  function destination(el) {
+    if (el === submitWrap) return 'footer';
+    if (el.matches?.('[data-create-section="commercial"]')) return 'commercial';
+    if (el.matches?.('[data-create-section="stock"]')) return 'stock';
+    if (el.classList?.contains('quality-variations-box')) return 'variations';
+    // Conteúdo principal permanece em Geral: textos, imagens, galeria, etiquetas e categoria.
+    if (el.classList?.contains('quality-tags-field') || el.classList?.contains('add-description-editor-wrap') || el.querySelector?.('[name="descriptionShort"]')) return 'general';
+    const field = el.querySelector?.('input,select,textarea');
+    const name = field?.name || '';
+    if (name === 'stock') return 'stock';
+    if (['showPrice','featured','active','detailsEnabled'].includes(name)) return 'site';
+    if (['image','gallery','category'].includes(name) || el.classList?.contains('quality-compact-gallery')) return 'general';
+    return 'general';
+  }
+  nodes.forEach(el => {
+    const dest = destination(el);
+    if (dest === 'footer') footer.appendChild(el); else panels[dest].appendChild(el);
+  });
+  addForm.appendChild(footer);
+  addForm.style.display = 'block';
+
+  document.querySelectorAll('.product-create-tab').forEach(btn => btn.addEventListener('click', () => {
+    const key = btn.dataset.createTab;
+    document.querySelectorAll('.product-create-tab').forEach(b => b.classList.toggle('active', b === btn));
+    Object.entries(panels).forEach(([panelKey,panel]) => panel.classList.toggle('active', panelKey === key));
+  }));
+
+  // A IA faz parte do workspace de cadastro e fica logo antes das abas.
+  if (aiBox && aiBox.parentElement === newSection) newSection.insertBefore(aiBox, document.getElementById('product-create-tabs'));
+
+  const params = new URLSearchParams(window.location.search);
+  setWorkspace(params.get('workspace') === 'new' ? 'new' : 'list', false);
+});
 </script>

@@ -1,0 +1,67 @@
+{
+  "version": "0.13.0",
+  "items": [
+    {
+      "id": "CXS-1785194728625-HF3BC",
+      "cashboxId": "caixa-principal",
+      "status": "closed",
+      "openingBalance": 0,
+      "openingBalanceSource": "previous_closing",
+      "openedAt": "2026-07-27T23:25:28.625Z",
+      "openedBy": "painel",
+      "openedDay": "2026-07-27",
+      "closedAt": "2026-07-28T01:54:30.233Z",
+      "closedBy": "painel",
+      "closingBalance": 1,
+      "expectedBalance": 1,
+      "difference": 0,
+      "notes": "",
+      "closingMode": "counted",
+      "closedDay": "2026-07-27",
+      "closingSummary": {
+        "openingBalance": 0,
+        "supplies": 1,
+        "withdrawals": 1,
+        "cashSales": 1,
+        "salesTotal": 8,
+        "byMethod": [
+          {
+            "methodId": "cartao-credito",
+            "entries": 1,
+            "exits": 0,
+            "total": 1,
+            "count": 1
+          },
+          {
+            "methodId": "dinheiro",
+            "entries": 2,
+            "exits": 1,
+            "total": 1,
+            "count": 3
+          },
+          {
+            "methodId": "pix",
+            "entries": 6,
+            "exits": 0,
+            "total": 6,
+            "count": 3
+          }
+        ],
+        "movementCount": 7
+      }
+    },
+    {
+      "id": "CXS-1785203781536-VZB50",
+      "cashboxId": "caixa-principal",
+      "status": "open",
+      "openingBalance": 1,
+      "openingBalanceSource": "previous_closing",
+      "openedAt": "2026-07-28T01:56:21.536Z",
+      "openedBy": "painel",
+      "openedDay": "2026-07-27",
+      "closedAt": null,
+      "closedBy": null,
+      "closingBalance": null
+    }
+  ]
+}

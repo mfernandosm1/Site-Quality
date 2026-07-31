@@ -1,0 +1,56 @@
+<% layout('layout') -%>
+<section class="erp-hero kernel-hero">
+  <div><span class="erp-kicker">QUALITY ERP · v0.15.1</span><h1>Logs e Auditoria</h1><p>Pesquisa, filtros, detalhes e exportação da atividade registrada pelo Kernel.</p></div>
+  <div class="erp-status-box"><b>Kernel ativo</b><span>Rastreabilidade global</span><small>Esta área pertence à Administração do Sistema. O acesso por perfil será aplicado quando o login for implantado.</small></div>
+</section>
+
+<section class="kernel-summary">
+  <div><small>LOGS</small><strong><%= summary.logs %></strong></div>
+  <div><small>EVENTOS</small><strong><%= summary.events %></strong></div>
+  <div><small>AUDITORIAS</small><strong><%= summary.audits %></strong></div>
+  <div><small>DOCUMENTOS</small><strong><%= summary.documents %></strong></div>
+  <div><small>PERFIS</small><strong><%= summary.profiles %></strong></div>
+</section>
+
+<div class="card kernel-card">
+  <div class="kernel-head"><div><h2>Atividade registrada</h2><p><%= pagination.total %> registro(s) encontrados.</p></div><a class="btn secondary" href="/kernel/export.csv?<%= new URLSearchParams(filters).toString() %>">⬇ Exportar CSV</a></div>
+  <form class="kernel-filters" method="get" action="/kernel">
+    <label class="kernel-search"><span>Pesquisar</span><input name="search" value="<%= filters.search || '' %>" placeholder="ID, descrição, rota, documento, IP..."></label>
+    <label><span>Módulo</span><select name="module"><option value="">Todos</option><% facets.modules.forEach(function(v){ %><option value="<%= v %>" <%= filters.module===v?'selected':'' %>><%= v %></option><% }) %></select></label>
+    <label><span>Ação</span><select name="action"><option value="">Todas</option><% facets.actions.forEach(function(v){ %><option value="<%= v %>" <%= filters.action===v?'selected':'' %>><%= v %></option><% }) %></select></label>
+    <label><span>Resultado</span><select name="result"><option value="">Todos</option><% facets.results.forEach(function(v){ %><option value="<%= v %>" <%= filters.result===v?'selected':'' %>><%= v %></option><% }) %></select></label>
+    <label><span>De</span><input type="date" name="from" value="<%= filters.from || '' %>"></label>
+    <label><span>Até</span><input type="date" name="to" value="<%= filters.to || '' %>"></label>
+    <div class="kernel-filter-actions"><button class="btn primary" type="submit">Filtrar</button><a class="btn ghost" href="/kernel">Limpar</a></div>
+  </form>
+
+  <div class="kernel-table-wrap"><table class="kernel-table"><thead><tr><th>Data/hora</th><th>Módulo</th><th>Ação</th><th>Descrição</th><th>Usuário</th><th>Resultado</th><th>Documento</th><th></th></tr></thead><tbody>
+  <% if(!logs.length){ %><tr><td colspan="8">Nenhum registro encontrado com os filtros informados.</td></tr><% } %>
+  <% logs.forEach(function(item){ %><tr class="kernel-row kernel-row-<%= item.result %>"><td><%= new Date(item.at).toLocaleString('pt-BR') %></td><td><%= item.module %></td><td><code><%= item.action %></code></td><td title="<%= item.label || item.route %>"><%= item.label || item.route || '-' %></td><td><%= item.actor %></td><td><span class="kernel-result <%= item.result %>"><%= item.result %></span></td><td><%= item.documentId || '-' %></td><td><a class="kernel-detail-link" href="/kernel?<%= new URLSearchParams({...filters,log:item.id,page:pagination.page}).toString() %>">Detalhes</a></td></tr><% }) %>
+  </tbody></table></div>
+
+  <nav class="kernel-pagination">
+    <% const base = {...filters}; delete base.page; delete base.log; %>
+    <a class="btn ghost <%= pagination.page<=1?'disabled':'' %>" href="/kernel?<%= new URLSearchParams({...base,page:Math.max(1,pagination.page-1)}).toString() %>">← Anterior</a>
+    <span>Página <strong><%= pagination.page %></strong> de <strong><%= pagination.pages %></strong></span>
+    <a class="btn ghost <%= pagination.page>=pagination.pages?'disabled':'' %>" href="/kernel?<%= new URLSearchParams({...base,page:Math.min(pagination.pages,pagination.page+1)}).toString() %>">Próxima →</a>
+  </nav>
+</div>
+
+<% if(selectedLog){ %>
+<div class="kernel-detail-overlay"><section class="kernel-detail-panel">
+  <div class="kernel-detail-head"><div><small>REGISTRO</small><h2><%= selectedLog.id %></h2></div><a class="kernel-detail-close" href="/kernel?<%= new URLSearchParams({...filters,log:''}).toString() %>">×</a></div>
+  <div class="kernel-detail-grid">
+    <% [['Data/hora',new Date(selectedLog.at).toLocaleString('pt-BR')],['Módulo',selectedLog.module],['Categoria',selectedLog.category],['Ação',selectedLog.action],['Usuário',selectedLog.actor],['Resultado',selectedLog.result],['Método',selectedLog.method||'-'],['Status HTTP',selectedLog.statusCode||'-'],['Duração',selectedLog.durationMs?selectedLog.durationMs+' ms':'-'],['IP',selectedLog.ip||'-'],['Dispositivo',selectedLog.device||'-'],['Documento',selectedLog.documentId||'-'],['Entidade',selectedLog.entityId||'-'],['Rota',selectedLog.route||'-']].forEach(function(field){ %><div><span><%= field[0] %></span><strong><%= field[1] %></strong></div><% }) %>
+  </div>
+  <div class="kernel-detail-block"><span>Descrição</span><p><%= selectedLog.label || '-' %></p></div>
+  <div class="kernel-detail-block"><span>Detalhes técnicos</span><pre><%= selectedLog.details ? JSON.stringify(selectedLog.details,null,2) : 'Sem detalhes adicionais.' %></pre></div>
+</section></div>
+<% } %>
+
+<section class="kernel-grid">
+  <div class="card"><h2>🔐 Perfis e permissões</h2><p><%= profiles.length %> perfis-base preparados. Ainda não bloqueiam telas até a implantação do login.</p><div class="kernel-profile-list"><% profiles.forEach(function(p){ %><span title="<%= p.description %>"><%= p.name %></span><% }) %></div></div>
+  <div class="card"><h2>📄 Centro de Documentos</h2><p><%= documents.length %> documentos universais registrados. Padrões: VEN, OS, ORC, COM, REC, PAG, CLI, FOR e PRO.</p></div>
+  <div class="card"><h2>🛡️ Auditoria</h2><p><%= audits.length %> alterações críticas armazenadas com suporte a valor anterior e novo.</p></div>
+  <div class="card"><h2>⏱️ Timeline</h2><p><%= timelines.length %> acontecimentos vinculados a clientes, produtos e operações.</p></div>
+</section>

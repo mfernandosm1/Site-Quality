@@ -1,0 +1,55 @@
+<% layout('layout') -%>
+<style>
+.sub-page-head{display:flex;justify-content:space-between;align-items:flex-start;gap:14px;margin-bottom:18px}.sub-page-head h3{margin:0}.sub-muted{color:#64748b;font-size:13px;margin-top:4px}.sub-create{display:none;margin:14px 0 20px;padding:16px;border:1px solid #334155;border-radius:14px}.sub-create.open{display:block}.sub-grid{display:grid;grid-template-columns:1.2fr 1fr 1fr 90px 120px 120px;gap:10px;align-items:end}.sub-grid .full{grid-column:1/-1}.sub-list{display:grid;gap:10px}.sub-row,.sub-head{display:grid;grid-template-columns:1.3fr 1fr 1fr 75px 100px 100px 130px;gap:10px;align-items:center}.sub-head{font-weight:800;padding:0 10px 10px;border-bottom:1px solid #334155}.sub-row{padding:12px 10px;border-bottom:1px solid #334155}.sub-actions{display:flex;gap:6px;justify-content:flex-end}.sub-pill{display:inline-flex;padding:5px 9px;border-radius:999px;background:rgba(100,116,139,.18);font-size:12px}.sub-modal-bg{position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:9999;display:none;align-items:center;justify-content:center;padding:18px}.sub-modal-bg.open{display:flex}.sub-modal{width:min(620px,100%);background:var(--panel-card,#fff);border-radius:16px;padding:20px}.sub-modal-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.sub-modal-grid .full{grid-column:1/-1}.sub-modal-actions{display:flex;justify-content:flex-end;gap:8px;margin-top:16px}@media(max-width:950px){.sub-head{display:none}.sub-row{grid-template-columns:1fr auto;}.sub-row>*:not(.sub-main):not(.sub-actions){display:none}.sub-grid{grid-template-columns:1fr 1fr}.sub-grid .full{grid-column:1/-1}}@media(max-width:600px){.sub-page-head{flex-direction:column}.sub-grid,.sub-modal-grid{grid-template-columns:1fr}.sub-modal-grid .full{grid-column:auto}}
+
+  .catalog-tabs {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin: 0 0 18px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid #e5e7eb;
+  }
+  .catalog-tab {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    min-height: 38px;
+    padding: 0 14px;
+    border: 1px solid #dbe2ea;
+    border-radius: 999px;
+    background: var(--panel-card, #fff);
+    color: inherit;
+    text-decoration: none;
+    font-weight: 800;
+    font-size: 13px;
+  }
+  .catalog-tab:hover { background: rgba(59,130,246,.10); }
+  .catalog-tab.active {
+    border-color: #3b82f6;
+    background: #3b82f6;
+    color: #fff;
+  }
+
+</style>
+<div class="card">
+  <nav class="catalog-tabs" aria-label="Gestão de categorias">
+    <a class="catalog-tab" href="/categorias">🗂️ Categorias principais</a>
+    <a class="catalog-tab active" href="/subcategorias">🧩 Subcategorias</a>
+  </nav>
+
+  <div class="sub-page-head"><div><h3>🧩 Subcategorias</h3><div class="sub-muted">Organize produtos dentro das categorias sem alterar o funcionamento atual do site.</div></div><button class="btn primary" id="toggle-sub-create" type="button">+ Nova Subcategoria</button></div>
+  <div class="sub-create" id="sub-create"><form method="post" action="/subcategorias/add" class="sub-grid">
+    <div><label>Categoria pai</label><select name="categoryId" required><option value="">Selecione</option><% (categorias||[]).forEach(c=>{ %><option value="<%= c.id %>"><%= c.name %></option><% }) %></select></div>
+    <div><label>Nome</label><input name="name" required placeholder="Ex.: Apple"></div><div><label>Slug</label><input name="slug" placeholder="apple"></div><div><label>Ordem</label><input type="number" name="order" min="1" placeholder="1"></div>
+    <div><label>Ativa</label><select name="active"><option value="true">Sim</option><option value="false">Não</option></select></div><div><label>Mostrar no site</label><select name="showOnSite"><option value="false">Não</option><option value="true">Sim</option></select></div>
+    <div class="full"><label>Descrição interna</label><textarea name="description" rows="2" placeholder="Opcional"></textarea></div><div><button class="btn primary">Adicionar</button></div>
+  </form></div>
+  <div class="sub-list"><div class="sub-head"><div>Subcategoria</div><div>Categoria</div><div>Slug</div><div>Ordem</div><div>Ativa</div><div>Produtos</div><div style="text-align:right">Ações</div></div>
+  <% (items||[]).forEach(s=>{ const cat=(categorias||[]).find(c=>Number(c.id)===Number(s.categoryId)); %>
+    <div class="sub-row"><div class="sub-main"><strong><%= s.name %></strong><div class="sub-muted">ID: <%= s.id %></div></div><div><%= cat ? cat.name : 'Categoria removida' %></div><div><code><%= s.slug %></code></div><div><%= s.order||1 %></div><div><span class="sub-pill"><%= s.active!==false?'Sim':'Não' %></span></div><div><%= usage[s.slug]||0 %></div><div class="sub-actions"><button type="button" class="btn" data-open="sub-<%= s.id %>">Editar</button><form method="post" action="/subcategorias/del" onsubmit="return confirm('Excluir esta subcategoria?');"><input type="hidden" name="id" value="<%= s.id %>"><button class="btn" <%= usage[s.slug] ? 'disabled title="Em uso por produtos"' : '' %>>Excluir</button></form></div></div>
+  <% }) %></div>
+</div>
+<% (items||[]).forEach(s=>{ %><div class="sub-modal-bg" id="sub-<%= s.id %>"><div class="sub-modal"><h3>Editar subcategoria</h3><form method="post" action="/subcategorias/update"><input type="hidden" name="id" value="<%= s.id %>"><div class="sub-modal-grid">
+<div><label>Categoria pai</label><select name="categoryId" required><% (categorias||[]).forEach(c=>{ %><option value="<%= c.id %>" <%= Number(c.id)===Number(s.categoryId)?'selected':'' %>><%= c.name %></option><% }) %></select></div><div><label>Nome</label><input name="name" value="<%= s.name %>" required></div><div><label>Slug</label><input name="slug" value="<%= s.slug %>"></div><div><label>Ordem</label><input type="number" min="1" name="order" value="<%= s.order||1 %>"></div><div><label>Ativa</label><select name="active"><option value="true" <%= s.active!==false?'selected':'' %>>Sim</option><option value="false" <%= s.active===false?'selected':'' %>>Não</option></select></div><div><label>Mostrar no site</label><select name="showOnSite"><option value="false" <%= !s.showOnSite?'selected':'' %>>Não</option><option value="true" <%= s.showOnSite?'selected':'' %>>Sim</option></select></div><div class="full"><label>Descrição interna</label><textarea name="description" rows="3"><%= s.description||'' %></textarea></div></div><div class="sub-modal-actions"><button type="button" class="btn" data-close>Cancelar</button><button class="btn primary">Salvar alterações</button></div></form></div></div><% }) %>
+<script>(function(){const box=document.getElementById('sub-create'),toggle=document.getElementById('toggle-sub-create');toggle?.addEventListener('click',()=>{box.classList.toggle('open');toggle.textContent=box.classList.contains('open')?'Fechar criação':'+ Nova Subcategoria'});document.querySelectorAll('[data-open]').forEach(b=>b.addEventListener('click',()=>document.getElementById(b.dataset.open)?.classList.add('open')));document.querySelectorAll('[data-close]').forEach(b=>b.addEventListener('click',()=>b.closest('.sub-modal-bg')?.classList.remove('open')));document.querySelectorAll('.sub-modal-bg').forEach(bg=>bg.addEventListener('click',e=>{if(e.target===bg)bg.classList.remove('open')}));function slugify(v){return String(v||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().trim().replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,'')}document.querySelectorAll('form[action="/subcategorias/add"],form[action="/subcategorias/update"]').forEach(f=>{const n=f.querySelector('[name=name]'),s=f.querySelector('[name=slug]');if(!n||!s)return;let manual=!!s.value;s.addEventListener('input',()=>{manual=true;s.value=slugify(s.value)});n.addEventListener('input',()=>{if(!manual||!s.value)s.value=slugify(n.value)})})})();</script>

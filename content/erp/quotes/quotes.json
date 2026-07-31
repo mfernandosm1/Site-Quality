@@ -1,0 +1,69 @@
+{
+  "version": 1,
+  "quotes": [
+    {
+      "id": "quote_ms3pcajx_s8ah7r",
+      "number": "85477998",
+      "status": "draft",
+      "customerId": "",
+      "customerName": "pablo oliveira recebimento",
+      "conversationId": "",
+      "notes": "",
+      "items": [
+        {
+          "id": "item_1785184532047_13hez",
+          "productId": "",
+          "name": "Iphone 16 | 128GB • Verde / Black / Ultramarine • Novo lacrado",
+          "quantity": 1,
+          "cost": 5270,
+          "importRate": 0,
+          "profit": 0,
+          "importedCost": 5270,
+          "unitPrice": 5270,
+          "total": 5270,
+          "cashPrice": 5547.37,
+          "card12Total": 6670.89,
+          "card12Installment": 555.91,
+          "card18Total": 7528.57,
+          "card18Installment": 418.25,
+          "source": "manual"
+        },
+        {
+          "id": "item_1785185631230_r7lrk",
+          "productId": "",
+          "name": "Iphone 17 | 256GB • Black / Blue / Sage / White / Lavanda • Novo lacrado",
+          "quantity": 1,
+          "cost": 5580,
+          "importRate": 0,
+          "profit": 0,
+          "importedCost": 5580,
+          "unitPrice": 5580,
+          "total": 5580,
+          "cashPrice": 5873.68,
+          "card12Total": 7063.29,
+          "card12Installment": 588.61,
+          "card18Total": 7971.43,
+          "card18Installment": 442.86,
+          "source": "manual"
+        }
+      ],
+      "subtotal": 10850,
+      "entry": 0,
+      "trade": {
+        "name": "Iphone 13 128gb no estado informado",
+        "value": 2000
+      },
+      "remaining": 8850,
+      "paymentMethod": "pix",
+      "installments": 1,
+      "rate": 5,
+      "financedTotal": 9315.79,
+      "installmentValue": 9315.79,
+      "totalCost": 10850,
+      "estimatedProfit": 465.79,
+      "message": "Ofertas de Julho Xiaomi válidas até 20/07 as 18h💥\n✅ 1 ano de garantia e suporte conosco\n🚚 Frete grátis\n\nOlá, pablo oliveira recebimento! 😊\n\n🎮Produto Iphone 16 | 128GB • Verde / Black / Ultramarine • Novo lacrado\nTem um *investimento* de\n💳 18X de R$ 418,25 no cartão\n💳 12X de R$ 555,91 no cartão\nR$ 5.547,37 à vista no pix ou dinheiro 🔥\n\n🎮Produto Iphone 17 | 256GB • Black / Blue / Sage / White / Lavanda • Novo lacrado\nTem um *investimento* de\n💳 18X de R$ 442,86 no cartão\n💳 12X de R$ 588,61 no cartão\nR$ 5.873,68 à vista no pix ou dinheiro 🔥\n\n🔄 Recebendo Iphone 13 128gb no estado informado na troca por R$ 2.000,00\n📌 Restante: R$ 8.850,00",
+      "createdAt": "2026-07-27T20:51:18.002Z",
+      "updatedAt": "2026-07-27T20:58:01.413Z"
+    }
+  ]
+}

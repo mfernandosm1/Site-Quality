@@ -1,0 +1,132 @@
+<% layout('layout') -%>
+<section class="ops-hero compact">
+  <div>
+    <span class="ops-kicker">CONFIGURAÇÕES DO SISTEMA · v<%= version %></span>
+    <h1>💰 Configurações Financeiras</h1>
+    <p>Regras globais utilizadas pelo Financeiro, PDV, O.S., Compras, Caixa e futuros documentos fiscais.</p>
+  </div>
+  <a class="btn" href="/configuracoes">← Configurações</a>
+</section>
+
+<nav class="finance-tabs finance-settings-tabs" id="financeTabs">
+  <button type="button" data-tab="paymentMethods" class="active">Formas de pagamento</button>
+  <button type="button" data-tab="categoriesAccounts">Centros de custo e planos de conta</button>
+  <button type="button" data-tab="receivables">Contas a receber</button>
+  <button type="button" data-tab="general">Configurações gerais</button>
+</nav>
+
+<div id="financeApp" data-catalogs='<%- JSON.stringify(catalogs).replace(/'/g, "&#39;") %>'>
+  <section class="finance-panel" id="financeCatalogPanel">
+    <header>
+      <div>
+        <h2 id="catalogTitle">Formas de pagamento</h2>
+        <p id="catalogDescription">Configure uma vez e escolha em quais operações cada forma poderá ser utilizada.</p>
+      </div>
+      <div class="finance-header-actions" id="catalogActions"></div>
+    </header>
+    <div class="finance-table-wrap">
+      <table class="finance-table"><thead id="financeHead"></thead><tbody id="financeBody"></tbody></table>
+    </div>
+  </section>
+
+  <section class="finance-general-panel" id="financeReceivablesPanel" hidden>
+    <article class="finance-info-card">
+      <div>
+        <h2>Estrutura pronta para Contas a Receber <span class="help-tip" tabindex="0" data-tooltip="A fundação já separa títulos, parcelas, recebimentos, movimentos e auditoria. A próxima etapa poderá criar as telas sem alterar a base financeira.">?</span></h2>
+        <p>O módulo será construído sobre títulos, parcelas, baixas, juros, descontos, estornos e origem operacional.</p>
+      </div>
+      <span class="finance-status">Preparado</span>
+    </article>
+    <div class="finance-general-grid">
+      <article class="finance-info-card vertical"><h3>Títulos</h3><p>Registro principal da obrigação, cliente, origem, competência, emissão, vencimento e valor total.</p></article>
+      <article class="finance-info-card vertical"><h3>Parcelas</h3><p>Vencimentos independentes, numeração, situação, saldo em aberto e vínculo com a forma de pagamento.</p></article>
+      <article class="finance-info-card vertical"><h3>Recebimentos</h3><p>Baixas totais ou parciais, juros, multa, desconto, data efetiva e conta de destino.</p></article>
+      <article class="finance-info-card vertical"><h3>Auditoria</h3><p>Criação, alteração, cancelamento, estorno e reabertura ficam rastreáveis para o LOG global.</p></article>
+    </div>
+  </section>
+
+  <section class="finance-general-panel" id="financeGeneralPanel" hidden>
+    <article class="finance-info-card">
+      <div>
+        <h2>Regras controladas pelo sistema <span class="help-tip" tabindex="0" data-tooltip="Naturezas, situações e origens são utilizadas pelo motor financeiro. Elas permanecem padronizadas para não comprometer relatórios e integrações.">?</span></h2>
+        <p>Naturezas, situações e origens são definidas automaticamente conforme cada operação.</p>
+      </div>
+      <span class="finance-status">Protegido</span>
+    </article>
+    <div class="finance-general-grid">
+      <article class="finance-info-card vertical"><h3>Naturezas financeiras</h3><p>Receita, despesa, transferência, ajuste e estorno. A operação define qual natureza será usada.</p></article>
+      <article class="finance-info-card vertical"><h3>Situações</h3><p>Em aberto, parcial, pago, vencido, cancelado e estornado. O sistema atualiza a situação conforme parcelas e pagamentos.</p></article>
+      <article class="finance-info-card vertical"><h3>Origens</h3><p>PDV, O.S., Compras, Caixa, importação ou lançamento manual. A origem identifica de onde o registro veio.</p></article>
+      <article class="finance-info-card vertical"><h3>Centros de custo <span class="help-tip" tabindex="0" data-tooltip="O plano de conta explica o que gerou o valor. O centro de custo identifica em qual área, setor ou unidade ele deve ser analisado.">?</span></h3><p>Organizam Loja, Assistência, Operação Geral e futuras unidades sem duplicar o Plano de Contas.</p></article>
+    </div>
+  </section>
+</div>
+
+<dialog class="finance-dialog" id="financeDialog">
+  <form id="financeForm" novalidate>
+    <header>
+      <div><small>CONFIGURAÇÕES FINANCEIRAS</small><h2 id="financeFormTitle">Novo cadastro</h2></div>
+      <button type="button" class="finance-dialog-close" aria-label="Fechar">×</button>
+    </header>
+    <input type="hidden" name="id"><input type="hidden" name="catalog">
+
+    <div class="finance-form-grid">
+      <label><span>Nome *</span><input name="name" required maxlength="100"></label>
+      <label><span>Código <span class="help-tip" tabindex="0" data-tooltip="Identificador curto usado em pesquisas, relatórios e integrações.">?</span></span><input name="code" maxlength="30"></label>
+      <label class="finance-category-field" hidden><span>Centro de custo *</span><select name="categoryId"></select></label>
+      <label class="finance-type-field" hidden><span>Classificação *</span><select name="type"><option value="receita">Receita</option><option value="despesa">Despesa</option></select></label>
+    </div>
+
+    <section class="payment-config" hidden>
+      <fieldset><legend>Onde pode ser utilizada <span class="help-tip" tabindex="0" data-tooltip="Marque os módulos em que esta forma deve aparecer para o operador.">?</span></legend>
+        <div class="finance-module-checks">
+          <label><input type="checkbox" name="modules.sales">Vendas</label><label><input type="checkbox" name="modules.purchases">Compras</label><label><input type="checkbox" name="modules.pdv">PDV</label><label><input type="checkbox" name="modules.serviceOrders">O.S.</label><label><input type="checkbox" name="modules.finance">Financeiro</label>
+        </div>
+      </fieldset>
+      <fieldset><legend>Parcelamento e recebimento</legend>
+        <div class="finance-switches">
+          <label><input type="checkbox" name="autoSettle"><span>Baixa automática <span class="help-tip" tabindex="0" data-tooltip="Use somente quando o valor puder ser considerado pago no momento da operação, como dinheiro e PIX confirmado.">?</span></span></label>
+          <label><input type="checkbox" name="allowInstallments"><span>Permitir parcelamento</span></label>
+          <label><input type="checkbox" name="passInterestToCustomer"><span>Repassar juros ao cliente</span></label>
+          <label><input type="checkbox" name="changeAllowed"><span>Permitir troco</span></label>
+          <label><input type="checkbox" name="generatesReceivable"><span>Gerar Contas a Receber</span></label>
+          <label><input type="checkbox" name="requireIdentifiedCustomer"><span>Exigir cliente identificado</span></label>
+          <label><input type="checkbox" name="requireValidDocument"><span>Exigir CPF/CNPJ válido</span></label>
+          <label><input type="checkbox" name="requireCreditReceipt"><span>Exigir comprovante assinado</span></label>
+        </div>
+        <div class="finance-form-grid compact-grid">
+          <label><span>Máximo de parcelas</span><input type="number" min="1" max="120" name="maxInstallments" value="1"></label>
+          <label><span>Parcela mínima (R$)</span><input type="number" min="0" step="0.01" name="minimumInstallmentValue" value="0"></label>
+          <label><span>Prazo para recebimento (dias)</span><input type="number" min="0" max="365" name="settlementDays" value="0"></label>
+          <label><span>Taxa administrativa (%)</span><input type="number" min="0" max="100" step="0.001" name="feePercent" value="0"></label>
+          <label><span>Juros padrão ao mês (%)</span><input type="number" min="0" max="100" step="0.001" name="monthlyInterestPercent" value="0"></label>
+          <label><span>Primeiro vencimento (dias)</span><input type="number" min="0" max="365" name="firstDueDays" value="0"></label>
+          <label><span>Intervalo entre parcelas (dias)</span><input type="number" min="1" max="365" name="installmentIntervalDays" value="30"></label>
+        </div>
+      </fieldset>
+      <fieldset><legend>Regras de atraso <span class="help-tip" tabindex="0" data-tooltip="Estas regras serão calculadas automaticamente no recebimento de parcelas vencidas.">?</span></legend>
+        <div class="finance-form-grid compact-grid">
+          <label><span>Dias de carência</span><input type="number" min="0" max="365" name="lateGraceDays" value="0"></label>
+          <label><span>Multa fixa (R$)</span><input type="number" min="0" step="0.01" name="lateFineFixed" value="0"></label>
+          <label><span>Multa (%)</span><input type="number" min="0" max="100" step="0.001" name="lateFinePercent" value="0"></label>
+          <label><span>Juros por atraso (%)</span><input type="number" min="0" max="100" step="0.001" name="lateInterestPercent" value="0"></label>
+          <label><span>Periodicidade</span><select name="lateInterestPeriod"><option value="daily">Ao dia</option><option value="monthly">Ao mês</option></select></label>
+          <label><span>Tipo de juros</span><select name="lateInterestType"><option value="simple">Juros simples</option><option value="compound">Juros compostos</option></select></label>
+          <label><span>Taxa administrativa de atraso (%)</span><input type="number" min="0" max="100" step="0.001" name="lateAdministrativeFeePercent" value="0"></label>
+        </div>
+      </fieldset>
+      <fieldset><legend>Preparação fiscal e NFC-e <span class="help-tip" tabindex="0" data-tooltip="Estes campos não emitem NFC-e nesta versão. Eles apenas evitam retrabalho quando a integração fiscal for implantada.">?</span></legend>
+        <div class="finance-form-grid compact-grid">
+          <label><span>Código de pagamento NFC-e</span><input name="nfcePaymentCode" maxlength="10" placeholder="Ex.: 01, 03, 17"></label>
+          <label><span>Tipo fiscal interno</span><select name="fiscalType"><option value="other">Outros</option><option value="cash">Dinheiro</option><option value="credit_card">Cartão de crédito</option><option value="debit_card">Cartão de débito</option><option value="pix">PIX</option><option value="boleto">Boleto</option><option value="store_credit">Crédito da loja</option></select></label>
+          <label><span>Integração / adquirente</span><input name="acquirerCode" maxlength="40" placeholder="Opcional"></label>
+          <label><span>Bandeira obrigatória</span><select name="cardBrandRequired"><option value="false">Não</option><option value="true">Sim</option></select></label>
+        </div>
+      </fieldset>
+    </section>
+
+    <label class="finance-active"><input type="checkbox" name="active" checked><span>Cadastro ativo</span></label>
+    <footer><button type="button" class="btn finance-dialog-cancel">Cancelar</button><button type="submit" class="btn btn-primary" id="financeSubmitButton">Salvar cadastro</button></footer>
+  </form>
+</dialog>
+<script src="/public/js/financeiro-fundacao.js"></script>

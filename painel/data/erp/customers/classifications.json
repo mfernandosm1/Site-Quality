@@ -1,0 +1,35 @@
+{
+  "version": "0.12.0",
+  "items": [
+    {
+      "id": "none",
+      "name": "Nenhum",
+      "order": 0,
+      "active": true
+    },
+    {
+      "id": "bronze",
+      "name": "Bronze",
+      "order": 1,
+      "active": true
+    },
+    {
+      "id": "prata",
+      "name": "Prata",
+      "order": 2,
+      "active": true
+    },
+    {
+      "id": "ouro",
+      "name": "Ouro",
+      "order": 3,
+      "active": true
+    },
+    {
+      "id": "diamante",
+      "name": "Diamante",
+      "order": 4,
+      "active": true
+    }
+  ]
+}

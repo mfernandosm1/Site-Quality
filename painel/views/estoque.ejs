@@ -1,0 +1,260 @@
+<% layout('layout') -%>
+<section class="inventory-page" id="inventoryPage">
+
+<style>
+.inventory-module-tabs{display:flex;gap:8px;margin:14px 0 16px;flex-wrap:wrap}
+.inventory-module-tab{border:1px solid #334155;background:#111827;color:#e5e7eb;border-radius:10px;padding:10px 15px;font-weight:900;cursor:pointer}
+.inventory-module-tab.active{background:#2563eb;border-color:#2563eb;color:#fff}
+.inventory-view[hidden]{display:none!important}
+.inventory-giro-card{border:1px solid #2b3340;background:#101214;border-radius:14px;padding:14px;margin-bottom:14px}
+.inventory-giro-title{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
+.inventory-giro-title h2{margin:0;font-size:17px}.inventory-giro-title p{margin:3px 0 0;color:#94a3b8;font-size:12px}
+.inventory-giro-filters{display:grid;grid-template-columns:1.2fr repeat(5,minmax(120px,1fr)) auto;gap:8px;margin-top:14px;align-items:end}
+.inventory-giro-filters label{display:block;font-size:10px;font-weight:900;color:#94a3b8;margin-bottom:5px;text-transform:uppercase}
+.inventory-giro-filters input,.inventory-giro-filters select{width:100%;min-height:38px;border-radius:9px;border:1px solid #374151;background:#17191d;color:#fff;padding:8px}
+.inventory-giro-kpis{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin:14px 0}
+.inventory-giro-kpi{border:1px solid #30363d;background:#111315;border-radius:12px;padding:12px}
+.inventory-giro-kpi span{display:block;color:#94a3b8;font-size:10px;font-weight:900;text-transform:uppercase}
+.inventory-giro-kpi strong{display:block;font-size:24px;margin:5px 0;color:#fff}.inventory-giro-kpi small{color:#94a3b8;font-size:11px}
+.inventory-giro-table-wrap{overflow:auto;border:1px solid #30363d;border-radius:12px}
+.inventory-giro-table{width:100%;border-collapse:collapse;min-width:980px}
+.inventory-giro-table th,.inventory-giro-table td{padding:11px 10px;border-bottom:1px solid #2b3036;text-align:left;font-size:11px}
+.inventory-giro-table th{background:#17191d;color:#cbd5e1;font-size:10px;text-transform:uppercase}
+.inventory-giro-product{display:flex;align-items:center;gap:9px}.inventory-giro-product img{width:36px;height:36px;object-fit:contain;border-radius:8px;background:#fff}
+.inventory-giro-rank{font-weight:900;font-size:14px}.inventory-giro-status{display:inline-flex;border-radius:999px;padding:5px 8px;font-weight:900;font-size:10px}
+.inventory-giro-high{background:#052e16;color:#86efac;border:1px solid #166534}.inventory-giro-medium{background:#422006;color:#fde68a;border:1px solid #854d0e}.inventory-giro-low{background:#3f1d0b;color:#fdba74;border:1px solid #9a3412}.inventory-giro-none{background:#27272a;color:#d4d4d8;border:1px solid #52525b}
+.inventory-giro-empty{text-align:center;padding:28px;color:#94a3b8}.inventory-giro-note{margin-top:10px;color:#94a3b8;font-size:11px}
+.inventory-restock-toolbar{display:grid;grid-template-columns:repeat(3,minmax(150px,1fr)) auto;gap:10px;align-items:end;margin-top:14px}
+.inventory-restock-toolbar label{display:block;font-size:10px;font-weight:900;color:#94a3b8;margin-bottom:5px;text-transform:uppercase}
+.inventory-restock-toolbar select{width:100%;min-height:40px;border-radius:9px;border:1px solid #374151;background:#17191d;color:#fff;padding:8px}
+.inventory-restock-actions{display:flex;gap:8px;flex-wrap:wrap}
+.inventory-restock-summary{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:14px 0}
+.inventory-restock-summary article{border:1px solid #30363d;background:#111315;border-radius:12px;padding:12px}
+.inventory-restock-summary span{display:block;color:#94a3b8;font-size:10px;font-weight:900;text-transform:uppercase}.inventory-restock-summary strong{display:block;font-size:24px;margin-top:5px}
+.inventory-restock-table-wrap{overflow:auto;border:1px solid #30363d;border-radius:12px}.inventory-restock-table{width:100%;border-collapse:collapse;min-width:920px}
+.inventory-restock-table th,.inventory-restock-table td{padding:10px;border-bottom:1px solid #2b3036;text-align:left;font-size:11px}.inventory-restock-table th{background:#17191d;color:#cbd5e1;font-size:10px;text-transform:uppercase}
+.inventory-restock-qty{width:78px;min-height:34px;border:1px solid #374151;border-radius:8px;background:#0f1114;color:#fff;padding:6px;text-align:center;font-weight:900}
+.inventory-restock-priority{display:inline-flex;border-radius:999px;padding:5px 8px;font-size:10px;font-weight:900}.inventory-restock-critical{background:#450a0a;color:#fecaca;border:1px solid #991b1b}.inventory-restock-high{background:#431407;color:#fed7aa;border:1px solid #9a3412}.inventory-restock-medium{background:#422006;color:#fde68a;border:1px solid #854d0e}
+.inventory-restock-preview{margin-top:14px}.inventory-restock-preview textarea{width:100%;min-height:220px;resize:vertical;border:1px solid #374151;border-radius:12px;background:#0d0f12;color:#e5e7eb;padding:14px;line-height:1.55;font-family:inherit}
+.inventory-restock-preview-head{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:8px;flex-wrap:wrap}.inventory-restock-preview-head h3{margin:0;font-size:15px}
+@media(max-width:900px){.inventory-restock-toolbar,.inventory-restock-summary{grid-template-columns:repeat(2,1fr)}}@media(max-width:600px){.inventory-restock-toolbar,.inventory-restock-summary{grid-template-columns:1fr}}
+@media(max-width:1100px){.inventory-giro-filters{grid-template-columns:repeat(3,1fr)}.inventory-giro-kpis{grid-template-columns:repeat(2,1fr)}}@media(max-width:700px){.inventory-giro-filters,.inventory-giro-kpis{grid-template-columns:1fr}}
+.inventory-status-uncontrolled{background:#27272a;color:#d4d4d8;border-color:#52525b}
+</style>
+
+  <header class="inventory-hero">
+    <div>
+      <span class="inventory-kicker">ERP · ESTOQUE v0.11.9</span>
+      <h1>Estoque</h1>
+      <p>Visão operacional de todos os produtos, com destaque para os que possuem controle de estoque ativo.</p>
+    </div>
+    <div class="inventory-hero-actions">
+      <a class="btn" href="/erp">← Voltar ao ERP</a>
+      <a class="btn" href="/produtos?origem=erp">Cadastro de produtos</a>
+    </div>
+  </header>
+
+  <% if (flash) { %><div class="notice"><%= flash %></div><% } %>
+
+
+  <nav class="inventory-module-tabs" aria-label="Áreas do estoque">
+    <button class="inventory-module-tab active" type="button" data-inventory-view="operation">Operação</button>
+    <button class="inventory-module-tab" type="button" data-inventory-view="turnover">Giro dos produtos</button>
+    <button class="inventory-module-tab" type="button" data-inventory-view="restock">Pedido de reposição</button>
+  </nav>
+
+  <div class="inventory-view" id="inventoryOperationView" data-inventory-panel="operation">
+  <section class="inventory-kpis" aria-label="Resumo do estoque">
+    <article class="inventory-kpi"><span>Produtos controlados</span><strong><%= summary.controlled %></strong><small>Itens com controle ativo</small></article>
+    <article class="inventory-kpi inventory-kpi-warning"><span>Estoque baixo</span><strong><%= summary.low %></strong><small>Disponível menor ou igual ao mínimo</small></article>
+    <article class="inventory-kpi inventory-kpi-danger"><span>Estoque zerado</span><strong><%= summary.zero %></strong><small>Sem unidades disponíveis</small></article>
+    <article class="inventory-kpi inventory-kpi-info"><span>Unidades disponíveis</span><strong><%= summary.availableUnits %></strong><small>Físico menos reservado</small></article>
+  </section>
+
+  <section class="inventory-filters">
+    <div class="inventory-filter-main">
+      <label for="inventorySearch">Pesquisar produto</label>
+      <input id="inventorySearch" type="search" placeholder="Digite o nome do produto..." autocomplete="off">
+    </div>
+    <div><label for="inventoryCategory">Categoria</label><select id="inventoryCategory"><option value="">Todas</option><% categories.forEach((category) => { %><option value="<%= category.slug || category.id %>"><%= category.name %></option><% }) %></select></div>
+    <div><label for="inventorySubcategory">Subcategoria</label><select id="inventorySubcategory"><option value="">Todas</option><% subcategories.forEach((subcategory) => { %><option value="<%= subcategory.slug || subcategory.id %>" data-category-id="<%= subcategory.categoryId || '' %>"><%= subcategory.name %></option><% }) %></select></div>
+    <div><label for="inventoryStatus">Situação</label><select id="inventoryStatus"><option value="">Todas</option><option value="normal">Normal</option><option value="low">Estoque baixo</option><option value="zero">Zerado</option><option value="uncontrolled">Controle desativado</option></select></div>
+    <button class="btn inventory-clear-filters" id="inventoryClearFilters" type="button">Limpar</button>
+  </section>
+
+  <section class="inventory-list-card">
+    <div class="inventory-list-head">
+      <div><h2>Produtos e variações</h2><p id="inventoryResultCount"><%= products.length %> produto(s) encontrado(s)</p></div>
+      <span class="badge">Movimentações inteligentes · v0.11.9</span>
+    </div>
+
+    <div class="inventory-table-wrap">
+      <table class="inventory-table">
+        <thead><tr><th>Produto</th><th>Categoria</th><th>Físico</th><th>Reservado</th><th>Disponível</th><th>Mínimo</th><th>Situação</th><th>Ações</th></tr></thead>
+        <tbody id="inventoryTableBody">
+          <% products.forEach((product) => { %>
+            <tr data-inventory-row data-search="<%= product.searchText %>" data-category="<%= product.categorySlug %>" data-subcategory="<%= product.subcategorySlug %>" data-status="<%= product.status %>">
+              <td><div class="inventory-product-cell"><div class="inventory-product-thumb"><% if (product.image) { %><img src="/<%= product.image.replace(/^\//, '') %>" alt=""><% } else { %>📦<% } %></div><div><strong><%= product.name %></strong><small><%= product.inventoryItemId %></small></div></div></td>
+              <td><strong><%= product.categoryName %></strong><small><%= product.subcategoryName %></small></td>
+              <td class="inventory-number"><%= product.physicalQuantity %></td>
+              <td class="inventory-number"><%= product.reservedQuantity %></td>
+              <td class="inventory-number inventory-available"><%= product.availableQuantity %></td>
+              <td class="inventory-number"><%= product.minimumQuantity %></td>
+              <td><span class="inventory-status inventory-status-<%= product.status %>"><%= product.status === 'zero' ? 'Zerado' : product.status === 'low' ? 'Estoque baixo' : product.status === 'uncontrolled' ? 'Controle desativado' : 'Normal' %></span></td>
+              <td><% if (product.controlled) { %><button class="btn inventory-move-btn" type="button" data-inventory-item-id="<%= product.inventoryItemId %>" data-product-id="<%= product.productId %>" data-product-name="<%= product.name %>" data-physical="<%= product.physicalQuantity %>" data-reserved="<%= product.reservedQuantity %>" data-available="<%= product.availableQuantity %>" data-minimum="<%= product.minimumQuantity %>">Movimentar</button><% } else { %><a class="btn" href="/produtos?origem=erp">Ativar no cadastro</a><% } %></td>
+            </tr>
+          <% }) %>
+        </tbody>
+      </table>
+      <div class="inventory-empty" id="inventoryEmpty" <%= products.length ? 'hidden' : '' %>><strong>Nenhum produto encontrado.</strong><span>Confira o Cadastro Mestre de Produtos.</span></div>
+    </div>
+  </section>
+  </div>
+
+  <div class="inventory-view" id="inventoryTurnoverView" data-inventory-panel="turnover" hidden>
+    <section class="inventory-giro-card">
+      <div class="inventory-giro-title">
+        <div><h2>📊 Giro dos produtos</h2><p>Ranking baseado somente em movimentações classificadas como venda.</p></div>
+        <span class="badge">Estoque v0.11.9</span>
+      </div>
+      <div class="inventory-giro-filters">
+        <div><label for="giroSearch">Produto</label><input id="giroSearch" type="search" placeholder="Buscar produto..."></div>
+        <div><label for="giroPeriod">Período</label><select id="giroPeriod"><option value="30">Últimos 30 dias</option><option value="90">Últimos 3 meses</option><option value="365">Último ano</option><option value="0">Todo o período</option></select></div>
+        <div><label for="giroCategory">Categoria</label><select id="giroCategory"><option value="">Todas</option><% categories.forEach((category) => { %><option value="<%= category.slug || category.id %>"><%= category.name %></option><% }) %></select></div>
+        <div><label for="giroSubcategory">Subcategoria</label><select id="giroSubcategory"><option value="">Todas</option><% subcategories.forEach((subcategory) => { %><option value="<%= subcategory.slug || subcategory.id %>"><%= subcategory.name %></option><% }) %></select></div>
+        <div><label for="giroBrand">Marca</label><select id="giroBrand"><option value="">Todas</option></select></div>
+        <div><label for="giroSituation">Situação</label><select id="giroSituation"><option value="">Todos</option><option value="sold">Com vendas</option><option value="never">Nunca vendidos</option><option value="stale30">Sem venda há 30 dias</option><option value="stale60">Sem venda há 60 dias</option><option value="stale90">Sem venda há 90 dias</option></select></div>
+        <button class="btn" type="button" id="giroClearFilters">Limpar</button>
+      </div>
+      <p class="inventory-giro-note">Marca usa o campo padronizado do cadastro. Produtos ainda não classificados aparecem como “Sem marca definida”.</p>
+    </section>
+
+    <section class="inventory-giro-kpis">
+      <article class="inventory-giro-kpi"><span>Carro-chefe</span><strong id="giroTopName">—</strong><small id="giroTopUnits">Nenhuma venda no período</small></article>
+      <article class="inventory-giro-kpi"><span>Unidades vendidas</span><strong id="giroUnits">0</strong><small>No período filtrado</small></article>
+      <article class="inventory-giro-kpi"><span>Produtos vendidos</span><strong id="giroSoldProducts">0</strong><small>Produtos diferentes</small></article>
+      <article class="inventory-giro-kpi"><span>Nunca vendidos</span><strong id="giroNeverSold">0</strong><small>Sem venda registrada em todo o histórico</small></article>
+      <article class="inventory-giro-kpi"><span>Sem venda há 90 dias</span><strong id="giroStale">0</strong><small>Considerando a última venda</small></article>
+    </section>
+
+    <section class="inventory-giro-card">
+      <div class="inventory-giro-title"><div><h2>Ranking e saúde do giro</h2><p id="giroResultCount">0 produto(s)</p></div></div>
+      <div class="inventory-giro-table-wrap">
+        <table class="inventory-giro-table">
+          <thead><tr><th>#</th><th>Produto</th><th>Categoria</th><th>Marca</th><th>Vendidos</th><th>Última venda</th><th>Dias sem vender</th><th>Disponível</th><th>Giro</th><th>Compradores</th></tr></thead>
+          <tbody id="giroTableBody"></tbody>
+        </table>
+        <div class="inventory-giro-empty" id="giroEmpty" hidden>Nenhum produto encontrado com os filtros atuais.</div>
+      </div>
+    </section>
+  </div>
+
+  <div class="inventory-view" id="inventoryRestockView" data-inventory-panel="restock" hidden>
+    <section class="inventory-giro-card">
+      <div class="inventory-giro-title">
+        <div><h2>🧾 Pedido inteligente de reposição</h2><p>Cria uma sugestão usando estoque mínimo, saldo disponível e vendas registradas.</p></div>
+        <span class="badge">Estoque v0.11.9</span>
+      </div>
+      <div class="inventory-restock-toolbar">
+        <div><label for="restockPeriod">Giro considerado</label><select id="restockPeriod"><option value="30">Últimos 30 dias</option><option value="90">Últimos 3 meses</option><option value="365">Último ano</option></select></div>
+        <div><label for="restockCoverage">Cobertura desejada</label><select id="restockCoverage"><option value="15">15 dias</option><option value="30" selected>30 dias</option><option value="45">45 dias</option><option value="60">60 dias</option></select></div>
+        <div><label for="restockRule">Produtos incluídos</label><select id="restockRule"><option value="smart">Baixo estoque + bom giro</option><option value="minimum">Abaixo do estoque mínimo</option><option value="sales">Com giro e reposição calculada</option></select></div>
+        <div class="inventory-restock-actions"><button class="btn primary" type="button" id="restockGenerate">Gerar pedido</button><button class="btn" type="button" id="restockSelectAll">Marcar sugeridos</button></div>
+      </div>
+      <p class="inventory-giro-note">A quantidade sugerida é apenas operacional e pode ser alterada antes de copiar o pedido. Nenhuma entrada de estoque é criada automaticamente.</p>
+    </section>
+
+    <section class="inventory-restock-summary">
+      <article><span>Produtos sugeridos</span><strong id="restockProductsCount">0</strong></article>
+      <article><span>Unidades no pedido</span><strong id="restockUnitsCount">0</strong></article>
+      <article><span>Prioridade crítica</span><strong id="restockCriticalCount">0</strong></article>
+      <article><span>Itens selecionados</span><strong id="restockSelectedCount">0</strong></article>
+    </section>
+
+    <section class="inventory-giro-card">
+      <div class="inventory-giro-title"><div><h2>Sugestão de compra</h2><p id="restockResultCount">Clique em “Gerar pedido”.</p></div></div>
+      <div class="inventory-restock-table-wrap">
+        <table class="inventory-restock-table">
+          <thead><tr><th class="inventory-restock-check"><input id="restockMasterSelect" type="checkbox" aria-label="Selecionar ou desmarcar todos os produtos sugeridos" disabled></th><th>Produto</th><th>Disponível</th><th>Mínimo</th><th>Vendas</th><th>Cobertura</th><th>Prioridade</th><th>Comprar</th></tr></thead>
+          <tbody id="restockTableBody"></tbody>
+        </table>
+        <div class="inventory-giro-empty" id="restockEmpty">Nenhuma sugestão gerada ainda.</div>
+      </div>
+      <div class="inventory-restock-preview">
+        <div class="inventory-restock-preview-head"><h3>Texto do pedido</h3><button class="btn" type="button" id="restockCopy">Copiar pedido</button></div>
+        <textarea id="restockPreview" readonly placeholder="O pedido aparecerá aqui..."></textarea>
+      </div>
+    </section>
+  </div>
+</section>
+
+<script id="inventoryGiroData" type="application/json"><%- JSON.stringify(giroProducts || []).replace(/</g, '\\u003c') %></script>
+
+<div class="inventory-drawer-backdrop" id="inventoryDrawerBackdrop" hidden></div>
+<aside class="inventory-drawer" id="inventoryDrawer" aria-hidden="true" aria-label="Movimentar estoque">
+  <header class="inventory-drawer-header">
+    <div><span class="inventory-kicker">OPERAÇÃO MANUAL</span><h2 id="inventoryDrawerTitle">Movimentar estoque</h2><small id="inventoryDrawerItemId"></small></div>
+    <button class="inventory-drawer-close" id="inventoryDrawerClose" type="button" aria-label="Fechar">×</button>
+  </header>
+  <div class="inventory-drawer-body">
+    <section class="inventory-drawer-balances">
+      <div><span>Físico</span><strong id="drawerPhysical">0</strong></div>
+      <div><span>Reservado</span><strong id="drawerReserved">0</strong></div>
+      <div><span>Disponível</span><strong id="drawerAvailable">0</strong></div>
+      <div><span>Mínimo</span><strong id="drawerMinimum">0</strong></div>
+    </section>
+
+    <form class="inventory-movement-form" id="inventoryMovementForm">
+      <input type="hidden" id="movementInventoryItemId" name="inventoryItemId">
+      <div class="inventory-operation-tabs" role="group" aria-label="Tipo de movimentação">
+        <button type="button" class="inventory-operation-tab active" data-operation="entrada">Entrada</button>
+        <button type="button" class="inventory-operation-tab" data-operation="saida">Saída</button>
+        <button type="button" class="inventory-operation-tab" data-operation="ajuste">Ajuste</button>
+      </div>
+      <input type="hidden" id="movementOperation" name="operation" value="entrada">
+      <input type="hidden" id="movementReasonCode" name="reasonCode" value="">
+      <input type="hidden" id="movementClassification" name="classification" value="">
+      <label for="movementQuantity" id="movementQuantityLabel">Quantidade de entrada</label>
+      <input id="movementQuantity" name="quantity" type="number" min="1" step="1" inputmode="numeric" required placeholder="1">
+      <div class="inventory-quick-quantity" id="inventoryQuickQuantity" aria-label="Quantidades rápidas">
+        <span>Quantidade rápida</span>
+        <div>
+          <button type="button" data-quick-quantity="1">1</button>
+          <button type="button" data-quick-quantity="5">5</button>
+          <button type="button" data-quick-quantity="10">10</button>
+        </div>
+      </div>
+
+      <label for="movementReason">Motivo <b>*</b></label>
+      <div class="inventory-reason-shortcuts">
+        <div class="inventory-reason-group" id="inventoryRecentReasons" hidden>
+          <span>⭐ Recentes</span>
+          <div class="inventory-reason-chips" id="inventoryRecentReasonChips"></div>
+        </div>
+        <div class="inventory-reason-group">
+          <span>Motivos rápidos</span>
+          <div class="inventory-reason-chips" id="inventoryReasonChips">
+            <button type="button" data-reason="Compra de fornecedor" data-reason-code="PURCHASE" data-classification="purchase">📦 Compra</button>
+            <button type="button" data-reason="Venda em balcão" data-reason-code="SALE" data-classification="sale">🛒 Venda</button>
+            <button type="button" data-reason="Brinde para cliente" data-reason-code="GIFT" data-classification="gift">🎁 Brinde</button>
+            <button type="button" data-reason="Devolução de cliente" data-reason-code="RETURN" data-classification="return">↩ Devolução</button>
+            <button type="button" data-reason="Troca ou garantia" data-reason-code="WARRANTY" data-classification="warranty">🔄 Troca / garantia</button>
+            <button type="button" data-reason="Correção de inventário" data-reason-code="INVENTORY" data-classification="inventory">📋 Inventário</button>
+            <button type="button" data-reason="Perda ou avaria" data-reason-code="LOSS" data-classification="loss">⚠ Perda / avaria</button>
+            <button type="button" data-reason="Uso interno" data-reason-code="INTERNAL" data-classification="internal">🏢 Uso interno</button>
+          </div>
+        </div>
+      </div>
+      <textarea id="movementReason" name="reason" rows="3" maxlength="240" required placeholder="Clique em um motivo rápido ou digite manualmente..."></textarea>
+      <div class="inventory-form-message" id="inventoryFormMessage" hidden></div>
+      <button class="btn primary inventory-submit-movement" id="inventorySubmitMovement" type="submit">Registrar entrada</button>
+    </form>
+
+    <section class="inventory-history-section">
+      <div class="inventory-history-head"><h3>Histórico</h3><button class="btn" id="inventoryReloadHistory" type="button">Atualizar</button></div>
+      <div class="inventory-history-list" id="inventoryHistoryList"><div class="inventory-history-empty">Carregando histórico...</div></div>
+    </section>
+  </div>
+</aside>
+
+<script src="/public/js/estoque.js"></script>

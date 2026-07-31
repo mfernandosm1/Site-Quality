@@ -1,6 +1,120 @@
 {
   "items": [
     {
+      "id": "PRD-1785454144302",
+      "name": "Capa TPU Antishock Premium Motorola Moto G56 5G - Transparente",
+      "slug": "capa-tpu-antishock-premium-motorola-moto-g56-5g-transparente",
+      "active": false,
+      "siteEnabled": false,
+      "code": "77098",
+      "sku": "77098",
+      "barcode": "",
+      "ncm": "39209910",
+      "price": 0,
+      "stock": 0,
+      "commercial": {
+        "costPrice": 4,
+        "salePrice": 0
+      },
+      "inventory": {
+        "itemId": "PRD-1785454144302",
+        "stockControlled": true,
+        "allowNegative": false,
+        "channelAvailability": {
+          "site": {
+            "mode": "disabled",
+            "enabled": false,
+            "limit": null,
+            "physicalSafety": 0
+          }
+        }
+      },
+      "erp": {
+        "active": true
+      },
+      "virtualStore": {
+        "active": false,
+        "channels": {
+          "lojaVirtual": {
+            "enabled": false
+          }
+        }
+      }
+    },
+    {
+      "id": "PRD-1785451902034",
+      "name": "Tela Frontal Iphone 12",
+      "slug": "tela-frontal-iphone-12",
+      "active": false,
+      "siteEnabled": false,
+      "code": "9919",
+      "sku": "9919",
+      "barcode": "",
+      "ncm": "85171432",
+      "price": 0,
+      "stock": 2,
+      "commercial": {
+        "costPrice": 160.9,
+        "salePrice": 0
+      },
+      "inventory": {
+        "itemId": "PRD-1785451902034",
+        "stockControlled": true,
+        "allowNegative": false,
+        "channelAvailability": {
+          "site": {
+            "mode": "disabled",
+            "enabled": false,
+            "limit": null,
+            "physicalSafety": 0
+          }
+        }
+      },
+      "erp": {
+        "active": true
+      },
+      "virtualStore": {
+        "active": false,
+        "channels": {
+          "lojaVirtual": {
+            "enabled": false
+          }
+        }
+      }
+    },
+    {
+      "id": "PRD-1785449482228",
+      "name": "Cabo Lightning 1m KD-28A Kaidi - Preto",
+      "slug": "cabo-lightning-1m-kd-28a-kaidi-preto",
+      "active": false,
+      "code": "R9983PRE",
+      "sku": "R9983PRE",
+      "barcode": "",
+      "ncm": "85444200",
+      "price": 0,
+      "stock": 0,
+      "commercial": {
+        "costPrice": 6.24,
+        "salePrice": 0
+      },
+      "inventory": {
+        "itemId": "PRD-1785449482228",
+        "stockControlled": true,
+        "allowNegative": false
+      },
+      "erp": {
+        "active": true
+      },
+      "virtualStore": {
+        "active": false,
+        "channels": {
+          "lojaVirtual": {
+            "enabled": false
+          }
+        }
+      }
+    },
+    {
       "id": 1761055764334,
       "name": "Controle PS4",
       "price": null,
@@ -14,7 +128,7 @@
       "descriptionShort": "",
       "descriptionLong": "",
       "slug": "controle-ps4",
-      "stock": null,
+      "stock": 7,
       "showVariationsOnCard": false,
       "variations": {
         "enabled": false,
@@ -30,6 +144,46 @@
         "conditionText": "",
         "labelsText": "{}",
         "combinationsText": ""
+      },
+      "commercial": {
+        "costPrice": null,
+        "cashPrice": null,
+        "installmentPrice": null,
+        "minimumPrice": null,
+        "minimumMarginPercent": null,
+        "discountPolicy": "inherit",
+        "maximumDiscountPercent": null,
+        "maximumDiscountAmount": null,
+        "requiresAuthorization": false
+      },
+      "inventory": {
+        "itemId": "PRD-1761055764334",
+        "stockControlled": true,
+        "allowNegative": false,
+        "minimumQuantity": 10,
+        "channelAvailability": {
+          "site": {
+            "mode": "shared",
+            "enabled": true,
+            "limit": null,
+            "physicalSafety": 0
+          }
+        }
+      },
+      "subcategory": "",
+      "tags": [],
+      "relatedManualIds": [],
+      "crossSellIds": [],
+      "erp": {
+        "active": true
+      },
+      "virtualStore": {
+        "active": true,
+        "channels": {
+          "lojaVirtual": {
+            "enabled": true
+          }
+        }
       }
     },
     {
@@ -65,6 +219,20 @@
         "conditionText": "",
         "labelsText": "{}",
         "combinationsText": ""
+      },
+      "inventory": {
+        "itemId": "PRD-1761055784959",
+        "stockControlled": false,
+        "allowNegative": false,
+        "minimumQuantity": 0,
+        "channelAvailability": {
+          "site": {
+            "mode": "shared",
+            "enabled": true,
+            "limit": null,
+            "physicalSafety": 0
+          }
+        }
       }
     },
     {
@@ -100,6 +268,20 @@
         "conditionText": "",
         "labelsText": "{}",
         "combinationsText": ""
+      },
+      "inventory": {
+        "itemId": "PRD-1761056785061",
+        "stockControlled": false,
+        "allowNegative": false,
+        "minimumQuantity": 0,
+        "channelAvailability": {
+          "site": {
+            "mode": "shared",
+            "enabled": true,
+            "limit": null,
+            "physicalSafety": 0
+          }
+        }
       }
     },
     {
@@ -115,7 +297,39 @@
       "detailsEnabled": false,
       "descriptionShort": "",
       "descriptionLong": "",
-      "slug": "mini-game-portatil-400-jogos"
+      "slug": "mini-game-portatil-400-jogos",
+      "subcategory": "",
+      "commercial": {
+        "costPrice": null,
+        "cashPrice": null,
+        "installmentPrice": null,
+        "minimumPrice": null,
+        "minimumMarginPercent": null,
+        "discountPolicy": "inherit",
+        "maximumDiscountPercent": null,
+        "maximumDiscountAmount": null,
+        "requiresAuthorization": false
+      },
+      "stock": null,
+      "tags": [],
+      "relatedManualIds": [],
+      "crossSellIds": [],
+      "showVariationsOnCard": false,
+      "variations": {
+        "enabled": false,
+        "colors": [],
+        "storage": [],
+        "ram": [],
+        "condition": [],
+        "combinations": [],
+        "labels": {},
+        "colorsText": "",
+        "storageText": "",
+        "ramText": "",
+        "conditionText": "",
+        "labelsText": "{}",
+        "combinationsText": ""
+      }
     },
     {
       "id": 1761057538723,
@@ -601,6 +815,20 @@
         "conditionText": "",
         "labelsText": "{}",
         "combinationsText": ""
+      },
+      "inventory": {
+        "itemId": "PRD-1769989886741",
+        "stockControlled": false,
+        "allowNegative": false,
+        "minimumQuantity": 0,
+        "channelAvailability": {
+          "site": {
+            "mode": "shared",
+            "enabled": true,
+            "limit": null,
+            "physicalSafety": 0
+          }
+        }
       }
     },
     {
@@ -956,7 +1184,21 @@
       "detailsEnabled": false,
       "descriptionShort": "",
       "descriptionLong": "",
-      "slug": "bateria-apple-magsafe"
+      "slug": "bateria-apple-magsafe",
+      "inventory": {
+        "itemId": "PRD-1780362105345",
+        "stockControlled": false,
+        "allowNegative": false,
+        "minimumQuantity": 0,
+        "channelAvailability": {
+          "site": {
+            "mode": "shared",
+            "enabled": true,
+            "limit": null,
+            "physicalSafety": 0
+          }
+        }
+      }
     },
     {
       "id": 1780620735223,
@@ -1524,7 +1766,21 @@
         "conditionText": "",
         "combinationsText": ""
       },
-      "id": 1781824479005
+      "id": 1781824479005,
+      "inventory": {
+        "itemId": "PRD-1781824479005",
+        "stockControlled": false,
+        "allowNegative": false,
+        "minimumQuantity": 0,
+        "channelAvailability": {
+          "site": {
+            "mode": "shared",
+            "enabled": true,
+            "limit": null,
+            "physicalSafety": 0
+          }
+        }
+      }
     },
     {
       "name": "Apple 2026 MacBook Neo chip A18 Pro, IA e Apple Intelligence, Tela 13 pol. Liquid Retina, 8 GB de memória unificada",
@@ -1576,7 +1832,21 @@
       },
       "id": 1781826340965,
       "stock": null,
-      "showVariationsOnCard": false
+      "showVariationsOnCard": false,
+      "inventory": {
+        "itemId": "PRD-1781826340965",
+        "stockControlled": false,
+        "allowNegative": false,
+        "minimumQuantity": 0,
+        "channelAvailability": {
+          "site": {
+            "mode": "shared",
+            "enabled": true,
+            "limit": null,
+            "physicalSafety": 0
+          }
+        }
+      }
     },
     {
       "name": "Teclado com Fio Multimídia USB KB-M11BK C3 Tech - Preto",
@@ -1636,7 +1906,16 @@
         "conditionText": "",
         "combinationsText": ""
       },
-      "id": 1781828065854
+      "id": 1781828065854,
+      "commercial": {
+        "costPrice": 1
+      },
+      "inventory": {
+        "itemId": "PRD-1781828065854",
+        "stockControlled": true,
+        "allowNegative": false
+      },
+      "stock": 5
     },
     {
       "name": "Troca de Tela de Celulares",

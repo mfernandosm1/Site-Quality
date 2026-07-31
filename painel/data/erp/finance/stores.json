@@ -1,0 +1,12 @@
+{
+  "version": "0.16.0",
+  "items": [
+    {
+      "id": "STORE-MAIN",
+      "name": "Loja principal",
+      "code": "MATRIZ",
+      "active": true,
+      "system": true
+    }
+  ]
+}

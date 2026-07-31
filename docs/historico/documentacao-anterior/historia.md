@@ -1,0 +1,3 @@
+# História
+
+Histórico da plataforma.

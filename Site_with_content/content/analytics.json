@@ -1,29 +1,29 @@
 {
   "version": "8.4.0-analytics-professional",
   "createdAt": "2026-07-08T00:26:21.803Z",
-  "updatedAt": "2026-07-16T23:32:22.696Z",
+  "updatedAt": "2026-07-31T15:47:20.938Z",
   "source": "local-json",
   "counters": {
-    "product_view": 43,
+    "product_view": 46,
     "favorite": 2,
     "favorite_click": 0,
     "whatsapp_click": 5,
-    "category_view": 58,
+    "category_view": 67,
     "share_click": 0,
     "search": 6,
-    "page_view": 161
+    "page_view": 178
   },
   "products": {
     "mini-game-portatil-400-jogos": {
       "slug": "mini-game-portatil-400-jogos",
       "name": "Mini game portátil 400 jogos",
-      "image": "images/Mini game portátil 400 jogos e controle.jpg",
-      "url": "http://localhost:3000/site/view/index.html",
-      "views": 0,
+      "image": "/images/Mini game portátil 400 jogos e controle.jpg",
+      "url": "http://localhost:3000/produto/mini-game-portatil-400-jogos/",
+      "views": 1,
       "favorites": 2,
       "whatsapp": 1,
       "shares": 0,
-      "lastAt": "2026-07-12T18:06:14.793Z"
+      "lastAt": "2026-07-24T22:43:11.215Z"
     },
     "motorola-moto-g35-5g-128gb-4gb-ram-8gb-ram-boost": {
       "slug": "motorola-moto-g35-5g-128gb-4gb-ram-8gb-ram-boost",
@@ -261,11 +261,11 @@
       "name": "Apple iPad 11 128gb - 11'' polegadas",
       "image": "/images/Ipad 11 rosa.jpeg",
       "url": "http://localhost:3000/produto/apple-ipad-11-128gb-11-polegadas/",
-      "views": 1,
+      "views": 3,
       "favorites": 0,
       "whatsapp": 0,
       "shares": 0,
-      "lastAt": "2026-07-16T23:32:22.696Z"
+      "lastAt": "2026-07-17T16:14:02.982Z"
     }
   },
   "categories": {
@@ -273,8 +273,8 @@
       "slug": "smartphones",
       "name": "smartphones",
       "url": "http://localhost:3000/smartphones/",
-      "views": 18,
-      "lastAt": "2026-07-15T18:15:33.831Z"
+      "views": 20,
+      "lastAt": "2026-07-31T00:46:20.191Z"
     },
     "assistencia-tecnica": {
       "slug": "assistencia-tecnica",
@@ -287,15 +287,15 @@
       "slug": "acessorios",
       "name": "acessorios",
       "url": "http://localhost:3000/acessorios/",
-      "views": 16,
-      "lastAt": "2026-07-16T23:26:08.706Z"
+      "views": 20,
+      "lastAt": "2026-07-31T15:47:20.937Z"
     },
     "eletronicos": {
       "slug": "eletronicos",
       "name": "eletronicos",
       "url": "http://localhost:3000/eletronicos/",
-      "views": 21,
-      "lastAt": "2026-07-16T23:32:19.326Z"
+      "views": 24,
+      "lastAt": "2026-07-31T15:47:08.015Z"
     }
   },
   "searches": {
@@ -318,13 +318,13 @@
   "pages": {
     "http://localhost:3000/site/view/index.html": {
       "url": "http://localhost:3000/site/view/index.html",
-      "views": 62,
-      "lastAt": "2026-07-16T23:25:53.229Z"
+      "views": 67,
+      "lastAt": "2026-07-31T15:46:52.409Z"
     },
     "http://localhost:3000/smartphones/": {
       "url": "http://localhost:3000/smartphones/",
-      "views": 39,
-      "lastAt": "2026-07-15T18:15:33.829Z"
+      "views": 43,
+      "lastAt": "2026-07-31T00:46:20.188Z"
     },
     "http://localhost:3000/produto/motorola-moto-g35-5g-128gb-4gb-ram-8gb-ram-boost/": {
       "url": "http://localhost:3000/produto/motorola-moto-g35-5g-128gb-4gb-ram-8gb-ram-boost/",
@@ -343,13 +343,13 @@
     },
     "http://localhost:3000/acessorios/": {
       "url": "http://localhost:3000/acessorios/",
-      "views": 32,
-      "lastAt": "2026-07-16T23:26:08.706Z"
+      "views": 40,
+      "lastAt": "2026-07-31T15:47:20.937Z"
     },
     "http://localhost:3000/eletronicos/": {
       "url": "http://localhost:3000/eletronicos/",
-      "views": 42,
-      "lastAt": "2026-07-16T23:32:19.325Z"
+      "views": 48,
+      "lastAt": "2026-07-31T15:47:08.015Z"
     },
     "http://localhost:3000/produto/microfone-lapela-celular-bluetooth-tipo-c/": {
       "url": "http://localhost:3000/produto/microfone-lapela-celular-bluetooth-tipo-c/",
@@ -448,8 +448,13 @@
     },
     "http://localhost:3000/produto/apple-ipad-11-128gb-11-polegadas/": {
       "url": "http://localhost:3000/produto/apple-ipad-11-128gb-11-polegadas/",
+      "views": 6,
+      "lastAt": "2026-07-17T16:14:02.980Z"
+    },
+    "http://localhost:3000/produto/mini-game-portatil-400-jogos/": {
+      "url": "http://localhost:3000/produto/mini-game-portatil-400-jogos/",
       "views": 2,
-      "lastAt": "2026-07-16T23:32:22.696Z"
+      "lastAt": "2026-07-24T22:43:11.214Z"
     }
   },
   "devices": {},
@@ -3634,6 +3639,344 @@
       "product": {
         "slug": "apple-ipad-11-128gb-11-polegadas",
         "name": "Apple iPad 11 128gb - 11'' polegadas"
+      },
+      "term": ""
+    },
+    {
+      "at": "2026-07-17T12:54:05.914Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/produto/apple-ipad-11-128gb-11-polegadas/",
+      "referrer": "http://localhost:3000/eletronicos/",
+      "device": "desktop",
+      "viewport": "2732x1198",
+      "language": "pt-PT",
+      "term": ""
+    },
+    {
+      "at": "2026-07-17T12:54:06.581Z",
+      "type": "product_view",
+      "url": "http://localhost:3000/produto/apple-ipad-11-128gb-11-polegadas/",
+      "referrer": "http://localhost:3000/eletronicos/",
+      "device": "desktop",
+      "viewport": "2732x1198",
+      "language": "pt-PT",
+      "product": {
+        "slug": "apple-ipad-11-128gb-11-polegadas",
+        "name": "Apple iPad 11 128gb - 11'' polegadas"
+      },
+      "term": ""
+    },
+    {
+      "at": "2026-07-17T16:14:01.616Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/produto/apple-ipad-11-128gb-11-polegadas/",
+      "referrer": "http://localhost:3000/eletronicos/",
+      "device": "desktop",
+      "viewport": "2049x898",
+      "language": "pt-PT",
+      "term": ""
+    },
+    {
+      "at": "2026-07-17T16:14:02.982Z",
+      "type": "product_view",
+      "url": "http://localhost:3000/produto/apple-ipad-11-128gb-11-polegadas/",
+      "referrer": "http://localhost:3000/eletronicos/",
+      "device": "desktop",
+      "viewport": "2049x898",
+      "language": "pt-PT",
+      "product": {
+        "slug": "apple-ipad-11-128gb-11-polegadas",
+        "name": "Apple iPad 11 128gb - 11'' polegadas"
+      },
+      "term": ""
+    },
+    {
+      "at": "2026-07-19T18:40:38.184Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/site/view/index.html",
+      "referrer": "http://localhost:3000/manutencao",
+      "device": "desktop",
+      "viewport": "2049x898",
+      "language": "pt-PT",
+      "term": ""
+    },
+    {
+      "at": "2026-07-19T18:40:42.963Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/smartphones/",
+      "referrer": "http://localhost:3000/site/view/index.html",
+      "device": "desktop",
+      "viewport": "2049x898",
+      "language": "pt-PT",
+      "term": ""
+    },
+    {
+      "at": "2026-07-19T18:40:42.972Z",
+      "type": "category_view",
+      "url": "http://localhost:3000/smartphones/",
+      "referrer": "http://localhost:3000/site/view/index.html",
+      "device": "desktop",
+      "viewport": "2049x898",
+      "language": "pt-PT",
+      "category": {
+        "slug": "smartphones",
+        "name": "smartphones"
+      },
+      "term": ""
+    },
+    {
+      "at": "2026-07-24T22:43:01.797Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/site/view/index.html",
+      "referrer": "http://localhost:3000/produtos?saved=bulk",
+      "device": "desktop",
+      "viewport": "1707x748",
+      "language": "pt-PT",
+      "term": ""
+    },
+    {
+      "at": "2026-07-24T22:43:03.456Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/eletronicos/",
+      "referrer": "http://localhost:3000/site/view/index.html",
+      "device": "desktop",
+      "viewport": "1707x748",
+      "language": "pt-PT",
+      "term": ""
+    },
+    {
+      "at": "2026-07-24T22:43:03.465Z",
+      "type": "category_view",
+      "url": "http://localhost:3000/eletronicos/",
+      "referrer": "http://localhost:3000/site/view/index.html",
+      "device": "desktop",
+      "viewport": "1707x748",
+      "language": "pt-PT",
+      "category": {
+        "slug": "eletronicos",
+        "name": "eletronicos"
+      },
+      "term": ""
+    },
+    {
+      "at": "2026-07-24T22:43:10.312Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/produto/mini-game-portatil-400-jogos/",
+      "referrer": "http://localhost:3000/eletronicos/",
+      "device": "desktop",
+      "viewport": "1707x748",
+      "language": "pt-PT",
+      "term": ""
+    },
+    {
+      "at": "2026-07-24T22:43:11.215Z",
+      "type": "product_view",
+      "url": "http://localhost:3000/produto/mini-game-portatil-400-jogos/",
+      "referrer": "http://localhost:3000/eletronicos/",
+      "device": "desktop",
+      "viewport": "1707x748",
+      "language": "pt-PT",
+      "product": {
+        "slug": "mini-game-portatil-400-jogos",
+        "name": "Mini game portátil 400 jogos"
+      },
+      "term": ""
+    },
+    {
+      "at": "2026-07-30T22:30:56.058Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/site/view/index.html",
+      "referrer": "http://localhost:3000/produtos?origem=erp",
+      "device": "desktop",
+      "viewport": "2049x898",
+      "language": "pt-PT",
+      "term": ""
+    },
+    {
+      "at": "2026-07-30T22:31:32.077Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/acessorios/",
+      "referrer": "http://localhost:3000/site/view/index.html",
+      "device": "desktop",
+      "viewport": "2049x898",
+      "language": "pt-PT",
+      "term": ""
+    },
+    {
+      "at": "2026-07-30T22:31:32.165Z",
+      "type": "category_view",
+      "url": "http://localhost:3000/acessorios/",
+      "referrer": "http://localhost:3000/site/view/index.html",
+      "device": "desktop",
+      "viewport": "2049x898",
+      "language": "pt-PT",
+      "category": {
+        "slug": "acessorios",
+        "name": "acessorios"
+      },
+      "term": ""
+    },
+    {
+      "at": "2026-07-31T00:46:11.637Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/site/view/index.html",
+      "referrer": "http://localhost:3000/produtos?origem=erp",
+      "device": "desktop",
+      "viewport": "2732x1198",
+      "language": "pt-PT",
+      "term": ""
+    },
+    {
+      "at": "2026-07-31T00:46:20.127Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/smartphones/",
+      "referrer": "http://localhost:3000/site/view/index.html",
+      "device": "desktop",
+      "viewport": "2732x1198",
+      "language": "pt-PT",
+      "term": ""
+    },
+    {
+      "at": "2026-07-31T00:46:20.191Z",
+      "type": "category_view",
+      "url": "http://localhost:3000/smartphones/",
+      "referrer": "http://localhost:3000/site/view/index.html",
+      "device": "desktop",
+      "viewport": "2732x1198",
+      "language": "pt-PT",
+      "category": {
+        "slug": "smartphones",
+        "name": "smartphones"
+      },
+      "term": ""
+    },
+    {
+      "at": "2026-07-31T00:46:23.590Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/eletronicos/",
+      "referrer": "http://localhost:3000/smartphones/",
+      "device": "desktop",
+      "viewport": "2732x1198",
+      "language": "pt-PT",
+      "term": ""
+    },
+    {
+      "at": "2026-07-31T00:46:23.662Z",
+      "type": "category_view",
+      "url": "http://localhost:3000/eletronicos/",
+      "referrer": "http://localhost:3000/smartphones/",
+      "device": "desktop",
+      "viewport": "2732x1198",
+      "language": "pt-PT",
+      "category": {
+        "slug": "eletronicos",
+        "name": "eletronicos"
+      },
+      "term": ""
+    },
+    {
+      "at": "2026-07-31T15:46:52.409Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/site/view/index.html",
+      "referrer": "http://localhost:3000/produtos?origem=erp",
+      "device": "desktop",
+      "viewport": "2049x898",
+      "language": "pt-PT",
+      "term": ""
+    },
+    {
+      "at": "2026-07-31T15:46:58.560Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/acessorios/",
+      "referrer": "http://localhost:3000/site/view/index.html",
+      "device": "desktop",
+      "viewport": "2049x898",
+      "language": "pt-PT",
+      "term": ""
+    },
+    {
+      "at": "2026-07-31T15:46:58.639Z",
+      "type": "category_view",
+      "url": "http://localhost:3000/acessorios/",
+      "referrer": "http://localhost:3000/site/view/index.html",
+      "device": "desktop",
+      "viewport": "2049x898",
+      "language": "pt-PT",
+      "category": {
+        "slug": "acessorios",
+        "name": "acessorios"
+      },
+      "term": ""
+    },
+    {
+      "at": "2026-07-31T15:47:06.147Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/acessorios/",
+      "referrer": "http://localhost:3000/acessorios/",
+      "device": "desktop",
+      "viewport": "2049x898",
+      "language": "pt-PT",
+      "term": ""
+    },
+    {
+      "at": "2026-07-31T15:47:06.226Z",
+      "type": "category_view",
+      "url": "http://localhost:3000/acessorios/",
+      "referrer": "http://localhost:3000/acessorios/",
+      "device": "desktop",
+      "viewport": "2049x898",
+      "language": "pt-PT",
+      "category": {
+        "slug": "acessorios",
+        "name": "acessorios"
+      },
+      "term": ""
+    },
+    {
+      "at": "2026-07-31T15:47:07.934Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/eletronicos/",
+      "referrer": "http://localhost:3000/acessorios/",
+      "device": "desktop",
+      "viewport": "2049x898",
+      "language": "pt-PT",
+      "term": ""
+    },
+    {
+      "at": "2026-07-31T15:47:08.015Z",
+      "type": "category_view",
+      "url": "http://localhost:3000/eletronicos/",
+      "referrer": "http://localhost:3000/acessorios/",
+      "device": "desktop",
+      "viewport": "2049x898",
+      "language": "pt-PT",
+      "category": {
+        "slug": "eletronicos",
+        "name": "eletronicos"
+      },
+      "term": ""
+    },
+    {
+      "at": "2026-07-31T15:47:20.850Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/acessorios/",
+      "referrer": "http://localhost:3000/eletronicos/",
+      "device": "desktop",
+      "viewport": "2049x898",
+      "language": "pt-PT",
+      "term": ""
+    },
+    {
+      "at": "2026-07-31T15:47:20.937Z",
+      "type": "category_view",
+      "url": "http://localhost:3000/acessorios/",
+      "referrer": "http://localhost:3000/eletronicos/",
+      "device": "desktop",
+      "viewport": "2049x898",
+      "language": "pt-PT",
+      "category": {
+        "slug": "acessorios",
+        "name": "acessorios"
       },
       "term": ""
     }

@@ -1,0 +1,2051 @@
+{
+  "version": "0.15.0",
+  "items": [
+    {
+      "id": "EVT-00000001",
+      "at": "2026-07-28T12:43:26.486Z",
+      "name": "SYSTEM_STARTED",
+      "module": "system",
+      "actor": "sistema",
+      "entityType": "",
+      "entityId": "",
+      "documentId": "",
+      "correlationId": "",
+      "data": {
+        "version": "0.15.0",
+        "port": 3000
+      }
+    },
+    {
+      "id": "EVT-00000002",
+      "at": "2026-07-28T12:56:56.490Z",
+      "name": "SYSTEM_SHUTDOWN",
+      "module": "system",
+      "actor": "sistema",
+      "entityType": "",
+      "entityId": "",
+      "documentId": "",
+      "correlationId": "",
+      "data": {
+        "signal": "SIGINT"
+      }
+    },
+    {
+      "id": "EVT-00000003",
+      "at": "2026-07-28T12:57:03.144Z",
+      "name": "SYSTEM_STARTED",
+      "module": "system",
+      "actor": "sistema",
+      "entityType": "",
+      "entityId": "",
+      "documentId": "",
+      "correlationId": "",
+      "data": {
+        "version": "0.15.0",
+        "port": 3000
+      }
+    },
+    {
+      "id": "EVT-00000004",
+      "at": "2026-07-28T13:06:36.707Z",
+      "name": "SYSTEM_SHUTDOWN",
+      "module": "system",
+      "actor": "sistema",
+      "entityType": "",
+      "entityId": "",
+      "documentId": "",
+      "correlationId": "",
+      "data": {
+        "signal": "SIGINT"
+      }
+    },
+    {
+      "id": "EVT-00000005",
+      "at": "2026-07-28T13:06:42.390Z",
+      "name": "SYSTEM_STARTED",
+      "module": "system",
+      "actor": "sistema",
+      "entityType": "",
+      "entityId": "",
+      "documentId": "",
+      "correlationId": "",
+      "data": {
+        "version": "0.15.0",
+        "port": 3000
+      }
+    },
+    {
+      "id": "EVT-00000006",
+      "at": "2026-07-28T13:35:42.307Z",
+      "name": "SYSTEM_SHUTDOWN",
+      "module": "system",
+      "actor": "sistema",
+      "entityType": "",
+      "entityId": "",
+      "documentId": "",
+      "correlationId": "",
+      "data": {
+        "signal": "SIGINT"
+      }
+    },
+    {
+      "id": "EVT-00000007",
+      "at": "2026-07-28T13:35:47.954Z",
+      "name": "SYSTEM_STARTED",
+      "module": "system",
+      "actor": "sistema",
+      "entityType": "",
+      "entityId": "",
+      "documentId": "",
+      "correlationId": "",
+      "data": {
+        "version": "0.15.2",
+        "port": 3000
+      }
+    },
+    {
+      "id": "EVT-00000008",
+      "at": "2026-07-28T14:22:01.068Z",
+      "name": "SYSTEM_SHUTDOWN",
+      "module": "system",
+      "actor": "sistema",
+      "entityType": "",
+      "entityId": "",
+      "documentId": "",
+      "correlationId": "",
+      "data": {
+        "signal": "SIGINT"
+      }
+    },
+    {
+      "id": "EVT-00000009",
+      "at": "2026-07-28T14:22:07.748Z",
+      "name": "SYSTEM_STARTED",
+      "module": "system",
+      "actor": "sistema",
+      "entityType": "",
+      "entityId": "",
+      "documentId": "",
+      "correlationId": "",
+      "data": {
+        "version": "0.15.2",
+        "port": 3000
+      }
+    },
+    {
+      "id": "EVT-00000010",
+      "at": "2026-07-28T14:27:55.583Z",
+      "name": "SYSTEM_SHUTDOWN",
+      "module": "system",
+      "actor": "sistema",
+      "entityType": "",
+      "entityId": "",
+      "documentId": "",
+      "correlationId": "",
+      "data": {
+        "signal": "SIGINT"
+      }
+    },
+    {
+      "id": "EVT-00000011",
+      "at": "2026-07-28T14:28:01.377Z",
+      "name": "SYSTEM_STARTED",
+      "module": "system",
+      "actor": "sistema",
+      "entityType": "",
+      "entityId": "",
+      "documentId": "",
+      "correlationId": "",
+      "data": {
+        "version": "0.15.2",
+        "port": 3000
+      }
+    },
+    {
+      "id": "EVT-00000012",
+      "at": "2026-07-28T14:41:03.344Z",
+      "name": "SYSTEM_SHUTDOWN",
+      "module": "system",
+      "actor": "sistema",
+      "entityType": "",
+      "entityId": "",
+      "documentId": "",
+      "correlationId": "",
+      "data": {
+        "signal": "SIGINT"
+      }
+    },
+    {
+      "id": "EVT-00000013",
+      "at": "2026-07-28T14:41:09.765Z",
+      "name": "SYSTEM_STARTED",
+      "module": "system",
+      "actor": "sistema",
+      "entityType": "",
+      "entityId": "",
+      "documentId": "",
+      "correlationId": "",
+      "data": {
+        "version": "0.15.2",
+        "port": 3000
+      }
+    },
+    {
+      "id": "EVT-00000014",
+      "at": "2026-07-28T14:45:57.972Z",
+      "name": "SYSTEM_SHUTDOWN",
+      "module": "system",
+      "actor": "sistema",
+      "entityType": "",
+      "entityId": "",
+      "documentId": "",
+      "correlationId": "",
+      "data": {
+        "signal": "SIGINT"
+      }
+    },
+    {
+      "id": "EVT-00000015",
+      "at": "2026-07-28T14:46:04.607Z",
+      "name": "SYSTEM_STARTED",
+      "module": "system",
+      "actor": "sistema",
+      "entityType": "",
+      "entityId": "",
+      "documentId": "",
+      "correlationId": "",
+      "data": {
+        "version": "0.15.2",
+        "port": 3000
+      }
+    },
+    {
+      "id": "EVT-00000016",
+      "at": "2026-07-28T14:51:25.792Z",
+      "name": "SYSTEM_SHUTDOWN",
+      "module": "system",
+      "actor": "sistema",
+      "entityType": "",
+      "entityId": "",
+      "documentId": "",
+      "correlationId": "",
+      "data": {
+        "signal": "SIGINT"
+      }
+    },
+    {
+      "id": "EVT-00000017",
+      "at": "2026-07-28T14:51:32.017Z",
+      "name": "SYSTEM_STARTED",
+      "module": "system",
+      "actor": "sistema",
+      "entityType": "",
+      "entityId": "",
+      "documentId": "",
+      "correlationId": "",
+      "data": {
+        "version": "0.15.2",
+        "port": 3000
+      }
+    },
+    {
+      "id": "EVT-00000018",
+      "at": "2026-07-28T15:40:09.402Z",
+      "name": "SYSTEM_SHUTDOWN",
+      "module": "system",
+      "actor": "sistema",
+      "entityType": "",
+      "entityId": "",
+      "documentId": "",
+      "correlationId": "",
+      "data": {
+        "signal": "SIGINT"
+      }
+    },
+    {
+      "id": "EVT-00000019",
+      "at": "2026-07-28T15:40:15.636Z",
+      "name": "SYSTEM_STARTED",
+      "module": "system",
+      "actor": "sistema",
+      "entityType": "",
+      "entityId": "",
+      "documentId": "",
+      "correlationId": "",
+      "data": {
+        "version": "0.15.2",
+        "port": 3000
+      }
+    },
+    {
+      "id": "EVT-00000020",
+      "at": "2026-07-28T16:41:23.267Z",
+      "name": "SYSTEM_SHUTDOWN",
+      "module": "system",
+      "actor": "sistema",
+      "entityType": "",
+      "entityId": "",
+      "documentId": "",
+      "correlationId": "",
+      "data": {
+        "signal": "SIGINT"
+      }
+    },
+    {
+      "id": "EVT-00000021",
+      "at": "2026-07-28T16:41:29.253Z",
+      "name": "SYSTEM_STARTED",
+      "module": "system",
+      "actor": "sistema",
+      "entityType": "",
+      "entityId": "",
+      "documentId": "",
+      "correlationId": "",
+      "data": {
+        "version": "0.15.2",
+        "port": 3000
+      }
+    },
+    {
+      "id": "EVT-00000022",
+      "at": "2026-07-28T16:46:28.969Z",
+      "name": "SYSTEM_SHUTDOWN",
+      "module": "system",
+      "actor": "sistema",
+      "entityType": "",
+      "entityId": "",
+      "documentId": "",
+      "correlationId": "",
+      "data": {
+        "signal": "SIGINT"
+      }
+    },
+    {
+      "id": "EVT-00000023",
+      "at": "2026-07-28T16:46:34.812Z",
+      "name": "SYSTEM_STARTED",
+      "module": "system",
+      "actor": "sistema",
+      "entityType": "",
+      "entityId": "",
+      "documentId": "",
+      "correlationId": "",
+      "data": {
+        "version": "0.15.2",
+        "port": 3000
+      }
+    },
+    {
+      "id": "EVT-00000024",
+      "at": "2026-07-28T17:25:05.141Z",
+      "name": "SYSTEM_SHUTDOWN",
+      "module": "system",
+      "actor": "sistema",
+      "entityType": "",
+      "entityId": "",
+      "documentId": "",
+      "correlationId": "",
+      "data": {
+        "signal": "SIGINT"
+      }
+    },
+    {
+      "id": "EVT-00000025",
+      "at": "2026-07-28T17:25:13.745Z",
+      "name": "SYSTEM_STARTED",
+      "module": "system",
+      "actor": "sistema",
+      "entityType": "",
+      "entityId": "",
+      "documentId": "",
+      "correlationId": "",
+      "data": {
+        "version": "0.15.2",
+        "port": 3000
+      }
+    },
+    {
+      "id": "EVT-00000026",
+      "at": "2026-07-28T17:46:49.589Z",
+      "name": "SYSTEM_SHUTDOWN",
+      "module": "system",
+      "actor": "sistema",
+      "entityType": "",
+      "entityId": "",
+      "documentId": "",
+      "correlationId": "",
+      "data": {
+        "signal": "SIGINT"
+      }
+    },
+    {
+      "id": "EVT-00000027",
+      "at": "2026-07-28T17:52:27.040Z",
+      "name": "SYSTEM_STARTED",
+      "module": "system",
+      "actor": "sistema",
+      "entityType": "",
+      "entityId": "",
+      "documentId": "",
+      "correlationId": "",
+      "data": {
+        "version": "0.15.2",
+        "port": 3000
+      }
+    },
+    {
+      "id": "EVT-00000028",
+      "at": "2026-07-28T18:21:37.761Z",
+      "name": "SYSTEM_SHUTDOWN",
+      "module": "system",
+      "actor": "sistema",
+      "entityType": "",
+      "entityId": "",
+      "documentId": "",
+      "correlationId": "",
+      "data": {
+        "signal": "SIGINT"
+      }
+    },
+    {
+      "id": "EVT-00000029",
+      "at": "2026-07-28T18:21:47.031Z",
+      "name": "SYSTEM_STARTED",
+      "module": "system",
+      "actor": "sistema",
+      "entityType": "",
+      "entityId": "",
+      "documentId": "",
+      "correlationId": "",
+      "data": {
+        "version": "0.15.2",
+        "port": 3000
+      }
+    },
+    {
+      "id": "EVT-00000030",
+      "at": "2026-07-28T18:22:33.276Z",
+      "name": "SYSTEM_SHUTDOWN",
+      "module": "system",
+      "actor": "sistema",
+      "entityType": "",
+      "entityId": "",
+      "documentId": "",
+      "correlationId": "",
+      "data": {
+        "signal": "SIGINT"
+      }
+    },
+    {
+      "id": "EVT-00000031",
+      "at": "2026-07-28T18:23:49.357Z",
+      "name": "SYSTEM_STARTED",
+      "module": "system",
+      "actor": "sistema",
+      "entityType": "",
+      "entityId": "",
+      "documentId": "",
+      "correlationId": "",
+      "data": {
+        "version": "0.15.2",
+        "port": 3000
+      }
+    },
+    {
+      "id": "EVT-00000032",
+      "at": "2026-07-28T18:41:24.181Z",
+      "name": "SYSTEM_SHUTDOWN",
+      "module": "system",
+      "actor": "sistema",
+      "entityType": "",
+      "entityId": "",
+      "documentId": "",
+      "correlationId": "",
+      "data": {
+        "signal": "SIGINT"
+      }
+    },
+    {
+      "id": "EVT-00000033",
+      "at": "2026-07-28T18:41:31.462Z",
+      "name": "SYSTEM_STARTED",
+      "module": "system",
+      "actor": "sistema",
+      "entityType": "",
+      "entityId": "",
+      "documentId": "",
+      "correlationId": "",
+      "data": {
+        "version": "0.15.2",
+        "port": 3000
+      }
+    },
+    {
+      "id": "EVT-00000034",
+      "at": "2026-07-28T19:30:09.380Z",
+      "name": "SYSTEM_SHUTDOWN",
+      "module": "system",
+      "actor": "sistema",
+      "entityType": "",
+      "entityId": "",
+      "documentId": "",
+      "correlationId": "",
+      "data": {
+        "signal": "SIGINT"
+      }
+    },
+    {
+      "id": "EVT-00000035",
+      "at": "2026-07-28T19:30:19.768Z",
+      "name": "SYSTEM_STARTED",
+      "module": "system",
+      "actor": "sistema",
+      "entityType": "",
+      "entityId": "",
+      "documentId": "",
+      "correlationId": "",
+      "data": {
+        "version": "0.15.2",
+        "port": 3000
+      }
+    },
+    {
+      "id": "EVT-00000036",
+      "at": "2026-07-28T19:57:23.050Z",
+      "name": "SYSTEM_SHUTDOWN",
+      "module": "system",
+      "actor": "sistema",
+      "entityType": "",
+      "entityId": "",
+      "documentId": "",
+      "correlationId": "",
+      "data": {
+        "signal": "SIGINT"
+      }
+    },
+    {
+      "id": "EVT-00000037",
+      "at": "2026-07-28T19:57:29.119Z",
+      "name": "SYSTEM_STARTED",
+      "module": "system",
+      "actor": "sistema",
+      "entityType": "",
+      "entityId": "",
+      "documentId": "",
+      "correlationId": "",
+      "data": {
+        "version": "0.15.2",
+        "port": 3000
+      }
+    },
+    {
+      "id": "EVT-00000038",
+      "at": "2026-07-28T20:54:34.701Z",
+      "name": "SYSTEM_SHUTDOWN",
+      "module": "system",
+      "actor": "sistema",
+      "entityType": "",
+      "entityId": "",
+      "documentId": "",
+      "correlationId": "",
+      "data": {
+        "signal": "SIGINT"
+      }
+    },
+    {
+      "id": "EVT-00000039",
+      "at": "2026-07-28T21:02:30.060Z",
+      "name": "SYSTEM_STARTED",
+      "module": "system",
+      "actor": "sistema",
+      "entityType": "",
+      "entityId": "",
+      "documentId": "",
+      "correlationId": "",
+      "data": {
+        "version": "0.15.2",
+        "port": 3000
+      }
+    },
+    {
+      "id": "EVT-00000040",
+      "at": "2026-07-28T22:04:29.699Z",
+      "name": "SYSTEM_SHUTDOWN",
+      "module": "system",
+      "actor": "sistema",
+      "entityType": "",
+      "entityId": "",
+      "documentId": "",
+      "correlationId": "",
+      "data": {
+        "signal": "SIGINT"
+      }
+    },
+    {
+      "id": "EVT-00000041",
+      "at": "2026-07-28T22:04:36.667Z",
+      "name": "SYSTEM_STARTED",
+      "module": "system",
+      "actor": "sistema",
+      "entityType": "",
+      "entityId": "",
+      "documentId": "",
+      "correlationId": "",
+      "data": {
+        "version": "0.15.2",
+        "port": 3000
+      }
+    },
+    {
+      "id": "EVT-00000042",
+      "at": "2026-07-28T22:21:42.478Z",
+      "name": "SYSTEM_SHUTDOWN",
+      "module": "system",
+      "actor": "sistema",
+      "entityType": "",
+      "entityId": "",
+      "documentId": "",
+      "correlationId": "",
+      "data": {
+        "signal": "SIGINT"
+      }
+    },
+    {
+      "id": "EVT-00000043",
+      "at": "2026-07-28T22:21:50.723Z",
+      "name": "SYSTEM_STARTED",
+      "module": "system",
+      "actor": "sistema",
+      "entityType": "",
+      "entityId": "",
+      "documentId": "",
+      "correlationId": "",
+      "data": {
+        "version": "0.15.2",
+        "port": 3000
+      }
+    },
+    {
+      "id": "EVT-00000044",
+      "at": "2026-07-28T22:32:17.324Z",
+      "name": "SYSTEM_SHUTDOWN",
+      "module": "system",
+      "actor": "sistema",
+      "entityType": "",
+      "entityId": "",
+      "documentId": "",
+      "correlationId": "",
+      "data": {
+        "signal": "SIGINT"
+      }
+    },
+    {
+      "id": "EVT-00000045",
+      "at": "2026-07-28T22:32:22.517Z",
+      "name": "SYSTEM_STARTED",
+      "module": "system",
+      "actor": "sistema",
+      "entityType": "",
+      "entityId": "",
+      "documentId": "",
+      "correlationId": "",
+      "data": {
+        "version": "0.15.2",
+        "port": 3000
+      }
+    },
+    {
+      "id": "EVT-00000046",
+      "at": "2026-07-28T22:50:10.338Z",
+      "name": "SYSTEM_SHUTDOWN",
+      "module": "system",
+      "actor": "sistema",
+      "entityType": "",
+      "entityId": "",
+      "documentId": "",
+      "correlationId": "",
+      "data": {
+        "signal": "SIGINT"
+      }
+    },
+    {
+      "id": "EVT-00000047",
+      "at": "2026-07-28T22:52:16.372Z",
+      "name": "SYSTEM_STARTED",
+      "module": "system",
+      "actor": "sistema",
+      "entityType": "",
+      "entityId": "",
+      "documentId": "",
+      "correlationId": "",
+      "data": {
+        "version": "0.15.2",
+        "port": 3000
+      }
+    },
+    {
+      "id": "EVT-00000048",
+      "at": "2026-07-28T22:56:44.862Z",
+      "name": "SYSTEM_SHUTDOWN",
+      "module": "system",
+      "actor": "sistema",
+      "entityType": "",
+      "entityId": "",
+      "documentId": "",
+      "correlationId": "",
+      "data": {
+        "signal": "SIGINT"
+      }
+    },
+    {
+      "id": "EVT-00000049",
+      "at": "2026-07-28T22:56:51.412Z",
+      "name": "SYSTEM_STARTED",
+      "module": "system",
+      "actor": "sistema",
+      "entityType": "",
+      "entityId": "",
+      "documentId": "",
+      "correlationId": "",
+      "data": {
+        "version": "0.15.2",
+        "port": 3000
+      }
+    },
+    {
+      "id": "EVT-00000050",
+      "at": "2026-07-28T23:03:30.711Z",
+      "name": "SYSTEM_SHUTDOWN",
+      "module": "system",
+      "actor": "sistema",
+      "entityType": "",
+      "entityId": "",
+      "documentId": "",
+      "correlationId": "",
+      "data": {
+        "signal": "SIGINT"
+      }
+    },
+    {
+      "id": "EVT-00000051",
+      "at": "2026-07-28T23:03:36.653Z",
+      "name": "SYSTEM_STARTED",
+      "module": "system",
+      "actor": "sistema",
+      "entityType": "",
+      "entityId": "",
+      "documentId": "",
+      "correlationId": "",
+      "data": {
+        "version": "0.15.2",
+        "port": 3000
+      }
+    },
+    {
+      "id": "EVT-00000052",
+      "at": "2026-07-28T23:17:29.073Z",
+      "name": "SYSTEM_SHUTDOWN",
+      "module": "system",
+      "actor": "sistema",
+      "entityType": "",
+      "entityId": "",
+      "documentId": "",
+      "correlationId": "",
+      "data": {
+        "signal": "SIGINT"
+      }
+    },
+    {
+      "id": "EVT-00000053",
+      "at": "2026-07-28T23:51:05.546Z",
+      "name": "SYSTEM_STARTED",
+      "module": "system",
+      "actor": "sistema",
+      "entityType": "",
+      "entityId": "",
+      "documentId": "",
+      "correlationId": "",
+      "data": {
+        "version": "0.15.2",
+        "port": 3000
+      }
+    },
+    {
+      "id": "EVT-00000054",
+      "at": "2026-07-29T00:08:52.479Z",
+      "name": "SYSTEM_SHUTDOWN",
+      "module": "system",
+      "actor": "sistema",
+      "entityType": "",
+      "entityId": "",
+      "documentId": "",
+      "correlationId": "",
+      "data": {
+        "signal": "SIGINT"
+      }
+    },
+    {
+      "id": "EVT-00000055",
+      "at": "2026-07-29T00:08:58.016Z",
+      "name": "SYSTEM_STARTED",
+      "module": "system",
+      "actor": "sistema",
+      "entityType": "",
+      "entityId": "",
+      "documentId": "",
+      "correlationId": "",
+      "data": {
+        "version": "0.15.2",
+        "port": 3000
+      }
+    },
+    {
+      "id": "EVT-00000056",
+      "at": "2026-07-29T00:22:23.533Z",
+      "name": "SYSTEM_SHUTDOWN",
+      "module": "system",
+      "actor": "sistema",
+      "entityType": "",
+      "entityId": "",
+      "documentId": "",
+      "correlationId": "",
+      "data": {
+        "signal": "SIGINT"
+      }
+    },
+    {
+      "id": "EVT-00000057",
+      "at": "2026-07-29T00:22:29.772Z",
+      "name": "SYSTEM_STARTED",
+      "module": "system",
+      "actor": "sistema",
+      "entityType": "",
+      "entityId": "",
+      "documentId": "",
+      "correlationId": "",
+      "data": {
+        "version": "0.15.2",
+        "port": 3000
+      }
+    },
+    {
+      "id": "EVT-00000058",
+      "at": "2026-07-29T00:25:45.982Z",
+      "name": "SYSTEM_SHUTDOWN",
+      "module": "system",
+      "actor": "sistema",
+      "entityType": "",
+      "entityId": "",
+      "documentId": "",
+      "correlationId": "",
+      "data": {
+        "signal": "SIGINT"
+      }
+    },
+    {
+      "id": "EVT-00000059",
+      "at": "2026-07-29T00:25:51.344Z",
+      "name": "SYSTEM_STARTED",
+      "module": "system",
+      "actor": "sistema",
+      "entityType": "",
+      "entityId": "",
+      "documentId": "",
+      "correlationId": "",
+      "data": {
+        "version": "0.15.2",
+        "port": 3000
+      }
+    },
+    {
+      "id": "EVT-00000060",
+      "at": "2026-07-29T00:46:14.685Z",
+      "name": "SYSTEM_SHUTDOWN",
+      "module": "system",
+      "actor": "sistema",
+      "entityType": "",
+      "entityId": "",
+      "documentId": "",
+      "correlationId": "",
+      "data": {
+        "signal": "SIGINT"
+      }
+    },
+    {
+      "id": "EVT-00000061",
+      "at": "2026-07-29T00:46:20.518Z",
+      "name": "SYSTEM_STARTED",
+      "module": "system",
+      "actor": "sistema",
+      "entityType": "",
+      "entityId": "",
+      "documentId": "",
+      "correlationId": "",
+      "data": {
+        "version": "0.15.2",
+        "port": 3000
+      }
+    },
+    {
+      "id": "EVT-00000062",
+      "at": "2026-07-29T01:05:51.790Z",
+      "name": "SYSTEM_SHUTDOWN",
+      "module": "system",
+      "actor": "sistema",
+      "entityType": "",
+      "entityId": "",
+      "documentId": "",
+      "correlationId": "",
+      "data": {
+        "signal": "SIGINT"
+      }
+    },
+    {
+      "id": "EVT-00000063",
+      "at": "2026-07-29T01:05:58.275Z",
+      "name": "SYSTEM_STARTED",
+      "module": "system",
+      "actor": "sistema",
+      "entityType": "",
+      "entityId": "",
+      "documentId": "",
+      "correlationId": "",
+      "data": {
+        "version": "0.15.2",
+        "port": 3000
+      }
+    },
+    {
+      "id": "EVT-00000064",
+      "at": "2026-07-29T01:15:15.671Z",
+      "name": "SYSTEM_SHUTDOWN",
+      "module": "system",
+      "actor": "sistema",
+      "entityType": "",
+      "entityId": "",
+      "documentId": "",
+      "correlationId": "",
+      "data": {
+        "signal": "SIGINT"
+      }
+    },
+    {
+      "id": "EVT-00000065",
+      "at": "2026-07-29T01:15:21.984Z",
+      "name": "SYSTEM_STARTED",
+      "module": "system",
+      "actor": "sistema",
+      "entityType": "",
+      "entityId": "",
+      "documentId": "",
+      "correlationId": "",
+      "data": {
+        "version": "0.15.2",
+        "port": 3000
+      }
+    },
+    {
+      "id": "EVT-00000066",
+      "at": "2026-07-29T01:30:08.227Z",
+      "name": "SYSTEM_SHUTDOWN",
+      "module": "system",
+      "actor": "sistema",
+      "entityType": "",
+      "entityId": "",
+      "documentId": "",
+      "correlationId": "",
+      "data": {
+        "signal": "SIGINT"
+      }
+    },
+    {
+      "id": "EVT-00000067",
+      "at": "2026-07-29T01:30:14.242Z",
+      "name": "SYSTEM_STARTED",
+      "module": "system",
+      "actor": "sistema",
+      "entityType": "",
+      "entityId": "",
+      "documentId": "",
+      "correlationId": "",
+      "data": {
+        "version": "0.15.2",
+        "port": 3000
+      }
+    },
+    {
+      "id": "EVT-00000068",
+      "at": "2026-07-29T01:37:48.897Z",
+      "name": "SYSTEM_SHUTDOWN",
+      "module": "system",
+      "actor": "sistema",
+      "entityType": "",
+      "entityId": "",
+      "documentId": "",
+      "correlationId": "",
+      "data": {
+        "signal": "SIGINT"
+      }
+    },
+    {
+      "id": "EVT-00000069",
+      "at": "2026-07-29T01:53:56.726Z",
+      "name": "SYSTEM_STARTED",
+      "module": "system",
+      "actor": "sistema",
+      "entityType": "",
+      "entityId": "",
+      "documentId": "",
+      "correlationId": "",
+      "data": {
+        "version": "0.15.2",
+        "port": 3000
+      }
+    },
+    {
+      "id": "EVT-00000070",
+      "at": "2026-07-29T01:58:50.617Z",
+      "name": "SYSTEM_SHUTDOWN",
+      "module": "system",
+      "actor": "sistema",
+      "entityType": "",
+      "entityId": "",
+      "documentId": "",
+      "correlationId": "",
+      "data": {
+        "signal": "SIGINT"
+      }
+    },
+    {
+      "id": "EVT-00000071",
+      "at": "2026-07-29T01:58:56.922Z",
+      "name": "SYSTEM_STARTED",
+      "module": "system",
+      "actor": "sistema",
+      "entityType": "",
+      "entityId": "",
+      "documentId": "",
+      "correlationId": "",
+      "data": {
+        "version": "0.15.2",
+        "port": 3000
+      }
+    },
+    {
+      "id": "EVT-00000072",
+      "at": "2026-07-29T02:04:18.103Z",
+      "name": "SYSTEM_SHUTDOWN",
+      "module": "system",
+      "actor": "sistema",
+      "entityType": "",
+      "entityId": "",
+      "documentId": "",
+      "correlationId": "",
+      "data": {
+        "signal": "SIGINT"
+      }
+    },
+    {
+      "id": "EVT-00000073",
+      "at": "2026-07-29T02:04:24.712Z",
+      "name": "SYSTEM_STARTED",
+      "module": "system",
+      "actor": "sistema",
+      "entityType": "",
+      "entityId": "",
+      "documentId": "",
+      "correlationId": "",
+      "data": {
+        "version": "0.15.2",
+        "port": 3000
+      }
+    },
+    {
+      "id": "EVT-00000074",
+      "at": "2026-07-29T02:08:12.917Z",
+      "name": "SYSTEM_SHUTDOWN",
+      "module": "system",
+      "actor": "sistema",
+      "entityType": "",
+      "entityId": "",
+      "documentId": "",
+      "correlationId": "",
+      "data": {
+        "signal": "SIGINT"
+      }
+    },
+    {
+      "id": "EVT-00000075",
+      "at": "2026-07-29T10:24:12.173Z",
+      "name": "SYSTEM_STARTED",
+      "module": "system",
+      "actor": "sistema",
+      "entityType": "",
+      "entityId": "",
+      "documentId": "",
+      "correlationId": "",
+      "data": {
+        "version": "0.15.2",
+        "port": 3000
+      }
+    },
+    {
+      "id": "EVT-00000076",
+      "at": "2026-07-29T10:41:09.010Z",
+      "name": "SYSTEM_SHUTDOWN",
+      "module": "system",
+      "actor": "sistema",
+      "entityType": "",
+      "entityId": "",
+      "documentId": "",
+      "correlationId": "",
+      "data": {
+        "signal": "SIGINT"
+      }
+    },
+    {
+      "id": "EVT-00000077",
+      "at": "2026-07-29T10:43:16.152Z",
+      "name": "SYSTEM_STARTED",
+      "module": "system",
+      "actor": "sistema",
+      "entityType": "",
+      "entityId": "",
+      "documentId": "",
+      "correlationId": "",
+      "data": {
+        "version": "0.15.2",
+        "port": 3000
+      }
+    },
+    {
+      "id": "EVT-00000078",
+      "at": "2026-07-29T11:58:25.754Z",
+      "name": "SYSTEM_SHUTDOWN",
+      "module": "system",
+      "actor": "sistema",
+      "entityType": "",
+      "entityId": "",
+      "documentId": "",
+      "correlationId": "",
+      "data": {
+        "signal": "SIGINT"
+      }
+    },
+    {
+      "id": "EVT-00000079",
+      "at": "2026-07-29T11:58:32.285Z",
+      "name": "SYSTEM_STARTED",
+      "module": "system",
+      "actor": "sistema",
+      "entityType": "",
+      "entityId": "",
+      "documentId": "",
+      "correlationId": "",
+      "data": {
+        "version": "0.15.2",
+        "port": 3000
+      }
+    },
+    {
+      "id": "EVT-00000080",
+      "at": "2026-07-29T12:58:50.712Z",
+      "name": "SYSTEM_SHUTDOWN",
+      "module": "system",
+      "actor": "sistema",
+      "entityType": "",
+      "entityId": "",
+      "documentId": "",
+      "correlationId": "",
+      "data": {
+        "signal": "SIGINT"
+      }
+    },
+    {
+      "id": "EVT-00000081",
+      "at": "2026-07-29T12:59:00.546Z",
+      "name": "SYSTEM_STARTED",
+      "module": "system",
+      "actor": "sistema",
+      "entityType": "",
+      "entityId": "",
+      "documentId": "",
+      "correlationId": "",
+      "data": {
+        "version": "0.15.2",
+        "port": 3000
+      }
+    },
+    {
+      "id": "EVT-00000082",
+      "at": "2026-07-29T13:15:38.069Z",
+      "name": "SYSTEM_SHUTDOWN",
+      "module": "system",
+      "actor": "sistema",
+      "entityType": "",
+      "entityId": "",
+      "documentId": "",
+      "correlationId": "",
+      "data": {
+        "signal": "SIGINT"
+      }
+    },
+    {
+      "id": "EVT-00000083",
+      "at": "2026-07-29T13:15:44.685Z",
+      "name": "SYSTEM_STARTED",
+      "module": "system",
+      "actor": "sistema",
+      "entityType": "",
+      "entityId": "",
+      "documentId": "",
+      "correlationId": "",
+      "data": {
+        "version": "0.15.2",
+        "port": 3000
+      }
+    },
+    {
+      "id": "EVT-00000084",
+      "at": "2026-07-29T13:23:50.459Z",
+      "name": "SYSTEM_SHUTDOWN",
+      "module": "system",
+      "actor": "sistema",
+      "entityType": "",
+      "entityId": "",
+      "documentId": "",
+      "correlationId": "",
+      "data": {
+        "signal": "SIGINT"
+      }
+    },
+    {
+      "id": "EVT-00000085",
+      "at": "2026-07-29T13:23:55.790Z",
+      "name": "SYSTEM_STARTED",
+      "module": "system",
+      "actor": "sistema",
+      "entityType": "",
+      "entityId": "",
+      "documentId": "",
+      "correlationId": "",
+      "data": {
+        "version": "0.15.2",
+        "port": 3000
+      }
+    },
+    {
+      "id": "EVT-00000086",
+      "at": "2026-07-29T13:44:21.192Z",
+      "name": "SYSTEM_SHUTDOWN",
+      "module": "system",
+      "actor": "sistema",
+      "entityType": "",
+      "entityId": "",
+      "documentId": "",
+      "correlationId": "",
+      "data": {
+        "signal": "SIGINT"
+      }
+    },
+    {
+      "id": "EVT-00000087",
+      "at": "2026-07-29T13:44:27.449Z",
+      "name": "SYSTEM_STARTED",
+      "module": "system",
+      "actor": "sistema",
+      "entityType": "",
+      "entityId": "",
+      "documentId": "",
+      "correlationId": "",
+      "data": {
+        "version": "0.15.2",
+        "port": 3000
+      }
+    },
+    {
+      "id": "EVT-00000088",
+      "at": "2026-07-29T15:01:58.716Z",
+      "name": "SYSTEM_SHUTDOWN",
+      "module": "system",
+      "actor": "sistema",
+      "entityType": "",
+      "entityId": "",
+      "documentId": "",
+      "correlationId": "",
+      "data": {
+        "signal": "SIGINT"
+      }
+    },
+    {
+      "id": "EVT-00000089",
+      "at": "2026-07-29T15:02:09.002Z",
+      "name": "SYSTEM_STARTED",
+      "module": "system",
+      "actor": "sistema",
+      "entityType": "",
+      "entityId": "",
+      "documentId": "",
+      "correlationId": "",
+      "data": {
+        "version": "0.15.2",
+        "port": 3000
+      }
+    },
+    {
+      "id": "EVT-00000090",
+      "at": "2026-07-29T19:28:18.223Z",
+      "name": "SYSTEM_SHUTDOWN",
+      "module": "system",
+      "actor": "sistema",
+      "entityType": "",
+      "entityId": "",
+      "documentId": "",
+      "correlationId": "",
+      "data": {
+        "signal": "SIGINT"
+      }
+    },
+    {
+      "id": "EVT-00000091",
+      "at": "2026-07-29T23:00:55.293Z",
+      "name": "SYSTEM_STARTED",
+      "module": "system",
+      "actor": "sistema",
+      "entityType": "",
+      "entityId": "",
+      "documentId": "",
+      "correlationId": "",
+      "data": {
+        "version": "0.15.2",
+        "port": 3000
+      }
+    },
+    {
+      "id": "EVT-00000092",
+      "at": "2026-07-30T01:39:18.908Z",
+      "name": "SYSTEM_SHUTDOWN",
+      "module": "system",
+      "actor": "sistema",
+      "entityType": "",
+      "entityId": "",
+      "documentId": "",
+      "correlationId": "",
+      "data": {
+        "signal": "SIGINT"
+      }
+    },
+    {
+      "id": "EVT-00000093",
+      "at": "2026-07-30T01:40:28.465Z",
+      "name": "SYSTEM_STARTED",
+      "module": "system",
+      "actor": "sistema",
+      "entityType": "",
+      "entityId": "",
+      "documentId": "",
+      "correlationId": "",
+      "data": {
+        "version": "0.15.2",
+        "port": 3000
+      }
+    },
+    {
+      "id": "EVT-00000094",
+      "at": "2026-07-30T01:52:46.492Z",
+      "name": "SYSTEM_SHUTDOWN",
+      "module": "system",
+      "actor": "sistema",
+      "entityType": "",
+      "entityId": "",
+      "documentId": "",
+      "correlationId": "",
+      "data": {
+        "signal": "SIGINT"
+      }
+    },
+    {
+      "id": "EVT-00000095",
+      "at": "2026-07-30T01:52:53.132Z",
+      "name": "SYSTEM_STARTED",
+      "module": "system",
+      "actor": "sistema",
+      "entityType": "",
+      "entityId": "",
+      "documentId": "",
+      "correlationId": "",
+      "data": {
+        "version": "0.15.2",
+        "port": 3000
+      }
+    },
+    {
+      "id": "EVT-00000096",
+      "at": "2026-07-30T02:10:48.278Z",
+      "name": "SYSTEM_SHUTDOWN",
+      "module": "system",
+      "actor": "sistema",
+      "entityType": "",
+      "entityId": "",
+      "documentId": "",
+      "correlationId": "",
+      "data": {
+        "signal": "SIGINT"
+      }
+    },
+    {
+      "id": "EVT-00000097",
+      "at": "2026-07-30T02:10:54.994Z",
+      "name": "SYSTEM_STARTED",
+      "module": "system",
+      "actor": "sistema",
+      "entityType": "",
+      "entityId": "",
+      "documentId": "",
+      "correlationId": "",
+      "data": {
+        "version": "0.15.2",
+        "port": 3000
+      }
+    },
+    {
+      "id": "EVT-00000098",
+      "at": "2026-07-30T02:55:52.961Z",
+      "name": "SYSTEM_SHUTDOWN",
+      "module": "system",
+      "actor": "sistema",
+      "entityType": "",
+      "entityId": "",
+      "documentId": "",
+      "correlationId": "",
+      "data": {
+        "signal": "SIGINT"
+      }
+    },
+    {
+      "id": "EVT-00000099",
+      "at": "2026-07-30T02:55:58.735Z",
+      "name": "SYSTEM_STARTED",
+      "module": "system",
+      "actor": "sistema",
+      "entityType": "",
+      "entityId": "",
+      "documentId": "",
+      "correlationId": "",
+      "data": {
+        "version": "0.15.2",
+        "port": 3000
+      }
+    },
+    {
+      "id": "EVT-00000100",
+      "at": "2026-07-30T03:04:55.116Z",
+      "name": "SYSTEM_SHUTDOWN",
+      "module": "system",
+      "actor": "sistema",
+      "entityType": "",
+      "entityId": "",
+      "documentId": "",
+      "correlationId": "",
+      "data": {
+        "signal": "SIGINT"
+      }
+    },
+    {
+      "id": "EVT-00000101",
+      "at": "2026-07-30T03:05:00.420Z",
+      "name": "SYSTEM_STARTED",
+      "module": "system",
+      "actor": "sistema",
+      "entityType": "",
+      "entityId": "",
+      "documentId": "",
+      "correlationId": "",
+      "data": {
+        "version": "0.15.2",
+        "port": 3000
+      }
+    },
+    {
+      "id": "EVT-00000102",
+      "at": "2026-07-30T03:06:34.341Z",
+      "name": "SYSTEM_SHUTDOWN",
+      "module": "system",
+      "actor": "sistema",
+      "entityType": "",
+      "entityId": "",
+      "documentId": "",
+      "correlationId": "",
+      "data": {
+        "signal": "SIGINT"
+      }
+    },
+    {
+      "id": "EVT-00000103",
+      "at": "2026-07-30T03:06:55.514Z",
+      "name": "SYSTEM_STARTED",
+      "module": "system",
+      "actor": "sistema",
+      "entityType": "",
+      "entityId": "",
+      "documentId": "",
+      "correlationId": "",
+      "data": {
+        "version": "0.15.2",
+        "port": 3000
+      }
+    },
+    {
+      "id": "EVT-00000104",
+      "at": "2026-07-30T10:34:07.703Z",
+      "name": "SYSTEM_SHUTDOWN",
+      "module": "system",
+      "actor": "sistema",
+      "entityType": "",
+      "entityId": "",
+      "documentId": "",
+      "correlationId": "",
+      "data": {
+        "signal": "SIGINT"
+      }
+    },
+    {
+      "id": "EVT-00000105",
+      "at": "2026-07-30T10:34:14.449Z",
+      "name": "SYSTEM_STARTED",
+      "module": "system",
+      "actor": "sistema",
+      "entityType": "",
+      "entityId": "",
+      "documentId": "",
+      "correlationId": "",
+      "data": {
+        "version": "0.15.2",
+        "port": 3000
+      }
+    },
+    {
+      "id": "EVT-00000106",
+      "at": "2026-07-30T12:56:27.070Z",
+      "name": "SYSTEM_SHUTDOWN",
+      "module": "system",
+      "actor": "sistema",
+      "entityType": "",
+      "entityId": "",
+      "documentId": "",
+      "correlationId": "",
+      "data": {
+        "signal": "SIGINT"
+      }
+    },
+    {
+      "id": "EVT-00000107",
+      "at": "2026-07-30T12:56:39.008Z",
+      "name": "SYSTEM_STARTED",
+      "module": "system",
+      "actor": "sistema",
+      "entityType": "",
+      "entityId": "",
+      "documentId": "",
+      "correlationId": "",
+      "data": {
+        "version": "0.15.2",
+        "port": 3000
+      }
+    },
+    {
+      "id": "EVT-00000108",
+      "at": "2026-07-30T13:17:00.294Z",
+      "name": "SYSTEM_SHUTDOWN",
+      "module": "system",
+      "actor": "sistema",
+      "entityType": "",
+      "entityId": "",
+      "documentId": "",
+      "correlationId": "",
+      "data": {
+        "signal": "SIGINT"
+      }
+    },
+    {
+      "id": "EVT-00000109",
+      "at": "2026-07-30T13:17:06.744Z",
+      "name": "SYSTEM_STARTED",
+      "module": "system",
+      "actor": "sistema",
+      "entityType": "",
+      "entityId": "",
+      "documentId": "",
+      "correlationId": "",
+      "data": {
+        "version": "0.15.2",
+        "port": 3000
+      }
+    },
+    {
+      "id": "EVT-00000110",
+      "at": "2026-07-30T13:28:06.147Z",
+      "name": "SYSTEM_SHUTDOWN",
+      "module": "system",
+      "actor": "sistema",
+      "entityType": "",
+      "entityId": "",
+      "documentId": "",
+      "correlationId": "",
+      "data": {
+        "signal": "SIGINT"
+      }
+    },
+    {
+      "id": "EVT-00000111",
+      "at": "2026-07-30T13:28:11.924Z",
+      "name": "SYSTEM_STARTED",
+      "module": "system",
+      "actor": "sistema",
+      "entityType": "",
+      "entityId": "",
+      "documentId": "",
+      "correlationId": "",
+      "data": {
+        "version": "0.15.2",
+        "port": 3000
+      }
+    },
+    {
+      "id": "EVT-00000112",
+      "at": "2026-07-30T13:36:45.321Z",
+      "name": "SYSTEM_SHUTDOWN",
+      "module": "system",
+      "actor": "sistema",
+      "entityType": "",
+      "entityId": "",
+      "documentId": "",
+      "correlationId": "",
+      "data": {
+        "signal": "SIGINT"
+      }
+    },
+    {
+      "id": "EVT-00000113",
+      "at": "2026-07-30T13:36:50.798Z",
+      "name": "SYSTEM_STARTED",
+      "module": "system",
+      "actor": "sistema",
+      "entityType": "",
+      "entityId": "",
+      "documentId": "",
+      "correlationId": "",
+      "data": {
+        "version": "0.15.2",
+        "port": 3000
+      }
+    },
+    {
+      "id": "EVT-00000114",
+      "at": "2026-07-30T15:46:10.736Z",
+      "name": "SYSTEM_SHUTDOWN",
+      "module": "system",
+      "actor": "sistema",
+      "entityType": "",
+      "entityId": "",
+      "documentId": "",
+      "correlationId": "",
+      "data": {
+        "signal": "SIGINT"
+      }
+    },
+    {
+      "id": "EVT-00000115",
+      "at": "2026-07-30T15:46:21.049Z",
+      "name": "SYSTEM_STARTED",
+      "module": "system",
+      "actor": "sistema",
+      "entityType": "",
+      "entityId": "",
+      "documentId": "",
+      "correlationId": "",
+      "data": {
+        "version": "0.15.2",
+        "port": 3000
+      }
+    },
+    {
+      "id": "EVT-00000116",
+      "at": "2026-07-30T16:10:42.963Z",
+      "name": "SYSTEM_SHUTDOWN",
+      "module": "system",
+      "actor": "sistema",
+      "entityType": "",
+      "entityId": "",
+      "documentId": "",
+      "correlationId": "",
+      "data": {
+        "signal": "SIGINT"
+      }
+    },
+    {
+      "id": "EVT-00000117",
+      "at": "2026-07-30T16:10:49.287Z",
+      "name": "SYSTEM_STARTED",
+      "module": "system",
+      "actor": "sistema",
+      "entityType": "",
+      "entityId": "",
+      "documentId": "",
+      "correlationId": "",
+      "data": {
+        "version": "0.15.2",
+        "port": 3000
+      }
+    },
+    {
+      "id": "EVT-00000118",
+      "at": "2026-07-30T16:37:10.533Z",
+      "name": "SYSTEM_SHUTDOWN",
+      "module": "system",
+      "actor": "sistema",
+      "entityType": "",
+      "entityId": "",
+      "documentId": "",
+      "correlationId": "",
+      "data": {
+        "signal": "SIGINT"
+      }
+    },
+    {
+      "id": "EVT-00000119",
+      "at": "2026-07-30T16:37:17.176Z",
+      "name": "SYSTEM_STARTED",
+      "module": "system",
+      "actor": "sistema",
+      "entityType": "",
+      "entityId": "",
+      "documentId": "",
+      "correlationId": "",
+      "data": {
+        "version": "0.15.2",
+        "port": 3000
+      }
+    },
+    {
+      "id": "EVT-00000120",
+      "at": "2026-07-30T17:36:14.591Z",
+      "name": "SYSTEM_SHUTDOWN",
+      "module": "system",
+      "actor": "sistema",
+      "entityType": "",
+      "entityId": "",
+      "documentId": "",
+      "correlationId": "",
+      "data": {
+        "signal": "SIGINT"
+      }
+    },
+    {
+      "id": "EVT-00000121",
+      "at": "2026-07-30T17:36:20.638Z",
+      "name": "SYSTEM_STARTED",
+      "module": "system",
+      "actor": "sistema",
+      "entityType": "",
+      "entityId": "",
+      "documentId": "",
+      "correlationId": "",
+      "data": {
+        "version": "0.15.2",
+        "port": 3000
+      }
+    },
+    {
+      "id": "EVT-00000122",
+      "at": "2026-07-30T18:26:36.660Z",
+      "name": "SYSTEM_SHUTDOWN",
+      "module": "system",
+      "actor": "sistema",
+      "entityType": "",
+      "entityId": "",
+      "documentId": "",
+      "correlationId": "",
+      "data": {
+        "signal": "SIGINT"
+      }
+    },
+    {
+      "id": "EVT-00000123",
+      "at": "2026-07-30T18:26:42.610Z",
+      "name": "SYSTEM_STARTED",
+      "module": "system",
+      "actor": "sistema",
+      "entityType": "",
+      "entityId": "",
+      "documentId": "",
+      "correlationId": "",
+      "data": {
+        "version": "0.15.2",
+        "port": 3000
+      }
+    },
+    {
+      "id": "EVT-00000124",
+      "at": "2026-07-30T22:04:10.693Z",
+      "name": "SYSTEM_SHUTDOWN",
+      "module": "system",
+      "actor": "sistema",
+      "entityType": "",
+      "entityId": "",
+      "documentId": "",
+      "correlationId": "",
+      "data": {
+        "signal": "SIGINT"
+      }
+    },
+    {
+      "id": "EVT-00000125",
+      "at": "2026-07-30T22:04:21.423Z",
+      "name": "SYSTEM_STARTED",
+      "module": "system",
+      "actor": "sistema",
+      "entityType": "",
+      "entityId": "",
+      "documentId": "",
+      "correlationId": "",
+      "data": {
+        "version": "0.15.2",
+        "port": 3000
+      }
+    },
+    {
+      "id": "EVT-00000126",
+      "at": "2026-07-30T22:36:31.711Z",
+      "name": "SYSTEM_SHUTDOWN",
+      "module": "system",
+      "actor": "sistema",
+      "entityType": "",
+      "entityId": "",
+      "documentId": "",
+      "correlationId": "",
+      "data": {
+        "signal": "SIGINT"
+      }
+    },
+    {
+      "id": "EVT-00000127",
+      "at": "2026-07-30T22:36:38.662Z",
+      "name": "SYSTEM_STARTED",
+      "module": "system",
+      "actor": "sistema",
+      "entityType": "",
+      "entityId": "",
+      "documentId": "",
+      "correlationId": "",
+      "data": {
+        "version": "0.15.2",
+        "port": 3000
+      }
+    },
+    {
+      "id": "EVT-00000128",
+      "at": "2026-07-30T23:19:02.678Z",
+      "name": "SYSTEM_SHUTDOWN",
+      "module": "system",
+      "actor": "sistema",
+      "entityType": "",
+      "entityId": "",
+      "documentId": "",
+      "correlationId": "",
+      "data": {
+        "signal": "SIGINT"
+      }
+    },
+    {
+      "id": "EVT-00000129",
+      "at": "2026-07-30T23:19:13.931Z",
+      "name": "SYSTEM_STARTED",
+      "module": "system",
+      "actor": "sistema",
+      "entityType": "",
+      "entityId": "",
+      "documentId": "",
+      "correlationId": "",
+      "data": {
+        "version": "0.15.2",
+        "port": 3000
+      }
+    },
+    {
+      "id": "EVT-00000130",
+      "at": "2026-07-31T00:42:57.062Z",
+      "name": "SYSTEM_SHUTDOWN",
+      "module": "system",
+      "actor": "sistema",
+      "entityType": "",
+      "entityId": "",
+      "documentId": "",
+      "correlationId": "",
+      "data": {
+        "signal": "SIGINT"
+      }
+    },
+    {
+      "id": "EVT-00000131",
+      "at": "2026-07-31T00:43:03.509Z",
+      "name": "SYSTEM_STARTED",
+      "module": "system",
+      "actor": "sistema",
+      "entityType": "",
+      "entityId": "",
+      "documentId": "",
+      "correlationId": "",
+      "data": {
+        "version": "0.15.2",
+        "port": 3000
+      }
+    },
+    {
+      "id": "EVT-00000132",
+      "at": "2026-07-31T09:42:46.124Z",
+      "name": "SYSTEM_SHUTDOWN",
+      "module": "system",
+      "actor": "sistema",
+      "entityType": "",
+      "entityId": "",
+      "documentId": "",
+      "correlationId": "",
+      "data": {
+        "signal": "SIGINT"
+      }
+    },
+    {
+      "id": "EVT-00000133",
+      "at": "2026-07-31T09:42:52.901Z",
+      "name": "SYSTEM_STARTED",
+      "module": "system",
+      "actor": "sistema",
+      "entityType": "",
+      "entityId": "",
+      "documentId": "",
+      "correlationId": "",
+      "data": {
+        "version": "0.15.2",
+        "port": 3000
+      }
+    },
+    {
+      "id": "EVT-00000134",
+      "at": "2026-07-31T09:55:41.744Z",
+      "name": "SYSTEM_SHUTDOWN",
+      "module": "system",
+      "actor": "sistema",
+      "entityType": "",
+      "entityId": "",
+      "documentId": "",
+      "correlationId": "",
+      "data": {
+        "signal": "SIGINT"
+      }
+    },
+    {
+      "id": "EVT-00000135",
+      "at": "2026-07-31T10:36:57.971Z",
+      "name": "SYSTEM_STARTED",
+      "module": "system",
+      "actor": "sistema",
+      "entityType": "",
+      "entityId": "",
+      "documentId": "",
+      "correlationId": "",
+      "data": {
+        "version": "0.15.2",
+        "port": 3000
+      }
+    },
+    {
+      "id": "EVT-00000136",
+      "at": "2026-07-31T13:56:24.175Z",
+      "name": "SYSTEM_SHUTDOWN",
+      "module": "system",
+      "actor": "sistema",
+      "entityType": "",
+      "entityId": "",
+      "documentId": "",
+      "correlationId": "",
+      "data": {
+        "signal": "SIGINT"
+      }
+    },
+    {
+      "id": "EVT-00000137",
+      "at": "2026-07-31T13:56:35.920Z",
+      "name": "SYSTEM_STARTED",
+      "module": "system",
+      "actor": "sistema",
+      "entityType": "",
+      "entityId": "",
+      "documentId": "",
+      "correlationId": "",
+      "data": {
+        "version": "0.15.2",
+        "port": 3000
+      }
+    },
+    {
+      "id": "EVT-00000138",
+      "at": "2026-07-31T15:36:50.318Z",
+      "name": "SYSTEM_SHUTDOWN",
+      "module": "system",
+      "actor": "sistema",
+      "entityType": "",
+      "entityId": "",
+      "documentId": "",
+      "correlationId": "",
+      "data": {
+        "signal": "SIGINT"
+      }
+    },
+    {
+      "id": "EVT-00000139",
+      "at": "2026-07-31T15:36:56.916Z",
+      "name": "SYSTEM_STARTED",
+      "module": "system",
+      "actor": "sistema",
+      "entityType": "",
+      "entityId": "",
+      "documentId": "",
+      "correlationId": "",
+      "data": {
+        "version": "0.15.2",
+        "port": 3000
+      }
+    },
+    {
+      "id": "EVT-00000140",
+      "at": "2026-07-31T15:42:29.300Z",
+      "name": "SYSTEM_SHUTDOWN",
+      "module": "system",
+      "actor": "sistema",
+      "entityType": "",
+      "entityId": "",
+      "documentId": "",
+      "correlationId": "",
+      "data": {
+        "signal": "SIGINT"
+      }
+    },
+    {
+      "id": "EVT-00000141",
+      "at": "2026-07-31T15:42:35.021Z",
+      "name": "SYSTEM_STARTED",
+      "module": "system",
+      "actor": "sistema",
+      "entityType": "",
+      "entityId": "",
+      "documentId": "",
+      "correlationId": "",
+      "data": {
+        "version": "0.15.2",
+        "port": 3000
+      }
+    }
+  ],
+  "updatedAt": "2026-07-31T15:42:35.023Z"
+}

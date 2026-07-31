@@ -1,0 +1,4255 @@
+{
+  "version": "0.13.3",
+  "nextNumber": 24,
+  "items": [
+    {
+      "id": "OP-1785195329360-IV3TQ",
+      "number": 1,
+      "type": "sale",
+      "status": "finalized",
+      "version": 11,
+      "createdAt": "2026-07-27T23:35:29.360Z",
+      "createdBy": "painel",
+      "dates": {
+        "openedAt": "2026-07-27T23:35:29.360Z",
+        "updatedAt": "2026-07-28T15:43:18.922Z",
+        "finalizedAt": "2026-07-28T15:43:18.922Z",
+        "cancelledAt": null
+      },
+      "operationalStatus": "completed",
+      "financialStatus": "paid",
+      "timeline": [
+        {
+          "id": "EVT-1785195329360-48M6K",
+          "type": "created",
+          "label": "Operação criada",
+          "at": "2026-07-27T23:35:29.360Z",
+          "actor": "painel"
+        },
+        {
+          "id": "EVT-1785195486788-LX29U",
+          "type": "updated",
+          "label": "Operação atualizada: Pagamentos",
+          "at": "2026-07-27T23:38:06.788Z",
+          "actor": "painel",
+          "details": {
+            "version": 2
+          }
+        },
+        {
+          "id": "EVT-1785195581541-XYJJT",
+          "type": "updated",
+          "label": "Operação atualizada: Observação, Pagamentos",
+          "at": "2026-07-27T23:39:41.541Z",
+          "actor": "painel",
+          "details": {
+            "version": 3
+          }
+        },
+        {
+          "id": "EVT-1785195607441-Y8QEG",
+          "type": "updated",
+          "label": "Operação atualizada: Tipo, Dados da O.S.",
+          "at": "2026-07-27T23:40:07.441Z",
+          "actor": "painel",
+          "details": {
+            "version": 4
+          }
+        },
+        {
+          "id": "EVT-1785195732990-SBEED",
+          "type": "attachment_added",
+          "label": "Foto adicionada à O.S.: ChatGPT Image 27 de jul. de 2026, 17_21_12.png",
+          "at": "2026-07-27T23:42:12.990Z",
+          "actor": "painel",
+          "details": {
+            "attachmentId": "ATT-1785195732975-98T5J",
+            "kind": "checkin",
+            "size": 125480
+          }
+        },
+        {
+          "id": "EVT-1785195740566-SN462",
+          "type": "updated",
+          "label": "Operação atualizada: Dados da O.S.",
+          "at": "2026-07-27T23:42:20.566Z",
+          "actor": "painel",
+          "details": {
+            "version": 6
+          }
+        },
+        {
+          "id": "EVT-1785195753688-C56LB",
+          "type": "updated",
+          "label": "Operação atualizada: Dados da O.S.",
+          "at": "2026-07-27T23:42:33.688Z",
+          "actor": "painel",
+          "details": {
+            "version": 7
+          }
+        },
+        {
+          "id": "EVT-1785196025445-0GJV6",
+          "type": "updated",
+          "label": "Operação atualizada: Tipo, Pagamentos",
+          "at": "2026-07-27T23:47:05.445Z",
+          "actor": "painel",
+          "details": {
+            "version": 8
+          }
+        },
+        {
+          "id": "EVT-1785253398879-8U8M2",
+          "type": "updated",
+          "label": "Operação atualizada: Itens, Pagamentos",
+          "at": "2026-07-28T15:43:18.879Z",
+          "actor": "painel",
+          "details": {
+            "version": 9
+          }
+        },
+        {
+          "id": "EVT-1785253398916-X0A7S",
+          "type": "posted",
+          "label": "Estoque e caixa processados",
+          "at": "2026-07-28T15:43:18.916Z",
+          "actor": "painel"
+        },
+        {
+          "id": "EVT-1785253398922-UV4IW",
+          "type": "finalized",
+          "label": "Operação finalizada com pagamento integral",
+          "at": "2026-07-28T15:43:18.922Z",
+          "actor": "painel",
+          "details": {
+            "status": "finalized",
+            "financialStatus": "paid",
+            "total": 2,
+            "amountPaid": 2,
+            "change": 0
+          }
+        }
+      ],
+      "audit": [
+        {
+          "id": "EVT-1785195329360-48M6K",
+          "type": "created",
+          "label": "Operação criada",
+          "at": "2026-07-27T23:35:29.360Z",
+          "actor": "painel"
+        },
+        {
+          "id": "EVT-1785195486788-LX29U",
+          "type": "updated",
+          "label": "Operação atualizada: Pagamentos",
+          "at": "2026-07-27T23:38:06.788Z",
+          "actor": "painel",
+          "details": {
+            "version": 2
+          }
+        },
+        {
+          "id": "EVT-1785195581541-XYJJT",
+          "type": "updated",
+          "label": "Operação atualizada: Observação, Pagamentos",
+          "at": "2026-07-27T23:39:41.541Z",
+          "actor": "painel",
+          "details": {
+            "version": 3
+          }
+        },
+        {
+          "id": "EVT-1785195607441-Y8QEG",
+          "type": "updated",
+          "label": "Operação atualizada: Tipo, Dados da O.S.",
+          "at": "2026-07-27T23:40:07.441Z",
+          "actor": "painel",
+          "details": {
+            "version": 4
+          }
+        },
+        {
+          "id": "EVT-1785195732990-SBEED",
+          "type": "attachment_added",
+          "label": "Foto adicionada à O.S.: ChatGPT Image 27 de jul. de 2026, 17_21_12.png",
+          "at": "2026-07-27T23:42:12.990Z",
+          "actor": "painel",
+          "details": {
+            "attachmentId": "ATT-1785195732975-98T5J",
+            "kind": "checkin",
+            "size": 125480
+          }
+        },
+        {
+          "id": "EVT-1785195740566-SN462",
+          "type": "updated",
+          "label": "Operação atualizada: Dados da O.S.",
+          "at": "2026-07-27T23:42:20.566Z",
+          "actor": "painel",
+          "details": {
+            "version": 6
+          }
+        },
+        {
+          "id": "EVT-1785195753688-C56LB",
+          "type": "updated",
+          "label": "Operação atualizada: Dados da O.S.",
+          "at": "2026-07-27T23:42:33.688Z",
+          "actor": "painel",
+          "details": {
+            "version": 7
+          }
+        },
+        {
+          "id": "EVT-1785196025445-0GJV6",
+          "type": "updated",
+          "label": "Operação atualizada: Tipo, Pagamentos",
+          "at": "2026-07-27T23:47:05.445Z",
+          "actor": "painel",
+          "details": {
+            "version": 8
+          }
+        },
+        {
+          "id": "EVT-1785253398879-8U8M2",
+          "type": "updated",
+          "label": "Operação atualizada: Itens, Pagamentos",
+          "at": "2026-07-28T15:43:18.879Z",
+          "actor": "painel",
+          "details": {
+            "version": 9
+          }
+        },
+        {
+          "id": "EVT-1785253398916-X0A7S",
+          "type": "posted",
+          "label": "Estoque e caixa processados",
+          "at": "2026-07-28T15:43:18.916Z",
+          "actor": "painel"
+        },
+        {
+          "id": "EVT-1785253398922-UV4IW",
+          "type": "finalized",
+          "label": "Operação finalizada com pagamento integral",
+          "at": "2026-07-28T15:43:18.922Z",
+          "actor": "painel",
+          "details": {
+            "status": "finalized",
+            "financialStatus": "paid",
+            "total": 2,
+            "amountPaid": 2,
+            "change": 0
+          }
+        }
+      ],
+      "snapshot": {
+        "createdAt": "2026-07-28T15:43:18.922Z",
+        "customer": {
+          "id": "CLI-1785107913792-ZXBKD",
+          "name": "teste",
+          "identifier": ""
+        },
+        "seller": {
+          "id": "",
+          "name": "matheus"
+        },
+        "items": [
+          {
+            "id": "OPI-1785195329361-6DHB6",
+            "productId": "1781828065854",
+            "inventoryItemId": "",
+            "name": "Adaptador Veicular P2 Bluetooth Receptor de Música",
+            "quantity": 1,
+            "unitPrice": 2,
+            "unitCost": 0,
+            "discount": 0,
+            "sellerId": "",
+            "sellerNameSnapshot": "matheus",
+            "stockControlled": false,
+            "allowNegative": false
+          }
+        ],
+        "payments": [
+          {
+            "id": "PAY-1785253398878-PKXFS",
+            "methodId": "dinheiro",
+            "methodName": "Dinheiro",
+            "amount": 2,
+            "installments": 1,
+            "dueDate": "",
+            "status": "paid",
+            "notes": ""
+          }
+        ],
+        "serviceOrder": {
+          "device": "testeeee de salvamento ",
+          "equipmentId": "testeeee de salvamento ",
+          "issue": "testeeee de salvamento ",
+          "technicianName": "testeeee de salvamento ",
+          "servicePerformed": "testeeee de salvamento ",
+          "accessories": "",
+          "checkin": {
+            "notes": "testeeee de salvamento ",
+            "items": [
+              {
+                "label": "Tela / display",
+                "status": "not_applicable",
+                "notes": "aaa"
+              },
+              {
+                "label": "Carcaça / estrutura",
+                "status": "not_applicable",
+                "notes": "a"
+              },
+              {
+                "label": "Botões",
+                "status": "approved",
+                "notes": "a"
+              },
+              {
+                "label": "Conectores",
+                "status": "not_tested",
+                "notes": "a"
+              },
+              {
+                "label": "Câmeras",
+                "status": "failed",
+                "notes": "a"
+              },
+              {
+                "label": "Áudio",
+                "status": "not_applicable",
+                "notes": "a"
+              },
+              {
+                "label": "Sinais de oxidação",
+                "status": "approved",
+                "notes": "a"
+              },
+              {
+                "label": "Liga / inicializa",
+                "status": "not_applicable",
+                "notes": "a"
+              }
+            ]
+          },
+          "checkout": {
+            "notes": "aaa",
+            "items": [
+              {
+                "label": "Tela / display",
+                "status": "not_applicable",
+                "notes": "aa"
+              },
+              {
+                "label": "Touch / teclado",
+                "status": "approved",
+                "notes": ""
+              },
+              {
+                "label": "Botões",
+                "status": "not_applicable",
+                "notes": "aaa"
+              },
+              {
+                "label": "Carregamento / fonte",
+                "status": "not_applicable",
+                "notes": "sss"
+              },
+              {
+                "label": "Bateria",
+                "status": "not_tested",
+                "notes": "s"
+              }
+            ],
+            "customerChecked": true,
+            "accessoriesChecked": false,
+            "guidanceReceived": false
+          },
+          "attachments": [
+            {
+              "id": "ATT-1785195732975-98T5J",
+              "name": "ChatGPT Image 27 de jul. de 2026, 17_21_12.png",
+              "kind": "checkin",
+              "filename": "ATT-1785195732975-98T5J.webp",
+              "mime": "image/webp",
+              "size": 125480,
+              "createdAt": "2026-07-27T23:42:12.990Z",
+              "createdBy": "painel",
+              "url": "/erp/pdv/operacoes/OP-1785195329360-IV3TQ/anexos/ATT-1785195732975-98T5J"
+            }
+          ]
+        },
+        "totals": {
+          "subtotal": 2,
+          "discountTotal": 0,
+          "total": 2,
+          "amountPaid": 2,
+          "amountPending": 0,
+          "change": 0
+        }
+      },
+      "links": {
+        "originalOperationId": null,
+        "originalItemId": null,
+        "exchangeIds": [],
+        "returnIds": [],
+        "warrantyIds": []
+      },
+      "customerId": "CLI-1785107913792-ZXBKD",
+      "customerNameSnapshot": "teste",
+      "identifier": "",
+      "sellerId": "",
+      "sellerNameSnapshot": "matheus",
+      "notes": "testeeee de salvamento",
+      "serviceOrder": {
+        "device": "testeeee de salvamento ",
+        "equipmentId": "testeeee de salvamento ",
+        "issue": "testeeee de salvamento ",
+        "technicianName": "testeeee de salvamento ",
+        "servicePerformed": "testeeee de salvamento ",
+        "accessories": "",
+        "checkin": {
+          "notes": "testeeee de salvamento ",
+          "items": [
+            {
+              "label": "Tela / display",
+              "status": "not_applicable",
+              "notes": "aaa"
+            },
+            {
+              "label": "Carcaça / estrutura",
+              "status": "not_applicable",
+              "notes": "a"
+            },
+            {
+              "label": "Botões",
+              "status": "approved",
+              "notes": "a"
+            },
+            {
+              "label": "Conectores",
+              "status": "not_tested",
+              "notes": "a"
+            },
+            {
+              "label": "Câmeras",
+              "status": "failed",
+              "notes": "a"
+            },
+            {
+              "label": "Áudio",
+              "status": "not_applicable",
+              "notes": "a"
+            },
+            {
+              "label": "Sinais de oxidação",
+              "status": "approved",
+              "notes": "a"
+            },
+            {
+              "label": "Liga / inicializa",
+              "status": "not_applicable",
+              "notes": "a"
+            }
+          ]
+        },
+        "checkout": {
+          "notes": "aaa",
+          "items": [
+            {
+              "label": "Tela / display",
+              "status": "not_applicable",
+              "notes": "aa"
+            },
+            {
+              "label": "Touch / teclado",
+              "status": "approved",
+              "notes": ""
+            },
+            {
+              "label": "Botões",
+              "status": "not_applicable",
+              "notes": "aaa"
+            },
+            {
+              "label": "Carregamento / fonte",
+              "status": "not_applicable",
+              "notes": "sss"
+            },
+            {
+              "label": "Bateria",
+              "status": "not_tested",
+              "notes": "s"
+            }
+          ],
+          "customerChecked": true,
+          "accessoriesChecked": false,
+          "guidanceReceived": false
+        },
+        "attachments": [
+          {
+            "id": "ATT-1785195732975-98T5J",
+            "name": "ChatGPT Image 27 de jul. de 2026, 17_21_12.png",
+            "kind": "checkin",
+            "filename": "ATT-1785195732975-98T5J.webp",
+            "mime": "image/webp",
+            "size": 125480,
+            "createdAt": "2026-07-27T23:42:12.990Z",
+            "createdBy": "painel",
+            "url": "/erp/pdv/operacoes/OP-1785195329360-IV3TQ/anexos/ATT-1785195732975-98T5J"
+          }
+        ]
+      },
+      "cashboxId": "caixa-principal",
+      "items": [
+        {
+          "id": "OPI-1785195329361-6DHB6",
+          "productId": "1781828065854",
+          "inventoryItemId": "",
+          "name": "Adaptador Veicular P2 Bluetooth Receptor de Música",
+          "quantity": 1,
+          "unitPrice": 2,
+          "unitCost": 0,
+          "discount": 0,
+          "sellerId": "",
+          "sellerNameSnapshot": "matheus",
+          "stockControlled": false,
+          "allowNegative": false
+        }
+      ],
+      "payments": [
+        {
+          "id": "PAY-1785253398878-PKXFS",
+          "methodId": "dinheiro",
+          "methodName": "Dinheiro",
+          "amount": 2,
+          "installments": 1,
+          "dueDate": "",
+          "status": "paid",
+          "notes": ""
+        }
+      ],
+      "subtotal": 2,
+      "discountTotal": 0,
+      "total": 2,
+      "amountPaid": 2,
+      "amountPending": 0,
+      "change": 0,
+      "updatedAt": "2026-07-28T15:43:18.922Z",
+      "updatedBy": "painel",
+      "inventoryPostedAt": "2026-07-28T15:43:18.915Z",
+      "cashPostedAt": "2026-07-28T15:43:18.915Z",
+      "finalizedAt": "2026-07-28T15:43:18.922Z",
+      "finalizedBy": "painel"
+    },
+    {
+      "id": "OP-1785196793652-V9ZTT",
+      "number": 2,
+      "type": "sale",
+      "status": "finalized",
+      "version": 3,
+      "createdAt": "2026-07-27T23:59:53.652Z",
+      "createdBy": "painel",
+      "dates": {
+        "openedAt": "2026-07-27T23:59:53.652Z",
+        "updatedAt": "2026-07-27T23:59:53.690Z",
+        "finalizedAt": "2026-07-27T23:59:53.690Z",
+        "cancelledAt": null
+      },
+      "operationalStatus": "completed",
+      "financialStatus": "paid",
+      "timeline": [
+        {
+          "id": "EVT-1785196793652-6U7R1",
+          "type": "created",
+          "label": "Operação criada",
+          "at": "2026-07-27T23:59:53.652Z",
+          "actor": "painel"
+        },
+        {
+          "id": "EVT-1785196793685-1VHX0",
+          "type": "posted",
+          "label": "Estoque e caixa processados",
+          "at": "2026-07-27T23:59:53.685Z",
+          "actor": "painel"
+        },
+        {
+          "id": "EVT-1785196793690-KYGZ3",
+          "type": "finalized",
+          "label": "Operação finalizada com pagamento integral",
+          "at": "2026-07-27T23:59:53.690Z",
+          "actor": "painel",
+          "details": {
+            "status": "finalized",
+            "financialStatus": "paid",
+            "total": 1,
+            "amountPaid": 1,
+            "change": 0
+          }
+        }
+      ],
+      "audit": [
+        {
+          "id": "EVT-1785196793652-6U7R1",
+          "type": "created",
+          "label": "Operação criada",
+          "at": "2026-07-27T23:59:53.652Z",
+          "actor": "painel"
+        },
+        {
+          "id": "EVT-1785196793685-1VHX0",
+          "type": "posted",
+          "label": "Estoque e caixa processados",
+          "at": "2026-07-27T23:59:53.685Z",
+          "actor": "painel"
+        },
+        {
+          "id": "EVT-1785196793690-KYGZ3",
+          "type": "finalized",
+          "label": "Operação finalizada com pagamento integral",
+          "at": "2026-07-27T23:59:53.690Z",
+          "actor": "painel",
+          "details": {
+            "status": "finalized",
+            "financialStatus": "paid",
+            "total": 1,
+            "amountPaid": 1,
+            "change": 0
+          }
+        }
+      ],
+      "snapshot": {
+        "createdAt": "2026-07-27T23:59:53.690Z",
+        "customer": {
+          "id": "",
+          "name": "Consumidor final",
+          "identifier": ""
+        },
+        "seller": {
+          "id": "",
+          "name": "teste"
+        },
+        "items": [
+          {
+            "id": "OPI-1785196793652-LN46J",
+            "productId": "1781828065854",
+            "inventoryItemId": "",
+            "name": "Adaptador Veicular P2 Bluetooth Receptor de Música",
+            "quantity": 1,
+            "unitPrice": 1,
+            "unitCost": 0,
+            "discount": 0,
+            "sellerId": "",
+            "sellerNameSnapshot": "teste",
+            "stockControlled": false,
+            "allowNegative": false
+          }
+        ],
+        "payments": [
+          {
+            "id": "PAY-1785196793652-0EXR6",
+            "methodId": "dinheiro",
+            "methodName": "Dinheiro",
+            "amount": 1,
+            "installments": 1,
+            "dueDate": "",
+            "status": "paid",
+            "notes": ""
+          }
+        ],
+        "serviceOrder": {
+          "device": "",
+          "equipmentId": "",
+          "issue": "",
+          "technicianName": "",
+          "servicePerformed": "",
+          "accessories": "",
+          "checkin": {
+            "notes": "",
+            "items": []
+          },
+          "checkout": {
+            "notes": "",
+            "items": [],
+            "customerChecked": false,
+            "accessoriesChecked": false,
+            "guidanceReceived": false
+          },
+          "attachments": []
+        },
+        "totals": {
+          "subtotal": 1,
+          "discountTotal": 0,
+          "total": 1,
+          "amountPaid": 1,
+          "amountPending": 0,
+          "change": 0
+        }
+      },
+      "links": {
+        "originalOperationId": null,
+        "originalItemId": null,
+        "exchangeIds": [],
+        "returnIds": [],
+        "warrantyIds": []
+      },
+      "customerId": "",
+      "customerNameSnapshot": "",
+      "identifier": "",
+      "sellerId": "",
+      "sellerNameSnapshot": "teste",
+      "notes": "",
+      "serviceOrder": {
+        "device": "",
+        "equipmentId": "",
+        "issue": "",
+        "technicianName": "",
+        "servicePerformed": "",
+        "accessories": "",
+        "checkin": {
+          "notes": "",
+          "items": []
+        },
+        "checkout": {
+          "notes": "",
+          "items": [],
+          "customerChecked": false,
+          "accessoriesChecked": false,
+          "guidanceReceived": false
+        },
+        "attachments": []
+      },
+      "cashboxId": "caixa-principal",
+      "items": [
+        {
+          "id": "OPI-1785196793652-LN46J",
+          "productId": "1781828065854",
+          "inventoryItemId": "",
+          "name": "Adaptador Veicular P2 Bluetooth Receptor de Música",
+          "quantity": 1,
+          "unitPrice": 1,
+          "unitCost": 0,
+          "discount": 0,
+          "sellerId": "",
+          "sellerNameSnapshot": "teste",
+          "stockControlled": false,
+          "allowNegative": false
+        }
+      ],
+      "payments": [
+        {
+          "id": "PAY-1785196793652-0EXR6",
+          "methodId": "dinheiro",
+          "methodName": "Dinheiro",
+          "amount": 1,
+          "installments": 1,
+          "dueDate": "",
+          "status": "paid",
+          "notes": ""
+        }
+      ],
+      "subtotal": 1,
+      "discountTotal": 0,
+      "total": 1,
+      "amountPaid": 1,
+      "amountPending": 0,
+      "change": 0,
+      "updatedAt": "2026-07-27T23:59:53.690Z",
+      "updatedBy": "painel",
+      "inventoryPostedAt": "2026-07-27T23:59:53.684Z",
+      "cashPostedAt": "2026-07-27T23:59:53.684Z",
+      "finalizedAt": "2026-07-27T23:59:53.690Z",
+      "finalizedBy": "painel"
+    },
+    {
+      "id": "OP-1785198065748-5DXZP",
+      "number": 3,
+      "type": "sale",
+      "status": "finalized",
+      "version": 3,
+      "createdAt": "2026-07-28T00:21:05.748Z",
+      "createdBy": "painel",
+      "dates": {
+        "openedAt": "2026-07-28T00:21:05.748Z",
+        "updatedAt": "2026-07-28T00:21:05.781Z",
+        "finalizedAt": "2026-07-28T00:21:05.781Z",
+        "cancelledAt": null
+      },
+      "operationalStatus": "completed",
+      "financialStatus": "paid",
+      "timeline": [
+        {
+          "id": "EVT-1785198065748-ZC3PT",
+          "type": "created",
+          "label": "Operação criada",
+          "at": "2026-07-28T00:21:05.748Z",
+          "actor": "painel"
+        },
+        {
+          "id": "EVT-1785198065777-25B6P",
+          "type": "posted",
+          "label": "Estoque e caixa processados",
+          "at": "2026-07-28T00:21:05.777Z",
+          "actor": "painel"
+        },
+        {
+          "id": "EVT-1785198065782-YAHRN",
+          "type": "finalized",
+          "label": "Operação finalizada com pagamento integral",
+          "at": "2026-07-28T00:21:05.782Z",
+          "actor": "painel",
+          "details": {
+            "status": "finalized",
+            "financialStatus": "paid",
+            "total": 2,
+            "amountPaid": 2,
+            "change": 0
+          }
+        }
+      ],
+      "audit": [
+        {
+          "id": "EVT-1785198065748-ZC3PT",
+          "type": "created",
+          "label": "Operação criada",
+          "at": "2026-07-28T00:21:05.748Z",
+          "actor": "painel"
+        },
+        {
+          "id": "EVT-1785198065777-25B6P",
+          "type": "posted",
+          "label": "Estoque e caixa processados",
+          "at": "2026-07-28T00:21:05.777Z",
+          "actor": "painel"
+        },
+        {
+          "id": "EVT-1785198065782-YAHRN",
+          "type": "finalized",
+          "label": "Operação finalizada com pagamento integral",
+          "at": "2026-07-28T00:21:05.782Z",
+          "actor": "painel",
+          "details": {
+            "status": "finalized",
+            "financialStatus": "paid",
+            "total": 2,
+            "amountPaid": 2,
+            "change": 0
+          }
+        }
+      ],
+      "snapshot": {
+        "createdAt": "2026-07-28T00:21:05.781Z",
+        "customer": {
+          "id": "",
+          "name": "Consumidor final",
+          "identifier": ""
+        },
+        "seller": {
+          "id": "",
+          "name": ""
+        },
+        "items": [
+          {
+            "id": "OPI-1785198065748-VS7DD",
+            "productId": "1781828065854",
+            "inventoryItemId": "",
+            "name": "Adaptador Veicular P2 Bluetooth Receptor de Música",
+            "quantity": 1,
+            "unitPrice": 2,
+            "unitCost": 0,
+            "discount": 0,
+            "sellerId": "",
+            "sellerNameSnapshot": "",
+            "stockControlled": false,
+            "allowNegative": false
+          }
+        ],
+        "payments": [
+          {
+            "id": "PAY-1785198065748-DC9G9",
+            "methodId": "pix",
+            "methodName": "Pix",
+            "amount": 2,
+            "installments": 1,
+            "dueDate": "",
+            "status": "paid",
+            "notes": ""
+          }
+        ],
+        "serviceOrder": {
+          "device": "",
+          "equipmentId": "",
+          "issue": "",
+          "technicianName": "",
+          "servicePerformed": "",
+          "accessories": "",
+          "checkin": {
+            "notes": "",
+            "items": []
+          },
+          "checkout": {
+            "notes": "",
+            "items": [],
+            "customerChecked": false,
+            "accessoriesChecked": false,
+            "guidanceReceived": false
+          },
+          "attachments": []
+        },
+        "totals": {
+          "subtotal": 2,
+          "discountTotal": 0,
+          "total": 2,
+          "amountPaid": 2,
+          "amountPending": 0,
+          "change": 0
+        }
+      },
+      "links": {
+        "originalOperationId": null,
+        "originalItemId": null,
+        "exchangeIds": [],
+        "returnIds": [],
+        "warrantyIds": []
+      },
+      "customerId": "",
+      "customerNameSnapshot": "",
+      "identifier": "",
+      "sellerId": "",
+      "sellerNameSnapshot": "",
+      "notes": "",
+      "serviceOrder": {
+        "device": "",
+        "equipmentId": "",
+        "issue": "",
+        "technicianName": "",
+        "servicePerformed": "",
+        "accessories": "",
+        "checkin": {
+          "notes": "",
+          "items": []
+        },
+        "checkout": {
+          "notes": "",
+          "items": [],
+          "customerChecked": false,
+          "accessoriesChecked": false,
+          "guidanceReceived": false
+        },
+        "attachments": []
+      },
+      "cashboxId": "caixa-principal",
+      "items": [
+        {
+          "id": "OPI-1785198065748-VS7DD",
+          "productId": "1781828065854",
+          "inventoryItemId": "",
+          "name": "Adaptador Veicular P2 Bluetooth Receptor de Música",
+          "quantity": 1,
+          "unitPrice": 2,
+          "unitCost": 0,
+          "discount": 0,
+          "sellerId": "",
+          "sellerNameSnapshot": "",
+          "stockControlled": false,
+          "allowNegative": false
+        }
+      ],
+      "payments": [
+        {
+          "id": "PAY-1785198065748-DC9G9",
+          "methodId": "pix",
+          "methodName": "Pix",
+          "amount": 2,
+          "installments": 1,
+          "dueDate": "",
+          "status": "paid",
+          "notes": ""
+        }
+      ],
+      "subtotal": 2,
+      "discountTotal": 0,
+      "total": 2,
+      "amountPaid": 2,
+      "amountPending": 0,
+      "change": 0,
+      "updatedAt": "2026-07-28T00:21:05.781Z",
+      "updatedBy": "painel",
+      "inventoryPostedAt": "2026-07-28T00:21:05.775Z",
+      "cashPostedAt": "2026-07-28T00:21:05.775Z",
+      "finalizedAt": "2026-07-28T00:21:05.781Z",
+      "finalizedBy": "painel"
+    },
+    {
+      "id": "OP-1785198144640-9BKB0",
+      "number": 4,
+      "type": "sale",
+      "status": "finalized",
+      "version": 3,
+      "createdAt": "2026-07-28T00:22:24.640Z",
+      "createdBy": "painel",
+      "dates": {
+        "openedAt": "2026-07-28T00:22:24.640Z",
+        "updatedAt": "2026-07-28T00:22:24.698Z",
+        "finalizedAt": "2026-07-28T00:22:24.698Z",
+        "cancelledAt": null
+      },
+      "operationalStatus": "completed",
+      "financialStatus": "paid",
+      "timeline": [
+        {
+          "id": "EVT-1785198144640-IMKGK",
+          "type": "created",
+          "label": "Operação criada",
+          "at": "2026-07-28T00:22:24.640Z",
+          "actor": "painel"
+        },
+        {
+          "id": "EVT-1785198144694-05VG2",
+          "type": "posted",
+          "label": "Estoque e caixa processados",
+          "at": "2026-07-28T00:22:24.694Z",
+          "actor": "painel"
+        },
+        {
+          "id": "EVT-1785198144698-6363Z",
+          "type": "finalized",
+          "label": "Operação finalizada com pagamento integral",
+          "at": "2026-07-28T00:22:24.698Z",
+          "actor": "painel",
+          "details": {
+            "status": "finalized",
+            "financialStatus": "paid",
+            "total": 3,
+            "amountPaid": 3,
+            "change": 0
+          }
+        }
+      ],
+      "audit": [
+        {
+          "id": "EVT-1785198144640-IMKGK",
+          "type": "created",
+          "label": "Operação criada",
+          "at": "2026-07-28T00:22:24.640Z",
+          "actor": "painel"
+        },
+        {
+          "id": "EVT-1785198144694-05VG2",
+          "type": "posted",
+          "label": "Estoque e caixa processados",
+          "at": "2026-07-28T00:22:24.694Z",
+          "actor": "painel"
+        },
+        {
+          "id": "EVT-1785198144698-6363Z",
+          "type": "finalized",
+          "label": "Operação finalizada com pagamento integral",
+          "at": "2026-07-28T00:22:24.698Z",
+          "actor": "painel",
+          "details": {
+            "status": "finalized",
+            "financialStatus": "paid",
+            "total": 3,
+            "amountPaid": 3,
+            "change": 0
+          }
+        }
+      ],
+      "snapshot": {
+        "createdAt": "2026-07-28T00:22:24.698Z",
+        "customer": {
+          "id": "",
+          "name": "Consumidor final",
+          "identifier": ""
+        },
+        "seller": {
+          "id": "",
+          "name": ""
+        },
+        "items": [
+          {
+            "id": "OPI-1785198144641-MR7RJ",
+            "productId": "1781828065854",
+            "inventoryItemId": "",
+            "name": "Adaptador Veicular P2 Bluetooth Receptor de Música",
+            "quantity": 1,
+            "unitPrice": 3,
+            "unitCost": 0,
+            "discount": 0,
+            "sellerId": "",
+            "sellerNameSnapshot": "",
+            "stockControlled": false,
+            "allowNegative": false
+          }
+        ],
+        "payments": [
+          {
+            "id": "PAY-1785198144641-HODHV",
+            "methodId": "pix",
+            "methodName": "Pix",
+            "amount": 3,
+            "installments": 1,
+            "dueDate": "",
+            "status": "paid",
+            "notes": ""
+          }
+        ],
+        "serviceOrder": {
+          "device": "",
+          "equipmentId": "",
+          "issue": "",
+          "technicianName": "",
+          "servicePerformed": "",
+          "accessories": "",
+          "checkin": {
+            "notes": "",
+            "items": []
+          },
+          "checkout": {
+            "notes": "",
+            "items": [],
+            "customerChecked": false,
+            "accessoriesChecked": false,
+            "guidanceReceived": false
+          },
+          "attachments": []
+        },
+        "totals": {
+          "subtotal": 3,
+          "discountTotal": 0,
+          "total": 3,
+          "amountPaid": 3,
+          "amountPending": 0,
+          "change": 0
+        }
+      },
+      "links": {
+        "originalOperationId": null,
+        "originalItemId": null,
+        "exchangeIds": [],
+        "returnIds": [],
+        "warrantyIds": []
+      },
+      "customerId": "",
+      "customerNameSnapshot": "",
+      "identifier": "",
+      "sellerId": "",
+      "sellerNameSnapshot": "",
+      "notes": "",
+      "serviceOrder": {
+        "device": "",
+        "equipmentId": "",
+        "issue": "",
+        "technicianName": "",
+        "servicePerformed": "",
+        "accessories": "",
+        "checkin": {
+          "notes": "",
+          "items": []
+        },
+        "checkout": {
+          "notes": "",
+          "items": [],
+          "customerChecked": false,
+          "accessoriesChecked": false,
+          "guidanceReceived": false
+        },
+        "attachments": []
+      },
+      "cashboxId": "caixa-principal",
+      "items": [
+        {
+          "id": "OPI-1785198144641-MR7RJ",
+          "productId": "1781828065854",
+          "inventoryItemId": "",
+          "name": "Adaptador Veicular P2 Bluetooth Receptor de Música",
+          "quantity": 1,
+          "unitPrice": 3,
+          "unitCost": 0,
+          "discount": 0,
+          "sellerId": "",
+          "sellerNameSnapshot": "",
+          "stockControlled": false,
+          "allowNegative": false
+        }
+      ],
+      "payments": [
+        {
+          "id": "PAY-1785198144641-HODHV",
+          "methodId": "pix",
+          "methodName": "Pix",
+          "amount": 3,
+          "installments": 1,
+          "dueDate": "",
+          "status": "paid",
+          "notes": ""
+        }
+      ],
+      "subtotal": 3,
+      "discountTotal": 0,
+      "total": 3,
+      "amountPaid": 3,
+      "amountPending": 0,
+      "change": 0,
+      "updatedAt": "2026-07-28T00:22:24.698Z",
+      "updatedBy": "painel",
+      "inventoryPostedAt": "2026-07-28T00:22:24.692Z",
+      "cashPostedAt": "2026-07-28T00:22:24.692Z",
+      "finalizedAt": "2026-07-28T00:22:24.698Z",
+      "finalizedBy": "painel"
+    },
+    {
+      "id": "OP-1785198164832-UV6DY",
+      "number": 5,
+      "type": "sale",
+      "status": "finalized",
+      "version": 3,
+      "createdAt": "2026-07-28T00:22:44.832Z",
+      "createdBy": "painel",
+      "dates": {
+        "openedAt": "2026-07-28T00:22:44.832Z",
+        "updatedAt": "2026-07-28T00:22:44.861Z",
+        "finalizedAt": "2026-07-28T00:22:44.861Z",
+        "cancelledAt": null
+      },
+      "operationalStatus": "completed",
+      "financialStatus": "paid",
+      "timeline": [
+        {
+          "id": "EVT-1785198164832-9S0I3",
+          "type": "created",
+          "label": "Operação criada",
+          "at": "2026-07-28T00:22:44.832Z",
+          "actor": "painel"
+        },
+        {
+          "id": "EVT-1785198164856-4C5SY",
+          "type": "posted",
+          "label": "Estoque e caixa processados",
+          "at": "2026-07-28T00:22:44.856Z",
+          "actor": "painel"
+        },
+        {
+          "id": "EVT-1785198164861-2FLQY",
+          "type": "finalized",
+          "label": "Operação finalizada com pagamento integral",
+          "at": "2026-07-28T00:22:44.861Z",
+          "actor": "painel",
+          "details": {
+            "status": "finalized",
+            "financialStatus": "paid",
+            "total": 1,
+            "amountPaid": 1,
+            "change": 0
+          }
+        }
+      ],
+      "audit": [
+        {
+          "id": "EVT-1785198164832-9S0I3",
+          "type": "created",
+          "label": "Operação criada",
+          "at": "2026-07-28T00:22:44.832Z",
+          "actor": "painel"
+        },
+        {
+          "id": "EVT-1785198164856-4C5SY",
+          "type": "posted",
+          "label": "Estoque e caixa processados",
+          "at": "2026-07-28T00:22:44.856Z",
+          "actor": "painel"
+        },
+        {
+          "id": "EVT-1785198164861-2FLQY",
+          "type": "finalized",
+          "label": "Operação finalizada com pagamento integral",
+          "at": "2026-07-28T00:22:44.861Z",
+          "actor": "painel",
+          "details": {
+            "status": "finalized",
+            "financialStatus": "paid",
+            "total": 1,
+            "amountPaid": 1,
+            "change": 0
+          }
+        }
+      ],
+      "snapshot": {
+        "createdAt": "2026-07-28T00:22:44.861Z",
+        "customer": {
+          "id": "",
+          "name": "Consumidor final",
+          "identifier": ""
+        },
+        "seller": {
+          "id": "",
+          "name": ""
+        },
+        "items": [
+          {
+            "id": "OPI-1785198164832-QMOV6",
+            "productId": "1781828065854",
+            "inventoryItemId": "",
+            "name": "Adaptador Veicular P2 Bluetooth Receptor de Música",
+            "quantity": 1,
+            "unitPrice": 1,
+            "unitCost": 0,
+            "discount": 0,
+            "sellerId": "",
+            "sellerNameSnapshot": "",
+            "stockControlled": false,
+            "allowNegative": false
+          }
+        ],
+        "payments": [
+          {
+            "id": "PAY-1785198164832-09IQ3",
+            "methodId": "pix",
+            "methodName": "Pix",
+            "amount": 1,
+            "installments": 1,
+            "dueDate": "",
+            "status": "paid",
+            "notes": ""
+          }
+        ],
+        "serviceOrder": {
+          "device": "",
+          "equipmentId": "",
+          "issue": "",
+          "technicianName": "",
+          "servicePerformed": "",
+          "accessories": "",
+          "checkin": {
+            "notes": "",
+            "items": []
+          },
+          "checkout": {
+            "notes": "",
+            "items": [],
+            "customerChecked": false,
+            "accessoriesChecked": false,
+            "guidanceReceived": false
+          },
+          "attachments": []
+        },
+        "totals": {
+          "subtotal": 1,
+          "discountTotal": 0,
+          "total": 1,
+          "amountPaid": 1,
+          "amountPending": 0,
+          "change": 0
+        }
+      },
+      "links": {
+        "originalOperationId": null,
+        "originalItemId": null,
+        "exchangeIds": [],
+        "returnIds": [],
+        "warrantyIds": []
+      },
+      "customerId": "",
+      "customerNameSnapshot": "",
+      "identifier": "",
+      "sellerId": "",
+      "sellerNameSnapshot": "",
+      "notes": "",
+      "serviceOrder": {
+        "device": "",
+        "equipmentId": "",
+        "issue": "",
+        "technicianName": "",
+        "servicePerformed": "",
+        "accessories": "",
+        "checkin": {
+          "notes": "",
+          "items": []
+        },
+        "checkout": {
+          "notes": "",
+          "items": [],
+          "customerChecked": false,
+          "accessoriesChecked": false,
+          "guidanceReceived": false
+        },
+        "attachments": []
+      },
+      "cashboxId": "caixa-principal",
+      "items": [
+        {
+          "id": "OPI-1785198164832-QMOV6",
+          "productId": "1781828065854",
+          "inventoryItemId": "",
+          "name": "Adaptador Veicular P2 Bluetooth Receptor de Música",
+          "quantity": 1,
+          "unitPrice": 1,
+          "unitCost": 0,
+          "discount": 0,
+          "sellerId": "",
+          "sellerNameSnapshot": "",
+          "stockControlled": false,
+          "allowNegative": false
+        }
+      ],
+      "payments": [
+        {
+          "id": "PAY-1785198164832-09IQ3",
+          "methodId": "pix",
+          "methodName": "Pix",
+          "amount": 1,
+          "installments": 1,
+          "dueDate": "",
+          "status": "paid",
+          "notes": ""
+        }
+      ],
+      "subtotal": 1,
+      "discountTotal": 0,
+      "total": 1,
+      "amountPaid": 1,
+      "amountPending": 0,
+      "change": 0,
+      "updatedAt": "2026-07-28T00:22:44.861Z",
+      "updatedBy": "painel",
+      "inventoryPostedAt": "2026-07-28T00:22:44.855Z",
+      "cashPostedAt": "2026-07-28T00:22:44.855Z",
+      "finalizedAt": "2026-07-28T00:22:44.861Z",
+      "finalizedBy": "painel"
+    },
+    {
+      "id": "OP-1785199789025-DSMT1",
+      "number": 6,
+      "type": "service_order",
+      "status": "finalized",
+      "version": 3,
+      "createdAt": "2026-07-28T00:49:49.025Z",
+      "createdBy": "painel",
+      "dates": {
+        "openedAt": "2026-07-28T00:49:49.025Z",
+        "updatedAt": "2026-07-28T00:49:49.062Z",
+        "finalizedAt": "2026-07-28T00:49:49.062Z",
+        "cancelledAt": null
+      },
+      "operationalStatus": "completed",
+      "financialStatus": "paid",
+      "timeline": [
+        {
+          "id": "EVT-1785199789025-UMAEH",
+          "type": "created",
+          "label": "Operação criada",
+          "at": "2026-07-28T00:49:49.025Z",
+          "actor": "painel"
+        },
+        {
+          "id": "EVT-1785199789052-6N911",
+          "type": "posted",
+          "label": "Estoque e caixa processados",
+          "at": "2026-07-28T00:49:49.052Z",
+          "actor": "painel"
+        },
+        {
+          "id": "EVT-1785199789062-NYU6B",
+          "type": "finalized",
+          "label": "Operação finalizada com pagamento integral",
+          "at": "2026-07-28T00:49:49.062Z",
+          "actor": "painel",
+          "details": {
+            "status": "finalized",
+            "financialStatus": "paid",
+            "total": 1,
+            "amountPaid": 1,
+            "change": 0
+          }
+        }
+      ],
+      "audit": [
+        {
+          "id": "EVT-1785199789025-UMAEH",
+          "type": "created",
+          "label": "Operação criada",
+          "at": "2026-07-28T00:49:49.025Z",
+          "actor": "painel"
+        },
+        {
+          "id": "EVT-1785199789052-6N911",
+          "type": "posted",
+          "label": "Estoque e caixa processados",
+          "at": "2026-07-28T00:49:49.052Z",
+          "actor": "painel"
+        },
+        {
+          "id": "EVT-1785199789062-NYU6B",
+          "type": "finalized",
+          "label": "Operação finalizada com pagamento integral",
+          "at": "2026-07-28T00:49:49.062Z",
+          "actor": "painel",
+          "details": {
+            "status": "finalized",
+            "financialStatus": "paid",
+            "total": 1,
+            "amountPaid": 1,
+            "change": 0
+          }
+        }
+      ],
+      "snapshot": {
+        "createdAt": "2026-07-28T00:49:49.062Z",
+        "customer": {
+          "id": "",
+          "name": "Consumidor final",
+          "identifier": ""
+        },
+        "seller": {
+          "id": "",
+          "name": ""
+        },
+        "items": [
+          {
+            "id": "OPI-1785199789025-G68WU",
+            "productId": "1781828065854",
+            "inventoryItemId": "",
+            "name": "Adaptador Veicular P2 Bluetooth Receptor de Música",
+            "quantity": 1,
+            "unitPrice": 1,
+            "unitCost": 0,
+            "discount": 0,
+            "sellerId": "",
+            "sellerNameSnapshot": "",
+            "stockControlled": false,
+            "allowNegative": false
+          }
+        ],
+        "payments": [
+          {
+            "id": "PAY-1785199789025-B01Z3",
+            "methodId": "cartao-credito",
+            "methodName": "Cartão de crédito",
+            "amount": 1,
+            "installments": 1,
+            "dueDate": "",
+            "status": "paid",
+            "notes": ""
+          }
+        ],
+        "serviceOrder": {
+          "device": "",
+          "equipmentId": "",
+          "issue": "",
+          "technicianName": "",
+          "servicePerformed": "",
+          "accessories": "",
+          "checkin": {
+            "notes": "",
+            "items": []
+          },
+          "checkout": {
+            "notes": "",
+            "items": [],
+            "customerChecked": false,
+            "accessoriesChecked": false,
+            "guidanceReceived": false
+          },
+          "attachments": []
+        },
+        "totals": {
+          "subtotal": 1,
+          "discountTotal": 0,
+          "total": 1,
+          "amountPaid": 1,
+          "amountPending": 0,
+          "change": 0
+        }
+      },
+      "links": {
+        "originalOperationId": null,
+        "originalItemId": null,
+        "exchangeIds": [],
+        "returnIds": [],
+        "warrantyIds": []
+      },
+      "customerId": "",
+      "customerNameSnapshot": "",
+      "identifier": "",
+      "sellerId": "",
+      "sellerNameSnapshot": "",
+      "notes": "",
+      "serviceOrder": {
+        "device": "",
+        "equipmentId": "",
+        "issue": "",
+        "technicianName": "",
+        "servicePerformed": "",
+        "accessories": "",
+        "checkin": {
+          "notes": "",
+          "items": []
+        },
+        "checkout": {
+          "notes": "",
+          "items": [],
+          "customerChecked": false,
+          "accessoriesChecked": false,
+          "guidanceReceived": false
+        },
+        "attachments": []
+      },
+      "cashboxId": "caixa-principal",
+      "items": [
+        {
+          "id": "OPI-1785199789025-G68WU",
+          "productId": "1781828065854",
+          "inventoryItemId": "",
+          "name": "Adaptador Veicular P2 Bluetooth Receptor de Música",
+          "quantity": 1,
+          "unitPrice": 1,
+          "unitCost": 0,
+          "discount": 0,
+          "sellerId": "",
+          "sellerNameSnapshot": "",
+          "stockControlled": false,
+          "allowNegative": false
+        }
+      ],
+      "payments": [
+        {
+          "id": "PAY-1785199789025-B01Z3",
+          "methodId": "cartao-credito",
+          "methodName": "Cartão de crédito",
+          "amount": 1,
+          "installments": 1,
+          "dueDate": "",
+          "status": "paid",
+          "notes": ""
+        }
+      ],
+      "subtotal": 1,
+      "discountTotal": 0,
+      "total": 1,
+      "amountPaid": 1,
+      "amountPending": 0,
+      "change": 0,
+      "updatedAt": "2026-07-28T00:49:49.062Z",
+      "updatedBy": "painel",
+      "inventoryPostedAt": "2026-07-28T00:49:49.050Z",
+      "cashPostedAt": "2026-07-28T00:49:49.050Z",
+      "finalizedAt": "2026-07-28T00:49:49.062Z",
+      "finalizedBy": "painel"
+    },
+    {
+      "id": "OP-1785232238140-HR2OQ",
+      "number": 7,
+      "type": "sale",
+      "status": "finalized",
+      "version": 3,
+      "createdAt": "2026-07-28T09:50:38.139Z",
+      "createdBy": "painel",
+      "dates": {
+        "openedAt": "2026-07-28T09:50:38.139Z",
+        "updatedAt": "2026-07-28T09:50:38.177Z",
+        "finalizedAt": "2026-07-28T09:50:38.177Z",
+        "cancelledAt": null
+      },
+      "operationalStatus": "completed",
+      "financialStatus": "paid",
+      "timeline": [
+        {
+          "id": "EVT-1785232238140-LV89U",
+          "type": "created",
+          "label": "Operação criada",
+          "at": "2026-07-28T09:50:38.140Z",
+          "actor": "painel"
+        },
+        {
+          "id": "EVT-1785232238171-0Q5IN",
+          "type": "posted",
+          "label": "Estoque e caixa processados",
+          "at": "2026-07-28T09:50:38.171Z",
+          "actor": "painel"
+        },
+        {
+          "id": "EVT-1785232238177-PKQ1A",
+          "type": "finalized",
+          "label": "Operação finalizada com pagamento integral",
+          "at": "2026-07-28T09:50:38.177Z",
+          "actor": "painel",
+          "details": {
+            "status": "finalized",
+            "financialStatus": "paid",
+            "total": 5,
+            "amountPaid": 5,
+            "change": 0
+          }
+        }
+      ],
+      "audit": [
+        {
+          "id": "EVT-1785232238140-LV89U",
+          "type": "created",
+          "label": "Operação criada",
+          "at": "2026-07-28T09:50:38.140Z",
+          "actor": "painel"
+        },
+        {
+          "id": "EVT-1785232238171-0Q5IN",
+          "type": "posted",
+          "label": "Estoque e caixa processados",
+          "at": "2026-07-28T09:50:38.171Z",
+          "actor": "painel"
+        },
+        {
+          "id": "EVT-1785232238177-PKQ1A",
+          "type": "finalized",
+          "label": "Operação finalizada com pagamento integral",
+          "at": "2026-07-28T09:50:38.177Z",
+          "actor": "painel",
+          "details": {
+            "status": "finalized",
+            "financialStatus": "paid",
+            "total": 5,
+            "amountPaid": 5,
+            "change": 0
+          }
+        }
+      ],
+      "snapshot": {
+        "createdAt": "2026-07-28T09:50:38.177Z",
+        "customer": {
+          "id": "",
+          "name": "Consumidor final",
+          "identifier": ""
+        },
+        "seller": {
+          "id": "",
+          "name": ""
+        },
+        "items": [
+          {
+            "id": "OPI-1785232238140-QLDJO",
+            "productId": "1781828065854",
+            "inventoryItemId": "",
+            "name": "Adaptador Veicular P2 Bluetooth Receptor de Música",
+            "quantity": 1,
+            "unitPrice": 5,
+            "unitCost": 0,
+            "discount": 0,
+            "sellerId": "",
+            "sellerNameSnapshot": "",
+            "stockControlled": false,
+            "allowNegative": false
+          }
+        ],
+        "payments": [
+          {
+            "id": "PAY-1785232238140-WVW13",
+            "methodId": "pix",
+            "methodName": "Pix",
+            "amount": 5,
+            "installments": 1,
+            "dueDate": "",
+            "status": "paid",
+            "notes": ""
+          }
+        ],
+        "serviceOrder": {
+          "device": "",
+          "equipmentId": "",
+          "issue": "",
+          "technicianName": "",
+          "servicePerformed": "",
+          "accessories": "",
+          "checkin": {
+            "notes": "",
+            "items": []
+          },
+          "checkout": {
+            "notes": "",
+            "items": [],
+            "customerChecked": false,
+            "accessoriesChecked": false,
+            "guidanceReceived": false
+          },
+          "attachments": []
+        },
+        "totals": {
+          "subtotal": 5,
+          "discountTotal": 0,
+          "total": 5,
+          "amountPaid": 5,
+          "amountPending": 0,
+          "change": 0
+        }
+      },
+      "links": {
+        "originalOperationId": null,
+        "originalItemId": null,
+        "exchangeIds": [],
+        "returnIds": [],
+        "warrantyIds": []
+      },
+      "customerId": "",
+      "customerNameSnapshot": "",
+      "identifier": "",
+      "sellerId": "",
+      "sellerNameSnapshot": "",
+      "notes": "",
+      "serviceOrder": {
+        "device": "",
+        "equipmentId": "",
+        "issue": "",
+        "technicianName": "",
+        "servicePerformed": "",
+        "accessories": "",
+        "checkin": {
+          "notes": "",
+          "items": []
+        },
+        "checkout": {
+          "notes": "",
+          "items": [],
+          "customerChecked": false,
+          "accessoriesChecked": false,
+          "guidanceReceived": false
+        },
+        "attachments": []
+      },
+      "cashboxId": "caixa-principal",
+      "items": [
+        {
+          "id": "OPI-1785232238140-QLDJO",
+          "productId": "1781828065854",
+          "inventoryItemId": "",
+          "name": "Adaptador Veicular P2 Bluetooth Receptor de Música",
+          "quantity": 1,
+          "unitPrice": 5,
+          "unitCost": 0,
+          "discount": 0,
+          "sellerId": "",
+          "sellerNameSnapshot": "",
+          "stockControlled": false,
+          "allowNegative": false
+        }
+      ],
+      "payments": [
+        {
+          "id": "PAY-1785232238140-WVW13",
+          "methodId": "pix",
+          "methodName": "Pix",
+          "amount": 5,
+          "installments": 1,
+          "dueDate": "",
+          "status": "paid",
+          "notes": ""
+        }
+      ],
+      "subtotal": 5,
+      "discountTotal": 0,
+      "total": 5,
+      "amountPaid": 5,
+      "amountPending": 0,
+      "change": 0,
+      "updatedAt": "2026-07-28T09:50:38.177Z",
+      "updatedBy": "painel",
+      "inventoryPostedAt": "2026-07-28T09:50:38.169Z",
+      "cashPostedAt": "2026-07-28T09:50:38.169Z",
+      "finalizedAt": "2026-07-28T09:50:38.177Z",
+      "finalizedBy": "painel"
+    },
+    {
+      "id": "OP-1785232344500-7VWIA",
+      "number": 8,
+      "type": "sale",
+      "status": "finalized",
+      "version": 3,
+      "createdAt": "2026-07-28T09:52:24.499Z",
+      "createdBy": "painel",
+      "dates": {
+        "openedAt": "2026-07-28T09:52:24.499Z",
+        "updatedAt": "2026-07-28T09:52:24.531Z",
+        "finalizedAt": "2026-07-28T09:52:24.531Z",
+        "cancelledAt": null
+      },
+      "operationalStatus": "completed",
+      "financialStatus": "paid",
+      "timeline": [
+        {
+          "id": "EVT-1785232344500-3VS8N",
+          "type": "created",
+          "label": "Operação criada",
+          "at": "2026-07-28T09:52:24.500Z",
+          "actor": "painel"
+        },
+        {
+          "id": "EVT-1785232344523-U3OKY",
+          "type": "posted",
+          "label": "Estoque e caixa processados",
+          "at": "2026-07-28T09:52:24.523Z",
+          "actor": "painel"
+        },
+        {
+          "id": "EVT-1785232344532-ZJZ45",
+          "type": "finalized",
+          "label": "Operação finalizada com pagamento integral",
+          "at": "2026-07-28T09:52:24.532Z",
+          "actor": "painel",
+          "details": {
+            "status": "finalized",
+            "financialStatus": "paid",
+            "total": 0.01,
+            "amountPaid": 0.01,
+            "change": 0
+          }
+        }
+      ],
+      "audit": [
+        {
+          "id": "EVT-1785232344500-3VS8N",
+          "type": "created",
+          "label": "Operação criada",
+          "at": "2026-07-28T09:52:24.500Z",
+          "actor": "painel"
+        },
+        {
+          "id": "EVT-1785232344523-U3OKY",
+          "type": "posted",
+          "label": "Estoque e caixa processados",
+          "at": "2026-07-28T09:52:24.523Z",
+          "actor": "painel"
+        },
+        {
+          "id": "EVT-1785232344532-ZJZ45",
+          "type": "finalized",
+          "label": "Operação finalizada com pagamento integral",
+          "at": "2026-07-28T09:52:24.532Z",
+          "actor": "painel",
+          "details": {
+            "status": "finalized",
+            "financialStatus": "paid",
+            "total": 0.01,
+            "amountPaid": 0.01,
+            "change": 0
+          }
+        }
+      ],
+      "snapshot": {
+        "createdAt": "2026-07-28T09:52:24.531Z",
+        "customer": {
+          "id": "",
+          "name": "Consumidor final",
+          "identifier": ""
+        },
+        "seller": {
+          "id": "",
+          "name": ""
+        },
+        "items": [
+          {
+            "id": "OPI-1785232344500-AU5WL",
+            "productId": "1781828065854",
+            "inventoryItemId": "",
+            "name": "Adaptador Veicular P2 Bluetooth Receptor de Música",
+            "quantity": 1,
+            "unitPrice": 0.01,
+            "unitCost": 0,
+            "discount": 0,
+            "sellerId": "",
+            "sellerNameSnapshot": "",
+            "stockControlled": false,
+            "allowNegative": false
+          }
+        ],
+        "payments": [
+          {
+            "id": "PAY-1785232344500-C8VKU",
+            "methodId": "pix",
+            "methodName": "Pix",
+            "amount": 0.01,
+            "installments": 1,
+            "dueDate": "",
+            "status": "paid",
+            "notes": ""
+          }
+        ],
+        "serviceOrder": {
+          "device": "",
+          "equipmentId": "",
+          "issue": "",
+          "technicianName": "",
+          "servicePerformed": "",
+          "accessories": "",
+          "checkin": {
+            "notes": "",
+            "items": []
+          },
+          "checkout": {
+            "notes": "",
+            "items": [],
+            "customerChecked": false,
+            "accessoriesChecked": false,
+            "guidanceReceived": false
+          },
+          "attachments": []
+        },
+        "totals": {
+          "subtotal": 0.01,
+          "discountTotal": 0,
+          "total": 0.01,
+          "amountPaid": 0.01,
+          "amountPending": 0,
+          "change": 0
+        }
+      },
+      "links": {
+        "originalOperationId": null,
+        "originalItemId": null,
+        "exchangeIds": [],
+        "returnIds": [],
+        "warrantyIds": []
+      },
+      "customerId": "",
+      "customerNameSnapshot": "",
+      "identifier": "",
+      "sellerId": "",
+      "sellerNameSnapshot": "",
+      "notes": "",
+      "serviceOrder": {
+        "device": "",
+        "equipmentId": "",
+        "issue": "",
+        "technicianName": "",
+        "servicePerformed": "",
+        "accessories": "",
+        "checkin": {
+          "notes": "",
+          "items": []
+        },
+        "checkout": {
+          "notes": "",
+          "items": [],
+          "customerChecked": false,
+          "accessoriesChecked": false,
+          "guidanceReceived": false
+        },
+        "attachments": []
+      },
+      "cashboxId": "caixa-principal",
+      "items": [
+        {
+          "id": "OPI-1785232344500-AU5WL",
+          "productId": "1781828065854",
+          "inventoryItemId": "",
+          "name": "Adaptador Veicular P2 Bluetooth Receptor de Música",
+          "quantity": 1,
+          "unitPrice": 0.01,
+          "unitCost": 0,
+          "discount": 0,
+          "sellerId": "",
+          "sellerNameSnapshot": "",
+          "stockControlled": false,
+          "allowNegative": false
+        }
+      ],
+      "payments": [
+        {
+          "id": "PAY-1785232344500-C8VKU",
+          "methodId": "pix",
+          "methodName": "Pix",
+          "amount": 0.01,
+          "installments": 1,
+          "dueDate": "",
+          "status": "paid",
+          "notes": ""
+        }
+      ],
+      "subtotal": 0.01,
+      "discountTotal": 0,
+      "total": 0.01,
+      "amountPaid": 0.01,
+      "amountPending": 0,
+      "change": 0,
+      "updatedAt": "2026-07-28T09:52:24.531Z",
+      "updatedBy": "painel",
+      "inventoryPostedAt": "2026-07-28T09:52:24.521Z",
+      "cashPostedAt": "2026-07-28T09:52:24.521Z",
+      "finalizedAt": "2026-07-28T09:52:24.531Z",
+      "finalizedBy": "painel"
+    },
+    {
+      "id": "OP-1785232480248-VCTTW",
+      "number": 9,
+      "type": "sale",
+      "status": "cancelled",
+      "version": 2,
+      "createdAt": "2026-07-28T09:54:40.248Z",
+      "createdBy": "painel",
+      "dates": {
+        "openedAt": "2026-07-28T09:54:40.248Z",
+        "updatedAt": "2026-07-28T09:54:54.326Z",
+        "finalizedAt": null,
+        "cancelledAt": "2026-07-28T09:54:54.326Z"
+      },
+      "operationalStatus": "cancelled",
+      "financialStatus": "cancelled",
+      "timeline": [
+        {
+          "id": "EVT-1785232480248-777EM",
+          "type": "created",
+          "label": "Operação criada",
+          "at": "2026-07-28T09:54:40.248Z",
+          "actor": "painel"
+        },
+        {
+          "id": "EVT-1785232494326-28PE3",
+          "type": "cancelled",
+          "label": "Operação cancelada: teste",
+          "at": "2026-07-28T09:54:54.326Z",
+          "actor": "painel"
+        }
+      ],
+      "audit": [
+        {
+          "id": "EVT-1785232480248-777EM",
+          "type": "created",
+          "label": "Operação criada",
+          "at": "2026-07-28T09:54:40.248Z",
+          "actor": "painel"
+        },
+        {
+          "id": "EVT-1785232494326-28PE3",
+          "type": "cancelled",
+          "label": "Operação cancelada: teste",
+          "at": "2026-07-28T09:54:54.326Z",
+          "actor": "painel"
+        }
+      ],
+      "snapshot": null,
+      "links": {
+        "originalOperationId": null,
+        "originalItemId": null,
+        "exchangeIds": [],
+        "returnIds": [],
+        "warrantyIds": []
+      },
+      "customerId": "",
+      "customerNameSnapshot": "",
+      "identifier": "",
+      "sellerId": "",
+      "sellerNameSnapshot": "",
+      "notes": "",
+      "serviceOrder": {
+        "device": "",
+        "equipmentId": "",
+        "issue": "",
+        "technicianName": "",
+        "servicePerformed": "",
+        "accessories": "",
+        "checkin": {
+          "notes": "",
+          "items": []
+        },
+        "checkout": {
+          "notes": "",
+          "items": [],
+          "customerChecked": false,
+          "accessoriesChecked": false,
+          "guidanceReceived": false
+        },
+        "attachments": []
+      },
+      "cashboxId": "caixa-principal",
+      "items": [
+        {
+          "id": "OPI-1785232480248-WHJWP",
+          "productId": "1781828065854",
+          "inventoryItemId": "",
+          "name": "Adaptador Veicular P2 Bluetooth Receptor de Música",
+          "quantity": 1,
+          "unitPrice": 0,
+          "unitCost": 0,
+          "discount": 0,
+          "sellerId": "",
+          "sellerNameSnapshot": "",
+          "stockControlled": false,
+          "allowNegative": false
+        }
+      ],
+      "payments": [],
+      "subtotal": 0,
+      "discountTotal": 0,
+      "total": 0,
+      "amountPaid": 0,
+      "amountPending": 0,
+      "change": 0,
+      "updatedAt": "2026-07-28T09:54:54.326Z",
+      "updatedBy": "painel",
+      "cancelReason": "teste",
+      "cancelledAt": "2026-07-28T09:54:54.326Z",
+      "cancelledBy": "painel"
+    },
+    {
+      "id": "OP-1785232813829-DRHNT",
+      "number": 10,
+      "type": "sale",
+      "status": "finalized",
+      "version": 3,
+      "createdAt": "2026-07-28T10:00:13.829Z",
+      "createdBy": "painel",
+      "dates": {
+        "openedAt": "2026-07-28T10:00:13.829Z",
+        "updatedAt": "2026-07-28T10:00:13.867Z",
+        "finalizedAt": "2026-07-28T10:00:13.867Z",
+        "cancelledAt": null
+      },
+      "operationalStatus": "completed",
+      "financialStatus": "paid",
+      "timeline": [
+        {
+          "id": "EVT-1785232813829-IC52R",
+          "type": "created",
+          "label": "Operação criada",
+          "at": "2026-07-28T10:00:13.829Z",
+          "actor": "painel"
+        },
+        {
+          "id": "EVT-1785232813860-U2LC1",
+          "type": "posted",
+          "label": "Estoque e caixa processados",
+          "at": "2026-07-28T10:00:13.860Z",
+          "actor": "painel"
+        },
+        {
+          "id": "EVT-1785232813867-SCXB9",
+          "type": "finalized",
+          "label": "Operação finalizada com pagamento integral",
+          "at": "2026-07-28T10:00:13.867Z",
+          "actor": "painel",
+          "details": {
+            "status": "finalized",
+            "financialStatus": "paid",
+            "total": 1,
+            "amountPaid": 1,
+            "change": 0
+          }
+        }
+      ],
+      "audit": [
+        {
+          "id": "EVT-1785232813829-IC52R",
+          "type": "created",
+          "label": "Operação criada",
+          "at": "2026-07-28T10:00:13.829Z",
+          "actor": "painel"
+        },
+        {
+          "id": "EVT-1785232813860-U2LC1",
+          "type": "posted",
+          "label": "Estoque e caixa processados",
+          "at": "2026-07-28T10:00:13.860Z",
+          "actor": "painel"
+        },
+        {
+          "id": "EVT-1785232813867-SCXB9",
+          "type": "finalized",
+          "label": "Operação finalizada com pagamento integral",
+          "at": "2026-07-28T10:00:13.867Z",
+          "actor": "painel",
+          "details": {
+            "status": "finalized",
+            "financialStatus": "paid",
+            "total": 1,
+            "amountPaid": 1,
+            "change": 0
+          }
+        }
+      ],
+      "snapshot": {
+        "createdAt": "2026-07-28T10:00:13.867Z",
+        "customer": {
+          "id": "",
+          "name": "Consumidor final",
+          "identifier": ""
+        },
+        "seller": {
+          "id": "",
+          "name": ""
+        },
+        "items": [
+          {
+            "id": "OPI-1785232813830-IMBUP",
+            "productId": "1781828065854",
+            "inventoryItemId": "",
+            "name": "Adaptador Veicular P2 Bluetooth Receptor de Música",
+            "quantity": 1,
+            "unitPrice": 1,
+            "unitCost": 0,
+            "discount": 0,
+            "sellerId": "",
+            "sellerNameSnapshot": "",
+            "stockControlled": false,
+            "allowNegative": false
+          }
+        ],
+        "payments": [
+          {
+            "id": "PAY-1785232813830-LLR0D",
+            "methodId": "dinheiro",
+            "methodName": "Dinheiro",
+            "amount": 1,
+            "installments": 1,
+            "dueDate": "",
+            "status": "paid",
+            "notes": ""
+          }
+        ],
+        "serviceOrder": {
+          "device": "",
+          "equipmentId": "",
+          "issue": "",
+          "technicianName": "",
+          "servicePerformed": "",
+          "accessories": "",
+          "checkin": {
+            "notes": "",
+            "items": []
+          },
+          "checkout": {
+            "notes": "",
+            "items": [],
+            "customerChecked": false,
+            "accessoriesChecked": false,
+            "guidanceReceived": false
+          },
+          "attachments": []
+        },
+        "totals": {
+          "subtotal": 1,
+          "discountTotal": 0,
+          "total": 1,
+          "amountPaid": 1,
+          "amountPending": 0,
+          "change": 0
+        }
+      },
+      "links": {
+        "originalOperationId": null,
+        "originalItemId": null,
+        "exchangeIds": [],
+        "returnIds": [],
+        "warrantyIds": []
+      },
+      "customerId": "",
+      "customerNameSnapshot": "",
+      "identifier": "",
+      "sellerId": "",
+      "sellerNameSnapshot": "",
+      "notes": "",
+      "serviceOrder": {
+        "device": "",
+        "equipmentId": "",
+        "issue": "",
+        "technicianName": "",
+        "servicePerformed": "",
+        "accessories": "",
+        "checkin": {
+          "notes": "",
+          "items": []
+        },
+        "checkout": {
+          "notes": "",
+          "items": [],
+          "customerChecked": false,
+          "accessoriesChecked": false,
+          "guidanceReceived": false
+        },
+        "attachments": []
+      },
+      "cashboxId": "caixa-principal",
+      "items": [
+        {
+          "id": "OPI-1785232813830-IMBUP",
+          "productId": "1781828065854",
+          "inventoryItemId": "",
+          "name": "Adaptador Veicular P2 Bluetooth Receptor de Música",
+          "quantity": 1,
+          "unitPrice": 1,
+          "unitCost": 0,
+          "discount": 0,
+          "sellerId": "",
+          "sellerNameSnapshot": "",
+          "stockControlled": false,
+          "allowNegative": false
+        }
+      ],
+      "payments": [
+        {
+          "id": "PAY-1785232813830-LLR0D",
+          "methodId": "dinheiro",
+          "methodName": "Dinheiro",
+          "amount": 1,
+          "installments": 1,
+          "dueDate": "",
+          "status": "paid",
+          "notes": ""
+        }
+      ],
+      "subtotal": 1,
+      "discountTotal": 0,
+      "total": 1,
+      "amountPaid": 1,
+      "amountPending": 0,
+      "change": 0,
+      "updatedAt": "2026-07-28T10:00:13.867Z",
+      "updatedBy": "painel",
+      "inventoryPostedAt": "2026-07-28T10:00:13.858Z",
+      "cashPostedAt": "2026-07-28T10:00:13.858Z",
+      "finalizedAt": "2026-07-28T10:00:13.867Z",
+      "finalizedBy": "painel"
+    },
+    {
+      "id": "OP-1785234947596-L3JU6",
+      "number": 11,
+      "type": "sale",
+      "status": "cancelled",
+      "version": 2,
+      "createdAt": "2026-07-28T10:35:47.596Z",
+      "createdBy": "painel",
+      "dates": {
+        "openedAt": "2026-07-28T10:35:47.596Z",
+        "updatedAt": "2026-07-28T10:36:05.494Z",
+        "finalizedAt": null,
+        "cancelledAt": "2026-07-28T10:36:05.494Z"
+      },
+      "operationalStatus": "cancelled",
+      "financialStatus": "cancelled",
+      "timeline": [
+        {
+          "id": "EVT-1785234947596-09G30",
+          "type": "created",
+          "label": "Operação criada",
+          "at": "2026-07-28T10:35:47.596Z",
+          "actor": "painel"
+        },
+        {
+          "id": "EVT-1785234965494-9JAOK",
+          "type": "cancelled",
+          "label": "Operação cancelada: teste",
+          "at": "2026-07-28T10:36:05.494Z",
+          "actor": "painel"
+        }
+      ],
+      "audit": [
+        {
+          "id": "EVT-1785234947596-09G30",
+          "type": "created",
+          "label": "Operação criada",
+          "at": "2026-07-28T10:35:47.596Z",
+          "actor": "painel"
+        },
+        {
+          "id": "EVT-1785234965494-9JAOK",
+          "type": "cancelled",
+          "label": "Operação cancelada: teste",
+          "at": "2026-07-28T10:36:05.494Z",
+          "actor": "painel"
+        }
+      ],
+      "snapshot": null,
+      "links": {
+        "originalOperationId": null,
+        "originalItemId": null,
+        "exchangeIds": [],
+        "returnIds": [],
+        "warrantyIds": []
+      },
+      "customerId": "",
+      "customerNameSnapshot": "",
+      "identifier": "",
+      "sellerId": "",
+      "sellerNameSnapshot": "",
+      "notes": "",
+      "serviceOrder": {},
+      "cashboxId": "caixa-principal",
+      "items": [],
+      "payments": [],
+      "subtotal": 0,
+      "discountTotal": 0,
+      "total": 0,
+      "amountPaid": 0,
+      "amountPending": 0,
+      "change": 0,
+      "updatedAt": "2026-07-28T10:36:05.494Z",
+      "updatedBy": "painel",
+      "cancelReason": "teste",
+      "cancelledAt": "2026-07-28T10:36:05.494Z",
+      "cancelledBy": "painel"
+    },
+    {
+      "id": "OP-1785234966549-KNBW3",
+      "number": 12,
+      "type": "sale",
+      "status": "open",
+      "version": 1,
+      "createdAt": "2026-07-28T10:36:06.549Z",
+      "createdBy": "painel",
+      "dates": {
+        "openedAt": "2026-07-28T10:36:06.549Z",
+        "updatedAt": "2026-07-28T10:36:06.549Z",
+        "finalizedAt": null,
+        "cancelledAt": null
+      },
+      "operationalStatus": "in_service",
+      "financialStatus": "not_started",
+      "timeline": [
+        {
+          "id": "EVT-1785234966549-U0JXA",
+          "type": "created",
+          "label": "Operação criada",
+          "at": "2026-07-28T10:36:06.549Z",
+          "actor": "painel"
+        }
+      ],
+      "audit": [
+        {
+          "id": "EVT-1785234966549-U0JXA",
+          "type": "created",
+          "label": "Operação criada",
+          "at": "2026-07-28T10:36:06.549Z",
+          "actor": "painel"
+        }
+      ],
+      "snapshot": null,
+      "links": {
+        "originalOperationId": null,
+        "originalItemId": null,
+        "exchangeIds": [],
+        "returnIds": [],
+        "warrantyIds": []
+      },
+      "customerId": "",
+      "customerNameSnapshot": "",
+      "identifier": "",
+      "sellerId": "",
+      "sellerNameSnapshot": "",
+      "notes": "",
+      "serviceOrder": {},
+      "cashboxId": "caixa-principal",
+      "items": [],
+      "payments": [],
+      "subtotal": 0,
+      "discountTotal": 0,
+      "total": 0,
+      "amountPaid": 0,
+      "amountPending": 0,
+      "change": 0,
+      "updatedAt": "2026-07-28T10:36:06.549Z",
+      "updatedBy": "painel"
+    },
+    {
+      "id": "OP-1785253403961-A8A9M",
+      "number": 13,
+      "type": "sale",
+      "status": "open",
+      "version": 1,
+      "createdAt": "2026-07-28T15:43:23.961Z",
+      "createdBy": "painel",
+      "dates": {
+        "openedAt": "2026-07-28T15:43:23.961Z",
+        "updatedAt": "2026-07-28T15:43:23.962Z",
+        "finalizedAt": null,
+        "cancelledAt": null
+      },
+      "operationalStatus": "in_service",
+      "financialStatus": "not_started",
+      "timeline": [
+        {
+          "id": "EVT-1785253403961-DKXNX",
+          "type": "created",
+          "label": "Operação criada",
+          "at": "2026-07-28T15:43:23.961Z",
+          "actor": "painel"
+        }
+      ],
+      "audit": [
+        {
+          "id": "EVT-1785253403961-DKXNX",
+          "type": "created",
+          "label": "Operação criada",
+          "at": "2026-07-28T15:43:23.961Z",
+          "actor": "painel"
+        }
+      ],
+      "snapshot": null,
+      "links": {
+        "originalOperationId": null,
+        "originalItemId": null,
+        "exchangeIds": [],
+        "returnIds": [],
+        "warrantyIds": []
+      },
+      "customerId": "",
+      "customerNameSnapshot": "",
+      "identifier": "",
+      "sellerId": "",
+      "sellerNameSnapshot": "",
+      "notes": "",
+      "serviceOrder": {},
+      "cashboxId": "caixa-principal",
+      "items": [],
+      "payments": [],
+      "subtotal": 0,
+      "discountTotal": 0,
+      "total": 0,
+      "amountPaid": 0,
+      "amountPending": 0,
+      "change": 0,
+      "updatedAt": "2026-07-28T15:43:23.962Z",
+      "updatedBy": "painel"
+    },
+    {
+      "id": "OP-1785277412959-UFE3P",
+      "number": 14,
+      "type": "sale",
+      "status": "finalized",
+      "version": 5,
+      "createdAt": "2026-07-28T22:23:32.959Z",
+      "createdBy": "painel",
+      "dates": {
+        "openedAt": "2026-07-28T22:23:32.959Z",
+        "updatedAt": "2026-07-28T22:34:12.744Z",
+        "finalizedAt": "2026-07-28T22:34:12.744Z",
+        "cancelledAt": null
+      },
+      "operationalStatus": "completed",
+      "financialStatus": "pending_receipt",
+      "timeline": [
+        {
+          "id": "EVT-1785277412960-I9735",
+          "type": "created",
+          "label": "Operação criada",
+          "at": "2026-07-28T22:23:32.960Z",
+          "actor": "painel"
+        },
+        {
+          "id": "EVT-1785278014038-26W23",
+          "type": "updated",
+          "label": "Operação atualizada: Pagamentos",
+          "at": "2026-07-28T22:33:34.038Z",
+          "actor": "painel",
+          "details": {
+            "version": 2
+          }
+        },
+        {
+          "id": "EVT-1785278052681-T1FZS",
+          "type": "updated",
+          "label": "Operação atualizada: Pagamentos",
+          "at": "2026-07-28T22:34:12.681Z",
+          "actor": "painel",
+          "details": {
+            "version": 3
+          }
+        },
+        {
+          "id": "EVT-1785278052737-S1GCQ",
+          "type": "posted",
+          "label": "Estoque e caixa processados",
+          "at": "2026-07-28T22:34:12.737Z",
+          "actor": "painel"
+        },
+        {
+          "id": "EVT-1785278052744-68J11",
+          "type": "finalized",
+          "label": "Operação finalizada com títulos financeiros gerados",
+          "at": "2026-07-28T22:34:12.744Z",
+          "actor": "painel",
+          "details": {
+            "status": "finalized",
+            "financialStatus": "pending_receipt",
+            "total": 2,
+            "amountPaid": 2,
+            "change": 0
+          }
+        }
+      ],
+      "audit": [
+        {
+          "id": "EVT-1785277412960-I9735",
+          "type": "created",
+          "label": "Operação criada",
+          "at": "2026-07-28T22:23:32.960Z",
+          "actor": "painel"
+        },
+        {
+          "id": "EVT-1785278014038-26W23",
+          "type": "updated",
+          "label": "Operação atualizada: Pagamentos",
+          "at": "2026-07-28T22:33:34.038Z",
+          "actor": "painel",
+          "details": {
+            "version": 2
+          }
+        },
+        {
+          "id": "EVT-1785278052681-T1FZS",
+          "type": "updated",
+          "label": "Operação atualizada: Pagamentos",
+          "at": "2026-07-28T22:34:12.681Z",
+          "actor": "painel",
+          "details": {
+            "version": 3
+          }
+        },
+        {
+          "id": "EVT-1785278052737-S1GCQ",
+          "type": "posted",
+          "label": "Estoque e caixa processados",
+          "at": "2026-07-28T22:34:12.737Z",
+          "actor": "painel"
+        },
+        {
+          "id": "EVT-1785278052744-68J11",
+          "type": "finalized",
+          "label": "Operação finalizada com títulos financeiros gerados",
+          "at": "2026-07-28T22:34:12.744Z",
+          "actor": "painel",
+          "details": {
+            "status": "finalized",
+            "financialStatus": "pending_receipt",
+            "total": 2,
+            "amountPaid": 2,
+            "change": 0
+          }
+        }
+      ],
+      "snapshot": {
+        "createdAt": "2026-07-28T22:34:12.744Z",
+        "customer": {
+          "id": "CLI-1785107913792-ZXBKD",
+          "name": "teste",
+          "identifier": ""
+        },
+        "seller": {
+          "id": "",
+          "name": ""
+        },
+        "items": [
+          {
+            "id": "OPI-1785277412960-LBLKK",
+            "productId": "1781828065854",
+            "inventoryItemId": "",
+            "name": "Adaptador Veicular P2 Bluetooth Receptor de Música",
+            "quantity": 1,
+            "unitPrice": 2,
+            "unitCost": 0,
+            "discount": 0,
+            "sellerId": "",
+            "sellerNameSnapshot": "",
+            "stockControlled": false,
+            "allowNegative": false
+          }
+        ],
+        "payments": [
+          {
+            "id": "PAY-1785278052681-W5KY3",
+            "methodId": "boleto-crediario",
+            "methodName": "Boleto / crediário",
+            "amount": 2,
+            "installments": 1,
+            "dueDate": "",
+            "status": "paid",
+            "notes": ""
+          }
+        ],
+        "serviceOrder": {
+          "device": "",
+          "equipmentId": "",
+          "issue": "",
+          "technicianName": "",
+          "servicePerformed": "",
+          "accessories": "",
+          "checkin": {
+            "notes": "",
+            "items": []
+          },
+          "checkout": {
+            "notes": "",
+            "items": [],
+            "customerChecked": false,
+            "accessoriesChecked": false,
+            "guidanceReceived": false
+          },
+          "attachments": []
+        },
+        "totals": {
+          "subtotal": 2,
+          "discountTotal": 0,
+          "total": 2,
+          "amountPaid": 2,
+          "amountPending": 0,
+          "change": 0
+        }
+      },
+      "links": {
+        "originalOperationId": null,
+        "originalItemId": null,
+        "exchangeIds": [],
+        "returnIds": [],
+        "warrantyIds": []
+      },
+      "customerId": "CLI-1785107913792-ZXBKD",
+      "customerNameSnapshot": "teste",
+      "identifier": "",
+      "sellerId": "",
+      "sellerNameSnapshot": "",
+      "notes": "",
+      "serviceOrder": {
+        "device": "",
+        "equipmentId": "",
+        "issue": "",
+        "technicianName": "",
+        "servicePerformed": "",
+        "accessories": "",
+        "checkin": {
+          "notes": "",
+          "items": []
+        },
+        "checkout": {
+          "notes": "",
+          "items": [],
+          "customerChecked": false,
+          "accessoriesChecked": false,
+          "guidanceReceived": false
+        },
+        "attachments": []
+      },
+      "cashboxId": "caixa-principal",
+      "items": [
+        {
+          "id": "OPI-1785277412960-LBLKK",
+          "productId": "1781828065854",
+          "inventoryItemId": "",
+          "name": "Adaptador Veicular P2 Bluetooth Receptor de Música",
+          "quantity": 1,
+          "unitPrice": 2,
+          "unitCost": 0,
+          "discount": 0,
+          "sellerId": "",
+          "sellerNameSnapshot": "",
+          "stockControlled": false,
+          "allowNegative": false
+        }
+      ],
+      "payments": [
+        {
+          "id": "PAY-1785278052681-W5KY3",
+          "methodId": "boleto-crediario",
+          "methodName": "Boleto / crediário",
+          "amount": 2,
+          "installments": 1,
+          "dueDate": "",
+          "status": "paid",
+          "notes": ""
+        }
+      ],
+      "subtotal": 2,
+      "discountTotal": 0,
+      "total": 2,
+      "amountPaid": 2,
+      "amountPending": 0,
+      "change": 0,
+      "updatedAt": "2026-07-28T22:34:12.744Z",
+      "updatedBy": "painel",
+      "inventoryPostedAt": "2026-07-28T22:34:12.736Z",
+      "cashPostedAt": "2026-07-28T22:34:12.736Z",
+      "receivableIds": [
+        "REC-fd5b239d-00e9-4fb8-af99-a33af1eec57c"
+      ],
+      "finalizedAt": "2026-07-28T22:34:12.744Z",
+      "finalizedBy": "painel"
+    },
+    {
+      "id": "OP-1785279185078-F1PJN",
+      "number": 15,
+      "type": "sale",
+      "status": "finalized",
+      "version": 3,
+      "createdAt": "2026-07-28T22:53:05.077Z",
+      "createdBy": "painel",
+      "dates": {
+        "openedAt": "2026-07-28T22:53:05.077Z",
+        "updatedAt": "2026-07-28T22:53:05.161Z",
+        "finalizedAt": "2026-07-28T22:53:05.161Z",
+        "cancelledAt": null
+      },
+      "operationalStatus": "completed",
+      "financialStatus": "pending_receipt",
+      "timeline": [
+        {
+          "id": "EVT-1785279185078-OBXV8",
+          "type": "created",
+          "label": "Operação criada",
+          "at": "2026-07-28T22:53:05.078Z",
+          "actor": "painel"
+        },
+        {
+          "id": "EVT-1785279185153-FBCU6",
+          "type": "posted",
+          "label": "Estoque e caixa processados",
+          "at": "2026-07-28T22:53:05.153Z",
+          "actor": "painel"
+        },
+        {
+          "id": "EVT-1785279185161-XRZL6",
+          "type": "finalized",
+          "label": "Operação finalizada com títulos financeiros gerados",
+          "at": "2026-07-28T22:53:05.161Z",
+          "actor": "painel",
+          "details": {
+            "status": "finalized",
+            "financialStatus": "pending_receipt",
+            "total": 1,
+            "amountPaid": 1,
+            "change": 0
+          }
+        }
+      ],
+      "audit": [
+        {
+          "id": "EVT-1785279185078-OBXV8",
+          "type": "created",
+          "label": "Operação criada",
+          "at": "2026-07-28T22:53:05.078Z",
+          "actor": "painel"
+        },
+        {
+          "id": "EVT-1785279185153-FBCU6",
+          "type": "posted",
+          "label": "Estoque e caixa processados",
+          "at": "2026-07-28T22:53:05.153Z",
+          "actor": "painel"
+        },
+        {
+          "id": "EVT-1785279185161-XRZL6",
+          "type": "finalized",
+          "label": "Operação finalizada com títulos financeiros gerados",
+          "at": "2026-07-28T22:53:05.161Z",
+          "actor": "painel",
+          "details": {
+            "status": "finalized",
+            "financialStatus": "pending_receipt",
+            "total": 1,
+            "amountPaid": 1,
+            "change": 0
+          }
+        }
+      ],
+      "snapshot": {
+        "createdAt": "2026-07-28T22:53:05.161Z",
+        "customer": {
+          "id": "CLI-1785107913792-ZXBKD",
+          "name": "teste",
+          "identifier": ""
+        },
+        "seller": {
+          "id": "",
+          "name": ""
+        },
+        "items": [
+          {
+            "id": "OPI-1785279185078-FKOPW",
+            "productId": "1781828065854",
+            "inventoryItemId": "",
+            "name": "Adaptador Veicular P2 Bluetooth Receptor de Música",
+            "quantity": 1,
+            "unitPrice": 1,
+            "unitCost": 0,
+            "discount": 0,
+            "sellerId": "",
+            "sellerNameSnapshot": "",
+            "stockControlled": false,
+            "allowNegative": false
+          }
+        ],
+        "payments": [
+          {
+            "id": "PAY-1785279185078-6POZ9",
+            "methodId": "boleto-crediario",
+            "methodName": "Boleto / crediário",
+            "amount": 1,
+            "installments": 1,
+            "dueDate": "2026-08-27",
+            "status": "paid",
+            "notes": ""
+          }
+        ],
+        "serviceOrder": {
+          "device": "",
+          "equipmentId": "",
+          "issue": "",
+          "technicianName": "",
+          "servicePerformed": "",
+          "accessories": "",
+          "checkin": {
+            "notes": "",
+            "items": []
+          },
+          "checkout": {
+            "notes": "",
+            "items": [],
+            "customerChecked": false,
+            "accessoriesChecked": false,
+            "guidanceReceived": false
+          },
+          "attachments": []
+        },
+        "totals": {
+          "subtotal": 1,
+          "discountTotal": 0,
+          "total": 1,
+          "amountPaid": 1,
+          "amountPending": 0,
+          "change": 0
+        }
+      },
+      "links": {
+        "originalOperationId": null,
+        "originalItemId": null,
+        "exchangeIds": [],
+        "returnIds": [],
+        "warrantyIds": []
+      },
+      "customerId": "CLI-1785107913792-ZXBKD",
+      "customerNameSnapshot": "teste",
+      "identifier": "",
+      "sellerId": "",
+      "sellerNameSnapshot": "",
+      "notes": "",
+      "serviceOrder": {
+        "device": "",
+        "equipmentId": "",
+        "issue": "",
+        "technicianName": "",
+        "servicePerformed": "",
+        "accessories": "",
+        "checkin": {
+          "notes": "",
+          "items": []
+        },
+        "checkout": {
+          "notes": "",
+          "items": [],
+          "customerChecked": false,
+          "accessoriesChecked": false,
+          "guidanceReceived": false
+        },
+        "attachments": []
+      },
+      "cashboxId": "caixa-principal",
+      "items": [
+        {
+          "id": "OPI-1785279185078-FKOPW",
+          "productId": "1781828065854",
+          "inventoryItemId": "",
+          "name": "Adaptador Veicular P2 Bluetooth Receptor de Música",
+          "quantity": 1,
+          "unitPrice": 1,
+          "unitCost": 0,
+          "discount": 0,
+          "sellerId": "",
+          "sellerNameSnapshot": "",
+          "stockControlled": false,
+          "allowNegative": false
+        }
+      ],
+      "payments": [
+        {
+          "id": "PAY-1785279185078-6POZ9",
+          "methodId": "boleto-crediario",
+          "methodName": "Boleto / crediário",
+          "amount": 1,
+          "installments": 1,
+          "dueDate": "2026-08-27",
+          "status": "paid",
+          "notes": ""
+        }
+      ],
+      "subtotal": 1,
+      "discountTotal": 0,
+      "total": 1,
+      "amountPaid": 1,
+      "amountPending": 0,
+      "change": 0,
+      "updatedAt": "2026-07-28T22:53:05.161Z",
+      "updatedBy": "painel",
+      "inventoryPostedAt": "2026-07-28T22:53:05.151Z",
+      "cashPostedAt": "2026-07-28T22:53:05.151Z",
+      "receivableIds": [
+        "REC-44aa68d5-acca-4270-90bb-2bff5caee1a8"
+      ],
+      "finalizedAt": "2026-07-28T22:53:05.161Z",
+      "finalizedBy": "painel"
+    },
+    {
+      "id": "OP-1785279193817-SOSCP",
+      "number": 16,
+      "type": "sale",
+      "status": "open",
+      "version": 1,
+      "createdAt": "2026-07-28T22:53:13.817Z",
+      "createdBy": "painel",
+      "dates": {
+        "openedAt": "2026-07-28T22:53:13.817Z",
+        "updatedAt": "2026-07-28T22:53:13.817Z",
+        "finalizedAt": null,
+        "cancelledAt": null
+      },
+      "operationalStatus": "in_service",
+      "financialStatus": "not_started",
+      "timeline": [
+        {
+          "id": "EVT-1785279193817-DZLL0",
+          "type": "created",
+          "label": "Operação criada",
+          "at": "2026-07-28T22:53:13.817Z",
+          "actor": "painel"
+        }
+      ],
+      "audit": [
+        {
+          "id": "EVT-1785279193817-DZLL0",
+          "type": "created",
+          "label": "Operação criada",
+          "at": "2026-07-28T22:53:13.817Z",
+          "actor": "painel"
+        }
+      ],
+      "snapshot": null,
+      "links": {
+        "originalOperationId": null,
+        "originalItemId": null,
+        "exchangeIds": [],
+        "returnIds": [],
+        "warrantyIds": []
+      },
+      "customerId": "",
+      "customerNameSnapshot": "",
+      "identifier": "",
+      "sellerId": "",
+      "sellerNameSnapshot": "",
+      "notes": "",
+      "serviceOrder": {},
+      "cashboxId": "caixa-principal",
+      "items": [],
+      "payments": [],
+      "subtotal": 0,
+      "discountTotal": 0,
+      "total": 0,
+      "amountPaid": 0,
+      "amountPending": 0,
+      "change": 0,
+      "updatedAt": "2026-07-28T22:53:13.817Z",
+      "updatedBy": "painel"
+    },
+    {
+      "id": "OP-1785284982958-M17I9",
+      "number": 17,
+      "type": "sale",
+      "status": "finalized",
+      "version": 3,
+      "createdAt": "2026-07-29T00:29:42.958Z",
+      "createdBy": "painel",
+      "dates": {
+        "openedAt": "2026-07-29T00:29:42.958Z",
+        "updatedAt": "2026-07-29T00:29:43.028Z",
+        "finalizedAt": "2026-07-29T00:29:43.028Z",
+        "cancelledAt": null
+      },
+      "operationalStatus": "completed",
+      "financialStatus": "pending_receipt",
+      "timeline": [
+        {
+          "id": "EVT-1785284982958-1DX3I",
+          "type": "created",
+          "label": "Operação criada",
+          "at": "2026-07-29T00:29:42.958Z",
+          "actor": "painel"
+        },
+        {
+          "id": "EVT-1785284983022-ZZX4G",
+          "type": "posted",
+          "label": "Estoque e caixa processados",
+          "at": "2026-07-29T00:29:43.022Z",
+          "actor": "painel"
+        },
+        {
+          "id": "EVT-1785284983028-TJEUD",
+          "type": "finalized",
+          "label": "Operação finalizada com títulos financeiros gerados",
+          "at": "2026-07-29T00:29:43.028Z",
+          "actor": "painel",
+          "details": {
+            "status": "finalized",
+            "financialStatus": "pending_receipt",
+            "total": 3.5,
+            "amountPaid": 3.5,
+            "change": 0
+          }
+        }
+      ],
+      "audit": [
+        {
+          "id": "EVT-1785284982958-1DX3I",
+          "type": "created",
+          "label": "Operação criada",
+          "at": "2026-07-29T00:29:42.958Z",
+          "actor": "painel"
+        },
+        {
+          "id": "EVT-1785284983022-ZZX4G",
+          "type": "posted",
+          "label": "Estoque e caixa processados",
+          "at": "2026-07-29T00:29:43.022Z",
+          "actor": "painel"
+        },
+        {
+          "id": "EVT-1785284983028-TJEUD",
+          "type": "finalized",
+          "label": "Operação finalizada com títulos financeiros gerados",
+          "at": "2026-07-29T00:29:43.028Z",
+          "actor": "painel",
+          "details": {
+            "status": "finalized",
+            "financialStatus": "pending_receipt",
+            "total": 3.5,
+            "amountPaid": 3.5,
+            "change": 0
+          }
+        }
+      ],
+      "snapshot": {
+        "createdAt": "2026-07-29T00:29:43.028Z",
+        "customer": {
+          "id": "CLI-1785107913792-ZXBKD",
+          "name": "teste",
+          "identifier": ""
+        },
+        "seller": {
+          "id": "",
+          "name": ""
+        },
+        "items": [
+          {
+            "id": "OPI-1785284982958-Y23C3",
+            "productId": "1781828065854",
+            "inventoryItemId": "",
+            "name": "Adaptador Veicular P2 Bluetooth Receptor de Música",
+            "quantity": 1,
+            "unitPrice": 3.5,
+            "unitCost": 0,
+            "discount": 0,
+            "sellerId": "",
+            "sellerNameSnapshot": "",
+            "stockControlled": false,
+            "allowNegative": false
+          }
+        ],
+        "payments": [
+          {
+            "id": "PAY-1785284982958-XAKKS",
+            "methodId": "boleto-crediario",
+            "methodName": "Boleto / crediário",
+            "amount": 3.5,
+            "installments": 3,
+            "dueDate": "2026-08-27",
+            "status": "paid",
+            "notes": ""
+          }
+        ],
+        "serviceOrder": {
+          "device": "",
+          "equipmentId": "",
+          "issue": "",
+          "technicianName": "",
+          "servicePerformed": "",
+          "accessories": "",
+          "checkin": {
+            "notes": "",
+            "items": []
+          },
+          "checkout": {
+            "notes": "",
+            "items": [],
+            "customerChecked": false,
+            "accessoriesChecked": false,
+            "guidanceReceived": false
+          },
+          "attachments": []
+        },
+        "totals": {
+          "subtotal": 3.5,
+          "discountTotal": 0,
+          "total": 3.5,
+          "amountPaid": 3.5,
+          "amountPending": 0,
+          "change": 0
+        }
+      },
+      "links": {
+        "originalOperationId": null,
+        "originalItemId": null,
+        "exchangeIds": [],
+        "returnIds": [],
+        "warrantyIds": []
+      },
+      "customerId": "CLI-1785107913792-ZXBKD",
+      "customerNameSnapshot": "teste",
+      "identifier": "",
+      "sellerId": "",
+      "sellerNameSnapshot": "",
+      "notes": "",
+      "serviceOrder": {
+        "device": "",
+        "equipmentId": "",
+        "issue": "",
+        "technicianName": "",
+        "servicePerformed": "",
+        "accessories": "",
+        "checkin": {
+          "notes": "",
+          "items": []
+        },
+        "checkout": {
+          "notes": "",
+          "items": [],
+          "customerChecked": false,
+          "accessoriesChecked": false,
+          "guidanceReceived": false
+        },
+        "attachments": []
+      },
+      "cashboxId": "caixa-principal",
+      "items": [
+        {
+          "id": "OPI-1785284982958-Y23C3",
+          "productId": "1781828065854",
+          "inventoryItemId": "",
+          "name": "Adaptador Veicular P2 Bluetooth Receptor de Música",
+          "quantity": 1,
+          "unitPrice": 3.5,
+          "unitCost": 0,
+          "discount": 0,
+          "sellerId": "",
+          "sellerNameSnapshot": "",
+          "stockControlled": false,
+          "allowNegative": false
+        }
+      ],
+      "payments": [
+        {
+          "id": "PAY-1785284982958-XAKKS",
+          "methodId": "boleto-crediario",
+          "methodName": "Boleto / crediário",
+          "amount": 3.5,
+          "installments": 3,
+          "dueDate": "2026-08-27",
+          "status": "paid",
+          "notes": ""
+        }
+      ],
+      "subtotal": 3.5,
+      "discountTotal": 0,
+      "total": 3.5,
+      "amountPaid": 3.5,
+      "amountPending": 0,
+      "change": 0,
+      "updatedAt": "2026-07-29T00:29:43.028Z",
+      "updatedBy": "painel",
+      "inventoryPostedAt": "2026-07-29T00:29:43.020Z",
+      "cashPostedAt": "2026-07-29T00:29:43.020Z",
+      "receivableIds": [
+        "REC-501a15b6-4507-460b-a341-23a4ed182fc3"
+      ],
+      "finalizedAt": "2026-07-29T00:29:43.028Z",
+      "finalizedBy": "painel"
+    },
+    {
+      "id": "OP-1785286405976-AXNTK",
+      "number": 18,
+      "type": "sale",
+      "status": "finalized",
+      "version": 3,
+      "createdAt": "2026-07-29T00:53:25.976Z",
+      "createdBy": "painel",
+      "dates": {
+        "openedAt": "2026-07-29T00:53:25.976Z",
+        "updatedAt": "2026-07-29T00:53:26.077Z",
+        "finalizedAt": "2026-07-29T00:53:26.077Z",
+        "cancelledAt": null
+      },
+      "operationalStatus": "completed",
+      "financialStatus": "pending_receipt",
+      "timeline": [
+        {
+          "id": "EVT-1785286405977-1JST3",
+          "type": "created",
+          "label": "Operação criada",
+          "at": "2026-07-29T00:53:25.977Z",
+          "actor": "painel"
+        },
+        {
+          "id": "EVT-1785286406071-3K77L",
+          "type": "posted",
+          "label": "Estoque e caixa processados",
+          "at": "2026-07-29T00:53:26.071Z",
+          "actor": "painel"
+        },
+        {
+          "id": "EVT-1785286406077-U0C7S",
+          "type": "finalized",
+          "label": "Operação finalizada com títulos financeiros gerados",
+          "at": "2026-07-29T00:53:26.077Z",
+          "actor": "painel",
+          "details": {
+            "status": "finalized",
+            "financialStatus": "pending_receipt",
+            "total": 5,
+            "amountPaid": 5,
+            "change": 0
+          }
+        }
+      ],
+      "audit": [
+        {
+          "id": "EVT-1785286405977-1JST3",
+          "type": "created",
+          "label": "Operação criada",
+          "at": "2026-07-29T00:53:25.977Z",
+          "actor": "painel"
+        },
+        {
+          "id": "EVT-1785286406071-3K77L",
+          "type": "posted",
+          "label": "Estoque e caixa processados",
+          "at": "2026-07-29T00:53:26.071Z",
+          "actor": "painel"
+        },
+        {
+          "id": "EVT-1785286406077-U0C7S",
+          "type": "finalized",
+          "label": "Operação finalizada com títulos financeiros gerados",
+          "at": "2026-07-29T00:53:26.077Z",
+          "actor": "painel",
+          "details": {
+            "status": "finalized",
+            "financialStatus": "pending_receipt",
+            "total": 5,
+            "amountPaid": 5,
+            "change": 0
+          }
+        }
+      ],
+      "snapshot": {
+        "createdAt": "2026-07-29T00:53:26.077Z",
+        "customer": {
+          "id": "CLI-1785107913792-ZXBKD",
+          "name": "teste",
+          "identifier": ""
+        },
+        "seller": {
+          "id": "",
+          "name": ""
+        },
+        "items": [
+          {
+            "id": "OPI-1785286405977-85NCQ",
+            "productId": "1781828065854",
+            "inventoryItemId": "",
+            "name": "Adaptador Veicular P2 Bluetooth Receptor de Música",
+            "quantity": 1,
+            "unitPrice": 5,
+            "unitCost": 0,
+            "discount": 0,
+            "sellerId": "",
+            "sellerNameSnapshot": "",
+            "stockControlled": false,
+            "allowNegative": false
+          }
+        ],
+        "payments": [
+          {
+            "id": "PAY-1785286405977-U5FOE",
+            "methodId": "boleto-crediario",
+            "methodName": "Boleto / crediário",
+            "amount": 5,
+            "installments": 10,
+            "dueDate": "2026-08-27",
+            "dueDates": [
+              "2026-08-27",
+              "2026-09-27",
+              "2026-10-25",
+              "2026-11-24",
+              "2026-12-23",
+              "2027-01-22",
+              "2027-02-20",
+              "2027-03-21",
+              "2027-04-24",
+              "2027-05-25"
+            ],
+            "status": "paid",
+            "notes": ""
+          }
+        ],
+        "serviceOrder": {
+          "device": "",
+          "equipmentId": "",
+          "issue": "",
+          "technicianName": "",
+          "servicePerformed": "",
+          "accessories": "",
+          "checkin": {
+            "notes": "",
+            "items": []
+          },
+          "checkout": {
+            "notes": "",
+            "items": [],
+            "customerChecked": false,
+            "accessoriesChecked": false,
+            "guidanceReceived": false
+          },
+          "attachments": []
+        },
+        "totals": {
+          "subtotal": 5,
+          "discountTotal": 0,
+          "total": 5,
+          "amountPaid": 5,
+          "amountPending": 0,
+          "change": 0
+        }
+      },
+      "links": {
+        "originalOperationId": null,
+        "originalItemId": null,
+        "exchangeIds": [],
+        "returnIds": [],
+        "warrantyIds": []
+      },
+      "customerId": "CLI-1785107913792-ZXBKD",
+      "customerNameSnapshot": "teste",
+      "identifier": "",
+      "sellerId": "",
+      "sellerNameSnapshot": "",
+      "notes": "",
+      "serviceOrder": {
+        "device": "",
+        "equipmentId": "",
+        "issue": "",
+        "technicianName": "",
+        "servicePerformed": "",
+        "accessories": "",
+        "checkin": {
+          "notes": "",
+          "items": []
+        },
+        "checkout": {
+          "notes": "",
+          "items": [],
+          "customerChecked": false,
+          "accessoriesChecked": false,
+          "guidanceReceived": false
+        },
+        "attachments": []
+      },
+      "cashboxId": "caixa-principal",
+      "items": [
+        {
+          "id": "OPI-1785286405977-85NCQ",
+          "productId": "1781828065854",
+          "inventoryItemId": "",
+          "name": "Adaptador Veicular P2 Bluetooth Receptor de Música",
+          "quantity": 1,
+          "unitPrice": 5,
+          "unitCost": 0,
+          "discount": 0,
+          "sellerId": "",
+          "sellerNameSnapshot": "",
+          "stockControlled": false,
+          "allowNegative": false
+        }
+      ],
+      "payments": [
+        {
+          "id": "PAY-1785286405977-U5FOE",
+          "methodId": "boleto-crediario",
+          "methodName": "Boleto / crediário",
+          "amount": 5,
+          "installments": 10,
+          "dueDate": "2026-08-27",
+          "dueDates": [
+            "2026-08-27",
+            "2026-09-27",
+            "2026-10-25",
+            "2026-11-24",
+            "2026-12-23",
+            "2027-01-22",
+            "2027-02-20",
+            "2027-03-21",
+            "2027-04-24",
+            "2027-05-25"
+          ],
+          "status": "paid",
+          "notes": ""
+        }
+      ],
+      "subtotal": 5,
+      "discountTotal": 0,
+      "total": 5,
+      "amountPaid": 5,
+      "amountPending": 0,
+      "change": 0,
+      "updatedAt": "2026-07-29T00:53:26.077Z",
+      "updatedBy": "painel",
+      "inventoryPostedAt": "2026-07-29T00:53:26.069Z",
+      "cashPostedAt": "2026-07-29T00:53:26.069Z",
+      "receivableIds": [
+        "REC-954feb6e-c4cb-4d43-952f-04fa62996214"
+      ],
+      "finalizedAt": "2026-07-29T00:53:26.077Z",
+      "finalizedBy": "painel"
+    },
+    {
+      "id": "OP-1785286408146-9CKVW",
+      "number": 19,
+      "type": "sale",
+      "status": "open",
+      "version": 1,
+      "createdAt": "2026-07-29T00:53:28.146Z",
+      "createdBy": "painel",
+      "dates": {
+        "openedAt": "2026-07-29T00:53:28.146Z",
+        "updatedAt": "2026-07-29T00:53:28.146Z",
+        "finalizedAt": null,
+        "cancelledAt": null
+      },
+      "operationalStatus": "in_service",
+      "financialStatus": "not_started",
+      "timeline": [
+        {
+          "id": "EVT-1785286408146-Q0AXU",
+          "type": "created",
+          "label": "Operação criada",
+          "at": "2026-07-29T00:53:28.146Z",
+          "actor": "painel"
+        }
+      ],
+      "audit": [
+        {
+          "id": "EVT-1785286408146-Q0AXU",
+          "type": "created",
+          "label": "Operação criada",
+          "at": "2026-07-29T00:53:28.146Z",
+          "actor": "painel"
+        }
+      ],
+      "snapshot": null,
+      "links": {
+        "originalOperationId": null,
+        "originalItemId": null,
+        "exchangeIds": [],
+        "returnIds": [],
+        "warrantyIds": []
+      },
+      "customerId": "",
+      "customerNameSnapshot": "",
+      "identifier": "",
+      "sellerId": "",
+      "sellerNameSnapshot": "",
+      "notes": "",
+      "serviceOrder": {},
+      "cashboxId": "caixa-principal",
+      "items": [],
+      "payments": [],
+      "subtotal": 0,
+      "discountTotal": 0,
+      "total": 0,
+      "amountPaid": 0,
+      "amountPending": 0,
+      "change": 0,
+      "updatedAt": "2026-07-29T00:53:28.146Z",
+      "updatedBy": "painel"
+    },
+    {
+      "id": "OP-1785459007045-7BQGT",
+      "number": 20,
+      "type": "sale",
+      "status": "finalized",
+      "version": 3,
+      "createdAt": "2026-07-31T00:50:07.045Z",
+      "createdBy": "painel",
+      "dates": {
+        "openedAt": "2026-07-31T00:50:07.045Z",
+        "updatedAt": "2026-07-31T00:50:07.163Z",
+        "finalizedAt": "2026-07-31T00:50:07.163Z",
+        "cancelledAt": null
+      },
+      "operationalStatus": "completed",
+      "financialStatus": "paid",
+      "timeline": [
+        {
+          "id": "EVT-1785459007045-VC22F",
+          "type": "created",
+          "label": "Operação criada",
+          "at": "2026-07-31T00:50:07.045Z",
+          "actor": "painel"
+        },
+        {
+          "id": "EVT-1785459007155-O6I8T",
+          "type": "posted",
+          "label": "Estoque e caixa processados",
+          "at": "2026-07-31T00:50:07.156Z",
+          "actor": "painel"
+        },
+        {
+          "id": "EVT-1785459007163-41UHD",
+          "type": "finalized",
+          "label": "Operação finalizada com pagamento integral",
+          "at": "2026-07-31T00:50:07.163Z",
+          "actor": "painel",
+          "details": {
+            "status": "finalized",
+            "financialStatus": "paid",
+            "total": 1,
+            "amountPaid": 1,
+            "change": 0
+          }
+        }
+      ],
+      "audit": [
+        {
+          "id": "EVT-1785459007045-VC22F",
+          "type": "created",
+          "label": "Operação criada",
+          "at": "2026-07-31T00:50:07.045Z",
+          "actor": "painel"
+        },
+        {
+          "id": "EVT-1785459007155-O6I8T",
+          "type": "posted",
+          "label": "Estoque e caixa processados",
+          "at": "2026-07-31T00:50:07.156Z",
+          "actor": "painel"
+        },
+        {
+          "id": "EVT-1785459007163-41UHD",
+          "type": "finalized",
+          "label": "Operação finalizada com pagamento integral",
+          "at": "2026-07-31T00:50:07.163Z",
+          "actor": "painel",
+          "details": {
+            "status": "finalized",
+            "financialStatus": "paid",
+            "total": 1,
+            "amountPaid": 1,
+            "change": 0
+          }
+        }
+      ],
+      "snapshot": {
+        "createdAt": "2026-07-31T00:50:07.163Z",
+        "customer": {
+          "id": "",
+          "name": "Consumidor final",
+          "identifier": ""
+        },
+        "seller": {
+          "id": "",
+          "name": ""
+        },
+        "items": [
+          {
+            "id": "OPI-1785459007046-4SY7D",
+            "productId": "1781828065854",
+            "inventoryItemId": "PRD-1781828065854",
+            "name": "Adaptador Veicular P2 Bluetooth Receptor de Música",
+            "quantity": 1,
+            "unitPrice": 1,
+            "unitCost": 1,
+            "discount": 0,
+            "sellerId": "",
+            "sellerNameSnapshot": "",
+            "stockControlled": true,
+            "allowNegative": false
+          }
+        ],
+        "payments": [
+          {
+            "id": "PAY-1785459007046-4PDJS",
+            "methodId": "dinheiro",
+            "methodName": "Dinheiro",
+            "amount": 1,
+            "installments": 1,
+            "dueDate": "",
+            "dueDates": [],
+            "installmentAmounts": [],
+            "status": "paid",
+            "notes": ""
+          }
+        ],
+        "serviceOrder": {
+          "device": "",
+          "equipmentId": "",
+          "issue": "",
+          "technicianName": "",
+          "servicePerformed": "",
+          "accessories": "",
+          "checkin": {
+            "notes": "",
+            "items": []
+          },
+          "checkout": {
+            "notes": "",
+            "items": [],
+            "customerChecked": false,
+            "accessoriesChecked": false,
+            "guidanceReceived": false
+          },
+          "attachments": []
+        },
+        "totals": {
+          "subtotal": 1,
+          "discountTotal": 0,
+          "total": 1,
+          "amountPaid": 1,
+          "amountPending": 0,
+          "change": 0
+        }
+      },
+      "links": {
+        "originalOperationId": null,
+        "originalItemId": null,
+        "exchangeIds": [],
+        "returnIds": [],
+        "warrantyIds": []
+      },
+      "customerId": "",
+      "customerNameSnapshot": "",
+      "identifier": "",
+      "sellerId": "",
+      "sellerNameSnapshot": "",
+      "notes": "",
+      "serviceOrder": {
+        "device": "",
+        "equipmentId": "",
+        "issue": "",
+        "technicianName": "",
+        "servicePerformed": "",
+        "accessories": "",
+        "checkin": {
+          "notes": "",
+          "items": []
+        },
+        "checkout": {
+          "notes": "",
+          "items": [],
+          "customerChecked": false,
+          "accessoriesChecked": false,
+          "guidanceReceived": false
+        },
+        "attachments": []
+      },
+      "cashboxId": "caixa-principal",
+      "items": [
+        {
+          "id": "OPI-1785459007046-4SY7D",
+          "productId": "1781828065854",
+          "inventoryItemId": "PRD-1781828065854",
+          "name": "Adaptador Veicular P2 Bluetooth Receptor de Música",
+          "quantity": 1,
+          "unitPrice": 1,
+          "unitCost": 1,
+          "discount": 0,
+          "sellerId": "",
+          "sellerNameSnapshot": "",
+          "stockControlled": true,
+          "allowNegative": false
+        }
+      ],
+      "payments": [
+        {
+          "id": "PAY-1785459007046-4PDJS",
+          "methodId": "dinheiro",
+          "methodName": "Dinheiro",
+          "amount": 1,
+          "installments": 1,
+          "dueDate": "",
+          "dueDates": [],
+          "installmentAmounts": [],
+          "status": "paid",
+          "notes": ""
+        }
+      ],
+      "subtotal": 1,
+      "discountTotal": 0,
+      "total": 1,
+      "amountPaid": 1,
+      "amountPending": 0,
+      "change": 0,
+      "updatedAt": "2026-07-31T00:50:07.163Z",
+      "updatedBy": "painel",
+      "inventoryPostedAt": "2026-07-31T00:50:07.153Z",
+      "cashPostedAt": "2026-07-31T00:50:07.153Z",
+      "receivableIds": [],
+      "finalizedAt": "2026-07-31T00:50:07.163Z",
+      "finalizedBy": "painel"
+    },
+    {
+      "id": "OP-1785459009615-6R6PZ",
+      "number": 21,
+      "type": "sale",
+      "status": "open",
+      "version": 1,
+      "createdAt": "2026-07-31T00:50:09.615Z",
+      "createdBy": "painel",
+      "dates": {
+        "openedAt": "2026-07-31T00:50:09.615Z",
+        "updatedAt": "2026-07-31T00:50:09.616Z",
+        "finalizedAt": null,
+        "cancelledAt": null
+      },
+      "operationalStatus": "in_service",
+      "financialStatus": "not_started",
+      "timeline": [
+        {
+          "id": "EVT-1785459009616-YM3K8",
+          "type": "created",
+          "label": "Operação criada",
+          "at": "2026-07-31T00:50:09.616Z",
+          "actor": "painel"
+        }
+      ],
+      "audit": [
+        {
+          "id": "EVT-1785459009616-YM3K8",
+          "type": "created",
+          "label": "Operação criada",
+          "at": "2026-07-31T00:50:09.616Z",
+          "actor": "painel"
+        }
+      ],
+      "snapshot": null,
+      "links": {
+        "originalOperationId": null,
+        "originalItemId": null,
+        "exchangeIds": [],
+        "returnIds": [],
+        "warrantyIds": []
+      },
+      "customerId": "",
+      "customerNameSnapshot": "",
+      "identifier": "",
+      "sellerId": "",
+      "sellerNameSnapshot": "",
+      "notes": "",
+      "serviceOrder": {},
+      "cashboxId": "caixa-principal",
+      "items": [],
+      "payments": [],
+      "subtotal": 0,
+      "discountTotal": 0,
+      "total": 0,
+      "amountPaid": 0,
+      "amountPending": 0,
+      "change": 0,
+      "updatedAt": "2026-07-31T00:50:09.616Z",
+      "updatedBy": "painel"
+    },
+    {
+      "id": "OP-1785459300185-D5EJJ",
+      "number": 22,
+      "type": "sale",
+      "status": "finalized",
+      "version": 3,
+      "createdAt": "2026-07-31T00:55:00.185Z",
+      "createdBy": "painel",
+      "dates": {
+        "openedAt": "2026-07-31T00:55:00.185Z",
+        "updatedAt": "2026-07-31T00:55:00.306Z",
+        "finalizedAt": "2026-07-31T00:55:00.306Z",
+        "cancelledAt": null
+      },
+      "operationalStatus": "completed",
+      "financialStatus": "paid",
+      "timeline": [
+        {
+          "id": "EVT-1785459300185-WQFQG",
+          "type": "created",
+          "label": "Operação criada",
+          "at": "2026-07-31T00:55:00.185Z",
+          "actor": "painel"
+        },
+        {
+          "id": "EVT-1785459300294-Y3JA2",
+          "type": "posted",
+          "label": "Estoque e caixa processados",
+          "at": "2026-07-31T00:55:00.294Z",
+          "actor": "painel"
+        },
+        {
+          "id": "EVT-1785459300306-JKBUW",
+          "type": "finalized",
+          "label": "Operação finalizada com pagamento integral",
+          "at": "2026-07-31T00:55:00.306Z",
+          "actor": "painel",
+          "details": {
+            "status": "finalized",
+            "financialStatus": "paid",
+            "total": 1,
+            "amountPaid": 1,
+            "change": 0
+          }
+        }
+      ],
+      "audit": [
+        {
+          "id": "EVT-1785459300185-WQFQG",
+          "type": "created",
+          "label": "Operação criada",
+          "at": "2026-07-31T00:55:00.185Z",
+          "actor": "painel"
+        },
+        {
+          "id": "EVT-1785459300294-Y3JA2",
+          "type": "posted",
+          "label": "Estoque e caixa processados",
+          "at": "2026-07-31T00:55:00.294Z",
+          "actor": "painel"
+        },
+        {
+          "id": "EVT-1785459300306-JKBUW",
+          "type": "finalized",
+          "label": "Operação finalizada com pagamento integral",
+          "at": "2026-07-31T00:55:00.306Z",
+          "actor": "painel",
+          "details": {
+            "status": "finalized",
+            "financialStatus": "paid",
+            "total": 1,
+            "amountPaid": 1,
+            "change": 0
+          }
+        }
+      ],
+      "snapshot": {
+        "createdAt": "2026-07-31T00:55:00.306Z",
+        "customer": {
+          "id": "",
+          "name": "Consumidor final",
+          "identifier": ""
+        },
+        "seller": {
+          "id": "",
+          "name": ""
+        },
+        "items": [
+          {
+            "id": "OPI-1785459300185-5VIPW",
+            "productId": "1781828065854",
+            "inventoryItemId": "PRD-1781828065854",
+            "name": "Adaptador Veicular P2 Bluetooth Receptor de Música",
+            "quantity": 1,
+            "unitPrice": 1,
+            "unitCost": 1,
+            "discount": 0,
+            "sellerId": "",
+            "sellerNameSnapshot": "",
+            "stockControlled": true,
+            "allowNegative": false
+          }
+        ],
+        "payments": [
+          {
+            "id": "PAY-1785459300186-VXMG2",
+            "methodId": "dinheiro",
+            "methodName": "Dinheiro",
+            "amount": 1,
+            "installments": 1,
+            "dueDate": "",
+            "dueDates": [],
+            "installmentAmounts": [],
+            "status": "paid",
+            "notes": ""
+          }
+        ],
+        "serviceOrder": {
+          "device": "",
+          "equipmentId": "",
+          "issue": "",
+          "technicianName": "",
+          "servicePerformed": "",
+          "accessories": "",
+          "checkin": {
+            "notes": "",
+            "items": []
+          },
+          "checkout": {
+            "notes": "",
+            "items": [],
+            "customerChecked": false,
+            "accessoriesChecked": false,
+            "guidanceReceived": false
+          },
+          "attachments": []
+        },
+        "totals": {
+          "subtotal": 1,
+          "discountTotal": 0,
+          "total": 1,
+          "amountPaid": 1,
+          "amountPending": 0,
+          "change": 0
+        }
+      },
+      "links": {
+        "originalOperationId": null,
+        "originalItemId": null,
+        "exchangeIds": [],
+        "returnIds": [],
+        "warrantyIds": []
+      },
+      "customerId": "",
+      "customerNameSnapshot": "",
+      "identifier": "",
+      "sellerId": "",
+      "sellerNameSnapshot": "",
+      "notes": "",
+      "serviceOrder": {
+        "device": "",
+        "equipmentId": "",
+        "issue": "",
+        "technicianName": "",
+        "servicePerformed": "",
+        "accessories": "",
+        "checkin": {
+          "notes": "",
+          "items": []
+        },
+        "checkout": {
+          "notes": "",
+          "items": [],
+          "customerChecked": false,
+          "accessoriesChecked": false,
+          "guidanceReceived": false
+        },
+        "attachments": []
+      },
+      "cashboxId": "caixa-principal",
+      "items": [
+        {
+          "id": "OPI-1785459300185-5VIPW",
+          "productId": "1781828065854",
+          "inventoryItemId": "PRD-1781828065854",
+          "name": "Adaptador Veicular P2 Bluetooth Receptor de Música",
+          "quantity": 1,
+          "unitPrice": 1,
+          "unitCost": 1,
+          "discount": 0,
+          "sellerId": "",
+          "sellerNameSnapshot": "",
+          "stockControlled": true,
+          "allowNegative": false
+        }
+      ],
+      "payments": [
+        {
+          "id": "PAY-1785459300186-VXMG2",
+          "methodId": "dinheiro",
+          "methodName": "Dinheiro",
+          "amount": 1,
+          "installments": 1,
+          "dueDate": "",
+          "dueDates": [],
+          "installmentAmounts": [],
+          "status": "paid",
+          "notes": ""
+        }
+      ],
+      "subtotal": 1,
+      "discountTotal": 0,
+      "total": 1,
+      "amountPaid": 1,
+      "amountPending": 0,
+      "change": 0,
+      "updatedAt": "2026-07-31T00:55:00.306Z",
+      "updatedBy": "painel",
+      "inventoryPostedAt": "2026-07-31T00:55:00.290Z",
+      "cashPostedAt": "2026-07-31T00:55:00.290Z",
+      "receivableIds": [],
+      "finalizedAt": "2026-07-31T00:55:00.306Z",
+      "finalizedBy": "painel"
+    },
+    {
+      "id": "OP-1785459308374-ET5E4",
+      "number": 23,
+      "type": "sale",
+      "status": "open",
+      "version": 1,
+      "createdAt": "2026-07-31T00:55:08.374Z",
+      "createdBy": "painel",
+      "dates": {
+        "openedAt": "2026-07-31T00:55:08.374Z",
+        "updatedAt": "2026-07-31T00:55:08.375Z",
+        "finalizedAt": null,
+        "cancelledAt": null
+      },
+      "operationalStatus": "in_service",
+      "financialStatus": "not_started",
+      "timeline": [
+        {
+          "id": "EVT-1785459308374-DEW77",
+          "type": "created",
+          "label": "Operação criada",
+          "at": "2026-07-31T00:55:08.374Z",
+          "actor": "painel"
+        }
+      ],
+      "audit": [
+        {
+          "id": "EVT-1785459308374-DEW77",
+          "type": "created",
+          "label": "Operação criada",
+          "at": "2026-07-31T00:55:08.374Z",
+          "actor": "painel"
+        }
+      ],
+      "snapshot": null,
+      "links": {
+        "originalOperationId": null,
+        "originalItemId": null,
+        "exchangeIds": [],
+        "returnIds": [],
+        "warrantyIds": []
+      },
+      "customerId": "",
+      "customerNameSnapshot": "",
+      "identifier": "",
+      "sellerId": "",
+      "sellerNameSnapshot": "",
+      "notes": "",
+      "serviceOrder": {},
+      "cashboxId": "caixa-principal",
+      "items": [],
+      "payments": [],
+      "subtotal": 0,
+      "discountTotal": 0,
+      "total": 0,
+      "amountPaid": 0,
+      "amountPending": 0,
+      "change": 0,
+      "updatedAt": "2026-07-31T00:55:08.375Z",
+      "updatedBy": "painel"
+    }
+  ]
+}

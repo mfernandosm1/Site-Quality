@@ -1,0 +1,15 @@
+{
+  "platformName": "Painel",
+  "companyId": "quality",
+  "tradeName": "Quality Celulares",
+  "legalName": "Rede Quality Celulares Ltda.",
+  "segment": "retail_electronics",
+  "segmentLabel": "Comércio de celulares e eletrônicos",
+  "unitId": "matriz",
+  "unitName": "Quality Celulares — Matriz",
+  "architecture": {
+    "multiCompanyReady": true,
+    "multiUnitReady": true,
+    "modular": true
+  }
+}

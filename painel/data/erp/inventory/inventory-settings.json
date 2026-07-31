@@ -1,0 +1,10 @@
+{
+  "version":"0.11.0",
+  "defaultLocationId":"loja-principal",
+  "defaults":{
+    "stockControlled":false,
+    "allowNegative":false,
+    "channelAvailability":{"site":{"mode":"shared","enabled":true,"limit":null,"physicalSafety":0}}
+  },
+  "advancedFeatures":{"multipleLocations":false,"serialNumber":false,"imei":false,"batches":false,"expiration":false,"consignment":false}
+}

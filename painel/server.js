@@ -4,13 +4,16 @@ import { fileURLToPath } from 'url';
 import bodyParser from 'body-parser';
 import ejsMate from 'ejs-mate';
 import fs from 'fs'; // 👈 necessário para checar o flag
+import KernelService from './services/kernel/kernel-service.js';
+import requestLogger from './services/kernel/request-logger.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const app = express();
 app.engine('ejs', ejsMate);
-const PORT = 3000;
+const PORT = Number(process.env.PORT) || 3000;
+const HOST = process.env.HOST || '0.0.0.0';
 
 const ROOT = path.resolve(__dirname, '..');
 const SITE_DIR = path.join(ROOT, 'Site_with_content');
@@ -27,6 +30,10 @@ app.use(bodyParser.urlencoded({ extended: true, limit: '15mb' }));
 app.use(bodyParser.json({ limit: '15mb' }));
 app.use('/public', express.static(PUBLIC_DIR));
 
+// Quality ERP v0.15.0 — Kernel global
+app.locals.kernelService = new KernelService({ dataDir: path.join(__dirname, 'data', 'kernel') });
+app.use(requestLogger(app.locals.kernelService));
+
 // Routes
 import indexRouter from './routes/index.js';
 import headerRouter from './routes/header.js';
@@ -36,6 +43,7 @@ import pagamentosRouter from './routes/pagamentos.js';
 import produtosRouter from './routes/produtos.js';
 import marketingRouter from './routes/marketing.js';
 import categoriasRouter from './routes/categorias.js';
+import subcategoriasRouter from './routes/subcategorias.js';
 import paginasRouter from './routes/paginas.js';
 import paginasIndexRouter from './routes/paginas_index.js';
 import paginasSobreRouter from './routes/paginas_sobre.js';
@@ -51,6 +59,12 @@ import seoRouter from './routes/seo.js';
 import sitePreviewRouter from './routes/sitepreview.js';
 import sorteiosRouter from './routes/sorteios.js';
 import analyticsRouter from './routes/analytics.js';
+import erpRouter from './routes/erp.js';
+import compatibilidadeRouter from './routes/compatibilidade.js';
+import orcamentosRouter from './routes/orcamentos.js';
+import navigationRouter from './routes/navigation.js';
+import configuracoesRouter from './routes/configuracoes.js';
+import kernelRouter from './routes/kernel.js';
 import automacaoWhatsappRouter, { initializeWhatsApp, shutdownWhatsApp } from './routes/automacao_whatsapp.js';
 
 app.use('/', indexRouter);
@@ -61,6 +75,7 @@ app.use('/pagamentos', pagamentosRouter);
 app.use('/produtos', produtosRouter);
 app.use('/marketing', marketingRouter);
 app.use('/categorias', categoriasRouter);
+app.use('/subcategorias', subcategoriasRouter);
 app.use('/paginas', paginasRouter);
 app.use('/paginas-index', paginasIndexRouter);
 app.use('/paginas-sobre', paginasSobreRouter);
@@ -75,6 +90,12 @@ app.use('/estilos', estilosRouter);
 app.use('/seo', seoRouter);
 app.use('/sorteios', sorteiosRouter);
 app.use('/analytics', analyticsRouter);
+app.use('/erp', erpRouter);
+app.use('/compatibilidade', compatibilidadeRouter);
+app.use('/orcamentos', orcamentosRouter);
+app.use('/', navigationRouter);
+app.use('/configuracoes', configuracoesRouter);
+app.use('/kernel', kernelRouter);
 app.use('/automacao-whatsapp', automacaoWhatsappRouter);
 
 
@@ -148,13 +169,19 @@ app.get('/:slug', (req, res) => {
   res.sendFile(path.join(SITE_DIR, 'categoria.html'));
 });
 
-const server = app.listen(PORT, async () => {
-  console.log(`Painel Quality V7.3 em http://localhost:${PORT}`);
+const server = app.listen(PORT, HOST, async () => {
+  console.log(`Painel Quality ERP v0.15.2 iniciado na porta ${PORT}`);
+  console.log(`Acesso local: http://localhost:${PORT}`);
+  console.log(`Acesso remoto: http://IP-TAILSCALE-DESTE-PC:${PORT}`);
+  app.locals.kernelService.events.publish({ name: 'SYSTEM_STARTED', module: 'system', actor: 'sistema', data: { version: '0.15.2', port: PORT } });
+  app.locals.kernelService.logs.record({ category: 'system', module: 'system', action: 'SYSTEM_STARTED', actor: 'sistema', label: 'Painel Quality ERP iniciado', details: { version: '0.15.2', port: PORT } });
   await initializeWhatsApp(app);
 });
 
 async function gracefulShutdown(signal) {
   console.log(`\n${signal}: encerrando Painel Quality...`);
+  app.locals.kernelService.events.publish({ name: 'SYSTEM_SHUTDOWN', module: 'system', actor: 'sistema', data: { signal } });
+  app.locals.kernelService.logs.record({ category: 'system', module: 'system', action: 'SYSTEM_SHUTDOWN', actor: 'sistema', label: 'Painel Quality ERP encerrando', details: { signal } });
   await shutdownWhatsApp();
   server.close(() => process.exit(0));
   setTimeout(() => process.exit(1), 5000).unref();

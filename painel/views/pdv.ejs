@@ -1,0 +1,308 @@
+<% layout('layout') -%>
+<div class="pdv-shell" data-current-id="<%= current?.id || '' %>">
+  <header class="pdv-head pdv-head-compact">
+    <div class="pdv-title-line"><h1>PDV</h1><span class="pdv-version">v0.14.7</span></div>
+    <section class="pdv-cashbar pdv-cashbar-inline">
+      <div><b>Caixa:</b><select id="cashbox"><% cashboxes.forEach(c=>{ %><option value="<%= c.id %>" <%= selectedCashboxId===c.id?'selected':'' %>><%= c.name %></option><% }) %></select></div>
+      <div id="cashStatus" class="pdv-cash-status <%= openSession?'open':'closed' %>"><%= openSession?'● Aberto':'● Fechado' %></div>
+      <div><b id="cashBalanceLabel"><%= openSession ? 'Saldo' : 'Saldo anterior' %></b><strong id="cashBalance">R$ <%= Number(cashBalance||0).toLocaleString('pt-BR',{minimumFractionDigits:2}) %></strong></div>
+      <button class="btn" id="btnCash"><%= openSession?'Movimentações':'Abrir caixa' %></button>
+    </section>
+    <div class="pdv-head-actions">
+      <button class="btn" id="btnOperations">🔎 Buscar operações <kbd>Ctrl+A</kbd></button>
+      <button class="btn" id="btnShortcuts">⌨️ Atalhos <kbd>F1</kbd></button>
+      <button class="btn primary" id="btnNew">＋ Nova operação</button>
+    </div>
+  </header>
+
+  <section class="pdv-workspace">
+    <div class="pdv-main">
+      <div class="pdv-operation-top">
+        <div class="pdv-type-switch"><button data-type="sale" class="active">🛒 Venda</button><button data-type="service_order">🛠️ O.S.</button></div>
+        <span id="operationNumber" class="pdv-operation-number"><%= current ? '#'+current.number : 'Nova operação' %></span>
+        <span class="pdv-status-pill" id="operationStatus"><%= current?.status === 'finalized' ? 'Finalizada' : current?.status === 'awaiting_payment' ? 'Aguardando pagamento' : current?.status === 'cancelled' ? 'Cancelada' : 'Em aberto' %></span><span class="pdv-version-pill" id="operationVersion">v<%= current?.version || 0 %></span><button class="btn pdv-history-btn" id="btnHistory" <%= current ? '' : 'disabled' %>>🕘 Histórico</button>
+      </div>
+
+      <div class="pdv-fields-grid pdv-fields-smart">
+        <label class="pdv-customer-field">Cliente<div class="pdv-field-with-action"><select id="customerId"><option value="">Consumidor final</option><% customers.forEach(c=>{ %><option value="<%= c.id %>" data-name="<%= c.name %>"><%= c.code %> · <%= c.name %></option><% }) %></select><button class="btn pdv-mini-action" id="btnCustomerSearch" title="Pesquisar cliente">🔎</button></div></label>
+        <label class="pdv-identifier-field" title="Dê dois cliques para informar nome, telefone ou referência">Identificador <span class="pdv-muted-note">(duplo clique)</span><input id="identifier" class="pdv-identifier-collapsed" placeholder="✎" readonly></label>
+        <label>Vendedor principal<input id="sellerName" placeholder="Selecione ou informe o vendedor"></label>
+      </div>
+
+      <div class="pdv-product-entry">
+        <label>Produto / serviço<div class="pdv-field-with-action"><input id="productSearch" list="productOptions" placeholder="Pesquise por nome, código, SKU ou código de barras [F5]"><button class="btn pdv-mini-action" id="btnProductSearch" title="Abrir lista de produtos">🔎</button></div></label>
+        <datalist id="productOptions"><% products.forEach(p=>{ %><option value="<%= p.name %>" data-id="<%= p.id %>"></option><% }) %></datalist>
+        <label>Quantidade<input type="number" id="productQty" value="1" min="0.001" step="0.001"></label>
+        <button class="btn primary" id="btnAddProduct">Adicionar</button>
+      </div>
+
+      <div class="pdv-table-wrap"><table class="pdv-table"><thead><tr><th>Produto / serviço</th><th>Qtd.</th><th>Valor unit.</th><th>Desconto</th><th>Vendedor do item</th><th>Subtotal</th><th></th></tr></thead><tbody id="itemsBody"></tbody></table></div>
+
+      <div class="pdv-os-panel" id="osPanel" hidden>
+        <div class="pdv-os-title"><div><h3>Ordem de Serviço</h3><p>Preencha somente o necessário. Check-in, check-out e fotos são opcionais.</p></div></div>
+        <div class="pdv-fields-grid pdv-os-main-grid">
+          <label>Equipamento<input id="osDevice" placeholder="Ex.: iPhone 13, Notebook Dell, Impressora Brother"></label>
+          <label>Identificação do equipamento <span class="pdv-muted-note">(opcional)</span><input id="osEquipmentId" placeholder="Número de série, patrimônio ou referência"></label>
+          <label>Técnico responsável<input id="osTechnician" placeholder="Nome do técnico"></label>
+        </div>
+        <label>Problema relatado / diagnóstico inicial<textarea id="osIssue" rows="3" placeholder="Relato do cliente e diagnóstico inicial no mesmo campo"></textarea></label>
+        <label>Serviço realizado<textarea id="osServicePerformed" rows="4" placeholder="Descreva as etapas realizadas para solucionar o problema"></textarea></label>
+        <label>Acessórios recebidos <span class="pdv-muted-note">(opcional)</span><input id="osAccessories" placeholder="Ex.: carregador, fonte, cabo USB, capa, mouse"></label>
+
+        <details class="pdv-os-section" id="osCheckinSection">
+          <summary><span>📥 Check-in do equipamento</span><small>Opcional · estado na entrada</small></summary>
+          <div class="pdv-os-section-body">
+            <label>Estado físico / observações de entrada<textarea id="osCheckinNotes" rows="3" placeholder="Riscos, trincas, amassados, peças faltando ou outras observações"></textarea></label>
+            <div class="pdv-checklist" id="checkinChecklist"></div>
+          </div>
+        </details>
+
+        <details class="pdv-os-section" id="osCheckoutSection">
+          <summary><span>✅ Check-out e testes finais</span><small>Opcional · validação antes da entrega</small></summary>
+          <div class="pdv-os-section-body">
+            <div class="pdv-checklist" id="checkoutChecklist"></div>
+            <label>Observações finais do check-out<textarea id="osCheckoutNotes" rows="3" placeholder="Resultados, limitações ou orientações ao cliente"></textarea></label>
+            <div class="pdv-delivery-checks"><label><input type="checkbox" id="osCustomerChecked"> Cliente conferiu o equipamento</label><label><input type="checkbox" id="osAccessoriesChecked"> Cliente conferiu os acessórios</label><label><input type="checkbox" id="osGuidanceReceived"> Cliente recebeu orientações</label></div>
+          </div>
+        </details>
+
+        <details class="pdv-os-section" id="osPhotosSection">
+          <summary><span>🖼️ Fotos da O.S.</span><small>Até 3 fotos · compactação automática</small></summary>
+          <div class="pdv-os-section-body">
+            <div class="pdv-photo-toolbar"><select id="photoKind"><option value="checkin">Foto de entrada</option><option value="checkout">Foto de saída</option><option value="general">Foto geral</option></select><input type="file" id="osPhotoInput" accept="image/*" capture="environment"><button class="btn" id="btnAddPhoto" type="button">Adicionar foto</button></div>
+            <p class="pdv-modal-help">A imagem é reduzida para no máximo 1600 px e salva em WebP. O limite total é de três fotos por O.S.</p>
+            <div class="pdv-photo-grid" id="osPhotoGrid"></div>
+          </div>
+        </details>
+      </div>
+
+      <label class="pdv-notes">Observação geral<textarea id="notes" rows="2" placeholder="Informação interna da venda ou O.S."></textarea></label>
+    </div>
+
+    <aside class="pdv-side">
+      <div class="pdv-summary"><div><span>Subtotal</span><b id="subtotal">R$ 0,00</b></div><div><span>Descontos</span><b id="discountTotal">R$ 0,00</b></div><div class="total"><span>Total da operação</span><strong id="total">R$ 0,00</strong></div></div>
+      <div class="pdv-payments-head"><h3>Pagamentos</h3><button class="btn" id="btnAddPayment">＋ Adicionar</button></div>
+      <div id="payments"></div>
+      <div class="pdv-payment-summary"><div><span>Total pago</span><b id="amountPaid">R$ 0,00</b></div><div class="pending"><span>Pendente</span><strong id="amountPending">R$ 0,00</strong></div><div class="change"><span>Troco</span><strong id="change">R$ 0,00</strong></div></div>
+    </aside>
+  </section>
+
+  <footer class="pdv-bottom-actions">
+    <div class="pdv-bottom-left">
+      <button class="btn" id="btnPrint">🖨️ Imprimir <kbd>F9</kbd></button>
+      <button class="btn warn" id="btnCancelOperation" <%= current && !['finalized','cancelled'].includes(current.status) ? '' : 'disabled' %>>Cancelar</button><button class="btn" id="btnSave">💾 Salvar em aberto <kbd>F10</kbd></button>
+    </div>
+    <button class="btn primary pdv-finalize-wide" id="btnFinalize">✓ Finalizar operação <kbd>F12</kbd></button>
+  </footer>
+</div>
+
+
+<div class="pdv-modal" id="modalCustomerSearch" hidden><div class="pdv-modal-card wide"><button class="pdv-close" data-close>×</button><h2>Buscar cliente</h2><p class="pdv-modal-help">Pesquise por nome, telefone, CPF/CNPJ, e-mail ou código.</p><input id="customerSearchInput" placeholder="Digite para pesquisar"><div class="pdv-search-list" id="customerSearchList"></div></div></div>
+<div class="pdv-modal" id="modalProductSearch" hidden><div class="pdv-modal-card wide"><button class="pdv-close" data-close>×</button><h2>Buscar produto / serviço</h2><p class="pdv-modal-help">Pesquise por nome, código, SKU, categoria ou código de barras.</p><input id="productSearchInput" placeholder="Digite para pesquisar"><div class="pdv-search-list" id="productSearchList"></div></div></div>
+<div class="pdv-modal" id="modalPrint" hidden><div class="pdv-modal-card pdv-print-modal"><button class="pdv-close" data-close>×</button><h2>Imprimir</h2><p class="pdv-modal-help">Selecione o modelo de impressão.</p><div class="pdv-print-models" id="printModels"></div><div class="pdv-print-options" id="osPrintOptions" hidden><b>Conteúdo da impressão da O.S.</b><label><input type="checkbox" id="printCheckin" checked> Incluir check-in preenchido</label><label><input type="checkbox" id="printCheckout" checked> Incluir check-out preenchido</label><label><input type="checkbox" id="printPhotos" checked> Incluir fotos</label><label><input type="checkbox" id="printTimeline"> Incluir histórico resumido</label></div><div class="pdv-print-actions"><label><input type="checkbox" id="printPreview" checked> Visualizar antes de imprimir</label><button class="btn" data-close>Cancelar</button><button class="btn primary" id="btnConfirmPrint">🖨️ Imprimir</button></div></div></div>
+<div class="pdv-modal" id="modalNewPrintModel" hidden><div class="pdv-modal-card"><button class="pdv-close" data-close>×</button><h2>Novo modelo</h2><label>Nome<input id="newModelName" placeholder="Ex.: Termo de garantia"></label><label>Aplicação<select id="newModelType"><option value="all">Venda e O.S.</option><option value="sale">Somente venda</option><option value="service_order">Somente O.S.</option></select></label><label>Conteúdo<textarea id="newModelContent" rows="12" placeholder="Use: {{empresa}}, {{numero}}, {{cliente}}, {{identificador}}, {{itens}}, {{total}}, {{vendedor}}, {{observacao}}, {{os_aparelho}}, {{os_defeito}}"></textarea></label><button class="btn primary" id="btnSavePrintModel">Salvar modelo</button></div></div>
+<div class="pdv-modal" id="modalHistory" hidden><div class="pdv-modal-card wide"><button class="pdv-close" data-close>×</button><h2>Histórico da operação</h2><div class="pdv-operation-dates" id="operationDates"></div><div class="pdv-timeline" id="operationTimeline"></div></div></div>
+<div class="pdv-modal" id="modalOperations" hidden><div class="pdv-modal-card wide"><button class="pdv-close" data-close>×</button><h2>Buscar operações</h2><input id="operationSearch" placeholder="Cliente, identificador, número, aparelho ou vendedor"><div class="pdv-operation-list" id="operationList"></div></div></div>
+<div class="pdv-modal pdv-cash-modal" id="modalCash" hidden><div class="pdv-modal-card"><button class="pdv-close" data-close>×</button><h2 id="cashModalTitle">Caixa simplificado</h2><div id="cashClosedBox"><p class="pdv-modal-help">Abra o caixa uma vez no início do dia. O saldo inicial é transportado automaticamente do último fechamento.</p><div class="pdv-cash-opening-summary"><span>Saldo para abertura</span><strong id="openingBalanceDisplay">R$ <%= Number(cashState?.suggestedOpeningBalance||0).toLocaleString('pt-BR',{minimumFractionDigits:2}) %></strong><small><%= cashState?.lastClosedSession ? 'Vindo do último fechamento' : 'Primeira abertura registrada' %></small></div><label class="pdv-additional-opening" <%= cashState?.openedTodayByUser ? '' : 'hidden' %>><input type="checkbox" id="allowAdditionalOpening"> Abrir um novo turno hoje</label><button class="btn primary pdv-cash-primary" id="btnOpenCash">Abrir caixa e liberar PDV</button></div><div id="cashOpenBox"><div class="pdv-cash-current"><span>Saldo calculado agora</span><strong><%= Number(cashBalance||0).toLocaleString('pt-BR',{style:'currency',currency:'BRL'}) %></strong><small>Será usado automaticamente no fechamento.</small></div><details class="pdv-cash-movements"><summary>Registrar suprimento, sangria ou despesa</summary><div><label>Tipo<select id="movementType"><option value="supply">Entrada (suprimento)</option><option value="withdrawal">Saída (sangria)</option><option value="expense">Despesa</option></select></label><label>Valor<input type="number" id="movementAmount" step="0.01"></label><label>Descrição<input id="movementDescription"></label><button class="btn" id="btnMovement">Registrar movimentação</button></div></details><button class="btn warn pdv-cash-primary" id="btnCloseCash">Abrir conferência no Caixa Operacional</button></div></div></div>
+<div class="pdv-modal" id="modalInstallments" hidden><div class="pdv-modal-card wide pdv-installments-modal"><button class="pdv-close" data-close>×</button><h2>Configurar parcelas</h2><p class="pdv-modal-help">Defina valores e vencimentos das parcelas. Você também pode redistribuir os valores igualmente.</p><div class="pdv-installment-summary" id="installmentSummary"></div><div class="pdv-installment-tools"><button type="button" class="btn" id="btnRedistributeInstallments">Redistribuir igualmente</button></div><div class="pdv-installment-list" id="installmentList"></div><div class="pdv-finalize-actions"><button class="btn" data-close>Cancelar</button><button class="btn primary" id="btnSaveInstallments">Salvar configuração</button></div></div></div>
+<div class="pdv-modal" id="modalFinalize" hidden><div class="pdv-modal-card pdv-finalize-modal"><button class="pdv-close" data-close>×</button><h2>Confirmar finalização</h2><p class="pdv-modal-help">Confira os dados antes de processar estoque e caixa. Depois de finalizada, a operação ficará somente para consulta.</p><div class="pdv-finalize-summary" id="finalizeSummary"></div><div class="pdv-finalize-actions"><button class="btn" data-close>Cancelar</button><button class="btn primary" id="btnConfirmFinalize">✓ Confirmar finalização</button></div></div></div>
+<div class="pdv-modal pdv-success-backdrop" id="modalFinalizeSuccess" hidden><div class="pdv-modal-card pdv-success-modal"><div class="pdv-success-icon">✓</div><h2 id="finalizeSuccessTitle">Operação finalizada com sucesso</h2><p class="pdv-modal-help" id="finalizeSuccessText">A movimentação foi registrada no estoque e no caixa.</p><div class="pdv-success-number" id="finalizeSuccessNumber">#—</div><div class="pdv-success-actions"><button class="btn primary" id="btnSuccessNew">＋ Nova operação <kbd>F9</kbd></button><button class="btn" id="btnSuccessPrint">🖨️ Imprimir comprovante</button><button class="btn" id="btnSuccessView">👁️ Ver resumo da operação</button></div><p class="pdv-success-note">Imprimir, cancelar a impressão ou consultar o resumo não altera a venda finalizada.</p></div></div>
+<div class="pdv-modal pdv-success-backdrop" id="modalOperationSummary" hidden><div class="pdv-modal-card pdv-operation-summary-modal"><button class="pdv-close" id="btnSummaryClose" type="button" aria-label="Fechar">×</button><div class="pdv-operation-summary-head"><div><span>Operação finalizada</span><h2 id="operationSummaryTitle">Resumo da operação</h2></div><span class="pdv-status-pill">Finalizada</span></div><div id="operationSummaryContent" class="pdv-operation-summary-content"></div><div class="pdv-success-actions"><button class="btn" id="btnSummaryBack">← Voltar ao sucesso</button><button class="btn" id="btnSummaryPrint">🖨️ Imprimir novamente</button><button class="btn primary" id="btnSummaryNew">＋ Nova operação</button></div></div></div>
+<div class="pdv-modal" id="modalShortcuts" hidden><div class="pdv-modal-card"><button class="pdv-close" data-close>×</button><h2>Atalhos do PDV</h2><div class="pdv-shortcuts"><span><kbd>F1</kbd> Menu de atalhos</span><span><kbd>F5</kbd> Buscar produto</span><span><kbd>F7</kbd> Buscar cliente</span><span><kbd>F9</kbd> Imprimir</span><span><kbd>F10</kbd> Salvar em aberto</span><span><kbd>F12</kbd> Finalizar</span><span><kbd>Ctrl+A</kbd> Buscar operações</span><span><kbd>Ctrl+S</kbd> Salvar em aberto</span></div></div></div>
+<script>window.PDV_BOOT=<%- JSON.stringify({products,customers,operations,current,openSession,cashState,paymentMethods,selectedCashboxId}) %>;</script>
+<script>
+(()=>{
+ const boot=window.PDV_BOOT, money=v=>Number(v||0).toLocaleString('pt-BR',{style:'currency',currency:'BRL'}), $=s=>document.querySelector(s);
+ let state={id:boot.current?.id||'',number:boot.current?.number||null,version:Number(boot.current?.version||0),type:boot.current?.type||'sale',items:boot.current?.items||[],payments:boot.current?.payments||[]};
+ const checkinItems=['Tela / display','Carcaça / estrutura','Botões','Conectores','Câmeras','Áudio','Sinais de oxidação','Liga / inicializa'];
+ const checkoutItems=['Liga / desliga','Tela / display','Touch / teclado','Botões','Carregamento / fonte','Bateria','Câmeras / scanner','Áudio / microfone','Wi-Fi / rede','Bluetooth','USB / conectores','Impressão / alimentação de papel','HDMI / vídeo'];
+ const productByName=new Map(boot.products.map(p=>[String(p.name).toLowerCase(),p]));
+ const paymentMethodById=new Map((boot.paymentMethods||[]).map(m=>[String(m.id),m]));
+ const isoDateAfter=days=>{const d=new Date();d.setHours(12,0,0,0);d.setDate(d.getDate()+Number(days||0));return d.toISOString().slice(0,10);};
+ const addDaysToIso=(iso,days)=>{const d=new Date(`${iso}T12:00:00`);if(Number.isNaN(d.getTime()))return '';d.setDate(d.getDate()+Number(days||0));return d.toISOString().slice(0,10);};
+ let installmentRow=null;
+ function paymentDueDates(el){try{const value=JSON.parse(el.dataset.dueDates||'[]');return Array.isArray(value)?value.filter(Boolean):[]}catch{return []}}
+ function paymentInstallmentAmounts(el){try{const value=JSON.parse(el.dataset.installmentAmounts||'[]');return Array.isArray(value)?value.map(Number).filter(value=>Number.isFinite(value)&&value>=0):[]}catch{return []}}
+ function buildDueDates(el){const method=paymentMethodById.get(el.querySelector('.pay-method').value)||{};const count=Math.max(1,Number(el.querySelector('.pay-installments').value||1));const first=isoDateAfter(method.firstDueDays||0);const current=paymentDueDates(el);return Array.from({length:count},(_,index)=>current[index]||addDaysToIso(first,index*Number(method.installmentIntervalDays||30)));}
+ function equalInstallmentAmounts(amount,count){const cents=Math.round(Number(amount||0)*100),base=Math.floor(cents/count),remainder=cents-(base*count);return Array.from({length:count},(_,index)=>(base+(index<remainder?1:0))/100);}
+ function syncInstallmentButton(el){const method=paymentMethodById.get(el.querySelector('.pay-method').value)||{};const count=Math.max(1,Number(el.querySelector('.pay-installments').value||1));const action=el.querySelector('.pdv-installment-action');const button=el.querySelector('.pdv-installment-config');const resume=el.querySelector('.pdv-installment-resume');const dueField=el.querySelector('.pdv-pay-due-field');const receivable=method.generatesReceivable===true;const multiple=receivable&&count>1;const single=receivable&&count===1;if(dueField){dueField.hidden=!single;const input=dueField.querySelector('.pay-due-date');if(single&&input&&!input.value){const current=paymentDueDates(el);input.value=current[0]||isoDateAfter(method.firstDueDays||0);el.dataset.dueDates=JSON.stringify([input.value]);}}action.hidden=!multiple;button.classList.toggle('configured',multiple&&el.dataset.installmentsConfigured==='true');button.innerHTML=multiple&&el.dataset.installmentsConfigured==='true'?'<span class="pdv-installment-icon">✓</span><span>Parcelas configuradas</span>':'<span class="pdv-installment-icon">⚙</span><span>Configurar parcelas</span>';if(resume)resume.textContent=multiple&&el.dataset.installmentsConfigured==='true'?`${count} parcelas • Configuração personalizada`:`${count} parcelas • Distribuição igual`;}
+ function updateInstallmentSummary(){if(!installmentRow)return;const amount=Math.round(Number(installmentRow.querySelector('.pay-amount').value||0)*100)/100;const values=[...$('#installmentList').querySelectorAll('.pdv-installment-value')].map(input=>Number(input.value||0));const configured=Math.round(values.reduce((sum,value)=>sum+value,0)*100)/100;const difference=Math.round((amount-configured)*100)/100;$('#installmentSummary').innerHTML=`<div><span>Total da forma</span><strong>${money(amount)}</strong></div><div><span>Total configurado</span><strong>${money(configured)}</strong></div><div class="${Math.abs(difference)<.01?'ok':difference>0?'warning':'negative'}"><span>${Math.abs(difference)<.01?'Distribuição fechada':difference>0?'Falta distribuir':'Valor excedente'}</span><strong>${money(Math.abs(difference))}</strong></div>`;}
+ function renderInstallmentModalValues(values,dates){const count=dates.length;$('#installmentList').innerHTML=dates.map((dueDate,index)=>`<div class="pdv-installment-line"><span><b>${index+1}/${count}</b><small>Parcela ${index+1}</small></span><label><small>Valor</small><input class="pdv-installment-value" type="number" min="0.01" step="0.01" value="${Number(values[index]||0).toFixed(2)}"></label><label><small>Vencimento</small><input class="pdv-installment-date" type="date" value="${dueDate}"></label></div>`).join('');$('#installmentList').querySelectorAll('input').forEach(input=>input.addEventListener('input',updateInstallmentSummary));updateInstallmentSummary();}
+ function openInstallmentModal(el){const count=Math.max(1,Number(el.querySelector('.pay-installments').value||1));const amount=Number(el.querySelector('.pay-amount').value||0);const dates=buildDueDates(el);const currentValues=paymentInstallmentAmounts(el);const values=currentValues.length===count?currentValues:equalInstallmentAmounts(amount,count);installmentRow=el;renderInstallmentModalValues(values,dates);show('#modalInstallments');}
+ function redistributeInstallments(){if(!installmentRow)return;const count=Math.max(1,Number(installmentRow.querySelector('.pay-installments').value||1));const values=equalInstallmentAmounts(Number(installmentRow.querySelector('.pay-amount').value||0),count);[...$('#installmentList').querySelectorAll('.pdv-installment-value')].forEach((input,index)=>input.value=Number(values[index]||0).toFixed(2));updateInstallmentSummary();}
+ function saveInstallmentDates(){if(!installmentRow)return;const dates=[...$('#installmentList').querySelectorAll('.pdv-installment-date')].map(input=>input.value);const values=[...$('#installmentList').querySelectorAll('.pdv-installment-value')].map(input=>Math.round(Number(input.value||0)*100)/100);if(dates.some(value=>!value)){alert('Informe o vencimento de todas as parcelas.');return;}if(values.some(value=>value<=0)){alert('Todas as parcelas precisam ter valor maior que zero.');return;}const amount=Math.round(Number(installmentRow.querySelector('.pay-amount').value||0)*100)/100;const configured=Math.round(values.reduce((sum,value)=>sum+value,0)*100)/100;if(Math.abs(amount-configured)>=.01){alert(`A soma das parcelas precisa fechar em ${money(amount)}. Diferença atual: ${money(amount-configured)}.`);return;}installmentRow.dataset.dueDates=JSON.stringify(dates);installmentRow.dataset.installmentAmounts=JSON.stringify(values);installmentRow.dataset.installmentsConfigured='true';syncInstallmentButton(installmentRow);$('#modalInstallments').hidden=true;installmentRow=null;}
+ function syncPaymentRow(el,{setDefaultDate=false}={}){
+  const method=paymentMethodById.get(el.querySelector('.pay-method').value)||{};
+  const receivable=method.generatesReceivable===true;
+  const installments=el.querySelector('.pay-installments');
+  installments.disabled=method.allowInstallments===false;
+  installments.max=Math.max(1,Number(method.maxInstallments||1));
+  if(method.allowInstallments===false)installments.value=1;
+  if(!receivable)el.dataset.dueDates='[]';
+  syncInstallmentButton(el);
+ }
+ function rowPayment(p={}){
+  const el=document.createElement('div');
+  el.className='pdv-payment-row';
+  el.innerHTML=`
+    <label class="pdv-pay-method-field"><span>Forma de pagamento</span><select class="pay-method"><option value="">Selecione...</option>${boot.paymentMethods.map(m=>`<option value="${m.id}">${m.name}</option>`).join('')}</select></label>
+    <label class="pdv-pay-amount-field"><span>Valor</span><input class="pay-amount" type="number" min="0" step="0.01" placeholder="0,00"></label>
+    <label class="pdv-pay-installments-field"><span>Parcelas</span><input class="pay-installments" type="number" min="1" value="1"></label>
+    <label class="pdv-pay-due-field" hidden><span>Vencimento</span><input class="pay-due-date" type="date"></label>
+    <div class="pdv-installment-action" hidden>
+      <button type="button" class="btn pdv-installment-config">⚙ Configurar parcelas</button>
+      <small class="pdv-installment-resume"></small>
+    </div>
+    <button class="pdv-icon-btn pdv-pay-remove" title="Remover pagamento">×</button>`;
+  el.querySelector('.pay-method').value=p.methodId||'';
+  el.querySelector('.pay-amount').value=p.amount||'';
+  el.querySelector('.pay-installments').value=p.installments||1;
+  el.dataset.dueDates=JSON.stringify(Array.isArray(p.dueDates)&&p.dueDates.length?p.dueDates:(p.dueDate?[p.dueDate]:[]));
+  el.dataset.installmentAmounts=JSON.stringify(Array.isArray(p.installmentAmounts)?p.installmentAmounts:[]);
+  el.dataset.installmentsConfigured=(Array.isArray(p.dueDates)&&p.dueDates.length===Number(p.installments||1))?'true':'false';
+  el.querySelector('.pay-method').addEventListener('change',()=>{el.dataset.dueDates='[]';el.dataset.installmentAmounts='[]';el.dataset.installmentsConfigured='false';syncPaymentRow(el,{setDefaultDate:true});calc();});
+  el.querySelector('.pay-installments').addEventListener('input',()=>{el.dataset.dueDates='[]';el.dataset.installmentAmounts='[]';el.dataset.installmentsConfigured='false';syncInstallmentButton(el);calc();});
+  el.querySelector('.pay-installments').addEventListener('change',()=>{const method=paymentMethodById.get(el.querySelector('.pay-method').value)||{};const count=Math.max(1,Number(el.querySelector('.pay-installments').value||1));syncInstallmentButton(el);if(method.generatesReceivable===true&&count>1)openInstallmentModal(el);});
+  el.querySelector('.pay-due-date').addEventListener('change',event=>{el.dataset.dueDates=JSON.stringify(event.target.value?[event.target.value]:[]);el.dataset.installmentAmounts='[]';el.dataset.installmentsConfigured='false';calc();});
+  el.querySelector('.pay-amount').addEventListener('input',()=>{el.dataset.installmentsConfigured='false';syncInstallmentButton(el);});
+  el.querySelectorAll('input,select').forEach(i=>i.addEventListener('input',calc));
+  el.querySelector('.pdv-installment-config').onclick=()=>openInstallmentModal(el);
+  el.querySelector('.pdv-pay-remove').onclick=()=>{el.remove();calc()};
+  $('#payments').append(el);
+  el.querySelector('.pay-due-date').value=(Array.isArray(p.dueDates)&&p.dueDates[0])||p.dueDate||'';
+  syncPaymentRow(el,{setDefaultDate:!p.dueDate});
+ }
+ function renderItems(){ const body=$('#itemsBody'); body.innerHTML=''; state.items.forEach((i,idx)=>{ const tr=document.createElement('tr'); tr.innerHTML=`<td><b>${i.name}</b><small>${i.stockControlled?'Estoque controlado':'Sem controle de estoque'}</small></td><td><input data-k="quantity" type="number" min="0.001" step="0.001" value="${i.quantity}"></td><td><input data-k="unitPrice" type="number" min="0" step="0.01" value="${i.unitPrice}"></td><td><input data-k="discount" type="number" min="0" step="0.01" value="${i.discount||0}"></td><td><input data-k="sellerNameSnapshot" value="${i.sellerNameSnapshot||$('#sellerName').value||''}"></td><td class="item-subtotal">${money(i.quantity*i.unitPrice-(i.discount||0))}</td><td><button class="pdv-icon-btn">×</button></td>`; tr.querySelectorAll('input').forEach(inp=>inp.oninput=()=>{state.items[idx][inp.dataset.k]=['sellerNameSnapshot'].includes(inp.dataset.k)?inp.value:Number(inp.value||0);calc()}); tr.querySelector('button').onclick=()=>{state.items.splice(idx,1);renderItems();calc()}; body.append(tr); }); calc(); }
+ function collectPayments(){ return [...document.querySelectorAll('.pdv-payment-row')].map(r=>{const count=Math.max(1,Number(r.querySelector('.pay-installments').value||1));const inlineDue=r.querySelector('.pay-due-date')?.value||'';const dueDates=count===1&&inlineDue?[inlineDue]:paymentDueDates(r);const installmentAmounts=paymentInstallmentAmounts(r);return {methodId:r.querySelector('.pay-method').value,methodName:r.querySelector('.pay-method').selectedOptions[0]?.text||'',amount:Number(r.querySelector('.pay-amount').value||0),installments:count,dueDate:dueDates[0]||'',dueDates,installmentAmounts,status:'paid'};}).filter(p=>p.amount>0); }
+ function calc(){ const subtotal=state.items.reduce((s,i)=>s+Number(i.quantity||0)*Number(i.unitPrice||0),0), discounts=state.items.reduce((s,i)=>s+Number(i.discount||0),0), total=Math.max(0,subtotal-discounts); state.payments=collectPayments(); const paid=state.payments.reduce((s,p)=>s+p.amount,0); $('#subtotal').textContent=money(subtotal);$('#discountTotal').textContent=money(discounts);$('#total').textContent=money(total);$('#amountPaid').textContent=money(paid);$('#amountPending').textContent=money(Math.max(0,total-paid));$('#change').textContent=money(Math.max(0,paid-total)); }
+ function finalizationData(){
+  const items=state.items||[];
+  if(!items.length)throw new Error('Adicione pelo menos um produto ou serviço antes de finalizar.');
+  for(const item of items){
+   const quantity=Number(item.quantity||0),unitPrice=Number(item.unitPrice||0),discount=Number(item.discount||0);
+   if(quantity<=0)throw new Error(`Informe uma quantidade válida para ${item.name||'o item'}.`);
+   if(unitPrice<=0)throw new Error(`O valor unitário de ${item.name||'um item'} deve ser maior que zero.`);
+   if(discount<0)throw new Error(`O desconto de ${item.name||'um item'} não pode ser negativo.`);
+   if((quantity*unitPrice)-discount<=0)throw new Error(`O subtotal de ${item.name||'um item'} deve ser de pelo menos R$ 0,01.`);
+  }
+  const subtotal=items.reduce((sum,item)=>sum+Number(item.quantity||0)*Number(item.unitPrice||0),0);
+  const discounts=items.reduce((sum,item)=>sum+Number(item.discount||0),0);
+  const total=Math.round(Math.max(0,subtotal-discounts)*100)/100;
+  if(total<0.01)throw new Error('O total da operação deve ser de pelo menos R$ 0,01.');
+  const paymentRows=[...document.querySelectorAll('.pdv-payment-row')];
+  const invalidPayment=paymentRows.find(r=>Number(r.querySelector('.pay-amount').value||0)>0&&!r.querySelector('.pay-method').value);
+  if(invalidPayment){invalidPayment.querySelector('.pay-method').focus();throw new Error('Selecione a forma de pagamento antes de finalizar.');}
+  const payments=collectPayments();
+  const unconfiguredRows=paymentRows.filter(r=>{const method=paymentMethodById.get(r.querySelector('.pay-method').value)||{};return Number(r.querySelector('.pay-amount').value||0)>0&&method.generatesReceivable===true&&r.dataset.installmentsConfigured!=='true';});
+  if(unconfiguredRows.length){const proceed=confirm('As datas e valores das parcelas ainda não foram configurados. Deseja finalizar usando divisão igual e vencimentos automáticos mensais?');if(!proceed){openInstallmentModal(unconfiguredRows[0]);throw new Error('Finalize a configuração das parcelas antes de continuar.');}unconfiguredRows.forEach(r=>{const count=Math.max(1,Number(r.querySelector('.pay-installments').value||1));r.dataset.dueDates=JSON.stringify(buildDueDates(r));r.dataset.installmentAmounts=JSON.stringify(equalInstallmentAmounts(Number(r.querySelector('.pay-amount').value||0),count));r.dataset.installmentsConfigured='true';});}
+  const normalizedPayments=collectPayments();payments.splice(0,payments.length,...normalizedPayments);
+  if(!payments.length)throw new Error('Informe o pagamento integral antes de finalizar.');
+  const paid=Math.round(payments.reduce((sum,p)=>sum+Number(p.amount||0),0)*100)/100;
+  const pending=Math.round((total-paid)*100)/100;
+  if(pending>0)throw new Error(`Ainda faltam ${money(pending)} para concluir a operação.`);
+  const change=Math.max(0,Math.round((paid-total)*100)/100);
+  const cashPaid=Math.round(payments.filter(p=>p.methodId==='dinheiro').reduce((sum,p)=>sum+Number(p.amount||0),0)*100)/100;
+  if(change>cashPaid)throw new Error('Somente pagamentos em dinheiro podem ultrapassar o total e gerar troco.');
+  return {total,paid,change,payments};
+ }
+ function openFinalizeConfirmation(){
+  try{
+   const data=finalizationData();
+   const customer=$('#customerId').selectedOptions[0]?.dataset.name||$('#identifier').value||'Consumidor final';
+   const paymentSummary=data.payments.map(p=>`<div><span>${esc(p.methodName)}${p.installments>1?` · ${p.installments}x`:''}${p.dueDate?` · inicia em ${new Date(p.dueDate+'T12:00:00').toLocaleDateString('pt-BR')}`:''}</span><b>${money(p.amount)}</b></div>`).join('');
+   $('#finalizeSummary').innerHTML=`<div><span>Operação</span><b>${state.number?'#'+state.number:'Nova '+(state.type==='service_order'?'O.S.':'venda')}</b></div><div><span>Cliente</span><b>${esc(customer)}</b></div><div><span>Itens</span><b>${state.items.length}</b></div><hr>${paymentSummary}<hr><div class="total"><span>Total</span><strong>${money(data.total)}</strong></div><div><span>Total pago</span><b>${money(data.paid)}</b></div><div><span>Troco</span><b>${money(data.change)}</b></div><div><span>Caixa</span><b>${esc($('#cashbox').selectedOptions[0]?.text||'Caixa principal')}</b></div>`;
+   show('#modalFinalize');
+  }catch(error){alert(error.message);}
+ }
+ function collectChecklist(id){return [...document.querySelectorAll(`#${id} .pdv-check-row`)].map(r=>({label:r.dataset.label,status:r.querySelector('select').value,notes:r.querySelector('input').value.trim()})).filter(i=>i.status!=='not_applicable'||i.notes);}
+ function payload(){ const opt=$('#customerId').selectedOptions[0]; const previous=boot.current?.serviceOrder||{}; return {id:state.id,version:state.version,type:state.type,cashboxId:$('#cashbox').value,customerId:$('#customerId').value,customerNameSnapshot:opt?.dataset.name||'',identifier:$('#identifier').value,sellerNameSnapshot:$('#sellerName').value,notes:$('#notes').value,items:state.items,payments:collectPayments(),serviceOrder:{...previous,device:$('#osDevice').value,equipmentId:$('#osEquipmentId').value,issue:$('#osIssue').value,technicianName:$('#osTechnician').value,servicePerformed:$('#osServicePerformed').value,accessories:$('#osAccessories').value,checkin:{notes:$('#osCheckinNotes').value,items:collectChecklist('checkinChecklist')},checkout:{notes:$('#osCheckoutNotes').value,items:collectChecklist('checkoutChecklist'),customerChecked:$('#osCustomerChecked').checked,accessoriesChecked:$('#osAccessoriesChecked').checked,guidanceReceived:$('#osGuidanceReceived').checked},attachments:previous.attachments||[]}}; }
+ async function api(url,method='GET',body){ const r=await fetch(url,{method,headers:{'Content-Type':'application/json'},body:body?JSON.stringify(body):undefined}); const j=await r.json(); if(!r.ok||!j.success){const e=new Error(j.message||'Erro na operação.');e.code=j.code;e.current=j.current;throw e;} return j; }
+ async function save(finalize=false){ if(!boot.openSession)return alert('Abra o caixa antes de iniciar ou alterar uma Venda/O.S.'); try{ let j=await api('/erp/pdv/operacoes','POST',payload()); applyServerOperation(j.operation); if(finalize){ j=await api(`/erp/pdv/operacoes/${state.id}/finalizar`,'POST'); applyServerOperation(j.operation); $('#operationStatus').textContent='Finalizada'; lockFinalized(); openFinalizeSuccess(j.operation); } else {$('#operationStatus').textContent='Salva em aberto';alert(j.message);} }catch(e){ if(e.code==='OPERATION_VERSION_CONFLICT'){const reload=confirm(e.message+'\n\nClique em OK para recarregar a versão atual sem sobrescrever a outra aba.');if(reload&&e.current){sessionStorage.setItem('qualityPdvConflict',JSON.stringify(e.current));location.href='/erp/pdv?operacao='+e.current.id;}return;} alert(e.message);} }
+ function applyServerOperation(op){state.id=op.id;state.number=op.number;state.version=Number(op.version||0);boot.current=op;$('#operationNumber').textContent='#'+state.number;$('#operationVersion').textContent='v'+state.version;$('#btnHistory').disabled=false;$('#btnCancelOperation').disabled=['finalized','cancelled'].includes(op.status);}
+ function openFinalizeSuccess(op){const kind=op?.type==='service_order'?'O.S.':'Venda';$('#finalizeSuccessTitle').textContent=`${kind} finalizada com sucesso`;$('#finalizeSuccessText').textContent='Estoque, pagamentos e caixa foram processados corretamente.';$('#finalizeSuccessNumber').textContent=`${kind} nº #${op?.number||state.number||'—'}`;show('#modalFinalizeSuccess');setTimeout(()=>$('#btnSuccessNew')?.focus(),50);}
+ function lockFinalized(){if(!boot.current||!['finalized','cancelled'].includes(boot.current.status))return;document.querySelectorAll('.pdv-main input,.pdv-main select,.pdv-main textarea,.pdv-main button:not(#btnHistory),.pdv-side input,.pdv-side select,.pdv-side button').forEach(el=>el.disabled=true);$('#btnSave').disabled=true;$('#btnFinalize').disabled=true;}
+ function setType(type){state.type=type;document.querySelectorAll('.pdv-type-switch button').forEach(b=>b.classList.toggle('active',b.dataset.type===type));$('#osPanel').hidden=type!=='service_order';}
+ $('#btnAddProduct').onclick=()=>{ const p=productByName.get($('#productSearch').value.trim().toLowerCase()); if(!p)return alert('Selecione um produto válido da lista.'); state.items.push({productId:String(p.id),inventoryItemId:p.inventoryItemId,name:p.name,quantity:Number($('#productQty').value||1),unitPrice:Number(p.salePrice||0),unitCost:Number(p.unitCost||0),discount:0,sellerNameSnapshot:$('#sellerName').value,stockControlled:p.stockControlled,allowNegative:p.allowNegative}); $('#productSearch').value='';renderItems();};
+ $('#btnAddPayment').onclick=()=>rowPayment(); $('#btnSave').onclick=()=>save(false); $('#btnFinalize').onclick=openFinalizeConfirmation; $('#btnConfirmFinalize').onclick=()=>{hideAll();save(true);};
+ const newOperationUrl=()=>'/erp/pdv?nova=1&caixa='+encodeURIComponent($('#cashbox')?.value||boot.selectedCashboxId||'caixa-principal');
+ let printReturnModal=null;
+ function showOnly(id){document.querySelectorAll('.pdv-modal').forEach(m=>m.hidden=true);show(id);}
+ function restoreAfterPrint(){hideAll();if(printReturnModal)show(printReturnModal);printReturnModal=null;}
+ function openPrintFrom(returnModal=null){printReturnModal=returnModal;selectedPrintModel=state.type==='service_order'?'os-entry':'sale-receipt';$('#osPrintOptions').hidden=state.type!=='service_order';renderPrintModels();showOnly('#modalPrint');}
+ function renderOperationSummary(){
+  const op=boot.current||{};const items=op.items||state.items||[];const payments=op.payments||state.payments||[];
+  const total=Number(op.total??items.reduce((s,i)=>s+(Number(i.quantity||0)*Number(i.unitPrice||0)-Number(i.discount||0)),0));
+  const customer=op.customerNameSnapshot||op.identifier||'Consumidor final';
+  $('#operationSummaryTitle').textContent=`${op.type==='service_order'?'O.S.':'Venda'} #${op.number||state.number||'—'}`;
+  $('#operationSummaryContent').innerHTML=`<div class="pdv-operation-summary-grid"><div><span>Cliente</span><strong>${esc(customer)}</strong></div><div><span>Vendedor</span><strong>${esc(op.sellerNameSnapshot||'—')}</strong></div><div><span>Finalizada em</span><strong>${fmtDate(op.dates?.finalizedAt||op.finalizedAt)}</strong></div><div><span>Total</span><strong>${money(total)}</strong></div></div><section><h3>Itens</h3>${items.map(i=>`<div class="pdv-operation-summary-row"><span>${esc(i.quantity)}x ${esc(i.name)}</span><strong>${money(Number(i.quantity||0)*Number(i.unitPrice||0)-Number(i.discount||0))}</strong></div>`).join('')||'<p class="pdv-modal-help">Nenhum item registrado.</p>'}</section><section><h3>Pagamentos</h3>${payments.map(p=>`<div class="pdv-operation-summary-row"><span>${esc(p.methodName||p.methodId||'Pagamento')}</span><strong>${money(p.amount)}</strong></div>`).join('')||'<p class="pdv-modal-help">Nenhum pagamento registrado.</p>'}</section>`;
+ }
+ $('#btnSuccessNew').onclick=()=>location.href=newOperationUrl();
+ $('#btnSaveInstallments').onclick=saveInstallmentDates;$('#btnRedistributeInstallments').onclick=redistributeInstallments;
+ $('#btnSuccessPrint').onclick=()=>openPrintFrom('#modalFinalizeSuccess');
+ $('#btnSuccessView').onclick=()=>{renderOperationSummary();showOnly('#modalOperationSummary');};
+ $('#btnSummaryBack').onclick=()=>showOnly('#modalFinalizeSuccess');
+ $('#btnSummaryClose').onclick=()=>hideAll();
+ $('#btnSummaryPrint').onclick=()=>openPrintFrom('#modalOperationSummary');
+ $('#btnSummaryNew').onclick=()=>location.href=newOperationUrl(); $('#btnCancelOperation').onclick=async()=>{if(!state.id)return;const reason=prompt('Informe o motivo do cancelamento:');if(reason===null)return;if(!reason.trim())return alert('Informe o motivo do cancelamento.');if(!confirm('Confirmar o cancelamento desta operação?'))return;try{const j=await api(`/erp/pdv/operacoes/${state.id}/cancelar`,'POST',{version:state.version,reason});applyServerOperation(j.operation);$('#operationStatus').textContent='Cancelada';lockFinalized();alert(j.message||'Operação cancelada com sucesso.');location.href=newOperationUrl();}catch(e){alert(e.message)}}; document.querySelectorAll('.pdv-type-switch button').forEach(b=>b.onclick=()=>setType(b.dataset.type));
+ const show=id=>{const el=$(id);if(el)el.hidden=false;}, hideAll=()=>document.querySelectorAll('.pdv-modal').forEach(m=>m.hidden=true);
+ document.querySelectorAll('[data-close]').forEach(b=>b.onclick=()=>{const modal=b.closest('.pdv-modal');if(modal?.id==='modalPrint'){restoreAfterPrint();return;}hideAll();}); $('#btnShortcuts').onclick=()=>show('#modalShortcuts'); $('#btnCash').onclick=()=>{if(boot.openSession){location.href='/erp/pdv/caixa?caixa='+encodeURIComponent($('#cashbox').value);}else{show('#modalCash');}};
+ const norm=v=>String(v||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase();
+ const esc=v=>String(v??'').replace(/[&<>"']/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
+ function renderCustomerSearch(q=''){ const term=norm(q); const list=(boot.customers||[]).filter(c=>!term||norm(`${c.code||''} ${c.name||''} ${c.tradeName||''} ${c.document||''} ${c.mobile||''} ${c.phone||''} ${c.email||''}`).includes(term)).slice(0,80); $('#customerSearchList').innerHTML=list.map(c=>`<button data-id="${esc(c.id)}"><b>${esc(c.name||'Cliente')}</b><span>${esc(c.document||'Sem documento')} · ${esc(c.mobile||c.phone||'Sem telefone')}</span><em>${esc(c.code||'')}</em></button>`).join('')||'<p>Nenhum cliente encontrado.</p>'; document.querySelectorAll('#customerSearchList button').forEach(b=>b.onclick=()=>{$('#customerId').value=b.dataset.id;hideAll();}); }
+ function renderProductSearch(q=''){ const term=norm(q); const list=(boot.products||[]).filter(p=>!term||norm(`${p.name||''} ${p.code||''} ${p.sku||''} ${p.barcode||''} ${p.category||''}`).includes(term)).slice(0,100); $('#productSearchList').innerHTML=list.map(p=>`<button data-name="${esc(p.name)}"><b>${esc(p.name)}</b><span>Cód. ${esc(p.code||'—')} · Estoque ${p.availableQuantity==null?'não controlado':esc(p.availableQuantity)}</span><em>${money(p.salePrice||0)}</em></button>`).join('')||'<p>Nenhum produto encontrado.</p>'; document.querySelectorAll('#productSearchList button').forEach(b=>b.onclick=()=>{$('#productSearch').value=b.dataset.name;hideAll();$('#productQty').focus();}); }
+ $('#btnCustomerSearch').onclick=()=>{renderCustomerSearch();show('#modalCustomerSearch');setTimeout(()=>$('#customerSearchInput').focus(),50)}; $('#customerSearchInput').oninput=e=>renderCustomerSearch(e.target.value);
+ $('#btnProductSearch').onclick=()=>{renderProductSearch();show('#modalProductSearch');setTimeout(()=>$('#productSearchInput').focus(),50)}; $('#productSearchInput').oninput=e=>renderProductSearch(e.target.value);
+ const identifier=$('#identifier'); function openIdentifier(){identifier.readOnly=false;identifier.classList.remove('pdv-identifier-collapsed');identifier.placeholder='Nome, telefone ou referência';identifier.focus();identifier.select();} identifier.ondblclick=openIdentifier; identifier.parentElement.ondblclick=openIdentifier; identifier.onblur=()=>{identifier.readOnly=true;identifier.classList.add('pdv-identifier-collapsed');identifier.placeholder=identifier.value?'':'✎'};
+ const defaultPrintModels=[
+  {id:'sale-receipt',name:'Cupom não fiscal',type:'sale',icon:'🧾',content:'{{empresa}}\n\nCUPOM NÃO FISCAL\nOperação: {{numero}}\nCliente: {{cliente}}\nIdentificador: {{identificador}}\n\n{{itens}}\n\nTOTAL: {{total}}\nVendedor: {{vendedor}}\nObservação: {{observacao}}'},
+  {id:'os-entry',name:'Entrada da O.S.',type:'service_order',icon:'📥',smart:true},
+  {id:'os-complete',name:'O.S. completa',type:'service_order',icon:'📋',smart:true},
+  {id:'os-exit',name:'Comprovante de retirada',type:'service_order',icon:'📤',smart:true},
+  {id:'custom-base',name:'Modelo personalizado',type:'all',icon:'📄',content:'{{empresa}}\nOperação {{numero}}\nCliente: {{cliente}}\n\n{{itens}}\n\nTotal: {{total}}'}
+ ];
+ let selectedPrintModel=''; const getCustomModels=()=>{try{return JSON.parse(localStorage.getItem('qualityPdvPrintModels')||'[]')}catch{return[]}};
+ function renderPrintModels(){const models=[...defaultPrintModels,...getCustomModels()].filter(m=>m.type==='all'||m.type===state.type); $('#printModels').innerHTML=models.map(m=>`<button class="pdv-print-model ${selectedPrintModel===m.id?'selected':''}" data-id="${esc(m.id)}"><span>${m.icon||'📄'}</span><b>${esc(m.name)}</b><small>${m.type==='sale'?'Venda':m.type==='service_order'?'O.S.':'Venda e O.S.'}</small></button>`).join('')+`<button class="pdv-print-model new" data-new><span>＋</span><b>Novo modelo</b><small>Criar modelo</small></button>`; document.querySelectorAll('.pdv-print-model[data-id]').forEach(b=>b.onclick=()=>{selectedPrintModel=b.dataset.id;renderPrintModels()}); $('#printModels [data-new]').onclick=()=>{show('#modalNewPrintModel')}; }
+ function currentPrintModel(){return [...defaultPrintModels,...getCustomModels()].find(m=>m.id===selectedPrintModel)||defaultPrintModels.find(m=>m.type===state.type)||defaultPrintModels[0]}
+ function checklistHtml(title,data){const items=(data?.items||[]).filter(i=>i.status&&i.status!=='not_applicable');if(!items.length&&!data?.notes)return '';const labels={approved:'Aprovado',failed:'Com problema',not_tested:'Não testado',not_applicable:'N/A'};return `<section><h2>${esc(title)}</h2>${items.length?`<table><tbody>${items.map(i=>`<tr><td>${esc(i.label)}</td><td><b>${esc(labels[i.status]||i.status)}</b></td><td>${esc(i.notes||'')}</td></tr>`).join('')}</tbody></table>`:''}${data?.notes?`<p><b>Observações:</b> ${esc(data.notes)}</p>`:''}</section>`;}
+ async function photosHtml(attachments){if(!attachments.length||!$('#printPhotos').checked)return '';const imgs=await Promise.all(attachments.map(async a=>{try{const r=await fetch(a.url);const b=await r.blob();return await new Promise(ok=>{const fr=new FileReader();fr.onload=()=>ok(`<figure><img src="${fr.result}"><figcaption>${esc(a.kind==='checkin'?'Entrada':a.kind==='checkout'?'Saída':'Foto da O.S.')}</figcaption></figure>`);fr.readAsDataURL(b)})}catch{return ''}}));return imgs.some(Boolean)?`<section><h2>Fotos</h2><div class="photos">${imgs.join('')}</div></section>`:'';}
+ async function buildPrintHtml(model){const op=boot.current||payload();const so=payload().serviceOrder;const customer=$('#customerId').selectedOptions[0]?.dataset.name||'Consumidor final';const total=state.items.reduce((s,i)=>s+Number(i.quantity||0)*Number(i.unitPrice||0)-Number(i.discount||0),0);if(!model.smart){let text=model.content;const d={empresa:'Quality Celulares',numero:state.number||'NOVA',cliente:customer,identificador:$('#identifier').value||'—',vendedor:$('#sellerName').value||'—',observacao:$('#notes').value||'—',total:money(total),itens:state.items.length?state.items.map(i=>`${i.quantity}x ${i.name} — ${money(i.quantity*i.unitPrice-(i.discount||0))}`).join('\n'):'Nenhum item adicionado',os_aparelho:so.device||'—',os_defeito:so.issue||'—'};Object.entries(d).forEach(([k,v])=>text=text.replaceAll(`{{${k}}}`,String(v)));return `<!doctype html><html><head><meta charset="utf-8"><title>${esc(model.name)}</title><style>body{font:14px Arial,sans-serif;color:#111;margin:28px;white-space:pre-wrap;line-height:1.45}</style></head><body>${esc(text)}</body></html>`;}
+ const complete=model.id==='os-complete',exit=model.id==='os-exit';let body=`<header><h1>QUALITY CELULARES</h1><h2>${exit?'COMPROVANTE DE RETIRADA':'ORDEM DE SERVIÇO'} #${esc(state.number||'NOVA')}</h2></header><section class="grid"><p><b>Cliente:</b> ${esc(customer)}</p><p><b>Contato/referência:</b> ${esc($('#identifier').value||'—')}</p><p><b>Equipamento:</b> ${esc(so.device||'—')}</p>${so.equipmentId?`<p><b>Identificação:</b> ${esc(so.equipmentId)}</p>`:''}<p><b>Técnico:</b> ${esc(so.technicianName||'—')}</p><p><b>Abertura:</b> ${fmtDate(op.dates?.openedAt||op.createdAt||new Date())}</p></section>${so.issue?`<section><h2>Problema relatado / diagnóstico inicial</h2><p>${esc(so.issue)}</p></section>`:''}${so.accessories?`<section><h2>Acessórios recebidos</h2><p>${esc(so.accessories)}</p></section>`:''}${so.servicePerformed?`<section><h2>Serviço realizado</h2><p>${esc(so.servicePerformed)}</p></section>`:''}`;
+ if(complete&&$('#printCheckin').checked)body+=checklistHtml('Check-in',so.checkin);if((complete||exit)&&$('#printCheckout').checked)body+=checklistHtml('Check-out e testes finais',so.checkout);if(so.checkout?.customerChecked||so.checkout?.accessoriesChecked||so.checkout?.guidanceReceived)body+=`<section><h2>Conferência na entrega</h2><p>${so.checkout.customerChecked?'☑':'☐'} Cliente conferiu o equipamento &nbsp; ${so.checkout.accessoriesChecked?'☑':'☐'} Conferiu os acessórios &nbsp; ${so.checkout.guidanceReceived?'☑':'☐'} Recebeu orientações</p></section>`;if(complete)body+=await photosHtml(so.attachments||[]);if(state.items.length)body+=`<section><h2>Produtos / serviços</h2><table><tbody>${state.items.map(i=>`<tr><td>${esc(i.quantity)}x ${esc(i.name)}</td><td>${money(i.quantity*i.unitPrice-(i.discount||0))}</td></tr>`).join('')}</tbody></table><p class="total"><b>Total:</b> ${money(total)}</p></section>`;if(complete&&$('#printTimeline').checked&&(op.timeline||[]).length)body+=`<section><h2>Histórico resumido</h2>${op.timeline.map(e=>`<p>${fmtDate(e.at)} — ${esc(e.label||e.type)}</p>`).join('')}</section>`;body+=`<footer><div>Assinatura do cliente: __________________________________</div><div>Responsável: __________________________________</div></footer>`;return `<!doctype html><html><head><meta charset="utf-8"><title>${esc(model.name)}</title><style>body{font:13px Arial,sans-serif;color:#111;margin:24px;line-height:1.4}header{text-align:center;border-bottom:2px solid #111;margin-bottom:18px}h1{font-size:20px;margin:0}h2{font-size:15px;margin:12px 0 7px}.grid{display:grid;grid-template-columns:1fr 1fr;gap:4px 20px}section{border-bottom:1px solid #ccc;padding:7px 0}p{white-space:pre-wrap;margin:5px 0}table{width:100%;border-collapse:collapse}td{border-bottom:1px solid #ddd;padding:5px}.photos{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.photos img{width:100%;max-height:260px;object-fit:contain}.photos figure{margin:0;text-align:center}.total{text-align:right;font-size:16px}footer{display:grid;grid-template-columns:1fr 1fr;gap:30px;margin-top:45px}@media print{body{margin:10mm}}</style></head><body>${body}</body></html>`;}
+ $('#btnPrint').onclick=()=>openPrintFrom(null);
+ $('#btnConfirmPrint').onclick=async()=>{
+  const model=currentPrintModel();let w=null;
+  try{
+   w=window.open('','_blank');
+   if(!w)throw new Error('O navegador bloqueou a janela de impressão. Autorize pop-ups para o Painel Quality.');
+   const html=await buildPrintHtml(model);
+   w.document.open();w.document.write(html);w.document.close();
+   restoreAfterPrint();
+   if($('#printPreview').checked){
+    const closePreview=()=>{try{if(!w.closed)w.close();}catch(_){}};
+    w.addEventListener?.('afterprint',closePreview,{once:true});
+    setTimeout(()=>{try{w.focus();w.print();}catch(_){}},300);
+   }else{w.focus();}
+  }catch(e){
+   try{if(w&&!w.closed)w.close();}catch(_){}
+   alert(e.message||'Não foi possível abrir a impressão.');
+  }
+ };
+ $('#btnSavePrintModel').onclick=()=>{const name=$('#newModelName').value.trim(),content=$('#newModelContent').value.trim();if(!name||!content)return alert('Informe o nome e o conteúdo do modelo.');const models=getCustomModels();models.push({id:'custom-'+Date.now(),name,type:$('#newModelType').value,icon:'📄',content});localStorage.setItem('qualityPdvPrintModels',JSON.stringify(models));$('#newModelName').value='';$('#newModelContent').value='';hideAll();selectedPrintModel=models.at(-1).id;renderPrintModels();show('#modalPrint')};
+ const fmtDate=v=>v?new Date(v).toLocaleString('pt-BR'):'—';
+ function renderHistory(){const op=boot.current;if(!op)return;$('#operationDates').innerHTML=`<div><span>Abertura</span><b>${fmtDate(op.dates?.openedAt||op.createdAt)}</b></div><div><span>Última atualização</span><b>${fmtDate(op.dates?.updatedAt||op.updatedAt)}</b></div><div><span>Finalização</span><b>${fmtDate(op.dates?.finalizedAt||op.finalizedAt)}</b></div><div><span>Cancelamento</span><b>${fmtDate(op.dates?.cancelledAt||op.cancelledAt)}</b></div>`;const events=[...(op.timeline||[])].reverse();$('#operationTimeline').innerHTML=events.map(ev=>`<article><time>${fmtDate(ev.at)}</time><div><b>${esc(ev.label||ev.type)}</b><span>${esc(ev.actor||'sistema')}</span></div></article>`).join('')||'<p>Nenhum evento registrado.</p>';}
+ $('#btnHistory').onclick=()=>{renderHistory();show('#modalHistory')};
+ function renderOperations(filter=''){ const q=filter.toLowerCase(); $('#operationList').innerHTML=boot.operations.filter(o=>!q||`${o.number} ${o.identifier} ${o.customerNameSnapshot} ${o.sellerNameSnapshot} ${o.serviceOrder?.device||''}`.toLowerCase().includes(q)).map(o=>`<button data-id="${o.id}"><b>${o.type==='service_order'?'O.S.':'Venda'} #${o.number}</b><span>${o.customerNameSnapshot||o.identifier||'Consumidor final'}</span><em>${money(o.total)} · ${o.status}</em></button>`).join('')||'<p>Nenhuma operação encontrada.</p>'; document.querySelectorAll('#operationList button').forEach(b=>b.onclick=()=>location.href='/erp/pdv?operacao='+b.dataset.id); }
+ $('#btnOperations').onclick=()=>{renderOperations();show('#modalOperations')}; $('#operationSearch').oninput=e=>renderOperations(e.target.value); $('#btnNew').onclick=()=>location.href=newOperationUrl();
+ $('#btnOpenCash').onclick=async()=>{try{const body={cashboxId:$('#cashbox').value,allowAdditionalOpening:!!$('#allowAdditionalOpening')?.checked};await api('/erp/pdv/caixa/abrir','POST',body);location.reload()}catch(e){alert(e.message)}};
+ $('#btnMovement').onclick=async()=>{try{await api('/erp/pdv/caixa/movimentar','POST',{cashboxId:$('#cashbox').value,type:$('#movementType').value,amount:Number($('#movementAmount').value||0),description:$('#movementDescription').value});location.reload()}catch(e){alert(e.message)}};
+ $('#btnCloseCash').onclick=()=>{location.href='/erp/pdv/caixa?caixa='+encodeURIComponent($('#cashbox').value)};
+ document.addEventListener('keydown',e=>{if(e.key==='F1'){e.preventDefault();show('#modalShortcuts')}if(e.key==='F5'){e.preventDefault();$('#productSearch').focus()}if(e.key==='F7'){e.preventDefault();$('#btnCustomerSearch').click()}if(e.key==='F9'){e.preventDefault();if(!$('#modalFinalizeSuccess').hidden||!$('#modalOperationSummary').hidden)location.href=newOperationUrl();else $('#btnPrint').click()}if(e.key==='F10'){e.preventDefault();save(false)}if(e.key==='F12'){e.preventDefault();save(true)}if(e.ctrlKey&&e.key.toLowerCase()==='a'){e.preventDefault();$('#btnOperations').click()}if(e.ctrlKey&&e.key.toLowerCase()==='s'){e.preventDefault();save(false)}});
+ if(boot.current){const so=boot.current.serviceOrder||{};$('#customerId').value=boot.current.customerId||'';$('#identifier').value=boot.current.identifier||'';$('#sellerName').value=boot.current.sellerNameSnapshot||'';$('#notes').value=boot.current.notes||'';$('#osDevice').value=so.device||'';$('#osEquipmentId').value=so.equipmentId||'';$('#osIssue').value=so.issue||so.diagnosis||'';$('#osTechnician').value=so.technicianName||'';$('#osServicePerformed').value=so.servicePerformed||'';$('#osAccessories').value=so.accessories||'';$('#osCheckinNotes').value=so.checkin?.notes||'';$('#osCheckoutNotes').value=so.checkout?.notes||'';$('#osCustomerChecked').checked=!!so.checkout?.customerChecked;$('#osAccessoriesChecked').checked=!!so.checkout?.accessoriesChecked;$('#osGuidanceReceived').checked=!!so.checkout?.guidanceReceived;}
+ function renderChecklist(containerId,labels,saved=[]){const map=new Map((saved||[]).map(i=>[i.label,i]));$(containerId).innerHTML=labels.map(label=>{const item=map.get(label)||{};return `<div class="pdv-check-row" data-label="${esc(label)}"><b>${esc(label)}</b><select><option value="not_applicable">Não se aplica</option><option value="approved">Aprovado</option><option value="failed">Com problema</option><option value="not_tested">Não testado</option></select><input placeholder="Observação opcional" value="${esc(item.notes||'')}"></div>`}).join('');[...document.querySelectorAll(`${containerId} .pdv-check-row`)].forEach(r=>r.querySelector('select').value=map.get(r.dataset.label)?.status||'not_applicable');}
+ function renderPhotos(){const list=boot.current?.serviceOrder?.attachments||[];$('#osPhotoGrid').innerHTML=list.map(a=>`<article><img src="${esc(a.url)}" alt="Foto da O.S."><span>${a.kind==='checkin'?'Entrada':a.kind==='checkout'?'Saída':'Geral'}</span><button type="button" data-id="${esc(a.id)}">Remover</button></article>`).join('')||'<p class="pdv-empty-photos">Nenhuma foto adicionada.</p>';document.querySelectorAll('#osPhotoGrid button').forEach(b=>b.onclick=async()=>{if(!confirm('Remover esta foto?'))return;try{const j=await api(`/erp/pdv/operacoes/${state.id}/anexos/${b.dataset.id}`,'DELETE',{version:state.version});applyServerOperation(j.operation);renderPhotos()}catch(e){alert(e.message)}});}
+ async function compressPhoto(file){const img=await new Promise((ok,fail)=>{const i=new Image();i.onload=()=>ok(i);i.onerror=fail;i.src=URL.createObjectURL(file)});const max=1600,scale=Math.min(1,max/Math.max(img.width,img.height)),canvas=document.createElement('canvas');canvas.width=Math.round(img.width*scale);canvas.height=Math.round(img.height*scale);canvas.getContext('2d').drawImage(img,0,0,canvas.width,canvas.height);return canvas.toDataURL('image/webp',0.78);}
+ $('#btnAddPhoto').onclick=async()=>{if(!boot.openSession)return alert('Abra o caixa antes de alterar a O.S.');if(!state.id){alert('Salve a O.S. em aberto antes de adicionar fotos.');return}const file=$('#osPhotoInput').files[0];if(!file)return alert('Selecione uma foto.');try{$('#btnAddPhoto').disabled=true;$('#btnAddPhoto').textContent='Compactando...';const dataUrl=await compressPhoto(file);const j=await api(`/erp/pdv/operacoes/${state.id}/anexos`,'POST',{version:state.version,dataUrl,name:file.name,kind:$('#photoKind').value});applyServerOperation(j.operation);$('#osPhotoInput').value='';renderPhotos();alert(j.message)}catch(e){alert(e.message)}finally{$('#btnAddPhoto').disabled=false;$('#btnAddPhoto').textContent='Adicionar foto'}};
+ renderChecklist('#checkinChecklist',checkinItems,boot.current?.serviceOrder?.checkin?.items);renderChecklist('#checkoutChecklist',checkoutItems,boot.current?.serviceOrder?.checkout?.items);renderPhotos();
+ setType(state.type); const initialPayments=Array.isArray(state.payments)?[...state.payments]:[]; (initialPayments.length?initialPayments:[{}]).forEach(rowPayment); renderItems(); $('#cashClosedBox').hidden=!!boot.openSession;$('#cashOpenBox').hidden=!boot.openSession; if(!boot.openSession){document.querySelectorAll('.pdv-main input,.pdv-main select,.pdv-main textarea,.pdv-main button:not(#btnHistory),.pdv-side input,.pdv-side select,.pdv-side button,.pdv-type-switch button,#btnSave,#btnFinalize,#btnCancelOperation').forEach(el=>el.disabled=true);$('#operationStatus').textContent='Abra o caixa para operar';show('#modalCash');document.querySelector('#modalCash [data-close]').hidden=true;} lockFinalized();
+})();
+</script>

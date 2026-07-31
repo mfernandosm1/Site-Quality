@@ -1,0 +1,138 @@
+<% layout('layout') -%>
+<%
+  const safeJson=value=>JSON.stringify(value||{}).replace(/</g,'\\u003c');
+  const money=value=>Number(value||0).toLocaleString('pt-BR',{style:'currency',currency:'BRL'});
+  const fmtDate=value=>value?new Date(`${value}T12:00:00`).toLocaleDateString('pt-BR'):'—';
+  const labels={open:'Em aberto',partial:'Parcial',paid:'Pago',cancelled:'Estornada',reversed:'Estornada'};
+  const methods=(catalogs.paymentMethods||[]).filter(item=>item.active!==false);
+  const costCenters=(catalogs.costCenters||[]).filter(item=>item.active!==false);
+  const accounts=(catalogs.accounts||[]).filter(item=>item.active!==false);
+%>
+<section class="finance-hero compact">
+  <div><span class="erp-kicker">FINANCEIRO · v<%= version %></span><h1>📤 Contas a Pagar</h1><p>Cadastre despesas, acompanhe vencimentos e registre pagamentos com integração ao caixa.</p></div>
+  <div class="finance-header-actions"><button type="button" class="btn btn-success" id="newPayable">+ Nova conta</button><a class="btn" href="/erp/financeiro">← Financeiro</a></div>
+</section>
+<div id="payablesApp">
+  <section class="receivable-kpis">
+    <button type="button" class="receivable-kpi" data-summary-filter="open"><span>Em aberto</span><strong><%= money(summary.open.value) %></strong><small><%= summary.open.count %> conta(s)</small></button>
+    <button type="button" class="receivable-kpi" data-summary-filter="today"><span>Vencem hoje</span><strong><%= money(summary.dueToday.value) %></strong><small><%= summary.dueToday.count %> parcela(s)</small></button>
+    <button type="button" class="receivable-kpi danger" data-summary-filter="overdue"><span>Vencidos</span><strong><%= money(summary.overdue.value) %></strong><small><%= summary.overdue.count %> parcela(s)</small></button>
+    <button type="button" class="receivable-kpi success" data-summary-filter="paid-month"><span>Pagos no mês</span><strong><%= money(summary.paidMonth.value) %></strong><small><%= summary.paidMonth.count %> pagamento(s)</small></button>
+  </section>
+
+  <nav class="payable-view-tabs" aria-label="Visualização das contas a pagar">
+    <button type="button" class="active" data-payable-view="active" aria-pressed="true">Contas Ativas <span id="activePayablesCount"><%= (typeof viewCounts !== 'undefined' && viewCounts && Number.isFinite(Number(viewCounts.active))) ? viewCounts.active : titles.length %></span></button>
+    <button type="button" data-payable-view="reversed" aria-pressed="false">Estornadas <span id="reversedPayablesCount"><%= (typeof viewCounts !== 'undefined' && viewCounts && Number.isFinite(Number(viewCounts.reversed))) ? viewCounts.reversed : 0 %></span></button>
+  </nav>
+
+  <section class="receivable-filter-panel">
+    <div class="receivable-search-row">
+      <label class="receivable-search"><span>Buscar</span><input id="payableSearch" placeholder="Número, fornecedor, documento ou descrição"></label>
+      <label><span>Situação</span><select id="payableStatus"><option value="">Todas</option><option value="open">Em aberto</option><option value="partial">Parcial</option><option value="paid">Paga</option><option value="overdue">Vencida</option><option value="reversed">Estornada</option></select></label>
+      <label><span>Origem</span><select id="payableType"><option value="">Todas</option><option value="expense">Despesas</option><option value="purchase">Compras</option></select></label>
+      <button type="button" class="btn" id="togglePayableFilters">Mais filtros</button><button type="button" class="btn btn-ghost" id="clearPayableFilters">Limpar</button>
+    </div>
+    <div class="receivable-quick-filters"><button data-due-preset="">Todos</button><button data-due-preset="today">Hoje</button><button data-due-preset="overdue">Vencidos</button><button data-due-preset="next7">Próximos 7 dias</button><button data-due-preset="month">Este mês</button><button data-due-preset="nextMonth">Próximo mês</button><button data-due-preset="future">Futuras</button></div>
+    <div class="receivable-advanced-filters" id="payableAdvancedFilters" hidden>
+      <div class="payables-period-filter">
+        <span class="operations-period-title">Período de vencimento</span>
+        <div class="operations-period-inputs">
+          <label><span>De</span><span class="operations-date-field"><input type="date" id="payableDueFrom"><button class="operations-period-trigger" type="button" data-quick-date-trigger="from" aria-label="Abrir períodos rápidos da data inicial" title="Períodos rápidos">▾</button></span></label>
+          <label><span>Até</span><span class="operations-date-field"><input type="date" id="payableDueTo"><button class="operations-period-trigger" type="button" data-quick-date-trigger="to" aria-label="Abrir períodos rápidos da data final" title="Períodos rápidos">▾</button></span></label>
+        </div>
+      </div>
+      <label><span>Fornecedor</span><select id="payableSupplier"><option value="">Todos</option><% suppliers.forEach(item=>{ %><option value="<%= item.id %>"><%= item.name %></option><% }) %></select></label>
+      <label><span>Forma prevista</span><select id="payablePaymentMethod"><option value="">Todas</option><% methods.forEach(item=>{ %><option value="<%= item.id %>"><%= item.name %></option><% }) %></select></label>
+      <label><span>Centro de custo</span><select id="payableCostCenter"><option value="">Todos</option><% costCenters.forEach(item=>{ %><option value="<%= item.id %>"><%= item.name %></option><% }) %></select></label>
+      <label><span>Plano de contas</span><select id="payableAccount"><option value="">Todos</option><% accounts.forEach(item=>{ %><option value="<%= item.id %>"><%= item.name %></option><% }) %></select></label>
+    </div>
+  </section>
+
+  <section class="finance-panel receivable-list-panel">
+    <div class="receivable-list-meta"><div class="payable-results-heading"><strong id="payableResultCount"><%= titles.length %> conta(s)</strong><details class="payable-export-menu"><summary class="btn btn-small">Exportar ▾</summary><div><button type="button" id="exportPayablesPdf">PDF</button><button type="button" id="exportPayablesImage">Imagem</button></div></details></div><div class="payable-list-tools"><label><span>Ordenar</span><select id="payableSort"><option value="dueAsc">Vencimento mais próximo</option><option value="dueDesc">Vencimento mais distante</option><option value="valueDesc">Maior saldo</option><option value="createdDesc">Mais recentes</option></select></label><span>Clique em uma linha para consultar ou pagar.</span></div></div>
+    <div class="finance-table-wrap"><table class="finance-table receivable-table"><thead><tr><th>Nº</th><th>Fornecedor / Descrição</th><th>Documento</th><th>Próximo vencimento</th><th>Valor</th><th>Saldo</th><th>Situação</th></tr></thead><tbody id="payablesBody">
+      <% if(!titles.length){ %><tr><td colspan="7" class="empty-state"><strong>Nenhuma conta a pagar cadastrada.</strong><br>Use “Nova conta” para registrar o primeiro compromisso.</td></tr><% } else titles.forEach(title=>{ const next=(title.installments||[]).find(item=>Number(item.openBalance||0)>0); %>
+      <tr class="receivable-row" tabindex="0" data-open="<%= title.id %>"><td><b><%= title.number %></b></td><td><%= title.supplierName %><small><%= title.description %></small></td><td><%= title.documentNumber||'—' %></td><td><%= next?fmtDate(next.dueDate):'—' %></td><td><%= money(title.netValue) %></td><td><%= money(title.openBalance) %></td><td><span class="finance-status <%= title.status==='paid'?'':'off' %>"><%= labels[title.status]||title.status %></span></td></tr>
+      <% }) %>
+    </tbody></table></div>
+  </section>
+</div>
+<script type="application/json" id="payablesBootstrap"><%- safeJson({titles,suppliers,catalogs,cashboxes,defaultCashboxId,summary}) %></script>
+
+<div class="receivable-drawer-backdrop" id="payableDrawerBackdrop" hidden></div>
+<aside class="receivable-drawer" id="payableDrawer" aria-hidden="true"><div id="payableDetail"></div></aside>
+
+<div class="receivable-modal" id="payableCreateModal" hidden>
+  <div class="receivable-modal-backdrop" data-close-create></div>
+  <section class="receivable-modal-card payable-create-card" role="dialog" aria-modal="true" aria-labelledby="payableCreateTitle">
+    <header class="receivable-modal-header"><div><span>CONTAS A PAGAR</span><h2 id="payableCreateTitle">Nova conta</h2><p>Cadastre o compromisso, as competências e o vencimento.</p></div><button type="button" data-close-create aria-label="Fechar">×</button></header>
+    <form id="payableCreateForm">
+      <section class="payable-form-section">
+        <header><h3>Identificação da conta</h3><small>Informações principais do compromisso.</small></header>
+        <div class="payable-create-grid payable-create-grid-main">
+          <label class="span-2"><span>Fornecedor</span><select id="createSupplier"><option value="">Sem fornecedor</option><% suppliers.forEach(item=>{ %><option value="<%= item.id %>"><%= item.name %></option><% }) %></select></label>
+          <label class="span-2"><span>Descrição *</span><input id="createDescription" required></label>
+          <label><span>Nº documento / nota</span><input id="createDocument"></label>
+          <label><span>Valor por competência *</span><input id="createValue" inputmode="decimal" required></label>
+          <label><span>Emissão</span><input type="date" id="createIssueDate"></label>
+          <label class="span-2"><span>Caixa previsto *</span><select id="createCashbox" required><% cashboxes.forEach(item=>{ %><option value="<%= item.id %>" <%= item.id===defaultCashboxId?'selected':'' %>><%= item.name %><%= item.isOpen?' · Aberto':' · Fechado' %></option><% }) %></select><small class="payable-field-help">O caixa aberto atual é selecionado automaticamente. Você poderá trocar novamente ao registrar o pagamento.</small></label>
+        </div>
+      </section>
+
+      <section class="payable-form-section">
+        <header><div><h3>Competências</h3><small>Use somente mês e ano. O botão + cria o mês seguinte automaticamente.</small></div><button type="button" class="btn btn-small" id="addCompetence">+ Adicionar competência</button></header>
+        <p class="payable-context-help"><strong>Competências</strong> definem o período contábil da despesa.</p>
+        <div id="competenceRows" class="payable-competence-list"></div>
+      </section>
+
+      <section class="payable-form-section">
+        <header><h3>Totais e classificação</h3><small>Cada competência gera uma parcela com valor e vencimento próprios.</small></header>
+        <div class="payable-create-total"><span>Total da despesa</span><strong id="createGrandTotal">R$ 0,00</strong><small id="createTotalHint">1 competência</small></div>
+        <section class="payable-plan-box">
+          <header><div><h4>Plano de pagamento</h4><small>Combine entrada e saldo em formas diferentes. A soma precisa fechar o total da despesa.</small></div><button type="button" class="btn btn-small" id="addPaymentPlan">+ Adicionar forma</button></header>
+          <p class="payable-context-help"><strong>Plano de Pagamento</strong> define como a despesa será liquidada.</p>
+          <div id="paymentPlanRows" class="payable-plan-list"></div>
+          <div class="payable-plan-summary"><div><span>Total da despesa</span><b id="paymentPlanExpenseTotal">R$ 0,00</b></div><div><span>Composição</span><b id="paymentPlanTotal">R$ 0,00</b></div><strong id="paymentPlanStatus" class="is-pending">Informe a composição</strong></div>
+        </section>
+        <div class="payable-create-grid">
+          <label><span>Centro de custo</span><select id="createCostCenter"><option value="">Não definido</option><% costCenters.forEach(item=>{ %><option value="<%= item.id %>"><%= item.name %></option><% }) %></select></label>
+          <label><span>Plano de contas</span><select id="createAccount"><option value="">Não definido</option><% accounts.forEach(item=>{ %><option value="<%= item.id %>"><%= item.name %></option><% }) %></select></label>
+        </div>
+      </section>
+
+      <label class="receivable-notes"><span>Observação</span><textarea id="createNotes" rows="3"></textarea></label>
+      <footer class="receivable-modal-actions"><button type="button" class="btn btn-ghost" data-close-create>Cancelar</button><button type="submit" class="btn btn-success" id="savePayable">Salvar conta</button></footer>
+    </form>
+  </section>
+</div>
+
+<div class="receivable-modal" id="payablePaymentModal" hidden>
+  <div class="receivable-modal-backdrop" data-close-payment></div>
+  <section class="receivable-modal-card" role="dialog" aria-modal="true">
+    <header class="receivable-modal-header"><div><span>CONTAS A PAGAR</span><h2>Registrar pagamento</h2><p id="paymentTitleLabel"></p></div><button type="button" data-close-payment aria-label="Fechar">×</button></header>
+    <form id="payablePaymentForm">
+      <div id="paymentFormContent">
+        <section class="receivable-receive-summary"><div><span>Parcela</span><b id="paymentInstallmentLabel">—</b></div><div><span>Saldo em aberto</span><strong id="paymentOpenBalance">R$ 0,00</strong></div></section>
+        <div class="receivable-receive-grid"><label><span>Data do pagamento</span><input type="date" id="paymentDate" required></label><label><span>Juros</span><input id="paymentInterest" value="0,00"></label><label><span>Multa</span><input id="paymentFine" value="0,00"></label><label><span>Desconto</span><input id="paymentDiscount" value="0,00"></label><label><span>Caixa</span><select id="paymentCashbox"><% cashboxes.forEach(item=>{ %><option value="<%= item.id %>"><%= item.name %><%= item.isOpen?' · Aberto':' · Fechado' %></option><% }) %></select></label></div>
+        <section class="receivable-payment-box"><header><div><span>Formas de pagamento</span><small>Divida o valor entre uma ou mais formas.</small></div><button type="button" class="btn btn-small" id="addPayablePayment">+ Adicionar forma</button></header><div id="payablePaymentRows"></div></section>
+        <section class="receivable-receive-totals"><div><span>Total informado</span><strong id="paymentTotal">R$ 0,00</strong></div><div><span>Valor aplicado</span><b id="paymentPrincipal">R$ 0,00</b></div><div><span id="paymentDifferenceLabel">Saldo após pagamento</span><b id="paymentRemaining">R$ 0,00</b></div></section>
+        <label class="receivable-notes"><span>Observação</span><textarea id="paymentNotes" rows="3"></textarea></label>
+        <footer class="receivable-modal-actions"><button type="button" class="btn btn-ghost" data-close-payment>Cancelar</button><button type="submit" class="btn btn-success" id="confirmPayablePayment">Confirmar pagamento</button></footer>
+      </div>
+      <section class="receivable-receive-success" id="paymentSuccess" hidden><div class="receivable-success-icon">✓</div><h3>Pagamento registrado</h3><p id="paymentSuccessMessage"></p><strong id="paymentSuccessValue"></strong><div><button type="button" class="btn" id="printPayableReceipt">Imprimir comprovante</button><button type="button" class="btn btn-success" id="finishPayablePayment">Concluir</button></div></section>
+    </form>
+  </section>
+</div>
+
+<div class="receivable-modal" id="payableReverseModal" hidden>
+  <div class="receivable-modal-backdrop" data-close-reverse></div>
+  <section class="receivable-modal-card payable-reverse-card" role="dialog" aria-modal="true">
+    <header class="receivable-modal-header"><div><span>CONTAS A PAGAR</span><h2>Estornar conta</h2><p>A conta será retirada dos compromissos em aberto.</p></div><button type="button" data-close-reverse aria-label="Fechar">×</button></header>
+    <form id="payableReverseForm">
+      <label class="receivable-notes"><span>Motivo do estorno <small>(opcional)</small></span><textarea id="reverseReason" rows="4" placeholder="Ex.: lançamento duplicado, despesa cancelada..."></textarea></label>
+      <footer class="receivable-modal-actions"><button type="button" class="btn btn-ghost" data-close-reverse>Voltar</button><button type="submit" class="btn btn-danger" id="confirmPayableReverse">Estornar conta</button></footer>
+    </form>
+  </section>
+</div>
+<script src="/public/js/quick-date-picker.js?v=1.0.3"></script>
+<script src="/public/js/contas-pagar.js?v=0.18.8.2"></script>

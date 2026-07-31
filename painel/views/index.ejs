@@ -1,27 +1,70 @@
 <% layout('layout') -%>
-<div class="grid">
-  <a class="card" href="/paginas/edit?file=index.html"><h3>🏠 Index</h3><p>Página inicial</p></a>
-  <a class="card" href="/sobre"><h3>🧾 Sobre</h3><p>Editor visual</p></a>
-  <a class="card" href="/pagamentos"><h3>💳 Pagamento</h3><p>Editor visual</p></a>
-  <a class="card" href="/banners"><h3>🖼️ Banners</h3><p>Gerenciar slides</p></a>
-  <a class="card" href="/produtos"><h3>📦 Produtos</h3><p>Lista e CRUD</p></a>
-  <a class="card" href="/categorias"><h3>🗂️ Categorias</h3><p>Lista e CRUD</p></a>
-  <a class="card" href="/seo"><h3>📈 SEO</h3><p>Google, Sitemap & Schema</p></a>
-  <a class="card" href="/header"><h3>🟣 Cabeçalho</h3><p>Desktop & Mobile</p></a>
-  <a class="card" href="/footer"><h3>🔻 Footer</h3><p>Texto e sociais</p></a>
-  <a class="card" href="/personalizacao"><h3>🎨 Personalização</h3><p>Site, painel e CSS avançado</p></a>
 
-  <div class="card"><h3>🛠️ Manutenção</h3>
-    <div class="stat"><span>Status:</span> <b><%= maint.active ? 'ATIVA' : 'DESATIVADA' %></b></div>
-    <form method="post" action="/manutencao/ativar?from=/"><button class="btn warn" type="submit">Ativar</button></form>
-    <form method="post" action="/manutencao/desativar?from=/"><button class="btn" type="submit">Desativar</button></form>
+<section class="ops-dashboard-head">
+  <div>
+    <h1>Painel Quality</h1>
+    <p>Centro de operações da empresa.</p>
+  </div>
+  <a class="btn ghost" href="/configuracoes">⚙️ Configurações</a>
+</section>
+
+<section class="ops-quick-card shortcuts-card">
+  <div class="shortcuts-heading">
+    <div><h2>Ações rápidas</h2><p>Personalize os atalhos conforme sua rotina.</p></div>
+    <div class="shortcuts-head-actions">
+      <a class="btn ghost" href="<%= manageShortcuts ? '/' : '/?atalhos=1' %>"><%= manageShortcuts ? 'Concluir' : '✏️ Gerenciar atalhos' %></a>
+    </div>
   </div>
 
-  <div class="card"><h3>📤 Publicação</h3>
-    <div class="stat"><span>Última:</span> <b><%= publish.last_publish || '—' %></b></div>
-    <form method="post" action="/publicar"><button class="btn primary" type="submit">Publicar agora</button></form>
+  <div class="shortcuts-grid">
+    <% quickActions.forEach(function(action, index){ %>
+      <div class="shortcut-item">
+        <% if(action.type === 'post'){ %>
+          <form method="post" action="<%= action.href %>" class="shortcut-open-form"><button type="submit" class="shortcut-open"><span><%= action.icon %></span><div><strong><%= action.name %></strong><small>Abrir</small></div></button></form>
+        <% } else { %>
+          <a class="shortcut-open" href="<%= action.href %>"><span><%= action.icon %></span><div><strong><%= action.name %></strong><small>Abrir</small></div></a>
+        <% } %>
+        <% if(manageShortcuts){ %>
+          <div class="shortcut-controls">
+            <form method="post" action="/atalhos/mover"><input type="hidden" name="actionId" value="<%= action.id %>"><input type="hidden" name="direction" value="up"><button title="Mover para esquerda" <%= index === 0 ? 'disabled' : '' %>>←</button></form>
+            <form method="post" action="/atalhos/mover"><input type="hidden" name="actionId" value="<%= action.id %>"><input type="hidden" name="direction" value="down"><button title="Mover para direita" <%= index === quickActions.length - 1 ? 'disabled' : '' %>>→</button></form>
+            <form method="post" action="/atalhos/remover"><input type="hidden" name="actionId" value="<%= action.id %>"><button class="danger" title="Remover">×</button></form>
+          </div>
+        <% } %>
+      </div>
+    <% }) %>
+
+    <% if(availableActions.length){ %>
+      <form method="post" action="/atalhos/adicionar" class="shortcut-add-card">
+        <span class="shortcut-plus">＋</span>
+        <select name="actionId" required>
+          <option value="">Adicionar atalho</option>
+          <% availableActions.forEach(function(action){ %><option value="<%= action.id %>"><%= action.icon %> <%= action.name %></option><% }) %>
+        </select>
+        <button class="btn primary" type="submit">Adicionar</button>
+      </form>
+    <% } %>
   </div>
+</section>
 
-  <a class="card" href="/automacao-whatsapp"><h3>💬 Automação WhatsApp</h3><p>Blocos, simulador e aniversariantes</p></a>
-</div>
 
+<div class="ops-section-title"><div><h2>Áreas principais</h2><p>A navegação está organizada por responsabilidade.</p></div></div>
+<section class="ops-main-grid">
+  <a class="ops-area-card featured" href="/erp"><span class="ops-area-icon">💼</span><div><small>GESTÃO</small><h2>ERP</h2><p>Clientes, produtos, fornecedores, O.S., orçamentos, PDV, estoque, compras e financeiro.</p><b>Abrir área ERP →</b></div></a>
+  <a class="ops-area-card" href="/crm"><span class="ops-area-icon">💬</span><div><small>RELACIONAMENTO</small><h2>CRM</h2><p>WhatsApp, Inbox, automações, notas, lembretes e histórico comercial.</p><b>Abrir CRM →</b></div></a>
+  <a class="ops-area-card" href="/site"><span class="ops-area-icon">🌐</span><div><small>PRESENÇA DIGITAL</small><h2>Site</h2><p>Produtos públicos, categorias, banners, páginas, SEO, manutenção e publicação.</p><b>Abrir Site →</b></div></a>
+  <a class="ops-area-card" href="/analytics"><span class="ops-area-icon">📊</span><div><small>DADOS</small><h2>Analytics</h2><p>Acessos, buscas, favoritos, conversões e oportunidades comerciais.</p><b>Abrir Analytics →</b></div></a>
+  <a class="ops-area-card" href="/marketing"><span class="ops-area-icon">✨</span><div><small>COMUNICAÇÃO</small><h2>Marketing</h2><p>Marketing IA, promoções, sorteios e futuras campanhas integradas.</p><b>Abrir Marketing →</b></div></a>
+  <a class="ops-area-card" href="/ferramentas"><span class="ops-area-icon">🧰</span><div><small>APOIO</small><h2>Ferramentas</h2><p>Compatibilidade, calculadora comercial, backup e atualizações.</p><b>Abrir Ferramentas →</b></div></a>
+  <a class="ops-area-card settings" href="/configuracoes"><span class="ops-area-icon">⚙️</span><div><small>PLATAFORMA</small><h2>Configurações</h2><p>Empresa, unidades, módulos, permissões, integrações e identidade.</p><b>Abrir Configurações →</b></div></a>
+</section>
+
+
+
+<div class="ops-section-title"><div><h2>Status do sistema</h2><p>Informações gerais da plataforma e da publicação.</p></div></div>
+<section class="ops-status-grid">
+  <div class="ops-status-card"><span>🧠</span><div><small>Fundação ERP</small><strong>v0.10.0 ativa</strong></div></div>
+  <div class="ops-status-card"><span>🌐</span><div><small>Última publicação</small><strong><%= publishFormatted %></strong></div></div>
+  <div class="ops-status-card"><span>🛠️</span><div><small>Manutenção do site</small><strong class="<%= maint.active ? 'status-danger' : 'status-ok' %>"><%= maint.active ? 'Ativa' : 'Desativada' %></strong></div></div>
+  <div class="ops-status-card"><span>🔗</span><div><small>Arquitetura</small><strong>Integração primeiro</strong></div></div>
+</section>

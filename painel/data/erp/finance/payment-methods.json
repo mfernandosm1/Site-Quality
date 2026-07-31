@@ -1,0 +1,181 @@
+{
+  "version": "0.16.0",
+  "items": [
+    {
+      "id": "PM-DINHEIRO",
+      "name": "Dinheiro",
+      "code": "DIN",
+      "active": true,
+      "autoSettle": true,
+      "eventType": "cash",
+      "modules": {
+        "sales": true,
+        "purchases": true,
+        "pdv": true,
+        "serviceOrders": true,
+        "finance": true
+      },
+      "allowInstallments": false,
+      "maxInstallments": 1,
+      "settlementDays": 0,
+      "system": true
+    },
+    {
+      "id": "PM-PIX",
+      "name": "PIX",
+      "code": "PIX",
+      "active": true,
+      "autoSettle": true,
+      "eventType": "bank",
+      "modules": {
+        "sales": true,
+        "purchases": true,
+        "pdv": true,
+        "serviceOrders": true,
+        "finance": true
+      },
+      "allowInstallments": false,
+      "maxInstallments": 1,
+      "settlementDays": 0,
+      "system": true
+    },
+    {
+      "id": "PM-CREDITO",
+      "name": "Cartão de crédito",
+      "code": "CRED",
+      "active": true,
+      "autoSettle": false,
+      "eventType": "receivable",
+      "modules": {
+        "sales": true,
+        "purchases": false,
+        "pdv": true,
+        "serviceOrders": true,
+        "finance": true
+      },
+      "allowInstallments": true,
+      "maxInstallments": 18,
+      "settlementDays": 30,
+      "system": true
+    },
+    {
+      "id": "PM-DEBITO",
+      "name": "Cartão de débito",
+      "code": "DEB",
+      "active": true,
+      "autoSettle": false,
+      "eventType": "receivable",
+      "modules": {
+        "sales": true,
+        "purchases": false,
+        "pdv": true,
+        "serviceOrders": true,
+        "finance": true
+      },
+      "allowInstallments": false,
+      "maxInstallments": 1,
+      "settlementDays": 1,
+      "system": true
+    },
+    {
+      "id": "PM-BOLETO",
+      "name": "Boleto",
+      "code": "BOL",
+      "active": true,
+      "autoSettle": false,
+      "eventType": "title",
+      "modules": {
+        "sales": true,
+        "purchases": true,
+        "pdv": false,
+        "serviceOrders": true,
+        "finance": true
+      },
+      "allowInstallments": true,
+      "maxInstallments": 36,
+      "settlementDays": 0,
+      "system": true,
+      "parentId": null,
+      "updatedAt": "2026-07-28T17:58:08.149Z",
+      "updatedBy": "painel",
+      "createdAt": "2026-07-28T17:26:17.781Z",
+      "createdBy": "painel",
+      "generatesReceivable": true,
+      "requireIdentifiedCustomer": true,
+      "requireValidDocument": true,
+      "requireCreditReceipt": true,
+      "firstDueDays": 30,
+      "installmentIntervalDays": 30
+    },
+    {
+      "id": "PAY-9dbceede-83ac-47b2-afe3-27a99c89610d",
+      "name": "aa",
+      "code": "",
+      "active": false,
+      "autoSettle": false,
+      "allowInstallments": false,
+      "maxInstallments": 1,
+      "settlementDays": 0,
+      "modules": {
+        "sales": false,
+        "purchases": false,
+        "pdv": false,
+        "serviceOrders": false,
+        "finance": false
+      },
+      "parentId": null,
+      "updatedAt": "2026-07-28T19:30:35.298Z",
+      "updatedBy": "painel",
+      "createdAt": "2026-07-28T18:35:00.549Z",
+      "createdBy": "painel",
+      "eventType": "receivable"
+    },
+    {
+      "id": "PAY-db052100-9f28-4eeb-9374-8269aab02143",
+      "name": "a",
+      "code": "",
+      "active": false,
+      "autoSettle": false,
+      "allowInstallments": false,
+      "maxInstallments": 1,
+      "settlementDays": 0,
+      "modules": {
+        "sales": false,
+        "purchases": false,
+        "pdv": false,
+        "serviceOrders": false,
+        "finance": false
+      },
+      "parentId": null,
+      "updatedAt": "2026-07-28T19:30:33.903Z",
+      "updatedBy": "painel",
+      "createdAt": "2026-07-28T18:35:07.749Z",
+      "createdBy": "painel",
+      "eventType": "receivable"
+    },
+    {
+      "id": "PAY-4c1f8fb5-f21c-45fd-8345-b11e9709ce9a",
+      "name": "aaaa",
+      "code": "",
+      "active": false,
+      "autoSettle": false,
+      "allowInstallments": false,
+      "maxInstallments": 1,
+      "settlementDays": 0,
+      "modules": {
+        "sales": false,
+        "purchases": false,
+        "pdv": false,
+        "serviceOrders": false,
+        "finance": false
+      },
+      "parentId": null,
+      "updatedAt": "2026-07-28T19:30:36.512Z",
+      "updatedBy": "painel",
+      "createdAt": "2026-07-28T18:36:42.513Z",
+      "createdBy": "painel",
+      "eventType": "receivable"
+    }
+  ],
+  "updatedAt": "2026-07-28T22:22:06.377Z"
+}

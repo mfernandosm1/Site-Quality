@@ -1,0 +1,241 @@
+<% layout('layout') -%>
+<style>
+  .compat-page{--compat-bg:var(--bg,#f6f8fc);--compat-card:var(--card,#fff);--compat-card-2:var(--surface-soft,#f8fafc);--compat-text:var(--text,#111827);--compat-muted:var(--muted,#6b7280);--compat-border:var(--line,#e5e7eb);--compat-input:var(--surface-soft,var(--compat-card));--compat-red:var(--brand,#c90000);display:grid;gap:16px;color:var(--compat-text)}
+  .compat-page *{box-sizing:border-box}.compat-page button,.compat-page input,.compat-page select,.compat-page textarea{font:inherit}
+  .compat-top{display:flex;align-items:flex-start;justify-content:space-between;gap:14px;flex-wrap:wrap}.compat-title h1{margin:0;font-size:clamp(22px,3vw,30px)}.compat-title p{margin:5px 0 0;color:var(--compat-muted)}
+  .compat-top-actions,.compat-tabs,.compat-actions{display:flex;gap:8px;align-items:center;flex-wrap:wrap}.compat-tabs{padding:4px;border:1px solid var(--compat-border);border-radius:12px;background:var(--compat-card)}
+  .compat-tab,.compat-btn{min-height:38px;border-radius:9px;padding:9px 13px;border:1px solid transparent;text-decoration:none;font-weight:700;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:6px;color:inherit;background:transparent}
+  .compat-tab.active,.compat-btn.primary{background:var(--compat-red);border-color:var(--compat-red);color:#fff}.compat-btn.secondary{background:var(--compat-card-2);border-color:var(--compat-border)}.compat-btn.danger{color:#ef4444;border-color:rgba(239,68,68,.28);background:rgba(239,68,68,.08)}.compat-btn.small{min-height:32px;padding:6px 10px;font-size:12px}
+  .compat-alert{padding:11px 13px;border-radius:10px;border:1px solid rgba(34,197,94,.28);background:rgba(34,197,94,.10)}.compat-alert.error{border-color:rgba(239,68,68,.3);background:rgba(239,68,68,.10)}
+  .compat-workspace{display:grid;grid-template-columns:minmax(260px,330px) minmax(0,1fr);gap:16px;min-height:600px}.compat-card{background:var(--compat-card);border:1px solid var(--compat-border);border-radius:14px;padding:15px;box-shadow:0 5px 18px rgba(0,0,0,.04)}
+  .compat-sidebar{display:flex;flex-direction:column;min-height:0}.compat-search-wrap{position:relative}.compat-search-wrap input{padding-left:38px}.compat-search-icon{position:absolute;left:12px;top:50%;transform:translateY(-50%);opacity:.6;pointer-events:none}.compat-search-clear{position:absolute;right:7px;top:50%;transform:translateY(-50%);border:0;background:transparent;color:inherit;cursor:pointer;padding:6px;opacity:.65}
+  .compat-input,.compat-form input,.compat-form select,.compat-form textarea{width:100%;border:1px solid var(--compat-border);border-radius:9px;padding:10px 11px;background:var(--compat-input);color:var(--compat-text);outline:none}.compat-input:focus,.compat-form input:focus,.compat-form select:focus,.compat-form textarea:focus{border-color:var(--compat-red);box-shadow:0 0 0 3px rgba(215,25,32,.12)}
+  .compat-list{display:grid;gap:10px;overflow:auto;margin:12px -4px 0;padding:0 4px;max-height:480px}.compat-brand{display:grid;gap:7px}.compat-brand-head{position:sticky;top:0;z-index:2;display:flex;align-items:center;justify-content:space-between;gap:8px;padding:7px 9px;border:1px solid var(--compat-border);border-radius:9px;background:var(--compat-card);font-size:12px;font-weight:800}.compat-brand-count{color:var(--compat-muted);font-weight:700}.compat-brand-list{display:grid;gap:7px}.compat-device{display:block;padding:10px 11px;border:1px solid var(--compat-border);border-radius:10px;text-decoration:none;color:inherit;background:var(--compat-card-2)}.compat-device:hover,.compat-device.active{border-color:var(--compat-red);background:rgba(215,25,32,.08)}.compat-device b{display:block}.compat-device small{display:block;color:var(--compat-muted);margin-top:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .compat-sidebar-foot{margin-top:auto;padding-top:12px}.compat-counter{font-size:12px;color:var(--compat-muted);margin-top:8px}.compat-main-head{display:flex;justify-content:space-between;gap:14px;align-items:flex-start;flex-wrap:wrap}.compat-main-head h2{margin:0}.compat-main-head p{margin:4px 0 0;color:var(--compat-muted)}
+  .compat-summary{display:flex;gap:8px;flex-wrap:wrap;margin:14px 0}.compat-stat{padding:7px 10px;border-radius:9px;background:var(--compat-card-2);border:1px solid var(--compat-border);font-size:12px}.compat-stat b{font-size:14px}
+  .compat-section{border-top:1px solid var(--compat-border);padding-top:15px;margin-top:15px}.compat-section h3{margin:0 0 10px}.compat-relations{display:grid;gap:8px}.compat-relation{display:flex;justify-content:space-between;gap:14px;padding:12px;border:1px solid var(--compat-border);border-radius:11px;background:var(--compat-card-2)}.compat-relation h4{margin:0 0 6px}.compat-note{margin:7px 0 0;color:var(--compat-muted);font-size:13px}.compat-meta{display:flex;gap:5px;flex-wrap:wrap}.compat-pill{padding:4px 7px;border-radius:999px;background:rgba(127,127,127,.14);font-size:11px;font-weight:700}.compat-pill.ok{background:rgba(34,197,94,.14);color:#16a34a}.compat-pill.warn{background:rgba(245,158,11,.15);color:#b45309}
+  .compat-form{display:grid;gap:10px}.compat-form label{display:grid;gap:5px;font-size:12px;font-weight:700}.compat-form textarea{min-height:70px;resize:vertical}.compat-form-row{display:grid;grid-template-columns:1fr 1fr;gap:10px}.compat-drawer{display:none;padding:14px;margin-top:14px;border-radius:12px;border:1px solid var(--compat-border);background:var(--compat-card-2)}.compat-drawer.open{display:block}.compat-drawer h3{margin:0 0 12px}.compat-details summary{cursor:pointer;color:var(--compat-muted);font-size:13px;font-weight:700;margin-bottom:9px}.compat-empty{display:grid;place-items:center;text-align:center;min-height:150px;padding:25px;border:1px dashed var(--compat-border);border-radius:12px;color:var(--compat-muted)}.compat-empty h3{color:var(--compat-text);margin:0 0 5px}.compat-hidden{display:none!important}
+  html[data-panel-theme="oled"] .compat-page{--compat-bg:#000;--compat-card:#101010;--compat-card-2:#181818;--compat-input:#181818;--compat-text:#f5f5f5;--compat-muted:#a2a2a2;--compat-border:#303030;color-scheme:dark}.compat-page select option{background:var(--compat-card);color:var(--compat-text)}
+  html[data-panel-theme]:not([data-panel-theme="light"]) .compat-card,html[data-panel-theme]:not([data-panel-theme="light"]) .compat-tabs,html[data-panel-theme]:not([data-panel-theme="light"]) .compat-brand-head,html[data-panel-theme]:not([data-panel-theme="light"]) .compat-device,html[data-panel-theme]:not([data-panel-theme="light"]) .compat-drawer,html[data-panel-theme]:not([data-panel-theme="light"]) .compat-relation,html[data-panel-theme]:not([data-panel-theme="light"]) .compat-stat,html[data-panel-theme]:not([data-panel-theme="light"]) .compat-empty{background:var(--compat-card)!important;color:var(--compat-text)!important;border-color:var(--compat-border)!important;box-shadow:none!important}
+  html[data-panel-theme]:not([data-panel-theme="light"]) .compat-device,html[data-panel-theme]:not([data-panel-theme="light"]) .compat-drawer,html[data-panel-theme]:not([data-panel-theme="light"]) .compat-relation,html[data-panel-theme]:not([data-panel-theme="light"]) .compat-stat{background:var(--compat-card-2)!important}
+  html[data-panel-theme]:not([data-panel-theme="light"]) .compat-device:hover,html[data-panel-theme]:not([data-panel-theme="light"]) .compat-device.active{background:color-mix(in srgb,var(--compat-red) 16%,var(--compat-card))!important;border-color:var(--compat-red)!important}
+  html[data-panel-theme]:not([data-panel-theme="light"]) .compat-input,html[data-panel-theme]:not([data-panel-theme="light"]) .compat-form input,html[data-panel-theme]:not([data-panel-theme="light"]) .compat-form select,html[data-panel-theme]:not([data-panel-theme="light"]) .compat-form textarea{background:var(--compat-input)!important;color:var(--compat-text)!important;border-color:var(--compat-border)!important}
+  @media(max-width:900px){.compat-workspace{grid-template-columns:1fr}.compat-list{max-height:300px}.compat-form-row{grid-template-columns:1fr}.compat-relation{align-items:flex-start}}
+</style>
+
+<div class="compat-page">
+  <header class="compat-top">
+    <div class="compat-title">
+      <h1>Compatibilidade</h1>
+      <p>Consulte rapidamente quais capas e películas servem em cada aparelho.</p>
+    </div>
+    <div class="compat-top-actions">
+      <div class="compat-tabs" aria-label="Tipo de compatibilidade">
+        <a class="compat-tab <%= selectedType.key === 'capas' ? 'active' : '' %>" href="/compatibilidade?tipo=capas">📱 Capas</a>
+        <a class="compat-tab <%= selectedType.key === 'peliculas' ? 'active' : '' %>" href="/compatibilidade?tipo=peliculas">🛡️ Películas</a>
+      </div>
+      <a class="compat-btn secondary" href="/ferramentas">← Ferramentas</a>
+    </div>
+  </header>
+
+  <% if (flash) { %><div class="compat-alert"><%= flash %></div><% } %>
+  <% if (error) { %><div class="compat-alert error"><%= error %></div><% } %>
+
+  <div class="compat-workspace">
+    <aside class="compat-card compat-sidebar">
+      <div class="compat-search-wrap">
+        <span class="compat-search-icon">⌕</span>
+        <input class="compat-input" id="deviceSearch" value="<%= search %>" placeholder="Buscar aparelho..." autocomplete="off" autofocus>
+        <button class="compat-search-clear" id="clearSearch" type="button" title="Limpar busca">✕</button>
+      </div>
+      <div class="compat-counter"><span id="visibleCount"><%= devices.length %></span> aparelho(s)</div>
+
+      <div class="compat-list" id="deviceList">
+        <% if (!allDevices.length) { %>
+          <div class="compat-empty" id="emptyDatabase">Nenhum aparelho cadastrado.</div>
+        <% } %>
+        <% deviceGroups.forEach((group) => { %>
+          <section class="compat-brand" data-brand-group>
+            <div class="compat-brand-head">
+              <span><%= group.brand %></span>
+              <span class="compat-brand-count"><span data-brand-visible><%= group.devices.length %></span>/<%= group.devices.length %></span>
+            </div>
+            <div class="compat-brand-list">
+              <% group.devices.forEach((device) => { %>
+                <a class="compat-device <%= selectedDevice && String(selectedDevice.id) === String(device.id) ? 'active' : '' %>" data-search="<%= device.searchText %>" href="/compatibilidade?tipo=<%= selectedType.key %>&device=<%= device.id %>">
+                  <b><%= device.name %></b>
+                  <% if (device.aliases.length) { %><small><%= device.aliases.join(', ') %></small><% } %>
+                </a>
+              <% }) %>
+            </div>
+          </section>
+        <% }) %>
+        <div class="compat-empty compat-hidden" id="emptySearch">Nenhum aparelho encontrado.</div>
+      </div>
+
+      <div class="compat-sidebar-foot">
+        <button class="compat-btn primary" type="button" data-toggle="newDevice">＋ Novo aparelho</button>
+        <div class="compat-drawer" id="newDevice">
+          <h3>Novo aparelho</h3>
+          <form class="compat-form" method="post" action="/compatibilidade/aparelhos">
+            <input type="hidden" name="type" value="<%= selectedType.key %>">
+            <label>Aparelho<input name="name" required placeholder="Ex.: Samsung Galaxy A15 4G"></label>
+            <details class="compat-details">
+              <summary>Adicionar detalhes opcionais</summary>
+              <div class="compat-form">
+                <label>Outros nomes<input name="aliases" placeholder="A15, SM-A155"></label>
+                <label>Observação<textarea name="notes" placeholder="Informação útil para diferenciar o modelo"></textarea></label>
+              </div>
+            </details>
+            <button class="compat-btn primary" type="submit">Salvar aparelho</button>
+          </form>
+        </div>
+      </div>
+    </aside>
+
+    <main class="compat-card">
+      <% if (!selectedDevice) { %>
+        <div class="compat-empty">
+          <div><h3>Selecione um aparelho</h3><p>Use a busca ao lado ou cadastre um novo modelo.</p></div>
+        </div>
+      <% } else { %>
+        <div class="compat-main-head">
+          <div>
+            <h2><%= selectedDevice.name %></h2>
+            <% if (selectedDevice.aliases.length) { %><p>Também encontrado por: <%= selectedDevice.aliases.join(', ') %></p><% } %>
+          </div>
+          <div class="compat-actions">
+            <button class="compat-btn secondary" type="button" data-toggle="editDevice">Editar</button>
+            <button class="compat-btn primary" type="button" data-toggle="addRelation">＋ Adicionar <%= selectedType.singular %></button>
+          </div>
+        </div>
+
+        <div class="compat-summary">
+          <span class="compat-stat"><b><%= relations.length %></b> cadastrada(s)</span>
+          
+          <span class="compat-stat"><b><%= relations.filter(r => r.product).length %></b> com produto</span>
+          <span class="compat-stat"><b><%= relations.filter(r => r.product && Number(r.product.stock) > 0).length %></b> em estoque</span>
+        </div>
+
+        <% if (selectedDevice.notes) { %><div class="compat-alert"><b>Observação:</b> <%= selectedDevice.notes %></div><% } %>
+
+        <div class="compat-drawer" id="editDevice">
+          <h3>Editar aparelho</h3>
+          <form class="compat-form" method="post" action="/compatibilidade/aparelhos/<%= selectedDevice.id %>/editar">
+            <input type="hidden" name="type" value="<%= selectedType.key %>">
+            <label>Aparelho<input name="name" value="<%= selectedDevice.name %>" required></label>
+            <label>Outros nomes<input name="aliases" value="<%= selectedDevice.aliases.join(', ') %>"></label>
+            <label>Observação<textarea name="notes"><%= selectedDevice.notes %></textarea></label>
+            <div class="compat-actions"><button class="compat-btn primary" type="submit">Salvar</button></div>
+          </form>
+          <form method="post" action="/compatibilidade/aparelhos/<%= selectedDevice.id %>/arquivar" onsubmit="return confirm('Arquivar este aparelho? Os vínculos serão preservados.');" style="margin-top:8px">
+            <input type="hidden" name="type" value="<%= selectedType.key %>">
+            <button class="compat-btn danger small" type="submit">Arquivar aparelho</button>
+          </form>
+        </div>
+
+        <div class="compat-drawer" id="addRelation">
+          <h3>Adicionar <%= selectedType.singular %> compatível</h3>
+          <form class="compat-form" method="post" action="/compatibilidade/relacoes">
+            <input type="hidden" name="type" value="<%= selectedType.key %>">
+            <input type="hidden" name="deviceId" value="<%= selectedDevice.id %>">
+            <label>Descrição<input name="label" placeholder="Ex.: Capa do Galaxy A15 4G"></label>
+            <% if (products.length) { %>
+              <label>Vincular produto existente
+                <select name="productId"><option value="">Sem produto vinculado</option><% products.forEach((product) => { %><option value="<%= product.id %>"><%= product.name %><%= product.stock !== null ? ` · estoque ${product.stock}` : '' %></option><% }) %></select>
+              </label>
+            <% } %>
+            <details class="compat-details">
+              <summary>Confirmação e observação</summary>
+              <div class="compat-form-row">
+                <label>Status<select name="status"><option value="verified">Confirmada</option><option value="suggested">Conferir</option><option value="manual">Manual</option></select></label>
+                <label>Observação<input name="notes" placeholder="Ex.: conferir recorte da câmera"></label>
+              </div>
+            </details>
+            <button class="compat-btn primary" type="submit">Adicionar</button>
+          </form>
+        </div>
+
+        <section class="compat-section">
+          <h3><%= selectedType.title %> compatíveis</h3>
+          <div class="compat-relations">
+            <% if (!relations.length) { %><div class="compat-empty">Nenhuma compatibilidade cadastrada.</div><% } %>
+            <% relations.forEach((relation) => { %>
+              <article class="compat-relation">
+                <div>
+                  <h4><%= relation.product ? relation.product.name : (relation.label || `${selectedType.singular} sem descrição`) %></h4>
+                  <% if (relation.source !== 'quality_compat_v2_2') { %>
+                    <div class="compat-meta">
+                      <span class="compat-pill <%= relation.status === 'verified' ? 'ok' : (relation.status === 'suggested' ? 'warn' : '') %>"><%= relation.status === 'verified' ? 'Confirmada' : (relation.status === 'suggested' ? 'Conferir' : 'Manual') %></span>
+                      <% if (relation.product) { %><span class="compat-pill">Produto vinculado</span><span class="compat-pill <%= Number(relation.product.stock) > 0 ? 'ok' : 'warn' %>">Estoque: <%= relation.product.stock ?? 'não informado' %></span><% } %>
+                    </div>
+                  <% } %>
+                  <% if (relation.label && relation.product) { %><p class="compat-note"><b>Descrição:</b> <%= relation.label %></p><% } %>
+                  <% if (relation.notes) { %><p class="compat-note"><%= relation.notes %></p><% } %>
+                </div>
+                <form method="post" action="/compatibilidade/relacoes/<%= relation.id %>/remover" onsubmit="return confirm('Remover esta compatibilidade?');">
+                  <input type="hidden" name="type" value="<%= selectedType.key %>"><button class="compat-btn danger small" type="submit">Remover</button>
+                </form>
+              </article>
+            <% }) %>
+          </div>
+        </section>
+
+        <section class="compat-section">
+          <details class="compat-details">
+            <summary>Copiar compatibilidades de outro aparelho</summary>
+            <form class="compat-form" method="post" action="/compatibilidade/duplicar">
+              <input type="hidden" name="type" value="<%= selectedType.key %>"><input type="hidden" name="targetDeviceId" value="<%= selectedDevice.id %>">
+              <label>Aparelho de origem<select name="sourceDeviceId" required><option value="">Selecione...</option><% allDevices.filter(d => String(d.id) !== String(selectedDevice.id)).forEach((device) => { %><option value="<%= device.id %>"><%= device.name %></option><% }) %></select></label>
+              <button class="compat-btn secondary" type="submit">Copiar para revisão</button>
+            </form>
+          </details>
+        </section>
+      <% } %>
+    </main>
+  </div>
+</div>
+
+<script>
+(function(){
+  document.querySelectorAll('[data-toggle]').forEach(function(button){
+    button.addEventListener('click', function(){
+      var target = document.getElementById(button.dataset.toggle);
+      if (target) target.classList.toggle('open');
+    });
+  });
+
+  var input = document.getElementById('deviceSearch');
+  var clear = document.getElementById('clearSearch');
+  var items = Array.from(document.querySelectorAll('.compat-device'));
+  var empty = document.getElementById('emptySearch');
+  var count = document.getElementById('visibleCount');
+  if (!input) return;
+
+  function normalize(value){
+    return String(value || '').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/[^a-z0-9]+/g,' ').trim();
+  }
+  function filter(){
+    var tokens = normalize(input.value).split(' ').filter(Boolean);
+    var visible = 0;
+    items.forEach(function(item){
+      var haystack = item.dataset.search || '';
+      var show = tokens.every(function(token){ return haystack.indexOf(token) !== -1; });
+      item.classList.toggle('compat-hidden', !show);
+      if (show) visible += 1;
+    });
+    document.querySelectorAll('[data-brand-group]').forEach(function(group){
+      var groupItems = Array.from(group.querySelectorAll('.compat-device'));
+      var groupVisible = groupItems.filter(function(item){ return !item.classList.contains('compat-hidden'); }).length;
+      group.classList.toggle('compat-hidden', groupVisible === 0);
+      var groupCount = group.querySelector('[data-brand-visible]');
+      if (groupCount) groupCount.textContent = groupVisible;
+    });
+    if (empty) empty.classList.toggle('compat-hidden', visible !== 0 || items.length === 0);
+    if (count) count.textContent = visible;
+  }
+  input.addEventListener('input', filter);
+  clear.addEventListener('click', function(){ input.value=''; filter(); input.focus(); });
+  filter();
+})();
+</script>

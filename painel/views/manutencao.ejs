@@ -1,0 +1,28 @@
+<% layout('layout') -%>
+<section class="ops-dashboard-head">
+  <div><h1>🛠️ Manutenção do site</h1><p>Controle a página temporária exibida enquanto o site recebe atualizações.</p></div>
+  <a class="btn ghost" href="/site">← Voltar para Site</a>
+</section>
+
+<section class="maintenance-control-card <%= enabled ? 'enabled' : 'disabled' %>">
+  <div class="maintenance-status-icon"><%= enabled ? '⚠️' : '✅' %></div>
+  <div class="maintenance-status-copy">
+    <small>STATUS ATUAL</small>
+    <h2><%= enabled ? 'Manutenção ativa' : 'Site operando normalmente' %></h2>
+    <p><%= enabled ? 'O preview local está exibindo a página de manutenção. Para refletir no site público, publique as alterações.' : 'A página normal do site está disponível. Você pode ativar a manutenção quando precisar realizar mudanças.' %></p>
+  </div>
+  <div class="maintenance-actions">
+    <% if(enabled){ %>
+      <form method="post" action="/manutencao/desativar"><button class="btn primary" type="submit">✅ Desativar manutenção</button></form>
+    <% } else { %>
+      <form method="post" action="/manutencao/ativar"><button class="btn warn" type="submit">🛠️ Ativar manutenção</button></form>
+    <% } %>
+    <a class="btn ghost" href="/site/view/index.html" target="_blank">👁️ Visualizar site</a>
+  </div>
+</section>
+
+<section class="settings-card maintenance-help">
+  <h2>Como funciona</h2>
+  <p>Ao ativar, o Painel cria o arquivo <code>maintenance.flag</code> e prepara a página <code>maintenance.html</code>. Ao desativar, o arquivo de controle é removido.</p>
+  <p>A ativação local é imediata. Para atualizar o site público hospedado, use o botão <strong>Publicar</strong> depois da alteração.</p>
+</section>

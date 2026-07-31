@@ -1,0 +1,1643 @@
+{
+  "version": 1,
+  "customers": [
+    {
+      "id": "customer_mrqphfu4_9vtpck",
+      "type": "person",
+      "name": "Quality Celulares",
+      "phones": [
+        {
+          "number": "555591407824",
+          "type": "whatsapp",
+          "primary": true,
+          "whatsappId": "145771240403186@lid"
+        }
+      ],
+      "email": "",
+      "document": {
+        "cpf": "",
+        "cnpj": ""
+      },
+      "addresses": [],
+      "stage": "new",
+      "origin": "whatsapp_direct",
+      "interestProduct": "",
+      "assignedTo": "",
+      "active": true,
+      "createdAt": "2026-07-18T18:34:17.837Z",
+      "updatedAt": "2026-07-20T17:50:53.979Z",
+      "source": "whatsapp",
+      "channels": [
+        {
+          "type": "whatsapp",
+          "externalId": "145771240403186@lid",
+          "conversationId": "555591407824"
+        }
+      ]
+    },
+    {
+      "id": "customer_mrqpinxp_3utgup",
+      "type": "person",
+      "name": "+55 54 9944-6381",
+      "phones": [
+        {
+          "number": "555499446381",
+          "type": "whatsapp",
+          "primary": true,
+          "whatsappId": "242644294889695@lid"
+        }
+      ],
+      "email": "",
+      "document": {
+        "cpf": "",
+        "cnpj": ""
+      },
+      "addresses": [],
+      "stage": "new",
+      "origin": "whatsapp_direct",
+      "interestProduct": "",
+      "assignedTo": "",
+      "active": true,
+      "createdAt": "2026-07-18T18:35:14.989Z",
+      "updatedAt": "2026-07-18T19:02:04.247Z",
+      "source": "whatsapp",
+      "channels": [
+        {
+          "type": "whatsapp",
+          "externalId": "242644294889695@lid",
+          "conversationId": "555499446381"
+        }
+      ]
+    },
+    {
+      "id": "customer_mrqpj1d2_eh1eib",
+      "type": "person",
+      "name": "+55 54 9198-8365",
+      "phones": [
+        {
+          "number": "555491988365",
+          "type": "whatsapp",
+          "primary": true,
+          "whatsappId": "134299349213337@lid"
+        }
+      ],
+      "email": "",
+      "document": {
+        "cpf": "",
+        "cnpj": ""
+      },
+      "addresses": [],
+      "stage": "new",
+      "origin": "unknown",
+      "interestProduct": "",
+      "assignedTo": "",
+      "active": true,
+      "createdAt": "2026-07-18T18:35:32.391Z",
+      "updatedAt": "2026-07-18T18:35:32.391Z",
+      "source": "whatsapp"
+    },
+    {
+      "id": "customer_mrqpj33i_axoa34",
+      "type": "person",
+      "name": "+55 35 8873-4431",
+      "phones": [
+        {
+          "number": "553588734431",
+          "type": "whatsapp",
+          "primary": true,
+          "whatsappId": "182635112484984@lid"
+        }
+      ],
+      "email": "",
+      "document": {
+        "cpf": "",
+        "cnpj": ""
+      },
+      "addresses": [],
+      "stage": "new",
+      "origin": "whatsapp_direct",
+      "interestProduct": "",
+      "assignedTo": "",
+      "active": true,
+      "createdAt": "2026-07-18T18:35:34.638Z",
+      "updatedAt": "2026-07-18T18:35:34.638Z",
+      "source": "whatsapp"
+    },
+    {
+      "id": "customer_mrqpj8n8_qxd8cq",
+      "type": "person",
+      "name": "Sitta De Pf",
+      "phones": [
+        {
+          "number": "555499065791",
+          "type": "whatsapp",
+          "primary": true,
+          "whatsappId": "59369349759189@lid"
+        }
+      ],
+      "email": "",
+      "document": {
+        "cpf": "",
+        "cnpj": ""
+      },
+      "addresses": [],
+      "stage": "new",
+      "origin": "whatsapp_direct",
+      "interestProduct": "",
+      "assignedTo": "",
+      "active": true,
+      "createdAt": "2026-07-18T18:35:41.828Z",
+      "updatedAt": "2026-07-18T19:04:46.878Z",
+      "source": "whatsapp",
+      "channels": [
+        {
+          "type": "whatsapp",
+          "externalId": "59369349759189@lid",
+          "conversationId": "555499065791"
+        }
+      ],
+      "commercialStage": "new",
+      "labels": []
+    },
+    {
+      "id": "customer_mrqpjgk1_94jyft",
+      "type": "person",
+      "name": "+55 54 9166-5040",
+      "phones": [
+        {
+          "number": "555491665040",
+          "type": "whatsapp",
+          "primary": true,
+          "whatsappId": "140613018247397@lid"
+        }
+      ],
+      "email": "",
+      "document": {
+        "cpf": "",
+        "cnpj": ""
+      },
+      "addresses": [],
+      "stage": "new",
+      "origin": "whatsapp_direct",
+      "interestProduct": "",
+      "assignedTo": "",
+      "active": true,
+      "createdAt": "2026-07-18T18:35:52.081Z",
+      "updatedAt": "2026-07-18T19:02:03.351Z",
+      "source": "whatsapp",
+      "channels": [
+        {
+          "type": "whatsapp",
+          "externalId": "140613018247397@lid",
+          "conversationId": "555491665040"
+        }
+      ]
+    },
+    {
+      "id": "customer_mrqpl73o_mew71w",
+      "type": "person",
+      "name": "Bruno Kan Arquitetura",
+      "phones": [
+        {
+          "number": "5511986111169",
+          "type": "whatsapp",
+          "primary": true,
+          "whatsappId": "141394702274748@lid"
+        }
+      ],
+      "email": "",
+      "document": {
+        "cpf": "",
+        "cnpj": ""
+      },
+      "addresses": [],
+      "stage": "new",
+      "origin": "unknown",
+      "interestProduct": "",
+      "assignedTo": "",
+      "active": true,
+      "createdAt": "2026-07-18T18:37:13.141Z",
+      "updatedAt": "2026-07-18T19:02:02.192Z",
+      "source": "whatsapp",
+      "channels": [
+        {
+          "type": "whatsapp",
+          "externalId": "141394702274748@lid",
+          "conversationId": "5511986111169"
+        }
+      ]
+    },
+    {
+      "id": "customer_mrqpodh9_81jeye",
+      "type": "person",
+      "name": "KAN Arquitetura Pedro",
+      "phones": [
+        {
+          "number": "551131996404",
+          "type": "whatsapp",
+          "primary": true,
+          "whatsappId": "186766770319500@lid"
+        }
+      ],
+      "email": "",
+      "document": {
+        "cpf": "",
+        "cnpj": ""
+      },
+      "addresses": [],
+      "stage": "new",
+      "origin": "unknown",
+      "interestProduct": "",
+      "assignedTo": "",
+      "active": true,
+      "createdAt": "2026-07-18T18:39:41.373Z",
+      "updatedAt": "2026-07-18T19:02:00.377Z",
+      "source": "whatsapp",
+      "channels": [
+        {
+          "type": "whatsapp",
+          "externalId": "186766770319500@lid",
+          "conversationId": "551131996404"
+        }
+      ]
+    },
+    {
+      "id": "customer_mrqpoehq_vrerxe",
+      "type": "person",
+      "name": "555492449327",
+      "phones": [
+        {
+          "number": "555492449327",
+          "type": "whatsapp",
+          "primary": true,
+          "whatsappId": "188201692057780@lid"
+        }
+      ],
+      "email": "",
+      "document": {
+        "cpf": "",
+        "cnpj": ""
+      },
+      "addresses": [],
+      "stage": "new",
+      "origin": "unknown",
+      "interestProduct": "",
+      "assignedTo": "",
+      "active": true,
+      "createdAt": "2026-07-18T18:39:42.686Z",
+      "updatedAt": "2026-07-18T19:02:01.396Z",
+      "source": "whatsapp",
+      "channels": [
+        {
+          "type": "whatsapp",
+          "externalId": "188201692057780@lid",
+          "conversationId": "555492449327"
+        }
+      ]
+    },
+    {
+      "id": "customer_mrqqfz73_9lfcm8",
+      "type": "person",
+      "name": "Jackson Almeida",
+      "tradeName": "",
+      "email": "",
+      "document": {
+        "cpf": "",
+        "cnpj": ""
+      },
+      "phones": [
+        {
+          "number": "555591811356",
+          "type": "whatsapp",
+          "primary": true
+        }
+      ],
+      "addresses": [],
+      "channels": [
+        {
+          "type": "whatsapp",
+          "externalId": "231060684181752@lid",
+          "conversationId": "555591811356"
+        }
+      ],
+      "labels": [],
+      "commercialStage": "new",
+      "interestProduct": "",
+      "assignedTo": "",
+      "createdAt": "2026-07-18T19:01:09.231Z",
+      "updatedAt": "2026-07-18T19:01:09.231Z"
+    },
+    {
+      "id": "customer_mrqqg6q3_47zmty",
+      "type": "person",
+      "name": "+55 54 9995-0875",
+      "tradeName": "",
+      "email": "",
+      "document": {
+        "cpf": "",
+        "cnpj": ""
+      },
+      "phones": [
+        {
+          "number": "555499950875",
+          "type": "whatsapp",
+          "primary": true
+        }
+      ],
+      "addresses": [],
+      "channels": [
+        {
+          "type": "whatsapp",
+          "externalId": "250216238301291@lid",
+          "conversationId": "555499950875"
+        }
+      ],
+      "labels": [],
+      "commercialStage": "new",
+      "interestProduct": "",
+      "assignedTo": "",
+      "createdAt": "2026-07-18T19:01:18.987Z",
+      "updatedAt": "2026-07-18T19:01:18.987Z"
+    },
+    {
+      "id": "customer_mrqqg7l0_ivmi1t",
+      "type": "person",
+      "name": "555493565333",
+      "tradeName": "",
+      "email": "",
+      "document": {
+        "cpf": "",
+        "cnpj": ""
+      },
+      "phones": [
+        {
+          "number": "555493565333",
+          "type": "whatsapp",
+          "primary": true
+        }
+      ],
+      "addresses": [],
+      "channels": [
+        {
+          "type": "whatsapp",
+          "externalId": "83151187648654@lid",
+          "conversationId": "555493565333"
+        }
+      ],
+      "labels": [],
+      "commercialStage": "new",
+      "interestProduct": "",
+      "assignedTo": "",
+      "createdAt": "2026-07-18T19:01:20.100Z",
+      "updatedAt": "2026-07-18T19:01:20.100Z"
+    },
+    {
+      "id": "customer_mrqqg8kc_60gb66",
+      "type": "person",
+      "name": "5511943760348",
+      "tradeName": "",
+      "email": "",
+      "document": {
+        "cpf": "",
+        "cnpj": ""
+      },
+      "phones": [
+        {
+          "number": "5511943760348",
+          "type": "whatsapp",
+          "primary": true
+        }
+      ],
+      "addresses": [],
+      "channels": [
+        {
+          "type": "whatsapp",
+          "externalId": "4367998558287@lid",
+          "conversationId": "5511943760348"
+        }
+      ],
+      "labels": [],
+      "commercialStage": "new",
+      "interestProduct": "",
+      "assignedTo": "",
+      "createdAt": "2026-07-18T19:01:21.372Z",
+      "updatedAt": "2026-07-18T19:01:21.372Z"
+    },
+    {
+      "id": "customer_mrr72kk6_p6ym1k",
+      "type": "person",
+      "name": "Neiva",
+      "tradeName": "",
+      "email": "",
+      "document": {
+        "cpf": "",
+        "cnpj": ""
+      },
+      "phones": [
+        {
+          "number": "555599406233",
+          "type": "whatsapp",
+          "primary": true
+        }
+      ],
+      "addresses": [],
+      "channels": [
+        {
+          "type": "whatsapp",
+          "externalId": "212167240491143@lid",
+          "conversationId": "555599406233"
+        }
+      ],
+      "labels": [],
+      "commercialStage": "new",
+      "interestProduct": "",
+      "assignedTo": "",
+      "createdAt": "2026-07-19T02:46:37.206Z",
+      "updatedAt": "2026-07-19T02:46:37.206Z"
+    },
+    {
+      "id": "customer_mrrtfz1e_bswswq",
+      "type": "person",
+      "name": "Michael Mano",
+      "tradeName": "",
+      "email": "",
+      "document": {
+        "cpf": "",
+        "cnpj": ""
+      },
+      "phones": [
+        {
+          "number": "555584396500",
+          "type": "whatsapp",
+          "primary": true
+        }
+      ],
+      "addresses": [],
+      "channels": [
+        {
+          "type": "whatsapp",
+          "externalId": "269071195062313@lid",
+          "conversationId": "555584396500"
+        }
+      ],
+      "labels": [],
+      "commercialStage": "new",
+      "interestProduct": "",
+      "assignedTo": "",
+      "createdAt": "2026-07-19T13:12:54.051Z",
+      "updatedAt": "2026-07-19T13:12:54.051Z"
+    },
+    {
+      "id": "customer_mrs3pafv_2hjo2o",
+      "type": "person",
+      "name": "Ivete",
+      "tradeName": "",
+      "email": "",
+      "document": {
+        "cpf": "",
+        "cnpj": ""
+      },
+      "phones": [
+        {
+          "number": "555599559497",
+          "type": "whatsapp",
+          "primary": true
+        }
+      ],
+      "addresses": [],
+      "channels": [
+        {
+          "type": "whatsapp",
+          "externalId": "177579868815385@lid",
+          "conversationId": "555599559497"
+        }
+      ],
+      "labels": [],
+      "commercialStage": "new",
+      "interestProduct": "",
+      "assignedTo": "",
+      "createdAt": "2026-07-19T18:00:04.891Z",
+      "updatedAt": "2026-07-19T18:00:04.891Z"
+    },
+    {
+      "id": "customer_mrtit8f3_lgkbq6",
+      "type": "person",
+      "name": "+55 11 94550-7928",
+      "tradeName": "",
+      "email": "",
+      "document": {
+        "cpf": "",
+        "cnpj": ""
+      },
+      "phones": [
+        {
+          "number": "5511945507928",
+          "type": "whatsapp",
+          "primary": true
+        }
+      ],
+      "addresses": [],
+      "channels": [
+        {
+          "type": "whatsapp",
+          "externalId": "246565616754867@lid",
+          "conversationId": "5511945507928"
+        }
+      ],
+      "labels": [],
+      "commercialStage": "new",
+      "interestProduct": "",
+      "assignedTo": "",
+      "createdAt": "2026-07-20T17:50:49.311Z",
+      "updatedAt": "2026-07-20T17:50:49.311Z"
+    },
+    {
+      "id": "customer_mrtit9vt_jl8ujj",
+      "type": "person",
+      "name": "‪+5554991652836‬",
+      "tradeName": "",
+      "email": "",
+      "document": {
+        "cpf": "",
+        "cnpj": ""
+      },
+      "phones": [
+        {
+          "number": "555491652836",
+          "type": "whatsapp",
+          "primary": true
+        }
+      ],
+      "addresses": [],
+      "channels": [
+        {
+          "type": "whatsapp",
+          "externalId": "30309701652568@lid",
+          "conversationId": "555491652836"
+        }
+      ],
+      "labels": [],
+      "commercialStage": "new",
+      "interestProduct": "",
+      "assignedTo": "",
+      "createdAt": "2026-07-20T17:50:51.209Z",
+      "updatedAt": "2026-07-20T17:50:51.209Z"
+    },
+    {
+      "id": "customer_mrtitjx2_i1b0of",
+      "type": "person",
+      "name": "Eloide",
+      "tradeName": "",
+      "email": "",
+      "document": {
+        "cpf": "",
+        "cnpj": ""
+      },
+      "phones": [
+        {
+          "number": "555496324341",
+          "type": "whatsapp",
+          "primary": true
+        }
+      ],
+      "addresses": [],
+      "channels": [
+        {
+          "type": "whatsapp",
+          "externalId": "116617019183158@lid",
+          "conversationId": "555496324341"
+        }
+      ],
+      "labels": [],
+      "commercialStage": "new",
+      "interestProduct": "",
+      "assignedTo": "",
+      "createdAt": "2026-07-20T17:51:04.214Z",
+      "updatedAt": "2026-07-20T17:51:04.214Z"
+    },
+    {
+      "id": "customer_mrtitu64_x5cbx6",
+      "type": "person",
+      "name": "Importscell",
+      "tradeName": "",
+      "email": "",
+      "document": {
+        "cpf": "",
+        "cnpj": ""
+      },
+      "phones": [
+        {
+          "number": "555499866869",
+          "type": "whatsapp",
+          "primary": true
+        }
+      ],
+      "addresses": [],
+      "channels": [
+        {
+          "type": "whatsapp",
+          "externalId": "166657733435616@lid",
+          "conversationId": "555499866869"
+        }
+      ],
+      "labels": [],
+      "commercialStage": "new",
+      "interestProduct": "",
+      "assignedTo": "",
+      "createdAt": "2026-07-20T17:51:17.500Z",
+      "updatedAt": "2026-07-20T17:51:17.500Z"
+    },
+    {
+      "id": "customer_mrvagol4_tk7u6z",
+      "type": "person",
+      "name": "Mercado Livre",
+      "tradeName": "",
+      "email": "",
+      "document": {
+        "cpf": "",
+        "cnpj": ""
+      },
+      "phones": [
+        {
+          "number": "5511978506319",
+          "type": "whatsapp",
+          "primary": true
+        }
+      ],
+      "addresses": [],
+      "channels": [
+        {
+          "type": "whatsapp",
+          "externalId": "37877366915178@lid",
+          "conversationId": "5511978506319"
+        }
+      ],
+      "labels": [],
+      "commercialStage": "new",
+      "interestProduct": "",
+      "assignedTo": "",
+      "createdAt": "2026-07-21T23:32:39.160Z",
+      "updatedAt": "2026-07-21T23:32:39.160Z"
+    },
+    {
+      "id": "customer_mrvagxtj_pl6tul",
+      "type": "person",
+      "name": "Alan Oliveira Advogado",
+      "tradeName": "",
+      "email": "",
+      "document": {
+        "cpf": "",
+        "cnpj": ""
+      },
+      "phones": [
+        {
+          "number": "555496660278",
+          "type": "whatsapp",
+          "primary": true
+        }
+      ],
+      "addresses": [],
+      "channels": [
+        {
+          "type": "whatsapp",
+          "externalId": "229918357073935@lid",
+          "conversationId": "555496660278"
+        }
+      ],
+      "labels": [],
+      "commercialStage": "new",
+      "interestProduct": "",
+      "assignedTo": "",
+      "createdAt": "2026-07-21T23:32:51.127Z",
+      "updatedAt": "2026-07-21T23:32:51.127Z"
+    },
+    {
+      "id": "customer_mrxsag18_w67jp4",
+      "type": "person",
+      "name": "555599830355",
+      "tradeName": "",
+      "email": "",
+      "document": {
+        "cpf": "",
+        "cnpj": ""
+      },
+      "phones": [
+        {
+          "number": "555599830355",
+          "type": "whatsapp",
+          "primary": true
+        }
+      ],
+      "addresses": [],
+      "channels": [
+        {
+          "type": "whatsapp",
+          "externalId": "199278093942791@lid",
+          "conversationId": "555599830355"
+        }
+      ],
+      "labels": [],
+      "commercialStage": "new",
+      "interestProduct": "",
+      "assignedTo": "",
+      "createdAt": "2026-07-23T17:27:13.580Z",
+      "updatedAt": "2026-07-23T17:27:13.580Z"
+    },
+    {
+      "id": "customer_mrxshhxz_8sqrlf",
+      "type": "person",
+      "name": "Otavio luiz",
+      "tradeName": "",
+      "email": "",
+      "document": {
+        "cpf": "",
+        "cnpj": ""
+      },
+      "phones": [
+        {
+          "number": "555494024128",
+          "type": "whatsapp",
+          "primary": true
+        }
+      ],
+      "addresses": [],
+      "channels": [
+        {
+          "type": "whatsapp",
+          "externalId": "163699104948397@lid",
+          "conversationId": "555494024128"
+        }
+      ],
+      "labels": [],
+      "commercialStage": "new",
+      "interestProduct": "",
+      "assignedTo": "",
+      "createdAt": "2026-07-23T17:32:42.647Z",
+      "updatedAt": "2026-07-23T17:32:42.647Z"
+    },
+    {
+      "id": "customer_mrxsn6ty_ek1bht",
+      "type": "person",
+      "name": "555599407824",
+      "tradeName": "",
+      "email": "",
+      "document": {
+        "cpf": "",
+        "cnpj": ""
+      },
+      "phones": [
+        {
+          "number": "555599407824",
+          "type": "whatsapp",
+          "primary": true
+        }
+      ],
+      "addresses": [],
+      "channels": [
+        {
+          "type": "whatsapp",
+          "externalId": "71914966003874@lid",
+          "conversationId": "555599407824"
+        }
+      ],
+      "labels": [],
+      "commercialStage": "new",
+      "interestProduct": "",
+      "assignedTo": "",
+      "createdAt": "2026-07-23T17:37:08.182Z",
+      "updatedAt": "2026-07-23T17:37:08.182Z"
+    },
+    {
+      "id": "customer_mrxtx20e_9fiuwl",
+      "type": "person",
+      "name": "1ndio",
+      "tradeName": "",
+      "email": "",
+      "document": {
+        "cpf": "",
+        "cnpj": ""
+      },
+      "phones": [
+        {
+          "number": "555491902695",
+          "type": "whatsapp",
+          "primary": true
+        }
+      ],
+      "addresses": [],
+      "channels": [
+        {
+          "type": "whatsapp",
+          "externalId": "4372880724193@lid",
+          "conversationId": "555491902695"
+        }
+      ],
+      "labels": [],
+      "commercialStage": "new",
+      "interestProduct": "",
+      "assignedTo": "",
+      "createdAt": "2026-07-23T18:12:48.110Z",
+      "updatedAt": "2026-07-23T18:12:48.110Z"
+    },
+    {
+      "id": "customer_mrxu11hk_rgmsic",
+      "type": "person",
+      "name": "Johny | Representante Comercial",
+      "tradeName": "",
+      "email": "",
+      "document": {
+        "cpf": "",
+        "cnpj": ""
+      },
+      "phones": [
+        {
+          "number": "5511922961271",
+          "type": "whatsapp",
+          "primary": true
+        }
+      ],
+      "addresses": [],
+      "channels": [
+        {
+          "type": "whatsapp",
+          "externalId": "21690272723046@lid",
+          "conversationId": "5511922961271"
+        }
+      ],
+      "labels": [],
+      "commercialStage": "new",
+      "interestProduct": "",
+      "assignedTo": "",
+      "createdAt": "2026-07-23T18:15:54.057Z",
+      "updatedAt": "2026-07-23T18:15:54.057Z"
+    },
+    {
+      "id": "customer_mrxxb12h_m80ua8",
+      "type": "person",
+      "name": "+55 800 771 1400",
+      "tradeName": "",
+      "email": "",
+      "document": {
+        "cpf": "",
+        "cnpj": ""
+      },
+      "phones": [
+        {
+          "number": "558007711400",
+          "type": "whatsapp",
+          "primary": true
+        }
+      ],
+      "addresses": [],
+      "channels": [
+        {
+          "type": "whatsapp",
+          "externalId": "66864604516497@lid",
+          "conversationId": "558007711400"
+        }
+      ],
+      "labels": [],
+      "commercialStage": "new",
+      "interestProduct": "",
+      "assignedTo": "",
+      "createdAt": "2026-07-23T19:47:38.921Z",
+      "updatedAt": "2026-07-23T19:47:38.921Z"
+    },
+    {
+      "id": "customer_mrxxwwh2_g3t838",
+      "type": "person",
+      "name": "Mariza De Paula",
+      "tradeName": "",
+      "email": "",
+      "document": {
+        "cpf": "",
+        "cnpj": ""
+      },
+      "phones": [
+        {
+          "number": "555596320186",
+          "type": "whatsapp",
+          "primary": true
+        }
+      ],
+      "addresses": [],
+      "channels": [
+        {
+          "type": "whatsapp",
+          "externalId": "75549095522427@lid",
+          "conversationId": "555596320186"
+        }
+      ],
+      "labels": [],
+      "commercialStage": "new",
+      "interestProduct": "",
+      "assignedTo": "",
+      "createdAt": "2026-07-23T20:04:39.398Z",
+      "updatedAt": "2026-07-23T20:04:39.398Z"
+    },
+    {
+      "id": "customer_mrxxwz2j_k5zel0",
+      "type": "person",
+      "name": "Ismael Recapas",
+      "tradeName": "",
+      "email": "",
+      "document": {
+        "cpf": "",
+        "cnpj": ""
+      },
+      "phones": [
+        {
+          "number": "555185409529",
+          "type": "whatsapp",
+          "primary": true
+        }
+      ],
+      "addresses": [],
+      "channels": [
+        {
+          "type": "whatsapp",
+          "externalId": "144822136475758@lid",
+          "conversationId": "555185409529"
+        }
+      ],
+      "labels": [],
+      "commercialStage": "new",
+      "interestProduct": "",
+      "assignedTo": "",
+      "createdAt": "2026-07-23T20:04:42.764Z",
+      "updatedAt": "2026-07-23T20:04:42.764Z"
+    },
+    {
+      "id": "customer_mrxxx3dk_65o8oi",
+      "type": "person",
+      "name": "Gilnei Paulo Drehmer",
+      "tradeName": "",
+      "email": "",
+      "document": {
+        "cpf": "",
+        "cnpj": ""
+      },
+      "phones": [
+        {
+          "number": "555597080635",
+          "type": "whatsapp",
+          "primary": true
+        }
+      ],
+      "addresses": [],
+      "channels": [
+        {
+          "type": "whatsapp",
+          "externalId": "177713079959675@lid",
+          "conversationId": "555597080635"
+        }
+      ],
+      "labels": [],
+      "commercialStage": "new",
+      "interestProduct": "",
+      "assignedTo": "",
+      "createdAt": "2026-07-23T20:04:48.344Z",
+      "updatedAt": "2026-07-23T20:04:48.344Z"
+    },
+    {
+      "id": "customer_mrys179i_ank75l",
+      "type": "person",
+      "name": "Veronica Fischer",
+      "tradeName": "",
+      "email": "",
+      "document": {
+        "cpf": "",
+        "cnpj": ""
+      },
+      "phones": [
+        {
+          "number": "555599260017",
+          "type": "whatsapp",
+          "primary": true
+        }
+      ],
+      "addresses": [],
+      "channels": [
+        {
+          "type": "whatsapp",
+          "externalId": "87282409316465@lid",
+          "conversationId": "555599260017"
+        }
+      ],
+      "labels": [],
+      "commercialStage": "new",
+      "interestProduct": "",
+      "assignedTo": "",
+      "createdAt": "2026-07-24T10:07:48.486Z",
+      "updatedAt": "2026-07-24T10:07:48.486Z"
+    },
+    {
+      "id": "customer_mryzxsyx_al00og",
+      "type": "person",
+      "name": "Joao",
+      "tradeName": "",
+      "email": "",
+      "document": {
+        "cpf": "",
+        "cnpj": ""
+      },
+      "phones": [
+        {
+          "number": "555499309593",
+          "type": "whatsapp",
+          "primary": true
+        }
+      ],
+      "addresses": [],
+      "channels": [
+        {
+          "type": "whatsapp",
+          "externalId": "156418497871982@lid",
+          "conversationId": "555499309593"
+        }
+      ],
+      "labels": [],
+      "commercialStage": "new",
+      "interestProduct": "",
+      "assignedTo": "",
+      "createdAt": "2026-07-24T13:49:06.921Z",
+      "updatedAt": "2026-07-24T13:49:06.921Z"
+    },
+    {
+      "id": "customer_mryzy7gd_kulpq6",
+      "type": "person",
+      "name": "555596588553",
+      "tradeName": "",
+      "email": "",
+      "document": {
+        "cpf": "",
+        "cnpj": ""
+      },
+      "phones": [
+        {
+          "number": "555596588553",
+          "type": "whatsapp",
+          "primary": true
+        }
+      ],
+      "addresses": [],
+      "channels": [
+        {
+          "type": "whatsapp",
+          "externalId": "57728756101344@lid",
+          "conversationId": "555596588553"
+        }
+      ],
+      "labels": [],
+      "commercialStage": "new",
+      "interestProduct": "",
+      "assignedTo": "",
+      "createdAt": "2026-07-24T13:49:25.693Z",
+      "updatedAt": "2026-07-24T13:49:25.693Z"
+    },
+    {
+      "id": "customer_mryzyi0y_r49anc",
+      "type": "person",
+      "name": "ANA C  PROFETIZA",
+      "tradeName": "",
+      "email": "",
+      "document": {
+        "cpf": "",
+        "cnpj": ""
+      },
+      "phones": [
+        {
+          "number": "555496303518",
+          "type": "whatsapp",
+          "primary": true
+        }
+      ],
+      "addresses": [],
+      "channels": [
+        {
+          "type": "whatsapp",
+          "externalId": "40957026279597@lid",
+          "conversationId": "555496303518"
+        }
+      ],
+      "labels": [],
+      "commercialStage": "new",
+      "interestProduct": "",
+      "assignedTo": "",
+      "createdAt": "2026-07-24T13:49:39.394Z",
+      "updatedAt": "2026-07-24T13:49:39.394Z"
+    },
+    {
+      "id": "customer_ms09ownz_1u7ium",
+      "type": "person",
+      "name": "Angélica Gatti",
+      "tradeName": "",
+      "email": "",
+      "document": {
+        "cpf": "",
+        "cnpj": ""
+      },
+      "phones": [
+        {
+          "number": "555599086754",
+          "type": "whatsapp",
+          "primary": true
+        }
+      ],
+      "addresses": [],
+      "channels": [
+        {
+          "type": "whatsapp",
+          "externalId": "99360109006983@lid",
+          "conversationId": "555599086754"
+        }
+      ],
+      "labels": [],
+      "commercialStage": "new",
+      "interestProduct": "",
+      "assignedTo": "",
+      "createdAt": "2026-07-25T11:09:54.143Z",
+      "updatedAt": "2026-07-25T11:09:54.143Z"
+    },
+    {
+      "id": "customer_ms346tql_fg62c1",
+      "type": "person",
+      "name": "Tiago Nicola",
+      "tradeName": "",
+      "email": "",
+      "document": {
+        "cpf": "",
+        "cnpj": ""
+      },
+      "phones": [
+        {
+          "number": "555496599167",
+          "type": "whatsapp",
+          "primary": true
+        }
+      ],
+      "addresses": [],
+      "channels": [
+        {
+          "type": "whatsapp",
+          "externalId": "93905215340787@lid",
+          "conversationId": "555496599167"
+        }
+      ],
+      "labels": [],
+      "commercialStage": "new",
+      "interestProduct": "",
+      "assignedTo": "",
+      "createdAt": "2026-07-27T10:59:10.989Z",
+      "updatedAt": "2026-07-27T10:59:10.989Z"
+    },
+    {
+      "id": "customer_ms365jbr_nbyzat",
+      "type": "person",
+      "name": "Olívia Dahmer",
+      "tradeName": "",
+      "email": "",
+      "document": {
+        "cpf": "",
+        "cnpj": ""
+      },
+      "phones": [
+        {
+          "number": "555491418799",
+          "type": "whatsapp",
+          "primary": true
+        }
+      ],
+      "addresses": [],
+      "channels": [
+        {
+          "type": "whatsapp",
+          "externalId": "213511431012570@lid",
+          "conversationId": "555491418799"
+        }
+      ],
+      "labels": [],
+      "commercialStage": "new",
+      "interestProduct": "Iphone 17 256gb novo lacrado",
+      "assignedTo": "",
+      "createdAt": "2026-07-27T11:54:10.076Z",
+      "updatedAt": "2026-07-27T11:54:10.076Z"
+    },
+    {
+      "id": "customer_ms366ej8_ezzk0e",
+      "type": "person",
+      "name": "Thassia Mariana Rodrigues",
+      "tradeName": "",
+      "email": "",
+      "document": {
+        "cpf": "",
+        "cnpj": ""
+      },
+      "phones": [
+        {
+          "number": "555592062802",
+          "type": "whatsapp",
+          "primary": true
+        }
+      ],
+      "addresses": [],
+      "channels": [
+        {
+          "type": "whatsapp",
+          "externalId": "228814550491194@lid",
+          "conversationId": "555592062802"
+        }
+      ],
+      "labels": [],
+      "commercialStage": "new",
+      "interestProduct": "",
+      "assignedTo": "",
+      "createdAt": "2026-07-27T11:54:50.516Z",
+      "updatedAt": "2026-07-27T11:54:50.516Z"
+    },
+    {
+      "id": "customer_ms366hzv_k92zss",
+      "type": "person",
+      "name": "Joao Paulo Hubner",
+      "tradeName": "",
+      "email": "",
+      "document": {
+        "cpf": "",
+        "cnpj": ""
+      },
+      "phones": [
+        {
+          "number": "555496424317",
+          "type": "whatsapp",
+          "primary": true
+        }
+      ],
+      "addresses": [],
+      "channels": [
+        {
+          "type": "whatsapp",
+          "externalId": "1013679448307@lid",
+          "conversationId": "555496424317"
+        }
+      ],
+      "labels": [],
+      "commercialStage": "new",
+      "interestProduct": "",
+      "assignedTo": "",
+      "createdAt": "2026-07-27T11:54:55.003Z",
+      "updatedAt": "2026-07-27T11:54:55.003Z"
+    },
+    {
+      "id": "customer_ms366kfo_f6f467",
+      "type": "person",
+      "name": "555496462477",
+      "tradeName": "",
+      "email": "",
+      "document": {
+        "cpf": "",
+        "cnpj": ""
+      },
+      "phones": [
+        {
+          "number": "555496462477",
+          "type": "whatsapp",
+          "primary": true
+        }
+      ],
+      "addresses": [],
+      "channels": [
+        {
+          "type": "whatsapp",
+          "externalId": "65073150173270@lid",
+          "conversationId": "555496462477"
+        }
+      ],
+      "labels": [],
+      "commercialStage": "new",
+      "interestProduct": "",
+      "assignedTo": "",
+      "createdAt": "2026-07-27T11:54:58.164Z",
+      "updatedAt": "2026-07-27T11:54:58.164Z"
+    },
+    {
+      "id": "customer_ms366luc_xdbuwn",
+      "type": "person",
+      "name": "Gabriela Benini",
+      "tradeName": "",
+      "email": "",
+      "document": {
+        "cpf": "",
+        "cnpj": ""
+      },
+      "phones": [
+        {
+          "number": "555492334181",
+          "type": "whatsapp",
+          "primary": true
+        }
+      ],
+      "addresses": [],
+      "channels": [
+        {
+          "type": "whatsapp",
+          "externalId": "66228546736220@lid",
+          "conversationId": "555492334181"
+        }
+      ],
+      "labels": [],
+      "commercialStage": "new",
+      "interestProduct": "",
+      "assignedTo": "",
+      "createdAt": "2026-07-27T11:54:59.988Z",
+      "updatedAt": "2026-07-27T11:54:59.988Z"
+    },
+    {
+      "id": "customer_ms366ndl_53gcwc",
+      "type": "person",
+      "name": "Anita Streit",
+      "tradeName": "",
+      "email": "",
+      "document": {
+        "cpf": "",
+        "cnpj": ""
+      },
+      "phones": [
+        {
+          "number": "555599949135",
+          "type": "whatsapp",
+          "primary": true
+        }
+      ],
+      "addresses": [],
+      "channels": [
+        {
+          "type": "whatsapp",
+          "externalId": "217157925343423@lid",
+          "conversationId": "555599949135"
+        }
+      ],
+      "labels": [],
+      "commercialStage": "new",
+      "interestProduct": "",
+      "assignedTo": "",
+      "createdAt": "2026-07-27T11:55:01.977Z",
+      "updatedAt": "2026-07-27T11:55:01.977Z"
+    },
+    {
+      "id": "customer_ms366oud_38v4yr",
+      "type": "person",
+      "name": "Raimondi",
+      "tradeName": "",
+      "email": "",
+      "document": {
+        "cpf": "",
+        "cnpj": ""
+      },
+      "phones": [
+        {
+          "number": "555591361348",
+          "type": "whatsapp",
+          "primary": true
+        }
+      ],
+      "addresses": [],
+      "channels": [
+        {
+          "type": "whatsapp",
+          "externalId": "273572387942454@lid",
+          "conversationId": "555591361348"
+        }
+      ],
+      "labels": [],
+      "commercialStage": "new",
+      "interestProduct": "",
+      "assignedTo": "",
+      "createdAt": "2026-07-27T11:55:03.877Z",
+      "updatedAt": "2026-07-27T11:55:03.877Z"
+    },
+    {
+      "id": "customer_ms366rhd_ksor8m",
+      "type": "person",
+      "name": "555596332302",
+      "tradeName": "",
+      "email": "",
+      "document": {
+        "cpf": "",
+        "cnpj": ""
+      },
+      "phones": [
+        {
+          "number": "555596332302",
+          "type": "whatsapp",
+          "primary": true
+        }
+      ],
+      "addresses": [],
+      "channels": [
+        {
+          "type": "whatsapp",
+          "externalId": "252368201502765@lid",
+          "conversationId": "555596332302"
+        }
+      ],
+      "labels": [],
+      "commercialStage": "new",
+      "interestProduct": "",
+      "assignedTo": "",
+      "createdAt": "2026-07-27T11:55:07.297Z",
+      "updatedAt": "2026-07-27T11:55:07.297Z"
+    },
+    {
+      "id": "customer_ms39nb4t_bvuq8a",
+      "type": "person",
+      "name": "Roseli",
+      "tradeName": "",
+      "email": "",
+      "document": {
+        "cpf": "",
+        "cnpj": ""
+      },
+      "phones": [
+        {
+          "number": "555496487027",
+          "type": "whatsapp",
+          "primary": true
+        }
+      ],
+      "addresses": [],
+      "channels": [
+        {
+          "type": "whatsapp",
+          "externalId": "176338572955902@lid",
+          "conversationId": "555496487027"
+        }
+      ],
+      "labels": [],
+      "commercialStage": "new",
+      "interestProduct": "",
+      "assignedTo": "",
+      "createdAt": "2026-07-27T13:31:58.109Z",
+      "updatedAt": "2026-07-27T13:31:58.109Z"
+    },
+    {
+      "id": "customer_ms39ndd2_vwqx55",
+      "type": "person",
+      "name": "Nicollas",
+      "tradeName": "",
+      "email": "",
+      "document": {
+        "cpf": "",
+        "cnpj": ""
+      },
+      "phones": [
+        {
+          "number": "555596067863",
+          "type": "whatsapp",
+          "primary": true
+        }
+      ],
+      "addresses": [],
+      "channels": [
+        {
+          "type": "whatsapp",
+          "externalId": "99299828441237@lid",
+          "conversationId": "555596067863"
+        }
+      ],
+      "labels": [],
+      "commercialStage": "new",
+      "interestProduct": "Iphone 16 128gb novo lacrado",
+      "assignedTo": "",
+      "createdAt": "2026-07-27T13:32:00.998Z",
+      "updatedAt": "2026-07-27T13:32:00.998Z"
+    },
+    {
+      "id": "customer_ms39qsro_kp916r",
+      "type": "person",
+      "name": "Anderson",
+      "tradeName": "",
+      "email": "",
+      "document": {
+        "cpf": "",
+        "cnpj": ""
+      },
+      "phones": [
+        {
+          "number": "555599993426",
+          "type": "whatsapp",
+          "primary": true
+        }
+      ],
+      "addresses": [],
+      "channels": [
+        {
+          "type": "whatsapp",
+          "externalId": "154211622895847@lid",
+          "conversationId": "555599993426"
+        }
+      ],
+      "labels": [],
+      "commercialStage": "new",
+      "interestProduct": "",
+      "assignedTo": "",
+      "createdAt": "2026-07-27T13:34:40.932Z",
+      "updatedAt": "2026-07-27T13:34:40.932Z"
+    },
+    {
+      "id": "customer_ms3hxx48_ns6e2g",
+      "type": "person",
+      "name": "Adriane Brescovit",
+      "tradeName": "",
+      "email": "",
+      "document": {
+        "cpf": "",
+        "cnpj": ""
+      },
+      "phones": [
+        {
+          "number": "555499075280",
+          "type": "whatsapp",
+          "primary": true
+        }
+      ],
+      "addresses": [],
+      "channels": [
+        {
+          "type": "whatsapp",
+          "externalId": "74122864390352@lid",
+          "conversationId": "555499075280"
+        }
+      ],
+      "labels": [],
+      "commercialStage": "new",
+      "interestProduct": "",
+      "assignedTo": "",
+      "createdAt": "2026-07-27T17:24:10.088Z",
+      "updatedAt": "2026-07-27T17:24:10.088Z"
+    },
+    {
+      "id": "customer_ms3m9uls_nrosil",
+      "type": "person",
+      "name": "Zenira Da Rosa",
+      "tradeName": "",
+      "email": "",
+      "document": {
+        "cpf": "",
+        "cnpj": ""
+      },
+      "phones": [
+        {
+          "number": "555584388057",
+          "type": "whatsapp",
+          "primary": true
+        }
+      ],
+      "addresses": [],
+      "channels": [
+        {
+          "type": "whatsapp",
+          "externalId": "62006526791814@lid",
+          "conversationId": "555584388057"
+        }
+      ],
+      "labels": [],
+      "commercialStage": "new",
+      "interestProduct": "",
+      "assignedTo": "",
+      "createdAt": "2026-07-27T19:25:25.168Z",
+      "updatedAt": "2026-07-27T19:25:25.168Z"
+    },
+    {
+      "id": "customer_ms7k3mpt_re1ksc",
+      "type": "person",
+      "name": "Thayla Shivany",
+      "tradeName": "",
+      "email": "",
+      "document": {
+        "cpf": "",
+        "cnpj": ""
+      },
+      "phones": [
+        {
+          "number": "555597050063",
+          "type": "whatsapp",
+          "primary": true
+        }
+      ],
+      "addresses": [],
+      "channels": [
+        {
+          "type": "whatsapp",
+          "externalId": "226082900938895@lid",
+          "conversationId": "555597050063"
+        }
+      ],
+      "labels": [],
+      "commercialStage": "new",
+      "interestProduct": "",
+      "assignedTo": "",
+      "createdAt": "2026-07-30T13:35:40.482Z",
+      "updatedAt": "2026-07-30T13:35:40.482Z"
+    }
+  ]
+}

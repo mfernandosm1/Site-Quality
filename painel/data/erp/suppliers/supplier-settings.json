@@ -1,0 +1,61 @@
+{
+  "version": "0.12.6",
+  "requiredFields": [
+    "name",
+    "document"
+  ],
+  "visibleFields": [
+    "personType",
+    "originType",
+    "name",
+    "tradeName",
+    "document",
+    "stateRegistration",
+    "municipalRegistration",
+    "birthDate",
+    "contactName",
+    "phone",
+    "mobile",
+    "email",
+    "website",
+    "zipCode",
+    "street",
+    "number",
+    "complement",
+    "district",
+    "city",
+    "state",
+    "defaultMarkup",
+    "averageDeliveryDays",
+    "minimumOrderQuantity",
+    "minimumOrderValue",
+    "orderDays",
+    "paymentTerms",
+    "preferredPaymentMethod",
+    "currency",
+    "shippingMethods",
+    "freightNotes",
+    "suppliedCategories",
+    "contacts",
+    "internalAlert",
+    "notes"
+  ],
+  "shippingMethodOptions": [
+    "Correios",
+    "Transportadora",
+    "Motoboy",
+    "Retirada no local",
+    "Ônibus / excursão",
+    "Aéreo",
+    "Entrega própria",
+    "Outro"
+  ],
+  "suppliedCategoryOptions": [
+    "Celulares",
+    "Peças",
+    "Acessórios",
+    "Informática",
+    "Serviços",
+    "Outros"
+  ]
+}

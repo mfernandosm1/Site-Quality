@@ -2,11 +2,50 @@ import express from 'express';
 import fs from 'fs';
 import path from 'path';
 import multer from 'multer';
+import { fileURLToPath } from 'url';
+import InventoryService from '../services/inventory-service.js';
 
 const router = express.Router();
+const ROUTES_DIR = path.dirname(fileURLToPath(import.meta.url));
+const PANEL_DIR = path.resolve(ROUTES_DIR, '..');
 
 function P(app) {
   return app.locals.paths;
+}
+
+function inventoryService(app) {
+  // O estoque pertence ao painel local, e não à pasta pública do site.
+  // Como este arquivo fica em painel/routes, PANEL_DIR sempre aponta para C:\Site\painel.
+  const dataDir = path.join(PANEL_DIR, 'data', 'erp', 'inventory');
+
+  if (!app.locals.inventoryService) {
+    app.locals.inventoryService = new InventoryService({ dataDir });
+    console.log(`📦 Inventory Service: ${dataDir}`);
+  }
+
+  return app.locals.inventoryService;
+}
+
+function booleanFromBody(value, fallback = false) {
+  // Express pode entregar um valor simples ou um array quando existem campos
+  // repetidos. Sempre considera o último valor enviado pelo formulário.
+  const raw = Array.isArray(value) ? value[value.length - 1] : value;
+  if (raw === undefined || raw === null || raw === '') return fallback;
+  if (raw === true || raw === 1) return true;
+  if (raw === false || raw === 0) return false;
+
+  const normalized = String(raw).trim().toLowerCase();
+  if (['true', '1', 'on', 'yes', 'sim', 'ativo'].includes(normalized)) return true;
+  if (['false', '0', 'off', 'no', 'nao', 'não', 'inativo'].includes(normalized)) return false;
+  return fallback;
+}
+
+
+function numberOrNull(value, fallback = null) {
+  if (value === undefined) return fallback;
+  if (value === null || value === '') return null;
+  const parsed = Number(value);
+  return Number.isFinite(parsed) ? parsed : fallback;
 }
 
 function readJson(p) {
@@ -19,6 +58,38 @@ function readJson(p) {
 
 function writeJson(p, data) {
   fs.writeFileSync(p, JSON.stringify(data, null, 2), 'utf-8');
+}
+
+function backupProductsJson(file) {
+  if (!fs.existsSync(file)) return null;
+
+  const backupDir = path.resolve(PANEL_DIR, '..', 'Backup', 'Painel', 'products');
+  fs.mkdirSync(backupDir, { recursive: true });
+
+  const now = new Date();
+  const stamp = [
+    now.getFullYear(),
+    String(now.getMonth() + 1).padStart(2, '0'),
+    String(now.getDate()).padStart(2, '0'),
+    '-',
+    String(now.getHours()).padStart(2, '0'),
+    String(now.getMinutes()).padStart(2, '0'),
+    String(now.getSeconds()).padStart(2, '0')
+  ].join('');
+
+  const backupFile = path.join(backupDir, `products-${stamp}.json`);
+  fs.copyFileSync(file, backupFile);
+
+  const backups = fs.readdirSync(backupDir)
+    .filter(name => /^products-.*\.json$/i.test(name))
+    .map(name => ({ name, full: path.join(backupDir, name), time: fs.statSync(path.join(backupDir, name)).mtimeMs }))
+    .sort((a, b) => b.time - a.time);
+
+  backups.slice(10).forEach(entry => {
+    try { fs.unlinkSync(entry.full); } catch (_) {}
+  });
+
+  return backupFile;
 }
 
 function getAllImages(baseDir, prefix = '') {
@@ -98,6 +169,26 @@ function loadCategories(app) {
   } catch (e) {
     return [];
   }
+}
+
+function loadSubcategories(app) {
+  try {
+    const file = path.join(P(app).CONTENT_DIR, 'subcategories.json');
+    const data = readJson(file);
+    return data.items || [];
+  } catch (e) {
+    return [];
+  }
+}
+
+function normalizeSubcategoryValue(value, categoryValue, categories = [], subcategories = []) {
+  const raw = (value ?? '').toString().trim();
+  if (!raw) return '';
+  const category = (categories || []).find(c => String(c.slug || '') === String(categoryValue || ''));
+  if (!category) return '';
+  const normalized = gerarSlug(raw);
+  const found = (subcategories || []).find(s => Number(s.categoryId) === Number(category.id) && (String(s.slug || '') === raw || gerarSlug(s.name || '') === normalized || gerarSlug(s.slug || '') === normalized));
+  return found ? String(found.slug || '').trim() : '';
 }
 
 function normalizeCategoryValue(value, categories = []) {
@@ -854,10 +945,117 @@ function tagsFromBody(value, current = []) {
     .slice(0, 8);
 }
 
+
+function defaultInventoryPolicy(current = {}, body = null) {
+  const inventory = current.inventory && typeof current.inventory === 'object' ? current.inventory : {};
+  const currentSite = inventory.channelAvailability?.site || {};
+  const source = body || {};
+  const siteMode = source.inventorySiteMode ?? currentSite.mode ?? 'shared';
+  return {
+    itemId: inventory.itemId || '',
+    stockControlled: booleanFromBody(source.stockControlled, inventory.stockControlled === true),
+    allowNegative: booleanFromBody(source.allowNegative, inventory.allowNegative === true),
+    minimumQuantity: Math.max(0, numberOrNull(source.minimumQuantity, inventory.minimumQuantity ?? 0) || 0),
+    channelAvailability: {
+      site: {
+        mode: ['shared', 'limited', 'disabled'].includes(siteMode) ? siteMode : 'shared',
+        enabled: siteMode !== 'disabled',
+        limit: Math.max(0, numberOrNull(source.siteLimit, currentSite.limit) || 0) || null,
+        physicalSafety: Math.max(0, numberOrNull(source.physicalSafety, currentSite.physicalSafety ?? 0) || 0)
+      }
+    }
+  };
+}
+
+function combinationKey(combo = {}) {
+  return [combo.color, combo.storage, combo.ram, combo.condition]
+    .map(value => String(value || '').trim().toLowerCase())
+    .join('|');
+}
+
+function ensureInventoryIdentity(product = {}, previous = null) {
+  const previousInventory = previous?.inventory || {};
+  const inventory = defaultInventoryPolicy(product);
+  inventory.itemId = inventory.itemId || previousInventory.itemId || `PRD-${product.id || Date.now()}`;
+  product.inventory = inventory;
+
+  const previousByKey = new Map(
+    (previous?.variations?.combinations || []).map(combo => [combinationKey(combo), combo.inventoryItemId])
+  );
+
+  if (Array.isArray(product?.variations?.combinations)) {
+    product.variations.combinations = product.variations.combinations.map((combo, index) => ({
+      ...combo,
+      inventoryItemId: combo.inventoryItemId || previousByKey.get(combinationKey(combo)) || `VAR-${product.id || Date.now()}-${index + 1}`
+    }));
+  }
+  return product;
+}
+
+function syncInventoryFromProduct(req, product, { reason = 'Ajuste pelo cadastro de produtos', initial = false } = {}) {
+  const service = inventoryService(req.app);
+  const policy = product.inventory || {};
+
+  console.log(
+    `📦 Diagnóstico estoque: ${product.name || product.id} | ` +
+    `controlado=${policy.stockControlled === true} | ` +
+    `item=${policy.itemId || 'sem-item'} | quantidade=${product.stock ?? 'não informada'}`
+  );
+
+  if (!policy.stockControlled) {
+    console.log(`📦 Estoque ERP ignorado: controle desativado para ${product.name || product.id}`);
+    return { controlled: false };
+  }
+
+  const syncOne = (inventoryItemId, quantity, label) => {
+    if (!inventoryItemId) return null;
+    const desired = Math.max(0, Number(quantity) || 0);
+    service.configurarItem({
+      inventoryItemId,
+      minimumQuantity: Math.max(0, Number(policy.minimumQuantity) || 0)
+    });
+    const current = service.consultarSaldo({ inventoryItemId });
+    if (current.physicalQuantity === desired) return current;
+    return service.ajustarEstoque({
+      inventoryItemId,
+      newQuantity: desired,
+      origin: 'cadastro_produtos',
+      referenceType: 'product',
+      referenceId: String(product.id),
+      reason: initial ? `Entrada inicial: ${label}` : reason,
+      createdBy: req.user?.name || req.user?.email || 'painel',
+      allowNegative: policy.allowNegative === true
+    }).balance;
+  };
+
+  const productBalance = syncOne(policy.itemId, product.stock, product.name || 'Produto');
+  const variationBalances = [];
+  for (const combo of product?.variations?.combinations || []) {
+    variationBalances.push(syncOne(combo.inventoryItemId, combo.stock, `${product.name} / ${combinationKey(combo)}`));
+  }
+  console.log(`📦 Estoque ERP sincronizado: ${product.name || product.id} | físico: ${productBalance?.physicalQuantity ?? 0}`);
+  return { controlled: true, productBalance, variationBalances };
+}
+
+function productErpActive(product = {}) {
+  if (product.erp && typeof product.erp === 'object' && product.erp.active !== undefined) {
+    return booleanFromBody(product.erp.active, true);
+  }
+  return booleanFromBody(product.active, true);
+}
+
+function productLvActive(product = {}) {
+  if (product.virtualStore && typeof product.virtualStore === 'object' && product.virtualStore.active !== undefined) {
+    return booleanFromBody(product.virtualStore.active, true);
+  }
+  return booleanFromBody(product.active, true);
+}
+
 function productFromBody(body, current = {}) {
-  const priceValue = body.price !== undefined && body.price !== ''
-    ? Number(body.price)
-    : null;
+  const submittedPrice = body.lvPrice ?? body.price;
+  const priceValue = submittedPrice !== undefined && submittedPrice !== ''
+    ? Number(submittedPrice)
+    : (current.price ?? null);
 
   const stockValue = body.stock !== undefined && body.stock !== ''
     ? Math.max(0, Number(body.stock))
@@ -875,24 +1073,97 @@ function productFromBody(body, current = {}) {
     ? comboStocks.reduce((sum, value) => sum + value, 0)
     : (Number.isFinite(stockValue) ? stockValue : null);
 
+  const numberOrNull = (value, fallback = null) => {
+    if (value === undefined) return fallback;
+    if (value === null || value === '') return null;
+    const parsed = Number(value);
+    return Number.isFinite(parsed) ? parsed : fallback;
+  };
+
+  const currentCommercial = current.commercial || {};
+  const commercial = {
+    costPrice: numberOrNull(body.costPrice, currentCommercial.costPrice ?? null),
+    erpPrice: numberOrNull(body.erpPrice, currentCommercial.erpPrice ?? current.price ?? null),
+    marketplacePrice: numberOrNull(body.marketplacePrice, currentCommercial.marketplacePrice ?? null),
+    promotionalPrice: numberOrNull(body.promotionalPrice, currentCommercial.promotionalPrice ?? null),
+    desiredMarginPercent: numberOrNull(body.desiredMarginPercent, currentCommercial.desiredMarginPercent ?? null),
+    expectedProfit: numberOrNull(body.expectedProfit, currentCommercial.expectedProfit ?? null),
+    defaultCommissionPercent: numberOrNull(body.defaultCommissionPercent, currentCommercial.defaultCommissionPercent ?? null),
+    cashPrice: numberOrNull(body.cashPrice, currentCommercial.cashPrice ?? null),
+    installmentPrice: numberOrNull(body.installmentPrice, currentCommercial.installmentPrice ?? null),
+    minimumPrice: numberOrNull(body.minimumPrice, currentCommercial.minimumPrice ?? null),
+    minimumMarginPercent: numberOrNull(body.minimumMarginPercent, currentCommercial.minimumMarginPercent ?? null),
+    discountPolicy: (body.discountPolicy ?? currentCommercial.discountPolicy ?? 'inherit').toString(),
+    maximumDiscountPercent: numberOrNull(body.maximumDiscountPercent, currentCommercial.maximumDiscountPercent ?? null),
+    maximumDiscountAmount: numberOrNull(body.maximumDiscountAmount, currentCommercial.maximumDiscountAmount ?? null),
+    requiresAuthorization: body.requiresAuthorization === undefined
+      ? Boolean(currentCommercial.requiresAuthorization)
+      : (body.requiresAuthorization === true || body.requiresAuthorization === 'true')
+  };
+
   return {
-    name: (body.name || current.name || '').trim(),
+    name: (body.erpName ?? body.name ?? current.name ?? '').toString().trim(),
+    // Espelhos legados preservam os serviços atuais enquanto o cadastro mestre evolui.
+    sku: (body.sku ?? current.erp?.sku ?? current.sku ?? '').toString().trim(),
+    code: (body.internalCode ?? current.erp?.internalCode ?? current.code ?? '').toString().trim(),
+    barcode: (body.barcode ?? current.erp?.barcode ?? current.barcode ?? '').toString().trim(),
+    brand: (body.brand ?? current.erp?.brand ?? current.brand ?? '').toString().trim(),
     slug: gerarSlug(body.slug || current.slug || body.name || current.name || ''),
     price: priceValue,
+    commercial,
     stock: finalStock,
+    inventory: defaultInventoryPolicy(current, body),
     image: (body.image || current.image || '').trim(),
     gallery: galleryFromBody(body.gallery, current.gallery),
-    category: (body.category ?? current.category ?? '').toString().trim(),
+    category: (body.siteCategory ?? body.category ?? current.category ?? '').toString().trim(),
+    subcategory: (body.siteSubcategory ?? body.subcategory ?? body.subcategoria ?? current.subcategory ?? current.subcategoria ?? '').toString().trim(),
     tags: tagsFromBody(body.tags, current.tags),
     relatedManualIds: idListFromBody(body.relatedManualIds, current.relatedManualIds),
     crossSellIds: idListFromBody(body.crossSellIds, current.crossSellIds),
     showPrice: body.showPrice === true || body.showPrice === 'true',
     featured: body.featured === true || body.featured === 'true',
-    active: body.active === true || body.active === 'true',
+    // Compatibilidade do site público: `active` continua representando o canal LV.
+    // O ERP passa a usar `erp.active`, sem alterar o formato esperado pelo publicador atual.
+    active: booleanFromBody(body.lvActive ?? body.active ?? body.publishSite, productLvActive(current)),
+    erp: {
+      ...(current.erp && typeof current.erp === 'object' ? current.erp : {}),
+      sku: (body.sku ?? current.erp?.sku ?? current.sku ?? '').toString().trim(),
+      internalCode: (body.internalCode ?? current.erp?.internalCode ?? '').toString().trim(),
+      supplierCode: (body.supplierCode ?? current.erp?.supplierCode ?? '').toString().trim(),
+      barcode: (body.barcode ?? current.erp?.barcode ?? current.barcode ?? '').toString().trim(),
+      brand: (body.brand ?? current.erp?.brand ?? current.brand ?? '').toString().trim(),
+      unit: (body.unit ?? current.erp?.unit ?? 'UN').toString().trim() || 'UN',
+      category: (body.erpCategory ?? current.erp?.category ?? '').toString().trim(),
+      subcategory: (body.erpSubcategory ?? current.erp?.subcategory ?? '').toString().trim(),
+      mainSupplierId: (body.mainSupplierId ?? current.erp?.mainSupplierId ?? '').toString().trim(),
+      preferredSupplierId: (body.preferredSupplierId ?? current.erp?.preferredSupplierId ?? '').toString().trim(),
+      active: booleanFromBody(body.erpActive, productErpActive(current))
+    },
+    virtualStore: {
+      ...(current.virtualStore && typeof current.virtualStore === 'object' ? current.virtualStore : {}),
+      name: (body.lvName ?? current.virtualStore?.name ?? body.erpName ?? body.name ?? current.name ?? '').toString().trim(),
+      price: numberOrNull(body.lvPrice, current.virtualStore?.price ?? current.price ?? null),
+      active: booleanFromBody(body.lvActive ?? body.active ?? body.publishSite, productLvActive(current)),
+      seoTitle: (body.seoTitle ?? current.virtualStore?.seoTitle ?? '').toString().trim(),
+      seoDescription: (body.seoDescription ?? current.virtualStore?.seoDescription ?? '').toString().trim(),
+      channels: {
+        ...(current.virtualStore?.channels && typeof current.virtualStore.channels === 'object' ? current.virtualStore.channels : {}),
+        lojaVirtual: { enabled: booleanFromBody(body.lvActive ?? body.active ?? body.publishSite, productLvActive(current)) },
+        mercadoLivre: { enabled: false },
+        shopee: { enabled: false },
+        amazon: { enabled: false },
+        magalu: { enabled: false }
+      }
+    },
     detailsEnabled: body.detailsEnabled === true || body.detailsEnabled === 'true',
     showVariationsOnCard: body.showVariationsOnCard === true || body.showVariationsOnCard === 'true',
     descriptionShort: (body.descriptionShort ?? current.descriptionShort ?? '').toString().trim(),
     descriptionLong: (body.descriptionLong ?? current.descriptionLong ?? '').toString().trim(),
+
+    // Estoque ERP: preserva a identidade existente e aplica os campos
+    // enviados pelo cadastro/modal (controle, mínimo, negativo e site).
+    inventory: defaultInventoryPolicy(current, body),
+
     variations: Object.assign(
       variations,
       variationsToText(variations)
@@ -954,6 +1225,8 @@ router.get('/', (req, res) => {
 
   const catsFile = path.join(contentDir, 'categories.json');
   const cats = readJson(catsFile);
+  const subcatsFile = path.join(contentDir, 'subcategories.json');
+  const subcats = readJson(subcatsFile);
 
   const imagesDir = path.join(P(req.app).SITE_DIR, 'images');
   const imagens = getAllImages(imagesDir);
@@ -962,15 +1235,33 @@ router.get('/', (req, res) => {
   if (req.query.saved === 'produto') flash = '✅ Produto salvo com sucesso.';
   if (req.query.saved === 'duplicate') flash = '📄 Produto duplicado com sucesso. Edite o novo produto criado como cópia.';
   if (req.query.saved === 'all') flash = '✅ Alterações salvas com sucesso.';
-  if (req.query.saved === 'bulk') flash = '✅ Categoria aplicada nos produtos selecionados.';
+  if (req.query.saved === 'bulk') {
+    const updated = Math.max(0, Number(req.query.updated) || 0);
+    const skipped = Math.max(0, Number(req.query.skipped) || 0);
+    const errors = Math.max(0, Number(req.query.errors) || 0);
+    flash = `✅ Operações em lote concluídas: ${updated} produto(s) alterado(s)` +
+      (skipped ? ` · ${skipped} sem mudança` : '') +
+      (errors ? ` · ⚠️ ${errors} com erro` : '') + '.';
+  }
   if (req.query.saved === 'details_on') flash = '✅ Detalhes ativados nos produtos selecionados.';
   if (req.query.saved === 'details_off') flash = '✅ Detalhes desativados nos produtos selecionados.';
   if (req.query.deleted === '1') flash = '🗑️ Produto excluído com sucesso.';
 
+  const invService = inventoryService(req.app);
+  (data.items || []).forEach(item => {
+    ensureInventoryIdentity(item, item);
+    if (item.inventory?.stockControlled && item.inventory?.itemId) {
+      item.inventoryBalance = invService.consultarSaldo({ inventoryItemId: item.inventory.itemId });
+      item.stock = item.inventoryBalance.physicalQuantity;
+    }
+  });
+
   res.render('produtos', {
     items: data.items || [],
     categorias: cats.items || [],
+    subcategorias: subcats.items || [],
     imagens,
+    origemErp: req.query.origem === 'erp',
     flash
   });
 });
@@ -1019,6 +1310,7 @@ router.post('/add', (req, res) => {
   const novo = productFromBody(req.body);
   novo.id = Date.now();
   novo.category = normalizeCategoryValue(novo.category, categorias);
+  novo.subcategory = normalizeSubcategoryValue(novo.subcategory, novo.category, categorias, loadSubcategories(req.app));
 
   if (!novo.name) {
     return res.redirect('/produtos?error=name');
@@ -1030,7 +1322,15 @@ router.post('/add', (req, res) => {
     novo.id
   );
 
+  ensureInventoryIdentity(novo);
   data.items.push(novo);
+
+  try {
+    syncInventoryFromProduct(req, novo, { initial: true });
+  } catch (error) {
+    console.error('⚠️ Falha ao inicializar estoque do produto:', error);
+    return res.redirect('/produtos?error=inventory');
+  }
 
   writeJson(file, data);
   console.log(`✅ Produto "${novo.name}" adicionado com slug "${novo.slug}".`);
@@ -1054,14 +1354,52 @@ router.post('/update', (req, res) => {
   }
 
   const categorias = loadCategories(req.app);
+  const previousItem = JSON.parse(JSON.stringify(item));
   Object.assign(item, productFromBody(req.body, item));
+
+  // Persistência explícita dos status independentes. Essa atribuição final evita
+  // que campos legados ou valores falsos sejam substituídos por defaults durante
+  // a atualização completa do produto.
+  if (req.body.erpActive !== undefined) {
+    item.erp = item.erp && typeof item.erp === 'object' ? item.erp : {};
+    item.erp.active = booleanFromBody(req.body.erpActive, productErpActive(previousItem));
+  }
+
+  if (req.body.lvActive !== undefined || req.body.active !== undefined || req.body.publishSite !== undefined) {
+    const submittedLvStatus = req.body.lvActive ?? req.body.active ?? req.body.publishSite;
+    const lvActive = booleanFromBody(submittedLvStatus, productLvActive(previousItem));
+    item.active = lvActive; // compatibilidade com o publicador atual
+    item.virtualStore = item.virtualStore && typeof item.virtualStore === 'object' ? item.virtualStore : {};
+    item.virtualStore.active = lvActive;
+    item.virtualStore.channels = item.virtualStore.channels && typeof item.virtualStore.channels === 'object'
+      ? item.virtualStore.channels
+      : {};
+    item.virtualStore.channels.lojaVirtual = {
+      ...(item.virtualStore.channels.lojaVirtual && typeof item.virtualStore.channels.lojaVirtual === 'object'
+        ? item.virtualStore.channels.lojaVirtual
+        : {}),
+      enabled: lvActive
+    };
+  }
+
+  ensureInventoryIdentity(item, previousItem);
   item.category = normalizeCategoryValue(item.category, categorias);
+  item.subcategory = normalizeSubcategoryValue(item.subcategory, item.category, categorias, loadSubcategories(req.app));
 
   item.slug = slugUnico(
     gerarSlug(req.body.slug || item.slug || item.name),
     data.items,
     item.id
   );
+
+  try {
+    const inventoryResult = syncInventoryFromProduct(req, item);
+    if (inventoryResult?.productBalance) item.stock = inventoryResult.productBalance.physicalQuantity;
+  } catch (error) {
+    console.error('⚠️ Falha ao ajustar estoque:', error);
+    if (wantsJson(req)) return res.status(400).json({ success: false, message: error.message || 'Erro ao ajustar estoque.' });
+    return res.redirect('/produtos?error=inventory');
+  }
 
   writeJson(file, data);
   console.log(`✏️ Produto atualizado: ${item.name || id} | slug: ${item.slug}`);
@@ -1071,6 +1409,66 @@ router.post('/update', (req, res) => {
   }
 
   res.redirect('/produtos?saved=produto');
+});
+
+
+// Atualização dedicada dos canais. Mantém a persistência de ERP e Loja Virtual
+// independente do salvamento completo do cadastro e evita que campos legados
+// restaurem `false` para `true` durante a atualização da linha.
+router.post('/update-channel-status', (req, res) => {
+  try {
+    const file = path.join(P(req.app).CONTENT_DIR, 'products.json');
+    const data = readJson(file);
+    data.items = Array.isArray(data.items) ? data.items : [];
+
+    const submittedId = String(req.body.id ?? '').trim();
+    const item = data.items.find(product => String(product.id) === submittedId);
+
+    if (!item) {
+      return res.status(404).json({ success: false, message: `Produto ${submittedId || '(sem ID)'} não encontrado.` });
+    }
+
+    const erpActive = booleanFromBody(req.body.erpActive, productErpActive(item));
+    const lvActive = booleanFromBody(req.body.lvActive, productLvActive(item));
+
+    item.erp = item.erp && typeof item.erp === 'object' ? item.erp : {};
+    item.erp.active = erpActive;
+    item.active = lvActive;
+    item.virtualStore = item.virtualStore && typeof item.virtualStore === 'object' ? item.virtualStore : {};
+    item.virtualStore.active = lvActive;
+    item.virtualStore.channels = item.virtualStore.channels && typeof item.virtualStore.channels === 'object'
+      ? item.virtualStore.channels
+      : {};
+    item.virtualStore.channels.lojaVirtual = {
+      ...(item.virtualStore.channels.lojaVirtual && typeof item.virtualStore.channels.lojaVirtual === 'object'
+        ? item.virtualStore.channels.lojaVirtual
+        : {}),
+      enabled: lvActive
+    };
+
+    backupProductsJson(file);
+    writeJson(file, data);
+
+    return res.json({
+      success: true,
+      message: 'Status ERP e Loja Virtual salvos.',
+      item: {
+        id: item.id,
+        erp: { active: item.erp.active },
+        active: item.active,
+        virtualStore: {
+          active: item.virtualStore.active,
+          channels: { lojaVirtual: { enabled: item.virtualStore.channels.lojaVirtual.enabled } }
+        }
+      }
+    });
+  } catch (error) {
+    console.error('❌ Erro ao salvar status ERP/LV:', error);
+    return res.status(500).json({
+      success: false,
+      message: error?.message || 'Erro interno ao gravar os status ERP/LV.'
+    });
+  }
 });
 
 router.post('/update-all', (req, res) => {
@@ -1098,15 +1496,46 @@ router.post('/update-all', (req, res) => {
 
     const updated = productFromBody({
       name: getField('name'),
+      erpName: getField('name'),
+      sku: getField('sku'),
+      internalCode: getField('internalCode'),
+      supplierCode: getField('supplierCode'),
+      barcode: getField('barcode'),
+      brand: getField('brand'),
+      unit: getField('unit'),
+      erpCategory: getField('erpCategory'),
+      erpSubcategory: getField('erpSubcategory'),
+      erpActive: getField('erpActive'),
+      lvName: getField('lvName'),
+      lvPrice: getField('lvPrice'),
+      seoTitle: getField('seoTitle'),
+      seoDescription: getField('seoDescription'),
       slug: getField('slug'),
       price: getField('price'),
+      costPrice: getField('costPrice'),
+      cashPrice: getField('cashPrice'),
+      installmentPrice: getField('installmentPrice'),
+      minimumPrice: getField('minimumPrice'),
+      minimumMarginPercent: getField('minimumMarginPercent'),
+      discountPolicy: getField('discountPolicy'),
+      maximumDiscountPercent: getField('maximumDiscountPercent'),
+      maximumDiscountAmount: getField('maximumDiscountAmount'),
+      requiresAuthorization: getField('requiresAuthorization'),
       stock: getField('stock'),
+      stockControlled: getField('stockControlled'),
+      allowNegative: getField('allowNegative'),
+      minimumQuantity: getField('minimumQuantity'),
+      inventorySiteMode: getField('inventorySiteMode'),
+      siteLimit: getField('siteLimit'),
+      physicalSafety: getField('physicalSafety'),
       image: getField('image'),
       gallery: getField('gallery'),
       category: getField('category'),
+      subcategory: getField('subcategory'),
       showPrice: getField('showPrice'),
       featured: getField('featured'),
-      active: getField('active'),
+      lvActive: getField('lvActive') ?? getField('active'),
+      active: getField('lvActive') ?? getField('active'),
       detailsEnabled: getField('detailsEnabled'),
       showVariationsOnCard: getField('showVariationsOnCard'),
       descriptionShort: getField('descriptionShort'),
@@ -1122,8 +1551,12 @@ router.post('/update-all', (req, res) => {
 
     if (!updated.name) updated.name = item.name;
 
+    const previousItem = JSON.parse(JSON.stringify(item));
     Object.assign(item, updated);
+    ensureInventoryIdentity(item, previousItem);
+    syncInventoryFromProduct(req, item);
     item.category = normalizeCategoryValue(item.category, categorias);
+  item.subcategory = normalizeSubcategoryValue(item.subcategory, item.category, categorias, loadSubcategories(req.app));
 
     item.slug = slugUnico(
       gerarSlug(getField('slug') || item.slug || item.name),
@@ -1137,7 +1570,7 @@ router.post('/update-all', (req, res) => {
   res.redirect('/produtos?saved=all');
 });
 
-router.post('/bulk-category', (req, res) => {
+router.post('/bulk-actions', (req, res) => {
   const file = path.join(P(req.app).CONTENT_DIR, 'products.json');
   const data = readJson(file);
   data.items = data.items || [];
@@ -1148,51 +1581,166 @@ router.post('/bulk-category', (req, res) => {
       ? [req.body.selectedIds]
       : [];
 
-  const selectedIds = ids.map(Number);
+  const selectedIds = new Set(ids.map(Number).filter(Number.isFinite));
+  if (!selectedIds.size) {
+    return res.redirect('/produtos?error=bulk_no_selection');
+  }
+
+  const enabledActions = new Set(
+    Array.isArray(req.body.enabledActions)
+      ? req.body.enabledActions
+      : req.body.enabledActions
+        ? [req.body.enabledActions]
+        : []
+  );
+
+  if (!enabledActions.size) {
+    return res.redirect('/produtos?error=bulk_no_action');
+  }
+
   const categorias = loadCategories(req.app);
-  const category = normalizeCategoryValue((req.body.bulkCategory ?? '').toString().trim(), categorias);
+  const subcategorias = loadSubcategories(req.app);
+  const hasCategory = enabledActions.has('category');
+  const hasSubcategory = enabledActions.has('subcategory');
+  const hasStockControlled = enabledActions.has('stockControlled');
+  const hasMinimumQuantity = enabledActions.has('minimumQuantity');
+  const hasErpActive = enabledActions.has('erpActive');
+  const hasLvActive = enabledActions.has('lvActive');
+
+  const requestedCategory = hasCategory
+    ? normalizeCategoryValue((req.body.bulkCategory ?? '').toString().trim(), categorias)
+    : null;
+
+  const requestedSubcategoryRaw = (req.body.bulkSubcategory ?? '').toString().trim();
+  const requestedMinimumQuantity = hasMinimumQuantity
+    ? Math.max(0, Math.floor(Number(req.body.bulkMinimumQuantity) || 0))
+    : null;
+  const booleanValue = name => String(req.body[name] ?? '') === 'true';
+  const requestedStockControlled = hasStockControlled
+    ? booleanValue('bulkStockControlled')
+    : null;
+
+  let backupFile = null;
+  try {
+    backupFile = backupProductsJson(file);
+  } catch (error) {
+    console.error('❌ Falha ao criar backup antes das operações em lote:', error);
+    return res.status(500).send('Não foi possível criar o backup de segurança do products.json. Nenhuma alteração foi aplicada.');
+  }
 
   let updated = 0;
+  let skipped = 0;
+  let errors = 0;
+  const changedFields = new Set();
+  const service = inventoryService(req.app);
 
   data.items.forEach(item => {
-    if (selectedIds.includes(Number(item.id))) {
-      item.category = category;
-      updated++;
+    if (!selectedIds.has(Number(item.id))) return;
+
+    const before = JSON.stringify(item);
+
+    try {
+      ensureInventoryIdentity(item, item);
+      const finalCategory = hasCategory ? requestedCategory : normalizeCategoryValue(item.category, categorias);
+
+      if (hasCategory) {
+        item.category = finalCategory;
+        changedFields.add('categoria');
+      }
+
+      if (hasSubcategory) {
+        item.subcategory = normalizeSubcategoryValue(
+          requestedSubcategoryRaw,
+          finalCategory,
+          categorias,
+          subcategorias
+        );
+        changedFields.add('subcategoria');
+      } else if (hasCategory) {
+        item.subcategory = normalizeSubcategoryValue(
+          item.subcategory ?? item.subcategoria ?? '',
+          finalCategory,
+          categorias,
+          subcategorias
+        );
+      }
+
+      if (hasErpActive) {
+        item.erp = item.erp && typeof item.erp === 'object' ? item.erp : {};
+        item.erp.active = booleanValue('bulkErpActive');
+        changedFields.add('status ERP');
+      }
+      if (hasLvActive || enabledActions.has('active')) {
+        const lvActive = hasLvActive ? booleanValue('bulkLvActive') : booleanValue('bulkActive');
+        item.active = lvActive;
+        item.virtualStore = item.virtualStore && typeof item.virtualStore === 'object' ? item.virtualStore : {};
+        item.virtualStore.active = lvActive;
+        item.virtualStore.channels = item.virtualStore.channels && typeof item.virtualStore.channels === 'object' ? item.virtualStore.channels : {};
+        item.virtualStore.channels.lojaVirtual = { enabled: lvActive };
+        changedFields.add('status LV');
+      }
+      if (enabledActions.has('showPrice')) {
+        item.showPrice = booleanValue('bulkShowPrice');
+        changedFields.add('preço');
+      }
+      if (enabledActions.has('detailsEnabled')) {
+        item.detailsEnabled = booleanValue('bulkDetailsEnabled');
+        changedFields.add('detalhes');
+      }
+      if (enabledActions.has('featured')) {
+        item.featured = booleanValue('bulkFeatured');
+        changedFields.add('vitrine');
+      }
+
+      if (hasStockControlled) {
+        item.inventory.stockControlled = requestedStockControlled;
+        changedFields.add('controle de estoque');
+      }
+
+      if (hasMinimumQuantity) {
+        item.inventory.minimumQuantity = requestedMinimumQuantity;
+        changedFields.add('estoque mínimo');
+      }
+
+      ensureInventoryIdentity(item, item);
+
+      if (item.inventory?.stockControlled === true && item.inventory?.itemId && (hasStockControlled || hasMinimumQuantity)) {
+        service.configurarItem({
+          inventoryItemId: item.inventory.itemId,
+          minimumQuantity: Math.max(0, Number(item.inventory.minimumQuantity) || 0)
+        });
+
+        if (hasStockControlled && requestedStockControlled === true) {
+          syncInventoryFromProduct(req, item, {
+            reason: 'Ativação do controle de estoque em lote',
+            initial: false
+          });
+        }
+      }
+
+      if (JSON.stringify(item) === before) skipped++;
+      else updated++;
+    } catch (error) {
+      errors++;
+      console.error(`⚠️ Falha na operação em lote do produto ${item.name || item.id}:`, error);
     }
   });
 
   writeJson(file, data);
-  console.log(`⚡ Categoria aplicada em massa: ${updated} produto(s).`);
-  res.redirect('/produtos?saved=bulk');
-});
+  console.log(
+    `⚡ Operações em lote: ${updated} alterado(s), ${skipped} sem mudança, ${errors} erro(s) | ` +
+    `${Array.from(changedFields).join(', ')} | backup: ${backupFile || 'não criado'}`
+  );
 
-router.post('/bulk-details', (req, res) => {
-  const file = path.join(P(req.app).CONTENT_DIR, 'products.json');
-  const data = readJson(file);
-  data.items = data.items || [];
-
-  const ids = Array.isArray(req.body.selectedIds)
-    ? req.body.selectedIds
-    : req.body.selectedIds
-      ? [req.body.selectedIds]
-      : [];
-
-  const selectedIds = ids.map(Number);
-  const enable = req.body.detailsAction === 'enable';
-
-  let updated = 0;
-
-  data.items.forEach(item => {
-    if (selectedIds.includes(Number(item.id))) {
-      item.detailsEnabled = enable;
-      updated++;
-    }
+  const params = new URLSearchParams({
+    saved: 'bulk',
+    updated: String(updated),
+    skipped: String(skipped),
+    errors: String(errors)
   });
-
-  writeJson(file, data);
-  console.log(`${enable ? '✅' : '🚫'} Detalhes ${enable ? 'ativados' : 'desativados'} em ${updated} produto(s).`);
-  res.redirect(`/produtos?saved=${enable ? 'details_on' : 'details_off'}`);
+  res.redirect(`/produtos?${params.toString()}`);
 });
+
 
 
 router.post('/duplicate', (req, res) => {

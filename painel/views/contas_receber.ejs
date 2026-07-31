@@ -1,0 +1,121 @@
+<% layout('layout') -%>
+<section class="finance-hero compact">
+  <div><span class="erp-kicker">FINANCEIRO · v<%= version %></span><h1>📥 Contas a Receber</h1><p>Acompanhe títulos, vencimentos e histórico financeiro originados no PDV.</p></div>
+  <div class="finance-header-actions"><a class="btn" href="/erp/financeiro">← Financeiro</a></div>
+</section>
+
+<%
+  const safeJson = value => JSON.stringify(value || {}).replace(/</g, '\\u003c');
+  const formatMoney = value => Number(value || 0).toLocaleString('pt-BR', { style:'currency', currency:'BRL' });
+  const formatDate = value => value ? new Date(String(value).length === 10 ? `${value}T12:00:00` : value).toLocaleDateString('pt-BR') : '—';
+  const statusLabels = { open:'Em aberto', partial:'Parcial', paid:'Recebido', cancelled:'Cancelado', reversed:'Estornado' };
+  const activeCustomers = (customers || []).filter(item => item.active !== false);
+  const methods = (catalogs.paymentMethods || []).filter(item => item.active !== false);
+  const costCenters = (catalogs.costCenters || []).filter(item => item.active !== false);
+  const accounts = (catalogs.accounts || []).filter(item => item.active !== false);
+%>
+<div id="receivablesApp">
+  <% if (reconciliation && reconciliation.created > 0) { %>
+    <section class="finance-info-card receivables-reconciliation"><div><h2>Integração recuperada automaticamente</h2><p><strong><%= reconciliation.created %> título(s)</strong> foram sincronizados com o Contas a Receber.</p></div><span class="finance-status">Sincronizado</span></section>
+  <% } %>
+
+  <section class="receivable-kpis" aria-label="Resumo do Contas a Receber">
+    <button type="button" class="receivable-kpi" data-summary-filter="open"><span>Em aberto</span><strong><%= formatMoney(summary.open.value) %></strong><small><%= summary.open.count %> título(s)</small></button>
+    <button type="button" class="receivable-kpi" data-summary-filter="today"><span>Vencem hoje</span><strong><%= formatMoney(summary.dueToday.value) %></strong><small><%= summary.dueToday.count %> parcela(s)</small></button>
+    <button type="button" class="receivable-kpi danger" data-summary-filter="overdue"><span>Vencidos</span><strong><%= formatMoney(summary.overdue.value) %></strong><small><%= summary.overdue.count %> parcela(s)</small></button>
+    <button type="button" class="receivable-kpi success" data-summary-filter="received-month"><span>Recebidos no mês</span><strong><%= formatMoney(summary.receivedMonth.value) %></strong><small><%= summary.receivedMonth.count %> recebimento(s)</small></button>
+  </section>
+
+  <section class="receivable-filter-panel">
+    <div class="receivable-search-row">
+      <label class="receivable-search"><span>Buscar</span><input id="receivableSearch" placeholder="Número, cliente ou origem"></label>
+      <label><span>Situação</span><select id="receivableStatus"><option value="">Todas</option><option value="open">Em aberto</option><option value="partial">Parcial</option><option value="paid">Recebido</option><option value="cancelled">Cancelado</option></select></label>
+      <button type="button" class="btn" id="toggleAdvancedFilters">Mais filtros</button>
+      <button type="button" class="btn btn-ghost" id="clearReceivableFilters">Limpar</button>
+    </div>
+    <div class="receivable-quick-filters" aria-label="Filtros rápidos por vencimento">
+      <button type="button" data-due-preset="">Todos</button>
+      <button type="button" data-due-preset="today">Hoje</button>
+      <button type="button" data-due-preset="overdue">Vencidos</button>
+      <button type="button" data-due-preset="next7">Próximos 7 dias</button>
+      <button type="button" data-due-preset="month">Este mês</button>
+    </div>
+    <div class="receivable-advanced-filters" id="receivableAdvancedFilters" hidden>
+      <label><span>Vencimento inicial</span><input type="date" id="receivableDueFrom"></label>
+      <label><span>Vencimento final</span><input type="date" id="receivableDueTo"></label>
+      <label><span>Cliente</span><select id="receivableCustomer"><option value="">Todos os clientes</option><% activeCustomers.forEach(item => { %><option value="<%= item.id %>"><%= item.name %></option><% }) %></select></label>
+      <label><span>Forma de pagamento</span><select id="receivablePaymentMethod"><option value="">Todas as formas</option><% methods.forEach(item => { %><option value="<%= item.id %>"><%= item.name %></option><% }) %></select></label>
+      <label><span>Centro de custo</span><select id="receivableCostCenter"><option value="">Todos</option><% costCenters.forEach(item => { %><option value="<%= item.id %>"><%= item.name %></option><% }) %></select></label>
+      <label><span>Plano de contas</span><select id="receivableAccount"><option value="">Todos</option><% accounts.forEach(item => { %><option value="<%= item.id %>"><%= item.name %></option><% }) %></select></label>
+    </div>
+  </section>
+
+  <section class="finance-panel receivable-list-panel">
+    <div class="receivable-list-meta"><strong id="receivableResultCount"><%= (titles || []).length %> título(s)</strong><span>Clique em uma linha para consultar os detalhes.</span></div>
+    <div class="finance-table-wrap"><table class="finance-table receivable-table"><thead><tr><th>Nº</th><th>Cliente</th><th>Origem</th><th>Próximo vencimento</th><th>Valor</th><th>Saldo</th><th>Situação</th></tr></thead><tbody id="receivablesBody">
+      <% if (!titles || !titles.length) { %>
+        <tr><td colspan="7" class="empty-state"><strong>Nenhuma conta a receber gerada.</strong><br>Finalize uma Venda ou O.S. configurada para gerar recebimentos futuros.</td></tr>
+      <% } else { titles.forEach(title => { const nextInstallment = (title.installments || []).find(item => Number(item.openBalance || 0) > 0); %>
+        <tr class="receivable-row" tabindex="0" data-open="<%= title.id %>" aria-label="Abrir título <%= title.number %>">
+          <td><b><%= title.number %></b></td><td><%= title.customerName %><small><%= title.customerDocument || '—' %></small></td><td><%= title.originLabel || '—' %></td><td><%= nextInstallment ? formatDate(nextInstallment.dueDate) : '—' %></td><td><%= formatMoney(title.netValue) %></td><td><%= formatMoney(title.openBalance) %></td><td><span class="finance-status <%= title.status === 'paid' ? '' : 'off' %>"><%= statusLabels[title.status] || title.status %></span></td>
+        </tr>
+      <% }) } %>
+    </tbody></table></div>
+  </section>
+</div>
+
+<script type="application/json" id="receivablesBootstrap"><%- safeJson({ titles, customers, catalogs, summary }) %></script>
+<div class="receivable-drawer-backdrop" id="receivableDrawerBackdrop" hidden></div>
+<aside class="receivable-drawer" id="receivableDrawer" aria-hidden="true" aria-label="Detalhes do título">
+  <div id="receivableDetail"></div>
+</aside>
+
+<div class="receivable-modal" id="receivableReceiveModal" hidden>
+  <div class="receivable-modal-backdrop" data-close-receive></div>
+  <section class="receivable-modal-card" role="dialog" aria-modal="true" aria-labelledby="receiveModalTitle">
+    <header class="receivable-modal-header">
+      <div><span>FINANCEIRO</span><h2 id="receiveModalTitle">Recebimento de parcela</h2><p id="receiveTitleLabel"></p></div>
+      <button type="button" data-close-receive aria-label="Fechar">×</button>
+    </header>
+
+    <form id="receivableReceiveForm">
+      <div id="receiveFormContent">
+        <section class="receivable-receive-summary">
+          <div><span>Parcela</span><b id="receiveInstallmentLabel">—</b></div>
+          <div><span>Saldo em aberto</span><strong id="receiveOpenBalance">R$ 0,00</strong></div>
+        </section>
+
+        <div class="receivable-receive-grid">
+          <label><span>Data do recebimento</span><input type="date" id="receiveDate" required></label>
+          <label><span>Juros</span><input id="receiveInterest" inputmode="decimal" value="0,00"></label>
+          <label><span>Multa</span><input id="receiveFine" inputmode="decimal" value="0,00"></label>
+          <label><span>Desconto</span><input id="receiveDiscount" inputmode="decimal" value="0,00"></label>
+        </div>
+
+        <section class="receivable-payment-box">
+          <header><div><span>Formas de pagamento</span><small>É possível dividir o recebimento entre mais de uma forma.</small></div><button type="button" class="btn" id="addReceivePayment">+ Adicionar forma</button></header>
+          <div id="receivePayments"></div>
+        </section>
+
+        <label class="receivable-notes"><span>Observação</span><textarea id="receiveNotes" rows="3" placeholder="Informação opcional para o histórico e comprovante"></textarea></label>
+
+        <section class="receivable-receive-totals">
+          <div><span>Total informado</span><b id="receivePaymentTotal">R$ 0,00</b></div>
+          <div><span>Aplicado ao saldo</span><b id="receivePrincipalTotal">R$ 0,00</b></div>
+          <div><span id="receiveDifference">Saldo após recebimento</span><strong id="receiveRemaining">R$ 0,00</strong></div>
+        </section>
+
+        <footer class="receivable-modal-actions"><button type="button" class="btn btn-ghost" data-close-receive>Cancelar</button><button type="submit" class="btn btn-success" id="confirmReceivableReceipt">Confirmar recebimento</button></footer>
+      </div>
+
+      <section class="receivable-receive-success" id="receiveSuccess" hidden>
+        <div class="receivable-success-icon">✓</div>
+        <h3 id="receiveSuccessMessage">Recebimento registrado.</h3>
+        <p>Valor recebido: <strong id="receiveSuccessValue">R$ 0,00</strong></p>
+        <div><button type="button" class="btn" id="printCurrentReceipt">Imprimir comprovante</button><button type="button" class="btn btn-success" id="finishCurrentReceipt">Concluir</button></div>
+      </section>
+    </form>
+  </section>
+</div>
+
+<script src="/public/js/contas-receber.js"></script>

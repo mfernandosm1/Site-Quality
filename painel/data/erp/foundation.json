@@ -1,0 +1,27 @@
+{
+  "version": "0.16.0",
+  "name": "Workspace de Produtos",
+  "status": "centro_operacoes",
+  "database": "SQLite planejado; implementação adiada até validação do modelo",
+  "sourceOfTruth": "ERP Core",
+  "multiCompanyReady": true,
+  "principles": [
+    "integração antes da implementação",
+    "base única de dados",
+    "módulos não são donos das entidades centrais",
+    "evolução incremental",
+    "compatibilidade com futura nuvem"
+  ],
+  "productMaster": {
+    "status": "ativo_inicial",
+    "source": "products.json",
+    "commercialPolicy": true,
+    "discountLevels": [
+      "categoria",
+      "produto",
+      "variacao"
+    ]
+  },
+  "productsWorkspace": "lista e novo cadastro separados com navegação por abas",
+  "finance": "foundation-active"
+}

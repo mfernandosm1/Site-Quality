@@ -1,0 +1,106 @@
+{
+  "version": "0.16.0",
+  "items": [
+    {
+      "id": "ACC-RECEITAS",
+      "code": "1",
+      "name": "Receitas",
+      "type": "receita",
+      "parentId": null,
+      "active": true,
+      "system": true,
+      "updatedAt": "2026-07-28T17:29:36.011Z",
+      "updatedBy": "painel",
+      "createdAt": "2026-07-28T17:29:36.011Z",
+      "createdBy": "painel",
+      "categoryId": "CAT-VENDAS"
+    },
+    {
+      "id": "ACC-VENDAS",
+      "code": "1.01",
+      "name": "Vendas de mercadorias",
+      "type": "receita",
+      "parentId": null,
+      "active": true,
+      "system": true,
+      "categoryId": "CAT-VENDAS"
+    },
+    {
+      "id": "ACC-SERVICOS",
+      "code": "1.02",
+      "name": "Serviços e assistência técnica",
+      "type": "receita",
+      "parentId": null,
+      "active": true,
+      "system": true,
+      "categoryId": "CAT-SERVICOS"
+    },
+    {
+      "id": "ACC-DESPESAS",
+      "code": "2",
+      "name": "Despesas",
+      "type": "despesa",
+      "parentId": null,
+      "active": true,
+      "system": true,
+      "categoryId": "CAT-OPERACIONAL"
+    },
+    {
+      "id": "ACC-CMV",
+      "code": "2.01",
+      "name": "Custo das mercadorias vendidas",
+      "type": "despesa",
+      "parentId": null,
+      "active": true,
+      "system": true,
+      "categoryId": "CAT-FORNECEDORES"
+    },
+    {
+      "id": "ACC-OPERACIONAIS",
+      "code": "2.02",
+      "name": "Despesas operacionais",
+      "type": "despesa",
+      "parentId": null,
+      "active": true,
+      "system": true,
+      "categoryId": "CAT-OPERACIONAL"
+    },
+    {
+      "id": "ACC-FINANCEIRAS",
+      "code": "2.03",
+      "name": "Despesas financeiras",
+      "type": "despesa",
+      "parentId": null,
+      "active": true,
+      "system": true,
+      "categoryId": "CAT-OPERACIONAL"
+    },
+    {
+      "id": "ACC-38642715-71f5-40ef-9933-c30286b6242f",
+      "name": "teste",
+      "code": "",
+      "active": true,
+      "categoryId": "CAT-FORNECEDORES",
+      "parentId": null,
+      "type": "despesa",
+      "updatedAt": "2026-07-28T18:27:33.491Z",
+      "updatedBy": "painel",
+      "createdAt": "2026-07-28T18:27:33.491Z",
+      "createdBy": "painel"
+    },
+    {
+      "id": "ACC-77185409-0110-4124-a1c4-48d73051bfe6",
+      "name": "testerr",
+      "code": "",
+      "active": true,
+      "categoryId": "CAT-SERVICOS",
+      "parentId": null,
+      "type": "receita",
+      "updatedAt": "2026-07-28T18:30:17.371Z",
+      "updatedBy": "painel",
+      "createdAt": "2026-07-28T18:30:17.371Z",
+      "createdBy": "painel"
+    }
+  ],
+  "updatedAt": "2026-07-28T18:41:38.414Z"
+}

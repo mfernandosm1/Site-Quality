@@ -1,0 +1,3 @@
+# Filosofia
+
+Princípios do projeto.

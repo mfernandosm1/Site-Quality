@@ -1,0 +1,47 @@
+<% layout('layout') -%>
+<section class="erp-hero">
+  <div>
+    <span class="erp-kicker">FUNDAÇÃO ERP · v<%= foundation.version %></span>
+    <h1>ERP Quality</h1>
+    <p>Base central para conectar clientes, produtos, site, WhatsApp, estoque, vendas, serviços e financeiro.</p>
+  </div>
+  <div class="erp-status-box">
+    <b>Estado atual</b>
+    <span>Arquitetura e integração</span>
+    <small>Clientes, Fornecedores, Estoque, Catálogo, Orçamentos e Compatibilidade já possuem acesso operacional.</small>
+  </div>
+</section>
+
+<section class="erp-principles">
+  <div><b>🧠 ERP como cérebro</b><span>Os módulos consomem uma base central.</span></div>
+  <div><b>🔗 Integração primeiro</b><span>Nenhum módulo nasce isolado.</span></div>
+  <div><b>🏢 Preparado para multiempresa</b><span>Estrutura prevê empresa_id desde a fundação.</span></div>
+  <div><b>🛡️ Evolução segura</b><span>Sem substituir módulos estáveis.</span></div>
+</section>
+
+<div class="erp-section-title">
+  <div><h2>Área ERP</h2><p>Mapa dos módulos planejados e suas responsabilidades.</p></div>
+  <span class="badge">Fundação ativa</span>
+</div>
+
+<div class="erp-grid">
+  <a class="erp-module-card" href="/kernel"><div class="erp-module-icon">🧠</div><div><h3>Centro de Inteligência</h3><p>Logs, eventos, auditoria, documentos e timelines de todos os módulos.</p><span class="erp-module-status">Ativo</span></div></a>
+  <% modules.forEach((item) => { %>
+    <a class="erp-module-card" href="/erp/modulo/<%= item.key %>">
+      <div class="erp-module-icon"><%= item.icon %></div>
+      <div>
+        <h3><%= item.name %></h3>
+        <p><%= item.description %></p>
+        <span class="erp-module-status"><%= item.status === 'ativo' ? 'Ativo' : 'Planejado' %></span>
+      </div>
+    </a>
+  <% }) %>
+</div>
+
+<section class="erp-flow-card">
+  <h2>Integração planejada</h2>
+  <div class="erp-flow">
+    <span>ERP Core</span><i>→</i><span>Produtos</span><i>→</i><span>Site</span><i>→</i><span>WhatsApp</span><i>→</i><span>Venda</span><i>→</i><span>Estoque + Financeiro</span>
+  </div>
+  <p>O site continuará estático e rápido. Os produtos serão administrados no ERP e exportados com segurança para o site.</p>
+</section>

@@ -1,0 +1,54 @@
+<% layout('layout') -%>
+<section class="ops-hero compact">
+  <div><span class="ops-kicker">FUNDAÇÃO DA PLATAFORMA</span><h1>⚙️ Configurações</h1><p>Dados centrais da empresa e preparação para módulos, unidades e diferentes segmentos.</p></div>
+  <span class="ops-badge foundation">Estrutura inicial</span>
+</section>
+
+<div class="settings-layout">
+  <section class="settings-main">
+    <div class="settings-card">
+      <div class="settings-card-head"><div><h2>🏢 Empresa ativa</h2><p>Esses dados futuramente serão utilizados pelo ERP, Site, WhatsApp, documentos e integrações.</p></div><span class="ops-badge planned">Somente leitura nesta versão</span></div>
+      <div class="settings-fields">
+        <div><label>Nome da plataforma</label><strong><%= company.platformName || 'Painel' %></strong></div>
+        <div><label>Nome fantasia</label><strong><%= company.tradeName || 'Quality Celulares' %></strong></div>
+        <div><label>Razão social</label><strong><%= company.legalName || 'A configurar' %></strong></div>
+        <div><label>Segmento</label><strong><%= company.segmentLabel || 'Comércio de celulares e eletrônicos' %></strong></div>
+        <div><label>Empresa</label><strong><%= company.companyId || 'quality' %></strong></div>
+        <div><label>Unidade ativa</label><strong><%= company.unitName || 'Matriz' %></strong></div>
+      </div>
+    </div>
+
+    <div class="settings-card">
+      <h2>🧩 Áreas de configuração planejadas</h2>
+      <div class="settings-section-grid">
+        <% [
+          ['🏢','Empresa','Dados cadastrais, contatos, endereço e identidade.'],
+          ['🏬','Filiais e unidades','Matriz, lojas, escritórios ou outras unidades.'],
+          ['🧩','Módulos','Ativar apenas as áreas necessárias para cada empresa.'],
+          ['👤','Usuários e permissões','Perfis, acessos e responsabilidades.'],
+          ['💼','Operação','Regras comerciais, estoque, compras e atendimento.'],
+          ['💰','Financeiro','Formas de pagamento, plano de contas, centros de custo e parâmetros.','/configuracoes/financeiro'],
+          ['🧾','Fiscal','Configurações fiscais isoladas e protegidas.'],
+          ['🔌','Integrações','Site, WhatsApp, APIs e serviços externos.'],
+          ['🎨','Identidade','Logo, nome, cores e aparência por empresa.'],
+          ['🛡️','Logs e auditoria','Acessos, atividades, eventos, alterações e rastreabilidade.','/kernel']
+        ].forEach(function(section){ %>
+          <% if (section[3]) { %>
+            <a class="settings-section settings-section-link" href="<%= section[3] %>"><span><%= section[0] %></span><div><h3><%= section[1] %></h3><p><%= section[2] %></p><b>Abrir configurações →</b></div></a>
+          <% } else { %>
+            <div class="settings-section"><span><%= section[0] %></span><div><h3><%= section[1] %></h3><p><%= section[2] %></p></div></div>
+          <% } %>
+        <% }) %>
+      </div>
+      <div class="settings-admin-actions">
+        <a class="settings-admin-link" href="/kernel"><span>📜</span><div><strong>Logs e Auditoria</strong><small>Pesquisar ações, abrir detalhes e exportar registros.</small></div><b>→</b></a>
+        <div class="settings-admin-link planned"><span>🔐</span><div><strong>Usuários e Permissões</strong><small>Estrutura preparada; ativação junto com login e sessões.</small></div><b>Planejado</b></div>
+        <div class="settings-admin-link planned"><span>📄</span><div><strong>Centro de Documentos</strong><small>Numeração universal e relacionamentos entre operações.</small></div><b>Fundação</b></div>
+      </div>
+    </div>
+  </section>
+
+  <aside class="settings-side">
+    <div class="settings-card sticky-card"><h2>Princípio da plataforma</h2><p>O núcleo deve permanecer genérico. A Quality é a primeira empresa, mas a arquitetura deverá atender comércio, serviços, escritórios e outros segmentos.</p><div class="platform-levels"><span>Plataforma</span><i>↓</i><span>Empresa</span><i>↓</i><span>Unidade</span><i>↓</i><span>Módulos</span></div></div>
+  </aside>
+</div>

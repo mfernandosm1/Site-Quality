@@ -1,0 +1,76 @@
+<% layout('layout') -%>
+<% const dateTime = value => value ? new Date(value).toLocaleString('pt-BR') : '—'; %>
+<% const labelResult = { success:'Sucesso', error:'Erro', warning:'Atenção' }; %>
+<% const params = extra => new URLSearchParams({ q:filters.search||'', modulo:filters.module||'', tipo:filters.source||'', resultado:filters.result||'', usuario:filters.actor||'', de:filters.from||'', ate:filters.to||'', pagina:result.page, ...(extra||{}) }).toString(); %>
+
+<section class="erp-history-hero">
+  <div><span class="erp-kicker">QUALITY ERP · v0.17.4</span><h1>🕘 Histórico do ERP</h1><p>Timeline global das atividades, auditorias e alterações registradas no painel.</p></div>
+  <div class="erp-history-hero-actions"><a class="btn" href="/configuracoes">Configurações</a><a class="btn" href="/kernel">Logs técnicos</a></div>
+</section>
+
+<section class="erp-history-summary">
+  <article><span>REGISTROS ENCONTRADOS</span><strong><%= result.total %></strong><small>Conforme os filtros atuais</small></article>
+  <article><span>ATIVIDADES DE HOJE</span><strong><%= result.summary.today %></strong><small>No conjunto filtrado</small></article>
+  <article><span>AUDITORIAS</span><strong><%= result.summary.critical %></strong><small>Alterações críticas</small></article>
+  <article class="<%= result.summary.errors ? 'has-alert' : '' %>"><span>ERROS</span><strong><%= result.summary.errors %></strong><small>Registros com falha</small></article>
+  <article><span>USUÁRIOS</span><strong><%= result.summary.actors %></strong><small>Responsáveis distintos</small></article>
+</section>
+
+<form class="erp-history-filters" method="get" action="/erp/historico">
+  <label class="erp-history-search"><span>Pesquisa global</span><input name="q" value="<%= filters.search %>" placeholder="Venda, cliente, produto, ação, documento, usuário..."></label>
+  <label><span>Módulo</span><select name="modulo"><option value="">Todos</option><% facets.modules.forEach(value => { %><option value="<%= value %>" <%= filters.module===value?'selected':'' %>><%= value %></option><% }) %></select></label>
+  <label><span>Tipo de registro</span><select name="tipo"><option value="">Todos</option><option value="log" <%= filters.source==='log'?'selected':'' %>>Atividade</option><option value="timeline" <%= filters.source==='timeline'?'selected':'' %>>Timeline</option><option value="audit" <%= filters.source==='audit'?'selected':'' %>>Auditoria</option></select></label>
+  <label><span>Resultado</span><select name="resultado"><option value="">Todos</option><% facets.results.forEach(value => { %><option value="<%= value %>" <%= filters.result===value?'selected':'' %>><%= labelResult[value] || value %></option><% }) %></select></label>
+  <label><span>Usuário</span><select name="usuario"><option value="">Todos</option><% facets.actors.forEach(value => { %><option value="<%= value %>" <%= filters.actor===value?'selected':'' %>><%= value %></option><% }) %></select></label>
+  <label><span>De</span><input type="date" name="de" value="<%= filters.from %>"></label>
+  <label><span>Até</span><input type="date" name="ate" value="<%= filters.to %>"></label>
+  <div class="erp-history-filter-actions"><a class="btn" href="/erp/historico">Limpar</a><button class="btn btn-primary" type="submit">Buscar</button></div>
+</form>
+
+<section class="erp-history-content">
+  <header><div><h2>Linha do tempo</h2><p><%= result.total %> acontecimento(s) localizado(s).</p></div><span>Página <b><%= result.page %></b> de <b><%= result.pages %></b></span></header>
+  <div class="erp-history-list">
+    <% if (!result.items.length) { %><div class="erp-history-empty"><b>Nenhum registro encontrado</b><span>Ajuste os filtros ou limpe a pesquisa para consultar todo o histórico.</span></div><% } %>
+    <% result.items.forEach(item => { %>
+      <article class="erp-history-item is-<%= item.result %> is-<%= item.source %>">
+        <div class="erp-history-marker"><span><%= item.icon %></span><i></i></div>
+        <div class="erp-history-card">
+          <div class="erp-history-card-head"><div><span class="erp-history-type"><%= item.sourceLabel %> · <%= item.moduleLabel %></span><h3><%= item.title %></h3></div><time><%= dateTime(item.at) %></time></div>
+          <div class="erp-history-meta"><span>👤 <%= item.actor %></span><span>⚙️ <%= item.action %></span><span class="erp-history-result is-<%= item.result %>"><%= labelResult[item.result] || item.result %></span><% if(item.documentId){ %><span>📄 <%= item.documentId %></span><% } %><% if(item.entityId){ %><span>🔗 <%= item.entityId %></span><% } %></div>
+          <div class="erp-history-card-actions"><small><%= item.route || item.category || item.rawId %></small><a class="btn btn-small" href="/erp/historico?<%= params({ registro:item.id }) %>">Ver detalhes</a></div>
+        </div>
+      </article>
+    <% }) %>
+  </div>
+  <nav class="erp-history-pagination">
+    <a class="btn <%= result.page<=1?'disabled':'' %>" href="/erp/historico?<%= params({ pagina:Math.max(1,result.page-1), registro:'' }) %>">← Anterior</a>
+    <span>Página <strong><%= result.page %></strong> de <strong><%= result.pages %></strong></span>
+    <a class="btn <%= result.page>=result.pages?'disabled':'' %>" href="/erp/historico?<%= params({ pagina:Math.min(result.pages,result.page+1), registro:'' }) %>">Próxima →</a>
+  </nav>
+</section>
+
+<% if (selectedItem) { %>
+<div class="erp-history-detail-backdrop" data-history-backdrop><section class="erp-history-detail-panel">
+  <header><div><span><%= selectedItem.sourceLabel %> · <%= selectedItem.moduleLabel %></span><h2><%= selectedItem.title %></h2><p><%= dateTime(selectedItem.at) %></p></div><button type="button" data-history-close aria-label="Fechar">×</button></header>
+  <div class="erp-history-detail-grid">
+    <% [['Registro',selectedItem.rawId],['Tipo',selectedItem.sourceLabel],['Módulo',selectedItem.moduleLabel],['Ação',selectedItem.action],['Usuário',selectedItem.actor],['Resultado',labelResult[selectedItem.result]||selectedItem.result],['Categoria',selectedItem.category||'—'],['Documento',selectedItem.documentId||'—'],['Entidade',selectedItem.entityId||'—'],['Rota',selectedItem.route||'—'],['Método',selectedItem.method||'—'],['IP',selectedItem.ip||'—']].forEach(field => { %><div><span><%= field[0] %></span><strong><%= field[1] %></strong></div><% }) %>
+  </div>
+  <% if(selectedItem.reason){ %><div class="erp-history-detail-block"><span>Motivo</span><p><%= selectedItem.reason %></p></div><% } %>
+  <div class="erp-history-detail-block"><span>Detalhes registrados</span><pre><%= selectedItem.details ? JSON.stringify(selectedItem.details,null,2) : 'Sem detalhes adicionais.' %></pre></div>
+  <% if(selectedItem.source==='audit'){ %><div class="erp-history-audit-compare"><div><span>Antes</span><pre><%= selectedItem.before !== null ? JSON.stringify(selectedItem.before,null,2) : 'Não informado.' %></pre></div><div><span>Depois</span><pre><%= selectedItem.after !== null ? JSON.stringify(selectedItem.after,null,2) : 'Não informado.' %></pre></div></div><% } %>
+</section></div>
+<% } %>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const close = () => {
+    document.querySelector('[data-history-backdrop]')?.remove();
+    const url = new URL(window.location.href);
+    url.searchParams.delete('registro');
+    history.replaceState({}, '', url.pathname + (url.search ? url.search : ''));
+  };
+  document.querySelector('[data-history-close]')?.addEventListener('click', close);
+  document.querySelector('[data-history-backdrop]')?.addEventListener('click', event => { if (event.target === event.currentTarget) close(); });
+  document.addEventListener('keydown', event => { if (event.key === 'Escape') close(); });
+});
+</script>

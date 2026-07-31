@@ -1,8 +1,34 @@
 import fs from 'fs';
 import path from 'path';
 
+// Mantém o Inbox isolado por conta conectada. O WeakMap evita estado global
+// compartilhado entre instâncias do app e não persiste dados sensíveis em memória.
+const activeInboxAccounts = new WeakMap();
+
+function normalizeAccountKey(value=''){
+  const key = digits(value);
+  return key ? key.slice(0, 20) : '';
+}
+
+export function setInboxAccount(app, accountNumber){
+  const key = normalizeAccountKey(accountNumber);
+  if(!key) throw new Error('Não foi possível identificar a conta do WhatsApp.');
+  activeInboxAccounts.set(app, key);
+  ensureInboxStorage(app);
+  return key;
+}
+
+export function clearInboxAccount(app){
+  activeInboxAccounts.delete(app);
+}
+
+export function getInboxAccount(app){
+  return activeInboxAccounts.get(app) || null;
+}
+
 function paths(app){
-  const root = path.join(app.locals.paths.CONTENT_DIR, 'automacao_whatsapp', 'inbox');
+  const accountKey = getInboxAccount(app) || '__disconnected__';
+  const root = path.join(app.locals.paths.CONTENT_DIR, 'automacao_whatsapp', 'inbox', 'accounts', accountKey);
   return {
     root,
     conversationsFile: path.join(root, 'conversations.json'),
@@ -61,7 +87,7 @@ function extensionFromMime(mime='', originalName=''){
   if(original && /^\.[a-z0-9]{1,8}$/.test(original)) return original;
   const map = {
     'image/jpeg':'.jpg','image/png':'.png','image/webp':'.webp','image/gif':'.gif',
-    'audio/ogg':'.ogg','audio/mpeg':'.mp3','audio/mp4':'.m4a','audio/webm':'.webm',
+    'audio/ogg':'.ogg','audio/oga':'.oga','audio/mpeg':'.mp3','audio/mp4':'.m4a','audio/webm':'.webm',
     'video/mp4':'.mp4','video/webm':'.webm','application/pdf':'.pdf',
     'application/msword':'.doc','application/vnd.openxmlformats-officedocument.wordprocessingml.document':'.docx',
     'application/vnd.ms-excel':'.xls','application/vnd.openxmlformats-officedocument.spreadsheetml.sheet':'.xlsx',
@@ -70,7 +96,8 @@ function extensionFromMime(mime='', originalName=''){
   return map[String(mime || '').toLowerCase()] || '';
 }
 function mediaKind(type='', mime=''){
-  if(String(mime).startsWith('image/') || ['image','sticker'].includes(type)) return 'image';
+  if(type === 'sticker') return 'sticker';
+  if(String(mime).startsWith('image/') || type === 'image') return 'image';
   if(String(mime).startsWith('audio/') || ['audio','ptt'].includes(type)) return 'audio';
   if(String(mime).startsWith('video/') || type === 'video') return 'video';
   return 'document';
@@ -127,13 +154,98 @@ function savedContactFor(contacts, conversation){
   )) || null;
 }
 
+
+const CONVERSATION_STATES = ['open','closed'];
+const CLOSE_REASONS = ['customer_bought','customer_gave_up','will_think','no_interest','completed','other'];
+
+function withCommercialLifecycle(conversation={}){
+  if(conversation.conversationType === 'group') return conversation;
+  const state = CONVERSATION_STATES.includes(conversation.attendanceState) ? conversation.attendanceState : 'open';
+  return {
+    ...conversation,
+    attendanceState:state,
+    attendanceOpenedAt:conversation.attendanceOpenedAt || conversation.firstContactAt || conversation.createdAt || now(),
+    attendanceClosedAt:state === 'closed' ? (conversation.attendanceClosedAt || conversation.updatedAt || null) : null,
+    attendanceClosedReason:state === 'closed' ? (conversation.attendanceClosedReason || 'completed') : null,
+    attendanceClosedBy:state === 'closed' ? (conversation.attendanceClosedBy || 'operador') : null,
+    attendanceReopenedAt:conversation.attendanceReopenedAt || null,
+    attendanceCloseCount:Number(conversation.attendanceCloseCount || 0),
+    attendanceReopenCount:Number(conversation.attendanceReopenCount || 0),
+    attendanceHistory:Array.isArray(conversation.attendanceHistory) ? conversation.attendanceHistory : []
+  };
+}
+
+function persistConversationMutation(app, conversationId, mutate){
+  const p=ensureInboxStorage(app);
+  const data=readJson(p.conversationsFile,{version:5,conversations:[]});
+  const conversations=listFrom(data,'conversations');
+  const conversation=conversations.find(c=>c.id===String(conversationId||''));
+  if(!conversation) throw new Error('Conversa não encontrada.');
+  if(conversation.conversationType==='group' || isGroup(conversation.whatsappId)) throw new Error('Grupos não possuem ciclo comercial.');
+  Object.assign(conversation,withCommercialLifecycle(conversation));
+  mutate(conversation);
+  conversation.updatedAt=now();
+  atomicWriteJson(p.conversationsFile,{version:5,conversations});
+  return conversation;
+}
+
+export function updateConversationAttendance(app, conversationId, changes={}){
+  const action=safeText(changes.action,20);
+  const actor=safeText(changes.actor || 'operador',120) || 'operador';
+  return persistConversationMutation(app,conversationId,conversation=>{
+    const timestamp=now();
+    if(action==='close'){
+      const reason=CLOSE_REASONS.includes(changes.reason) ? changes.reason : 'completed';
+      if(conversation.attendanceState!=='closed') conversation.attendanceCloseCount=Number(conversation.attendanceCloseCount||0)+1;
+      conversation.attendanceState='closed';
+      conversation.attendanceClosedAt=timestamp;
+      conversation.attendanceClosedReason=reason;
+      conversation.attendanceClosedBy=actor;
+      conversation.awaitingResponse=false;
+      conversation.waitingSince=null;
+      conversation.attendanceHistory=[...(conversation.attendanceHistory||[]),{action:'closed',at:timestamp,reason,by:actor}].slice(-100);
+      if(reason==='customer_bought'){
+        conversation.commercialStatus='completed_sale';
+        conversation.commercialStatusUpdatedAt=timestamp;
+      } else if(reason==='customer_gave_up'){
+        conversation.commercialStatus='lost';
+        conversation.commercialStatusUpdatedAt=timestamp;
+      } else if(reason==='no_interest'){
+        conversation.commercialStatus='no_potential';
+        conversation.commercialStatusUpdatedAt=timestamp;
+      }
+    } else if(action==='reopen'){
+      if(conversation.attendanceState==='closed') conversation.attendanceReopenCount=Number(conversation.attendanceReopenCount||0)+1;
+      conversation.attendanceState='open';
+      conversation.attendanceOpenedAt=timestamp;
+      conversation.attendanceReopenedAt=timestamp;
+      conversation.attendanceClosedAt=null;
+      conversation.attendanceClosedReason=null;
+      conversation.attendanceClosedBy=null;
+      conversation.attendanceHistory=[...(conversation.attendanceHistory||[]),{action:'reopened',at:timestamp,by:actor}].slice(-100);
+    } else throw new Error('Ação de atendimento inválida.');
+  });
+}
+
+export function bulkUpdateConversationAttendance(app, conversationIds=[], changes={}){
+  const ids=[...new Set((Array.isArray(conversationIds)?conversationIds:[]).map(v=>safeText(v,80).replace(/[^a-zA-Z0-9_-]/g,'')).filter(Boolean))];
+  if(!ids.length) throw new Error('Selecione ao menos uma conversa.');
+  const updated=[];
+  const errors=[];
+  for(const id of ids){
+    try{ updated.push(updateConversationAttendance(app,id,changes)); }
+    catch(error){ errors.push({id,message:error.message}); }
+  }
+  return {updated:updated.length,errors};
+}
+
 export function getInboxData(app){
   const p = ensureInboxStorage(app);
   const contacts = listFrom(readJson(p.contactsFile,{contacts:[]}), 'contacts');
   const conversations = listFrom(readJson(p.conversationsFile,{conversations:[]}), 'conversations')
     .map(c => {
       const conversationType = c.conversationType || (isGroup(c.whatsappId) || String(c.id||'').startsWith('group_') ? 'group' : 'contact');
-      return { ...c, conversationType, contactSaved:conversationType === 'contact' && Boolean(savedContactFor(contacts,c)) };
+      return withCommercialLifecycle({ ...c, conversationType, contactSaved:conversationType === 'contact' && Boolean(savedContactFor(contacts,c)) });
     })
     .sort((a,b)=>String(b.lastMessageAt||'').localeCompare(String(a.lastMessageAt||'')));
   return { conversations, contacts:contacts.filter(c => c.manuallySaved === true) };
@@ -152,7 +264,8 @@ export function getInboxSummary(app){
   return {
     groups: groups.length,
     total: conversations.length,
-    awaitingResponse: conversations.filter(c => c.awaitingResponse).length,
+    awaitingResponse: conversations.filter(c => c.attendanceState !== 'closed' && c.awaitingResponse).length,
+    closedAttendances: conversations.filter(c => c.attendanceState === 'closed').length,
     newContacts: conversations.filter(c => c.commercialStatus === 'new').length,
     inProgress: conversations.filter(c => c.commercialStatus === 'in_progress').length,
     pending: conversations.filter(c => c.commercialStatus === 'pending').length,
@@ -175,6 +288,9 @@ export function getCommercialDashboard(app){
   const lost = byStatus.lost || 0;
   const qualifiedBase = completed + lost;
   const conversionRate = qualifiedBase ? Math.round((completed / qualifiedBase) * 100) : 0;
+  const nowMs=Date.now();
+  const waitSeconds=c=>c.awaitingResponse && c.waitingSince ? Math.max(0,Math.round((nowMs-new Date(c.waitingSince).getTime())/1000)) : 0;
+  const open=c=>c.attendanceState !== 'closed' && !['completed_sale','lost','no_potential'].includes(c.commercialStatus || 'new');
   const interests = new Map();
   for(const conversation of conversations){
     const interest = safeText(conversation.interestProduct,220);
@@ -185,13 +301,31 @@ export function getCommercialDashboard(app){
     interests.set(key,current);
   }
   const topInterests = [...interests.values()].sort((a,b)=>b.total-a.total || a.name.localeCompare(b.name,'pt-BR')).slice(0,8);
-  const opportunities = conversations.filter(c => !['completed_sale','lost','no_potential'].includes(c.commercialStatus || 'new'))
-    .sort((a,b)=>Number(Boolean(b.awaitingResponse))-Number(Boolean(a.awaitingResponse)) || String(b.lastMessageAt||'').localeCompare(String(a.lastMessageAt||'')))
-    .slice(0,30);
+  const allOpportunities = conversations.filter(open).map(c=>{
+    const waitingSeconds=waitSeconds(c);
+    const dueMs=c.nextActionDueAt ? new Date(c.nextActionDueAt).getTime() : null;
+    const nextActionOverdue=Number.isFinite(dueMs) && dueMs < nowMs;
+    let attentionLevel='normal';
+    if(c.awaitingResponse && waitingSeconds>=7200) attentionLevel='critical';
+    else if(c.awaitingResponse && waitingSeconds>=1800) attentionLevel='warning';
+    else if(nextActionOverdue) attentionLevel='warning';
+    return {...c,waitingSeconds,nextActionOverdue,attentionLevel};
+  }).sort((a,b)=>{
+    const score={critical:3,warning:2,normal:1};
+    return (score[b.attentionLevel]-score[a.attentionLevel]) || Number(Boolean(b.awaitingResponse))-Number(Boolean(a.awaitingResponse)) || String(b.lastMessageAt||'').localeCompare(String(a.lastMessageAt||''));
+  });
+  const opportunities=allOpportunities.slice(0,50);
+  const awaiting=allOpportunities.filter(c=>c.awaitingResponse);
   return {
     total:conversations.length,
+    closedAttendances:conversations.filter(c=>c.attendanceState==='closed').length,
     activePipeline:(byStatus.new||0)+(byStatus.in_progress||0)+(byStatus.pending||0),
     awaitingResponse:conversations.filter(c=>c.awaitingResponse).length,
+    waitingOver30m:awaiting.filter(c=>c.waitingSeconds>=1800).length,
+    waitingOver2h:awaiting.filter(c=>c.waitingSeconds>=7200).length,
+    structuredPending:allOpportunities.filter(c=>(c.pendingType&&c.pendingType!=='none') || c.pendingNote).length,
+    withoutNextAction:allOpportunities.filter(c=>!safeText(c.nextAction,500)).length,
+    overdueNextActions:allOpportunities.filter(c=>c.nextActionOverdue).length,
     completedSales:completed,
     conversionRate,
     averageFirstResponseSeconds,
@@ -276,13 +410,37 @@ async function browserChatSnapshots(client){
   }catch{return [];}
 }
 
-async function getChatCatalog(client){
+function providerChatToSnapshot(chat={}){
+  return {
+    id:String(chat?.id || ''),
+    isGroup:Boolean(chat?.isGroup || String(chat?.id || '').endsWith('@g.us')),
+    name:String(chat?.name || ''),
+    formattedTitle:String(chat?.formattedTitle || chat?.name || ''),
+    subject:String(chat?.subject || ''),
+    unreadCount:Number(chat?.unreadCount || 0),
+    timestamp:Number(chat?.timestamp || 0),
+    participantCount:Number.isFinite(Number(chat?.participantCount)) ? Number(chat.participantCount) : null,
+    contactNumber:String(chat?.contact?.number || ''),
+    contactId:String(chat?.contact?.id || ''),
+    contactName:String(chat?.contact?.name || chat?.contact?.pushname || chat?.contact?.shortName || '')
+  };
+}
+
+async function getChatCatalog(client, provider=null){
+  if(provider?.getChatsSafe){
+    try{
+      const result=await provider.getChatsSafe();
+      const snapshots=(result?.chats || []).map(providerChatToSnapshot)
+        .filter(item=>item.id && item.id!=='status@broadcast');
+      if(snapshots.length) return { chats:[], snapshots, source:'provider', providerStats:result?.stats || null };
+    }catch{}
+  }
   try{
     const chats=await client.getChats();
-    if(Array.isArray(chats) && chats.length) return { chats, snapshots:[] };
+    if(Array.isArray(chats) && chats.length) return { chats, snapshots:[], source:'public_api' };
   }catch{}
   const snapshots=await browserChatSnapshots(client);
-  return { chats:[], snapshots };
+  return { chats:[], snapshots, source:'browser_store' };
 }
 
 function canonicalIncomingMessageId(msg, rawChatId, fromMe){
@@ -496,6 +654,9 @@ export async function registerWhatsAppMessage(app, msg, client=null, options={})
 
   const timestamp = msg.timestamp ? new Date(Number(msg.timestamp)*1000).toISOString() : now();
   const rawType = safeText(msg.type || 'chat',40);
+  if(['notification_template','gp2','protocol'].includes(rawType)){
+    return { ignored:true, reason:'mensagem_de_sistema', type:rawType };
+  }
   const isCallNotice = rawType === 'e2e_notification' || rawType === 'call_log';
   const type = isCallNotice ? 'call_notification' : rawType;
   const text = isCallNotice ? '📞 Chamada pelo WhatsApp' : safeText(msg.body || '',6000);
@@ -513,7 +674,10 @@ export async function registerWhatsAppMessage(app, msg, client=null, options={})
       lastIncomingAt:null, lastOutgoingAt:null, awaitingResponse:false, waitingSince:null, unreadCount:0,
       commercialStatus:group?null:'new', commercialStatusUpdatedAt:group?null:timestamp,
       origin:group?'group':'unknown', originMode:group?'system':'automatic',
-      interestProduct:'', originPage:null, firstResponseAt:null, firstResponseTimeSeconds:null, archived:false
+      interestProduct:'', originPage:null, firstResponseAt:null, firstResponseTimeSeconds:null, archived:false,
+      attendanceState:group?null:'open', attendanceOpenedAt:group?null:timestamp, attendanceClosedAt:null,
+      attendanceClosedReason:null, attendanceClosedBy:null, attendanceReopenedAt:null,
+      attendanceCloseCount:0, attendanceReopenCount:0, attendanceHistory:[]
     };
     conversations.push(conversation);
   }
@@ -568,6 +732,17 @@ export async function registerWhatsAppMessage(app, msg, client=null, options={})
     conversation.lastIncomingAt=timestamp;
     if(!options?.historical) conversation.unreadCount=Number(conversation.unreadCount||0)+1;
     if(!group){
+      Object.assign(conversation,withCommercialLifecycle(conversation));
+      if(conversation.attendanceState==='closed' && !options?.historical){
+        conversation.attendanceState='open';
+        conversation.attendanceOpenedAt=timestamp;
+        conversation.attendanceReopenedAt=timestamp;
+        conversation.attendanceClosedAt=null;
+        conversation.attendanceClosedReason=null;
+        conversation.attendanceClosedBy=null;
+        conversation.attendanceReopenCount=Number(conversation.attendanceReopenCount||0)+1;
+        conversation.attendanceHistory=[...(conversation.attendanceHistory||[]),{action:'reopened_automatically',at:timestamp,by:'nova_mensagem_cliente'}].slice(-100);
+      }
       if(!conversation.awaitingResponse) conversation.waitingSince=timestamp;
       conversation.awaitingResponse=true;
       if(wasNew || conversation.origin==='unknown'){
@@ -595,14 +770,14 @@ export async function registerWhatsAppMessage(app, msg, client=null, options={})
   };
 }
 
-export async function repairInboxContactNames(app, client){
+export async function repairInboxContactNames(app, client, options={}){
   const p=ensureInboxStorage(app);
   const data=readJson(p.conversationsFile,{version:4,conversations:[]});
   const conversations=listFrom(data,'conversations');
   const contacts=conversations.filter(c=>c.conversationType!=='group' && !isGroup(c.whatsappId));
   if(!client || !contacts.length) return {updated:0,unresolved:contacts.length,total:contacts.length};
   const ownName=safeText(client?.info?.pushname || '',160);
-  const catalog=await getChatCatalog(client);
+  const catalog=await getChatCatalog(client, options.provider);
   const byId=new Map((catalog.chats||[]).map(chat=>[serializedId(chat?.id),chat]));
   const snapshots=catalog.snapshots||[];
   const snapById=new Map(snapshots.map(item=>[item.id,item]));
@@ -632,7 +807,7 @@ export async function syncInboxFromWhatsApp(app,client,options={}){
   ensureInboxStorage(app);
   const chatLimit=Math.min(200,Math.max(20,Number(options.chatLimit)||120));
   const messageLimit=Math.min(120,Math.max(20,Number(options.messageLimit)||60));
-  const catalog=await getChatCatalog(client);
+  const catalog=await getChatCatalog(client, options.provider);
   let entries=[];
   if(catalog.chats.length){
     entries=catalog.chats.map(chat=>({id:serializedId(chat.id),chat,snapshot:null,timestamp:Number(chat?.timestamp||0)}));
@@ -651,9 +826,10 @@ export async function syncInboxFromWhatsApp(app,client,options={}){
       fetched=(fetched||[]).slice().sort((a,b)=>Number(a?.timestamp||0)-Number(b?.timestamp||0));
       totalMessages+=fetched.length;
       for(const message of fetched){
-        if(typeof options.onMessage==='function') options.onMessage(message);
+        if(typeof options.onMessage==='function') await options.onMessage(message);
         const result=await registerWhatsAppMessage(app,message,client,{historical:true,chatOverride:chat});
         if(result?.saved) saved+=1;
+        if(typeof options.onRegistered==='function') await options.onRegistered(message,result);
       }
       const p=ensureInboxStorage(app);
       const data=readJson(p.conversationsFile,{version:4,conversations:[]});
@@ -683,16 +859,16 @@ export async function syncInboxFromWhatsApp(app,client,options={}){
       }
     }catch{ errors+=1; }
   }
-  return {chats:entries.length,resolvedChats,messages:totalMessages,saved,errors,source:catalog.chats.length?'public_api':'browser_store'};
+  return {chats:entries.length,resolvedChats,messages:totalMessages,saved,errors,source:catalog.source || (catalog.chats.length?'public_api':'browser_store'),providerStats:catalog.providerStats || null};
 }
 
-export async function repairInboxGroupNames(app, client){
+export async function repairInboxGroupNames(app, client, options={}){
   const p=ensureInboxStorage(app);
   const data=readJson(p.conversationsFile,{version:4,conversations:[]});
   const conversations=listFrom(data,'conversations');
   const groups=conversations.filter(c=>c.conversationType==='group' || isGroup(c.whatsappId));
   if(!client || !groups.length) return {updated:0,unresolved:groups.length,total:groups.length};
-  const catalog=await getChatCatalog(client);
+  const catalog=await getChatCatalog(client, options.provider);
   const snapshots=catalog.snapshots||[];
   const key=value=>String(value||'').replace(/\D/g,'');
   const byExact=new Map(); const byKey=new Map();
@@ -712,7 +888,7 @@ export async function repairInboxGroupNames(app, client){
     if(Number.isFinite(Number(count))) group.groupParticipantCount=Number(count);
   }
   if(updated) atomicWriteJson(p.conversationsFile,{version:4,conversations});
-  return {updated,unresolved,total:groups.length,source:catalog.chats.length?'public_api':'browser_store'};
+  return {updated,unresolved,total:groups.length,source:catalog.source || (catalog.chats.length?'public_api':'browser_store')};
 }
 
 export function storeInboxMediaFile(app, conversationId, messageId, buffer, meta={}){
@@ -958,6 +1134,16 @@ export function updateInboxContact(app, conversationId, changes={}){
     conversation.originMode='manual';
   }
   conversation.interestProduct=safeText(changes.interestProduct,220);
+  const allowedPendingTypes=['none','send_quote','send_photo','check_stock','customer_reply','supplier_reply','payment','technical','other'];
+  if(allowedPendingTypes.includes(changes.pendingType)){
+    conversation.pendingType=changes.pendingType;
+  }
+  conversation.pendingNote=safeText(changes.pendingNote,500);
+  conversation.nextAction=safeText(changes.nextAction,500);
+  const dueRaw=safeText(changes.nextActionDueAt,40);
+  const dueDate=dueRaw ? new Date(dueRaw) : null;
+  conversation.nextActionDueAt=dueDate && !Number.isNaN(dueDate.getTime()) ? dueDate.toISOString() : null;
+  conversation.attentionUpdatedAt=now();
   conversation.updatedAt=now();
 
   let contactSaved=false;
