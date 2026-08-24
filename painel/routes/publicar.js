@@ -3,7 +3,9 @@ import fs from "fs";
 import path from "path";
 import archiver from "archiver";
 import simpleGit from "simple-git";
-import { generateCategoryPage, updateHeaderMenu, convertOldCategoryFiles, generateSeoFiles, loadSeoConfig, generateFriendlyUrlPages, syncSharedHeaderFooterPages } from "./main_utils.js";
+import { generateCategoryPage, updateHeaderMenu, convertOldCategoryFiles, generateSeoFiles, loadSeoConfig, generateFriendlyUrlPages,
+  syncGeneratedHeaderIntoIndex
+} from "./main_utils.js";
 
 const router = express.Router();
 
@@ -149,6 +151,7 @@ function prepararCategoriasParaPublicacao(){
     const data = readJsonSafe(categoriesPath, { items: [] });
     const subcategories = readJsonSafe(subcategoriesPath, { items: [] });
     updateHeaderMenu(data.items || [], SITE_DIR, subcategories.items || []);
+    syncGeneratedHeaderIntoIndex(SITE_DIR);
     generateCategoryPage('', '', SITE_DIR);
     convertOldCategoryFiles(SITE_DIR);
     console.log('✅ Categorias e subcategorias preparadas para publicação.');
@@ -304,22 +307,17 @@ function syncDirContents(src, dst){
       } else if (ent.isFile()){
         try {
           fs.mkdirSync(path.dirname(d), { recursive:true });
-          // Publicação incremental: não regrava arquivos que não mudaram.
-          // Na primeira publicação após esta melhoria alguns arquivos ainda podem
-          // ser copiados; nas próximas, o ganho é bem maior.
-          let unchanged = false;
+          let copy = true;
           if (fs.existsSync(d)) {
-            const srcStat = fs.statSync(s);
-            const dstStat = fs.statSync(d);
-            unchanged = srcStat.size === dstStat.size && dstStat.mtimeMs >= (srcStat.mtimeMs - 2);
+            const ss = fs.statSync(s);
+            const ds = fs.statSync(d);
+            if (ss.size === ds.size) {
+              const sb = fs.readFileSync(s);
+              const db = fs.readFileSync(d);
+              copy = !sb.equals(db);
+            }
           }
-          if (!unchanged) {
-            fs.copyFileSync(s, d);
-            try {
-              const srcStat = fs.statSync(s);
-              fs.utimesSync(d, srcStat.atime, srcStat.mtime);
-            } catch {}
-          }
+          if (copy) fs.copyFileSync(s, d);
         } catch (error) {
           error.message = `Falha ao copiar "${s}" para "${d}": ${error.message}`;
           error.path = error.path || s;
@@ -425,9 +423,6 @@ router.post("/", async (req,res)=>{
     // =================== PUBLICAÇÃO NORMAL ===================
     console.log("🌐 Modo normal: preparando categoria.html, limpando categorias antigas e sincronizando SITE_DIR → REPO_DIR...");
     prepararCategoriasParaPublicacao();
-    // A Home e demais páginas estáticas precisam receber o MESMO header recém-gerado.
-    // Sem isto, o index podia publicar um menu antigo enquanto /smartphones/ já estava correto.
-    syncSharedHeaderFooterPages(SITE_DIR);
     generateSeoFiles(SITE_DIR, loadSeoConfig(SITE_DIR));
     generateFriendlyUrlPages(SITE_DIR);
     gerarHtmlEstaticoCategoriasPremium();

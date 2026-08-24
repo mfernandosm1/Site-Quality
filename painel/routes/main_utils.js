@@ -44,35 +44,6 @@ function replaceHeaderFooterInFullPage(html, header, footer){
   return out;
 }
 
-
-/**
- * Mantém as páginas estáticas principais usando exatamente o mesmo header/footer
- * gerado pelo catálogo. Isso evita a Home ficar com um menu antigo enquanto as
- * páginas de categoria já exibem subcategorias novas.
- */
-export function syncSharedHeaderFooterPages(siteDir, fileNames = ['index.html','sobre.html','formas-de-pagamento.html','produto.html']){
-  if (!siteDir || !fs.existsSync(siteDir)) return { updated:0, skipped:0 };
-  const header = readFileUtf8(path.join(siteDir, 'header.html'));
-  const footer = readFileUtf8(path.join(siteDir, 'footer.html'));
-  if (!header) return { updated:0, skipped:0 };
-
-  let updated = 0;
-  let skipped = 0;
-  for (const fileName of fileNames) {
-    const filePath = path.join(siteDir, fileName);
-    if (!fs.existsSync(filePath)) { skipped++; continue; }
-    const original = readFileUtf8(filePath);
-    if (!original || !/<header\s+class=["']header["']/i.test(original)) { skipped++; continue; }
-    const next = replaceHeaderFooterInFullPage(original, header, footer);
-    if (next !== original) {
-      writeFileUtf8(filePath, next);
-      updated++;
-    }
-  }
-  console.log(`✅ Header/rodapé compartilhados sincronizados em ${updated} página(s).`);
-  return { updated, skipped };
-}
-
 export function extractMain(html){
   const $ = cheerio.load(html, { decodeEntities: false });
   const $main = $('main').first();
@@ -1072,6 +1043,51 @@ function iconHtml(icon){
   return `<i class="${escapeAttr(cls)}" aria-hidden="true"></i> `;
 }
 
+
+export function syncGeneratedHeaderIntoIndex(siteDir){
+  try {
+    const indexPath = path.join(siteDir, 'index.html');
+    const headerPath = path.join(siteDir, 'header.html');
+    if (!fs.existsSync(indexPath) || !fs.existsSync(headerPath)) return false;
+
+    const indexHtml = readFileUtf8(indexPath);
+    const headerHtml = readFileUtf8(headerPath);
+    if (!indexHtml || !headerHtml) return false;
+
+    const $ = cheerio.load(indexHtml, { decodeEntities:false });
+    const oldHeader = $('header.header').first();
+    if (!oldHeader.length) {
+      console.warn('⚠️ index.html sem <header class="header">; menu da Home não foi sincronizado.');
+      return false;
+    }
+
+    // Remove sobras de versões antigas em que o menu mobile ficava fora do header.
+    $('#mobile-menu, #menu-overlay, .mobile-menu, .menu-overlay').each((_, el) => {
+      if (!$(el).closest('header.header').length) $(el).remove();
+    });
+
+    // Remove scripts legados do próprio header que podem repovoar/reordenar o menu
+    // depois de inserirmos a versão atual. Mantém scripts gerais da página.
+    $('script').each((_, el) => {
+      const txt = ($(el).html() || '').toLowerCase();
+      const menuSignals = ['menu-toggle','menu-close','mobile-menu','nav-mobile','nav-desktop'];
+      const hits = menuSignals.filter(k => txt.includes(k)).length;
+      if (hits >= 3) $(el).remove();
+    });
+
+    // O header.html é a fonte única da navegação. Inserimos o bloco inteiro
+    // (CSS + header desktop/mobile + script de preview), não apenas a tag <header>.
+    oldHeader.replaceWith(headerHtml);
+
+    writeFileUtf8(indexPath, $.html());
+    console.log('✅ Header da Home sincronizado com o menu atual (desktop + mobile).');
+    return true;
+  } catch (e) {
+    console.warn(`⚠️ Falha ao sincronizar header da Home: ${e.message}`);
+    return false;
+  }
+}
+
 export function updateHeaderMenu(categories, siteDir, subcategories = null) {
   const headerPath = path.join(siteDir, 'header.html');
   const sorted = [...(categories || [])].sort((a, b) => (Number(a.order || 0) - Number(b.order || 0)));
@@ -1198,6 +1214,7 @@ ${catLinksMobile}
 </script>`;
 
   writeFileUtf8(headerPath, headerHtml);
+  syncGeneratedHeaderIntoIndex(siteDir);
   console.log(`✅ Header atualizado com ${sorted.length} categorias e ${visibleSubs.length} subcategoria(s) visível(is).`);
 }
 

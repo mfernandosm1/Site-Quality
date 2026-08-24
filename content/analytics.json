@@ -1,7 +1,7 @@
 {
   "version": "8.4.0-analytics-professional",
   "createdAt": "2026-07-08T00:26:21.803Z",
-  "updatedAt": "2026-08-24T00:23:36.506Z",
+  "updatedAt": "2026-08-24T00:40:24.694Z",
   "source": "local-json",
   "counters": {
     "product_view": 64,
@@ -11,7 +11,7 @@
     "category_view": 97,
     "share_click": 1,
     "search": 22,
-    "page_view": 257
+    "page_view": 260
   },
   "products": {
     "mini-game-portatil-400-jogos": {
@@ -382,8 +382,8 @@
   "pages": {
     "http://localhost:3000/site/view/index.html": {
       "url": "http://localhost:3000/site/view/index.html",
-      "views": 107,
-      "lastAt": "2026-08-24T00:16:07.123Z"
+      "views": 110,
+      "lastAt": "2026-08-24T00:40:24.693Z"
     },
     "http://localhost:3000/smartphones/": {
       "url": "http://localhost:3000/smartphones/",
@@ -5717,6 +5717,36 @@
         "slug": "iphone-17-pro-max-256gb-novo-lacrado",
         "name": "Iphone 17 pro max 256gb novo lacrado"
       },
+      "term": ""
+    },
+    {
+      "at": "2026-08-24T00:35:47.839Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/site/view/index.html",
+      "referrer": "http://localhost:3000/smartphones/?subcategoria=usados",
+      "device": "desktop",
+      "viewport": "1366x633",
+      "language": "pt-PT",
+      "term": ""
+    },
+    {
+      "at": "2026-08-24T00:40:20.140Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/site/view/index.html",
+      "referrer": "http://localhost:3000/",
+      "device": "desktop",
+      "viewport": "1366x633",
+      "language": "pt-PT",
+      "term": ""
+    },
+    {
+      "at": "2026-08-24T00:40:24.693Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/site/view/index.html",
+      "referrer": "http://localhost:3000/acessorios/",
+      "device": "desktop",
+      "viewport": "1366x633",
+      "language": "pt-PT",
       "term": ""
     }
   ]
