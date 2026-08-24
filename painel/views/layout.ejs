@@ -161,7 +161,7 @@
 </div>
 
 <div class="container">
-  <% if (typeof flash !== 'undefined' && flash) { %><div class="notice"><%= flash %></div><% } %>
+  <% if (typeof flash !== 'undefined' && flash) { %><div class="notice" data-auto-flash><%= flash %></div><% } %>
   <%- body %>
 </div>
 <script>
@@ -252,4 +252,24 @@
 <script src="/public/js/address-autocomplete.js" defer></script>
 <script src="/public/js/analytics-live-card.js" defer></script>
 <script src="/public/js/kernel-tracker.js" defer></script>
+
+<script>
+(function(){
+  const flash = document.querySelector('[data-auto-flash]');
+  if (!flash) return;
+  window.setTimeout(function(){
+    flash.style.transition = 'opacity .22s ease, transform .22s ease';
+    flash.style.opacity = '0';
+    flash.style.transform = 'translateY(-4px)';
+    window.setTimeout(function(){ flash.remove(); }, 240);
+  }, 3000);
+  try {
+    const url = new URL(window.location.href);
+    if (url.searchParams.has('flash')) {
+      url.searchParams.delete('flash');
+      history.replaceState(null, '', url.pathname + (url.searchParams.toString() ? '?' + url.searchParams.toString() : '') + url.hash);
+    }
+  } catch (e) {}
+})();
+</script>
 </body></html>

@@ -1,17 +1,17 @@
 {
   "version": "8.4.0-analytics-professional",
   "createdAt": "2026-07-08T00:26:21.803Z",
-  "updatedAt": "2026-08-24T00:16:07.123Z",
+  "updatedAt": "2026-08-24T00:23:36.506Z",
   "source": "local-json",
   "counters": {
-    "product_view": 63,
+    "product_view": 64,
     "favorite": 2,
     "favorite_click": 0,
     "whatsapp_click": 6,
     "category_view": 97,
     "share_click": 1,
     "search": 22,
-    "page_view": 256
+    "page_view": 257
   },
   "products": {
     "mini-game-portatil-400-jogos": {
@@ -239,11 +239,11 @@
       "name": "Iphone 17 pro max 256gb novo lacrado",
       "image": "/images/iphone 17 pro max laranja.jpeg",
       "url": "http://localhost:3000/produto/iphone-17-pro-max-256gb-novo-lacrado/",
-      "views": 5,
+      "views": 6,
       "favorites": 0,
       "whatsapp": 0,
       "shares": 0,
-      "lastAt": "2026-08-24T00:04:09.368Z"
+      "lastAt": "2026-08-24T00:23:36.505Z"
     },
     "samsung-galaxy-s26-ultra-5g-256gb": {
       "slug": "samsung-galaxy-s26-ultra-5g-256gb",
@@ -502,8 +502,8 @@
     },
     "http://localhost:3000/produto/iphone-17-pro-max-256gb-novo-lacrado/": {
       "url": "http://localhost:3000/produto/iphone-17-pro-max-256gb-novo-lacrado/",
-      "views": 10,
-      "lastAt": "2026-08-24T00:04:09.368Z"
+      "views": 12,
+      "lastAt": "2026-08-24T00:23:36.499Z"
     },
     "http://localhost:3000/produto/samsung-galaxy-s26-ultra-5g-256gb/": {
       "url": "http://localhost:3000/produto/samsung-galaxy-s26-ultra-5g-256gb/",
@@ -5693,6 +5693,30 @@
       "device": "desktop",
       "viewport": "1821x844",
       "language": "pt-PT",
+      "term": ""
+    },
+    {
+      "at": "2026-08-24T00:23:35.635Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/produto/iphone-17-pro-max-256gb-novo-lacrado/",
+      "referrer": "http://localhost:3000/smartphones/",
+      "device": "desktop",
+      "viewport": "1821x844",
+      "language": "pt-PT",
+      "term": ""
+    },
+    {
+      "at": "2026-08-24T00:23:36.505Z",
+      "type": "product_view",
+      "url": "http://localhost:3000/produto/iphone-17-pro-max-256gb-novo-lacrado/",
+      "referrer": "http://localhost:3000/smartphones/",
+      "device": "desktop",
+      "viewport": "1821x844",
+      "language": "pt-PT",
+      "product": {
+        "slug": "iphone-17-pro-max-256gb-novo-lacrado",
+        "name": "Iphone 17 pro max 256gb novo lacrado"
+      },
       "term": ""
     }
   ]

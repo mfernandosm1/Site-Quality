@@ -44,6 +44,35 @@ function replaceHeaderFooterInFullPage(html, header, footer){
   return out;
 }
 
+
+/**
+ * Mantém as páginas estáticas principais usando exatamente o mesmo header/footer
+ * gerado pelo catálogo. Isso evita a Home ficar com um menu antigo enquanto as
+ * páginas de categoria já exibem subcategorias novas.
+ */
+export function syncSharedHeaderFooterPages(siteDir, fileNames = ['index.html','sobre.html','formas-de-pagamento.html','produto.html']){
+  if (!siteDir || !fs.existsSync(siteDir)) return { updated:0, skipped:0 };
+  const header = readFileUtf8(path.join(siteDir, 'header.html'));
+  const footer = readFileUtf8(path.join(siteDir, 'footer.html'));
+  if (!header) return { updated:0, skipped:0 };
+
+  let updated = 0;
+  let skipped = 0;
+  for (const fileName of fileNames) {
+    const filePath = path.join(siteDir, fileName);
+    if (!fs.existsSync(filePath)) { skipped++; continue; }
+    const original = readFileUtf8(filePath);
+    if (!original || !/<header\s+class=["']header["']/i.test(original)) { skipped++; continue; }
+    const next = replaceHeaderFooterInFullPage(original, header, footer);
+    if (next !== original) {
+      writeFileUtf8(filePath, next);
+      updated++;
+    }
+  }
+  console.log(`✅ Header/rodapé compartilhados sincronizados em ${updated} página(s).`);
+  return { updated, skipped };
+}
+
 export function extractMain(html){
   const $ = cheerio.load(html, { decodeEntities: false });
   const $main = $('main').first();
