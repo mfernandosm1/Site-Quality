@@ -1,7 +1,7 @@
 {
   "version": "8.4.0-analytics-professional",
   "createdAt": "2026-07-08T00:26:21.803Z",
-  "updatedAt": "2026-08-24T00:40:24.694Z",
+  "updatedAt": "2026-08-24T00:49:43.683Z",
   "source": "local-json",
   "counters": {
     "product_view": 64,
@@ -11,7 +11,7 @@
     "category_view": 97,
     "share_click": 1,
     "search": 22,
-    "page_view": 260
+    "page_view": 264
   },
   "products": {
     "mini-game-portatil-400-jogos": {
@@ -382,8 +382,8 @@
   "pages": {
     "http://localhost:3000/site/view/index.html": {
       "url": "http://localhost:3000/site/view/index.html",
-      "views": 110,
-      "lastAt": "2026-08-24T00:40:24.693Z"
+      "views": 114,
+      "lastAt": "2026-08-24T00:49:43.682Z"
     },
     "http://localhost:3000/smartphones/": {
       "url": "http://localhost:3000/smartphones/",
@@ -5744,6 +5744,46 @@
       "type": "page_view",
       "url": "http://localhost:3000/site/view/index.html",
       "referrer": "http://localhost:3000/acessorios/",
+      "device": "desktop",
+      "viewport": "1366x633",
+      "language": "pt-PT",
+      "term": ""
+    },
+    {
+      "at": "2026-08-24T00:46:51.442Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/site/view/index.html",
+      "referrer": "http://localhost:3000/",
+      "device": "desktop",
+      "viewport": "1366x633",
+      "language": "pt-PT",
+      "term": ""
+    },
+    {
+      "at": "2026-08-24T00:46:53.098Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/site/view/index.html",
+      "referrer": "http://localhost:3000/smartphones/",
+      "device": "desktop",
+      "viewport": "1366x633",
+      "language": "pt-PT",
+      "term": ""
+    },
+    {
+      "at": "2026-08-24T00:49:41.045Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/site/view/index.html",
+      "referrer": "http://localhost:3000/",
+      "device": "desktop",
+      "viewport": "1366x633",
+      "language": "pt-PT",
+      "term": ""
+    },
+    {
+      "at": "2026-08-24T00:49:43.682Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/site/view/index.html",
+      "referrer": "http://localhost:3000/smartphones/",
       "device": "desktop",
       "viewport": "1366x633",
       "language": "pt-PT",

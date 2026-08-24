@@ -1202,6 +1202,12 @@ ${catLinksMobile}
 
   <div id="menu-overlay" class="menu-overlay"></div>
 </header>
+
+<!-- Fonte imutável do menu. Scripts antigos do site podem tentar reconstruir somente
+     as categorias após o carregamento; estes templates permitem restaurar a árvore
+     categoria -> subcategoria sem depender de nova requisição. -->
+<template id="quality-desktop-category-menu-template">${catLinksDesktop}</template>
+<template id="quality-mobile-category-menu-template">${catLinksMobile}</template>
 <script>
 (function(){
   var isLocalPreview = window.location.hostname === 'localhost' && window.location.port === '3000';
@@ -1209,6 +1215,90 @@ ${catLinksMobile}
     document.querySelectorAll('[data-home-link]').forEach(function(a){
       a.setAttribute('href', '/site/view/index.html');
     });
+  }
+
+  var restoring = false;
+  var restoreTimer = null;
+
+  function directCategoryNodes(nav, mobile){
+    if (!nav) return [];
+    return Array.prototype.filter.call(nav.children, function(el){
+      if (!el || !el.matches) return false;
+      return mobile
+        ? el.matches('.cat-link, .cat-mobile-group, .cat-menu-group, .cat-sub-link')
+        : el.matches('.cat-link, .cat-menu-group, .cat-mobile-group, .cat-sub-link');
+    });
+  }
+
+  function normalizedMarkup(nodes){
+    return nodes.map(function(el){
+      return (el.outerHTML || '').replace(/\s+/g, ' ').trim();
+    }).join('');
+  }
+
+  function templateMarkup(tpl, mobile){
+    var box = document.createElement('div');
+    box.appendChild(tpl.content.cloneNode(true));
+    return normalizedMarkup(directCategoryNodes(box, mobile));
+  }
+
+  function restoreOne(navId, templateId, mobile){
+    var nav = document.getElementById(navId);
+    var tpl = document.getElementById(templateId);
+    if (!nav || !tpl) return;
+
+    var current = directCategoryNodes(nav, mobile);
+    if (normalizedMarkup(current) === templateMarkup(tpl, mobile)) return;
+
+    current.forEach(function(el){ el.remove(); });
+
+    var frag = tpl.content.cloneNode(true);
+    if (mobile) {
+      nav.appendChild(frag);
+    } else {
+      var search = nav.querySelector('.search-wrapper');
+      if (search) nav.insertBefore(frag, search);
+      else nav.appendChild(frag);
+    }
+  }
+
+  function restoreMenus(){
+    if (restoring) return;
+    restoring = true;
+    try {
+      restoreOne('nav-desktop', 'quality-desktop-category-menu-template', false);
+      restoreOne('nav-mobile', 'quality-mobile-category-menu-template', true);
+    } finally {
+      restoring = false;
+    }
+  }
+
+  function scheduleRestore(){
+    if (restoring) return;
+    clearTimeout(restoreTimer);
+    restoreTimer = setTimeout(restoreMenus, 0);
+  }
+
+  function protectMenu(){
+    restoreMenus();
+    ['nav-desktop','nav-mobile'].forEach(function(id){
+      var nav = document.getElementById(id);
+      if (!nav || typeof MutationObserver === 'undefined') return;
+      var observer = new MutationObserver(function(){ scheduleRestore(); });
+      observer.observe(nav, { childList:true, subtree:true });
+    });
+
+    // Scripts legados normalmente executam no DOMContentLoaded ou poucos ms depois.
+    // Estas passagens cobrem esse período e o observer mantém a árvore correta depois.
+    setTimeout(restoreMenus, 50);
+    setTimeout(restoreMenus, 250);
+    setTimeout(restoreMenus, 1000);
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', protectMenu, { once:true });
+  } else {
+    protectMenu();
   }
 })();
 </script>`;
