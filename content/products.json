@@ -31118,7 +31118,7 @@
         "price": 4299.99,
         "active": true,
         "seoTitle": "",
-        "seoDescription": "",
+        "seoDescription": "iPhone 15 Pro 128GB usado, totalmente testado e revisado, com 90 dias de garantia. Chip A17 Pro, câmera de 48 MP e tela ProMotion de 120Hz.",
         "channels": {
           "lojaVirtual": {
             "enabled": true
@@ -31185,7 +31185,7 @@
         "ramText": "",
         "conditionText": "",
         "labelsText": "{}",
-        "combinationsText": "Natural Titanium"
+        "combinationsText": "Natural Titanium|||||0"
       },
       "integrations": {
         "wm10": {
@@ -31228,13 +31228,10 @@
         "catalogKind": "product"
       },
       "inventoryBalance": {
-        "inventoryItemId": "PRD-1786499948984",
-        "locationId": "loja-principal",
         "physicalQuantity": 0,
-        "reservedQuantity": 0,
         "availableQuantity": 0,
-        "minimumQuantity": 0,
-        "updatedAt": "2026-08-24T01:09:10.811Z"
+        "reservedQuantity": 0,
+        "derivedFromVariations": true
       },
       "updatedAt": "2026-08-24T01:06:55.162Z"
     },
