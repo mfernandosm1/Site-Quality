@@ -31156,19 +31156,36 @@
       "descriptionShort": "",
       "descriptionLong": "<p><strong>Destaques do Produto:</strong></p><ul><li><p><strong>Tela Super Retina XDR ProMotion:</strong> OLED de 6,1\" com taxa de atualização de até 120Hz.</p></li><li><p><strong>Chip A17 Pro:</strong> Alto desempenho para aplicativos, jogos e tarefas mais exigentes.</p></li><li><p><strong>Sistema de Câmeras Pro:</strong> Câmera principal de 48 MP, ultra-angular e teleobjetiva para fotos e vídeos com excelente qualidade.</p></li><li><p><strong>128GB de Armazenamento:</strong> Espaço para aplicativos, fotos, vídeos e arquivos.</p></li><li><p><strong>5G, Face ID e USB-C:</strong> Conectividade rápida, segurança e praticidade no carregamento.</p></li><li><p><strong>Estrutura em Titânio:</strong> Acabamento premium, leve e resistente.</p></li></ul><p><strong>Especificações Técnicas:</strong></p><ul><li><p><strong>Tela:</strong> 6,1\" Super Retina XDR OLED com ProMotion 120Hz</p></li><li><p><strong>Processador:</strong> Apple A17 Pro</p></li><li><p><strong>Armazenamento:</strong> 128GB</p></li><li><p><strong>Câmeras Traseiras:</strong> 48 MP + 12 MP + 12 MP</p></li><li><p><strong>Câmera Frontal:</strong> 12 MP</p></li><li><p><strong>Conectividade:</strong> 5G, Wi-Fi, Bluetooth e NFC</p></li><li><p><strong>Segurança:</strong> Face ID</p></li><li><p><strong>Conector:</strong> USB-C</p></li><li><p><strong>Resistência:</strong> IP68</p></li><li><p>Usado, Testado e Revisado: Aparelho funcionando 100%.</p></li><li><p>Garantia: 90 dias de garantia.</p></li></ul>",
       "variations": {
-        "enabled": false,
-        "colors": [],
+        "enabled": true,
+        "colors": [
+          {
+            "name": "Natural Titanium",
+            "hex": "#c2bcb2",
+            "image": "images/iphone 15 pro usado natural titanium.jpg"
+          }
+        ],
         "storage": [],
         "ram": [],
         "condition": [],
-        "combinations": [],
-        "labels": [],
-        "colorsText": "",
+        "combinations": [
+          {
+            "color": "Natural Titanium",
+            "storage": "",
+            "ram": "",
+            "condition": "",
+            "image": "",
+            "stock": 0,
+            "erpPrice": null,
+            "inventoryItemId": "VAR-1786499948984-1"
+          }
+        ],
+        "labels": {},
+        "colorsText": "Natural Titanium|#c2bcb2|images/iphone 15 pro usado natural titanium.jpg",
         "storageText": "",
         "ramText": "",
         "conditionText": "",
-        "labelsText": "[]",
-        "combinationsText": ""
+        "labelsText": "{}",
+        "combinationsText": "Natural Titanium"
       },
       "integrations": {
         "wm10": {
@@ -31217,7 +31234,7 @@
         "reservedQuantity": 0,
         "availableQuantity": 0,
         "minimumQuantity": 0,
-        "updatedAt": "2026-08-24T01:06:36.999Z"
+        "updatedAt": "2026-08-24T01:09:10.811Z"
       },
       "updatedAt": "2026-08-24T01:06:55.162Z"
     },

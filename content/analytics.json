@@ -1,17 +1,17 @@
 {
   "version": "8.4.0-analytics-professional",
   "createdAt": "2026-07-08T00:26:21.803Z",
-  "updatedAt": "2026-08-24T01:09:24.519Z",
+  "updatedAt": "2026-08-24T01:12:37.286Z",
   "source": "local-json",
   "counters": {
-    "product_view": 65,
+    "product_view": 66,
     "favorite": 2,
     "favorite_click": 0,
     "whatsapp_click": 6,
     "category_view": 97,
     "share_click": 1,
     "search": 22,
-    "page_view": 268
+    "page_view": 270
   },
   "products": {
     "mini-game-portatil-400-jogos": {
@@ -316,11 +316,11 @@
       "name": "Iphone 15 pro 128gb usado",
       "image": "/images/produtos/1787533615144-iphone-15-pro-usado-natural-titanium.jpg",
       "url": "http://localhost:3000/produto/iphone-15-pro-128gb-usado/",
-      "views": 1,
+      "views": 2,
       "favorites": 0,
       "whatsapp": 0,
       "shares": 0,
-      "lastAt": "2026-08-24T01:07:21.845Z"
+      "lastAt": "2026-08-24T01:12:37.286Z"
     }
   },
   "categories": {
@@ -393,8 +393,8 @@
   "pages": {
     "http://localhost:3000/site/view/index.html": {
       "url": "http://localhost:3000/site/view/index.html",
-      "views": 117,
-      "lastAt": "2026-08-24T01:09:24.519Z"
+      "views": 118,
+      "lastAt": "2026-08-24T01:12:32.757Z"
     },
     "http://localhost:3000/smartphones/": {
       "url": "http://localhost:3000/smartphones/",
@@ -558,8 +558,8 @@
     },
     "http://localhost:3000/produto/iphone-15-pro-128gb-usado/": {
       "url": "http://localhost:3000/produto/iphone-15-pro-128gb-usado/",
-      "views": 2,
-      "lastAt": "2026-08-24T01:07:21.845Z"
+      "views": 4,
+      "lastAt": "2026-08-24T01:12:37.286Z"
     }
   },
   "devices": {},
@@ -5857,6 +5857,40 @@
       "device": "desktop",
       "viewport": "1366x633",
       "language": "pt-PT",
+      "term": ""
+    },
+    {
+      "at": "2026-08-24T01:12:32.757Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/site/view/index.html",
+      "referrer": "http://localhost:3000/produtos?page=1&q=iphone+15+pro&lvStatus=true",
+      "device": "desktop",
+      "viewport": "1366x633",
+      "language": "pt-PT",
+      "term": ""
+    },
+    {
+      "at": "2026-08-24T01:12:36.381Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/produto/iphone-15-pro-128gb-usado/",
+      "referrer": "http://localhost:3000/smartphones/?subcategoria=usados",
+      "device": "desktop",
+      "viewport": "1366x633",
+      "language": "pt-PT",
+      "term": ""
+    },
+    {
+      "at": "2026-08-24T01:12:37.286Z",
+      "type": "product_view",
+      "url": "http://localhost:3000/produto/iphone-15-pro-128gb-usado/",
+      "referrer": "http://localhost:3000/smartphones/?subcategoria=usados",
+      "device": "desktop",
+      "viewport": "1366x633",
+      "language": "pt-PT",
+      "product": {
+        "slug": "iphone-15-pro-128gb-usado",
+        "name": "Iphone 15 pro 128gb usado"
+      },
       "term": ""
     }
   ]
