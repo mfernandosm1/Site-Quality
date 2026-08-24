@@ -1,31 +1,23 @@
 <% layout('layout') -%>
+<% const initialPeriod = String(typeof queryPeriod !== 'undefined' ? queryPeriod : 'month'); const initialPeriodLabels={today:'Hoje',week:'Esta semana',month:'Mês',last_month:'Mês passado',year:'Ano',all:'Todo período'}; %>
 
-<section class="ops-dashboard-head">
-  <div>
-    <h1>Painel Quality</h1>
-    <p>Centro de operações da empresa.</p>
+
+
+<section class="workbar-card <%= manageShortcuts ? 'is-editing' : '' %>">
+  <div class="workbar-head">
+    <div><strong>⚡ Atalhos rápidos</strong><small>Acessos usados no dia a dia</small></div>
+    <div><a class="btn ghost" href="/erp/agenda">✓ Agenda</a><a class="btn ghost" href="/?atalhos=1">⚙ Personalizar atalhos</a></div>
   </div>
-  <a class="btn ghost" href="/configuracoes">⚙️ Configurações</a>
-</section>
-
-<section class="ops-quick-card shortcuts-card">
-  <div class="shortcuts-heading">
-    <div><h2>Ações rápidas</h2><p>Personalize os atalhos conforme sua rotina.</p></div>
-    <div class="shortcuts-head-actions">
-      <a class="btn ghost" href="<%= manageShortcuts ? '/' : '/?atalhos=1' %>"><%= manageShortcuts ? 'Concluir' : '✏️ Gerenciar atalhos' %></a>
-    </div>
-  </div>
-
-  <div class="shortcuts-grid">
+  <div class="workbar">
     <% quickActions.forEach(function(action, index){ %>
-      <div class="shortcut-item">
+      <div class="workbar-item">
         <% if(action.type === 'post'){ %>
-          <form method="post" action="<%= action.href %>" class="shortcut-open-form"><button type="submit" class="shortcut-open"><span><%= action.icon %></span><div><strong><%= action.name %></strong><small>Abrir</small></div></button></form>
+          <form method="post" action="<%= action.href %>"><button class="workbar-action" type="submit" title="<%= action.name %>" aria-label="<%= action.name %>"><span><%= action.icon %></span><small><%= action.name %></small></button></form>
         <% } else { %>
-          <a class="shortcut-open" href="<%= action.href %>"><span><%= action.icon %></span><div><strong><%= action.name %></strong><small>Abrir</small></div></a>
+          <a class="workbar-action" href="<%= action.href %>" title="<%= action.name %>" aria-label="<%= action.name %>"><span><%= action.icon %></span><small><%= action.name %></small></a>
         <% } %>
         <% if(manageShortcuts){ %>
-          <div class="shortcut-controls">
+          <div class="workbar-controls">
             <form method="post" action="/atalhos/mover"><input type="hidden" name="actionId" value="<%= action.id %>"><input type="hidden" name="direction" value="up"><button title="Mover para esquerda" <%= index === 0 ? 'disabled' : '' %>>←</button></form>
             <form method="post" action="/atalhos/mover"><input type="hidden" name="actionId" value="<%= action.id %>"><input type="hidden" name="direction" value="down"><button title="Mover para direita" <%= index === quickActions.length - 1 ? 'disabled' : '' %>>→</button></form>
             <form method="post" action="/atalhos/remover"><input type="hidden" name="actionId" value="<%= action.id %>"><button class="danger" title="Remover">×</button></form>
@@ -33,38 +25,133 @@
         <% } %>
       </div>
     <% }) %>
-
-    <% if(availableActions.length){ %>
-      <form method="post" action="/atalhos/adicionar" class="shortcut-add-card">
-        <span class="shortcut-plus">＋</span>
-        <select name="actionId" required>
-          <option value="">Adicionar atalho</option>
-          <% availableActions.forEach(function(action){ %><option value="<%= action.id %>"><%= action.icon %> <%= action.name %></option><% }) %>
-        </select>
+    <% if(manageShortcuts && availableActions.length){ %>
+      <form method="post" action="/atalhos/adicionar" class="workbar-add" data-shortcut-picker>
+        <div class="workbar-picker">
+          <input class="workbar-search" type="search" placeholder="Buscar atalho..." autocomplete="off" aria-label="Buscar atalho" data-shortcut-search>
+          <select name="actionId" required data-shortcut-select>
+            <option value="">Adicionar atalho...</option>
+            <% const shortcutGroups = [...new Set(availableActions.map(action => action.group || 'Outros'))]; %>
+            <% shortcutGroups.forEach(function(group){ const items = availableActions.filter(action => (action.group || 'Outros') === group); %>
+              <optgroup label="<%= group %>">
+                <% items.forEach(function(action){ %><option value="<%= action.id %>" data-search="<%= ((action.name || '') + ' ' + (action.group || '')).toLowerCase() %>"><%= action.icon %> <%= action.name %></option><% }) %>
+              </optgroup>
+            <% }) %>
+          </select>
+          <div class="workbar-search-empty" data-shortcut-empty hidden>Nenhum atalho encontrado.</div>
+        </div>
         <button class="btn primary" type="submit">Adicionar</button>
       </form>
     <% } %>
   </div>
+  <% if(manageShortcuts){ %><div class="workbar-edit-note"><span>Organize apenas o que você realmente usa.</span><a class="btn" href="/">Concluir</a></div><% } %>
 </section>
 
+<section class="business-overview" data-dashboard-root data-initial-period="<%= initialPeriod %>">
+  <div class="dashboard-section-head">
+    <div><span class="section-eyebrow">VISÃO DO NEGÓCIO</span><h2 data-period-label><%= initialPeriodLabels[initialPeriod] || 'Mês' %></h2></div>
+    <nav class="period-chips" aria-label="Período da visão do negócio">
+      <% [['today','Hoje'],['week','Esta semana'],['month','Mês'],['last_month','Mês passado'],['year','Ano'],['all','Todo período']].forEach(function(item){ %>
+        <a data-period="<%= item[0] %>" class="<%= initialPeriod===item[0] ? 'active' : '' %>" href="/?periodo=<%= item[0] %>"><%= item[1] %></a>
+      <% }) %>
+    </nav>
+  </div>
 
-<div class="ops-section-title"><div><h2>Áreas principais</h2><p>A navegação está organizada por responsabilidade.</p></div></div>
-<section class="ops-main-grid">
-  <a class="ops-area-card featured" href="/erp"><span class="ops-area-icon">💼</span><div><small>GESTÃO</small><h2>ERP</h2><p>Clientes, produtos, fornecedores, O.S., orçamentos, PDV, estoque, compras e financeiro.</p><b>Abrir área ERP →</b></div></a>
-  <a class="ops-area-card" href="/crm"><span class="ops-area-icon">💬</span><div><small>RELACIONAMENTO</small><h2>CRM</h2><p>WhatsApp, Inbox, automações, notas, lembretes e histórico comercial.</p><b>Abrir CRM →</b></div></a>
-  <a class="ops-area-card" href="/site"><span class="ops-area-icon">🌐</span><div><small>PRESENÇA DIGITAL</small><h2>Site</h2><p>Produtos públicos, categorias, banners, páginas, SEO, manutenção e publicação.</p><b>Abrir Site →</b></div></a>
-  <a class="ops-area-card" href="/analytics"><span class="ops-area-icon">📊</span><div><small>DADOS</small><h2>Analytics</h2><p>Acessos, buscas, favoritos, conversões e oportunidades comerciais.</p><b>Abrir Analytics →</b></div></a>
-  <a class="ops-area-card" href="/marketing"><span class="ops-area-icon">✨</span><div><small>COMUNICAÇÃO</small><h2>Marketing</h2><p>Marketing IA, promoções, sorteios e futuras campanhas integradas.</p><b>Abrir Marketing →</b></div></a>
-  <a class="ops-area-card" href="/ferramentas"><span class="ops-area-icon">🧰</span><div><small>APOIO</small><h2>Ferramentas</h2><p>Compatibilidade, calculadora comercial, backup e atualizações.</p><b>Abrir Ferramentas →</b></div></a>
-  <a class="ops-area-card settings" href="/configuracoes"><span class="ops-area-icon">⚙️</span><div><small>PLATAFORMA</small><h2>Configurações</h2><p>Empresa, unidades, módulos, permissões, integrações e identidade.</p><b>Abrir Configurações →</b></div></a>
+  <div class="business-metrics">
+    <a class="business-metric revenue" data-metric-link="revenue" href="/erp/centro-operacoes"><span>Faturamento</span><strong data-metric="revenue">—</strong><small>Operações concluídas no período</small></a>
+    <a class="business-metric" data-metric-link="sales" href="/erp/centro-operacoes"><span>Vendas + O.S.</span><strong data-metric="salesCount">—</strong><small data-metric-breakdown="sales">—</small></a>
+    <a class="business-metric receivable" href="/erp/financeiro/contas-a-receber"><span>Contas a receber</span><strong data-metric="accountsReceivable">—</strong><small>Total em aberto no período</small></a>
+    <a class="business-metric payable" href="/erp/financeiro/contas-a-pagar"><span>Contas a pagar</span><strong data-metric="accountsPayable">—</strong><small>Total em aberto no período</small></a>
+    <a class="business-metric paid" data-metric-link="accountsPaid" href="/erp/financeiro/contas-a-pagar"><span>Contas pagas</span><strong data-metric="accountsPaid">—</strong><small>Pagas no período</small></a>
+  </div>
 </section>
 
+<section class="dashboard-primary-grid">
+  <article class="dashboard-panel revenue-panel">
+    <div class="dashboard-section-head compact">
+      <div><span class="section-eyebrow">FATURAMENTO</span><h2 data-chart-title>Movimento diário do mês</h2></div>
+      <a class="panel-link" data-chart-link href="/erp/centro-operacoes">Ver operações →</a>
+    </div>
+    <div class="revenue-chart" role="img" aria-label="Gráfico de faturamento diário do mês">
+      <div class="chart-scale"><span data-chart-max>—</span><span data-chart-half>—</span><span>R$ 0</span></div>
+      <div class="chart-canvas">
+        <svg viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
+          <line x1="0" y1="16" x2="100" y2="16"></line><line x1="0" y1="54" x2="100" y2="54"></line><line x1="0" y1="92" x2="100" y2="92"></line>
+          <polyline data-chart-line points=""></polyline>
+        </svg>
+        <div class="chart-hit-layer" data-chart-points></div>
+      </div>
+    </div>
+    <div class="chart-axis" data-chart-axis aria-label="Dias do período"></div>
+  </article>
 
+  <article class="dashboard-panel attention-panel">
+    <div class="dashboard-section-head compact"><div><span class="section-eyebrow">ATENÇÃO NECESSÁRIA</span><h2>O que pede ação</h2></div></div>
+    <div class="attention-list" data-attention-list><div class="attention-empty">Carregando pendências…</div></div>
+  </article>
 
-<div class="ops-section-title"><div><h2>Status do sistema</h2><p>Informações gerais da plataforma e da publicação.</p></div></div>
-<section class="ops-status-grid">
-  <div class="ops-status-card"><span>🧠</span><div><small>Fundação ERP</small><strong>v0.10.0 ativa</strong></div></div>
-  <div class="ops-status-card"><span>🌐</span><div><small>Última publicação</small><strong><%= publishFormatted %></strong></div></div>
-  <div class="ops-status-card"><span>🛠️</span><div><small>Manutenção do site</small><strong class="<%= maint.active ? 'status-danger' : 'status-ok' %>"><%= maint.active ? 'Ativa' : 'Desativada' %></strong></div></div>
-  <div class="ops-status-card"><span>🔗</span><div><small>Arquitetura</small><strong>Integração primeiro</strong></div></div>
 </section>
+
+<section class="dashboard-secondary-grid dashboard-secondary-with-agenda">
+  <article class="dashboard-panel customers-panel customers-panel-compact">
+    <div class="dashboard-section-head compact">
+      <div><span class="section-eyebrow">CLIENTES</span><h2>Quem mais comprou nos últimos 30 dias</h2></div>
+      <div class="ranking-toggle"><button class="active" type="button" data-ranking="value">Por valor</button><button type="button" data-ranking="count">Por quantidade</button></div>
+    </div>
+    <div class="ranking-list" data-ranking-list="value"><div class="attention-empty">Carregando ranking…</div></div>
+    <div class="ranking-list" data-ranking-list="count" hidden></div>
+  </article>
+
+  <article class="dashboard-panel agenda-dashboard-panel">
+    <div class="dashboard-section-head compact">
+      <div><span class="section-eyebrow">AGENDA</span><h2>Próximos compromissos</h2></div>
+      <a class="panel-link" href="/erp/agenda">Ver agenda →</a>
+    </div>
+    <div class="dashboard-agenda-list" data-agenda-list><div class="attention-empty">Carregando agenda…</div></div>
+  </article>
+</section>
+
+<details class="dashboard-customer-map" data-customer-map-details>
+  <summary>
+    <span><b>📍 Localização dos clientes</b><small>Concentração por cidade e clientes · carregado somente quando você abrir</small></span>
+    <span class="dashboard-customer-map-action">Visualizar mapa</span>
+  </summary>
+  <div class="dashboard-customer-map-body">
+    <div class="dashboard-customer-map-stage" data-customer-map-stage>
+      <div class="dashboard-map-cta">
+        <strong>Localização carregada somente quando você pedir</strong>
+        <span>Ao abrir, você vê as cidades e os clientes. O mapa geral e os endereços exatos só carregam quando solicitado.</span>
+      </div>
+    </div>
+    <aside class="dashboard-customer-map-ranking" data-customer-map-ranking></aside>
+  </div>
+</details>
+
+
+<script>
+(function(){
+  const picker = document.querySelector('[data-shortcut-picker]');
+  if(!picker) return;
+  const input = picker.querySelector('[data-shortcut-search]');
+  const select = picker.querySelector('[data-shortcut-select]');
+  const empty = picker.querySelector('[data-shortcut-empty]');
+  if(!input || !select) return;
+  const normalize = value => String(value || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().trim();
+  input.addEventListener('input', function(){
+    const query = normalize(input.value);
+    let visible = 0;
+    Array.from(select.querySelectorAll('optgroup')).forEach(group => {
+      let groupVisible = 0;
+      Array.from(group.querySelectorAll('option')).forEach(option => {
+        const match = !query || normalize(option.dataset.search || option.textContent).includes(query);
+        option.hidden = !match;
+        if(match){ visible += 1; groupVisible += 1; }
+      });
+      group.hidden = groupVisible === 0;
+    });
+    if(empty) empty.hidden = visible !== 0;
+    if(select.selectedOptions[0]?.hidden) select.value = '';
+  });
+})();
+</script>
+<script src="/public/js/dashboard.js"></script>

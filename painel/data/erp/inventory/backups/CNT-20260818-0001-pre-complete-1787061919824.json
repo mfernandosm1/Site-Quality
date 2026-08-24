@@ -1,0 +1,218 @@
+{
+  "createdAt": "2026-08-18T14:05:19.824Z",
+  "count": {
+    "id": "CNT-20260818-0001",
+    "type": "partial",
+    "status": "in_progress",
+    "blockPdv": false,
+    "notes": "",
+    "locationId": "loja-principal",
+    "startedAt": "2026-08-18T12:24:21.176Z",
+    "createdAt": "2026-08-18T12:24:21.176Z",
+    "createdBy": "painel",
+    "updatedAt": "2026-08-18T14:04:52.101Z",
+    "items": [
+      {
+        "inventoryItemId": "PRD-1786321659727",
+        "productId": "PRD-1786321659727",
+        "selectionId": "PRD-1786321659727",
+        "name": "Capa TPU Antishock Premium iPhone 15 - Transparente",
+        "code": "PRD-114",
+        "sku": "62234",
+        "barcode": "",
+        "variationLabel": "",
+        "systemQuantityAtCount": 3,
+        "countedQuantity": 4,
+        "firstCountedAt": "2026-08-18T14:04:44.766Z",
+        "lastCountedAt": "2026-08-18T14:04:52.101Z"
+      }
+    ],
+    "snapshot": [],
+    "events": [
+      {
+        "id": "EVT-1787055861178-ad273u",
+        "type": "created",
+        "actor": "painel",
+        "createdAt": "2026-08-18T12:24:21.178Z",
+        "metadata": {
+          "type": "partial",
+          "blockPdv": false,
+          "snapshotSize": 0
+        }
+      },
+      {
+        "id": "EVT-1787061884770-rkc104",
+        "type": "item_counted",
+        "actor": "painel",
+        "createdAt": "2026-08-18T14:04:44.770Z",
+        "metadata": {
+          "inventoryItemId": "PRD-1786321659727",
+          "quantity": 1
+        }
+      },
+      {
+        "id": "EVT-1787061889199-opi0p6",
+        "type": "item_counted",
+        "actor": "painel",
+        "createdAt": "2026-08-18T14:04:49.199Z",
+        "metadata": {
+          "inventoryItemId": "PRD-1786321659727",
+          "quantity": 2
+        }
+      },
+      {
+        "id": "EVT-1787061889776-ntw3k1",
+        "type": "item_counted",
+        "actor": "painel",
+        "createdAt": "2026-08-18T14:04:49.776Z",
+        "metadata": {
+          "inventoryItemId": "PRD-1786321659727",
+          "quantity": 2
+        }
+      },
+      {
+        "id": "EVT-1787061891511-b3rhsv",
+        "type": "item_counted",
+        "actor": "painel",
+        "createdAt": "2026-08-18T14:04:51.512Z",
+        "metadata": {
+          "inventoryItemId": "PRD-1786321659727",
+          "quantity": 2
+        }
+      },
+      {
+        "id": "EVT-1787061892101-hhyyyv",
+        "type": "item_counted",
+        "actor": "painel",
+        "createdAt": "2026-08-18T14:04:52.101Z",
+        "metadata": {
+          "inventoryItemId": "PRD-1786321659727",
+          "quantity": 4
+        }
+      }
+    ]
+  },
+  "conference": {
+    "count": {
+      "id": "CNT-20260818-0001",
+      "type": "partial",
+      "status": "in_progress",
+      "blockPdv": false,
+      "notes": "",
+      "locationId": "loja-principal",
+      "startedAt": "2026-08-18T12:24:21.176Z",
+      "createdAt": "2026-08-18T12:24:21.176Z",
+      "createdBy": "painel",
+      "updatedAt": "2026-08-18T14:04:52.101Z",
+      "items": [
+        {
+          "inventoryItemId": "PRD-1786321659727",
+          "productId": "PRD-1786321659727",
+          "selectionId": "PRD-1786321659727",
+          "name": "Capa TPU Antishock Premium iPhone 15 - Transparente",
+          "code": "PRD-114",
+          "sku": "62234",
+          "barcode": "",
+          "variationLabel": "",
+          "systemQuantityAtCount": 3,
+          "countedQuantity": 4,
+          "firstCountedAt": "2026-08-18T14:04:44.766Z",
+          "lastCountedAt": "2026-08-18T14:04:52.101Z"
+        }
+      ],
+      "snapshot": [],
+      "events": [
+        {
+          "id": "EVT-1787055861178-ad273u",
+          "type": "created",
+          "actor": "painel",
+          "createdAt": "2026-08-18T12:24:21.178Z",
+          "metadata": {
+            "type": "partial",
+            "blockPdv": false,
+            "snapshotSize": 0
+          }
+        },
+        {
+          "id": "EVT-1787061884770-rkc104",
+          "type": "item_counted",
+          "actor": "painel",
+          "createdAt": "2026-08-18T14:04:44.770Z",
+          "metadata": {
+            "inventoryItemId": "PRD-1786321659727",
+            "quantity": 1
+          }
+        },
+        {
+          "id": "EVT-1787061889199-opi0p6",
+          "type": "item_counted",
+          "actor": "painel",
+          "createdAt": "2026-08-18T14:04:49.199Z",
+          "metadata": {
+            "inventoryItemId": "PRD-1786321659727",
+            "quantity": 2
+          }
+        },
+        {
+          "id": "EVT-1787061889776-ntw3k1",
+          "type": "item_counted",
+          "actor": "painel",
+          "createdAt": "2026-08-18T14:04:49.776Z",
+          "metadata": {
+            "inventoryItemId": "PRD-1786321659727",
+            "quantity": 2
+          }
+        },
+        {
+          "id": "EVT-1787061891511-b3rhsv",
+          "type": "item_counted",
+          "actor": "painel",
+          "createdAt": "2026-08-18T14:04:51.512Z",
+          "metadata": {
+            "inventoryItemId": "PRD-1786321659727",
+            "quantity": 2
+          }
+        },
+        {
+          "id": "EVT-1787061892101-hhyyyv",
+          "type": "item_counted",
+          "actor": "painel",
+          "createdAt": "2026-08-18T14:04:52.101Z",
+          "metadata": {
+            "inventoryItemId": "PRD-1786321659727",
+            "quantity": 4
+          }
+        }
+      ]
+    },
+    "rows": [
+      {
+        "inventoryItemId": "PRD-1786321659727",
+        "productId": "PRD-1786321659727",
+        "selectionId": "PRD-1786321659727",
+        "name": "Capa TPU Antishock Premium iPhone 15 - Transparente",
+        "code": "PRD-114",
+        "sku": "62234",
+        "barcode": "",
+        "variationLabel": "",
+        "systemQuantityAtCount": 3,
+        "countedQuantity": 4,
+        "firstCountedAt": "2026-08-18T14:04:44.766Z",
+        "lastCountedAt": "2026-08-18T14:04:52.101Z",
+        "systemQuantity": 3,
+        "movementsAfterCount": 0,
+        "targetQuantity": 4,
+        "difference": 1
+      }
+    ],
+    "uncounted": [],
+    "summary": {
+      "counted": 1,
+      "matched": 0,
+      "shortage": 0,
+      "surplus": 1,
+      "divergences": 1,
+      "uncounted": 0
+    }
+  }
+}

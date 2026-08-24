@@ -1,12 +1,22 @@
 import fs from 'fs';
 import path from 'path';
 import crypto from 'crypto';
+import { matchesSearchText } from '../utils/search.js';
 
 const clone = value => JSON.parse(JSON.stringify(value));
 const now = () => new Date().toISOString();
 const clean = value => String(value ?? '').trim();
 const amount = value => Math.round((Number(value) || 0) * 100) / 100;
 const onlyDigits = value => String(value || '').replace(/\D/g, '');
+function localDateKey(value = new Date()) {
+  const date = value instanceof Date ? value : new Date(value);
+  if (Number.isNaN(date.getTime())) return '';
+  try {
+    return new Intl.DateTimeFormat('en-CA', { timeZone:'America/Sao_Paulo', year:'numeric', month:'2-digit', day:'2-digit' }).format(date);
+  } catch (_) {
+    return date.toISOString().slice(0,10);
+  }
+}
 
 function addDays(dateValue, days) {
   const date = dateValue ? new Date(`${dateValue}T12:00:00`) : new Date();
@@ -20,16 +30,25 @@ export default class ReceivablesService {
     this.financeService = financeService;
     this.customerService = customerService;
     this.commerceService = commerceService;
+    this._jsonCache = new Map();
     fs.mkdirSync(dataDir, { recursive:true });
     this.ensure();
   }
   file(name) { return path.join(this.dataDir, name); }
   read(name, fallback={ version:'0.16.7', items:[] }) {
-    try { return JSON.parse(fs.readFileSync(this.file(name), 'utf8')); } catch (_) { return clone(fallback); }
+    const target=this.file(name);
+    try {
+      const stat=fs.statSync(target),cached=this._jsonCache.get(target);
+      if(cached&&cached.mtimeMs===stat.mtimeMs&&cached.size===stat.size)return cached.data;
+      const data=JSON.parse(fs.readFileSync(target,'utf8'));
+      this._jsonCache.set(target,{mtimeMs:stat.mtimeMs,size:stat.size,data});
+      return data;
+    } catch (_) { return clone(fallback); }
   }
   write(name, data) {
     const target = this.file(name); const temp = `${target}.tmp`;
     fs.writeFileSync(temp, JSON.stringify(data, null, 2), 'utf8'); fs.renameSync(temp, target);
+    try{const stat=fs.statSync(target);this._jsonCache.set(target,{mtimeMs:stat.mtimeMs,size:stat.size,data});}catch(_){this._jsonCache.delete(target);}
   }
   ensure() {
     for (const name of ['receivables.json','receivable-installments.json','receipts.json','receivable-events.json']) {
@@ -48,7 +67,7 @@ export default class ReceivablesService {
   list({ status='', customerId='', search='', paymentMethodId='', costCenterId='', accountId='', dueFrom='', dueTo='', duePreset='' } = {}) {
     const titles = this.read('receivables.json').items || [];
     const installments = this.read('receivable-installments.json').items || [];
-    const term = clean(search).toLowerCase();
+    const term = clean(search);
     const today = new Date().toISOString().slice(0,10);
     const monthStart = `${today.slice(0,7)}-01`;
     const monthEndDate = new Date(`${monthStart}T12:00:00`);
@@ -56,7 +75,11 @@ export default class ReceivablesService {
     monthEndDate.setDate(0);
     const monthEnd = monthEndDate.toISOString().slice(0,10);
     const plusDays = days => addDays(today, days);
-    return titles.filter(item => {
+    const currentCustomers = new Map((this.customerService?.listCustomers({ includeInactive:true }) || []).map(customer => [String(customer.id), customer]));
+    return titles.map(item => {
+      const customer = currentCustomers.get(String(item.customerId || ''));
+      return customer ? { ...item, customerName:item.customerNameSnapshot || item.customerName, customerNameSnapshot:item.customerNameSnapshot || item.customerName, customerNameCurrent:customer.name, customerName:customer.name, customerDocument:customer.document || item.customerDocument } : item;
+    }).filter(item => {
       if (status && item.status !== status) return false;
       if (customerId && item.customerId !== customerId) return false;
       if (paymentMethodId && item.paymentMethodId !== paymentMethodId) return false;
@@ -71,7 +94,7 @@ export default class ReceivablesService {
       if (duePreset === 'overdue' && !openDueDates.some(date => date < today)) return false;
       if (duePreset === 'next7' && !openDueDates.some(date => date >= today && date <= plusDays(7))) return false;
       if (duePreset === 'month' && !openDueDates.some(date => date >= monthStart && date <= monthEnd)) return false;
-      if (term && ![item.number,item.customerName,item.originLabel].some(v => clean(v).toLowerCase().includes(term))) return false;
+      if (!matchesSearchText([item.number,item.customerName,item.originLabel].join(' '), term)) return false;
       return true;
     }).map(title => ({ ...title, installments:installments.filter(i => i.receivableId === title.id) }))
       .sort((a,b) => String(b.createdAt).localeCompare(String(a.createdAt)));
@@ -85,7 +108,7 @@ export default class ReceivablesService {
     const active = titles.filter(item => !['cancelled','reversed'].includes(item.status));
     const open = active.filter(item => ['open','partial'].includes(item.status));
     const openInstallments = open.flatMap(title => (title.installments || []).filter(item => Number(item.openBalance || 0) > 0));
-    const receipts = this.read('receipts.json').items || [];
+    const receipts = (this.read('receipts.json').items || []).filter(item=>item.status!=='reversed'&&item.reversalStatus!=='reversed');
     return {
       open: {
         count: open.length,
@@ -105,7 +128,33 @@ export default class ReceivablesService {
       }
     };
   }
+  customerCreditSummaries(customerIds=[]) {
+    const ids=new Set((customerIds||[]).map(String).filter(Boolean));
+    if(!ids.size)return {};
+    const titles=(this.read('receivables.json').items||[]).filter(item=>ids.has(String(item.customerId||''))).sort((a,b)=>String(b.createdAt||'').localeCompare(String(a.createdAt||'')));
+    const titleIds=new Set(titles.map(item=>item.id));
+    const installments=(this.read('receivable-installments.json').items||[]).filter(item=>titleIds.has(item.receivableId));
+    const receipts=(this.read('receipts.json').items||[]).filter(item=>titleIds.has(item.receivableId)&&item.status!=='reversed'&&item.reversalStatus!=='reversed');
+    const installmentsByTitle=new Map();
+    for(const item of installments){const list=installmentsByTitle.get(item.receivableId)||[];list.push(item);installmentsByTitle.set(item.receivableId,list)}
+    const titlesByCustomer=new Map();
+    for(const item of titles){const key=String(item.customerId||'');const list=titlesByCustomer.get(key)||[];list.push({...item,installments:installmentsByTitle.get(item.id)||[]});titlesByCustomer.set(key,list)}
+    const receiptsByTitle=new Map();
+    for(const item of receipts){const list=receiptsByTitle.get(item.receivableId)||[];list.push(item);receiptsByTitle.set(item.receivableId,list)}
+    const today=new Date().toISOString().slice(0,10), result={};
+    for(const customerId of ids){
+      const customerTitles=titlesByCustomer.get(customerId)||[];
+      const customerInstallments=customerTitles.flatMap(title=>(title.installments||[]).map(item=>({...item,receivableId:title.id,titleNumber:title.number})));
+      const openInstallments=customerInstallments.filter(item=>Number(item.openBalance||0)>0&&!['cancelled','reversed'].includes(item.status));
+      const overdue=openInstallments.filter(item=>item.dueDate&&item.dueDate<today);
+      const customerReceipts=customerTitles.flatMap(title=>receiptsByTitle.get(title.id)||[]);
+      result[customerId]={customerId,titleCount:customerTitles.length,openTitleCount:customerTitles.filter(item=>['open','partial'].includes(item.status)).length,paidTitleCount:customerTitles.filter(item=>item.status==='paid').length,overdueInstallmentCount:overdue.length,totalGenerated:amount(customerTitles.filter(item=>!['cancelled','reversed'].includes(item.status)).reduce((sum,item)=>sum+Number(item.netValue||0),0)),openBalance:amount(customerTitles.reduce((sum,item)=>sum+Number(item.openBalance||0),0)),overdueBalance:amount(overdue.reduce((sum,item)=>sum+Number(item.openBalance||0),0)),lastTitleAt:customerTitles[0]?.createdAt||null,oldestOverdueDate:[...overdue].sort((a,b)=>String(a.dueDate).localeCompare(String(b.dueDate)))[0]?.dueDate||null,totalReceived:amount(customerReceipts.reduce((sum,item)=>sum+Number(item.value||0),0)),receiptCount:customerReceipts.length,lastReceiptAt:[...customerReceipts].sort((a,b)=>String(b.receivedDateTime||b.createdAt).localeCompare(String(a.receivedDateTime||a.createdAt)))[0]?.receivedDateTime||null,status:overdue.length?'overdue':openInstallments.length?'open':customerTitles.length?'clear':'no_history',recentTitles:customerTitles.slice(0,8).map(item=>({id:item.id,number:item.number,originLabel:item.originLabel,netValue:item.netValue,openBalance:item.openBalance,status:item.status,issueDate:item.issueDate}))};
+    }
+    return result;
+  }
   customerCreditSummary(customerId='') {
+    const batch=this.customerCreditSummaries([customerId]);
+    if(batch[String(customerId)])return batch[String(customerId)];
     const titles=this.list({ customerId });
     const today=new Date().toISOString().slice(0,10);
     const installments=titles.flatMap(title=>(title.installments||[]).map(item=>({ ...item, receivableId:title.id, titleNumber:title.number })));
@@ -113,7 +162,7 @@ export default class ReceivablesService {
     const overdue=openInstallments.filter(item=>item.dueDate && item.dueDate<today);
     const paid=titles.filter(item=>item.status==='paid');
     const titleIds=new Set(titles.map(item=>item.id));
-    const customerReceipts=(this.read('receipts.json').items||[]).filter(item=>titleIds.has(item.receivableId));
+    const customerReceipts=(this.read('receipts.json').items||[]).filter(item=>titleIds.has(item.receivableId)&&item.status!=='reversed'&&item.reversalStatus!=='reversed');
     return {
       customerId,
       titleCount:titles.length,
@@ -163,7 +212,8 @@ export default class ReceivablesService {
     if (method.generatesReceivable === true) return true;
     if (method.generatesReceivable === false) return false;
     const eventType=clean(method.eventType).toLowerCase();
-    return method.autoSettle !== true && ['title','receivable'].includes(eventType);
+    const salesPaid = method.salesPaid !== undefined ? method.salesPaid === true : method.autoSettle === true;
+    return salesPaid !== true && ['title','receivable'].includes(eventType);
   }
   validateOperation(operation={}) {
     const receivablePayments=[];
@@ -177,6 +227,13 @@ export default class ReceivablesService {
       if (count>Number(method.maxInstallments||1)) throw new Error(`${method.name}: máximo permitido de ${method.maxInstallments||1} parcela(s).`);
       const minimum=Number(method.minimumInstallmentValue||0);
       if (minimum>0 && amount(payment.amount/count)<minimum) throw new Error(`${method.name}: cada parcela deve ter no mínimo R$ ${minimum.toFixed(2).replace('.',',')}.`);
+      // PDV: uma venda/O.S. nunca pode criar título com vencimento retroativo.
+      // A data-base é o dia corrente da operação no fuso da loja (São Paulo).
+      const saleDate=localDateKey();
+      const dueDates=(Array.isArray(payment.dueDates)?payment.dueDates:[]).map(clean).filter(Boolean);
+      if (!dueDates.length && clean(payment.dueDate)) dueDates.push(clean(payment.dueDate));
+      const retroactive=dueDates.find(dueDate=>/^\d{4}-\d{2}-\d{2}$/.test(dueDate) && dueDate < saleDate);
+      if (retroactive) throw new Error(`${method.name}: o vencimento ${retroactive.split('-').reverse().join('/')} é anterior à data da venda. Use hoje ou uma data futura.`);
       receivablePayments.push({ payment, method, customer });
     }
     return receivablePayments;
@@ -195,19 +252,49 @@ export default class ReceivablesService {
     },actor,{ operational:true }));
   }
   reconcileOperations(operations=[], actor='sistema') {
-    const result={ checked:0, created:0, existing:0, skipped:0, errors:[] };
+    const result={ checked:0, created:0, existing:0, skipped:0, cancelled:0, pendingReceiptReversal:0, errors:[] };
     for (const operation of Array.isArray(operations)?operations:[]) {
-      if (!operation || operation.status !== 'finalized') continue;
-      result.checked += 1;
-      try {
-        const before=(this.read('receivables.json').items||[]).length;
-        const generated=this.createFromOperation(operation,actor);
-        const after=(this.read('receivables.json').items||[]).length;
-        result.created += Math.max(0,after-before);
-        result.existing += Math.max(0,generated.length-Math.max(0,after-before));
-        if (!generated.length) result.skipped += 1;
-      } catch (error) {
-        result.errors.push({ operationId:operation.id, number:operation.number, message:error.message });
+      if (!operation) continue;
+
+      if (operation.status === 'finalized') {
+        result.checked += 1;
+        try {
+          const before=(this.read('receivables.json').items||[]).length;
+          const generated=this.createFromOperation(operation,actor);
+          const after=(this.read('receivables.json').items||[]).length;
+          result.created += Math.max(0,after-before);
+          result.existing += Math.max(0,generated.length-Math.max(0,after-before));
+          if (!generated.length) result.skipped += 1;
+        } catch (error) {
+          result.errors.push({ operationId:operation.id, number:operation.number, message:error.message });
+        }
+        continue;
+      }
+
+      if (!['cancelled','reversed'].includes(operation.status)) continue;
+      const operationReceivableIds=new Set((operation.receivableIds||[]).map(String));
+      // Use a base bruta para que filtros, cadastro do cliente ou saldos antigos não
+      // impeçam a reconciliação de títulos ligados a operações canceladas/estornadas.
+      const linkedTitles=(this.read('receivables.json').items||[]).filter(title=>operationReceivableIds.has(String(title.id))||String(title.originId||'')===String(operation.id));
+      for (const title of linkedTitles) {
+        if (['cancelled','reversed'].includes(title.status) && Number(title.openBalance||0)===0) continue;
+        const activeReceipts=this.receipts(title.id).filter(receipt=>receipt.status!=='reversed'&&receipt.reversalStatus!=='reversed');
+        if (activeReceipts.length) {
+          result.pendingReceiptReversal += activeReceipts.length;
+          result.errors.push({
+            operationId:operation.id,
+            number:operation.number,
+            receivableId:title.id,
+            message:`O título ${title.number||title.id} ainda possui ${activeReceipts.length} recebimento(s) ativo(s) e precisa ser estornado pelo fluxo da operação.`
+          });
+          continue;
+        }
+        try {
+          this.cancel(title.id, `${operation.status==='reversed'?'Estorno':'Cancelamento'} reconciliado da operação #${operation.number}`, actor);
+          result.cancelled += 1;
+        } catch (error) {
+          result.errors.push({ operationId:operation.id, number:operation.number, receivableId:title.id, message:error.message });
+        }
       }
     }
     return result;
@@ -229,6 +316,10 @@ export default class ReceivablesService {
     const firstDueDate = clean(payload.firstDueDate) || addDays(issueDate, paymentMethod.firstDueDays || 0);
     const customDueDates=(Array.isArray(payload.installmentDueDates)?payload.installmentDueDates:[]).map(clean).filter(Boolean);
     if(customDueDates.length && customDueDates.length!==count) throw new Error(`Configure os ${count} vencimentos do parcelamento.`);
+    if(options?.operational===true){
+      const retroactive=[firstDueDate,...customDueDates].filter(Boolean).find(dueDate=>/^\d{4}-\d{2}-\d{2}$/.test(dueDate)&&dueDate<issueDate);
+      if(retroactive) throw new Error(`Vencimento retroativo não permitido no PDV: ${retroactive.split('-').reverse().join('/')} é anterior à venda de ${issueDate.split('-').reverse().join('/')}.`);
+    }
     const customAmounts=(Array.isArray(payload.installmentAmounts)?payload.installmentAmounts:[]).map(amount);
     if(customAmounts.length && customAmounts.length!==count) throw new Error(`Configure os valores das ${count} parcelas.`);
     if(customAmounts.length && customAmounts.some(value=>value<=0)) throw new Error('Todas as parcelas precisam ter valor maior que zero.');
@@ -267,8 +358,6 @@ export default class ReceivablesService {
     }
 
     const actorName=clean(actor)||'painel';
-    const openCash = this.commerceService.findOpenSessionForUser(actorName, clean(payload.cashboxId));
-    if (!openCash?.session) throw new Error('Não existe caixa aberto para este usuário. Abra o Caixa antes de confirmar o recebimento.');
 
     const titleDb = this.read('receivables.json');
     const title = (titleDb.items || []).find(i => i.id === id);
@@ -285,10 +374,20 @@ export default class ReceivablesService {
       if (!method) throw new Error(`Selecione uma forma de pagamento ativa no pagamento ${index + 1}.`);
       const value = amount(payment.value ?? payment.amount);
       if (value <= 0) throw new Error(`Informe um valor maior que zero no pagamento ${index + 1}.`);
-      const commerceMethod=this.resolveCommercePaymentMethod({ paymentMethodId, paymentMethodName:method.name });
-      if(!commerceMethod) throw new Error(`A forma ${method.name} não possui correspondência ativa no Caixa.`);
-      return { paymentMethodId, paymentMethodName:method.name, commerceMethodId:commerceMethod.id, value };
+      const creditCash=method.creditCashOnSale!==false;
+      const commerceMethod=creditCash?this.resolveCommercePaymentMethod({ paymentMethodId, paymentMethodName:method.name }):null;
+      if(creditCash&&!commerceMethod) throw new Error(`A forma ${method.name} não possui correspondência ativa no Caixa.`);
+      const requestedInstallments=Math.max(1,Math.round(Number(payment.installments||1)||1));
+      const maxInstallments=Math.max(1,Number(method.maxInstallments||1));
+      const allowsInstallments=Boolean(method.allowInstallments) && maxInstallments>1;
+      if(!allowsInstallments && requestedInstallments>1) throw new Error(`${method.name} não permite parcelamento.`);
+      if(requestedInstallments>maxInstallments) throw new Error(`${method.name}: máximo permitido de ${maxInstallments} parcela(s).`);
+      const installments=allowsInstallments?requestedInstallments:1;
+      return { paymentMethodId, paymentMethodName:method.name, commerceMethodId:commerceMethod?.id||method.name, creditCash, value, installments };
     });
+    const requiresCash=payments.some(payment=>payment.creditCash!==false);
+    const openCash=requiresCash?this.commerceService.findOpenSessionForUser(actorName, clean(payload.cashboxId)):null;
+    if (requiresCash&&!openCash?.session) throw new Error('Não existe caixa aberto para este usuário. Abra o Caixa antes de confirmar um recebimento configurado para creditar no Caixa.');
     const value = amount(payments.reduce((sum, payment) => sum + payment.value, 0));
     const interest = amount(payload.interest);
     const fine = amount(payload.fine);
@@ -342,7 +441,7 @@ export default class ReceivablesService {
         paymentMethodId:payments[0]?.paymentMethodId || title.paymentMethodId,
         receivedAt:clean(payload.receivedAt)||new Date().toISOString().slice(0,10),
         receivedDateTime:now(), notes:clean(payload.notes), balanceAfter:title.openBalance,
-        cashboxId:openCash.cashbox.id, cashboxName:openCash.cashbox.name, cashSessionId:openCash.session.id,
+        cashboxId:openCash?.cashbox?.id||'', cashboxName:openCash?.cashbox?.name||'', cashSessionId:openCash?.session?.id||'',
         operationId:title.originId || '', operationType:title.origin || '', customerId:title.customerId,
         reversible:true, reversalStatus:'available', createdAt:now(), createdBy:actorName
       };
@@ -354,6 +453,7 @@ export default class ReceivablesService {
 
       const cashMovements=[];
       for (const [index,payment] of payments.entries()) {
+        if(payment.creditCash===false) continue;
         cashMovements.push(this.commerceService.addCashMovement({
           cashboxId:openCash.cashbox.id, type:'receivable_receipt', amount:payment.value,
           methodId:payment.commerceMethodId,
@@ -366,23 +466,118 @@ export default class ReceivablesService {
       receipt.cashMovementIds=cashMovements.map(item=>item.id);
 
       const operation=title.originId ? this.commerceService.getOperation(title.originId) : null;
-      const financial=this.financeService.registerReceivableReceipt({ receipt, title, installment:selectedInstallment, operation, cashSession:openCash.session, cashboxId:openCash.cashbox.id, actor:actorName });
+      const financial=this.financeService.registerReceivableReceipt({ receipt, title, installment:selectedInstallment, operation, cashSession:openCash?.session||null, cashboxId:openCash?.cashbox?.id||'', actor:actorName });
       receipt.financeEntryIds=financial.entries.map(item=>item.id);
       receipt.financePaymentIds=financial.payments.map(item=>item.id);
       receipt.financeMovementIds=financial.movements.map(item=>item.id);
       this.write('receipts.json', receiptDb);
 
-      this.event(id,'received',actorName,{ receiptId:receipt.id, receiptNumber:receipt.receiptNumber, value, principalValue:appliedToPrincipal, balanceAfter:title.openBalance, allocations, cashboxId:openCash.cashbox.id, cashSessionId:openCash.session.id, cashMovementIds:receipt.cashMovementIds, financeMovementIds:receipt.financeMovementIds });
+      this.event(id,'received',actorName,{ receiptId:receipt.id, receiptNumber:receipt.receiptNumber, value, principalValue:appliedToPrincipal, balanceAfter:title.openBalance, allocations, cashboxId:openCash?.cashbox?.id||'', cashSessionId:openCash?.session?.id||'', cashMovementIds:receipt.cashMovementIds, financeMovementIds:receipt.financeMovementIds });
       return { item:this.get(id), receipt, cashMovements, financial, duplicated:false };
     } catch (error) {
       this.restoreSnapshots(snapshots);
       throw error;
     }
   }
+
+  reverseReceipt(id, receiptId, reason='', actor='painel') {
+    const why=clean(reason); if(!why) throw new Error('Informe o motivo do estorno.');
+    const actorName=clean(actor)||'painel';
+    const titleDb=this.read('receivables.json'); const title=(titleDb.items||[]).find(item=>item.id===id);
+    if(!title) throw new Error('Título não encontrado.');
+    const receiptDb=this.read('receipts.json'); receiptDb.items=receiptDb.items||[];
+    const receipt=receiptDb.items.find(item=>item.id===receiptId&&item.receivableId===id);
+    if(!receipt) throw new Error('Recebimento não encontrado.');
+    if(receipt.status==='reversed'||receipt.reversalStatus==='reversed') throw new Error('Este recebimento já foi estornado.');
+    const cashPayments=(receipt.payments||[]).filter(payment=>payment.creditCash!==false);
+    const openCash=cashPayments.length?this.commerceService.findOpenSessionForUser(actorName,receipt.cashboxId):null;
+    if(cashPayments.length&&!openCash?.session) throw new Error(`Abra o caixa ${receipt.cashboxName||receipt.cashboxId||''} antes de estornar o recebimento.`);
+    const installmentsDb=this.read('receivable-installments.json');
+    const linkedOperation=title.originId ? this.commerceService.getOperation(title.originId) : null;
+    const operationReference=linkedOperation?.number ? ` · ${linkedOperation.type==='service_order'?'O.S.':'Venda'} #${linkedOperation.number}` : '';
+    const reversalMovementIds=[];
+    for(const [index,payment] of (receipt.payments||[]).entries()) {
+      if(payment.creditCash===false) continue;
+      const method=this.resolveCommercePaymentMethod(payment);
+      if(!method) throw new Error(`A forma ${payment.paymentMethodName||payment.paymentMethodId} não possui correspondência ativa no Caixa.`);
+      const movement=this.commerceService.addCashMovement({
+        cashboxId:openCash.cashbox.id,type:'refund',amount:payment.value,methodId:method.id,
+        description:`Estorno recebimento ${receipt.receiptNumber} · Título ${title.number}${operationReference} · ${why}`,
+        referenceType:'receivable_receipt_reversal',referenceId:receipt.id,createdBy:actorName,
+        idempotencyKey:`reverse-receipt-${receipt.id}-${index}`,
+        metadata:{receiptId:receipt.id,receivableId:id,originalReceiptId:receipt.id,reason:why,operationId:title.originId||'',operationNumber:linkedOperation?.number||null,customerId:title.customerId||'',customerName:title.customerName||'',cashboxId:openCash.cashbox.id}
+      });
+      reversalMovementIds.push(movement.id);
+    }
+    this.financeService.reverseReceivableReceipt({receipt,title,reason:why,actor:actorName});
+    const principal=amount(receipt.principalValue||0);
+    for(const allocation of (receipt.allocations||[])) {
+      const installment=installmentsDb.items.find(item=>item.id===allocation.installmentId&&item.receivableId===id);
+      if(!installment) continue;
+      installment.paidValue=amount(Math.max(0,Number(installment.paidValue||0)-Number(allocation.value||0)));
+      installment.openBalance=amount(Number(installment.openBalance||0)+Number(allocation.value||0));
+      installment.status=installment.paidValue>0?'partial':'open'; installment.updatedAt=now(); installment.updatedBy=actorName;
+    }
+    title.openBalance=amount(Number(title.openBalance||0)+principal);
+    const remainingReceipts=receiptDb.items.filter(item=>item.receivableId===id&&item.id!==receipt.id&&item.status!=='reversed'&&item.reversalStatus!=='reversed');
+    const operationIsClosed=['cancelled','reversed'].includes(linkedOperation?.status);
+
+    if (operationIsClosed) {
+      const cancelledAt=now();
+      title.cancelledOpenBalance=amount(title.openBalance||0);
+      title.openBalance=0;
+      title.status='cancelled';
+      title.cancelReason=`${linkedOperation.status==='reversed'?'Estorno':'Cancelamento'} da operação #${linkedOperation.number||title.originId}`;
+      title.cancelledAt=title.cancelledAt||cancelledAt;
+      title.cancelledBy=title.cancelledBy||actorName;
+      for (const installment of installmentsDb.items||[]) {
+        if (installment.receivableId!==id) continue;
+        installment.cancelledOpenBalance=amount(installment.openBalance||0);
+        installment.openBalance=0;
+        installment.status='cancelled';
+        installment.cancelledAt=installment.cancelledAt||cancelledAt;
+        installment.cancelledBy=installment.cancelledBy||actorName;
+        installment.updatedAt=cancelledAt;
+        installment.updatedBy=actorName;
+      }
+    } else {
+      title.status=remainingReceipts.length?'partial':'open';
+    }
+    title.updatedAt=now(); title.updatedBy=actorName;
+    this.write('receivable-installments.json',installmentsDb);
+    this.write('receivables.json',titleDb);
+    receipt.cashboxId=receipt.cashboxId||openCash?.cashbox?.id||''; receipt.cashboxName=receipt.cashboxName||openCash?.cashbox?.name||''; receipt.status='reversed'; receipt.reversalStatus='reversed'; receipt.reversedAt=now(); receipt.reversedBy=actorName; receipt.reverseReason=why; receipt.cashReversalMovementIds=reversalMovementIds;
+    this.write('receipts.json',receiptDb);
+    this.event(id,'receipt_reversed',actorName,{receiptId:receipt.id,receiptNumber:receipt.receiptNumber,value:receipt.value,principalValue:principal,reason:why,balanceAfter:title.openBalance,cashReversalMovementIds:reversalMovementIds});
+    return {item:this.get(id),receipt};
+  }
+
   cancel(id, reason='', actor='painel') {
     const db=this.read('receivables.json'); const item=(db.items||[]).find(i=>i.id===id); if(!item) throw new Error('Título não encontrado.');
-    if (item.status === 'paid') throw new Error('Título recebido não pode ser cancelado. Use estorno.');
-    item.status='cancelled'; item.cancelReason=clean(reason); item.cancelledAt=now(); item.cancelledBy=actor; item.updatedAt=now(); this.write('receivables.json',db); this.event(id,'cancelled',actor,{reason:clean(reason)}); return this.get(id);
+    if (['cancelled','reversed'].includes(item.status)) return this.get(id);
+    const activeReceipts=this.receipts(id).filter(receipt=>receipt.status!=='reversed'&&receipt.reversalStatus!=='reversed');
+    if (activeReceipts.length) throw new Error('Título com recebimento não pode ser cancelado. Estorne os recebimentos primeiro.');
+
+    const cancelledAt=now();
+    const previousOpenBalance=amount(item.openBalance||0);
+    item.status='cancelled'; item.cancelReason=clean(reason); item.cancelledAt=cancelledAt; item.cancelledBy=actor;
+    item.cancelledOpenBalance=previousOpenBalance; item.openBalance=0; item.updatedAt=cancelledAt; item.updatedBy=actor;
+    this.write('receivables.json',db);
+
+    const installmentsDb=this.read('receivable-installments.json');
+    for (const installment of installmentsDb.items||[]) {
+      if (installment.receivableId!==id || ['cancelled','reversed'].includes(installment.status)) continue;
+      installment.cancelledOpenBalance=amount(installment.openBalance||0);
+      installment.openBalance=0;
+      installment.status='cancelled';
+      installment.cancelledAt=cancelledAt;
+      installment.cancelledBy=actor;
+      installment.updatedAt=cancelledAt;
+      installment.updatedBy=actor;
+    }
+    this.write('receivable-installments.json',installmentsDb);
+    this.event(id,'cancelled',actor,{reason:clean(reason),cancelledOpenBalance:previousOpenBalance});
+    return this.get(id);
   }
   event(receivableId, action, actor, details={}) { const db=this.read('receivable-events.json'); db.items=db.items||[]; db.items.unshift({ id:`REV-${crypto.randomUUID()}`, receivableId, action, actor, at:now(), ...details }); this.write('receivable-events.json',db); }
   events(id) { return (this.read('receivable-events.json').items||[]).filter(i=>i.receivableId===id); }

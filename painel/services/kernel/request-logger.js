@@ -19,13 +19,14 @@ export default function requestLogger(kernel) {
     const started = Date.now();
     req.kernelContext = { requestId: crypto.randomUUID(), actor: actor(req), ip: ip(req), device: device(req), module: moduleFromPath(req.originalUrl) };
     res.on('finish', () => {
-      const isPageView = req.method === 'GET' && String(res.getHeader('content-type') || '').includes('text/html');
       const isMutation = ['POST','PUT','PATCH','DELETE'].includes(req.method);
-      if (!isPageView && !isMutation) return;
-      const action = isPageView ? 'PAGE_VIEW' : `HTTP_${req.method}`;
-      kernel.logs.record({ ...req.kernelContext, action, route: req.originalUrl.split('?')[0], method: req.method,
-        statusCode: res.statusCode, result: res.statusCode >= 400 ? 'error' : 'success', durationMs: Date.now() - started,
-        category: isPageView ? 'access' : 'operational', label: isPageView ? 'Página acessada' : 'Operação executada', details: safeDetails(req) });
+      const isError = res.statusCode >= 400;
+      // PAGE_VIEW e GET comum não são mais gravados. Eles geravam dezenas de
+      // milhares de registros e bloqueavam a próxima navegação sem ganho operacional.
+      if (!isMutation && !isError) return;
+      kernel.logs.record({ ...req.kernelContext, action:`HTTP_${req.method}`, route:req.originalUrl.split('?')[0], method:req.method,
+        statusCode:res.statusCode, result:isError?'error':'success', durationMs:Date.now()-started,
+        category:isError?'error':'operational', label:isError?'Falha HTTP':'Operação executada', details:safeDetails(req) });
     });
     next();
   };

@@ -1,0 +1,119 @@
+<% layout('layout') -%>
+<%
+  const typeLabel = { product: 'Produto', service: 'Serviço', controlled_product: 'Produto Controlado' };
+  const safeItemsJson = JSON.stringify(items || []).replace(/</g, '\\u003c').replace(/>/g, '\\u003e').replace(/&/g, '\\u0026');
+%>
+<header class="erp-cat-head">
+  <div>
+    <a class="erp-cat-back" href="/erp">← ERP</a>
+    <h1>Categorias ERP</h1>
+    <p>Estrutura interna para produtos, estoque, compras, PDV, relatórios e financeiro. Sem vínculo com SEO ou navegação do site.</p>
+  </div>
+  <div class="erp-cat-head-actions">
+    <a class="btn" href="/erp/categorias/export.csv">⬇ Exportar CSV</a>
+    <button class="btn" type="button" id="erpCatPrint">🖨️ Imprimir / PDF</button>
+    <button class="btn primary" type="button" id="erpCatNew">＋ Nova categoria</button>
+  </div>
+</header>
+
+<% if (error) { %><div class="notice erp-cat-error">⚠️ <%= error %></div><% } %>
+<% if (migration && (migration.categoriesChanged || migration.productsChanged)) { %>
+  <div class="notice">✅ Migração automática concluída sem remover os vínculos antigos: <%= migration.total %> categorias ERP preparadas.</div>
+<% } %>
+
+<section class="erp-cat-summary">
+  <article class="erp-tone-info"><small>Total</small><strong><%= (items || []).length %></strong></article>
+  <article class="erp-tone-success"><small>Ativas</small><strong><%= (items || []).filter((item) => item.active !== false).length %></strong></article>
+  <article class="erp-tone-income"><small>Produtos vinculados</small><strong><%= Object.values(usage || {}).reduce((total, info) => total + (info.products || 0), 0) %></strong></article>
+</section>
+
+<section class="erp-cat-panel">
+  <div class="erp-cat-toolbar">
+    <input id="erpCatSearch" type="search" placeholder="Buscar categoria ERP..." autocomplete="off">
+    <button class="btn" type="button" id="erpCatExpandAll">▼ Expandir todas</button>
+    <button class="btn" type="button" id="erpCatCollapseAll">▶ Recolher todas</button>
+  </div>
+
+  <div class="erp-cat-table-head">
+    <span>Nome</span><span>Tipo</span><span>Produtos</span><span>Status</span><span>Última utilização</span><span>Ações</span>
+  </div>
+
+  <div class="erp-cat-tree" id="erpCatTree">
+    <% function renderNode(parentId, depth) {
+      (items || [])
+        .filter((item) => (item.parentId || null) === (parentId || null))
+        .sort((a, b) => String(a.name).localeCompare(String(b.name), 'pt-BR'))
+        .forEach((item) => {
+          const children = (items || []).filter((child) => child.parentId === item.id);
+          const info = usage[item.id] || {};
+    %>
+      <div class="erp-cat-row" data-id="<%= item.id %>" data-parent="<%= item.parentId || '' %>" data-depth="<%= depth %>" data-name="<%= String(item.name).toLocaleLowerCase('pt-BR') %>" style="--depth:<%= depth %>" <%= depth > 0 ? 'hidden' : '' %>>
+        <div class="erp-cat-name">
+          <% if (children.length) { %>
+            <button class="erp-cat-toggle" type="button" data-category-toggle="<%= item.id %>" aria-label="Expandir <%= item.name %>" aria-expanded="false">▶</button>
+          <% } else { %>
+            <span class="erp-cat-toggle-spacer"></span>
+          <% } %>
+          <div>
+            <strong><%= item.name %></strong>
+            <% if (item.description) { %><small><%= item.description %></small><% } %>
+          </div>
+        </div>
+        <span><%= typeLabel[item.type] || 'Produto' %></span>
+        <span><%= info.products || 0 %></span>
+        <span><b class="erp-cat-status <%= item.active !== false ? 'active' : 'inactive' %>"><%= item.active !== false ? 'Ativa' : 'Inativa' %></b></span>
+        <span><%= info.lastUsedAt ? new Date(info.lastUsedAt).toLocaleDateString('pt-BR') : '—' %></span>
+        <div class="erp-cat-actions">
+          <button class="btn compact" type="button" data-category-edit="<%= item.id %>">Editar</button>
+          <form method="post" action="/erp/categorias/delete" data-category-delete-form>
+            <input type="hidden" name="id" value="<%= item.id %>">
+            <button class="btn compact danger" type="submit" <%= (info.products || 0) || children.length ? 'disabled title="Categoria em uso ou com categorias filhas"' : '' %>>Excluir</button>
+          </form>
+        </div>
+      </div>
+    <% renderNode(item.id, depth + 1); }); } renderNode(null, 0); %>
+  </div>
+
+  <% if (!(items || []).length) { %>
+    <div class="erp-cat-empty">Nenhuma categoria ERP cadastrada.</div>
+  <% } %>
+</section>
+
+<div class="erp-cat-modal-bg" id="erpCatModal" aria-hidden="true">
+  <div class="erp-cat-modal" role="dialog" aria-modal="true" aria-labelledby="erpCatModalTitle">
+    <div class="erp-cat-modal-head">
+      <div><small>CADASTRO INTERNO</small><h2 id="erpCatModalTitle">Nova categoria ERP</h2></div>
+      <button type="button" class="erp-cat-close" data-category-close aria-label="Fechar">×</button>
+    </div>
+    <form method="post" action="/erp/categorias/save" id="erpCatForm">
+      <input type="hidden" name="id" id="catId">
+      <div class="erp-cat-form-grid">
+        <label>Nome *<input name="name" id="catName" required maxlength="120" placeholder="Ex.: Smartphones" autocomplete="off"></label>
+        <label>Tipo
+          <select name="type" id="catType">
+            <option value="product">Produto</option>
+            <option value="service">Serviço</option>
+            <option value="controlled_product">Produto Controlado</option>
+          </select>
+        </label>
+        <label>Categoria superior
+          <select name="parentId" id="catParent">
+            <option value="">Nenhuma (categoria principal)</option>
+            <% (tree || []).forEach((item) => { %><option value="<%= item.id %>"><%= '— '.repeat(item.depth) %><%= item.name %></option><% }); %>
+          </select>
+        </label>
+        <label>Status
+          <select name="active" id="catActive"><option value="true">Ativa</option><option value="false">Inativa</option></select>
+        </label>
+        <label class="full">Descrição<textarea name="description" id="catDescription" rows="4" maxlength="500" placeholder="Descrição interna opcional"></textarea></label>
+      </div>
+      <div class="erp-cat-modal-actions">
+        <button class="btn" type="button" data-category-close>Cancelar</button>
+        <button class="btn primary" type="submit">💾 Salvar categoria</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<script type="application/json" id="erpCatItemsData"><%- safeItemsJson %></script>
+<script src="/public/js/erp-categories.js"></script>

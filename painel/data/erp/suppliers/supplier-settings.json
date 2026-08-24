@@ -1,61 +1,224 @@
 {
-  "version": "0.12.6",
-  "requiredFields": [
-    "name",
-    "document"
-  ],
-  "visibleFields": [
-    "personType",
-    "originType",
-    "name",
-    "tradeName",
-    "document",
-    "stateRegistration",
-    "municipalRegistration",
-    "birthDate",
-    "contactName",
-    "phone",
-    "mobile",
-    "email",
-    "website",
-    "zipCode",
-    "street",
-    "number",
-    "complement",
-    "district",
-    "city",
-    "state",
-    "defaultMarkup",
-    "averageDeliveryDays",
-    "minimumOrderQuantity",
-    "minimumOrderValue",
-    "orderDays",
-    "paymentTerms",
-    "preferredPaymentMethod",
-    "currency",
-    "shippingMethods",
-    "freightNotes",
-    "suppliedCategories",
-    "contacts",
-    "internalAlert",
-    "notes"
-  ],
-  "shippingMethodOptions": [
-    "Correios",
-    "Transportadora",
-    "Motoboy",
-    "Retirada no local",
-    "Ônibus / excursão",
-    "Aéreo",
-    "Entrega própria",
-    "Outro"
-  ],
-  "suppliedCategoryOptions": [
-    "Celulares",
-    "Peças",
-    "Acessórios",
-    "Informática",
-    "Serviços",
-    "Outros"
+  "version": "0.25.9",
+  "cnpjLookupEnabled": true,
+  "allowDocumentEdit": true,
+  "fields": [
+    {
+      "key": "personType",
+      "label": "Tipo de pessoa",
+      "visible": true,
+      "required": false,
+      "order": 1
+    },
+    {
+      "key": "originType",
+      "label": "Origem",
+      "visible": true,
+      "required": false,
+      "order": 2
+    },
+    {
+      "key": "document",
+      "label": "CPF/CNPJ",
+      "visible": true,
+      "required": false,
+      "order": 3
+    },
+    {
+      "key": "name",
+      "label": "Nome/Razão social",
+      "visible": true,
+      "required": true,
+      "order": 4
+    },
+    {
+      "key": "tradeName",
+      "label": "Nome fantasia",
+      "visible": true,
+      "required": false,
+      "order": 5
+    },
+    {
+      "key": "stateRegistration",
+      "label": "Inscrição estadual/RG",
+      "visible": true,
+      "required": false,
+      "order": 6
+    },
+    {
+      "key": "municipalRegistration",
+      "label": "Inscrição municipal",
+      "visible": true,
+      "required": false,
+      "order": 7
+    },
+    {
+      "key": "birthDate",
+      "label": "Data de nascimento",
+      "visible": true,
+      "required": false,
+      "order": 8
+    },
+    {
+      "key": "contactName",
+      "label": "Pessoa de contato",
+      "visible": true,
+      "required": false,
+      "order": 9
+    },
+    {
+      "key": "mobile",
+      "label": "Celular/WhatsApp",
+      "visible": true,
+      "required": false,
+      "order": 10
+    },
+    {
+      "key": "phone",
+      "label": "Telefone",
+      "visible": true,
+      "required": false,
+      "order": 11
+    },
+    {
+      "key": "email",
+      "label": "E-mail",
+      "visible": true,
+      "required": false,
+      "order": 12
+    },
+    {
+      "key": "website",
+      "label": "Website",
+      "visible": true,
+      "required": false,
+      "order": 13
+    },
+    {
+      "key": "zipCode",
+      "label": "CEP",
+      "visible": true,
+      "required": false,
+      "order": 14
+    },
+    {
+      "key": "state",
+      "label": "Estado",
+      "visible": true,
+      "required": false,
+      "order": 15
+    },
+    {
+      "key": "street",
+      "label": "Rua",
+      "visible": true,
+      "required": false,
+      "order": 16
+    },
+    {
+      "key": "number",
+      "label": "Número",
+      "visible": true,
+      "required": false,
+      "order": 17
+    },
+    {
+      "key": "complement",
+      "label": "Complemento",
+      "visible": true,
+      "required": false,
+      "order": 18
+    },
+    {
+      "key": "district",
+      "label": "Bairro",
+      "visible": true,
+      "required": false,
+      "order": 19
+    },
+    {
+      "key": "city",
+      "label": "Cidade",
+      "visible": true,
+      "required": false,
+      "order": 20
+    },
+    {
+      "key": "defaultMarkup",
+      "label": "Markup padrão",
+      "visible": true,
+      "required": false,
+      "order": 21
+    },
+    {
+      "key": "currency",
+      "label": "Moeda padrão",
+      "visible": true,
+      "required": false,
+      "order": 22
+    },
+    {
+      "key": "averageDeliveryDays",
+      "label": "Prazo médio de entrega",
+      "visible": true,
+      "required": false,
+      "order": 23
+    },
+    {
+      "key": "minimumOrderQuantity",
+      "label": "Quantidade mínima",
+      "visible": true,
+      "required": false,
+      "order": 24
+    },
+    {
+      "key": "minimumOrderValue",
+      "label": "Valor mínimo",
+      "visible": true,
+      "required": false,
+      "order": 25
+    },
+    {
+      "key": "orderDays",
+      "label": "Dias de pedido",
+      "visible": true,
+      "required": false,
+      "order": 26
+    },
+    {
+      "key": "paymentTerms",
+      "label": "Condição de pagamento",
+      "visible": true,
+      "required": false,
+      "order": 27
+    },
+    {
+      "key": "preferredPaymentMethod",
+      "label": "Forma de pagamento",
+      "visible": true,
+      "required": false,
+      "order": 28
+    },
+    {
+      "key": "freightNotes",
+      "label": "Observações de frete",
+      "visible": true,
+      "required": false,
+      "order": 29
+    },
+    {
+      "key": "internalAlert",
+      "label": "Alerta interno",
+      "visible": true,
+      "required": false,
+      "order": 30
+    },
+    {
+      "key": "notes",
+      "label": "Observações",
+      "visible": true,
+      "required": false,
+      "order": 31
+    }
   ]
 }

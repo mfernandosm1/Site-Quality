@@ -40,16 +40,18 @@
 @media(max-width:900px){.inventory-restock-toolbar,.inventory-restock-summary{grid-template-columns:repeat(2,1fr)}}@media(max-width:600px){.inventory-restock-toolbar,.inventory-restock-summary{grid-template-columns:1fr}}
 @media(max-width:1100px){.inventory-giro-filters{grid-template-columns:repeat(3,1fr)}.inventory-giro-kpis{grid-template-columns:repeat(2,1fr)}}@media(max-width:700px){.inventory-giro-filters,.inventory-giro-kpis{grid-template-columns:1fr}}
 .inventory-status-uncontrolled{background:#27272a;color:#d4d4d8;border-color:#52525b}
+.inventory-info{display:inline-flex;align-items:center;justify-content:center;width:17px;height:17px;border:1px solid #64748b;border-radius:50%;font-size:10px;font-weight:900;color:#cbd5e1;cursor:help;vertical-align:middle;margin-left:5px}
+.inventory-filters{grid-template-columns:minmax(260px,1.5fr) repeat(4,minmax(140px,.7fr)) auto}.inventory-page-controls{display:flex;align-items:center;gap:8px;flex-wrap:wrap}.inventory-page-controls select{height:34px;border:1px solid #374151;background:#0f1114;color:#fff;border-radius:8px;padding:0 9px}.inventory-page-info{color:#94a3b8;font-size:11px;min-width:150px;text-align:right}
 </style>
 
   <header class="inventory-hero">
     <div>
       <span class="inventory-kicker">ERP · ESTOQUE v0.11.9</span>
-      <h1>Estoque</h1>
-      <p>Visão operacional de todos os produtos, com destaque para os que possuem controle de estoque ativo.</p>
+      <h1>Estoque <span class="inventory-info" title="Visão operacional de todos os produtos, com destaque para os que possuem controle de estoque ativo.">i</span></h1>
     </div>
     <div class="inventory-hero-actions">
       <a class="btn" href="/erp">← Voltar ao ERP</a>
+      <a class="btn primary" href="/erp/estoque/contagens">📋 Contagem de estoque</a>
       <a class="btn" href="/produtos?origem=erp">Cadastro de produtos</a>
     </div>
   </header>
@@ -65,10 +67,10 @@
 
   <div class="inventory-view" id="inventoryOperationView" data-inventory-panel="operation">
   <section class="inventory-kpis" aria-label="Resumo do estoque">
-    <article class="inventory-kpi"><span>Produtos controlados</span><strong><%= summary.controlled %></strong><small>Itens com controle ativo</small></article>
-    <article class="inventory-kpi inventory-kpi-warning"><span>Estoque baixo</span><strong><%= summary.low %></strong><small>Disponível menor ou igual ao mínimo</small></article>
-    <article class="inventory-kpi inventory-kpi-danger"><span>Estoque zerado</span><strong><%= summary.zero %></strong><small>Sem unidades disponíveis</small></article>
-    <article class="inventory-kpi inventory-kpi-info"><span>Unidades disponíveis</span><strong><%= summary.availableUnits %></strong><small>Físico menos reservado</small></article>
+    <article class="inventory-kpi erp-tone-info"><span>Produtos controlados</span><strong><%= summary.controlled %></strong><small>Itens com controle ativo</small></article>
+    <article class="inventory-kpi inventory-kpi-warning erp-tone-warning"><span>Estoque baixo</span><strong><%= summary.low %></strong><small>Disponível menor ou igual ao mínimo</small></article>
+    <article class="inventory-kpi inventory-kpi-danger erp-tone-expense"><span>Estoque zerado</span><strong><%= summary.zero %></strong><small>Sem unidades disponíveis</small></article>
+    <article class="inventory-kpi inventory-kpi-info erp-tone-success"><span>Unidades disponíveis</span><strong><%= summary.availableUnits %></strong><small>Físico menos reservado</small></article>
   </section>
 
   <section class="inventory-filters">
@@ -79,13 +81,14 @@
     <div><label for="inventoryCategory">Categoria</label><select id="inventoryCategory"><option value="">Todas</option><% categories.forEach((category) => { %><option value="<%= category.slug || category.id %>"><%= category.name %></option><% }) %></select></div>
     <div><label for="inventorySubcategory">Subcategoria</label><select id="inventorySubcategory"><option value="">Todas</option><% subcategories.forEach((subcategory) => { %><option value="<%= subcategory.slug || subcategory.id %>" data-category-id="<%= subcategory.categoryId || '' %>"><%= subcategory.name %></option><% }) %></select></div>
     <div><label for="inventoryStatus">Situação</label><select id="inventoryStatus"><option value="">Todas</option><option value="normal">Normal</option><option value="low">Estoque baixo</option><option value="zero">Zerado</option><option value="uncontrolled">Controle desativado</option></select></div>
+    <div><label for="inventoryPageSize">Exibir</label><select id="inventoryPageSize"><option value="50">50 produtos</option><option value="100">100 produtos</option><option value="200">200 produtos</option><option value="300">300 produtos</option></select></div>
     <button class="btn inventory-clear-filters" id="inventoryClearFilters" type="button">Limpar</button>
   </section>
 
   <section class="inventory-list-card">
     <div class="inventory-list-head">
       <div><h2>Produtos e variações</h2><p id="inventoryResultCount"><%= products.length %> produto(s) encontrado(s)</p></div>
-      <span class="badge">Movimentações inteligentes · v0.11.9</span>
+      <div class="inventory-page-controls"><span class="inventory-page-info" id="inventoryPageInfo"></span><button class="btn" id="inventoryPagePrev" type="button">← Anterior</button><button class="btn" id="inventoryPageNext" type="button">Próxima →</button></div>
     </div>
 
     <div class="inventory-table-wrap">

@@ -1,0 +1,370 @@
+{
+  "version": "2.0",
+  "items": [
+    {
+      "id": "credit-book",
+      "name": "Carnê de Crediário — Padrão",
+      "type": "credit_book",
+      "paper": "thermal",
+      "active": true,
+      "system": true,
+      "nativeKind": "credit_book",
+      "icon": "📄",
+      "editorDriven": true,
+      "content": "<div class=\"doc-header\">{{empresa_logo}}<strong class=\"doc-company\">QUALITY CELULARES</strong><span>CARNÊ / COMPROVANTE DE CREDIÁRIO</span></div><hr><div style=\"text-align:center;font-size:10.5px;line-height:1.35\"><b>{{empresa_razao}}</b><br>CNPJ: {{empresa_cnpj}}<br>{{empresa_endereco}}<br>{{empresa_cidade}}<br>Celular: {{empresa_telefone}} · {{empresa_email}}</div><hr><div><b>Venda:</b> #{{numero}}<br><b>Data:</b> {{data}}<br><b>Cliente:</b> {{cliente}}<br><b>CPF/CNPJ:</b> {{cpf}}<br><b>Telefone:</b> {{telefone}}<br><b>Endereço:</b> {{endereco}}<br><b>Total no crediário:</b> {{crediario_total}}<br><b>Parcelas:</b> {{crediario_quantidade}}</div><hr><section><h3>ITENS DA VENDA</h3>{{crediario_itens}}</section><hr><div style=\"font-size:11px;text-align:center\">Declaro estar ciente dos valores e vencimentos informados e comprometo-me com o pagamento das parcelas nas respectivas datas.</div><hr><section><h3>OBSERVAÇÕES IMPORTANTES</h3><div>Confira seu carnê, nele consta todas as parcelas de sua compra.<br>Contas em dia não impedem novas compras e evita negativações e protestos.</div></section><div style=\"margin-top:12px;text-align:center\"><b>Visite nossa loja virtual:</b><br>{{empresa_site}}</div><div style=\"margin-top:12px;text-align:center\">É um privilégio ter você como nosso cliente =)<br>Quality Celulares agradece a preferência!</div><div style=\"margin-top:22px;text-align:center\">Assinatura do cliente<br><br>__________________________________<br>{{cliente}}</div>{{crediario_canhoes}}"
+    },
+    {
+      "id": "os-exit",
+      "name": "O.S. Saída — Padrão",
+      "type": "service_order",
+      "paper": "thermal",
+      "active": true,
+      "system": true,
+      "nativeKind": "os_exit",
+      "icon": "📤",
+      "editorDriven": true,
+      "content": "<div class=\"doc-header\">{{empresa_logo}}<strong class=\"doc-company\">QUALITY CELULARES</strong><span>COMPROVANTE DE SAÍDA - O.S. Nº {{numero}}</span><b class=\"doc-status\">{{status}}</b></div><hr><div class=\"doc-grid\"><span><b>Cliente:</b> {{cliente}}</span><span><b>Equipamento:</b> {{os_aparelho}}</span><span><b>Celular:</b> {{telefone}}</span><span><b>Abertura:</b> {{os_abertura}}</span><span><b>Técnico:</b> {{os_tecnico}}</span><span><b>Saída:</b> {{os_saida}}</span></div><hr><section><h3>PROBLEMA INFORMADO</h3>{{os_problema_conteudo}}<hr><h3>SERVIÇO EXECUTADO</h3>{{os_servico_conteudo}}</section><hr><section><h3>PRODUTOS / SERVIÇOS</h3><div class=\"receipt-items os-receipt-items\">{{itens_tabela}}</div><div class=\"doc-total\"><b>TOTAL</b><strong>{{total}}</strong></div></section><hr><section><h3>PAGAMENTOS</h3>{{pagamentos}}</section><hr><section><h3>CONDIÇÕES DE GARANTIA E RETIRADA</h3><div>1 - A empresa garante seus serviços por um período de 90 dias contados a partir da data de retirada.<br>2 - Esse comprovante de saída é sua garantia, portanto guarde-o com cuidado, é obrigatório apresentar esse documento.<br>3 - A garantia perderá sua validade se houver violação do lacre colocado pela empresa no equipamento ou serviço.<br>4 - A garantia cobre somente os componentes substítuidos ou reparados não envolvendo componentes que não tenham sido relacionados ou cobrados. <br><br><strong>Considerações Finais:</strong> Declaro ter utilizado o serviço dessa empresa e que o equipamento foi devolvido em perfeito estado de funcionamento e testado antes da assinatura deste comprovante.</div></section><hr><div class=\"signature\">Assinatura: _____________________________________ </div><br>",
+      "history": [
+        {
+          "at": "2026-08-15T10:54:10.435Z",
+          "content": "<div class=\"doc-header\">{{empresa_logo}}<strong class=\"doc-company\">QUALITY CELULARES</strong><span>COMPROVANTE DE SAÍDA - O.S. Nº {{numero}}</span><b class=\"doc-status\">{{status}}</b></div><hr><div class=\"doc-grid\"><span><b>Cliente:</b> {{cliente}}</span><span><b>Saída:</b> {{os_saida}}</span><span><b>Contato/referência:</b> {{identificador}}</span><span><b>Equipamento:</b> {{os_aparelho}}</span><span><b>Técnico:</b> {{os_tecnico}}</span><span><b>Abertura:</b> {{os_abertura}}</span></div><hr><section><h3>PROBLEMA INFORMADO</h3>{{os_problema_conteudo}}<hr><h3>SERVIÇO EXECUTADO</h3>{{os_servico_conteudo}}</section><hr><section><h3>PRODUTOS / SERVIÇOS</h3>{{itens_resumo}}<div class=\"doc-total\"><b>Total:</b><strong>{{total}}</strong></div></section><hr><section><h3>PAGAMENTOS</h3>{{pagamentos}}</section><hr><section><h3>CONDIÇÕES DE GARANTIA E RETIRADA</h3><div>1 - A empresa garante seus serviços por um período de 90 dias contados a partir da data de retirada.<br>2 - Esse comprovante de saída é sua garantia, portanto guarde-o com cuidado, é obrigatório apresentar esse documento.<br>3 - A garantia perderá sua validade se houver violação do lacre colocado pela empresa no equipamento ou serviço.<br>4 - A garantia cobre somente os componentes substítuidos ou reparados não envolvendo componentes que não tenham sido relacionados ou cobrados. <br><br>Considerações Finais: Declaro ter utilizado o serviço dessa empresa e que o equipamento foi devolvido em perfeito estado de funcionamento e testado antes da assinatura deste comprovante.</div></section><hr><div class=\"signature\">Assinatura: _____________________________________ </div><br>",
+          "name": "O.S. Saída — Padrão"
+        },
+        {
+          "at": "2026-08-14T11:02:27.432Z",
+          "content": "<div class=\"doc-header\">{{empresa_logo}}<strong class=\"doc-company\">QUALITY CELULARES</strong><span>COMPROVANTE DE SAÍDA - O.S. Nº {{numero}}</span><b class=\"doc-status\">{{status}}</b></div><hr><div class=\"doc-grid\"><span><b>Cliente:</b> {{cliente}}</span><span><b>Saída:</b> {{os_saida}}</span><span><b>Contato/referência:</b> {{identificador}}</span><span><b>Equipamento:</b> {{os_aparelho}}</span><span><b>Técnico:</b> {{os_tecnico}}</span><span><b>Abertura:</b> {{os_abertura}}</span></div><hr><section><h3>PROBLEMA INFORMADO</h3>{{os_problema_conteudo}}<hr><h3>SERVIÇO EXECUTADO</h3>{{os_servico_conteudo}}</section><hr><section><h3>PRODUTOS / SERVIÇOS</h3>{{itens_resumo}}<div class=\"doc-total\"><b>Total:</b><strong>{{total}}</strong></div></section><hr><section><h3>PAGAMENTOS</h3>{{pagamentos}}</section><hr><section><h3>CONDIÇÕES DE GARANTIA E RETIRADA</h3><div>1 - A empresa garante seus serviços por um período de 90 dias contados a partir da data de retirada.<br>2 - Esse comprovante de saída é sua garantia, portanto guarde-o com cuidado, é obrigatório apresentar esse documento.<br>3 - A garantia perderá sua validade se houver violação do lacre colocado pela empresa no equipamento ou serviço.<br>4 - A garantia cobre somente os componentes substítuidos ou reparados não envolvendo componentes que não tenham sido relacionados ou cobrados. <br><br>Considerações Finais: Declaro ter utilizado o serviço dessa empresa e que o equipamento foi devolvido em perfeito estado de funcionamento e testado antes da assinatura deste comprovante.</div></section><hr><br><div class=\"signature\">Assinatura: _____________________________________ </div><br><br>",
+          "name": "O.S. Saída — Padrão"
+        },
+        {
+          "at": "2026-08-14T11:02:03.164Z",
+          "content": "<div class=\"doc-header\">{{empresa_logo}}<strong class=\"doc-company\">QUALITY CELULARES</strong><span>COMPROVANTE DE SAÍDA - O.S. Nº {{numero}}</span><b class=\"doc-status\">{{status}}</b></div><hr><div class=\"doc-grid\"><span><b>Cliente:</b> {{cliente}}</span><span><b>Saída:</b> {{os_saida}}</span><span><b>Contato/referência:</b> {{identificador}}</span><span><b>Equipamento:</b> {{os_aparelho}}</span><span><b>Técnico:</b> {{os_tecnico}}</span><span><b>Abertura:</b> {{os_abertura}}</span></div><hr><section><h3>PROBLEMA INFORMADO</h3>{{os_problema_conteudo}}<hr><h3>SERVIÇO EXECUTADO</h3>{{os_servico_conteudo}}</section><hr><section><h3>PRODUTOS / SERVIÇOS</h3>{{itens_resumo}}<div class=\"doc-total\"><b>Total:</b><strong>{{total}}</strong></div></section><hr><section><h3>PAGAMENTOS</h3>{{pagamentos}}</section><hr><section><h3>CONDIÇÕES DE GARANTIA E RETIRADA</h3><div>1 - A empresa garante seus serviços por um período de 90 dias contados a partir da data de retirada.<br>2 - Esse comprovante de saída é sua garantia, portanto guarde-o com cuidado, é obrigatório apresentar esse documento.<br>3 - A garantia perderá sua validade se houver violação do lacre colocado pela empresa no equipamento ou serviço.<br>4 - A garantia cobre somente os componentes substítuidos ou reparados não envolvendo componentes que não tenham sido relacionados ou cobrados. <br><br>Considerações Finais: Declaro ter utilizado o serviço dessa empresa e que o equipamento foi devolvido em perfeito estado de funcionamento e testado antes da assinatura deste comprovante.</div></section><hr><br><div class=\"signature\">Assinatura: _____________________________________ </div><br>",
+          "name": "O.S. Saída — Padrão"
+        },
+        {
+          "at": "2026-08-14T11:01:19.991Z",
+          "content": "<div class=\"doc-header\">{{empresa_logo}}<strong class=\"doc-company\">QUALITY CELULARES</strong><span>COMPROVANTE DE SAÍDA - O.S. Nº {{numero}}</span><b class=\"doc-status\">{{status}}</b></div><hr><div class=\"doc-grid\"><span><b>Cliente:</b> {{cliente}}</span><span><b>Saída:</b> {{os_saida}}</span><span><b>Contato/referência:</b> {{identificador}}</span><span><b>Equipamento:</b> {{os_aparelho}}</span><span><b>Técnico:</b> {{os_tecnico}}</span><span><b>Abertura:</b> {{os_abertura}}</span></div><hr><section><h3>PROBLEMA INFORMADO</h3>{{os_problema_conteudo}}<hr><h3>SERVIÇO EXECUTADO</h3>{{os_servico_conteudo}}</section><hr><section><h3>PRODUTOS / SERVIÇOS</h3>{{itens_resumo}}<div class=\"doc-total\"><b>Total:</b><strong>{{total}}</strong></div></section><hr><section><h3>PAGAMENTOS</h3>{{pagamentos}}</section><hr><section><h3>CONDIÇÕES DE GARANTIA E RETIRADA</h3><div>1 - A empresa garante seus serviços por um período de 90 dias contados a partir da data de retirada.<br>2 - Esse comprovante de saída é sua garantia, portanto guarde-o com cuidado, é obrigatório apresentar esse documento.<br>3 - A garantia perderá sua validade se houver violação do lacre colocado pela empresa no equipamento ou serviço.<br>4 - A garantia cobre somente os componentes substítuidos ou reparados não envolvendo componentes que não tenham sido relacionados ou cobrados. <br><br>Considerações Finais: Declaro ter utilizado o serviço dessa empresa e que o equipamento foi devolvido em perfeito estado de funcionamento e testado antes da assinatura deste comprovante.</div></section><hr><br><br><div class=\"signature\">Assinatura: _____________________________________ </div><br>",
+          "name": "O.S. Saída — Padrão"
+        },
+        {
+          "at": "2026-08-14T11:00:42.929Z",
+          "content": "<div class=\"doc-header\">{{empresa_logo}}<strong class=\"doc-company\">QUALITY CELULARES</strong><span>COMPROVANTE DE SAÍDA - O.S. Nº {{numero}}</span><b class=\"doc-status\">{{status}}</b></div><hr><div class=\"doc-grid\"><span><b>Cliente:</b> {{cliente}}</span><span><b>Saída:</b> {{os_saida}}</span><span><b>Contato/referência:</b> {{identificador}}</span><span><b>Equipamento:</b> {{os_aparelho}}</span><span><b>Técnico:</b> {{os_tecnico}}</span><span><b>Abertura:</b> {{os_abertura}}</span></div><hr><section><h3>PROBLEMA INFORMADO</h3>{{os_problema_conteudo}}<hr><h3>SERVIÇO EXECUTADO</h3>{{os_servico_conteudo}}</section><hr><section><h3>PRODUTOS / SERVIÇOS</h3>{{itens_resumo}}<div class=\"doc-total\"><b>Total:</b><strong>{{total}}</strong></div></section><hr><section><h3>PAGAMENTOS</h3>{{pagamentos}}</section><hr><section><h3>CONDIÇÕES DE GARANTIA E RETIRADA</h3><div>1 - A empresa garante seus serviços por um período de 90 dias contados a partir da data de retirada.<br>2 - Esse comprovante de saída é sua garantia, portanto guarde-o com cuidado, é obrigatório apresentar esse documento.<br>3 - A garantia perderá sua validade se houver violação do lacre colocado pela empresa no equipamento ou serviço.<br>4 - A garantia cobre somente os componentes substítuidos ou reparados não envolvendo componentes que não tenham sido relacionados ou cobrados. <br><br>Considerações Finais: Declaro ter utilizado o serviço dessa empresa e que o equipamento foi devolvido em perfeito estado de funcionamento e testado antes da assinatura deste comprovante.</div></section><hr><br><div class=\"signature\">Assinatura: _____________________________________ </div><br>",
+          "name": "O.S. Saída — Padrão"
+        },
+        {
+          "at": "2026-08-14T11:00:06.964Z",
+          "content": "<div class=\"doc-header\">{{empresa_logo}}<strong class=\"doc-company\">QUALITY CELULARES</strong><span>COMPROVANTE DE SAÍDA - O.S. Nº {{numero}}</span><b class=\"doc-status\">{{status}}</b></div><hr><div class=\"doc-grid\"><span><b>Cliente:</b> {{cliente}}</span><span><b>Saída:</b> {{os_saida}}</span><span><b>Contato/referência:</b> {{identificador}}</span><span><b>Equipamento:</b> {{os_aparelho}}</span><span><b>Técnico:</b> {{os_tecnico}}</span><span><b>Abertura:</b> {{os_abertura}}</span></div><hr><section><h3>PROBLEMA INFORMADO</h3>{{os_problema_conteudo}}<hr><h3>SERVIÇO EXECUTADO</h3>{{os_servico_conteudo}}</section><hr><section><h3>PRODUTOS / SERVIÇOS</h3>{{itens_resumo}}<div class=\"doc-total\"><b>Total:</b><strong>{{total}}</strong></div></section><hr><section><h3>PAGAMENTOS</h3>{{pagamentos}}</section><hr><section><h3>CONDIÇÕES DE GARANTIA E RETIRADA</h3><div>1 - A empresa garante seus serviços por um período de 90 dias contados a partir da data de retirada.<br>2 - Esse comprovante de saída é sua garantia, portanto guarde-o com cuidado, é obrigatório apresentar esse documento.<br>3 - A garantia perderá sua validade se houver violação do lacre colocado pela empresa no equipamento ou serviço.<br>4 - A garantia cobre somente os componentes substítuidos ou reparados não envolvendo componentes que não tenham sido relacionados ou cobrados. <br><br>Considerações Finais: Declaro ter utilizado o serviço dessa empresa e que o equipamento foi devolvido em perfeito estado de funcionamento e testado antes da assinatura deste comprovante.</div></section><hr><div class=\"signature\">Assinatura: _____________________________________ </div><br><br>",
+          "name": "O.S. Saída — Padrão"
+        },
+        {
+          "at": "2026-08-14T10:59:09.900Z",
+          "content": "<div class=\"doc-header\">{{empresa_logo}}<strong class=\"doc-company\">QUALITY CELULARES</strong><span>COMPROVANTE DE SAÍDA - O.S. Nº {{numero}}</span><b class=\"doc-status\">{{status}}</b></div><hr><div class=\"doc-grid\"><span><b>Cliente:</b> {{cliente}}</span><span><b>Saída:</b> {{os_saida}}</span><span><b>Contato/referência:</b> {{identificador}}</span><span><b>Equipamento:</b> {{os_aparelho}}</span><span><b>Técnico:</b> {{os_tecnico}}</span><span><b>Abertura:</b> {{os_abertura}}</span></div><hr><section><h3>PROBLEMA INFORMADO</h3>{{os_problema_conteudo}}<hr><h3>SERVIÇO EXECUTADO</h3>{{os_servico_conteudo}}</section><hr><section><h3>PRODUTOS / SERVIÇOS</h3>{{itens_resumo}}<div class=\"doc-total\"><b>Total:</b><strong>{{total}}</strong></div></section><hr><section><h3>PAGAMENTOS</h3>{{pagamentos}}</section><hr><section><h3>CONDIÇÕES DE GARANTIA E RETIRADA</h3><div>1 - A empresa garante seus serviços por um período de 90 dias contados a partir da data de retirada.<br>2 - Esse comprovante de saída é sua garantia, portanto guarde-o com cuidado, é obrigatório apresentar esse documento.<br>3 - A garantia perderá sua validade se houver violação do lacre colocado pela empresa no equipamento ou serviço.<br>4 - A garantia cobre somente os componentes substítuidos ou reparados não envolvendo componentes que não tenham sido relacionados ou cobrados. <br><br>Considerações Finais: Declaro ter utilizado o serviço dessa empresa e que o equipamento foi devolvido em perfeito estado de funcionamento e testado antes da assinatura deste comprovante.</div></section><hr><div class=\"signature\">Assinatura: ________________________________</div>",
+          "name": "O.S. Saída — Padrão"
+        },
+        {
+          "at": "2026-08-13T23:02:45.004Z",
+          "content": "<div class=\"doc-header\">{{empresa_logo}}<strong class=\"doc-company\">QUALITY CELULARES</strong><span>COMPROVANTE DE SAÍDA - O.S. Nº {{numero}}</span><b class=\"doc-status\">{{status}}</b></div><hr><div class=\"doc-grid\"><span><b>Cliente:</b> {{cliente}}</span><span><b>Contato/referência:</b> {{identificador}}</span><span><b>Equipamento:</b> {{os_aparelho}}</span><span><b>Técnico:</b> {{os_tecnico}}</span><span><b>Abertura:</b> {{os_abertura}}</span></div>{{os_servico_bloco}}<hr><h3>PRODUTOS / SERVIÇOS</h3>{{itens_resumo}}<div class=\"doc-total\"><b>Total:</b><strong>{{total}}</strong></div><hr><h3>CONDIÇÕES DE GARANTIA E RETIRADA</h3><div><span style=\"font-size:14px\">texto</span>1 - A empresa garante seus serviços por um período de 90 dias contados a partir da data de retirada.<br>2 - Esse comprovante de saída é sua garantia, portanto guarde-o com cuidado, é obrigatório apresentar esse documento.<br>3 - A garantia perderá sua validade se houver violação do lacre colocado pela empresa no equipamento ou serviço.<br>4 - A garantia cobre somente os componentes substítuidos ou reparados não envolvendo componentes que não tenham sido relacionados ou cobrados. <br><br><strong>Considerações Finais:</strong> Declaro ter utilizado o serviço dessa empresa e que o equipamento foi devolvido em perfeito estado de funcionamento e testado antes da assinatura deste comprovante.</div><div class=\"signature\">Assinatura: ________________________________</div>",
+          "name": "O.S. Saída — Padrão"
+        },
+        {
+          "at": "2026-08-04T02:15:33.720Z",
+          "content": "<div class=\"doc-header\">{{empresa_logo}}<strong class=\"doc-company\">QUALITY CELULARES</strong><span>COMPROVANTE DE SAÍDA - O.S. Nº {{numero}}</span><b class=\"doc-status\">{{status}}</b></div><hr><div class=\"doc-grid\"><span><b>Cliente:</b> {{cliente}}</span><span><b>Contato/referência:</b> {{identificador}}</span><span><b>Equipamento:</b> {{os_aparelho}}</span><span><b>Técnico:</b> {{os_tecnico}}</span><span><b>Abertura:</b> {{os_abertura}}</span></div>{{os_servico_bloco}}<hr><h3>PRODUTOS / SERVIÇOS</h3>{{itens_resumo}}<div class=\"doc-total\"><b>Total:</b><strong>{{total}}</strong></div><hr><h3>CONDIÇÕES DE GARANTIA E RETIRADA</h3><div>1 - A empresa garante seus serviços por um período de 90 dias contados a partir da data de retirada.<br>2 - Esse comprovante de saída é sua garantia, portanto guarde-o com cuidado, é obrigatório apresentar esse documento.<br>3 - A garantia perderá sua validade se houver violação do lacre colocado pela empresa no equipamento ou serviço.<br>4 - A garantia cobre somente os componentes substítuidos ou reparados não envolvendo componentes que não tenham sido relacionados ou cobrados. <br><br>Considerações Finais: Declaro ter utilizado o serviço dessa empresa e que o equipamento foi devolvido em perfeito estado de funcionamento e testado antes da assinatura deste comprovante.</div><div class=\"signature\">Assinatura: ________________________________</div>",
+          "name": "O.S. Saída — Padrão"
+        }
+      ],
+      "visualConfig": {
+        "kind": "os_exit",
+        "header": {
+          "logo": true,
+          "company": true,
+          "title": true,
+          "status": true,
+          "companyText": "QUALITY CELULARES",
+          "titleText": "COMPROVANTE DE SAÍDA - O.S."
+        },
+        "layout": {
+          "preset": "standard",
+          "order": [
+            "header",
+            "details",
+            "service",
+            "products",
+            "payments",
+            "terms",
+            "signature"
+          ],
+          "blocks": {
+            "header": {
+              "fontSize": 12,
+              "titleSize": 12,
+              "titleBold": true,
+              "titleAlign": "left",
+              "spaceBefore": 0,
+              "spaceAfter": 0,
+              "separator": true
+            },
+            "details": {
+              "fontSize": 12,
+              "titleSize": 12,
+              "titleBold": true,
+              "titleAlign": "left",
+              "spaceBefore": 0,
+              "spaceAfter": 0,
+              "separator": true
+            },
+            "service": {
+              "fontSize": 12,
+              "titleSize": 12,
+              "titleBold": true,
+              "titleAlign": "left",
+              "spaceBefore": 0,
+              "spaceAfter": 0,
+              "separator": true
+            },
+            "products": {
+              "fontSize": 12,
+              "titleSize": 12,
+              "titleBold": true,
+              "titleAlign": "left",
+              "spaceBefore": 0,
+              "spaceAfter": 0,
+              "separator": true
+            },
+            "payments": {
+              "fontSize": 12,
+              "titleSize": 12,
+              "titleBold": true,
+              "titleAlign": "left",
+              "spaceBefore": 0,
+              "spaceAfter": 0,
+              "separator": true
+            },
+            "terms": {
+              "fontSize": 12,
+              "titleSize": 12,
+              "titleBold": true,
+              "titleAlign": "left",
+              "spaceBefore": 0,
+              "spaceAfter": 0,
+              "separator": true
+            },
+            "signature": {
+              "fontSize": 12,
+              "titleSize": 12,
+              "titleBold": true,
+              "titleAlign": "left",
+              "spaceBefore": 0,
+              "spaceAfter": 0,
+              "separator": true
+            }
+          }
+        },
+        "os": {
+          "customer": true,
+          "reference": true,
+          "equipment": true,
+          "technician": true,
+          "openedAt": true,
+          "deliveredAt": true,
+          "service": true,
+          "serviceTitle": "SERVIÇO EXECUTADO",
+          "products": true,
+          "productsTitle": "PRODUTOS / SERVIÇOS",
+          "payments": true,
+          "paymentsTitle": "PAGAMENTOS",
+          "terms": true,
+          "termsTitle": "CONDIÇÕES DE GARANTIA E RETIRADA",
+          "signature": true,
+          "signatureLabel": "Assinatura:",
+          "termsText": "1 - A empresa garante seus serviços por um período de 90 dias contados a partir da data de retirada.\r\n2 - Esse comprovante de saída é sua garantia, portanto guarde-o com cuidado, é obrigatório apresentar esse documento.\r\n3 - A garantia perderá sua validade se houver violação do lacre colocado pela empresa no equipamento ou serviço.\r\n4 - A garantia cobre somente os componentes substítuidos ou reparados não envolvendo componentes que não tenham sido relacionados ou cobrados. \r\n\r\nConsiderações Finais: Declaro ter utilizado o serviço dessa empresa e que o equipamento foi devolvido em perfeito estado de funcionamento e testado antes da assinatura deste comprovante.",
+          "problem": true,
+          "problemTitle": "PROBLEMA INFORMADO"
+        }
+      }
+    },
+    {
+      "id": "os-entry",
+      "name": "O.S. Entrada — Padrão",
+      "type": "service_order",
+      "paper": "thermal",
+      "active": true,
+      "system": true,
+      "nativeKind": "os_entry",
+      "icon": "📥",
+      "editorDriven": true,
+      "content": "<div class=\"receipt-block receipt-block-header\" style=\"font-size:12px;margin-top:0px;margin-bottom:0px\"><div class=\"doc-header\">{{empresa_logo}}<strong class=\"doc-company\">QUALITY CELULARES</strong><span>COMPROVANTE DE ENTRADA - O.S. Nº {{numero}}</span><b class=\"doc-status\">{{status}}</b></div></div><hr><div class=\"receipt-block receipt-block-details\" style=\"font-size:12px;margin-top:0px;margin-bottom:0px\"><div class=\"doc-grid\"><span><b>Cliente:</b> {{cliente}}</span><span><b>Equipamento:</b> {{os_aparelho}}</span><span><b>Celular:</b> {{telefone}}</span><span><b>Abertura:</b> {{os_abertura}}</span><span><b>Técnico:</b> {{os_tecnico}}</span></div></div><hr><div class=\"receipt-block receipt-block-problem\" style=\"font-size:12px;margin-top:0px;margin-bottom:0px\"><section><h3 style=\"font-size:12px;font-weight:700;text-align:left\">PROBLEMA INFORMADO</h3>{{os_problema_conteudo}}</section></div><hr><div class=\"receipt-block receipt-block-accessories\" style=\"font-size:12px;margin-top:0px;margin-bottom:0px\"><section><h3 style=\"font-size:12px;font-weight:700;text-align:left\">ACESSÓRIOS</h3>{{os_acessorios_conteudo}}</section></div><hr><div class=\"receipt-block receipt-block-products\" style=\"font-size:12px;margin-top:0px;margin-bottom:0px\"><section><h3 style=\"font-size:12px;font-weight:700;text-align:left\">PRODUTOS / SERVIÇOS</h3><div class=\"receipt-items os-receipt-items\">{{itens_tabela}}</div><div class=\"doc-total\"><b>TOTAL</b><strong>{{total}}</strong></div></section></div><hr><div class=\"receipt-block receipt-block-terms\" style=\"font-size:12px;margin-top:0px;margin-bottom:0px\"><section><h3 style=\"font-size:12px;font-weight:700;text-align:left\">CONDIÇÕES DE SERVIÇO</h3><div>1 - Fornecemos 90 dias para mão de obra e peças usadas no conserto, contados a partir da data de entrega.<br>2 - Os Aparelhos não retirados no prazo máximo de <strong>60 dias</strong> contados apartir da comunicação para sua retirada<br>sofrerão acréscimo das despesas de armazenamento e após <strong>90 dias</strong> serão descartados.                    <br>3 - No caso de não aprovação do orçamento será cobrada a taxa no valor de <strong>R$ 40,00</strong> e o cliente concederá a Empresa alguns dias para adequar o equipamento as mesmas condições em que o recebeu, lacrando-o na saída.<br>4 - A Quality Celulares não é responsável pela perda de dados ou destruição de mídias resultantes do uso ou reparo do produto, seja devido a problemas de vírus ou qualquer outro motivo.<br><br><strong>AUTORIZAÇÃO:</strong> O cliente autoriza a Empresa a realizar a desmontagem do seu equipamento para efetuar a devida análise do defeito visando a elaboração do orçamento, efetuando todas as substituições de componentes e ajustes necessários a chegar no diagnóstico dos problemas apresentados.<br>Declaro estar ciente dos termos e estou de acordo com suas condições.</div></section></div><hr><div class=\"receipt-block receipt-block-passwords\" style=\"font-size:12px;margin-top:0px;margin-bottom:0px\">{{senhas_desenho}}</div><hr><div class=\"receipt-block receipt-block-signature\" style=\"font-size:12px;margin-top:0px;margin-bottom:0px\"><br><div class=\"signature\"><strong>Assinatura:</strong> ________________________________</div></div><br><br>",
+      "history": [
+        {
+          "at": "2026-08-14T11:07:45.028Z",
+          "content": "<div class=\"receipt-block receipt-block-header\" style=\"font-size:12px;margin-top:0px;margin-bottom:0px\"><div class=\"doc-header\">{{empresa_logo}}<strong class=\"doc-company\">QUALITY CELULARES</strong><span>COMPROVANTE DE ENTRADA - O.S. Nº {{numero}}</span><b class=\"doc-status\">{{status}}</b></div></div><hr><div class=\"receipt-block receipt-block-details\" style=\"font-size:12px;margin-top:0px;margin-bottom:0px\"><div class=\"doc-grid\"><span><b>Cliente:</b> {{cliente}}</span><span><b>Contato/referência:</b> {{identificador}}</span><span><b>Equipamento:</b> {{os_aparelho}}</span><span><b>Técnico:</b> {{os_tecnico}}</span><span><b>Abertura:</b> {{os_abertura}}</span></div></div><hr><div class=\"receipt-block receipt-block-problem\" style=\"font-size:12px;margin-top:0px;margin-bottom:0px\"><section><h3 style=\"font-size:12px;font-weight:700;text-align:left\">PROBLEMA INFORMADO</h3>{{os_problema_conteudo}}</section></div><hr><div class=\"receipt-block receipt-block-accessories\" style=\"font-size:12px;margin-top:0px;margin-bottom:0px\"><section><h3 style=\"font-size:12px;font-weight:700;text-align:left\">ACESSÓRIOS</h3>{{os_acessorios_conteudo}}</section></div><hr><div class=\"receipt-block receipt-block-products\" style=\"font-size:12px;margin-top:0px;margin-bottom:0px\"><section><h3 style=\"font-size:12px;font-weight:700;text-align:left\">PRODUTOS / SERVIÇOS</h3>{{itens_resumo}}<div class=\"doc-total\"><b>Total:</b><strong>{{total}}</strong></div></section></div><hr><div class=\"receipt-block receipt-block-terms\" style=\"font-size:12px;margin-top:0px;margin-bottom:0px\"><section><h3 style=\"font-size:12px;font-weight:700;text-align:left\">CONDIÇÕES DE SERVIÇO</h3><div>1 - Fornecemos 90 dias para mão de obra e peças usadas no conserto, contados a partir da data de entrega.<br>2 - Os Aparelhos não retirados no prazo máximo de 60 dias contados apartir da comunicação para sua retirada<br>sofrerão acréscimo das despesas de armazenamento e após 90 dias serão descartados.                    <br>3 - No caso de não aprovação do orçamento será cobrada a taxa no valor de R$ 40,00 e o cliente concederá a Empresa alguns dias para adequar o equipamento as mesmas condições em que o recebeu, lacrando-o na saída.<br>4 - A Quality Celulares não é responsável pela perda de dados ou destruição de mídias resultantes do uso ou reparo do produto, seja devido a problemas de vírus ou qualquer outro motivo.<br><br>AUTORIZAÇÃO: O cliente autoriza a Empresa a realizar a desmontagem do seu equipamento para efetuar a devida análise do defeito visando a elaboração do orçamento, efetuando todas as substituições de componentes e ajustes necessários a chegar no diagnóstico dos problemas apresentados.<br>Declaro estar ciente dos termos e estou de acordo com suas condições.</div></section></div><hr><div class=\"receipt-block receipt-block-passwords\" style=\"font-size:12px;margin-top:0px;margin-bottom:0px\">{{senhas_desenho}}</div><hr><div class=\"receipt-block receipt-block-signature\" style=\"font-size:12px;margin-top:0px;margin-bottom:0px\"><br><div class=\"signature\">Assinatura: ________________________________</div></div><br><br>",
+          "name": "O.S. Entrada — Padrão"
+        },
+        {
+          "at": "2026-08-14T11:04:20.724Z",
+          "content": "<div class=\"receipt-block receipt-block-header\" style=\"font-size:12px;margin-top:0px;margin-bottom:0px\"><div class=\"doc-header\">{{empresa_logo}}<strong class=\"doc-company\">QUALITY CELULARES</strong><span>COMPROVANTE DE ENTRADA - O.S. Nº {{numero}}</span><b class=\"doc-status\">{{status}}</b></div></div><hr><div class=\"receipt-block receipt-block-details\" style=\"font-size:12px;margin-top:0px;margin-bottom:0px\"><div class=\"doc-grid\"><span><b>Cliente:</b> {{cliente}}</span><span><b>Contato/referência:</b> {{identificador}}</span><span><b>Equipamento:</b> {{os_aparelho}}</span><span><b>Técnico:</b> {{os_tecnico}}</span><span><b>Abertura:</b> {{os_abertura}}</span></div></div><hr><div class=\"receipt-block receipt-block-problem\" style=\"font-size:12px;margin-top:0px;margin-bottom:0px\"><section><h3 style=\"font-size:12px;font-weight:700;text-align:left\">PROBLEMA INFORMADO</h3>{{os_problema_conteudo}}</section></div><hr><div class=\"receipt-block receipt-block-accessories\" style=\"font-size:12px;margin-top:0px;margin-bottom:0px\"><section><h3 style=\"font-size:12px;font-weight:700;text-align:left\">ACESSÓRIOS</h3>{{os_acessorios_conteudo}}</section></div><hr><div class=\"receipt-block receipt-block-products\" style=\"font-size:12px;margin-top:0px;margin-bottom:0px\"><section><h3 style=\"font-size:12px;font-weight:700;text-align:left\">PRODUTOS / SERVIÇOS</h3>{{itens_resumo}}<div class=\"doc-total\"><b>Total:</b><strong>{{total}}</strong></div></section></div><hr><div class=\"receipt-block receipt-block-terms\" style=\"font-size:12px;margin-top:0px;margin-bottom:0px\"><section><h3 style=\"font-size:12px;font-weight:700;text-align:left\">CONDIÇÕES DE SERVIÇO</h3><div>1 - Fornecemos 90 dias para mão de obra e peças usadas no conserto, contados a partir da data de entrega.<br>2 - Os Aparelhos não retirados no prazo máximo de 60 dias contados apartir da comunicação para sua retirada<br>sofrerão acréscimo das despesas de armazenamento e após 90 dias serão descartados.                    <br>3 - No caso de não aprovação do orçamento será cobrada a taxa no valor de R$ 40,00 e o cliente concederá a Empresa alguns dias para adequar o equipamento as mesmas condições em que o recebeu, lacrando-o na saída.<br>4 - A Quality Celulares não é responsável pela perda de dados ou destruição de mídias resultantes do uso ou reparo do produto, seja devido a problemas de vírus ou qualquer outro motivo.<br><br>AUTORIZAÇÃO: O cliente autoriza a Empresa a realizar a desmontagem do seu equipamento para efetuar a devida análise do defeito visando a elaboração do orçamento, efetuando todas as substituições de componentes e ajustes necessários a chegar no diagnóstico dos problemas apresentados.<br>Declaro estar ciente dos termos e estou de acordo com suas condições.</div></section></div><hr><div class=\"receipt-block receipt-block-passwords\" style=\"font-size:12px;margin-top:0px;margin-bottom:0px\">{{senhas_desenho}}</div><hr><div class=\"receipt-block receipt-block-signature\" style=\"font-size:12px;margin-top:0px;margin-bottom:0px\"><br><div class=\"signature\">Assinatura: ________________________________</div></div><br>",
+          "name": "O.S. Entrada — Padrão"
+        },
+        {
+          "at": "2026-08-14T11:02:55.232Z",
+          "content": "<div class=\"receipt-block receipt-block-header\" style=\"font-size:12px;margin-top:0px;margin-bottom:0px\"><div class=\"doc-header\">{{empresa_logo}}<strong class=\"doc-company\">QUALITY CELULARES</strong><span>COMPROVANTE DE ENTRADA - O.S. Nº {{numero}}</span><b class=\"doc-status\">{{status}}</b></div></div><hr><div class=\"receipt-block receipt-block-details\" style=\"font-size:12px;margin-top:0px;margin-bottom:0px\"><div class=\"doc-grid\"><span><b>Cliente:</b> {{cliente}}</span><span><b>Contato/referência:</b> {{identificador}}</span><span><b>Equipamento:</b> {{os_aparelho}}</span><span><b>Técnico:</b> {{os_tecnico}}</span><span><b>Abertura:</b> {{os_abertura}}</span></div></div><hr><div class=\"receipt-block receipt-block-problem\" style=\"font-size:12px;margin-top:0px;margin-bottom:0px\"><section><h3 style=\"font-size:12px;font-weight:700;text-align:left\">PROBLEMA INFORMADO</h3>{{os_problema_conteudo}}</section></div><hr><div class=\"receipt-block receipt-block-accessories\" style=\"font-size:12px;margin-top:0px;margin-bottom:0px\"><section><h3 style=\"font-size:12px;font-weight:700;text-align:left\">ACESSÓRIOS</h3>{{os_acessorios_conteudo}}</section></div><hr><div class=\"receipt-block receipt-block-products\" style=\"font-size:12px;margin-top:0px;margin-bottom:0px\"><section><h3 style=\"font-size:12px;font-weight:700;text-align:left\">PRODUTOS / SERVIÇOS</h3>{{itens_resumo}}<div class=\"doc-total\"><b>Total:</b><strong>{{total}}</strong></div></section></div><hr><div class=\"receipt-block receipt-block-terms\" style=\"font-size:12px;margin-top:0px;margin-bottom:0px\"><section><h3 style=\"font-size:12px;font-weight:700;text-align:left\">CONDIÇÕES DE SERVIÇO</h3><div>1 - Fornecemos 90 dias para mão de obra e peças usadas no conserto, contados a partir da data de entrega.<br>2 - Os Aparelhos não retirados no prazo máximo de 60 dias contados apartir da comunicação para sua retirada<br>sofrerão acréscimo das despesas de armazenamento e após 90 dias serão descartados.                    <br>3 - No caso de não aprovação do orçamento será cobrada a taxa no valor de R$ 40,00 e o cliente concederá a Empresa alguns dias para adequar o equipamento as mesmas condições em que o recebeu, lacrando-o na saída.<br>4 - A Quality Celulares não é responsável pela perda de dados ou destruição de mídias resultantes do uso ou reparo do produto, seja devido a problemas de vírus ou qualquer outro motivo.<br><br>AUTORIZAÇÃO: O cliente autoriza a Empresa a realizar a desmontagem do seu equipamento para efetuar a devida análise do defeito visando a elaboração do orçamento, efetuando todas as substituições de componentes e ajustes necessários a chegar no diagnóstico dos problemas apresentados.<br>Declaro estar ciente dos termos e estou de acordo com suas condições.</div></section></div><hr><div class=\"receipt-block receipt-block-passwords\" style=\"font-size:12px;margin-top:0px;margin-bottom:0px\">{{senhas_desenho}}</div><hr><div class=\"receipt-block receipt-block-signature\" style=\"font-size:12px;margin-top:0px;margin-bottom:0px\"><div class=\"signature\">Assinatura: ________________________________</div></div>",
+          "name": "O.S. Entrada — Padrão"
+        },
+        {
+          "at": "2026-08-14T10:54:23.710Z",
+          "content": "<div class=\"receipt-block receipt-block-header\" style=\"font-size:12px;margin-top:0px;margin-bottom:0px\"><div class=\"doc-header\">{{empresa_logo}}<strong class=\"doc-company\">QUALITY CELULARES</strong><span>COMPROVANTE DE ENTRADA - O.S. Nº {{numero}}</span><b class=\"doc-status\">{{status}}</b></div></div><hr><div class=\"receipt-block receipt-block-details\" style=\"font-size:12px;margin-top:0px;margin-bottom:0px\"><div class=\"doc-grid\"><span><b>Cliente:</b> {{cliente}}</span><span><b>Contato/referência:</b> {{identificador}}</span><span><b>Equipamento:</b> {{os_aparelho}}</span><span><b>Técnico:</b> {{os_tecnico}}</span><span><b>Abertura:</b> {{os_abertura}}</span></div></div><hr><div class=\"receipt-block receipt-block-problem\" style=\"font-size:12px;margin-top:0px;margin-bottom:0px\"><section><h3 style=\"font-size:12px;font-weight:700;text-align:left\">PROBLEMA INFORMADO</h3>{{os_problema_conteudo}}</section></div><hr><div class=\"receipt-block receipt-block-accessories\" style=\"font-size:12px;margin-top:0px;margin-bottom:0px\"><section><h3 style=\"font-size:12px;font-weight:700;text-align:left\">ACESSÓRIOS</h3>{{os_acessorios_conteudo}}</section></div><hr><div class=\"receipt-block receipt-block-products\" style=\"font-size:12px;margin-top:0px;margin-bottom:0px\"><section><h3 style=\"font-size:12px;font-weight:700;text-align:left\">PRODUTOS / SERVIÇOS</h3>{{itens_resumo}}<div class=\"doc-total\"><b>Total:</b><strong>{{total}}</strong></div></section></div><hr><div class=\"receipt-block receipt-block-terms\" style=\"font-size:12px;margin-top:0px;margin-bottom:0px\"><section><h3 style=\"font-size:12px;font-weight:700;text-align:left\">CONDIÇÕES DE SERVIÇO</h3><div>CONDIÇÕES DE SERVIÇO<br>1 - Fornecemos 90 dias para mão de obra e peças usadas no conserto, contados a partir da data de entrega.<br>2 - Os Aparelhos não retirados no prazo máximo de 60 dias contados apartir da comunicação para sua retirada<br>sofrerão acréscimo das despesas de armazenamento e após 90 dias serão descartados.                    <br>3 - No caso de não aprovação do orçamento será cobrada a taxa no valor de R$ 40,00 e o cliente concederá a Empresa alguns dias para adequar o equipamento as mesmas condições em que o recebeu, lacrando-o na saída.<br>4 - A Quality Celulares não é responsável pela perda de dados ou destruição de mídias resultantes do uso ou reparo do produto, seja devido a problemas de vírus ou qualquer outro motivo.<br><br>AUTORIZAÇÃO: O cliente autoriza a Empresa a realizar a desmontagem do seu equipamento para efetuar a devida análise do defeito visando a elaboração do orçamento, efetuando todas as substituições de componentes e ajustes necessários a chegar no diagnóstico dos problemas apresentados.<br>Declaro estar ciente dos termos e estou de acordo com suas condições.</div></section></div><hr><div class=\"receipt-block receipt-block-passwords\" style=\"font-size:12px;margin-top:0px;margin-bottom:0px\">{{senhas_desenho}}</div><hr><div class=\"receipt-block receipt-block-signature\" style=\"font-size:12px;margin-top:0px;margin-bottom:0px\"><div class=\"signature\">Assinatura: ________________________________</div></div>",
+          "name": "O.S. Entrada — Padrão"
+        },
+        {
+          "at": "2026-08-14T10:53:51.585Z",
+          "content": "<div class=\"doc-header\">{{empresa_logo}}<strong class=\"doc-company\">QUALITY CELULARES</strong><span>COMPROVANTE DE ENTRADA - O.S. Nº {{numero}}</span><b class=\"doc-status\">{{status}}</b></div><hr><div class=\"doc-grid\"><span><b>Cliente:</b> {{cliente}}</span><span><b>Contato/referência:</b> {{identificador}}</span><span><b>Equipamento:</b> {{os_aparelho}}</span><span><b>Técnico:</b> {{os_tecnico}}</span><span><b>Abertura:</b> {{os_abertura}}</span></div>{{os_problema_bloco}}{{os_acessorios_bloco}}<hr><h3>PRODUTOS / SERVIÇOS</h3>{{itens_resumo}}<div class=\"doc-total\"><b>Total:</b><strong>{{total}}</strong></div><hr><h3>CONDIÇÕES DE SERVIÇO</h3><span style=\"font-size:14px\"></span>1 - Fornecemos 90 dias para mão de obra e peças usadas no conserto, contados a partir da data de entrega.<br>2 - Os Aparelhos não retirados no prazo máximo de 60 dias contados apartir da comunicação para sua retirada<br>sofrerão acréscimo das despesas de armazenamento e após 90 dias serão descartados.                    <br>3 - No caso de não aprovação do orçamento será cobrada a taxa no valor de R$ 40,00 e o cliente concederá a Empresa alguns dias para adequar o equipamento as mesmas condições em que o recebeu, lacrando-o na saída.<br>4 - A Quality Celulares não é responsável pela perda de dados ou destruição de mídias resultantes do uso ou reparo do produto, seja devido a problemas de vírus ou qualquer outro motivo.<br><br>AUTORIZAÇÃO: O cliente autoriza a Empresa a realizar a desmontagem do seu equipamento para efetuar a devida análise do defeito visando a elaboração do orçamento, efetuando todas as substituições de componentes e ajustes necessários a chegar no diagnóstico dos problemas apresentados.<br>Declaro estar ciente dos termos e estou de acordo com suas condições.</div>{{senhas_desenho}}<div class=\"signature\">Assinatura: ________________________________</div>",
+          "name": "O.S. Entrada — Padrão"
+        },
+        {
+          "at": "2026-08-13T23:01:12.214Z",
+          "content": "<div class=\"doc-header\">{{empresa_logo}}<strong class=\"doc-company\">QUALITY CELULARES</strong><span>COMPROVANTE DE ENTRADA - O.S. Nº {{numero}}</span><b class=\"doc-status\">{{status}}</b></div><hr><div class=\"doc-grid\"><span><b>Cliente:</b> {{cliente}}</span><span><b>Contato/referência:</b> {{identificador}}</span><span><b>Equipamento:</b> {{os_aparelho}}</span><span><b>Técnico:</b> {{os_tecnico}}</span><span><b>Abertura:</b> {{os_abertura}}</span></div>{{os_problema_bloco}}{{os_acessorios_bloco}}<hr><h3>PRODUTOS / SERVIÇOS</h3>{{itens_resumo}}<div class=\"doc-total\"><b>Total:</b><strong>{{total}}</strong></div><hr><h3>CONDIÇÕES DE SERVIÇO</h3><span style=\"font-size:14px\">texto</span>1 - Fornecemos 90 dias para mão de obra e peças usadas no conserto, contados a partir da data de entrega.<br>2 - Os Aparelhos não retirados no prazo máximo de 60 dias contados apartir da comunicação para sua retirada<br>sofrerão acréscimo das despesas de armazenamento e após 90 dias serão descartados.                    <br>3 - No caso de não aprovação do orçamento será cobrada a taxa no valor de R$ 40,00 e o cliente concederá a Empresa alguns dias para adequar o equipamento as mesmas condições em que o recebeu, lacrando-o na saída.<br>4 - A Quality Celulares não é responsável pela perda de dados ou destruição de mídias resultantes do uso ou reparo do produto, seja devido a problemas de vírus ou qualquer outro motivo.<br><br>AUTORIZAÇÃO: O cliente autoriza a Empresa a realizar a desmontagem do seu equipamento para efetuar a devida análise do defeito visando a elaboração do orçamento, efetuando todas as substituições de componentes e ajustes necessários a chegar no diagnóstico dos problemas apresentados.<br>Declaro estar ciente dos termos e estou de acordo com suas condições.</div>{{senhas_desenho}}<div class=\"signature\">Assinatura: ________________________________</div>",
+          "name": "O.S. Entrada — Padrão"
+        },
+        {
+          "at": "2026-08-04T02:16:00.057Z",
+          "content": "<div class=\"doc-header\">{{empresa_logo}}<strong class=\"doc-company\">QUALITY CELULARES</strong><span>COMPROVANTE DE ENTRADA - O.S. Nº {{numero}}</span><b class=\"doc-status\">{{status}}</b></div><hr><div class=\"doc-grid\"><span><b>Cliente:</b> {{cliente}}</span><span><b>Contato/referência:</b> {{identificador}}</span><span><b>Equipamento:</b> {{os_aparelho}}</span><span><b>Técnico:</b> {{os_tecnico}}</span><span><b>Abertura:</b> {{os_abertura}}</span></div>{{os_problema_bloco}}{{os_acessorios_bloco}}<hr><h3>PRODUTOS / SERVIÇOS</h3>{{itens_resumo}}<div class=\"doc-total\"><b>Total:</b><strong>{{total}}</strong></div><hr><h3>CONDIÇÕES DE SERVIÇO</h3>1 - Fornecemos 90 dias para mão de obra e peças usadas no conserto, contados a partir da data de entrega.<br>2 - Os Aparelhos não retirados no prazo máximo de 60 dias contados apartir da comunicação para sua retirada<br>sofrerão acréscimo das despesas de armazenamento e após 90 dias serão descartados.                    <br>3 - No caso de não aprovação do orçamento será cobrada a taxa no valor de R$ 40,00 e o cliente concederá a Empresa alguns dias para adequar o equipamento as mesmas condições em que o recebeu, lacrando-o na saída.<br>4 - A Quality Celulares não é responsável pela perda de dados ou destruição de mídias resultantes do uso ou reparo do produto, seja devido a problemas de vírus ou qualquer outro motivo.<br><br>AUTORIZAÇÃO: O cliente autoriza a Empresa a realizar a desmontagem do seu equipamento para efetuar a devida análise do defeito visando a elaboração do orçamento, efetuando todas as substituições de componentes e ajustes necessários a chegar no diagnóstico dos problemas apresentados.<br>Declaro estar ciente dos termos e estou de acordo com suas condições.</div>{{senhas_desenho}}<div class=\"signature\">Assinatura: ________________________________</div>",
+          "name": "O.S. Entrada — Padrão"
+        },
+        {
+          "at": "2026-08-04T02:14:26.490Z",
+          "content": "<div class=\"doc-header\">{{empresa_logo}}<strong class=\"doc-company\">QUALITY CELULARES</strong><span>COMPROVANTE DE ENTRADA - O.S. Nº {{numero}}</span><b class=\"doc-status\">{{status}}</b></div><hr><div class=\"doc-grid\"><span><b>Cliente:</b> {{cliente}}</span><span><b>Contato/referência:</b> {{identificador}}</span><span><b>Equipamento:</b> {{os_aparelho}}</span><span><b>Técnico:</b> {{os_tecnico}}</span><span><b>Abertura:</b> {{os_abertura}}</span></div>{{os_problema_bloco}}{{os_acessorios_bloco}}<hr><h3>PRODUTOS / SERVIÇOS</h3>{{itens_resumo}}<div class=\"doc-total\"><b>Total:</b><strong>{{total}}</strong></div><hr><h3>CONDIÇÕES DE SERVIÇO</h3><div>CONDIÇÕES DE SERVIÇO<br>1 - Fornecemos 90 dias para mão de obra e peças usadas no conserto, contados a partir da data de entrega.<br>2 - Os Aparelhos não retirados no prazo máximo de 60 dias contados apartir da comunicação para sua retirada<br>sofrerão acréscimo das despesas de armazenamento e após 90 dias serão descartados.                    <br>3 - No caso de não aprovação do orçamento será cobrada a taxa no valor de R$ 40,00 e o cliente concederá a Empresa alguns dias para adequar o equipamento as mesmas condições em que o recebeu, lacrando-o na saída.<br>4 - A Quality Celulares não é responsável pela perda de dados ou destruição de mídias resultantes do uso ou reparo do produto, seja devido a problemas de vírus ou qualquer outro motivo.<br><br>AUTORIZAÇÃO: O cliente autoriza a Empresa a realizar a desmontagem do seu equipamento para efetuar a devida análise do defeito visando a elaboração do orçamento, efetuando todas as substituições de componentes e ajustes necessários a chegar no diagnóstico dos problemas apresentados.<br>Declaro estar ciente dos termos e estou de acordo com suas condições.</div>{{senhas_desenho}}<div class=\"signature\">Assinatura: ________________________________</div>",
+          "name": "O.S. Entrada — Padrão"
+        }
+      ],
+      "visualConfig": {
+        "kind": "os_entry",
+        "header": {
+          "logo": true,
+          "company": true,
+          "title": true,
+          "status": true,
+          "companyText": "QUALITY CELULARES",
+          "titleText": "COMPROVANTE DE ENTRADA - O.S."
+        },
+        "layout": {
+          "preset": "standard",
+          "order": [
+            "header",
+            "details",
+            "problem",
+            "accessories",
+            "products",
+            "terms",
+            "passwords",
+            "signature"
+          ],
+          "blocks": {
+            "header": {
+              "fontSize": 12,
+              "titleSize": 12,
+              "titleBold": true,
+              "titleAlign": "left",
+              "spaceBefore": 0,
+              "spaceAfter": 0,
+              "separator": true
+            },
+            "details": {
+              "fontSize": 12,
+              "titleSize": 12,
+              "titleBold": true,
+              "titleAlign": "left",
+              "spaceBefore": 0,
+              "spaceAfter": 0,
+              "separator": true
+            },
+            "problem": {
+              "fontSize": 12,
+              "titleSize": 12,
+              "titleBold": true,
+              "titleAlign": "left",
+              "spaceBefore": 0,
+              "spaceAfter": 0,
+              "separator": true
+            },
+            "accessories": {
+              "fontSize": 12,
+              "titleSize": 12,
+              "titleBold": true,
+              "titleAlign": "left",
+              "spaceBefore": 0,
+              "spaceAfter": 0,
+              "separator": true
+            },
+            "products": {
+              "fontSize": 12,
+              "titleSize": 12,
+              "titleBold": true,
+              "titleAlign": "left",
+              "spaceBefore": 0,
+              "spaceAfter": 0,
+              "separator": true
+            },
+            "terms": {
+              "fontSize": 12,
+              "titleSize": 12,
+              "titleBold": true,
+              "titleAlign": "left",
+              "spaceBefore": 0,
+              "spaceAfter": 0,
+              "separator": true
+            },
+            "passwords": {
+              "fontSize": 12,
+              "titleSize": 12,
+              "titleBold": true,
+              "titleAlign": "left",
+              "spaceBefore": 0,
+              "spaceAfter": 0,
+              "separator": true
+            },
+            "signature": {
+              "fontSize": 12,
+              "titleSize": 12,
+              "titleBold": true,
+              "titleAlign": "left",
+              "spaceBefore": 0,
+              "spaceAfter": 0,
+              "separator": true
+            }
+          },
+          "selectedBlock": "header"
+        },
+        "os": {
+          "customer": true,
+          "reference": true,
+          "equipment": true,
+          "technician": true,
+          "openedAt": true,
+          "problem": true,
+          "problemTitle": "PROBLEMA INFORMADO",
+          "accessories": true,
+          "accessoriesTitle": "ACESSÓRIOS",
+          "products": true,
+          "productsTitle": "PRODUTOS / SERVIÇOS",
+          "terms": true,
+          "termsTitle": "CONDIÇÕES DE SERVIÇO",
+          "passwords": true,
+          "passwordsTitle": "Senhas de desenho",
+          "signature": true,
+          "signatureLabel": "Assinatura:",
+          "termsText": "1 - Fornecemos 90 dias para mão de obra e peças usadas no conserto, contados a partir da data de entrega.\n2 - Os Aparelhos não retirados no prazo máximo de 60 dias contados apartir da comunicação para sua retirada\nsofrerão acréscimo das despesas de armazenamento e após 90 dias serão descartados.                    \n3 - No caso de não aprovação do orçamento será cobrada a taxa no valor de R$ 40,00 e o cliente concederá a Empresa alguns dias para adequar o equipamento as mesmas condições em que o recebeu, lacrando-o na saída.\n4 - A Quality Celulares não é responsável pela perda de dados ou destruição de mídias resultantes do uso ou reparo do produto, seja devido a problemas de vírus ou qualquer outro motivo.\n\nAUTORIZAÇÃO: O cliente autoriza a Empresa a realizar a desmontagem do seu equipamento para efetuar a devida análise do defeito visando a elaboração do orçamento, efetuando todas as substituições de componentes e ajustes necessários a chegar no diagnóstico dos problemas apresentados.\nDeclaro estar ciente dos termos e estou de acordo com suas condições."
+        }
+      }
+    },
+    {
+      "id": "sale-receipt",
+      "name": "Venda — Padrão",
+      "type": "sale",
+      "paper": "thermal",
+      "active": true,
+      "system": true,
+      "nativeKind": "sale",
+      "icon": "🧾",
+      "editorDriven": true,
+      "content": "<div class=\"doc-header\">{{empresa_logo}}<strong class=\"doc-company\">QUALITY CELULARES</strong><span>COMPROVANTE NÃO FISCAL</span><b class=\"doc-status\">{{status}}</b></div><hr><div><b>Operação:</b> {{numero}}<br><b>Data:</b> {{data}}<br><b>Cliente:</b> {{cliente}}<br><b>CPF/CNPJ:</b> {{cpf}}<br><b>Telefone:</b> {{telefone}}<br><b>Endereço:</b> {{endereco}}<br><b>Identificador:</b> {{identificador}}<br><b>Vendedor:</b> {{vendedor}}</div><hr><h3>DESCRIÇÃO DO PRODUTO</h3>{{itens_tabela}}<div class=\"doc-total\"><b>TOTAL</b><strong>{{total}}</strong></div><hr><h3>PAGAMENTOS</h3>{{pagamentos}}<div class=\"sale-footer\"><strong>Foi um prazer lhe atender. Volte sempre!</strong><span>Se remover os lacres do produto, perde a garantia.</span></div>"
+    }
+  ]
+}

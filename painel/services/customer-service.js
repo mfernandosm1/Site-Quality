@@ -17,6 +17,45 @@ function onlyDigits(value = '') {
   return String(value || '').replace(/\D/g, '');
 }
 
+
+const CUSTOMER_FIELD_DEFINITIONS = [
+  { key:'personType', label:'Tipo de pessoa', section:'main', locked:true, enabled:true, required:true, order:10 },
+  { key:'document', label:'CPF / CNPJ', section:'main', enabled:true, required:false, order:20 },
+  { key:'name', label:'Nome / Razão social', section:'main', locked:true, enabled:true, required:true, order:30 },
+  { key:'tradeName', label:'Nome fantasia', section:'main', personType:'pj', enabled:true, required:false, order:40 },
+  { key:'stateRegistration', label:'RG / Inscrição estadual', section:'main', enabled:true, required:false, order:50 },
+  { key:'companyStatus', label:'Situação cadastral', section:'main', personType:'pj', enabled:true, required:false, order:60 },
+  { key:'openingDate', label:'Data de abertura', section:'main', personType:'pj', enabled:true, required:false, order:70 },
+  { key:'legalNature', label:'Natureza jurídica', section:'main', personType:'pj', enabled:true, required:false, order:80 },
+  { key:'companySize', label:'Porte', section:'main', personType:'pj', enabled:true, required:false, order:90 },
+  { key:'primaryCnae', label:'Atividade principal (CNAE)', section:'main', personType:'pj', enabled:true, required:false, order:100 },
+  { key:'birthDate', label:'Data de nascimento', section:'main', personType:'pf', enabled:true, required:false, order:110 },
+  { key:'monthlyIncome', label:'Renda mensal', section:'main', personType:'pf', enabled:true, required:false, order:112 },
+  { key:'profession', label:'Profissão', section:'main', personType:'pf', enabled:true, required:false, order:114 },
+  { key:'spouseName', label:'Cônjuge', section:'main', personType:'pf', enabled:true, required:false, order:116 },
+  { key:'fatherName', label:'Nome do pai', section:'main', personType:'pf', enabled:true, required:false, order:117 },
+  { key:'motherName', label:'Nome da mãe', section:'main', personType:'pf', enabled:true, required:false, order:118 },
+  { key:'creditLimit', label:'Limite de crédito', section:'relationship', enabled:true, required:false, order:5 },
+  { key:'mobile', label:'Celular / WhatsApp', section:'main', enabled:true, required:false, order:120 },
+  { key:'phone', label:'Telefone', section:'main', enabled:true, required:false, order:130 },
+  { key:'email', label:'E-mail', section:'main', enabled:true, required:false, order:140 },
+  { key:'zipCode', label:'CEP', section:'address', enabled:true, required:false, order:10 },
+  { key:'state', label:'Estado', section:'address', enabled:true, required:false, order:20 },
+  { key:'street', label:'Endereço', section:'address', enabled:true, required:false, order:30 },
+  { key:'number', label:'Número', section:'address', enabled:true, required:false, order:40 },
+  { key:'complement', label:'Complemento', section:'address', enabled:true, required:false, order:50 },
+  { key:'district', label:'Bairro', section:'address', enabled:true, required:false, order:60 },
+  { key:'city', label:'Cidade', section:'address', enabled:true, required:false, order:70 },
+  { key:'classificationId', label:'Classificação', section:'relationship', enabled:true, required:false, order:10 },
+  { key:'origin', label:'Origem do cliente', section:'relationship', enabled:true, required:false, order:20 },
+  { key:'active', label:'Situação', section:'relationship', enabled:true, required:false, order:30 },
+  { key:'notes', label:'Observações', section:'relationship', enabled:true, required:false, order:40 }
+];
+
+function defaultCustomerFieldSettings() {
+  return CUSTOMER_FIELD_DEFINITIONS.map(item => ({ ...item }));
+}
+
 function isValidCpf(value = '') {
   const cpf = onlyDigits(value);
   if (cpf.length !== 11 || /^(\d)\1{10}$/.test(cpf)) return false;
@@ -56,6 +95,7 @@ export default class CustomerService {
     this.customersFile = path.join(this.dataDir, 'customers.json');
     this.classificationsFile = path.join(this.dataDir, 'classifications.json');
     this.settingsFile = path.join(this.dataDir, 'customer-settings.json');
+    this._jsonCache = new Map();
     this.ensureStorage();
   }
 
@@ -73,10 +113,10 @@ export default class CustomerService {
       ]
     });
     this.ensureJsonFile(this.settingsFile, {
-      version: '0.12.5',
-      requiredFields: ['name'],
-      visibleFields: ['personType','name','tradeName','document','stateRegistration','companyStatus','openingDate','legalNature','companySize','primaryCnae','birthDate','phone','mobile','email','zipCode','street','number','complement','district','city','state','classificationId','origin','notes']
+      version: '0.23.0',
+      fields: defaultCustomerFieldSettings()
     });
+    this.migrateFieldSettings();
   }
 
   ensureJsonFile(file, initialData) {
@@ -91,14 +131,65 @@ export default class CustomerService {
   }
 
   readJson(file, fallback) {
-    try { return JSON.parse(fs.readFileSync(file, 'utf8')); }
-    catch (_) { return clone(fallback); }
+    try {
+      const stat = fs.statSync(file);
+      const cached = this._jsonCache.get(file);
+      if (cached && cached.mtimeMs === stat.mtimeMs && cached.size === stat.size) return cached.data;
+      const data = JSON.parse(fs.readFileSync(file, 'utf8'));
+      this._jsonCache.set(file, { mtimeMs:stat.mtimeMs, size:stat.size, data });
+      return data;
+    } catch (_) { return clone(fallback); }
   }
 
   writeJsonAtomic(file, data) {
     const temp = `${file}.tmp`;
     fs.writeFileSync(temp, JSON.stringify(data, null, 2), 'utf8');
     fs.renameSync(temp, file);
+    try { const stat=fs.statSync(file); this._jsonCache.set(file,{mtimeMs:stat.mtimeMs,size:stat.size,data}); } catch (_) { this._jsonCache.delete(file); }
+  }
+
+  migrateFieldSettings() {
+    const current = this.readJson(this.settingsFile, {});
+    const currentFields = Array.isArray(current.fields) ? current.fields : [];
+    const legacyVisible = Array.isArray(current.visibleFields) ? current.visibleFields : null;
+    const legacyRequired = Array.isArray(current.requiredFields) ? current.requiredFields : [];
+    const byKey = new Map(currentFields.map(item => [String(item.key), item]));
+    const fields = defaultCustomerFieldSettings().map(definition => {
+      const saved = byKey.get(definition.key) || {};
+      const enabled = definition.locked ? true : (saved.enabled !== undefined ? saved.enabled !== false : (legacyVisible ? legacyVisible.includes(definition.key) : definition.enabled));
+      const required = definition.locked ? true : (saved.required !== undefined ? saved.required === true : legacyRequired.includes(definition.key));
+      return { ...definition, ...saved, key:definition.key, label:definition.label, displayLabel:String(definition.key === 'street' && normalizeText(saved.displayLabel) === 'rua' ? definition.label : (saved.displayLabel || definition.label)).trim() || definition.label, section:definition.section, personType:definition.personType || '', locked:Boolean(definition.locked), enabled, required: enabled && required, order:Number(saved.order || definition.order) };
+    });
+    const normalized = { version:'0.23.0', fields };
+    if (JSON.stringify(current) !== JSON.stringify(normalized)) this.writeJsonAtomic(this.settingsFile, normalized);
+    return normalized;
+  }
+
+  getFieldSettings() {
+    return clone(this.migrateFieldSettings());
+  }
+
+  saveFieldSettings(payload = {}) {
+    const current = this.getFieldSettings();
+    const submitted = Array.isArray(payload.fields) ? payload.fields : [];
+    const byKey = new Map(submitted.map(item => [String(item.key || ''), item]));
+    const fields = current.fields.map(definition => {
+      const input = byKey.get(definition.key) || {};
+      const enabled = definition.locked ? true : input.enabled === true || input.enabled === 'true';
+      const required = definition.locked ? true : enabled && (input.required === true || input.required === 'true');
+      const order = Math.max(1, Number.parseInt(input.order, 10) || definition.order || 1);
+      const displayLabel = String(input.displayLabel || definition.displayLabel || definition.label).trim().slice(0, 80) || definition.label;
+      return { ...definition, displayLabel, enabled, required, order };
+    });
+    const result = { version:'0.23.0', fields };
+    this.writeJsonAtomic(this.settingsFile, result);
+    return clone(result);
+  }
+
+  resetFieldSettings() {
+    const result = { version:'0.23.0', fields:defaultCustomerFieldSettings() };
+    this.writeJsonAtomic(this.settingsFile, result);
+    return clone(result);
   }
 
   listClassifications() {
@@ -169,7 +260,7 @@ export default class CustomerService {
     return {
       personType,
       name: String(payload.name || '').trim(),
-      tradeName: String(payload.tradeName || '').trim(),
+      tradeName: personType === 'pj' ? String(payload.tradeName || '').trim() : '',
       document: onlyDigits(payload.document),
       stateRegistration: String(payload.stateRegistration || '').trim(),
       companyStatus: String(payload.companyStatus || '').trim(),
@@ -178,6 +269,12 @@ export default class CustomerService {
       companySize: String(payload.companySize || '').trim(),
       primaryCnae: String(payload.primaryCnae || '').trim(),
       birthDate: String(payload.birthDate || '').trim(),
+      monthlyIncome: Math.max(0, Number(String(payload.monthlyIncome ?? 0).replace(',', '.')) || 0),
+      profession: String(payload.profession || '').trim(),
+      spouseName: String(payload.spouseName || '').trim(),
+      fatherName: String(payload.fatherName || '').trim(),
+      motherName: String(payload.motherName || '').trim(),
+      creditLimit: Math.max(0, Number(String(payload.creditLimit ?? 0).replace(',', '.')) || 0),
       phone: onlyDigits(payload.phone),
       mobile: onlyDigits(payload.mobile),
       email: String(payload.email || '').trim().toLowerCase(),
@@ -203,6 +300,16 @@ export default class CustomerService {
 
   validate(customer) {
     if (!customer.name) throw new Error('O nome do cliente é obrigatório.');
+
+    const settings = this.getFieldSettings();
+    for (const field of settings.fields || []) {
+      if (field.enabled === false || field.required !== true) continue;
+      if (field.personType && field.personType !== customer.personType) continue;
+      const value = customer[field.key];
+      if (value === undefined || value === null || String(value).trim() === '') {
+        throw new Error(`O campo ${field.displayLabel || field.label} é obrigatório.`);
+      }
+    }
 
     if (customer.document) {
       if (customer.personType === 'pf' && !isValidCpf(customer.document)) {
@@ -270,5 +377,22 @@ export default class CustomerService {
     const current = this.getCustomer(id);
     if (!current) throw new Error('Cliente não encontrado.');
     return this.updateCustomer(id, { ...current, active: Boolean(active) }, { updatedBy, allowDuplicate:true });
+  }
+
+  setActiveMany(ids = [], active = false, updatedBy = 'painel') {
+    const uniqueIds = [...new Set((Array.isArray(ids) ? ids : []).map(id => String(id || '').trim()).filter(Boolean))];
+    if (!uniqueIds.length) throw new Error('Selecione ao menos um cliente.');
+    const data = this.readJson(this.customersFile, { version:'0.12.5', nextCode:1, items:[] });
+    const found = new Set();
+    const changedAt = new Date().toISOString();
+    data.items = (data.items || []).map(customer => {
+      if (!uniqueIds.includes(String(customer.id))) return customer;
+      found.add(String(customer.id));
+      return { ...customer, active:Boolean(active), updatedAt:changedAt, updatedBy };
+    });
+    const missing = uniqueIds.filter(id => !found.has(id));
+    if (missing.length) throw new Error(`${missing.length} cliente(s) não foram encontrados.`);
+    this.writeJsonAtomic(this.customersFile, data);
+    return { changed:uniqueIds.length, active:Boolean(active) };
   }
 }

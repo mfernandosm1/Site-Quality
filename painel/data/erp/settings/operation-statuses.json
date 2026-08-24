@@ -1,0 +1,131 @@
+{
+  "version": "1.0",
+  "items": [
+    {
+      "id": "sale-delivered",
+      "name": "VENDA ENTREGUE",
+      "active": true,
+      "defaultSale": true,
+      "defaultOs": false
+    },
+    {
+      "id": "paid-pickup",
+      "name": "PAGO / AGUARDANDO RETIRADA",
+      "active": true,
+      "defaultSale": false,
+      "defaultOs": false
+    },
+    {
+      "id": "paid-reserved",
+      "name": "PAGO / RESERVADO",
+      "active": true,
+      "defaultSale": false,
+      "defaultOs": false
+    },
+    {
+      "id": "awaiting-post",
+      "name": "Aguardando Correios",
+      "active": true,
+      "defaultSale": false,
+      "defaultOs": false
+    },
+    {
+      "id": "on-counter",
+      "name": "Na bancada",
+      "active": true,
+      "defaultSale": false,
+      "defaultOs": true
+    },
+    {
+      "id": "awaiting-customer",
+      "name": "Aguardando o cliente",
+      "active": true,
+      "defaultSale": false,
+      "defaultOs": false
+    },
+    {
+      "id": "service-delivered",
+      "name": "SERVIÇO ENTREGUE",
+      "active": true,
+      "defaultSale": false,
+      "defaultOs": false
+    },
+    {
+      "id": "service-feedback",
+      "name": "SERVIÇO ENTREGUE / FEEDBACK OK",
+      "active": true,
+      "defaultSale": false,
+      "defaultOs": false
+    },
+    {
+      "id": "warranty-counter",
+      "name": "Garantia - Na bancada",
+      "active": true,
+      "defaultSale": false,
+      "defaultOs": false
+    },
+    {
+      "id": "warranty-delivered",
+      "name": "GARANTIA / ENTREGUE",
+      "active": true,
+      "defaultSale": false,
+      "defaultOs": false
+    },
+    {
+      "id": "no-repair",
+      "name": "CONSERTO INVIÁVEL",
+      "active": true,
+      "defaultSale": false,
+      "defaultOs": false
+    },
+    {
+      "id": "no-repair-delivered",
+      "name": "CONSERTO INVIÁVEL / ENTREGUE",
+      "active": true,
+      "defaultSale": false,
+      "defaultOs": false
+    },
+    {
+      "id": "quote-approved",
+      "name": "ORÇAMENTO APROVADO / AGUARDANDO RETIRADA",
+      "active": true,
+      "defaultSale": false,
+      "defaultOs": false
+    },
+    {
+      "id": "quote-cancelled",
+      "name": "ORÇAMENTO CANCELADO - Entregue",
+      "active": true,
+      "defaultSale": false,
+      "defaultOs": false
+    },
+    {
+      "id": "resale-review",
+      "name": "REVENDA / AVALIAÇÃO",
+      "active": true,
+      "defaultSale": false,
+      "defaultOs": false
+    },
+    {
+      "id": "resale-paid",
+      "name": "REVENDA / PAGO AO CLIENTE",
+      "active": true,
+      "defaultSale": false,
+      "defaultOs": false
+    },
+    {
+      "id": "abandoned",
+      "name": "Abandonado - Descartado",
+      "active": true,
+      "defaultSale": false,
+      "defaultOs": false
+    },
+    {
+      "id": "gift",
+      "name": "Brinde",
+      "active": true,
+      "defaultSale": false,
+      "defaultOs": false
+    }
+  ]
+}

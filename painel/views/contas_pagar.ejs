@@ -4,63 +4,75 @@
   const money=value=>Number(value||0).toLocaleString('pt-BR',{style:'currency',currency:'BRL'});
   const fmtDate=value=>value?new Date(`${value}T12:00:00`).toLocaleDateString('pt-BR'):'—';
   const labels={open:'Em aberto',partial:'Parcial',paid:'Pago',cancelled:'Estornada',reversed:'Estornada'};
-  const methods=(catalogs.paymentMethods||[]).filter(item=>item.active!==false);
-  const costCenters=(catalogs.costCenters||[]).filter(item=>item.active!==false);
-  const accounts=(catalogs.accounts||[]).filter(item=>item.active!==false);
+  const ref=value=>String(value||'').replace(/\b([A-Z]{1,5})-0+(\d+)\b/g,'$1-$2');
+  const referenceOf=title=>{ const text=[title.description,title.documentNumber,title.originId].filter(Boolean).join(' '); const match=text.match(/COM-0*\d+/i); const purchase=match?ref(match[0].toUpperCase()):''; const doc=String(title.documentNumber||'').trim(); if(purchase){ if(doc&&!/^COM-0*\d+$/i.test(doc)) return `Nota ${ref(doc)} · Compra ${purchase}`; return `Compra ${purchase}`; } return ref(title.notes||doc||title.description||'—'); };
+  const methods=(catalogs.paymentMethods||[]).filter(item=>item.active!==false&&item.modules?.purchases!==false);
+  const costCenters=(catalogs.costCenters||[]).filter(item=>item.active!==false&&item.nature!=='receita'&&item.hiddenFromCatalog!==true);
+  const accounts=(catalogs.accounts||[]).filter(item=>item.active!==false&&item.type!=='receita'&&item.hiddenFromCatalog!==true);
 %>
 <section class="finance-hero compact">
-  <div><span class="erp-kicker">FINANCEIRO · v<%= version %></span><h1>📤 Contas a Pagar</h1><p>Cadastre despesas, acompanhe vencimentos e registre pagamentos com integração ao caixa.</p></div>
+  <div><span class="erp-kicker">FINANCEIRO · v<%= version %></span><h1>📤 Contas a Pagar <button type="button" class="payable-info-tip payable-hero-tip" data-tooltip="Cadastre despesas, acompanhe vencimentos e registre pagamentos com integração ao caixa." aria-label="Informações sobre Contas a Pagar">i</button></h1></div>
   <div class="finance-header-actions"><button type="button" class="btn btn-success" id="newPayable">+ Nova conta</button><a class="btn" href="/erp/financeiro">← Financeiro</a></div>
 </section>
 <div id="payablesApp">
-  <section class="receivable-kpis">
-    <button type="button" class="receivable-kpi" data-summary-filter="open"><span>Em aberto</span><strong><%= money(summary.open.value) %></strong><small><%= summary.open.count %> conta(s)</small></button>
-    <button type="button" class="receivable-kpi" data-summary-filter="today"><span>Vencem hoje</span><strong><%= money(summary.dueToday.value) %></strong><small><%= summary.dueToday.count %> parcela(s)</small></button>
-    <button type="button" class="receivable-kpi danger" data-summary-filter="overdue"><span>Vencidos</span><strong><%= money(summary.overdue.value) %></strong><small><%= summary.overdue.count %> parcela(s)</small></button>
-    <button type="button" class="receivable-kpi success" data-summary-filter="paid-month"><span>Pagos no mês</span><strong><%= money(summary.paidMonth.value) %></strong><small><%= summary.paidMonth.count %> pagamento(s)</small></button>
+  <section class="receivable-kpis payable-primary-kpis">
+    <button type="button" class="receivable-kpi erp-tone-warning" data-summary-filter="total-period"><span>Total do período</span><strong><%= money(summary.totalPeriod?.value) %></strong><small><%= summary.totalPeriod?.count || 0 %> parcela(s) · pagas no período + em aberto no período</small></button>
+    <button type="button" class="receivable-kpi erp-tone-expense" data-summary-filter="open"><span>Em aberto</span><strong><%= money(summary.open.value) %></strong><small><%= summary.open.count %> parcela(s)</small></button>
+    <button type="button" class="receivable-kpi erp-tone-expense" data-summary-filter="today"><span>Vencem hoje</span><strong><%= money(summary.dueToday.value) %></strong><small><%= summary.dueToday.count %> parcela(s)</small></button>
+    <button type="button" class="receivable-kpi danger erp-tone-expense" data-summary-filter="overdue"><span>Vencidos</span><strong><%= money(summary.overdue.value) %></strong><small><%= summary.overdue.count %> parcela(s)</small></button>
+    <button type="button" class="receivable-kpi success erp-tone-success" data-summary-filter="paid-month"><span>Pagos no período</span><strong><%= money(summary.paidMonth.value) %></strong><small><%= summary.paidMonth.count %> pagamento(s)</small></button>
   </section>
-
-  <nav class="payable-view-tabs" aria-label="Visualização das contas a pagar">
-    <button type="button" class="active" data-payable-view="active" aria-pressed="true">Contas Ativas <span id="activePayablesCount"><%= (typeof viewCounts !== 'undefined' && viewCounts && Number.isFinite(Number(viewCounts.active))) ? viewCounts.active : titles.length %></span></button>
-    <button type="button" data-payable-view="reversed" aria-pressed="false">Estornadas <span id="reversedPayablesCount"><%= (typeof viewCounts !== 'undefined' && viewCounts && Number.isFinite(Number(viewCounts.reversed))) ? viewCounts.reversed : 0 %></span></button>
-  </nav>
+  <section class="receivable-kpis payable-period-kpis" aria-label="Compromissos por período">
+    <button type="button" class="receivable-kpi erp-tone-warning" data-summary-filter="this-week"><span>Contas desta semana</span><strong><%= money(summary.thisWeek?.value) %></strong><small><%= summary.thisWeek?.count || 0 %> parcela(s)</small></button>
+    <button type="button" class="receivable-kpi erp-tone-warning" data-summary-filter="next-week"><span>Contas da próxima semana</span><strong><%= money(summary.nextWeek?.value) %></strong><small><%= summary.nextWeek?.count || 0 %> parcela(s)</small></button>
+    <button type="button" class="receivable-kpi erp-tone-warning" data-summary-filter="next-30"><span>Próximos 30 dias</span><strong><%= money(summary.next30Days?.value) %></strong><small><%= summary.next30Days?.count || 0 %> parcela(s)</small></button>
+  </section>
 
   <section class="receivable-filter-panel">
     <div class="receivable-search-row">
-      <label class="receivable-search"><span>Buscar</span><input id="payableSearch" placeholder="Número, fornecedor, documento ou descrição"></label>
+      <label class="receivable-search"><span>Buscar</span><input id="payableSearch" placeholder="Número, fornecedor, referência ou descrição"></label>
       <label><span>Situação</span><select id="payableStatus"><option value="">Todas</option><option value="open">Em aberto</option><option value="partial">Parcial</option><option value="paid">Paga</option><option value="overdue">Vencida</option><option value="reversed">Estornada</option></select></label>
       <label><span>Origem</span><select id="payableType"><option value="">Todas</option><option value="expense">Despesas</option><option value="purchase">Compras</option></select></label>
       <button type="button" class="btn" id="togglePayableFilters">Mais filtros</button><button type="button" class="btn btn-ghost" id="clearPayableFilters">Limpar</button>
     </div>
-    <div class="receivable-quick-filters"><button data-due-preset="">Todos</button><button data-due-preset="today">Hoje</button><button data-due-preset="overdue">Vencidos</button><button data-due-preset="next7">Próximos 7 dias</button><button data-due-preset="month">Este mês</button><button data-due-preset="nextMonth">Próximo mês</button><button data-due-preset="future">Futuras</button></div>
+    <div class="receivable-quick-filters"><button data-due-preset="">Todos</button><button data-due-preset="today">Hoje</button><button data-due-preset="overdue">Vencidos</button><button data-due-preset="next7">Próximos 7 dias</button><button data-due-preset="month">Este mês</button><button data-due-preset="nextMonth">Próximo mês</button><button data-due-preset="thisWeek">Esta semana</button></div>
     <div class="receivable-advanced-filters" id="payableAdvancedFilters" hidden>
       <div class="payables-period-filter">
-        <span class="operations-period-title">Período de vencimento</span>
+        <span class="operations-period-title" id="payablePeriodTitle">Período de vencimento</span>
         <div class="operations-period-inputs">
           <label><span>De</span><span class="operations-date-field"><input type="date" id="payableDueFrom"><button class="operations-period-trigger" type="button" data-quick-date-trigger="from" aria-label="Abrir períodos rápidos da data inicial" title="Períodos rápidos">▾</button></span></label>
           <label><span>Até</span><span class="operations-date-field"><input type="date" id="payableDueTo"><button class="operations-period-trigger" type="button" data-quick-date-trigger="to" aria-label="Abrir períodos rápidos da data final" title="Períodos rápidos">▾</button></span></label>
         </div>
       </div>
-      <label><span>Fornecedor</span><select id="payableSupplier"><option value="">Todos</option><% suppliers.forEach(item=>{ %><option value="<%= item.id %>"><%= item.name %></option><% }) %></select></label>
-      <label><span>Forma prevista</span><select id="payablePaymentMethod"><option value="">Todas</option><% methods.forEach(item=>{ %><option value="<%= item.id %>"><%= item.name %></option><% }) %></select></label>
-      <label><span>Centro de custo</span><select id="payableCostCenter"><option value="">Todos</option><% costCenters.forEach(item=>{ %><option value="<%= item.id %>"><%= item.name %></option><% }) %></select></label>
-      <label><span>Plano de contas</span><select id="payableAccount"><option value="">Todos</option><% accounts.forEach(item=>{ %><option value="<%= item.id %>"><%= item.name %></option><% }) %></select></label>
+      <div class="payable-multi-label"><span>Forma prevista</span><details class="cashflow-multi payable-multi" data-payable-multi-filter><summary><span data-payable-multi-summary>Todas</span><b>▾</b></summary><div class="cashflow-multi-menu"><button type="button" data-clear-payable-multi>Limpar seleção</button><% methods.forEach(item=>{ %><label class="payable-multi-option"><input type="checkbox" name="paymentMethodId" value="<%= item.id %>"><span><%= item.name %></span></label><% }) %></div></details></div>
+      <div class="payable-multi-label"><span>Classificação financeira</span><details class="cashflow-multi payable-multi" data-payable-multi-filter><summary><span data-payable-multi-summary>Todas</span><b>▾</b></summary><div class="cashflow-multi-menu"><button type="button" data-clear-payable-multi>Limpar seleção</button><% accounts.forEach(item=>{ const center=costCenters.find(c=>c.id===(item.costCenterId||item.categoryId)); %><label class="payable-multi-option"><input type="checkbox" name="accountId" value="<%= item.id %>"><span><%= center ? center.name + ' › ' : '' %><%= item.name %></span></label><% }) %></div></details></div>
+      <div class="payable-multi-label"><span>Fornecedor</span><details class="cashflow-multi payable-multi" data-payable-multi-filter><summary><span data-payable-multi-summary>Todos</span><b>▾</b></summary><div class="cashflow-multi-menu"><button type="button" data-clear-payable-multi>Limpar seleção</button><% suppliers.forEach(item=>{ %><label class="payable-multi-option"><input type="checkbox" name="supplierId" value="<%= item.id %>"><span><%= item.name %></span></label><% }) %></div></details></div>
     </div>
+    <nav class="payable-view-tabs" aria-label="Visualização das contas a pagar">
+      <button type="button" data-payable-view="all" aria-pressed="false">Ativas + Pagas <span id="allPayablesCount"><%= (typeof viewCounts !== 'undefined' && viewCounts && Number.isFinite(Number(viewCounts.all))) ? viewCounts.all : titles.length %></span></button>
+      <button type="button" class="active" data-payable-view="active" aria-pressed="true">Contas Ativas <span id="activePayablesCount"><%= (typeof viewCounts !== 'undefined' && viewCounts && Number.isFinite(Number(viewCounts.active))) ? viewCounts.active : titles.length %></span></button>
+      <button type="button" data-payable-view="paid" aria-pressed="false">Contas Pagas <span id="paidPayablesCount"><%= (typeof viewCounts !== 'undefined' && viewCounts && Number.isFinite(Number(viewCounts.paid))) ? viewCounts.paid : 0 %></span></button>
+      <button type="button" data-payable-view="reversed" aria-pressed="false">Estornadas <span id="reversedPayablesCount"><%= (typeof viewCounts !== 'undefined' && viewCounts && Number.isFinite(Number(viewCounts.reversed))) ? viewCounts.reversed : 0 %></span></button>
+    </nav>
   </section>
 
   <section class="finance-panel receivable-list-panel">
-    <div class="receivable-list-meta"><div class="payable-results-heading"><strong id="payableResultCount"><%= titles.length %> conta(s)</strong><details class="payable-export-menu"><summary class="btn btn-small">Exportar ▾</summary><div><button type="button" id="exportPayablesPdf">PDF</button><button type="button" id="exportPayablesImage">Imagem</button></div></details></div><div class="payable-list-tools"><label><span>Ordenar</span><select id="payableSort"><option value="dueAsc">Vencimento mais próximo</option><option value="dueDesc">Vencimento mais distante</option><option value="valueDesc">Maior saldo</option><option value="createdDesc">Mais recentes</option></select></label><span>Clique em uma linha para consultar ou pagar.</span></div></div>
-    <div class="finance-table-wrap"><table class="finance-table receivable-table"><thead><tr><th>Nº</th><th>Fornecedor / Descrição</th><th>Documento</th><th>Próximo vencimento</th><th>Valor</th><th>Saldo</th><th>Situação</th></tr></thead><tbody id="payablesBody">
-      <% if(!titles.length){ %><tr><td colspan="7" class="empty-state"><strong>Nenhuma conta a pagar cadastrada.</strong><br>Use “Nova conta” para registrar o primeiro compromisso.</td></tr><% } else titles.forEach(title=>{ const next=(title.installments||[]).find(item=>Number(item.openBalance||0)>0); %>
-      <tr class="receivable-row" tabindex="0" data-open="<%= title.id %>"><td><b><%= title.number %></b></td><td><%= title.supplierName %><small><%= title.description %></small></td><td><%= title.documentNumber||'—' %></td><td><%= next?fmtDate(next.dueDate):'—' %></td><td><%= money(title.netValue) %></td><td><%= money(title.openBalance) %></td><td><span class="finance-status <%= title.status==='paid'?'':'off' %>"><%= labels[title.status]||title.status %></span></td></tr>
+    <div class="receivable-list-meta"><div class="payable-results-heading"><strong id="payableResultCount"><%= titles.length %> conta(s)</strong><span class="payable-visible-total" id="payableVisibleTotal">Total exibido: —</span><details class="payable-export-menu"><summary class="btn btn-small">Exportar ▾</summary><div><button type="button" id="exportPayablesPdf">PDF</button><button type="button" id="exportPayablesImage">Imagem</button></div></details><button type="button" class="btn btn-success btn-small payable-bulk-pay-button" id="paySelectedPayables" hidden>Pagar selecionadas</button></div><div class="payable-list-tools"><label><span>Ordenar</span><select id="payableSort"><option value="dueAsc">Vencimento mais próximo</option><option value="dueDesc">Vencimento mais distante</option><option value="valueDesc">Maior saldo</option><option value="createdDesc">Mais recentes</option></select></label><span>Clique em uma linha para consultar ou pagar.</span></div></div>
+    <div class="finance-table-wrap"><table class="finance-table receivable-table"><thead><tr><th class="payable-select-column"><input type="checkbox" id="selectAllPayables" aria-label="Selecionar todas as contas visíveis" title="Selecionar todas"></th><th>Nº</th><th>Fornecedor / Descrição</th><th>Referência</th><th id="payableDateColumnTitle">Próximo vencimento</th><th>Valor</th><th>Saldo</th><th>Situação</th></tr></thead><tbody id="payablesBody">
+      <% if(!titles.length){ %><tr><td colspan="8" class="empty-state"><strong>Nenhuma conta a pagar cadastrada.</strong><br>Use “Nova conta” para registrar o primeiro compromisso.</td></tr><% } else titles.forEach(title=>{ const next=(title.installments||[]).find(item=>Number(item.openBalance||0)>0); const selectable=next && ['open','partial'].includes(title.status); %>
+      <tr class="receivable-row" tabindex="0" data-open="<%= title.id %>"><td class="payable-select-column"><% if(selectable){ %><input type="checkbox" class="payable-row-select" data-select-payable="<%= title.id %>" aria-label="Selecionar <%= ref(title.number) %>"><% } %></td><td><b><%= ref(title.number) %></b></td><td><%= title.supplierName %><small><%= ref(title.description) %></small></td><td><%= referenceOf(title) %></td><td><%= next?fmtDate(next.dueDate):'—' %></td><td><%= money(next ? Number(next.openBalance ?? next.originalValue ?? 0) : title.openBalance) %></td><td><%= money(title.openBalance) %></td><td><span class="finance-status <%= title.status==='paid'?'':'off' %>"><%= labels[title.status]||title.status %></span></td></tr>
       <% }) %>
     </tbody></table></div>
   </section>
 </div>
 <script type="application/json" id="payablesBootstrap"><%- safeJson({titles,suppliers,catalogs,cashboxes,defaultCashboxId,summary}) %></script>
 
-<div class="receivable-drawer-backdrop" id="payableDrawerBackdrop" hidden></div>
-<aside class="receivable-drawer" id="payableDrawer" aria-hidden="true"><div id="payableDetail"></div></aside>
+<div class="receivable-modal payable-central-modal" id="payableDrawer" hidden aria-hidden="true">
+  <div class="receivable-modal-backdrop" id="payableDrawerBackdrop"></div>
+  <section class="receivable-modal-card payable-central-modal-card" role="dialog" aria-modal="true" aria-label="Financeiro da conta">
+    <div id="payableDetail"></div>
+  </section>
+</div>
 
 <div class="receivable-modal" id="payableCreateModal" hidden>
   <div class="receivable-modal-backdrop" data-close-create></div>
@@ -68,36 +80,39 @@
     <header class="receivable-modal-header"><div><span>CONTAS A PAGAR</span><h2 id="payableCreateTitle">Nova conta</h2><p>Cadastre o compromisso, as competências e o vencimento.</p></div><button type="button" data-close-create aria-label="Fechar">×</button></header>
     <form id="payableCreateForm">
       <section class="payable-form-section">
-        <header><h3>Identificação da conta</h3><small>Informações principais do compromisso.</small></header>
+        <header><h3>Identificação da conta</h3></header>
         <div class="payable-create-grid payable-create-grid-main">
           <label class="span-2"><span>Fornecedor</span><select id="createSupplier"><option value="">Sem fornecedor</option><% suppliers.forEach(item=>{ %><option value="<%= item.id %>"><%= item.name %></option><% }) %></select></label>
           <label class="span-2"><span>Descrição *</span><input id="createDescription" required></label>
           <label><span>Nº documento / nota</span><input id="createDocument"></label>
           <label><span>Valor por competência *</span><input id="createValue" inputmode="decimal" required></label>
           <label><span>Emissão</span><input type="date" id="createIssueDate"></label>
-          <label class="span-2"><span>Caixa previsto *</span><select id="createCashbox" required><% cashboxes.forEach(item=>{ %><option value="<%= item.id %>" <%= item.id===defaultCashboxId?'selected':'' %>><%= item.name %><%= item.isOpen?' · Aberto':' · Fechado' %></option><% }) %></select><small class="payable-field-help">O caixa aberto atual é selecionado automaticamente. Você poderá trocar novamente ao registrar o pagamento.</small></label>
+          <label class="span-2"><span>Caixa previsto * <button type="button" class="payable-info-tip" data-tooltip="O caixa aberto atual é selecionado automaticamente. Você poderá trocar novamente ao registrar o pagamento." aria-label="Informação sobre Caixa previsto">i</button></span><select id="createCashbox" required><% cashboxes.forEach(item=>{ %><option value="<%= item.id %>" <%= item.id===defaultCashboxId?'selected':'' %>><%= item.name %><%= item.isOpen?' · Aberto':' · Fechado' %></option><% }) %></select></label>
+          <label class="span-2"><span>Plano de contas * <button type="button" class="payable-info-tip" data-tooltip="O Centro de custo é definido automaticamente pelo Plano de contas. O ERP também aprende com suas classificações anteriores." aria-label="Informação sobre Plano de contas">i</button></span><select id="createAccount" required><option value="">Selecione o plano de contas</option><% accounts.forEach(item=>{ const center=costCenters.find(c=>c.id===(item.costCenterId||item.categoryId)); %><option value="<%= item.id %>" data-cost-center="<%= item.costCenterId || item.categoryId || '' %>"><%= center ? center.name + ' › ' : '' %><%= item.name %></option><% }) %></select><small class="payable-field-help" id="createAccountHint" hidden></small></label>
         </div>
       </section>
 
       <section class="payable-form-section">
-        <header><div><h3>Competências</h3><small>Use somente mês e ano. O botão + cria o mês seguinte automaticamente.</small></div><button type="button" class="btn btn-small" id="addCompetence">+ Adicionar competência</button></header>
-        <p class="payable-context-help"><strong>Competências</strong> definem o período contábil da despesa.</p>
-        <div id="competenceRows" class="payable-competence-list"></div>
+        <header><div><h3>Competências <button type="button" class="payable-info-tip" data-tooltip="Competência define apenas o mês contábil. O vencimento pertence ao Plano de Pagamento. Use somente mês e ano; o botão + cria o mês seguinte automaticamente." aria-label="Informação sobre Competências">i</button></h3></div><button type="button" class="btn btn-small" id="addCompetence">+ Adicionar competência</button></header>
+        <div id="competenceRows" class="payable-competence-list"></div><div class="payable-add-more-sticky"><button type="button" class="btn btn-small" id="addCompetenceBottom">+ Adicionar próxima competência</button></div>
       </section>
 
       <section class="payable-form-section">
-        <header><h3>Totais e classificação</h3><small>Cada competência gera uma parcela com valor e vencimento próprios.</small></header>
+        <header><h3>Totais e classificação</h3></header>
         <div class="payable-create-total"><span>Total da despesa</span><strong id="createGrandTotal">R$ 0,00</strong><small id="createTotalHint">1 competência</small></div>
         <section class="payable-plan-box">
-          <header><div><h4>Plano de pagamento</h4><small>Combine entrada e saldo em formas diferentes. A soma precisa fechar o total da despesa.</small></div><button type="button" class="btn btn-small" id="addPaymentPlan">+ Adicionar forma</button></header>
-          <p class="payable-context-help"><strong>Plano de Pagamento</strong> define como a despesa será liquidada.</p>
+          <header><div><h4>Plano de pagamento <button type="button" class="payable-info-tip" data-tooltip="Plano de Pagamento define como a despesa será liquidada. Combine entrada e saldo em formas diferentes. A soma precisa fechar o total da despesa." aria-label="Informação sobre Plano de Pagamento">i</button></h4></div><button type="button" class="btn btn-small" id="addPaymentPlan">+ Adicionar forma</button></header>
+          <div class="payable-installment-generator">
+            <label><span>Quantidade de parcelas</span><input id="planInstallmentQuantity" type="number" min="1" max="120" value="1"></label>
+            <label><span>Forma de pagamento</span><select id="planPaymentMethod"><option value="">Selecione</option><% methods.forEach(item=>{ %><option value="<%= item.id %>"><%= item.name %></option><% }) %></select></label>
+            <label><span>Primeiro vencimento</span><input id="planFirstDueDate" type="date"></label>
+            <button type="button" class="btn btn-small" id="generatePaymentPlan">Gerar parcelas</button>
+          </div>
+          <label class="payable-auto-distribute"><input type="checkbox" id="autoDistributePlan" checked><span>Dividir o total igualmente e avançar os vencimentos mês a mês</span></label>
           <div id="paymentPlanRows" class="payable-plan-list"></div>
           <div class="payable-plan-summary"><div><span>Total da despesa</span><b id="paymentPlanExpenseTotal">R$ 0,00</b></div><div><span>Composição</span><b id="paymentPlanTotal">R$ 0,00</b></div><strong id="paymentPlanStatus" class="is-pending">Informe a composição</strong></div>
         </section>
-        <div class="payable-create-grid">
-          <label><span>Centro de custo</span><select id="createCostCenter"><option value="">Não definido</option><% costCenters.forEach(item=>{ %><option value="<%= item.id %>"><%= item.name %></option><% }) %></select></label>
-          <label><span>Plano de contas</span><select id="createAccount"><option value="">Não definido</option><% accounts.forEach(item=>{ %><option value="<%= item.id %>"><%= item.name %></option><% }) %></select></label>
-        </div>
+
       </section>
 
       <label class="receivable-notes"><span>Observação</span><textarea id="createNotes" rows="3"></textarea></label>
@@ -124,6 +139,27 @@
   </section>
 </div>
 
+<div class="receivable-modal" id="payableBulkPaymentModal" hidden>
+  <div class="receivable-modal-backdrop" data-close-bulk-payment></div>
+  <section class="receivable-modal-card payable-bulk-payment-card" role="dialog" aria-modal="true" aria-labelledby="payableBulkPaymentTitle">
+    <header class="receivable-modal-header"><div><span>CONTAS A PAGAR</span><h2 id="payableBulkPaymentTitle">Pagar contas selecionadas</h2><p>Defina a baixa de cada conta. Cada pagamento continuará registrado individualmente.</p></div><button type="button" data-close-bulk-payment aria-label="Fechar">×</button></header>
+    <form id="payableBulkPaymentForm">
+      <section class="payable-bulk-apply">
+        <div><strong>Aplicar a todas</strong><small>Preencha uma vez quando data, forma ou caixa forem iguais.</small></div>
+        <label><span>Data</span><input type="date" id="bulkApplyDate"></label>
+        <label><span>Forma de pagamento</span><select id="bulkApplyMethod"><option value="">Manter individual</option><% methods.forEach(item=>{ %><option value="<%= item.id %>"><%= item.name %></option><% }) %></select></label>
+        <label><span>Caixa</span><select id="bulkApplyCashbox"><option value="">Manter individual</option><% cashboxes.forEach(item=>{ %><option value="<%= item.id %>"><%= item.name %><%= item.isOpen?' · Aberto':' · Fechado' %></option><% }) %></select></label>
+        <button type="button" class="btn btn-small" id="applyBulkPaymentDefaults">Aplicar</button>
+      </section>
+      <div class="payable-bulk-payment-list" id="bulkPaymentRows"></div>
+      <section class="payable-bulk-summary"><div><span>Contas selecionadas</span><strong id="bulkPaymentCount">0</strong></div><div><span>Total a pagar</span><strong id="bulkPaymentTotal">R$ 0,00</strong></div></section>
+      <label class="receivable-notes"><span>Observação do lote <small>(opcional)</small></span><textarea id="bulkPaymentNotes" rows="2" placeholder="Será registrada em cada pagamento deste lote."></textarea></label>
+      <p class="payable-bulk-warning" id="bulkPaymentStatus" hidden></p>
+      <footer class="receivable-modal-actions"><button type="button" class="btn btn-ghost" data-close-bulk-payment>Cancelar</button><button type="submit" class="btn btn-success" id="confirmBulkPayables">Confirmar pagamentos</button></footer>
+    </form>
+  </section>
+</div>
+
 <div class="receivable-modal" id="payableReverseModal" hidden>
   <div class="receivable-modal-backdrop" data-close-reverse></div>
   <section class="receivable-modal-card payable-reverse-card" role="dialog" aria-modal="true">
@@ -135,4 +171,5 @@
   </section>
 </div>
 <script src="/public/js/quick-date-picker.js?v=1.0.3"></script>
-<script src="/public/js/contas-pagar.js?v=0.18.8.2"></script>
+<script src="/public/js/inline-supplier-create.js?v=1.0.0"></script>
+<script src="/public/js/contas-pagar.js?v=0.26.4"></script>

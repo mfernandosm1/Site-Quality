@@ -369,6 +369,20 @@
       font-size: 16px;
     }
 
+    .cat-actions .sub-add-inline {
+      width: 40px;
+      min-height: 34px;
+      padding: 0;
+      overflow: hidden;
+      font-size: 0;
+    }
+
+    .cat-actions .sub-add-inline::before {
+      content: "+";
+      font-size: 18px;
+      line-height: 1;
+    }
+
     .cat-create-grid {
       grid-template-columns: 1fr 1fr;
     }
@@ -430,21 +444,99 @@
     color: #fff;
   }
 
+
+  .cat-page-actions { display:flex; gap:8px; flex-wrap:wrap; justify-content:flex-end; }
+  .sub-create-box {
+    display:none; border:1px solid #dbe2ea; background:var(--panel-soft,#f8fafc);
+    border-radius:14px; padding:14px; margin:12px 0 18px;
+  }
+  .sub-create-box.open { display:block; }
+  .sub-create-grid { display:grid; grid-template-columns:minmax(180px,1.2fr) minmax(160px,1fr) minmax(140px,1fr) 90px 110px 130px; gap:10px; align-items:end; }
+  .sub-create-grid .full { grid-column:1/-1; }
+  .cat-tree-row { position:relative; }
+  .cat-tree-row.cat-parent-row { background:rgba(59,130,246,.035); }
+  .cat-tree-row.sub-child-row { padding-top:9px; padding-bottom:9px; background:rgba(100,116,139,.035); }
+  .sub-child-row .cat-cell-name { padding-left:28px; position:relative; }
+  .sub-child-row .cat-cell-name::before { content:'↳'; position:absolute; left:3px; top:50%; transform:translateY(-50%); color:#64748b; font-weight:900; font-size:17px; }
+  .sub-child-row .cat-name-main { font-weight:750; }
+  .sub-meta-pills { display:flex; gap:6px; flex-wrap:wrap; align-items:center; }
+  .sub-status-pill { display:inline-flex; align-items:center; min-height:28px; padding:0 9px; border-radius:999px; background:rgba(100,116,139,.13); font-size:11px; font-weight:800; white-space:nowrap; }
+  .sub-status-pill.on { background:rgba(16,185,129,.13); color:#047857; }
+  .sub-status-pill.off { background:rgba(239,68,68,.11); color:#b91c1c; }
+  .sub-actions-unified { display:flex; flex-direction:column; align-items:flex-end; gap:5px; }
+  .sub-empty-row { margin:0 8px 4px 76px; padding:8px 10px 10px 18px; border-left:2px dashed #cbd5e1; color:#64748b; font-size:12px; display:flex; align-items:center; justify-content:space-between; gap:12px; }
+  .sub-add-inline { border:0; background:transparent; color:#2563eb; font-weight:800; cursor:pointer; padding:5px 7px; border-radius:8px; white-space:nowrap; }
+  .sub-add-inline:hover { background:rgba(59,130,246,.10); }
+  .sub-modal-bg { position:fixed; inset:0; z-index:9999; background:rgba(15,23,42,.58); display:none; align-items:center; justify-content:center; padding:18px; }
+  .sub-modal-bg.open { display:flex; }
+  .sub-modal { width:min(620px,100%); max-height:calc(100vh - 36px); overflow:auto; background:var(--panel-card,#fff); border-radius:18px; box-shadow:0 22px 60px rgba(0,0,0,.28); padding:20px; }
+  .sub-modal h3 { margin-top:0; }
+  .sub-modal-grid { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+  .sub-modal-grid .full { grid-column:1/-1; }
+  .sub-modal-actions { display:flex; justify-content:flex-end; gap:8px; margin-top:16px; }
+  .cat-tree-helper { color:#64748b; font-size:12px; margin:-4px 0 12px 52px; }
+
+  /* Respeita os temas globais do painel nesta tela. */
+  html[data-panel-theme]:not([data-panel-theme="light"]) .cat-create-box,
+  html[data-panel-theme]:not([data-panel-theme="light"]) .sub-create-box,
+  html[data-panel-theme]:not([data-panel-theme="light"]) .cat-modal,
+  html[data-panel-theme]:not([data-panel-theme="light"]) .sub-modal {
+    background:var(--card)!important; color:var(--text)!important; border-color:var(--line)!important;
+  }
+  html[data-panel-theme]:not([data-panel-theme="light"]) .cat-list-head,
+  html[data-panel-theme]:not([data-panel-theme="light"]) .cat-row { border-color:var(--line)!important; color:var(--text)!important; }
+  html[data-panel-theme]:not([data-panel-theme="light"]) .cat-name-main,
+  html[data-panel-theme]:not([data-panel-theme="light"]) .cat-icon-pill i { color:var(--text)!important; }
+  html[data-panel-theme]:not([data-panel-theme="light"]) .cat-icon-preview,
+  html[data-panel-theme]:not([data-panel-theme="light"]) .cat-action-btn,
+  html[data-panel-theme]:not([data-panel-theme="light"]) .cat-close-btn { background:var(--card)!important; border-color:var(--line)!important; }
+  html[data-panel-theme]:not([data-panel-theme="light"]) .cat-action-btn:hover { background:var(--surface-hover)!important; }
+  html[data-panel-theme]:not([data-panel-theme="light"]) .cat-tree-row.cat-parent-row { background:color-mix(in srgb,var(--blue) 5%,var(--card))!important; }
+  html[data-panel-theme]:not([data-panel-theme="light"]) .cat-tree-row.sub-child-row { background:var(--surface-soft)!important; }
+  html[data-panel-theme]:not([data-panel-theme="light"]) .sub-empty-row { color:var(--muted)!important; border-color:var(--line)!important; }
+  html[data-panel-theme]:not([data-panel-theme="light"]) .cat-index,
+  html[data-panel-theme]:not([data-panel-theme="light"]) .cat-order-badge,
+  html[data-panel-theme]:not([data-panel-theme="light"]) .cat-icon-pill,
+  html[data-panel-theme]:not([data-panel-theme="light"]) .sub-status-pill { background:var(--surface-soft)!important; color:var(--text)!important; border-color:var(--line)!important; }
+  html[data-panel-theme]:not([data-panel-theme="light"]) .cat-muted,
+  html[data-panel-theme]:not([data-panel-theme="light"]) .cat-subtitle,
+  html[data-panel-theme]:not([data-panel-theme="light"]) .cat-seo-help,
+  html[data-panel-theme]:not([data-panel-theme="light"]) .cat-seo-counter,
+  html[data-panel-theme]:not([data-panel-theme="light"]) .cat-tree-helper { color:var(--muted)!important; }
+  html[data-panel-theme]:not([data-panel-theme="light"]) .cat-slug { color:var(--text)!important; background:var(--surface-soft)!important; border-color:var(--line)!important; }
+  html[data-panel-theme="oled"] .cat-tree-row.cat-parent-row { background:#050505!important; }
+  html[data-panel-theme="oled"] .cat-tree-row.sub-child-row,
+  html[data-panel-theme="oled"] .sub-empty-row { background:#0b0b0b!important; }
+  html[data-panel-theme="blue"] .cat-tree-row.cat-parent-row { background:#0d1928!important; }
+  html[data-panel-theme="blue"] .cat-tree-row.sub-child-row,
+  html[data-panel-theme="blue"] .sub-empty-row { background:#142338!important; }
+
+  @media(max-width:950px){
+    .sub-create-grid { grid-template-columns:1fr 1fr; }
+    .sub-create-grid .full { grid-column:1/-1; }
+    .sub-empty-row { margin-left:46px; }
+    .sub-child-row .cat-cell-name { padding-left:22px; }
+  }
+  @media(max-width:600px){
+    .cat-page-actions { width:100%; justify-content:flex-start; }
+    .sub-create-grid,.sub-modal-grid { grid-template-columns:1fr; }
+    .sub-create-grid .full,.sub-modal-grid .full { grid-column:auto; }
+    .sub-empty-row { margin-left:8px; }
+  }
+
 </style>
 
 <div class="card">
-  <nav class="catalog-tabs" aria-label="Gestão de categorias">
-    <a class="catalog-tab active" href="/categorias">🗂️ Categorias principais</a>
-    <a class="catalog-tab" href="/subcategorias">🧩 Subcategorias</a>
-  </nav>
-
   <div class="cat-page-header">
     <div>
-      <h3>✨ 🗂️ Categorias</h3>
-      <div class="cat-subtitle">Gerencie as categorias do menu e da página única <code>categoria.html</code>.</div>
+      <h3>✨ 🗂️ Categorias da Loja Virtual</h3>
+      <div class="cat-subtitle">Categorias e subcategorias agora ficam juntas em uma única estrutura.</div>
     </div>
 
-    <button type="button" class="btn primary" id="btn-toggle-create">+ Nova Categoria</button>
+    <div class="cat-page-actions">
+      <button type="button" class="btn" id="btn-toggle-sub-create">+ Nova Subcategoria</button>
+      <button type="button" class="btn primary" id="btn-toggle-create">+ Nova Categoria</button>
+    </div>
   </div>
 
   <div class="cat-create-box" id="cat-create-box">
@@ -487,26 +579,48 @@
         <div class="cat-seo-help">Por enquanto pode deixar em branco para usar a logo. Depois podemos colocar banners por categoria.</div>
       </div>
       <div class="cat-create-submit">
-        <button class="btn primary" type="submit">Adicionar</button>
+        <button class="btn primary" type="submit">Adicionar categoria</button>
       </div>
     </form>
   </div>
 
+  <div class="sub-create-box" id="sub-create-box">
+    <form method="post" action="/subcategorias/add" class="sub-create-grid" id="sub-create-form">
+      <div>
+        <label>Categoria pai</label>
+        <select name="categoryId" id="sub-create-category" required>
+          <option value="">Selecione</option>
+          <% (items||[]).forEach(c=>{ %><option value="<%= c.id %>"><%= c.name %></option><% }) %>
+        </select>
+      </div>
+      <div><label>Nome</label><input name="name" required placeholder="Ex.: Apple"></div>
+      <div><label>Slug</label><input name="slug" placeholder="apple"></div>
+      <div><label>Ordem</label><input type="number" name="order" min="1" placeholder="1"></div>
+      <div><label>Ativa</label><select name="active"><option value="true">Sim</option><option value="false">Não</option></select></div>
+      <div><label>Mostrar no site</label><select name="showOnSite"><option value="false">Não</option><option value="true">Sim</option></select></div>
+      <div class="full"><label>Descrição interna</label><textarea name="description" rows="2" placeholder="Opcional"></textarea></div>
+      <div><button class="btn primary" type="submit">Adicionar subcategoria</button></div>
+    </form>
+  </div>
+
+  <div class="cat-tree-helper">A hierarquia abaixo representa <strong>Categoria → Subcategoria</strong>. Produtos continuam vinculados pelos mesmos dados já existentes.</div>
+
   <div class="cat-list">
     <div class="cat-list-head">
       <div>#</div>
-      <div>Categoria</div>
+      <div>Categoria / subcategoria</div>
       <div>Slug</div>
       <div>Ordem</div>
-      <div>Ícone</div>
+      <div>Ícone / status</div>
       <div style="text-align:right;">Ações</div>
     </div>
 
-    <% (items||[]).forEach((c,idx)=>{ 
+    <% (items||[]).forEach((c,idx)=>{
       const selectedIcon = iconOptions.find(opt => opt.value === (c.icon || ''));
       const iconLabel = selectedIcon ? selectedIcon.label : 'Personalizado';
+      const filhos = (subcategorias||[]).filter(s => Number(s.categoryId) === Number(c.id));
     %>
-      <div class="cat-row">
+      <div class="cat-row cat-tree-row cat-parent-row">
         <div class="cat-cell-idx"><span class="cat-index"><%= idx+1 %></span></div>
 
         <div class="cat-cell-name cat-name">
@@ -515,34 +629,57 @@
           </span>
           <div>
             <div class="cat-name-main"><%= c.name %></div>
-            <div class="cat-muted">ID: <%= c.id %></div>
+            <div class="cat-muted"><%= filhos.length %> subcategoria<%= filhos.length === 1 ? '' : 's' %> · ID: <%= c.id %></div>
           </div>
         </div>
 
-        <div class="cat-cell-slug">
-          <code class="cat-slug"><%= c.slug %></code>
-        </div>
-
-        <div class="cat-cell-order">
-          <span class="cat-order-badge"><%= c.order || (idx+1) %></span>
-        </div>
-
-        <div class="cat-cell-icon">
-          <span class="cat-icon-pill">
-            <% if (c.icon) { %><i class="<%= c.icon %>"></i><% } %>
-            <%= iconLabel %>
-          </span>
-        </div>
+        <div class="cat-cell-slug"><code class="cat-slug"><%= c.slug %></code></div>
+        <div class="cat-cell-order"><span class="cat-order-badge"><%= c.order || (idx+1) %></span></div>
+        <div class="cat-cell-icon"><span class="cat-icon-pill"><% if (c.icon) { %><i class="<%= c.icon %>"></i><% } %><%= iconLabel %></span></div>
 
         <div class="cat-cell-actions cat-actions">
           <button type="button" class="cat-action-btn" data-open-modal="cat-modal-<%= c.id %>">✏️ Editar</button>
-
+          <button type="button" class="sub-add-inline" data-add-subcategory="<%= c.id %>">+ Subcategoria</button>
           <form method="post" action="/categorias/del" class="cat-delete-row" onsubmit="return confirm('Excluir esta categoria?');">
             <input type="hidden" name="id" value="<%= c.id %>">
-            <button type="submit" class="cat-delete-btn">🗑 Excluir</button>
+            <button type="submit" class="cat-delete-btn" <%= filhos.length ? 'disabled title="Remova ou reorganize as subcategorias primeiro"' : '' %>>🗑 Excluir</button>
           </form>
         </div>
       </div>
+
+      <% filhos.forEach(s=>{ %>
+        <div class="cat-row cat-tree-row sub-child-row">
+          <div class="cat-cell-idx"></div>
+          <div class="cat-cell-name cat-name">
+            <div>
+              <div class="cat-name-main"><%= s.name %></div>
+              <div class="cat-muted">Subcategoria · ID: <%= s.id %></div>
+            </div>
+          </div>
+          <div class="cat-cell-slug"><code class="cat-slug"><%= s.slug %></code></div>
+          <div class="cat-cell-order"><span class="cat-order-badge"><%= s.order || 1 %></span></div>
+          <div class="cat-cell-icon">
+            <div class="sub-meta-pills">
+              <span class="sub-status-pill <%= s.active !== false ? 'on' : 'off' %>"><%= s.active !== false ? 'Ativa' : 'Inativa' %></span>
+              <span class="sub-status-pill"><%= (subUsage && subUsage[s.slug]) || 0 %> produto<%= ((subUsage && subUsage[s.slug]) || 0) === 1 ? '' : 's' %></span>
+            </div>
+          </div>
+          <div class="cat-cell-actions cat-actions sub-actions-unified">
+            <button type="button" class="cat-action-btn" data-open-sub="sub-modal-<%= s.id %>">✏️ Editar</button>
+            <form method="post" action="/subcategorias/del" class="cat-delete-row" onsubmit="return confirm('Excluir esta subcategoria?');">
+              <input type="hidden" name="id" value="<%= s.id %>">
+              <button type="submit" class="cat-delete-btn" <%= (subUsage && subUsage[s.slug]) ? 'disabled title="Em uso por produtos"' : '' %>>🗑 Excluir</button>
+            </form>
+          </div>
+        </div>
+      <% }) %>
+
+      <% if (!filhos.length) { %>
+        <div class="sub-empty-row">
+          <span>Nenhuma subcategoria cadastrada em <strong><%= c.name %></strong>.</span>
+          <button type="button" class="sub-add-inline" data-add-subcategory="<%= c.id %>">+ Adicionar</button>
+        </div>
+      <% } %>
     <% }) %>
   </div>
 </div>
@@ -586,8 +723,8 @@
 
             <div class="full">
               <label>Título SEO / WhatsApp</label>
-              <input type="text" name="seoTitle" value="<%= c.seoTitle || ((c.name || 'Categoria') + ' | Quality Celulares') %>
-        <div class="cat-seo-counter" data-counter-for="seoTitle"></div>" placeholder="Ex.: Smartphones | Quality Celulares">
+              <input type="text" name="seoTitle" value="<%= c.seoTitle || ((c.name || 'Categoria') + ' | Quality Celulares') %>" placeholder="Ex.: Smartphones | Quality Celulares">
+              <div class="cat-seo-counter" data-counter-for="seoTitle"></div>
               <div class="cat-seo-help">Título que aparece no Google e na prévia do WhatsApp/Facebook.</div>
             </div>
 
@@ -624,6 +761,37 @@
   </div>
 <% }) %>
 
+<% (subcategorias||[]).forEach(s=>{ %>
+  <div class="sub-modal-bg" id="sub-modal-<%= s.id %>" aria-hidden="true">
+    <div class="sub-modal" role="dialog" aria-modal="true" aria-labelledby="sub-modal-title-<%= s.id %>">
+      <h3 id="sub-modal-title-<%= s.id %>">Editar subcategoria</h3>
+      <form method="post" action="/subcategorias/update">
+        <input type="hidden" name="id" value="<%= s.id %>">
+        <div class="sub-modal-grid">
+          <div>
+            <label>Categoria pai</label>
+            <select name="categoryId" required>
+              <% (items||[]).forEach(c=>{ %>
+                <option value="<%= c.id %>" <%= Number(c.id)===Number(s.categoryId)?'selected':'' %>><%= c.name %></option>
+              <% }) %>
+            </select>
+          </div>
+          <div><label>Nome</label><input name="name" value="<%= s.name %>" required></div>
+          <div><label>Slug</label><input name="slug" value="<%= s.slug %>"></div>
+          <div><label>Ordem</label><input type="number" min="1" name="order" value="<%= s.order||1 %>"></div>
+          <div><label>Ativa</label><select name="active"><option value="true" <%= s.active!==false?'selected':'' %>>Sim</option><option value="false" <%= s.active===false?'selected':'' %>>Não</option></select></div>
+          <div><label>Mostrar no site</label><select name="showOnSite"><option value="false" <%= !s.showOnSite?'selected':'' %>>Não</option><option value="true" <%= s.showOnSite?'selected':'' %>>Sim</option></select></div>
+          <div class="full"><label>Descrição interna</label><textarea name="description" rows="3"><%= s.description||'' %></textarea></div>
+        </div>
+        <div class="sub-modal-actions">
+          <button type="button" class="btn" data-close-sub>Cancelar</button>
+          <button class="btn primary" type="submit">Salvar alterações</button>
+        </div>
+      </form>
+    </div>
+  </div>
+<% }) %>
+
 <div class="card">
   <h3>✨ Importar</h3>
   <p class="notice">Tenta ler itens do &lt;nav&gt; do <code>header.html</code> (textos viram nome; href vira slug).</p>
@@ -647,6 +815,30 @@
       createBtn.textContent = createBox.classList.contains('open') ? 'Fechar criação' : '+ Nova Categoria';
     });
   }
+
+  const subCreateBtn = document.getElementById('btn-toggle-sub-create');
+  const subCreateBox = document.getElementById('sub-create-box');
+  const subCreateCategory = document.getElementById('sub-create-category');
+
+  function openSubCreate(categoryId = '') {
+    if (!subCreateBox) return;
+    subCreateBox.classList.add('open');
+    if (subCreateBtn) subCreateBtn.textContent = 'Fechar subcategoria';
+    if (categoryId && subCreateCategory) subCreateCategory.value = String(categoryId);
+    subCreateBox.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    window.setTimeout(() => subCreateBox.querySelector('input[name="name"]')?.focus(), 180);
+  }
+
+  subCreateBtn?.addEventListener('click', () => {
+    if (!subCreateBox) return;
+    const willOpen = !subCreateBox.classList.contains('open');
+    subCreateBox.classList.toggle('open', willOpen);
+    subCreateBtn.textContent = willOpen ? 'Fechar subcategoria' : '+ Nova Subcategoria';
+  });
+
+  document.querySelectorAll('[data-add-subcategory]').forEach(btn => {
+    btn.addEventListener('click', () => openSubCreate(btn.getAttribute('data-add-subcategory')));
+  });
 
   function openModal(id) {
     const modal = document.getElementById(id);
@@ -675,9 +867,35 @@
     });
   });
 
+  document.querySelectorAll('[data-open-sub]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const modal = document.getElementById(btn.getAttribute('data-open-sub'));
+      modal?.classList.add('open');
+      modal?.setAttribute('aria-hidden', 'false');
+    });
+  });
+
+  document.querySelectorAll('[data-close-sub]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const modal = btn.closest('.sub-modal-bg');
+      modal?.classList.remove('open');
+      modal?.setAttribute('aria-hidden', 'true');
+    });
+  });
+
+  document.querySelectorAll('.sub-modal-bg').forEach(backdrop => {
+    backdrop.addEventListener('click', (e) => {
+      if (e.target === backdrop) {
+        backdrop.classList.remove('open');
+        backdrop.setAttribute('aria-hidden', 'true');
+      }
+    });
+  });
+
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') {
       document.querySelectorAll('.cat-modal-backdrop.open').forEach(closeModal);
+      document.querySelectorAll('.sub-modal-bg.open').forEach(modal => { modal.classList.remove('open'); modal.setAttribute('aria-hidden', 'true'); });
     }
   });
 
@@ -718,6 +936,7 @@
   }
 
   document.querySelectorAll('form[action="/categorias/add"], form[action="/categorias/update"]').forEach(bindAutoSlug);
+  document.querySelectorAll('form[action="/subcategorias/add"], form[action="/subcategorias/update"]').forEach(bindAutoSlug);
 
 
 
@@ -757,5 +976,23 @@
       alert('⚠️ Erro ao executar a limpeza. Veja o console para detalhes.');
     }
   });
+})();
+</script>
+
+<script>
+(function(){
+  const notice = document.querySelector('.container > .notice');
+  if (!notice) return;
+  window.setTimeout(() => {
+    notice.style.transition = 'opacity .18s ease, transform .18s ease';
+    notice.style.opacity = '0';
+    notice.style.transform = 'translateY(-5px)';
+    window.setTimeout(() => notice.remove(), 200);
+  }, 3000);
+  try {
+    const url = new URL(window.location.href);
+    ['saved','subsaved','subdeleted','error'].forEach(k => url.searchParams.delete(k));
+    history.replaceState(null, '', url.pathname + (url.searchParams.toString() ? '?' + url.searchParams.toString() : '') + url.hash);
+  } catch (_) {}
 })();
 </script>

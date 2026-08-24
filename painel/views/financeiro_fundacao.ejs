@@ -1,24 +1,19 @@
 <% layout('layout') -%>
-<section class="finance-hero finance-operations-hero">
-  <div><span class="erp-kicker">GESTÃO FINANCEIRA · v<%= version %></span><h1>Financeiro</h1><p>Acompanhe compromissos, recebimentos, movimentações e resultados da empresa.</p></div>
-  <div class="finance-hero-status"><b>Infraestrutura protegida</b><span>Integrações automáticas serão ativadas por etapas</span><small>PDV, O.S. e Caixa permanecem estáveis nesta versão.</small></div>
-</section>
-
 <section class="finance-summary" aria-label="Resumo financeiro">
-  <div><span>Entradas hoje</span><b><%= Number(dashboard?.today?.income || 0).toLocaleString('pt-BR',{style:'currency',currency:'BRL'}) %></b></div>
-  <div><span>Entradas no mês</span><b><%= Number(dashboard?.month?.income || 0).toLocaleString('pt-BR',{style:'currency',currency:'BRL'}) %></b></div>
-  <div><span>Saídas no mês</span><b><%= Number(dashboard?.month?.expense || 0).toLocaleString('pt-BR',{style:'currency',currency:'BRL'}) %></b></div>
-  <div><span>Saldo financeiro registrado</span><b><%= Number(dashboard?.balance || 0).toLocaleString('pt-BR',{style:'currency',currency:'BRL'}) %></b></div>
+  <div class="erp-tone-income"><span>Entradas operacionais hoje</span><b><%= Number(dashboard?.today?.income || 0).toLocaleString('pt-BR',{style:'currency',currency:'BRL'}) %></b></div>
+  <div class="erp-tone-income"><span>Entradas operacionais no mês</span><b><%= Number(dashboard?.month?.income || 0).toLocaleString('pt-BR',{style:'currency',currency:'BRL'}) %></b></div>
+  <div class="erp-tone-expense"><span>Saídas operacionais no mês</span><b><%= Number(dashboard?.month?.expense || 0).toLocaleString('pt-BR',{style:'currency',currency:'BRL'}) %></b></div>
+  <div class="erp-tone-success"><span>Saldo operacional registrado</span><b><%= Number(dashboard?.balance || 0).toLocaleString('pt-BR',{style:'currency',currency:'BRL'}) %></b></div>
 </section>
 
 <section class="finance-operation-grid">
   <% [
-    ['📊','Dashboard Financeiro','Visão geral de saldos, vencimentos e indicadores.','Em preparação'],
+    ['📊','Dashboard Financeiro','Resumo prático de vencimentos, saldos e compromissos para organizar a semana.','Resumo acima'],
     ['📥','Contas a Receber','Valores a receber, parcelas, baixas e atrasos.','Disponível','/erp/financeiro/contas-a-receber'],
     ['📤','Contas a Pagar','Despesas, fornecedores, parcelas e pagamentos.','Disponível','/erp/financeiro/contas-a-pagar'],
     ['💵','Caixa Operacional','Movimentações, saldo, entradas, saídas e turnos do mesmo caixa utilizado pelo PDV.','Disponível','/erp/pdv/caixa'],
-    ['💸','Fluxo de Caixa','Entradas e saídas reais por data de movimentação.','Base pronta'],
-    ['📈','DRE','Resultado por competência: receitas, custos e despesas.','Base pronta'],
+    ['💸','Fluxo de Caixa','Extrato inteligente com realizado, previsto e saldo projetado.','Disponível','/erp/financeiro/fluxo-de-caixa'],
+    ['📈','DRE Inteligente','Resultado por competência com grupos definidos pelo Plano de Contas e detalhamento por lançamento.','Disponível','/erp/financeiro/dre'],
     ['🧾','DFC','Demonstração dos fluxos de caixa operacionais e financeiros.','Planejado'],
     ['➕','Receitas','Lançamentos manuais de receitas não originadas no PDV.','Planejado'],
     ['➖','Despesas','Lançamentos manuais e recorrentes com parcelamento.','Planejado'],

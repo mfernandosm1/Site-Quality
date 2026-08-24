@@ -1576,9 +1576,9 @@ if (flashMessage) {
   });
 
   historySearch?.addEventListener('input', () => {
-    const term = historySearch.value.toLowerCase().trim();
+    const term = historySearch.value;
     document.querySelectorAll('.marketing-history-item').forEach(item => {
-      item.style.display = item.dataset.search.includes(term) ? '' : 'none';
+      item.style.display = QualitySearch.matches(item.dataset.search, term) ? '' : 'none';
     });
   });
   loadChatHistory();

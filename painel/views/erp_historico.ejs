@@ -9,11 +9,11 @@
 </section>
 
 <section class="erp-history-summary">
-  <article><span>REGISTROS ENCONTRADOS</span><strong><%= result.total %></strong><small>Conforme os filtros atuais</small></article>
-  <article><span>ATIVIDADES DE HOJE</span><strong><%= result.summary.today %></strong><small>No conjunto filtrado</small></article>
-  <article><span>AUDITORIAS</span><strong><%= result.summary.critical %></strong><small>Alterações críticas</small></article>
-  <article class="<%= result.summary.errors ? 'has-alert' : '' %>"><span>ERROS</span><strong><%= result.summary.errors %></strong><small>Registros com falha</small></article>
-  <article><span>USUÁRIOS</span><strong><%= result.summary.actors %></strong><small>Responsáveis distintos</small></article>
+  <article class="erp-tone-info"><span>REGISTROS ENCONTRADOS</span><strong><%= result.total %></strong><small>Conforme os filtros atuais</small></article>
+  <article class="erp-tone-income"><span>ATIVIDADES DE HOJE</span><strong><%= result.summary.today %></strong><small>No conjunto filtrado</small></article>
+  <article class="erp-tone-warning"><span>AUDITORIAS</span><strong><%= result.summary.critical %></strong><small>Alterações críticas</small></article>
+  <article class="erp-tone-expense <%= result.summary.errors ? 'has-alert' : '' %>"><span>ERROS</span><strong><%= result.summary.errors %></strong><small>Registros com falha</small></article>
+  <article class="erp-tone-info"><span>USUÁRIOS</span><strong><%= result.summary.actors %></strong><small>Responsáveis distintos</small></article>
 </section>
 
 <form class="erp-history-filters" method="get" action="/erp/historico">

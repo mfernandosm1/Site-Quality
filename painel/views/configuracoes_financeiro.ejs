@@ -57,7 +57,7 @@
       <article class="finance-info-card vertical"><h3>Naturezas financeiras</h3><p>Receita, despesa, transferência, ajuste e estorno. A operação define qual natureza será usada.</p></article>
       <article class="finance-info-card vertical"><h3>Situações</h3><p>Em aberto, parcial, pago, vencido, cancelado e estornado. O sistema atualiza a situação conforme parcelas e pagamentos.</p></article>
       <article class="finance-info-card vertical"><h3>Origens</h3><p>PDV, O.S., Compras, Caixa, importação ou lançamento manual. A origem identifica de onde o registro veio.</p></article>
-      <article class="finance-info-card vertical"><h3>Centros de custo <span class="help-tip" tabindex="0" data-tooltip="O plano de conta explica o que gerou o valor. O centro de custo identifica em qual área, setor ou unidade ele deve ser analisado.">?</span></h3><p>Organizam Loja, Assistência, Operação Geral e futuras unidades sem duplicar o Plano de Contas.</p></article>
+      <article class="finance-info-card vertical"><h3>Centros de custo <span class="help-tip" tabindex="0" data-tooltip="O plano de conta explica o que gerou o valor. O centro de custo identifica em qual área, setor ou unidade ele deve ser analisado.">?</span></h3><p>Mostram em qual área o dinheiro entrou ou saiu. O Plano de Conta explica exatamente o motivo do lançamento.</p></article>
     </div>
   </section>
 </div>
@@ -72,20 +72,21 @@
 
     <div class="finance-form-grid">
       <label><span>Nome *</span><input name="name" required maxlength="100"></label>
-      <label><span>Código <span class="help-tip" tabindex="0" data-tooltip="Identificador curto usado em pesquisas, relatórios e integrações.">?</span></span><input name="code" maxlength="30"></label>
-      <label class="finance-category-field" hidden><span>Centro de custo *</span><select name="categoryId"></select></label>
+      <label class="finance-code-field"><span>Código <span class="help-tip" tabindex="0" data-tooltip="Identificador curto usado em pesquisas, relatórios e integrações.">?</span></span><input name="code" maxlength="30"><small class="finance-code-auto" hidden>Gerado automaticamente pelo Quality conforme o Centro de Custo.</small></label>
+      <label class="finance-category-field" hidden><span>Centro de custo *</span><select name="costCenterId"></select></label>
       <label class="finance-type-field" hidden><span>Classificação *</span><select name="type"><option value="receita">Receita</option><option value="despesa">Despesa</option></select></label>
     </div>
 
     <section class="payment-config" hidden>
       <fieldset><legend>Onde pode ser utilizada <span class="help-tip" tabindex="0" data-tooltip="Marque os módulos em que esta forma deve aparecer para o operador.">?</span></legend>
         <div class="finance-module-checks">
-          <label><input type="checkbox" name="modules.sales">Vendas</label><label><input type="checkbox" name="modules.purchases">Compras</label><label><input type="checkbox" name="modules.pdv">PDV</label><label><input type="checkbox" name="modules.serviceOrders">O.S.</label><label><input type="checkbox" name="modules.finance">Financeiro</label>
+          <label><input type="checkbox" name="modules.sales">Vendas</label><label><input type="checkbox" name="modules.purchases">Compras / Contas a Pagar</label><label><input type="checkbox" name="modules.pdv">PDV</label><label><input type="checkbox" name="modules.serviceOrders">O.S.</label><label><input type="checkbox" name="modules.finance">Financeiro</label>
         </div>
       </fieldset>
-      <fieldset><legend>Parcelamento e recebimento</legend>
+      <fieldset><legend>Parâmetros para vendas e recebimentos</legend>
         <div class="finance-switches">
-          <label><input type="checkbox" name="autoSettle"><span>Baixa automática <span class="help-tip" tabindex="0" data-tooltip="Use somente quando o valor puder ser considerado pago no momento da operação, como dinheiro e PIX confirmado.">?</span></span></label>
+          <label><input type="checkbox" name="salesPaid"><span>Baixa automática na venda <span class="help-tip" tabindex="0" data-tooltip="Quando marcado, a forma é considerada liquidada no momento da venda/PDV. Não altera Compras ou Contas a Pagar.">?</span></span></label>
+          <label><input type="checkbox" name="creditCashOnSale"><span>Creditar no Caixa <span class="help-tip" tabindex="0" data-tooltip="Controla somente o movimento operacional no Caixa. Pode haver baixa automática na venda sem creditar no Caixa.">?</span></span></label>
           <label><input type="checkbox" name="allowInstallments"><span>Permitir parcelamento</span></label>
           <label><input type="checkbox" name="passInterestToCustomer"><span>Repassar juros ao cliente</span></label>
           <label><input type="checkbox" name="changeAllowed"><span>Permitir troco</span></label>
@@ -104,6 +105,14 @@
           <label><span>Intervalo entre parcelas (dias)</span><input type="number" min="1" max="365" name="installmentIntervalDays" value="30"></label>
         </div>
       </fieldset>
+
+      <fieldset><legend>Parâmetros para compras e Contas a Pagar <span class="help-tip" tabindex="0" data-tooltip="As regras de compras e Contas a Pagar são independentes das regras de venda. Ex.: cartão de crédito pode ter baixa automática no PDV e permanecer em aberto nas Compras/Contas a Pagar.">i</span></legend>
+        <div class="finance-switches">
+          <label><input type="checkbox" name="purchasePaid"><span>Baixa automática em compras / contas a pagar <span class="help-tip" tabindex="0" data-tooltip="Marcado: Compras e Contas a Pagar com esta forma são baixadas automaticamente. Desmarcado: permanecem em aberto, mesmo se a forma for paga automaticamente no PDV.">?</span></span></label>
+          <label><input type="checkbox" name="debitCashOnPurchase"><span>Debitar no Caixa <span class="help-tip" tabindex="0" data-tooltip="Controla somente a saída no Caixa. Uma despesa pode ser baixada automaticamente sem gerar débito no Caixa.">?</span></span></label>
+        </div>
+      </fieldset>
+
       <fieldset><legend>Regras de atraso <span class="help-tip" tabindex="0" data-tooltip="Estas regras serão calculadas automaticamente no recebimento de parcelas vencidas.">?</span></legend>
         <div class="finance-form-grid compact-grid">
           <label><span>Dias de carência</span><input type="number" min="0" max="365" name="lateGraceDays" value="0"></label>

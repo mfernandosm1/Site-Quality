@@ -1,0 +1,26 @@
+{
+  "version": "0.25.0",
+  "baseUrl": "https://app.wm10.com.br/quality/sistema/api/cliente/",
+  "cnpj": "20375910000166",
+  "token": "EXFjfmJ0AAATQ1VSRFM",
+  "pageSize": 100,
+  "ignoredCodes": [
+    2,
+    755,
+    759,
+    760,
+    199,
+    1474,
+    1475,
+    1498,
+    1499,
+    1560,
+    1562,
+    1596,
+    2416,
+    2087,
+    1462,
+    790,
+    767
+  ]
+}

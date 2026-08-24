@@ -1,0 +1,94 @@
+<% layout('layout') -%>
+<%
+const money=v=>Number(v||0).toLocaleString('pt-BR',{style:'currency',currency:'BRL'});
+const date=v=>{const [y,m,d]=String(v||'').split('-');return y?`${d}/${m}/${y}`:'—';};
+const time=v=>{const d=new Date(v);return Number.isNaN(d.getTime())?'—':d.toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit'});};
+const s=result.summary||{};
+const selectedPayments=Array.isArray(filters.paymentMethodId)?filters.paymentMethodId:(filters.paymentMethodId?[filters.paymentMethodId]:[]);
+const selectedOrigins=Array.isArray(filters.origin)?filters.origin:(filters.origin?[filters.origin]:[]);
+const selectedClassifications=Array.isArray(filters.classification)?filters.classification:(filters.classification?[filters.classification]:[]);
+const multiLabel=(values,allLabel='Todas')=>!values.length?allLabel:(values.length===1?'1 selecionada':`${values.length} selecionadas`);
+const originLabels={
+  manual:'Lançamento manual',
+  payable_payment:'Pagamento de conta a pagar',
+  'payable payment':'Pagamento de conta a pagar',
+  payable_payment_reversal:'Estorno de pagamento de conta a pagar',
+  'payable payment reversal':'Estorno de pagamento de conta a pagar',
+  receivable_receipt_reversal:'Estorno de recebimento de conta a receber',
+  'receivable receipt reversal':'Estorno de recebimento de conta a receber',
+  purchase:'Compra',
+  purchase_payment:'Pagamento de compra',
+  service_order:'Ordem de serviço',
+  'service order':'Ordem de serviço',
+  sale:'Venda',
+  sale_receipt:'Recebimento de venda',
+  receivable_receipt:'Recebimento de conta a receber',
+  payable:'Conta a pagar',
+  receivable:'Conta a receber',
+  contas_a_pagar:'Conta a pagar',
+  contas_a_receber:'Conta a receber',
+  financeiro:'Financeiro',
+  caixa:'Caixa',
+  supply:'Suprimento de caixa',
+  withdrawal:'Sangria de caixa'
+};
+const originLabel=v=>originLabels[String(v||'').toLowerCase()]||String(v||'').replaceAll('_',' ').replace(/\b\w/g,c=>c.toUpperCase());
+%>
+<section class="cashflow-page" data-start="<%= filters.start %>" data-end="<%= filters.end %>">
+  <header class="cashflow-header">
+    <div><span class="cashflow-version">Quality ERP v<%= version %></span><h1>Fluxo de Caixa Inteligente</h1><p class="cashflow-subtitle">Extrato consolidado <span class="help-tip" tabindex="0" data-tooltip="Extrato consolidado do Caixa e do Financeiro. Suprimentos e sangrias ficam ocultos por padrão.">i</span></p></div>
+    <details class="cashflow-export-menu no-export"><summary class="btn">Exportar ▾</summary><div><button type="button" id="exportCashFlowPdf">PDF</button><button type="button" id="exportCashFlowImage">Imagem</button></div></details>
+  </header>
+
+  <div class="cashflow-cards">
+    <article class="erp-tone-success" title="Saldo anterior + entradas líquidas - saídas líquidas"><span>Saldo atual</span><b><%= money(s.currentBalance) %></b></article>
+    <article class="is-income erp-tone-income" title="Entradas líquidas: recebimentos menos estornos de recebimentos"><span>Entradas realizadas</span><b><%= money(s.realizedIncome) %></b></article>
+    <article class="is-expense erp-tone-expense" title="Saídas líquidas: pagamentos menos estornos de pagamentos"><span>Saídas realizadas</span><b><%= money(s.realizedExpense) %></b></article>
+    <article class="is-forecast erp-tone-income"><span>Receber previsto</span><b><%= money(s.forecastIncome) %></b></article>
+    <article class="is-forecast erp-tone-warning"><span>Pagar previsto</span><b><%= money(s.forecastExpense) %></b></article>
+    <article class="is-projected erp-tone-info"><span>Saldo projetado</span><b><%= money(s.projectedBalance) %></b></article>
+  </div>
+
+  <form class="cashflow-filters no-export" method="get" action="/erp/financeiro/fluxo-de-caixa">
+    <div class="cashflow-quick" aria-label="Filtros rápidos">
+      <% [['today','Hoje'],['yesterday','Ontem'],['this-week','Esta semana'],['this-month','Este mês'],['30','Últimos 30 dias'],['60','Últimos 60 dias'],['90','Últimos 90 dias'],['year','Ano']].forEach(item=>{ %>
+        <button type="button" data-range="<%= item[0] %>"><%= item[1] %></button>
+      <% }) %>
+    </div>
+    <div class="cashflow-filter-grid">
+      <label>De<input type="date" name="start" value="<%= filters.start %>"></label>
+      <label>Até<input type="date" name="end" value="<%= filters.end %>"></label>
+      <label>Situação<select name="mode"><option value="ambos" <%= filters.mode==='ambos'?'selected':'' %>>Ambos</option><option value="realizado" <%= filters.mode==='realizado'?'selected':'' %>>Realizado</option><option value="previsto" <%= filters.mode==='previsto'?'selected':'' %>>Previsto</option></select></label>
+      <div class="cashflow-multi-label"><span>Forma de pagamento</span><details class="cashflow-multi" data-multi-filter><summary><span data-multi-summary><%= multiLabel(selectedPayments) %></span><b>▾</b></summary><div class="cashflow-multi-menu"><button type="button" data-clear-multi>Limpar seleção</button><% (catalogs.paymentMethods||[]).filter(x=>x.active!==false).forEach(x=>{ %><label><input type="checkbox" name="paymentMethodId" value="<%= x.id %>" <%= selectedPayments.includes(x.id)?'checked':'' %>><span><%= x.name %></span></label><% }) %></div></details></div>
+      <div class="cashflow-multi-label"><span>Origem</span><details class="cashflow-multi" data-multi-filter><summary><span data-multi-summary><%= multiLabel(selectedOrigins) %></span><b>▾</b></summary><div class="cashflow-multi-menu"><button type="button" data-clear-multi>Limpar seleção</button><% origins.forEach(x=>{ %><label><input type="checkbox" name="origin" value="<%= x %>" <%= selectedOrigins.includes(x)?'checked':'' %>><span><%= originLabel(x) %></span></label><% }) %></div></details></div>
+      <div class="cashflow-multi-label"><span>Classificação financeira</span><details class="cashflow-multi" data-multi-filter><summary><span data-multi-summary><%= multiLabel(selectedClassifications) %></span><b>▾</b></summary><div class="cashflow-multi-menu"><button type="button" data-clear-multi>Limpar seleção</button><strong>Centros de custo</strong><% (catalogs.costCenters||[]).filter(x=>x.active!==false).forEach(x=>{ const value=`cost:${x.id}`; %><label><input type="checkbox" name="classification" value="<%= value %>" <%= selectedClassifications.includes(value)?'checked':'' %>><span><%= x.name %></span></label><% }) %><strong>Plano de contas</strong><% (catalogs.accounts||[]).filter(x=>x.active!==false).forEach(x=>{ const value=`account:${x.id}`; %><label><input type="checkbox" name="classification" value="<%= value %>" <%= selectedClassifications.includes(value)?'checked':'' %>><span><%= x.code %> · <%= x.name %></span></label><% }) %></div></details></div>
+      <label class="cashflow-toggle"><span>Ajustes do caixa</span><span class="cashflow-toggle-control"><input type="checkbox" name="includeCashAdjustments" value="1" <%= filters.includeCashAdjustments?'checked':'' %>><span>Considerar suprimentos e sangrias</span></span></label>
+      <button class="btn primary" type="submit">Aplicar filtros</button>
+    </div>
+  </form>
+
+  <section class="cashflow-timeline">
+    <div class="cashflow-section-title"><div><h2>Linha do tempo financeira</h2><span><%= result.items.length %> movimentação(ões)</span></div></div>
+    <% if (!result.groups.length) { %><div class="cashflow-empty">Nenhuma movimentação encontrada no período.</div><% } %>
+    <% result.groups.forEach(group=>{ %>
+      <article class="cashflow-day">
+        <header><div><strong><%= date(group.date) %></strong><span><%= group.items.length %> lançamento(s)</span></div><div class="cashflow-day-totals"><span>Entradas <b><%= money(group.income) %></b></span><span>Saídas <b><%= money(group.expense) %></b></span><span>Saldo <b><%= money(group.balance) %></b></span></div></header>
+        <div class="cashflow-list">
+          <% group.items.forEach(item=>{ %>
+            <button class="cashflow-row" type="button" data-item='<%- JSON.stringify(item).replace(/'/g,"&#39;") %>'>
+              <span class="cashflow-direction <%= item.direction %>"><%= item.direction==='entrada'?'↑':'↓' %></span>
+              <span class="cashflow-main"><b><%= item.reference %></b><small><%= time(item.dateTime) %> · <%= originLabel(item.origin) %><%= item.party?` · ${item.party}`:'' %></small></span>
+              <span class="cashflow-status <%= item.status %>"><%= item.status==='realizado'?'Realizado':'Previsto' %></span>
+              <strong class="cashflow-value <%= item.direction %>"><%= item.direction==='saida'?'- ':'+ ' %><%= money(item.value) %></strong>
+              <span class="cashflow-balance">Saldo <b><%= money(item.runningBalance) %></b></span>
+            </button>
+          <% }) %>
+        </div>
+      </article>
+    <% }) %>
+  </section>
+</section>
+<div class="cashflow-drawer-backdrop" hidden></div>
+<aside class="cashflow-drawer" aria-hidden="true"><button class="cashflow-drawer-close" type="button">×</button><div id="cashflowDrawerContent"></div></aside>
+<script>window.__cashFlowOriginLabels=<%- JSON.stringify(originLabels) %>;</script>
+<script src="/public/js/fluxo-caixa.js"></script>

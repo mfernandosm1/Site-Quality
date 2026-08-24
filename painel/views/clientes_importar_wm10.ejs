@@ -1,0 +1,91 @@
+<% layout('layout') -%>
+<section class="wm10-import-page">
+  <header class="wm10-import-hero">
+    <div><span>QUALITY ERP v0.25.1.6</span><h1>Importar clientes do WM10</h1><p>Modo seguro: importa somente clientes novos e preserva integralmente os cadastros já existentes.</p></div>
+    <a class="btn" href="/erp/clientes">← Voltar aos clientes</a>
+  </header>
+
+  <div class="wm10-grid">
+    <section class="wm10-card">
+      <h2>1. Configuração da API</h2>
+      <form id="wm10ConfigForm" class="wm10-form">
+        <label>URL da API<input name="baseUrl" value="<%= wm10Settings.baseUrl || '' %>" required></label>
+        <label>CNPJ da loja<input name="cnpj" value="<%= wm10Settings.cnpj || '' %>" inputmode="numeric" required></label>
+        <label>Token da API<input name="token" type="password" placeholder="<%= wm10Settings.tokenConfigured ? 'Token já configurado — deixe em branco para manter' : 'Informe o token' %>"></label>
+        <label>Registros por página<input name="pageSize" type="number" min="1" max="500" value="<%= wm10Settings.pageSize || 100 %>"></label>
+        <label class="full">Códigos ignorados<input name="ignoredCodes" value="<%= (wm10Settings.ignoredCodes || []).join(', ') %>"><small>Separados por vírgula. Configurados: 2, 755, 759 e 760.</small></label>
+        <button class="btn primary" type="submit">Salvar configuração</button>
+      </form>
+      <p id="wm10ConfigMessage" class="wm10-message" hidden></p>
+    </section>
+
+    <section class="wm10-card">
+      <h2>2. Simulação segura</h2>
+      <p>Nenhum cliente será gravado nesta etapa. A consulta poderá levar alguns instantes conforme o tamanho da base.</p>
+      <div class="wm10-safe-mode"><strong>🔒 Importação protegida</strong><span>Somente os clientes marcados como novos serão criados. Clientes existentes não serão atualizados nem regravados.</span></div>
+      <label class="wm10-option"><input id="wm10NormalizeNames" type="checkbox" checked><span><strong>Padronizar nomes de pessoas físicas em caixa alta</strong><small>Ex.: KAUE CONRADO ALLGAYER GONÇALVES → Kaue Conrado Allgayer Gonçalves. Empresas e nomes já formatados não serão alterados.</small></span></label>
+      <button id="wm10Simulate" class="btn primary" type="button">Consultar e simular</button>
+      <div id="wm10Progress" class="wm10-progress" hidden>Consultando páginas da API WM10…</div>
+      <hr class="wm10-divider">
+      <h3>Diagnóstico por registro</h3>
+      <p class="wm10-muted">Consulte um código específico para comparar UTF-8, Windows-1252 e ISO-8859-1 sem gravar dados.</p>
+      <div class="wm10-diagnostic-form">
+        <input id="wm10DiagnosticCode" type="number" min="1" placeholder="Código WM10, ex.: 218">
+        <button id="wm10Diagnose" class="btn" type="button">🔍 Diagnosticar registro</button>
+      </div>
+    </section>
+  </div>
+
+  <section id="wm10Diagnostic" class="wm10-card" hidden>
+    <div class="wm10-report-head"><div><h2>Diagnóstico de codificação</h2><p id="wm10DiagnosticConclusion"></p></div></div>
+    <div id="wm10DiagnosticSummary" class="wm10-summary"></div>
+    <div id="wm10DiagnosticCandidates" class="wm10-diagnostic-candidates"></div>
+    <details><summary>Prévia hexadecimal dos bytes recebidos</summary><pre id="wm10DiagnosticHex" class="wm10-code"></pre></details>
+  </section>
+
+  <section id="wm10Report" class="wm10-card" hidden>
+    <div class="wm10-report-head"><div><h2>3. Resultado da simulação</h2><p id="wm10GeneratedAt"></p></div><button id="wm10Execute" class="btn success" type="button" disabled>Importar novos clientes</button></div>
+    <div id="wm10Summary" class="wm10-summary"></div>
+    <p class="wm10-muted"><strong>Regra do WhatsApp:</strong> celular é a primeira opção; telefone é usado como alternativa. “Sem WhatsApp” significa que nenhum dos dois campos possui número utilizável.</p>
+    <div class="wm10-search-wrap"><label for="wm10Search">Conferir clientes</label><input id="wm10Search" type="search" placeholder="Pesquisar por nome, CPF/CNPJ ou cidade..."></div>
+    <div id="wm10Conflicts" class="wm10-conflicts" hidden></div>
+    <details><summary>Novos clientes</summary><div id="wm10NewList" class="wm10-list"></div></details>
+    <details><summary>Clientes existentes — não serão alterados</summary><div id="wm10UpdateList" class="wm10-list"></div></details>
+    <details><summary>Ignorados e avisos</summary><div id="wm10IgnoredList" class="wm10-list"></div></details>
+  </section>
+</section>
+
+<style>
+.wm10-import-page{max-width:1280px;margin:0 auto;padding:24px}.wm10-import-hero,.wm10-report-head{display:flex;justify-content:space-between;gap:20px;align-items:center}.wm10-import-hero{padding:20px;border:1px solid var(--border,#d8dee8);border-radius:14px;margin-bottom:14px}.wm10-import-hero span{font-size:11px;font-weight:800;color:#2563eb}.wm10-import-hero h1{margin:5px 0}.wm10-import-hero p{margin:0;color:#64748b}.wm10-grid{display:grid;grid-template-columns:1.3fr .7fr;gap:14px}.wm10-card{border:1px solid var(--border,#d8dee8);border-radius:14px;padding:18px;margin-bottom:14px;background:var(--card-bg,#fff)}.wm10-card h2{margin:0 0 14px}.wm10-form{display:grid;grid-template-columns:1fr 1fr;gap:12px}.wm10-form label{font-size:11px;font-weight:800;text-transform:uppercase}.wm10-form input{display:block;width:100%;box-sizing:border-box;margin-top:6px;padding:10px;border:1px solid #cbd5e1;border-radius:8px;background:transparent;color:inherit}.wm10-form .full{grid-column:1/-1}.wm10-form small{display:block;margin-top:5px;color:#64748b;text-transform:none;font-weight:400}.wm10-option{display:flex;gap:10px;align-items:flex-start;margin:12px 0;padding:11px;border:1px solid #cbd5e1;border-radius:9px}.wm10-option input{margin-top:3px}.wm10-option span{display:grid;gap:3px}.wm10-option small{color:#64748b}.wm10-message,.wm10-progress{padding:10px;border-radius:8px;margin-top:12px;background:rgba(37,99,235,.12)}.wm10-safe-mode{display:grid;gap:4px;margin:12px 0;padding:12px;border:1px solid rgba(21,128,61,.45);border-radius:10px;background:rgba(21,128,61,.10)}.wm10-safe-mode span{color:#64748b}.wm10-summary{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:14px 0}.wm10-stat{border:1px solid #cbd5e1;border-radius:10px;padding:12px}.wm10-stat span{display:block;font-size:10px;text-transform:uppercase;color:#64748b}.wm10-stat strong{font-size:22px}.wm10-conflicts{padding:12px;border-radius:10px;background:rgba(220,38,38,.12);color:#ef4444;font-weight:700;margin-bottom:12px}.wm10-list{max-height:280px;overflow:auto;margin-top:8px}.wm10-search-wrap{margin:12px 0}.wm10-search-wrap label{display:block;font-size:11px;font-weight:800;text-transform:uppercase;margin-bottom:6px}.wm10-search-wrap input{width:100%;box-sizing:border-box;padding:10px;border:1px solid #cbd5e1;border-radius:8px;background:transparent;color:inherit}.wm10-list article{display:grid;grid-template-columns:80px minmax(220px,1.5fr) minmax(150px,.8fr) minmax(180px,1fr) 130px;gap:10px;align-items:center;padding:8px;border-bottom:1px solid #d8dee8;font-size:12px}.wm10-list article.wm10-list-head{position:sticky;top:0;background:var(--card-bg,#fff);z-index:1;font-size:10px;font-weight:800;text-transform:uppercase;color:#64748b}.wm10-list article[hidden]{display:none}.wm10-divider{border:0;border-top:1px solid #d8dee8;margin:18px 0}.wm10-muted{color:#64748b}.wm10-diagnostic-form{display:flex;gap:8px;align-items:center}.wm10-diagnostic-form input{flex:1;min-width:0;padding:10px;border:1px solid #cbd5e1;border-radius:8px;background:transparent;color:inherit}.wm10-diagnostic-candidates{display:grid;gap:12px}.wm10-diagnostic-card{border:1px solid #cbd5e1;border-radius:10px;padding:12px}.wm10-diagnostic-card h3{margin:0 0 8px}.wm10-diagnostic-card dl{display:grid;grid-template-columns:180px 1fr;gap:6px 12px;margin:0}.wm10-diagnostic-card dt{font-weight:800}.wm10-diagnostic-card dd{margin:0;overflow-wrap:anywhere}.wm10-code{white-space:pre-wrap;overflow-wrap:anywhere;max-height:220px;overflow:auto;padding:12px;border-radius:8px;background:rgba(148,163,184,.12)}details{border-top:1px solid #d8dee8;padding:10px 0}summary{cursor:pointer;font-weight:800}.btn.success{background:#15803d;color:white}.btn:disabled{opacity:.5;cursor:not-allowed}
+html[data-panel-theme="oled"] .wm10-card,html[data-panel-theme="oled"] .wm10-import-hero,html[data-panel-theme="black-oled"] .wm10-card,html[data-panel-theme="black-oled"] .wm10-import-hero{background:#080a0c!important;border-color:#30363d!important;color:#f8fafc!important}html[data-panel-theme="oled"] .wm10-form input,html[data-panel-theme="black-oled"] .wm10-form input,html[data-panel-theme="oled"] .wm10-search-wrap input,html[data-panel-theme="black-oled"] .wm10-search-wrap input{background:#0d0f12!important;border-color:#374151!important;color:#fff!important}html[data-panel-theme="oled"] .wm10-list article.wm10-list-head,html[data-panel-theme="black-oled"] .wm10-list article.wm10-list-head{background:#080a0c!important}html[data-panel-theme="oled"] .wm10-option,html[data-panel-theme="black-oled"] .wm10-option{border-color:#374151!important;background:#0d0f12!important}html[data-panel-theme="oled"] .wm10-diagnostic-form input,html[data-panel-theme="black-oled"] .wm10-diagnostic-form input{background:#0d0f12!important;border-color:#374151!important;color:#fff!important}
+@media(max-width:800px){.wm10-grid{grid-template-columns:1fr}.wm10-form{grid-template-columns:1fr}.wm10-summary{grid-template-columns:repeat(2,1fr)}.wm10-import-hero,.wm10-report-head{align-items:flex-start;flex-direction:column}.wm10-list{overflow:auto}.wm10-list article{min-width:850px}}
+</style>
+<script>
+(() => {
+  const configForm=document.getElementById('wm10ConfigForm'), configMessage=document.getElementById('wm10ConfigMessage');
+  const simulate=document.getElementById('wm10Simulate'), execute=document.getElementById('wm10Execute'), progress=document.getElementById('wm10Progress'), reportBox=document.getElementById('wm10Report');
+  const diagnose=document.getElementById('wm10Diagnose'), diagnosticCode=document.getElementById('wm10DiagnosticCode'), diagnosticBox=document.getElementById('wm10Diagnostic'), normalizeNames=document.getElementById('wm10NormalizeNames');
+  let lastReport=null;
+  const request=async(url,options={})=>{const response=await fetch(url,{...options,headers:{'Content-Type':'application/json',Accept:'application/json',...(options.headers||{})}});const result=await response.json();if(!response.ok||!result.success)throw new Error(result.message||'Falha na operação.');return result;};
+  configForm.addEventListener('submit',async event=>{event.preventDefault();configMessage.hidden=false;configMessage.textContent='Salvando…';try{const data=Object.fromEntries(new FormData(configForm));const result=await request('/erp/clientes/importar-wm10/configuracao',{method:'POST',body:JSON.stringify(data)});configMessage.textContent=result.message;}catch(error){configMessage.textContent=error.message;}});
+  const esc=value=>String(value??'').replace(/[&<>"']/g,char=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[char]));
+  const formatDocument=value=>{const raw=String(value||'').replace(/\D/g,'');if(raw.length===11)return raw.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/,'$1.$2.$3-$4');if(raw.length===14)return raw.replace(/(\d{2})(\d{3})(\d{3})(\d{4})(\d{2})/,'$1.$2.$3/$4-$5');return raw||'—';};
+  const fillList=(id,items,kind)=>{const target=document.getElementById(id);const rows=(items||[]).slice(0,5000);if(!rows.length){target.innerHTML='<p>Nenhum registro.</p>';return;}target.innerHTML=`<article class="wm10-list-head"><span>Código</span><span>Nome</span><span>CPF/CNPJ</span><span>Cidade</span><span>Resultado</span></article>`+rows.map(item=>{const mapped=item.mapped||{};const city=item.city||mapped.city||'';const state=item.state||mapped.state||'';const result=kind==='new'?'Novo cliente':kind==='existing'?'Preservado — sem alteração':item.matchBy||item.reason||'';const search=[item.name,item.document||mapped.document,city,state,result].join(' ').toLowerCase();return `<article data-search="${esc(search)}"><strong>#${esc(item.code)}</strong><span>${esc(item.name||'Sem nome')}</span><span>${esc(formatDocument(item.document||mapped.document))}</span><span>${esc([city,state].filter(Boolean).join('/')||'—')}</span><small>${esc(result)}</small></article>`;}).join('');};
+  function applySearch(){const term=document.getElementById('wm10Search').value;document.querySelectorAll('.wm10-list article[data-search]').forEach(row=>{row.hidden=!QualitySearch.matches(row.dataset.search,term);});}
+  document.getElementById('wm10Search').addEventListener('input',applySearch);
+  function render(report){lastReport=report;reportBox.hidden=false;document.getElementById('wm10GeneratedAt').textContent=`Consulta gerada em ${new Date(report.generatedAt).toLocaleString('pt-BR')}`;const stats=[['Localizados',report.totalFound],['Novos para importar',report.new.length],['Existentes preservados',report.updates.length],['Ignorados',report.ignored.length],['Conflitos',report.duplicates.length],['Avisos',report.invalid.length],['Ativos',report.active||0],['Inativos',report.inactive||0],['Pessoa física',report.individuals||0],['Pessoa jurídica',report.companies||0],['Nomes padronizados',report.normalizedNames||0],['WhatsApp via celular',report.whatsAppFromMobile||0],['WhatsApp via telefone',report.whatsAppFromPhone||0],['Sem WhatsApp',report.withoutWhatsApp],['Sem nascimento',report.withoutBirthDate]];document.getElementById('wm10Summary').innerHTML=stats.map(([label,value])=>`<div class="wm10-stat"><span>${label}</span><strong>${value}</strong></div>`).join('');const conflicts=document.getElementById('wm10Conflicts');conflicts.hidden=!report.duplicates.length;conflicts.textContent=report.duplicates.length?`Importação bloqueada: ${report.duplicates.length} conflito(s). Revise os registros listados antes de continuar.`:'';execute.disabled=report.duplicates.length>0||report.new.length===0;execute.textContent=report.new.length?`Importar ${report.new.length} novo(s) cliente(s)`:'Nenhum cliente novo';fillList('wm10NewList',report.new,'new');fillList('wm10UpdateList',report.updates,'existing');fillList('wm10IgnoredList',[...report.ignored,...report.invalid,...report.duplicates],'warning');applySearch();reportBox.scrollIntoView({behavior:'smooth',block:'start'});}
+  const fieldRows=fields=>Object.entries(fields||{}).map(([key,value])=>`<dt>${esc(key)}</dt><dd>${esc(value||'—')}</dd>`).join('');
+  function renderDiagnostic(diagnostic){
+    diagnosticBox.hidden=false;
+    document.getElementById('wm10DiagnosticConclusion').textContent=diagnostic.conclusion||'';
+    const stats=[['Código',diagnostic.customerCode],['HTTP',diagnostic.httpStatus],['Bytes',diagnostic.rawLength],['Content-Type',diagnostic.contentType],['Escolhida',diagnostic.selectedEncoding||'—'],['� nos bytes',diagnostic.rawContainsReplacementUtf8?'Sim':'Não']];
+    document.getElementById('wm10DiagnosticSummary').innerHTML=stats.map(([label,value])=>`<div class="wm10-stat"><span>${esc(label)}</span><strong>${esc(value)}</strong></div>`).join('');
+    document.getElementById('wm10DiagnosticCandidates').innerHTML=(diagnostic.candidates||[]).map(candidate=>`<article class="wm10-diagnostic-card"><h3>${esc(candidate.encoding)} ${candidate.parseOk?'✅':'❌'}</h3><p>Score: <strong>${esc(candidate.score)}</strong> · �: ${esc(candidate.replacementCount)} · Mojibake: ${esc(candidate.mojibakeCount)} · Controles: ${esc(candidate.controlCount)}</p>${candidate.parseError?`<p>${esc(candidate.parseError)}</p>`:`<dl>${fieldRows(candidate.fields)}</dl>`}</article>`).join('');
+    document.getElementById('wm10DiagnosticHex').textContent=diagnostic.hexPreview||'';
+    diagnosticBox.scrollIntoView({behavior:'smooth',block:'start'});
+  }
+  diagnose.addEventListener('click',async()=>{const code=Number.parseInt(diagnosticCode.value,10);if(!code){alert('Informe o código WM10 do cliente.');diagnosticCode.focus();return;}diagnose.disabled=true;diagnose.textContent='Diagnosticando…';try{const result=await request('/erp/clientes/importar-wm10/diagnosticar',{method:'POST',body:JSON.stringify({customerCode:code})});renderDiagnostic(result.diagnostic);}catch(error){alert(error.message);}finally{diagnose.disabled=false;diagnose.textContent='🔍 Diagnosticar registro';}});
+  simulate.addEventListener('click',async()=>{simulate.disabled=true;progress.hidden=false;progress.textContent='Consultando páginas da API WM10…';try{const result=await request('/erp/clientes/importar-wm10/simular',{method:'POST',body:JSON.stringify({normalizeIndividualNames:normalizeNames.checked})});render(result.report);}catch(error){alert(error.message);}finally{simulate.disabled=false;progress.hidden=true;}});
+  execute.addEventListener('click',async()=>{if(!lastReport||execute.disabled)return;const normalizeAtExecution=Boolean(lastReport.normalizeIndividualNames);if(normalizeNames.checked!==normalizeAtExecution){alert('A opção de padronização mudou após a simulação. Execute uma nova simulação antes de importar.');return;}const expectedNewCodes=(lastReport.new||[]).map(item=>Number(item.code)).filter(Number.isFinite);if(!confirm(`Importar somente ${expectedNewCodes.length} cliente(s) novo(s)?\n\nOs ${lastReport.updates.length} clientes já existentes serão preservados sem qualquer alteração. Um backup será feito antes.`))return;execute.disabled=true;execute.textContent='Importando novos…';try{const result=await request('/erp/clientes/importar-wm10/executar',{method:'POST',body:JSON.stringify({mode:'new-only',normalizeIndividualNames:normalizeAtExecution,expectedNewCodes})});alert(`${result.message}\nNovos importados: ${result.report.imported}\nExistentes preservados: ${result.report.preservedExisting}\nAtualizados: ${result.report.updated}\nErros: ${result.report.errors.length}`);window.location.href='/erp/clientes';}catch(error){alert(error.message);execute.disabled=false;execute.textContent=`Importar ${expectedNewCodes.length} novo(s) cliente(s)`;}});
+})();
+</script>

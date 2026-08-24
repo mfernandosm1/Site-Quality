@@ -1,21 +1,100 @@
 (() => {
   const normalize = (value='') => String(value || '').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().trim();
   const digits = (value='') => String(value || '').replace(/\D/g,'');
+  const displayCode = value => String(value || '').replace(/^0+(?=\d)/, '') || '0';
   const parse = id => { try { return JSON.parse(document.getElementById(id)?.textContent || '[]'); } catch (_) { return []; } };
   let customers = parse('customersData');
+  const customerFinancialSummaries = (() => { try { return JSON.parse(document.getElementById('customerFinancialData')?.textContent || '{}'); } catch (_) { return {}; } })();
+  const customerFieldSettings = (() => { try { return JSON.parse(document.getElementById('customerFieldSettingsData')?.textContent || '{\"fields\":[]}'); } catch (_) { return { fields:[] }; } })();
   const search = document.getElementById('customerSearch');
   const statusFilter = document.getElementById('customerStatusFilter');
   const typeFilter = document.getElementById('customerTypeFilter');
   const classificationFilter = document.getElementById('customerClassificationFilter');
+  const registrationFilter = document.getElementById('customerRegistrationFilter');
+  const tableBody = document.getElementById('customersTableBody');
   const rows = [...document.querySelectorAll('[data-customer-row]')];
-  function filterRows(){let visible=0; const term=normalize(search?.value); rows.forEach(row=>{const show=(!term||normalize(row.dataset.search).includes(term))&&(!statusFilter.value||row.dataset.status===statusFilter.value)&&(!typeFilter.value||row.dataset.type===typeFilter.value)&&(!classificationFilter.value||row.dataset.classification===classificationFilter.value); row.hidden=!show;if(show)visible++;});document.getElementById('customerResultCount').textContent=`${visible} cliente(s) encontrado(s)`;document.getElementById('customersEmpty').hidden=visible!==0;}
-  [search,statusFilter,typeFilter,classificationFilter].filter(Boolean).forEach(el=>el.addEventListener(el===search?'input':'change',filterRows));
-  document.getElementById('customerClearFilters')?.addEventListener('click',()=>{search.value='';statusFilter.value='';typeFilter.value='';classificationFilter.value='';filterRows();search.focus();});
+  const filtersForm = document.getElementById('customerFiltersForm');
+  let searchTimer = null;
+  function submitFilters(){
+    if (!filtersForm) return;
+    const pageField = filtersForm.querySelector('input[name="page"]');
+    if (pageField) pageField.remove();
+    filtersForm.requestSubmit();
+  }
+  search?.addEventListener('input', () => {
+    window.clearTimeout(searchTimer);
+    searchTimer = window.setTimeout(submitFilters, 350);
+  });
+  [statusFilter,typeFilter,classificationFilter,registrationFilter].filter(Boolean).forEach(el => el.addEventListener('change', submitFilters));
+  document.getElementById('customerClearFilters')?.addEventListener('click', () => {
+    window.location.href = '/erp/clientes';
+  });
+
+
+  const selectAll = document.getElementById('customerSelectAll');
+  const bulkDeactivate = document.getElementById('customerBulkDeactivate');
+  const bulkActivate = document.getElementById('customerBulkActivate');
+  const bulkCount = document.getElementById('customerBulkCount');
+  const rowSelections = [...document.querySelectorAll('.customer-row-select')];
+  function selectedCustomerIds(){ return rowSelections.filter(input => input.checked).map(input => input.value); }
+  function updateBulkSelection(){
+    const selected = selectedCustomerIds();
+    if (bulkCount) bulkCount.textContent = selected.length ? `${selected.length} selecionado(s)` : 'Nenhum selecionado';
+    if (bulkDeactivate) bulkDeactivate.disabled = selected.length === 0;
+    if (bulkActivate) bulkActivate.disabled = selected.length === 0;
+    const visible = rowSelections.filter(input => !input.closest('[data-customer-row]')?.hidden);
+    if (selectAll) {
+      selectAll.checked = visible.length > 0 && visible.every(input => input.checked);
+      selectAll.indeterminate = visible.some(input => input.checked) && !selectAll.checked;
+    }
+  }
+  selectAll?.addEventListener('change', () => {
+    rowSelections.forEach(input => { if (!input.closest('[data-customer-row]')?.hidden) input.checked = selectAll.checked; });
+    updateBulkSelection();
+  });
+  rowSelections.forEach(input => input.addEventListener('change', updateBulkSelection));
+  async function updateSelectedCustomers(active){
+    const ids = selectedCustomerIds();
+    if (!ids.length) return;
+    const action = active ? 'Reativar' : 'Inativar';
+    const complement = active ? 'Eles voltarão a aparecer nas novas operações.' : 'O histórico será preservado.';
+    if (!confirm(`${action} ${ids.length} cliente(s) selecionado(s)? ${complement}`)) return;
+    try {
+      if (bulkDeactivate) bulkDeactivate.disabled = true;
+      if (bulkActivate) bulkActivate.disabled = true;
+      const response = await fetch('/erp/clientes/situacao/lote', {
+        method:'PATCH', headers:{'Content-Type':'application/json', Accept:'application/json'},
+        body:JSON.stringify({ ids, active })
+      });
+      const result = await response.json();
+      if (!response.ok || !result.success) throw new Error(result.message || `Não foi possível ${active ? 'reativar' : 'inativar'} os clientes.`);
+      alert(result.message);
+      window.location.reload();
+    } catch (error) {
+      alert(error.message);
+      updateBulkSelection();
+    }
+  }
+  bulkDeactivate?.addEventListener('click', () => updateSelectedCustomers(false));
+  bulkActivate?.addEventListener('click', () => updateSelectedCustomers(true));
+  updateBulkSelection();
 
   const drawer=document.getElementById('customerDrawer'),backdrop=document.getElementById('customerDrawerBackdrop'),form=document.getElementById('customerForm'),message=document.getElementById('customerMessage'),duplicateBox=document.getElementById('customerDuplicateBox'),toggleActive=document.getElementById('customerToggleActive');
-  const fields=['id','personType','name','tradeName','document','stateRegistration','companyStatus','openingDate','legalNature','companySize','primaryCnae','birthDate','mobile','phone','email','zipCode','street','number','complement','district','city','state','classificationId','origin','notes','active'];
+  const fields=['id','personType','name','tradeName','document','stateRegistration','companyStatus','openingDate','legalNature','companySize','primaryCnae','birthDate','monthlyIncome','profession','spouseName','fatherName','motherName','creditLimit','mobile','phone','email','zipCode','street','number','complement','district','city','state','classificationId','origin','notes','active'];
   const byName = name => form.elements.namedItem(name);
-  function openDrawer(customer=null){form.reset();message.hidden=true;duplicateBox.hidden=true;lastResolvedZip='';lastResolvedCnpj='';setZipStatus('');fields.forEach(name=>{const field=byName(name);if(field)field.value=customer?.[name] ?? (name==='personType'?'pf':name==='classificationId'?'none':name==='active'?'true':'');});if(documentField){documentField.value=formatDocument(documentField.value,personTypeField?.value);documentField.placeholder=personTypeField?.value==='pj'?'00.000.000/0000-00':'000.000.000-00';setDocumentStatus('');clearDocumentAction();updatePersonTypeFields();updateAgeInfo();}document.getElementById('customerDrawerTitle').textContent=customer?'Detalhes do cliente':'Novo cliente';document.getElementById('customerDrawerCode').textContent=customer?`Código ${customer.code}`:'Cadastro rápido ou completo';toggleActive.hidden=!customer; if(customer){toggleActive.textContent=customer.active===false?'Reativar cliente':'Inativar cliente';toggleActive.className=`btn ${customer.active===false?'success':'danger'}`;} selectTab('main');backdrop.hidden=false;drawer.classList.add('open');drawer.setAttribute('aria-hidden','false');document.body.style.overflow='hidden';setTimeout(() => {
+  function birthIsoToBr(value='') { const match=String(value||'').match(/^(\d{4})-(\d{2})-(\d{2})$/); return match ? `${match[3]}/${match[2]}/${match[1]}` : String(value||''); }
+  function birthBrToIso(value='') {
+    const raw=String(value||'').trim(); if(!raw) return '';
+    let day,month,year,match=raw.match(/^(\d{1,2})[\/\-.](\d{1,2})[\/\-.](\d{4})$/);
+    if(match){day=Number(match[1]);month=Number(match[2]);year=Number(match[3]);}
+    else if((match=raw.match(/^(\d{4})-(\d{2})-(\d{2})$/))){year=Number(match[1]);month=Number(match[2]);day=Number(match[3]);}
+    else return null;
+    const date=new Date(year,month-1,day,12); if(date.getFullYear()!==year||date.getMonth()!==month-1||date.getDate()!==day||date>new Date()||year<1890)return null;
+    return `${year}-${String(month).padStart(2,'0')}-${String(day).padStart(2,'0')}`;
+  }
+  function formatBirthInput(value=''){const valueDigits=digits(value).slice(0,8);if(valueDigits.length<=2)return valueDigits;if(valueDigits.length<=4)return `${valueDigits.slice(0,2)}/${valueDigits.slice(2)}`;return `${valueDigits.slice(0,2)}/${valueDigits.slice(2,4)}/${valueDigits.slice(4)}`;}
+
+  function openDrawer(customer=null){form.reset();message.hidden=true;duplicateBox.hidden=true;lastResolvedZip='';lastResolvedCnpj='';setZipStatus('');fields.forEach(name=>{const field=byName(name);if(field)field.value=customer?.[name] ?? (name==='personType'?'pf':name==='classificationId'?'none':name==='active'?'true':'');});if(byName('birthDate'))byName('birthDate').value=birthIsoToBr(byName('birthDate').value);if(documentField){documentField.value=formatDocument(documentField.value,personTypeField?.value);documentField.placeholder=personTypeField?.value==='pj'?'00.000.000/0000-00':'000.000.000-00';setDocumentStatus('');clearDocumentAction();updatePersonTypeFields();updateAgeInfo();}document.getElementById('customerDrawerTitle').textContent=customer?'Detalhes do cliente':'Novo cliente';document.getElementById('customerDrawerCode').textContent=customer?`Código ${displayCode(customer.code)}`:'Cadastro rápido ou completo';toggleActive.hidden=!customer; if(customer){toggleActive.textContent=customer.active===false?'Reativar cliente':'Inativar cliente';toggleActive.className=`btn ${customer.active===false?'success':'danger'}`;} selectTab('main');backdrop.hidden=false;drawer.classList.add('open');drawer.setAttribute('aria-hidden','false');document.body.style.overflow='hidden';setTimeout(() => {
     if (customer) byName('name')?.focus();
     else documentField?.focus();
   }, 100);}
@@ -163,7 +242,7 @@
     const openButton = document.createElement('button');
     openButton.type = 'button';
     openButton.className = 'customer-document-open';
-    openButton.textContent = `Abrir cliente ${customer.code || ''}`.trim();
+    openButton.textContent = `Abrir cliente ${displayCode(customer.code)}`;
     openButton.addEventListener('click', () => openDrawer(customer));
     actions.appendChild(openButton);
 
@@ -190,7 +269,7 @@
     const existing = findCustomerByDocument(document);
     if (existing) {
       const status = existing.active === false ? 'inativo' : 'ativo';
-      setDocumentStatus(`${label} já cadastrado para ${existing.name} · código ${existing.code} · cliente ${status}.`, 'warning');
+      setDocumentStatus(`${label} já cadastrado para ${existing.name} · código ${displayCode(existing.code)} · cliente ${status}.`, 'warning');
       showExistingCustomerAction(existing);
       return true;
     }
@@ -204,7 +283,9 @@
 
   function calculateAge(dateValue = '') {
     if (!dateValue) return null;
-    const birth = new Date(`${dateValue}T12:00:00`);
+    const iso = birthBrToIso(dateValue);
+    if (!iso) return null;
+    const birth = new Date(`${iso}T12:00:00`);
     if (Number.isNaN(birth.getTime())) return null;
     const today = new Date();
     if (birth > today) return null;
@@ -224,10 +305,40 @@
 
   function updatePersonTypeFields() {
     const isCompany = personTypeField?.value === 'pj';
+    if (!isCompany) {
+      const tradeName = byName('tradeName');
+      if (tradeName) tradeName.value = '';
+    }
     document.querySelectorAll('.customer-pj-field').forEach(el => { el.hidden = !isCompany; });
     document.querySelectorAll('.customer-pf-field').forEach(el => { el.hidden = isCompany; });
     const documentLabel = document.getElementById('customerDocumentLabel');
     if (documentLabel) documentLabel.textContent = isCompany ? 'CNPJ' : 'CPF';
+    applyCustomerFieldSettings();
+  }
+
+  function applyCustomerFieldSettings() {
+    const fields = Array.isArray(customerFieldSettings.fields) ? customerFieldSettings.fields : [];
+    fields.forEach(setting => {
+      const control = byName(setting.key);
+      const wrapper = control?.closest('.customer-field');
+      if (!control || !wrapper) return;
+      wrapper.dataset.configEnabled = setting.enabled === false ? 'false' : 'true';
+      wrapper.style.order = String(Number(setting.order || 0));
+      const matchesPerson = !setting.personType || setting.personType === personTypeField?.value;
+      wrapper.hidden = setting.enabled === false || !matchesPerson;
+      control.required = setting.required === true && matchesPerson && setting.enabled !== false;
+      const label = wrapper.querySelector('label');
+      if (label) {
+        const base = String(setting.displayLabel || setting.label || label.textContent).replace(/\s*\*\s*$/, '').trim();
+        label.textContent = `${base}${control.required ? ' *' : ''}`;
+      }
+    });
+    document.querySelectorAll('[data-customer-panel]').forEach(panel => {
+      const tabKey = panel.dataset.customerPanel;
+      const visible = [...panel.querySelectorAll('.customer-field')].some(field => !field.hidden);
+      const tab = document.querySelector(`[data-customer-tab="${tabKey}"]`);
+      if (tab) tab.hidden = !visible;
+    });
   }
 
   function assignCompanyField(name, value, { overwrite = false } = {}) {
@@ -489,8 +600,8 @@
       lastResolvedZip = zip;
       setZipStatus('Endereço preenchido pelo CEP.', 'success');
 
-      const numberField = byName('number');
-      if (numberField && !numberField.value) numberField.focus();
+      const streetField = byName('street');
+      if (streetField) { streetField.focus(); streetField.select?.(); }
     } catch (error) {
       if (error.name === 'AbortError') return;
       lastResolvedZip = '';
@@ -510,14 +621,24 @@
   zipField?.addEventListener('blur', () => lookupZipCode());
 
   const birthDateField = byName('birthDate');
-  birthDateField?.addEventListener('input', updateAgeInfo);
+  birthDateField?.addEventListener('input', () => { birthDateField.setCustomValidity(''); birthDateField.value=formatBirthInput(birthDateField.value); updateAgeInfo(); });
+  birthDateField?.addEventListener('paste', event => {
+    const pasted=event.clipboardData?.getData('text')?.trim() || '';
+    if(!pasted) return;
+    event.preventDefault();
+    const iso=birthBrToIso(pasted);
+    if(iso) birthDateField.value=birthIsoToBr(iso);
+    else birthDateField.value=formatBirthInput(pasted);
+    birthDateField.setCustomValidity('');
+    updateAgeInfo();
+  });
   birthDateField?.addEventListener('change', updateAgeInfo);
   updateAgeInfo();
 
-  function payload(){const data=Object.fromEntries(new FormData(form).entries());data.active=data.active!=='false';return data;}
+  function payload(){const data=Object.fromEntries(new FormData(form).entries());const birthDate=birthBrToIso(data.birthDate);if(data.birthDate&&birthDate===null)throw new Error('BIRTH_DATE_INVALID');data.birthDate=birthDate||'';data.active=data.active!=='false';return data;}
   function showMessage(text,type='error'){message.className=`customer-message ${type}`;message.textContent=text;message.hidden=false;}
   function showDuplicates(items=[]){duplicateBox.innerHTML=`<strong>⚠ Possível duplicidade</strong>${items.map(item=>`<p><b>${item.name}</b> · código ${item.code}${item.mobile?` · ${item.mobile}`:''}</p>`).join('')}<button type="button" class="btn" id="customerForceSave">Salvar mesmo assim</button>`;duplicateBox.hidden=false;document.getElementById('customerForceSave')?.addEventListener('click',()=>save(true));}
-  async function save(allowDuplicate=false){message.hidden=true;duplicateBox.hidden=true;if(!validateDocumentField()){selectTab('main');documentField?.focus();documentField?.reportValidity();return;}const data=payload();const id=data.id;const button=document.getElementById('customerSave');button.disabled=true;button.textContent='Salvando...';try{const response=await fetch(id?`/erp/clientes/${encodeURIComponent(id)}`:'/erp/clientes',{method:id?'PUT':'POST',headers:{'Content-Type':'application/json',Accept:'application/json'},body:JSON.stringify({...data,allowDuplicate})});const result=await response.json();if(!response.ok||!result.success){
+  async function save(allowDuplicate=false){message.hidden=true;duplicateBox.hidden=true;if(!form.checkValidity()){const invalid=form.querySelector(':invalid');const panel=invalid?.closest('[data-customer-panel]');if(panel)selectTab(panel.dataset.customerPanel);invalid?.reportValidity();invalid?.focus();return;}if(!validateDocumentField()){selectTab('main');documentField?.focus();documentField?.reportValidity();return;}let data;try{data=payload();}catch(error){if(error.message==='BIRTH_DATE_INVALID'){const birthField=byName('birthDate');birthField?.setCustomValidity('Informe uma data válida no formato DD/MM/AAAA.');birthField?.reportValidity();birthField?.focus();return;}throw error;}const id=data.id;const button=document.getElementById('customerSave');button.disabled=true;button.textContent='Salvando...';try{const response=await fetch(id?`/erp/clientes/${encodeURIComponent(id)}`:'/erp/clientes',{method:id?'PUT':'POST',headers:{'Content-Type':'application/json',Accept:'application/json'},body:JSON.stringify({...data,allowDuplicate})});const result=await response.json();if(!response.ok||!result.success){
       if(result.code==='DOCUMENT_ALREADY_EXISTS'){
         const existing=(result.duplicates||[])[0];
         if(existing){
@@ -533,4 +654,105 @@
     }showMessage(result.message,'success');setTimeout(()=>window.location.reload(),550);}catch(error){showMessage(error.message);}finally{button.disabled=false;button.textContent='Salvar cliente';}}
   form?.addEventListener('submit',e=>{e.preventDefault();save(false);});
   toggleActive?.addEventListener('click',async()=>{const id=byName('id').value;if(!id)return;const active=byName('active').value==='false';try{const response=await fetch(`/erp/clientes/${encodeURIComponent(id)}/situacao`,{method:'PATCH',headers:{'Content-Type':'application/json',Accept:'application/json'},body:JSON.stringify({active})});const result=await response.json();if(!response.ok||!result.success)throw new Error(result.message||'Falha ao atualizar situação.');window.location.reload();}catch(error){showMessage(error.message);}});
+
+  const money = value => Number(value || 0).toLocaleString('pt-BR',{style:'currency',currency:'BRL'});
+  const closeCustomerManageMenus = except => {
+    document.querySelectorAll('.customer-manage[open]').forEach(item => {
+      if (item !== except) item.removeAttribute('open');
+    });
+  };
+  const positionCustomerManageMenu = details => {
+    if (!details?.open) return;
+    const trigger = details.querySelector('summary');
+    const menu = details.querySelector('.customer-manage-menu');
+    if (!trigger || !menu) return;
+
+    const gap = 6;
+    const viewportGap = 10;
+    const triggerRect = trigger.getBoundingClientRect();
+    const menuWidth = Math.max(220, Math.min(300, menu.offsetWidth || 220));
+    const menuHeight = menu.offsetHeight || 180;
+    let left = triggerRect.right - menuWidth;
+    left = Math.max(viewportGap, Math.min(left, window.innerWidth - menuWidth - viewportGap));
+
+    const roomBelow = window.innerHeight - triggerRect.bottom - viewportGap;
+    const roomAbove = triggerRect.top - viewportGap;
+    let top = triggerRect.bottom + gap;
+    if (roomBelow < menuHeight && roomAbove > roomBelow) top = triggerRect.top - menuHeight - gap;
+    top = Math.max(viewportGap, Math.min(top, window.innerHeight - menuHeight - viewportGap));
+
+    menu.style.left = `${Math.round(left)}px`;
+    menu.style.top = `${Math.round(top)}px`;
+  };
+  document.querySelectorAll('.customer-manage').forEach(details => {
+    details.addEventListener('toggle', () => {
+      if (!details.open) return;
+      closeCustomerManageMenus(details);
+      requestAnimationFrame(() => positionCustomerManageMenu(details));
+    });
+  });
+  document.addEventListener('click', event => {
+    const manage = event.target.closest('.customer-manage');
+    if (!manage && !event.target.closest('.customer-finance-card')) closeCustomerManageMenus();
+  });
+  const repositionOpenCustomerMenu = () => {
+    const openMenu = document.querySelector('.customer-manage[open]');
+    if (openMenu) positionCustomerManageMenu(openMenu);
+  };
+  window.addEventListener('resize', repositionOpenCustomerMenu);
+  window.addEventListener('scroll', repositionOpenCustomerMenu, true);
+  document.addEventListener('keydown', event => { if(event.key==='Escape'){ closeCustomerManageMenus(); const modal=document.getElementById('customerFinanceModal'); if(modal)modal.hidden=true; }});
+  const financeModal=document.getElementById('customerFinanceModal');
+  document.querySelectorAll('.customer-finance').forEach(button=>button.addEventListener('click',()=>{
+    const customer=customers.find(item=>String(item.id)===String(button.dataset.id))||{};
+    const summary=customerFinancialSummaries[button.dataset.id]||{};
+    const limit=Number(customer.creditLimit||0), used=Number(summary.openBalance||0), available=limit>0?Math.max(0,limit-used):null;
+    document.getElementById('customerFinanceTitle').textContent=`Financeiro · ${customer.name||'Cliente'}`;
+    document.getElementById('customerFinanceContent').innerHTML=`<div class="customer-finance-grid"><div><span>Limite de crédito</span><strong>${limit>0?money(limit):'Não configurado'}</strong></div><div><span>Disponível</span><strong>${available===null?'—':money(available)}</strong></div><div><span>Em aberto</span><strong>${money(summary.openBalance)}</strong></div><div><span>Vencido</span><strong>${money(summary.overdueBalance)}</strong></div><div><span>Títulos em aberto</span><strong>${Number(summary.openTitleCount||0)}</strong></div><div><span>Total recebido</span><strong>${money(summary.totalReceived)}</strong></div></div>${Number(summary.overdueBalance||0)>0?'<div class="customer-finance-alert">Cliente possui valores vencidos no Contas a Receber.</div>':''}`;
+    financeModal.hidden=false;
+    button.closest('details')?.removeAttribute('open');
+  }));
+  document.getElementById('customerFinanceClose')?.addEventListener('click',()=>financeModal.hidden=true);
+  financeModal?.addEventListener('click',event=>{if(event.target===financeModal)financeModal.hidden=true;});
+
+  const featureModal=document.getElementById('customerFeatureModal');
+  const featureTitle=document.getElementById('customerFeatureTitle');
+  const featureContent=document.getElementById('customerFeatureContent');
+  if (featureModal && featureModal.parentElement !== document.body) document.body.appendChild(featureModal);
+  const openFeature=(title,html)=>{featureTitle.textContent=title;featureContent.innerHTML=`<div class="customer-feature-body">${html}</div>`;featureModal.hidden=false;closeCustomerManageMenus();};
+  const closeFeature=()=>{featureModal.hidden=true;featureContent.innerHTML='';};
+  document.getElementById('customerFeatureClose')?.addEventListener('click',closeFeature);
+  featureModal?.addEventListener('click',e=>{if(e.target===featureModal)closeFeature();});
+  const fmtDate=value=>value?new Date(String(value).length===10?`${value}T12:00:00`:value).toLocaleDateString('pt-BR'):'—';
+  const statusText={open:'Aberta',finalized:'Concluída',cancelled:'Cancelada',reversed:'Estornada'};
+  const escapeHtml=value=>String(value??'').replace(/[&<>"']/g,char=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[char]));
+
+  const ratingText={regular:'Regular',atencao:'Atenção',inadimplente:'Inadimplente',sem_historico:'Sem histórico suficiente'};
+  document.querySelectorAll('.customer-credit-analysis').forEach(button=>button.addEventListener('click',async()=>{
+    openFeature('Análise de crédito','Carregando...');
+    try{const r=await fetch(`/erp/clientes/${encodeURIComponent(button.dataset.id)}/api/analise-credito`);const d=await r.json();if(!r.ok||!d.success)throw new Error(d.message||'Falha ao consultar.');const a=d.analysis,c=d.customer;const limit=Number(c.creditLimit||0),available=limit>0?Math.max(0,limit-Number(a.openBalance||0)):null;
+      openFeature(`Análise de crédito · ${c.name}`,`<div class="credit-sections"><div><span class="credit-rating ${a.rating}">${ratingText[a.rating]||a.rating}</span></div><section class="credit-section"><h3>Crédito</h3><div class="customer-feature-grid"><div><span>Limite</span><strong>${limit>0?money(limit):'Não configurado'}</strong></div><div><span>Utilizado</span><strong>${money(a.openBalance)}</strong></div><div><span>Disponível</span><strong>${available===null?'—':money(available)}</strong></div><div><span>Vencido</span><strong>${money(a.overdueBalance)}</strong></div></div></section><section class="credit-section"><h3>Comportamento</h3><div class="customer-feature-grid"><div><span>Maior atraso</span><strong>${Math.round(a.maxDelayDays||0)} dias</strong></div><div><span>Média de atraso</span><strong>${Math.round(a.averageDelayDays||0)} dias</strong></div><div><span>Primeiro crediário</span><strong>${fmtDate(a.firstCreditAt)}</strong></div><div><span>Última compra</span><strong>${fmtDate(a.lastPurchaseAt)}</strong></div></div></section><section class="credit-section"><h3>Compras</h3><div class="customer-feature-grid"><div><span>Quantidade</span><strong>${a.operationCount}</strong></div><div><span>Total comprado</span><strong>${money(a.totalSales)}</strong></div><div><span>Total no crediário</span><strong>${money(a.totalCreditSales)}</strong></div><div><span>Maior compra</span><strong>${money(a.largestSale)}</strong></div><div><span>Ticket médio</span><strong>${money(a.averageTicket)}</strong></div></div></section><section class="credit-section"><h3>Parcelas</h3><div class="customer-feature-grid"><div><span>Pagas</span><strong>${a.paidInstallmentCount}</strong></div><div><span>Abertas</span><strong>${a.openInstallmentCount}</strong></div><div><span>Vencidas</span><strong>${a.overdueInstallmentCount}</strong></div><div><span>Total recebido</span><strong>${money(a.totalReceived)}</strong></div></div></section><section class="credit-section"><h3>Rentabilidade</h3><div class="customer-feature-grid"><div><span>Custo conhecido</span><strong>${money(a.knownCost)}</strong></div><div><span>Resultado bruto</span><strong>${money(a.grossProfit)}</strong></div><div><span>Resultado %</span><strong>${a.profitPercent==null?'—':a.profitPercent.toFixed(2)+'%'}</strong></div><div><span>Markup</span><strong>${a.markup==null?'—':a.markup.toFixed(2)}</strong></div></div>${a.itemsWithoutCost?`<p class="profit-warning">${a.itemsWithoutCost} item(ns) sem custo registrado não entraram no cálculo.</p>`:''}<div class="profit-table-wrap"><table class="profit-table"><thead><tr><th>Mês/Ano</th><th>Compra</th><th>Venda</th><th>Resultado</th><th>Resultado %</th><th>Markup</th></tr></thead><tbody>${(a.profitability||[]).map(r=>`<tr><td>${r.month==='sem-data'?'Sem data':r.month.split('-').reverse().join('/')}</td><td>${money(r.cost)}</td><td>${money(r.revenue)}</td><td>${money(r.profit)}</td><td>${r.profitPercent==null?'—':r.profitPercent.toFixed(2)+'%'}</td><td>${r.markup==null?'—':r.markup.toFixed(2)}</td></tr>`).join('')||'<tr><td colspan="6">Sem dados de rentabilidade.</td></tr>'}</tbody></table></div></section></div>`);
+    }catch(e){openFeature('Análise de crédito',`<p>${e.message}</p>`);}
+  }));
+
+  async function showOperationDetail(customerId,operationId,backPage=1){
+    openFeature('Operação do cliente','Carregando...');
+    try{const r=await fetch(`/erp/clientes/${encodeURIComponent(customerId)}/api/operacoes/${encodeURIComponent(operationId)}`);const d=await r.json();if(!r.ok||!d.success)throw new Error(d.message||'Falha ao consultar operação.');const op=d.operation;
+      const items=(op.items||[]).map(i=>`<tr><td>${i.name}</td><td>${i.quantity}</td><td>${money(i.unitPrice)}</td><td>${money(Number(i.quantity||0)*Number(i.unitPrice||0)-Number(i.discount||0))}</td></tr>`).join('')||'<tr><td colspan="4">Sem itens.</td></tr>';
+      const timeline=(op.timeline||[]).map(e=>{const note=e.type==='operation_note_added'?e.details?.note:'';return `<article><strong>${escapeHtml(e.label||e.type)}</strong>${note?`<p>${escapeHtml(note)}</p>`:''}<small>${fmtDate(e.at)} · ${escapeHtml(e.actor||'sistema')}</small></article>`;}).join('')||'<p>Sem eventos.</p>';
+      const legacyDetails=op.details?`<p><strong>Observação complementar anterior:</strong> ${escapeHtml(op.details)}</p>`:'';
+      openFeature(`${op.type==='service_order'?'O.S.':'Venda'} #${op.number} · ${op.displayCustomer}`,`<button class="btn" id="backToHistory">← Voltar ao histórico</button> <a class="btn" target="_blank" href="/erp/pdv?operacao=${encodeURIComponent(op.id)}&imprimir=1">Imprimir</a><div class="operation-detail-box"><p><strong>Situação:</strong> ${statusText[op.status]||op.status} &nbsp; <strong>Total:</strong> ${money(op.total)}</p><p><strong>Observação original:</strong> ${escapeHtml(op.notes||'—')}</p>${legacyDetails}<table class="operation-items"><thead><tr><th>Item</th><th>Qtd.</th><th>Unitário</th><th>Total</th></tr></thead><tbody>${items}</tbody></table></div><section class="operation-detail-box"><h3>Histórico / log</h3><div class="operation-timeline">${timeline}</div><form id="operationNoteForm" class="operation-note-form"><label for="operationNoteText"><strong>Adicionar observação à operação</strong><small> O texto será acrescentado ao histórico sem apagar informações anteriores.</small></label><textarea id="operationNoteText" name="note" required placeholder="Ex.: Cliente retirou o aparelho, entrou em contato ou recebeu nova orientação."></textarea><div class="operation-note-actions"><button class="btn primary" type="submit">Adicionar observação</button></div></form></section>`);
+      document.getElementById('backToHistory')?.addEventListener('click',()=>showHistory(customerId,backPage));
+      document.getElementById('operationNoteForm')?.addEventListener('submit',async e=>{e.preventDefault();const note=String(new FormData(e.currentTarget).get('note')||'').trim();if(!note)return;const button=e.currentTarget.querySelector('button[type="submit"]');if(button)button.disabled=true;const rr=await fetch(`/erp/clientes/${encodeURIComponent(customerId)}/api/operacoes/${encodeURIComponent(operationId)}/observacoes`,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({note})});const dd=await rr.json();if(!rr.ok||!dd.success){if(button)button.disabled=false;alert(dd.message||'Não foi possível adicionar a observação.');return;}showOperationDetail(customerId,operationId,backPage);});
+    }catch(e){openFeature('Operação do cliente',`<p>${e.message}</p>`);}
+  }
+
+  async function showHistory(id,page=1){openFeature('Histórico do cliente','Carregando...');try{const r=await fetch(`/erp/clientes/${encodeURIComponent(id)}/api/historico?page=${page}&pageSize=10`);const d=await r.json();if(!r.ok||!d.success)throw new Error(d.message||'Falha ao consultar.');const rows=d.items.map(op=>`<tr class="customer-history-row" data-operation-id="${op.id}"><td>#${op.number}</td><td>${op.type==='service_order'?'O.S.':'Venda'}</td><td>${fmtDate(op.dates?.openedAt||op.createdAt)}</td><td>${money(op.total)}</td><td>${statusText[op.status]||op.status}</td><td>${op.notes||op.details||'Sem observação'}</td></tr>`).join('')||'<tr><td colspan="6">Nenhuma operação encontrada.</td></tr>';openFeature(`Histórico · ${d.customer.name}`,`<p>${d.total} operação(ões) encontrada(s). Clique em uma linha para consultar.</p><table class="customer-history-table"><thead><tr><th>Nº</th><th>Tipo</th><th>Data</th><th>Total</th><th>Situação</th><th>Observação</th></tr></thead><tbody>${rows}</tbody></table><div class="customer-pagination"><button class="btn" id="historyPrev" ${d.page<=1?'disabled':''}>Anterior</button><span>Página ${d.page} de ${d.pages}</span><button class="btn" id="historyNext" ${d.page>=d.pages?'disabled':''}>Próxima</button></div>`);document.querySelectorAll('.customer-history-row').forEach(row=>row.addEventListener('click',()=>showOperationDetail(id,row.dataset.operationId,d.page)));document.getElementById('historyPrev')?.addEventListener('click',()=>showHistory(id,d.page-1));document.getElementById('historyNext')?.addEventListener('click',()=>showHistory(id,d.page+1));}catch(e){openFeature('Histórico do cliente',`<p>${e.message}</p>`);}}
+  document.querySelectorAll('.customer-history').forEach(button=>button.addEventListener('click',()=>showHistory(button.dataset.id,1)));
+
+  async function showCreditAccount(id){openFeature('Crediário do cliente','Carregando...');try{const r=await fetch(`/erp/clientes/${encodeURIComponent(id)}/api/crediario`);const d=await r.json();if(!r.ok||!d.success)throw new Error(d.message||'Falha ao consultar crediário.');const s=d.summary;const statusText={open:'Em aberto',partial:'Parcial',paid:'Recebido',cancelled:'Cancelado',reversed:'Estornado'};const rows=(d.titles||[]).map(t=>`<tr><td><b>${String(t.number||'').replace(/^0+/,'')||t.number}</b></td><td>${t.originLabel||'—'}</td><td>${fmtDate(t.issueDate||t.createdAt)}</td><td>${money(t.netValue)}</td><td>${money(t.openBalance)}</td><td><span class="credit-status credit-status-${t.status}">${statusText[t.status]||'Em aberto'}</span></td><td><a class="btn" target="_blank" rel="noopener" href="/erp/financeiro/contas-a-receber?cliente=${encodeURIComponent(id)}&titulo=${encodeURIComponent(t.id)}">Abrir ficha</a></td></tr>`).join('')||'<tr><td colspan="7">Nenhum título encontrado.</td></tr>';openFeature(`Central de crediário · ${d.customer.name}`,`<div class="credit-summary-row"><div class="credit-summary-card"><span>Limite</span><strong>${Number(s.creditLimit)>0?money(s.creditLimit):'Não configurado'}</strong></div><div class="credit-summary-card"><span>Disponível</span><strong>${s.availableCredit===null?'—':money(s.availableCredit)}</strong></div><div class="credit-summary-card"><span>Em aberto</span><strong>${money(s.openBalance)}</strong></div><div class="credit-summary-card"><span>Vencido</span><strong>${money(s.overdueBalance)}</strong></div></div><div class="credit-central-note">Clique em <b>Abrir ficha</b> para consultar produtos, parcelas, recebimentos, comprovantes e histórico completo.</div><div class="credit-table-wrap"><table class="credit-table"><thead><tr><th>Nº</th><th>Origem</th><th>Emissão</th><th>Valor</th><th>Saldo</th><th>Situação</th><th></th></tr></thead><tbody>${rows}</tbody></table></div>`);}catch(e){openFeature('Crediário do cliente',`<p>${e.message}</p>`);}}
+  document.querySelectorAll('.customer-credit-account').forEach(button=>button.addEventListener('click',()=>showCreditAccount(button.dataset.id)));
+
+  async function showWallet(id){openFeature('Carteira do cliente','Carregando...');try{const r=await fetch(`/erp/clientes/${encodeURIComponent(id)}/api/carteira`);const d=await r.json();if(!r.ok||!d.success)throw new Error(d.message||'Falha ao consultar.');const customer=customers.find(c=>String(c.id)===String(id))||{};const entries=(d.items||[]).map(i=>`<div class="wallet-entry"><span>${fmtDate(i.createdAt)}</span><strong class="wallet-${i.direction}">${i.direction==='credit'?'+':'-'} ${money(i.value)}</strong><span>${i.reason||i.type}</span><span>Saldo ${money(i.balanceAfter)}</span></div>`).join('')||'<p>Nenhum lançamento na carteira.</p>';openFeature(`Carteira · ${customer.name||'Cliente'}`,`<div class="wallet-summary"><span>Saldo atual</span><h2>${money(d.balance)}</h2></div><form class="wallet-form" id="walletForm"><select name="direction"><option value="credit">Adicionar crédito</option><option value="debit">Utilizar / debitar</option></select><input name="value" inputmode="decimal" placeholder="Valor" required><input name="reason" placeholder="Motivo: vale, devolução, cupom..." required><button class="btn" type="submit">Lançar</button></form><div>${entries}</div>`);document.getElementById('walletForm')?.addEventListener('submit',async e=>{e.preventDefault();const form=new FormData(e.currentTarget);const payload={direction:form.get('direction'),value:String(form.get('value')).replace('.','').replace(',','.'),reason:form.get('reason')};const rr=await fetch(`/erp/clientes/${encodeURIComponent(id)}/api/carteira`,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});const dd=await rr.json();if(!rr.ok||!dd.success){alert(dd.message||'Falha ao lançar.');return;}showWallet(id);});}catch(e){openFeature('Carteira do cliente',`<p>${e.message}</p>`);}}
+  document.querySelectorAll('.customer-wallet').forEach(button=>button.addEventListener('click',()=>showWallet(button.dataset.id)));
 })();

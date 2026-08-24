@@ -1,3 +1,4 @@
+import { matchesSearchText } from '../utils/search.js';
 function text(value = '') {
   return String(value ?? '').trim();
 }
@@ -118,7 +119,7 @@ export default class ErpHistoryService {
           item.result, item.category, item.entityType, item.entityId, item.documentId,
           item.route, item.ip, JSON.stringify(item.details || ''), JSON.stringify(item.before || ''), JSON.stringify(item.after || '')
         ].join(' '));
-        if (!haystack.includes(search)) return false;
+        if (!matchesSearchText(haystack, search)) return false;
       }
       return true;
     });

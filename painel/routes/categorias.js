@@ -1,6 +1,7 @@
 import express from 'express';
 import fs from 'fs';
 import path from 'path';
+import { updateHeaderMenu, generateCategoryPage as generateCurrentCategoryPage, generateFriendlyUrlPages } from './main_utils.js';
 
 const router = express.Router();
 
@@ -589,20 +590,46 @@ function generateCategoryPage(siteDir){
   fs.writeFileSync(path.join(siteDir, 'categoria.html'), html, 'utf-8');
 }
 function rebuildCategoryStructure(items, siteDir){
-  // V7.7: não reescreve mais categoria.html automaticamente.
-  // O categoria.html agora é um arquivo fixo do site, para não perder melhorias
-  // como etiquetas, cards, filtros e ajustes de SEO ao criar/editar categorias.
-  // Mantemos apenas o header.html atualizado como compatibilidade/preview.
-  generateHeader(items || [], siteDir);
+  // Mantém o header e as URLs amigáveis sincronizados com categorias/subcategorias.
+  const subcategories = readJson(path.join(siteDir, 'content', 'subcategories.json')).items || [];
+  updateHeaderMenu(items || [], siteDir, subcategories);
+  // Mantém categoria.html (usado pelas URLs amigáveis no preview local)
+  // sincronizado com o header e com o controlador atual de subcategorias.
+  generateCurrentCategoryPage('', '', siteDir);
   generateStaticCategoryPages(items || [], siteDir);
+  try { generateFriendlyUrlPages(siteDir); } catch (e) { console.warn(`⚠️ Falha ao atualizar URLs amigáveis: ${e.message}`); }
 }
 
 // ====== LISTAR ======
 router.get('/', (req,res)=>{
-  const file = path.join(P(req.app).CONTENT_DIR, 'categories.json');
+  const contentDir = P(req.app).CONTENT_DIR;
+  const file = path.join(contentDir, 'categories.json');
+  const subcategoriesFile = path.join(contentDir, 'subcategories.json');
+  const productsFile = path.join(contentDir, 'products.json');
   const data = readJson(file);
-  const msg = req.query.saved ? '✅ Categoria salva com sucesso!' : null;
-  res.render('categorias', { items: data.items || [], flash: msg });
+  const subcategoriesData = readJson(subcategoriesFile);
+  const productsData = readJson(productsFile);
+
+  const subUsage = {};
+  for (const product of productsData.items || []) {
+    const slug = String(product.subcategory || product.subcategoria || '').trim();
+    if (slug) subUsage[slug] = (subUsage[slug] || 0) + 1;
+  }
+
+  let flash = null;
+  if (req.query.saved === '1') flash = '✅ Categoria salva com sucesso!';
+  if (req.query.subsaved === '1') flash = '✅ Subcategoria salva com sucesso!';
+  if (req.query.subdeleted === '1') flash = '🗑️ Subcategoria excluída com sucesso.';
+  if (req.query.error === 'sub_in_use') flash = '⚠️ Esta subcategoria está em uso por produtos e não pode ser excluída.';
+  if (req.query.error === 'category_has_subcategories') flash = '⚠️ Esta categoria possui subcategorias. Reorganize ou exclua as subcategorias antes de remover a categoria.';
+  if (req.query.error === 'invalid_subcategory') flash = '⚠️ Confira os dados da subcategoria e tente novamente.';
+
+  res.render('categorias', {
+    items: sortedCategories(data.items || []),
+    subcategorias: (subcategoriesData.items || []).sort((a,b) => Number(a.order || 0) - Number(b.order || 0) || String(a.name || '').localeCompare(String(b.name || ''), 'pt-BR')),
+    subUsage,
+    flash
+  });
 });
 
 // ====== ADICIONAR ======
@@ -676,8 +703,13 @@ router.post('/del', (req,res)=>{
   const SITE_DIR = paths.SITE_DIR || paths.SITE_WITH_CONTENT || paths.SITE || paths.PUBLIC_DIR;
   const CONTENT_DIR = paths.CONTENT_DIR;
   const file = path.join(CONTENT_DIR, 'categories.json');
+  const subcategoriesFile = path.join(CONTENT_DIR, 'subcategories.json');
   const data = readJson(file);
+  const subcategoriesData = readJson(subcategoriesFile);
   const id = Number(req.body.id);
+
+  const hasSubcategories = (subcategoriesData.items || []).some(sub => Number(sub.categoryId) === id);
+  if (hasSubcategories) return res.redirect('/categorias?error=category_has_subcategories');
 
   data.items = (data.items||[]).filter(c=> Number(c.id)!==id);
   writeJson(file, data);

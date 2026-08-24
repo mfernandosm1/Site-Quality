@@ -4,6 +4,9 @@ import path from 'path';
 import multer from 'multer';
 import { fileURLToPath } from 'url';
 import InventoryService from '../services/inventory-service.js';
+import ErpCategoryService from '../services/erp-category-service.js';
+import Wm10ProductImportService from '../services/wm10-product-import-service.js';
+import { matchesSearchText, searchRelevanceScore } from '../utils/search.js';
 
 const router = express.Router();
 const ROUTES_DIR = path.dirname(fileURLToPath(import.meta.url));
@@ -48,9 +51,14 @@ function numberOrNull(value, fallback = null) {
   return Number.isFinite(parsed) ? parsed : fallback;
 }
 
+const productsJsonCache = new Map();
 function readJson(p) {
   try {
-    return JSON.parse(fs.readFileSync(p, 'utf-8'));
+    const stat=fs.statSync(p),cached=productsJsonCache.get(p);
+    if(cached&&cached.mtimeMs===stat.mtimeMs&&cached.size===stat.size)return cached.data;
+    const data=JSON.parse(fs.readFileSync(p,'utf-8'));
+    productsJsonCache.set(p,{mtimeMs:stat.mtimeMs,size:stat.size,data});
+    return data;
   } catch (e) {
     return { items: [] };
   }
@@ -58,6 +66,7 @@ function readJson(p) {
 
 function writeJson(p, data) {
   fs.writeFileSync(p, JSON.stringify(data, null, 2), 'utf-8');
+  try{const stat=fs.statSync(p);productsJsonCache.set(p,{mtimeMs:stat.mtimeMs,size:stat.size,data});}catch(_){productsJsonCache.delete(p);}
 }
 
 function backupProductsJson(file) {
@@ -112,6 +121,16 @@ function getAllImages(baseDir, prefix = '') {
   return results;
 }
 
+let imagesCache = { key:'', at:0, items:[] };
+function getAllImagesCached(baseDir, ttlMs = 30000) {
+  const key = path.resolve(baseDir || '');
+  const now = Date.now();
+  if (imagesCache.key === key && (now - imagesCache.at) < ttlMs) return imagesCache.items;
+  const items = getAllImages(baseDir);
+  imagesCache = { key, at:now, items };
+  return items;
+}
+
 function wantsJson(req) {
   return req.xhr || (req.headers.accept || '').includes('application/json');
 }
@@ -159,6 +178,196 @@ function slugUnico(slugBase, items = [], ignoreId = null) {
   }
 
   return slug;
+}
+
+
+function nextInternalProductCode(items = []) {
+  let max = 0;
+  for (const item of items || []) {
+    const raw = String(item?.erp?.internalCode || item?.code || '').trim();
+    const match = raw.match(/^PRD-(\d+)$/i);
+    if (match) max = Math.max(max, Number(match[1]) || 0);
+  }
+  return `PRD-${max + 1}`;
+}
+
+function ensureInternalProductCodes(items = []) {
+  let changed = false;
+  let max = 0;
+
+  // Primeiro descobre o maior número existente. Depois percorre na ordem do
+  // cadastro: o primeiro dono de um código válido o mantém; duplicados recebem
+  // um código novo. O algoritmo anterior não distinguia corretamente duas linhas
+  // com o mesmo erp.internalCode.
+  for (const item of items || []) {
+    const raw = String(item?.erp?.internalCode || item?.code || '').trim();
+    const match = raw.match(/^PRD-(\d+)$/i);
+    if (match) max = Math.max(max, Number(match[1]) || 0);
+  }
+
+  const used = new Set();
+  for (const item of items || []) {
+    item.erp = item.erp && typeof item.erp === 'object' ? item.erp : {};
+    let raw = String(item.erp.internalCode || item.code || '').trim().toUpperCase();
+    const valid = /^PRD-\d+$/i.test(raw);
+
+    if (!valid || used.has(raw)) {
+      do { max += 1; raw = `PRD-${max}`; } while (used.has(raw));
+      changed = true;
+    }
+
+    used.add(raw);
+    if (item.erp.internalCode !== raw || item.code !== raw) changed = true;
+    item.erp.internalCode = raw;
+    item.code = raw;
+  }
+  return changed;
+}
+
+function ensureUniqueInventoryIdentities(items = []) {
+  let changed = false;
+  const used = new Set();
+
+  const uniqueId = base => {
+    let candidate = String(base || '').trim();
+    if (!candidate || used.has(candidate)) {
+      const prefix = candidate.startsWith('VAR-') ? 'VAR' : 'PRD';
+      let seed = Date.now();
+      do { candidate = `${prefix}-${seed++}`; } while (used.has(candidate));
+    }
+    used.add(candidate);
+    return candidate;
+  };
+
+  for (const product of items || []) {
+    if (!product || typeof product !== 'object') continue;
+    const isService = String(product?.erp?.type || '').toLowerCase() === 'service';
+    if (isService) continue;
+
+    product.inventory = product.inventory && typeof product.inventory === 'object' ? product.inventory : {};
+    const originalParentId = String(product.inventory.itemId || '').trim();
+    const preferredParentId = originalParentId || `PRD-${product.id || Date.now()}`;
+    const parentDuplicate = originalParentId && used.has(originalParentId);
+    const nextParentId = uniqueId(preferredParentId);
+    if (nextParentId !== originalParentId) {
+      product.inventory.itemId = nextParentId;
+      // Quando a identidade foi duplicada, o saldo histórico pertence ao primeiro
+      // cadastro. A cópia reparada começa em zero para não duplicar quantidade.
+      if (parentDuplicate) product.stock = 0;
+      changed = true;
+    }
+
+    if (Array.isArray(product?.variations?.combinations)) {
+      product.variations.combinations = product.variations.combinations.map((combo, index) => {
+        const originalVariationId = String(combo?.inventoryItemId || '').trim();
+        const preferredVariationId = originalVariationId || `VAR-${product.id || Date.now()}-${index + 1}`;
+        const variationDuplicate = originalVariationId && used.has(originalVariationId);
+        const nextVariationId = uniqueId(preferredVariationId);
+        if (nextVariationId === originalVariationId) return combo;
+        changed = true;
+        return {
+          ...combo,
+          inventoryItemId: nextVariationId,
+          ...(variationDuplicate ? { stock: 0 } : {})
+        };
+      });
+      if (product.variations.combinations.length) {
+        product.stock = variationStockTotal(product);
+      }
+    }
+  }
+
+  return changed;
+}
+
+function validErpCategorySlug(value, categories = []) {
+  const raw = String(value || '').trim();
+  if (!raw) return '';
+
+  const normalized = gerarSlug(raw);
+  const found = (categories || []).find(category => {
+    const id = String(category?.id ?? '').trim();
+    const slug = String(category?.slug ?? '').trim();
+    const name = String(category?.name ?? '').trim();
+    return raw === id || raw === slug || raw === name || normalized === gerarSlug(slug) || normalized === gerarSlug(name);
+  });
+
+  return found ? String(found.slug || gerarSlug(found.name) || '').trim() : '';
+}
+
+
+function erpCategoryService(app) {
+  return new ErpCategoryService({ panelDir: path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..'), contentDir: P(app).CONTENT_DIR });
+}
+
+function wm10ProductImportService(app) {
+  if (app.locals.wm10ProductImportService) return app.locals.wm10ProductImportService;
+  const dataDir = path.join(PANEL_DIR, 'data', 'erp', 'products');
+  const productsFile = path.join(P(app).CONTENT_DIR, 'products.json');
+  const backupDir = path.resolve(PANEL_DIR, '..', 'Backup', 'Painel', 'products', 'wm10');
+  app.locals.wm10ProductImportService = new Wm10ProductImportService({ dataDir, productsFile, backupDir, inventoryService: inventoryService(app) });
+  console.log('🔄 Assistente de Migração WM10 · Produtos preparado.');
+  return app.locals.wm10ProductImportService;
+}
+function loadErpCategories(app) {
+  try { return erpCategoryService(app).tree({ includeInactive: true }); } catch (_) { return []; }
+}
+function validErpCategory(value, categories = []) {
+  const raw = String(value || '').trim();
+  if (!raw) return null;
+  const normalized = gerarSlug(raw);
+  return (categories || []).find(category => category.id === raw || gerarSlug(category.code || '') === normalized || gerarSlug(category.name || '') === normalized) || null;
+}
+function firstActiveServiceCategory(app) {
+  return loadErpCategories(app).find(category => category?.type === 'service' && category?.active !== false) || null;
+}
+
+function serviceCategoryForProduct(product = {}, categories = []) {
+  const value = product?.erp?.categoryId || product?.erp?.category || '';
+  const category = validErpCategory(value, categories);
+  if (category?.type === 'service') return category;
+  if (String(product?.erp?.type || '').trim().toLowerCase() === 'service') return { type: 'service' };
+  return null;
+}
+
+function cleanupLegacyServiceVariations(items = [], categories = []) {
+  let changed = false;
+  for (const item of items || []) {
+    if (!serviceCategoryForProduct(item, categories)) continue;
+
+    item.erp = item.erp && typeof item.erp === 'object' ? item.erp : {};
+    if (item.erp.type !== 'service') {
+      item.erp.type = 'service';
+      changed = true;
+    }
+
+    const hasLegacyVariations = item?.variations?.enabled === true
+      || (Array.isArray(item?.variations?.combinations) && item.variations.combinations.length > 0)
+      || ['colors', 'storage', 'ram', 'condition'].some(key => Array.isArray(item?.variations?.[key]) && item.variations[key].length > 0);
+
+    if (hasLegacyVariations) {
+      item.variations = emptyVariations();
+      changed = true;
+    }
+
+    if (item.stock !== null) {
+      item.stock = null;
+      changed = true;
+    }
+
+    if (item?.inventory?.stockControlled !== false) {
+      item.inventory = defaultInventoryPolicy(item, {
+        stockControlled: 'false',
+        allowNegative: 'false',
+        inventorySiteMode: 'disabled',
+        minimumQuantity: 0,
+        siteLimit: 0,
+        physicalSafety: 0
+      });
+      changed = true;
+    }
+  }
+  return changed;
 }
 
 function loadCategories(app) {
@@ -835,7 +1044,8 @@ function parseVariationCombinations(value) {
       ram: parts[2] || '',
       condition: parts[3] || '',
       image: parts[4] || '',
-      stock: parts[5] !== undefined && parts[5] !== '' ? Number(parts[5]) : null
+      stock: parts[5] !== undefined && parts[5] !== '' ? Number(parts[5]) : null,
+      erpPrice: parts[6] !== undefined && parts[6] !== '' && Number.isFinite(Number(parts[6])) ? Number(parts[6]) : null
     };
   }).filter(c => c.color || c.storage || c.ram || c.condition);
 }
@@ -853,6 +1063,88 @@ function parseVariationLabels(value) {
   }
 }
 
+function reconcileVariationCombinations({ colors = [], storage = [], ram = [], condition = [], combinations = [] } = {}) {
+  const dimensions = [
+    ['color', colors.map(item => item?.name).filter(Boolean)],
+    ['storage', storage],
+    ['ram', ram],
+    ['condition', condition]
+  ].filter(([, values]) => Array.isArray(values) && values.length);
+
+  if (!dimensions.length) return [];
+
+  const allowed = Object.fromEntries(dimensions.map(([field, values]) => [field, new Set(values.map(String))]));
+  const fields = ['color', 'storage', 'ram', 'condition'];
+  const clean = [];
+  const seen = new Set();
+
+  const keyOf = combo => fields.map(field => String(combo?.[field] || '').trim()).join('|');
+  const isValid = combo => fields.every(field => {
+    const value = String(combo?.[field] || '').trim();
+    if (!value) return true;
+    return allowed[field]?.has(value) === true;
+  });
+  const pushUnique = combo => {
+    const key = keyOf(combo);
+    if (!key.replace(/\|/g, '')) return;
+    if (seen.has(key)) return;
+    seen.add(key);
+    clean.push(combo);
+  };
+
+  (Array.isArray(combinations) ? combinations : []).filter(isValid).forEach(pushUnique);
+
+  const generateForOrphan = (field, value) => {
+    const otherDimensions = dimensions.filter(([name]) => name !== field);
+    let partials = [{ color:'', storage:'', ram:'', condition:'', image:'', stock:null, erpPrice:null }];
+    otherDimensions.forEach(([otherField, values]) => {
+      partials = partials.flatMap(base => values.map(option => ({ ...base, [otherField]:option })));
+    });
+    if (!otherDimensions.length) partials = [{ color:'', storage:'', ram:'', condition:'', image:'', stock:null, erpPrice:null }];
+    partials.forEach(base => pushUnique({ ...base, [field]:value }));
+  };
+
+  dimensions.forEach(([field, values]) => {
+    values.forEach(value => {
+      const represented = clean.some(combo => String(combo?.[field] || '').trim() === String(value));
+      if (!represented) generateForOrphan(field, value);
+    });
+  });
+
+  return clean;
+}
+
+function reconcileStoredVariationGrids(items = []) {
+  let changed = false;
+  (Array.isArray(items) ? items : []).forEach(product => {
+    const variations = product?.variations;
+    if (!variations || variations.enabled !== true) return;
+    const previous = {
+      inventory: product.inventory ? { ...product.inventory } : {},
+      variations: {
+        ...variations,
+        combinations: Array.isArray(variations.combinations) ? variations.combinations.map(combo => ({ ...combo })) : []
+      }
+    };
+    const next = reconcileVariationCombinations({
+      colors: Array.isArray(variations.colors) ? variations.colors : [],
+      storage: Array.isArray(variations.storage) ? variations.storage : [],
+      ram: Array.isArray(variations.ram) ? variations.ram : [],
+      condition: Array.isArray(variations.condition) ? variations.condition : [],
+      combinations: Array.isArray(variations.combinations) ? variations.combinations : []
+    });
+    const beforeKeys = previous.variations.combinations.map(combinationKey).join('||');
+    const afterKeys = next.map(combinationKey).join('||');
+    if (beforeKeys === afterKeys && previous.variations.combinations.length === next.length) return;
+    product.variations.combinations = next;
+    ensureInventoryIdentity(product, previous);
+    Object.assign(product.variations, variationsToText(product.variations));
+    product.stock = variationStockTotal(product);
+    changed = true;
+  });
+  return changed;
+}
+
 function variationsFromBody(body, current = {}) {
   const currentVariations = current.variations || {};
   const enabledRaw = body.variationsEnabled ?? currentVariations.enabled ?? false;
@@ -862,7 +1154,14 @@ function variationsFromBody(body, current = {}) {
   const storage = linesFromBody(body.variationStorage ?? currentVariations.storageText ?? '');
   const ram = linesFromBody(body.variationRam ?? currentVariations.ramText ?? '');
   const condition = linesFromBody(body.variationCondition ?? currentVariations.conditionText ?? '');
-  const combinations = parseVariationCombinations(body.variationCombinations ?? currentVariations.combinationsText ?? '');
+  let combinations = parseVariationCombinations(body.variationCombinations ?? currentVariations.combinationsText ?? '');
+
+  // Mantém a grade de estoque coerente com as opções cadastradas.
+  // Se uma nova opção foi incluída em um produto que já possuía variações,
+  // cria somente as combinações necessárias para essa opção, preservando
+  // estoque/preço das combinações existentes. Também remove combinações órfãs
+  // quando uma opção deixa de existir.
+  combinations = reconcileVariationCombinations({ colors, storage, ram, condition, combinations });
 
   const hasAnyVariation = colors.length || storage.length || ram.length || condition.length || combinations.length;
   const enabled = enabledRaw === true || enabledRaw === 'true' || enabledRaw === 'on' || enabledRaw === '1' || !!hasAnyVariation;
@@ -879,9 +1178,27 @@ function variationsFromBody(body, current = {}) {
 }
 
 
+function emptyVariations() {
+  return {
+    enabled: false,
+    colors: [],
+    storage: [],
+    ram: [],
+    condition: [],
+    combinations: [],
+    labels: {},
+    colorsText: '',
+    storageText: '',
+    ramText: '',
+    conditionText: '',
+    labelsText: '',
+    combinationsText: ''
+  };
+}
+
 function variationsToText(variations = {}) {
   const colors = Array.isArray(variations.colors) ? variations.colors.map(c => [c.name, c.hex, c.image].filter(Boolean).join('|')).join('\n') : '';
-  const combinations = Array.isArray(variations.combinations) ? variations.combinations.map(c => [c.color, c.storage, c.ram, c.condition, c.image, c.stock].filter((v, i) => i < 4 || (v !== undefined && v !== null && v !== '')).join('|')).join('\n') : '';
+  const combinations = Array.isArray(variations.combinations) ? variations.combinations.map(c => [c.color, c.storage, c.ram, c.condition, c.image, c.stock, c.erpPrice].map(v => v === undefined || v === null ? '' : v).join('|').replace(/\|+$/,'')).join('\n') : '';
   return {
     colorsText: colors,
     storageText: Array.isArray(variations.storage) ? variations.storage.join('\n') : '',
@@ -973,6 +1290,20 @@ function combinationKey(combo = {}) {
     .join('|');
 }
 
+function variationCombinations(product = {}) {
+  return Array.isArray(product?.variations?.combinations)
+    ? product.variations.combinations.filter(combo => combo && typeof combo === 'object')
+    : [];
+}
+
+function hasInventoryVariations(product = {}) {
+  return variationCombinations(product).length > 0;
+}
+
+function variationStockTotal(product = {}) {
+  return variationCombinations(product).reduce((sum, combo) => sum + Math.max(0, Number(combo?.stock) || 0), 0);
+}
+
 function ensureInventoryIdentity(product = {}, previous = null) {
   const previousInventory = previous?.inventory || {};
   const inventory = defaultInventoryPolicy(product);
@@ -1028,13 +1359,49 @@ function syncInventoryFromProduct(req, product, { reason = 'Ajuste pelo cadastro
     }).balance;
   };
 
-  const productBalance = syncOne(policy.itemId, product.stock, product.name || 'Produto');
+  const combinations = variationCombinations(product);
   const variationBalances = [];
-  for (const combo of product?.variations?.combinations || []) {
-    variationBalances.push(syncOne(combo.inventoryItemId, combo.stock, `${product.name} / ${combinationKey(combo)}`));
+
+  // Regra estrutural do Quality ERP:
+  // - produto simples: saldo físico pertence ao item pai;
+  // - produto com grade: saldo físico pertence SOMENTE às combinações.
+  // O campo product.stock permanece apenas como espelho calculado para compatibilidade
+  // com telas/relatórios legados; nunca é um segundo estoque editável.
+  if (combinations.length) {
+    // Se este cadastro já teve saldo no item pai antes de ganhar variações,
+    // zera somente o saldo atual do pai (o histórico permanece intacto). Assim
+    // não existe quantidade física paralela fora das combinações.
+    if (policy.itemId) {
+      const parentCurrent = service.consultarSaldo({ inventoryItemId: policy.itemId });
+      if ((Number(parentCurrent?.physicalQuantity) || 0) !== 0) {
+        service.ajustarEstoque({
+          inventoryItemId: policy.itemId,
+          newQuantity: 0,
+          origin: 'cadastro_produtos',
+          referenceType: 'product',
+          referenceId: String(product.id),
+          reason: 'Saldo do produto pai zerado: estoque passou a ser controlado pelas variações',
+          createdBy: req.user?.name || req.user?.email || 'painel',
+          allowNegative: true
+        });
+      }
+    }
+
+    for (const combo of combinations) {
+      const balance = syncOne(combo.inventoryItemId, combo.stock, `${product.name} / ${combinationKey(combo)}`);
+      variationBalances.push(balance);
+      if (balance) combo.stock = balance.physicalQuantity;
+    }
+    const aggregatePhysical = variationBalances.reduce((sum, balance) => sum + (Number(balance?.physicalQuantity) || 0), 0);
+    product.stock = aggregatePhysical;
+    console.log(`📦 Estoque ERP por variações: ${product.name || product.id} | total calculado: ${aggregatePhysical}`);
+    return { controlled: true, productBalance: null, variationBalances, aggregatePhysical, stockMode: 'variations' };
   }
+
+  const productBalance = syncOne(policy.itemId, product.stock, product.name || 'Produto');
+  if (productBalance) product.stock = productBalance.physicalQuantity;
   console.log(`📦 Estoque ERP sincronizado: ${product.name || product.id} | físico: ${productBalance?.physicalQuantity ?? 0}`);
-  return { controlled: true, productBalance, variationBalances };
+  return { controlled: true, productBalance, variationBalances, aggregatePhysical: productBalance?.physicalQuantity ?? 0, stockMode: 'product' };
 }
 
 function productErpActive(product = {}) {
@@ -1052,8 +1419,27 @@ function productLvActive(product = {}) {
 }
 
 function productFromBody(body, current = {}) {
-  const submittedPrice = body.lvPrice ?? body.price;
-  const priceValue = submittedPrice !== undefined && submittedPrice !== ''
+  // O modal de produto reúne várias abas em um único formulário. Quando ele informa
+  // quais campos foram realmente alterados, preservamos os dados das outras abas
+  // diretamente do registro atual. Isso evita que um valor vazio/desatualizado no
+  // navegador apague Categoria LV, Subcategoria LV ou SEO ao salvar apenas ERP/estoque.
+  const hasTouchedMetadata = Object.prototype.hasOwnProperty.call(body || {}, '__touchedFields');
+  let touchedFields = new Set();
+  if (hasTouchedMetadata) {
+    try {
+      const parsed = JSON.parse(String(body.__touchedFields || '[]'));
+      touchedFields = new Set(Array.isArray(parsed) ? parsed.map(String) : []);
+    } catch (_) {
+      touchedFields = new Set(String(body.__touchedFields || '').split(',').map(v => v.trim()).filter(Boolean));
+    }
+  }
+  const scopedValue = (key, submitted, fallback) => {
+    if (!hasTouchedMetadata) return submitted !== undefined ? submitted : fallback;
+    return touchedFields.has(key) ? (submitted !== undefined ? submitted : '') : fallback;
+  };
+
+  const submittedPrice = scopedValue('lvPrice', body.lvPrice ?? body.price, current.virtualStore?.price ?? current.price ?? null);
+  const priceValue = submittedPrice !== undefined && submittedPrice !== '' && submittedPrice !== null
     ? Number(submittedPrice)
     : (current.price ?? null);
 
@@ -1081,16 +1467,19 @@ function productFromBody(body, current = {}) {
   };
 
   const currentCommercial = current.commercial || {};
+  const unifiedErpPrice = numberOrNull(body.erpPrice, currentCommercial.erpPrice ?? currentCommercial.salePrice ?? current.price ?? null);
   const commercial = {
     costPrice: numberOrNull(body.costPrice, currentCommercial.costPrice ?? null),
-    erpPrice: numberOrNull(body.erpPrice, currentCommercial.erpPrice ?? current.price ?? null),
+    erpPrice: unifiedErpPrice,
+    salePrice: unifiedErpPrice,
     marketplacePrice: numberOrNull(body.marketplacePrice, currentCommercial.marketplacePrice ?? null),
     promotionalPrice: numberOrNull(body.promotionalPrice, currentCommercial.promotionalPrice ?? null),
     desiredMarginPercent: numberOrNull(body.desiredMarginPercent, currentCommercial.desiredMarginPercent ?? null),
     expectedProfit: numberOrNull(body.expectedProfit, currentCommercial.expectedProfit ?? null),
     defaultCommissionPercent: numberOrNull(body.defaultCommissionPercent, currentCommercial.defaultCommissionPercent ?? null),
-    cashPrice: numberOrNull(body.cashPrice, currentCommercial.cashPrice ?? null),
-    installmentPrice: numberOrNull(body.installmentPrice, currentCommercial.installmentPrice ?? null),
+    // Campos legados preservados apenas como espelho do preço ERP. Não são mais preços independentes.
+    cashPrice: unifiedErpPrice,
+    installmentPrice: unifiedErpPrice,
     minimumPrice: numberOrNull(body.minimumPrice, currentCommercial.minimumPrice ?? null),
     minimumMarginPercent: numberOrNull(body.minimumMarginPercent, currentCommercial.minimumMarginPercent ?? null),
     discountPolicy: (body.discountPolicy ?? currentCommercial.discountPolicy ?? 'inherit').toString(),
@@ -1105,7 +1494,7 @@ function productFromBody(body, current = {}) {
     name: (body.erpName ?? body.name ?? current.name ?? '').toString().trim(),
     // Espelhos legados preservam os serviços atuais enquanto o cadastro mestre evolui.
     sku: (body.sku ?? current.erp?.sku ?? current.sku ?? '').toString().trim(),
-    code: (body.internalCode ?? current.erp?.internalCode ?? current.code ?? '').toString().trim(),
+    code: (current.erp?.internalCode ?? current.code ?? '').toString().trim(),
     barcode: (body.barcode ?? current.erp?.barcode ?? current.barcode ?? '').toString().trim(),
     brand: (body.brand ?? current.erp?.brand ?? current.brand ?? '').toString().trim(),
     slug: gerarSlug(body.slug || current.slug || body.name || current.name || ''),
@@ -1115,21 +1504,22 @@ function productFromBody(body, current = {}) {
     inventory: defaultInventoryPolicy(current, body),
     image: (body.image || current.image || '').trim(),
     gallery: galleryFromBody(body.gallery, current.gallery),
-    category: (body.siteCategory ?? body.category ?? current.category ?? '').toString().trim(),
-    subcategory: (body.siteSubcategory ?? body.subcategory ?? body.subcategoria ?? current.subcategory ?? current.subcategoria ?? '').toString().trim(),
+    category: scopedValue('category', body.siteCategory ?? body.category, current.category ?? '').toString().trim(),
+    subcategory: scopedValue('subcategory', body.siteSubcategory ?? body.subcategory ?? body.subcategoria, current.subcategory ?? current.subcategoria ?? '').toString().trim(),
     tags: tagsFromBody(body.tags, current.tags),
     relatedManualIds: idListFromBody(body.relatedManualIds, current.relatedManualIds),
     crossSellIds: idListFromBody(body.crossSellIds, current.crossSellIds),
-    showPrice: body.showPrice === true || body.showPrice === 'true',
-    featured: body.featured === true || body.featured === 'true',
+    showPrice: booleanFromBody(scopedValue('showPrice', body.showPrice, current.showPrice), Boolean(current.showPrice)),
+    featured: booleanFromBody(scopedValue('featured', body.featured, current.featured), Boolean(current.featured)),
     // Compatibilidade do site público: `active` continua representando o canal LV.
     // O ERP passa a usar `erp.active`, sem alterar o formato esperado pelo publicador atual.
-    active: booleanFromBody(body.lvActive ?? body.active ?? body.publishSite, productLvActive(current)),
+    active: booleanFromBody(scopedValue('lvActive', body.lvActive ?? body.active ?? body.publishSite, productLvActive(current)), productLvActive(current)),
     erp: {
       ...(current.erp && typeof current.erp === 'object' ? current.erp : {}),
       sku: (body.sku ?? current.erp?.sku ?? current.sku ?? '').toString().trim(),
-      internalCode: (body.internalCode ?? current.erp?.internalCode ?? '').toString().trim(),
+      internalCode: (current.erp?.internalCode ?? current.code ?? '').toString().trim(),
       supplierCode: (body.supplierCode ?? current.erp?.supplierCode ?? '').toString().trim(),
+      searchAlias: (body.searchAlias ?? current.erp?.searchAlias ?? '').toString().trim(),
       barcode: (body.barcode ?? current.erp?.barcode ?? current.barcode ?? '').toString().trim(),
       brand: (body.brand ?? current.erp?.brand ?? current.brand ?? '').toString().trim(),
       unit: (body.unit ?? current.erp?.unit ?? 'UN').toString().trim() || 'UN',
@@ -1141,22 +1531,22 @@ function productFromBody(body, current = {}) {
     },
     virtualStore: {
       ...(current.virtualStore && typeof current.virtualStore === 'object' ? current.virtualStore : {}),
-      name: (body.lvName ?? current.virtualStore?.name ?? body.erpName ?? body.name ?? current.name ?? '').toString().trim(),
-      price: numberOrNull(body.lvPrice, current.virtualStore?.price ?? current.price ?? null),
-      active: booleanFromBody(body.lvActive ?? body.active ?? body.publishSite, productLvActive(current)),
-      seoTitle: (body.seoTitle ?? current.virtualStore?.seoTitle ?? '').toString().trim(),
-      seoDescription: (body.seoDescription ?? current.virtualStore?.seoDescription ?? '').toString().trim(),
+      name: scopedValue('lvName', body.lvName, current.virtualStore?.name ?? current.name ?? '').toString().trim(),
+      price: numberOrNull(scopedValue('lvPrice', body.lvPrice, current.virtualStore?.price ?? current.price ?? null), current.virtualStore?.price ?? current.price ?? null),
+      active: booleanFromBody(scopedValue('lvActive', body.lvActive ?? body.active ?? body.publishSite, productLvActive(current)), productLvActive(current)),
+      seoTitle: scopedValue('seoTitle', body.seoTitle, current.virtualStore?.seoTitle ?? '').toString().trim(),
+      seoDescription: scopedValue('seoDescription', body.seoDescription, current.virtualStore?.seoDescription ?? '').toString().trim(),
       channels: {
         ...(current.virtualStore?.channels && typeof current.virtualStore.channels === 'object' ? current.virtualStore.channels : {}),
-        lojaVirtual: { enabled: booleanFromBody(body.lvActive ?? body.active ?? body.publishSite, productLvActive(current)) },
+        lojaVirtual: { enabled: booleanFromBody(scopedValue('lvActive', body.lvActive ?? body.active ?? body.publishSite, productLvActive(current)), productLvActive(current)) },
         mercadoLivre: { enabled: false },
         shopee: { enabled: false },
         amazon: { enabled: false },
         magalu: { enabled: false }
       }
     },
-    detailsEnabled: body.detailsEnabled === true || body.detailsEnabled === 'true',
-    showVariationsOnCard: body.showVariationsOnCard === true || body.showVariationsOnCard === 'true',
+    detailsEnabled: booleanFromBody(scopedValue('detailsEnabled', body.detailsEnabled, current.detailsEnabled), Boolean(current.detailsEnabled)),
+    showVariationsOnCard: booleanFromBody(scopedValue('showVariationsOnCard', body.showVariationsOnCard, current.showVariationsOnCard), Boolean(current.showVariationsOnCard)),
     descriptionShort: (body.descriptionShort ?? current.descriptionShort ?? '').toString().trim(),
     descriptionLong: (body.descriptionLong ?? current.descriptionLong ?? '').toString().trim(),
 
@@ -1218,18 +1608,206 @@ router.post('/upload-gallery', upload.array('galleryFiles', 4), (req, res) => {
   });
 });
 
+
+// V1.7.3 - troca rápida da imagem principal diretamente pela listagem de Produtos.
+router.post('/quick-main-image', upload.single('imageFile'), (req, res) => {
+  try {
+    if (!req.file) return res.status(400).json({ success:false, message:'Selecione uma imagem.' });
+    const productId = String(req.body?.productId || '').trim();
+    if (!productId) return res.status(400).json({ success:false, message:'Produto não informado.' });
+
+    const file = path.join(P(req.app).CONTENT_DIR, 'products.json');
+    const data = readJson(file);
+    data.items = Array.isArray(data.items) ? data.items : [];
+    const item = data.items.find(product => String(product.id) === productId);
+    if (!item) return res.status(404).json({ success:false, message:'Produto não encontrado.' });
+
+    backupProductsJson(file);
+    const image = `images/produtos/${req.file.filename}`;
+    item.image = image;
+    item.updatedAt = new Date().toISOString();
+    writeJson(file, data);
+    return res.json({ success:true, message:'Foto principal atualizada.', image, productId:item.id });
+  } catch (error) {
+    return res.status(400).json({ success:false, message:error.message || 'Não foi possível atualizar a foto principal.' });
+  }
+});
+
+router.get('/importar-wm10', (req, res) => {
+  const service = wm10ProductImportService(req.app);
+  return res.render('produtos_importar_wm10', {
+    wm10Settings: service.getSettings(),
+    migrationProgress: service.getProgress(),
+    lastReport: service.getLastReport(),
+    sourceCacheInfo: service.getSourceCacheInfo(),
+    refreshEstimate: service.estimateRefreshCost()
+  });
+});
+
+router.post('/importar-wm10/configuracao', (req, res) => {
+  try {
+    const settings = wm10ProductImportService(req.app).saveSettings(req.body || {});
+    return res.json({ success:true, message:'Configuração WM10 salva com segurança.', settings });
+  } catch (error) {
+    return res.status(400).json({ success:false, message:error.message });
+  }
+});
+
+router.post('/importar-wm10/testar', async (req, res) => {
+  try {
+    const result = await wm10ProductImportService(req.app).testConnection();
+    return res.json({ success:true, ...result });
+  } catch (error) {
+    return res.status(400).json({ success:false, message:error.message });
+  }
+});
+
+router.post('/importar-wm10/simular', async (req, res) => {
+  try {
+    const report = await wm10ProductImportService(req.app).simulate({
+      useCache:req.body?.useCache !== false,
+      forceRefresh:req.body?.forceRefresh === true
+    });
+    return res.json({ success:true, report });
+  } catch (error) {
+    return res.status(400).json({ success:false, message:error.message });
+  }
+});
+
+router.post('/importar-wm10/executar', async (req, res) => {
+  try {
+    const report = await wm10ProductImportService(req.app).importSelected({
+      selectedCodes:Array.isArray(req.body?.selectedCodes) ? req.body.selectedCodes : [],
+      fields:req.body?.fields && typeof req.body.fields === 'object' ? req.body.fields : {},
+      itemKinds:req.body?.itemKinds && typeof req.body.itemKinds === 'object' ? req.body.itemKinds : {},
+      serviceCategory:firstActiveServiceCategory(req.app),
+      user:req.user?.name || req.user?.email || 'painel'
+    });
+    return res.json({ success:true, message:`${report.imported} produto(s) importado(s).`, report });
+  } catch (error) {
+    return res.status(400).json({ success:false, message:error.message });
+  }
+});
+
+router.post('/importar-wm10/sincronizar', async (req, res) => {
+  try {
+    const report = await wm10ProductImportService(req.app).syncSelected({
+      selectedCodes:Array.isArray(req.body?.selectedCodes) ? req.body.selectedCodes : [],
+      fields:req.body?.fields && typeof req.body.fields === 'object' ? req.body.fields : {},
+      user:req.user?.name || req.user?.email || 'painel'
+    });
+    return res.json({ success:true, message:`${report.synced} produto(s) sincronizado(s).`, report });
+  } catch (error) {
+    return res.status(400).json({ success:false, message:error.message });
+  }
+});
+
+router.post('/importar-wm10/vincular', (req, res) => {
+  try {
+    const result = wm10ProductImportService(req.app).linkExisting({
+      wm10Code:req.body?.wm10Code,
+      productId:req.body?.productId,
+      user:req.user?.name || req.user?.email || 'painel'
+    });
+    return res.json({ success:true, message:'Produto WM10 vinculado ao cadastro existente.', result });
+  } catch (error) {
+    return res.status(400).json({ success:false, message:error.message });
+  }
+});
+
+router.post('/importar-wm10/decisao', (req, res) => {
+  try {
+    const result = wm10ProductImportService(req.app).setDecision({
+      wm10Code:req.body?.wm10Code,
+      decision:String(req.body?.decision || ''),
+      user:req.user?.name || req.user?.email || 'painel'
+    });
+    return res.json({ success:true, message:result.decision === 'ignored' ? 'Produto marcado para não importar.' : 'Produto devolvido para a fila de análise.', result });
+  } catch (error) {
+    return res.status(400).json({ success:false, message:error.message });
+  }
+});
+
+router.post('/importar-wm10/familia', (req, res) => {
+  try {
+    const result = wm10ProductImportService(req.app).saveFamilyDecision({
+      familyId:req.body?.familyId,
+      name:req.body?.name,
+      parentCode:req.body?.parentCode,
+      roles:req.body?.roles && typeof req.body.roles === 'object' ? req.body.roles : {},
+      status:String(req.body?.status || 'approved'),
+      nameEdited:req.body?.nameEdited === true,
+      kind:String(req.body?.kind || 'product').toLowerCase() === 'service' ? 'service' : 'product',
+      serviceCategory:String(req.body?.kind || 'product').toLowerCase() === 'service' ? firstActiveServiceCategory(req.app) : null,
+      user:req.user?.name || req.user?.email || 'painel'
+    });
+    return res.json({ success:true, message:'Família salva. Nenhum produto foi alterado ainda.', result });
+  } catch (error) {
+    return res.status(400).json({ success:false, message:error.message });
+  }
+});
+
+router.post('/importar-wm10/familia/reabrir', (req, res) => {
+  try {
+    const result = wm10ProductImportService(req.app).resetFamilyDecision({ familyId:req.body?.familyId });
+    return res.json({ success:true, message:'Família devolvida para sugestão.', result });
+  } catch (error) {
+    return res.status(400).json({ success:false, message:error.message });
+  }
+});
+
+router.post('/importar-wm10/familia/corrigir-importada', async (req, res) => {
+  try {
+    const result = await wm10ProductImportService(req.app).repairImportedFamily({
+      familyId:req.body?.familyId,
+      user:req.user?.name || req.user?.email || 'painel'
+    });
+    return res.json({ success:true, message:`Família corrigida: ${result.name}.`, result });
+  } catch (error) {
+    return res.status(400).json({ success:false, message:error.message });
+  }
+});
+
+
+router.post('/importar-wm10/familias/importar', async (req, res) => {
+  try {
+    const report = await wm10ProductImportService(req.app).importApprovedFamilies({
+      familyIds:Array.isArray(req.body?.familyIds) ? req.body.familyIds : [],
+      fields:req.body?.fields && typeof req.body.fields === 'object' ? req.body.fields : {},
+      user:req.user?.name || req.user?.email || 'painel'
+    });
+    return res.json({ success:true, message:`${report.importedFamilies} família(s) importada(s).`, report });
+  } catch (error) {
+    return res.status(400).json({ success:false, message:error.message });
+  }
+});
+
+
+
+router.get('/api/images', (req, res) => {
+  try {
+    const imagesDir = path.join(P(req.app).SITE_DIR, 'images');
+    return res.json({ success:true, items:getAllImagesCached(imagesDir) });
+  } catch (error) {
+    return res.status(500).json({ success:false, message:error.message || 'Não foi possível listar as imagens.', items:[] });
+  }
+});
+
 router.get('/', (req, res) => {
   const contentDir = P(req.app).CONTENT_DIR;
   const file = path.join(contentDir, 'products.json');
   const data = readJson(file);
+  const workspaceNew = req.query.workspace === 'new';
 
   const catsFile = path.join(contentDir, 'categories.json');
   const cats = readJson(catsFile);
   const subcatsFile = path.join(contentDir, 'subcategories.json');
   const subcats = readJson(subcatsFile);
+  const erpCategorias = loadErpCategories(req.app);
 
   const imagesDir = path.join(P(req.app).SITE_DIR, 'images');
-  const imagens = getAllImages(imagesDir);
+  // A lista de imagens é carregada sob demanda pela API; não varrer o disco antes de renderizar Produtos.
+  const imagens = [];
 
   let flash = null;
   if (req.query.saved === 'produto') flash = '✅ Produto salvo com sucesso.';
@@ -1239,29 +1817,136 @@ router.get('/', (req, res) => {
     const updated = Math.max(0, Number(req.query.updated) || 0);
     const skipped = Math.max(0, Number(req.query.skipped) || 0);
     const errors = Math.max(0, Number(req.query.errors) || 0);
-    flash = `✅ Operações em lote concluídas: ${updated} produto(s) alterado(s)` +
+    flash = `✅ ${updated} ${updated === 1 ? 'produto alterado' : 'produtos alterados'}` +
       (skipped ? ` · ${skipped} sem mudança` : '') +
       (errors ? ` · ⚠️ ${errors} com erro` : '') + '.';
   }
   if (req.query.saved === 'details_on') flash = '✅ Detalhes ativados nos produtos selecionados.';
   if (req.query.saved === 'details_off') flash = '✅ Detalhes desativados nos produtos selecionados.';
   if (req.query.deleted === '1') flash = '🗑️ Produto excluído com sucesso.';
+  if (req.query.error === 'erp_category') flash = '⚠️ Selecione uma categoria do ERP antes de cadastrar o produto.';
 
-  const invService = inventoryService(req.app);
-  (data.items || []).forEach(item => {
-    ensureInventoryIdentity(item, item);
-    if (item.inventory?.stockControlled && item.inventory?.itemId) {
-      item.inventoryBalance = invService.consultarSaldo({ inventoryItemId: item.inventory.itemId });
-      item.stock = item.inventoryBalance.physicalQuantity;
+  const cleanedLegacyServices = cleanupLegacyServiceVariations(data.items || [], erpCategorias);
+  const reconciledVariationGrids = reconcileStoredVariationGrids(data.items || []);
+  const ensuredInternalCodes = ensureInternalProductCodes(data.items || []);
+  const ensuredInventoryIdentities = ensureUniqueInventoryIdentities(data.items || []);
+  if (cleanedLegacyServices || reconciledVariationGrids || ensuredInternalCodes || ensuredInventoryIdentities) {
+    backupProductsJson(file);
+    writeJson(file, data);
+  }
+
+  const allItems = data.items || [];
+  const listQuery = String(req.query.q || '').trim();
+  const listCategory = String(req.query.categoria || '').trim();
+  const listErpStatus = String(req.query.erpStatus || '').trim();
+  // Ao entrar em Produtos pelo contexto da Loja Virtual, prioriza LV ativo.
+  // No contexto ERP (?origem=erp) mantém todos os produtos, salvo filtro explícito.
+  const hasExplicitLvStatus = Object.prototype.hasOwnProperty.call(req.query || {}, 'lvStatus');
+  const listLvStatus = String(hasExplicitLvStatus ? (req.query.lvStatus || '') : (req.query.origem === 'erp' ? '' : 'true')).trim();
+  const pageSize = Math.min(300, Math.max(20, Number(req.query.pageSize) || 50));
+
+  let filteredItems = workspaceNew ? [] : allItems.filter(item => {
+    if (listQuery) {
+      const erp = item?.erp || {};
+      const haystack = [item?.name, item?.slug, erp.internalCode, erp.sku, erp.barcode, erp.supplierCode, erp.searchAlias, erp.brand, erp.model].join(' ');
+      if (!matchesSearchText(haystack, listQuery)) return false;
     }
+    if (listCategory) {
+      const category = String(item?.category || '');
+      if (listCategory === '[vitrine]') { if (category) return false; }
+      else if (category !== listCategory) return false;
+    }
+    if (listErpStatus) {
+      const raw = item?.erp?.active !== undefined ? item.erp.active : item.active;
+      const active = !['false','0','off','inativo'].includes(String(raw).toLowerCase()) && raw !== false;
+      if (String(active) !== listErpStatus) return false;
+    }
+    if (listLvStatus) {
+      const raw = item?.virtualStore?.active !== undefined ? item.virtualStore.active : item.active;
+      const active = !['false','0','off','inativo'].includes(String(raw).toLowerCase()) && raw !== false;
+      if (String(active) !== listLvStatus) return false;
+    }
+    return true;
   });
 
+  // Em buscas textuais, resultados cujo nome/modelo realmente correspondem ao que foi
+  // digitado ficam antes de coincidências encontradas apenas em SKU/código/barcode.
+  // Isso evita, por exemplo, "redmi 12" trazer Redmi Note 15 no topo só porque "12"
+  // existe em algum identificador técnico do produto.
+  if (listQuery && filteredItems.length > 1) {
+    filteredItems = filteredItems
+      .map((item, originalIndex) => {
+        const erp = item?.erp || {};
+        const nameAndModel = [item?.name, erp.brand, erp.model].filter(Boolean).join(' ');
+        const technicalFields = [item?.slug, erp.internalCode, erp.sku, erp.barcode, erp.supplierCode, erp.searchAlias].filter(Boolean).join(' ');
+        return { item, originalIndex, score:searchRelevanceScore({ name:nameAndModel, fields:technicalFields, query:listQuery }) };
+      })
+      .sort((a,b) => b.score - a.score || a.originalIndex - b.originalIndex)
+      .map(entry => entry.item);
+  }
+
+  const totalFiltered = filteredItems.length;
+  const totalPages = workspaceNew ? 1 : Math.max(1, Math.ceil(totalFiltered / pageSize));
+  const requestedPage = Math.max(1, Number(req.query.page) || 1);
+  const currentPage = Math.min(requestedPage, totalPages);
+  const startIndex = (currentPage - 1) * pageSize;
+  const renderItems = workspaceNew ? [] : filteredItems.slice(startIndex, startIndex + pageSize);
+
+  if (!workspaceNew && renderItems.length) {
+    const invService = inventoryService(req.app);
+    const inventoryIds = [];
+
+    renderItems.forEach(item => {
+      ensureInventoryIdentity(item, item);
+      if (item.inventory?.stockControlled !== true) return;
+      const combinations = variationCombinations(item);
+      if (combinations.length) {
+        combinations.forEach(combo => { if (combo.inventoryItemId) inventoryIds.push(combo.inventoryItemId); });
+      } else if (item.inventory?.itemId) {
+        inventoryIds.push(item.inventory.itemId);
+      }
+    });
+
+    const balances = invService.consultarSaldosEmLote({ inventoryItemIds: inventoryIds });
+
+    renderItems.forEach(item => {
+      if (item.inventory?.stockControlled !== true) return;
+      const combinations = variationCombinations(item);
+      if (combinations.length) {
+        let physicalQuantity = 0, availableQuantity = 0, reservedQuantity = 0;
+        combinations.forEach(combo => {
+          if (!combo.inventoryItemId) return;
+          const balance = balances.get(String(combo.inventoryItemId));
+          if (!balance) return;
+          combo.stock = Number(balance.physicalQuantity) || 0;
+          physicalQuantity += Number(balance.physicalQuantity) || 0;
+          availableQuantity += Number(balance.availableQuantity) || 0;
+          reservedQuantity += Number(balance.reservedQuantity) || 0;
+        });
+        item.stock = physicalQuantity;
+        item.inventoryBalance = { physicalQuantity, availableQuantity, reservedQuantity, derivedFromVariations: true };
+        return;
+      }
+      if (item.inventory?.itemId) {
+        item.inventoryBalance = balances.get(String(item.inventory.itemId)) || { physicalQuantity: 0, availableQuantity: 0, reservedQuantity: 0 };
+        item.stock = Number(item.inventoryBalance.physicalQuantity) || 0;
+      }
+    });
+  }
+
   res.render('produtos', {
-    items: data.items || [],
+    items: renderItems,
     categorias: cats.items || [],
     subcategorias: subcats.items || [],
+    erpCategorias,
     imagens,
     origemErp: req.query.origem === 'erp',
+    workspaceNew,
+    workspaceType: String(req.query.type || 'product').toLowerCase() === 'service' ? 'service' : 'product',
+    listState: {
+      query:listQuery, category:listCategory, erpStatus:listErpStatus, lvStatus:listLvStatus,
+      page:currentPage, pageSize, totalFiltered, totalPages, totalItems:allItems.length
+    },
     flash
   });
 });
@@ -1307,8 +1992,42 @@ router.post('/add', (req, res) => {
   data.items = data.items || [];
 
   const categorias = loadCategories(req.app);
-  const novo = productFromBody(req.body);
+  const erpCategorias = loadErpCategories(req.app);
+  // Segurança de cadastro: produtos novos começam fora da Loja Virtual.
+  // A ativação ocorre somente quando o usuário selecionar explicitamente "Ativo".
+  const createBody = { ...req.body };
+  if (createBody.lvActive === undefined && createBody.active === undefined && createBody.publishSite === undefined) {
+    createBody.lvActive = 'false';
+  }
+  const novo = productFromBody(createBody);
+  const erpCategory = validErpCategory(createBody.erpCategory, erpCategorias);
+  if (!erpCategory || erpCategory.active === false) return res.redirect('/produtos?error=erp_category');
   novo.id = Date.now();
+  novo.erp = novo.erp && typeof novo.erp === 'object' ? novo.erp : {};
+  novo.erp.categoryId = erpCategory.id;
+  novo.erp.category = erpCategory.code;
+  if (erpCategory.type === 'service') {
+    novo.erp.type = 'service';
+    // Serviço é sempre um cadastro vendável único. Não usa grade/variações de produto.
+    // Isso garante preço, histórico e seleção independentes no PDV.
+    novo.variations = emptyVariations();
+    novo.stock = null;
+    novo.inventory = defaultInventoryPolicy(novo, { stockControlled: 'false', allowNegative: 'false', inventorySiteMode: 'disabled', minimumQuantity: 0, siteLimit: 0, physicalSafety: 0 });
+  }
+  else {
+    // Regra padrão do ERP: todo produto físico novo participa do controle de estoque.
+    // Serviços permanecem fora do estoque pelo bloco acima.
+    novo.inventory = defaultInventoryPolicy(novo, {
+      stockControlled: 'true',
+      allowNegative: String(novo?.inventory?.allowNegative === true),
+      inventorySiteMode: novo?.inventory?.channelAvailability?.site?.mode || 'shared',
+      minimumQuantity: novo?.inventory?.minimumQuantity ?? 0,
+      siteLimit: novo?.inventory?.channelAvailability?.site?.limit ?? 0,
+      physicalSafety: novo?.inventory?.channelAvailability?.site?.physicalSafety ?? 0
+    });
+  }
+  novo.erp.internalCode = nextInternalProductCode(data.items);
+  novo.code = novo.erp.internalCode;
   novo.category = normalizeCategoryValue(novo.category, categorias);
   novo.subcategory = normalizeSubcategoryValue(novo.subcategory, novo.category, categorias, loadSubcategories(req.app));
 
@@ -1337,13 +2056,46 @@ router.post('/add', (req, res) => {
   res.redirect('/produtos?saved=produto');
 });
 
+function findProductBySubmittedId(items, rawId) {
+  const submitted = String(rawId ?? '').trim();
+  if (!submitted) return null;
+
+  // IDs de produtos importados podem ser textuais. Nunca converter cegamente para
+  // Number(), pois valores como QLT-.../IDs externos viram NaN e o produto some
+  // apenas no momento de salvar. A comparação textual preserva a identidade real.
+  let item = (items || []).find(product => String(product?.id ?? '').trim() === submitted);
+  if (item) return item;
+
+  // Compatibilidade com bases antigas em que o mesmo ID foi persistido como número
+  // de um lado e string numérica do outro.
+  if (/^-?\d+(?:\.0+)?$/.test(submitted)) {
+    const numeric = Number(submitted);
+    item = (items || []).find(product => {
+      const candidate = String(product?.id ?? '').trim();
+      return /^-?\d+(?:\.0+)?$/.test(candidate) && Number(candidate) === numeric;
+    });
+    if (item) return item;
+  }
+
+  // Fallback seguro para cadastros importados que usaram o código interno como
+  // identidade no frontend em versões anteriores.
+  return (items || []).find(product => {
+    const codes = [
+      product?.erp?.internalCode, product?.internalCode, product?.code,
+      product?.codigo, product?.codigoInterno, product?.qltCode
+    ].map(value => String(value ?? '').trim()).filter(Boolean);
+    return codes.includes(submitted);
+  }) || null;
+}
+
 router.post('/update', (req, res) => {
   const file = path.join(P(req.app).CONTENT_DIR, 'products.json');
   const data = readJson(file);
   data.items = data.items || [];
 
-  const id = Number(req.body.id);
-  const item = data.items.find(p => Number(p.id) === id);
+  const submittedId = String(req.body.id ?? '').trim();
+  const item = findProductBySubmittedId(data.items, submittedId);
+  const id = item?.id ?? submittedId;
 
   if (!item) {
     if (wantsJson(req)) {
@@ -1354,8 +2106,35 @@ router.post('/update', (req, res) => {
   }
 
   const categorias = loadCategories(req.app);
+  const erpCategorias = loadErpCategories(req.app);
   const previousItem = JSON.parse(JSON.stringify(item));
+
+  // A nova categoria ERP usa identidade própria. O código legado continua salvo para
+  // preservar integrações consolidadas que ainda leem item.erp.category.
+  const submittedErpCategory = String(req.body.erpCategory || '').trim();
+  const previousCategoryId = String(previousItem?.erp?.categoryId || '').trim();
+  const previousCategoryCode = String(previousItem?.erp?.category || '').trim();
+  const erpCategory = validErpCategory(submittedErpCategory || previousCategoryId || previousCategoryCode, erpCategorias);
+
+  // A categoria ERP é obrigatória apenas no cadastro de novos produtos. Em uma
+  // edição de produto legado, a ausência de categoria não pode impedir ajustes
+  // independentes de estoque, status ou disponibilidade.
   Object.assign(item, productFromBody(req.body, item));
+  item.erp = item.erp && typeof item.erp === 'object' ? item.erp : {};
+  if (erpCategory) {
+    item.erp.categoryId = erpCategory.id;
+    item.erp.category = erpCategory.code;
+    if (erpCategory.type === 'service') {
+      item.erp.type = 'service';
+      // Ao converter/salvar como serviço, remove qualquer grade antiga.
+      // Serviços são cadastrados individualmente e usam o preço do bloco Comercial.
+      item.variations = emptyVariations();
+      item.stock = null;
+      item.inventory = defaultInventoryPolicy(item, { stockControlled: 'false', allowNegative: 'false', inventorySiteMode: 'disabled', minimumQuantity: 0, siteLimit: 0, physicalSafety: 0 });
+    }
+  }
+  item.erp.internalCode = previousItem.erp?.internalCode || previousItem.code || nextInternalProductCode(data.items);
+  item.code = item.erp.internalCode;
 
   // Persistência explícita dos status independentes. Essa atribuição final evita
   // que campos legados ou valores falsos sejam substituídos por defaults durante
@@ -1394,7 +2173,8 @@ router.post('/update', (req, res) => {
 
   try {
     const inventoryResult = syncInventoryFromProduct(req, item);
-    if (inventoryResult?.productBalance) item.stock = inventoryResult.productBalance.physicalQuantity;
+    if (inventoryResult?.stockMode === 'variations') item.stock = Number(inventoryResult.aggregatePhysical) || 0;
+    else if (inventoryResult?.productBalance) item.stock = inventoryResult.productBalance.physicalQuantity;
   } catch (error) {
     console.error('⚠️ Falha ao ajustar estoque:', error);
     if (wantsJson(req)) return res.status(400).json({ success: false, message: error.message || 'Erro ao ajustar estoque.' });
@@ -1485,8 +2265,7 @@ router.post('/update-all', (req, res) => {
       : [];
 
   ids.forEach((rawId, index) => {
-    const id = Number(rawId);
-    const item = data.items.find(p => Number(p.id) === id);
+    const item = findProductBySubmittedId(data.items, rawId);
     if (!item) return;
 
     const getField = (field) => {
@@ -1500,6 +2279,7 @@ router.post('/update-all', (req, res) => {
       sku: getField('sku'),
       internalCode: getField('internalCode'),
       supplierCode: getField('supplierCode'),
+      searchAlias: getField('searchAlias'),
       barcode: getField('barcode'),
       brand: getField('brand'),
       unit: getField('unit'),
@@ -1604,6 +2384,7 @@ router.post('/bulk-actions', (req, res) => {
   const hasSubcategory = enabledActions.has('subcategory');
   const hasStockControlled = enabledActions.has('stockControlled');
   const hasMinimumQuantity = enabledActions.has('minimumQuantity');
+  const hasAllowNegative = enabledActions.has('allowNegative');
   const hasErpActive = enabledActions.has('erpActive');
   const hasLvActive = enabledActions.has('lvActive');
 
@@ -1618,6 +2399,9 @@ router.post('/bulk-actions', (req, res) => {
   const booleanValue = name => String(req.body[name] ?? '') === 'true';
   const requestedStockControlled = hasStockControlled
     ? booleanValue('bulkStockControlled')
+    : null;
+  const requestedAllowNegative = hasAllowNegative
+    ? booleanValue('bulkAllowNegative')
     : null;
 
   let backupFile = null;
@@ -1702,6 +2486,11 @@ router.post('/bulk-actions', (req, res) => {
         changedFields.add('estoque mínimo');
       }
 
+      if (hasAllowNegative) {
+        item.inventory.allowNegative = requestedAllowNegative;
+        changedFields.add('venda com estoque zerado/negativo');
+      }
+
       ensureInventoryIdentity(item, item);
 
       if (item.inventory?.stockControlled === true && item.inventory?.itemId && (hasStockControlled || hasMinimumQuantity)) {
@@ -1748,8 +2537,9 @@ router.post('/duplicate', (req, res) => {
   const data = readJson(file);
   data.items = data.items || [];
 
-  const id = Number(req.body.id);
-  const original = data.items.find(p => Number(p.id) === id);
+  const submittedId = String(req.body.id ?? '').trim();
+  const original = findProductBySubmittedId(data.items, submittedId);
+  const id = original?.id ?? submittedId;
 
   if (!original) {
     if (wantsJson(req)) {
@@ -1771,17 +2561,47 @@ router.post('/duplicate', (req, res) => {
     novoId
   );
 
-  // Quando o código interno QLT existir no futuro, ele não deve ser reaproveitado na cópia.
-  delete copia.code;
+  // Duplicar reaproveita os dados comerciais/cadastrais, mas NUNCA as identidades
+  // técnicas do produto original. Código e inventoryItemId são chaves usadas pelo
+  // estoque/contagens; copiá-las faz dois cadastros apontarem para o mesmo item físico.
+  copia.erp = copia.erp && typeof copia.erp === 'object' ? copia.erp : {};
+  const novoCodigo = nextInternalProductCode(data.items);
+  copia.erp.internalCode = novoCodigo;
+  copia.code = novoCodigo;
   delete copia.internalCode;
   delete copia.codigo;
   delete copia.codigoInterno;
   delete copia.qltCode;
 
+  // A cópia é um novo item físico: começa com saldo zero e recebe identidades de
+  // estoque próprias. Isso evita saldo fantasma e garante contagem independente.
+  copia.stock = copia.erp?.type === 'service' ? null : 0;
+  copia.inventory = copia.inventory && typeof copia.inventory === 'object' ? copia.inventory : {};
+  copia.inventory.itemId = '';
+  if (Array.isArray(copia?.variations?.combinations)) {
+    copia.variations.combinations = copia.variations.combinations.map(combo => ({
+      ...combo,
+      stock: 0,
+      inventoryItemId: ''
+    }));
+  }
+  ensureInventoryIdentity(copia, null);
+
   data.items.push(copia);
   writeJson(file, data);
 
-  console.log(`📄 Produto duplicado: ${original.name || id} -> ${copia.name} | slug: ${copia.slug}`);
+  // Registra/configura o novo item no módulo de estoque sem herdar movimentações
+  // do produto de origem. Para serviços, syncInventoryFromProduct apenas ignora.
+  try {
+    syncInventoryFromProduct(req, copia, { initial: true });
+  } catch (error) {
+    console.error(`⚠️ Produto duplicado, mas falhou ao inicializar estoque de ${copia.name}:`, error);
+  }
+
+  console.log(
+    `📄 Produto duplicado: ${original.name || id} -> ${copia.name} | ` +
+    `código: ${copia.erp.internalCode} | estoque: ${copia.inventory?.itemId || 'não controlado'} | slug: ${copia.slug}`
+  );
 
   if (wantsJson(req)) {
     return res.json({ success: true, message: '📄 Produto duplicado com sucesso.', item: copia });
@@ -1793,9 +2613,11 @@ router.post('/duplicate', (req, res) => {
 router.post('/del', (req, res) => {
   const file = path.join(P(req.app).CONTENT_DIR, 'products.json');
   const data = readJson(file);
-  const id = Number(req.body.id);
+  const submittedId = String(req.body.id ?? '').trim();
+  const target = findProductBySubmittedId(data.items || [], submittedId);
+  const id = target?.id ?? submittedId;
 
-  data.items = (data.items || []).filter(p => Number(p.id) !== id);
+  data.items = (data.items || []).filter(product => product !== target);
   writeJson(file, data);
 
   console.log(`🗑️ Produto ${id} excluído.`);

@@ -1,0 +1,19 @@
+QUALITY ERP v0.25.x — Correção estável do Workspace de Produtos
+
+Arquivo alterado:
+- views/produtos.ejs
+
+Correção aplicada:
+- /produtos continua exibindo cabeçalho, indicadores, Workspace, filtros, operações em lote e listagem.
+- /produtos?workspace=new não renderiza no HTML o cabeçalho mestre, os seis indicadores nem o título/descrição do Workspace.
+- Os botões Produtos cadastrados, Novo produto e Voltar à lista agora navegam pelas URLs reais, evitando disputa entre EJS, CSS, JavaScript e Ctrl+F5.
+- Removida a exibição de “0 selecionado(s)” sem quebrar o contador interno usado pelas ações em lote.
+
+Checklist:
+1. Reiniciar o painel.
+2. Abrir /produtos: confirmar cards, filtros e listagem.
+3. Abrir /produtos?workspace=new: confirmar que começa nos botões e no formulário.
+4. Clicar Produtos cadastrados: deve carregar /produtos com a listagem e os cards.
+5. Clicar Novo produto: deve carregar /produtos?workspace=new sem os cards.
+6. Testar Ctrl+F5 nas duas URLs: o conteúdo não deve alternar depois do carregamento.
+7. Validar Black OLED e Claro.

@@ -12,54 +12,244 @@
 </script>
 <link rel="stylesheet" href="/public/css/painel.css">
 <link rel="stylesheet" href="/public/css/painel-theme.css">
-<script src="https://cdn.ckeditor.com/4.25.1-lts/full/ckeditor.js"></script>
-</head><body>
-<div class='topbar'>
-  <div class='brand'>Painel Quality</div>
-  <nav>
-    <a href='/'>🏠 Dashboard</a>
-    <a href='/erp'>💼 ERP</a>
-    <a href='/categorias'>🗂️ Categorias</a>
-    <a href='/crm'>💬 CRM</a>
-    <a href='/site'>🌐 Site</a>
-    <a href='/analytics'>📊 Analytics</a>
-    <a href='/marketing'>✨ Marketing</a>
-    <a href='/ferramentas'>🧰 Ferramentas</a>
-    <a href='/configuracoes'>⚙️ Configurações</a>
-  </nav>
-  <div class='actions'>
-    <div class='panel-theme-control' title='Tema do painel'>
-      <span aria-hidden='true'>🎨</span>
-      <select id='panelThemeSelect' aria-label='Escolher tema do painel'>
-        <option value='light'>Claro</option>
-        <option value='dark'>Escuro</option>
-        <option value='oled'>Black OLED</option>
-        <option value='blue'>Dark Blue</option>
+<script src="/public/js/search-utils.js"></script>
+</head><body class='<%= typeof pageClass !== "undefined" ? pageClass : "" %>'>
+<header class="topbar quality-shell" data-quality-shell>
+  <a class="brand" href="/" aria-label="Abrir painel inicial">
+    <% if (typeof panelCompany !== 'undefined' && panelCompany && panelCompany.logoUrl) { %>
+      <img class="quality-brand-logo" src="<%= panelCompany.logoUrl %>?v=<%= panelCompany.logoVersion || 1 %>" alt="<%= panelCompany.tradeName || 'Logo da empresa' %>">
+    <% } else { %>
+      <span class="quality-brand-mark" aria-hidden="true">Q</span>
+      <span class="quality-brand-copy"><strong><%= (typeof panelCompany !== 'undefined' && panelCompany?.tradeName) || 'Quality ERP' %></strong><small>Painel ERP</small></span>
+    <% } %>
+  </a>
+
+  <div class="quality-nav-stack">
+    <div class="quality-global-search" data-global-search>
+      <span aria-hidden="true">⌕</span>
+      <input id="qualityGlobalSearch" type="search" placeholder="[F1] Pesquisar menu" autocomplete="off" aria-label="Pesquisar menu do ERP">
+      <div class="quality-global-search-results" data-global-search-results hidden></div>
+    </div>
+
+    <nav class="quality-main-nav" aria-label="Navegação principal">
+    <a class="quality-nav-home" href="/" data-shell-link>🏠 Início</a>
+
+    <details class="quality-nav-menu quality-shortcuts-menu" data-shell-menu>
+      <summary>⭐ Atalhos <span>▾</span></summary>
+      <div class="quality-nav-dropdown quality-shortcuts-dropdown">
+        <a href="/erp/pdv" data-shell-link data-global-shortcut="pdv"><b>🛒 PDV</b><small>Venda rápida</small></a>
+        <a href="/erp/pdv/caixa" data-shell-link data-global-shortcut="caixa"><b>💵 Caixa Operacional</b><small>Abrir caixa e movimentos</small></a>
+        <a href="/erp/agenda" data-shell-link data-global-shortcut="agenda"><b>✅ Agenda</b><small>Tarefas e lembretes</small></a>
+        <a href="/automacao-whatsapp?tab=inbox" data-shell-link data-global-shortcut="inbox"><b>💬 Inbox</b><small>WhatsApp e atendimento</small></a>
+        <a href="/erp/centro-operacoes" data-shell-link data-global-shortcut="centro"><b>🧭 Centro de Operações</b><small>Vendas, O.S. e histórico</small></a>
+        <a href="/erp/clientes" data-shell-link data-global-shortcut="clientes"><b>👥 Clientes</b><small>Cadastro e histórico</small></a>
+        <a href="/erp/compras" data-shell-link data-global-shortcut="compras"><b>🚚 Compras</b><small>XML e entradas</small></a>
+        <a href="/erp/estoque" data-shell-link data-global-shortcut="estoque"><b>📚 Estoque</b><small>Saldos e contagens</small></a>
+        <a href="/orcamentos" data-shell-link data-global-shortcut="orcamentos"><b>📝 Orçamentos</b><small>Propostas e cotações</small></a>
+        <a href="/erp/produtos" data-shell-link data-global-shortcut="produtos"><b>📦 Produtos</b><small>Cadastro e preços</small></a>
+        <a href="/erp/fornecedores" data-shell-link data-global-shortcut="fornecedores"><b>🏭 Fornecedores</b><small>Cadastro de parceiros</small></a>
+        <a href="/erp/financeiro/contas-a-receber" data-shell-link data-global-shortcut="receber"><b>📥 Contas a Receber</b><small>Baixas e recebimentos</small></a>
+        <a href="/erp/financeiro/contas-a-pagar" data-shell-link data-global-shortcut="pagar"><b>📤 Contas a Pagar</b><small>Despesas e pagamentos</small></a>
+        <a href="/erp/financeiro/fluxo-de-caixa" data-shell-link data-global-shortcut="fluxo"><b>📈 Fluxo de Caixa</b><small>Realizado e previsto</small></a>
+        <a href="/erp/financeiro/dre" data-shell-link data-global-shortcut="dre"><b>📊 DRE</b><small>Resultado do negócio</small></a>
+        <a href="/site" data-shell-link data-global-shortcut="site"><b>🌐 Site</b><small>Conteúdo e vitrine</small></a>
+        <a href="/produtos?lvStatus=true" data-shell-link data-global-shortcut="produtos-site"><b>🛍️ Produtos do site</b><small>Loja virtual ativa</small></a>
+        <a href="/analytics" data-shell-link data-global-shortcut="analytics"><b>📊 Analytics</b><small>Métricas e indicadores</small></a>
+        <a href="/marketing" data-shell-link data-global-shortcut="marketing"><b>✨ Marketing</b><small>Campanhas e conteúdo</small></a>
+        <a href="/configuracoes" data-shell-link data-global-shortcut="configuracoes"><b>⚙️ Configurações</b><small>Preferências do sistema</small></a>
+        <a href="#" data-global-shortcuts-config><b>⚙ Personalizar atalhos do menu</b><small>Escolher acessos rápidos desta barra</small></a>
+      </div>
+    </details>
+
+    <details class="quality-nav-menu" data-shell-menu>
+      <summary>⚡ Operação <span>▾</span></summary>
+      <div class="quality-nav-dropdown">
+        <a href="/erp/centro-operacoes" data-shell-link><b>Centro de Operações</b><small>Vendas, O.S. e histórico</small></a>
+        <a href="/erp/pdv" data-shell-link><b>PDV</b><small>Venda rápida e atendimento</small></a>
+        <a href="/erp/agenda" data-shell-link><b>Agenda</b><small>Tarefas e compromissos</small></a>
+        <a href="/erp/compras" data-shell-link><b>Compras</b><small>XML, fornecedores e entradas</small></a>
+        <a href="/erp/estoque" data-shell-link><b>Estoque</b><small>Saldos, movimentos e contagens</small></a>
+      </div>
+    </details>
+
+    <details class="quality-nav-menu" data-shell-menu>
+      <summary>💼 ERP <span>▾</span></summary>
+      <div class="quality-nav-dropdown">
+        <a href="/erp" data-shell-link><b>Visão do ERP</b><small>Todos os módulos</small></a>
+        <a href="/erp/clientes" data-shell-link><b>Clientes</b><small>Cadastro e histórico</small></a>
+        <a href="/erp/produtos" data-shell-link><b>Produtos</b><small>Catálogo e preços</small></a>
+        <a href="/erp/categorias" data-shell-link><b>Categorias ERP</b><small>Estrutura interna</small></a>
+        <a href="/erp/fornecedores" data-shell-link><b>Fornecedores</b><small>Cadastro de parceiros</small></a>
+      </div>
+    </details>
+
+    <details class="quality-nav-menu" data-shell-menu>
+      <summary>💰 Financeiro <span>▾</span></summary>
+      <div class="quality-nav-dropdown">
+        <a href="/erp/financeiro" data-shell-link><b>Financeiro</b><small>Visão geral</small></a>
+        <a href="/erp/financeiro/contas-a-receber" data-shell-link><b>Contas a Receber</b><small>Baixas e recebimentos</small></a>
+        <a href="/erp/financeiro/contas-a-pagar" data-shell-link><b>Contas a Pagar</b><small>Despesas e pagamentos</small></a>
+        <a href="/erp/pdv/caixa" data-shell-link><b>Caixa Operacional</b><small>Movimentos, saldo e turnos</small></a>
+        <a href="/erp/financeiro/fluxo-de-caixa" data-shell-link><b>Fluxo de Caixa</b><small>Realizado e previsto</small></a>
+        <a href="/erp/financeiro/dre" data-shell-link><b>DRE</b><small>Resultado do negócio</small></a>
+      </div>
+    </details>
+
+    <details class="quality-nav-menu" data-shell-menu>
+      <summary>💬 CRM <span>▾</span></summary>
+      <div class="quality-nav-dropdown">
+        <a href="/automacao-whatsapp" data-shell-link><b>Painel Comercial</b><small>Indicadores e oportunidades</small></a>
+        <a href="/automacao-whatsapp?tab=inbox" data-shell-link><b>Inbox</b><small>Conversas e atendimento</small></a>
+        <a href="/automacao-whatsapp?tab=palavras-chave" data-shell-link><b>Automação</b><small>Respostas, blocos e fluxos</small></a>
+      </div>
+    </details>
+
+    <details class="quality-nav-menu" data-shell-menu>
+      <summary>🌐 Negócio <span>▾</span></summary>
+      <div class="quality-nav-dropdown quality-nav-dropdown-right">
+        <a href="/site" data-shell-link><b>Site</b><small>Conteúdo e vitrine</small></a>
+        <a href="/analytics" data-shell-link><b>Analytics</b><small>Métricas do site</small></a>
+        <a href="/marketing" data-shell-link><b>Marketing</b><small>Campanhas e conteúdo</small></a>
+        <a href="/ferramentas" data-shell-link><b>Ferramentas</b><small>Utilidades do painel</small></a>
+        <a href="/configuracoes" data-shell-link><b>Configurações</b><small>Preferências do sistema</small></a>
+      </div>
+    </details>
+    </nav>
+  </div>
+
+  <div class="actions">
+    <div class="panel-theme-control" title="Tema do painel">
+      <span aria-hidden="true">🎨</span>
+      <select id="panelThemeSelect" aria-label="Escolher tema do painel">
+        <option value="light">Claro</option>
+        <option value="dark">Escuro</option>
+        <option value="oled">Black OLED</option>
+        <option value="blue">Dark Blue</option>
       </select>
     </div>
-    <form method='post' action='/publicar'><button class='btn primary' type='submit'>📤 Publicar</button></form>
-    <a class='btn secondary' href='/site/view/index.html' target='_blank'>👁️ Ver site</a>
+    <form method="post" action="/publicar"><button class="btn primary" type="submit">📤 Publicar</button></form>
+    <a class="btn secondary" href="/site/view/index.html" target="_blank">👁️ Ver site</a>
+  </div>
+</header>
+<div class="quality-shortcuts-config" data-global-shortcuts-modal hidden>
+  <div class="quality-shortcuts-config__card" role="dialog" aria-modal="true" aria-labelledby="qualityShortcutsTitle">
+    <div class="quality-shortcuts-config__head"><div><strong id="qualityShortcutsTitle">Personalizar atalhos do menu</strong><small>Esses atalhos são independentes dos ícones da Dashboard.</small></div><button type="button" data-global-shortcuts-close aria-label="Fechar">×</button></div>
+    <div class="quality-shortcuts-config__grid">
+      <label><input type="checkbox" value="pdv"> 🛒 PDV</label>
+      <label><input type="checkbox" value="caixa"> 💵 Caixa Operacional</label>
+      <label><input type="checkbox" value="agenda"> ✅ Agenda</label>
+      <label><input type="checkbox" value="inbox"> 💬 Inbox</label>
+      <label><input type="checkbox" value="centro"> 🧭 Centro de Operações</label>
+      <label><input type="checkbox" value="clientes"> 👥 Clientes</label>
+      <label><input type="checkbox" value="compras"> 🚚 Compras</label>
+      <label><input type="checkbox" value="estoque"> 📚 Estoque</label>
+      <label><input type="checkbox" value="orcamentos"> 📝 Orçamentos</label>
+      <label><input type="checkbox" value="produtos"> 📦 Produtos</label>
+      <label><input type="checkbox" value="fornecedores"> 🏭 Fornecedores</label>
+      <label><input type="checkbox" value="receber"> 📥 Contas a Receber</label>
+      <label><input type="checkbox" value="pagar"> 📤 Contas a Pagar</label>
+      <label><input type="checkbox" value="fluxo"> 📈 Fluxo de Caixa</label>
+      <label><input type="checkbox" value="dre"> 📊 DRE</label>
+      <label><input type="checkbox" value="site"> 🌐 Site</label>
+      <label><input type="checkbox" value="produtos-site"> 🛍️ Produtos do site</label>
+      <label><input type="checkbox" value="analytics"> 📊 Analytics</label>
+      <label><input type="checkbox" value="marketing"> ✨ Marketing</label>
+      <label><input type="checkbox" value="configuracoes"> ⚙️ Configurações</label>
+    </div>
+    <div class="quality-shortcuts-config__actions"><button class="btn secondary" type="button" data-global-shortcuts-reset>Restaurar padrão</button><button class="btn primary" type="button" data-global-shortcuts-save>Salvar</button></div>
   </div>
 </div>
-<div class='container'>
-  <% if (typeof flash !== 'undefined' && flash) { %><div class='notice'><%= flash %></div><% } %>
+
+<div class="container">
+  <% if (typeof flash !== 'undefined' && flash) { %><div class="notice"><%= flash %></div><% } %>
   <%- body %>
 </div>
 <script>
 (function(){
   var select=document.getElementById('panelThemeSelect');
-  if(!select)return;
   var root=document.documentElement;
-  var current=root.getAttribute('data-panel-theme')||'light';
-  select.value=current;
-  select.addEventListener('change',function(){
-    root.setAttribute('data-panel-theme',this.value);
-    try{localStorage.setItem('quality_panel_theme',this.value);}catch(e){}
+  if(select){
+    var current=root.getAttribute('data-panel-theme')||'light';
+    select.value=current;
+    select.addEventListener('change',function(){
+      root.setAttribute('data-panel-theme',this.value);
+      try{localStorage.setItem('quality_panel_theme',this.value);}catch(e){}
+    });
+  }
+
+  var menus=Array.from(document.querySelectorAll('[data-shell-menu]'));
+  menus.forEach(function(menu){
+    menu.addEventListener('toggle',function(){
+      if(!menu.open)return;
+      menus.forEach(function(other){if(other!==menu)other.open=false;});
+    });
   });
+  document.addEventListener('click',function(event){
+    if(event.target.closest('[data-shell-menu]'))return;
+    menus.forEach(function(menu){menu.open=false;});
+  });
+  document.addEventListener('keydown',function(event){if(event.key==='Escape')menus.forEach(function(menu){menu.open=false;});});
+
+  var shortcutStorageKey='quality_global_menu_shortcuts';
+  var shortcutDefaults=['pdv','caixa','agenda','inbox','centro'];
+  var shortcutLinks=Array.from(document.querySelectorAll('[data-global-shortcut]'));
+  var shortcutModal=document.querySelector('[data-global-shortcuts-modal]');
+  var getShortcutIds=function(){try{var raw=JSON.parse(localStorage.getItem(shortcutStorageKey)||'null');return Array.isArray(raw)?raw:shortcutDefaults.slice();}catch(e){return shortcutDefaults.slice();}};
+  var applyShortcuts=function(){var ids=new Set(getShortcutIds());shortcutLinks.forEach(function(link){var visible=ids.has(link.dataset.globalShortcut);link.hidden=!visible;link.style.display=visible?'':'none';});};
+  var openShortcutConfig=function(){if(!shortcutModal)return;var ids=new Set(getShortcutIds());shortcutModal.querySelectorAll('input[type=checkbox]').forEach(function(box){box.checked=ids.has(box.value);});shortcutModal.hidden=false;menus.forEach(function(menu){menu.open=false;});};
+  applyShortcuts();
+  document.querySelector('[data-global-shortcuts-config]')?.addEventListener('click',function(event){event.preventDefault();openShortcutConfig();});
+  shortcutModal?.querySelector('[data-global-shortcuts-close]')?.addEventListener('click',function(){shortcutModal.hidden=true;});
+  shortcutModal?.addEventListener('click',function(event){if(event.target===shortcutModal)shortcutModal.hidden=true;});
+  shortcutModal?.querySelector('[data-global-shortcuts-reset]')?.addEventListener('click',function(){localStorage.removeItem(shortcutStorageKey);applyShortcuts();openShortcutConfig();});
+  shortcutModal?.querySelector('[data-global-shortcuts-save]')?.addEventListener('click',function(){var ids=Array.from(shortcutModal.querySelectorAll('input[type=checkbox]:checked')).map(function(box){return box.value;});if(!ids.length)ids=['pdv'];try{localStorage.setItem(shortcutStorageKey,JSON.stringify(ids));}catch(e){}applyShortcuts();shortcutModal.hidden=true;});
+
+  var path=location.pathname.replace(/\/$/,'')||'/';
+  var links=Array.from(document.querySelectorAll('[data-shell-link]'));
+  var candidates=links.filter(function(link){
+    var href=(new URL(link.href,location.origin)).pathname.replace(/\/$/,'')||'/';
+    return href==='/' ? path==='/' : (path===href || path.indexOf(href+'/')===0);
+  }).sort(function(a,b){return b.pathname.length-a.pathname.length;});
+  if(candidates[0]){
+    candidates[0].classList.add('is-active');
+    var parent=candidates[0].closest('[data-shell-menu]');
+    if(parent)parent.classList.add('has-active');
+  }
+
+  var searchInput=document.getElementById('qualityGlobalSearch');
+  var searchResults=document.querySelector('[data-global-search-results]');
+  if(searchInput&&searchResults){
+    var extraSearchItems=[
+      ['Caixa Operacional','/erp/pdv/caixa','Financeiro'],['Orçamentos','/orcamentos','Operação'],['Categorias ERP','/erp/categorias','ERP'],
+      ['Produtos do site','/produtos?lvStatus=true','Negócio'],['Banners','/banners','Negócio'],['SEO','/seo','Negócio'],['Configurações','/configuracoes','Sistema']
+    ];
+    var navItems=Array.from(document.querySelectorAll('.quality-main-nav a[href],.quality-nav-dropdown a[href]')).map(function(a){
+      return {label:(a.querySelector('b')?.textContent||a.textContent||'').replace(/[🏠⭐⚡💼💰💬🌐🛒💵✅🧭⚙📦]/g,'').trim(),href:a.getAttribute('href'),group:a.closest('.quality-nav-menu')?.querySelector('summary')?.textContent.replace('▾','').trim()||'Menu'};
+    });
+    extraSearchItems.forEach(function(item){navItems.push({label:item[0],href:item[1],group:item[2]});});
+    var seen=new Set();navItems=navItems.filter(function(item){var key=(item.label+'|'+item.href).toLowerCase();if(!item.label||!item.href||seen.has(key))return false;seen.add(key);return true;});
+    var normalize=function(v){return String(v||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase();};
+    var renderSearch=function(){
+      var q=normalize(searchInput.value).trim();
+      if(!q){searchResults.hidden=true;searchResults.innerHTML='';return;}
+      var terms=q.split(/\s+/).filter(Boolean);
+      var matches=navItems.filter(function(item){var hay=normalize(item.label+' '+item.group);return terms.every(function(term){return hay.includes(term);});}).slice(0,9);
+      searchResults.innerHTML=matches.length?matches.map(function(item,index){return '<a href="'+item.href+'" data-global-result="'+index+'"><b>'+item.label+'</b><small>'+item.group+'</small></a>';}).join(''):'<div class="quality-search-empty">Nenhuma opção encontrada.</div>';
+      searchResults.hidden=false;
+    };
+    searchInput.addEventListener('input',renderSearch);
+    searchInput.addEventListener('keydown',function(event){
+      if(event.key==='Enter'){var first=searchResults.querySelector('a');if(first){event.preventDefault();location.href=first.href;}}
+      if(event.key==='Escape'){searchInput.value='';searchResults.hidden=true;searchInput.blur();}
+    });
+    document.addEventListener('keydown',function(event){if(event.key==='F1'){event.preventDefault();searchInput.focus();searchInput.select();}});
+    document.addEventListener('click',function(event){if(!event.target.closest('[data-global-search]'))searchResults.hidden=true;});
+  }
 })();
 </script>
-<script src='/public/js/painel.js'></script>
-<script src='/public/js/help-tips.js'></script>
-<script src='/public/js/analytics-live-card.js'></script>
-<script src='/public/js/kernel-tracker.js'></script>
+<script src="/public/js/painel.js" defer></script>
+<script src="/public/js/help-tips.js" defer></script>
+<script src="/public/js/address-autocomplete.js" defer></script>
+<script src="/public/js/analytics-live-card.js" defer></script>
+<script src="/public/js/kernel-tracker.js" defer></script>
 </body></html>

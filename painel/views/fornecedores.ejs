@@ -59,10 +59,10 @@
 </header>
 
 <section class="suppliers-kpis">
-  <article class="suppliers-kpi"><span>Total</span><strong><%= summary.total %></strong></article>
-  <article class="suppliers-kpi"><span>Ativos</span><strong><%= summary.active %></strong></article>
-  <article class="suppliers-kpi"><span>Inativos</span><strong><%= summary.inactive %></strong></article>
-  <article class="suppliers-kpi"><span>Novos neste mês</span><strong><%= summary.newThisMonth %></strong></article>
+  <article class="suppliers-kpi erp-tone-info"><span>Total</span><strong><%= summary.total %></strong></article>
+  <article class="suppliers-kpi erp-tone-success"><span>Ativos</span><strong><%= summary.active %></strong></article>
+  <article class="suppliers-kpi erp-tone-expense"><span>Inativos</span><strong><%= summary.inactive %></strong></article>
+  <article class="suppliers-kpi erp-tone-income"><span>Novos neste mês</span><strong><%= summary.newThisMonth %></strong></article>
 </section>
 
 <section class="suppliers-card">
@@ -142,15 +142,15 @@
           </div>
           <div class="supplier-field"><label id="supplierNameLabel">Razão social *</label><input name="name" id="supplierName" maxlength="160" required></div>
           <div class="supplier-field supplier-pj-only"><label>Nome fantasia</label><input name="tradeName" id="supplierTradeName" maxlength="160"></div>
-          <div class="supplier-field"><label id="supplierRegistrationLabel">Inscrição estadual</label><input name="stateRegistration" id="supplierStateRegistration"></div>
+          <div class="supplier-field supplier-pj-only"><label id="supplierRegistrationLabel">Inscrição estadual</label><input name="stateRegistration" id="supplierStateRegistration"></div>
           <div class="supplier-field supplier-pj-only"><label>Inscrição municipal</label><input name="municipalRegistration" id="supplierMunicipalRegistration"></div>
           <div class="supplier-field supplier-pf-only" hidden><label>Data de nascimento</label><input name="birthDate" id="supplierBirthDate" type="date"></div>
-          <div class="supplier-field"><label>Pessoa de contato</label><input name="contactName" id="supplierContactName"></div>
+          <div class="supplier-field supplier-pj-only"><label>Pessoa de contato</label><input name="contactName" id="supplierContactName"></div>
           <div class="supplier-field"><label>Celular / WhatsApp</label><input name="mobile" id="supplierMobile" inputmode="tel"></div>
           <div class="supplier-field"><label>Telefone</label><input name="phone" id="supplierPhone" inputmode="tel"></div>
           <div class="supplier-field"><label>E-mail</label><input name="email" id="supplierEmail" type="email"></div>
-          <div class="supplier-field"><label>Website</label><input name="website" id="supplierWebsite" type="url"></div>
-          <div class="supplier-field full"><div class="supplier-consult-box" id="supplierLookupInfo">A consulta de CNPJ é auxiliar. Os dados continuam editáveis e o cadastro manual permanece disponível caso o serviço externo esteja indisponível.</div></div>
+          <div class="supplier-field supplier-pj-only"><label>Website</label><input name="website" id="supplierWebsite" type="url"></div>
+          <div class="supplier-field full supplier-pj-only"><div class="supplier-consult-box" id="supplierLookupInfo">A consulta de CNPJ é auxiliar. Os dados continuam editáveis e o cadastro manual permanece disponível caso o serviço externo esteja indisponível.</div></div>
         </div>
       </section>
 
@@ -158,7 +158,7 @@
         <div class="supplier-grid">
           <div class="supplier-field"><label>CEP</label><div class="supplier-inline"><input name="zipCode" id="supplierZipCode" inputmode="numeric" maxlength="9"><button class="btn" id="supplierCepLookup" type="button">Consultar CEP</button></div></div>
           <div class="supplier-field"><label>Estado</label><input name="state" id="supplierState" maxlength="2"></div>
-          <div class="supplier-field full"><label>Rua</label><input name="street" id="supplierStreet"></div>
+          <div class="supplier-field full"><label>Endereço</label><input name="street" id="supplierStreet"></div>
           <div class="supplier-field"><label>Número</label><input name="number" id="supplierNumber"></div>
           <div class="supplier-field"><label>Complemento</label><input name="complement" id="supplierComplement"></div>
           <div class="supplier-field"><label>Bairro</label><input name="district" id="supplierDistrict"></div>
@@ -227,4 +227,5 @@
     </form>
   </div>
 </aside>
+<script id="supplierFieldSettingsData" type="application/json"><%- JSON.stringify(supplierFieldSettings || {}) %></script>
 <script src="/public/js/fornecedores.js"></script>

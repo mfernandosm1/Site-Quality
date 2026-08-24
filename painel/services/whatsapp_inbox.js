@@ -4,6 +4,8 @@ import path from 'path';
 // Mantém o Inbox isolado por conta conectada. O WeakMap evita estado global
 // compartilhado entre instâncias do app e não persiste dados sensíveis em memória.
 const activeInboxAccounts = new WeakMap();
+const inboundMetricsCache = new WeakMap();
+const commercialDashboardCache = new WeakMap();
 
 function normalizeAccountKey(value=''){
   const key = digits(value);
@@ -143,7 +145,14 @@ export function extractInterestProduct(text=''){
     /produto\s*:\s*(.+?)(?:\n|$)/i,
     /interesse\s*:\s*(.+?)(?:\n|$)/i
   ];
-  for(const pattern of patterns){ const match = raw.match(pattern); if(match?.[1]) return safeText(match[1],220); }
+  for(const pattern of patterns){
+    const match = raw.match(pattern);
+    if(match?.[1]){
+      const value=safeText(match[1],220).replace(/\s+/g,' ').trim();
+      const markers=(value.match(/(?:^|\s)\d{1,2}\s*[-–—.)]/g)||[]).length;
+      if(value.length<=100 && value.split(/\s+/).filter(Boolean).length<=14 && markers<2) return value;
+    }
+  }
   return '';
 }
 
@@ -186,6 +195,39 @@ function persistConversationMutation(app, conversationId, mutate){
   mutate(conversation);
   conversation.updatedAt=now();
   atomicWriteJson(p.conversationsFile,{version:5,conversations});
+  return conversation;
+}
+
+
+export function ensureInboxConversationForContact(app,{phone='',whatsappId='',name=''}={}){
+  const p=ensureInboxStorage(app);
+  const cleanPhone=normalizePhone(phone);
+  if(!cleanPhone) throw new Error('Informe um número válido para iniciar a conversa.');
+  const cleanWhatsappId=safeText(whatsappId,160) || `${cleanPhone}@c.us`;
+  const data=readJson(p.conversationsFile,{version:5,conversations:[]});
+  const conversations=listFrom(data,'conversations');
+  let conversation=conversations.find(c=>c.conversationType!=='group' && (normalizePhone(c.phone)===cleanPhone || c.whatsappId===cleanWhatsappId));
+  if(conversation){
+    if(name && !conversation.nameEdited && (!conversation.name || conversation.name===conversation.phone)) conversation.name=safeText(name,160);
+    conversation.phone=cleanPhone; conversation.phoneResolved=true; conversation.whatsappId=cleanWhatsappId; conversation.updatedAt=now();
+    atomicWriteJson(p.conversationsFile,{version:5,conversations});
+    return withCommercialLifecycle(conversation);
+  }
+  const timestamp=now();
+  conversation={
+    id:cleanPhone,conversationType:'contact',phone:cleanPhone,phoneResolved:true,whatsappId:cleanWhatsappId,
+    name:safeText(name,160)||cleanPhone,nameEdited:false,groupParticipantCount:null,
+    createdAt:timestamp,updatedAt:timestamp,firstContactAt:timestamp,lastMessageAt:timestamp,
+    lastIncomingAt:null,lastOutgoingAt:null,awaitingResponse:false,waitingSince:null,unreadCount:0,
+    commercialStatus:'new',commercialStatusUpdatedAt:timestamp,origin:'whatsapp_direct',originMode:'automatic',
+    interestProduct:'',originPage:null,firstResponseAt:null,firstResponseTimeSeconds:null,archived:false,
+    attendanceState:'open',attendanceOpenedAt:timestamp,attendanceClosedAt:null,attendanceClosedReason:null,attendanceClosedBy:null,attendanceReopenedAt:null,
+    attendanceCloseCount:0,attendanceReopenCount:0,attendanceHistory:[]
+  };
+  conversations.push(conversation);
+  atomicWriteJson(p.conversationsFile,{version:5,conversations});
+  const messagesPath=messageFile(p,conversation.id);
+  if(!fs.existsSync(messagesPath)) atomicWriteJson(messagesPath,{version:4,conversationId:conversation.id,messages:[]});
   return conversation;
 }
 
@@ -254,11 +296,23 @@ export function getInboxData(app){
 export function getConversationMessages(app, conversationId){
   const p = ensureInboxStorage(app);
   const data = readJson(messageFile(p, conversationId), { version:3, conversationId, messages:[] });
-  return listFrom(data,'messages').slice().sort((a,b)=>String(a.timestamp||'').localeCompare(String(b.timestamp||'')));
+  const hiddenTechnicalTypes=new Set(['ciphertext','protocol','notification_template','gp2','e2e_notification','debug']);
+  const userTextTypes=new Set(['chat','buttons_response','list_response','reaction','poll_creation','poll_update']);
+  return listFrom(data,'messages').filter(item=>!hiddenTechnicalTypes.has(String(item?.type||''))).map(item=>{
+    const type=String(item?.type||'');
+    if(['call_notification','call_log','call','missed_call'].includes(type)) return {...item,type:'call_notification',text:'📞 Chamada pelo WhatsApp'};
+    if(type==='revoked') return {...item,text:'🚫 Mensagem apagada'};
+    const text=String(item?.text||'');
+    if(!userTextTypes.has(type) && text.length>1000){
+      const compact=text.replace(/\s+/g,'');
+      if(compact.length>900 && compact.length/Math.max(1,text.length)>.82) return {...item,text:'⚙️ Evento técnico do WhatsApp'};
+    }
+    return item;
+  }).sort((a,b)=>String(a.timestamp||'').localeCompare(String(b.timestamp||'')));
 }
 
-export function getInboxSummary(app){
-  const data = getInboxData(app);
+export function getInboxSummary(app, prefetchedData=null){
+  const data = prefetchedData || getInboxData(app);
   const conversations = data.conversations.filter(c => c.conversationType !== 'group');
   const groups = data.conversations.filter(c => c.conversationType === 'group');
   return {
@@ -276,51 +330,162 @@ export function getInboxSummary(app){
 }
 
 
-export function getCommercialDashboard(app){
-  const conversations = getInboxData(app).conversations.filter(c => c.conversationType !== 'group');
+export function getInboundContactMetrics(app, prefetchedData=null){
+  const p=ensureInboxStorage(app);
+  const conversations=(prefetchedData || getInboxData(app)).conversations.filter(c=>c.conversationType!=='group');
+  const signature=[conversations.length,conversations[0]?.lastMessageAt||'',conversations.reduce((sum,c)=>sum+Number(c.unreadCount||0),0)].join('|');
+  const cached=inboundMetricsCache.get(app);
+  if(cached && cached.signature===signature && Date.now()-cached.at<15000) return cached.value;
+  const nowDate=new Date();
+  const dayStart=new Date(nowDate); dayStart.setHours(0,0,0,0);
+  const weekStart=new Date(dayStart); weekStart.setDate(weekStart.getDate()-((weekStart.getDay()+6)%7));
+  const monthStart=new Date(nowDate.getFullYear(),nowDate.getMonth(),1);
+  const endMs=Date.now()+1000;
+  const ranges={today:dayStart.getTime(),week:weekStart.getTime(),month:monthStart.getTime()};
+  const counts={today:0,week:0,month:0};
+  const daily=new Map();
+  for(let cursor=new Date(monthStart);cursor.getTime()<=dayStart.getTime();cursor.setDate(cursor.getDate()+1)){
+    daily.set(cursor.toISOString().slice(0,10),0);
+  }
+  for(const conversation of conversations){
+    const lastMs=Date.parse(conversation.lastMessageAt||'');
+    if(!Number.isFinite(lastMs) || lastMs<ranges.month) continue;
+    const data=readJson(messageFile(p,conversation.id),{messages:[]});
+    const messages=listFrom(data,'messages').filter(m=>['incoming','outgoing'].includes(m.direction)).map(m=>({...m,_ms:Date.parse(m.timestamp||'')})).filter(m=>Number.isFinite(m._ms)&&m._ms<=endMs).sort((a,b)=>a._ms-b._ms);
+    if(!messages.length) continue;
+    for(const [key,startMs] of Object.entries(ranges)){
+      const first=messages.find(m=>m._ms>=startMs);
+      if(first?.direction==='incoming') counts[key]+=1;
+    }
+    for(const [dateKey] of daily){
+      const start=new Date(dateKey+'T00:00:00');
+      const finish=new Date(start); finish.setDate(finish.getDate()+1);
+      const first=messages.find(m=>m._ms>=start.getTime()&&m._ms<finish.getTime());
+      if(first?.direction==='incoming') daily.set(dateKey,(daily.get(dateKey)||0)+1);
+    }
+  }
+  const value={today:counts.today,week:counts.week,month:counts.month,daily:[...daily.entries()].map(([date,total])=>({date,total}))};
+  inboundMetricsCache.set(app,{signature,at:Date.now(),value});
+  return value;
+}
+
+function cleanCommercialInterest(value=''){
+  let text=safeText(value,220).replace(/\s+/g,' ').trim();
+  if(!text) return '';
+  text=text.replace(/^(?:produto|interesse)\s*:\s*/i,'').trim();
+  const menuMarkers=(text.match(/(?:^|\s)\d{1,2}\s*[-–—.)]/g)||[]).length;
+  const menuWords=(text.match(/\b(?:consultar|cancelar|lojas? parceiras?|reclama[cç][aã]o|acompanhe|deseja)\b/gi)||[]).length;
+  const words=text.split(/\s+/).filter(Boolean);
+  // Evita transformar textos inteiros de menus/fluxos em "interesse" comercial.
+  if(menuMarkers>=2 || (menuMarkers>=1 && menuWords>=2) || words.length>14 || text.length>100) return '';
+  return text;
+}
+
+function recentConversationSignals(app, conversations, nowMs){
+  const p=ensureInboxStorage(app);
+  const recent30=nowMs-(30*86400000);
+  const freshWindow=nowMs-(7*86400000);
+  const map=new Map();
+  const responseSamples=[];
+  for(const conversation of conversations){
+    const lastKnown=Date.parse(conversation.lastMessageAt||'');
+    if(!Number.isFinite(lastKnown) || lastKnown<recent30) continue;
+    const data=readJson(messageFile(p,conversation.id),{messages:[]});
+    const messages=listFrom(data,'messages')
+      .filter(m=>m && (m.direction==='incoming'||m.direction==='outgoing'))
+      .map(m=>({...m,_ms:Date.parse(m.timestamp||'')}))
+      .filter(m=>Number.isFinite(m._ms))
+      .sort((a,b)=>a._ms-b._ms);
+    if(!messages.length) continue;
+    const last=messages[messages.length-1];
+    const lastIncoming=[...messages].reverse().find(m=>m.direction==='incoming');
+    const isOpen=conversation.attendanceState!=='closed' && !['completed_sale','lost','no_potential'].includes(conversation.commercialStatus||'new');
+    const awaiting=isOpen && last.direction==='incoming' && last._ms>=freshWindow;
+    const waitingSeconds=awaiting?Math.max(0,Math.round((nowMs-last._ms)/1000)):0;
+    map.set(conversation.id,{awaitingResponse:awaiting,waitingSeconds,waitingSince:awaiting?last.timestamp:null,lastIncomingAt:lastIncoming?.timestamp||conversation.lastIncomingAt||null,lastDirection:last.direction});
+
+    // Mede a primeira resposta somente quando o cliente iniciou o contato daquele dia.
+    // Limita a 12 h para um atendimento deixado de um dia para o outro não distorcer todo o indicador.
+    const recent=messages.filter(m=>m._ms>=recent30);
+    const byDay=new Map();
+    for(const msg of recent){
+      const d=new Date(msg._ms); const key=`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+      if(!byDay.has(key)) byDay.set(key,[]);
+      byDay.get(key).push(msg);
+    }
+    for(const dayMessages of byDay.values()){
+      const first=dayMessages[0];
+      if(!first || first.direction!=='incoming') continue;
+      const reply=messages.find(m=>m.direction==='outgoing' && m._ms>first._ms && m._ms-first._ms<=12*60*60*1000);
+      if(reply) responseSamples.push(Math.round((reply._ms-first._ms)/1000));
+    }
+  }
+  return {map,responseSamples};
+}
+
+export function getCommercialDashboard(app, prefetchedData=null){
+  const conversations = (prefetchedData || getInboxData(app)).conversations.filter(c => c.conversationType !== 'group');
+  const signature=[conversations.length,conversations[0]?.lastMessageAt||'',conversations.reduce((sum,c)=>sum+Number(c.unreadCount||0),0)].join('|');
+  const cached=commercialDashboardCache.get(app);
+  if(cached && cached.signature===signature && Date.now()-cached.at<10000) return cached.value;
+
   const statusOrder = ['new','in_progress','pending','completed_sale','lost','no_potential'];
   const originOrder = ['site_quality','instagram','whatsapp_direct','campaign','referral','unknown'];
   const byStatus = Object.fromEntries(statusOrder.map(key => [key, conversations.filter(c => c.commercialStatus === key).length]));
   const byOrigin = Object.fromEntries(originOrder.map(key => [key, conversations.filter(c => (c.origin || 'unknown') === key).length]));
-  const responseTimes = conversations.map(c => Number(c.firstResponseTimeSeconds)).filter(Number.isFinite).filter(v => v >= 0);
-  const averageFirstResponseSeconds = responseTimes.length ? Math.round(responseTimes.reduce((sum,value)=>sum+value,0)/responseTimes.length) : null;
   const completed = byStatus.completed_sale || 0;
   const lost = byStatus.lost || 0;
   const qualifiedBase = completed + lost;
   const conversionRate = qualifiedBase ? Math.round((completed / qualifiedBase) * 100) : 0;
   const nowMs=Date.now();
-  const waitSeconds=c=>c.awaitingResponse && c.waitingSince ? Math.max(0,Math.round((nowMs-new Date(c.waitingSince).getTime())/1000)) : 0;
-  const open=c=>c.attendanceState !== 'closed' && !['completed_sale','lost','no_potential'].includes(c.commercialStatus || 'new');
+  const signals=recentConversationSignals(app,conversations,nowMs);
+  const usefulResponseTimes=signals.responseSamples.filter(v=>Number.isFinite(v)&&v>=0);
+  const averageFirstResponseSeconds=usefulResponseTimes.length?Math.round(usefulResponseTimes.reduce((sum,value)=>sum+value,0)/usefulResponseTimes.length):null;
+
   const interests = new Map();
   for(const conversation of conversations){
-    const interest = safeText(conversation.interestProduct,220);
+    const interest = cleanCommercialInterest(conversation.interestProduct);
     if(!interest) continue;
-    const key = interest.toLocaleLowerCase('pt-BR');
+    const key = interest.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLocaleLowerCase('pt-BR');
     const current = interests.get(key) || { name:interest, total:0 };
     current.total += 1;
     interests.set(key,current);
   }
   const topInterests = [...interests.values()].sort((a,b)=>b.total-a.total || a.name.localeCompare(b.name,'pt-BR')).slice(0,8);
+
+  const open=c=>c.attendanceState !== 'closed' && !['completed_sale','lost','no_potential'].includes(c.commercialStatus || 'new');
   const allOpportunities = conversations.filter(open).map(c=>{
-    const waitingSeconds=waitSeconds(c);
+    const signal=signals.map.get(c.id);
+    const awaitingResponse=Boolean(signal?.awaitingResponse);
+    const waitingSeconds=Number(signal?.waitingSeconds||0);
+    const waitingSince=signal?.waitingSince||null;
+    const cleanInterest=cleanCommercialInterest(c.interestProduct);
     const dueMs=c.nextActionDueAt ? new Date(c.nextActionDueAt).getTime() : null;
     const nextActionOverdue=Number.isFinite(dueMs) && dueMs < nowMs;
+    const lastIncomingMs=Date.parse(signal?.lastIncomingAt||c.lastIncomingAt||'');
+    const daysSinceIncoming=Number.isFinite(lastIncomingMs)?Math.max(0,Math.floor((nowMs-lastIncomingMs)/86400000)):9999;
+    let score=0, opportunityReason='', suggestedAction='';
+    if(awaitingResponse){ score+=100+Math.min(60,Math.floor(waitingSeconds/1800)*4); opportunityReason='Cliente está aguardando resposta'; suggestedAction='Responder agora'; }
+    if(nextActionOverdue){ score+=85; opportunityReason=opportunityReason||'Próxima ação está vencida'; suggestedAction=suggestedAction||safeText(c.nextAction,180)||'Executar próxima ação'; }
+    if((c.pendingType&&c.pendingType!=='none') || c.pendingNote){ score+=55; opportunityReason=opportunityReason||'Existe uma pendência registrada'; suggestedAction=suggestedAction||safeText(c.pendingNote,180)||'Resolver pendência'; }
+    if(safeText(c.nextAction,300) && !nextActionOverdue){ score+=35; opportunityReason=opportunityReason||'Há uma próxima ação definida'; suggestedAction=suggestedAction||safeText(c.nextAction,180); }
+    if(cleanInterest){ score+=30; opportunityReason=opportunityReason||`Interesse em ${cleanInterest}`; suggestedAction=suggestedAction||'Dar continuidade à negociação'; }
+    if(c.commercialStatus==='pending') score+=25;
+    else if(c.commercialStatus==='in_progress') score+=18;
+    if(daysSinceIncoming<=2) score+=18; else if(daysSinceIncoming<=7) score+=10; else if(daysSinceIncoming>14) score-=45;
     let attentionLevel='normal';
-    if(c.awaitingResponse && waitingSeconds>=7200) attentionLevel='critical';
-    else if(c.awaitingResponse && waitingSeconds>=1800) attentionLevel='warning';
-    else if(nextActionOverdue) attentionLevel='warning';
-    return {...c,waitingSeconds,nextActionOverdue,attentionLevel};
-  }).sort((a,b)=>{
-    const score={critical:3,warning:2,normal:1};
-    return (score[b.attentionLevel]-score[a.attentionLevel]) || Number(Boolean(b.awaitingResponse))-Number(Boolean(a.awaitingResponse)) || String(b.lastMessageAt||'').localeCompare(String(a.lastMessageAt||''));
-  });
-  const opportunities=allOpportunities.slice(0,50);
+    if((awaitingResponse && waitingSeconds>=7200) || nextActionOverdue) attentionLevel='critical';
+    else if((awaitingResponse && waitingSeconds>=1800) || (c.pendingType&&c.pendingType!=='none')) attentionLevel='warning';
+    return {...c,interestProduct:cleanInterest,awaitingResponse,waitingSeconds,waitingSince,nextActionOverdue,daysSinceIncoming,attentionLevel,opportunityScore:score,opportunityReason,suggestedAction};
+  }).filter(c=>Number.isFinite(Date.parse(c.lastIncomingAt||'')) && c.daysSinceIncoming<=30 && c.opportunityScore>=30)
+    .sort((a,b)=>b.opportunityScore-a.opportunityScore || String(b.lastIncomingAt||'').localeCompare(String(a.lastIncomingAt||'')));
+  const opportunities=allOpportunities.slice(0,40);
   const awaiting=allOpportunities.filter(c=>c.awaitingResponse);
-  return {
+  const value={
     total:conversations.length,
     closedAttendances:conversations.filter(c=>c.attendanceState==='closed').length,
-    activePipeline:(byStatus.new||0)+(byStatus.in_progress||0)+(byStatus.pending||0),
-    awaitingResponse:conversations.filter(c=>c.awaitingResponse).length,
+    activePipeline:allOpportunities.length,
+    awaitingResponse:awaiting.length,
     waitingOver30m:awaiting.filter(c=>c.waitingSeconds>=1800).length,
     waitingOver2h:awaiting.filter(c=>c.waitingSeconds>=7200).length,
     structuredPending:allOpportunities.filter(c=>(c.pendingType&&c.pendingType!=='none') || c.pendingNote).length,
@@ -329,11 +494,14 @@ export function getCommercialDashboard(app){
     completedSales:completed,
     conversionRate,
     averageFirstResponseSeconds,
+    responseSampleSize:usefulResponseTimes.length,
     byStatus,
     byOrigin,
     topInterests,
     opportunities
   };
+  commercialDashboardCache.set(app,{signature,at:Date.now(),value});
+  return value;
 }
 
 export function getInboxRevision(app, conversationId=''){
@@ -654,12 +822,23 @@ export async function registerWhatsAppMessage(app, msg, client=null, options={})
 
   const timestamp = msg.timestamp ? new Date(Number(msg.timestamp)*1000).toISOString() : now();
   const rawType = safeText(msg.type || 'chat',40);
-  if(['notification_template','gp2','protocol'].includes(rawType)){
+  // Eventos internos podem aparecer por alguns instantes após reiniciar o processo
+  // (Ctrl+C / npm start). Eles não são mensagens do usuário e, quando salvos,
+  // acabam aparecendo como códigos extensos no Inbox.
+  if(['notification_template','gp2','protocol','ciphertext','e2e_notification','debug'].includes(rawType)){
     return { ignored:true, reason:'mensagem_de_sistema', type:rawType };
   }
-  const isCallNotice = rawType === 'e2e_notification' || rawType === 'call_log';
-  const type = isCallNotice ? 'call_notification' : rawType;
-  const text = isCallNotice ? '📞 Chamada pelo WhatsApp' : safeText(msg.body || '',6000);
+  const isCallNotice = ['call_log','call','missed_call'].includes(rawType);
+  const isRevoked = rawType === 'revoked';
+  const type = isCallNotice ? 'call_notification' : (isRevoked ? 'revoked' : rawType);
+  let text = isCallNotice ? '📞 Chamada pelo WhatsApp' : (isRevoked ? '🚫 Mensagem apagada' : safeText(msg.body || '',6000));
+  // Proteção adicional contra payloads técnicos/serializados de tipos não textuais.
+  // Não interfere em chat, respostas, legendas ou mensagens normais do cliente.
+  const userTextTypes = new Set(['chat','buttons_response','list_response','reaction','poll_creation','poll_update']);
+  if(!userTextTypes.has(rawType) && text.length > 1000){
+    const compact=text.replace(/\s+/g,'');
+    if(compact.length > 900 && compact.length / Math.max(1,text.length) > .82) text='⚙️ Evento técnico do WhatsApp';
+  }
   const conversationsData = readJson(p.conversationsFile,{version:4,conversations:[]});
   const conversations = listFrom(conversationsData,'conversations');
   let conversation = conversations.find(c => c.id === conversationId || (group && c.whatsappId === rawChatId));
@@ -667,7 +846,7 @@ export async function registerWhatsAppMessage(app, msg, client=null, options={})
   if(!conversation){
     conversation = {
       id:conversationId, conversationType:group?'group':'contact', phone:group?'':phone,
-      phoneResolved:group?false:Boolean(resolved?.resolved), whatsappId:chatId,
+      phoneResolved:group?false:Boolean(resolved?.resolved), whatsappId:chatId, firstMessageDirection:fromMe?'outgoing':'incoming',
       name:whatsappName || (group?'Grupo do WhatsApp':phone), nameEdited:false,
       groupParticipantCount:group?participantCount:null,
       createdAt:timestamp, updatedAt:timestamp, firstContactAt:timestamp, lastMessageAt:timestamp,
@@ -686,6 +865,7 @@ export async function registerWhatsAppMessage(app, msg, client=null, options={})
   const messageData = readJson(messagesPath,{version:4,conversationId:conversation.id,messages:[]});
   const messages = listFrom(messageData,'messages');
   if(messages.some(item=>item.id===id)) return { ignored:true, reason:'duplicada' };
+  if(!conversation.firstMessageDirection && !messages.length) conversation.firstMessageDirection=fromMe?'outgoing':'incoming';
 
   if(!group){
     const contacts = listFrom(readJson(p.contactsFile,{version:3,contacts:[]}), 'contacts');
@@ -815,9 +995,22 @@ export async function syncInboxFromWhatsApp(app,client,options={}){
     entries=(catalog.snapshots||[]).map(snapshot=>({id:snapshot.id,chat:null,snapshot,timestamp:Number(snapshot.timestamp||0)}));
   }
   entries=entries.filter(item=>item.id&&item.id!=='status@broadcast').sort((a,b)=>b.timestamp-a.timestamp).slice(0,chatLimit);
-  let totalMessages=0,saved=0,errors=0,resolvedChats=0;
+  const initialData=getInboxData(app);
+  const initialConversations=initialData.conversations;
+  const incremental=options.incremental !== false;
+  let totalMessages=0,saved=0,errors=0,resolvedChats=0,skippedUpToDate=0;
   for(const entry of entries){
     try{
+      const existing=initialConversations.find(c=>c.whatsappId===entry.id || (isGroup(entry.id) && (c.id===groupConversationId(entry.id) || idDigits(c.whatsappId)===idDigits(entry.id))) || (!isGroup(entry.id) && normalizePhone(c.phone)===normalizePhone(entry.snapshot?.contactNumber||entry.snapshot?.contactId||entry.id)));
+      const rawRemoteTs=Number(entry.timestamp||0);
+      const remoteMs=rawRemoteTs > 1e12 ? rawRemoteTs : rawRemoteTs*1000;
+      const localMs=existing?.lastMessageAt ? new Date(existing.lastMessageAt).getTime() : 0;
+      // Na abertura/reconexão, chats já atualizados não precisam buscar novamente
+      // as últimas dezenas de mensagens. Isso evita milhares de leituras/escritas.
+      if(incremental && existing && remoteMs > 0 && Number.isFinite(localMs) && localMs >= remoteMs-1000){
+        skippedUpToDate+=1;
+        continue;
+      }
       let chat=entry.chat;
       if(!chat){ try{ chat=await client.getChatById(entry.id); }catch{} }
       if(!chat){ errors+=1; continue; }
@@ -859,7 +1052,7 @@ export async function syncInboxFromWhatsApp(app,client,options={}){
       }
     }catch{ errors+=1; }
   }
-  return {chats:entries.length,resolvedChats,messages:totalMessages,saved,errors,source:catalog.source || (catalog.chats.length?'public_api':'browser_store'),providerStats:catalog.providerStats || null};
+  return {chats:entries.length,resolvedChats,messages:totalMessages,saved,errors,skippedUpToDate,source:catalog.source || (catalog.chats.length?'public_api':'browser_store'),providerStats:catalog.providerStats || null};
 }
 
 export async function repairInboxGroupNames(app, client, options={}){
@@ -1090,6 +1283,7 @@ export function markConversationRead(app, conversationId){
   const conversations = listFrom(data,'conversations');
   const conversation = conversations.find(c => c.id === String(conversationId || ''));
   if(!conversation) throw new Error('Conversa não encontrada.');
+  if(Number(conversation.unreadCount||0)===0 && !conversation.manuallyUnread) return conversation;
   conversation.unreadCount = 0;
   conversation.manuallyUnread = false;
   conversation.readAt = now();

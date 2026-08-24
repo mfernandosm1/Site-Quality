@@ -2177,7 +2177,7 @@ html[data-panel-theme]:not([data-panel-theme="light"]) .kernel-filters,html[data
 @media(max-width:1100px){.kernel-filters{grid-template-columns:repeat(3,1fr)}.kernel-search{grid-column:span 2}}@media(max-width:700px){.kernel-filters{grid-template-columns:1fr}.kernel-search{grid-column:auto}.kernel-detail-grid{grid-template-columns:1fr}.kernel-filter-actions{width:100%}.kernel-filter-actions>*{flex:1}}
 
 /* ERP v0.15.2 — Centro de Operações */
-.operations-hero{display:flex;justify-content:space-between;gap:24px;align-items:flex-end;margin-bottom:18px}.operations-hero h1{margin:4px 0 6px}.operations-hero p{margin:0;color:var(--muted,#8d98a7)}.operations-quick-actions{display:flex;gap:8px;flex-wrap:wrap}.operations-summary{display:grid;grid-template-columns:repeat(5,minmax(120px,1fr));gap:10px;margin-bottom:14px}.operations-summary>div,.operations-filters,.operations-table-card,.operation-detail-panel article{background:var(--card-bg,#15181d);border:1px solid var(--border-color,#2a3038);border-radius:12px}.operations-summary>div{padding:13px 15px}.operations-summary span{display:block;color:var(--muted,#8d98a7);font-size:12px}.operations-summary b{display:block;margin-top:4px;font-size:19px}.operations-filters{display:grid;grid-template-columns:2fr repeat(3,1fr);gap:12px;padding:14px;margin-bottom:14px}.operations-filters label{display:flex;flex-direction:column;gap:5px}.operations-filters label span{font-size:12px;font-weight:700;color:var(--muted,#8d98a7)}.operations-filters input,.operations-filters select{width:100%}.operations-filter-actions{display:flex;align-items:flex-end;justify-content:flex-end;gap:8px}.operations-table-card{overflow:hidden}.operations-table-head{display:flex;justify-content:space-between;align-items:center;padding:14px 16px;border-bottom:1px solid var(--border-color,#2a3038)}.operations-table-head h2{font-size:17px;margin:0}.operations-table-head span{color:var(--muted,#8d98a7);font-size:12px}.operations-table-wrap,.detail-table-wrap{overflow:auto}.operations-table{width:100%;border-collapse:collapse;min-width:1080px}.operations-table th,.operations-table td{padding:11px 12px;text-align:left;border-bottom:1px solid var(--border-color,#2a3038);vertical-align:middle}.operations-table th{font-size:11px;text-transform:uppercase;color:var(--muted,#8d98a7)}.operations-table td{font-size:13px}.operations-table td small{display:block;margin-top:3px;color:var(--muted,#8d98a7);font-size:10px}.operation-type,.operation-status{display:inline-flex;padding:4px 8px;border-radius:999px;font-size:11px;font-weight:700}.operation-type{background:rgba(72,132,255,.14)}.operation-status.is-open{background:rgba(245,166,35,.14);color:#f5b74f}.operation-status.is-finalized{background:rgba(39,174,96,.14);color:#54d98a}.operation-status.is-cancelled{background:rgba(220,53,69,.14);color:#ff7180}.operations-actions{white-space:nowrap}.operations-actions .btn{margin-left:5px}.operations-empty{text-align:center!important;padding:28px!important;color:var(--muted,#8d98a7)}.btn-small{padding:6px 9px;font-size:11px}.operation-detail-backdrop{position:fixed;inset:0;background:rgba(0,0,0,.68);z-index:1000;display:flex;justify-content:flex-end}.operation-detail-panel{width:min(820px,94vw);height:100%;overflow:auto;background:var(--page-bg,#0b0d10);border-left:1px solid var(--border-color,#2a3038);padding:18px}.operation-detail-panel>header{display:flex;justify-content:space-between;gap:16px;align-items:flex-start;padding-bottom:14px;border-bottom:1px solid var(--border-color,#2a3038)}.operation-detail-panel header span{font-size:12px;color:var(--muted,#8d98a7);font-weight:700}.operation-detail-panel h2{margin:3px 0}.operation-detail-panel header p{margin:0;color:var(--muted,#8d98a7)}.operation-detail-close{font-size:30px;line-height:1;text-decoration:none;color:inherit}.operation-detail-actions{display:flex;gap:8px;margin:14px 0}.operation-detail-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px}.operation-detail-panel article{padding:14px}.operation-detail-panel article h3{margin:0 0 12px;font-size:15px}.operation-detail-panel dl{display:grid;grid-template-columns:130px 1fr;gap:8px;margin:0}.operation-detail-panel dt{color:var(--muted,#8d98a7);font-size:12px}.operation-detail-panel dd{margin:0;font-size:13px;overflow-wrap:anywhere}.operation-detail-section{margin-bottom:12px}.operation-detail-section table{width:100%;border-collapse:collapse;min-width:620px}.operation-detail-section th,.operation-detail-section td{padding:8px;border-bottom:1px solid var(--border-color,#2a3038);font-size:12px;text-align:left}.operation-detail-section th{color:var(--muted,#8d98a7)}.operation-totals{display:flex;justify-content:flex-end;gap:18px;padding-top:12px}.operation-totals span{font-size:12px}.operation-totals b{display:block;font-size:15px}.operation-movement{display:flex;justify-content:space-between;gap:12px;padding:9px 0;border-bottom:1px solid var(--border-color,#2a3038)}.operation-movement:last-child{border-bottom:0}.operation-movement span{font-size:12px}.operation-movement small{display:block;color:var(--muted,#8d98a7);margin-top:3px}.operation-timeline>div{display:flex;gap:10px;padding:7px 0}.operation-timeline i{width:8px;height:8px;border-radius:50%;background:currentColor;margin-top:5px;flex:0 0 auto}.operation-timeline span{font-size:12px}.operation-timeline small{display:block;color:var(--muted,#8d98a7);margin-top:3px}.muted{color:var(--muted,#8d98a7)}
+.operations-hero{display:flex;justify-content:space-between;gap:24px;align-items:flex-end;margin-bottom:18px}.operations-hero h1{margin:4px 0 6px}.operations-hero p{margin:0;color:var(--muted,#8d98a7)}.operations-quick-actions{display:flex;gap:8px;flex-wrap:wrap}.operations-summary{display:grid;grid-template-columns:repeat(5,minmax(120px,1fr));gap:10px;margin-bottom:14px}.operations-summary>div,.operations-filters,.operations-table-card,.operation-detail-panel article{background:var(--card-bg,#15181d);border:1px solid var(--border-color,#2a3038);border-radius:12px}.operations-summary>div{padding:13px 15px}.operations-summary span{display:block;color:var(--muted,#8d98a7);font-size:12px}.operations-summary b{display:block;margin-top:4px;font-size:19px}.operations-filters{display:grid;grid-template-columns:2fr repeat(3,1fr);gap:12px;padding:14px;margin-bottom:14px}.operations-filters label{display:flex;flex-direction:column;gap:5px}.operations-filters label span{font-size:12px;font-weight:700;color:var(--muted,#8d98a7)}.operations-filters input,.operations-filters select{width:100%}.operations-filter-actions{display:flex;align-items:flex-end;justify-content:flex-end;gap:8px}.operations-table-card{overflow:hidden}.operations-table-head{display:flex;justify-content:space-between;align-items:center;padding:14px 16px;border-bottom:1px solid var(--border-color,#2a3038)}.operations-table-head h2{font-size:17px;margin:0}.operations-table-head span{color:var(--muted,#8d98a7);font-size:12px}.operations-table-wrap,.detail-table-wrap{overflow:auto}.operations-table{width:100%;border-collapse:collapse;min-width:1080px}.operations-table th,.operations-table td{padding:11px 12px;text-align:left;border-bottom:1px solid var(--border-color,#2a3038);vertical-align:middle}.operations-table th{font-size:11px;text-transform:uppercase;color:var(--muted,#8d98a7)}.operations-table td{font-size:13px}.operations-table td small{display:block;margin-top:3px;color:var(--muted,#8d98a7);font-size:10px}.operation-type,.operation-status{display:inline-flex;padding:4px 8px;border-radius:999px;font-size:11px;font-weight:700}.operation-type{background:rgba(72,132,255,.14)}.operation-status.is-open{background:rgba(245,166,35,.14);color:#f5b74f}.operation-status.is-finalized{background:rgba(39,174,96,.14);color:#54d98a}.operation-status.is-cancelled{background:rgba(220,53,69,.14);color:#ff7180}.operations-actions{white-space:nowrap}.operations-actions .btn{margin-left:5px}.operations-empty{text-align:center!important;padding:28px!important;color:var(--muted,#8d98a7)}.btn-small{padding:6px 9px;font-size:11px}.operation-detail-backdrop{position:fixed;inset:0;background:rgba(0,0,0,.68);z-index:1000;display:flex;justify-content:flex-end}.operation-detail-panel{width:min(820px,94vw);height:100%;overflow:auto;background:var(--page-bg,#0b0d10);border-left:1px solid var(--border-color,#2a3038);padding:18px}.operation-detail-panel>header{display:flex;justify-content:space-between;gap:16px;align-items:flex-start;padding-bottom:14px;border-bottom:1px solid var(--border-color,#2a3038)}.operation-detail-panel header span{font-size:12px;color:var(--muted,#8d98a7);font-weight:700}.operation-detail-panel h2{margin:3px 0}.operation-detail-panel header p{margin:0;color:var(--muted,#8d98a7)}.operation-detail-close{font-size:30px;line-height:1;text-decoration:none;color:inherit}.operation-detail-actions{display:flex;gap:8px;margin:14px 0}.operation-detail-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px}.operation-detail-panel article{padding:14px}.operation-detail-panel article h3{margin:0 0 12px;font-size:15px}.operation-detail-panel dl{display:grid;grid-template-columns:130px 1fr;gap:8px;margin:0}.operation-detail-panel dt{color:var(--muted,#8d98a7);font-size:12px}.operation-detail-panel dd{margin:0;font-size:13px;overflow-wrap:anywhere}.operation-detail-section{margin-bottom:12px}.operation-detail-section table{width:100%;border-collapse:collapse;min-width:620px}.operation-detail-section th,.operation-detail-section td{padding:8px;border-bottom:1px solid var(--border-color,#2a3038);font-size:12px;text-align:left}.operation-detail-section th{color:var(--muted,#8d98a7)}.operation-totals{display:flex;justify-content:flex-end;gap:18px;padding-top:12px}.operation-totals span{font-size:12px}.operation-totals b{display:block;font-size:15px}.operation-movement{display:flex;justify-content:space-between;gap:12px;padding:9px 0;border-bottom:1px solid var(--border-color,#2a3038)}.operation-movement:last-child{border-bottom:0}.operation-movement span{font-size:12px}.operation-movement small{display:block;color:var(--muted,#8d98a7);margin-top:3px}.operation-timeline>div{display:flex;gap:10px;padding:7px 0}.operation-timeline i{width:8px;height:8px;border-radius:50%;background:currentColor;margin-top:5px;flex:0 0 auto}.operation-timeline span{font-size:12px}.operation-timeline p{margin:5px 0;white-space:pre-wrap;overflow-wrap:anywhere}.operation-timeline small{display:block;color:var(--muted,#8d98a7);margin-top:3px}.muted{color:var(--muted,#8d98a7)}
 @media(max-width:900px){.operations-summary{grid-template-columns:repeat(2,1fr)}.operations-filters{grid-template-columns:1fr 1fr}.operations-search{grid-column:1/-1}.operation-detail-grid{grid-template-columns:1fr}}@media(max-width:560px){.operations-hero{align-items:flex-start;flex-direction:column}.operations-summary,.operations-filters{grid-template-columns:1fr}.operations-filter-actions{justify-content:stretch}.operations-filter-actions>*{flex:1}.operation-detail-panel{width:100vw}.operation-detail-panel dl{grid-template-columns:1fr}.operation-totals{justify-content:flex-start;flex-wrap:wrap}}
 
 /* Quality ERP — QuickDatePicker global v1.0 */
@@ -2385,6 +2385,9 @@ html[data-panel-theme="oled"] .receivable-toolbar input,html[data-panel-theme="o
 /* ========================================================================== */
 body.receivable-drawer-open{overflow:hidden}
 .receivable-kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin:0 0 14px}
+.payable-primary-kpis{grid-template-columns:repeat(5,minmax(0,1fr))}
+.payable-visible-total{font-weight:800;opacity:.82;white-space:nowrap}
+.payable-period-kpis{grid-template-columns:repeat(3,minmax(0,1fr));margin-top:-2px}
 .receivable-kpi{appearance:none;text-align:left;border:1px solid var(--panel-border,#333);border-radius:12px;background:var(--panel-card,#111);color:inherit;padding:15px;cursor:pointer;transition:border-color .18s ease,transform .18s ease,background .18s ease}
 .receivable-kpi:hover,.receivable-kpi:focus-visible{border-color:var(--panel-accent,#c90000);transform:translateY(-1px);outline:none}
 .receivable-kpi span{display:block;font-size:11px;font-weight:800;letter-spacing:.04em;text-transform:uppercase;opacity:.68}
@@ -2417,13 +2420,13 @@ html[data-panel-theme="oled"] .receivable-kpi,html[data-panel-theme="oled"] .rec
 html[data-panel-theme="oled"] .receivable-filter-panel input,html[data-panel-theme="oled"] .receivable-filter-panel select{background:#070707!important;border-color:#282828!important;color:#f5f5f5!important}
 html[data-panel-theme="oled"] .receivable-detail-card,html[data-panel-theme="oled"] .receivable-detail-summary>div,html[data-panel-theme="oled"] .receivable-credit-summary>div{background:#070707!important;border-color:#282828!important}
 html[data-panel-theme="oled"] .receivable-table .receivable-row:hover td,html[data-panel-theme="oled"] .receivable-table .receivable-row:focus td{background:#0e0e0e!important}
-@media(max-width:1000px){.receivable-kpis{grid-template-columns:repeat(2,minmax(0,1fr))}.receivable-search-row{grid-template-columns:1fr 180px}.receivable-advanced-filters{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:1000px){.receivable-kpis,.payable-period-kpis{grid-template-columns:repeat(2,minmax(0,1fr))}.receivable-search-row{grid-template-columns:1fr 180px}.receivable-advanced-filters{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:620px){.receivable-kpis,.receivable-search-row,.receivable-advanced-filters,.receivable-detail-summary,.receivable-detail-grid,.receivable-credit-summary{grid-template-columns:1fr}.receivable-list-meta{align-items:flex-start;flex-direction:column}.receivable-installments>div{grid-template-columns:45px 1fr auto}.receivable-installments>div span:nth-child(3){display:none}.receivable-drawer{width:100vw}}
 
 /* Quality ERP v0.17.0 — Recebimento de parcelas */
 .receivable-operation-items{margin-top:14px;border-top:1px solid #272727;padding-top:12px}.receivable-operation-items h4{margin:0 0 8px;font-size:12px;text-transform:uppercase;color:#8e8e8e}.receivable-operation-item{display:flex;justify-content:space-between;gap:12px;padding:10px 0;border-bottom:1px solid #1d1d1d}.receivable-operation-item:last-child{border-bottom:0}.receivable-operation-item div{display:grid;gap:3px}.receivable-operation-item small{color:#909090}.receivable-service-summary{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px}.receivable-service-summary>div{border:1px solid #292929;border-radius:8px;padding:9px;background:#070707}.receivable-service-summary .wide{grid-column:1/-1}.receivable-service-summary span{display:block;color:#777;font-size:10px;text-transform:uppercase}.receivable-service-summary b{display:block;margin-top:4px;font-size:12px}.receivable-installment-row{grid-template-columns:minmax(90px,1.2fr) auto minmax(90px,.8fr) auto!important;align-items:center!important}.receivable-installment-row>div{display:grid;gap:2px}.receivable-installment-row small{color:#777}.receivable-installment-row .btn{min-width:82px}.receivable-paid-mark{font-size:11px;color:#4ddd87;font-weight:700}.btn-success{background:#11833e!important;border-color:#15934a!important;color:#fff!important}.receivable-reprint{display:inline-flex;margin-top:8px;padding:0;border:0;background:none;color:#56a7ff;font-size:11px;cursor:pointer}.receivable-reprint:hover{text-decoration:underline}
-.receivable-modal[hidden]{display:none}.receivable-modal{position:fixed;inset:0;z-index:10020;display:grid;place-items:center;padding:20px}.receivable-modal-backdrop{position:absolute;inset:0;background:rgba(0,0,0,.82);backdrop-filter:blur(3px)}.receivable-modal-card{position:relative;width:min(760px,100%);max-height:calc(100vh - 40px);overflow:auto;background:#050505;border:1px solid #303030;border-radius:14px;box-shadow:0 30px 90px rgba(0,0,0,.72)}.receivable-modal-header{position:sticky;top:0;z-index:2;display:flex;justify-content:space-between;gap:18px;padding:18px 20px;background:#080808;border-bottom:1px solid #242424}.receivable-modal-header span{font-size:10px;color:#d4a600;font-weight:800}.receivable-modal-header h2{margin:3px 0;font-size:20px}.receivable-modal-header p{margin:0;color:#8c8c8c;font-size:12px}.receivable-modal-header>button{width:32px;height:32px;border-radius:8px;border:1px solid #333;background:#111;color:#eee;font-size:20px;cursor:pointer}.receivable-modal form{padding:18px}.receivable-receive-summary{display:grid;grid-template-columns:1.5fr .8fr;gap:10px;margin-bottom:14px}.receivable-receive-summary>div,.receivable-receive-totals>div{border:1px solid #282828;border-radius:9px;background:#090909;padding:12px}.receivable-receive-summary span,.receivable-receive-totals span{display:block;color:#777;font-size:10px;text-transform:uppercase}.receivable-receive-summary b,.receivable-receive-summary strong,.receivable-receive-totals b,.receivable-receive-totals strong{display:block;margin-top:5px}.receivable-receive-summary strong{font-size:20px;color:#fff}.receivable-receive-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}.receivable-receive-grid label,.receivable-notes{display:grid;gap:5px}.receivable-receive-grid label span,.receivable-notes span{font-size:10px;color:#777;font-weight:700}.receivable-receive-grid input,.receivable-notes textarea,.receivable-payment-row input,.receivable-payment-row select{width:100%;box-sizing:border-box;background:#050505;border:1px solid #303030;border-radius:8px;color:#f4f4f4;padding:10px}.receivable-payment-box{margin-top:14px;border:1px solid #282828;border-radius:10px;padding:12px;background:#090909}.receivable-payment-box>header{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:10px}.receivable-payment-box>header span{display:block;font-weight:700}.receivable-payment-box>header small{color:#777}.receivable-payment-row{display:grid;grid-template-columns:minmax(170px,1fr) 150px 38px;gap:8px;margin-top:8px}.receivable-payment-row [data-remove-payment]{padding:8px;font-size:18px}.receivable-notes{margin-top:14px}.receivable-notes textarea{resize:vertical}.receivable-receive-totals{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:14px}.receivable-receive-totals strong{color:#4ddd87;font-size:18px}.receivable-modal-actions{display:flex;justify-content:flex-end;gap:8px;margin-top:16px;padding-top:14px;border-top:1px solid #242424}.receivable-receive-success{text-align:center;padding:35px 15px}.receivable-success-icon{display:grid;place-items:center;width:64px;height:64px;margin:0 auto 14px;border-radius:50%;background:#0d6f35;color:#fff;font-size:34px}.receivable-receive-success h3{margin:0 0 8px}.receivable-receive-success p{color:#aaa}.receivable-receive-success>div:last-child{display:flex;justify-content:center;gap:10px;margin-top:20px}.receivable-modal-open{overflow:hidden}
-@media(max-width:760px){.receivable-receive-grid{grid-template-columns:1fr 1fr}.receivable-receive-totals{grid-template-columns:1fr}.receivable-payment-row{grid-template-columns:1fr 120px 38px}.receivable-installment-row{grid-template-columns:1fr auto!important}.receivable-installment-row .btn,.receivable-paid-mark{grid-column:1/-1}.receivable-service-summary{grid-template-columns:1fr}.receivable-service-summary .wide{grid-column:auto}}
+.receivable-modal[hidden]{display:none}.receivable-modal{position:fixed;inset:0;z-index:10020;display:grid;place-items:center;padding:20px}.receivable-modal-backdrop{position:absolute;inset:0;background:rgba(0,0,0,.82);backdrop-filter:blur(3px)}.receivable-modal-card{position:relative;width:min(760px,100%);max-height:calc(100vh - 40px);overflow:auto;background:#050505;border:1px solid #303030;border-radius:14px;box-shadow:0 30px 90px rgba(0,0,0,.72)}.receivable-modal-header{position:sticky;top:0;z-index:2;display:flex;justify-content:space-between;gap:18px;padding:18px 20px;background:#080808;border-bottom:1px solid #242424}.receivable-modal-header span{font-size:10px;color:#d4a600;font-weight:800}.receivable-modal-header h2{margin:3px 0;font-size:20px}.receivable-modal-header p{margin:0;color:#8c8c8c;font-size:12px}.receivable-modal-header>button{width:32px;height:32px;border-radius:8px;border:1px solid #333;background:#111;color:#eee;font-size:20px;cursor:pointer}.receivable-modal form{padding:18px}.receivable-receive-summary{display:grid;grid-template-columns:1.5fr .8fr;gap:10px;margin-bottom:14px}.receivable-receive-summary>div,.receivable-receive-totals>div{border:1px solid #282828;border-radius:9px;background:#090909;padding:12px}.receivable-receive-summary span,.receivable-receive-totals span{display:block;color:#777;font-size:10px;text-transform:uppercase}.receivable-receive-summary b,.receivable-receive-summary strong,.receivable-receive-totals b,.receivable-receive-totals strong{display:block;margin-top:5px}.receivable-receive-summary strong{font-size:20px;color:#fff}.receivable-receive-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}.receivable-receive-grid label,.receivable-notes{display:grid;gap:5px}.receivable-receive-grid label span,.receivable-notes span{font-size:10px;color:#777;font-weight:700}.receivable-receive-grid input,.receivable-notes textarea,.receivable-payment-row input,.receivable-payment-row select{width:100%;box-sizing:border-box;background:#050505;border:1px solid #303030;border-radius:8px;color:#f4f4f4;padding:10px}.receivable-payment-box{margin-top:14px;border:1px solid #282828;border-radius:10px;padding:12px;background:#090909}.receivable-payment-box>header{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:10px}.receivable-payment-box>header span{display:block;font-weight:700}.receivable-payment-box>header small{color:#777}.receivable-payment-row{display:grid;grid-template-columns:minmax(170px,1fr) 150px 110px 38px;gap:8px;margin-top:8px;align-items:end}.receive-installments-wrap{display:grid;gap:4px}.receive-installments-wrap[hidden]{display:none}.receive-installments-wrap span{font-size:10px;color:#777;font-weight:700}.receivable-payment-row [data-remove-payment]{padding:8px;font-size:18px}.receivable-notes{margin-top:14px}.receivable-notes textarea{resize:vertical}.receivable-receive-totals{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:14px}.receivable-receive-totals strong{color:#4ddd87;font-size:18px}.receivable-modal-actions{display:flex;justify-content:flex-end;gap:8px;margin-top:16px;padding-top:14px;border-top:1px solid #242424}.receivable-receive-success{text-align:center;padding:35px 15px}.receivable-success-icon{display:grid;place-items:center;width:64px;height:64px;margin:0 auto 14px;border-radius:50%;background:#0d6f35;color:#fff;font-size:34px}.receivable-receive-success h3{margin:0 0 8px}.receivable-receive-success p{color:#aaa}.receivable-receive-success>div:last-child{display:flex;justify-content:center;gap:10px;margin-top:20px}.receivable-modal-open{overflow:hidden}
+@media(max-width:760px){.receivable-receive-grid{grid-template-columns:1fr 1fr}.receivable-receive-totals{grid-template-columns:1fr}.receivable-payment-row{grid-template-columns:1fr 120px 90px 38px}.receivable-installment-row{grid-template-columns:1fr auto!important}.receivable-installment-row .btn,.receivable-paid-mark{grid-column:1/-1}.receivable-service-summary{grid-template-columns:1fr}.receivable-service-summary .wide{grid-column:auto}}
 
 
 /* Quality ERP v0.17.1.1 — configuração compacta de parcelas */
@@ -2916,3 +2919,819 @@ html[data-panel-theme="light"] #purchaseDrawer .purchase-detail-item,
 html[data-panel-theme="light"] #purchaseDrawer .purchase-detail-card,
 html[data-panel-theme="light"] #purchaseDrawer .purchase-detail-integration>div{background:#f8fafc!important;border-color:#d7dee8!important;color:#0f172a!important}
 html[data-panel-theme="light"] #purchaseDrawer .purchase-detail-empty{border-color:#cbd5e1!important;color:#475569!important}
+
+/* Quality ERP v0.21.2 — correções do modo claro da Central Financeira */
+html[data-panel-theme="light"] .payable-central-modal-card{background:#fff;color:#111827;border-color:#d7dde5}
+html[data-panel-theme="light"] .payable-central-header{background:#fff;border-color:#d7dde5}
+html[data-panel-theme="light"] .payable-central-header p,
+html[data-panel-theme="light"] .payable-central-finance p,
+html[data-panel-theme="light"] .payable-operation-main label>span,
+html[data-panel-theme="light"] .payable-operation-status>span,
+html[data-panel-theme="light"] .payable-operation-status small{color:#667085}
+html[data-panel-theme="light"] .payable-central-summary,
+html[data-panel-theme="light"] .payable-central-finance,
+html[data-panel-theme="light"] .payable-collapsible,
+html[data-panel-theme="light"] .payable-inline-payments{background:#e5e7eb;border-color:#d7dde5}
+html[data-panel-theme="light"] .payable-central-summary>div,
+html[data-panel-theme="light"] .payable-central-totals>div,
+html[data-panel-theme="light"] .payable-central-finance,
+html[data-panel-theme="light"] .payable-collapsible,
+html[data-panel-theme="light"] .payable-inline-payments{background:#fff}
+html[data-panel-theme="light"] .payable-operation-row{border-color:#e5e7eb}
+html[data-panel-theme="light"] .payable-operation-main input,
+html[data-panel-theme="light"] .payable-operation-main select{background:#fff;color:#111827;border-color:#cfd6df}
+html[data-panel-theme="light"] .payable-operation-progress{background:#e5e7eb}
+html[data-panel-theme="light"] .payable-inline-payments article{border-color:#e5e7eb}
+html[data-panel-theme="light"] .payable-collapsible summary span{background:#eef1f5;color:#344054}
+html[data-panel-theme="light"] .payable-join-check span{color:#111827!important}
+html[data-panel-theme="light"] .payable-central-header>button{background:#fff;color:#111827;border-color:#cfd6df}
+
+/* Quality ERP v0.21.3 — modo claro da grade compacta */
+html[data-panel-theme="light"] .payable-icon-action,
+html[data-panel-theme="light"] .payable-help>summary,
+html[data-panel-theme="light"] .payable-help>div{background:#fff!important;color:#111827!important;border-color:#cbd5e1!important}
+html[data-panel-theme="light"] .payable-icon-action:hover{background:#f8fafc!important;color:#b00000!important;border-color:#b00000!important}
+html[data-panel-theme="light"] .payable-operation-columns{background:#f8fafc!important;color:#64748b!important;border-color:#dbe2ea!important}
+html[data-panel-theme="light"] .payable-operation-row{background:#fff!important;border-color:#e2e8f0!important}
+html[data-panel-theme="light"] .payable-operation-row:nth-child(even){background:#fbfcfe!important}
+
+
+/* Quality ERP v0.23.6.1 — Central de Recebimentos e Crediário */
+#receivableDrawer.receivable-drawer{top:4vh;right:3vw;width:94vw!important;max-width:1500px;height:92vh;border:1px solid var(--panel-border,#2b2b2b);border-radius:14px;box-shadow:0 28px 90px rgba(0,0,0,.62);transform:translateY(108vh);overflow:hidden}
+#receivableDrawer.receivable-drawer.open{transform:translateY(0)}
+#receivableDrawer .receivable-drawer-body{padding:16px 20px 30px}
+#receivableDrawer .receivable-detail-summary{grid-template-columns:repeat(3,minmax(160px,1fr))}
+#receivableDrawer .receivable-drawer-nav{position:relative}
+.credit-table-wrap{overflow:auto;border:1px solid var(--panel-border,#282828);border-radius:10px}
+.credit-central-note{margin:12px 0;padding:10px 12px;border:1px solid var(--panel-border,#2b2b2b);border-radius:9px;background:rgba(255,255,255,.025);font-size:12px}
+.credit-status{display:inline-flex;padding:5px 9px;border-radius:999px;font-size:11px;font-weight:800;border:1px solid #3a3a3a}
+.credit-status-paid{color:#86efac;border-color:#166534;background:rgba(22,101,52,.18)}
+.credit-status-partial{color:#fde68a;border-color:#854d0e;background:rgba(133,77,14,.18)}
+.credit-status-open{color:#bfdbfe;border-color:#1d4ed8;background:rgba(29,78,216,.14)}
+.credit-status-cancelled,.credit-status-reversed{color:#fca5a5;border-color:#991b1b;background:rgba(153,27,27,.16)}
+html[data-panel-theme="light"] .credit-central-note{background:#f8fafc;border-color:#d7dde5;color:#334155}
+html[data-panel-theme="light"] #receivableDrawer.receivable-drawer{box-shadow:0 24px 70px rgba(15,23,42,.25)}
+@media(max-width:760px){#receivableDrawer.receivable-drawer{top:0;right:0;width:100vw!important;height:100vh;border-radius:0}.credit-table{min-width:780px}}
+
+/* Quality ERP v0.23.6.5 — painel de gerenciamento do Centro de Operações */
+.operations-actions{min-width:142px;white-space:normal}
+.operations-actions-main{display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+.operations-actions-main .btn{margin:0!important}
+.operation-manage-toggle span{display:inline-block;margin-left:3px;transition:transform .18s ease}
+.operation-manage-toggle.is-open span{transform:rotate(180deg)}
+.operation-manage-row[hidden]{display:none}
+.operation-manage-row>td{padding:0!important;background:color-mix(in srgb,var(--card-bg,#15181d) 88%,#000 12%)}
+.operation-manage-panel{display:flex;align-items:stretch;gap:14px;padding:11px 13px 12px;border-bottom:1px solid var(--border-color,#2a3038);box-shadow:inset 3px 0 0 var(--accent,#d90404)}
+.operation-manage-group{display:flex;flex-direction:column;gap:7px;min-width:0;padding-right:14px;border-right:1px solid var(--border-color,#2a3038)}
+.operation-manage-group:last-child{padding-right:0;border-right:0}
+.operation-manage-label{font-size:10px;font-weight:800;letter-spacing:.05em;text-transform:uppercase;color:var(--muted,#8d98a7)}
+.operation-manage-buttons{display:flex;align-items:center;gap:7px;flex-wrap:wrap}
+.operation-action{appearance:none;display:inline-flex;align-items:center;justify-content:center;gap:6px;min-height:30px;padding:6px 10px;border:1px solid var(--border-color,#2a3038);border-radius:8px;background:var(--card-bg,#15181d);color:inherit;font:inherit;font-size:11px;font-weight:700;text-decoration:none;cursor:pointer;transition:border-color .15s ease,background .15s ease,transform .15s ease}
+.operation-action:hover{border-color:color-mix(in srgb,var(--accent,#d90404) 55%,var(--border-color,#2a3038));background:color-mix(in srgb,var(--card-bg,#15181d) 88%,var(--accent,#d90404) 12%);transform:translateY(-1px)}
+.operation-action.is-danger{color:#ff7d89;border-color:rgba(220,53,69,.35);background:rgba(220,53,69,.08)}
+.operation-action.is-danger:hover{background:rgba(220,53,69,.16);border-color:rgba(220,53,69,.62)}
+.operation-manage-fiscal{margin-left:auto;min-width:145px}
+.operation-fiscal-status{display:inline-flex;align-items:center;width:max-content;padding:6px 9px;border-radius:999px;background:rgba(148,163,184,.12);color:var(--muted,#8d98a7);font-size:11px;font-weight:700}
+.operation-main-row:has(+ .operation-manage-row:not([hidden])){background:color-mix(in srgb,var(--card-bg,#15181d) 90%,var(--accent,#d90404) 10%)}
+html[data-panel-theme="light"] .operation-manage-row>td{background:#f8fafc!important}
+html[data-panel-theme="light"] .operation-manage-panel{box-shadow:inset 3px 0 0 #dc0000}
+html[data-panel-theme="light"] .operation-action{background:#fff!important;color:#0f172a!important;border-color:#cbd5e1!important}
+html[data-panel-theme="light"] .operation-action:hover{background:#f8fafc!important;border-color:#94a3b8!important}
+html[data-panel-theme="light"] .operation-action.is-danger{color:#b42332!important;background:#fff5f5!important;border-color:#fecdd3!important}
+html[data-panel-theme="light"] .operation-fiscal-status{background:#e2e8f0!important;color:#475569!important}
+@media(max-width:900px){.operation-manage-panel{flex-direction:column;gap:10px}.operation-manage-group{padding-right:0;padding-bottom:10px;border-right:0;border-bottom:1px solid var(--border-color,#2a3038)}.operation-manage-group:last-child{padding-bottom:0;border-bottom:0}.operation-manage-fiscal{margin-left:0}.operation-action{flex:1 1 150px}}
+
+/* Quality ERP v0.23.6.7 — filtros e estorno em lote no Centro de Operações */
+.operations-table-title-row{display:flex;align-items:center;gap:14px;min-width:0;flex-wrap:wrap}
+.operations-status-tabs{display:inline-flex;align-items:center;gap:5px;padding:4px;border:1px solid var(--border-color,#2a3038);border-radius:10px;background:color-mix(in srgb,var(--card-bg,#15181d) 92%,#000 8%)}
+.operations-status-tabs a{display:inline-flex;align-items:center;gap:6px;min-height:28px;padding:5px 9px;border:1px solid transparent;border-radius:7px;color:var(--muted,#8d98a7);font-size:11px;font-weight:750;text-decoration:none;white-space:nowrap}
+.operations-status-tabs a b{display:inline-grid;place-items:center;min-width:20px;height:20px;padding:0 5px;border-radius:999px;background:rgba(148,163,184,.12);color:inherit;font-size:10px}
+.operations-status-tabs a:hover{color:inherit;background:rgba(148,163,184,.08)}
+.operations-status-tabs a.is-active{color:#fff;background:var(--accent,#d90404);border-color:color-mix(in srgb,var(--accent,#d90404) 75%,#fff 25%)}
+.operations-status-tabs a.is-active b{background:rgba(255,255,255,.2);color:#fff}
+.operations-bulk-bar{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:10px 14px;border-bottom:1px solid var(--border-color,#2a3038);background:color-mix(in srgb,var(--card-bg,#15181d) 86%,var(--accent,#d90404) 14%);box-shadow:inset 3px 0 0 var(--accent,#d90404)}
+.operations-bulk-bar[hidden]{display:none}
+.operations-bulk-bar strong{display:block;font-size:12px}
+.operations-bulk-bar small{display:block;margin-top:2px;color:var(--muted,#8d98a7);font-size:10px}
+.operations-bulk-actions{display:flex;align-items:center;gap:7px;flex-wrap:wrap}
+.operations-select-head,.operations-select-cell{width:46px!important;min-width:46px;text-align:center!important;padding-left:7px!important;padding-right:10px!important}
+.operation-select,.operations-select-head label{display:inline-grid;place-items:center;width:28px;height:28px;border:1px solid var(--border-color,#2a3038);border-radius:8px;background:color-mix(in srgb,var(--card-bg,#15181d) 92%,#000 8%);cursor:pointer}
+.operation-select:has(input:disabled){opacity:.3;cursor:not-allowed}
+.operation-select input,.operations-select-head input{width:15px;height:15px;margin:0;accent-color:var(--accent,#d90404);cursor:pointer}
+.operation-select input:disabled{cursor:not-allowed}
+.operation-main-row.is-selected{background:color-mix(in srgb,var(--card-bg,#15181d) 84%,var(--accent,#d90404) 16%)!important;box-shadow:inset -3px 0 0 var(--accent,#d90404)}
+.operation-manage-primary{flex:1 1 auto;border-right:0;padding-right:0}
+.operation-manage-fiscal{flex:0 0 auto;margin-left:14px;padding-left:14px;padding-right:0;border-left:1px solid var(--border-color,#2a3038);border-right:0}
+.operation-manage-panel{align-items:center}
+.operation-manage-buttons{flex-wrap:nowrap}
+html[data-panel-theme="light"] .operations-status-tabs{background:#f8fafc!important;border-color:#d7dee8!important}
+html[data-panel-theme="light"] .operations-status-tabs a{color:#475569!important}
+html[data-panel-theme="light"] .operations-status-tabs a:hover{background:#edf2f7!important;color:#0f172a!important}
+html[data-panel-theme="light"] .operations-status-tabs a.is-active{background:#dc0000!important;color:#fff!important;border-color:#dc0000!important}
+html[data-panel-theme="light"] .operations-status-tabs a b{background:#e2e8f0!important;color:#475569!important}
+html[data-panel-theme="light"] .operations-status-tabs a.is-active b{background:rgba(255,255,255,.22)!important;color:#fff!important}
+html[data-panel-theme="light"] .operations-bulk-bar{background:#fff5f5!important;border-color:#fecaca!important;box-shadow:inset 3px 0 0 #dc0000}
+html[data-panel-theme="light"] .operation-select,html[data-panel-theme="light"] .operations-select-head label{background:#fff!important;border-color:#cbd5e1!important}
+html[data-panel-theme="light"] .operation-main-row.is-selected{background:#fff1f2!important;box-shadow:inset -3px 0 0 #dc0000}
+@media(max-width:1100px){.operations-table-title-row{align-items:flex-start;flex-direction:column}.operations-status-tabs{max-width:100%;overflow-x:auto}.operation-manage-buttons{flex-wrap:wrap}}
+@media(max-width:760px){.operations-bulk-bar{align-items:flex-start;flex-direction:column}.operations-bulk-actions{width:100%}.operations-bulk-actions .btn{flex:1}.operations-status-tabs a{padding:5px 7px}.operations-status-tabs a span{display:none}.operations-status-tabs a b{min-width:24px}.operation-manage-fiscal{margin-left:0;padding-left:0;border-left:0}}
+
+
+/* Quality ERP v0.24.0 — Centro de Operações, Caixa e Configurações PDV */
+.cash-pdv-settings{display:grid;gap:16px}.settings-form-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}.settings-form-grid fieldset{border:1px solid var(--border-color,#303038);border-radius:14px;padding:16px;display:grid;gap:12px;min-width:0}.settings-form-grid legend{font-weight:800;padding:0 8px}.settings-form-grid label{display:grid;gap:6px}.settings-form-grid .check{display:flex;align-items:center;gap:8px}.settings-check-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.settings-save-bar{grid-column:1/-1;display:flex;justify-content:flex-end;align-items:center;gap:14px;position:sticky;bottom:12px;padding:12px;border-radius:12px;background:var(--panel-bg,#111);border:1px solid var(--border-color,#303038);z-index:3}.settings-save-bar .success{color:#42d392}.settings-save-bar .error{color:#ff6b6b}.pdv-item-verified{display:flex!important;align-items:center;gap:6px;margin-top:6px;font-weight:700;font-size:.78rem}.cash-summary-v024{grid-template-columns:repeat(6,minmax(145px,1fr))}.operation-manage-panel{max-width:100%;overflow:visible}.operation-manage-buttons{display:flex;flex-wrap:wrap;gap:8px}.operations-select-cell,.operations-select-head{position:sticky;right:0;z-index:2;background:var(--panel-bg,#111)}
+@media(max-width:1100px){.cash-summary-v024{grid-template-columns:repeat(3,minmax(145px,1fr))}.settings-form-grid{grid-template-columns:1fr}}
+@media(max-width:680px){.cash-summary-v024,.settings-check-grid{grid-template-columns:1fr}.operations-status-tabs{overflow-x:auto}}
+
+
+/* Quality ERP v0.24.0.1 — correções de regressão Centro/PDV */
+.operations-actions{position:relative;overflow:visible!important}
+.operation-manage-menu{position:relative;display:inline-block}
+.operation-manage-menu>summary{list-style:none;cursor:pointer;user-select:none;margin:0!important}
+.operation-manage-menu>summary::-webkit-details-marker{display:none}
+.operation-manage-menu[open]>summary span{display:inline-block;transform:rotate(180deg)}
+.operation-manage-popover{position:fixed;z-index:1200;top:0;left:0;right:auto;width:210px;display:grid;gap:5px;padding:8px;border:1px solid var(--border-color,#2a3038);border-radius:10px;background:var(--card-bg,#15181d);box-shadow:0 14px 35px rgba(0,0,0,.32);visibility:hidden}
+.operation-manage-menu[open] .operation-manage-popover{visibility:visible}
+.operation-manage-popover .operation-action{width:100%;justify-content:flex-start;min-height:32px;margin:0}
+.operation-manage-popover .operation-action:disabled{opacity:.55;cursor:not-allowed;transform:none}
+.operations-table-wrap{overflow:auto}
+html[data-panel-theme="light"] .operation-manage-popover{background:#fff!important;color:#0f172a!important;border-color:#cbd5e1!important;box-shadow:0 14px 35px rgba(15,23,42,.18)}
+html[data-panel-theme="light"] .operations-select-cell,html[data-panel-theme="light"] .operations-select-head{background:#fff!important}
+html[data-panel-theme="light"] .operation-main-row.is-selected .operations-select-cell{background:#fff1f2!important}
+html[data-panel-theme="light"] .operations-table tbody tr:hover .operations-select-cell{background:#f8fafc!important}
+
+
+/* Quality ERP v0.24.0.7 — cabeçalho enxuto do Contas a Receber */
+.finance-back-row{display:flex;align-items:center;justify-content:flex-start;margin:0 0 14px}
+html[data-panel-theme="oled"] .finance-back-row .btn{background:#090909;border-color:#2a2a2a;color:#f5f5f5}
+html[data-panel-theme="light"] .finance-back-row .btn{background:#fff;border-color:#d8dee9;color:#172033}
+
+
+/* Quality ERP v0.25.3 — Contas a Pagar */
+.payable-add-more-sticky{position:sticky;bottom:0;z-index:8;display:flex;justify-content:center;padding:10px 0 2px;background:linear-gradient(180deg,transparent,#0b0b0b 38%)}
+.payable-add-more-sticky .btn{min-width:240px}
+.payable-auto-distribute{display:flex;align-items:center;gap:8px;margin:8px 0 10px;padding:9px 11px;border:1px solid #2f2f2f;border-radius:9px;background:#080808;font-size:12px}
+.payable-auto-distribute input{width:auto!important;margin:0}
+.payable-plan-number{display:block;margin:0 0 7px;color:#f2c94c;font-size:11px;letter-spacing:.04em}
+.payable-classification-box{margin-top:12px;padding:12px;border:1px solid #2d2d2d;border-radius:12px;background:#070707}
+.payable-classification-box>header{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:10px}
+.payable-classification-box>header span{display:block;color:#f2c94c;font-size:9px;font-weight:800;letter-spacing:.08em}
+.payable-classification-box>header h3{margin:2px 0 0;font-size:14px}
+.payable-classification-view,.payable-classification-form{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.payable-classification-view>div,.payable-classification-form label{padding:9px;border:1px solid #292929;border-radius:9px;background:#030303}
+.payable-classification-view span,.payable-classification-form span{display:block;margin-bottom:4px;color:#aaa;font-size:10px}
+.payable-classification-form select{width:100%}
+.payable-classification-form>div{grid-column:1/-1;display:flex;justify-content:flex-end;gap:8px}
+html[data-panel-theme="light"] .payable-add-more-sticky{background:linear-gradient(180deg,transparent,#fff 38%)}
+html[data-panel-theme="light"] .payable-auto-distribute,html[data-panel-theme="light"] .payable-classification-box,html[data-panel-theme="light"] .payable-classification-view>div,html[data-panel-theme="light"] .payable-classification-form label{background:#fff;border-color:#d7d7d7}
+@media(max-width:620px){.payable-classification-view,.payable-classification-form{grid-template-columns:1fr}.payable-add-more-sticky .btn{width:100%;min-width:0}}
+
+/* Quality ERP v0.25.4 — geração rápida de parcelas e feedback de carregamento */
+.payable-installment-generator{display:grid;grid-template-columns:minmax(135px,.55fr) minmax(180px,.8fr) minmax(170px,.75fr) auto;gap:10px;align-items:end;margin:10px 0;padding:10px;border:1px solid var(--border,rgba(148,163,184,.22));border-radius:10px;background:rgba(148,163,184,.05)}
+.payable-installment-generator label{display:grid;gap:5px}.payable-installment-generator span{font-size:11px;font-weight:700}.payable-installment-generator .btn{min-height:38px;white-space:nowrap}
+.payable-loading-notice{position:fixed;right:22px;bottom:22px;z-index:10050;max-width:390px;padding:12px 16px;border:1px solid rgba(59,130,246,.45);border-radius:10px;background:#0b1220;color:#e2e8f0;box-shadow:0 14px 35px rgba(0,0,0,.35);font-size:13px;font-weight:700}
+#payablesApp.is-loading .payables-table-wrap,#payablesApp.is-loading .receivable-list{opacity:.62;pointer-events:none}
+@media(max-width:760px){.payable-installment-generator{grid-template-columns:1fr}.payable-installment-generator .btn{width:100%}}
+
+/* Quality ERP v0.25.5 — paginação de clientes */
+.customers-pagination-info{display:flex;align-items:center;gap:12px;flex-wrap:wrap}.customers-page-size{display:inline-flex;align-items:center;gap:6px;font-size:10px;font-weight:800;color:inherit}.customers-page-size select{min-height:30px;border:1px solid #374151;border-radius:7px;background:#17191d;color:inherit;padding:4px 26px 4px 8px}.customers-page-size select:focus{outline:2px solid rgba(37,99,235,.45);outline-offset:1px}html[data-panel-theme="light"] .customers-page-size select{background:#fff;border-color:#cbd5e1;color:#0f172a}
+
+/* Quality ERP v0.25.7 — pesquisa em classificações financeiras */
+.payable-select-search{
+  width:100%;
+  min-height:34px;
+  margin:0 0 6px;
+  padding:7px 10px;
+  border:1px solid var(--border-color,#30343b);
+  border-radius:8px;
+  background:var(--surface-2,#111315);
+  color:inherit;
+  font:inherit;
+}
+.payable-select-search:focus{
+  outline:none;
+  border-color:#d71920;
+  box-shadow:0 0 0 2px rgba(215,25,32,.16);
+}
+.payable-classification-form .payable-select-search{margin-top:4px}
+/* Quality ERP — Configurações de status e impressão */
+.erp-config-table{display:grid;gap:8px}.erp-config-row{display:grid;grid-template-columns:minmax(260px,1fr) 90px 110px 110px 100px;gap:10px;align-items:center;padding:10px;border:1px solid var(--border-color,#303030);border-radius:10px}.erp-config-head{font-weight:800;background:rgba(255,255,255,.035)}.erp-config-row>label{text-align:center}.erp-config-row input[type=text],.erp-config-row input:not([type]){width:100%}.settings-form-actions{display:flex;justify-content:flex-end;margin-top:14px}.settings-check-grid{display:grid;grid-template-columns:repeat(2,minmax(220px,1fr));gap:12px}.settings-check-grid label{padding:12px;border:1px solid var(--border-color,#303030);border-radius:10px}.pdv-success-actions-final{grid-template-columns:1fr 1fr}.pdv-success-actions-final .btn:first-child{grid-column:auto}.pdv-success-actions-final .btn{min-height:44px}@media(max-width:800px){.erp-config-row{grid-template-columns:1fr 70px 85px 85px}.erp-config-row>*:last-child{grid-column:1/-1}.erp-config-head{display:none}.settings-check-grid{grid-template-columns:1fr}}
+
+/* Quality ERP — configurações de comprovantes */
+.print-logo-config{display:grid;grid-template-columns:minmax(180px,1fr) auto;gap:12px;align-items:center;margin-top:18px;padding-top:16px;border-top:1px solid var(--border-color,#333)}
+.print-logo-config img{max-width:180px;max-height:80px;object-fit:contain;background:#fff;border-radius:8px;padding:8px}
+.print-logo-config input[type=file],.print-logo-config label{grid-column:1/-1}
+.settings-card textarea{width:100%;resize:vertical;min-height:120px}
+.settings-note{margin-top:12px;opacity:.78}
+@media(max-width:700px){.print-logo-config{grid-template-columns:1fr}.print-logo-config img{justify-self:start}}
+
+.pdv-pattern-pair-editor{display:grid;grid-template-columns:repeat(2,minmax(220px,1fr));gap:18px}.pdv-pattern-editor{display:grid;justify-items:start;gap:8px;padding:12px;border:1px solid var(--line);border-radius:12px}.pdv-pattern-grid{display:grid;grid-template-columns:repeat(3,30px);gap:9px;padding:4px}.pdv-pattern-grid button{width:30px;height:30px;border:2px solid var(--line);border-radius:50%;background:var(--card);color:var(--text);font-size:11px;font-weight:900;cursor:pointer}.pdv-pattern-grid button.selected{border-color:var(--blue);background:var(--blue);color:#fff}.pdv-pattern-actions{display:grid;gap:7px}.pdv-pattern-actions p{margin:0;color:var(--muted);font-size:11px}@media(max-width:720px){.pdv-pattern-pair-editor{grid-template-columns:1fr}}
+\n/* Central de Impressões v0.26.0 */
+.print-model-center{margin:18px 26px}.settings-card-title{display:flex;align-items:flex-start;justify-content:space-between;gap:16px}.print-model-list{display:grid;gap:8px;margin-top:14px}.print-model-list article{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px;border:1px solid var(--border-color,#333);border-radius:10px}.print-model-list article>div{display:grid;gap:3px}.print-model-list article span{opacity:.7;font-size:12px}.print-model-list form{display:flex;gap:6px}.print-model-editor{margin-top:14px;border-top:1px solid var(--border-color,#333);padding-top:12px}.print-model-editor summary{cursor:pointer;font-weight:700;margin-bottom:12px}.print-model-editor form{display:grid;gap:12px}.print-variable-help{display:flex;flex-wrap:wrap;gap:6px;align-items:center}.print-variable-help code{padding:5px 7px;border-radius:6px;background:rgba(127,127,127,.15)}@media(max-width:760px){.settings-card-title,.print-model-list article{align-items:stretch;flex-direction:column}.print-model-list form{width:100%}.print-model-center{margin:14px}}\n
+/* Quality ERP v0.26.0 — Fluxo de Caixa Inteligente */
+.cashflow-page{display:grid;gap:16px}.cashflow-header{display:flex;justify-content:space-between;align-items:end}.cashflow-header h1{margin:4px 0;font-size:clamp(24px,3vw,34px)}.cashflow-header p{margin:0;opacity:.7}.cashflow-version{font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;opacity:.65}.cashflow-cards{display:grid;grid-template-columns:repeat(7,minmax(145px,1fr));gap:10px}.cashflow-cards article{padding:14px;border:1px solid var(--panel-border,#d8dee8);border-radius:14px;background:var(--panel-card,#fff);min-width:0}.cashflow-cards span{display:block;font-size:12px;opacity:.72;margin-bottom:7px}.cashflow-cards b{font-size:17px;white-space:nowrap}.cashflow-cards .is-income b,.cashflow-value.entrada{color:#169b62}.cashflow-cards .is-expense b,.cashflow-value.saida{color:#d94b55}.cashflow-cards .is-projected{box-shadow:inset 0 0 0 1px rgba(54,116,255,.25)}.cashflow-filters{border:1px solid var(--panel-border,#d8dee8);border-radius:16px;background:var(--panel-card,#fff);padding:12px;display:grid;gap:12px}.cashflow-quick{display:flex;gap:7px;flex-wrap:wrap}.cashflow-quick button{border:1px solid var(--panel-border,#d8dee8);background:transparent;color:inherit;border-radius:999px;padding:7px 11px;cursor:pointer;font-weight:700}.cashflow-filter-grid{display:grid;grid-template-columns:repeat(7,minmax(130px,1fr)) auto;gap:9px;align-items:end}.cashflow-filter-grid label{font-size:11px;font-weight:800;display:grid;gap:5px}.cashflow-filter-grid input,.cashflow-filter-grid select{min-height:38px;border:1px solid var(--panel-border,#d8dee8);border-radius:9px;background:var(--panel-input,#fff);color:inherit;padding:0 9px}.cashflow-toggle-control{min-height:38px;border:1px solid var(--panel-border,#d8dee8);border-radius:9px;background:var(--panel-input,#fff);display:flex;align-items:center;gap:8px;padding:0 9px;font-size:11px;font-weight:700}.cashflow-toggle-control input{min-height:auto;width:16px;height:16px;margin:0;padding:0;accent-color:#3674ff}.cashflow-section-title{display:flex;justify-content:space-between;align-items:center}.cashflow-section-title h2{margin:0}.cashflow-section-title span{font-size:12px;opacity:.65}.cashflow-timeline{display:grid;gap:12px}.cashflow-day{border:1px solid var(--panel-border,#d8dee8);border-radius:16px;background:var(--panel-card,#fff);overflow:hidden}.cashflow-day>header{padding:12px 14px;display:flex;justify-content:space-between;gap:15px;border-bottom:1px solid var(--panel-border,#d8dee8)}.cashflow-day>header>div:first-child{display:grid}.cashflow-day>header span{font-size:12px;opacity:.72}.cashflow-day-totals{display:flex;gap:18px;align-items:center}.cashflow-day-totals span{display:grid;text-align:right}.cashflow-row{width:100%;border:0;border-bottom:1px solid var(--panel-border,#e7eaf0);background:transparent;color:inherit;display:grid;grid-template-columns:32px minmax(220px,1fr) 90px 125px 145px;align-items:center;gap:10px;padding:11px 14px;text-align:left;cursor:pointer}.cashflow-row:last-child{border-bottom:0}.cashflow-row:hover{background:rgba(100,120,150,.07)}.cashflow-direction{width:28px;height:28px;border-radius:9px;display:grid;place-items:center;font-weight:900}.cashflow-direction.entrada{background:rgba(22,155,98,.12);color:#169b62}.cashflow-direction.saida{background:rgba(217,75,85,.12);color:#d94b55}.cashflow-main{display:grid;min-width:0}.cashflow-main b,.cashflow-main small{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.cashflow-main small{opacity:.65;margin-top:3px}.cashflow-status{font-size:11px;font-weight:800;border-radius:999px;padding:5px 8px;text-align:center}.cashflow-status.realizado{background:rgba(22,155,98,.12);color:#169b62}.cashflow-status.previsto{background:rgba(235,161,29,.14);color:#b87800}.cashflow-value,.cashflow-balance{text-align:right}.cashflow-balance{font-size:11px;opacity:.72}.cashflow-empty{padding:35px;text-align:center;border:1px dashed var(--panel-border,#d8dee8);border-radius:16px;opacity:.7}.cashflow-drawer-backdrop{position:fixed;inset:0;background:rgba(0,0,0,.38);z-index:9998}.cashflow-drawer{position:fixed;z-index:9999;right:0;top:0;height:100vh;width:min(430px,94vw);background:var(--panel-card,#fff);color:inherit;border-left:1px solid var(--panel-border,#d8dee8);padding:26px;transform:translateX(105%);transition:transform .2s ease;overflow:auto}.cashflow-drawer.is-open{transform:none}.cashflow-drawer-close{position:absolute;right:14px;top:12px;border:0;background:transparent;color:inherit;font-size:30px;cursor:pointer}.cashflow-drawer-kicker{font-size:11px;font-weight:900;text-transform:uppercase;opacity:.6}.cashflow-drawer h2{padding-right:30px}.cashflow-drawer dl{display:grid;gap:0;margin:20px 0}.cashflow-drawer dl div{padding:11px 0;border-bottom:1px solid var(--panel-border,#d8dee8)}.cashflow-drawer dt{font-size:11px;font-weight:900;opacity:.6;text-transform:uppercase}.cashflow-drawer dd{margin:4px 0 0}.cashflow-drawer .btn{display:inline-flex}.cashflow-page button,.cashflow-page select,.cashflow-page input{font:inherit}@media(max-width:1300px){.cashflow-cards{grid-template-columns:repeat(4,1fr)}.cashflow-filter-grid{grid-template-columns:repeat(4,1fr)}}@media(max-width:760px){.cashflow-cards{grid-template-columns:repeat(2,1fr)}.cashflow-filter-grid{grid-template-columns:1fr 1fr}.cashflow-day>header{display:grid}.cashflow-day-totals{justify-content:space-between}.cashflow-row{grid-template-columns:30px 1fr auto}.cashflow-status{display:none}.cashflow-balance{grid-column:2}.cashflow-value{grid-column:3;grid-row:1}.cashflow-cards b{font-size:15px}}
+html[data-panel-theme="oled"] .cashflow-cards article,html[data-panel-theme="oled"] .cashflow-filters,html[data-panel-theme="oled"] .cashflow-day,html[data-panel-theme="oled"] .cashflow-drawer{background:#000;border-color:#242424}html[data-panel-theme="oled"] .cashflow-row:hover{background:#0d0d0d}html[data-panel-theme="dark"] .cashflow-cards article,html[data-panel-theme="dark"] .cashflow-filters,html[data-panel-theme="dark"] .cashflow-day,html[data-panel-theme="dark"] .cashflow-drawer{background:#15181d}
+
+/* Quality ERP — correção do checkbox de ajustes no tema Black OLED */
+.cashflow-toggle-control input[type="checkbox"]{
+  appearance:none;
+  -webkit-appearance:none;
+  flex:0 0 18px;
+  width:18px;
+  height:18px;
+  min-height:18px;
+  margin:0;
+  padding:0;
+  border:1px solid var(--panel-border,#8a8a8a);
+  border-radius:5px;
+  background:var(--panel-card,#fff);
+  display:grid;
+  place-content:center;
+  cursor:pointer;
+}
+.cashflow-toggle-control input[type="checkbox"]::before{
+  content:"";
+  width:9px;
+  height:9px;
+  border-radius:2px;
+  transform:scale(0);
+  transition:transform .12s ease-in-out;
+  background:#fff;
+}
+.cashflow-toggle-control input[type="checkbox"]:checked{
+  background:#3674ff;
+  border-color:#3674ff;
+}
+.cashflow-toggle-control input[type="checkbox"]:checked::before{transform:scale(1)}
+.cashflow-toggle-control input[type="checkbox"]:focus-visible{outline:2px solid #3674ff;outline-offset:2px}
+html[data-panel-theme="oled"] .cashflow-toggle-control{
+  background:#050505;
+  border-color:#323232;
+  color:#f5f5f5;
+}
+html[data-panel-theme="oled"] .cashflow-toggle-control input[type="checkbox"]{
+  background:#111;
+  border-color:#686868;
+}
+html[data-panel-theme="oled"] .cashflow-toggle-control input[type="checkbox"]:checked{
+  background:#3674ff;
+  border-color:#6e9aff;
+}
+
+/* Quality ERP — busca incremental do PDV */
+.pdv-product-search-wrap{position:relative;min-width:0}.pdv-product-quick-list{position:absolute;z-index:1200;left:0;right:40px;top:calc(100% + 5px);max-height:320px;overflow:auto;background:var(--card);border:1px solid var(--line);border-radius:10px;box-shadow:0 14px 36px rgba(0,0,0,.28);padding:5px}.pdv-product-quick-list[hidden]{display:none}.pdv-product-quick-list button{width:100%;display:grid;grid-template-columns:minmax(180px,1.4fr) minmax(170px,1fr) auto;gap:10px;align-items:center;border:0;border-bottom:1px solid var(--line);background:transparent;color:var(--text);text-align:left;padding:9px 10px;cursor:pointer}.pdv-product-quick-list button:last-child{border-bottom:0}.pdv-product-quick-list button:hover{background:var(--surface-hover,#eef2f7)}.pdv-product-quick-list span,.pdv-product-quick-list em{color:var(--muted);font-style:normal}.pdv-product-quick-list p{margin:6px 8px;color:var(--muted)}
+@media(max-width:680px){.pdv-product-quick-list{right:0}.pdv-product-quick-list button{grid-template-columns:1fr}.pdv-product-quick-list span,.pdv-product-quick-list em{display:block}}
+
+/* Quality ERP v0.26.x — Contas a Pagar: ações em lote e agrupamento por data */
+/* Este arquivo é carregado depois de painel.css; por isso o botão precisa ser definido aqui para não ser neutralizado pela regra genérica de .btn. */
+#paySelectedPayables.payable-bulk-pay-button{
+  display:inline-flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  gap:6px!important;
+  min-height:32px!important;
+  padding:7px 13px!important;
+  border:1px solid #12823f!important;
+  border-radius:9px!important;
+  background:#12823f!important;
+  color:#fff!important;
+  font-weight:800!important;
+  line-height:1!important;
+  box-shadow:0 3px 10px rgba(18,130,63,.24)!important;
+}
+#paySelectedPayables.payable-bulk-pay-button::before{content:"✓";font-weight:900}
+#paySelectedPayables.payable-bulk-pay-button:hover{
+  background:#15964a!important;
+  border-color:#15964a!important;
+  color:#fff!important;
+  transform:translateY(-1px);
+  box-shadow:0 5px 14px rgba(18,130,63,.30)!important;
+}
+#paySelectedPayables.payable-bulk-pay-button:active{transform:translateY(0)}
+
+html[data-panel-theme="light"] .finance-table .payable-date-group div{
+  background:#f3f6fa!important;
+  border-color:#d9e0e9!important;
+  color:#64748b!important;
+}
+html[data-panel-theme="light"] .finance-table .payable-date-group b,
+html[data-panel-theme="light"] .finance-table .payable-date-group strong{
+  color:#172033!important;
+}
+
+
+/* Quality ERP v0.17.2 — modal financeiro amplo e parâmetros organizados */
+@media (min-width: 981px){
+  .finance-dialog:has(.payment-config:not([hidden])){
+    width:min(1240px,calc(100vw - 48px));
+    max-width:none;
+    height:min(900px,calc(100vh - 40px));
+    max-height:calc(100vh - 40px);
+    overflow:hidden;
+  }
+  .finance-dialog:has(.payment-config:not([hidden])) #financeForm{
+    height:100%;
+    display:grid;
+    grid-template-rows:auto auto minmax(0,1fr) auto auto;
+  }
+  .finance-dialog:has(.payment-config:not([hidden])) .payment-config{
+    display:grid!important;
+    grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);
+    gap:14px;
+    margin:0 20px 14px;
+    padding:0;
+    border:0;
+    overflow:auto;
+    align-content:start;
+  }
+  .finance-dialog:has(.payment-config:not([hidden])) .payment-config>fieldset{
+    margin:0!important;
+    min-width:0;
+    padding:16px;
+    background:var(--panel-card,#fff);
+  }
+  .finance-dialog:has(.payment-config:not([hidden])) .payment-config>fieldset:first-child{
+    grid-column:1/-1;
+  }
+  .finance-dialog:has(.payment-config:not([hidden])) .payment-config .finance-switches,
+  .finance-dialog:has(.payment-config:not([hidden])) .payment-config .finance-module-checks{
+    row-gap:10px;
+  }
+  .finance-dialog:has(.payment-config:not([hidden])) .payment-config .compact-grid{
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:12px;
+  }
+  .finance-dialog:has(.payment-config:not([hidden]))>.finance-form-grid,
+  .finance-dialog:has(.payment-config:not([hidden])) #financeForm>.finance-form-grid{
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    padding-bottom:14px;
+  }
+  .finance-dialog:has(.payment-config:not([hidden])) #financeForm>header,
+  .finance-dialog:has(.payment-config:not([hidden])) #financeForm>footer{
+    flex:0 0 auto;
+  }
+  .finance-dialog:has(.payment-config:not([hidden])) .finance-active{
+    margin:0 20px 12px;
+  }
+}
+@media (min-width:981px) and (max-height:760px){
+  .finance-dialog:has(.payment-config:not([hidden])){
+    height:calc(100vh - 20px);
+    max-height:calc(100vh - 20px);
+  }
+  .finance-dialog:has(.payment-config:not([hidden])) .payment-config{
+    gap:10px;
+  }
+  .finance-dialog:has(.payment-config:not([hidden])) .payment-config>fieldset{
+    padding:12px;
+  }
+}
+
+
+/* Quality ERP v0.17.3 — tooltip financeiro fora do overflow do dialog */
+.finance-dialog .help-tip::after{display:none!important}
+.finance-floating-tooltip{position:fixed;z-index:2147483000;max-width:min(340px,calc(100vw - 24px));padding:9px 11px;border-radius:8px;background:#16181d;color:#fff;border:1px solid rgba(255,255,255,.16);box-shadow:0 10px 28px rgba(0,0,0,.4);font-size:12px;font-weight:400;line-height:1.4;text-align:left;pointer-events:none}
+.finance-floating-tooltip[hidden]{display:none!important}
+
+
+/* Quality ERP V20 — tooltips acima dos modais + informativos compactos */
+.finance-floating-tooltip{right:auto!important;bottom:auto!important;margin:0!important;position:fixed!important;z-index:2147483647!important;}
+.finance-floating-tooltip:popover-open{display:block!important;}
+.payable-info-tip{display:inline-grid;place-items:center;width:17px;height:17px;padding:0;margin-left:4px;border:1px solid currentColor;border-radius:50%;background:transparent;color:inherit;font-size:10px;font-weight:800;line-height:1;cursor:help;opacity:.72;vertical-align:middle}
+.payable-info-tip:hover,.payable-info-tip:focus{opacity:1;outline:none}
+.payable-floating-tooltip{position:fixed;z-index:2147483000;max-width:min(360px,calc(100vw - 24px));padding:9px 11px;border-radius:8px;background:#16181d;color:#fff;border:1px solid rgba(255,255,255,.16);box-shadow:0 10px 28px rgba(0,0,0,.4);font-size:12px;font-weight:400;line-height:1.4;text-align:left;pointer-events:none}
+.payable-floating-tooltip[hidden]{display:none!important}
+.finance-switches label.is-system-locked{opacity:.9}
+.finance-switches label.is-system-locked input{cursor:not-allowed}
+.finance-switches label.is-system-locked span::after{content:' · regra do ERP';font-size:10px;font-weight:600;color:var(--panel-muted,#8b949e)}
+
+/* Quality ERP v0.26.1 — refinamentos do Fluxo de Caixa */
+.cashflow-subtitle{display:flex;align-items:center;gap:6px}.cashflow-subtitle .help-tip{display:inline-grid;place-items:center;width:18px;height:18px;min-width:18px;border-radius:50%;font-size:11px;font-style:normal;font-weight:900;opacity:1}.cashflow-export-menu{position:relative}.cashflow-export-menu summary{list-style:none;cursor:pointer}.cashflow-export-menu summary::-webkit-details-marker{display:none}.cashflow-export-menu>div{position:absolute;z-index:40;right:0;top:calc(100% + 6px);min-width:130px;padding:5px;border:1px solid var(--panel-border,#d8dee8);border-radius:10px;background:var(--panel-card,#fff);box-shadow:0 12px 30px rgba(0,0,0,.18)}.cashflow-export-menu button{display:block;width:100%;border:0;background:transparent;color:inherit;text-align:left;padding:8px 10px;border-radius:7px;cursor:pointer}.cashflow-export-menu button:hover{background:rgba(100,120,150,.10)}.cashflow-filter-grid{grid-template-columns:repeat(6,minmax(135px,1fr)) minmax(210px,1.25fr) auto}.cashflow-filter-grid label:has(select[name="classification"]){min-width:210px}html[data-panel-theme="oled"] .cashflow-export-menu>div{background:#090909;border-color:#292929}@media(max-width:1300px){.cashflow-filter-grid{grid-template-columns:repeat(4,1fr)}}@media(max-width:760px){.cashflow-header{align-items:flex-start;gap:10px}.cashflow-export-menu{align-self:flex-start}.cashflow-filter-grid{grid-template-columns:1fr 1fr}}
+
+/* Quality ERP v0.26.2 — filtros múltiplos do Fluxo de Caixa */
+.cashflow-multi-label{font-size:11px;font-weight:800;display:grid;gap:5px;min-width:0}
+.cashflow-multi{position:relative;min-width:0}
+.cashflow-multi>summary{min-height:38px;border:1px solid var(--panel-border,#d8dee8);border-radius:9px;background:var(--panel-input,#fff);color:inherit;padding:0 10px;display:flex;align-items:center;justify-content:space-between;gap:8px;cursor:pointer;list-style:none;font-weight:500;white-space:nowrap;overflow:hidden}
+.cashflow-multi>summary::-webkit-details-marker{display:none}.cashflow-multi>summary span{overflow:hidden;text-overflow:ellipsis}
+.cashflow-multi-menu{position:absolute;z-index:80;left:0;top:calc(100% + 5px);width:max(100%,260px);max-height:310px;overflow:auto;padding:7px;border:1px solid var(--panel-border,#d8dee8);border-radius:10px;background:var(--panel-card,#fff);box-shadow:0 14px 34px rgba(0,0,0,.22)}
+.cashflow-multi-menu>button{width:100%;border:0;background:transparent;color:inherit;text-align:left;padding:7px 8px;margin-bottom:4px;border-radius:7px;cursor:pointer;font-weight:700;opacity:.72}
+.cashflow-multi-menu>button:hover{background:rgba(100,120,150,.10);opacity:1}.cashflow-multi-menu>strong{display:block;padding:8px 8px 4px;font-size:10px;text-transform:uppercase;letter-spacing:.05em;opacity:.58}
+.cashflow-multi-menu label{display:flex;align-items:center;gap:8px;padding:7px 8px;border-radius:7px;cursor:pointer;font-size:11px;font-weight:600}.cashflow-multi-menu label:hover{background:rgba(100,120,150,.10)}
+.cashflow-multi-menu input[type="checkbox"]{width:15px;height:15px;min-height:15px;margin:0;padding:0;accent-color:#3674ff}.cashflow-party-document{display:block;margin-top:3px;opacity:.62;font-size:11px}
+html[data-panel-theme="oled"] .cashflow-multi>summary,html[data-panel-theme="oled"] .cashflow-multi-menu{background:#090909;border-color:#292929;color:#fff}html[data-panel-theme="oled"] .cashflow-multi-menu label:hover,html[data-panel-theme="oled"] .cashflow-multi-menu>button:hover{background:#151515}
+
+/* v0.10.15 - filtros CP alinhados */
+.payable-classification-filter{grid-column:span 2;min-width:0}
+@media(max-width:1000px){.payable-classification-filter{grid-column:span 1}}
+@media(max-width:620px){.payable-classification-filter{grid-column:1/-1}}
+
+/* Contas a Pagar v0.10.16 — filtros múltiplos compactos */
+#payablesApp .receivable-advanced-filters{grid-template-columns:repeat(3,minmax(0,1fr));align-items:end}
+#payablesApp .payables-period-filter{grid-column:1/-1;max-width:none}
+#payablesApp .payable-multi-label{font-size:11px;font-weight:800;display:grid;gap:5px;min-width:0}
+#payablesApp .payable-multi{min-width:0;width:100%}
+#payablesApp .payable-multi>summary{width:100%;box-sizing:border-box}
+#payablesApp .payable-multi-menu{width:max(100%,260px)}
+@media(max-width:1000px){#payablesApp .receivable-advanced-filters{grid-template-columns:repeat(2,minmax(0,1fr))}#payablesApp .payables-period-filter{grid-column:1/-1}}
+@media(max-width:620px){#payablesApp .receivable-advanced-filters{grid-template-columns:1fr}#payablesApp .payables-period-filter{grid-column:1}}
+
+
+/* Contas a Pagar v0.10.17 — filtros visuais compactos */
+#payablesApp .receivable-search-row{
+  grid-template-columns:minmax(300px,520px) 170px 130px auto auto;
+  justify-content:start;
+  align-items:end;
+  gap:8px;
+}
+#payablesApp .receivable-search-row .receivable-search{width:100%;min-width:0}
+#payablesApp #clearPayableFilters{width:auto;min-width:72px;padding-left:12px;padding-right:12px}
+#payablesApp #togglePayableFilters{width:auto;white-space:nowrap}
+#payablesApp .receivable-advanced-filters{
+  grid-template-columns:minmax(180px,.9fr) minmax(210px,1fr) minmax(230px,1.1fr);
+  align-items:end;
+  gap:8px;
+}
+#payablesApp .payables-period-filter{
+  grid-column:1/-1;
+  max-width:520px;
+}
+#payablesApp .payables-period-filter .operations-period-inputs{
+  grid-template-columns:repeat(2,minmax(180px,240px));
+  gap:8px;
+}
+#payablesApp .payables-period-filter .operations-date-field input{min-height:34px;height:34px}
+#payablesApp .payables-period-filter .operations-period-trigger{width:28px}
+#payablesApp .payable-multi-label{gap:4px}
+#payablesApp .payable-multi>summary{min-height:34px;height:34px;padding:0 9px;border-radius:8px}
+#payablesApp .payable-multi-menu{
+  width:320px;
+  max-width:min(360px,calc(100vw - 44px));
+  max-height:270px;
+  padding:5px;
+}
+#payablesApp .payable-multi-menu>button{padding:6px 7px;margin-bottom:2px;font-size:11px}
+#payablesApp .payable-multi-menu label{padding:5px 7px;font-size:10.5px;gap:7px}
+#payablesApp .payable-multi-menu input[type="checkbox"]{width:14px;height:14px;min-height:14px}
+.payable-hero-tip{position:relative;top:-2px;margin-left:5px}
+@media(max-width:1050px){
+  #payablesApp .receivable-search-row{grid-template-columns:minmax(260px,1fr) 160px 120px auto}
+  #payablesApp #clearPayableFilters{grid-column:auto}
+  #payablesApp .receivable-advanced-filters{grid-template-columns:repeat(2,minmax(0,1fr))}
+  #payablesApp .payables-period-filter{grid-column:1/-1;max-width:520px}
+}
+@media(max-width:700px){
+  #payablesApp .receivable-search-row{grid-template-columns:1fr 1fr}
+  #payablesApp .receivable-search-row .receivable-search{grid-column:1/-1}
+  #payablesApp .receivable-advanced-filters{grid-template-columns:1fr}
+  #payablesApp .payables-period-filter{grid-column:1;max-width:none}
+  #payablesApp .payables-period-filter .operations-period-inputs{grid-template-columns:1fr}
+  #payablesApp .payable-multi-menu{width:min(320px,calc(100vw - 44px))}
+}
+
+/* Contas a Pagar v0.10.18 — filtros avançados em uma única linha */
+@media(min-width:1101px){
+  #payablesApp .receivable-advanced-filters{
+    grid-template-columns:minmax(340px,.95fr) minmax(150px,.55fr) minmax(230px,.8fr) minmax(190px,.7fr);
+    align-items:end;
+    gap:8px;
+  }
+  #payablesApp .payables-period-filter{
+    grid-column:auto;
+    max-width:none;
+    min-width:0;
+  }
+  #payablesApp .payables-period-filter .operations-period-inputs{
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:6px;
+  }
+}
+#payablesApp .payables-period-filter .operations-date-field input{
+  min-height:32px;
+  height:32px;
+  padding-top:0;
+  padding-bottom:0;
+}
+#payablesApp .payables-period-filter .operations-period-trigger{width:26px;min-width:26px}
+#payablesApp .payable-multi>summary{
+  min-height:32px;
+  height:32px;
+  padding:0 8px;
+  font-size:11px;
+}
+#payablesApp .payable-multi-menu{
+  width:max(100%,240px);
+  max-width:min(320px,calc(100vw - 44px));
+  max-height:245px;
+  padding:4px;
+}
+#payablesApp .payable-multi-label:nth-of-type(3) .payable-multi-menu{width:max(100%,320px);max-width:min(360px,calc(100vw - 44px))}
+#payablesApp .payable-multi-menu>button{
+  padding:5px 7px;
+  margin-bottom:2px;
+  min-height:26px;
+  font-size:10.5px;
+}
+#payablesApp .receivable-filter-panel .payable-multi-menu label{
+  display:flex;
+  flex-direction:row;
+  align-items:center;
+  justify-content:flex-start;
+  gap:7px;
+  min-height:28px;
+  padding:4px 7px;
+  margin:0;
+  font-size:10.5px;
+  line-height:1.2;
+}
+#payablesApp .receivable-filter-panel .payable-multi-menu label>span{
+  display:block;
+  min-width:0;
+  font-size:10.5px;
+  font-weight:600;
+  line-height:1.2;
+  opacity:.86;
+  white-space:normal;
+}
+#payablesApp .payable-multi-menu input[type="checkbox"]{
+  flex:0 0 auto;
+  width:13px;
+  height:13px;
+  min-height:13px;
+}
+@media(max-width:1100px) and (min-width:701px){
+  #payablesApp .receivable-advanced-filters{grid-template-columns:repeat(2,minmax(0,1fr))}
+  #payablesApp .payables-period-filter{grid-column:1/-1;max-width:520px}
+}
+
+/* Contas a Pagar v0.10.19 — menus múltiplos: alinhamento e fechamento consistente */
+#payablesApp .receivable-filter-panel .payable-multi-menu > label{
+  display:grid !important;
+  grid-template-columns:16px minmax(0,1fr) !important;
+  align-items:center !important;
+  justify-content:stretch !important;
+  column-gap:8px !important;
+  min-height:30px !important;
+  padding:5px 8px !important;
+  margin:0 !important;
+  flex-direction:unset !important;
+  text-align:left !important;
+}
+#payablesApp .receivable-filter-panel .payable-multi-menu > label > input[type="checkbox"]{
+  display:block !important;
+  grid-column:1 !important;
+  grid-row:1 !important;
+  align-self:center !important;
+  justify-self:center !important;
+  width:14px !important;
+  height:14px !important;
+  min-width:14px !important;
+  min-height:14px !important;
+  margin:0 !important;
+  padding:0 !important;
+}
+#payablesApp .receivable-filter-panel .payable-multi-menu > label > span{
+  display:block !important;
+  grid-column:2 !important;
+  grid-row:1 !important;
+  align-self:center !important;
+  min-width:0 !important;
+  margin:0 !important;
+  line-height:1.25 !important;
+  text-align:left !important;
+}
+
+/* Contas a Pagar v0.10.20 — opções dos filtros múltiplos realmente compactas */
+#payablesApp .receivable-filter-panel .payable-multi-menu > label{
+  position:relative !important;
+  display:block !important;
+  min-height:27px !important;
+  height:27px !important;
+  padding:0 7px 0 29px !important;
+  margin:0 !important;
+  line-height:27px !important;
+  overflow:hidden !important;
+  box-sizing:border-box !important;
+  text-align:left !important;
+}
+#payablesApp .receivable-filter-panel .payable-multi-menu > label > input[type="checkbox"]{
+  position:absolute !important;
+  left:8px !important;
+  top:50% !important;
+  transform:translateY(-50%) !important;
+  display:block !important;
+  width:13px !important;
+  height:13px !important;
+  min-width:13px !important;
+  min-height:13px !important;
+  margin:0 !important;
+  padding:0 !important;
+}
+#payablesApp .receivable-filter-panel .payable-multi-menu > label > span{
+  display:block !important;
+  width:100% !important;
+  max-width:100% !important;
+  min-width:0 !important;
+  margin:0 !important;
+  padding:0 !important;
+  line-height:27px !important;
+  white-space:nowrap !important;
+  overflow:hidden !important;
+  text-overflow:ellipsis !important;
+  text-align:left !important;
+}
+#payablesApp .payable-multi-menu{
+  max-height:230px !important;
+}
+#payablesApp .payable-multi-menu > button{
+  min-height:25px !important;
+  padding:4px 7px !important;
+}
+
+
+/* Contas a Pagar v0.10.21 — correção definitiva das opções dos filtros múltiplos.
+   Classe própria para não herdar o layout vertical genérico de .receivable-filter-panel label. */
+#payablesApp .receivable-filter-panel label.payable-multi-option,
+#payablesApp .payable-multi-menu > label.payable-multi-option{
+  display:flex !important;
+  flex-direction:row !important;
+  align-items:center !important;
+  justify-content:flex-start !important;
+  gap:8px !important;
+  width:100% !important;
+  min-height:30px !important;
+  height:auto !important;
+  margin:0 !important;
+  padding:5px 8px !important;
+  box-sizing:border-box !important;
+  line-height:1.2 !important;
+  text-align:left !important;
+  overflow:hidden !important;
+}
+#payablesApp .receivable-filter-panel label.payable-multi-option > input[type="checkbox"],
+#payablesApp .payable-multi-menu > label.payable-multi-option > input[type="checkbox"]{
+  position:static !important;
+  inset:auto !important;
+  transform:none !important;
+  display:block !important;
+  flex:0 0 14px !important;
+  width:14px !important;
+  height:14px !important;
+  min-width:14px !important;
+  min-height:14px !important;
+  max-width:14px !important;
+  max-height:14px !important;
+  margin:0 !important;
+  padding:0 !important;
+  align-self:center !important;
+}
+#payablesApp .receivable-filter-panel label.payable-multi-option > span,
+#payablesApp .payable-multi-menu > label.payable-multi-option > span{
+  display:block !important;
+  flex:1 1 auto !important;
+  width:auto !important;
+  min-width:0 !important;
+  margin:0 !important;
+  padding:0 !important;
+  font-size:11px !important;
+  font-weight:600 !important;
+  line-height:1.25 !important;
+  text-align:left !important;
+  white-space:nowrap !important;
+  overflow:hidden !important;
+  text-overflow:ellipsis !important;
+  opacity:.88 !important;
+}
+#payablesApp .payable-multi-menu > label.payable-multi-option:hover{
+  background:rgba(100,120,150,.10) !important;
+}
+html[data-panel-theme="oled"] #payablesApp .payable-multi-menu > label.payable-multi-option:hover{
+  background:#151515 !important;
+}
+
+
+/* Quality ERP — Caixa v0.14.5: ajuda, resumo recolhido e cards configuráveis */
+.cash-page-head h1{display:flex;align-items:center;gap:6px;flex-wrap:wrap}.cash-info-tip{margin-left:1px}.cash-info-tip::after{top:calc(100% + 8px);bottom:auto;left:0;transform:none;width:min(330px,72vw)}
+.cash-filtered-summary-note{transition:opacity .22s ease,transform .22s ease}.cash-filtered-summary-note.is-hiding{opacity:0;transform:translateY(-4px)}
+.cash-methods-details{padding:0;overflow:visible}.cash-methods-summary{list-style:none;cursor:pointer;padding:14px 16px;display:flex;align-items:center;justify-content:space-between;gap:12px;font-weight:850}.cash-methods-summary::-webkit-details-marker{display:none}.cash-methods-summary::after{content:'▾';font-size:13px;opacity:.75;transition:transform .18s ease}.cash-methods-details[open]>.cash-methods-summary::after{transform:rotate(180deg)}.cash-methods-summary>span{font-size:17px}.cash-methods-summary>small{margin-left:auto;color:var(--muted,#999);font-size:10px;font-weight:650}.cash-methods-body{padding:0 16px 16px}.cash-method-picker{margin:0 0 11px;border:1px solid var(--border,#2f2f2f);border-radius:9px;background:rgba(127,127,127,.035)}.cash-method-picker>summary{cursor:pointer;list-style:none;padding:8px 10px;font-size:11px;font-weight:800}.cash-method-picker>summary::-webkit-details-marker{display:none}.cash-method-picker-options{display:flex;gap:7px;flex-wrap:wrap;padding:0 10px 10px}.cash-method-picker-options label{display:inline-flex;align-items:center;gap:5px;border:1px solid var(--border,#333);border-radius:999px;padding:5px 8px;font-size:10px;cursor:pointer;background:var(--panel,#111)}.cash-method-picker-options input{margin:0}.cash-method-grid article[hidden]{display:none!important}.cash-method-empty{grid-column:1/-1;margin:0;padding:14px;text-align:center;border:1px dashed var(--border,#333);border-radius:9px}.cash-method-note{margin:9px 0 0;color:var(--muted,#999);font-size:10px;line-height:1.4}
+html[data-panel-theme="light"] .cash-method-picker-options label{background:#fff}
+@media(max-width:760px){.cash-methods-summary{align-items:flex-start;flex-wrap:wrap}.cash-methods-summary>small{width:100%;margin-left:0}.cash-method-grid{grid-template-columns:1fr}}
+
+/* Quality ERP v0.28.0 — aliases globais de tema + revisão Dark/Dark Blue */
+:root{
+  --panel-card:var(--card);
+  --panel-border:var(--line);
+  --panel-text:var(--text);
+  --panel-muted:var(--muted);
+  --panel-input:var(--card);
+  --card-bg:var(--card);
+  --surface:var(--card);
+  --surface-2:color-mix(in srgb,var(--card) 92%,var(--text));
+  --border:var(--line);
+}
+html[data-panel-theme="dark"],html[data-panel-theme="oled"],html[data-panel-theme="blue"]{
+  --panel-card:var(--card);--panel-border:var(--line);--panel-text:var(--text);--panel-muted:var(--muted);--panel-input:var(--surface-soft);--card-bg:var(--card);--surface:var(--card);--surface-2:var(--surface-soft);--border:var(--line);
+}
+html[data-panel-theme="dark"] .topbar.quality-shell{--shell-bg:#151922;--shell-line:#343b49;--shell-hover:#242b37}
+html[data-panel-theme="oled"] .topbar.quality-shell{--shell-bg:#080808;--shell-line:#2a2a2a;--shell-hover:#171717}
+html[data-panel-theme="blue"] .topbar.quality-shell{--shell-bg:#0d1929;--shell-line:#29405d;--shell-hover:#172a40}
+html[data-panel-theme="light"] .topbar.quality-shell{--shell-bg:#111827;--shell-line:rgba(255,255,255,.12);--shell-hover:rgba(255,255,255,.08)}
+html[data-panel-theme]:not([data-panel-theme="light"]) .erp-tone-income{background:linear-gradient(145deg,rgba(37,99,235,.18),var(--card))!important;border-color:rgba(96,165,250,.42)!important}
+html[data-panel-theme]:not([data-panel-theme="light"]) .erp-tone-expense{background:linear-gradient(145deg,rgba(220,38,38,.18),var(--card))!important;border-color:rgba(248,113,113,.42)!important}
+html[data-panel-theme]:not([data-panel-theme="light"]) .erp-tone-success{background:linear-gradient(145deg,rgba(22,163,74,.18),var(--card))!important;border-color:rgba(74,222,128,.42)!important}
+html[data-panel-theme]:not([data-panel-theme="light"]) .erp-tone-warning{background:linear-gradient(145deg,rgba(217,164,65,.17),var(--card))!important;border-color:rgba(224,168,46,.45)!important}
+html[data-panel-theme]:not([data-panel-theme="light"]) .erp-tone-info{background:linear-gradient(145deg,rgba(124,58,237,.17),var(--card))!important;border-color:rgba(167,139,250,.40)!important}
+
+/* Safety net para componentes antigos que ainda usam aliases históricos. */
+html[data-panel-theme]:not([data-panel-theme="light"]) .erp-cat-summary article,
+html[data-panel-theme]:not([data-panel-theme="light"]) .erp-cat-panel,
+html[data-panel-theme]:not([data-panel-theme="light"]) .cashflow-cards article,
+html[data-panel-theme]:not([data-panel-theme="light"]) .cashflow-filters,
+html[data-panel-theme]:not([data-panel-theme="light"]) .cashflow-day,
+html[data-panel-theme]:not([data-panel-theme="light"]) .cashflow-drawer,
+html[data-panel-theme]:not([data-panel-theme="light"]) .cashflow-multi>summary,
+html[data-panel-theme]:not([data-panel-theme="light"]) .cashflow-multi-menu,
+html[data-panel-theme]:not([data-panel-theme="light"]) .finance-operation-card,
+html[data-panel-theme]:not([data-panel-theme="light"]) .finance-configuration-link{
+  background:var(--card)!important;color:var(--text)!important;border-color:var(--line)!important;
+}
+html[data-panel-theme="blue"] .cashflow-cards article,
+html[data-panel-theme="blue"] .cashflow-filters,
+html[data-panel-theme="blue"] .cashflow-day,
+html[data-panel-theme="blue"] .cashflow-drawer{background:var(--card)!important;border-color:var(--line)!important}
+html[data-panel-theme]:not([data-panel-theme="light"]) .cashflow-row:hover,
+html[data-panel-theme]:not([data-panel-theme="light"]) .erp-cat-row:hover{background:var(--surface-hover)!important}
+html[data-panel-theme]:not([data-panel-theme="light"]) input[type="date"],
+html[data-panel-theme]:not([data-panel-theme="light"]) input[type="datetime-local"],
+html[data-panel-theme]:not([data-panel-theme="light"]) input[type="search"]{color-scheme:dark;background:var(--surface-soft)!important;color:var(--text)!important;border-color:var(--line)!important}
+
+/* v0.28.0 — componentes legados com paleta própria: herdam corretamente Escuro/Dark Blue/OLED. */
+html[data-panel-theme]:not([data-panel-theme="light"]) .qw-wrap{
+  --qw-bg:var(--bg);--qw-card:var(--card);--qw-text:var(--text);--qw-muted:var(--muted);--qw-line:var(--line);--qw-soft:var(--surface-soft);--qw-shadow:0 10px 30px var(--shadow);
+}
+html[data-panel-theme]:not([data-panel-theme="light"]) .qw-btn:not(.primary):not(.danger):not(.success),
+html[data-panel-theme]:not([data-panel-theme="light"]) .qw-tab:not(.active),
+html[data-panel-theme]:not([data-panel-theme="light"]) .qw-pill:not(.green):not(.orange):not(.red),
+html[data-panel-theme]:not([data-panel-theme="light"]) .qw-input,
+html[data-panel-theme]:not([data-panel-theme="light"]) .qw-textarea,
+html[data-panel-theme]:not([data-panel-theme="light"]) .qw-select,
+html[data-panel-theme]:not([data-panel-theme="light"]) .qw-step,
+html[data-panel-theme]:not([data-panel-theme="light"]) .qw-mini-btn:not(.danger),
+html[data-panel-theme]:not([data-panel-theme="light"]) .qw-popover-item,
+html[data-panel-theme]:not([data-panel-theme="light"]) .qw-block-popover-search,
+html[data-panel-theme]:not([data-panel-theme="light"]) .qw-sync-btn,
+html[data-panel-theme]:not([data-panel-theme="light"]) .qw-attention-card{
+  background:var(--card)!important;color:var(--text)!important;border-color:var(--line)!important;
+}
+html[data-panel-theme]:not([data-panel-theme="light"]) .qw-field label,
+html[data-panel-theme]:not([data-panel-theme="light"]) .qw-check,
+html[data-panel-theme]:not([data-panel-theme="light"]) .qw-next-action,
+html[data-panel-theme]:not([data-panel-theme="light"]) .qw-next-action strong{color:var(--text)!important}
+html[data-panel-theme]:not([data-panel-theme="light"]) .qw-table td{border-color:var(--line)!important}
+
+html[data-panel-theme]:not([data-panel-theme="light"]) .qa-wrap{
+  --qa-bg:var(--bg);--qa-card:var(--card);--qa-text:var(--text);--qa-muted:var(--muted);--qa-line:var(--line);--qa-shadow:0 10px 30px var(--shadow);
+}
+html[data-panel-theme]:not([data-panel-theme="light"]) .qa-pill,
+html[data-panel-theme]:not([data-panel-theme="light"]) .qa-filter:not(.active),
+html[data-panel-theme]:not([data-panel-theme="light"]) .qa-empty{background:var(--card)!important;color:var(--text)!important;border-color:var(--line)!important}
+html[data-panel-theme]:not([data-panel-theme="light"]) .qa-pill strong{color:var(--text)!important}
+html[data-panel-theme]:not([data-panel-theme="light"]) .qa-table td,
+html[data-panel-theme]:not([data-panel-theme="light"]) .qa-event{border-color:var(--line)!important}
+html[data-panel-theme]:not([data-panel-theme="light"]) .qa-live{background:linear-gradient(180deg,color-mix(in srgb,#d9a441 10%,var(--card)),var(--card))!important}
+
+html[data-panel-theme]:not([data-panel-theme="light"]) .customer-settings-hero,
+html[data-panel-theme]:not([data-panel-theme="light"]) .customer-settings-card,
+html[data-panel-theme]:not([data-panel-theme="light"]) .customer-settings-note{background:var(--card)!important;color:var(--text)!important;border-color:var(--line)!important}
+html[data-panel-theme]:not([data-panel-theme="light"]) .customer-settings-table th,
+html[data-panel-theme]:not([data-panel-theme="light"]) .customer-settings-table td{color:var(--text)!important;border-color:var(--line)!important}
+html[data-panel-theme]:not([data-panel-theme="light"]) .customer-label-input,
+html[data-panel-theme]:not([data-panel-theme="light"]) .customer-order-input,
+html[data-panel-theme]:not([data-panel-theme="light"]) .customer-move{background:var(--surface-soft)!important;color:var(--text)!important;border-color:var(--line)!important}
+
+/* Quality ERP v0.28.2 — correções finais Agenda / shell em temas escuros */
+html[data-panel-theme]:not([data-panel-theme="light"]) .agenda-create-card,
+html[data-panel-theme]:not([data-panel-theme="light"]) .agenda-group,
+html[data-panel-theme]:not([data-panel-theme="light"]) .agenda-completed,
+html[data-panel-theme]:not([data-panel-theme="light"]) .agenda-settings-panel,
+html[data-panel-theme]:not([data-panel-theme="light"]) .agenda-setting-card,
+html[data-panel-theme]:not([data-panel-theme="light"]) .agenda-tab-panels,
+html[data-panel-theme]:not([data-panel-theme="light"]) .agenda-owner-column,
+html[data-panel-theme]:not([data-panel-theme="light"]) .agenda-summary{
+  background:var(--card)!important;color:var(--text)!important;border-color:var(--line)!important;
+}
+html[data-panel-theme]:not([data-panel-theme="light"]) .agenda-field input,
+html[data-panel-theme]:not([data-panel-theme="light"]) .agenda-field select,
+html[data-panel-theme]:not([data-panel-theme="light"]) .agenda-field textarea,
+html[data-panel-theme]:not([data-panel-theme="light"]) .agenda-date-control,
+html[data-panel-theme]:not([data-panel-theme="light"]) .agenda-settings-toggle,
+html[data-panel-theme]:not([data-panel-theme="light"]) .agenda-more button{
+  background:var(--surface-soft)!important;color:var(--text)!important;border-color:var(--line)!important;color-scheme:dark;
+}
+html[data-panel-theme]:not([data-panel-theme="light"]) .agenda-quick-form,
+html[data-panel-theme]:not([data-panel-theme="light"]) .agenda-owner-chip{
+  background:var(--card)!important;color:var(--text)!important;border-color:var(--line)!important;
+}
+html[data-panel-theme]:not([data-panel-theme="light"]) .agenda-owner-chip{background:var(--surface-soft)!important}
+html[data-panel-theme]:not([data-panel-theme="light"]) .agenda-item{color:var(--text)!important;border-color:var(--line)!important}
+html[data-panel-theme]:not([data-panel-theme="light"]) .agenda-item-main small,
+html[data-panel-theme]:not([data-panel-theme="light"]) .agenda-field label,
+html[data-panel-theme]:not([data-panel-theme="light"]) .agenda-settings-panel small{color:var(--muted)!important}

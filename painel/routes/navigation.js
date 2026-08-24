@@ -6,7 +6,7 @@ const AREAS = {
   crm: {
     title: 'CRM e Relacionamento', icon: '💬', description: 'Atendimento, histórico, WhatsApp, lembretes e automações.',
     items: [
-      { name: 'WhatsApp e Inbox', href: '/automacao-whatsapp', icon: '💬', description: 'Conversas, contatos, notas, lembretes e atendimento.' },
+      { name: 'Inbox', href: '/automacao-whatsapp?tab=inbox', icon: '💬', description: 'Conversas, contatos, notas, lembretes e atendimento.', descriptionAsInfo: true },
       { name: 'Automações', href: '/automacao-whatsapp', icon: '⚡', description: 'Blocos, mídias, fluxos e ações futuras.' },
       { name: 'Analytics Comercial', href: '/analytics', icon: '📊', description: 'Acompanhe interações, origem e oportunidades.' }
     ]
@@ -15,7 +15,7 @@ const AREAS = {
     title: 'Site', icon: '🌐', description: 'Conteúdo público, catálogo, aparência, SEO e publicação.',
     items: [
       { name: 'Produtos do Site', href: '/produtos', icon: '📦', description: 'Catálogo público atual e futura sincronização com o ERP.' },
-      { name: 'Categorias', href: '/categorias', icon: '🗂️', description: 'Organização das categorias públicas.' },
+      { name: 'Categorias da Loja Virtual', href: '/categorias', icon: '🗂️', description: 'SEO, URLs, banners, ícones e navegação das categorias públicas.' },
       { name: 'Banners', href: '/banners', icon: '🖼️', description: 'Slides e campanhas visuais.' },
       { name: 'SEO', href: '/seo', icon: '🔎', description: 'Metadados, sitemap e estrutura para buscadores.' },
       { name: 'Páginas', href: '/paginas', icon: '📄', description: 'Conteúdo das páginas públicas.' },
@@ -45,7 +45,11 @@ const AREAS = {
   }
 };
 
-router.get('/:area(crm|site|marketing|ferramentas)', (req, res) => {
+router.get('/crm', (req, res) => {
+  res.redirect('/automacao-whatsapp');
+});
+
+router.get('/:area(site|marketing|ferramentas)', (req, res) => {
   res.render('area_hub', { flash: null, area: AREAS[req.params.area] });
 });
 

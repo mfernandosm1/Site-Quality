@@ -1,10 +1,12 @@
 <% layout('layout') -%>
+<% const isNewWorkspace = workspaceNew === true; const requestedWorkspaceType = typeof workspaceType === 'string' ? workspaceType : 'product'; const defaultServiceCategory = (erpCategorias || []).find(c => c.active !== false && c.type === 'service'); %>
+<% const erpCategoryById = new Map((erpCategorias || []).map(c => [String(c.id), c])); const lvCategoryBySlug = new Map((categorias || []).map(c => [String(c.slug || c.id || ''), c])); const lvSubcategoryByKey = new Map(); (subcategorias || []).forEach(sc => { [sc.id, sc.slug, sc.name].filter(Boolean).forEach(key => lvSubcategoryByKey.set(String(key), sc)); }); %>
 <div class="card">
-  <h3>📦 Cadastro Mestre de Produtos</h3>
-  <div class="master-product-hero">
-    <div><strong>ERP · Produtos</strong><span>Cadastro mestre separado por ERP, Loja Virtual e Comercial, preparado para omnichannel.</span></div>
-    <a class="btn" href="/erp">← Voltar ao ERP</a>
+  <% if (!isNewWorkspace) { %>
+  <div id="product-master-intro">
+    <h3>📦 Cadastro Mestre de Produtos</h3>
   </div>
+  <% } %>
 
 
   <style>
@@ -17,8 +19,18 @@
   .quality-inventory-config .inventory-check{flex-direction:row;align-items:center;border:1px solid #e5e7eb;background:#fff;border-radius:10px;padding:10px}
   .quality-inventory-config .inventory-check input{width:auto!important;min-height:auto!important}
   .quality-inventory-help{display:block;margin-top:8px;color:#64748b;font-size:11px}
+  html[data-panel-theme="oled"] .quality-inventory-config{background:#090909;border-color:#2b2b2b;color:#f5f5f5}
+  html[data-panel-theme="oled"] .quality-inventory-config>strong{color:#f5f5f5}
+  html[data-panel-theme="oled"] .quality-inventory-config label{color:#d4d4d4}
+  html[data-panel-theme="oled"] .quality-inventory-config .inventory-check{background:#101010;border-color:#303030;color:#e5e5e5}
+  html[data-panel-theme="oled"] .quality-inventory-config input,html[data-panel-theme="oled"] .quality-inventory-config select{background:#101010!important;color:#f5f5f5!important;border-color:#343434!important}
+  html[data-panel-theme="oled"] .quality-inventory-config input::placeholder{color:#737373}
+  html[data-panel-theme="oled"] .quality-inventory-help{color:#8f8f8f}
   @media(max-width:800px){.quality-inventory-config-grid{grid-template-columns:1fr}}
 
+
+  .quality-list-erp-category{display:flex;flex-direction:column;gap:2px;padding:7px 9px;border:1px solid #dbeafe;background:#f8fbff;border-radius:9px}.quality-list-erp-category small{font-size:9px;text-transform:uppercase;color:#64748b;font-weight:800}.quality-list-erp-category strong{font-size:11px;color:#0f172a}html[data-panel-theme="oled"] .quality-list-erp-category{background:#090909;border-color:#2c2c2c}html[data-panel-theme="oled"] .quality-list-erp-category strong{color:#f5f5f5}
+  .quality-erp-stock-card{display:flex;flex-direction:column;gap:8px;padding:9px;border:1px solid #dbeafe;background:#f8fbff;border-radius:11px}.quality-erp-stock-card .quality-list-erp-category{padding:0;border:0;background:transparent}.quality-erp-type{font-size:10px;color:#64748b;font-weight:700}.quality-stock-compact{display:flex;align-items:center;justify-content:space-between;gap:7px;padding-top:7px;border-top:1px solid #dbeafe}.quality-stock-compact input{width:72px!important;min-height:32px!important;padding:6px 8px!important}.quality-lv-category-card{display:flex;flex-direction:column;gap:3px;padding:8px 9px;border:1px solid #d1fae5;background:#f0fdf4;border-radius:10px;text-align:left;margin-bottom:7px}.quality-lv-category-card small{font-size:9px;text-transform:uppercase;letter-spacing:.03em;color:#047857;font-weight:900}.quality-lv-category-card strong{font-size:11px;color:#064e3b}.quality-lv-category-card span{font-size:10px;color:#4b5563}.quality-lv-inactive-badge{display:inline-flex;align-items:center;justify-content:center;gap:5px;padding:7px 9px;border:1px dashed #cbd5e1;background:#f8fafc;color:#64748b;border-radius:9px;font-size:10px;font-weight:800;margin-bottom:7px}.quality-lv-controls-disabled{opacity:.58}.quality-lv-category-card{display:flex}.quality-lv-inactive-badge{display:none}.quality-lv-controls-disabled .quality-lv-category-card{display:none}.quality-lv-controls-disabled .quality-lv-inactive-badge{display:inline-flex}.quality-lv-controls-disabled .quality-compact-field:not(.quality-lv-status-field){display:none}.quality-lv-controls-disabled .quality-channel-help{display:none}html[data-panel-theme="oled"] .quality-erp-stock-card{background:#090909;border-color:#292929}html[data-panel-theme="oled"] .quality-stock-compact{border-color:#292929}html[data-panel-theme="oled"] .quality-lv-category-card{background:#07140d;border-color:#14532d}html[data-panel-theme="oled"] .quality-lv-category-card small{color:#6ee7b7}html[data-panel-theme="oled"] .quality-lv-category-card strong{color:#d1fae5}html[data-panel-theme="oled"] .quality-lv-category-card span{color:#9ca3af}html[data-panel-theme="oled"] .quality-lv-inactive-badge{background:#090909;border-color:#343434;color:#a3a3a3}
   /* Layout moderno e compacto da página Produtos */
   .quality-panel-header{
     display:flex;
@@ -119,8 +131,12 @@
   .quality-table-toolbar{
     display:flex;
     justify-content:flex-end;
+    align-items:center;
+    gap:10px;
+    flex-wrap:wrap;
     margin:12px 0;
   }
+  .quality-table-toolbar .quality-channel-help{max-width:270px;text-align:left}
 
   .quality-table-wrap{
     width:100%;
@@ -133,6 +149,32 @@
     min-width:0 !important;
     table-layout:fixed !important;
     border-collapse:collapse;
+  }
+  .quality-products-summary-table th,.quality-products-summary-table td{vertical-align:middle;padding:9px 8px}
+  .quality-products-summary-table th:nth-child(1),.quality-products-summary-table td:nth-child(1){width:38px;text-align:center}
+  .quality-products-summary-table th:nth-child(2),.quality-products-summary-table td:nth-child(2){width:46px;text-align:center}
+  .quality-products-summary-table th:nth-child(5),.quality-products-summary-table td:nth-child(5),
+  .quality-products-summary-table th:nth-child(6),.quality-products-summary-table td:nth-child(6){width:118px;text-align:center}
+  .quality-products-summary-table th:nth-child(7),.quality-products-summary-table td:nth-child(7){width:150px}
+  .quality-products-summary-table th:nth-child(8),.quality-products-summary-table td:nth-child(8){width:132px;text-align:center}
+  .quality-products-summary-table .btn{margin:2px 0}
+  .quality-product-cell,.quality-row-actions{min-width:0}
+  .quality-product-cell input,.quality-product-cell select{max-width:100%}
+  html[data-panel-theme="light"] .quality-table-wrap{scrollbar-color:#b8c2d1 #eef2f7}
+  html[data-panel-theme="oled"] .quality-table-wrap{scrollbar-color:#404040 #111}
+  @media(max-width:1100px){
+    .quality-products-summary-table{min-width:980px !important;table-layout:auto !important}
+    .quality-table-wrap{border-radius:12px}
+    .quality-products-summary-table th,.quality-products-summary-table td{padding:8px 7px}
+    .quality-products-summary-table th:nth-child(3),.quality-products-summary-table td:nth-child(3){min-width:250px}
+    .quality-products-summary-table th:nth-child(4),.quality-products-summary-table td:nth-child(4){min-width:190px}
+  }
+  @media(max-width:700px){
+    .quality-bulk-head,.quality-bulk-footer{align-items:stretch}
+    .quality-bulk-selection-actions{width:100%}
+    .quality-bulk-selection-actions .btn{flex:1 1 140px}
+    .quality-filter-counter{min-height:38px}
+    .quality-table-wrap{margin-left:-4px;margin-right:-4px;width:calc(100% + 8px)}
   }
 
   .quality-table-wrap .table th,
@@ -577,10 +619,13 @@
   .variation-labels-grid input{width:100% !important;min-height:36px !important;}
   .variation-help{display:block;margin-top:5px;color:#6b7280;font-size:11px;}
   .quality-combo-card{grid-column:1 / -1;background:#fff;border:1px solid #dbeafe !important;}
-  .variation-combo-row{display:grid;grid-template-columns:1fr 1fr 1fr 1fr 1.2fr .7fr auto;gap:6px;align-items:end;}
+  .variation-combo-row{display:grid;grid-template-columns:1fr 1fr 1fr 1fr 1.15fr .65fr .8fr auto;gap:6px;align-items:end;}
   .quality-combo-list{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px;}
+  .quality-variation-inline-price{display:inline-flex;align-items:center;gap:5px;margin-left:8px;padding-left:8px;border-left:1px solid #d1d5db}.quality-variation-inline-price small{font-size:10px;opacity:.72}.quality-variation-inline-price input{width:92px;padding:5px 7px;border:1px solid #cbd5e1;border-radius:7px;background:transparent;color:inherit}
   .quality-combo-pill{display:inline-flex;align-items:center;gap:6px;border:1px solid #bfdbfe;background:#eff6ff;border-radius:999px;padding:5px 8px;font-size:11px;font-weight:800;}
   .quality-combo-pill button{border:none;background:transparent;color:#991b1b;cursor:pointer;font-weight:900;}
+  .quality-combo-price-inline{width:92px!important;min-height:28px!important;height:28px!important;padding:3px 7px!important;border-radius:8px!important;font-size:11px!important;background:#fff!important;}
+  .quality-combo-price-label{font-size:10px;color:#64748b;font-weight:700;}
 
   @media (max-width:1000px){.quality-variations-grid,.variation-modal-grid{grid-template-columns:1fr;}.variation-form-row,.variation-simple-row,.variation-combo-row{grid-template-columns:1fr;}}
 
@@ -654,6 +699,15 @@
   .quality-stock-badge{display:inline-flex;align-items:center;gap:5px;border-radius:999px;padding:5px 9px;font-size:11px;font-weight:900;border:1px solid #bbf7d0;background:#f0fdf4;color:#15803d;white-space:nowrap;}
   .quality-stock-badge.zero{border-color:#fecaca;background:#fef2f2;color:#b91c1c;}
   .quality-stock-badge.empty{border-color:#e5e7eb;background:#f8fafc;color:#64748b;}
+  .quality-service-badge{display:inline-flex;align-items:center;gap:5px;border-radius:999px;padding:5px 9px;font-size:11px;font-weight:900;border:1px solid #bfdbfe;background:#eff6ff;color:#1d4ed8;white-space:nowrap;}
+  .quality-service-note{display:none;padding:14px;border:1px dashed #93c5fd;border-radius:10px;background:#eff6ff;color:#1e40af;font-weight:800;}
+  .quality-inventory-config.is-service .quality-inventory-config-grid,.quality-inventory-config.is-service .quality-inventory-help{display:none!important;}
+  .quality-inventory-config.is-service .quality-service-note{display:block;}
+  .quality-stock-variation-box.is-service{display:none!important;}
+  .product-row[data-erp-category-type="service"] .quality-stock-label,.product-row[data-erp-category-type="service"] .quality-stock-line input{display:none!important;}
+  html[data-panel-theme="oled"] .quality-service-badge,html[data-panel-theme="oled"] .quality-service-note{background:#081225;border-color:#1e3a5f;color:#93c5fd;}
+  .quality-lv-disabled-note{display:none;grid-column:1/-1;padding:12px;border:1px dashed #cbd5e1;border-radius:10px;background:#f8fafc;color:#64748b;font-size:12px;}
+  html[data-panel-theme="oled"] .quality-lv-disabled-note{background:#0a0a0a;border-color:#333;color:#aaa;}
 
   .quality-status-stack{display:grid;grid-template-columns:1fr;gap:7px;max-width:150px;}
   .quality-compact-field{display:grid;grid-template-columns:62px 1fr;align-items:center;gap:7px;margin:0;}
@@ -801,14 +855,26 @@
 
   /* v0.10.2 - Workspace de Produto */
   .product-workspace-toolbar{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin:14px 0 16px;padding:12px 14px;border:1px solid #dbe3ef;background:#fff;border-radius:14px;box-shadow:0 5px 16px rgba(15,23,42,.04)}
-  .product-workspace-toolbar-left{display:flex;gap:8px;flex-wrap:wrap}.product-workspace-toolbar .btn{min-height:38px;border-radius:10px;font-weight:800}.product-workspace-toolbar .btn.active{background:#2563eb!important;color:#fff!important;border-color:#1d4ed8!important}
+  .product-workspace-toolbar-left,.product-workspace-toolbar-right{display:flex;gap:8px;flex-wrap:wrap;align-items:center}.product-workspace-toolbar .btn{min-height:38px;border-radius:10px;font-weight:800}.product-workspace-toolbar .btn.active{background:#2563eb!important;color:#fff!important;border-color:#1d4ed8!important}
+  .quality-product-thumb.quick-main-image{position:relative;cursor:pointer}.quality-product-thumb.quick-main-image:after{content:"📷";position:absolute;right:3px;bottom:3px;width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:rgba(15,23,42,.82);color:#fff;font-size:11px;opacity:0;transform:translateY(2px);transition:.15s}.quality-product-thumb.quick-main-image:hover:after{opacity:1;transform:none}.quality-product-thumb.quick-main-image.is-uploading{opacity:.55;pointer-events:none}
+  .product-kind-dialog{position:fixed;inset:0;z-index:12000;display:none;align-items:center;justify-content:center;padding:18px;background:rgba(15,23,42,.55);backdrop-filter:blur(2px)}.product-kind-dialog.open{display:flex}.product-kind-card{width:min(520px,100%);border:1px solid #dbe3ef;border-radius:18px;background:#fff;padding:20px;box-shadow:0 24px 80px rgba(15,23,42,.25)}.product-kind-card h3{margin:0 0 6px}.product-kind-card p{margin:0 0 16px;color:#64748b}.product-kind-options{display:grid;grid-template-columns:1fr 1fr;gap:10px}.product-kind-option{padding:16px;text-align:left;border:1px solid #dbe3ef;border-radius:14px;background:#f8fafc;cursor:pointer;font-weight:900}.product-kind-option small{display:block;margin-top:4px;color:#64748b;font-weight:600}.product-kind-cancel{margin-top:12px;width:100%}html[data-panel-theme="oled"] .product-kind-card,html[data-panel-theme="black-oled"] .product-kind-card{background:#0b0d10;border-color:#30363d;color:#fff}html[data-panel-theme="oled"] .product-kind-option,html[data-panel-theme="black-oled"] .product-kind-option{background:#101317;border-color:#30363d;color:#fff}@media(max-width:600px){.product-kind-options{grid-template-columns:1fr}}
   .product-workspace-title strong{display:block;font-size:14px;color:#0f172a}.product-workspace-title span{display:block;margin-top:2px;font-size:11px;color:#64748b}
   .product-workspace-section{display:none !important}.product-workspace-section.active{display:block !important}
   .new-product-workspace{border:1px solid #dbeafe;background:#fff;border-radius:16px;padding:14px;margin-bottom:18px}
   .new-product-heading{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:12px}.new-product-heading h2{margin:0;font-size:18px}.new-product-heading p{margin:3px 0 0;color:#64748b;font-size:12px}
   .product-create-tabs{display:flex;gap:7px;flex-wrap:wrap;border-bottom:1px solid #e5e7eb;margin:2px 0 14px;padding-bottom:9px}.product-create-tab{border:1px solid #dbe3ef;background:#f8fafc;color:#334155;border-radius:999px;padding:8px 12px;font-weight:800;font-size:12px;cursor:pointer}.product-create-tab.active{background:#0f172a;color:#fff;border-color:#0f172a}
-  .product-create-panel{display:none}.product-create-panel.active{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:10px}.product-create-panel>*{min-width:0}.product-create-panel .field-name,.product-create-panel .field-slug,.product-create-panel .field-image,.product-create-panel .field-category{grid-column:span 2}.product-create-panel .quality-compact-gallery,.product-create-panel .quality-variations-box,.product-create-panel .quality-tags-field,.product-create-panel .add-description-editor-wrap,.product-create-panel .commercial-policy-box{grid-column:1/-1}
-  .product-create-footer{display:flex;justify-content:flex-end;gap:8px;margin-top:14px;padding-top:12px;border-top:1px solid #e5e7eb}.product-create-footer .btn{min-width:150px}
+  .product-create-panel{display:none;width:100%;min-width:0}.product-create-panel.active{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:10px}.product-create-panel>*{min-width:0}.product-create-panel .field-name,.product-create-panel .field-slug,.product-create-panel .field-image,.product-create-panel .field-category{grid-column:span 2}.product-create-panel .quality-compact-gallery,.product-create-panel .quality-variations-box,.product-create-panel .quality-tags-field,.product-create-panel .add-description-editor-wrap,.product-create-panel .commercial-policy-box{grid-column:1/-1}
+  /* v0.12.3.14 - bootstrap deterministico das abas do cadastro.
+     Antes do JS reorganizar o DOM, somente campos ERP (sem data-create-section) podem aparecer.
+     Nao depende de :has(), timeout, DOMContentLoaded ou velocidade de outros scripts. */
+  #add-product-form:not(.create-tabs-ready){visibility:hidden}
+  #add-product-form:not(.create-tabs-ready) > [data-create-section="commercial"],
+  #add-product-form:not(.create-tabs-ready) > [data-create-section="stock"],
+  #add-product-form:not(.create-tabs-ready) > [data-create-section="site"],
+  #add-product-form:not(.create-tabs-ready) > .quality-variations-box{display:none!important}
+  #add-product-form.create-tabs-ready{display:block!important;width:100%}
+  #add-product-form.create-tabs-ready > .product-create-panel{width:100%}
+  .product-create-footer{display:flex;width:100%;justify-content:flex-end;gap:8px;margin-top:14px;padding-top:12px;border-top:1px solid #e5e7eb}.product-create-footer .btn{min-width:150px}
   .workspace-list-heading{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;margin:8px 0 12px}.workspace-list-heading h2{margin:0;font-size:18px}.workspace-list-heading p{margin:3px 0 0;color:#64748b;font-size:12px}
   .commercial-policy-box.workspace-commercial{background:linear-gradient(135deg,#f8fbff,#fff)}
   @media(max-width:900px){.product-create-panel.active{grid-template-columns:1fr}.product-create-panel .field-name,.product-create-panel .field-slug,.product-create-panel .field-image,.product-create-panel .field-category{grid-column:1/-1}.product-workspace-title{width:100%}}
@@ -936,23 +1002,37 @@
     border-color:#303030 !important;
   }
 
-  .quality-master-area{grid-column:1/-1;border:1px solid #2b2b2b;background:#101010;border-radius:14px;padding:14px}.quality-master-area-title{display:flex;justify-content:space-between;gap:10px;align-items:center;margin-bottom:12px}.quality-master-area-title small{opacity:.7}.quality-master-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}.quality-master-grid label{display:flex;flex-direction:column;gap:5px;font-size:11px;font-weight:800}.quality-master-grid .inventory-check{flex-direction:row;align-items:center}.quality-master-grid .inventory-check input{width:auto!important}@media(max-width:900px){.quality-master-grid{grid-template-columns:1fr 1fr}}@media(max-width:620px){.quality-master-grid{grid-template-columns:1fr}}
+  .quality-master-area{grid-column:1/-1;border:1px solid #2b2b2b;background:#101010;border-radius:14px;padding:14px}.quality-master-area-title{display:flex;justify-content:space-between;gap:10px;align-items:center;margin-bottom:12px}.quality-master-area-title small{opacity:.7}.quality-master-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}.quality-master-grid label{display:flex;flex-direction:column;gap:5px;font-size:11px;font-weight:800}.quality-master-grid .inventory-check{flex-direction:row;align-items:center}.quality-master-grid .inventory-check input{width:auto!important}.quality-master-extra{margin-top:12px;border-top:1px solid rgba(148,163,184,.22);padding-top:10px}.quality-master-extra summary{cursor:pointer;font-size:12px;font-weight:900;list-style:none;padding:6px 0}.quality-master-extra summary::-webkit-details-marker{display:none}.quality-master-extra[open] summary{margin-bottom:10px}@media(max-width:900px){.quality-master-grid{grid-template-columns:1fr 1fr}}@media(max-width:620px){.quality-master-grid{grid-template-columns:1fr}}
 html[data-panel-theme="light"] .quality-master-area,html[data-panel-theme="light"] .quality-inventory-config,html[data-panel-theme="light"] .commercial-policy-box,html[data-panel-theme="light"] .quality-control-box,html[data-panel-theme="light"] .quality-bulk-action,html[data-panel-theme="light"] .quality-gallery-modal,html[data-panel-theme="light"] .quality-edit-modal{background:#fff;color:#111827;border-color:#d7dde5}html[data-panel-theme="light"] .quality-master-area input,html[data-panel-theme="light"] .quality-master-area select,html[data-panel-theme="light"] .quality-edit-modal input,html[data-panel-theme="light"] .quality-edit-modal select,html[data-panel-theme="light"] .quality-edit-modal textarea{background:#fff;color:#111827;border-color:#cbd5e1}
 
   .quality-channel-status{min-width:118px}
   .quality-channel-help{display:block;font-size:11px;line-height:1.35;color:var(--muted,#6b7280);max-width:145px}
   .quality-products-summary-table th:nth-child(5),.quality-products-summary-table th:nth-child(6){text-align:center}
   body.theme-oled .quality-channel-help{color:#9ca3af}
+
+  .quality-filter-status-row{display:grid;grid-template-columns:repeat(2,minmax(160px,1fr)) auto;gap:10px;margin-top:10px;align-items:end}
+  .quality-filter-field label{display:block;font-size:10px;font-weight:900;text-transform:uppercase;letter-spacing:.05em;margin:0 0 5px;color:#64748b}
+  .quality-filter-counter{min-height:40px;display:flex;align-items:center;justify-content:center;padding:0 14px;border-radius:12px;border:1px solid #dbe3ef;background:#f8fafc;color:#0f172a;font-weight:900;white-space:nowrap}
+  html[data-panel-theme="oled"] .quality-filter-counter{background:#181818!important;color:#f5f5f5!important;border-color:#303030!important}
+  html[data-panel-theme="oled"] .quality-filter-field label{color:#a3a3a3!important}
+  .product-row.erp-inactive td{opacity:.78}
+  .product-row.erp-inactive td:first-child{box-shadow:inset 4px 0 0 #ef4444}
+  .product-row.lv-inactive:not(.erp-inactive) td:first-child{box-shadow:inset 4px 0 0 #f59e0b}
+  .product-row.erp-inactive .prod-name-input,.product-row.lv-inactive .prod-name-input{font-weight:900}
+  @media(max-width:900px){.quality-filter-status-row{grid-template-columns:1fr}.quality-filter-counter{justify-content:flex-start}}
+
+  .quality-bulk-toggle{width:100%;display:flex;align-items:center;justify-content:space-between;border:0;background:transparent;padding:0;font:inherit;font-weight:800;color:inherit;cursor:pointer;text-align:left}
+  .quality-bulk-toggle-icon{display:inline-flex;min-width:24px;justify-content:center}
+  .quality-bulk-center:not(.is-expanded) .quality-bulk-collapsible{display:none!important}
+  .quality-bulk-center:not(.is-expanded){gap:0}
+  [data-create-lv-dependent][hidden]{display:none!important}
+
 </style>
 
 
-  <% if (flash) { %>
-    <div id="flash-message" style="margin: 10px 0 18px 0; padding: 12px 14px; border-radius: 6px; background: #e8f7ee; border: 1px solid #b8e6c8; color: #087a31; font-weight: 600;">
-      <%= flash %>
-    </div>
-  <% } else { %>
-    <div id="flash-message" style="display:none; margin: 10px 0 18px 0; padding: 12px 14px; border-radius: 6px; background: #e8f7ee; border: 1px solid #b8e6c8; color: #087a31; font-weight: 600;"></div>
-  <% } %>
+  <!-- Mensagens AJAX da própria tela. O flash do redirect é exibido uma única
+       vez pelo layout global, evitando os dois avisos simultâneos. -->
+  <div id="flash-message" style="display:none; margin: 10px 0 18px 0; padding: 12px 14px; border-radius: 6px; background: #e8f7ee; border: 1px solid #b8e6c8; color: #087a31; font-weight: 600;"></div>
 
   <%
     const totalProdutos = (items || []).length;
@@ -962,7 +1042,8 @@ html[data-panel-theme="light"] .quality-master-area,html[data-panel-theme="light
     const variacaoProdutos = (items || []).filter(p => p.variations && p.variations.enabled).length;
     const estoqueTotalProdutos = (items || []).reduce((sum, p) => sum + (Number(p.stock) || 0), 0);
   %>
-  <div class="quality-indicators-grid">
+  <% if (!isNewWorkspace) { %>
+  <div class="quality-indicators-grid" id="product-summary-indicators">
     <div class="quality-indicator-card"><span>📦 Produtos</span><strong><%= totalProdutos %></strong></div>
     <div class="quality-indicator-card"><span>🟢 Ativos</span><strong><%= ativosProdutos %></strong></div>
     <div class="quality-indicator-card"><span>🔴 Inativos</span><strong><%= inativosProdutos %></strong></div>
@@ -970,29 +1051,43 @@ html[data-panel-theme="light"] .quality-master-area,html[data-panel-theme="light
     <div class="quality-indicator-card"><span>🎨 Variações</span><strong><%= variacaoProdutos %></strong></div>
     <div class="quality-indicator-card"><span>📦 Estoque total</span><strong id="quality-stock-total-indicator"><%= estoqueTotalProdutos %></strong></div>
   </div>
+  <% } %>
 
   <div class="product-workspace-toolbar">
-    <div class="product-workspace-title">
-      <strong>Workspace de Produtos</strong>
-      <span>Consulte a base ou abra um cadastro sem misturar as duas tarefas.</span>
-    </div>
     <div class="product-workspace-toolbar-left">
-      <button class="btn active" type="button" data-product-workspace="list">📋 Produtos cadastrados</button>
-      <button class="btn primary" type="button" data-product-workspace="new">＋ Novo produto</button>
+      <a class="btn <%= isNewWorkspace ? '' : 'active' %>" href="/produtos">📋 Produtos cadastrados</a>
+      <a class="btn primary <%= isNewWorkspace ? 'active' : '' %> js-new-product-choice" href="/produtos?workspace=new">＋ Novo produto</a>
+    </div>
+    <div class="product-workspace-toolbar-right">
+      <a class="btn" href="/produtos/importar-wm10">⇩ Migração WM10</a>
+      <a class="btn" href="/erp">← Voltar ao ERP</a>
     </div>
   </div>
 
-  <section class="product-workspace-section new-product-workspace" id="product-workspace-new">
+  <div class="product-kind-dialog" id="product-kind-dialog" aria-hidden="true">
+    <div class="product-kind-card" role="dialog" aria-modal="true" aria-labelledby="product-kind-title">
+      <h3 id="product-kind-title">O que você vai cadastrar?</h3>
+      <p>Escolha o tipo para o Quality preparar o cadastro correto.</p>
+      <div class="product-kind-options">
+        <button type="button" class="product-kind-option" data-product-kind="product">📦 Produto<small>Mercadoria, peça, acessório ou item com estoque.</small></button>
+        <button type="button" class="product-kind-option" data-product-kind="service">🧰 Serviço<small>Abre o cadastro já direcionado para uma categoria de Serviço.</small></button>
+      </div>
+      <button type="button" class="btn product-kind-cancel" id="product-kind-cancel">Cancelar</button>
+    </div>
+  </div>
+  <input type="file" id="quick-main-image-file" accept="image/*" hidden>
+
+  <section class="product-workspace-section new-product-workspace <%= isNewWorkspace ? 'active' : '' %>" id="product-workspace-new">
     <div class="new-product-heading">
-      <div><h2>＋ Novo produto</h2><p>Preencha por etapas. Os campos continuam salvando no cadastro atual com segurança.</p></div>
-      <button class="btn" type="button" data-product-workspace="list">← Voltar à lista</button>
+      <div><h2><%= requestedWorkspaceType === 'service' ? '＋ Novo serviço' : '＋ Novo produto' %></h2><p>Preencha por etapas. Os campos continuam salvando no cadastro atual com segurança.</p></div>
+      <a class="btn" href="/produtos">← Voltar à lista</a>
     </div>
     <div class="product-create-tabs" id="product-create-tabs">
       <button type="button" class="product-create-tab active" data-create-tab="general">🏢 ERP</button>
       <button type="button" class="product-create-tab" data-create-tab="commercial">💰 Comercial</button>
       <button type="button" class="product-create-tab" data-create-tab="stock">📚 Estoque</button>
       <button type="button" class="product-create-tab" data-create-tab="site">🌐 Loja Virtual</button>
-      <button type="button" class="product-create-tab" data-create-tab="variations">🎛️ Variações</button>
+      <button type="button" class="product-create-tab" data-create-tab="variations" id="create-variations-tab" <%= requestedWorkspaceType === 'service' ? 'hidden' : '' %>>🎛️ Variações</button>
     </div>
   <div class="quality-ai-fill-box" id="quality-ai-fill-box">
     <div class="quality-ai-fill-title">
@@ -1015,64 +1110,72 @@ html[data-panel-theme="light"] .quality-master-area,html[data-panel-theme="light
       <input type="text" name="erpName" id="add-product-name" placeholder="Ex.: IPHONE 15 128GB PRETO">
     </div>
 
-    <div class="field-slug" data-create-section="site">
+    <div class="field-slug" data-create-section="site" data-create-lv-dependent>
       <label>Nome da Loja Virtual (Nome LV)</label>
       <input type="text" name="lvName" id="add-product-lv-name" placeholder="Ex.: Apple iPhone 15 128GB">
       <small class="slug-help">Pode ser mais comercial que o nome interno usado no ERP.</small>
     </div>
 
-    <div class="field-slug" data-create-section="site">
+    <div class="field-slug" data-create-section="site" data-create-lv-dependent>
       <label>Slug / URL amigável</label>
       <input type="text" name="slug" id="add-product-slug" placeholder="iphone-15-128gb">
       <small class="slug-help">Preenche automático pelo nome e pode ser ajustado para SEO.</small>
     </div>
 
-    <div class="field-small" data-create-section="commercial">
-      <label>Preço ERP</label>
-      <input type="number" name="erpPrice" step="0.01" min="0" placeholder="opcional">
-    </div>
-
-    <div class="field-small" data-create-section="site">
+    <div class="field-small" data-create-section="site" data-create-lv-dependent>
       <label>Preço Loja Virtual</label>
       <input type="number" name="lvPrice" step="0.01" min="0" placeholder="opcional">
     </div>
 
-    <div class="field-small">
+    <div class="field-small" data-create-section="stock">
       <label>Estoque</label>
       <input type="number" name="stock" step="1" min="0" placeholder="opcional">
     </div>
 
     <div class="quality-master-area" data-create-section="general">
-      <div class="quality-master-area-title"><strong>🏢 Identificação ERP</strong><small>Campos internos usados por compras, estoque, PDV e relatórios.</small></div>
+      <div class="quality-master-area-title"><strong>🏢 Dados ERP</strong><small>Base simples para compras, estoque, PDV e relatórios.</small></div>
+      <% if (requestedWorkspaceType === 'service' && !defaultServiceCategory) { %><div class="quality-service-note" style="display:block">⚠️ Nenhuma Categoria ERP ativa do tipo Serviço foi encontrada. Cadastre/ative uma categoria de Serviço antes de salvar.</div><% } %>
       <div class="quality-master-grid">
+        <label>Apelido de busca<input type="text" name="searchAlias" placeholder="Ex.: Película Note 13 Pro"></label>
         <label>SKU<input type="text" name="sku" placeholder="SKU interno"></label>
-        <label>Código interno<input type="text" name="internalCode" placeholder="Código próprio"></label>
-        <label>Código do fornecedor<input type="text" name="supplierCode"></label>
         <label>Código de barras<input type="text" name="barcode" inputmode="numeric"></label>
         <label>Marca<input type="text" name="brand"></label>
-        <label>Unidade<select name="unit"><option value="UN">UN - Unidade</option><option value="CX">CX - Caixa</option><option value="PC">PC - Peça</option><option value="KIT">KIT</option><option value="SER">SER - Serviço</option></select></label>
-        <label>Categoria ERP<input type="text" name="erpCategory" placeholder="Ex.: Acessórios"></label>
-        <label>Subcategoria ERP<input type="text" name="erpSubcategory" placeholder="Ex.: Capas"></label>
-        <label>Fornecedor principal<input type="text" name="mainSupplierId" placeholder="Preparado para vínculo"></label>
-        <label>Fornecedor preferencial<input type="text" name="preferredSupplierId" placeholder="Preparado para vínculo"></label>
-        <label class="inventory-check"><input type="checkbox" name="erpActive" value="true" checked> Produto ativo no ERP</label>
+        <label>Categoria ERP
+          <select name="erpCategory" required>
+            <option value="">Selecione uma categoria...</option>
+            <% (erpCategorias || []).filter(c => c.active !== false).forEach(c => { %><option value="<%= c.id %>" data-category-type="<%= c.type || 'product' %>" <%= requestedWorkspaceType === 'service' && defaultServiceCategory && String(defaultServiceCategory.id) === String(c.id) ? 'selected' : '' %>><%= '— '.repeat(c.depth || 0) %><%= c.name %></option><% }) %>
+          </select>
+        </label>
+<div class="quality-category-separation-note"><strong>Categoria interna</strong><small>Não altera SEO, URL ou navegação da Loja Virtual.</small></div>
+        <label class="inventory-check"><input type="checkbox" name="erpActive" value="true" checked> <%= requestedWorkspaceType === 'service' ? 'Serviço ativo no ERP' : 'Produto ativo no ERP' %></label>
       </div>
+      <details class="quality-master-extra">
+        <summary>＋ Dados internos adicionais</summary>
+        <div class="quality-master-grid">
+          <label>Código interno<input type="text" name="internalCode" value="Gerado automaticamente ao salvar" readonly></label>
+          <label>Código do fornecedor<input type="text" name="supplierCode"></label>
+          <label>Unidade<select name="unit"><option value="UN" <%= requestedWorkspaceType !== 'service' ? 'selected' : '' %>>UN - Unidade</option><option value="CX">CX - Caixa</option><option value="PC">PC - Peça</option><option value="KIT">KIT</option><option value="SER" <%= requestedWorkspaceType === 'service' ? 'selected' : '' %>>SER - Serviço</option></select></label>
+          <label>Fornecedor principal<input type="text" name="mainSupplierId" placeholder="Preparado para vínculo futuro"></label>
+          <label>Fornecedor preferencial<input type="text" name="preferredSupplierId" placeholder="Preparado para vínculo futuro"></label>
+        </div>
+      </details>
     </div>
 
-    <div class="quality-inventory-config" data-create-section="stock">
+    <div class="quality-inventory-config" data-create-section="stock" id="add-inventory-config">
       <strong>📦 Controle de estoque ERP</strong>
+      <div class="quality-service-note">🧰 Esta categoria é do tipo Serviço. O controle de estoque não se aplica.</div>
       <div class="quality-inventory-config-grid">
-        <label class="inventory-check"><input type="checkbox" name="stockControlled" value="true" checked> Controlar estoque deste produto</label>
+        <label class="inventory-check"><input type="checkbox" name="stockControlled" value="true" <%= requestedWorkspaceType === 'service' ? '' : 'checked' %>> Controlar estoque deste <%= requestedWorkspaceType === 'service' ? 'serviço' : 'produto' %></label>
         <label class="inventory-check"><input type="checkbox" name="allowNegative" value="true"> Permitir vender com estoque zerado/negativo</label>
         <label>Estoque mínimo<input type="number" name="minimumQuantity" min="0" step="1" value="0"></label>
-        <label>Disponibilidade no site<select name="inventorySiteMode"><option value="shared" selected>Compartilhar saldo</option><option value="limited">Limitar quantidade</option><option value="disabled">Não disponibilizar</option></select></label>
+        <label>Disponibilidade no site<select name="inventorySiteMode"><option value="shared" <%= requestedWorkspaceType !== 'service' ? 'selected' : '' %>>Compartilhar saldo</option><option value="limited">Limitar quantidade</option><option value="disabled" <%= requestedWorkspaceType === 'service' ? 'selected' : '' %>>Não disponibilizar</option></select></label>
         <label>Limite do site<input type="number" name="siteLimit" min="0" step="1" placeholder="Opcional"></label>
         <label>Reserva física da loja<input type="number" name="physicalSafety" min="0" step="1" value="0"></label>
       </div>
       <small class="quality-inventory-help">Nesta entrega, quantidade, controle, estoque mínimo e histórico já são gravados. As regras automáticas de venda pelo site serão conectadas em uma etapa futura.</small>
     </div>
 
-    <div class="field-image">
+    <div class="field-image" data-create-lv-dependent>
       <label>Imagem</label>
       <input type="text" name="image" id="add-product-image" list="imagens-list" placeholder="Selecione ou digite o nome..." onfocus="sincronizarImagensAuto()" autocomplete="off">
       <datalist id="imagens-list">
@@ -1082,24 +1185,24 @@ html[data-panel-theme="light"] .quality-master-area,html[data-panel-theme="light
       </datalist>
     </div>
 
-    <div class="field-category">
-      <label>Categoria do site</label>
+    <div class="field-category" data-site-category-field data-create-section="site" data-create-lv-dependent>
+      <label>Categoria Loja Virtual</label>
       <select name="siteCategory" class="js-category-select" data-subcategory-target="add-product-subcategory">
-        <option value="">Início (vitrine)</option>
+        <option value="">Sem categoria</option>
         <% (categorias || []).forEach(c => { %>
-          <option value="<%= c.slug %>"><%= c.name %></option>
+          <option value="<%= c.slug %>" <%= listState?.category === c.slug ? 'selected' : '' %>><%= c.name %></option>
         <% }) %>
       </select>
     </div>
 
-    <div class="field-category">
-      <label>Subcategoria do site</label>
+    <div class="field-category" data-site-category-field data-create-section="site" data-create-lv-dependent>
+      <label>Subcategoria Loja Virtual</label>
       <select name="siteSubcategory" id="add-product-subcategory" class="js-subcategory-select">
-        <option value="">Sem subcategoria</option>
+        <option value="">Selecione primeiro uma categoria...</option>
       </select>
     </div>
 
-    <div class="field-small">
+    <div class="field-small" data-create-section="site" data-create-lv-dependent>
       <label>Mostrar preço</label>
       <select name="showPrice">
         <option value="true" selected>Sim</option>
@@ -1107,7 +1210,7 @@ html[data-panel-theme="light"] .quality-master-area,html[data-panel-theme="light
       </select>
     </div>
 
-    <div class="field-small">
+    <div class="field-small" data-create-section="site" data-create-lv-dependent>
       <label>Mostrar na vitrine</label>
       <select name="featured">
         <option value="true">Sim</option>
@@ -1116,15 +1219,15 @@ html[data-panel-theme="light"] .quality-master-area,html[data-panel-theme="light
     </div>
 
     <div class="field-small" data-create-section="site">
-      <label>Loja Virtual (LV)</label>
-      <select name="lvActive">
-        <option value="true" selected>Ativo</option>
-        <option value="false">Inativo</option>
+      <label>Produto publicado na Loja Virtual</label>
+      <select name="lvActive" id="add-lv-active">
+        <option value="true">Ativo</option>
+        <option value="false" selected>Inativo</option>
       </select>
       <small class="slug-help">A alteração entra no site somente ao usar o botão Publicar.</small>
     </div>
 
-    <div class="field-small">
+    <div class="field-small" data-create-section="site" data-create-lv-dependent>
       <label>Ver detalhes</label>
       <select name="detailsEnabled">
         <option value="false" selected>Não</option>
@@ -1132,7 +1235,7 @@ html[data-panel-theme="light"] .quality-master-area,html[data-panel-theme="light
       </select>
     </div>
 
-    <div class="quality-compact-gallery" style="grid-column: 1 / -1; border:1px solid #e5e7eb; border-radius:8px; padding:10px; background:#fafafa;">
+    <div class="quality-compact-gallery" data-create-lv-dependent style="grid-column: 1 / -1; border:1px solid #e5e7eb; border-radius:8px; padding:10px; background:#fafafa;">
       <label>Galeria do produto <small style="font-weight:400;color:#6b7280;">(máx. 4 itens: fotos ou vídeo do YouTube)</small></label>
       <textarea name="gallery" id="add-product-gallery" class="add-gallery-hidden-textarea"></textarea>
       <div class="add-gallery-manager">
@@ -1142,7 +1245,7 @@ html[data-panel-theme="light"] .quality-master-area,html[data-panel-theme="light
       <small style="display:block; margin-top:6px; color:#6b7280;">Use o gerenciador para adicionar fotos ou vídeo. Depois clique em <strong>Adicionar</strong> para salvar o produto.</small>
     </div>
 
-    <div class="quality-variations-box" id="add-variations-box">
+    <div class="quality-variations-box" id="add-variations-box" <%= requestedWorkspaceType === 'service' ? 'hidden' : '' %>>
       <div class="quality-variations-title">
         <span>🎛️ Variações do produto <small style="font-weight:400;color:#6b7280;">(opcional)</small></span>
         <small style="font-weight:400;color:#6b7280;">Use só quando o produto tiver cor, GB, RAM ou estado.</small>
@@ -1162,7 +1265,7 @@ html[data-panel-theme="light"] .quality-master-area,html[data-panel-theme="light
       <div class="quality-variations-grid">
         <div class="variation-labels-box">
           <strong>🏷️ Nome dos grupos</strong>
-          <small class="variation-help">Opcional. Use quando quiser trocar "Armazenamento" por "Tipo de serviço", por exemplo.</small>
+          <small class="variation-help">Opcional. Use quando quiser personalizar os nomes dos grupos de variação do produto.</small>
           <div class="variation-labels-grid">
             <label>Cor<input type="text" class="variation-label-input" data-label-type="colors" placeholder="Cor"></label>
             <label>Armazenamento<input type="text" class="variation-label-input" data-label-type="storage" placeholder="Armazenamento"></label>
@@ -1204,7 +1307,7 @@ html[data-panel-theme="light"] .quality-master-area,html[data-panel-theme="light
         </div>
         <div class="quality-var-card quality-combo-card" data-var-card="combinations">
           <strong>🧩 Grade de combinações</strong>
-          <small class="variation-help">Opcional. Ex.: Preto + 128GB + 4GB. Ao clicar numa cor no site, ele puxa automaticamente a combinação cadastrada.</small>
+          <small class="variation-help">Cada combinação é um item vendável. O preço ERP é opcional: vazio herda o preço do cadastro pai; preenchido usa o preço próprio da variação.</small>
           <div class="variation-combo-row">
             <select class="var-combo-select" data-combo="color"><option value="">Cor</option></select>
             <select class="var-combo-select" data-combo="storage"><option value="">GB</option></select>
@@ -1212,6 +1315,7 @@ html[data-panel-theme="light"] .quality-master-area,html[data-panel-theme="light
             <select class="var-combo-select" data-combo="condition"><option value="">Estado</option></select>
             <input type="text" class="var-combo-image quality-image-picker" list="imagens-list" placeholder="Imagem opcional" onfocus="sincronizarImagensAuto()" autocomplete="off">
             <input type="number" class="var-combo-stock stock-input-small" min="0" step="1" placeholder="Estoque">
+            <input type="number" class="var-combo-price" min="0" step="0.01" placeholder="Preço ERP" title="Opcional: vazio herda o preço ERP do cadastro pai">
             <button class="btn add-var-combo" type="button">Adicionar</button>
           </div>
           <div class="quality-combo-list" data-var-list="combinations"></div>
@@ -1225,8 +1329,7 @@ html[data-panel-theme="light"] .quality-master-area,html[data-panel-theme="light
       <strong>💰 Comercial e política de desconto</strong>
       <div class="commercial-policy-grid" style="margin-top:10px">
         <label>Preço de custo<input type="number" name="costPrice" step="0.01" min="0" placeholder="0,00"></label>
-        <label>Preço à vista / PIX<input type="number" name="cashPrice" step="0.01" min="0" placeholder="0,00"></label>
-        <label>Preço parcelado<input type="number" name="installmentPrice" step="0.01" min="0" placeholder="0,00"></label>
+        <label>Preço de venda ERP<input type="number" name="erpPrice" step="0.01" min="0" placeholder="0,00"></label>
         <label>Preço mínimo<input type="number" name="minimumPrice" step="0.01" min="0" placeholder="0,00"></label>
         <label>Margem mínima (%)<input type="number" name="minimumMarginPercent" step="0.01" min="0" placeholder="0"></label>
         <label>Política de desconto<select name="discountPolicy"><option value="inherit">Herdar regra superior</option><option value="custom">Regra própria</option><option value="blocked">Sem desconto</option></select></label>
@@ -1237,7 +1340,7 @@ html[data-panel-theme="light"] .quality-master-area,html[data-panel-theme="light
       <small class="commercial-note">O limite mais restritivo entre desconto, preço mínimo e margem mínima sempre prevalecerá.</small>
     </div>
 
-    <div class="quality-tags-field">
+    <div class="quality-tags-field" data-create-lv-dependent>
       <label>Etiquetas do produto</label>
       <div class="quality-tags-options">
         <% ['Lançamento','Oferta','Mais vendido','Últimas unidades','Preço Baixou','Frete grátis','Novo','Novidade','Seminovo','5G'].forEach(tag => { %>
@@ -1250,12 +1353,12 @@ html[data-panel-theme="light"] .quality-master-area,html[data-panel-theme="light
       <small class="variation-help">As etiquetas aparecem no card e na página do produto. Use poucas para não poluir.</small>
     </div>
 
-    <div style="grid-column: 1 / -1;">
+    <div style="grid-column: 1 / -1;" data-create-lv-dependent>
       <label>Descrição curta</label>
       <input type="text" name="descriptionShort" placeholder="Ex.: Novo, lacrado, 128GB, garantia...">
     </div>
 
-    <div class="add-description-editor-wrap">
+    <div class="add-description-editor-wrap" data-create-lv-dependent>
       <label>Descrição completa</label>
       <textarea name="descriptionLong" id="add-description-long-hidden" style="display:none;"></textarea>
       <div class="description-toolbar" style="margin-top:8px;">
@@ -1274,23 +1377,62 @@ html[data-panel-theme="light"] .quality-master-area,html[data-panel-theme="light
       <button class="btn primary" type="submit">Adicionar</button>
     </div>
   </form>
+  <script>
+  // v0.12.3.16 - bootstrap imediato e isolado do cadastro.
+  // Executa assim que o formulário termina de ser interpretado, antes do restante da página.
+  (() => {
+    const addForm=document.getElementById('add-product-form');
+    if(!addForm||addForm.classList.contains('create-tabs-ready'))return;
+    const nodes=Array.from(addForm.children);
+    const submitWrap=nodes.find(el=>el.querySelector?.('button[type="submit"]'));
+    const panels={};
+    ['general','commercial','stock','site','variations'].forEach(key=>{
+      const panel=document.createElement('div');
+      panel.className='product-create-panel'+(key==='general'?' active':'');
+      panel.dataset.createPanel=key; panels[key]=panel; addForm.appendChild(panel);
+    });
+    const footer=document.createElement('div'); footer.className='product-create-footer';
+    const destination=el=>{
+      if(el===submitWrap)return 'footer';
+      if(el.matches?.('[data-create-section="commercial"]'))return 'commercial';
+      if(el.matches?.('[data-create-section="stock"]'))return 'stock';
+      if(el.matches?.('[data-create-section="site"]'))return 'site';
+      if(el.classList?.contains('quality-variations-box'))return 'variations';
+      if(el.classList?.contains('quality-tags-field')||el.classList?.contains('add-description-editor-wrap')||el.querySelector?.('[name="descriptionShort"]'))return 'general';
+      const name=el.querySelector?.('input,select,textarea')?.name||'';
+      if(name==='stock')return 'stock';
+      if(['showPrice','featured','active','lvActive','detailsEnabled','showVariationsOnCard','siteCategory','siteSubcategory','slug','lvName','lvPrice'].includes(name))return 'site';
+      return 'general';
+    };
+    nodes.forEach(el=>{const dest=destination(el);dest==='footer'?footer.appendChild(el):panels[dest].appendChild(el);});
+    addForm.appendChild(footer);
+    addForm.classList.add('create-tabs-ready');
+    window.__qualityProductCreatePanels=panels;
+  })();
+  </script>
   </section>
 
-  <section class="product-workspace-section active" id="product-workspace-list">
+  <section class="product-workspace-section <%= isNewWorkspace ? '' : 'active' %>" id="product-workspace-list">
     <div class="workspace-list-heading"><div><h2>📋 Produtos cadastrados</h2><p>Pesquise, filtre, edite e acompanhe os principais estados da base.</p></div></div>
 
   <div class="quality-controls-grid">
     <div class="quality-control-box">
       <div class="quality-control-title">🔎 Busca e filtros</div>
       <div class="quality-search-row">
-        <input type="text" id="panel-search-input" placeholder="Buscar produto pelo nome...">
+        <input type="text" id="panel-search-input" value="<%= listState?.query || '' %>" placeholder="Buscar por nome, código, SKU, barras, fornecedor ou slug...">
         <select id="panel-category-filter">
-          <option value="">Todas as Categorias</option>
-          <option value="[vitrine]">Início (vitrine)</option>
+          <option value="" <%= !listState?.category ? 'selected' : '' %>>Todas as Categorias</option>
+          <option value="[vitrine]" <%= listState?.category === '[vitrine]' ? 'selected' : '' %>>Início (vitrine)</option>
           <% (categorias || []).forEach(c => { %>
-            <option value="<%= c.slug %>"><%= c.name %></option>
+            <option value="<%= c.slug %>" <%= listState?.category === c.slug ? 'selected' : '' %>><%= c.name %></option>
           <% }) %>
         </select>
+      </div>
+      <div class="quality-filter-status-row">
+        <div class="quality-filter-field"><label for="panel-erp-filter">Status ERP</label><select id="panel-erp-filter"><option value="" <%= !listState?.erpStatus ? 'selected' : '' %>>Todos</option><option value="true" <%= listState?.erpStatus === 'true' ? 'selected' : '' %>>ERP Ativo</option><option value="false" <%= listState?.erpStatus === 'false' ? 'selected' : '' %>>ERP Inativo</option></select></div>
+        <div class="quality-filter-field"><label for="panel-lv-filter">Status Loja Virtual</label><select id="panel-lv-filter"><option value="" <%= !listState?.lvStatus ? 'selected' : '' %>>Todos</option><option value="true" <%= listState?.lvStatus === 'true' ? 'selected' : '' %>>LV Ativo</option><option value="false" <%= listState?.lvStatus === 'false' ? 'selected' : '' %>>LV Inativo</option></select></div>
+        <div class="quality-filter-field"><label for="panel-stock-filter">Estoque</label><select id="panel-stock-filter"><option value="">Todos</option><option value="positive">Com estoque</option><option value="zero">Estoque zerado</option><option value="service">Serviços</option></select></div>
+        <div class="quality-filter-counter"><span id="filtered-products-count"><%= listState?.totalFiltered ?? (items || []).length %></span>&nbsp;produto(s)</div>
       </div>
     </div>
 
@@ -1299,15 +1441,15 @@ html[data-panel-theme="light"] .quality-master-area,html[data-panel-theme="light
         <div id="bulk-selected-container"></div>
 
         <div class="quality-bulk-head">
-          <div class="quality-control-title" style="margin:0;">⚡ Central de Operações em Lote · <span id="selected-count">0</span> selecionado(s)</div>
-          <div class="quality-bulk-selection-actions">
+          <button class="quality-bulk-toggle" type="button" id="bulk-center-toggle" aria-expanded="false"><span>⚡ Central de Operações em Lote <span id="selected-count" hidden>0</span></span><span class="quality-bulk-toggle-icon">▶</span></button>
+          <div class="quality-bulk-selection-actions quality-bulk-collapsible">
             <button class="btn" type="button" id="select-all-products">Selecionar resultados</button>
             <button class="btn" type="button" id="invert-selection">Inverter seleção</button>
             <button class="btn" type="button" id="clear-selection">Limpar</button>
           </div>
         </div>
 
-        <div class="quality-bulk-actions-grid">
+        <div class="quality-bulk-actions-grid quality-bulk-collapsible">
           <div class="quality-bulk-action" data-bulk-action="category">
             <label class="quality-bulk-action-head"><input type="checkbox" name="enabledActions" value="category"> Alterar categoria</label>
             <div class="quality-bulk-action-field">
@@ -1369,9 +1511,20 @@ html[data-panel-theme="light"] .quality-master-area,html[data-panel-theme="light
               <small class="quality-bulk-field-help">Define o mesmo mínimo para todos os produtos selecionados.</small>
             </div>
           </div>
+
+          <div class="quality-bulk-action" data-bulk-action="allowNegative">
+            <label class="quality-bulk-action-head"><input type="checkbox" name="enabledActions" value="allowNegative"> Venda sem saldo</label>
+            <div class="quality-bulk-action-field">
+              <select name="bulkAllowNegative" id="bulk-allow-negative">
+                <option value="true">Permitir estoque zerado/negativo</option>
+                <option value="false">Bloquear sem estoque disponível</option>
+              </select>
+              <small class="quality-bulk-field-help">Aplica a regra aos produtos selecionados sem alterar seus saldos.</small>
+            </div>
+          </div>
         </div>
 
-        <div class="quality-bulk-footer">
+        <div class="quality-bulk-footer quality-bulk-collapsible">
           <span class="quality-bulk-summary" id="bulk-actions-summary">Marque apenas as informações que deseja alterar.</span>
           <button class="btn primary quality-bulk-apply" type="submit">Aplicar alterações selecionadas</button>
         </div>
@@ -1380,18 +1533,14 @@ html[data-panel-theme="light"] .quality-master-area,html[data-panel-theme="light
   </div>
 
   <form id="update-all-form" method="post" action="/produtos/update-all">
-    <div class="quality-table-toolbar">
-      <button class="btn primary" type="button" id="save-dirty-products-btn">💾 Salvar alterações pendentes</button>
-    </div>
-
     <div class="quality-table-wrap">
     <table class="table quality-products-summary-table">
       <thead>
         <tr>
-          <th><input type="checkbox" id="select-all-checkbox" title="Selecionar todos"></th>
+          <th><input type="checkbox" id="select-all-checkbox" title="Selecionar ou desmarcar todos os produtos visíveis"></th>
           <th>#</th>
           <th>Produto</th>
-          <th>Categoria / Estoque</th>
+          <th>ERP / Estoque</th>
           <th>ERP</th>
           <th>LV</th>
           <th>Recursos</th>
@@ -1400,8 +1549,9 @@ html[data-panel-theme="light"] .quality-master-area,html[data-panel-theme="light
       </thead>
       <tbody id="products-table-body">
         <% (items || []).forEach((p, idx) => { %>
-          <% const stockValue = (p.stock ?? ''); const stockNum = Number(stockValue || 0); const stockClass = stockValue === '' ? 'empty' : (stockNum > 0 ? '' : 'zero'); const stockText = stockValue === '' ? 'Não informado' : (stockNum > 0 ? 'Em estoque' : 'Sem estoque'); %>
-          <tr class="product-row" data-id="<%= p.id %>">
+          <% const hasStockVariations = Array.isArray(p?.variations?.combinations) && p.variations.combinations.length > 0; const stockValue = (p.stock ?? ''); const stockNum = Number(stockValue || 0); const stockClass = stockValue === '' ? 'empty' : (stockNum > 0 ? '' : 'zero'); const stockText = stockValue === '' ? 'Não informado' : (stockNum > 0 ? 'Em estoque' : 'Sem estoque'); %>
+          <% const listErpRaw = p?.erp?.active !== undefined ? p.erp.active : p.active; const listErpActive = !['false','0','off','inativo'].includes(String(listErpRaw).toLowerCase()) && listErpRaw !== false; const listLvRaw = p?.virtualStore?.active !== undefined ? p.virtualStore.active : p.active; const listLvActive = !['false','0','off','inativo'].includes(String(listLvRaw).toLowerCase()) && listLvRaw !== false; %>
+          <tr class="product-row <%= !listErpActive ? 'erp-inactive' : '' %> <%= !listLvActive ? 'lv-inactive' : '' %>" data-id="<%= p.id %>" data-erp-active="<%= listErpActive ? 'true' : 'false' %>" data-lv-active="<%= listLvActive ? 'true' : 'false' %>" data-erp-category-type="<%= erpCategoryById.get(String(p?.erp?.categoryId || p?.erp?.category || ''))?.type || 'product' %>" data-stock="<%= Number(stockValue || 0) %>" data-stock-controlled="<%= p?.inventory?.stockControlled === true ? 'true' : 'false' %>">
             <td><input type="checkbox" class="product-check" value="<%= p.id %>"></td>
             <td><span class="badge"><%= idx + 1 %></span></td>
 
@@ -1411,10 +1561,11 @@ html[data-panel-theme="light"] .quality-master-area,html[data-panel-theme="light
               <input type="hidden" name="sku" value="<%= erpData.sku || '' %>">
               <input type="hidden" name="internalCode" value="<%= erpData.internalCode || '' %>">
               <input type="hidden" name="supplierCode" value="<%= erpData.supplierCode || '' %>">
+              <input type="hidden" name="searchAlias" value="<%= erpData.searchAlias || '' %>">
               <input type="hidden" name="barcode" value="<%= erpData.barcode || '' %>">
               <input type="hidden" name="brand" value="<%= erpData.brand || '' %>">
               <input type="hidden" name="unit" value="<%= erpData.unit || 'UN' %>">
-              <input type="hidden" name="erpCategory" value="<%= erpData.category || '' %>">
+              <input type="hidden" name="erpCategory" value="<%= erpData.categoryId || erpData.category || '' %>">
               <input type="hidden" name="erpSubcategory" value="<%= erpData.subcategory || '' %>">
               <input type="hidden" name="lvName" value="<%= lvData.name || p.name || '' %>">
               <input type="hidden" name="lvPrice" value="<%= lvData.price ?? p.price ?? '' %>">
@@ -1440,7 +1591,7 @@ html[data-panel-theme="light"] .quality-master-area,html[data-panel-theme="light
               <input type="hidden" name="physicalSafety" class="row-physical-safety" value="<%= siteInventory.physicalSafety ?? 0 %>">
 
               <div class="quality-product-cell">
-                <div class="quality-product-thumb">
+                <div class="quality-product-thumb quick-main-image" data-product-id="<%= p.id %>" title="Clique para trocar a foto principal">
                   <img src="/<%= p.image || 'images/sem-imagem.png' %>" alt="" onerror="this.onerror=null;this.src='/images/sem-imagem.png';">
                 </div>
                 <div class="quality-product-main">
@@ -1454,23 +1605,27 @@ html[data-panel-theme="light"] .quality-master-area,html[data-panel-theme="light
             </td>
 
             <td>
-              <div class="quality-category-stock">
-                <select name="category" class="prod-category-select js-category-select" data-subcategory-target="row-subcategory-<%= p.id %>">
-                  <option value="">Início (vitrine)</option>
-                  <% (categorias || []).forEach(c => { %>
-                    <option value="<%= c.slug %>" <%= p.category === c.slug ? 'selected' : '' %>><%= c.name %></option>
-                  <% }) %>
-                </select>
-                <select name="subcategory" id="row-subcategory-<%= p.id %>" class="prod-subcategory-select js-subcategory-select" data-current="<%= p.subcategory || p.subcategoria || '' %>">
-                  <option value="">Sem subcategoria</option>
-                </select>
-                <div class="quality-stock-box">
-                  <span class="quality-stock-label">Estoque</span>
-                  <div class="quality-stock-line">
-                    <input type="number" step="1" min="0" name="stock" value="<%= stockValue %>" placeholder="Qtd.">
-                    <span class="quality-stock-badge <%= stockClass %>">📦 <%= stockText %></span>
+              <% const listErpCategory = erpCategoryById.get(String(erpData.categoryId || erpData.category || '')); const listErpCategoryType = listErpCategory?.type || 'product'; %>
+              <div class="quality-erp-stock-card">
+                <div class="quality-list-erp-category"><small>Categoria ERP</small><strong><%= listErpCategory?.name || 'Não definida' %></strong><span class="quality-erp-type"><%= listErpCategoryType === 'service' ? 'Serviço' : (listErpCategoryType === 'controlled_product' ? 'Produto controlado' : 'Produto') %></span></div>
+                <input type="hidden" name="category" class="prod-category-select" value="<%= p.category || '' %>">
+                <input type="hidden" name="subcategory" class="prod-subcategory-select" value="<%= p.subcategory || p.subcategoria || '' %>">
+                <% if (listErpCategoryType === 'service') { %>
+                  <span class="quality-service-badge">🧰 Serviço</span>
+                  <input type="hidden" name="stock" value="<%= stockValue %>">
+                <% } else { %>
+                  <div class="quality-stock-compact" data-stock-mode="<%= hasStockVariations ? 'variations' : 'product' %>">
+                    <span class="quality-stock-label"><%= hasStockVariations ? 'Estoque total' : 'Estoque' %></span>
+                    <% if (hasStockVariations) { %>
+                      <input type="hidden" name="stock" value="<%= stockValue %>">
+                      <strong class="quality-derived-stock"><%= stockNum %></strong>
+                      <span class="quality-stock-badge <%= stockClass %>">📦 <%= stockText %> · <%= p.variations.combinations.length %> variação(ões)</span>
+                    <% } else { %>
+                      <input type="number" step="1" min="0" name="stock" value="<%= stockValue %>" placeholder="Qtd.">
+                      <span class="quality-stock-badge <%= stockClass %>">📦 <%= stockText %></span>
+                    <% } %>
                   </div>
-                </div>
+                <% } %>
               </div>
             </td>
 
@@ -1489,9 +1644,11 @@ html[data-panel-theme="light"] .quality-master-area,html[data-panel-theme="light
             </td>
 
             <td>
-              <% const rawLvActive = lvData.active !== undefined ? lvData.active : p.active; const lvActiveValue = !['false', '0', 'off', 'inativo'].includes(String(rawLvActive).toLowerCase()) && rawLvActive !== false; %>
-              <div class="quality-status-stack quality-channel-status">
-                <div class="quality-compact-field">
+              <% const rawLvActive = lvData.active !== undefined ? lvData.active : p.active; const lvActiveValue = !['false', '0', 'off', 'inativo'].includes(String(rawLvActive).toLowerCase()) && rawLvActive !== false; const listLvCategory = lvCategoryBySlug.get(String(p.category || '')); const listLvSubcategory = lvSubcategoryByKey.get(String(p.subcategory || p.subcategoria || '')); %>
+              <div class="quality-status-stack quality-channel-status <%= !lvActiveValue ? 'quality-lv-controls-disabled' : '' %>">
+                <div class="quality-lv-category-card"><small>Categoria LV</small><strong><%= listLvCategory?.name || (p.category ? p.category : 'Sem categoria') %></strong><% if (listLvSubcategory) { %><span>Subcategoria LV: <%= listLvSubcategory.name || listLvSubcategory.slug %></span><% } %></div>
+                <div class="quality-lv-inactive-badge">○ LV Inativa</div>
+                <div class="quality-compact-field quality-lv-status-field">
                   <label>Loja Virtual</label>
                   <select name="lvActive" aria-label="Status LV de <%= p.name %>">
                     <option value="true" <%= lvActiveValue ? 'selected' : '' %>>Ativo</option>
@@ -1531,11 +1688,9 @@ html[data-panel-theme="light"] .quality-master-area,html[data-panel-theme="light
                 <textarea name="relatedManualIds" class="row-related-manual-ids" style="display:none;"><%= Array.isArray(p.relatedManualIds) ? p.relatedManualIds.join('\n') : (p.relatedManualIds || '') %></textarea>
                 <textarea name="crossSellIds" class="row-cross-sell-ids" style="display:none;"><%= Array.isArray(p.crossSellIds) ? p.crossSellIds.join('\n') : (p.crossSellIds || '') %></textarea>
 
-                <select name="image" class="prod-image-select quality-image-compact-select" data-current-val="<%= p.image %>">
+                <select name="image" class="prod-image-select quality-image-compact-select" data-current-val="<%= p.image || '' %>" data-lazy-images="true">
                   <option value="">Imagem...</option>
-                  <% (imagens || []).forEach(img => { %>
-                    <option value="images/<%= img %>" <%= p.image === ('images/' + img) ? 'selected' : '' %>><%= img %></option>
-                  <% }) %>
+                  <% if (p.image) { %><option value="<%= p.image %>" selected><%= String(p.image).replace(/^images\//, '') %></option><% } %>
                 </select>
 
                 <div class="quality-resource-row">
@@ -1563,15 +1718,20 @@ html[data-panel-theme="light"] .quality-master-area,html[data-panel-theme="light
                 <textarea name="variationRam" class="variation-hidden-data row-variation-ram"><%= Array.isArray(v.ram) ? v.ram.join('\n') : (v.ramText || '') %></textarea>
                 <textarea name="variationCondition" class="variation-hidden-data row-variation-condition"><%= Array.isArray(v.condition) ? v.condition.join('\n') : (v.conditionText || '') %></textarea>
                 <textarea name="variationLabels" class="variation-hidden-data row-variation-labels"><%= v.labels ? JSON.stringify(v.labels) : (v.labelsText || '') %></textarea>
-                <textarea name="variationCombinations" class="variation-hidden-data row-variation-combinations"><%= Array.isArray(v.combinations) ? v.combinations.map(c => [c.color, c.storage, c.ram, c.condition, c.image, c.stock].filter((x, i) => i < 4 || x !== undefined && x !== null && x !== '').join('|')).join('\n') : (v.combinationsText || '') %></textarea>
-                <button class="btn manage-variations-btn" type="button">🎛️ Variações</button>
-                <div class="variation-summary">Sem variações</div>
+                <textarea name="variationCombinations" class="variation-hidden-data row-variation-combinations"><%= Array.isArray(v.combinations) ? v.combinations.map(c => [c.color, c.storage, c.ram, c.condition, c.image, c.stock, c.erpPrice].map(x => x === undefined || x === null ? '' : x).join('|').replace(/\|+$/,'')).join('\n') : (v.combinationsText || '') %></textarea>
+                <% if (listErpCategoryType !== 'service') { %>
+                  <button class="btn manage-variations-btn" type="button">🎛️ Variações</button>
+                  <div class="variation-summary">Sem variações</div>
+                <% } else { %>
+                  <div class="variation-summary quality-service-unique-note">🧰 Cadastro único · preço em Comercial</div>
+                <% } %>
               </div>
             </td>
 
             <td class="quality-actions">
               <div class="quality-row-actions">
                 <button class="btn primary quality-edit-btn" type="button">✏️ Editar</button>
+                <button class="btn quality-history-btn" type="button">🕘 Histórico</button>
                 <span class="row-save-status" style="display:none; font-weight:600; color:#087a31;">✅ Salvo</span>
                 <button class="btn quality-duplicate-btn" type="submit" form="duplicate-form-<%= p.id %>" onclick="return confirm('Duplicar este produto?')">📄 Duplicar</button>
                 <button class="btn quality-delete-btn" type="submit" form="delete-form-<%= p.id %>" onclick="return confirm('Excluir este produto?')">🗑️ Excluir</button>
@@ -1583,6 +1743,14 @@ html[data-panel-theme="light"] .quality-master-area,html[data-panel-theme="light
     </table>
     </div>
   </form>
+  <% if ((listState?.totalPages || 1) > 1) { const qsBase = new URLSearchParams(); if(listState?.query) qsBase.set('q',listState.query); if(listState?.category) qsBase.set('categoria',listState.category); if(listState?.erpStatus) qsBase.set('erpStatus',listState.erpStatus); if(listState?.lvStatus) qsBase.set('lvStatus',listState.lvStatus); qsBase.set('pageSize',String(listState.pageSize || 250)); %>
+    <div class="quality-pagination" style="display:flex;align-items:center;justify-content:center;gap:8px;flex-wrap:wrap;margin:14px 0 4px;">
+      <% const prevQs = new URLSearchParams(qsBase); prevQs.set('page', String(Math.max(1,(listState.page||1)-1))); const nextQs = new URLSearchParams(qsBase); nextQs.set('page', String(Math.min(listState.totalPages,(listState.page||1)+1))); %>
+      <a class="btn" href="/produtos?<%= prevQs.toString() %>" <%= listState.page <= 1 ? 'aria-disabled="true" style="pointer-events:none;opacity:.45"' : '' %>>← Anterior</a>
+      <span style="font-weight:700;">Página <%= listState.page %> de <%= listState.totalPages %> · <%= listState.totalFiltered %> produto(s)</span>
+      <a class="btn" href="/produtos?<%= nextQs.toString() %>" <%= listState.page >= listState.totalPages ? 'aria-disabled="true" style="pointer-events:none;opacity:.45"' : '' %>>Próxima →</a>
+    </div>
+  <% } %>
   </section>
 
   <% (items || []).forEach((p) => { %>
@@ -1647,7 +1815,7 @@ html[data-panel-theme="light"] .quality-master-area,html[data-panel-theme="light
           <div class="quality-variations-grid">
             <div class="variation-labels-box">
               <strong>🏷️ Nome dos grupos</strong>
-              <small class="variation-help">Opcional. Ex.: use <strong>Tipo de serviço</strong> no campo Armazenamento para listar Troca de bateria, Conector de carga etc.</small>
+              <small class="variation-help">Os grupos organizam opções vendáveis. Em serviços, use um único grupo como <strong>Tipo de serviço</strong> e cadastre cada serviço como uma opção separada.</small>
               <div class="variation-labels-grid">
                 <label>Cor<input type="text" class="variation-label-input" data-label-type="colors" placeholder="Cor"></label>
                 <label>Armazenamento<input type="text" class="variation-label-input" data-label-type="storage" placeholder="Armazenamento"></label>
@@ -1675,7 +1843,7 @@ Com marcas de uso">Usados padrão</button></div><div class="quality-var-list" da
             
         <div class="quality-var-card quality-combo-card" data-var-card="combinations">
           <strong>🧩 Grade de combinações</strong>
-          <small class="variation-help">Opcional. Use para definir combinações exatas, exemplo: Preto + 128GB + 4GB. Ao clicar numa cor no site, ele puxa automaticamente a combinação cadastrada.</small>
+          <small class="variation-help">Cada combinação é um item vendável. Para serviços, use um grupo como <strong>Tipo de serviço</strong>; para produtos, Cor/GB/RAM/etc. O preço ERP pode ser próprio ou herdado do pai.</small>
           <div class="variation-combo-row">
             <select class="var-combo-select" data-combo="color"><option value="">Cor</option></select>
             <select class="var-combo-select" data-combo="storage"><option value="">GB</option></select>
@@ -1683,6 +1851,7 @@ Com marcas de uso">Usados padrão</button></div><div class="quality-var-list" da
             <select class="var-combo-select" data-combo="condition"><option value="">Estado</option></select>
             <input type="text" class="var-combo-image quality-image-picker" list="imagens-list" placeholder="Imagem opcional" onfocus="sincronizarImagensAuto()" autocomplete="off">
             <input type="number" class="var-combo-stock stock-input-small" min="0" step="1" placeholder="Estoque">
+            <input type="number" class="var-combo-price" min="0" step="0.01" placeholder="Preço ERP" title="Opcional: vazio herda o preço ERP do cadastro pai">
             <button class="btn add-var-combo" type="button">Adicionar</button>
           </div>
           <div class="quality-combo-list" data-var-list="combinations"></div>
@@ -1704,7 +1873,9 @@ Com marcas de uso">Usados padrão</button></div><div class="quality-var-list" da
 </datalist>
 
 <div class="quality-modal-backdrop" id="description-modal" aria-hidden="true">
-  <div class="quality-description-modal">
+  
+<div class="receivable-modal" id="productHistoryModal" hidden><div class="receivable-modal-backdrop" data-history-close></div><section class="receivable-modal-card" style="max-width:760px"><header class="receivable-modal-header"><div><span>PRODUTO</span><h2 id="productHistoryTitle">Histórico do produto</h2><p>Alterações cadastrais, estoque, compras e vendas vinculadas.</p></div><button type="button" data-history-close>×</button></header><div id="productHistoryBody" style="padding:14px;max-height:65vh;overflow:auto"></div><footer class="receivable-modal-actions"><button type="button" class="btn" data-history-close>Fechar</button></footer></section></div>
+<div class="quality-description-modal">
     <div class="quality-gallery-modal-header">
       <strong>📝 Editar descrição do produto</strong>
       <button class="quality-close-btn" type="button" id="description-modal-close">×</button>
@@ -1763,58 +1934,19 @@ Com marcas de uso">Usados padrão</button></div><div class="quality-var-list" da
             <label>Nome do produto</label>
             <input type="text" id="edit-name" placeholder="Nome do produto">
           </div>
+          <div class="quality-edit-field"><label>Apelido de busca</label><input type="text" id="edit-searchAlias" placeholder="Nome curto usado nas buscas"></div>
           <div class="quality-edit-field"><label>SKU</label><input type="text" id="edit-sku"></div>
-          <div class="quality-edit-field"><label>Código interno</label><input type="text" id="edit-internalCode"></div>
+          <div class="quality-edit-field"><label>Código interno</label><input type="text" id="edit-internalCode" readonly></div>
           <div class="quality-edit-field"><label>Código do fornecedor</label><input type="text" id="edit-supplierCode"></div>
           <div class="quality-edit-field"><label>Código de barras</label><input type="text" id="edit-barcode"></div>
           <div class="quality-edit-field"><label>Marca</label><input type="text" id="edit-brand"></div>
           <div class="quality-edit-field"><label>Unidade</label><select id="edit-unit"><option value="UN">UN</option><option value="CX">CX</option><option value="PC">PC</option><option value="KIT">KIT</option><option value="SER">SER</option></select></div>
-          <div class="quality-edit-field"><label>Categoria ERP</label><input type="text" id="edit-erpCategory"></div>
-          <div class="quality-edit-field"><label>Subcategoria ERP</label><input type="text" id="edit-erpSubcategory"></div>
+          <div class="quality-edit-field"><label>Categoria ERP</label><select id="edit-erpCategory"><option value="">Selecione uma categoria...</option><% (erpCategorias || []).filter(c => c.active !== false).forEach(c => { %><option value="<%= c.id %>" data-category-type="<%= c.type || 'product' %>"><%= "— ".repeat(c.depth || 0) %><%= c.name %></option><% }) %></select><small class="quality-edit-help">Uso interno do ERP; independente da Loja Virtual.</small></div>
           <div class="quality-edit-field"><label>Ativo no ERP</label><select id="edit-erpActive"><option value="true">Sim</option><option value="false">Não</option></select></div>
-          <div class="quality-edit-field">
-            <label>Slug / URL amigável</label>
-            <input type="text" id="edit-slug" placeholder="slug-do-produto">
-          </div>
-          <div class="quality-edit-field">
-            <label>Categoria</label>
-            <select id="edit-category" class="js-category-select" data-subcategory-target="edit-subcategory">
-              <option value="">Início (vitrine)</option>
-              <% (categorias || []).forEach(c => { %>
-                <option value="<%= c.slug %>"><%= c.name %></option>
-              <% }) %>
-            </select>
-          </div>
-          <div class="quality-edit-field">
-            <label>Subcategoria</label>
-            <select id="edit-subcategory" class="js-subcategory-select"><option value="">Sem subcategoria</option></select>
-          </div>
           <div class="quality-edit-field">
             <label>Imagem principal</label>
             <input type="text" id="edit-image" list="imagens-list" class="quality-image-picker" placeholder="images/foto.jpg" onfocus="sincronizarImagensAuto()" autocomplete="off">
           </div>
-          <div class="quality-edit-field">
-            <label>Preço opcional</label>
-            <input type="number" id="edit-price" step="0.01" min="0" placeholder="Deixe vazio para ocultar">
-          </div>
-          <div class="quality-edit-field">
-            <label>Mostrar preço</label>
-            <select id="edit-showPrice"><option value="true">Sim</option><option value="false">Não</option></select>
-          </div>
-          <div class="quality-edit-field">
-            <label>Vitrine</label>
-            <select id="edit-featured"><option value="true">Sim</option><option value="false">Não</option></select>
-          </div>
-          <div class="quality-edit-field">
-            <label>Ver detalhes</label>
-            <select id="edit-detailsEnabled"><option value="true">Sim</option><option value="false">Não</option></select>
-          </div>
-          <div class="quality-edit-field">
-            <label>Mostrar variações no card do site</label>
-            <select id="edit-showVariationsOnCard"><option value="false">Não</option><option value="true">Sim</option></select>
-            <small class="quality-edit-help">Liga/desliga por produto. A exibição no site precisa do próximo arquivo da vitrine/categoria.</small>
-          </div>
-
         </div>
       </div>
 
@@ -1852,9 +1984,7 @@ Com marcas de uso">Usados padrão</button></div><div class="quality-var-list" da
         <div class="commercial-policy-box">
           <strong>💰 Preços e política comercial</strong>
           <div class="commercial-policy-grid" style="margin-top:10px">
-            <label>Preço de custo<input type="number" id="edit-costPrice" step="0.01" min="0"></label><label>Preço ERP<input type="number" id="edit-erpPrice" step="0.01" min="0"></label><label>Preço Marketplace<input type="number" id="edit-marketplacePrice" step="0.01" min="0"></label><label>Preço promocional<input type="number" id="edit-promotionalPrice" step="0.01" min="0"></label><label>Margem desejada (%)<input type="number" id="edit-desiredMarginPercent" step="0.01" min="0"></label><label>Lucro esperado<input type="number" id="edit-expectedProfit" step="0.01" min="0"></label><label>Comissão padrão (%)<input type="number" id="edit-defaultCommissionPercent" step="0.01" min="0"></label>
-            <label>Preço à vista<input type="number" id="edit-cashPrice" step="0.01" min="0"></label>
-            <label>Preço parcelado<input type="number" id="edit-installmentPrice" step="0.01" min="0"></label>
+            <label>Preço de custo<input type="number" id="edit-costPrice" step="0.01" min="0"></label><label>Preço de venda ERP<input type="number" id="edit-erpPrice" step="0.01" min="0"></label><label>Preço Marketplace<input type="number" id="edit-marketplacePrice" step="0.01" min="0"></label><label>Preço promocional<input type="number" id="edit-promotionalPrice" step="0.01" min="0"></label><label>Margem desejada (%)<input type="number" id="edit-desiredMarginPercent" step="0.01" min="0"></label><label>Lucro esperado<input type="number" id="edit-expectedProfit" step="0.01" min="0"></label><label>Comissão padrão (%)<input type="number" id="edit-defaultCommissionPercent" step="0.01" min="0"></label>
             <label>Preço mínimo<input type="number" id="edit-minimumPrice" step="0.01" min="0"></label>
             <label>Regra de desconto<select id="edit-discountPolicy"><option value="inherit">Herdar da categoria</option><option value="custom">Personalizada</option><option value="none">Não permitir desconto</option></select></label>
             <label>Desconto máximo (%)<input type="number" id="edit-maximumDiscountPercent" step="0.01" min="0" max="100"></label>
@@ -1867,20 +1997,21 @@ Com marcas de uso">Usados padrão</button></div><div class="quality-var-list" da
       </div>
 
       <div class="quality-edit-panel" data-edit-panel="estoque">
-        <div class="quality-inventory-config" style="margin:0;">
+        <div class="quality-inventory-config" style="margin:0;" id="edit-inventory-config">
           <strong>📦 Controle de estoque ERP</strong>
+          <div class="quality-service-note">🧰 Esta categoria é do tipo Serviço. O controle de estoque foi desativado e o histórico anterior permanece preservado.</div>
           <div class="quality-inventory-config-grid">
             <label class="inventory-check"><input type="checkbox" id="edit-stock-controlled"> Controlar estoque deste produto</label>
             <label class="inventory-check"><input type="checkbox" id="edit-allow-negative"> Permitir vender com estoque zerado/negativo</label>
-            <label>Estoque geral<input type="number" id="edit-stock" min="0" step="1" placeholder="Quantidade física"></label>
+            <label id="edit-stock-label">Estoque<input type="number" id="edit-stock" min="0" step="1" placeholder="Quantidade física"><small id="edit-stock-derived-help" class="quality-edit-help" style="display:none;">Calculado automaticamente pela soma das variações. Edite as quantidades abaixo.</small></label>
             <label>Estoque mínimo<input type="number" id="edit-stock-min" min="0" step="1" value="0"></label>
             <label>Disponibilidade no site<select id="edit-inventory-site-mode"><option value="shared">Compartilhar saldo</option><option value="limited">Limitar quantidade</option><option value="disabled">Não disponibilizar</option></select></label>
             <label>Limite do site<input type="number" id="edit-site-limit" min="0" step="1" placeholder="Opcional"></label>
             <label>Reserva física da loja<input type="number" id="edit-physical-safety" min="0" step="1" value="0"></label>
           </div>
-          <small class="quality-inventory-help">Alterar o estoque e salvar gera uma movimentação de ajuste em vez de apagar o histórico anterior.</small>
+          <small class="quality-inventory-help" id="edit-stock-policy-help">Produto simples usa estoque próprio. Quando houver combinações, o estoque do produto passa a ser somente a soma calculada das variações.</small>
         </div>
-        <div class="quality-stock-variation-box">
+        <div class="quality-stock-variation-box" id="edit-stock-variation-box">
           <strong>Estoque por variação</strong>
           <small class="quality-edit-help" style="display:block;">Quando existir grade de combinações, cada combinação recebe identidade própria no estoque.</small>
           <div id="edit-variation-stock-list" class="quality-stock-variation-list"></div>
@@ -1889,24 +2020,55 @@ Com marcas de uso">Usados padrão</button></div><div class="quality-var-list" da
 
       <div class="quality-edit-panel" data-edit-panel="seo">
         <div class="quality-edit-grid">
-          <div class="quality-edit-field"><label>Nome da Loja Virtual (Nome LV)</label><input type="text" id="edit-lvName"></div>
-          <div class="quality-edit-field"><label>Preço Loja Virtual</label><input type="number" id="edit-lvPrice" step="0.01" min="0"></div>
-          <div class="quality-edit-field"><label>Loja Virtual (LV)</label><select id="edit-lvActive"><option value="true">Ativo</option><option value="false">Inativo</option></select><small class="quality-edit-help">A alteração será refletida no site na próxima publicação.</small></div>
-          <div class="quality-edit-field">
+          <div class="quality-edit-field" data-edit-lv-dependent><label>Nome da Loja Virtual (Nome LV)</label><input type="text" id="edit-lvName"></div>
+          <div class="quality-edit-field" data-edit-lv-dependent><label>Preço Loja Virtual</label><input type="number" id="edit-lvPrice" step="0.01" min="0"></div>
+          <div class="quality-edit-field"><label>Produto publicado na Loja Virtual</label><select id="edit-lvActive"><option value="true">Ativo</option><option value="false">Inativo</option></select><small class="quality-edit-help">A alteração será refletida no site na próxima publicação.</small></div>
+          <div class="quality-edit-field" data-edit-lv-dependent>
+            <label>Slug / URL amigável</label>
+            <input type="text" id="edit-slug" placeholder="slug-do-produto">
+          </div>
+          <div class="quality-edit-field" data-edit-site-category>
+            <label>Categoria Loja Virtual</label>
+            <select id="edit-category" class="js-category-select" data-subcategory-target="edit-subcategory">
+              <option value="">Sem categoria</option>
+              <% (categorias || []).forEach(c => { %>
+                <option value="<%= c.slug %>"><%= c.name %></option>
+              <% }) %>
+            </select>
+          </div>
+          <div class="quality-edit-field" data-edit-site-category>
+            <label>Subcategoria Loja Virtual</label>
+            <select id="edit-subcategory" class="js-subcategory-select"><option value="">Sem subcategoria</option></select>
+          </div>
+          <div class="quality-edit-field" data-edit-lv-dependent>
+            <label>Mostrar preço</label>
+            <select id="edit-showPrice"><option value="true">Sim</option><option value="false">Não</option></select>
+          </div>
+          <div class="quality-edit-field" data-edit-lv-dependent>
+            <label>Vitrine</label>
+            <select id="edit-featured"><option value="true">Sim</option><option value="false">Não</option></select>
+          </div>
+          <div class="quality-edit-field" data-edit-lv-dependent>
+            <label>Ver detalhes</label>
+            <select id="edit-detailsEnabled"><option value="true">Sim</option><option value="false">Não</option></select>
+          </div>
+          <div class="quality-edit-field" data-edit-lv-dependent>
+            <label>Mostrar variações no card do site</label>
+            <select id="edit-showVariationsOnCard"><option value="false">Não</option><option value="true">Sim</option></select>
+            <small class="quality-edit-help">Liga/desliga por produto. A exibição no site precisa do próximo arquivo da vitrine/categoria.</small>
+          </div>
+          <div class="quality-edit-field" data-edit-lv-dependent>
             <label>Título SEO</label>
-            <input type="text" id="edit-seo-title" placeholder="Usa o nome do produto por enquanto">
-            <small class="quality-edit-help">Nesta versão, o título SEO acompanha o nome do produto.</small>
+            <input type="text" id="edit-seo-title" placeholder="Título para Google e compartilhamentos">
+            <small class="quality-edit-help">Título usado pelo site e buscadores. Se quiser, pode ser diferente do nome do produto.</small>
           </div>
-          <div class="quality-edit-field">
-            <label>URL canônica / slug</label>
-            <input type="text" id="edit-seo-slug" placeholder="slug-do-produto">
-          </div>
-          <div class="quality-edit-field" style="grid-column:1 / -1;">
+          <div class="quality-edit-field" data-edit-lv-dependent style="grid-column:1 / -1;">
             <label>Descrição SEO</label>
-            <textarea id="edit-seo-description" placeholder="Resumo para Google. Nesta versão serve como apoio visual; descrição real segue a descrição curta do produto."></textarea>
+            <textarea id="edit-seo-description" placeholder="Resumo para Google e compartilhamentos. Este conteúdo é salvo no produto."></textarea>
           </div>
         </div>
-        <div class="quality-empty-note" style="margin-top:12px;">🔎 SEO avançado preparado visualmente. O slug já salva hoje; título/descrição SEO dedicados exigem suporte no backend depois.</div>
+        <div class="quality-lv-disabled-note" id="edit-lv-disabled-note">A Loja Virtual está inativa para este item. Ative acima para editar categoria, SEO e recursos públicos.</div>
+        <div class="quality-empty-note" data-edit-lv-dependent style="margin-top:12px;">🔎 Categoria, subcategoria, slug, título SEO e descrição SEO são salvos no cadastro da Loja Virtual.</div>
       </div>
 
       <div class="quality-edit-actions">
@@ -1955,6 +2117,7 @@ Com marcas de uso">Usados padrão</button></div><div class="quality-var-list" da
 <script>
 document.addEventListener("DOMContentLoaded", () => {
   const searchInput = document.getElementById("panel-search-input");
+  const QUALITY_LIST_STATE = <%- JSON.stringify(listState || {}).replace(/</g, '\u003c') %>;
 
   const QUALITY_SUBCATEGORIES = <%- JSON.stringify(subcategorias || []).replace(/</g, '\u003c') %>;
   const QUALITY_CATEGORIES = <%- JSON.stringify(categorias || []).replace(/</g, '\u003c') %>;
@@ -1965,7 +2128,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (!target) return;
     const category = QUALITY_CATEGORIES.find(c => String(c.slug || '') === String(categorySelect.value || ''));
     const current = preferredValue || target.dataset.current || target.value || '';
-    target.innerHTML = '<option value="">Sem subcategoria</option>';
+    target.innerHTML = categorySelect.value ? '<option value="">Selecione uma subcategoria...</option>' : '<option value="">Selecione primeiro uma categoria...</option>';
     if (category) {
       QUALITY_SUBCATEGORIES.filter(s => Number(s.categoryId) === Number(category.id) && s.active !== false)
         .sort((a,b) => Number(a.order||0)-Number(b.order||0))
@@ -1973,6 +2136,16 @@ document.addEventListener("DOMContentLoaded", () => {
     }
     target.dataset.current = '';
   }
+  const addProductForm = document.getElementById('add-product-form');
+  addProductForm?.addEventListener('submit', (event) => {
+    const erpCategory = addProductForm.querySelector('select[name="erpCategory"]');
+    if (erpCategory && !erpCategory.value) {
+      event.preventDefault();
+      alert('Selecione uma categoria do ERP antes de cadastrar o produto.');
+      erpCategory.focus();
+    }
+  });
+
   document.querySelectorAll('.js-category-select').forEach(select => {
     refreshSubcategorySelect(select);
     select.addEventListener('change', () => refreshSubcategorySelect(select, ''));
@@ -2025,7 +2198,39 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   const categoryFilter = document.getElementById("panel-category-filter");
+  const erpFilter = document.getElementById("panel-erp-filter");
+  const lvFilter = document.getElementById("panel-lv-filter");
+  const stockFilter = document.getElementById("panel-stock-filter");
+  const filteredProductsCount = document.getElementById("filtered-products-count");
   const rows = document.querySelectorAll("#products-table-body .product-row");
+
+  async function hydrateCompactImageSelect(select) {
+    if (!select || select.dataset.imagesLoaded === 'true') return;
+    await sincronizarImagensAuto();
+    const current = select.value || select.dataset.currentVal || '';
+    const options = [...document.querySelectorAll('#imagens-list option')];
+    const fragment = document.createDocumentFragment();
+    const placeholder = document.createElement('option');
+    placeholder.value = '';
+    placeholder.textContent = 'Imagem...';
+    fragment.appendChild(placeholder);
+    options.forEach(source => {
+      const option = document.createElement('option');
+      option.value = source.value;
+      option.textContent = source.textContent || source.value.replace(/^images\//, '');
+      if (option.value === current) option.selected = true;
+      fragment.appendChild(option);
+    });
+    select.innerHTML = '';
+    select.appendChild(fragment);
+    select.value = current;
+    select.dataset.imagesLoaded = 'true';
+  }
+
+  document.querySelectorAll('.quality-image-compact-select[data-lazy-images="true"]').forEach(select => {
+    select.addEventListener('focus', () => hydrateCompactImageSelect(select), { once: true });
+    select.addEventListener('pointerdown', () => hydrateCompactImageSelect(select), { once: true });
+  });
   const selectedCount = document.getElementById("selected-count");
   const bulkContainer = document.getElementById("bulk-selected-container");
   const selectAllCheckbox = document.getElementById("select-all-checkbox");
@@ -2037,8 +2242,20 @@ document.addEventListener("DOMContentLoaded", () => {
   const bulkStockControlled = document.getElementById("bulk-stock-controlled");
   const bulkMinimumQuantity = document.getElementById("bulk-minimum-quantity");
   const flashMessage = document.getElementById("flash-message");
-  const updateAllForm = document.getElementById("update-all-form");
-  const saveDirtyProductsBtn = document.getElementById("save-dirty-products-btn");
+
+  const bulkCenterToggle = document.getElementById("bulk-center-toggle");
+  const bulkCenter = bulkCenterToggle?.closest(".quality-bulk-center");
+  const syncBulkCenter = () => {
+    const expanded = bulkCenter?.classList.contains("is-expanded") === true;
+    bulkCenterToggle?.setAttribute("aria-expanded", expanded ? "true" : "false");
+    const icon = bulkCenterToggle?.querySelector(".quality-bulk-toggle-icon");
+    if (icon) icon.textContent = expanded ? "▼" : "▶";
+  };
+  bulkCenterToggle?.addEventListener("click", () => {
+    bulkCenter?.classList.toggle("is-expanded");
+    syncBulkCenter();
+  });
+  syncBulkCenter();
 
   const galleryModal = document.getElementById("gallery-modal-backdrop");
   const galleryModalClose = document.getElementById("gallery-modal-close");
@@ -2430,23 +2647,84 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
+  function syncRowOperationalState(row) {
+    const erpActive = row.querySelector('select[name="erpActive"]')?.value !== 'false';
+    const lvActive = row.querySelector('select[name="lvActive"]')?.value !== 'false';
+    row.dataset.erpActive = erpActive ? 'true' : 'false';
+    row.dataset.lvActive = lvActive ? 'true' : 'false';
+    row.classList.toggle('erp-inactive', !erpActive);
+    row.classList.toggle('lv-inactive', !lvActive);
+    const lvPanel = row.querySelector('.quality-channel-status:has(select[name="lvActive"])');
+    if (lvPanel) lvPanel.classList.toggle('quality-lv-controls-disabled', !lvActive);
+  }
+
+  function normalizeProductSearch(value) {
+    return String(value || "")
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "")
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, " ")
+      .trim();
+  }
+
+  function productSearchMatches(haystack, query) {
+    const normalizedHaystack = normalizeProductSearch(haystack);
+    const normalizedQuery = normalizeProductSearch(query);
+    if (!normalizedQuery) return true;
+    const hayTokens = normalizedHaystack.split(/\s+/).filter(Boolean);
+    const queryTokens = normalizedQuery.split(/\s+/).filter(Boolean);
+    return queryTokens.every(token => hayTokens.some(hayToken => token.length >= 3 ? hayToken.includes(token) : hayToken.startsWith(token)));
+  }
+
   function filterTable() {
-    const searchText = (searchInput?.value || "").toLowerCase().trim();
+    const searchText = searchInput?.value || "";
     const selectedCategory = categoryFilter?.value || "";
+    const selectedErp = erpFilter?.value || "";
+    const selectedLv = lvFilter?.value || "";
+    const selectedStock = stockFilter?.value || "";
+    let visibleCount = 0;
 
     rows.forEach(row => {
-      const productName = row.querySelector(".prod-name-input")?.value.toLowerCase() || "";
+      syncRowOperationalState(row);
+      const searchableSelectors = [
+        ".prod-name-input", ".prod-slug-input",
+        'input[name="internalCode"]', 'input[name="sku"]',
+        'input[name="barcode"]', 'input[name="supplierCode"]',
+        'input[name="searchAlias"]'
+      ];
+      const searchHaystack = searchableSelectors
+        .map(selector => row.querySelector(selector)?.value || "")
+        .join(" ");
       const productCategory = row.querySelector(".prod-category-select")?.value || "";
-      const matchesSearch = productName.includes(searchText);
+      const matchesSearch = productSearchMatches(searchHaystack, searchText);
+      const matchesErp = !selectedErp || row.dataset.erpActive === selectedErp;
+      const matchesLv = !selectedLv || row.dataset.lvActive === selectedLv;
+      const isService = row.dataset.erpCategoryType === "service";
+      const stockValue = Number(row.querySelector('input[name="stock"]')?.value ?? row.dataset.stock ?? 0);
+      const stockControlled = (row.querySelector('input[name="stockControlled"]')?.value || row.dataset.stockControlled) === "true";
+      let matchesStock = true;
+      if (selectedStock === "service") matchesStock = isService;
+      else if (selectedStock === "positive") matchesStock = !isService && stockControlled && stockValue > 0;
+      else if (selectedStock === "zero") matchesStock = !isService && stockControlled && stockValue <= 0;
 
       let matchesCategory = false;
       if (selectedCategory === "") matchesCategory = true;
       else if (selectedCategory === "[vitrine]") matchesCategory = productCategory === "";
       else matchesCategory = productCategory === selectedCategory;
 
-      row.style.display = (matchesSearch && matchesCategory) ? "" : "none";
+      const visible = matchesSearch && matchesCategory && matchesErp && matchesLv && matchesStock;
+      row.style.display = visible ? "" : "none";
+      if (visible) visibleCount += 1;
     });
 
+    if (filteredProductsCount) {
+      const serverStateMatches = String(searchText).trim() === String(QUALITY_LIST_STATE.query || '').trim()
+        && selectedCategory === String(QUALITY_LIST_STATE.category || '')
+        && selectedErp === String(QUALITY_LIST_STATE.erpStatus || '')
+        && selectedLv === String(QUALITY_LIST_STATE.lvStatus || '')
+        && !selectedStock;
+      filteredProductsCount.textContent = String(serverStateMatches ? (QUALITY_LIST_STATE.totalFiltered ?? visibleCount) : visibleCount);
+    }
     updateSelectionCount();
   }
 
@@ -2460,9 +2738,34 @@ document.addEventListener("DOMContentLoaded", () => {
     row.dataset.dirty = "0";
   }
 
-  async function saveProductRow(row) {
+  function refreshLvCategoryCard(row) {
+    if (!row) return;
+    const card = row.querySelector('.quality-lv-category-card');
+    if (!card) return;
+    const categorySlug = getRowField(row, '.prod-category-select');
+    const subcategorySlug = getRowField(row, '.prod-subcategory-select');
+    const category = QUALITY_CATEGORIES.find(c => String(c.slug || '') === String(categorySlug || ''));
+    const subcategory = QUALITY_SUBCATEGORIES.find(s => String(s.slug || '') === String(subcategorySlug || '') && (!category || Number(s.categoryId) === Number(category.id)));
+    card.innerHTML = '';
+    const small = document.createElement('small');
+    small.textContent = 'Categoria LV';
+    const strong = document.createElement('strong');
+    strong.textContent = category?.name || categorySlug || 'Sem categoria';
+    card.appendChild(small);
+    card.appendChild(strong);
+    if (subcategory) {
+      const span = document.createElement('span');
+      span.textContent = 'Subcategoria LV: ' + (subcategory.name || subcategory.slug || subcategorySlug);
+      card.appendChild(span);
+    }
+  }
+
+  async function saveProductRow(row, options = {}) {
     const data = new URLSearchParams();
     data.append("id", row.dataset.id);
+    if (Array.isArray(options.touchedFields)) {
+      data.append('__touchedFields', JSON.stringify(options.touchedFields));
+    }
 
     row.querySelectorAll("input[name], select[name], textarea[name]").forEach(el => {
       if (el.name === "id") return;
@@ -2494,30 +2797,10 @@ document.addEventListener("DOMContentLoaded", () => {
       const json = await res.json();
       if (!res.ok || !json.success) throw new Error(json.message || "Erro ao salvar produto.");
 
-      const statusData = new URLSearchParams();
-      statusData.append('id', row.dataset.id);
-      statusData.append('erpActive', submittedErpActive);
-      statusData.append('lvActive', submittedLvActive);
-
-      const statusResponse = await fetch('/produtos/update-channel-status', {
-        method: 'POST',
-        body: statusData.toString(),
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
-        }
-      });
-      const statusJson = await statusResponse.json();
-      if (!statusResponse.ok || !statusJson.success) {
-        throw new Error(statusJson.message || 'Erro ao salvar os status ERP/LV.');
-      }
-
-      // A resposta da rota dedicada é a fonte final dos dois estados.
-      if (statusJson.item) {
-        json.item.erp = statusJson.item.erp;
-        json.item.active = statusJson.item.active;
-        json.item.virtualStore = statusJson.item.virtualStore;
-      }
+      // O /produtos/update já persiste o produto completo, inclusive os estados
+      // ERP/LV. Não fazemos uma segunda gravação de status aqui: duas requisições
+      // concorrentes sobre products.json podiam fazer uma resposta antiga sobrescrever
+      // Categoria LV, Subcategoria e SEO recém-salvos.
 
       if (json.item && json.item.slug) {
         const slugInput = row.querySelector(".prod-slug-input");
@@ -2545,6 +2828,14 @@ document.addEventListener("DOMContentLoaded", () => {
         setRowField(row, 'select[name="lvActive"]', savedLvActive === false ? 'false' : 'true');
       }
 
+      if (json.item) {
+        setRowField(row, '.prod-category-select', json.item.category || '');
+        setRowField(row, '.prod-subcategory-select', json.item.subcategory || json.item.subcategoria || '');
+        setRowField(row, 'input[name="seoTitle"]', json.item.virtualStore?.seoTitle || '');
+        setRowField(row, 'input[name="seoDescription"]', json.item.virtualStore?.seoDescription || '');
+        refreshLvCategoryCard(row);
+      }
+
       markRowClean(row);
       updateGallerySummary(row);
 
@@ -2558,16 +2849,18 @@ document.addEventListener("DOMContentLoaded", () => {
       } else {
         showMessage("✅ Produto salvo com sucesso.");
       }
+      return true;
     } catch (err) {
       console.error(err);
+      const message = err?.message || "Erro ao salvar produto.";
       const status = row.querySelector(".row-save-status");
       if (status) {
-        status.textContent = "⚠️ Erro ao salvar";
+        status.textContent = `⚠️ ${message}`;
         status.style.color = "#a40000";
         status.style.display = "inline-block";
-      } else {
-        showMessage("⚠️ Erro ao salvar produto.", "error");
       }
+      showMessage(`⚠️ ${message}`, "error");
+      return false;
     } finally {
       if (btn) {
         btn.disabled = false;
@@ -2618,6 +2911,8 @@ document.addEventListener("DOMContentLoaded", () => {
       const savedLv = json.item?.virtualStore?.active === false ? 'false' : 'true';
       if (erpSelect) erpSelect.value = savedErp;
       if (lvSelect) lvSelect.value = savedLv;
+      syncRowOperationalState(row);
+      filterTable();
 
       markRowClean(row);
       if (status) {
@@ -2643,52 +2938,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-
-  async function saveDirtyProductRows() {
-    const dirtyRows = Array.from(rows).filter(row => row.dataset.dirty === "1");
-
-    if (!dirtyRows.length) {
-      showMessage("✅ Nenhuma alteração pendente para salvar.");
-      return;
-    }
-
-    const oldText = saveDirtyProductsBtn ? saveDirtyProductsBtn.textContent : "";
-    if (saveDirtyProductsBtn) {
-      saveDirtyProductsBtn.disabled = true;
-      saveDirtyProductsBtn.textContent = `Salvando ${dirtyRows.length} produto(s)...`;
-    }
-
-    let saved = 0;
-    let failed = 0;
-
-    for (const row of dirtyRows) {
-      try {
-        await saveProductRow(row);
-        saved++;
-      } catch (err) {
-        console.error(err);
-        failed++;
-      }
-    }
-
-    if (saveDirtyProductsBtn) {
-      saveDirtyProductsBtn.disabled = false;
-      saveDirtyProductsBtn.textContent = oldText;
-    }
-
-    if (failed) {
-      showMessage(`⚠️ ${saved} produto(s) salvo(s), ${failed} com erro.`, "error");
-    } else {
-      showMessage(`✅ ${saved} produto(s) salvo(s) com sucesso.`);
-    }
-  }
-
-  updateAllForm?.addEventListener("submit", (event) => {
-    event.preventDefault();
-    saveDirtyProductRows();
-  });
-
-  saveDirtyProductsBtn?.addEventListener("click", saveDirtyProductRows);
 
   galleryModalClose?.addEventListener("click", closeGalleryModal);
   galleryModal?.addEventListener("click", (event) => {
@@ -2730,8 +2979,33 @@ document.addEventListener("DOMContentLoaded", () => {
   });
   addGalleryTextarea?.addEventListener("input", updateAddGallerySummary);
 
-  searchInput?.addEventListener("input", filterTable);
-  categoryFilter?.addEventListener("change", filterTable);
+  let serverFilterTimer = null;
+  function navigateServerFilteredList(delay = 0) {
+    clearTimeout(serverFilterTimer);
+    serverFilterTimer = setTimeout(() => {
+      const params = new URLSearchParams(window.location.search);
+      params.delete('workspace');
+      params.delete('type');
+      params.set('page', '1');
+      const setOrDelete = (key, value) => value ? params.set(key, value) : params.delete(key);
+      setOrDelete('q', searchInput?.value.trim() || '');
+      setOrDelete('categoria', categoryFilter?.value || '');
+      setOrDelete('erpStatus', erpFilter?.value || '');
+      setOrDelete('lvStatus', lvFilter?.value || '');
+      window.location.href = `/produtos?${params.toString()}`;
+    }, delay);
+  }
+
+  // A busca local responde imediatamente, mas a paginação no servidor só acontece
+  // depois de uma pausa real na digitação. Isso evita recarregar a página a cada letra.
+  searchInput?.addEventListener("input", () => { navigateServerFilteredList(700); });
+  searchInput?.addEventListener("keydown", event => {
+    if (event.key === 'Enter') { event.preventDefault(); navigateServerFilteredList(0); }
+  });
+  categoryFilter?.addEventListener("change", () => { filterTable(); navigateServerFilteredList(0); });
+  erpFilter?.addEventListener("change", () => { filterTable(); navigateServerFilteredList(0); });
+  lvFilter?.addEventListener("change", () => { filterTable(); navigateServerFilteredList(0); });
+  stockFilter?.addEventListener("change", filterTable);
 
   document.querySelectorAll(".product-check").forEach(chk => {
     chk.addEventListener("change", updateSelectionCount);
@@ -2754,8 +3028,11 @@ document.addEventListener("DOMContentLoaded", () => {
     const lvStatusSelect = row.querySelector('select[name="lvActive"]');
     if (erpStatusSelect) erpStatusSelect.dataset.savedValue = erpStatusSelect.value;
     if (lvStatusSelect) lvStatusSelect.dataset.savedValue = lvStatusSelect.value;
-    erpStatusSelect?.addEventListener('change', () => saveChannelStatus(row));
-    lvStatusSelect?.addEventListener('change', () => saveChannelStatus(row));
+    // Somente alterações feitas pelo usuário disparam a gravação dedicada de status.
+    // setRowField() também emite `change` para atualizar a UI; deixar esses eventos
+    // programáticos salvarem gerava duas escritas concorrentes no products.json.
+    erpStatusSelect?.addEventListener('change', (event) => { if (event.isTrusted) saveChannelStatus(row); });
+    lvStatusSelect?.addEventListener('change', (event) => { if (event.isTrusted) saveChannelStatus(row); });
 
     row.querySelector(".save-product-btn")?.addEventListener("click", () => saveProductRow(row));
     row.querySelector(".manage-gallery-btn")?.addEventListener("click", () => openGalleryModal(makeGalleryContextFromRow(row)));
@@ -2766,6 +3043,8 @@ document.addEventListener("DOMContentLoaded", () => {
     updateGallerySummary(row);
     updateVariationSummary(row);
   });
+
+  filterTable();
 
   selectAllCheckbox?.addEventListener("change", () => {
     visibleRows().forEach(row => {
@@ -2813,6 +3092,8 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     const labels = enabled.map(input => input.closest('.quality-bulk-action')?.querySelector('.quality-bulk-action-head')?.textContent.trim()).filter(Boolean);
+    const confirmed = window.confirm(`Aplicar ${labels.join(', ')} em ${checkedProducts.length} produto(s) selecionado(s)?`);
+    if (!confirmed) { event.preventDefault(); return; }
     if (bulkActionsSummary) bulkActionsSummary.textContent = `${checkedProducts.length} produto(s) · ${labels.join(' · ')}`;
 
     const categoryEnabled = enabled.some(input => input.value === 'category');
@@ -2957,7 +3238,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function comboLineLabel(line) {
     const p = (line || '').split('|').map(v => v.trim());
-    return [p[0], p[1], p[2], p[3]].filter(Boolean).join(' + ') + (p[4] ? ' 🖼️' : '') + (p[5] ? ' • Est: ' + p[5] : '');
+    return [p[0], p[1], p[2], p[3]].filter(Boolean).join(' + ') + (p[4] ? ' 🖼️' : '') + (p[5] ? ' • Est: ' + p[5] : '') + (p[6] ? ' • R$ ' + Number(p[6]).toLocaleString('pt-BR',{minimumFractionDigits:2,maximumFractionDigits:2}) : ' • preço do pai');
   }
 
   function colorNameFromLine(line) { return (line || '').split('|')[0].trim(); }
@@ -2979,6 +3260,62 @@ document.addEventListener("DOMContentLoaded", () => {
     if (values.includes(old)) select.value = old;
   }
 
+  function reconcileVariationCombinationLines(box, dimensions, comboTextarea) {
+    const fields = ['color','storage','ram','condition'];
+    const fieldIndex = {color:0,storage:1,ram:2,condition:3};
+    const allowed = {};
+    (dimensions || []).forEach(function(entry){ allowed[entry[0]] = new Set((entry[1] || []).map(String)); });
+
+    const existing = parseLines(comboTextarea?.value || '');
+    const clean = [];
+    const seen = new Set();
+
+    function lineParts(line){
+      const parts=String(line||'').split('|').map(function(v){return v.trim();});
+      while(parts.length<7)parts.push('');
+      return parts;
+    }
+    function key(parts){ return parts.slice(0,4).join('|'); }
+    function valid(parts){
+      return fields.every(function(field){
+        const value=parts[fieldIndex[field]]||'';
+        if(!value)return true;
+        return !!(allowed[field] && allowed[field].has(value));
+      });
+    }
+    function push(parts){
+      const k=key(parts);
+      if(!k.replace(/\|/g,'') || seen.has(k))return;
+      seen.add(k);clean.push(parts);
+    }
+
+    existing.map(lineParts).filter(valid).forEach(push);
+
+    function generateForOrphan(field,value){
+      const others=(dimensions||[]).filter(function(entry){return entry[0]!==field;});
+      let rows=[['','','','','','','']];
+      others.forEach(function(entry){
+        const otherField=entry[0], values=entry[1]||[], idx=fieldIndex[otherField];
+        rows=rows.flatMap(function(base){
+          return values.map(function(option){const copy=base.slice();copy[idx]=option;return copy;});
+        });
+      });
+      if(!others.length)rows=[['','','','','','','']];
+      rows.forEach(function(parts){parts[fieldIndex[field]]=value;push(parts);});
+    }
+
+    (dimensions||[]).forEach(function(entry){
+      const field=entry[0], values=entry[1]||[], idx=fieldIndex[field];
+      values.forEach(function(value){
+        if(!clean.some(function(parts){return (parts[idx]||'')===value;})) generateForOrphan(field,value);
+      });
+    });
+
+    const lines=clean.map(function(parts){return parts.join('|').replace(/\|+$/,'');});
+    if(comboTextarea)comboTextarea.value=lines.join('\n');
+    return lines;
+  }
+
   function renderComboTools(box) {
     if (!box) return;
     const colors = parseLines(getVarTextarea(box, 'colors')?.value).map(colorNameFromLine).filter(Boolean);
@@ -2993,11 +3330,100 @@ document.addEventListener("DOMContentLoaded", () => {
     const comboTextarea = getVarTextarea(box, 'combinations');
     const comboList = box.querySelector('[data-var-list="combinations"]');
     if (!comboTextarea || !comboList) return;
+
+    // Reconciliamos as opções com a grade de estoque. Isso evita o caso em que
+    // uma nova variação aparece visualmente, mas fica fora de "Estoque por variação".
+    // Combinações já existentes mantêm estoque/preço; opções removidas deixam de
+    // gerar combinações e novas opções recebem as combinações que faltam.
+    const dimensions = [
+      ['color', colors], ['storage', storage], ['ram', ram], ['condition', condition]
+    ].filter(([, values]) => values.length);
+    let comboLines = reconcileVariationCombinationLines(box, dimensions, comboTextarea);
+
+    // Quando há somente um grupo, a opção já é a própria variação vendável.
+    // Nesse caso o preço pertence visualmente à opção (Cor/Tipo de serviço/etc.),
+    // e não à Grade de combinações. A grade continua sendo usada internamente
+    // para manter identidade, preço e compatibilidade com PDV/estoque.
+    const comboCard = box.querySelector('[data-var-card="combinations"]');
+    if (dimensions.length === 1) {
+      if (comboCard) comboCard.style.display = 'none';
+      const [field, values] = dimensions[0];
+      const typeByField = { color:'colors', storage:'storage', ram:'ram', condition:'condition' };
+      const fieldIndex = { color:0, storage:1, ram:2, condition:3 }[field];
+      const listBox = box.querySelector(`[data-var-list="${typeByField[field]}"]`);
+      const pills = listBox ? Array.from(listBox.querySelectorAll('.quality-var-pill')) : [];
+      values.forEach((value, optionIndex) => {
+        const pill = pills[optionIndex];
+        if (!pill) return;
+        const comboIndex = comboLines.findIndex(line => {
+          const parts = line.split('|').map(v => v.trim());
+          return (parts[fieldIndex] || '') === value;
+        });
+        if (comboIndex < 0) return;
+        const parts = comboLines[comboIndex].split('|').map(v => v.trim());
+        while (parts.length < 7) parts.push('');
+        const wrap = document.createElement('span');
+        wrap.className = 'quality-variation-inline-price';
+        const label = document.createElement('small');
+        label.textContent = 'Preço ERP';
+        const input = document.createElement('input');
+        input.type = 'number'; input.min = '0'; input.step = '0.01';
+        input.placeholder = 'Herdar pai'; input.value = parts[6] || '';
+        input.title = 'Vazio = usa o Preço de venda ERP do cadastro pai';
+        input.addEventListener('click', e => e.stopPropagation());
+        input.addEventListener('change', () => {
+          const current = parseLines(comboTextarea.value);
+          const currentIndex = current.findIndex(line => {
+            const p = line.split('|').map(v => v.trim());
+            return (p[fieldIndex] || '') === value;
+          });
+          if (currentIndex < 0) return;
+          const cp = current[currentIndex].split('|').map(v => v.trim());
+          while (cp.length < 7) cp.push('');
+          cp[6] = input.value.trim();
+          current[currentIndex] = cp.join('|').replace(/\|+$/,'');
+          comboTextarea.value = current.join('\n');
+          comboTextarea.dispatchEvent(new Event('input', { bubbles:true }));
+        });
+        wrap.appendChild(label); wrap.appendChild(input);
+        const removeBtn = pill.querySelector('button');
+        pill.insertBefore(wrap, removeBtn || null);
+      });
+    } else if (comboCard) {
+      comboCard.style.display = '';
+    }
+
     comboList.innerHTML = '';
-    parseLines(comboTextarea.value).forEach((line, index) => {
+    comboLines.forEach((line, index) => {
+      const parts = line.split('|').map(v => v.trim());
+      while (parts.length < 7) parts.push('');
       const pill = document.createElement('span');
       pill.className = 'quality-combo-pill';
-      pill.appendChild(document.createTextNode(comboLineLabel(line)));
+      const text = document.createElement('span');
+      text.textContent = [parts[0], parts[1], parts[2], parts[3]].filter(Boolean).join(' + ') || `Variação ${index + 1}`;
+      pill.appendChild(text);
+      const priceLabel = document.createElement('span');
+      priceLabel.className = 'quality-combo-price-label';
+      priceLabel.textContent = 'Preço ERP';
+      pill.appendChild(priceLabel);
+      const priceInput = document.createElement('input');
+      priceInput.type = 'number';
+      priceInput.min = '0';
+      priceInput.step = '0.01';
+      priceInput.placeholder = 'Herdar pai';
+      priceInput.className = 'quality-combo-price-inline';
+      priceInput.value = parts[6] || '';
+      priceInput.title = 'Vazio = usa o Preço de venda ERP do cadastro pai';
+      priceInput.addEventListener('change', () => {
+        const current = parseLines(comboTextarea.value);
+        const currentParts = (current[index] || line).split('|').map(v => v.trim());
+        while (currentParts.length < 7) currentParts.push('');
+        currentParts[6] = priceInput.value.trim();
+        current[index] = currentParts.join('|').replace(/\|+$/,'');
+        comboTextarea.value = current.join('\n');
+        comboTextarea.dispatchEvent(new Event('input', { bubbles:true }));
+      });
+      pill.appendChild(priceInput);
       const remove = document.createElement('button');
       remove.type = 'button';
       remove.textContent = '×';
@@ -3061,8 +3487,9 @@ document.addEventListener("DOMContentLoaded", () => {
         const condition = box.querySelector('.var-combo-select[data-combo="condition"]')?.value || '';
         const image = (box.querySelector('.var-combo-image')?.value || '').trim();
         const stock = (box.querySelector('.var-combo-stock')?.value || '').trim();
+        const price = (box.querySelector('.var-combo-price')?.value || '').trim();
         if (!color && !storage && !ram && !condition) return alert('Escolha pelo menos uma opção para a combinação.');
-        const line = [color, storage, ram, condition, image, stock].join('|').replace(/\|+$/,'');
+        const line = [color, storage, ram, condition, image, stock, price].join('|').replace(/\|+$/,'');
         const textarea = getVarTextarea(box, 'combinations');
         const list = parseLines(textarea.value);
         uniquePush(list, line);
@@ -3070,8 +3497,10 @@ document.addEventListener("DOMContentLoaded", () => {
         textarea.dispatchEvent(new Event("input", { bubbles:true }));
         const imageInput = box.querySelector('.var-combo-image');
         const stockInput = box.querySelector('.var-combo-stock');
+        const priceInput = box.querySelector('.var-combo-price');
         if (imageInput) imageInput.value = '';
         if (stockInput) stockInput.value = '';
+        if (priceInput) priceInput.value = '';
         renderVariationBox(box);
       });
     });
@@ -3442,6 +3871,35 @@ document.addEventListener("DOMContentLoaded", () => {
   const editProductThumb = document.getElementById("edit-product-thumb");
   const editVariationStockList = document.getElementById("edit-variation-stock-list");
   let activeEditRow = null;
+  let activeEditTouchedFields = new Set();
+  const editProtectedLvFields = new Map([
+    ['edit-lvName', 'lvName'],
+    ['edit-lvPrice', 'lvPrice'],
+    ['edit-category', 'category'],
+    ['edit-subcategory', 'subcategory'],
+    ['edit-seo-title', 'seoTitle'],
+    ['edit-seo-description', 'seoDescription'],
+    ['edit-showPrice', 'showPrice'],
+    ['edit-lvActive', 'lvActive'],
+    ['edit-featured', 'featured'],
+    ['edit-detailsEnabled', 'detailsEnabled'],
+    ['edit-showVariationsOnCard', 'showVariationsOnCard']
+  ]);
+
+  function markEditFieldTouched(event) {
+    const key = editProtectedLvFields.get(event.currentTarget?.id);
+    if (!key || !activeEditRow) return;
+    activeEditTouchedFields.add(key);
+    // Trocar a categoria pode limpar/recalcular a subcategoria automaticamente.
+    // Nesse caso os dois campos pertencem à mesma alteração intencional.
+    if (key === 'category') activeEditTouchedFields.add('subcategory');
+  }
+
+  editProtectedLvFields.forEach((_, id) => {
+    const el = document.getElementById(id);
+    el?.addEventListener('input', markEditFieldTouched);
+    el?.addEventListener('change', markEditFieldTouched);
+  });
 
   function qltCodeFromRow(row){
     const raw = String(row?.dataset?.id || "0").replace(/\D/g, "");
@@ -3466,15 +3924,35 @@ document.addEventListener("DOMContentLoaded", () => {
     return "/" + String(path).replace(/^\//, "");
   }
 
+  function selectedErpCategoryType(select){
+    return select?.selectedOptions?.[0]?.dataset?.categoryType || "product";
+  }
+
+  function syncEditCategoryBehavior(){
+    const select=document.getElementById("edit-erpCategory");
+    const isService=selectedErpCategoryType(select)==="service";
+    document.getElementById("edit-inventory-config")?.classList.toggle("is-service",isService);
+    document.getElementById("edit-stock-variation-box")?.classList.toggle("is-service",isService);
+    if(isService){
+      const controlled=document.getElementById("edit-stock-controlled");
+      const negative=document.getElementById("edit-allow-negative");
+      const mode=document.getElementById("edit-inventory-site-mode");
+      if(controlled) controlled.checked=false;
+      if(negative) negative.checked=false;
+      if(mode) mode.value="disabled";
+    }
+    return isService;
+  }
+
   function parseComboLines(text){
     return (text || "").split(/\r?\n/).map(line => line.trim()).filter(Boolean).map(line => {
       const parts = line.split("|").map(v => v.trim());
-      return { color: parts[0] || "", storage: parts[1] || "", ram: parts[2] || "", condition: parts[3] || "", image: parts[4] || "", stock: parts[5] || "" };
+      return { color: parts[0] || "", storage: parts[1] || "", ram: parts[2] || "", condition: parts[3] || "", image: parts[4] || "", stock: parts[5] || "", erpPrice: parts[6] || "" };
     });
   }
 
   function comboToLine(c){
-    return [c.color, c.storage, c.ram, c.condition, c.image, c.stock].filter((x, i) => i < 4 || (x !== undefined && x !== null && x !== "")).join("|");
+    return [c.color, c.storage, c.ram, c.condition, c.image, c.stock, c.erpPrice].map(function(x){return x===undefined||x===null?'':x;}).join("|").replace(/\|+$/,'');
   }
 
   function comboLabel(c){
@@ -3498,8 +3976,42 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
+  function syncEditStockArchitecture(row){
+    const combosEl = row?.querySelector('.row-variation-combinations');
+    const combos = parseComboLines(combosEl?.value || '');
+    const hasVariations = combos.length > 0;
+    const stockInput = document.getElementById('edit-stock');
+    const stockLabel = document.getElementById('edit-stock-label');
+    const derivedHelp = document.getElementById('edit-stock-derived-help');
+    if (!stockInput) return hasVariations;
+
+    if (hasVariations) {
+      const total = combos.reduce((sum, combo) => sum + Math.max(0, Number(combo.stock) || 0), 0);
+      stockInput.value = String(total);
+      // Produto com variações não possui estoque próprio. O total é apenas uma
+      // leitura derivada da soma das combinações e não pode receber foco/edição.
+      stockInput.readOnly = true;
+      stockInput.disabled = true;
+      stockInput.tabIndex = -1;
+      stockInput.setAttribute('aria-readonly', 'true');
+      stockInput.title = 'Calculado automaticamente pela soma das variações';
+      if (stockLabel?.childNodes?.[0]) stockLabel.childNodes[0].textContent = 'Estoque total (variações)';
+      if (derivedHelp) derivedHelp.style.display = 'block';
+    } else {
+      stockInput.readOnly = false;
+      stockInput.disabled = false;
+      stockInput.tabIndex = 0;
+      stockInput.removeAttribute('aria-readonly');
+      stockInput.removeAttribute('title');
+      if (stockLabel?.childNodes?.[0]) stockLabel.childNodes[0].textContent = 'Estoque';
+      if (derivedHelp) derivedHelp.style.display = 'none';
+    }
+    return hasVariations;
+  }
+
   function openEditProductModal(row){
     activeEditRow = row;
+    activeEditTouchedFields = new Set();
     if (!row) return;
     const name = getRowField(row, ".prod-name-input");
     const image = getRowField(row, ".prod-image-select");
@@ -3508,14 +4020,15 @@ document.addEventListener("DOMContentLoaded", () => {
     if (editProductThumb) editProductThumb.src = productImageUrl(image);
 
     document.getElementById("edit-name").value = name;
+    document.getElementById("edit-searchAlias").value = getRowField(row, 'input[name="searchAlias"]');
     document.getElementById("edit-sku").value = getRowField(row, 'input[name="sku"]');
     document.getElementById("edit-internalCode").value = getRowField(row, 'input[name="internalCode"]');
     document.getElementById("edit-supplierCode").value = getRowField(row, 'input[name="supplierCode"]');
     document.getElementById("edit-barcode").value = getRowField(row, 'input[name="barcode"]');
     document.getElementById("edit-brand").value = getRowField(row, 'input[name="brand"]');
     document.getElementById("edit-unit").value = getRowField(row, 'input[name="unit"]') || "UN";
-    document.getElementById("edit-erpCategory").value = getRowField(row, 'input[name="erpCategory"]');
-    document.getElementById("edit-erpSubcategory").value = getRowField(row, 'input[name="erpSubcategory"]');
+    const editErpCategory = document.getElementById("edit-erpCategory");
+    editErpCategory.value = getRowField(row, 'input[name="erpCategory"]');
     document.getElementById("edit-erpActive").value = getRowField(row, 'select[name="erpActive"]') || "true";
     document.getElementById("edit-lvName").value = getRowField(row, 'input[name="lvName"]') || name;
     document.getElementById("edit-lvPrice").value = getRowField(row, 'input[name="lvPrice"]');
@@ -3523,7 +4036,6 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("edit-category").value = getRowField(row, ".prod-category-select");
     refreshSubcategorySelect(document.getElementById("edit-category"), getRowField(row, ".prod-subcategory-select"));
     document.getElementById("edit-image").value = image;
-    document.getElementById("edit-price").value = getRowField(row, 'input[name="price"]');
     document.getElementById("edit-costPrice").value = getRowField(row, 'input[name="costPrice"]');
     document.getElementById("edit-erpPrice").value = getRowField(row, 'input[name="erpPrice"]');
     document.getElementById("edit-marketplacePrice").value = getRowField(row, 'input[name="marketplacePrice"]');
@@ -3531,8 +4043,6 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("edit-desiredMarginPercent").value = getRowField(row, 'input[name="desiredMarginPercent"]');
     document.getElementById("edit-expectedProfit").value = getRowField(row, 'input[name="expectedProfit"]');
     document.getElementById("edit-defaultCommissionPercent").value = getRowField(row, 'input[name="defaultCommissionPercent"]');
-    document.getElementById("edit-cashPrice").value = getRowField(row, 'input[name="cashPrice"]');
-    document.getElementById("edit-installmentPrice").value = getRowField(row, 'input[name="installmentPrice"]');
     document.getElementById("edit-minimumPrice").value = getRowField(row, 'input[name="minimumPrice"]');
     document.getElementById("edit-minimumMarginPercent").value = getRowField(row, 'input[name="minimumMarginPercent"]');
     document.getElementById("edit-discountPolicy").value = getRowField(row, 'input[name="discountPolicy"]') || "inherit";
@@ -3556,10 +4066,12 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("edit-inventory-site-mode").value = getRowField(row, '.row-inventory-site-mode') || "shared";
     document.getElementById("edit-site-limit").value = getRowField(row, '.row-site-limit');
     document.getElementById("edit-physical-safety").value = getRowField(row, '.row-physical-safety') || "0";
-    document.getElementById("edit-seo-title").value = name;
-    document.getElementById("edit-seo-slug").value = getRowField(row, ".prod-slug-input");
-    document.getElementById("edit-seo-description").value = getRowField(row, ".row-description-short");
+    document.getElementById("edit-seo-title").value = getRowField(row, 'input[name="seoTitle"]') || name;
+    document.getElementById("edit-slug").value = getRowField(row, ".prod-slug-input");
+    document.getElementById("edit-seo-description").value = getRowField(row, 'input[name="seoDescription"]') || getRowField(row, ".row-description-short");
     renderEditVariationStock(row);
+    syncEditStockArchitecture(row);
+    syncEditCategoryBehavior();
 
     document.querySelectorAll(".quality-edit-tab").forEach((btn, idx) => btn.classList.toggle("active", idx === 0));
     document.querySelectorAll(".quality-edit-panel").forEach((panel, idx) => panel.classList.toggle("active", idx === 0));
@@ -3589,7 +4101,10 @@ document.addEventListener("DOMContentLoaded", () => {
     const stockValue = getRowField(row, 'input[name="stock"]');
     const stockNum = Number(stockValue || 0);
     const badge = row?.querySelector(".quality-stock-badge");
+    if (row?.dataset?.erpCategoryType === "service") return;
     if (!badge) return;
+    const derived = row?.querySelector('.quality-derived-stock');
+    if (derived) derived.textContent = String(Math.max(0, Number(stockValue) || 0));
     badge.classList.remove("zero", "empty");
     if (stockValue === "") {
       badge.classList.add("empty");
@@ -3605,6 +4120,7 @@ document.addEventListener("DOMContentLoaded", () => {
   function applyEditModalToRow(row){
     if (!row) return;
     setRowField(row, ".prod-name-input", document.getElementById("edit-name").value.trim());
+    setRowField(row, 'input[name="searchAlias"]', document.getElementById("edit-searchAlias").value.trim());
     setRowField(row, 'input[name="sku"]', document.getElementById("edit-sku").value.trim());
     setRowField(row, 'input[name="internalCode"]', document.getElementById("edit-internalCode").value.trim());
     setRowField(row, 'input[name="supplierCode"]', document.getElementById("edit-supplierCode").value.trim());
@@ -3612,7 +4128,6 @@ document.addEventListener("DOMContentLoaded", () => {
     setRowField(row, 'input[name="brand"]', document.getElementById("edit-brand").value.trim());
     setRowField(row, 'input[name="unit"]', document.getElementById("edit-unit").value);
     setRowField(row, 'input[name="erpCategory"]', document.getElementById("edit-erpCategory").value.trim());
-    setRowField(row, 'input[name="erpSubcategory"]', document.getElementById("edit-erpSubcategory").value.trim());
     setRowField(row, 'select[name="erpActive"]', document.getElementById("edit-erpActive").value);
     setRowField(row, 'input[name="lvName"]', document.getElementById("edit-lvName").value.trim());
     setRowField(row, 'input[name="lvPrice"]', document.getElementById("edit-lvPrice").value);
@@ -3620,8 +4135,9 @@ document.addEventListener("DOMContentLoaded", () => {
     setRowField(row, ".prod-slug-input", gerarSlugPainel(document.getElementById("edit-slug").value.trim()));
     setRowField(row, ".prod-category-select", document.getElementById("edit-category").value);
     setRowField(row, ".prod-subcategory-select", document.getElementById("edit-subcategory").value);
+    setRowField(row, 'input[name="seoTitle"]', document.getElementById("edit-seo-title").value.trim());
+    setRowField(row, 'input[name="seoDescription"]', document.getElementById("edit-seo-description").value.trim());
     setRowField(row, ".prod-image-select", document.getElementById("edit-image").value.trim());
-    setRowField(row, 'input[name="price"]', document.getElementById("edit-price").value);
     setRowField(row, 'input[name="costPrice"]', document.getElementById("edit-costPrice").value);
     setRowField(row, 'input[name="erpPrice"]', document.getElementById("edit-erpPrice").value);
     setRowField(row, 'input[name="marketplacePrice"]', document.getElementById("edit-marketplacePrice").value);
@@ -3629,8 +4145,9 @@ document.addEventListener("DOMContentLoaded", () => {
     setRowField(row, 'input[name="desiredMarginPercent"]', document.getElementById("edit-desiredMarginPercent").value);
     setRowField(row, 'input[name="expectedProfit"]', document.getElementById("edit-expectedProfit").value);
     setRowField(row, 'input[name="defaultCommissionPercent"]', document.getElementById("edit-defaultCommissionPercent").value);
-    setRowField(row, 'input[name="cashPrice"]', document.getElementById("edit-cashPrice").value);
-    setRowField(row, 'input[name="installmentPrice"]', document.getElementById("edit-installmentPrice").value);
+    // Compatibilidade legada: preço à vista/parcelado deixa de ser editável e acompanha o preço ERP.
+    setRowField(row, 'input[name="cashPrice"]', document.getElementById("edit-erpPrice").value);
+    setRowField(row, 'input[name="installmentPrice"]', document.getElementById("edit-erpPrice").value);
     setRowField(row, 'input[name="minimumPrice"]', document.getElementById("edit-minimumPrice").value);
     setRowField(row, 'input[name="minimumMarginPercent"]', document.getElementById("edit-minimumMarginPercent").value);
     setRowField(row, 'input[name="discountPolicy"]', document.getElementById("edit-discountPolicy").value);
@@ -3645,15 +4162,18 @@ document.addEventListener("DOMContentLoaded", () => {
     setTagsValue(row, parseTagsValue(document.getElementById("edit-tags").value));
     setListValue(row, ".row-related-manual-ids", document.getElementById("edit-related-manual-ids")?.value || "");
     setListValue(row, ".row-cross-sell-ids", document.getElementById("edit-cross-sell-ids")?.value || "");
-    setRowField(row, 'input[name="stock"]', document.getElementById("edit-stock").value);
-    setRowField(row, '.row-stock-controlled', document.getElementById("edit-stock-controlled").checked ? "true" : "false");
-    setRowField(row, '.row-allow-negative', document.getElementById("edit-allow-negative").checked ? "true" : "false");
+    const editIsService = syncEditCategoryBehavior();
+    row.dataset.erpCategoryType = editIsService ? "service" : selectedErpCategoryType(document.getElementById("edit-erpCategory"));
+    const hasVariationStock = parseComboLines(row.querySelector('.row-variation-combinations')?.value || '').length > 0;
+    if (!hasVariationStock) setRowField(row, 'input[name="stock"]', document.getElementById("edit-stock").value);
+    setRowField(row, '.row-stock-controlled', editIsService ? "false" : (document.getElementById("edit-stock-controlled").checked ? "true" : "false"));
+    setRowField(row, '.row-allow-negative', editIsService ? "false" : (document.getElementById("edit-allow-negative").checked ? "true" : "false"));
     setRowField(row, '.row-minimum-quantity', document.getElementById("edit-stock-min").value || "0");
-    setRowField(row, '.row-inventory-site-mode', document.getElementById("edit-inventory-site-mode").value || "shared");
+    setRowField(row, '.row-inventory-site-mode', editIsService ? "disabled" : (document.getElementById("edit-inventory-site-mode").value || "shared"));
     setRowField(row, '.row-site-limit', document.getElementById("edit-site-limit").value);
     setRowField(row, '.row-physical-safety', document.getElementById("edit-physical-safety").value || "0");
 
-    const seoSlug = document.getElementById("edit-seo-slug").value.trim();
+    const seoSlug = document.getElementById("edit-slug").value.trim();
     if (seoSlug) setRowField(row, ".prod-slug-input", gerarSlugPainel(seoSlug));
 
     const combosEl = row.querySelector(".row-variation-combinations");
@@ -3664,7 +4184,7 @@ document.addEventListener("DOMContentLoaded", () => {
         if (combos[idx]) combos[idx].stock = input.value;
       });
       const validStocks = combos.map(c => c.stock).filter(v => v !== "" && !Number.isNaN(Number(v)));
-      if (validStocks.length) setRowField(row, 'input[name="stock"]', validStocks.reduce((sum, v) => sum + Math.max(0, Number(v)), 0));
+      if (combos.length) setRowField(row, 'input[name="stock"]', validStocks.reduce((sum, v) => sum + Math.max(0, Number(v)), 0));
       combosEl.value = combos.map(comboToLine).join("\n");
       combosEl.dispatchEvent(new Event("change", { bubbles:true }));
     }
@@ -3697,125 +4217,76 @@ document.addEventListener("DOMContentLoaded", () => {
   editProductModal?.addEventListener("click", e => { if (e.target === editProductModal) closeEditProductModal(); });
   editProductSave?.addEventListener("click", async () => {
     if (!activeEditRow) return;
+    const touchedFields = Array.from(activeEditTouchedFields);
     applyEditModalToRow(activeEditRow);
-    await saveProductRow(activeEditRow);
-    closeEditProductModal();
+    const saved = await saveProductRow(activeEditRow, { touchedFields });
+    if (saved) closeEditProductModal();
   });
 
   updateAddGallerySummary();
   updateSelectionCount();
 
+  // O redirect de salvar usa ?saved=... apenas para a primeira renderização.
+  // Retira o parâmetro imediatamente para F5 não repetir o salvamento/mensagem.
+  const currentUrl = new URL(window.location.href);
+  if (currentUrl.searchParams.has('saved')) {
+    currentUrl.searchParams.delete('saved');
+    history.replaceState(history.state, '', currentUrl.pathname + (currentUrl.search ? currentUrl.search : '') + currentUrl.hash);
+  }
+
+  // O layout global já exibiu o único aviso de redirect. Em Produtos ele é
+  // transitório para não permanecer preso no topo da tela.
+  const layoutNotice = document.querySelector('.notice');
+  if (layoutNotice) setTimeout(() => { layoutNotice.style.display = 'none'; }, 3500);
+
   if (flashMessage && flashMessage.textContent.trim()) {
-    setTimeout(() => {
+    clearTimeout(window.__flashTimer);
+    window.__flashTimer = setTimeout(() => {
       flashMessage.style.display = "none";
     }, 3500);
   }
 });
 
-function sincronizarImagensAuto() {
-  fetch(window.location.href)
-    .then(res => res.text())
-    .then(htmlStr => {
-      const parser = new DOMParser();
-      const doc = parser.parseFromString(htmlStr, 'text/html');
+let __qualityImagesPromise = null;
+async function sincronizarImagensAuto() {
+  const dataList = document.getElementById("imagens-list");
+  if (dataList?.dataset.loaded === 'true') return [];
+  if (__qualityImagesPromise) return __qualityImagesPromise;
 
-      const tabelaSelects = doc.querySelector(".prod-image-select");
-      if (!tabelaSelects) return;
-
-      const opcoesImagem = Array.from(tabelaSelects.options)
-        .map(opt => opt.value.replace("images/", "").trim())
-        .filter(val => val !== "");
-
-      const dataList = document.getElementById("imagens-list");
+  __qualityImagesPromise = fetch('/produtos/api/images', { headers:{ 'Accept':'application/json' } })
+    .then(res => res.json())
+    .then(json => {
+      if (!json?.success) throw new Error(json?.message || 'Erro ao listar imagens.');
+      const imagens = Array.isArray(json.items) ? json.items : [];
       if (dataList) {
-        dataList.innerHTML = "";
-        opcoesImagem.forEach(img => {
-          const opt = document.createElement("option");
-          opt.value = "images/" + img;
-          opt.textContent = img;
+        dataList.innerHTML = '';
+        imagens.forEach(img => {
+          const opt = document.createElement('option');
+          opt.value = img.startsWith('images/') ? img : `images/${img}`;
+          opt.textContent = img.replace(/^images\//, '');
           dataList.appendChild(opt);
         });
+        dataList.dataset.loaded = 'true';
       }
-
-      const linhaSelects = document.querySelectorAll(".prod-image-select");
-      linhaSelects.forEach(select => {
-        const valorAtual = select.value || select.getAttribute("data-current-val") || "";
-        select.innerHTML = '<option value="">Selecione...</option>';
-
-        opcoesImagem.forEach(img => {
-          const opt = document.createElement("option");
-          opt.value = "images/" + img;
-          opt.textContent = img;
-          if ("images/" + img === valorAtual) opt.selected = true;
-          select.appendChild(opt);
-        });
-
-        select.setAttribute("data-current-val", valorAtual);
-      });
+      return imagens;
     })
-    .catch(err => console.error("Erro na sincronização automática de fotos:", err));
+    .catch(err => {
+      console.error('Erro ao sincronizar imagens:', err);
+      __qualityImagesPromise = null;
+      return [];
+    });
+  return __qualityImagesPromise;
 }
 </script>
 
 <script>
-document.addEventListener('DOMContentLoaded', () => {
-  const listSection = document.getElementById('product-workspace-list');
-  const newSection = document.getElementById('product-workspace-new');
+(() => {
+  // v0.12.3.16: estrutura das abas já montada imediatamente após o formulário.
   const addForm = document.getElementById('add-product-form');
-  const aiBox = document.getElementById('quality-ai-fill-box');
-  if (!listSection || !newSection || !addForm) return;
-
-  function setWorkspace(view, updateUrl = true) {
-    const isNew = view === 'new';
-    listSection.classList.toggle('active', !isNew);
-    newSection.classList.toggle('active', isNew);
-    document.querySelectorAll('[data-product-workspace]').forEach(btn => {
-      btn.classList.toggle('active', btn.dataset.productWorkspace === view);
-    });
-    if (updateUrl && history.replaceState) {
-      const url = new URL(window.location.href);
-      if (isNew) url.searchParams.set('workspace', 'new'); else url.searchParams.delete('workspace');
-      history.replaceState({}, '', url);
-    }
-    const targetSection = isNew ? newSection : listSection;
-    window.scrollTo({top: Math.max(0, targetSection.offsetTop - 90), behavior: 'smooth'});
-  }
-  document.querySelectorAll('[data-product-workspace]').forEach(btn => btn.addEventListener('click', () => setWorkspace(btn.dataset.productWorkspace)));
-
-  // Organiza o formulário existente em abas sem alterar nomes, rotas ou salvamento.
-  const nodes = Array.from(addForm.children);
-  const submitWrap = nodes.find(el => el.querySelector?.('button[type="submit"]'));
-  const panels = {};
-  ['general','commercial','stock','site','variations'].forEach(key => {
-    const panel = document.createElement('div');
-    panel.className = 'product-create-panel' + (key === 'general' ? ' active' : '');
-    panel.dataset.createPanel = key;
-    panels[key] = panel;
-    addForm.appendChild(panel);
-  });
-  const footer = document.createElement('div');
-  footer.className = 'product-create-footer';
-
-  function destination(el) {
-    if (el === submitWrap) return 'footer';
-    if (el.matches?.('[data-create-section="commercial"]')) return 'commercial';
-    if (el.matches?.('[data-create-section="stock"]')) return 'stock';
-    if (el.classList?.contains('quality-variations-box')) return 'variations';
-    // Conteúdo principal permanece em Geral: textos, imagens, galeria, etiquetas e categoria.
-    if (el.classList?.contains('quality-tags-field') || el.classList?.contains('add-description-editor-wrap') || el.querySelector?.('[name="descriptionShort"]')) return 'general';
-    const field = el.querySelector?.('input,select,textarea');
-    const name = field?.name || '';
-    if (name === 'stock') return 'stock';
-    if (['showPrice','featured','active','detailsEnabled'].includes(name)) return 'site';
-    if (['image','gallery','category'].includes(name) || el.classList?.contains('quality-compact-gallery')) return 'general';
-    return 'general';
-  }
-  nodes.forEach(el => {
-    const dest = destination(el);
-    if (dest === 'footer') footer.appendChild(el); else panels[dest].appendChild(el);
-  });
-  addForm.appendChild(footer);
-  addForm.style.display = 'block';
+  if (!addForm) return;
+  const panels = window.__qualityProductCreatePanels || Object.fromEntries(
+    [...addForm.querySelectorAll('[data-create-panel]')].map(panel => [panel.dataset.createPanel, panel])
+  );
 
   document.querySelectorAll('.product-create-tab').forEach(btn => btn.addEventListener('click', () => {
     const key = btn.dataset.createTab;
@@ -3823,10 +4294,125 @@ document.addEventListener('DOMContentLoaded', () => {
     Object.entries(panels).forEach(([panelKey,panel]) => panel.classList.toggle('active', panelKey === key));
   }));
 
-  // A IA faz parte do workspace de cadastro e fica logo antes das abas.
-  if (aiBox && aiBox.parentElement === newSection) newSection.insertBefore(aiBox, document.getElementById('product-create-tabs'));
-
   const params = new URLSearchParams(window.location.search);
-  setWorkspace(params.get('workspace') === 'new' ? 'new' : 'list', false);
-});
+  const productKindDialog=document.getElementById('product-kind-dialog');
+  const openProductKindDialog=()=>{if(!productKindDialog)return;productKindDialog.classList.add('open');productKindDialog.setAttribute('aria-hidden','false');};
+  const closeProductKindDialog=()=>{if(!productKindDialog)return;productKindDialog.classList.remove('open');productKindDialog.setAttribute('aria-hidden','true');};
+  // Sempre abre o seletor, inclusive quando o usuário já está em Novo Produto/Serviço.
+  document.querySelectorAll('.js-new-product-choice').forEach(link=>link.addEventListener('click',event=>{event.preventDefault();openProductKindDialog();}));
+  document.getElementById('product-kind-cancel')?.addEventListener('click',closeProductKindDialog);
+  productKindDialog?.addEventListener('click',event=>{if(event.target===productKindDialog)closeProductKindDialog();});
+  productKindDialog?.querySelectorAll('[data-product-kind]').forEach(button=>button.addEventListener('click',()=>{window.location.href=`/produtos?workspace=new&type=${encodeURIComponent(button.dataset.productKind||'product')}`;}));
+  document.addEventListener('keydown',event=>{if(event.key==='Escape'&&productKindDialog?.classList.contains('open'))closeProductKindDialog();});
+
+  const requestedProductKind=String(params.get('type')||'').toLowerCase();
+  if(params.get('workspace')==='new'&&requestedProductKind==='service'){
+    const serviceCategory=[...document.querySelectorAll('select[name="erpCategory"] option[data-category-type="service"]')][0];
+    const categorySelect=document.querySelector('select[name="erpCategory"]');
+    if(serviceCategory&&categorySelect){categorySelect.value=serviceCategory.value;categorySelect.dispatchEvent(new Event('change',{bubbles:true}));}
+    const heading=document.querySelector('.new-product-heading h2');if(heading)heading.textContent='＋ Novo serviço';
+  }
+})();
+</script>
+
+<script>
+(()=>{
+  const createStatus=document.getElementById('add-lv-active');
+  const createFields=[...document.querySelectorAll('[data-create-lv-dependent]')];
+  const syncCreateLv=()=>{
+    const inactive=createStatus?.value!=='true';
+    createFields.forEach(el=>el.hidden=inactive);
+  };
+  createStatus?.addEventListener('change',syncCreateLv); syncCreateLv();
+
+  const createCategory=document.querySelector('select[name="erpCategory"]');
+  const createInventory=document.getElementById('add-inventory-config');
+  const createVariationsTab=document.getElementById('create-variations-tab');
+  const createVariationsBox=document.getElementById('add-variations-box');
+  const syncCreateCategory=()=>{
+    const isService=createCategory?.selectedOptions?.[0]?.dataset?.categoryType==='service';
+    createInventory?.classList.toggle('is-service',isService);
+    if(createVariationsTab) createVariationsTab.hidden=isService;
+    if(createVariationsBox) createVariationsBox.hidden=isService;
+    if(isService){
+      // Serviço = cadastro único. Variações pertencem somente a produtos.
+      createVariationsBox?.querySelectorAll('textarea[data-var-type]').forEach(el=>{el.value='';});
+      const enabled=createVariationsBox?.querySelector('select[name="variationsEnabled"]');
+      if(enabled){ enabled.value='false'; enabled.dispatchEvent(new Event('change',{bubbles:true})); }
+      const activeTab=document.querySelector('.product-create-tab.active');
+      if(activeTab?.dataset?.createTab==='variations') document.querySelector('.product-create-tab[data-create-tab="commercial"]')?.click();
+      const controlled=document.querySelector('input[name="stockControlled"]');
+      const negative=document.querySelector('input[name="allowNegative"]');
+      const mode=document.querySelector('select[name="inventorySiteMode"]');
+      if(controlled) controlled.checked=false;
+      if(negative) negative.checked=false;
+      if(mode) mode.value='disabled';
+    }
+  };
+  createCategory?.addEventListener('change',syncCreateCategory); syncCreateCategory();
+
+  const editStatus=document.getElementById('edit-lvActive');
+  const editCategoryFields=[...document.querySelectorAll('[data-edit-site-category]')];
+  const editLvFields=[...document.querySelectorAll('[data-edit-lv-dependent]')];
+  const editDisabledNote=document.getElementById('edit-lv-disabled-note');
+  const syncEditLv=()=>{
+    const inactive=editStatus?.value!=='true';
+    [...editCategoryFields,...editLvFields].forEach(el=>el.hidden=inactive);
+    if(editDisabledNote) editDisabledNote.style.display=inactive?'block':'none';
+  };
+  editStatus?.addEventListener('change',syncEditLv);
+  document.getElementById('edit-erpCategory')?.addEventListener('change',syncEditCategoryBehavior);
+  document.querySelectorAll('[data-edit-product],.quality-edit-open').forEach(btn=>btn.addEventListener('click',()=>setTimeout(()=>{syncEditLv();syncEditCategoryBehavior();},0)));
+})();
+</script>
+
+<script>
+(()=>{
+  const modal=document.getElementById('productHistoryModal'), body=document.getElementById('productHistoryBody'), title=document.getElementById('productHistoryTitle');
+  if(!modal)return;
+  const esc=v=>String(v??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
+  const fmt=v=>{try{return new Date(v).toLocaleString('pt-BR')}catch{return v||'—'}};
+  const close=()=>{modal.hidden=true;}; document.querySelectorAll('[data-history-close]').forEach(b=>b.addEventListener('click',close));
+  document.querySelectorAll('.quality-history-btn').forEach(btn=>btn.addEventListener('click',async()=>{
+    const row=btn.closest('.product-row'); if(!row)return; const id=row.dataset.id; const name=row.querySelector('.prod-name-input')?.value||'Produto';
+    title.textContent=`Histórico · ${name}`; body.innerHTML='<p>Carregando histórico...</p>'; modal.hidden=false;
+    try{const j=await fetch(`/produtos/api/${encodeURIComponent(id)}/historico`).then(r=>r.json()); if(!j.success)throw new Error(j.message);
+      body.innerHTML=(j.events||[]).length?(j.events||[]).map(e=>`<div style="border-bottom:1px solid var(--border,#333);padding:10px 2px"><div style="display:flex;justify-content:space-between;gap:12px"><strong>${esc(e.label)}</strong><small>${esc(fmt(e.at))}</small></div><small>${esc(e.source||'')} · ${esc(e.actor||'sistema')}</small></div>`).join(''):'<p>Nenhum evento registrado para este produto.</p>';
+    }catch(error){body.innerHTML=`<p>⚠️ ${esc(error.message||'Não foi possível carregar o histórico.')}</p>`;}
+  }));
+})();
+</script>
+
+<script>
+// V1.7.4 - atalhos resilientes: Produto/Serviço e foto principal na listagem.
+(()=>{
+  const dialog=()=>document.getElementById('product-kind-dialog');
+  const fileInput=()=>document.getElementById('quick-main-image-file');
+  let quickTarget=null;
+  const openDialog=()=>{const el=dialog();if(!el)return;el.classList.add('open');el.setAttribute('aria-hidden','false');};
+  const closeDialog=()=>{const el=dialog();if(!el)return;el.classList.remove('open');el.setAttribute('aria-hidden','true');};
+  document.addEventListener('click',event=>{
+    const newButton=event.target.closest?.('.js-new-product-choice');
+    if(newButton){
+      event.preventDefault(); event.stopImmediatePropagation(); openDialog(); return;
+    }
+    const kindButton=event.target.closest?.('[data-product-kind]');
+    if(kindButton && dialog()?.contains(kindButton)){
+      event.preventDefault(); event.stopImmediatePropagation();
+      location.href=`/produtos?workspace=new&type=${encodeURIComponent(kindButton.dataset.productKind||'product')}`; return;
+    }
+    if(event.target.closest?.('#product-kind-cancel')){event.preventDefault();closeDialog();return;}
+    if(event.target===dialog()){closeDialog();return;}
+    const thumb=event.target.closest?.('.quick-main-image');
+    if(thumb){event.preventDefault();event.stopImmediatePropagation();quickTarget=thumb;const input=fileInput();if(input){input.value='';input.click();}return;}
+  },true);
+  fileInput()?.addEventListener('change',async event=>{
+    const input=event.currentTarget,file=input.files?.[0],target=quickTarget; if(!file||!target)return;
+    if(!file.type.startsWith('image/')){alert('Selecione uma imagem.');input.value='';quickTarget=null;return;}
+    const form=new FormData();form.append('imageFile',file);form.append('productId',target.dataset.productId||'');target.classList.add('is-uploading');
+    try{const response=await fetch('/produtos/quick-main-image',{method:'POST',body:form,headers:{Accept:'application/json'}});const payload=await response.json().catch(()=>({}));if(!response.ok||payload.success===false)throw new Error(payload.message||'Falha ao trocar a imagem.');const img=target.querySelector('img');if(img)img.src=`/${payload.image}?v=${Date.now()}`;}
+    catch(error){alert(error.message||'Falha ao trocar a foto principal.');}
+    finally{target.classList.remove('is-uploading');input.value='';quickTarget=null;}
+  },true);
+})();
 </script>

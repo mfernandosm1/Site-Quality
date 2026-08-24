@@ -1,14 +1,12 @@
 <% layout('layout') -%>
-<section class="finance-hero compact">
-  <div><span class="erp-kicker">FINANCEIRO · v<%= version %></span><h1>📥 Contas a Receber</h1><p>Acompanhe títulos, vencimentos e histórico financeiro originados no PDV.</p></div>
-  <div class="finance-header-actions"><a class="btn" href="/erp/financeiro">← Financeiro</a></div>
-</section>
+<div class="finance-back-row"><a class="btn" href="/erp/financeiro">← Financeiro</a></div>
 
 <%
   const safeJson = value => JSON.stringify(value || {}).replace(/</g, '\\u003c');
   const formatMoney = value => Number(value || 0).toLocaleString('pt-BR', { style:'currency', currency:'BRL' });
   const formatDate = value => value ? new Date(String(value).length === 10 ? `${value}T12:00:00` : value).toLocaleDateString('pt-BR') : '—';
   const statusLabels = { open:'Em aberto', partial:'Parcial', paid:'Recebido', cancelled:'Cancelado', reversed:'Estornado' };
+const ref = value => String(value ?? '').replace(/\b([A-Z]{1,5})-0+(\d+)\b/g, '$1-$2');
   const activeCustomers = (customers || []).filter(item => item.active !== false);
   const methods = (catalogs.paymentMethods || []).filter(item => item.active !== false);
   const costCenters = (catalogs.costCenters || []).filter(item => item.active !== false);
@@ -20,10 +18,10 @@
   <% } %>
 
   <section class="receivable-kpis" aria-label="Resumo do Contas a Receber">
-    <button type="button" class="receivable-kpi" data-summary-filter="open"><span>Em aberto</span><strong><%= formatMoney(summary.open.value) %></strong><small><%= summary.open.count %> título(s)</small></button>
-    <button type="button" class="receivable-kpi" data-summary-filter="today"><span>Vencem hoje</span><strong><%= formatMoney(summary.dueToday.value) %></strong><small><%= summary.dueToday.count %> parcela(s)</small></button>
-    <button type="button" class="receivable-kpi danger" data-summary-filter="overdue"><span>Vencidos</span><strong><%= formatMoney(summary.overdue.value) %></strong><small><%= summary.overdue.count %> parcela(s)</small></button>
-    <button type="button" class="receivable-kpi success" data-summary-filter="received-month"><span>Recebidos no mês</span><strong><%= formatMoney(summary.receivedMonth.value) %></strong><small><%= summary.receivedMonth.count %> recebimento(s)</small></button>
+    <button type="button" class="receivable-kpi erp-tone-income" data-summary-filter="open"><span>Em aberto</span><strong><%= formatMoney(summary.open.value) %></strong><small><%= summary.open.count %> título(s)</small></button>
+    <button type="button" class="receivable-kpi erp-tone-warning" data-summary-filter="today"><span>Vencem hoje</span><strong><%= formatMoney(summary.dueToday.value) %></strong><small><%= summary.dueToday.count %> parcela(s)</small></button>
+    <button type="button" class="receivable-kpi danger erp-tone-expense" data-summary-filter="overdue"><span>Vencidos</span><strong><%= formatMoney(summary.overdue.value) %></strong><small><%= summary.overdue.count %> parcela(s)</small></button>
+    <button type="button" class="receivable-kpi success erp-tone-success" data-summary-filter="received-month"><span>Recebidos no mês</span><strong><%= formatMoney(summary.receivedMonth.value) %></strong><small><%= summary.receivedMonth.count %> recebimento(s)</small></button>
   </section>
 
   <section class="receivable-filter-panel">
@@ -43,10 +41,10 @@
     <div class="receivable-advanced-filters" id="receivableAdvancedFilters" hidden>
       <label><span>Vencimento inicial</span><input type="date" id="receivableDueFrom"></label>
       <label><span>Vencimento final</span><input type="date" id="receivableDueTo"></label>
-      <label><span>Cliente</span><select id="receivableCustomer"><option value="">Todos os clientes</option><% activeCustomers.forEach(item => { %><option value="<%= item.id %>"><%= item.name %></option><% }) %></select></label>
-      <label><span>Forma de pagamento</span><select id="receivablePaymentMethod"><option value="">Todas as formas</option><% methods.forEach(item => { %><option value="<%= item.id %>"><%= item.name %></option><% }) %></select></label>
-      <label><span>Centro de custo</span><select id="receivableCostCenter"><option value="">Todos</option><% costCenters.forEach(item => { %><option value="<%= item.id %>"><%= item.name %></option><% }) %></select></label>
-      <label><span>Plano de contas</span><select id="receivableAccount"><option value="">Todos</option><% accounts.forEach(item => { %><option value="<%= item.id %>"><%= item.name %></option><% }) %></select></label>
+      <label><span>Cliente</span><select id="receivableCustomer"><option value="">Todos os clientes</option><% activeCustomers.forEach(item => { %><option value="<%= item.id %>" <%= String(initialCustomerId || '') === String(item.id) ? 'selected' : '' %>><%= item.name %></option><% }) %></select></label>
+      <label><span>Forma de pagamento</span><select id="receivablePaymentMethod"><option value="">Todas as formas</option><% methods.forEach(item => { %><option value="<%= item.id %>" <%= String(initialCustomerId || '') === String(item.id) ? 'selected' : '' %>><%= item.name %></option><% }) %></select></label>
+      <label><span>Centro de custo</span><select id="receivableCostCenter"><option value="">Todos</option><% costCenters.forEach(item => { %><option value="<%= item.id %>" <%= String(initialCustomerId || '') === String(item.id) ? 'selected' : '' %>><%= item.name %></option><% }) %></select></label>
+      <label><span>Plano de contas</span><select id="receivableAccount"><option value="">Todos</option><% accounts.forEach(item => { %><option value="<%= item.id %>" <%= String(initialCustomerId || '') === String(item.id) ? 'selected' : '' %>><%= item.name %></option><% }) %></select></label>
     </div>
   </section>
 
@@ -56,15 +54,15 @@
       <% if (!titles || !titles.length) { %>
         <tr><td colspan="7" class="empty-state"><strong>Nenhuma conta a receber gerada.</strong><br>Finalize uma Venda ou O.S. configurada para gerar recebimentos futuros.</td></tr>
       <% } else { titles.forEach(title => { const nextInstallment = (title.installments || []).find(item => Number(item.openBalance || 0) > 0); %>
-        <tr class="receivable-row" tabindex="0" data-open="<%= title.id %>" aria-label="Abrir título <%= title.number %>">
-          <td><b><%= title.number %></b></td><td><%= title.customerName %><small><%= title.customerDocument || '—' %></small></td><td><%= title.originLabel || '—' %></td><td><%= nextInstallment ? formatDate(nextInstallment.dueDate) : '—' %></td><td><%= formatMoney(title.netValue) %></td><td><%= formatMoney(title.openBalance) %></td><td><span class="finance-status <%= title.status === 'paid' ? '' : 'off' %>"><%= statusLabels[title.status] || title.status %></span></td>
+        <tr class="receivable-row" tabindex="0" data-open="<%= title.id %>" aria-label="Abrir título <%= ref(title.number) %>">
+          <td><b><%= ref(title.number) %></b></td><td><%= title.customerName %><small><%= title.customerDocument || '—' %></small></td><td><%= title.originLabel || '—' %></td><td><%= nextInstallment ? formatDate(nextInstallment.dueDate) : '—' %></td><td><%= formatMoney(title.netValue) %></td><td><%= formatMoney(title.openBalance) %></td><td><span class="finance-status <%= title.status === 'paid' ? '' : 'off' %>"><%= statusLabels[title.status] || title.status %></span></td>
         </tr>
       <% }) } %>
     </tbody></table></div>
   </section>
 </div>
 
-<script type="application/json" id="receivablesBootstrap"><%- safeJson({ titles, customers, catalogs, summary }) %></script>
+<script type="application/json" id="receivablesBootstrap"><%- safeJson({ titles, customers, catalogs, summary, cashboxes, conversations, initialTitleId }) %></script>
 <div class="receivable-drawer-backdrop" id="receivableDrawerBackdrop" hidden></div>
 <aside class="receivable-drawer" id="receivableDrawer" aria-hidden="true" aria-label="Detalhes do título">
   <div id="receivableDetail"></div>
@@ -86,6 +84,7 @@
         </section>
 
         <div class="receivable-receive-grid">
+          <label><span>Caixa</span><select id="receiveCashbox" required><option value="">Selecione</option><% (cashboxes || []).forEach(item => { %><option value="<%= item.id %>" <%= item.isOpen ? 'data-open="true"' : 'disabled' %>><%= item.name %><%= item.isOpen ? ' · Aberto' : ' · Fechado' %></option><% }) %></select></label>
           <label><span>Data do recebimento</span><input type="date" id="receiveDate" required></label>
           <label><span>Juros</span><input id="receiveInterest" inputmode="decimal" value="0,00"></label>
           <label><span>Multa</span><input id="receiveFine" inputmode="decimal" value="0,00"></label>
@@ -117,5 +116,8 @@
     </form>
   </section>
 </div>
+
+
+<div class="receivable-modal" id="receiptWhatsAppModal" hidden><div class="receivable-modal-backdrop" data-close-whatsapp></div><section class="receivable-modal-card receipt-whatsapp-card" role="dialog" aria-modal="true"><header class="receivable-modal-header"><div><span>WHATSAPP</span><h2>Enviar comprovante</h2><p id="receiptWhatsAppCustomer">Selecione a conversa e o formato.</p></div><button type="button" data-close-whatsapp>×</button></header><div class="receipt-whatsapp-body"><label><span>Conversa do cliente</span><select id="receiptWhatsAppConversation"><option value="">Selecione</option><% (conversations||[]).forEach(item=>{ %><option value="<%= item.id %>" data-phone="<%= item.phone||'' %>"><%= item.name %><%= item.phone?' · '+item.phone:'' %></option><% }) %></select></label><label><span>Formato do comprovante</span><select id="receiptWhatsAppFormat"><option value="image">Imagem</option><option value="pdf">PDF</option></select></label><p class="receipt-whatsapp-hint">O envio será feito diretamente pelo WhatsApp conectado ao painel.</p></div><footer class="receivable-modal-actions"><button type="button" class="btn btn-ghost" data-close-whatsapp>Cancelar</button><button type="button" class="btn btn-success" id="sendReceiptWhatsApp">Enviar comprovante</button></footer></section></div>
 
 <script src="/public/js/contas-receber.js"></script>

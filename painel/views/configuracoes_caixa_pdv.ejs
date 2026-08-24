@@ -1,0 +1,78 @@
+<% layout('layout') -%>
+<section class="ops-hero compact"><div><span class="ops-kicker">QUALITY ERP v0.24.0</span><h1>Configurações do Caixa / PDV</h1><p>Regras independentes para cada caixa operacional.</p></div><a class="btn" href="/configuracoes">Voltar</a></section>
+<section class="cash-pdv-settings">
+  <div class="settings-card"><label>Caixa<select id="settingsCashbox"><% cashboxes.forEach(c=>{ %><option value="<%= c.id %>" <%= c.id===selectedCashboxId?'selected':'' %>><%= c.name %></option><% }) %></select></label></div>
+  <form id="cashPdvSettingsForm" class="settings-card settings-form-grid">
+    <input type="hidden" name="cashboxId" value="<%= selectedCashboxId %>">
+    <fieldset><legend>Caixa</legend>
+      <label>Operação do caixa<select name="closingMode" id="closingMode"><option value="manual" <%= cashboxConfig.closingMode!=='automatic'?'selected':'' %>>Manual</option><option value="automatic" <%= cashboxConfig.closingMode==='automatic'?'selected':'' %>>Automática</option></select><small id="operationModeHelp"></small></label>
+      <div id="automaticCashboxOptions" class="automatic-shifts-panel">
+        <small>Cada horário representa o início de um novo turno. O turno atual fecha 10 segundos antes e o próximo abre exatamente no horário.</small>
+        <div id="automaticShiftTimes">
+          <% ((cashboxConfig.automaticShiftTimes&&cashboxConfig.automaticShiftTimes.length)?cashboxConfig.automaticShiftTimes:['08:00']).forEach(time=>{ %>
+            <div class="shift-time-row"><input type="time" name="automaticShiftTimes" value="<%= time %>" required><button type="button" class="btn shift-remove" title="Remover turno">×</button></div>
+          <% }) %>
+        </div>
+        <button type="button" class="btn" id="addAutomaticShift">+ Adicionar turno</button>
+      </div>
+      <label class="check"><input type="checkbox" name="allowNegativeCash" <%= cashboxConfig.allowNegativeCash?'checked':'' %>> Permitir caixa negativo</label><label class="check"><input type="checkbox" name="requireNegativeReason" <%= cashboxConfig.requireNegativeReason!==false?'checked':'' %>> Exigir motivo para caixa negativo</label><label class="check"><input type="checkbox" name="isDefault" <%= cashboxConfig.isDefault?'checked':'' %>> Caixa padrão</label></fieldset>
+    <fieldset><legend>Venda</legend><label class="check"><input type="checkbox" name="requireItemVerification" <%= cashboxConfig.requireItemVerification?'checked':'' %>> Obrigar conferência dos produtos</label><label class="check"><input type="checkbox" name="requireSeller" <%= cashboxConfig.requireSeller?'checked':'' %>> Obrigar vendedor</label><label class="check"><input type="checkbox" name="useLoggedUserAsSeller" <%= cashboxConfig.useLoggedUserAsSeller!==false?'checked':'' %>> Usar usuário logado como vendedor principal</label><label>Vendedor padrão<input name="defaultSeller" value="<%= cashboxConfig.defaultSeller||'' %>"><small>Usado como alternativa quando não houver usuário logado habilitado como vendedor.</small></label><label>Parcela inicial padrão<input type="number" min="1" name="defaultInstallments" value="<%= cashboxConfig.defaultInstallments||1 %>"></label><label>Dias da primeira parcela<input type="number" min="0" name="firstDueDays" value="<%= cashboxConfig.firstDueDays||30 %>"></label><label>Tipo padrão<select name="defaultOperationType"><option value="sale" <%= cashboxConfig.defaultOperationType!=='service_order'?'selected':'' %>>Venda</option><option value="service_order" <%= cashboxConfig.defaultOperationType==='service_order'?'selected':'' %>>O.S.</option></select></label></fieldset>
+    <fieldset><legend>Colunas do PDV</legend><div class="settings-check-grid"><% [['reference','Referência'],['serial','Nº Série'],['color','Cor'],['size','Tamanho'],['seller','Vendedor'],['discount','Desconto'],['commission','Comissão'],['internalCode','Código interno']].forEach(([key,label])=>{ %><label class="check"><input type="checkbox" name="visibleColumns" value="<%= key %>" <%= cashboxConfig.visibleColumns?.[key]?'checked':'' %>> <%= label %></label><% }) %></div></fieldset>
+    <fieldset><legend>Formas de pagamento</legend><div class="settings-check-grid"><% paymentMethods.forEach(method=>{ %><label class="check"><input type="checkbox" name="enabledPaymentMethods" value="<%= method.id %>" <%= (cashboxConfig.enabledPaymentMethods||[]).includes(method.id)?'checked':'' %>> <%= method.name %></label><% }) %></div></fieldset>
+    <fieldset><legend>Usuários autorizados</legend><textarea name="allowedUsers" rows="4" placeholder="Um usuário por linha"><%= (cashboxConfig.allowedUsers||[]).join('\n') %></textarea><small>Em branco permite todos enquanto o login individual não estiver ativo.</small></fieldset>
+    <fieldset><legend>Equipe disponível no PDV / O.S.</legend><textarea name="allowedSellers" rows="4" placeholder="Uma pessoa por linha"><%= (cashboxConfig.allowedSellers||[]).join('\n') %></textarea><small>Esta mesma lista pode ser usada como vendedor da venda, vendedor por item ou técnico da O.S. A função é escolhida em cada operação; ninguém fica preso a um papel fixo.</small></fieldset>
+    <div class="settings-save-bar"><span id="settingsFeedback"></span><button class="btn btn-primary" type="submit">Salvar configurações</button></div>
+  </form>
+</section>
+<style>
+.automatic-shifts-panel{display:grid;gap:10px;padding:12px;border:1px solid var(--border-color,#333);border-radius:10px;background:rgba(255,255,255,.02)}
+.shift-time-row{display:grid;grid-template-columns:minmax(130px,1fr) 42px;gap:8px;margin-top:8px}.shift-remove{font-size:20px;line-height:1;padding:0}.automatic-shifts-panel small{display:block;margin-top:5px;opacity:.75;line-height:1.35}
+</style>
+<script>(()=>{
+  const form=document.querySelector('#cashPdvSettingsForm');
+  const feedback=document.querySelector('#settingsFeedback');
+  const closingMode=document.querySelector('#closingMode');
+  const automaticOptions=document.querySelector('#automaticCashboxOptions');
+  const operationModeHelp=document.querySelector('#operationModeHelp');
+  const shiftsList=document.querySelector('#automaticShiftTimes');
+  const addShift=document.querySelector('#addAutomaticShift');
+
+  const refreshVisibility=()=>{
+    const automatic=closingMode.value==='automatic';
+    automaticOptions.style.display=automatic?'grid':'none';
+    operationModeHelp.textContent=automatic
+      ?'O sistema fecha o turno atual e abre o próximo nos horários configurados.'
+      :'A abertura e o fechamento são realizados exclusivamente pelo usuário.';
+  };
+  const bindRemove=button=>button.onclick=()=>{
+    const rows=shiftsList.querySelectorAll('.shift-time-row');
+    if(rows.length<=1){ rows[0].querySelector('input').value='08:00'; return; }
+    button.closest('.shift-time-row').remove();
+  };
+  shiftsList.querySelectorAll('.shift-remove').forEach(bindRemove);
+  addShift.onclick=()=>{
+    const row=document.createElement('div');
+    row.className='shift-time-row';
+    row.innerHTML='<input type="time" name="automaticShiftTimes" value="08:00" required><button type="button" class="btn shift-remove" title="Remover turno">×</button>';
+    shiftsList.appendChild(row); bindRemove(row.querySelector('.shift-remove')); row.querySelector('input').focus();
+  };
+  closingMode.onchange=refreshVisibility;
+  refreshVisibility();
+
+  document.querySelector('#settingsCashbox').onchange=e=>location.href='/erp/configuracoes/caixa-pdv?caixa='+encodeURIComponent(e.target.value);
+  form.onsubmit=async e=>{
+    e.preventDefault();
+    const fd=new FormData(form);
+    const shiftTimes=fd.getAll('automaticShiftTimes').map(v=>String(v||'').trim()).filter(Boolean);
+    if(fd.get('closingMode')==='automatic'&&!shiftTimes.length){
+      feedback.textContent='Adicione pelo menos um horário de turno.'; feedback.className='error'; return;
+    }
+    const closingMode=fd.get('closingMode')==='automatic'?'automatic':'manual';
+    const body={cashboxId:fd.get('cashboxId'),closingMode,automaticShiftsEnabled:closingMode==='automatic',automaticShiftTimes:shiftTimes,allowNegativeCash:fd.has('allowNegativeCash'),requireNegativeReason:fd.has('requireNegativeReason'),isDefault:fd.has('isDefault'),requireItemVerification:fd.has('requireItemVerification'),requireSeller:fd.has('requireSeller'),useLoggedUserAsSeller:fd.has('useLoggedUserAsSeller'),defaultSeller:fd.get('defaultSeller'),defaultInstallments:Number(fd.get('defaultInstallments')||1),firstDueDays:Number(fd.get('firstDueDays')||0),defaultOperationType:fd.get('defaultOperationType'),visibleColumns:Object.fromEntries(fd.getAll('visibleColumns').map(k=>[k,true])),enabledPaymentMethods:fd.getAll('enabledPaymentMethods'),allowedUsers:String(fd.get('allowedUsers')||'').split(/\r?\n/).map(v=>v.trim()).filter(Boolean),allowedSellers:String(fd.get('allowedSellers')||'').split(/\r?\n/).map(v=>v.trim()).filter(Boolean)};
+    try{
+      const r=await fetch('/erp/configuracoes/caixa-pdv',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)}),j=await r.json();
+      if(!r.ok)throw new Error(j.message);
+      feedback.textContent=j.message; feedback.className='success';
+    }catch(error){ feedback.textContent=error.message; feedback.className='error'; }
+  };
+})();</script>

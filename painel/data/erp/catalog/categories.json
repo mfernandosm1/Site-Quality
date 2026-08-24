@@ -1,0 +1,97 @@
+{
+  "version": "1.0",
+  "migratedAt": "2026-08-04T18:06:56.639Z",
+  "items": [
+    {
+      "id": "ERP-CAT-1",
+      "code": "smartphones",
+      "name": "Smartphones",
+      "description": "",
+      "type": "product",
+      "parentId": null,
+      "active": true,
+      "source": {
+        "migratedFrom": "site-category",
+        "legacyId": 1780850034586,
+        "legacySlug": "smartphones"
+      },
+      "createdAt": "2026-08-04T18:06:56.637Z",
+      "updatedAt": "2026-08-04T18:06:56.637Z"
+    },
+    {
+      "id": "ERP-CAT-2",
+      "code": "acessorios",
+      "name": "Acessórios",
+      "description": "",
+      "type": "product",
+      "parentId": null,
+      "active": true,
+      "source": {
+        "migratedFrom": "site-category",
+        "legacyId": 1780867101688,
+        "legacySlug": "acessorios"
+      },
+      "createdAt": "2026-08-04T18:06:56.637Z",
+      "updatedAt": "2026-08-04T18:06:56.637Z"
+    },
+    {
+      "id": "ERP-CAT-3",
+      "code": "eletronicos",
+      "name": "Eletrônicos",
+      "description": "",
+      "type": "product",
+      "parentId": null,
+      "active": true,
+      "source": {
+        "migratedFrom": "site-category",
+        "legacyId": 1781103660065,
+        "legacySlug": "eletronicos"
+      },
+      "createdAt": "2026-08-04T18:06:56.637Z",
+      "updatedAt": "2026-08-04T18:06:56.637Z"
+    },
+    {
+      "id": "ERP-CAT-4",
+      "code": "assistencia-tecnica",
+      "name": "Assistência Técnica",
+      "description": "",
+      "type": "product",
+      "parentId": null,
+      "active": true,
+      "source": {
+        "migratedFrom": "site-category",
+        "legacyId": 1782064911168,
+        "legacySlug": "assistencia-tecnica"
+      },
+      "createdAt": "2026-08-04T18:06:56.637Z",
+      "updatedAt": "2026-08-04T18:06:56.637Z"
+    },
+    {
+      "id": "ERP-CAT-5",
+      "code": "teste",
+      "name": "teste",
+      "description": "",
+      "type": "product",
+      "parentId": "ERP-CAT-3",
+      "active": true,
+      "source": {
+        "migratedFrom": "site-subcategory",
+        "legacyId": 1784933034760,
+        "legacySlug": "teste"
+      },
+      "createdAt": "2026-08-04T18:06:56.637Z",
+      "updatedAt": "2026-08-04T18:06:56.637Z"
+    },
+    {
+      "id": "ERP-CAT-6",
+      "createdAt": "2026-08-04T19:02:39.340Z",
+      "code": "servicos",
+      "name": "Serviços",
+      "description": "",
+      "type": "service",
+      "parentId": null,
+      "active": true,
+      "updatedAt": "2026-08-04T19:02:39.340Z"
+    }
+  ]
+}

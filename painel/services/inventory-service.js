@@ -42,6 +42,7 @@ export default class InventoryService {
     this.movementsFile = path.join(this.dataDir, 'movements.json');
     this.settingsFile = path.join(this.dataDir, 'inventory-settings.json');
     this.locationsFile = path.join(this.dataDir, 'locations.json');
+    this._jsonCache = new Map();
 
     this.ensureStorage();
   }
@@ -119,7 +120,12 @@ export default class InventoryService {
 
   readJson(file, fallback) {
     try {
-      return JSON.parse(fs.readFileSync(file, 'utf8'));
+      const stat=fs.statSync(file);
+      const cached=this._jsonCache.get(file);
+      if(cached&&cached.mtimeMs===stat.mtimeMs&&cached.size===stat.size)return cached.data;
+      const data=JSON.parse(fs.readFileSync(file,'utf8'));
+      this._jsonCache.set(file,{mtimeMs:stat.mtimeMs,size:stat.size,data});
+      return data;
     } catch (_) {
       return JSON.parse(JSON.stringify(fallback));
     }
@@ -129,6 +135,7 @@ export default class InventoryService {
     const tempFile = `${file}.tmp`;
     fs.writeFileSync(tempFile, JSON.stringify(data, null, 2), 'utf8');
     fs.renameSync(tempFile, file);
+    try{const stat=fs.statSync(file);this._jsonCache.set(file,{mtimeMs:stat.mtimeMs,size:stat.size,data});}catch(_){this._jsonCache.delete(file);}
   }
 
   getDefaultLocationId() {
@@ -203,6 +210,30 @@ export default class InventoryService {
     return this.balanceFromItem(item);
   }
 
+  consultarSaldosEmLote({ inventoryItemIds = [], locationId } = {}) {
+    const ids = [...new Set((inventoryItemIds || []).filter(Boolean).map(id => String(id)))];
+    const effectiveLocationId = locationId || this.getDefaultLocationId();
+    const stock = this.readJson(this.stockFile, { version: '0.11.9', items: [] });
+    const wanted = new Set(ids);
+    const balances = new Map();
+
+    for (const entry of stock.items || []) {
+      const inventoryItemId = String(entry.inventoryItemId || '');
+      const entryLocationId = String(entry.locationId || effectiveLocationId);
+      if (!wanted.has(inventoryItemId) || entryLocationId !== String(effectiveLocationId)) continue;
+      balances.set(inventoryItemId, this.balanceFromItem(entry));
+    }
+
+    for (const inventoryItemId of ids) {
+      if (balances.has(inventoryItemId)) continue;
+      balances.set(inventoryItemId, {
+        inventoryItemId, locationId: effectiveLocationId,
+        physicalQuantity: 0, reservedQuantity: 0, availableQuantity: 0, minimumQuantity: 0
+      });
+    }
+    return balances;
+  }
+
   resolveMovementReason({ reason = '', reasonCode = '', classification = '' } = {}) {
     const cleanReason = String(reason || '').trim();
     const requestedCode = String(reasonCode || '').trim().toUpperCase();
@@ -272,6 +303,77 @@ export default class InventoryService {
       })
       .sort((a, b) => String(b.createdAt || '').localeCompare(String(a.createdAt || '')))
       .slice(0, Math.max(1, Math.min(100000, Number(limit) || 200)));
+  }
+
+  ajustarEstoquesEmLote({ adjustments = [], origin = 'manual', referenceType = 'product', referenceId = '', reason = 'Ajuste de estoque', reasonCode = '', classification = '', createdBy = 'painel', allowNegative = false, locationId } = {}) {
+    const list = Array.isArray(adjustments) ? adjustments : [];
+    if (!list.length) return [];
+
+    const effectiveLocationId = locationId || this.getDefaultLocationId();
+    const stock = this.readJson(this.stockFile, { version: '0.11.9', items: [] });
+    const movements = this.readJson(this.movementsFile, { version: '0.11.9', items: [] });
+    const movementReason = this.resolveMovementReason({ reason, reasonCode, classification });
+    const results = [];
+
+    // Índices preparados uma única vez. Em inventários grandes, usar Array.find/createMovementId
+    // dentro do loop fazia o custo crescer rapidamente e podia bloquear o Node durante a conclusão.
+    const stockByKey = new Map();
+    for (const entry of stock.items || []) {
+      const entryLocationId = String(entry.locationId || effectiveLocationId);
+      stockByKey.set(`${String(entry.inventoryItemId || '')}@@${entryLocationId}`, entry);
+    }
+    const date = new Date();
+    const dateKey = `${date.getFullYear()}${String(date.getMonth()+1).padStart(2,'0')}${String(date.getDate()).padStart(2,'0')}`;
+    const movementPrefix = `MOV-${dateKey}-`;
+    let movementSequence = (movements.items || []).reduce((highest, movement) => {
+      const id = String(movement?.id || '');
+      if (!id.startsWith(movementPrefix)) return highest;
+      const seq = Number(id.slice(movementPrefix.length));
+      return Number.isInteger(seq) ? Math.max(highest, seq) : highest;
+    }, 0);
+
+    for (const adjustment of list) {
+      const inventoryItemId = adjustment?.inventoryItemId;
+      const desired = Number(adjustment?.newQuantity);
+      if (!inventoryItemId) throw new Error('Item de estoque não informado.');
+      if (!Number.isFinite(desired)) throw new Error(`Quantidade de estoque inválida para ${inventoryItemId}.`);
+      if (!allowNegative && desired < 0) throw new Error(`O estoque não pode ficar negativo para ${inventoryItemId}.`);
+
+      const stockKey = `${String(inventoryItemId)}@@${String(effectiveLocationId)}`;
+      let item = stockByKey.get(stockKey);
+      if (!item) {
+        item = { inventoryItemId: String(inventoryItemId), locationId: effectiveLocationId, physicalQuantity: 0, reservedQuantity: 0, minimumQuantity: 0, updatedAt: new Date().toISOString() };
+        stock.items.push(item);
+        stockByKey.set(stockKey, item);
+      }
+
+      const previousQuantity = Number(item.physicalQuantity) || 0;
+      const difference = desired - previousQuantity;
+      if (difference === 0) {
+        results.push({ movement: null, balance: this.balanceFromItem(item), inventoryItemId: String(inventoryItemId) });
+        continue;
+      }
+
+      item.physicalQuantity = desired;
+      item.reservedQuantity = Math.max(0, Number(item.reservedQuantity) || 0);
+      item.updatedAt = new Date().toISOString();
+      const movement = {
+        id: `${movementPrefix}${String(++movementSequence).padStart(6, '0')}`, inventoryItemId: String(inventoryItemId), locationId: effectiveLocationId,
+        type: previousQuantity === 0 && desired > 0 ? 'entrada_inicial' : 'ajuste', direction: difference > 0 ? 'entrada' : 'saida',
+        quantity: Math.abs(difference), signedQuantity: difference, previousPhysicalQuantity: previousQuantity, newPhysicalQuantity: desired,
+        reservedQuantity: item.reservedQuantity, availableQuantity: desired - item.reservedQuantity,
+        origin: adjustment.origin || origin, referenceType: adjustment.referenceType || referenceType,
+        referenceId: String(adjustment.referenceId || referenceId || ''), reason: movementReason.reason, reasonCode: movementReason.reasonCode,
+        classification: movementReason.classification, createdBy: String(adjustment.createdBy || createdBy || 'painel'), createdAt: new Date().toISOString()
+      };
+      movements.items.push(movement);
+      results.push({ movement, balance: this.balanceFromItem(item), inventoryItemId: String(inventoryItemId) });
+    }
+
+    // Uma única gravação por arquivo evita centenas de leituras/escritas na conclusão de inventários grandes.
+    this.writeJsonAtomic(this.movementsFile, movements);
+    this.writeJsonAtomic(this.stockFile, stock);
+    return results;
   }
 
   ajustarEstoque({

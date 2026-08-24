@@ -2,66 +2,606 @@
   "version": "0.13.0",
   "items": [
     {
-      "id": "CXS-1785194728625-HF3BC",
+      "id": "CXS-1785809295302-C41FS",
       "cashboxId": "caixa-principal",
       "status": "closed",
       "openingBalance": 0,
       "openingBalanceSource": "previous_closing",
-      "openedAt": "2026-07-27T23:25:28.625Z",
+      "openedAt": "2026-08-04T02:08:15.302Z",
       "openedBy": "painel",
-      "openedDay": "2026-07-27",
-      "closedAt": "2026-07-28T01:54:30.233Z",
-      "closedBy": "painel",
-      "closingBalance": 1,
-      "expectedBalance": 1,
+      "openedDay": "2026-08-03",
+      "closedAt": "2026-08-05T10:24:51.975Z",
+      "closedBy": "sistema",
+      "closingBalance": 0,
+      "expectedBalance": 0,
       "difference": 0,
-      "notes": "",
-      "closingMode": "counted",
-      "closedDay": "2026-07-27",
+      "notes": "Fechamento automático programado.",
+      "closingMode": "automatic",
+      "closedDay": "2026-08-05",
       "closingSummary": {
         "openingBalance": 0,
-        "supplies": 1,
-        "withdrawals": 1,
-        "cashSales": 1,
-        "salesTotal": 8,
+        "supplies": 0,
+        "withdrawals": 0,
+        "cashSales": 0,
+        "salesTotal": 0,
+        "byMethod": [],
+        "movementCount": 0
+      },
+      "automaticCycleDay": "2026-08-05",
+      "automaticClosingTime": "07:09",
+      "automaticReopenAfter": "2026-08-05T10:25:51.798Z"
+    },
+    {
+      "id": "CXS-1785925552274-I28X5",
+      "cashboxId": "caixa-principal",
+      "status": "closed",
+      "openingBalance": 0,
+      "openingBalanceSource": "previous_closing",
+      "openedAt": "2026-08-05T10:25:52.274Z",
+      "openedBy": "sistema",
+      "openedDay": "2026-08-05",
+      "closedAt": "2026-08-06T03:00:01.095Z",
+      "closedBy": "sistema",
+      "closingBalance": 180,
+      "openingMode": "automatic",
+      "automaticCycleDay": "2026-08-06",
+      "automaticSourceSessionId": "CXS-1785809295302-C41FS",
+      "expectedBalance": 180,
+      "difference": 0,
+      "notes": "Fechamento automático programado.",
+      "closingMode": "automatic",
+      "closedDay": "2026-08-06",
+      "closingSummary": {
+        "openingBalance": 0,
+        "supplies": 2591.21,
+        "withdrawals": 2591.21,
+        "cashSales": 180,
+        "salesTotal": 180,
         "byMethod": [
           {
-            "methodId": "cartao-credito",
-            "entries": 1,
+            "methodId": "dinheiro",
+            "entries": 2771.21,
+            "exits": 2591.21,
+            "total": 180,
+            "count": 3
+          }
+        ],
+        "movementCount": 3
+      },
+      "automaticClosingEventKey": "2026-08-06T00:00",
+      "automaticClosingTime": "00:00"
+    },
+    {
+      "id": "CXS-1786018975490-EBDWA",
+      "cashboxId": "caixa-principal",
+      "status": "closed",
+      "openingBalance": 180,
+      "openingBalanceSource": "previous_closing",
+      "openedAt": "2026-08-06T12:22:55.490Z",
+      "openedBy": "painel",
+      "openedDay": "2026-08-06",
+      "closedAt": "2026-08-07T02:59:51.115Z",
+      "closedBy": "sistema",
+      "closingBalance": 180,
+      "expectedBalance": 180,
+      "difference": 0,
+      "notes": "Fechamento automático para início do turno das 00:00.",
+      "closingMode": "automatic",
+      "closedDay": "2026-08-06",
+      "closingSummary": {
+        "openingBalance": 180,
+        "supplies": 0,
+        "withdrawals": 0,
+        "cashSales": 0,
+        "salesTotal": 0,
+        "byMethod": [],
+        "movementCount": 0
+      },
+      "automaticShiftEventKey": "2026-08-06T00:00",
+      "automaticShiftTime": "00:00",
+      "automaticCycleDay": "2026-08-06"
+    },
+    {
+      "id": "CXS-1786071591160-0TSQ5",
+      "cashboxId": "caixa-principal",
+      "status": "closed",
+      "openingBalance": 180,
+      "openingBalanceSource": "previous_closing",
+      "openedAt": "2026-08-07T02:59:51.160Z",
+      "openedBy": "sistema",
+      "openedDay": "2026-08-06",
+      "closedAt": "2026-08-08T02:59:53.876Z",
+      "closedBy": "sistema",
+      "closingBalance": 180,
+      "openingMode": "automatic",
+      "automaticShiftEventKey": "2026-08-07T00:00",
+      "automaticShiftTime": "00:00",
+      "automaticCycleDay": "2026-08-07",
+      "automaticSourceSessionId": "CXS-1786018975490-EBDWA",
+      "expectedBalance": 180,
+      "difference": 0,
+      "notes": "Fechamento automático para início do turno das 00:00.",
+      "closingMode": "automatic",
+      "closedDay": "2026-08-07",
+      "closingSummary": {
+        "openingBalance": 180,
+        "supplies": 0,
+        "withdrawals": 0,
+        "cashSales": 0,
+        "salesTotal": 0,
+        "byMethod": [
+          {
+            "methodId": "boleto-crediario",
+            "entries": 0,
+            "exits": 2536.7799999999997,
+            "total": -2536.78,
+            "count": 2
+          }
+        ],
+        "movementCount": 2
+      }
+    },
+    {
+      "id": "CXS-1786158003872-KE5ZJ",
+      "cashboxId": "caixa-principal",
+      "status": "closed",
+      "openingBalance": 180,
+      "openingBalanceSource": "previous_closing",
+      "openedAt": "2026-08-08T03:00:03.872Z",
+      "openedBy": "sistema",
+      "openedDay": "2026-08-08",
+      "closedAt": "2026-08-11T02:59:51.027Z",
+      "closedBy": "sistema",
+      "closingBalance": 880,
+      "openingMode": "automatic",
+      "automaticShiftEventKey": "2026-08-10T00:00",
+      "automaticShiftTime": "00:00",
+      "automaticCycleDay": "2026-08-10",
+      "automaticSourceSessionId": "CXS-1786071591160-0TSQ5",
+      "expectedBalance": 880,
+      "difference": 0,
+      "notes": "Fechamento automático para início do turno das 00:00.",
+      "closingMode": "automatic",
+      "closedDay": "2026-08-10",
+      "closingSummary": {
+        "openingBalance": 180,
+        "supplies": 180,
+        "withdrawals": 0,
+        "cashSales": 520,
+        "salesTotal": 5600.79,
+        "byMethod": [
+          {
+            "methodId": "PM-DINHEIRO",
+            "entries": 350,
             "exits": 0,
-            "total": 1,
+            "total": 350,
+            "count": 2
+          },
+          {
+            "methodId": "PAY-6c97fb7a-21e6-44d7-8b1f-f44dcc22628f",
+            "entries": 170,
+            "exits": 0,
+            "total": 170,
             "count": 1
           },
           {
             "methodId": "dinheiro",
-            "entries": 2,
-            "exits": 1,
-            "total": 1,
-            "count": 3
+            "entries": 180,
+            "exits": 0,
+            "total": 180,
+            "count": 1
           },
           {
-            "methodId": "pix",
-            "entries": 6,
+            "methodId": "PAY-78ea78b1-83ad-4abb-849e-2d9b68abd163",
+            "entries": 0,
+            "exits": 1412.92,
+            "total": -1412.92,
+            "count": 1
+          },
+          {
+            "methodId": "PM-CREDITO",
+            "entries": 560.8,
             "exits": 0,
-            "total": 6,
-            "count": 3
+            "total": 560.8,
+            "count": 2
+          },
+          {
+            "methodId": "PM-PIX",
+            "entries": 4519.99,
+            "exits": 0,
+            "total": 4519.99,
+            "count": 6
           }
         ],
-        "movementCount": 7
+        "movementCount": 13
       }
     },
     {
-      "id": "CXS-1785203781536-VZB50",
+      "id": "CXS-1786417200971-5M61Q",
+      "cashboxId": "caixa-principal",
+      "status": "closed",
+      "openingBalance": 880,
+      "openingBalanceSource": "previous_closing",
+      "openedAt": "2026-08-11T03:00:00.971Z",
+      "openedBy": "sistema",
+      "openedDay": "2026-08-11",
+      "closedAt": "2026-08-13T02:59:54.084Z",
+      "closedBy": "sistema",
+      "closingBalance": 1372.2,
+      "openingMode": "automatic",
+      "automaticShiftEventKey": "2026-08-12T00:00",
+      "automaticShiftTime": "00:00",
+      "automaticCycleDay": "2026-08-12",
+      "automaticSourceSessionId": "CXS-1786158003872-KE5ZJ",
+      "expectedBalance": 1372.2,
+      "difference": 0,
+      "notes": "Fechamento automático para início do turno das 00:00.",
+      "closingMode": "automatic",
+      "closedDay": "2026-08-12",
+      "closingSummary": {
+        "openingBalance": 880,
+        "supplies": 0,
+        "withdrawals": 72.8,
+        "cashSales": 565,
+        "salesTotal": 5094.1,
+        "byMethod": [
+          {
+            "methodId": "PM-CREDITO",
+            "entries": 4167.66,
+            "exits": 223.56,
+            "total": 3944.1,
+            "count": 12
+          },
+          {
+            "methodId": "Boleto",
+            "entries": 0,
+            "exits": 2473.63,
+            "total": -2473.63,
+            "count": 4
+          },
+          {
+            "methodId": "PM-DINHEIRO",
+            "entries": 565,
+            "exits": 72.8,
+            "total": 492.2,
+            "count": 8
+          },
+          {
+            "methodId": "PM-PIX",
+            "entries": 585,
+            "exits": 0,
+            "total": 585,
+            "count": 4
+          },
+          {
+            "methodId": "Debitado da conta",
+            "entries": 0,
+            "exits": 340,
+            "total": -340,
+            "count": 1
+          }
+        ],
+        "movementCount": 29
+      }
+    },
+    {
+      "id": "CXS-1786590004047-U7ZGS",
+      "cashboxId": "caixa-principal",
+      "status": "closed",
+      "openingBalance": 1372.2,
+      "openingBalanceSource": "previous_closing",
+      "openedAt": "2026-08-13T03:00:04.047Z",
+      "openedBy": "sistema",
+      "openedDay": "2026-08-13",
+      "closedAt": "2026-08-15T02:59:53.685Z",
+      "closedBy": "sistema",
+      "closingBalance": 2372.2,
+      "openingMode": "automatic",
+      "automaticShiftEventKey": "2026-08-14T00:00",
+      "automaticShiftTime": "00:00",
+      "automaticCycleDay": "2026-08-14",
+      "automaticSourceSessionId": "CXS-1786417200971-5M61Q",
+      "expectedBalance": 2372.2,
+      "difference": 0,
+      "notes": "Fechamento automático para início do turno das 00:00.",
+      "closingMode": "automatic",
+      "closedDay": "2026-08-14",
+      "closingSummary": {
+        "openingBalance": 1372.2,
+        "supplies": 0,
+        "withdrawals": 0,
+        "cashSales": 1000,
+        "salesTotal": 1180,
+        "byMethod": [
+          {
+            "methodId": "PM-DINHEIRO",
+            "entries": 1000,
+            "exits": 0,
+            "total": 1000,
+            "count": 4
+          },
+          {
+            "methodId": "PM-PIX",
+            "entries": 180,
+            "exits": 1000,
+            "total": -820,
+            "count": 4
+          }
+        ],
+        "movementCount": 8
+      }
+    },
+    {
+      "id": "CXS-1786762803611-XLX0H",
+      "cashboxId": "caixa-principal",
+      "status": "closed",
+      "openingBalance": 2372.2,
+      "openingBalanceSource": "previous_closing",
+      "openedAt": "2026-08-15T03:00:03.611Z",
+      "openedBy": "sistema",
+      "openedDay": "2026-08-15",
+      "closedAt": "2026-08-17T02:59:51.682Z",
+      "closedBy": "sistema",
+      "closingBalance": 5352.2,
+      "openingMode": "automatic",
+      "automaticShiftEventKey": "2026-08-16T00:00",
+      "automaticShiftTime": "00:00",
+      "automaticCycleDay": "2026-08-16",
+      "automaticSourceSessionId": "CXS-1786590004047-U7ZGS",
+      "expectedBalance": 5352.2,
+      "difference": 0,
+      "notes": "Fechamento automático para início do turno das 00:00.",
+      "closingMode": "automatic",
+      "closedDay": "2026-08-16",
+      "closingSummary": {
+        "openingBalance": 2372.2,
+        "supplies": 0,
+        "withdrawals": 0,
+        "cashSales": 2980,
+        "salesTotal": 4869.89,
+        "byMethod": [
+          {
+            "methodId": "PM-PIX",
+            "entries": 79.99000000000001,
+            "exits": 0,
+            "total": 79.99,
+            "count": 2
+          },
+          {
+            "methodId": "PM-CREDITO",
+            "entries": 1809.9,
+            "exits": 0,
+            "total": 1809.9,
+            "count": 1
+          },
+          {
+            "methodId": "PM-DINHEIRO",
+            "entries": 175,
+            "exits": 0,
+            "total": 175,
+            "count": 2
+          },
+          {
+            "methodId": "PAY-7c338d6b-a7e2-4a40-b193-c6395128a938",
+            "entries": 2805,
+            "exits": 0,
+            "total": 2805,
+            "count": 1
+          }
+        ],
+        "movementCount": 6
+      }
+    },
+    {
+      "id": "CXS-1786935601640-6TSTM",
+      "cashboxId": "caixa-principal",
+      "status": "closed",
+      "openingBalance": 5352.2,
+      "openingBalanceSource": "previous_closing",
+      "openedAt": "2026-08-17T03:00:01.640Z",
+      "openedBy": "sistema",
+      "openedDay": "2026-08-17",
+      "closedAt": "2026-08-19T02:59:52.551Z",
+      "closedBy": "sistema",
+      "closingBalance": 12435.19,
+      "openingMode": "automatic",
+      "automaticShiftEventKey": "2026-08-18T00:00",
+      "automaticShiftTime": "00:00",
+      "automaticCycleDay": "2026-08-18",
+      "automaticSourceSessionId": "CXS-1786762803611-XLX0H",
+      "expectedBalance": 12435.19,
+      "difference": 0,
+      "notes": "Fechamento automático para início do turno das 00:00.",
+      "closingMode": "automatic",
+      "closedDay": "2026-08-18",
+      "closingSummary": {
+        "openingBalance": 5352.2,
+        "supplies": 0,
+        "withdrawals": 0,
+        "cashSales": 7082.99,
+        "salesTotal": 7212.99,
+        "byMethod": [
+          {
+            "methodId": "PAY-80aa64db-9fbf-404e-91cc-5a788c4b2880",
+            "entries": 1099.99,
+            "exits": 0,
+            "total": 1099.99,
+            "count": 7
+          },
+          {
+            "methodId": "PAY-7d47b3ee-c71b-4e90-9f68-7a80cbdc4d6a",
+            "entries": 1568,
+            "exits": 0,
+            "total": 1568,
+            "count": 1
+          },
+          {
+            "methodId": "PM-DINHEIRO",
+            "entries": 365,
+            "exits": 0,
+            "total": 365,
+            "count": 4
+          },
+          {
+            "methodId": "PAY-7c338d6b-a7e2-4a40-b193-c6395128a938",
+            "entries": 4050,
+            "exits": 0,
+            "total": 4050,
+            "count": 1
+          },
+          {
+            "methodId": "PM-PIX",
+            "entries": 130,
+            "exits": 0,
+            "total": 130,
+            "count": 1
+          },
+          {
+            "methodId": "Boleto",
+            "entries": 0,
+            "exits": 1950.06,
+            "total": -1950.06,
+            "count": 1
+          }
+        ],
+        "movementCount": 15
+      }
+    },
+    {
+      "id": "CXS-1787108402404-GU5UY",
+      "cashboxId": "caixa-principal",
+      "status": "closed",
+      "openingBalance": 12435.19,
+      "openingBalanceSource": "previous_closing",
+      "openedAt": "2026-08-19T03:00:02.404Z",
+      "openedBy": "sistema",
+      "openedDay": "2026-08-19",
+      "closedAt": "2026-08-21T02:59:52.488Z",
+      "closedBy": "sistema",
+      "closingBalance": 12659.19,
+      "openingMode": "automatic",
+      "automaticShiftEventKey": "2026-08-20T00:00",
+      "automaticShiftTime": "00:00",
+      "automaticCycleDay": "2026-08-20",
+      "automaticSourceSessionId": "CXS-1786935601640-6TSTM",
+      "expectedBalance": 12659.19,
+      "difference": 0,
+      "notes": "Fechamento automático para início do turno das 00:00.",
+      "closingMode": "automatic",
+      "closedDay": "2026-08-20",
+      "closingSummary": {
+        "openingBalance": 12435.19,
+        "supplies": 0,
+        "withdrawals": 141,
+        "cashSales": 365,
+        "salesTotal": 540.01,
+        "byMethod": [
+          {
+            "methodId": "PM-DINHEIRO",
+            "entries": 295,
+            "exits": 141,
+            "total": 154,
+            "count": 7
+          },
+          {
+            "methodId": "Boleto",
+            "entries": 0,
+            "exits": 2898.3799999999997,
+            "total": -2898.38,
+            "count": 7
+          },
+          {
+            "methodId": "PM-CREDITO",
+            "entries": 175.01,
+            "exits": 0,
+            "total": 175.01,
+            "count": 3
+          },
+          {
+            "methodId": "PAY-80aa64db-9fbf-404e-91cc-5a788c4b2880",
+            "entries": 70,
+            "exits": 0,
+            "total": 70,
+            "count": 1
+          }
+        ],
+        "movementCount": 18
+      }
+    },
+    {
+      "id": "CXS-1787281202363-H6JSX",
+      "cashboxId": "caixa-principal",
+      "status": "closed",
+      "openingBalance": 12659.19,
+      "openingBalanceSource": "previous_closing",
+      "openedAt": "2026-08-21T03:00:02.363Z",
+      "openedBy": "sistema",
+      "openedDay": "2026-08-21",
+      "closedAt": "2026-08-23T02:59:51.931Z",
+      "closedBy": "sistema",
+      "closingBalance": 13113.7,
+      "openingMode": "automatic",
+      "automaticShiftEventKey": "2026-08-22T00:00",
+      "automaticShiftTime": "00:00",
+      "automaticCycleDay": "2026-08-22",
+      "automaticSourceSessionId": "CXS-1787108402404-GU5UY",
+      "expectedBalance": 13113.7,
+      "difference": 0,
+      "notes": "Fechamento automático para início do turno das 00:00.",
+      "closingMode": "automatic",
+      "closedDay": "2026-08-22",
+      "closingSummary": {
+        "openingBalance": 12659.19,
+        "supplies": 0,
+        "withdrawals": 424.5,
+        "cashSales": 879.01,
+        "salesTotal": 1138.57,
+        "byMethod": [
+          {
+            "methodId": "PM-CREDITO",
+            "entries": 259.56,
+            "exits": 0,
+            "total": 259.56,
+            "count": 1,
+            "reversals": 0
+          },
+          {
+            "methodId": "PM-DINHEIRO",
+            "entries": 309.01,
+            "exits": 0,
+            "total": 309.01,
+            "count": 5,
+            "reversals": 0
+          },
+          {
+            "methodId": "PAY-80aa64db-9fbf-404e-91cc-5a788c4b2880",
+            "entries": 570,
+            "exits": 0,
+            "total": 570,
+            "count": 2,
+            "reversals": 0
+          }
+        ],
+        "movementCount": 15
+      }
+    },
+    {
+      "id": "CXS-1787454001915-RC3TN",
       "cashboxId": "caixa-principal",
       "status": "open",
-      "openingBalance": 1,
+      "openingBalance": 13113.7,
       "openingBalanceSource": "previous_closing",
-      "openedAt": "2026-07-28T01:56:21.536Z",
-      "openedBy": "painel",
-      "openedDay": "2026-07-27",
+      "openedAt": "2026-08-23T03:00:01.915Z",
+      "openedBy": "sistema",
+      "openedDay": "2026-08-23",
       "closedAt": null,
       "closedBy": null,
-      "closingBalance": null
+      "closingBalance": null,
+      "openingMode": "automatic",
+      "automaticShiftEventKey": "2026-08-23T00:00",
+      "automaticShiftTime": "00:00",
+      "automaticCycleDay": "2026-08-23",
+      "automaticSourceSessionId": "CXS-1787281202363-H6JSX"
     }
   ]
 }

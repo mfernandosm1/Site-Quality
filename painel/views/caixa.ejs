@@ -1,16 +1,20 @@
 <% layout('layout') -%>
 <% const money = value => Number(value || 0).toLocaleString('pt-BR',{style:'currency',currency:'BRL'}); %>
 <% const methodName = id => (paymentMethods.find(p=>p.id===id)?.name || id); %>
+<% const ref = value => { const raw=String(value ?? '').trim(); if (/^\d+$/.test(raw)) return String(Number(raw)); return raw.replace(/\b([A-Z]{1,5})-0+(\d+)\b/g,'$1-$2').replace(/(Título|Recebimento|Comprovante)\s+0+(\d+)/gi,'$1 $2'); }; %>
 <% const safeSelectedClosing = typeof selectedClosing !== 'undefined' ? selectedClosing : null; %>
 <% const safeClosedSessions = typeof closedSessions !== 'undefined' && Array.isArray(closedSessions) ? closedSessions : []; %>
 <% const safeViewedSession = typeof viewedSession !== 'undefined' ? viewedSession : openSession; %>
 <% const isClosingView = Boolean(safeSelectedClosing); %>
+<% const activePaymentMethods = paymentMethods.filter(item => item && item.active !== false); %>
+<% const paymentSummaryRows = Array.isArray(summary?.byMethod) ? summary.byMethod : []; %>
+<% const paymentCardMethods = [...activePaymentMethods]; const paymentCardIds = new Set(paymentCardMethods.map(item => String(item.id))); paymentSummaryRows.forEach(row => { const id=String(row.methodId || 'outros'); if (!paymentCardIds.has(id)) { paymentCardMethods.push({ id, name:methodName(id), active:true, legacy:true }); paymentCardIds.add(id); } }); %>
+<% const paymentSummaryMap = new Map(paymentSummaryRows.map(row => [String(row.methodId || 'outros'), row])); %>
 <main class="cash-page">
   <header class="cash-page-head">
     <div>
       <a class="cash-back" href="/erp/pdv?caixa=<%= encodeURIComponent(selectedCashboxId) %>">← Voltar ao PDV</a>
-      <h1>Caixa Operacional <small>v0.14.4</small></h1>
-      <p>Abertura, movimentações, conferência e histórico de fechamentos.</p>
+      <h1>Caixa Operacional <small>v0.14.5</small> <span class="help-tip cash-info-tip" tabindex="0" data-tooltip="Abertura, movimentações, conferência e histórico de fechamentos." aria-label="Informações sobre o Caixa Operacional">i</span></h1>
     </div>
     <div class="cash-head-actions">
       <label>Caixa
@@ -54,14 +58,14 @@
       <div><span>Saldo inicial</span><strong><%= money(summary?.openingBalance) %></strong></div>
     </section>
 
-    <% if (filtersActive) { %><div class="cash-filtered-summary-note">Resumo recalculado conforme os filtros ativos.</div><% } %>
-    <section class="cash-summary-grid cash-summary-grid-v144">
-      <article><span>🔓 Abertura</span><strong><%= money(summary?.openingBalance) %></strong><small>Saldo inicial do turno</small></article>
-      <article class="cash-card-primary" title="Saldo inicial + entradas em dinheiro + suprimentos − sangrias e despesas pagas em dinheiro"><span>💰 <%= filtersActive ? 'Saldo físico no filtro' : (isClosingView ? 'Saldo físico do fechamento' : 'Saldo físico atual') %></span><strong><%= money(summary?.expectedBalance) %></strong><small>Abertura + entradas − saídas em dinheiro</small></article>
-      <article class="cash-card-primary" title="Soma das vendas, O.S. e recebimentos em dinheiro, Pix, cartão, boleto e demais formas"><span>📥 <%= filtersActive ? 'Total recebido no filtro' : (isClosingView ? 'Total recebido no turno' : 'Total recebido hoje') %></span><strong><%= money(summary?.totalReceived ?? summary?.salesTotal) %></strong><small>Vendas, O.S. e recebimentos em todas as formas</small></article>
-      <article title="Somente valores que realmente entraram em espécie na gaveta"><span>💵 Entradas em dinheiro</span><strong><%= money(summary?.cashReceived ?? summary?.cashSales) %></strong><small>Vendas, O.S. e recebimentos em espécie</small></article>
-      <article><span>＋ Suprimentos</span><strong><%= money(summary?.supplies) %></strong><small>Entradas manuais</small></article>
-      <article><span>− Sangrias / despesas</span><strong><%= money(summary?.withdrawals) %></strong><small>Saídas físicas</small></article>
+    <% if (filtersActive) { %><div class="cash-filtered-summary-note" data-filter-summary-note role="status">Resumo recalculado conforme os filtros ativos.</div><% } %>
+    <section class="cash-summary-grid cash-summary-v024">
+      <article class="erp-tone-success"><span>💰 Saldo atual</span><strong><%= money(liveSummary?.cashBalance ?? cashState?.balance) %></strong><small>Dinheiro físico disponível agora</small></article>
+      <article class="cash-card-primary erp-tone-income"><span>📅 Recebido hoje</span><strong><%= money(dailySummary?.netReceivedToday) %></strong><small>Zera automaticamente na troca da data</small></article>
+      <article class="erp-tone-income"><span>🕒 Recebido no turno</span><strong><%= money(liveSummary?.totalReceived) %></strong><small>Somente o caixa atualmente aberto</small></article>
+      <article class="erp-tone-expense"><span>📤 Saídas hoje</span><strong><%= money(dailySummary?.exitsToday) %></strong><small>Sangrias, despesas e outras saídas</small></article>
+      <article class="erp-tone-warning"><span>↶ Estornos hoje</span><strong><%= money(dailySummary?.reversalsToday) %></strong><small>Valores retirados dos recebimentos do dia</small></article>
+      <article class="erp-tone-info"><span>🧮 Total esperado</span><strong><%= money(liveSummary?.expectedBalance ?? summary?.expectedBalance) %></strong><small>Abertura + entradas − saídas em dinheiro</small></article>
     </section>
 
     <% if (!isClosingView && openSession) { %>
@@ -73,13 +77,26 @@
     </section>
     <% } %>
 
-    <section class="cash-methods">
-      <h2>Resumo por forma de pagamento</h2>
-      <div class="cash-method-grid">
-        <% (summary?.byMethod||[]).forEach(m=>{ %><article><span><%= methodName(m.methodId) %></span><strong><%= money(m.total) %></strong><small><%= m.count %> movimentação(ões)</small></article><% }) %>
-        <% if (!(summary?.byMethod||[]).length) { %><p class="cash-muted">Ainda não existem recebimentos neste turno.</p><% } %>
+    <details class="cash-methods cash-methods-details">
+      <summary class="cash-methods-summary"><span>Resumo por forma de pagamento</span><small>Recebimentos líquidos por forma</small></summary>
+      <div class="cash-methods-body">
+        <details class="cash-method-picker">
+          <summary>⚙ Escolher cards exibidos</summary>
+          <div class="cash-method-picker-options" data-payment-method-picker>
+            <% paymentCardMethods.forEach(method=>{ const row=paymentSummaryMap.get(String(method.id)); %>
+              <label><input type="checkbox" value="<%= method.id %>" data-payment-method-toggle data-has-movement="<%= row && (Number(row.count||0)>0 || Number(row.reversals||0)>0 || Math.abs(Number(row.total||0))>0) ? '1' : '0' %>"><span><%= method.name || method.id %></span></label>
+            <% }) %>
+          </div>
+        </details>
+        <div class="cash-method-grid" data-payment-method-grid>
+          <% paymentCardMethods.forEach(method=>{ const m=paymentSummaryMap.get(String(method.id)) || { methodId:method.id, total:0, count:0, reversals:0 }; %>
+            <article data-payment-method-card="<%= method.id %>" data-has-movement="<%= Number(m.count||0)>0 || Number(m.reversals||0)>0 || Math.abs(Number(m.total||0))>0 ? '1' : '0' %>"><span><%= method.name || method.id %></span><strong><%= money(m.total) %></strong><small><%= Number(m.count||0) %> recebimento(s)<%= Number(m.reversals||0) ? ' · '+Number(m.reversals||0)+' estorno(s)' : '' %></small></article>
+          <% }) %>
+          <p class="cash-muted cash-method-empty" data-payment-method-empty hidden>Nenhum card selecionado. Use “Escolher cards exibidos” para definir o resumo.</p>
+        </div>
+        <p class="cash-method-note">Considera vendas, O.S. e recebimentos de clientes. Estornos reduzem o total; suprimentos, sangrias e despesas não entram neste resumo.</p>
       </div>
-    </section>
+    </details>
 
     <section class="cash-history">
       <div class="cash-history-head"><div><h2><%= isClosingView ? 'Movimentações deste fechamento' : 'Linha do tempo do turno' %></h2><p><%= isClosingView ? 'Somente os movimentos pertencentes ao turno selecionado.' : 'Todos os movimentos mantêm origem, referência, usuário e forma de pagamento.' %></p></div></div>
@@ -100,7 +117,7 @@
       </form>
       <div class="cash-table-wrap"><table class="cash-table"><thead><tr><th>Data / hora</th><th>Tipo</th><th>Referência / descrição</th><th>Cliente</th><th>Usuário</th><th>Forma</th><th class="num">Valor</th><th class="num">Saldo</th></tr></thead><tbody>
         <tr class="opening"><td><%= new Date(safeViewedSession.openedAt).toLocaleString('pt-BR') %></td><td><span class="cash-type-badge opening">Abertura</span></td><td>Saldo inicial do turno</td><td>—</td><td><%= safeViewedSession.openedBy %></td><td>Dinheiro</td><td class="num positive"><%= money(safeViewedSession.openingBalance) %></td><td class="num"><%= money(safeViewedSession.openingBalance) %></td></tr>
-        <% movements.forEach(m=>{ const out=Number(m.signedAmount)<0; const isSale=m.type==='sale_receipt'&&m.operationType==='sale'; const isOS=m.type==='sale_receipt'&&m.operationType==='service_order'; const label=isSale?'🛒 Venda':isOS?'🛠️ O.S.':m.type==='receivable_receipt'?'💰 Recebimento':({supply:'📥 Suprimento',withdrawal:'📤 Sangria',expense:'📤 Despesa',refund:'↩️ Estorno'}[m.type]||m.type); const badge=isSale?'sale':isOS?'service-order':m.type; const reference=(isSale||isOS)?`${label} #${m.operationNumber || '—'}`:(m.description||'—'); %><tr><td><%= new Date(m.createdAt).toLocaleString('pt-BR') %></td><td><span class="cash-type-badge <%= badge %>"><%= label %></span></td><td><strong><%= reference %></strong><% if ((isSale||isOS) && m.description) { %><small class="cash-row-detail"><%= m.description %></small><% } %></td><td><%= m.customerName||'—' %></td><td><%= m.createdBy||'—' %></td><td><%= methodName(m.methodId) %></td><td class="num <%= out?'negative':'positive' %>"><%= out?'− ':'+ ' %><%= money(m.amount) %></td><td class="num"><%= m.balanceAfter===null||m.balanceAfter===undefined?'—':money(m.balanceAfter) %></td></tr><% }) %>
+        <% movements.forEach(m=>{ const out=Number(m.signedAmount)<0; const isSale=m.type==='sale_receipt'&&m.operationType==='sale'; const isOS=m.type==='sale_receipt'&&m.operationType==='service_order'; const label=isSale?'🛒 Venda':isOS?'🛠️ O.S.':m.type==='receivable_receipt'?'💰 Recebimento':({supply:'📥 Suprimento',withdrawal:'📤 Sangria',expense:'📤 Despesa',refund:'↩️ Estorno',payment_reversal:'↩️ Estorno'}[m.type]||m.type); const badge=isSale?'sale':isOS?'service-order':m.type; const reference=(isSale||isOS)?`${label} #${ref(m.operationNumber || '—')}`:ref(m.description||'—'); %><tr><td><%= new Date(m.createdAt).toLocaleString('pt-BR') %></td><td><span class="cash-type-badge <%= badge %>"><%= label %></span></td><td><strong><%= reference %></strong><% if ((isSale||isOS) && m.description) { %><small class="cash-row-detail"><%= ref(m.description) %></small><% } %></td><td><%= m.customerName||'—' %></td><td><%= m.createdBy||'—' %></td><td><%= methodName(m.methodId) %></td><td class="num <%= out?'negative':'positive' %>"><%= out?'− ':'+ ' %><%= money(m.amount) %></td><td class="num"><%= m.balanceAfter===null||m.balanceAfter===undefined?'—':money(m.balanceAfter) %></td></tr><% }) %>
         <% if (!movements.length) { %><tr><td colspan="8" class="cash-empty-row">Nenhuma movimentação encontrada para os filtros selecionados.</td></tr><% } %>
       </tbody></table></div>
     </section>
@@ -145,5 +162,40 @@
     start.value=iso(from);end.value=iso(to);submit();
   }));
   [start,end,form.querySelector('[name="tipo"]'),form.querySelector('[name="forma"]'),form.querySelector('[name="usuario"]')].filter(Boolean).forEach(el=>el.addEventListener('change',submit));
+})();
+</script>
+<script>
+(()=>{
+  const note=document.querySelector('[data-filter-summary-note]');
+  if(note){ setTimeout(()=>{ note.classList.add('is-hiding'); setTimeout(()=>note.remove(),240); },3000); }
+
+  const toggles=[...document.querySelectorAll('[data-payment-method-toggle]')];
+  const cards=[...document.querySelectorAll('[data-payment-method-card]')];
+  const empty=document.querySelector('[data-payment-method-empty]');
+  if(!toggles.length || !cards.length) return;
+  const storageKey='quality.erp.caixa.payment-cards.v1';
+  const validIds=new Set(toggles.map(input=>input.value));
+  let selected=[];
+  try{
+    const saved=JSON.parse(localStorage.getItem(storageKey)||'null');
+    if(Array.isArray(saved)) selected=saved.map(String).filter(id=>validIds.has(id));
+  }catch(_){ selected=[]; }
+  if(!selected.length){
+    selected=toggles.filter(input=>input.dataset.hasMovement==='1').map(input=>input.value);
+    if(!selected.length) selected=toggles.slice(0,Math.min(5,toggles.length)).map(input=>input.value);
+  }
+  const apply=()=>{
+    const selectedSet=new Set(selected);
+    toggles.forEach(input=>{ input.checked=selectedSet.has(input.value); });
+    let visible=0;
+    cards.forEach(card=>{ const show=selectedSet.has(card.dataset.paymentMethodCard); card.hidden=!show; if(show) visible+=1; });
+    if(empty) empty.hidden=visible!==0;
+  };
+  toggles.forEach(input=>input.addEventListener('change',()=>{
+    selected=toggles.filter(item=>item.checked).map(item=>item.value);
+    try{ localStorage.setItem(storageKey,JSON.stringify(selected)); }catch(_){}
+    apply();
+  }));
+  apply();
 })();
 </script>

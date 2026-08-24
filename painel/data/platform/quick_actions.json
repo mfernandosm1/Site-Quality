@@ -1,8 +1,17 @@
 {
   "actions": [
-    "whatsapp",
+    "erp",
+    "erp-pdv",
     "produtos-site",
-    "erp-orcamentos"
+    "erp-orcamentos",
+    "erp-financeiro",
+    "whatsapp-inbox",
+    "ferramentas-compatibilidade",
+    "erp-contas-pagar",
+    "erp-dre",
+    "erp-estoque",
+    "erp-fluxo-caixa",
+    "erp-clientes-lista"
   ],
-  "updatedAt": "2026-07-27T11:47:31.082Z"
+  "updatedAt": "2026-08-14T01:10:34.776Z"
 }

@@ -188,7 +188,9 @@ export function applyFormasFields(html, fields){
 ========================================================= */
 function categoryPageHtml(header, footer, siteDir = null){
   const currentTemplate = readCurrentSiteTemplate(siteDir, 'categoria.html');
-  if (currentTemplate) return replaceHeaderFooterInFullPage(currentTemplate, header, footer);
+  if (currentTemplate && currentTemplate.includes('QUALITY_CATEGORY_TEMPLATE_V2_SUBCATEGORIES')) {
+    return replaceHeaderFooterInFullPage(currentTemplate, header, footer);
+  }
   return `<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -216,6 +218,7 @@ function categoryPageHtml(header, footer, siteDir = null){
   </style>
 </head>
 <body>
+<!-- QUALITY_CATEGORY_TEMPLATE_V2_SUBCATEGORIES -->
 ${header}
 <main class="main">
   <h1 id="categoria-titulo" style="text-align:center;margin-top:30px;display:flex;justify-content:center;align-items:center;gap:10px;flex-wrap:wrap;">Categoria</h1>
@@ -235,6 +238,16 @@ ${footer}
 (function(){
   function normalizeText(v){
     return (v || '').toString().trim().normalize('NFD').replace(/[\\u0300-\\u036f]/g, '').toLowerCase();
+  }
+
+  function flagEnabled(value, defaultValue){
+    if (value === undefined || value === null || value === '') return !!defaultValue;
+    if (value === true || value === 1) return true;
+    if (value === false || value === 0) return false;
+    const normalized = normalizeText(value);
+    if (['true','1','sim','yes','on','ativo'].includes(normalized)) return true;
+    if (['false','0','nao','não','no','off','inativo'].includes(normalized)) return false;
+    return !!defaultValue;
   }
 
   function shouldShowPrice(p){
@@ -572,6 +585,7 @@ ${footer}
   const lastPath = normalizeText(pathParts[pathParts.length - 1] || '');
   const pathSlug = ['categoria.html', 'index.html'].includes(lastPath) ? '' : lastPath;
   const currentSlug = normalizeText(params.get('slug') || params.get('cat') || pathSlug);
+  const currentSubSlug = normalizeText(params.get('subcategoria') || params.get('subcat') || '');
   const titleEl = document.getElementById('categoria-titulo');
 
   if (!currentSlug) {
@@ -582,9 +596,11 @@ ${footer}
 
   Promise.all([
     fetchJson(['/content/categories.json', '/site/content/categories.json']).catch(() => ({ items: [] })),
-    fetchJson(['/content/products.json', '/site/content/products.json']).catch(() => ({ items: [] }))
-  ]).then(([categoriesData, productsData]) => {
+    fetchJson(['/content/products.json', '/site/content/products.json']).catch(() => ({ items: [] })),
+    fetchJson(['/content/subcategories.json', '/site/content/subcategories.json']).catch(() => ({ items: [] }))
+  ]).then(([categoriesData, productsData, subcategoriesData]) => {
     const categories = categoriesData.items || [];
+    const subcategories = subcategoriesData.items || [];
     const category = categories.find(c =>
       normalizeText(c.slug) === currentSlug ||
       normalizeText(c.name) === currentSlug ||
@@ -595,9 +611,38 @@ ${footer}
     const categoryNameLower = normalizeText(categoryName);
     const categorySlugLower = normalizeText(category ? category.slug : currentSlug);
     const categoryIdLower = normalizeText(category ? category.id : '');
+    const currentSubcategory = currentSubSlug ? subcategories.find(s =>
+      s && flagEnabled(s.active, true) && flagEnabled(s.showOnSite, false) &&
+      Number(s.categoryId) === Number(category ? category.id : 0) &&
+      (normalizeText(s.slug) === currentSubSlug || normalizeText(s.name) === currentSubSlug || normalizeText(s.id) === currentSubSlug)
+    ) : null;
+    const visibleSubcategories = subcategories
+      .filter(s => s && flagEnabled(s.active, true) && flagEnabled(s.showOnSite, false) && Number(s.categoryId) === Number(category ? category.id : 0))
+      .sort((a,b) => Number(a.order || 0) - Number(b.order || 0) || String(a.name || '').localeCompare(String(b.name || ''), 'pt-BR'));
+    const pageTitle = currentSubcategory ? categoryName + ' — ' + (currentSubcategory.name || currentSubcategory.slug) : categoryName;
 
-    setCategoryTitle(titleEl, categoryName, category ? category.icon : '');
-    document.title = categoryName + ' – Quality Celulares';
+    setCategoryTitle(titleEl, pageTitle, category ? category.icon : '');
+    document.title = pageTitle + ' – Quality Celulares';
+
+    if (visibleSubcategories.length && titleEl && titleEl.parentNode) {
+      const filter = document.createElement('div');
+      filter.className = 'quality-subcategory-filter';
+      filter.style.cssText = 'display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin:10px 0 18px';
+      const all = document.createElement('a');
+      all.href = '/' + encodeURIComponent(categorySlugLower || currentSlug) + '/';
+      all.textContent = 'Todos';
+      all.style.cssText = 'padding:7px 11px;border:1px solid #ddd;border-radius:999px;text-decoration:none;color:inherit;font-weight:700;background:' + (!currentSubcategory ? '#111;color:#fff' : '#fff');
+      filter.appendChild(all);
+      visibleSubcategories.forEach(function(sub){
+        const a = document.createElement('a');
+        a.href = '/' + encodeURIComponent(categorySlugLower || currentSlug) + '/?subcategoria=' + encodeURIComponent(sub.slug || sub.name || '');
+        a.textContent = sub.name || sub.slug || 'Subcategoria';
+        const active = currentSubcategory && Number(currentSubcategory.id) === Number(sub.id);
+        a.style.cssText = 'padding:7px 11px;border:1px solid #ddd;border-radius:999px;text-decoration:none;color:inherit;font-weight:700;background:' + (active ? '#111;color:#fff' : '#fff');
+        filter.appendChild(a);
+      });
+      titleEl.parentNode.insertBefore(filter, titleEl.nextSibling);
+    }
 
     const metaDescriptionText =(category && (category.ogDescription || category.seoDescription))
     ? (category.ogDescription || category.seoDescription)
@@ -638,11 +683,15 @@ ${footer}
     const products = (productsData.items || []).filter(p => {
       if (p.active === false) return false;
       const cat = normalizeText(p.category ?? p.categoria ?? p.categorySlug ?? p.categoriaSlug ?? p.categoryId ?? p.categoriaId);
-      return cat === currentSlug || cat === categorySlugLower || cat === categoryNameLower || (categoryIdLower && cat === categoryIdLower);
+      const inCategory = cat === currentSlug || cat === categorySlugLower || cat === categoryNameLower || (categoryIdLower && cat === categoryIdLower);
+      if (!inCategory) return false;
+      if (!currentSubcategory) return true;
+      const sub = normalizeText(p.subcategory ?? p.subcategoria ?? p.subcategorySlug ?? p.subcategoriaSlug ?? p.subcategoryId ?? p.subcategoriaId);
+      return sub === normalizeText(currentSubcategory.slug) || sub === normalizeText(currentSubcategory.name) || sub === normalizeText(currentSubcategory.id);
     });
 
     if (products.length === 0) {
-      showMessage('Nenhum produto nesta categoria ainda.');
+      showMessage(currentSubcategory ? 'Nenhum produto nesta subcategoria ainda.' : 'Nenhum produto nesta categoria ainda.');
       return;
     }
 
@@ -994,16 +1043,45 @@ function iconHtml(icon){
   return `<i class="${escapeAttr(cls)}" aria-hidden="true"></i> `;
 }
 
-export function updateHeaderMenu(categories, siteDir) {
+export function updateHeaderMenu(categories, siteDir, subcategories = null) {
   const headerPath = path.join(siteDir, 'header.html');
   const sorted = [...(categories || [])].sort((a, b) => (Number(a.order || 0) - Number(b.order || 0)));
+  const subList = Array.isArray(subcategories)
+    ? subcategories
+    : (readJsonSafe(path.join(siteDir, 'content', 'subcategories.json'), { items: [] }).items || []);
+
+  const visibleSubs = subList
+    .filter(s => {
+      if (!s) return false;
+      const active = ![false, 'false', 0, '0', 'nao', 'não', 'no'].includes(typeof s.active === 'string' ? s.active.toLowerCase() : s.active);
+      const show = [true, 'true', 1, '1', 'sim', 'yes'].includes(typeof s.showOnSite === 'string' ? s.showOnSite.toLowerCase() : s.showOnSite);
+      return active && show;
+    })
+    .sort((a,b) => Number(a.order || 0) - Number(b.order || 0) || String(a.name || '').localeCompare(String(b.name || ''), 'pt-BR'));
+
+  function subLinksFor(category, mobile = false){
+    const children = visibleSubs.filter(s => Number(s.categoryId) === Number(category.id));
+    if (!children.length) return '';
+    const catSlug = encodeURIComponent((category.slug || category.name || '').toString().trim());
+    return children.map(s => {
+      const subSlug = encodeURIComponent((s.slug || s.name || '').toString().trim());
+      const href = `/${catSlug}/?subcategoria=${subSlug}`;
+      const cls = mobile ? 'cat-sub-link cat-sub-link-mobile' : 'cat-sub-link';
+      return `<a href="${href}" class="${cls}">${escapeText(s.name || s.slug || 'Subcategoria')}</a>`;
+    }).join('');
+  }
 
   const catLinksDesktop = sorted.map(c => {
     const slug = (c.slug || c.name || '').toString().trim();
     const name = (c.name || slug).toString().trim();
     const icon = (c.icon || '').toString().trim();
     if (!slug || !name) return '';
-    return `          <a href="/${encodeURIComponent(slug)}/" class="cat-link">${iconHtml(icon)}${escapeText(name)}</a>`;
+    const children = subLinksFor(c, false);
+    if (!children) return `          <a href="/${encodeURIComponent(slug)}/" class="cat-link">${iconHtml(icon)}${escapeText(name)}</a>`;
+    return `          <div class="cat-menu-group">
+            <a href="/${encodeURIComponent(slug)}/" class="cat-link cat-parent-link">${iconHtml(icon)}${escapeText(name)} <span class="cat-menu-caret">▾</span></a>
+            <div class="cat-submenu">${children}</div>
+          </div>`;
   }).filter(Boolean).join('\n');
 
   const catLinksMobile = sorted.map(c => {
@@ -1011,10 +1089,28 @@ export function updateHeaderMenu(categories, siteDir) {
     const name = (c.name || slug).toString().trim();
     const icon = (c.icon || '').toString().trim();
     if (!slug || !name) return '';
-    return `          <a href="/${encodeURIComponent(slug)}/" class="cat-link">${iconHtml(icon)}${escapeText(name)}</a>`;
+    const children = subLinksFor(c, true);
+    if (!children) return `          <a href="/${encodeURIComponent(slug)}/" class="cat-link">${iconHtml(icon)}${escapeText(name)}</a>`;
+    return `          <div class="cat-mobile-group">
+            <a href="/${encodeURIComponent(slug)}/" class="cat-link">${iconHtml(icon)}${escapeText(name)}</a>
+            <div class="cat-mobile-submenu">${children}</div>
+          </div>`;
   }).filter(Boolean).join('\n');
 
-  const headerHtml = `<header class="header">
+  const headerHtml = `<style>
+.cat-menu-group{position:relative;display:inline-flex;align-items:center;align-self:stretch}
+.cat-menu-group>.cat-link{display:flex;align-items:center;height:100%;white-space:nowrap}
+.cat-menu-caret{font-size:10px;margin-left:3px;opacity:.8}
+.cat-submenu{position:absolute;top:calc(100% - 1px);left:0;min-width:185px;background:#fff;border:1px solid rgba(0,0,0,.10);border-radius:0 0 10px 10px;box-shadow:0 12px 28px rgba(0,0,0,.16);padding:7px;display:none;z-index:1000}
+.cat-menu-group:hover .cat-submenu,.cat-menu-group:focus-within .cat-submenu{display:grid;gap:2px}
+.cat-submenu .cat-sub-link{display:block!important;height:auto!important;padding:9px 11px!important;border-radius:7px;color:#222!important;text-decoration:none!important;white-space:nowrap}
+.cat-submenu .cat-sub-link:hover{background:#f3f4f6;color:#c90000!important}
+.cat-mobile-group{display:block}
+.cat-mobile-submenu{display:grid;gap:2px;padding:0 0 6px 18px}
+.mobile-nav .cat-sub-link-mobile{font-size:.92em;opacity:.9;padding-top:7px!important;padding-bottom:7px!important}
+@media(max-width:850px){.nav-desktop .cat-menu-group{display:none}}
+</style>
+<header class="header">
   <div class="header-container">
     <a href="/" class="logo-wrapper" data-home-link>
       <img src="/images/logo.png" onerror="this.onerror=null;this.src='/site/images/logo.png';" alt="Quality Celulares" class="logo">
@@ -1073,7 +1169,7 @@ ${catLinksMobile}
 </script>`;
 
   writeFileUtf8(headerPath, headerHtml);
-  console.log(`✅ Header atualizado com ${sorted.length} categorias.`);
+  console.log(`✅ Header atualizado com ${sorted.length} categorias e ${visibleSubs.length} subcategoria(s) visível(is).`);
 }
 
 

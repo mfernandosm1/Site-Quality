@@ -1,47 +1,74 @@
 <% layout('layout') -%>
-<section class="erp-hero">
-  <div>
-    <span class="erp-kicker">FUNDAÇÃO ERP · v<%= foundation.version %></span>
-    <h1>ERP Quality</h1>
-    <p>Base central para conectar clientes, produtos, site, WhatsApp, estoque, vendas, serviços e financeiro.</p>
+<%
+  const modulesByKey = new Map(modules.map((item) => [item.key, item]));
+  const operationalKeys = [
+    'clientes',
+    'produtos',
+    'categorias',
+    'estoque',
+    'fornecedores',
+    'compras',
+    'pdv',
+    'orcamentos',
+    'centro-operacoes',
+    'financeiro',
+    'ordens-servico'
+  ];
+  const managementKeys = ['fluxo-caixa', 'dre', 'dfc', 'relatorios'];
+  const operationalModules = operationalKeys.map((key) => modulesByKey.get(key)).filter(Boolean);
+  const managementModules = managementKeys.map((key) => modulesByKey.get(key)).filter(Boolean);
+%>
+
+<header class="erp-dashboard-header">
+  <h1>Quality ERP</h1>
+  <span>v0.27.1</span>
+</header>
+
+<section class="erp-module-group" aria-labelledby="erp-operacional-title">
+  <div class="erp-group-heading">
+    <h2 id="erp-operacional-title">Operacional</h2>
   </div>
-  <div class="erp-status-box">
-    <b>Estado atual</b>
-    <span>Arquitetura e integração</span>
-    <small>Clientes, Fornecedores, Estoque, Catálogo, Orçamentos e Compatibilidade já possuem acesso operacional.</small>
+
+  <div class="erp-grid erp-grid-organized">
+    <% operationalModules.forEach((item) => { %>
+      <a class="erp-module-card" href="/erp/modulo/<%= item.key %>" aria-label="<%= item.name %>. <%= item.description %>">
+        <div class="erp-module-icon"><%= item.icon %></div>
+        <div class="erp-module-content">
+          <h3 class="erp-module-title"><%= item.name %></h3>
+          <p class="erp-module-description"><%= item.description %></p>
+          <span class="erp-module-status <%= item.status === 'ativo' ? 'is-active' : 'is-planned' %>"><%= item.status === 'ativo' ? 'Ativo' : 'Planejado' %></span>
+        </div>
+      </a>
+    <% }) %>
   </div>
 </section>
 
-<section class="erp-principles">
-  <div><b>🧠 ERP como cérebro</b><span>Os módulos consomem uma base central.</span></div>
-  <div><b>🔗 Integração primeiro</b><span>Nenhum módulo nasce isolado.</span></div>
-  <div><b>🏢 Preparado para multiempresa</b><span>Estrutura prevê empresa_id desde a fundação.</span></div>
-  <div><b>🛡️ Evolução segura</b><span>Sem substituir módulos estáveis.</span></div>
-</section>
+<section class="erp-module-group" aria-labelledby="erp-gestao-title">
+  <div class="erp-group-heading">
+    <h2 id="erp-gestao-title">Gestão</h2>
+  </div>
 
-<div class="erp-section-title">
-  <div><h2>Área ERP</h2><p>Mapa dos módulos planejados e suas responsabilidades.</p></div>
-  <span class="badge">Fundação ativa</span>
-</div>
+  <div class="erp-grid erp-grid-organized">
+    <% managementModules.forEach((item) => { %>
+      <a class="erp-module-card" href="/erp/modulo/<%= item.key %>" aria-label="<%= item.name %>. <%= item.description %>">
+        <div class="erp-module-icon"><%= item.icon %></div>
+        <div class="erp-module-content">
+          <h3 class="erp-module-title"><%= item.name %></h3>
+          <p class="erp-module-description"><%= item.description %></p>
+          <span class="erp-module-status <%= item.status === 'ativo' ? 'is-active' : 'is-planned' %>"><%= item.status === 'ativo' ? 'Ativo' : 'Planejado' %></span>
+        </div>
+      </a>
+    <% }) %>
 
-<div class="erp-grid">
-  <a class="erp-module-card" href="/kernel"><div class="erp-module-icon">🧠</div><div><h3>Centro de Inteligência</h3><p>Logs, eventos, auditoria, documentos e timelines de todos os módulos.</p><span class="erp-module-status">Ativo</span></div></a>
-  <% modules.forEach((item) => { %>
-    <a class="erp-module-card" href="/erp/modulo/<%= item.key %>">
-      <div class="erp-module-icon"><%= item.icon %></div>
-      <div>
-        <h3><%= item.name %></h3>
-        <p><%= item.description %></p>
-        <span class="erp-module-status"><%= item.status === 'ativo' ? 'Ativo' : 'Planejado' %></span>
+    <a class="erp-module-card" href="/kernel" aria-label="Centro de Inteligência. Logs, eventos, auditoria, documentos e timelines de todos os módulos.">
+      <div class="erp-module-icon">🧠</div>
+      <div class="erp-module-content">
+        <h3 class="erp-module-title">Centro de Inteligência</h3>
+        <p class="erp-module-description">Logs, eventos, auditoria, documentos e timelines de todos os módulos.</p>
+        <span class="erp-module-status is-active">Ativo</span>
       </div>
     </a>
-  <% }) %>
-</div>
-
-<section class="erp-flow-card">
-  <h2>Integração planejada</h2>
-  <div class="erp-flow">
-    <span>ERP Core</span><i>→</i><span>Produtos</span><i>→</i><span>Site</span><i>→</i><span>WhatsApp</span><i>→</i><span>Venda</span><i>→</i><span>Estoque + Financeiro</span>
   </div>
-  <p>O site continuará estático e rápido. Os produtos serão administrados no ERP e exportados com segurança para o site.</p>
 </section>
+
+

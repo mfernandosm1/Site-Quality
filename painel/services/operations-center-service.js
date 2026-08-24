@@ -52,9 +52,13 @@ export default class OperationsCenterService {
     const dateTo = String(filters.dateTo || '');
     const seller = normalize(filters.seller);
     const cashboxId = String(filters.cashboxId || 'all');
-    const sort = ['number', 'customer', 'openedAt', 'total'].includes(String(filters.sort)) ? String(filters.sort) : 'openedAt';
+    const sort = ['number', 'customer', 'openedAt', 'finalizedAt', 'activityAt', 'total'].includes(String(filters.sort)) ? String(filters.sort) : 'openedAt';
     const direction = String(filters.direction) === 'asc' ? 'asc' : 'desc';
-    const customers = new Map((this.customers?.listCustomers({ includeInactive: true }) || []).map(item => [String(item.id), item]));
+    const customerList = this.customers?.listCustomers({ includeInactive: true }) || [];
+    const customers = new Map(customerList.map(item => [String(item.id), item]));
+    const customersByName = new Map();
+    customerList.forEach(item => { const key=normalize(item.name); if(key && !customersByName.has(key)) customersByName.set(key,item); });
+    const resolveCustomer = operation => customers.get(String(operation.customerId || '')) || customersByName.get(normalize(operation.customerNameSnapshot)) || null;
 
     const items = this.commerce.listOperations({ status: 'all' }).filter(operation => {
       if (type !== 'all' && operation.type !== type) return false;
@@ -62,12 +66,22 @@ export default class OperationsCenterService {
       if (cashboxId !== 'all' && operation.cashboxId !== cashboxId) return false;
       if (seller && !normalize(operation.sellerNameSnapshot).includes(seller)) return false;
 
-      const eventDate = dateKey(operation.dates?.openedAt || operation.createdAt);
+      // A data usada pelo Centro de Operações acompanha o evento que define
+      // a situação atual. Uma venda aberta ontem e finalizada hoje pertence ao
+      // filtro de concluídas de hoje, exatamente como na Dashboard e no Caixa.
+      const eventTimestamp = operation.status === 'finalized'
+        ? (operation.dates?.finalizedAt || operation.dates?.updatedAt || operation.dates?.openedAt || operation.createdAt)
+        : operation.status === 'cancelled'
+          ? (operation.dates?.cancelledAt || operation.dates?.updatedAt || operation.dates?.openedAt || operation.createdAt)
+          : operation.status === 'reversed'
+            ? (operation.dates?.reversedAt || operation.dates?.updatedAt || operation.dates?.finalizedAt || operation.dates?.openedAt || operation.createdAt)
+            : (operation.dates?.openedAt || operation.createdAt);
+      const eventDate = dateKey(eventTimestamp);
       if (dateFrom && eventDate < dateFrom) return false;
       if (dateTo && eventDate > dateTo) return false;
 
       if (query) {
-        const customer = customers.get(String(operation.customerId || '')) || {};
+        const customer = resolveCustomer(operation) || {};
         const haystack = normalize([
           operation.number, operation.id, operation.identifier, operation.customerNameSnapshot,
           operation.sellerNameSnapshot, customer.name, customer.tradeName, customer.document,
@@ -77,7 +91,7 @@ export default class OperationsCenterService {
         if (!haystack.includes(query) && (!queryDigits || !digitHaystack.includes(queryDigits))) return false;
       }
       return true;
-    }).map(operation => this.summary(operation, customers.get(String(operation.customerId || ''))));
+    }).map(operation => this.summary(operation, resolveCustomer(operation)));
 
     const compare = (a, b) => {
       let left;
@@ -91,6 +105,19 @@ export default class OperationsCenterService {
       } else if (sort === 'total') {
         left = Number(a.total || 0);
         right = Number(b.total || 0);
+      } else if (sort === 'finalizedAt') {
+        left = new Date(a.dates?.finalizedAt || a.dates?.cancelledAt || a.dates?.reversedAt || 0).getTime() || 0;
+        right = new Date(b.dates?.finalizedAt || b.dates?.cancelledAt || b.dates?.reversedAt || 0).getTime() || 0;
+      } else if (sort === 'activityAt') {
+        const activity = item => item.status === 'finalized'
+          ? (item.dates?.finalizedAt || item.dates?.updatedAt || item.dates?.openedAt || item.createdAt)
+          : item.status === 'cancelled'
+            ? (item.dates?.cancelledAt || item.dates?.updatedAt || item.dates?.openedAt || item.createdAt)
+            : item.status === 'reversed'
+              ? (item.dates?.reversedAt || item.dates?.updatedAt || item.dates?.finalizedAt || item.dates?.openedAt || item.createdAt)
+              : (item.dates?.openedAt || item.createdAt);
+        left = new Date(activity(a) || 0).getTime() || 0;
+        right = new Date(activity(b) || 0).getTime() || 0;
       } else {
         left = new Date(a.dates?.openedAt || a.createdAt || 0).getTime() || 0;
         right = new Date(b.dates?.openedAt || b.createdAt || 0).getTime() || 0;
@@ -108,7 +135,7 @@ export default class OperationsCenterService {
     return {
       ...operation,
       customer: customer || null,
-      displayCustomer: operation.customerNameSnapshot || customer?.name || operation.identifier || 'Consumidor final',
+      displayCustomer: customer?.name || operation.customerNameSnapshot || operation.identifier || 'Consumidor final',
       displayType: operation.type === 'service_order' ? 'O.S.' : 'Venda',
       canOpenInPdv: operation.status === 'open' && Boolean(openSession),
       cashboxOpen: Boolean(openSession),
@@ -119,7 +146,8 @@ export default class OperationsCenterService {
   getDetails(id) {
     const operation = this.commerce.getOperation(String(id));
     if (!operation) return null;
-    const customer = operation.customerId && this.customers ? this.customers.getCustomer(operation.customerId) : null;
+    const customerList=this.customers?.listCustomers({includeInactive:true})||[];
+    const customer=(operation.customerId&&this.customers?this.customers.getCustomer(operation.customerId):null)||customerList.find(item=>normalize(item.name)===normalize(operation.customerNameSnapshot))||null;
     const cashMovements = readJson(this.cashMovementsFile, { items: [] }).items
       .filter(item => String(item.referenceId || '') === String(operation.id));
     const inventoryMovements = readJson(this.inventoryMovementsFile, { items: [] }).items

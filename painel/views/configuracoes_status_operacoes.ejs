@@ -1,0 +1,22 @@
+<% layout('layout') -%>
+<section class="ops-hero compact"><div><span class="ops-kicker">CONFIGURAÇÕES DO ERP</span><h1>🏷️ Status de Vendas e O.S.</h1><p>Personalize os status operacionais e defina o padrão usado em novas vendas e ordens de serviço.</p></div><a class="btn" href="/configuracoes">← Configurações</a></section>
+<% if (flash) { %><div class="flash success"><%= flash %></div><% } %>
+<form method="post" class="settings-card" id="statusForm">
+  <div class="settings-card-head"><div><h2>Status disponíveis</h2><p>Os nomes podem ser alterados sem mexer nos status técnicos internos do ERP.</p></div><button class="btn" type="button" id="addStatus">＋ Adicionar status</button></div>
+  <div class="erp-config-table" id="statusRows">
+    <div class="erp-config-row erp-config-head"><span>Status</span><span>Ativo</span><span>Padrão venda</span><span>Padrão O.S.</span><span></span></div>
+    <% statuses.forEach(function(status,index){ %>
+      <div class="erp-config-row status-row">
+        <input type="hidden" name="id" value="<%= status.id %>"><input name="name" value="<%= status.name %>" required>
+        <label><input type="checkbox" name="active" value="<%= index %>" <%= status.active!==false?'checked':'' %>> Sim</label>
+        <label><input type="radio" name="defaultSale" value="<%= index %>" <%= status.defaultSale?'checked':'' %>></label>
+        <label><input type="radio" name="defaultOs" value="<%= index %>" <%= status.defaultOs?'checked':'' %>></label>
+        <button class="btn danger remove-status" type="button">Remover</button>
+      </div>
+    <% }) %>
+  </div>
+  <div class="settings-form-actions"><button class="btn primary" type="submit">Salvar status</button></div>
+</form>
+<script>
+(()=>{const rows=document.getElementById('statusRows');function reindex(){[...rows.querySelectorAll('.status-row')].forEach((row,i)=>row.querySelectorAll('input[type=checkbox],input[type=radio]').forEach(input=>input.value=String(i)));}document.getElementById('addStatus').onclick=()=>{const i=rows.querySelectorAll('.status-row').length;const row=document.createElement('div');row.className='erp-config-row status-row';row.innerHTML=`<input type="hidden" name="id" value="status-${Date.now()}"><input name="name" placeholder="Novo status" required><label><input type="checkbox" name="active" value="${i}" checked> Sim</label><label><input type="radio" name="defaultSale" value="${i}"></label><label><input type="radio" name="defaultOs" value="${i}"></label><button class="btn danger remove-status" type="button">Remover</button>`;rows.appendChild(row)};rows.addEventListener('click',e=>{if(!e.target.classList.contains('remove-status'))return;e.target.closest('.status-row')?.remove();reindex()});})();
+</script>

@@ -1,0 +1,3394 @@
+{
+  "items": [
+    {
+      "id": "PRD-1785454144302",
+      "name": "Capa TPU Antishock Premium Motorola Moto G56 5G - Transparente",
+      "slug": "capa-tpu-antishock-premium-motorola-moto-g56-5g-transparente",
+      "active": false,
+      "siteEnabled": false,
+      "code": "PRD-1",
+      "sku": "77098",
+      "barcode": "",
+      "ncm": "39209910",
+      "price": 0,
+      "stock": 0,
+      "commercial": {
+        "costPrice": 4,
+        "salePrice": 0
+      },
+      "inventory": {
+        "itemId": "PRD-1785454144302",
+        "stockControlled": true,
+        "allowNegative": false,
+        "channelAvailability": {
+          "site": {
+            "mode": "disabled",
+            "enabled": false,
+            "limit": null,
+            "physicalSafety": 0
+          }
+        }
+      },
+      "erp": {
+        "active": false,
+        "internalCode": "PRD-1"
+      },
+      "virtualStore": {
+        "active": false,
+        "channels": {
+          "lojaVirtual": {
+            "enabled": false
+          }
+        }
+      }
+    },
+    {
+      "id": "PRD-1785451902034",
+      "name": "Tela Frontal Iphone 12",
+      "slug": "tela-frontal-iphone-12",
+      "active": false,
+      "siteEnabled": false,
+      "code": "PRD-2",
+      "sku": "9919",
+      "barcode": "",
+      "ncm": "85171432",
+      "price": 0,
+      "stock": 2,
+      "commercial": {
+        "costPrice": 160.9,
+        "salePrice": 0
+      },
+      "inventory": {
+        "itemId": "PRD-1785451902034",
+        "stockControlled": true,
+        "allowNegative": false,
+        "channelAvailability": {
+          "site": {
+            "mode": "disabled",
+            "enabled": false,
+            "limit": null,
+            "physicalSafety": 0
+          }
+        }
+      },
+      "erp": {
+        "active": true,
+        "internalCode": "PRD-2"
+      },
+      "virtualStore": {
+        "active": false,
+        "channels": {
+          "lojaVirtual": {
+            "enabled": false
+          }
+        }
+      }
+    },
+    {
+      "id": "PRD-1785449482228",
+      "name": "Cabo Lightning 1m KD-28A Kaidi - Preto",
+      "slug": "cabo-lightning-1m-kd-28a-kaidi-preto",
+      "active": false,
+      "code": "PRD-3",
+      "sku": "R9983PRE",
+      "barcode": "",
+      "ncm": "85444200",
+      "price": 0,
+      "stock": 0,
+      "commercial": {
+        "costPrice": 6.24,
+        "salePrice": 0
+      },
+      "inventory": {
+        "itemId": "PRD-1785449482228",
+        "stockControlled": true,
+        "allowNegative": false
+      },
+      "erp": {
+        "active": true,
+        "internalCode": "PRD-3"
+      },
+      "virtualStore": {
+        "active": false,
+        "channels": {
+          "lojaVirtual": {
+            "enabled": false
+          }
+        }
+      }
+    },
+    {
+      "id": 1761055764334,
+      "name": "Controle PS4",
+      "price": null,
+      "image": "images/controlePS4.jpg",
+      "category": "acessorios",
+      "showPrice": false,
+      "featured": true,
+      "active": true,
+      "gallery": [],
+      "detailsEnabled": false,
+      "descriptionShort": "",
+      "descriptionLong": "",
+      "slug": "controle-ps4",
+      "stock": 7,
+      "showVariationsOnCard": false,
+      "variations": {
+        "enabled": false,
+        "colors": [],
+        "storage": [],
+        "ram": [],
+        "condition": [],
+        "combinations": [],
+        "labels": {},
+        "colorsText": "",
+        "storageText": "",
+        "ramText": "",
+        "conditionText": "",
+        "labelsText": "{}",
+        "combinationsText": ""
+      },
+      "commercial": {
+        "costPrice": null,
+        "cashPrice": null,
+        "installmentPrice": null,
+        "minimumPrice": null,
+        "minimumMarginPercent": null,
+        "discountPolicy": "inherit",
+        "maximumDiscountPercent": null,
+        "maximumDiscountAmount": null,
+        "requiresAuthorization": false
+      },
+      "inventory": {
+        "itemId": "PRD-1761055764334",
+        "stockControlled": true,
+        "allowNegative": false,
+        "minimumQuantity": 10,
+        "channelAvailability": {
+          "site": {
+            "mode": "shared",
+            "enabled": true,
+            "limit": null,
+            "physicalSafety": 0
+          }
+        }
+      },
+      "subcategory": "",
+      "tags": [],
+      "relatedManualIds": [],
+      "crossSellIds": [],
+      "erp": {
+        "active": true,
+        "internalCode": "PRD-4"
+      },
+      "virtualStore": {
+        "active": true,
+        "channels": {
+          "lojaVirtual": {
+            "enabled": true
+          }
+        }
+      },
+      "code": "PRD-4"
+    },
+    {
+      "id": 1761055784959,
+      "name": "Relógio Smartwatch Xiaomi Amazfit Bip 6",
+      "price": null,
+      "image": "images/Smartwatch Xiaomi Amazfit Bip 6.jpg",
+      "category": "eletronicos",
+      "showPrice": false,
+      "featured": true,
+      "active": true,
+      "gallery": [],
+      "detailsEnabled": true,
+      "descriptionShort": "Relógio inteligente perfeito para o seu dia a dia e treinos. Agora com uma incrível tela AMOLED vibrante e de alta resolução, ele oferece excelente visibilidade sob o sol. Conta com sensores avançados para cuidar da sua saúde 24h e a famosa bateria de longa duração que passa semanas longe da tomada.",
+      "descriptionLong": "<p><b>Destaques do Produto:</b></p><ul><li><p><b>Tela AMOLED:</b> Cores vivas, alta nitidez e suporte ao modo <i>Always-On</i> (Tela Sempre Ativa).</p></li><li><p><b>Bateria Monstruosa:</b> Dias de autonomia contínua sem precisar de carregador.</p></li><li><p><b>Saúde 24h:</b> Monitora batimentos cardíacos, oxigênio no sangue (SpO2), sono e estresse.</p></li><li><p><b>Modos Esportivos:</b> Acompanha mais de 100 modalidades físicas com relatórios no celular.</p></li><li><p><b>Resistente à Água:</b> Proteção 5 ATM, ideal para natação, banho e treinos intensos.</p></li></ul><p><b>Especificações Técnicas:</b></p><ul><li><p><b>Tela:</b> AMOLED de alta resolução</p></li><li><p><b>Conectividade:</b> Bluetooth (Notificações e chamadas na tela)</p></li><li><p><b>Sensores:</b> BioTracker PPG, Acelerômetro e Giroscópio</p></li><li><p><b>Resistência:</b> 5 ATM (Até 50 metros de profundidade)</p></li><li><p><b>Compatibilidade:</b> Android e iOS (App Zepp)</p></li></ul>",
+      "slug": "relogio-smartwatch-xiaomi-amazfit-bip-6",
+      "stock": null,
+      "tags": [],
+      "relatedManualIds": [],
+      "crossSellIds": [],
+      "showVariationsOnCard": false,
+      "variations": {
+        "enabled": false,
+        "colors": [],
+        "storage": [],
+        "ram": [],
+        "condition": [],
+        "combinations": [],
+        "labels": {},
+        "colorsText": "",
+        "storageText": "",
+        "ramText": "",
+        "conditionText": "",
+        "labelsText": "{}",
+        "combinationsText": ""
+      },
+      "inventory": {
+        "itemId": "PRD-1761055784959",
+        "stockControlled": false,
+        "allowNegative": false,
+        "minimumQuantity": 0,
+        "channelAvailability": {
+          "site": {
+            "mode": "shared",
+            "enabled": true,
+            "limit": null,
+            "physicalSafety": 0
+          }
+        }
+      },
+      "erp": {
+        "internalCode": "PRD-5"
+      },
+      "code": "PRD-5"
+    },
+    {
+      "id": 1761056785061,
+      "name": "Fonte Original Apple Usb C 20w",
+      "price": null,
+      "image": "images/Fonte Original Apple Usb C 20w.jpg",
+      "category": "acessorios",
+      "showPrice": false,
+      "featured": true,
+      "active": true,
+      "gallery": [],
+      "detailsEnabled": true,
+      "descriptionShort": "Garanta a máxima velocidade e proteção para o seu aparelho com o adaptador oficial da Apple",
+      "descriptionLong": "<p>&nbsp;Desenvolvida para preservar a saúde da sua bateria a longo prazo, esta fonte evita o superaquecimento e entrega a energia exata que o seu aparelho precisa.</p><p><b>Destaques do Produto:</b></p><ul><li><p><b>Carregamento Ultraveloz:</b> Tecnologia de carregamento rápido que preenche até <b>50% da bateria em apenas 30 minutos</b> (nos modelos compatíveis).</p></li><li><p><b>Saúde da Bateria:</b> Engenharia oficial Apple que protege a vida útil da célula de carga e evita o desgaste precoce.</p></li><li><p><b>Segurança Total:</b> Sistemas integrados contra curto-circuitos, picos de tensão e superaquecimento.</p></li><li><p><b>Design Prático:</b> Formato compacto, leve e <b>bivolt automático (110V / 220V)</b></p></li></ul><p><b>Especificações Técnicas:</b></p><ul><li><p><b>Marca:</b> Apple</p></li><li><p><b>Potência:</b> 20W</p></li><li><p><b>Conector de Saída:</b> USB-C</p></li><li><p><b>Voltagem:</b> Bivolt (100V - 240V)</p></li><li><p><b>Compatibilidade:</b> Recomendado para iPhones do iPhone 8 em diante e iPads.</p></li></ul><p><b>Conteúdo da Embalagem:</b>\n1 Adaptador de Energia Apple 20W USB-C e Guia do Usuário. <i>(obs: Não acompanha cabo)</i></p>",
+      "slug": "fonte-original-apple-usb-c-20w",
+      "stock": null,
+      "tags": [],
+      "relatedManualIds": [],
+      "crossSellIds": [],
+      "showVariationsOnCard": false,
+      "variations": {
+        "enabled": false,
+        "colors": [],
+        "storage": [],
+        "ram": [],
+        "condition": [],
+        "combinations": [],
+        "labels": {},
+        "colorsText": "",
+        "storageText": "",
+        "ramText": "",
+        "conditionText": "",
+        "labelsText": "{}",
+        "combinationsText": ""
+      },
+      "inventory": {
+        "itemId": "PRD-1761056785061",
+        "stockControlled": false,
+        "allowNegative": false,
+        "minimumQuantity": 0,
+        "channelAvailability": {
+          "site": {
+            "mode": "shared",
+            "enabled": true,
+            "limit": null,
+            "physicalSafety": 0
+          }
+        }
+      },
+      "erp": {
+        "internalCode": "PRD-6"
+      },
+      "code": "PRD-6"
+    },
+    {
+      "id": 1761057069267,
+      "name": "Mini game portátil 400 jogos",
+      "price": null,
+      "image": "images/Mini game portátil 400 jogos e controle.jpg",
+      "category": "eletronicos",
+      "showPrice": false,
+      "featured": true,
+      "active": true,
+      "gallery": [],
+      "detailsEnabled": false,
+      "descriptionShort": "",
+      "descriptionLong": "",
+      "slug": "mini-game-portatil-400-jogos",
+      "subcategory": "",
+      "commercial": {
+        "costPrice": null,
+        "cashPrice": null,
+        "installmentPrice": null,
+        "minimumPrice": null,
+        "minimumMarginPercent": null,
+        "discountPolicy": "inherit",
+        "maximumDiscountPercent": null,
+        "maximumDiscountAmount": null,
+        "requiresAuthorization": false
+      },
+      "stock": null,
+      "tags": [],
+      "relatedManualIds": [],
+      "crossSellIds": [],
+      "showVariationsOnCard": false,
+      "variations": {
+        "enabled": false,
+        "colors": [],
+        "storage": [],
+        "ram": [],
+        "condition": [],
+        "combinations": [],
+        "labels": {},
+        "colorsText": "",
+        "storageText": "",
+        "ramText": "",
+        "conditionText": "",
+        "labelsText": "{}",
+        "combinationsText": ""
+      },
+      "erp": {
+        "internalCode": "PRD-7"
+      },
+      "code": "PRD-7"
+    },
+    {
+      "id": 1761057538723,
+      "name": "Fone JBL Tune 510bt Branco",
+      "price": null,
+      "image": "images/Fone JBL Tune 510 Branco.jpg",
+      "category": "acessorios",
+      "showPrice": false,
+      "featured": true,
+      "active": true,
+      "gallery": [],
+      "detailsEnabled": false,
+      "descriptionShort": "",
+      "descriptionLong": "",
+      "slug": "fone-jbl-tune-510bt-branco",
+      "erp": {
+        "internalCode": "PRD-8"
+      },
+      "code": "PRD-8"
+    },
+    {
+      "id": 1761057889958,
+      "name": "Xiaomi Redmi Note 14 256gb verde",
+      "price": null,
+      "image": "images/Redmi note 14 verde.jpeg",
+      "category": "smartphones",
+      "showPrice": false,
+      "featured": false,
+      "active": true,
+      "gallery": [],
+      "detailsEnabled": false,
+      "descriptionShort": "",
+      "descriptionLong": "",
+      "slug": "xiaomi-redmi-note-14-256gb-verde",
+      "erp": {
+        "internalCode": "PRD-9"
+      },
+      "code": "PRD-9"
+    },
+    {
+      "id": 1763504317936,
+      "name": "Xiaomi Redmi 15c 4G 128gb azul",
+      "price": null,
+      "image": "images/Redmi 15c azul.jpeg",
+      "category": "smartphones",
+      "showPrice": false,
+      "featured": false,
+      "active": true,
+      "gallery": [],
+      "detailsEnabled": false,
+      "descriptionShort": "",
+      "descriptionLong": "",
+      "slug": "xiaomi-redmi-15c-4g-128gb-azul",
+      "erp": {
+        "internalCode": "PRD-10"
+      },
+      "code": "PRD-10"
+    },
+    {
+      "id": 1763504404711,
+      "name": "Iphone 16 128gb novo lacrado",
+      "price": null,
+      "image": "images/Iphone 16 preto.jpeg",
+      "category": "smartphones",
+      "showPrice": false,
+      "featured": false,
+      "active": true,
+      "gallery": [
+        "images/produtos/1783216405845-iphone-16-verde.jpeg",
+        "images/produtos/1783216405848-iphone-16-azul.jpeg",
+        "images/produtos/1783216405853-iphone-16-rosa.jpeg",
+        "images/produtos/1783216405858-iphone-16-branco.jpeg"
+      ],
+      "detailsEnabled": true,
+      "descriptionShort": "O iPhone 16 combina potência avançada e praticidade no tamanho ideal. Equipado com o novo chip A18, ele entrega desempenho ultraveloz com excelente economia de bateria. O grande destaque desta geração é o botão Controle da Câmera, que facilita o acesso instantâneo às suas fotos e vídeos. Perfeito para o dia a dia, jogos e redes sociais",
+      "descriptionLong": "<p><b>Destaques do Produto:</b></p><ul><li><p><b>Controle da Câmera:</b> Botão físico tátil para abrir, dar zoom e tirar fotos instantaneamente</p></li><li><p><b>Desempenho Inovador:</b> Processador A18, ultraveloz para jogos, tarefas pesadas e inteligência artificial</p></li><li><p><b>Fotos Profissionais:</b> Câmera de 48 MP com zoom óptico de 2x e lente macro integrada</p></li><li><p><b>Botão de Ação:</b> Atalho prático e personalizável para ativar suas funções favoritas num clique</p></li><li><p><b>Design de Ponta:</b> Acabamento em alumínio aeroespacial altamente resistente a quedas e riscos</p></li></ul><p><b>Especificações Técnicas:</b></p><ul><li><p><b>Tela:</b> 6,1\" Super Retina XDR OLED</p></li><li><p><b>Processador:</b> Apple A18 Chip</p></li><li><p><b>Armazenamento:</b> 128GB</p></li><li><p><b>Câmeras Traseiras:</b> 48 MP (Principal) + 12 MP (Ultrawide)</p></li><li><p><b>Conectividade:</b> USB-C, Wi-Fi 7 e 5G</p></li><li><p><b>Resistência:</b> Certificação IP68 (à prova d'água e poeira)</p></li></ul><p><b>Conteúdo da Embalagem:</b>\niPhone 16 128GB, Cabo USB-C para Recarga e Manuais</p>",
+      "slug": "iphone-16-128gb-novo-lacrado",
+      "stock": null,
+      "tags": [],
+      "relatedManualIds": [],
+      "crossSellIds": [],
+      "showVariationsOnCard": false,
+      "variations": {
+        "enabled": true,
+        "colors": [
+          {
+            "name": "Preto",
+            "hex": "#111111",
+            "image": "images/Iphone 16 preto.jpeg"
+          },
+          {
+            "name": "Branco",
+            "hex": "#ffffff",
+            "image": "images/Iphone 16 (branco).jpeg"
+          },
+          {
+            "name": "Ultramarine",
+            "hex": "#2730b0",
+            "image": "images/Iphone 16 (azul).jpeg"
+          },
+          {
+            "name": "Rosa",
+            "hex": "#f934f2",
+            "image": "images/Iphone 16 (rosa).jpeg"
+          },
+          {
+            "name": "Verde Acizentado",
+            "hex": "#39a24b",
+            "image": "images/Iphone 16 (verde).jpeg"
+          }
+        ],
+        "storage": [],
+        "ram": [],
+        "condition": [],
+        "combinations": [],
+        "labels": {},
+        "colorsText": "Preto|#111111|images/Iphone 16 preto.jpeg\nBranco|#ffffff|images/Iphone 16 (branco).jpeg\nUltramarine|#2730b0|images/Iphone 16 (azul).jpeg\nRosa|#f934f2|images/Iphone 16 (rosa).jpeg\nVerde Acizentado|#39a24b|images/Iphone 16 (verde).jpeg",
+        "storageText": "",
+        "ramText": "",
+        "conditionText": "",
+        "labelsText": "{}",
+        "combinationsText": ""
+      },
+      "erp": {
+        "internalCode": "PRD-11"
+      },
+      "code": "PRD-11"
+    },
+    {
+      "id": 1763504737051,
+      "name": "Iphone 17 256gb novo lacrado",
+      "price": null,
+      "image": "images/Iphone 17 branco.jpeg",
+      "category": "smartphones",
+      "showPrice": false,
+      "featured": false,
+      "active": true,
+      "gallery": [
+        "images/produtos/1783215211712-iphone17preto.jpeg",
+        "images/produtos/1783215211715-iphone-17-azul.jpeg",
+        "images/produtos/1783215211720-iphone-17-lavanda.jpeg",
+        "images/produtos/1783215211721-iphone-17-verde.jpeg"
+      ],
+      "detailsEnabled": true,
+      "descriptionShort": "O iPhone 17 eleva o padrão da categoria com a chegada da tela Super Retina XDR de 6,3\" com ProMotion de 120Hz, garantindo uma navegação ultrafluida. Equipado com o potente chip A19 e construído para a inteligência artificial, ele oferece desempenho de sobra, câmeras aprimoradas e bateria de longa duração com conector USB-C",
+      "descriptionLong": "<p><b>Destaques do Produto:</b></p><ul><li><p><b>Tela Fluida:</b> Display OLED de 6,3 polegadas agora com tecnologia ProMotion de 120Hz.</p></li><li><p><b>Desempenho:</b> Processador A19 com máxima velocidade e eficiência de bateria</p></li><li><p><b>Fotografia Avançada:</b> Sistema de câmeras de 48 MP (Principal e Ultrawide) para fotos nítidas em qualquer luz.</p></li><li><p><b>Mais Resistência:</b> Tela protegida com Ceramic Shield, altamente resistente a quedas.</p></li><li><p><b>Carregamento Rápido:</b> Conector USB-C com suporte a carregamento rápido e MagSafe.</p></li></ul><p><b>Especificações Técnicas:</b></p><ul><li><p><b>Tela:</b> 6,3\" Super Retina XDR OLED (120Hz)</p></li><li><p><b>Processador:</b> Apple A19 Chip</p></li><li><p><b>Opções de Armazenamento:</b> 256GB ou 512GB</p></li><li><p><b>Câmeras Traseiras:</b> 48 MP + 48 MP | Câmera Frontal: 18 MP</p></li><li><p><b>Conectividade:</b> USB-C, Wi-Fi 7 e Bluetooth</p></li><li><p><b>Resistência:</b> Certificação IP68 (à prova d'água e poeira)</p></li></ul><p><b>Conteúdo da Embalagem:</b>\niPhone 17, Cabo USB-C para Recarga e Manuais</p>",
+      "slug": "iphone-17-256gb-novo-lacrado",
+      "stock": null,
+      "tags": [
+        "Últimas unidades"
+      ],
+      "relatedManualIds": [],
+      "crossSellIds": [],
+      "showVariationsOnCard": false,
+      "variations": {
+        "enabled": true,
+        "colors": [
+          {
+            "name": "Branco",
+            "hex": "#f5f5f5",
+            "image": "images/Iphone 17 branco.jpeg"
+          },
+          {
+            "name": "Preto",
+            "hex": "#0d0d0d",
+            "image": "images/Iphone17preto.jpeg"
+          },
+          {
+            "name": "Azul",
+            "hex": "#282dc8",
+            "image": "images/iphone 17 (azul).jpeg"
+          },
+          {
+            "name": "Lavanda",
+            "hex": "#a258df",
+            "image": "images/iphone 17 (lavanda).jpeg"
+          },
+          {
+            "name": "Verde",
+            "hex": "#5adf58",
+            "image": "images/iphone 17 (verde).jpeg"
+          }
+        ],
+        "storage": [
+          "256GB",
+          "512GB"
+        ],
+        "ram": [],
+        "condition": [],
+        "combinations": [],
+        "labels": {},
+        "colorsText": "Branco|#f5f5f5|images/Iphone 17 branco.jpeg\nPreto|#0d0d0d|images/Iphone17preto.jpeg\nAzul|#282dc8|images/iphone 17 (azul).jpeg\nLavanda|#a258df|images/iphone 17 (lavanda).jpeg\nVerde|#5adf58|images/iphone 17 (verde).jpeg",
+        "storageText": "256GB\n512GB",
+        "ramText": "",
+        "conditionText": "",
+        "labelsText": "{}",
+        "combinationsText": ""
+      },
+      "erp": {
+        "internalCode": "PRD-12"
+      },
+      "code": "PRD-12"
+    },
+    {
+      "id": 1763504760533,
+      "name": "Iphone 17 pro 256gb novo lacrado",
+      "price": null,
+      "image": "images/Iphone 17 pro azul.jpeg",
+      "category": "smartphones",
+      "showPrice": false,
+      "featured": false,
+      "active": true,
+      "gallery": [],
+      "detailsEnabled": true,
+      "descriptionShort": "Oferece a potência máxima e os recursos mais avançados da Apple no tamanho ideal para o dia a dia. Construído em titânio ultra-resistente, ele traz o poderoso chip A19 Pro combinado com 12GB de memória RAM, conjunto perfeito para rodar com perfeição o ecossistema de inteligência artificial da Apple e jogos de nível de console.",
+      "descriptionLong": "<p><b>Destaques do Produto:</b></p><ul><li><p><b>Construção em Titânio:</b> Estrutura mais leve, resistente a quedas e com acabamento premium fosco.</p></li><li><p><b>Desempenho no Extremo:</b> Chip A19 Pro com 12GB de RAM para velocidade absurda e inteligência artificial avançada.</p></li><li><p><b>Fotografia Revolucionária:</b> Sistema triplo onde todas as câmeras (Principal, Ultrawide e Teleobjetiva) possuem sensores de 48 MP.</p></li><li><p><b>Tela ProMotion de 120Hz:</b> Display Super Retina XDR de 6,3 polegadas com navegação ultrafluida e bordas finíssimas.</p></li><li><p><b>Conectividade Pro:</b> Porta USB-C com velocidade de transferência de dados rápida (USB 3) e suporte a Wi-Fi 7.</p></li></ul><p><b>Especificações Técnicas:</b></p><ul><li><p><b>Tela:</b> 6,3\" Super Retina XDR OLED com ProMotion (120Hz)</p></li><li><p><b>Processador:</b> Apple A19 Pro Chip</p></li><li><p><b>Memória RAM:</b> 12GB</p></li><li><p><b>Opções de Armazenamento:</b> 256GB ou 512GB</p></li><li><p><b>Câmeras Traseiras:</b> Tripla de 48 MP + 48 MP + 48 MP com Zoom Óptico e OIS</p></li><li><p><b>Conectividade:</b> USB-C (USB 3), Wi-Fi 7 e 5G</p></li><li><p><b>Resistência:</b> Certificação IP68 (à prova d'água e poeira)</p></li></ul>",
+      "slug": "iphone-17-pro-256gb-novo-lacrado",
+      "stock": null,
+      "tags": [],
+      "relatedManualIds": [],
+      "crossSellIds": [],
+      "showVariationsOnCard": false,
+      "variations": {
+        "enabled": false,
+        "colors": [],
+        "storage": [],
+        "ram": [],
+        "condition": [],
+        "combinations": [],
+        "labels": {},
+        "colorsText": "",
+        "storageText": "",
+        "ramText": "",
+        "conditionText": "",
+        "labelsText": "{}",
+        "combinationsText": ""
+      },
+      "erp": {
+        "internalCode": "PRD-13"
+      },
+      "code": "PRD-13"
+    },
+    {
+      "id": 1763504982114,
+      "name": "Iphone 17 pro max 256gb novo lacrado",
+      "price": null,
+      "image": "images/iphone 17 pro max laranja.jpeg",
+      "category": "smartphones",
+      "showPrice": false,
+      "featured": true,
+      "active": true,
+      "gallery": [
+        "images/produtos/1784139633643-17-promax-1.jpeg",
+        "images/produtos/1784139633646-17-promax-2.jpeg"
+      ],
+      "detailsEnabled": true,
+      "descriptionShort": "Titânio, Tela de 6,9\", Chip A19 Pro e Câmeras de 48 MP\n\nProjetado para quem exige o máximo em desempenho, fotografia e inteligência artificial. Construído em titânio ultra-resistente, ele traz uma tela imersiva de 6,9\" com bordas ainda mais finas e taxa de atualização ProMotion de 120Hz. Equipado com o chip mais poderoso do mercado, o A19 Pro, e generosos 12GB de memória RAM, ele roda com perfeição jogos de nível de console e o avançado ecossistema de inteligência artificial da Apple.",
+      "descriptionLong": "<p><b>Destaques do Produto:</b></p><ul><li><p><b>Construção Premium:</b> Estrutura em titânio de grau aeroespacial, extremamente leve e resistente.</p></li><li><p><b>Performance Incomparável:</b> Chip A19 Pro com 12GB de RAM, focado em velocidade extrema e recursos avançados de IA.</p></li><li><p><b>Sistema de Câmeras Triplo de 48 MP:</b> Todas as lentes traseiras (Principal, Ultrawide e Teleobjetiva) agora contam com sensores de 48 MP, garantindo o zoom óptico e a qualidade de imagem mais avançados do mercado.</p></li><li><p><b>Tela Gigante e Fluida:</b> Display Super Retina XDR de 6,9 polegadas com ProMotion de 120Hz e brilho aprimorado para o sol.</p></li><li><p><b>Autonomia Imbatível:</b> A maior duração de bateria da história do iPhone, com carregamento rápido e conector USB-C de alta velocidade.</p></li></ul><p><b>Especificações Técnicas:</b></p><ul><li><p><b>Tela:</b> 6,9\" Super Retina XDR OLED com ProMotion (120Hz)</p></li><li><p><b>Processador:</b> Apple A19 Pro Chip</p></li><li><p><b>Memória RAM:</b> 12GB</p></li><li><p><b>Opções de Armazenamento:</b> 256GB / 512GB / 1TB / 2TB</p></li><li><p><b>Câmeras Traseiras:</b> Tripla de 48 MP + 48 MP + 48 MP com Zoom Óptico de longo alcance e estabilização por deslocamento de sensor</p></li><li><p><b>Conectividade:</b> USB-C (Velocidade USB 3), Wi-Fi 7 e 5G</p></li><li><p><b>Resistência:</b> Certificação IP68 (altamente à prova d'água e poeira)</p></li></ul>",
+      "slug": "iphone-17-pro-max-256gb-novo-lacrado",
+      "stock": null,
+      "tags": [],
+      "relatedManualIds": [],
+      "crossSellIds": [],
+      "showVariationsOnCard": false,
+      "variations": {
+        "enabled": true,
+        "colors": [
+          {
+            "name": "Laranja-cósmico",
+            "hex": "#e54915",
+            "image": "images/iphone 17 pro max laranja.jpeg"
+          },
+          {
+            "name": "Azul-intenso",
+            "hex": "#0e104e",
+            "image": "images/17-promax (2).jpeg"
+          },
+          {
+            "name": "Prateado",
+            "hex": "#e2e2e4",
+            "image": "images/17-promax (1).jpeg"
+          }
+        ],
+        "storage": [],
+        "ram": [],
+        "condition": [],
+        "combinations": [],
+        "labels": {},
+        "colorsText": "Laranja-cósmico|#e54915|images/iphone 17 pro max laranja.jpeg\nAzul-intenso|#0e104e|images/17-promax (2).jpeg\nPrateado|#e2e2e4|images/17-promax (1).jpeg",
+        "storageText": "",
+        "ramText": "",
+        "conditionText": "",
+        "labelsText": "{}",
+        "combinationsText": ""
+      },
+      "erp": {
+        "internalCode": "PRD-14"
+      },
+      "code": "PRD-14"
+    },
+    {
+      "id": 1763505019906,
+      "name": "Alexa Echo Pop Preta",
+      "price": null,
+      "image": "images/Alexa echo pop preta (2).jpeg",
+      "category": "eletronicos",
+      "showPrice": false,
+      "featured": true,
+      "active": true,
+      "gallery": [],
+      "detailsEnabled": true,
+      "descriptionShort": "O alto-falante inteligente compacto da Amazon, perfeito para quartos e espaços pequenos. Com formato de semiesfera e som direcionado de alta qualidade, ele traz toda a inteligência da Alexa para você controlar sua casa, ouvir músicas e organizar sua rotina usando apenas a voz.",
+      "descriptionLong": "<p><b>Destaques do Produto:</b></p><ul><li><p><b>Som Direcionado:</b> Áudio frontal definido, ideal para ambientes menores e cabeceiras.</p></li><li><p><b>Casa Inteligente:</b> Controle lâmpadas, tomadas, TVs e outros aparelhos por comando de voz.</p></li><li><p><b>Rotinas e Praticidade:</b> Toque músicas, crie alarmes, cronômetros e confira o clima num instante.</p></li><li><p><b>Privacidade Garantida:</b> Botão físico exclusivo para desligar totalmente o microfone.</p></li><li><p><b>Design Moderno:</b> Compacto, leve e construído com materiais sustentáveis.</p></li></ul><p><b>Especificações Técnicas:</b></p><ul><li><p><b>Alto-falante:</b> 1 driver direcional de 1,95\"</p></li><li><p><b>Conectividade:</b> Wi-Fi banda dupla e Bluetooth</p></li><li><p><b>Idiomas:</b> Português do Brasil de forma nativa</p></li><li><p><b>Alimentação:</b> Tomada (Fonte bivolt inclusa)</p></li><li><p><b>Compatibilidade:</b> Android, iOS e dispositivos Fire OS</p></li></ul>",
+      "slug": "alexa-echo-pop-preta",
+      "stock": null,
+      "tags": [],
+      "relatedManualIds": [],
+      "crossSellIds": [],
+      "showVariationsOnCard": false,
+      "variations": {
+        "enabled": false,
+        "colors": [],
+        "storage": [],
+        "ram": [],
+        "condition": [],
+        "combinations": [],
+        "labels": {},
+        "colorsText": "",
+        "storageText": "",
+        "ramText": "",
+        "conditionText": "",
+        "labelsText": "{}",
+        "combinationsText": ""
+      },
+      "erp": {
+        "internalCode": "PRD-15"
+      },
+      "code": "PRD-15"
+    },
+    {
+      "id": 1763510143145,
+      "name": "Alexa Echo Dot 5 Branca",
+      "price": null,
+      "image": "images/Alexa echo dot branca.jpeg",
+      "category": "eletronicos",
+      "showPrice": false,
+      "featured": false,
+      "active": true,
+      "gallery": [],
+      "detailsEnabled": true,
+      "descriptionShort": "O alto-falante inteligente mais popular da Amazon, oferecendo vocais mais nítidos e graves até duas vezes mais potentes que a geração anterior. Perfeito para qualquer ambiente, ele traz a inteligência da Alexa para automatizar sua rotina, tocar suas músicas favoritas e controlar sua casa inteligente por comando de voz.",
+      "descriptionLong": "<p><b>Destaques do Produto:</b></p><ul><li><p><b>Áudio Superior:</b> O melhor som já visto em um Echo Dot, com áudio vibrante em todo o ambiente.</p></li><li><p><b>Casa Inteligente:</b> Controle lâmpadas, ar-condicionado e trancas compatíveis apenas com a voz.</p></li><li><p><b>Sensor de Temperatura:</b> Crie rotinas automáticas (como ligar o ventilador se o quarto esquentar).</p></li><li><p><b>Mais Praticidade:</b> Toque músicas, configure alarmes, lembretes e tire dúvidas com a Alexa.</p></li><li><p><b>Privacidade Protegida:</b> Conta com botão físico para desligar o microfone sempre que quiser.</p></li></ul><p><b>Especificações Técnicas:</b></p><ul><li><p><b>Alto-falante:</b> 1 driver de 1,73\" com direcionamento frontal e áudio HD</p></li><li><p><b>Conectividade:</b> Wi-Fi banda dupla e Bluetooth</p></li><li><p><b>Sensores:</b> Sensor de temperatura integrado</p></li><li><p><b>Alimentação:</b> Tomada (Fonte bivolt inclusa)</p></li><li><p><b>Compatibilidade:</b> Aplicativo Alexa (Android e iOS)</p></li></ul>",
+      "slug": "alexa-echo-dot-5-branca",
+      "stock": null,
+      "tags": [],
+      "relatedManualIds": [],
+      "crossSellIds": [],
+      "showVariationsOnCard": false,
+      "variations": {
+        "enabled": false,
+        "colors": [],
+        "storage": [],
+        "ram": [],
+        "condition": [],
+        "combinations": [],
+        "labels": {},
+        "colorsText": "",
+        "storageText": "",
+        "ramText": "",
+        "conditionText": "",
+        "labelsText": "{}",
+        "combinationsText": ""
+      },
+      "erp": {
+        "internalCode": "PRD-16"
+      },
+      "code": "PRD-16"
+    },
+    {
+      "id": 1763510200924,
+      "name": "Relógio Smartwatch Xiaomi Amazfit Bip 5 Rosa",
+      "price": null,
+      "image": "images/Xiaomi amazfit bip 5 rosa.jpeg",
+      "category": "eletronicos",
+      "showPrice": false,
+      "featured": false,
+      "active": true,
+      "gallery": [],
+      "detailsEnabled": false,
+      "descriptionShort": "",
+      "descriptionLong": "",
+      "slug": "relogio-smartwatch-xiaomi-amazfit-bip-5-rosa",
+      "erp": {
+        "internalCode": "PRD-17"
+      },
+      "code": "PRD-17"
+    },
+    {
+      "id": 1763510500879,
+      "name": "Suporte de Celular Veicular",
+      "price": null,
+      "image": "images/Suporte Veicular Multilaser.jpeg",
+      "category": "acessorios",
+      "showPrice": false,
+      "featured": false,
+      "active": true,
+      "gallery": [],
+      "detailsEnabled": false,
+      "descriptionShort": "",
+      "descriptionLong": "",
+      "slug": "suporte-de-celular-veicular",
+      "erp": {
+        "internalCode": "PRD-18"
+      },
+      "code": "PRD-18"
+    },
+    {
+      "id": 1763510724859,
+      "name": "Alexa Echo Show 5 3ª Geração",
+      "price": null,
+      "image": "images/Alexa_EchoShow5.jpeg",
+      "category": "eletronicos",
+      "showPrice": false,
+      "featured": false,
+      "active": true,
+      "gallery": [],
+      "detailsEnabled": false,
+      "descriptionShort": "",
+      "descriptionLong": "",
+      "slug": "alexa-echo-show-5-3-geracao",
+      "erp": {
+        "internalCode": "PRD-19"
+      },
+      "code": "PRD-19"
+    },
+    {
+      "id": 1767565504744,
+      "name": "Carregador Veicular USB / USB-C",
+      "price": null,
+      "image": "images/Carregador veicular.jpeg",
+      "category": "acessorios",
+      "showPrice": false,
+      "featured": false,
+      "active": true,
+      "gallery": [],
+      "detailsEnabled": false,
+      "descriptionShort": "",
+      "descriptionLong": "",
+      "slug": "carregador-veicular-usb-usb-c",
+      "erp": {
+        "internalCode": "PRD-20"
+      },
+      "code": "PRD-20"
+    },
+    {
+      "id": 1769989097776,
+      "name": "Câmera Inteligente Intelbras Interna",
+      "price": null,
+      "image": "images/Camera intelbras interna.jpeg",
+      "category": "eletronicos",
+      "showPrice": false,
+      "featured": false,
+      "active": true,
+      "gallery": [],
+      "detailsEnabled": false,
+      "descriptionShort": "",
+      "descriptionLong": "",
+      "slug": "camera-inteligente-intelbras-interna",
+      "erp": {
+        "internalCode": "PRD-21"
+      },
+      "code": "PRD-21"
+    },
+    {
+      "id": 1769989352309,
+      "name": "Tablet Xiaomi Redmi Pad 2 128GB/4GB ram 11\" polegadas",
+      "price": null,
+      "image": "images/Tablet Xiaomi Redmi pad2.jpeg",
+      "category": "eletronicos",
+      "showPrice": false,
+      "featured": true,
+      "active": true,
+      "gallery": [],
+      "detailsEnabled": true,
+      "descriptionShort": "Combina ótimo custo-benefício com desempenho fluido para estudos, mídias e navegação, destacando-se por sua tela grande de alta taxa de atualização e bateria robusta para o dia todo.",
+      "descriptionLong": "<p><b>Destaques do Produto:</b></p><ul><li><p><b>Tela de 11 Polegadas:</b> Painel amplo com <b>taxa de atualização de 90Hz</b> para navegação e vídeos muito mais fluidos.</p></li><li><p><b>Armazenamento Expansível:</b> 128GB internos para aplicativos e arquivos, com suporte a cartão MicroSD.</p></li><li><p><b>Áudio Imersivo:</b> Quatro alto-falantes integrados com tecnologia <b>Dolby Atmos</b> para som de cinema.</p></li><li><p><b>Construção Premium:</b> Acabamento unibody em metal leve, fino e resistente.</p></li><li><p><b>Bateria de Longa Duração:</b> Alta capacidade para horas contínuas de reprodução de vídeo e uso intenso.</p></li></ul><p><b>Especificações Técnicas:</b></p><ul><li><p><b>Tela:</b> 11\" FHD+ (1920x1200) com proteção contra fadiga ocular</p></li><li><p><b>Processador:</b> Octa-Core de alto desempenho</p></li><li><p><b>Memória RAM:</b> 4GB</p></li><li><p><b>Armazenamento:</b> 128GB</p></li><li><p><b>Câmeras:</b> Traseira de 8 MP e Frontal de 8 MP</p></li><li><p><b>Conectividade:</b> Wi-Fi, Bluetooth e porta USB-C</p></li></ul><p><b>Conteúdo da Embalagem:</b>\nTablet Redmi Pad 2, Carregador, Cabo USB-C, Extrator de Cartão e Manuais</p>",
+      "slug": "tablet-xiaomi-redmi-pad-2-128gb-4gb-ram-11-polegadas",
+      "stock": null,
+      "tags": [],
+      "relatedManualIds": [],
+      "crossSellIds": [],
+      "showVariationsOnCard": false,
+      "variations": {
+        "enabled": false,
+        "colors": [],
+        "storage": [],
+        "ram": [],
+        "condition": [],
+        "combinations": [],
+        "labels": {},
+        "colorsText": "",
+        "storageText": "",
+        "ramText": "",
+        "conditionText": "",
+        "labelsText": "{}",
+        "combinationsText": ""
+      },
+      "erp": {
+        "internalCode": "PRD-22"
+      },
+      "code": "PRD-22"
+    },
+    {
+      "id": 1769989886741,
+      "name": "Apple iPad 11 128gb - 11'' polegadas",
+      "price": null,
+      "image": "images/Ipad 11 rosa.jpeg",
+      "category": "eletronicos",
+      "showPrice": false,
+      "featured": false,
+      "active": true,
+      "gallery": [],
+      "detailsEnabled": true,
+      "descriptionShort": "O iPad de 11ª Geração une a alta performance do ecossistema Apple com a versatilidade de uma tela de 10,9 polegadas. Com 128GB de armazenamento, ele oferece o espaço perfeito para estudar, trabalhar, jogar e guardar todos os seus arquivos sem preocupações.",
+      "descriptionLong": "<p><b>Destaques do Produto:</b></p><ul><li><p><b>Tela Liquid Retina de 10,9\":</b> Cores vivas, alta nitidez e tecnologia <i>True Tone</i>, que ajusta o brilho conforme a luz ambiente para proteger seus olhos.</p></li><li><p><b>Desempenho Fluido:</b> Chip potente para rodar aplicativos de estudos, jogos e multitarefas sem qualquer travamento.</p></li><li><p><b>Câmera com Palco Central:</b> Câmera frontal ultra-angular de 12MP que acompanha seu movimento automaticamente durante videochamadas e reuniões.</p></li><li><p><b>Criatividade Sem Limites:</b> Compatível com a <i>Apple Pencil</i> (ideal para desenhar e fazer anotações) e teclados portáteis.</p></li><li><p><b>Conectividade Moderna:</b> Porta USB-C para carregamento rápido e conexão direta de acessórios.</p></li></ul><p><b>Especificações Técnicas:</b></p><ul><li><p><b>Tela:</b> 10,9 polegadas Retina IPS</p></li><li><p><b>Armazenamento:</b> 128GB</p></li><li><p><b>Câmeras:</b> Traseira de 12MP e Frontal de 12MP&nbsp;</p></li><li><p><b>Sistema Operacional:</b> iPadOS&nbsp;</p></li></ul>",
+      "slug": "apple-ipad-11-128gb-11-polegadas",
+      "stock": null,
+      "tags": [],
+      "relatedManualIds": [],
+      "crossSellIds": [],
+      "showVariationsOnCard": false,
+      "variations": {
+        "enabled": false,
+        "colors": [],
+        "storage": [],
+        "ram": [],
+        "condition": [],
+        "combinations": [],
+        "labels": {},
+        "colorsText": "",
+        "storageText": "",
+        "ramText": "",
+        "conditionText": "",
+        "labelsText": "{}",
+        "combinationsText": ""
+      },
+      "inventory": {
+        "itemId": "PRD-1769989886741",
+        "stockControlled": false,
+        "allowNegative": false,
+        "minimumQuantity": 0,
+        "channelAvailability": {
+          "site": {
+            "mode": "shared",
+            "enabled": true,
+            "limit": null,
+            "physicalSafety": 0
+          }
+        }
+      },
+      "erp": {
+        "internalCode": "PRD-23"
+      },
+      "code": "PRD-23"
+    },
+    {
+      "id": 1769989919633,
+      "name": "Samsung Galaxy A17 128gb / 4gb Ram Tela 6.7\"",
+      "price": null,
+      "image": "images/Samsung a17.jpeg",
+      "category": "smartphones",
+      "showPrice": false,
+      "featured": false,
+      "active": true,
+      "gallery": [],
+      "detailsEnabled": false,
+      "descriptionShort": "",
+      "descriptionLong": "",
+      "slug": "samsung-galaxy-a17-128gb-4gb-ram-tela-6-7",
+      "erp": {
+        "internalCode": "PRD-24"
+      },
+      "code": "PRD-24"
+    },
+    {
+      "id": 1769990813874,
+      "name": "Playstation 5 Digital 1TB",
+      "price": null,
+      "image": "images/Playstation 5.jpeg",
+      "category": "eletronicos",
+      "showPrice": false,
+      "featured": true,
+      "active": true,
+      "gallery": [],
+      "detailsEnabled": true,
+      "descriptionShort": "Traz o poder máximo da nova geração de jogos em um design Slim mais fino e compacto. Modelo totalmente focado em jogos digitais (sem leitor de discos), ele oferece carregamento instantâneo graças ao seu SSD ultraveloz, gráficos impressionantes em 4K e total imersão nos gameplays.",
+      "descriptionLong": "<p><b>Destaques do Produto:</b></p><ul><li><p><b>Edição Digital:</b> Console mais leve e moderno, ideal para jogos baixados direto da PS Store.</p></li><li><p><b>Armazenamento de 1TB:</b> Espaço de sobra em SSD de ultra-alta velocidade para salvar seus principais jogos.</p></li><li><p><b>Controle DualSense:</b> Imersão total com gatilhos adaptáveis e vibração realista que reage aos seus comandos.</p></li><li><p><b>Gráficos em 4K:</b> Suporte a Ray Tracing (luz e reflexos realistas) e jogabilidade ultrafluida a até 120 fps.</p></li><li><p><b>Retrocompatibilidade:</b> Jogue também os principais títulos digitais do seu PS4 com desempenho aprimorado.</p></li></ul><p><b>Especificações Técnicas:</b></p><ul><li><p><b>Armazenamento:</b> 1TB SSD</p></li><li><p><b>Desempenho:</b> Processador AMD Zen 2 e Gráficos RDNA 2</p></li><li><p><b>Resolução:</b> Saída 4K e suporte a telas de 120Hz</p></li><li><p><b>Conectividade:</b> Wi-Fi 6, Bluetooth 5.1 e portas USB-C / HDMI 2.1</p></li></ul>",
+      "slug": "playstation-5-digital-1tb",
+      "stock": null,
+      "tags": [],
+      "relatedManualIds": [],
+      "crossSellIds": [],
+      "showVariationsOnCard": false,
+      "variations": {
+        "enabled": false,
+        "colors": [],
+        "storage": [],
+        "ram": [],
+        "condition": [],
+        "combinations": [],
+        "labels": {},
+        "colorsText": "",
+        "storageText": "",
+        "ramText": "",
+        "conditionText": "",
+        "labelsText": "{}",
+        "combinationsText": ""
+      },
+      "erp": {
+        "internalCode": "PRD-25"
+      },
+      "code": "PRD-25"
+    },
+    {
+      "id": 1769990967110,
+      "name": "Motorola Moto G35 5G 128gb 4GB Ram+8GB Ram Boost",
+      "price": null,
+      "image": "images/Moto G35.jpeg",
+      "category": "smartphones",
+      "showPrice": false,
+      "featured": false,
+      "active": true,
+      "gallery": [],
+      "detailsEnabled": true,
+      "descriptionShort": "O Moto G35 5G se destaca pelo excelente custo-benefício, trazendo conexões móveis de alta velocidade, tela inteligente de grande brilho para uso ao ar livre e recursos otimizados de memória por inteligência artificial.",
+      "descriptionLong": "<p><b>Destaques do Produto:</b></p><ul><li><p><b>Performance com RAM Boost:</b> Equipado com 4GB de RAM física e <b>+8GB de RAM Boost</b> (virtual), garantindo maior fluidez ao abrir vários aplicativos simultaneamente.</p></li><li><p><b>Maior Tela da Categoria:</b> Painel de 6,7 polegadas FHD+ com <b>taxa de 120Hz</b> e superbrilho de até 1000 nits, protegido por vidro Gorilla Glass 3.</p></li><li><p><b>Gravação Avançada em 4K:</b> Câmera traseira principal de 50 MP com inteligência artificial para capturar vídeos em ultra-alta definição e fotos detalhadas.</p></li><li><p><b>Bateria de Longa Duração:</b> Capacidade de 5.000 mAh que passa de um dia de uso e suporta carregamento rápido <b>TurboPower de 20W</b>.</p></li><li><p><b>Opções de Armazenamento:</b> Disponível em versões de <b>128GB</b> ou <b>256GB</b> de espaço interno.</p></li></ul><p><b>Especificações Técnicas:</b></p><ul><li><p><b>Tela:</b> 6,7\" IPS LCD FHD+ (120Hz) com tecnologia Smart Water Touch</p></li><li><p><b>Processador:</b> Unisoc T760 (Octa-Core de até 2.2 GHz)</p></li><li><p><b>Memória:</b> 4GB RAM + 8GB RAM Boost (Otimização por IA)</p></li><li><p><b>Armazenamento:</b> 128GB ou 256GB de memória interna</p></li><li><p><b>Câmeras Traseiras:</b> Dupla (50 MP Principal + 8 MP Ultra-Wide)</p></li><li><p><b>Câmera Frontal:</b> 16 MP com tecnologia Quad Pixel</p></li><li><p><b>Áudio:</b> Alto-falantes estéreo com som de alta qualidade</p></li></ul>",
+      "slug": "motorola-moto-g35-5g-128gb-4gb-ram-8gb-ram-boost",
+      "stock": null,
+      "tags": [],
+      "relatedManualIds": [],
+      "crossSellIds": [],
+      "showVariationsOnCard": false,
+      "variations": {
+        "enabled": false,
+        "colors": [],
+        "storage": [],
+        "ram": [],
+        "condition": [],
+        "combinations": [],
+        "labels": {},
+        "colorsText": "",
+        "storageText": "",
+        "ramText": "",
+        "conditionText": "",
+        "labelsText": "{}",
+        "combinationsText": ""
+      },
+      "erp": {
+        "internalCode": "PRD-26"
+      },
+      "code": "PRD-26"
+    },
+    {
+      "id": 1769991520959,
+      "name": "Xiaomi Redmi Note 15 5G 256gb 8gb ram",
+      "price": null,
+      "image": "images/Redmi Note 15.jpeg",
+      "category": "smartphones",
+      "showPrice": false,
+      "featured": true,
+      "active": true,
+      "gallery": [],
+      "detailsEnabled": true,
+      "descriptionShort": "O Redmi Note 15 entrega o melhor custo-benefício da categoria com recursos premium e design moderno. Equipado com processadores eficientes, ele garante excelente fluidez para as tarefas diárias, redes sociais e vídeos. O grande destaque fica por conta de sua incrível tela AMOLED de 120Hz e a poderosa câmera principal de 108 MP, ideal para registrar fotos ultra nítidas.",
+      "descriptionLong": "<p><b>Destaques do Produto:</b></p><ul><li><p><b>Fotos de Alta Resolução:</b> Câmera principal de 108 MP para capturar o máximo de detalhes e nitidez.</p></li><li><p><b>Tela Surpreendente:</b> Painel AMOLED de 120Hz com cores vivas e excelente brilho sob o sol.</p></li><li><p><b>Bateria para o Dia Todo:</b> 5000mAh de capacidade com carregamento rápido e ótima autonomia.</p></li><li><p><b>Design Moderno:</b> Corpo ultrafino, leve e com acabamento elegante que se destaca.</p></li><li><p><b>Variação de Conectividade:</b> Disponível nas versões <b>4G</b> e <b>5G</b> para atender à sua necessidade de navegação.</p></li></ul><p><b>Especificações Técnicas:</b></p><ul><li><p><b>Tela:</b> 6,67\" AMOLED FHD+ (120Hz)</p></li><li><p><b>Processador:</b> MediaTek (Otimizado para cada versão)</p></li><li><p><b>Versões de Rede:</b> 4G ou 5G</p></li><li><p><b>Opções de Armazenamento:</b> 256GB ou 512GB</p></li><li><p><b>Câmera Traseira:</b> 108 MP (Principal) + Lentes Auxiliares</p></li><li><p><b>Bateria:</b> 5000mAh com carregamento rápido</p></li></ul>",
+      "slug": "xiaomi-redmi-note-15-5g-256gb-8gb-ram",
+      "stock": null,
+      "tags": [],
+      "relatedManualIds": [],
+      "crossSellIds": [],
+      "showVariationsOnCard": false,
+      "variations": {
+        "enabled": false,
+        "colors": [],
+        "storage": [],
+        "ram": [],
+        "condition": [],
+        "combinations": [],
+        "labels": {},
+        "colorsText": "",
+        "storageText": "",
+        "ramText": "",
+        "conditionText": "",
+        "labelsText": "{}",
+        "combinationsText": ""
+      },
+      "erp": {
+        "internalCode": "PRD-27"
+      },
+      "code": "PRD-27"
+    },
+    {
+      "id": 1772999663128,
+      "name": "Xiaomi Redmi Note 15 Pro 5G 256GB/8GB ram",
+      "price": null,
+      "image": "images/Xiaomi Redmi Note 15 pro.jpeg",
+      "category": "smartphones",
+      "showPrice": false,
+      "featured": true,
+      "active": true,
+      "gallery": [],
+      "detailsEnabled": true,
+      "descriptionShort": "O Redmi Note 15 Pro eleva a categoria intermediária ao nível premium. Equipado com um processador de alta performance e excelente eficiência energética, ele roda jogos e aplicativos pesados com total fluidez. O grande destaque é o seu sensor fotográfico de 200 MP com estabilização óptica (OIS), que garante fotos profissionais e vídeos estáveis mesmo em movimento.",
+      "descriptionLong": "<p><b>Destaques do Produto:</b></p><ul><li><p><b>Câmera Ultra Fina:</b> Sensor principal de 200 MP com OIS para capturas ultra detalhadas e perfeitas em qualquer luz.</p></li><li><p><b>Tela Premium:</b> Display AMOLED Curvo de 120Hz com cores vibrantes e bordas infinitas.</p></li><li><p><b>Carregamento Super Turbo:</b> Bateria de longa duração que recarrega de forma ultraveloz em poucos minutos.</p></li><li><p><b>Desempenho Fluido:</b> Processador otimizado para multitarefas pesadas e excelente eficiência de energia.</p></li><li><p><b>Design Sofisticado:</b> Acabamento traseiro elegante com proteção avançada contra riscos e quedas.</p></li></ul><p><b>Especificações Técnicas:</b></p><ul><li><p><b>Tela:</b> 6,67\" AMOLED Curva FHD+ (120Hz)</p></li><li><p><b>Opções de Armazenamento:</b> 256GB ou 512GB</p></li><li><p><b>Câmera Traseira:</b> 200 MP (Principal com OIS) + Lentes Auxiliares</p></li><li><p><b>Bateria:</b> 5000mAh (ou superior) com suporte a carregamento rápido de alta potência</p></li><li><p><b>Segurança:</b> Leitor de digital sob a tela</p></li></ul>",
+      "slug": "xiaomi-redmi-note-15-pro-5g-256gb-8gb-ram",
+      "stock": null,
+      "tags": [],
+      "relatedManualIds": [],
+      "crossSellIds": [],
+      "showVariationsOnCard": false,
+      "variations": {
+        "enabled": false,
+        "colors": [],
+        "storage": [],
+        "ram": [],
+        "condition": [],
+        "combinations": [],
+        "labels": {},
+        "colorsText": "",
+        "storageText": "",
+        "ramText": "",
+        "conditionText": "",
+        "labelsText": "{}",
+        "combinationsText": ""
+      },
+      "erp": {
+        "internalCode": "PRD-28"
+      },
+      "code": "PRD-28"
+    },
+    {
+      "id": 1773000130662,
+      "name": "Xiaomi Redmi Note 14 Pro 5G 256GB/12GB Ram",
+      "price": null,
+      "image": "images/Xiaomi redmi note 14 pro.jpeg",
+      "category": "smartphones",
+      "showPrice": false,
+      "featured": false,
+      "active": true,
+      "gallery": [],
+      "detailsEnabled": false,
+      "descriptionShort": "",
+      "descriptionLong": "",
+      "slug": "xiaomi-redmi-note-14-pro-5g-256gb-12gb-ram",
+      "erp": {
+        "internalCode": "PRD-29"
+      },
+      "code": "PRD-29"
+    },
+    {
+      "id": 1773000346654,
+      "name": "Samsung Galaxy A26 5g 256gb 8gb Ram",
+      "price": null,
+      "image": "images/Samsung a26.jpeg",
+      "category": "smartphones",
+      "showPrice": false,
+      "featured": false,
+      "active": true,
+      "gallery": [],
+      "detailsEnabled": false,
+      "descriptionShort": "",
+      "descriptionLong": "",
+      "slug": "samsung-galaxy-a26-5g-256gb-8gb-ram",
+      "erp": {
+        "internalCode": "PRD-30"
+      },
+      "code": "PRD-30"
+    },
+    {
+      "id": 1773000557522,
+      "name": "Samsung Galaxy S25 Fe 5G 256gb 8gb Ram",
+      "price": null,
+      "image": "images/S25fe azul.jpeg",
+      "category": "smartphones",
+      "showPrice": false,
+      "featured": true,
+      "active": true,
+      "gallery": [],
+      "detailsEnabled": true,
+      "descriptionShort": "Equilibra especificações avançadas e preço competitivo, trazendo uma tela ampla, excelente desempenho com IA integrada e proteção contra água para o uso diário.",
+      "descriptionLong": "<p><b>Destaques do Produto:</b></p><ul><li><p><b>Performance Potente:</b> Processador <b>Exynos 2400</b> com 8GB de RAM, otimizado para navegação fluida, multitarefas e inteligência artificial.</p></li><li><p><b>Tela Ampla e Brilhante:</b> Painel de 6,7 polegadas com <b>taxa de 120Hz</b>, ideal para vídeos e jogos com transições suaves sob o sol.</p></li><li><p><b>Câmeras Otimizadas:</b> Sensor principal de 50 MP e motor <i>ProVisual Engine</i> com IA para melhorar fotos noturnas e edições rápidas.</p></li><li><p><b>Mais Proteção:</b> Acabamento em Gorilla Glass Victus+ e <b>certificação IP68</b> contra imersão em água e poeira.</p></li><li><p><b>Duas Opções de Espaço:</b> Disponível em <b>128GB</b> ou <b>256GB</b> de armazenamento interno</p></li></ul><p><b>Especificações Técnicas:</b></p><ul><li><p><b>Tela:</b> 6,7\" Dynamic AMOLED 2X FHD+ (120Hz)</p></li><li><p><b>Processador:</b> Samsung Exynos 2400</p></li><li><p><b>Memória RAM:</b> 8GB</p></li><li><p><b>Armazenamento:</b> 128GB ou 256GB</p></li><li><p><b>Câmera Traseira:</b> Tripla (50 MP + 12 MP + 8 MP) com Zoom Óptico e OIS</p></li><li><p><b>Bateria:</b> 4.900 mAh com suporte a carregamento rápido</p></li><li><p><b>Conectividade:</b> 5G, Wi-Fi, Bluetooth e Google Gemini integrado</p></li></ul>",
+      "slug": "samsung-galaxy-s25-fe-5g-256gb-8gb-ram",
+      "stock": null,
+      "tags": [],
+      "relatedManualIds": [],
+      "crossSellIds": [],
+      "showVariationsOnCard": false,
+      "variations": {
+        "enabled": false,
+        "colors": [],
+        "storage": [],
+        "ram": [],
+        "condition": [],
+        "combinations": [],
+        "labels": {},
+        "colorsText": "",
+        "storageText": "",
+        "ramText": "",
+        "conditionText": "",
+        "labelsText": "{}",
+        "combinationsText": ""
+      },
+      "erp": {
+        "internalCode": "PRD-31"
+      },
+      "code": "PRD-31"
+    },
+    {
+      "id": 1773000787931,
+      "name": "Samsung Galaxy S25+ 5G 256gb 12gb Ram",
+      "price": null,
+      "image": "images/S25plus.jpeg",
+      "category": "smartphones",
+      "showPrice": false,
+      "featured": false,
+      "active": true,
+      "gallery": [],
+      "detailsEnabled": false,
+      "descriptionShort": "",
+      "descriptionLong": "",
+      "slug": "samsung-galaxy-s25-5g-256gb-12gb-ram",
+      "erp": {
+        "internalCode": "PRD-32"
+      },
+      "code": "PRD-32"
+    },
+    {
+      "id": 1773001006652,
+      "name": "Notebook Lenovo IdeaPad 1 AMD Ryzen 5 7520U 8GB 512GB SSD Win 11",
+      "price": null,
+      "image": "images/Notebook Lenovo ideapad1-7520u.jpeg",
+      "category": "eletronicos",
+      "showPrice": false,
+      "featured": true,
+      "active": true,
+      "gallery": [],
+      "detailsEnabled": true,
+      "descriptionShort": "Notebook ideal para quem busca agilidade nos estudos, trabalho e tarefas do dia a dia. Equipado com o processador AMD Ryzen 5 de última geração e um armazenamento ultraveloz em SSD de 512GB, ele liga em poucos segundos e roda seus aplicativos com excelente fluidez. Tudo isso em um design fino, leve e fácil de transportar.",
+      "descriptionLong": "<p><b>Destaques do Produto:</b></p><ul><li><p><b>Excelente Desempenho:</b> Processador Ryzen 5 e memória LPDDR5 garantem velocidade nas tarefas diárias e multitarefas.</p></li><li><p><b>Armazenamento Espaçoso:</b> SSD de 512GB com muito espaço para arquivos e inicialização ultrarrápida do Windows 11.</p></li><li><p><b>Conectividade Moderna:</b> Equipado com Wi-Fi 6 de alta velocidade e porta USB-C para transferência de dados.</p></li><li><p><b>Privacidade Garantida:</b> WebCam HD com obturador físico (basta deslizar para fechar a câmera).</p></li><li><p><b>Conforto no Uso:</b> Teclado completo no padrão brasileiro (ABNT2) com teclado numérico dedicado.</p></li></ul><p><b>Especificações Técnicas:</b></p><ul><li><p><b>Tela:</b> 15.6\" HD (1366 x 768) Antirreflexo</p></li><li><p><b>Processador:</b> AMD Ryzen 5 7520U (Até 4.3GHz)</p></li><li><p><b>Memória RAM:</b> 8GB LPDDR5</p></li><li><p><b>Armazenamento:</b> 512GB SSD NVMe PCIe</p></li><li><p><b>Placa de Vídeo:</b> AMD Radeon 610M (Integrada)</p></li><li><p><b>Sistema Operacional:</b> Windows 11</p></li></ul>",
+      "slug": "notebook-lenovo-ideapad-1-amd-ryzen-5-7520u-8gb-512gb-ssd-win-11",
+      "variations": {
+        "enabled": false,
+        "colors": [],
+        "storage": [],
+        "ram": [],
+        "condition": [],
+        "combinations": [],
+        "labels": {},
+        "colorsText": "",
+        "storageText": "",
+        "ramText": "",
+        "conditionText": "",
+        "labelsText": "{}",
+        "combinationsText": ""
+      },
+      "stock": null,
+      "tags": [],
+      "relatedManualIds": [],
+      "crossSellIds": [],
+      "showVariationsOnCard": false,
+      "erp": {
+        "internalCode": "PRD-33"
+      },
+      "code": "PRD-33"
+    },
+    {
+      "id": 1773001450741,
+      "name": "Xiaomi Poco X8 Pro 512gb 12gb Ram",
+      "price": null,
+      "image": "images/xiaomi poco x8 pro.jpeg",
+      "category": "smartphones",
+      "showPrice": false,
+      "featured": true,
+      "active": true,
+      "gallery": [],
+      "detailsEnabled": true,
+      "descriptionShort": "O POCO X8 Pro 5G une desempenho bruto e autonomia revolucionária. Equipado com o potente chip Dimensity 8500-Ultra, ele roda jogos pesados e multitarefas com fluidez máxima. O grande destaque é sua bateria massiva de 6500mAh com carregamento ultrarrápido de 100W, perfeita para quem busca alta performance sem depender de tomadas.",
+      "descriptionLong": "<p><b>Destaques do Produto:</b></p><ul><li><p><b>Bateria Monstruosa:</b> 6500mAh de capacidade com carregamento HyperCharge de 100W.</p></li><li><p><b>Tela de Elite:</b> Painel AMOLED 1,5K de 120Hz com altíssima nitidez e fluidez.</p></li><li><p><b>Poder para Jogos:</b> Processador avançado de 4nm, ideal para tarefas e games exigentes.</p></li><li><p><b>Fotos Estáveis:</b> Câmera de 50 MP com estabilização óptica (OIS) para fotos e vídeos sem tremer.</p></li><li><p><b>Máxima Proteção:</b> Certificação IP68, sendo totalmente resistente a água e poeira.</p></li></ul><p><b>Especificações Técnicas:</b></p><ul><li><p><b>Tela:</b> 6,59\" AMOLED 1,5K (120Hz)</p></li><li><p><b>Processador:</b> MediaTek Dimensity 8500-Ultra</p></li><li><p><b>Opções de Armazenamento:</b> 256GB ou 512GB</p></li><li><p><b>Câmera Traseira:</b> 50 MP (Principal com OIS) + 8 MP (Ultrawide)</p></li><li><p><b>Bateria:</b> 6500mAh com carregamento de 100W</p></li><li><p><b>Resistência:</b> Certificação IP68 (à prova d'água)</p></li></ul>",
+      "slug": "xiaomi-poco-x8-pro-512gb-12gb-ram",
+      "stock": null,
+      "tags": [],
+      "relatedManualIds": [],
+      "crossSellIds": [],
+      "showVariationsOnCard": false,
+      "variations": {
+        "enabled": false,
+        "colors": [],
+        "storage": [],
+        "ram": [],
+        "condition": [],
+        "combinations": [],
+        "labels": {},
+        "colorsText": "",
+        "storageText": "",
+        "ramText": "",
+        "conditionText": "",
+        "labelsText": "{}",
+        "combinationsText": ""
+      },
+      "erp": {
+        "internalCode": "PRD-34"
+      },
+      "code": "PRD-34"
+    },
+    {
+      "id": 1780360199477,
+      "name": "Xiaomi Poco X8 Pro Max 256gb 12gb Ram",
+      "price": null,
+      "image": "images/Xiaomi Poco X8 pro max.jpeg",
+      "category": "smartphones",
+      "showPrice": false,
+      "featured": true,
+      "active": true,
+      "gallery": [],
+      "detailsEnabled": true,
+      "descriptionShort": "O POCO X8 Pro Max 5G leva a performance ao nível extremo com acabamento premium e hardware de elite. Equipado com o processador topo de linha Dimensity 9400, ele foi feito para rodar absolutamente tudo com o máximo de quadros por segundo. Traz uma impressionante bateria de 6500mAh, carregamento ultrarrápido e uma tela curva deslumbrante, sendo a escolha definitiva para quem não aceita menos que o topo",
+      "descriptionLong": "<p><b>Destaques do Produto:</b></p><ul><li><p><b>Máxima Autonomia:</b> Bateria massiva de 6500mAh com carregamento rápido de alta eficiência.</p></li><li><p><b>Tela Premium:</b> Display AMOLED Curvo de 120Hz com resolução superior e bordas ultrafinas.</p></li><li><p><b>Desempenho Extremo:</b> Processador Dimensity 9400, ideal para os jogos mais pesados e IA avançada.</p></li><li><p><b>Fotografia de Cinema:</b> Conjunto de câmeras com sensor principal Sony de 50 MP e estabilização óptica (OIS).</p></li><li><p><b>Construção Blindada:</b> Certificação IP68/IP69 com alta resistência a água, poeira e jatos de pressão.</p></li></ul><p><b>Especificações Técnicas:</b></p><ul><li><p><b>Tela:</b> 6,67\" AMOLED Curva 1.5K (120Hz)</p></li><li><p><b>Processador:</b> MediaTek Dimensity 9400</p></li><li><p><b>Opções de Armazenamento:</b> 256GB ou 512GB</p></li><li><p><b>Câmera Traseira:</b> 50 MP (Principal OIS) + 50 MP (Ultrawide) + Lente Teleobjetiva</p></li><li><p><b>Bateria:</b> 6500mAh com carregamento rápido</p></li><li><p><b>Resistência:</b> Certificação IP68/IP69 (altamente à prova d'água)</p></li></ul>",
+      "slug": "xiaomi-poco-x8-pro-max-256gb-12gb-ram",
+      "stock": null,
+      "tags": [],
+      "relatedManualIds": [],
+      "crossSellIds": [],
+      "showVariationsOnCard": false,
+      "variations": {
+        "enabled": false,
+        "colors": [],
+        "storage": [],
+        "ram": [],
+        "condition": [],
+        "combinations": [],
+        "labels": {},
+        "colorsText": "",
+        "storageText": "",
+        "ramText": "",
+        "conditionText": "",
+        "labelsText": "{}",
+        "combinationsText": ""
+      },
+      "erp": {
+        "internalCode": "PRD-35"
+      },
+      "code": "PRD-35"
+    },
+    {
+      "id": 1780362105345,
+      "name": "Bateria Apple MagSafe",
+      "price": null,
+      "image": "images/Bateria MagSafe.jpeg",
+      "category": "acessorios",
+      "showPrice": false,
+      "featured": false,
+      "active": true,
+      "gallery": [],
+      "detailsEnabled": false,
+      "descriptionShort": "",
+      "descriptionLong": "",
+      "slug": "bateria-apple-magsafe",
+      "inventory": {
+        "itemId": "PRD-1780362105345",
+        "stockControlled": false,
+        "allowNegative": false,
+        "minimumQuantity": 0,
+        "channelAvailability": {
+          "site": {
+            "mode": "shared",
+            "enabled": true,
+            "limit": null,
+            "physicalSafety": 0
+          }
+        }
+      },
+      "erp": {
+        "internalCode": "PRD-36"
+      },
+      "code": "PRD-36"
+    },
+    {
+      "id": 1780620735223,
+      "name": "Cartão De Memória MicroSD SanDisk Ultra 128gb",
+      "price": null,
+      "image": "images/Cartao_Sandisk_128gb.jpeg",
+      "category": "acessorios",
+      "showPrice": false,
+      "featured": false,
+      "active": true,
+      "gallery": [],
+      "detailsEnabled": false,
+      "descriptionShort": "",
+      "descriptionLong": "",
+      "slug": "cartao-de-memoria-microsd-sandisk-ultra-128gb",
+      "erp": {
+        "internalCode": "PRD-37"
+      },
+      "code": "PRD-37"
+    },
+    {
+      "id": 1780620964604,
+      "name": "Motorola Moto G55 5G 256GB 16GB (8GB RAM+8GB Ram Boost)",
+      "price": null,
+      "image": "images/Moto G55.jpeg",
+      "category": "smartphones",
+      "showPrice": false,
+      "featured": true,
+      "active": true,
+      "gallery": [],
+      "detailsEnabled": true,
+      "descriptionShort": "",
+      "descriptionLong": "O Moto G55 5G entrega desempenho fluido, muita memória e conectividade de quinta geração por um preço super acessível. O grande destaque é o recurso RAM Boost, que duplica a memória do aparelho para garantir que nenhum aplicativo trave.\r\n\r\nTela: Full HD+ de 6,5\" com taxa de 120Hz, garantindo navegação ultrafluida e ótima qualidade para vídeos.\r\n\r\nMemória Inteligente: 256GB de espaço interno + 16GB de RAM no total (8GB físicos + 8GB virtuais via Ram Boost).\r\n\r\nCâmeras: Sensor principal de 50 MP com Estabilização Óptica (OIS), que evita fotos e vídeos tremidos mesmo em movimento.\r\n\r\nBateria: Gigante de 5000 mAh com carregamento rápido TurboPower incluído na caixa.\r\n\r\nDiferenciais: Design moderno com acabamento premium resistente a respingos, som estéreo com Dolby Atmos e conectividade 5G.",
+      "slug": "motorola-moto-g55-5g-256gb-16gb-8gb-ram-8gb-ram-boost",
+      "erp": {
+        "internalCode": "PRD-38"
+      },
+      "code": "PRD-38"
+    },
+    {
+      "id": 1780621718802,
+      "name": "Carregador TurboPower™ 30W - Cabo USB-C",
+      "price": null,
+      "image": "images/Carregador 30w usb C.jpeg",
+      "category": "acessorios",
+      "showPrice": false,
+      "featured": false,
+      "active": true,
+      "gallery": [],
+      "detailsEnabled": false,
+      "descriptionShort": "",
+      "descriptionLong": "",
+      "slug": "carregador-turbopower-30w-cabo-usb-c",
+      "erp": {
+        "internalCode": "PRD-39"
+      },
+      "code": "PRD-39"
+    },
+    {
+      "id": 1780622020125,
+      "name": "Relógio Smartwatch Amazfit Bip 5 Branco",
+      "price": null,
+      "image": "images/Relogio Xiaomi amazfit bip 5 branco.jpeg",
+      "category": "eletronicos",
+      "showPrice": false,
+      "featured": false,
+      "active": true,
+      "gallery": [],
+      "detailsEnabled": false,
+      "descriptionShort": "",
+      "descriptionLong": "",
+      "slug": "relogio-smartwatch-amazfit-bip-5-branco",
+      "erp": {
+        "internalCode": "PRD-40"
+      },
+      "code": "PRD-40"
+    },
+    {
+      "id": 1780622237724,
+      "name": "Samsung Galaxy A07 128gb 4gb Ram Tela 6.7",
+      "price": null,
+      "image": "images/Celular Samsung A07.jpeg",
+      "category": "smartphones",
+      "showPrice": false,
+      "featured": false,
+      "active": true,
+      "gallery": [],
+      "detailsEnabled": false,
+      "descriptionShort": "",
+      "descriptionLong": "",
+      "slug": "samsung-galaxy-a07-128gb-4gb-ram-tela-6-7",
+      "erp": {
+        "internalCode": "PRD-41"
+      },
+      "code": "PRD-41"
+    },
+    {
+      "id": 1780622580515,
+      "name": "Película de Privacidade 3D  Proteção Real",
+      "price": null,
+      "image": "images/Pelicula de privacidade.jpeg",
+      "category": "acessorios",
+      "showPrice": false,
+      "featured": false,
+      "active": true,
+      "gallery": [],
+      "detailsEnabled": false,
+      "descriptionShort": "",
+      "descriptionLong": "",
+      "slug": "pelicula-de-privacidade-3d-protecao-real",
+      "erp": {
+        "internalCode": "PRD-42"
+      },
+      "code": "PRD-42"
+    },
+    {
+      "id": 1780622740979,
+      "name": "Samsung Galaxy A36 5G 256GB 8GB RAM Tela 6.7",
+      "price": null,
+      "image": "images/Samsung A36.jpeg",
+      "category": "smartphones",
+      "showPrice": false,
+      "featured": false,
+      "active": true,
+      "gallery": [],
+      "detailsEnabled": false,
+      "descriptionShort": "",
+      "descriptionLong": "",
+      "slug": "samsung-galaxy-a36-5g-256gb-8gb-ram-tela-6-7",
+      "erp": {
+        "internalCode": "PRD-43"
+      },
+      "code": "PRD-43"
+    },
+    {
+      "id": 1780623045203,
+      "name": "Samsung Galaxy S26 5G, 256GB, 12GB RAM, Galaxy AI, Tela 6.3",
+      "price": null,
+      "image": "images/Samsung S26.jpeg",
+      "category": "smartphones",
+      "showPrice": false,
+      "featured": true,
+      "active": true,
+      "gallery": [],
+      "detailsEnabled": true,
+      "descriptionShort": "O Samsung Galaxy S26 5G redefine a categoria premium com o equilíbrio perfeito entre tamanho compacto e desempenho extremo. Equipado com impressionantes 12GB de memória RAM e o novo chip Snapdragon 8 Gen 5, ele foi projetado para entregar multitarefas ultravelozes e o máximo desempenho para jogos exigentes. Conta com o ecossistema avançado de inteligência artificial Galaxy AI para tradução em tempo real, edição mágica de fotos e produtividade máxima.",
+      "descriptionLong": "<p><b>Destaques do Produto:</b></p><ul><li><p><b>Poder Absoluto:</b> 12GB de RAM combinados com processador de última geração para velocidade máxima sem travamentos.</p></li><li><p><b>Galaxy AI Inteligente:</b> Recursos avançados de inteligência artificial para fotos, buscas automáticas e produtividade no dia a dia.</p></li><li><p><b>Tela Dynamic AMOLED 2X:</b> Display de 120Hz com brilho extraordinário para visualização perfeita mesmo sob o sol forte.</p></li><li><p><b>Câmeras de Cinema:</b> Sensor principal de alta resolução com inteligência computacional para fotos e vídeos noturnos perfeitos.</p></li><li><p><b>Design Sofisticado e Resistente:</b> Acabamento premium em alumínio blindado e vidro de alta resistência a impactos.</p></li></ul><p><b>Especificações Técnicas:</b></p><ul><li><p><b>Tela:</b> 6,2\" Dynamic AMOLED 2X FHD+ (120Hz)</p></li><li><p><b>Processador:</b> Qualcomm Snapdragon 8 Gen 5 (ou Exynos equivalente)</p></li><li><p><b>Memória RAM:</b> 12GB</p></li><li><p><b>Armazenamento:</b> 256GB</p></li><li><p><b>Câmera Traseira:</b> Tripla de alta resolução com zoom óptico e estabilização (OIS)</p></li><li><p><b>Conectividade:</b> 5G, Wi-Fi 7, Bluetooth e NFC</p></li><li><p><b>Resistência:</b> Certificação IP68 (altamente à prova d'água e poeira)</p></li></ul>",
+      "slug": "samsung-galaxy-s26-5g-256gb-12gb-ram-galaxy-ai-tela-6-3",
+      "stock": null,
+      "tags": [],
+      "relatedManualIds": [],
+      "crossSellIds": [],
+      "showVariationsOnCard": false,
+      "variations": {
+        "enabled": false,
+        "colors": [],
+        "storage": [],
+        "ram": [],
+        "condition": [],
+        "combinations": [],
+        "labels": {},
+        "colorsText": "",
+        "storageText": "",
+        "ramText": "",
+        "conditionText": "",
+        "labelsText": "{}",
+        "combinationsText": ""
+      },
+      "erp": {
+        "internalCode": "PRD-44"
+      },
+      "code": "PRD-44"
+    },
+    {
+      "id": 1780693602729,
+      "name": "Pen Drive Sandisk Cruzer Blade 128gb",
+      "price": null,
+      "image": "images/pen drive Sandisk 128gb.jpeg",
+      "category": "acessorios",
+      "showPrice": false,
+      "featured": false,
+      "active": true,
+      "gallery": [],
+      "detailsEnabled": false,
+      "descriptionShort": "",
+      "descriptionLong": "",
+      "slug": "pen-drive-sandisk-cruzer-blade-128gb-2",
+      "erp": {
+        "internalCode": "PRD-45"
+      },
+      "code": "PRD-45"
+    },
+    {
+      "name": "Xiaomi Poco X7 pro 5G 512gb 12gb ram",
+      "price": null,
+      "image": "images/pocox7pro.png",
+      "gallery": [
+        "images/produtos/1780867302218-xiaomi-poco-x7-pro-2.jpeg"
+      ],
+      "category": "smartphones",
+      "showPrice": false,
+      "featured": false,
+      "active": true,
+      "detailsEnabled": true,
+      "descriptionShort": "O Poco X7 Pro oferece desempenho de topo de linha com um preço que cabe no seu bolso. Equipado com o novíssimo processador MediaTek Dimensity 8400-Ultra e uma bateria gigante, ele é perfeito para quem busca velocidade máxima em jogos pesados, multitarefa extrema e fotos profissionais.",
+      "descriptionLong": "<div>🛠️ <b>Especificações Técnicas:</b></div><ul><li><p><b>Memória Interna:</b> 512GB (Espaço de sobra para milhares de fotos, vídeos e apps)</p></li><li><p><b>Memória RAM:</b> 12GB LPDDR5X (Fluidez extrema em multitarefas)</p></li><li><p><b>Processador:</b> MediaTek Dimensity 8400-Ultra (4nm) — Potência máxima com economia de energia</p></li><li><p><b>Tela:</b> AMOLED CrystalRes de 6.67\" 1.5K, 120Hz e proteção Gorilla Glass</p></li><li><p><b>Câmeras Traseiras:</b> Principal de 50 MP com Estabilização Óptica (OIS) + Ultra-Wide de 8 MP (Vídeos em 4K)</p></li><li><p><b>Câmera Frontal:</b> 20 MP para selfies nítidas</p></li><li><p><b>Bateria:</b> 6000mAh com Carregamento Turbo de 90W (Carrega 100% em cerca de 42 minutos)</p></li><li><p><b>Conectividade:</b> 5G, Wi-Fi 6, Bluetooth, NFC e Sensor de Digital na Tela</p></li><li><p><b>Sistema:</b> Android com a nova interface HyperOS da Xiaomi</p></li></ul>",
+      "id": 1780867309549,
+      "slug": "xiaomi-poco-x7-pro-5g-512gb-12gb-ram",
+      "stock": null,
+      "tags": [],
+      "relatedManualIds": [],
+      "crossSellIds": [],
+      "showVariationsOnCard": false,
+      "variations": {
+        "enabled": false,
+        "colors": [],
+        "storage": [],
+        "ram": [],
+        "condition": [],
+        "combinations": [],
+        "labels": {},
+        "colorsText": "",
+        "storageText": "",
+        "ramText": "",
+        "conditionText": "",
+        "labelsText": "{}",
+        "combinationsText": ""
+      },
+      "erp": {
+        "internalCode": "PRD-46"
+      },
+      "code": "PRD-46"
+    },
+    {
+      "name": "Samsung A56 5g 256gb 8gb ram 6.7\"",
+      "slug": "samsung-a56-5g-256gb",
+      "price": null,
+      "image": "images/Samsung-A56-Preto.jpeg",
+      "gallery": [],
+      "category": "smartphones",
+      "showPrice": false,
+      "featured": false,
+      "active": true,
+      "detailsEnabled": true,
+      "descriptionShort": "",
+      "descriptionLong": "",
+      "id": 1781122138913,
+      "erp": {
+        "internalCode": "PRD-47"
+      },
+      "code": "PRD-47"
+    },
+    {
+      "name": "Carregador Power Bank 20000mAh Kaidi Preto",
+      "slug": "carregador-power-bank-20000mah-kaidi",
+      "price": null,
+      "image": "images/PowerBank_Kaidi_preto.jpeg",
+      "gallery": [],
+      "category": "acessorios",
+      "showPrice": false,
+      "featured": false,
+      "active": true,
+      "detailsEnabled": true,
+      "descriptionShort": "",
+      "descriptionLong": "Carregamento rápido 2.1A\n\nProduto certificado e homologado pela Anatel\n\nCélula de alta qualidade\n\nSistema de segurança\n\nCapacidade da célula: 20000mAh (74Wh)\n\nSaída de cabo: DC5V/2.1A (Micro/Lightning/Type-C)\n\nEntrada (Type-C/Cabo USB): DC5V/2.1A(Max)\n\nSaída USB: DC5V/2.1A (Max)\n\nSaída geral: DC5V/2.1A(Max)",
+      "id": 1781122618415,
+      "erp": {
+        "internalCode": "PRD-48"
+      },
+      "code": "PRD-48"
+    },
+    {
+      "name": "Mouse sem Fio 1000Dpi M-W20BK C3 Tech - Preto",
+      "slug": "mouse-sem-fio-1000dpi-c3tech",
+      "price": null,
+      "image": "images/Mouse sem Fio 1000Dpi M-W20BK C3 Tech.jpg",
+      "gallery": [
+        "images/produtos/1781123106896-mouse-sem-fio-1000dpi-m-w20bk-c3-tech-2.jpg"
+      ],
+      "category": "acessorios",
+      "showPrice": false,
+      "featured": false,
+      "active": true,
+      "detailsEnabled": true,
+      "descriptionShort": "",
+      "descriptionLong": "Especificações:\r\n\r\n- Design ergonômico\r\n\r\n- Ambidestro\r\n\r\n- Estrutura resistente\r\n\r\n- Botões de alta qualidade\r\n\r\nTecnologia Free Smart Link.\r\n\r\nSensor óptico\r\n\r\nModos de DPI Selecionáveis através de botão.\r\n\r\nResoluções: 500/800/1000 DPI\r\n\r\nRaio de transmissão de até 12 metros\r\n\r\nAlta economia das pilhas.\r\n\r\n2 Pilhas AAA\r\n\r\nDesligamento automático.\r\n\r\nModo de Operação: 2.4GHz bidirecional\r\n\r\nConteúdo da embalagem:\r\n\r\n1 Mouse sem fio\r\n1 RC Nano conector",
+      "id": 1781123111679,
+      "erp": {
+        "internalCode": "PRD-49"
+      },
+      "code": "PRD-49"
+    },
+    {
+      "name": "Caixa de som JBL Boombox 3",
+      "slug": "caixa-de-som-jbl-boombox-3",
+      "price": null,
+      "image": "images/JBL-boombox3-camuflada.jpeg",
+      "gallery": [],
+      "category": "eletronicos",
+      "showPrice": false,
+      "featured": true,
+      "active": true,
+      "detailsEnabled": true,
+      "descriptionShort": "A JBL Boombox 3 é a caixa de som portátil definitiva para quem busca o máximo de potência e clareza sonora. Com um novo design acústico de 3 vias, ela entrega um som muito mais limpo com graves profundos e potentes que preenchem qualquer ambiente. Seu design robusto conta com uma alça de metal resistente e proteção total contra água e poeira, ideal para festas na piscina, praia ou churrascos.",
+      "descriptionLong": "<p><b>Destaques do Produto:</b></p><ul><li><p><b>Som Lendário JBL Pro:</b> Sistema de 3 vias que proporciona áudio de alta definição com graves absurdamente fortes.</p></li><li><p><b>À Prova d'Água e Poeira:</b> Certificação IP67, totalmente resistente a mergulhos na piscina e ao clima ao ar livre.</p></li><li><p><b>Função PartyBoost:</b> Permite conectar duas ou mais caixas JBL compatíveis para criar um som estéreo massivo.</p></li><li><p><b>Powerbank Integrado:</b> Carregue seu smartphone ou tablet diretamente na caixa de som através da porta USB interna.</p></li></ul><p><b>Especificações Técnicas:</b></p><ul><li><p><b>Potência:</b> Até 180W RMS (conectada à tomada) / Até 136W RMS (no modo bateria)</p></li><li><p><b>Conectividade:</b> Bluetooth 5.3 (conexão ultra-estável para até dois smartphones)</p></li><li><p><b>Resistência:</b> Certificação IP67 (à prova d'água e poeira)</p></li><li><p><b>Autonomia da Bateria:</b> Até 24 horas (variando de acordo com o volume e tipo de som)</p></li><li><p><b>Tempo de Carga:</b> Aproximadamente 6,5 horas para carga completa</p></li></ul>",
+      "id": 1781196214682,
+      "stock": null,
+      "tags": [],
+      "relatedManualIds": [],
+      "crossSellIds": [],
+      "showVariationsOnCard": false,
+      "variations": {
+        "enabled": false,
+        "colors": [],
+        "storage": [],
+        "ram": [],
+        "condition": [],
+        "combinations": [],
+        "labels": {},
+        "colorsText": "",
+        "storageText": "",
+        "ramText": "",
+        "conditionText": "",
+        "labelsText": "{}",
+        "combinationsText": ""
+      },
+      "erp": {
+        "internalCode": "PRD-50"
+      },
+      "code": "PRD-50"
+    },
+    {
+      "name": "Mini Caixa De Som Bluetooth À Prova D'água Ipx6 Portátil",
+      "slug": "caixa-de-som-bluetooth-ipx6",
+      "price": null,
+      "image": "images/Caixa_de-som_altomex.jpeg",
+      "gallery": [],
+      "category": "eletronicos",
+      "showPrice": false,
+      "featured": false,
+      "active": true,
+      "detailsEnabled": true,
+      "descriptionShort": "",
+      "descriptionLong": "Potência de saída de 15 W para um som potente e claro.\nAutonomia máxima da bateria de 4 horas para uso prolongado.\nTempo de carregamento de apenas 2 horas para conveniência.\nDesign cilíndrico portátil, ideal para levar a qualquer lugar.\nÀ prova d'água com classificação IPX6, perfeito para uso externo.\nConexão Bluetooth para streaming sem fio fácil e rápido.",
+      "id": 1781196414711,
+      "variations": {
+        "enabled": false,
+        "colors": [],
+        "storage": [],
+        "ram": [],
+        "condition": [],
+        "combinations": [],
+        "colorsText": "",
+        "storageText": "",
+        "ramText": "",
+        "conditionText": "",
+        "combinationsText": ""
+      },
+      "erp": {
+        "internalCode": "PRD-51"
+      },
+      "code": "PRD-51"
+    },
+    {
+      "name": "Motorola Edge 70 5g - 256gb 24gb (8gb + 16gb Ram Boost), Ultrafino, 3 Cameras 50mp, Tela 6.7\"",
+      "slug": "motorola-edge-70-5g-256gb-24gbram",
+      "price": null,
+      "image": "images/Moto Edge 70 .jpeg",
+      "gallery": [],
+      "category": "smartphones",
+      "showPrice": false,
+      "featured": true,
+      "active": true,
+      "detailsEnabled": true,
+      "descriptionShort": "Eleva o padrão de sofisticação e desempenho. Com um design premium extremamente leve e ultrafino, ele traz uma tela imersiva de 6,7 polegadas perfeita para jogos e vídeos. Equipado com um poderoso sistema de memória que soma 8GB de RAM física a +16GB de RAM Boost, ele entrega velocidade total para abrir dezenas de aplicativos ao mesmo tempo sem nenhum travamento.",
+      "descriptionLong": "<p><b>Destaques do Produto:</b></p><ul><li><p><b>Design Ultrafino:</b> Pegada extremamente leve, fina e elegante com acabamento premium de alta resistência.</p></li><li><p><b>Multitarefas Monstruoso:</b> Configuração poderosa de <b>8GB de RAM + 16GB de RAM Boost</b> (virtual) para máximo desempenho contínuo.</p></li><li><p><b>Conjunto Triplo de 50 MP:</b> Três câmeras traseiras de 50 megapixels para fotos e vídeos profissionais com riqueza de detalhes e modo noturno avançado.</p></li><li><p><b>Tela de Cinema:</b> Display de 6,7 polegadas com alta taxa de atualização, oferecendo cores vibrantes e navegação ultrafluida.</p></li><li><p><b>Conectividade Total:</b> Pronto para a velocidade da rede 5G com gerenciamento inteligente de bateria.</p></li></ul><p><b>Especificações Técnicas:</b></p><ul><li><p><b>Tela:</b> 6,7\" com alta resolução e fluidez avançada</p></li><li><p><b>Memória RAM:</b> 8GB Física + 16GB RAM Boost (Otimização por Software)</p></li><li><p><b>Armazenamento:</b> 256GB de memória interna</p></li><li><p><b>Câmeras Traseiras:</b> Sistema Triplo de 50 MP + 50 MP + 50 MP com estabilização inteligente</p></li><li><p><b>Conectividade:</b> 5G de alta velocidade, Wi-Fi e Bluetooth avançado</p></li><li><p><b>Bateria:</b> Alta capacidade integrada com suporte a carregamento super-rápido</p></li></ul>",
+      "id": 1781197059394,
+      "stock": null,
+      "tags": [],
+      "relatedManualIds": [],
+      "crossSellIds": [],
+      "showVariationsOnCard": false,
+      "variations": {
+        "enabled": false,
+        "colors": [],
+        "storage": [],
+        "ram": [],
+        "condition": [],
+        "combinations": [],
+        "labels": {},
+        "colorsText": "",
+        "storageText": "",
+        "ramText": "",
+        "conditionText": "",
+        "labelsText": "{}",
+        "combinationsText": ""
+      },
+      "erp": {
+        "internalCode": "PRD-52"
+      },
+      "code": "PRD-52"
+    },
+    {
+      "name": "Notebook Gamer Acer Nitro V ANV15-51-57WS Intel® Core™ i5 13ªGeração 512SSD 8GB Ram GeForce® RTX 3050",
+      "slug": "notebook-gamer-acer-nitro-intel-core-i5-512ssd-8gb-ram-geforce-rtx-3050",
+      "price": null,
+      "image": "images/Notebook_acer_nitro.jpeg",
+      "gallery": [],
+      "category": "eletronicos",
+      "showPrice": false,
+      "featured": true,
+      "active": true,
+      "detailsEnabled": true,
+      "descriptionShort": "",
+      "descriptionLong": "O Acer Nitro entrega o desempenho que você precisa para dominar seus jogos favoritos e encarar tarefas pesadas com fluidez. Equipado com processador de última geração e placa de vídeo dedicada.\r\n\r\nGráficos Incríveis: Placa NVIDIA GeForce RTX 3050 para alta qualidade gráfica e inteligência artificial.\r\n\r\nProcessamento Rápido: Intel Core i5 de 13ª Geração, ideal para jogos, edições e multitarefa.\r\n\r\nVelocidade Superior: Armazenamento de 512GB SSD que inicia o sistema e carrega os jogos em segundos.\r\n\r\nDesempenho Eficiente: 8GB de memória RAM de alta velocidade.\r\n\r\nRefrigeração Avançada: Sistema de ventilação dupla para manter a máquina fria durante as partidas intensas.",
+      "id": 1781197397059,
+      "erp": {
+        "internalCode": "PRD-53"
+      },
+      "code": "PRD-53"
+    },
+    {
+      "name": "Celular LG G360 Dual Sim P/ Idoso",
+      "slug": "celular-lg-g360-dual-sim-idoso",
+      "price": null,
+      "image": "images/Celular_Idoso_LG-G360.jpeg",
+      "gallery": [],
+      "category": "smartphones",
+      "showPrice": false,
+      "featured": false,
+      "active": true,
+      "detailsEnabled": false,
+      "descriptionShort": "",
+      "descriptionLong": "",
+      "id": 1781260067474,
+      "erp": {
+        "internalCode": "PRD-54"
+      },
+      "code": "PRD-54"
+    },
+    {
+      "name": "Tablet Samsung Galaxy Tab A11, 64gb, 4gb Ram, Tela De 8.7, Bateria 5.100mah",
+      "slug": "tablet-samsung-galaxy-tab-a11-64gb-4gbram",
+      "price": null,
+      "image": "images/Tablet_Samsung_tabA11.jpeg",
+      "gallery": [
+        "images/produtos/1781271923190-tablet-samsung-taba11-2.jpeg"
+      ],
+      "category": "eletronicos",
+      "showPrice": false,
+      "featured": false,
+      "active": true,
+      "detailsEnabled": true,
+      "descriptionShort": "",
+      "descriptionLong": "companheiro ideal, com capacidade de sobra para cada uma das suas atividades. O design fino, compacto e portátil, com facilidade para segurar com a mão, o torna uma combinação perfeita de desempenho e versatilidade.\n\nSistema operacional: Android 15.0\nResolução da tela de 1340px x 800px\nCom leitor micro-SD\nPossui GPS\nPesa apenas 335g",
+      "id": 1781272005592,
+      "erp": {
+        "internalCode": "PRD-55"
+      },
+      "code": "PRD-55"
+    },
+    {
+      "name": "Celular Nokia 4G Dual Sim P/ Idoso",
+      "slug": "celular-nokia-4g-dual-sim-idoso",
+      "price": null,
+      "image": "images/nokia_2660_idoso.jpeg",
+      "gallery": [],
+      "category": "smartphones",
+      "showPrice": false,
+      "featured": false,
+      "active": true,
+      "detailsEnabled": false,
+      "descriptionShort": "",
+      "descriptionLong": "",
+      "id": 1781272093569,
+      "erp": {
+        "internalCode": "PRD-56"
+      },
+      "code": "PRD-56"
+    },
+    {
+      "name": "Fone JBL Wave Buds 2",
+      "slug": "fone-jbl-wave-buds-2",
+      "price": null,
+      "image": "images/Fone_JBL Wave Buds 2.jpeg",
+      "gallery": [],
+      "category": "acessorios",
+      "showPrice": false,
+      "featured": false,
+      "active": true,
+      "detailsEnabled": true,
+      "descriptionShort": "",
+      "descriptionLong": "JBL Wave Buds 2: Som potente e liberdade total para seu dia.\r\n\r\nExperimente o som imersivo da JBL com graves profundos e agudos claros. Os Wave Buds 2 oferecem conforto ergonômico e conexão sem fio estável via Bluetooth 5.2. Curta *até 40 horas de reprodução total*, sendo 10 horas direto nos fones e mais 30 horas com o estojo de recarga. Conte com resistência à água e poeira (IP54) para te acompanhar em qualquer aventura. Controle tudo com um toque e tenha chamadas nítidas. A liberdade sonora que você merece!",
+      "id": 1781450389959,
+      "erp": {
+        "internalCode": "PRD-57"
+      },
+      "code": "PRD-57"
+    },
+    {
+      "name": "Fone Bluetooth Xiaomi Redmi Buds 8 Active",
+      "slug": "fone-bluetooth-xiaomi-redmi-buds-8-active",
+      "price": null,
+      "image": "images/Fone De Ouvido Xiaomi Redmi Buds 8 Active.jpeg",
+      "gallery": [
+        "images/produtos/1781450684095-fone-de-ouvido-xiaomi-redmi-buds-8-active-2.jpeg",
+        "images/produtos/1781450684101-fone-de-ouvido-xiaomi-redmi-buds-8-active-3.jpeg"
+      ],
+      "category": "acessorios",
+      "showPrice": false,
+      "featured": false,
+      "active": true,
+      "detailsEnabled": true,
+      "descriptionShort": "",
+      "descriptionLong": "O parceiro perfeito para sua rotina. Com design ergonômico ultraleve, oferece som imersivo de alta qualidade e chamadas nítidas com cancelamento de ruído por IA.\n\nBateria: Até 37 horas de autonomia total.\n\nConexão: Bluetooth 5.4 ultraestável.\n\nResistência: Proteção IP54 (suor e poeira).\n\nConforto: Encaixe semi-intra-auricular para uso prolongado.\n\nPerformance e liberdade para o seu dia a dia.",
+      "id": 1781451058168,
+      "erp": {
+        "internalCode": "PRD-58"
+      },
+      "code": "PRD-58"
+    },
+    {
+      "name": "Película 3D Proteção Real",
+      "slug": "pelicula-3d-protecao-real",
+      "price": null,
+      "image": "images/pelicula3D.jpeg",
+      "gallery": [],
+      "category": "acessorios",
+      "showPrice": false,
+      "featured": false,
+      "active": true,
+      "detailsEnabled": true,
+      "descriptionShort": "",
+      "descriptionLong": "Proteja seu celular sem perder a elegância. A Película 3D Proteção Real oferece cobertura total da tela com um toque suave, garantindo que o brilho e a sensibilidade do seu toque permaneçam originais.\r\n\r\nCobertura Total: Bordas curvas que protegem cada centímetro da tela.\r\n\r\nToque Suave: Superfície lisa que mantém a fluidez original do seu touch.\r\n\r\nAlta Resistência: Proteção superior contra riscos, batidas e impactos do dia a dia.\r\n\r\nTransparência Máxima: Mantém as cores vivas e a nitidez do seu visor.",
+      "id": 1781453700789,
+      "erp": {
+        "internalCode": "PRD-59"
+      },
+      "code": "PRD-59"
+    },
+    {
+      "name": "Fone Bluetooth JBL Tune 530BT",
+      "slug": "fone-bluetooth-jbl-tune-530bt",
+      "price": null,
+      "image": "images/Fone_JBL-tune530bt.jpeg",
+      "gallery": [
+        "images/produtos/1781454022589-fone-jbl-tune530bt-1.jpeg",
+        "images/produtos/1781454022599-fone-jbl-tune530bt-2.jpeg"
+      ],
+      "category": "acessorios",
+      "showPrice": false,
+      "featured": false,
+      "active": true,
+      "detailsEnabled": true,
+      "descriptionShort": "",
+      "descriptionLong": "Leve a qualidade de áudio da JBL para onde você for. O Tune 530BT une tecnologia de ponta, conforto ergonômico e uma bateria impressionante para você não ficar na mão.\r\n\r\nJBL Pure Bass: O som potente que você já conhece e ama.\r\n\r\nBateria Incrível: Até 76 horas de som. Carga rápida de 5 min = 5h de música.\r\n\r\nChamadas Claras: Sistema com 2 microfones para conversas sem ruídos.\r\n\r\nConectividade Total: Bluetooth estável com alternância fácil entre dispositivos.\r\n\r\nControle no seu Bolso: Personalize seu som via App JBL Headphones.\r\n\r\nDesign Inteligente: Leve, dobrável e confortável para o dia todo.",
+      "id": 1781454148301,
+      "erp": {
+        "internalCode": "PRD-60"
+      },
+      "code": "PRD-60"
+    },
+    {
+      "name": "Console PlayStation 4 Slim 1TB Sony Usado",
+      "slug": "console-playstation4-slim-1tb-usado",
+      "price": null,
+      "image": "images/ps4.png",
+      "gallery": [
+        "images/produtos/1781454525927-ps4-2.png"
+      ],
+      "category": "eletronicos",
+      "showPrice": false,
+      "featured": false,
+      "active": true,
+      "detailsEnabled": true,
+      "descriptionShort": "",
+      "descriptionLong": "Espaço de sobra: Com 1TB de armazenamento, você tem capacidade de sobra para instalar vários jogos sem se preocupar.\r\nDesign Slim: Mais silencioso, compacto e elegante para qualquer ambiente.\r\nQualidade e Confiabilidade: Console revisado, testado e pronto para proporcionar horas de diversão imediata.\r\n\r\nEspecificações Técnicas:\r\nCapacidade: 1TB.\r\nConectividade: Bluetooth e Wi-Fi integrados.\r\nResolução: Suporte a HDR.\r\nVoltagem: Bivolt.\r\n\r\n\r\nConteúdo:\r\n01 Console PlayStation 4 Slim 1TB.\r\n01 Controle sem fio DualShock 4.\r\n01 Cabo HDMI.\r\n01 Cabo de energia.\r\n01 Cabo USB para carregamento do controle.",
+      "id": 1781454733442,
+      "erp": {
+        "internalCode": "PRD-61"
+      },
+      "code": "PRD-61"
+    },
+    {
+      "name": "Samsung Galaxy A57 5G 256gb Tela 6.7\"",
+      "slug": "samsung-galaxy-a57-5g-256gb",
+      "price": null,
+      "image": "images/Samsung A57.jpeg",
+      "gallery": [
+        "images/produtos/1781455460661-samsung-a57-2.png"
+      ],
+      "category": "smartphones",
+      "showPrice": false,
+      "featured": false,
+      "active": true,
+      "detailsEnabled": true,
+      "descriptionShort": "",
+      "descriptionLong": "O Samsung Galaxy A57 é a escolha ideal para quem não quer escolher entre desempenho e armazenamento\r\n\r\nEspaço de sobra: 256GB para você nunca mais se preocupar em apagar arquivos importantes.\r\nPerformance Fluida: Processador otimizado que garante agilidade para multitarefas e jogos.\r\nFotos de Alta Qualidade: Conjunto de câmeras avançado para registrar cada momento com cores vivas e nitidez impressionante, mesmo em ambientes com pouca luz.\r\nDesign Moderno e Durável: Acabamento sofisticado com a qualidade de construção que só a Samsung oferece.\r\nTela Imersiva: Cores intensas e brilho equilibrado para uma experiência visual de cinema na palma da mão.",
+      "id": 1781455522062,
+      "erp": {
+        "internalCode": "PRD-62"
+      },
+      "code": "PRD-62"
+    },
+    {
+      "name": "Impressora Multifuncional Epson EcoTank L3250, Colorida, Wifi",
+      "slug": "impressora-multifuncional-epson-ecotank-l3250-wifi",
+      "price": null,
+      "image": "images/epson-l3250.jpeg",
+      "gallery": [
+        "images/produtos/1781655174152-epson-l3250-2.jpeg",
+        "images/produtos/1781655183486-epson-l3250-3.jpeg"
+      ],
+      "category": "eletronicos",
+      "showPrice": false,
+      "featured": false,
+      "active": true,
+      "detailsEnabled": true,
+      "descriptionShort": "",
+      "descriptionLong": "A Epson EcoTank L3250 é a multifuncional 3-em-1 (imprime, copia e digitaliza) ideal para famílias, estudantes e profissionais em home office. Graças ao sistema 100% sem cartuchos, você economiza até 90% em tinta, imprimindo milhares de páginas com um único kit de garrafas originais Epson.Com conectividade Wi-Fi avançada, você envia seus documentos e fotos direto do celular ou tablet usando o aplicativo Epson Smart Panel. É a praticidade que o seu dia a dia precisa, com o menor custo por página do mercado.\nRendimento: Até 4.500 páginas em preto ou até 7.500 páginas coloridas",
+      "variations": {
+        "enabled": true,
+        "colors": [
+          {
+            "name": "Preto",
+            "hex": "#111111",
+            "image": ""
+          }
+        ],
+        "storage": [],
+        "ram": [],
+        "condition": [],
+        "combinations": [],
+        "labels": {},
+        "colorsText": "Preto|#111111",
+        "storageText": "",
+        "ramText": "",
+        "conditionText": "",
+        "labelsText": "{}",
+        "combinationsText": ""
+      },
+      "id": 1781655355785,
+      "stock": null,
+      "showVariationsOnCard": true,
+      "erp": {
+        "internalCode": "PRD-63"
+      },
+      "code": "PRD-63"
+    },
+    {
+      "name": "Apple Watch Series 11 GPS Cinza espacial de Alumínio 42mm Pulseira Esportiva Preta",
+      "slug": "apple-watch-series11-gps-de-aluminio-42mm-preta",
+      "price": null,
+      "image": "images/Apple watch series 11_cinzaespacial.jpeg",
+      "gallery": [],
+      "category": "eletronicos",
+      "showPrice": false,
+      "featured": true,
+      "active": true,
+      "detailsEnabled": true,
+      "descriptionShort": "",
+      "descriptionLong": "O Apple Watch Series 11 combina design elegante e tecnologia avançada. Com caixa leve de alumínio de 42mm na cor cinza-espacial e pulseira esportiva preta, oferece tela Retina Sempre Ativa, recursos inteligentes de saúde — incluindo monitoramento de sono e sinais vitais — e conectividade integrada para o seu dia a dia. Performance e estilo em um só dispositivo.\n\nProcessador: Chip S10 de 2 núcleos (mais rápido e eficiente).\nTela: Retina Sempre Ativa (até 2000 nits de brilho).\nDurabilidade: Vidro Ion-X (2x mais resistente a arranhões) e resistência à água (50m).\nBateria: Até 24 horas de uso normal (recarga rápida: 80% em 30 min).\nSaúde: ECG, monitoramento de oxigênio no sangue, temperatura e qualidade do sono.\nSegurança: Detecção de queda e de acidentes graves com chamada de emergência automática.\nCapacidade: 64 GB para apps, músicas e podcasts.",
+      "variations": {
+        "enabled": false,
+        "colors": [],
+        "storage": [],
+        "ram": [],
+        "condition": [],
+        "combinations": [],
+        "colorsText": "",
+        "storageText": "",
+        "ramText": "",
+        "conditionText": "",
+        "combinationsText": ""
+      },
+      "id": 1781824479005,
+      "inventory": {
+        "itemId": "PRD-1781824479005",
+        "stockControlled": false,
+        "allowNegative": false,
+        "minimumQuantity": 0,
+        "channelAvailability": {
+          "site": {
+            "mode": "shared",
+            "enabled": true,
+            "limit": null,
+            "physicalSafety": 0
+          }
+        }
+      },
+      "erp": {
+        "internalCode": "PRD-64"
+      },
+      "code": "PRD-64"
+    },
+    {
+      "name": "Apple 2026 MacBook Neo chip A18 Pro, IA e Apple Intelligence, Tela 13 pol. Liquid Retina, 8 GB de memória unificada",
+      "slug": "apple-2026-macbook-neo-a18pro-ia-apple-intelligence-tela13-8gbram-ssd512",
+      "price": null,
+      "image": "images/Macbook_neo_A18pro.jpeg",
+      "gallery": [
+        "images/produtos/1781825435823-macbook-neo-a18pro-2.jpeg",
+        "images/produtos/1781825435829-macbook-neo-a18pro-3.jpeg",
+        "images/produtos/1781825435831-macbook-neo-a18pro-4.jpeg"
+      ],
+      "category": "eletronicos",
+      "showPrice": false,
+      "featured": false,
+      "active": true,
+      "detailsEnabled": true,
+      "descriptionShort": "",
+      "descriptionLong": "O MacBook Neo une design ultraportátil e alta performance. Equipado com o chip A18 Pro e recursos de Apple Intelligence, ele entrega velocidade e inteligência para elevar sua produtividade a um novo nível.\n\nChip: A18 Pro (CPU de 6 núcleos, GPU de 5 núcleos, Neural Engine de 16 núcleos)\nApple Intelligence: Ferramentas inteligentes que facilitam o seu dia a dia.\nTela Liquid Retina de 13\"\nArmazenamento versões: 256gb e 512GB de SSD.\nMemória: 8GB de memória unificada.\nBateria: Longa duração (até 16h de reprodução de vídeo)\nTeclado: Magic Keyboard com Touch ID\nConteúdo da caixa: MacBook Neo, cabo carregador USB-C (trançado) e adaptador de energia USB-C de 20W.",
+      "variations": {
+        "enabled": true,
+        "colors": [
+          {
+            "name": "Silver (Prateado)",
+            "hex": "#a19b9b",
+            "image": ""
+          },
+          {
+            "name": "Indigo (Azul escuro)",
+            "hex": "#0b3142",
+            "image": ""
+          }
+        ],
+        "storage": [
+          "256GB",
+          "512GB"
+        ],
+        "ram": [
+          "8GB"
+        ],
+        "condition": [],
+        "combinations": [],
+        "labels": {},
+        "colorsText": "Silver (Prateado)|#a19b9b\nIndigo (Azul escuro)|#0b3142",
+        "storageText": "256GB\n512GB",
+        "ramText": "8GB",
+        "conditionText": "",
+        "labelsText": "{}",
+        "combinationsText": ""
+      },
+      "id": 1781826340965,
+      "stock": null,
+      "showVariationsOnCard": false,
+      "inventory": {
+        "itemId": "PRD-1781826340965",
+        "stockControlled": false,
+        "allowNegative": false,
+        "minimumQuantity": 0,
+        "channelAvailability": {
+          "site": {
+            "mode": "shared",
+            "enabled": true,
+            "limit": null,
+            "physicalSafety": 0
+          }
+        }
+      },
+      "erp": {
+        "internalCode": "PRD-65"
+      },
+      "code": "PRD-65"
+    },
+    {
+      "name": "Teclado com Fio Multimídia USB KB-M11BK C3 Tech - Preto",
+      "slug": "teclado-com-fio-multimidia-usb-kb-m11bk-c3tech",
+      "price": null,
+      "image": "images/Teclado com Fio Multimídia USB KB-M11BK C3 Tech - Preto-500x500.jpg",
+      "gallery": [
+        "images/produtos/1781827053900-tecladokb-m11-c3techsecundaria3-500x500.jpg"
+      ],
+      "category": "acessorios",
+      "showPrice": false,
+      "featured": false,
+      "active": true,
+      "detailsEnabled": true,
+      "descriptionShort": "",
+      "descriptionLong": "Feito para se adaptar perfeitamente às suas necessidades diárias, sinta a familiaridade do layout brasileiro ABNT2 enquanto desfruta da conveniência do plug and play. Com teclas baixas e resistência a respingos, é construído para durar. Eleve sua experiência de digitação com o Teclado USB Multmídia KB-M11BK.\r\n\r\nCaracterísticas:\r\nConexão USB\r\nLayout padrão português brasileiro ABNT2\r\nFunções Multimídia\r\nSistema anti-respingo\r\nTeclas baixas slim\r\nRegulagem de altura\r\nPlug and Play, sem necessidade de instalação de driver\r\nSuporte a Windows e Linux\r\n\r\nTeclas multimídias:\r\nPágina Principal\r\nE-mail\r\nBusca\r\nMeu Computador\r\nCalculadora\r\nMídia\r\nReproduzir/Pausar\r\nFaixa Anterior\r\nPróxima Faixa\r\nAumentar Volume\r\nDiminuir Volume\r\nMudo",
+      "variations": {
+        "enabled": false,
+        "colors": [],
+        "storage": [],
+        "ram": [],
+        "condition": [],
+        "combinations": [],
+        "colorsText": "",
+        "storageText": "",
+        "ramText": "",
+        "conditionText": "",
+        "combinationsText": ""
+      },
+      "id": 1781827066100,
+      "erp": {
+        "internalCode": "PRD-66"
+      },
+      "code": "PRD-66"
+    },
+    {
+      "name": "Adaptador Veicular P2 Bluetooth Receptor de Música",
+      "slug": "adaptador-veicular-p2-bluetooth-receptor-de-musica",
+      "price": null,
+      "image": "images/Adaptador P2 Bluetooth Receptor de Música R1914-500x500.jpg",
+      "gallery": [
+        "images/produtos/1781827782404-adaptador-p2-bluetooth-receptor-de-ma-sica-r1914-img2.jpg"
+      ],
+      "category": "acessorios",
+      "showPrice": false,
+      "featured": false,
+      "active": true,
+      "detailsEnabled": true,
+      "descriptionShort": "",
+      "descriptionLong": "Permite transmitir áudio via Bluetooth para qualquer equipamento de som.\n\n- Ligue Adaptador na USB e coloque cabo na parte traseira e o mesmo ligue no auxiliar do Radio\n- Pode ser utilizado para transmitir som do celular/tablet/notebook a uma distancia de até 10 metros sem fio\n- A entrada USB funciona apenas como fonte de alimentação para o receptor, pode ser utilizada uma fonte de celular com saída USB para esta alimentação, assim pode-se utilizar em qualquer equipamento de som.\n- Através do conector p2 o áudio é enviado para o radio, pode ser utilizado um cabo p2 / RCA para poder ligar a TV",
+      "variations": {
+        "enabled": false,
+        "colors": [],
+        "storage": [],
+        "ram": [],
+        "condition": [],
+        "combinations": [],
+        "labels": {},
+        "colorsText": "",
+        "storageText": "",
+        "ramText": "",
+        "conditionText": "",
+        "labelsText": "{}",
+        "combinationsText": ""
+      },
+      "id": 1781828065854,
+      "commercial": {
+        "costPrice": 1,
+        "erpPrice": null,
+        "marketplacePrice": null,
+        "promotionalPrice": null,
+        "desiredMarginPercent": null,
+        "expectedProfit": null,
+        "defaultCommissionPercent": null,
+        "cashPrice": null,
+        "installmentPrice": null,
+        "minimumPrice": null,
+        "minimumMarginPercent": null,
+        "discountPolicy": "inherit",
+        "maximumDiscountPercent": null,
+        "maximumDiscountAmount": null,
+        "requiresAuthorization": false
+      },
+      "inventory": {
+        "itemId": "PRD-1781828065854",
+        "stockControlled": true,
+        "allowNegative": true,
+        "minimumQuantity": 0,
+        "channelAvailability": {
+          "site": {
+            "mode": "shared",
+            "enabled": true,
+            "limit": null,
+            "physicalSafety": 0
+          }
+        }
+      },
+      "stock": 0,
+      "erp": {
+        "internalCode": "PRD-67",
+        "active": true,
+        "sku": "",
+        "supplierCode": "",
+        "searchAlias": "",
+        "barcode": "",
+        "brand": "",
+        "unit": "UN",
+        "category": "acessorios",
+        "subcategory": "",
+        "mainSupplierId": "",
+        "preferredSupplierId": ""
+      },
+      "code": "PRD-67",
+      "virtualStore": {
+        "active": true,
+        "channels": {
+          "lojaVirtual": {
+            "enabled": true
+          },
+          "mercadoLivre": {
+            "enabled": false
+          },
+          "shopee": {
+            "enabled": false
+          },
+          "amazon": {
+            "enabled": false
+          },
+          "magalu": {
+            "enabled": false
+          }
+        },
+        "name": "Adaptador Veicular P2 Bluetooth Receptor de Música",
+        "price": null,
+        "seoTitle": "",
+        "seoDescription": ""
+      },
+      "sku": "",
+      "barcode": "",
+      "brand": "",
+      "subcategory": "",
+      "tags": [],
+      "relatedManualIds": [],
+      "crossSellIds": [],
+      "showVariationsOnCard": false
+    },
+    {
+      "name": "Troca de Tela de Celulares",
+      "slug": "troca-de-tela-de-celulares",
+      "price": null,
+      "image": "images/Troca_de-Tela_card.png",
+      "gallery": [
+        "images/produtos/1782071417602-troca-de-bateria.png"
+      ],
+      "category": "assistencia-tecnica",
+      "showPrice": false,
+      "featured": false,
+      "active": true,
+      "detailsEnabled": true,
+      "descriptionShort": "Troca de telas para iPhone, Samsung, Motorola e Xiaomi, com serviço rápido, instalação profissional e garantia.",
+      "descriptionLong": "Assistência técnica especializada em troca de telas para iPhone, Samsung, Motorola e Xiaomi. Utilizamos peças de qualidade e realizamos a substituição com cuidado técnico, buscando devolver ao aparelho sua melhor aparência e funcionalidade. Serviço rápido, instalação profissional e garantia.",
+      "variations": {
+        "enabled": true,
+        "colors": [],
+        "storage": [
+          "Troca de Bateria",
+          "Troca de Entrada de Energia",
+          "Reparo na Placa"
+        ],
+        "ram": [],
+        "condition": [],
+        "combinations": [],
+        "labels": {
+          "colors": "Cor",
+          "storage": "Serviços"
+        },
+        "colorsText": "",
+        "storageText": "Troca de Bateria\nTroca de Entrada de Energia\nReparo na Placa",
+        "ramText": "",
+        "conditionText": "",
+        "labelsText": "{\"colors\":\"Cor\",\"storage\":\"Serviços\"}",
+        "combinationsText": ""
+      },
+      "id": 1782068543631,
+      "erp": {
+        "internalCode": "PRD-68"
+      },
+      "code": "PRD-68"
+    },
+    {
+      "name": "Samsung Galaxy S26 Ultra 5G 256gb 12gb ram",
+      "slug": "samsung-galaxy-s26-ultra-5g-256gb",
+      "price": null,
+      "image": "images/s26ultra.jpg",
+      "gallery": [],
+      "category": "smartphones",
+      "showPrice": false,
+      "featured": true,
+      "active": true,
+      "detailsEnabled": true,
+      "descriptionShort": "Samsung Galaxy S26 Ultra 5G – Titânio, Câmera de 200 MP, S Pen e 12GB RAM\n\nO Samsung Galaxy S26 Ultra 5G é o topo de linha definitivo para quem busca o máximo em fotografia, produtividade e desempenho. Equipado com 12GB de RAM e o poderoso processador Snapdragon 8 Gen 5, ele entrega velocidade extrema para qualquer tarefa. Seu design em titânio traz elegância e altíssima durabilidade, contando ainda com a caneta S Pen integrada e o avançado ecossistema Galaxy AI para tradução, buscas e edições inteligentes.",
+      "descriptionLong": "<p><b>Destaques do Produto:</b></p><ul><li><p><b>Construção em Titânio:</b> Design premium ultrarresistente, leve e com acabamento sofisticado.</p></li><li><p><b>Caneta S Pen Embutida:</b> Produtividade máxima para fazer anotações, desenhar e controlar a câmera à distância.</p></li><li><p><b>Câmera Monstruosa de 200 MP:</b> Fotos com riqueza de detalhes absurda e zoom óptico de ultra-alcance com estabilização.</p></li><li><p><b>Galaxy AI Avançado:</b> Inteligência artificial poderosa para otimização de fotos noturnas, resumos de textos e tradução simultânea.</p></li><li><p><b>Tela Plana de Elite:</b> Display Dynamic AMOLED 2X com taxa de 120Hz e vidro antirreflexo, perfeito para usar sob qualquer iluminação.</p></li></ul><p><b>Especificações Técnicas:</b></p><ul><li><p><b>Tela:</b> 6,8\" Dynamic AMOLED 2X QHD+ (120Hz) Antirreflexo</p></li><li><p><b>Processador:</b> Qualcomm Snapdragon 8 Gen 5 for Galaxy</p></li><li><p><b>Memória RAM:</b> 12GB</p></li><li><p><b>Armazenamento:</b> 256GB</p></li><li><p><b>Câmera Traseira:</b> Quádrupla (200 MP + 50 MP + 12 MP + 10 MP) com Zoom Óptico e OIS</p></li><li><p><b>Conectividade:</b> 5G, Wi-Fi 7, Bluetooth, NFC e S Pen integrada</p></li><li><p><b>Resistência:</b> Certificação IP68 (à prova d'água e poeira)</p></li></ul>",
+      "variations": {
+        "enabled": false,
+        "colors": [],
+        "storage": [],
+        "ram": [],
+        "condition": [],
+        "combinations": [],
+        "labels": {},
+        "colorsText": "",
+        "storageText": "",
+        "ramText": "",
+        "conditionText": "",
+        "labelsText": "{}",
+        "combinationsText": ""
+      },
+      "id": 1782677744401,
+      "stock": null,
+      "tags": [],
+      "relatedManualIds": [],
+      "crossSellIds": [],
+      "showVariationsOnCard": false,
+      "erp": {
+        "internalCode": "PRD-69"
+      },
+      "code": "PRD-69"
+    },
+    {
+      "name": "Tablet Samsung Galaxy Tab S10 FE 128 Gb",
+      "slug": "tablet-samsung-galaxy-tab-s10-fe-128gb",
+      "price": null,
+      "image": "images/Tablet Samsung S10fe.jpeg",
+      "gallery": [],
+      "category": "eletronicos",
+      "showPrice": false,
+      "featured": false,
+      "active": true,
+      "detailsEnabled": true,
+      "descriptionShort": "",
+      "descriptionLong": "* Tela: LCD de 10,9 polegadas com taxa de atualização de 90Hz.\r\n* Processador: Octa-Core Exynos 1580.\r\n* Câmera Traseira: 13 MP com gravação de vídeo em até 4K.\r\n* Câmera Frontal: 12 MP Ultra Wide ideal para videochamadas.\r\n* Bateria: 8.000 mAh com suporte a carregamento rápido de 45W.\r\n* Sistema Operacional: Android com interface One UI e recursos de inteligência artificial.\r\n* Conectividade: Versões com Wi-Fi 6 ou suporte a redes móveis 5G, além de Bluetooth 5.3 e GPS.\r\n* Áudio: Alto-falantes duplos com tecnologia Dolby Atmos.\r\n* Construção: Design fino e elegante com certificação IP68 de resistência a água e poeira.\r\n* Diferencial: Caneta S Pen inclusa na caixa para escrita e desenhos.",
+      "variations": {
+        "enabled": false,
+        "colors": [],
+        "storage": [],
+        "ram": [],
+        "condition": [],
+        "combinations": [],
+        "labels": {},
+        "colorsText": "",
+        "storageText": "",
+        "ramText": "",
+        "conditionText": "",
+        "labelsText": "{}",
+        "combinationsText": ""
+      },
+      "id": 1782679096916,
+      "erp": {
+        "internalCode": "PRD-70"
+      },
+      "code": "PRD-70"
+    },
+    {
+      "name": "Garrafa de Tinta Epson T544",
+      "slug": "garrafa-de-tinta-epson-t544",
+      "price": null,
+      "image": "images/Garrafa de tinta epson 544 preto.jpeg",
+      "gallery": [
+        "images/produtos/1782679478860-garrafa-de-tinta-epson-544-amarelo.jpeg",
+        "images/produtos/1782679478864-garrafa-de-tinta-epson-544-ciano.jpeg",
+        "images/produtos/1782679478873-garrafa-de-tinta-epson-544-magenta.jpeg"
+      ],
+      "category": "eletronicos",
+      "showPrice": false,
+      "featured": false,
+      "active": true,
+      "detailsEnabled": true,
+      "descriptionShort": "",
+      "descriptionLong": "<b>Compatibilidade:</b> Impressoras Epson EcoTank L3110, L3150, L3210, L3250, L5190, L5290 e modelos similares.\nRefil: 65 ml por garrafa.\nRendimento Estimado: Até 4.500 páginas em preto ou até 7.500 páginas em cores\nDiferencial: Sistema de abastecimento Ecofit que evita derramamentos e erros de cor",
+      "variations": {
+        "enabled": true,
+        "colors": [
+          {
+            "name": "Preto",
+            "hex": "#111111",
+            "image": ""
+          },
+          {
+            "name": "Magenta",
+            "hex": "#ff00ff",
+            "image": ""
+          },
+          {
+            "name": "Ciano",
+            "hex": "#0019ff",
+            "image": ""
+          },
+          {
+            "name": "Amarelo",
+            "hex": "#fff700",
+            "image": ""
+          }
+        ],
+        "storage": [],
+        "ram": [],
+        "condition": [],
+        "combinations": [
+          {
+            "color": "Preto",
+            "storage": "",
+            "ram": "",
+            "condition": "",
+            "image": "images/Garrafa de tinta epson 544 preto.jpeg",
+            "stock": null
+          },
+          {
+            "color": "Magenta",
+            "storage": "",
+            "ram": "",
+            "condition": "",
+            "image": "images/Garrafa de tinta epson 544 magenta.jpeg",
+            "stock": null
+          },
+          {
+            "color": "Ciano",
+            "storage": "",
+            "ram": "",
+            "condition": "",
+            "image": "images/Garrafa de tinta epson 544 ciano.jpeg",
+            "stock": null
+          },
+          {
+            "color": "Amarelo",
+            "storage": "",
+            "ram": "",
+            "condition": "",
+            "image": "images/Garrafa de tinta epson 544 amarelo.jpeg",
+            "stock": null
+          }
+        ],
+        "labels": {},
+        "colorsText": "Preto|#111111\nMagenta|#ff00ff\nCiano|#0019ff\nAmarelo|#fff700",
+        "storageText": "",
+        "ramText": "",
+        "conditionText": "",
+        "labelsText": "{}",
+        "combinationsText": "Preto||||images/Garrafa de tinta epson 544 preto.jpeg\nMagenta||||images/Garrafa de tinta epson 544 magenta.jpeg\nCiano||||images/Garrafa de tinta epson 544 ciano.jpeg\nAmarelo||||images/Garrafa de tinta epson 544 amarelo.jpeg"
+      },
+      "id": 1782679964152,
+      "stock": null,
+      "showVariationsOnCard": true,
+      "tags": [],
+      "relatedManualIds": [],
+      "crossSellIds": [],
+      "erp": {
+        "internalCode": "PRD-71"
+      },
+      "code": "PRD-71"
+    },
+    {
+      "name": "Monitor Aoc 23,8 Led Full-hd 100hz",
+      "slug": "monitor-aoc-23-8-led-full-hd-100hz",
+      "price": null,
+      "stock": null,
+      "image": "images/monitorAOC23.8.jpeg",
+      "gallery": [
+        "images/produtos/1782947345059-2-monitoraoc23-8.jpeg",
+        "images/produtos/1782947345060-3-monitoraoc23-8.jpeg"
+      ],
+      "category": "eletronicos",
+      "showPrice": false,
+      "featured": false,
+      "active": true,
+      "detailsEnabled": true,
+      "descriptionShort": "",
+      "descriptionLong": "<div>O Monitor AOC Gaming 24B30HM2 combina alta performance e conforto visual num design ultrafino com bordas infinitas em 3 lados. Perfeito para jogos, trabalho e setups multi-monitores, oferece a fluidez que precisas com imagens nítidas de qualquer ângulo.</div><div><br></div><div><b>Destaques do Produto:</b></div><div>* Máxima Fluidez: Taxa de atualização de 100Hz e tempo de resposta de 1ms para uma jogabilidade rápida e sem rastros.</div><div>* Gráficos Perfeitos: Tecnologia Adaptive-Sync que elimina cortes e rasgos de imagem (tearing).</div><div>* Imagens Impressionantes: Painel VA com resolução Full HD e amplo ângulo de visão de 178°.</div><div>* Proteção para os Olhos: Tecnologias Flicker-Free e Low Blue Mode que reduzem a fadiga ocular em longos períodos de uso.</div><div><br></div><div><b>Especificações Técnicas:</b></div><div>* Tela: 23,8\" Widescreen VA (Bordas Ultrafinas)</div><div>* Resolução: 1920 x 1080 Full HD</div><div>* Taxa de Atualização: 100Hz</div><div>* Tempo de Resposta: 1ms</div><div>* Conexões: 1x HDMI 1.4 | 1x VGA</div><div>* Tecnologias: Adaptive-Sync, Flicker-Free, Low Blue Mode e Modo HDR</div><div>* Fixação VESA: Sim (compatível com suportes de parede/braços articulados)</div><div>* Voltagem: Bivolt</div><div><br></div><div><b>Conteúdo da Embalagem:</b></div><div>Monitor AOC 23,8\", Cabo de Força, Cabo HDMI e Base.</div>",
+      "variations": {
+        "enabled": false,
+        "colors": [],
+        "storage": [],
+        "ram": [],
+        "condition": [],
+        "combinations": [],
+        "labels": {},
+        "colorsText": "",
+        "storageText": "",
+        "ramText": "",
+        "conditionText": "",
+        "labelsText": "{}",
+        "combinationsText": ""
+      },
+      "id": 1782947479539,
+      "erp": {
+        "internalCode": "PRD-72"
+      },
+      "code": "PRD-72"
+    },
+    {
+      "name": "Antena Starlink Mini, Internet Via Satélite de Alta Velocidade, Portátil, WIFI 5",
+      "slug": "antena-starlink-mini-internet-via-satelite-portatil-wifi5",
+      "price": null,
+      "stock": null,
+      "image": "images/Starlink_mini.jpeg",
+      "gallery": [
+        "images/produtos/1782950185963-starlink-mini-2.png"
+      ],
+      "category": "eletronicos",
+      "showPrice": false,
+      "featured": false,
+      "active": true,
+      "detailsEnabled": true,
+      "descriptionShort": "",
+      "descriptionLong": "<p>A Starlink Mini é a solução definitiva de conectividade ultraportátil, projetada para entregar internet de alta velocidade e baixa latência em qualquer lugar do planeta. Com design compacto que cabe na mochila, ela traz o roteador Wi-Fi 5 integrado diretamente no corpo da antena, reduzindo cabos e simplificando a instalação</p><p><b>Destaques do Produto:</b></p><ul><li><p><b>Mobilidade Total:</b> Design ultraleve (apenas 1,1 kg) e compacto, feito para levar na mochila.</p></li><li><p><b>Roteador Wi-Fi 5 Integrado:</b> Dispensa roteador externo, conecta até 128 dispositivos e cobre até 112 m².</p></li><li><p><b>Alta Performance:</b> Velocidades acima de 100 Mbps para streaming, jogos e videochamadas sem travar.</p></li><li><p><b>Resistência Extrema:</b> Certificação IP67 (totalmente à prova de poeira e resistente à água).</p></li><li><p><b>Alimentação Flexível:</b> Funciona na tomada padrão ou via fontes portáteis/powerbanks (USB-C PD de 100W).</p></li></ul><p><b>Especificações Técnicas:</b></p><ul><li><p><b>Modelo:</b> Starlink Mini com Wi-Fi embutido</p></li><li><p><b>Tecnologia Sem Fio:</b> Wi-Fi 5 (Dual Band 3x3 MU-MIMO)</p></li><li><p><b>Velocidade Média:</b> Acima de 100 Mbps</p></li><li><p><b>Conectividade:</b> 1x Porta Ethernet LAN (com vedação)</p></li><li><p><b>Proteção:</b> Classificação IP67 (resistente a chuva e poeira)</p></li><li><p><b>Dimensões e Peso:</b> 29,8 x 25,9 cm | 1,1 kg</p></li></ul><p><b>Conteúdo da Embalagem:</b>\nAntena Starlink Mini, Apoio de Mesa, Adaptador de Tubo, Cabo de Alimentação CC (15m) e Fonte de Alimentação.</p>",
+      "variations": {
+        "enabled": false,
+        "colors": [],
+        "storage": [],
+        "ram": [],
+        "condition": [],
+        "combinations": [],
+        "labels": {},
+        "colorsText": "",
+        "storageText": "",
+        "ramText": "",
+        "conditionText": "",
+        "labelsText": "{}",
+        "combinationsText": ""
+      },
+      "id": 1782950375032,
+      "tags": [
+        "Novidade"
+      ],
+      "showVariationsOnCard": false,
+      "relatedManualIds": [],
+      "crossSellIds": [],
+      "erp": {
+        "internalCode": "PRD-73"
+      },
+      "code": "PRD-73"
+    },
+    {
+      "name": "Smart TV 4K 55\" LG QNED73 Google Cast Integrado Controle AI Magic WebOS 25",
+      "slug": "smart-tv-4k-55-lg-qned73-googlecast-integrado-controle-ai-webos-25",
+      "price": null,
+      "stock": null,
+      "image": "images/tv55LG (1).jpeg",
+      "gallery": [
+        "images/produtos/1782951486127-tv55lg-2.jpeg",
+        "images/produtos/1782951486132-tv55lg-3.jpeg",
+        "images/produtos/1782951486137-tv55lg-4.jpeg",
+        "images/produtos/1782951486148-tv55lg-5.jpeg"
+      ],
+      "category": "eletronicos",
+      "showPrice": false,
+      "featured": true,
+      "active": true,
+      "detailsEnabled": true,
+      "descriptionShort": "",
+      "descriptionLong": "<p>A <b>Smart TV LG QNED73 de 55\"</b> combina as tecnologias Quantum Dot e NanoCell para entregar cores puras, brilho impressionante e um contraste revolucionário. Equipada com o avançado Processador AI α7 Gen8, ela otimiza automaticamente imagem e som em tempo real, transformando qualquer conteúdo em uma experiência de cinema. É a escolha perfeita para streaming, jogos e esportes na sua sala.</p><p><b>Destaques do Produto:</b></p><ul><li><p><b>Tecnologia QNED:</b> Cores incrivelmente puras e ricas através da combinação perfeita de Quantum Dot e NanoCell.</p></li><li><p><b>Inteligência Artificial Avançada:</b> Processador AI α7 Gen8 4K com <i>Super Upscaling</i>, que melhora a definição de conteúdos de menor resolução.</p></li><li><p><b>Controle Inteligente:</b> Inclui o controle <i>AI Magic</i>, que funciona como um mouse na tela e aceita comandos de voz.</p></li><li><p><b>Sistema Atualizado:</b> Navegação fluida com o sistema <i>webOS 25</i>, com acesso fácil aos principais aplicativos de streaming.</p></li><li><p><b>Conectividade e Transmissão:</b> <i>Google Cast</i> integrado para espelhar seu smartphone ou tablet num piscar de olhos.</p></li><li><p><b>Foco em Esportes e Games:</b> Modo Esportes, Alerta de Esportes para não perder nenhum lance do seu time e Portal de Games dedicado para jogar direto na TV.</p></li></ul><p><b>Especificações Técnicas:</b></p><ul><li><p><b>Tamanho da Tela:</b> 55 polegadas</p></li><li><p><b>Resolução:</b> 4K Ultra HD (3840 x 2160)</p></li><li><p><b>Tecnologia do Painel:</b> QNED (Quantum Dot + NanoCell)</p></li><li><p><b>Processador:</b> α7 Gen8 AI Processor 4K</p></li><li><p><b>Sistema Operacional:</b> webOS 25</p></li><li><p><b>Conectividade:</b> Wi-Fi, Bluetooth, Entradas HDMI e USB</p></li><li><p><b>Recursos Especiais:</b> Google Cast, Controle AI Magic, Assistentes de Voz integrados</p></li></ul><p><b>Conteúdo da Embalagem:</b>\nSmart TV LG 55\", Controle Remoto AI Magic, Pilhas, Cabo de Força, Base (Pés) e Manual do Usuário.</p>",
+      "variations": {
+        "enabled": false,
+        "colors": [],
+        "storage": [],
+        "ram": [],
+        "condition": [],
+        "combinations": [],
+        "labels": {},
+        "colorsText": "",
+        "storageText": "",
+        "ramText": "",
+        "conditionText": "",
+        "labelsText": "{}",
+        "combinationsText": ""
+      },
+      "id": 1782951548072,
+      "tags": [],
+      "showVariationsOnCard": false,
+      "relatedManualIds": [],
+      "crossSellIds": [],
+      "erp": {
+        "internalCode": "PRD-74"
+      },
+      "code": "PRD-74"
+    },
+    {
+      "name": "Pc Gamer Completo Intel I7 Rtx 3050 Ram 16gb Ssd 512gb Monitor 24\"",
+      "slug": "pc-gamer-intel-i7-rtx-3050-ram-16gb-ssd-512gb-monitor-24",
+      "price": null,
+      "stock": null,
+      "image": "images/Pc Gamer Intel I7 Rtx 3050 Ram 16gb Ssd 512gb Monitor 24 (1).jpeg",
+      "gallery": [
+        "images/produtos/1783102864697-pc-gamer-intel-i7-rtx-3050-ram-16gb-ssd-512gb-monitor-24-2.jpeg",
+        "images/produtos/1783102864702-pc-gamer-intel-i7-rtx-3050-ram-16gb-ssd-512gb-monitor-24-3.jpeg",
+        "images/produtos/1783102864720-pc-gamer-intel-i7-rtx-3050-ram-16gb-ssd-512gb-monitor-24-4.jpeg",
+        "images/produtos/1783102864722-pc-gamer-intel-i7-rtx-3050-ram-16gb-ssd-512gb-monitor-24-5.jpeg"
+      ],
+      "category": "eletronicos",
+      "tags": [
+        "Oferta"
+      ],
+      "relatedManualIds": [],
+      "crossSellIds": [],
+      "showPrice": false,
+      "featured": true,
+      "active": true,
+      "detailsEnabled": true,
+      "showVariationsOnCard": false,
+      "descriptionShort": "Uma máquina potente, montada por profissionais com mais de 10 anos de experiência, pronta para rodar seus jogos favoritos e encarar qualquer rotina de estudos ou trabalho",
+      "descriptionLong": "<div>🛠️ Especificações Técnicas:</div><div><br></div><div>Processador: Intel Core i7</div><div><br></div><div>Placa-Mãe: Chipset Intel H61</div><div><br></div><div>Memória RAM: 16GB DDR3 (2x 8GB)</div><div><br></div><div>Placa de Vídeo: NVIDIA GeForce RTX 3050</div><div><br></div><div>Armazenamento: SSD 480GB (Ultra Velocidade)</div><div><br></div><div>Fonte: 500W Bivolt</div><div><br></div><div>Gabinete: Gamer Estilo Aquário com 3 Fans RGB</div><div><br></div><div>Monitor: 23.8\" Polegadas - 100Hz</div><div><br></div><div>Kit Periféricos: Teclado, Mouse, Headset e Mousepad Gamer</div><div><br></div><div>Sistema: Windows 10 ou 11, cliente escolhe</div>",
+      "variations": {
+        "enabled": false,
+        "colors": [],
+        "storage": [],
+        "ram": [],
+        "condition": [],
+        "combinations": [],
+        "labels": {},
+        "colorsText": "",
+        "storageText": "",
+        "ramText": "",
+        "conditionText": "",
+        "labelsText": "{}",
+        "combinationsText": ""
+      },
+      "id": 1783102892175,
+      "erp": {
+        "internalCode": "PRD-75"
+      },
+      "code": "PRD-75"
+    },
+    {
+      "name": "Chip Vivo Pré Pago",
+      "slug": "chip-vivo-pre-pago",
+      "price": null,
+      "stock": null,
+      "image": "images/Chip_vivo.jpeg",
+      "gallery": [],
+      "category": "acessorios",
+      "tags": [],
+      "relatedManualIds": [],
+      "crossSellIds": [],
+      "showPrice": false,
+      "featured": false,
+      "active": true,
+      "detailsEnabled": true,
+      "showVariationsOnCard": false,
+      "descriptionShort": "Chip Vivo Pré Pago: Conecte-se com planos flexíveis e bônus exclusivos. A qualidade da rede Vivo na palma da sua mão para você falar e navegar sem preocupações.",
+      "descriptionLong": "<p><strong>Chip Vivo Pré Pago</strong> oferece conectividade confiável e planos flexíveis para você controlar seus gastos. Ideal para quem busca liberdade para falar e navegar, com a qualidade e cobertura da rede Vivo.</p><ul><li><strong>Operadora:</strong> Vivo</li><li><b>Formato:</b> Triplo corte (Ajustável em tamanho Mini, Micro e Nano Chip, compatível com qualquer celular)</li><li><strong>Tipo:</strong> Chip Pré Pago</li><li><strong>Cobertura:</strong> Nacional (verificar área de cobertura específica)</li><li><strong>Tecnologia:</strong> Compatível com redes 3G, 4G e 5G&nbsp;<br><br><br></li></ul>",
+      "variations": {
+        "enabled": false,
+        "colors": [],
+        "storage": [],
+        "ram": [],
+        "condition": [],
+        "combinations": [],
+        "labels": {},
+        "colorsText": "",
+        "storageText": "",
+        "ramText": "",
+        "conditionText": "",
+        "labelsText": "{}",
+        "combinationsText": ""
+      },
+      "id": 1783337681331,
+      "erp": {
+        "internalCode": "PRD-76"
+      },
+      "code": "PRD-76"
+    },
+    {
+      "name": "Capa TPU Antishock Premium, Diversos Modelos",
+      "slug": "capa-tpu-antishock-premium-diversos-modelos",
+      "price": null,
+      "stock": null,
+      "image": "images/Capa TPU Antishock Premium Samsung - Transparente-500x500.jpg",
+      "gallery": [],
+      "category": "acessorios",
+      "tags": [],
+      "relatedManualIds": [],
+      "crossSellIds": [],
+      "showPrice": false,
+      "featured": false,
+      "active": true,
+      "detailsEnabled": true,
+      "showVariationsOnCard": false,
+      "descriptionShort": "",
+      "descriptionLong": "<p>A Capa Anti Impacto Transparente oferece proteção sem esconder o design do seu smartphone. Fabricada em TPU flexível de alta qualidade, possui cantos reforçados com tecnologia anti-impacto, ajudando a absorver choques causados por quedas e protegendo o aparelho contra riscos e arranhões.</p><p>✔ Material flexível e resistente.<br>✔ Cantos reforçados com proteção anti-impacto.<br>✔ Transparência que valoriza o design do aparelho.<br>✔ Encaixe preciso para câmera, botões e conexões.</p>",
+      "variations": {
+        "enabled": false,
+        "colors": [],
+        "storage": [],
+        "ram": [],
+        "condition": [],
+        "combinations": [],
+        "labels": {},
+        "colorsText": "",
+        "storageText": "",
+        "ramText": "",
+        "conditionText": "",
+        "labelsText": "{}",
+        "combinationsText": ""
+      },
+      "id": 1783429578989,
+      "erp": {
+        "internalCode": "PRD-77"
+      },
+      "code": "PRD-77"
+    },
+    {
+      "name": "Capa Carteira Diversos Modelos",
+      "slug": "capa-carteira-diversos-modelos",
+      "price": null,
+      "stock": null,
+      "image": "images/Book Cover PReta-500x500.jpg",
+      "gallery": [
+        "images/produtos/1783430239782-capa-carteira2.jpeg"
+      ],
+      "category": "acessorios",
+      "tags": [],
+      "relatedManualIds": [],
+      "crossSellIds": [],
+      "showPrice": false,
+      "featured": false,
+      "active": true,
+      "detailsEnabled": true,
+      "showVariationsOnCard": false,
+      "descriptionShort": "",
+      "descriptionLong": "<p>Proteja seu smartphone com estilo e praticidade. A Case Carteira possui acabamento moderno, encaixe perfeito para o aparelho e recortes precisos para câmera, botões e entradas.</p><p>✔ Fechamento magnético para maior segurança.<br>✔ Compartimentos internos para cartões.<br>✔ Proteção para tela e traseira do aparelho.<br>✔ Design elegante e funcional para o dia a dia.</p>",
+      "variations": {
+        "enabled": false,
+        "colors": [],
+        "storage": [],
+        "ram": [],
+        "condition": [],
+        "combinations": [],
+        "labels": {},
+        "colorsText": "",
+        "storageText": "",
+        "ramText": "",
+        "conditionText": "",
+        "labelsText": "{}",
+        "combinationsText": ""
+      },
+      "id": 1783430267700,
+      "erp": {
+        "internalCode": "PRD-78"
+      },
+      "code": "PRD-78"
+    },
+    {
+      "name": "Motorola Moto G17 128GB  (4GB RAM + 8GB RAM Boost)",
+      "slug": "motorola-moto-g17-128gb-4gb-ram-8gb-ram-boost",
+      "price": null,
+      "stock": null,
+      "image": "images/MotoG17 (2).jpeg",
+      "gallery": [
+        "images/produtos/1783638581213-motog17-rosa.png",
+        "images/produtos/1783638581222-motog17-roxo.png"
+      ],
+      "category": "smartphones",
+      "tags": [],
+      "relatedManualIds": [],
+      "crossSellIds": [],
+      "showPrice": false,
+      "featured": false,
+      "active": true,
+      "detailsEnabled": true,
+      "showVariationsOnCard": false,
+      "descriptionShort": "O Moto G17 é a escolha ideal para o uso diário, unindo design moderno e eficiência. Com a tecnologia RAM Boost, ele oferece um desempenho fluido para alternar entre aplicativos, garantindo que você tenha velocidade e espaço de sobra para seus arquivos, fotos e vídeos",
+      "descriptionLong": "<p><b>Destaques do Produto:</b></p><ul><li><p><b>Performance Turbinada:</b> 4GB de RAM física somados a <b>+8GB de RAM Boost</b> (virtual) para um multitarefa mais ágil.</p></li><li><p><b>Armazenamento de 128GB:</b> Espaço confortável para salvar aplicativos, fotos e mídias sem preocupações.</p></li><li><p><b>Bateria de Longa Duração:</b> Capacidade de 5.000 mAh para acompanhar você o dia todo, longe da tomada.</p></li><li><p><b>Sistema de Câmeras com IA:</b> Capturas nítidas e vídeos de qualidade com recursos de inteligência artificial.</p></li><li><p><b>Design Ergonômico:</b> Acabamento moderno e confortável para o uso com uma só mão.</p></li></ul><p><b>Especificações Técnicas:</b></p><ul><li><p><b>Tela:</b> IPS LCD de alta definição e fluidez</p></li><li><p><b>Memória RAM:</b> 4GB + 8GB RAM Boost</p></li><li><p><b>Armazenamento:</b> 128GB</p></li><li><p><b>Câmera Traseira:</b> Sensor principal de alta resolução com IA</p></li><li><p><b>Bateria:</b> 5.000 mAh com carregamento rápido</p></li><li><p><b>Conectividade:</b> Bluetooth, Wi-Fi e USB-C</p></li></ul><p><b>Conteúdo da Embalagem:</b>\nSmartphone Moto G17, Carregador, Cabo USB, Extrator de Chip e Manuais</p>",
+      "variations": {
+        "enabled": true,
+        "colors": [
+          {
+            "name": "Azul Claro",
+            "hex": "#4f94ee",
+            "image": "images/MotoG17 (2).jpeg"
+          },
+          {
+            "name": "Rosa",
+            "hex": "#d44ec2",
+            "image": "images/MotoG17 (1).jpeg"
+          },
+          {
+            "name": "Roxo",
+            "hex": "#8a46aa",
+            "image": "images/MotoG17 (3).jpeg"
+          }
+        ],
+        "storage": [],
+        "ram": [],
+        "condition": [],
+        "combinations": [],
+        "labels": {},
+        "colorsText": "Azul Claro|#4f94ee|images/MotoG17 (2).jpeg\nRosa|#d44ec2|images/MotoG17 (1).jpeg\nRoxo|#8a46aa|images/MotoG17 (3).jpeg",
+        "storageText": "",
+        "ramText": "",
+        "conditionText": "",
+        "labelsText": "{}",
+        "combinationsText": ""
+      },
+      "id": 1783638856827,
+      "erp": {
+        "internalCode": "PRD-79"
+      },
+      "code": "PRD-79"
+    },
+    {
+      "name": "Microfone Lapela Celular Bluetooth Tipo C",
+      "slug": "microfone-lapela-celular-bluetooth-tipo-c",
+      "price": null,
+      "stock": null,
+      "image": "images/Microfone_bluetooth_lapela.jpeg",
+      "gallery": [
+        "images/produtos/1783640105651-microfone-lapela-bluetooth2.jpeg"
+      ],
+      "category": "acessorios",
+      "tags": [],
+      "relatedManualIds": [],
+      "crossSellIds": [],
+      "showPrice": false,
+      "featured": false,
+      "active": true,
+      "detailsEnabled": true,
+      "showVariationsOnCard": false,
+      "descriptionShort": "O Microfone de Lapela H'maston MK04 é a solução perfeita para quem busca melhorar a qualidade de áudio em gravações de vídeos, stories, lives, entrevistas e vlogs. Com conexão sem fio estável e plug-and-play via porta USB-C (Tipo C), ele dispensa o uso de cabos, permitindo total liberdade de movimento com um som limpo, cristalino e livre de ruídos externos",
+      "descriptionLong": "<p><b>Destaques do Produto:</b></p><ul><li><p><b>Conexão Sem Fio Automática:</b> Basta plugar o receptor na entrada Tipo C do celular e ligar o microfone para começar a gravar instantaneamente.</p></li><li><p><b>Redução de Ruído Inteligente:</b> Captação omnidirecional de 360° com filtro que isola o barulho do ambiente, focando apenas na sua voz.</p></li><li><p><b>Liberdade de Movimento:</b> Conectividade sem fio de longo alcance, ideal para gravações dinâmicas em ambientes internos ou externos.</p></li><li><p><b>Design Discreto e Leve:</b> Clipe de lapela firme e leve, que se prende facilmente à roupa sem chamar a atenção.</p></li><li><p><b>Bateria de Longa Duração:</b> Bateria interna recarregável que garante autonomia para várias horas seguidas de gravação.</p></li></ul><p><b>Especificações Técnicas:</b></p><ul><li><p><b>Marca:</b> H'maston</p></li><li><p><b>Modelo:</b> MK04-TIPOC</p></li><li><p><b>Conexão:</b> Receptor USB-C (Tipo C)</p></li><li><p><b>Frequência:</b> Bluetooth de alta fidelidade</p></li><li><p><b>Captação:</b> 360 Graus (Omnidirecional)</p></li><li><p><b>Alimentação:</b> Bateria interna recarregável via cabo USB<br></p></li><li><p><b>Duração da Bateria:</b> Até <b>5 a 6 horas</b> de uso contínuo com uma única carga.</p></li><li><p><b>Tempo de Recarga:</b> Aproximadamente<b>&nbsp;2 horas</b> para carregar totalmente</p></li></ul>",
+      "variations": {
+        "enabled": false,
+        "colors": [],
+        "storage": [],
+        "ram": [],
+        "condition": [],
+        "combinations": [],
+        "labels": {},
+        "colorsText": "",
+        "storageText": "",
+        "ramText": "",
+        "conditionText": "",
+        "labelsText": "{}",
+        "combinationsText": ""
+      },
+      "id": 1783640236000,
+      "erp": {
+        "internalCode": "PRD-80"
+      },
+      "code": "PRD-80"
+    },
+    {
+      "name": "Ring Light Iluminador Led 12 Polegadas 30cm + Tripé 210cm",
+      "slug": "ring-light-iluminador-led-12-polegadas-30cm-tripe-210cm",
+      "price": null,
+      "stock": null,
+      "image": "images/Tripe_RingLight_12 (1).jpeg",
+      "gallery": [
+        "images/produtos/1783640571341-tripe-ringlight-12-2.jpeg",
+        "images/produtos/1783640571344-tripe-ringlight-12-3.jpeg"
+      ],
+      "category": "acessorios",
+      "tags": [],
+      "relatedManualIds": [],
+      "crossSellIds": [],
+      "showPrice": false,
+      "featured": false,
+      "active": true,
+      "detailsEnabled": true,
+      "showVariationsOnCard": false,
+      "descriptionShort": "O Ring Light de 12 polegadas é o acessório perfeito para iluminar suas fotos, selfies, stories, vídeos e transmissões ao vivo. Ele garante uma luz uniforme que realça os detalhes e elimina sombras indesejadas, deixando seus conteúdos com aspecto muito mais profissional",
+      "descriptionLong": "<p><b>Destaques do Produto:</b></p><ul><li><p><b>3 Tons de Iluminação:</b> Luz branca fria, branca morna e amarela, ajustáveis diretamente no controle integrado ao cabo.</p></li><li><p><b>Tripé Ajustável:</b> Suporte robusto com altura regulável que vai de 65 cm (mínima) até 2,10 metros (máxima).</p></li><li><p><b>Suporte de Celular Incluso:</b> Adaptador flexível de smartphone posicionado no centro do anel para facilitar o enquadramento perfeito.</p></li><li><p><b>Alimentação Via USB:</b> Pode ser ligado facilmente em carregadores de celular, notebooks ou powerbanks.</p></li></ul><p><b>Especificações Técnicas:</b></p><ul><li><p><b>Tamanho do Anel:</b> 12 polegadas (30 cm)</p></li><li><p><b>Potência:</b> 37W</p></li><li><p><b>Altura Máxima do Tripé:</b> 2,10 metros</p></li><li><p><b>Altura Mínima do Tripé:</b> 65 cm</p></li><li><p><b>Alimentação:</b> Cabo USB com controle integrado</p></li><li><p><b>Garantia:</b>&nbsp;30 dias<br></p></li></ul><p><b>Conteúdo da Embalagem:</b>\r\n1 Ring Light de 30 cm, 1 Tripé de até 2,10 m, 1 Suporte Flexível para Celular.</p>",
+      "variations": {
+        "enabled": false,
+        "colors": [],
+        "storage": [],
+        "ram": [],
+        "condition": [],
+        "combinations": [],
+        "labels": {},
+        "colorsText": "",
+        "storageText": "",
+        "ramText": "",
+        "conditionText": "",
+        "labelsText": "{}",
+        "combinationsText": ""
+      },
+      "id": 1783640758981,
+      "erp": {
+        "internalCode": "PRD-81"
+      },
+      "code": "PRD-81"
+    },
+    {
+      "name": "Notebook Acer Aspire 5 AMD Ryzen 5 5500U • 16 GB DDR4 • 512 GB SSD • Tela 15,6\" FHD IPS • Windows 11 Home • Wi-Fi 6",
+      "slug": "notebook-acer-aspire-5-amd-ryzen-5-5500u-16gb-512gb-ssd",
+      "price": null,
+      "stock": null,
+      "image": "images/Notebook Acer Aspire 5 A515-45-R043 - AMD Ryzen 5 5500U (1).jpeg",
+      "gallery": [
+        "images/produtos/1783641127583-notebook-acer-aspire-5-a515-45-r043-amd-ryzen-5-5500u-2.jpeg",
+        "images/produtos/1783641127585-notebook-acer-aspire-5-a515-45-r043-amd-ryzen-5-5500u-3.jpeg"
+      ],
+      "category": "eletronicos",
+      "tags": [],
+      "relatedManualIds": [],
+      "crossSellIds": [],
+      "showPrice": false,
+      "featured": false,
+      "active": true,
+      "detailsEnabled": true,
+      "showVariationsOnCard": false,
+      "descriptionShort": "O Acer Aspire 5 é a escolha ideal para quem precisa de máxima produtividade, agilidade em tarefas exigentes e excelente desempenho multitarefa. Equipado com o processador AMD Ryzen 5 e impressionantes 16GB de memória RAM, este notebook garante fluidez total para trabalhar com várias abas e programas abertos ao mesmo tempo, além de contar com uma tela IPS de alta qualidade para o seu conforto visual",
+      "descriptionLong": "<p><b>Destaques do Produto:</b></p><ul><li><p><b>Excelente Performance:</b> Processador Ryzen 5 de 6 núcleos aliado a 16GB de RAM, ideal para trabalho, estudos pesados e multitarefas sem travamentos.</p></li><li><p><b>Tela Premium FHD IPS:</b> Resolução Full HD com painel IPS, que entrega cores muito mais vivas e ângulos de visão perfeitos, sem distorção.</p></li><li><p><b>Inicialização Ultrarrápida:</b> Armazenamento SSD 512GB que liga o sistema em poucos segundos.</p></li><li><p><b>Conectividade Avançada:</b> Equipado com Wi-Fi 6, proporcionando uma conexão de internet sem fio muito mais estável e veloz.</p></li><li><p><b>Design Elegante:</b> Visual moderno com acabamento refinado, sendo fino e prático para transportar no dia a dia.</p></li></ul><p><b>Especificações Técnicas:</b></p><ul><li><p><b>Tela:</b> 15.6\" Full HD (1920 x 1080) Tecnologia IPS, Antirreflexo</p></li><li><p><b>Processador:</b> AMD Ryzen 5 5500U (6 núcleos, 12 threads, até 4.0GHz)</p></li><li><p><b>Memória RAM:</b> 16GB DDR4</p></li><li><p><b>Armazenamento:</b> 512GB SSD NVMe PCIe</p></li><li><p><b>Placa de Vídeo:</b> AMD Radeon™ Graphics (Integrada)</p></li><li><p><b>Sistema Operacional:</b> Windows 11 Home</p></li><li><p><b>Conectividade:</b> Wi-Fi 6, Bluetooth e porta Gigabit Ethernet (RJ-45)</p></li></ul><p><b>Conteúdo da Embalagem:</b>\r\nNotebook Acer Aspire 5, Fonte de Alimentação (Carregador) e Manuais.</p>",
+      "variations": {
+        "enabled": false,
+        "colors": [],
+        "storage": [],
+        "ram": [],
+        "condition": [],
+        "combinations": [],
+        "labels": {},
+        "colorsText": "",
+        "storageText": "",
+        "ramText": "",
+        "conditionText": "",
+        "labelsText": "{}",
+        "combinationsText": ""
+      },
+      "id": 1783641240775,
+      "erp": {
+        "internalCode": "PRD-82"
+      },
+      "code": "PRD-82"
+    },
+    {
+      "name": "Carregador Turbo De Celular Tipo C 20w",
+      "slug": "carregador-turbo-de-celular-tipo-c-20w",
+      "price": null,
+      "stock": null,
+      "image": "images/Carregador Kaidi 20w.jpeg",
+      "gallery": [],
+      "category": "acessorios",
+      "tags": [],
+      "relatedManualIds": [],
+      "crossSellIds": [],
+      "showPrice": false,
+      "featured": false,
+      "active": true,
+      "detailsEnabled": true,
+      "showVariationsOnCard": false,
+      "descriptionShort": "O carregador Kaidi é a solução ideal para quem busca carregamento rápido e máxima segurança para o smartphone. Com potência de 20W na saída USB-C, ele é totalmente homologado pela Anatel e compatível com as principais marcas do mercado, garantindo uma recarga eficiente e protegida contra danos elétricos",
+      "descriptionLong": "<p><b>Destaques do Produto:</b></p><ul><li><p><b>Carregamento Turbo de 20W:</b> Velocidade otimizada para carregar a bateria do seu aparelho em muito menos tempo.</p></li><li><p><b>Homologado pela Anatel:</b> Certificação oficial (Nº 81902212308) que garante um produto testado, seguro e de alta qualidade.</p></li><li><p><b>Proteção Contra Sobrecarga:</b> Sistema inteligente que protege a bateria do celular contra superaquecimento, picos de tensão e curto-circuitos.</p></li><li><p><b>Cabo Tipo C Incluso:</b> Acompanha um cabo USB-C para USB-C de 1 metro, pronto para usar assim que tirar da embalagem.</p></li><li><p><b>Compatibilidade Universal:</b> Perfeito para dispositivos Apple (iPhone), Samsung, Motorola e Xiaomi que utilizam conexão Tipo C.</p></li></ul><p><b>Especificações Técnicas:</b></p><ul><li><p><b>Potência:</b> 20W</p></li><li><p><b>Conector de Saída:</b> USB-C (Tipo C)</p></li><li><p><b>Comprimento do Cabo:</b> 1 metro (Tipo C para Tipo C)</p></li></ul>",
+      "variations": {
+        "enabled": false,
+        "colors": [],
+        "storage": [],
+        "ram": [],
+        "condition": [],
+        "combinations": [],
+        "labels": {},
+        "colorsText": "",
+        "storageText": "",
+        "ramText": "",
+        "conditionText": "",
+        "labelsText": "{}",
+        "combinationsText": ""
+      },
+      "id": 1783641848880,
+      "erp": {
+        "internalCode": "PRD-83"
+      },
+      "code": "PRD-83"
+    },
+    {
+      "name": "Carregador Kaidi Turbo 20W - 1 Linha Iphones",
+      "slug": "carregador-kaidi-turbo-20w-iphones",
+      "price": null,
+      "stock": null,
+      "image": "images/kit_Carregador_kaidi-Lightning.jpg",
+      "gallery": [],
+      "category": "acessorios",
+      "tags": [],
+      "relatedManualIds": [],
+      "crossSellIds": [],
+      "showPrice": false,
+      "featured": false,
+      "active": true,
+      "detailsEnabled": true,
+      "showVariationsOnCard": false,
+      "descriptionShort": "O carregador Kaidi oferece carregamento de alta velocidade e máxima segurança para dispositivos Apple. Com potência de 20W e tecnologia Power Delivery (PD) na saída USB-C, este modelo vem acompanhado de um cabo USB-C para Lightning, sendo a escolha perfeita para recarregar iPhones e iPads de forma rápida e eficiente",
+      "descriptionLong": "<p><b>Destaques do Produto:</b></p><ul><li><p><b>Tecnologia Turbo Power Delivery (PD):</b> Entrega até <b>20W</b> de potência, permitindo carregar a bateria do iPhone muito mais rápido do que os carregadores convencionais.</p></li><li><p><b>Cabo Lightning Incluso:</b> Já vem com um cabo USB-C para Lightning de alta resistência, pronto para o uso imediato na linha Apple.</p></li><li><p><b>Proteção Elétrica Avançada:</b> Sistema inteligente com circuitos integrados que protegem o aparelho contra sobrecarga, picos de tensão e superaquecimento.</p></li><li><p><b>Construção Segura:</b> Fabricado com materiais de alta qualidade e resistência para garantir longa durabilidade no uso diário.</p></li><li><p><b>Design Compacto:</b> Formato leve e prático, ideal para levar na mochila, bolsa ou em viagens.</p></li></ul><p><b>Especificações Técnicas:</b></p><ul><li><p><b>Potência:</b> 20W com suporte a Power Delivery (PD)</p></li><li><p><b>Conector de Saída:</b> USB-C (Tipo C)</p></li><li><p><b>Cabo Incluso:</b> USB-C para Lightning (Compatível com iPhone/iPad)</p></li></ul>",
+      "variations": {
+        "enabled": false,
+        "colors": [],
+        "storage": [],
+        "ram": [],
+        "condition": [],
+        "combinations": [],
+        "labels": {},
+        "colorsText": "",
+        "storageText": "",
+        "ramText": "",
+        "conditionText": "",
+        "labelsText": "{}",
+        "combinationsText": ""
+      },
+      "id": 1783642212165,
+      "erp": {
+        "internalCode": "PRD-84"
+      },
+      "code": "PRD-84"
+    },
+    {
+      "name": "Impressora Multifuncional HP DeskJet 2975 Colorida Wi-Fi",
+      "slug": "impressora-multifuncional-hp-deskjet-2975-colorida-wifi",
+      "price": null,
+      "stock": null,
+      "image": "images/Impressora Multifuncional HP 2975  (1).jpeg",
+      "gallery": [
+        "images/produtos/1783861955100-impressora-multifuncional-hp-2975-2.jpeg",
+        "images/produtos/1783861955109-impressora-multifuncional-hp-2975-3.jpeg",
+        "images/produtos/1783861955112-impressora-multifuncional-hp-2975-4.jpeg",
+        "images/produtos/1783861955113-impressora-multifuncional-hp-2975-5.jpeg"
+      ],
+      "category": "eletronicos",
+      "tags": [],
+      "relatedManualIds": [],
+      "crossSellIds": [],
+      "showPrice": false,
+      "featured": false,
+      "active": true,
+      "detailsEnabled": true,
+      "showVariationsOnCard": false,
+      "descriptionShort": "A HP DeskJet Ink Advantage 2975 é a escolha ideal para uso doméstico e estudos, reunindo as funções de imprimir, copiar e digitalizar em um equipamento compacto, fácil de configurar e com conexão sem fio estável",
+      "descriptionLong": "<p><b>Destaques do Produto:</b></p><ul><li><p><b>Três Funções em Uma:</b> Imprime, copia e digitaliza documentos ou fotos com total versatilidade em um único aparelho.</p></li><li><p><b>Conexão Sem Fio Prática:</b> Equipada com <b>Wi-Fi de banda dupla</b> para maior estabilidade e menor risco de quedas de sinal.</p></li><li><p><b>Impressão Direta do Celular:</b> Configuração e comandos simplificados através do aplicativo oficial da HP, facilitando o envio de arquivos direto do smartphone.</p></li><li><p><b>Qualidade Fotográfica:</b> Entrega excelente nitidez em textos pretos e cores vivas com resolução otimizada de até 4800 x 1200 dpi.</p></li><li><p><b>Design Inteligente e Compacto:</b> Ocupa pouquíssimo espaço na mesa de trabalho, sendo perfeita para quartos ou escritórios pequenos.</p></li></ul><p><b>Especificações Técnicas:</b></p><ul><li><p><b>Funções:</b> Impressão, cópia, digitalização</p></li><li><p><b>Tecnologia de Impressão:</b> Jato de tinta térmico HP</p></li><li><p><b>Conectividade:</b> Wi-Fi de banda dupla (2.4 GHz e 5 GHz) e porta USB 2.0 de alta velocidade</p></li><li><p><b>Resolução de Impressão (Máxima):</b> Até 4800 x 1200 dpi otimizados em cores</p></li><li><p><b>Sistemas Compatíveis:</b> Android, iOS, Windows e macOS</p></li></ul>",
+      "variations": {
+        "enabled": false,
+        "colors": [],
+        "storage": [],
+        "ram": [],
+        "condition": [],
+        "combinations": [],
+        "labels": {},
+        "colorsText": "",
+        "storageText": "",
+        "ramText": "",
+        "conditionText": "",
+        "labelsText": "{}",
+        "combinationsText": ""
+      },
+      "id": 1783862276071,
+      "erp": {
+        "internalCode": "PRD-85"
+      },
+      "code": "PRD-85"
+    },
+    {
+      "name": "Carregador Indutivo Magnético Kaidi 15w Carga Rápida",
+      "slug": "carregador-indutivo-magnetico-kaidi-15w-carga-rapida-kd9092",
+      "price": null,
+      "stock": null,
+      "image": "images/Carregador Indutivo Magnético 15w Kaidi Kd-9092 (2).jpeg",
+      "gallery": [
+        "images/produtos/1783865551541-carregador-indutivo-magna-tico-15w-kaidi-kd-9092-1.jpeg"
+      ],
+      "category": "acessorios",
+      "tags": [],
+      "relatedManualIds": [],
+      "crossSellIds": [],
+      "showPrice": false,
+      "featured": false,
+      "active": true,
+      "detailsEnabled": true,
+      "showVariationsOnCard": false,
+      "descriptionShort": "O Carregador Indutivo da Kaidi oferece carregamento rápido sem fio de até 15W com fixação magnética estável.",
+      "descriptionLong": "<p><b>Destaques do Produto:</b></p><ul><li><p><b>Alinhamento Magnético Estável:</b> Equipado com potentes ímãs que se alinham perfeitamente à traseira do aparelho, evitando desconexões.</p></li><li><p><b>Carga Rápida de 15W:</b> Tecnologia por indução Qi inteligente que adapta a potência (5W, 7.5W, 10W ou 15W) conforme a necessidade do seu celular.</p></li><li><p><b>Tecnologia Anti-Aquecimento:</b> Sistema integrado de controle térmico que protege o dispositivo e tenta preservar a saúde da bateria durante a recarga.</p></li><li><p><b>Design Ultra Fino:</b> Estrutura minimalista com acabamento em alumínio e apenas 7mm de espessura, sendo leve e portátil.</p></li><li><p><b>Homologado Anatel:</b> Produto certificado (Nº 060682312308), garantindo testes de qualidade e segurança elétrica.</p></li></ul><p><b>Especificações Técnicas:</b></p><ul><li><p><b>Potência de Saída:</b> Até 15W (Wireless)</p></li><li><p><b>Entrada:</b> Conector USB-C (Cabo integrado de 1 metro)</p></li><li><p><b>Compatibilidade:</b> iPhones com tecnologia MagSafe e demais smartphones com carregamento sem fio (Qi)</p></li></ul>",
+      "variations": {
+        "enabled": false,
+        "colors": [],
+        "storage": [],
+        "ram": [],
+        "condition": [],
+        "combinations": [],
+        "labels": {},
+        "colorsText": "",
+        "storageText": "",
+        "ramText": "",
+        "conditionText": "",
+        "labelsText": "{}",
+        "combinationsText": ""
+      },
+      "id": 1783866191448,
+      "erp": {
+        "internalCode": "PRD-86"
+      },
+      "code": "PRD-86"
+    },
+    {
+      "name": "Limpa Telas Implastec 60ml + Flanela Anti Risco – Brilho e Proteção",
+      "slug": "limpa-telas-implastec-60ml-flanela-anti-risco-brilho-e-protecao",
+      "price": null,
+      "stock": null,
+      "image": "images/Limpa Telas Implastec 60ml + Flanela Anti Risco R14255-500x500.jpg",
+      "gallery": [],
+      "category": "acessorios",
+      "tags": [],
+      "relatedManualIds": [],
+      "crossSellIds": [],
+      "showPrice": false,
+      "featured": false,
+      "active": true,
+      "detailsEnabled": true,
+      "showVariationsOnCard": false,
+      "descriptionShort": "O Limpa Telas Implastec é ideal para remover marcas de dedos, poeira e gordura de telas e eletrônicos, deixando uma película protetora que repele o pó",
+      "descriptionLong": "<p><b>Destaques do Produto:</b></p><ul><li><p><b>Fórmula Segura:</b> Sem álcool ou solventes, limpa sem danificar o display.</p></li><li><p><b>Flanela Inclusa:</b> Acompanha pano de microfibra de alta qualidade que não solta fiapos e evita riscos.</p></li><li><p><b>Ação Antiestática:</b> Cria uma camada invisível que retarda o acúmulo de poeira.</p></li><li><p><b>Uso Geral:</b> Perfeito para smartphones, tablets, notebooks, TVs, monitores e películas de vidro.</p></li></ul><p><b>Especificações Técnicas:</b></p><ul><li><p><b>Marca:</b> Implastec | <b>Volume:</b> 60ml | <b>Acompanha:</b> 1 Flanela de microfibra</p></li></ul>",
+      "variations": {
+        "enabled": false,
+        "colors": [],
+        "storage": [],
+        "ram": [],
+        "condition": [],
+        "combinations": [],
+        "labels": {},
+        "colorsText": "",
+        "storageText": "",
+        "ramText": "",
+        "conditionText": "",
+        "labelsText": "{}",
+        "combinationsText": ""
+      },
+      "id": 1783873997797,
+      "erp": {
+        "internalCode": "PRD-87"
+      },
+      "code": "PRD-87"
+    },
+    {
+      "name": "Notebook Lenovo IdeaPad 1 Ryzen 3 7320U 4GB 256GB SSD W11 15.6",
+      "slug": "notebook-lenovo-ideapad-1-ryzen-3-7320u-4gb-256gb-ssd",
+      "price": null,
+      "stock": null,
+      "image": "images/Notebook Lenovo Ideapad 1 AMD Ryzen 3 4gb Ram 256gb (1).jpeg",
+      "gallery": [
+        "images/produtos/1783988031422-notebook-lenovo-ideapad-1-amd-ryzen-3-4gb-ram-256gb-2.jpeg",
+        "images/produtos/1783988031425-notebook-lenovo-ideapad-1-amd-ryzen-3-4gb-ram-256gb-3.jpeg"
+      ],
+      "category": "eletronicos",
+      "tags": [],
+      "relatedManualIds": [],
+      "crossSellIds": [],
+      "showPrice": false,
+      "featured": false,
+      "active": true,
+      "detailsEnabled": true,
+      "showVariationsOnCard": false,
+      "descriptionShort": "O Lenovo IdeaPad 1 é a escolha ideal para estudos e trabalho diário, oferecendo inicialização rápida e agora atualizado para a experiência moderna do Windows 11",
+      "descriptionLong": "<p><b>Destaques do Produto:</b></p><ul><li><p><b>Velocidade com SSD:</b> Armazenamento de 256GB SSD que inicia o sistema e abre seus arquivos em segundos.</p></li><li><p><b>Processador Moderno:</b> AMD Ryzen 3 da série 7000, projetado para tarefas diárias com excelente eficiência de bateria.</p></li><li><p><b>Design Fino e Leve:</b> Apenas 17,9 mm de espessura e peso de 1,58 kg, sendo muito fácil de transportar.</p></li><li><p><b>Privacidade e Áudio:</b> Webcam integrada com obturador físico de privacidade e som otimizado com Dolby Audio.</p></li></ul><p><b>Especificações Técnicas:</b></p><ul><li><p><b>Processador:</b> AMD Ryzen 3 7320U (Até 4.1GHz)</p></li><li><p><b>Memória RAM:</b> 4GB LPDDR5</p></li><li><p><b>Armazenamento:</b> 256GB SSD NVMe</p></li><li><p><b>Tela:</b> 15.6\" Antirreflexo com teclado numérico integrado</p></li><li><p><b>Conectividade:</b> Wi-Fi, Bluetooth e portas USB-C, USB-A e HDMI</p></li><li><p><b>Sistema instalado pela loja:</b> Windows 11</p></li></ul><p><b>Conteúdo da Embalagem:</b>\r\n1 Notebook Lenovo IdeaPad 1, Fonte de Alimentação e Guia de Início Rápido</p>",
+      "variations": {
+        "enabled": false,
+        "colors": [],
+        "storage": [],
+        "ram": [],
+        "condition": [],
+        "combinations": [],
+        "labels": {},
+        "colorsText": "",
+        "storageText": "",
+        "ramText": "",
+        "conditionText": "",
+        "labelsText": "{}",
+        "combinationsText": ""
+      },
+      "id": 1783988152298,
+      "erp": {
+        "internalCode": "PRD-88"
+      },
+      "code": "PRD-88"
+    },
+    {
+      "name": "teste",
+      "sku": "",
+      "code": "PRD-89",
+      "barcode": "",
+      "brand": "",
+      "slug": "teste",
+      "price": null,
+      "commercial": {
+        "costPrice": null,
+        "erpPrice": null,
+        "marketplacePrice": null,
+        "promotionalPrice": null,
+        "desiredMarginPercent": null,
+        "expectedProfit": null,
+        "defaultCommissionPercent": null,
+        "cashPrice": null,
+        "installmentPrice": null,
+        "minimumPrice": null,
+        "minimumMarginPercent": null,
+        "discountPolicy": "inherit",
+        "maximumDiscountPercent": null,
+        "maximumDiscountAmount": null,
+        "requiresAuthorization": false
+      },
+      "stock": -1,
+      "inventory": {
+        "itemId": "PRD-1785594517818",
+        "stockControlled": true,
+        "allowNegative": true,
+        "minimumQuantity": 0,
+        "channelAvailability": {
+          "site": {
+            "mode": "shared",
+            "enabled": true,
+            "limit": null,
+            "physicalSafety": 0
+          }
+        }
+      },
+      "image": "",
+      "gallery": [],
+      "category": "",
+      "subcategory": "",
+      "tags": [],
+      "relatedManualIds": [],
+      "crossSellIds": [],
+      "showPrice": true,
+      "featured": false,
+      "active": true,
+      "erp": {
+        "sku": "",
+        "internalCode": "PRD-89",
+        "supplierCode": "",
+        "searchAlias": "",
+        "barcode": "",
+        "brand": "",
+        "unit": "UN",
+        "category": "",
+        "subcategory": "",
+        "mainSupplierId": "",
+        "preferredSupplierId": "",
+        "active": true
+      },
+      "virtualStore": {
+        "name": "teste LV",
+        "price": null,
+        "active": true,
+        "seoTitle": "",
+        "seoDescription": "",
+        "channels": {
+          "lojaVirtual": {
+            "enabled": true
+          },
+          "mercadoLivre": {
+            "enabled": false
+          },
+          "shopee": {
+            "enabled": false
+          },
+          "amazon": {
+            "enabled": false
+          },
+          "magalu": {
+            "enabled": false
+          }
+        }
+      },
+      "detailsEnabled": false,
+      "showVariationsOnCard": false,
+      "descriptionShort": "",
+      "descriptionLong": "",
+      "variations": {
+        "enabled": false,
+        "colors": [],
+        "storage": [],
+        "ram": [],
+        "condition": [],
+        "combinations": [],
+        "labels": {},
+        "colorsText": "",
+        "storageText": "",
+        "ramText": "",
+        "conditionText": "",
+        "labelsText": "{}",
+        "combinationsText": ""
+      },
+      "id": 1785594517818
+    },
+    {
+      "name": "testeteste",
+      "sku": "",
+      "code": "PRD-90",
+      "barcode": "",
+      "brand": "",
+      "slug": "testeteste",
+      "price": null,
+      "commercial": {
+        "costPrice": null,
+        "erpPrice": null,
+        "marketplacePrice": null,
+        "promotionalPrice": null,
+        "desiredMarginPercent": null,
+        "expectedProfit": null,
+        "defaultCommissionPercent": null,
+        "cashPrice": null,
+        "installmentPrice": null,
+        "minimumPrice": null,
+        "minimumMarginPercent": null,
+        "discountPolicy": "inherit",
+        "maximumDiscountPercent": null,
+        "maximumDiscountAmount": null,
+        "requiresAuthorization": false
+      },
+      "stock": null,
+      "inventory": {
+        "itemId": "PRD-1785602416293",
+        "stockControlled": true,
+        "allowNegative": false,
+        "minimumQuantity": 0,
+        "channelAvailability": {
+          "site": {
+            "mode": "shared",
+            "enabled": true,
+            "limit": null,
+            "physicalSafety": 0
+          }
+        }
+      },
+      "image": "",
+      "gallery": [],
+      "category": "",
+      "subcategory": "",
+      "tags": [],
+      "relatedManualIds": [],
+      "crossSellIds": [],
+      "showPrice": true,
+      "featured": false,
+      "active": false,
+      "erp": {
+        "sku": "",
+        "internalCode": "PRD-90",
+        "supplierCode": "",
+        "searchAlias": "tt",
+        "barcode": "",
+        "brand": "",
+        "unit": "UN",
+        "category": "smartphones",
+        "subcategory": "",
+        "mainSupplierId": "",
+        "preferredSupplierId": "",
+        "active": true
+      },
+      "virtualStore": {
+        "name": "",
+        "price": null,
+        "active": false,
+        "seoTitle": "",
+        "seoDescription": "",
+        "channels": {
+          "lojaVirtual": {
+            "enabled": false
+          },
+          "mercadoLivre": {
+            "enabled": false
+          },
+          "shopee": {
+            "enabled": false
+          },
+          "amazon": {
+            "enabled": false
+          },
+          "magalu": {
+            "enabled": false
+          }
+        }
+      },
+      "detailsEnabled": false,
+      "showVariationsOnCard": false,
+      "descriptionShort": "",
+      "descriptionLong": "",
+      "variations": {
+        "enabled": false,
+        "colors": [],
+        "storage": [],
+        "ram": [],
+        "condition": [],
+        "combinations": [],
+        "labels": {},
+        "colorsText": "",
+        "storageText": "",
+        "ramText": "",
+        "conditionText": "",
+        "labelsText": "{}",
+        "combinationsText": ""
+      },
+      "id": 1785602416293
+    }
+  ]
+}

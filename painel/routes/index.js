@@ -1,47 +1,76 @@
 import express from 'express';
 import fs from 'fs';
 import path from 'path';
+import { fileURLToPath } from 'url';
+import DashboardService from '../services/dashboard-service.js';
+import CustomerService from '../services/customer-service.js';
+import { getTaskOverview, listAgendaOwners, listAgendaTypes } from '../services/erp_tasks.js';
 
 const router = express.Router();
+const ROUTES_DIR = path.dirname(fileURLToPath(import.meta.url));
+const PANEL_DIR = path.resolve(ROUTES_DIR, '..');
 function P(app){ return app.locals.paths; }
+function getIndexCustomerService(app){
+  if(app.locals.customerService) return app.locals.customerService;
+  app.locals.customerService = new CustomerService({ dataDir:path.join(PANEL_DIR,'data','erp','customers') });
+  return app.locals.customerService;
+}
 
 const AVAILABLE_ACTIONS = [
-  // Rotina principal
-  { id:'whatsapp', name:'WhatsApp', icon:'💬', href:'/automacao-whatsapp', type:'link' },
-  { id:'publicar', name:'Publicar agora', icon:'📤', href:'/publicar', type:'post' },
+  // Operação
+  { id:'home', name:'Atalhos rápidos', icon:'🏠', href:'/', type:'link', group:'Operação' },
+  { id:'erp-centro-operacoes', name:'Operações / vendas', icon:'🧭', href:'/erp/centro-operacoes', type:'link', group:'Operação' },
+  { id:'erp-agenda', name:'Agenda / tarefas', icon:'✅', href:'/erp/agenda', type:'link', group:'Operação' },
+  { id:'erp-pdv', name:'PDV', icon:'🛒', href:'/erp/pdv', type:'link', group:'Operação' },
+  { id:'erp-orcamentos', name:'Orçamentos', icon:'📝', href:'/orcamentos', type:'link', group:'Operação' },
+  { id:'erp-os', name:'Ordens de Serviço', icon:'🛠️', href:'/erp/modulo/ordens-servico', type:'link', group:'Operação' },
 
-  // ERP — acessos internos
-  { id:'erp', name:'ERP', icon:'💼', href:'/erp', type:'link' },
-  { id:'erp-clientes', name:'ERP · Clientes', icon:'👥', href:'/erp/clientes', type:'link' },
-  { id:'erp-produtos', name:'ERP · Produtos', icon:'📦', href:'/produtos?origem=erp', type:'link' },
-  { id:'erp-orcamentos', name:'ERP · Orçamentos', icon:'🧾', href:'/orcamentos', type:'link' },
-  { id:'erp-estoque', name:'ERP · Estoque', icon:'📚', href:'/erp/estoque', type:'link' },
-  { id:'erp-pdv', name:'ERP · PDV', icon:'🛒', href:'/erp/modulo/pdv', type:'link' },
-  { id:'erp-fornecedores', name:'ERP · Fornecedores', icon:'🏭', href:'/erp/modulo/fornecedores', type:'link' },
-  { id:'erp-os', name:'ERP · Ordens de Serviço', icon:'🛠️', href:'/erp/modulo/ordens-servico', type:'link' },
-  { id:'erp-compras', name:'ERP · Compras', icon:'🚚', href:'/erp/modulo/compras', type:'link' },
-  { id:'erp-financeiro', name:'ERP · Financeiro', icon:'💰', href:'/erp/modulo/financeiro', type:'link' },
+  // Clientes e relacionamento
+  { id:'erp-clientes-lista', name:'Clientes', icon:'👥', href:'/erp/clientes', type:'link', group:'Clientes e relacionamento' },
+  { id:'erp-clientes', name:'Novo cliente', icon:'👤＋', href:'/erp/clientes?novo=1', type:'link', group:'Clientes e relacionamento' },
+  { id:'whatsapp-inbox', name:'Inbox · WhatsApp', icon:'💬', href:'/automacao-whatsapp?tab=inbox', type:'link', group:'Clientes e relacionamento' },
+  { id:'whatsapp', name:'WhatsApp · Automação', icon:'🤖', href:'/automacao-whatsapp', type:'link', group:'Clientes e relacionamento' },
+  { id:'crm', name:'CRM', icon:'💬', href:'/crm', type:'link', group:'Clientes e relacionamento' },
 
-  // Ferramentas — acessos internos
-  { id:'ferramentas', name:'Ferramentas', icon:'🧰', href:'/ferramentas', type:'link' },
-  { id:'ferramentas-compatibilidade', name:'Ferramentas · Capas e películas', icon:'📱', href:'/compatibilidade', type:'link' },
-  { id:'ferramentas-calculadora', name:'Ferramentas · Calculadora comercial', icon:'🧮', href:'/orcamentos', type:'link' },
-  { id:'ferramentas-backup', name:'Ferramentas · Backup', icon:'💾', href:'/backup', type:'link' },
-  { id:'ferramentas-atualizacoes', name:'Ferramentas · Atualizações', icon:'🔄', href:'/atualizacoes', type:'link' },
+  // Produtos, estoque e compras
+  { id:'erp-produtos', name:'Produtos', icon:'📦', href:'/produtos?origem=erp', type:'link', group:'Produtos, estoque e compras' },
+  { id:'erp-estoque', name:'Estoque', icon:'📚', href:'/erp/estoque', type:'link', group:'Produtos, estoque e compras' },
+  { id:'erp-contagem-estoque', name:'Contagem de estoque', icon:'📋', href:'/erp/estoque/contagens', type:'link', group:'Produtos, estoque e compras' },
+  { id:'erp-compras', name:'Compras', icon:'🚚', href:'/erp/compras', type:'link', group:'Produtos, estoque e compras' },
+  { id:'erp-fornecedores', name:'Fornecedores', icon:'🏭', href:'/erp/fornecedores', type:'link', group:'Produtos, estoque e compras' },
+  { id:'erp-historico', name:'Histórico ERP', icon:'🕘', href:'/erp/historico', type:'link', group:'Produtos, estoque e compras' },
 
-  // Site e demais áreas
-  { id:'produtos-site', name:'Produtos do site', icon:'📦', href:'/produtos', type:'link' },
-  { id:'banners', name:'Banners', icon:'🖼️', href:'/banners', type:'link' },
-  { id:'crm', name:'CRM', icon:'💬', href:'/crm', type:'link' },
-  { id:'site', name:'Site', icon:'🌐', href:'/site', type:'link' },
-  { id:'analytics', name:'Analytics', icon:'📊', href:'/analytics', type:'link' },
-  { id:'marketing', name:'Marketing', icon:'✨', href:'/marketing', type:'link' },
-  { id:'configuracoes', name:'Configurações', icon:'⚙️', href:'/configuracoes', type:'link' },
-  { id:'manutencao', name:'Manutenção do site', icon:'🛠️', href:'/manutencao', type:'link' },
-  { id:'categorias', name:'Categorias', icon:'🗂️', href:'/categorias', type:'link' },
-  { id:'seo', name:'SEO', icon:'🔎', href:'/seo', type:'link' },
-  { id:'paginas', name:'Páginas', icon:'📄', href:'/paginas', type:'link' },
-  { id:'personalizacao', name:'Personalização', icon:'🎨', href:'/personalizacao', type:'link' }
+  // Financeiro
+  { id:'erp-financeiro', name:'Financeiro', icon:'💰', href:'/erp/financeiro', type:'link', group:'Financeiro' },
+  { id:'erp-contas-receber', name:'Contas a receber', icon:'📥', href:'/erp/financeiro/contas-a-receber', type:'link', group:'Financeiro' },
+  { id:'erp-contas-pagar', name:'Contas a pagar', icon:'📤', href:'/erp/financeiro/contas-a-pagar', type:'link', group:'Financeiro' },
+  { id:'erp-caixa', name:'Caixa / PDV', icon:'🏦', href:'/erp/pdv/caixa', type:'link', group:'Financeiro' },
+  { id:'erp-fluxo-caixa', name:'Fluxo de Caixa', icon:'📈', href:'/erp/financeiro/fluxo-de-caixa', type:'link', group:'Financeiro' },
+  { id:'erp-dre', name:'DRE', icon:'📊', href:'/erp/financeiro/dre', type:'link', group:'Financeiro' },
+
+  // Loja virtual
+  { id:'publicar', name:'Publicar agora', icon:'📤', href:'/publicar', type:'post', group:'Loja virtual' },
+  { id:'produtos-site', name:'Produtos do site', icon:'📦', href:'/produtos', type:'link', group:'Loja virtual' },
+  { id:'banners', name:'Banners', icon:'🖼️', href:'/banners', type:'link', group:'Loja virtual' },
+  { id:'site', name:'Site', icon:'🌐', href:'/site', type:'link', group:'Loja virtual' },
+  { id:'analytics', name:'Analytics', icon:'📊', href:'/analytics', type:'link', group:'Loja virtual' },
+  { id:'marketing', name:'Marketing', icon:'✨', href:'/marketing', type:'link', group:'Loja virtual' },
+  { id:'categorias', name:'Categorias', icon:'🗂️', href:'/categorias', type:'link', group:'Loja virtual' },
+  { id:'seo', name:'SEO', icon:'🔎', href:'/seo', type:'link', group:'Loja virtual' },
+  { id:'paginas', name:'Páginas', icon:'📄', href:'/paginas', type:'link', group:'Loja virtual' },
+  { id:'personalizacao', name:'Personalização', icon:'🎨', href:'/personalizacao', type:'link', group:'Loja virtual' },
+  { id:'manutencao', name:'Manutenção do site', icon:'🛠️', href:'/manutencao', type:'link', group:'Loja virtual' },
+
+  // Ferramentas
+  { id:'ferramentas', name:'Ferramentas', icon:'🧰', href:'/ferramentas', type:'link', group:'Ferramentas' },
+  { id:'ferramentas-compatibilidade', name:'Capas e películas', icon:'📱', href:'/compatibilidade', type:'link', group:'Ferramentas' },
+  { id:'ferramentas-calculadora', name:'Calculadora comercial', icon:'🧮', href:'/orcamentos', type:'link', group:'Ferramentas' },
+  { id:'ferramentas-backup', name:'Backup', icon:'💾', href:'/backup', type:'link', group:'Ferramentas' },
+  { id:'ferramentas-atualizacoes', name:'Atualizações', icon:'🔄', href:'/atualizacoes', type:'link', group:'Ferramentas' },
+
+  // Configurações
+  { id:'erp', name:'ERP', icon:'💼', href:'/erp', type:'link', group:'Configurações' },
+  { id:'configuracoes', name:'Configurações', icon:'⚙️', href:'/configuracoes', type:'link', group:'Configurações' }
 ];
 
 function quickActionsPath(app){
@@ -51,7 +80,7 @@ function quickActionsPath(app){
 
 function readQuickActionIds(app){
   const file = quickActionsPath(app);
-  const defaults = ['whatsapp','produtos-site','banners','publicar'];
+  const defaults = ['erp-pdv','erp-orcamentos','erp-clientes','crm','erp-financeiro','site','configuracoes'];
   try {
     const data = JSON.parse(fs.readFileSync(file, 'utf-8'));
     if (Array.isArray(data.actions)) return data.actions.filter(Boolean);
@@ -67,6 +96,17 @@ function saveQuickActionIds(app, ids){
 
 function resolveQuickActions(ids){
   return ids.map(id => AVAILABLE_ACTIONS.find(item => item.id === id)).filter(Boolean);
+}
+
+
+function getDashboardService(app){
+  if (app.locals.dashboardService) return app.locals.dashboardService;
+  const { ROOT, CONTENT_DIR } = P(app);
+  app.locals.dashboardService = new DashboardService({
+    panelDir:path.join(ROOT, 'painel'),
+    siteContentDir:CONTENT_DIR
+  });
+  return app.locals.dashboardService;
 }
 
 function formatPublishDate(value){
@@ -95,10 +135,116 @@ router.get('/', (req,res)=>{
     maint,
     publish,
     publishFormatted:formatPublishDate(publish.last_publish),
+    pageClass:'dashboard-home',
+    queryPeriod:String(req.query.periodo || 'month'),
     quickActions:resolveQuickActions(quickActionIds),
     availableActions:AVAILABLE_ACTIONS.filter(item => !quickActionIds.includes(item.id)),
     manageShortcuts:req.query.atalhos === '1'
   });
+});
+
+router.get('/api/dashboard', async (req,res)=>{
+  try {
+    const dashboard = await getDashboardService(req.app).snapshot({ period:String(req.query.periodo || 'month') });
+    const allTasks = getTaskOverview(req.app);
+    const owners = listAgendaOwners(req.app, { includeInactive:true });
+    const types = listAgendaTypes(req.app);
+    const ownerColor = new Map(owners.map(item => [item.name, item.color]));
+    const typeName = new Map(types.map(item => [item.id, item.name]));
+    const undated = allTasks.undated || allTasks.reminders || [];
+    const soonLimit = Date.now() + (2 * 24 * 60 * 60 * 1000);
+    const upcomingSoon = allTasks.upcoming.filter(item => {
+      const due = new Date(item.dueAt);
+      return !Number.isNaN(due.getTime()) && due.getTime() <= soonLimit;
+    });
+    const upcomingLater = allTasks.upcoming.filter(item => !upcomingSoon.some(soon => soon.id === item.id));
+    const ordered = [...allTasks.overdue, ...allTasks.today, ...upcomingSoon, ...undated, ...upcomingLater]
+      .filter((item,index,array)=>array.findIndex(other=>other.id===item.id)===index);
+    const agenda = {
+      overdue:allTasks.overdue.length,
+      today:allTasks.today.length,
+      upcoming:allTasks.upcoming.length,
+      undated:undated.length,
+      reminders:undated.length,
+      totalOpen:allTasks.totalOpen,
+      next:ordered.slice(0, 12).map(item => ({
+        id:item.id,
+        title:item.title,
+        owner:item.owner || 'Sem responsável',
+        ownerColor:ownerColor.get(item.owner) || '#64748b',
+        type:item.type,
+        typeName:item.typeName || typeName.get(item.type) || 'Tarefa',
+        dueAt:item.dueAt || '',
+        priority:item.priority || 'medium',
+        description:item.description || '',
+        customerId:item.customerId || '',
+        customerName:item.customerName || '',
+        href:`/erp/agenda?responsavel=${encodeURIComponent(item.owner || 'all')}`
+      }))
+    };
+    res.set('Cache-Control', 'private, max-age=10');
+    res.json({ ok:true, dashboard:{ ...dashboard, agenda } });
+  } catch (error) {
+    console.error('Falha ao carregar dashboard:', error);
+    res.status(500).json({ ok:false, error:'Não foi possível carregar os indicadores da dashboard.' });
+  }
+});
+
+function normalizeGeoText(value=''){
+  return String(value||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').trim().toLowerCase();
+}
+function customerAddressText(customer){
+  return [customer.street,customer.number,customer.district,customer.city,customer.state,customer.zipCode ? `CEP ${customer.zipCode}` : '', 'Brasil'].filter(Boolean).join(', ');
+}
+
+router.get('/api/dashboard/customer-locations', (req,res)=>{
+  try{
+    const customers=getIndexCustomerService(req.app).listCustomers({ includeInactive:false });
+    const groups=new Map();
+    let withoutCity=0;
+    customers.forEach(customer=>{
+      const city=String(customer.city||'').trim();
+      const state=String(customer.state||'').trim().toUpperCase();
+      if(!city){ withoutCity+=1; return; }
+      const key=`${normalizeGeoText(city)}|${state}`;
+      const current=groups.get(key)||{ key, city, state, count:0 };
+      current.count+=1;
+      groups.set(key,current);
+    });
+    const locations=[...groups.values()].sort((a,b)=>b.count-a.count||a.city.localeCompare(b.city,'pt-BR'));
+    res.set('Cache-Control','private, max-age=300');
+    return res.json({ ok:true, totalCustomers:customers.length, locatedCustomers:customers.length-withoutCity, withoutCity, locations });
+  }catch(error){
+    console.error('Falha ao agrupar localização de clientes:',error);
+    return res.status(500).json({ ok:false, error:'Não foi possível carregar a localização dos clientes.' });
+  }
+});
+
+router.get('/api/dashboard/customer-location-customers', (req,res)=>{
+  try{
+    const city=String(req.query.city||'').trim();
+    const state=String(req.query.state||'').trim().toUpperCase();
+    const q=normalizeGeoText(req.query.q||'');
+    if(!city) return res.status(400).json({ok:false,error:'Cidade não informada.'});
+    const customers=getIndexCustomerService(req.app).listCustomers({ includeInactive:false })
+      .filter(customer=>normalizeGeoText(customer.city)===normalizeGeoText(city) && (!state || String(customer.state||'').trim().toUpperCase()===state))
+      .filter(customer=>{
+        if(!q)return true;
+        return normalizeGeoText([customer.name,customer.document,customer.mobile,customer.phone,customer.street,customer.district,customer.zipCode].filter(Boolean).join(' ')).includes(q);
+      });
+    const total=customers.length;
+    const items=customers.slice(0,60).map(customer=>({
+      id:customer.id, name:customer.name||customer.tradeName||'Cliente', document:customer.document||'',
+      mobile:customer.mobile||customer.phone||'', street:customer.street||'', number:customer.number||'',
+      district:customer.district||'', city:customer.city||city, state:customer.state||state, zipCode:customer.zipCode||'',
+      address:customerAddressText(customer)
+    }));
+    res.set('Cache-Control','private, max-age=60');
+    return res.json({ok:true,total,items});
+  }catch(error){
+    console.error('Falha ao listar clientes por cidade:',error);
+    return res.status(500).json({ok:false,error:'Não foi possível carregar os clientes desta cidade.'});
+  }
 });
 
 router.post('/atalhos/adicionar', (req,res)=>{

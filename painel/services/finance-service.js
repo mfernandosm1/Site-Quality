@@ -4,6 +4,7 @@ import crypto from 'crypto';
 
 const CATALOGS = {
   accounts: 'chart-of-accounts.json',
+  dreGroups: 'dre-groups.json',
   categories: 'categories.json',
   natures: 'natures.json',
   costCenters: 'cost-centers.json',
@@ -13,6 +14,7 @@ const CATALOGS = {
 };
 
 const DEFAULTS = {
+  dreGroups: [{"id":"DRE-RB","code":"01","name":"Receita Bruta","kind":"income","operation":"add","order":10,"active":true,"system":true},{"id":"DRE-DED","code":"02","name":"Deduções da Receita","kind":"deduction","operation":"subtract","order":20,"active":true,"system":true},{"id":"DRE-CMV","code":"03","name":"Custos das Vendas (CMV)","kind":"cost","operation":"subtract","order":30,"active":true,"system":true},{"id":"DRE-DO","code":"04","name":"Despesas Operacionais","kind":"expense","operation":"subtract","order":40,"active":true,"system":true},{"id":"DRE-RF","code":"05","name":"Receitas Financeiras","kind":"income","operation":"add","order":50,"active":true,"system":true},{"id":"DRE-DF","code":"06","name":"Despesas Financeiras","kind":"expense","operation":"subtract","order":60,"active":true,"system":true},{"id":"DRE-OR","code":"07","name":"Outras Receitas","kind":"income","operation":"add","order":70,"active":true,"system":true},{"id":"DRE-OD","code":"08","name":"Outras Despesas","kind":"expense","operation":"subtract","order":80,"active":true,"system":true}],
   accounts: [
     { id:'ACC-RECEITAS', code:'1', name:'Receitas', type:'receita', parentId:null, active:true, system:true },
     { id:'ACC-VENDAS', code:'1.01', name:'Vendas de mercadorias', type:'receita', parentId:'ACC-RECEITAS', active:true, system:true },
@@ -58,11 +60,11 @@ const DEFAULTS = {
     { id:'ORG-IMPORTACAO', name:'Importação', module:'importacao', active:true, system:true }
   ],
   paymentMethods: [
-    { id:'PM-DINHEIRO', name:'Dinheiro', code:'DIN', active:true, autoSettle:true, eventType:'cash', modules:{ sales:true, purchases:true, pdv:true, serviceOrders:true, finance:true }, allowInstallments:false, maxInstallments:1, settlementDays:0, system:true },
-    { id:'PM-PIX', name:'PIX', code:'PIX', active:true, autoSettle:true, eventType:'bank', modules:{ sales:true, purchases:true, pdv:true, serviceOrders:true, finance:true }, allowInstallments:false, maxInstallments:1, settlementDays:0, system:true },
-    { id:'PM-CREDITO', name:'Cartão de crédito', code:'CRED', active:true, autoSettle:false, eventType:'receivable', modules:{ sales:true, purchases:false, pdv:true, serviceOrders:true, finance:true }, allowInstallments:true, maxInstallments:18, settlementDays:30, system:true },
-    { id:'PM-DEBITO', name:'Cartão de débito', code:'DEB', active:true, autoSettle:false, eventType:'receivable', modules:{ sales:true, purchases:false, pdv:true, serviceOrders:true, finance:true }, allowInstallments:false, maxInstallments:1, settlementDays:1, system:true },
-    { id:'PM-BOLETO', name:'Boleto / crediário', code:'BOL', active:true, autoSettle:false, eventType:'title', modules:{ sales:true, purchases:true, pdv:true, serviceOrders:true, finance:true }, allowInstallments:true, maxInstallments:36, settlementDays:0, firstDueDays:30, installmentIntervalDays:30, generatesReceivable:true, requireIdentifiedCustomer:true, requireValidDocument:true, requireCreditReceipt:true, system:true }
+    { id:'PM-DINHEIRO', name:'Dinheiro', code:'DIN', active:true, salesPaid:true, purchasePaid:true, creditCashOnSale:true, debitCashOnPurchase:true, autoSettle:true, eventType:'cash', modules:{ sales:true, purchases:true, pdv:true, serviceOrders:true, finance:true }, allowInstallments:false, maxInstallments:1, settlementDays:0, system:true },
+    { id:'PM-PIX', name:'PIX', code:'PIX', active:true, salesPaid:true, purchasePaid:true, creditCashOnSale:true, debitCashOnPurchase:true, autoSettle:true, eventType:'bank', modules:{ sales:true, purchases:true, pdv:true, serviceOrders:true, finance:true }, allowInstallments:false, maxInstallments:1, settlementDays:0, system:true },
+    { id:'PM-CREDITO', name:'Cartão de crédito', code:'CRED', active:true, salesPaid:false, purchasePaid:false, creditCashOnSale:true, debitCashOnPurchase:true, autoSettle:false, eventType:'receivable', modules:{ sales:true, purchases:false, pdv:true, serviceOrders:true, finance:true }, allowInstallments:true, maxInstallments:18, settlementDays:30, system:true },
+    { id:'PM-DEBITO', name:'Cartão de débito', code:'DEB', active:true, salesPaid:false, purchasePaid:false, creditCashOnSale:true, debitCashOnPurchase:true, autoSettle:false, eventType:'receivable', modules:{ sales:true, purchases:false, pdv:true, serviceOrders:true, finance:true }, allowInstallments:false, maxInstallments:1, settlementDays:1, system:true },
+    { id:'PM-BOLETO', name:'Boleto / crediário', code:'BOL', active:true, salesPaid:false, purchasePaid:false, creditCashOnSale:true, debitCashOnPurchase:true, autoSettle:false, eventType:'title', modules:{ sales:true, purchases:true, pdv:true, serviceOrders:true, finance:true }, allowInstallments:true, maxInstallments:36, settlementDays:0, firstDueDays:30, installmentIntervalDays:30, generatesReceivable:true, requireIdentifiedCustomer:true, requireValidDocument:true, requireCreditReceipt:true, system:true }
   ],
   stores: [
     { id:'STORE-MAIN', name:'Loja principal', code:'MATRIZ', active:true, system:true }
@@ -80,6 +82,7 @@ function bool(value, fallback = false) {
 export default class FinanceService {
   constructor({ dataDir }) {
     this.dataDir = dataDir;
+    this._jsonCache = new Map();
     fs.mkdirSync(dataDir, { recursive:true });
     this.ensureFoundation();
     this.migrateFoundation();
@@ -87,13 +90,21 @@ export default class FinanceService {
 
   file(name) { return path.join(this.dataDir, name); }
   readFile(name, fallback = { items:[] }) {
-    try { return JSON.parse(fs.readFileSync(this.file(name), 'utf8')); } catch (_) { return clone(fallback); }
+    const target=this.file(name);
+    try{
+      const stat=fs.statSync(target),cached=this._jsonCache.get(target);
+      if(cached&&cached.mtimeMs===stat.mtimeMs&&cached.size===stat.size)return cached.data;
+      const data=JSON.parse(fs.readFileSync(target,'utf8'));
+      this._jsonCache.set(target,{mtimeMs:stat.mtimeMs,size:stat.size,data});
+      return data;
+    }catch(_){return clone(fallback);}
   }
   writeFile(name, data) {
     const target = this.file(name);
     const temp = `${target}.tmp`;
     fs.writeFileSync(temp, JSON.stringify(data, null, 2), 'utf8');
     fs.renameSync(temp, target);
+    try{const stat=fs.statSync(target);this._jsonCache.set(target,{mtimeMs:stat.mtimeMs,size:stat.size,data});}catch(_){this._jsonCache.delete(target);}
   }
   ensureFoundation() {
     for (const [catalog, filename] of Object.entries(CATALOGS)) {
@@ -129,10 +140,74 @@ export default class FinanceService {
     }
     if (changed) { accountsDb.items = accounts; accountsDb.updatedAt = now(); this.writeFile(CATALOGS.accounts, accountsDb); }
 
+    // O Grupo DRE pertence à estrutura do Centro de Custo. Os planos de conta
+    // herdam essa classificação e o operador não precisa escolher a mesma regra
+    // novamente em cada plano. Para bases antigas, preservamos o grupo já usado
+    // pelos planos filhos e gravamos essa informação no centro.
+    const centersDb = this.readFile(CATALOGS.costCenters, { items:[] });
+    let centersChanged = false;
+    for (const center of centersDb.items || []) {
+      if (center.dreGroupId) continue;
+      const childGroups = accounts
+        .filter(account => clean(account.costCenterId || account.categoryId) === clean(center.id) && clean(account.dreGroupId))
+        .map(account => clean(account.dreGroupId));
+      const counts = childGroups.reduce((map,id) => map.set(id,(map.get(id)||0)+1), new Map());
+      const inherited = [...counts.entries()].sort((a,b)=>b[1]-a[1])[0]?.[0] || '';
+      center.dreGroupId = inherited || (center.nature === 'receita' ? 'DRE-RB' : center.id === 'CC-CMV' || center.id === 'CC-VEICULOS' ? 'DRE-CMV' : center.id === 'CC-FINANCEIRO' ? 'DRE-DF' : 'DRE-DO');
+      centersChanged = true;
+    }
+    if (centersChanged) { centersDb.updatedAt=now(); this.writeFile(CATALOGS.costCenters, centersDb); }
+
+    // Completa automaticamente códigos ausentes em Planos de Conta legados/recém-criados.
+    // Faz isso depois de carregar os Centros para manter a numeração por grupo.
+    let accountCodesChanged = false;
+    const centerByIdForCodes = new Map((centersDb.items || []).map(center => [clean(center.id), center]));
+    for (const account of accounts) {
+      if (clean(account.code)) continue;
+      const center = centerByIdForCodes.get(clean(account.costCenterId || account.categoryId));
+      if (!center) continue;
+      account.code = this.nextAccountCode(center, accounts.filter(item => item.id !== account.id));
+      accountCodesChanged = true;
+    }
+    if (accountCodesChanged) { accountsDb.items = accounts; accountsDb.updatedAt = now(); this.writeFile(CATALOGS.accounts, accountsDb); }
+
     const methodsDb = this.readFile(CATALOGS.paymentMethods, { items:[] });
     let methodsChanged = false;
     for (const method of methodsDb.items || []) {
+      // V17: parâmetros independentes para Venda e para Compras/Contas a Pagar.
+      // `autoSettle` permanece apenas como alias legado de "Pago na venda".
+      if (method.salesPaid === undefined) {
+        method.salesPaid = method.autoSettle === true;
+        methodsChanged = true;
+      }
+      if (method.purchasePaid === undefined) {
+        // Migração conservadora: evita que cartões usados como pagos no PDV
+        // sejam tratados como despesas automaticamente pagas.
+        method.purchasePaid = method.autoSettle === true
+          && method.modules?.purchases === true
+          && method.allowInstallments !== true;
+        methodsChanged = true;
+      }
+      if (method.creditCashOnSale === undefined) {
+        method.creditCashOnSale = true;
+        methodsChanged = true;
+      }
+      if (method.debitCashOnPurchase === undefined) {
+        method.debitCashOnPurchase = true;
+        methodsChanged = true;
+      }
+      if (method.autoSettle !== method.salesPaid) {
+        method.autoSettle = method.salesPaid === true;
+        methodsChanged = true;
+      }
       const marker = clean(`${method.id} ${method.code} ${method.name}`).normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase();
+      const isCashMoney = method.id === 'PM-DINHEIRO' || clean(method.code).toUpperCase() === 'DIN' || clean(method.name).normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase() === 'dinheiro';
+      if (isCashMoney && (method.salesPaid !== true || method.purchasePaid !== true || method.autoSettle !== true)) {
+        method.salesPaid = true;
+        method.purchasePaid = true;
+        method.autoSettle = true;
+        methodsChanged = true;
+      }
       if ((marker.includes('boleto') || marker.includes('crediario')) && method.system === true) {
         const defaults = { generatesReceivable:true, requireIdentifiedCustomer:true, requireValidDocument:true, requireCreditReceipt:true, firstDueDays:30, installmentIntervalDays:30 };
         for (const [key,value] of Object.entries(defaults)) if (method[key] === undefined) { method[key]=value; methodsChanged=true; }
@@ -146,6 +221,17 @@ export default class FinanceService {
     const items = this.readFile(filename).items || [];
     return items.filter(item => includeInactive || item.active !== false)
       .sort((a,b) => clean(a.code || a.name).localeCompare(clean(b.code || b.name), 'pt-BR', { numeric:true }));
+  }
+  nextAccountCode(costCenter, accounts=[]) {
+    const centerCode = clean(costCenter?.code).replace(/^0+(?=\d)/, '') || clean(costCenter?.code) || '0';
+    const isIncome = clean(costCenter?.nature) === 'receita';
+    const prefix = isIncome ? '1.' : `2.${centerCode}.`;
+    const numbers = (accounts || []).map(item => clean(item.code)).filter(code => code.startsWith(prefix)).map(code => {
+      const tail = code.slice(prefix.length).split('.')[0];
+      return /^\d+$/.test(tail) ? Number(tail) : 0;
+    }).filter(Boolean);
+    const next = (numbers.length ? Math.max(...numbers) : 0) + 1;
+    return isIncome ? `1.${String(next).padStart(2,'0')}` : `${prefix}${String(next).padStart(2,'0')}`;
   }
   saveCatalogItem(catalog, payload={}, actor='painel') {
     const filename = CATALOGS[catalog];
@@ -168,16 +254,44 @@ export default class FinanceService {
       updatedAt:now(), updatedBy:actor
     };
     if (!existing.createdAt) { base.createdAt = now(); base.createdBy = actor; }
+    if (catalog === 'costCenters') {
+      base.nature = clean(payload.nature || existing.nature) || 'despesa';
+      if (!clean(base.dreGroupId)) {
+        const childGroups=this.listCatalog('accounts').filter(account=>clean(account.costCenterId||account.categoryId)===id&&clean(account.dreGroupId)).map(account=>clean(account.dreGroupId));
+        const counts=childGroups.reduce((map,groupId)=>map.set(groupId,(map.get(groupId)||0)+1),new Map());
+        const marker=clean(`${base.id} ${base.code} ${base.name}`).normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase();
+        const automaticGroup=base.nature==='receita'?'DRE-RB':(marker.includes('financeir')||marker.includes('bancar'))?'DRE-DF':(marker.includes('cmv')||marker.includes('mercadoria vendida')||marker.includes('revenda'))?'DRE-CMV':'DRE-DO';
+        base.dreGroupId=[...counts.entries()].sort((a,b)=>b[1]-a[1])[0]?.[0] || automaticGroup;
+      }
+    }
     if (catalog === 'accounts') {
-      base.categoryId = clean(payload.categoryId || existing.categoryId) || null;
-      base.parentId = null; // v0.16.2: planos ficam diretamente dentro do centro de custo
-      if (!base.categoryId) throw new Error('Selecione o Centro de Custo do Plano de Conta.');
-      const category = this.listCatalog('categories').find(item => item.id === base.categoryId);
-      if (!category) throw new Error('Centro de Custo não encontrado.');
-      base.type = category.nature || payload.type || existing.type || 'despesa';
+      base.costCenterId = clean(payload.costCenterId || payload.categoryId || existing.costCenterId || existing.categoryId) || null;
+      base.categoryId = base.costCenterId; // compatibilidade com cadastros anteriores à v0.25.6
+      base.parentId = null;
+      if (!base.costCenterId) throw new Error('Selecione o Centro de Custo do Plano de Conta.');
+      const costCenter = this.listCatalog('costCenters').find(item => item.id === base.costCenterId);
+      if (!costCenter) throw new Error('Centro de Custo não encontrado.');
+      // Código de Plano de Conta é responsabilidade do sistema. Em novos planos,
+      // gera o próximo código dentro do Centro de Custo (ex.: 2.40.17).
+      // Em edições, preserva o código já existente.
+      if (!clean(existing.code)) base.code = this.nextAccountCode(costCenter, items.filter(item => item.id !== id));
+      else base.code = clean(existing.code);
+      base.type = costCenter.nature || payload.type || existing.type || 'despesa';
+      // Centro de Custo + Plano de Conta formam uma única classificação operacional.
+      // O Grupo DRE é herdado do Centro de Custo e deixa de ser uma escolha manual
+      // repetida em cada plano.
+      const centerMarker=clean(`${costCenter.id} ${costCenter.code} ${costCenter.name}`).normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase();
+      const automaticGroup=base.type==='receita'?'DRE-RB':(centerMarker.includes('financeir')||centerMarker.includes('bancar'))?'DRE-DF':(centerMarker.includes('cmv')||centerMarker.includes('mercadoria vendida')||centerMarker.includes('revenda'))?'DRE-CMV':'DRE-DO';
+      base.dreGroupId = clean(costCenter.dreGroupId || existing.dreGroupId) || automaticGroup;
     }
     if (catalog === 'paymentMethods') {
-      base.autoSettle = bool(payload.autoSettle, existing.autoSettle === true);
+      const isCashMoney = existing.id === 'PM-DINHEIRO' || clean(payload.code ?? existing.code).toUpperCase() === 'DIN' || clean(payload.name ?? existing.name).normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase() === 'dinheiro';
+      base.salesPaid = isCashMoney ? true : bool(payload.salesPaid, existing.salesPaid ?? existing.autoSettle === true);
+      base.purchasePaid = isCashMoney ? true : bool(payload.purchasePaid, existing.purchasePaid === true);
+      base.creditCashOnSale = bool(payload.creditCashOnSale, existing.creditCashOnSale !== false);
+      base.debitCashOnPurchase = bool(payload.debitCashOnPurchase, existing.debitCashOnPurchase !== false);
+      // Compatibilidade: autoSettle representa somente o comportamento da venda.
+      base.autoSettle = base.salesPaid === true;
       base.allowInstallments = bool(payload.allowInstallments, existing.allowInstallments === true);
       base.maxInstallments = Math.max(1, Number(payload.maxInstallments || existing.maxInstallments || 1));
       base.settlementDays = Math.max(0, Number(payload.settlementDays ?? existing.settlementDays ?? 0));
@@ -214,7 +328,7 @@ export default class FinanceService {
         .sort((a,b) => a.installments-b.installments);
       // Regra interna: a interface não expõe termos técnicos como "evento gerado".
       // O FinanceService infere o comportamento conforme baixa e prazo.
-      base.eventType = existing.eventType || (base.autoSettle ? (base.settlementDays > 0 ? 'bank' : 'cash') : (base.allowInstallments ? 'title' : 'receivable'));
+      base.eventType = existing.eventType || (base.salesPaid ? (base.settlementDays > 0 ? 'bank' : 'cash') : (base.allowInstallments ? 'title' : 'receivable'));
       const modules = payload.modules || {};
       base.modules = {
         sales:bool(modules.sales), purchases:bool(modules.purchases), pdv:bool(modules.pdv),
@@ -303,6 +417,7 @@ export default class FinanceService {
       const paymentRecord = {
         id:`FPY-${crypto.randomUUID()}`, ...common, entryId:entry.id, sequence:index+1,
         paymentMethodId:payment.paymentMethodId, paymentMethodName:payment.paymentMethodName,
+        installments:Math.max(1,Number(payment.installments||1)||1),
         value:Number(payment.value || 0), createdAt:now(), createdBy:clean(actor) || 'painel'
       };
       const movement = {
@@ -325,6 +440,25 @@ export default class FinanceService {
     this.writeFile('movements.json', movementsDb);
     this.audit('receivable_receipt_posted', { receiptId:receipt.id, receivableId:title.id, entryId:entry.id, movementIds:financeMovements.map(item=>item.id), actor });
     return { duplicated:false, entries:[entry], payments:financePayments, movements:financeMovements };
+  }
+
+
+  reverseReceivableReceipt({ receipt, title, reason='', actor='painel' } = {}) {
+    if (!receipt?.id || !title?.id) throw new Error('Dados do recebimento para estorno incompletos.');
+    const reversedAt=now();
+    const mark=(fileName)=>{
+      const db=this.readFile(fileName,{version:'0.23.6',items:[]}); db.items=db.items||[];
+      let changed=0;
+      for (const item of db.items) {
+        if (item.receiptId!==receipt.id || item.status==='reversed') continue;
+        item.status='reversed'; item.reversedAt=reversedAt; item.reversedBy=clean(actor)||'painel'; item.reverseReason=clean(reason); changed+=1;
+      }
+      if (changed) this.writeFile(fileName,db);
+      return changed;
+    };
+    const result={entries:mark('entries.json'),payments:mark('payments.json'),movements:mark('movements.json')};
+    this.audit('receivable_receipt_reversed',{receiptId:receipt.id,receivableId:title.id,reason:clean(reason),actor:clean(actor)||'painel',...result});
+    return result;
   }
 
 
@@ -360,17 +494,61 @@ export default class FinanceService {
     return {duplicated:false,entries:[entry],payments:financePayments,movements:financeMovements};
   }
 
+
+  reversePayablePayment({ payment, title, reason='', actor='painel' } = {}) {
+    if (!payment?.id || !title?.id) throw new Error('Dados do pagamento para estorno incompletos.');
+    const reversedAt=now();
+    const mark=(fileName)=>{
+      const db=this.readFile(fileName,{version:'0.18.0',items:[]}); db.items=db.items||[];
+      let changed=0;
+      for (const item of db.items) {
+        if (item.payablePaymentId!==payment.id || item.status==='reversed') continue;
+        item.status='reversed'; item.reversedAt=reversedAt; item.reversedBy=clean(actor)||'painel'; item.reverseReason=clean(reason); changed+=1;
+      }
+      if (changed) this.writeFile(fileName,db);
+      return changed;
+    };
+    const result={ entries:mark('entries.json'), payments:mark('payments.json'), movements:mark('movements.json') };
+    this.audit('payable_payment_reversed',{payablePaymentId:payment.id,payableId:title.id,reason:clean(reason),actor:clean(actor)||'painel',...result});
+    return result;
+  }
+
   financialDashboardSummary(referenceDate='') {
     const date = clean(referenceDate) || new Date().toISOString().slice(0,10);
     const month = date.slice(0,7);
-    const movements = (this.readFile('movements.json', { items:[] }).items || []).filter(item => item.status !== 'reversed');
+    const movements = (this.readFile('movements.json', { items:[] }).items || []).filter(item => !['reversed','cancelled','void'].includes(clean(item.status).toLowerCase()) && clean(item.reversalStatus).toLowerCase() !== 'reversed');
     const income = movements.filter(item => item.direction === 'entrada');
     const expense = movements.filter(item => item.direction === 'saida');
-    const sum = items => Math.round(items.reduce((total,item)=>total+Number(item.value || 0),0)*100)/100;
+    const sum = items => Math.round(items.reduce((total,item)=>total+Number(item.openBalance ?? item.value ?? 0),0)*100)/100;
+    const addDays = (value, days) => { const d = new Date(`${value}T12:00:00`); d.setDate(d.getDate()+days); return d.toISOString().slice(0,10); };
+    const current = new Date(`${date}T12:00:00`);
+    const mondayOffset = (current.getDay()+6)%7;
+    const weekStart = addDays(date, -mondayOffset);
+    const weekEnd = addDays(weekStart, 6);
+    const nextWeekStart = addDays(weekStart, 7);
+    const nextWeekEnd = addDays(weekStart, 13);
+    const payables = (this.readFile('payables.json', { items:[] }).items || []).filter(item => !['cancelled','reversed'].includes(item.status));
+    const payableIds = new Set(payables.map(item=>item.id));
+    const installments = (this.readFile('payable-installments.json', { items:[] }).items || []).filter(item => payableIds.has(item.payableId) && Number(item.openBalance || 0) > 0 && !['paid','cancelled','reversed'].includes(item.status));
+    const commitment = (from,to) => { const rows=installments.filter(item=>item.dueDate>=from && item.dueDate<=to); return { count:rows.length, value:sum(rows), from, to }; };
+    const overdueRows = installments.filter(item=>item.dueDate && item.dueDate<date);
+    const next30End = addDays(date,30);
+    const todayIncome=sum(income.filter(item=>item.movementDate===date));
+    const todayExpense=sum(expense.filter(item=>item.movementDate===date));
+    const monthIncome=sum(income.filter(item=>clean(item.movementDate).slice(0,7)===month));
+    const monthExpense=sum(expense.filter(item=>clean(item.movementDate).slice(0,7)===month));
+    const totalIncome=sum(income);
+    const totalExpense=sum(expense);
     return {
-      today:{ income:sum(income.filter(item=>item.movementDate===date)), expense:sum(expense.filter(item=>item.movementDate===date)) },
-      month:{ income:sum(income.filter(item=>clean(item.movementDate).slice(0,7)===month)), expense:sum(expense.filter(item=>clean(item.movementDate).slice(0,7)===month)) },
-      balance:Math.round((sum(income)-sum(expense))*100)/100,
+      today:{ income:todayIncome, expense:todayExpense, balance:Math.round((todayIncome-todayExpense)*100)/100 },
+      month:{ income:monthIncome, expense:monthExpense, balance:Math.round((monthIncome-monthExpense)*100)/100 },
+      balance:Math.round((totalIncome-totalExpense)*100)/100,
+      commitments:{
+        overdue:{ count:overdueRows.length, value:sum(overdueRows) },
+        thisWeek:commitment(date, weekEnd),
+        nextWeek:commitment(nextWeekStart, nextWeekEnd),
+        next30Days:commitment(date, next30End)
+      },
       movementCount:movements.length,
       updatedAt:now()
     };

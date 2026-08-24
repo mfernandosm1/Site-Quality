@@ -1,0 +1,287 @@
+<% layout('layout') -%>
+<%
+  const fmt = value => value ? new Date(value).toLocaleString('pt-BR', { dateStyle:'short', timeStyle:'short' }) : 'Sem data';
+  const palette = ['#4b83ff','#9b6cff','#20a46b','#e19b24','#df5b66','#2aa7b8'];
+  const types = Array.isArray(agendaTypes) ? agendaTypes : [];
+  const typeMap = new Map(types.map(item=>[item.id,item]));
+  const knownOwners = [...(registeredOwners||[])];
+  const selectableOwners = [...(registeredOwners||[])];
+  const undatedItems = overview.undated || overview.reminders || [];
+  const taskOwnerNames = [...new Set([...(overview.overdue||[]),...(overview.today||[]),...(overview.upcoming||[]),...undatedItems,...(overview.completed||[])].map(t=>t.owner).filter(Boolean))];
+  taskOwnerNames.forEach((name,index)=>{ if(!knownOwners.some(item=>item.name===name)) knownOwners.push({ id:'', name, color:palette[index%palette.length], legacy:true }); });
+  const ownerColor = name => knownOwners.find(item=>item.name===name)?.color || '#64748b';
+  const ownersForItems = items => [...new Set((items||[]).map(t=>t.owner||'Sem responsável'))].sort((a,b)=>a.localeCompare(b,'pt-BR'));
+  const taskTypeName = task => task.typeName || typeMap.get(task.type)?.name || 'Tarefa';
+  const formatMinutes = value => {
+    const mins=Math.max(0,Number(value||0));
+    if(mins<60) return `${Math.round(mins)} min`;
+    if(mins<1440){ const h=Math.floor(mins/60),m=Math.round(mins%60); return m?`${h}h ${m}min`:`${h}h`; }
+    const d=Math.floor(mins/1440),h=Math.round((mins%1440)/60); return h?`${d}d ${h}h`:`${d}d`;
+  };
+  const initialTab = (overview.overdue||[]).length ? 'vencidas' : (overview.today||[]).length ? 'hoje' : (overview.upcoming||[]).length ? 'proximas' : undatedItems.length ? 'semdata' : 'concluidas';
+%>
+<div data-agenda-page>
+<section class="agenda-head">
+  <div><span class="erp-kicker">ORGANIZAÇÃO</span><h1>Agenda</h1><p>Tarefas, compromissos e lembretes organizados por responsável.</p></div>
+  <div class="agenda-head-actions">
+    <button class="agenda-settings-toggle" type="button" data-agenda-settings-toggle aria-expanded="false">⚙ Configurações</button>
+    <a class="btn" href="/">← Dashboard</a>
+  </div>
+</section>
+
+<section class="agenda-create-card">
+  <form method="post" action="/erp/agenda" class="agenda-quick-form" data-agenda-form>
+    <div class="agenda-field agenda-title-field"><label>O que precisa ser feito?</label><input name="title" maxlength="180" required autofocus placeholder="Ex.: Retornar orçamento do João"></div>
+    <div class="agenda-field agenda-date-field" data-agenda-date-field><label>Quando?</label><div class="agenda-date-control"><input type="datetime-local" name="dueAt" min="2000-01-01T00:00" max="2100-12-31T23:59" required data-agenda-due><button type="button" class="agenda-clear-date" data-agenda-clear-date hidden>Sem data</button></div></div>
+    <div class="agenda-field"><label>Tipo</label><select name="type" data-agenda-type><% types.forEach(item => { %><option value="<%= item.id %>" data-due-mode="<%= item.dueMode %>"><%= item.name %></option><% }) %></select></div>
+    <div class="agenda-field"><label>Cliente <small>(opcional)</small></label><select name="customerId"><option value="">Sem cliente vinculado</option><% customers.forEach(customer => { %><option value="<%= customer.id %>"><%= customer.name %><%= customer.document ? ` · ${customer.document}` : '' %></option><% }) %></select></div>
+    <div class="agenda-field"><label>Responsável</label><select name="owner" required><% selectableOwners.forEach(person => { %><option value="<%= person.name %>" <%= person.name===owner?'selected':'' %>><%= person.name %></option><% }) %></select></div>
+    <div class="agenda-field agenda-priority"><label>Prioridade</label><select name="priority"><option value="medium">Normal</option><option value="high">Alta</option><option value="low">Baixa</option></select></div>
+    <button class="btn primary agenda-add" type="submit">+ Adicionar</button>
+  </form>
+</section>
+
+<section class="agenda-settings-wrap">
+  <div class="agenda-settings-panel" data-agenda-settings hidden>
+    <div class="agenda-settings-head"><div><strong>Configurações da agenda</strong><small>Responsáveis, tipos e recursos que alteram o funcionamento da agenda ficam concentrados aqui.</small></div><button type="button" data-agenda-settings-close aria-label="Fechar configurações">×</button></div>
+    <div class="agenda-settings-grid">
+      <section class="agenda-setting-card">
+        <div class="agenda-setting-title"><div><span>RESPONSÁVEIS</span><h3>Quem pode receber itens</h3></div></div>
+        <form method="post" action="/erp/agenda/responsaveis" class="agenda-owner-add-form">
+          <div class="agenda-field"><label>Nome do responsável</label><input name="name" maxlength="160" required placeholder="Ex.: João"></div>
+          <div class="agenda-field agenda-color-field"><label>Cor</label><input type="color" name="color" value="<%= palette[(registeredOwners||[]).length % palette.length] %>" aria-label="Cor do responsável"></div>
+          <button class="btn primary" type="submit">+ Cadastrar</button>
+        </form>
+        <div class="agenda-owner-registry">
+          <% if(!(registeredOwners||[]).length){ %><small>Nenhum responsável cadastrado.</small><% } %>
+          <% (registeredOwners||[]).forEach(person => { %>
+            <div class="agenda-owner-registry-item"><span class="agenda-owner-dot" style="--owner-color:<%= person.color %>"></span><strong><%= person.name %></strong><form method="post" action="/erp/agenda/responsaveis/<%= person.id %>/excluir" onsubmit="return confirm('Remover este responsável da lista? As tarefas já criadas serão preservadas.')"><button type="submit" title="Remover responsável">×</button></form></div>
+          <% }) %>
+        </div>
+      </section>
+
+      <section class="agenda-setting-card">
+        <div class="agenda-setting-title"><div><span>TIPOS</span><h3>Tipos de compromisso</h3></div></div>
+        <form method="post" action="/erp/agenda/tipos" class="agenda-type-add-form">
+          <div class="agenda-field"><label>Nome do tipo</label><input name="name" maxlength="80" required placeholder="Ex.: Cobrança"></div>
+          <div class="agenda-field"><label>Data</label><select name="dueMode"><option value="required">Obrigatória</option><option value="optional">Opcional</option></select></div>
+          <button class="btn primary" type="submit">+ Cadastrar</button>
+        </form>
+        <div class="agenda-type-registry">
+          <% types.forEach(item => { %>
+            <div class="agenda-type-registry-item"><div><strong><%= item.name %></strong><small><%= item.dueMode==='optional'?'Data opcional':'Data obrigatória' %><%= item.builtin?' · padrão':'' %></small></div><% if(!item.builtin){ %><form method="post" action="/erp/agenda/tipos/<%= item.id %>/excluir" onsubmit="return confirm('Remover este tipo?')"><button type="submit" title="Remover tipo">×</button></form><% } %></div>
+          <% }) %>
+        </div>
+      </section>
+    </div>
+
+    <% if((analytics||[]).length){ %>
+    <section class="agenda-analytics-section">
+      <div class="agenda-setting-title"><div><span>ANÁLISE</span><h3>Organização por responsável</h3><small>Exibida somente quando existe histórico suficiente de compromissos concluídos com prazo.</small></div></div>
+      <div class="agenda-analytics-grid">
+        <% (analytics||[]).forEach(item => { %>
+        <article class="agenda-analytics-card <%= item.tone %>" style="--owner-color:<%= item.color %>">
+          <header><span class="agenda-owner-dot"></span><strong><%= item.owner %></strong><small>Base: <%= item.completedCount %> concluídos</small></header>
+          <div class="agenda-analytics-metrics"><div><b><%= item.onTimeRate %>%</b><span>no prazo</span></div><div><b><%= item.avgDelayMinutes ? formatMinutes(item.avgDelayMinutes) : '—' %></b><span>atraso médio</span></div><div><b><%= item.avgEarlyMinutes ? formatMinutes(item.avgEarlyMinutes) : '—' %></b><span>antecedência média</span></div></div>
+          <p><%= item.insight %></p>
+        </article>
+        <% }) %>
+      </div>
+    </section>
+    <% } %>
+  </div>
+</section>
+
+<section class="agenda-owner-filter">
+  <span>Visualizar:</span>
+  <a class="agenda-owner-chip <%= selectedOwner === 'all' ? 'active' : '' %>" href="/erp/agenda?responsavel=all">Todas as pessoas</a>
+  <% knownOwners.forEach(person => { %><a class="agenda-owner-chip <%= selectedOwner === person.name ? 'active' : '' %>" style="--owner-color:<%= person.color %>" href="/erp/agenda?responsavel=<%= encodeURIComponent(person.name) %>"><span class="agenda-owner-dot"></span><%= person.name %></a><% }) %>
+</section>
+
+<section class="agenda-summary-row agenda-summary-five" role="tablist" aria-label="Filtros da agenda">
+  <button type="button" class="agenda-summary danger erp-tone-expense <%= initialTab==='vencidas'?'active':'' %>" data-agenda-tab="vencidas"><span>Vencidas</span><b><%= overview.overdue.length %></b></button>
+  <button type="button" class="agenda-summary warning erp-tone-warning <%= initialTab==='hoje'?'active':'' %>" data-agenda-tab="hoje"><span>Hoje</span><b><%= overview.today.length %></b></button>
+  <button type="button" class="agenda-summary erp-tone-income <%= initialTab==='proximas'?'active':'' %>" data-agenda-tab="proximas"><span>Próximas</span><b><%= overview.upcoming.length %></b></button>
+  <button type="button" class="agenda-summary reminder erp-tone-info <%= initialTab==='semdata'?'active':'' %>" data-agenda-tab="semdata"><span>Sem data</span><b><%= undatedItems.length %></b></button>
+  <button type="button" class="agenda-summary erp-tone-success <%= initialTab==='concluidas'?'active':'' %>" data-agenda-tab="concluidas"><span>Concluídas</span><b><%= (overview.completed||[]).length %></b></button>
+</section>
+
+<div class="agenda-tab-panels">
+<% const groups = [ ['vencidas','Vencidas',overview.overdue], ['hoje','Hoje',overview.today], ['proximas','Próximas',overview.upcoming], ['semdata','Sem data',undatedItems] ]; %>
+<% groups.forEach(([id,label,items]) => { const groupOwners=ownersForItems(items); %>
+<section class="agenda-group" id="<%= id %>" data-agenda-panel="<%= id %>" <%= id === initialTab ? '' : 'hidden' %>>
+  <div class="agenda-group-head"><h2><%= label %></h2><span><%= items.length %></span></div>
+  <% if(!items.length){ %><div class="agenda-empty">Nenhum item aqui.</div><% } %>
+  <% if(items.length){ %>
+  <div class="agenda-owner-columns <%= groupOwners.length===1?'single':'' %>">
+    <% groupOwners.forEach(ownerName => { const ownerItems=items.filter(task=>(task.owner||'Sem responsável')===ownerName); const color=ownerColor(ownerName); %>
+      <section class="agenda-owner-column" style="--owner-color:<%= color %>">
+        <header><span class="agenda-owner-dot"></span><strong><%= ownerName %></strong><b><%= ownerItems.length %></b></header>
+        <div class="agenda-list">
+          <% ownerItems.forEach(task => { %>
+          <article class="agenda-item <%= task.priority === 'high' ? 'high' : '' %>">
+            <div class="agenda-check"><form method="post" action="/erp/agenda/<%= task.id %>/concluir"><button type="submit" title="Marcar como concluída">✓</button></form></div>
+            <div class="agenda-item-main">
+              <div class="agenda-item-title"><strong><%= task.title %></strong><span><%= taskTypeName(task) %></span><% if(task.priority === 'high'){ %><em>Alta</em><% } %></div>
+              <small><%= task.dueAt ? fmt(task.dueAt) : '🔔 Sem data definida' %><% if(task.customerName){ %> · <a href="/erp/clientes/<%= task.customerId %>/ficha"><%= task.customerName %></a><% } %></small>
+              <% if(task.description){ %><p><%= task.description %></p><% } %>
+            </div>
+            <details class="agenda-more"><summary>•••</summary><form method="post" action="/erp/agenda/<%= task.id %>/excluir" onsubmit="return confirm('Remover este item?')"><button type="submit">Excluir</button></form></details>
+          </article>
+          <% }) %>
+        </div>
+      </section>
+    <% }) %>
+  </div>
+  <% } %>
+</section>
+<% }) %>
+
+<section class="agenda-group agenda-completed" id="concluidas" data-agenda-panel="concluidas" <%= initialTab === 'concluidas' ? '' : 'hidden' %>>
+  <div class="agenda-group-head"><h2>Concluídas recentemente</h2><span><%= (overview.completed||[]).length %></span></div>
+  <% if(!(overview.completed||[]).length){ %><div class="agenda-empty">Nenhuma tarefa concluída recentemente.</div><% } %>
+  <div class="agenda-list completed"><% (overview.completed||[]).forEach(task => { %><article class="agenda-item"><div class="agenda-item-main"><div class="agenda-item-title"><strong><%= task.title %></strong><span><%= taskTypeName(task) %></span><span class="agenda-owner-badge" style="--owner-color:<%= ownerColor(task.owner) %>"><span class="agenda-owner-dot"></span><%= task.owner || 'Sem responsável' %></span></div><small><%= task.completedAt ? new Date(task.completedAt).toLocaleString('pt-BR') : '' %></small></div></article><% }) %></div>
+</section>
+</div>
+</div>
+<script>
+(function(){
+  const PAGE_SELECTOR='[data-agenda-page]';
+  let refreshing=false;
+
+  function showAgendaToast(message,tone='success'){
+    if(!message) return;
+    let toast=document.querySelector('[data-agenda-toast]');
+    if(!toast){
+      toast=document.createElement('div');
+      toast.dataset.agendaToast='1';
+      toast.className='agenda-inline-toast';
+      document.body.appendChild(toast);
+    }
+    toast.className=`agenda-inline-toast ${tone}`;
+    toast.textContent=message;
+    toast.hidden=false;
+    clearTimeout(showAgendaToast.timer);
+    showAgendaToast.timer=setTimeout(()=>{ toast.hidden=true; },2400);
+  }
+
+  function validDateTime(value){
+    const m=String(value||'').match(/^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2})$/);
+    if(!m) return false;
+    const y=+m[1],mo=+m[2],da=+m[3],h=+m[4],mi=+m[5];
+    if(y<2000||y>2100||mo<1||mo>12||da<1||da>31||h<0||h>23||mi<0||mi>59) return false;
+    const d=new Date(y,mo-1,da,h,mi);
+    return d.getFullYear()===y&&d.getMonth()===mo-1&&d.getDate()===da&&d.getHours()===h&&d.getMinutes()===mi;
+  }
+
+  function initAgendaPage({settingsOpen=false,activeTab=''}={}){
+    const page=document.querySelector(PAGE_SELECTOR);
+    if(!page) return;
+    const input=page.querySelector('[data-agenda-due]');
+    const type=page.querySelector('[data-agenda-type]');
+    const clearDate=page.querySelector('[data-agenda-clear-date]');
+    let dateTouched=false;
+    function selectedDueMode(){ return type?.selectedOptions?.[0]?.dataset?.dueMode==='optional'?'optional':'required'; }
+    function setDefaultDate(){
+      if(!input || input.value) return;
+      const d=new Date(); d.setMinutes(0,0,0); d.setHours(d.getHours()+1);
+      input.value=new Date(d.getTime()-d.getTimezoneOffset()*60000).toISOString().slice(0,16);
+      input.dataset.autoDate='1';
+    }
+    function syncType(){
+      const optional=selectedDueMode()==='optional';
+      if(input){
+        input.required=!optional;
+        if(optional && !dateTouched && input.dataset.autoDate==='1'){ input.value=''; input.dataset.autoDate=''; }
+        if(!optional && !input.value) setDefaultDate();
+      }
+      if(clearDate) clearDate.hidden=!optional;
+    }
+    setDefaultDate(); syncType();
+    type?.addEventListener('change',syncType);
+    input?.addEventListener('input',()=>{ dateTouched=true; input.dataset.autoDate=''; input.setCustomValidity(''); });
+    clearDate?.addEventListener('click',()=>{ if(!input)return; input.value=''; input.dataset.autoDate=''; dateTouched=true; input.focus(); });
+
+    const form=page.querySelector('[data-agenda-form]');
+    if(form&&input){
+      form.addEventListener('submit',function(event){
+        const optional=selectedDueMode()==='optional'&&!input.value;
+        input.setCustomValidity(optional||validDateTime(input.value)?'':'Informe uma data válida entre 2000 e 2100.');
+        if(!input.checkValidity()){ event.preventDefault(); input.reportValidity(); }
+      });
+    }
+
+    const settings=page.querySelector('[data-agenda-settings]');
+    const settingsToggle=page.querySelector('[data-agenda-settings-toggle]');
+    const settingsClose=page.querySelector('[data-agenda-settings-close]');
+    function setSettings(open){ if(!settings)return; settings.hidden=!open; settingsToggle?.setAttribute('aria-expanded',open?'true':'false'); }
+    setSettings(settingsOpen);
+    settingsToggle?.addEventListener('click',()=>setSettings(settings.hidden));
+    settingsClose?.addEventListener('click',()=>setSettings(false));
+
+    const tabs=[...page.querySelectorAll('[data-agenda-tab]')];
+    const panels=[...page.querySelectorAll('[data-agenda-panel]')];
+    const wanted=activeTab && tabs.some(tab=>tab.dataset.agendaTab===activeTab) ? activeTab : (tabs.find(tab=>tab.classList.contains('active'))?.dataset.agendaTab||'');
+    if(wanted){
+      tabs.forEach(tab=>tab.classList.toggle('active',tab.dataset.agendaTab===wanted));
+      panels.forEach(panel=>panel.hidden=panel.dataset.agendaPanel!==wanted);
+    }
+    tabs.forEach(tab=>tab.addEventListener('click',()=>{
+      tabs.forEach(item=>item.classList.toggle('active',item===tab));
+      panels.forEach(panel=>panel.hidden=panel.dataset.agendaPanel!==tab.dataset.agendaTab);
+    }));
+  }
+
+  async function refreshAgenda(){
+    if(refreshing) return;
+    refreshing=true;
+    const current=document.querySelector(PAGE_SELECTOR);
+    if(!current){ refreshing=false; return; }
+    const scrollY=window.scrollY;
+    const settingsOpen=!current.querySelector('[data-agenda-settings]')?.hidden;
+    const activeTab=current.querySelector('[data-agenda-tab].active')?.dataset.agendaTab||'';
+    try{
+      const response=await fetch(window.location.href,{headers:{Accept:'text/html','X-Agenda-Refresh':'1'},cache:'no-store'});
+      if(!response.ok) throw new Error('Não foi possível atualizar a agenda.');
+      const html=await response.text();
+      const doc=new DOMParser().parseFromString(html,'text/html');
+      const incoming=doc.querySelector(PAGE_SELECTOR);
+      if(!incoming) throw new Error('A agenda retornou uma resposta inválida.');
+      current.innerHTML=incoming.innerHTML;
+      initAgendaPage({settingsOpen,activeTab});
+      requestAnimationFrame(()=>window.scrollTo({top:scrollY,left:0,behavior:'auto'}));
+    }finally{ refreshing=false; }
+  }
+
+  if(!window.__qualityAgendaAsyncBound){
+    window.__qualityAgendaAsyncBound=true;
+    document.addEventListener('submit',async event=>{
+      const form=event.target.closest(`${PAGE_SELECTOR} form[method="post"]`);
+      if(!form || event.defaultPrevented) return;
+      event.preventDefault();
+      const submitter=event.submitter || form.querySelector('button[type="submit"]');
+      const oldText=submitter?.textContent;
+      if(submitter){ submitter.disabled=true; submitter.textContent='Salvando…'; }
+      try{
+        const body=new URLSearchParams();
+        new FormData(form).forEach((value,key)=>body.append(key,String(value)));
+        const response=await fetch(form.action,{method:'POST',headers:{Accept:'application/json','Content-Type':'application/x-www-form-urlencoded;charset=UTF-8'},body});
+        const data=await response.json().catch(()=>({success:false,message:'Resposta inválida do servidor.'}));
+        if(!response.ok || data.success===false) throw new Error(data.message||'Não foi possível concluir a ação.');
+        await refreshAgenda();
+        showAgendaToast(data.message||'Agenda atualizada.');
+      }catch(error){
+        showAgendaToast(error.message||'Não foi possível concluir a ação.','error');
+        if(submitter){ submitter.disabled=false; submitter.textContent=oldText; }
+      }
+    });
+  }
+
+  initAgendaPage();
+  const notice=document.querySelector('.container > .notice');
+  if(notice){
+    setTimeout(()=>{ notice.style.transition='opacity .2s ease,transform .2s ease'; notice.style.opacity='0'; notice.style.transform='translateY(-4px)'; setTimeout(()=>notice.remove(),220); },2500);
+    try{ const url=new URL(window.location.href); if(url.searchParams.has('flash')){ url.searchParams.delete('flash'); history.replaceState(null,'',url.pathname+(url.search?'?'+url.searchParams.toString():'')+url.hash); } }catch(_e){}
+  }
+})();
+</script>

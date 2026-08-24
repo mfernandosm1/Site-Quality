@@ -1,0 +1,138 @@
+{
+  "createdAt": "2026-08-18T20:25:42.472Z",
+  "count": {
+    "id": "CNT-20260818-0003",
+    "type": "partial",
+    "status": "in_progress",
+    "blockPdv": false,
+    "notes": "",
+    "locationId": "loja-principal",
+    "startedAt": "2026-08-18T20:15:48.218Z",
+    "createdAt": "2026-08-18T20:15:48.218Z",
+    "createdBy": "painel",
+    "updatedAt": "2026-08-18T20:25:16.091Z",
+    "items": [
+      {
+        "inventoryItemId": "PRD-1786323149628",
+        "productId": "PRD-1786323149628",
+        "selectionId": "PRD-1786323149628",
+        "name": "Capa Xiaomi Redmi Note 15 4G e 5G - Clear Case Fosca Graphite Black",
+        "code": "PRD-123",
+        "sku": "80603",
+        "barcode": "",
+        "variationLabel": "",
+        "systemQuantityAtCount": 2,
+        "countedQuantity": 1,
+        "firstCountedAt": "2026-08-18T20:25:16.091Z",
+        "lastCountedAt": "2026-08-18T20:25:16.091Z"
+      }
+    ],
+    "snapshot": [],
+    "events": [
+      {
+        "id": "EVT-1787084148218-gh8122",
+        "type": "created",
+        "actor": "painel",
+        "createdAt": "2026-08-18T20:15:48.218Z",
+        "metadata": {
+          "type": "partial",
+          "blockPdv": false,
+          "snapshotSize": 0
+        }
+      },
+      {
+        "id": "EVT-1787084716094-o11qwl",
+        "type": "item_counted",
+        "actor": "painel",
+        "createdAt": "2026-08-18T20:25:16.094Z",
+        "metadata": {
+          "inventoryItemId": "PRD-1786323149628",
+          "quantity": 1
+        }
+      }
+    ]
+  },
+  "conference": {
+    "count": {
+      "id": "CNT-20260818-0003",
+      "type": "partial",
+      "status": "in_progress",
+      "blockPdv": false,
+      "notes": "",
+      "locationId": "loja-principal",
+      "startedAt": "2026-08-18T20:15:48.218Z",
+      "createdAt": "2026-08-18T20:15:48.218Z",
+      "createdBy": "painel",
+      "updatedAt": "2026-08-18T20:25:16.091Z",
+      "items": [
+        {
+          "inventoryItemId": "PRD-1786323149628",
+          "productId": "PRD-1786323149628",
+          "selectionId": "PRD-1786323149628",
+          "name": "Capa Xiaomi Redmi Note 15 4G e 5G - Clear Case Fosca Graphite Black",
+          "code": "PRD-123",
+          "sku": "80603",
+          "barcode": "",
+          "variationLabel": "",
+          "systemQuantityAtCount": 2,
+          "countedQuantity": 1,
+          "firstCountedAt": "2026-08-18T20:25:16.091Z",
+          "lastCountedAt": "2026-08-18T20:25:16.091Z"
+        }
+      ],
+      "snapshot": [],
+      "events": [
+        {
+          "id": "EVT-1787084148218-gh8122",
+          "type": "created",
+          "actor": "painel",
+          "createdAt": "2026-08-18T20:15:48.218Z",
+          "metadata": {
+            "type": "partial",
+            "blockPdv": false,
+            "snapshotSize": 0
+          }
+        },
+        {
+          "id": "EVT-1787084716094-o11qwl",
+          "type": "item_counted",
+          "actor": "painel",
+          "createdAt": "2026-08-18T20:25:16.094Z",
+          "metadata": {
+            "inventoryItemId": "PRD-1786323149628",
+            "quantity": 1
+          }
+        }
+      ]
+    },
+    "rows": [
+      {
+        "inventoryItemId": "PRD-1786323149628",
+        "productId": "PRD-1786323149628",
+        "selectionId": "PRD-1786323149628",
+        "name": "Capa Xiaomi Redmi Note 15 4G e 5G - Clear Case Fosca Graphite Black",
+        "code": "PRD-123",
+        "sku": "80603",
+        "barcode": "",
+        "variationLabel": "",
+        "systemQuantityAtCount": 2,
+        "countedQuantity": 1,
+        "firstCountedAt": "2026-08-18T20:25:16.091Z",
+        "lastCountedAt": "2026-08-18T20:25:16.091Z",
+        "systemQuantity": 2,
+        "movementsAfterCount": 0,
+        "targetQuantity": 1,
+        "difference": -1
+      }
+    ],
+    "uncounted": [],
+    "summary": {
+      "counted": 1,
+      "matched": 0,
+      "shortage": 1,
+      "surplus": 0,
+      "divergences": 1,
+      "uncounted": 0
+    }
+  }
+}

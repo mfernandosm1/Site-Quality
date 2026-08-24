@@ -1,0 +1,214 @@
+{
+  "createdAt": "2026-08-18T01:04:01.137Z",
+  "count": {
+    "id": "CNT-20260817-0001",
+    "type": "partial",
+    "status": "in_progress",
+    "blockPdv": false,
+    "notes": "",
+    "locationId": "loja-principal",
+    "startedAt": "2026-08-18T00:42:24.949Z",
+    "createdAt": "2026-08-18T00:42:24.949Z",
+    "createdBy": "painel",
+    "updatedAt": "2026-08-18T01:03:41.082Z",
+    "items": [
+      {
+        "inventoryItemId": "PRD-1787014997526",
+        "productId": "1787014997526",
+        "selectionId": "1787014997526",
+        "name": "Celular Xiaomi Redmi Note 8 64gb usado",
+        "code": "PRD-825",
+        "sku": "PRD-825",
+        "barcode": "",
+        "variationLabel": "",
+        "systemQuantityAtCount": 0,
+        "countedQuantity": 1,
+        "firstCountedAt": "2026-08-18T01:03:41.082Z",
+        "lastCountedAt": "2026-08-18T01:03:41.082Z"
+      }
+    ],
+    "snapshot": [],
+    "events": [
+      {
+        "id": "EVT-1787013744950-qmeqac",
+        "type": "created",
+        "actor": "painel",
+        "createdAt": "2026-08-18T00:42:24.950Z",
+        "metadata": {
+          "type": "partial",
+          "blockPdv": false,
+          "snapshotSize": 0
+        }
+      },
+      {
+        "id": "EVT-1787013774579-j7ofeg",
+        "type": "item_counted",
+        "actor": "painel",
+        "createdAt": "2026-08-18T00:42:54.579Z",
+        "metadata": {
+          "inventoryItemId": "PRD-1786321760864",
+          "quantity": 1
+        }
+      },
+      {
+        "id": "EVT-1787013780278-5gxqkf",
+        "type": "item_counted",
+        "actor": "painel",
+        "createdAt": "2026-08-18T00:43:00.278Z",
+        "metadata": {
+          "inventoryItemId": "PRD-1787008976540",
+          "quantity": 1
+        }
+      },
+      {
+        "id": "EVT-1787013789476-m84czs",
+        "type": "item_removed",
+        "actor": "painel",
+        "createdAt": "2026-08-18T00:43:09.477Z",
+        "metadata": {
+          "inventoryItemId": "PRD-1786321760864"
+        }
+      },
+      {
+        "id": "EVT-1787013792056-4iqsir",
+        "type": "item_removed",
+        "actor": "painel",
+        "createdAt": "2026-08-18T00:43:12.056Z",
+        "metadata": {
+          "inventoryItemId": "PRD-1787008976540"
+        }
+      },
+      {
+        "id": "EVT-1787015021085-cxa296",
+        "type": "item_counted",
+        "actor": "painel",
+        "createdAt": "2026-08-18T01:03:41.085Z",
+        "metadata": {
+          "inventoryItemId": "PRD-1787014997526",
+          "quantity": 1
+        }
+      }
+    ]
+  },
+  "conference": {
+    "count": {
+      "id": "CNT-20260817-0001",
+      "type": "partial",
+      "status": "in_progress",
+      "blockPdv": false,
+      "notes": "",
+      "locationId": "loja-principal",
+      "startedAt": "2026-08-18T00:42:24.949Z",
+      "createdAt": "2026-08-18T00:42:24.949Z",
+      "createdBy": "painel",
+      "updatedAt": "2026-08-18T01:03:41.082Z",
+      "items": [
+        {
+          "inventoryItemId": "PRD-1787014997526",
+          "productId": "1787014997526",
+          "selectionId": "1787014997526",
+          "name": "Celular Xiaomi Redmi Note 8 64gb usado",
+          "code": "PRD-825",
+          "sku": "PRD-825",
+          "barcode": "",
+          "variationLabel": "",
+          "systemQuantityAtCount": 0,
+          "countedQuantity": 1,
+          "firstCountedAt": "2026-08-18T01:03:41.082Z",
+          "lastCountedAt": "2026-08-18T01:03:41.082Z"
+        }
+      ],
+      "snapshot": [],
+      "events": [
+        {
+          "id": "EVT-1787013744950-qmeqac",
+          "type": "created",
+          "actor": "painel",
+          "createdAt": "2026-08-18T00:42:24.950Z",
+          "metadata": {
+            "type": "partial",
+            "blockPdv": false,
+            "snapshotSize": 0
+          }
+        },
+        {
+          "id": "EVT-1787013774579-j7ofeg",
+          "type": "item_counted",
+          "actor": "painel",
+          "createdAt": "2026-08-18T00:42:54.579Z",
+          "metadata": {
+            "inventoryItemId": "PRD-1786321760864",
+            "quantity": 1
+          }
+        },
+        {
+          "id": "EVT-1787013780278-5gxqkf",
+          "type": "item_counted",
+          "actor": "painel",
+          "createdAt": "2026-08-18T00:43:00.278Z",
+          "metadata": {
+            "inventoryItemId": "PRD-1787008976540",
+            "quantity": 1
+          }
+        },
+        {
+          "id": "EVT-1787013789476-m84czs",
+          "type": "item_removed",
+          "actor": "painel",
+          "createdAt": "2026-08-18T00:43:09.477Z",
+          "metadata": {
+            "inventoryItemId": "PRD-1786321760864"
+          }
+        },
+        {
+          "id": "EVT-1787013792056-4iqsir",
+          "type": "item_removed",
+          "actor": "painel",
+          "createdAt": "2026-08-18T00:43:12.056Z",
+          "metadata": {
+            "inventoryItemId": "PRD-1787008976540"
+          }
+        },
+        {
+          "id": "EVT-1787015021085-cxa296",
+          "type": "item_counted",
+          "actor": "painel",
+          "createdAt": "2026-08-18T01:03:41.085Z",
+          "metadata": {
+            "inventoryItemId": "PRD-1787014997526",
+            "quantity": 1
+          }
+        }
+      ]
+    },
+    "rows": [
+      {
+        "inventoryItemId": "PRD-1787014997526",
+        "productId": "1787014997526",
+        "selectionId": "1787014997526",
+        "name": "Celular Xiaomi Redmi Note 8 64gb usado",
+        "code": "PRD-825",
+        "sku": "PRD-825",
+        "barcode": "",
+        "variationLabel": "",
+        "systemQuantityAtCount": 0,
+        "countedQuantity": 1,
+        "firstCountedAt": "2026-08-18T01:03:41.082Z",
+        "lastCountedAt": "2026-08-18T01:03:41.082Z",
+        "systemQuantity": 0,
+        "movementsAfterCount": 0,
+        "targetQuantity": 1,
+        "difference": 1
+      }
+    ],
+    "uncounted": [],
+    "summary": {
+      "counted": 1,
+      "matched": 0,
+      "shortage": 0,
+      "surplus": 1,
+      "divergences": 1,
+      "uncounted": 0
+    }
+  }
+}

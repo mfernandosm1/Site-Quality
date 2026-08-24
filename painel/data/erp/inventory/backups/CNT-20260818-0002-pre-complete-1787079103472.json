@@ -1,0 +1,262 @@
+{
+  "createdAt": "2026-08-18T18:51:43.472Z",
+  "count": {
+    "id": "CNT-20260818-0002",
+    "type": "partial",
+    "status": "in_progress",
+    "blockPdv": false,
+    "notes": "",
+    "locationId": "loja-principal",
+    "startedAt": "2026-08-18T18:46:25.099Z",
+    "createdAt": "2026-08-18T18:46:25.099Z",
+    "createdBy": "painel",
+    "updatedAt": "2026-08-18T18:51:34.151Z",
+    "items": [
+      {
+        "inventoryItemId": "PRD-1787078951571",
+        "productId": "1787078951571",
+        "selectionId": "1787078951571",
+        "name": "Adaptador de tomada pino chato Americano",
+        "code": "PRD-826",
+        "sku": "PRD-826",
+        "barcode": "7897468602661",
+        "variationLabel": "",
+        "systemQuantityAtCount": 0,
+        "countedQuantity": 21,
+        "firstCountedAt": "2026-08-18T18:49:48.096Z",
+        "lastCountedAt": "2026-08-18T18:49:59.866Z"
+      },
+      {
+        "inventoryItemId": "PRD-1783337681331",
+        "productId": "1783337681331",
+        "selectionId": "1783337681331",
+        "name": "Chip Vivo Pré Pago",
+        "code": "PRD-76",
+        "sku": "PRD-76",
+        "barcode": "",
+        "variationLabel": "",
+        "systemQuantityAtCount": 0,
+        "countedQuantity": 31,
+        "firstCountedAt": "2026-08-18T18:51:34.151Z",
+        "lastCountedAt": "2026-08-18T18:51:34.151Z"
+      }
+    ],
+    "snapshot": [],
+    "events": [
+      {
+        "id": "EVT-1787078785100-xwjx8o",
+        "type": "created",
+        "actor": "painel",
+        "createdAt": "2026-08-18T18:46:25.100Z",
+        "metadata": {
+          "type": "partial",
+          "blockPdv": false,
+          "snapshotSize": 0
+        }
+      },
+      {
+        "id": "EVT-1787078819800-75ucit",
+        "type": "item_counted",
+        "actor": "painel",
+        "createdAt": "2026-08-18T18:46:59.800Z",
+        "metadata": {
+          "inventoryItemId": "PRD-1783337681331",
+          "quantity": 1
+        }
+      },
+      {
+        "id": "EVT-1787078830206-sfvmn1",
+        "type": "item_removed",
+        "actor": "painel",
+        "createdAt": "2026-08-18T18:47:10.206Z",
+        "metadata": {
+          "inventoryItemId": "PRD-1783337681331"
+        }
+      },
+      {
+        "id": "EVT-1787078988101-uipqqg",
+        "type": "item_counted",
+        "actor": "painel",
+        "createdAt": "2026-08-18T18:49:48.101Z",
+        "metadata": {
+          "inventoryItemId": "PRD-1787078951571",
+          "quantity": 20
+        }
+      },
+      {
+        "id": "EVT-1787078999866-d95gd4",
+        "type": "item_counted",
+        "actor": "painel",
+        "createdAt": "2026-08-18T18:49:59.866Z",
+        "metadata": {
+          "inventoryItemId": "PRD-1787078951571",
+          "quantity": 21
+        }
+      },
+      {
+        "id": "EVT-1787079094156-pcejiy",
+        "type": "item_counted",
+        "actor": "painel",
+        "createdAt": "2026-08-18T18:51:34.156Z",
+        "metadata": {
+          "inventoryItemId": "PRD-1783337681331",
+          "quantity": 31
+        }
+      }
+    ]
+  },
+  "conference": {
+    "count": {
+      "id": "CNT-20260818-0002",
+      "type": "partial",
+      "status": "in_progress",
+      "blockPdv": false,
+      "notes": "",
+      "locationId": "loja-principal",
+      "startedAt": "2026-08-18T18:46:25.099Z",
+      "createdAt": "2026-08-18T18:46:25.099Z",
+      "createdBy": "painel",
+      "updatedAt": "2026-08-18T18:51:34.151Z",
+      "items": [
+        {
+          "inventoryItemId": "PRD-1787078951571",
+          "productId": "1787078951571",
+          "selectionId": "1787078951571",
+          "name": "Adaptador de tomada pino chato Americano",
+          "code": "PRD-826",
+          "sku": "PRD-826",
+          "barcode": "7897468602661",
+          "variationLabel": "",
+          "systemQuantityAtCount": 0,
+          "countedQuantity": 21,
+          "firstCountedAt": "2026-08-18T18:49:48.096Z",
+          "lastCountedAt": "2026-08-18T18:49:59.866Z"
+        },
+        {
+          "inventoryItemId": "PRD-1783337681331",
+          "productId": "1783337681331",
+          "selectionId": "1783337681331",
+          "name": "Chip Vivo Pré Pago",
+          "code": "PRD-76",
+          "sku": "PRD-76",
+          "barcode": "",
+          "variationLabel": "",
+          "systemQuantityAtCount": 0,
+          "countedQuantity": 31,
+          "firstCountedAt": "2026-08-18T18:51:34.151Z",
+          "lastCountedAt": "2026-08-18T18:51:34.151Z"
+        }
+      ],
+      "snapshot": [],
+      "events": [
+        {
+          "id": "EVT-1787078785100-xwjx8o",
+          "type": "created",
+          "actor": "painel",
+          "createdAt": "2026-08-18T18:46:25.100Z",
+          "metadata": {
+            "type": "partial",
+            "blockPdv": false,
+            "snapshotSize": 0
+          }
+        },
+        {
+          "id": "EVT-1787078819800-75ucit",
+          "type": "item_counted",
+          "actor": "painel",
+          "createdAt": "2026-08-18T18:46:59.800Z",
+          "metadata": {
+            "inventoryItemId": "PRD-1783337681331",
+            "quantity": 1
+          }
+        },
+        {
+          "id": "EVT-1787078830206-sfvmn1",
+          "type": "item_removed",
+          "actor": "painel",
+          "createdAt": "2026-08-18T18:47:10.206Z",
+          "metadata": {
+            "inventoryItemId": "PRD-1783337681331"
+          }
+        },
+        {
+          "id": "EVT-1787078988101-uipqqg",
+          "type": "item_counted",
+          "actor": "painel",
+          "createdAt": "2026-08-18T18:49:48.101Z",
+          "metadata": {
+            "inventoryItemId": "PRD-1787078951571",
+            "quantity": 20
+          }
+        },
+        {
+          "id": "EVT-1787078999866-d95gd4",
+          "type": "item_counted",
+          "actor": "painel",
+          "createdAt": "2026-08-18T18:49:59.866Z",
+          "metadata": {
+            "inventoryItemId": "PRD-1787078951571",
+            "quantity": 21
+          }
+        },
+        {
+          "id": "EVT-1787079094156-pcejiy",
+          "type": "item_counted",
+          "actor": "painel",
+          "createdAt": "2026-08-18T18:51:34.156Z",
+          "metadata": {
+            "inventoryItemId": "PRD-1783337681331",
+            "quantity": 31
+          }
+        }
+      ]
+    },
+    "rows": [
+      {
+        "inventoryItemId": "PRD-1787078951571",
+        "productId": "1787078951571",
+        "selectionId": "1787078951571",
+        "name": "Adaptador de tomada pino chato Americano",
+        "code": "PRD-826",
+        "sku": "PRD-826",
+        "barcode": "7897468602661",
+        "variationLabel": "",
+        "systemQuantityAtCount": 0,
+        "countedQuantity": 21,
+        "firstCountedAt": "2026-08-18T18:49:48.096Z",
+        "lastCountedAt": "2026-08-18T18:49:59.866Z",
+        "systemQuantity": 0,
+        "movementsAfterCount": 0,
+        "targetQuantity": 21,
+        "difference": 21
+      },
+      {
+        "inventoryItemId": "PRD-1783337681331",
+        "productId": "1783337681331",
+        "selectionId": "1783337681331",
+        "name": "Chip Vivo Pré Pago",
+        "code": "PRD-76",
+        "sku": "PRD-76",
+        "barcode": "",
+        "variationLabel": "",
+        "systemQuantityAtCount": 0,
+        "countedQuantity": 31,
+        "firstCountedAt": "2026-08-18T18:51:34.151Z",
+        "lastCountedAt": "2026-08-18T18:51:34.151Z",
+        "systemQuantity": 0,
+        "movementsAfterCount": 0,
+        "targetQuantity": 31,
+        "difference": 31
+      }
+    ],
+    "uncounted": [],
+    "summary": {
+      "counted": 2,
+      "matched": 0,
+      "shortage": 0,
+      "surplus": 2,
+      "divergences": 2,
+      "uncounted": 0
+    }
+  }
+}

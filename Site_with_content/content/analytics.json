@@ -1,17 +1,17 @@
 {
   "version": "8.4.0-analytics-professional",
   "createdAt": "2026-07-08T00:26:21.803Z",
-  "updatedAt": "2026-07-31T15:47:20.938Z",
+  "updatedAt": "2026-08-24T00:16:07.123Z",
   "source": "local-json",
   "counters": {
-    "product_view": 46,
+    "product_view": 63,
     "favorite": 2,
     "favorite_click": 0,
-    "whatsapp_click": 5,
-    "category_view": 67,
-    "share_click": 0,
-    "search": 6,
-    "page_view": 178
+    "whatsapp_click": 6,
+    "category_view": 97,
+    "share_click": 1,
+    "search": 22,
+    "page_view": 256
   },
   "products": {
     "mini-game-portatil-400-jogos": {
@@ -96,11 +96,11 @@
       "name": "Relógio Smartwatch Xiaomi Amazfit Bip 6",
       "image": "/images/Smartwatch Xiaomi Amazfit Bip 6.jpg",
       "url": "http://localhost:3000/produto/relogio-smartwatch-xiaomi-amazfit-bip-6/",
-      "views": 2,
+      "views": 3,
       "favorites": 0,
       "whatsapp": 0,
       "shares": 0,
-      "lastAt": "2026-07-12T13:37:13.068Z"
+      "lastAt": "2026-08-23T19:49:58.841Z"
     },
     "xiaomi-poco-x7-pro-5g-512gb-12gb-ram": {
       "slug": "xiaomi-poco-x7-pro-5g-512gb-12gb-ram",
@@ -139,12 +139,12 @@
       "slug": "fonte-original-apple-usb-c-20w",
       "name": "Fonte Original Apple Usb C 20w",
       "image": "/images/Fonte Original Apple Usb C 20w.jpg",
-      "url": "http://localhost:3000/produto/fonte-original-apple-usb-c-20w/",
+      "url": "http://localhost:3000/site/view/index.html",
       "views": 9,
       "favorites": 0,
-      "whatsapp": 1,
+      "whatsapp": 2,
       "shares": 0,
-      "lastAt": "2026-07-15T16:17:09.001Z"
+      "lastAt": "2026-08-23T22:53:13.976Z"
     },
     "fone-jbl-tune-510bt-branco": {
       "slug": "fone-jbl-tune-510bt-branco",
@@ -239,11 +239,11 @@
       "name": "Iphone 17 pro max 256gb novo lacrado",
       "image": "/images/iphone 17 pro max laranja.jpeg",
       "url": "http://localhost:3000/produto/iphone-17-pro-max-256gb-novo-lacrado/",
-      "views": 4,
+      "views": 5,
       "favorites": 0,
       "whatsapp": 0,
       "shares": 0,
-      "lastAt": "2026-07-15T21:01:27.976Z"
+      "lastAt": "2026-08-24T00:04:09.368Z"
     },
     "samsung-galaxy-s26-ultra-5g-256gb": {
       "slug": "samsung-galaxy-s26-ultra-5g-256gb",
@@ -266,36 +266,80 @@
       "whatsapp": 0,
       "shares": 0,
       "lastAt": "2026-07-17T16:14:02.982Z"
+    },
+    "teste": {
+      "slug": "teste",
+      "name": "teste",
+      "image": "/images/sem-imagem.png",
+      "url": "http://localhost:3000/produto/teste/",
+      "views": 1,
+      "favorites": 0,
+      "whatsapp": 0,
+      "shares": 1,
+      "lastAt": "2026-08-23T19:52:21.455Z"
+    },
+    "troca-de-tela-de-celulares": {
+      "slug": "troca-de-tela-de-celulares",
+      "name": "Troca de Tela de Celulares",
+      "image": "/images/Troca_de-Tela_card.png",
+      "url": "http://localhost:3000/produto/troca-de-tela-de-celulares/",
+      "views": 8,
+      "favorites": 0,
+      "whatsapp": 0,
+      "shares": 0,
+      "lastAt": "2026-08-23T22:56:37.392Z"
+    },
+    "iphone-13-usado-128gb": {
+      "slug": "iphone-13-usado-128gb",
+      "name": "iPhone 13 usado 128GB",
+      "image": "/images/produtos/1787528607679-iphone-13-usado-pt.jpeg",
+      "url": "http://localhost:3000/produto/iphone-13-usado-128gb/",
+      "views": 5,
+      "favorites": 0,
+      "whatsapp": 0,
+      "shares": 0,
+      "lastAt": "2026-08-24T00:08:21.016Z"
+    },
+    "iphone-15-128gb-usado": {
+      "slug": "iphone-15-128gb-usado",
+      "name": "iPhone 15 128GB USADO",
+      "image": "/images/sem-imagem.png",
+      "url": "http://localhost:3000/produto/iphone-15-128gb-usado/",
+      "views": 1,
+      "favorites": 0,
+      "whatsapp": 0,
+      "shares": 0,
+      "lastAt": "2026-08-24T00:15:21.709Z"
     }
   },
   "categories": {
     "smartphones": {
       "slug": "smartphones",
       "name": "smartphones",
-      "url": "http://localhost:3000/smartphones/",
-      "views": 20,
-      "lastAt": "2026-07-31T00:46:20.191Z"
+      "url": "http://localhost:3000/smartphones/?subcategoria=usados",
+      "views": 41,
+      "lastAt": "2026-08-23T23:24:43.574Z"
     },
     "assistencia-tecnica": {
       "slug": "assistencia-tecnica",
       "name": "assistencia-tecnica",
       "url": "http://localhost:3000/assistencia-tecnica/",
-      "views": 3,
-      "lastAt": "2026-07-10T20:47:26.751Z"
+      "views": 5,
+      "lastAt": "2026-08-23T22:53:36.220Z"
     },
     "acessorios": {
       "slug": "acessorios",
       "name": "acessorios",
       "url": "http://localhost:3000/acessorios/",
-      "views": 20,
-      "lastAt": "2026-07-31T15:47:20.937Z"
+      "views": 22,
+      "lastAt": "2026-07-31T23:20:20.910Z"
     },
     "eletronicos": {
       "slug": "eletronicos",
       "name": "eletronicos",
       "url": "http://localhost:3000/eletronicos/",
-      "views": 24,
-      "lastAt": "2026-07-31T15:47:08.015Z"
+      "views": 29,
+      "lastAt": "2026-08-23T22:53:37.471Z"
     }
   },
   "searches": {
@@ -313,18 +357,38 @@
       "term": "x7",
       "total": 4,
       "lastAt": "2026-07-11T14:45:12.951Z"
+    },
+    "watch": {
+      "term": "watch",
+      "total": 8,
+      "lastAt": "2026-08-13T11:37:56.128Z"
+    },
+    "teste": {
+      "term": "teste",
+      "total": 4,
+      "lastAt": "2026-08-23T19:52:16.758Z"
+    },
+    "iphone 12": {
+      "term": "iphone 12",
+      "total": 2,
+      "lastAt": "2026-08-23T19:50:16.850Z"
+    },
+    "iphone 13": {
+      "term": "iphone 13",
+      "total": 2,
+      "lastAt": "2026-08-23T19:50:19.676Z"
     }
   },
   "pages": {
     "http://localhost:3000/site/view/index.html": {
       "url": "http://localhost:3000/site/view/index.html",
-      "views": 67,
-      "lastAt": "2026-07-31T15:46:52.409Z"
+      "views": 107,
+      "lastAt": "2026-08-24T00:16:07.123Z"
     },
     "http://localhost:3000/smartphones/": {
       "url": "http://localhost:3000/smartphones/",
-      "views": 43,
-      "lastAt": "2026-07-31T00:46:20.188Z"
+      "views": 73,
+      "lastAt": "2026-08-23T23:24:39.694Z"
     },
     "http://localhost:3000/produto/motorola-moto-g35-5g-128gb-4gb-ram-8gb-ram-boost/": {
       "url": "http://localhost:3000/produto/motorola-moto-g35-5g-128gb-4gb-ram-8gb-ram-boost/",
@@ -333,8 +397,8 @@
     },
     "http://localhost:3000/assistencia-tecnica/": {
       "url": "http://localhost:3000/assistencia-tecnica/",
-      "views": 6,
-      "lastAt": "2026-07-10T20:47:26.751Z"
+      "views": 10,
+      "lastAt": "2026-08-23T22:53:36.220Z"
     },
     "http://localhost:3000/produto/motorola-moto-g17-128gb-4gb-ram-8gb-ram-boost/": {
       "url": "http://localhost:3000/produto/motorola-moto-g17-128gb-4gb-ram-8gb-ram-boost/",
@@ -343,13 +407,13 @@
     },
     "http://localhost:3000/acessorios/": {
       "url": "http://localhost:3000/acessorios/",
-      "views": 40,
-      "lastAt": "2026-07-31T15:47:20.937Z"
+      "views": 44,
+      "lastAt": "2026-07-31T23:20:20.910Z"
     },
     "http://localhost:3000/eletronicos/": {
       "url": "http://localhost:3000/eletronicos/",
-      "views": 48,
-      "lastAt": "2026-07-31T15:47:08.015Z"
+      "views": 58,
+      "lastAt": "2026-08-23T22:53:37.470Z"
     },
     "http://localhost:3000/produto/microfone-lapela-celular-bluetooth-tipo-c/": {
       "url": "http://localhost:3000/produto/microfone-lapela-celular-bluetooth-tipo-c/",
@@ -373,8 +437,8 @@
     },
     "http://localhost:3000/produto/relogio-smartwatch-xiaomi-amazfit-bip-6/": {
       "url": "http://localhost:3000/produto/relogio-smartwatch-xiaomi-amazfit-bip-6/",
-      "views": 5,
-      "lastAt": "2026-07-12T13:37:13.068Z"
+      "views": 9,
+      "lastAt": "2026-08-23T19:50:04.836Z"
     },
     "http://localhost:3000/produto/pc-gamer-intel-i7-rtx-3050-ram-16gb-ssd-512gb-monitor-24/": {
       "url": "http://localhost:3000/produto/pc-gamer-intel-i7-rtx-3050-ram-16gb-ssd-512gb-monitor-24/",
@@ -438,8 +502,8 @@
     },
     "http://localhost:3000/produto/iphone-17-pro-max-256gb-novo-lacrado/": {
       "url": "http://localhost:3000/produto/iphone-17-pro-max-256gb-novo-lacrado/",
-      "views": 8,
-      "lastAt": "2026-07-15T21:01:27.975Z"
+      "views": 10,
+      "lastAt": "2026-08-24T00:04:09.368Z"
     },
     "http://localhost:3000/produto/samsung-galaxy-s26-ultra-5g-256gb/": {
       "url": "http://localhost:3000/produto/samsung-galaxy-s26-ultra-5g-256gb/",
@@ -455,6 +519,31 @@
       "url": "http://localhost:3000/produto/mini-game-portatil-400-jogos/",
       "views": 2,
       "lastAt": "2026-07-24T22:43:11.214Z"
+    },
+    "http://localhost:3000/produto/teste/": {
+      "url": "http://localhost:3000/produto/teste/",
+      "views": 9,
+      "lastAt": "2026-08-23T19:52:21.455Z"
+    },
+    "http://localhost:3000/produto/troca-de-tela-de-celulares/": {
+      "url": "http://localhost:3000/produto/troca-de-tela-de-celulares/",
+      "views": 16,
+      "lastAt": "2026-08-23T22:56:37.391Z"
+    },
+    "http://localhost:3000/smartphones/?subcategoria=usados": {
+      "url": "http://localhost:3000/smartphones/?subcategoria=usados",
+      "views": 12,
+      "lastAt": "2026-08-23T23:24:43.574Z"
+    },
+    "http://localhost:3000/produto/iphone-13-usado-128gb/": {
+      "url": "http://localhost:3000/produto/iphone-13-usado-128gb/",
+      "views": 10,
+      "lastAt": "2026-08-24T00:08:21.016Z"
+    },
+    "http://localhost:3000/produto/iphone-15-128gb-usado/": {
+      "url": "http://localhost:3000/produto/iphone-15-128gb-usado/",
+      "views": 2,
+      "lastAt": "2026-08-24T00:15:21.708Z"
     }
   },
   "devices": {},
@@ -3978,6 +4067,1632 @@
         "slug": "acessorios",
         "name": "acessorios"
       },
+      "term": ""
+    },
+    {
+      "at": "2026-07-31T21:04:04.822Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/acessorios/",
+      "referrer": "http://localhost:3000/eletronicos/",
+      "device": "desktop",
+      "viewport": "2049x898",
+      "language": "pt-PT",
+      "term": ""
+    },
+    {
+      "at": "2026-07-31T21:04:04.940Z",
+      "type": "category_view",
+      "url": "http://localhost:3000/acessorios/",
+      "referrer": "http://localhost:3000/eletronicos/",
+      "device": "desktop",
+      "viewport": "2049x898",
+      "language": "pt-PT",
+      "category": {
+        "slug": "acessorios",
+        "name": "acessorios"
+      },
+      "term": ""
+    },
+    {
+      "at": "2026-07-31T23:20:20.808Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/acessorios/",
+      "referrer": "http://localhost:3000/eletronicos/",
+      "device": "desktop",
+      "viewport": "2732x1198",
+      "language": "pt-PT",
+      "term": ""
+    },
+    {
+      "at": "2026-07-31T23:20:20.910Z",
+      "type": "category_view",
+      "url": "http://localhost:3000/acessorios/",
+      "referrer": "http://localhost:3000/eletronicos/",
+      "device": "desktop",
+      "viewport": "2732x1198",
+      "language": "pt-PT",
+      "category": {
+        "slug": "acessorios",
+        "name": "acessorios"
+      },
+      "term": ""
+    },
+    {
+      "at": "2026-08-11T23:43:17.433Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/site/view/index.html",
+      "referrer": "http://localhost:3000/produtos?page=1&q=12c",
+      "device": "desktop",
+      "viewport": "1707x791",
+      "language": "pt-PT",
+      "term": ""
+    },
+    {
+      "at": "2026-08-13T11:37:44.735Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/site/view/index.html",
+      "referrer": "http://localhost:3000/orcamentos",
+      "device": "desktop",
+      "viewport": "1707x791",
+      "language": "pt-PT",
+      "term": ""
+    },
+    {
+      "at": "2026-08-13T11:37:47.996Z",
+      "type": "search",
+      "url": "http://localhost:3000/site/view/index.html",
+      "referrer": "http://localhost:3000/orcamentos",
+      "device": "desktop",
+      "viewport": "1707x791",
+      "language": "pt-PT",
+      "term": "watch"
+    },
+    {
+      "at": "2026-08-13T11:37:51.171Z",
+      "type": "search",
+      "url": "http://localhost:3000/site/view/index.html",
+      "referrer": "http://localhost:3000/orcamentos",
+      "device": "desktop",
+      "viewport": "1707x791",
+      "language": "pt-PT",
+      "term": "watch"
+    },
+    {
+      "at": "2026-08-13T11:37:54.565Z",
+      "type": "search",
+      "url": "http://localhost:3000/site/view/index.html",
+      "referrer": "http://localhost:3000/orcamentos",
+      "device": "desktop",
+      "viewport": "1707x791",
+      "language": "pt-PT",
+      "term": "watch"
+    },
+    {
+      "at": "2026-08-13T11:37:54.858Z",
+      "type": "search",
+      "url": "http://localhost:3000/site/view/index.html",
+      "referrer": "http://localhost:3000/orcamentos",
+      "device": "desktop",
+      "viewport": "1707x791",
+      "language": "pt-PT",
+      "term": "watch"
+    },
+    {
+      "at": "2026-08-13T11:37:55.157Z",
+      "type": "search",
+      "url": "http://localhost:3000/site/view/index.html",
+      "referrer": "http://localhost:3000/orcamentos",
+      "device": "desktop",
+      "viewport": "1707x791",
+      "language": "pt-PT",
+      "term": "watch"
+    },
+    {
+      "at": "2026-08-13T11:37:55.471Z",
+      "type": "search",
+      "url": "http://localhost:3000/site/view/index.html",
+      "referrer": "http://localhost:3000/orcamentos",
+      "device": "desktop",
+      "viewport": "1707x791",
+      "language": "pt-PT",
+      "term": "watch"
+    },
+    {
+      "at": "2026-08-13T11:37:55.812Z",
+      "type": "search",
+      "url": "http://localhost:3000/site/view/index.html",
+      "referrer": "http://localhost:3000/orcamentos",
+      "device": "desktop",
+      "viewport": "1707x791",
+      "language": "pt-PT",
+      "term": "watch"
+    },
+    {
+      "at": "2026-08-13T11:37:56.128Z",
+      "type": "search",
+      "url": "http://localhost:3000/site/view/index.html",
+      "referrer": "http://localhost:3000/orcamentos",
+      "device": "desktop",
+      "viewport": "1707x791",
+      "language": "pt-PT",
+      "term": "watch"
+    },
+    {
+      "at": "2026-08-13T11:38:00.817Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/eletronicos/",
+      "referrer": "http://localhost:3000/site/view/index.html",
+      "device": "desktop",
+      "viewport": "1707x791",
+      "language": "pt-PT",
+      "term": ""
+    },
+    {
+      "at": "2026-08-13T11:38:01.137Z",
+      "type": "category_view",
+      "url": "http://localhost:3000/eletronicos/",
+      "referrer": "http://localhost:3000/site/view/index.html",
+      "device": "desktop",
+      "viewport": "1707x791",
+      "language": "pt-PT",
+      "category": {
+        "slug": "eletronicos",
+        "name": "eletronicos"
+      },
+      "term": ""
+    },
+    {
+      "at": "2026-08-13T11:55:47.387Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/eletronicos/",
+      "referrer": "http://localhost:3000/site/view/index.html",
+      "device": "desktop",
+      "viewport": "1707x791",
+      "language": "pt-PT",
+      "term": ""
+    },
+    {
+      "at": "2026-08-13T11:55:47.860Z",
+      "type": "category_view",
+      "url": "http://localhost:3000/eletronicos/",
+      "referrer": "http://localhost:3000/site/view/index.html",
+      "device": "desktop",
+      "viewport": "1707x791",
+      "language": "pt-PT",
+      "category": {
+        "slug": "eletronicos",
+        "name": "eletronicos"
+      },
+      "term": ""
+    },
+    {
+      "at": "2026-08-23T19:40:41.220Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/site/view/index.html",
+      "referrer": "http://localhost:3000/produtos",
+      "device": "desktop",
+      "viewport": "1366x633",
+      "language": "pt-PT",
+      "term": ""
+    },
+    {
+      "at": "2026-08-23T19:41:08.856Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/eletronicos/",
+      "referrer": "http://localhost:3000/site/view/index.html",
+      "device": "desktop",
+      "viewport": "1366x633",
+      "language": "pt-PT",
+      "term": ""
+    },
+    {
+      "at": "2026-08-23T19:41:08.868Z",
+      "type": "category_view",
+      "url": "http://localhost:3000/eletronicos/",
+      "referrer": "http://localhost:3000/site/view/index.html",
+      "device": "desktop",
+      "viewport": "1366x633",
+      "language": "pt-PT",
+      "category": {
+        "slug": "eletronicos",
+        "name": "eletronicos"
+      },
+      "term": ""
+    },
+    {
+      "at": "2026-08-23T19:41:11.445Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/site/view/index.html",
+      "referrer": "http://localhost:3000/eletronicos/",
+      "device": "desktop",
+      "viewport": "1366x633",
+      "language": "pt-PT",
+      "term": ""
+    },
+    {
+      "at": "2026-08-23T19:49:55.179Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/site/view/index.html",
+      "referrer": "http://localhost:3000/site",
+      "device": "desktop",
+      "viewport": "1366x633",
+      "language": "pt-PT",
+      "term": ""
+    },
+    {
+      "at": "2026-08-23T19:49:57.958Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/produto/relogio-smartwatch-xiaomi-amazfit-bip-6/",
+      "referrer": "http://localhost:3000/site/view/index.html",
+      "device": "desktop",
+      "viewport": "1366x633",
+      "language": "pt-PT",
+      "term": ""
+    },
+    {
+      "at": "2026-08-23T19:49:58.841Z",
+      "type": "product_view",
+      "url": "http://localhost:3000/produto/relogio-smartwatch-xiaomi-amazfit-bip-6/",
+      "referrer": "http://localhost:3000/site/view/index.html",
+      "device": "desktop",
+      "viewport": "1366x633",
+      "language": "pt-PT",
+      "product": {
+        "slug": "relogio-smartwatch-xiaomi-amazfit-bip-6",
+        "name": "Relógio Smartwatch Xiaomi Amazfit Bip 6"
+      },
+      "term": ""
+    },
+    {
+      "at": "2026-08-23T19:50:04.822Z",
+      "type": "search",
+      "url": "http://localhost:3000/produto/relogio-smartwatch-xiaomi-amazfit-bip-6/",
+      "referrer": "http://localhost:3000/site/view/index.html",
+      "device": "desktop",
+      "viewport": "1366x633",
+      "language": "pt-PT",
+      "term": "teste"
+    },
+    {
+      "at": "2026-08-23T19:50:04.836Z",
+      "type": "search",
+      "url": "http://localhost:3000/produto/relogio-smartwatch-xiaomi-amazfit-bip-6/",
+      "referrer": "http://localhost:3000/site/view/index.html",
+      "device": "desktop",
+      "viewport": "1366x633",
+      "language": "pt-PT",
+      "term": "teste"
+    },
+    {
+      "at": "2026-08-23T19:50:04.940Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/produto/teste/",
+      "referrer": "http://localhost:3000/produto/relogio-smartwatch-xiaomi-amazfit-bip-6/",
+      "device": "desktop",
+      "viewport": "1366x633",
+      "language": "pt-PT",
+      "term": ""
+    },
+    {
+      "at": "2026-08-23T19:50:05.855Z",
+      "type": "product_view",
+      "url": "http://localhost:3000/produto/teste/",
+      "referrer": "http://localhost:3000/produto/relogio-smartwatch-xiaomi-amazfit-bip-6/",
+      "device": "desktop",
+      "viewport": "1366x633",
+      "language": "pt-PT",
+      "product": {
+        "slug": "teste",
+        "name": "teste"
+      },
+      "term": ""
+    },
+    {
+      "at": "2026-08-23T19:50:16.838Z",
+      "type": "search",
+      "url": "http://localhost:3000/produto/teste/",
+      "referrer": "http://localhost:3000/produto/relogio-smartwatch-xiaomi-amazfit-bip-6/",
+      "device": "desktop",
+      "viewport": "1366x633",
+      "language": "pt-PT",
+      "term": "iphone 12"
+    },
+    {
+      "at": "2026-08-23T19:50:16.850Z",
+      "type": "search",
+      "url": "http://localhost:3000/produto/teste/",
+      "referrer": "http://localhost:3000/produto/relogio-smartwatch-xiaomi-amazfit-bip-6/",
+      "device": "desktop",
+      "viewport": "1366x633",
+      "language": "pt-PT",
+      "term": "iphone 12"
+    },
+    {
+      "at": "2026-08-23T19:50:19.666Z",
+      "type": "search",
+      "url": "http://localhost:3000/produto/teste/",
+      "referrer": "http://localhost:3000/produto/relogio-smartwatch-xiaomi-amazfit-bip-6/",
+      "device": "desktop",
+      "viewport": "1366x633",
+      "language": "pt-PT",
+      "term": "iphone 13"
+    },
+    {
+      "at": "2026-08-23T19:50:19.676Z",
+      "type": "search",
+      "url": "http://localhost:3000/produto/teste/",
+      "referrer": "http://localhost:3000/produto/relogio-smartwatch-xiaomi-amazfit-bip-6/",
+      "device": "desktop",
+      "viewport": "1366x633",
+      "language": "pt-PT",
+      "term": "iphone 13"
+    },
+    {
+      "at": "2026-08-23T19:52:16.743Z",
+      "type": "search",
+      "url": "http://localhost:3000/produto/teste/",
+      "referrer": "http://localhost:3000/produto/relogio-smartwatch-xiaomi-amazfit-bip-6/",
+      "device": "desktop",
+      "viewport": "1366x633",
+      "language": "pt-PT",
+      "term": "teste"
+    },
+    {
+      "at": "2026-08-23T19:52:16.758Z",
+      "type": "search",
+      "url": "http://localhost:3000/produto/teste/",
+      "referrer": "http://localhost:3000/produto/relogio-smartwatch-xiaomi-amazfit-bip-6/",
+      "device": "desktop",
+      "viewport": "1366x633",
+      "language": "pt-PT",
+      "term": "teste"
+    },
+    {
+      "at": "2026-08-23T19:52:21.455Z",
+      "type": "share_click",
+      "url": "http://localhost:3000/produto/teste/",
+      "referrer": "http://localhost:3000/produto/relogio-smartwatch-xiaomi-amazfit-bip-6/",
+      "device": "desktop",
+      "viewport": "1366x633",
+      "language": "pt-PT",
+      "product": {
+        "slug": "teste",
+        "name": "teste"
+      },
+      "term": ""
+    },
+    {
+      "at": "2026-08-23T19:52:29.643Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/site/view/index.html",
+      "referrer": "http://localhost:3000/produto/teste/",
+      "device": "desktop",
+      "viewport": "1366x633",
+      "language": "pt-PT",
+      "term": ""
+    },
+    {
+      "at": "2026-08-23T19:52:31.426Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/assistencia-tecnica/",
+      "referrer": "http://localhost:3000/site/view/index.html",
+      "device": "desktop",
+      "viewport": "1366x633",
+      "language": "pt-PT",
+      "term": ""
+    },
+    {
+      "at": "2026-08-23T19:52:31.437Z",
+      "type": "category_view",
+      "url": "http://localhost:3000/assistencia-tecnica/",
+      "referrer": "http://localhost:3000/site/view/index.html",
+      "device": "desktop",
+      "viewport": "1366x633",
+      "language": "pt-PT",
+      "category": {
+        "slug": "assistencia-tecnica",
+        "name": "assistencia-tecnica"
+      },
+      "term": ""
+    },
+    {
+      "at": "2026-08-23T19:52:35.499Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/produto/troca-de-tela-de-celulares/",
+      "referrer": "http://localhost:3000/assistencia-tecnica/",
+      "device": "desktop",
+      "viewport": "1366x633",
+      "language": "pt-PT",
+      "term": ""
+    },
+    {
+      "at": "2026-08-23T19:52:36.408Z",
+      "type": "product_view",
+      "url": "http://localhost:3000/produto/troca-de-tela-de-celulares/",
+      "referrer": "http://localhost:3000/assistencia-tecnica/",
+      "device": "desktop",
+      "viewport": "1366x633",
+      "language": "pt-PT",
+      "product": {
+        "slug": "troca-de-tela-de-celulares",
+        "name": "Troca de Tela de Celulares"
+      },
+      "term": ""
+    },
+    {
+      "at": "2026-08-23T19:55:12.854Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/produto/troca-de-tela-de-celulares/",
+      "referrer": "http://localhost:3000/assistencia-tecnica/",
+      "device": "desktop",
+      "viewport": "1366x633",
+      "language": "pt-PT",
+      "term": ""
+    },
+    {
+      "at": "2026-08-23T19:55:13.762Z",
+      "type": "product_view",
+      "url": "http://localhost:3000/produto/troca-de-tela-de-celulares/",
+      "referrer": "http://localhost:3000/assistencia-tecnica/",
+      "device": "desktop",
+      "viewport": "1366x633",
+      "language": "pt-PT",
+      "product": {
+        "slug": "troca-de-tela-de-celulares",
+        "name": "Troca de Tela de Celulares"
+      },
+      "term": ""
+    },
+    {
+      "at": "2026-08-23T20:24:45.186Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/produto/troca-de-tela-de-celulares/",
+      "referrer": "http://localhost:3000/assistencia-tecnica/",
+      "device": "desktop",
+      "viewport": "2049x949",
+      "language": "pt-PT",
+      "term": ""
+    },
+    {
+      "at": "2026-08-23T20:24:46.064Z",
+      "type": "product_view",
+      "url": "http://localhost:3000/produto/troca-de-tela-de-celulares/",
+      "referrer": "http://localhost:3000/assistencia-tecnica/",
+      "device": "desktop",
+      "viewport": "2049x949",
+      "language": "pt-PT",
+      "product": {
+        "slug": "troca-de-tela-de-celulares",
+        "name": "Troca de Tela de Celulares"
+      },
+      "term": ""
+    },
+    {
+      "at": "2026-08-23T21:12:02.228Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/produto/troca-de-tela-de-celulares/",
+      "referrer": "http://localhost:3000/assistencia-tecnica/",
+      "device": "desktop",
+      "viewport": "1366x633",
+      "language": "pt-PT",
+      "term": ""
+    },
+    {
+      "at": "2026-08-23T21:12:03.970Z",
+      "type": "product_view",
+      "url": "http://localhost:3000/produto/troca-de-tela-de-celulares/",
+      "referrer": "http://localhost:3000/assistencia-tecnica/",
+      "device": "desktop",
+      "viewport": "1366x633",
+      "language": "pt-PT",
+      "product": {
+        "slug": "troca-de-tela-de-celulares",
+        "name": "Troca de Tela de Celulares"
+      },
+      "term": ""
+    },
+    {
+      "at": "2026-08-23T21:17:19.709Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/site/view/index.html",
+      "referrer": "http://localhost:3000/produtos?page=1&q=troca+de&lvStatus=true",
+      "device": "desktop",
+      "viewport": "1366x633",
+      "language": "pt-PT",
+      "term": ""
+    },
+    {
+      "at": "2026-08-23T21:17:25.434Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/produto/troca-de-tela-de-celulares/",
+      "referrer": "http://localhost:3000/assistencia-tecnica/",
+      "device": "desktop",
+      "viewport": "1366x633",
+      "language": "pt-PT",
+      "term": ""
+    },
+    {
+      "at": "2026-08-23T21:17:26.326Z",
+      "type": "product_view",
+      "url": "http://localhost:3000/produto/troca-de-tela-de-celulares/",
+      "referrer": "http://localhost:3000/assistencia-tecnica/",
+      "device": "desktop",
+      "viewport": "1366x633",
+      "language": "pt-PT",
+      "product": {
+        "slug": "troca-de-tela-de-celulares",
+        "name": "Troca de Tela de Celulares"
+      },
+      "term": ""
+    },
+    {
+      "at": "2026-08-23T22:45:51.169Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/produto/troca-de-tela-de-celulares/",
+      "referrer": "http://localhost:3000/assistencia-tecnica/",
+      "device": "desktop",
+      "viewport": "1366x633",
+      "language": "pt-PT",
+      "term": ""
+    },
+    {
+      "at": "2026-08-23T22:45:52.980Z",
+      "type": "product_view",
+      "url": "http://localhost:3000/produto/troca-de-tela-de-celulares/",
+      "referrer": "http://localhost:3000/assistencia-tecnica/",
+      "device": "desktop",
+      "viewport": "1366x633",
+      "language": "pt-PT",
+      "product": {
+        "slug": "troca-de-tela-de-celulares",
+        "name": "Troca de Tela de Celulares"
+      },
+      "term": ""
+    },
+    {
+      "at": "2026-08-23T22:49:26.271Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/site/view/index.html",
+      "referrer": "http://localhost:3000/categorias?subsaved=1",
+      "device": "desktop",
+      "viewport": "1366x633",
+      "language": "pt-PT",
+      "term": ""
+    },
+    {
+      "at": "2026-08-23T22:49:29.607Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/smartphones/",
+      "referrer": "http://localhost:3000/site/view/index.html",
+      "device": "desktop",
+      "viewport": "1366x633",
+      "language": "pt-PT",
+      "term": ""
+    },
+    {
+      "at": "2026-08-23T22:49:29.628Z",
+      "type": "category_view",
+      "url": "http://localhost:3000/smartphones/",
+      "referrer": "http://localhost:3000/site/view/index.html",
+      "device": "desktop",
+      "viewport": "1366x633",
+      "language": "pt-PT",
+      "category": {
+        "slug": "smartphones",
+        "name": "smartphones"
+      },
+      "term": ""
+    },
+    {
+      "at": "2026-08-23T22:49:31.551Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/site/view/index.html",
+      "referrer": "http://localhost:3000/smartphones/",
+      "device": "desktop",
+      "viewport": "1366x633",
+      "language": "pt-PT",
+      "term": ""
+    },
+    {
+      "at": "2026-08-23T22:50:35.190Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/produto/troca-de-tela-de-celulares/",
+      "referrer": "http://localhost:3000/assistencia-tecnica/",
+      "device": "desktop",
+      "viewport": "1366x633",
+      "language": "pt-PT",
+      "term": ""
+    },
+    {
+      "at": "2026-08-23T22:50:36.065Z",
+      "type": "product_view",
+      "url": "http://localhost:3000/produto/troca-de-tela-de-celulares/",
+      "referrer": "http://localhost:3000/assistencia-tecnica/",
+      "device": "desktop",
+      "viewport": "1366x633",
+      "language": "pt-PT",
+      "product": {
+        "slug": "troca-de-tela-de-celulares",
+        "name": "Troca de Tela de Celulares"
+      },
+      "term": ""
+    },
+    {
+      "at": "2026-08-23T22:53:13.977Z",
+      "type": "whatsapp_click",
+      "url": "http://localhost:3000/site/view/index.html",
+      "referrer": "http://localhost:3000/smartphones/",
+      "device": "desktop",
+      "viewport": "1821x844",
+      "language": "pt-PT",
+      "product": {
+        "slug": "",
+        "name": "Fonte Original Apple Usb C 20w"
+      },
+      "term": ""
+    },
+    {
+      "at": "2026-08-23T22:53:31.112Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/site/view/index.html",
+      "referrer": "http://localhost:3000/site/formas-de-pagamento.html",
+      "device": "desktop",
+      "viewport": "1821x844",
+      "language": "pt-PT",
+      "term": ""
+    },
+    {
+      "at": "2026-08-23T22:53:32.505Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/eletronicos/",
+      "referrer": "http://localhost:3000/site/view/index.html",
+      "device": "desktop",
+      "viewport": "1821x844",
+      "language": "pt-PT",
+      "term": ""
+    },
+    {
+      "at": "2026-08-23T22:53:32.519Z",
+      "type": "category_view",
+      "url": "http://localhost:3000/eletronicos/",
+      "referrer": "http://localhost:3000/site/view/index.html",
+      "device": "desktop",
+      "viewport": "1821x844",
+      "language": "pt-PT",
+      "category": {
+        "slug": "eletronicos",
+        "name": "eletronicos"
+      },
+      "term": ""
+    },
+    {
+      "at": "2026-08-23T22:53:36.207Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/assistencia-tecnica/",
+      "referrer": "http://localhost:3000/eletronicos/",
+      "device": "desktop",
+      "viewport": "1821x844",
+      "language": "pt-PT",
+      "term": ""
+    },
+    {
+      "at": "2026-08-23T22:53:36.220Z",
+      "type": "category_view",
+      "url": "http://localhost:3000/assistencia-tecnica/",
+      "referrer": "http://localhost:3000/eletronicos/",
+      "device": "desktop",
+      "viewport": "1821x844",
+      "language": "pt-PT",
+      "category": {
+        "slug": "assistencia-tecnica",
+        "name": "assistencia-tecnica"
+      },
+      "term": ""
+    },
+    {
+      "at": "2026-08-23T22:53:37.458Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/eletronicos/",
+      "referrer": "http://localhost:3000/assistencia-tecnica/",
+      "device": "desktop",
+      "viewport": "1821x844",
+      "language": "pt-PT",
+      "term": ""
+    },
+    {
+      "at": "2026-08-23T22:53:37.471Z",
+      "type": "category_view",
+      "url": "http://localhost:3000/eletronicos/",
+      "referrer": "http://localhost:3000/assistencia-tecnica/",
+      "device": "desktop",
+      "viewport": "1821x844",
+      "language": "pt-PT",
+      "category": {
+        "slug": "eletronicos",
+        "name": "eletronicos"
+      },
+      "term": ""
+    },
+    {
+      "at": "2026-08-23T22:53:38.845Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/smartphones/",
+      "referrer": "http://localhost:3000/eletronicos/",
+      "device": "desktop",
+      "viewport": "1821x844",
+      "language": "pt-PT",
+      "term": ""
+    },
+    {
+      "at": "2026-08-23T22:53:38.857Z",
+      "type": "category_view",
+      "url": "http://localhost:3000/smartphones/",
+      "referrer": "http://localhost:3000/eletronicos/",
+      "device": "desktop",
+      "viewport": "1821x844",
+      "language": "pt-PT",
+      "category": {
+        "slug": "smartphones",
+        "name": "smartphones"
+      },
+      "term": ""
+    },
+    {
+      "at": "2026-08-23T22:56:36.553Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/produto/troca-de-tela-de-celulares/",
+      "referrer": "http://localhost:3000/assistencia-tecnica/",
+      "device": "desktop",
+      "viewport": "1821x844",
+      "language": "pt-PT",
+      "term": ""
+    },
+    {
+      "at": "2026-08-23T22:56:37.392Z",
+      "type": "product_view",
+      "url": "http://localhost:3000/produto/troca-de-tela-de-celulares/",
+      "referrer": "http://localhost:3000/assistencia-tecnica/",
+      "device": "desktop",
+      "viewport": "1821x844",
+      "language": "pt-PT",
+      "product": {
+        "slug": "troca-de-tela-de-celulares",
+        "name": "Troca de Tela de Celulares"
+      },
+      "term": ""
+    },
+    {
+      "at": "2026-08-23T22:56:37.919Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/smartphones/",
+      "referrer": "http://localhost:3000/produto/troca-de-tela-de-celulares/",
+      "device": "desktop",
+      "viewport": "1821x844",
+      "language": "pt-PT",
+      "term": ""
+    },
+    {
+      "at": "2026-08-23T22:56:37.932Z",
+      "type": "category_view",
+      "url": "http://localhost:3000/smartphones/",
+      "referrer": "http://localhost:3000/produto/troca-de-tela-de-celulares/",
+      "device": "desktop",
+      "viewport": "1821x844",
+      "language": "pt-PT",
+      "category": {
+        "slug": "smartphones",
+        "name": "smartphones"
+      },
+      "term": ""
+    },
+    {
+      "at": "2026-08-23T22:56:39.417Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/site/view/index.html",
+      "referrer": "http://localhost:3000/smartphones/",
+      "device": "desktop",
+      "viewport": "1821x844",
+      "language": "pt-PT",
+      "term": ""
+    },
+    {
+      "at": "2026-08-23T22:56:43.375Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/smartphones/",
+      "referrer": "http://localhost:3000/eletronicos/",
+      "device": "desktop",
+      "viewport": "1821x844",
+      "language": "pt-PT",
+      "term": ""
+    },
+    {
+      "at": "2026-08-23T22:56:43.391Z",
+      "type": "category_view",
+      "url": "http://localhost:3000/smartphones/",
+      "referrer": "http://localhost:3000/eletronicos/",
+      "device": "desktop",
+      "viewport": "1821x844",
+      "language": "pt-PT",
+      "category": {
+        "slug": "smartphones",
+        "name": "smartphones"
+      },
+      "term": ""
+    },
+    {
+      "at": "2026-08-23T22:57:59.963Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/smartphones/",
+      "referrer": "http://localhost:3000/eletronicos/",
+      "device": "desktop",
+      "viewport": "1821x844",
+      "language": "pt-PT",
+      "term": ""
+    },
+    {
+      "at": "2026-08-23T22:57:59.981Z",
+      "type": "category_view",
+      "url": "http://localhost:3000/smartphones/",
+      "referrer": "http://localhost:3000/eletronicos/",
+      "device": "desktop",
+      "viewport": "1821x844",
+      "language": "pt-PT",
+      "category": {
+        "slug": "smartphones",
+        "name": "smartphones"
+      },
+      "term": ""
+    },
+    {
+      "at": "2026-08-23T22:58:01.354Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/smartphones/",
+      "referrer": "http://localhost:3000/smartphones/",
+      "device": "desktop",
+      "viewport": "1821x844",
+      "language": "pt-PT",
+      "term": ""
+    },
+    {
+      "at": "2026-08-23T22:58:01.369Z",
+      "type": "category_view",
+      "url": "http://localhost:3000/smartphones/",
+      "referrer": "http://localhost:3000/smartphones/",
+      "device": "desktop",
+      "viewport": "1821x844",
+      "language": "pt-PT",
+      "category": {
+        "slug": "smartphones",
+        "name": "smartphones"
+      },
+      "term": ""
+    },
+    {
+      "at": "2026-08-23T22:59:01.175Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/site/view/index.html",
+      "referrer": "http://localhost:3000/smartphones/",
+      "device": "desktop",
+      "viewport": "1821x844",
+      "language": "pt-PT",
+      "term": ""
+    },
+    {
+      "at": "2026-08-23T22:59:02.939Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/smartphones/",
+      "referrer": "http://localhost:3000/site/view/index.html",
+      "device": "desktop",
+      "viewport": "1821x844",
+      "language": "pt-PT",
+      "term": ""
+    },
+    {
+      "at": "2026-08-23T22:59:02.957Z",
+      "type": "category_view",
+      "url": "http://localhost:3000/smartphones/",
+      "referrer": "http://localhost:3000/site/view/index.html",
+      "device": "desktop",
+      "viewport": "1821x844",
+      "language": "pt-PT",
+      "category": {
+        "slug": "smartphones",
+        "name": "smartphones"
+      },
+      "term": ""
+    },
+    {
+      "at": "2026-08-23T22:59:05.154Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/site/view/index.html",
+      "referrer": "http://localhost:3000/smartphones/",
+      "device": "desktop",
+      "viewport": "1821x844",
+      "language": "pt-PT",
+      "term": ""
+    },
+    {
+      "at": "2026-08-23T22:59:06.373Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/smartphones/",
+      "referrer": "http://localhost:3000/site/view/index.html",
+      "device": "desktop",
+      "viewport": "1821x844",
+      "language": "pt-PT",
+      "term": ""
+    },
+    {
+      "at": "2026-08-23T22:59:06.392Z",
+      "type": "category_view",
+      "url": "http://localhost:3000/smartphones/",
+      "referrer": "http://localhost:3000/site/view/index.html",
+      "device": "desktop",
+      "viewport": "1821x844",
+      "language": "pt-PT",
+      "category": {
+        "slug": "smartphones",
+        "name": "smartphones"
+      },
+      "term": ""
+    },
+    {
+      "at": "2026-08-23T22:59:07.264Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/site/view/index.html",
+      "referrer": "http://localhost:3000/smartphones/",
+      "device": "desktop",
+      "viewport": "1821x844",
+      "language": "pt-PT",
+      "term": ""
+    },
+    {
+      "at": "2026-08-23T22:59:10.176Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/site/view/index.html",
+      "referrer": "http://localhost:3000/smartphones/",
+      "device": "desktop",
+      "viewport": "1821x844",
+      "language": "pt-PT",
+      "term": ""
+    },
+    {
+      "at": "2026-08-23T22:59:36.903Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/site/view/index.html",
+      "referrer": "http://localhost:3000/smartphones/",
+      "device": "desktop",
+      "viewport": "1821x844",
+      "language": "pt-PT",
+      "term": ""
+    },
+    {
+      "at": "2026-08-23T22:59:43.789Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/smartphones/",
+      "referrer": "http://localhost:3000/smartphones/",
+      "device": "desktop",
+      "viewport": "1821x844",
+      "language": "pt-PT",
+      "term": ""
+    },
+    {
+      "at": "2026-08-23T22:59:43.818Z",
+      "type": "category_view",
+      "url": "http://localhost:3000/smartphones/",
+      "referrer": "http://localhost:3000/smartphones/",
+      "device": "desktop",
+      "viewport": "1821x844",
+      "language": "pt-PT",
+      "category": {
+        "slug": "smartphones",
+        "name": "smartphones"
+      },
+      "term": ""
+    },
+    {
+      "at": "2026-08-23T23:04:08.652Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/smartphones/",
+      "referrer": "http://localhost:3000/smartphones/",
+      "device": "desktop",
+      "viewport": "1366x633",
+      "language": "pt-PT",
+      "term": ""
+    },
+    {
+      "at": "2026-08-23T23:04:09.124Z",
+      "type": "category_view",
+      "url": "http://localhost:3000/smartphones/",
+      "referrer": "http://localhost:3000/smartphones/",
+      "device": "desktop",
+      "viewport": "1366x633",
+      "language": "pt-PT",
+      "category": {
+        "slug": "smartphones",
+        "name": "smartphones"
+      },
+      "term": ""
+    },
+    {
+      "at": "2026-08-23T23:04:11.874Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/site/view/index.html",
+      "referrer": "http://localhost:3000/smartphones/",
+      "device": "desktop",
+      "viewport": "1366x633",
+      "language": "pt-PT",
+      "term": ""
+    },
+    {
+      "at": "2026-08-23T23:04:12.562Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/smartphones/",
+      "referrer": "http://localhost:3000/site/view/index.html",
+      "device": "desktop",
+      "viewport": "1366x633",
+      "language": "pt-PT",
+      "term": ""
+    },
+    {
+      "at": "2026-08-23T23:04:12.579Z",
+      "type": "category_view",
+      "url": "http://localhost:3000/smartphones/",
+      "referrer": "http://localhost:3000/site/view/index.html",
+      "device": "desktop",
+      "viewport": "1366x633",
+      "language": "pt-PT",
+      "category": {
+        "slug": "smartphones",
+        "name": "smartphones"
+      },
+      "term": ""
+    },
+    {
+      "at": "2026-08-23T23:04:13.731Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/site/view/index.html",
+      "referrer": "http://localhost:3000/smartphones/",
+      "device": "desktop",
+      "viewport": "1366x633",
+      "language": "pt-PT",
+      "term": ""
+    },
+    {
+      "at": "2026-08-23T23:04:15.652Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/smartphones/?subcategoria=usados",
+      "referrer": "http://localhost:3000/site/view/index.html",
+      "device": "desktop",
+      "viewport": "1366x633",
+      "language": "pt-PT",
+      "term": ""
+    },
+    {
+      "at": "2026-08-23T23:04:15.666Z",
+      "type": "category_view",
+      "url": "http://localhost:3000/smartphones/?subcategoria=usados",
+      "referrer": "http://localhost:3000/site/view/index.html",
+      "device": "desktop",
+      "viewport": "1366x633",
+      "language": "pt-PT",
+      "category": {
+        "slug": "smartphones",
+        "name": "smartphones"
+      },
+      "term": ""
+    },
+    {
+      "at": "2026-08-23T23:04:22.862Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/site/view/index.html",
+      "referrer": "http://localhost:3000/smartphones/?subcategoria=usados",
+      "device": "desktop",
+      "viewport": "1366x633",
+      "language": "pt-PT",
+      "term": ""
+    },
+    {
+      "at": "2026-08-23T23:04:25.419Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/smartphones/?subcategoria=usados",
+      "referrer": "http://localhost:3000/site/view/index.html",
+      "device": "desktop",
+      "viewport": "1366x633",
+      "language": "pt-PT",
+      "term": ""
+    },
+    {
+      "at": "2026-08-23T23:04:25.437Z",
+      "type": "category_view",
+      "url": "http://localhost:3000/smartphones/?subcategoria=usados",
+      "referrer": "http://localhost:3000/site/view/index.html",
+      "device": "desktop",
+      "viewport": "1366x633",
+      "language": "pt-PT",
+      "category": {
+        "slug": "smartphones",
+        "name": "smartphones"
+      },
+      "term": ""
+    },
+    {
+      "at": "2026-08-23T23:04:26.909Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/site/view/index.html",
+      "referrer": "http://localhost:3000/smartphones/?subcategoria=usados",
+      "device": "desktop",
+      "viewport": "1366x633",
+      "language": "pt-PT",
+      "term": ""
+    },
+    {
+      "at": "2026-08-23T23:10:29.877Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/site/view/index.html",
+      "referrer": "http://localhost:3000/smartphones/?subcategoria=usados",
+      "device": "desktop",
+      "viewport": "1366x633",
+      "language": "pt-PT",
+      "term": ""
+    },
+    {
+      "at": "2026-08-23T23:10:30.814Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/smartphones/",
+      "referrer": "http://localhost:3000/site/view/index.html",
+      "device": "desktop",
+      "viewport": "1366x633",
+      "language": "pt-PT",
+      "term": ""
+    },
+    {
+      "at": "2026-08-23T23:10:30.833Z",
+      "type": "category_view",
+      "url": "http://localhost:3000/smartphones/",
+      "referrer": "http://localhost:3000/site/view/index.html",
+      "device": "desktop",
+      "viewport": "1366x633",
+      "language": "pt-PT",
+      "category": {
+        "slug": "smartphones",
+        "name": "smartphones"
+      },
+      "term": ""
+    },
+    {
+      "at": "2026-08-23T23:10:32.058Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/smartphones/",
+      "referrer": "http://localhost:3000/smartphones/",
+      "device": "desktop",
+      "viewport": "1366x633",
+      "language": "pt-PT",
+      "term": ""
+    },
+    {
+      "at": "2026-08-23T23:10:32.074Z",
+      "type": "category_view",
+      "url": "http://localhost:3000/smartphones/",
+      "referrer": "http://localhost:3000/smartphones/",
+      "device": "desktop",
+      "viewport": "1366x633",
+      "language": "pt-PT",
+      "category": {
+        "slug": "smartphones",
+        "name": "smartphones"
+      },
+      "term": ""
+    },
+    {
+      "at": "2026-08-23T23:10:33.385Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/site/view/index.html",
+      "referrer": "http://localhost:3000/smartphones/",
+      "device": "desktop",
+      "viewport": "1366x633",
+      "language": "pt-PT",
+      "term": ""
+    },
+    {
+      "at": "2026-08-23T23:10:34.531Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/smartphones/?subcategoria=usados",
+      "referrer": "http://localhost:3000/site/view/index.html",
+      "device": "desktop",
+      "viewport": "1366x633",
+      "language": "pt-PT",
+      "term": ""
+    },
+    {
+      "at": "2026-08-23T23:10:34.548Z",
+      "type": "category_view",
+      "url": "http://localhost:3000/smartphones/?subcategoria=usados",
+      "referrer": "http://localhost:3000/site/view/index.html",
+      "device": "desktop",
+      "viewport": "1366x633",
+      "language": "pt-PT",
+      "category": {
+        "slug": "smartphones",
+        "name": "smartphones"
+      },
+      "term": ""
+    },
+    {
+      "at": "2026-08-23T23:10:44.707Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/site/view/index.html",
+      "referrer": "http://localhost:3000/smartphones/?subcategoria=usados",
+      "device": "desktop",
+      "viewport": "1366x633",
+      "language": "pt-PT",
+      "term": ""
+    },
+    {
+      "at": "2026-08-23T23:12:11.044Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/site/view/index.html",
+      "referrer": "http://localhost:3000/smartphones/?subcategoria=usados",
+      "device": "desktop",
+      "viewport": "1366x633",
+      "language": "pt-PT",
+      "term": ""
+    },
+    {
+      "at": "2026-08-23T23:12:12.528Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/smartphones/?subcategoria=usados",
+      "referrer": "http://localhost:3000/site/view/index.html",
+      "device": "desktop",
+      "viewport": "1366x633",
+      "language": "pt-PT",
+      "term": ""
+    },
+    {
+      "at": "2026-08-23T23:12:12.548Z",
+      "type": "category_view",
+      "url": "http://localhost:3000/smartphones/?subcategoria=usados",
+      "referrer": "http://localhost:3000/site/view/index.html",
+      "device": "desktop",
+      "viewport": "1366x633",
+      "language": "pt-PT",
+      "category": {
+        "slug": "smartphones",
+        "name": "smartphones"
+      },
+      "term": ""
+    },
+    {
+      "at": "2026-08-23T23:15:21.643Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/site/view/index.html",
+      "referrer": "http://localhost:3000/smartphones/?subcategoria=usados",
+      "device": "desktop",
+      "viewport": "1366x633",
+      "language": "pt-PT",
+      "term": ""
+    },
+    {
+      "at": "2026-08-23T23:15:41.339Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/smartphones/?subcategoria=usados",
+      "referrer": "http://localhost:3000/site/view/index.html",
+      "device": "desktop",
+      "viewport": "1366x633",
+      "language": "pt-PT",
+      "term": ""
+    },
+    {
+      "at": "2026-08-23T23:15:41.352Z",
+      "type": "category_view",
+      "url": "http://localhost:3000/smartphones/?subcategoria=usados",
+      "referrer": "http://localhost:3000/site/view/index.html",
+      "device": "desktop",
+      "viewport": "1366x633",
+      "language": "pt-PT",
+      "category": {
+        "slug": "smartphones",
+        "name": "smartphones"
+      },
+      "term": ""
+    },
+    {
+      "at": "2026-08-23T23:15:43.382Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/smartphones/",
+      "referrer": "http://localhost:3000/smartphones/?subcategoria=usados",
+      "device": "desktop",
+      "viewport": "1366x633",
+      "language": "pt-PT",
+      "term": ""
+    },
+    {
+      "at": "2026-08-23T23:15:43.395Z",
+      "type": "category_view",
+      "url": "http://localhost:3000/smartphones/",
+      "referrer": "http://localhost:3000/smartphones/?subcategoria=usados",
+      "device": "desktop",
+      "viewport": "1366x633",
+      "language": "pt-PT",
+      "category": {
+        "slug": "smartphones",
+        "name": "smartphones"
+      },
+      "term": ""
+    },
+    {
+      "at": "2026-08-23T23:24:39.670Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/smartphones/",
+      "referrer": "http://localhost:3000/smartphones/?subcategoria=usados",
+      "device": "desktop",
+      "viewport": "1366x633",
+      "language": "pt-PT",
+      "term": ""
+    },
+    {
+      "at": "2026-08-23T23:24:39.695Z",
+      "type": "category_view",
+      "url": "http://localhost:3000/smartphones/",
+      "referrer": "http://localhost:3000/smartphones/?subcategoria=usados",
+      "device": "desktop",
+      "viewport": "1366x633",
+      "language": "pt-PT",
+      "category": {
+        "slug": "smartphones",
+        "name": "smartphones"
+      },
+      "term": ""
+    },
+    {
+      "at": "2026-08-23T23:24:41.880Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/site/view/index.html",
+      "referrer": "http://localhost:3000/smartphones/",
+      "device": "desktop",
+      "viewport": "1366x633",
+      "language": "pt-PT",
+      "term": ""
+    },
+    {
+      "at": "2026-08-23T23:24:43.552Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/smartphones/?subcategoria=usados",
+      "referrer": "http://localhost:3000/site/view/index.html",
+      "device": "desktop",
+      "viewport": "1366x633",
+      "language": "pt-PT",
+      "term": ""
+    },
+    {
+      "at": "2026-08-23T23:24:43.574Z",
+      "type": "category_view",
+      "url": "http://localhost:3000/smartphones/?subcategoria=usados",
+      "referrer": "http://localhost:3000/site/view/index.html",
+      "device": "desktop",
+      "viewport": "1366x633",
+      "language": "pt-PT",
+      "category": {
+        "slug": "smartphones",
+        "name": "smartphones"
+      },
+      "term": ""
+    },
+    {
+      "at": "2026-08-23T23:24:47.408Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/site/view/index.html",
+      "referrer": "http://localhost:3000/smartphones/?subcategoria=usados",
+      "device": "desktop",
+      "viewport": "1366x633",
+      "language": "pt-PT",
+      "term": ""
+    },
+    {
+      "at": "2026-08-23T23:35:28.878Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/site/view/index.html",
+      "referrer": "http://localhost:3000/smartphones/?subcategoria=usados",
+      "device": "desktop",
+      "viewport": "1366x633",
+      "language": "pt-PT",
+      "term": ""
+    },
+    {
+      "at": "2026-08-23T23:35:30.218Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/site/view/index.html",
+      "referrer": "http://localhost:3000/smartphones/?subcategoria=usados",
+      "device": "desktop",
+      "viewport": "1366x633",
+      "language": "pt-PT",
+      "term": ""
+    },
+    {
+      "at": "2026-08-23T23:44:53.699Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/site/view/index.html",
+      "referrer": "http://localhost:3000/smartphones/",
+      "device": "desktop",
+      "viewport": "1366x633",
+      "language": "pt-PT",
+      "term": ""
+    },
+    {
+      "at": "2026-08-23T23:46:05.785Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/produto/iphone-13-usado-128gb/",
+      "referrer": "http://localhost:3000/smartphones/?subcategoria=usados",
+      "device": "desktop",
+      "viewport": "1366x633",
+      "language": "pt-PT",
+      "term": ""
+    },
+    {
+      "at": "2026-08-23T23:46:06.662Z",
+      "type": "product_view",
+      "url": "http://localhost:3000/produto/iphone-13-usado-128gb/",
+      "referrer": "http://localhost:3000/smartphones/?subcategoria=usados",
+      "device": "desktop",
+      "viewport": "1366x633",
+      "language": "pt-PT",
+      "product": {
+        "slug": "iphone-13-usado-128gb",
+        "name": "iPhone 13 usado 128GB"
+      },
+      "term": ""
+    },
+    {
+      "at": "2026-08-23T23:51:06.583Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/produto/iphone-13-usado-128gb/",
+      "referrer": "http://localhost:3000/smartphones/?subcategoria=usados",
+      "device": "desktop",
+      "viewport": "1366x633",
+      "language": "pt-PT",
+      "term": ""
+    },
+    {
+      "at": "2026-08-23T23:51:07.473Z",
+      "type": "product_view",
+      "url": "http://localhost:3000/produto/iphone-13-usado-128gb/",
+      "referrer": "http://localhost:3000/smartphones/?subcategoria=usados",
+      "device": "desktop",
+      "viewport": "1366x633",
+      "language": "pt-PT",
+      "product": {
+        "slug": "iphone-13-usado-128gb",
+        "name": "iPhone 13 usado 128GB"
+      },
+      "term": ""
+    },
+    {
+      "at": "2026-08-24T00:02:40.231Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/produto/iphone-13-usado-128gb/",
+      "referrer": "http://localhost:3000/smartphones/?subcategoria=usados",
+      "device": "desktop",
+      "viewport": "1366x633",
+      "language": "pt-PT",
+      "term": ""
+    },
+    {
+      "at": "2026-08-24T00:02:41.096Z",
+      "type": "product_view",
+      "url": "http://localhost:3000/produto/iphone-13-usado-128gb/",
+      "referrer": "http://localhost:3000/smartphones/?subcategoria=usados",
+      "device": "desktop",
+      "viewport": "1366x633",
+      "language": "pt-PT",
+      "product": {
+        "slug": "iphone-13-usado-128gb",
+        "name": "iPhone 13 usado 128GB"
+      },
+      "term": ""
+    },
+    {
+      "at": "2026-08-24T00:02:43.451Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/produto/iphone-13-usado-128gb/",
+      "referrer": "http://localhost:3000/smartphones/?subcategoria=usados",
+      "device": "desktop",
+      "viewport": "1366x633",
+      "language": "pt-PT",
+      "term": ""
+    },
+    {
+      "at": "2026-08-24T00:02:44.347Z",
+      "type": "product_view",
+      "url": "http://localhost:3000/produto/iphone-13-usado-128gb/",
+      "referrer": "http://localhost:3000/smartphones/?subcategoria=usados",
+      "device": "desktop",
+      "viewport": "1366x633",
+      "language": "pt-PT",
+      "product": {
+        "slug": "iphone-13-usado-128gb",
+        "name": "iPhone 13 usado 128GB"
+      },
+      "term": ""
+    },
+    {
+      "at": "2026-08-24T00:04:08.479Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/produto/iphone-17-pro-max-256gb-novo-lacrado/",
+      "referrer": "http://localhost:3000/smartphones/",
+      "device": "desktop",
+      "viewport": "1366x633",
+      "language": "pt-PT",
+      "term": ""
+    },
+    {
+      "at": "2026-08-24T00:04:09.368Z",
+      "type": "product_view",
+      "url": "http://localhost:3000/produto/iphone-17-pro-max-256gb-novo-lacrado/",
+      "referrer": "http://localhost:3000/smartphones/",
+      "device": "desktop",
+      "viewport": "1366x633",
+      "language": "pt-PT",
+      "product": {
+        "slug": "iphone-17-pro-max-256gb-novo-lacrado",
+        "name": "Iphone 17 pro max 256gb novo lacrado"
+      },
+      "term": ""
+    },
+    {
+      "at": "2026-08-24T00:08:20.109Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/produto/iphone-13-usado-128gb/",
+      "referrer": "http://localhost:3000/smartphones/?subcategoria=usados",
+      "device": "desktop",
+      "viewport": "1821x844",
+      "language": "pt-PT",
+      "term": ""
+    },
+    {
+      "at": "2026-08-24T00:08:21.016Z",
+      "type": "product_view",
+      "url": "http://localhost:3000/produto/iphone-13-usado-128gb/",
+      "referrer": "http://localhost:3000/smartphones/?subcategoria=usados",
+      "device": "desktop",
+      "viewport": "1821x844",
+      "language": "pt-PT",
+      "product": {
+        "slug": "iphone-13-usado-128gb",
+        "name": "iPhone 13 usado 128GB"
+      },
+      "term": ""
+    },
+    {
+      "at": "2026-08-24T00:15:20.823Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/produto/iphone-15-128gb-usado/",
+      "referrer": "http://localhost:3000/smartphones/?subcategoria=usados",
+      "device": "desktop",
+      "viewport": "1821x844",
+      "language": "pt-PT",
+      "term": ""
+    },
+    {
+      "at": "2026-08-24T00:15:21.709Z",
+      "type": "product_view",
+      "url": "http://localhost:3000/produto/iphone-15-128gb-usado/",
+      "referrer": "http://localhost:3000/smartphones/?subcategoria=usados",
+      "device": "desktop",
+      "viewport": "1821x844",
+      "language": "pt-PT",
+      "product": {
+        "slug": "iphone-15-128gb-usado",
+        "name": "iPhone 15 128GB USADO"
+      },
+      "term": ""
+    },
+    {
+      "at": "2026-08-24T00:16:07.123Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/site/view/index.html",
+      "referrer": "http://localhost:3000/smartphones/?subcategoria=usados",
+      "device": "desktop",
+      "viewport": "1821x844",
+      "language": "pt-PT",
       "term": ""
     }
   ]

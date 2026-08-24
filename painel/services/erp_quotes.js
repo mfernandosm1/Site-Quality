@@ -103,7 +103,7 @@ export function saveQuoteSettings(app,input={}){
       header:text(input.message?.header,500),footer:text(input.message?.footer,1000),
       warranty:text(input.message?.warranty,500),shipping:text(input.message?.shipping,500),
       offerTitle:text(input.message?.offerTitle,500),validUntil:text(input.message?.validUntil,200),
-      productEmoji:text(input.message?.productEmoji,20)||'📲',installmentEmoji:text(input.message?.installmentEmoji,20)||'💳',cashEmoji:text(input.message?.cashEmoji,20)||'🔥',
+      productEmoji:input.message?.productEmoji===undefined?(current.message?.productEmoji??'📲'):text(input.message.productEmoji,20),installmentEmoji:input.message?.installmentEmoji===undefined?(current.message?.installmentEmoji??'💳'):text(input.message.installmentEmoji,20),cashEmoji:input.message?.cashEmoji===undefined?(current.message?.cashEmoji??'🔥'):text(input.message.cashEmoji,20),
       paymentLabels:{
         card:text(input.message?.paymentLabels?.card,80)||'no cartão',
         credit:text(input.message?.paymentLabels?.credit,80)||'no boleto/crediário',

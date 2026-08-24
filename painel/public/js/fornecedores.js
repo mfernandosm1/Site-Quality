@@ -7,8 +7,12 @@
   const normalize = value => String(value || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().trim();
 
   let suppliers = parseJson('suppliersData');
+  const supplierFieldSettings = (()=>{ try{return JSON.parse(byId('supplierFieldSettingsData')?.textContent||'{}');}catch(_){return {fields:[]};} })();
+  const supplierFieldMap = new Map((supplierFieldSettings.fields||[]).map(field=>[field.key,field]));
   let editingId = '';
   let existingSupplier = null;
+  let supplierCepTimer = null;
+  let lastSupplierCep = '';
 
   const drawer = byId('supplierDrawer');
   const backdrop = byId('supplierDrawerBackdrop');
@@ -18,6 +22,20 @@
   const personType = byId('supplierPersonType');
   const documentState = byId('supplierDocumentState');
   const cnpjLookup = byId('supplierCnpjLookup');
+
+
+  function applyFieldSettings() {
+    const idMap = {personType:'supplierPersonType',originType:'supplierOriginType',document:'supplierDocument',name:'supplierName',tradeName:'supplierTradeName',stateRegistration:'supplierStateRegistration',municipalRegistration:'supplierMunicipalRegistration',birthDate:'supplierBirthDate',contactName:'supplierContactName',mobile:'supplierMobile',phone:'supplierPhone',email:'supplierEmail',website:'supplierWebsite',zipCode:'supplierZipCode',state:'supplierState',street:'supplierStreet',number:'supplierNumber',complement:'supplierComplement',district:'supplierDistrict',city:'supplierCity',defaultMarkup:'supplierDefaultMarkup',currency:'supplierCurrency',averageDeliveryDays:'supplierAverageDeliveryDays',minimumOrderQuantity:'supplierMinimumOrderQuantity',minimumOrderValue:'supplierMinimumOrderValue',orderDays:'supplierOrderDays',paymentTerms:'supplierPaymentTerms',preferredPaymentMethod:'supplierPreferredPaymentMethod',freightNotes:'supplierFreightNotes',internalAlert:'supplierInternalAlert',notes:'supplierNotes'};
+    for (const [key,id] of Object.entries(idMap)) {
+      const input=byId(id), setting=supplierFieldMap.get(key); if(!input||!setting) continue;
+      const wrapper=input.closest('.supplier-field'); if(wrapper) wrapper.hidden=setting.visible===false;
+      input.required=Boolean(setting.required && setting.visible!==false);
+      const label=wrapper?.querySelector('label'); if(label && setting.label) label.textContent=`${setting.label}${input.required?' *':''}`;
+    }
+    cnpjLookup.hidden = personType.value === 'pf' || supplierFieldSettings.cnpjLookupEnabled === false || supplierFieldMap.get('document')?.visible === false;
+  }
+
+  function fieldRequired(key){ return Boolean(supplierFieldMap.get(key)?.required && supplierFieldMap.get(key)?.visible !== false); }
 
   function isValidCpf(value) {
     const cpf = onlyDigits(value);
@@ -61,12 +79,34 @@
 
   function updatePersonTypeFields() {
     const isPf = personType.value === 'pf';
-    document.querySelectorAll('.supplier-pf-only').forEach(el => el.hidden = !isPf);
-    document.querySelectorAll('.supplier-pj-only').forEach(el => el.hidden = isPf);
-    byId('supplierNameLabel').textContent = isPf ? 'Nome completo *' : 'Razão social *';
-    byId('supplierDocumentLabel').textContent = isPf ? 'CPF *' : 'CNPJ *';
-    byId('supplierRegistrationLabel').textContent = isPf ? 'RG' : 'Inscrição estadual';
-    cnpjLookup.hidden = isPf;
+
+    // Primeiro aplica as preferências gerais; depois a regra PF/PJ prevalece.
+    // Isso evita que Configurações → Fornecedores volte a exibir campos empresariais para pessoa física.
+    applyFieldSettings();
+
+    document.querySelectorAll('.supplier-pf-only').forEach(el => {
+      if (!isPf) {
+        el.hidden = true;
+        el.querySelectorAll('input,select,textarea').forEach(control => { control.required = false; });
+      }
+    });
+    document.querySelectorAll('.supplier-pj-only').forEach(el => {
+      if (isPf) {
+        el.hidden = true;
+        el.querySelectorAll('input,select,textarea').forEach(control => {
+          control.required = false;
+          if(control.name !== 'personType') control.value = '';
+        });
+      }
+    });
+
+    const nameSetting=supplierFieldMap.get('name');
+    byId('supplierNameLabel').textContent = `${isPf ? 'Nome completo' : (nameSetting?.label || 'Razão social')}${fieldRequired('name')?' *':''}`;
+    byId('supplierDocumentLabel').textContent = `${isPf ? 'CPF' : 'CNPJ'}${fieldRequired('document')?' *':''}`;
+    byId('supplierRegistrationLabel').textContent = 'Inscrição estadual';
+    documentInput.maxLength = isPf ? 14 : 18;
+    documentInput.setAttribute('aria-label', isPf ? 'CPF' : 'CNPJ');
+    cnpjLookup.hidden = isPf || supplierFieldSettings.cnpjLookupEnabled === false || supplierFieldMap.get('document')?.visible === false;
   }
 
   function renderContacts(items = []) {
@@ -109,13 +149,14 @@
 
   function validateDocument(checkDuplicate = true) {
     const digits = onlyDigits(documentInput.value);
-    const valid = personType.value === 'pf' ? isValidCpf(digits) : isValidCnpj(digits);
+    const documentRequired=fieldRequired('document');
+    const valid = !digits ? !documentRequired : (personType.value === 'pf' ? isValidCpf(digits) : isValidCnpj(digits));
     documentInput.value = formatDocument(digits);
 
     documentState.className = `supplier-document-state ${valid ? 'ok' : 'error'}`;
-    documentState.textContent = valid
+    documentState.textContent = !digits && !documentRequired ? 'Documento opcional' : (valid
       ? `✓ ${personType.value === 'pf' ? 'CPF' : 'CNPJ'} válido`
-      : `✕ ${personType.value === 'pf' ? 'CPF' : 'CNPJ'} inválido ou incompleto`;
+      : `✕ ${personType.value === 'pf' ? 'CPF' : 'CNPJ'} inválido ou incompleto`);
 
     const duplicate = checkDuplicate ? findExistingByDocument() : null;
     if (checkDuplicate) {
@@ -123,9 +164,10 @@
       else hideExistingCard();
     }
 
-    saveButton.disabled = !valid || !byId('supplierName').value.trim() || Boolean(duplicate);
+    const nameOk=!fieldRequired('name') || byId('supplierName').value.trim();
+    saveButton.disabled = !valid || !nameOk || Boolean(duplicate);
     updatePersonTypeFields();
-    cnpjLookup.disabled = personType.value !== 'pj' || !valid || Boolean(duplicate);
+    cnpjLookup.disabled = personType.value !== 'pj' || !digits || !valid || Boolean(duplicate) || supplierFieldSettings.cnpjLookupEnabled === false;
     return valid;
   }
 
@@ -233,6 +275,18 @@
     renderContacts(values.contacts || []);
     updatePersonTypeFields();
 
+    const documentLocked = Boolean(record && supplierFieldSettings.allowDocumentEdit !== true);
+    documentInput.disabled = documentLocked;
+    personType.disabled = documentLocked;
+    documentInput.title = documentLocked
+      ? 'A alteração de CPF/CNPJ está bloqueada nas Configurações de Fornecedores.'
+      : '';
+    personType.title = documentInput.title;
+    if (documentLocked) {
+      documentState.textContent = 'Documento protegido. A liberação é feita em Configurações → Fornecedores.';
+      documentState.className = 'supplier-document-state valid';
+    }
+
     byId('supplierToggleActive').textContent = values.active === false ? 'Reativar' : 'Inativar';
     byId('supplierToggleActive').className = values.active === false ? 'btn success' : 'btn danger';
 
@@ -253,7 +307,20 @@
     data.id = editingId;
     data.active = data.active !== 'false';
     data.defaultMarkup = Number(data.defaultMarkup || 0);
-    data.document = onlyDigits(data.document);
+    if (editingId && supplierFieldSettings.allowDocumentEdit !== true) {
+      const current = suppliers.find(item => String(item.id) === String(editingId));
+      data.document = onlyDigits(current?.document || '');
+      data.personType = current?.personType || 'pj';
+    } else {
+      data.document = onlyDigits(data.document);
+    }
+    if (data.personType === 'pf') {
+      data.tradeName = '';
+      data.stateRegistration = '';
+      data.municipalRegistration = '';
+      data.contactName = '';
+      data.website = '';
+    }
     data.zipCode = onlyDigits(data.zipCode);
     data.phone = onlyDigits(data.phone);
     data.mobile = onlyDigits(data.mobile);
@@ -281,7 +348,7 @@
     let visible = 0;
 
     document.querySelectorAll('[data-supplier-row]').forEach(row => {
-      const show = (!search || row.dataset.search.includes(search))
+      const show = QualitySearch.matches(row.dataset.search, search)
         && (!status || row.dataset.status === status)
         && (!type || row.dataset.type === type)
         && (!origin || row.dataset.origin === origin);
@@ -320,12 +387,17 @@
   byId('supplierName').addEventListener('input', validateDocument);
   byId('supplierMobile').addEventListener('input', event => { event.target.value = formatPhone(event.target.value); });
   byId('supplierPhone').addEventListener('input', event => { event.target.value = formatPhone(event.target.value); });
-  byId('supplierZipCode').addEventListener('input', event => { event.target.value = formatCep(event.target.value); });
+  byId('supplierZipCode').addEventListener('input', event => {
+    event.target.value = formatCep(event.target.value);
+    clearTimeout(supplierCepTimer);
+    const cep = onlyDigits(event.target.value);
+    if (cep.length === 8 && cep !== lastSupplierCep) supplierCepTimer = setTimeout(() => lookupSupplierCep(true), 260);
+  });
   byId('supplierAddContact').addEventListener('click', () => addContactRow());
 
   form.addEventListener('submit', async event => {
     event.preventDefault();
-    if (!validateDocument()) return setMessage('Informe um CPF ou CNPJ válido.');
+    if (!validateDocument()) return setMessage(fieldRequired('document') ? `Informe um ${personType.value === 'pf' ? 'CPF' : 'CNPJ'} válido.` : 'O documento informado é inválido.');
     const duplicate = findExistingByDocument();
     if (duplicate) {
       showExistingCard(duplicate);
@@ -397,23 +469,37 @@
     }
   });
 
-  byId('supplierCepLookup').addEventListener('click', async () => {
+  async function lookupSupplierCep(silent = false) {
     const cep = onlyDigits(byId('supplierZipCode').value);
-    if (cep.length !== 8) return setMessage('Informe um CEP com 8 números.');
+    if (cep.length !== 8) {
+      if (!silent) setMessage('Informe um CEP com 8 números.');
+      return;
+    }
+    if (silent && cep === lastSupplierCep) return;
+    const button = byId('supplierCepLookup');
+    if (button) button.disabled = true;
     try {
-      const response = await fetch(`https://viacep.com.br/ws/${cep}/json/`);
+      const response = await fetch(`https://viacep.com.br/ws/${cep}/json/`, { headers:{ Accept:'application/json' } });
       const data = await response.json();
-      if (data.erro) throw new Error('CEP não encontrado.');
+      if (!response.ok || data.erro) throw new Error('CEP não encontrado.');
       byId('supplierStreet').value = data.logradouro || '';
       byId('supplierDistrict').value = data.bairro || '';
       byId('supplierCity').value = data.localidade || '';
       byId('supplierState').value = data.uf || '';
       byId('supplierComplement').value = data.complemento || '';
-      setMessage('Endereço preenchido pelo CEP.', 'success');
+      lastSupplierCep = cep;
+      setMessage('Endereço preenchido pelo CEP. Digite para pesquisar outros endereços da cidade.', 'success');
+      byId('supplierStreet')?.focus();
+      byId('supplierStreet')?.select?.();
     } catch (error) {
-      setMessage(error.message || 'Não foi possível consultar o CEP.');
+      lastSupplierCep = '';
+      if (!silent) setMessage(error.message || 'Não foi possível consultar o CEP.');
+    } finally {
+      if (button) button.disabled = false;
     }
-  });
+  }
+
+  byId('supplierCepLookup').addEventListener('click', () => lookupSupplierCep(false));
 
   cnpjLookup.addEventListener('click', async () => {
     if (personType.value !== 'pj' || !validateDocument() || findExistingByDocument()) return;
@@ -447,5 +533,6 @@
     }
   });
 
+  applyFieldSettings();
   validateDocument();
 })();

@@ -65,17 +65,65 @@ export default class SupplierService {
       nextCode: 1,
       items: []
     });
-    this.ensureJsonFile(this.settingsFile, {
-      version: '0.12.7',
-      requiredFields: ['name', 'document'],
-      visibleFields: [
-        'personType','originType','name','tradeName','document',
-        'stateRegistration','municipalRegistration','contactName',
-        'phone','mobile','email','website','zipCode','street','number',
-        'complement','district','city','state','defaultMarkup',
-        'paymentTerms','preferredPaymentMethod','currency','notes'
-      ]
-    });
+    this.ensureJsonFile(this.settingsFile, this.defaultFieldSettings());
+  }
+
+
+  defaultFieldSettings() {
+    const fields = [
+      ['personType','Tipo de pessoa',true,true],['originType','Origem',true,true],
+      ['document','CPF/CNPJ',true,true],['name','Nome/Razão social',true,true],
+      ['tradeName','Nome fantasia',true,false],['stateRegistration','Inscrição estadual/RG',true,false],
+      ['municipalRegistration','Inscrição municipal',true,false],['birthDate','Data de nascimento',true,false],
+      ['contactName','Pessoa de contato',true,false],['mobile','Celular/WhatsApp',true,false],
+      ['phone','Telefone',true,false],['email','E-mail',true,false],['website','Website',true,false],
+      ['zipCode','CEP',true,false],['state','Estado',true,false],['street','Endereço',true,false],
+      ['number','Número',true,false],['complement','Complemento',true,false],['district','Bairro',true,false],
+      ['city','Cidade',true,false],['defaultMarkup','Markup padrão',true,false],['currency','Moeda padrão',true,false],
+      ['averageDeliveryDays','Prazo médio de entrega',true,false],['minimumOrderQuantity','Quantidade mínima',true,false],
+      ['minimumOrderValue','Valor mínimo',true,false],['orderDays','Dias de pedido',true,false],
+      ['paymentTerms','Condição de pagamento',true,false],['preferredPaymentMethod','Forma de pagamento',true,false],
+      ['freightNotes','Observações de frete',true,false],['internalAlert','Alerta interno',true,false],['notes','Observações',true,false]
+    ].map(([key,label,visible,required], index) => ({ key,label,visible,required,order:index+1 }));
+    return { version:'0.25.9', cnpjLookupEnabled:true, allowDocumentEdit:false, fields };
+  }
+
+  getFieldSettings() {
+    const defaults = this.defaultFieldSettings();
+    const stored = this.readJson(this.settingsFile, defaults);
+    if (Array.isArray(stored.fields)) {
+      const byKey = new Map(stored.fields.map(item => [String(item.key), item]));
+      return { ...defaults, ...stored, fields:defaults.fields.map(field => { const saved=byKey.get(field.key)||{}; const merged={ ...field, ...saved }; if(field.key==='street' && normalizeText(merged.label)==='rua') merged.label='Endereço'; return merged; }) };
+    }
+    const required = new Set(stored.requiredFields || ['name','document']);
+    const visible = new Set(stored.visibleFields || defaults.fields.map(field => field.key));
+    return { ...defaults, cnpjLookupEnabled:stored.cnpjLookupEnabled !== false, allowDocumentEdit:stored.allowDocumentEdit === true, fields:defaults.fields.map(field => ({...field, visible:visible.has(field.key), required:required.has(field.key)})) };
+  }
+
+  saveFieldSettings(payload = {}) {
+    const defaults = this.defaultFieldSettings();
+    const incoming = Array.isArray(payload.fields) ? payload.fields : [];
+    const byKey = new Map(incoming.map(item => [String(item.key), item]));
+    const protectedKeys = new Set(['personType','originType','name']);
+    const settings = {
+      version:'0.25.9',
+      cnpjLookupEnabled: payload.cnpjLookupEnabled !== false,
+      allowDocumentEdit: payload.allowDocumentEdit === true,
+      fields: defaults.fields.map((field,index) => {
+        const item = byKey.get(field.key) || {};
+        const visible = protectedKeys.has(field.key) ? true : item.visible !== false;
+        const required = field.key === 'name' ? true : Boolean(item.required) && visible;
+        return { ...field, label:field.key==='street' ? 'Endereço' : (String(item.label || field.label).trim() || field.label), visible, required, order:index+1 };
+      })
+    };
+    this.writeJsonAtomic(this.settingsFile, settings);
+    return settings;
+  }
+
+  resetFieldSettings() {
+    const settings = this.defaultFieldSettings();
+    this.writeJsonAtomic(this.settingsFile, settings);
+    return settings;
   }
 
   ensureJsonFile(file, initialData) {
@@ -142,7 +190,7 @@ export default class SupplierService {
     const personType = payload.personType === 'pf' ? 'pf' : 'pj';
     const originType = payload.originType === 'imported' ? 'imported' : 'national';
 
-    return {
+    const supplier = {
       personType,
       originType,
       name: String(payload.name || '').trim(),
@@ -211,17 +259,38 @@ export default class SupplierService {
         lastPurchaseAt: String(payload?.statistics?.lastPurchaseAt || '').trim()
       }
     };
+
+    // Pessoa física não carrega campos exclusivamente empresariais.
+    if (personType === 'pf') {
+      supplier.tradeName = '';
+      supplier.stateRegistration = '';
+      supplier.municipalRegistration = '';
+      supplier.contactName = '';
+      supplier.website = '';
+    }
+
+    return supplier;
   }
 
   validate(supplier) {
-    if (!supplier.name) throw new Error('O nome ou razão social do fornecedor é obrigatório.');
-    if (!supplier.document) throw new Error('O CPF ou CNPJ do fornecedor é obrigatório.');
+    const settings = this.getFieldSettings();
+    const required = new Set(settings.fields.filter(field => field.visible !== false && field.required).map(field => field.key));
+    const labels = new Map(settings.fields.map(field => [field.key, field.label]));
+    const corporateOnly = new Set(['tradeName','stateRegistration','municipalRegistration','contactName','website']);
+    for (const key of required) {
+      if (supplier.personType === 'pf' && corporateOnly.has(key)) continue;
+      if (supplier.personType === 'pj' && key === 'birthDate') continue;
+      const value = supplier[key];
+      if (value === undefined || value === null || String(value).trim() === '') {
+        throw new Error(`${labels.get(key) || key} é obrigatório.`);
+      }
+    }
 
-    if (supplier.personType === 'pf' && !isValidCpf(supplier.document)) {
+    if (supplier.document && supplier.personType === 'pf' && !isValidCpf(supplier.document)) {
       throw new Error('CPF inválido. Confira os números informados.');
     }
 
-    if (supplier.personType === 'pj' && !isValidCnpj(supplier.document)) {
+    if (supplier.document && supplier.personType === 'pj' && !isValidCnpj(supplier.document)) {
       throw new Error('CNPJ inválido. Confira os números informados.');
     }
 
@@ -282,9 +351,22 @@ export default class SupplierService {
     if (index < 0) throw new Error('Fornecedor não encontrado.');
 
     const current = data.items[index];
+    const settings = this.getFieldSettings();
+    const currentDocument = onlyDigits(current.document || '');
+    const requestedDocument = onlyDigits(payload.document === undefined ? current.document : payload.document);
+    const requestedPersonType = String(payload.personType === undefined ? current.personType : payload.personType || '').trim();
+
+    if (settings.allowDocumentEdit !== true && (
+      requestedDocument !== currentDocument || requestedPersonType !== String(current.personType || '').trim()
+    )) {
+      throw new Error('A alteração de CPF/CNPJ do fornecedor está bloqueada nas Configurações de Fornecedores.');
+    }
+
     const supplier = this.sanitize({
       ...current,
       ...payload,
+      document: settings.allowDocumentEdit === true ? requestedDocument : current.document,
+      personType: settings.allowDocumentEdit === true ? requestedPersonType : current.personType,
       links: current.links,
       statistics: current.statistics
     });

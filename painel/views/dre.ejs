@@ -1,0 +1,157 @@
+<% layout('layout') -%>
+<%
+const money = value => Math.abs(Number(value || 0)).toLocaleString('pt-BR',{style:'currency',currency:'BRL'});
+const signedMoney = value => `${Number(value||0) < 0 ? '- ' : ''}${money(value)}`;
+const percent = value => `${Number(value || 0) < 0 ? '- ' : ''}${Math.abs(Number(value || 0)).toLocaleString('pt-BR',{maximumFractionDigits:1})}%`;
+const periodLabel = (() => { const a = new Date(filters.start+'T12:00:00'); const b = new Date(filters.end+'T12:00:00'); const fmt = d => d.toLocaleDateString('pt-BR',{day:'2-digit',month:'2-digit',year:'numeric'}); return `${fmt(a)} a ${fmt(b)}`; })();
+const revenueRows = result.rows.filter(g => g.operation !== 'subtract');
+const deductionRows = result.rows.filter(g => g.id === 'DRE-DED');
+const cmvRows = result.rows.filter(g => g.id === 'DRE-CMV');
+const expenseRows = result.rows.filter(g => g.operation === 'subtract' && !['DRE-DED','DRE-CMV'].includes(g.id));
+const orderedRows = [...revenueRows, ...deductionRows, ...cmvRows, ...expenseRows];
+const analysisParts = String(result.analysis || '').split('. ').filter(Boolean).map((part,index,array) => index < array.length - 1 && !/[.!?]$/.test(part) ? `${part}.` : part);
+const resultStages = [
+  { label:'Receitas', value:result.summary.incomeBeforeCmv, kind:'income' },
+  { label:'CMV', value:-result.summary.cmv, kind:'cost' },
+  { label:'Lucro bruto', value:result.summary.grossProfit, kind:result.summary.grossProfit < 0 ? 'cost' : 'income' },
+  { label:'Despesas', value:-result.summary.expenses, kind:'cost' },
+  { label:'Resultado', value:result.summary.result, kind:result.summary.result < 0 ? 'cost' : 'income' }
+];
+const maxStageValue = Math.max(1,...resultStages.map(x=>Math.abs(Number(x.value||0))));
+const expenseChartRows = expenseRows.filter(x=>Number(x.value||0)>0).sort((a,b)=>Number(b.value||0)-Number(a.value||0));
+%>
+<section class="ops-hero compact dre-hero">
+  <div>
+    <span class="ops-kicker">FINANCEIRO · v<%= version %></span>
+    <h1>📈 DRE Inteligente</h1>
+    <p>Período: <strong><%= periodLabel %></strong> · Receitas − CMV − despesas = resultado líquido.</p>
+  </div>
+  <div class="dre-hero-actions no-export">
+    <details class="dre-export-menu"><summary class="btn">Exportar ▾</summary><div><button type="button" id="exportDrePdf">PDF</button><button type="button" id="exportDreImage">Imagem</button></div></details>
+    <a class="btn" href="/erp/financeiro">← Financeiro</a>
+  </div>
+</section>
+
+<form id="dreFilters" class="dre-filter-shell no-export" method="get" action="/erp/financeiro/dre">
+  <div class="dre-quick-row" aria-label="Filtros rápidos do DRE">
+    <button class="dre-quick-chip" type="button" data-quick="last-3-months">Últimos 3 meses</button>
+    <button class="dre-quick-chip" type="button" data-quick="this-month">Este mês</button>
+    <button class="dre-quick-chip" type="button" data-quick="previous-month">Mês anterior</button>
+    <button class="dre-quick-chip" type="button" data-quick="this-year">Ano</button>
+    <button class="dre-quick-chip" type="button" data-quick="all">Todos</button>
+  </div>
+
+  <div class="dre-main-filter-row">
+    <label class="dre-filter-basis"><span>Regime</span><select name="basis"><option value="competence" <%= filters.basis==='competence'?'selected':'' %>>Competência</option><option value="cash" <%= filters.basis==='cash'?'selected':'' %>>Caixa</option></select></label>
+    <label class="dre-filter-classification"><span>Classificação financeira</span><select name="classification"><option value="">Todas</option><optgroup label="Centros de custo"><% catalogs.costCenters.filter(x=>x.active!==false).forEach(c=>{ %><option value="cost:<%= c.id %>" <%= filters.classification===`cost:${c.id}`?'selected':'' %>><%= c.name %></option><% }) %></optgroup><optgroup label="Planos de conta"><% catalogs.accounts.filter(x=>x.active!==false).forEach(a=>{ %><option value="account:<%= a.id %>" <%= filters.classification===`account:${a.id}`?'selected':'' %>><%= a.code %> · <%= a.name %></option><% }) %></optgroup></select></label>
+    <label class="dre-filter-group"><span>Grupo DRE</span><select name="groupId"><option value="">Todos</option><% catalogs.groups.forEach(g=>{ %><option value="<%= g.id %>" <%= filters.groupId===g.id?'selected':'' %>><%= g.name %></option><% }) %></select></label>
+  </div>
+
+  <div class="dre-date-filter-row">
+    <label><span>De</span><input type="date" name="start" value="<%= filters.start %>"></label>
+    <label><span>Até</span><input type="date" name="end" value="<%= filters.end %>"></label>
+    <button class="btn btn-primary dre-apply-button" type="submit">Aplicar</button>
+  </div>
+</form>
+
+<section class="finance-summary dre-summary" aria-label="Resumo DRE">
+  <div class="erp-tone-income"><span>Receitas</span><b class="positive"><%= money(result.summary.totalIncome) %></b><small>Receitas consideradas no período</small></div>
+  <div class="erp-tone-expense"><span>CMV</span><b class="negative">- <%= money(result.summary.cmv) %></b><small>Custo dos produtos vendidos</small></div>
+  <div class="<%= result.summary.grossProfit < 0 ? 'erp-tone-expense' : 'erp-tone-success' %>"><span>Lucro bruto</span><b class="<%= result.summary.grossProfit < 0 ? 'negative' : 'positive' %>"><%= signedMoney(result.summary.grossProfit) %></b><small>Receitas − deduções − CMV</small></div>
+  <div class="erp-tone-expense"><span>Despesas</span><b class="negative">- <%= money(result.summary.expenses) %></b><small><%= result.summary.expenseCount %> lançamento(s), sem contar CMV nem principal de financiamentos</small></div>
+  <div class="dre-result-card <%= result.summary.result < 0 ? 'is-deficit erp-tone-expense' : result.summary.result > 0 ? 'is-surplus erp-tone-success' : 'is-neutral erp-tone-info' %>"><span>Resultado líquido</span><b class="<%= result.summary.result < 0 ? 'negative' : result.summary.result > 0 ? 'positive' : '' %>"><%= signedMoney(result.summary.result) %></b><small>Margem líquida: <%= percent(result.summary.margin) %></small></div>
+</section>
+
+<details class="dre-collapsible dre-analysis">
+  <summary><span><b>Análise gerencial</b><small>Leitura rápida do período selecionado</small></span><i>›</i></summary>
+  <div class="dre-collapsible-body dre-insight-body">
+    <% analysisParts.forEach((part,index)=>{ %><p class="<%= index===analysisParts.length-1 && analysisParts.length>1 ? 'dre-recommendation' : '' %>"><%= part %></p><% }) %>
+  </div>
+</details>
+
+<details class="dre-collapsible dre-visuals" open>
+  <summary><span><b>Visão gráfica</b><small>Veja de onde vem o resultado e quais despesas mais pesam no período</small></span><i>›</i></summary>
+  <div class="dre-collapsible-body dre-visual-grid">
+    <section class="dre-visual-card">
+      <header><div><b>Formação do resultado</b><small>Receitas, custos, despesas e resultado líquido</small></div></header>
+      <div class="dre-stage-chart">
+        <% resultStages.forEach(stage=>{ const size=Math.max(3,Math.round(Math.abs(Number(stage.value||0))/maxStageValue*100)); %>
+          <div class="dre-stage-item">
+            <span class="dre-stage-value <%= Number(stage.value||0)<0?'negative':'positive' %>"><%= signedMoney(stage.value) %></span>
+            <div class="dre-stage-track"><i class="dre-stage-bar <%= stage.kind==='cost'?'negative-bar':'positive-bar' %>" style="height:<%= size %>%"></i></div>
+            <b><%= stage.label %></b>
+          </div>
+        <% }) %>
+      </div>
+    </section>
+
+    <section class="dre-visual-card">
+      <header><div><b>Composição das despesas</b><small>Participação de cada grupo nas despesas após o CMV</small></div><strong><%= money(result.summary.expenses) %></strong></header>
+      <div class="dre-expense-chart">
+        <% if(expenseChartRows.length){ expenseChartRows.forEach(group=>{ const share=result.summary.expenses ? Number(group.value||0)/result.summary.expenses*100 : 0; %>
+          <div class="dre-expense-bar-row">
+            <div class="dre-expense-bar-head"><span><%= group.name %></span><b>- <%= money(group.value) %> · <%= percent(share) %></b></div>
+            <div class="dre-expense-track"><i style="width:<%= Math.max(1,Math.min(100,share)) %>%"></i></div>
+          </div>
+        <% }) } else { %><div class="dre-chart-empty">Nenhuma despesa classificada no período.</div><% } %>
+      </div>
+    </section>
+  </div>
+</details>
+
+<details class="dre-collapsible">
+  <summary><span><b>Evolução do resultado</b><small>Últimos seis meses, respeitando os filtros selecionados</small></span><i>›</i></summary>
+  <div class="dre-collapsible-body">
+    <% const maxTimeline = Math.max(1,...result.timeline.map(x=>Math.abs(x.result))); %>
+    <div class="dre-chart">
+      <% result.timeline.forEach(point=>{ const size=Math.max(2,Math.round(Math.abs(point.result)/maxTimeline*100)); %>
+        <div class="dre-chart-column">
+          <span class="dre-chart-value <%= point.result<0?'negative':'positive' %>"><%= signedMoney(point.result) %></span>
+          <div class="dre-chart-track"><i class="dre-chart-bar <%= point.result>=0?'positive-bar':'negative-bar' %>" style="height:<%= size %>%"></i></div>
+          <b><%= point.label %></b>
+        </div>
+      <% }) %>
+    </div>
+  </div>
+</details>
+
+<details class="dre-collapsible dre-structure-block">
+  <summary><span><b>Estrutura do DRE</b><small>Os grupos iniciam recolhidos; abra somente o que deseja investigar</small></span><span class="dre-summary-result <%= result.summary.result<0?'negative':'positive' %>"><%= signedMoney(result.summary.result) %></span><i>›</i></summary>
+  <div class="dre-collapsible-body dre-table-body">
+    <div class="finance-table-wrap"><table class="finance-table dre-table"><thead><tr><th>Estrutura</th><th class="dre-value">Valor</th><th class="dre-value">% das receitas</th></tr></thead><tbody>
+      <tr class="dre-section-label"><td colspan="3">RECEITAS E CUSTO DA MERCADORIA</td></tr>
+      <% [...revenueRows,...deductionRows,...cmvRows].forEach(group=>{ const pct=result.summary.totalIncome ? group.value/result.summary.totalIncome*100 : 0; %>
+        <tr class="dre-group-row" data-dre-toggle="group-<%= group.id %>"><td><b><span class="dre-chevron">›</span> <%= group.operation==='subtract'?'(−)':'(+)' %> <%= group.name %></b><small><%= group.accounts.length %> plano(s) · <%= group.accounts.reduce((s,a)=>s+a.items.length,0) %> lançamento(s)</small></td><td class="dre-value <%= group.operation==='subtract'?'negative':'positive' %>"><b><%= group.operation==='subtract' ? `- ${money(group.value)}` : money(group.value) %></b></td><td class="dre-value"><%= percent(pct) %></td></tr>
+        <% group.accounts.forEach(account=>{ %>
+          <tr class="dre-account-row" data-dre-parent="group-<%= group.id %>" hidden data-dre-toggle="account-<%= group.id %>-<%= account.accountId %>"><td><span class="dre-chevron">›</span> <b><%= account.accountName %></b><small><%= account.items.length %> lançamento(s)</small></td><td class="dre-value <%= group.operation==='subtract'?'negative':'positive' %>"><%= group.operation==='subtract'?`- ${money(account.value)}`:money(account.value) %></td><td class="dre-value"><%= percent(result.summary.totalIncome?account.value/result.summary.totalIncome*100:0) %></td></tr>
+          <% account.items.forEach(item=>{ %><tr class="dre-detail-row" data-dre-parent="account-<%= group.id %>-<%= account.accountId %>" hidden><td><span><%= new Date(item.date+'T12:00:00').toLocaleDateString('pt-BR') %></span> · <%= item.description %><small><%= item.supplierName || item.customerName || item.costCenterName %></small></td><td class="dre-value <%= group.operation==='subtract'?'negative':'positive' %>"><%= group.operation==='subtract'?`- ${money(item.value)}`:money(item.value) %></td><td></td></tr><% }) %>
+        <% }) %>
+      <% }) %>
+      <tr class="dre-subtotal-row"><td><b>(=) LUCRO BRUTO</b><small>Receitas − deduções − CMV</small></td><td class="dre-value <%= result.summary.grossProfit<0?'negative':'positive' %>"><b><%= signedMoney(result.summary.grossProfit) %></b></td><td class="dre-value"><b><%= percent(result.summary.totalIncome?result.summary.grossProfit/result.summary.totalIncome*100:0) %></b></td></tr>
+
+      <tr class="dre-section-label dre-expense-label"><td colspan="3">DESPESAS</td></tr>
+      <% expenseRows.forEach(group=>{ const pct=result.summary.totalIncome ? group.value/result.summary.totalIncome*100 : 0; %>
+        <tr class="dre-group-row" data-dre-toggle="group-<%= group.id %>"><td><b><span class="dre-chevron">›</span> (−) <%= group.name %></b><small><%= group.accounts.length %> plano(s) · <%= group.accounts.reduce((s,a)=>s+a.items.length,0) %> lançamento(s)</small></td><td class="dre-value negative"><b>- <%= money(group.value) %></b></td><td class="dre-value"><%= percent(pct) %></td></tr>
+        <% group.accounts.forEach(account=>{ %>
+          <tr class="dre-account-row" data-dre-parent="group-<%= group.id %>" hidden data-dre-toggle="account-<%= group.id %>-<%= account.accountId %>"><td><span class="dre-chevron">›</span> <b><%= account.accountName %></b><small><%= account.items.length %> lançamento(s)</small></td><td class="dre-value negative">- <%= money(account.value) %></td><td class="dre-value"><%= percent(result.summary.totalIncome?account.value/result.summary.totalIncome*100:0) %></td></tr>
+          <% account.items.forEach(item=>{ %><tr class="dre-detail-row" data-dre-parent="account-<%= group.id %>-<%= account.accountId %>" hidden><td><span><%= new Date(item.date+'T12:00:00').toLocaleDateString('pt-BR') %></span> · <%= item.description %><small><%= item.supplierName || item.customerName || item.costCenterName %></small></td><td class="dre-value negative">- <%= money(item.value) %></td><td></td></tr><% }) %>
+        <% }) %>
+      <% }) %>
+      <% if(!expenseRows.length){ %><tr><td colspan="3" class="dre-empty-row">Nenhuma despesa classificada nesta parte do DRE.</td></tr><% } %>
+      <tr class="dre-result-row"><td><b>(=) RESULTADO LÍQUIDO</b><small>Lucro bruto − despesas</small></td><td class="dre-value <%= result.summary.result<0?'negative':'positive' %>"><b><%= signedMoney(result.summary.result) %></b></td><td class="dre-value <%= result.summary.margin<0?'negative':'positive' %>"><b><%= percent(result.summary.margin) %></b></td></tr>
+    </tbody></table></div>
+  </div>
+</details>
+
+<% if(result.unclassified.length){ %><details class="dre-collapsible dre-warning-block"><summary><span><b>⚠️ Lançamentos sem Grupo DRE</b><small><%= result.unclassified.length %> lançamento(s) aguardando classificação</small></span><i>›</i></summary><div class="dre-collapsible-body"><div class="dre-warning-actions"><p>Esses lançamentos precisam de classificação. Quando possível, o sistema usa uma classificação provisória; recebimentos ligados a venda/O.S. já considerada entram pela própria operação para evitar duplicidade.</p><a class="btn" href="/configuracoes/financeiro">Classificar planos</a></div><div class="finance-table-wrap"><table class="finance-table"><tbody><% result.unclassified.forEach(x=>{ %><tr><td><b><%= x.description %></b><small><%= x.accountName %> · <%= x.date %></small></td><td class="dre-value"><%= money(x.value) %><small><% if(x.includedViaOperation){ %>Já considerado na venda/O.S.<% } else if(x.fallbackClassification){ %>Considerado provisoriamente no resultado<% } else { %>Precisa de classificação<% } %></small></td></tr><% }) %></tbody></table></div></div></details><% } %>
+
+<style>
+.dre-hero{margin-bottom:10px}.dre-hero-actions{display:flex;gap:8px;align-items:center}.dre-export-menu{position:relative}.dre-export-menu>summary{list-style:none;cursor:pointer}.dre-export-menu>summary::-webkit-details-marker{display:none}.dre-export-menu>div{position:absolute;right:0;top:calc(100% + 6px);z-index:30;min-width:140px;padding:6px;border:1px solid var(--border,#30343b);border-radius:10px;background:var(--card,#111);box-shadow:0 12px 30px rgba(0,0,0,.25)}.dre-export-menu button{display:block;width:100%;border:0;background:transparent;color:inherit;text-align:left;padding:9px 10px;border-radius:7px;cursor:pointer}.dre-export-menu button:hover{background:rgba(255,255,255,.06)}
+.dre-filter-shell{padding:12px 14px;border:1px solid var(--border,#30343b);border-radius:14px;background:var(--card,#111);margin-bottom:12px}.dre-quick-row{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:10px}.dre-quick-chip{appearance:none;border:1px solid var(--border,#30343b);background:transparent;color:inherit;border-radius:999px;padding:7px 12px;font-weight:700;cursor:pointer;line-height:1}.dre-quick-chip:hover,.dre-quick-chip.is-active{border-color:var(--primary,#38d996);background:color-mix(in srgb,var(--primary,#38d996) 14%,transparent)}.dre-main-filter-row{display:grid;grid-template-columns:minmax(150px,.72fr) minmax(220px,1.05fr) minmax(180px,.8fr);gap:10px;align-items:end}.dre-date-filter-row{display:grid;grid-template-columns:minmax(170px,.72fr) minmax(170px,.72fr) auto;gap:10px;align-items:end;padding-top:10px;margin-top:10px;border-top:1px solid var(--border,#30343b);max-width:760px}.dre-main-filter-row label,.dre-date-filter-row label{display:grid;gap:5px}.dre-main-filter-row label span,.dre-date-filter-row label span{font-size:.72rem;font-weight:800;text-transform:uppercase;letter-spacing:.04em;opacity:.68}.dre-main-filter-row select,.dre-date-filter-row input{width:100%}.dre-apply-button{min-width:96px;white-space:nowrap}
+.dre-summary{grid-template-columns:repeat(5,minmax(0,1fr));margin-bottom:12px}.dre-summary>div{position:relative;overflow:hidden}.dre-summary>div b{font-variant-numeric:tabular-nums}.dre-summary>div small{display:block;margin-top:4px;opacity:.66}.positive{color:#38d996}.negative{color:#ff6b6b}.dre-result-card{transition:border-color .18s ease,box-shadow .18s ease,background .18s ease}.dre-result-card.is-deficit{border-color:rgba(255,107,107,.68)!important;background:linear-gradient(135deg,rgba(255,107,107,.105),rgba(255,107,107,.018));box-shadow:inset 4px 0 0 rgba(255,107,107,.95),0 0 0 1px rgba(255,107,107,.11)}.dre-result-card.is-surplus{border-color:rgba(56,217,150,.62)!important;background:linear-gradient(135deg,rgba(56,217,150,.095),rgba(56,217,150,.014));box-shadow:inset 4px 0 0 rgba(56,217,150,.95),0 0 0 1px rgba(56,217,150,.09)}.dre-result-card.is-deficit>b{color:#ff6b6b!important;font-size:1.34rem;text-shadow:0 0 14px rgba(255,107,107,.12)}.dre-result-card.is-surplus>b{color:#38d996!important;font-size:1.34rem;text-shadow:0 0 14px rgba(56,217,150,.10)}.dre-value{text-align:right;white-space:nowrap}
+.dre-collapsible{border:1px solid var(--border,#30343b);border-radius:14px;background:var(--card,#111);margin:10px 0;overflow:hidden}.dre-collapsible>summary{list-style:none;display:flex;align-items:center;gap:12px;padding:13px 16px;cursor:pointer;user-select:none}.dre-collapsible>summary::-webkit-details-marker{display:none}.dre-collapsible>summary:hover{background:rgba(255,255,255,.025)}.dre-collapsible>summary span:first-child{display:grid;gap:2px;min-width:0}.dre-collapsible>summary small{font-weight:400;opacity:.66}.dre-collapsible>summary>i{margin-left:auto;font-style:normal;font-size:1.45rem;transition:transform .16s ease}.dre-collapsible[open]>summary>i{transform:rotate(90deg)}.dre-collapsible-body{border-top:1px solid var(--border,#30343b);padding:14px 16px}.dre-insight-body{display:grid;gap:9px}.dre-insight-body p{margin:0;line-height:1.55;font-weight:600}.dre-insight-body .dre-recommendation{padding-top:8px;margin-top:2px;border-top:1px dashed var(--border,#30343b)}.dre-summary-result{margin-left:auto;font-weight:800}.dre-structure-block>summary>i{margin-left:0}.dre-table-body{padding:0}.dre-group-row,.dre-account-row{cursor:pointer}.dre-group-row td{border-top:1px solid var(--border,#30343b)}.dre-group-row:hover,.dre-account-row:hover{background:rgba(255,255,255,.025)}.dre-account-row td:first-child{padding-left:34px}.dre-detail-row td:first-child{padding-left:58px}.dre-detail-row{opacity:.88}.dre-result-row{font-size:1.06rem;background:rgba(255,255,255,.055)}.dre-subtotal-row{font-size:1.03rem;background:rgba(255,255,255,.035)}.dre-section-label td{font-size:.72rem;font-weight:900;letter-spacing:.08em;opacity:.75;background:rgba(56,217,150,.07);padding-top:9px;padding-bottom:9px}.dre-expense-label td{background:rgba(255,107,107,.07)}.dre-empty-row{text-align:center;opacity:.65;padding:18px!important}.dre-chevron{display:inline-block;font-size:1.25rem;line-height:.8;transition:transform .15s ease}.is-open .dre-chevron{transform:rotate(90deg)}
+.dre-visual-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:14px}.dre-visual-card{min-width:0;border:1px solid var(--border,#30343b);border-radius:12px;padding:14px;background:rgba(255,255,255,.018)}.dre-visual-card>header{display:flex;justify-content:space-between;align-items:start;gap:12px;margin-bottom:12px}.dre-visual-card>header div{display:grid;gap:2px}.dre-visual-card>header small{opacity:.62}.dre-visual-card>header strong{white-space:nowrap;font-variant-numeric:tabular-nums}.dre-stage-chart{height:220px;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px}.dre-stage-item{min-width:0;display:grid;grid-template-rows:28px 1fr 24px;text-align:center}.dre-stage-value{font-size:.76rem;font-weight:800;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.dre-stage-track{height:152px;display:flex;align-items:flex-end;justify-content:center;border-bottom:1px solid var(--border,#30343b);background:linear-gradient(to top,rgba(255,255,255,.018),transparent)}.dre-stage-bar{display:block;width:min(46px,64%);min-height:3px;border-radius:7px 7px 2px 2px;opacity:.9}.dre-stage-item>b{font-size:.75rem;padding-top:5px}.dre-expense-chart{display:grid;gap:12px}.dre-expense-bar-row{display:grid;gap:6px}.dre-expense-bar-head{display:flex;justify-content:space-between;align-items:center;gap:12px;font-size:.78rem}.dre-expense-bar-head span{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.dre-expense-bar-head b{white-space:nowrap;font-variant-numeric:tabular-nums;color:#ff8585}.dre-expense-track{height:9px;border-radius:999px;background:rgba(255,255,255,.055);overflow:hidden}.dre-expense-track i{display:block;height:100%;border-radius:inherit;background:linear-gradient(90deg,rgba(255,107,107,.65),rgba(255,107,107,.95))}.dre-chart-empty{padding:34px 12px;text-align:center;opacity:.62}.dre-chart{height:220px;display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:12px;padding:2px 2px 0}.dre-chart-column{min-width:0;display:grid;grid-template-rows:28px 1fr 22px;text-align:center}.dre-chart-value{font-size:.72rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;opacity:.85}.dre-chart-track{height:138px;display:flex;align-items:flex-end;justify-content:center;border-bottom:1px solid var(--border,#30343b)}.dre-chart-bar{display:block;width:min(44px,62%);min-height:2px;border-radius:7px 7px 2px 2px}.positive-bar{background:#1fbf7a}.negative-bar{background:#ef5350}.dre-chart-column b{text-transform:capitalize;font-size:.8rem;padding-top:5px}.dre-warning-actions{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:10px}.dre-warning-actions p{margin:0}
+@media(max-width:980px){.dre-visual-grid{grid-template-columns:1fr}.dre-main-filter-row{grid-template-columns:1fr 1fr}.dre-filter-group{grid-column:span 2}.dre-date-filter-row{grid-template-columns:1fr 1fr auto;max-width:none}.dre-summary{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media(max-width:700px){.dre-summary{grid-template-columns:repeat(2,minmax(0,1fr))}.dre-main-filter-row,.dre-date-filter-row{grid-template-columns:1fr}.dre-filter-group{grid-column:auto}.dre-date-filter-row .btn{width:100%}.dre-chart{gap:5px;padding-inline:0}.dre-chart-value{font-size:.62rem}.dre-summary-result{display:none}.dre-collapsible>summary{padding:12px}.dre-collapsible-body{padding:12px}.dre-hero-actions{width:100%;justify-content:flex-end}}
+</style>
+<script src="/public/js/dre.js?v=0.30.2"></script>

@@ -1,0 +1,26 @@
+{
+  "type": "import",
+  "requested": 1,
+  "imported": 1,
+  "stockAdjusted": 0,
+  "fields": {
+    "name": true,
+    "salePrice": true,
+    "cost": false,
+    "barcode": true,
+    "reference": true,
+    "brand": true,
+    "unit": true,
+    "active": true,
+    "stock": false,
+    "collection": false
+  },
+  "errors": [],
+  "backupFile": "C:\\Site\\Backup\\Painel\\products\\wm10\\products-before-wm10-2026-08-18T18-47-37-048Z.json",
+  "inventoryBackups": [],
+  "startedAt": "2026-08-18T18:47:37.068Z",
+  "importedCodes": [
+    4074
+  ],
+  "finishedAt": "2026-08-18T18:47:37.112Z"
+}

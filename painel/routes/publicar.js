@@ -139,12 +139,19 @@ function readJsonSafe(file, fallback = { items: [] }){
 
 function prepararCategoriasParaPublicacao(){
   try {
-    const categoriesPath = path.join(REPO_DIR, 'content', 'categories.json');
+    const contentDir = path.join(SITE_DIR, 'content');
+    const categoriesPath = fs.existsSync(path.join(contentDir, 'categories.json'))
+      ? path.join(contentDir, 'categories.json')
+      : path.join(REPO_DIR, 'content', 'categories.json');
+    const subcategoriesPath = fs.existsSync(path.join(contentDir, 'subcategories.json'))
+      ? path.join(contentDir, 'subcategories.json')
+      : path.join(REPO_DIR, 'content', 'subcategories.json');
     const data = readJsonSafe(categoriesPath, { items: [] });
-    updateHeaderMenu(data.items || [], SITE_DIR);
+    const subcategories = readJsonSafe(subcategoriesPath, { items: [] });
+    updateHeaderMenu(data.items || [], SITE_DIR, subcategories.items || []);
     generateCategoryPage('', '', SITE_DIR);
     convertOldCategoryFiles(SITE_DIR);
-    console.log('✅ Categorias preparadas para página única categoria.html.');
+    console.log('✅ Categorias e subcategorias preparadas para publicação.');
   } catch (e) {
     console.warn(`⚠️ Falha ao preparar categorias: ${e.message}`);
   }

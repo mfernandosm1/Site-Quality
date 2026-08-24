@@ -1,0 +1,224 @@
+{
+  "createdAt": "2026-08-21T21:14:33.708Z",
+  "count": {
+    "id": "CNT-20260821-0001",
+    "type": "partial",
+    "status": "in_progress",
+    "blockPdv": false,
+    "notes": "",
+    "locationId": "loja-principal",
+    "startedAt": "2026-08-21T21:12:05.675Z",
+    "createdAt": "2026-08-21T21:12:05.675Z",
+    "createdBy": "painel",
+    "updatedAt": "2026-08-21T21:13:53.463Z",
+    "items": [
+      {
+        "inventoryItemId": "PRD-1786499862209",
+        "productId": "1786499862209",
+        "selectionId": "1786499862209",
+        "name": "Figurinhas da copa",
+        "code": "PRD-261",
+        "sku": "PRD-261",
+        "barcode": "7897653549146",
+        "variationLabel": "",
+        "systemQuantityAtCount": 0,
+        "countedQuantity": 10,
+        "firstCountedAt": "2026-08-21T21:12:12.601Z",
+        "lastCountedAt": "2026-08-21T21:12:16.898Z"
+      },
+      {
+        "inventoryItemId": "PRD-1786499862967",
+        "productId": "1786499862967",
+        "selectionId": "1786499862967",
+        "name": "Smartphone usado Samsung A14 128gb",
+        "code": "PRD-253",
+        "sku": "PRD-253",
+        "barcode": "",
+        "variationLabel": "",
+        "systemQuantityAtCount": 0,
+        "countedQuantity": 1,
+        "firstCountedAt": "2026-08-21T21:13:53.463Z",
+        "lastCountedAt": "2026-08-21T21:13:53.463Z"
+      }
+    ],
+    "snapshot": [],
+    "events": [
+      {
+        "id": "EVT-1787346725677-4mn6q9",
+        "type": "created",
+        "actor": "painel",
+        "createdAt": "2026-08-21T21:12:05.677Z",
+        "metadata": {
+          "type": "partial",
+          "blockPdv": false,
+          "snapshotSize": 0
+        }
+      },
+      {
+        "id": "EVT-1787346732605-ndsu4g",
+        "type": "item_counted",
+        "actor": "painel",
+        "createdAt": "2026-08-21T21:12:12.605Z",
+        "metadata": {
+          "inventoryItemId": "PRD-1786499862209",
+          "quantity": 1
+        }
+      },
+      {
+        "id": "EVT-1787346736898-ipyduv",
+        "type": "item_counted",
+        "actor": "painel",
+        "createdAt": "2026-08-21T21:12:16.898Z",
+        "metadata": {
+          "inventoryItemId": "PRD-1786499862209",
+          "quantity": 10
+        }
+      },
+      {
+        "id": "EVT-1787346833467-xa3get",
+        "type": "item_counted",
+        "actor": "painel",
+        "createdAt": "2026-08-21T21:13:53.467Z",
+        "metadata": {
+          "inventoryItemId": "PRD-1786499862967",
+          "quantity": 1
+        }
+      }
+    ]
+  },
+  "conference": {
+    "count": {
+      "id": "CNT-20260821-0001",
+      "type": "partial",
+      "status": "in_progress",
+      "blockPdv": false,
+      "notes": "",
+      "locationId": "loja-principal",
+      "startedAt": "2026-08-21T21:12:05.675Z",
+      "createdAt": "2026-08-21T21:12:05.675Z",
+      "createdBy": "painel",
+      "updatedAt": "2026-08-21T21:13:53.463Z",
+      "items": [
+        {
+          "inventoryItemId": "PRD-1786499862209",
+          "productId": "1786499862209",
+          "selectionId": "1786499862209",
+          "name": "Figurinhas da copa",
+          "code": "PRD-261",
+          "sku": "PRD-261",
+          "barcode": "7897653549146",
+          "variationLabel": "",
+          "systemQuantityAtCount": 0,
+          "countedQuantity": 10,
+          "firstCountedAt": "2026-08-21T21:12:12.601Z",
+          "lastCountedAt": "2026-08-21T21:12:16.898Z"
+        },
+        {
+          "inventoryItemId": "PRD-1786499862967",
+          "productId": "1786499862967",
+          "selectionId": "1786499862967",
+          "name": "Smartphone usado Samsung A14 128gb",
+          "code": "PRD-253",
+          "sku": "PRD-253",
+          "barcode": "",
+          "variationLabel": "",
+          "systemQuantityAtCount": 0,
+          "countedQuantity": 1,
+          "firstCountedAt": "2026-08-21T21:13:53.463Z",
+          "lastCountedAt": "2026-08-21T21:13:53.463Z"
+        }
+      ],
+      "snapshot": [],
+      "events": [
+        {
+          "id": "EVT-1787346725677-4mn6q9",
+          "type": "created",
+          "actor": "painel",
+          "createdAt": "2026-08-21T21:12:05.677Z",
+          "metadata": {
+            "type": "partial",
+            "blockPdv": false,
+            "snapshotSize": 0
+          }
+        },
+        {
+          "id": "EVT-1787346732605-ndsu4g",
+          "type": "item_counted",
+          "actor": "painel",
+          "createdAt": "2026-08-21T21:12:12.605Z",
+          "metadata": {
+            "inventoryItemId": "PRD-1786499862209",
+            "quantity": 1
+          }
+        },
+        {
+          "id": "EVT-1787346736898-ipyduv",
+          "type": "item_counted",
+          "actor": "painel",
+          "createdAt": "2026-08-21T21:12:16.898Z",
+          "metadata": {
+            "inventoryItemId": "PRD-1786499862209",
+            "quantity": 10
+          }
+        },
+        {
+          "id": "EVT-1787346833467-xa3get",
+          "type": "item_counted",
+          "actor": "painel",
+          "createdAt": "2026-08-21T21:13:53.467Z",
+          "metadata": {
+            "inventoryItemId": "PRD-1786499862967",
+            "quantity": 1
+          }
+        }
+      ]
+    },
+    "rows": [
+      {
+        "inventoryItemId": "PRD-1786499862209",
+        "productId": "1786499862209",
+        "selectionId": "1786499862209",
+        "name": "Figurinhas da copa",
+        "code": "PRD-261",
+        "sku": "PRD-261",
+        "barcode": "7897653549146",
+        "variationLabel": "",
+        "systemQuantityAtCount": 0,
+        "countedQuantity": 10,
+        "firstCountedAt": "2026-08-21T21:12:12.601Z",
+        "lastCountedAt": "2026-08-21T21:12:16.898Z",
+        "systemQuantity": 0,
+        "movementsAfterCount": 0,
+        "targetQuantity": 10,
+        "difference": 10
+      },
+      {
+        "inventoryItemId": "PRD-1786499862967",
+        "productId": "1786499862967",
+        "selectionId": "1786499862967",
+        "name": "Smartphone usado Samsung A14 128gb",
+        "code": "PRD-253",
+        "sku": "PRD-253",
+        "barcode": "",
+        "variationLabel": "",
+        "systemQuantityAtCount": 0,
+        "countedQuantity": 1,
+        "firstCountedAt": "2026-08-21T21:13:53.463Z",
+        "lastCountedAt": "2026-08-21T21:13:53.463Z",
+        "systemQuantity": 0,
+        "movementsAfterCount": 0,
+        "targetQuantity": 1,
+        "difference": 1
+      }
+    ],
+    "uncounted": [],
+    "summary": {
+      "counted": 2,
+      "matched": 0,
+      "shortage": 0,
+      "surplus": 2,
+      "divergences": 2,
+      "uncounted": 0
+    }
+  }
+}

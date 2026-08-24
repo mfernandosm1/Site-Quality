@@ -1,6 +1,7 @@
 import express from 'express';
 import fs from 'fs';
 import path from 'path';
+import { updateHeaderMenu, generateCategoryPage, generateFriendlyUrlPages } from './main_utils.js';
 
 const router = express.Router();
 function P(app){ return app.locals.paths; }
@@ -38,25 +39,29 @@ function validCategoryId(raw, cats){
   const id = Number(raw);
   return cats.some(c => Number(c.id) === id) ? id : null;
 }
+
+function syncSiteNavigation(app){
+  try {
+    const paths = P(app);
+    const siteDir = paths.SITE_DIR || paths.SITE_WITH_CONTENT || paths.SITE || paths.PUBLIC_DIR;
+    if (!siteDir) return;
+    const cats = categories(app);
+    const subs = readJson(files(app).subcategories).items || [];
+    updateHeaderMenu(cats, siteDir, subs);
+    // A rota pública /smartphones/ serve categoria.html diretamente.
+    // Regera a página-base para que o header e o filtro de subcategoria fiquem atuais.
+    generateCategoryPage('', '', siteDir);
+    try { generateFriendlyUrlPages(siteDir); } catch (e) { console.warn(`⚠️ Falha ao atualizar páginas após subcategoria: ${e.message}`); }
+  } catch (e) {
+    console.warn(`⚠️ Falha ao sincronizar subcategorias com o site: ${e.message}`);
+  }
+}
 function sorted(items = []){
   return [...items].sort((a,b) => Number(a.order || 0)-Number(b.order || 0) || String(a.name||'').localeCompare(String(b.name||''), 'pt-BR'));
 }
 
 router.get('/', (req,res) => {
-  const f = files(req.app);
-  const data = readJson(f.subcategories);
-  const cats = categories(req.app);
-  const productItems = readJson(f.products).items || [];
-  const usage = {};
-  for (const p of productItems) {
-    const slug = String(p.subcategory || p.subcategoria || '').trim();
-    if (slug) usage[slug] = (usage[slug] || 0) + 1;
-  }
-  let flash = null;
-  if (req.query.saved === '1') flash = '✅ Subcategoria salva com sucesso.';
-  if (req.query.deleted === '1') flash = '🗑️ Subcategoria excluída com sucesso.';
-  if (req.query.error === 'in_use') flash = '⚠️ Esta subcategoria está em uso e não pode ser excluída.';
-  res.render('subcategorias', { items: sorted(data.items || []), categorias: sorted(cats), usage, flash });
+  res.redirect('/categorias');
 });
 
 router.post('/add', (req,res) => {
@@ -64,7 +69,7 @@ router.post('/add', (req,res) => {
   data.items = data.items || [];
   const name = String(req.body.name || '').trim();
   const categoryId = validCategoryId(req.body.categoryId, cats);
-  if (!name || !categoryId) return res.redirect('/subcategorias?error=invalid');
+  if (!name || !categoryId) return res.redirect('/categorias?error=invalid_subcategory');
   data.items.push({
     id: Date.now(), categoryId, name,
     slug: uniqueSlug(req.body.slug || name, data.items),
@@ -74,17 +79,18 @@ router.post('/add', (req,res) => {
     description: String(req.body.description || '').trim()
   });
   writeJson(f.subcategories, data);
-  res.redirect('/subcategorias?saved=1');
+  syncSiteNavigation(req.app);
+  res.redirect('/categorias?subsaved=1');
 });
 
 router.post('/update', (req,res) => {
   const f = files(req.app), data = readJson(f.subcategories), cats = categories(req.app);
   data.items = data.items || [];
   const item = data.items.find(x => Number(x.id) === Number(req.body.id));
-  if (!item) return res.redirect('/subcategorias?error=not_found');
+  if (!item) return res.redirect('/categorias?error=invalid_subcategory');
   const categoryId = validCategoryId(req.body.categoryId, cats);
   const name = String(req.body.name || '').trim();
-  if (!name || !categoryId) return res.redirect('/subcategorias?error=invalid');
+  if (!name || !categoryId) return res.redirect('/categorias?error=invalid_subcategory');
   const oldSlug = item.slug;
   item.categoryId = categoryId;
   item.name = name;
@@ -94,6 +100,7 @@ router.post('/update', (req,res) => {
   item.showOnSite = req.body.showOnSite === 'true';
   item.description = String(req.body.description || '').trim();
   writeJson(f.subcategories, data);
+  syncSiteNavigation(req.app);
 
   if (oldSlug && oldSlug !== item.slug) {
     const products = readJson(f.products);
@@ -107,19 +114,20 @@ router.post('/update', (req,res) => {
     }
     if (changed) writeJson(f.products, products);
   }
-  res.redirect('/subcategorias?saved=1');
+  res.redirect('/categorias?subsaved=1');
 });
 
 router.post('/del', (req,res) => {
   const f = files(req.app), data = readJson(f.subcategories), products = readJson(f.products);
   const id = Number(req.body.id);
   const item = (data.items || []).find(x => Number(x.id) === id);
-  if (!item) return res.redirect('/subcategorias?error=not_found');
+  if (!item) return res.redirect('/categorias?error=invalid_subcategory');
   const inUse = (products.items || []).some(p => String(p.subcategory || p.subcategoria || '') === String(item.slug || ''));
-  if (inUse) return res.redirect('/subcategorias?error=in_use');
+  if (inUse) return res.redirect('/categorias?error=sub_in_use');
   data.items = (data.items || []).filter(x => Number(x.id) !== id);
   writeJson(f.subcategories, data);
-  res.redirect('/subcategorias?deleted=1');
+  syncSiteNavigation(req.app);
+  res.redirect('/categorias?subdeleted=1');
 });
 
 router.get('/api', (req,res) => {

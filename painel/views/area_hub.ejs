@@ -9,7 +9,11 @@
     <% if(item.disabled){ %>
       <div class="ops-link-card disabled"><span class="ops-link-icon"><%= item.icon %></span><div><h3><%= item.name %></h3><p><%= item.description %></p><span class="ops-badge planned">Planejado</span></div></div>
     <% } else { %>
-      <a class="ops-link-card" href="<%= item.href %>"><span class="ops-link-icon"><%= item.icon %></span><div><h3><%= item.name %></h3><p><%= item.description %></p><span class="ops-link-action">Abrir →</span></div></a>
+      <a class="ops-link-card" href="<%= item.href %>"><span class="ops-link-icon"><%= item.icon %></span><div><h3 style="display:flex;align-items:center;gap:7px"><%= item.name %><% if(item.descriptionAsInfo){ %><span class="ops-info-tip" tabindex="0" aria-label="Informações">i<span><%= item.description %></span></span><% } %></h3><% if(!item.descriptionAsInfo){ %><p><%= item.description %></p><% } %><span class="ops-link-action">Abrir →</span></div></a>
     <% } %>
   <% }) %>
 </div>
+
+<style>
+.ops-info-tip{position:relative;display:inline-grid;place-items:center;width:17px;height:17px;border-radius:999px;border:1px solid currentColor;font-size:10px;font-weight:900;opacity:.72;cursor:help}.ops-info-tip>span{position:absolute;z-index:20;left:0;top:calc(100% + 7px);width:270px;max-width:70vw;padding:8px 10px;border-radius:9px;background:#111827;color:#fff;font-size:11px;font-weight:600;line-height:1.4;box-shadow:0 10px 24px rgba(0,0,0,.25);opacity:0;visibility:hidden;transform:translateY(-3px);transition:.12s;pointer-events:none}.ops-info-tip:hover>span,.ops-info-tip:focus>span{opacity:1;visibility:visible;transform:none}
+</style>

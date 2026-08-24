@@ -7,28 +7,45 @@
   const clearButton = document.getElementById('inventoryClearFilters');
   const resultCount = document.getElementById('inventoryResultCount');
   const empty = document.getElementById('inventoryEmpty');
+  const pageSize = document.getElementById('inventoryPageSize');
+  const pageInfo = document.getElementById('inventoryPageInfo');
+  const pagePrev = document.getElementById('inventoryPagePrev');
+  const pageNext = document.getElementById('inventoryPageNext');
   const rows = [...document.querySelectorAll('[data-inventory-row]')];
+  let inventoryPage = 1;
 
-  function applyFilters() {
+  function applyFilters({ resetPage = false } = {}) {
     if (!search || !category || !subcategory || !status) return;
+    if (resetPage) inventoryPage = 1;
     const term = normalize(search.value);
     const selectedCategory = category.value;
     const selectedSubcategory = subcategory.value;
     const selectedStatus = status.value;
-    let visible = 0;
-    rows.forEach((row) => {
-      const matches = (!term || normalize(row.dataset.search).includes(term)) &&
-        (!selectedCategory || row.dataset.category === selectedCategory) &&
-        (!selectedSubcategory || row.dataset.subcategory === selectedSubcategory) &&
-        (!selectedStatus || row.dataset.status === selectedStatus);
-      row.hidden = !matches;
-      if (matches) visible += 1;
-    });
-    if (resultCount) resultCount.textContent = `${visible} produto(s) encontrado(s)`;
-    if (empty) empty.hidden = visible !== 0;
+    const limit = [50,100,200,300].includes(Number(pageSize?.value)) ? Number(pageSize.value) : 50;
+    const matchedRows = rows.filter((row) => QualitySearch.matches(row.dataset.search, term) &&
+      (!selectedCategory || row.dataset.category === selectedCategory) &&
+      (!selectedSubcategory || row.dataset.subcategory === selectedSubcategory) &&
+      (!selectedStatus || row.dataset.status === selectedStatus));
+    const total = matchedRows.length;
+    const totalPages = Math.max(1, Math.ceil(total / limit));
+    inventoryPage = Math.min(Math.max(1, inventoryPage), totalPages);
+    const start = (inventoryPage - 1) * limit;
+    const visibleSet = new Set(matchedRows.slice(start, start + limit));
+    rows.forEach(row => { row.hidden = !visibleSet.has(row); });
+    if (resultCount) resultCount.textContent = `${total} produto(s) encontrado(s)`;
+    if (empty) empty.hidden = total !== 0;
+    if (pageInfo) pageInfo.textContent = total ? `Página ${inventoryPage} de ${totalPages} · exibindo ${Math.min(limit, total - start)} de ${total}` : 'Nenhum produto';
+    if (pagePrev) pagePrev.disabled = inventoryPage <= 1 || total === 0;
+    if (pageNext) pageNext.disabled = inventoryPage >= totalPages || total === 0;
   }
-  [search, category, subcategory, status].filter(Boolean).forEach((field) => field.addEventListener(field === search ? 'input' : 'change', applyFilters));
-  clearButton?.addEventListener('click', () => { search.value=''; category.value=''; subcategory.value=''; status.value=''; applyFilters(); search.focus(); });
+  let searchTimer=null;
+  if(search) search.addEventListener('input',()=>{clearTimeout(searchTimer);searchTimer=setTimeout(()=>applyFilters({resetPage:true}),220);});
+  [category, subcategory, status].filter(Boolean).forEach((field)=>field.addEventListener('change',()=>applyFilters({resetPage:true})));
+  pageSize?.addEventListener('change', () => applyFilters({ resetPage:true }));
+  pagePrev?.addEventListener('click', () => { inventoryPage = Math.max(1, inventoryPage - 1); applyFilters(); });
+  pageNext?.addEventListener('click', () => { inventoryPage += 1; applyFilters(); });
+  clearButton?.addEventListener('click', () => { search.value=''; category.value=''; subcategory.value=''; status.value=''; inventoryPage=1; applyFilters(); search.focus(); });
+  applyFilters();
 
   const drawer = document.getElementById('inventoryDrawer');
   const backdrop = document.getElementById('inventoryDrawerBackdrop');

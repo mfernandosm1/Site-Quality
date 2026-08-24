@@ -1,0 +1,85 @@
+{
+  "version": "0.27.0",
+  "items": [
+    {
+      "id": "DRE-RB",
+      "code": "01",
+      "name": "Receita Bruta",
+      "kind": "income",
+      "operation": "add",
+      "order": 10,
+      "active": true,
+      "system": true
+    },
+    {
+      "id": "DRE-DED",
+      "code": "02",
+      "name": "Deduções da Receita",
+      "kind": "deduction",
+      "operation": "subtract",
+      "order": 20,
+      "active": true,
+      "system": true
+    },
+    {
+      "id": "DRE-CMV",
+      "code": "03",
+      "name": "Custos das Vendas (CMV)",
+      "kind": "cost",
+      "operation": "subtract",
+      "order": 30,
+      "active": true,
+      "system": true
+    },
+    {
+      "id": "DRE-DO",
+      "code": "04",
+      "name": "Despesas Operacionais",
+      "kind": "expense",
+      "operation": "subtract",
+      "order": 40,
+      "active": true,
+      "system": true
+    },
+    {
+      "id": "DRE-RF",
+      "code": "05",
+      "name": "Receitas Financeiras",
+      "kind": "income",
+      "operation": "add",
+      "order": 50,
+      "active": true,
+      "system": true
+    },
+    {
+      "id": "DRE-DF",
+      "code": "06",
+      "name": "Despesas Financeiras",
+      "kind": "expense",
+      "operation": "subtract",
+      "order": 60,
+      "active": true,
+      "system": true
+    },
+    {
+      "id": "DRE-OR",
+      "code": "07",
+      "name": "Outras Receitas",
+      "kind": "income",
+      "operation": "add",
+      "order": 70,
+      "active": true,
+      "system": true
+    },
+    {
+      "id": "DRE-OD",
+      "code": "08",
+      "name": "Outras Despesas",
+      "kind": "expense",
+      "operation": "subtract",
+      "order": 80,
+      "active": true,
+      "system": true
+    }
+  ]
+}

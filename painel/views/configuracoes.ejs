@@ -6,16 +6,42 @@
 
 <div class="settings-layout">
   <section class="settings-main">
-    <div class="settings-card">
-      <div class="settings-card-head"><div><h2>🏢 Empresa ativa</h2><p>Esses dados futuramente serão utilizados pelo ERP, Site, WhatsApp, documentos e integrações.</p></div><span class="ops-badge planned">Somente leitura nesta versão</span></div>
-      <div class="settings-fields">
-        <div><label>Nome da plataforma</label><strong><%= company.platformName || 'Painel' %></strong></div>
-        <div><label>Nome fantasia</label><strong><%= company.tradeName || 'Quality Celulares' %></strong></div>
-        <div><label>Razão social</label><strong><%= company.legalName || 'A configurar' %></strong></div>
-        <div><label>Segmento</label><strong><%= company.segmentLabel || 'Comércio de celulares e eletrônicos' %></strong></div>
-        <div><label>Empresa</label><strong><%= company.companyId || 'quality' %></strong></div>
-        <div><label>Unidade ativa</label><strong><%= company.unitName || 'Matriz' %></strong></div>
-      </div>
+    <div class="settings-card company-identity-card">
+      <div class="settings-card-head"><div><h2>🏢 Empresa e identidade</h2><p>Nome e logo usados no cabeçalho do ERP. A logo é carregada localmente e não deixa a navegação mais pesada.</p></div><span class="ops-badge active">Configurável</span></div>
+      <form method="post" action="/configuracoes/empresa" enctype="multipart/form-data" class="company-identity-form">
+        <div class="company-logo-config">
+          <div class="company-logo-preview">
+            <% if(company.logoUrl){ %><img src="<%= company.logoUrl %>?v=<%= company.logoVersion || 1 %>" alt="Logo atual"><% } else { %><span>Q</span><% } %>
+          </div>
+          <div class="company-logo-upload">
+            <label>Logo da empresa</label>
+            <input type="file" name="logo" accept="image/png,image/jpeg,image/webp">
+            <small>PNG, JPG ou WebP. Você pode usar uma imagem de qualquer proporção e enquadrá-la antes de salvar.</small>
+            <% if(company.logoUrl){ %><button class="btn company-logo-current" type="button" data-logo-current>✂ Reenquadrar logo atual</button><% } %>
+            <label class="company-remove-logo"><input type="checkbox" name="removeLogo" value="1"> Remover logo atual</label>
+          </div>
+        </div>
+        <div class="company-logo-editor" data-company-logo-editor data-current-logo="<%= company.logoUrl || '' %>" hidden>
+          <div class="company-logo-editor-head"><div><strong>Enquadramento da logo</strong><small>Arraste a imagem dentro do quadro ou use os controles. O arquivo salvo já fica recortado para o cabeçalho.</small></div></div>
+          <div class="company-logo-crop-frame"><canvas width="700" height="200" aria-label="Prévia do enquadramento da logo"></canvas></div>
+          <div class="company-logo-editor-controls">
+            <label>Zoom <input type="range" min="50" max="500" value="100" step="1" data-logo-zoom></label>
+            <label>Horizontal <input type="range" min="-100" max="100" value="0" step="1" data-logo-x></label>
+            <label>Vertical <input type="range" min="-100" max="100" value="0" step="1" data-logo-y></label>
+          </div>
+          <label class="company-logo-remove-bg"><input type="checkbox" data-logo-remove-bg> <span><strong>Remover fundo branco/claro</strong><small>Útil para logos JPG ou PNG com um retângulo branco. O ERP salva a área clara como transparente.</small></span></label>
+          <div class="company-logo-editor-actions"><button type="button" class="btn" data-logo-fit>Mostrar inteira</button><button type="button" class="btn" data-logo-fill>Preencher quadro</button><small data-logo-status></small></div>
+        </div>
+        <div class="settings-fields settings-fields-editable">
+          <div><label>Nome da plataforma</label><input name="platformName" value="<%= company.platformName || 'Painel' %>" maxlength="80"></div>
+          <div><label>Nome fantasia</label><input name="tradeName" value="<%= company.tradeName || 'Quality Celulares' %>" maxlength="120"></div>
+          <div><label>Razão social</label><input name="legalName" value="<%= company.legalName || '' %>" maxlength="180"></div>
+          <div><label>Unidade ativa</label><input name="unitName" value="<%= company.unitName || 'Matriz' %>" maxlength="120"></div>
+          <div><label>Segmento</label><strong><%= company.segmentLabel || 'Comércio de celulares e eletrônicos' %></strong></div>
+          <div><label>Empresa</label><strong><%= company.companyId || 'quality' %></strong></div>
+        </div>
+        <div class="company-identity-actions"><button class="btn primary" type="submit">Salvar empresa e logo</button></div>
+      </form>
     </div>
 
     <div class="settings-card">
@@ -26,8 +52,13 @@
           ['🏬','Filiais e unidades','Matriz, lojas, escritórios ou outras unidades.'],
           ['🧩','Módulos','Ativar apenas as áreas necessárias para cada empresa.'],
           ['👤','Usuários e permissões','Perfis, acessos e responsabilidades.'],
-          ['💼','Operação','Regras comerciais, estoque, compras e atendimento.'],
+          ['💼','Caixa e PDV','Regras por caixa, conferência, vendedores, colunas e formas de pagamento.','/erp/configuracoes/caixa-pdv'],
+          ['👥','Cadastro de Clientes','Campos visíveis, obrigatórios e ordem do formulário.','/configuracoes/clientes'],
+          ['🏭','Cadastro de Fornecedores','Campos visíveis, obrigatórios e consulta de CNPJ.','/configuracoes/fornecedores'],
           ['💰','Financeiro','Formas de pagamento, plano de contas, centros de custo e parâmetros.','/configuracoes/financeiro'],
+          ['🎟️','Cupons de desconto','Criar cupons fixos ou percentuais para uso no PDV.','/configuracoes/cupons'],
+          ['🏷️','Status de Vendas e O.S.','Personalizar status operacionais e definir padrões por tipo de operação.','/erp/configuracoes/status-operacoes'],
+          ['🖨️','Comprovantes e Impressões','Editar dados, formato e conteúdo padrão das impressões do ERP.','/erp/configuracoes/comprovantes'],
           ['🧾','Fiscal','Configurações fiscais isoladas e protegidas.'],
           ['🔌','Integrações','Site, WhatsApp, APIs e serviços externos.'],
           ['🎨','Identidade','Logo, nome, cores e aparência por empresa.'],
@@ -52,3 +83,5 @@
     <div class="settings-card sticky-card"><h2>Princípio da plataforma</h2><p>O núcleo deve permanecer genérico. A Quality é a primeira empresa, mas a arquitetura deverá atender comércio, serviços, escritórios e outros segmentos.</p><div class="platform-levels"><span>Plataforma</span><i>↓</i><span>Empresa</span><i>↓</i><span>Unidade</span><i>↓</i><span>Módulos</span></div></div>
   </aside>
 </div>
+
+<script src="/public/js/company-logo-editor.js"></script>

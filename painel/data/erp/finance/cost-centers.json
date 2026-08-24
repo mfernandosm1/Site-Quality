@@ -1,29 +1,140 @@
 {
-  "version": "0.16.0",
+  "version": "0.25.8",
   "items": [
     {
-      "id": "CC-GERAL",
+      "id": "CC-RECEITAS",
       "code": "01",
-      "name": "Operação geral",
-      "parentId": null,
+      "name": "Receitas",
+      "nature": "receita",
+      "description": "Receitas geradas automaticamente por PDV, O.S. e demais origens operacionais.",
       "active": true,
-      "system": true
+      "system": true,
+      "order": 1,
+      "hiddenFromCatalog": true,
+      "managedBySystem": true,
+      "dreGroupId": "DRE-RB"
     },
     {
-      "id": "CC-LOJA",
-      "code": "01.01",
-      "name": "Loja",
-      "parentId": "CC-GERAL",
+      "id": "CC-CMV",
+      "code": "10",
+      "name": "CMV — Mercadorias e peças",
+      "nature": "despesa",
+      "description": "Custos diretamente ligados ao que foi comprado para revenda ou utilizado nos serviços.",
       "active": true,
-      "system": true
+      "system": true,
+      "order": 10,
+      "dreGroupId": "DRE-CMV"
+    },
+    {
+      "id": "CC-OPERACAO",
+      "code": "20",
+      "name": "Operacionais Fixos",
+      "nature": "despesa",
+      "description": "Despesas fixas, recorrentes e indispensáveis para manter a empresa funcionando, mesmo sem vendas no mês.",
+      "active": true,
+      "system": true,
+      "order": 20,
+      "dreGroupId": "DRE-DO"
     },
     {
       "id": "CC-ASSISTENCIA",
-      "code": "01.02",
-      "name": "Assistência técnica",
-      "parentId": "CC-GERAL",
+      "code": "30",
+      "name": "Assistência Técnica",
+      "nature": "despesa",
+      "description": "Ferramentas, consumíveis e estrutura utilizada na prestação dos serviços técnicos.",
       "active": true,
-      "system": true
+      "system": true,
+      "order": 30,
+      "dreGroupId": "DRE-DO"
+    },
+    {
+      "id": "CC-COMERCIAL",
+      "code": "40",
+      "name": "Custos Comerciais",
+      "nature": "despesa",
+      "description": "Despesas comerciais e administrativas eventuais ligadas à operação, atendimento e relacionamento da empresa.",
+      "active": true,
+      "system": true,
+      "order": 40,
+      "dreGroupId": "DRE-DO"
+    },
+    {
+      "id": "CC-MARKETING",
+      "code": "50",
+      "name": "Marketing",
+      "nature": "despesa",
+      "description": "Divulgação, campanhas, materiais promocionais e aquisição de clientes.",
+      "active": true,
+      "system": true,
+      "order": 50,
+      "dreGroupId": "DRE-DO"
+    },
+    {
+      "id": "CC-TECNOLOGIA",
+      "code": "60",
+      "name": "Tecnologia e Sistemas",
+      "nature": "despesa",
+      "description": "Sistemas, inteligência artificial, domínio, hospedagem e ferramentas digitais.",
+      "active": true,
+      "system": true,
+      "order": 60,
+      "dreGroupId": "DRE-DO"
+    },
+    {
+      "id": "CC-FINANCEIRO",
+      "code": "70",
+      "name": "Financeiro e Bancário",
+      "nature": "despesa",
+      "description": "Juros, tarifas, empréstimos, antecipações e custos dos meios de pagamento.",
+      "active": true,
+      "system": true,
+      "order": 70,
+      "dreGroupId": "DRE-DF"
+    },
+    {
+      "id": "CC-IMPOSTOS",
+      "code": "80",
+      "name": "Governo e Impostos",
+      "nature": "despesa",
+      "description": "Tributos, encargos e taxas governamentais.",
+      "active": true,
+      "system": true,
+      "order": 80,
+      "dreGroupId": "DRE-DO"
+    },
+    {
+      "id": "CC-PESSOAS",
+      "code": "90",
+      "name": "Pessoas e Sócios",
+      "nature": "despesa",
+      "description": "Colaboradores, benefícios, encargos e desenvolvimento profissional. Pró-labore fica em Operacionais Fixos.",
+      "active": true,
+      "system": true,
+      "order": 90,
+      "dreGroupId": "DRE-DO"
+    },
+    {
+      "id": "CC-VEICULOS",
+      "code": "100",
+      "name": "Veículos e Deslocamentos",
+      "nature": "despesa",
+      "description": "Combustível, manutenção, documentação e deslocamentos da empresa.",
+      "active": true,
+      "system": true,
+      "order": 100,
+      "dreGroupId": "DRE-CMV"
+    },
+    {
+      "id": "CC-INVESTIMENTOS",
+      "code": "110",
+      "name": "Investimentos e Projetos",
+      "nature": "despesa",
+      "description": "Aquisições e projetos que ampliam ou melhoram a capacidade da empresa.",
+      "active": true,
+      "system": true,
+      "order": 110,
+      "dreGroupId": "DRE-DO"
     }
-  ]
+  ],
+  "updatedAt": "2026-08-12T19:42:19.613Z"
 }

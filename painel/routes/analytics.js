@@ -12,6 +12,8 @@ const router = express.Router();
 const SHEETS_READ_ENABLED = true;
 const SHEETS_ENDPOINT = process.env.QUALITY_ANALYTICS_SHEETS_URL || 'https://script.google.com/macros/s/AKfycbwZQ01q5u5lRqE3Hk-nMutkTWcLA8r7127sO3Dt132Ti8L0Ci7DWoOyby5v92T_WY34/exec';
 const SHEETS_KEY = process.env.QUALITY_ANALYTICS_KEY || 'quality-analytics-v1';
+const panelDataCache = { data:null, at:0, loading:null };
+const PANEL_CACHE_TTL = 2 * 60 * 1000;
 
 function P(app){ return app.locals.paths; }
 function filePath(app){ return path.join(P(app).CONTENT_DIR, 'analytics.json'); }
@@ -249,14 +251,24 @@ async function resetSheets(){
   if(!payload.success) throw new Error(payload.message || payload.error || 'Google Sheets retornou erro ao zerar.');
   return payload;
 }
+async function refreshPanelData(app){
+  if(panelDataCache.loading)return panelDataCache.loading;
+  panelDataCache.loading=(async()=>{
+    try{
+      const sheets=await readSheetsData();
+      if(sheets){panelDataCache.data=sheets;panelDataCache.at=Date.now();return sheets;}
+    }catch(error){console.warn('analytics sheets fallback:',error.message);}
+    const local=readData(app);panelDataCache.data=local;panelDataCache.at=Date.now();return local;
+  })().finally(()=>{panelDataCache.loading=null;});
+  return panelDataCache.loading;
+}
 async function readPanelData(app){
-  try {
-    const sheets = await readSheetsData();
-    if(sheets) return sheets;
-  } catch(error){
-    console.warn('analytics sheets fallback:', error.message);
-  }
-  return readData(app);
+  const fresh=panelDataCache.data && (Date.now()-panelDataCache.at)<PANEL_CACHE_TTL;
+  if(fresh)return panelDataCache.data;
+  // Stale-while-revalidate: abre o painel imediatamente e atualiza a fonte externa em segundo plano.
+  const fallback=panelDataCache.data||readData(app);
+  refreshPanelData(app).catch(()=>{});
+  return fallback;
 }
 function pct(value, total){
   const t = Number(total || 0);

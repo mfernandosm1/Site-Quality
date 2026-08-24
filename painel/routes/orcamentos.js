@@ -64,7 +64,7 @@ const excelUpload=multer({storage:multer.memoryStorage(),limits:{fileSize:20*102
 }});
 function safe(value,max=4000){return String(value??'').replace(/[<>]/g,'').trim().slice(0,max);}
 function parsePayload(req){if(req.body?.payload){try{return JSON.parse(req.body.payload);}catch{throw new Error('Os dados do orçamento estão inválidos.');}}return req.body||{};}
-function loadProducts(app){const file=path.join(app.locals.paths.CONTENT_DIR,'products.json');try{const raw=JSON.parse(fs.readFileSync(file,'utf8'));const list=Array.isArray(raw)?raw:(raw.products||raw.items||[]);return list.map((p,index)=>({id:String(p.id||p.slug||index),name:String(p.name||p.nome||p.title||p.titulo||'Produto'),cost:Number(p.cost||p.custo||p.purchasePrice||0)||0,price:Number(p.price||p.preco||p.valor||0)||0}));}catch{return [];}}
+function loadProducts(app){const file=path.join(app.locals.paths.CONTENT_DIR,'products.json');try{const raw=JSON.parse(fs.readFileSync(file,'utf8'));const list=Array.isArray(raw)?raw:(raw.products||raw.items||[]);return list.filter(p=>((p&&p.erp&&p.erp.active!==undefined)?p.erp.active:p.active)!==false).map((p,index)=>({id:String(p.id||p.slug||index),name:String(p.name||p.nome||p.title||p.titulo||'Produto'),cost:Number(p.cost||p.custo||p.purchasePrice||0)||0,price:Number(p?.commercial?.erpPrice ?? p?.commercial?.salePrice ?? p.price ?? p.preco ?? p.valor ?? 0)||0}));}catch{return [];}}
 function normalizeMatrix(rows){
   // Importa todas as linhas legíveis da planilha.
   // O limite anterior de 2.500 linhas fazia produtos localizados mais abaixo desaparecerem.
