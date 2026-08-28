@@ -1,17 +1,17 @@
 {
   "version": "8.4.0-analytics-professional",
   "createdAt": "2026-07-08T00:26:21.803Z",
-  "updatedAt": "2026-08-28T23:11:14.760Z",
+  "updatedAt": "2026-08-28T23:51:30.876Z",
   "source": "local-json",
   "counters": {
-    "product_view": 79,
+    "product_view": 82,
     "favorite": 2,
     "favorite_click": 0,
     "whatsapp_click": 6,
     "category_view": 97,
     "share_click": 1,
     "search": 24,
-    "page_view": 286
+    "page_view": 289
   },
   "products": {
     "mini-game-portatil-400-jogos": {
@@ -343,6 +343,17 @@
       "whatsapp": 0,
       "shares": 0,
       "lastAt": "2026-08-28T23:11:14.760Z"
+    },
+    "limpeza-de-virus-e-formatacao": {
+      "slug": "limpeza-de-virus-e-formatacao",
+      "name": "Limpeza de vírus e Formatação",
+      "image": "/images/produtos/1787961084470-limpezadevirus-formataa-ao.png",
+      "url": "http://localhost:3000/produto/limpeza-de-virus-e-formatacao/",
+      "views": 3,
+      "favorites": 0,
+      "whatsapp": 0,
+      "shares": 0,
+      "lastAt": "2026-08-28T23:51:30.876Z"
     }
   },
   "categories": {
@@ -597,6 +608,11 @@
       "url": "http://localhost:3000/produto/troca-de-bateria-de-celular/",
       "views": 8,
       "lastAt": "2026-08-28T23:11:14.759Z"
+    },
+    "http://localhost:3000/produto/limpeza-de-virus-e-formatacao/": {
+      "url": "http://localhost:3000/produto/limpeza-de-virus-e-formatacao/",
+      "views": 6,
+      "lastAt": "2026-08-28T23:51:30.876Z"
     }
   },
   "devices": {},
@@ -6289,6 +6305,78 @@
       "product": {
         "slug": "troca-de-bateria-de-celular",
         "name": "Troca de Bateria de Celulares"
+      },
+      "term": ""
+    },
+    {
+      "at": "2026-08-28T23:30:32.372Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/produto/limpeza-de-virus-e-formatacao/",
+      "referrer": "http://localhost:3000/assistencia-tecnica/",
+      "device": "desktop",
+      "viewport": "1366x633",
+      "language": "pt-PT",
+      "term": ""
+    },
+    {
+      "at": "2026-08-28T23:30:33.266Z",
+      "type": "product_view",
+      "url": "http://localhost:3000/produto/limpeza-de-virus-e-formatacao/",
+      "referrer": "http://localhost:3000/assistencia-tecnica/",
+      "device": "desktop",
+      "viewport": "1366x633",
+      "language": "pt-PT",
+      "product": {
+        "slug": "limpeza-de-virus-e-formatacao",
+        "name": "Limpeza de vírus e Formatação"
+      },
+      "term": ""
+    },
+    {
+      "at": "2026-08-28T23:48:08.776Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/produto/limpeza-de-virus-e-formatacao/",
+      "referrer": "http://localhost:3000/assistencia-tecnica/",
+      "device": "desktop",
+      "viewport": "1366x633",
+      "language": "pt-PT",
+      "term": ""
+    },
+    {
+      "at": "2026-08-28T23:48:09.991Z",
+      "type": "product_view",
+      "url": "http://localhost:3000/produto/limpeza-de-virus-e-formatacao/",
+      "referrer": "http://localhost:3000/assistencia-tecnica/",
+      "device": "desktop",
+      "viewport": "1366x633",
+      "language": "pt-PT",
+      "product": {
+        "slug": "limpeza-de-virus-e-formatacao",
+        "name": "Limpeza de vírus e Formatação"
+      },
+      "term": ""
+    },
+    {
+      "at": "2026-08-28T23:51:30.028Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/produto/limpeza-de-virus-e-formatacao/",
+      "referrer": "http://localhost:3000/assistencia-tecnica/",
+      "device": "desktop",
+      "viewport": "1366x633",
+      "language": "pt-PT",
+      "term": ""
+    },
+    {
+      "at": "2026-08-28T23:51:30.876Z",
+      "type": "product_view",
+      "url": "http://localhost:3000/produto/limpeza-de-virus-e-formatacao/",
+      "referrer": "http://localhost:3000/assistencia-tecnica/",
+      "device": "desktop",
+      "viewport": "1366x633",
+      "language": "pt-PT",
+      "product": {
+        "slug": "limpeza-de-virus-e-formatacao",
+        "name": "Limpeza de vírus e Formatação"
       },
       "term": ""
     }

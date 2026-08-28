@@ -10841,30 +10841,18 @@
       "active": true,
       "detailsEnabled": true,
       "descriptionShort": "Troca de telas para iPhone, Samsung, Motorola e Xiaomi, com serviço rápido, instalação profissional e garantia.",
-      "descriptionLong": "Assistência técnica especializada em troca de telas para iPhone, Samsung, Motorola e Xiaomi. Utilizamos peças de qualidade e realizamos a substituição com cuidado técnico, buscando devolver ao aparelho sua melhor aparência e funcionalidade. Serviço rápido, instalação profissional e garantia.",
+      "descriptionLong": "<p>Assistência técnica especializada em <strong>troca de tela de celulares</strong>, incluindo iPhone, Samsung, Motorola e Xiaomi Trabalhamos com peças de qualidade e realizamos a substituição com cuidado técnico para recuperar a aparência, o toque e o funcionamento do aparelho</p><p>✅ Instalação profissional<br>✅ Peças de qualidade<br>✅ Serviço rápido e seguro<br>✅ Garantia no serviço</p><br>Pronto Socorro do seu celular! Atendemos&nbsp;<strong>Saldanha Marinho e toda a região</strong>, incluindo Carazinho, Não me toque, Santa Bárbara do Sul, Colorado RS, Ibirubá, Tapera, Selbach, Quinze de Novembro, Fortaleza dos Valos, Panambi, Cruz Alta e demais cidades da região.<br><br>",
       "variations": {
         "enabled": true,
         "colors": [],
         "storage": [
-          "Troca de Bateria",
           "Troca de Entrada de Energia",
           "Reparo na Placa",
-          "Troca de tela",
-          "Limpeza de vírus"
+          "Troca de tela"
         ],
         "ram": [],
         "condition": [],
         "combinations": [
-          {
-            "color": "",
-            "storage": "Troca de Bateria",
-            "ram": "",
-            "condition": "",
-            "image": "",
-            "stock": 0,
-            "erpPrice": null,
-            "inventoryItemId": "VAR-1782068543631-1"
-          },
           {
             "color": "",
             "storage": "Troca de Entrada de Energia",
@@ -10873,6 +10861,8 @@
             "image": "",
             "stock": 0,
             "erpPrice": null,
+            "costPrice": null,
+            "desiredMarginPercent": null,
             "inventoryItemId": "VAR-1782068543631-2"
           },
           {
@@ -10883,6 +10873,8 @@
             "image": "",
             "stock": 0,
             "erpPrice": null,
+            "costPrice": null,
+            "desiredMarginPercent": null,
             "inventoryItemId": "VAR-1782068543631-3"
           },
           {
@@ -10893,17 +10885,9 @@
             "image": "",
             "stock": 0,
             "erpPrice": null,
+            "costPrice": null,
+            "desiredMarginPercent": null,
             "inventoryItemId": "VAR-1782068543631-4"
-          },
-          {
-            "color": "",
-            "storage": "Limpeza de vírus",
-            "ram": "",
-            "condition": "",
-            "image": "",
-            "stock": 0,
-            "erpPrice": null,
-            "inventoryItemId": "VAR-1782068543631-5"
           }
         ],
         "labels": {
@@ -10911,11 +10895,11 @@
           "storage": "Serviços"
         },
         "colorsText": "",
-        "storageText": "Troca de Bateria\nTroca de Entrada de Energia\nReparo na Placa\nTroca de tela\nLimpeza de vírus",
+        "storageText": "Troca de Entrada de Energia\nReparo na Placa\nTroca de tela",
         "ramText": "",
         "conditionText": "",
         "labelsText": "{\"colors\":\"Cor\",\"storage\":\"Serviços\"}",
-        "combinationsText": "|Troca de Bateria||||0\n|Troca de Entrada de Energia||||0\n|Reparo na Placa||||0\n|Troca de tela||||0\n|Limpeza de vírus"
+        "combinationsText": "|Troca de Entrada de Energia||||0\n|Reparo na Placa||||0\n|Troca de tela||||0"
       },
       "id": 1782068543631,
       "erp": {
@@ -10931,7 +10915,7 @@
         "subcategory": "",
         "mainSupplierId": "",
         "preferredSupplierId": "",
-        "active": true
+        "active": false
       },
       "code": "PRD-68",
       "inventory": {
@@ -121300,9 +121284,130 @@
         "reservedQuantity": 0,
         "availableQuantity": 0,
         "minimumQuantity": 0,
-        "updatedAt": "2026-08-28T23:09:04.342Z"
+        "updatedAt": "2026-08-28T23:11:06.224Z"
       },
       "updatedAt": "2026-08-28T23:10:26.878Z"
+    },
+    {
+      "name": "Limpeza de vírus e Formatação",
+      "sku": "",
+      "code": "PRD-860",
+      "barcode": "",
+      "brand": "",
+      "slug": "limpeza-de-virus-e-formatacao",
+      "price": null,
+      "commercial": {
+        "costPrice": null,
+        "erpPrice": null,
+        "salePrice": null,
+        "marketplacePrice": null,
+        "promotionalPrice": null,
+        "desiredMarginPercent": null,
+        "expectedProfit": null,
+        "defaultCommissionPercent": null,
+        "cashPrice": null,
+        "installmentPrice": null,
+        "minimumPrice": null,
+        "minimumMarginPercent": null,
+        "discountPolicy": "inherit",
+        "maximumDiscountPercent": null,
+        "maximumDiscountAmount": null,
+        "requiresAuthorization": false
+      },
+      "stock": 0,
+      "inventory": {
+        "itemId": "PRD-1787959282655",
+        "stockControlled": true,
+        "allowNegative": false,
+        "minimumQuantity": 0,
+        "channelAvailability": {
+          "site": {
+            "mode": "shared",
+            "enabled": true,
+            "limit": null,
+            "physicalSafety": 0
+          }
+        }
+      },
+      "image": "images/produtos/1787961084470-limpezadevirus-formataa-ao.png",
+      "gallery": [],
+      "category": "assistencia-tecnica",
+      "subcategory": "",
+      "tags": [],
+      "relatedManualIds": [],
+      "crossSellIds": [],
+      "showPrice": false,
+      "featured": false,
+      "active": true,
+      "erp": {
+        "sku": "",
+        "internalCode": "PRD-860",
+        "supplierCode": "",
+        "searchAlias": "",
+        "barcode": "",
+        "brand": "",
+        "unit": "UN",
+        "category": "assistencia-tecnica",
+        "subcategory": "",
+        "mainSupplierId": "",
+        "preferredSupplierId": "",
+        "active": false,
+        "categoryId": "ERP-CAT-4"
+      },
+      "virtualStore": {
+        "name": "Limpeza de vírus e Formatação",
+        "price": null,
+        "active": true,
+        "seoTitle": "",
+        "seoDescription": "Limpeza de vírus e formatação de celulares, notebooks, PCs e PlayStation em Saldanha Marinho e região. Serviço profissional, rápido e seguro.",
+        "channels": {
+          "lojaVirtual": {
+            "enabled": true
+          },
+          "mercadoLivre": {
+            "enabled": false
+          },
+          "shopee": {
+            "enabled": false
+          },
+          "amazon": {
+            "enabled": false
+          },
+          "magalu": {
+            "enabled": false
+          }
+        }
+      },
+      "detailsEnabled": true,
+      "showVariationsOnCard": false,
+      "descriptionShort": "",
+      "descriptionLong": "<p>💻📲&nbsp; <strong>Seu aparelho está lento, travando ou apresentando erros?</strong></p><p>Realizamos <strong>limpeza de vírus, otimização ou formatação</strong> em celulares, notebooks, computadores e PlayStation.</p><p>✅ Remoção de vírus e programas indesejados<br>✅ Formatação e reinstalação do sistema<br>✅ Otimização de desempenho<br>✅ Celulares, notebooks, PCs e PlayStation<br>✅ Serviço técnico profissional e seguro<br>✅ Telebusca e tele-entrega<strong> </strong>para sua comodidade</p><p><br></p>",
+      "variations": {
+        "enabled": false,
+        "colors": [],
+        "storage": [],
+        "ram": [],
+        "condition": [],
+        "combinations": [],
+        "labels": {},
+        "colorsText": "",
+        "storageText": "",
+        "ramText": "",
+        "conditionText": "",
+        "labelsText": "{}",
+        "combinationsText": ""
+      },
+      "id": 1787959282655,
+      "inventoryBalance": {
+        "inventoryItemId": "PRD-1787959282655",
+        "locationId": "loja-principal",
+        "physicalQuantity": 0,
+        "reservedQuantity": 0,
+        "availableQuantity": 0,
+        "minimumQuantity": 0,
+        "updatedAt": "2026-08-28T23:56:51.942Z"
+      },
+      "updatedAt": "2026-08-28T23:51:24.512Z"
     }
   ]
 }
