@@ -1209,6 +1209,19 @@
 .mobile-nav .cat-sub-link-mobile{font-size:.92em;opacity:.9;padding-top:7px!important;padding-bottom:7px!important}
 @media(max-width:850px){.nav-desktop .cat-menu-group{display:none}}
 </style>
+<style>
+.cat-menu-group{position:relative;display:inline-flex;align-items:center;align-self:stretch}
+.cat-menu-group>.cat-link{display:flex;align-items:center;height:100%;white-space:nowrap}
+.cat-menu-caret{font-size:10px;margin-left:3px;opacity:.8}
+.cat-submenu{position:absolute;top:calc(100% - 1px);left:0;min-width:185px;background:#fff;border:1px solid rgba(0,0,0,.10);border-radius:0 0 10px 10px;box-shadow:0 12px 28px rgba(0,0,0,.16);padding:7px;display:none;z-index:1000}
+.cat-menu-group:hover .cat-submenu,.cat-menu-group:focus-within .cat-submenu{display:grid;gap:2px}
+.cat-submenu .cat-sub-link{display:block!important;height:auto!important;padding:9px 11px!important;border-radius:7px;color:#222!important;text-decoration:none!important;white-space:nowrap}
+.cat-submenu .cat-sub-link:hover{background:#f3f4f6;color:#c90000!important}
+.cat-mobile-group{display:block}
+.cat-mobile-submenu{display:grid;gap:2px;padding:0 0 6px 18px}
+.mobile-nav .cat-sub-link-mobile{font-size:.92em;opacity:.9;padding-top:7px!important;padding-bottom:7px!important}
+@media(max-width:850px){.nav-desktop .cat-menu-group{display:none}}
+</style>
 <header class="header">
   <div class="header-container">
     <a href="/" class="logo-wrapper" data-home-link>
@@ -1268,6 +1281,118 @@
 
   <div id="menu-overlay" class="menu-overlay"></div>
 </header>
+
+<!-- Fonte imutável do menu. Scripts antigos do site podem tentar reconstruir somente
+     as categorias após o carregamento; estes templates permitem restaurar a árvore
+     categoria -> subcategoria sem depender de nova requisição. -->
+<template id="quality-desktop-category-menu-template">          <div class="cat-menu-group">
+            <a href="/smartphones/" class="cat-link cat-parent-link">Smartphones <span class="cat-menu-caret">▾</span></a>
+            <div class="cat-submenu"><a href="/smartphones/?subcategoria=usados" class="cat-sub-link">Usados</a></div>
+          </div>
+          <a href="/acessorios/" class="cat-link">Acessórios</a>
+          <a href="/eletronicos/" class="cat-link">Eletrônicos</a>
+          <a href="/assistencia-tecnica/" class="cat-link">Assistência Técnica</a></template>
+<template id="quality-mobile-category-menu-template">          <div class="cat-mobile-group">
+            <a href="/smartphones/" class="cat-link">Smartphones</a>
+            <div class="cat-mobile-submenu"><a href="/smartphones/?subcategoria=usados" class="cat-sub-link cat-sub-link-mobile">Usados</a></div>
+          </div>
+          <a href="/acessorios/" class="cat-link">Acessórios</a>
+          <a href="/eletronicos/" class="cat-link">Eletrônicos</a>
+          <a href="/assistencia-tecnica/" class="cat-link">Assistência Técnica</a></template>
+<script>
+(function(){
+  var isLocalPreview = window.location.hostname === 'localhost' && window.location.port === '3000';
+  if (isLocalPreview) {
+    document.querySelectorAll('[data-home-link]').forEach(function(a){
+      a.setAttribute('href', '/site/view/index.html');
+    });
+  }
+
+  var restoring = false;
+  var restoreTimer = null;
+
+  function directCategoryNodes(nav, mobile){
+    if (!nav) return [];
+    return Array.prototype.filter.call(nav.children, function(el){
+      if (!el || !el.matches) return false;
+      return mobile
+        ? el.matches('.cat-link, .cat-mobile-group, .cat-menu-group, .cat-sub-link')
+        : el.matches('.cat-link, .cat-menu-group, .cat-mobile-group, .cat-sub-link');
+    });
+  }
+
+  function normalizedMarkup(nodes){
+    return nodes.map(function(el){
+      return (el.outerHTML || '').replace(/s+/g, ' ').trim();
+    }).join('');
+  }
+
+  function templateMarkup(tpl, mobile){
+    var box = document.createElement('div');
+    box.appendChild(tpl.content.cloneNode(true));
+    return normalizedMarkup(directCategoryNodes(box, mobile));
+  }
+
+  function restoreOne(navId, templateId, mobile){
+    var nav = document.getElementById(navId);
+    var tpl = document.getElementById(templateId);
+    if (!nav || !tpl) return;
+
+    var current = directCategoryNodes(nav, mobile);
+    if (normalizedMarkup(current) === templateMarkup(tpl, mobile)) return;
+
+    current.forEach(function(el){ el.remove(); });
+
+    var frag = tpl.content.cloneNode(true);
+    if (mobile) {
+      nav.appendChild(frag);
+    } else {
+      var search = nav.querySelector('.search-wrapper');
+      if (search) nav.insertBefore(frag, search);
+      else nav.appendChild(frag);
+    }
+  }
+
+  function restoreMenus(){
+    if (restoring) return;
+    restoring = true;
+    try {
+      restoreOne('nav-desktop', 'quality-desktop-category-menu-template', false);
+      restoreOne('nav-mobile', 'quality-mobile-category-menu-template', true);
+    } finally {
+      restoring = false;
+    }
+  }
+
+  function scheduleRestore(){
+    if (restoring) return;
+    clearTimeout(restoreTimer);
+    restoreTimer = setTimeout(restoreMenus, 0);
+  }
+
+  function protectMenu(){
+    restoreMenus();
+    ['nav-desktop','nav-mobile'].forEach(function(id){
+      var nav = document.getElementById(id);
+      if (!nav || typeof MutationObserver === 'undefined') return;
+      var observer = new MutationObserver(function(){ scheduleRestore(); });
+      observer.observe(nav, { childList:true, subtree:true });
+    });
+
+    // Scripts legados normalmente executam no DOMContentLoaded ou poucos ms depois.
+    // Estas passagens cobrem esse período e o observer mantém a árvore correta depois.
+    setTimeout(restoreMenus, 50);
+    setTimeout(restoreMenus, 250);
+    setTimeout(restoreMenus, 1000);
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', protectMenu, { once:true });
+  } else {
+    protectMenu();
+  }
+})();
+</script>
 
 <!-- Fonte imutável do menu. Scripts antigos do site podem tentar reconstruir somente
      as categorias após o carregamento; estes templates permitem restaurar a árvore
