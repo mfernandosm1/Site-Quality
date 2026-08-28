@@ -31,7 +31,7 @@
 
 <section class="agenda-create-card">
   <form method="post" action="/erp/agenda" class="agenda-quick-form" data-agenda-form>
-    <div class="agenda-field agenda-title-field"><label>O que precisa ser feito?</label><input name="title" maxlength="180" required autofocus placeholder="Ex.: Retornar orçamento do João"></div>
+    <div class="agenda-field agenda-title-field"><label>O que precisa ser feito?</label><textarea name="title" rows="2" required autofocus data-agenda-title placeholder="Ex.: Retornar orçamento do João. Pode escrever todos os detalhes necessários."></textarea></div>
     <div class="agenda-field agenda-date-field" data-agenda-date-field><label>Quando?</label><div class="agenda-date-control"><input type="datetime-local" name="dueAt" min="2000-01-01T00:00" max="2100-12-31T23:59" required data-agenda-due><button type="button" class="agenda-clear-date" data-agenda-clear-date hidden>Sem data</button></div></div>
     <div class="agenda-field"><label>Tipo</label><select name="type" data-agenda-type><% types.forEach(item => { %><option value="<%= item.id %>" data-due-mode="<%= item.dueMode %>"><%= item.name %></option><% }) %></select></div>
     <div class="agenda-field"><label>Cliente <small>(opcional)</small></label><select name="customerId"><option value="">Sem cliente vinculado</option><% customers.forEach(customer => { %><option value="<%= customer.id %>"><%= customer.name %><%= customer.document ? ` · ${customer.document}` : '' %></option><% }) %></select></div>
@@ -119,14 +119,14 @@
         <header><span class="agenda-owner-dot"></span><strong><%= ownerName %></strong><b><%= ownerItems.length %></b></header>
         <div class="agenda-list">
           <% ownerItems.forEach(task => { %>
-          <article class="agenda-item <%= task.priority === 'high' ? 'high' : '' %>">
+          <article class="agenda-item <%= task.priority === 'high' ? 'high' : '' %>" data-task-id="<%= task.id %>" data-task-title="<%= task.title %>" data-task-description="<%= task.description || '' %>" data-task-due="<%= task.dueAt || '' %>" data-task-type="<%= task.type || 'task' %>" data-task-customer="<%= task.customerId || '' %>" data-task-owner="<%= task.owner || '' %>" data-task-priority="<%= task.priority || 'medium' %>">
             <div class="agenda-check"><form method="post" action="/erp/agenda/<%= task.id %>/concluir"><button type="submit" title="Marcar como concluída">✓</button></form></div>
             <div class="agenda-item-main">
               <div class="agenda-item-title"><strong><%= task.title %></strong><span><%= taskTypeName(task) %></span><% if(task.priority === 'high'){ %><em>Alta</em><% } %></div>
-              <small><%= task.dueAt ? fmt(task.dueAt) : '🔔 Sem data definida' %><% if(task.customerName){ %> · <a href="/erp/clientes/<%= task.customerId %>/ficha"><%= task.customerName %></a><% } %></small>
+              <small><%= task.dueAt ? fmt(task.dueAt) : '🔔 Sem data definida' %><% if(task.customerName){ %> · <a href="/erp/clientes/<%= task.customerId %>/ficha"><%= task.customerName %></a><% } %><% if(task.updatedBy && task.updatedAt && task.updatedAt !== task.createdAt){ %> · editado por <%= task.updatedBy %><% } %></small>
               <% if(task.description){ %><p><%= task.description %></p><% } %>
             </div>
-            <details class="agenda-more"><summary>•••</summary><form method="post" action="/erp/agenda/<%= task.id %>/excluir" onsubmit="return confirm('Remover este item?')"><button type="submit">Excluir</button></form></details>
+            <details class="agenda-more"><summary>•••</summary><div class="agenda-more-menu"><button type="button" class="agenda-edit-button" data-edit-task>Editar</button><form method="post" action="/erp/agenda/<%= task.id %>/excluir" onsubmit="return confirm('Remover este item?')"><button type="submit" class="danger">Excluir</button></form></div></details>
           </article>
           <% }) %>
         </div>
@@ -142,6 +142,22 @@
   <% if(!(overview.completed||[]).length){ %><div class="agenda-empty">Nenhuma tarefa concluída recentemente.</div><% } %>
   <div class="agenda-list completed"><% (overview.completed||[]).forEach(task => { %><article class="agenda-item"><div class="agenda-item-main"><div class="agenda-item-title"><strong><%= task.title %></strong><span><%= taskTypeName(task) %></span><span class="agenda-owner-badge" style="--owner-color:<%= ownerColor(task.owner) %>"><span class="agenda-owner-dot"></span><%= task.owner || 'Sem responsável' %></span></div><small><%= task.completedAt ? new Date(task.completedAt).toLocaleString('pt-BR') : '' %></small></div></article><% }) %></div>
 </section>
+</div>
+
+<div class="agenda-edit-modal" data-agenda-edit-modal hidden>
+  <form method="post" class="agenda-edit-card" data-agenda-edit-form>
+    <header><div><span>EDITAR TAREFA</span><h2>Atualizar item da agenda</h2><small>A alteração ficará registrada com usuário, horário e valores antes/depois.</small></div><button type="button" data-agenda-edit-close aria-label="Fechar">×</button></header>
+    <div class="agenda-edit-grid">
+      <div class="agenda-field agenda-edit-title"><label>O que precisa ser feito?</label><textarea name="title" rows="4" required data-edit-title></textarea></div>
+      <div class="agenda-field"><label>Quando?</label><input type="datetime-local" name="dueAt" min="2000-01-01T00:00" max="2100-12-31T23:59" data-edit-due></div>
+      <div class="agenda-field"><label>Tipo</label><select name="type" data-edit-type><% types.forEach(item => { %><option value="<%= item.id %>" data-due-mode="<%= item.dueMode %>"><%= item.name %></option><% }) %></select></div>
+      <div class="agenda-field"><label>Cliente <small>(opcional)</small></label><select name="customerId" data-edit-customer><option value="">Sem cliente vinculado</option><% customers.forEach(customer => { %><option value="<%= customer.id %>"><%= customer.name %><%= customer.document ? ` · ${customer.document}` : '' %></option><% }) %></select></div>
+      <div class="agenda-field"><label>Responsável</label><select name="owner" required data-edit-owner><% selectableOwners.forEach(person => { %><option value="<%= person.name %>"><%= person.name %></option><% }) %></select></div>
+      <div class="agenda-field"><label>Prioridade</label><select name="priority" data-edit-priority><option value="medium">Normal</option><option value="high">Alta</option><option value="low">Baixa</option></select></div>
+      <div class="agenda-field agenda-edit-description"><label>Detalhes / observações <small>(opcional)</small></label><textarea name="description" rows="4" data-edit-description placeholder="Informações complementares da tarefa"></textarea></div>
+    </div>
+    <footer><button type="button" class="btn" data-agenda-edit-close>Cancelar</button><button type="submit" class="btn primary">Salvar alterações</button></footer>
+  </form>
 </div>
 </div>
 <script>
@@ -218,6 +234,35 @@
     setSettings(settingsOpen);
     settingsToggle?.addEventListener('click',()=>setSettings(settings.hidden));
     settingsClose?.addEventListener('click',()=>setSettings(false));
+
+    page.querySelectorAll('textarea').forEach(area=>{
+      const resize=()=>{area.style.height='auto';area.style.height=`${Math.min(Math.max(area.scrollHeight,58),260)}px`;};
+      area.addEventListener('input',resize);resize();
+    });
+
+    const editModal=page.querySelector('[data-agenda-edit-modal]');
+    const editForm=page.querySelector('[data-agenda-edit-form]');
+    const editDue=page.querySelector('[data-edit-due]');
+    const editType=page.querySelector('[data-edit-type]');
+    function syncEditDue(){ if(!editType||!editDue)return; editDue.required=editType.selectedOptions?.[0]?.dataset?.dueMode!=='optional'; }
+    function closeEdit(){ if(editModal)editModal.hidden=true; }
+    page.querySelectorAll('[data-agenda-edit-close]').forEach(btn=>btn.addEventListener('click',closeEdit));
+    editType?.addEventListener('change',syncEditDue);
+    page.querySelectorAll('[data-edit-task]').forEach(btn=>btn.addEventListener('click',()=>{
+      const item=btn.closest('[data-task-id]'); if(!item||!editForm||!editModal)return;
+      editForm.action=`/erp/agenda/${encodeURIComponent(item.dataset.taskId)}/editar`;
+      editForm.elements.title.value=item.dataset.taskTitle||'';
+      editForm.elements.description.value=item.dataset.taskDescription||'';
+      editForm.elements.dueAt.value=item.dataset.taskDue||'';
+      editForm.elements.type.value=item.dataset.taskType||'task';
+      editForm.elements.customerId.value=item.dataset.taskCustomer||'';
+      editForm.elements.owner.value=item.dataset.taskOwner||'';
+      editForm.elements.priority.value=item.dataset.taskPriority||'medium';
+      syncEditDue(); editModal.hidden=false;
+      const area=editForm.elements.title; area.style.height='auto';area.style.height=`${Math.min(Math.max(area.scrollHeight,90),300)}px`;area.focus();
+      item.querySelector('details.agenda-more')?.removeAttribute('open');
+    }));
+    editModal?.addEventListener('click',event=>{if(event.target===editModal)closeEdit();});
 
     const tabs=[...page.querySelectorAll('[data-agenda-tab]')];
     const panels=[...page.querySelectorAll('[data-agenda-panel]')];

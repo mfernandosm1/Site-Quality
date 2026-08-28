@@ -2,6 +2,1090 @@
   "version": "0.18.0",
   "items": [
     {
+      "id": "PYP-28346079-3b23-4003-b479-327161995249",
+      "requestKey": "manual-payable-PAY-30a3b168-023c-4f49-b714-07db143fba8c-PIN-fd7ac40a-91b6-4a35-934d-1a1948e10763",
+      "paymentNumber": "PG-000059",
+      "payableId": "PAY-30a3b168-023c-4f49-b714-07db143fba8c",
+      "installmentId": "PIN-fd7ac40a-91b6-4a35-934d-1a1948e10763",
+      "paidAt": "2026-08-27",
+      "value": 110,
+      "principalValue": 110,
+      "interest": 0,
+      "fine": 0,
+      "discount": 0,
+      "payments": [
+        {
+          "paymentMethodId": "PM-DINHEIRO",
+          "paymentMethodName": "Dinheiro",
+          "commerceMethodId": "PM-DINHEIRO",
+          "debitCash": true,
+          "value": 110
+        }
+      ],
+      "notes": "Pagamento automático conforme parâmetros de Compras / Contas a Pagar da forma de pagamento.",
+      "cashboxId": "caixa-principal",
+      "cashMovementIds": [
+        "CXM-1787876377776-U8Y5F"
+      ],
+      "createdAt": "2026-08-28T00:19:37.781Z",
+      "createdBy": "Matheus Fernando",
+      "balanceBefore": 110,
+      "balanceAfter": 0,
+      "financeEntryIds": [
+        "FEN-aad2c933-e262-479b-ac20-ed54ac0405db"
+      ],
+      "financePaymentIds": [
+        "FPY-1b1349c8-9468-43ba-9189-516500fe7cc3"
+      ],
+      "financeMovementIds": [
+        "FMV-a1d1d2fb-16f3-4398-a8cc-e459323ba5a1"
+      ]
+    },
+    {
+      "id": "PYP-1de8becf-7a04-4bdf-85d9-256e23fef09d",
+      "requestKey": "purchase-PUR-386f4d35-c690-4b63-85fb-879c744ca776-PIN-9350034a-70ce-4316-a8eb-acfabe5630f4",
+      "paymentNumber": "PG-000058",
+      "payableId": "PAY-e5bb959b-604e-4c01-9832-97a1a7d02ae8",
+      "installmentId": "PIN-9350034a-70ce-4316-a8eb-acfabe5630f4",
+      "paidAt": "2026-08-27",
+      "value": 249,
+      "principalValue": 249,
+      "interest": 0,
+      "fine": 0,
+      "discount": 0,
+      "payments": [
+        {
+          "paymentMethodId": "PM-DINHEIRO",
+          "paymentMethodName": "Dinheiro",
+          "commerceMethodId": "PM-DINHEIRO",
+          "debitCash": true,
+          "value": 249
+        }
+      ],
+      "notes": "Pagamento automático conforme parâmetros de Compras / Contas a Pagar da forma de pagamento.",
+      "cashboxId": "caixa-principal",
+      "cashMovementIds": [
+        "CXM-1787853152802-Z05EY"
+      ],
+      "createdAt": "2026-08-27T17:52:32.806Z",
+      "createdBy": "Matheus Fernando",
+      "balanceBefore": 249,
+      "balanceAfter": 0,
+      "financeEntryIds": [
+        "FEN-ced78a95-2988-475e-be62-8635b61d01a3"
+      ],
+      "financePaymentIds": [
+        "FPY-09f87005-a7af-4a55-b8c0-a97d54ac6f83"
+      ],
+      "financeMovementIds": [
+        "FMV-86689b5d-8069-4f09-b5ad-c6ffc5d8eedf"
+      ]
+    },
+    {
+      "id": "PYP-1758ca37-b15b-41b9-bcaa-6187919c70cb",
+      "requestKey": "purchase-PUR-386f4d35-c690-4b63-85fb-879c744ca776-PIN-55936f68-e9c7-43a6-937e-5905e03d366f",
+      "paymentNumber": "PG-000057",
+      "payableId": "PAY-e5bb959b-604e-4c01-9832-97a1a7d02ae8",
+      "installmentId": "PIN-55936f68-e9c7-43a6-937e-5905e03d366f",
+      "paidAt": "2026-08-27",
+      "value": 3600,
+      "principalValue": 3600,
+      "interest": 0,
+      "fine": 0,
+      "discount": 0,
+      "payments": [
+        {
+          "paymentMethodId": "PM-DINHEIRO",
+          "paymentMethodName": "Dinheiro",
+          "commerceMethodId": "PM-DINHEIRO",
+          "debitCash": true,
+          "value": 3600
+        }
+      ],
+      "notes": "Pagamento automático conforme parâmetros de Compras / Contas a Pagar da forma de pagamento.",
+      "cashboxId": "caixa-principal",
+      "cashMovementIds": [
+        "CXM-1787853152737-X5ZVC"
+      ],
+      "createdAt": "2026-08-27T17:52:32.744Z",
+      "createdBy": "Matheus Fernando",
+      "balanceBefore": 3600,
+      "balanceAfter": 0,
+      "financeEntryIds": [
+        "FEN-bff0b253-6331-470c-a9c9-3237a2cd3f7c"
+      ],
+      "financePaymentIds": [
+        "FPY-0edba631-4e6c-45d0-9660-bbf3f05e7977"
+      ],
+      "financeMovementIds": [
+        "FMV-baef7438-ed19-4933-bc2b-843a3f95fbd4"
+      ]
+    },
+    {
+      "id": "PYP-034db71b-1e36-4d48-88db-d1284bdf6354",
+      "requestKey": "manual-payable-PAY-70cb0965-cb5b-49b9-8848-228d9cefa5bf-PIN-11ac0338-380c-4fd7-a143-f5a52272429d",
+      "paymentNumber": "PG-000056",
+      "payableId": "PAY-70cb0965-cb5b-49b9-8848-228d9cefa5bf",
+      "installmentId": "PIN-11ac0338-380c-4fd7-a143-f5a52272429d",
+      "paidAt": "2026-08-27",
+      "value": 35,
+      "principalValue": 35,
+      "interest": 0,
+      "fine": 0,
+      "discount": 0,
+      "payments": [
+        {
+          "paymentMethodId": "PM-DINHEIRO",
+          "paymentMethodName": "Dinheiro",
+          "commerceMethodId": "PM-DINHEIRO",
+          "debitCash": true,
+          "value": 35
+        }
+      ],
+      "notes": "Pagamento automático conforme parâmetros de Compras / Contas a Pagar da forma de pagamento.",
+      "cashboxId": "caixa-principal",
+      "cashMovementIds": [
+        "CXM-1787834272401-TBPZP"
+      ],
+      "createdAt": "2026-08-27T12:37:52.405Z",
+      "createdBy": "Matheus Fernando",
+      "balanceBefore": 35,
+      "balanceAfter": 0,
+      "financeEntryIds": [
+        "FEN-51b93b95-925a-44ec-89cf-d20e55372d0a"
+      ],
+      "financePaymentIds": [
+        "FPY-b4d67a43-624d-4795-b9f1-d67dff8b9709"
+      ],
+      "financeMovementIds": [
+        "FMV-7d11b314-5d85-476b-a470-6ea9ea0e5915"
+      ]
+    },
+    {
+      "id": "PYP-c4d28470-3da9-4f9a-a7aa-7e6a8533fe9f",
+      "requestKey": "28eee592-cf04-459a-8997-630914091b81",
+      "paymentNumber": "PG-000055",
+      "payableId": "PAY-7eeebb45-41f4-4288-ab1e-e533af80ce53",
+      "installmentId": "PIN-56d39768-f0e5-4566-92a0-85211c4a4803",
+      "paidAt": "2026-08-25",
+      "value": 1017.25,
+      "principalValue": 1017.25,
+      "interest": 0,
+      "fine": 0,
+      "discount": 0,
+      "payments": [
+        {
+          "paymentMethodId": "PAY-78ea78b1-83ad-4abb-849e-2d9b68abd163",
+          "paymentMethodName": "Debitado da conta",
+          "commerceMethodId": "Debitado da conta",
+          "debitCash": true,
+          "value": 1017.25
+        }
+      ],
+      "notes": "desc por antecipação",
+      "cashboxId": "caixa-principal",
+      "cashMovementIds": [
+        "CXM-1787652579673-OL3IE"
+      ],
+      "createdAt": "2026-08-25T10:09:39.676Z",
+      "createdBy": "painel",
+      "balanceBefore": 1017.25,
+      "balanceAfter": 0,
+      "financeEntryIds": [
+        "FEN-ec085abb-9293-4b66-96b2-5d73a434934a"
+      ],
+      "financePaymentIds": [
+        "FPY-84e154bb-3f50-4e06-ba14-7ab86d71f027"
+      ],
+      "financeMovementIds": [
+        "FMV-b7719ab1-9150-486a-93bb-6ed5d082e168"
+      ],
+      "cashReconciledAt": "2026-08-27T23:34:15.286Z",
+      "cashReconciledBy": "Matheus Fernando"
+    },
+    {
+      "id": "PYP-a021f089-f168-45de-810c-e77ecf44fd8a",
+      "requestKey": "05e9b6a8-9957-457c-96cd-9852440a78d4",
+      "paymentNumber": "PG-000054",
+      "payableId": "PAY-534fe8bd-7d8e-4764-8695-b2ce1f737e3a",
+      "installmentId": "PIN-107c9eda-7fe3-408a-91c5-9d8d4a6fd163",
+      "paidAt": "2026-08-24",
+      "value": 40,
+      "principalValue": 40,
+      "interest": 0,
+      "fine": 0,
+      "discount": 0,
+      "payments": [
+        {
+          "paymentMethodId": "PM-BOLETO",
+          "paymentMethodName": "Boleto",
+          "commerceMethodId": "Boleto",
+          "debitCash": true,
+          "value": 40
+        }
+      ],
+      "notes": "",
+      "cashboxId": "caixa-principal",
+      "cashMovementIds": [
+        "CXM-1787596263924-FYO5L"
+      ],
+      "createdAt": "2026-08-24T18:31:03.928Z",
+      "createdBy": "painel",
+      "balanceBefore": 40,
+      "balanceAfter": 0,
+      "financeEntryIds": [
+        "FEN-4eb34f33-1ef8-49f5-8356-62b4dc651c34"
+      ],
+      "financePaymentIds": [
+        "FPY-33dfca5a-042f-4c1b-8263-b40a7a46e05c"
+      ],
+      "financeMovementIds": [
+        "FMV-0a989e05-dbfb-4b7f-b00f-7c22a015e8d6"
+      ],
+      "cashReconciledAt": "2026-08-27T23:34:15.296Z",
+      "cashReconciledBy": "Matheus Fernando"
+    },
+    {
+      "id": "PYP-182802e8-cb34-4b44-ac29-6f136c8fabfa",
+      "requestKey": "6223ad00-a663-460a-bdeb-032a452540e5-18",
+      "paymentNumber": "PG-000053",
+      "payableId": "PAY-ed55b6db-7af9-4cf6-9b31-090938034913",
+      "installmentId": "PIN-de696b34-3b0b-4fd6-8c3c-201c7ef6b211",
+      "paidAt": "2026-08-24",
+      "value": 321.8,
+      "principalValue": 321.8,
+      "interest": 0,
+      "fine": 0,
+      "discount": 0,
+      "payments": [
+        {
+          "paymentMethodId": "PAY-78ea78b1-83ad-4abb-849e-2d9b68abd163",
+          "paymentMethodName": "Debitado da conta",
+          "commerceMethodId": "Debitado da conta",
+          "debitCash": true,
+          "value": 321.8
+        }
+      ],
+      "notes": "",
+      "cashboxId": "caixa-principal",
+      "cashMovementIds": [
+        "CXM-1787596212291-MIW37"
+      ],
+      "createdAt": "2026-08-24T18:30:12.309Z",
+      "createdBy": "painel",
+      "balanceBefore": 321.8,
+      "balanceAfter": 0,
+      "financeEntryIds": [
+        "FEN-daf62082-6632-4872-9a71-95a486e2ec07"
+      ],
+      "financePaymentIds": [
+        "FPY-1c01144b-334d-4416-9786-a4e1661edf0c"
+      ],
+      "financeMovementIds": [
+        "FMV-a678789b-c454-4af1-80b7-ac8dd1943457"
+      ],
+      "cashReconciledAt": "2026-08-27T23:34:15.302Z",
+      "cashReconciledBy": "Matheus Fernando"
+    },
+    {
+      "id": "PYP-56c89c9b-dfcc-4943-983d-abc84cd4241d",
+      "requestKey": "6223ad00-a663-460a-bdeb-032a452540e5-17",
+      "paymentNumber": "PG-000052",
+      "payableId": "PAY-68507f3d-18c9-4d72-9fbd-c71aafada6f4",
+      "installmentId": "PIN-58651ea4-a003-4b0c-8782-9424ab6f9ca5",
+      "paidAt": "2026-08-24",
+      "value": 247.14,
+      "principalValue": 247.14,
+      "interest": 0,
+      "fine": 0,
+      "discount": 0,
+      "payments": [
+        {
+          "paymentMethodId": "PAY-78ea78b1-83ad-4abb-849e-2d9b68abd163",
+          "paymentMethodName": "Debitado da conta",
+          "commerceMethodId": "Debitado da conta",
+          "debitCash": true,
+          "value": 247.14
+        }
+      ],
+      "notes": "",
+      "cashboxId": "caixa-principal",
+      "cashMovementIds": [
+        "CXM-1787596212251-TVN3H"
+      ],
+      "createdAt": "2026-08-24T18:30:12.255Z",
+      "createdBy": "painel",
+      "balanceBefore": 247.14,
+      "balanceAfter": 0,
+      "financeEntryIds": [
+        "FEN-bf3ee931-c18b-49c1-9967-9a96beed5d14"
+      ],
+      "financePaymentIds": [
+        "FPY-51931dc0-7d07-4725-bcaa-121e5aaea4fe"
+      ],
+      "financeMovementIds": [
+        "FMV-ecaf7341-e110-46e3-87f0-186a1142b092"
+      ],
+      "cashReconciledAt": "2026-08-27T23:34:15.307Z",
+      "cashReconciledBy": "Matheus Fernando"
+    },
+    {
+      "id": "PYP-453700f3-d895-4236-a77b-68f3e54c2594",
+      "requestKey": "6223ad00-a663-460a-bdeb-032a452540e5-16",
+      "paymentNumber": "PG-000051",
+      "payableId": "PAY-a761afbf-e5b8-403f-bd8f-758439242673",
+      "installmentId": "PIN-f07d3c36-2280-4385-a89b-f9a4b57ac809",
+      "paidAt": "2026-08-24",
+      "value": 132.76,
+      "principalValue": 132.76,
+      "interest": 0,
+      "fine": 0,
+      "discount": 0,
+      "payments": [
+        {
+          "paymentMethodId": "PAY-78ea78b1-83ad-4abb-849e-2d9b68abd163",
+          "paymentMethodName": "Debitado da conta",
+          "commerceMethodId": "Debitado da conta",
+          "debitCash": true,
+          "value": 132.76
+        }
+      ],
+      "notes": "",
+      "cashboxId": "caixa-principal",
+      "cashMovementIds": [
+        "CXM-1787596212212-Y1UCT"
+      ],
+      "createdAt": "2026-08-24T18:30:12.215Z",
+      "createdBy": "painel",
+      "balanceBefore": 132.76,
+      "balanceAfter": 0,
+      "financeEntryIds": [
+        "FEN-f63ca87b-611c-49cc-89a1-004b751b7b4b"
+      ],
+      "financePaymentIds": [
+        "FPY-3dccbbea-946b-43a6-8c92-b32958a2d38a"
+      ],
+      "financeMovementIds": [
+        "FMV-50ec2b3a-cc03-4fc7-b0ae-509c14dd47c4"
+      ],
+      "cashReconciledAt": "2026-08-27T23:34:15.312Z",
+      "cashReconciledBy": "Matheus Fernando"
+    },
+    {
+      "id": "PYP-e9eb54aa-8034-416b-aa75-2d64fe77cc07",
+      "requestKey": "6223ad00-a663-460a-bdeb-032a452540e5-15",
+      "paymentNumber": "PG-000050",
+      "payableId": "PAY-93cdb9e4-788e-4231-9810-2c54643aa593",
+      "installmentId": "PIN-cd9c6c59-bf9e-4566-9940-ca4afe30f7cb",
+      "paidAt": "2026-08-24",
+      "value": 67.79,
+      "principalValue": 67.79,
+      "interest": 0,
+      "fine": 0,
+      "discount": 0,
+      "payments": [
+        {
+          "paymentMethodId": "PAY-78ea78b1-83ad-4abb-849e-2d9b68abd163",
+          "paymentMethodName": "Debitado da conta",
+          "commerceMethodId": "Debitado da conta",
+          "debitCash": true,
+          "value": 67.79
+        }
+      ],
+      "notes": "",
+      "cashboxId": "caixa-principal",
+      "cashMovementIds": [
+        "CXM-1787596212169-SDJ6Z"
+      ],
+      "createdAt": "2026-08-24T18:30:12.173Z",
+      "createdBy": "painel",
+      "balanceBefore": 67.79,
+      "balanceAfter": 0,
+      "financeEntryIds": [
+        "FEN-90b3080a-d74a-4ef1-aed1-44023b29f7c2"
+      ],
+      "financePaymentIds": [
+        "FPY-5bc3e7f4-33ae-49b7-99c4-d7b8c9285263"
+      ],
+      "financeMovementIds": [
+        "FMV-bdf53452-2a48-4daa-b1f9-15646af221ab"
+      ],
+      "cashReconciledAt": "2026-08-27T23:34:15.318Z",
+      "cashReconciledBy": "Matheus Fernando"
+    },
+    {
+      "id": "PYP-aa16fe75-c88d-4d20-bddb-ebc8bc750c86",
+      "requestKey": "6223ad00-a663-460a-bdeb-032a452540e5-14",
+      "paymentNumber": "PG-000049",
+      "payableId": "PAY-03d07338-3c67-4dc2-bdf8-372a13402682",
+      "installmentId": "PIN-619009a6-2b84-4d2c-b00d-bdb295dbc78d",
+      "paidAt": "2026-08-24",
+      "value": 127.2,
+      "principalValue": 127.2,
+      "interest": 0,
+      "fine": 0,
+      "discount": 0,
+      "payments": [
+        {
+          "paymentMethodId": "PAY-78ea78b1-83ad-4abb-849e-2d9b68abd163",
+          "paymentMethodName": "Debitado da conta",
+          "commerceMethodId": "Debitado da conta",
+          "debitCash": true,
+          "value": 127.2
+        }
+      ],
+      "notes": "",
+      "cashboxId": "caixa-principal",
+      "cashMovementIds": [
+        "CXM-1787596212129-YC1JP"
+      ],
+      "createdAt": "2026-08-24T18:30:12.133Z",
+      "createdBy": "painel",
+      "balanceBefore": 127.2,
+      "balanceAfter": 0,
+      "financeEntryIds": [
+        "FEN-b60c2f3c-c805-4b7d-9253-276fda62a265"
+      ],
+      "financePaymentIds": [
+        "FPY-1a7d8c3e-e721-41fc-aaf6-4d0278a69eb3"
+      ],
+      "financeMovementIds": [
+        "FMV-eff0382e-7327-4741-9b36-b6175f4fda61"
+      ],
+      "cashReconciledAt": "2026-08-27T23:34:15.324Z",
+      "cashReconciledBy": "Matheus Fernando"
+    },
+    {
+      "id": "PYP-91004db9-982a-443b-89f5-4abfd08a4223",
+      "requestKey": "6223ad00-a663-460a-bdeb-032a452540e5-13",
+      "paymentNumber": "PG-000048",
+      "payableId": "PAY-091696ab-4062-41ec-84fb-ddd35617b2ea",
+      "installmentId": "PIN-72e16137-dd76-441e-b632-bbe372e1e412",
+      "paidAt": "2026-08-24",
+      "value": 27.25,
+      "principalValue": 27.25,
+      "interest": 0,
+      "fine": 0,
+      "discount": 0,
+      "payments": [
+        {
+          "paymentMethodId": "PAY-78ea78b1-83ad-4abb-849e-2d9b68abd163",
+          "paymentMethodName": "Debitado da conta",
+          "commerceMethodId": "Debitado da conta",
+          "debitCash": true,
+          "value": 27.25
+        }
+      ],
+      "notes": "",
+      "cashboxId": "caixa-principal",
+      "cashMovementIds": [
+        "CXM-1787596212088-VGQCE"
+      ],
+      "createdAt": "2026-08-24T18:30:12.092Z",
+      "createdBy": "painel",
+      "balanceBefore": 27.25,
+      "balanceAfter": 0,
+      "financeEntryIds": [
+        "FEN-2c9c6d89-54f6-4e29-9ad0-34654a67f2e1"
+      ],
+      "financePaymentIds": [
+        "FPY-69e42a07-bcab-497e-a0bd-c0d96b5f67a9"
+      ],
+      "financeMovementIds": [
+        "FMV-1affda01-6374-4ea3-8763-51c751498ef0"
+      ],
+      "cashReconciledAt": "2026-08-27T23:34:15.329Z",
+      "cashReconciledBy": "Matheus Fernando"
+    },
+    {
+      "id": "PYP-ba5d2368-ebc3-498c-bb22-54e3baaedda7",
+      "requestKey": "6223ad00-a663-460a-bdeb-032a452540e5-12",
+      "paymentNumber": "PG-000047",
+      "payableId": "PAY-398fe73f-c697-4a33-ba44-625f56d25d37",
+      "installmentId": "PIN-ac7d5273-0b7a-4854-86e3-7c7ef3ac0bf1",
+      "paidAt": "2026-08-24",
+      "value": 59.9,
+      "principalValue": 59.9,
+      "interest": 0,
+      "fine": 0,
+      "discount": 0,
+      "payments": [
+        {
+          "paymentMethodId": "PAY-78ea78b1-83ad-4abb-849e-2d9b68abd163",
+          "paymentMethodName": "Debitado da conta",
+          "commerceMethodId": "Debitado da conta",
+          "debitCash": true,
+          "value": 59.9
+        }
+      ],
+      "notes": "",
+      "cashboxId": "caixa-principal",
+      "cashMovementIds": [
+        "CXM-1787596212041-X2QEA"
+      ],
+      "createdAt": "2026-08-24T18:30:12.044Z",
+      "createdBy": "painel",
+      "balanceBefore": 59.9,
+      "balanceAfter": 0,
+      "financeEntryIds": [
+        "FEN-fd3dc67f-89d6-4f6b-b798-784b3b52ddb4"
+      ],
+      "financePaymentIds": [
+        "FPY-07d61ae0-ac21-445b-a2a4-08f337c9a476"
+      ],
+      "financeMovementIds": [
+        "FMV-9c1d358a-79cc-4c80-bc77-41571b9b2924"
+      ],
+      "cashReconciledAt": "2026-08-27T23:34:15.334Z",
+      "cashReconciledBy": "Matheus Fernando"
+    },
+    {
+      "id": "PYP-0205b0b1-5734-443a-b106-ebe1a3ec3053",
+      "requestKey": "6223ad00-a663-460a-bdeb-032a452540e5-11",
+      "paymentNumber": "PG-000046",
+      "payableId": "PAY-4867b108-ff79-4361-a47d-7505bab35f3e",
+      "installmentId": "PIN-12e5e16d-697b-4f42-b92c-983b91af036b",
+      "paidAt": "2026-08-24",
+      "value": 48.27,
+      "principalValue": 48.27,
+      "interest": 0,
+      "fine": 0,
+      "discount": 0,
+      "payments": [
+        {
+          "paymentMethodId": "PAY-78ea78b1-83ad-4abb-849e-2d9b68abd163",
+          "paymentMethodName": "Debitado da conta",
+          "commerceMethodId": "Debitado da conta",
+          "debitCash": true,
+          "value": 48.27
+        }
+      ],
+      "notes": "",
+      "cashboxId": "caixa-principal",
+      "cashMovementIds": [
+        "CXM-1787596211995-DJ7D5"
+      ],
+      "createdAt": "2026-08-24T18:30:11.998Z",
+      "createdBy": "painel",
+      "balanceBefore": 48.27,
+      "balanceAfter": 0,
+      "financeEntryIds": [
+        "FEN-562e67f3-7fdd-472b-b286-07dd714807f0"
+      ],
+      "financePaymentIds": [
+        "FPY-4e3fd126-22d2-446e-af02-0c596fca3c87"
+      ],
+      "financeMovementIds": [
+        "FMV-32a93285-a104-49e0-a925-07e4459af231"
+      ],
+      "cashReconciledAt": "2026-08-27T23:34:15.339Z",
+      "cashReconciledBy": "Matheus Fernando"
+    },
+    {
+      "id": "PYP-e895c5d7-3fab-4b45-8bf3-c297ad7ccd8d",
+      "requestKey": "6223ad00-a663-460a-bdeb-032a452540e5-10",
+      "paymentNumber": "PG-000045",
+      "payableId": "PAY-a0d6de7c-b9c4-45d6-8997-e631615e9ec7",
+      "installmentId": "PIN-a43c011c-4e51-40c1-8f7d-c350cdd2e975",
+      "paidAt": "2026-08-24",
+      "value": 111.42,
+      "principalValue": 111.42,
+      "interest": 0,
+      "fine": 0,
+      "discount": 0,
+      "payments": [
+        {
+          "paymentMethodId": "PAY-78ea78b1-83ad-4abb-849e-2d9b68abd163",
+          "paymentMethodName": "Debitado da conta",
+          "commerceMethodId": "Debitado da conta",
+          "debitCash": true,
+          "value": 111.42
+        }
+      ],
+      "notes": "",
+      "cashboxId": "caixa-principal",
+      "cashMovementIds": [
+        "CXM-1787596211955-9YAJN"
+      ],
+      "createdAt": "2026-08-24T18:30:11.958Z",
+      "createdBy": "painel",
+      "balanceBefore": 111.42,
+      "balanceAfter": 0,
+      "financeEntryIds": [
+        "FEN-a692bc10-3490-4ebe-bb65-6f7198a3485e"
+      ],
+      "financePaymentIds": [
+        "FPY-ba5b57d1-9a94-4f5d-b3b0-535283582ae8"
+      ],
+      "financeMovementIds": [
+        "FMV-acfcf13f-414c-4265-91a0-752e45db7d32"
+      ],
+      "cashReconciledAt": "2026-08-27T23:34:15.347Z",
+      "cashReconciledBy": "Matheus Fernando"
+    },
+    {
+      "id": "PYP-62aec81b-52b3-4692-8279-60c70357e5d5",
+      "requestKey": "6223ad00-a663-460a-bdeb-032a452540e5-9",
+      "paymentNumber": "PG-000044",
+      "payableId": "PAY-636d0c60-637e-48ff-aacf-5be61229ab5c",
+      "installmentId": "PIN-61e0682f-3f89-41d2-ab8b-dcfa8a774494",
+      "paidAt": "2026-08-24",
+      "value": 293.73,
+      "principalValue": 293.73,
+      "interest": 0,
+      "fine": 0,
+      "discount": 0,
+      "payments": [
+        {
+          "paymentMethodId": "PAY-78ea78b1-83ad-4abb-849e-2d9b68abd163",
+          "paymentMethodName": "Debitado da conta",
+          "commerceMethodId": "Debitado da conta",
+          "debitCash": true,
+          "value": 293.73
+        }
+      ],
+      "notes": "",
+      "cashboxId": "caixa-principal",
+      "cashMovementIds": [
+        "CXM-1787596211913-SR61M"
+      ],
+      "createdAt": "2026-08-24T18:30:11.917Z",
+      "createdBy": "painel",
+      "balanceBefore": 293.73,
+      "balanceAfter": 0,
+      "financeEntryIds": [
+        "FEN-805a2de7-aadc-460c-ab9e-178d27b30dcf"
+      ],
+      "financePaymentIds": [
+        "FPY-451d4049-38ba-41c3-b82f-d978e0a6474f"
+      ],
+      "financeMovementIds": [
+        "FMV-ec35ce46-c1ee-4924-9fa0-56626f0f87ff"
+      ],
+      "cashReconciledAt": "2026-08-27T23:34:15.352Z",
+      "cashReconciledBy": "Matheus Fernando"
+    },
+    {
+      "id": "PYP-57ab086a-d90d-41db-858a-ed0d76d61abf",
+      "requestKey": "6223ad00-a663-460a-bdeb-032a452540e5-8",
+      "paymentNumber": "PG-000043",
+      "payableId": "PAY-78e63f92-9b47-4c9b-a202-9c5ff119ef8f",
+      "installmentId": "PIN-fd75b02c-fa43-4f83-8802-b17cc11de1d5",
+      "paidAt": "2026-08-24",
+      "value": 50,
+      "principalValue": 50,
+      "interest": 0,
+      "fine": 0,
+      "discount": 0,
+      "payments": [
+        {
+          "paymentMethodId": "PAY-78ea78b1-83ad-4abb-849e-2d9b68abd163",
+          "paymentMethodName": "Debitado da conta",
+          "commerceMethodId": "Debitado da conta",
+          "debitCash": true,
+          "value": 50
+        }
+      ],
+      "notes": "",
+      "cashboxId": "caixa-principal",
+      "cashMovementIds": [
+        "CXM-1787596211874-5OZBV"
+      ],
+      "createdAt": "2026-08-24T18:30:11.878Z",
+      "createdBy": "painel",
+      "balanceBefore": 50,
+      "balanceAfter": 0,
+      "financeEntryIds": [
+        "FEN-dbbca2f9-e8b4-4008-ba81-5da32907fc4d"
+      ],
+      "financePaymentIds": [
+        "FPY-da184bbd-2692-4698-940a-93ff9e57ed43"
+      ],
+      "financeMovementIds": [
+        "FMV-5ba07f5a-f0f3-4a5b-8016-1bcc6054a924"
+      ],
+      "cashReconciledAt": "2026-08-27T23:34:15.357Z",
+      "cashReconciledBy": "Matheus Fernando"
+    },
+    {
+      "id": "PYP-e011da37-14bd-4e4d-aee0-e7fb217adee1",
+      "requestKey": "6223ad00-a663-460a-bdeb-032a452540e5-7",
+      "paymentNumber": "PG-000042",
+      "payableId": "PAY-e2e4c759-dc7b-46f0-8c5d-0b4ef2ed5dfc",
+      "installmentId": "PIN-9e32cc7f-a5f2-43fe-a8a4-d82fa125d61d",
+      "paidAt": "2026-08-24",
+      "value": 66.11,
+      "principalValue": 66.11,
+      "interest": 0,
+      "fine": 0,
+      "discount": 0,
+      "payments": [
+        {
+          "paymentMethodId": "PAY-78ea78b1-83ad-4abb-849e-2d9b68abd163",
+          "paymentMethodName": "Debitado da conta",
+          "commerceMethodId": "Debitado da conta",
+          "debitCash": true,
+          "value": 66.11
+        }
+      ],
+      "notes": "",
+      "cashboxId": "caixa-principal",
+      "cashMovementIds": [
+        "CXM-1787596211834-J17GI"
+      ],
+      "createdAt": "2026-08-24T18:30:11.837Z",
+      "createdBy": "painel",
+      "balanceBefore": 66.11,
+      "balanceAfter": 0,
+      "financeEntryIds": [
+        "FEN-a33cbe8f-a14d-4763-8da4-adc93278d5cc"
+      ],
+      "financePaymentIds": [
+        "FPY-2b0b1083-2b42-4e5d-9b11-bba5f648b46b"
+      ],
+      "financeMovementIds": [
+        "FMV-eef72a2e-f66c-4715-964f-a0da46c6b867"
+      ],
+      "cashReconciledAt": "2026-08-27T23:34:15.363Z",
+      "cashReconciledBy": "Matheus Fernando"
+    },
+    {
+      "id": "PYP-82f94d5f-cbe2-4eda-8704-ec02fe0ee32f",
+      "requestKey": "6223ad00-a663-460a-bdeb-032a452540e5-6",
+      "paymentNumber": "PG-000041",
+      "payableId": "PAY-ab4d67ff-8bd6-4606-a6fd-7ff01bab1059",
+      "installmentId": "PIN-76c71ef8-bbfd-4873-824d-fe0fb9098a30",
+      "paidAt": "2026-08-24",
+      "value": 332.77,
+      "principalValue": 332.77,
+      "interest": 0,
+      "fine": 0,
+      "discount": 0,
+      "payments": [
+        {
+          "paymentMethodId": "PAY-78ea78b1-83ad-4abb-849e-2d9b68abd163",
+          "paymentMethodName": "Debitado da conta",
+          "commerceMethodId": "Debitado da conta",
+          "debitCash": true,
+          "value": 332.77
+        }
+      ],
+      "notes": "",
+      "cashboxId": "caixa-principal",
+      "cashMovementIds": [
+        "CXM-1787596211794-XOXP4"
+      ],
+      "createdAt": "2026-08-24T18:30:11.798Z",
+      "createdBy": "painel",
+      "balanceBefore": 332.77,
+      "balanceAfter": 0,
+      "financeEntryIds": [
+        "FEN-8888193f-a488-4b27-8dfd-78d53e6d99ea"
+      ],
+      "financePaymentIds": [
+        "FPY-765b481b-d000-4238-9bf1-57877b080f37"
+      ],
+      "financeMovementIds": [
+        "FMV-88c8fd2c-3e5a-4743-bf38-5e5b36d0e3c2"
+      ],
+      "cashReconciledAt": "2026-08-27T23:34:15.368Z",
+      "cashReconciledBy": "Matheus Fernando"
+    },
+    {
+      "id": "PYP-b4205843-a240-4153-84a4-677d4897db4c",
+      "requestKey": "6223ad00-a663-460a-bdeb-032a452540e5-5",
+      "paymentNumber": "PG-000040",
+      "payableId": "PAY-c08614cc-8754-4f8c-9398-f3e39e0652e1",
+      "installmentId": "PIN-bfa26061-4fd8-4bc4-b2e0-61de0cd8927f",
+      "paidAt": "2026-08-24",
+      "value": 62.9,
+      "principalValue": 62.9,
+      "interest": 0,
+      "fine": 0,
+      "discount": 0,
+      "payments": [
+        {
+          "paymentMethodId": "PAY-78ea78b1-83ad-4abb-849e-2d9b68abd163",
+          "paymentMethodName": "Debitado da conta",
+          "commerceMethodId": "Debitado da conta",
+          "debitCash": true,
+          "value": 62.9
+        }
+      ],
+      "notes": "",
+      "cashboxId": "caixa-principal",
+      "cashMovementIds": [
+        "CXM-1787596211754-YPR59"
+      ],
+      "createdAt": "2026-08-24T18:30:11.757Z",
+      "createdBy": "painel",
+      "balanceBefore": 62.9,
+      "balanceAfter": 0,
+      "financeEntryIds": [
+        "FEN-53c1e76f-83c8-4a0e-923b-b0d843a4c5f9"
+      ],
+      "financePaymentIds": [
+        "FPY-e6b3a905-8cd9-4137-b73f-6e99c1083b5a"
+      ],
+      "financeMovementIds": [
+        "FMV-9a5d2efc-d761-478c-864b-50e5b26e127d"
+      ],
+      "cashReconciledAt": "2026-08-27T23:34:15.373Z",
+      "cashReconciledBy": "Matheus Fernando"
+    },
+    {
+      "id": "PYP-c07b932b-6138-4a97-bcd0-a70c9af76e99",
+      "requestKey": "6223ad00-a663-460a-bdeb-032a452540e5-4",
+      "paymentNumber": "PG-000039",
+      "payableId": "PAY-1b206d1e-1625-4433-a1bb-2c2fadcdca0d",
+      "installmentId": "PIN-8e2d3300-3a3f-4dd2-a2a6-638c5eccd5e1",
+      "paidAt": "2026-08-24",
+      "value": 63.2,
+      "principalValue": 63.2,
+      "interest": 0,
+      "fine": 0,
+      "discount": 0,
+      "payments": [
+        {
+          "paymentMethodId": "PAY-78ea78b1-83ad-4abb-849e-2d9b68abd163",
+          "paymentMethodName": "Debitado da conta",
+          "commerceMethodId": "Debitado da conta",
+          "debitCash": true,
+          "value": 63.2
+        }
+      ],
+      "notes": "",
+      "cashboxId": "caixa-principal",
+      "cashMovementIds": [
+        "CXM-1787596211712-O7QIT"
+      ],
+      "createdAt": "2026-08-24T18:30:11.716Z",
+      "createdBy": "painel",
+      "balanceBefore": 63.2,
+      "balanceAfter": 0,
+      "financeEntryIds": [
+        "FEN-0b5a805a-42ef-4b35-b929-f8252104779c"
+      ],
+      "financePaymentIds": [
+        "FPY-9c958851-2663-4f98-8a0c-71571f503500"
+      ],
+      "financeMovementIds": [
+        "FMV-6359b926-85a4-4b1e-9f68-5fa7fb58fe13"
+      ],
+      "cashReconciledAt": "2026-08-27T23:34:15.378Z",
+      "cashReconciledBy": "Matheus Fernando"
+    },
+    {
+      "id": "PYP-a901547e-2589-43c5-a301-373f1a1a3947",
+      "requestKey": "6223ad00-a663-460a-bdeb-032a452540e5-3",
+      "paymentNumber": "PG-000038",
+      "payableId": "PAY-dc0abed3-b66d-48fd-9764-9e280b1ffcb0",
+      "installmentId": "PIN-6c0d8d37-5c02-459a-9773-64b36025aa9d",
+      "paidAt": "2026-08-24",
+      "value": 66.43,
+      "principalValue": 66.43,
+      "interest": 0,
+      "fine": 0,
+      "discount": 0,
+      "payments": [
+        {
+          "paymentMethodId": "PAY-78ea78b1-83ad-4abb-849e-2d9b68abd163",
+          "paymentMethodName": "Debitado da conta",
+          "commerceMethodId": "Debitado da conta",
+          "debitCash": true,
+          "value": 66.43
+        }
+      ],
+      "notes": "",
+      "cashboxId": "caixa-principal",
+      "cashMovementIds": [
+        "CXM-1787596211672-06WJI"
+      ],
+      "createdAt": "2026-08-24T18:30:11.675Z",
+      "createdBy": "painel",
+      "balanceBefore": 66.43,
+      "balanceAfter": 0,
+      "financeEntryIds": [
+        "FEN-489870ab-a716-4cbe-85c8-8dc24ddb8296"
+      ],
+      "financePaymentIds": [
+        "FPY-879633fd-6fff-45f8-b431-89d996880097"
+      ],
+      "financeMovementIds": [
+        "FMV-8b5c038b-b7d2-474e-a5ec-b486163650ad"
+      ],
+      "cashReconciledAt": "2026-08-27T23:34:15.384Z",
+      "cashReconciledBy": "Matheus Fernando"
+    },
+    {
+      "id": "PYP-059776d8-f6a3-403a-b6dc-1afc144bbf55",
+      "requestKey": "6223ad00-a663-460a-bdeb-032a452540e5-2",
+      "paymentNumber": "PG-000037",
+      "payableId": "PAY-150a37cf-4799-4d1b-b19e-e93626f937db",
+      "installmentId": "PIN-b5b7a49e-358f-4638-a40e-72e7881c9d44",
+      "paidAt": "2026-08-24",
+      "value": 68.7,
+      "principalValue": 68.7,
+      "interest": 0,
+      "fine": 0,
+      "discount": 0,
+      "payments": [
+        {
+          "paymentMethodId": "PAY-78ea78b1-83ad-4abb-849e-2d9b68abd163",
+          "paymentMethodName": "Debitado da conta",
+          "commerceMethodId": "Debitado da conta",
+          "debitCash": true,
+          "value": 68.7
+        }
+      ],
+      "notes": "",
+      "cashboxId": "caixa-principal",
+      "cashMovementIds": [
+        "CXM-1787596211631-AT947"
+      ],
+      "createdAt": "2026-08-24T18:30:11.634Z",
+      "createdBy": "painel",
+      "balanceBefore": 68.7,
+      "balanceAfter": 0,
+      "financeEntryIds": [
+        "FEN-7f3e209a-4804-4cba-b758-385ad111e065"
+      ],
+      "financePaymentIds": [
+        "FPY-d8f25ac0-4391-412e-ac3f-ef6f7cad0bad"
+      ],
+      "financeMovementIds": [
+        "FMV-9bbdf0f8-7aef-4131-9d57-da349a1a671c"
+      ],
+      "cashReconciledAt": "2026-08-27T23:34:15.390Z",
+      "cashReconciledBy": "Matheus Fernando"
+    },
+    {
+      "id": "PYP-78cc42f4-5729-4ad2-95e2-f0bcc19a0758",
+      "requestKey": "6223ad00-a663-460a-bdeb-032a452540e5-1",
+      "paymentNumber": "PG-000036",
+      "payableId": "PAY-c1abbba6-4baa-4ec2-9f3e-bd9d2aa069b4",
+      "installmentId": "PIN-9c7f84aa-ce52-488d-96f4-3b7a69cc8be1",
+      "paidAt": "2026-08-24",
+      "value": 39.47,
+      "principalValue": 39.47,
+      "interest": 0,
+      "fine": 0,
+      "discount": 0,
+      "payments": [
+        {
+          "paymentMethodId": "PAY-78ea78b1-83ad-4abb-849e-2d9b68abd163",
+          "paymentMethodName": "Debitado da conta",
+          "commerceMethodId": "Debitado da conta",
+          "debitCash": true,
+          "value": 39.47
+        }
+      ],
+      "notes": "",
+      "cashboxId": "caixa-principal",
+      "cashMovementIds": [
+        "CXM-1787596211590-CKWXR"
+      ],
+      "createdAt": "2026-08-24T18:30:11.593Z",
+      "createdBy": "painel",
+      "balanceBefore": 39.47,
+      "balanceAfter": 0,
+      "financeEntryIds": [
+        "FEN-78f587d3-5c01-49b6-99cd-f51c2f0e981f"
+      ],
+      "financePaymentIds": [
+        "FPY-fe260b51-3f95-4cc1-a99b-75c1065a1a87"
+      ],
+      "financeMovementIds": [
+        "FMV-e55d9c51-2c60-459a-a599-498abb455d16"
+      ],
+      "cashReconciledAt": "2026-08-27T23:34:15.396Z",
+      "cashReconciledBy": "Matheus Fernando"
+    },
+    {
+      "id": "PYP-d55aeaeb-3f2a-4dc9-b259-209264ec94b1",
+      "requestKey": "6223ad00-a663-460a-bdeb-032a452540e5-0",
+      "paymentNumber": "PG-000035",
+      "payableId": "PAY-17a36a1a-a96c-461d-b3ab-7ea70e3605d5",
+      "installmentId": "PIN-5fe3fd1d-f61d-42f3-9ad1-eb251424e571",
+      "paidAt": "2026-08-24",
+      "value": 1914.99,
+      "principalValue": 1914.99,
+      "interest": 0,
+      "fine": 0,
+      "discount": 0,
+      "payments": [
+        {
+          "paymentMethodId": "PAY-78ea78b1-83ad-4abb-849e-2d9b68abd163",
+          "paymentMethodName": "Debitado da conta",
+          "commerceMethodId": "Debitado da conta",
+          "debitCash": true,
+          "value": 1914.99
+        }
+      ],
+      "notes": "",
+      "cashboxId": "caixa-principal",
+      "cashMovementIds": [
+        "CXM-1787596211542-8FSG7"
+      ],
+      "createdAt": "2026-08-24T18:30:11.546Z",
+      "createdBy": "painel",
+      "balanceBefore": 1914.99,
+      "balanceAfter": 0,
+      "financeEntryIds": [
+        "FEN-1f9b97e5-e24f-4979-9134-c3c1fe9b31a2"
+      ],
+      "financePaymentIds": [
+        "FPY-caf1f68d-27f1-4c87-a38a-b1a7b0ce0385"
+      ],
+      "financeMovementIds": [
+        "FMV-33facdba-e547-4e84-87dc-d1a934fdecc8"
+      ],
+      "cashReconciledAt": "2026-08-27T23:34:15.401Z",
+      "cashReconciledBy": "Matheus Fernando"
+    },
+    {
+      "id": "PYP-64b3ab71-e6d7-4946-a428-50612c8c4792",
+      "requestKey": "manual-payable-PAY-574cda04-3537-4f92-bee0-61e9c202ecb3-PIN-d18aec7a-da86-43e8-9ce1-2de9d6d21adf",
+      "paymentNumber": "PG-000034",
+      "payableId": "PAY-574cda04-3537-4f92-bee0-61e9c202ecb3",
+      "installmentId": "PIN-d18aec7a-da86-43e8-9ce1-2de9d6d21adf",
+      "paidAt": "2026-08-24",
+      "value": 50,
+      "principalValue": 50,
+      "interest": 0,
+      "fine": 0,
+      "discount": 0,
+      "payments": [
+        {
+          "paymentMethodId": "PM-DINHEIRO",
+          "paymentMethodName": "Dinheiro",
+          "commerceMethodId": "PM-DINHEIRO",
+          "debitCash": true,
+          "value": 50
+        }
+      ],
+      "notes": "Pagamento automático conforme parâmetros de Compras / Contas a Pagar da forma de pagamento.",
+      "cashboxId": "caixa-principal",
+      "cashMovementIds": [
+        "CXM-1787594395915-XK2TQ"
+      ],
+      "createdAt": "2026-08-24T17:59:55.920Z",
+      "createdBy": "painel",
+      "balanceBefore": 50,
+      "balanceAfter": 0,
+      "financeEntryIds": [
+        "FEN-1ec462c2-1853-45fd-b294-14fc7636b88a"
+      ],
+      "financePaymentIds": [
+        "FPY-af8354e0-1ffd-4e5e-adc6-f1702983b8a7"
+      ],
+      "financeMovementIds": [
+        "FMV-d521f444-d4bd-46e8-8314-a12138e42699"
+      ],
+      "cashReconciledAt": "2026-08-27T23:34:15.407Z",
+      "cashReconciledBy": "Matheus Fernando"
+    },
+    {
       "id": "PYP-6168015b-e06f-4a10-9c9c-2803fa930163",
       "requestKey": "manual-payable-PAY-b0618cdb-24da-4471-a7b0-eb5c0057fcb4-PIN-e8743ab2-2e2b-438b-ac76-f7e2060a6867",
       "paymentNumber": "PG-000033",
@@ -39,7 +1123,9 @@
       ],
       "financeMovementIds": [
         "FMV-eac3ccf5-fc6a-49df-8774-a0b4add765e0"
-      ]
+      ],
+      "cashReconciledAt": "2026-08-27T23:34:15.412Z",
+      "cashReconciledBy": "Matheus Fernando"
     },
     {
       "id": "PYP-bf189c5b-c970-43c4-89db-d39f5900e6b3",
@@ -80,8 +1166,8 @@
       "financeMovementIds": [
         "FMV-66165d57-fa7c-4ebf-a0ff-0392009c3fea"
       ],
-      "cashReconciledAt": "2026-08-23T13:58:06.778Z",
-      "cashReconciledBy": "painel"
+      "cashReconciledAt": "2026-08-27T23:34:15.417Z",
+      "cashReconciledBy": "Matheus Fernando"
     },
     {
       "id": "PYP-2ea01006-0ced-4bb0-b19b-609765697976",
@@ -122,8 +1208,8 @@
       "financeMovementIds": [
         "FMV-6d5726f0-ec8f-4357-9c34-4e626cf573ef"
       ],
-      "cashReconciledAt": "2026-08-23T13:58:06.790Z",
-      "cashReconciledBy": "painel"
+      "cashReconciledAt": "2026-08-27T23:34:15.422Z",
+      "cashReconciledBy": "Matheus Fernando"
     },
     {
       "id": "PYP-a11ac10d-18e3-4854-a0db-92259ec5856b",
@@ -164,8 +1250,8 @@
       "financeMovementIds": [
         "FMV-305ada82-5a2e-4473-b4d5-9ec6f11d37fa"
       ],
-      "cashReconciledAt": "2026-08-23T13:58:06.795Z",
-      "cashReconciledBy": "painel"
+      "cashReconciledAt": "2026-08-27T23:34:15.428Z",
+      "cashReconciledBy": "Matheus Fernando"
     },
     {
       "id": "PYP-e9381ebc-c804-4645-9f9c-187967fde4aa",
@@ -206,8 +1292,8 @@
       "financeMovementIds": [
         "FMV-7c024022-678d-4893-8d76-45a2b18fb3e0"
       ],
-      "cashReconciledAt": "2026-08-23T13:58:06.800Z",
-      "cashReconciledBy": "painel"
+      "cashReconciledAt": "2026-08-27T23:34:15.436Z",
+      "cashReconciledBy": "Matheus Fernando"
     },
     {
       "id": "PYP-1703deeb-1bab-4519-8a80-2cf43ae26eab",
@@ -248,8 +1334,8 @@
       "financeMovementIds": [
         "FMV-3c48b6a6-e14d-43e0-b5bb-ee4e1cc6e9bc"
       ],
-      "cashReconciledAt": "2026-08-23T13:58:06.805Z",
-      "cashReconciledBy": "painel"
+      "cashReconciledAt": "2026-08-27T23:34:15.442Z",
+      "cashReconciledBy": "Matheus Fernando"
     },
     {
       "id": "PYP-3e1200ad-6740-4bac-ba03-eb6e1329ef68",
@@ -290,8 +1376,8 @@
       "financeMovementIds": [
         "FMV-afc22362-cb15-4159-a798-182d08389fd8"
       ],
-      "cashReconciledAt": "2026-08-23T13:58:06.810Z",
-      "cashReconciledBy": "painel"
+      "cashReconciledAt": "2026-08-27T23:34:15.447Z",
+      "cashReconciledBy": "Matheus Fernando"
     },
     {
       "id": "PYP-be343d3c-b670-4899-b217-2b72e747f07e",
@@ -332,8 +1418,8 @@
       "financeMovementIds": [
         "FMV-e17acbf5-0615-46b5-ad0b-db95bc0043f7"
       ],
-      "cashReconciledAt": "2026-08-23T13:58:06.815Z",
-      "cashReconciledBy": "painel"
+      "cashReconciledAt": "2026-08-27T23:34:15.453Z",
+      "cashReconciledBy": "Matheus Fernando"
     },
     {
       "id": "PYP-2ef95556-9893-4c8a-a590-a7d53c8d099f",
@@ -374,8 +1460,8 @@
       "financeMovementIds": [
         "FMV-01b38015-db81-492f-a7b7-9efecce27fe7"
       ],
-      "cashReconciledAt": "2026-08-23T13:58:06.820Z",
-      "cashReconciledBy": "painel"
+      "cashReconciledAt": "2026-08-27T23:34:15.458Z",
+      "cashReconciledBy": "Matheus Fernando"
     },
     {
       "id": "PYP-166ef0c9-4cc2-46af-a379-7b2e091b6506",
@@ -416,8 +1502,8 @@
       "financeMovementIds": [
         "FMV-034de0df-0f49-427b-8411-a01bcd1a759c"
       ],
-      "cashReconciledAt": "2026-08-23T13:58:06.825Z",
-      "cashReconciledBy": "painel"
+      "cashReconciledAt": "2026-08-27T23:34:15.463Z",
+      "cashReconciledBy": "Matheus Fernando"
     },
     {
       "id": "PYP-07af53be-4dd0-49ad-ae62-0409f17a4329",
@@ -458,8 +1544,8 @@
       "financeMovementIds": [
         "FMV-1d9e9c85-7b76-45ab-bab5-20279ffbfb43"
       ],
-      "cashReconciledAt": "2026-08-23T13:58:06.829Z",
-      "cashReconciledBy": "painel"
+      "cashReconciledAt": "2026-08-27T23:34:15.468Z",
+      "cashReconciledBy": "Matheus Fernando"
     },
     {
       "id": "PYP-5f7138d2-bf98-4a53-bfb4-9f544239730f",
@@ -500,8 +1586,8 @@
       "financeMovementIds": [
         "FMV-5216b165-16d1-414b-9a60-65da7cfdda92"
       ],
-      "cashReconciledAt": "2026-08-23T13:58:06.834Z",
-      "cashReconciledBy": "painel"
+      "cashReconciledAt": "2026-08-27T23:34:15.474Z",
+      "cashReconciledBy": "Matheus Fernando"
     },
     {
       "id": "PYP-de52b328-ab66-45c1-8223-2d33112241d1",
@@ -542,8 +1628,8 @@
       "financeMovementIds": [
         "FMV-f0b1beec-d461-4b2d-ae7f-2cacf42eefac"
       ],
-      "cashReconciledAt": "2026-08-23T13:58:06.838Z",
-      "cashReconciledBy": "painel"
+      "cashReconciledAt": "2026-08-27T23:34:15.479Z",
+      "cashReconciledBy": "Matheus Fernando"
     },
     {
       "id": "PYP-6f7f5362-cfa0-4ccc-b36c-00e16bb275ff",
@@ -584,8 +1670,8 @@
       "financeMovementIds": [
         "FMV-65eb1f04-f5c1-4807-a89a-fbb12ea0e4ff"
       ],
-      "cashReconciledAt": "2026-08-23T13:58:06.843Z",
-      "cashReconciledBy": "painel"
+      "cashReconciledAt": "2026-08-27T23:34:15.485Z",
+      "cashReconciledBy": "Matheus Fernando"
     },
     {
       "id": "PYP-eed98ece-5b19-410f-b072-1cd2de49b45f",
@@ -626,8 +1712,8 @@
       "financeMovementIds": [
         "FMV-bb2d3ca8-e8d6-4453-a3b5-9149f20e0b30"
       ],
-      "cashReconciledAt": "2026-08-23T13:58:06.847Z",
-      "cashReconciledBy": "painel"
+      "cashReconciledAt": "2026-08-27T23:34:15.490Z",
+      "cashReconciledBy": "Matheus Fernando"
     },
     {
       "id": "PYP-59cbd3d7-b0d5-41a8-b86a-278b847e9746",
@@ -668,8 +1754,8 @@
       "financeMovementIds": [
         "FMV-cc70743a-ff43-4dc4-9fdf-5590a8e235f3"
       ],
-      "cashReconciledAt": "2026-08-23T13:58:06.852Z",
-      "cashReconciledBy": "painel"
+      "cashReconciledAt": "2026-08-27T23:34:15.496Z",
+      "cashReconciledBy": "Matheus Fernando"
     },
     {
       "id": "PYP-87c613ce-ea33-4e85-9717-5f8b6008422f",
@@ -710,8 +1796,8 @@
       "financeMovementIds": [
         "FMV-7a94afc1-7fd2-4d87-a48b-103ec7387b1c"
       ],
-      "cashReconciledAt": "2026-08-23T13:58:06.856Z",
-      "cashReconciledBy": "painel"
+      "cashReconciledAt": "2026-08-27T23:34:15.502Z",
+      "cashReconciledBy": "Matheus Fernando"
     },
     {
       "id": "PYP-cadbe8e8-ee8f-4e98-9f63-2dafd0730345",
@@ -752,8 +1838,8 @@
       "financeMovementIds": [
         "FMV-3469f359-7c57-428d-8fcd-1f4ae51fe41e"
       ],
-      "cashReconciledAt": "2026-08-23T13:58:06.861Z",
-      "cashReconciledBy": "painel"
+      "cashReconciledAt": "2026-08-27T23:34:15.508Z",
+      "cashReconciledBy": "Matheus Fernando"
     },
     {
       "id": "PYP-b116e764-45a8-4ed5-8640-e0c779397f1c",
@@ -794,8 +1880,8 @@
       "financeMovementIds": [
         "FMV-875b7b7d-054b-4cfd-a4f5-d96c1340456f"
       ],
-      "cashReconciledAt": "2026-08-23T13:58:06.865Z",
-      "cashReconciledBy": "painel"
+      "cashReconciledAt": "2026-08-27T23:34:15.513Z",
+      "cashReconciledBy": "Matheus Fernando"
     },
     {
       "id": "PYP-4410f997-7231-41c8-a523-de75bf3c191e",
@@ -836,8 +1922,8 @@
       "financeMovementIds": [
         "FMV-674af2e2-b673-4d7e-bfa7-d3264d21428f"
       ],
-      "cashReconciledAt": "2026-08-23T13:58:06.870Z",
-      "cashReconciledBy": "painel"
+      "cashReconciledAt": "2026-08-27T23:34:15.519Z",
+      "cashReconciledBy": "Matheus Fernando"
     },
     {
       "id": "PYP-b1ac2c29-8ee4-4b36-ac2c-85c507c8c728",
@@ -884,8 +1970,8 @@
       "cashReversalMovementIds": [
         "CXM-1786568257058-W8EE8"
       ],
-      "cashReconciledAt": "2026-08-23T13:58:06.875Z",
-      "cashReconciledBy": "painel"
+      "cashReconciledAt": "2026-08-27T23:34:15.525Z",
+      "cashReconciledBy": "Matheus Fernando"
     },
     {
       "id": "PYP-f7ecdda0-6114-4369-b57b-fdf09e4d6c41",
@@ -932,8 +2018,8 @@
       "cashReversalMovementIds": [
         "CXM-1786568253280-D7SVV"
       ],
-      "cashReconciledAt": "2026-08-23T13:58:06.881Z",
-      "cashReconciledBy": "painel"
+      "cashReconciledAt": "2026-08-27T23:34:15.530Z",
+      "cashReconciledBy": "Matheus Fernando"
     },
     {
       "id": "PYP-cc858e03-6934-404d-81f7-e7d96ee22d90",
@@ -980,8 +2066,8 @@
       "cashReversalMovementIds": [
         "CXM-1786568248760-PJSLQ"
       ],
-      "cashReconciledAt": "2026-08-23T13:58:06.885Z",
-      "cashReconciledBy": "painel"
+      "cashReconciledAt": "2026-08-27T23:34:15.535Z",
+      "cashReconciledBy": "Matheus Fernando"
     },
     {
       "id": "PYP-4e5d4bcf-d281-4713-9384-05afd0172232",
@@ -1021,8 +2107,8 @@
       "financeMovementIds": [
         "FMV-7fee9b06-59c7-4889-93dd-c0ca21a5c19b"
       ],
-      "cashReconciledAt": "2026-08-23T13:58:06.889Z",
-      "cashReconciledBy": "painel"
+      "cashReconciledAt": "2026-08-27T23:34:15.541Z",
+      "cashReconciledBy": "Matheus Fernando"
     },
     {
       "id": "PYP-1565ac34-209e-4323-9cbb-a1870eb57425",
@@ -1062,8 +2148,8 @@
       "financeMovementIds": [
         "FMV-76892bfb-490d-4ee3-99dd-4b2c84728417"
       ],
-      "cashReconciledAt": "2026-08-23T13:58:06.894Z",
-      "cashReconciledBy": "painel"
+      "cashReconciledAt": "2026-08-27T23:34:15.546Z",
+      "cashReconciledBy": "Matheus Fernando"
     },
     {
       "id": "PYP-454069d1-1486-4b1b-a3fd-1c3bbcd23077",
@@ -1103,8 +2189,8 @@
       "financeMovementIds": [
         "FMV-f4e27e5d-373b-4b4b-b867-1f5cf69bfe01"
       ],
-      "cashReconciledAt": "2026-08-23T13:58:06.899Z",
-      "cashReconciledBy": "painel"
+      "cashReconciledAt": "2026-08-27T23:34:15.553Z",
+      "cashReconciledBy": "Matheus Fernando"
     },
     {
       "id": "PYP-774be9a3-0aa7-4942-8fd3-8617c8bbd37e",
@@ -1144,8 +2230,8 @@
       "financeMovementIds": [
         "FMV-059bf91d-100d-4b56-b6e9-86561ab023d0"
       ],
-      "cashReconciledAt": "2026-08-23T13:58:06.904Z",
-      "cashReconciledBy": "painel"
+      "cashReconciledAt": "2026-08-27T23:34:15.559Z",
+      "cashReconciledBy": "Matheus Fernando"
     },
     {
       "id": "PYP-ead5ea56-81a2-4af6-84ef-0ae49e9bb5d3",
@@ -1185,8 +2271,8 @@
       "financeMovementIds": [
         "FMV-3c9b41e6-2db8-4a80-8666-9eb369439ed6"
       ],
-      "cashReconciledAt": "2026-08-23T13:58:06.909Z",
-      "cashReconciledBy": "painel"
+      "cashReconciledAt": "2026-08-27T23:34:15.565Z",
+      "cashReconciledBy": "Matheus Fernando"
     },
     {
       "id": "PYP-b6c55d0f-d27d-4aac-b919-4419f9d0618f",
@@ -1226,8 +2312,8 @@
       "financeMovementIds": [
         "FMV-7dc60554-84fa-46dc-870e-43c70604a0ed"
       ],
-      "cashReconciledAt": "2026-08-23T13:58:06.913Z",
-      "cashReconciledBy": "painel"
+      "cashReconciledAt": "2026-08-27T23:34:15.572Z",
+      "cashReconciledBy": "Matheus Fernando"
     },
     {
       "id": "PYP-a442b144-78a1-4db7-8831-e5863d82a0f9",
@@ -1267,8 +2353,8 @@
       "financeMovementIds": [
         "FMV-ef9c4319-23ef-4f62-96b7-2fa5d05a3102"
       ],
-      "cashReconciledAt": "2026-08-23T13:58:06.918Z",
-      "cashReconciledBy": "painel"
+      "cashReconciledAt": "2026-08-27T23:34:15.578Z",
+      "cashReconciledBy": "Matheus Fernando"
     },
     {
       "id": "PYP-89d9e825-c7a6-40c8-90c2-6ecdb1f095ab",
@@ -1308,8 +2394,8 @@
       "financeMovementIds": [
         "FMV-2007b0e4-ed02-44f9-b25b-49190cea2cdd"
       ],
-      "cashReconciledAt": "2026-08-23T13:58:06.923Z",
-      "cashReconciledBy": "painel"
+      "cashReconciledAt": "2026-08-27T23:34:15.583Z",
+      "cashReconciledBy": "Matheus Fernando"
     },
     {
       "id": "PYP-895755ef-111b-4f55-bc91-4c8e57a171e3",
@@ -1349,8 +2435,8 @@
       "financeMovementIds": [
         "FMV-f6f60d98-4d63-4458-9db8-00905e26227c"
       ],
-      "cashReconciledAt": "2026-08-23T13:58:06.932Z",
-      "cashReconciledBy": "painel"
+      "cashReconciledAt": "2026-08-27T23:34:15.590Z",
+      "cashReconciledBy": "Matheus Fernando"
     },
     {
       "id": "PYP-6789cd5e-7e58-4745-a274-e1fb1f87691e",
@@ -1390,8 +2476,8 @@
       "financeMovementIds": [
         "FMV-81ffdafb-add7-4eeb-92b3-b522b59a8525"
       ],
-      "cashReconciledAt": "2026-08-23T13:58:06.936Z",
-      "cashReconciledBy": "painel"
+      "cashReconciledAt": "2026-08-27T23:34:15.595Z",
+      "cashReconciledBy": "Matheus Fernando"
     }
   ]
 }

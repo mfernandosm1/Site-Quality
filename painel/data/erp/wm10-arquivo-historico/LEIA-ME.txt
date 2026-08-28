@@ -1,0 +1,21 @@
+ARQUIVO HISTÓRICO WM10 — SOMENTE CONSULTA
+
+Esta pasta é independente do banco operacional do Quality ERP.
+Nenhum arquivo daqui movimenta estoque, caixa, financeiro, comissão ou cadastros atuais.
+
+Pastas:
+01_CLIENTES
+02_CLASSIFICACOES_CLIENTES
+03_LOJAS
+04_USUARIOS_VENDEDORES
+05_CATEGORIAS_PRODUTOS
+06_PRODUTOS
+07_FOTOS_PRODUTOS
+08_SERVICOS
+09_MOVIMENTACOES (todos os tipos e estados)
+10_NOTAS_FISCAIS
+11_DADOS_JA_IMPORTADOS_LOCALMENTE
+
+Cada consulta salva uma cópia .json tratada e uma cópia .raw com os bytes recebidos da WM10.
+O token da API não é gravado neste arquivo histórico.
+Criado em: 2026-08-27T14:13:03.310Z

@@ -1,6 +1,6 @@
 {
   "version": "0.12.0",
-  "nextCode": 2987,
+  "nextCode": 2992,
   "items": [
     {
       "id": "CLI-1785107913792-ZXBKD",
@@ -1676,9 +1676,9 @@
         "serviceOrderIds": []
       },
       "createdAt": "2026-08-02T18:58:38.108Z",
-      "updatedAt": "2026-08-02T18:58:38.112Z",
+      "updatedAt": "2026-08-26T16:43:50.584Z",
       "createdBy": "painel",
-      "updatedBy": "painel",
+      "updatedBy": "wm10-legacy-rollback",
       "integrations": {
         "wm10": {
           "customerCode": 25,
@@ -1702,6 +1702,10 @@
           "importedAt": "2026-08-02T18:58:38.112Z",
           "importedBy": "painel"
         }
+      },
+      "migration": {
+        "wm10LegacyEmailRollbackAt": "2026-08-26T16:43:50.584Z",
+        "wm10LegacyEmailRollbackValue": "adilsonbender.sm1@gmail.com"
       }
     },
     {
@@ -1746,9 +1750,9 @@
         "serviceOrderIds": []
       },
       "createdAt": "2026-08-02T18:58:38.120Z",
-      "updatedAt": "2026-08-02T18:58:38.124Z",
+      "updatedAt": "2026-08-26T16:43:50.584Z",
       "createdBy": "painel",
-      "updatedBy": "painel",
+      "updatedBy": "wm10-legacy-rollback",
       "integrations": {
         "wm10": {
           "customerCode": 26,
@@ -1772,6 +1776,10 @@
           "importedAt": "2026-08-02T18:58:38.124Z",
           "importedBy": "painel"
         }
+      },
+      "migration": {
+        "wm10LegacyEmailRollbackAt": "2026-08-26T16:43:50.584Z",
+        "wm10LegacyEmailRollbackValue": "volneivargas123@gmail.com"
       }
     },
     {
@@ -5666,9 +5674,9 @@
         "serviceOrderIds": []
       },
       "createdAt": "2026-08-02T18:58:38.899Z",
-      "updatedAt": "2026-08-02T18:58:38.905Z",
+      "updatedAt": "2026-08-26T16:43:50.584Z",
       "createdBy": "painel",
-      "updatedBy": "painel",
+      "updatedBy": "wm10-legacy-rollback",
       "integrations": {
         "wm10": {
           "customerCode": 82,
@@ -5692,6 +5700,10 @@
           "importedAt": "2026-08-02T18:58:38.905Z",
           "importedBy": "painel"
         }
+      },
+      "migration": {
+        "wm10LegacyEmailRollbackAt": "2026-08-26T16:43:50.584Z",
+        "wm10LegacyEmailRollbackValue": "danielmartins041288@gmail.com"
       }
     },
     {
@@ -5736,9 +5748,9 @@
         "serviceOrderIds": []
       },
       "createdAt": "2026-08-02T18:58:38.916Z",
-      "updatedAt": "2026-08-02T18:58:38.922Z",
+      "updatedAt": "2026-08-26T16:43:50.584Z",
       "createdBy": "painel",
-      "updatedBy": "painel",
+      "updatedBy": "wm10-legacy-rollback",
       "integrations": {
         "wm10": {
           "customerCode": 83,
@@ -5762,6 +5774,10 @@
           "importedAt": "2026-08-02T18:58:38.922Z",
           "importedBy": "painel"
         }
+      },
+      "migration": {
+        "wm10LegacyEmailRollbackAt": "2026-08-26T16:43:50.584Z",
+        "wm10LegacyEmailRollbackValue": "airtonformentini.sm1@gmail.com"
       }
     },
     {
@@ -8816,9 +8832,9 @@
         "serviceOrderIds": []
       },
       "createdAt": "2026-08-02T18:58:39.798Z",
-      "updatedAt": "2026-08-02T18:58:39.805Z",
+      "updatedAt": "2026-08-26T16:43:50.584Z",
       "createdBy": "painel",
-      "updatedBy": "painel",
+      "updatedBy": "wm10-legacy-rollback",
       "integrations": {
         "wm10": {
           "customerCode": 127,
@@ -8842,6 +8858,10 @@
           "importedAt": "2026-08-02T18:58:39.805Z",
           "importedBy": "painel"
         }
+      },
+      "migration": {
+        "wm10LegacyEmailRollbackAt": "2026-08-26T16:43:50.584Z",
+        "wm10LegacyEmailRollbackValue": "tiagocoradin44@gmail.com"
       }
     },
     {
@@ -9166,9 +9186,9 @@
         "serviceOrderIds": []
       },
       "createdAt": "2026-08-02T18:58:39.908Z",
-      "updatedAt": "2026-08-02T18:58:39.917Z",
+      "updatedAt": "2026-08-26T16:43:50.584Z",
       "createdBy": "painel",
-      "updatedBy": "painel",
+      "updatedBy": "wm10-legacy-rollback",
       "integrations": {
         "wm10": {
           "customerCode": 132,
@@ -9192,6 +9212,10 @@
           "importedAt": "2026-08-02T18:58:39.917Z",
           "importedBy": "painel"
         }
+      },
+      "migration": {
+        "wm10LegacyEmailRollbackAt": "2026-08-26T16:43:50.584Z",
+        "wm10LegacyEmailRollbackValue": "anabarden7188@gmail.com"
       }
     },
     {
@@ -11896,9 +11920,9 @@
         "serviceOrderIds": []
       },
       "createdAt": "2026-08-02T18:58:40.876Z",
-      "updatedAt": "2026-08-02T18:58:40.885Z",
+      "updatedAt": "2026-08-26T16:43:50.584Z",
       "createdBy": "painel",
-      "updatedBy": "painel",
+      "updatedBy": "wm10-legacy-rollback",
       "integrations": {
         "wm10": {
           "customerCode": 171,
@@ -11922,6 +11946,10 @@
           "importedAt": "2026-08-02T18:58:40.885Z",
           "importedBy": "painel"
         }
+      },
+      "migration": {
+        "wm10LegacyEmailRollbackAt": "2026-08-26T16:43:50.584Z",
+        "wm10LegacyEmailRollbackValue": "supercotribasaldanhamarinho@gmail.com"
       }
     },
     {
@@ -11966,9 +11994,9 @@
         "serviceOrderIds": []
       },
       "createdAt": "2026-08-02T18:58:40.902Z",
-      "updatedAt": "2026-08-02T18:58:40.911Z",
+      "updatedAt": "2026-08-26T16:43:50.584Z",
       "createdBy": "painel",
-      "updatedBy": "painel",
+      "updatedBy": "wm10-legacy-rollback",
       "integrations": {
         "wm10": {
           "customerCode": 172,
@@ -11992,6 +12020,10 @@
           "importedAt": "2026-08-02T18:58:40.911Z",
           "importedBy": "painel"
         }
+      },
+      "migration": {
+        "wm10LegacyEmailRollbackAt": "2026-08-26T16:43:50.584Z",
+        "wm10LegacyEmailRollbackValue": "maurodamiani.sm@gmail.com"
       }
     },
     {
@@ -12526,9 +12558,9 @@
         "serviceOrderIds": []
       },
       "createdAt": "2026-08-02T18:58:41.122Z",
-      "updatedAt": "2026-08-02T18:58:41.138Z",
+      "updatedAt": "2026-08-26T16:43:50.584Z",
       "createdBy": "painel",
-      "updatedBy": "painel",
+      "updatedBy": "wm10-legacy-rollback",
       "integrations": {
         "wm10": {
           "customerCode": 180,
@@ -12552,6 +12584,10 @@
           "importedAt": "2026-08-02T18:58:41.138Z",
           "importedBy": "painel"
         }
+      },
+      "migration": {
+        "wm10LegacyEmailRollbackAt": "2026-08-26T16:43:50.584Z",
+        "wm10LegacyEmailRollbackValue": "mariaepertile@gmail.com"
       }
     },
     {
@@ -12736,9 +12772,9 @@
         "serviceOrderIds": []
       },
       "createdAt": "2026-08-02T18:58:41.212Z",
-      "updatedAt": "2026-08-02T18:58:41.222Z",
+      "updatedAt": "2026-08-26T16:43:50.584Z",
       "createdBy": "painel",
-      "updatedBy": "painel",
+      "updatedBy": "wm10-legacy-rollback",
       "integrations": {
         "wm10": {
           "customerCode": 183,
@@ -12762,6 +12798,10 @@
           "importedAt": "2026-08-02T18:58:41.222Z",
           "importedBy": "painel"
         }
+      },
+      "migration": {
+        "wm10LegacyEmailRollbackAt": "2026-08-26T16:43:50.584Z",
+        "wm10LegacyEmailRollbackValue": "fabiobarilli.sm@hotmail.com"
       }
     },
     {
@@ -13296,9 +13336,9 @@
         "serviceOrderIds": []
       },
       "createdAt": "2026-08-02T18:58:41.443Z",
-      "updatedAt": "2026-08-02T18:58:41.452Z",
+      "updatedAt": "2026-08-26T16:43:50.584Z",
       "createdBy": "painel",
-      "updatedBy": "painel",
+      "updatedBy": "wm10-legacy-rollback",
       "integrations": {
         "wm10": {
           "customerCode": 191,
@@ -13322,6 +13362,10 @@
           "importedAt": "2026-08-02T18:58:41.452Z",
           "importedBy": "painel"
         }
+      },
+      "migration": {
+        "wm10LegacyEmailRollbackAt": "2026-08-26T16:43:50.584Z",
+        "wm10LegacyEmailRollbackValue": "franciscodeabreu.sm@gmail.com"
       }
     },
     {
@@ -13576,9 +13620,9 @@
         "serviceOrderIds": []
       },
       "createdAt": "2026-08-02T18:58:41.560Z",
-      "updatedAt": "2026-08-02T18:58:41.569Z",
+      "updatedAt": "2026-08-26T16:43:50.584Z",
       "createdBy": "painel",
-      "updatedBy": "painel",
+      "updatedBy": "wm10-legacy-rollback",
       "integrations": {
         "wm10": {
           "customerCode": 195,
@@ -13602,6 +13646,10 @@
           "importedAt": "2026-08-02T18:58:41.569Z",
           "importedBy": "painel"
         }
+      },
+      "migration": {
+        "wm10LegacyEmailRollbackAt": "2026-08-26T16:43:50.584Z",
+        "wm10LegacyEmailRollbackValue": "ritadbrum@gmail.com"
       }
     },
     {
@@ -13716,9 +13764,9 @@
         "serviceOrderIds": []
       },
       "createdAt": "2026-08-02T18:58:41.617Z",
-      "updatedAt": "2026-08-02T18:58:41.626Z",
+      "updatedAt": "2026-08-26T16:43:50.584Z",
       "createdBy": "painel",
-      "updatedBy": "painel",
+      "updatedBy": "wm10-legacy-rollback",
       "integrations": {
         "wm10": {
           "customerCode": 197,
@@ -13742,6 +13790,10 @@
           "importedAt": "2026-08-02T18:58:41.626Z",
           "importedBy": "painel"
         }
+      },
+      "migration": {
+        "wm10LegacyEmailRollbackAt": "2026-08-26T16:43:50.584Z",
+        "wm10LegacyEmailRollbackValue": "sebastiaodebairros.sm@gmail.com"
       }
     },
     {
@@ -13786,9 +13838,9 @@
         "serviceOrderIds": []
       },
       "createdAt": "2026-08-02T18:58:41.648Z",
-      "updatedAt": "2026-08-02T18:58:41.657Z",
+      "updatedAt": "2026-08-26T16:43:50.584Z",
       "createdBy": "painel",
-      "updatedBy": "painel",
+      "updatedBy": "wm10-legacy-rollback",
       "integrations": {
         "wm10": {
           "customerCode": 198,
@@ -13812,6 +13864,10 @@
           "importedAt": "2026-08-02T18:58:41.657Z",
           "importedBy": "painel"
         }
+      },
+      "migration": {
+        "wm10LegacyEmailRollbackAt": "2026-08-26T16:43:50.584Z",
+        "wm10LegacyEmailRollbackValue": "valterhorbach.sm@gmail.com"
       }
     },
     {
@@ -14486,9 +14542,9 @@
         "serviceOrderIds": []
       },
       "createdAt": "2026-08-02T18:58:41.955Z",
-      "updatedAt": "2026-08-02T18:58:41.965Z",
+      "updatedAt": "2026-08-26T16:43:50.584Z",
       "createdBy": "painel",
-      "updatedBy": "painel",
+      "updatedBy": "wm10-legacy-rollback",
       "integrations": {
         "wm10": {
           "customerCode": 209,
@@ -14512,6 +14568,10 @@
           "importedAt": "2026-08-02T18:58:41.965Z",
           "importedBy": "painel"
         }
+      },
+      "migration": {
+        "wm10LegacyEmailRollbackAt": "2026-08-26T16:43:50.584Z",
+        "wm10LegacyEmailRollbackValue": "ivosaggin.sm@gmail.com"
       }
     },
     {
@@ -14556,9 +14616,9 @@
         "serviceOrderIds": []
       },
       "createdAt": "2026-08-02T18:58:41.989Z",
-      "updatedAt": "2026-08-02T18:58:42.003Z",
+      "updatedAt": "2026-08-26T16:43:50.584Z",
       "createdBy": "painel",
-      "updatedBy": "painel",
+      "updatedBy": "wm10-legacy-rollback",
       "integrations": {
         "wm10": {
           "customerCode": 210,
@@ -14582,6 +14642,10 @@
           "importedAt": "2026-08-02T18:58:42.003Z",
           "importedBy": "painel"
         }
+      },
+      "migration": {
+        "wm10LegacyEmailRollbackAt": "2026-08-26T16:43:50.584Z",
+        "wm10LegacyEmailRollbackValue": "mdealmeida403@gmail.com"
       }
     },
     {
@@ -15676,9 +15740,9 @@
         "serviceOrderIds": []
       },
       "createdAt": "2026-08-02T18:58:42.530Z",
-      "updatedAt": "2026-08-02T18:58:42.540Z",
+      "updatedAt": "2026-08-26T16:43:50.584Z",
       "createdBy": "painel",
-      "updatedBy": "painel",
+      "updatedBy": "wm10-legacy-rollback",
       "integrations": {
         "wm10": {
           "customerCode": 226,
@@ -15702,6 +15766,10 @@
           "importedAt": "2026-08-02T18:58:42.540Z",
           "importedBy": "painel"
         }
+      },
+      "migration": {
+        "wm10LegacyEmailRollbackAt": "2026-08-26T16:43:50.584Z",
+        "wm10LegacyEmailRollbackValue": "lizandrotarcisiokolberg@gmail.com"
       }
     },
     {
@@ -16096,9 +16164,9 @@
         "serviceOrderIds": []
       },
       "createdAt": "2026-08-02T18:58:42.733Z",
-      "updatedAt": "2026-08-02T18:58:42.744Z",
+      "updatedAt": "2026-08-26T16:43:50.584Z",
       "createdBy": "painel",
-      "updatedBy": "painel",
+      "updatedBy": "wm10-legacy-rollback",
       "integrations": {
         "wm10": {
           "customerCode": 232,
@@ -16122,6 +16190,10 @@
           "importedAt": "2026-08-02T18:58:42.744Z",
           "importedBy": "painel"
         }
+      },
+      "migration": {
+        "wm10LegacyEmailRollbackAt": "2026-08-26T16:43:50.584Z",
+        "wm10LegacyEmailRollbackValue": "lucasfarias.sm1@gmail.com"
       }
     },
     {
@@ -16516,9 +16588,9 @@
         "serviceOrderIds": []
       },
       "createdAt": "2026-08-02T18:58:42.936Z",
-      "updatedAt": "2026-08-02T18:58:42.948Z",
+      "updatedAt": "2026-08-26T16:43:50.584Z",
       "createdBy": "painel",
-      "updatedBy": "painel",
+      "updatedBy": "wm10-legacy-rollback",
       "integrations": {
         "wm10": {
           "customerCode": 238,
@@ -16542,6 +16614,10 @@
           "importedAt": "2026-08-02T18:58:42.948Z",
           "importedBy": "painel"
         }
+      },
+      "migration": {
+        "wm10LegacyEmailRollbackAt": "2026-08-26T16:43:50.584Z",
+        "wm10LegacyEmailRollbackValue": "rodrigozanini.sm1@gmail.com"
       }
     },
     {
@@ -16936,9 +17012,9 @@
         "serviceOrderIds": []
       },
       "createdAt": "2026-08-02T18:58:43.147Z",
-      "updatedAt": "2026-08-02T18:58:43.158Z",
+      "updatedAt": "2026-08-26T16:43:50.584Z",
       "createdBy": "painel",
-      "updatedBy": "painel",
+      "updatedBy": "wm10-legacy-rollback",
       "integrations": {
         "wm10": {
           "customerCode": 244,
@@ -16962,6 +17038,10 @@
           "importedAt": "2026-08-02T18:58:43.158Z",
           "importedBy": "painel"
         }
+      },
+      "migration": {
+        "wm10LegacyEmailRollbackAt": "2026-08-26T16:43:50.584Z",
+        "wm10LegacyEmailRollbackValue": "joaoalmeida.sm01@gmail.com"
       }
     },
     {
@@ -17286,9 +17366,9 @@
         "serviceOrderIds": []
       },
       "createdAt": "2026-08-02T18:58:43.324Z",
-      "updatedAt": "2026-08-02T18:58:43.336Z",
+      "updatedAt": "2026-08-26T16:43:50.584Z",
       "createdBy": "painel",
-      "updatedBy": "painel",
+      "updatedBy": "wm10-legacy-rollback",
       "integrations": {
         "wm10": {
           "customerCode": 249,
@@ -17312,6 +17392,10 @@
           "importedAt": "2026-08-02T18:58:43.336Z",
           "importedBy": "painel"
         }
+      },
+      "migration": {
+        "wm10LegacyEmailRollbackAt": "2026-08-26T16:43:50.584Z",
+        "wm10LegacyEmailRollbackValue": "tataivetefavretto@gmail.com"
       }
     },
     {
@@ -17356,9 +17440,9 @@
         "serviceOrderIds": []
       },
       "createdAt": "2026-08-02T18:58:43.361Z",
-      "updatedAt": "2026-08-02T18:58:43.372Z",
+      "updatedAt": "2026-08-26T16:43:50.584Z",
       "createdBy": "painel",
-      "updatedBy": "painel",
+      "updatedBy": "wm10-legacy-rollback",
       "integrations": {
         "wm10": {
           "customerCode": 250,
@@ -17382,6 +17466,10 @@
           "importedAt": "2026-08-02T18:58:43.372Z",
           "importedBy": "painel"
         }
+      },
+      "migration": {
+        "wm10LegacyEmailRollbackAt": "2026-08-26T16:43:50.584Z",
+        "wm10LegacyEmailRollbackValue": "anahauenstein.sm@gmail.com"
       }
     },
     {
@@ -17496,9 +17584,9 @@
         "serviceOrderIds": []
       },
       "createdAt": "2026-08-02T18:58:43.435Z",
-      "updatedAt": "2026-08-02T18:58:43.447Z",
+      "updatedAt": "2026-08-26T16:43:50.584Z",
       "createdBy": "painel",
-      "updatedBy": "painel",
+      "updatedBy": "wm10-legacy-rollback",
       "integrations": {
         "wm10": {
           "customerCode": 252,
@@ -17522,6 +17610,10 @@
           "importedAt": "2026-08-02T18:58:43.447Z",
           "importedBy": "painel"
         }
+      },
+      "migration": {
+        "wm10LegacyEmailRollbackAt": "2026-08-26T16:43:50.584Z",
+        "wm10LegacyEmailRollbackValue": "mauriciopesente.sm@gmail.com"
       }
     },
     {
@@ -17846,9 +17938,9 @@
         "serviceOrderIds": []
       },
       "createdAt": "2026-08-02T18:58:43.619Z",
-      "updatedAt": "2026-08-02T18:58:43.631Z",
+      "updatedAt": "2026-08-26T16:43:50.584Z",
       "createdBy": "painel",
-      "updatedBy": "painel",
+      "updatedBy": "wm10-legacy-rollback",
       "integrations": {
         "wm10": {
           "customerCode": 257,
@@ -17872,6 +17964,10 @@
           "importedAt": "2026-08-02T18:58:43.631Z",
           "importedBy": "painel"
         }
+      },
+      "migration": {
+        "wm10LegacyEmailRollbackAt": "2026-08-26T16:43:50.584Z",
+        "wm10LegacyEmailRollbackValue": "climeriokipper@gmail.com"
       }
     },
     {
@@ -17966,7 +18062,7 @@
       "motherName": "",
       "creditLimit": 0,
       "phone": "",
-      "mobile": "",
+      "mobile": "55996134791",
       "email": "",
       "zipCode": "98250000",
       "street": "RUA GOMERCINDO SARAIVA",
@@ -17986,9 +18082,9 @@
         "serviceOrderIds": []
       },
       "createdAt": "2026-08-02T18:58:43.693Z",
-      "updatedAt": "2026-08-02T18:58:43.705Z",
+      "updatedAt": "2026-08-28T18:39:53.101Z",
       "createdBy": "painel",
-      "updatedBy": "painel",
+      "updatedBy": "Matheus Fernando",
       "integrations": {
         "wm10": {
           "customerCode": 259,
@@ -18196,9 +18292,9 @@
         "serviceOrderIds": []
       },
       "createdAt": "2026-08-02T18:58:43.803Z",
-      "updatedAt": "2026-08-02T18:58:43.815Z",
+      "updatedAt": "2026-08-26T16:43:50.584Z",
       "createdBy": "painel",
-      "updatedBy": "painel",
+      "updatedBy": "wm10-legacy-rollback",
       "integrations": {
         "wm10": {
           "customerCode": 262,
@@ -18222,6 +18318,10 @@
           "importedAt": "2026-08-02T18:58:43.815Z",
           "importedBy": "painel"
         }
+      },
+      "migration": {
+        "wm10LegacyEmailRollbackAt": "2026-08-26T16:43:50.584Z",
+        "wm10LegacyEmailRollbackValue": "verginassijudite@gmail.com"
       }
     },
     {
@@ -18476,9 +18576,9 @@
         "serviceOrderIds": []
       },
       "createdAt": "2026-08-02T18:58:43.952Z",
-      "updatedAt": "2026-08-02T18:58:43.970Z",
+      "updatedAt": "2026-08-26T16:43:50.584Z",
       "createdBy": "painel",
-      "updatedBy": "painel",
+      "updatedBy": "wm10-legacy-rollback",
       "integrations": {
         "wm10": {
           "customerCode": 266,
@@ -18502,6 +18602,10 @@
           "importedAt": "2026-08-02T18:58:43.970Z",
           "importedBy": "painel"
         }
+      },
+      "migration": {
+        "wm10LegacyEmailRollbackAt": "2026-08-26T16:43:50.584Z",
+        "wm10LegacyEmailRollbackValue": "elizanedamiani.sm@gmail.com"
       }
     },
     {
@@ -19106,9 +19210,9 @@
         "serviceOrderIds": []
       },
       "createdAt": "2026-08-02T18:58:44.302Z",
-      "updatedAt": "2026-08-02T18:58:44.315Z",
+      "updatedAt": "2026-08-26T16:43:50.584Z",
       "createdBy": "painel",
-      "updatedBy": "painel",
+      "updatedBy": "wm10-legacy-rollback",
       "integrations": {
         "wm10": {
           "customerCode": 275,
@@ -19132,6 +19236,10 @@
           "importedAt": "2026-08-02T18:58:44.315Z",
           "importedBy": "painel"
         }
+      },
+      "migration": {
+        "wm10LegacyEmailRollbackAt": "2026-08-26T16:43:50.584Z",
+        "wm10LegacyEmailRollbackValue": "mfernando.sm1@gmail.com"
       }
     },
     {
@@ -20016,9 +20124,9 @@
         "serviceOrderIds": []
       },
       "createdAt": "2026-08-02T18:58:44.819Z",
-      "updatedAt": "2026-08-02T18:58:44.832Z",
+      "updatedAt": "2026-08-26T16:43:50.584Z",
       "createdBy": "painel",
-      "updatedBy": "painel",
+      "updatedBy": "wm10-legacy-rollback",
       "integrations": {
         "wm10": {
           "customerCode": 288,
@@ -20042,6 +20150,10 @@
           "importedAt": "2026-08-02T18:58:44.831Z",
           "importedBy": "painel"
         }
+      },
+      "migration": {
+        "wm10LegacyEmailRollbackAt": "2026-08-26T16:43:50.584Z",
+        "wm10LegacyEmailRollbackValue": "clarissanapp@icloud.com"
       }
     },
     {
@@ -20436,9 +20548,9 @@
         "serviceOrderIds": []
       },
       "createdAt": "2026-08-02T18:58:45.062Z",
-      "updatedAt": "2026-08-02T18:58:45.074Z",
+      "updatedAt": "2026-08-26T16:43:50.584Z",
       "createdBy": "painel",
-      "updatedBy": "painel",
+      "updatedBy": "wm10-legacy-rollback",
       "integrations": {
         "wm10": {
           "customerCode": 294,
@@ -20462,6 +20574,10 @@
           "importedAt": "2026-08-02T18:58:45.074Z",
           "importedBy": "painel"
         }
+      },
+      "migration": {
+        "wm10LegacyEmailRollbackAt": "2026-08-26T16:43:50.584Z",
+        "wm10LegacyEmailRollbackValue": "terezinhabarbieri.sm@gmail.com"
       }
     },
     {
@@ -20576,9 +20692,9 @@
         "serviceOrderIds": []
       },
       "createdAt": "2026-08-02T18:58:45.147Z",
-      "updatedAt": "2026-08-02T18:58:45.160Z",
+      "updatedAt": "2026-08-26T16:43:50.584Z",
       "createdBy": "painel",
-      "updatedBy": "painel",
+      "updatedBy": "wm10-legacy-rollback",
       "integrations": {
         "wm10": {
           "customerCode": 296,
@@ -20602,6 +20718,10 @@
           "importedAt": "2026-08-02T18:58:45.160Z",
           "importedBy": "painel"
         }
+      },
+      "migration": {
+        "wm10LegacyEmailRollbackAt": "2026-08-26T16:43:50.584Z",
+        "wm10LegacyEmailRollbackValue": "brunodasilva.sm2@gmail.com"
       }
     },
     {
@@ -20926,9 +21046,9 @@
         "serviceOrderIds": []
       },
       "createdAt": "2026-08-02T18:58:45.353Z",
-      "updatedAt": "2026-08-02T18:58:45.367Z",
+      "updatedAt": "2026-08-26T16:43:50.584Z",
       "createdBy": "painel",
-      "updatedBy": "painel",
+      "updatedBy": "wm10-legacy-rollback",
       "integrations": {
         "wm10": {
           "customerCode": 301,
@@ -20952,6 +21072,10 @@
           "importedAt": "2026-08-02T18:58:45.367Z",
           "importedBy": "painel"
         }
+      },
+      "migration": {
+        "wm10LegacyEmailRollbackAt": "2026-08-26T16:43:50.584Z",
+        "wm10LegacyEmailRollbackValue": "cleusabasanella@gmail.com"
       }
     },
     {
@@ -21136,9 +21260,9 @@
         "serviceOrderIds": []
       },
       "createdAt": "2026-08-02T18:58:45.478Z",
-      "updatedAt": "2026-08-02T18:58:45.491Z",
+      "updatedAt": "2026-08-26T16:43:50.584Z",
       "createdBy": "painel",
-      "updatedBy": "painel",
+      "updatedBy": "wm10-legacy-rollback",
       "integrations": {
         "wm10": {
           "customerCode": 304,
@@ -21162,6 +21286,10 @@
           "importedAt": "2026-08-02T18:58:45.491Z",
           "importedBy": "painel"
         }
+      },
+      "migration": {
+        "wm10LegacyEmailRollbackAt": "2026-08-26T16:43:50.584Z",
+        "wm10LegacyEmailRollbackValue": "lewejuliano@gmail.com"
       }
     },
     {
@@ -21556,9 +21684,9 @@
         "serviceOrderIds": []
       },
       "createdAt": "2026-08-02T18:58:45.755Z",
-      "updatedAt": "2026-08-02T18:58:45.768Z",
+      "updatedAt": "2026-08-26T16:43:50.584Z",
       "createdBy": "painel",
-      "updatedBy": "painel",
+      "updatedBy": "wm10-legacy-rollback",
       "integrations": {
         "wm10": {
           "customerCode": 310,
@@ -21582,6 +21710,10 @@
           "importedAt": "2026-08-02T18:58:45.768Z",
           "importedBy": "painel"
         }
+      },
+      "migration": {
+        "wm10LegacyEmailRollbackAt": "2026-08-26T16:43:50.584Z",
+        "wm10LegacyEmailRollbackValue": "mgstoreibi@gmail.com"
       }
     },
     {
@@ -22536,9 +22668,9 @@
         "serviceOrderIds": []
       },
       "createdAt": "2026-08-02T18:58:46.364Z",
-      "updatedAt": "2026-08-02T18:58:46.378Z",
+      "updatedAt": "2026-08-26T16:43:50.584Z",
       "createdBy": "painel",
-      "updatedBy": "painel",
+      "updatedBy": "wm10-legacy-rollback",
       "integrations": {
         "wm10": {
           "customerCode": 324,
@@ -22562,6 +22694,10 @@
           "importedAt": "2026-08-02T18:58:46.378Z",
           "importedBy": "painel"
         }
+      },
+      "migration": {
+        "wm10LegacyEmailRollbackAt": "2026-08-26T16:43:50.584Z",
+        "wm10LegacyEmailRollbackValue": "dinusanapp@gmail.com"
       }
     },
     {
@@ -23516,9 +23652,9 @@
         "serviceOrderIds": []
       },
       "createdAt": "2026-08-02T18:58:47.001Z",
-      "updatedAt": "2026-08-02T18:58:47.016Z",
+      "updatedAt": "2026-08-26T16:43:50.584Z",
       "createdBy": "painel",
-      "updatedBy": "painel",
+      "updatedBy": "wm10-legacy-rollback",
       "integrations": {
         "wm10": {
           "customerCode": 338,
@@ -23542,6 +23678,10 @@
           "importedAt": "2026-08-02T18:58:47.016Z",
           "importedBy": "painel"
         }
+      },
+      "migration": {
+        "wm10LegacyEmailRollbackAt": "2026-08-26T16:43:50.584Z",
+        "wm10LegacyEmailRollbackValue": "luizguilhermepintomuller@gmail.com"
       }
     },
     {
@@ -24706,9 +24846,9 @@
         "serviceOrderIds": []
       },
       "createdAt": "2026-08-02T18:58:47.816Z",
-      "updatedAt": "2026-08-02T18:58:47.831Z",
+      "updatedAt": "2026-08-26T16:43:50.584Z",
       "createdBy": "painel",
-      "updatedBy": "painel",
+      "updatedBy": "wm10-legacy-rollback",
       "integrations": {
         "wm10": {
           "customerCode": 355,
@@ -24732,6 +24872,10 @@
           "importedAt": "2026-08-02T18:58:47.831Z",
           "importedBy": "painel"
         }
+      },
+      "migration": {
+        "wm10LegacyEmailRollbackAt": "2026-08-26T16:43:50.584Z",
+        "wm10LegacyEmailRollbackValue": "glauceagiongo.sm1@gmail.com"
       }
     },
     {
@@ -24916,9 +25060,9 @@
         "serviceOrderIds": []
       },
       "createdAt": "2026-08-02T18:58:47.959Z",
-      "updatedAt": "2026-08-02T18:58:47.974Z",
+      "updatedAt": "2026-08-26T16:43:50.584Z",
       "createdBy": "painel",
-      "updatedBy": "painel",
+      "updatedBy": "wm10-legacy-rollback",
       "integrations": {
         "wm10": {
           "customerCode": 358,
@@ -24942,6 +25086,10 @@
           "importedAt": "2026-08-02T18:58:47.974Z",
           "importedBy": "painel"
         }
+      },
+      "migration": {
+        "wm10LegacyEmailRollbackAt": "2026-08-26T16:43:50.584Z",
+        "wm10LegacyEmailRollbackValue": "grazi.gelhen11@gmail.com"
       }
     },
     {
@@ -25336,9 +25484,9 @@
         "serviceOrderIds": []
       },
       "createdAt": "2026-08-02T18:58:48.248Z",
-      "updatedAt": "2026-08-02T18:58:48.267Z",
+      "updatedAt": "2026-08-26T16:43:50.584Z",
       "createdBy": "painel",
-      "updatedBy": "painel",
+      "updatedBy": "wm10-legacy-rollback",
       "integrations": {
         "wm10": {
           "customerCode": 364,
@@ -25362,6 +25510,10 @@
           "importedAt": "2026-08-02T18:58:48.266Z",
           "importedBy": "painel"
         }
+      },
+      "migration": {
+        "wm10LegacyEmailRollbackAt": "2026-08-26T16:43:50.584Z",
+        "wm10LegacyEmailRollbackValue": "evertondasilva.sm1@gmail.com"
       }
     },
     {
@@ -26176,9 +26328,9 @@
         "serviceOrderIds": []
       },
       "createdAt": "2026-08-02T18:58:48.844Z",
-      "updatedAt": "2026-08-02T18:58:48.859Z",
+      "updatedAt": "2026-08-26T16:43:50.584Z",
       "createdBy": "painel",
-      "updatedBy": "painel",
+      "updatedBy": "wm10-legacy-rollback",
       "integrations": {
         "wm10": {
           "customerCode": 376,
@@ -26202,6 +26354,10 @@
           "importedAt": "2026-08-02T18:58:48.859Z",
           "importedBy": "painel"
         }
+      },
+      "migration": {
+        "wm10LegacyEmailRollbackAt": "2026-08-26T16:43:50.584Z",
+        "wm10LegacyEmailRollbackValue": "ilsefischer.sm@gmail.com"
       }
     },
     {
@@ -27506,9 +27662,9 @@
         "serviceOrderIds": []
       },
       "createdAt": "2026-08-02T18:58:49.819Z",
-      "updatedAt": "2026-08-02T18:58:49.836Z",
+      "updatedAt": "2026-08-26T16:43:50.584Z",
       "createdBy": "painel",
-      "updatedBy": "painel",
+      "updatedBy": "wm10-legacy-rollback",
       "integrations": {
         "wm10": {
           "customerCode": 395,
@@ -27532,6 +27688,10 @@
           "importedAt": "2026-08-02T18:58:49.836Z",
           "importedBy": "painel"
         }
+      },
+      "migration": {
+        "wm10LegacyEmailRollbackAt": "2026-08-26T16:43:50.584Z",
+        "wm10LegacyEmailRollbackValue": "verzegnazzileticia@gmail.com"
       }
     },
     {
@@ -27856,9 +28016,9 @@
         "serviceOrderIds": []
       },
       "createdAt": "2026-08-02T18:58:50.084Z",
-      "updatedAt": "2026-08-02T18:58:50.100Z",
+      "updatedAt": "2026-08-26T16:43:50.584Z",
       "createdBy": "painel",
-      "updatedBy": "painel",
+      "updatedBy": "wm10-legacy-rollback",
       "integrations": {
         "wm10": {
           "customerCode": 400,
@@ -27882,6 +28042,10 @@
           "importedAt": "2026-08-02T18:58:50.100Z",
           "importedBy": "painel"
         }
+      },
+      "migration": {
+        "wm10LegacyEmailRollbackAt": "2026-08-26T16:43:50.584Z",
+        "wm10LegacyEmailRollbackValue": "mullerloreni1@gmail.com"
       }
     },
     {
@@ -28186,7 +28350,7 @@
       "motherName": "",
       "creditLimit": 0,
       "phone": "",
-      "mobile": "55996987304",
+      "mobile": "55996581910",
       "email": "",
       "zipCode": "98250000",
       "street": "RUA JOAO GOBBI",
@@ -28206,9 +28370,9 @@
         "serviceOrderIds": []
       },
       "createdAt": "2026-08-02T18:58:50.346Z",
-      "updatedAt": "2026-08-02T18:58:50.362Z",
+      "updatedAt": "2026-08-27T12:58:15.102Z",
       "createdBy": "painel",
-      "updatedBy": "painel",
+      "updatedBy": "Matheus Fernando",
       "integrations": {
         "wm10": {
           "customerCode": 405,
@@ -30936,9 +31100,9 @@
         "serviceOrderIds": []
       },
       "createdAt": "2026-08-02T18:58:52.509Z",
-      "updatedAt": "2026-08-02T18:58:52.532Z",
+      "updatedAt": "2026-08-26T16:43:50.584Z",
       "createdBy": "painel",
-      "updatedBy": "painel",
+      "updatedBy": "wm10-legacy-rollback",
       "integrations": {
         "wm10": {
           "customerCode": 444,
@@ -30962,6 +31126,10 @@
           "importedAt": "2026-08-02T18:58:52.532Z",
           "importedBy": "painel"
         }
+      },
+      "migration": {
+        "wm10LegacyEmailRollbackAt": "2026-08-26T16:43:50.584Z",
+        "wm10LegacyEmailRollbackValue": "romaldo11kussler@gmail.com"
       }
     },
     {
@@ -33316,9 +33484,9 @@
         "serviceOrderIds": []
       },
       "createdAt": "2026-08-02T18:58:54.559Z",
-      "updatedAt": "2026-08-02T18:58:54.578Z",
+      "updatedAt": "2026-08-26T16:43:50.584Z",
       "createdBy": "painel",
-      "updatedBy": "painel",
+      "updatedBy": "wm10-legacy-rollback",
       "integrations": {
         "wm10": {
           "customerCode": 478,
@@ -33342,6 +33510,10 @@
           "importedAt": "2026-08-02T18:58:54.578Z",
           "importedBy": "painel"
         }
+      },
+      "migration": {
+        "wm10LegacyEmailRollbackAt": "2026-08-26T16:43:50.584Z",
+        "wm10LegacyEmailRollbackValue": "nereabarilli@gmail.com"
       }
     },
     {
@@ -35186,7 +35358,7 @@
       "motherName": "",
       "creditLimit": 0,
       "phone": "5533731271",
-      "mobile": "55991658878",
+      "mobile": "55999005818",
       "email": "",
       "zipCode": "98250000",
       "street": "RUA PRESTES GUIMARAES",
@@ -35206,9 +35378,9 @@
         "serviceOrderIds": []
       },
       "createdAt": "2026-08-02T18:58:56.289Z",
-      "updatedAt": "2026-08-02T18:58:56.309Z",
+      "updatedAt": "2026-08-27T12:56:54.115Z",
       "createdBy": "painel",
-      "updatedBy": "painel",
+      "updatedBy": "Matheus Fernando",
       "integrations": {
         "wm10": {
           "customerCode": 505,
@@ -36116,9 +36288,9 @@
         "serviceOrderIds": []
       },
       "createdAt": "2026-08-02T18:58:57.155Z",
-      "updatedAt": "2026-08-02T18:58:57.177Z",
+      "updatedAt": "2026-08-26T16:43:50.584Z",
       "createdBy": "painel",
-      "updatedBy": "painel",
+      "updatedBy": "wm10-legacy-rollback",
       "integrations": {
         "wm10": {
           "customerCode": 518,
@@ -36142,6 +36314,10 @@
           "importedAt": "2026-08-02T18:58:57.177Z",
           "importedBy": "painel"
         }
+      },
+      "migration": {
+        "wm10LegacyEmailRollbackAt": "2026-08-26T16:43:50.584Z",
+        "wm10LegacyEmailRollbackValue": "paulooliveira.sm1@gmail.com"
       }
     },
     {
@@ -36536,9 +36712,9 @@
         "serviceOrderIds": []
       },
       "createdAt": "2026-08-02T18:58:57.555Z",
-      "updatedAt": "2026-08-02T18:58:57.577Z",
+      "updatedAt": "2026-08-26T16:43:50.584Z",
       "createdBy": "painel",
-      "updatedBy": "painel",
+      "updatedBy": "wm10-legacy-rollback",
       "integrations": {
         "wm10": {
           "customerCode": 524,
@@ -36562,6 +36738,10 @@
           "importedAt": "2026-08-02T18:58:57.577Z",
           "importedBy": "painel"
         }
+      },
+      "migration": {
+        "wm10LegacyEmailRollbackAt": "2026-08-26T16:43:50.584Z",
+        "wm10LegacyEmailRollbackValue": "marinesdemarco.sm1@gmail.com"
       }
     },
     {
@@ -37166,9 +37346,9 @@
         "serviceOrderIds": []
       },
       "createdAt": "2026-08-02T18:58:58.186Z",
-      "updatedAt": "2026-08-02T18:58:58.208Z",
+      "updatedAt": "2026-08-26T16:43:50.584Z",
       "createdBy": "painel",
-      "updatedBy": "painel",
+      "updatedBy": "wm10-legacy-rollback",
       "integrations": {
         "wm10": {
           "customerCode": 533,
@@ -37192,6 +37372,10 @@
           "importedAt": "2026-08-02T18:58:58.208Z",
           "importedBy": "painel"
         }
+      },
+      "migration": {
+        "wm10LegacyEmailRollbackAt": "2026-08-26T16:43:50.584Z",
+        "wm10LegacyEmailRollbackValue": "jorgemanoelribeiro23@gmail.com"
       }
     },
     {
@@ -37306,9 +37490,9 @@
         "serviceOrderIds": []
       },
       "createdAt": "2026-08-02T18:58:58.323Z",
-      "updatedAt": "2026-08-02T18:58:58.345Z",
+      "updatedAt": "2026-08-26T16:43:50.584Z",
       "createdBy": "painel",
-      "updatedBy": "painel",
+      "updatedBy": "wm10-legacy-rollback",
       "integrations": {
         "wm10": {
           "customerCode": 535,
@@ -37332,6 +37516,10 @@
           "importedAt": "2026-08-02T18:58:58.345Z",
           "importedBy": "painel"
         }
+      },
+      "migration": {
+        "wm10LegacyEmailRollbackAt": "2026-08-26T16:43:50.584Z",
+        "wm10LegacyEmailRollbackValue": "venildabauermann@gmail.com"
       }
     },
     {
@@ -38006,9 +38194,9 @@
         "serviceOrderIds": []
       },
       "createdAt": "2026-08-02T18:58:59.023Z",
-      "updatedAt": "2026-08-02T18:58:59.045Z",
+      "updatedAt": "2026-08-26T16:43:50.584Z",
       "createdBy": "painel",
-      "updatedBy": "painel",
+      "updatedBy": "wm10-legacy-rollback",
       "integrations": {
         "wm10": {
           "customerCode": 545,
@@ -38032,6 +38220,10 @@
           "importedAt": "2026-08-02T18:58:59.045Z",
           "importedBy": "painel"
         }
+      },
+      "migration": {
+        "wm10LegacyEmailRollbackAt": "2026-08-26T16:43:50.584Z",
+        "wm10LegacyEmailRollbackValue": "giovannabirkhan.sm1@gmail.com"
       }
     },
     {
@@ -38566,9 +38758,9 @@
         "serviceOrderIds": []
       },
       "createdAt": "2026-08-02T18:58:59.589Z",
-      "updatedAt": "2026-08-02T18:58:59.612Z",
+      "updatedAt": "2026-08-26T16:43:50.584Z",
       "createdBy": "painel",
-      "updatedBy": "painel",
+      "updatedBy": "wm10-legacy-rollback",
       "integrations": {
         "wm10": {
           "customerCode": 553,
@@ -38592,6 +38784,10 @@
           "importedAt": "2026-08-02T18:58:59.612Z",
           "importedBy": "painel"
         }
+      },
+      "migration": {
+        "wm10LegacyEmailRollbackAt": "2026-08-26T16:43:50.584Z",
+        "wm10LegacyEmailRollbackValue": "luizaharter.sm@gmail.com"
       }
     },
     {
@@ -38986,9 +39182,9 @@
         "serviceOrderIds": []
       },
       "createdAt": "2026-08-02T18:59:00.026Z",
-      "updatedAt": "2026-08-02T18:59:00.051Z",
+      "updatedAt": "2026-08-26T16:43:50.584Z",
       "createdBy": "painel",
-      "updatedBy": "painel",
+      "updatedBy": "wm10-legacy-rollback",
       "integrations": {
         "wm10": {
           "customerCode": 559,
@@ -39012,6 +39208,10 @@
           "importedAt": "2026-08-02T18:59:00.051Z",
           "importedBy": "painel"
         }
+      },
+      "migration": {
+        "wm10LegacyEmailRollbackAt": "2026-08-26T16:43:50.584Z",
+        "wm10LegacyEmailRollbackValue": "tainaansolin.sm1@gmail.com"
       }
     },
     {
@@ -39406,9 +39606,9 @@
         "serviceOrderIds": []
       },
       "createdAt": "2026-08-02T18:59:00.459Z",
-      "updatedAt": "2026-08-02T18:59:00.483Z",
+      "updatedAt": "2026-08-26T16:43:50.584Z",
       "createdBy": "painel",
-      "updatedBy": "painel",
+      "updatedBy": "wm10-legacy-rollback",
       "integrations": {
         "wm10": {
           "customerCode": 565,
@@ -39432,6 +39632,10 @@
           "importedAt": "2026-08-02T18:59:00.483Z",
           "importedBy": "painel"
         }
+      },
+      "migration": {
+        "wm10LegacyEmailRollbackAt": "2026-08-26T16:43:50.584Z",
+        "wm10LegacyEmailRollbackValue": "fatimaalliatti@gmail.com"
       }
     },
     {
@@ -39546,9 +39750,9 @@
         "serviceOrderIds": []
       },
       "createdAt": "2026-08-02T18:59:00.606Z",
-      "updatedAt": "2026-08-02T18:59:00.630Z",
+      "updatedAt": "2026-08-26T16:43:50.584Z",
       "createdBy": "painel",
-      "updatedBy": "painel",
+      "updatedBy": "wm10-legacy-rollback",
       "integrations": {
         "wm10": {
           "customerCode": 567,
@@ -39572,6 +39776,10 @@
           "importedAt": "2026-08-02T18:59:00.630Z",
           "importedBy": "painel"
         }
+      },
+      "migration": {
+        "wm10LegacyEmailRollbackAt": "2026-08-26T16:43:50.584Z",
+        "wm10LegacyEmailRollbackValue": "fernandohamel.sm@gmail.comm"
       }
     },
     {
@@ -40526,9 +40734,9 @@
         "serviceOrderIds": []
       },
       "createdAt": "2026-08-02T18:59:01.647Z",
-      "updatedAt": "2026-08-02T18:59:01.670Z",
+      "updatedAt": "2026-08-26T16:43:50.584Z",
       "createdBy": "painel",
-      "updatedBy": "painel",
+      "updatedBy": "wm10-legacy-rollback",
       "integrations": {
         "wm10": {
           "customerCode": 581,
@@ -40552,6 +40760,10 @@
           "importedAt": "2026-08-02T18:59:01.670Z",
           "importedBy": "painel"
         }
+      },
+      "migration": {
+        "wm10LegacyEmailRollbackAt": "2026-08-26T16:43:50.584Z",
+        "wm10LegacyEmailRollbackValue": "kikolimberger01@gmail.com"
       }
     },
     {
@@ -40596,9 +40808,9 @@
         "serviceOrderIds": []
       },
       "createdAt": "2026-08-02T18:59:01.721Z",
-      "updatedAt": "2026-08-02T18:59:01.746Z",
+      "updatedAt": "2026-08-26T16:43:50.584Z",
       "createdBy": "painel",
-      "updatedBy": "painel",
+      "updatedBy": "wm10-legacy-rollback",
       "integrations": {
         "wm10": {
           "customerCode": 582,
@@ -40622,6 +40834,10 @@
           "importedAt": "2026-08-02T18:59:01.746Z",
           "importedBy": "painel"
         }
+      },
+      "migration": {
+        "wm10LegacyEmailRollbackAt": "2026-08-26T16:43:50.584Z",
+        "wm10LegacyEmailRollbackValue": "erliasroessler.sm@gmail.com"
       }
     },
     {
@@ -41506,9 +41722,9 @@
         "serviceOrderIds": []
       },
       "createdAt": "2026-08-02T18:59:02.730Z",
-      "updatedAt": "2026-08-02T18:59:02.754Z",
+      "updatedAt": "2026-08-26T16:43:50.584Z",
       "createdBy": "painel",
-      "updatedBy": "painel",
+      "updatedBy": "wm10-legacy-rollback",
       "integrations": {
         "wm10": {
           "customerCode": 595,
@@ -41532,6 +41748,10 @@
           "importedAt": "2026-08-02T18:59:02.754Z",
           "importedBy": "painel"
         }
+      },
+      "migration": {
+        "wm10LegacyEmailRollbackAt": "2026-08-26T16:43:50.584Z",
+        "wm10LegacyEmailRollbackValue": "jasoncoradin.sm@gmail.com"
       }
     },
     {
@@ -41576,9 +41796,9 @@
         "serviceOrderIds": []
       },
       "createdAt": "2026-08-02T18:59:02.807Z",
-      "updatedAt": "2026-08-02T18:59:02.833Z",
+      "updatedAt": "2026-08-26T16:43:50.584Z",
       "createdBy": "painel",
-      "updatedBy": "painel",
+      "updatedBy": "wm10-legacy-rollback",
       "integrations": {
         "wm10": {
           "customerCode": 596,
@@ -41602,6 +41822,10 @@
           "importedAt": "2026-08-02T18:59:02.833Z",
           "importedBy": "painel"
         }
+      },
+      "migration": {
+        "wm10LegacyEmailRollbackAt": "2026-08-26T16:43:50.584Z",
+        "wm10LegacyEmailRollbackValue": "josehauenstein@gmail.com"
       }
     },
     {
@@ -41646,9 +41870,9 @@
         "serviceOrderIds": []
       },
       "createdAt": "2026-08-02T18:59:02.884Z",
-      "updatedAt": "2026-08-02T18:59:02.909Z",
+      "updatedAt": "2026-08-26T16:43:50.584Z",
       "createdBy": "painel",
-      "updatedBy": "painel",
+      "updatedBy": "wm10-legacy-rollback",
       "integrations": {
         "wm10": {
           "customerCode": 597,
@@ -41672,6 +41896,10 @@
           "importedAt": "2026-08-02T18:59:02.909Z",
           "importedBy": "painel"
         }
+      },
+      "migration": {
+        "wm10LegacyEmailRollbackAt": "2026-08-26T16:43:50.584Z",
+        "wm10LegacyEmailRollbackValue": "maisa1010araldi@gmail.com"
       }
     },
     {
@@ -41716,9 +41944,9 @@
         "serviceOrderIds": []
       },
       "createdAt": "2026-08-02T18:59:02.991Z",
-      "updatedAt": "2026-08-02T18:59:03.018Z",
+      "updatedAt": "2026-08-26T16:43:50.584Z",
       "createdBy": "painel",
-      "updatedBy": "painel",
+      "updatedBy": "wm10-legacy-rollback",
       "integrations": {
         "wm10": {
           "customerCode": 598,
@@ -41742,6 +41970,10 @@
           "importedAt": "2026-08-02T18:59:03.018Z",
           "importedBy": "painel"
         }
+      },
+      "migration": {
+        "wm10LegacyEmailRollbackAt": "2026-08-26T16:43:50.584Z",
+        "wm10LegacyEmailRollbackValue": "elbioformentini77@gmail.com"
       }
     },
     {
@@ -43466,9 +43698,9 @@
         "serviceOrderIds": []
       },
       "createdAt": "2026-08-02T18:59:04.933Z",
-      "updatedAt": "2026-08-02T18:59:04.957Z",
+      "updatedAt": "2026-08-26T16:43:50.584Z",
       "createdBy": "painel",
-      "updatedBy": "painel",
+      "updatedBy": "wm10-legacy-rollback",
       "integrations": {
         "wm10": {
           "customerCode": 623,
@@ -43492,6 +43724,10 @@
           "importedAt": "2026-08-02T18:59:04.957Z",
           "importedBy": "painel"
         }
+      },
+      "migration": {
+        "wm10LegacyEmailRollbackAt": "2026-08-26T16:43:50.584Z",
+        "wm10LegacyEmailRollbackValue": "luisdasilva.sm@gmail.com"
       }
     },
     {
@@ -44376,9 +44612,9 @@
         "serviceOrderIds": []
       },
       "createdAt": "2026-08-02T18:59:05.972Z",
-      "updatedAt": "2026-08-02T18:59:05.997Z",
+      "updatedAt": "2026-08-26T16:43:50.584Z",
       "createdBy": "painel",
-      "updatedBy": "painel",
+      "updatedBy": "wm10-legacy-rollback",
       "integrations": {
         "wm10": {
           "customerCode": 636,
@@ -44402,6 +44638,10 @@
           "importedAt": "2026-08-02T18:59:05.997Z",
           "importedBy": "painel"
         }
+      },
+      "migration": {
+        "wm10LegacyEmailRollbackAt": "2026-08-26T16:43:50.584Z",
+        "wm10LegacyEmailRollbackValue": "brenoconte.sm1@gmail.com"
       }
     },
     {
@@ -44726,9 +44966,9 @@
         "serviceOrderIds": []
       },
       "createdAt": "2026-08-02T18:59:06.373Z",
-      "updatedAt": "2026-08-02T18:59:06.401Z",
+      "updatedAt": "2026-08-26T16:43:50.584Z",
       "createdBy": "painel",
-      "updatedBy": "painel",
+      "updatedBy": "wm10-legacy-rollback",
       "integrations": {
         "wm10": {
           "customerCode": 641,
@@ -44752,6 +44992,10 @@
           "importedAt": "2026-08-02T18:59:06.401Z",
           "importedBy": "painel"
         }
+      },
+      "migration": {
+        "wm10LegacyEmailRollbackAt": "2026-08-26T16:43:50.584Z",
+        "wm10LegacyEmailRollbackValue": "nadirsantos.sm@gmail.com"
       }
     },
     {
@@ -45986,9 +46230,9 @@
         "serviceOrderIds": []
       },
       "createdAt": "2026-08-02T18:59:07.978Z",
-      "updatedAt": "2026-08-02T18:59:08.010Z",
+      "updatedAt": "2026-08-26T16:43:50.584Z",
       "createdBy": "painel",
-      "updatedBy": "painel",
+      "updatedBy": "wm10-legacy-rollback",
       "integrations": {
         "wm10": {
           "customerCode": 659,
@@ -46012,6 +46256,10 @@
           "importedAt": "2026-08-02T18:59:08.010Z",
           "importedBy": "painel"
         }
+      },
+      "migration": {
+        "wm10LegacyEmailRollbackAt": "2026-08-26T16:43:50.584Z",
+        "wm10LegacyEmailRollbackValue": "betoazevedo.sm@gmail.com"
       }
     },
     {
@@ -46266,9 +46514,9 @@
         "serviceOrderIds": []
       },
       "createdAt": "2026-08-02T18:59:08.356Z",
-      "updatedAt": "2026-08-02T18:59:08.386Z",
+      "updatedAt": "2026-08-26T16:43:50.584Z",
       "createdBy": "painel",
-      "updatedBy": "painel",
+      "updatedBy": "wm10-legacy-rollback",
       "integrations": {
         "wm10": {
           "customerCode": 663,
@@ -46292,6 +46540,10 @@
           "importedAt": "2026-08-02T18:59:08.386Z",
           "importedBy": "painel"
         }
+      },
+      "migration": {
+        "wm10LegacyEmailRollbackAt": "2026-08-26T16:43:50.584Z",
+        "wm10LegacyEmailRollbackValue": "evertonroessler@hotmail.com"
       }
     },
     {
@@ -46476,9 +46728,9 @@
         "serviceOrderIds": []
       },
       "createdAt": "2026-08-02T18:59:08.632Z",
-      "updatedAt": "2026-08-02T18:59:08.660Z",
+      "updatedAt": "2026-08-26T16:43:50.584Z",
       "createdBy": "painel",
-      "updatedBy": "painel",
+      "updatedBy": "wm10-legacy-rollback",
       "integrations": {
         "wm10": {
           "customerCode": 666,
@@ -46502,6 +46754,10 @@
           "importedAt": "2026-08-02T18:59:08.660Z",
           "importedBy": "painel"
         }
+      },
+      "migration": {
+        "wm10LegacyEmailRollbackAt": "2026-08-26T16:43:50.584Z",
+        "wm10LegacyEmailRollbackValue": "angelapedroso465@gmail.com"
       }
     },
     {
@@ -47036,9 +47292,9 @@
         "serviceOrderIds": []
       },
       "createdAt": "2026-08-02T18:59:09.348Z",
-      "updatedAt": "2026-08-02T18:59:09.375Z",
+      "updatedAt": "2026-08-26T16:43:50.584Z",
       "createdBy": "painel",
-      "updatedBy": "painel",
+      "updatedBy": "wm10-legacy-rollback",
       "integrations": {
         "wm10": {
           "customerCode": 674,
@@ -47062,6 +47318,10 @@
           "importedAt": "2026-08-02T18:59:09.375Z",
           "importedBy": "painel"
         }
+      },
+      "migration": {
+        "wm10LegacyEmailRollbackAt": "2026-08-26T16:43:50.584Z",
+        "wm10LegacyEmailRollbackValue": "elizabauermann.sm@gmail.com"
       }
     },
     {
@@ -47176,9 +47436,9 @@
         "serviceOrderIds": []
       },
       "createdAt": "2026-08-02T18:59:09.526Z",
-      "updatedAt": "2026-08-02T18:59:09.553Z",
+      "updatedAt": "2026-08-26T16:43:50.584Z",
       "createdBy": "painel",
-      "updatedBy": "painel",
+      "updatedBy": "wm10-legacy-rollback",
       "integrations": {
         "wm10": {
           "customerCode": 676,
@@ -47202,6 +47462,10 @@
           "importedAt": "2026-08-02T18:59:09.553Z",
           "importedBy": "painel"
         }
+      },
+      "migration": {
+        "wm10LegacyEmailRollbackAt": "2026-08-26T16:43:50.584Z",
+        "wm10LegacyEmailRollbackValue": "juscemore@gmail.com"
       }
     },
     {
@@ -47596,9 +47860,9 @@
         "serviceOrderIds": []
       },
       "createdAt": "2026-08-02T18:59:10.051Z",
-      "updatedAt": "2026-08-02T18:59:10.077Z",
+      "updatedAt": "2026-08-26T16:43:50.584Z",
       "createdBy": "painel",
-      "updatedBy": "painel",
+      "updatedBy": "wm10-legacy-rollback",
       "integrations": {
         "wm10": {
           "customerCode": 682,
@@ -47622,6 +47886,10 @@
           "importedAt": "2026-08-02T18:59:10.077Z",
           "importedBy": "painel"
         }
+      },
+      "migration": {
+        "wm10LegacyEmailRollbackAt": "2026-08-26T16:43:50.584Z",
+        "wm10LegacyEmailRollbackValue": "dieisonbauermann.sm@gmail.com"
       }
     },
     {
@@ -48296,9 +48564,9 @@
         "serviceOrderIds": []
       },
       "createdAt": "2026-08-02T18:59:10.998Z",
-      "updatedAt": "2026-08-02T18:59:11.034Z",
+      "updatedAt": "2026-08-26T16:43:50.584Z",
       "createdBy": "painel",
-      "updatedBy": "painel",
+      "updatedBy": "wm10-legacy-rollback",
       "integrations": {
         "wm10": {
           "customerCode": 692,
@@ -48322,6 +48590,10 @@
           "importedAt": "2026-08-02T18:59:11.034Z",
           "importedBy": "painel"
         }
+      },
+      "migration": {
+        "wm10LegacyEmailRollbackAt": "2026-08-26T16:43:50.584Z",
+        "wm10LegacyEmailRollbackValue": "juraciaraldi.sm@gmail.com"
       }
     },
     {
@@ -48436,9 +48708,9 @@
         "serviceOrderIds": []
       },
       "createdAt": "2026-08-02T18:59:11.212Z",
-      "updatedAt": "2026-08-02T18:59:11.244Z",
+      "updatedAt": "2026-08-26T16:43:50.584Z",
       "createdBy": "painel",
-      "updatedBy": "painel",
+      "updatedBy": "wm10-legacy-rollback",
       "integrations": {
         "wm10": {
           "customerCode": 694,
@@ -48462,6 +48734,10 @@
           "importedAt": "2026-08-02T18:59:11.244Z",
           "importedBy": "painel"
         }
+      },
+      "migration": {
+        "wm10LegacyEmailRollbackAt": "2026-08-26T16:43:50.584Z",
+        "wm10LegacyEmailRollbackValue": "jefersonhauenstein.sm@gmail.com"
       }
     },
     {
@@ -48856,9 +49132,9 @@
         "serviceOrderIds": []
       },
       "createdAt": "2026-08-02T18:59:11.794Z",
-      "updatedAt": "2026-08-02T18:59:11.830Z",
+      "updatedAt": "2026-08-26T16:43:50.584Z",
       "createdBy": "painel",
-      "updatedBy": "painel",
+      "updatedBy": "wm10-legacy-rollback",
       "integrations": {
         "wm10": {
           "customerCode": 700,
@@ -48882,6 +49158,10 @@
           "importedAt": "2026-08-02T18:59:11.830Z",
           "importedBy": "painel"
         }
+      },
+      "migration": {
+        "wm10LegacyEmailRollbackAt": "2026-08-26T16:43:50.584Z",
+        "wm10LegacyEmailRollbackValue": "andreiabarilli3@gmail.com"
       }
     },
     {
@@ -61176,9 +61456,9 @@
         "serviceOrderIds": []
       },
       "createdAt": "2026-08-02T18:59:28.385Z",
-      "updatedAt": "2026-08-02T18:59:28.412Z",
+      "updatedAt": "2026-08-26T16:43:50.584Z",
       "createdBy": "painel",
-      "updatedBy": "painel",
+      "updatedBy": "wm10-legacy-rollback",
       "integrations": {
         "wm10": {
           "customerCode": 881,
@@ -61202,6 +61482,10 @@
           "importedAt": "2026-08-02T18:59:28.412Z",
           "importedBy": "painel"
         }
+      },
+      "migration": {
+        "wm10LegacyEmailRollbackAt": "2026-08-26T16:43:50.584Z",
+        "wm10LegacyEmailRollbackValue": "celitacici@gmail.com"
       }
     },
     {
@@ -64956,9 +65240,9 @@
         "serviceOrderIds": []
       },
       "createdAt": "2026-08-02T18:59:32.786Z",
-      "updatedAt": "2026-08-02T18:59:32.812Z",
+      "updatedAt": "2026-08-26T16:43:50.584Z",
       "createdBy": "painel",
-      "updatedBy": "painel",
+      "updatedBy": "wm10-legacy-rollback",
       "integrations": {
         "wm10": {
           "customerCode": 935,
@@ -64982,6 +65266,10 @@
           "importedAt": "2026-08-02T18:59:32.812Z",
           "importedBy": "painel"
         }
+      },
+      "migration": {
+        "wm10LegacyEmailRollbackAt": "2026-08-26T16:43:50.584Z",
+        "wm10LegacyEmailRollbackValue": "neleidesantos.sm@gmail.com"
       }
     },
     {
@@ -65026,9 +65314,9 @@
         "serviceOrderIds": []
       },
       "createdAt": "2026-08-02T18:59:32.909Z",
-      "updatedAt": "2026-08-02T18:59:32.938Z",
+      "updatedAt": "2026-08-26T16:43:50.584Z",
       "createdBy": "painel",
-      "updatedBy": "painel",
+      "updatedBy": "wm10-legacy-rollback",
       "integrations": {
         "wm10": {
           "customerCode": 936,
@@ -65052,6 +65340,10 @@
           "importedAt": "2026-08-02T18:59:32.938Z",
           "importedBy": "painel"
         }
+      },
+      "migration": {
+        "wm10LegacyEmailRollbackAt": "2026-08-26T16:43:50.584Z",
+        "wm10LegacyEmailRollbackValue": "andrerodrigues.sm2@gmail.com"
       }
     },
     {
@@ -65376,9 +65668,9 @@
         "serviceOrderIds": []
       },
       "createdAt": "2026-08-02T18:59:33.403Z",
-      "updatedAt": "2026-08-02T18:59:33.429Z",
+      "updatedAt": "2026-08-26T16:43:50.584Z",
       "createdBy": "painel",
-      "updatedBy": "painel",
+      "updatedBy": "wm10-legacy-rollback",
       "integrations": {
         "wm10": {
           "customerCode": 941,
@@ -65402,6 +65694,10 @@
           "importedAt": "2026-08-02T18:59:33.429Z",
           "importedBy": "painel"
         }
+      },
+      "migration": {
+        "wm10LegacyEmailRollbackAt": "2026-08-26T16:43:50.584Z",
+        "wm10LegacyEmailRollbackValue": "sg369079@gmail.com"
       }
     },
     {
@@ -65586,9 +65882,9 @@
         "serviceOrderIds": []
       },
       "createdAt": "2026-08-02T18:59:33.706Z",
-      "updatedAt": "2026-08-02T18:59:33.745Z",
+      "updatedAt": "2026-08-26T16:43:50.584Z",
       "createdBy": "painel",
-      "updatedBy": "painel",
+      "updatedBy": "wm10-legacy-rollback",
       "integrations": {
         "wm10": {
           "customerCode": 944,
@@ -65612,6 +65908,10 @@
           "importedAt": "2026-08-02T18:59:33.745Z",
           "importedBy": "painel"
         }
+      },
+      "migration": {
+        "wm10LegacyEmailRollbackAt": "2026-08-26T16:43:50.584Z",
+        "wm10LegacyEmailRollbackValue": "fatimadaluz.sm@gmail.com"
       }
     },
     {
@@ -66146,9 +66446,9 @@
         "serviceOrderIds": []
       },
       "createdAt": "2026-08-02T18:59:34.661Z",
-      "updatedAt": "2026-08-02T18:59:34.718Z",
+      "updatedAt": "2026-08-26T16:43:50.584Z",
       "createdBy": "painel",
-      "updatedBy": "painel",
+      "updatedBy": "wm10-legacy-rollback",
       "integrations": {
         "wm10": {
           "customerCode": 952,
@@ -66172,6 +66472,10 @@
           "importedAt": "2026-08-02T18:59:34.718Z",
           "importedBy": "painel"
         }
+      },
+      "migration": {
+        "wm10LegacyEmailRollbackAt": "2026-08-26T16:43:50.584Z",
+        "wm10LegacyEmailRollbackValue": "danielcattani.sm@gmail.com"
       }
     },
     {
@@ -67406,9 +67710,9 @@
         "serviceOrderIds": []
       },
       "createdAt": "2026-08-02T18:59:37.019Z",
-      "updatedAt": "2026-08-02T18:59:37.056Z",
+      "updatedAt": "2026-08-26T16:43:50.584Z",
       "createdBy": "painel",
-      "updatedBy": "painel",
+      "updatedBy": "wm10-legacy-rollback",
       "integrations": {
         "wm10": {
           "customerCode": 970,
@@ -67432,6 +67736,10 @@
           "importedAt": "2026-08-02T18:59:37.056Z",
           "importedBy": "painel"
         }
+      },
+      "migration": {
+        "wm10LegacyEmailRollbackAt": "2026-08-26T16:43:50.584Z",
+        "wm10LegacyEmailRollbackValue": "e17843331@gmail.com"
       }
     },
     {
@@ -68246,9 +68554,9 @@
         "serviceOrderIds": []
       },
       "createdAt": "2026-08-02T18:59:38.518Z",
-      "updatedAt": "2026-08-02T18:59:38.558Z",
+      "updatedAt": "2026-08-26T16:43:50.584Z",
       "createdBy": "painel",
-      "updatedBy": "painel",
+      "updatedBy": "wm10-legacy-rollback",
       "integrations": {
         "wm10": {
           "customerCode": 982,
@@ -68272,6 +68580,10 @@
           "importedAt": "2026-08-02T18:59:38.558Z",
           "importedBy": "painel"
         }
+      },
+      "migration": {
+        "wm10LegacyEmailRollbackAt": "2026-08-26T16:43:50.584Z",
+        "wm10LegacyEmailRollbackValue": "claudiomirdepaula171@gmail.com"
       }
     },
     {
@@ -69996,9 +70308,9 @@
         "serviceOrderIds": []
       },
       "createdAt": "2026-08-02T18:59:41.663Z",
-      "updatedAt": "2026-08-02T18:59:41.704Z",
+      "updatedAt": "2026-08-26T16:43:50.584Z",
       "createdBy": "painel",
-      "updatedBy": "painel",
+      "updatedBy": "wm10-legacy-rollback",
       "integrations": {
         "wm10": {
           "customerCode": 1007,
@@ -70022,6 +70334,10 @@
           "importedAt": "2026-08-02T18:59:41.704Z",
           "importedBy": "painel"
         }
+      },
+      "migration": {
+        "wm10LegacyEmailRollbackAt": "2026-08-26T16:43:50.584Z",
+        "wm10LegacyEmailRollbackValue": "rudineibeskow.sm1@gmail.com"
       }
     },
     {
@@ -70066,9 +70382,9 @@
         "serviceOrderIds": []
       },
       "createdAt": "2026-08-02T18:59:41.790Z",
-      "updatedAt": "2026-08-02T18:59:41.831Z",
+      "updatedAt": "2026-08-26T16:43:50.584Z",
       "createdBy": "painel",
-      "updatedBy": "painel",
+      "updatedBy": "wm10-legacy-rollback",
       "integrations": {
         "wm10": {
           "customerCode": 1008,
@@ -70092,6 +70408,10 @@
           "importedAt": "2026-08-02T18:59:41.831Z",
           "importedBy": "painel"
         }
+      },
+      "migration": {
+        "wm10LegacyEmailRollbackAt": "2026-08-26T16:43:50.584Z",
+        "wm10LegacyEmailRollbackValue": "juniorbirkhan087@gmail.com"
       }
     },
     {
@@ -70626,9 +70946,9 @@
         "serviceOrderIds": []
       },
       "createdAt": "2026-08-02T18:59:42.801Z",
-      "updatedAt": "2026-08-02T18:59:42.843Z",
+      "updatedAt": "2026-08-26T16:43:50.584Z",
       "createdBy": "painel",
-      "updatedBy": "painel",
+      "updatedBy": "wm10-legacy-rollback",
       "integrations": {
         "wm10": {
           "customerCode": 1016,
@@ -70652,6 +70972,10 @@
           "importedAt": "2026-08-02T18:59:42.843Z",
           "importedBy": "painel"
         }
+      },
+      "migration": {
+        "wm10LegacyEmailRollbackAt": "2026-08-26T16:43:50.584Z",
+        "wm10LegacyEmailRollbackValue": "giselemartins.sm1@gmail.com"
       }
     },
     {
@@ -71186,9 +71510,9 @@
         "serviceOrderIds": []
       },
       "createdAt": "2026-08-02T18:59:43.815Z",
-      "updatedAt": "2026-08-02T18:59:43.864Z",
+      "updatedAt": "2026-08-26T16:43:50.584Z",
       "createdBy": "painel",
-      "updatedBy": "painel",
+      "updatedBy": "wm10-legacy-rollback",
       "integrations": {
         "wm10": {
           "customerCode": 1024,
@@ -71212,6 +71536,10 @@
           "importedAt": "2026-08-02T18:59:43.864Z",
           "importedBy": "painel"
         }
+      },
+      "migration": {
+        "wm10LegacyEmailRollbackAt": "2026-08-26T16:43:50.584Z",
+        "wm10LegacyEmailRollbackValue": "dogastonho5@gmail.com"
       }
     },
     {
@@ -71886,9 +72214,9 @@
         "serviceOrderIds": []
       },
       "createdAt": "2026-08-02T18:59:45.150Z",
-      "updatedAt": "2026-08-02T18:59:45.190Z",
+      "updatedAt": "2026-08-26T16:43:50.584Z",
       "createdBy": "painel",
-      "updatedBy": "painel",
+      "updatedBy": "wm10-legacy-rollback",
       "integrations": {
         "wm10": {
           "customerCode": 1034,
@@ -71912,6 +72240,10 @@
           "importedAt": "2026-08-02T18:59:45.190Z",
           "importedBy": "painel"
         }
+      },
+      "migration": {
+        "wm10LegacyEmailRollbackAt": "2026-08-26T16:43:50.584Z",
+        "wm10LegacyEmailRollbackValue": "viniciusroessler@icloud.com"
       }
     },
     {
@@ -72306,9 +72638,9 @@
         "serviceOrderIds": []
       },
       "createdAt": "2026-08-02T18:59:45.945Z",
-      "updatedAt": "2026-08-02T18:59:45.984Z",
+      "updatedAt": "2026-08-26T16:43:50.584Z",
       "createdBy": "painel",
-      "updatedBy": "painel",
+      "updatedBy": "wm10-legacy-rollback",
       "integrations": {
         "wm10": {
           "customerCode": 1040,
@@ -72332,6 +72664,10 @@
           "importedAt": "2026-08-02T18:59:45.984Z",
           "importedBy": "painel"
         }
+      },
+      "migration": {
+        "wm10LegacyEmailRollbackAt": "2026-08-26T16:43:50.584Z",
+        "wm10LegacyEmailRollbackValue": "veralimberger752@gmail.com"
       }
     },
     {
@@ -72726,9 +73062,9 @@
         "serviceOrderIds": []
       },
       "createdAt": "2026-08-02T18:59:46.745Z",
-      "updatedAt": "2026-08-02T18:59:46.788Z",
+      "updatedAt": "2026-08-26T16:43:50.584Z",
       "createdBy": "painel",
-      "updatedBy": "painel",
+      "updatedBy": "wm10-legacy-rollback",
       "integrations": {
         "wm10": {
           "customerCode": 1046,
@@ -72752,6 +73088,10 @@
           "importedAt": "2026-08-02T18:59:46.788Z",
           "importedBy": "painel"
         }
+      },
+      "migration": {
+        "wm10LegacyEmailRollbackAt": "2026-08-26T16:43:50.584Z",
+        "wm10LegacyEmailRollbackValue": "alexandrenovachinski@icloud.com"
       }
     },
     {
@@ -72866,9 +73206,9 @@
         "serviceOrderIds": []
       },
       "createdAt": "2026-08-02T18:59:47.012Z",
-      "updatedAt": "2026-08-02T18:59:47.052Z",
+      "updatedAt": "2026-08-26T16:43:50.584Z",
       "createdBy": "painel",
-      "updatedBy": "painel",
+      "updatedBy": "wm10-legacy-rollback",
       "integrations": {
         "wm10": {
           "customerCode": 1048,
@@ -72892,6 +73232,10 @@
           "importedAt": "2026-08-02T18:59:47.052Z",
           "importedBy": "painel"
         }
+      },
+      "migration": {
+        "wm10LegacyEmailRollbackAt": "2026-08-26T16:43:50.584Z",
+        "wm10LegacyEmailRollbackValue": "mariamenezes20243@gmail.com"
       }
     },
     {
@@ -73636,9 +73980,9 @@
         "serviceOrderIds": []
       },
       "createdAt": "2026-08-02T18:59:48.639Z",
-      "updatedAt": "2026-08-02T18:59:48.681Z",
+      "updatedAt": "2026-08-26T16:43:50.584Z",
       "createdBy": "painel",
-      "updatedBy": "painel",
+      "updatedBy": "wm10-legacy-rollback",
       "integrations": {
         "wm10": {
           "customerCode": 1059,
@@ -73662,6 +74006,10 @@
           "importedAt": "2026-08-02T18:59:48.681Z",
           "importedBy": "painel"
         }
+      },
+      "migration": {
+        "wm10LegacyEmailRollbackAt": "2026-08-26T16:43:50.584Z",
+        "wm10LegacyEmailRollbackValue": "lilianmartins713@gmail.com"
       }
     },
     {
@@ -73916,9 +74264,9 @@
         "serviceOrderIds": []
       },
       "createdAt": "2026-08-02T18:59:49.188Z",
-      "updatedAt": "2026-08-02T18:59:49.232Z",
+      "updatedAt": "2026-08-26T16:43:50.584Z",
       "createdBy": "painel",
-      "updatedBy": "painel",
+      "updatedBy": "wm10-legacy-rollback",
       "integrations": {
         "wm10": {
           "customerCode": 1063,
@@ -73942,6 +74290,10 @@
           "importedAt": "2026-08-02T18:59:49.232Z",
           "importedBy": "painel"
         }
+      },
+      "migration": {
+        "wm10LegacyEmailRollbackAt": "2026-08-26T16:43:50.584Z",
+        "wm10LegacyEmailRollbackValue": "aldoripedrozo7@gmail.com"
       }
     },
     {
@@ -75176,9 +75528,9 @@
         "serviceOrderIds": []
       },
       "createdAt": "2026-08-02T18:59:51.730Z",
-      "updatedAt": "2026-08-02T18:59:51.772Z",
+      "updatedAt": "2026-08-26T16:43:50.584Z",
       "createdBy": "painel",
-      "updatedBy": "painel",
+      "updatedBy": "wm10-legacy-rollback",
       "integrations": {
         "wm10": {
           "customerCode": 1081,
@@ -75202,6 +75554,10 @@
           "importedAt": "2026-08-02T18:59:51.772Z",
           "importedBy": "painel"
         }
+      },
+      "migration": {
+        "wm10LegacyEmailRollbackAt": "2026-08-26T16:43:50.584Z",
+        "wm10LegacyEmailRollbackValue": "l29915211@gmail.com"
       }
     },
     {
@@ -75246,9 +75602,9 @@
         "serviceOrderIds": []
       },
       "createdAt": "2026-08-02T18:59:51.871Z",
-      "updatedAt": "2026-08-02T18:59:51.913Z",
+      "updatedAt": "2026-08-26T16:43:50.584Z",
       "createdBy": "painel",
-      "updatedBy": "painel",
+      "updatedBy": "wm10-legacy-rollback",
       "integrations": {
         "wm10": {
           "customerCode": 1082,
@@ -75272,6 +75628,10 @@
           "importedAt": "2026-08-02T18:59:51.913Z",
           "importedBy": "painel"
         }
+      },
+      "migration": {
+        "wm10LegacyEmailRollbackAt": "2026-08-26T16:43:50.584Z",
+        "wm10LegacyEmailRollbackValue": "laurindorebellatto.sm@gmail.com"
       }
     },
     {
@@ -75946,9 +76306,9 @@
         "serviceOrderIds": []
       },
       "createdAt": "2026-08-02T18:59:53.302Z",
-      "updatedAt": "2026-08-02T18:59:53.333Z",
+      "updatedAt": "2026-08-26T16:43:50.584Z",
       "createdBy": "painel",
-      "updatedBy": "painel",
+      "updatedBy": "wm10-legacy-rollback",
       "integrations": {
         "wm10": {
           "customerCode": 1092,
@@ -75972,6 +76332,10 @@
           "importedAt": "2026-08-02T18:59:53.333Z",
           "importedBy": "painel"
         }
+      },
+      "migration": {
+        "wm10LegacyEmailRollbackAt": "2026-08-26T16:43:50.584Z",
+        "wm10LegacyEmailRollbackValue": "jonasstumm.sm@gmail.com"
       }
     },
     {
@@ -78606,9 +78970,9 @@
         "serviceOrderIds": []
       },
       "createdAt": "2026-08-02T18:59:58.598Z",
-      "updatedAt": "2026-08-02T18:59:58.643Z",
+      "updatedAt": "2026-08-26T16:43:50.584Z",
       "createdBy": "painel",
-      "updatedBy": "painel",
+      "updatedBy": "wm10-legacy-rollback",
       "integrations": {
         "wm10": {
           "customerCode": 1130,
@@ -78632,6 +78996,10 @@
           "importedAt": "2026-08-02T18:59:58.643Z",
           "importedBy": "painel"
         }
+      },
+      "migration": {
+        "wm10LegacyEmailRollbackAt": "2026-08-26T16:43:50.584Z",
+        "wm10LegacyEmailRollbackValue": "donizetemattje03@gmail.com"
       }
     },
     {
@@ -79306,9 +79674,9 @@
         "serviceOrderIds": []
       },
       "createdAt": "2026-08-02T19:00:00.137Z",
-      "updatedAt": "2026-08-02T19:00:00.184Z",
+      "updatedAt": "2026-08-26T16:43:50.584Z",
       "createdBy": "painel",
-      "updatedBy": "painel",
+      "updatedBy": "wm10-legacy-rollback",
       "integrations": {
         "wm10": {
           "customerCode": 1140,
@@ -79332,6 +79700,10 @@
           "importedAt": "2026-08-02T19:00:00.184Z",
           "importedBy": "painel"
         }
+      },
+      "migration": {
+        "wm10LegacyEmailRollbackAt": "2026-08-26T16:43:50.584Z",
+        "wm10LegacyEmailRollbackValue": "erickrosa.sm1@gmail.com"
       }
     },
     {
@@ -79446,9 +79818,9 @@
         "serviceOrderIds": []
       },
       "createdAt": "2026-08-02T19:00:00.432Z",
-      "updatedAt": "2026-08-02T19:00:00.477Z",
+      "updatedAt": "2026-08-26T16:43:50.584Z",
       "createdBy": "painel",
-      "updatedBy": "painel",
+      "updatedBy": "wm10-legacy-rollback",
       "integrations": {
         "wm10": {
           "customerCode": 1142,
@@ -79472,6 +79844,10 @@
           "importedAt": "2026-08-02T19:00:00.477Z",
           "importedBy": "painel"
         }
+      },
+      "migration": {
+        "wm10LegacyEmailRollbackAt": "2026-08-26T16:43:50.584Z",
+        "wm10LegacyEmailRollbackValue": "wilmarodrigues.sm@gmail.com"
       }
     },
     {
@@ -80846,9 +81222,9 @@
         "serviceOrderIds": []
       },
       "createdAt": "2026-08-02T19:00:03.431Z",
-      "updatedAt": "2026-08-02T19:00:03.480Z",
+      "updatedAt": "2026-08-26T16:43:50.584Z",
       "createdBy": "painel",
-      "updatedBy": "painel",
+      "updatedBy": "wm10-legacy-rollback",
       "integrations": {
         "wm10": {
           "customerCode": 1162,
@@ -80872,6 +81248,10 @@
           "importedAt": "2026-08-02T19:00:03.480Z",
           "importedBy": "painel"
         }
+      },
+      "migration": {
+        "wm10LegacyEmailRollbackAt": "2026-08-26T16:43:50.584Z",
+        "wm10LegacyEmailRollbackValue": "elisianebender.sm@gmail.com"
       }
     },
     {
@@ -82106,9 +82486,9 @@
         "serviceOrderIds": []
       },
       "createdAt": "2026-08-02T19:00:06.354Z",
-      "updatedAt": "2026-08-02T19:00:06.400Z",
+      "updatedAt": "2026-08-26T16:43:50.584Z",
       "createdBy": "painel",
-      "updatedBy": "painel",
+      "updatedBy": "wm10-legacy-rollback",
       "integrations": {
         "wm10": {
           "customerCode": 1181,
@@ -82132,6 +82512,10 @@
           "importedAt": "2026-08-02T19:00:06.400Z",
           "importedBy": "painel"
         }
+      },
+      "migration": {
+        "wm10LegacyEmailRollbackAt": "2026-08-26T16:43:50.584Z",
+        "wm10LegacyEmailRollbackValue": "julianomartins.sm2022@gmail.com"
       }
     },
     {
@@ -84066,9 +84450,9 @@
         "serviceOrderIds": []
       },
       "createdAt": "2026-08-02T19:00:10.668Z",
-      "updatedAt": "2026-08-02T19:00:10.718Z",
+      "updatedAt": "2026-08-26T16:43:50.584Z",
       "createdBy": "painel",
-      "updatedBy": "painel",
+      "updatedBy": "wm10-legacy-rollback",
       "integrations": {
         "wm10": {
           "customerCode": 1209,
@@ -84092,6 +84476,10 @@
           "importedAt": "2026-08-02T19:00:10.718Z",
           "importedBy": "painel"
         }
+      },
+      "migration": {
+        "wm10LegacyEmailRollbackAt": "2026-08-26T16:43:50.584Z",
+        "wm10LegacyEmailRollbackValue": "pedrodamiao.sm@gmail.com"
       }
     },
     {
@@ -85606,9 +85994,9 @@
         "serviceOrderIds": []
       },
       "createdAt": "2026-08-02T19:00:14.065Z",
-      "updatedAt": "2026-08-02T19:00:14.102Z",
+      "updatedAt": "2026-08-26T16:43:50.584Z",
       "createdBy": "painel",
-      "updatedBy": "painel",
+      "updatedBy": "wm10-legacy-rollback",
       "integrations": {
         "wm10": {
           "customerCode": 1231,
@@ -85632,6 +86020,10 @@
           "importedAt": "2026-08-02T19:00:14.102Z",
           "importedBy": "painel"
         }
+      },
+      "migration": {
+        "wm10LegacyEmailRollbackAt": "2026-08-26T16:43:50.584Z",
+        "wm10LegacyEmailRollbackValue": "mariacandidaribas.sm1@gmail.com"
       }
     },
     {
@@ -85956,9 +86348,9 @@
         "serviceOrderIds": []
       },
       "createdAt": "2026-08-02T19:00:14.622Z",
-      "updatedAt": "2026-08-02T19:00:14.658Z",
+      "updatedAt": "2026-08-26T16:43:50.584Z",
       "createdBy": "painel",
-      "updatedBy": "painel",
+      "updatedBy": "wm10-legacy-rollback",
       "integrations": {
         "wm10": {
           "customerCode": 1236,
@@ -85982,6 +86374,10 @@
           "importedAt": "2026-08-02T19:00:14.658Z",
           "importedBy": "painel"
         }
+      },
+      "migration": {
+        "wm10LegacyEmailRollbackAt": "2026-08-26T16:43:50.584Z",
+        "wm10LegacyEmailRollbackValue": "osvaldokolberg69@gmail.com"
       }
     },
     {
@@ -87006,9 +87402,9 @@
         "serviceOrderIds": []
       },
       "createdAt": "2026-08-02T19:00:16.511Z",
-      "updatedAt": "2026-08-02T19:00:16.589Z",
+      "updatedAt": "2026-08-26T16:43:50.584Z",
       "createdBy": "painel",
-      "updatedBy": "painel",
+      "updatedBy": "wm10-legacy-rollback",
       "integrations": {
         "wm10": {
           "customerCode": 1251,
@@ -87032,6 +87428,10 @@
           "importedAt": "2026-08-02T19:00:16.589Z",
           "importedBy": "painel"
         }
+      },
+      "migration": {
+        "wm10LegacyEmailRollbackAt": "2026-08-26T16:43:50.584Z",
+        "wm10LegacyEmailRollbackValue": "evertondasilva.sm1@gmail.com"
       }
     },
     {
@@ -87426,9 +87826,9 @@
         "serviceOrderIds": []
       },
       "createdAt": "2026-08-02T19:00:17.691Z",
-      "updatedAt": "2026-08-02T19:00:17.749Z",
+      "updatedAt": "2026-08-26T16:43:50.584Z",
       "createdBy": "painel",
-      "updatedBy": "painel",
+      "updatedBy": "wm10-legacy-rollback",
       "integrations": {
         "wm10": {
           "customerCode": 1257,
@@ -87452,6 +87852,10 @@
           "importedAt": "2026-08-02T19:00:17.749Z",
           "importedBy": "painel"
         }
+      },
+      "migration": {
+        "wm10LegacyEmailRollbackAt": "2026-08-26T16:43:50.584Z",
+        "wm10LegacyEmailRollbackValue": "jocegstrentzke@gmail.com"
       }
     },
     {
@@ -90226,9 +90630,9 @@
         "serviceOrderIds": []
       },
       "createdAt": "2026-08-02T19:00:24.696Z",
-      "updatedAt": "2026-08-02T19:00:24.750Z",
+      "updatedAt": "2026-08-26T16:43:50.584Z",
       "createdBy": "painel",
-      "updatedBy": "painel",
+      "updatedBy": "wm10-legacy-rollback",
       "integrations": {
         "wm10": {
           "customerCode": 1297,
@@ -90252,6 +90656,10 @@
           "importedAt": "2026-08-02T19:00:24.750Z",
           "importedBy": "painel"
         }
+      },
+      "migration": {
+        "wm10LegacyEmailRollbackAt": "2026-08-26T16:43:50.584Z",
+        "wm10LegacyEmailRollbackValue": "wrbarbieriinsumosagricolas.sm@gmail.com"
       }
     },
     {
@@ -90716,9 +91124,9 @@
         "serviceOrderIds": []
       },
       "createdAt": "2026-08-02T19:00:25.863Z",
-      "updatedAt": "2026-08-02T19:00:25.916Z",
+      "updatedAt": "2026-08-26T16:43:50.584Z",
       "createdBy": "painel",
-      "updatedBy": "painel",
+      "updatedBy": "wm10-legacy-rollback",
       "integrations": {
         "wm10": {
           "customerCode": 1304,
@@ -90742,6 +91150,10 @@
           "importedAt": "2026-08-02T19:00:25.916Z",
           "importedBy": "painel"
         }
+      },
+      "migration": {
+        "wm10LegacyEmailRollbackAt": "2026-08-26T16:43:50.584Z",
+        "wm10LegacyEmailRollbackValue": "ericalima30@icloud.com"
       }
     },
     {
@@ -91626,9 +92038,9 @@
         "serviceOrderIds": []
       },
       "createdAt": "2026-08-02T19:00:28.124Z",
-      "updatedAt": "2026-08-02T19:00:28.177Z",
+      "updatedAt": "2026-08-26T16:43:50.584Z",
       "createdBy": "painel",
-      "updatedBy": "painel",
+      "updatedBy": "wm10-legacy-rollback",
       "integrations": {
         "wm10": {
           "customerCode": 1317,
@@ -91652,6 +92064,10 @@
           "importedAt": "2026-08-02T19:00:28.177Z",
           "importedBy": "painel"
         }
+      },
+      "migration": {
+        "wm10LegacyEmailRollbackAt": "2026-08-26T16:43:50.584Z",
+        "wm10LegacyEmailRollbackValue": "elisakussler@gmail.com"
       }
     },
     {
@@ -91696,9 +92112,9 @@
         "serviceOrderIds": []
       },
       "createdAt": "2026-08-02T19:00:28.290Z",
-      "updatedAt": "2026-08-02T19:00:28.345Z",
+      "updatedAt": "2026-08-26T16:43:50.584Z",
       "createdBy": "painel",
-      "updatedBy": "painel",
+      "updatedBy": "wm10-legacy-rollback",
       "integrations": {
         "wm10": {
           "customerCode": 1318,
@@ -91722,6 +92138,10 @@
           "importedAt": "2026-08-02T19:00:28.345Z",
           "importedBy": "painel"
         }
+      },
+      "migration": {
+        "wm10LegacyEmailRollbackAt": "2026-08-26T16:43:50.584Z",
+        "wm10LegacyEmailRollbackValue": "mariabsilva.saldanha@gmail.com"
       }
     },
     {
@@ -91766,9 +92186,9 @@
         "serviceOrderIds": []
       },
       "createdAt": "2026-08-02T19:00:28.456Z",
-      "updatedAt": "2026-08-02T19:00:28.509Z",
+      "updatedAt": "2026-08-26T16:43:50.584Z",
       "createdBy": "painel",
-      "updatedBy": "painel",
+      "updatedBy": "wm10-legacy-rollback",
       "integrations": {
         "wm10": {
           "customerCode": 1319,
@@ -91792,6 +92212,10 @@
           "importedAt": "2026-08-02T19:00:28.509Z",
           "importedBy": "painel"
         }
+      },
+      "migration": {
+        "wm10LegacyEmailRollbackAt": "2026-08-26T16:43:50.584Z",
+        "wm10LegacyEmailRollbackValue": "gersonfreitas.sm1@gmail.com"
       }
     },
     {
@@ -92116,9 +92540,9 @@
         "serviceOrderIds": []
       },
       "createdAt": "2026-08-02T19:00:29.311Z",
-      "updatedAt": "2026-08-02T19:00:29.364Z",
+      "updatedAt": "2026-08-26T16:43:50.584Z",
       "createdBy": "painel",
-      "updatedBy": "painel",
+      "updatedBy": "wm10-legacy-rollback",
       "integrations": {
         "wm10": {
           "customerCode": 1324,
@@ -92142,6 +92566,10 @@
           "importedAt": "2026-08-02T19:00:29.364Z",
           "importedBy": "painel"
         }
+      },
+      "migration": {
+        "wm10LegacyEmailRollbackAt": "2026-08-26T16:43:50.584Z",
+        "wm10LegacyEmailRollbackValue": "andrielementz@hotmail.com"
       }
     },
     {
@@ -93586,9 +94014,9 @@
         "serviceOrderIds": []
       },
       "createdAt": "2026-08-02T19:00:32.938Z",
-      "updatedAt": "2026-08-02T19:00:33.000Z",
+      "updatedAt": "2026-08-26T16:43:50.584Z",
       "createdBy": "painel",
-      "updatedBy": "painel",
+      "updatedBy": "wm10-legacy-rollback",
       "integrations": {
         "wm10": {
           "customerCode": 1345,
@@ -93612,6 +94040,10 @@
           "importedAt": "2026-08-02T19:00:33.000Z",
           "importedBy": "painel"
         }
+      },
+      "migration": {
+        "wm10LegacyEmailRollbackAt": "2026-08-26T16:43:50.584Z",
+        "wm10LegacyEmailRollbackValue": "rmdebona86@gmail.com"
       }
     },
     {
@@ -94986,9 +95418,9 @@
         "serviceOrderIds": []
       },
       "createdAt": "2026-08-02T19:00:36.448Z",
-      "updatedAt": "2026-08-02T19:00:36.488Z",
+      "updatedAt": "2026-08-26T16:43:50.584Z",
       "createdBy": "painel",
-      "updatedBy": "painel",
+      "updatedBy": "wm10-legacy-rollback",
       "integrations": {
         "wm10": {
           "customerCode": 1365,
@@ -95012,6 +95444,10 @@
           "importedAt": "2026-08-02T19:00:36.488Z",
           "importedBy": "painel"
         }
+      },
+      "migration": {
+        "wm10LegacyEmailRollbackAt": "2026-08-26T16:43:50.584Z",
+        "wm10LegacyEmailRollbackValue": "inesbirkhan92@gmail.com"
       }
     },
     {
@@ -95756,9 +96192,9 @@
         "serviceOrderIds": []
       },
       "createdAt": "2026-08-02T19:00:37.888Z",
-      "updatedAt": "2026-08-02T19:00:37.943Z",
+      "updatedAt": "2026-08-26T16:43:50.584Z",
       "createdBy": "painel",
-      "updatedBy": "painel",
+      "updatedBy": "wm10-legacy-rollback",
       "integrations": {
         "wm10": {
           "customerCode": 1376,
@@ -95782,6 +96218,10 @@
           "importedAt": "2026-08-02T19:00:37.943Z",
           "importedBy": "painel"
         }
+      },
+      "migration": {
+        "wm10LegacyEmailRollbackAt": "2026-08-26T16:43:50.584Z",
+        "wm10LegacyEmailRollbackValue": "depaulabardeni@gmail.com"
       }
     },
     {
@@ -96176,9 +96616,9 @@
         "serviceOrderIds": []
       },
       "createdAt": "2026-08-02T19:00:39.023Z",
-      "updatedAt": "2026-08-02T19:00:39.089Z",
+      "updatedAt": "2026-08-26T16:43:50.584Z",
       "createdBy": "painel",
-      "updatedBy": "painel",
+      "updatedBy": "wm10-legacy-rollback",
       "integrations": {
         "wm10": {
           "customerCode": 1382,
@@ -96202,6 +96642,10 @@
           "importedAt": "2026-08-02T19:00:39.089Z",
           "importedBy": "painel"
         }
+      },
+      "migration": {
+        "wm10LegacyEmailRollbackAt": "2026-08-26T16:43:50.584Z",
+        "wm10LegacyEmailRollbackValue": "arcildovaliati.sm@gmail.com"
       }
     },
     {
@@ -97926,9 +98370,9 @@
         "serviceOrderIds": []
       },
       "createdAt": "2026-08-02T19:00:43.598Z",
-      "updatedAt": "2026-08-02T19:00:43.656Z",
+      "updatedAt": "2026-08-26T16:43:50.584Z",
       "createdBy": "painel",
-      "updatedBy": "painel",
+      "updatedBy": "wm10-legacy-rollback",
       "integrations": {
         "wm10": {
           "customerCode": 1407,
@@ -97952,6 +98396,10 @@
           "importedAt": "2026-08-02T19:00:43.656Z",
           "importedBy": "painel"
         }
+      },
+      "migration": {
+        "wm10LegacyEmailRollbackAt": "2026-08-26T16:43:50.584Z",
+        "wm10LegacyEmailRollbackValue": "sirleiaime.sm@gmail.com"
       }
     },
     {
@@ -97996,9 +98444,9 @@
         "serviceOrderIds": []
       },
       "createdAt": "2026-08-02T19:00:43.780Z",
-      "updatedAt": "2026-08-02T19:00:43.834Z",
+      "updatedAt": "2026-08-26T16:43:50.584Z",
       "createdBy": "painel",
-      "updatedBy": "painel",
+      "updatedBy": "wm10-legacy-rollback",
       "integrations": {
         "wm10": {
           "customerCode": 1408,
@@ -98022,6 +98470,10 @@
           "importedAt": "2026-08-02T19:00:43.834Z",
           "importedBy": "painel"
         }
+      },
+      "migration": {
+        "wm10LegacyEmailRollbackAt": "2026-08-26T16:43:50.584Z",
+        "wm10LegacyEmailRollbackValue": "carlos.schneider1969@gmail.com"
       }
     },
     {
@@ -99256,9 +99708,9 @@
         "serviceOrderIds": []
       },
       "createdAt": "2026-08-02T19:00:47.239Z",
-      "updatedAt": "2026-08-02T19:00:47.298Z",
+      "updatedAt": "2026-08-26T16:43:50.584Z",
       "createdBy": "painel",
-      "updatedBy": "painel",
+      "updatedBy": "wm10-legacy-rollback",
       "integrations": {
         "wm10": {
           "customerCode": 1426,
@@ -99282,6 +99734,10 @@
           "importedAt": "2026-08-02T19:00:47.298Z",
           "importedBy": "painel"
         }
+      },
+      "migration": {
+        "wm10LegacyEmailRollbackAt": "2026-08-26T16:43:50.584Z",
+        "wm10LegacyEmailRollbackValue": "valdepontes556@gmail.com"
       }
     },
     {
@@ -99816,9 +100272,9 @@
         "serviceOrderIds": []
       },
       "createdAt": "2026-08-02T19:00:48.827Z",
-      "updatedAt": "2026-08-02T19:00:48.894Z",
+      "updatedAt": "2026-08-26T16:43:50.584Z",
       "createdBy": "painel",
-      "updatedBy": "painel",
+      "updatedBy": "wm10-legacy-rollback",
       "integrations": {
         "wm10": {
           "customerCode": 1434,
@@ -99842,6 +100298,10 @@
           "importedAt": "2026-08-02T19:00:48.894Z",
           "importedBy": "painel"
         }
+      },
+      "migration": {
+        "wm10LegacyEmailRollbackAt": "2026-08-26T16:43:50.584Z",
+        "wm10LegacyEmailRollbackValue": "pietraschneideradv@gmail.com"
       }
     },
     {
@@ -100236,9 +100696,9 @@
         "serviceOrderIds": []
       },
       "createdAt": "2026-08-02T19:00:50.145Z",
-      "updatedAt": "2026-08-02T19:00:50.201Z",
+      "updatedAt": "2026-08-26T16:43:50.584Z",
       "createdBy": "painel",
-      "updatedBy": "painel",
+      "updatedBy": "wm10-legacy-rollback",
       "integrations": {
         "wm10": {
           "customerCode": 1440,
@@ -100262,6 +100722,10 @@
           "importedAt": "2026-08-02T19:00:50.201Z",
           "importedBy": "painel"
         }
+      },
+      "migration": {
+        "wm10LegacyEmailRollbackAt": "2026-08-26T16:43:50.584Z",
+        "wm10LegacyEmailRollbackValue": "josealdori.sm@gmail.com"
       }
     },
     {
@@ -101216,9 +101680,9 @@
         "serviceOrderIds": []
       },
       "createdAt": "2026-08-02T19:00:52.787Z",
-      "updatedAt": "2026-08-02T19:00:52.844Z",
+      "updatedAt": "2026-08-26T16:43:50.584Z",
       "createdBy": "painel",
-      "updatedBy": "painel",
+      "updatedBy": "wm10-legacy-rollback",
       "integrations": {
         "wm10": {
           "customerCode": 1454,
@@ -101242,6 +101706,10 @@
           "importedAt": "2026-08-02T19:00:52.844Z",
           "importedBy": "painel"
         }
+      },
+      "migration": {
+        "wm10LegacyEmailRollbackAt": "2026-08-26T16:43:50.584Z",
+        "wm10LegacyEmailRollbackValue": "geraciamaral.sm@gmail.com"
       }
     },
     {
@@ -103526,9 +103994,9 @@
         "serviceOrderIds": []
       },
       "createdAt": "2026-08-02T19:00:59.014Z",
-      "updatedAt": "2026-08-02T19:00:59.073Z",
+      "updatedAt": "2026-08-26T16:43:50.584Z",
       "createdBy": "painel",
-      "updatedBy": "painel",
+      "updatedBy": "wm10-legacy-rollback",
       "integrations": {
         "wm10": {
           "customerCode": 1490,
@@ -103552,6 +104020,10 @@
           "importedAt": "2026-08-02T19:00:59.073Z",
           "importedBy": "painel"
         }
+      },
+      "migration": {
+        "wm10LegacyEmailRollbackAt": "2026-08-26T16:43:50.584Z",
+        "wm10LegacyEmailRollbackValue": "arlindosoares.sm@gmail.com"
       }
     },
     {
@@ -103666,9 +104138,9 @@
         "serviceOrderIds": []
       },
       "createdAt": "2026-08-02T19:00:59.397Z",
-      "updatedAt": "2026-08-02T19:00:59.454Z",
+      "updatedAt": "2026-08-26T16:43:50.584Z",
       "createdBy": "painel",
-      "updatedBy": "painel",
+      "updatedBy": "wm10-legacy-rollback",
       "integrations": {
         "wm10": {
           "customerCode": 1492,
@@ -103692,6 +104164,10 @@
           "importedAt": "2026-08-02T19:00:59.454Z",
           "importedBy": "painel"
         }
+      },
+      "migration": {
+        "wm10LegacyEmailRollbackAt": "2026-08-26T16:43:50.584Z",
+        "wm10LegacyEmailRollbackValue": "darosajurema0@gmail.com"
       }
     },
     {
@@ -104156,9 +104632,9 @@
         "serviceOrderIds": []
       },
       "createdAt": "2026-08-02T19:01:00.771Z",
-      "updatedAt": "2026-08-02T19:01:00.830Z",
+      "updatedAt": "2026-08-26T16:43:50.584Z",
       "createdBy": "painel",
-      "updatedBy": "painel",
+      "updatedBy": "wm10-legacy-rollback",
       "integrations": {
         "wm10": {
           "customerCode": 1501,
@@ -104182,6 +104658,10 @@
           "importedAt": "2026-08-02T19:01:00.830Z",
           "importedBy": "painel"
         }
+      },
+      "migration": {
+        "wm10LegacyEmailRollbackAt": "2026-08-26T16:43:50.584Z",
+        "wm10LegacyEmailRollbackValue": "casteelli06@gmail.com"
       }
     },
     {
@@ -107919,7 +108399,7 @@
       "mobile": "55999760225",
       "email": "",
       "zipCode": "98250000",
-      "street": "AVENIDA SILVA TAVARES",
+      "street": "Rua Gomercindo saraiva",
       "number": "1879",
       "complement": "",
       "district": "CENTRO",
@@ -107936,7 +108416,7 @@
         "serviceOrderIds": []
       },
       "createdAt": "2026-08-02T19:01:12.828Z",
-      "updatedAt": "2026-08-02T19:01:12.888Z",
+      "updatedAt": "2026-08-26T19:44:07.197Z",
       "createdBy": "painel",
       "updatedBy": "painel",
       "integrations": {
@@ -107962,6 +108442,10 @@
           "importedAt": "2026-08-02T19:01:12.888Z",
           "importedBy": "painel"
         }
+      },
+      "migration": {
+        "wm10LegacyEmailRollbackAt": "2026-08-26T16:43:50.584Z",
+        "wm10LegacyEmailRollbackValue": "jubarbieri47@gmail.com"
       }
     },
     {
@@ -111156,9 +111640,9 @@
         "serviceOrderIds": []
       },
       "createdAt": "2026-08-02T19:01:22.178Z",
-      "updatedAt": "2026-08-02T19:01:22.246Z",
+      "updatedAt": "2026-08-26T16:43:50.584Z",
       "createdBy": "painel",
-      "updatedBy": "painel",
+      "updatedBy": "wm10-legacy-rollback",
       "integrations": {
         "wm10": {
           "customerCode": 1604,
@@ -111182,6 +111666,10 @@
           "importedAt": "2026-08-02T19:01:22.246Z",
           "importedBy": "painel"
         }
+      },
+      "migration": {
+        "wm10LegacyEmailRollbackAt": "2026-08-26T16:43:50.584Z",
+        "wm10LegacyEmailRollbackValue": "enidarosadesouza@gmail.com"
       }
     },
     {
@@ -111366,9 +111854,9 @@
         "serviceOrderIds": []
       },
       "createdAt": "2026-08-02T19:01:22.818Z",
-      "updatedAt": "2026-08-02T19:01:22.885Z",
+      "updatedAt": "2026-08-26T16:43:50.584Z",
       "createdBy": "painel",
-      "updatedBy": "painel",
+      "updatedBy": "wm10-legacy-rollback",
       "integrations": {
         "wm10": {
           "customerCode": 1607,
@@ -111392,6 +111880,10 @@
           "importedAt": "2026-08-02T19:01:22.885Z",
           "importedBy": "painel"
         }
+      },
+      "migration": {
+        "wm10LegacyEmailRollbackAt": "2026-08-26T16:43:50.584Z",
+        "wm10LegacyEmailRollbackValue": "inezweher@gmail.com"
       }
     },
     {
@@ -114059,7 +114551,7 @@
       "code": "001631",
       "companyId": "quality-principal",
       "personType": "pf",
-      "name": "marisa almeida santos",
+      "name": "marisa de fatima de almeida santos",
       "tradeName": "",
       "document": "88920747091",
       "stateRegistration": "",
@@ -114096,9 +114588,9 @@
         "serviceOrderIds": []
       },
       "createdAt": "2026-08-02T19:01:31.155Z",
-      "updatedAt": "2026-08-02T19:01:31.220Z",
+      "updatedAt": "2026-08-26T16:43:50.584Z",
       "createdBy": "painel",
-      "updatedBy": "painel",
+      "updatedBy": "wm10-legacy-rollback",
       "integrations": {
         "wm10": {
           "customerCode": 1646,
@@ -114122,6 +114614,10 @@
           "importedAt": "2026-08-02T19:01:31.220Z",
           "importedBy": "painel"
         }
+      },
+      "migration": {
+        "wm10LegacyEmailRollbackAt": "2026-08-26T16:43:50.584Z",
+        "wm10LegacyEmailRollbackValue": "marisasantos.sm1@gmail.com"
       }
     },
     {
@@ -114166,9 +114662,9 @@
         "serviceOrderIds": []
       },
       "createdAt": "2026-08-02T19:01:31.366Z",
-      "updatedAt": "2026-08-02T19:01:31.429Z",
+      "updatedAt": "2026-08-26T16:43:50.584Z",
       "createdBy": "painel",
-      "updatedBy": "painel",
+      "updatedBy": "wm10-legacy-rollback",
       "integrations": {
         "wm10": {
           "customerCode": 1647,
@@ -114192,6 +114688,10 @@
           "importedAt": "2026-08-02T19:01:31.429Z",
           "importedBy": "painel"
         }
+      },
+      "migration": {
+        "wm10LegacyEmailRollbackAt": "2026-08-26T16:43:50.584Z",
+        "wm10LegacyEmailRollbackValue": "ercioseiter.sm@gmail.com"
       }
     },
     {
@@ -114936,9 +115436,9 @@
         "serviceOrderIds": []
       },
       "createdAt": "2026-08-02T19:01:33.749Z",
-      "updatedAt": "2026-08-02T19:01:33.816Z",
+      "updatedAt": "2026-08-26T16:43:50.584Z",
       "createdBy": "painel",
-      "updatedBy": "painel",
+      "updatedBy": "wm10-legacy-rollback",
       "integrations": {
         "wm10": {
           "customerCode": 1658,
@@ -114962,6 +115462,10 @@
           "importedAt": "2026-08-02T19:01:33.816Z",
           "importedBy": "painel"
         }
+      },
+      "migration": {
+        "wm10LegacyEmailRollbackAt": "2026-08-26T16:43:50.584Z",
+        "wm10LegacyEmailRollbackValue": "luciavillani2023@gmail.com"
       }
     },
     {
@@ -117785,8 +118289,8 @@
       "fatherName": "",
       "motherName": "",
       "creditLimit": 0,
-      "phone": "54991494128",
-      "mobile": "54991494128",
+      "phone": "",
+      "mobile": "54994623003",
       "email": "",
       "zipCode": "98200000",
       "street": "Humberto fior",
@@ -117806,9 +118310,9 @@
         "serviceOrderIds": []
       },
       "createdAt": "2026-08-02T19:01:42.619Z",
-      "updatedAt": "2026-08-02T19:01:42.668Z",
+      "updatedAt": "2026-08-27T12:54:00.973Z",
       "createdBy": "painel",
-      "updatedBy": "painel",
+      "updatedBy": "Matheus Fernando",
       "integrations": {
         "wm10": {
           "customerCode": 1699,
@@ -118786,9 +119290,9 @@
         "serviceOrderIds": []
       },
       "createdAt": "2026-08-02T19:01:44.828Z",
-      "updatedAt": "2026-08-02T19:01:44.900Z",
+      "updatedAt": "2026-08-26T16:43:50.584Z",
       "createdBy": "painel",
-      "updatedBy": "painel",
+      "updatedBy": "wm10-legacy-rollback",
       "integrations": {
         "wm10": {
           "customerCode": 1713,
@@ -118812,6 +119316,10 @@
           "importedAt": "2026-08-02T19:01:44.900Z",
           "importedBy": "painel"
         }
+      },
+      "migration": {
+        "wm10LegacyEmailRollbackAt": "2026-08-26T16:43:50.584Z",
+        "wm10LegacyEmailRollbackValue": "arno.representacoes@gmail.com"
       }
     },
     {
@@ -119276,9 +119784,9 @@
         "serviceOrderIds": []
       },
       "createdAt": "2026-08-02T19:01:46.439Z",
-      "updatedAt": "2026-08-02T19:01:46.506Z",
+      "updatedAt": "2026-08-26T16:43:50.584Z",
       "createdBy": "painel",
-      "updatedBy": "painel",
+      "updatedBy": "wm10-legacy-rollback",
       "integrations": {
         "wm10": {
           "customerCode": 1720,
@@ -119302,6 +119810,10 @@
           "importedAt": "2026-08-02T19:01:46.506Z",
           "importedBy": "painel"
         }
+      },
+      "migration": {
+        "wm10LegacyEmailRollbackAt": "2026-08-26T16:43:50.584Z",
+        "wm10LegacyEmailRollbackValue": "catatajonas.sm1@icloud.com"
       }
     },
     {
@@ -119486,9 +119998,9 @@
         "serviceOrderIds": []
       },
       "createdAt": "2026-08-02T19:01:47.122Z",
-      "updatedAt": "2026-08-02T19:01:47.193Z",
+      "updatedAt": "2026-08-26T16:43:50.584Z",
       "createdBy": "painel",
-      "updatedBy": "painel",
+      "updatedBy": "wm10-legacy-rollback",
       "integrations": {
         "wm10": {
           "customerCode": 1723,
@@ -119512,6 +120024,10 @@
           "importedAt": "2026-08-02T19:01:47.193Z",
           "importedBy": "painel"
         }
+      },
+      "migration": {
+        "wm10LegacyEmailRollbackAt": "2026-08-26T16:43:50.584Z",
+        "wm10LegacyEmailRollbackValue": "vitormateus.sm1@gmail.com"
       }
     },
     {
@@ -119626,9 +120142,9 @@
         "serviceOrderIds": []
       },
       "createdAt": "2026-08-02T19:01:47.636Z",
-      "updatedAt": "2026-08-02T19:01:47.706Z",
+      "updatedAt": "2026-08-26T16:43:50.584Z",
       "createdBy": "painel",
-      "updatedBy": "painel",
+      "updatedBy": "wm10-legacy-rollback",
       "integrations": {
         "wm10": {
           "customerCode": 1725,
@@ -119652,6 +120168,10 @@
           "importedAt": "2026-08-02T19:01:47.706Z",
           "importedBy": "painel"
         }
+      },
+      "migration": {
+        "wm10LegacyEmailRollbackAt": "2026-08-26T16:43:50.584Z",
+        "wm10LegacyEmailRollbackValue": "manuelifiorese@gmail.com"
       }
     },
     {
@@ -121656,9 +122176,9 @@
         "serviceOrderIds": []
       },
       "createdAt": "2026-08-02T19:01:54.151Z",
-      "updatedAt": "2026-08-02T19:01:54.219Z",
+      "updatedAt": "2026-08-26T16:43:50.584Z",
       "createdBy": "painel",
-      "updatedBy": "painel",
+      "updatedBy": "wm10-legacy-rollback",
       "integrations": {
         "wm10": {
           "customerCode": 1754,
@@ -121682,6 +122202,10 @@
           "importedAt": "2026-08-02T19:01:54.219Z",
           "importedBy": "painel"
         }
+      },
+      "migration": {
+        "wm10LegacyEmailRollbackAt": "2026-08-26T16:43:50.584Z",
+        "wm10LegacyEmailRollbackValue": "iltonbarden.sm1@gmail.com"
       }
     },
     {
@@ -122006,9 +122530,9 @@
         "serviceOrderIds": []
       },
       "createdAt": "2026-08-02T19:01:55.322Z",
-      "updatedAt": "2026-08-02T19:01:55.400Z",
+      "updatedAt": "2026-08-26T16:43:50.584Z",
       "createdBy": "painel",
-      "updatedBy": "painel",
+      "updatedBy": "wm10-legacy-rollback",
       "integrations": {
         "wm10": {
           "customerCode": 1759,
@@ -122032,6 +122556,10 @@
           "importedAt": "2026-08-02T19:01:55.400Z",
           "importedBy": "painel"
         }
+      },
+      "migration": {
+        "wm10LegacyEmailRollbackAt": "2026-08-26T16:43:50.584Z",
+        "wm10LegacyEmailRollbackValue": "mauribirkan@gmail.com"
       }
     },
     {
@@ -123406,9 +123934,9 @@
         "serviceOrderIds": []
       },
       "createdAt": "2026-08-02T19:02:00.414Z",
-      "updatedAt": "2026-08-02T19:02:00.485Z",
+      "updatedAt": "2026-08-26T16:43:50.584Z",
       "createdBy": "painel",
-      "updatedBy": "painel",
+      "updatedBy": "wm10-legacy-rollback",
       "integrations": {
         "wm10": {
           "customerCode": 1779,
@@ -123432,6 +123960,10 @@
           "importedAt": "2026-08-02T19:02:00.485Z",
           "importedBy": "painel"
         }
+      },
+      "migration": {
+        "wm10LegacyEmailRollbackAt": "2026-08-26T16:43:50.584Z",
+        "wm10LegacyEmailRollbackValue": "larissagelhen222@gmail.com"
       }
     },
     {
@@ -123826,9 +124358,9 @@
         "serviceOrderIds": []
       },
       "createdAt": "2026-08-02T19:02:01.879Z",
-      "updatedAt": "2026-08-02T19:02:01.951Z",
+      "updatedAt": "2026-08-26T16:43:50.584Z",
       "createdBy": "painel",
-      "updatedBy": "painel",
+      "updatedBy": "wm10-legacy-rollback",
       "integrations": {
         "wm10": {
           "customerCode": 1785,
@@ -123852,6 +124384,10 @@
           "importedAt": "2026-08-02T19:02:01.951Z",
           "importedBy": "painel"
         }
+      },
+      "migration": {
+        "wm10LegacyEmailRollbackAt": "2026-08-26T16:43:50.584Z",
+        "wm10LegacyEmailRollbackValue": "milanese.valdir@gmail.com"
       }
     },
     {
@@ -124036,9 +124572,9 @@
         "serviceOrderIds": []
       },
       "createdAt": "2026-08-02T19:02:02.586Z",
-      "updatedAt": "2026-08-02T19:02:02.653Z",
+      "updatedAt": "2026-08-26T16:43:50.584Z",
       "createdBy": "painel",
-      "updatedBy": "painel",
+      "updatedBy": "wm10-legacy-rollback",
       "integrations": {
         "wm10": {
           "customerCode": 1788,
@@ -124062,6 +124598,10 @@
           "importedAt": "2026-08-02T19:02:02.653Z",
           "importedBy": "painel"
         }
+      },
+      "migration": {
+        "wm10LegacyEmailRollbackAt": "2026-08-26T16:43:50.584Z",
+        "wm10LegacyEmailRollbackValue": "lurdesbirkahnn.sm@gmail.com"
       }
     },
     {
@@ -125086,9 +125626,9 @@
         "serviceOrderIds": []
       },
       "createdAt": "2026-08-02T19:02:06.083Z",
-      "updatedAt": "2026-08-02T19:02:06.153Z",
+      "updatedAt": "2026-08-26T16:43:50.584Z",
       "createdBy": "painel",
-      "updatedBy": "painel",
+      "updatedBy": "wm10-legacy-rollback",
       "integrations": {
         "wm10": {
           "customerCode": 1803,
@@ -125112,6 +125652,10 @@
           "importedAt": "2026-08-02T19:02:06.152Z",
           "importedBy": "painel"
         }
+      },
+      "migration": {
+        "wm10LegacyEmailRollbackAt": "2026-08-26T16:43:50.584Z",
+        "wm10LegacyEmailRollbackValue": "katianahuther.sm@gmail.com"
       }
     },
     {
@@ -125576,9 +126120,9 @@
         "serviceOrderIds": []
       },
       "createdAt": "2026-08-02T19:02:07.798Z",
-      "updatedAt": "2026-08-02T19:02:07.868Z",
+      "updatedAt": "2026-08-26T16:43:50.584Z",
       "createdBy": "painel",
-      "updatedBy": "painel",
+      "updatedBy": "wm10-legacy-rollback",
       "integrations": {
         "wm10": {
           "customerCode": 1810,
@@ -125602,6 +126146,10 @@
           "importedAt": "2026-08-02T19:02:07.868Z",
           "importedBy": "painel"
         }
+      },
+      "migration": {
+        "wm10LegacyEmailRollbackAt": "2026-08-26T16:43:50.584Z",
+        "wm10LegacyEmailRollbackValue": "ionedahmer@gmail.com"
       }
     },
     {
@@ -127779,7 +128327,7 @@
       "code": "001827",
       "companyId": "quality-principal",
       "personType": "pj",
-      "name": "Matheus Fernando Chechi",
+      "name": "Rede Quality Celulares",
       "tradeName": "QUALITY MAGAZINE",
       "document": "20375910000247",
       "stateRegistration": "",
@@ -127816,9 +128364,9 @@
         "serviceOrderIds": []
       },
       "createdAt": "2026-08-02T19:02:15.397Z",
-      "updatedAt": "2026-08-02T19:02:15.465Z",
+      "updatedAt": "2026-08-27T22:18:20.236Z",
       "createdBy": "painel",
-      "updatedBy": "painel",
+      "updatedBy": "Matheus Fernando",
       "integrations": {
         "wm10": {
           "customerCode": 1842,
@@ -128376,9 +128924,9 @@
         "serviceOrderIds": []
       },
       "createdAt": "2026-08-02T19:02:17.620Z",
-      "updatedAt": "2026-08-02T19:02:17.717Z",
+      "updatedAt": "2026-08-26T16:43:50.584Z",
       "createdBy": "painel",
-      "updatedBy": "painel",
+      "updatedBy": "wm10-legacy-rollback",
       "integrations": {
         "wm10": {
           "customerCode": 1850,
@@ -128402,6 +128950,10 @@
           "importedAt": "2026-08-02T19:02:17.717Z",
           "importedBy": "painel"
         }
+      },
+      "migration": {
+        "wm10LegacyEmailRollbackAt": "2026-08-26T16:43:50.584Z",
+        "wm10LegacyEmailRollbackValue": "arnildopasquali.sm@gmail.com"
       }
     },
     {
@@ -128586,9 +129138,9 @@
         "serviceOrderIds": []
       },
       "createdAt": "2026-08-02T19:02:18.514Z",
-      "updatedAt": "2026-08-02T19:02:18.587Z",
+      "updatedAt": "2026-08-26T16:43:50.584Z",
       "createdBy": "painel",
-      "updatedBy": "painel",
+      "updatedBy": "wm10-legacy-rollback",
       "integrations": {
         "wm10": {
           "customerCode": 1853,
@@ -128612,6 +129164,10 @@
           "importedAt": "2026-08-02T19:02:18.587Z",
           "importedBy": "painel"
         }
+      },
+      "migration": {
+        "wm10LegacyEmailRollbackAt": "2026-08-26T16:43:50.584Z",
+        "wm10LegacyEmailRollbackValue": "inesnapp@icloud.com"
       }
     },
     {
@@ -128866,9 +129422,9 @@
         "serviceOrderIds": []
       },
       "createdAt": "2026-08-02T19:02:19.463Z",
-      "updatedAt": "2026-08-02T19:02:19.536Z",
+      "updatedAt": "2026-08-26T16:43:50.584Z",
       "createdBy": "painel",
-      "updatedBy": "painel",
+      "updatedBy": "wm10-legacy-rollback",
       "integrations": {
         "wm10": {
           "customerCode": 1857,
@@ -128892,6 +129448,10 @@
           "importedAt": "2026-08-02T19:02:19.536Z",
           "importedBy": "painel"
         }
+      },
+      "migration": {
+        "wm10LegacyEmailRollbackAt": "2026-08-26T16:43:50.584Z",
+        "wm10LegacyEmailRollbackValue": "lenibarbieri.sm@gmail.com"
       }
     },
     {
@@ -130196,9 +130756,9 @@
         "serviceOrderIds": []
       },
       "createdAt": "2026-08-02T19:02:24.188Z",
-      "updatedAt": "2026-08-02T19:02:24.260Z",
+      "updatedAt": "2026-08-26T16:43:50.584Z",
       "createdBy": "painel",
-      "updatedBy": "painel",
+      "updatedBy": "wm10-legacy-rollback",
       "integrations": {
         "wm10": {
           "customerCode": 1876,
@@ -130222,6 +130782,10 @@
           "importedAt": "2026-08-02T19:02:24.260Z",
           "importedBy": "painel"
         }
+      },
+      "migration": {
+        "wm10LegacyEmailRollbackAt": "2026-08-26T16:43:50.584Z",
+        "wm10LegacyEmailRollbackValue": "luisfelipefosqueira12@gmail.com"
       }
     },
     {
@@ -132926,9 +133490,9 @@
         "serviceOrderIds": []
       },
       "createdAt": "2026-08-02T19:02:34.191Z",
-      "updatedAt": "2026-08-02T19:02:34.263Z",
+      "updatedAt": "2026-08-26T16:43:50.584Z",
       "createdBy": "painel",
-      "updatedBy": "painel",
+      "updatedBy": "wm10-legacy-rollback",
       "integrations": {
         "wm10": {
           "customerCode": 1915,
@@ -132952,6 +133516,10 @@
           "importedAt": "2026-08-02T19:02:34.263Z",
           "importedBy": "painel"
         }
+      },
+      "migration": {
+        "wm10LegacyEmailRollbackAt": "2026-08-26T16:43:50.584Z",
+        "wm10LegacyEmailRollbackValue": "clarindamaia.sm@gmail.com"
       }
     },
     {
@@ -133696,9 +134264,9 @@
         "serviceOrderIds": []
       },
       "createdAt": "2026-08-02T19:02:36.951Z",
-      "updatedAt": "2026-08-02T19:02:37.025Z",
+      "updatedAt": "2026-08-26T16:43:50.584Z",
       "createdBy": "painel",
-      "updatedBy": "painel",
+      "updatedBy": "wm10-legacy-rollback",
       "integrations": {
         "wm10": {
           "customerCode": 1926,
@@ -133722,6 +134290,10 @@
           "importedAt": "2026-08-02T19:02:37.025Z",
           "importedBy": "painel"
         }
+      },
+      "migration": {
+        "wm10LegacyEmailRollbackAt": "2026-08-26T16:43:50.584Z",
+        "wm10LegacyEmailRollbackValue": "arimoraes1.sm@gmail.com"
       }
     },
     {
@@ -133906,9 +134478,9 @@
         "serviceOrderIds": []
       },
       "createdAt": "2026-08-02T19:02:37.680Z",
-      "updatedAt": "2026-08-02T19:02:37.758Z",
+      "updatedAt": "2026-08-26T16:43:50.584Z",
       "createdBy": "painel",
-      "updatedBy": "painel",
+      "updatedBy": "wm10-legacy-rollback",
       "integrations": {
         "wm10": {
           "customerCode": 1929,
@@ -133932,6 +134504,10 @@
           "importedAt": "2026-08-02T19:02:37.758Z",
           "importedBy": "painel"
         }
+      },
+      "migration": {
+        "wm10LegacyEmailRollbackAt": "2026-08-26T16:43:50.584Z",
+        "wm10LegacyEmailRollbackValue": "veramizaltemayer.sm1@gmail.com"
       }
     },
     {
@@ -135565,12 +136141,12 @@
       "fatherName": "",
       "motherName": "",
       "creditLimit": 0,
-      "phone": "55984570596",
-      "mobile": "",
-      "email": "",
+      "phone": "",
+      "mobile": "54981434061",
+      "email": "bitielipadilha76@gmail.com",
       "zipCode": "99450000",
-      "street": "RUA SEVERO WINLANG",
-      "number": "183",
+      "street": "Rua Tunas",
+      "number": "180",
       "complement": "",
       "district": "UNIÃO",
       "city": "Selbach",
@@ -135586,7 +136162,7 @@
         "serviceOrderIds": []
       },
       "createdAt": "2026-08-02T19:02:42.600Z",
-      "updatedAt": "2026-08-02T19:02:42.682Z",
+      "updatedAt": "2026-08-24T22:12:59.107Z",
       "createdBy": "painel",
       "updatedBy": "painel",
       "integrations": {
@@ -138246,9 +138822,9 @@
         "serviceOrderIds": []
       },
       "createdAt": "2026-08-02T19:02:52.758Z",
-      "updatedAt": "2026-08-02T19:02:52.838Z",
+      "updatedAt": "2026-08-26T16:43:50.584Z",
       "createdBy": "painel",
-      "updatedBy": "painel",
+      "updatedBy": "wm10-legacy-rollback",
       "integrations": {
         "wm10": {
           "customerCode": 1991,
@@ -138272,6 +138848,10 @@
           "importedAt": "2026-08-02T19:02:52.838Z",
           "importedBy": "painel"
         }
+      },
+      "migration": {
+        "wm10LegacyEmailRollbackAt": "2026-08-26T16:43:50.584Z",
+        "wm10LegacyEmailRollbackValue": "lewesisimar@gmail.com"
       }
     },
     {
@@ -140906,9 +141486,9 @@
         "serviceOrderIds": []
       },
       "createdAt": "2026-08-02T19:03:02.584Z",
-      "updatedAt": "2026-08-02T19:03:02.685Z",
+      "updatedAt": "2026-08-26T16:43:50.584Z",
       "createdBy": "painel",
-      "updatedBy": "painel",
+      "updatedBy": "wm10-legacy-rollback",
       "integrations": {
         "wm10": {
           "customerCode": 2029,
@@ -140932,6 +141512,10 @@
           "importedAt": "2026-08-02T19:03:02.685Z",
           "importedBy": "painel"
         }
+      },
+      "migration": {
+        "wm10LegacyEmailRollbackAt": "2026-08-26T16:43:50.584Z",
+        "wm10LegacyEmailRollbackValue": "janainamellotassoo@gmail.com"
       }
     },
     {
@@ -141046,9 +141630,9 @@
         "serviceOrderIds": []
       },
       "createdAt": "2026-08-02T19:03:03.149Z",
-      "updatedAt": "2026-08-02T19:03:03.226Z",
+      "updatedAt": "2026-08-26T16:43:50.584Z",
       "createdBy": "painel",
-      "updatedBy": "painel",
+      "updatedBy": "wm10-legacy-rollback",
       "integrations": {
         "wm10": {
           "customerCode": 2031,
@@ -141072,6 +141656,10 @@
           "importedAt": "2026-08-02T19:03:03.226Z",
           "importedBy": "painel"
         }
+      },
+      "migration": {
+        "wm10LegacyEmailRollbackAt": "2026-08-26T16:43:50.584Z",
+        "wm10LegacyEmailRollbackValue": "lstepauwelz@yahoo.com.br"
       }
     },
     {
@@ -142026,9 +142614,9 @@
         "serviceOrderIds": []
       },
       "createdAt": "2026-08-02T19:03:06.882Z",
-      "updatedAt": "2026-08-02T19:03:06.964Z",
+      "updatedAt": "2026-08-26T16:43:50.584Z",
       "createdBy": "painel",
-      "updatedBy": "painel",
+      "updatedBy": "wm10-legacy-rollback",
       "integrations": {
         "wm10": {
           "customerCode": 2045,
@@ -142052,6 +142640,10 @@
           "importedAt": "2026-08-02T19:03:06.964Z",
           "importedBy": "painel"
         }
+      },
+      "migration": {
+        "wm10LegacyEmailRollbackAt": "2026-08-26T16:43:50.584Z",
+        "wm10LegacyEmailRollbackValue": "joaoselvinofachidejesus@gmail.com"
       }
     },
     {
@@ -142166,9 +142758,9 @@
         "serviceOrderIds": []
       },
       "createdAt": "2026-08-02T19:03:07.406Z",
-      "updatedAt": "2026-08-02T19:03:07.488Z",
+      "updatedAt": "2026-08-26T16:43:50.584Z",
       "createdBy": "painel",
-      "updatedBy": "painel",
+      "updatedBy": "wm10-legacy-rollback",
       "integrations": {
         "wm10": {
           "customerCode": 2047,
@@ -142192,6 +142784,10 @@
           "importedAt": "2026-08-02T19:03:07.488Z",
           "importedBy": "painel"
         }
+      },
+      "migration": {
+        "wm10LegacyEmailRollbackAt": "2026-08-26T16:43:50.584Z",
+        "wm10LegacyEmailRollbackValue": "fabielivaliati.sm1@gmail.com"
       }
     },
     {
@@ -142236,9 +142832,9 @@
         "serviceOrderIds": []
       },
       "createdAt": "2026-08-02T19:03:07.674Z",
-      "updatedAt": "2026-08-02T19:03:07.752Z",
+      "updatedAt": "2026-08-26T16:43:50.584Z",
       "createdBy": "painel",
-      "updatedBy": "painel",
+      "updatedBy": "wm10-legacy-rollback",
       "integrations": {
         "wm10": {
           "customerCode": 2048,
@@ -142262,6 +142858,10 @@
           "importedAt": "2026-08-02T19:03:07.752Z",
           "importedBy": "painel"
         }
+      },
+      "migration": {
+        "wm10LegacyEmailRollbackAt": "2026-08-26T16:43:50.584Z",
+        "wm10LegacyEmailRollbackValue": "theofranca.sm@gmail.com"
       }
     },
     {
@@ -143426,9 +144026,9 @@
         "serviceOrderIds": []
       },
       "createdAt": "2026-08-02T19:03:12.227Z",
-      "updatedAt": "2026-08-02T19:03:12.308Z",
+      "updatedAt": "2026-08-26T16:43:50.584Z",
       "createdBy": "painel",
-      "updatedBy": "painel",
+      "updatedBy": "wm10-legacy-rollback",
       "integrations": {
         "wm10": {
           "customerCode": 2065,
@@ -143452,6 +144052,10 @@
           "importedAt": "2026-08-02T19:03:12.308Z",
           "importedBy": "painel"
         }
+      },
+      "migration": {
+        "wm10LegacyEmailRollbackAt": "2026-08-26T16:43:50.584Z",
+        "wm10LegacyEmailRollbackValue": "rafa89@hotmail.com.br"
       }
     },
     {
@@ -145386,9 +145990,9 @@
         "serviceOrderIds": []
       },
       "createdAt": "2026-08-02T19:03:17.854Z",
-      "updatedAt": "2026-08-02T19:03:17.912Z",
+      "updatedAt": "2026-08-26T16:43:50.584Z",
       "createdBy": "painel",
-      "updatedBy": "painel",
+      "updatedBy": "wm10-legacy-rollback",
       "integrations": {
         "wm10": {
           "customerCode": 2094,
@@ -145412,6 +146016,10 @@
           "importedAt": "2026-08-02T19:03:17.912Z",
           "importedBy": "painel"
         }
+      },
+      "migration": {
+        "wm10LegacyEmailRollbackAt": "2026-08-26T16:43:50.584Z",
+        "wm10LegacyEmailRollbackValue": "paulogrosa.sm@gmail.com"
       }
     },
     {
@@ -145456,9 +146064,9 @@
         "serviceOrderIds": []
       },
       "createdAt": "2026-08-02T19:03:18.070Z",
-      "updatedAt": "2026-08-02T19:03:18.141Z",
+      "updatedAt": "2026-08-26T16:43:50.584Z",
       "createdBy": "painel",
-      "updatedBy": "painel",
+      "updatedBy": "wm10-legacy-rollback",
       "integrations": {
         "wm10": {
           "customerCode": 2095,
@@ -145482,6 +146090,10 @@
           "importedAt": "2026-08-02T19:03:18.141Z",
           "importedBy": "painel"
         }
+      },
+      "migration": {
+        "wm10LegacyEmailRollbackAt": "2026-08-26T16:43:50.584Z",
+        "wm10LegacyEmailRollbackValue": "netod6160@gmail.com"
       }
     },
     {
@@ -145666,9 +146278,9 @@
         "serviceOrderIds": []
       },
       "createdAt": "2026-08-02T19:03:18.860Z",
-      "updatedAt": "2026-08-02T19:03:18.945Z",
+      "updatedAt": "2026-08-26T16:43:50.584Z",
       "createdBy": "painel",
-      "updatedBy": "painel",
+      "updatedBy": "wm10-legacy-rollback",
       "integrations": {
         "wm10": {
           "customerCode": 2098,
@@ -145692,6 +146304,10 @@
           "importedAt": "2026-08-02T19:03:18.945Z",
           "importedBy": "painel"
         }
+      },
+      "migration": {
+        "wm10LegacyEmailRollbackAt": "2026-08-26T16:43:50.584Z",
+        "wm10LegacyEmailRollbackValue": "paulaesterizgodoy@gmail.com"
       }
     },
     {
@@ -147906,9 +148522,9 @@
         "serviceOrderIds": []
       },
       "createdAt": "2026-08-02T19:03:28.089Z",
-      "updatedAt": "2026-08-02T19:03:28.191Z",
+      "updatedAt": "2026-08-26T16:43:50.584Z",
       "createdBy": "painel",
-      "updatedBy": "painel",
+      "updatedBy": "wm10-legacy-rollback",
       "integrations": {
         "wm10": {
           "customerCode": 2130,
@@ -147932,6 +148548,10 @@
           "importedAt": "2026-08-02T19:03:28.190Z",
           "importedBy": "painel"
         }
+      },
+      "migration": {
+        "wm10LegacyEmailRollbackAt": "2026-08-26T16:43:50.584Z",
+        "wm10LegacyEmailRollbackValue": "gilberto@allianzaquimica.com"
       }
     },
     {
@@ -148116,9 +148736,9 @@
         "serviceOrderIds": []
       },
       "createdAt": "2026-08-02T19:03:29.095Z",
-      "updatedAt": "2026-08-02T19:03:29.205Z",
+      "updatedAt": "2026-08-26T16:43:50.584Z",
       "createdBy": "painel",
-      "updatedBy": "painel",
+      "updatedBy": "wm10-legacy-rollback",
       "integrations": {
         "wm10": {
           "customerCode": 2133,
@@ -148142,6 +148762,10 @@
           "importedAt": "2026-08-02T19:03:29.205Z",
           "importedBy": "painel"
         }
+      },
+      "migration": {
+        "wm10LegacyEmailRollbackAt": "2026-08-26T16:43:50.584Z",
+        "wm10LegacyEmailRollbackValue": "renatopinto.sm@gmail.com"
       }
     },
     {
@@ -148676,9 +149300,9 @@
         "serviceOrderIds": []
       },
       "createdAt": "2026-08-02T19:03:31.339Z",
-      "updatedAt": "2026-08-02T19:03:31.424Z",
+      "updatedAt": "2026-08-26T16:43:50.584Z",
       "createdBy": "painel",
-      "updatedBy": "painel",
+      "updatedBy": "wm10-legacy-rollback",
       "integrations": {
         "wm10": {
           "customerCode": 2141,
@@ -148702,6 +149326,10 @@
           "importedAt": "2026-08-02T19:03:31.424Z",
           "importedBy": "painel"
         }
+      },
+      "migration": {
+        "wm10LegacyEmailRollbackAt": "2026-08-26T16:43:50.584Z",
+        "wm10LegacyEmailRollbackValue": "priscilaiora@icloud.com"
       }
     },
     {
@@ -148956,9 +149584,9 @@
         "serviceOrderIds": []
       },
       "createdAt": "2026-08-02T19:03:32.420Z",
-      "updatedAt": "2026-08-02T19:03:32.505Z",
+      "updatedAt": "2026-08-26T16:43:50.584Z",
       "createdBy": "painel",
-      "updatedBy": "painel",
+      "updatedBy": "wm10-legacy-rollback",
       "integrations": {
         "wm10": {
           "customerCode": 2145,
@@ -148982,6 +149610,10 @@
           "importedAt": "2026-08-02T19:03:32.505Z",
           "importedBy": "painel"
         }
+      },
+      "migration": {
+        "wm10LegacyEmailRollbackAt": "2026-08-26T16:43:50.584Z",
+        "wm10LegacyEmailRollbackValue": "venildabauermann@gmail.com"
       }
     },
     {
@@ -150566,9 +151198,9 @@
         "serviceOrderIds": []
       },
       "createdAt": "2026-08-02T19:03:38.800Z",
-      "updatedAt": "2026-08-02T19:03:38.889Z",
+      "updatedAt": "2026-08-26T16:43:50.584Z",
       "createdBy": "painel",
-      "updatedBy": "painel",
+      "updatedBy": "wm10-legacy-rollback",
       "integrations": {
         "wm10": {
           "customerCode": 2168,
@@ -150592,6 +151224,10 @@
           "importedAt": "2026-08-02T19:03:38.889Z",
           "importedBy": "painel"
         }
+      },
+      "migration": {
+        "wm10LegacyEmailRollbackAt": "2026-08-26T16:43:50.584Z",
+        "wm10LegacyEmailRollbackValue": "antoniobairros.sm@gmail.com"
       }
     },
     {
@@ -150846,9 +151482,9 @@
         "serviceOrderIds": []
       },
       "createdAt": "2026-08-02T19:03:39.935Z",
-      "updatedAt": "2026-08-02T19:03:40.024Z",
+      "updatedAt": "2026-08-26T16:43:50.584Z",
       "createdBy": "painel",
-      "updatedBy": "painel",
+      "updatedBy": "wm10-legacy-rollback",
       "integrations": {
         "wm10": {
           "customerCode": 2172,
@@ -150872,6 +151508,10 @@
           "importedAt": "2026-08-02T19:03:40.024Z",
           "importedBy": "painel"
         }
+      },
+      "migration": {
+        "wm10LegacyEmailRollbackAt": "2026-08-26T16:43:50.584Z",
+        "wm10LegacyEmailRollbackValue": "neripiccinini2@gmail.com"
       }
     },
     {
@@ -151756,9 +152396,9 @@
         "serviceOrderIds": []
       },
       "createdAt": "2026-08-02T19:03:43.800Z",
-      "updatedAt": "2026-08-02T19:03:43.885Z",
+      "updatedAt": "2026-08-26T16:43:50.584Z",
       "createdBy": "painel",
-      "updatedBy": "painel",
+      "updatedBy": "wm10-legacy-rollback",
       "integrations": {
         "wm10": {
           "customerCode": 2185,
@@ -151782,6 +152422,10 @@
           "importedAt": "2026-08-02T19:03:43.885Z",
           "importedBy": "painel"
         }
+      },
+      "migration": {
+        "wm10LegacyEmailRollbackAt": "2026-08-26T16:43:50.584Z",
+        "wm10LegacyEmailRollbackValue": "anelisecavalheiro.sm@gmail.com"
       }
     },
     {
@@ -151896,9 +152540,9 @@
         "serviceOrderIds": []
       },
       "createdAt": "2026-08-02T19:03:44.381Z",
-      "updatedAt": "2026-08-02T19:03:44.474Z",
+      "updatedAt": "2026-08-26T16:43:50.584Z",
       "createdBy": "painel",
-      "updatedBy": "painel",
+      "updatedBy": "wm10-legacy-rollback",
       "integrations": {
         "wm10": {
           "customerCode": 2187,
@@ -151922,6 +152566,10 @@
           "importedAt": "2026-08-02T19:03:44.474Z",
           "importedBy": "painel"
         }
+      },
+      "migration": {
+        "wm10LegacyEmailRollbackAt": "2026-08-26T16:43:50.584Z",
+        "wm10LegacyEmailRollbackValue": "inilarabauerman.sm@gmail.com"
       }
     },
     {
@@ -153996,9 +154644,9 @@
         "serviceOrderIds": []
       },
       "createdAt": "2026-08-02T19:03:53.581Z",
-      "updatedAt": "2026-08-02T19:03:53.718Z",
+      "updatedAt": "2026-08-26T16:43:50.584Z",
       "createdBy": "painel",
-      "updatedBy": "painel",
+      "updatedBy": "wm10-legacy-rollback",
       "integrations": {
         "wm10": {
           "customerCode": 2217,
@@ -154022,6 +154670,10 @@
           "importedAt": "2026-08-02T19:03:53.718Z",
           "importedBy": "painel"
         }
+      },
+      "migration": {
+        "wm10LegacyEmailRollbackAt": "2026-08-26T16:43:50.584Z",
+        "wm10LegacyEmailRollbackValue": "leonirgobbi.sm@gmail.com"
       }
     },
     {
@@ -155256,9 +155908,9 @@
         "serviceOrderIds": []
       },
       "createdAt": "2026-08-02T19:03:59.114Z",
-      "updatedAt": "2026-08-02T19:03:59.207Z",
+      "updatedAt": "2026-08-26T16:43:50.584Z",
       "createdBy": "painel",
-      "updatedBy": "painel",
+      "updatedBy": "wm10-legacy-rollback",
       "integrations": {
         "wm10": {
           "customerCode": 2235,
@@ -155282,6 +155934,10 @@
           "importedAt": "2026-08-02T19:03:59.207Z",
           "importedBy": "painel"
         }
+      },
+      "migration": {
+        "wm10LegacyEmailRollbackAt": "2026-08-26T16:43:50.584Z",
+        "wm10LegacyEmailRollbackValue": "josi.streit@gmail.com"
       }
     },
     {
@@ -156376,9 +157032,9 @@
         "serviceOrderIds": []
       },
       "createdAt": "2026-08-02T19:04:03.762Z",
-      "updatedAt": "2026-08-02T19:04:03.852Z",
+      "updatedAt": "2026-08-26T16:43:50.584Z",
       "createdBy": "painel",
-      "updatedBy": "painel",
+      "updatedBy": "wm10-legacy-rollback",
       "integrations": {
         "wm10": {
           "customerCode": 2251,
@@ -156402,6 +157058,10 @@
           "importedAt": "2026-08-02T19:04:03.852Z",
           "importedBy": "painel"
         }
+      },
+      "migration": {
+        "wm10LegacyEmailRollbackAt": "2026-08-26T16:43:50.584Z",
+        "wm10LegacyEmailRollbackValue": "schneiderveronica.sm@gmail.com"
       }
     },
     {
@@ -157496,9 +158156,9 @@
         "serviceOrderIds": []
       },
       "createdAt": "2026-08-02T19:04:08.393Z",
-      "updatedAt": "2026-08-02T19:04:08.485Z",
+      "updatedAt": "2026-08-26T16:43:50.584Z",
       "createdBy": "painel",
-      "updatedBy": "painel",
+      "updatedBy": "wm10-legacy-rollback",
       "integrations": {
         "wm10": {
           "customerCode": 2267,
@@ -157522,6 +158182,10 @@
           "importedAt": "2026-08-02T19:04:08.485Z",
           "importedBy": "painel"
         }
+      },
+      "migration": {
+        "wm10LegacyEmailRollbackAt": "2026-08-26T16:43:50.584Z",
+        "wm10LegacyEmailRollbackValue": "paulovargas130@gmail.com"
       }
     },
     {
@@ -158966,9 +159630,9 @@
         "serviceOrderIds": []
       },
       "createdAt": "2026-08-02T19:04:14.660Z",
-      "updatedAt": "2026-08-02T19:04:14.746Z",
+      "updatedAt": "2026-08-26T16:43:50.584Z",
       "createdBy": "painel",
-      "updatedBy": "painel",
+      "updatedBy": "wm10-legacy-rollback",
       "integrations": {
         "wm10": {
           "customerCode": 2288,
@@ -158992,6 +159656,10 @@
           "importedAt": "2026-08-02T19:04:14.746Z",
           "importedBy": "painel"
         }
+      },
+      "migration": {
+        "wm10LegacyEmailRollbackAt": "2026-08-26T16:43:50.584Z",
+        "wm10LegacyEmailRollbackValue": "machadopablo167@gmail.com"
       }
     },
     {
@@ -159386,9 +160054,9 @@
         "serviceOrderIds": []
       },
       "createdAt": "2026-08-02T19:04:16.406Z",
-      "updatedAt": "2026-08-02T19:04:16.483Z",
+      "updatedAt": "2026-08-26T16:43:50.584Z",
       "createdBy": "painel",
-      "updatedBy": "painel",
+      "updatedBy": "wm10-legacy-rollback",
       "integrations": {
         "wm10": {
           "customerCode": 2294,
@@ -159412,6 +160080,10 @@
           "importedAt": "2026-08-02T19:04:16.483Z",
           "importedBy": "painel"
         }
+      },
+      "migration": {
+        "wm10LegacyEmailRollbackAt": "2026-08-26T16:43:50.584Z",
+        "wm10LegacyEmailRollbackValue": "ihermannmuller@gmail.com"
       }
     },
     {
@@ -159596,9 +160268,9 @@
         "serviceOrderIds": []
       },
       "createdAt": "2026-08-02T19:04:17.291Z",
-      "updatedAt": "2026-08-02T19:04:17.382Z",
+      "updatedAt": "2026-08-26T16:43:50.584Z",
       "createdBy": "painel",
-      "updatedBy": "painel",
+      "updatedBy": "wm10-legacy-rollback",
       "integrations": {
         "wm10": {
           "customerCode": 2297,
@@ -159622,6 +160294,10 @@
           "importedAt": "2026-08-02T19:04:17.382Z",
           "importedBy": "painel"
         }
+      },
+      "migration": {
+        "wm10LegacyEmailRollbackAt": "2026-08-26T16:43:50.584Z",
+        "wm10LegacyEmailRollbackValue": "genessiaraldi.sm@gmail.com"
       }
     },
     {
@@ -162956,9 +163632,9 @@
         "serviceOrderIds": []
       },
       "createdAt": "2026-08-02T19:04:31.585Z",
-      "updatedAt": "2026-08-02T19:04:31.688Z",
+      "updatedAt": "2026-08-26T16:43:50.584Z",
       "createdBy": "painel",
-      "updatedBy": "painel",
+      "updatedBy": "wm10-legacy-rollback",
       "integrations": {
         "wm10": {
           "customerCode": 2345,
@@ -162982,6 +163658,10 @@
           "importedAt": "2026-08-02T19:04:31.688Z",
           "importedBy": "painel"
         }
+      },
+      "migration": {
+        "wm10LegacyEmailRollbackAt": "2026-08-26T16:43:50.584Z",
+        "wm10LegacyEmailRollbackValue": "darcisartorilewe@gmail.com"
       }
     },
     {
@@ -163166,9 +163846,9 @@
         "serviceOrderIds": []
       },
       "createdAt": "2026-08-02T19:04:32.576Z",
-      "updatedAt": "2026-08-02T19:04:32.663Z",
+      "updatedAt": "2026-08-26T16:43:50.584Z",
       "createdBy": "painel",
-      "updatedBy": "painel",
+      "updatedBy": "wm10-legacy-rollback",
       "integrations": {
         "wm10": {
           "customerCode": 2348,
@@ -163192,6 +163872,10 @@
           "importedAt": "2026-08-02T19:04:32.663Z",
           "importedBy": "painel"
         }
+      },
+      "migration": {
+        "wm10LegacyEmailRollbackAt": "2026-08-26T16:43:50.584Z",
+        "wm10LegacyEmailRollbackValue": "aldinobarbieri.sm@gmail.com"
       }
     },
     {
@@ -164706,9 +165390,9 @@
         "serviceOrderIds": []
       },
       "createdAt": "2026-08-02T19:04:39.267Z",
-      "updatedAt": "2026-08-02T19:04:39.360Z",
+      "updatedAt": "2026-08-26T16:43:50.584Z",
       "createdBy": "painel",
-      "updatedBy": "painel",
+      "updatedBy": "wm10-legacy-rollback",
       "integrations": {
         "wm10": {
           "customerCode": 2370,
@@ -164732,6 +165416,10 @@
           "importedAt": "2026-08-02T19:04:39.360Z",
           "importedBy": "painel"
         }
+      },
+      "migration": {
+        "wm10LegacyEmailRollbackAt": "2026-08-26T16:43:50.584Z",
+        "wm10LegacyEmailRollbackValue": "luizdejesus.sm@gmail.com"
       }
     },
     {
@@ -165686,9 +166374,9 @@
         "serviceOrderIds": []
       },
       "createdAt": "2026-08-02T19:04:42.990Z",
-      "updatedAt": "2026-08-02T19:04:43.064Z",
+      "updatedAt": "2026-08-26T16:43:50.584Z",
       "createdBy": "painel",
-      "updatedBy": "painel",
+      "updatedBy": "wm10-legacy-rollback",
       "integrations": {
         "wm10": {
           "customerCode": 2384,
@@ -165712,6 +166400,10 @@
           "importedAt": "2026-08-02T19:04:43.064Z",
           "importedBy": "painel"
         }
+      },
+      "migration": {
+        "wm10LegacyEmailRollbackAt": "2026-08-26T16:43:50.584Z",
+        "wm10LegacyEmailRollbackValue": "valterogerio.sm@gmail.com"
       }
     },
     {
@@ -165826,9 +166518,9 @@
         "serviceOrderIds": []
       },
       "createdAt": "2026-08-02T19:04:43.459Z",
-      "updatedAt": "2026-08-02T19:04:43.526Z",
+      "updatedAt": "2026-08-26T16:43:50.584Z",
       "createdBy": "painel",
-      "updatedBy": "painel",
+      "updatedBy": "wm10-legacy-rollback",
       "integrations": {
         "wm10": {
           "customerCode": 2386,
@@ -165852,6 +166544,10 @@
           "importedAt": "2026-08-02T19:04:43.526Z",
           "importedBy": "painel"
         }
+      },
+      "migration": {
+        "wm10LegacyEmailRollbackAt": "2026-08-26T16:43:50.584Z",
+        "wm10LegacyEmailRollbackValue": "helioschenkel8@gmail.com"
       }
     },
     {
@@ -166666,9 +167362,9 @@
         "serviceOrderIds": []
       },
       "createdAt": "2026-08-02T19:04:47.654Z",
-      "updatedAt": "2026-08-02T19:04:47.757Z",
+      "updatedAt": "2026-08-26T16:43:50.584Z",
       "createdBy": "painel",
-      "updatedBy": "painel",
+      "updatedBy": "wm10-legacy-rollback",
       "integrations": {
         "wm10": {
           "customerCode": 2398,
@@ -166692,6 +167388,10 @@
           "importedAt": "2026-08-02T19:04:47.757Z",
           "importedBy": "painel"
         }
+      },
+      "migration": {
+        "wm10LegacyEmailRollbackAt": "2026-08-26T16:43:50.584Z",
+        "wm10LegacyEmailRollbackValue": "elisadalpizzol9@gmail.com"
       }
     },
     {
@@ -167856,9 +168556,9 @@
         "serviceOrderIds": []
       },
       "createdAt": "2026-08-02T19:04:53.167Z",
-      "updatedAt": "2026-08-02T19:04:53.272Z",
+      "updatedAt": "2026-08-26T16:43:50.584Z",
       "createdBy": "painel",
-      "updatedBy": "painel",
+      "updatedBy": "wm10-legacy-rollback",
       "integrations": {
         "wm10": {
           "customerCode": 2415,
@@ -167882,6 +168582,10 @@
           "importedAt": "2026-08-02T19:04:53.272Z",
           "importedBy": "painel"
         }
+      },
+      "migration": {
+        "wm10LegacyEmailRollbackAt": "2026-08-26T16:43:50.584Z",
+        "wm10LegacyEmailRollbackValue": "iriapezzini@gmail.com"
       }
     },
     {
@@ -168626,9 +169330,9 @@
         "serviceOrderIds": []
       },
       "createdAt": "2026-08-02T19:04:57.271Z",
-      "updatedAt": "2026-08-02T19:04:57.388Z",
+      "updatedAt": "2026-08-26T16:43:50.584Z",
       "createdBy": "painel",
-      "updatedBy": "painel",
+      "updatedBy": "wm10-legacy-rollback",
       "integrations": {
         "wm10": {
           "customerCode": 2427,
@@ -168652,6 +169356,10 @@
           "importedAt": "2026-08-02T19:04:57.388Z",
           "importedBy": "painel"
         }
+      },
+      "migration": {
+        "wm10LegacyEmailRollbackAt": "2026-08-26T16:43:50.584Z",
+        "wm10LegacyEmailRollbackValue": "eleandroroessler@gmail.com"
       }
     },
     {
@@ -169116,9 +169824,9 @@
         "serviceOrderIds": []
       },
       "createdAt": "2026-08-02T19:04:59.696Z",
-      "updatedAt": "2026-08-02T19:04:59.804Z",
+      "updatedAt": "2026-08-26T16:43:50.584Z",
       "createdBy": "painel",
-      "updatedBy": "painel",
+      "updatedBy": "wm10-legacy-rollback",
       "integrations": {
         "wm10": {
           "customerCode": 2434,
@@ -169142,6 +169850,10 @@
           "importedAt": "2026-08-02T19:04:59.804Z",
           "importedBy": "painel"
         }
+      },
+      "migration": {
+        "wm10LegacyEmailRollbackAt": "2026-08-26T16:43:50.584Z",
+        "wm10LegacyEmailRollbackValue": "mariabescow@gmail.com"
       }
     },
     {
@@ -172616,9 +173328,9 @@
         "serviceOrderIds": []
       },
       "createdAt": "2026-08-02T19:05:16.409Z",
-      "updatedAt": "2026-08-02T19:05:16.503Z",
+      "updatedAt": "2026-08-26T16:43:50.584Z",
       "createdBy": "painel",
-      "updatedBy": "painel",
+      "updatedBy": "wm10-legacy-rollback",
       "integrations": {
         "wm10": {
           "customerCode": 2484,
@@ -172642,6 +173354,10 @@
           "importedAt": "2026-08-02T19:05:16.503Z",
           "importedBy": "painel"
         }
+      },
+      "migration": {
+        "wm10LegacyEmailRollbackAt": "2026-08-26T16:43:50.584Z",
+        "wm10LegacyEmailRollbackValue": "noemibardenbirkhan@gmail.com"
       }
     },
     {
@@ -172756,9 +173472,9 @@
         "serviceOrderIds": []
       },
       "createdAt": "2026-08-02T19:05:17.050Z",
-      "updatedAt": "2026-08-02T19:05:17.147Z",
+      "updatedAt": "2026-08-26T16:43:50.584Z",
       "createdBy": "painel",
-      "updatedBy": "painel",
+      "updatedBy": "wm10-legacy-rollback",
       "integrations": {
         "wm10": {
           "customerCode": 2486,
@@ -172782,6 +173498,10 @@
           "importedAt": "2026-08-02T19:05:17.147Z",
           "importedBy": "painel"
         }
+      },
+      "migration": {
+        "wm10LegacyEmailRollbackAt": "2026-08-26T16:43:50.584Z",
+        "wm10LegacyEmailRollbackValue": "mariassc878@gmail.com"
       }
     },
     {
@@ -182066,9 +182786,9 @@
         "serviceOrderIds": []
       },
       "createdAt": "2026-08-02T19:05:57.723Z",
-      "updatedAt": "2026-08-02T19:05:57.799Z",
+      "updatedAt": "2026-08-26T16:43:50.584Z",
       "createdBy": "painel",
-      "updatedBy": "painel",
+      "updatedBy": "wm10-legacy-rollback",
       "integrations": {
         "wm10": {
           "customerCode": 2619,
@@ -182092,6 +182812,10 @@
           "importedAt": "2026-08-02T19:05:57.799Z",
           "importedBy": "painel"
         }
+      },
+      "migration": {
+        "wm10LegacyEmailRollbackAt": "2026-08-26T16:43:50.584Z",
+        "wm10LegacyEmailRollbackValue": "ivarlimberger.sm@gmail.com"
       }
     },
     {
@@ -196906,9 +197630,9 @@
         "serviceOrderIds": []
       },
       "createdAt": "2026-08-02T19:07:11.507Z",
-      "updatedAt": "2026-08-02T19:07:11.617Z",
+      "updatedAt": "2026-08-26T16:43:50.584Z",
       "createdBy": "painel",
-      "updatedBy": "painel",
+      "updatedBy": "wm10-legacy-rollback",
       "integrations": {
         "wm10": {
           "customerCode": 2831,
@@ -196932,6 +197656,10 @@
           "importedAt": "2026-08-02T19:07:11.617Z",
           "importedBy": "painel"
         }
+      },
+      "migration": {
+        "wm10LegacyEmailRollbackAt": "2026-08-26T16:43:50.584Z",
+        "wm10LegacyEmailRollbackValue": "eduardodebairros82@gmail.com"
       }
     },
     {
@@ -198775,8 +199503,8 @@
       "fatherName": "",
       "motherName": "",
       "creditLimit": 0,
-      "phone": "49991325426",
-      "mobile": "49991325426",
+      "phone": "",
+      "mobile": "",
       "email": "",
       "zipCode": "98250000",
       "street": "Rua apolinario porto alegre",
@@ -198796,7 +199524,7 @@
         "serviceOrderIds": []
       },
       "createdAt": "2026-08-02T19:07:22.840Z",
-      "updatedAt": "2026-08-02T19:07:22.950Z",
+      "updatedAt": "2026-08-25T10:34:20.412Z",
       "createdBy": "painel",
       "updatedBy": "painel",
       "integrations": {
@@ -201736,9 +202464,9 @@
         "serviceOrderIds": []
       },
       "createdAt": "2026-08-02T19:07:39.731Z",
-      "updatedAt": "2026-08-02T19:07:39.844Z",
+      "updatedAt": "2026-08-26T16:43:50.584Z",
       "createdBy": "painel",
-      "updatedBy": "painel",
+      "updatedBy": "wm10-legacy-rollback",
       "integrations": {
         "wm10": {
           "customerCode": 2900,
@@ -201762,6 +202490,10 @@
           "importedAt": "2026-08-02T19:07:39.844Z",
           "importedBy": "painel"
         }
+      },
+      "migration": {
+        "wm10LegacyEmailRollbackAt": "2026-08-26T16:43:50.584Z",
+        "wm10LegacyEmailRollbackValue": "vanderleiferrari.sm@gmail.com"
       }
     },
     {
@@ -203556,9 +204288,9 @@
         "serviceOrderIds": []
       },
       "createdAt": "2026-08-02T19:07:49.496Z",
-      "updatedAt": "2026-08-02T19:07:49.642Z",
+      "updatedAt": "2026-08-26T16:43:50.584Z",
       "createdBy": "painel",
-      "updatedBy": "painel",
+      "updatedBy": "wm10-legacy-rollback",
       "integrations": {
         "wm10": {
           "customerCode": 2926,
@@ -203582,6 +204314,10 @@
           "importedAt": "2026-08-02T19:07:49.642Z",
           "importedBy": "painel"
         }
+      },
+      "migration": {
+        "wm10LegacyEmailRollbackAt": "2026-08-26T16:43:50.584Z",
+        "wm10LegacyEmailRollbackValue": "manuelifiorese.sm@gmail.com"
       }
     },
     {
@@ -204816,9 +205552,9 @@
         "serviceOrderIds": []
       },
       "createdAt": "2026-08-02T19:07:56.715Z",
-      "updatedAt": "2026-08-02T19:07:56.833Z",
+      "updatedAt": "2026-08-26T16:43:50.584Z",
       "createdBy": "painel",
-      "updatedBy": "painel",
+      "updatedBy": "wm10-legacy-rollback",
       "integrations": {
         "wm10": {
           "customerCode": 2944,
@@ -204842,6 +205578,10 @@
           "importedAt": "2026-08-02T19:07:56.833Z",
           "importedBy": "painel"
         }
+      },
+      "migration": {
+        "wm10LegacyEmailRollbackAt": "2026-08-26T16:43:50.584Z",
+        "wm10LegacyEmailRollbackValue": "luizmilanese.sm@gmail.com"
       }
     },
     {
@@ -206146,9 +206886,9 @@
         "serviceOrderIds": []
       },
       "createdAt": "2026-08-02T19:08:04.386Z",
-      "updatedAt": "2026-08-06T18:13:00.906Z",
+      "updatedAt": "2026-08-26T16:43:50.584Z",
       "createdBy": "painel",
-      "updatedBy": "painel",
+      "updatedBy": "wm10-legacy-rollback",
       "integrations": {
         "wm10": {
           "customerCode": 2963,
@@ -206172,6 +206912,10 @@
           "importedAt": "2026-08-02T19:08:04.506Z",
           "importedBy": "painel"
         }
+      },
+      "migration": {
+        "wm10LegacyEmailRollbackAt": "2026-08-26T16:43:50.584Z",
+        "wm10LegacyEmailRollbackValue": "pazinattoacimar@gmail.com"
       }
     },
     {
@@ -207896,9 +208640,33 @@
         "serviceOrderIds": []
       },
       "createdAt": "2026-08-02T19:08:15.042Z",
-      "updatedAt": "2026-08-02T19:08:15.042Z",
+      "updatedAt": "2026-08-26T16:13:44.522Z",
       "createdBy": "painel",
-      "updatedBy": "painel"
+      "updatedBy": "painel",
+      "integrations": {
+        "wm10": {
+          "customerCode": 2988,
+          "rawDocument": "01909938041",
+          "documentValid": true,
+          "originalName": "Sabrina de oliveira baruffi",
+          "nameNormalized": false,
+          "foreignDocument": "",
+          "sex": "F",
+          "whatsAppNumber": "55991105741",
+          "whatsAppSource": "mobile",
+          "countryCode": 1058,
+          "latitude": null,
+          "longitude": null,
+          "facebook": "",
+          "instagram": "",
+          "classificationCode": "",
+          "classificationUpdatedAt": "",
+          "registeredAt": "2026-07-31T14:23:41.940",
+          "updatedAt": "2026-07-31T14:23:41.940",
+          "linkedAt": "2026-08-26T16:13:44.522Z",
+          "linkedBy": "painel"
+        }
+      }
     },
     {
       "id": "CLI-1786026365358-DWCIG",
@@ -208082,9 +208850,33 @@
         "serviceOrderIds": []
       },
       "createdAt": "2026-08-11T17:37:56.523Z",
-      "updatedAt": "2026-08-11T17:37:56.523Z",
+      "updatedAt": "2026-08-26T16:13:44.522Z",
       "createdBy": "painel",
-      "updatedBy": "painel"
+      "updatedBy": "painel",
+      "integrations": {
+        "wm10": {
+          "customerCode": 2992,
+          "rawDocument": "02749507073",
+          "documentValid": true,
+          "originalName": "Andrielle de castro",
+          "nameNormalized": false,
+          "foreignDocument": "",
+          "sex": "F",
+          "whatsAppNumber": "55996985950",
+          "whatsAppSource": "phone",
+          "countryCode": 1058,
+          "latitude": null,
+          "longitude": null,
+          "facebook": "",
+          "instagram": "",
+          "classificationCode": "",
+          "classificationUpdatedAt": "",
+          "registeredAt": "2026-08-11T19:31:58.050",
+          "updatedAt": "2026-08-11T19:31:58.050",
+          "linkedAt": "2026-08-26T16:13:44.522Z",
+          "linkedBy": "painel"
+        }
+      }
     },
     {
       "id": "CLI-1786483049017-2DC7M",
@@ -208128,9 +208920,33 @@
         "serviceOrderIds": []
       },
       "createdAt": "2026-08-11T21:17:29.017Z",
-      "updatedAt": "2026-08-11T21:17:29.017Z",
+      "updatedAt": "2026-08-26T16:13:44.522Z",
       "createdBy": "painel",
-      "updatedBy": "painel"
+      "updatedBy": "painel",
+      "integrations": {
+        "wm10": {
+          "customerCode": 2991,
+          "rawDocument": "05116891011",
+          "documentValid": true,
+          "originalName": "MARYANE DE PAULA ALTMEYER",
+          "nameNormalized": false,
+          "foreignDocument": "",
+          "sex": "F",
+          "whatsAppNumber": "55999860398",
+          "whatsAppSource": "mobile",
+          "countryCode": 1058,
+          "latitude": null,
+          "longitude": null,
+          "facebook": "",
+          "instagram": "",
+          "classificationCode": "",
+          "classificationUpdatedAt": "",
+          "registeredAt": "2026-08-11T18:19:55.957",
+          "updatedAt": "2026-08-11T18:19:55.957",
+          "linkedAt": "2026-08-26T16:13:44.522Z",
+          "linkedBy": "painel"
+        }
+      }
     },
     {
       "id": "CLI-1786562652397-FNYAV",
@@ -208174,9 +208990,33 @@
         "serviceOrderIds": []
       },
       "createdAt": "2026-08-12T19:24:12.397Z",
-      "updatedAt": "2026-08-14T01:10:56.331Z",
+      "updatedAt": "2026-08-26T16:13:44.522Z",
       "createdBy": "painel",
-      "updatedBy": "painel"
+      "updatedBy": "painel",
+      "integrations": {
+        "wm10": {
+          "customerCode": 2993,
+          "rawDocument": "00615656013",
+          "documentValid": true,
+          "originalName": "CAMILA PAZINATO",
+          "nameNormalized": false,
+          "foreignDocument": "",
+          "sex": "F",
+          "whatsAppNumber": "55996087302",
+          "whatsAppSource": "mobile",
+          "countryCode": 1058,
+          "latitude": null,
+          "longitude": null,
+          "facebook": "",
+          "instagram": "",
+          "classificationCode": "",
+          "classificationUpdatedAt": "",
+          "registeredAt": "2026-08-12T16:24:21.170",
+          "updatedAt": "2026-08-12T17:48:38.760",
+          "linkedAt": "2026-08-26T16:13:44.522Z",
+          "linkedBy": "painel"
+        }
+      }
     },
     {
       "id": "CLI-1786651899683-UOYW1",
@@ -208358,9 +209198,33 @@
         "serviceOrderIds": []
       },
       "createdAt": "2026-08-15T18:28:10.181Z",
-      "updatedAt": "2026-08-15T18:28:57.489Z",
+      "updatedAt": "2026-08-26T16:13:44.522Z",
       "createdBy": "painel",
-      "updatedBy": "painel"
+      "updatedBy": "painel",
+      "integrations": {
+        "wm10": {
+          "customerCode": 2994,
+          "rawDocument": "04906742084",
+          "documentValid": true,
+          "originalName": "Erik Richard Dos Santos",
+          "nameNormalized": false,
+          "foreignDocument": "",
+          "sex": "M",
+          "whatsAppNumber": "54993888412",
+          "whatsAppSource": "mobile",
+          "countryCode": 1058,
+          "latitude": null,
+          "longitude": null,
+          "facebook": "",
+          "instagram": "",
+          "classificationCode": "",
+          "classificationUpdatedAt": "",
+          "registeredAt": "2026-08-16T13:27:01.470",
+          "updatedAt": "2026-08-16T13:27:01.470",
+          "linkedAt": "2026-08-26T16:13:44.522Z",
+          "linkedBy": "painel"
+        }
+      }
     },
     {
       "id": "CLI-1786970716524-YT517",
@@ -208496,9 +209360,33 @@
         "serviceOrderIds": []
       },
       "createdAt": "2026-08-18T01:25:28.240Z",
-      "updatedAt": "2026-08-18T01:25:28.240Z",
+      "updatedAt": "2026-08-26T16:13:44.522Z",
       "createdBy": "painel",
-      "updatedBy": "painel"
+      "updatedBy": "painel",
+      "integrations": {
+        "wm10": {
+          "customerCode": 2995,
+          "rawDocument": "05129678060",
+          "documentValid": true,
+          "originalName": "Diovana Lucieli Vargas Valescki",
+          "nameNormalized": false,
+          "foreignDocument": "",
+          "sex": "F",
+          "whatsAppNumber": "55999894529",
+          "whatsAppSource": "mobile",
+          "countryCode": 1058,
+          "latitude": null,
+          "longitude": null,
+          "facebook": "",
+          "instagram": "",
+          "classificationCode": "",
+          "classificationUpdatedAt": "",
+          "registeredAt": "2026-08-17T17:08:36.067",
+          "updatedAt": "2026-08-17T17:08:36.067",
+          "linkedAt": "2026-08-26T16:13:44.522Z",
+          "linkedBy": "painel"
+        }
+      }
     },
     {
       "id": "CLI-1787254763381-61HHO",
@@ -208637,6 +209525,236 @@
       "updatedAt": "2026-08-22T15:08:36.269Z",
       "createdBy": "painel",
       "updatedBy": "painel"
+    },
+    {
+      "id": "CLI-1787573200858-0Q0OH",
+      "code": "002987",
+      "companyId": "quality-principal",
+      "personType": "pf",
+      "name": "Alex Junior Ritter",
+      "tradeName": "",
+      "document": "02415944050",
+      "stateRegistration": "",
+      "companyStatus": "",
+      "openingDate": "",
+      "legalNature": "",
+      "companySize": "",
+      "primaryCnae": "",
+      "birthDate": "1990-07-26",
+      "monthlyIncome": 0,
+      "profession": "",
+      "spouseName": "",
+      "fatherName": "",
+      "motherName": "",
+      "creditLimit": 0,
+      "phone": "",
+      "mobile": "55997220950",
+      "email": "",
+      "zipCode": "98240000",
+      "street": "Rua Gabriel Santos",
+      "number": "606",
+      "complement": "",
+      "district": "morada do sol",
+      "city": "Santa Bárbara do Sul",
+      "state": "RS",
+      "classificationId": "none",
+      "origin": "",
+      "notes": "",
+      "active": true,
+      "links": {
+        "whatsappIds": [],
+        "quoteIds": [],
+        "saleIds": [],
+        "serviceOrderIds": []
+      },
+      "createdAt": "2026-08-24T12:06:40.858Z",
+      "updatedAt": "2026-08-24T12:06:40.858Z",
+      "createdBy": "painel",
+      "updatedBy": "painel"
+    },
+    {
+      "id": "CLI-1787579340973-3E0IG",
+      "code": "002988",
+      "companyId": "quality-principal",
+      "personType": "pf",
+      "name": "Roberval klemann",
+      "tradeName": "",
+      "document": "92783473020",
+      "stateRegistration": "",
+      "companyStatus": "",
+      "openingDate": "",
+      "legalNature": "",
+      "companySize": "",
+      "primaryCnae": "",
+      "birthDate": "1977-10-15",
+      "monthlyIncome": 0,
+      "profession": "",
+      "spouseName": "",
+      "fatherName": "",
+      "motherName": "",
+      "creditLimit": 0,
+      "phone": "",
+      "mobile": "55999358886",
+      "email": "",
+      "zipCode": "98250000",
+      "street": "Rua conrad neuwald",
+      "number": "580",
+      "complement": "",
+      "district": "centro",
+      "city": "Saldanha Marinho",
+      "state": "RS",
+      "classificationId": "none",
+      "origin": "",
+      "notes": "",
+      "active": true,
+      "links": {
+        "whatsappIds": [],
+        "quoteIds": [],
+        "saleIds": [],
+        "serviceOrderIds": []
+      },
+      "createdAt": "2026-08-24T13:49:00.973Z",
+      "updatedAt": "2026-08-24T13:49:00.973Z",
+      "createdBy": "painel",
+      "updatedBy": "painel"
+    },
+    {
+      "id": "CLI-1787579532782-ADA99",
+      "code": "002989",
+      "companyId": "quality-principal",
+      "personType": "pf",
+      "name": "Aline Goulart Soares",
+      "tradeName": "",
+      "document": "01869767047",
+      "stateRegistration": "",
+      "companyStatus": "",
+      "openingDate": "",
+      "legalNature": "",
+      "companySize": "",
+      "primaryCnae": "",
+      "birthDate": "1980-09-24",
+      "monthlyIncome": 0,
+      "profession": "",
+      "spouseName": "",
+      "fatherName": "",
+      "motherName": "",
+      "creditLimit": 0,
+      "phone": "",
+      "mobile": "55996998527",
+      "email": "",
+      "zipCode": "98250000",
+      "street": "Rua Conrad Neuwald",
+      "number": "620",
+      "complement": "",
+      "district": "centro",
+      "city": "Saldanha Marinho",
+      "state": "RS",
+      "classificationId": "none",
+      "origin": "",
+      "notes": "",
+      "active": true,
+      "links": {
+        "whatsappIds": [],
+        "quoteIds": [],
+        "saleIds": [],
+        "serviceOrderIds": []
+      },
+      "createdAt": "2026-08-24T13:52:12.782Z",
+      "updatedAt": "2026-08-24T13:52:12.782Z",
+      "createdBy": "painel",
+      "updatedBy": "painel"
+    },
+    {
+      "id": "CLI-1787657503670-CL8KJ",
+      "code": "002990",
+      "companyId": "quality-principal",
+      "personType": "pf",
+      "name": "Edite doneda",
+      "tradeName": "",
+      "document": "66640458004",
+      "stateRegistration": "",
+      "companyStatus": "",
+      "openingDate": "",
+      "legalNature": "",
+      "companySize": "",
+      "primaryCnae": "",
+      "birthDate": "1954-12-23",
+      "monthlyIncome": 0,
+      "profession": "",
+      "spouseName": "",
+      "fatherName": "",
+      "motherName": "",
+      "creditLimit": 0,
+      "phone": "",
+      "mobile": "55997160717",
+      "email": "",
+      "zipCode": "98250000",
+      "street": "Rua gomercindo saraiva",
+      "number": "1231",
+      "complement": "",
+      "district": "centro",
+      "city": "Saldanha Marinho",
+      "state": "RS",
+      "classificationId": "none",
+      "origin": "",
+      "notes": "",
+      "active": true,
+      "links": {
+        "whatsappIds": [],
+        "quoteIds": [],
+        "saleIds": [],
+        "serviceOrderIds": []
+      },
+      "createdAt": "2026-08-25T11:31:43.670Z",
+      "updatedAt": "2026-08-25T11:31:43.670Z",
+      "createdBy": "painel",
+      "updatedBy": "painel"
+    },
+    {
+      "id": "CLI-1787870359029-R6JHS",
+      "code": "002991",
+      "companyId": "quality-principal",
+      "personType": "pf",
+      "name": "Aureo augusto santin hoffmann",
+      "tradeName": "",
+      "document": "03278217012",
+      "stateRegistration": "",
+      "companyStatus": "",
+      "openingDate": "",
+      "legalNature": "",
+      "companySize": "",
+      "primaryCnae": "",
+      "birthDate": "1994-06-16",
+      "monthlyIncome": 0,
+      "profession": "",
+      "spouseName": "",
+      "fatherName": "",
+      "motherName": "",
+      "creditLimit": 0,
+      "phone": "",
+      "mobile": "54991433737",
+      "email": "",
+      "zipCode": "99460000",
+      "street": "Rua Getulio Vargas",
+      "number": "133",
+      "complement": "",
+      "district": "Centro",
+      "city": "Colorado",
+      "state": "RS",
+      "classificationId": "none",
+      "origin": "",
+      "notes": "",
+      "active": true,
+      "links": {
+        "whatsappIds": [],
+        "quoteIds": [],
+        "saleIds": [],
+        "serviceOrderIds": []
+      },
+      "createdAt": "2026-08-27T22:39:19.029Z",
+      "updatedAt": "2026-08-27T22:39:19.029Z",
+      "createdBy": "Matheus Fernando",
+      "updatedBy": "Matheus Fernando"
     }
   ]
 }

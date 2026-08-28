@@ -1,0 +1,33 @@
+{
+  "version": "1.0",
+  "items": [
+    {
+      "kind": "store",
+      "userId": "",
+      "periodicity": "monthly",
+      "periodKey": "2026-08",
+      "storeId": "STORE-MAIN",
+      "target": 32000,
+      "basis": "sale",
+      "id": "GOAL-0670b895-d2a7-4def-88ac-b5fcd5ec72db",
+      "updatedAt": "2026-08-28T01:13:35.383Z",
+      "updatedBy": "Matheus Fernando",
+      "createdAt": "2026-08-28T01:13:21.394Z",
+      "createdBy": "Matheus Fernando"
+    },
+    {
+      "kind": "user",
+      "userId": "USR-d15976b1-a734-459f-8957-b9f42bc39ea2",
+      "periodicity": "monthly",
+      "periodKey": "2026-08",
+      "storeId": "STORE-MAIN",
+      "target": 0,
+      "basis": "rule",
+      "id": "GOAL-0df1e821-a864-4252-989c-973833cb1842",
+      "updatedAt": "2026-08-28T01:13:35.383Z",
+      "updatedBy": "Matheus Fernando",
+      "createdAt": "2026-08-28T01:13:21.394Z",
+      "createdBy": "Matheus Fernando"
+    }
+  ]
+}

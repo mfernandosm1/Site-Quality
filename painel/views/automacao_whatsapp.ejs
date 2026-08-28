@@ -203,7 +203,7 @@
   .qw-opportunity{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:10px;align-items:center;border:1px solid #eef2f7;border-radius:12px;padding:10px;text-decoration:none;color:var(--qw-text);background:#fff}.qw-opportunity:hover{background:#f8fafc}.qw-opportunity[hidden]{display:none}.qw-opportunity-name{font-weight:900;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.qw-opportunity-meta{font-size:11px;color:#64748b;margin-top:3px}.qw-opportunity-side{text-align:right;white-space:nowrap}.qw-opportunity-wait{font-size:10px;font-weight:900;color:#b91c1c;background:#fee2e2;border-radius:999px;padding:4px 7px}.qw-opportunity-ok{font-size:10px;font-weight:900;color:#166534;background:#dcfce7;border-radius:999px;padding:4px 7px}
   .qw-origin-row,.qw-interest-row{display:grid;grid-template-columns:minmax(100px,1fr) 2fr auto;gap:8px;align-items:center;margin:9px 0;font-size:12px}.qw-bar{height:8px;border-radius:999px;background:#e2e8f0;overflow:hidden}.qw-bar span{display:block;height:100%;background:#2563eb;border-radius:inherit}.qw-interest-row{grid-template-columns:minmax(0,1fr) auto}.qw-interest-row strong{font-size:13px}.qw-commercial-empty{padding:16px;border:1px dashed #cbd5e1;border-radius:12px;text-align:center;color:#64748b}
   @media(max-width:1100px){.qw-commercial-kpis{grid-template-columns:repeat(3,1fr)}.qw-commercial-layout{grid-template-columns:1fr}}
-  @media(max-width:700px){.qw-commercial-kpis{grid-template-columns:repeat(2,1fr)}.qw-commercial-tools{grid-template-columns:1fr}.qw-commercial-kpi:last-child{grid-column:span 2}}
+  @media(max-width:700px){.qw-commercial-kpis{grid-template-columns:repeat(2,1fr)}.qw-commercial-tools{grid-template-columns:1fr}.qw-commercial-kpi:last-child{grid-column:span 2}.qw-interest-groups{grid-template-columns:1fr}.qw-inbound-controls{display:grid;grid-template-columns:1fr 1fr}.qw-inbound-controls select{min-width:0;width:100%}}
 
 
   /* v0.12.6 — agenda central, emoji e aproveitamento total do Inbox */
@@ -314,7 +314,7 @@
   .qw-operational .qw-commercial-tools{grid-template-columns:1.4fr .8fr}
   html[data-panel-theme]:not([data-panel-theme="light"]) .qw-commercial-kpi,html[data-panel-theme]:not([data-panel-theme="light"]) .qw-opportunity,html[data-panel-theme]:not([data-panel-theme="light"]) .qw-task-kpi{background:var(--qw-card)!important;color:var(--qw-text)!important;border-color:var(--qw-line)!important}
   html[data-panel-theme]:not([data-panel-theme="light"]) .qw-commercial-kpi .label,html[data-panel-theme]:not([data-panel-theme="light"]) .qw-commercial-kpi .hint,html[data-panel-theme]:not([data-panel-theme="light"]) .qw-opportunity-meta{color:var(--qw-muted)!important}
-  .qw-inbound-daily{height:150px;display:flex;align-items:flex-end;gap:3px;overflow-x:auto;padding:18px 2px 2px;margin-top:10px}.qw-inbound-day{position:relative;display:grid;grid-template-rows:1fr 14px;align-items:end;justify-items:center;min-width:16px;height:100%;flex:1}.qw-inbound-day i{display:block;width:70%;min-height:3px;border-radius:5px 5px 2px 2px;background:#3b82f6}.qw-inbound-day small{font-size:7px;color:var(--qw-muted)}.qw-inbound-day span{position:absolute;top:-14px;font-size:7px;color:var(--qw-muted)}
+  .qw-inbound-daily{height:150px;display:flex;align-items:flex-end;gap:3px;overflow-x:auto;padding:18px 2px 2px;margin-top:8px}.qw-inbound-day{position:relative;display:grid;grid-template-rows:1fr 14px;align-items:end;justify-items:center;min-width:18px;height:100%;flex:1}.qw-inbound-bars{height:100%;width:82%;display:flex;align-items:flex-end;justify-content:center;gap:2px}.qw-inbound-bars i{display:block;width:50%;min-height:3px;border-radius:5px 5px 2px 2px}.qw-inbound-bars i.current{background:#3b82f6}.qw-inbound-bars i.compare{background:#f59e0b}.qw-inbound-day small{font-size:7px;color:var(--qw-muted)}.qw-inbound-day>span{position:absolute;top:-14px;font-size:7px;color:var(--qw-muted)}.qw-inbound-controls{display:flex;gap:7px;flex-wrap:wrap;margin-top:10px}.qw-inbound-controls label{display:grid;gap:3px;font-size:9px;color:var(--qw-muted);font-weight:800}.qw-inbound-controls select{min-width:145px;height:31px;padding:0 8px}.qw-inbound-summary{display:flex;align-items:center;gap:7px;flex-wrap:wrap;margin-top:8px;font-size:10px;color:var(--qw-muted)}.qw-inbound-summary span{display:inline-flex;align-items:center;gap:4px;padding:4px 7px;border:1px solid var(--qw-line);border-radius:999px}.qw-inbound-summary .current b{color:#3b82f6}.qw-inbound-summary .compare b{color:#f59e0b}.qw-inbound-summary .delta.up{color:#16a34a}.qw-inbound-summary .delta.down{color:#dc2626}.qw-interest-groups{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:10px}.qw-interest-groups section{min-width:0;border:1px solid var(--qw-line);border-radius:11px;padding:9px}.qw-interest-groups h3{margin:0 0 7px;font-size:11px}.qw-interest-groups .qw-commercial-empty{padding:10px;font-size:10px}
   .qw-contact-kpis{grid-template-columns:repeat(6,minmax(0,1fr))}
   .qw-opportunity-row.smart{display:block}
   .qw-opportunity-row.smart .qw-opportunity{width:100%}
@@ -339,6 +339,60 @@
   .qw-schedule-modal{z-index:99999!important}
   .qw-storage-report{margin-top:12px}.qw-storage-metrics{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}.qw-storage-metric{border:1px solid var(--qw-line);border-radius:11px;padding:10px;background:var(--qw-card,#fff)}.qw-storage-metric strong{display:block;font-size:18px}.qw-storage-metric span{display:block;margin-top:3px;font-size:9px;color:var(--qw-muted)}.qw-storage-detail{margin-top:10px;padding:10px;border:1px solid var(--qw-line);border-radius:11px;font-size:10px;color:var(--qw-muted)}.qw-storage-actions{display:flex;gap:8px;flex-wrap:wrap}.qw-storage-actions form{margin:0}
   @media(max-width:900px){.qw-inbox-page{height:auto;min-height:calc(100vh - 108px);overflow:visible}.qw-inbox-page .qw-inbox-shell{height:auto!important}.qw-storage-metrics{grid-template-columns:repeat(2,1fr)}}
+
+  /* 2026-08-25 — Temas escuros consistentes no CRM/WhatsApp, inclusive Blocos */
+  html[data-panel-theme]:not([data-panel-theme="light"]){
+    --qw-bg:var(--bg);
+    --qw-card:var(--card);
+    --qw-text:var(--text);
+    --qw-muted:var(--muted);
+    --qw-line:var(--line);
+    --qw-soft:var(--surface-soft,var(--card));
+    --qw-shadow:0 10px 30px var(--shadow,rgba(0,0,0,.35));
+  }
+  html[data-panel-theme]:not([data-panel-theme="light"]) .qw-wrap{background:var(--qw-bg)!important;color:var(--qw-text)!important}
+  html[data-panel-theme]:not([data-panel-theme="light"]) .qw-card,
+  html[data-panel-theme]:not([data-panel-theme="light"]) .qw-step,
+  html[data-panel-theme]:not([data-panel-theme="light"]) .qw-block-card,
+  html[data-panel-theme]:not([data-panel-theme="light"]) .qw-option-card,
+  html[data-panel-theme]:not([data-panel-theme="light"]) .qw-flow-map,
+  html[data-panel-theme]:not([data-panel-theme="light"]) .qw-flow-node,
+  html[data-panel-theme]:not([data-panel-theme="light"]) .qw-log-row,
+  html[data-panel-theme]:not([data-panel-theme="light"]) .qw-media-card,
+  html[data-panel-theme]:not([data-panel-theme="light"]) .qw-media-group,
+  html[data-panel-theme]:not([data-panel-theme="light"]) .qw-settings-nav{
+    background:var(--qw-card)!important;color:var(--qw-text)!important;border-color:var(--qw-line)!important;
+  }
+  html[data-panel-theme]:not([data-panel-theme="light"]) .qw-step-head,
+  html[data-panel-theme]:not([data-panel-theme="light"]) .qw-media-group-head{
+    background:var(--qw-soft)!important;color:var(--qw-text)!important;border-color:var(--qw-line)!important;
+  }
+  html[data-panel-theme]:not([data-panel-theme="light"]) .qw-input,
+  html[data-panel-theme]:not([data-panel-theme="light"]) .qw-textarea,
+  html[data-panel-theme]:not([data-panel-theme="light"]) .qw-select{
+    background:var(--qw-soft)!important;color:var(--qw-text)!important;border-color:var(--qw-line)!important;
+  }
+  html[data-panel-theme]:not([data-panel-theme="light"]) .qw-field label,
+  html[data-panel-theme]:not([data-panel-theme="light"]) .qw-check,
+  html[data-panel-theme]:not([data-panel-theme="light"]) .qw-step-title,
+  html[data-panel-theme]:not([data-panel-theme="light"]) .qw-block-name{
+    color:var(--qw-text)!important;
+  }
+  html[data-panel-theme]:not([data-panel-theme="light"]) .qw-btn:not(.primary):not(.success):not(.danger):not(.dark),
+  html[data-panel-theme]:not([data-panel-theme="light"]) .qw-tab:not(.active),
+  html[data-panel-theme]:not([data-panel-theme="light"]) .qw-mini-btn:not(.danger):not(.blue):not(.gold),
+  html[data-panel-theme]:not([data-panel-theme="light"]) .qw-pill:not(.green):not(.orange):not(.red){
+    background:var(--qw-soft)!important;color:var(--qw-text)!important;border-color:var(--qw-line)!important;
+  }
+  html[data-panel-theme]:not([data-panel-theme="light"]) .qw-mini-btn.blue{background:color-mix(in srgb,#2563eb 18%,var(--qw-card))!important;color:#bfdbfe!important;border-color:color-mix(in srgb,#60a5fa 45%,var(--qw-line))!important}
+  html[data-panel-theme]:not([data-panel-theme="light"]) .qw-mini-btn.gold{background:color-mix(in srgb,#f59e0b 14%,var(--qw-card))!important;color:#fde68a!important;border-color:color-mix(in srgb,#f59e0b 45%,var(--qw-line))!important}
+  html[data-panel-theme]:not([data-panel-theme="light"]) .qw-empty{background:var(--qw-soft)!important;color:var(--qw-muted)!important;border-color:var(--qw-line)!important}
+  html[data-panel-theme]:not([data-panel-theme="light"]) .qw-flow-start{background:color-mix(in srgb,#16a34a 14%,var(--qw-card))!important;color:#bbf7d0!important;border-color:color-mix(in srgb,#22c55e 45%,var(--qw-line))!important}
+  html[data-panel-theme]:not([data-panel-theme="light"]) .qw-flow-node.start{background:color-mix(in srgb,#16a34a 10%,var(--qw-card))!important;color:var(--qw-text)!important;border-color:color-mix(in srgb,#22c55e 35%,var(--qw-line))!important}
+  html[data-panel-theme]:not([data-panel-theme="light"]) .qw-flow-node.choice{background:color-mix(in srgb,#2563eb 12%,var(--qw-card))!important;color:var(--qw-text)!important;border-color:color-mix(in srgb,#60a5fa 35%,var(--qw-line))!important}
+  html[data-panel-theme]:not([data-panel-theme="light"]) .qw-info-tip{background:var(--qw-soft)!important;color:var(--qw-muted)!important;border-color:var(--qw-line)!important}
+  html[data-panel-theme]:not([data-panel-theme="light"]) .qw-unsaved{background:color-mix(in srgb,#f59e0b 12%,var(--qw-card))!important;color:#fde68a!important;border-color:color-mix(in srgb,#f59e0b 40%,var(--qw-line))!important}
+
 </style>
 
 <div class="qw-wrap <%= (tab === 'inbox' || tab === 'dashboard') ? 'qw-operational' : '' %> <%= tab === 'inbox' ? 'qw-inbox-page' : '' %>">
@@ -395,7 +449,8 @@
     const statusLabelsDashboard = {new:'Novo',in_progress:'Em andamento',pending:'Pendente',completed_sale:'Venda concluída',lost:'Perdido',no_potential:'Sem potencial'};
     const formatResponseTimeDashboard = function(seconds){ if(seconds===null || seconds===undefined) return '—'; if(seconds<60) return seconds+'s'; const min=Math.round(seconds/60); if(min<60) return min+' min'; return (seconds/3600).toFixed(1).replace('.',',')+' h'; };
     const inboundDaily = inboundMetrics?.daily || [];
-    const inboundDailyMax = Math.max(1,...inboundDaily.map(function(item){return Number(item.total||0);}));
+    const inboundCompareDaily = inboundMetrics?.compareDaily || [];
+    const inboundDailyMax = Math.max(1,...inboundDaily.map(function(item){return Number(item.total||0);}),...inboundCompareDaily.map(function(item){return Number(item.total||0);}));
   %>
     <div class="qw-library-heading" style="margin:2px 0 10px"><h2 style="margin:0">📊 Painel comercial</h2><span class="qw-info-tip" tabindex="0" aria-label="Como são contados os contatos">i<span class="qw-info-tip-text">Os indicadores de contatos contam cada número uma única vez no período e somente quando a primeira mensagem do período veio do cliente. Conversas iniciadas pela loja não entram nessa contagem.</span></span></div>
     <div class="qw-commercial-kpis qw-contact-kpis">
@@ -456,9 +511,24 @@
         </div>
       </div>
       <div class="qw-commercial-stack">
-        <div class="qw-card qw-commercial-card"><div class="qw-library-heading"><h2 style="margin:0">📈 Contatos por dia</h2><span class="qw-info-tip" tabindex="0">i<span class="qw-info-tip-text">Mostra quantos contatos únicos iniciaram conversa em cada dia do mês atual. Se a loja enviou a primeira mensagem daquele dia, o contato não entra.</span></span></div><div class="qw-inbound-daily"><% inboundDaily.forEach(function(item){ const day=String(item.date||'').slice(8,10); const height=Math.max(3,Math.round((Number(item.total||0)/inboundDailyMax)*100)); %><div class="qw-inbound-day" title="<%= day %>: <%= item.total %> contato(s)"><span><%= item.total || '' %></span><i style="height:<%= height %>%"></i><small><%= day %></small></div><% }) %></div></div>
+        <div class="qw-card qw-commercial-card">
+          <div class="qw-library-heading"><h2 style="margin:0">📈 Contatos por dia</h2><span class="qw-info-tip" tabindex="0">i<span class="qw-info-tip-text">Conta contatos únicos em cada dia quando a primeira mensagem daquele dia veio do cliente. Você pode selecionar um mês e comparar com outro mês sem alterar o restante do painel.</span></span></div>
+          <form class="qw-inbound-controls" method="get" action="/automacao-whatsapp">
+            <input type="hidden" name="tab" value="dashboard">
+            <label>Mês<select class="qw-select" name="contactMonth" onchange="this.form.submit()"><% (inboundMetrics?.availableMonths||[]).forEach(function(month){ %><option value="<%= month.key %>" <%= inboundMetrics?.selectedMonth===month.key?'selected':'' %>><%= month.label %></option><% }) %></select></label>
+            <label>Comparar com<select class="qw-select" name="compareMonth" onchange="this.form.submit()"><option value="none" <%= !inboundMetrics?.compareMonth?'selected':'' %>>Sem comparação</option><% (inboundMetrics?.availableMonths||[]).forEach(function(month){ %><option value="<%= month.key %>" <%= inboundMetrics?.compareMonth===month.key?'selected':'' %>><%= month.label %></option><% }) %></select></label>
+          </form>
+          <div class="qw-inbound-summary"><span class="current"><b><%= inboundMetrics?.selectedTotal||0 %></b> <%= inboundMetrics?.selectedMonthLabel||'' %></span><% if(inboundMetrics?.compareMonth){ %><span class="compare"><b><%= inboundMetrics?.compareTotal||0 %></b> <%= inboundMetrics?.compareMonthLabel||'' %></span><span class="delta <%= Number(inboundMetrics?.deltaPercent||0)>=0?'up':'down' %>"><%= inboundMetrics?.deltaPercent===null?'—':((Number(inboundMetrics.deltaPercent)>=0?'+':'')+String(inboundMetrics.deltaPercent).replace('.',',')+'%') %></span><% } %></div>
+          <div class="qw-inbound-daily"><% inboundDaily.forEach(function(item,index){ const day=String(item.date||'').slice(8,10); const compare=inboundCompareDaily[index]||{}; const height=Math.max(3,Math.round((Number(item.total||0)/inboundDailyMax)*100)); const compareHeight=Math.max(3,Math.round((Number(compare.total||0)/inboundDailyMax)*100)); %><div class="qw-inbound-day" title="<%= inboundMetrics?.selectedMonthLabel %> dia <%= day %>: <%= item.total %><% if(inboundMetrics?.compareMonth){ %> · <%= inboundMetrics?.compareMonthLabel %>: <%= compare.total||0 %><% } %>"><span><%= item.total || '' %></span><div class="qw-inbound-bars"><i class="current" style="height:<%= height %>%"></i><% if(inboundMetrics?.compareMonth){ %><i class="compare" style="height:<%= compareHeight %>%"></i><% } %></div><small><%= day %></small></div><% }) %></div>
+        </div>
         <div class="qw-card qw-commercial-card"><div class="qw-library-heading"><h2 style="margin:0">⏱️ Atendimento</h2><span class="qw-info-tip" tabindex="0">i<span class="qw-info-tip-text">Indicadores calculados pelas mensagens reais recentes do Inbox. “Aguardando agora” considera conversas abertas em que o cliente falou por último nos últimos 7 dias. A primeira resposta usa contatos iniciados pelo cliente nos últimos 30 dias e ignora intervalos acima de 12 horas para não distorcer a média com conversas deixadas para o dia seguinte.</span></span></div><div class="qw-smart-panel"><div class="qw-smart-metric"><strong><%= formatResponseTimeDashboard(commercialDashboard.averageFirstResponseSeconds) %></strong><span>1ª resposta média · 30d</span></div><div class="qw-smart-metric"><strong><%= commercialDashboard.awaitingResponse %></strong><span>Aguardando agora</span></div><div class="qw-smart-metric"><strong><%= commercialDashboard.waitingOver2h %></strong><span>Críticos +2h</span></div></div></div>
-        <div class="qw-card qw-commercial-card"><div class="qw-library-heading"><h2 style="margin:0">📱 Interesses mais frequentes</h2><span class="qw-info-tip" tabindex="0">i<span class="qw-info-tip-text">Mostra somente interesses curtos e claros registrados nas conversas. Textos longos de menus, respostas automáticas e conteúdos que parecem fluxo do bot são descartados para não poluir o ranking.</span></span></div><% if(!commercialDashboard.topInterests.length){ %><div class="qw-commercial-empty">Ainda não há interesses claros suficientes para formar um ranking.</div><% } %><% commercialDashboard.topInterests.forEach(function(item){ %><div class="qw-interest-row"><span><%= item.name %></span><strong><%= item.total %></strong></div><% }) %></div>
+        <div class="qw-card qw-commercial-card">
+          <div class="qw-library-heading"><h2 style="margin:0">🔎 Interesses detectados</h2><span class="qw-info-tip" tabindex="0">i<span class="qw-info-tip-text">Além do interesse vindo do site, o painel lê mensagens recebidas recentes e só contabiliza quando consegue relacionar o texto a um produto ou serviço realmente cadastrado no Quality ERP. Cada conversa conta no máximo uma vez por item para evitar inflar o ranking.</span></span></div>
+          <div class="qw-interest-groups">
+            <section><h3>📱 Produtos</h3><% if(!(commercialDashboard.topProductInterests||[]).length){ %><div class="qw-commercial-empty">Nenhum produto cadastrado foi identificado com segurança nas conversas.</div><% } %><% (commercialDashboard.topProductInterests||[]).forEach(function(item){ %><div class="qw-interest-row"><span><%= item.name %></span><strong><%= item.total %></strong></div><% }) %></section>
+            <section><h3>🛠️ Serviços</h3><% if(!(commercialDashboard.topServiceInterests||[]).length){ %><div class="qw-commercial-empty">Nenhum serviço cadastrado foi identificado com segurança nas conversas.</div><% } %><% (commercialDashboard.topServiceInterests||[]).forEach(function(item){ %><div class="qw-interest-row"><span><%= item.name %></span><strong><%= item.total %></strong></div><% }) %></section>
+          </div>
+        </div>
       </div>
     </div>
   <% } %>
@@ -699,6 +769,7 @@
         </div>
         <div id="waDiagnostic" class="qw-info" style="margin-top:12px;display:none"></div>
         <div class="qw-info" style="margin-top:12px">A sessão é salva localmente em <code>content/automacao_whatsapp/session</code>. “Desconectar” preserva a sessão; “Novo QR” remove a autenticação local.</div>
+        <div class="qw-warning" style="margin-top:12px"><strong>⚠ Canal atual via WhatsApp Web</strong><br><span style="display:block;margin-top:5px">Esta conexão usa <code>whatsapp-web.js</code> e uma sessão local do WhatsApp Web. Ela não é a API Oficial da Meta. Os limites, intervalos e bloqueio automático de pedidos como “parar” reduzem disparos acidentais, mas não transformam esta conexão em um canal oficial. Para o menor risco operacional, migre o Inbox e as automações para a WhatsApp Business Platform/API Oficial.</span></div>
         <div style="margin-top:16px;padding-top:14px;border-top:1px solid var(--qw-line)">
           <div class="qw-library-heading"><h2 style="margin:0">🧹 Agendamentos</h2><span class="qw-info-tip" tabindex="0" aria-label="Limpeza global de agendamentos">i<span class="qw-info-tip-text">Remove os agendamentos de todas as conversas, inclusive pendentes. Use somente quando quiser zerar a fila e o histórico.</span></span></div>
           <p class="qw-muted" style="margin:6px 0 10px">Limpeza geral dos agendamentos do Inbox.</p>
@@ -902,7 +973,7 @@
           <div style="display:flex;align-items:center;justify-content:flex-end;gap:8px;flex-wrap:wrap">
             <span class="qw-pill"><%= birthdayDashboard.total %> hoje</span>
             <span class="qw-pill green"><%= birthdayDashboard.sent %> enviado(s)</span>
-            <span class="qw-pill"><%= birthdayDashboard.pending %> pendente(s)</span>
+            <span class="qw-pill"><%= birthdayDashboard.pending %> pendente(s)</span><% if(Number(birthdayDashboard.optedOut||0)>0){ %><span class="qw-pill"><%= birthdayDashboard.optedOut %> opt-out</span><% } %>
             <span class="qw-pill <%= config.aniversariantesAtivo ? 'green' : '' %>"><%= config.aniversariantesAtivo ? 'Automação ativa' : 'Automação desativada' %></span>
           </div>
         </div>
@@ -920,7 +991,7 @@
             </div>
             <div class="qw-field">
               <label>Intervalo entre aniversariantes (segundos)</label>
-              <input class="qw-input" type="number" min="0" max="600" name="intervaloAniversarioSegundos" value="<%= config.intervaloAniversarioSegundos == null ? 30 : config.intervaloAniversarioSegundos %>">
+              <input class="qw-input" type="number" min="45" max="600" name="intervaloAniversarioSegundos" value="<%= config.intervaloAniversarioSegundos == null ? 45 : Math.max(45, Number(config.intervaloAniversarioSegundos)||45) %>">
             </div>
           </div>
           <div class="qw-field">
@@ -977,6 +1048,7 @@
                 <% if(row.status === 'enviado'){ %><span class="qw-pill green">Enviado</span>
                 <% } else if(row.status === 'erro'){ %><span class="qw-pill">Erro · tentará novamente</span>
                 <% } else if(row.status === 'sem_telefone'){ %><span class="qw-pill">Sem telefone</span>
+                <% } else if(row.status === 'opt_out'){ %><span class="qw-pill">Não enviar · opt-out</span>
                 <% } else { %><span class="qw-pill">Pendente</span><% } %>
               </td>
               <td>
@@ -984,6 +1056,8 @@
                   <button class="qw-btn" type="button" onclick="resendBirthdayCustomer('<%= row.id %>')">Reenviar agora</button>
                 <% } else if(row.status === 'sem_telefone'){ %>
                   <span class="qw-muted">Corrija o cadastro</span>
+                <% } else if(row.status === 'opt_out'){ %>
+                  <span class="qw-muted">Bloqueado por solicitação do cliente</span>
                 <% } else { %>
                   <span class="qw-muted">—</span>
                 <% } %>
@@ -1058,7 +1132,7 @@
   <% } %>
 
   <% if (tab === 'configuracoes' && settingsSection === 'geral') { %>
-    <div class="qw-grid"><div class="qw-card qw-span-8"><h2>⚙️ Configurações gerais</h2><p class="sub">Limites e comportamento humano do WhatsApp. Horário e mensagem de aniversário ficam na aba Aniversariantes.</p><form class="qw-form" method="post" action="/automacao-whatsapp/configuracoes/salvar"><div class="qw-field"><label>Número de teste padrão</label><input class="qw-input" name="numeroTeste" inputmode="numeric" value="<%= config.numeroTeste || '' %>" placeholder="Ex: 5599999999999"></div><div class="qw-row"><div class="qw-field"><label>Limite diário de mensagens</label><input class="qw-input" type="number" min="1" max="1000" name="limiteDiario" value="<%= config.limiteDiario || 40 %>"></div></div><div class="qw-row"><div class="qw-field"><label>Delay humano mínimo entre mensagens (segundos)</label><input class="qw-input" type="number" min="0" name="delayHumanoMin" value="<%= config.delayHumanoMin || 4 %>"></div><div class="qw-field"><label>Delay humano máximo entre mensagens (segundos)</label><input class="qw-input" type="number" min="0" name="delayHumanoMax" value="<%= config.delayHumanoMax || 12 %>"></div></div><div class="qw-row"><div class="qw-field"><label>Digitando padrão (segundos)</label><input class="qw-input" type="number" min="0" name="digitandoPadrao" value="<%= config.digitandoPadrao || 2 %>"></div><div class="qw-field"><label>Gravando áudio padrão (segundos)</label><input class="qw-input" type="number" min="0" name="gravandoAudioPadrao" value="<%= config.gravandoAudioPadrao || 2 %>"></div></div><label class="qw-check"><input type="checkbox" name="envioRealAtivo" <%= config.envioRealAtivo ? 'checked' : '' %>> Permitir envio real quando a conexão WhatsApp existir</label><button class="qw-btn primary" type="submit">Salvar configurações</button></form></div><div class="qw-card qw-span-4"><h2>🛡️ Nota</h2><div class="qw-warning">Na v0.5.0, o envio real existe apenas em Configurações → Conexão e sempre exige ação manual. Esta chave continua reservada para fases futuras.</div></div></div>
+    <div class="qw-grid"><div class="qw-card qw-span-8"><h2>⚙️ Configurações gerais</h2><p class="sub">Limites operacionais de envio. Horário e mensagem de aniversário ficam na aba Aniversariantes.</p><form class="qw-form" method="post" action="/automacao-whatsapp/configuracoes/salvar"><div class="qw-field"><label>Número de teste padrão</label><input class="qw-input" name="numeroTeste" inputmode="numeric" value="<%= config.numeroTeste || '' %>" placeholder="Ex: 5599999999999"></div><div class="qw-row"><div class="qw-field"><label>Limite diário de mensagens</label><input class="qw-input" type="number" min="1" max="1000" name="limiteDiario" value="<%= config.limiteDiario || 40 %>"></div></div><div class="qw-row"><div class="qw-field"><label>Intervalo operacional mínimo (segundos)</label><input class="qw-input" type="number" min="0" name="delayHumanoMin" value="<%= config.delayHumanoMin || 4 %>"></div><div class="qw-field"><label>Intervalo operacional máximo (segundos)</label><input class="qw-input" type="number" min="0" name="delayHumanoMax" value="<%= config.delayHumanoMax || 12 %>"></div></div><div class="qw-row"><div class="qw-field"><label>Digitando padrão (segundos)</label><input class="qw-input" type="number" min="0" name="digitandoPadrao" value="<%= config.digitandoPadrao || 2 %>"></div><div class="qw-field"><label>Gravando áudio padrão (segundos)</label><input class="qw-input" type="number" min="0" name="gravandoAudioPadrao" value="<%= config.gravandoAudioPadrao || 2 %>"></div></div><label class="qw-check"><input type="checkbox" name="envioRealAtivo" <%= config.envioRealAtivo ? 'checked' : '' %>> Permitir envio real quando a conexão WhatsApp existir</label><button class="qw-btn primary" type="submit">Salvar configurações</button></form></div><div class="qw-card qw-span-4"><h2>🛡️ Nota</h2><div class="qw-warning">Na v0.5.0, o envio real existe apenas em Configurações → Conexão e sempre exige ação manual. Esta chave continua reservada para fases futuras.</div></div></div>
   <% } %>
 </div>
 
@@ -1139,6 +1213,7 @@
   function birthdayStatusInfo(row){
     if(row.status==='enviado') return {label:'Já enviado hoje',icon:'✅',tone:'green'};
     if(row.status==='sem_telefone') return {label:'Não será enviado · sem telefone',icon:'⚠️',tone:'warn'};
+    if(row.status==='opt_out') return {label:'Não será enviado · opt-out',icon:'⛔',tone:'warn'};
     if(row.status==='erro') return {label:'Será tentado novamente',icon:'🟠',tone:'warn'};
     return {label:'Será enviado',icon:'🟢',tone:'green'};
   }

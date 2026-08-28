@@ -1,4 +1,2793 @@
 {
   "version": "0.15.0",
-  "items": []
+  "items": [
+    {
+      "id": "AUD-00000001",
+      "at": "2026-08-27T11:02:46.851Z",
+      "module": "usuarios",
+      "action": "FIRST_ADMIN_CREATED",
+      "actor": "Matheus Fernando",
+      "entityType": "user",
+      "entityId": "USR-d15976b1-a734-459f-8957-b9f42bc39ea2",
+      "documentId": "",
+      "reason": "",
+      "before": null,
+      "after": {
+        "id": "USR-d15976b1-a734-459f-8957-b9f42bc39ea2",
+        "name": "Matheus Fernando",
+        "username": "matheus",
+        "email": "sac.quality2@gmail.com",
+        "profileId": "administrator",
+        "active": true,
+        "seller": true,
+        "technician": false,
+        "updatedAt": "2026-08-27T11:02:46.738Z",
+        "updatedBy": "primeiro-acesso",
+        "createdAt": "2026-08-27T11:02:46.738Z",
+        "createdBy": "primeiro-acesso"
+      },
+      "ip": "",
+      "requestId": ""
+    },
+    {
+      "id": "AUD-00000002",
+      "at": "2026-08-27T22:13:38.864Z",
+      "module": "usuarios",
+      "action": "USER_UPDATED",
+      "actor": "Matheus Fernando",
+      "entityType": "user",
+      "entityId": "USR-d15976b1-a734-459f-8957-b9f42bc39ea2",
+      "documentId": "",
+      "reason": "",
+      "before": null,
+      "after": {
+        "id": "USR-d15976b1-a734-459f-8957-b9f42bc39ea2",
+        "name": "Matheus Fernando",
+        "username": "matheus",
+        "email": "sac.quality2@gmail.com",
+        "profileId": "administrator",
+        "active": true,
+        "seller": true,
+        "technician": true,
+        "updatedAt": "2026-08-27T22:13:38.858Z",
+        "updatedBy": "Matheus Fernando",
+        "createdAt": "2026-08-27T11:02:46.738Z",
+        "createdBy": "primeiro-acesso"
+      },
+      "ip": "",
+      "requestId": ""
+    },
+    {
+      "id": "AUD-00000003",
+      "at": "2026-08-27T23:24:39.535Z",
+      "module": "usuarios",
+      "action": "USER_UPDATED",
+      "actor": "Matheus Fernando",
+      "entityType": "user",
+      "entityId": "USR-d15976b1-a734-459f-8957-b9f42bc39ea2",
+      "documentId": "",
+      "reason": "",
+      "before": null,
+      "after": {
+        "id": "USR-d15976b1-a734-459f-8957-b9f42bc39ea2",
+        "name": "Matheus Fernando",
+        "username": "matheus",
+        "email": "sac.quality2@gmail.com",
+        "profileId": "administrator",
+        "active": true,
+        "seller": true,
+        "technician": true,
+        "updatedAt": "2026-08-27T23:24:39.527Z",
+        "updatedBy": "Matheus Fernando",
+        "createdAt": "2026-08-27T11:02:46.738Z",
+        "createdBy": "primeiro-acesso",
+        "displayName": "Matheus Fernando",
+        "accessPolicy": {
+          "accessUntil": "",
+          "scheduleEnabled": false,
+          "schedule": {
+            "0": {
+              "enabled": false,
+              "start": "08:00",
+              "end": "18:00"
+            },
+            "1": {
+              "enabled": true,
+              "start": "08:00",
+              "end": "18:00"
+            },
+            "2": {
+              "enabled": true,
+              "start": "08:00",
+              "end": "18:00"
+            },
+            "3": {
+              "enabled": true,
+              "start": "08:00",
+              "end": "18:00"
+            },
+            "4": {
+              "enabled": true,
+              "start": "08:00",
+              "end": "18:00"
+            },
+            "5": {
+              "enabled": true,
+              "start": "08:00",
+              "end": "18:00"
+            },
+            "6": {
+              "enabled": false,
+              "start": "08:00",
+              "end": "18:00"
+            }
+          },
+          "ipRestrictionEnabled": false,
+          "allowedIps": []
+        },
+        "pdvPolicy": {
+          "maxDiscountPercent": 5
+        }
+      },
+      "ip": "",
+      "requestId": ""
+    },
+    {
+      "id": "AUD-00000004",
+      "at": "2026-08-27T23:31:32.501Z",
+      "module": "pdv",
+      "action": "DISCOUNT_APPROVAL_KEY_CREATED",
+      "actor": "Matheus Fernando",
+      "entityType": "discount_approval",
+      "entityId": "DAP-a6337e67-b110-4c7f-ade8-6b5b664b83d2",
+      "documentId": "",
+      "reason": "",
+      "before": null,
+      "after": {
+        "id": "DAP-a6337e67-b110-4c7f-ade8-6b5b664b83d2",
+        "code": "******",
+        "issuerName": "Matheus Fernando",
+        "issuedAt": "2026-08-27T23:31:32.495Z",
+        "expiresAt": "2026-08-27T23:36:32.495Z",
+        "ttlMinutes": 5
+      },
+      "ip": "",
+      "requestId": ""
+    },
+    {
+      "id": "AUD-00000005",
+      "at": "2026-08-27T23:31:53.168Z",
+      "module": "pdv",
+      "action": "DISCOUNT_APPROVAL_KEY_CREATED",
+      "actor": "Matheus Fernando",
+      "entityType": "discount_approval",
+      "entityId": "DAP-bca7c3bf-35eb-41dd-87ac-905b92429fa9",
+      "documentId": "",
+      "reason": "",
+      "before": null,
+      "after": {
+        "id": "DAP-bca7c3bf-35eb-41dd-87ac-905b92429fa9",
+        "code": "******",
+        "issuerName": "Matheus Fernando",
+        "issuedAt": "2026-08-27T23:31:53.160Z",
+        "expiresAt": "2026-08-27T23:36:53.160Z",
+        "ttlMinutes": 5
+      },
+      "ip": "",
+      "requestId": ""
+    },
+    {
+      "id": "AUD-00000006",
+      "at": "2026-08-28T12:13:56.500Z",
+      "module": "agenda",
+      "action": "TASK_CREATED",
+      "actor": "Matheus Fernando",
+      "entityType": "agenda_task",
+      "entityId": "task_mtcwy83w_9r4hq5",
+      "documentId": "",
+      "reason": "",
+      "before": null,
+      "after": {
+        "id": "task_mtcwy83w_9r4hq5",
+        "customerId": "",
+        "customerName": "",
+        "conversationId": "",
+        "owner": "Quality",
+        "type": "task",
+        "typeName": "Tarefa",
+        "title": "pagar mulher do cel R$180,00",
+        "description": "",
+        "dueAt": "2026-08-29T08:00",
+        "priority": "medium",
+        "status": "open",
+        "createdAt": "2026-08-28T12:13:56.492Z",
+        "createdBy": "Matheus Fernando",
+        "updatedAt": "2026-08-28T12:13:56.492Z",
+        "updatedBy": "Matheus Fernando",
+        "completedAt": null,
+        "history": [
+          {
+            "at": "2026-08-28T12:13:56.492Z",
+            "actor": "Matheus Fernando",
+            "action": "created",
+            "before": null,
+            "after": {
+              "title": "pagar mulher do cel R$180,00",
+              "description": "",
+              "dueAt": "2026-08-29T08:00",
+              "priority": "medium",
+              "type": "task",
+              "typeName": "Tarefa",
+              "customerId": "",
+              "customerName": "",
+              "owner": "Quality",
+              "status": "open"
+            }
+          }
+        ]
+      },
+      "ip": "100.99.15.27",
+      "requestId": ""
+    },
+    {
+      "id": "AUD-00000007",
+      "at": "2026-08-28T12:14:24.263Z",
+      "module": "agenda",
+      "action": "TASK_DELETED",
+      "actor": "Matheus Fernando",
+      "entityType": "agenda_task",
+      "entityId": "task_mtcwy83w_9r4hq5",
+      "documentId": "",
+      "reason": "",
+      "before": {
+        "id": "task_mtcwy83w_9r4hq5",
+        "customerId": "",
+        "customerName": "",
+        "conversationId": "",
+        "owner": "Quality",
+        "type": "task",
+        "typeName": "Tarefa",
+        "title": "pagar mulher do cel R$180,00",
+        "description": "",
+        "dueAt": "2026-08-29T08:00",
+        "priority": "medium",
+        "status": "open",
+        "createdAt": "2026-08-28T12:13:56.492Z",
+        "createdBy": "Matheus Fernando",
+        "updatedAt": "2026-08-28T12:13:56.492Z",
+        "updatedBy": "Matheus Fernando",
+        "completedAt": null,
+        "history": [
+          {
+            "at": "2026-08-28T12:13:56.492Z",
+            "actor": "Matheus Fernando",
+            "action": "created",
+            "before": null,
+            "after": {
+              "title": "pagar mulher do cel R$180,00",
+              "description": "",
+              "dueAt": "2026-08-29T08:00",
+              "priority": "medium",
+              "type": "task",
+              "typeName": "Tarefa",
+              "customerId": "",
+              "customerName": "",
+              "owner": "Quality",
+              "status": "open"
+            }
+          }
+        ]
+      },
+      "after": null,
+      "ip": "100.99.15.27",
+      "requestId": ""
+    },
+    {
+      "id": "AUD-00000008",
+      "at": "2026-08-28T12:15:11.786Z",
+      "module": "agenda",
+      "action": "TASK_UPDATED",
+      "actor": "Matheus Fernando",
+      "entityType": "agenda_task",
+      "entityId": "task_mt3n4aj0_1zb9zn",
+      "documentId": "",
+      "reason": "",
+      "before": {
+        "title": "avisar a helena durante sobre a venda do cel",
+        "description": "",
+        "dueAt": "2026-08-28T09:00",
+        "priority": "medium",
+        "type": "task",
+        "typeName": "Tarefa",
+        "customerId": "",
+        "customerName": "",
+        "owner": "Quality",
+        "status": "open"
+      },
+      "after": {
+        "title": "pagar a helena durante sobre a venda do cel R$180,00",
+        "description": "",
+        "dueAt": "2026-08-28T09:00",
+        "priority": "medium",
+        "type": "task",
+        "typeName": "Tarefa",
+        "customerId": "",
+        "customerName": "",
+        "owner": "Quality",
+        "status": "open"
+      },
+      "ip": "100.99.15.27",
+      "requestId": ""
+    },
+    {
+      "id": "AUD-00000009",
+      "at": "2026-08-28T22:11:02.774Z",
+      "module": "usuarios",
+      "action": "USER_UPDATED",
+      "actor": "Matheus Fernando",
+      "entityType": "user",
+      "entityId": "USR-d15976b1-a734-459f-8957-b9f42bc39ea2",
+      "documentId": "",
+      "reason": "",
+      "before": null,
+      "after": {
+        "id": "USR-d15976b1-a734-459f-8957-b9f42bc39ea2",
+        "name": "Matheus Fernando",
+        "username": "matheus",
+        "email": "sac.quality2@gmail.com",
+        "profileId": "administrator",
+        "active": true,
+        "seller": true,
+        "technician": true,
+        "updatedAt": "2026-08-28T22:11:02.764Z",
+        "updatedBy": "Matheus Fernando",
+        "createdAt": "2026-08-27T11:02:46.738Z",
+        "createdBy": "primeiro-acesso",
+        "displayName": "Matheus Fernando",
+        "accessPolicy": {
+          "accessUntil": "",
+          "scheduleEnabled": false,
+          "schedule": {
+            "0": {
+              "enabled": false,
+              "start": "08:00",
+              "end": "18:00"
+            },
+            "1": {
+              "enabled": true,
+              "start": "08:00",
+              "end": "18:00"
+            },
+            "2": {
+              "enabled": true,
+              "start": "08:00",
+              "end": "18:00"
+            },
+            "3": {
+              "enabled": true,
+              "start": "08:00",
+              "end": "18:00"
+            },
+            "4": {
+              "enabled": true,
+              "start": "08:00",
+              "end": "18:00"
+            },
+            "5": {
+              "enabled": true,
+              "start": "08:00",
+              "end": "18:00"
+            },
+            "6": {
+              "enabled": false,
+              "start": "08:00",
+              "end": "18:00"
+            }
+          },
+          "ipRestrictionEnabled": false,
+          "allowedIps": []
+        },
+        "pdvPolicy": {
+          "maxDiscountPercent": 5
+        },
+        "mobile": "55999407824",
+        "recoveryKeyConfigured": false
+      },
+      "ip": "",
+      "requestId": ""
+    },
+    {
+      "id": "AUD-00000010",
+      "at": "2026-08-28T22:11:52.356Z",
+      "module": "usuarios",
+      "action": "RECOVERY_KEY_CREATED",
+      "actor": "Matheus Fernando",
+      "entityType": "user",
+      "entityId": "USR-d15976b1-a734-459f-8957-b9f42bc39ea2",
+      "documentId": "",
+      "reason": "",
+      "before": null,
+      "after": null,
+      "ip": "",
+      "requestId": ""
+    },
+    {
+      "id": "AUD-00000011",
+      "at": "2026-08-28T22:38:46.450Z",
+      "module": "produtos",
+      "action": "PRODUCT_UPDATED",
+      "actor": "Matheus Fernando",
+      "entityType": "product",
+      "entityId": "1787956609617",
+      "documentId": "",
+      "reason": "Cadastro de produto atualizado",
+      "before": {
+        "name": "Troca de Bateria de Celular",
+        "sku": "",
+        "code": "PRD-859",
+        "barcode": "",
+        "brand": "",
+        "slug": "troca-de-bateria-de-celular",
+        "price": null,
+        "commercial": {
+          "costPrice": null,
+          "erpPrice": null,
+          "salePrice": null,
+          "marketplacePrice": null,
+          "promotionalPrice": null,
+          "desiredMarginPercent": null,
+          "expectedProfit": null,
+          "defaultCommissionPercent": null,
+          "cashPrice": null,
+          "installmentPrice": null,
+          "minimumPrice": null,
+          "minimumMarginPercent": null,
+          "discountPolicy": "inherit",
+          "maximumDiscountPercent": null,
+          "maximumDiscountAmount": null,
+          "requiresAuthorization": false
+        },
+        "stock": 0,
+        "inventory": {
+          "itemId": "PRD-1787956609617",
+          "stockControlled": true,
+          "allowNegative": false,
+          "minimumQuantity": 0,
+          "channelAvailability": {
+            "site": {
+              "mode": "shared",
+              "enabled": true,
+              "limit": null,
+              "physicalSafety": 0
+            }
+          }
+        },
+        "image": "",
+        "gallery": [],
+        "category": "assistencia-tecnica",
+        "subcategory": "",
+        "tags": [],
+        "relatedManualIds": [],
+        "crossSellIds": [],
+        "showPrice": false,
+        "featured": false,
+        "active": true,
+        "erp": {
+          "sku": "",
+          "internalCode": "PRD-859",
+          "supplierCode": "",
+          "searchAlias": "",
+          "barcode": "",
+          "brand": "",
+          "unit": "UN",
+          "category": "assistencia-tecnica",
+          "subcategory": "",
+          "mainSupplierId": "",
+          "preferredSupplierId": "",
+          "active": true,
+          "categoryId": "ERP-CAT-4"
+        },
+        "virtualStore": {
+          "name": "Troca de Bateria de Celular",
+          "price": null,
+          "active": true,
+          "seoTitle": "",
+          "seoDescription": "",
+          "channels": {
+            "lojaVirtual": {
+              "enabled": true
+            },
+            "mercadoLivre": {
+              "enabled": false
+            },
+            "shopee": {
+              "enabled": false
+            },
+            "amazon": {
+              "enabled": false
+            },
+            "magalu": {
+              "enabled": false
+            }
+          }
+        },
+        "detailsEnabled": true,
+        "showVariationsOnCard": false,
+        "descriptionShort": "",
+        "descriptionLong": "",
+        "variations": {
+          "enabled": false,
+          "colors": [],
+          "storage": [],
+          "ram": [],
+          "condition": [],
+          "combinations": [],
+          "labels": {},
+          "colorsText": "",
+          "storageText": "",
+          "ramText": "",
+          "conditionText": "",
+          "labelsText": "{}",
+          "combinationsText": ""
+        },
+        "id": 1787956609617,
+        "inventoryBalance": {
+          "inventoryItemId": "PRD-1787956609617",
+          "locationId": "loja-principal",
+          "physicalQuantity": 0,
+          "reservedQuantity": 0,
+          "availableQuantity": 0,
+          "minimumQuantity": 0,
+          "updatedAt": "2026-08-28T22:36:49.630Z"
+        }
+      },
+      "after": {
+        "name": "Troca de Bateria de Celular",
+        "sku": "",
+        "code": "PRD-859",
+        "barcode": "",
+        "brand": "",
+        "slug": "troca-de-bateria-de-celular",
+        "price": null,
+        "commercial": {
+          "costPrice": null,
+          "erpPrice": null,
+          "salePrice": null,
+          "marketplacePrice": null,
+          "promotionalPrice": null,
+          "desiredMarginPercent": null,
+          "expectedProfit": null,
+          "defaultCommissionPercent": null,
+          "cashPrice": null,
+          "installmentPrice": null,
+          "minimumPrice": null,
+          "minimumMarginPercent": null,
+          "discountPolicy": "inherit",
+          "maximumDiscountPercent": null,
+          "maximumDiscountAmount": null,
+          "requiresAuthorization": false
+        },
+        "stock": 0,
+        "inventory": {
+          "itemId": "PRD-1787956609617",
+          "stockControlled": true,
+          "allowNegative": false,
+          "minimumQuantity": 0,
+          "channelAvailability": {
+            "site": {
+              "mode": "shared",
+              "enabled": true,
+              "limit": null,
+              "physicalSafety": 0
+            }
+          }
+        },
+        "image": "",
+        "gallery": [
+          "images/produtos/1787956726300-troca-de-bateria.png"
+        ],
+        "category": "assistencia-tecnica",
+        "subcategory": "",
+        "tags": [],
+        "relatedManualIds": [],
+        "crossSellIds": [],
+        "showPrice": false,
+        "featured": false,
+        "active": true,
+        "erp": {
+          "sku": "",
+          "internalCode": "PRD-859",
+          "supplierCode": "",
+          "searchAlias": "",
+          "barcode": "",
+          "brand": "",
+          "unit": "UN",
+          "category": "assistencia-tecnica",
+          "subcategory": "",
+          "mainSupplierId": "",
+          "preferredSupplierId": "",
+          "active": true,
+          "categoryId": "ERP-CAT-4"
+        },
+        "virtualStore": {
+          "name": "Troca de Bateria de Celular",
+          "price": null,
+          "active": true,
+          "seoTitle": "",
+          "seoDescription": "",
+          "channels": {
+            "lojaVirtual": {
+              "enabled": true
+            },
+            "mercadoLivre": {
+              "enabled": false
+            },
+            "shopee": {
+              "enabled": false
+            },
+            "amazon": {
+              "enabled": false
+            },
+            "magalu": {
+              "enabled": false
+            }
+          }
+        },
+        "detailsEnabled": true,
+        "showVariationsOnCard": false,
+        "descriptionShort": "",
+        "descriptionLong": "",
+        "variations": {
+          "enabled": false,
+          "colors": [],
+          "storage": [],
+          "ram": [],
+          "condition": [],
+          "combinations": [],
+          "labels": {},
+          "colorsText": "",
+          "storageText": "",
+          "ramText": "",
+          "conditionText": "",
+          "labelsText": "{}",
+          "combinationsText": ""
+        },
+        "id": 1787956609617,
+        "inventoryBalance": {
+          "inventoryItemId": "PRD-1787956609617",
+          "locationId": "loja-principal",
+          "physicalQuantity": 0,
+          "reservedQuantity": 0,
+          "availableQuantity": 0,
+          "minimumQuantity": 0,
+          "updatedAt": "2026-08-28T22:36:49.630Z"
+        }
+      },
+      "ip": "127.0.0.1",
+      "requestId": "71a12892-0a07-498a-8de3-5ff3f24f9c2b"
+    },
+    {
+      "id": "AUD-00000012",
+      "at": "2026-08-28T22:38:53.534Z",
+      "module": "produtos",
+      "action": "PRODUCT_UPDATED",
+      "actor": "Matheus Fernando",
+      "entityType": "product",
+      "entityId": "1787956609617",
+      "documentId": "",
+      "reason": "Cadastro de produto atualizado",
+      "before": {
+        "name": "Troca de Bateria de Celular",
+        "sku": "",
+        "code": "PRD-859",
+        "barcode": "",
+        "brand": "",
+        "slug": "troca-de-bateria-de-celular",
+        "price": null,
+        "commercial": {
+          "costPrice": null,
+          "erpPrice": null,
+          "salePrice": null,
+          "marketplacePrice": null,
+          "promotionalPrice": null,
+          "desiredMarginPercent": null,
+          "expectedProfit": null,
+          "defaultCommissionPercent": null,
+          "cashPrice": null,
+          "installmentPrice": null,
+          "minimumPrice": null,
+          "minimumMarginPercent": null,
+          "discountPolicy": "inherit",
+          "maximumDiscountPercent": null,
+          "maximumDiscountAmount": null,
+          "requiresAuthorization": false
+        },
+        "stock": 0,
+        "inventory": {
+          "itemId": "PRD-1787956609617",
+          "stockControlled": true,
+          "allowNegative": false,
+          "minimumQuantity": 0,
+          "channelAvailability": {
+            "site": {
+              "mode": "shared",
+              "enabled": true,
+              "limit": null,
+              "physicalSafety": 0
+            }
+          }
+        },
+        "image": "",
+        "gallery": [
+          "images/produtos/1787956726300-troca-de-bateria.png"
+        ],
+        "category": "assistencia-tecnica",
+        "subcategory": "",
+        "tags": [],
+        "relatedManualIds": [],
+        "crossSellIds": [],
+        "showPrice": false,
+        "featured": false,
+        "active": true,
+        "erp": {
+          "sku": "",
+          "internalCode": "PRD-859",
+          "supplierCode": "",
+          "searchAlias": "",
+          "barcode": "",
+          "brand": "",
+          "unit": "UN",
+          "category": "assistencia-tecnica",
+          "subcategory": "",
+          "mainSupplierId": "",
+          "preferredSupplierId": "",
+          "active": true,
+          "categoryId": "ERP-CAT-4"
+        },
+        "virtualStore": {
+          "name": "Troca de Bateria de Celular",
+          "price": null,
+          "active": true,
+          "seoTitle": "",
+          "seoDescription": "",
+          "channels": {
+            "lojaVirtual": {
+              "enabled": true
+            },
+            "mercadoLivre": {
+              "enabled": false
+            },
+            "shopee": {
+              "enabled": false
+            },
+            "amazon": {
+              "enabled": false
+            },
+            "magalu": {
+              "enabled": false
+            }
+          }
+        },
+        "detailsEnabled": true,
+        "showVariationsOnCard": false,
+        "descriptionShort": "",
+        "descriptionLong": "",
+        "variations": {
+          "enabled": false,
+          "colors": [],
+          "storage": [],
+          "ram": [],
+          "condition": [],
+          "combinations": [],
+          "labels": {},
+          "colorsText": "",
+          "storageText": "",
+          "ramText": "",
+          "conditionText": "",
+          "labelsText": "{}",
+          "combinationsText": ""
+        },
+        "id": 1787956609617,
+        "inventoryBalance": {
+          "inventoryItemId": "PRD-1787956609617",
+          "locationId": "loja-principal",
+          "physicalQuantity": 0,
+          "reservedQuantity": 0,
+          "availableQuantity": 0,
+          "minimumQuantity": 0,
+          "updatedAt": "2026-08-28T22:36:49.630Z"
+        }
+      },
+      "after": {
+        "name": "Troca de Bateria de Celular",
+        "sku": "",
+        "code": "PRD-859",
+        "barcode": "",
+        "brand": "",
+        "slug": "troca-de-bateria-de-celular",
+        "price": null,
+        "commercial": {
+          "costPrice": null,
+          "erpPrice": null,
+          "salePrice": null,
+          "marketplacePrice": null,
+          "promotionalPrice": null,
+          "desiredMarginPercent": null,
+          "expectedProfit": null,
+          "defaultCommissionPercent": null,
+          "cashPrice": null,
+          "installmentPrice": null,
+          "minimumPrice": null,
+          "minimumMarginPercent": null,
+          "discountPolicy": "inherit",
+          "maximumDiscountPercent": null,
+          "maximumDiscountAmount": null,
+          "requiresAuthorization": false
+        },
+        "stock": 0,
+        "inventory": {
+          "itemId": "PRD-1787956609617",
+          "stockControlled": true,
+          "allowNegative": false,
+          "minimumQuantity": 0,
+          "channelAvailability": {
+            "site": {
+              "mode": "shared",
+              "enabled": true,
+              "limit": null,
+              "physicalSafety": 0
+            }
+          }
+        },
+        "image": "",
+        "gallery": [
+          "images/produtos/1787956726300-troca-de-bateria.png"
+        ],
+        "category": "assistencia-tecnica",
+        "subcategory": "",
+        "tags": [],
+        "relatedManualIds": [],
+        "crossSellIds": [],
+        "showPrice": false,
+        "featured": false,
+        "active": true,
+        "erp": {
+          "sku": "",
+          "internalCode": "PRD-859",
+          "supplierCode": "",
+          "searchAlias": "",
+          "barcode": "",
+          "brand": "",
+          "unit": "UN",
+          "category": "assistencia-tecnica",
+          "subcategory": "",
+          "mainSupplierId": "",
+          "preferredSupplierId": "",
+          "active": true,
+          "categoryId": "ERP-CAT-4"
+        },
+        "virtualStore": {
+          "name": "Troca de Bateria de Celular",
+          "price": null,
+          "active": true,
+          "seoTitle": "",
+          "seoDescription": "",
+          "channels": {
+            "lojaVirtual": {
+              "enabled": true
+            },
+            "mercadoLivre": {
+              "enabled": false
+            },
+            "shopee": {
+              "enabled": false
+            },
+            "amazon": {
+              "enabled": false
+            },
+            "magalu": {
+              "enabled": false
+            }
+          }
+        },
+        "detailsEnabled": true,
+        "showVariationsOnCard": false,
+        "descriptionShort": "",
+        "descriptionLong": "",
+        "variations": {
+          "enabled": false,
+          "colors": [],
+          "storage": [],
+          "ram": [],
+          "condition": [],
+          "combinations": [],
+          "labels": {},
+          "colorsText": "",
+          "storageText": "",
+          "ramText": "",
+          "conditionText": "",
+          "labelsText": "{}",
+          "combinationsText": ""
+        },
+        "id": 1787956609617,
+        "inventoryBalance": {
+          "inventoryItemId": "PRD-1787956609617",
+          "locationId": "loja-principal",
+          "physicalQuantity": 0,
+          "reservedQuantity": 0,
+          "availableQuantity": 0,
+          "minimumQuantity": 0,
+          "updatedAt": "2026-08-28T22:36:49.630Z"
+        }
+      },
+      "ip": "127.0.0.1",
+      "requestId": "2d131d6d-e37e-4641-b414-73a548b598f2"
+    },
+    {
+      "id": "AUD-00000013",
+      "at": "2026-08-28T22:39:25.042Z",
+      "module": "produtos",
+      "action": "PRODUCT_UPDATED",
+      "actor": "Matheus Fernando",
+      "entityType": "product",
+      "entityId": "1787956609617",
+      "documentId": "",
+      "reason": "Cadastro de produto atualizado",
+      "before": {
+        "name": "Troca de Bateria de Celular",
+        "sku": "",
+        "code": "PRD-859",
+        "barcode": "",
+        "brand": "",
+        "slug": "troca-de-bateria-de-celular",
+        "price": null,
+        "commercial": {
+          "costPrice": null,
+          "erpPrice": null,
+          "salePrice": null,
+          "marketplacePrice": null,
+          "promotionalPrice": null,
+          "desiredMarginPercent": null,
+          "expectedProfit": null,
+          "defaultCommissionPercent": null,
+          "cashPrice": null,
+          "installmentPrice": null,
+          "minimumPrice": null,
+          "minimumMarginPercent": null,
+          "discountPolicy": "inherit",
+          "maximumDiscountPercent": null,
+          "maximumDiscountAmount": null,
+          "requiresAuthorization": false
+        },
+        "stock": 0,
+        "inventory": {
+          "itemId": "PRD-1787956609617",
+          "stockControlled": true,
+          "allowNegative": false,
+          "minimumQuantity": 0,
+          "channelAvailability": {
+            "site": {
+              "mode": "shared",
+              "enabled": true,
+              "limit": null,
+              "physicalSafety": 0
+            }
+          }
+        },
+        "image": "",
+        "gallery": [
+          "images/produtos/1787956726300-troca-de-bateria.png"
+        ],
+        "category": "assistencia-tecnica",
+        "subcategory": "",
+        "tags": [],
+        "relatedManualIds": [],
+        "crossSellIds": [],
+        "showPrice": false,
+        "featured": false,
+        "active": true,
+        "erp": {
+          "sku": "",
+          "internalCode": "PRD-859",
+          "supplierCode": "",
+          "searchAlias": "",
+          "barcode": "",
+          "brand": "",
+          "unit": "UN",
+          "category": "assistencia-tecnica",
+          "subcategory": "",
+          "mainSupplierId": "",
+          "preferredSupplierId": "",
+          "active": true,
+          "categoryId": "ERP-CAT-4"
+        },
+        "virtualStore": {
+          "name": "Troca de Bateria de Celular",
+          "price": null,
+          "active": true,
+          "seoTitle": "",
+          "seoDescription": "",
+          "channels": {
+            "lojaVirtual": {
+              "enabled": true
+            },
+            "mercadoLivre": {
+              "enabled": false
+            },
+            "shopee": {
+              "enabled": false
+            },
+            "amazon": {
+              "enabled": false
+            },
+            "magalu": {
+              "enabled": false
+            }
+          }
+        },
+        "detailsEnabled": true,
+        "showVariationsOnCard": false,
+        "descriptionShort": "",
+        "descriptionLong": "",
+        "variations": {
+          "enabled": false,
+          "colors": [],
+          "storage": [],
+          "ram": [],
+          "condition": [],
+          "combinations": [],
+          "labels": {},
+          "colorsText": "",
+          "storageText": "",
+          "ramText": "",
+          "conditionText": "",
+          "labelsText": "{}",
+          "combinationsText": ""
+        },
+        "id": 1787956609617,
+        "inventoryBalance": {
+          "inventoryItemId": "PRD-1787956609617",
+          "locationId": "loja-principal",
+          "physicalQuantity": 0,
+          "reservedQuantity": 0,
+          "availableQuantity": 0,
+          "minimumQuantity": 0,
+          "updatedAt": "2026-08-28T22:36:49.630Z"
+        }
+      },
+      "after": {
+        "name": "Troca de Bateria de Celular",
+        "sku": "",
+        "code": "PRD-859",
+        "barcode": "",
+        "brand": "",
+        "slug": "troca-de-bateria-de-celular",
+        "price": null,
+        "commercial": {
+          "costPrice": null,
+          "erpPrice": null,
+          "salePrice": null,
+          "marketplacePrice": null,
+          "promotionalPrice": null,
+          "desiredMarginPercent": null,
+          "expectedProfit": null,
+          "defaultCommissionPercent": null,
+          "cashPrice": null,
+          "installmentPrice": null,
+          "minimumPrice": null,
+          "minimumMarginPercent": null,
+          "discountPolicy": "inherit",
+          "maximumDiscountPercent": null,
+          "maximumDiscountAmount": null,
+          "requiresAuthorization": false
+        },
+        "stock": 0,
+        "inventory": {
+          "itemId": "PRD-1787956609617",
+          "stockControlled": true,
+          "allowNegative": false,
+          "minimumQuantity": 0,
+          "channelAvailability": {
+            "site": {
+              "mode": "shared",
+              "enabled": true,
+              "limit": null,
+              "physicalSafety": 0
+            }
+          }
+        },
+        "image": "",
+        "gallery": [],
+        "category": "assistencia-tecnica",
+        "subcategory": "",
+        "tags": [],
+        "relatedManualIds": [],
+        "crossSellIds": [],
+        "showPrice": false,
+        "featured": false,
+        "active": true,
+        "erp": {
+          "sku": "",
+          "internalCode": "PRD-859",
+          "supplierCode": "",
+          "searchAlias": "",
+          "barcode": "",
+          "brand": "",
+          "unit": "UN",
+          "category": "assistencia-tecnica",
+          "subcategory": "",
+          "mainSupplierId": "",
+          "preferredSupplierId": "",
+          "active": true,
+          "categoryId": "ERP-CAT-4"
+        },
+        "virtualStore": {
+          "name": "Troca de Bateria de Celular",
+          "price": null,
+          "active": true,
+          "seoTitle": "",
+          "seoDescription": "",
+          "channels": {
+            "lojaVirtual": {
+              "enabled": true
+            },
+            "mercadoLivre": {
+              "enabled": false
+            },
+            "shopee": {
+              "enabled": false
+            },
+            "amazon": {
+              "enabled": false
+            },
+            "magalu": {
+              "enabled": false
+            }
+          }
+        },
+        "detailsEnabled": true,
+        "showVariationsOnCard": false,
+        "descriptionShort": "",
+        "descriptionLong": "",
+        "variations": {
+          "enabled": false,
+          "colors": [],
+          "storage": [],
+          "ram": [],
+          "condition": [],
+          "combinations": [],
+          "labels": {},
+          "colorsText": "",
+          "storageText": "",
+          "ramText": "",
+          "conditionText": "",
+          "labelsText": "{}",
+          "combinationsText": ""
+        },
+        "id": 1787956609617,
+        "inventoryBalance": {
+          "inventoryItemId": "PRD-1787956609617",
+          "locationId": "loja-principal",
+          "physicalQuantity": 0,
+          "reservedQuantity": 0,
+          "availableQuantity": 0,
+          "minimumQuantity": 0,
+          "updatedAt": "2026-08-28T22:36:49.630Z"
+        }
+      },
+      "ip": "127.0.0.1",
+      "requestId": "96b7aa38-db21-42b8-845d-f4e2c8904f8d"
+    },
+    {
+      "id": "AUD-00000014",
+      "at": "2026-08-28T22:39:31.085Z",
+      "module": "produtos",
+      "action": "PRODUCT_UPDATED",
+      "actor": "Matheus Fernando",
+      "entityType": "product",
+      "entityId": "1787956609617",
+      "documentId": "",
+      "reason": "Cadastro de produto atualizado",
+      "before": {
+        "name": "Troca de Bateria de Celular",
+        "sku": "",
+        "code": "PRD-859",
+        "barcode": "",
+        "brand": "",
+        "slug": "troca-de-bateria-de-celular",
+        "price": null,
+        "commercial": {
+          "costPrice": null,
+          "erpPrice": null,
+          "salePrice": null,
+          "marketplacePrice": null,
+          "promotionalPrice": null,
+          "desiredMarginPercent": null,
+          "expectedProfit": null,
+          "defaultCommissionPercent": null,
+          "cashPrice": null,
+          "installmentPrice": null,
+          "minimumPrice": null,
+          "minimumMarginPercent": null,
+          "discountPolicy": "inherit",
+          "maximumDiscountPercent": null,
+          "maximumDiscountAmount": null,
+          "requiresAuthorization": false
+        },
+        "stock": 0,
+        "inventory": {
+          "itemId": "PRD-1787956609617",
+          "stockControlled": true,
+          "allowNegative": false,
+          "minimumQuantity": 0,
+          "channelAvailability": {
+            "site": {
+              "mode": "shared",
+              "enabled": true,
+              "limit": null,
+              "physicalSafety": 0
+            }
+          }
+        },
+        "image": "",
+        "gallery": [],
+        "category": "assistencia-tecnica",
+        "subcategory": "",
+        "tags": [],
+        "relatedManualIds": [],
+        "crossSellIds": [],
+        "showPrice": false,
+        "featured": false,
+        "active": true,
+        "erp": {
+          "sku": "",
+          "internalCode": "PRD-859",
+          "supplierCode": "",
+          "searchAlias": "",
+          "barcode": "",
+          "brand": "",
+          "unit": "UN",
+          "category": "assistencia-tecnica",
+          "subcategory": "",
+          "mainSupplierId": "",
+          "preferredSupplierId": "",
+          "active": true,
+          "categoryId": "ERP-CAT-4"
+        },
+        "virtualStore": {
+          "name": "Troca de Bateria de Celular",
+          "price": null,
+          "active": true,
+          "seoTitle": "",
+          "seoDescription": "",
+          "channels": {
+            "lojaVirtual": {
+              "enabled": true
+            },
+            "mercadoLivre": {
+              "enabled": false
+            },
+            "shopee": {
+              "enabled": false
+            },
+            "amazon": {
+              "enabled": false
+            },
+            "magalu": {
+              "enabled": false
+            }
+          }
+        },
+        "detailsEnabled": true,
+        "showVariationsOnCard": false,
+        "descriptionShort": "",
+        "descriptionLong": "",
+        "variations": {
+          "enabled": false,
+          "colors": [],
+          "storage": [],
+          "ram": [],
+          "condition": [],
+          "combinations": [],
+          "labels": {},
+          "colorsText": "",
+          "storageText": "",
+          "ramText": "",
+          "conditionText": "",
+          "labelsText": "{}",
+          "combinationsText": ""
+        },
+        "id": 1787956609617,
+        "inventoryBalance": {
+          "inventoryItemId": "PRD-1787956609617",
+          "locationId": "loja-principal",
+          "physicalQuantity": 0,
+          "reservedQuantity": 0,
+          "availableQuantity": 0,
+          "minimumQuantity": 0,
+          "updatedAt": "2026-08-28T22:36:49.630Z"
+        }
+      },
+      "after": {
+        "name": "Troca de Bateria de Celular",
+        "sku": "",
+        "code": "PRD-859",
+        "barcode": "",
+        "brand": "",
+        "slug": "troca-de-bateria-de-celular",
+        "price": null,
+        "commercial": {
+          "costPrice": null,
+          "erpPrice": null,
+          "salePrice": null,
+          "marketplacePrice": null,
+          "promotionalPrice": null,
+          "desiredMarginPercent": null,
+          "expectedProfit": null,
+          "defaultCommissionPercent": null,
+          "cashPrice": null,
+          "installmentPrice": null,
+          "minimumPrice": null,
+          "minimumMarginPercent": null,
+          "discountPolicy": "inherit",
+          "maximumDiscountPercent": null,
+          "maximumDiscountAmount": null,
+          "requiresAuthorization": false
+        },
+        "stock": 0,
+        "inventory": {
+          "itemId": "PRD-1787956609617",
+          "stockControlled": true,
+          "allowNegative": false,
+          "minimumQuantity": 0,
+          "channelAvailability": {
+            "site": {
+              "mode": "shared",
+              "enabled": true,
+              "limit": null,
+              "physicalSafety": 0
+            }
+          }
+        },
+        "image": "",
+        "gallery": [],
+        "category": "assistencia-tecnica",
+        "subcategory": "",
+        "tags": [],
+        "relatedManualIds": [],
+        "crossSellIds": [],
+        "showPrice": false,
+        "featured": false,
+        "active": true,
+        "erp": {
+          "sku": "",
+          "internalCode": "PRD-859",
+          "supplierCode": "",
+          "searchAlias": "",
+          "barcode": "",
+          "brand": "",
+          "unit": "UN",
+          "category": "assistencia-tecnica",
+          "subcategory": "",
+          "mainSupplierId": "",
+          "preferredSupplierId": "",
+          "active": true,
+          "categoryId": "ERP-CAT-4"
+        },
+        "virtualStore": {
+          "name": "Troca de Bateria de Celular",
+          "price": null,
+          "active": true,
+          "seoTitle": "",
+          "seoDescription": "",
+          "channels": {
+            "lojaVirtual": {
+              "enabled": true
+            },
+            "mercadoLivre": {
+              "enabled": false
+            },
+            "shopee": {
+              "enabled": false
+            },
+            "amazon": {
+              "enabled": false
+            },
+            "magalu": {
+              "enabled": false
+            }
+          }
+        },
+        "detailsEnabled": true,
+        "showVariationsOnCard": false,
+        "descriptionShort": "",
+        "descriptionLong": "",
+        "variations": {
+          "enabled": false,
+          "colors": [],
+          "storage": [],
+          "ram": [],
+          "condition": [],
+          "combinations": [],
+          "labels": {},
+          "colorsText": "",
+          "storageText": "",
+          "ramText": "",
+          "conditionText": "",
+          "labelsText": "{}",
+          "combinationsText": ""
+        },
+        "id": 1787956609617,
+        "inventoryBalance": {
+          "inventoryItemId": "PRD-1787956609617",
+          "locationId": "loja-principal",
+          "physicalQuantity": 0,
+          "reservedQuantity": 0,
+          "availableQuantity": 0,
+          "minimumQuantity": 0,
+          "updatedAt": "2026-08-28T22:36:49.630Z"
+        }
+      },
+      "ip": "127.0.0.1",
+      "requestId": "02bfbf0e-d6b1-4b6e-9e61-ae0618cbda2b"
+    },
+    {
+      "id": "AUD-00000015",
+      "at": "2026-08-28T22:40:22.429Z",
+      "module": "produtos",
+      "action": "PRODUCT_UPDATED",
+      "actor": "Matheus Fernando",
+      "entityType": "product",
+      "entityId": "1787956609617",
+      "documentId": "",
+      "reason": "Cadastro de produto atualizado",
+      "before": {
+        "name": "Troca de Bateria de Celular",
+        "sku": "",
+        "code": "PRD-859",
+        "barcode": "",
+        "brand": "",
+        "slug": "troca-de-bateria-de-celular",
+        "price": null,
+        "commercial": {
+          "costPrice": null,
+          "erpPrice": null,
+          "salePrice": null,
+          "marketplacePrice": null,
+          "promotionalPrice": null,
+          "desiredMarginPercent": null,
+          "expectedProfit": null,
+          "defaultCommissionPercent": null,
+          "cashPrice": null,
+          "installmentPrice": null,
+          "minimumPrice": null,
+          "minimumMarginPercent": null,
+          "discountPolicy": "inherit",
+          "maximumDiscountPercent": null,
+          "maximumDiscountAmount": null,
+          "requiresAuthorization": false
+        },
+        "stock": 0,
+        "inventory": {
+          "itemId": "PRD-1787956609617",
+          "stockControlled": true,
+          "allowNegative": false,
+          "minimumQuantity": 0,
+          "channelAvailability": {
+            "site": {
+              "mode": "shared",
+              "enabled": true,
+              "limit": null,
+              "physicalSafety": 0
+            }
+          }
+        },
+        "image": "",
+        "gallery": [],
+        "category": "assistencia-tecnica",
+        "subcategory": "",
+        "tags": [],
+        "relatedManualIds": [],
+        "crossSellIds": [],
+        "showPrice": false,
+        "featured": false,
+        "active": true,
+        "erp": {
+          "sku": "",
+          "internalCode": "PRD-859",
+          "supplierCode": "",
+          "searchAlias": "",
+          "barcode": "",
+          "brand": "",
+          "unit": "UN",
+          "category": "assistencia-tecnica",
+          "subcategory": "",
+          "mainSupplierId": "",
+          "preferredSupplierId": "",
+          "active": true,
+          "categoryId": "ERP-CAT-4"
+        },
+        "virtualStore": {
+          "name": "Troca de Bateria de Celular",
+          "price": null,
+          "active": true,
+          "seoTitle": "",
+          "seoDescription": "",
+          "channels": {
+            "lojaVirtual": {
+              "enabled": true
+            },
+            "mercadoLivre": {
+              "enabled": false
+            },
+            "shopee": {
+              "enabled": false
+            },
+            "amazon": {
+              "enabled": false
+            },
+            "magalu": {
+              "enabled": false
+            }
+          }
+        },
+        "detailsEnabled": true,
+        "showVariationsOnCard": false,
+        "descriptionShort": "",
+        "descriptionLong": "",
+        "variations": {
+          "enabled": false,
+          "colors": [],
+          "storage": [],
+          "ram": [],
+          "condition": [],
+          "combinations": [],
+          "labels": {},
+          "colorsText": "",
+          "storageText": "",
+          "ramText": "",
+          "conditionText": "",
+          "labelsText": "{}",
+          "combinationsText": ""
+        },
+        "id": 1787956609617,
+        "inventoryBalance": {
+          "inventoryItemId": "PRD-1787956609617",
+          "locationId": "loja-principal",
+          "physicalQuantity": 0,
+          "reservedQuantity": 0,
+          "availableQuantity": 0,
+          "minimumQuantity": 0,
+          "updatedAt": "2026-08-28T22:36:49.630Z"
+        }
+      },
+      "after": {
+        "name": "Troca de Bateria de Celular",
+        "sku": "",
+        "code": "PRD-859",
+        "barcode": "",
+        "brand": "",
+        "slug": "troca-de-bateria-de-celular",
+        "price": null,
+        "commercial": {
+          "costPrice": null,
+          "erpPrice": null,
+          "salePrice": null,
+          "marketplacePrice": null,
+          "promotionalPrice": null,
+          "desiredMarginPercent": null,
+          "expectedProfit": null,
+          "defaultCommissionPercent": null,
+          "cashPrice": null,
+          "installmentPrice": null,
+          "minimumPrice": null,
+          "minimumMarginPercent": null,
+          "discountPolicy": "inherit",
+          "maximumDiscountPercent": null,
+          "maximumDiscountAmount": null,
+          "requiresAuthorization": false
+        },
+        "stock": 0,
+        "inventory": {
+          "itemId": "PRD-1787956609617",
+          "stockControlled": true,
+          "allowNegative": false,
+          "minimumQuantity": 0,
+          "channelAvailability": {
+            "site": {
+              "mode": "shared",
+              "enabled": true,
+              "limit": null,
+              "physicalSafety": 0
+            }
+          }
+        },
+        "image": "",
+        "gallery": [],
+        "category": "assistencia-tecnica",
+        "subcategory": "",
+        "tags": [],
+        "relatedManualIds": [],
+        "crossSellIds": [],
+        "showPrice": false,
+        "featured": false,
+        "active": true,
+        "erp": {
+          "sku": "",
+          "internalCode": "PRD-859",
+          "supplierCode": "",
+          "searchAlias": "",
+          "barcode": "",
+          "brand": "",
+          "unit": "UN",
+          "category": "assistencia-tecnica",
+          "subcategory": "",
+          "mainSupplierId": "",
+          "preferredSupplierId": "",
+          "active": false,
+          "categoryId": "ERP-CAT-4"
+        },
+        "virtualStore": {
+          "name": "Troca de Bateria de Celular",
+          "price": null,
+          "active": true,
+          "seoTitle": "",
+          "seoDescription": "",
+          "channels": {
+            "lojaVirtual": {
+              "enabled": true
+            },
+            "mercadoLivre": {
+              "enabled": false
+            },
+            "shopee": {
+              "enabled": false
+            },
+            "amazon": {
+              "enabled": false
+            },
+            "magalu": {
+              "enabled": false
+            }
+          }
+        },
+        "detailsEnabled": true,
+        "showVariationsOnCard": false,
+        "descriptionShort": "",
+        "descriptionLong": "",
+        "variations": {
+          "enabled": false,
+          "colors": [],
+          "storage": [],
+          "ram": [],
+          "condition": [],
+          "combinations": [],
+          "labels": {},
+          "colorsText": "",
+          "storageText": "",
+          "ramText": "",
+          "conditionText": "",
+          "labelsText": "{}",
+          "combinationsText": ""
+        },
+        "id": 1787956609617,
+        "inventoryBalance": {
+          "inventoryItemId": "PRD-1787956609617",
+          "locationId": "loja-principal",
+          "physicalQuantity": 0,
+          "reservedQuantity": 0,
+          "availableQuantity": 0,
+          "minimumQuantity": 0,
+          "updatedAt": "2026-08-28T22:36:49.630Z"
+        }
+      },
+      "ip": "127.0.0.1",
+      "requestId": "e728b6bd-ff6d-479b-b356-2671bdd5493b"
+    },
+    {
+      "id": "AUD-00000016",
+      "at": "2026-08-28T22:57:35.085Z",
+      "module": "produtos",
+      "action": "PRODUCT_UPDATED",
+      "actor": "Matheus Fernando",
+      "entityType": "product",
+      "entityId": "1787956609617",
+      "documentId": "",
+      "reason": "Cadastro de produto atualizado",
+      "before": {
+        "name": "Troca de Bateria de Celular",
+        "sku": "",
+        "code": "PRD-859",
+        "barcode": "",
+        "brand": "",
+        "slug": "troca-de-bateria-de-celular",
+        "price": null,
+        "commercial": {
+          "costPrice": null,
+          "erpPrice": null,
+          "salePrice": null,
+          "marketplacePrice": null,
+          "promotionalPrice": null,
+          "desiredMarginPercent": null,
+          "expectedProfit": null,
+          "defaultCommissionPercent": null,
+          "cashPrice": null,
+          "installmentPrice": null,
+          "minimumPrice": null,
+          "minimumMarginPercent": null,
+          "discountPolicy": "inherit",
+          "maximumDiscountPercent": null,
+          "maximumDiscountAmount": null,
+          "requiresAuthorization": false
+        },
+        "stock": 0,
+        "inventory": {
+          "itemId": "PRD-1787956609617",
+          "stockControlled": true,
+          "allowNegative": false,
+          "minimumQuantity": 0,
+          "channelAvailability": {
+            "site": {
+              "mode": "shared",
+              "enabled": true,
+              "limit": null,
+              "physicalSafety": 0
+            }
+          }
+        },
+        "image": "",
+        "gallery": [],
+        "category": "assistencia-tecnica",
+        "subcategory": "",
+        "tags": [],
+        "relatedManualIds": [],
+        "crossSellIds": [],
+        "showPrice": false,
+        "featured": false,
+        "active": true,
+        "erp": {
+          "sku": "",
+          "internalCode": "PRD-859",
+          "supplierCode": "",
+          "searchAlias": "",
+          "barcode": "",
+          "brand": "",
+          "unit": "UN",
+          "category": "assistencia-tecnica",
+          "subcategory": "",
+          "mainSupplierId": "",
+          "preferredSupplierId": "",
+          "active": false,
+          "categoryId": "ERP-CAT-4"
+        },
+        "virtualStore": {
+          "name": "Troca de Bateria de Celular",
+          "price": null,
+          "active": true,
+          "seoTitle": "",
+          "seoDescription": "",
+          "channels": {
+            "lojaVirtual": {
+              "enabled": true
+            },
+            "mercadoLivre": {
+              "enabled": false
+            },
+            "shopee": {
+              "enabled": false
+            },
+            "amazon": {
+              "enabled": false
+            },
+            "magalu": {
+              "enabled": false
+            }
+          }
+        },
+        "detailsEnabled": true,
+        "showVariationsOnCard": false,
+        "descriptionShort": "",
+        "descriptionLong": "",
+        "variations": {
+          "enabled": false,
+          "colors": [],
+          "storage": [],
+          "ram": [],
+          "condition": [],
+          "combinations": [],
+          "labels": {},
+          "colorsText": "",
+          "storageText": "",
+          "ramText": "",
+          "conditionText": "",
+          "labelsText": "{}",
+          "combinationsText": ""
+        },
+        "id": 1787956609617,
+        "inventoryBalance": {
+          "inventoryItemId": "PRD-1787956609617",
+          "locationId": "loja-principal",
+          "physicalQuantity": 0,
+          "reservedQuantity": 0,
+          "availableQuantity": 0,
+          "minimumQuantity": 0,
+          "updatedAt": "2026-08-28T22:36:49.630Z"
+        }
+      },
+      "after": {
+        "name": "Troca de Bateria de Celular",
+        "sku": "",
+        "code": "PRD-859",
+        "barcode": "",
+        "brand": "",
+        "slug": "troca-de-bateria-de-celular",
+        "price": null,
+        "commercial": {
+          "costPrice": null,
+          "erpPrice": null,
+          "salePrice": null,
+          "marketplacePrice": null,
+          "promotionalPrice": null,
+          "desiredMarginPercent": null,
+          "expectedProfit": null,
+          "defaultCommissionPercent": null,
+          "cashPrice": null,
+          "installmentPrice": null,
+          "minimumPrice": null,
+          "minimumMarginPercent": null,
+          "discountPolicy": "inherit",
+          "maximumDiscountPercent": null,
+          "maximumDiscountAmount": null,
+          "requiresAuthorization": false
+        },
+        "stock": 0,
+        "inventory": {
+          "itemId": "PRD-1787956609617",
+          "stockControlled": true,
+          "allowNegative": false,
+          "minimumQuantity": 0,
+          "channelAvailability": {
+            "site": {
+              "mode": "shared",
+              "enabled": true,
+              "limit": null,
+              "physicalSafety": 0
+            }
+          }
+        },
+        "image": "",
+        "gallery": [],
+        "category": "assistencia-tecnica",
+        "subcategory": "",
+        "tags": [],
+        "relatedManualIds": [],
+        "crossSellIds": [],
+        "showPrice": false,
+        "featured": false,
+        "active": true,
+        "erp": {
+          "sku": "",
+          "internalCode": "PRD-859",
+          "supplierCode": "",
+          "searchAlias": "",
+          "barcode": "",
+          "brand": "",
+          "unit": "UN",
+          "category": "assistencia-tecnica",
+          "subcategory": "",
+          "mainSupplierId": "",
+          "preferredSupplierId": "",
+          "active": false,
+          "categoryId": "ERP-CAT-4"
+        },
+        "virtualStore": {
+          "name": "Troca de Bateria de Celular",
+          "price": null,
+          "active": true,
+          "seoTitle": "",
+          "seoDescription": "",
+          "channels": {
+            "lojaVirtual": {
+              "enabled": true
+            },
+            "mercadoLivre": {
+              "enabled": false
+            },
+            "shopee": {
+              "enabled": false
+            },
+            "amazon": {
+              "enabled": false
+            },
+            "magalu": {
+              "enabled": false
+            }
+          }
+        },
+        "detailsEnabled": true,
+        "showVariationsOnCard": false,
+        "descriptionShort": "",
+        "descriptionLong": "<p>🔋 <strong>Seu celular descarrega rápido ou não segura mais carga?</strong></p><p>Realizamos <strong>troca de bateria de celulares</strong> com instalação profissional e garantia</p><p>✅ Troca de bateria para <strong>iPhone, Samsung, Motorola, Xiaomi e outras marcas</strong><br>✅ Serviço realizado por técnico especializado<br>✅ Peças certificadas e instalação profissional<br>✅ Atendimento rápido, seguro e com garantia<br></p><p>Recupere a autonomia do seu aparelho e volte a usar seu celular por muito mais tempo sem depender do carregador</p>",
+        "variations": {
+          "enabled": false,
+          "colors": [],
+          "storage": [],
+          "ram": [],
+          "condition": [],
+          "combinations": [],
+          "labels": {},
+          "colorsText": "",
+          "storageText": "",
+          "ramText": "",
+          "conditionText": "",
+          "labelsText": "{}",
+          "combinationsText": ""
+        },
+        "id": 1787956609617,
+        "inventoryBalance": {
+          "inventoryItemId": "PRD-1787956609617",
+          "locationId": "loja-principal",
+          "physicalQuantity": 0,
+          "reservedQuantity": 0,
+          "availableQuantity": 0,
+          "minimumQuantity": 0,
+          "updatedAt": "2026-08-28T22:36:49.630Z"
+        }
+      },
+      "ip": "127.0.0.1",
+      "requestId": "d9614c09-3d07-4bb8-88a3-e52f8df59d2d"
+    },
+    {
+      "id": "AUD-00000017",
+      "at": "2026-08-28T22:57:37.905Z",
+      "module": "produtos",
+      "action": "PRODUCT_UPDATED",
+      "actor": "Matheus Fernando",
+      "entityType": "product",
+      "entityId": "1787956609617",
+      "documentId": "",
+      "reason": "Cadastro de produto atualizado",
+      "before": {
+        "name": "Troca de Bateria de Celular",
+        "sku": "",
+        "code": "PRD-859",
+        "barcode": "",
+        "brand": "",
+        "slug": "troca-de-bateria-de-celular",
+        "price": null,
+        "commercial": {
+          "costPrice": null,
+          "erpPrice": null,
+          "salePrice": null,
+          "marketplacePrice": null,
+          "promotionalPrice": null,
+          "desiredMarginPercent": null,
+          "expectedProfit": null,
+          "defaultCommissionPercent": null,
+          "cashPrice": null,
+          "installmentPrice": null,
+          "minimumPrice": null,
+          "minimumMarginPercent": null,
+          "discountPolicy": "inherit",
+          "maximumDiscountPercent": null,
+          "maximumDiscountAmount": null,
+          "requiresAuthorization": false
+        },
+        "stock": 0,
+        "inventory": {
+          "itemId": "PRD-1787956609617",
+          "stockControlled": true,
+          "allowNegative": false,
+          "minimumQuantity": 0,
+          "channelAvailability": {
+            "site": {
+              "mode": "shared",
+              "enabled": true,
+              "limit": null,
+              "physicalSafety": 0
+            }
+          }
+        },
+        "image": "",
+        "gallery": [],
+        "category": "assistencia-tecnica",
+        "subcategory": "",
+        "tags": [],
+        "relatedManualIds": [],
+        "crossSellIds": [],
+        "showPrice": false,
+        "featured": false,
+        "active": true,
+        "erp": {
+          "sku": "",
+          "internalCode": "PRD-859",
+          "supplierCode": "",
+          "searchAlias": "",
+          "barcode": "",
+          "brand": "",
+          "unit": "UN",
+          "category": "assistencia-tecnica",
+          "subcategory": "",
+          "mainSupplierId": "",
+          "preferredSupplierId": "",
+          "active": false,
+          "categoryId": "ERP-CAT-4"
+        },
+        "virtualStore": {
+          "name": "Troca de Bateria de Celular",
+          "price": null,
+          "active": true,
+          "seoTitle": "",
+          "seoDescription": "",
+          "channels": {
+            "lojaVirtual": {
+              "enabled": true
+            },
+            "mercadoLivre": {
+              "enabled": false
+            },
+            "shopee": {
+              "enabled": false
+            },
+            "amazon": {
+              "enabled": false
+            },
+            "magalu": {
+              "enabled": false
+            }
+          }
+        },
+        "detailsEnabled": true,
+        "showVariationsOnCard": false,
+        "descriptionShort": "",
+        "descriptionLong": "<p>🔋 <strong>Seu celular descarrega rápido ou não segura mais carga?</strong></p><p>Realizamos <strong>troca de bateria de celulares</strong> com instalação profissional e garantia</p><p>✅ Troca de bateria para <strong>iPhone, Samsung, Motorola, Xiaomi e outras marcas</strong><br>✅ Serviço realizado por técnico especializado<br>✅ Peças certificadas e instalação profissional<br>✅ Atendimento rápido, seguro e com garantia<br></p><p>Recupere a autonomia do seu aparelho e volte a usar seu celular por muito mais tempo sem depender do carregador</p>",
+        "variations": {
+          "enabled": false,
+          "colors": [],
+          "storage": [],
+          "ram": [],
+          "condition": [],
+          "combinations": [],
+          "labels": {},
+          "colorsText": "",
+          "storageText": "",
+          "ramText": "",
+          "conditionText": "",
+          "labelsText": "{}",
+          "combinationsText": ""
+        },
+        "id": 1787956609617,
+        "inventoryBalance": {
+          "inventoryItemId": "PRD-1787956609617",
+          "locationId": "loja-principal",
+          "physicalQuantity": 0,
+          "reservedQuantity": 0,
+          "availableQuantity": 0,
+          "minimumQuantity": 0,
+          "updatedAt": "2026-08-28T22:36:49.630Z"
+        }
+      },
+      "after": {
+        "name": "Troca de Bateria de Celular",
+        "sku": "",
+        "code": "PRD-859",
+        "barcode": "",
+        "brand": "",
+        "slug": "troca-de-bateria-de-celular",
+        "price": null,
+        "commercial": {
+          "costPrice": null,
+          "erpPrice": null,
+          "salePrice": null,
+          "marketplacePrice": null,
+          "promotionalPrice": null,
+          "desiredMarginPercent": null,
+          "expectedProfit": null,
+          "defaultCommissionPercent": null,
+          "cashPrice": null,
+          "installmentPrice": null,
+          "minimumPrice": null,
+          "minimumMarginPercent": null,
+          "discountPolicy": "inherit",
+          "maximumDiscountPercent": null,
+          "maximumDiscountAmount": null,
+          "requiresAuthorization": false
+        },
+        "stock": 0,
+        "inventory": {
+          "itemId": "PRD-1787956609617",
+          "stockControlled": true,
+          "allowNegative": false,
+          "minimumQuantity": 0,
+          "channelAvailability": {
+            "site": {
+              "mode": "shared",
+              "enabled": true,
+              "limit": null,
+              "physicalSafety": 0
+            }
+          }
+        },
+        "image": "",
+        "gallery": [],
+        "category": "assistencia-tecnica",
+        "subcategory": "",
+        "tags": [],
+        "relatedManualIds": [],
+        "crossSellIds": [],
+        "showPrice": false,
+        "featured": false,
+        "active": true,
+        "erp": {
+          "sku": "",
+          "internalCode": "PRD-859",
+          "supplierCode": "",
+          "searchAlias": "",
+          "barcode": "",
+          "brand": "",
+          "unit": "UN",
+          "category": "assistencia-tecnica",
+          "subcategory": "",
+          "mainSupplierId": "",
+          "preferredSupplierId": "",
+          "active": false,
+          "categoryId": "ERP-CAT-4"
+        },
+        "virtualStore": {
+          "name": "Troca de Bateria de Celular",
+          "price": null,
+          "active": true,
+          "seoTitle": "",
+          "seoDescription": "",
+          "channels": {
+            "lojaVirtual": {
+              "enabled": true
+            },
+            "mercadoLivre": {
+              "enabled": false
+            },
+            "shopee": {
+              "enabled": false
+            },
+            "amazon": {
+              "enabled": false
+            },
+            "magalu": {
+              "enabled": false
+            }
+          }
+        },
+        "detailsEnabled": true,
+        "showVariationsOnCard": false,
+        "descriptionShort": "",
+        "descriptionLong": "<p>🔋 <strong>Seu celular descarrega rápido ou não segura mais carga?</strong></p><p>Realizamos <strong>troca de bateria de celulares</strong> com instalação profissional e garantia</p><p>✅ Troca de bateria para <strong>iPhone, Samsung, Motorola, Xiaomi e outras marcas</strong><br>✅ Serviço realizado por técnico especializado<br>✅ Peças certificadas e instalação profissional<br>✅ Atendimento rápido, seguro e com garantia<br></p><p>Recupere a autonomia do seu aparelho e volte a usar seu celular por muito mais tempo sem depender do carregador</p>",
+        "variations": {
+          "enabled": false,
+          "colors": [],
+          "storage": [],
+          "ram": [],
+          "condition": [],
+          "combinations": [],
+          "labels": {},
+          "colorsText": "",
+          "storageText": "",
+          "ramText": "",
+          "conditionText": "",
+          "labelsText": "{}",
+          "combinationsText": ""
+        },
+        "id": 1787956609617,
+        "inventoryBalance": {
+          "inventoryItemId": "PRD-1787956609617",
+          "locationId": "loja-principal",
+          "physicalQuantity": 0,
+          "reservedQuantity": 0,
+          "availableQuantity": 0,
+          "minimumQuantity": 0,
+          "updatedAt": "2026-08-28T22:36:49.630Z"
+        }
+      },
+      "ip": "127.0.0.1",
+      "requestId": "1fff88aa-5005-46eb-8b82-550ae60fec59"
+    },
+    {
+      "id": "AUD-00000018",
+      "at": "2026-08-28T23:00:08.343Z",
+      "module": "agenda",
+      "action": "TASK_CREATED",
+      "actor": "Matheus Fernando",
+      "entityType": "agenda_task",
+      "entityId": "task_mtdk18nk_sym8ga",
+      "documentId": "",
+      "reason": "",
+      "before": null,
+      "after": {
+        "id": "task_mtdk18nk_sym8ga",
+        "customerId": "",
+        "customerName": "",
+        "conversationId": "",
+        "owner": "Quality",
+        "type": "task",
+        "typeName": "Tarefa",
+        "title": "testar devolução / troca no pdv.\nao cadastrar um produto, se eu selecionar uma categoria do site, ele não precisa exigir uma categoria do erp também.",
+        "description": "",
+        "dueAt": "2026-08-29T20:00",
+        "priority": "medium",
+        "status": "open",
+        "createdAt": "2026-08-28T23:00:08.335Z",
+        "createdBy": "Matheus Fernando",
+        "updatedAt": "2026-08-28T23:00:08.335Z",
+        "updatedBy": "Matheus Fernando",
+        "completedAt": null,
+        "history": [
+          {
+            "at": "2026-08-28T23:00:08.335Z",
+            "actor": "Matheus Fernando",
+            "action": "created",
+            "before": null,
+            "after": {
+              "title": "testar devolução / troca no pdv.\nao cadastrar um produto, se eu selecionar uma categoria do site, ele não precisa exigir uma categoria do erp também.",
+              "description": "",
+              "dueAt": "2026-08-29T20:00",
+              "priority": "medium",
+              "type": "task",
+              "typeName": "Tarefa",
+              "customerId": "",
+              "customerName": "",
+              "owner": "Quality",
+              "status": "open"
+            }
+          }
+        ]
+      },
+      "ip": "127.0.0.1",
+      "requestId": ""
+    },
+    {
+      "id": "AUD-00000019",
+      "at": "2026-08-28T23:00:38.539Z",
+      "module": "agenda",
+      "action": "TASK_UPDATED",
+      "actor": "Matheus Fernando",
+      "entityType": "agenda_task",
+      "entityId": "task_mtc3pty4_krx6cj",
+      "documentId": "",
+      "reason": "",
+      "before": {
+        "title": "Precisa pensar em segurança, ataque racker entre outras, pois agora o sistema tem dados importante e é bom cuidar disso",
+        "description": "",
+        "dueAt": "2026-08-28T12:00",
+        "priority": "medium",
+        "type": "task",
+        "typeName": "Tarefa",
+        "customerId": "",
+        "customerName": "",
+        "owner": "Quality",
+        "status": "open"
+      },
+      "after": {
+        "title": "Precisa pensar em segurança, ataque hacker entre outras, pois agora o sistema tem dados importante e é bom cuidar disso",
+        "description": "",
+        "dueAt": "2026-08-28T12:00",
+        "priority": "medium",
+        "type": "task",
+        "typeName": "Tarefa",
+        "customerId": "",
+        "customerName": "",
+        "owner": "Quality",
+        "status": "open"
+      },
+      "ip": "127.0.0.1",
+      "requestId": ""
+    },
+    {
+      "id": "AUD-00000020",
+      "at": "2026-08-28T23:09:04.391Z",
+      "module": "produtos",
+      "action": "PRODUCT_UPDATED",
+      "actor": "Matheus Fernando",
+      "entityType": "product",
+      "entityId": "1787956609617",
+      "documentId": "",
+      "reason": "Cadastro de produto atualizado",
+      "before": {
+        "name": "Troca de Bateria de Celular",
+        "sku": "",
+        "code": "PRD-859",
+        "barcode": "",
+        "brand": "",
+        "slug": "troca-de-bateria-de-celular",
+        "price": null,
+        "commercial": {
+          "costPrice": null,
+          "erpPrice": null,
+          "salePrice": null,
+          "marketplacePrice": null,
+          "promotionalPrice": null,
+          "desiredMarginPercent": null,
+          "expectedProfit": null,
+          "defaultCommissionPercent": null,
+          "cashPrice": null,
+          "installmentPrice": null,
+          "minimumPrice": null,
+          "minimumMarginPercent": null,
+          "discountPolicy": "inherit",
+          "maximumDiscountPercent": null,
+          "maximumDiscountAmount": null,
+          "requiresAuthorization": false
+        },
+        "stock": 0,
+        "inventory": {
+          "itemId": "PRD-1787956609617",
+          "stockControlled": true,
+          "allowNegative": false,
+          "minimumQuantity": 0,
+          "channelAvailability": {
+            "site": {
+              "mode": "shared",
+              "enabled": true,
+              "limit": null,
+              "physicalSafety": 0
+            }
+          }
+        },
+        "image": "",
+        "gallery": [],
+        "category": "assistencia-tecnica",
+        "subcategory": "",
+        "tags": [],
+        "relatedManualIds": [],
+        "crossSellIds": [],
+        "showPrice": false,
+        "featured": false,
+        "active": true,
+        "erp": {
+          "sku": "",
+          "internalCode": "PRD-859",
+          "supplierCode": "",
+          "searchAlias": "",
+          "barcode": "",
+          "brand": "",
+          "unit": "UN",
+          "category": "assistencia-tecnica",
+          "subcategory": "",
+          "mainSupplierId": "",
+          "preferredSupplierId": "",
+          "active": false,
+          "categoryId": "ERP-CAT-4"
+        },
+        "virtualStore": {
+          "name": "Troca de Bateria de Celular",
+          "price": null,
+          "active": true,
+          "seoTitle": "",
+          "seoDescription": "",
+          "channels": {
+            "lojaVirtual": {
+              "enabled": true
+            },
+            "mercadoLivre": {
+              "enabled": false
+            },
+            "shopee": {
+              "enabled": false
+            },
+            "amazon": {
+              "enabled": false
+            },
+            "magalu": {
+              "enabled": false
+            }
+          }
+        },
+        "detailsEnabled": true,
+        "showVariationsOnCard": false,
+        "descriptionShort": "",
+        "descriptionLong": "<p>🔋 <strong>Seu celular descarrega rápido ou não segura mais carga?</strong></p><p>Realizamos <strong>troca de bateria de celulares</strong> com instalação profissional e garantia</p><p>✅ Troca de bateria para <strong>iPhone, Samsung, Motorola, Xiaomi e outras marcas</strong><br>✅ Serviço realizado por técnico especializado<br>✅ Peças certificadas e instalação profissional<br>✅ Atendimento rápido, seguro e com garantia<br></p><p>Recupere a autonomia do seu aparelho e volte a usar seu celular por muito mais tempo sem depender do carregador</p>",
+        "variations": {
+          "enabled": false,
+          "colors": [],
+          "storage": [],
+          "ram": [],
+          "condition": [],
+          "combinations": [],
+          "labels": {},
+          "colorsText": "",
+          "storageText": "",
+          "ramText": "",
+          "conditionText": "",
+          "labelsText": "{}",
+          "combinationsText": ""
+        },
+        "id": 1787956609617,
+        "inventoryBalance": {
+          "inventoryItemId": "PRD-1787956609617",
+          "locationId": "loja-principal",
+          "physicalQuantity": 0,
+          "reservedQuantity": 0,
+          "availableQuantity": 0,
+          "minimumQuantity": 0,
+          "updatedAt": "2026-08-28T22:57:37.854Z"
+        }
+      },
+      "after": {
+        "name": "Troca de Bateria de Celular",
+        "sku": "",
+        "code": "PRD-859",
+        "barcode": "",
+        "brand": "",
+        "slug": "troca-de-bateria-de-celular",
+        "price": null,
+        "commercial": {
+          "costPrice": null,
+          "erpPrice": null,
+          "salePrice": null,
+          "marketplacePrice": null,
+          "promotionalPrice": null,
+          "desiredMarginPercent": null,
+          "expectedProfit": null,
+          "defaultCommissionPercent": null,
+          "cashPrice": null,
+          "installmentPrice": null,
+          "minimumPrice": null,
+          "minimumMarginPercent": null,
+          "discountPolicy": "inherit",
+          "maximumDiscountPercent": null,
+          "maximumDiscountAmount": null,
+          "requiresAuthorization": false
+        },
+        "stock": 0,
+        "inventory": {
+          "itemId": "PRD-1787956609617",
+          "stockControlled": true,
+          "allowNegative": false,
+          "minimumQuantity": 0,
+          "channelAvailability": {
+            "site": {
+              "mode": "shared",
+              "enabled": true,
+              "limit": null,
+              "physicalSafety": 0
+            }
+          }
+        },
+        "image": "",
+        "gallery": [],
+        "category": "assistencia-tecnica",
+        "subcategory": "",
+        "tags": [],
+        "relatedManualIds": [],
+        "crossSellIds": [],
+        "showPrice": false,
+        "featured": false,
+        "active": true,
+        "erp": {
+          "sku": "",
+          "internalCode": "PRD-859",
+          "supplierCode": "",
+          "searchAlias": "",
+          "barcode": "",
+          "brand": "",
+          "unit": "UN",
+          "category": "assistencia-tecnica",
+          "subcategory": "",
+          "mainSupplierId": "",
+          "preferredSupplierId": "",
+          "active": false,
+          "categoryId": "ERP-CAT-4"
+        },
+        "virtualStore": {
+          "name": "Troca de Bateria de Celular",
+          "price": null,
+          "active": true,
+          "seoTitle": "",
+          "seoDescription": "Troca de bateria de celular para iPhone, Samsung, Motorola e Xiaomi, com instalação profissional, serviço rápido e garantia.",
+          "channels": {
+            "lojaVirtual": {
+              "enabled": true
+            },
+            "mercadoLivre": {
+              "enabled": false
+            },
+            "shopee": {
+              "enabled": false
+            },
+            "amazon": {
+              "enabled": false
+            },
+            "magalu": {
+              "enabled": false
+            }
+          }
+        },
+        "detailsEnabled": true,
+        "showVariationsOnCard": false,
+        "descriptionShort": "",
+        "descriptionLong": "<p>🔋 <strong>Seu celular descarrega rápido ou não segura mais carga?</strong></p><p>Realizamos <strong>troca de bateria de celulares</strong> com instalação profissional e garantia</p><p>✅ Troca de bateria para <strong>iPhone, Samsung, Motorola, Xiaomi e outras marcas</strong><br>✅ Serviço realizado por técnico especializado<br>✅ Peças certificadas e instalação profissional<br>✅ Atendimento rápido, seguro e com garantia<br></p><p>Recupere a autonomia do seu aparelho e volte a usar seu celular por muito mais tempo sem depender do carregador</p>",
+        "variations": {
+          "enabled": false,
+          "colors": [],
+          "storage": [],
+          "ram": [],
+          "condition": [],
+          "combinations": [],
+          "labels": {},
+          "colorsText": "",
+          "storageText": "",
+          "ramText": "",
+          "conditionText": "",
+          "labelsText": "{}",
+          "combinationsText": ""
+        },
+        "id": 1787956609617,
+        "inventoryBalance": {
+          "inventoryItemId": "PRD-1787956609617",
+          "locationId": "loja-principal",
+          "physicalQuantity": 0,
+          "reservedQuantity": 0,
+          "availableQuantity": 0,
+          "minimumQuantity": 0,
+          "updatedAt": "2026-08-28T22:57:37.854Z"
+        }
+      },
+      "ip": "127.0.0.1",
+      "requestId": "0cc4be25-5ae6-4cc1-8bc5-28ceb7281714"
+    },
+    {
+      "id": "AUD-00000021",
+      "at": "2026-08-28T23:11:06.278Z",
+      "module": "produtos",
+      "action": "PRODUCT_UPDATED",
+      "actor": "Matheus Fernando",
+      "entityType": "product",
+      "entityId": "1787956609617",
+      "documentId": "",
+      "reason": "Cadastro de produto atualizado",
+      "before": {
+        "name": "Troca de Bateria de Celular",
+        "sku": "",
+        "code": "PRD-859",
+        "barcode": "",
+        "brand": "",
+        "slug": "troca-de-bateria-de-celular",
+        "price": null,
+        "commercial": {
+          "costPrice": null,
+          "erpPrice": null,
+          "salePrice": null,
+          "marketplacePrice": null,
+          "promotionalPrice": null,
+          "desiredMarginPercent": null,
+          "expectedProfit": null,
+          "defaultCommissionPercent": null,
+          "cashPrice": null,
+          "installmentPrice": null,
+          "minimumPrice": null,
+          "minimumMarginPercent": null,
+          "discountPolicy": "inherit",
+          "maximumDiscountPercent": null,
+          "maximumDiscountAmount": null,
+          "requiresAuthorization": false
+        },
+        "stock": 0,
+        "inventory": {
+          "itemId": "PRD-1787956609617",
+          "stockControlled": true,
+          "allowNegative": false,
+          "minimumQuantity": 0,
+          "channelAvailability": {
+            "site": {
+              "mode": "shared",
+              "enabled": true,
+              "limit": null,
+              "physicalSafety": 0
+            }
+          }
+        },
+        "image": "images/produtos/1787958626711-troca-de-bateria.png",
+        "gallery": [],
+        "category": "assistencia-tecnica",
+        "subcategory": "",
+        "tags": [],
+        "relatedManualIds": [],
+        "crossSellIds": [],
+        "showPrice": false,
+        "featured": false,
+        "active": true,
+        "erp": {
+          "sku": "",
+          "internalCode": "PRD-859",
+          "supplierCode": "",
+          "searchAlias": "",
+          "barcode": "",
+          "brand": "",
+          "unit": "UN",
+          "category": "assistencia-tecnica",
+          "subcategory": "",
+          "mainSupplierId": "",
+          "preferredSupplierId": "",
+          "active": false,
+          "categoryId": "ERP-CAT-4"
+        },
+        "virtualStore": {
+          "name": "Troca de Bateria de Celular",
+          "price": null,
+          "active": true,
+          "seoTitle": "",
+          "seoDescription": "Troca de bateria de celular para iPhone, Samsung, Motorola e Xiaomi, com instalação profissional, serviço rápido e garantia.",
+          "channels": {
+            "lojaVirtual": {
+              "enabled": true
+            },
+            "mercadoLivre": {
+              "enabled": false
+            },
+            "shopee": {
+              "enabled": false
+            },
+            "amazon": {
+              "enabled": false
+            },
+            "magalu": {
+              "enabled": false
+            }
+          }
+        },
+        "detailsEnabled": true,
+        "showVariationsOnCard": false,
+        "descriptionShort": "",
+        "descriptionLong": "<p>🔋 <strong>Seu celular descarrega rápido ou não segura mais carga?</strong></p><p>Realizamos <strong>troca de bateria de celulares</strong> com instalação profissional e garantia</p><p>✅ Troca de bateria para <strong>iPhone, Samsung, Motorola, Xiaomi e outras marcas</strong><br>✅ Serviço realizado por técnico especializado<br>✅ Peças certificadas e instalação profissional<br>✅ Atendimento rápido, seguro e com garantia<br></p><p>Recupere a autonomia do seu aparelho e volte a usar seu celular por muito mais tempo sem depender do carregador</p>",
+        "variations": {
+          "enabled": false,
+          "colors": [],
+          "storage": [],
+          "ram": [],
+          "condition": [],
+          "combinations": [],
+          "labels": {},
+          "colorsText": "",
+          "storageText": "",
+          "ramText": "",
+          "conditionText": "",
+          "labelsText": "{}",
+          "combinationsText": ""
+        },
+        "id": 1787956609617,
+        "inventoryBalance": {
+          "inventoryItemId": "PRD-1787956609617",
+          "locationId": "loja-principal",
+          "physicalQuantity": 0,
+          "reservedQuantity": 0,
+          "availableQuantity": 0,
+          "minimumQuantity": 0,
+          "updatedAt": "2026-08-28T23:09:04.342Z"
+        },
+        "updatedAt": "2026-08-28T23:10:26.878Z"
+      },
+      "after": {
+        "name": "Troca de Bateria de Celulares",
+        "sku": "",
+        "code": "PRD-859",
+        "barcode": "",
+        "brand": "",
+        "slug": "troca-de-bateria-de-celular",
+        "price": null,
+        "commercial": {
+          "costPrice": null,
+          "erpPrice": null,
+          "salePrice": null,
+          "marketplacePrice": null,
+          "promotionalPrice": null,
+          "desiredMarginPercent": null,
+          "expectedProfit": null,
+          "defaultCommissionPercent": null,
+          "cashPrice": null,
+          "installmentPrice": null,
+          "minimumPrice": null,
+          "minimumMarginPercent": null,
+          "discountPolicy": "inherit",
+          "maximumDiscountPercent": null,
+          "maximumDiscountAmount": null,
+          "requiresAuthorization": false
+        },
+        "stock": 0,
+        "inventory": {
+          "itemId": "PRD-1787956609617",
+          "stockControlled": true,
+          "allowNegative": false,
+          "minimumQuantity": 0,
+          "channelAvailability": {
+            "site": {
+              "mode": "shared",
+              "enabled": true,
+              "limit": null,
+              "physicalSafety": 0
+            }
+          }
+        },
+        "image": "images/produtos/1787958626711-troca-de-bateria.png",
+        "gallery": [],
+        "category": "assistencia-tecnica",
+        "subcategory": "",
+        "tags": [],
+        "relatedManualIds": [],
+        "crossSellIds": [],
+        "showPrice": false,
+        "featured": false,
+        "active": true,
+        "erp": {
+          "sku": "",
+          "internalCode": "PRD-859",
+          "supplierCode": "",
+          "searchAlias": "",
+          "barcode": "",
+          "brand": "",
+          "unit": "UN",
+          "category": "assistencia-tecnica",
+          "subcategory": "",
+          "mainSupplierId": "",
+          "preferredSupplierId": "",
+          "active": false,
+          "categoryId": "ERP-CAT-4"
+        },
+        "virtualStore": {
+          "name": "Troca de Bateria de Celular",
+          "price": null,
+          "active": true,
+          "seoTitle": "",
+          "seoDescription": "Troca de bateria de celular para iPhone, Samsung, Motorola e Xiaomi, com instalação profissional, serviço rápido e garantia.",
+          "channels": {
+            "lojaVirtual": {
+              "enabled": true
+            },
+            "mercadoLivre": {
+              "enabled": false
+            },
+            "shopee": {
+              "enabled": false
+            },
+            "amazon": {
+              "enabled": false
+            },
+            "magalu": {
+              "enabled": false
+            }
+          }
+        },
+        "detailsEnabled": true,
+        "showVariationsOnCard": false,
+        "descriptionShort": "",
+        "descriptionLong": "<p>🔋 <strong>Seu celular descarrega rápido ou não segura mais carga?</strong></p><p>Realizamos <strong>troca de bateria de celulares</strong> com instalação profissional e garantia</p><p>✅ Troca de bateria para <strong>iPhone, Samsung, Motorola, Xiaomi e outras marcas</strong><br>✅ Serviço realizado por técnico especializado<br>✅ Peças certificadas e instalação profissional<br>✅ Atendimento rápido, seguro e com garantia<br></p><p>Recupere a autonomia do seu aparelho e volte a usar seu celular por muito mais tempo sem depender do carregador</p>",
+        "variations": {
+          "enabled": false,
+          "colors": [],
+          "storage": [],
+          "ram": [],
+          "condition": [],
+          "combinations": [],
+          "labels": {},
+          "colorsText": "",
+          "storageText": "",
+          "ramText": "",
+          "conditionText": "",
+          "labelsText": "{}",
+          "combinationsText": ""
+        },
+        "id": 1787956609617,
+        "inventoryBalance": {
+          "inventoryItemId": "PRD-1787956609617",
+          "locationId": "loja-principal",
+          "physicalQuantity": 0,
+          "reservedQuantity": 0,
+          "availableQuantity": 0,
+          "minimumQuantity": 0,
+          "updatedAt": "2026-08-28T23:09:04.342Z"
+        },
+        "updatedAt": "2026-08-28T23:10:26.878Z"
+      },
+      "ip": "127.0.0.1",
+      "requestId": "4c2fe2a0-717a-4a86-98b1-d5f907634e14"
+    }
+  ],
+  "updatedAt": "2026-08-28T23:11:06.282Z"
 }

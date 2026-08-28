@@ -6,6 +6,7 @@ import { fileURLToPath } from 'url';
 import InventoryService from '../services/inventory-service.js';
 import ErpCategoryService from '../services/erp-category-service.js';
 import Wm10ProductImportService from '../services/wm10-product-import-service.js';
+import ErpHistoryService from '../services/erp-history-service.js';
 import { matchesSearchText, searchRelevanceScore } from '../utils/search.js';
 
 const router = express.Router();
@@ -27,6 +28,66 @@ function inventoryService(app) {
   }
 
   return app.locals.inventoryService;
+}
+
+
+function erpHistoryService(app) {
+  if (app.locals.erpHistoryService) return app.locals.erpHistoryService;
+  if (!app.locals.kernelService) return null;
+  app.locals.erpHistoryService = new ErpHistoryService({ kernelService: app.locals.kernelService });
+  return app.locals.erpHistoryService;
+}
+
+function productCreatedAtMs(item = {}, fallbackIndex = 0) {
+  const explicit = item.createdAt || item.created_at || item.created || item.erp?.createdAt || item.virtualStore?.createdAt;
+  if (explicit) {
+    const parsed = new Date(explicit).getTime();
+    if (Number.isFinite(parsed)) return parsed;
+  }
+  const match = String(item.id || '').match(/(\d{13})/);
+  if (match) {
+    const parsed = Number(match[1]);
+    if (Number.isFinite(parsed) && parsed > 946684800000 && parsed < 4102444800000) return parsed;
+  }
+  return Number(fallbackIndex) || 0;
+}
+
+function hydrateInventoryBalancesForItems(app, items = []) {
+  const invService = inventoryService(app);
+  const inventoryIds = [];
+  const list = Array.isArray(items) ? items : [];
+
+  list.forEach(item => {
+    ensureInventoryIdentity(item, item);
+    if (item.inventory?.stockControlled !== true) return;
+    const combinations = variationCombinations(item);
+    if (combinations.length) combinations.forEach(combo => { if (combo.inventoryItemId) inventoryIds.push(combo.inventoryItemId); });
+    else if (item.inventory?.itemId) inventoryIds.push(item.inventory.itemId);
+  });
+
+  const balances = invService.consultarSaldosEmLote({ inventoryItemIds: inventoryIds });
+  list.forEach(item => {
+    if (item.inventory?.stockControlled !== true) return;
+    const combinations = variationCombinations(item);
+    if (combinations.length) {
+      let physicalQuantity = 0, availableQuantity = 0, reservedQuantity = 0;
+      combinations.forEach(combo => {
+        if (!combo.inventoryItemId) return;
+        const balance = balances.get(String(combo.inventoryItemId));
+        if (!balance) return;
+        combo.stock = Number(balance.physicalQuantity) || 0;
+        physicalQuantity += Number(balance.physicalQuantity) || 0;
+        availableQuantity += Number(balance.availableQuantity) || 0;
+        reservedQuantity += Number(balance.reservedQuantity) || 0;
+      });
+      item.stock = physicalQuantity;
+      item.inventoryBalance = { physicalQuantity, availableQuantity, reservedQuantity, derivedFromVariations: true };
+    } else if (item.inventory?.itemId) {
+      item.inventoryBalance = balances.get(String(item.inventory.itemId)) || { physicalQuantity: 0, availableQuantity: 0, reservedQuantity: 0 };
+      item.stock = Number(item.inventoryBalance.physicalQuantity) || 0;
+    }
+  });
+  return list;
 }
 
 function booleanFromBody(value, fallback = false) {
@@ -1045,7 +1106,9 @@ function parseVariationCombinations(value) {
       condition: parts[3] || '',
       image: parts[4] || '',
       stock: parts[5] !== undefined && parts[5] !== '' ? Number(parts[5]) : null,
-      erpPrice: parts[6] !== undefined && parts[6] !== '' && Number.isFinite(Number(parts[6])) ? Number(parts[6]) : null
+      erpPrice: parts[6] !== undefined && parts[6] !== '' && Number.isFinite(Number(parts[6])) ? Number(parts[6]) : null,
+      costPrice: parts[7] !== undefined && parts[7] !== '' && Number.isFinite(Number(parts[7])) ? Number(parts[7]) : null,
+      desiredMarginPercent: parts[8] !== undefined && parts[8] !== '' && Number.isFinite(Number(parts[8])) ? Number(parts[8]) : null
     };
   }).filter(c => c.color || c.storage || c.ram || c.condition);
 }
@@ -1096,11 +1159,11 @@ function reconcileVariationCombinations({ colors = [], storage = [], ram = [], c
 
   const generateForOrphan = (field, value) => {
     const otherDimensions = dimensions.filter(([name]) => name !== field);
-    let partials = [{ color:'', storage:'', ram:'', condition:'', image:'', stock:null, erpPrice:null }];
+    let partials = [{ color:'', storage:'', ram:'', condition:'', image:'', stock:null, erpPrice:null, costPrice:null }];
     otherDimensions.forEach(([otherField, values]) => {
       partials = partials.flatMap(base => values.map(option => ({ ...base, [otherField]:option })));
     });
-    if (!otherDimensions.length) partials = [{ color:'', storage:'', ram:'', condition:'', image:'', stock:null, erpPrice:null }];
+    if (!otherDimensions.length) partials = [{ color:'', storage:'', ram:'', condition:'', image:'', stock:null, erpPrice:null, costPrice:null }];
     partials.forEach(base => pushUnique({ ...base, [field]:value }));
   };
 
@@ -1143,6 +1206,12 @@ function reconcileStoredVariationGrids(items = []) {
     changed = true;
   });
   return changed;
+}
+
+function inheritVariationCosts(items = []) {
+  // Custos de variação vazios permanecem vazios e herdam dinamicamente o custo do produto pai.
+  // Quando uma compra é concluída para uma variação, o custo individual é gravado nela.
+  return false;
 }
 
 function variationsFromBody(body, current = {}) {
@@ -1198,7 +1267,7 @@ function emptyVariations() {
 
 function variationsToText(variations = {}) {
   const colors = Array.isArray(variations.colors) ? variations.colors.map(c => [c.name, c.hex, c.image].filter(Boolean).join('|')).join('\n') : '';
-  const combinations = Array.isArray(variations.combinations) ? variations.combinations.map(c => [c.color, c.storage, c.ram, c.condition, c.image, c.stock, c.erpPrice].map(v => v === undefined || v === null ? '' : v).join('|').replace(/\|+$/,'')).join('\n') : '';
+  const combinations = Array.isArray(variations.combinations) ? variations.combinations.map(c => [c.color, c.storage, c.ram, c.condition, c.image, c.stock, c.erpPrice, c.costPrice, c.desiredMarginPercent].map(v => v === undefined || v === null ? '' : v).join('|').replace(/\|+$/,'')).join('\n') : '';
   return {
     colorsText: colors,
     storageText: Array.isArray(variations.storage) ? variations.storage.join('\n') : '',
@@ -1354,7 +1423,7 @@ function syncInventoryFromProduct(req, product, { reason = 'Ajuste pelo cadastro
       referenceType: 'product',
       referenceId: String(product.id),
       reason: initial ? `Entrada inicial: ${label}` : reason,
-      createdBy: req.user?.name || req.user?.email || 'painel',
+      createdBy: req.user?.displayName || req.user?.name || req.user?.email || 'painel',
       allowNegative: policy.allowNegative === true
     }).balance;
   };
@@ -1381,7 +1450,7 @@ function syncInventoryFromProduct(req, product, { reason = 'Ajuste pelo cadastro
           referenceType: 'product',
           referenceId: String(product.id),
           reason: 'Saldo do produto pai zerado: estoque passou a ser controlado pelas variações',
-          createdBy: req.user?.name || req.user?.email || 'painel',
+          createdBy: req.user?.displayName || req.user?.name || req.user?.email || 'painel',
           allowNegative: true
         });
       }
@@ -1489,6 +1558,16 @@ function productFromBody(body, current = {}) {
       ? Boolean(currentCommercial.requiresAuthorization)
       : (body.requiresAuthorization === true || body.requiresAuthorization === 'true')
   };
+
+  // Cada variação pode ter preço de compra próprio. Se ficar vazio, a variação
+  // herda o custo do produto pai somente na leitura/cálculo, sem copiar o valor.
+  if (variations.enabled && Array.isArray(variations.combinations)) {
+    variations.combinations = variations.combinations.map(combo => ({
+      ...combo,
+      costPrice: combo?.costPrice === '' || combo?.costPrice === undefined ? null : combo.costPrice,
+      desiredMarginPercent: combo?.desiredMarginPercent === '' || combo?.desiredMarginPercent === undefined ? null : combo.desiredMarginPercent
+    }));
+  }
 
   return {
     name: (body.erpName ?? body.name ?? current.name ?? '').toString().trim(),
@@ -1681,7 +1760,7 @@ router.post('/importar-wm10/executar', async (req, res) => {
       fields:req.body?.fields && typeof req.body.fields === 'object' ? req.body.fields : {},
       itemKinds:req.body?.itemKinds && typeof req.body.itemKinds === 'object' ? req.body.itemKinds : {},
       serviceCategory:firstActiveServiceCategory(req.app),
-      user:req.user?.name || req.user?.email || 'painel'
+      user:req.user?.displayName || req.user?.name || req.user?.email || 'painel'
     });
     return res.json({ success:true, message:`${report.imported} produto(s) importado(s).`, report });
   } catch (error) {
@@ -1694,7 +1773,7 @@ router.post('/importar-wm10/sincronizar', async (req, res) => {
     const report = await wm10ProductImportService(req.app).syncSelected({
       selectedCodes:Array.isArray(req.body?.selectedCodes) ? req.body.selectedCodes : [],
       fields:req.body?.fields && typeof req.body.fields === 'object' ? req.body.fields : {},
-      user:req.user?.name || req.user?.email || 'painel'
+      user:req.user?.displayName || req.user?.name || req.user?.email || 'painel'
     });
     return res.json({ success:true, message:`${report.synced} produto(s) sincronizado(s).`, report });
   } catch (error) {
@@ -1707,7 +1786,7 @@ router.post('/importar-wm10/vincular', (req, res) => {
     const result = wm10ProductImportService(req.app).linkExisting({
       wm10Code:req.body?.wm10Code,
       productId:req.body?.productId,
-      user:req.user?.name || req.user?.email || 'painel'
+      user:req.user?.displayName || req.user?.name || req.user?.email || 'painel'
     });
     return res.json({ success:true, message:'Produto WM10 vinculado ao cadastro existente.', result });
   } catch (error) {
@@ -1720,7 +1799,7 @@ router.post('/importar-wm10/decisao', (req, res) => {
     const result = wm10ProductImportService(req.app).setDecision({
       wm10Code:req.body?.wm10Code,
       decision:String(req.body?.decision || ''),
-      user:req.user?.name || req.user?.email || 'painel'
+      user:req.user?.displayName || req.user?.name || req.user?.email || 'painel'
     });
     return res.json({ success:true, message:result.decision === 'ignored' ? 'Produto marcado para não importar.' : 'Produto devolvido para a fila de análise.', result });
   } catch (error) {
@@ -1739,7 +1818,7 @@ router.post('/importar-wm10/familia', (req, res) => {
       nameEdited:req.body?.nameEdited === true,
       kind:String(req.body?.kind || 'product').toLowerCase() === 'service' ? 'service' : 'product',
       serviceCategory:String(req.body?.kind || 'product').toLowerCase() === 'service' ? firstActiveServiceCategory(req.app) : null,
-      user:req.user?.name || req.user?.email || 'painel'
+      user:req.user?.displayName || req.user?.name || req.user?.email || 'painel'
     });
     return res.json({ success:true, message:'Família salva. Nenhum produto foi alterado ainda.', result });
   } catch (error) {
@@ -1760,7 +1839,7 @@ router.post('/importar-wm10/familia/corrigir-importada', async (req, res) => {
   try {
     const result = await wm10ProductImportService(req.app).repairImportedFamily({
       familyId:req.body?.familyId,
-      user:req.user?.name || req.user?.email || 'painel'
+      user:req.user?.displayName || req.user?.name || req.user?.email || 'painel'
     });
     return res.json({ success:true, message:`Família corrigida: ${result.name}.`, result });
   } catch (error) {
@@ -1774,7 +1853,7 @@ router.post('/importar-wm10/familias/importar', async (req, res) => {
     const report = await wm10ProductImportService(req.app).importApprovedFamilies({
       familyIds:Array.isArray(req.body?.familyIds) ? req.body.familyIds : [],
       fields:req.body?.fields && typeof req.body.fields === 'object' ? req.body.fields : {},
-      user:req.user?.name || req.user?.email || 'painel'
+      user:req.user?.displayName || req.user?.name || req.user?.email || 'painel'
     });
     return res.json({ success:true, message:`${report.importedFamilies} família(s) importada(s).`, report });
   } catch (error) {
@@ -1790,6 +1869,78 @@ router.get('/api/images', (req, res) => {
     return res.json({ success:true, items:getAllImagesCached(imagesDir) });
   } catch (error) {
     return res.status(500).json({ success:false, message:error.message || 'Não foi possível listar as imagens.', items:[] });
+  }
+});
+
+
+router.get('/api/:id/historico', (req, res) => {
+  try {
+    const file = path.join(P(req.app).CONTENT_DIR, 'products.json');
+    const data = readJson(file);
+    const item = findProductBySubmittedId(Array.isArray(data.items) ? data.items : [], req.params.id);
+    if (!item) return res.status(404).json({ success:false, message:'Produto não encontrado.', events:[] });
+
+    const inventoryIds = [];
+    if (item.inventory?.itemId) inventoryIds.push(String(item.inventory.itemId));
+    variationCombinations(item).forEach(combo => { if (combo.inventoryItemId) inventoryIds.push(String(combo.inventoryItemId)); });
+    const identityTokens = [...new Set([
+      String(item.id || ''), String(item.erp?.internalCode || ''), String(item.erp?.sku || ''),
+      String(item.erp?.barcode || ''), ...inventoryIds
+    ].filter(token => token && token.length >= 3))];
+
+    const events = [];
+    const history = erpHistoryService(req.app);
+    if (history) {
+      history.allItems().forEach(entry => {
+        // Histórico do produto deve mostrar fatos de negócio. Requisições técnicas,
+        // especialmente tentativas antigas de abrir este próprio endpoint, poluíam
+        // a timeline com "Falha HTTP" sem representar alteração no cadastro.
+        if (entry.result === 'error' || entry.category === 'error') return;
+        if (/\/produtos\/api\/[^/]+\/historico(?:\?|$)/i.test(String(entry.route || ''))) return;
+        if (entry.action === 'PAGE_VIEW' || entry.title === 'Página acessada') return;
+        const haystack = [
+          entry.entityId, entry.documentId, entry.route,
+          JSON.stringify(entry.details || ''), JSON.stringify(entry.before || ''), JSON.stringify(entry.after || '')
+        ].join(' ');
+        if (!identityTokens.some(token => haystack.includes(token))) return;
+        events.push({
+          at: entry.at,
+          label: entry.title || entry.action || 'Alteração no produto',
+          source: [entry.moduleLabel, entry.sourceLabel].filter(Boolean).join(' · '),
+          actor: entry.actor || 'sistema'
+        });
+      });
+    }
+
+    const inv = inventoryService(req.app);
+    inventoryIds.forEach(inventoryItemId => {
+      try {
+        inv.listarMovimentacoes({ inventoryItemId, limit:60 }).forEach(movement => {
+          events.push({
+            at: movement.createdAt || movement.updatedAt || '',
+            label: movement.reason || movement.reasonLabel || movement.origin || 'Movimentação de estoque',
+            source: 'Estoque',
+            actor: movement.createdBy || movement.userName || 'sistema'
+          });
+        });
+      } catch (_) {}
+    });
+
+    const deduped = [];
+    const seen = new Set();
+    events
+      .filter(event => event.at || event.label)
+      .sort((a,b) => String(b.at || '').localeCompare(String(a.at || '')))
+      .forEach(event => {
+        const key = `${event.at}|${event.label}|${event.source}|${event.actor}`;
+        if (seen.has(key)) return;
+        seen.add(key); deduped.push(event);
+      });
+
+    return res.json({ success:true, events:deduped.slice(0,120) });
+  } catch (error) {
+    console.error('❌ Erro ao carregar histórico do produto:', error);
+    return res.status(500).json({ success:false, message:error?.message || 'Não foi possível carregar o histórico.', events:[] });
   }
 });
 
@@ -1828,22 +1979,58 @@ router.get('/', (req, res) => {
 
   const cleanedLegacyServices = cleanupLegacyServiceVariations(data.items || [], erpCategorias);
   const reconciledVariationGrids = reconcileStoredVariationGrids(data.items || []);
+  const inheritedVariationCosts = inheritVariationCosts(data.items || []);
   const ensuredInternalCodes = ensureInternalProductCodes(data.items || []);
   const ensuredInventoryIdentities = ensureUniqueInventoryIdentities(data.items || []);
-  if (cleanedLegacyServices || reconciledVariationGrids || ensuredInternalCodes || ensuredInventoryIdentities) {
+  if (cleanedLegacyServices || reconciledVariationGrids || inheritedVariationCosts || ensuredInternalCodes || ensuredInventoryIdentities) {
     backupProductsJson(file);
     writeJson(file, data);
   }
 
   const allItems = data.items || [];
+
+  // Resumo do Cadastro Mestre precisa representar a base inteira, não apenas os
+  // produtos da página atual. Também hidrata o estoque em lote uma única vez para
+  // que o card "Estoque total" e os filtros usem o saldo físico real.
+  if (!workspaceNew && allItems.length) {
+    try {
+      hydrateInventoryBalancesForItems(req.app, allItems);
+    } catch (error) {
+      console.warn('⚠️ Não foi possível consolidar o estoque do resumo de produtos:', error?.message || error);
+    }
+  }
+
+  const isErpActive = item => {
+    const raw = item?.erp?.active !== undefined ? item.erp.active : item?.active;
+    return !['false','0','off','inativo'].includes(String(raw).toLowerCase()) && raw !== false;
+  };
+  const productSummary = {
+    total: allItems.length,
+    active: allItems.filter(isErpActive).length,
+    inactive: allItems.filter(item => !isErpActive(item)).length,
+    featured: allItems.filter(item => item?.featured === true).length,
+    variations: allItems.filter(item => item?.variations?.enabled === true || variationCombinations(item).length > 0).length,
+    stockTotal: allItems.reduce((sum, item) => sum + (Number(item?.stock) || 0), 0)
+  };
+
   const listQuery = String(req.query.q || '').trim();
   const listCategory = String(req.query.categoria || '').trim();
   const listErpStatus = String(req.query.erpStatus || '').trim();
-  // Ao entrar em Produtos pelo contexto da Loja Virtual, prioriza LV ativo.
-  // No contexto ERP (?origem=erp) mantém todos os produtos, salvo filtro explícito.
+  // O cadastro mestre do ERP nunca aplica filtro de Loja Virtual por conta própria.
+  // A Loja Virtual continua podendo abrir diretamente os ativos usando ?lvStatus=true.
+  // Assim, selecionar "Todos" permanece realmente em Todos e cadastros/pesquisas não
+  // voltam sozinhos para LV Ativo.
   const hasExplicitLvStatus = Object.prototype.hasOwnProperty.call(req.query || {}, 'lvStatus');
-  const listLvStatus = String(hasExplicitLvStatus ? (req.query.lvStatus || '') : (req.query.origem === 'erp' ? '' : 'true')).trim();
-  const pageSize = Math.min(300, Math.max(20, Number(req.query.pageSize) || 50));
+  const listLvStatus = String(hasExplicitLvStatus ? (req.query.lvStatus || '') : '').trim();
+  const allowedStockOps = new Set(['gt','gte','eq','lte','lt','neq','service']);
+  const listStockOp = allowedStockOps.has(String(req.query.stockOp || '').trim()) ? String(req.query.stockOp).trim() : '';
+  const parsedStockQty = Number(req.query.stockQty);
+  const listStockQty = Number.isFinite(parsedStockQty) ? parsedStockQty : 0;
+  const allowedOrders = new Set(['newest','oldest','name_asc','name_desc','code_asc','code_desc']);
+  const listOrder = allowedOrders.has(String(req.query.order || '').trim()) ? String(req.query.order).trim() : '';
+  const allowedPageSizes = new Set([50, 100, 300, 500]);
+  const requestedPageSize = Number(req.query.pageSize);
+  const pageSize = allowedPageSizes.has(requestedPageSize) ? requestedPageSize : 50;
 
   let filteredItems = workspaceNew ? [] : allItems.filter(item => {
     if (listQuery) {
@@ -1869,6 +2056,25 @@ router.get('/', (req, res) => {
     return true;
   });
 
+
+  if (listStockOp) {
+    const categoryTypeById = new Map((erpCategorias || []).map(category => [String(category.id), String(category.type || 'product')]));
+    filteredItems = filteredItems.filter(item => {
+      const categoryKey = String(item?.erp?.categoryId || item?.erp?.category || '');
+      const isService = categoryTypeById.get(categoryKey) === 'service';
+      if (listStockOp === 'service') return isService;
+      if (isService) return false;
+      const stock = Number(item.stock || 0);
+      if (listStockOp === 'gt') return stock > listStockQty;
+      if (listStockOp === 'gte') return stock >= listStockQty;
+      if (listStockOp === 'eq') return stock === listStockQty;
+      if (listStockOp === 'lte') return stock <= listStockQty;
+      if (listStockOp === 'lt') return stock < listStockQty;
+      if (listStockOp === 'neq') return stock !== listStockQty;
+      return true;
+    });
+  }
+
   // Em buscas textuais, resultados cujo nome/modelo realmente correspondem ao que foi
   // digitado ficam antes de coincidências encontradas apenas em SKU/código/barcode.
   // Isso evita, por exemplo, "redmi 12" trazer Redmi Note 15 no topo só porque "12"
@@ -1882,6 +2088,27 @@ router.get('/', (req, res) => {
         return { item, originalIndex, score:searchRelevanceScore({ name:nameAndModel, fields:technicalFields, query:listQuery }) };
       })
       .sort((a,b) => b.score - a.score || a.originalIndex - b.originalIndex)
+      .map(entry => entry.item);
+  }
+
+
+  if (listOrder) {
+    const codeNumber = item => {
+      const raw = String(item?.erp?.internalCode || item?.internalCode || item?.id || '');
+      const digits = Number(raw.replace(/\D/g, ''));
+      return Number.isFinite(digits) ? digits : 0;
+    };
+    filteredItems = filteredItems
+      .map((item, originalIndex) => ({ item, originalIndex, createdAt:productCreatedAtMs(item, originalIndex), code:codeNumber(item) }))
+      .sort((a,b) => {
+        if (listOrder === 'newest') return b.createdAt - a.createdAt || a.originalIndex - b.originalIndex;
+        if (listOrder === 'oldest') return a.createdAt - b.createdAt || a.originalIndex - b.originalIndex;
+        if (listOrder === 'name_asc') return String(a.item?.name || '').localeCompare(String(b.item?.name || ''), 'pt-BR', { sensitivity:'base' });
+        if (listOrder === 'name_desc') return String(b.item?.name || '').localeCompare(String(a.item?.name || ''), 'pt-BR', { sensitivity:'base' });
+        if (listOrder === 'code_asc') return a.code - b.code || a.originalIndex - b.originalIndex;
+        if (listOrder === 'code_desc') return b.code - a.code || a.originalIndex - b.originalIndex;
+        return a.originalIndex - b.originalIndex;
+      })
       .map(entry => entry.item);
   }
 
@@ -1941,13 +2168,91 @@ router.get('/', (req, res) => {
     erpCategorias,
     imagens,
     origemErp: req.query.origem === 'erp',
+    productEditorMode: false,
     workspaceNew,
     workspaceType: String(req.query.type || 'product').toLowerCase() === 'service' ? 'service' : 'product',
     listState: {
       query:listQuery, category:listCategory, erpStatus:listErpStatus, lvStatus:listLvStatus,
+      stockOp:listStockOp, stockQty:listStockQty, order:listOrder,
       page:currentPage, pageSize, totalFiltered, totalPages, totalItems:allItems.length
     },
+    productSummary,
     flash
+  });
+});
+
+
+// Cadastro completo em tela dedicada. A listagem vira consulta e cada produto
+// abre sua própria URL, preservando toda a lógica de edição já existente.
+router.get('/:id', (req, res, next) => {
+  const reserved = new Set(['api','importar-wm10','upload-gallery','quick-main-image','add','update','update-all','bulk-actions','duplicate','del','ai-fill','update-channel-status']);
+  if (reserved.has(String(req.params.id || '').toLowerCase())) return next();
+
+  const contentDir = P(req.app).CONTENT_DIR;
+  const file = path.join(contentDir, 'products.json');
+  const data = readJson(file);
+  data.items = Array.isArray(data.items) ? data.items : [];
+
+  const erpCategorias = loadErpCategories(req.app);
+  const cleanedLegacyServices = cleanupLegacyServiceVariations(data.items, erpCategorias);
+  const reconciledVariationGrids = reconcileStoredVariationGrids(data.items);
+  const inheritedVariationCosts = inheritVariationCosts(data.items);
+  const ensuredInternalCodes = ensureInternalProductCodes(data.items);
+  const ensuredInventoryIdentities = ensureUniqueInventoryIdentities(data.items);
+  if (cleanedLegacyServices || reconciledVariationGrids || inheritedVariationCosts || ensuredInternalCodes || ensuredInventoryIdentities) {
+    backupProductsJson(file);
+    writeJson(file, data);
+  }
+
+  const item = findProductBySubmittedId(data.items, req.params.id);
+  if (!item) return res.status(404).redirect('/produtos?error=not_found');
+
+  // Mantém o saldo exibido no editor alinhado ao estoque real.
+  try {
+    ensureInventoryIdentity(item, item);
+    if (item.inventory?.stockControlled === true) {
+      const invService = inventoryService(req.app);
+      const combinations = variationCombinations(item);
+      if (combinations.length) {
+        const ids = combinations.map(c => c.inventoryItemId).filter(Boolean);
+        const balances = invService.consultarSaldosEmLote({ inventoryItemIds: ids });
+        let physicalQuantity = 0, availableQuantity = 0, reservedQuantity = 0;
+        combinations.forEach(combo => {
+          if (!combo.inventoryItemId) return;
+          const balance = balances.get(String(combo.inventoryItemId));
+          if (!balance) return;
+          combo.stock = Number(balance.physicalQuantity) || 0;
+          physicalQuantity += Number(balance.physicalQuantity) || 0;
+          availableQuantity += Number(balance.availableQuantity) || 0;
+          reservedQuantity += Number(balance.reservedQuantity) || 0;
+        });
+        item.stock = physicalQuantity;
+        item.inventoryBalance = { physicalQuantity, availableQuantity, reservedQuantity, derivedFromVariations: true };
+      } else if (item.inventory?.itemId) {
+        const balances = invService.consultarSaldosEmLote({ inventoryItemIds: [item.inventory.itemId] });
+        item.inventoryBalance = balances.get(String(item.inventory.itemId)) || { physicalQuantity: 0, availableQuantity: 0, reservedQuantity: 0 };
+        item.stock = Number(item.inventoryBalance.physicalQuantity) || 0;
+      }
+    }
+  } catch (error) {
+    console.warn('⚠️ Não foi possível atualizar o saldo no editor do produto:', error?.message || error);
+  }
+
+  const cats = readJson(path.join(contentDir, 'categories.json'));
+  const subcats = readJson(path.join(contentDir, 'subcategories.json'));
+
+  res.render('produtos', {
+    items: [item],
+    categorias: cats.items || [],
+    subcategorias: subcats.items || [],
+    erpCategorias,
+    imagens: [],
+    origemErp: true,
+    productEditorMode: true,
+    workspaceNew: false,
+    workspaceType: String(item?.erp?.type || 'product').toLowerCase() === 'service' ? 'service' : 'product',
+    listState: { query:'', category:'', erpStatus:'', lvStatus:'', page:1, pageSize:1, totalFiltered:1, totalPages:1, totalItems:data.items.length },
+    flash: null
   });
 });
 
@@ -2182,6 +2487,10 @@ router.post('/update', (req, res) => {
   }
 
   writeJson(file, data);
+  req.app.locals.kernelService?.audits?.record?.({
+    actor:req.user?.displayName || req.user?.name || req.user?.email || 'painel',module:'produtos',action:'PRODUCT_UPDATED',entityType:'product',entityId:String(item.id||id),
+    reason:'Cadastro de produto atualizado',before:previousItem,after:item,ip:req.kernelContext?.ip||'',requestId:req.kernelContext?.requestId||''
+  });
   console.log(`✏️ Produto atualizado: ${item.name || id} | slug: ${item.slug}`);
 
   if (wantsJson(req)) {
@@ -2617,8 +2926,15 @@ router.post('/del', (req, res) => {
   const target = findProductBySubmittedId(data.items || [], submittedId);
   const id = target?.id ?? submittedId;
 
+  const deletedSnapshot = target ? JSON.parse(JSON.stringify(target)) : null;
   data.items = (data.items || []).filter(product => product !== target);
   writeJson(file, data);
+  if(deletedSnapshot){
+    req.app.locals.kernelService?.audits?.record?.({
+      actor:req.user?.displayName || req.user?.name || req.user?.email || 'painel',module:'produtos',action:'PRODUCT_DELETED',entityType:'product',entityId:String(id),
+      reason:'Produto excluído do cadastro',before:deletedSnapshot,after:null,ip:req.kernelContext?.ip||'',requestId:req.kernelContext?.requestId||''
+    });
+  }
 
   console.log(`🗑️ Produto ${id} excluído.`);
   res.redirect('/produtos?deleted=1');

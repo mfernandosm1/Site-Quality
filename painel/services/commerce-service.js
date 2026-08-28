@@ -5,6 +5,24 @@ function clone(value){ return JSON.parse(JSON.stringify(value)); }
 function now(){ return new Date().toISOString(); }
 function num(value){ const n=Number(value); return Number.isFinite(n)?n:0; }
 function text(value){ return String(value ?? '').trim(); }
+function normalizeFreight(value={}){
+  const source=value&&typeof value==='object'?value:{};
+  const payer=['none','issuer','recipient','third_party'].includes(text(source.payer))?text(source.payer):'none';
+  return {
+    payer,
+    carrierId:text(source.carrierId),
+    carrierName:text(source.carrierName),
+    freightAmount:Math.max(0,num(source.freightAmount)),
+    insuranceAmount:Math.max(0,num(source.insuranceAmount)),
+    otherExpensesAmount:Math.max(0,num(source.otherExpensesAmount)),
+    volumeQuantity:Math.max(0,Math.round(num(source.volumeQuantity))),
+    species:text(source.species),
+    brand:text(source.brand),
+    netWeight:Math.max(0,num(source.netWeight)),
+    grossWeight:Math.max(0,num(source.grossWeight))
+  };
+}
+function freightTotal(value={}){const freight=normalizeFreight(value);return Math.round((freight.freightAmount+freight.insuranceAmount+freight.otherExpensesAmount)*100)/100;}
 function same(a,b){ return JSON.stringify(a ?? null) === JSON.stringify(b ?? null); }
 function localDay(value=new Date()){
   const date=value instanceof Date?value:new Date(value);
@@ -111,6 +129,8 @@ export default class CommerceService {
       op.details=text(op.details);
       op.coupon=op.coupon&&typeof op.coupon==='object'?op.coupon:null;
       op.couponDiscount=Math.max(0,num(op.couponDiscount||op.coupon?.discount));
+      op.freight=normalizeFreight(op.freight);
+      op.freightTotal=freightTotal(op.freight);
       op.fiscal=op.fiscal&&typeof op.fiscal==='object'?op.fiscal:{status:'none',documentId:null,updatedAt:null};
       if(!['none','pending','transmitted','rejected','cancelled'].includes(op.fiscal.status)) op.fiscal.status='none';
       if(!op.timeline.length) op.timeline.push({id:this.id('EVT'),type:'migration',label:'Operação incorporada à fundação v0.13.3',at:updatedAt,actor:'sistema'});
@@ -136,6 +156,7 @@ export default class CommerceService {
       cashboxId, closingMode:'manual', automaticClosingTime:'23:59', automaticShiftsEnabled:false, automaticShiftTimes:['08:00'], allowNegativeCash:false,
       requireNegativeReason:true, isDefault:cashboxId==='caixa-principal', requireItemVerification:false,
       requireSeller:false, useLoggedUserAsSeller:true, defaultSeller:'', defaultInstallments:1, firstDueDays:30, defaultOperationType:'sale',
+      discountApprovalEnabled:true, discountApprovalTtlMinutes:5,
       visibleColumns:{reference:true,serial:false,color:false,size:false,seller:true,discount:true,commission:false,internalCode:false},
       enabledPaymentMethods:['dinheiro','pix','cartao-credito','cartao-debito','boleto-crediario'],
       allowedUsers:[], allowedSellers:[]
@@ -219,6 +240,8 @@ export default class CommerceService {
       isDefault:payload.isDefault===true,requireItemVerification:payload.requireItemVerification===true,requireSeller:payload.requireSeller===true,
       useLoggedUserAsSeller:payload.useLoggedUserAsSeller!==false,defaultSeller:text(payload.defaultSeller),defaultInstallments:Math.max(1,Math.round(num(payload.defaultInstallments)||1)),
       firstDueDays:Math.max(0,Math.round(num(payload.firstDueDays)||0)),defaultOperationType:payload.defaultOperationType==='service_order'?'service_order':'sale',
+      discountApprovalEnabled:payload.discountApprovalEnabled!==false,
+      discountApprovalTtlMinutes:Math.min(30,Math.max(1,Math.round(num(payload.discountApprovalTtlMinutes)||5))),
       visibleColumns:Object.fromEntries(allowedColumns.map(key=>[key,payload.visibleColumns?.[key]===true])),
       enabledPaymentMethods:[...new Set((Array.isArray(payload.enabledPaymentMethods)?payload.enabledPaymentMethods:[]).map(text).filter(Boolean))],
       allowedUsers:[...new Set((Array.isArray(payload.allowedUsers)?payload.allowedUsers:[]).map(text).filter(Boolean))],
@@ -577,16 +600,18 @@ export default class CommerceService {
     op.identifier=text(payload.identifier); op.sellerId=text(payload.sellerId); op.sellerNameSnapshot=text(payload.sellerNameSnapshot); op.customStatusId=text(payload.customStatusId)||op.customStatusId||''; op.customStatusName=text(payload.customStatusName)||op.customStatusName||'';
     op.notes=text(payload.notes); op.details=text(payload.details ?? op.details); op.serviceOrder=payload.serviceOrder&&typeof payload.serviceOrder==='object'?clone(payload.serviceOrder):{};
     op.coupon=payload.coupon&&typeof payload.coupon==='object'?clone(payload.coupon):null;
+    op.freight=normalizeFreight(payload.freight);
+    op.freightTotal=freightTotal(op.freight);
     op.cashboxId=text(payload.cashboxId)||'caixa-principal';
     op.items=(Array.isArray(payload.items)?payload.items:[]).map((item,index)=>({
       id:text(item.id)||this.id('OPI'), productId:text(item.productId), inventoryItemId:text(item.inventoryItemId), code:text(item.code), sku:text(item.sku),
       name:text(item.name)||`Item ${index+1}`, quantity:Math.max(0.001,num(item.quantity)||1), unitPrice:Math.max(0,num(item.unitPrice)), unitCost:Math.max(0,num(item.unitCost)),
-      discount:Math.max(0,num(item.discount)), verified:item.verified===true, sellerId:text(item.sellerId)||text(payload.sellerId), sellerNameSnapshot:text(item.sellerNameSnapshot)||text(payload.sellerNameSnapshot), stockControlled:item.stockControlled===true, allowNegative:item.allowNegative===true
+      discount:Math.max(0,num(item.discount)), discountMode:item.discountMode==='percent'?'percent':'amount', discountPercent:Math.max(0,Math.min(100,num(item.discountPercent))), verified:item.verified===true, sellerId:text(item.sellerId)||text(payload.sellerId), sellerNameSnapshot:text(item.sellerNameSnapshot)||text(payload.sellerNameSnapshot), stockControlled:item.stockControlled===true, allowNegative:item.allowNegative===true
     }));
     op.payments=(Array.isArray(payload.payments)?payload.payments:[]).filter(p=>num(p.amount)>0).map(p=>({
       id:text(p.id)||this.id('PAY'), methodId:text(p.methodId)||'dinheiro', methodName:text(p.methodName), amount:Math.max(0,num(p.amount)), installments:Math.max(1,Math.round(num(p.installments)||1)), dueDate:text(p.dueDate), dueDates:(Array.isArray(p.dueDates)?p.dueDates:[]).map(text).filter(Boolean), installmentAmounts:(Array.isArray(p.installmentAmounts)?p.installmentAmounts:[]).map(value=>Math.max(0,num(value))), status:'paid', notes:text(p.notes)
     }));
-    op.subtotal=op.items.reduce((s,i)=>s+i.quantity*i.unitPrice,0); op.itemDiscountTotal=op.items.reduce((s,i)=>s+i.discount,0); op.couponDiscount=Math.min(Math.max(0,num(op.coupon?.discount)),Math.max(0,op.subtotal-op.itemDiscountTotal)); op.discountTotal=op.itemDiscountTotal+op.couponDiscount; op.total=Math.max(0,op.subtotal-op.discountTotal);
+    op.subtotal=op.items.reduce((s,i)=>s+i.quantity*i.unitPrice,0); op.itemDiscountTotal=op.items.reduce((s,i)=>s+i.discount,0); op.couponDiscount=Math.min(Math.max(0,num(op.coupon?.discount)),Math.max(0,op.subtotal-op.itemDiscountTotal)); op.discountTotal=op.itemDiscountTotal+op.couponDiscount; op.freightTotal=freightTotal(op.freight); op.total=Math.max(0,op.subtotal-op.discountTotal)+op.freightTotal;
     op.amountPaid=op.payments.reduce((s,p)=>s+p.amount,0); op.amountPending=Math.max(0,op.total-op.amountPaid); op.change=Math.max(0,op.amountPaid-op.total);
     op.financialStatus=op.amountPaid<=0?'not_started':op.amountPending>0?'partial':'paid';
     op.operationalStatus=text(payload.operationalStatus)||op.operationalStatus||(op.type==='service_order'?'received':'in_service');
@@ -599,6 +624,7 @@ export default class CommerceService {
       if(!same(before?.payments,op.payments)) changes.push('Pagamentos');
       if(!same(before?.serviceOrder,op.serviceOrder)) changes.push('Dados da O.S.');
       if(!same(before?.coupon,op.coupon)) changes.push('Cupom');
+      if(!same(before?.freight,op.freight)) changes.push('Frete / despesas');
       this.event(op,{type:'updated',label:changes.length?`Operação atualizada: ${changes.join(', ')}`:'Operação salva sem alterações de conteúdo',actor,details:{version:op.version}});
     }
     this.write(this.operationsFile,data); return clone(op);
@@ -704,7 +730,7 @@ export default class CommerceService {
     op.change=validation.change;
     op.finalizedAt=stamp; op.finalizedBy=actor; op.updatedAt=stamp; op.updatedBy=actor;
     op.dates={...(op.dates||{}),openedAt:op.dates?.openedAt||op.createdAt||stamp,updatedAt:stamp,finalizedAt:stamp,cancelledAt:null};
-    op.snapshot={createdAt:stamp,customer:{id:op.customerId||'',name:op.customerNameSnapshot||'Consumidor final',identifier:op.identifier||''},seller:{id:op.sellerId||'',name:op.sellerNameSnapshot||''},items:clone(op.items||[]),payments:clone(op.payments||[]),serviceOrder:clone(op.serviceOrder||{}),totals:{subtotal:op.subtotal||0,itemDiscountTotal:op.itemDiscountTotal||0,couponDiscount:op.couponDiscount||0,discountTotal:op.discountTotal||0,total:op.total||0,amountPaid:op.amountPaid||0,amountPending:op.amountPending||0,change:op.change||0}};
+    op.snapshot={createdAt:stamp,customer:{id:op.customerId||'',name:op.customerNameSnapshot||'Consumidor final',identifier:op.identifier||''},seller:{id:op.sellerId||'',name:op.sellerNameSnapshot||''},items:clone(op.items||[]),payments:clone(op.payments||[]),serviceOrder:clone(op.serviceOrder||{}),freight:clone(op.freight||{}),totals:{subtotal:op.subtotal||0,itemDiscountTotal:op.itemDiscountTotal||0,couponDiscount:op.couponDiscount||0,discountTotal:op.discountTotal||0,freightTotal:op.freightTotal||0,total:op.total||0,amountPaid:op.amountPaid||0,amountPending:op.amountPending||0,change:op.change||0}};
     op.version=Math.max(1,num(op.version))+1;
     this.event(op,{type:'finalized',label:Array.isArray(op.receivableIds)&&op.receivableIds.length?'Operação finalizada com títulos financeiros gerados':'Operação finalizada com pagamento integral',actor,details:{status:op.status,financialStatus:op.financialStatus,total:op.total,amountPaid:op.amountPaid,change:op.change}});
     this.write(this.operationsFile,data); return clone(op);
@@ -751,7 +777,7 @@ export default class CommerceService {
     const source=this.getOperation(id); if(!source) throw new Error('Operação não encontrada.');
     const duplicated=this.saveOperation({
       type:source.type, customerId:source.customerId, customerNameSnapshot:source.customerNameSnapshot, identifier:source.identifier,
-      sellerId:source.sellerId, sellerNameSnapshot:source.sellerNameSnapshot, notes:source.notes, cashboxId:source.cashboxId,
+      sellerId:source.sellerId, sellerNameSnapshot:source.sellerNameSnapshot, notes:source.notes, cashboxId:source.cashboxId, freight:clone(source.freight||{}),
       items:(source.items||[]).map(item=>({...item,id:''})), payments:(source.payments||[]).map(item=>({...item,id:''})),
       serviceOrder:clone(source.serviceOrder||{}), operationalStatus:source.type==='service_order'?'received':'in_service'
     },actor);
@@ -788,6 +814,7 @@ export default class CommerceService {
       sellerId:text(sources[0].sellerId),sellerNameSnapshot:text(sources[0].sellerNameSnapshot),
       notes:`Venda gerada pela junção das vendas ${sources.map(item=>`#${item.number}`).join(', ')}.`,
       serviceOrder:{},cashboxId,
+      freight:{payer:'third_party',carrierName:'',freightAmount:sources.reduce((sum,source)=>sum+freightTotal(source.freight),0),insuranceAmount:0,otherExpensesAmount:0,volumeQuantity:0,species:'',brand:'',netWeight:0,grossWeight:0},
       items:sources.flatMap(source=>(source.items||[]).map(item=>({...clone(item),id:this.id('OPI')}))),
       payments:[]
     };
@@ -795,7 +822,8 @@ export default class CommerceService {
     op.itemDiscountTotal=op.items.reduce((sum,item)=>sum+num(item.discount),0);
     op.couponDiscount=Math.min(Math.max(0,num(op.coupon?.discount)),Math.max(0,op.subtotal-op.itemDiscountTotal));
     op.discountTotal=op.itemDiscountTotal+op.couponDiscount;
-    op.total=Math.max(0,op.subtotal-op.discountTotal); op.amountPaid=0; op.amountPending=op.total; op.change=0;
+    op.freight=normalizeFreight(op.freight); op.freightTotal=freightTotal(op.freight);
+    op.total=Math.max(0,op.subtotal-op.discountTotal)+op.freightTotal; op.amountPaid=0; op.amountPending=op.total; op.change=0;
     this.event(op,{type:'created',label:'Operação criada por junção de vendas abertas',actor,details:{sourceOperationIds:ids,sourceNumbers:sources.map(item=>item.number)}});
     data.items.push(op);
     for(const source of sources){
@@ -807,6 +835,18 @@ export default class CommerceService {
       this.event(source,{type:'merged',label:`Venda juntada e substituída pela venda #${number}`,actor,details:{mergedIntoOperationId:op.id,mergedIntoNumber:number}});
     }
     this.write(this.operationsFile,data); return clone(op);
+  }
+
+  registerReturnLink(id,{returnId='',type='return',credit=0,reason=''}={},actor='painel') {
+    const data=this.read(this.operationsFile,{items:[]});
+    const op=data.items.find(item=>item.id===id);if(!op)throw new Error('Operação original não encontrada.');
+    op.links=op.links&&typeof op.links==='object'?op.links:{originalOperationId:null,originalItemId:null,exchangeIds:[],returnIds:[],warrantyIds:[]};
+    const key=type==='exchange'?'exchangeIds':'returnIds';
+    op.links[key]=Array.isArray(op.links[key])?op.links[key]:[];
+    if(returnId&&!op.links[key].includes(returnId))op.links[key].push(returnId);
+    op.updatedAt=now();op.updatedBy=actor;op.dates={...(op.dates||{}),updatedAt:op.updatedAt};op.version=Math.max(1,num(op.version))+1;
+    this.event(op,{type:type==='exchange'?'exchange_registered':'return_registered',label:`${type==='exchange'?'Troca':'Devolução'} registrada${returnId?` (${returnId})`:''}`,actor,details:{returnId,credit:num(credit),reason:text(reason)}});
+    this.write(this.operationsFile,data);return clone(op);
   }
 
   reverseOperation(id,{reason='',effects={}}={},actor='painel') {

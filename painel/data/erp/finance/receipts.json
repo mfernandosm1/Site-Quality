@@ -2,6 +2,120 @@
   "version": "0.16.2",
   "items": [
     {
+      "id": "RCP-b5840109-4a24-42de-837f-7959e89d9526",
+      "requestKey": "receipt-1787774023535-8jllmjsi5mw",
+      "receiptNumber": "000004",
+      "receivableId": "REC-3a8e309a-6b55-4067-af42-51bee70e8286",
+      "installmentId": "RIN-eecb08b2-22f9-4460-8f9f-c006b070cdaa",
+      "allocations": [
+        {
+          "installmentId": "RIN-eecb08b2-22f9-4460-8f9f-c006b070cdaa",
+          "number": 1,
+          "value": 20,
+          "balanceAfter": 0
+        }
+      ],
+      "payments": [
+        {
+          "paymentMethodId": "PM-DINHEIRO",
+          "paymentMethodName": "Dinheiro",
+          "commerceMethodId": "PM-DINHEIRO",
+          "creditCash": true,
+          "value": 20,
+          "installments": 1
+        }
+      ],
+      "value": 20,
+      "principalValue": 20,
+      "interest": 0,
+      "fine": 0,
+      "discount": 0,
+      "paymentMethodId": "PM-DINHEIRO",
+      "receivedAt": "2026-08-26",
+      "receivedDateTime": "2026-08-26T19:53:50.762Z",
+      "notes": "",
+      "balanceAfter": 0,
+      "cashboxId": "caixa-principal",
+      "cashboxName": "Caixa principal",
+      "cashSessionId": "CXS-1787626802746-YHWLT",
+      "operationId": "OP-1787401498524-4YKRT",
+      "operationType": "service_order",
+      "customerId": "CLI-1787401408676-2R3TI",
+      "reversible": true,
+      "reversalStatus": "available",
+      "createdAt": "2026-08-26T19:53:50.762Z",
+      "createdBy": "painel",
+      "cashMovementIds": [
+        "CXM-1787774030771-5EVGH"
+      ],
+      "financeEntryIds": [
+        "FEN-b94ee2c8-dfd2-4ca3-8a9c-b99004227b4e"
+      ],
+      "financePaymentIds": [
+        "FPY-5300335f-994e-41f4-b2cb-b79130feebcb"
+      ],
+      "financeMovementIds": [
+        "FMV-b783ec78-9e42-4d13-a605-bd452ef8a4f1"
+      ]
+    },
+    {
+      "id": "RCP-8533827d-3cd2-4a95-835c-2acadaabf6c4",
+      "requestKey": "1da42aa2-483d-4062-8eda-8dcf3daf2f6c",
+      "receiptNumber": "000003",
+      "receivableId": "REC-ae9bd17c-6eda-4463-81c8-5211d54341a5",
+      "installmentId": "RIN-497a7f77-d5a8-456a-8f87-babf1735cf15",
+      "allocations": [
+        {
+          "installmentId": "RIN-497a7f77-d5a8-456a-8f87-babf1735cf15",
+          "number": 1,
+          "value": 49,
+          "balanceAfter": 0
+        }
+      ],
+      "payments": [
+        {
+          "paymentMethodId": "PM-DINHEIRO",
+          "paymentMethodName": "Dinheiro",
+          "commerceMethodId": "PM-DINHEIRO",
+          "creditCash": true,
+          "value": 49,
+          "installments": 1
+        }
+      ],
+      "value": 49,
+      "principalValue": 49,
+      "interest": 0,
+      "fine": 0,
+      "discount": 0,
+      "paymentMethodId": "PM-DINHEIRO",
+      "receivedAt": "2026-08-25",
+      "receivedDateTime": "2026-08-25T16:52:15.146Z",
+      "notes": "",
+      "balanceAfter": 0,
+      "cashboxId": "caixa-principal",
+      "cashboxName": "Caixa principal",
+      "cashSessionId": "CXS-1787626802746-YHWLT",
+      "operationId": "OP-1787580493485-5XADD",
+      "operationType": "sale",
+      "customerId": "CLI-1785697362600-11IRI",
+      "reversible": true,
+      "reversalStatus": "available",
+      "createdAt": "2026-08-25T16:52:15.146Z",
+      "createdBy": "painel",
+      "cashMovementIds": [
+        "CXM-1787676735155-PY0UW"
+      ],
+      "financeEntryIds": [
+        "FEN-f099b8f6-2199-48e3-a931-d7a3fb806e41"
+      ],
+      "financePaymentIds": [
+        "FPY-4ec1671e-5a00-4a0d-b1fe-9ceb00628338"
+      ],
+      "financeMovementIds": [
+        "FMV-140f30cf-9438-45e5-b818-9ee43e3d2558"
+      ]
+    },
+    {
       "id": "RCP-189b72d8-64d1-4709-8689-4f445cc55b16",
       "requestKey": "a890123a-7bac-48d4-aeca-0d5ed5d0056f",
       "receiptNumber": "000002",
@@ -113,5 +227,5 @@
       ]
     }
   ],
-  "nextNumber": 3
+  "nextNumber": 5
 }

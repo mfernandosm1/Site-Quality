@@ -20,10 +20,17 @@ import CustomerWalletService from '../services/customer-wallet-service.js';
 import CouponService from '../services/coupon-service.js';
 import CashFlowService from '../services/cash-flow-service.js';
 import DreService from '../services/dre-service.js';
+import ReportService from '../services/report-service.js';
 import Wm10CustomerImportService from '../services/wm10-customer-import-service.js';
+import UserService from '../services/user-service.js';
+import CommissionService from '../services/commission-service.js';
+import DiscountApprovalService from '../services/discount-approval-service.js';
+import CarrierService from '../services/carrier-service.js';
+import PricingService from '../services/pricing-service.js';
+import ReturnService, { RETURN_REASONS } from '../services/return-service.js';
 import { listWhatsAppConversations, sendWhatsAppMediaToConversation } from './automacao_whatsapp.js';
 import { matchesSearchText } from '../utils/search.js';
-import { listTasks, createTask, completeTask, deleteTask, getTaskOverview, listTaskOwners, listAgendaOwners, createAgendaOwner, deleteAgendaOwner, listAgendaTypes, createAgendaType, deleteAgendaType, getAgendaAnalytics } from '../services/erp_tasks.js';
+import { listTasks, getTask, createTask, updateTask, completeTask, deleteTask, getTaskOverview, listTaskOwners, listAgendaOwners, createAgendaOwner, deleteAgendaOwner, listAgendaTypes, createAgendaType, deleteAgendaType, getAgendaAnalytics } from '../services/erp_tasks.js';
 
 const router = express.Router();
 const ROUTES_DIR = path.dirname(fileURLToPath(import.meta.url));
@@ -145,7 +152,7 @@ function ensureNativePrintModels() {
 }
 
 function userName(req) {
-  return req.user?.name || req.user?.email || 'painel';
+  return req.user?.displayName || req.user?.name || req.user?.email || 'painel';
 }
 
 function getErpCategoryService(app) {
@@ -179,6 +186,43 @@ function getCustomerService(app) {
   app.locals.customerService = new CustomerService({ dataDir });
   console.log(`👥 Customer Service: ${dataDir}`);
   return app.locals.customerService;
+}
+
+function getUserService(app) {
+  if (app.locals.userService) return app.locals.userService;
+  const dataDir = path.join(PANEL_DIR, 'data', 'erp', 'users');
+  app.locals.userService = new UserService({ dataDir });
+  return app.locals.userService;
+}
+
+function getCarrierService(app) {
+  if (app.locals.carrierService) return app.locals.carrierService;
+  app.locals.carrierService = new CarrierService({ dataDir:path.join(PANEL_DIR, 'data', 'erp', 'carriers') });
+  return app.locals.carrierService;
+}
+
+function getDiscountApprovalService(app) {
+  if (app.locals.discountApprovalService) return app.locals.discountApprovalService;
+  const dataDir = path.join(PANEL_DIR, 'data', 'erp', 'security');
+  app.locals.discountApprovalService = new DiscountApprovalService({ dataDir });
+  return app.locals.discountApprovalService;
+}
+
+function discountAssessment(items=[]) {
+  const rows=(Array.isArray(items)?items:[]).map(item=>{
+    const gross=Math.max(0,Number(item.quantity||0)*Number(item.unitPrice||0));
+    const discount=Math.max(0,Number(item.discount||0));
+    const percent=gross>0 ? (discount/gross)*100 : 0;
+    return {name:String(item.name||'Produto'),gross,discount,percent};
+  });
+  const gross=rows.reduce((sum,row)=>sum+row.gross,0);
+  const discount=rows.reduce((sum,row)=>sum+row.discount,0);
+  return {
+    gross,discount,
+    percent:gross>0?(discount/gross)*100:0,
+    maxItemPercent:rows.reduce((max,row)=>Math.max(max,row.percent),0),
+    rows
+  };
 }
 
 function getWm10CustomerImportService(app) {
@@ -226,6 +270,35 @@ function getDreService(app) {
   return app.locals.dreService;
 }
 
+function getReportService(app) {
+  if (app.locals.reportService) return app.locals.reportService;
+  app.locals.reportService = new ReportService({
+    panelDir:PANEL_DIR,
+    contentDir:app.locals.paths.CONTENT_DIR,
+    commerceService:getCommerceService(app),
+    inventoryService:getInventoryService(app),
+    purchaseService:getPurchaseService(app),
+    payablesService:getPayablesService(app),
+    dreService:getDreService(app),
+    returnService:getReturnService(app)
+  });
+  return app.locals.reportService;
+}
+
+function getCommissionService(app) {
+  if (app.locals.commissionService) return app.locals.commissionService;
+  app.locals.commissionService = new CommissionService({
+    dataDir:path.join(PANEL_DIR, 'data', 'erp', 'commissions'),
+    contentDir:app.locals.paths.CONTENT_DIR,
+    commerceService:getCommerceService(app),
+    receivablesService:getReceivablesService(app),
+    payablesService:getPayablesService(app),
+    financeService:getFinanceService(app),
+    userService:getUserService(app)
+  });
+  return app.locals.commissionService;
+}
+
 function getFinanceService(app) {
   if (app.locals.financeService) return app.locals.financeService;
   const dataDir = path.join(PANEL_DIR, 'data', 'erp', 'finance');
@@ -269,6 +342,21 @@ function getCustomerWalletService(app) {
   return app.locals.customerWalletService;
 }
 
+function getReturnService(app) {
+  if (app.locals.returnService) return app.locals.returnService;
+  app.locals.returnService = new ReturnService({
+    dataDir:path.join(PANEL_DIR,'data','erp','returns'),
+    productsFile:path.join(app.locals.paths.CONTENT_DIR,'products.json'),
+    commerceService:getCommerceService(app),
+    inventoryService:getInventoryService(app),
+    receivablesService:getReceivablesService(app),
+    walletService:getCustomerWalletService(app),
+    customerService:getCustomerService(app),
+    purchaseService:getPurchaseService(app)
+  });
+  return app.locals.returnService;
+}
+
 function getPayablesService(app) {
   if (app.locals.payablesService) return app.locals.payablesService;
   const dataDir = path.join(PANEL_DIR, 'data', 'erp', 'finance');
@@ -283,6 +371,17 @@ function getPayablesService(app) {
 }
 
 
+function getPricingService(app) {
+  if (app.locals.pricingService) return app.locals.pricingService;
+  const productsFile = path.join(app.locals.paths.CONTENT_DIR, 'products.json');
+  app.locals.pricingService = new PricingService({
+    panelDir:PANEL_DIR,
+    productsFile,
+    categoryService:getErpCategoryService(app)
+  });
+  return app.locals.pricingService;
+}
+
 function getPurchaseService(app) {
   if (app.locals.purchaseService) return app.locals.purchaseService;
   const dataDir = path.join(PANEL_DIR, 'data', 'erp', 'purchases');
@@ -292,7 +391,8 @@ function getPurchaseService(app) {
     productsFile,
     supplierService: getSupplierService(app),
     inventoryService: getInventoryService(app),
-    payablesService: getPayablesService(app)
+    payablesService: getPayablesService(app),
+    pricingService: getPricingService(app)
   });
   console.log(`🚚 Purchase Service: ${dataDir}`);
   return app.locals.purchaseService;
@@ -349,6 +449,7 @@ function normalizeText(value = '') {
 const MODULES = [
   { key: 'clientes', name: 'Clientes', icon: '👥', description: 'Cadastro mestre e histórico único do cliente.', status: 'ativo' },
   { key: 'produtos', name: 'Produtos', icon: '📦', description: 'Cadastro mestre integrado ao site, estoque, PDV e orçamentos.', status: 'planejado' },
+  { key: 'precificacao', name: 'Precificação Inteligente', icon: '🏷️', description: 'Margens por categoria, produto e variação com simulação de preço.', status: 'ativo' },
   { key: 'categorias', name: 'Categorias ERP', icon: '🗂️', description: 'Categorias internas para produtos, estoque, compras, PDV, relatórios e financeiro.', status: 'ativo' },
   { key: 'fornecedores', name: 'Fornecedores', icon: '🏭', description: 'Cadastro mestre integrado a produtos, compras, estoque e financeiro.', status: 'ativo' },
   { key: 'ordens-servico', name: 'Ordens de Serviço', icon: '🛠️', description: 'Assistência, aparelhos, peças, garantias e financeiro.', status: 'planejado' },
@@ -361,7 +462,8 @@ const MODULES = [
   { key: 'fluxo-caixa', name: 'Fluxo de Caixa', icon: '📈', description: 'Extrato financeiro inteligente com realizado e projeções.', status: 'ativo' },
   { key: 'dfc', name: 'DFC', icon: '📊', description: 'Demonstração dos fluxos de caixa.', status: 'planejado' },
   { key: 'dre', name: 'DRE Inteligente', icon: '📈', description: 'Resultado gerencial por período, Grupo DRE, plano de conta e centro de custo.', status: 'ativo' },
-  { key: 'relatorios', name: 'Relatórios', icon: '📋', description: 'Visões consolidadas de todo o ecossistema.', status: 'planejado' }
+  { key: 'relatorios', name: 'Relatórios', icon: '📋', description: 'Vendas, lucratividade, giro, estoque, descontos, compras e desempenho.', status: 'ativo' },
+  { key: 'metas-comissoes', name: 'Metas e Comissões', icon: '🎯', description: 'Metas da loja e vendedores, regras de comissão, apuração e lançamento no financeiro.', status: 'ativo' }
 ];
 
 router.get('/', (req, res) => {
@@ -959,9 +1061,102 @@ router.get('/clientes', (req, res) => {
   });
 });
 
+const WM10_MANUAL_RECEIVABLES = [
+  {
+    key:'wm10-sale-22106-credit-open', customerDocument:'03972715064', customerName:'Thassia Mariana Rodrigues', originId:'22106', originLabel:'WM10 · Venda #22106', reference:'Venda WM10 #22106', issueDate:'2026-07-11', originalTotal:405, openBalance:205,
+    installments:[{number:1,total:1,dueDate:'2026-07-15',value:205}],
+    items:['Smartphone Motorola Moto e22 64GB usado · R$ 405,00'],
+    notes:'Importação WM10. Venda total R$ 405,00. R$ 200,00 já pagos via PIX no WM10; saldo do crediário importado: R$ 205,00.'
+  },
+  {
+    key:'wm10-sale-22123-credit-open', customerDocument:'06442611027', customerName:'Arthur de Almeida', originId:'22123', originLabel:'WM10 · Venda #22123', reference:'Venda WM10 #22123', issueDate:'2026-07-15', originalTotal:139.99, openBalance:139.99,
+    installments:[{number:1,total:1,dueDate:'2026-07-15',value:139.99}],
+    items:['Adaptador USB Wi-Fi TP-Link TL-WN823N · R$ 139,99'],
+    notes:'Importação WM10. Venda total R$ 139,99; saldo integral do crediário em aberto.'
+  },
+  {
+    key:'wm10-sale-21898-credit-open', customerDocument:'92021697053', customerName:'Marino Martins', originId:'21898', originLabel:'WM10 · Venda #21898', reference:'Venda WM10 #21898', issueDate:'2026-05-25', originalTotal:180, openBalance:120,
+    installments:[{number:1,total:1,dueDate:'2026-06-15',value:120}],
+    items:['Capa Samsung Galaxy A07 Anti Impacto transp · R$ 50,00','Serviços diversos · R$ 80,00','Película Samsung A06 3D · R$ 50,00'],
+    notes:'Importação WM10. Venda total R$ 180,00. R$ 60,00 já pagos no WM10; saldo do crediário importado: R$ 120,00.'
+  },
+  {
+    key:'wm10-sale-21652-credit-open', customerDocument:'94670692020', customerName:'Gil Rovane Ficagna', originId:'21652', originLabel:'WM10 · Venda #21652', reference:'Venda WM10 #21652', issueDate:'2026-03-26', originalTotal:100, openBalance:100,
+    installments:[{number:1,total:1,dueDate:'2026-04-01',value:100}],
+    items:['Serviços diversos · R$ 100,00'],
+    notes:'Importação WM10. Venda total R$ 100,00; saldo integral do crediário em aberto.'
+  },
+  {
+    key:'wm10-sale-7705-credit-open', customerDocument:'98293540087', customerName:'Luciana dos Santos', originId:'7705', originLabel:'WM10 · Venda #7705', reference:'Venda WM10 #7705', issueDate:'2024-05-28', originalTotal:1629.99, openBalance:399.99,
+    installments:[
+      {number:2,total:4,dueDate:'2024-07-10',value:100},
+      {number:3,total:4,dueDate:'2024-08-10',value:150},
+      {number:4,total:4,dueDate:'2024-09-10',value:149.99}
+    ],
+    items:['Película Samsung A03 CORE VIDRO · R$ 29,99','Smartphone Xiaomi Redmi Note 12 128GB cinza · R$ 1.600,00'],
+    notes:'Importação WM10. Venda total R$ 1.629,99. Crediário original em 4x totalizando R$ 599,99; parte já paga no WM10. Saldos importados: 2/4 R$ 100,00, 3/4 R$ 150,00 e 4/4 R$ 149,99. Saldo total R$ 399,99.'
+  },
+  {
+    key:'wm10-manual-diecili-20260826', customerDocument:'03765797065', customerName:'Diecili Fernanda Dickel', originId:'manual-diecili', originLabel:'WM10 · Crediário importado', reference:'Crediário WM10 informado manualmente', issueDate:'', originalTotal:59.98, openBalance:59.98,
+    installments:[{number:1,total:1,dueDate:'',value:59.98}],
+    items:['2x Cabo USB Kapbom V8 1M · R$ 29,99 cada'],
+    notes:'Importação WM10 informada manualmente. Total R$ 59,98. Vencimento original não informado; mantido sem vencimento para não inventar data.'
+  },
+  {
+    key:'wm10-manual-samara-20260826', customerDocument:'05116845095', customerName:'Samara de Paula', originId:'manual-samara', originLabel:'WM10 · Crediário importado', reference:'Crediário WM10 informado manualmente', issueDate:'', originalTotal:4992.91, openBalance:710,
+    installments:[{number:1,total:1,dueDate:'',value:710}],
+    items:['iPhone 11 novo 64GB preto'],
+    notes:'Importação WM10 informada manualmente. Venda original R$ 4.992,91. Saldo ainda devido: R$ 710,00. Vencimento original não informado; mantido sem vencimento para não inventar data.'
+  },
+  {
+    key:'wm10-manual-maikel-20260826', customerDocument:'02331850038', customerName:'Maikel Ervino Kipper', originId:'manual-maikel', originLabel:'WM10 · Crediário importado', reference:'Crediário WM10 informado manualmente', issueDate:'', originalTotal:910.96, openBalance:600.96,
+    installments:[{number:1,total:1,dueDate:'',value:600.96}],
+    items:['Bebidas · total original R$ 910,96'],
+    notes:'Importação WM10 informada manualmente. Valor original R$ 910,96 em bebidas. Saldo ainda devido: R$ 600,96. Vencimento original não informado; mantido sem vencimento para não inventar data.'
+  }
+];
+
+function wm10ManualReceivablesStatus(app){
+  const receivables=getReceivablesService(app).list({});
+  const customers=getCustomerService(app).listCustomers({includeInactive:true});
+  const digits=value=>String(value||'').replace(/\D/g,'');
+  return WM10_MANUAL_RECEIVABLES.map(row=>{
+    const customer=customers.find(item=>digits(item.document)===digits(row.customerDocument));
+    const existing=receivables.find(item=>item.origin==='wm10_legacy_receivable'&&item.originPaymentKey===row.key);
+    return {...row,customerId:customer?.id||'',customerFound:Boolean(customer),customerCurrentName:customer?.name||'',imported:Boolean(existing),receivableId:existing?.id||'',receivableNumber:existing?.number||''};
+  });
+}
+
 router.get('/clientes/importar-wm10', (req, res) => {
   const service = getWm10CustomerImportService(req.app);
-  return res.render('clientes_importar_wm10', { wm10Settings:service.getSettings(), lastReport:service.getLastReport(), flash:req.query.flash || null });
+  return res.render('clientes_importar_wm10', {
+    wm10Settings:service.getSettings(),
+    cacheInfo:service.getCacheInfo(),
+    legacyInfo:service.getLegacyInfo(),
+    archiveInfo:service.getArchiveInfo(),
+    lastReport:service.getLastReport(),
+    flash:req.query.flash || null
+  });
+});
+
+router.get('/clientes/importar-wm10/arquivo-historico/status', (req,res) => {
+  try { return res.json({ success:true, info:getWm10CustomerImportService(req.app).getArchiveInfo() }); }
+  catch(error){ return res.status(400).json({success:false,message:error.message}); }
+});
+
+router.post('/clientes/importar-wm10/arquivo-historico/preparar', (req,res) => {
+  try { return res.json({ success:true, info:getWm10CustomerImportService(req.app).initializeArchive({force:Boolean(req.body?.force)}) }); }
+  catch(error){ return res.status(400).json({success:false,message:error.message}); }
+});
+
+router.post('/clientes/importar-wm10/arquivo-historico/proximo', async (req,res) => {
+  try { return res.json({ success:true, info:await getWm10CustomerImportService(req.app).processNextArchiveTask() }); }
+  catch(error){ return res.status(400).json({success:false,message:error.message, info:getWm10CustomerImportService(req.app).getArchiveInfo()}); }
+});
+
+router.post('/clientes/importar-wm10/arquivo-historico/repetir-erros', (req,res) => {
+  try { return res.json({ success:true, info:getWm10CustomerImportService(req.app).retryArchiveErrors() }); }
+  catch(error){ return res.status(400).json({success:false,message:error.message}); }
 });
 
 router.post('/clientes/importar-wm10/configuracao', (req, res) => {
@@ -971,11 +1166,60 @@ router.post('/clientes/importar-wm10/configuracao', (req, res) => {
   } catch (error) { return res.status(400).json({ success:false, message:error.message }); }
 });
 
+router.post('/clientes/importar-wm10/atualizar', async (req, res) => {
+  try {
+    const service = getWm10CustomerImportService(req.app);
+    const cacheInfo = await service.refreshSourceCache();
+    return res.json({ success:true, message:`Snapshot local atualizado com ${cacheInfo.rows} cliente(s).`, cacheInfo });
+  } catch (error) { return res.status(400).json({ success:false, message:error.message }); }
+});
+
 router.post('/clientes/importar-wm10/simular', async (req, res) => {
   try {
     const report = await getWm10CustomerImportService(req.app).simulate({ normalizeIndividualNames:req.body?.normalizeIndividualNames !== false });
     return res.json({ success:true, report });
   } catch (error) { return res.status(400).json({ success:false, message:error.message }); }
+});
+
+router.post('/clientes/importar-wm10/legado/preparar', (req, res) => {
+  try {
+    const info = getWm10CustomerImportService(req.app).prepareHistoryMigration({ user:userName(req) });
+    return res.json({ success:true, info });
+  } catch (error) { return res.status(400).json({ success:false, message:error.message }); }
+});
+
+router.post('/clientes/importar-wm10/legado/proximo', async (req, res) => {
+  try {
+    const info = await getWm10CustomerImportService(req.app).processNextHistoryBatch({ user:userName(req) });
+    return res.json({ success:true, info });
+  } catch (error) { return res.status(400).json({ success:false, message:error.message }); }
+});
+
+router.get('/clientes/importar-wm10/crediarios/status', (req,res) => {
+  try {
+    const items=wm10ManualReceivablesStatus(req.app);
+    return res.json({success:true,items,summary:{total:items.length,ready:items.filter(x=>x.customerFound).length,imported:items.filter(x=>x.imported).length,pending:items.filter(x=>x.customerFound&&!x.imported).length,openValue:items.reduce((sum,x)=>sum+Number(x.openBalance||0),0)}});
+  } catch(error){ return res.status(400).json({success:false,message:error.message}); }
+});
+
+router.post('/clientes/importar-wm10/crediarios/importar', (req,res) => {
+  try {
+    const service=getReceivablesService(req.app);
+    const status=wm10ManualReceivablesStatus(req.app);
+    const missing=status.filter(item=>!item.customerFound);
+    if(missing.length) return res.status(400).json({success:false,message:`Importação bloqueada: ${missing.map(item=>item.customerName).join(', ')} não foram localizados no cadastro de clientes.`});
+    const results=[];
+    for(const row of WM10_MANUAL_RECEIVABLES){
+      const result=service.importLegacyReceivable({
+        customerDocument:row.customerDocument,originId:row.originId,originLabel:row.originLabel,originPaymentKey:row.key,
+        reference:row.reference,issueDate:row.issueDate,originalTotal:row.originalTotal,openBalance:row.openBalance,
+        installments:row.installments,items:row.items,notes:row.notes
+      },userName(req));
+      results.push({key:row.key,name:row.customerName,created:result.created,id:result.item?.id||'',number:result.item?.number||''});
+    }
+    const items=wm10ManualReceivablesStatus(req.app);
+    return res.json({success:true,message:`Crediários WM10 processados. ${results.filter(x=>x.created).length} título(s) criado(s); ${results.filter(x=>!x.created).length} já existiam e não foram duplicados.`,results,items});
+  } catch(error){ return res.status(400).json({success:false,message:error.message}); }
 });
 
 router.post('/clientes/importar-wm10/diagnosticar', async (req, res) => {
@@ -1076,6 +1320,15 @@ router.get('/clientes/:id/ficha', (req,res) => {
   return res.render('cliente_ficha', { customer, credit, wallet, printedAt:new Date().toISOString() });
 });
 
+router.get('/clientes/:id/api/wm10-legado', (req,res) => {
+  try {
+    const customer=getCustomerService(req.app).getCustomer(req.params.id);
+    if(!customer) return res.status(404).json({success:false,message:'Cliente não encontrado.'});
+    const legacy=getWm10CustomerImportService(req.app).getLegacyForCustomer(customer.id);
+    return res.json({success:true,customer:{id:customer.id,name:customer.name},legacy});
+  } catch(error){return res.status(400).json({success:false,message:error.message});}
+});
+
 router.get('/clientes/:id/api/historico', (req,res) => {
   try {
     const customer=getCustomerService(req.app).getCustomer(req.params.id);
@@ -1084,9 +1337,13 @@ router.get('/clientes/:id/api/historico', (req,res) => {
     const type=String(req.query.type||'all'), status=String(req.query.status||'all');
     const normalize=value=>String(value||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().trim();
     let items=getCommerceService(req.app).listOperations({status:'all'}).filter(op=>String(op.customerId||'')===String(customer.id)||(!op.customerId&&normalize(op.customerNameSnapshot)===normalize(customer.name)));
+    items=items.map(op=>customerLiveOperation(op,customer)).map(op=>({...op,origin:op.origin||'quality',legacy:false,readOnly:false}));
+    const wm10Items=getWm10CustomerImportService(req.app).getHistoryForCustomer(customer.id).map(op=>({...op,displayCustomer:customer.name}));
+    items=[...items,...wm10Items];
     if(type!=='all') items=items.filter(op=>op.type===type);
     if(status!=='all') items=items.filter(op=>op.status===status);
-    items=items.map(op=>customerLiveOperation(op,customer));
+    const operationDate=op=>Date.parse(op?.dates?.finalizedAt||op?.dates?.openedAt||op?.createdAt||'')||0;
+    items.sort((a,b)=>operationDate(b)-operationDate(a));
     const total=items.length, pages=Math.max(1,Math.ceil(total/pageSize));
     const currentPage=Math.min(page,pages);
     return res.json({success:true,customer,page:currentPage,pages,total,items:items.slice((currentPage-1)*pageSize,currentPage*pageSize)});
@@ -1097,12 +1354,14 @@ router.get('/clientes/:id/api/operacoes/:operationId', (req,res) => {
   try {
     const customer=getCustomerService(req.app).getCustomer(req.params.id);
     if(!customer) return res.status(404).json({success:false,message:'Cliente não encontrado.'});
+    const wm10Details=getWm10CustomerImportService(req.app).getHistoryOperation(customer.id,req.params.operationId);
+    if(wm10Details) return res.json({success:true,customer,operation:{...wm10Details,displayCustomer:customer.name},receivables:[]});
     const details=getOperationsCenterService(req.app).getDetails(req.params.operationId);
     if(!details) return res.status(404).json({success:false,message:'Operação não encontrada.'});
     const linked=String(details.customerId||'')===String(customer.id)||String(details.customerNameSnapshot||'').trim().toLowerCase()===String(customer.name||'').trim().toLowerCase();
     if(!linked) return res.status(403).json({success:false,message:'A operação não pertence a este cliente.'});
     const receivables=getReceivablesService(req.app).list({customerId:customer.id}).filter(item=>String(item.operationId||item.originId||item.referenceId||'')===String(details.id)||String(item.originLabel||'').includes(`#${details.number}`));
-    return res.json({success:true,customer,operation:{...details,displayCustomer:customer.name},receivables});
+    return res.json({success:true,customer,operation:{...details,origin:details.origin||'quality',legacy:false,readOnly:false,displayCustomer:customer.name},receivables});
   } catch(error){return res.status(400).json({success:false,message:error.message});}
 });
 
@@ -1339,7 +1598,7 @@ router.post('/agenda', (req, res) => {
   try {
     const customerId = String(req.body?.customerId || '').trim();
     const customer = customerId ? getCustomerService(req.app).getCustomer(customerId) : null;
-    createTask(req.app, {
+    const task=createTask(req.app, {
       title:req.body?.title,
       description:req.body?.description,
       dueAt:req.body?.dueAt,
@@ -1348,11 +1607,22 @@ router.post('/agenda', (req, res) => {
       customerId:customer?.id || '',
       customerName:customer?.name || '',
       owner:String(req.body?.owner || '').trim() || userName(req)
-    });
+    }, userName(req));
+    req.app.locals.kernelService?.audits?.record?.({actor:userName(req),module:'agenda',action:'TASK_CREATED',entityType:'agenda_task',entityId:task.id,after:task,ip:req.ip||''});
     return agendaSuccess(req,res,'Item adicionado.');
   } catch (error) {
     return agendaFailure(req,res,error,'Não foi possível criar a tarefa.');
   }
+});
+
+router.post('/agenda/:id/editar', (req,res) => {
+  try {
+    const customerId=String(req.body?.customerId||'').trim();
+    const customer=customerId?getCustomerService(req.app).getCustomer(customerId):null;
+    const result=updateTask(req.app,req.params.id,{title:req.body?.title,description:req.body?.description,dueAt:req.body?.dueAt,priority:req.body?.priority,type:req.body?.type,customerId:customer?.id||'',customerName:customer?.name||'',owner:String(req.body?.owner||'').trim()||userName(req)},userName(req));
+    req.app.locals.kernelService?.audits?.record?.({actor:userName(req),module:'agenda',action:'TASK_UPDATED',entityType:'agenda_task',entityId:req.params.id,before:result.before,after:result.after,ip:req.ip||''});
+    return agendaSuccess(req,res,'Tarefa atualizada.');
+  } catch(error) { return agendaFailure(req,res,error,'Não foi possível editar a tarefa.'); }
 });
 
 router.post('/agenda/responsaveis', (req, res) => {
@@ -1393,7 +1663,9 @@ router.post('/agenda/tipos/:id/excluir', (req, res) => {
 
 router.post('/agenda/:id/concluir', (req, res) => {
   try {
-    completeTask(req.app, req.params.id);
+    const before=getTask(req.app,req.params.id);
+    const task=completeTask(req.app, req.params.id, userName(req));
+    req.app.locals.kernelService?.audits?.record?.({actor:userName(req),module:'agenda',action:'TASK_COMPLETED',entityType:'agenda_task',entityId:req.params.id,before,after:task,ip:req.ip||''});
     return agendaSuccess(req,res,'Item concluído.');
   } catch (error) {
     return agendaFailure(req,res,error,'Não foi possível concluir.');
@@ -1402,7 +1674,8 @@ router.post('/agenda/:id/concluir', (req, res) => {
 
 router.post('/agenda/:id/excluir', (req, res) => {
   try {
-    deleteTask(req.app, req.params.id);
+    const task=deleteTask(req.app, req.params.id);
+    req.app.locals.kernelService?.audits?.record?.({actor:userName(req),module:'agenda',action:'TASK_DELETED',entityType:'agenda_task',entityId:req.params.id,before:task,after:null,ip:req.ip||''});
     return agendaSuccess(req,res,'Item removido.');
   } catch (error) {
     return agendaFailure(req,res,error,'Não foi possível excluir.');
@@ -1474,12 +1747,16 @@ router.get('/configuracoes/caixa-pdv', (req, res) => {
   const settings = commerce.getSettings();
   const paymentMethods = getPdvPaymentMethods(req.app);
 
+  const erpUsers=getUserService(req.app).list({includeInactive:false});
   return res.render('configuracoes_caixa_pdv', {
     flash: req.query.flash || null,
     cashboxes,
     selectedCashboxId,
     cashboxConfig,
-    paymentMethods
+    paymentMethods,
+    erpUsers,
+    sellerUsers:erpUsers.filter(user=>user.seller===true),
+    technicianUsers:erpUsers.filter(user=>user.technician===true)
   });
 });
 
@@ -1710,17 +1987,22 @@ router.get('/pdv', (req, res) => {
   if (!req.query.operacao && String(req.query.nova || '') === '1' && openSession) {
     try {
       const forceNew = String(req.query.forcarNova || '') === '1';
-      const reusableEmptyOperation = forceNew ? null : findEmptyOpenPdvSale(commerce, selectedCashboxId);
+      const selectedCustomerId = String(req.query.cliente || '');
+      const exchangeReturnId = String(req.query.troca || '').trim();
+      const selectedCustomer = selectedCustomerId ? customerService.getCustomer(selectedCustomerId) : null;
+      const reusableEmptyOperation = (forceNew || selectedCustomerId) ? null : findEmptyOpenPdvSale(commerce, selectedCashboxId);
       if (reusableEmptyOperation) {
         return res.redirect(`/erp/pdv?caixa=${encodeURIComponent(selectedCashboxId)}&operacao=${encodeURIComponent(reusableEmptyOperation.id)}&rascunhoVazio=1`);
       }
       const reservedOperation = commerce.saveOperation({
         type: 'sale',
         cashboxId: selectedCashboxId,
+        customerId:selectedCustomer?.id || '',
+        customerNameSnapshot:selectedCustomer?.name || '',
         items: [],
         payments: []
       }, userName(req));
-      return res.redirect(`/erp/pdv?caixa=${encodeURIComponent(selectedCashboxId)}&operacao=${encodeURIComponent(reservedOperation.id)}`);
+      return res.redirect(`/erp/pdv?caixa=${encodeURIComponent(selectedCashboxId)}&operacao=${encodeURIComponent(reservedOperation.id)}${exchangeReturnId ? `&troca=${encodeURIComponent(exchangeReturnId)}` : ''}`);
     } catch (error) {
       console.error('Não foi possível reservar a nova operação:', error);
       return res.redirect(`/erp/pdv?caixa=${encodeURIComponent(selectedCashboxId)}&flash=${encodeURIComponent(error.message || 'Não foi possível criar a nova operação.')}`);
@@ -1746,15 +2028,38 @@ router.get('/pdv', (req, res) => {
   if (printSettings.logoUrl && printSettings.logoUrl.startsWith('/uploads/')) printSettings.logoUrl = `/public${printSettings.logoUrl}`;
 
   const cashboxSettings = commerce.getCashboxSettings(selectedCashboxId);
-  const loggedUserName = req.user?.name || req.user?.email || '';
+  const erpUsers = getUserService(req.app).list({ includeInactive:false });
+  const carriers = getCarrierService(req.app).list({ includeInactive:false });
+  const sellerUsers = erpUsers.filter(user => user.seller === true);
+  const technicianUsers = erpUsers.filter(user => user.technician === true);
+  const loggedUserName = req.user?.displayName || req.user?.name || req.user?.email || '';
+  const canApproveDiscount = !req.app.locals.authService || req.app.locals.authService.can(req.user,'pdv.discount.approve');
+  const canDiscount = !req.app.locals.authService || req.app.locals.authService.can(req.user,'pdv.discount') || canApproveDiscount;
+  const canReturns = !req.app.locals.authService || req.app.locals.authService.can(req.user,'pdv.returns');
+  const discountLimitPercent = Math.min(100,Math.max(0,Number(req.user?.pdvPolicy?.maxDiscountPercent||0)));
   const allowedSellers = Array.isArray(cashboxSettings.allowedSellers) ? cashboxSettings.allowedSellers : [];
-  const loggedUserAllowedAsSeller = !!loggedUserName && (!allowedSellers.length || allowedSellers.some(name => String(name).trim().toLowerCase() === String(loggedUserName).trim().toLowerCase()));
+  const loggedUserAliases=[req.user?.displayName,req.user?.name,req.user?.username].filter(Boolean).map(value=>String(value).trim().toLowerCase());
+  const loggedUserAllowedAsSeller = !!loggedUserName && (!allowedSellers.length || allowedSellers.some(name => loggedUserAliases.includes(String(name).trim().toLowerCase())));
   const operationAlreadyHasSeller = !!String(current?.sellerNameSnapshot || '').trim();
   const automaticSeller = !operationAlreadyHasSeller && cashboxSettings.useLoggedUserAsSeller !== false && loggedUserAllowedAsSeller
     ? loggedUserName
     : (!operationAlreadyHasSeller ? String(cashboxSettings.defaultSeller || '') : '');
 
   const emptyOpenSale = findEmptyOpenPdvSale(commerce, selectedCashboxId);
+
+  let exchangeContext = null;
+  const exchangeReturnId = String(req.query.troca || '').trim();
+  if (exchangeReturnId && current) {
+    try {
+      const returnRecord = getReturnService(req.app).get(exchangeReturnId);
+      if (returnRecord && String(returnRecord.customerId || '') === String(current.customerId || '')) {
+        exchangeContext = {
+          record: returnRecord,
+          wallet: getCustomerWalletService(req.app).summary(returnRecord.customerId)
+        };
+      }
+    } catch (_) {}
+  }
 
   res.render('pdv', {
     flash: req.query.flash || null,
@@ -1773,8 +2078,17 @@ router.get('/pdv', (req, res) => {
     emptyOpenSale,
     paymentMethods,
     cashboxSettings,
+    erpUsers,
+    sellerUsers,
+    technicianUsers,
+    carriers,
     loggedUserName,
     automaticSeller,
+    canDiscount,
+    canApproveDiscount,
+    canReturns,
+    exchangeContext,
+    discountLimitPercent,
     selectedCustomerId: String(req.query.cliente || ''),
     coupons: getCouponService(req.app).list({includeInactive:false}),
     operationStatuses: readJson(OPERATION_STATUSES_FILE,{items:[]}).items || [],
@@ -1784,6 +2098,34 @@ router.get('/pdv', (req, res) => {
     printReturnUrl,
     pageClass: printOnly ? 'pdv-print-only' : ''
   });
+});
+
+
+router.get('/pdv/trocas-devolucoes', (req,res) => {
+  try {
+    const commerce=getCommerceService(req.app),returns=getReturnService(req.app),customerService=getCustomerService(req.app);
+    const q=String(req.query.q||'').trim(),selectedId=String(req.query.venda||'').trim();
+    const sales=commerce.listOperations({status:'finalized'}).filter(operation=>operation.type==='sale').filter(operation=>{
+      if(!q)return true;
+      return matchesSearchText([operation.number,operation.customerNameSnapshot,operation.identifier,...(operation.items||[]).flatMap(item=>[item.name,item.code,item.sku])].join(' '),q);
+    }).slice(0,80);
+    let selected=null;
+    if(selectedId){
+      const preview=returns.operationPreview(selectedId);
+      selected={...preview,customer:preview.operation.customerId?customerService.getCustomer(preview.operation.customerId):null};
+    }
+    return res.render('trocas_devolucoes',{flash:req.query.flash||null,q,sales,selected,customers:customerService.listCustomers({includeInactive:false}),reasons:RETURN_REASONS,recentReturns:returns.list({}).slice(0,30)});
+  } catch(error){
+    return res.status(400).render('trocas_devolucoes',{flash:error.message||'Não foi possível abrir Trocas e Devoluções.',q:String(req.query.q||''),sales:[],selected:null,customers:[],reasons:RETURN_REASONS,recentReturns:[]});
+  }
+});
+
+router.post('/pdv/trocas-devolucoes', express.json(), (req,res) => {
+  try {
+    const record=getReturnService(req.app).create(req.body||{},userName(req));
+    req.app.locals.kernelService?.audits?.record?.({actor:userName(req),module:'pdv',action:record.type==='exchange'?'EXCHANGE_COMPLETED':'RETURN_COMPLETED',entityType:'return',entityId:record.id,label:`${record.type==='exchange'?'Troca':'Devolução'} ${record.number} registrada`,after:record,ip:req.ip||''});
+    return res.json({success:true,message:`${record.type==='exchange'?'Troca':'Devolução'} registrada com sucesso.`,record,wallet:getCustomerWalletService(req.app).summary(record.customerId)});
+  } catch(error){return res.status(400).json({success:false,message:error.message||'Não foi possível registrar a troca/devolução.'});}
 });
 
 
@@ -1942,18 +2284,85 @@ router.post('/pdv/caixa/movimentar', (req, res) => {
   } catch (error) { return res.status(400).json({ success:false, message:error.message }); }
 });
 
+router.post('/pdv/descontos/chave', express.json(), (req, res) => {
+  try {
+    const auth=req.app.locals.authService;
+    if(auth && !auth.can(req.user,'pdv.discount.approve')) return res.status(403).json({success:false,code:'PDV_DISCOUNT_APPROVAL_FORBIDDEN',message:'Seu usuário não pode gerar autorizações de desconto.'});
+    const cashboxId=String(req.body?.cashboxId||'').trim();
+    const settings=getCommerceService(req.app).getCashboxSettings(cashboxId||'caixa-principal');
+    if(settings.discountApprovalEnabled===false) throw new Error('A autorização por chave temporária está desativada neste caixa.');
+    const token=getDiscountApprovalService(req.app).issue({issuer:req.user,ttlMinutes:settings.discountApprovalTtlMinutes||5,cashboxId});
+    req.app.locals.kernelService?.audits?.record?.({actor:userName(req),module:'pdv',action:'DISCOUNT_APPROVAL_KEY_CREATED',entityType:'discount_approval',entityId:token.id,label:`Chave temporária de desconto gerada por ${userName(req)}`,after:{...token,code:'******'}});
+    return res.json({success:true,message:`Chave gerada. Ela expira em ${token.ttlMinutes} minuto(s) e só pode ser usada uma vez.`,token});
+  } catch(error){ return res.status(400).json({success:false,message:error.message||'Não foi possível gerar a chave.'}); }
+});
+
+
+router.post('/pdv/descontos/autorizar-supervisor', express.json(), (req, res) => {
+  try {
+    const login=String(req.body?.login||'').trim();
+    const password=String(req.body?.password||'');
+    if(!login || !password) return res.status(400).json({success:false,message:'Informe o usuário e a senha do supervisor.'});
+    const userService=getUserService(req.app);
+    const supervisor=userService.authenticate(login,password);
+    if(!supervisor) return res.status(401).json({success:false,code:'SUPERVISOR_AUTH_INVALID',message:'Usuário ou senha do supervisor inválidos.'});
+    const auth=req.app.locals.authService;
+    const access=auth?.accessStatus?.(supervisor,req);
+    if(access && !access.allowed) return res.status(403).json({success:false,code:access.code,message:`O supervisor informado não pode autorizar neste momento. ${access.message}`});
+    if(auth && !auth.can(supervisor,'pdv.discount.approve')) return res.status(403).json({success:false,code:'SUPERVISOR_DISCOUNT_FORBIDDEN',message:'Este usuário não possui permissão para autorizar descontos acima do limite.'});
+    const cashboxId=String(req.body?.cashboxId||'').trim();
+    const settings=getCommerceService(req.app).getCashboxSettings(cashboxId||'caixa-principal');
+    if(settings.discountApprovalEnabled===false) throw new Error('A autorização acima do limite está desativada neste caixa.');
+    const token=getDiscountApprovalService(req.app).issue({issuer:supervisor,ttlMinutes:Math.min(2,settings.discountApprovalTtlMinutes||5),cashboxId});
+    req.app.locals.kernelService?.audits?.record?.({actor:userName(req),module:'pdv',action:'DISCOUNT_SUPERVISOR_CREDENTIAL_AUTH',entityType:'discount_approval',entityId:token.id,label:`Supervisor ${supervisor.displayName||supervisor.name} autorizou desconto para ${userName(req)}`,details:{supervisorId:supervisor.id,operatorId:req.user?.id||'',cashboxId}});
+    return res.json({success:true,message:`Autorizado por ${supervisor.displayName||supervisor.name}.`,approvalCode:token.code,authorizedBy:supervisor.displayName||supervisor.name});
+  } catch(error){ return res.status(400).json({success:false,message:error.message||'Não foi possível validar o supervisor.'}); }
+});
+
 router.post('/pdv/operacoes', (req, res) => {
   try {
     const commerce = getCommerceService(req.app);
     const cashboxId = String(req.body?.cashboxId || 'caixa-principal');
     if (!commerce.getOpenSession(cashboxId)) throw new Error('Abra o caixa selecionado antes de iniciar ou alterar uma Venda/O.S.');
     const payload = { ...(req.body || {}) };
+    const existingOperation=payload.id ? commerce.getOperation(String(payload.id)) : null;
+    const requestedAssessment=discountAssessment(payload.items);
+    const previousAssessment=discountAssessment(existingOperation?.items);
+    const requestedDiscount=requestedAssessment.discount;
+    const previousDiscount=previousAssessment.discount;
+    let discountAuthorization=null;
+    if(requestedDiscount>previousDiscount+0.009 && req.app.locals.authService) {
+      const auth=req.app.locals.authService;
+      const canApprove=auth.can(req.user,'pdv.discount.approve');
+      const canDiscount=auth.can(req.user,'pdv.discount') || canApprove;
+      const allowedPercent=Math.min(100,Math.max(0,Number(req.user?.pdvPolicy?.maxDiscountPercent||0)));
+      if(!canDiscount && requestedDiscount>0.009){
+        const error=new Error('Seu perfil não permite conceder descontos no PDV.'); error.status=403; error.code='PDV_DISCOUNT_FORBIDDEN'; throw error;
+      }
+      const exceeds=requestedAssessment.rows.find(row=>row.discount>0.009 && row.percent>allowedPercent+0.0001);
+      if(exceeds){
+        const settings=commerce.getCashboxSettings(cashboxId);
+        if(settings.discountApprovalEnabled===false){
+          const error=new Error(`Seu limite é ${allowedPercent.toFixed(2).replace('.',',')}%. O item “${exceeds.name}” está com ${exceeds.percent.toFixed(2).replace('.',',')}% de desconto e a autorização acima do limite está desativada neste caixa.`); error.status=403; error.code='PDV_DISCOUNT_LIMIT_EXCEEDED'; throw error;
+        }
+        const approvalCode=String(payload.discountApprovalCode||'').trim();
+        if(!approvalCode){
+          const error=new Error(`Seu limite é ${allowedPercent.toFixed(2).replace('.',',')}%. O item “${exceeds.name}” está com ${exceeds.percent.toFixed(2).replace('.',',')}%. Informe uma chave temporária de supervisor para continuar.`);
+          error.status=428; error.code='PDV_DISCOUNT_APPROVAL_REQUIRED'; error.details={allowedPercent,requestedPercent:exceeds.percent,itemName:exceeds.name}; throw error;
+        }
+        discountAuthorization=getDiscountApprovalService(req.app).verifyAndConsume(approvalCode,{user:req.user,operationId:existingOperation?.id||'',cashboxId,requestedPercent:exceeds.percent});
+      }
+    }
+    delete payload.discountApprovalCode;
     const itemBase = (Array.isArray(payload.items)?payload.items:[]).reduce((sum,item)=>sum+(Number(item.quantity||0)*Number(item.unitPrice||0)-Number(item.discount||0)),0);
     if (String(payload.couponCode || '').trim()) payload.coupon = getCouponService(req.app).validate(payload.couponCode,itemBase,{customerId:payload.customerId});
     else payload.coupon = null;
     const operation = commerce.saveOperation(payload, userName(req));
-    return res.json({ success:true, message:'Operação salva em aberto.', operation });
-  } catch (error) { return res.status(error.status || 400).json({ success:false, message:error.message, code:error.code || null, current:error.current || null }); }
+    if(discountAuthorization){
+      req.app.locals.kernelService?.audits?.record?.({actor:userName(req),module:'pdv',action:'DISCOUNT_ABOVE_LIMIT_AUTHORIZED',entityType:'operation',entityId:operation.id,label:`Desconto acima do limite autorizado na operação #${operation.number}`,details:{authorizationId:discountAuthorization.id,authorizedBy:discountAuthorization.issuerName,operator:userName(req),requestedPercent:discountAuthorization.requestedPercent}});
+    }
+    return res.json({ success:true, message:discountAuthorization?'Operação salva com desconto autorizado por chave temporária.':'Operação salva em aberto.', operation, discountAuthorization:discountAuthorization?{authorizedBy:discountAuthorization.issuerName}:null });
+  } catch (error) { return res.status(error.status || 400).json({ success:false, message:error.message, code:error.code || null, current:error.current || null, details:error.details || null }); }
 });
 
 router.post('/pdv/operacoes/:id/finalizar', (req, res) => {
@@ -1968,6 +2377,16 @@ router.post('/pdv/operacoes/:id/finalizar', (req, res) => {
     commerce.validateOperationForFinalization(operation);
     const receivables = getReceivablesService(req.app);
     const receivablePlan = receivables.validateOperation(operation);
+    const walletPaymentTotal = Math.round((operation.payments || []).filter(payment => String(payment.methodId || '') === 'PM-CARTEIRA').reduce((sum,payment)=>sum+Number(payment.amount||0),0)*100)/100;
+    let walletPaymentEntry = null;
+    if (walletPaymentTotal > 0) {
+      if (!operation.customerId) throw new Error('Selecione um cliente cadastrado para utilizar crédito de troca/devolução.');
+      const walletSummary=getCustomerWalletService(req.app).summary(operation.customerId);
+      if (Number(walletSummary.balance||0)+0.009 < walletPaymentTotal) {
+        const error=new Error(`Crédito do cliente insuficiente. Disponível: ${Number(walletSummary.balance||0).toLocaleString('pt-BR',{style:'currency',currency:'BRL'})}.`);
+        error.code='CUSTOMER_WALLET_INSUFFICIENT';throw error;
+      }
+    }
     if (receivablePlan.length) {
       const customer = getCustomerService(req.app).getCustomer(operation.customerId);
       const creditLimit = Number(customer?.creditLimit || 0);
@@ -2077,13 +2496,17 @@ router.post('/pdv/operacoes/:id/finalizar', (req, res) => {
     }
 
     const generatedReceivables = receivables.createFromOperation(operation, userName(req));
+    if (walletPaymentTotal > 0) {
+      walletPaymentEntry=getCustomerWalletService(req.app).create(operation.customerId,{direction:'debit',value:walletPaymentTotal,type:'sale_payment',reason:`Crédito utilizado na ${operation.type === 'service_order' ? 'O.S.' : 'Venda'} #${operation.number}`,referenceType:'operation',referenceId:operation.id},userName(req));
+    }
     commerce.markOperationPosted(operation.id, {
       // Persiste eventuais correções de identidade de estoque feitas acima.
       // Assim um futuro estorno devolve para o mesmo item físico utilizado na venda.
       items: operation.items,
       inventoryPostedAt: new Date().toISOString(),
       cashPostedAt: new Date().toISOString(),
-      receivableIds:generatedReceivables.map(item=>item.id)
+      receivableIds:generatedReceivables.map(item=>item.id),
+      walletEntryIds:walletPaymentEntry?[walletPaymentEntry.id]:[]
     }, userName(req));
     const finalized = commerce.finalizeOperation(operation.id, userName(req));
     if(finalized.coupon?.id) getCouponService(req.app).markUsed(finalized.coupon.id, finalized.id, userName(req));
@@ -2626,6 +3049,20 @@ router.post('/estoque/movimentar', (req, res) => {
 
 
 
+router.get('/precificacao', (req,res) => {
+  try {
+    const service=getPricingService(req.app);
+    const data=service.overview({q:req.query.q||'',categoryId:req.query.categoryId||''});
+    return res.render('precificacao',{version:'1.0.0',flash:req.query.flash||null,filters:{q:req.query.q||'',categoryId:req.query.categoryId||''},...data});
+  } catch(error) { return res.status(500).send(error.message||'Não foi possível abrir a precificação.'); }
+});
+router.post('/api/precificacao/global',(req,res)=>{try{return res.json({success:true,message:'Regra geral de precificação atualizada.',item:getPricingService(req.app).saveGlobal(req.body||{},userName(req))});}catch(error){return res.status(400).json({success:false,message:error.message});}});
+router.post('/api/precificacao/categorias/:id',(req,res)=>{try{return res.json({success:true,message:'Margem padrão da categoria atualizada.',item:getPricingService(req.app).saveCategory(req.params.id,req.body?.marginPercent,userName(req))});}catch(error){return res.status(400).json({success:false,message:error.message});}});
+router.post('/api/precificacao/produtos/bulk',(req,res)=>{try{return res.json({success:true,message:'Margem dos produtos atualizada.',...getPricingService(req.app).setProductMargins(req.body?.productIds||[],req.body?.marginPercent,userName(req))});}catch(error){return res.status(400).json({success:false,message:error.message});}});
+router.post('/api/precificacao/produtos/:id',(req,res)=>{try{return res.json({success:true,message:'Margem própria do produto atualizada.',...getPricingService(req.app).setProductMargins([req.params.id],req.body?.marginPercent,userName(req))});}catch(error){return res.status(400).json({success:false,message:error.message});}});
+router.post('/api/precificacao/variacoes',(req,res)=>{try{return res.json({success:true,message:'Margem própria da variação atualizada.',item:getPricingService(req.app).setVariationMargin(req.body?.productId,req.body?.inventoryItemId,req.body?.marginPercent,userName(req))});}catch(error){return res.status(400).json({success:false,message:error.message});}});
+router.post('/api/precificacao/aplicar',(req,res)=>{try{return res.json({success:true,message:'Preços sugeridos aplicados.',...getPricingService(req.app).applySuggested(req.body?.keys||[],userName(req))});}catch(error){return res.status(400).json({success:false,message:error.message});}});
+
 router.get('/compras', (req, res) => {
   const service = getPurchaseService(req.app);
   try {
@@ -2643,7 +3080,7 @@ router.get('/compras', (req, res) => {
     .filter(item => item.type !== 'service');
   return res.render('compras', {
     version:'0.19.6', flash:req.query.flash || null, purchases, suppliers,
-    products:service.productCatalog().filter(item=>item.active), erpCategories, catalogs:finance.catalogs,
+    products:service.productCatalog().filter(item=>item.active), erpCategories, catalogs:finance.catalogs, pricingRules:getPricingService(req.app).rules(),
     cashboxes, defaultCashboxId:cashboxes.find(item=>item.isOpen)?.id || cashboxes[0]?.id || 'caixa-principal'
   });
 });
@@ -2695,6 +3132,108 @@ router.get('/financeiro', (req, res) => {
 
 
 
+
+router.get('/relatorios', (req,res) => {
+  const defaults=getReportService(req.app).defaultFilters();
+  return res.render('relatorios', { flash:req.query.flash || null, reportDefaults:defaults });
+});
+
+router.get('/api/relatorios/:view', (req,res) => {
+  try {
+    res.set('Cache-Control','no-store');
+    return res.json({ success:true, ...getReportService(req.app).query(req.params.view, req.query || {}) });
+  } catch (error) {
+    return res.status(400).json({ success:false, message:error.message || 'Não foi possível gerar o relatório.' });
+  }
+});
+
+router.get('/metas-comissoes', (req,res) => {
+  const service=getCommissionService(req.app);
+  const periodicity=req.query.periodicidade==='weekly'?'weekly':'monthly';
+  const periodKey=service.normalizePeriodKey(periodicity,req.query.periodo||'');
+  const finance=getFinanceService(req.app);
+  let stores=[];
+  let paymentMethods=[];
+  try { stores=finance.listCatalog('stores',{includeInactive:false}).filter(item=>item.active!==false); } catch(error) { console.warn('Metas/Comissões: lojas financeiras indisponíveis:',error?.message||error); }
+  try { paymentMethods=finance.listCatalog('paymentMethods',{includeInactive:false}).filter(item=>item.active!==false && (item.modules?.finance!==false || item.modules?.purchases!==false)); } catch(error) { console.warn('Metas/Comissões: formas de pagamento indisponíveis:',error?.message||error); }
+  if(!stores.length) stores=[{id:'STORE-MAIN',name:'Loja principal',active:true}];
+  const categories=getErpCategoryService(req.app).list({includeInactive:false});
+  return res.render('metas_comissoes',{flash:req.query.flash||null,boot:{periodicity,periodKey,stores,paymentMethods,categories}});
+});
+
+router.get('/api/metas-comissoes/config', (req,res) => {
+  try {
+    const service=getCommissionService(req.app);
+    const periodicity=req.query.periodicity==='weekly'?'weekly':'monthly';
+    const periodKey=service.normalizePeriodKey(periodicity,req.query.periodKey||'');
+    const storeId=String(req.query.storeId||'STORE-MAIN');
+    const result=service.config({periodicity,periodKey,storeId});
+    const canManage=!req.app.locals.authService || req.app.locals.authService.can(req.user,'commissions.manage');
+    if(!canManage && req.user?.id){
+      result.users=(result.users||[]).filter(user=>String(user.id)===String(req.user.id));
+      result.rules=(result.rules||[]).filter(rule=>String(rule.userId)===String(req.user.id));
+      if(result.goals?.userGoals) result.goals.userGoals=Object.fromEntries(Object.entries(result.goals.userGoals||{}).filter(([userId])=>String(userId)===String(req.user.id)));
+      result.settlements=(result.settlements||[]).filter(row=>String(row.userId)===String(req.user.id));
+      result.readOnly=true;
+    }
+    return res.json({success:true,...result});
+  } catch(error) { return res.status(400).json({success:false,message:error.message||'Não foi possível carregar metas e comissões.'}); }
+});
+
+router.get('/api/metas-comissoes/summary', (req,res) => {
+  try {
+    const service=getCommissionService(req.app);
+    const periodicity=req.query.periodicity==='weekly'?'weekly':'monthly';
+    const periodKey=service.normalizePeriodKey(periodicity,req.query.periodKey||'');
+    const storeId=String(req.query.storeId||'STORE-MAIN');
+    const result=service.summary({periodicity,periodKey,storeId});
+    const canManage=!req.app.locals.authService || req.app.locals.authService.can(req.user,'commissions.manage');
+    if(!canManage && req.user?.id){
+      result.rows=(result.rows||[]).filter(row=>String(row.user?.id||row.userId||'')===String(req.user.id));
+      result.totals={sellers:result.rows.length,commission:result.rows.reduce((sum,row)=>sum+Number(row.commission||row.totals?.commission||0),0),closed:result.rows.filter(row=>row.settlement).length,posted:result.rows.filter(row=>row.settlement?.status==='posted').length};
+      result.readOnly=true;
+    }
+    return res.json({success:true,...result});
+  } catch(error) { return res.status(400).json({success:false,message:error.message||'Não foi possível apurar as comissões.'}); }
+});
+
+router.get('/api/metas-comissoes/users/:userId', (req,res) => {
+  try {
+    const service=getCommissionService(req.app);
+    const canManage=!req.app.locals.authService || req.app.locals.authService.can(req.user,'commissions.manage');
+    if(!canManage && String(req.user?.id||'')!==String(req.params.userId)) return res.status(403).json({success:false,message:'Você só pode consultar a própria apuração de comissão.'});
+    const rule=service.getRule(req.params.userId);
+    const periodicity=req.query.periodicity==='weekly'?'weekly':(req.query.periodicity||rule.periodicity||'monthly');
+    const periodKey=service.normalizePeriodKey(periodicity,req.query.periodKey||'');
+    const storeId=String(req.query.storeId||rule.storeId||'STORE-MAIN');
+    return res.json({success:true,calculation:service.calculation({userId:req.params.userId,periodicity,periodKey,storeId})});
+  } catch(error) { return res.status(400).json({success:false,message:error.message||'Não foi possível detalhar a comissão.'}); }
+});
+
+router.post('/api/metas-comissoes/goals', (req,res) => {
+  try { const result=getCommissionService(req.app).saveGoals(req.body||{},userName(req)); return res.json({success:true,message:'Metas salvas com sucesso.',...result}); }
+  catch(error) { return res.status(400).json({success:false,message:error.message||'Não foi possível salvar as metas.'}); }
+});
+
+router.post('/api/metas-comissoes/rules/:userId', (req,res) => {
+  try { const rule=getCommissionService(req.app).saveRule(req.params.userId,req.body||{},userName(req)); return res.json({success:true,message:'Regra de comissão salva.',rule}); }
+  catch(error) { return res.status(400).json({success:false,message:error.message||'Não foi possível salvar a regra.'}); }
+});
+
+router.post('/api/metas-comissoes/settlements/close', (req,res) => {
+  try { const settlement=getCommissionService(req.app).closeSettlement(req.body||{},userName(req)); return res.json({success:true,message:'Apuração fechada. As regras e valores deste período foram congelados.',settlement}); }
+  catch(error) { return res.status(400).json({success:false,message:error.message||'Não foi possível fechar a apuração.'}); }
+});
+
+router.post('/api/metas-comissoes/settlements/:id/reopen', (req,res) => {
+  try { const result=getCommissionService(req.app).reopenSettlement(req.params.id,userName(req)); return res.json({success:true,message:'Apuração reaberta. Ela voltará a usar as regras atuais.',result}); }
+  catch(error) { return res.status(400).json({success:false,message:error.message||'Não foi possível reabrir a apuração.'}); }
+});
+
+router.post('/api/metas-comissoes/settlements/:id/finance', (req,res) => {
+  try { const result=getCommissionService(req.app).postToFinance(req.params.id,req.body||{},userName(req)); return res.json({success:true,message:result.duplicated?'Esta comissão já estava lançada no Financeiro.':'Comissão lançada em Contas a Pagar.',...result}); }
+  catch(error) { return res.status(400).json({success:false,message:error.message||'Não foi possível lançar a comissão no Financeiro.'}); }
+});
 
 router.get('/financeiro/dre', (req,res) => {
   const service=getDreService(req.app); const result=service.query(req.query||{}); const catalogs=service.catalogs();
@@ -2916,6 +3455,8 @@ router.get('/modulo/:key', (req, res) => {
   if (module.key === 'fluxo-caixa') return res.redirect('/erp/financeiro/fluxo-de-caixa');
   if (module.key === 'dre') return res.redirect('/erp/financeiro/dre');
   if (module.key === 'compras') return res.redirect('/erp/compras');
+  if (module.key === 'relatorios') return res.redirect('/erp/relatorios');
+  if (module.key === 'metas-comissoes') return res.redirect('/erp/metas-comissoes');
   res.render('erp_module_foundation', { flash: null, module });
 });
 

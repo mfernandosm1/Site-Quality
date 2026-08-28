@@ -2,6 +2,400 @@
   "version": "0.16.0",
   "items": [
     {
+      "id": "AUD-94a0c449-dbef-4f5a-8061-7c791fa04d3f",
+      "action": "payable_payment_posted",
+      "at": "2026-08-28T00:19:37.795Z",
+      "payablePaymentId": "PYP-28346079-3b23-4003-b479-327161995249",
+      "payableId": "PAY-30a3b168-023c-4f49-b714-07db143fba8c",
+      "entryId": "FEN-aad2c933-e262-479b-ac20-ed54ac0405db",
+      "movementIds": [
+        "FMV-a1d1d2fb-16f3-4398-a8cc-e459323ba5a1"
+      ],
+      "actor": "Matheus Fernando"
+    },
+    {
+      "id": "AUD-949dcb68-f9b6-4a5e-9f81-2c2e2374181a",
+      "action": "payable_payment_posted",
+      "at": "2026-08-27T17:52:32.816Z",
+      "payablePaymentId": "PYP-1de8becf-7a04-4bdf-85d9-256e23fef09d",
+      "payableId": "PAY-e5bb959b-604e-4c01-9832-97a1a7d02ae8",
+      "entryId": "FEN-ced78a95-2988-475e-be62-8635b61d01a3",
+      "movementIds": [
+        "FMV-86689b5d-8069-4f09-b5ad-c6ffc5d8eedf"
+      ],
+      "actor": "Matheus Fernando"
+    },
+    {
+      "id": "AUD-6b964a9d-1976-409f-bb37-8e76ab4a88db",
+      "action": "payable_payment_posted",
+      "at": "2026-08-27T17:52:32.765Z",
+      "payablePaymentId": "PYP-1758ca37-b15b-41b9-bcaa-6187919c70cb",
+      "payableId": "PAY-e5bb959b-604e-4c01-9832-97a1a7d02ae8",
+      "entryId": "FEN-bff0b253-6331-470c-a9c9-3237a2cd3f7c",
+      "movementIds": [
+        "FMV-baef7438-ed19-4933-bc2b-843a3f95fbd4"
+      ],
+      "actor": "Matheus Fernando"
+    },
+    {
+      "id": "AUD-e7a11bf9-aeb8-4ee3-9cf9-038ef97d1c10",
+      "action": "payable_payment_posted",
+      "at": "2026-08-27T12:37:52.417Z",
+      "payablePaymentId": "PYP-034db71b-1e36-4d48-88db-d1284bdf6354",
+      "payableId": "PAY-70cb0965-cb5b-49b9-8848-228d9cefa5bf",
+      "entryId": "FEN-51b93b95-925a-44ec-89cf-d20e55372d0a",
+      "movementIds": [
+        "FMV-7d11b314-5d85-476b-a470-6ea9ea0e5915"
+      ],
+      "actor": "Matheus Fernando"
+    },
+    {
+      "id": "AUD-19a4394b-f6e0-4dda-bd11-ef5a12065e8a",
+      "action": "receivable_receipt_posted",
+      "at": "2026-08-26T19:53:50.789Z",
+      "receiptId": "RCP-b5840109-4a24-42de-837f-7959e89d9526",
+      "receivableId": "REC-3a8e309a-6b55-4067-af42-51bee70e8286",
+      "entryId": "FEN-b94ee2c8-dfd2-4ca3-8a9c-b99004227b4e",
+      "movementIds": [
+        "FMV-b783ec78-9e42-4d13-a605-bd452ef8a4f1"
+      ],
+      "actor": "painel"
+    },
+    {
+      "id": "AUD-5a155735-dba6-4036-a481-8fc2d3299d39",
+      "action": "catalog_saved",
+      "at": "2026-08-25T16:52:41.167Z",
+      "catalog": "paymentMethods",
+      "itemId": "PAY-80aa64db-9fbf-404e-91cc-5a788c4b2880",
+      "actor": "painel",
+      "after": {
+        "id": "PAY-80aa64db-9fbf-404e-91cc-5a788c4b2880",
+        "name": "Pix outros",
+        "code": "",
+        "active": true,
+        "salesPaid": true,
+        "purchasePaid": false,
+        "creditCashOnSale": true,
+        "debitCashOnPurchase": true,
+        "allowInstallments": false,
+        "passInterestToCustomer": false,
+        "changeAllowed": false,
+        "generatesReceivable": false,
+        "requireIdentifiedCustomer": false,
+        "requireValidDocument": false,
+        "requireCreditReceipt": false,
+        "maxInstallments": 1,
+        "minimumInstallmentValue": 0,
+        "settlementDays": 0,
+        "feePercent": 0,
+        "monthlyInterestPercent": 0,
+        "firstDueDays": 0,
+        "installmentIntervalDays": 30,
+        "lateGraceDays": 0,
+        "lateFineFixed": 0,
+        "lateFinePercent": 0,
+        "lateInterestPercent": 0,
+        "lateAdministrativeFeePercent": 0,
+        "lateInterestPeriod": "daily",
+        "lateInterestType": "simple",
+        "nfcePaymentCode": "0",
+        "fiscalType": "other",
+        "acquirerCode": "0",
+        "cardBrandRequired": false,
+        "modules": {
+          "sales": true,
+          "purchases": true,
+          "pdv": true,
+          "serviceOrders": false,
+          "finance": false
+        },
+        "parentId": null,
+        "updatedAt": "2026-08-25T16:52:41.165Z",
+        "updatedBy": "painel",
+        "createdAt": "2026-08-18T01:00:27.837Z",
+        "createdBy": "painel",
+        "autoSettle": true,
+        "installmentRates": [],
+        "eventType": "cash"
+      }
+    },
+    {
+      "id": "AUD-47e27cb8-8773-426d-847e-4d32197301fd",
+      "action": "receivable_receipt_posted",
+      "at": "2026-08-25T16:52:15.173Z",
+      "receiptId": "RCP-8533827d-3cd2-4a95-835c-2acadaabf6c4",
+      "receivableId": "REC-ae9bd17c-6eda-4463-81c8-5211d54341a5",
+      "entryId": "FEN-f099b8f6-2199-48e3-a931-d7a3fb806e41",
+      "movementIds": [
+        "FMV-140f30cf-9438-45e5-b818-9ee43e3d2558"
+      ],
+      "actor": "painel"
+    },
+    {
+      "id": "AUD-09a2fd5d-3bdc-42a4-8c53-f1e44d0bd4c6",
+      "action": "payable_payment_posted",
+      "at": "2026-08-25T10:09:39.687Z",
+      "payablePaymentId": "PYP-c4d28470-3da9-4f9a-a7aa-7e6a8533fe9f",
+      "payableId": "PAY-7eeebb45-41f4-4288-ab1e-e533af80ce53",
+      "entryId": "FEN-ec085abb-9293-4b66-96b2-5d73a434934a",
+      "movementIds": [
+        "FMV-b7719ab1-9150-486a-93bb-6ed5d082e168"
+      ],
+      "actor": "painel"
+    },
+    {
+      "id": "AUD-bd852616-b6b3-4d7f-8e5e-253c3b57bae3",
+      "action": "payable_payment_posted",
+      "at": "2026-08-24T18:31:03.937Z",
+      "payablePaymentId": "PYP-a021f089-f168-45de-810c-e77ecf44fd8a",
+      "payableId": "PAY-534fe8bd-7d8e-4764-8695-b2ce1f737e3a",
+      "entryId": "FEN-4eb34f33-1ef8-49f5-8356-62b4dc651c34",
+      "movementIds": [
+        "FMV-0a989e05-dbfb-4b7f-b00f-7c22a015e8d6"
+      ],
+      "actor": "painel"
+    },
+    {
+      "id": "AUD-8f04b388-a45f-4aca-b577-e2e51584e456",
+      "action": "payable_payment_posted",
+      "at": "2026-08-24T18:30:12.318Z",
+      "payablePaymentId": "PYP-182802e8-cb34-4b44-ac29-6f136c8fabfa",
+      "payableId": "PAY-ed55b6db-7af9-4cf6-9b31-090938034913",
+      "entryId": "FEN-daf62082-6632-4872-9a71-95a486e2ec07",
+      "movementIds": [
+        "FMV-a678789b-c454-4af1-80b7-ac8dd1943457"
+      ],
+      "actor": "painel"
+    },
+    {
+      "id": "AUD-f79fbe75-9a8b-4819-a819-dc9d9fb329ce",
+      "action": "payable_payment_posted",
+      "at": "2026-08-24T18:30:12.263Z",
+      "payablePaymentId": "PYP-56c89c9b-dfcc-4943-983d-abc84cd4241d",
+      "payableId": "PAY-68507f3d-18c9-4d72-9fbd-c71aafada6f4",
+      "entryId": "FEN-bf3ee931-c18b-49c1-9967-9a96beed5d14",
+      "movementIds": [
+        "FMV-ecaf7341-e110-46e3-87f0-186a1142b092"
+      ],
+      "actor": "painel"
+    },
+    {
+      "id": "AUD-3b8019f0-7733-4b23-81c9-cc1dbdf15b82",
+      "action": "payable_payment_posted",
+      "at": "2026-08-24T18:30:12.224Z",
+      "payablePaymentId": "PYP-453700f3-d895-4236-a77b-68f3e54c2594",
+      "payableId": "PAY-a761afbf-e5b8-403f-bd8f-758439242673",
+      "entryId": "FEN-f63ca87b-611c-49cc-89a1-004b751b7b4b",
+      "movementIds": [
+        "FMV-50ec2b3a-cc03-4fc7-b0ae-509c14dd47c4"
+      ],
+      "actor": "painel"
+    },
+    {
+      "id": "AUD-9c994bd7-28cf-43e7-91a7-f36f9ab9c9cf",
+      "action": "payable_payment_posted",
+      "at": "2026-08-24T18:30:12.182Z",
+      "payablePaymentId": "PYP-e9eb54aa-8034-416b-aa75-2d64fe77cc07",
+      "payableId": "PAY-93cdb9e4-788e-4231-9810-2c54643aa593",
+      "entryId": "FEN-90b3080a-d74a-4ef1-aed1-44023b29f7c2",
+      "movementIds": [
+        "FMV-bdf53452-2a48-4daa-b1f9-15646af221ab"
+      ],
+      "actor": "painel"
+    },
+    {
+      "id": "AUD-b488a016-98a0-401f-8054-1c2107587311",
+      "action": "payable_payment_posted",
+      "at": "2026-08-24T18:30:12.142Z",
+      "payablePaymentId": "PYP-aa16fe75-c88d-4d20-bddb-ebc8bc750c86",
+      "payableId": "PAY-03d07338-3c67-4dc2-bdf8-372a13402682",
+      "entryId": "FEN-b60c2f3c-c805-4b7d-9253-276fda62a265",
+      "movementIds": [
+        "FMV-eff0382e-7327-4741-9b36-b6175f4fda61"
+      ],
+      "actor": "painel"
+    },
+    {
+      "id": "AUD-024496e4-88e4-4d12-8802-a8a1622780c7",
+      "action": "payable_payment_posted",
+      "at": "2026-08-24T18:30:12.102Z",
+      "payablePaymentId": "PYP-91004db9-982a-443b-89f5-4abfd08a4223",
+      "payableId": "PAY-091696ab-4062-41ec-84fb-ddd35617b2ea",
+      "entryId": "FEN-2c9c6d89-54f6-4e29-9ad0-34654a67f2e1",
+      "movementIds": [
+        "FMV-1affda01-6374-4ea3-8763-51c751498ef0"
+      ],
+      "actor": "painel"
+    },
+    {
+      "id": "AUD-1e5346cf-0ea2-474a-a08b-9adb998e9f99",
+      "action": "payable_payment_posted",
+      "at": "2026-08-24T18:30:12.054Z",
+      "payablePaymentId": "PYP-ba5d2368-ebc3-498c-bb22-54e3baaedda7",
+      "payableId": "PAY-398fe73f-c697-4a33-ba44-625f56d25d37",
+      "entryId": "FEN-fd3dc67f-89d6-4f6b-b798-784b3b52ddb4",
+      "movementIds": [
+        "FMV-9c1d358a-79cc-4c80-bc77-41571b9b2924"
+      ],
+      "actor": "painel"
+    },
+    {
+      "id": "AUD-368829ba-f9b1-44a3-b294-85390d16243f",
+      "action": "payable_payment_posted",
+      "at": "2026-08-24T18:30:12.007Z",
+      "payablePaymentId": "PYP-0205b0b1-5734-443a-b106-ebe1a3ec3053",
+      "payableId": "PAY-4867b108-ff79-4361-a47d-7505bab35f3e",
+      "entryId": "FEN-562e67f3-7fdd-472b-b286-07dd714807f0",
+      "movementIds": [
+        "FMV-32a93285-a104-49e0-a925-07e4459af231"
+      ],
+      "actor": "painel"
+    },
+    {
+      "id": "AUD-bea9f595-584a-4a8f-9d02-86a8dd0c40c5",
+      "action": "payable_payment_posted",
+      "at": "2026-08-24T18:30:11.967Z",
+      "payablePaymentId": "PYP-e895c5d7-3fab-4b45-8bf3-c297ad7ccd8d",
+      "payableId": "PAY-a0d6de7c-b9c4-45d6-8997-e631615e9ec7",
+      "entryId": "FEN-a692bc10-3490-4ebe-bb65-6f7198a3485e",
+      "movementIds": [
+        "FMV-acfcf13f-414c-4265-91a0-752e45db7d32"
+      ],
+      "actor": "painel"
+    },
+    {
+      "id": "AUD-13db53a9-2901-495a-b7cf-eaf84a0e20c3",
+      "action": "payable_payment_posted",
+      "at": "2026-08-24T18:30:11.926Z",
+      "payablePaymentId": "PYP-62aec81b-52b3-4692-8279-60c70357e5d5",
+      "payableId": "PAY-636d0c60-637e-48ff-aacf-5be61229ab5c",
+      "entryId": "FEN-805a2de7-aadc-460c-ab9e-178d27b30dcf",
+      "movementIds": [
+        "FMV-ec35ce46-c1ee-4924-9fa0-56626f0f87ff"
+      ],
+      "actor": "painel"
+    },
+    {
+      "id": "AUD-35227caf-a596-48c0-9025-3a6cf0589032",
+      "action": "payable_payment_posted",
+      "at": "2026-08-24T18:30:11.885Z",
+      "payablePaymentId": "PYP-57ab086a-d90d-41db-858a-ed0d76d61abf",
+      "payableId": "PAY-78e63f92-9b47-4c9b-a202-9c5ff119ef8f",
+      "entryId": "FEN-dbbca2f9-e8b4-4008-ba81-5da32907fc4d",
+      "movementIds": [
+        "FMV-5ba07f5a-f0f3-4a5b-8016-1bcc6054a924"
+      ],
+      "actor": "painel"
+    },
+    {
+      "id": "AUD-1c8c37f3-c503-4bba-9836-41b8142e7d2e",
+      "action": "payable_payment_posted",
+      "at": "2026-08-24T18:30:11.847Z",
+      "payablePaymentId": "PYP-e011da37-14bd-4e4d-aee0-e7fb217adee1",
+      "payableId": "PAY-e2e4c759-dc7b-46f0-8c5d-0b4ef2ed5dfc",
+      "entryId": "FEN-a33cbe8f-a14d-4763-8da4-adc93278d5cc",
+      "movementIds": [
+        "FMV-eef72a2e-f66c-4715-964f-a0da46c6b867"
+      ],
+      "actor": "painel"
+    },
+    {
+      "id": "AUD-6a8df160-5b76-4495-a296-9ca2d060684b",
+      "action": "payable_payment_posted",
+      "at": "2026-08-24T18:30:11.807Z",
+      "payablePaymentId": "PYP-82f94d5f-cbe2-4eda-8704-ec02fe0ee32f",
+      "payableId": "PAY-ab4d67ff-8bd6-4606-a6fd-7ff01bab1059",
+      "entryId": "FEN-8888193f-a488-4b27-8dfd-78d53e6d99ea",
+      "movementIds": [
+        "FMV-88c8fd2c-3e5a-4743-bf38-5e5b36d0e3c2"
+      ],
+      "actor": "painel"
+    },
+    {
+      "id": "AUD-387515ae-a96c-4793-9b3c-665ed69eae5b",
+      "action": "payable_payment_posted",
+      "at": "2026-08-24T18:30:11.766Z",
+      "payablePaymentId": "PYP-b4205843-a240-4153-84a4-677d4897db4c",
+      "payableId": "PAY-c08614cc-8754-4f8c-9398-f3e39e0652e1",
+      "entryId": "FEN-53c1e76f-83c8-4a0e-923b-b0d843a4c5f9",
+      "movementIds": [
+        "FMV-9a5d2efc-d761-478c-864b-50e5b26e127d"
+      ],
+      "actor": "painel"
+    },
+    {
+      "id": "AUD-bdc256be-2251-4865-9b0d-6b51e34f76ba",
+      "action": "payable_payment_posted",
+      "at": "2026-08-24T18:30:11.725Z",
+      "payablePaymentId": "PYP-c07b932b-6138-4a97-bcd0-a70c9af76e99",
+      "payableId": "PAY-1b206d1e-1625-4433-a1bb-2c2fadcdca0d",
+      "entryId": "FEN-0b5a805a-42ef-4b35-b929-f8252104779c",
+      "movementIds": [
+        "FMV-6359b926-85a4-4b1e-9f68-5fa7fb58fe13"
+      ],
+      "actor": "painel"
+    },
+    {
+      "id": "AUD-12ebc5b2-785d-4179-9730-28bac618f59e",
+      "action": "payable_payment_posted",
+      "at": "2026-08-24T18:30:11.684Z",
+      "payablePaymentId": "PYP-a901547e-2589-43c5-a301-373f1a1a3947",
+      "payableId": "PAY-dc0abed3-b66d-48fd-9764-9e280b1ffcb0",
+      "entryId": "FEN-489870ab-a716-4cbe-85c8-8dc24ddb8296",
+      "movementIds": [
+        "FMV-8b5c038b-b7d2-474e-a5ec-b486163650ad"
+      ],
+      "actor": "painel"
+    },
+    {
+      "id": "AUD-be65dabb-6725-4e1f-a7d9-ddc4e2a3ac1e",
+      "action": "payable_payment_posted",
+      "at": "2026-08-24T18:30:11.644Z",
+      "payablePaymentId": "PYP-059776d8-f6a3-403a-b6dc-1afc144bbf55",
+      "payableId": "PAY-150a37cf-4799-4d1b-b19e-e93626f937db",
+      "entryId": "FEN-7f3e209a-4804-4cba-b758-385ad111e065",
+      "movementIds": [
+        "FMV-9bbdf0f8-7aef-4131-9d57-da349a1a671c"
+      ],
+      "actor": "painel"
+    },
+    {
+      "id": "AUD-b999cb03-3ff7-46f8-a89c-fe51ff73a152",
+      "action": "payable_payment_posted",
+      "at": "2026-08-24T18:30:11.602Z",
+      "payablePaymentId": "PYP-78cc42f4-5729-4ad2-95e2-f0bcc19a0758",
+      "payableId": "PAY-c1abbba6-4baa-4ec2-9f3e-bd9d2aa069b4",
+      "entryId": "FEN-78f587d3-5c01-49b6-99cd-f51c2f0e981f",
+      "movementIds": [
+        "FMV-e55d9c51-2c60-459a-a599-498abb455d16"
+      ],
+      "actor": "painel"
+    },
+    {
+      "id": "AUD-3a0ca3ad-954d-4153-8c16-677727acb4eb",
+      "action": "payable_payment_posted",
+      "at": "2026-08-24T18:30:11.558Z",
+      "payablePaymentId": "PYP-d55aeaeb-3f2a-4dc9-b259-209264ec94b1",
+      "payableId": "PAY-17a36a1a-a96c-461d-b3ab-7ea70e3605d5",
+      "entryId": "FEN-1f9b97e5-e24f-4979-9134-c3c1fe9b31a2",
+      "movementIds": [
+        "FMV-33facdba-e547-4e84-87dc-d1a934fdecc8"
+      ],
+      "actor": "painel"
+    },
+    {
+      "id": "AUD-9c5f7c50-56a5-41e9-816a-86e945c44229",
+      "action": "payable_payment_posted",
+      "at": "2026-08-24T17:59:55.932Z",
+      "payablePaymentId": "PYP-64b3ab71-e6d7-4946-a428-50612c8c4792",
+      "payableId": "PAY-574cda04-3537-4f92-bee0-61e9c202ecb3",
+      "entryId": "FEN-1ec462c2-1853-45fd-b294-14fc7636b88a",
+      "movementIds": [
+        "FMV-d521f444-d4bd-46e8-8314-a12138e42699"
+      ],
+      "actor": "painel"
+    },
+    {
       "id": "AUD-a9c4eabf-1b54-49ac-9c49-efa3dfe876e7",
       "action": "payable_payment_posted",
       "at": "2026-08-23T23:34:04.598Z",

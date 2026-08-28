@@ -1,11 +1,17 @@
 <% layout('layout') -%>
 <section class="ops-hero compact">
   <div><span class="ops-kicker">CENTRO DO PAINEL</span><h1><%= area.icon %> <%= area.title %></h1><p><%= area.description %></p></div>
-  <a class="btn secondary" href="/">← Dashboard Geral</a>
+  <div class="area-hub-actions">
+    <% if(area.key==='site'){ %>
+      <% if(typeof can!=='function' || can('site.publish')){ %><form method="post" action="/publicar"><button class="btn primary" type="submit">📤 Publicar</button></form><% } %>
+      <a class="btn secondary" href="/site/view/index.html" target="_blank">👁️ Ver site</a>
+    <% } %>
+    <a class="btn secondary" href="/">← Dashboard Geral</a>
+  </div>
 </section>
 
 <div class="ops-area-grid">
-  <% area.items.forEach(function(item){ %>
+  <% area.items.forEach(function(item){ if(item.permission && typeof can==='function' && !can(item.permission)) return; %>
     <% if(item.disabled){ %>
       <div class="ops-link-card disabled"><span class="ops-link-icon"><%= item.icon %></span><div><h3><%= item.name %></h3><p><%= item.description %></p><span class="ops-badge planned">Planejado</span></div></div>
     <% } else { %>
@@ -15,5 +21,6 @@
 </div>
 
 <style>
+.area-hub-actions{display:flex;align-items:center;gap:8px;flex-wrap:wrap;justify-content:flex-end}.area-hub-actions form{margin:0}
 .ops-info-tip{position:relative;display:inline-grid;place-items:center;width:17px;height:17px;border-radius:999px;border:1px solid currentColor;font-size:10px;font-weight:900;opacity:.72;cursor:help}.ops-info-tip>span{position:absolute;z-index:20;left:0;top:calc(100% + 7px);width:270px;max-width:70vw;padding:8px 10px;border-radius:9px;background:#111827;color:#fff;font-size:11px;font-weight:600;line-height:1.4;box-shadow:0 10px 24px rgba(0,0,0,.25);opacity:0;visibility:hidden;transform:translateY(-3px);transition:.12s;pointer-events:none}.ops-info-tip:hover>span,.ops-info-tip:focus>span{opacity:1;visibility:visible;transform:none}
 </style>

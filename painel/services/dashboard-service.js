@@ -167,8 +167,8 @@ export default class DashboardService {
     const openStockCounts = stockCounts.filter(item => item.status === 'in_progress');
 
     const attention = [];
-    if (overduePayables.length) attention.push({ level:'danger', icon:'!', label:`${overduePayables.length} conta${overduePayables.length === 1 ? '' : 's'} a pagar vencida${overduePayables.length === 1 ? '' : 's'}`, href:'/erp/financeiro/contas-a-pagar?rapido=vencidas' });
-    if (dueTodayPayables.length) attention.push({ level:'warning', icon:'!', label:`${dueTodayPayables.length} conta${dueTodayPayables.length === 1 ? '' : 's'} vence${dueTodayPayables.length === 1 ? '' : 'm'} hoje`, href:'/erp/financeiro/contas-a-pagar?rapido=hoje' });
+    if (overduePayables.length) attention.push({ level:'danger', kind:'payable_overdue', icon:'!', label:`${overduePayables.length} conta${overduePayables.length === 1 ? '' : 's'} a pagar vencida${overduePayables.length === 1 ? '' : 's'}`, href:'/erp/financeiro/contas-a-pagar?rapido=vencidas' });
+    if (dueTodayPayables.length) attention.push({ level:'warning', kind:'payable_due_today', icon:'!', label:`${dueTodayPayables.length} conta${dueTodayPayables.length === 1 ? '' : 's'} vence${dueTodayPayables.length === 1 ? '' : 'm'} hoje`, href:'/erp/financeiro/contas-a-pagar?rapido=hoje' });
     if (upcomingPayables.length) attention.push({ level:'warning', icon:'!', label:upcomingPayables.length === 1?'1 conta a pagar vence nos próximos 2 dias':`${upcomingPayables.length} contas a pagar vencem nos próximos 2 dias`, href:`/erp/financeiro/contas-a-pagar?dueFrom=${encodeURIComponent(addDays(today,1))}&dueTo=${encodeURIComponent(upcomingPayableLimit)}` });
     if (openStockCounts.length) attention.push({ level:'warning', icon:'📋', label:`${openStockCounts.length} ${openStockCounts.length === 1 ? 'contagem' : 'contagens'} de estoque em andamento`, href:'/erp/estoque/contagens' });
     if (overdueReceivables.length) attention.push({ level:'danger', icon:'!', label:`${overdueReceivables.length} recebimento${overdueReceivables.length === 1 ? '' : 's'} em atraso`, href:'/erp/financeiro/contas-a-receber?rapido=vencidas' });

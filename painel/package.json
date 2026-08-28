@@ -4,7 +4,8 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "start": "node server.js"
+    "start": "node server.js",
+    "whatsapp:test-isolado": "node scripts/whatsapp-isolated-pairing.js"
   },
   "dependencies": {
     "archiver": "^5.3.2",

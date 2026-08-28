@@ -2,6 +2,1112 @@
   "version": "0.18.0",
   "items": [
     {
+      "id": "PEV-7c3fbd53-f725-40e4-b545-9f265db4a6b1",
+      "payableId": "PAY-30a3b168-023c-4f49-b714-07db143fba8c",
+      "action": "paid",
+      "at": "2026-08-28T00:19:37.810Z",
+      "actor": "Matheus Fernando",
+      "paymentId": "PYP-28346079-3b23-4003-b479-327161995249",
+      "installmentId": "PIN-fd7ac40a-91b6-4a35-934d-1a1948e10763",
+      "value": 110,
+      "principalValue": 110,
+      "balanceAfter": 0
+    },
+    {
+      "id": "PEV-c521425b-a123-49bf-bb95-6057626663e7",
+      "payableId": "PAY-30a3b168-023c-4f49-b714-07db143fba8c",
+      "action": "created",
+      "at": "2026-08-28T00:19:37.750Z",
+      "actor": "Matheus Fernando",
+      "value": 110,
+      "installmentCount": 1,
+      "competencies": [
+        "2026-08"
+      ],
+      "cashboxId": "caixa-principal",
+      "paymentPlan": [
+        {
+          "paymentMethodId": "PM-DINHEIRO",
+          "value": 110,
+          "installmentCount": 1,
+          "firstDueDate": "2026-08-27",
+          "installmentDueDates": []
+        }
+      ]
+    },
+    {
+      "id": "PEV-a4ae7fb3-72df-46b2-83fe-cac6061ce43b",
+      "payableId": "PAY-6cf9f2fd-cef3-4735-bf74-b35eccbba2f4",
+      "action": "cash_reconciled",
+      "at": "2026-08-27T23:34:15.595Z",
+      "actor": "Matheus Fernando",
+      "paymentId": "PYP-6789cd5e-7e58-4745-a274-e1fb1f87691e",
+      "cashMovementIds": [
+        "CXM-1785946592458-AQ6KV"
+      ]
+    },
+    {
+      "id": "PEV-0806a291-cf3b-4ce0-96c3-2ccaeebd46cb",
+      "payableId": "PAY-bf35c44a-c4a9-43ec-b678-06a0e572d34d",
+      "action": "cash_reconciled",
+      "at": "2026-08-27T23:34:15.590Z",
+      "actor": "Matheus Fernando",
+      "paymentId": "PYP-895755ef-111b-4f55-bc91-4c8e57a171e3",
+      "cashMovementIds": [
+        "CXM-1786144772683-5PO58"
+      ]
+    },
+    {
+      "id": "PEV-1647200d-a27d-401f-9d4e-6085ad64b0fc",
+      "payableId": "PAY-7eeebb45-41f4-4288-ab1e-e533af80ce53",
+      "action": "cash_reconciled",
+      "at": "2026-08-27T23:34:15.583Z",
+      "actor": "Matheus Fernando",
+      "paymentId": "PYP-89d9e825-c7a6-40c8-90c2-6ecdb1f095ab",
+      "cashMovementIds": [
+        "CXM-1786144876910-V2BQU"
+      ]
+    },
+    {
+      "id": "PEV-5e9d6b56-0c9c-4ceb-b71f-5953946d93e4",
+      "payableId": "PAY-1f39f125-1cd9-4023-b40e-dbe399671997",
+      "action": "cash_reconciled",
+      "at": "2026-08-27T23:34:15.578Z",
+      "actor": "Matheus Fernando",
+      "paymentId": "PYP-a442b144-78a1-4db7-8831-e5863d82a0f9",
+      "cashMovementIds": [
+        "CXM-1786365941500-QI8OE"
+      ]
+    },
+    {
+      "id": "PEV-32d4273f-dcb3-40f0-826b-c5d5acdc07a9",
+      "payableId": "PAY-00d391ab-9091-4b98-b835-ae4f3088a5db",
+      "action": "cash_reconciled",
+      "at": "2026-08-27T23:34:15.572Z",
+      "actor": "Matheus Fernando",
+      "paymentId": "PYP-b6c55d0f-d27d-4aac-b919-4419f9d0618f",
+      "cashMovementIds": [
+        "CXM-1786441372970-6IW51"
+      ]
+    },
+    {
+      "id": "PEV-44d03093-435b-4a2a-971d-385f104cb07f",
+      "payableId": "PAY-fccbbf1b-895f-4392-94d4-5d755ed77d02",
+      "action": "cash_reconciled",
+      "at": "2026-08-27T23:34:15.565Z",
+      "actor": "Matheus Fernando",
+      "paymentId": "PYP-ead5ea56-81a2-4af6-84ef-0ae49e9bb5d3",
+      "cashMovementIds": [
+        "CXM-1786479053455-G4DAC"
+      ]
+    },
+    {
+      "id": "PEV-069fc2f6-c723-4f26-b638-f5f7828c095d",
+      "payableId": "PAY-58191081-120f-4e6c-af2a-9913724698f4",
+      "action": "cash_reconciled",
+      "at": "2026-08-27T23:34:15.559Z",
+      "actor": "Matheus Fernando",
+      "paymentId": "PYP-774be9a3-0aa7-4942-8fd3-8617c8bbd37e",
+      "cashMovementIds": [
+        "CXM-1786479053532-FPXEV"
+      ]
+    },
+    {
+      "id": "PEV-fb02fd32-063f-4e4e-8cbe-39a56a74f7e1",
+      "payableId": "PAY-bf35c44a-c4a9-43ec-b678-06a0e572d34d",
+      "action": "cash_reconciled",
+      "at": "2026-08-27T23:34:15.553Z",
+      "actor": "Matheus Fernando",
+      "paymentId": "PYP-454069d1-1486-4b1b-a3fd-1c3bbcd23077",
+      "cashMovementIds": [
+        "CXM-1786497167375-2LDCN"
+      ]
+    },
+    {
+      "id": "PEV-4e2dd5f8-4af4-4584-adec-bafb403c4fcb",
+      "payableId": "PAY-91fec7c4-929c-4089-8328-0fae15bc544b",
+      "action": "cash_reconciled",
+      "at": "2026-08-27T23:34:15.546Z",
+      "actor": "Matheus Fernando",
+      "paymentId": "PYP-1565ac34-209e-4323-9cbb-a1870eb57425",
+      "cashMovementIds": [
+        "CXM-1786530830038-08TTO"
+      ]
+    },
+    {
+      "id": "PEV-8a1ca7b0-e410-4b8d-abdb-086c86468726",
+      "payableId": "PAY-ba09c58d-fc40-4f1c-93fd-756328f07e00",
+      "action": "cash_reconciled",
+      "at": "2026-08-27T23:34:15.541Z",
+      "actor": "Matheus Fernando",
+      "paymentId": "PYP-4e5d4bcf-d281-4713-9384-05afd0172232",
+      "cashMovementIds": [
+        "CXM-1786565300181-H3Q9K"
+      ]
+    },
+    {
+      "id": "PEV-802bbdf6-d57b-49c8-a591-dc1a5004d799",
+      "payableId": "PAY-36ff1bc1-e37c-4f78-a22e-973c1db277de",
+      "action": "cash_reconciled",
+      "at": "2026-08-27T23:34:15.535Z",
+      "actor": "Matheus Fernando",
+      "paymentId": "PYP-cc858e03-6934-404d-81f7-e7d96ee22d90",
+      "cashMovementIds": [
+        "CXM-1786566429318-VGWA1"
+      ]
+    },
+    {
+      "id": "PEV-b3d31c6d-5105-49cf-8232-6985bbfa4592",
+      "payableId": "PAY-36ff1bc1-e37c-4f78-a22e-973c1db277de",
+      "action": "cash_reconciled",
+      "at": "2026-08-27T23:34:15.530Z",
+      "actor": "Matheus Fernando",
+      "paymentId": "PYP-f7ecdda0-6114-4369-b57b-fdf09e4d6c41",
+      "cashMovementIds": [
+        "CXM-1786566429436-OLJ2L"
+      ]
+    },
+    {
+      "id": "PEV-6b40ce1e-1ac9-4457-89e0-d82e222ef088",
+      "payableId": "PAY-36ff1bc1-e37c-4f78-a22e-973c1db277de",
+      "action": "cash_reconciled",
+      "at": "2026-08-27T23:34:15.525Z",
+      "actor": "Matheus Fernando",
+      "paymentId": "PYP-b1ac2c29-8ee4-4b36-ac2c-85c507c8c728",
+      "cashMovementIds": [
+        "CXM-1786566429541-Z4ARD"
+      ]
+    },
+    {
+      "id": "PEV-0a2d3d45-c542-4c29-9704-078bb4504217",
+      "payableId": "PAY-d42a7e51-1e3b-4394-a2ff-7635db9fb93e",
+      "action": "cash_reconciled",
+      "at": "2026-08-27T23:34:15.519Z",
+      "actor": "Matheus Fernando",
+      "paymentId": "PYP-4410f997-7231-41c8-a523-de75bf3c191e",
+      "cashMovementIds": [
+        "CXM-1786669739513-V6JVX"
+      ]
+    },
+    {
+      "id": "PEV-69c11a1f-0f36-4b39-8723-02967ef73839",
+      "payableId": "PAY-918f5a20-a680-4ce5-81c9-05db218e68df",
+      "action": "cash_reconciled",
+      "at": "2026-08-27T23:34:15.513Z",
+      "actor": "Matheus Fernando",
+      "paymentId": "PYP-b116e764-45a8-4ed5-8640-e0c779397f1c",
+      "cashMovementIds": [
+        "CXM-1786964882814-7SRHI"
+      ]
+    },
+    {
+      "id": "PEV-319f5f35-4c42-465d-b41e-bfb27996e676",
+      "payableId": "PAY-36ff1bc1-e37c-4f78-a22e-973c1db277de",
+      "action": "cash_reconciled",
+      "at": "2026-08-27T23:34:15.508Z",
+      "actor": "Matheus Fernando",
+      "paymentId": "PYP-cadbe8e8-ee8f-4e98-9f63-2dafd0730345",
+      "cashMovementIds": [
+        "CXM-1787141872559-58ELL"
+      ]
+    },
+    {
+      "id": "PEV-77c548f6-c6e8-42f7-9373-c842c7235195",
+      "payableId": "PAY-c8383a87-c36a-4d25-bc6a-ecb272aa62c5",
+      "action": "cash_reconciled",
+      "at": "2026-08-27T23:34:15.502Z",
+      "actor": "Matheus Fernando",
+      "paymentId": "PYP-87c613ce-ea33-4e85-9717-5f8b6008422f",
+      "cashMovementIds": [
+        "CXM-1787141872643-F7ILX"
+      ]
+    },
+    {
+      "id": "PEV-6a4eedc1-9188-4cbf-a42d-139ae6de8592",
+      "payableId": "PAY-4d395271-7339-4b46-978f-a4a981fec252",
+      "action": "cash_reconciled",
+      "at": "2026-08-27T23:34:15.496Z",
+      "actor": "Matheus Fernando",
+      "paymentId": "PYP-59cbd3d7-b0d5-41a8-b86a-278b847e9746",
+      "cashMovementIds": [
+        "CXM-1787141872716-K0QMV"
+      ]
+    },
+    {
+      "id": "PEV-0018b6c3-4043-4634-9587-1174c2ff9c11",
+      "payableId": "PAY-6b00905e-8f22-46fc-9c97-2e1336dfa9ce",
+      "action": "cash_reconciled",
+      "at": "2026-08-27T23:34:15.490Z",
+      "actor": "Matheus Fernando",
+      "paymentId": "PYP-eed98ece-5b19-410f-b072-1cd2de49b45f",
+      "cashMovementIds": [
+        "CXM-1787141872794-EQ7TX"
+      ]
+    },
+    {
+      "id": "PEV-17f39612-d425-4596-bde2-3b876abbd178",
+      "payableId": "PAY-638aad00-4bf3-4426-8010-b12484b36f80",
+      "action": "cash_reconciled",
+      "at": "2026-08-27T23:34:15.485Z",
+      "actor": "Matheus Fernando",
+      "paymentId": "PYP-6f7f5362-cfa0-4ccc-b36c-00e16bb275ff",
+      "cashMovementIds": [
+        "CXM-1787141872869-Y6NFH"
+      ]
+    },
+    {
+      "id": "PEV-65cfe334-f458-458b-83b0-bc7a87102926",
+      "payableId": "PAY-95f23b80-fbbf-4022-a83b-d3b3cf45fd82",
+      "action": "cash_reconciled",
+      "at": "2026-08-27T23:34:15.480Z",
+      "actor": "Matheus Fernando",
+      "paymentId": "PYP-de52b328-ab66-45c1-8223-2d33112241d1",
+      "cashMovementIds": [
+        "CXM-1787142207112-9W851"
+      ]
+    },
+    {
+      "id": "PEV-0c8455e5-70dd-48da-8d38-80b454f2b5bb",
+      "payableId": "PAY-84311406-8ac2-46db-a09f-d2313fd2af95",
+      "action": "cash_reconciled",
+      "at": "2026-08-27T23:34:15.474Z",
+      "actor": "Matheus Fernando",
+      "paymentId": "PYP-5f7138d2-bf98-4a53-bfb4-9f544239730f",
+      "cashMovementIds": [
+        "CXM-1787275802745-34ET1"
+      ]
+    },
+    {
+      "id": "PEV-1cdc0604-fdb5-4ae9-86b6-1f5ec0c9b749",
+      "payableId": "PAY-3baefbc5-fedf-4da3-b5b6-5675a5ef09fb",
+      "action": "cash_reconciled",
+      "at": "2026-08-27T23:34:15.469Z",
+      "actor": "Matheus Fernando",
+      "paymentId": "PYP-07af53be-4dd0-49ad-ae62-0409f17a4329",
+      "cashMovementIds": [
+        "CXM-1787275802824-FAMZR"
+      ]
+    },
+    {
+      "id": "PEV-c1b4b42f-561e-44ff-9753-d4d05c781bf2",
+      "payableId": "PAY-f242720f-ebf2-48e3-ad50-b7c2555e6b3e",
+      "action": "cash_reconciled",
+      "at": "2026-08-27T23:34:15.463Z",
+      "actor": "Matheus Fernando",
+      "paymentId": "PYP-166ef0c9-4cc2-46af-a379-7b2e091b6506",
+      "cashMovementIds": [
+        "CXM-1787275888315-F48G0"
+      ]
+    },
+    {
+      "id": "PEV-c6149189-e95f-4cab-b936-c156e5ec2074",
+      "payableId": "PAY-1b9b9cbd-6ea7-4337-b4d5-626196565b5f",
+      "action": "cash_reconciled",
+      "at": "2026-08-27T23:34:15.458Z",
+      "actor": "Matheus Fernando",
+      "paymentId": "PYP-2ef95556-9893-4c8a-a590-a7d53c8d099f",
+      "cashMovementIds": [
+        "CXM-1787275951526-HRD79"
+      ]
+    },
+    {
+      "id": "PEV-6077426b-bf52-4de5-a88a-ec51d24ded00",
+      "payableId": "PAY-83ce5874-e24f-4c5a-89d8-e26da49f0163",
+      "action": "cash_reconciled",
+      "at": "2026-08-27T23:34:15.453Z",
+      "actor": "Matheus Fernando",
+      "paymentId": "PYP-be343d3c-b670-4899-b217-2b72e747f07e",
+      "cashMovementIds": [
+        "CXM-1787311117302-0W8NY"
+      ]
+    },
+    {
+      "id": "PEV-275d5d12-e5ef-460b-9c7c-6b7613a7c218",
+      "payableId": "PAY-3a71df9e-f826-4712-a09a-cb1c5178a40a",
+      "action": "cash_reconciled",
+      "at": "2026-08-27T23:34:15.447Z",
+      "actor": "Matheus Fernando",
+      "paymentId": "PYP-3e1200ad-6740-4bac-ba03-eb6e1329ef68",
+      "cashMovementIds": [
+        "CXM-1787311117388-CHW5X"
+      ]
+    },
+    {
+      "id": "PEV-9ac5db80-6811-459a-8fc7-dbcda908f8b4",
+      "payableId": "PAY-1552ff68-da7f-47fe-a5f8-6707332384e9",
+      "action": "cash_reconciled",
+      "at": "2026-08-27T23:34:15.442Z",
+      "actor": "Matheus Fernando",
+      "paymentId": "PYP-1703deeb-1bab-4519-8a80-2cf43ae26eab",
+      "cashMovementIds": [
+        "CXM-1787358849466-9WNSS"
+      ]
+    },
+    {
+      "id": "PEV-0d233632-02a6-40bb-84d2-137832d57093",
+      "payableId": "PAY-be9246b4-dd0c-4606-b941-44757c5c9875",
+      "action": "cash_reconciled",
+      "at": "2026-08-27T23:34:15.436Z",
+      "actor": "Matheus Fernando",
+      "paymentId": "PYP-e9381ebc-c804-4645-9f9c-187967fde4aa",
+      "cashMovementIds": [
+        "CXM-1787358849599-5W5W0"
+      ]
+    },
+    {
+      "id": "PEV-984935af-1bfc-4eea-a12a-4e02139a0a81",
+      "payableId": "PAY-0cce5c22-8a15-4987-8072-1f04950c94b5",
+      "action": "cash_reconciled",
+      "at": "2026-08-27T23:34:15.428Z",
+      "actor": "Matheus Fernando",
+      "paymentId": "PYP-a11ac10d-18e3-4854-a0db-92259ec5856b",
+      "cashMovementIds": [
+        "CXM-1787359788538-4MW8A"
+      ]
+    },
+    {
+      "id": "PEV-7286d83b-d0b4-4a9d-b70c-7827bf6aab86",
+      "payableId": "PAY-534fe8bd-7d8e-4764-8695-b2ce1f737e3a",
+      "action": "cash_reconciled",
+      "at": "2026-08-27T23:34:15.423Z",
+      "actor": "Matheus Fernando",
+      "paymentId": "PYP-2ea01006-0ced-4bb0-b19b-609765697976",
+      "cashMovementIds": [
+        "CXM-1787422791968-IJ5LJ"
+      ]
+    },
+    {
+      "id": "PEV-d6df68e6-2079-4d09-9ca0-7ec5dde76f5c",
+      "payableId": "PAY-69aad718-36f2-4c6e-90ff-91ba0a333921",
+      "action": "cash_reconciled",
+      "at": "2026-08-27T23:34:15.417Z",
+      "actor": "Matheus Fernando",
+      "paymentId": "PYP-bf189c5b-c970-43c4-89db-d39f5900e6b3",
+      "cashMovementIds": [
+        "CXM-1787425044077-7ZXWR"
+      ]
+    },
+    {
+      "id": "PEV-f5243a0c-6be8-4385-9c12-6c9caaf1b0e7",
+      "payableId": "PAY-b0618cdb-24da-4471-a7b0-eb5c0057fcb4",
+      "action": "cash_reconciled",
+      "at": "2026-08-27T23:34:15.412Z",
+      "actor": "Matheus Fernando",
+      "paymentId": "PYP-6168015b-e06f-4a10-9c9c-2803fa930163",
+      "cashMovementIds": [
+        "CXM-1787528044579-QVJ2W"
+      ]
+    },
+    {
+      "id": "PEV-4030ce95-a149-40ca-b74b-d9a224929576",
+      "payableId": "PAY-574cda04-3537-4f92-bee0-61e9c202ecb3",
+      "action": "cash_reconciled",
+      "at": "2026-08-27T23:34:15.407Z",
+      "actor": "Matheus Fernando",
+      "paymentId": "PYP-64b3ab71-e6d7-4946-a428-50612c8c4792",
+      "cashMovementIds": [
+        "CXM-1787594395915-XK2TQ"
+      ]
+    },
+    {
+      "id": "PEV-d189da98-c9cf-4535-883b-59a34669052d",
+      "payableId": "PAY-17a36a1a-a96c-461d-b3ab-7ea70e3605d5",
+      "action": "cash_reconciled",
+      "at": "2026-08-27T23:34:15.401Z",
+      "actor": "Matheus Fernando",
+      "paymentId": "PYP-d55aeaeb-3f2a-4dc9-b259-209264ec94b1",
+      "cashMovementIds": [
+        "CXM-1787596211542-8FSG7"
+      ]
+    },
+    {
+      "id": "PEV-f978e5c5-274d-443d-af59-40f13d96a5f4",
+      "payableId": "PAY-c1abbba6-4baa-4ec2-9f3e-bd9d2aa069b4",
+      "action": "cash_reconciled",
+      "at": "2026-08-27T23:34:15.396Z",
+      "actor": "Matheus Fernando",
+      "paymentId": "PYP-78cc42f4-5729-4ad2-95e2-f0bcc19a0758",
+      "cashMovementIds": [
+        "CXM-1787596211590-CKWXR"
+      ]
+    },
+    {
+      "id": "PEV-5019e52c-7f46-483f-86e9-1342873f8dbd",
+      "payableId": "PAY-150a37cf-4799-4d1b-b19e-e93626f937db",
+      "action": "cash_reconciled",
+      "at": "2026-08-27T23:34:15.390Z",
+      "actor": "Matheus Fernando",
+      "paymentId": "PYP-059776d8-f6a3-403a-b6dc-1afc144bbf55",
+      "cashMovementIds": [
+        "CXM-1787596211631-AT947"
+      ]
+    },
+    {
+      "id": "PEV-1c567b7a-649f-4168-b734-90f81ef006e5",
+      "payableId": "PAY-dc0abed3-b66d-48fd-9764-9e280b1ffcb0",
+      "action": "cash_reconciled",
+      "at": "2026-08-27T23:34:15.384Z",
+      "actor": "Matheus Fernando",
+      "paymentId": "PYP-a901547e-2589-43c5-a301-373f1a1a3947",
+      "cashMovementIds": [
+        "CXM-1787596211672-06WJI"
+      ]
+    },
+    {
+      "id": "PEV-a16ac287-d8cc-4802-a29b-decfdd93289d",
+      "payableId": "PAY-1b206d1e-1625-4433-a1bb-2c2fadcdca0d",
+      "action": "cash_reconciled",
+      "at": "2026-08-27T23:34:15.378Z",
+      "actor": "Matheus Fernando",
+      "paymentId": "PYP-c07b932b-6138-4a97-bcd0-a70c9af76e99",
+      "cashMovementIds": [
+        "CXM-1787596211712-O7QIT"
+      ]
+    },
+    {
+      "id": "PEV-fd3bfd85-01c1-4b1c-917b-6aeefed7fce7",
+      "payableId": "PAY-c08614cc-8754-4f8c-9398-f3e39e0652e1",
+      "action": "cash_reconciled",
+      "at": "2026-08-27T23:34:15.373Z",
+      "actor": "Matheus Fernando",
+      "paymentId": "PYP-b4205843-a240-4153-84a4-677d4897db4c",
+      "cashMovementIds": [
+        "CXM-1787596211754-YPR59"
+      ]
+    },
+    {
+      "id": "PEV-dbb3c5ad-3ad9-4dfc-8063-948a94da7840",
+      "payableId": "PAY-ab4d67ff-8bd6-4606-a6fd-7ff01bab1059",
+      "action": "cash_reconciled",
+      "at": "2026-08-27T23:34:15.368Z",
+      "actor": "Matheus Fernando",
+      "paymentId": "PYP-82f94d5f-cbe2-4eda-8704-ec02fe0ee32f",
+      "cashMovementIds": [
+        "CXM-1787596211794-XOXP4"
+      ]
+    },
+    {
+      "id": "PEV-75daf015-5c08-4084-8e15-49ea69d040d7",
+      "payableId": "PAY-e2e4c759-dc7b-46f0-8c5d-0b4ef2ed5dfc",
+      "action": "cash_reconciled",
+      "at": "2026-08-27T23:34:15.363Z",
+      "actor": "Matheus Fernando",
+      "paymentId": "PYP-e011da37-14bd-4e4d-aee0-e7fb217adee1",
+      "cashMovementIds": [
+        "CXM-1787596211834-J17GI"
+      ]
+    },
+    {
+      "id": "PEV-192e53af-1786-420b-9f1d-b56a997b6f2e",
+      "payableId": "PAY-78e63f92-9b47-4c9b-a202-9c5ff119ef8f",
+      "action": "cash_reconciled",
+      "at": "2026-08-27T23:34:15.358Z",
+      "actor": "Matheus Fernando",
+      "paymentId": "PYP-57ab086a-d90d-41db-858a-ed0d76d61abf",
+      "cashMovementIds": [
+        "CXM-1787596211874-5OZBV"
+      ]
+    },
+    {
+      "id": "PEV-9cf2a02c-69e6-4b13-8da3-5032a0f3a134",
+      "payableId": "PAY-636d0c60-637e-48ff-aacf-5be61229ab5c",
+      "action": "cash_reconciled",
+      "at": "2026-08-27T23:34:15.352Z",
+      "actor": "Matheus Fernando",
+      "paymentId": "PYP-62aec81b-52b3-4692-8279-60c70357e5d5",
+      "cashMovementIds": [
+        "CXM-1787596211913-SR61M"
+      ]
+    },
+    {
+      "id": "PEV-c60cc408-1031-438c-beb4-dd58f8492f6f",
+      "payableId": "PAY-a0d6de7c-b9c4-45d6-8997-e631615e9ec7",
+      "action": "cash_reconciled",
+      "at": "2026-08-27T23:34:15.347Z",
+      "actor": "Matheus Fernando",
+      "paymentId": "PYP-e895c5d7-3fab-4b45-8bf3-c297ad7ccd8d",
+      "cashMovementIds": [
+        "CXM-1787596211955-9YAJN"
+      ]
+    },
+    {
+      "id": "PEV-8e834b64-e994-41ee-b287-7e25284e6d99",
+      "payableId": "PAY-4867b108-ff79-4361-a47d-7505bab35f3e",
+      "action": "cash_reconciled",
+      "at": "2026-08-27T23:34:15.340Z",
+      "actor": "Matheus Fernando",
+      "paymentId": "PYP-0205b0b1-5734-443a-b106-ebe1a3ec3053",
+      "cashMovementIds": [
+        "CXM-1787596211995-DJ7D5"
+      ]
+    },
+    {
+      "id": "PEV-a58ae2db-435c-4a3c-abf6-f95f70a14938",
+      "payableId": "PAY-398fe73f-c697-4a33-ba44-625f56d25d37",
+      "action": "cash_reconciled",
+      "at": "2026-08-27T23:34:15.334Z",
+      "actor": "Matheus Fernando",
+      "paymentId": "PYP-ba5d2368-ebc3-498c-bb22-54e3baaedda7",
+      "cashMovementIds": [
+        "CXM-1787596212041-X2QEA"
+      ]
+    },
+    {
+      "id": "PEV-943d8f15-4a81-4c86-815e-4f8b6872f6bc",
+      "payableId": "PAY-091696ab-4062-41ec-84fb-ddd35617b2ea",
+      "action": "cash_reconciled",
+      "at": "2026-08-27T23:34:15.329Z",
+      "actor": "Matheus Fernando",
+      "paymentId": "PYP-91004db9-982a-443b-89f5-4abfd08a4223",
+      "cashMovementIds": [
+        "CXM-1787596212088-VGQCE"
+      ]
+    },
+    {
+      "id": "PEV-d16f999a-544b-4588-b648-86024fd3d787",
+      "payableId": "PAY-03d07338-3c67-4dc2-bdf8-372a13402682",
+      "action": "cash_reconciled",
+      "at": "2026-08-27T23:34:15.324Z",
+      "actor": "Matheus Fernando",
+      "paymentId": "PYP-aa16fe75-c88d-4d20-bddb-ebc8bc750c86",
+      "cashMovementIds": [
+        "CXM-1787596212129-YC1JP"
+      ]
+    },
+    {
+      "id": "PEV-8f355770-c51f-4449-ad11-491c01b3e351",
+      "payableId": "PAY-93cdb9e4-788e-4231-9810-2c54643aa593",
+      "action": "cash_reconciled",
+      "at": "2026-08-27T23:34:15.318Z",
+      "actor": "Matheus Fernando",
+      "paymentId": "PYP-e9eb54aa-8034-416b-aa75-2d64fe77cc07",
+      "cashMovementIds": [
+        "CXM-1787596212169-SDJ6Z"
+      ]
+    },
+    {
+      "id": "PEV-5318b835-bdac-40b4-8fa2-cc8e59ef79be",
+      "payableId": "PAY-a761afbf-e5b8-403f-bd8f-758439242673",
+      "action": "cash_reconciled",
+      "at": "2026-08-27T23:34:15.312Z",
+      "actor": "Matheus Fernando",
+      "paymentId": "PYP-453700f3-d895-4236-a77b-68f3e54c2594",
+      "cashMovementIds": [
+        "CXM-1787596212212-Y1UCT"
+      ]
+    },
+    {
+      "id": "PEV-3a2b5244-e2c5-40e0-9522-0c43b66172cd",
+      "payableId": "PAY-68507f3d-18c9-4d72-9fbd-c71aafada6f4",
+      "action": "cash_reconciled",
+      "at": "2026-08-27T23:34:15.307Z",
+      "actor": "Matheus Fernando",
+      "paymentId": "PYP-56c89c9b-dfcc-4943-983d-abc84cd4241d",
+      "cashMovementIds": [
+        "CXM-1787596212251-TVN3H"
+      ]
+    },
+    {
+      "id": "PEV-4b7aece2-2f0f-4235-9081-e5e3fa60f012",
+      "payableId": "PAY-ed55b6db-7af9-4cf6-9b31-090938034913",
+      "action": "cash_reconciled",
+      "at": "2026-08-27T23:34:15.302Z",
+      "actor": "Matheus Fernando",
+      "paymentId": "PYP-182802e8-cb34-4b44-ac29-6f136c8fabfa",
+      "cashMovementIds": [
+        "CXM-1787596212291-MIW37"
+      ]
+    },
+    {
+      "id": "PEV-4008c3c4-fbbd-4524-b7b0-6f3c8a9a1b85",
+      "payableId": "PAY-534fe8bd-7d8e-4764-8695-b2ce1f737e3a",
+      "action": "cash_reconciled",
+      "at": "2026-08-27T23:34:15.296Z",
+      "actor": "Matheus Fernando",
+      "paymentId": "PYP-a021f089-f168-45de-810c-e77ecf44fd8a",
+      "cashMovementIds": [
+        "CXM-1787596263924-FYO5L"
+      ]
+    },
+    {
+      "id": "PEV-ed49adbc-cd16-42fd-88df-0a8122180745",
+      "payableId": "PAY-7eeebb45-41f4-4288-ab1e-e533af80ce53",
+      "action": "cash_reconciled",
+      "at": "2026-08-27T23:34:15.290Z",
+      "actor": "Matheus Fernando",
+      "paymentId": "PYP-c4d28470-3da9-4f9a-a7aa-7e6a8533fe9f",
+      "cashMovementIds": [
+        "CXM-1787652579673-OL3IE"
+      ]
+    },
+    {
+      "id": "PEV-c82ce2c8-aa3a-4693-9db1-7a272f8d6e69",
+      "payableId": "PAY-0e76be82-df53-4b8e-a5a6-521d999d8c27",
+      "action": "installment_updated",
+      "at": "2026-08-27T17:53:00.018Z",
+      "actor": "Matheus Fernando",
+      "installmentId": "PIN-659dbd45-09a9-4564-a4fd-488094294f9b",
+      "installmentNumber": 1,
+      "previous": {
+        "value": 361.44,
+        "dueDate": "2026-08-28",
+        "paymentMethodId": "PM-BOLETO",
+        "notes": ""
+      },
+      "current": {
+        "value": 361.23,
+        "dueDate": "2026-08-28",
+        "paymentMethodId": "PM-BOLETO",
+        "notes": ""
+      }
+    },
+    {
+      "id": "PEV-ae6b0d5d-3325-40cd-8be1-00a7f93fe7cc",
+      "payableId": "PAY-e5bb959b-604e-4c01-9832-97a1a7d02ae8",
+      "action": "partial_payment",
+      "at": "2026-08-27T17:52:32.832Z",
+      "actor": "Matheus Fernando",
+      "paymentId": "PYP-1de8becf-7a04-4bdf-85d9-256e23fef09d",
+      "installmentId": "PIN-9350034a-70ce-4316-a8eb-acfabe5630f4",
+      "value": 249,
+      "principalValue": 249,
+      "balanceAfter": 441.77
+    },
+    {
+      "id": "PEV-1d196ec5-ed3b-44f4-9623-1e722fcdf3c7",
+      "payableId": "PAY-e5bb959b-604e-4c01-9832-97a1a7d02ae8",
+      "action": "partial_payment",
+      "at": "2026-08-27T17:52:32.784Z",
+      "actor": "Matheus Fernando",
+      "paymentId": "PYP-1758ca37-b15b-41b9-bcaa-6187919c70cb",
+      "installmentId": "PIN-55936f68-e9c7-43a6-937e-5905e03d366f",
+      "value": 3600,
+      "principalValue": 3600,
+      "balanceAfter": 690.77
+    },
+    {
+      "id": "PEV-eb493cdc-f812-4f40-a6eb-16ee5cdd6c9b",
+      "payableId": "PAY-e5bb959b-604e-4c01-9832-97a1a7d02ae8",
+      "action": "created",
+      "at": "2026-08-27T17:52:32.703Z",
+      "actor": "Matheus Fernando",
+      "value": 4290.77,
+      "installmentCount": 3,
+      "competencies": [
+        "2026-08"
+      ],
+      "cashboxId": "caixa-principal",
+      "paymentPlan": [
+        {
+          "paymentMethodId": "PM-DINHEIRO",
+          "value": 3600,
+          "installmentCount": 1,
+          "firstDueDate": "2026-08-27",
+          "installmentDueDates": [
+            "2026-08-27"
+          ]
+        },
+        {
+          "paymentMethodId": "PM-DINHEIRO",
+          "value": 249,
+          "installmentCount": 1,
+          "firstDueDate": "2026-08-27",
+          "installmentDueDates": [
+            "2026-08-27"
+          ]
+        },
+        {
+          "paymentMethodId": "PM-BOLETO",
+          "value": 441.77,
+          "installmentCount": 1,
+          "firstDueDate": "2026-08-27",
+          "installmentDueDates": [
+            "2026-08-27"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "PEV-3b2f3b02-e16a-4343-9da1-965cdcb77cd5",
+      "payableId": "PAY-0e76be82-df53-4b8e-a5a6-521d999d8c27",
+      "action": "created",
+      "at": "2026-08-27T17:20:02.679Z",
+      "actor": "Matheus Fernando",
+      "value": 361.44,
+      "installmentCount": 1,
+      "competencies": [
+        "2026-08"
+      ],
+      "cashboxId": "caixa-principal",
+      "paymentPlan": [
+        {
+          "paymentMethodId": "PM-BOLETO",
+          "value": 361.44,
+          "installmentCount": 1,
+          "firstDueDate": "2026-08-28",
+          "installmentDueDates": []
+        }
+      ]
+    },
+    {
+      "id": "PEV-18ac3949-427d-4a0e-998b-b38648e23ca6",
+      "payableId": "PAY-70cb0965-cb5b-49b9-8848-228d9cefa5bf",
+      "action": "paid",
+      "at": "2026-08-27T12:37:52.431Z",
+      "actor": "Matheus Fernando",
+      "paymentId": "PYP-034db71b-1e36-4d48-88db-d1284bdf6354",
+      "installmentId": "PIN-11ac0338-380c-4fd7-a143-f5a52272429d",
+      "value": 35,
+      "principalValue": 35,
+      "balanceAfter": 0
+    },
+    {
+      "id": "PEV-364316c1-dd9a-4e59-ae1a-de60a5d183e5",
+      "payableId": "PAY-70cb0965-cb5b-49b9-8848-228d9cefa5bf",
+      "action": "created",
+      "at": "2026-08-27T12:37:52.381Z",
+      "actor": "Matheus Fernando",
+      "value": 35,
+      "installmentCount": 1,
+      "competencies": [
+        "2026-08"
+      ],
+      "cashboxId": "caixa-principal",
+      "paymentPlan": [
+        {
+          "paymentMethodId": "PM-DINHEIRO",
+          "value": 35,
+          "installmentCount": 1,
+          "firstDueDate": "2026-08-27",
+          "installmentDueDates": []
+        }
+      ]
+    },
+    {
+      "id": "PEV-f6c67c8b-0a3e-4e52-94fa-04e73f066161",
+      "payableId": "PAY-7eeebb45-41f4-4288-ab1e-e533af80ce53",
+      "action": "partial_payment",
+      "at": "2026-08-25T10:09:39.701Z",
+      "actor": "painel",
+      "paymentId": "PYP-c4d28470-3da9-4f9a-a7aa-7e6a8533fe9f",
+      "installmentId": "PIN-56d39768-f0e5-4566-92a0-85211c4a4803",
+      "value": 1017.25,
+      "principalValue": 1017.25,
+      "balanceAfter": 3086.19
+    },
+    {
+      "id": "PEV-5b0e9edc-38ee-4e78-aea8-3039d5f63915",
+      "payableId": "PAY-7eeebb45-41f4-4288-ab1e-e533af80ce53",
+      "action": "installment_updated",
+      "at": "2026-08-25T10:09:28.653Z",
+      "actor": "painel",
+      "installmentId": "PIN-56d39768-f0e5-4566-92a0-85211c4a4803",
+      "installmentNumber": 2,
+      "previous": {
+        "value": 1028.73,
+        "dueDate": "2026-09-10",
+        "paymentMethodId": "PM-BOLETO",
+        "notes": ""
+      },
+      "current": {
+        "value": 1017.25,
+        "dueDate": "2026-09-10",
+        "paymentMethodId": "PM-BOLETO",
+        "notes": "desc por antecipação"
+      }
+    },
+    {
+      "id": "PEV-e9c4be38-daa7-4af4-a776-1d44471e35af",
+      "payableId": "PAY-534fe8bd-7d8e-4764-8695-b2ce1f737e3a",
+      "action": "partial_payment",
+      "at": "2026-08-24T18:31:03.950Z",
+      "actor": "painel",
+      "paymentId": "PYP-a021f089-f168-45de-810c-e77ecf44fd8a",
+      "installmentId": "PIN-107c9eda-7fe3-408a-91c5-9d8d4a6fd163",
+      "value": 40,
+      "principalValue": 40,
+      "balanceAfter": 46.5
+    },
+    {
+      "id": "PEV-476391ab-a250-40d9-bca0-4153e7c442bf",
+      "payableId": "PAY-534fe8bd-7d8e-4764-8695-b2ce1f737e3a",
+      "action": "installment_split",
+      "at": "2026-08-24T18:30:43.938Z",
+      "actor": "painel",
+      "sourceInstallmentId": "PIN-b0c080d1-2be4-4aaf-9ccc-8a55e4d8500c",
+      "sourceValue": 86.5,
+      "createdInstallmentIds": [
+        "PIN-107c9eda-7fe3-408a-91c5-9d8d4a6fd163",
+        "PIN-7729d66b-e395-4f90-b66b-cecc4e2ec0d7"
+      ],
+      "values": [
+        40,
+        46.5
+      ]
+    },
+    {
+      "id": "PEV-1b9a34d7-d2a4-44fa-bdfc-1ba1d9f980e7",
+      "payableId": "PAY-ed55b6db-7af9-4cf6-9b31-090938034913",
+      "action": "paid",
+      "at": "2026-08-24T18:30:12.332Z",
+      "actor": "painel",
+      "paymentId": "PYP-182802e8-cb34-4b44-ac29-6f136c8fabfa",
+      "installmentId": "PIN-de696b34-3b0b-4fd6-8c3c-201c7ef6b211",
+      "value": 321.8,
+      "principalValue": 321.8,
+      "balanceAfter": 0
+    },
+    {
+      "id": "PEV-0491eceb-7f76-47ab-97c0-b3443f91c4e2",
+      "payableId": "PAY-68507f3d-18c9-4d72-9fbd-c71aafada6f4",
+      "action": "partial_payment",
+      "at": "2026-08-24T18:30:12.277Z",
+      "actor": "painel",
+      "paymentId": "PYP-56c89c9b-dfcc-4943-983d-abc84cd4241d",
+      "installmentId": "PIN-58651ea4-a003-4b0c-8782-9424ab6f9ca5",
+      "value": 247.14,
+      "principalValue": 247.14,
+      "balanceAfter": 1729.98
+    },
+    {
+      "id": "PEV-ed5a9cc9-bf3b-40b1-a14a-01427d193233",
+      "payableId": "PAY-a761afbf-e5b8-403f-bd8f-758439242673",
+      "action": "partial_payment",
+      "at": "2026-08-24T18:30:12.237Z",
+      "actor": "painel",
+      "paymentId": "PYP-453700f3-d895-4236-a77b-68f3e54c2594",
+      "installmentId": "PIN-f07d3c36-2280-4385-a89b-f9a4b57ac809",
+      "value": 132.76,
+      "principalValue": 132.76,
+      "balanceAfter": 531.04
+    },
+    {
+      "id": "PEV-2e4f35cc-1218-4165-abeb-24e57909ab71",
+      "payableId": "PAY-93cdb9e4-788e-4231-9810-2c54643aa593",
+      "action": "partial_payment",
+      "at": "2026-08-24T18:30:12.195Z",
+      "actor": "painel",
+      "paymentId": "PYP-e9eb54aa-8034-416b-aa75-2d64fe77cc07",
+      "installmentId": "PIN-cd9c6c59-bf9e-4566-9940-ca4afe30f7cb",
+      "value": 67.79,
+      "principalValue": 67.79,
+      "balanceAfter": 542.32
+    },
+    {
+      "id": "PEV-83d4678b-12ae-4f9d-b459-3afee8bbb0e5",
+      "payableId": "PAY-03d07338-3c67-4dc2-bdf8-372a13402682",
+      "action": "partial_payment",
+      "at": "2026-08-24T18:30:12.156Z",
+      "actor": "painel",
+      "paymentId": "PYP-aa16fe75-c88d-4d20-bddb-ebc8bc750c86",
+      "installmentId": "PIN-619009a6-2b84-4d2c-b00d-bdb295dbc78d",
+      "value": 127.2,
+      "principalValue": 127.2,
+      "balanceAfter": 381.6
+    },
+    {
+      "id": "PEV-b176389c-75c5-44da-93e3-f89db395cbb8",
+      "payableId": "PAY-091696ab-4062-41ec-84fb-ddd35617b2ea",
+      "action": "partial_payment",
+      "at": "2026-08-24T18:30:12.116Z",
+      "actor": "painel",
+      "paymentId": "PYP-91004db9-982a-443b-89f5-4abfd08a4223",
+      "installmentId": "PIN-72e16137-dd76-441e-b632-bbe372e1e412",
+      "value": 27.25,
+      "principalValue": 27.25,
+      "balanceAfter": 27.25
+    },
+    {
+      "id": "PEV-ca25a9f9-db0a-4fa9-8d2e-2672c32567ce",
+      "payableId": "PAY-398fe73f-c697-4a33-ba44-625f56d25d37",
+      "action": "partial_payment",
+      "at": "2026-08-24T18:30:12.069Z",
+      "actor": "painel",
+      "paymentId": "PYP-ba5d2368-ebc3-498c-bb22-54e3baaedda7",
+      "installmentId": "PIN-ac7d5273-0b7a-4854-86e3-7c7ef3ac0bf1",
+      "value": 59.9,
+      "principalValue": 59.9,
+      "balanceAfter": 419.3
+    },
+    {
+      "id": "PEV-23ab703b-9720-408d-b99f-72dcde447710",
+      "payableId": "PAY-4867b108-ff79-4361-a47d-7505bab35f3e",
+      "action": "partial_payment",
+      "at": "2026-08-24T18:30:12.021Z",
+      "actor": "painel",
+      "paymentId": "PYP-0205b0b1-5734-443a-b106-ebe1a3ec3053",
+      "installmentId": "PIN-12e5e16d-697b-4f42-b92c-983b91af036b",
+      "value": 48.27,
+      "principalValue": 48.27,
+      "balanceAfter": 48.27
+    },
+    {
+      "id": "PEV-7604c6f1-d81a-40e8-bd6d-2c17fe057e6e",
+      "payableId": "PAY-a0d6de7c-b9c4-45d6-8997-e631615e9ec7",
+      "action": "partial_payment",
+      "at": "2026-08-24T18:30:11.981Z",
+      "actor": "painel",
+      "paymentId": "PYP-e895c5d7-3fab-4b45-8bf3-c297ad7ccd8d",
+      "installmentId": "PIN-a43c011c-4e51-40c1-8f7d-c350cdd2e975",
+      "value": 111.42,
+      "principalValue": 111.42,
+      "balanceAfter": 334.26
+    },
+    {
+      "id": "PEV-6bca462a-08a3-49f6-83ab-5576aa836e5a",
+      "payableId": "PAY-636d0c60-637e-48ff-aacf-5be61229ab5c",
+      "action": "partial_payment",
+      "at": "2026-08-24T18:30:11.939Z",
+      "actor": "painel",
+      "paymentId": "PYP-62aec81b-52b3-4692-8279-60c70357e5d5",
+      "installmentId": "PIN-61e0682f-3f89-41d2-ab8b-dcfa8a774494",
+      "value": 293.73,
+      "principalValue": 293.73,
+      "balanceAfter": 1762.38
+    },
+    {
+      "id": "PEV-42cb9953-9638-49ea-89f6-f415804cf845",
+      "payableId": "PAY-78e63f92-9b47-4c9b-a202-9c5ff119ef8f",
+      "action": "partial_payment",
+      "at": "2026-08-24T18:30:11.899Z",
+      "actor": "painel",
+      "paymentId": "PYP-57ab086a-d90d-41db-858a-ed0d76d61abf",
+      "installmentId": "PIN-fd75b02c-fa43-4f83-8802-b17cc11de1d5",
+      "value": 50,
+      "principalValue": 50,
+      "balanceAfter": 200
+    },
+    {
+      "id": "PEV-c6ba049e-783f-4db9-86e5-19404047117b",
+      "payableId": "PAY-e2e4c759-dc7b-46f0-8c5d-0b4ef2ed5dfc",
+      "action": "partial_payment",
+      "at": "2026-08-24T18:30:11.860Z",
+      "actor": "painel",
+      "paymentId": "PYP-e011da37-14bd-4e4d-aee0-e7fb217adee1",
+      "installmentId": "PIN-9e32cc7f-a5f2-43fe-a8a4-d82fa125d61d",
+      "value": 66.11,
+      "principalValue": 66.11,
+      "balanceAfter": 264.44
+    },
+    {
+      "id": "PEV-d0748a9b-e876-4d27-a55b-2b2cdba906ec",
+      "payableId": "PAY-ab4d67ff-8bd6-4606-a6fd-7ff01bab1059",
+      "action": "partial_payment",
+      "at": "2026-08-24T18:30:11.820Z",
+      "actor": "painel",
+      "paymentId": "PYP-82f94d5f-cbe2-4eda-8704-ec02fe0ee32f",
+      "installmentId": "PIN-76c71ef8-bbfd-4873-824d-fe0fb9098a30",
+      "value": 332.77,
+      "principalValue": 332.77,
+      "balanceAfter": 1331.08
+    },
+    {
+      "id": "PEV-a3b7f85a-02f3-4c55-ba23-2b914621f723",
+      "payableId": "PAY-c08614cc-8754-4f8c-9398-f3e39e0652e1",
+      "action": "partial_payment",
+      "at": "2026-08-24T18:30:11.780Z",
+      "actor": "painel",
+      "paymentId": "PYP-b4205843-a240-4153-84a4-677d4897db4c",
+      "installmentId": "PIN-bfa26061-4fd8-4bc4-b2e0-61de0cd8927f",
+      "value": 62.9,
+      "principalValue": 62.9,
+      "balanceAfter": 188.7
+    },
+    {
+      "id": "PEV-3b690cf7-2603-4bd3-a979-1c903195ea3c",
+      "payableId": "PAY-1b206d1e-1625-4433-a1bb-2c2fadcdca0d",
+      "action": "partial_payment",
+      "at": "2026-08-24T18:30:11.740Z",
+      "actor": "painel",
+      "paymentId": "PYP-c07b932b-6138-4a97-bcd0-a70c9af76e99",
+      "installmentId": "PIN-8e2d3300-3a3f-4dd2-a2a6-638c5eccd5e1",
+      "value": 63.2,
+      "principalValue": 63.2,
+      "balanceAfter": 189.6
+    },
+    {
+      "id": "PEV-1df372a0-62ae-473b-b698-21bc63ad0eff",
+      "payableId": "PAY-dc0abed3-b66d-48fd-9764-9e280b1ffcb0",
+      "action": "partial_payment",
+      "at": "2026-08-24T18:30:11.698Z",
+      "actor": "painel",
+      "paymentId": "PYP-a901547e-2589-43c5-a301-373f1a1a3947",
+      "installmentId": "PIN-6c0d8d37-5c02-459a-9773-64b36025aa9d",
+      "value": 66.43,
+      "principalValue": 66.43,
+      "balanceAfter": 199.29
+    },
+    {
+      "id": "PEV-608a2894-26c5-4305-9cdb-104f6b479a64",
+      "payableId": "PAY-150a37cf-4799-4d1b-b19e-e93626f937db",
+      "action": "partial_payment",
+      "at": "2026-08-24T18:30:11.658Z",
+      "actor": "painel",
+      "paymentId": "PYP-059776d8-f6a3-403a-b6dc-1afc144bbf55",
+      "installmentId": "PIN-b5b7a49e-358f-4638-a40e-72e7881c9d44",
+      "value": 68.7,
+      "principalValue": 68.7,
+      "balanceAfter": 206.1
+    },
+    {
+      "id": "PEV-98361a7c-187d-4f2c-874f-9907b292233c",
+      "payableId": "PAY-c1abbba6-4baa-4ec2-9f3e-bd9d2aa069b4",
+      "action": "partial_payment",
+      "at": "2026-08-24T18:30:11.617Z",
+      "actor": "painel",
+      "paymentId": "PYP-78cc42f4-5729-4ad2-95e2-f0bcc19a0758",
+      "installmentId": "PIN-9c7f84aa-ce52-488d-96f4-3b7a69cc8be1",
+      "value": 39.47,
+      "principalValue": 39.47,
+      "balanceAfter": 39.47
+    },
+    {
+      "id": "PEV-2dbc3e1d-5553-42af-8b18-45a327a8de67",
+      "payableId": "PAY-17a36a1a-a96c-461d-b3ab-7ea70e3605d5",
+      "action": "paid",
+      "at": "2026-08-24T18:30:11.573Z",
+      "actor": "painel",
+      "paymentId": "PYP-d55aeaeb-3f2a-4dc9-b259-209264ec94b1",
+      "installmentId": "PIN-5fe3fd1d-f61d-42f3-9ad1-eb251424e571",
+      "value": 1914.99,
+      "principalValue": 1914.99,
+      "balanceAfter": 0
+    },
+    {
+      "id": "PEV-f71fd271-5e84-4fad-8458-4b6378b46f5b",
+      "payableId": "PAY-574cda04-3537-4f92-bee0-61e9c202ecb3",
+      "action": "paid",
+      "at": "2026-08-24T17:59:55.947Z",
+      "actor": "painel",
+      "paymentId": "PYP-64b3ab71-e6d7-4946-a428-50612c8c4792",
+      "installmentId": "PIN-d18aec7a-da86-43e8-9ce1-2de9d6d21adf",
+      "value": 50,
+      "principalValue": 50,
+      "balanceAfter": 0
+    },
+    {
+      "id": "PEV-464fd038-7e59-4f55-8173-d8e6ca2a67b7",
+      "payableId": "PAY-574cda04-3537-4f92-bee0-61e9c202ecb3",
+      "action": "created",
+      "at": "2026-08-24T17:59:55.890Z",
+      "actor": "painel",
+      "value": 50,
+      "installmentCount": 1,
+      "competencies": [
+        "2026-08"
+      ],
+      "cashboxId": "caixa-principal",
+      "paymentPlan": [
+        {
+          "paymentMethodId": "PM-DINHEIRO",
+          "value": 50,
+          "installmentCount": 1,
+          "firstDueDate": "2026-08-24",
+          "installmentDueDates": []
+        }
+      ]
+    },
+    {
       "id": "PEV-66399980-996c-4777-9ef6-0cda13323236",
       "payableId": "PAY-b0618cdb-24da-4471-a7b0-eb5c0057fcb4",
       "action": "paid",

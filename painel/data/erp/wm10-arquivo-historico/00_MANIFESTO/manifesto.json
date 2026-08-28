@@ -1,0 +1,902 @@
+{
+  "version": "1.0",
+  "name": "Arquivo Histórico WM10",
+  "status": "complete",
+  "createdAt": "2026-08-27T14:13:03.304Z",
+  "updatedAt": "2026-08-27T16:19:11.022Z",
+  "finishedAt": "2026-08-27T16:19:11.022Z",
+  "requestCount": 42,
+  "estimatedCost": 0,
+  "tasks": [
+    {
+      "id": "clientes-p1",
+      "group": "01_CLIENTES",
+      "label": "Clientes · página 1",
+      "endpoint": "cliente/",
+      "params": {
+        "pagina": 1,
+        "limite": 500
+      },
+      "paged": true,
+      "pageKind": "clientes",
+      "status": "done",
+      "attempts": 1,
+      "requestCost": 0.01,
+      "startedAt": "2026-08-27T14:13:05.549Z",
+      "finishedAt": "2026-08-27T14:13:06.521Z",
+      "rows": 500,
+      "encoding": "Windows-1252",
+      "bytes": 376492
+    },
+    {
+      "id": "classificacoes",
+      "group": "02_CLASSIFICACOES_CLIENTES",
+      "label": "Classificações de clientes",
+      "endpoint": "classificacao/",
+      "params": {},
+      "status": "done",
+      "attempts": 1,
+      "requestCost": 0.01,
+      "startedAt": "2026-08-27T14:13:06.538Z",
+      "finishedAt": "2026-08-27T14:13:06.665Z",
+      "rows": 5,
+      "encoding": "UTF-8",
+      "bytes": 811
+    },
+    {
+      "id": "lojas",
+      "group": "03_LOJAS",
+      "label": "Lojas",
+      "endpoint": "loja/",
+      "params": {},
+      "status": "done",
+      "attempts": 1,
+      "requestCost": 0.01,
+      "startedAt": "2026-08-27T14:13:06.682Z",
+      "finishedAt": "2026-08-27T14:13:06.802Z",
+      "rows": 2,
+      "encoding": "Windows-1252",
+      "bytes": 1197
+    },
+    {
+      "id": "usuarios",
+      "group": "04_USUARIOS_VENDEDORES",
+      "label": "Usuários / vendedores",
+      "endpoint": "usuario/",
+      "params": {},
+      "status": "done",
+      "attempts": 1,
+      "requestCost": 0.01,
+      "startedAt": "2026-08-27T14:13:06.819Z",
+      "finishedAt": "2026-08-27T14:13:06.944Z",
+      "rows": 25,
+      "encoding": "Windows-1252",
+      "bytes": 3854
+    },
+    {
+      "id": "categorias",
+      "group": "05_CATEGORIAS_PRODUTOS",
+      "label": "Categorias de produtos",
+      "endpoint": "Categoria/",
+      "params": {},
+      "status": "done",
+      "attempts": 1,
+      "requestCost": 0.01,
+      "startedAt": "2026-08-27T14:13:06.960Z",
+      "finishedAt": "2026-08-27T14:13:07.082Z",
+      "rows": 163,
+      "encoding": "Windows-1252",
+      "bytes": 27805
+    },
+    {
+      "id": "produtos-p1",
+      "group": "06_PRODUTOS",
+      "label": "Produtos · página 1",
+      "endpoint": "produto/",
+      "params": {
+        "pagina": 1,
+        "limite": 500
+      },
+      "paged": true,
+      "pageKind": "produtos",
+      "status": "done",
+      "attempts": 1,
+      "requestCost": 0.01,
+      "startedAt": "2026-08-27T14:13:07.097Z",
+      "finishedAt": "2026-08-27T14:13:07.447Z",
+      "rows": 500,
+      "encoding": "Windows-1252",
+      "bytes": 401667
+    },
+    {
+      "id": "fotos-produtos",
+      "group": "07_FOTOS_PRODUTOS",
+      "label": "Fotos dos produtos",
+      "endpoint": "produto_foto/",
+      "params": {},
+      "status": "done",
+      "attempts": 4,
+      "requestCost": 0.01,
+      "startedAt": "2026-08-27T14:53:12.285Z",
+      "lastError": "",
+      "finishedAt": "2026-08-27T14:56:06.193Z",
+      "rows": 0,
+      "encoding": "local",
+      "bytes": 0,
+      "skippedRemote": true,
+      "skipReason": "Endpoint produto_foto exige cod_produto; coleta em massa automática desativada para evitar milhares de requisições pagas."
+    },
+    {
+      "id": "servicos",
+      "group": "08_SERVICOS",
+      "label": "Serviços",
+      "endpoint": "servico/",
+      "params": {},
+      "status": "done",
+      "attempts": 1,
+      "requestCost": 0.01,
+      "startedAt": "2026-08-27T14:56:06.371Z",
+      "finishedAt": "2026-08-27T14:56:06.967Z",
+      "rows": 59,
+      "encoding": "Windows-1252",
+      "bytes": 9952
+    },
+    {
+      "id": "mov-0-A",
+      "group": "09_MOVIMENTACOES/consignado",
+      "label": "consignado · aberta",
+      "endpoint": "venda/",
+      "params": {
+        "tipo_nota": 0,
+        "estado": "A"
+      },
+      "status": "done",
+      "attempts": 3,
+      "requestCost": 0.01,
+      "startedAt": "2026-08-27T14:59:28.488Z",
+      "lastError": "",
+      "finishedAt": "2026-08-27T14:59:28.904Z",
+      "rows": 0,
+      "encoding": "raw-only",
+      "bytes": 0,
+      "completedWithWarning": true,
+      "warning": "A API WM10 retornou conteúdo inválido (HTTP 200)."
+    },
+    {
+      "id": "mov-0-C",
+      "group": "09_MOVIMENTACOES/consignado",
+      "label": "consignado · concluida",
+      "endpoint": "venda/",
+      "params": {
+        "tipo_nota": 0,
+        "estado": "C"
+      },
+      "status": "done",
+      "attempts": 1,
+      "requestCost": 0.01,
+      "startedAt": "2026-08-27T14:59:28.927Z",
+      "finishedAt": "2026-08-27T14:59:29.040Z",
+      "rows": 0,
+      "encoding": "raw-only",
+      "bytes": 0,
+      "completedWithWarning": true,
+      "warning": "A API WM10 retornou conteúdo inválido (HTTP 200)."
+    },
+    {
+      "id": "mov-0-D",
+      "group": "09_MOVIMENTACOES/consignado",
+      "label": "consignado · cancelada",
+      "endpoint": "venda/",
+      "params": {
+        "tipo_nota": 0,
+        "estado": "D"
+      },
+      "status": "done",
+      "attempts": 1,
+      "requestCost": 0.01,
+      "startedAt": "2026-08-27T14:59:29.062Z",
+      "finishedAt": "2026-08-27T14:59:29.180Z",
+      "rows": 0,
+      "encoding": "raw-only",
+      "bytes": 0,
+      "completedWithWarning": true,
+      "warning": "A API WM10 retornou conteúdo inválido (HTTP 200)."
+    },
+    {
+      "id": "mov-0-E",
+      "group": "09_MOVIMENTACOES/consignado",
+      "label": "consignado · estornada",
+      "endpoint": "venda/",
+      "params": {
+        "tipo_nota": 0,
+        "estado": "E"
+      },
+      "status": "done",
+      "attempts": 1,
+      "requestCost": 0.01,
+      "startedAt": "2026-08-27T14:59:29.199Z",
+      "finishedAt": "2026-08-27T14:59:29.303Z",
+      "rows": 0,
+      "encoding": "raw-only",
+      "bytes": 0,
+      "completedWithWarning": true,
+      "warning": "A API WM10 retornou conteúdo inválido (HTTP 200)."
+    },
+    {
+      "id": "mov-1-A",
+      "group": "09_MOVIMENTACOES/venda",
+      "label": "venda · aberta",
+      "endpoint": "venda/",
+      "params": {
+        "tipo_nota": 1,
+        "estado": "A"
+      },
+      "status": "done",
+      "attempts": 1,
+      "requestCost": 0.01,
+      "startedAt": "2026-08-27T14:59:29.331Z",
+      "finishedAt": "2026-08-27T14:59:29.454Z",
+      "rows": 14,
+      "encoding": "Windows-1252",
+      "bytes": 14167
+    },
+    {
+      "id": "mov-1-C",
+      "group": "09_MOVIMENTACOES/venda",
+      "label": "venda · concluida",
+      "endpoint": "venda/",
+      "params": {
+        "tipo_nota": 1,
+        "estado": "C"
+      },
+      "status": "done",
+      "attempts": 1,
+      "requestCost": 0.01,
+      "startedAt": "2026-08-27T14:59:29.477Z",
+      "finishedAt": "2026-08-27T14:59:32.550Z",
+      "rows": 6347,
+      "encoding": "Windows-1252",
+      "bytes": 7743398
+    },
+    {
+      "id": "mov-1-D",
+      "group": "09_MOVIMENTACOES/venda",
+      "label": "venda · cancelada",
+      "endpoint": "venda/",
+      "params": {
+        "tipo_nota": 1,
+        "estado": "D"
+      },
+      "status": "done",
+      "attempts": 1,
+      "requestCost": 0.01,
+      "startedAt": "2026-08-27T14:59:32.586Z",
+      "finishedAt": "2026-08-27T14:59:33.096Z",
+      "rows": 434,
+      "encoding": "Windows-1252",
+      "bytes": 340946
+    },
+    {
+      "id": "mov-1-E",
+      "group": "09_MOVIMENTACOES/venda",
+      "label": "venda · estornada",
+      "endpoint": "venda/",
+      "params": {
+        "tipo_nota": 1,
+        "estado": "E"
+      },
+      "status": "done",
+      "attempts": 1,
+      "requestCost": 0.01,
+      "startedAt": "2026-08-27T14:59:33.113Z",
+      "finishedAt": "2026-08-27T14:59:33.465Z",
+      "rows": 353,
+      "encoding": "Windows-1252",
+      "bytes": 486727
+    },
+    {
+      "id": "mov-2-A",
+      "group": "09_MOVIMENTACOES/orcamento",
+      "label": "orcamento · aberta",
+      "endpoint": "venda/",
+      "params": {
+        "tipo_nota": 2,
+        "estado": "A"
+      },
+      "status": "done",
+      "attempts": 1,
+      "requestCost": 0.01,
+      "startedAt": "2026-08-27T14:59:33.488Z",
+      "finishedAt": "2026-08-27T14:59:33.579Z",
+      "rows": 0,
+      "encoding": "raw-only",
+      "bytes": 0,
+      "completedWithWarning": true,
+      "warning": "A API WM10 retornou conteúdo inválido (HTTP 200)."
+    },
+    {
+      "id": "mov-2-C",
+      "group": "09_MOVIMENTACOES/orcamento",
+      "label": "orcamento · concluida",
+      "endpoint": "venda/",
+      "params": {
+        "tipo_nota": 2,
+        "estado": "C"
+      },
+      "status": "done",
+      "attempts": 1,
+      "requestCost": 0.01,
+      "startedAt": "2026-08-27T14:59:33.945Z",
+      "finishedAt": "2026-08-27T14:59:34.067Z",
+      "rows": 1,
+      "encoding": "Windows-1252",
+      "bytes": 1377
+    },
+    {
+      "id": "mov-2-D",
+      "group": "09_MOVIMENTACOES/orcamento",
+      "label": "orcamento · cancelada",
+      "endpoint": "venda/",
+      "params": {
+        "tipo_nota": 2,
+        "estado": "D"
+      },
+      "status": "done",
+      "attempts": 1,
+      "requestCost": 0.01,
+      "startedAt": "2026-08-27T14:59:34.084Z",
+      "finishedAt": "2026-08-27T14:59:34.255Z",
+      "rows": 1,
+      "encoding": "Windows-1252",
+      "bytes": 1151
+    },
+    {
+      "id": "mov-2-E",
+      "group": "09_MOVIMENTACOES/orcamento",
+      "label": "orcamento · estornada",
+      "endpoint": "venda/",
+      "params": {
+        "tipo_nota": 2,
+        "estado": "E"
+      },
+      "status": "done",
+      "attempts": 1,
+      "requestCost": 0.01,
+      "startedAt": "2026-08-27T14:59:34.275Z",
+      "finishedAt": "2026-08-27T14:59:34.439Z",
+      "rows": 0,
+      "encoding": "raw-only",
+      "bytes": 0,
+      "completedWithWarning": true,
+      "warning": "A API WM10 retornou conteúdo inválido (HTTP 200)."
+    },
+    {
+      "id": "mov-3-A",
+      "group": "09_MOVIMENTACOES/venda_loja_virtual",
+      "label": "venda loja virtual · aberta",
+      "endpoint": "venda/",
+      "params": {
+        "tipo_nota": 3,
+        "estado": "A"
+      },
+      "status": "done",
+      "attempts": 1,
+      "requestCost": 0.01,
+      "startedAt": "2026-08-27T14:59:34.458Z",
+      "finishedAt": "2026-08-27T14:59:34.675Z",
+      "rows": 6,
+      "encoding": "Windows-1252",
+      "bytes": 7104
+    },
+    {
+      "id": "mov-3-C",
+      "group": "09_MOVIMENTACOES/venda_loja_virtual",
+      "label": "venda loja virtual · concluida",
+      "endpoint": "venda/",
+      "params": {
+        "tipo_nota": 3,
+        "estado": "C"
+      },
+      "status": "done",
+      "attempts": 1,
+      "requestCost": 0.01,
+      "startedAt": "2026-08-27T14:59:34.691Z",
+      "finishedAt": "2026-08-27T14:59:34.848Z",
+      "rows": 25,
+      "encoding": "Windows-1252",
+      "bytes": 29381
+    },
+    {
+      "id": "mov-3-D",
+      "group": "09_MOVIMENTACOES/venda_loja_virtual",
+      "label": "venda loja virtual · cancelada",
+      "endpoint": "venda/",
+      "params": {
+        "tipo_nota": 3,
+        "estado": "D"
+      },
+      "status": "done",
+      "attempts": 1,
+      "requestCost": 0.01,
+      "startedAt": "2026-08-27T14:59:34.865Z",
+      "finishedAt": "2026-08-27T14:59:34.956Z",
+      "rows": 0,
+      "encoding": "raw-only",
+      "bytes": 0,
+      "completedWithWarning": true,
+      "warning": "A API WM10 retornou conteúdo inválido (HTTP 200)."
+    },
+    {
+      "id": "mov-3-E",
+      "group": "09_MOVIMENTACOES/venda_loja_virtual",
+      "label": "venda loja virtual · estornada",
+      "endpoint": "venda/",
+      "params": {
+        "tipo_nota": 3,
+        "estado": "E"
+      },
+      "status": "done",
+      "attempts": 1,
+      "requestCost": 0.01,
+      "startedAt": "2026-08-27T14:59:34.974Z",
+      "finishedAt": "2026-08-27T14:59:35.087Z",
+      "rows": 2,
+      "encoding": "Windows-1252",
+      "bytes": 2512
+    },
+    {
+      "id": "mov-4-A",
+      "group": "09_MOVIMENTACOES/ordem_servico",
+      "label": "ordem servico · aberta",
+      "endpoint": "venda/",
+      "params": {
+        "tipo_nota": 4,
+        "estado": "A"
+      },
+      "status": "done",
+      "attempts": 1,
+      "requestCost": 0.01,
+      "startedAt": "2026-08-27T14:59:35.105Z",
+      "finishedAt": "2026-08-27T14:59:35.228Z",
+      "rows": 39,
+      "encoding": "Windows-1252",
+      "bytes": 35563
+    },
+    {
+      "id": "mov-4-C",
+      "group": "09_MOVIMENTACOES/ordem_servico",
+      "label": "ordem servico · concluida",
+      "endpoint": "venda/",
+      "params": {
+        "tipo_nota": 4,
+        "estado": "C"
+      },
+      "status": "done",
+      "attempts": 1,
+      "requestCost": 0.01,
+      "startedAt": "2026-08-27T14:59:35.249Z",
+      "finishedAt": "2026-08-27T14:59:35.805Z",
+      "rows": 1139,
+      "encoding": "Windows-1252",
+      "bytes": 1385269
+    },
+    {
+      "id": "mov-4-D",
+      "group": "09_MOVIMENTACOES/ordem_servico",
+      "label": "ordem servico · cancelada",
+      "endpoint": "venda/",
+      "params": {
+        "tipo_nota": 4,
+        "estado": "D"
+      },
+      "status": "done",
+      "attempts": 1,
+      "requestCost": 0.01,
+      "startedAt": "2026-08-27T14:59:35.823Z",
+      "finishedAt": "2026-08-27T14:59:37.871Z",
+      "rows": 81,
+      "encoding": "Windows-1252",
+      "bytes": 72198
+    },
+    {
+      "id": "mov-4-E",
+      "group": "09_MOVIMENTACOES/ordem_servico",
+      "label": "ordem servico · estornada",
+      "endpoint": "venda/",
+      "params": {
+        "tipo_nota": 4,
+        "estado": "E"
+      },
+      "status": "done",
+      "attempts": 1,
+      "requestCost": 0.01,
+      "startedAt": "2026-08-27T14:59:37.920Z",
+      "finishedAt": "2026-08-27T14:59:38.126Z",
+      "rows": 46,
+      "encoding": "Windows-1252",
+      "bytes": 56881
+    },
+    {
+      "id": "mov-5-A",
+      "group": "09_MOVIMENTACOES/pre_venda",
+      "label": "pre venda · aberta",
+      "endpoint": "venda/",
+      "params": {
+        "tipo_nota": 5,
+        "estado": "A"
+      },
+      "status": "done",
+      "attempts": 1,
+      "requestCost": 0.01,
+      "startedAt": "2026-08-27T14:59:38.145Z",
+      "finishedAt": "2026-08-27T14:59:38.237Z",
+      "rows": 0,
+      "encoding": "raw-only",
+      "bytes": 0,
+      "completedWithWarning": true,
+      "warning": "A API WM10 retornou conteúdo inválido (HTTP 200)."
+    },
+    {
+      "id": "mov-5-C",
+      "group": "09_MOVIMENTACOES/pre_venda",
+      "label": "pre venda · concluida",
+      "endpoint": "venda/",
+      "params": {
+        "tipo_nota": 5,
+        "estado": "C"
+      },
+      "status": "done",
+      "attempts": 1,
+      "requestCost": 0.01,
+      "startedAt": "2026-08-27T14:59:38.256Z",
+      "finishedAt": "2026-08-27T14:59:38.364Z",
+      "rows": 0,
+      "encoding": "raw-only",
+      "bytes": 0,
+      "completedWithWarning": true,
+      "warning": "A API WM10 retornou conteúdo inválido (HTTP 200)."
+    },
+    {
+      "id": "mov-5-D",
+      "group": "09_MOVIMENTACOES/pre_venda",
+      "label": "pre venda · cancelada",
+      "endpoint": "venda/",
+      "params": {
+        "tipo_nota": 5,
+        "estado": "D"
+      },
+      "status": "done",
+      "attempts": 1,
+      "requestCost": 0.01,
+      "startedAt": "2026-08-27T14:59:38.383Z",
+      "finishedAt": "2026-08-27T14:59:38.490Z",
+      "rows": 0,
+      "encoding": "raw-only",
+      "bytes": 0,
+      "completedWithWarning": true,
+      "warning": "A API WM10 retornou conteúdo inválido (HTTP 200)."
+    },
+    {
+      "id": "mov-5-E",
+      "group": "09_MOVIMENTACOES/pre_venda",
+      "label": "pre venda · estornada",
+      "endpoint": "venda/",
+      "params": {
+        "tipo_nota": 5,
+        "estado": "E"
+      },
+      "status": "done",
+      "attempts": 1,
+      "requestCost": 0.01,
+      "startedAt": "2026-08-27T14:59:38.514Z",
+      "finishedAt": "2026-08-27T14:59:38.684Z",
+      "rows": 0,
+      "encoding": "raw-only",
+      "bytes": 0,
+      "completedWithWarning": true,
+      "warning": "A API WM10 retornou conteúdo inválido (HTTP 200)."
+    },
+    {
+      "id": "notas-fiscais-p1",
+      "group": "10_NOTAS_FISCAIS",
+      "label": "Notas fiscais · página 1",
+      "endpoint": "nota/",
+      "params": {
+        "pagina": 1,
+        "limite": 500
+      },
+      "status": "done",
+      "attempts": 5,
+      "requestCost": 0.01,
+      "startedAt": "2026-08-27T16:16:31.396Z",
+      "lastError": "",
+      "finishedAt": "2026-08-27T16:16:32.145Z",
+      "paged": true,
+      "pageKind": "notas",
+      "rows": 500,
+      "encoding": "Windows-1252",
+      "bytes": 283678
+    },
+    {
+      "id": "clientes-p2",
+      "group": "01_CLIENTES",
+      "label": "Clientes · página 2",
+      "endpoint": "cliente/",
+      "params": {
+        "pagina": 2,
+        "limite": 500
+      },
+      "paged": true,
+      "pageKind": "clientes",
+      "status": "done",
+      "attempts": 1,
+      "requestCost": 0.01,
+      "startedAt": "2026-08-27T16:16:32.171Z",
+      "finishedAt": "2026-08-27T16:16:32.415Z",
+      "rows": 500,
+      "encoding": "Windows-1252",
+      "bytes": 371369
+    },
+    {
+      "id": "clientes-p3",
+      "group": "01_CLIENTES",
+      "label": "Clientes · página 3",
+      "endpoint": "cliente/",
+      "params": {
+        "pagina": 3,
+        "limite": 500
+      },
+      "paged": true,
+      "pageKind": "clientes",
+      "status": "done",
+      "attempts": 1,
+      "requestCost": 0.01,
+      "startedAt": "2026-08-27T16:16:32.445Z",
+      "finishedAt": "2026-08-27T16:16:32.740Z",
+      "rows": 500,
+      "encoding": "Windows-1252",
+      "bytes": 373632
+    },
+    {
+      "id": "clientes-p4",
+      "group": "01_CLIENTES",
+      "label": "Clientes · página 4",
+      "endpoint": "cliente/",
+      "params": {
+        "pagina": 4,
+        "limite": 500
+      },
+      "paged": true,
+      "pageKind": "clientes",
+      "status": "done",
+      "attempts": 1,
+      "requestCost": 0.01,
+      "startedAt": "2026-08-27T16:16:32.765Z",
+      "finishedAt": "2026-08-27T16:16:33.103Z",
+      "rows": 500,
+      "encoding": "Windows-1252",
+      "bytes": 370494
+    },
+    {
+      "id": "clientes-p5",
+      "group": "01_CLIENTES",
+      "label": "Clientes · página 5",
+      "endpoint": "cliente/",
+      "params": {
+        "pagina": 5,
+        "limite": 500
+      },
+      "paged": true,
+      "pageKind": "clientes",
+      "status": "done",
+      "attempts": 1,
+      "requestCost": 0.01,
+      "startedAt": "2026-08-27T16:16:33.124Z",
+      "finishedAt": "2026-08-27T16:16:33.395Z",
+      "rows": 500,
+      "encoding": "Windows-1252",
+      "bytes": 342901
+    },
+    {
+      "id": "clientes-p6",
+      "group": "01_CLIENTES",
+      "label": "Clientes · página 6",
+      "endpoint": "cliente/",
+      "params": {
+        "pagina": 6,
+        "limite": 500
+      },
+      "paged": true,
+      "pageKind": "clientes",
+      "status": "done",
+      "attempts": 1,
+      "requestCost": 0.01,
+      "startedAt": "2026-08-27T16:16:33.415Z",
+      "finishedAt": "2026-08-27T16:16:36.158Z",
+      "rows": 493,
+      "encoding": "Windows-1252",
+      "bytes": 341383
+    },
+    {
+      "id": "notas-fiscais-p2",
+      "group": "10_NOTAS_FISCAIS",
+      "label": "Notas fiscais · página 2",
+      "endpoint": "nota/",
+      "params": {
+        "pagina": 2,
+        "limite": 500
+      },
+      "paged": true,
+      "pageKind": "notas",
+      "status": "done",
+      "attempts": 1,
+      "requestCost": 0.01,
+      "startedAt": "2026-08-27T16:16:36.183Z",
+      "finishedAt": "2026-08-27T16:16:36.578Z",
+      "rows": 500,
+      "encoding": "Windows-1252",
+      "bytes": 283851
+    },
+    {
+      "id": "notas-fiscais-p3",
+      "group": "10_NOTAS_FISCAIS",
+      "label": "Notas fiscais · página 3",
+      "endpoint": "nota/",
+      "params": {
+        "pagina": 3,
+        "limite": 500
+      },
+      "paged": true,
+      "pageKind": "notas",
+      "status": "done",
+      "attempts": 1,
+      "requestCost": 0.01,
+      "startedAt": "2026-08-27T16:16:36.604Z",
+      "finishedAt": "2026-08-27T16:16:37.033Z",
+      "rows": 500,
+      "encoding": "Windows-1252",
+      "bytes": 284381
+    },
+    {
+      "id": "notas-fiscais-p4",
+      "group": "10_NOTAS_FISCAIS",
+      "label": "Notas fiscais · página 4",
+      "endpoint": "nota/",
+      "params": {
+        "pagina": 4,
+        "limite": 500
+      },
+      "paged": true,
+      "pageKind": "notas",
+      "status": "done",
+      "attempts": 1,
+      "requestCost": 0.01,
+      "startedAt": "2026-08-27T16:16:37.053Z",
+      "finishedAt": "2026-08-27T16:16:37.460Z",
+      "rows": 500,
+      "encoding": "Windows-1252",
+      "bytes": 284643
+    },
+    {
+      "id": "notas-fiscais-p5",
+      "group": "10_NOTAS_FISCAIS",
+      "label": "Notas fiscais · página 5",
+      "endpoint": "nota/",
+      "params": {
+        "pagina": 5,
+        "limite": 500
+      },
+      "paged": true,
+      "pageKind": "notas",
+      "status": "done",
+      "attempts": 1,
+      "requestCost": 0.01,
+      "startedAt": "2026-08-27T16:16:37.483Z",
+      "finishedAt": "2026-08-27T16:16:37.864Z",
+      "rows": 65,
+      "encoding": "Windows-1252",
+      "bytes": 36946
+    },
+    {
+      "id": "notas-fiscais-p6",
+      "group": "10_NOTAS_FISCAIS",
+      "label": "Notas fiscais · página 6",
+      "endpoint": "nota/",
+      "params": {
+        "pagina": 6,
+        "limite": 500
+      },
+      "paged": true,
+      "pageKind": "notas",
+      "status": "done",
+      "attempts": 3,
+      "requestCost": 0.01,
+      "startedAt": "2026-08-27T16:19:10.398Z",
+      "lastError": "",
+      "finishedAt": "2026-08-27T16:19:11.022Z",
+      "rows": 0,
+      "encoding": "raw-only",
+      "bytes": 0,
+      "completedWithWarning": true,
+      "endOfPagination": true,
+      "warning": "Fim da paginação de notas inferido na página 6: a WM10 retornou HTTP 200 com conteúdo não-JSON. O corpo bruto foi preservado."
+    }
+  ],
+  "errors": [],
+  "apiScope": "Todos os endpoints GET documentados + todas as movimentações em todos os tipos/estados",
+  "archiveRoot": "C:\\Site\\painel\\data\\erp\\wm10-arquivo-historico",
+  "warnings": [
+    {
+      "taskId": "mov-0-A",
+      "label": "consignado · aberta",
+      "message": "A API WM10 retornou conteúdo inválido (HTTP 200).",
+      "at": "2026-08-27T14:59:28.904Z"
+    },
+    {
+      "taskId": "mov-0-C",
+      "label": "consignado · concluida",
+      "message": "A API WM10 retornou conteúdo inválido (HTTP 200).",
+      "at": "2026-08-27T14:59:29.040Z"
+    },
+    {
+      "taskId": "mov-0-D",
+      "label": "consignado · cancelada",
+      "message": "A API WM10 retornou conteúdo inválido (HTTP 200).",
+      "at": "2026-08-27T14:59:29.180Z"
+    },
+    {
+      "taskId": "mov-0-E",
+      "label": "consignado · estornada",
+      "message": "A API WM10 retornou conteúdo inválido (HTTP 200).",
+      "at": "2026-08-27T14:59:29.303Z"
+    },
+    {
+      "taskId": "mov-2-A",
+      "label": "orcamento · aberta",
+      "message": "A API WM10 retornou conteúdo inválido (HTTP 200).",
+      "at": "2026-08-27T14:59:33.579Z"
+    },
+    {
+      "taskId": "mov-2-E",
+      "label": "orcamento · estornada",
+      "message": "A API WM10 retornou conteúdo inválido (HTTP 200).",
+      "at": "2026-08-27T14:59:34.439Z"
+    },
+    {
+      "taskId": "mov-3-D",
+      "label": "venda loja virtual · cancelada",
+      "message": "A API WM10 retornou conteúdo inválido (HTTP 200).",
+      "at": "2026-08-27T14:59:34.956Z"
+    },
+    {
+      "taskId": "mov-5-A",
+      "label": "pre venda · aberta",
+      "message": "A API WM10 retornou conteúdo inválido (HTTP 200).",
+      "at": "2026-08-27T14:59:38.237Z"
+    },
+    {
+      "taskId": "mov-5-C",
+      "label": "pre venda · concluida",
+      "message": "A API WM10 retornou conteúdo inválido (HTTP 200).",
+      "at": "2026-08-27T14:59:38.364Z"
+    },
+    {
+      "taskId": "mov-5-D",
+      "label": "pre venda · cancelada",
+      "message": "A API WM10 retornou conteúdo inválido (HTTP 200).",
+      "at": "2026-08-27T14:59:38.490Z"
+    },
+    {
+      "taskId": "mov-5-E",
+      "label": "pre venda · estornada",
+      "message": "A API WM10 retornou conteúdo inválido (HTTP 200).",
+      "at": "2026-08-27T14:59:38.684Z"
+    },
+    {
+      "taskId": "notas-fiscais-p6",
+      "label": "Notas fiscais · página 6",
+      "message": "Fim da paginação de notas inferido na página 6: a WM10 retornou HTTP 200 com conteúdo não-JSON. O corpo bruto foi preservado.",
+      "at": "2026-08-27T16:19:11.022Z"
+    }
+  ]
+}

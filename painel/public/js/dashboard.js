@@ -32,14 +32,30 @@
   function renderAttention(items){
     const host=document.querySelector('[data-attention-list]');
     if(!host) return;
-    if(!items.length){ host.innerHTML='<div class="attention-empty">Nenhuma pendência crítica detectada agora.</div>'; return; }
-    const pageCount=Math.max(1,Math.ceil(items.length/attentionPageSize));
+    const panel=host.closest('.attention-panel');
+    if(!items.length){
+      panel?.classList.remove('has-due-today','has-overdue-payable');
+      host.innerHTML='<div class="attention-empty">Nenhuma pendência crítica detectada agora.</div>';
+      return;
+    }
+
+    // Contas vencidas e as que vencem hoje ficam sempre presas no topo. Vencidas
+    // recebem prioridade visual vermelha; "vence hoje" mantém o destaque amarelo.
+    const overduePayable=items.find(item=>item.kind==='payable_overdue');
+    const dueToday=items.find(item=>item.kind==='payable_due_today');
+    const regularItems=items.filter(item=>!['payable_overdue','payable_due_today'].includes(item.kind));
+    panel?.classList.toggle('has-overdue-payable',Boolean(overduePayable));
+    panel?.classList.toggle('has-due-today',Boolean(dueToday) && !overduePayable);
+
+    const pageCount=Math.max(1,Math.ceil(regularItems.length/attentionPageSize));
     attentionPage=Math.min(attentionPage,pageCount-1);
     const start=attentionPage*attentionPageSize;
-    const pageItems=items.slice(start,start+attentionPageSize);
+    const pageItems=regularItems.slice(start,start+attentionPageSize);
+    const overdueCard=overduePayable?`<a href="${escapeHtml(overduePayable.href)}" class="attention-item ${escapeHtml(overduePayable.level)} overdue-payable"><span class="attention-icon">${escapeHtml(overduePayable.icon)}</span><strong>${escapeHtml(overduePayable.label)}<small class="attention-overdue-badge">${/^[1]\s/.test(String(overduePayable.label||''))?'VENCIDA':'VENCIDAS'}</small></strong><span>→</span></a>`:'';
+    const dueTodayCard=dueToday?`<a href="${escapeHtml(dueToday.href)}" class="attention-item ${escapeHtml(dueToday.level)} due-today"><span class="attention-icon">${escapeHtml(dueToday.icon)}</span><strong>${escapeHtml(dueToday.label)}<small class="attention-today-badge">VENCE HOJE</small></strong><span>→</span></a>`:'';
     const cards=pageItems.map(item=>`<a href="${escapeHtml(item.href)}" class="attention-item ${escapeHtml(item.level)}"><span class="attention-icon">${escapeHtml(item.icon)}</span><strong>${escapeHtml(item.label)}</strong><span>→</span></a>`).join('');
-    const pager=pageCount>1?`<div class="attention-pager"><button type="button" data-attention-prev ${attentionPage===0?'disabled':''} aria-label="Parte anterior">←</button><span>Parte ${attentionPage+1} de ${pageCount}</span><button type="button" data-attention-next ${attentionPage===pageCount-1?'disabled':''} aria-label="Próxima parte">→</button></div>`:'';
-    host.innerHTML=cards+pager;
+    const pager=regularItems.length>attentionPageSize?`<div class="attention-pager"><button type="button" data-attention-prev ${attentionPage===0?'disabled':''} aria-label="Parte anterior">←</button><span>Parte ${attentionPage+1} de ${pageCount}</span><button type="button" data-attention-next ${attentionPage===pageCount-1?'disabled':''} aria-label="Próxima parte">→</button></div>`:'';
+    host.innerHTML=overdueCard+dueTodayCard+cards+pager;
     host.querySelector('[data-attention-prev]')?.addEventListener('click',()=>{attentionPage=Math.max(0,attentionPage-1);renderAttention(items);});
     host.querySelector('[data-attention-next]')?.addEventListener('click',()=>{attentionPage=Math.min(pageCount-1,attentionPage+1);renderAttention(items);});
   }

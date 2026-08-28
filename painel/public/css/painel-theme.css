@@ -3735,3 +3735,114 @@ html[data-panel-theme]:not([data-panel-theme="light"]) .agenda-item{color:var(--
 html[data-panel-theme]:not([data-panel-theme="light"]) .agenda-item-main small,
 html[data-panel-theme]:not([data-panel-theme="light"]) .agenda-field label,
 html[data-panel-theme]:not([data-panel-theme="light"]) .agenda-settings-panel small{color:var(--muted)!important}
+
+/* ===== Produtos — largura ERP/Estoque + Status v0.12.3.13 =====
+   Reforço global para evitar regressões de regras legadas da listagem. */
+body table.quality-products-summary-table{table-layout:fixed!important;width:100%!important}
+body table.quality-products-summary-table [data-product-column="erp-stock"]{width:13%!important;min-width:0!important}
+body table.quality-products-summary-table [data-product-column="status"]{width:18%!important;min-width:0!important}
+body table.quality-products-summary-table td[data-product-column="erp-stock"] .quality-erp-stock-card{min-width:0!important;max-width:100%!important;overflow:hidden!important}
+body table.quality-products-summary-table td[data-product-column="status"] .quality-channel-status-controls{width:100%!important;max-width:none!important}
+body table.quality-products-summary-table td[data-product-column="status"] .quality-channel-status-control{grid-template-columns:44px minmax(94px,1fr)!important;width:100%!important}
+body table.quality-products-summary-table td[data-product-column="status"] .quality-channel-status-control select{min-width:94px!important;width:100%!important;max-width:none!important}
+
+
+
+/* ===== Produtos — colgroup definitivo ERP/Estoque + Status v0.12.3.14 =====
+   As larguras passam a ser controladas pelas colunas reais da tabela. */
+body table.quality-products-summary-table{table-layout:fixed!important;width:100%!important}
+body table.quality-products-summary-table th[data-product-column],
+body table.quality-products-summary-table td[data-product-column]{width:auto!important;min-width:0!important;max-width:none!important;box-sizing:border-box!important}
+body table.quality-products-summary-table col[data-product-column="select"]{width:3.5%!important}
+body table.quality-products-summary-table col[data-product-column="code"]{width:6%!important}
+body table.quality-products-summary-table col[data-product-column="product"]{width:37.5%!important}
+body table.quality-products-summary-table col[data-product-column="erp-stock"]{width:15%!important}
+body table.quality-products-summary-table col[data-product-column="status"]{width:15%!important}
+body table.quality-products-summary-table col[data-product-column="lv"]{width:13%!important}
+body table.quality-products-summary-table col[data-product-column="resources"]{width:0!important;visibility:collapse!important}
+body table.quality-products-summary-table col[data-product-column="actions"]{width:10%!important}
+body table.quality-products-summary-table col.quality-column-hidden{width:0!important;visibility:collapse!important}
+body table.quality-products-summary-table td[data-product-column="erp-stock"]{overflow:hidden!important}
+body table.quality-products-summary-table td[data-product-column="erp-stock"] .quality-erp-stock-card{width:100%!important;max-width:100%!important;min-width:0!important}
+body table.quality-products-summary-table td[data-product-column="status"]{overflow:hidden!important}
+body table.quality-products-summary-table td[data-product-column="status"] .quality-channel-status-controls{width:100%!important;max-width:100%!important;min-width:0!important}
+body table.quality-products-summary-table td[data-product-column="status"] .quality-channel-status-control{width:100%!important;max-width:100%!important;min-width:0!important;grid-template-columns:42px minmax(0,1fr)!important;gap:5px!important}
+body table.quality-products-summary-table td[data-product-column="status"] .quality-channel-status-control select{width:100%!important;min-width:0!important;max-width:100%!important}
+
+
+/* ===== Produtos — balanceamento final Produto / ERP-Estoque / Status v0.12.3.15 ===== */
+body table.quality-products-summary-table col[data-product-column="select"]{width:3.5%!important}
+body table.quality-products-summary-table col[data-product-column="code"]{width:6%!important}
+body table.quality-products-summary-table col[data-product-column="product"]{width:37.5%!important}
+body table.quality-products-summary-table col[data-product-column="erp-stock"]{width:15%!important}
+body table.quality-products-summary-table col[data-product-column="status"]{width:15%!important}
+body table.quality-products-summary-table col[data-product-column="lv"]{width:13%!important}
+body table.quality-products-summary-table col[data-product-column="resources"]{width:0!important;visibility:collapse!important}
+body table.quality-products-summary-table col[data-product-column="actions"]{width:10%!important}
+body table.quality-products-summary-table td[data-product-column="product"]{padding-left:8px!important;padding-right:8px!important}
+body table.quality-products-summary-table .quality-product-open-link{width:100%!important;min-width:0!important}
+body table.quality-products-summary-table .quality-product-main{min-width:0!important;overflow:hidden!important}
+body table.quality-products-summary-table .quality-product-open-name{white-space:nowrap!important;overflow:hidden!important;text-overflow:ellipsis!important}
+body table.quality-products-summary-table td[data-product-column="erp-stock"]{padding-left:5px!important;padding-right:5px!important}
+body table.quality-products-summary-table td[data-product-column="status"]{padding-left:6px!important;padding-right:6px!important}
+body table.quality-products-summary-table td[data-product-column="status"] .quality-channel-status-control{grid-template-columns:40px minmax(0,1fr)!important;gap:5px!important;padding-left:6px!important;padding-right:5px!important}
+body table.quality-products-summary-table td[data-product-column="status"] .quality-channel-status-control select{min-width:0!important;width:100%!important;padding-left:7px!important;padding-right:20px!important}
+
+
+/* ===== PDV Quality v0.15.0 — cabeçalho compacto + contexto de troca ===== */
+.pdv-title-stack{
+  display:grid;
+  justify-items:start;
+  align-content:center;
+  gap:2px;
+  min-width:72px;
+  white-space:nowrap;
+}
+.pdv-title-stack h1{margin:0!important;font-size:28px;line-height:1}
+.pdv-title-stack .pdv-version{
+  padding:0;
+  border:0;
+  border-radius:0;
+  background:transparent;
+  font-size:9px;
+  line-height:1.15;
+  letter-spacing:.02em;
+  color:var(--muted);
+  opacity:.9;
+}
+.pdv-head-actions{gap:6px}
+.pdv-head-actions>.btn{padding:8px 10px}
+.pdv-shortcuts-trigger{
+  min-width:56px!important;
+  padding:8px 8px!important;
+  display:inline-flex!important;
+  align-items:center;
+  justify-content:center;
+  gap:5px;
+}
+.pdv-shortcuts-trigger kbd{font-size:9px!important}
+.pdv-exchange-context{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:14px;
+  padding:10px 13px;
+  border:1px solid color-mix(in srgb,#2563eb 35%,var(--line));
+  border-radius:12px;
+  background:color-mix(in srgb,#2563eb 7%,var(--card));
+}
+.pdv-exchange-context>div:first-child{display:grid;gap:2px}
+.pdv-exchange-context>div:first-child>strong{font-size:12px}
+.pdv-exchange-context>div:first-child>span{font-size:10px;color:var(--muted)}
+.pdv-exchange-credit{display:grid;grid-template-columns:auto auto;column-gap:8px;align-items:baseline;text-align:right}
+.pdv-exchange-credit small{grid-column:1;font-size:8px;color:var(--muted);text-transform:uppercase;font-weight:900}
+.pdv-exchange-credit b{grid-column:2;font-size:16px;color:#16a34a}
+.pdv-exchange-credit span{grid-column:1/-1;font-size:9px;color:var(--muted)}
+@media(max-width:1250px){
+  .pdv-head-actions>.btn{padding:7px 9px}
+  .pdv-shortcuts-trigger{min-width:52px!important}
+}
+@media(max-width:760px){
+  .pdv-exchange-context{display:grid}
+  .pdv-exchange-credit{text-align:left;justify-content:start}
+}

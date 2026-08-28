@@ -3,6 +3,32 @@
   "defaultCashboxId": "caixa-principal",
   "paymentMethods": [
     {
+      "id": "PM-CARTEIRA",
+      "name": "Crédito do cliente / troca",
+      "code": "CART",
+      "active": true,
+      "salesPaid": true,
+      "purchasePaid": false,
+      "creditCashOnSale": false,
+      "debitCashOnPurchase": false,
+      "autoSettle": true,
+      "eventType": "wallet",
+      "modules": {
+        "sales": true,
+        "purchases": false,
+        "pdv": true,
+        "serviceOrders": true,
+        "finance": true
+      },
+      "allowInstallments": false,
+      "maxInstallments": 1,
+      "settlementDays": 0,
+      "generatesReceivable": false,
+      "requireIdentifiedCustomer": true,
+      "system": true,
+      "kind": "other"
+    },
+    {
       "id": "PAY-7c338d6b-a7e2-4a40-b193-c6395128a938",
       "name": "Convenio Sicredi até 60x",
       "code": "",
@@ -422,13 +448,13 @@
       "cardBrandRequired": false,
       "modules": {
         "sales": true,
-        "purchases": false,
+        "purchases": true,
         "pdv": true,
         "serviceOrders": false,
         "finance": false
       },
       "parentId": null,
-      "updatedAt": "2026-08-18T01:00:27.837Z",
+      "updatedAt": "2026-08-25T16:52:41.165Z",
       "updatedBy": "painel",
       "createdAt": "2026-08-18T01:00:27.837Z",
       "createdBy": "painel",
@@ -508,6 +534,8 @@
       "defaultInstallments": 1,
       "firstDueDays": 30,
       "defaultOperationType": "sale",
+      "discountApprovalEnabled": true,
+      "discountApprovalTtlMinutes": 5,
       "visibleColumns": {
         "reference": true,
         "serial": false,
@@ -528,7 +556,8 @@
         "PAY-1bee6a58-8d6f-4ca7-b1c4-cd9e40ea6197",
         "PAY-7d47b3ee-c71b-4e90-9f68-7a80cbdc4d6a",
         "PAY-f2f5fcbf-9285-4b7f-b58b-88af3de1dfdf",
-        "PAY-80aa64db-9fbf-404e-91cc-5a788c4b2880"
+        "PAY-80aa64db-9fbf-404e-91cc-5a788c4b2880",
+        "PM-CARTEIRA"
       ],
       "allowedUsers": [],
       "allowedSellers": [],

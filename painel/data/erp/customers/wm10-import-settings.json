@@ -1,9 +1,11 @@
 {
-  "version": "0.25.0",
+  "version": "0.27.0",
   "baseUrl": "https://app.wm10.com.br/quality/sistema/api/cliente/",
+  "salesBaseUrl": "https://app.wm10.com.br/quality/sistema/api/venda/",
   "cnpj": "20375910000166",
   "token": "EXFjfmJ0AAATQ1VSRFM",
-  "pageSize": 100,
+  "pageSize": 500,
+  "salesBatchSize": 250,
   "ignoredCodes": [
     2,
     755,

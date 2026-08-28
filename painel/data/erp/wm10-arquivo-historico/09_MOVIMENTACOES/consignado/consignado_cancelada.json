@@ -1,0 +1,14 @@
+{
+  "archiveVersion": "1.2",
+  "endpoint": "venda/",
+  "filters": {
+    "tipo_nota": 0,
+    "estado": "D"
+  },
+  "capturedAt": "2026-08-27T14:59:29.180Z",
+  "encoding": "raw-only",
+  "count": 0,
+  "data": [],
+  "warning": "A API WM10 respondeu HTTP 200 com conteúdo não interpretável como JSON. O conteúdo bruto foi preservado no arquivo .raw e esta combinação foi mantida como etapa concluída com aviso.",
+  "parseError": "A API WM10 retornou conteúdo inválido (HTTP 200)."
+}

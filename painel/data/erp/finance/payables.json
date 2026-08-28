@@ -2,6 +2,265 @@
   "version": "0.18.0",
   "items": [
     {
+      "id": "PAY-30a3b168-023c-4f49-b714-07db143fba8c",
+      "number": "CP-000071",
+      "supplierId": "FOR-1787876357527-SGZSU",
+      "supplierName": "Ferinha desbloqueios",
+      "entryType": "expense",
+      "supplierDocument": "",
+      "description": "p/ moto g14 revenda",
+      "documentNumber": "",
+      "origin": "manual",
+      "originId": "",
+      "issueDate": "2026-08-27",
+      "competenceDate": "2026-08-01",
+      "competencies": [
+        "2026-08"
+      ],
+      "grossValue": 110,
+      "discount": 0,
+      "interest": 0,
+      "fine": 0,
+      "netValue": 110,
+      "paidValue": 110,
+      "openBalance": 0,
+      "paymentMethodId": "PM-DINHEIRO",
+      "paymentPlan": [
+        {
+          "id": "PPL-6b80c0a9-1b2a-4da9-be90-c9173d28b67c",
+          "paymentMethodId": "PM-DINHEIRO",
+          "value": 110,
+          "installmentCount": 1,
+          "firstDueDate": "2026-08-27",
+          "installmentDueDates": [],
+          "intervalMonths": 1
+        }
+      ],
+      "accountId": "ACC-73fee17f-21f5-4744-b909-000062525c96",
+      "costCenterId": "CC-COMERCIAL",
+      "categoryId": "CC-COMERCIAL",
+      "storeId": "",
+      "cashboxId": "caixa-principal",
+      "status": "paid",
+      "notes": "",
+      "createdAt": "2026-08-28T00:19:37.735Z",
+      "createdBy": "Matheus Fernando",
+      "updatedAt": "2026-08-28T00:19:37.806Z",
+      "updatedBy": "Matheus Fernando"
+    },
+    {
+      "id": "PAY-e5bb959b-604e-4c01-9832-97a1a7d02ae8",
+      "number": "CP-000070",
+      "supplierId": "FOR-1787847948229-S8E6V",
+      "supplierName": "Fornecedores Diversos",
+      "entryType": "purchase",
+      "supplierDocument": "",
+      "description": "Compra COM-000016 · Fornecedores Diversos",
+      "documentNumber": "COM-000016",
+      "origin": "purchase",
+      "originId": "PUR-386f4d35-c690-4b63-85fb-879c744ca776",
+      "issueDate": "2026-08-27",
+      "competenceDate": "2026-08-01",
+      "competencies": [
+        "2026-08"
+      ],
+      "grossValue": 4290.77,
+      "discount": 0,
+      "interest": 0,
+      "fine": 0,
+      "netValue": 4290.77,
+      "paidValue": 3849,
+      "openBalance": 441.77,
+      "paymentMethodId": "PM-DINHEIRO",
+      "paymentPlan": [
+        {
+          "id": "PPL-f49897d4-3542-4b71-a48e-35e3e094f08d",
+          "paymentMethodId": "PM-DINHEIRO",
+          "value": 3600,
+          "installmentCount": 1,
+          "firstDueDate": "2026-08-27",
+          "installmentDueDates": [
+            "2026-08-27"
+          ],
+          "intervalMonths": 1
+        },
+        {
+          "id": "PPL-136586b7-002b-4d8c-8956-4727ff12cf31",
+          "paymentMethodId": "PM-DINHEIRO",
+          "value": 249,
+          "installmentCount": 1,
+          "firstDueDate": "2026-08-27",
+          "installmentDueDates": [
+            "2026-08-27"
+          ],
+          "intervalMonths": 1
+        },
+        {
+          "id": "PPL-4b37daee-1228-409f-8d66-d00fbf181c36",
+          "paymentMethodId": "PM-BOLETO",
+          "value": 441.77,
+          "installmentCount": 1,
+          "firstDueDate": "2026-08-27",
+          "installmentDueDates": [
+            "2026-08-27"
+          ],
+          "intervalMonths": 1
+        }
+      ],
+      "accountId": "",
+      "costCenterId": "",
+      "categoryId": "",
+      "storeId": "",
+      "cashboxId": "caixa-principal",
+      "status": "partial",
+      "notes": "Gerado automaticamente pela compra COM-000016.",
+      "createdAt": "2026-08-27T17:52:32.691Z",
+      "createdBy": "Matheus Fernando",
+      "updatedAt": "2026-08-27T17:52:32.827Z",
+      "updatedBy": "Matheus Fernando"
+    },
+    {
+      "id": "PAY-0e76be82-df53-4b8e-a5a6-521d999d8c27",
+      "number": "CP-000069",
+      "supplierId": "FOR-1787847948229-S8E6V",
+      "supplierName": "Fornecedores Diversos",
+      "entryType": "expense",
+      "supplierDocument": "",
+      "description": "echo dot neiva",
+      "documentNumber": "",
+      "origin": "manual",
+      "originId": "",
+      "issueDate": "2026-08-27",
+      "competenceDate": "2026-08-01",
+      "competencies": [
+        "2026-08"
+      ],
+      "grossValue": 361.23,
+      "discount": 0,
+      "interest": 0,
+      "fine": 0,
+      "netValue": 361.23,
+      "paidValue": 0,
+      "openBalance": 361.23,
+      "paymentMethodId": "PM-BOLETO",
+      "paymentPlan": [
+        {
+          "id": "PPL-fdb1b7a3-15ba-4044-94af-8fe72766f111",
+          "paymentMethodId": "PM-BOLETO",
+          "value": 361.44,
+          "installmentCount": 1,
+          "firstDueDate": "2026-08-28",
+          "installmentDueDates": [],
+          "intervalMonths": 1
+        }
+      ],
+      "accountId": "ACC-20-11",
+      "costCenterId": "CC-COMERCIAL",
+      "categoryId": "CC-COMERCIAL",
+      "storeId": "",
+      "cashboxId": "caixa-principal",
+      "status": "open",
+      "notes": "",
+      "createdAt": "2026-08-27T17:20:02.666Z",
+      "createdBy": "Matheus Fernando",
+      "updatedAt": "2026-08-27T17:53:00.010Z",
+      "updatedBy": "Matheus Fernando"
+    },
+    {
+      "id": "PAY-70cb0965-cb5b-49b9-8848-228d9cefa5bf",
+      "number": "CP-000068",
+      "supplierId": "FOR-1787142115719-PMQL9",
+      "supplierName": "Transportadora João Batista Talheimer",
+      "entryType": "expense",
+      "supplierDocument": "00792451023",
+      "description": "frete",
+      "documentNumber": "",
+      "origin": "manual",
+      "originId": "",
+      "issueDate": "2026-08-27",
+      "competenceDate": "2026-08-01",
+      "competencies": [
+        "2026-08"
+      ],
+      "grossValue": 35,
+      "discount": 0,
+      "interest": 0,
+      "fine": 0,
+      "netValue": 35,
+      "paidValue": 35,
+      "openBalance": 0,
+      "paymentMethodId": "PM-DINHEIRO",
+      "paymentPlan": [
+        {
+          "id": "PPL-c89be4d0-8bd8-40b3-a833-56c008e4969e",
+          "paymentMethodId": "PM-DINHEIRO",
+          "value": 35,
+          "installmentCount": 1,
+          "firstDueDate": "2026-08-27",
+          "installmentDueDates": [],
+          "intervalMonths": 1
+        }
+      ],
+      "accountId": "ACC-10-08",
+      "costCenterId": "CC-CMV",
+      "categoryId": "CC-CMV",
+      "storeId": "",
+      "cashboxId": "caixa-principal",
+      "status": "paid",
+      "notes": "",
+      "createdAt": "2026-08-27T12:37:52.368Z",
+      "createdBy": "Matheus Fernando",
+      "updatedAt": "2026-08-27T12:37:52.427Z",
+      "updatedBy": "Matheus Fernando"
+    },
+    {
+      "id": "PAY-574cda04-3537-4f92-bee0-61e9c202ecb3",
+      "number": "CP-000067",
+      "supplierId": "FOR-1785711679462-RCRZS",
+      "supplierName": "Matheus Fernando Chechi",
+      "entryType": "expense",
+      "supplierDocument": "01172199086",
+      "description": "graduação jiu",
+      "documentNumber": "",
+      "origin": "manual",
+      "originId": "",
+      "issueDate": "2026-08-24",
+      "competenceDate": "2026-08-01",
+      "competencies": [
+        "2026-08"
+      ],
+      "grossValue": 50,
+      "discount": 0,
+      "interest": 0,
+      "fine": 0,
+      "netValue": 50,
+      "paidValue": 50,
+      "openBalance": 0,
+      "paymentMethodId": "PM-DINHEIRO",
+      "paymentPlan": [
+        {
+          "id": "PPL-088ee7f6-3b50-4b4d-8e0e-89b915e14998",
+          "paymentMethodId": "PM-DINHEIRO",
+          "value": 50,
+          "installmentCount": 1,
+          "firstDueDate": "2026-08-24",
+          "installmentDueDates": [],
+          "intervalMonths": 1
+        }
+      ],
+      "accountId": "ACC-90-02",
+      "costCenterId": "CC-PESSOAS",
+      "categoryId": "CC-PESSOAS",
+      "storeId": "",
+      "cashboxId": "caixa-principal",
+      "status": "paid",
+      "notes": "",
+      "createdAt": "2026-08-24T17:59:55.875Z",
+      "createdBy": "painel",
+      "updatedAt": "2026-08-24T17:59:55.943Z",
+      "updatedBy": "painel"
+    },
+    {
       "id": "PAY-b0618cdb-24da-4471-a7b0-eb5c0057fcb4",
       "number": "CP-000066",
       "supplierId": "FOR-1787527916821-64A5S",
@@ -69,8 +328,8 @@
       "interest": 0,
       "fine": 0,
       "netValue": 1914.99,
-      "paidValue": 0,
-      "openBalance": 1914.99,
+      "paidValue": 1914.99,
+      "openBalance": 0,
       "paymentMethodId": "PM-BOLETO",
       "paymentPlan": [
         {
@@ -88,11 +347,11 @@
       "categoryId": "CC-COMERCIAL",
       "storeId": "",
       "cashboxId": "caixa-principal",
-      "status": "open",
+      "status": "paid",
       "notes": "",
       "createdAt": "2026-08-23T22:44:34.534Z",
       "createdBy": "painel",
-      "updatedAt": "2026-08-23T22:44:34.534Z",
+      "updatedAt": "2026-08-24T18:30:11.569Z",
       "updatedBy": "painel"
     },
     {
@@ -117,8 +376,8 @@
       "interest": 0,
       "fine": 0,
       "netValue": 78.94,
-      "paidValue": 0,
-      "openBalance": 78.94,
+      "paidValue": 39.47,
+      "openBalance": 39.47,
       "paymentMethodId": "PM-BOLETO",
       "paymentPlan": [
         {
@@ -145,11 +404,11 @@
       "categoryId": "CC-COMERCIAL",
       "storeId": "",
       "cashboxId": "caixa-principal",
-      "status": "open",
+      "status": "partial",
       "notes": "",
       "createdAt": "2026-08-23T22:42:48.656Z",
       "createdBy": "painel",
-      "updatedAt": "2026-08-23T22:42:48.656Z",
+      "updatedAt": "2026-08-24T18:30:11.613Z",
       "updatedBy": "painel"
     },
     {
@@ -271,8 +530,8 @@
       "interest": 0,
       "fine": 0,
       "netValue": 511,
-      "paidValue": 424.5,
-      "openBalance": 86.5,
+      "paidValue": 464.5,
+      "openBalance": 46.5,
       "paymentMethodId": "PM-BOLETO",
       "paymentPlan": [
         {
@@ -307,7 +566,7 @@
       "notes": "Gerado automaticamente pela compra COM-000013.",
       "createdAt": "2026-08-22T18:19:51.804Z",
       "createdBy": "painel",
-      "updatedAt": "2026-08-22T18:19:52.010Z",
+      "updatedAt": "2026-08-24T18:31:03.946Z",
       "updatedBy": "painel"
     },
     {
@@ -571,8 +830,8 @@
       "interest": 0,
       "fine": 0,
       "netValue": 274.8,
-      "paidValue": 0,
-      "openBalance": 274.8,
+      "paidValue": 68.7,
+      "openBalance": 206.1,
       "paymentMethodId": "PAY-f67a5400-9f7b-4b8b-af7a-adff277d9169",
       "paymentPlan": [
         {
@@ -617,11 +876,11 @@
       "categoryId": "CC-COMERCIAL",
       "storeId": "",
       "cashboxId": "caixa-principal",
-      "status": "open",
+      "status": "partial",
       "notes": "",
       "createdAt": "2026-08-16T20:38:31.059Z",
       "createdBy": "painel",
-      "updatedAt": "2026-08-16T20:38:31.059Z",
+      "updatedAt": "2026-08-24T18:30:11.654Z",
       "updatedBy": "painel"
     },
     {
@@ -648,8 +907,8 @@
       "interest": 0,
       "fine": 0,
       "netValue": 265.72,
-      "paidValue": 0,
-      "openBalance": 265.72,
+      "paidValue": 66.43,
+      "openBalance": 199.29,
       "paymentMethodId": "PAY-f67a5400-9f7b-4b8b-af7a-adff277d9169",
       "paymentPlan": [
         {
@@ -694,11 +953,11 @@
       "categoryId": "CC-COMERCIAL",
       "storeId": "",
       "cashboxId": "caixa-principal",
-      "status": "open",
+      "status": "partial",
       "notes": "",
       "createdAt": "2026-08-16T20:37:53.035Z",
       "createdBy": "painel",
-      "updatedAt": "2026-08-16T20:37:53.035Z",
+      "updatedAt": "2026-08-24T18:30:11.694Z",
       "updatedBy": "painel"
     },
     {
@@ -725,8 +984,8 @@
       "interest": 0,
       "fine": 0,
       "netValue": 252.8,
-      "paidValue": 0,
-      "openBalance": 252.8,
+      "paidValue": 63.2,
+      "openBalance": 189.6,
       "paymentMethodId": "PAY-f67a5400-9f7b-4b8b-af7a-adff277d9169",
       "paymentPlan": [
         {
@@ -771,11 +1030,11 @@
       "categoryId": "CC-COMERCIAL",
       "storeId": "",
       "cashboxId": "caixa-principal",
-      "status": "open",
+      "status": "partial",
       "notes": "",
       "createdAt": "2026-08-16T20:36:51.399Z",
       "createdBy": "painel",
-      "updatedAt": "2026-08-16T20:36:51.399Z",
+      "updatedAt": "2026-08-24T18:30:11.736Z",
       "updatedBy": "painel"
     },
     {
@@ -802,8 +1061,8 @@
       "interest": 0,
       "fine": 0,
       "netValue": 251.6,
-      "paidValue": 0,
-      "openBalance": 251.6,
+      "paidValue": 62.9,
+      "openBalance": 188.7,
       "paymentMethodId": "PAY-f67a5400-9f7b-4b8b-af7a-adff277d9169",
       "paymentPlan": [
         {
@@ -848,11 +1107,11 @@
       "categoryId": "CC-COMERCIAL",
       "storeId": "",
       "cashboxId": "caixa-principal",
-      "status": "open",
+      "status": "partial",
       "notes": "",
       "createdAt": "2026-08-16T20:36:19.089Z",
       "createdBy": "painel",
-      "updatedAt": "2026-08-16T20:36:19.089Z",
+      "updatedAt": "2026-08-24T18:30:11.776Z",
       "updatedBy": "painel"
     },
     {
@@ -880,8 +1139,8 @@
       "interest": 0,
       "fine": 0,
       "netValue": 1663.85,
-      "paidValue": 0,
-      "openBalance": 1663.85,
+      "paidValue": 332.77,
+      "openBalance": 1331.08,
       "paymentMethodId": "PAY-f67a5400-9f7b-4b8b-af7a-adff277d9169",
       "paymentPlan": [
         {
@@ -935,11 +1194,11 @@
       "categoryId": "CC-COMERCIAL",
       "storeId": "",
       "cashboxId": "caixa-principal",
-      "status": "open",
+      "status": "partial",
       "notes": "",
       "createdAt": "2026-08-16T20:34:46.222Z",
       "createdBy": "painel",
-      "updatedAt": "2026-08-16T20:34:46.222Z",
+      "updatedAt": "2026-08-24T18:30:11.817Z",
       "updatedBy": "painel"
     },
     {
@@ -967,8 +1226,8 @@
       "interest": 0,
       "fine": 0,
       "netValue": 330.55,
-      "paidValue": 0,
-      "openBalance": 330.55,
+      "paidValue": 66.11,
+      "openBalance": 264.44,
       "paymentMethodId": "PAY-f67a5400-9f7b-4b8b-af7a-adff277d9169",
       "paymentPlan": [
         {
@@ -1022,11 +1281,11 @@
       "categoryId": "CC-COMERCIAL",
       "storeId": "",
       "cashboxId": "caixa-principal",
-      "status": "open",
+      "status": "partial",
       "notes": "",
       "createdAt": "2026-08-16T20:33:55.655Z",
       "createdBy": "painel",
-      "updatedAt": "2026-08-16T20:33:55.655Z",
+      "updatedAt": "2026-08-24T18:30:11.857Z",
       "updatedBy": "painel"
     },
     {
@@ -1054,8 +1313,8 @@
       "interest": 0,
       "fine": 0,
       "netValue": 250,
-      "paidValue": 0,
-      "openBalance": 250,
+      "paidValue": 50,
+      "openBalance": 200,
       "paymentMethodId": "PAY-f67a5400-9f7b-4b8b-af7a-adff277d9169",
       "paymentPlan": [
         {
@@ -1109,11 +1368,11 @@
       "categoryId": "CC-COMERCIAL",
       "storeId": "",
       "cashboxId": "caixa-principal",
-      "status": "open",
+      "status": "partial",
       "notes": "",
       "createdAt": "2026-08-16T20:33:17.252Z",
       "createdBy": "painel",
-      "updatedAt": "2026-08-16T20:33:17.252Z",
+      "updatedAt": "2026-08-24T18:30:11.895Z",
       "updatedBy": "painel"
     },
     {
@@ -1143,8 +1402,8 @@
       "interest": 0,
       "fine": 0,
       "netValue": 2056.11,
-      "paidValue": 0,
-      "openBalance": 2056.11,
+      "paidValue": 293.73,
+      "openBalance": 1762.38,
       "paymentMethodId": "PAY-f67a5400-9f7b-4b8b-af7a-adff277d9169",
       "paymentPlan": [
         {
@@ -1216,11 +1475,11 @@
       "categoryId": "CC-COMERCIAL",
       "storeId": "",
       "cashboxId": "caixa-principal",
-      "status": "open",
+      "status": "partial",
       "notes": "",
       "createdAt": "2026-08-16T20:32:32.874Z",
       "createdBy": "painel",
-      "updatedAt": "2026-08-16T20:32:32.874Z",
+      "updatedAt": "2026-08-24T18:30:11.935Z",
       "updatedBy": "painel"
     },
     {
@@ -1247,8 +1506,8 @@
       "interest": 0,
       "fine": 0,
       "netValue": 445.68,
-      "paidValue": 0,
-      "openBalance": 445.68,
+      "paidValue": 111.42,
+      "openBalance": 334.26,
       "paymentMethodId": "PAY-f67a5400-9f7b-4b8b-af7a-adff277d9169",
       "paymentPlan": [
         {
@@ -1293,11 +1552,11 @@
       "categoryId": "CC-COMERCIAL",
       "storeId": "",
       "cashboxId": "caixa-principal",
-      "status": "open",
+      "status": "partial",
       "notes": "",
       "createdAt": "2026-08-16T20:31:06.032Z",
       "createdBy": "painel",
-      "updatedAt": "2026-08-16T20:31:06.032Z",
+      "updatedAt": "2026-08-24T18:30:11.978Z",
       "updatedBy": "painel"
     },
     {
@@ -1322,8 +1581,8 @@
       "interest": 0,
       "fine": 0,
       "netValue": 96.54,
-      "paidValue": 0,
-      "openBalance": 96.54,
+      "paidValue": 48.27,
+      "openBalance": 48.27,
       "paymentMethodId": "PAY-f67a5400-9f7b-4b8b-af7a-adff277d9169",
       "paymentPlan": [
         {
@@ -1350,11 +1609,11 @@
       "categoryId": "CC-COMERCIAL",
       "storeId": "",
       "cashboxId": "caixa-principal",
-      "status": "open",
+      "status": "partial",
       "notes": "",
       "createdAt": "2026-08-16T20:29:57.445Z",
       "createdBy": "painel",
-      "updatedAt": "2026-08-16T20:29:57.445Z",
+      "updatedAt": "2026-08-24T18:30:12.017Z",
       "updatedBy": "painel"
     },
     {
@@ -1385,8 +1644,8 @@
       "interest": 0,
       "fine": 0,
       "netValue": 479.2,
-      "paidValue": 0,
-      "openBalance": 479.2,
+      "paidValue": 59.9,
+      "openBalance": 419.3,
       "paymentMethodId": "PAY-f67a5400-9f7b-4b8b-af7a-adff277d9169",
       "paymentPlan": [
         {
@@ -1467,11 +1726,11 @@
       "categoryId": "CC-COMERCIAL",
       "storeId": "",
       "cashboxId": "caixa-principal",
-      "status": "open",
+      "status": "partial",
       "notes": "",
       "createdAt": "2026-08-16T20:28:22.996Z",
       "createdBy": "painel",
-      "updatedAt": "2026-08-16T20:28:22.996Z",
+      "updatedAt": "2026-08-24T18:30:12.065Z",
       "updatedBy": "painel"
     },
     {
@@ -1496,8 +1755,8 @@
       "interest": 0,
       "fine": 0,
       "netValue": 54.5,
-      "paidValue": 0,
-      "openBalance": 54.5,
+      "paidValue": 27.25,
+      "openBalance": 27.25,
       "paymentMethodId": "PAY-f67a5400-9f7b-4b8b-af7a-adff277d9169",
       "paymentPlan": [
         {
@@ -1524,11 +1783,11 @@
       "categoryId": "CC-COMERCIAL",
       "storeId": "",
       "cashboxId": "caixa-principal",
-      "status": "open",
+      "status": "partial",
       "notes": "",
       "createdAt": "2026-08-16T20:27:34.423Z",
       "createdBy": "painel",
-      "updatedAt": "2026-08-16T20:27:34.423Z",
+      "updatedAt": "2026-08-24T18:30:12.112Z",
       "updatedBy": "painel"
     },
     {
@@ -1555,8 +1814,8 @@
       "interest": 0,
       "fine": 0,
       "netValue": 508.8,
-      "paidValue": 0,
-      "openBalance": 508.8,
+      "paidValue": 127.2,
+      "openBalance": 381.6,
       "paymentMethodId": "PAY-f67a5400-9f7b-4b8b-af7a-adff277d9169",
       "paymentPlan": [
         {
@@ -1601,11 +1860,11 @@
       "categoryId": "CC-COMERCIAL",
       "storeId": "",
       "cashboxId": "caixa-principal",
-      "status": "open",
+      "status": "partial",
       "notes": "",
       "createdAt": "2026-08-16T20:25:39.716Z",
       "createdBy": "painel",
-      "updatedAt": "2026-08-16T20:25:39.716Z",
+      "updatedAt": "2026-08-24T18:30:12.152Z",
       "updatedBy": "painel"
     },
     {
@@ -1637,8 +1896,8 @@
       "interest": 0,
       "fine": 0,
       "netValue": 610.11,
-      "paidValue": 0,
-      "openBalance": 610.11,
+      "paidValue": 67.79,
+      "openBalance": 542.32,
       "paymentMethodId": "PAY-f67a5400-9f7b-4b8b-af7a-adff277d9169",
       "paymentPlan": [
         {
@@ -1728,11 +1987,11 @@
       "categoryId": "CC-COMERCIAL",
       "storeId": "",
       "cashboxId": "caixa-principal",
-      "status": "open",
+      "status": "partial",
       "notes": "",
       "createdAt": "2026-08-16T20:24:41.364Z",
       "createdBy": "painel",
-      "updatedAt": "2026-08-16T20:24:41.364Z",
+      "updatedAt": "2026-08-24T18:30:12.191Z",
       "updatedBy": "painel"
     },
     {
@@ -1760,8 +2019,8 @@
       "interest": 0,
       "fine": 0,
       "netValue": 663.8,
-      "paidValue": 0,
-      "openBalance": 663.8,
+      "paidValue": 132.76,
+      "openBalance": 531.04,
       "paymentMethodId": "PAY-f67a5400-9f7b-4b8b-af7a-adff277d9169",
       "paymentPlan": [
         {
@@ -1815,11 +2074,11 @@
       "categoryId": "CC-COMERCIAL",
       "storeId": "",
       "cashboxId": "caixa-principal",
-      "status": "open",
+      "status": "partial",
       "notes": "",
       "createdAt": "2026-08-16T20:23:11.034Z",
       "createdBy": "painel",
-      "updatedAt": "2026-08-16T20:23:11.034Z",
+      "updatedAt": "2026-08-24T18:30:12.234Z",
       "updatedBy": "painel"
     },
     {
@@ -1843,8 +2102,8 @@
       "interest": 0,
       "fine": 0,
       "netValue": 1977.12,
-      "paidValue": 0,
-      "openBalance": 1977.12,
+      "paidValue": 247.14,
+      "openBalance": 1729.98,
       "paymentMethodId": "PAY-f67a5400-9f7b-4b8b-af7a-adff277d9169",
       "paymentPlan": [
         {
@@ -1871,11 +2130,11 @@
       "categoryId": "CC-CMV",
       "storeId": "",
       "cashboxId": "caixa-principal",
-      "status": "open",
+      "status": "partial",
       "notes": "Gerado automaticamente pela compra COM-000011.",
       "createdAt": "2026-08-16T00:05:45.542Z",
       "createdBy": "painel",
-      "updatedAt": "2026-08-23T22:41:26.161Z",
+      "updatedAt": "2026-08-24T18:30:12.273Z",
       "updatedBy": "painel"
     },
     {
@@ -4190,13 +4449,13 @@
         "2026-11",
         "2026-12"
       ],
-      "grossValue": 5141.61,
+      "grossValue": 5130.13,
       "discount": 0,
       "interest": 0,
       "fine": 0,
-      "netValue": 5141.61,
-      "paidValue": 1026.69,
-      "openBalance": 4114.92,
+      "netValue": 5130.13,
+      "paidValue": 2043.94,
+      "openBalance": 3086.19,
       "paymentMethodId": "PM-BOLETO",
       "paymentPlan": [
         {
@@ -4249,7 +4508,7 @@
       "notes": "",
       "createdAt": "2026-08-02T22:32:33.917Z",
       "createdBy": "painel",
-      "updatedAt": "2026-08-07T23:21:16.941Z",
+      "updatedAt": "2026-08-25T10:09:39.697Z",
       "updatedBy": "painel"
     },
     {
@@ -4617,8 +4876,8 @@
       "interest": 0,
       "fine": 0,
       "netValue": 321.8,
-      "paidValue": 0,
-      "openBalance": 321.8,
+      "paidValue": 321.8,
+      "openBalance": 0,
       "paymentMethodId": "PM-CREDITO",
       "paymentPlan": [
         {
@@ -4635,11 +4894,11 @@
       "categoryId": "",
       "storeId": "",
       "cashboxId": "caixa-principal",
-      "status": "open",
+      "status": "paid",
       "notes": "Gerado automaticamente pela compra COM-000008.",
       "createdAt": "2026-07-30T23:25:31.669Z",
       "createdBy": "painel",
-      "updatedAt": "2026-08-01T20:47:42.642Z",
+      "updatedAt": "2026-08-24T18:30:12.328Z",
       "updatedBy": "painel"
     }
   ]

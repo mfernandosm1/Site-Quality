@@ -1,0 +1,6 @@
+FOTOS DOS PRODUTOS — WM10
+
+A API documentada exige o parâmetro cod_produto para este endpoint e não disponibiliza paginação/listagem em massa.
+Por segurança de custo, o backup completo NÃO dispara automaticamente uma requisição paga para cada produto.
+Foi preservado neste diretório um índice dos códigos de produtos disponíveis localmente para permitir uma coleta seletiva futura, se necessário.
+Esta etapa foi concluída sem consumo de requisição.

@@ -778,20 +778,45 @@
       "cardBrandRequired": false,
       "modules": {
         "sales": true,
-        "purchases": false,
+        "purchases": true,
         "pdv": true,
         "serviceOrders": false,
         "finance": false
       },
       "parentId": null,
-      "updatedAt": "2026-08-18T01:00:27.837Z",
+      "updatedAt": "2026-08-25T16:52:41.165Z",
       "updatedBy": "painel",
       "createdAt": "2026-08-18T01:00:27.837Z",
       "createdBy": "painel",
       "autoSettle": true,
       "installmentRates": [],
       "eventType": "cash"
+    },
+    {
+      "id": "PM-CARTEIRA",
+      "name": "Crédito do cliente / troca",
+      "code": "CART",
+      "active": true,
+      "salesPaid": true,
+      "purchasePaid": false,
+      "creditCashOnSale": false,
+      "debitCashOnPurchase": false,
+      "autoSettle": true,
+      "eventType": "wallet",
+      "modules": {
+        "sales": true,
+        "purchases": false,
+        "pdv": true,
+        "serviceOrders": true,
+        "finance": true
+      },
+      "allowInstallments": false,
+      "maxInstallments": 1,
+      "settlementDays": 0,
+      "generatesReceivable": false,
+      "requireIdentifiedCustomer": true,
+      "system": true
     }
   ],
-  "updatedAt": "2026-08-12T22:17:20.018Z"
+  "updatedAt": "2026-08-28T22:45:39.227Z"
 }

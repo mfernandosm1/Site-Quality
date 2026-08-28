@@ -269,6 +269,41 @@
         ]
       },
       "createdAt": "2026-08-22T18:57:24.215Z"
+    },
+    {
+      "id": "PUE-0077f807-1600-4e84-8b0f-94d58fb606c0",
+      "purchaseId": "PUR-386f4d35-c690-4b63-85fb-879c744ca776",
+      "type": "created",
+      "actor": "Matheus Fernando",
+      "details": {
+        "status": "open",
+        "total": 4290.77,
+        "itemCount": 7
+      },
+      "createdAt": "2026-08-27T17:52:32.526Z"
+    },
+    {
+      "id": "PUE-0928eb24-830f-4a80-8c87-86212c258020",
+      "purchaseId": "PUR-386f4d35-c690-4b63-85fb-879c744ca776",
+      "type": "completed",
+      "actor": "Matheus Fernando",
+      "details": {
+        "payableId": "PAY-e5bb959b-604e-4c01-9832-97a1a7d02ae8",
+        "paymentIds": [
+          "PYP-1758ca37-b15b-41b9-bcaa-6187919c70cb",
+          "PYP-1de8becf-7a04-4bdf-85d9-256e23fef09d"
+        ],
+        "inventoryMovements": [
+          "MOV-20260827-000003",
+          "MOV-20260827-000004",
+          "MOV-20260827-000005",
+          "MOV-20260827-000006",
+          "MOV-20260827-000007",
+          "MOV-20260827-000008",
+          "MOV-20260827-000009"
+        ]
+      },
+      "createdAt": "2026-08-27T17:52:33.118Z"
     }
   ]
 }

@@ -1,0 +1,1314 @@
+{
+  "archiveVersion": "1.0",
+  "endpoint": "Categoria/",
+  "filters": {},
+  "capturedAt": "2026-08-27T14:13:07.079Z",
+  "encoding": "Windows-1252",
+  "count": 163,
+  "data": [
+    {
+      "Cod_categoria": 0,
+      "Categoria": "Vale Desconto",
+      "cod_categoria_pai": 0,
+      "Ativo": 0,
+      "data_cadastrou": "2014-06-03T10:51:55.307",
+      "data_atualizou": "2024-07-12T14:13:53.857"
+    },
+    {
+      "Cod_categoria": 16,
+      "Categoria": "SMARTPHONES",
+      "cod_categoria_pai": 0,
+      "Ativo": 0,
+      "data_cadastrou": "2021-12-03T10:37:54.663",
+      "data_atualizou": "2023-09-05T16:40:15.760"
+    },
+    {
+      "Cod_categoria": 17,
+      "Categoria": "ACESSÓRIOS",
+      "cod_categoria_pai": 0,
+      "Ativo": 0,
+      "data_cadastrou": "2021-12-03T11:06:58.227",
+      "data_atualizou": "2024-07-23T18:24:12.967"
+    },
+    {
+      "Cod_categoria": 18,
+      "Categoria": "SUPORTES",
+      "cod_categoria_pai": 0,
+      "Ativo": 0,
+      "data_cadastrou": "2021-12-03T11:11:32.930",
+      "data_atualizou": "2021-12-08T15:33:04.937"
+    },
+    {
+      "Cod_categoria": 19,
+      "Categoria": "TABLETS",
+      "cod_categoria_pai": 0,
+      "Ativo": 0,
+      "data_cadastrou": "2021-12-03T11:15:38.023",
+      "data_atualizou": "2021-12-08T15:32:47.467"
+    },
+    {
+      "Cod_categoria": 20,
+      "Categoria": "MODA E FITNESS",
+      "cod_categoria_pai": 0,
+      "Ativo": 0,
+      "data_cadastrou": "2021-12-03T11:16:26.247",
+      "data_atualizou": "2021-12-08T15:30:56.567"
+    },
+    {
+      "Cod_categoria": 21,
+      "Categoria": "BEBIDAS",
+      "cod_categoria_pai": 0,
+      "Ativo": 0,
+      "data_cadastrou": "2021-12-03T11:17:17.333",
+      "data_atualizou": "2024-07-23T18:19:58.803"
+    },
+    {
+      "Cod_categoria": 22,
+      "Categoria": "CAIXAS DE SOM",
+      "cod_categoria_pai": 0,
+      "Ativo": 0,
+      "data_cadastrou": "2021-12-03T11:18:42.467",
+      "data_atualizou": "2021-12-08T15:39:15.317"
+    },
+    {
+      "Cod_categoria": 23,
+      "Categoria": "Copos Térmicos",
+      "cod_categoria_pai": 0,
+      "Ativo": 0,
+      "data_cadastrou": "2021-12-03T11:19:09.750",
+      "data_atualizou": "2023-09-05T20:33:04.417"
+    },
+    {
+      "Cod_categoria": 24,
+      "Categoria": "SMARTWATCHES",
+      "cod_categoria_pai": 0,
+      "Ativo": 0,
+      "data_cadastrou": "2021-12-03T11:22:15.670",
+      "data_atualizou": "2021-12-08T15:33:42.167"
+    },
+    {
+      "Cod_categoria": 25,
+      "Categoria": "AUTOMOTIVO",
+      "cod_categoria_pai": 0,
+      "Ativo": 0,
+      "data_cadastrou": "2021-12-03T11:25:01.610",
+      "data_atualizou": "2021-12-08T15:23:41.310"
+    },
+    {
+      "Cod_categoria": 26,
+      "Categoria": "CAPAS ",
+      "cod_categoria_pai": 0,
+      "Ativo": 0,
+      "data_cadastrou": "2021-12-03T11:26:40.050",
+      "data_atualizou": "2024-07-23T18:20:46.373"
+    },
+    {
+      "Cod_categoria": 27,
+      "Categoria": "PELÍCULAS",
+      "cod_categoria_pai": 0,
+      "Ativo": 0,
+      "data_cadastrou": "2021-12-03T11:26:49.427",
+      "data_atualizou": "2024-07-23T18:21:21.340"
+    },
+    {
+      "Cod_categoria": 28,
+      "Categoria": "BATERIAS E PILHAS",
+      "cod_categoria_pai": 0,
+      "Ativo": 0,
+      "data_cadastrou": "2021-12-03T11:37:50.003",
+      "data_atualizou": "2021-12-08T15:25:17.260"
+    },
+    {
+      "Cod_categoria": 29,
+      "Categoria": "Cabos",
+      "cod_categoria_pai": 0,
+      "Ativo": 0,
+      "data_cadastrou": "2021-12-03T11:38:58.570",
+      "data_atualizou": "2025-06-09T11:05:42.237"
+    },
+    {
+      "Cod_categoria": 30,
+      "Categoria": "UTILIDADES DOMÉSTICAS",
+      "cod_categoria_pai": 0,
+      "Ativo": 0,
+      "data_cadastrou": "2021-12-03T11:41:44.733",
+      "data_atualizou": "2021-12-08T15:27:24.820"
+    },
+    {
+      "Cod_categoria": 31,
+      "Categoria": "JOGOS E BRINQUEDOS",
+      "cod_categoria_pai": 0,
+      "Ativo": 0,
+      "data_cadastrou": "2021-12-03T13:45:36.053",
+      "data_atualizou": "2021-12-08T15:26:57.097"
+    },
+    {
+      "Cod_categoria": 32,
+      "Categoria": "PAPELARIA E ESCRITÓRIO",
+      "cod_categoria_pai": 0,
+      "Ativo": 0,
+      "data_cadastrou": "2021-12-03T14:04:50.400",
+      "data_atualizou": "2021-12-08T15:36:14.973"
+    },
+    {
+      "Cod_categoria": 33,
+      "Categoria": "PEÇAS PARA CELULARES",
+      "cod_categoria_pai": 0,
+      "Ativo": 0,
+      "data_cadastrou": "2021-12-03T14:14:42.180",
+      "data_atualizou": "2024-07-23T18:26:17.830"
+    },
+    {
+      "Cod_categoria": 34,
+      "Categoria": "Smartphones",
+      "cod_categoria_pai": 0,
+      "Ativo": 0,
+      "data_cadastrou": "2021-12-08T10:20:53.007",
+      "data_atualizou": "2024-08-08T15:53:34.553"
+    },
+    {
+      "Cod_categoria": 35,
+      "Categoria": "Corpo e Banho",
+      "cod_categoria_pai": 0,
+      "Ativo": 0,
+      "data_cadastrou": "2021-12-08T10:20:53.103",
+      "data_atualizou": "2023-09-05T16:50:59.257"
+    },
+    {
+      "Cod_categoria": 36,
+      "Categoria": "Baterias e Pilhass",
+      "cod_categoria_pai": 0,
+      "Ativo": 0,
+      "data_cadastrou": "2021-12-08T10:20:53.107",
+      "data_atualizou": "2024-08-21T17:35:03.440"
+    },
+    {
+      "Cod_categoria": 37,
+      "Categoria": "Linha Infantil",
+      "cod_categoria_pai": 0,
+      "Ativo": 1,
+      "data_cadastrou": "2021-12-08T10:20:53.107",
+      "data_atualizou": "2026-01-17T15:17:00.617"
+    },
+    {
+      "Cod_categoria": 38,
+      "Categoria": "Informática",
+      "cod_categoria_pai": 0,
+      "Ativo": 1,
+      "data_cadastrou": "2021-12-08T10:20:53.107",
+      "data_atualizou": "2025-05-13T14:02:03.820"
+    },
+    {
+      "Cod_categoria": 39,
+      "Categoria": "Smartwatches antiga",
+      "cod_categoria_pai": 0,
+      "Ativo": 0,
+      "data_cadastrou": "2021-12-08T10:20:53.107",
+      "data_atualizou": "2023-09-05T17:41:28.927"
+    },
+    {
+      "Cod_categoria": 40,
+      "Categoria": "Utilidades Domésticas",
+      "cod_categoria_pai": 0,
+      "Ativo": 1,
+      "data_cadastrou": "2021-12-08T10:20:53.110",
+      "data_atualizou": "2026-01-17T15:18:38.287"
+    },
+    {
+      "Cod_categoria": 41,
+      "Categoria": "Papelaria e Escritório",
+      "cod_categoria_pai": 0,
+      "Ativo": 1,
+      "data_cadastrou": "2021-12-08T10:20:53.110",
+      "data_atualizou": "2026-01-17T15:17:00.617"
+    },
+    {
+      "Cod_categoria": 42,
+      "Categoria": "Acessórios",
+      "cod_categoria_pai": 0,
+      "Ativo": 1,
+      "data_cadastrou": "2021-12-08T10:20:53.110",
+      "data_atualizou": "2025-05-13T14:02:36.247"
+    },
+    {
+      "Cod_categoria": 43,
+      "Categoria": "Moda e Fitness",
+      "cod_categoria_pai": 0,
+      "Ativo": 1,
+      "data_cadastrou": "2021-12-08T10:20:53.110",
+      "data_atualizou": "2026-01-17T15:17:00.617"
+    },
+    {
+      "Cod_categoria": 44,
+      "Categoria": "Automotivo",
+      "cod_categoria_pai": 0,
+      "Ativo": 0,
+      "data_cadastrou": "2021-12-08T10:20:53.113",
+      "data_atualizou": "2023-08-13T19:09:58.967"
+    },
+    {
+      "Cod_categoria": 45,
+      "Categoria": "Promoções Especiais",
+      "cod_categoria_pai": 0,
+      "Ativo": 1,
+      "data_cadastrou": "2021-12-08T10:20:53.113",
+      "data_atualizou": "2026-01-17T15:17:00.617"
+    },
+    {
+      "Cod_categoria": 46,
+      "Categoria": "Bebidas",
+      "cod_categoria_pai": 0,
+      "Ativo": 1,
+      "data_cadastrou": "2021-12-08T10:20:53.113",
+      "data_atualizou": "2026-01-17T15:17:00.617"
+    },
+    {
+      "Cod_categoria": 61,
+      "Categoria": "Serviços",
+      "cod_categoria_pai": 0,
+      "Ativo": 1,
+      "data_cadastrou": "2021-12-16T15:52:56.930",
+      "data_atualizou": "2025-05-13T14:04:46.803"
+    },
+    {
+      "Cod_categoria": 62,
+      "Categoria": "MERCADO LIVRE ",
+      "cod_categoria_pai": 0,
+      "Ativo": 1,
+      "data_cadastrou": "2022-01-12T17:17:04.940",
+      "data_atualizou": "2026-05-13T16:35:30.103"
+    },
+    {
+      "Cod_categoria": 63,
+      "Categoria": "Bateria removível",
+      "cod_categoria_pai": 0,
+      "Ativo": 0,
+      "data_cadastrou": "2022-01-14T15:23:18.087",
+      "data_atualizou": "2022-05-12T10:44:45.173"
+    },
+    {
+      "Cod_categoria": 64,
+      "Categoria": "GIFT CARD",
+      "cod_categoria_pai": 0,
+      "Ativo": 0,
+      "data_cadastrou": "2022-01-19T10:36:36.947",
+      "data_atualizou": "2023-08-13T19:38:29.860"
+    },
+    {
+      "Cod_categoria": 65,
+      "Categoria": "SERVIÇOS",
+      "cod_categoria_pai": 0,
+      "Ativo": 0,
+      "data_cadastrou": "2022-02-03T14:09:01.903",
+      "data_atualizou": "2022-02-03T14:09:43.273"
+    },
+    {
+      "Cod_categoria": 66,
+      "Categoria": "Vapes e Derivados",
+      "cod_categoria_pai": 0,
+      "Ativo": 1,
+      "data_cadastrou": "2022-02-22T09:07:38.133",
+      "data_atualizou": "2026-05-13T16:35:38.193"
+    },
+    {
+      "Cod_categoria": 67,
+      "Categoria": "Frontal",
+      "cod_categoria_pai": 0,
+      "Ativo": 0,
+      "data_cadastrou": "2022-04-06T15:58:21.557",
+      "data_atualizou": "2022-04-06T16:01:02.510"
+    },
+    {
+      "Cod_categoria": 68,
+      "Categoria": "Peças Assistência Técnica",
+      "cod_categoria_pai": 0,
+      "Ativo": 1,
+      "data_cadastrou": "2022-04-06T16:01:59.253",
+      "data_atualizou": "2025-05-13T16:19:48.117"
+    },
+    {
+      "Cod_categoria": 69,
+      "Categoria": "Eletrodoméstico",
+      "cod_categoria_pai": 0,
+      "Ativo": 0,
+      "data_cadastrou": "2022-07-19T11:15:31.987",
+      "data_atualizou": "2023-09-05T11:48:20.440"
+    },
+    {
+      "Cod_categoria": 70,
+      "Categoria": "Taxa ou Imposto Sobre Produtos",
+      "cod_categoria_pai": 0,
+      "Ativo": 0,
+      "data_cadastrou": "2022-09-27T08:45:09.847",
+      "data_atualizou": "2023-07-27T21:31:55.263"
+    },
+    {
+      "Cod_categoria": 71,
+      "Categoria": "UTILIDADES ASSISTENCIA",
+      "cod_categoria_pai": 0,
+      "Ativo": 0,
+      "data_cadastrou": "2023-05-15T15:51:36.490",
+      "data_atualizou": "2023-08-12T18:49:14.813"
+    },
+    {
+      "Cod_categoria": 72,
+      "Categoria": "Materiais e Equipamentos Internos",
+      "cod_categoria_pai": 0,
+      "Ativo": 1,
+      "data_cadastrou": "2023-09-03T12:29:00.207",
+      "data_atualizou": "2026-01-31T17:46:47.383"
+    },
+    {
+      "Cod_categoria": 1001,
+      "Categoria": "NOVOS",
+      "cod_categoria_pai": 16,
+      "Ativo": 0,
+      "data_cadastrou": "2021-12-03T11:45:24.613",
+      "data_atualizou": "2023-09-05T16:40:15.760"
+    },
+    {
+      "Cod_categoria": 1002,
+      "Categoria": "USADOS",
+      "cod_categoria_pai": 16,
+      "Ativo": 0,
+      "data_cadastrou": "2021-12-03T11:45:50.780",
+      "data_atualizou": "2023-09-05T16:40:15.760"
+    },
+    {
+      "Cod_categoria": 1003,
+      "Categoria": "ANTI IMPACTO",
+      "cod_categoria_pai": 26,
+      "Ativo": 0,
+      "data_cadastrou": "2021-12-03T11:46:23.727",
+      "data_atualizou": "2024-07-23T18:20:46.373"
+    },
+    {
+      "Cod_categoria": 1004,
+      "Categoria": "CASE",
+      "cod_categoria_pai": 26,
+      "Ativo": 0,
+      "data_cadastrou": "2021-12-03T11:46:33.197",
+      "data_atualizou": "2024-07-23T18:20:46.373"
+    },
+    {
+      "Cod_categoria": 1005,
+      "Categoria": "SILICONE",
+      "cod_categoria_pai": 26,
+      "Ativo": 0,
+      "data_cadastrou": "2021-12-03T11:47:06.880",
+      "data_atualizou": "2024-07-23T18:20:46.373"
+    },
+    {
+      "Cod_categoria": 1006,
+      "Categoria": "CABOS USB",
+      "cod_categoria_pai": 29,
+      "Ativo": 0,
+      "data_cadastrou": "2021-12-03T11:48:41.767",
+      "data_atualizou": "2024-07-23T18:25:51.063"
+    },
+    {
+      "Cod_categoria": 1007,
+      "Categoria": "CABOS HDMI",
+      "cod_categoria_pai": 29,
+      "Ativo": 0,
+      "data_cadastrou": "2021-12-03T11:49:02.460",
+      "data_atualizou": "2024-07-23T18:25:51.063"
+    },
+    {
+      "Cod_categoria": 1008,
+      "Categoria": "CABOS DIVERSOS",
+      "cod_categoria_pai": 29,
+      "Ativo": 0,
+      "data_cadastrou": "2021-12-03T11:50:02.087",
+      "data_atualizou": "2024-07-23T18:25:51.063"
+    },
+    {
+      "Cod_categoria": 1009,
+      "Categoria": "VIDRO 3D",
+      "cod_categoria_pai": 27,
+      "Ativo": 0,
+      "data_cadastrou": "2021-12-03T11:59:09.277",
+      "data_atualizou": "2024-07-23T18:21:21.340"
+    },
+    {
+      "Cod_categoria": 1010,
+      "Categoria": "GEL",
+      "cod_categoria_pai": 27,
+      "Ativo": 0,
+      "data_cadastrou": "2021-12-03T11:59:18.683",
+      "data_atualizou": "2024-07-23T18:21:21.340"
+    },
+    {
+      "Cod_categoria": 1011,
+      "Categoria": "VIDRO NORMAL",
+      "cod_categoria_pai": 27,
+      "Ativo": 0,
+      "data_cadastrou": "2021-12-03T11:59:56.313",
+      "data_atualizou": "2024-07-23T18:21:21.340"
+    },
+    {
+      "Cod_categoria": 1012,
+      "Categoria": "FONES DE OUVIDO",
+      "cod_categoria_pai": 17,
+      "Ativo": 0,
+      "data_cadastrou": "2021-12-03T13:46:51.240",
+      "data_atualizou": "2024-07-23T18:24:12.967"
+    },
+    {
+      "Cod_categoria": 1013,
+      "Categoria": "FONES DE OUVIDO BLUETOOTH",
+      "cod_categoria_pai": 17,
+      "Ativo": 0,
+      "data_cadastrou": "2021-12-03T13:49:10.093",
+      "data_atualizou": "2024-07-23T18:24:12.967"
+    },
+    {
+      "Cod_categoria": 1014,
+      "Categoria": "PEN DRIVE E CARTÕES SD",
+      "cod_categoria_pai": 17,
+      "Ativo": 0,
+      "data_cadastrou": "2021-12-03T14:06:07.010",
+      "data_atualizou": "2024-07-23T18:24:12.967"
+    },
+    {
+      "Cod_categoria": 1015,
+      "Categoria": "ADAPTADORES E RECEPTORES",
+      "cod_categoria_pai": 17,
+      "Ativo": 0,
+      "data_cadastrou": "2021-12-03T14:06:56.517",
+      "data_atualizou": "2024-07-23T18:24:12.967"
+    },
+    {
+      "Cod_categoria": 1016,
+      "Categoria": "TELAS FRONTAIS",
+      "cod_categoria_pai": 33,
+      "Ativo": 0,
+      "data_cadastrou": "2021-12-03T14:15:07.217",
+      "data_atualizou": "2024-07-23T18:26:17.830"
+    },
+    {
+      "Cod_categoria": 1017,
+      "Categoria": "CONECTORES DE CARGA",
+      "cod_categoria_pai": 33,
+      "Ativo": 0,
+      "data_cadastrou": "2021-12-03T14:29:19.737",
+      "data_atualizou": "2024-07-23T18:26:17.830"
+    },
+    {
+      "Cod_categoria": 1018,
+      "Categoria": "ALTO FALANTES",
+      "cod_categoria_pai": 33,
+      "Ativo": 0,
+      "data_cadastrou": "2021-12-03T14:29:40.790",
+      "data_atualizou": "2023-09-05T20:18:04.753"
+    },
+    {
+      "Cod_categoria": 1019,
+      "Categoria": "CAMERAS",
+      "cod_categoria_pai": 33,
+      "Ativo": 0,
+      "data_cadastrou": "2021-12-03T14:31:52.037",
+      "data_atualizou": "2024-07-23T18:26:17.830"
+    },
+    {
+      "Cod_categoria": 1020,
+      "Categoria": "TELA TOUCH",
+      "cod_categoria_pai": 33,
+      "Ativo": 0,
+      "data_cadastrou": "2021-12-03T14:32:21.727",
+      "data_atualizou": "2024-07-23T18:26:17.830"
+    },
+    {
+      "Cod_categoria": 1021,
+      "Categoria": "TELA DISPLAY",
+      "cod_categoria_pai": 33,
+      "Ativo": 0,
+      "data_cadastrou": "2021-12-03T14:32:32.013",
+      "data_atualizou": "2024-07-23T18:26:17.830"
+    },
+    {
+      "Cod_categoria": 1022,
+      "Categoria": "MICROFONES",
+      "cod_categoria_pai": 33,
+      "Ativo": 0,
+      "data_cadastrou": "2021-12-03T14:32:52.580",
+      "data_atualizou": "2023-09-05T20:17:40.283"
+    },
+    {
+      "Cod_categoria": 1023,
+      "Categoria": "COMPONENTES DIVERSOS",
+      "cod_categoria_pai": 33,
+      "Ativo": 0,
+      "data_cadastrou": "2021-12-03T14:35:08.550",
+      "data_atualizou": "2024-07-23T18:26:17.830"
+    },
+    {
+      "Cod_categoria": 1024,
+      "Categoria": "BOTÃO HOME",
+      "cod_categoria_pai": 33,
+      "Ativo": 0,
+      "data_cadastrou": "2021-12-03T14:35:32.017",
+      "data_atualizou": "2023-09-05T20:05:30.890"
+    },
+    {
+      "Cod_categoria": 1025,
+      "Categoria": "CERVEJAS",
+      "cod_categoria_pai": 21,
+      "Ativo": 0,
+      "data_cadastrou": "2021-12-06T16:11:55.237",
+      "data_atualizou": "2024-07-23T18:19:58.803"
+    },
+    {
+      "Cod_categoria": 1026,
+      "Categoria": "VINHOS",
+      "cod_categoria_pai": 1025,
+      "Ativo": 0,
+      "data_cadastrou": "2021-12-06T16:12:12.653",
+      "data_atualizou": "2021-12-06T16:12:33.003"
+    },
+    {
+      "Cod_categoria": 1027,
+      "Categoria": "VINHOS",
+      "cod_categoria_pai": 21,
+      "Ativo": 0,
+      "data_cadastrou": "2021-12-06T16:12:46.277",
+      "data_atualizou": "2024-07-23T18:19:58.803"
+    },
+    {
+      "Cod_categoria": 1028,
+      "Categoria": "CHAMPAGNES",
+      "cod_categoria_pai": 21,
+      "Ativo": 0,
+      "data_cadastrou": "2021-12-06T16:13:56.847",
+      "data_atualizou": "2024-07-23T18:19:58.803"
+    },
+    {
+      "Cod_categoria": 1029,
+      "Categoria": "WHISKY",
+      "cod_categoria_pai": 21,
+      "Ativo": 0,
+      "data_cadastrou": "2021-12-06T16:14:44.787",
+      "data_atualizou": "2024-07-23T18:19:58.803"
+    },
+    {
+      "Cod_categoria": 1030,
+      "Categoria": "LICORES",
+      "cod_categoria_pai": 21,
+      "Ativo": 0,
+      "data_cadastrou": "2021-12-06T16:16:18.783",
+      "data_atualizou": "2024-07-23T18:19:58.803"
+    },
+    {
+      "Cod_categoria": 1031,
+      "Categoria": "TEQUILAS",
+      "cod_categoria_pai": 21,
+      "Ativo": 0,
+      "data_cadastrou": "2021-12-06T16:16:41.497",
+      "data_atualizou": "2024-07-23T18:19:58.803"
+    },
+    {
+      "Cod_categoria": 1032,
+      "Categoria": "GIN",
+      "cod_categoria_pai": 21,
+      "Ativo": 0,
+      "data_cadastrou": "2021-12-06T16:39:24.307",
+      "data_atualizou": "2024-07-23T18:19:58.803"
+    },
+    {
+      "Cod_categoria": 1033,
+      "Categoria": "CAPA CARTEIRA",
+      "cod_categoria_pai": 26,
+      "Ativo": 0,
+      "data_cadastrou": "2021-12-07T09:25:10.757",
+      "data_atualizou": "2024-07-23T18:20:46.373"
+    },
+    {
+      "Cod_categoria": 1034,
+      "Categoria": "VODKA",
+      "cod_categoria_pai": 21,
+      "Ativo": 0,
+      "data_cadastrou": "2021-12-07T16:54:28.700",
+      "data_atualizou": "2024-07-23T18:19:58.803"
+    },
+    {
+      "Cod_categoria": 1035,
+      "Categoria": "Jogos",
+      "cod_categoria_pai": 37,
+      "Ativo": 0,
+      "data_cadastrou": "2021-12-08T10:20:53.453",
+      "data_atualizou": "2024-07-23T18:22:08.840"
+    },
+    {
+      "Cod_categoria": 1036,
+      "Categoria": "Smartphones Usados",
+      "cod_categoria_pai": 34,
+      "Ativo": 0,
+      "data_cadastrou": "2021-12-08T10:20:53.457",
+      "data_atualizou": "2024-08-08T15:53:34.553"
+    },
+    {
+      "Cod_categoria": 1037,
+      "Categoria": "Smartphones Novos",
+      "cod_categoria_pai": 34,
+      "Ativo": 0,
+      "data_cadastrou": "2021-12-08T10:20:53.457",
+      "data_atualizou": "2024-08-08T15:53:34.553"
+    },
+    {
+      "Cod_categoria": 1038,
+      "Categoria": "Pilhas e Baterias",
+      "cod_categoria_pai": 36,
+      "Ativo": 0,
+      "data_cadastrou": "2021-12-08T10:20:53.457",
+      "data_atualizou": "2024-08-21T17:35:03.440"
+    },
+    {
+      "Cod_categoria": 1039,
+      "Categoria": "Extensões",
+      "cod_categoria_pai": 36,
+      "Ativo": 0,
+      "data_cadastrou": "2021-12-08T10:20:53.460",
+      "data_atualizou": "2023-08-13T19:29:30.073"
+    },
+    {
+      "Cod_categoria": 1040,
+      "Categoria": "Brinquedos",
+      "cod_categoria_pai": 37,
+      "Ativo": 0,
+      "data_cadastrou": "2021-12-08T10:20:53.460",
+      "data_atualizou": "2024-07-23T18:22:08.840"
+    },
+    {
+      "Cod_categoria": 1041,
+      "Categoria": "Balões",
+      "cod_categoria_pai": 41,
+      "Ativo": 0,
+      "data_cadastrou": "2021-12-08T10:20:53.460",
+      "data_atualizou": "2023-09-05T17:03:08.393"
+    },
+    {
+      "Cod_categoria": 1042,
+      "Categoria": "Placa Informativa",
+      "cod_categoria_pai": 41,
+      "Ativo": 0,
+      "data_cadastrou": "2021-12-08T10:20:53.460",
+      "data_atualizou": "2023-09-05T17:03:08.393"
+    },
+    {
+      "Cod_categoria": 1043,
+      "Categoria": "Adaptadores",
+      "cod_categoria_pai": 42,
+      "Ativo": 1,
+      "data_cadastrou": "2021-12-08T10:20:53.463",
+      "data_atualizou": "2025-05-13T14:04:00.067"
+    },
+    {
+      "Cod_categoria": 1044,
+      "Categoria": "Capas Case Silicone",
+      "cod_categoria_pai": 42,
+      "Ativo": 1,
+      "data_cadastrou": "2021-12-08T10:20:53.463",
+      "data_atualizou": "2025-05-13T14:04:03.710"
+    },
+    {
+      "Cod_categoria": 1045,
+      "Categoria": "Cabos",
+      "cod_categoria_pai": 42,
+      "Ativo": 0,
+      "data_cadastrou": "2021-12-08T10:20:53.463",
+      "data_atualizou": "2025-06-09T11:07:51.010"
+    },
+    {
+      "Cod_categoria": 1046,
+      "Categoria": "Fones de Ouvido",
+      "cod_categoria_pai": 42,
+      "Ativo": 1,
+      "data_cadastrou": "2021-12-08T10:20:53.467",
+      "data_atualizou": "2025-05-13T14:04:19.403"
+    },
+    {
+      "Cod_categoria": 1047,
+      "Categoria": "Ferramentas Assistência",
+      "cod_categoria_pai": 42,
+      "Ativo": 0,
+      "data_cadastrou": "2021-12-08T10:20:53.467",
+      "data_atualizou": "2023-08-12T18:45:06.950"
+    },
+    {
+      "Cod_categoria": 1048,
+      "Categoria": "Mídia Removível",
+      "cod_categoria_pai": 42,
+      "Ativo": 1,
+      "data_cadastrou": "2021-12-08T10:20:53.467",
+      "data_atualizou": "2025-07-04T11:44:12.647"
+    },
+    {
+      "Cod_categoria": 1049,
+      "Categoria": "Suportes Veiculares com ventosa",
+      "cod_categoria_pai": 42,
+      "Ativo": 1,
+      "data_cadastrou": "2021-12-08T10:20:53.470",
+      "data_atualizou": "2025-05-13T14:04:27.630"
+    },
+    {
+      "Cod_categoria": 1050,
+      "Categoria": "Utensílios de Escritório",
+      "cod_categoria_pai": 41,
+      "Ativo": 1,
+      "data_cadastrou": "2021-12-08T10:20:53.470",
+      "data_atualizou": "2026-01-17T15:18:14.987"
+    },
+    {
+      "Cod_categoria": 1051,
+      "Categoria": "Utilitários Papelaria",
+      "cod_categoria_pai": 41,
+      "Ativo": 0,
+      "data_cadastrou": "2021-12-08T10:20:53.470",
+      "data_atualizou": "2023-09-05T17:03:08.393"
+    },
+    {
+      "Cod_categoria": 1052,
+      "Categoria": "Ferramentas e Assistência",
+      "cod_categoria_pai": 41,
+      "Ativo": 0,
+      "data_cadastrou": "2021-12-08T10:20:53.470",
+      "data_atualizou": "2023-08-12T18:56:41.517"
+    },
+    {
+      "Cod_categoria": 1053,
+      "Categoria": "Limpeza",
+      "cod_categoria_pai": 40,
+      "Ativo": 0,
+      "data_cadastrou": "2021-12-08T10:20:53.473",
+      "data_atualizou": "2024-07-23T18:23:32.803"
+    },
+    {
+      "Cod_categoria": 1054,
+      "Categoria": "Perfumaria",
+      "cod_categoria_pai": 35,
+      "Ativo": 1,
+      "data_cadastrou": "2021-12-08T10:20:53.473",
+      "data_atualizou": "2026-03-05T14:44:51.267"
+    },
+    {
+      "Cod_categoria": 1055,
+      "Categoria": "Acessórios para Bike",
+      "cod_categoria_pai": 42,
+      "Ativo": 0,
+      "data_cadastrou": "2021-12-08T10:20:53.477",
+      "data_atualizou": "2025-06-09T11:06:48.387"
+    },
+    {
+      "Cod_categoria": 1056,
+      "Categoria": "Tablets Android",
+      "cod_categoria_pai": 38,
+      "Ativo": 1,
+      "data_cadastrou": "2021-12-08T10:20:53.477",
+      "data_atualizou": "2025-01-01T18:36:28.953"
+    },
+    {
+      "Cod_categoria": 1057,
+      "Categoria": "Dia dos Namorados",
+      "cod_categoria_pai": 45,
+      "Ativo": 0,
+      "data_cadastrou": "2021-12-08T10:20:53.477",
+      "data_atualizou": "2023-09-05T15:26:09.390"
+    },
+    {
+      "Cod_categoria": 1058,
+      "Categoria": "DIA DOS PAIS",
+      "cod_categoria_pai": 45,
+      "Ativo": 0,
+      "data_cadastrou": "2021-12-08T10:20:53.480",
+      "data_atualizou": "2023-09-05T15:26:09.390"
+    },
+    {
+      "Cod_categoria": 1059,
+      "Categoria": "Caixas de som",
+      "cod_categoria_pai": 38,
+      "Ativo": 1,
+      "data_cadastrou": "2021-12-08T10:20:53.480",
+      "data_atualizou": "2024-12-22T13:13:17.470"
+    },
+    {
+      "Cod_categoria": 1060,
+      "Categoria": "Games",
+      "cod_categoria_pai": 38,
+      "Ativo": 1,
+      "data_cadastrou": "2021-12-08T10:20:53.480",
+      "data_atualizou": "2025-01-01T18:37:23.453"
+    },
+    {
+      "Cod_categoria": 1061,
+      "Categoria": "Películas",
+      "cod_categoria_pai": 42,
+      "Ativo": 1,
+      "data_cadastrou": "2021-12-10T16:42:04.197",
+      "data_atualizou": "2025-07-04T11:44:25.253"
+    },
+    {
+      "Cod_categoria": 1062,
+      "Categoria": "Ferramentas e Assistência",
+      "cod_categoria_pai": 1059,
+      "Ativo": 0,
+      "data_cadastrou": "2022-03-04T16:20:13.043",
+      "data_atualizou": "2022-03-04T16:20:38.723"
+    },
+    {
+      "Cod_categoria": 1063,
+      "Categoria": "Ferramentas e Assistência",
+      "cod_categoria_pai": 38,
+      "Ativo": 0,
+      "data_cadastrou": "2022-03-04T16:20:57.740",
+      "data_atualizou": "2023-09-05T19:58:44.367"
+    },
+    {
+      "Cod_categoria": 1064,
+      "Categoria": "Frontal",
+      "cod_categoria_pai": 68,
+      "Ativo": 1,
+      "data_cadastrou": "2022-04-06T16:02:25.067",
+      "data_atualizou": "2025-05-13T16:19:27.843"
+    },
+    {
+      "Cod_categoria": 1065,
+      "Categoria": "Baterias",
+      "cod_categoria_pai": 68,
+      "Ativo": 1,
+      "data_cadastrou": "2022-04-06T16:05:04.680",
+      "data_atualizou": "2025-05-13T16:19:36.873"
+    },
+    {
+      "Cod_categoria": 1066,
+      "Categoria": "Tampas Traseiras",
+      "cod_categoria_pai": 68,
+      "Ativo": 0,
+      "data_cadastrou": "2022-04-06T16:10:27.053",
+      "data_atualizou": "2024-08-08T15:48:10.800"
+    },
+    {
+      "Cod_categoria": 1067,
+      "Categoria": "Placas / Tampas e outros",
+      "cod_categoria_pai": 68,
+      "Ativo": 1,
+      "data_cadastrou": "2022-05-04T10:33:01.867",
+      "data_atualizou": "2026-01-28T14:33:09.323"
+    },
+    {
+      "Cod_categoria": 1068,
+      "Categoria": "Cabo Coaxial",
+      "cod_categoria_pai": 68,
+      "Ativo": 0,
+      "data_cadastrou": "2022-05-05T09:44:45.480",
+      "data_atualizou": "2023-09-05T20:02:55.487"
+    },
+    {
+      "Cod_categoria": 1069,
+      "Categoria": "Flex",
+      "cod_categoria_pai": 68,
+      "Ativo": 0,
+      "data_cadastrou": "2022-05-16T11:55:06.050",
+      "data_atualizou": "2023-09-05T20:15:46.977"
+    },
+    {
+      "Cod_categoria": 1070,
+      "Categoria": "Lente Câmera",
+      "cod_categoria_pai": 68,
+      "Ativo": 0,
+      "data_cadastrou": "2022-05-20T09:15:33.373",
+      "data_atualizou": "2023-09-05T20:04:37.630"
+    },
+    {
+      "Cod_categoria": 1071,
+      "Categoria": "Microfone",
+      "cod_categoria_pai": 68,
+      "Ativo": 0,
+      "data_cadastrou": "2022-06-09T17:18:10.497",
+      "data_atualizou": "2023-09-05T20:17:40.283"
+    },
+    {
+      "Cod_categoria": 1072,
+      "Categoria": "Alto Falante",
+      "cod_categoria_pai": 68,
+      "Ativo": 1,
+      "data_cadastrou": "2022-06-10T09:03:18.593",
+      "data_atualizou": "2026-01-23T15:47:56.580"
+    },
+    {
+      "Cod_categoria": 1073,
+      "Categoria": "Botão Home",
+      "cod_categoria_pai": 1066,
+      "Ativo": 0,
+      "data_cadastrou": "2022-06-21T10:38:40.917",
+      "data_atualizou": "2022-06-21T11:46:06.537"
+    },
+    {
+      "Cod_categoria": 1074,
+      "Categoria": "Botão Home",
+      "cod_categoria_pai": 68,
+      "Ativo": 0,
+      "data_cadastrou": "2022-06-21T10:39:00.660",
+      "data_atualizou": "2023-09-05T20:11:39.493"
+    },
+    {
+      "Cod_categoria": 1075,
+      "Categoria": "Carcaças Traseiras",
+      "cod_categoria_pai": 68,
+      "Ativo": 0,
+      "data_cadastrou": "2022-09-19T15:43:50.270",
+      "data_atualizou": "2023-09-05T20:12:54.453"
+    },
+    {
+      "Cod_categoria": 1076,
+      "Categoria": "Cabos Usb",
+      "cod_categoria_pai": 1045,
+      "Ativo": 0,
+      "data_cadastrou": "2023-08-11T13:26:31.140",
+      "data_atualizou": "2024-08-21T17:22:56.673"
+    },
+    {
+      "Cod_categoria": 1077,
+      "Categoria": "Cabos Diversos",
+      "cod_categoria_pai": 1045,
+      "Ativo": 0,
+      "data_cadastrou": "2023-08-11T13:35:00.583",
+      "data_atualizou": "2024-08-21T17:22:56.673"
+    },
+    {
+      "Cod_categoria": 1078,
+      "Categoria": "Fontes e Carregadores",
+      "cod_categoria_pai": 1045,
+      "Ativo": 0,
+      "data_cadastrou": "2023-08-12T08:02:44.033",
+      "data_atualizou": "2024-08-21T17:22:56.673"
+    },
+    {
+      "Cod_categoria": 1079,
+      "Categoria": "Power bank",
+      "cod_categoria_pai": 1045,
+      "Ativo": 0,
+      "data_cadastrou": "2023-08-12T18:30:58.727",
+      "data_atualizou": "2024-08-21T17:22:56.673"
+    },
+    {
+      "Cod_categoria": 1080,
+      "Categoria": "Cartões de recarga Gift Card",
+      "cod_categoria_pai": 38,
+      "Ativo": 0,
+      "data_cadastrou": "2023-08-13T19:36:14.543",
+      "data_atualizou": "2023-09-05T19:53:59.180"
+    },
+    {
+      "Cod_categoria": 1081,
+      "Categoria": "Eletrônicos e Eletrodomésticos",
+      "cod_categoria_pai": 38,
+      "Ativo": 1,
+      "data_cadastrou": "2023-09-05T11:06:01.433",
+      "data_atualizou": "2025-05-13T14:02:12.577"
+    },
+    {
+      "Cod_categoria": 1082,
+      "Categoria": "Produtos para reutilizar",
+      "cod_categoria_pai": 0,
+      "Ativo": 1,
+      "data_cadastrou": "2023-09-05T15:27:56.990",
+      "data_atualizou": "2025-05-21T14:37:39.280"
+    },
+    {
+      "Cod_categoria": 1083,
+      "Categoria": "Pilhas e Baterias",
+      "cod_categoria_pai": 17,
+      "Ativo": 0,
+      "data_cadastrou": "2023-09-05T17:04:14.370",
+      "data_atualizou": "2023-09-05T17:10:37.590"
+    },
+    {
+      "Cod_categoria": 1084,
+      "Categoria": "Infantil",
+      "cod_categoria_pai": 38,
+      "Ativo": 0,
+      "data_cadastrou": "2023-09-05T17:18:36.137",
+      "data_atualizou": "2024-08-08T15:38:20.513"
+    },
+    {
+      "Cod_categoria": 1085,
+      "Categoria": "Smartwatchs",
+      "cod_categoria_pai": 38,
+      "Ativo": 1,
+      "data_cadastrou": "2023-09-05T17:34:04.587",
+      "data_atualizou": "2025-05-09T09:46:59.750"
+    },
+    {
+      "Cod_categoria": 1086,
+      "Categoria": "não funcionou",
+      "cod_categoria_pai": 17,
+      "Ativo": 0,
+      "data_cadastrou": "2023-09-05T18:20:47.800",
+      "data_atualizou": "2023-09-05T18:23:20.477"
+    },
+    {
+      "Cod_categoria": 1087,
+      "Categoria": "Copos",
+      "cod_categoria_pai": 17,
+      "Ativo": 0,
+      "data_cadastrou": "2023-09-05T18:22:46.887",
+      "data_atualizou": "2023-09-05T20:25:56.253"
+    },
+    {
+      "Cod_categoria": 1088,
+      "Categoria": "Ferramentas de uso na Assistencia",
+      "cod_categoria_pai": 72,
+      "Ativo": 0,
+      "data_cadastrou": "2023-09-05T19:57:47.310",
+      "data_atualizou": "2024-08-08T15:44:05.290"
+    },
+    {
+      "Cod_categoria": 1089,
+      "Categoria": "REDMI 13C",
+      "cod_categoria_pai": 0,
+      "Ativo": 0,
+      "data_cadastrou": "2023-12-23T08:50:52.503",
+      "data_atualizou": "2024-06-25T09:43:16.463"
+    },
+    {
+      "Cod_categoria": 1090,
+      "Categoria": "Smartphones novos NOVO",
+      "cod_categoria_pai": 0,
+      "Ativo": 0,
+      "data_cadastrou": "2024-08-08T15:31:19.830",
+      "data_atualizou": "2024-08-08T15:32:10.040"
+    },
+    {
+      "Cod_categoria": 1091,
+      "Categoria": "Celulares novos",
+      "cod_categoria_pai": 0,
+      "Ativo": 1,
+      "data_cadastrou": "2024-08-08T15:51:03.153",
+      "data_atualizou": "2025-07-04T11:47:11.620"
+    },
+    {
+      "Cod_categoria": 1092,
+      "Categoria": "Celulares usados",
+      "cod_categoria_pai": 0,
+      "Ativo": 1,
+      "data_cadastrou": "2024-08-08T15:51:20.250",
+      "data_atualizou": "2025-07-04T11:47:23.290"
+    },
+    {
+      "Cod_categoria": 1094,
+      "Categoria": "Cabos Usb",
+      "cod_categoria_pai": 0,
+      "Ativo": 0,
+      "data_cadastrou": "2024-08-21T17:11:34.570",
+      "data_atualizou": "2024-08-21T17:38:17.783"
+    },
+    {
+      "Cod_categoria": 1095,
+      "Categoria": "Cabos Diversos",
+      "cod_categoria_pai": 0,
+      "Ativo": 0,
+      "data_cadastrou": "2024-08-21T17:12:21.207",
+      "data_atualizou": "2024-08-21T17:38:17.783"
+    },
+    {
+      "Cod_categoria": 1096,
+      "Categoria": "Fontes e Carregadores",
+      "cod_categoria_pai": 0,
+      "Ativo": 0,
+      "data_cadastrou": "2024-08-21T17:12:51.710",
+      "data_atualizou": "2024-08-21T17:39:25.987"
+    },
+    {
+      "Cod_categoria": 1097,
+      "Categoria": "Power Bank",
+      "cod_categoria_pai": 0,
+      "Ativo": 0,
+      "data_cadastrou": "2024-08-21T17:13:22.543",
+      "data_atualizou": "2024-08-21T17:38:17.783"
+    },
+    {
+      "Cod_categoria": 1098,
+      "Categoria": "Pilhas e Baterias",
+      "cod_categoria_pai": 42,
+      "Ativo": 0,
+      "data_cadastrou": "2024-08-21T17:29:38.110",
+      "data_atualizou": "2024-08-24T14:59:23.630"
+    },
+    {
+      "Cod_categoria": 1099,
+      "Categoria": "Cabos Usb Celulares",
+      "cod_categoria_pai": 42,
+      "Ativo": 1,
+      "data_cadastrou": "2024-08-21T17:35:40.993",
+      "data_atualizou": "2025-05-13T14:03:22.360"
+    },
+    {
+      "Cod_categoria": 1100,
+      "Categoria": "Cabos Diversos ",
+      "cod_categoria_pai": 42,
+      "Ativo": 1,
+      "data_cadastrou": "2024-08-21T17:35:53.090",
+      "data_atualizou": "2025-05-13T14:03:41.560"
+    },
+    {
+      "Cod_categoria": 1101,
+      "Categoria": "Power Bank e Carregadores Portáteis",
+      "cod_categoria_pai": 42,
+      "Ativo": 1,
+      "data_cadastrou": "2024-08-21T17:36:03.220",
+      "data_atualizou": "2025-05-13T14:03:45.473"
+    },
+    {
+      "Cod_categoria": 1102,
+      "Categoria": "Fontes e Carregadores ",
+      "cod_categoria_pai": 42,
+      "Ativo": 1,
+      "data_cadastrou": "2024-08-21T17:38:43.987",
+      "data_atualizou": "2025-07-04T11:44:35.897"
+    },
+    {
+      "Cod_categoria": 1103,
+      "Categoria": "Notebooks",
+      "cod_categoria_pai": 38,
+      "Ativo": 1,
+      "data_cadastrou": "2024-08-21T17:43:10.320",
+      "data_atualizou": "2024-12-23T21:21:01.547"
+    },
+    {
+      "Cod_categoria": 1104,
+      "Categoria": "TV e Smart TV",
+      "cod_categoria_pai": 38,
+      "Ativo": 1,
+      "data_cadastrou": "2024-08-21T17:43:30.803",
+      "data_atualizou": "2025-01-01T18:37:09.937"
+    },
+    {
+      "Cod_categoria": 1107,
+      "Categoria": "Fones JBL",
+      "cod_categoria_pai": 1046,
+      "Ativo": 1,
+      "data_cadastrou": "2024-10-31T14:44:21.143",
+      "data_atualizou": "2025-01-01T18:42:50.313"
+    },
+    {
+      "Cod_categoria": 1108,
+      "Categoria": "Fones JBL",
+      "cod_categoria_pai": 1046,
+      "Ativo": 0,
+      "data_cadastrou": "2024-10-31T15:00:09.080",
+      "data_atualizou": "2024-10-31T15:01:44.640"
+    },
+    {
+      "Cod_categoria": 1109,
+      "Categoria": "Fones Bluetooth Sem fio",
+      "cod_categoria_pai": 1046,
+      "Ativo": 1,
+      "data_cadastrou": "2024-11-16T10:47:50.303",
+      "data_atualizou": "2025-05-13T14:03:04.540"
+    },
+    {
+      "Cod_categoria": 1110,
+      "Categoria": "MagSafe Apple",
+      "cod_categoria_pai": 1101,
+      "Ativo": 1,
+      "data_cadastrou": "2024-11-16T11:35:10.640",
+      "data_atualizou": "2025-05-13T14:04:43.313"
+    },
+    {
+      "Cod_categoria": 1111,
+      "Categoria": "Ring Light",
+      "cod_categoria_pai": 38,
+      "Ativo": 1,
+      "data_cadastrou": "2024-11-16T16:08:10.077",
+      "data_atualizou": "2025-05-13T14:02:22.380"
+    },
+    {
+      "Cod_categoria": 1112,
+      "Categoria": "Cabo usb - c Original Apple",
+      "cod_categoria_pai": 1099,
+      "Ativo": 1,
+      "data_cadastrou": "2024-11-16T17:14:27.383",
+      "data_atualizou": "2025-05-13T14:03:25.903"
+    },
+    {
+      "Cod_categoria": 1113,
+      "Categoria": "Headphone Bluetooth Sem fio",
+      "cod_categoria_pai": 1046,
+      "Ativo": 1,
+      "data_cadastrou": "2024-11-16T17:38:44.817",
+      "data_atualizou": "2025-05-13T14:04:23.997"
+    },
+    {
+      "Cod_categoria": 1114,
+      "Categoria": "Capas para Tablet",
+      "cod_categoria_pai": 1044,
+      "Ativo": 1,
+      "data_cadastrou": "2024-11-23T10:01:32.380",
+      "data_atualizou": "2025-05-13T14:02:47.263"
+    },
+    {
+      "Cod_categoria": 1115,
+      "Categoria": "Capas Clear Case",
+      "cod_categoria_pai": 1044,
+      "Ativo": 1,
+      "data_cadastrou": "2024-11-23T11:05:56.730",
+      "data_atualizou": "2025-05-13T14:02:51.373"
+    },
+    {
+      "Cod_categoria": 1116,
+      "Categoria": "Capas Personalizadas p/ clientes",
+      "cod_categoria_pai": 1044,
+      "Ativo": 1,
+      "data_cadastrou": "2024-11-23T11:10:37.480",
+      "data_atualizou": "2025-05-13T14:02:55.897"
+    },
+    {
+      "Cod_categoria": 1117,
+      "Categoria": "Capa Anti Impacto",
+      "cod_categoria_pai": 1044,
+      "Ativo": 1,
+      "data_cadastrou": "2024-11-23T11:20:05.410",
+      "data_atualizou": "2025-05-13T16:19:15.543"
+    },
+    {
+      "Cod_categoria": 1118,
+      "Categoria": "Capa de Vidro",
+      "cod_categoria_pai": 1044,
+      "Ativo": 1,
+      "data_cadastrou": "2024-11-23T11:24:24.980",
+      "data_atualizou": "2025-06-03T14:44:22.560"
+    },
+    {
+      "Cod_categoria": 1119,
+      "Categoria": "Capa Carteira",
+      "cod_categoria_pai": 1044,
+      "Ativo": 1,
+      "data_cadastrou": "2024-11-23T11:40:26.990",
+      "data_atualizou": "2025-06-03T14:44:33.870"
+    },
+    {
+      "Cod_categoria": 1120,
+      "Categoria": "capa teste",
+      "cod_categoria_pai": 1044,
+      "Ativo": 1,
+      "data_cadastrou": "2024-11-25T11:27:12.747",
+      "data_atualizou": "2024-11-25T11:27:12.747"
+    },
+    {
+      "Cod_categoria": 1121,
+      "Categoria": "Ipad Apple",
+      "cod_categoria_pai": 38,
+      "Ativo": 1,
+      "data_cadastrou": "2024-12-04T16:36:25.757",
+      "data_atualizou": "2025-01-01T18:42:02.250"
+    },
+    {
+      "Cod_categoria": 1122,
+      "Categoria": "Macbook apple",
+      "cod_categoria_pai": 1103,
+      "Ativo": 1,
+      "data_cadastrou": "2024-12-04T16:38:10.127",
+      "data_atualizou": "2024-12-23T21:20:43.077"
+    }
+  ]
+}

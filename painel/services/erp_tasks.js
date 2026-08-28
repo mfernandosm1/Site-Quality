@@ -18,6 +18,8 @@ function writeJson(fp,data){ ensureDir(path.dirname(fp)); const temp=fp+'.tmp'; 
 function safe(v,max=500){ return String(v??'').replace(/[<>]/g,'').trim().slice(0,max); }
 function now(){ return new Date().toISOString(); }
 function makeId(prefix='task'){ return `${prefix}_${Date.now().toString(36)}_${Math.random().toString(36).slice(2,8)}`; }
+function taskSnapshot(task={}){ return {title:task.title||'',description:task.description||'',dueAt:task.dueAt||'',priority:task.priority||'medium',type:task.type||'task',typeName:task.typeName||'',customerId:task.customerId||'',customerName:task.customerName||'',owner:task.owner||'',status:task.status||'open'}; }
+function taskHistory(task,entry){ task.history=Array.isArray(task.history)?task.history:[]; task.history.unshift(entry); task.history=task.history.slice(0,100); }
 function parseDue(value){
   const raw=safe(value,30);
   const match=raw.match(/^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2})$/);
@@ -135,8 +137,9 @@ export function listTasks(app,{customerId='',owner='',includeCompleted=true}={})
   if(!includeCompleted) tasks=tasks.filter(t=>t.status!=='completed'&&t.status!=='cancelled');
   return tasks.slice().sort((a,b)=>{ if(a.status==='completed'&&b.status!=='completed')return 1;if(b.status==='completed'&&a.status!=='completed')return -1;if(!a.dueAt&&b.dueAt)return 1;if(a.dueAt&&!b.dueAt)return -1;return String(a.dueAt||'').localeCompare(String(b.dueAt||'')); });
 }
-export function createTask(app,input={}){
-  const title=safe(input.title,180); if(!title) throw new Error('Informe o título.');
+export function getTask(app,taskId){ const {data}=readStorage(app); const task=data.tasks.find(t=>t.id===safe(taskId,100)); return task?JSON.parse(JSON.stringify(task)):null; }
+export function createTask(app,input={},actor='painel'){
+  const title=safe(input.title,12000); if(!title) throw new Error('Informe o que precisa ser feito.');
   const {fp,data}=readStorage(app);
   const requestedType=safe(input.type,100)||'task';
   const type=data.types.find(item=>item.id===requestedType) || data.types.find(item=>item.id==='task') || DEFAULT_TYPES[0];
@@ -145,11 +148,21 @@ export function createTask(app,input={}){
   if(type.dueMode==='optional' && dueRaw && !due) throw new Error('Informe uma data e hora válidas ou deixe a data em branco.');
   const customerId=safe(input.customerId,100);
   const priority=['low','medium','high'].includes(input.priority)?input.priority:'medium';
-  const task={id:makeId(),customerId,customerName:safe(input.customerName,180),conversationId:safe(input.conversationId,100),owner:safe(input.owner,160)||'painel',type:type.id,typeName:type.name,title,description:safe(input.description,1000),dueAt:dueRaw,priority,status:'open',createdAt:now(),updatedAt:now(),completedAt:null};
-  data.tasks.push(task); writeJson(fp,data); return task;
+  const createdAt=now(),createdBy=safe(actor,160)||'painel';
+  const task={id:makeId(),customerId,customerName:safe(input.customerName,180),conversationId:safe(input.conversationId,100),owner:safe(input.owner,160)||createdBy,type:type.id,typeName:type.name,title,description:safe(input.description,12000),dueAt:dueRaw,priority,status:'open',createdAt,createdBy,updatedAt:createdAt,updatedBy:createdBy,completedAt:null,history:[]};
+  taskHistory(task,{at:createdAt,actor:createdBy,action:'created',before:null,after:taskSnapshot(task)});
+  data.tasks.push(task); writeJson(fp,data); return JSON.parse(JSON.stringify(task));
 }
-export function completeTask(app,taskId){ const {fp,data}=readStorage(app); const task=data.tasks.find(t=>t.id===safe(taskId,100)); if(!task)throw new Error('Item não encontrado.'); task.status='completed';task.completedAt=now();task.updatedAt=now();writeJson(fp,data);return task; }
-export function deleteTask(app,taskId){ const {fp,data}=readStorage(app); const before=data.tasks.length; data.tasks=data.tasks.filter(t=>t.id!==safe(taskId,100)); if(data.tasks.length===before)throw new Error('Item não encontrado.');writeJson(fp,data); }
+export function updateTask(app,taskId,input={},actor='painel'){
+  const {fp,data}=readStorage(app); const task=data.tasks.find(t=>t.id===safe(taskId,100)); if(!task)throw new Error('Item não encontrado.');
+  const before=taskSnapshot(task),title=safe(input.title,12000); if(!title)throw new Error('Informe o que precisa ser feito.');
+  const requestedType=safe(input.type,100)||task.type||'task'; const type=data.types.find(item=>item.id===requestedType)||data.types.find(item=>item.id==='task')||DEFAULT_TYPES[0];
+  const dueRaw=safe(input.dueAt,30); const due=dueRaw?parseDue(dueRaw):null; if(type.dueMode==='required'&&!due)throw new Error('Informe uma data e hora válidas.'); if(type.dueMode==='optional'&&dueRaw&&!due)throw new Error('Informe uma data e hora válidas ou deixe a data em branco.');
+  task.title=title;task.description=safe(input.description,12000);task.dueAt=dueRaw;task.priority=['low','medium','high'].includes(input.priority)?input.priority:'medium';task.type=type.id;task.typeName=type.name;task.customerId=safe(input.customerId,100);task.customerName=safe(input.customerName,180);task.owner=safe(input.owner,160)||task.owner||'painel';
+  task.updatedAt=now();task.updatedBy=safe(actor,160)||'painel'; const after=taskSnapshot(task); taskHistory(task,{at:task.updatedAt,actor:task.updatedBy,action:'updated',before,after}); writeJson(fp,data); return {task:JSON.parse(JSON.stringify(task)),before,after};
+}
+export function completeTask(app,taskId,actor='painel'){ const {fp,data}=readStorage(app); const task=data.tasks.find(t=>t.id===safe(taskId,100)); if(!task)throw new Error('Item não encontrado.'); const before=taskSnapshot(task); task.status='completed';task.completedAt=now();task.updatedAt=task.completedAt;task.updatedBy=safe(actor,160)||'painel';taskHistory(task,{at:task.updatedAt,actor:task.updatedBy,action:'completed',before,after:taskSnapshot(task)});writeJson(fp,data);return JSON.parse(JSON.stringify(task)); }
+export function deleteTask(app,taskId){ const {fp,data}=readStorage(app); const index=data.tasks.findIndex(t=>t.id===safe(taskId,100)); if(index<0)throw new Error('Item não encontrado.'); const [task]=data.tasks.splice(index,1);writeJson(fp,data);return JSON.parse(JSON.stringify(task)); }
 
 export function getTaskOverview(app,{owner=''}={}){
   const tasks=listTasks(app,{owner,includeCompleted:true}); const reference=new Date();

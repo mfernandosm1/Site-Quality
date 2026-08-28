@@ -1,0 +1,184 @@
+<% layout('layout') -%>
+<section class="users-page" data-users-page>
+  <header class="users-hero">
+    <div>
+      <span class="users-kicker">CONFIGURAÇÕES · EQUIPE</span>
+      <h1>👤 Usuários e Permissões</h1>
+      <p>Cadastre a equipe, defina o nome operacional, permissões e quando/de onde cada usuário pode acessar o ERP.</p>
+    </div>
+    <button class="btn primary" type="button" data-new-user>+ Novo usuário</button>
+  </header>
+
+  <% if(flash){ %><div class="users-flash"><%= flash %></div><% } %>
+
+  <% const activeUsers=(users||[]).filter(u=>u.active!==false); %>
+  <section class="users-summary">
+    <div><span>Usuários ativos</span><strong><%= activeUsers.length %></strong><small><%= (users||[]).length %> cadastrado(s)</small></div>
+    <div><span>Vendedores</span><strong><%= activeUsers.filter(u=>u.seller===true).length %></strong><small>Disponíveis no PDV e relatórios</small></div>
+    <div><span>Técnicos</span><strong><%= activeUsers.filter(u=>u.technician===true).length %></strong><small>Disponíveis nas O.S.</small></div>
+    <div><span>Com restrição</span><strong><%= activeUsers.filter(u=>u.accessPolicy?.accessUntil||u.accessPolicy?.scheduleEnabled||u.accessPolicy?.ipRestrictionEnabled).length %></strong><small>Data, horário ou IP</small></div>
+  </section>
+
+  <div class="users-grid">
+    <section class="users-card users-list-card">
+      <div class="users-card-head"><div><h2>Equipe cadastrada</h2><p>Desative quem sair da empresa sem apagar o histórico de vendas e ações.</p></div><input type="search" data-user-search placeholder="Buscar usuário..."></div>
+      <div class="users-table-wrap">
+        <table class="users-table">
+          <thead><tr><th>Nome</th><th>Nome operacional</th><th>Acesso</th><th>Perfil</th><th>Funções / Restrições</th><th>Status</th><th></th></tr></thead>
+          <tbody data-user-rows>
+            <% if(!(users||[]).length){ %><tr data-empty><td colspan="7" class="users-empty">Nenhum usuário cadastrado. Clique em <b>Novo usuário</b> para começar.</td></tr><% } %>
+            <% (users||[]).forEach(function(user){ const profile=(profiles||[]).find(p=>String(p.id)===String(user.profileId)); const ap=user.accessPolicy||{}; %>
+              <tr data-user-row data-search="<%= [user.name,user.displayName,user.username,user.email,user.mobile,profile?.name].filter(Boolean).join(' ').toLowerCase() %>">
+                <td><div class="users-name"><b><%= user.name %></b><small><%= user.email || '⚠ E-mail pendente' %><%= user.mobile ? ' · 📱 '+user.mobile : ' · ⚠ Celular pendente' %></small></div></td>
+                <td><span class="users-display-name"><%= user.displayName || user.name %></span></td>
+                <td><code><%= user.username %></code></td>
+                <td><span class="users-profile"><%= profile?.name || user.profileId || '—' %></span></td>
+                <td><div class="users-badges"><% if(user.seller){ %><span>💼 Vendedor</span><span>💸 Desc. <%= Number(user.pdvPolicy?.maxDiscountPercent||0).toLocaleString('pt-BR',{maximumFractionDigits:2}) %>%</span><% } %><% if(user.technician){ %><span>🛠 Técnico</span><% } %><% if(ap.accessUntil){ %><span>📅 Até <%= String(ap.accessUntil).split('-').reverse().join('/') %></span><% } %><% if(ap.scheduleEnabled){ %><span>🕒 Horário</span><% } %><% if(ap.ipRestrictionEnabled){ %><span>🌐 IP</span><% } %><% if(!user.seller&&!user.technician&&!ap.accessUntil&&!ap.scheduleEnabled&&!ap.ipRestrictionEnabled){ %><em>Administrativo</em><% } %></div></td>
+                <td><span class="users-status <%= user.active===false?'off':'on' %>"><%= user.active===false?'Inativo':'Ativo' %></span></td>
+                <td><div class="users-actions"><button type="button" data-edit-user="<%= user.id %>">Editar</button><button type="button" data-password-user="<%= user.id %>">Senha</button><button type="button" data-recovery-user="<%= user.id %>">Chave recuperação</button><button type="button" data-toggle-user="<%= user.id %>" data-active="<%= user.active===false?'0':'1' %>"><%= user.active===false?'Ativar':'Inativar' %></button></div></td>
+              </tr>
+            <% }) %>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <aside class="users-card users-permissions-card">
+      <h2>🔐 Perfis de permissão</h2>
+      <p>As permissões são aplicadas no servidor. Agora Loja Virtual, CRM, ferramentas, ERP e gestão possuem caminhos separados para liberar somente o necessário.</p>
+      <div class="users-profile-list">
+        <% (profiles||[]).forEach(function(profile){ %>
+          <details>
+            <summary><b><%= profile.name %></b><span><%= (profile.permissions||[]).includes('*')?'Acesso total':(profile.permissions||[]).length+' regra(s)' %></span></summary>
+            <p><%= profile.description %></p>
+            <div class="users-permission-tags"><% (profile.permissions||[]).forEach(function(rule){ %><code><%= rule %></code><% }) %></div>
+            <button class="users-profile-edit" type="button" data-edit-profile="<%= profile.id %>">Editar permissões</button>
+          </details>
+        <% }) %>
+      </div>
+      <div class="users-info"><b>Segurança aplicada continuamente</b><span>Data limite, horário e IP são conferidos no login e também durante a sessão. Ao sair da condição permitida, o acesso é encerrado.</span></div>
+    </aside>
+  </div>
+</section>
+
+<div class="users-modal" data-user-modal hidden>
+  <form class="users-modal-card users-user-modal-card" data-user-form>
+    <button type="button" class="users-close" data-close-user>×</button>
+    <div class="users-modal-head"><span data-user-form-kicker>NOVO USUÁRIO</span><h2 data-user-form-title>Cadastrar usuário</h2><p>Use o nome completo para cadastro e um nome curto para aparecer no PDV e na O.S.</p></div>
+    <input type="hidden" name="id">
+    <div class="users-form-grid">
+      <label><span>Nome completo</span><input name="name" maxlength="120" required placeholder="Nome do colaborador"></label>
+      <label><span>Nome no PDV / O.S. *</span><input name="displayName" maxlength="24" required placeholder="Ex.: Matheus"><small class="users-field-help">Máximo 24 caracteres e único entre usuários, para não confundir vendedor/técnico.</small></label>
+      <label><span>Usuário de acesso</span><input name="username" maxlength="80" required placeholder="ex.: matheus" autocomplete="off"></label>
+      <label><span>E-mail *</span><input name="email" type="email" maxlength="140" required placeholder="colaborador@empresa.com.br"><small class="users-field-help">Obrigatório e único. Base para recuperação de acesso.</small></label><label><span>Celular com DDD *</span><input name="mobile" inputmode="tel" maxlength="18" placeholder="(55) 99999-9999"><small class="users-field-help">Segundo canal de recuperação. Usuários antigos podem aparecer como pendentes até a próxima edição.</small></label>
+      <label><span>Perfil</span><select name="profileId"><% (profiles||[]).forEach(function(profile){ %><option value="<%= profile.id %>"><%= profile.name %></option><% }) %></select></label>
+      <label data-password-create><span>Senha inicial</span><input name="password" type="password" minlength="6" autocomplete="new-password" placeholder="Mínimo 6 caracteres"></label>
+    </div>
+
+    <fieldset class="users-functions"><legend>Funções operacionais</legend><label><input type="checkbox" name="seller"> <span><b>Vendedor</b><small>Aparece no PDV, itens de venda e relatórios.</small></span></label><label><input type="checkbox" name="technician"> <span><b>Técnico</b><small>Aparece como responsável nas ordens de serviço.</small></span></label><label><input type="checkbox" name="active" checked> <span><b>Usuário ativo</b><small>Pode entrar e ser usado nas operações.</small></span></label></fieldset>
+
+    <fieldset class="users-pdv-rules"><legend>Regras do PDV</legend>
+      <label><span><b>Desconto máximo sem autorização</b><small>Percentual máximo que este usuário pode aplicar em cada item da venda.</small></span><div class="users-percent-input"><input type="number" name="maxDiscountPercent" min="0" max="100" step="0.01" value="0"><b>%</b></div></label>
+      <p>Use <b>0%</b> para não permitir desconto manual. Acima do limite, o PDV pode solicitar uma chave temporária de supervisor, conforme a configuração do caixa.</p>
+    </fieldset>
+
+    <details class="users-access">
+      <summary><b>🛡️ Restrições de acesso</b><small>Opcionais · data, horário e IP</small></summary>
+      <div class="users-access-body">
+        <label class="users-access-date"><span>Data limite de acesso</span><input type="date" name="accessUntil"><small>Deixe vazio para não expirar. O acesso é permitido até o fim da data escolhida.</small></label>
+
+        <div class="users-access-toggle"><label><input type="checkbox" name="scheduleEnabled" data-schedule-enabled> <span><b>Restringir por horário</b><small>Fora dos dias/horários abaixo o sistema encerra o acesso.</small></span></label></div>
+        <div class="users-schedule" data-schedule-grid>
+          <% [['0','Domingo'],['1','Segunda'],['2','Terça'],['3','Quarta'],['4','Quinta'],['5','Sexta'],['6','Sábado']].forEach(function(day){ %>
+            <div class="users-schedule-row" data-day="<%= day[0] %>"><label><input type="checkbox" data-day-enabled> <b><%= day[1] %></b></label><label>Início <input type="time" data-day-start value="08:00"></label><label>Fim <input type="time" data-day-end value="18:00"></label></div>
+          <% }) %>
+        </div>
+
+        <div class="users-access-toggle"><label><input type="checkbox" name="ipRestrictionEnabled" data-ip-enabled> <span><b>Restringir por IP</b><small>Útil para liberar o usuário somente na rede da empresa.</small></span></label></div>
+        <div class="users-ip-box" data-ip-box>
+          <label><span>IPs permitidos</span><textarea name="allowedIps" rows="3" placeholder="Um IP por linha"></textarea><small>IP atual desta conexão: <b><%= currentIp || 'não identificado' %></b></small></label>
+          <% if(currentIp){ %><button class="btn" type="button" data-use-current-ip>+ Usar IP atual</button><% } %>
+        </div>
+      </div>
+    </details>
+
+    <div class="users-form-permissions" data-profile-description></div>
+    <div class="users-modal-actions"><button type="button" class="btn" data-close-user>Cancelar</button><button type="submit" class="btn primary" data-save-user>Salvar usuário</button></div>
+  </form>
+</div>
+
+<div class="users-modal" data-password-modal hidden>
+  <form class="users-modal-card small" data-password-form>
+    <button type="button" class="users-close" data-close-password>×</button>
+    <div class="users-modal-head"><span>SEGURANÇA</span><h2>Alterar senha</h2><p data-password-name></p></div>
+    <input type="hidden" name="id">
+    <label class="users-password-field"><span>Nova senha</span><input name="password" type="password" minlength="6" required autocomplete="new-password" placeholder="Mínimo 6 caracteres"></label>
+    <div class="users-modal-actions"><button type="button" class="btn" data-close-password>Cancelar</button><button type="submit" class="btn primary">Salvar nova senha</button></div>
+  </form>
+</div>
+
+<div class="users-modal" data-profile-modal hidden>
+  <form class="users-modal-card users-profile-modal-card" data-profile-form>
+    <button type="button" class="users-close" data-close-profile>×</button>
+    <div class="users-modal-head"><span>PERMISSÕES</span><h2 data-profile-title>Editar perfil</h2><p>Defina exatamente quais áreas este perfil pode consultar ou alterar.</p></div>
+    <input type="hidden" name="id">
+    <div class="users-form-grid"><label><span>Nome do perfil</span><input name="name" maxlength="80" required></label><label class="wide"><span>Descrição</span><input name="description" maxlength="220"></label></div>
+    <div class="users-permission-editor" data-permission-editor></div>
+    <div class="users-modal-actions"><button type="button" class="btn" data-close-profile>Cancelar</button><button type="submit" class="btn primary">Salvar permissões</button></div>
+  </form>
+</div>
+
+<script>window.QUALITY_USERS_BOOT=<%- JSON.stringify({users,profiles,permissionCatalog:typeof permissionCatalog!=='undefined'?permissionCatalog:[],currentIp:typeof currentIp!=='undefined'?currentIp:''}) %>;</script>
+<script>
+(()=>{
+  const boot=window.QUALITY_USERS_BOOT||{users:[],profiles:[]};
+  const users=Array.isArray(boot.users)?boot.users:[];
+  const profiles=Array.isArray(boot.profiles)?boot.profiles:[];
+  const permissionCatalog=Array.isArray(boot.permissionCatalog)?boot.permissionCatalog:[];
+  const modal=document.querySelector('[data-user-modal]'),form=document.querySelector('[data-user-form]');
+  const passwordModal=document.querySelector('[data-password-modal]'),passwordForm=document.querySelector('[data-password-form]');
+  const profileModal=document.querySelector('[data-profile-modal]'),profileForm=document.querySelector('[data-profile-form]');
+  const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  const profile=id=>profiles.find(p=>String(p.id)===String(id));
+  const api=async(url,body)=>{const response=await fetch(url,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body||{})});const data=await response.json();if(!response.ok||data.success===false)throw new Error(data.message||'Não foi possível concluir.');return data;};
+  const dayRows=()=>[...form.querySelectorAll('[data-day]')];
+  function updateProfileHint(){const p=profile(form.elements.profileId.value);const box=document.querySelector('[data-profile-description]');if(!p){box.innerHTML='';return;}box.innerHTML=`<b>${esc(p.name)}</b><span>${esc(p.description||'')}</span><small>${(p.permissions||[]).map(rule=>`<code>${esc(rule)}</code>`).join(' ')}</small>`;}
+  function updateRestrictionState(){const scheduleOn=form.elements.scheduleEnabled.checked;dayRows().forEach(row=>row.querySelectorAll('input').forEach(input=>input.disabled=!scheduleOn));const ipOn=form.elements.ipRestrictionEnabled.checked;form.elements.allowedIps.disabled=!ipOn;document.querySelector('[data-use-current-ip]')?.toggleAttribute('disabled',!ipOn);}
+  function defaultSchedule(){dayRows().forEach(row=>{const day=Number(row.dataset.day);row.querySelector('[data-day-enabled]').checked=day>=1&&day<=5;row.querySelector('[data-day-start]').value='08:00';row.querySelector('[data-day-end]').value='18:00';});}
+  function loadAccessPolicy(policy={}){form.elements.accessUntil.value=policy.accessUntil||'';form.elements.scheduleEnabled.checked=policy.scheduleEnabled===true;form.elements.ipRestrictionEnabled.checked=policy.ipRestrictionEnabled===true;form.elements.allowedIps.value=(policy.allowedIps||[]).join('\n');defaultSchedule();dayRows().forEach(row=>{const rule=policy.schedule?.[row.dataset.day];if(!rule)return;row.querySelector('[data-day-enabled]').checked=rule.enabled===true;row.querySelector('[data-day-start]').value=rule.start||'08:00';row.querySelector('[data-day-end]').value=rule.end||'18:00';});updateRestrictionState();}
+  function accessPolicyPayload(){const schedule={};dayRows().forEach(row=>{schedule[row.dataset.day]={enabled:row.querySelector('[data-day-enabled]').checked,start:row.querySelector('[data-day-start]').value||'08:00',end:row.querySelector('[data-day-end]').value||'18:00'};});return {accessUntil:form.elements.accessUntil.value||'',scheduleEnabled:form.elements.scheduleEnabled.checked,schedule,ipRestrictionEnabled:form.elements.ipRestrictionEnabled.checked,allowedIps:String(form.elements.allowedIps.value||'').split(/[\n,;]+/).map(v=>v.trim()).filter(Boolean)};}
+  function openUser(user=null){form.reset();delete form.elements.displayName.dataset.edited;form.elements.id.value=user?.id||'';form.elements.name.value=user?.name||'';form.elements.displayName.value=user?.displayName||user?.name||'';form.elements.username.value=user?.username||'';form.elements.email.value=user?.email||'';form.elements.mobile.value=user?.mobile||'';form.elements.profileId.value=user?.profileId||'seller';form.elements.seller.checked=user?user.seller===true:form.elements.profileId.value==='seller';form.elements.technician.checked=user?user.technician===true:form.elements.profileId.value==='service';form.elements.active.checked=user?user.active!==false:true;form.elements.maxDiscountPercent.value=Number(user?.pdvPolicy?.maxDiscountPercent||0);form.elements.password.value='';document.querySelector('[data-password-create]').hidden=!!user;form.elements.password.required=!user;document.querySelector('[data-user-form-kicker]').textContent=user?'EDITAR USUÁRIO':'NOVO USUÁRIO';document.querySelector('[data-user-form-title]').textContent=user?'Editar usuário':'Cadastrar usuário';loadAccessPolicy(user?.accessPolicy||{});updateProfileHint();modal.hidden=false;setTimeout(()=>form.elements.name.focus(),30);}
+  function closeUser(){modal.hidden=true;} function closePassword(){passwordModal.hidden=true;} function closeProfile(){profileModal.hidden=true;}
+  function openPassword(user){passwordForm.reset();passwordForm.elements.id.value=user.id;document.querySelector('[data-password-name]').textContent=user.name;passwordModal.hidden=false;setTimeout(()=>passwordForm.elements.password.focus(),30);}
+  function permissionMatches(rules,permission){return (rules||[]).some(rule=>rule==='*'||rule===permission||(rule.endsWith('.*')&&permission.startsWith(rule.slice(0,-1)))||(rule==='*.view'&&permission.endsWith('.view')));}
+  function openProfile(item){if(!item)return;profileForm.reset();profileForm.elements.id.value=item.id;profileForm.elements.name.value=item.name||'';profileForm.elements.description.value=item.description||'';document.querySelector('[data-profile-title]').textContent=`Editar ${item.name}`;const editor=document.querySelector('[data-permission-editor]');if(item.id==='administrator')editor.innerHTML='<div class="users-profile-locked"><b>Administrador</b><span>Este perfil mantém acesso total para evitar bloqueio administrativo do ERP.</span><code>*</code></div>';else editor.innerHTML=permissionCatalog.map(group=>`<fieldset><legend>${esc(group.group)}</legend>${(group.items||[]).map(permission=>`<label><input type="checkbox" value="${esc(permission.id)}" ${permissionMatches(item.permissions,permission.id)?'checked':''}><span><b>${esc(permission.name)}</b><small>${esc(permission.id)}</small></span></label>`).join('')}</fieldset>`).join('');profileModal.hidden=false;}
+  document.querySelector('[data-new-user]')?.addEventListener('click',()=>openUser());
+  document.querySelectorAll('[data-close-user]').forEach(b=>b.addEventListener('click',closeUser));document.querySelectorAll('[data-close-password]').forEach(b=>b.addEventListener('click',closePassword));document.querySelectorAll('[data-close-profile]').forEach(b=>b.addEventListener('click',closeProfile));
+  document.querySelectorAll('[data-edit-profile]').forEach(b=>b.addEventListener('click',()=>openProfile(profiles.find(p=>String(p.id)===String(b.dataset.editProfile)))));
+  form.elements.profileId?.addEventListener('change',()=>{if(!form.elements.id.value){form.elements.seller.checked=form.elements.profileId.value==='seller';form.elements.technician.checked=form.elements.profileId.value==='service';}updateProfileHint();});
+  form.elements.name?.addEventListener('input',()=>{if(!form.elements.id.value&&!form.elements.displayName.dataset.edited)form.elements.displayName.value=form.elements.name.value.split(/\s+/)[0].slice(0,24);});
+  form.elements.displayName?.addEventListener('input',()=>form.elements.displayName.dataset.edited='1');
+  form.elements.scheduleEnabled.addEventListener('change',updateRestrictionState);form.elements.ipRestrictionEnabled.addEventListener('change',updateRestrictionState);
+  document.querySelector('[data-use-current-ip]')?.addEventListener('click',()=>{const current=String(boot.currentIp||'').trim();if(!current)return;const lines=String(form.elements.allowedIps.value||'').split(/\r?\n/).map(v=>v.trim()).filter(Boolean);if(!lines.includes(current))lines.push(current);form.elements.allowedIps.value=lines.join('\n');});
+  document.querySelectorAll('[data-edit-user]').forEach(b=>b.addEventListener('click',()=>openUser(users.find(u=>String(u.id)===String(b.dataset.editUser)))));document.querySelectorAll('[data-password-user]').forEach(b=>b.addEventListener('click',()=>openPassword(users.find(u=>String(u.id)===String(b.dataset.passwordUser)))));
+  document.querySelectorAll('[data-toggle-user]').forEach(button=>button.addEventListener('click',async()=>{const user=users.find(u=>String(u.id)===String(button.dataset.toggleUser));if(!user)return;const active=button.dataset.active!=='1';if(!confirm(`${active?'Ativar':'Inativar'} ${user.name}? O histórico do usuário será preservado.`))return;try{await api(`/configuracoes/usuarios/${encodeURIComponent(user.id)}/status`,{active});location.reload();}catch(error){alert(error.message);}}));
+  form.addEventListener('submit',async event=>{event.preventDefault();const button=form.querySelector('[data-save-user]');button.disabled=true;try{const body={id:form.elements.id.value,name:form.elements.name.value,displayName:form.elements.displayName.value,username:form.elements.username.value,email:form.elements.email.value,mobile:form.elements.mobile.value,profileId:form.elements.profileId.value,password:form.elements.password.value,seller:form.elements.seller.checked,technician:form.elements.technician.checked,active:form.elements.active.checked,accessPolicy:accessPolicyPayload(),pdvPolicy:{maxDiscountPercent:Number(form.elements.maxDiscountPercent.value||0)}};await api('/configuracoes/usuarios',body);location.reload();}catch(error){alert(error.message);button.disabled=false;}});
+  profileForm?.addEventListener('submit',async event=>{event.preventDefault();const button=profileForm.querySelector('button[type="submit"]');button.disabled=true;try{const id=profileForm.elements.id.value;const permissions=id==='administrator'?['*']:[...profileForm.querySelectorAll('[data-permission-editor] input[type="checkbox"]:checked')].map(input=>input.value);await api(`/configuracoes/usuarios/perfis/${encodeURIComponent(id)}`,{name:profileForm.elements.name.value,description:profileForm.elements.description.value,permissions});location.reload();}catch(error){alert(error.message);button.disabled=false;}});
+  passwordForm.addEventListener('submit',async event=>{event.preventDefault();const button=passwordForm.querySelector('button[type="submit"]');button.disabled=true;try{await api(`/configuracoes/usuarios/${encodeURIComponent(passwordForm.elements.id.value)}/senha`,{password:passwordForm.elements.password.value});alert('Senha alterada com sucesso.');closePassword();button.disabled=false;}catch(error){alert(error.message);button.disabled=false;}});
+  document.querySelectorAll('[data-recovery-user]').forEach(button=>button.addEventListener('click',async()=>{const user=users.find(item=>String(item.id)===String(button.dataset.recoveryUser));if(!user)return;if(!confirm(`Gerar uma nova chave de recuperação para ${user.name}? A chave anterior deixará de funcionar.`))return;try{const data=await api(`/configuracoes/usuarios/${encodeURIComponent(user.id)}/chave-recuperacao`,{});window.prompt('CHAVE DE RECUPERAÇÃO — salve em local seguro. Ela será exibida somente agora e é invalidada após o uso.',data.key||'');}catch(error){alert(error.message);}}));
+  document.querySelector('[data-user-search]')?.addEventListener('input',event=>{const q=event.target.value.trim().toLowerCase();document.querySelectorAll('[data-user-row]').forEach(row=>row.hidden=q&&!String(row.dataset.search||'').includes(q));});
+  [modal,passwordModal,profileModal].forEach(layer=>layer?.addEventListener('click',event=>{if(event.target!==layer)return;if(layer===modal)closeUser();else if(layer===passwordModal)closePassword();else closeProfile();}));document.addEventListener('keydown',event=>{if(event.key==='Escape'){closeUser();closePassword();closeProfile();}});
+})();
+</script>
+
+<style>
+.users-page{display:grid;gap:14px}.users-hero{display:flex;justify-content:space-between;align-items:flex-start;gap:18px;border:1px solid var(--line);background:var(--card);border-radius:16px;padding:18px 20px;box-shadow:0 8px 30px rgba(15,23,42,.05)}.users-kicker{display:block;font-size:11px;letter-spacing:.12em;font-weight:800;color:var(--muted);margin-bottom:5px}.users-hero h1{margin:0 0 5px;font-size:26px;color:var(--text)}.users-hero p{margin:0;color:var(--muted);max-width:830px}.users-flash{padding:10px 12px;border-radius:10px;background:color-mix(in srgb,#16a34a 12%,var(--card));border:1px solid color-mix(in srgb,#16a34a 35%,var(--line));color:var(--text)}
+.users-summary{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}.users-summary>div{border:1px solid var(--line);border-radius:13px;background:var(--card);padding:13px 14px}.users-summary span{display:block;color:var(--muted);font-size:11px;font-weight:800;text-transform:uppercase}.users-summary strong{display:block;font-size:24px;color:var(--text);margin:4px 0}.users-summary small{color:var(--muted)}
+.users-grid{display:grid;grid-template-columns:minmax(0,1fr) 350px;gap:14px;align-items:start}.users-card{border:1px solid var(--line);background:var(--card);border-radius:14px;overflow:hidden}.users-card-head{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:14px 15px;border-bottom:1px solid var(--line)}.users-card-head h2,.users-permissions-card h2{margin:0 0 3px;font-size:16px;color:var(--text)}.users-card-head p,.users-permissions-card>p{margin:0;color:var(--muted);font-size:12px}.users-card-head input{height:36px;min-width:220px;border:1px solid var(--line);border-radius:10px;padding:0 10px;background:var(--card);color:var(--text)}.users-table-wrap{overflow:auto}.users-table{width:100%;border-collapse:collapse;white-space:nowrap;font-size:12px}.users-table th{font-size:10px;text-transform:uppercase;color:var(--muted);text-align:left;padding:9px 10px;background:color-mix(in srgb,var(--card) 94%,var(--text));border-bottom:1px solid var(--line)}.users-table td{padding:10px;border-bottom:1px solid var(--line);color:var(--text)}.users-name{display:grid;gap:2px;white-space:normal;min-width:170px}.users-name small{color:var(--muted)}.users-display-name{font-weight:800}.users-table code,.users-permission-tags code,.users-form-permissions code{padding:3px 6px;border-radius:6px;background:color-mix(in srgb,var(--card) 88%,var(--text));color:var(--text)}.users-profile{font-weight:700}.users-badges{display:flex;gap:5px;flex-wrap:wrap}.users-badges span{padding:4px 7px;border-radius:999px;background:color-mix(in srgb,var(--blue) 10%,var(--card));color:var(--text);font-size:10px;font-weight:700}.users-badges em{color:var(--muted);font-style:normal}.users-status{padding:4px 8px;border-radius:999px;font-size:10px;font-weight:800}.users-status.on{background:color-mix(in srgb,#16a34a 14%,var(--card));color:#15803d}.users-status.off{background:color-mix(in srgb,#64748b 16%,var(--card));color:var(--muted)}.users-actions{display:flex;gap:5px}.users-actions button{border:1px solid var(--line);background:var(--card);color:var(--text);border-radius:8px;padding:5px 8px;font:inherit;font-size:11px;cursor:pointer}.users-empty{text-align:center!important;padding:30px!important;color:var(--muted)!important}
+.users-permissions-card{padding:15px;position:sticky;top:14px}.users-profile-list{display:grid;gap:7px;margin-top:12px}.users-profile-list details{border:1px solid var(--line);border-radius:10px;padding:9px 10px}.users-profile-list summary{display:flex;justify-content:space-between;gap:8px;cursor:pointer;color:var(--text)}.users-profile-list summary span{font-size:10px;color:var(--muted)}.users-profile-list details p{font-size:11px;color:var(--muted);margin:8px 0}.users-permission-tags{display:flex;gap:4px;flex-wrap:wrap}.users-permission-tags code{font-size:9px}.users-info{display:grid;gap:4px;margin-top:14px;padding:11px;border-radius:10px;background:color-mix(in srgb,var(--blue) 8%,var(--card));color:var(--text)}.users-info span{font-size:11px;color:var(--muted);line-height:1.45}
+.users-modal{position:fixed;inset:0;z-index:1200;background:rgba(15,23,42,.56);display:grid;place-items:center;padding:18px}.users-modal[hidden]{display:none}.users-modal-card{position:relative;width:min(680px,96vw);max-height:92vh;overflow:auto;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px;box-shadow:0 30px 80px rgba(0,0,0,.3)}.users-user-modal-card{width:min(820px,96vw)}.users-modal-card.small{width:min(430px,96vw)}.users-close{position:absolute;right:12px;top:10px;border:0;background:transparent;color:var(--muted);font-size:25px;cursor:pointer}.users-modal-head span{font-size:10px;letter-spacing:.12em;font-weight:800;color:var(--muted)}.users-modal-head h2{margin:3px 0;color:var(--text)}.users-modal-head p{margin:0 0 14px;color:var(--muted);font-size:12px}.users-form-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.users-form-grid label,.users-password-field,.users-access-date,.users-ip-box label{display:grid;gap:4px}.users-form-grid label.wide{grid-column:1/-1}.users-form-grid label>span,.users-password-field>span,.users-access-date>span,.users-ip-box label>span{font-size:11px;font-weight:800;color:var(--muted)}.users-field-help,.users-access small,.users-ip-box small{font-size:9px;color:var(--muted);line-height:1.35}.users-form-grid input,.users-form-grid select,.users-password-field input,.users-access input[type=date],.users-schedule input[type=time],.users-ip-box textarea{border:1px solid var(--line);border-radius:9px;padding:0 10px;background:var(--card);color:var(--text);font:inherit}.users-form-grid input,.users-form-grid select,.users-password-field input,.users-access input[type=date],.users-schedule input[type=time]{height:38px}.users-functions{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;border:1px solid var(--line);border-radius:11px;margin:14px 0 10px;padding:10px}.users-functions legend{font-size:11px;font-weight:800;color:var(--muted);padding:0 5px}.users-functions label,.users-access-toggle label{display:flex;align-items:flex-start;gap:7px}.users-functions label span,.users-access-toggle label span{display:grid;gap:2px;color:var(--text)}.users-functions small{font-size:10px;color:var(--muted);line-height:1.35}
+.users-pdv-rules{border:1px solid var(--line);border-radius:11px;margin:10px 0;padding:10px;display:grid;gap:8px}.users-pdv-rules legend{font-size:11px;font-weight:800;color:var(--muted);padding:0 5px}.users-pdv-rules>label{display:flex;justify-content:space-between;align-items:center;gap:14px;color:var(--text)}.users-pdv-rules>label>span{display:grid;gap:2px}.users-pdv-rules small,.users-pdv-rules p{font-size:10px;color:var(--muted);line-height:1.4;margin:0}.users-percent-input{display:flex;align-items:center;gap:6px}.users-percent-input input{width:110px;height:38px;border:1px solid var(--line);border-radius:9px;padding:0 10px;background:var(--card);color:var(--text);font:inherit}
+.users-access{border:1px solid var(--line);border-radius:12px;margin:10px 0;overflow:hidden}.users-access>summary{padding:11px 12px;cursor:pointer;display:flex;justify-content:space-between;gap:10px;color:var(--text);background:color-mix(in srgb,var(--card) 94%,var(--text))}.users-access>summary small{color:var(--muted)}.users-access-body{padding:12px;display:grid;gap:12px}.users-access-toggle{padding-top:8px;border-top:1px solid var(--line)}.users-schedule{display:grid;gap:5px}.users-schedule-row{display:grid;grid-template-columns:minmax(130px,1fr) 145px 145px;gap:8px;align-items:center;padding:6px 8px;border:1px solid var(--line);border-radius:9px}.users-schedule-row>label{display:flex;align-items:center;gap:6px;font-size:11px;color:var(--muted)}.users-schedule-row>label:first-child{color:var(--text)}.users-schedule-row input[type=time]{width:90px;height:32px;padding:0 5px}.users-ip-box{display:grid;grid-template-columns:1fr auto;gap:8px;align-items:end}.users-ip-box textarea{padding:8px 10px;min-height:70px;resize:vertical}.users-ip-box [disabled],.users-schedule [disabled]{opacity:.55}
+.users-form-permissions{display:grid;gap:3px;padding:10px;border-radius:10px;background:color-mix(in srgb,var(--card) 91%,var(--text));color:var(--text)}.users-form-permissions span{font-size:11px;color:var(--muted)}.users-form-permissions small{display:flex;gap:4px;flex-wrap:wrap;margin-top:4px}.users-modal-actions{display:flex;justify-content:flex-end;gap:8px;margin-top:14px}.users-profile-edit{margin-top:9px;border:1px solid var(--line);background:var(--card);color:var(--text);border-radius:8px;padding:6px 8px;font:inherit;font-size:10px;font-weight:700;cursor:pointer}.users-profile-modal-card{width:min(900px,96vw)}.users-permission-editor{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px}.users-permission-editor fieldset{border:1px solid var(--line);border-radius:12px;padding:10px;display:grid;gap:6px}.users-permission-editor legend{font-size:11px;font-weight:900;color:var(--muted);padding:0 5px}.users-permission-editor label{display:flex;align-items:flex-start;gap:8px;padding:6px;border-radius:8px}.users-permission-editor label:hover{background:color-mix(in srgb,var(--brand) 6%,var(--card))}.users-permission-editor label span{display:grid;gap:1px;color:var(--text);font-size:11px}.users-permission-editor label small{font-family:monospace;color:var(--muted);font-size:9px}.users-profile-locked{grid-column:1/-1;display:grid;gap:5px;border:1px solid var(--line);border-radius:12px;padding:14px;background:color-mix(in srgb,var(--brand) 6%,var(--card));color:var(--text)}
+@media(max-width:1100px){.users-grid{grid-template-columns:1fr}.users-permissions-card{position:static}.users-summary{grid-template-columns:repeat(2,1fr)}}@media(max-width:700px){.users-permission-editor{grid-template-columns:1fr}.users-hero{display:grid}.users-summary{grid-template-columns:1fr 1fr}.users-card-head{align-items:stretch;display:grid}.users-card-head input{min-width:0;width:100%}.users-form-grid,.users-functions{grid-template-columns:1fr}.users-form-grid label.wide{grid-column:auto}.users-schedule-row{grid-template-columns:1fr 1fr}.users-schedule-row>label:first-child{grid-column:1/-1}.users-ip-box{grid-template-columns:1fr}}
+</style>

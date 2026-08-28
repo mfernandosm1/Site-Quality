@@ -330,26 +330,48 @@ export function getInboxSummary(app, prefetchedData=null){
 }
 
 
-export function getInboundContactMetrics(app, prefetchedData=null){
+export function getInboundContactMetrics(app, prefetchedData=null, options={}){
   const p=ensureInboxStorage(app);
   const conversations=(prefetchedData || getInboxData(app)).conversations.filter(c=>c.conversationType!=='group');
-  const signature=[conversations.length,conversations[0]?.lastMessageAt||'',conversations.reduce((sum,c)=>sum+Number(c.unreadCount||0),0)].join('|');
+  const nowDate=new Date();
+  const monthKeyFromDate=date=>`${date.getFullYear()}-${String(date.getMonth()+1).padStart(2,'0')}`;
+  const validMonth=value=>/^\d{4}-\d{2}$/.test(String(value||''));
+  const currentMonth=monthKeyFromDate(nowDate);
+  const selectedMonth=validMonth(options?.month)?String(options.month):currentMonth;
+  const selectedDate=new Date(`${selectedMonth}-01T12:00:00`);
+  const defaultCompareDate=new Date(selectedDate.getFullYear(),selectedDate.getMonth()-1,1,12);
+  const defaultCompare=monthKeyFromDate(defaultCompareDate);
+  const compareMonth=String(options?.compareMonth||'')==='none'?'':(validMonth(options?.compareMonth)?String(options.compareMonth):defaultCompare);
+  const signature=[conversations.length,conversations[0]?.lastMessageAt||'',conversations.reduce((sum,c)=>sum+Number(c.unreadCount||0),0),selectedMonth,compareMonth].join('|');
   const cached=inboundMetricsCache.get(app);
   if(cached && cached.signature===signature && Date.now()-cached.at<15000) return cached.value;
-  const nowDate=new Date();
+
   const dayStart=new Date(nowDate); dayStart.setHours(0,0,0,0);
   const weekStart=new Date(dayStart); weekStart.setDate(weekStart.getDate()-((weekStart.getDay()+6)%7));
   const monthStart=new Date(nowDate.getFullYear(),nowDate.getMonth(),1);
   const endMs=Date.now()+1000;
   const ranges={today:dayStart.getTime(),week:weekStart.getTime(),month:monthStart.getTime()};
   const counts={today:0,week:0,month:0};
-  const daily=new Map();
-  for(let cursor=new Date(monthStart);cursor.getTime()<=dayStart.getTime();cursor.setDate(cursor.getDate()+1)){
-    daily.set(cursor.toISOString().slice(0,10),0);
-  }
+  const buildMonthMap=key=>{
+    if(!key)return new Map();
+    const [year,month]=key.split('-').map(Number),days=new Date(year,month,0).getDate(),map=new Map();
+    for(let day=1;day<=days;day++) map.set(`${key}-${String(day).padStart(2,'0')}`,0);
+    return map;
+  };
+  const daily=buildMonthMap(selectedMonth),compareDaily=buildMonthMap(compareMonth);
+  const selectedStart=new Date(`${selectedMonth}-01T00:00:00`).getTime();
+  const compareStart=compareMonth?new Date(`${compareMonth}-01T00:00:00`).getTime():Infinity;
+  const earliest=Math.min(ranges.month,selectedStart,compareStart);
+  const countDaily=(messages,map)=>{
+    for(const [dateKey] of map){
+      const start=new Date(dateKey+'T00:00:00');const finish=new Date(start);finish.setDate(finish.getDate()+1);
+      const first=messages.find(m=>m._ms>=start.getTime()&&m._ms<finish.getTime());
+      if(first?.direction==='incoming') map.set(dateKey,(map.get(dateKey)||0)+1);
+    }
+  };
   for(const conversation of conversations){
     const lastMs=Date.parse(conversation.lastMessageAt||'');
-    if(!Number.isFinite(lastMs) || lastMs<ranges.month) continue;
+    if(!Number.isFinite(lastMs) || lastMs<earliest) continue;
     const data=readJson(messageFile(p,conversation.id),{messages:[]});
     const messages=listFrom(data,'messages').filter(m=>['incoming','outgoing'].includes(m.direction)).map(m=>({...m,_ms:Date.parse(m.timestamp||'')})).filter(m=>Number.isFinite(m._ms)&&m._ms<=endMs).sort((a,b)=>a._ms-b._ms);
     if(!messages.length) continue;
@@ -357,16 +379,59 @@ export function getInboundContactMetrics(app, prefetchedData=null){
       const first=messages.find(m=>m._ms>=startMs);
       if(first?.direction==='incoming') counts[key]+=1;
     }
-    for(const [dateKey] of daily){
-      const start=new Date(dateKey+'T00:00:00');
-      const finish=new Date(start); finish.setDate(finish.getDate()+1);
-      const first=messages.find(m=>m._ms>=start.getTime()&&m._ms<finish.getTime());
-      if(first?.direction==='incoming') daily.set(dateKey,(daily.get(dateKey)||0)+1);
-    }
+    countDaily(messages,daily);if(compareMonth)countDaily(messages,compareDaily);
   }
-  const value={today:counts.today,week:counts.week,month:counts.month,daily:[...daily.entries()].map(([date,total])=>({date,total}))};
+  const monthLabel=key=>{
+    if(!key)return '';
+    const [year,month]=key.split('-').map(Number);return new Intl.DateTimeFormat('pt-BR',{month:'long',year:'numeric'}).format(new Date(year,month-1,1,12));
+  };
+  const selectedTotal=[...daily.values()].reduce((sum,value)=>sum+Number(value||0),0),compareTotal=[...compareDaily.values()].reduce((sum,value)=>sum+Number(value||0),0);
+  const delta=compareMonth&&compareTotal?Math.round(((selectedTotal-compareTotal)/compareTotal)*1000)/10:null;
+  const availableMonths=[];
+  for(let offset=0;offset<18;offset++){
+    const d=new Date(nowDate.getFullYear(),nowDate.getMonth()-offset,1,12),key=monthKeyFromDate(d);availableMonths.push({key,label:monthLabel(key)});
+  }
+  const value={today:counts.today,week:counts.week,month:counts.month,daily:[...daily.entries()].map(([date,total])=>({date,total})),compareDaily:[...compareDaily.entries()].map(([date,total])=>({date,total})),selectedMonth,compareMonth,selectedMonthLabel:monthLabel(selectedMonth),compareMonthLabel:monthLabel(compareMonth),selectedTotal,compareTotal,deltaPercent:delta,availableMonths};
   inboundMetricsCache.set(app,{signature,at:Date.now(),value});
   return value;
+}
+
+function normalizeInterestText(value=''){
+  return String(value||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/[^a-z0-9]+/g,' ').replace(/\s+/g,' ').trim();
+}
+function interestTokens(value=''){
+  const stop=new Set(['para','com','sem','de','da','do','das','dos','um','uma','e','o','a','no','na','novo','nova','usado','usada','celular','smartphone','produto','servico','servicos']);
+  return normalizeInterestText(value).split(' ').filter(token=>token&&(token.length>=3||/\d/.test(token))&&!stop.has(token));
+}
+function loadCommercialCatalog(app){
+  const file=path.join(app.locals.paths.CONTENT_DIR,'products.json');
+  const data=readJson(file,{items:[]});
+  const rows=listFrom(data,'items');
+  return rows.filter(item=>item&&item.erp?.active!==false&&item.active!==false).map(item=>{
+    const name=safeText(item.name||item.title||'',180);if(!name)return null;
+    const kind=String(item.erp?.type||item.type||'product').toLowerCase()==='service'?'service':'product';
+    const tokens=interestTokens(name),normalized=normalizeInterestText(name);
+    return {id:String(item.id||item.code||name),name,kind,tokens,normalized};
+  }).filter(Boolean).filter(item=>item.tokens.length);
+}
+function bestCatalogInterest(value,catalog=[]){
+  const raw=safeText(value,220);if(!raw||raw.length<3)return null;
+  const normalized=normalizeInterestText(raw);if(!normalized)return null;
+  const msgTokens=new Set(interestTokens(raw));if(!msgTokens.size)return null;
+  let best=null,bestScore=0;
+  for(const item of catalog){
+    const numeric=item.tokens.filter(token=>/\d/.test(token));
+    const matched=item.tokens.filter(token=>msgTokens.has(token));
+    const numericMatched=numeric.filter(token=>msgTokens.has(token));
+    const exact=normalized.includes(item.normalized)||item.normalized.includes(normalized)&&normalized.length>=8;
+    if(numeric.length && !numericMatched.length && !exact)continue;
+    if(!exact && matched.length<2)continue;
+    const coverage=matched.length/Math.max(1,Math.min(item.tokens.length,5));
+    if(!exact && coverage<0.35)continue;
+    const score=(exact?100:0)+(matched.length*12)+(numericMatched.length*10)+(coverage*20)-Math.max(0,item.tokens.length-matched.length);
+    if(score>bestScore){bestScore=score;best=item;}
+  }
+  return bestScore>=28?best:null;
 }
 
 function cleanCommercialInterest(value=''){
@@ -402,7 +467,8 @@ function recentConversationSignals(app, conversations, nowMs){
     const isOpen=conversation.attendanceState!=='closed' && !['completed_sale','lost','no_potential'].includes(conversation.commercialStatus||'new');
     const awaiting=isOpen && last.direction==='incoming' && last._ms>=freshWindow;
     const waitingSeconds=awaiting?Math.max(0,Math.round((nowMs-last._ms)/1000)):0;
-    map.set(conversation.id,{awaitingResponse:awaiting,waitingSeconds,waitingSince:awaiting?last.timestamp:null,lastIncomingAt:lastIncoming?.timestamp||conversation.lastIncomingAt||null,lastDirection:last.direction});
+    const recentIncomingTexts=messages.filter(m=>m.direction==='incoming'&&m._ms>=recent30&&safeText(m.text,220)).slice(-16).map(m=>safeText(m.text,220));
+    map.set(conversation.id,{awaitingResponse:awaiting,waitingSeconds,waitingSince:awaiting?last.timestamp:null,lastIncomingAt:lastIncoming?.timestamp||conversation.lastIncomingAt||null,lastDirection:last.direction,recentIncomingTexts});
 
     // Mede a primeira resposta somente quando o cliente iniciou o contato daquele dia.
     // Limita a 12 h para um atendimento deixado de um dia para o outro não distorcer todo o indicador.
@@ -442,16 +508,25 @@ export function getCommercialDashboard(app, prefetchedData=null){
   const usefulResponseTimes=signals.responseSamples.filter(v=>Number.isFinite(v)&&v>=0);
   const averageFirstResponseSeconds=usefulResponseTimes.length?Math.round(usefulResponseTimes.reduce((sum,value)=>sum+value,0)/usefulResponseTimes.length):null;
 
-  const interests = new Map();
+  const catalog=loadCommercialCatalog(app);
+  const productInterests=new Map(),serviceInterests=new Map(),combinedInterests=new Map();
+  const addInterest=item=>{
+    if(!item)return;
+    const target=item.kind==='service'?serviceInterests:productInterests,key=`${item.kind}:${item.id||normalizeInterestText(item.name)}`;
+    const current=target.get(key)||{name:item.name,total:0,kind:item.kind};current.total+=1;target.set(key,current);
+    const combined=combinedInterests.get(key)||{name:item.name,total:0,kind:item.kind};combined.total+=1;combinedInterests.set(key,combined);
+  };
   for(const conversation of conversations){
-    const interest = cleanCommercialInterest(conversation.interestProduct);
-    if(!interest) continue;
-    const key = interest.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLocaleLowerCase('pt-BR');
-    const current = interests.get(key) || { name:interest, total:0 };
-    current.total += 1;
-    interests.set(key,current);
+    const signal=signals.map.get(conversation.id)||{};
+    const candidates=[cleanCommercialInterest(conversation.interestProduct),...(signal.recentIncomingTexts||[])].filter(Boolean);
+    const found=new Map();
+    for(const candidate of candidates){
+      const match=bestCatalogInterest(candidate,catalog);if(match)found.set(`${match.kind}:${match.id}`,match);
+    }
+    found.forEach(addInterest);
   }
-  const topInterests = [...interests.values()].sort((a,b)=>b.total-a.total || a.name.localeCompare(b.name,'pt-BR')).slice(0,8);
+  const rank=map=>[...map.values()].sort((a,b)=>b.total-a.total||a.name.localeCompare(b.name,'pt-BR')).slice(0,8);
+  const topProductInterests=rank(productInterests),topServiceInterests=rank(serviceInterests),topInterests=rank(combinedInterests);
 
   const open=c=>c.attendanceState !== 'closed' && !['completed_sale','lost','no_potential'].includes(c.commercialStatus || 'new');
   const allOpportunities = conversations.filter(open).map(c=>{
@@ -498,6 +573,9 @@ export function getCommercialDashboard(app, prefetchedData=null){
     byStatus,
     byOrigin,
     topInterests,
+    topProductInterests,
+    topServiceInterests,
+    catalogInterestCount:catalog.length,
     opportunities
   };
   commercialDashboardCache.set(app,{signature,at:Date.now(),value});

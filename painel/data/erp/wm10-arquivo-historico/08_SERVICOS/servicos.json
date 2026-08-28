@@ -1,0 +1,495 @@
+{
+  "archiveVersion": "1.0",
+  "endpoint": "servico/",
+  "filters": {},
+  "capturedAt": "2026-08-27T14:56:06.964Z",
+  "encoding": "Windows-1252",
+  "count": 59,
+  "data": [
+    {
+      "cod_servico": 365,
+      "nome": "Suporte tourobox",
+      "preco_compra": 0,
+      "preco_venda": 49.99,
+      "ativo": 0,
+      "data_atualizou": "2024-07-15T21:47:06.997",
+      "data_cadastrou": "2021-12-08T11:10:26.693"
+    },
+    {
+      "cod_servico": 1560,
+      "nome": "Cadastro de chip operadora (todas)",
+      "preco_compra": 0,
+      "preco_venda": 20,
+      "ativo": 0,
+      "data_atualizou": "2022-02-03T14:49:03.887",
+      "data_cadastrou": "2021-12-16T15:55:39.853"
+    },
+    {
+      "cod_servico": 1631,
+      "nome": "FRETE",
+      "preco_compra": 30,
+      "preco_venda": 30,
+      "ativo": 0,
+      "data_atualizou": "2021-12-20T11:21:22.840",
+      "data_cadastrou": "2021-12-17T17:15:52.110"
+    },
+    {
+      "cod_servico": 1632,
+      "nome": "Instalação de aplicativo",
+      "preco_compra": 0,
+      "preco_venda": 25,
+      "ativo": 0,
+      "data_atualizou": "2022-02-03T14:49:49.200",
+      "data_cadastrou": "2021-12-17T17:43:33.480"
+    },
+    {
+      "cod_servico": 2277,
+      "nome": "Criação de nova conta apple",
+      "preco_compra": 0,
+      "preco_venda": 180,
+      "ativo": 1,
+      "data_atualizou": "2025-05-14T14:13:47.407",
+      "data_cadastrou": "2022-01-21T16:08:19.580"
+    },
+    {
+      "cod_servico": 2307,
+      "nome": "Cadastro de chip",
+      "preco_compra": 0,
+      "preco_venda": 30,
+      "ativo": 1,
+      "data_cadastrou": "2022-02-03T14:11:24.533"
+    },
+    {
+      "cod_servico": 2308,
+      "nome": "Nova conta de Facebook / Instagram",
+      "preco_compra": 0,
+      "preco_venda": 150,
+      "ativo": 1,
+      "data_cadastrou": "2022-02-03T14:23:12.287"
+    },
+    {
+      "cod_servico": 2309,
+      "nome": "Copia de contatos",
+      "preco_compra": 0,
+      "preco_venda": 20,
+      "ativo": 1,
+      "data_cadastrou": "2022-02-03T14:24:01.960"
+    },
+    {
+      "cod_servico": 2310,
+      "nome": "Copia de dados Android para Android",
+      "preco_compra": 0,
+      "preco_venda": 90,
+      "ativo": 1,
+      "data_cadastrou": "2022-02-03T14:26:43.113"
+    },
+    {
+      "cod_servico": 2311,
+      "nome": "Copia de dados Android para iPhone",
+      "preco_compra": 0,
+      "preco_venda": 130,
+      "ativo": 1,
+      "data_cadastrou": "2022-02-03T14:27:10.217"
+    },
+    {
+      "cod_servico": 2312,
+      "nome": "Corte de chip",
+      "preco_compra": 0,
+      "preco_venda": 15,
+      "ativo": 1,
+      "data_cadastrou": "2022-02-03T14:27:23.647"
+    },
+    {
+      "cod_servico": 2313,
+      "nome": "Serviços diversos",
+      "preco_compra": 0,
+      "preco_venda": 50,
+      "ativo": 1,
+      "data_cadastrou": "2022-02-03T14:27:50.993"
+    },
+    {
+      "cod_servico": 2314,
+      "nome": "Serviço urgente",
+      "preco_compra": 0,
+      "preco_venda": 35,
+      "ativo": 0,
+      "data_atualizou": "2022-04-16T09:08:36.947",
+      "data_cadastrou": "2022-02-03T14:28:16.790"
+    },
+    {
+      "cod_servico": 2315,
+      "nome": "Configurações Diversas no Celular",
+      "preco_compra": 0,
+      "preco_venda": 30,
+      "ativo": 1,
+      "data_cadastrou": "2022-02-03T14:33:48.913"
+    },
+    {
+      "cod_servico": 2316,
+      "nome": "Email novo + aplicativos + copia de dados Android",
+      "preco_compra": 0,
+      "preco_venda": 150,
+      "ativo": 1,
+      "data_cadastrou": "2022-02-03T14:34:37.150"
+    },
+    {
+      "cod_servico": 2317,
+      "nome": "Copia de dados iphone para iphone",
+      "preco_compra": 0,
+      "preco_venda": 100,
+      "ativo": 1,
+      "data_cadastrou": "2022-02-03T14:35:03.087"
+    },
+    {
+      "cod_servico": 2318,
+      "nome": "Email + aplicativos Android",
+      "preco_compra": 0,
+      "preco_venda": 80,
+      "ativo": 1,
+      "data_cadastrou": "2022-02-03T14:35:36.577"
+    },
+    {
+      "cod_servico": 2319,
+      "nome": "Email + aplicativos iPhone",
+      "preco_compra": 0,
+      "preco_venda": 100,
+      "ativo": 1,
+      "data_cadastrou": "2022-02-03T14:35:57.323"
+    },
+    {
+      "cod_servico": 2320,
+      "nome": "Criação de Nova conta Google",
+      "preco_compra": 0,
+      "preco_venda": 80,
+      "ativo": 1,
+      "data_cadastrou": "2022-02-03T14:36:19.297"
+    },
+    {
+      "cod_servico": 2321,
+      "nome": "Email novo + remoção de conta antiga",
+      "preco_compra": 0,
+      "preco_venda": 65,
+      "ativo": 1,
+      "data_cadastrou": "2022-02-03T14:36:57.983"
+    },
+    {
+      "cod_servico": 2322,
+      "nome": "Formatação iPhone",
+      "preco_compra": 0,
+      "preco_venda": 80,
+      "ativo": 0,
+      "data_atualizou": "2023-01-27T08:33:43.653",
+      "data_cadastrou": "2022-02-03T14:37:30.527"
+    },
+    {
+      "cod_servico": 2323,
+      "nome": "Formatação Smartphone ou Tablet + copia de dados",
+      "preco_compra": 0,
+      "preco_venda": 100,
+      "ativo": 1,
+      "data_cadastrou": "2022-02-03T14:42:29.840"
+    },
+    {
+      "cod_servico": 2324,
+      "nome": "Instalação de aplicativos",
+      "preco_compra": 0,
+      "preco_venda": 30,
+      "ativo": 1,
+      "data_cadastrou": "2022-02-03T14:43:00.577"
+    },
+    {
+      "cod_servico": 2326,
+      "nome": "Recuperação de dados celular Android",
+      "preco_compra": 0,
+      "preco_venda": 140,
+      "ativo": 1,
+      "data_cadastrou": "2022-02-03T14:47:04.537"
+    },
+    {
+      "cod_servico": 2327,
+      "nome": "Recuperação de senha Facebook/ Instagram / email",
+      "preco_compra": 0,
+      "preco_venda": 65,
+      "ativo": 1,
+      "data_cadastrou": "2022-02-03T14:47:44.530"
+    },
+    {
+      "cod_servico": 2328,
+      "nome": "Correção de erro de sistema",
+      "preco_compra": 0,
+      "preco_venda": 80,
+      "ativo": 1,
+      "data_cadastrou": "2022-02-03T14:48:28.937"
+    },
+    {
+      "cod_servico": 2807,
+      "nome": "Copia de contatos",
+      "preco_compra": 0,
+      "preco_venda": 50,
+      "ativo": 1,
+      "data_cadastrou": "2022-04-18T11:31:06.130"
+    },
+    {
+      "cod_servico": 3137,
+      "nome": "Limpeza e desoxidação Entrada de energia Android",
+      "preco_compra": 0,
+      "preco_venda": 180,
+      "ativo": 1,
+      "data_atualizou": "2025-05-24T10:17:49.233",
+      "data_cadastrou": "2022-05-23T11:23:45.353"
+    },
+    {
+      "cod_servico": 3138,
+      "nome": "SMARTPHONE P/ EMPRESTIMO LG K10 2017",
+      "preco_compra": 0,
+      "preco_venda": 0,
+      "ativo": 0,
+      "data_atualizou": "2023-01-31T08:11:55.980",
+      "data_cadastrou": "2022-05-23T14:02:33.847"
+    },
+    {
+      "cod_servico": 3139,
+      "nome": "SMARTPHONE P/ EMPRESTIMO LG K10 2017  PRETO",
+      "preco_compra": 0,
+      "preco_venda": 0,
+      "ativo": 0,
+      "data_atualizou": "2023-01-31T08:11:55.980",
+      "data_cadastrou": "2022-05-23T14:03:47.163"
+    },
+    {
+      "cod_servico": 4829,
+      "nome": "Reprovação de Orçamento",
+      "preco_compra": 0,
+      "preco_venda": 20,
+      "ativo": 1,
+      "data_cadastrou": "2022-09-14T16:08:32.510"
+    },
+    {
+      "cod_servico": 5056,
+      "nome": "Formatação PC/Notebook + copia de dados",
+      "preco_compra": 0,
+      "preco_venda": 135,
+      "ativo": 1,
+      "data_cadastrou": "2022-09-29T11:26:30.863"
+    },
+    {
+      "cod_servico": 5057,
+      "nome": "Limpeza interna PC - Notebook",
+      "preco_compra": 0,
+      "preco_venda": 0.01,
+      "ativo": 1,
+      "data_cadastrou": "2022-09-29T11:37:44.440"
+    },
+    {
+      "cod_servico": 5063,
+      "nome": "Regravação de Sistema",
+      "preco_compra": 1,
+      "preco_venda": 320,
+      "ativo": 0,
+      "data_cadastrou": "2022-10-01T09:40:17.933"
+    },
+    {
+      "cod_servico": 6103,
+      "nome": "BANHO QUÍMICO E DESOXIDAÇÕES",
+      "preco_compra": 0,
+      "preco_venda": 200,
+      "ativo": 1,
+      "data_cadastrou": "2023-01-28T08:02:17.903"
+    },
+    {
+      "cod_servico": 6142,
+      "nome": "LIMPEZA ENTRADA DE ENERGIA CELULAR",
+      "preco_compra": 0,
+      "preco_venda": 160,
+      "ativo": 0,
+      "data_cadastrou": "2023-02-07T16:23:07.280"
+    },
+    {
+      "cod_servico": 6171,
+      "nome": "Copia de dados celular para pen drive",
+      "preco_compra": 0,
+      "preco_venda": 70,
+      "ativo": 1,
+      "data_cadastrou": "2023-02-13T08:11:28.450"
+    },
+    {
+      "cod_servico": 6330,
+      "nome": "INSTALAÇÃO DE PACOTE OFFICE PC/NOTE",
+      "preco_compra": 0,
+      "preco_venda": 90,
+      "ativo": 1,
+      "data_cadastrou": "2023-03-02T16:05:04.903"
+    },
+    {
+      "cod_servico": 6331,
+      "nome": "Instalação SSD + Formatação",
+      "preco_compra": 0,
+      "preco_venda": 229,
+      "ativo": 1,
+      "data_cadastrou": "2023-03-06T08:34:17.117"
+    },
+    {
+      "cod_servico": 6343,
+      "nome": "INSTALAR PLAY STORE EM TABLET AMAZON",
+      "preco_compra": 0,
+      "preco_venda": 60,
+      "ativo": 1,
+      "data_cadastrou": "2023-03-07T17:14:13.810"
+    },
+    {
+      "cod_servico": 6439,
+      "nome": "Formatação PC/Notebook sem copiar dados",
+      "preco_compra": 0,
+      "preco_venda": 120,
+      "ativo": 1,
+      "data_cadastrou": "2023-03-10T17:16:37.790"
+    },
+    {
+      "cod_servico": 6924,
+      "nome": "Formatação Smartphone ou tablet Sem copia de dados",
+      "preco_compra": 0,
+      "preco_venda": 85,
+      "ativo": 1,
+      "data_cadastrou": "2023-05-11T08:18:14.150"
+    },
+    {
+      "cod_servico": 7056,
+      "nome": "Recolagem de tela Iphone",
+      "preco_compra": 0,
+      "preco_venda": 0,
+      "ativo": 1,
+      "data_cadastrou": "2023-05-26T11:32:25.587"
+    },
+    {
+      "cod_servico": 7057,
+      "nome": "Recolagem de tela Android",
+      "preco_compra": 0,
+      "preco_venda": 200,
+      "ativo": 1,
+      "data_cadastrou": "2023-05-26T11:33:37.453"
+    },
+    {
+      "cod_servico": 7975,
+      "nome": "Suporte tourobox 90 dias de suporte",
+      "preco_compra": 0,
+      "preco_venda": 0,
+      "ativo": 0,
+      "data_atualizou": "2024-07-15T21:47:06.997",
+      "data_cadastrou": "2023-09-22T10:56:38.683"
+    },
+    {
+      "cod_servico": 7976,
+      "nome": "Suporte tourobox 1 ano de suporte",
+      "preco_compra": 0,
+      "preco_venda": 0,
+      "ativo": 0,
+      "data_atualizou": "2024-07-15T21:47:06.997",
+      "data_cadastrou": "2023-09-22T10:56:38.683"
+    },
+    {
+      "cod_servico": 10294,
+      "nome": "Regravação de Sistema SISTEMA ANDROID",
+      "preco_compra": 0.01,
+      "preco_venda": 250,
+      "ativo": 1,
+      "data_cadastrou": "2024-06-05T08:45:45.250"
+    },
+    {
+      "cod_servico": 10295,
+      "nome": "Regravação de Sistema SISTEMA IOS IPHONE",
+      "preco_compra": 0.01,
+      "preco_venda": 350,
+      "ativo": 1,
+      "data_cadastrou": "2024-06-05T08:45:45.250"
+    },
+    {
+      "cod_servico": 10454,
+      "nome": "LIMPEZA ENTRADA DE ENERGIA CELULAR SISTEMA ANDROID",
+      "preco_compra": 0.01,
+      "preco_venda": 150,
+      "ativo": 1,
+      "data_cadastrou": "2024-07-03T10:33:32.897"
+    },
+    {
+      "cod_servico": 10455,
+      "nome": "LIMPEZA ENTRADA DE ENERGIA CELULAR SISTEMA IOS IPHONE",
+      "preco_compra": 0.01,
+      "preco_venda": 190,
+      "ativo": 1,
+      "data_cadastrou": "2024-07-03T10:33:32.897"
+    },
+    {
+      "cod_servico": 10675,
+      "nome": "FRETE FORA DO RS",
+      "preco_compra": 0,
+      "preco_venda": 50,
+      "ativo": 0,
+      "data_atualizou": "2024-08-07T10:11:54.097",
+      "data_cadastrou": "2024-08-03T08:56:12.710"
+    },
+    {
+      "cod_servico": 10676,
+      "nome": "FRETE DENTRO DO RS",
+      "preco_compra": 62.65,
+      "preco_venda": 50,
+      "ativo": 1,
+      "data_cadastrou": "2024-08-03T10:00:42"
+    },
+    {
+      "cod_servico": 10677,
+      "nome": "FRETE FORA DO RS",
+      "preco_compra": 27,
+      "preco_venda": 20,
+      "ativo": 1,
+      "data_cadastrou": "2024-08-03T10:00:42"
+    },
+    {
+      "cod_servico": 10716,
+      "nome": "Troca tela + mão de obra",
+      "preco_compra": 0,
+      "preco_venda": 0.01,
+      "ativo": 1,
+      "data_cadastrou": "2024-08-09T11:19:27.413"
+    },
+    {
+      "cod_servico": 10717,
+      "nome": "Troca de entrada de energia + mão de obra",
+      "preco_compra": 0,
+      "preco_venda": 0.01,
+      "ativo": 1,
+      "data_cadastrou": "2024-08-09T11:21:12.893"
+    },
+    {
+      "cod_servico": 11502,
+      "nome": "Limpeza interna celular",
+      "preco_compra": 0,
+      "preco_venda": 190,
+      "ativo": 1,
+      "data_cadastrou": "2024-12-23T09:46:14.940"
+    },
+    {
+      "cod_servico": 11503,
+      "nome": "Copia de dados de Iphone para Android",
+      "preco_compra": 0,
+      "preco_venda": 90,
+      "ativo": 1,
+      "data_cadastrou": "2025-01-04T09:54:56.047"
+    },
+    {
+      "cod_servico": 11548,
+      "nome": "Recolagem de tampa Android",
+      "preco_compra": 0,
+      "preco_venda": 200,
+      "ativo": 1,
+      "data_cadastrou": "2025-01-16T09:36:29.103"
+    },
+    {
+      "cod_servico": 11614,
+      "nome": "Copia de dados android para IOS + Nova conta apple",
+      "preco_compra": 0,
+      "preco_venda": 250,
+      "ativo": 1,
+      "data_cadastrou": "2025-01-18T09:42:48.623"
+    }
+  ]
+}

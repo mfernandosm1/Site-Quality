@@ -1,0 +1,2122 @@
+{
+  "createdAt": "2026-08-25T23:35:06.057Z",
+  "count": {
+    "id": "CNT-20260825-0001",
+    "type": "partial",
+    "status": "in_progress",
+    "blockPdv": false,
+    "notes": "",
+    "locationId": "loja-principal",
+    "startedAt": "2026-08-25T21:14:41.920Z",
+    "createdAt": "2026-08-25T21:14:41.920Z",
+    "createdBy": "painel",
+    "updatedAt": "2026-08-25T23:10:47.781Z",
+    "items": [
+      {
+        "inventoryItemId": "VAR-1786498444551-10",
+        "productId": "1786498444551",
+        "selectionId": "1786498444551::VAR-1786498444551-10",
+        "name": "CAPA iPhone 14 PRO · Goiaba · CASE",
+        "code": "PRD-207",
+        "sku": "PRD-207",
+        "barcode": "",
+        "variationLabel": "Goiaba · CASE",
+        "systemQuantityAtCount": 0,
+        "countedQuantity": 1,
+        "firstCountedAt": "2026-08-25T21:14:51.005Z",
+        "lastCountedAt": "2026-08-25T21:14:51.005Z"
+      },
+      {
+        "inventoryItemId": "PRD-1787692677685",
+        "productId": "1787692677685",
+        "selectionId": "1787692677685",
+        "name": "Capa iPhone 16 pro - Clear Case Fosca Navy Blue",
+        "code": "PRD-835",
+        "sku": "PRD-835",
+        "barcode": "",
+        "variationLabel": "",
+        "systemQuantityAtCount": 0,
+        "countedQuantity": 2,
+        "firstCountedAt": "2026-08-25T21:18:08.236Z",
+        "lastCountedAt": "2026-08-25T21:18:10.850Z"
+      },
+      {
+        "inventoryItemId": "PRD-1787692878263",
+        "productId": "1787692878263",
+        "selectionId": "1787692878263",
+        "name": "Capa iPhone 16 pro - Clear Case Rosa",
+        "code": "PRD-836",
+        "sku": "PRD-836",
+        "barcode": "",
+        "variationLabel": "",
+        "systemQuantityAtCount": 0,
+        "countedQuantity": 1,
+        "firstCountedAt": "2026-08-25T21:21:31.200Z",
+        "lastCountedAt": "2026-08-25T21:21:31.200Z"
+      },
+      {
+        "inventoryItemId": "PRD-1787421873665",
+        "productId": "PRD-1787421873665",
+        "selectionId": "PRD-1787421873665",
+        "name": "BATERIA MOTO Z3 PLAY JS40",
+        "code": "PRD-831",
+        "sku": "PRD-831",
+        "barcode": "",
+        "variationLabel": "",
+        "systemQuantityAtCount": 1,
+        "countedQuantity": 0,
+        "firstCountedAt": "2026-08-25T21:21:38.440Z",
+        "lastCountedAt": "2026-08-25T21:21:43.035Z"
+      },
+      {
+        "inventoryItemId": "PRD-1786972297026",
+        "productId": "1786972297026",
+        "selectionId": "1786972297026",
+        "name": "Capa iPhone 17 Pro anti impacto",
+        "code": "PRD-604",
+        "sku": "PRD-604",
+        "barcode": "7898555213661",
+        "variationLabel": "",
+        "systemQuantityAtCount": 1,
+        "countedQuantity": 1,
+        "firstCountedAt": "2026-08-25T21:22:26.982Z",
+        "lastCountedAt": "2026-08-25T21:22:26.982Z"
+      },
+      {
+        "inventoryItemId": "PRD-1787693557685",
+        "productId": "1787693557685",
+        "selectionId": "1787693557685",
+        "name": "Pelicula Ceramica Motorola moto E6 plus / E6i / E6s",
+        "code": "PRD-837",
+        "sku": "PRD-837",
+        "barcode": "",
+        "variationLabel": "",
+        "systemQuantityAtCount": 0,
+        "countedQuantity": 1,
+        "firstCountedAt": "2026-08-25T21:32:57.794Z",
+        "lastCountedAt": "2026-08-25T21:32:57.794Z"
+      },
+      {
+        "inventoryItemId": "PRD-1787693733903",
+        "productId": "1787693733903",
+        "selectionId": "1787693733903",
+        "name": "Tela frontal samsung j5 j500 1ª LINHA preta",
+        "code": "PRD-838",
+        "sku": "PRD-838",
+        "barcode": "",
+        "variationLabel": "",
+        "systemQuantityAtCount": 0,
+        "countedQuantity": 1,
+        "firstCountedAt": "2026-08-25T21:35:47.567Z",
+        "lastCountedAt": "2026-08-25T21:35:47.567Z"
+      },
+      {
+        "inventoryItemId": "PRD-1786492565581",
+        "productId": "1786492565581",
+        "selectionId": "1786492565581",
+        "name": "TELA FRONTAL APPLE IPHONE 12 12 PRO",
+        "code": "PRD-194",
+        "sku": "PRD-194",
+        "barcode": "",
+        "variationLabel": "",
+        "systemQuantityAtCount": 0,
+        "countedQuantity": 1,
+        "firstCountedAt": "2026-08-25T21:36:13.316Z",
+        "lastCountedAt": "2026-08-25T21:36:13.316Z"
+      },
+      {
+        "inventoryItemId": "PRD-1787693916824",
+        "productId": "1787693916824",
+        "selectionId": "1787693916824",
+        "name": "Tela frontal Motorola Moto g7 / g7 plus 1ª LINHA preta",
+        "code": "PRD-839",
+        "sku": "PRD-839",
+        "barcode": "",
+        "variationLabel": "",
+        "systemQuantityAtCount": 0,
+        "countedQuantity": 1,
+        "firstCountedAt": "2026-08-25T21:38:44.557Z",
+        "lastCountedAt": "2026-08-25T21:38:44.557Z"
+      },
+      {
+        "inventoryItemId": "PRD-1787694038350",
+        "productId": "1787694038350",
+        "selectionId": "1787694038350",
+        "name": "Tela frontal Motorola Moto g6 1ª LINHA preta",
+        "code": "PRD-841",
+        "sku": "PRD-841",
+        "barcode": "",
+        "variationLabel": "",
+        "systemQuantityAtCount": 0,
+        "countedQuantity": 1,
+        "firstCountedAt": "2026-08-25T21:40:46.044Z",
+        "lastCountedAt": "2026-08-25T21:40:46.044Z"
+      },
+      {
+        "inventoryItemId": "PRD-1787694093005",
+        "productId": "1787694093005",
+        "selectionId": "1787694093005",
+        "name": "Tela frontal Motorola Moto C plus plus 1ª LINHA preta",
+        "code": "PRD-842",
+        "sku": "PRD-842",
+        "barcode": "",
+        "variationLabel": "",
+        "systemQuantityAtCount": 0,
+        "countedQuantity": 1,
+        "firstCountedAt": "2026-08-25T21:41:52.041Z",
+        "lastCountedAt": "2026-08-25T21:41:52.041Z"
+      },
+      {
+        "inventoryItemId": "VAR-1787693989841-2",
+        "productId": "1787693989841",
+        "selectionId": "1787693989841::VAR-1787693989841-2",
+        "name": "Tela frontal Motorola Moto e5 / g6 play 1ª LINHA · Dourada",
+        "code": "PRD-840",
+        "sku": "PRD-840",
+        "barcode": "",
+        "variationLabel": "Dourada",
+        "systemQuantityAtCount": 0,
+        "countedQuantity": 1,
+        "firstCountedAt": "2026-08-25T21:43:34.984Z",
+        "lastCountedAt": "2026-08-25T21:43:34.984Z"
+      },
+      {
+        "inventoryItemId": "VAR-1787693989841-1",
+        "productId": "1787693989841",
+        "selectionId": "1787693989841::VAR-1787693989841-1",
+        "name": "Tela frontal Motorola Moto e5 / g6 play 1ª LINHA · Preto",
+        "code": "PRD-840",
+        "sku": "PRD-840",
+        "barcode": "",
+        "variationLabel": "Preto",
+        "systemQuantityAtCount": 0,
+        "countedQuantity": 2,
+        "firstCountedAt": "2026-08-25T21:43:39.120Z",
+        "lastCountedAt": "2026-08-25T22:31:00.022Z"
+      },
+      {
+        "inventoryItemId": "PRD-1787694284861",
+        "productId": "1787694284861",
+        "selectionId": "1787694284861",
+        "name": "Tela frontal Motorola Moto One Hyper 1ª LINHA preta",
+        "code": "PRD-843",
+        "sku": "PRD-843",
+        "barcode": "",
+        "variationLabel": "",
+        "systemQuantityAtCount": 0,
+        "countedQuantity": 1,
+        "firstCountedAt": "2026-08-25T21:45:01.792Z",
+        "lastCountedAt": "2026-08-25T21:45:01.792Z"
+      },
+      {
+        "inventoryItemId": "PRD-1787694382441",
+        "productId": "1787694382441",
+        "selectionId": "1787694382441",
+        "name": "Tela frontal Motorola Moto g5 plus 1ª LINHA preta",
+        "code": "PRD-844",
+        "sku": "PRD-844",
+        "barcode": "",
+        "variationLabel": "",
+        "systemQuantityAtCount": 0,
+        "countedQuantity": 2,
+        "firstCountedAt": "2026-08-25T21:46:30.030Z",
+        "lastCountedAt": "2026-08-25T21:46:30.030Z"
+      },
+      {
+        "inventoryItemId": "PRD-1787694434821",
+        "productId": "1787694434821",
+        "selectionId": "1787694434821",
+        "name": "Tela frontal Motorola Moto g5s plus 1ª LINHA Dourada",
+        "code": "PRD-845",
+        "sku": "PRD-845",
+        "barcode": "",
+        "variationLabel": "",
+        "systemQuantityAtCount": 0,
+        "countedQuantity": 1,
+        "firstCountedAt": "2026-08-25T21:47:20.169Z",
+        "lastCountedAt": "2026-08-25T21:47:20.169Z"
+      },
+      {
+        "inventoryItemId": "PRD-1787694472502",
+        "productId": "1787694472502",
+        "selectionId": "1787694472502",
+        "name": "Tela frontal Motorola Moto g3 1ª LINHA Branca",
+        "code": "PRD-846",
+        "sku": "PRD-846",
+        "barcode": "",
+        "variationLabel": "",
+        "systemQuantityAtCount": 0,
+        "countedQuantity": 1,
+        "firstCountedAt": "2026-08-25T21:47:59.996Z",
+        "lastCountedAt": "2026-08-25T21:47:59.996Z"
+      },
+      {
+        "inventoryItemId": "PRD-1787696498699",
+        "productId": "1787696498699",
+        "selectionId": "1787696498699",
+        "name": "Bateria Samsung A20s / A10s / A21 / A11",
+        "code": "PRD-847",
+        "sku": "PRD-847",
+        "barcode": "",
+        "variationLabel": "",
+        "systemQuantityAtCount": 0,
+        "countedQuantity": 2,
+        "firstCountedAt": "2026-08-25T22:21:46.528Z",
+        "lastCountedAt": "2026-08-25T22:21:46.528Z"
+      },
+      {
+        "inventoryItemId": "PRD-1787696564665",
+        "productId": "1787696564665",
+        "selectionId": "1787696564665",
+        "name": "Bateria Samsung a23 / m23 / m52 / m53",
+        "code": "PRD-848",
+        "sku": "PRD-848",
+        "barcode": "",
+        "variationLabel": "",
+        "systemQuantityAtCount": 0,
+        "countedQuantity": 1,
+        "firstCountedAt": "2026-08-25T22:22:52.653Z",
+        "lastCountedAt": "2026-08-25T22:22:52.653Z"
+      },
+      {
+        "inventoryItemId": "PRD-1787696790882",
+        "productId": "1787696790882",
+        "selectionId": "1787696790882",
+        "name": "BATERIA Motorola Moto G8 / G8 Play / E7 (KG40)",
+        "code": "PRD-849",
+        "sku": "PRD-849",
+        "barcode": "",
+        "variationLabel": "",
+        "systemQuantityAtCount": 0,
+        "countedQuantity": 1,
+        "firstCountedAt": "2026-08-25T22:26:37.030Z",
+        "lastCountedAt": "2026-08-25T22:26:37.030Z"
+      },
+      {
+        "inventoryItemId": "PRD-1787696939720",
+        "productId": "1787696939720",
+        "selectionId": "1787696939720",
+        "name": "BATERIA MOTO X4 HX40",
+        "code": "PRD-851",
+        "sku": "PRD-851",
+        "barcode": "",
+        "variationLabel": "",
+        "systemQuantityAtCount": 0,
+        "countedQuantity": 1,
+        "firstCountedAt": "2026-08-25T22:29:03.669Z",
+        "lastCountedAt": "2026-08-25T22:29:03.669Z"
+      },
+      {
+        "inventoryItemId": "PRD-1787696988231",
+        "productId": "1787696988231",
+        "selectionId": "1787696988231",
+        "name": "BATERIA MOTO G5S / G5S PLUS / G6 (HG30)",
+        "code": "PRD-852",
+        "sku": "PRD-852",
+        "barcode": "",
+        "variationLabel": "",
+        "systemQuantityAtCount": 0,
+        "countedQuantity": 1,
+        "firstCountedAt": "2026-08-25T22:29:54.400Z",
+        "lastCountedAt": "2026-08-25T22:29:54.400Z"
+      },
+      {
+        "inventoryItemId": "VAR-1787697409200-4",
+        "productId": "1787697409200",
+        "selectionId": "1787697409200::VAR-1787697409200-4",
+        "name": "Tampa Traseira Samsung · Azul · A11",
+        "code": "PRD-853",
+        "sku": "PRD-853",
+        "barcode": "",
+        "variationLabel": "Azul · A11",
+        "systemQuantityAtCount": 0,
+        "countedQuantity": 1,
+        "firstCountedAt": "2026-08-25T22:39:57.831Z",
+        "lastCountedAt": "2026-08-25T22:39:57.831Z"
+      },
+      {
+        "inventoryItemId": "VAR-1787697409200-3",
+        "productId": "1787697409200",
+        "selectionId": "1787697409200::VAR-1787697409200-3",
+        "name": "Tampa Traseira Samsung · Preto · A20 / A30",
+        "code": "PRD-853",
+        "sku": "PRD-853",
+        "barcode": "",
+        "variationLabel": "Preto · A20 / A30",
+        "systemQuantityAtCount": 0,
+        "countedQuantity": 2,
+        "firstCountedAt": "2026-08-25T22:40:07.622Z",
+        "lastCountedAt": "2026-08-25T22:40:07.622Z"
+      },
+      {
+        "inventoryItemId": "PRD-1787697665291",
+        "productId": "1787697665291",
+        "selectionId": "1787697665291",
+        "name": "Tela frontal Xiaomi Redmi Note 8 preta",
+        "code": "PRD-854",
+        "sku": "PRD-854",
+        "barcode": "",
+        "variationLabel": "",
+        "systemQuantityAtCount": 0,
+        "countedQuantity": 1,
+        "firstCountedAt": "2026-08-25T22:41:10.012Z",
+        "lastCountedAt": "2026-08-25T22:41:10.012Z"
+      },
+      {
+        "inventoryItemId": "PRD-1787697706658",
+        "productId": "1787697706658",
+        "selectionId": "1787697706658",
+        "name": "Tela frontal Xiaomi Redmi Note 9s / 9 pro preta",
+        "code": "PRD-855",
+        "sku": "PRD-855",
+        "barcode": "",
+        "variationLabel": "",
+        "systemQuantityAtCount": 0,
+        "countedQuantity": 1,
+        "firstCountedAt": "2026-08-25T22:41:53.395Z",
+        "lastCountedAt": "2026-08-25T22:41:53.395Z"
+      },
+      {
+        "inventoryItemId": "PRD-1787697762559",
+        "productId": "1787697762559",
+        "selectionId": "1787697762559",
+        "name": "Tela Frontal LG K61 Q630 preta",
+        "code": "PRD-856",
+        "sku": "PRD-856",
+        "barcode": "",
+        "variationLabel": "",
+        "systemQuantityAtCount": 0,
+        "countedQuantity": 1,
+        "firstCountedAt": "2026-08-25T22:42:49.962Z",
+        "lastCountedAt": "2026-08-25T22:42:49.962Z"
+      },
+      {
+        "inventoryItemId": "PRD-1787699359131",
+        "productId": "1787699359131",
+        "selectionId": "1787699359131",
+        "name": "Bateria LG K52 BL-T51",
+        "code": "PRD-857",
+        "sku": "PRD-857",
+        "barcode": "",
+        "variationLabel": "",
+        "systemQuantityAtCount": 0,
+        "countedQuantity": 1,
+        "firstCountedAt": "2026-08-25T23:10:44.093Z",
+        "lastCountedAt": "2026-08-25T23:10:44.093Z"
+      },
+      {
+        "inventoryItemId": "PRD-1787699437309",
+        "productId": "1787699437309",
+        "selectionId": "1787699437309",
+        "name": "Bateria Xiaomi Mi A2 Mi 6x (BN36)",
+        "code": "PRD-858",
+        "sku": "PRD-858",
+        "barcode": "",
+        "variationLabel": "",
+        "systemQuantityAtCount": 0,
+        "countedQuantity": 1,
+        "firstCountedAt": "2026-08-25T23:10:47.781Z",
+        "lastCountedAt": "2026-08-25T23:10:47.781Z"
+      }
+    ],
+    "snapshot": [],
+    "events": [
+      {
+        "id": "EVT-1787692481920-hvi64m",
+        "type": "created",
+        "actor": "painel",
+        "createdAt": "2026-08-25T21:14:41.920Z",
+        "metadata": {
+          "type": "partial",
+          "blockPdv": false,
+          "snapshotSize": 0
+        }
+      },
+      {
+        "id": "EVT-1787692491005-8xv9gj",
+        "type": "item_counted",
+        "actor": "painel",
+        "createdAt": "2026-08-25T21:14:51.006Z",
+        "metadata": {
+          "inventoryItemId": "VAR-1786498444551-10",
+          "quantity": 1
+        }
+      },
+      {
+        "id": "EVT-1787692688237-qmjpk7",
+        "type": "item_counted",
+        "actor": "painel",
+        "createdAt": "2026-08-25T21:18:08.237Z",
+        "metadata": {
+          "inventoryItemId": "PRD-1787692677685",
+          "quantity": 1
+        }
+      },
+      {
+        "id": "EVT-1787692690850-952ykj",
+        "type": "item_counted",
+        "actor": "painel",
+        "createdAt": "2026-08-25T21:18:10.850Z",
+        "metadata": {
+          "inventoryItemId": "PRD-1787692677685",
+          "quantity": 2
+        }
+      },
+      {
+        "id": "EVT-1787692891200-f9ri6s",
+        "type": "item_counted",
+        "actor": "painel",
+        "createdAt": "2026-08-25T21:21:31.200Z",
+        "metadata": {
+          "inventoryItemId": "PRD-1787692878263",
+          "quantity": 1
+        }
+      },
+      {
+        "id": "EVT-1787692898440-fi3bjj",
+        "type": "item_counted",
+        "actor": "painel",
+        "createdAt": "2026-08-25T21:21:38.440Z",
+        "metadata": {
+          "inventoryItemId": "PRD-1787421873665",
+          "quantity": 1
+        }
+      },
+      {
+        "id": "EVT-1787692903035-zce2hg",
+        "type": "item_counted",
+        "actor": "painel",
+        "createdAt": "2026-08-25T21:21:43.035Z",
+        "metadata": {
+          "inventoryItemId": "PRD-1787421873665",
+          "quantity": 0
+        }
+      },
+      {
+        "id": "EVT-1787692946982-cwmqle",
+        "type": "item_counted",
+        "actor": "painel",
+        "createdAt": "2026-08-25T21:22:26.982Z",
+        "metadata": {
+          "inventoryItemId": "PRD-1786972297026",
+          "quantity": 1
+        }
+      },
+      {
+        "id": "EVT-1787693577794-618wi1",
+        "type": "item_counted",
+        "actor": "painel",
+        "createdAt": "2026-08-25T21:32:57.794Z",
+        "metadata": {
+          "inventoryItemId": "PRD-1787693557685",
+          "quantity": 1
+        }
+      },
+      {
+        "id": "EVT-1787693685849-nmk9s2",
+        "type": "item_counted",
+        "actor": "painel",
+        "createdAt": "2026-08-25T21:34:45.849Z",
+        "metadata": {
+          "inventoryItemId": "PRD-1786930625631",
+          "quantity": 1
+        }
+      },
+      {
+        "id": "EVT-1787693692461-xrb6vf",
+        "type": "item_removed",
+        "actor": "painel",
+        "createdAt": "2026-08-25T21:34:52.461Z",
+        "metadata": {
+          "inventoryItemId": "PRD-1786930625631"
+        }
+      },
+      {
+        "id": "EVT-1787693747568-6vm0xw",
+        "type": "item_counted",
+        "actor": "painel",
+        "createdAt": "2026-08-25T21:35:47.568Z",
+        "metadata": {
+          "inventoryItemId": "PRD-1787693733903",
+          "quantity": 1
+        }
+      },
+      {
+        "id": "EVT-1787693773316-5lf256",
+        "type": "item_counted",
+        "actor": "painel",
+        "createdAt": "2026-08-25T21:36:13.316Z",
+        "metadata": {
+          "inventoryItemId": "PRD-1786492565581",
+          "quantity": 1
+        }
+      },
+      {
+        "id": "EVT-1787693924557-n0gw0a",
+        "type": "item_counted",
+        "actor": "painel",
+        "createdAt": "2026-08-25T21:38:44.557Z",
+        "metadata": {
+          "inventoryItemId": "PRD-1787693916824",
+          "quantity": 1
+        }
+      },
+      {
+        "id": "EVT-1787693996386-2zs05r",
+        "type": "item_counted",
+        "actor": "painel",
+        "createdAt": "2026-08-25T21:39:56.386Z",
+        "metadata": {
+          "inventoryItemId": "PRD-1787693989841",
+          "quantity": 1
+        }
+      },
+      {
+        "id": "EVT-1787694046045-vs1bbf",
+        "type": "item_counted",
+        "actor": "painel",
+        "createdAt": "2026-08-25T21:40:46.045Z",
+        "metadata": {
+          "inventoryItemId": "PRD-1787694038350",
+          "quantity": 1
+        }
+      },
+      {
+        "id": "EVT-1787694112041-rlz3dp",
+        "type": "item_counted",
+        "actor": "painel",
+        "createdAt": "2026-08-25T21:41:52.041Z",
+        "metadata": {
+          "inventoryItemId": "PRD-1787694093005",
+          "quantity": 1
+        }
+      },
+      {
+        "id": "EVT-1787694155628-y2uagv",
+        "type": "item_removed",
+        "actor": "painel",
+        "createdAt": "2026-08-25T21:42:35.628Z",
+        "metadata": {
+          "inventoryItemId": "PRD-1787693989841"
+        }
+      },
+      {
+        "id": "EVT-1787694214984-ngz3p2",
+        "type": "item_counted",
+        "actor": "painel",
+        "createdAt": "2026-08-25T21:43:34.984Z",
+        "metadata": {
+          "inventoryItemId": "VAR-1787693989841-2",
+          "quantity": 1
+        }
+      },
+      {
+        "id": "EVT-1787694219121-8734j9",
+        "type": "item_counted",
+        "actor": "painel",
+        "createdAt": "2026-08-25T21:43:39.121Z",
+        "metadata": {
+          "inventoryItemId": "VAR-1787693989841-1",
+          "quantity": 1
+        }
+      },
+      {
+        "id": "EVT-1787694301792-burq2d",
+        "type": "item_counted",
+        "actor": "painel",
+        "createdAt": "2026-08-25T21:45:01.792Z",
+        "metadata": {
+          "inventoryItemId": "PRD-1787694284861",
+          "quantity": 1
+        }
+      },
+      {
+        "id": "EVT-1787694390030-7dlsfd",
+        "type": "item_counted",
+        "actor": "painel",
+        "createdAt": "2026-08-25T21:46:30.030Z",
+        "metadata": {
+          "inventoryItemId": "PRD-1787694382441",
+          "quantity": 2
+        }
+      },
+      {
+        "id": "EVT-1787694440169-ivblft",
+        "type": "item_counted",
+        "actor": "painel",
+        "createdAt": "2026-08-25T21:47:20.169Z",
+        "metadata": {
+          "inventoryItemId": "PRD-1787694434821",
+          "quantity": 1
+        }
+      },
+      {
+        "id": "EVT-1787694479997-pwi89b",
+        "type": "item_counted",
+        "actor": "painel",
+        "createdAt": "2026-08-25T21:47:59.997Z",
+        "metadata": {
+          "inventoryItemId": "PRD-1787694472502",
+          "quantity": 1
+        }
+      },
+      {
+        "id": "EVT-1787696506529-5xcfpf",
+        "type": "item_counted",
+        "actor": "painel",
+        "createdAt": "2026-08-25T22:21:46.529Z",
+        "metadata": {
+          "inventoryItemId": "PRD-1787696498699",
+          "quantity": 2
+        }
+      },
+      {
+        "id": "EVT-1787696572653-tcr8jp",
+        "type": "item_counted",
+        "actor": "painel",
+        "createdAt": "2026-08-25T22:22:52.653Z",
+        "metadata": {
+          "inventoryItemId": "PRD-1787696564665",
+          "quantity": 1
+        }
+      },
+      {
+        "id": "EVT-1787696797031-7ba530",
+        "type": "item_counted",
+        "actor": "painel",
+        "createdAt": "2026-08-25T22:26:37.031Z",
+        "metadata": {
+          "inventoryItemId": "PRD-1787696790882",
+          "quantity": 1
+        }
+      },
+      {
+        "id": "EVT-1787696943669-rbd92s",
+        "type": "item_counted",
+        "actor": "painel",
+        "createdAt": "2026-08-25T22:29:03.669Z",
+        "metadata": {
+          "inventoryItemId": "PRD-1787696939720",
+          "quantity": 1
+        }
+      },
+      {
+        "id": "EVT-1787696994400-8vt8mc",
+        "type": "item_counted",
+        "actor": "painel",
+        "createdAt": "2026-08-25T22:29:54.400Z",
+        "metadata": {
+          "inventoryItemId": "PRD-1787696988231",
+          "quantity": 1
+        }
+      },
+      {
+        "id": "EVT-1787697060022-p8opdi",
+        "type": "item_counted",
+        "actor": "painel",
+        "createdAt": "2026-08-25T22:31:00.022Z",
+        "metadata": {
+          "inventoryItemId": "VAR-1787693989841-1",
+          "quantity": 2
+        }
+      },
+      {
+        "id": "EVT-1787697597831-pvagb6",
+        "type": "item_counted",
+        "actor": "painel",
+        "createdAt": "2026-08-25T22:39:57.831Z",
+        "metadata": {
+          "inventoryItemId": "VAR-1787697409200-4",
+          "quantity": 1
+        }
+      },
+      {
+        "id": "EVT-1787697607623-ejhfgq",
+        "type": "item_counted",
+        "actor": "painel",
+        "createdAt": "2026-08-25T22:40:07.623Z",
+        "metadata": {
+          "inventoryItemId": "VAR-1787697409200-3",
+          "quantity": 2
+        }
+      },
+      {
+        "id": "EVT-1787697670013-gtize2",
+        "type": "item_counted",
+        "actor": "painel",
+        "createdAt": "2026-08-25T22:41:10.013Z",
+        "metadata": {
+          "inventoryItemId": "PRD-1787697665291",
+          "quantity": 1
+        }
+      },
+      {
+        "id": "EVT-1787697713395-5mo028",
+        "type": "item_counted",
+        "actor": "painel",
+        "createdAt": "2026-08-25T22:41:53.395Z",
+        "metadata": {
+          "inventoryItemId": "PRD-1787697706658",
+          "quantity": 1
+        }
+      },
+      {
+        "id": "EVT-1787697769963-854k8s",
+        "type": "item_counted",
+        "actor": "painel",
+        "createdAt": "2026-08-25T22:42:49.963Z",
+        "metadata": {
+          "inventoryItemId": "PRD-1787697762559",
+          "quantity": 1
+        }
+      },
+      {
+        "id": "EVT-1787699444093-ky8zzi",
+        "type": "item_counted",
+        "actor": "painel",
+        "createdAt": "2026-08-25T23:10:44.093Z",
+        "metadata": {
+          "inventoryItemId": "PRD-1787699359131",
+          "quantity": 1
+        }
+      },
+      {
+        "id": "EVT-1787699447781-dj7th0",
+        "type": "item_counted",
+        "actor": "painel",
+        "createdAt": "2026-08-25T23:10:47.781Z",
+        "metadata": {
+          "inventoryItemId": "PRD-1787699437309",
+          "quantity": 1
+        }
+      }
+    ]
+  },
+  "conference": {
+    "count": {
+      "id": "CNT-20260825-0001",
+      "type": "partial",
+      "status": "in_progress",
+      "blockPdv": false,
+      "notes": "",
+      "locationId": "loja-principal",
+      "startedAt": "2026-08-25T21:14:41.920Z",
+      "createdAt": "2026-08-25T21:14:41.920Z",
+      "createdBy": "painel",
+      "updatedAt": "2026-08-25T23:10:47.781Z",
+      "items": [
+        {
+          "inventoryItemId": "VAR-1786498444551-10",
+          "productId": "1786498444551",
+          "selectionId": "1786498444551::VAR-1786498444551-10",
+          "name": "CAPA iPhone 14 PRO · Goiaba · CASE",
+          "code": "PRD-207",
+          "sku": "PRD-207",
+          "barcode": "",
+          "variationLabel": "Goiaba · CASE",
+          "systemQuantityAtCount": 0,
+          "countedQuantity": 1,
+          "firstCountedAt": "2026-08-25T21:14:51.005Z",
+          "lastCountedAt": "2026-08-25T21:14:51.005Z"
+        },
+        {
+          "inventoryItemId": "PRD-1787692677685",
+          "productId": "1787692677685",
+          "selectionId": "1787692677685",
+          "name": "Capa iPhone 16 pro - Clear Case Fosca Navy Blue",
+          "code": "PRD-835",
+          "sku": "PRD-835",
+          "barcode": "",
+          "variationLabel": "",
+          "systemQuantityAtCount": 0,
+          "countedQuantity": 2,
+          "firstCountedAt": "2026-08-25T21:18:08.236Z",
+          "lastCountedAt": "2026-08-25T21:18:10.850Z"
+        },
+        {
+          "inventoryItemId": "PRD-1787692878263",
+          "productId": "1787692878263",
+          "selectionId": "1787692878263",
+          "name": "Capa iPhone 16 pro - Clear Case Rosa",
+          "code": "PRD-836",
+          "sku": "PRD-836",
+          "barcode": "",
+          "variationLabel": "",
+          "systemQuantityAtCount": 0,
+          "countedQuantity": 1,
+          "firstCountedAt": "2026-08-25T21:21:31.200Z",
+          "lastCountedAt": "2026-08-25T21:21:31.200Z"
+        },
+        {
+          "inventoryItemId": "PRD-1787421873665",
+          "productId": "PRD-1787421873665",
+          "selectionId": "PRD-1787421873665",
+          "name": "BATERIA MOTO Z3 PLAY JS40",
+          "code": "PRD-831",
+          "sku": "PRD-831",
+          "barcode": "",
+          "variationLabel": "",
+          "systemQuantityAtCount": 1,
+          "countedQuantity": 0,
+          "firstCountedAt": "2026-08-25T21:21:38.440Z",
+          "lastCountedAt": "2026-08-25T21:21:43.035Z"
+        },
+        {
+          "inventoryItemId": "PRD-1786972297026",
+          "productId": "1786972297026",
+          "selectionId": "1786972297026",
+          "name": "Capa iPhone 17 Pro anti impacto",
+          "code": "PRD-604",
+          "sku": "PRD-604",
+          "barcode": "7898555213661",
+          "variationLabel": "",
+          "systemQuantityAtCount": 1,
+          "countedQuantity": 1,
+          "firstCountedAt": "2026-08-25T21:22:26.982Z",
+          "lastCountedAt": "2026-08-25T21:22:26.982Z"
+        },
+        {
+          "inventoryItemId": "PRD-1787693557685",
+          "productId": "1787693557685",
+          "selectionId": "1787693557685",
+          "name": "Pelicula Ceramica Motorola moto E6 plus / E6i / E6s",
+          "code": "PRD-837",
+          "sku": "PRD-837",
+          "barcode": "",
+          "variationLabel": "",
+          "systemQuantityAtCount": 0,
+          "countedQuantity": 1,
+          "firstCountedAt": "2026-08-25T21:32:57.794Z",
+          "lastCountedAt": "2026-08-25T21:32:57.794Z"
+        },
+        {
+          "inventoryItemId": "PRD-1787693733903",
+          "productId": "1787693733903",
+          "selectionId": "1787693733903",
+          "name": "Tela frontal samsung j5 j500 1ª LINHA preta",
+          "code": "PRD-838",
+          "sku": "PRD-838",
+          "barcode": "",
+          "variationLabel": "",
+          "systemQuantityAtCount": 0,
+          "countedQuantity": 1,
+          "firstCountedAt": "2026-08-25T21:35:47.567Z",
+          "lastCountedAt": "2026-08-25T21:35:47.567Z"
+        },
+        {
+          "inventoryItemId": "PRD-1786492565581",
+          "productId": "1786492565581",
+          "selectionId": "1786492565581",
+          "name": "TELA FRONTAL APPLE IPHONE 12 12 PRO",
+          "code": "PRD-194",
+          "sku": "PRD-194",
+          "barcode": "",
+          "variationLabel": "",
+          "systemQuantityAtCount": 0,
+          "countedQuantity": 1,
+          "firstCountedAt": "2026-08-25T21:36:13.316Z",
+          "lastCountedAt": "2026-08-25T21:36:13.316Z"
+        },
+        {
+          "inventoryItemId": "PRD-1787693916824",
+          "productId": "1787693916824",
+          "selectionId": "1787693916824",
+          "name": "Tela frontal Motorola Moto g7 / g7 plus 1ª LINHA preta",
+          "code": "PRD-839",
+          "sku": "PRD-839",
+          "barcode": "",
+          "variationLabel": "",
+          "systemQuantityAtCount": 0,
+          "countedQuantity": 1,
+          "firstCountedAt": "2026-08-25T21:38:44.557Z",
+          "lastCountedAt": "2026-08-25T21:38:44.557Z"
+        },
+        {
+          "inventoryItemId": "PRD-1787694038350",
+          "productId": "1787694038350",
+          "selectionId": "1787694038350",
+          "name": "Tela frontal Motorola Moto g6 1ª LINHA preta",
+          "code": "PRD-841",
+          "sku": "PRD-841",
+          "barcode": "",
+          "variationLabel": "",
+          "systemQuantityAtCount": 0,
+          "countedQuantity": 1,
+          "firstCountedAt": "2026-08-25T21:40:46.044Z",
+          "lastCountedAt": "2026-08-25T21:40:46.044Z"
+        },
+        {
+          "inventoryItemId": "PRD-1787694093005",
+          "productId": "1787694093005",
+          "selectionId": "1787694093005",
+          "name": "Tela frontal Motorola Moto C plus plus 1ª LINHA preta",
+          "code": "PRD-842",
+          "sku": "PRD-842",
+          "barcode": "",
+          "variationLabel": "",
+          "systemQuantityAtCount": 0,
+          "countedQuantity": 1,
+          "firstCountedAt": "2026-08-25T21:41:52.041Z",
+          "lastCountedAt": "2026-08-25T21:41:52.041Z"
+        },
+        {
+          "inventoryItemId": "VAR-1787693989841-2",
+          "productId": "1787693989841",
+          "selectionId": "1787693989841::VAR-1787693989841-2",
+          "name": "Tela frontal Motorola Moto e5 / g6 play 1ª LINHA · Dourada",
+          "code": "PRD-840",
+          "sku": "PRD-840",
+          "barcode": "",
+          "variationLabel": "Dourada",
+          "systemQuantityAtCount": 0,
+          "countedQuantity": 1,
+          "firstCountedAt": "2026-08-25T21:43:34.984Z",
+          "lastCountedAt": "2026-08-25T21:43:34.984Z"
+        },
+        {
+          "inventoryItemId": "VAR-1787693989841-1",
+          "productId": "1787693989841",
+          "selectionId": "1787693989841::VAR-1787693989841-1",
+          "name": "Tela frontal Motorola Moto e5 / g6 play 1ª LINHA · Preto",
+          "code": "PRD-840",
+          "sku": "PRD-840",
+          "barcode": "",
+          "variationLabel": "Preto",
+          "systemQuantityAtCount": 0,
+          "countedQuantity": 2,
+          "firstCountedAt": "2026-08-25T21:43:39.120Z",
+          "lastCountedAt": "2026-08-25T22:31:00.022Z"
+        },
+        {
+          "inventoryItemId": "PRD-1787694284861",
+          "productId": "1787694284861",
+          "selectionId": "1787694284861",
+          "name": "Tela frontal Motorola Moto One Hyper 1ª LINHA preta",
+          "code": "PRD-843",
+          "sku": "PRD-843",
+          "barcode": "",
+          "variationLabel": "",
+          "systemQuantityAtCount": 0,
+          "countedQuantity": 1,
+          "firstCountedAt": "2026-08-25T21:45:01.792Z",
+          "lastCountedAt": "2026-08-25T21:45:01.792Z"
+        },
+        {
+          "inventoryItemId": "PRD-1787694382441",
+          "productId": "1787694382441",
+          "selectionId": "1787694382441",
+          "name": "Tela frontal Motorola Moto g5 plus 1ª LINHA preta",
+          "code": "PRD-844",
+          "sku": "PRD-844",
+          "barcode": "",
+          "variationLabel": "",
+          "systemQuantityAtCount": 0,
+          "countedQuantity": 2,
+          "firstCountedAt": "2026-08-25T21:46:30.030Z",
+          "lastCountedAt": "2026-08-25T21:46:30.030Z"
+        },
+        {
+          "inventoryItemId": "PRD-1787694434821",
+          "productId": "1787694434821",
+          "selectionId": "1787694434821",
+          "name": "Tela frontal Motorola Moto g5s plus 1ª LINHA Dourada",
+          "code": "PRD-845",
+          "sku": "PRD-845",
+          "barcode": "",
+          "variationLabel": "",
+          "systemQuantityAtCount": 0,
+          "countedQuantity": 1,
+          "firstCountedAt": "2026-08-25T21:47:20.169Z",
+          "lastCountedAt": "2026-08-25T21:47:20.169Z"
+        },
+        {
+          "inventoryItemId": "PRD-1787694472502",
+          "productId": "1787694472502",
+          "selectionId": "1787694472502",
+          "name": "Tela frontal Motorola Moto g3 1ª LINHA Branca",
+          "code": "PRD-846",
+          "sku": "PRD-846",
+          "barcode": "",
+          "variationLabel": "",
+          "systemQuantityAtCount": 0,
+          "countedQuantity": 1,
+          "firstCountedAt": "2026-08-25T21:47:59.996Z",
+          "lastCountedAt": "2026-08-25T21:47:59.996Z"
+        },
+        {
+          "inventoryItemId": "PRD-1787696498699",
+          "productId": "1787696498699",
+          "selectionId": "1787696498699",
+          "name": "Bateria Samsung A20s / A10s / A21 / A11",
+          "code": "PRD-847",
+          "sku": "PRD-847",
+          "barcode": "",
+          "variationLabel": "",
+          "systemQuantityAtCount": 0,
+          "countedQuantity": 2,
+          "firstCountedAt": "2026-08-25T22:21:46.528Z",
+          "lastCountedAt": "2026-08-25T22:21:46.528Z"
+        },
+        {
+          "inventoryItemId": "PRD-1787696564665",
+          "productId": "1787696564665",
+          "selectionId": "1787696564665",
+          "name": "Bateria Samsung a23 / m23 / m52 / m53",
+          "code": "PRD-848",
+          "sku": "PRD-848",
+          "barcode": "",
+          "variationLabel": "",
+          "systemQuantityAtCount": 0,
+          "countedQuantity": 1,
+          "firstCountedAt": "2026-08-25T22:22:52.653Z",
+          "lastCountedAt": "2026-08-25T22:22:52.653Z"
+        },
+        {
+          "inventoryItemId": "PRD-1787696790882",
+          "productId": "1787696790882",
+          "selectionId": "1787696790882",
+          "name": "BATERIA Motorola Moto G8 / G8 Play / E7 (KG40)",
+          "code": "PRD-849",
+          "sku": "PRD-849",
+          "barcode": "",
+          "variationLabel": "",
+          "systemQuantityAtCount": 0,
+          "countedQuantity": 1,
+          "firstCountedAt": "2026-08-25T22:26:37.030Z",
+          "lastCountedAt": "2026-08-25T22:26:37.030Z"
+        },
+        {
+          "inventoryItemId": "PRD-1787696939720",
+          "productId": "1787696939720",
+          "selectionId": "1787696939720",
+          "name": "BATERIA MOTO X4 HX40",
+          "code": "PRD-851",
+          "sku": "PRD-851",
+          "barcode": "",
+          "variationLabel": "",
+          "systemQuantityAtCount": 0,
+          "countedQuantity": 1,
+          "firstCountedAt": "2026-08-25T22:29:03.669Z",
+          "lastCountedAt": "2026-08-25T22:29:03.669Z"
+        },
+        {
+          "inventoryItemId": "PRD-1787696988231",
+          "productId": "1787696988231",
+          "selectionId": "1787696988231",
+          "name": "BATERIA MOTO G5S / G5S PLUS / G6 (HG30)",
+          "code": "PRD-852",
+          "sku": "PRD-852",
+          "barcode": "",
+          "variationLabel": "",
+          "systemQuantityAtCount": 0,
+          "countedQuantity": 1,
+          "firstCountedAt": "2026-08-25T22:29:54.400Z",
+          "lastCountedAt": "2026-08-25T22:29:54.400Z"
+        },
+        {
+          "inventoryItemId": "VAR-1787697409200-4",
+          "productId": "1787697409200",
+          "selectionId": "1787697409200::VAR-1787697409200-4",
+          "name": "Tampa Traseira Samsung · Azul · A11",
+          "code": "PRD-853",
+          "sku": "PRD-853",
+          "barcode": "",
+          "variationLabel": "Azul · A11",
+          "systemQuantityAtCount": 0,
+          "countedQuantity": 1,
+          "firstCountedAt": "2026-08-25T22:39:57.831Z",
+          "lastCountedAt": "2026-08-25T22:39:57.831Z"
+        },
+        {
+          "inventoryItemId": "VAR-1787697409200-3",
+          "productId": "1787697409200",
+          "selectionId": "1787697409200::VAR-1787697409200-3",
+          "name": "Tampa Traseira Samsung · Preto · A20 / A30",
+          "code": "PRD-853",
+          "sku": "PRD-853",
+          "barcode": "",
+          "variationLabel": "Preto · A20 / A30",
+          "systemQuantityAtCount": 0,
+          "countedQuantity": 2,
+          "firstCountedAt": "2026-08-25T22:40:07.622Z",
+          "lastCountedAt": "2026-08-25T22:40:07.622Z"
+        },
+        {
+          "inventoryItemId": "PRD-1787697665291",
+          "productId": "1787697665291",
+          "selectionId": "1787697665291",
+          "name": "Tela frontal Xiaomi Redmi Note 8 preta",
+          "code": "PRD-854",
+          "sku": "PRD-854",
+          "barcode": "",
+          "variationLabel": "",
+          "systemQuantityAtCount": 0,
+          "countedQuantity": 1,
+          "firstCountedAt": "2026-08-25T22:41:10.012Z",
+          "lastCountedAt": "2026-08-25T22:41:10.012Z"
+        },
+        {
+          "inventoryItemId": "PRD-1787697706658",
+          "productId": "1787697706658",
+          "selectionId": "1787697706658",
+          "name": "Tela frontal Xiaomi Redmi Note 9s / 9 pro preta",
+          "code": "PRD-855",
+          "sku": "PRD-855",
+          "barcode": "",
+          "variationLabel": "",
+          "systemQuantityAtCount": 0,
+          "countedQuantity": 1,
+          "firstCountedAt": "2026-08-25T22:41:53.395Z",
+          "lastCountedAt": "2026-08-25T22:41:53.395Z"
+        },
+        {
+          "inventoryItemId": "PRD-1787697762559",
+          "productId": "1787697762559",
+          "selectionId": "1787697762559",
+          "name": "Tela Frontal LG K61 Q630 preta",
+          "code": "PRD-856",
+          "sku": "PRD-856",
+          "barcode": "",
+          "variationLabel": "",
+          "systemQuantityAtCount": 0,
+          "countedQuantity": 1,
+          "firstCountedAt": "2026-08-25T22:42:49.962Z",
+          "lastCountedAt": "2026-08-25T22:42:49.962Z"
+        },
+        {
+          "inventoryItemId": "PRD-1787699359131",
+          "productId": "1787699359131",
+          "selectionId": "1787699359131",
+          "name": "Bateria LG K52 BL-T51",
+          "code": "PRD-857",
+          "sku": "PRD-857",
+          "barcode": "",
+          "variationLabel": "",
+          "systemQuantityAtCount": 0,
+          "countedQuantity": 1,
+          "firstCountedAt": "2026-08-25T23:10:44.093Z",
+          "lastCountedAt": "2026-08-25T23:10:44.093Z"
+        },
+        {
+          "inventoryItemId": "PRD-1787699437309",
+          "productId": "1787699437309",
+          "selectionId": "1787699437309",
+          "name": "Bateria Xiaomi Mi A2 Mi 6x (BN36)",
+          "code": "PRD-858",
+          "sku": "PRD-858",
+          "barcode": "",
+          "variationLabel": "",
+          "systemQuantityAtCount": 0,
+          "countedQuantity": 1,
+          "firstCountedAt": "2026-08-25T23:10:47.781Z",
+          "lastCountedAt": "2026-08-25T23:10:47.781Z"
+        }
+      ],
+      "snapshot": [],
+      "events": [
+        {
+          "id": "EVT-1787692481920-hvi64m",
+          "type": "created",
+          "actor": "painel",
+          "createdAt": "2026-08-25T21:14:41.920Z",
+          "metadata": {
+            "type": "partial",
+            "blockPdv": false,
+            "snapshotSize": 0
+          }
+        },
+        {
+          "id": "EVT-1787692491005-8xv9gj",
+          "type": "item_counted",
+          "actor": "painel",
+          "createdAt": "2026-08-25T21:14:51.006Z",
+          "metadata": {
+            "inventoryItemId": "VAR-1786498444551-10",
+            "quantity": 1
+          }
+        },
+        {
+          "id": "EVT-1787692688237-qmjpk7",
+          "type": "item_counted",
+          "actor": "painel",
+          "createdAt": "2026-08-25T21:18:08.237Z",
+          "metadata": {
+            "inventoryItemId": "PRD-1787692677685",
+            "quantity": 1
+          }
+        },
+        {
+          "id": "EVT-1787692690850-952ykj",
+          "type": "item_counted",
+          "actor": "painel",
+          "createdAt": "2026-08-25T21:18:10.850Z",
+          "metadata": {
+            "inventoryItemId": "PRD-1787692677685",
+            "quantity": 2
+          }
+        },
+        {
+          "id": "EVT-1787692891200-f9ri6s",
+          "type": "item_counted",
+          "actor": "painel",
+          "createdAt": "2026-08-25T21:21:31.200Z",
+          "metadata": {
+            "inventoryItemId": "PRD-1787692878263",
+            "quantity": 1
+          }
+        },
+        {
+          "id": "EVT-1787692898440-fi3bjj",
+          "type": "item_counted",
+          "actor": "painel",
+          "createdAt": "2026-08-25T21:21:38.440Z",
+          "metadata": {
+            "inventoryItemId": "PRD-1787421873665",
+            "quantity": 1
+          }
+        },
+        {
+          "id": "EVT-1787692903035-zce2hg",
+          "type": "item_counted",
+          "actor": "painel",
+          "createdAt": "2026-08-25T21:21:43.035Z",
+          "metadata": {
+            "inventoryItemId": "PRD-1787421873665",
+            "quantity": 0
+          }
+        },
+        {
+          "id": "EVT-1787692946982-cwmqle",
+          "type": "item_counted",
+          "actor": "painel",
+          "createdAt": "2026-08-25T21:22:26.982Z",
+          "metadata": {
+            "inventoryItemId": "PRD-1786972297026",
+            "quantity": 1
+          }
+        },
+        {
+          "id": "EVT-1787693577794-618wi1",
+          "type": "item_counted",
+          "actor": "painel",
+          "createdAt": "2026-08-25T21:32:57.794Z",
+          "metadata": {
+            "inventoryItemId": "PRD-1787693557685",
+            "quantity": 1
+          }
+        },
+        {
+          "id": "EVT-1787693685849-nmk9s2",
+          "type": "item_counted",
+          "actor": "painel",
+          "createdAt": "2026-08-25T21:34:45.849Z",
+          "metadata": {
+            "inventoryItemId": "PRD-1786930625631",
+            "quantity": 1
+          }
+        },
+        {
+          "id": "EVT-1787693692461-xrb6vf",
+          "type": "item_removed",
+          "actor": "painel",
+          "createdAt": "2026-08-25T21:34:52.461Z",
+          "metadata": {
+            "inventoryItemId": "PRD-1786930625631"
+          }
+        },
+        {
+          "id": "EVT-1787693747568-6vm0xw",
+          "type": "item_counted",
+          "actor": "painel",
+          "createdAt": "2026-08-25T21:35:47.568Z",
+          "metadata": {
+            "inventoryItemId": "PRD-1787693733903",
+            "quantity": 1
+          }
+        },
+        {
+          "id": "EVT-1787693773316-5lf256",
+          "type": "item_counted",
+          "actor": "painel",
+          "createdAt": "2026-08-25T21:36:13.316Z",
+          "metadata": {
+            "inventoryItemId": "PRD-1786492565581",
+            "quantity": 1
+          }
+        },
+        {
+          "id": "EVT-1787693924557-n0gw0a",
+          "type": "item_counted",
+          "actor": "painel",
+          "createdAt": "2026-08-25T21:38:44.557Z",
+          "metadata": {
+            "inventoryItemId": "PRD-1787693916824",
+            "quantity": 1
+          }
+        },
+        {
+          "id": "EVT-1787693996386-2zs05r",
+          "type": "item_counted",
+          "actor": "painel",
+          "createdAt": "2026-08-25T21:39:56.386Z",
+          "metadata": {
+            "inventoryItemId": "PRD-1787693989841",
+            "quantity": 1
+          }
+        },
+        {
+          "id": "EVT-1787694046045-vs1bbf",
+          "type": "item_counted",
+          "actor": "painel",
+          "createdAt": "2026-08-25T21:40:46.045Z",
+          "metadata": {
+            "inventoryItemId": "PRD-1787694038350",
+            "quantity": 1
+          }
+        },
+        {
+          "id": "EVT-1787694112041-rlz3dp",
+          "type": "item_counted",
+          "actor": "painel",
+          "createdAt": "2026-08-25T21:41:52.041Z",
+          "metadata": {
+            "inventoryItemId": "PRD-1787694093005",
+            "quantity": 1
+          }
+        },
+        {
+          "id": "EVT-1787694155628-y2uagv",
+          "type": "item_removed",
+          "actor": "painel",
+          "createdAt": "2026-08-25T21:42:35.628Z",
+          "metadata": {
+            "inventoryItemId": "PRD-1787693989841"
+          }
+        },
+        {
+          "id": "EVT-1787694214984-ngz3p2",
+          "type": "item_counted",
+          "actor": "painel",
+          "createdAt": "2026-08-25T21:43:34.984Z",
+          "metadata": {
+            "inventoryItemId": "VAR-1787693989841-2",
+            "quantity": 1
+          }
+        },
+        {
+          "id": "EVT-1787694219121-8734j9",
+          "type": "item_counted",
+          "actor": "painel",
+          "createdAt": "2026-08-25T21:43:39.121Z",
+          "metadata": {
+            "inventoryItemId": "VAR-1787693989841-1",
+            "quantity": 1
+          }
+        },
+        {
+          "id": "EVT-1787694301792-burq2d",
+          "type": "item_counted",
+          "actor": "painel",
+          "createdAt": "2026-08-25T21:45:01.792Z",
+          "metadata": {
+            "inventoryItemId": "PRD-1787694284861",
+            "quantity": 1
+          }
+        },
+        {
+          "id": "EVT-1787694390030-7dlsfd",
+          "type": "item_counted",
+          "actor": "painel",
+          "createdAt": "2026-08-25T21:46:30.030Z",
+          "metadata": {
+            "inventoryItemId": "PRD-1787694382441",
+            "quantity": 2
+          }
+        },
+        {
+          "id": "EVT-1787694440169-ivblft",
+          "type": "item_counted",
+          "actor": "painel",
+          "createdAt": "2026-08-25T21:47:20.169Z",
+          "metadata": {
+            "inventoryItemId": "PRD-1787694434821",
+            "quantity": 1
+          }
+        },
+        {
+          "id": "EVT-1787694479997-pwi89b",
+          "type": "item_counted",
+          "actor": "painel",
+          "createdAt": "2026-08-25T21:47:59.997Z",
+          "metadata": {
+            "inventoryItemId": "PRD-1787694472502",
+            "quantity": 1
+          }
+        },
+        {
+          "id": "EVT-1787696506529-5xcfpf",
+          "type": "item_counted",
+          "actor": "painel",
+          "createdAt": "2026-08-25T22:21:46.529Z",
+          "metadata": {
+            "inventoryItemId": "PRD-1787696498699",
+            "quantity": 2
+          }
+        },
+        {
+          "id": "EVT-1787696572653-tcr8jp",
+          "type": "item_counted",
+          "actor": "painel",
+          "createdAt": "2026-08-25T22:22:52.653Z",
+          "metadata": {
+            "inventoryItemId": "PRD-1787696564665",
+            "quantity": 1
+          }
+        },
+        {
+          "id": "EVT-1787696797031-7ba530",
+          "type": "item_counted",
+          "actor": "painel",
+          "createdAt": "2026-08-25T22:26:37.031Z",
+          "metadata": {
+            "inventoryItemId": "PRD-1787696790882",
+            "quantity": 1
+          }
+        },
+        {
+          "id": "EVT-1787696943669-rbd92s",
+          "type": "item_counted",
+          "actor": "painel",
+          "createdAt": "2026-08-25T22:29:03.669Z",
+          "metadata": {
+            "inventoryItemId": "PRD-1787696939720",
+            "quantity": 1
+          }
+        },
+        {
+          "id": "EVT-1787696994400-8vt8mc",
+          "type": "item_counted",
+          "actor": "painel",
+          "createdAt": "2026-08-25T22:29:54.400Z",
+          "metadata": {
+            "inventoryItemId": "PRD-1787696988231",
+            "quantity": 1
+          }
+        },
+        {
+          "id": "EVT-1787697060022-p8opdi",
+          "type": "item_counted",
+          "actor": "painel",
+          "createdAt": "2026-08-25T22:31:00.022Z",
+          "metadata": {
+            "inventoryItemId": "VAR-1787693989841-1",
+            "quantity": 2
+          }
+        },
+        {
+          "id": "EVT-1787697597831-pvagb6",
+          "type": "item_counted",
+          "actor": "painel",
+          "createdAt": "2026-08-25T22:39:57.831Z",
+          "metadata": {
+            "inventoryItemId": "VAR-1787697409200-4",
+            "quantity": 1
+          }
+        },
+        {
+          "id": "EVT-1787697607623-ejhfgq",
+          "type": "item_counted",
+          "actor": "painel",
+          "createdAt": "2026-08-25T22:40:07.623Z",
+          "metadata": {
+            "inventoryItemId": "VAR-1787697409200-3",
+            "quantity": 2
+          }
+        },
+        {
+          "id": "EVT-1787697670013-gtize2",
+          "type": "item_counted",
+          "actor": "painel",
+          "createdAt": "2026-08-25T22:41:10.013Z",
+          "metadata": {
+            "inventoryItemId": "PRD-1787697665291",
+            "quantity": 1
+          }
+        },
+        {
+          "id": "EVT-1787697713395-5mo028",
+          "type": "item_counted",
+          "actor": "painel",
+          "createdAt": "2026-08-25T22:41:53.395Z",
+          "metadata": {
+            "inventoryItemId": "PRD-1787697706658",
+            "quantity": 1
+          }
+        },
+        {
+          "id": "EVT-1787697769963-854k8s",
+          "type": "item_counted",
+          "actor": "painel",
+          "createdAt": "2026-08-25T22:42:49.963Z",
+          "metadata": {
+            "inventoryItemId": "PRD-1787697762559",
+            "quantity": 1
+          }
+        },
+        {
+          "id": "EVT-1787699444093-ky8zzi",
+          "type": "item_counted",
+          "actor": "painel",
+          "createdAt": "2026-08-25T23:10:44.093Z",
+          "metadata": {
+            "inventoryItemId": "PRD-1787699359131",
+            "quantity": 1
+          }
+        },
+        {
+          "id": "EVT-1787699447781-dj7th0",
+          "type": "item_counted",
+          "actor": "painel",
+          "createdAt": "2026-08-25T23:10:47.781Z",
+          "metadata": {
+            "inventoryItemId": "PRD-1787699437309",
+            "quantity": 1
+          }
+        }
+      ]
+    },
+    "rows": [
+      {
+        "inventoryItemId": "VAR-1786498444551-10",
+        "productId": "1786498444551",
+        "selectionId": "1786498444551::VAR-1786498444551-10",
+        "name": "CAPA iPhone 14 PRO · Goiaba · CASE",
+        "code": "PRD-207",
+        "sku": "PRD-207",
+        "barcode": "",
+        "variationLabel": "Goiaba · CASE",
+        "systemQuantityAtCount": 0,
+        "countedQuantity": 1,
+        "firstCountedAt": "2026-08-25T21:14:51.005Z",
+        "lastCountedAt": "2026-08-25T21:14:51.005Z",
+        "systemQuantity": 0,
+        "movementsAfterCount": 0,
+        "targetQuantity": 1,
+        "difference": 1
+      },
+      {
+        "inventoryItemId": "PRD-1787692677685",
+        "productId": "1787692677685",
+        "selectionId": "1787692677685",
+        "name": "Capa iPhone 16 pro - Clear Case Fosca Navy Blue",
+        "code": "PRD-835",
+        "sku": "PRD-835",
+        "barcode": "",
+        "variationLabel": "",
+        "systemQuantityAtCount": 0,
+        "countedQuantity": 2,
+        "firstCountedAt": "2026-08-25T21:18:08.236Z",
+        "lastCountedAt": "2026-08-25T21:18:10.850Z",
+        "systemQuantity": 0,
+        "movementsAfterCount": 0,
+        "targetQuantity": 2,
+        "difference": 2
+      },
+      {
+        "inventoryItemId": "PRD-1787692878263",
+        "productId": "1787692878263",
+        "selectionId": "1787692878263",
+        "name": "Capa iPhone 16 pro - Clear Case Rosa",
+        "code": "PRD-836",
+        "sku": "PRD-836",
+        "barcode": "",
+        "variationLabel": "",
+        "systemQuantityAtCount": 0,
+        "countedQuantity": 1,
+        "firstCountedAt": "2026-08-25T21:21:31.200Z",
+        "lastCountedAt": "2026-08-25T21:21:31.200Z",
+        "systemQuantity": 0,
+        "movementsAfterCount": 0,
+        "targetQuantity": 1,
+        "difference": 1
+      },
+      {
+        "inventoryItemId": "PRD-1787421873665",
+        "productId": "PRD-1787421873665",
+        "selectionId": "PRD-1787421873665",
+        "name": "BATERIA MOTO Z3 PLAY JS40",
+        "code": "PRD-831",
+        "sku": "PRD-831",
+        "barcode": "",
+        "variationLabel": "",
+        "systemQuantityAtCount": 1,
+        "countedQuantity": 0,
+        "firstCountedAt": "2026-08-25T21:21:38.440Z",
+        "lastCountedAt": "2026-08-25T21:21:43.035Z",
+        "systemQuantity": 1,
+        "movementsAfterCount": 0,
+        "targetQuantity": 0,
+        "difference": -1
+      },
+      {
+        "inventoryItemId": "PRD-1786972297026",
+        "productId": "1786972297026",
+        "selectionId": "1786972297026",
+        "name": "Capa iPhone 17 Pro anti impacto",
+        "code": "PRD-604",
+        "sku": "PRD-604",
+        "barcode": "7898555213661",
+        "variationLabel": "",
+        "systemQuantityAtCount": 1,
+        "countedQuantity": 1,
+        "firstCountedAt": "2026-08-25T21:22:26.982Z",
+        "lastCountedAt": "2026-08-25T21:22:26.982Z",
+        "systemQuantity": 1,
+        "movementsAfterCount": 0,
+        "targetQuantity": 1,
+        "difference": 0
+      },
+      {
+        "inventoryItemId": "PRD-1787693557685",
+        "productId": "1787693557685",
+        "selectionId": "1787693557685",
+        "name": "Pelicula Ceramica Motorola moto E6 plus / E6i / E6s",
+        "code": "PRD-837",
+        "sku": "PRD-837",
+        "barcode": "",
+        "variationLabel": "",
+        "systemQuantityAtCount": 0,
+        "countedQuantity": 1,
+        "firstCountedAt": "2026-08-25T21:32:57.794Z",
+        "lastCountedAt": "2026-08-25T21:32:57.794Z",
+        "systemQuantity": 0,
+        "movementsAfterCount": 0,
+        "targetQuantity": 1,
+        "difference": 1
+      },
+      {
+        "inventoryItemId": "PRD-1787693733903",
+        "productId": "1787693733903",
+        "selectionId": "1787693733903",
+        "name": "Tela frontal samsung j5 j500 1ª LINHA preta",
+        "code": "PRD-838",
+        "sku": "PRD-838",
+        "barcode": "",
+        "variationLabel": "",
+        "systemQuantityAtCount": 0,
+        "countedQuantity": 1,
+        "firstCountedAt": "2026-08-25T21:35:47.567Z",
+        "lastCountedAt": "2026-08-25T21:35:47.567Z",
+        "systemQuantity": 0,
+        "movementsAfterCount": 0,
+        "targetQuantity": 1,
+        "difference": 1
+      },
+      {
+        "inventoryItemId": "PRD-1786492565581",
+        "productId": "1786492565581",
+        "selectionId": "1786492565581",
+        "name": "TELA FRONTAL APPLE IPHONE 12 12 PRO",
+        "code": "PRD-194",
+        "sku": "PRD-194",
+        "barcode": "",
+        "variationLabel": "",
+        "systemQuantityAtCount": 0,
+        "countedQuantity": 1,
+        "firstCountedAt": "2026-08-25T21:36:13.316Z",
+        "lastCountedAt": "2026-08-25T21:36:13.316Z",
+        "systemQuantity": 0,
+        "movementsAfterCount": 0,
+        "targetQuantity": 1,
+        "difference": 1
+      },
+      {
+        "inventoryItemId": "PRD-1787693916824",
+        "productId": "1787693916824",
+        "selectionId": "1787693916824",
+        "name": "Tela frontal Motorola Moto g7 / g7 plus 1ª LINHA preta",
+        "code": "PRD-839",
+        "sku": "PRD-839",
+        "barcode": "",
+        "variationLabel": "",
+        "systemQuantityAtCount": 0,
+        "countedQuantity": 1,
+        "firstCountedAt": "2026-08-25T21:38:44.557Z",
+        "lastCountedAt": "2026-08-25T21:38:44.557Z",
+        "systemQuantity": 0,
+        "movementsAfterCount": 0,
+        "targetQuantity": 1,
+        "difference": 1
+      },
+      {
+        "inventoryItemId": "PRD-1787694038350",
+        "productId": "1787694038350",
+        "selectionId": "1787694038350",
+        "name": "Tela frontal Motorola Moto g6 1ª LINHA preta",
+        "code": "PRD-841",
+        "sku": "PRD-841",
+        "barcode": "",
+        "variationLabel": "",
+        "systemQuantityAtCount": 0,
+        "countedQuantity": 1,
+        "firstCountedAt": "2026-08-25T21:40:46.044Z",
+        "lastCountedAt": "2026-08-25T21:40:46.044Z",
+        "systemQuantity": 0,
+        "movementsAfterCount": 0,
+        "targetQuantity": 1,
+        "difference": 1
+      },
+      {
+        "inventoryItemId": "PRD-1787694093005",
+        "productId": "1787694093005",
+        "selectionId": "1787694093005",
+        "name": "Tela frontal Motorola Moto C plus plus 1ª LINHA preta",
+        "code": "PRD-842",
+        "sku": "PRD-842",
+        "barcode": "",
+        "variationLabel": "",
+        "systemQuantityAtCount": 0,
+        "countedQuantity": 1,
+        "firstCountedAt": "2026-08-25T21:41:52.041Z",
+        "lastCountedAt": "2026-08-25T21:41:52.041Z",
+        "systemQuantity": 0,
+        "movementsAfterCount": 0,
+        "targetQuantity": 1,
+        "difference": 1
+      },
+      {
+        "inventoryItemId": "VAR-1787693989841-2",
+        "productId": "1787693989841",
+        "selectionId": "1787693989841::VAR-1787693989841-2",
+        "name": "Tela frontal Motorola Moto e5 / g6 play 1ª LINHA · Dourada",
+        "code": "PRD-840",
+        "sku": "PRD-840",
+        "barcode": "",
+        "variationLabel": "Dourada",
+        "systemQuantityAtCount": 0,
+        "countedQuantity": 1,
+        "firstCountedAt": "2026-08-25T21:43:34.984Z",
+        "lastCountedAt": "2026-08-25T21:43:34.984Z",
+        "systemQuantity": 0,
+        "movementsAfterCount": 0,
+        "targetQuantity": 1,
+        "difference": 1
+      },
+      {
+        "inventoryItemId": "VAR-1787693989841-1",
+        "productId": "1787693989841",
+        "selectionId": "1787693989841::VAR-1787693989841-1",
+        "name": "Tela frontal Motorola Moto e5 / g6 play 1ª LINHA · Preto",
+        "code": "PRD-840",
+        "sku": "PRD-840",
+        "barcode": "",
+        "variationLabel": "Preto",
+        "systemQuantityAtCount": 0,
+        "countedQuantity": 2,
+        "firstCountedAt": "2026-08-25T21:43:39.120Z",
+        "lastCountedAt": "2026-08-25T22:31:00.022Z",
+        "systemQuantity": 0,
+        "movementsAfterCount": 0,
+        "targetQuantity": 2,
+        "difference": 2
+      },
+      {
+        "inventoryItemId": "PRD-1787694284861",
+        "productId": "1787694284861",
+        "selectionId": "1787694284861",
+        "name": "Tela frontal Motorola Moto One Hyper 1ª LINHA preta",
+        "code": "PRD-843",
+        "sku": "PRD-843",
+        "barcode": "",
+        "variationLabel": "",
+        "systemQuantityAtCount": 0,
+        "countedQuantity": 1,
+        "firstCountedAt": "2026-08-25T21:45:01.792Z",
+        "lastCountedAt": "2026-08-25T21:45:01.792Z",
+        "systemQuantity": 0,
+        "movementsAfterCount": 0,
+        "targetQuantity": 1,
+        "difference": 1
+      },
+      {
+        "inventoryItemId": "PRD-1787694382441",
+        "productId": "1787694382441",
+        "selectionId": "1787694382441",
+        "name": "Tela frontal Motorola Moto g5 plus 1ª LINHA preta",
+        "code": "PRD-844",
+        "sku": "PRD-844",
+        "barcode": "",
+        "variationLabel": "",
+        "systemQuantityAtCount": 0,
+        "countedQuantity": 2,
+        "firstCountedAt": "2026-08-25T21:46:30.030Z",
+        "lastCountedAt": "2026-08-25T21:46:30.030Z",
+        "systemQuantity": 0,
+        "movementsAfterCount": 0,
+        "targetQuantity": 2,
+        "difference": 2
+      },
+      {
+        "inventoryItemId": "PRD-1787694434821",
+        "productId": "1787694434821",
+        "selectionId": "1787694434821",
+        "name": "Tela frontal Motorola Moto g5s plus 1ª LINHA Dourada",
+        "code": "PRD-845",
+        "sku": "PRD-845",
+        "barcode": "",
+        "variationLabel": "",
+        "systemQuantityAtCount": 0,
+        "countedQuantity": 1,
+        "firstCountedAt": "2026-08-25T21:47:20.169Z",
+        "lastCountedAt": "2026-08-25T21:47:20.169Z",
+        "systemQuantity": 0,
+        "movementsAfterCount": 0,
+        "targetQuantity": 1,
+        "difference": 1
+      },
+      {
+        "inventoryItemId": "PRD-1787694472502",
+        "productId": "1787694472502",
+        "selectionId": "1787694472502",
+        "name": "Tela frontal Motorola Moto g3 1ª LINHA Branca",
+        "code": "PRD-846",
+        "sku": "PRD-846",
+        "barcode": "",
+        "variationLabel": "",
+        "systemQuantityAtCount": 0,
+        "countedQuantity": 1,
+        "firstCountedAt": "2026-08-25T21:47:59.996Z",
+        "lastCountedAt": "2026-08-25T21:47:59.996Z",
+        "systemQuantity": 0,
+        "movementsAfterCount": 0,
+        "targetQuantity": 1,
+        "difference": 1
+      },
+      {
+        "inventoryItemId": "PRD-1787696498699",
+        "productId": "1787696498699",
+        "selectionId": "1787696498699",
+        "name": "Bateria Samsung A20s / A10s / A21 / A11",
+        "code": "PRD-847",
+        "sku": "PRD-847",
+        "barcode": "",
+        "variationLabel": "",
+        "systemQuantityAtCount": 0,
+        "countedQuantity": 2,
+        "firstCountedAt": "2026-08-25T22:21:46.528Z",
+        "lastCountedAt": "2026-08-25T22:21:46.528Z",
+        "systemQuantity": 0,
+        "movementsAfterCount": 0,
+        "targetQuantity": 2,
+        "difference": 2
+      },
+      {
+        "inventoryItemId": "PRD-1787696564665",
+        "productId": "1787696564665",
+        "selectionId": "1787696564665",
+        "name": "Bateria Samsung a23 / m23 / m52 / m53",
+        "code": "PRD-848",
+        "sku": "PRD-848",
+        "barcode": "",
+        "variationLabel": "",
+        "systemQuantityAtCount": 0,
+        "countedQuantity": 1,
+        "firstCountedAt": "2026-08-25T22:22:52.653Z",
+        "lastCountedAt": "2026-08-25T22:22:52.653Z",
+        "systemQuantity": 0,
+        "movementsAfterCount": 0,
+        "targetQuantity": 1,
+        "difference": 1
+      },
+      {
+        "inventoryItemId": "PRD-1787696790882",
+        "productId": "1787696790882",
+        "selectionId": "1787696790882",
+        "name": "BATERIA Motorola Moto G8 / G8 Play / E7 (KG40)",
+        "code": "PRD-849",
+        "sku": "PRD-849",
+        "barcode": "",
+        "variationLabel": "",
+        "systemQuantityAtCount": 0,
+        "countedQuantity": 1,
+        "firstCountedAt": "2026-08-25T22:26:37.030Z",
+        "lastCountedAt": "2026-08-25T22:26:37.030Z",
+        "systemQuantity": 0,
+        "movementsAfterCount": 0,
+        "targetQuantity": 1,
+        "difference": 1
+      },
+      {
+        "inventoryItemId": "PRD-1787696939720",
+        "productId": "1787696939720",
+        "selectionId": "1787696939720",
+        "name": "BATERIA MOTO X4 HX40",
+        "code": "PRD-851",
+        "sku": "PRD-851",
+        "barcode": "",
+        "variationLabel": "",
+        "systemQuantityAtCount": 0,
+        "countedQuantity": 1,
+        "firstCountedAt": "2026-08-25T22:29:03.669Z",
+        "lastCountedAt": "2026-08-25T22:29:03.669Z",
+        "systemQuantity": 0,
+        "movementsAfterCount": 0,
+        "targetQuantity": 1,
+        "difference": 1
+      },
+      {
+        "inventoryItemId": "PRD-1787696988231",
+        "productId": "1787696988231",
+        "selectionId": "1787696988231",
+        "name": "BATERIA MOTO G5S / G5S PLUS / G6 (HG30)",
+        "code": "PRD-852",
+        "sku": "PRD-852",
+        "barcode": "",
+        "variationLabel": "",
+        "systemQuantityAtCount": 0,
+        "countedQuantity": 1,
+        "firstCountedAt": "2026-08-25T22:29:54.400Z",
+        "lastCountedAt": "2026-08-25T22:29:54.400Z",
+        "systemQuantity": 0,
+        "movementsAfterCount": 0,
+        "targetQuantity": 1,
+        "difference": 1
+      },
+      {
+        "inventoryItemId": "VAR-1787697409200-4",
+        "productId": "1787697409200",
+        "selectionId": "1787697409200::VAR-1787697409200-4",
+        "name": "Tampa Traseira Samsung · Azul · A11",
+        "code": "PRD-853",
+        "sku": "PRD-853",
+        "barcode": "",
+        "variationLabel": "Azul · A11",
+        "systemQuantityAtCount": 0,
+        "countedQuantity": 1,
+        "firstCountedAt": "2026-08-25T22:39:57.831Z",
+        "lastCountedAt": "2026-08-25T22:39:57.831Z",
+        "systemQuantity": 0,
+        "movementsAfterCount": 0,
+        "targetQuantity": 1,
+        "difference": 1
+      },
+      {
+        "inventoryItemId": "VAR-1787697409200-3",
+        "productId": "1787697409200",
+        "selectionId": "1787697409200::VAR-1787697409200-3",
+        "name": "Tampa Traseira Samsung · Preto · A20 / A30",
+        "code": "PRD-853",
+        "sku": "PRD-853",
+        "barcode": "",
+        "variationLabel": "Preto · A20 / A30",
+        "systemQuantityAtCount": 0,
+        "countedQuantity": 2,
+        "firstCountedAt": "2026-08-25T22:40:07.622Z",
+        "lastCountedAt": "2026-08-25T22:40:07.622Z",
+        "systemQuantity": 0,
+        "movementsAfterCount": 0,
+        "targetQuantity": 2,
+        "difference": 2
+      },
+      {
+        "inventoryItemId": "PRD-1787697665291",
+        "productId": "1787697665291",
+        "selectionId": "1787697665291",
+        "name": "Tela frontal Xiaomi Redmi Note 8 preta",
+        "code": "PRD-854",
+        "sku": "PRD-854",
+        "barcode": "",
+        "variationLabel": "",
+        "systemQuantityAtCount": 0,
+        "countedQuantity": 1,
+        "firstCountedAt": "2026-08-25T22:41:10.012Z",
+        "lastCountedAt": "2026-08-25T22:41:10.012Z",
+        "systemQuantity": 0,
+        "movementsAfterCount": 0,
+        "targetQuantity": 1,
+        "difference": 1
+      },
+      {
+        "inventoryItemId": "PRD-1787697706658",
+        "productId": "1787697706658",
+        "selectionId": "1787697706658",
+        "name": "Tela frontal Xiaomi Redmi Note 9s / 9 pro preta",
+        "code": "PRD-855",
+        "sku": "PRD-855",
+        "barcode": "",
+        "variationLabel": "",
+        "systemQuantityAtCount": 0,
+        "countedQuantity": 1,
+        "firstCountedAt": "2026-08-25T22:41:53.395Z",
+        "lastCountedAt": "2026-08-25T22:41:53.395Z",
+        "systemQuantity": 0,
+        "movementsAfterCount": 0,
+        "targetQuantity": 1,
+        "difference": 1
+      },
+      {
+        "inventoryItemId": "PRD-1787697762559",
+        "productId": "1787697762559",
+        "selectionId": "1787697762559",
+        "name": "Tela Frontal LG K61 Q630 preta",
+        "code": "PRD-856",
+        "sku": "PRD-856",
+        "barcode": "",
+        "variationLabel": "",
+        "systemQuantityAtCount": 0,
+        "countedQuantity": 1,
+        "firstCountedAt": "2026-08-25T22:42:49.962Z",
+        "lastCountedAt": "2026-08-25T22:42:49.962Z",
+        "systemQuantity": 0,
+        "movementsAfterCount": 0,
+        "targetQuantity": 1,
+        "difference": 1
+      },
+      {
+        "inventoryItemId": "PRD-1787699359131",
+        "productId": "1787699359131",
+        "selectionId": "1787699359131",
+        "name": "Bateria LG K52 BL-T51",
+        "code": "PRD-857",
+        "sku": "PRD-857",
+        "barcode": "",
+        "variationLabel": "",
+        "systemQuantityAtCount": 0,
+        "countedQuantity": 1,
+        "firstCountedAt": "2026-08-25T23:10:44.093Z",
+        "lastCountedAt": "2026-08-25T23:10:44.093Z",
+        "systemQuantity": 0,
+        "movementsAfterCount": 0,
+        "targetQuantity": 1,
+        "difference": 1
+      },
+      {
+        "inventoryItemId": "PRD-1787699437309",
+        "productId": "1787699437309",
+        "selectionId": "1787699437309",
+        "name": "Bateria Xiaomi Mi A2 Mi 6x (BN36)",
+        "code": "PRD-858",
+        "sku": "PRD-858",
+        "barcode": "",
+        "variationLabel": "",
+        "systemQuantityAtCount": 0,
+        "countedQuantity": 1,
+        "firstCountedAt": "2026-08-25T23:10:47.781Z",
+        "lastCountedAt": "2026-08-25T23:10:47.781Z",
+        "systemQuantity": 0,
+        "movementsAfterCount": 0,
+        "targetQuantity": 1,
+        "difference": 1
+      }
+    ],
+    "uncounted": [],
+    "summary": {
+      "counted": 29,
+      "matched": 1,
+      "shortage": 1,
+      "surplus": 27,
+      "divergences": 28,
+      "uncounted": 0
+    }
+  }
+}

@@ -33,7 +33,7 @@ const AVAILABLE_ACTIONS = [
   { id:'crm', name:'CRM', icon:'💬', href:'/crm', type:'link', group:'Clientes e relacionamento' },
 
   // Produtos, estoque e compras
-  { id:'erp-produtos', name:'Produtos', icon:'📦', href:'/produtos?origem=erp', type:'link', group:'Produtos, estoque e compras' },
+  { id:'erp-produtos', name:'Produtos ERP', icon:'📦', href:'/produtos?origem=erp', type:'link', group:'Produtos, estoque e compras' },
   { id:'erp-estoque', name:'Estoque', icon:'📚', href:'/erp/estoque', type:'link', group:'Produtos, estoque e compras' },
   { id:'erp-contagem-estoque', name:'Contagem de estoque', icon:'📋', href:'/erp/estoque/contagens', type:'link', group:'Produtos, estoque e compras' },
   { id:'erp-compras', name:'Compras', icon:'🚚', href:'/erp/compras', type:'link', group:'Produtos, estoque e compras' },
@@ -50,7 +50,7 @@ const AVAILABLE_ACTIONS = [
 
   // Loja virtual
   { id:'publicar', name:'Publicar agora', icon:'📤', href:'/publicar', type:'post', group:'Loja virtual' },
-  { id:'produtos-site', name:'Produtos do site', icon:'📦', href:'/produtos', type:'link', group:'Loja virtual' },
+  { id:'produtos-site', name:'Produtos do site', icon:'🛍️', href:'/produtos', type:'link', group:'Loja virtual' },
   { id:'banners', name:'Banners', icon:'🖼️', href:'/banners', type:'link', group:'Loja virtual' },
   { id:'site', name:'Site', icon:'🌐', href:'/site', type:'link', group:'Loja virtual' },
   { id:'analytics', name:'Analytics', icon:'📊', href:'/analytics', type:'link', group:'Loja virtual' },

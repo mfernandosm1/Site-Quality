@@ -58,7 +58,7 @@
     "installments": 1,
     "paymentMethod": "pix",
     "dollarRate": 0,
-    "dollarAdd": 0.17,
+    "dollarAdd": 0.1201,
     "defaultProfit": 0,
     "tableCashMode": "withFee",
     "manualCashMode": "noFee"
@@ -84,7 +84,7 @@
     "shipping": "🚚 Frete grátis",
     "offerTitle": "Ofertas de Julho Xiaomi",
     "validUntil": "20/07 as 18h",
-    "productEmoji": "📲",
+    "productEmoji": "🎮",
     "installmentEmoji": "💳",
     "cashEmoji": "🔥",
     "paymentLabels": {
@@ -94,5 +94,5 @@
       "cashNoFee": "à vista no Pix ou dinheiro"
     }
   },
-  "updatedAt": "2026-08-19T17:05:41.526Z"
+  "updatedAt": "2026-08-28T16:46:47.150Z"
 }

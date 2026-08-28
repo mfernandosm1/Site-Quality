@@ -1,0 +1,15 @@
+{
+  "archiveVersion": "1.3",
+  "endpoint": "nota/",
+  "filters": {
+    "pagina": 6,
+    "limite": 500
+  },
+  "capturedAt": "2026-08-27T16:19:11.022Z",
+  "encoding": "raw-only",
+  "count": 0,
+  "data": [],
+  "endOfPagination": true,
+  "warning": "Fim da paginação de notas inferido na página 6: a WM10 retornou HTTP 200 com conteúdo não-JSON. O corpo bruto foi preservado.",
+  "parseError": "A API WM10 retornou conteúdo inválido (HTTP 200)."
+}

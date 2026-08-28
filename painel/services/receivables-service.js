@@ -299,6 +299,52 @@ export default class ReceivablesService {
     }
     return result;
   }
+  importLegacyReceivable(payload={}, actor='migração WM10') {
+    const document=onlyDigits(payload.customerDocument);
+    const customer=(this.customerService.listCustomers({includeInactive:true})||[]).find(item=>onlyDigits(item.document)===document);
+    if(!customer) throw new Error(`Cliente não localizado para o CPF/CNPJ ${document || 'não informado'}.`);
+    const key=clean(payload.originPaymentKey);
+    if(!key) throw new Error('Informe uma chave única da importação legada.');
+    const titleDb=this.read('receivables.json');
+    const existing=(titleDb.items||[]).find(item=>item.origin==='wm10_legacy_receivable'&&item.originPaymentKey===key);
+    if(existing) return {item:this.get(existing.id),created:false};
+
+    const installments=Array.isArray(payload.installments)&&payload.installments.length
+      ? payload.installments.map((item,index)=>({
+          number:Number(item.number||index+1),
+          total:Number(item.total||payload.installments.length),
+          dueDate:clean(item.dueDate),
+          value:amount(item.value)
+        }))
+      : [{number:1,total:1,dueDate:clean(payload.dueDate),value:amount(payload.openBalance)}];
+    if(installments.some(item=>item.value<=0)) throw new Error('Todas as parcelas importadas precisam possuir saldo maior que zero.');
+    const openBalance=amount(installments.reduce((sum,item)=>sum+item.value,0));
+    if(openBalance<=0) throw new Error('O saldo importado precisa ser maior que zero.');
+
+    const id=`REC-${crypto.randomUUID()}`;
+    const seq=Number(titleDb.nextNumber||1);
+    const issueDate=clean(payload.issueDate);
+    const createdAt=now();
+    const title={
+      id,number:String(seq).padStart(6,'0'),customerId:customer.id,customerName:customer.name,customerNameSnapshot:customer.name,
+      customerDocument:document,origin:'wm10_legacy_receivable',originLabel:clean(payload.originLabel)||'WM10 · Crediário importado',
+      originId:clean(payload.originId),originPaymentKey:key,costCenterId:'CAT-VENDAS',accountId:'ACC-VENDAS',
+      paymentMethodId:clean(payload.paymentMethodId)||'PAY-1bee6a58-8d6f-4ca7-b1c4-cd9e40ea6197',
+      grossValue:openBalance,discount:0,addition:0,netValue:openBalance,openBalance,status:'open',issueDate,
+      competenceDate:issueDate,firstDueDate:installments.find(item=>item.dueDate)?.dueDate||'',notes:clean(payload.notes),
+      installmentCount:installments.length,createdAt,createdBy:actor,updatedAt:createdAt,updatedBy:actor,
+      legacy:{source:'WM10',originalTotal:amount(payload.originalTotal),items:Array.isArray(payload.items)?payload.items:[],reference:clean(payload.reference),importedAt:createdAt}
+    };
+    titleDb.nextNumber=seq+1; titleDb.items=titleDb.items||[]; titleDb.items.unshift(title); this.write('receivables.json',titleDb);
+    const installmentDb=this.read('receivable-installments.json'); installmentDb.items=installmentDb.items||[];
+    for(const installment of installments){
+      installmentDb.items.push({id:`RIN-${crypto.randomUUID()}`,receivableId:id,number:installment.number,total:installment.total,dueDate:installment.dueDate,originalValue:installment.value,openBalance:installment.value,paidValue:0,status:'open',createdAt});
+    }
+    this.write('receivable-installments.json',installmentDb);
+    this.event(id,'wm10_legacy_imported',actor,{reference:payload.reference||'',originalTotal:amount(payload.originalTotal),openBalance});
+    return {item:this.get(id),created:true};
+  }
+
   create(payload={}, actor='painel', options={}) {
     if (options.operational !== true) throw new Error('Títulos não podem ser criados manualmente. Finalize uma Venda ou O.S. com forma de pagamento que gere Contas a Receber.');
     const paymentMethod = this.financeService.listCatalog('paymentMethods').find(item => item.id === payload.paymentMethodId && item.active !== false);
@@ -550,6 +596,49 @@ export default class ReceivablesService {
     this.write('receipts.json',receiptDb);
     this.event(id,'receipt_reversed',actorName,{receiptId:receipt.id,receiptNumber:receipt.receiptNumber,value:receipt.value,principalValue:principal,reason:why,balanceAfter:title.openBalance,cashReversalMovementIds:reversalMovementIds});
     return {item:this.get(id),receipt};
+  }
+
+  applyCredit(id, value, { reason='', referenceType='', referenceId='', notes='' }={}, actor='painel') {
+    const credit=amount(value);
+    if(credit<=0) throw new Error('Informe um crédito maior que zero.');
+    const titleDb=this.read('receivables.json');
+    const installmentDb=this.read('receivable-installments.json');
+    const eventsDb=this.read('receivable-events.json');
+    const item=titleDb.items.find(row=>row.id===id);
+    if(!item) throw new Error('Conta a Receber não encontrada.');
+    if(['cancelled','reversed'].includes(item.status)) throw new Error('Não é possível aplicar crédito em um título cancelado/estornado.');
+    const refType=clean(referenceType),refId=clean(referenceId);
+    if(refType&&refId){
+      const existing=(eventsDb.items||[]).find(event=>event.receivableId===id&&event.action==='credit_applied'&&clean(event.referenceType)===refType&&clean(event.referenceId)===refId);
+      if(existing) return { title:this.get(id), applied:amount(existing.value), event:clone(existing), idempotent:true };
+    }
+    const maximum=amount(item.openBalance||0);
+    if(maximum<=0) return { title:this.get(id), applied:0, event:null };
+    const applied=amount(Math.min(credit,maximum));
+    let remaining=applied;
+    const allocations=[];
+    const installments=(installmentDb.items||[])
+      .filter(row=>row.receivableId===id&&Number(row.openBalance||0)>0&&!['cancelled','reversed'].includes(row.status))
+      .sort((a,b)=>String(a.dueDate||'').localeCompare(String(b.dueDate||''))||Number(a.number||0)-Number(b.number||0));
+    for(const installment of installments){
+      if(remaining<=0)break;
+      const used=amount(Math.min(remaining,Number(installment.openBalance||0)));
+      installment.openBalance=amount(Number(installment.openBalance||0)-used);
+      installment.creditedValue=amount(Number(installment.creditedValue||0)+used);
+      installment.status=installment.openBalance<=0?'paid':'partial';
+      allocations.push({installmentId:installment.id,number:installment.number,value:used,balanceAfter:installment.openBalance});
+      remaining=amount(remaining-used);
+    }
+    item.openBalance=amount(Number(item.openBalance||0)-applied);
+    item.creditedValue=amount(Number(item.creditedValue||0)+applied);
+    item.status=item.openBalance<=0?'paid':'partial';
+    item.updatedAt=now();item.updatedBy=actor;
+    if(item.openBalance<=0){item.settlementType='credit_adjustment';item.settledAt=item.settledAt||now();}
+    titleDb.updatedAt=now();installmentDb.updatedAt=now();
+    this.write('receivables.json',titleDb);this.write('receivable-installments.json',installmentDb);
+    const event={id:`REV-${crypto.randomUUID()}`,receivableId:id,action:'credit_applied',actor,at:now(),value:applied,balanceAfter:item.openBalance,reason:clean(reason),notes:clean(notes),referenceType:refType,referenceId:refId,allocations};
+    eventsDb.items=eventsDb.items||[];eventsDb.items.unshift(event);eventsDb.updatedAt=now();this.write('receivable-events.json',eventsDb);
+    return { title:this.get(id), applied, event:clone(event) };
   }
 
   cancel(id, reason='', actor='painel') {

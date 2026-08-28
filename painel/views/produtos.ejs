@@ -1,7 +1,7 @@
 <% layout('layout') -%>
-<% const isNewWorkspace = workspaceNew === true; const requestedWorkspaceType = typeof workspaceType === 'string' ? workspaceType : 'product'; const defaultServiceCategory = (erpCategorias || []).find(c => c.active !== false && c.type === 'service'); %>
+<% const isNewWorkspace = workspaceNew === true; const isEditorMode = (typeof productEditorMode !== 'undefined' && productEditorMode === true); const requestedWorkspaceType = typeof workspaceType === 'string' ? workspaceType : 'product'; const defaultServiceCategory = (erpCategorias || []).find(c => c.active !== false && c.type === 'service'); %>
 <% const erpCategoryById = new Map((erpCategorias || []).map(c => [String(c.id), c])); const lvCategoryBySlug = new Map((categorias || []).map(c => [String(c.slug || c.id || ''), c])); const lvSubcategoryByKey = new Map(); (subcategorias || []).forEach(sc => { [sc.id, sc.slug, sc.name].filter(Boolean).forEach(key => lvSubcategoryByKey.set(String(key), sc)); }); %>
-<div class="card">
+<div class="card <%= isEditorMode ? 'quality-editor-route' : '' %>">
   <% if (!isNewWorkspace) { %>
   <div id="product-master-intro">
     <h3>📦 Cadastro Mestre de Produtos</h3>
@@ -619,13 +619,13 @@
   .variation-labels-grid input{width:100% !important;min-height:36px !important;}
   .variation-help{display:block;margin-top:5px;color:#6b7280;font-size:11px;}
   .quality-combo-card{grid-column:1 / -1;background:#fff;border:1px solid #dbeafe !important;}
-  .variation-combo-row{display:grid;grid-template-columns:1fr 1fr 1fr 1fr 1.15fr .65fr .8fr auto;gap:6px;align-items:end;}
+  .variation-combo-row{display:grid;grid-template-columns:1fr 1fr 1fr 1fr 1.15fr .65fr .8fr .8fr .8fr auto;gap:6px;align-items:end;}
   .quality-combo-list{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px;}
   .quality-variation-inline-price{display:inline-flex;align-items:center;gap:5px;margin-left:8px;padding-left:8px;border-left:1px solid #d1d5db}.quality-variation-inline-price small{font-size:10px;opacity:.72}.quality-variation-inline-price input{width:92px;padding:5px 7px;border:1px solid #cbd5e1;border-radius:7px;background:transparent;color:inherit}
   .quality-combo-pill{display:inline-flex;align-items:center;gap:6px;border:1px solid #bfdbfe;background:#eff6ff;border-radius:999px;padding:5px 8px;font-size:11px;font-weight:800;}
   .quality-combo-pill button{border:none;background:transparent;color:#991b1b;cursor:pointer;font-weight:900;}
-  .quality-combo-price-inline{width:92px!important;min-height:28px!important;height:28px!important;padding:3px 7px!important;border-radius:8px!important;font-size:11px!important;background:#fff!important;}
-  .quality-combo-price-label{font-size:10px;color:#64748b;font-weight:700;}
+  .quality-combo-price-inline,.quality-combo-cost-inline{width:92px!important;min-height:28px!important;height:28px!important;padding:3px 7px!important;border-radius:8px!important;font-size:11px!important;background:#fff!important;}
+  .quality-combo-price-label,.quality-combo-cost-label{font-size:10px;color:#64748b;font-weight:700;}
 
   @media (max-width:1000px){.quality-variations-grid,.variation-modal-grid{grid-template-columns:1fr;}.variation-form-row,.variation-simple-row,.variation-combo-row{grid-template-columns:1fr;}}
 
@@ -771,6 +771,8 @@
   .quality-compact-field:nth-child(4) label::before{content:'👁️';}
   .quality-compact-field select{min-height:32px !important;padding:6px 7px !important;font-size:11px !important;border-radius:9px !important;}
 
+  .quality-operational-status .quality-compact-field:nth-child(2) label::before{content:'🛍️';}
+  .quality-lv-detail-card{max-width:172px!important;}
   .quality-resource-stack{width:100% !important;max-width:150px !important;gap:8px !important;align-items:stretch !important;position:relative;}
   .quality-image-compact-select{display:none !important;}
   .quality-resource-row{display:flex !important;flex-direction:column !important;gap:8px !important;}
@@ -1010,8 +1012,11 @@ html[data-panel-theme="light"] .quality-master-area,html[data-panel-theme="light
   .quality-products-summary-table th:nth-child(5),.quality-products-summary-table th:nth-child(6){text-align:center}
   body.theme-oled .quality-channel-help{color:#9ca3af}
 
-  .quality-filter-status-row{display:grid;grid-template-columns:repeat(2,minmax(160px,1fr)) auto;gap:10px;margin-top:10px;align-items:end}
+  .quality-filter-status-row{display:grid;grid-template-columns:minmax(120px,145px) minmax(145px,175px) minmax(115px,140px) max-content;gap:8px;margin-top:10px;align-items:end;justify-content:start}
+  .quality-filter-field{min-width:0}.quality-filter-field select{width:100%;min-height:38px;padding:7px 9px}
   .quality-filter-field label{display:block;font-size:10px;font-weight:900;text-transform:uppercase;letter-spacing:.05em;margin:0 0 5px;color:#64748b}
+  .quality-search-button{flex:0 0 auto;min-height:40px;padding:8px 14px!important;font-weight:900}
+  .workspace-heading-inline{display:flex;align-items:center;gap:7px}.quality-info-dot{display:inline-flex;align-items:center;justify-content:center;width:19px;height:19px;border-radius:50%;border:1px solid #cbd5e1;color:#64748b;font-size:11px;font-weight:900;cursor:help;user-select:none}.quality-info-dot:hover{border-color:#94a3b8;color:#334155}
   .quality-filter-counter{min-height:40px;display:flex;align-items:center;justify-content:center;padding:0 14px;border-radius:12px;border:1px solid #dbe3ef;background:#f8fafc;color:#0f172a;font-weight:900;white-space:nowrap}
   html[data-panel-theme="oled"] .quality-filter-counter{background:#181818!important;color:#f5f5f5!important;border-color:#303030!important}
   html[data-panel-theme="oled"] .quality-filter-field label{color:#a3a3a3!important}
@@ -1019,7 +1024,19 @@ html[data-panel-theme="light"] .quality-master-area,html[data-panel-theme="light
   .product-row.erp-inactive td:first-child{box-shadow:inset 4px 0 0 #ef4444}
   .product-row.lv-inactive:not(.erp-inactive) td:first-child{box-shadow:inset 4px 0 0 #f59e0b}
   .product-row.erp-inactive .prod-name-input,.product-row.lv-inactive .prod-name-input{font-weight:900}
-  @media(max-width:900px){.quality-filter-status-row{grid-template-columns:1fr}.quality-filter-counter{justify-content:flex-start}}
+  @media(max-width:900px){.quality-filter-status-row{grid-template-columns:1fr 1fr}.quality-filter-counter{justify-content:flex-start}.quality-search-row input{flex-basis:100%}}@media(max-width:620px){.quality-filter-status-row{grid-template-columns:1fr}}
+
+  /* 2026-08-25 — Listagem: código real do produto e colunas equilibradas */
+  .quality-products-summary-table th:nth-child(1),.quality-products-summary-table td:nth-child(1){width:3% !important;text-align:center}
+  .quality-products-summary-table th:nth-child(2),.quality-products-summary-table td:nth-child(2){width:7% !important;text-align:center}
+  .quality-products-summary-table th:nth-child(3),.quality-products-summary-table td:nth-child(3){width:30% !important}
+  .quality-products-summary-table th:nth-child(4),.quality-products-summary-table td:nth-child(4){width:20% !important}
+  .quality-products-summary-table th:nth-child(5),.quality-products-summary-table td:nth-child(5){width:10% !important}
+  .quality-products-summary-table th:nth-child(6),.quality-products-summary-table td:nth-child(6){width:10% !important}
+  .quality-products-summary-table th:nth-child(7),.quality-products-summary-table td:nth-child(7){width:10% !important}
+  .quality-products-summary-table th:nth-child(8),.quality-products-summary-table td:nth-child(8){width:10% !important}
+  .quality-product-code{display:inline-flex;align-items:center;justify-content:center;max-width:100%;padding:5px 7px;border:1px solid var(--line,#e5e7eb);border-radius:8px;background:color-mix(in srgb,var(--card,#fff) 88%,var(--text,#111827));color:var(--text,#111827);font:800 10.5px/1.2 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  html[data-panel-theme]:not([data-panel-theme="light"]) .quality-product-code{background:var(--surface-soft,var(--card));border-color:var(--line);color:var(--text)}
 
   .quality-bulk-toggle{width:100%;display:flex;align-items:center;justify-content:space-between;border:0;background:transparent;padding:0;font:inherit;font-weight:800;color:inherit;cursor:pointer;text-align:left}
   .quality-bulk-toggle-icon{display:inline-flex;min-width:24px;justify-content:center}
@@ -1027,6 +1044,385 @@ html[data-panel-theme="light"] .quality-master-area,html[data-panel-theme="light
   .quality-bulk-center:not(.is-expanded){gap:0}
   [data-create-lv-dependent][hidden]{display:none!important}
 
+  /* Editor dedicado: a listagem fica somente para consulta; toda edição abre em /produtos/:id. */
+  .quality-products-summary-table th:nth-child(7),.quality-products-summary-table td:nth-child(7),
+  .quality-products-summary-table th:nth-child(8),.quality-products-summary-table td:nth-child(8){display:none!important}
+  .quality-products-summary-table th:nth-child(2),.quality-products-summary-table td:nth-child(2){width:8%!important}
+  .quality-products-summary-table th:nth-child(3),.quality-products-summary-table td:nth-child(3){width:38%!important}
+  .quality-products-summary-table th:nth-child(4),.quality-products-summary-table td:nth-child(4){width:24%!important}
+  .quality-products-summary-table th:nth-child(5),.quality-products-summary-table td:nth-child(5){width:14%!important}
+  .quality-products-summary-table th:nth-child(6),.quality-products-summary-table td:nth-child(6){width:16%!important}
+  .quality-product-open-link{display:flex;align-items:center;gap:12px;color:inherit;text-decoration:none;min-width:0}
+  .quality-product-open-link:hover .quality-product-open-name{color:#2563eb}
+  .quality-product-open-name{display:block;font-weight:950;font-size:13px;line-height:1.25;color:var(--text,#0f172a);transition:color .15s}
+  .quality-product-open-meta{display:block;margin-top:6px;font:700 10px/1.3 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;color:var(--muted,#64748b);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .quality-readonly-status{display:flex;flex-direction:column;gap:7px}
+  .quality-readonly-badge{display:flex;align-items:center;justify-content:space-between;gap:8px;border:1px solid var(--line,#e5e7eb);background:var(--card,#fff);border-radius:9px;padding:7px 9px;font-size:10.5px;font-weight:850;color:var(--text,#111827)}
+  .quality-readonly-badge i{width:8px;height:8px;border-radius:999px;background:#ef4444;display:inline-block;margin-right:5px}.quality-readonly-badge.is-active i{background:#22c55e}
+  /* Status ERP/LV editável direto na listagem, com gravação automática já existente. */
+  .quality-channel-status-controls{display:flex;flex-direction:column;gap:6px;min-width:0}
+  .quality-channel-status-control{display:grid;grid-template-columns:42px minmax(0,1fr);align-items:center;gap:6px;padding:4px 5px 4px 8px;border:1px solid var(--line,#e5e7eb);border-radius:9px;background:var(--card,#fff);font-size:10px;font-weight:900;color:var(--text,#111827)}
+  .quality-channel-status-control>span{display:flex;align-items:center;gap:5px;white-space:nowrap}.quality-channel-status-control i{width:8px;height:8px;border-radius:50%;background:#ef4444;display:inline-block;flex:0 0 auto}.quality-channel-status-control.is-active i{background:#22c55e}
+  .quality-channel-status-control select{width:100%!important;min-width:72px!important;min-height:28px!important;height:28px!important;padding:3px 22px 3px 7px!important;border-radius:7px!important;font-size:10px!important;font-weight:850!important;background:var(--surface-soft,#f8fafc)!important;color:var(--text,#111827)!important;border-color:var(--line,#dbe3ef)!important}
+  .quality-channel-status-control select:disabled{opacity:.6;cursor:wait}.quality-inline-status-feedback{display:none;margin:0 2px;font-size:9px!important;line-height:1.2;text-align:left!important}
+  html[data-panel-theme]:not([data-panel-theme="light"]) .quality-channel-status-control{background:var(--card);border-color:var(--line);color:var(--text)}
+  .quality-lv-readonly-summary{display:flex;flex-direction:column;gap:7px}.quality-lv-readonly-flags{display:flex;gap:5px;flex-wrap:wrap}.quality-lv-readonly-flags span{border:1px solid var(--line,#e5e7eb);border-radius:999px;padding:4px 7px;font-size:9px;font-weight:800;color:var(--muted,#64748b)}
+  .quality-editor-route #product-master-intro,.quality-editor-route #product-summary-indicators,.quality-editor-route .product-workspace-toolbar,.quality-editor-route #product-workspace-new,.quality-editor-route #product-workspace-list,.quality-editor-route #product-kind-dialog{display:none!important}
+  .quality-editor-route{padding:0!important;background:transparent!important;border:0!important;box-shadow:none!important}
+  .quality-editor-route #edit-product-modal{position:relative!important;inset:auto!important;display:block!important;background:transparent!important;padding:0!important;z-index:auto!important}
+  .quality-editor-route .quality-edit-modal{width:100%!important;max-width:none!important;max-height:none!important;min-height:calc(100vh - 165px);overflow:visible!important;border-radius:16px!important;box-shadow:none!important}
+  .quality-editor-route .quality-edit-modal-body{padding:18px 20px 24px!important}
+  .quality-editor-route .quality-edit-modal-header{position:sticky;top:0;z-index:5;border-radius:16px 16px 0 0}
+  .quality-editor-resources{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 14px;padding:11px;border:1px solid var(--line,#e5e7eb);border-radius:12px;background:var(--surface-soft,#f8fafc)}
+  .quality-editor-resources .btn{width:auto!important;margin:0!important;padding:8px 10px!important;font-size:11px!important}
+  .quality-editor-route .quality-edit-actions{position:sticky;bottom:0;background:var(--card,#fff);padding:12px 0 2px;z-index:4}
+  html[data-panel-theme]:not([data-panel-theme="light"]) .quality-editor-route .quality-edit-actions{background:var(--card)}
+  @media(max-width:760px){.quality-editor-route .quality-edit-modal-body{padding:12px}.quality-editor-resources .btn{flex:1 1 44%}.quality-products-summary-table th:nth-child(4),.quality-products-summary-table td:nth-child(4),.quality-products-summary-table th:nth-child(6),.quality-products-summary-table td:nth-child(6){display:none!important}}
+
+
+  /* 2026-08-25 — Listagem refinada + editor realmente em tela dedicada */
+  .quality-list-view-toolbar{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:10px 0 8px;padding:8px 10px;border:1px solid var(--line,#e5e7eb);border-radius:11px;background:var(--card,#fff);position:relative}
+  .quality-list-view-hint{display:flex;align-items:baseline;gap:8px;min-width:0}.quality-list-view-hint strong{font-size:12px}.quality-list-view-hint small{font-size:10.5px;color:var(--muted,#64748b)}
+  .quality-list-view-actions{display:flex;align-items:center;gap:7px;flex-wrap:wrap;justify-content:flex-end}
+  .quality-page-size-control{display:flex;align-items:center;gap:6px;font-size:10px;font-weight:800;white-space:nowrap;color:var(--muted,#64748b)}
+  .quality-page-size-control select{width:76px!important;min-height:34px!important;height:34px!important;padding:5px 7px!important;font-size:10.5px!important}
+  .quality-columns-control{position:relative;flex:0 0 auto}.quality-columns-button{min-width:102px!important}
+  .quality-columns-menu{position:absolute;right:0;top:calc(100% + 7px);z-index:45;width:245px;padding:10px;border:1px solid var(--line,#dbe3ef);border-radius:12px;background:var(--card,#fff);color:var(--text,#111827);box-shadow:0 16px 42px rgba(15,23,42,.18)}
+  .quality-columns-menu[hidden]{display:none!important}.quality-columns-menu-head{display:flex;flex-direction:column;gap:2px;padding:2px 3px 8px;border-bottom:1px solid var(--line,#e5e7eb);margin-bottom:6px}.quality-columns-menu-head strong{font-size:12px}.quality-columns-menu-head small{font-size:10px;color:var(--muted,#64748b)}
+  .quality-columns-menu label{display:flex;align-items:center;gap:8px;padding:7px 4px;font-size:11px;font-weight:800;cursor:pointer}.quality-columns-menu label small{margin-left:auto;color:var(--muted,#64748b);font-size:9px}.quality-columns-menu input{width:15px!important;height:15px!important;min-height:15px!important;padding:0!important}.quality-columns-menu>button{width:100%;margin-top:6px}
+  html[data-panel-theme]:not([data-panel-theme="light"]) .quality-list-view-toolbar,html[data-panel-theme]:not([data-panel-theme="light"]) .quality-columns-menu{background:var(--card);border-color:var(--line);color:var(--text)}
+
+  /* Recursos ficam dentro do cadastro. Na lista permanecem apenas Duplicar/Excluir. */
+  .quality-products-summary-table [data-product-column="resources"]{display:none!important}
+  .quality-products-summary-table th[data-product-column="code"]:not(.quality-column-hidden),.quality-products-summary-table td[data-product-column="code"]:not(.quality-column-hidden),
+  .quality-products-summary-table th[data-product-column="product"]:not(.quality-column-hidden),.quality-products-summary-table td[data-product-column="product"]:not(.quality-column-hidden),
+  .quality-products-summary-table th[data-product-column="erp-stock"]:not(.quality-column-hidden),.quality-products-summary-table td[data-product-column="erp-stock"]:not(.quality-column-hidden),
+  .quality-products-summary-table th[data-product-column="status"]:not(.quality-column-hidden),.quality-products-summary-table td[data-product-column="status"]:not(.quality-column-hidden),
+  .quality-products-summary-table th[data-product-column="lv"]:not(.quality-column-hidden),.quality-products-summary-table td[data-product-column="lv"]:not(.quality-column-hidden),
+  .quality-products-summary-table th[data-product-column="actions"]:not(.quality-column-hidden),.quality-products-summary-table td[data-product-column="actions"]:not(.quality-column-hidden){display:table-cell!important}
+  .quality-products-summary-table [data-product-column].quality-column-hidden{display:none!important}
+  /* A tabela precisa de layout fixo; sem isso o navegador ignora na prática as larguras
+     percentuais quando o conteúdo interno exige mais espaço. */
+  .quality-products-summary-table{width:100%!important;table-layout:fixed!important}
+  .quality-products-summary-table th[data-product-column="select"],.quality-products-summary-table td[data-product-column="select"]{width:3.2%!important;text-align:center}
+  .quality-products-summary-table th[data-product-column="code"],.quality-products-summary-table td[data-product-column="code"]{width:6%!important;text-align:center}
+  .quality-products-summary-table th[data-product-column="product"],.quality-products-summary-table td[data-product-column="product"]{width:41.8%!important}
+  .quality-products-summary-table th[data-product-column="erp-stock"],.quality-products-summary-table td[data-product-column="erp-stock"]{width:13%!important;min-width:0!important}
+  .quality-products-summary-table th[data-product-column="status"],.quality-products-summary-table td[data-product-column="status"]{width:18%!important;min-width:0!important;text-align:left}
+  .quality-products-summary-table th[data-product-column="lv"],.quality-products-summary-table td[data-product-column="lv"]{width:10%!important;text-align:left}
+  .quality-products-summary-table th[data-product-column="actions"],.quality-products-summary-table td[data-product-column="actions"]{width:8%!important;text-align:center}
+  .quality-row-actions-compact{display:flex;flex-direction:column;gap:6px}.quality-row-actions-compact .btn{width:100%!important;margin:0!important;padding:7px 6px!important;font-size:10px!important}
+
+  /* ERP/Estoque mais enxuto: mostra o essencial sem consumir uma coluna larga. */
+  .quality-products-summary-table td[data-product-column="erp-stock"] .quality-erp-stock-card{width:100%;min-width:0;box-sizing:border-box;padding:5px 6px;gap:4px;border-radius:8px;overflow:hidden}
+  .quality-products-summary-table td[data-product-column="erp-stock"] .quality-list-erp-category{gap:1px}
+  .quality-products-summary-table td[data-product-column="erp-stock"] .quality-list-erp-category small{font-size:8px}
+  .quality-products-summary-table td[data-product-column="erp-stock"] .quality-list-erp-category strong{font-size:10px;line-height:1.12;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .quality-products-summary-table td[data-product-column="erp-stock"] .quality-erp-type{font-size:8px;line-height:1.05;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .quality-products-summary-table td[data-product-column="erp-stock"] .quality-stock-compact{display:grid;grid-template-columns:auto 1fr;align-items:center;gap:3px 5px;padding-top:4px}
+  .quality-products-summary-table td[data-product-column="erp-stock"] .quality-stock-label{font-size:8.5px}.quality-products-summary-table td[data-product-column="erp-stock"] .quality-derived-stock{justify-self:end;font-size:11px}
+  .quality-products-summary-table td[data-product-column="erp-stock"] .quality-stock-badge{grid-column:1/-1;width:max-content;max-width:100%;padding:4px 7px!important;font-size:9px!important;overflow:hidden;text-overflow:ellipsis}
+
+  /* A rota /produtos/:id deixa de parecer modal e passa a ocupar a tela de edição. */
+  .quality-editor-route{width:100vw!important;max-width:none!important;margin-left:calc(50% - 50vw)!important;margin-right:calc(50% - 50vw)!important;margin-top:-18px!important;margin-bottom:-18px!important;min-height:calc(100vh - 120px)!important;border-radius:0!important}
+  .quality-editor-route #edit-product-modal{width:100%!important;min-height:calc(100vh - 120px)!important;margin:0!important}
+  .quality-editor-route .quality-edit-modal{width:100%!important;max-width:100%!important;min-height:calc(100vh - 120px)!important;border-radius:0!important;border-left:0!important;border-right:0!important;box-shadow:none!important}
+  .quality-editor-route .quality-edit-modal-header{border-radius:0!important;padding:14px clamp(16px,2.2vw,34px)!important}
+  .quality-editor-route .quality-edit-modal-body{width:100%!important;max-width:1600px!important;margin:0 auto!important;padding:18px clamp(16px,2.2vw,34px) 26px!important}
+  .quality-editor-route .quality-editor-resources{margin-top:0}
+  @media(max-width:900px){.quality-list-view-hint small{display:none}.quality-products-summary-table{min-width:980px!important}.quality-editor-route .quality-edit-modal-body{padding:14px!important}}
+
+  /* 2026-08-25 — editor de produto como página, sem aparência de modal */
+  .quality-modal-backdrop.quality-product-editor-page{
+    position:relative!important;
+    inset:auto!important;
+    z-index:auto!important;
+    width:100%!important;
+    min-height:calc(100vh - 145px)!important;
+    display:block!important;
+    padding:0!important;
+    margin:0!important;
+    background:transparent!important;
+    backdrop-filter:none!important;
+    -webkit-backdrop-filter:none!important;
+  }
+  .quality-product-editor-page .quality-edit-modal{
+    width:100%!important;
+    max-width:none!important;
+    min-height:calc(100vh - 145px)!important;
+    max-height:none!important;
+    margin:0!important;
+    overflow:visible!important;
+    border-radius:0!important;
+    border-left:0!important;
+    border-right:0!important;
+    box-shadow:none!important;
+  }
+  .quality-product-editor-page .quality-edit-modal-header{
+    position:sticky!important;
+    top:0!important;
+    z-index:12!important;
+    border-radius:0!important;
+    padding:14px clamp(16px,2.2vw,34px)!important;
+  }
+  .quality-product-editor-page .quality-edit-modal-body{
+    width:100%!important;
+    max-width:1600px!important;
+    margin:0 auto!important;
+    padding:18px clamp(16px,2.2vw,34px) 28px!important;
+  }
+  .quality-product-editor-page .quality-edit-actions{
+    position:sticky!important;
+    bottom:0!important;
+    z-index:10!important;
+    background:var(--card,#fff)!important;
+  }
+  html[data-panel-theme]:not([data-panel-theme="light"]) .quality-product-editor-page .quality-edit-actions{background:var(--card)!important}
+
+  /* Central em lote compacta: fechada vira uma única linha; aberta vira lista. */
+  .quality-controls-grid{
+    grid-template-columns:1fr!important;
+    gap:8px!important;
+    margin:14px 0 10px!important;
+  }
+  .quality-bulk-control-box{
+    padding:0!important;
+    overflow:visible!important;
+  }
+  .quality-bulk-control-box .quality-bulk-center{gap:0!important}
+  .quality-bulk-control-box .quality-bulk-head{padding:0!important}
+  .quality-bulk-control-box .quality-bulk-toggle{
+    min-height:42px;
+    padding:9px 12px!important;
+    border-radius:10px;
+  }
+  .quality-bulk-control-box .quality-bulk-center.is-expanded .quality-bulk-toggle{
+    border-bottom:1px solid var(--line,#e5e7eb);
+    border-radius:10px 10px 0 0;
+  }
+  .quality-bulk-control-box .quality-bulk-selection-actions{
+    padding:9px 12px 0!important;
+  }
+  .quality-bulk-control-box .quality-bulk-actions-grid{
+    grid-template-columns:1fr!important;
+    gap:0!important;
+    padding:8px 12px 0!important;
+  }
+  .quality-bulk-control-box .quality-bulk-action{
+    border:0!important;
+    border-bottom:1px solid var(--line,#e5e7eb)!important;
+    border-radius:0!important;
+    padding:9px 2px!important;
+    background:transparent!important;
+  }
+  .quality-bulk-control-box .quality-bulk-action:last-child{border-bottom:0!important}
+  .quality-bulk-control-box .quality-bulk-footer{
+    padding:10px 12px 12px!important;
+    border-top:1px solid var(--line,#e5e7eb);
+  }
+  @media(max-width:900px){
+    .quality-product-editor-page .quality-edit-modal-body{padding:14px!important}
+    .quality-bulk-control-box .quality-bulk-footer{align-items:stretch!important}
+  }
+
+  /* 2026-08-25 — editor mais denso: mais conteúdo visível sem perder legibilidade. */
+  .quality-product-editor-page .quality-edit-modal-header,
+  .quality-editor-route .quality-edit-modal-header{
+    min-height:56px!important;
+    padding:7px clamp(14px,1.8vw,26px)!important;
+  }
+  .quality-product-editor-page .quality-edit-modal-header img,
+  .quality-editor-route .quality-edit-modal-header img{
+    width:44px!important;height:44px!important;min-width:44px!important;border-radius:9px!important;
+  }
+  .quality-product-editor-page .quality-edit-modal-header h2,
+  .quality-editor-route .quality-edit-modal-header h2{font-size:14px!important;line-height:1.2!important;margin:0!important}
+  .quality-product-editor-page .quality-edit-modal-header small,
+  .quality-editor-route .quality-edit-modal-header small{font-size:9px!important}
+  .quality-product-editor-page .quality-editor-resources.is-header-resources,
+  .quality-editor-route .quality-editor-resources.is-header-resources{
+    margin:0 6px 0 auto!important;padding:0!important;border:0!important;background:transparent!important;
+    flex:0 1 auto!important;flex-wrap:nowrap!important;overflow-x:auto!important;max-width:62vw!important;
+  }
+  .quality-product-editor-page .quality-editor-resources.is-header-resources .btn,
+  .quality-editor-route .quality-editor-resources.is-header-resources .btn{white-space:nowrap!important;flex:0 0 auto!important}
+  .quality-product-editor-page .quality-edit-modal-body,
+  .quality-editor-route .quality-edit-modal-body{
+    padding:8px clamp(14px,1.8vw,26px) 12px!important;
+    max-width:none!important;
+  }
+  .quality-product-editor-page .quality-editor-resources,
+  .quality-editor-route .quality-editor-resources{
+    margin:0 0 6px!important;padding:5px 8px!important;gap:5px!important;border-radius:9px!important;
+  }
+  .quality-product-editor-page .quality-editor-resources .btn,
+  .quality-editor-route .quality-editor-resources .btn{
+    min-height:28px!important;padding:4px 7px!important;font-size:9.5px!important;
+  }
+  .quality-product-editor-page .quality-edit-tabs,
+  .quality-editor-route .quality-edit-tabs{gap:5px!important;margin-bottom:7px!important;padding-bottom:6px!important;flex-wrap:nowrap!important;overflow-x:auto!important}
+  .quality-product-editor-page .quality-edit-tab,
+  .quality-editor-route .quality-edit-tab{min-height:31px!important;padding:5px 9px!important;border-radius:8px!important;font-size:10.5px!important;white-space:nowrap!important}
+  .quality-product-editor-page .quality-edit-grid,
+  .quality-editor-route .quality-edit-grid{gap:7px 10px!important}
+  .quality-product-editor-page .quality-edit-field,
+  .quality-editor-route .quality-edit-field{gap:3px!important}
+  .quality-product-editor-page .quality-edit-field label,
+  .quality-editor-route .quality-edit-field label{font-size:10px!important;line-height:1.15!important}
+  .quality-product-editor-page .quality-edit-field input,
+  .quality-product-editor-page .quality-edit-field select,
+  .quality-editor-route .quality-edit-field input,
+  .quality-editor-route .quality-edit-field select{min-height:33px!important;height:33px!important;padding:5px 9px!important;border-radius:8px!important;font-size:11px!important}
+  .quality-product-editor-page .quality-edit-help,
+  .quality-editor-route .quality-edit-help{font-size:8.5px!important;line-height:1.2!important}
+  .quality-product-editor-page .quality-edit-actions,
+  .quality-editor-route .quality-edit-actions{padding:7px 0 2px!important}
+  .quality-product-editor-page .quality-edit-actions .btn,
+  .quality-editor-route .quality-edit-actions .btn{min-height:34px!important;padding:6px 10px!important;font-size:10.5px!important}
+
+  /* Filtro de estoque por operador/quantidade + ordenação da listagem. */
+  .quality-filter-status-row-advanced{grid-template-columns:minmax(115px,140px) minmax(145px,170px) minmax(190px,230px) minmax(145px,180px) max-content!important}
+  .quality-stock-filter-combo{display:grid;grid-template-columns:72px 82px;gap:5px;align-items:center;width:max-content;max-width:100%}
+  .quality-stock-filter-combo select,.quality-stock-filter-combo input{width:100%!important;min-width:0!important;min-height:38px!important;height:38px!important;padding:7px 8px!important}
+  .quality-stock-filter-combo input{max-width:82px!important}
+  .quality-stock-filter-combo input:disabled{opacity:.5;cursor:not-allowed}
+  @media(max-width:1100px){.quality-filter-status-row-advanced{grid-template-columns:repeat(2,minmax(160px,1fr))!important}.quality-filter-counter{justify-content:flex-start}}
+  @media(max-width:620px){.quality-filter-status-row-advanced{grid-template-columns:1fr!important}}
+
+  /* 2026-08-26 — fechamento definitivo das larguras da listagem.
+     Há regras legadas por nth-child nesta tela; este bloco usa os dois seletores
+     para impedir que elas voltem a alargar ERP/Estoque ou espremer Status. */
+  table.quality-products-summary-table{table-layout:fixed!important;width:100%!important}
+  table.quality-products-summary-table th:nth-child(1),table.quality-products-summary-table td:nth-child(1),
+  table.quality-products-summary-table [data-product-column="select"]{width:3.2%!important}
+  table.quality-products-summary-table th:nth-child(2),table.quality-products-summary-table td:nth-child(2),
+  table.quality-products-summary-table [data-product-column="code"]{width:6%!important}
+  table.quality-products-summary-table th:nth-child(3),table.quality-products-summary-table td:nth-child(3),
+  table.quality-products-summary-table [data-product-column="product"]{width:41.8%!important}
+  table.quality-products-summary-table th:nth-child(4),table.quality-products-summary-table td:nth-child(4),
+  table.quality-products-summary-table [data-product-column="erp-stock"]{width:13%!important;min-width:0!important;max-width:none!important}
+  table.quality-products-summary-table th:nth-child(5),table.quality-products-summary-table td:nth-child(5),
+  table.quality-products-summary-table [data-product-column="status"]{width:18%!important;min-width:0!important;max-width:none!important}
+  table.quality-products-summary-table th:nth-child(6),table.quality-products-summary-table td:nth-child(6),
+  table.quality-products-summary-table [data-product-column="lv"]{width:10%!important}
+  table.quality-products-summary-table th:nth-child(8),table.quality-products-summary-table td:nth-child(8),
+  table.quality-products-summary-table [data-product-column="actions"]{width:8%!important}
+
+  /* ERP/Estoque realmente compacto no eixo horizontal. */
+  table.quality-products-summary-table td[data-product-column="erp-stock"]{padding-left:6px!important;padding-right:6px!important}
+  table.quality-products-summary-table td[data-product-column="erp-stock"] .quality-erp-stock-card{
+    width:100%!important;min-width:0!important;max-width:100%!important;padding:5px 6px!important;overflow:hidden!important
+  }
+  table.quality-products-summary-table td[data-product-column="erp-stock"] .quality-list-erp-category strong,
+  table.quality-products-summary-table td[data-product-column="erp-stock"] .quality-erp-type{
+    display:block!important;max-width:100%!important;white-space:nowrap!important;overflow:hidden!important;text-overflow:ellipsis!important
+  }
+
+  /* Status recebe o espaço liberado e o select nunca mais corta Ativo/Inativo. */
+  table.quality-products-summary-table td[data-product-column="status"]{padding-left:8px!important;padding-right:8px!important;overflow:visible!important}
+  table.quality-products-summary-table td[data-product-column="status"] .quality-channel-status-controls{
+    width:100%!important;max-width:none!important;min-width:0!important;gap:7px!important
+  }
+  table.quality-products-summary-table td[data-product-column="status"] .quality-channel-status-control{
+    width:100%!important;min-width:0!important;box-sizing:border-box!important;grid-template-columns:44px minmax(94px,1fr)!important;gap:7px!important
+  }
+  table.quality-products-summary-table td[data-product-column="status"] .quality-channel-status-control select{
+    width:100%!important;min-width:94px!important;max-width:none!important;padding-left:8px!important;padding-right:24px!important;text-overflow:clip!important
+  }
+
+
+  /* 2026-08-26 — grade definitiva da listagem de produtos.
+     O colgroup passa a ser a fonte de verdade das larguras. Isso evita que
+     conteúdo interno ou regras antigas redistribuam ERP/Estoque e Status. */
+  table.quality-products-summary-table{
+    width:100%!important;
+    table-layout:fixed!important;
+  }
+  table.quality-products-summary-table th[data-product-column],
+  table.quality-products-summary-table td[data-product-column]{
+    width:auto!important;
+    min-width:0!important;
+    max-width:none!important;
+    box-sizing:border-box!important;
+  }
+  table.quality-products-summary-table col[data-product-column="select"]{width:3.5%!important}
+  table.quality-products-summary-table col[data-product-column="code"]{width:6%!important}
+  table.quality-products-summary-table col[data-product-column="product"]{width:37.5%!important}
+  table.quality-products-summary-table col[data-product-column="erp-stock"]{width:15%!important}
+  table.quality-products-summary-table col[data-product-column="status"]{width:15%!important}
+  table.quality-products-summary-table col[data-product-column="lv"]{width:13%!important}
+  table.quality-products-summary-table col[data-product-column="resources"]{width:0!important;visibility:collapse!important}
+  table.quality-products-summary-table col[data-product-column="actions"]{width:10%!important}
+  table.quality-products-summary-table col.quality-column-hidden{width:0!important;visibility:collapse!important}
+
+  /* ERP / Estoque: reduz de verdade a largura horizontal e deixa o card se
+     adaptar à coluna, sem tentar empurrar Status para a direita. */
+  table.quality-products-summary-table td[data-product-column="erp-stock"]{
+    padding-left:6px!important;
+    padding-right:6px!important;
+    overflow:hidden!important;
+  }
+  table.quality-products-summary-table td[data-product-column="erp-stock"] .quality-erp-stock-card{
+    width:100%!important;
+    max-width:100%!important;
+    min-width:0!important;
+    box-sizing:border-box!important;
+  }
+
+  /* Status: mantém ERP e LV alinhados dentro da própria coluna. O select pode
+     encolher com a célula, mas há espaço suficiente para Ativo/Inativo. */
+  table.quality-products-summary-table td[data-product-column="status"]{
+    padding-left:7px!important;
+    padding-right:7px!important;
+    overflow:hidden!important;
+  }
+  table.quality-products-summary-table td[data-product-column="status"] .quality-channel-status-controls{
+    width:100%!important;
+    max-width:100%!important;
+    min-width:0!important;
+    gap:6px!important;
+  }
+  table.quality-products-summary-table td[data-product-column="status"] .quality-channel-status-control{
+    width:100%!important;
+    max-width:100%!important;
+    min-width:0!important;
+    grid-template-columns:42px minmax(0,1fr)!important;
+    gap:5px!important;
+    box-sizing:border-box!important;
+  }
+  table.quality-products-summary-table td[data-product-column="status"] .quality-channel-status-control select{
+    width:100%!important;
+    min-width:0!important;
+    max-width:100%!important;
+    box-sizing:border-box!important;
+    padding-left:7px!important;
+    padding-right:22px!important;
+  }
+
+  @media(max-width:1100px){
+    table.quality-products-summary-table{min-width:1050px!important}
+    .quality-table-wrap{overflow-x:auto!important}
+  }
+
+
+  /* 2026-08-26 — balanceamento final da listagem: devolve largura ao Produto
+     sem voltar a espremer Ativo/Inativo. As porcentagens somam 100%. */
+  table.quality-products-summary-table col[data-product-column="select"]{width:3.5%!important}
+  table.quality-products-summary-table col[data-product-column="code"]{width:6%!important}
+  table.quality-products-summary-table col[data-product-column="product"]{width:37.5%!important}
+  table.quality-products-summary-table col[data-product-column="erp-stock"]{width:15%!important}
+  table.quality-products-summary-table col[data-product-column="status"]{width:15%!important}
+  table.quality-products-summary-table col[data-product-column="lv"]{width:13%!important}
+  table.quality-products-summary-table col[data-product-column="resources"]{width:0!important;visibility:collapse!important}
+  table.quality-products-summary-table col[data-product-column="actions"]{width:10%!important}
+  table.quality-products-summary-table td[data-product-column="product"]{padding-left:8px!important;padding-right:8px!important}
+  table.quality-products-summary-table .quality-product-open-link{min-width:0!important;width:100%!important}
+  table.quality-products-summary-table .quality-product-main{min-width:0!important;overflow:hidden!important}
+  table.quality-products-summary-table .quality-product-open-name{white-space:nowrap!important;overflow:hidden!important;text-overflow:ellipsis!important}
+  table.quality-products-summary-table td[data-product-column="erp-stock"]{padding-left:5px!important;padding-right:5px!important}
+  table.quality-products-summary-table td[data-product-column="status"]{padding-left:6px!important;padding-right:6px!important}
+  table.quality-products-summary-table td[data-product-column="status"] .quality-channel-status-control{grid-template-columns:40px minmax(0,1fr)!important;gap:5px!important;padding-left:6px!important;padding-right:5px!important}
+  table.quality-products-summary-table td[data-product-column="status"] .quality-channel-status-control select{min-width:0!important;width:100%!important;padding-left:7px!important;padding-right:20px!important}
 </style>
 
 
@@ -1035,12 +1431,15 @@ html[data-panel-theme="light"] .quality-master-area,html[data-panel-theme="light
   <div id="flash-message" style="display:none; margin: 10px 0 18px 0; padding: 12px 14px; border-radius: 6px; background: #e8f7ee; border: 1px solid #b8e6c8; color: #087a31; font-weight: 600;"></div>
 
   <%
-    const totalProdutos = (items || []).length;
-    const ativosProdutos = (items || []).filter(p => p.active !== false).length;
-    const inativosProdutos = totalProdutos - ativosProdutos;
-    const vitrineProdutos = (items || []).filter(p => p.featured === true).length;
-    const variacaoProdutos = (items || []).filter(p => p.variations && p.variations.enabled).length;
-    const estoqueTotalProdutos = (items || []).reduce((sum, p) => sum + (Number(p.stock) || 0), 0);
+    // Os indicadores vêm consolidados da rota e representam toda a base. O
+    // fallback existe apenas para compatibilidade com renderizações antigas.
+    const summaryProdutos = (typeof productSummary !== 'undefined' && productSummary) ? productSummary : {};
+    const totalProdutos = Number.isFinite(Number(summaryProdutos.total)) ? Number(summaryProdutos.total) : (items || []).length;
+    const ativosProdutos = Number.isFinite(Number(summaryProdutos.active)) ? Number(summaryProdutos.active) : (items || []).filter(p => (p?.erp?.active !== undefined ? p.erp.active : p.active) !== false).length;
+    const inativosProdutos = Number.isFinite(Number(summaryProdutos.inactive)) ? Number(summaryProdutos.inactive) : Math.max(0, totalProdutos - ativosProdutos);
+    const vitrineProdutos = Number.isFinite(Number(summaryProdutos.featured)) ? Number(summaryProdutos.featured) : (items || []).filter(p => p.featured === true).length;
+    const variacaoProdutos = Number.isFinite(Number(summaryProdutos.variations)) ? Number(summaryProdutos.variations) : (items || []).filter(p => p.variations && p.variations.enabled).length;
+    const estoqueTotalProdutos = Number.isFinite(Number(summaryProdutos.stockTotal)) ? Number(summaryProdutos.stockTotal) : (items || []).reduce((sum, p) => sum + (Number(p.stock) || 0), 0);
   %>
   <% if (!isNewWorkspace) { %>
   <div class="quality-indicators-grid" id="product-summary-indicators">
@@ -1059,6 +1458,7 @@ html[data-panel-theme="light"] .quality-master-area,html[data-panel-theme="light
       <a class="btn primary <%= isNewWorkspace ? 'active' : '' %> js-new-product-choice" href="/produtos?workspace=new">＋ Novo produto</a>
     </div>
     <div class="product-workspace-toolbar-right">
+      <a class="btn" href="/erp/precificacao">🏷️ Precificação inteligente</a>
       <a class="btn" href="/produtos/importar-wm10">⇩ Migração WM10</a>
       <a class="btn" href="/erp">← Voltar ao ERP</a>
     </div>
@@ -1307,7 +1707,7 @@ html[data-panel-theme="light"] .quality-master-area,html[data-panel-theme="light
         </div>
         <div class="quality-var-card quality-combo-card" data-var-card="combinations">
           <strong>🧩 Grade de combinações</strong>
-          <small class="variation-help">Cada combinação é um item vendável. O preço ERP é opcional: vazio herda o preço do cadastro pai; preenchido usa o preço próprio da variação.</small>
+          <small class="variation-help">Cada combinação é um item vendável. Preço de venda, preço de compra e margem alvo podem ser próprios; quando vazios, herdam as regras/valores do cadastro pai.</small>
           <div class="variation-combo-row">
             <select class="var-combo-select" data-combo="color"><option value="">Cor</option></select>
             <select class="var-combo-select" data-combo="storage"><option value="">GB</option></select>
@@ -1316,6 +1716,8 @@ html[data-panel-theme="light"] .quality-master-area,html[data-panel-theme="light
             <input type="text" class="var-combo-image quality-image-picker" list="imagens-list" placeholder="Imagem opcional" onfocus="sincronizarImagensAuto()" autocomplete="off">
             <input type="number" class="var-combo-stock stock-input-small" min="0" step="1" placeholder="Estoque">
             <input type="number" class="var-combo-price" min="0" step="0.01" placeholder="Preço ERP" title="Opcional: vazio herda o preço ERP do cadastro pai">
+            <input type="number" class="var-combo-cost" min="0" step="0.01" placeholder="Preço compra" title="Opcional: vazio herda o preço de compra do cadastro pai">
+            <input type="number" class="var-combo-margin" min="0" step="0.01" placeholder="Margem alvo %" title="Opcional: margem sobre custo específica desta variação">
             <button class="btn add-var-combo" type="button">Adicionar</button>
           </div>
           <div class="quality-combo-list" data-var-list="combinations"></div>
@@ -1328,8 +1730,9 @@ html[data-panel-theme="light"] .quality-master-area,html[data-panel-theme="light
     <div class="commercial-policy-box workspace-commercial" data-create-section="commercial">
       <strong>💰 Comercial e política de desconto</strong>
       <div class="commercial-policy-grid" style="margin-top:10px">
-        <label>Preço de custo<input type="number" name="costPrice" step="0.01" min="0" placeholder="0,00"></label>
+        <label>Preço de compra<input type="number" name="costPrice" step="0.01" min="0" placeholder="0,00"></label>
         <label>Preço de venda ERP<input type="number" name="erpPrice" step="0.01" min="0" placeholder="0,00"></label>
+        <label>Margem alvo sobre custo (%)<input type="number" name="desiredMarginPercent" step="0.01" min="0" placeholder="Herdar categoria"></label>
         <label>Preço mínimo<input type="number" name="minimumPrice" step="0.01" min="0" placeholder="0,00"></label>
         <label>Margem mínima (%)<input type="number" name="minimumMarginPercent" step="0.01" min="0" placeholder="0"></label>
         <label>Política de desconto<select name="discountPolicy"><option value="inherit">Herdar regra superior</option><option value="custom">Regra própria</option><option value="blocked">Sem desconto</option></select></label>
@@ -1413,10 +1816,10 @@ html[data-panel-theme="light"] .quality-master-area,html[data-panel-theme="light
   </section>
 
   <section class="product-workspace-section <%= isNewWorkspace ? '' : 'active' %>" id="product-workspace-list">
-    <div class="workspace-list-heading"><div><h2>📋 Produtos cadastrados</h2><p>Pesquise, filtre, edite e acompanhe os principais estados da base.</p></div></div>
+    <div class="workspace-list-heading"><div class="workspace-heading-inline"><h2>📋 Produtos cadastrados</h2><span class="quality-info-dot" title="Pesquise, filtre, edite e acompanhe os principais estados da base." aria-label="Informação sobre a listagem">i</span></div></div>
 
   <div class="quality-controls-grid">
-    <div class="quality-control-box">
+    <div class="quality-control-box quality-search-control-box">
       <div class="quality-control-title">🔎 Busca e filtros</div>
       <div class="quality-search-row">
         <input type="text" id="panel-search-input" value="<%= listState?.query || '' %>" placeholder="Buscar por nome, código, SKU, barras, fornecedor ou slug...">
@@ -1427,16 +1830,44 @@ html[data-panel-theme="light"] .quality-master-area,html[data-panel-theme="light
             <option value="<%= c.slug %>" <%= listState?.category === c.slug ? 'selected' : '' %>><%= c.name %></option>
           <% }) %>
         </select>
+        <button class="btn primary quality-search-button" type="button" id="panel-search-button">🔎 Buscar</button>
       </div>
-      <div class="quality-filter-status-row">
+      <div class="quality-filter-status-row quality-filter-status-row-advanced">
         <div class="quality-filter-field"><label for="panel-erp-filter">Status ERP</label><select id="panel-erp-filter"><option value="" <%= !listState?.erpStatus ? 'selected' : '' %>>Todos</option><option value="true" <%= listState?.erpStatus === 'true' ? 'selected' : '' %>>ERP Ativo</option><option value="false" <%= listState?.erpStatus === 'false' ? 'selected' : '' %>>ERP Inativo</option></select></div>
         <div class="quality-filter-field"><label for="panel-lv-filter">Status Loja Virtual</label><select id="panel-lv-filter"><option value="" <%= !listState?.lvStatus ? 'selected' : '' %>>Todos</option><option value="true" <%= listState?.lvStatus === 'true' ? 'selected' : '' %>>LV Ativo</option><option value="false" <%= listState?.lvStatus === 'false' ? 'selected' : '' %>>LV Inativo</option></select></div>
-        <div class="quality-filter-field"><label for="panel-stock-filter">Estoque</label><select id="panel-stock-filter"><option value="">Todos</option><option value="positive">Com estoque</option><option value="zero">Estoque zerado</option><option value="service">Serviços</option></select></div>
+        <div class="quality-filter-field quality-stock-filter-field">
+          <label for="panel-stock-filter">Estoque</label>
+          <div class="quality-stock-filter-combo">
+            <select id="panel-stock-filter" aria-label="Operador do estoque">
+              <option value="" <%= !listState?.stockOp ? 'selected' : '' %>>Todos</option>
+              <option value="gt" <%= listState?.stockOp === 'gt' ? 'selected' : '' %>>&gt;</option>
+              <option value="gte" <%= listState?.stockOp === 'gte' ? 'selected' : '' %>>&gt;=</option>
+              <option value="eq" <%= listState?.stockOp === 'eq' ? 'selected' : '' %>>=</option>
+              <option value="lte" <%= listState?.stockOp === 'lte' ? 'selected' : '' %>>&lt;=</option>
+              <option value="lt" <%= listState?.stockOp === 'lt' ? 'selected' : '' %>>&lt;</option>
+              <option value="neq" <%= listState?.stockOp === 'neq' ? 'selected' : '' %>>&lt;&gt;</option>
+              <option value="service" <%= listState?.stockOp === 'service' ? 'selected' : '' %>>Serviços</option>
+            </select>
+            <input type="number" id="panel-stock-qty" step="1" value="<%= Number(listState?.stockQty ?? 0) %>" aria-label="Quantidade de estoque" title="Quantidade usada na comparação">
+          </div>
+        </div>
+        <div class="quality-filter-field quality-order-filter-field">
+          <label for="panel-order-filter">Ordenar</label>
+          <select id="panel-order-filter">
+            <option value="" <%= !listState?.order ? 'selected' : '' %>>Padrão</option>
+            <option value="newest" <%= listState?.order === 'newest' ? 'selected' : '' %>>Mais recentes</option>
+            <option value="oldest" <%= listState?.order === 'oldest' ? 'selected' : '' %>>Mais antigos</option>
+            <option value="name_asc" <%= listState?.order === 'name_asc' ? 'selected' : '' %>>Nome A–Z</option>
+            <option value="name_desc" <%= listState?.order === 'name_desc' ? 'selected' : '' %>>Nome Z–A</option>
+            <option value="code_asc" <%= listState?.order === 'code_asc' ? 'selected' : '' %>>Código crescente</option>
+            <option value="code_desc" <%= listState?.order === 'code_desc' ? 'selected' : '' %>>Código decrescente</option>
+          </select>
+        </div>
         <div class="quality-filter-counter"><span id="filtered-products-count"><%= listState?.totalFiltered ?? (items || []).length %></span>&nbsp;produto(s)</div>
       </div>
     </div>
 
-    <div class="quality-control-box">
+    <div class="quality-control-box quality-bulk-control-box">
       <form id="bulk-actions-form" method="post" action="/produtos/bulk-actions" class="quality-bulk-center">
         <div id="bulk-selected-container"></div>
 
@@ -1532,19 +1963,55 @@ html[data-panel-theme="light"] .quality-master-area,html[data-panel-theme="light
     </div>
   </div>
 
+  <div class="quality-list-view-toolbar" aria-label="Opções de visualização da listagem">
+    <div class="quality-list-view-hint">
+      <strong>Listagem de produtos</strong>
+    </div>
+    <div class="quality-list-view-actions">
+      <label class="quality-page-size-control" for="panel-page-size">Por página
+        <select id="panel-page-size" aria-label="Quantidade de produtos por página">
+          <% [50,100,300,500].forEach(size => { %><option value="<%= size %>" <%= Number(listState?.pageSize || 50) === size ? 'selected' : '' %>><%= size %></option><% }) %>
+        </select>
+      </label>
+      <div class="quality-columns-control">
+        <button class="btn quality-columns-button" type="button" id="product-columns-button" aria-expanded="false" aria-controls="product-columns-menu">☷ Colunas</button>
+        <div class="quality-columns-menu" id="product-columns-menu" hidden>
+          <div class="quality-columns-menu-head"><strong>Colunas visíveis</strong><small>A preferência fica salva neste navegador.</small></div>
+          <label><input type="checkbox" checked disabled> Produto <small>sempre visível</small></label>
+          <label><input type="checkbox" data-product-column-toggle="code" checked> Código</label>
+          <label><input type="checkbox" data-product-column-toggle="erp-stock" checked> ERP / Estoque</label>
+          <label><input type="checkbox" data-product-column-toggle="status" checked> Status</label>
+          <label><input type="checkbox" data-product-column-toggle="lv" checked> Loja Virtual</label>
+          <label><input type="checkbox" data-product-column-toggle="actions" checked> Ações</label>
+          <button class="btn" type="button" id="product-columns-reset">Restaurar padrão</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <form id="update-all-form" method="post" action="/produtos/update-all">
     <div class="quality-table-wrap">
     <table class="table quality-products-summary-table">
+      <colgroup class="quality-products-colgroup" aria-hidden="true">
+        <col data-product-column="select">
+        <col data-product-column="code">
+        <col data-product-column="product">
+        <col data-product-column="erp-stock">
+        <col data-product-column="status">
+        <col data-product-column="lv">
+        <col data-product-column="resources">
+        <col data-product-column="actions">
+      </colgroup>
       <thead>
         <tr>
-          <th><input type="checkbox" id="select-all-checkbox" title="Selecionar ou desmarcar todos os produtos visíveis"></th>
-          <th>#</th>
-          <th>Produto</th>
-          <th>ERP / Estoque</th>
-          <th>ERP</th>
-          <th>LV</th>
-          <th>Recursos</th>
-          <th>Ações</th>
+          <th data-product-column="select"><input type="checkbox" id="select-all-checkbox" title="Selecionar ou desmarcar todos os produtos visíveis"></th>
+          <th data-product-column="code">Código</th>
+          <th data-product-column="product">Produto</th>
+          <th data-product-column="erp-stock">ERP / Estoque</th>
+          <th data-product-column="status">Status</th>
+          <th data-product-column="lv">Loja Virtual</th>
+          <th data-product-column="resources">Recursos</th>
+          <th data-product-column="actions">Ações</th>
         </tr>
       </thead>
       <tbody id="products-table-body">
@@ -1552,10 +2019,11 @@ html[data-panel-theme="light"] .quality-master-area,html[data-panel-theme="light
           <% const hasStockVariations = Array.isArray(p?.variations?.combinations) && p.variations.combinations.length > 0; const stockValue = (p.stock ?? ''); const stockNum = Number(stockValue || 0); const stockClass = stockValue === '' ? 'empty' : (stockNum > 0 ? '' : 'zero'); const stockText = stockValue === '' ? 'Não informado' : (stockNum > 0 ? 'Em estoque' : 'Sem estoque'); %>
           <% const listErpRaw = p?.erp?.active !== undefined ? p.erp.active : p.active; const listErpActive = !['false','0','off','inativo'].includes(String(listErpRaw).toLowerCase()) && listErpRaw !== false; const listLvRaw = p?.virtualStore?.active !== undefined ? p.virtualStore.active : p.active; const listLvActive = !['false','0','off','inativo'].includes(String(listLvRaw).toLowerCase()) && listLvRaw !== false; %>
           <tr class="product-row <%= !listErpActive ? 'erp-inactive' : '' %> <%= !listLvActive ? 'lv-inactive' : '' %>" data-id="<%= p.id %>" data-erp-active="<%= listErpActive ? 'true' : 'false' %>" data-lv-active="<%= listLvActive ? 'true' : 'false' %>" data-erp-category-type="<%= erpCategoryById.get(String(p?.erp?.categoryId || p?.erp?.category || ''))?.type || 'product' %>" data-stock="<%= Number(stockValue || 0) %>" data-stock-controlled="<%= p?.inventory?.stockControlled === true ? 'true' : 'false' %>">
-            <td><input type="checkbox" class="product-check" value="<%= p.id %>"></td>
-            <td><span class="badge"><%= idx + 1 %></span></td>
+            <td data-product-column="select"><input type="checkbox" class="product-check" value="<%= p.id %>"></td>
+            <% const displayProductCode = String(p?.erp?.internalCode || p?.internalCode || p.id || '').replace(/\D/g, '') || String(p.id || ''); %>
+            <td data-product-column="code"><span class="quality-product-code" title="Código interno <%= displayProductCode %>"><%= displayProductCode %></span></td>
 
-            <td>
+            <td data-product-column="product">
               <input type="hidden" name="id" value="<%= p.id %>">
               <% const erpData = p.erp || {}; const lvData = p.virtualStore || {}; %>
               <input type="hidden" name="sku" value="<%= erpData.sku || '' %>">
@@ -1590,21 +2058,21 @@ html[data-panel-theme="light"] .quality-master-area,html[data-panel-theme="light
               <input type="hidden" name="siteLimit" class="row-site-limit" value="<%= siteInventory.limit ?? '' %>">
               <input type="hidden" name="physicalSafety" class="row-physical-safety" value="<%= siteInventory.physicalSafety ?? 0 %>">
 
-              <div class="quality-product-cell">
-                <div class="quality-product-thumb quick-main-image" data-product-id="<%= p.id %>" title="Clique para trocar a foto principal">
+              <a class="quality-product-open-link" href="/produtos/<%= encodeURIComponent(String(p.id)) %>" title="Abrir cadastro completo de <%= p.name %>">
+                <div class="quality-product-thumb quick-main-image" data-product-id="<%= p.id %>" title="Clique para trocar somente a foto principal">
                   <img src="/<%= p.image || 'images/sem-imagem.png' %>" alt="" onerror="this.onerror=null;this.src='/images/sem-imagem.png';">
                 </div>
                 <div class="quality-product-main">
-                  <input type="text" name="name" value="<%= p.name %>" class="prod-name-input" placeholder="Nome do produto">
-                  <div class="quality-product-meta">
-                    <input type="text" name="slug" value="<%= p.slug || '' %>" class="prod-slug-input" placeholder="slug-do-produto">
-                    <input type="number" step="0.01" min="0" name="price" value="<%= p.price || '' %>" placeholder="Preço opcional">
-                  </div>
+                  <input type="hidden" name="name" value="<%= p.name %>" class="prod-name-input">
+                  <input type="hidden" name="slug" value="<%= p.slug || '' %>" class="prod-slug-input">
+                  <input type="hidden" step="0.01" min="0" name="price" value="<%= p.price || '' %>">
+                  <span class="quality-product-open-name"><%= p.name %></span>
+                  <span class="quality-product-open-meta"><%= p.slug || 'sem-slug' %></span>
                 </div>
-              </div>
+              </a>
             </td>
 
-            <td>
+            <td data-product-column="erp-stock">
               <% const listErpCategory = erpCategoryById.get(String(erpData.categoryId || erpData.category || '')); const listErpCategoryType = listErpCategory?.type || 'product'; %>
               <div class="quality-erp-stock-card">
                 <div class="quality-list-erp-category"><small>Categoria ERP</small><strong><%= listErpCategory?.name || 'Não definida' %></strong><span class="quality-erp-type"><%= listErpCategoryType === 'service' ? 'Serviço' : (listErpCategoryType === 'controlled_product' ? 'Produto controlado' : 'Produto') %></span></div>
@@ -1621,7 +2089,8 @@ html[data-panel-theme="light"] .quality-master-area,html[data-panel-theme="light
                       <strong class="quality-derived-stock"><%= stockNum %></strong>
                       <span class="quality-stock-badge <%= stockClass %>">📦 <%= stockText %> · <%= p.variations.combinations.length %> variação(ões)</span>
                     <% } else { %>
-                      <input type="number" step="1" min="0" name="stock" value="<%= stockValue %>" placeholder="Qtd.">
+                      <input type="hidden" name="stock" value="<%= stockValue %>">
+                      <strong class="quality-derived-stock"><%= stockValue === '' ? '—' : stockNum %></strong>
                       <span class="quality-stock-badge <%= stockClass %>">📦 <%= stockText %></span>
                     <% } %>
                   </div>
@@ -1629,64 +2098,44 @@ html[data-panel-theme="light"] .quality-master-area,html[data-panel-theme="light
               </div>
             </td>
 
-            <td>
+            <td data-product-column="status">
               <% const rawErpActive = erpData.active !== undefined ? erpData.active : p.active; const erpActiveValue = !['false', '0', 'off', 'inativo'].includes(String(rawErpActive).toLowerCase()) && rawErpActive !== false; %>
-              <div class="quality-status-stack quality-channel-status">
-                <div class="quality-compact-field">
-                  <label>ERP</label>
-                  <select name="erpActive" aria-label="Status ERP de <%= p.name %>">
-                    <option value="true" <%= erpActiveValue ? 'selected' : '' %>>Ativo</option>
-                    <option value="false" <%= !erpActiveValue ? 'selected' : '' %>>Inativo</option>
-                  </select>
-                </div>
-                <small class="quality-channel-help">PDV, estoque, compras e financeiro.</small>
-              </div>
-            </td>
-
-            <td>
               <% const rawLvActive = lvData.active !== undefined ? lvData.active : p.active; const lvActiveValue = !['false', '0', 'off', 'inativo'].includes(String(rawLvActive).toLowerCase()) && rawLvActive !== false; const listLvCategory = lvCategoryBySlug.get(String(p.category || '')); const listLvSubcategory = lvSubcategoryByKey.get(String(p.subcategory || p.subcategoria || '')); %>
-              <div class="quality-status-stack quality-channel-status <%= !lvActiveValue ? 'quality-lv-controls-disabled' : '' %>">
-                <div class="quality-lv-category-card"><small>Categoria LV</small><strong><%= listLvCategory?.name || (p.category ? p.category : 'Sem categoria') %></strong><% if (listLvSubcategory) { %><span>Subcategoria LV: <%= listLvSubcategory.name || listLvSubcategory.slug %></span><% } %></div>
-                <div class="quality-lv-inactive-badge">○ LV Inativa</div>
-                <div class="quality-compact-field quality-lv-status-field">
-                  <label>Loja Virtual</label>
-                  <select name="lvActive" aria-label="Status LV de <%= p.name %>">
-                    <option value="true" <%= lvActiveValue ? 'selected' : '' %>>Ativo</option>
-                    <option value="false" <%= !lvActiveValue ? 'selected' : '' %>>Inativo</option>
-                  </select>
-                </div>
-                <div class="quality-compact-field">
-                  <label>Vitrine</label>
-                  <select name="featured">
-                    <option value="true" <%= p.featured ? 'selected' : '' %>>Sim</option>
-                    <option value="false" <%= !p.featured ? 'selected' : '' %>>Não</option>
-                  </select>
-                </div>
-                <div class="quality-compact-field">
-                  <label>Preço</label>
-                  <select name="showPrice">
-                    <option value="true" <%= p.showPrice !== false ? 'selected' : '' %>>Mostrar</option>
-                    <option value="false" <%= p.showPrice === false ? 'selected' : '' %>>Ocultar</option>
-                  </select>
-                </div>
-                <div class="quality-compact-field">
-                  <label>Detalhes</label>
-                  <select name="detailsEnabled">
-                    <option value="true" <%= p.detailsEnabled ? 'selected' : '' %>>Sim</option>
-                    <option value="false" <%= !p.detailsEnabled ? 'selected' : '' %>>Não</option>
-                  </select>
-                </div>
-                <small class="quality-channel-help">Sincroniza somente ao clicar em Publicar.</small>
+              <div class="quality-channel-status-controls">
+                <label class="quality-channel-status-control <%= erpActiveValue ? 'is-active' : 'is-inactive' %>" data-channel-status="erp">
+                  <span><i></i>ERP</span>
+                  <select name="erpActive" aria-label="Status ERP de <%= p.name %>"><option value="true" <%= erpActiveValue ? 'selected' : '' %>>Ativo</option><option value="false" <%= !erpActiveValue ? 'selected' : '' %>>Inativo</option></select>
+                </label>
+                <label class="quality-channel-status-control <%= lvActiveValue ? 'is-active' : 'is-inactive' %>" data-channel-status="lv">
+                  <span><i></i>LV</span>
+                  <select name="lvActive" aria-label="Status Loja Virtual de <%= p.name %>"><option value="true" <%= lvActiveValue ? 'selected' : '' %>>Ativa</option><option value="false" <%= !lvActiveValue ? 'selected' : '' %>>Inativa</option></select>
+                </label>
+                <small class="quality-inline-status-feedback row-save-status" aria-live="polite"></small>
               </div>
             </td>
 
-            <td>
+            <td data-product-column="lv">
+              <div class="quality-lv-readonly-summary">
+                <div class="quality-lv-category-card" style="display:flex!important"><small>Categoria LV</small><strong><%= listLvCategory?.name || (p.category ? p.category : 'Sem categoria') %></strong><% if (listLvSubcategory) { %><span><%= listLvSubcategory.name || listLvSubcategory.slug %></span><% } %></div>
+                <div class="quality-lv-readonly-flags">
+                  <span><%= p.featured ? '⭐ Vitrine' : 'Sem vitrine' %></span>
+                  <span><%= p.showPrice !== false ? 'Preço visível' : 'Preço oculto' %></span>
+                  <span><%= p.detailsEnabled ? 'Detalhes ativos' : 'Detalhes off' %></span>
+                </div>
+              </div>
+              <select name="featured" hidden><option value="true" <%= p.featured ? 'selected' : '' %>>Sim</option><option value="false" <%= !p.featured ? 'selected' : '' %>>Não</option></select>
+              <select name="showPrice" hidden><option value="true" <%= p.showPrice !== false ? 'selected' : '' %>>Mostrar</option><option value="false" <%= p.showPrice === false ? 'selected' : '' %>>Ocultar</option></select>
+              <select name="detailsEnabled" hidden><option value="true" <%= p.detailsEnabled ? 'selected' : '' %>>Sim</option><option value="false" <%= !p.detailsEnabled ? 'selected' : '' %>>Não</option></select>
+            </td>
+
+            <td data-product-column="resources">
               <div class="quality-resource-stack">
                 <textarea name="descriptionShort" class="row-description-short" placeholder="Descrição curta..." style="display:none;"><%= p.descriptionShort || '' %></textarea>
                 <textarea name="descriptionLong" class="row-description-long" placeholder="Descrição completa..." style="display:none;"><%= p.descriptionLong || '' %></textarea>
                 <textarea name="tags" class="row-product-tags" style="display:none;"><%= Array.isArray(p.tags) ? p.tags.join('\n') : (p.tags || '') %></textarea>
                 <textarea name="relatedManualIds" class="row-related-manual-ids" style="display:none;"><%= Array.isArray(p.relatedManualIds) ? p.relatedManualIds.join('\n') : (p.relatedManualIds || '') %></textarea>
                 <textarea name="crossSellIds" class="row-cross-sell-ids" style="display:none;"><%= Array.isArray(p.crossSellIds) ? p.crossSellIds.join('\n') : (p.crossSellIds || '') %></textarea>
+                <button class="quality-history-btn" type="button" style="display:none!important" aria-hidden="true" tabindex="-1">Histórico</button>
 
                 <select name="image" class="prod-image-select quality-image-compact-select" data-current-val="<%= p.image || '' %>" data-lazy-images="true">
                   <option value="">Imagem...</option>
@@ -1718,7 +2167,7 @@ html[data-panel-theme="light"] .quality-master-area,html[data-panel-theme="light
                 <textarea name="variationRam" class="variation-hidden-data row-variation-ram"><%= Array.isArray(v.ram) ? v.ram.join('\n') : (v.ramText || '') %></textarea>
                 <textarea name="variationCondition" class="variation-hidden-data row-variation-condition"><%= Array.isArray(v.condition) ? v.condition.join('\n') : (v.conditionText || '') %></textarea>
                 <textarea name="variationLabels" class="variation-hidden-data row-variation-labels"><%= v.labels ? JSON.stringify(v.labels) : (v.labelsText || '') %></textarea>
-                <textarea name="variationCombinations" class="variation-hidden-data row-variation-combinations"><%= Array.isArray(v.combinations) ? v.combinations.map(c => [c.color, c.storage, c.ram, c.condition, c.image, c.stock, c.erpPrice].map(x => x === undefined || x === null ? '' : x).join('|').replace(/\|+$/,'')).join('\n') : (v.combinationsText || '') %></textarea>
+                <textarea name="variationCombinations" class="variation-hidden-data row-variation-combinations"><%= Array.isArray(v.combinations) ? v.combinations.map(c => [c.color, c.storage, c.ram, c.condition, c.image, c.stock, c.erpPrice, c.costPrice, c.desiredMarginPercent].map(x => x === undefined || x === null ? '' : x).join('|').replace(/\|+$/,'')).join('\n') : (v.combinationsText || '') %></textarea>
                 <% if (listErpCategoryType !== 'service') { %>
                   <button class="btn manage-variations-btn" type="button">🎛️ Variações</button>
                   <div class="variation-summary">Sem variações</div>
@@ -1728,11 +2177,8 @@ html[data-panel-theme="light"] .quality-master-area,html[data-panel-theme="light
               </div>
             </td>
 
-            <td class="quality-actions">
-              <div class="quality-row-actions">
-                <button class="btn primary quality-edit-btn" type="button">✏️ Editar</button>
-                <button class="btn quality-history-btn" type="button">🕘 Histórico</button>
-                <span class="row-save-status" style="display:none; font-weight:600; color:#087a31;">✅ Salvo</span>
+            <td class="quality-actions" data-product-column="actions">
+              <div class="quality-row-actions quality-row-actions-compact">
                 <button class="btn quality-duplicate-btn" type="submit" form="duplicate-form-<%= p.id %>" onclick="return confirm('Duplicar este produto?')">📄 Duplicar</button>
                 <button class="btn quality-delete-btn" type="submit" form="delete-form-<%= p.id %>" onclick="return confirm('Excluir este produto?')">🗑️ Excluir</button>
               </div>
@@ -1743,7 +2189,7 @@ html[data-panel-theme="light"] .quality-master-area,html[data-panel-theme="light
     </table>
     </div>
   </form>
-  <% if ((listState?.totalPages || 1) > 1) { const qsBase = new URLSearchParams(); if(listState?.query) qsBase.set('q',listState.query); if(listState?.category) qsBase.set('categoria',listState.category); if(listState?.erpStatus) qsBase.set('erpStatus',listState.erpStatus); if(listState?.lvStatus) qsBase.set('lvStatus',listState.lvStatus); qsBase.set('pageSize',String(listState.pageSize || 250)); %>
+  <% if ((listState?.totalPages || 1) > 1) { const qsBase = new URLSearchParams(); if(listState?.query) qsBase.set('q',listState.query); if(listState?.category) qsBase.set('categoria',listState.category); if(listState?.erpStatus) qsBase.set('erpStatus',listState.erpStatus); if(listState?.lvStatus) qsBase.set('lvStatus',listState.lvStatus); if(listState?.stockOp) qsBase.set('stockOp',listState.stockOp); if(listState?.stockOp && listState.stockOp !== 'service') qsBase.set('stockQty',String(Number(listState.stockQty || 0))); if(listState?.order) qsBase.set('order',listState.order); qsBase.set('pageSize',String(listState.pageSize || 50)); %>
     <div class="quality-pagination" style="display:flex;align-items:center;justify-content:center;gap:8px;flex-wrap:wrap;margin:14px 0 4px;">
       <% const prevQs = new URLSearchParams(qsBase); prevQs.set('page', String(Math.max(1,(listState.page||1)-1))); const nextQs = new URLSearchParams(qsBase); nextQs.set('page', String(Math.min(listState.totalPages,(listState.page||1)+1))); %>
       <a class="btn" href="/produtos?<%= prevQs.toString() %>" <%= listState.page <= 1 ? 'aria-disabled="true" style="pointer-events:none;opacity:.45"' : '' %>>← Anterior</a>
@@ -1843,7 +2289,7 @@ Com marcas de uso">Usados padrão</button></div><div class="quality-var-list" da
             
         <div class="quality-var-card quality-combo-card" data-var-card="combinations">
           <strong>🧩 Grade de combinações</strong>
-          <small class="variation-help">Cada combinação é um item vendável. Para serviços, use um grupo como <strong>Tipo de serviço</strong>; para produtos, Cor/GB/RAM/etc. O preço ERP pode ser próprio ou herdado do pai.</small>
+          <small class="variation-help">Cada combinação é um item vendável. Para serviços, use um grupo como <strong>Tipo de serviço</strong>; para produtos, Cor/GB/RAM/etc. Preço de venda, preço de compra e margem alvo podem ser próprios ou herdados do pai.</small>
           <div class="variation-combo-row">
             <select class="var-combo-select" data-combo="color"><option value="">Cor</option></select>
             <select class="var-combo-select" data-combo="storage"><option value="">GB</option></select>
@@ -1852,6 +2298,8 @@ Com marcas de uso">Usados padrão</button></div><div class="quality-var-list" da
             <input type="text" class="var-combo-image quality-image-picker" list="imagens-list" placeholder="Imagem opcional" onfocus="sincronizarImagensAuto()" autocomplete="off">
             <input type="number" class="var-combo-stock stock-input-small" min="0" step="1" placeholder="Estoque">
             <input type="number" class="var-combo-price" min="0" step="0.01" placeholder="Preço ERP" title="Opcional: vazio herda o preço ERP do cadastro pai">
+            <input type="number" class="var-combo-cost" min="0" step="0.01" placeholder="Preço compra" title="Opcional: vazio herda o preço de compra do cadastro pai">
+            <input type="number" class="var-combo-margin" min="0" step="0.01" placeholder="Margem alvo %" title="Opcional: margem sobre custo específica desta variação">
             <button class="btn add-var-combo" type="button">Adicionar</button>
           </div>
           <div class="quality-combo-list" data-var-list="combinations"></div>
@@ -1872,10 +2320,10 @@ Com marcas de uso">Usados padrão</button></div><div class="quality-var-list" da
   <% }) %>
 </datalist>
 
-<div class="quality-modal-backdrop" id="description-modal" aria-hidden="true">
-  
 <div class="receivable-modal" id="productHistoryModal" hidden><div class="receivable-modal-backdrop" data-history-close></div><section class="receivable-modal-card" style="max-width:760px"><header class="receivable-modal-header"><div><span>PRODUTO</span><h2 id="productHistoryTitle">Histórico do produto</h2><p>Alterações cadastrais, estoque, compras e vendas vinculadas.</p></div><button type="button" data-history-close>×</button></header><div id="productHistoryBody" style="padding:14px;max-height:65vh;overflow:auto"></div><footer class="receivable-modal-actions"><button type="button" class="btn" data-history-close>Fechar</button></footer></section></div>
-<div class="quality-description-modal">
+
+<div class="quality-modal-backdrop" id="description-modal" aria-hidden="true">
+  <div class="quality-description-modal">
     <div class="quality-gallery-modal-header">
       <strong>📝 Editar descrição do produto</strong>
       <button class="quality-close-btn" type="button" id="description-modal-close">×</button>
@@ -1907,8 +2355,8 @@ Com marcas de uso">Usados padrão</button></div><div class="quality-var-list" da
 </div>
 
 
-<div class="quality-modal-backdrop" id="edit-product-modal" aria-hidden="true">
-  <div class="quality-edit-modal" role="dialog" aria-modal="true">
+<div class="quality-modal-backdrop <%= isEditorMode ? 'quality-product-editor-page' : '' %>" id="edit-product-modal" aria-hidden="true">
+  <div class="quality-edit-modal" role="<%= isEditorMode ? 'region' : 'dialog' %>" aria-modal="<%= isEditorMode ? 'false' : 'true' %>">
     <div class="quality-edit-modal-header">
       <div class="quality-edit-title">
         <img id="edit-product-thumb" src="/images/sem-imagem.png" alt="">
@@ -1917,9 +2365,18 @@ Com marcas de uso">Usados padrão</button></div><div class="quality-var-list" da
           <small id="edit-product-code">QLT-000000</small>
         </div>
       </div>
-      <button class="quality-close-btn" type="button" id="edit-product-close">×</button>
+      <button class="quality-close-btn" type="button" id="edit-product-close" title="<%= isEditorMode ? 'Voltar à listagem' : 'Fechar' %>"><%= isEditorMode ? '←' : '×' %></button>
     </div>
     <div class="quality-edit-modal-body">
+      <% if (isEditorMode) { %>
+      <div class="quality-editor-resources" aria-label="Recursos do produto">
+        <button class="btn" type="button" id="editor-open-description">📝 Descrição</button>
+        <button class="btn" type="button" id="editor-open-gallery">🖼️ Galeria</button>
+        <button class="btn" type="button" id="editor-open-tags">🏷️ Etiquetas</button>
+        <button class="btn" type="button" id="editor-open-variations">🎛️ Variações</button>
+        <button class="btn" type="button" id="editor-open-history">🕘 Histórico</button>
+      </div>
+      <% } %>
       <div class="quality-edit-tabs">
         <button class="quality-edit-tab active" type="button" data-edit-tab="dados">🏢 ERP</button>
         <button class="quality-edit-tab" type="button" data-edit-tab="comercial">💰 Comercial</button>
@@ -1984,7 +2441,7 @@ Com marcas de uso">Usados padrão</button></div><div class="quality-var-list" da
         <div class="commercial-policy-box">
           <strong>💰 Preços e política comercial</strong>
           <div class="commercial-policy-grid" style="margin-top:10px">
-            <label>Preço de custo<input type="number" id="edit-costPrice" step="0.01" min="0"></label><label>Preço de venda ERP<input type="number" id="edit-erpPrice" step="0.01" min="0"></label><label>Preço Marketplace<input type="number" id="edit-marketplacePrice" step="0.01" min="0"></label><label>Preço promocional<input type="number" id="edit-promotionalPrice" step="0.01" min="0"></label><label>Margem desejada (%)<input type="number" id="edit-desiredMarginPercent" step="0.01" min="0"></label><label>Lucro esperado<input type="number" id="edit-expectedProfit" step="0.01" min="0"></label><label>Comissão padrão (%)<input type="number" id="edit-defaultCommissionPercent" step="0.01" min="0"></label>
+            <label>Preço de compra<input type="number" id="edit-costPrice" step="0.01" min="0"></label><label>Preço de venda ERP<input type="number" id="edit-erpPrice" step="0.01" min="0"></label><label>Preço Marketplace<input type="number" id="edit-marketplacePrice" step="0.01" min="0"></label><label>Preço promocional<input type="number" id="edit-promotionalPrice" step="0.01" min="0"></label><label>Margem alvo sobre custo (%)<input type="number" id="edit-desiredMarginPercent" step="0.01" min="0" placeholder="Herdar categoria"></label><label>Lucro esperado<input type="number" id="edit-expectedProfit" step="0.01" min="0"></label><label>Comissão padrão (%)<input type="number" id="edit-defaultCommissionPercent" step="0.01" min="0"></label>
             <label>Preço mínimo<input type="number" id="edit-minimumPrice" step="0.01" min="0"></label>
             <label>Regra de desconto<select id="edit-discountPolicy"><option value="inherit">Herdar da categoria</option><option value="custom">Personalizada</option><option value="none">Não permitir desconto</option></select></label>
             <label>Desconto máximo (%)<input type="number" id="edit-maximumDiscountPercent" step="0.01" min="0" max="100"></label>
@@ -2072,7 +2529,7 @@ Com marcas de uso">Usados padrão</button></div><div class="quality-var-list" da
       </div>
 
       <div class="quality-edit-actions">
-        <button class="btn" type="button" id="edit-product-cancel">Cancelar</button>
+        <button class="btn" type="button" id="edit-product-cancel"><%= isEditorMode ? '← Voltar à listagem' : 'Cancelar' %></button>
         <button class="btn primary" type="button" id="edit-product-save">💾 Salvar alterações</button>
       </div>
     </div>
@@ -2116,8 +2573,55 @@ Com marcas de uso">Usados padrão</button></div><div class="quality-var-list" da
 
 <script>
 document.addEventListener("DOMContentLoaded", () => {
+  const QUALITY_PRODUCT_EDITOR_MODE = <%= isEditorMode ? 'true' : 'false' %>;
   const searchInput = document.getElementById("panel-search-input");
   const QUALITY_LIST_STATE = <%- JSON.stringify(listState || {}).replace(/</g, '\u003c') %>;
+
+  // Preferências das colunas da listagem (estilo WM10), salvas localmente por navegador.
+  const PRODUCT_COLUMNS_STORAGE_KEY = 'quality-products-list-columns-v1';
+  const PRODUCT_OPTIONAL_COLUMNS = ['code','erp-stock','status','lv','actions'];
+  const productColumnsButton = document.getElementById('product-columns-button');
+  const productColumnsMenu = document.getElementById('product-columns-menu');
+  const productColumnToggles = Array.from(document.querySelectorAll('[data-product-column-toggle]'));
+  const productColumnsReset = document.getElementById('product-columns-reset');
+
+  function readProductColumnsPreference(){
+    try {
+      const stored = JSON.parse(localStorage.getItem(PRODUCT_COLUMNS_STORAGE_KEY) || 'null');
+      if (!Array.isArray(stored)) return [...PRODUCT_OPTIONAL_COLUMNS];
+      return PRODUCT_OPTIONAL_COLUMNS.filter(key => stored.includes(key));
+    } catch (_) { return [...PRODUCT_OPTIONAL_COLUMNS]; }
+  }
+
+  function applyProductColumnsPreference(visibleColumns, persist = false){
+    const visible = new Set(Array.isArray(visibleColumns) ? visibleColumns : PRODUCT_OPTIONAL_COLUMNS);
+    PRODUCT_OPTIONAL_COLUMNS.forEach(key => {
+      document.querySelectorAll(`[data-product-column="${key}"]`).forEach(cell => cell.classList.toggle('quality-column-hidden', !visible.has(key)));
+    });
+    productColumnToggles.forEach(input => { input.checked = visible.has(input.dataset.productColumnToggle); });
+    if (persist) {
+      try { localStorage.setItem(PRODUCT_COLUMNS_STORAGE_KEY, JSON.stringify(PRODUCT_OPTIONAL_COLUMNS.filter(key => visible.has(key)))); } catch (_) {}
+    }
+  }
+
+  applyProductColumnsPreference(readProductColumnsPreference());
+  productColumnToggles.forEach(input => input.addEventListener('change', () => {
+    applyProductColumnsPreference(productColumnToggles.filter(el => el.checked).map(el => el.dataset.productColumnToggle), true);
+  }));
+  productColumnsReset?.addEventListener('click', () => applyProductColumnsPreference([...PRODUCT_OPTIONAL_COLUMNS], true));
+  productColumnsButton?.addEventListener('click', event => {
+    event.stopPropagation();
+    if (!productColumnsMenu) return;
+    const willOpen = productColumnsMenu.hidden;
+    productColumnsMenu.hidden = !willOpen;
+    productColumnsButton.setAttribute('aria-expanded', willOpen ? 'true' : 'false');
+  });
+  productColumnsMenu?.addEventListener('click', event => event.stopPropagation());
+  document.addEventListener('click', () => {
+    if (!productColumnsMenu || productColumnsMenu.hidden) return;
+    productColumnsMenu.hidden = true;
+    productColumnsButton?.setAttribute('aria-expanded','false');
+  });
 
   const QUALITY_SUBCATEGORIES = <%- JSON.stringify(subcategorias || []).replace(/</g, '\u003c') %>;
   const QUALITY_CATEGORIES = <%- JSON.stringify(categorias || []).replace(/</g, '\u003c') %>;
@@ -2201,6 +2705,9 @@ document.addEventListener("DOMContentLoaded", () => {
   const erpFilter = document.getElementById("panel-erp-filter");
   const lvFilter = document.getElementById("panel-lv-filter");
   const stockFilter = document.getElementById("panel-stock-filter");
+  const stockQtyFilter = document.getElementById("panel-stock-qty");
+  const orderFilter = document.getElementById("panel-order-filter");
+  const pageSizeFilter = document.getElementById("panel-page-size");
   const filteredProductsCount = document.getElementById("filtered-products-count");
   const rows = document.querySelectorAll("#products-table-body .product-row");
 
@@ -2654,8 +3161,14 @@ document.addEventListener("DOMContentLoaded", () => {
     row.dataset.lvActive = lvActive ? 'true' : 'false';
     row.classList.toggle('erp-inactive', !erpActive);
     row.classList.toggle('lv-inactive', !lvActive);
-    const lvPanel = row.querySelector('.quality-channel-status:has(select[name="lvActive"])');
+    const lvPanel = row.querySelector('.quality-lv-detail-card');
     if (lvPanel) lvPanel.classList.toggle('quality-lv-controls-disabled', !lvActive);
+    const erpControl = row.querySelector('[data-channel-status="erp"]');
+    const lvControl = row.querySelector('[data-channel-status="lv"]');
+    erpControl?.classList.toggle('is-active', erpActive);
+    erpControl?.classList.toggle('is-inactive', !erpActive);
+    lvControl?.classList.toggle('is-active', lvActive);
+    lvControl?.classList.toggle('is-inactive', !lvActive);
   }
 
   function normalizeProductSearch(value) {
@@ -2682,6 +3195,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const selectedErp = erpFilter?.value || "";
     const selectedLv = lvFilter?.value || "";
     const selectedStock = stockFilter?.value || "";
+    const selectedStockQty = Number(stockQtyFilter?.value || 0);
     let visibleCount = 0;
 
     rows.forEach(row => {
@@ -2704,8 +3218,15 @@ document.addEventListener("DOMContentLoaded", () => {
       const stockControlled = (row.querySelector('input[name="stockControlled"]')?.value || row.dataset.stockControlled) === "true";
       let matchesStock = true;
       if (selectedStock === "service") matchesStock = isService;
-      else if (selectedStock === "positive") matchesStock = !isService && stockControlled && stockValue > 0;
-      else if (selectedStock === "zero") matchesStock = !isService && stockControlled && stockValue <= 0;
+      else if (selectedStock) {
+        if (isService) matchesStock = false;
+        else if (selectedStock === "gt") matchesStock = stockValue > selectedStockQty;
+        else if (selectedStock === "gte") matchesStock = stockValue >= selectedStockQty;
+        else if (selectedStock === "eq") matchesStock = stockValue === selectedStockQty;
+        else if (selectedStock === "lte") matchesStock = stockValue <= selectedStockQty;
+        else if (selectedStock === "lt") matchesStock = stockValue < selectedStockQty;
+        else if (selectedStock === "neq") matchesStock = stockValue !== selectedStockQty;
+      }
 
       let matchesCategory = false;
       if (selectedCategory === "") matchesCategory = true;
@@ -2722,7 +3243,9 @@ document.addEventListener("DOMContentLoaded", () => {
         && selectedCategory === String(QUALITY_LIST_STATE.category || '')
         && selectedErp === String(QUALITY_LIST_STATE.erpStatus || '')
         && selectedLv === String(QUALITY_LIST_STATE.lvStatus || '')
-        && !selectedStock;
+        && selectedStock === String(QUALITY_LIST_STATE.stockOp || '')
+        && Number(selectedStockQty) === Number(QUALITY_LIST_STATE.stockQty || 0)
+        && String(orderFilter?.value || '') === String(QUALITY_LIST_STATE.order || '');
       filteredProductsCount.textContent = String(serverStateMatches ? (QUALITY_LIST_STATE.totalFiltered ?? visibleCount) : visibleCount);
     }
     updateSelectionCount();
@@ -2992,20 +3515,37 @@ document.addEventListener("DOMContentLoaded", () => {
       setOrDelete('categoria', categoryFilter?.value || '');
       setOrDelete('erpStatus', erpFilter?.value || '');
       setOrDelete('lvStatus', lvFilter?.value || '');
+      setOrDelete('stockOp', stockFilter?.value || '');
+      if (stockFilter?.value && stockFilter.value !== 'service') params.set('stockQty', String(Number(stockQtyFilter?.value || 0)));
+      else params.delete('stockQty');
+      setOrDelete('order', orderFilter?.value || '');
+      if (pageSizeFilter?.value) params.set('pageSize', pageSizeFilter.value);
       window.location.href = `/produtos?${params.toString()}`;
     }, delay);
   }
 
-  // A busca local responde imediatamente, mas a paginação no servidor só acontece
-  // depois de uma pausa real na digitação. Isso evita recarregar a página a cada letra.
-  searchInput?.addEventListener("input", () => { navigateServerFilteredList(700); });
+  // Busca manual: nada acontece enquanto o usuário está digitando.
+  // Executa apenas ao pressionar Enter ou clicar em Buscar.
+  const searchButton = document.getElementById('panel-search-button');
   searchInput?.addEventListener("keydown", event => {
     if (event.key === 'Enter') { event.preventDefault(); navigateServerFilteredList(0); }
   });
+  searchButton?.addEventListener('click', () => navigateServerFilteredList(0));
   categoryFilter?.addEventListener("change", () => { filterTable(); navigateServerFilteredList(0); });
   erpFilter?.addEventListener("change", () => { filterTable(); navigateServerFilteredList(0); });
   lvFilter?.addEventListener("change", () => { filterTable(); navigateServerFilteredList(0); });
-  stockFilter?.addEventListener("change", filterTable);
+  const syncStockQuantityState = () => {
+    if (!stockQtyFilter) return;
+    const operator = stockFilter?.value || '';
+    stockQtyFilter.disabled = !operator || operator === 'service';
+  };
+  // O filtro de estoque é manual: escolher o operador ou digitar a quantidade não
+  // recarrega a tela no meio da configuração. Aplica ao clicar em Buscar ou Enter.
+  stockFilter?.addEventListener("change", syncStockQuantityState);
+  stockQtyFilter?.addEventListener("keydown", event => { if (event.key === 'Enter') { event.preventDefault(); navigateServerFilteredList(0); } });
+  orderFilter?.addEventListener("change", () => navigateServerFilteredList(0));
+  pageSizeFilter?.addEventListener("change", () => navigateServerFilteredList(0));
+  syncStockQuantityState();
 
   document.querySelectorAll(".product-check").forEach(chk => {
     chk.addEventListener("change", updateSelectionCount);
@@ -3238,7 +3778,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function comboLineLabel(line) {
     const p = (line || '').split('|').map(v => v.trim());
-    return [p[0], p[1], p[2], p[3]].filter(Boolean).join(' + ') + (p[4] ? ' 🖼️' : '') + (p[5] ? ' • Est: ' + p[5] : '') + (p[6] ? ' • R$ ' + Number(p[6]).toLocaleString('pt-BR',{minimumFractionDigits:2,maximumFractionDigits:2}) : ' • preço do pai');
+    return [p[0], p[1], p[2], p[3]].filter(Boolean).join(' + ') + (p[4] ? ' 🖼️' : '') + (p[5] ? ' • Est: ' + p[5] : '') + (p[6] ? ' • Venda R$ ' + Number(p[6]).toLocaleString('pt-BR',{minimumFractionDigits:2,maximumFractionDigits:2}) : ' • venda do pai') + (p[7] ? ' • Compra R$ ' + Number(p[7]).toLocaleString('pt-BR',{minimumFractionDigits:2,maximumFractionDigits:2}) : ' • compra do pai') + (p[8] ? ' • Margem ' + Number(p[8]).toLocaleString('pt-BR',{maximumFractionDigits:2}) + '%' : '');
   }
 
   function colorNameFromLine(line) { return (line || '').split('|')[0].trim(); }
@@ -3272,7 +3812,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function lineParts(line){
       const parts=String(line||'').split('|').map(function(v){return v.trim();});
-      while(parts.length<7)parts.push('');
+      while(parts.length<8)parts.push('');
       return parts;
     }
     function key(parts){ return parts.slice(0,4).join('|'); }
@@ -3293,14 +3833,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function generateForOrphan(field,value){
       const others=(dimensions||[]).filter(function(entry){return entry[0]!==field;});
-      let rows=[['','','','','','','']];
+      let rows=[['','','','','','','','','']];
       others.forEach(function(entry){
         const otherField=entry[0], values=entry[1]||[], idx=fieldIndex[otherField];
         rows=rows.flatMap(function(base){
           return values.map(function(option){const copy=base.slice();copy[idx]=option;return copy;});
         });
       });
-      if(!others.length)rows=[['','','','','','','']];
+      if(!others.length)rows=[['','','','','','','','','']];
       rows.forEach(function(parts){parts[fieldIndex[field]]=value;push(parts);});
     }
 
@@ -3361,7 +3901,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
         if (comboIndex < 0) return;
         const parts = comboLines[comboIndex].split('|').map(v => v.trim());
-        while (parts.length < 7) parts.push('');
+        while (parts.length < 9) parts.push('');
         const wrap = document.createElement('span');
         wrap.className = 'quality-variation-inline-price';
         const label = document.createElement('small');
@@ -3379,13 +3919,54 @@ document.addEventListener("DOMContentLoaded", () => {
           });
           if (currentIndex < 0) return;
           const cp = current[currentIndex].split('|').map(v => v.trim());
-          while (cp.length < 7) cp.push('');
+          while (cp.length < 9) cp.push('');
           cp[6] = input.value.trim();
           current[currentIndex] = cp.join('|').replace(/\|+$/,'');
           comboTextarea.value = current.join('\n');
           comboTextarea.dispatchEvent(new Event('input', { bubbles:true }));
         });
         wrap.appendChild(label); wrap.appendChild(input);
+        const costLabel = document.createElement('small');
+        costLabel.textContent = 'Preço compra';
+        const costInput = document.createElement('input');
+        costInput.type = 'number'; costInput.min = '0'; costInput.step = '0.01';
+        costInput.placeholder = 'Herdar pai'; costInput.value = parts[7] || '';
+        costInput.title = 'Vazio = usa o preço de compra do cadastro pai';
+        costInput.addEventListener('click', e => e.stopPropagation());
+        costInput.addEventListener('change', () => {
+          const current = parseLines(comboTextarea.value);
+          const currentIndex = current.findIndex(line => {
+            const p = line.split('|').map(v => v.trim());
+            return (p[fieldIndex] || '') === value;
+          });
+          if (currentIndex < 0) return;
+          const cp = current[currentIndex].split('|').map(v => v.trim());
+          while (cp.length < 9) cp.push('');
+          cp[7] = costInput.value.trim();
+          current[currentIndex] = cp.join('|').replace(/\|+$/,'');
+          comboTextarea.value = current.join('\n');
+          comboTextarea.dispatchEvent(new Event('input', { bubbles:true }));
+        });
+        wrap.appendChild(costLabel); wrap.appendChild(costInput);
+        const marginLabel = document.createElement('small');
+        marginLabel.textContent = 'Margem alvo %';
+        const marginInput = document.createElement('input');
+        marginInput.type = 'number'; marginInput.min = '0'; marginInput.step = '0.01';
+        marginInput.placeholder = 'Herdar'; marginInput.value = parts[8] || '';
+        marginInput.title = 'Margem sobre custo específica da variação. Vazio = herda produto/categoria.';
+        marginInput.addEventListener('click', e => e.stopPropagation());
+        marginInput.addEventListener('change', () => {
+          const current = parseLines(comboTextarea.value);
+          const currentIndex = current.findIndex(line => { const p = line.split('|').map(v => v.trim()); return (p[fieldIndex] || '') === value; });
+          if (currentIndex < 0) return;
+          const cp = current[currentIndex].split('|').map(v => v.trim());
+          while (cp.length < 9) cp.push('');
+          cp[8] = marginInput.value.trim();
+          current[currentIndex] = cp.join('|').replace(/\|+$/,'');
+          comboTextarea.value = current.join('\n');
+          comboTextarea.dispatchEvent(new Event('input', { bubbles:true }));
+        });
+        wrap.appendChild(marginLabel); wrap.appendChild(marginInput);
         const removeBtn = pill.querySelector('button');
         pill.insertBefore(wrap, removeBtn || null);
       });
@@ -3396,7 +3977,7 @@ document.addEventListener("DOMContentLoaded", () => {
     comboList.innerHTML = '';
     comboLines.forEach((line, index) => {
       const parts = line.split('|').map(v => v.trim());
-      while (parts.length < 7) parts.push('');
+      while (parts.length < 9) parts.push('');
       const pill = document.createElement('span');
       pill.className = 'quality-combo-pill';
       const text = document.createElement('span');
@@ -3417,13 +3998,54 @@ document.addEventListener("DOMContentLoaded", () => {
       priceInput.addEventListener('change', () => {
         const current = parseLines(comboTextarea.value);
         const currentParts = (current[index] || line).split('|').map(v => v.trim());
-        while (currentParts.length < 7) currentParts.push('');
+        while (currentParts.length < 9) currentParts.push('');
         currentParts[6] = priceInput.value.trim();
         current[index] = currentParts.join('|').replace(/\|+$/,'');
         comboTextarea.value = current.join('\n');
         comboTextarea.dispatchEvent(new Event('input', { bubbles:true }));
       });
       pill.appendChild(priceInput);
+      const costLabel = document.createElement('span');
+      costLabel.className = 'quality-combo-cost-label';
+      costLabel.textContent = 'Preço compra';
+      pill.appendChild(costLabel);
+      const costInput = document.createElement('input');
+      costInput.type = 'number';
+      costInput.min = '0';
+      costInput.step = '0.01';
+      costInput.placeholder = 'Herdar pai';
+      costInput.className = 'quality-combo-cost-inline';
+      costInput.value = parts[7] || '';
+      costInput.title = 'Vazio = usa o preço de compra do cadastro pai';
+      costInput.addEventListener('change', () => {
+        const current = parseLines(comboTextarea.value);
+        const currentParts = (current[index] || line).split('|').map(v => v.trim());
+        while (currentParts.length < 9) currentParts.push('');
+        currentParts[7] = costInput.value.trim();
+        current[index] = currentParts.join('|').replace(/\|+$/,'');
+        comboTextarea.value = current.join('\n');
+        comboTextarea.dispatchEvent(new Event('input', { bubbles:true }));
+      });
+      pill.appendChild(costInput);
+      const marginLabel = document.createElement('span');
+      marginLabel.className = 'quality-combo-margin-label';
+      marginLabel.textContent = 'Margem alvo %';
+      pill.appendChild(marginLabel);
+      const marginInput = document.createElement('input');
+      marginInput.type = 'number'; marginInput.min = '0'; marginInput.step = '0.01';
+      marginInput.placeholder = 'Herdar'; marginInput.className = 'quality-combo-margin-inline';
+      marginInput.value = parts[8] || '';
+      marginInput.title = 'Margem sobre custo específica desta variação. Vazio = herda produto/categoria.';
+      marginInput.addEventListener('change', () => {
+        const current = parseLines(comboTextarea.value);
+        const currentParts = (current[index] || line).split('|').map(v => v.trim());
+        while (currentParts.length < 9) currentParts.push('');
+        currentParts[8] = marginInput.value.trim();
+        current[index] = currentParts.join('|').replace(/\|+$/,'');
+        comboTextarea.value = current.join('\n');
+        comboTextarea.dispatchEvent(new Event('input', { bubbles:true }));
+      });
+      pill.appendChild(marginInput);
       const remove = document.createElement('button');
       remove.type = 'button';
       remove.textContent = '×';
@@ -3488,8 +4110,10 @@ document.addEventListener("DOMContentLoaded", () => {
         const image = (box.querySelector('.var-combo-image')?.value || '').trim();
         const stock = (box.querySelector('.var-combo-stock')?.value || '').trim();
         const price = (box.querySelector('.var-combo-price')?.value || '').trim();
+        const cost = (box.querySelector('.var-combo-cost')?.value || '').trim();
+        const margin = (box.querySelector('.var-combo-margin')?.value || '').trim();
         if (!color && !storage && !ram && !condition) return alert('Escolha pelo menos uma opção para a combinação.');
-        const line = [color, storage, ram, condition, image, stock, price].join('|').replace(/\|+$/,'');
+        const line = [color, storage, ram, condition, image, stock, price, cost, margin].join('|').replace(/\|+$/,'');
         const textarea = getVarTextarea(box, 'combinations');
         const list = parseLines(textarea.value);
         uniquePush(list, line);
@@ -3498,9 +4122,13 @@ document.addEventListener("DOMContentLoaded", () => {
         const imageInput = box.querySelector('.var-combo-image');
         const stockInput = box.querySelector('.var-combo-stock');
         const priceInput = box.querySelector('.var-combo-price');
+        const costInput = box.querySelector('.var-combo-cost');
+        const marginInput = box.querySelector('.var-combo-margin');
         if (imageInput) imageInput.value = '';
         if (stockInput) stockInput.value = '';
         if (priceInput) priceInput.value = '';
+        if (costInput) costInput.value = '';
+        if (marginInput) marginInput.value = '';
         renderVariationBox(box);
       });
     });
@@ -3902,9 +4530,8 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   function qltCodeFromRow(row){
-    const raw = String(row?.dataset?.id || "0").replace(/\D/g, "");
-    const suffix = raw.slice(-6).padStart(6, "0");
-    return "QLT-" + suffix;
+    const internal = getRowField(row, 'input[name="internalCode"]') || String(row?.dataset?.id || "");
+    return String(internal).replace(/\D/g, "") || String(row?.dataset?.id || "");
   }
 
   function getRowField(row, selector){
@@ -3947,12 +4574,12 @@ document.addEventListener("DOMContentLoaded", () => {
   function parseComboLines(text){
     return (text || "").split(/\r?\n/).map(line => line.trim()).filter(Boolean).map(line => {
       const parts = line.split("|").map(v => v.trim());
-      return { color: parts[0] || "", storage: parts[1] || "", ram: parts[2] || "", condition: parts[3] || "", image: parts[4] || "", stock: parts[5] || "", erpPrice: parts[6] || "" };
+      return { color: parts[0] || "", storage: parts[1] || "", ram: parts[2] || "", condition: parts[3] || "", image: parts[4] || "", stock: parts[5] || "", erpPrice: parts[6] || "", costPrice: parts[7] || "", desiredMarginPercent: parts[8] || "" };
     });
   }
 
   function comboToLine(c){
-    return [c.color, c.storage, c.ram, c.condition, c.image, c.stock, c.erpPrice].map(function(x){return x===undefined||x===null?'':x;}).join("|").replace(/\|+$/,'');
+    return [c.color, c.storage, c.ram, c.condition, c.image, c.stock, c.erpPrice, c.costPrice, c.desiredMarginPercent].map(function(x){return x===undefined||x===null?'':x;}).join("|").replace(/\|+$/,'');
   }
 
   function comboLabel(c){
@@ -4212,16 +4839,50 @@ document.addEventListener("DOMContentLoaded", () => {
     btn.addEventListener("click", () => openEditProductModal(btn.closest("tr")));
   });
 
-  editProductClose?.addEventListener("click", closeEditProductModal);
-  editProductCancel?.addEventListener("click", closeEditProductModal);
-  editProductModal?.addEventListener("click", e => { if (e.target === editProductModal) closeEditProductModal(); });
+  const leaveProductEditor = () => {
+    if (!QUALITY_PRODUCT_EDITOR_MODE) return closeEditProductModal();
+    if (window.history.length > 1) window.history.back();
+    else window.location.href = '/produtos?origem=erp';
+  };
+  editProductClose?.addEventListener("click", leaveProductEditor);
+  editProductCancel?.addEventListener("click", leaveProductEditor);
+  editProductModal?.addEventListener("click", e => { if (!QUALITY_PRODUCT_EDITOR_MODE && e.target === editProductModal) closeEditProductModal(); });
   editProductSave?.addEventListener("click", async () => {
     if (!activeEditRow) return;
     const touchedFields = Array.from(activeEditTouchedFields);
     applyEditModalToRow(activeEditRow);
     const saved = await saveProductRow(activeEditRow, { touchedFields });
-    if (saved) closeEditProductModal();
+    if (saved && !QUALITY_PRODUCT_EDITOR_MODE) closeEditProductModal();
+    if (saved && QUALITY_PRODUCT_EDITOR_MODE) {
+      if (flashMessage) { flashMessage.textContent = '✅ Produto salvo com sucesso.'; flashMessage.style.display = 'block'; setTimeout(()=>flashMessage.style.display='none',2500); }
+    }
   });
+
+  const editorRow = () => activeEditRow || document.querySelector('.product-row');
+  document.getElementById('editor-open-description')?.addEventListener('click',()=>editorRow()?.querySelector('.manage-description-btn')?.click());
+  document.getElementById('editor-open-gallery')?.addEventListener('click',()=>editorRow()?.querySelector('.manage-gallery-btn')?.click());
+  document.getElementById('editor-open-tags')?.addEventListener('click',()=>editorRow()?.querySelector('.manage-tags-btn')?.click());
+  document.getElementById('editor-open-variations')?.addEventListener('click',()=>editorRow()?.querySelector('.manage-variations-btn')?.click());
+  document.getElementById('editor-open-history')?.addEventListener('click',()=>editorRow()?.querySelector('.quality-history-btn')?.click());
+
+  if (QUALITY_PRODUCT_EDITOR_MODE) {
+    // O editor ainda usa a linha oculta como fonte de dados, mas visualmente deve
+    // nascer no topo da página. Mover o bloco para o início elimina qualquer
+    // espaço herdado da estrutura da listagem sem duplicar lógica de cadastro.
+    const editorRoute = document.querySelector('.quality-editor-route');
+    if (editorRoute && editProductModal) editorRoute.prepend(editProductModal);
+    // Aproveita a área livre do cabeçalho: recursos rápidos ficam ao lado do nome/foto,
+    // em vez de consumir uma linha inteira abaixo do produto.
+    const editorHeader = editProductModal?.querySelector('.quality-edit-modal-header');
+    const editorResources = editProductModal?.querySelector('.quality-editor-resources');
+    if (editorHeader && editorResources && editProductClose) {
+      editorResources.classList.add('is-header-resources');
+      editorHeader.insertBefore(editorResources, editProductClose);
+    }
+    const row = document.querySelector('.product-row');
+    if (row) openEditProductModal(row);
+    requestAnimationFrame(() => window.scrollTo({ top: 0, left: 0, behavior: 'auto' }));
+  }
 
   updateAddGallerySummary();
   updateSelectionCount();
@@ -4376,7 +5037,11 @@ async function sincronizarImagensAuto() {
   document.querySelectorAll('.quality-history-btn').forEach(btn=>btn.addEventListener('click',async()=>{
     const row=btn.closest('.product-row'); if(!row)return; const id=row.dataset.id; const name=row.querySelector('.prod-name-input')?.value||'Produto';
     title.textContent=`Histórico · ${name}`; body.innerHTML='<p>Carregando histórico...</p>'; modal.hidden=false;
-    try{const j=await fetch(`/produtos/api/${encodeURIComponent(id)}/historico`).then(r=>r.json()); if(!j.success)throw new Error(j.message);
+    try{
+      const response=await fetch(`/produtos/api/${encodeURIComponent(id)}/historico`,{headers:{'Accept':'application/json'}});
+      const raw=await response.text(); let j={};
+      try{j=raw?JSON.parse(raw):{};}catch(_){throw new Error('O histórico retornou uma resposta inválida. Recarregue a página e tente novamente.');}
+      if(!response.ok||!j.success)throw new Error(j.message||`Falha HTTP ${response.status}`);
       body.innerHTML=(j.events||[]).length?(j.events||[]).map(e=>`<div style="border-bottom:1px solid var(--border,#333);padding:10px 2px"><div style="display:flex;justify-content:space-between;gap:12px"><strong>${esc(e.label)}</strong><small>${esc(fmt(e.at))}</small></div><small>${esc(e.source||'')} · ${esc(e.actor||'sistema')}</small></div>`).join(''):'<p>Nenhum evento registrado para este produto.</p>';
     }catch(error){body.innerHTML=`<p>⚠️ ${esc(error.message||'Não foi possível carregar o histórico.')}</p>`;}
   }));

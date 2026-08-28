@@ -51,12 +51,14 @@
           ['🏢','Empresa','Dados cadastrais, contatos, endereço e identidade.'],
           ['🏬','Filiais e unidades','Matriz, lojas, escritórios ou outras unidades.'],
           ['🧩','Módulos','Ativar apenas as áreas necessárias para cada empresa.'],
-          ['👤','Usuários e permissões','Perfis, acessos e responsabilidades.'],
+          ['👤','Usuários e permissões','Perfis, acessos, vendedores, técnicos e responsabilidades.','/configuracoes/usuarios'],
           ['💼','Caixa e PDV','Regras por caixa, conferência, vendedores, colunas e formas de pagamento.','/erp/configuracoes/caixa-pdv'],
           ['👥','Cadastro de Clientes','Campos visíveis, obrigatórios e ordem do formulário.','/configuracoes/clientes'],
           ['🏭','Cadastro de Fornecedores','Campos visíveis, obrigatórios e consulta de CNPJ.','/configuracoes/fornecedores'],
+          ['🚚','Transportadoras e entregas','Cadastre Correios, transportadoras, motoboys e outros métodos usados no frete do PDV.','/configuracoes/transportadoras'],
           ['💰','Financeiro','Formas de pagamento, plano de contas, centros de custo e parâmetros.','/configuracoes/financeiro'],
-          ['🎟️','Cupons de desconto','Criar cupons fixos ou percentuais para uso no PDV.','/configuracoes/cupons'],
+          ['🔑','Chave temporária de desconto','Gere autorizações de uso único para descontos acima do limite do vendedor.','/configuracoes/cupons#chave-temporaria'],
+          ['🎟️','Descontos e cupons','Cadastre cupons promocionais, limites e períodos de utilização.','/configuracoes/cupons#cupons'],
           ['🏷️','Status de Vendas e O.S.','Personalizar status operacionais e definir padrões por tipo de operação.','/erp/configuracoes/status-operacoes'],
           ['🖨️','Comprovantes e Impressões','Editar dados, formato e conteúdo padrão das impressões do ERP.','/erp/configuracoes/comprovantes'],
           ['🧾','Fiscal','Configurações fiscais isoladas e protegidas.'],
@@ -73,7 +75,7 @@
       </div>
       <div class="settings-admin-actions">
         <a class="settings-admin-link" href="/kernel"><span>📜</span><div><strong>Logs e Auditoria</strong><small>Pesquisar ações, abrir detalhes e exportar registros.</small></div><b>→</b></a>
-        <div class="settings-admin-link planned"><span>🔐</span><div><strong>Usuários e Permissões</strong><small>Estrutura preparada; ativação junto com login e sessões.</small></div><b>Planejado</b></div>
+        <a class="settings-admin-link" href="/configuracoes/usuarios"><span>🔐</span><div><strong>Usuários e Permissões</strong><small>Cadastre equipe, perfis, vendedores, técnicos e senhas.</small></div><b>→</b></a>
         <div class="settings-admin-link planned"><span>📄</span><div><strong>Centro de Documentos</strong><small>Numeração universal e relacionamentos entre operações.</small></div><b>Fundação</b></div>
       </div>
     </div>

@@ -1,0 +1,267 @@
+<% layout('layout') -%>
+<% const canManageCommissions = typeof can==='function' ? can('commissions.manage') : true; const canManageUsers = typeof can==='function' ? can('users.manage') : true; %>
+<section class="mc-page" data-mc-page>
+  <header class="mc-hero">
+    <div>
+      <span class="mc-kicker">GESTÃO · EQUIPE</span>
+      <h1>🎯 Metas e Comissões</h1>
+      <p>Metas da loja e vendedores, comissão por venda ou financeiro recebido, faixas progressivas, regras por categoria e fechamento integrado ao Financeiro.</p>
+    </div>
+    <div class="mc-hero-actions">
+      <% if(canManageUsers){ %><a class="btn" href="/configuracoes/usuarios">👤 Usuários</a><% } %>
+      <a class="btn" href="/erp/relatorios#sellers">📋 Desempenho</a>
+    </div>
+  </header>
+
+  <section class="mc-period-card">
+    <label><span>Periodicidade</span><select data-periodicity><option value="monthly">Mensal</option><option value="weekly">Semanal</option></select></label>
+    <label data-month-field><span>Mês</span><input type="month" data-period-month></label>
+    <label data-week-field hidden><span>Semana</span><input type="date" data-period-week><small>Escolha qualquer dia da semana</small></label>
+    <label><span>Loja</span><select data-store><% (boot.stores||[]).forEach(function(store){ %><option value="<%= store.id %>"><%= store.name %></option><% }) %></select></label>
+    <button type="button" class="btn primary" data-refresh>Atualizar</button>
+  </section>
+
+  <nav class="mc-tabs" aria-label="Metas e comissões">
+    <button type="button" class="active" data-tab="settlement">Apuração</button>
+    <% if(canManageCommissions){ %><button type="button" data-tab="goals">Metas</button>
+    <button type="button" data-tab="rules">Regras de comissão</button><% } %>
+  </nav>
+
+  <section data-tab-panel="settlement">
+    <div class="mc-summary" data-summary></div>
+    <section class="mc-card">
+      <div class="mc-card-head"><div><h2>Apuração dos vendedores</h2><p>Valores ao vivo enquanto a apuração estiver aberta. Ao fechar, a regra e o detalhamento ficam congelados.</p></div><span class="mc-period-label" data-period-label></span></div>
+      <div class="mc-table-wrap" data-settlement-table><div class="mc-loading">Calculando...</div></div>
+    </section>
+  </section>
+
+  <section data-tab-panel="goals" hidden>
+    <div class="mc-grid-two">
+      <section class="mc-card">
+        <div class="mc-card-head"><div><h2>Meta da loja</h2><p>Usada no acompanhamento e nas regras condicionadas à meta da loja.</p></div></div>
+        <form class="mc-goal-form" data-goals-form>
+          <label><span>Meta do período</span><div class="mc-money-input"><b>R$</b><input type="number" step="0.01" min="0" data-store-target></div></label>
+          <label><span>Como medir a meta da loja</span><select data-store-basis><option value="sale">Venda concluída</option><option value="received">Financeiro recebido</option></select><small>No recebido, crediário conta somente conforme as parcelas forem pagas.</small></label>
+          <div class="mc-goal-actions"><button class="btn primary" type="submit">Salvar metas</button></div>
+        </form>
+      </section>
+      <section class="mc-card">
+        <div class="mc-card-head"><div><h2>Metas individuais</h2><p>Meta de acompanhamento de cada vendedor. As faixas de comissão são configuradas separadamente.</p></div></div>
+        <div class="mc-user-goals" data-user-goals></div>
+      </section>
+    </div>
+  </section>
+
+  <section data-tab-panel="rules" hidden>
+    <section class="mc-card">
+      <div class="mc-card-head"><div><h2>Regras por vendedor</h2><p>Os vendedores vêm exclusivamente dos usuários ativos marcados como <b>Vendedor</b>.</p></div><% if(canManageUsers){ %><a class="btn" href="/configuracoes/usuarios">Gerenciar usuários</a><% } %></div>
+      <div class="mc-rule-list" data-rule-list></div>
+    </section>
+  </section>
+</section>
+
+<div class="mc-modal" data-detail-modal hidden>
+  <div class="mc-modal-card mc-modal-wide">
+    <button type="button" class="mc-close" data-detail-close>×</button>
+    <div data-detail-content></div>
+  </div>
+</div>
+
+<div class="mc-modal" data-rule-modal hidden>
+  <form class="mc-modal-card mc-rule-modal" data-rule-form>
+    <button type="button" class="mc-close" data-rule-close>×</button>
+    <div class="mc-modal-head"><span>REGRA DE COMISSÃO</span><h2 data-rule-title>Configurar vendedor</h2><p>As alterações afetam apenas períodos ainda não fechados.</p></div>
+    <input type="hidden" name="userId">
+    <div class="mc-rule-main">
+      <label class="mc-switch-line"><input type="checkbox" name="active"><span><b>Comissão ativa</b><small>Habilita a apuração para este vendedor.</small></span></label>
+      <label><span>Periodicidade</span><select name="periodicity"><option value="monthly">Mensal</option><option value="weekly">Semanal</option></select></label>
+      <label><span>Base da comissão</span><select name="basis"><option value="sale">Venda concluída</option><option value="received">Financeiro recebido</option></select></label>
+      <label><span>Tipo de comissão</span><select name="scope"><option value="own_sales">Próprias vendas (P)</option><option value="store_sales">Vendas da loja inteira (L)</option><option value="own_sales_if_store_goal">Próprias vendas se a meta da loja for atingida (M)</option></select></label>
+      <label><span>Loja</span><select name="storeId"><% (boot.stores||[]).forEach(function(store){ %><option value="<%= store.id %>"><%= store.name %></option><% }) %></select></label>
+    </div>
+    <fieldset class="mc-operation-types"><legend>Movimentos que geram comissão</legend><label><input type="checkbox" name="includeSales"> Vendas</label><label><input type="checkbox" name="includeServiceOrders"> Ordens de Serviço</label></fieldset>
+
+    <section class="mc-rule-section">
+      <div class="mc-rule-section-head"><div><h3>Faixas de comissão</h3><p>O sistema usa a maior faixa atingida no período.</p></div><button type="button" class="btn" data-add-tier>+ Faixa</button></div>
+      <div class="mc-tier-list" data-tier-list></div>
+      <div class="mc-note">Ex.: R$ 20.000 → 1,5%; R$ 30.000 → 2%. Também é possível definir um valor fixo de comissão para a faixa.</div>
+    </section>
+
+    <section class="mc-rule-section">
+      <div class="mc-rule-section-head"><div><h3>Comissão por categoria</h3><p>Percentual específico substitui a faixa geral naquele item. Não é aplicado quando a regra for “Loja inteira (L)”.</p></div><button type="button" class="btn" data-add-category>+ Categoria</button></div>
+      <div class="mc-category-list" data-category-list></div>
+    </section>
+
+    <div class="mc-modal-actions"><button type="button" class="btn" data-rule-close>Cancelar</button><button type="submit" class="btn primary" data-rule-save>Salvar regra</button></div>
+  </form>
+</div>
+
+<div class="mc-modal" data-finance-modal hidden>
+  <form class="mc-modal-card mc-finance-card" data-finance-form>
+    <button type="button" class="mc-close" data-finance-close>×</button>
+    <div class="mc-modal-head"><span>FINANCEIRO</span><h2>Lançar comissão como despesa</h2><p data-finance-description></p></div>
+    <input type="hidden" name="settlementId">
+    <div class="mc-finance-amount" data-finance-amount></div>
+    <label><span>Vencimento</span><input type="date" name="dueDate" required></label>
+    <label><span>Forma prevista de pagamento</span><select name="paymentMethodId" required><option value="">Selecione...</option><% (boot.paymentMethods||[]).forEach(function(method){ %><option value="<%= method.id %>"><%= method.name %></option><% }) %></select></label>
+    <div class="mc-note">Será criada uma única conta em <b>Contas a Pagar</b>, vinculada à apuração. O sistema bloqueia lançamento duplicado.</div>
+    <div class="mc-modal-actions"><button type="button" class="btn" data-finance-close>Cancelar</button><button type="submit" class="btn primary">Gerar conta a pagar</button></div>
+  </form>
+</div>
+
+<script>window.QUALITY_MC_BOOT=<%- JSON.stringify({...boot,canManage:canManageCommissions}) %>;</script>
+<script>
+(()=>{
+  const boot=window.QUALITY_MC_BOOT||{};
+  const canManage=boot.canManage!==false;
+  const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
+  const esc=value=>String(value??'').replace(/[&<>"']/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
+  const brl=value=>Number(value||0).toLocaleString('pt-BR',{style:'currency',currency:'BRL'});
+  const number=(value,digits=0)=>Number(value||0).toLocaleString('pt-BR',{minimumFractionDigits:digits,maximumFractionDigits:digits});
+  const pct=value=>`${number(value,2)}%`;
+  const fmtDate=value=>{if(!value)return '—';const raw=String(value).slice(0,10);const p=raw.split('-');return p.length===3?`${p[2]}/${p[1]}/${p[0]}`:raw;};
+  const today=()=>{const d=new Date();return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;};
+  const api=async(url,options={})=>{const response=await fetch(url,{headers:{Accept:'application/json','Content-Type':'application/json',...(options.headers||{})},...options});const data=await response.json();if(!response.ok||data.success===false)throw new Error(data.message||'Não foi possível concluir.');return data;};
+  const periodicity=$('[data-periodicity]'),monthInput=$('[data-period-month]'),weekInput=$('[data-period-week]'),store=$('[data-store]');
+  const monthField=$('[data-month-field]'),weekField=$('[data-week-field]'),summaryEl=$('[data-summary]'),tableEl=$('[data-settlement-table]'),periodLabel=$('[data-period-label]');
+  const goalForm=$('[data-goals-form]'),storeTarget=$('[data-store-target]'),storeBasis=$('[data-store-basis]'),userGoals=$('[data-user-goals]'),ruleList=$('[data-rule-list]');
+  let config=null,summary=null,activeTab='settlement';
+
+  periodicity.value=boot.periodicity||'monthly';
+  if(periodicity.value==='monthly')monthInput.value=String(boot.periodKey||'').slice(0,7);else weekInput.value=boot.periodKey||today();
+  if((boot.stores||[])[0]&&!store.value)store.value=boot.stores[0].id;
+
+  function current(){return {periodicity:periodicity.value,periodKey:periodicity.value==='monthly'?monthInput.value:weekInput.value,storeId:store.value||'STORE-MAIN'};}
+  function syncPeriodFields(){const weekly=periodicity.value==='weekly';monthField.hidden=weekly;weekField.hidden=!weekly;if(weekly&&!weekInput.value)weekInput.value=today();if(!weekly&&!monthInput.value)monthInput.value=today().slice(0,7);}
+  function qs(params){return new URLSearchParams(params).toString();}
+  function scopeLabel(value){return value==='store_sales'?'Loja inteira (L)':value==='own_sales_if_store_goal'?'Próprias + meta loja (M)':'Próprias vendas (P)';}
+  function basisLabel(value){return value==='received'?'Financeiro recebido':'Venda concluída';}
+  function tierLabel(tier){if(!tier)return 'Sem faixa';return tier.remunerationType==='fixed'?`${brl(tier.value)} fixo`:`${number(tier.value,2)}%`;}
+  function statusBadge(row){if(row.settlement?.status==='posted')return '<span class="mc-status posted">Financeiro</span>';if(row.settlement)return '<span class="mc-status closed">Fechada</span>';if(row.rule?.active)return '<span class="mc-status open">Em apuração</span>';return '<span class="mc-status off">Sem regra</span>';}
+  function progress(value,max){const p=max?Math.min(100,Math.max(0,(Number(value||0)/Number(max||1))*100)):0;return `<div class="mc-progress"><span style="width:${p}%"></span></div>`;}
+  function toast(message,kind='ok'){let el=$('[data-mc-toast]');if(!el){el=document.createElement('div');el.dataset.mcToast='';el.className='mc-toast';document.body.appendChild(el);}el.textContent=message;el.className=`mc-toast ${kind}`;el.hidden=false;clearTimeout(el._t);el._t=setTimeout(()=>el.hidden=true,3200);}
+
+  async function loadAll(){
+    syncPeriodFields();tableEl.innerHTML='<div class="mc-loading">Calculando metas e comissões...</div>';summaryEl.innerHTML='';
+    const p=current();
+    try{
+      const [cfg,sum]=await Promise.all([api(`/erp/api/metas-comissoes/config?${qs(p)}`),api(`/erp/api/metas-comissoes/summary?${qs(p)}`)]);
+      config=cfg;summary=sum;renderAll();
+    }catch(error){tableEl.innerHTML=`<div class="mc-error">${esc(error.message)}</div>`;toast(error.message,'error');}
+  }
+
+  function renderAll(){renderSummary();renderSettlement();renderGoals();renderRules();}
+  function renderSummary(){
+    const g=summary?.storeGoal||{},t=summary?.totals||{},period=summary?.period||{};periodLabel.textContent=period.label||'';
+    const parseDay=value=>{const raw=String(value||'').slice(0,10);const [y,m,d]=raw.split('-').map(Number);return y&&m&&d?new Date(y,m-1,d,12):null;};
+    const from=parseDay(period.from),to=parseDay(period.to),now=parseDay(today());
+    const dayMs=86400000,totalDays=from&&to?Math.max(1,Math.round((to-from)/dayMs)+1):0;
+    let elapsedDays=totalDays,remainingDays=0;
+    if(from&&to&&now){elapsedDays=now<from?0:now>to?totalDays:Math.max(1,Math.round((now-from)/dayMs)+1);remainingDays=now>to?0:now<from?totalDays:Math.max(1,Math.round((to-now)/dayMs)+1);}
+    const neededPerDay=g.target&&!g.reached&&remainingDays?Number(g.remaining||0)/remainingDays:0;
+    const projection=g.target&&elapsedDays&&totalDays?Number(g.achieved||0)/elapsedDays*totalDays:0;
+    const projectionLabel=!g.target?'Meta não configurada':projection>=Number(g.target||0)?'✅ Tendência de atingir':'Abaixo do ritmo da meta';
+    summaryEl.innerHTML=`
+      <div class="mc-stat"><span>Meta da loja</span><strong>${brl(g.target)}</strong><small>${basisLabel(g.basis)}</small></div>
+      <div class="mc-stat"><span>Atingido</span><strong>${brl(g.achieved)}</strong><small>${g.target?pct(g.percent):'Meta não configurada'}</small>${progress(g.achieved,g.target)}</div>
+      <div class="mc-stat"><span>Falta</span><strong>${brl(g.remaining)}</strong><small>${g.reached?'✅ Meta atingida':remainingDays?`${number(remainingDays)} dia(s) restante(s)`:'Período encerrado'}</small></div>
+      <div class="mc-stat"><span>Necessário por dia</span><strong>${g.reached?'—':brl(neededPerDay)}</strong><small>${g.target&&!g.reached&&remainingDays?'Para alcançar a meta no prazo':'Sem necessidade calculada'}</small></div>
+      <div class="mc-stat"><span>Projeção do período</span><strong>${g.target?brl(projection):'—'}</strong><small>${projectionLabel}</small></div>
+      <div class="mc-stat"><span>Comissões</span><strong>${brl(t.commission)}</strong><small>${number(t.closed)} fechada(s) · ${number(t.posted)} no Financeiro</small></div>`;
+  }
+
+  function renderSettlement(){
+    const rows=summary?.rows||[];
+    if(!rows.length){tableEl.innerHTML='<div class="mc-empty"><b>Nenhum vendedor para esta periodicidade.</b><span>Cadastre usuários marcados como Vendedor e configure a regra mensal ou semanal.</span></div>';return;}
+    tableEl.innerHTML=`<table class="mc-table"><thead><tr><th>Vendedor</th><th>Regra</th><th>Vendas próprias</th><th>Meta individual</th><th>Faixa atingida</th><th>Próxima faixa</th><th>Comissão</th><th>Status</th><th></th></tr></thead><tbody>${rows.map(row=>{
+      const ug=row.userGoal||{},next=row.nextTier,diff=Number(row.differenceToNext||0);
+      return `<tr>
+        <td><div class="mc-person"><b>${esc(row.user?.name||'—')}</b><small>${esc(row.user?.username||'')}</small></div></td>
+        <td><div class="mc-rule-cell"><b>${esc(scopeLabel(row.rule?.scope))}</b><small>${esc(basisLabel(row.rule?.basis))}</small></div></td>
+        <td class="num"><b>${brl(row.totals?.ownSales)}</b><small>${number(row.totals?.operations)} venda(s) elegível(is)</small></td>
+        <td><div class="mc-goal-cell"><b>${ug.target?brl(ug.target):'Não definida'}</b><small>${ug.target?pct(ug.percent):'Configure em Metas'}</small>${ug.target?progress(ug.achieved,ug.target):''}</div></td>
+        <td class="num"><b>${tierLabel(row.tier)}</b><small>${row.tier?`a partir de ${brl(row.tier.minValue)}`:'Nenhuma'}</small></td>
+        <td class="num"><b>${next?brl(next.minValue):'Máxima'}</b><small>${next?`faltam ${brl(diff)}`:'Sem próxima faixa'}</small></td>
+        <td class="num"><strong class="mc-commission">${brl(row.totals?.commission)}</strong><small>${row.allowed?'Base '+brl(row.totals?.eligibleBase):esc(row.blockedReason||'Sem comissão')}</small></td>
+        <td>${statusBadge(row)}</td>
+        <td><div class="mc-actions">${actionButtons(row)}</div></td>
+      </tr>`;
+    }).join('')}</tbody></table>`;
+    $$('[data-detail-user]').forEach(btn=>btn.addEventListener('click',()=>openDetail(btn.dataset.detailUser)));
+    $$('[data-close-settlement]').forEach(btn=>btn.addEventListener('click',()=>closeSettlement(btn.dataset.closeSettlement)));
+    $$('[data-reopen-settlement]').forEach(btn=>btn.addEventListener('click',()=>reopenSettlement(btn.dataset.reopenSettlement)));
+    $$('[data-finance-settlement]').forEach(btn=>btn.addEventListener('click',()=>openFinance(btn.dataset.financeSettlement)));
+  }
+  function actionButtons(row){
+    const detail=`<button type="button" data-detail-user="${esc(row.user.id)}">Detalhes</button>`;
+    if(!canManage)return detail;
+    if(row.settlement?.status==='posted')return `${detail}<a href="/erp/financeiro/contas-a-pagar" class="mc-link-btn">Ver financeiro</a>`;
+    if(row.settlement)return `${detail}<button type="button" data-finance-settlement="${esc(row.settlement.id)}">Lançar despesa</button><button type="button" data-reopen-settlement="${esc(row.settlement.id)}">Reabrir</button>`;
+    if(row.rule?.active)return `${detail}<button type="button" class="primary" data-close-settlement="${esc(row.user.id)}">Fechar</button>`;
+    return `${detail}<button type="button" data-edit-rule="${esc(row.user.id)}">Configurar</button>`;
+  }
+
+  function renderGoals(){
+    const goals=config?.goals||{},users=config?.users||[],userMap=goals.userGoals||{};
+    storeTarget.value=Number(goals.storeGoal?.target||0)||'';storeBasis.value=goals.storeGoal?.basis||'sale';
+    userGoals.innerHTML=users.length?users.map(user=>`<label class="mc-user-goal"><span><b>${esc(user.name)}</b><small>${esc(user.username||'')}</small></span><div class="mc-money-input"><b>R$</b><input type="number" min="0" step="0.01" data-user-goal="${esc(user.id)}" value="${Number(userMap[user.id]?.target||0)||''}" placeholder="0,00"></div></label>`).join(''):'<div class="mc-empty">Nenhum vendedor ativo.</div>';
+  }
+
+  function renderRules(){
+    const users=config?.users||[],rules=new Map((config?.rules||[]).map(r=>[String(r.userId),r]));
+    ruleList.innerHTML=users.length?users.map(user=>{const rule=rules.get(String(user.id))||{};return `<article class="mc-rule-item"><div class="mc-person"><b>${esc(user.name)}</b><small>${esc(user.username||'')}</small></div><div class="mc-rule-cell"><b>${rule.active?scopeLabel(rule.scope):'Comissão não configurada'}</b><small>${rule.active?`${basisLabel(rule.basis)} · ${rule.periodicity==='weekly'?'Semanal':'Mensal'}`:'Ative quando desejar começar a apuração'}</small></div><div class="mc-rule-tags">${(rule.tiers||[]).slice(0,3).map(t=>`<span>${brl(t.minValue)} → ${tierLabel(t)}</span>`).join('')}${(rule.tiers||[]).length>3?`<em>+${rule.tiers.length-3}</em>`:''}</div><button class="btn" type="button" data-edit-rule="${esc(user.id)}">Configurar</button></article>`;}).join(''):'<div class="mc-empty"><b>Cadastre os vendedores primeiro.</b><span>Em Configurações → Usuários, marque a função Vendedor.</span></div>';
+    $$('[data-edit-rule]').forEach(btn=>btn.addEventListener('click',()=>openRule(btn.dataset.editRule)));
+  }
+
+  goalForm.addEventListener('submit',async event=>{
+    event.preventDefault();const p=current(),button=goalForm.querySelector('button[type=submit]');button.disabled=true;
+    try{await api('/erp/api/metas-comissoes/goals',{method:'POST',body:JSON.stringify({...p,storeTarget:Number(storeTarget.value||0),storeBasis:storeBasis.value,userGoals:$$('[data-user-goal]').map(input=>({userId:input.dataset.userGoal,target:Number(input.value||0)}))})});toast('Metas salvas.');await loadAll();}catch(error){toast(error.message,'error');}finally{button.disabled=false;}
+  });
+
+  const ruleModal=$('[data-rule-modal]'),ruleForm=$('[data-rule-form]'),tierList=$('[data-tier-list]'),categoryList=$('[data-category-list]');
+  function ruleFor(userId){return (config?.rules||[]).find(r=>String(r.userId)===String(userId))||{userId,active:false,periodicity:'monthly',basis:'sale',scope:'own_sales',storeId:store.value,includeSales:true,includeServiceOrders:true,tiers:[{minValue:0,remunerationType:'percent',value:0}],categoryRules:[]};}
+  function openRule(userId){
+    const user=(config?.users||[]).find(u=>String(u.id)===String(userId)),rule=ruleFor(userId);if(!user)return;
+    ruleForm.reset();ruleForm.elements.userId.value=userId;ruleForm.elements.active.checked=rule.active===true;ruleForm.elements.periodicity.value=rule.periodicity||'monthly';ruleForm.elements.basis.value=rule.basis||'sale';ruleForm.elements.scope.value=rule.scope||'own_sales';ruleForm.elements.storeId.value=rule.storeId||store.value;ruleForm.elements.includeSales.checked=rule.includeSales!==false;ruleForm.elements.includeServiceOrders.checked=rule.includeServiceOrders!==false;$('[data-rule-title]').textContent=user.name;
+    tierList.innerHTML='';(rule.tiers||[]).forEach(addTierRow);if(!tierList.children.length)addTierRow({minValue:0,remunerationType:'percent',value:0});
+    categoryList.innerHTML='';(rule.categoryRules||[]).filter(r=>r.active!==false).forEach(addCategoryRow);ruleModal.hidden=false;
+  }
+  function closeRule(){ruleModal.hidden=true;}
+  function addTierRow(row={}){const wrap=document.createElement('div');wrap.className='mc-tier-row';wrap.innerHTML=`<label><span>Venda/recebido a partir de</span><div class="mc-money-input"><b>R$</b><input type="number" min="0" step="0.01" data-tier-min value="${Number(row.minValue||0)}"></div></label><label><span>Remuneração</span><select data-tier-type><option value="percent" ${row.remunerationType!=='fixed'?'selected':''}>Percentual</option><option value="fixed" ${row.remunerationType==='fixed'?'selected':''}>Valor fixo no período</option></select></label><label><span>Valor</span><input type="number" min="0" step="0.01" data-tier-value value="${Number(row.value||0)}"></label><button type="button" data-remove-row aria-label="Remover">×</button>`;wrap.querySelector('[data-remove-row]').addEventListener('click',()=>wrap.remove());tierList.appendChild(wrap);}
+  function addCategoryRow(row={}){const wrap=document.createElement('div');wrap.className='mc-category-row';wrap.innerHTML=`<label><span>Categoria</span><select data-category-id><option value="">Selecione...</option>${(boot.categories||[]).map(c=>`<option value="${esc(c.id)}" ${String(c.id)===String(row.categoryId)?'selected':''}>${esc(c.name)}</option>`).join('')}</select></label><label><span>Comissão</span><div class="mc-percent-input"><input type="number" min="0" step="0.01" data-category-percent value="${Number(row.percent||0)}"><b>%</b></div></label><button type="button" data-remove-row aria-label="Remover">×</button>`;wrap.querySelector('[data-remove-row]').addEventListener('click',()=>wrap.remove());categoryList.appendChild(wrap);}
+  $('[data-add-tier]').addEventListener('click',()=>addTierRow({}));$('[data-add-category]').addEventListener('click',()=>addCategoryRow({}));$$('[data-rule-close]').forEach(btn=>btn.addEventListener('click',closeRule));
+  ruleForm.addEventListener('submit',async event=>{
+    event.preventDefault();const userId=ruleForm.elements.userId.value,button=$('[data-rule-save]');button.disabled=true;
+    const tiers=$$('.mc-tier-row').map(row=>({minValue:Number(row.querySelector('[data-tier-min]').value||0),remunerationType:row.querySelector('[data-tier-type]').value,value:Number(row.querySelector('[data-tier-value]').value||0)}));
+    const categoryRules=$$('.mc-category-row').map(row=>({categoryId:row.querySelector('[data-category-id]').value,percent:Number(row.querySelector('[data-category-percent]').value||0),active:true})).filter(row=>row.categoryId);
+    try{await api(`/erp/api/metas-comissoes/rules/${encodeURIComponent(userId)}`,{method:'POST',body:JSON.stringify({active:ruleForm.elements.active.checked,periodicity:ruleForm.elements.periodicity.value,basis:ruleForm.elements.basis.value,scope:ruleForm.elements.scope.value,storeId:ruleForm.elements.storeId.value,includeSales:ruleForm.elements.includeSales.checked,includeServiceOrders:ruleForm.elements.includeServiceOrders.checked,tiers,categoryRules})});closeRule();toast('Regra de comissão salva.');await loadAll();}catch(error){toast(error.message,'error');}finally{button.disabled=false;}
+  });
+
+  async function openDetail(userId){
+    const modal=$('[data-detail-modal]'),content=$('[data-detail-content]');modal.hidden=false;content.innerHTML='<div class="mc-loading">Carregando detalhamento...</div>';
+    try{const data=await api(`/erp/api/metas-comissoes/users/${encodeURIComponent(userId)}?${qs(current())}`),c=data.calculation||{},details=c.details||[];content.innerHTML=`<div class="mc-modal-head"><span>DETALHAMENTO DA COMISSÃO</span><h2>${esc(c.user?.name||'Vendedor')} · ${esc(c.period?.label||'')}</h2><p>${esc(scopeLabel(c.rule?.scope))} · ${esc(basisLabel(c.rule?.basis))}${c.settlement?' · apuração fechada':''}</p></div><div class="mc-detail-summary"><div><span>Base elegível</span><b>${brl(c.totals?.eligibleBase)}</b></div><div><span>Faixa</span><b>${tierLabel(c.tier)}</b></div><div><span>Comissão</span><b>${brl(c.totals?.commission)}</b></div><div><span>Meta loja</span><b>${c.storeGoal?.target?pct(c.storeGoal.percent):'—'}</b></div></div>${c.blockedReason?`<div class="mc-warning">${esc(c.blockedReason)}</div>`:''}<div class="mc-table-wrap"><table class="mc-table compact"><thead><tr><th>Data</th><th>Venda</th><th>Produto</th><th>Origem</th><th>Base</th><th>%</th><th>Comissão</th></tr></thead><tbody>${details.length?details.map(r=>`<tr><td>${fmtDate(r.eventDate)}</td><td><a href="/erp/centro-operacoes?operacao=${encodeURIComponent(r.operationId)}">#${esc(r.operationNumber)}</a></td><td><div class="mc-product"><b>${esc(r.product)}</b><small>${esc([r.code,r.categoryName].filter(Boolean).join(' · '))}${r.categoryOverride?' · regra da categoria':''}</small></div></td><td>${r.source==='receipt'?`Recebimento ${esc(r.receiptNumber||'')}`:'Venda'}</td><td class="num">${brl(r.base)}</td><td class="num">${r.commissionRate===null?'Fixo':pct(r.commissionRate)}</td><td class="num"><b>${brl(r.commission)}</b></td></tr>`).join(''):`<tr><td colspan="7" class="mc-empty-cell">Nenhum item elegível neste período.</td></tr>`}</tbody></table></div>`;}catch(error){content.innerHTML=`<div class="mc-error">${esc(error.message)}</div>`;}
+  }
+  function closeDetail(){$('[data-detail-modal]').hidden=true;} $('[data-detail-close]').addEventListener('click',closeDetail);
+
+  async function closeSettlement(userId){const row=(summary?.rows||[]).find(r=>String(r.user?.id)===String(userId));if(!row)return;if(!confirm(`Fechar a comissão de ${row.user.name} em ${brl(row.totals?.commission)}? Depois disso as regras deste período ficam congeladas.`))return;try{await api('/erp/api/metas-comissoes/settlements/close',{method:'POST',body:JSON.stringify({...current(),userId})});toast('Apuração fechada.');await loadAll();}catch(error){toast(error.message,'error');}}
+  async function reopenSettlement(id){if(!confirm('Reabrir esta apuração? Ela voltará a recalcular com as regras atuais.'))return;try{await api(`/erp/api/metas-comissoes/settlements/${encodeURIComponent(id)}/reopen`,{method:'POST',body:'{}'});toast('Apuração reaberta.');await loadAll();}catch(error){toast(error.message,'error');}}
+
+  const financeModal=$('[data-finance-modal]'),financeForm=$('[data-finance-form]');
+  function openFinance(id){const row=(summary?.rows||[]).find(r=>String(r.settlement?.id)===String(id));if(!row)return;financeForm.reset();financeForm.elements.settlementId.value=id;financeForm.elements.dueDate.value=today();$('[data-finance-description]').textContent=`${row.user.name} · ${row.period?.label||summary.period?.label||''}`;$('[data-finance-amount]').textContent=brl(row.totals?.commission);financeModal.hidden=false;}
+  function closeFinance(){financeModal.hidden=true;}$$('[data-finance-close]').forEach(btn=>btn.addEventListener('click',closeFinance));
+  financeForm.addEventListener('submit',async event=>{event.preventDefault();const button=financeForm.querySelector('button[type=submit]');button.disabled=true;try{const id=financeForm.elements.settlementId.value;await api(`/erp/api/metas-comissoes/settlements/${encodeURIComponent(id)}/finance`,{method:'POST',body:JSON.stringify({dueDate:financeForm.elements.dueDate.value,paymentMethodId:financeForm.elements.paymentMethodId.value})});closeFinance();toast('Comissão lançada em Contas a Pagar.');await loadAll();}catch(error){toast(error.message,'error');}finally{button.disabled=false;}});
+
+  function activateTab(name){activeTab=name;$$('[data-tab]').forEach(btn=>btn.classList.toggle('active',btn.dataset.tab===name));$$('[data-tab-panel]').forEach(panel=>panel.hidden=panel.dataset.tabPanel!==name);}
+  $$('[data-tab]').forEach(btn=>btn.addEventListener('click',()=>activateTab(btn.dataset.tab)));
+  periodicity.addEventListener('change',()=>{syncPeriodFields();loadAll();});monthInput.addEventListener('change',loadAll);weekInput.addEventListener('change',loadAll);store.addEventListener('change',loadAll);$('[data-refresh]').addEventListener('click',loadAll);
+  [ruleModal,$('[data-detail-modal]'),financeModal].forEach(modal=>modal?.addEventListener('click',event=>{if(event.target!==modal)return;if(modal===ruleModal)closeRule();else if(modal===financeModal)closeFinance();else closeDetail();}));
+  document.addEventListener('keydown',event=>{if(event.key==='Escape'){closeRule();closeFinance();closeDetail();}});
+  syncPeriodFields();loadAll();
+})();
+</script>
+
+<style>
+.mc-page{display:grid;gap:14px}.mc-hero,.mc-period-card,.mc-card{background:var(--card);border:1px solid var(--line);border-radius:15px}.mc-hero{padding:18px 20px;display:flex;justify-content:space-between;gap:18px;align-items:flex-start}.mc-kicker{font-size:10px;font-weight:900;letter-spacing:.13em;color:var(--muted)}.mc-hero h1{margin:4px 0 5px;font-size:27px;color:var(--text)}.mc-hero p{margin:0;color:var(--muted);max-width:900px}.mc-hero-actions{display:flex;gap:7px;flex-wrap:wrap}.mc-period-card{padding:11px 13px;display:flex;gap:9px;align-items:end;flex-wrap:wrap}.mc-period-card label{display:grid;gap:4px;min-width:150px}.mc-period-card label span,.mc-goal-form label>span,.mc-rule-main label>span,.mc-finance-card label>span,.mc-tier-row label>span,.mc-category-row label>span{font-size:10px;text-transform:uppercase;font-weight:900;color:var(--muted)}.mc-period-card input,.mc-period-card select,.mc-goal-form input,.mc-goal-form select,.mc-rule-main select,.mc-finance-card input,.mc-finance-card select,.mc-tier-row input,.mc-tier-row select,.mc-category-row select,.mc-category-row input{height:38px;border:1px solid var(--line);border-radius:9px;background:var(--card);color:var(--text);padding:0 10px}.mc-period-card small,.mc-goal-form small{font-size:9px;color:var(--muted)}.mc-tabs{display:flex;gap:5px;border-bottom:1px solid var(--line);padding:0 4px}.mc-tabs button{border:0;background:transparent;color:var(--muted);font-weight:800;padding:10px 13px;border-bottom:2px solid transparent;cursor:pointer}.mc-tabs button.active{color:var(--brand);border-color:var(--brand)}
+.mc-summary{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:9px;margin-bottom:12px}.mc-stat{background:var(--card);border:1px solid var(--line);border-radius:13px;padding:13px}.mc-stat>span{font-size:10px;text-transform:uppercase;font-weight:900;color:var(--muted)}.mc-stat strong{display:block;font-size:22px;margin:4px 0;color:var(--text)}.mc-stat small{display:block;color:var(--muted);font-size:10px}.mc-progress{height:5px;border-radius:999px;background:color-mix(in srgb,var(--card) 78%,var(--text));overflow:hidden;margin-top:7px}.mc-progress span{display:block;height:100%;background:var(--brand);border-radius:inherit}.mc-card{overflow:hidden}.mc-card-head{padding:13px 15px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;gap:12px}.mc-card-head h2{margin:0 0 3px;font-size:16px;color:var(--text)}.mc-card-head p{margin:0;color:var(--muted);font-size:11px}.mc-period-label{font-size:11px;font-weight:800;color:var(--muted)}.mc-table-wrap{overflow:auto}.mc-table{width:100%;border-collapse:collapse;font-size:11px;white-space:nowrap}.mc-table th{text-align:left;padding:8px 9px;font-size:9px;text-transform:uppercase;letter-spacing:.04em;color:var(--muted);background:color-mix(in srgb,var(--card) 94%,var(--text));border-bottom:1px solid var(--line)}.mc-table td{padding:9px;border-bottom:1px solid var(--line);color:var(--text);vertical-align:middle}.mc-table .num{text-align:right}.mc-table td small{display:block;color:var(--muted);font-size:9px;margin-top:2px}.mc-table a{color:var(--brand);font-weight:800}.mc-person,.mc-rule-cell,.mc-goal-cell,.mc-product{display:grid;gap:2px;white-space:normal;min-width:125px}.mc-person small,.mc-rule-cell small,.mc-product small{color:var(--muted);font-size:9px}.mc-commission{font-size:14px;color:#16a34a}.mc-status{padding:4px 7px;border-radius:999px;font-size:9px;font-weight:900}.mc-status.open{background:color-mix(in srgb,#2563eb 12%,var(--card));color:#2563eb}.mc-status.closed{background:color-mix(in srgb,#f59e0b 14%,var(--card));color:#b45309}.mc-status.posted{background:color-mix(in srgb,#16a34a 14%,var(--card));color:#15803d}.mc-status.off{background:color-mix(in srgb,#64748b 13%,var(--card));color:var(--muted)}.mc-actions{display:flex;gap:4px}.mc-actions button,.mc-link-btn{border:1px solid var(--line);background:var(--card);color:var(--text);border-radius:7px;padding:5px 7px;font:inherit;font-size:9px;cursor:pointer;text-decoration:none}.mc-actions .primary{border-color:var(--brand);color:var(--brand);font-weight:900}.mc-loading,.mc-error,.mc-empty{padding:28px;text-align:center;color:var(--muted)}.mc-error{color:#dc2626}.mc-empty{display:grid;gap:5px}.mc-grid-two{display:grid;grid-template-columns:minmax(300px,.7fr) minmax(420px,1.3fr);gap:12px}.mc-goal-form{padding:15px;display:grid;gap:12px}.mc-goal-form label{display:grid;gap:5px}.mc-money-input,.mc-percent-input{display:flex;align-items:center;border:1px solid var(--line);border-radius:9px;background:var(--card);overflow:hidden}.mc-money-input>b,.mc-percent-input>b{padding:0 9px;color:var(--muted);font-size:11px}.mc-money-input input,.mc-percent-input input{border:0!important;border-radius:0!important;min-width:0;width:100%}.mc-goal-actions{display:flex;justify-content:flex-end}.mc-user-goals{display:grid}.mc-user-goal{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:10px 14px;border-bottom:1px solid var(--line)}.mc-user-goal>span{display:grid}.mc-user-goal small{color:var(--muted);font-size:9px}.mc-user-goal .mc-money-input{width:180px}.mc-rule-list{display:grid}.mc-rule-item{display:grid;grid-template-columns:minmax(150px,.7fr) minmax(230px,1.2fr) 1fr auto;gap:12px;align-items:center;padding:11px 14px;border-bottom:1px solid var(--line)}.mc-rule-tags{display:flex;gap:4px;flex-wrap:wrap}.mc-rule-tags span,.mc-rule-tags em{padding:4px 6px;border-radius:999px;background:color-mix(in srgb,var(--card) 88%,var(--text));font-size:9px;color:var(--text);font-style:normal}.mc-modal{position:fixed;inset:0;z-index:1400;background:rgba(15,23,42,.58);display:grid;place-items:center;padding:18px}.mc-modal[hidden]{display:none}.mc-modal-card{position:relative;width:min(720px,96vw);max-height:92vh;overflow:auto;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px;box-shadow:0 28px 80px rgba(0,0,0,.3)}.mc-modal-wide{width:min(1120px,97vw)}.mc-rule-modal{width:min(940px,97vw)}.mc-finance-card{width:min(480px,96vw);display:grid;gap:10px}.mc-close{position:absolute;right:11px;top:9px;border:0;background:transparent;color:var(--muted);font-size:26px;cursor:pointer}.mc-modal-head>span{font-size:9px;letter-spacing:.13em;font-weight:900;color:var(--muted)}.mc-modal-head h2{margin:3px 0;color:var(--text)}.mc-modal-head p{margin:0 0 13px;color:var(--muted);font-size:11px}.mc-rule-main{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.mc-rule-main label,.mc-finance-card label,.mc-tier-row label,.mc-category-row label{display:grid;gap:4px}.mc-switch-line{grid-column:1/-1;display:flex!important;align-items:flex-start;gap:8px;padding:9px;border:1px solid var(--line);border-radius:10px}.mc-switch-line span{display:grid;gap:2px}.mc-switch-line small{font-size:9px;color:var(--muted)}.mc-operation-types{border:1px solid var(--line);border-radius:10px;margin:12px 0;padding:10px;display:flex;gap:18px}.mc-operation-types legend{font-size:10px;font-weight:900;color:var(--muted);padding:0 5px}.mc-rule-section{border-top:1px solid var(--line);padding-top:13px;margin-top:13px}.mc-rule-section-head{display:flex;justify-content:space-between;gap:12px;align-items:start;margin-bottom:8px}.mc-rule-section-head h3{margin:0 0 2px;font-size:14px;color:var(--text)}.mc-rule-section-head p{margin:0;color:var(--muted);font-size:10px}.mc-tier-list,.mc-category-list{display:grid;gap:6px}.mc-tier-row{display:grid;grid-template-columns:1.1fr .8fr .7fr 34px;gap:6px;align-items:end;padding:8px;border:1px solid var(--line);border-radius:10px}.mc-category-row{display:grid;grid-template-columns:1fr 180px 34px;gap:6px;align-items:end;padding:8px;border:1px solid var(--line);border-radius:10px}.mc-tier-row>button,.mc-category-row>button{height:38px;border:1px solid var(--line);border-radius:8px;background:var(--card);color:#dc2626;font-size:19px;cursor:pointer}.mc-note{padding:9px 10px;margin-top:8px;border-radius:9px;background:color-mix(in srgb,var(--brand) 7%,var(--card));color:var(--muted);font-size:10px;line-height:1.45}.mc-modal-actions{display:flex;justify-content:flex-end;gap:7px;margin-top:14px}.mc-detail-summary{display:grid;grid-template-columns:repeat(4,1fr);gap:7px;margin:10px 0 13px}.mc-detail-summary div{border:1px solid var(--line);border-radius:10px;padding:9px}.mc-detail-summary span{display:block;color:var(--muted);font-size:9px;text-transform:uppercase;font-weight:900}.mc-detail-summary b{display:block;color:var(--text);font-size:15px;margin-top:3px}.mc-warning{padding:9px;border-radius:9px;background:color-mix(in srgb,#f59e0b 13%,var(--card));color:var(--text);margin-bottom:10px}.mc-finance-amount{font-size:27px;font-weight:900;color:#16a34a;padding:9px 0}.mc-toast{position:fixed;right:18px;bottom:18px;z-index:1700;background:#166534;color:#fff;padding:10px 14px;border-radius:10px;box-shadow:0 10px 30px rgba(0,0,0,.25);font-size:12px;font-weight:800}.mc-toast.error{background:#b91c1c}.mc-empty-cell{text-align:center!important;padding:28px!important;color:var(--muted)!important}
+@media(max-width:1250px){.mc-summary{grid-template-columns:repeat(3,1fr)}}@media(max-width:1050px){.mc-summary{grid-template-columns:repeat(2,1fr)}.mc-grid-two{grid-template-columns:1fr}.mc-rule-item{grid-template-columns:1fr 1fr}.mc-rule-item>.btn{justify-self:start}.mc-rule-main{grid-template-columns:1fr 1fr}}@media(max-width:700px){.mc-hero{display:grid}.mc-period-card{display:grid;grid-template-columns:1fr 1fr}.mc-period-card label{min-width:0}.mc-summary{grid-template-columns:1fr 1fr}.mc-rule-item{grid-template-columns:1fr}.mc-rule-main,.mc-tier-row,.mc-category-row,.mc-detail-summary{grid-template-columns:1fr}.mc-tier-row>button,.mc-category-row>button{width:44px}.mc-user-goal{align-items:stretch;display:grid}.mc-user-goal .mc-money-input{width:100%}}
+</style>

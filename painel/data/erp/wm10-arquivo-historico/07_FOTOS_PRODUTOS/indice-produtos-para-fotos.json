@@ -1,0 +1,9 @@
+{
+  "archiveVersion": "1.1",
+  "capturedAt": "2026-08-27T14:56:06.193Z",
+  "endpoint": "produto_foto/",
+  "note": "A API WM10 exige cod_produto para consultar fotos. A consulta em massa não foi executada automaticamente para evitar uma requisição paga por produto.",
+  "endpointTemplate": "produto_foto/?cod_produto={COD_PRODUTO}",
+  "productCount": 0,
+  "products": []
+}

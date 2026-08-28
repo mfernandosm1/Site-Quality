@@ -21,9 +21,13 @@ const require = createRequire(import.meta.url);
 const router = express.Router();
 const ROUTES_DIR = path.dirname(fileURLToPath(import.meta.url));
 const PANEL_DIR = path.resolve(ROUTES_DIR, '..');
-const MODULE_VERSION = '0.12.6-schedules-inbox-ux';
+const MODULE_VERSION = '0.12.7-whatsapp-safety';
 const CLIENT_INITIALIZE_TIMEOUT_MS = 90000;
 const BIRTHDAY_TIMEZONE = 'America/Sao_Paulo';
+const DEFAULT_BIRTHDAY_INTERVAL_SECONDS = 45;
+const MIN_AUTOMATED_BIRTHDAY_INTERVAL_SECONDS = 45;
+const SCHEDULED_QUEUE_GAP_MS = 5000;
+const AUTOMATED_BLOCK_GAP_MS = 1800;
 const DEFAULT_BIRTHDAY_MESSAGE = `Olá {primeiro_nome} 😃
 Hoje é um dia especial 🎈
 Desejamos um aniversário maravilhoso, repleto de alegria e momentos inesquecíveis 🎂🥳🎉
@@ -297,7 +301,7 @@ function defaults(){
       horarioAniversario: '08:00',
       mensagemAniversario: DEFAULT_BIRTHDAY_MESSAGE,
       mensagemAniversarioAtrasado: DEFAULT_LATE_BIRTHDAY_MESSAGE,
-      intervaloAniversarioSegundos: 30,
+      intervaloAniversarioSegundos: DEFAULT_BIRTHDAY_INTERVAL_SECONDS,
       limiteDiario: 40,
       delayHumanoMin: 4,
       delayHumanoMax: 12,
@@ -320,6 +324,7 @@ function ensureData(app){
   if(!fs.existsSync(filePath(app, 'aniversariantes_envios.json'))) writeJson(app, 'aniversariantes_envios.json', { version:1, items:[] });
   if(!fs.existsSync(filePath(app, 'mensagens_agendadas.json'))) writeJson(app, 'mensagens_agendadas.json', { version:1, items:[] });
   if(!fs.existsSync(filePath(app, 'palavras_chave.json'))) writeJson(app, 'palavras_chave.json', { version:1, items:[] });
+  if(!fs.existsSync(filePath(app, 'automacao_bloqueios.json'))) writeJson(app, 'automacao_bloqueios.json', { version:1, items:[] });
   if(!fs.existsSync(filePath(app, 'config.json'))) writeJson(app, 'config.json', d.config);
 }
 function syncLegacyMediaCatalog(app, blocos, midias){
@@ -372,6 +377,52 @@ function normalizeAutomationText(value=''){
     .replace(/[^\p{L}\p{N}\s]/gu,' ')
     .replace(/\s+/g,' ')
     .trim();
+}
+
+function automationSuppressionsData(app){
+  const raw=readJson(app,'automacao_bloqueios.json',{version:1,items:[]});
+  const items=(Array.isArray(raw?.items)?raw.items:[]).map(item=>({
+    phone:String(item?.phone||'').replace(/\D/g,''),
+    blockedAt:item?.blockedAt||null,
+    reason:safeText(item?.reason||'opt_out',80),
+    source:safeText(item?.source||'whatsapp',80)
+  })).filter(item=>item.phone);
+  return {version:1,items};
+}
+function saveAutomationSuppressions(app,data){ writeJson(app,'automacao_bloqueios.json',{version:1,items:(data?.items||[]).slice(-5000)}); }
+function automationPhoneKey(value=''){
+  let n=String(value||'').replace(/\D/g,'');
+  if((n.length===10||n.length===11)&&!n.startsWith('55'))n='55'+n;
+  return n;
+}
+function isAutomationSuppressed(app,phone=''){
+  const key=automationPhoneKey(phone);if(!key)return false;
+  return automationSuppressionsData(app).items.some(item=>item.phone===key);
+}
+function setAutomationSuppressed(app,phone='',blocked=true,{reason='opt_out',source='whatsapp'}={}){
+  const key=automationPhoneKey(phone);if(!key)return false;
+  const data=automationSuppressionsData(app);const index=data.items.findIndex(item=>item.phone===key);
+  if(blocked){
+    const next={phone:key,blockedAt:now(),reason:safeText(reason,80),source:safeText(source,80)};
+    if(index>=0)data.items[index]=next;else data.items.push(next);
+  }else if(index>=0)data.items.splice(index,1);
+  saveAutomationSuppressions(app,data);return true;
+}
+function automationPreferenceIntent(text=''){
+  const normalized=normalizeAutomationText(text);if(!normalized)return '';
+  const optIn=['quero voltar a receber','pode voltar a enviar','pode me enviar novamente','voltar a receber mensagens'];
+  if(optIn.some(item=>normalized.includes(item)))return 'opt_in';
+  const exactOut=new Set(['parar','pare','sair','descadastrar','remover meu numero','remova meu numero']);
+  if(exactOut.has(normalized))return 'opt_out';
+  const out=['nao quero receber mensagens','nao quero mais receber','nao me envie mensagens','nao envie mais mensagens','cancelar mensagens','parar de receber mensagens','remover das mensagens'];
+  if(out.some(item=>normalized.includes(item)))return 'opt_out';
+  return '';
+}
+function applyInboundAutomationPreference(app,{phone='',text=''}={}){
+  const intent=automationPreferenceIntent(text);if(!intent||!phone)return intent;
+  if(intent==='opt_out')setAutomationSuppressed(app,phone,true,{reason:'pedido_cliente',source:'mensagem_recebida'});
+  if(intent==='opt_in')setAutomationSuppressed(app,phone,false,{reason:'retorno_cliente',source:'mensagem_recebida'});
+  return intent;
 }
 function splitKeywordInput(value){
   const source=Array.isArray(value)?value.join('\n'):String(value||'');
@@ -647,17 +698,19 @@ function getMissedBirthdayDashboard(app,config){
     const phone=birthdayPhone(customer);
     const entry=findBirthdayHistoryEntry(history,clock.date,customer.id);
     const sentByPhone=phone?findBirthdaySentByPhone(history,clock.date,phone):null;
-    const status=entry?.status || (sentByPhone?'enviado':(phone?'pendente':'sem_telefone'));
+    const suppressed=phone?isAutomationSuppressed(app,phone):false;
+    const status=suppressed?'opt_out':(entry?.status || (sentByPhone?'enviado':(phone?'pendente':'sem_telefone')));
     return {
       id:customer.id,name:customer.name||'Cliente',birthDate:customer.birthDate||'',phone,
       status,error:entry?.error||'',sentAt:entry?.sentAt||null,birthdayDate:clock.date,birthdayDateLabel:dateLabel,
       message:renderBirthdayMessage(config.mensagemAniversarioAtrasado||DEFAULT_LATE_BIRTHDAY_MESSAGE,customer,{birthdayDateLabel:dateLabel})
     };
-  }).filter(row=>row.status!=='enviado');
+  }).filter(row=>row.status!=='enviado' && row.status!=='opt_out');
   return {
     date:clock.date,dateLabel,rows,total:rows.length,
     pending:rows.filter(row=>row.status==='pendente'||row.status==='erro').length,
     noPhone:rows.filter(row=>row.status==='sem_telefone').length,
+    optedOut:rows.filter(row=>row.status==='opt_out').length,
     previewMessage:renderBirthdayMessage(config.mensagemAniversarioAtrasado||DEFAULT_LATE_BIRTHDAY_MESSAGE,{name:'João da Silva'},{birthdayDateLabel:dateLabel})
   };
 }
@@ -669,7 +722,8 @@ function getBirthdayDashboard(app,config){
     const phone=birthdayPhone(customer);
     const entry=findBirthdayHistoryEntry(history,clock.date,customer.id);
     const sentByPhone=phone?findBirthdaySentByPhone(history,clock.date,phone):null;
-    let status=entry?.status || (sentByPhone?'enviado':(phone?'pendente':'sem_telefone'));
+    const suppressed=phone?isAutomationSuppressed(app,phone):false;
+    let status=suppressed?'opt_out':(entry?.status || (sentByPhone?'enviado':(phone?'pendente':'sem_telefone')));
     return {
       id:customer.id,name:customer.name||'Cliente',birthDate:customer.birthDate||'',phone,
       status,error:entry?.error||'',sentAt:entry?.sentAt||null,
@@ -679,19 +733,20 @@ function getBirthdayDashboard(app,config){
   const sent=rows.filter(row=>row.status==='enviado').length;
   const pending=rows.filter(row=>row.status==='pendente'||row.status==='erro').length;
   const noPhone=rows.filter(row=>row.status==='sem_telefone').length;
+  const optedOut=rows.filter(row=>row.status==='opt_out').length;
   const recent=(history.items||[]).slice().sort((a,b)=>String(b.updatedAt||b.createdAt||'').localeCompare(String(a.updatedAt||a.createdAt||''))).slice(0,30);
   return {
-    date:clock.date,rows,total:rows.length,sent,pending,noPhone,recent,
+    date:clock.date,rows,total:rows.length,sent,pending,noPhone,optedOut,recent,
     previewMessage:renderBirthdayMessage(config.mensagemAniversario,{name:'João da Silva'},{birthdayDateLabel:birthdayDisplayDate(clock.date)}),
     missedPreviousDay:getMissedBirthdayDashboard(app,config),
     runtime:{running:birthdayRuntime.running,lastRunAt:birthdayRuntime.lastRunAt,lastRunResult:birthdayRuntime.lastRunResult}
   };
 }
 function randomBirthdayDelay(config){
-  const configured=safeNumber(config.intervaloAniversarioSegundos,30,0,600);
-  if(configured>0) return configured*1000;
-  const min=safeNumber(config.delayHumanoMin,4,0,600),max=Math.max(min,safeNumber(config.delayHumanoMax,12,0,600));
-  return Math.round((min+Math.random()*(max-min))*1000);
+  const configured=safeNumber(config.intervaloAniversarioSegundos,DEFAULT_BIRTHDAY_INTERVAL_SECONDS,0,600);
+  // Mensagens proativas não são disparadas em rajada. O intervalo mínimo é deliberadamente
+  // conservador para reduzir envios acidentais em sequência; não substitui as regras oficiais do WhatsApp.
+  return Math.max(MIN_AUTOMATED_BIRTHDAY_INTERVAL_SECONDS,configured||DEFAULT_BIRTHDAY_INTERVAL_SECONDS)*1000;
 }
 async function sendMissedBirthdayCustomer(app,customerId,templateOverride=""){
   if(birthdayRuntime.running) return {success:false,skipped:true,message:'Já existe uma rotina de aniversariantes em execução.'};
@@ -705,6 +760,7 @@ async function sendMissedBirthdayCustomer(app,customerId,templateOverride=""){
   if(previous?.status==='enviado') return {success:false,skipped:true,message:'Este aniversário do dia anterior já foi recuperado/enviado.'};
   const phone=birthdayPhone(customer);
   if(!phone) return {success:false,skipped:true,message:'Corrija o telefone/celular deste cliente antes de enviar.'};
+  if(isAutomationSuppressed(app,phone)) return {success:false,skipped:true,message:'Este contato pediu para não receber mensagens automáticas.'};
   if(findBirthdaySentByPhone(history,clock.date,phone)) return {success:false,skipped:true,message:'Este número já recebeu a mensagem referente a esse aniversário.'};
   birthdayRuntime.running=true;
   try{
@@ -746,6 +802,7 @@ async function processMissedBirthdayRun(app,templateOverride=""){
       if(previous?.status==='enviado'){ result.alreadySent++; continue; }
       const phone=birthdayPhone(customer);
       if(!phone){ result.noPhone++; continue; }
+      if(isAutomationSuppressed(app,phone)){ result.optedOut=Number(result.optedOut||0)+1; continue; }
       if(findBirthdaySentByPhone(history,clock.date,phone)){ result.alreadySent++; continue; }
       processed++;
       const lateTemplate=safeText(templateOverride,4000) || config.mensagemAniversarioAtrasado || DEFAULT_LATE_BIRTHDAY_MESSAGE;
@@ -782,6 +839,7 @@ async function resendBirthdayCustomer(app,customerId){
   if(previous?.status==='enviado') return {success:false,skipped:true,message:'Este aniversariante já recebeu a mensagem hoje.'};
   const phone=birthdayPhone(customer);
   if(!phone) return {success:false,skipped:true,message:'Corrija o telefone/celular deste cliente antes de reenviar.'};
+  if(isAutomationSuppressed(app,phone)) return {success:false,skipped:true,message:'Este contato pediu para não receber mensagens automáticas.'};
   if(findBirthdaySentByPhone(history,clock.date,phone)) return {success:false,skipped:true,message:'Este número já recebeu uma mensagem de aniversário hoje.'};
   birthdayRuntime.running=true;
   try{
@@ -809,7 +867,7 @@ async function processBirthdayRun(app,{source='automatico',force=false}={}){
   if(!force && !config.aniversariantesAtivo) return {success:false,skipped:true,message:'Automação de aniversariantes está desativada.'};
   if(!waState.client || waState.status!=='conectado') return {success:false,skipped:true,message:'WhatsApp desconectado.'};
   birthdayRuntime.running=true;
-  const result={date:clock.date,total:0,sent:0,alreadySent:0,noPhone:0,errors:0,limited:false,source};
+  const result={date:clock.date,total:0,sent:0,alreadySent:0,noPhone:0,optedOut:0,errors:0,limited:false,source};
   try{
     const customers=getBirthdayCustomers(app,clock);
     const limit=safeNumber(config.limiteDiario,40,1,1000);
@@ -822,6 +880,7 @@ async function processBirthdayRun(app,{source='automatico',force=false}={}){
       if(source==='automatico' && previous?.status==='erro' && Number(previous.attempts||0)>=3){ result.errors++; continue; }
       const phone=birthdayPhone(customer);
       if(!phone){ result.noPhone++; continue; }
+      if(isAutomationSuppressed(app,phone)){ result.optedOut++; continue; }
       if(findBirthdaySentByPhone(history,clock.date,phone)){ result.alreadySent++; continue; }
       if(processed>=limit){ result.limited=true; break; }
       processed++;
@@ -1098,6 +1157,7 @@ async function sendScheduledMessage(app,item){
   const conversation=inboxData.conversations.find(row=>row.id===safeConversationId(item.conversationId));
   if(!conversation) throw new Error('A conversa agendada não existe mais no Inbox.');
   const destination=await resolveInboxDestination(conversation);
+  if(destination.digits && isAutomationSuppressed(app,destination.digits)) throw new Error('Este contato pediu para não receber mensagens automáticas.');
   if(item.type==='image' || item.type==='audio' || item.type==='video'){
     let absolute=localMediaPath(app,item.filePath||'');
     if(!absolute || !fs.existsSync(absolute)) throw new Error(item.type==='audio'?'O áudio agendado não foi encontrado no armazenamento.':item.type==='video'?'O vídeo agendado não foi encontrado no armazenamento.':'A imagem agendada não foi encontrada no armazenamento.');
@@ -1128,7 +1188,7 @@ async function sendScheduledMessage(app,item){
           throw new Error('Falha ao enviar o áudio como mensagem de voz: '+safeText(failures.filter(Boolean).join(' | '),420));
         }
       }
-      if(item.text) await sendWhatsAppReliable(destination.chatId,item.text);
+      if(item.text){ await sleep(1500); await sendWhatsAppReliable(destination.chatId,item.text); }
     }else{
       sent=await sendWhatsAppReliable(destination.chatId,media,{caption:item.text||undefined});
     }
@@ -1189,6 +1249,15 @@ async function processScheduledMessages(app){
       const when=Date.parse(item.scheduledAt||'');
       const retryAt=Date.parse(item.nextAttemptAt||'')||0;
       if(!Number.isFinite(when) || when>Date.now() || (retryAt && retryAt>Date.now())) continue;
+      const scheduledConversation=getInboxData(app).conversations.find(row=>row.id===safeConversationId(item.conversationId));
+      if(scheduledConversation && !isGroupConversation(scheduledConversation) && isAutomationSuppressed(app,scheduledConversation.phone)){
+        item.status='cancelado'; item.cancelledAt=now(); item.updatedAt=now(); item.nextAttemptAt=null;
+        item.lastError='Cancelado automaticamente: o contato pediu para não receber mensagens automáticas.';
+        removeScheduledFile(app,item);
+        saveScheduledMessagesData(app,data);
+        addLog(app,'inbox_agendamento_opt_out','Agendamento cancelado porque o contato pediu para não receber mensagens automáticas.',{agendamentoId:item.id,conversa:item.conversationId});
+        continue;
+      }
       item.lastAttemptAt=now();
       item.attempts=Number(item.attempts||0)+1;
       item.updatedAt=now();
@@ -1229,7 +1298,7 @@ async function processScheduledMessages(app){
         });
         saveScheduledMessagesData(app,data);
       }
-      await sleep(350);
+      await sleep(SCHEDULED_QUEUE_GAP_MS);
     }
   }finally{
     scheduledMessageRuntime.running=false;
@@ -1554,6 +1623,10 @@ async function runBlockToChat(app, destination, bloco){
         }
 
         if(sentPreview) summary.sentMessages.push(sentPreview);
+        if(sentPreview && index < totalSteps - 1){
+          const nextType=safeText(bloco.etapas[index+1]?.tipo||'',30);
+          if(nextType!=='pausa') await sleep(AUTOMATED_BLOCK_GAP_MS);
+        }
         summary.success += 1;
         addLog(app, 'bloco_etapa_enviada', `Etapa ${stepNumber}/${totalSteps} concluída: ${stepType}`, {
           blocoId: bloco.id,
@@ -1828,8 +1901,14 @@ async function createClient(app){
       if(result?.saved && result?.conversationType!=='group' && message?.hasMedia) await persistMessageMedia(app,message,result);
       if(result?.saved){
         if(result.direction === 'incoming'){
-          const flowHandled=await handlePendingFlowSelection(app,message);
-          if(!flowHandled) await handleKeywordAutomation(app,message);
+          const preference=applyInboundAutomationPreference(app,{phone:result.phone,text:message?.body||result.preview||''});
+          if(preference==='opt_out'){
+            addLog(app,'automacao_opt_out','Contato pediu para não receber mensagens automáticas.',{telefone:result.phone||null,conversa:result.conversationId});
+          }else{
+            if(preference==='opt_in') addLog(app,'automacao_opt_in','Contato voltou a autorizar mensagens automáticas.',{telefone:result.phone||null,conversa:result.conversationId});
+            const flowHandled=await handlePendingFlowSelection(app,message);
+            if(!flowHandled) await handleKeywordAutomation(app,message);
+          }
         }
         addLog(app, 'inbox_mensagem_registrada', result.direction === 'incoming' ? 'Mensagem recebida e registrada no Inbox.' : 'Mensagem enviada e registrada no Inbox.', {
           conversa: result.conversationId,
@@ -2045,7 +2124,7 @@ router.get('/', (req,res)=>{
   // arquivo de conversas várias vezes e ainda varria toda a pasta de mídias.
   const inboxSummary = getInboxSummary(req.app, inboxData);
   const commercialDashboard = getCommercialDashboard(req.app, inboxData);
-  const inboundMetrics = getInboundContactMetrics(req.app, inboxData);
+  const inboundMetrics = getInboundContactMetrics(req.app, inboxData, { month:req.query.contactMonth, compareMonth:req.query.compareMonth });
   const scheduledOverview = listScheduledOverview(req.app, 12);
   const selectedConversation = inboxData.conversations.find(c => c.id === selectedConversationId) || null;
   const selectedMessages = selectedConversation ? getConversationMessages(req.app, selectedConversation.id) : [];
@@ -2371,6 +2450,7 @@ router.post('/inbox/agendar', (req,res)=>{
       const conversation=inboxData.conversations.find(item=>item.id===conversationId);
       if(!conversation) throw new Error('Conversa não encontrada.');
       if(!isGroupConversation(conversation) && (!conversation.phoneResolved || !conversation.phone)) throw new Error('O número deste cliente ainda não foi identificado no WhatsApp.');
+      if(!isGroupConversation(conversation) && isAutomationSuppressed(req.app,conversation.phone)) throw new Error('Este contato pediu para não receber mensagens automáticas. Remova o bloqueio somente se ele autorizar novamente.');
 
       const data=scheduledMessagesData(req.app);
       const item={
@@ -2786,7 +2866,7 @@ router.post('/aniversariantes/configuracoes', (req,res)=>{
       horarioAniversario:horario,
       mensagemAniversario:mensagem,
       mensagemAniversarioAtrasado:mensagemAtrasado,
-      intervaloAniversarioSegundos:safeNumber(body.intervaloAniversarioSegundos,data.config.intervaloAniversarioSegundos||30,0,600),
+      intervaloAniversarioSegundos:safeNumber(body.intervaloAniversarioSegundos,data.config.intervaloAniversarioSegundos||DEFAULT_BIRTHDAY_INTERVAL_SECONDS,MIN_AUTOMATED_BIRTHDAY_INTERVAL_SECONDS,600),
       atualizadoEm:now(),version:MODULE_VERSION
     };
     writeJson(req.app,'config.json',config);
@@ -2797,7 +2877,7 @@ router.post('/aniversariantes/configuracoes', (req,res)=>{
 router.get('/aniversariantes/simular', (req,res)=>{
   try{
     const data=loadAll(req.app),dashboard=getBirthdayDashboard(req.app,data.config);
-    const intervalSeconds=safeNumber(data.config.intervaloAniversarioSegundos,30,0,600);
+    const intervalSeconds=Math.max(MIN_AUTOMATED_BIRTHDAY_INTERVAL_SECONDS,safeNumber(data.config.intervaloAniversarioSegundos,DEFAULT_BIRTHDAY_INTERVAL_SECONDS,0,600));
     const eligible=dashboard.rows.filter(row=>row.status==='pendente'||row.status==='erro').length;
     const estimatedSeconds=Math.max(0,(eligible-1)*intervalSeconds);
     res.set('Cache-Control','no-store');
@@ -3195,7 +3275,7 @@ router.post('/configuracoes/salvar', (req,res)=>{
     horarioAniversario: safeText(body.horarioAniversario || data.config.horarioAniversario || '08:00', 20),
     mensagemAniversario: data.config.mensagemAniversario || DEFAULT_BIRTHDAY_MESSAGE,
     aniversariantesAtivo: Boolean(data.config.aniversariantesAtivo),
-    intervaloAniversarioSegundos: safeNumber(data.config.intervaloAniversarioSegundos,30,0,600),
+    intervaloAniversarioSegundos: safeNumber(data.config.intervaloAniversarioSegundos,DEFAULT_BIRTHDAY_INTERVAL_SECONDS,MIN_AUTOMATED_BIRTHDAY_INTERVAL_SECONDS,600),
     limiteDiario: safeNumber(body.limiteDiario, 40, 1, 1000),
     delayHumanoMin: safeNumber(body.delayHumanoMin, 4, 0, 600),
     delayHumanoMax: safeNumber(body.delayHumanoMax, 12, 0, 600),

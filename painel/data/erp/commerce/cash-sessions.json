@@ -588,20 +588,118 @@
     {
       "id": "CXS-1787454001915-RC3TN",
       "cashboxId": "caixa-principal",
-      "status": "open",
+      "status": "closed",
       "openingBalance": 13113.7,
       "openingBalanceSource": "previous_closing",
       "openedAt": "2026-08-23T03:00:01.915Z",
       "openedBy": "sistema",
       "openedDay": "2026-08-23",
+      "closedAt": "2026-08-25T02:59:52.738Z",
+      "closedBy": "sistema",
+      "closingBalance": 14569.83,
+      "openingMode": "automatic",
+      "automaticShiftEventKey": "2026-08-24T00:00",
+      "automaticShiftTime": "00:00",
+      "automaticCycleDay": "2026-08-24",
+      "automaticSourceSessionId": "CXS-1787281202363-H6JSX",
+      "expectedBalance": 14569.83,
+      "difference": 0,
+      "notes": "Fechamento automático para início do turno das 00:00.",
+      "closingMode": "automatic",
+      "closedDay": "2026-08-24",
+      "closingSummary": {
+        "openingBalance": 13113.7,
+        "supplies": 0,
+        "withdrawals": 723.87,
+        "cashSales": 2180,
+        "salesTotal": 2180,
+        "byMethod": [
+          {
+            "methodId": "PAY-80aa64db-9fbf-404e-91cc-5a788c4b2880",
+            "entries": 140,
+            "exits": 0,
+            "total": 140,
+            "count": 3,
+            "reversals": 0
+          },
+          {
+            "methodId": "PM-DINHEIRO",
+            "entries": 2040,
+            "exits": 0,
+            "total": 2040,
+            "count": 5,
+            "reversals": 0
+          }
+        ],
+        "movementCount": 30
+      }
+    },
+    {
+      "id": "CXS-1787626802746-YHWLT",
+      "cashboxId": "caixa-principal",
+      "status": "closed",
+      "openingBalance": 14569.83,
+      "openingBalanceSource": "previous_closing",
+      "openedAt": "2026-08-25T03:00:02.746Z",
+      "openedBy": "sistema",
+      "openedDay": "2026-08-25",
+      "closedAt": "2026-08-27T02:59:52.735Z",
+      "closedBy": "sistema",
+      "closingBalance": 15392.84,
+      "openingMode": "automatic",
+      "automaticShiftEventKey": "2026-08-26T00:00",
+      "automaticShiftTime": "00:00",
+      "automaticCycleDay": "2026-08-26",
+      "automaticSourceSessionId": "CXS-1787454001915-RC3TN",
+      "expectedBalance": 15392.84,
+      "difference": 0,
+      "notes": "Fechamento automático para início do turno das 00:00.",
+      "closingMode": "automatic",
+      "closedDay": "2026-08-26",
+      "closingSummary": {
+        "openingBalance": 14569.83,
+        "supplies": 0,
+        "withdrawals": 0,
+        "cashSales": 823.01,
+        "salesTotal": 823.01,
+        "byMethod": [
+          {
+            "methodId": "PM-DINHEIRO",
+            "entries": 747.01,
+            "exits": 0,
+            "total": 747.01,
+            "count": 7,
+            "reversals": 0
+          },
+          {
+            "methodId": "PAY-80aa64db-9fbf-404e-91cc-5a788c4b2880",
+            "entries": 76,
+            "exits": 0,
+            "total": 76,
+            "count": 2,
+            "reversals": 0
+          }
+        ],
+        "movementCount": 10
+      }
+    },
+    {
+      "id": "CXS-1787799602731-ZU23A",
+      "cashboxId": "caixa-principal",
+      "status": "open",
+      "openingBalance": 15392.84,
+      "openingBalanceSource": "previous_closing",
+      "openedAt": "2026-08-27T03:00:02.731Z",
+      "openedBy": "sistema",
+      "openedDay": "2026-08-27",
       "closedAt": null,
       "closedBy": null,
       "closingBalance": null,
       "openingMode": "automatic",
-      "automaticShiftEventKey": "2026-08-23T00:00",
+      "automaticShiftEventKey": "2026-08-27T00:00",
       "automaticShiftTime": "00:00",
-      "automaticCycleDay": "2026-08-23",
-      "automaticSourceSessionId": "CXS-1787281202363-H6JSX"
+      "automaticCycleDay": "2026-08-27",
+      "automaticSourceSessionId": "CXS-1787626802746-YHWLT"
     }
   ]
 }

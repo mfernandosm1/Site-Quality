@@ -1,6 +1,6 @@
 import crypto from 'crypto';
 
-function actor(req) { return req.user?.name || req.user?.email || req.session?.user?.name || 'painel'; }
+function actor(req) { return req.user?.displayName || req.user?.name || req.user?.email || req.session?.user?.name || 'painel'; }
 function moduleFromPath(url = '') {
   const first = String(url).split('?')[0].split('/').filter(Boolean)[0] || 'dashboard';
   if (first === 'erp') return String(url).split('/').filter(Boolean)[1] || 'erp';

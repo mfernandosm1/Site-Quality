@@ -1,17 +1,17 @@
 {
   "version": "8.4.0-analytics-professional",
   "createdAt": "2026-07-08T00:26:21.803Z",
-  "updatedAt": "2026-08-24T01:12:37.286Z",
+  "updatedAt": "2026-08-28T23:11:14.760Z",
   "source": "local-json",
   "counters": {
-    "product_view": 66,
+    "product_view": 79,
     "favorite": 2,
     "favorite_click": 0,
     "whatsapp_click": 6,
     "category_view": 97,
     "share_click": 1,
-    "search": 22,
-    "page_view": 270
+    "search": 24,
+    "page_view": 286
   },
   "products": {
     "mini-game-portatil-400-jogos": {
@@ -283,11 +283,11 @@
       "name": "Troca de Tela de Celulares",
       "image": "/images/Troca_de-Tela_card.png",
       "url": "http://localhost:3000/produto/troca-de-tela-de-celulares/",
-      "views": 8,
+      "views": 14,
       "favorites": 0,
       "whatsapp": 0,
       "shares": 0,
-      "lastAt": "2026-08-23T22:56:37.392Z"
+      "lastAt": "2026-08-28T22:57:41.479Z"
     },
     "iphone-13-usado-128gb": {
       "slug": "iphone-13-usado-128gb",
@@ -316,11 +316,33 @@
       "name": "Iphone 15 pro 128gb usado",
       "image": "/images/produtos/1787533615144-iphone-15-pro-usado-natural-titanium.jpg",
       "url": "http://localhost:3000/produto/iphone-15-pro-128gb-usado/",
+      "views": 3,
+      "favorites": 0,
+      "whatsapp": 0,
+      "shares": 0,
+      "lastAt": "2026-08-24T01:13:57.538Z"
+    },
+    "xiaomi-redmi-note-15-5g-256gb-8gb-ram": {
+      "slug": "xiaomi-redmi-note-15-5g-256gb-8gb-ram",
+      "name": "Xiaomi Redmi Note 15 5G 256gb 8gb ram",
+      "image": "/images/Redmi Note 15.jpeg",
+      "url": "http://localhost:3000/produto/xiaomi-redmi-note-15-5g-256gb-8gb-ram/",
       "views": 2,
       "favorites": 0,
       "whatsapp": 0,
       "shares": 0,
-      "lastAt": "2026-08-24T01:12:37.286Z"
+      "lastAt": "2026-08-27T17:09:53.764Z"
+    },
+    "troca-de-bateria-de-celular": {
+      "slug": "troca-de-bateria-de-celular",
+      "name": "Troca de Bateria de Celulares",
+      "image": "/images/produtos/1787958626711-troca-de-bateria.png",
+      "url": "http://localhost:3000/produto/troca-de-bateria-de-celular/",
+      "views": 4,
+      "favorites": 0,
+      "whatsapp": 0,
+      "shares": 0,
+      "lastAt": "2026-08-28T23:11:14.760Z"
     }
   },
   "categories": {
@@ -388,13 +410,18 @@
       "term": "iphone 13",
       "total": 2,
       "lastAt": "2026-08-23T19:50:19.676Z"
+    },
+    "note 15": {
+      "term": "note 15",
+      "total": 2,
+      "lastAt": "2026-08-27T16:29:09.762Z"
     }
   },
   "pages": {
     "http://localhost:3000/site/view/index.html": {
       "url": "http://localhost:3000/site/view/index.html",
-      "views": 118,
-      "lastAt": "2026-08-24T01:12:32.757Z"
+      "views": 123,
+      "lastAt": "2026-08-28T22:28:43.590Z"
     },
     "http://localhost:3000/smartphones/": {
       "url": "http://localhost:3000/smartphones/",
@@ -538,8 +565,8 @@
     },
     "http://localhost:3000/produto/troca-de-tela-de-celulares/": {
       "url": "http://localhost:3000/produto/troca-de-tela-de-celulares/",
-      "views": 16,
-      "lastAt": "2026-08-23T22:56:37.391Z"
+      "views": 28,
+      "lastAt": "2026-08-28T22:57:41.479Z"
     },
     "http://localhost:3000/smartphones/?subcategoria=usados": {
       "url": "http://localhost:3000/smartphones/?subcategoria=usados",
@@ -558,8 +585,18 @@
     },
     "http://localhost:3000/produto/iphone-15-pro-128gb-usado/": {
       "url": "http://localhost:3000/produto/iphone-15-pro-128gb-usado/",
+      "views": 6,
+      "lastAt": "2026-08-24T01:13:57.537Z"
+    },
+    "http://localhost:3000/produto/xiaomi-redmi-note-15-5g-256gb-8gb-ram/": {
+      "url": "http://localhost:3000/produto/xiaomi-redmi-note-15-5g-256gb-8gb-ram/",
       "views": 4,
-      "lastAt": "2026-08-24T01:12:37.286Z"
+      "lastAt": "2026-08-27T17:09:53.764Z"
+    },
+    "http://localhost:3000/produto/troca-de-bateria-de-celular/": {
+      "url": "http://localhost:3000/produto/troca-de-bateria-de-celular/",
+      "views": 8,
+      "lastAt": "2026-08-28T23:11:14.759Z"
     }
   },
   "devices": {},
@@ -5890,6 +5927,368 @@
       "product": {
         "slug": "iphone-15-pro-128gb-usado",
         "name": "Iphone 15 pro 128gb usado"
+      },
+      "term": ""
+    },
+    {
+      "at": "2026-08-24T01:13:46.578Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/site/view/index.html",
+      "referrer": "http://localhost:3000/",
+      "device": "desktop",
+      "viewport": "1366x633",
+      "language": "pt-PT",
+      "term": ""
+    },
+    {
+      "at": "2026-08-24T01:13:56.651Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/produto/iphone-15-pro-128gb-usado/",
+      "referrer": "http://localhost:3000/smartphones/?subcategoria=usados",
+      "device": "desktop",
+      "viewport": "1366x633",
+      "language": "pt-PT",
+      "term": ""
+    },
+    {
+      "at": "2026-08-24T01:13:57.538Z",
+      "type": "product_view",
+      "url": "http://localhost:3000/produto/iphone-15-pro-128gb-usado/",
+      "referrer": "http://localhost:3000/smartphones/?subcategoria=usados",
+      "device": "desktop",
+      "viewport": "1366x633",
+      "language": "pt-PT",
+      "product": {
+        "slug": "iphone-15-pro-128gb-usado",
+        "name": "Iphone 15 pro 128gb usado"
+      },
+      "term": ""
+    },
+    {
+      "at": "2026-08-27T16:29:00.089Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/site/view/index.html",
+      "referrer": "http://localhost:3000/produtos/1786838719575",
+      "device": "desktop",
+      "viewport": "1517x665",
+      "language": "pt-BR",
+      "term": ""
+    },
+    {
+      "at": "2026-08-27T16:29:05.216Z",
+      "type": "search",
+      "url": "http://localhost:3000/site/view/index.html",
+      "referrer": "http://localhost:3000/produtos/1786838719575",
+      "device": "desktop",
+      "viewport": "1517x665",
+      "language": "pt-BR",
+      "term": "note 15"
+    },
+    {
+      "at": "2026-08-27T16:29:09.762Z",
+      "type": "search",
+      "url": "http://localhost:3000/site/view/index.html",
+      "referrer": "http://localhost:3000/produtos/1786838719575",
+      "device": "desktop",
+      "viewport": "1517x665",
+      "language": "pt-BR",
+      "term": "note 15"
+    },
+    {
+      "at": "2026-08-27T16:29:17.579Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/produto/xiaomi-redmi-note-15-5g-256gb-8gb-ram/",
+      "referrer": "http://localhost:3000/smartphones/",
+      "device": "desktop",
+      "viewport": "1517x665",
+      "language": "pt-BR",
+      "term": ""
+    },
+    {
+      "at": "2026-08-27T16:29:18.466Z",
+      "type": "product_view",
+      "url": "http://localhost:3000/produto/xiaomi-redmi-note-15-5g-256gb-8gb-ram/",
+      "referrer": "http://localhost:3000/smartphones/",
+      "device": "desktop",
+      "viewport": "1517x665",
+      "language": "pt-BR",
+      "product": {
+        "slug": "xiaomi-redmi-note-15-5g-256gb-8gb-ram",
+        "name": "Xiaomi Redmi Note 15 5G 256gb 8gb ram"
+      },
+      "term": ""
+    },
+    {
+      "at": "2026-08-27T17:09:53.048Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/produto/xiaomi-redmi-note-15-5g-256gb-8gb-ram/",
+      "referrer": "http://localhost:3000/smartphones/",
+      "device": "desktop",
+      "viewport": "1517x665",
+      "language": "pt-BR",
+      "term": ""
+    },
+    {
+      "at": "2026-08-27T17:09:53.764Z",
+      "type": "product_view",
+      "url": "http://localhost:3000/produto/xiaomi-redmi-note-15-5g-256gb-8gb-ram/",
+      "referrer": "http://localhost:3000/smartphones/",
+      "device": "desktop",
+      "viewport": "1517x665",
+      "language": "pt-BR",
+      "product": {
+        "slug": "xiaomi-redmi-note-15-5g-256gb-8gb-ram",
+        "name": "Xiaomi Redmi Note 15 5G 256gb 8gb ram"
+      },
+      "term": ""
+    },
+    {
+      "at": "2026-08-28T22:28:43.590Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/site/view/index.html",
+      "referrer": "http://localhost:3000/site",
+      "device": "desktop",
+      "viewport": "1366x633",
+      "language": "pt-PT",
+      "term": ""
+    },
+    {
+      "at": "2026-08-28T22:28:52.766Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/produto/troca-de-tela-de-celulares/",
+      "referrer": "http://localhost:3000/assistencia-tecnica/",
+      "device": "desktop",
+      "viewport": "1366x633",
+      "language": "pt-PT",
+      "term": ""
+    },
+    {
+      "at": "2026-08-28T22:28:53.661Z",
+      "type": "product_view",
+      "url": "http://localhost:3000/produto/troca-de-tela-de-celulares/",
+      "referrer": "http://localhost:3000/assistencia-tecnica/",
+      "device": "desktop",
+      "viewport": "1366x633",
+      "language": "pt-PT",
+      "product": {
+        "slug": "troca-de-tela-de-celulares",
+        "name": "Troca de Tela de Celulares"
+      },
+      "term": ""
+    },
+    {
+      "at": "2026-08-28T22:29:04.536Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/produto/troca-de-tela-de-celulares/",
+      "referrer": "http://localhost:3000/assistencia-tecnica/",
+      "device": "desktop",
+      "viewport": "1366x633",
+      "language": "pt-PT",
+      "term": ""
+    },
+    {
+      "at": "2026-08-28T22:29:05.431Z",
+      "type": "product_view",
+      "url": "http://localhost:3000/produto/troca-de-tela-de-celulares/",
+      "referrer": "http://localhost:3000/assistencia-tecnica/",
+      "device": "desktop",
+      "viewport": "1366x633",
+      "language": "pt-PT",
+      "product": {
+        "slug": "troca-de-tela-de-celulares",
+        "name": "Troca de Tela de Celulares"
+      },
+      "term": ""
+    },
+    {
+      "at": "2026-08-28T22:33:41.161Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/produto/troca-de-tela-de-celulares/",
+      "referrer": "http://localhost:3000/assistencia-tecnica/",
+      "device": "desktop",
+      "viewport": "1707x791",
+      "language": "pt-PT",
+      "term": ""
+    },
+    {
+      "at": "2026-08-28T22:33:42.021Z",
+      "type": "product_view",
+      "url": "http://localhost:3000/produto/troca-de-tela-de-celulares/",
+      "referrer": "http://localhost:3000/assistencia-tecnica/",
+      "device": "desktop",
+      "viewport": "1707x791",
+      "language": "pt-PT",
+      "product": {
+        "slug": "troca-de-tela-de-celulares",
+        "name": "Troca de Tela de Celulares"
+      },
+      "term": ""
+    },
+    {
+      "at": "2026-08-28T22:39:06.418Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/produto/troca-de-tela-de-celulares/",
+      "referrer": "http://localhost:3000/assistencia-tecnica/",
+      "device": "desktop",
+      "viewport": "1707x791",
+      "language": "pt-PT",
+      "term": ""
+    },
+    {
+      "at": "2026-08-28T22:39:07.284Z",
+      "type": "product_view",
+      "url": "http://localhost:3000/produto/troca-de-tela-de-celulares/",
+      "referrer": "http://localhost:3000/assistencia-tecnica/",
+      "device": "desktop",
+      "viewport": "1707x791",
+      "language": "pt-PT",
+      "product": {
+        "slug": "troca-de-tela-de-celulares",
+        "name": "Troca de Tela de Celulares"
+      },
+      "term": ""
+    },
+    {
+      "at": "2026-08-28T22:39:11.395Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/produto/troca-de-bateria-de-celular/",
+      "referrer": "http://localhost:3000/assistencia-tecnica/",
+      "device": "desktop",
+      "viewport": "1707x791",
+      "language": "pt-PT",
+      "term": ""
+    },
+    {
+      "at": "2026-08-28T22:39:12.269Z",
+      "type": "product_view",
+      "url": "http://localhost:3000/produto/troca-de-bateria-de-celular/",
+      "referrer": "http://localhost:3000/assistencia-tecnica/",
+      "device": "desktop",
+      "viewport": "1707x791",
+      "language": "pt-PT",
+      "product": {
+        "slug": "troca-de-bateria-de-celular",
+        "name": "Troca de Bateria de Celular"
+      },
+      "term": ""
+    },
+    {
+      "at": "2026-08-28T22:40:45.024Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/produto/troca-de-bateria-de-celular/",
+      "referrer": "http://localhost:3000/assistencia-tecnica/",
+      "device": "desktop",
+      "viewport": "1707x791",
+      "language": "pt-PT",
+      "term": ""
+    },
+    {
+      "at": "2026-08-28T22:40:45.867Z",
+      "type": "product_view",
+      "url": "http://localhost:3000/produto/troca-de-bateria-de-celular/",
+      "referrer": "http://localhost:3000/assistencia-tecnica/",
+      "device": "desktop",
+      "viewport": "1707x791",
+      "language": "pt-PT",
+      "product": {
+        "slug": "troca-de-bateria-de-celular",
+        "name": "Troca de Bateria de Celular"
+      },
+      "term": ""
+    },
+    {
+      "at": "2026-08-28T22:41:50.687Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/produto/troca-de-tela-de-celulares/",
+      "referrer": "http://localhost:3000/assistencia-tecnica/",
+      "device": "desktop",
+      "viewport": "1366x633",
+      "language": "pt-PT",
+      "term": ""
+    },
+    {
+      "at": "2026-08-28T22:41:51.541Z",
+      "type": "product_view",
+      "url": "http://localhost:3000/produto/troca-de-tela-de-celulares/",
+      "referrer": "http://localhost:3000/assistencia-tecnica/",
+      "device": "desktop",
+      "viewport": "1366x633",
+      "language": "pt-PT",
+      "product": {
+        "slug": "troca-de-tela-de-celulares",
+        "name": "Troca de Tela de Celulares"
+      },
+      "term": ""
+    },
+    {
+      "at": "2026-08-28T22:57:40.578Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/produto/troca-de-tela-de-celulares/",
+      "referrer": "http://localhost:3000/assistencia-tecnica/",
+      "device": "desktop",
+      "viewport": "1707x791",
+      "language": "pt-PT",
+      "term": ""
+    },
+    {
+      "at": "2026-08-28T22:57:41.479Z",
+      "type": "product_view",
+      "url": "http://localhost:3000/produto/troca-de-tela-de-celulares/",
+      "referrer": "http://localhost:3000/assistencia-tecnica/",
+      "device": "desktop",
+      "viewport": "1707x791",
+      "language": "pt-PT",
+      "product": {
+        "slug": "troca-de-tela-de-celulares",
+        "name": "Troca de Tela de Celulares"
+      },
+      "term": ""
+    },
+    {
+      "at": "2026-08-28T22:57:45.066Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/produto/troca-de-bateria-de-celular/",
+      "referrer": "http://localhost:3000/assistencia-tecnica/",
+      "device": "desktop",
+      "viewport": "1707x791",
+      "language": "pt-PT",
+      "term": ""
+    },
+    {
+      "at": "2026-08-28T22:57:45.966Z",
+      "type": "product_view",
+      "url": "http://localhost:3000/produto/troca-de-bateria-de-celular/",
+      "referrer": "http://localhost:3000/assistencia-tecnica/",
+      "device": "desktop",
+      "viewport": "1707x791",
+      "language": "pt-PT",
+      "product": {
+        "slug": "troca-de-bateria-de-celular",
+        "name": "Troca de Bateria de Celular"
+      },
+      "term": ""
+    },
+    {
+      "at": "2026-08-28T23:11:13.872Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/produto/troca-de-bateria-de-celular/",
+      "referrer": "http://localhost:3000/assistencia-tecnica/",
+      "device": "desktop",
+      "viewport": "1366x633",
+      "language": "pt-PT",
+      "term": ""
+    },
+    {
+      "at": "2026-08-28T23:11:14.760Z",
+      "type": "product_view",
+      "url": "http://localhost:3000/produto/troca-de-bateria-de-celular/",
+      "referrer": "http://localhost:3000/assistencia-tecnica/",
+      "device": "desktop",
+      "viewport": "1366x633",
+      "language": "pt-PT",
+      "product": {
+        "slug": "troca-de-bateria-de-celular",
+        "name": "Troca de Bateria de Celulares"
       },
       "term": ""
     }

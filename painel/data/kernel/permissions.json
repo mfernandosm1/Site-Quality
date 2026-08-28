@@ -1,5 +1,5 @@
 {
-  "version": 1,
+  "version": 4,
   "items": [
     {
       "id": "administrator",
@@ -7,21 +7,33 @@
       "description": "Acesso total ao painel e às configurações.",
       "permissions": [
         "*"
-      ]
+      ],
+      "system": true
     },
     {
       "id": "manager",
       "name": "Gerente",
       "description": "Operação ampla, relatórios e aprovações.",
       "permissions": [
-        "dashboard.view",
+        "dashboard.*",
         "erp.view",
+        "operations.view",
         "pdv.*",
+        "cash.*",
         "customers.*",
-        "products.view",
-        "inventory.view",
-        "reports.view"
-      ]
+        "products.*",
+        "inventory.*",
+        "purchases.*",
+        "suppliers.*",
+        "agenda.*",
+        "quotes.*",
+        "reports.*",
+        "commissions.*",
+        "crm.*",
+        "finance.view",
+        "audit.view"
+      ],
+      "system": true
     },
     {
       "id": "seller",
@@ -29,11 +41,21 @@
       "description": "Atendimento, clientes, produtos e vendas.",
       "permissions": [
         "dashboard.view",
-        "pdv.*",
+        "erp.view",
+        "operations.view",
+        "pdv.view",
+        "pdv.sell",
+        "pdv.discount",
         "customers.*",
         "products.view",
-        "inventory.view"
-      ]
+        "inventory.view",
+        "agenda.*",
+        "quotes.*",
+        "commissions.view",
+        "crm.view",
+        "crm.inbox.*"
+      ],
+      "system": true
     },
     {
       "id": "service",
@@ -41,11 +63,17 @@
       "description": "Ordens de serviço, clientes e consulta de estoque.",
       "permissions": [
         "dashboard.view",
+        "erp.view",
+        "operations.view",
         "service_orders.*",
         "customers.*",
         "products.view",
-        "inventory.view"
-      ]
+        "inventory.view",
+        "agenda.*",
+        "crm.view",
+        "crm.inbox.*"
+      ],
+      "system": true
     },
     {
       "id": "finance",
@@ -53,10 +81,14 @@
       "description": "Caixa, contas, recebimentos e relatórios financeiros.",
       "permissions": [
         "dashboard.view",
+        "erp.view",
         "cash.*",
         "finance.*",
-        "reports.finance"
-      ]
+        "reports.*",
+        "commissions.view",
+        "audit.view"
+      ],
+      "system": true
     },
     {
       "id": "stock",
@@ -64,10 +96,14 @@
       "description": "Produtos, entradas, saídas e ajustes de estoque.",
       "permissions": [
         "dashboard.view",
-        "products.view",
+        "erp.view",
+        "products.*",
         "inventory.*",
-        "suppliers.view"
-      ]
+        "purchases.*",
+        "suppliers.*",
+        "reports.view"
+      ],
+      "system": true
     },
     {
       "id": "readonly",
@@ -75,8 +111,10 @@
       "description": "Consulta sem autorização para alterar registros.",
       "permissions": [
         "dashboard.view",
+        "erp.view",
         "*.view"
-      ]
+      ],
+      "system": true
     }
   ]
 }

@@ -1,0 +1,21 @@
+{
+  "version": "1.0",
+  "items": [
+    {
+      "id": "PRC-7eb5ea70-281b-4c89-b5cd-a4b2774c8f3a",
+      "type": "global_rule_updated",
+      "actor": "Matheus Fernando",
+      "createdAt": "2026-08-28T22:18:15.199Z",
+      "previous": {
+        "marginPercent": null,
+        "rounding": "exact"
+      },
+      "current": {
+        "marginPercent": 0,
+        "rounding": "ending_99",
+        "updatedAt": "2026-08-28T22:18:15.195Z",
+        "updatedBy": "Matheus Fernando"
+      }
+    }
+  ]
+}

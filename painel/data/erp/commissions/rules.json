@@ -1,0 +1,28 @@
+{
+  "version": "1.0",
+  "items": [
+    {
+      "id": "CRL-9be9b911-f749-4b53-a3fc-65ae499f0e65",
+      "userId": "USR-d15976b1-a734-459f-8957-b9f42bc39ea2",
+      "active": true,
+      "periodicity": "monthly",
+      "basis": "sale",
+      "scope": "own_sales",
+      "storeId": "STORE-MAIN",
+      "includeSales": true,
+      "includeServiceOrders": true,
+      "tiers": [
+        {
+          "id": "TIER-ee4594c6-0116-4914-954b-d972dfbd6d55",
+          "minValue": 1000,
+          "remunerationType": "percent",
+          "value": 2,
+          "order": 0
+        }
+      ],
+      "categoryRules": [],
+      "updatedAt": "2026-08-28T01:12:09.336Z",
+      "updatedBy": "Matheus Fernando"
+    }
+  ]
+}

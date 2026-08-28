@@ -8,6 +8,8 @@ import KernelService from './services/kernel/kernel-service.js';
 import requestLogger from './services/kernel/request-logger.js';
 import CommerceService from './services/commerce-service.js';
 import InventoryService from './services/inventory-service.js';
+import UserService from './services/user-service.js';
+import AuthService from './services/auth-service.js';
 import { updateHeaderMenu, generateCategoryPage } from './routes/main_utils.js';
 
 const __filename = fileURLToPath(import.meta.url);
@@ -176,7 +178,10 @@ function ensureAllPhysicalProductsStockControlled() {
       product.inventory.itemId = `PRD-${product.id || Date.now()}`;
       changed = true;
     }
-    if (product.inventory.stockControlled !== true) {
+    // Migração: somente define o padrão quando o campo ainda não existe.
+    // Um produto marcado explicitamente como "não controlar estoque" deve continuar assim
+    // após reiniciar o ERP (ex.: itens genéricos/operacionais como "Vendas Diversas").
+    if (product.inventory.stockControlled === undefined || product.inventory.stockControlled === null) {
       product.inventory.stockControlled = true;
       enabledProducts++;
       changed = true;
@@ -253,9 +258,17 @@ app.use(bodyParser.json({ limit: '15mb' }));
 app.use('/public', express.static(PUBLIC_DIR));
 app.use((req,res,next)=>{ res.locals.panelCompany=loadCompanyProfile(); next(); });
 
-// Quality ERP v0.15.0 — Kernel global
+// Quality ERP — Kernel, usuários e autenticação global
 app.locals.kernelService = new KernelService({ dataDir: path.join(__dirname, 'data', 'kernel') });
 app.locals.commerceService = new CommerceService({ dataDir: path.join(__dirname, 'data', 'erp', 'commerce') });
+app.locals.userService = new UserService({ dataDir: path.join(__dirname, 'data', 'erp', 'users') });
+app.locals.authService = new AuthService({
+  dataDir: path.join(__dirname, 'data', 'erp', 'users'),
+  userService: app.locals.userService,
+  permissionService: app.locals.kernelService.permissions
+});
+// Resolve o usuário antes do logger para que auditoria e operações recebam o ator real.
+app.use(app.locals.authService.attachUser());
 app.use(requestLogger(app.locals.kernelService));
 
 // Routes
@@ -290,7 +303,14 @@ import orcamentosRouter from './routes/orcamentos.js';
 import navigationRouter from './routes/navigation.js';
 import configuracoesRouter from './routes/configuracoes.js';
 import kernelRouter from './routes/kernel.js';
+import authRouter from './routes/auth.js';
 import automacaoWhatsappRouter, { initializeWhatsApp, shutdownWhatsApp } from './routes/automacao_whatsapp.js';
+
+// Login / primeiro acesso ficam fora do bloqueio de permissões.
+app.use('/', authRouter);
+// Somente rotas administrativas conhecidas são protegidas. O preview público em /site
+// e as URLs amigáveis do catálogo continuam acessíveis sem login.
+app.use(app.locals.authService.authorizeRequests());
 
 app.use('/', indexRouter);
 app.use('/header', headerRouter);

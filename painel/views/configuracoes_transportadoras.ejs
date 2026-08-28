@@ -1,0 +1,66 @@
+<% layout('layout') -%>
+<section class="ops-hero compact"><div><span class="ops-kicker">CONFIGURAÇÕES · LOGÍSTICA</span><h1>🚚 Transportadoras e entregas</h1><p>Cadastre Correios, transportadoras, motoboys e outros métodos para selecionar diretamente no frete do PDV.</p></div><a class="btn" href="/configuracoes">← Voltar</a></section>
+<div class="settings-card carrier-card">
+  <div class="settings-card-head"><div><h2 id="carrierFormTitle">Nova transportadora / método</h2><p>Os cadastros ativos aparecem automaticamente no PDV.</p></div></div>
+  <form id="carrierForm" class="carrier-grid">
+    <input type="hidden" id="carrierId">
+    <label>Nome *<input id="carrierName" maxlength="120" required placeholder="Ex.: Correios, Jadlog, Motoboy João"></label>
+    <label>Tipo<select id="carrierType"><option value="carrier">Transportadora</option><option value="correios">Correios</option><option value="motoboy">Motoboy</option><option value="own">Entrega própria</option><option value="pickup">Retirada no local</option><option value="bus">Ônibus / excursão</option><option value="air">Aéreo</option><option value="other">Outro</option></select></label>
+    <label>CNPJ / CPF<div class="carrier-cnpj-line"><input id="carrierDocument" maxlength="18" inputmode="numeric" placeholder="00.000.000/0000-00"><button type="button" class="btn" id="carrierLookupCnpj">🔎 Buscar dados</button></div><small id="carrierLookupStatus" class="q-sub"></small></label>
+    <label>Inscrição Estadual / RG<input id="carrierStateRegistration" maxlength="30"></label>
+    <label>Razão Social<input id="carrierLegalName" maxlength="180"></label>
+    <label>Nome Fantasia<input id="carrierTradeName" maxlength="160"></label>
+    <label>CEP<input id="carrierZip" maxlength="9" inputmode="numeric"></label>
+    <label>Bairro<input id="carrierNeighborhood" maxlength="100"></label>
+    <label class="wide">Endereço<input id="carrierAddress" maxlength="180"></label>
+    <label>Cidade<input id="carrierCity" maxlength="80"></label>
+    <label>UF<input id="carrierState" maxlength="2"></label>
+    <label>Telefone<input id="carrierPhone" maxlength="30"></label>
+    <label>E-mail para envio / contato<input id="carrierEmail" type="email" maxlength="160"></label>
+    <label class="wide">Situação cadastral<input id="carrierRegistrationStatus" maxlength="80" readonly placeholder="Preenchida pela consulta do CNPJ"></label>
+    <label>Placa do veículo<input id="carrierPlate" maxlength="10"></label>
+    <label>UF da placa<input id="carrierPlateState" maxlength="2"></label>
+    <label class="wide">Observações<input id="carrierNotes" maxlength="300"></label>
+    <label class="carrier-active"><input id="carrierActive" type="checkbox" checked> Ativo</label>
+    <div class="carrier-actions wide"><button type="button" class="btn" id="carrierClear">Limpar</button><button class="btn primary" type="submit">Salvar cadastro</button></div>
+  </form>
+</div>
+<div class="settings-card carrier-card"><h2>Cadastros</h2><div class="carrier-list" id="carrierList"></div></div>
+<style>
+.carrier-card{margin:16px 28px}.carrier-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.carrier-grid label{display:grid;gap:5px;font-size:11px;font-weight:800}.carrier-grid input,.carrier-grid select{min-height:39px;border:1px solid var(--line);border-radius:9px;background:var(--input-bg,var(--card));color:var(--text);padding:8px 10px}.carrier-grid .wide{grid-column:1/-1}.carrier-cnpj-line{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:7px;align-items:center}.carrier-cnpj-line .btn{white-space:nowrap;min-height:39px}.carrier-lookup-ok{color:#2fbf71!important}.carrier-lookup-error{color:#e25b5b!important}.carrier-active{display:flex!important;align-items:center;gap:8px}.carrier-active input{min-height:auto}.carrier-actions{display:flex;justify-content:flex-end;gap:8px}.carrier-row{display:grid;grid-template-columns:minmax(180px,1.6fr) minmax(100px,.7fr) minmax(160px,1fr) auto;gap:10px;align-items:center;padding:12px 4px;border-bottom:1px solid var(--line)}.carrier-row small{color:var(--muted)}.carrier-row-actions{display:flex;gap:6px}.carrier-inactive{opacity:.55}@media(max-width:780px){.carrier-card{margin:12px}.carrier-grid{grid-template-columns:1fr}.carrier-grid .wide{grid-column:auto}.carrier-row{grid-template-columns:1fr}.carrier-row-actions{justify-content:flex-start}}
+</style>
+<script>
+const carriers=<%- JSON.stringify(carriers||[]).replace(/</g,'\\u003c') %>;
+const $=s=>document.querySelector(s); const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const typeNames={carrier:'Transportadora',correios:'Correios',motoboy:'Motoboy',own:'Entrega própria',pickup:'Retirada no local',bus:'Ônibus / excursão',air:'Aéreo',other:'Outro'};
+function render(){ $('#carrierList').innerHTML=carriers.length?carriers.map(c=>`<div class="carrier-row ${c.active===false?'carrier-inactive':''}"><div><b>${esc(c.name)}</b><br><small>${esc(c.document||'Sem documento')}</small></div><div>${esc(typeNames[c.type]||c.type||'Transportadora')}</div><div>${esc([c.city,c.state].filter(Boolean).join(' / ')||'—')}</div><div class="carrier-row-actions"><button class="btn" data-edit="${c.id}">Editar</button><button class="btn" data-del="${c.id}">Excluir</button></div></div>`).join(''):'<p class="q-sub">Nenhum cadastro ainda.</p>'; }
+function clearForm(){ $('#carrierForm').reset();$('#carrierId').value='';$('#carrierActive').checked=true;$('#carrierFormTitle').textContent='Nova transportadora / método';$('#carrierLookupStatus').textContent='';$('#carrierLookupStatus').className='q-sub'; }
+function fill(c){ $('#carrierId').value=c.id||'';$('#carrierName').value=c.name||'';$('#carrierType').value=c.type||'carrier';$('#carrierDocument').value=c.document||'';$('#carrierStateRegistration').value=c.stateRegistration||'';$('#carrierLegalName').value=c.legalName||'';$('#carrierTradeName').value=c.tradeName||'';$('#carrierZip').value=c.zip||'';$('#carrierNeighborhood').value=c.neighborhood||'';$('#carrierAddress').value=c.address||'';$('#carrierCity').value=c.city||'';$('#carrierState').value=c.state||'';$('#carrierPhone').value=c.phone||'';$('#carrierEmail').value=c.email||'';$('#carrierRegistrationStatus').value=c.registrationStatus||'';$('#carrierPlate').value=c.plate||'';$('#carrierPlateState').value=c.plateState||'';$('#carrierNotes').value=c.notes||'';$('#carrierActive').checked=c.active!==false;$('#carrierFormTitle').textContent='Editar cadastro';$('#carrierLookupStatus').textContent='';$('#carrierLookupStatus').className='q-sub';scrollTo({top:0,behavior:'smooth'}); }
+
+function onlyDigits(v){return String(v||'').replace(/\D/g,'');}
+function maskCnpj(value){const n=onlyDigits(value).slice(0,14);return n.replace(/^(\d{2})(\d)/,'$1.$2').replace(/^(\d{2})\.(\d{3})(\d)/,'$1.$2.$3').replace(/\.(\d{3})(\d)/,'.$1/$2').replace(/(\d{4})(\d)/,'$1-$2');}
+function maskCep(value){const n=onlyDigits(value).slice(0,8);return n.replace(/(\d{5})(\d)/,'$1-$2');}
+$('#carrierDocument').addEventListener('input',e=>{const n=onlyDigits(e.target.value);if(n.length<=14)e.target.value=n.length>11?maskCnpj(n):n;});
+$('#carrierZip').addEventListener('input',e=>e.target.value=maskCep(e.target.value));
+$('#carrierLookupCnpj').onclick=async()=>{
+  const button=$('#carrierLookupCnpj'),status=$('#carrierLookupStatus'),cnpj=onlyDigits($('#carrierDocument').value);
+  status.className='q-sub';
+  if(cnpj.length!==14){status.textContent='Informe um CNPJ com 14 dígitos para buscar.';status.classList.add('carrier-lookup-error');return;}
+  button.disabled=true;button.textContent='Buscando…';status.textContent='Consultando dados cadastrais…';
+  try{
+    const id=$('#carrierId').value||'';const r=await fetch('/configuracoes/transportadoras/cnpj/'+encodeURIComponent(cnpj)+'?id='+encodeURIComponent(id));const j=await r.json();
+    if(!r.ok||!j.success)throw new Error(j.message||'Não foi possível consultar.');
+    const d=j.data||{};
+    $('#carrierDocument').value=maskCnpj(d.document||cnpj);
+    if(d.name)$('#carrierName').value=d.name;
+    $('#carrierLegalName').value=d.legalName||'';$('#carrierTradeName').value=d.tradeName||'';
+    if(d.stateRegistration)$('#carrierStateRegistration').value=d.stateRegistration;
+    $('#carrierZip').value=maskCep(d.zip||'');$('#carrierAddress').value=d.address||'';$('#carrierNeighborhood').value=d.neighborhood||'';$('#carrierCity').value=d.city||'';$('#carrierState').value=d.state||'';$('#carrierPhone').value=d.phone||'';$('#carrierEmail').value=d.email||'';$('#carrierRegistrationStatus').value=d.registrationStatus||'';
+    status.textContent='✓ Dados encontrados e preenchidos. Revise antes de salvar.';status.classList.add('carrier-lookup-ok');
+  }catch(error){status.textContent=error.message||'Não foi possível consultar o CNPJ.';status.classList.add('carrier-lookup-error');}
+  finally{button.disabled=false;button.textContent='🔎 Buscar dados';}
+};
+
+$('#carrierClear').onclick=clearForm; $('#carrierForm').onsubmit=async e=>{e.preventDefault();const body={id:$('#carrierId').value,name:$('#carrierName').value,type:$('#carrierType').value,document:$('#carrierDocument').value,stateRegistration:$('#carrierStateRegistration').value,legalName:$('#carrierLegalName').value,tradeName:$('#carrierTradeName').value,zip:$('#carrierZip').value,neighborhood:$('#carrierNeighborhood').value,address:$('#carrierAddress').value,city:$('#carrierCity').value,state:$('#carrierState').value,phone:$('#carrierPhone').value,email:$('#carrierEmail').value,registrationStatus:$('#carrierRegistrationStatus').value,plate:$('#carrierPlate').value,plateState:$('#carrierPlateState').value,notes:$('#carrierNotes').value,active:$('#carrierActive').checked};const r=await fetch('/configuracoes/transportadoras',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)});const j=await r.json();if(!j.success)return alert(j.message);location.reload();};
+$('#carrierList').onclick=async e=>{const edit=e.target.closest('[data-edit]');if(edit)return fill(carriers.find(c=>c.id===edit.dataset.edit));const del=e.target.closest('[data-del]');if(del&&confirm('Excluir este cadastro?')){const r=await fetch('/configuracoes/transportadoras/'+encodeURIComponent(del.dataset.del),{method:'DELETE'});const j=await r.json();if(!j.success)return alert(j.message);location.reload();}};render();
+</script>

@@ -10,7 +10,8 @@ const CATALOGS = {
   costCenters: 'cost-centers.json',
   statuses: 'statuses.json',
   origins: 'origins.json',
-  paymentMethods: 'payment-methods.json'
+  paymentMethods: 'payment-methods.json',
+  stores: 'stores.json'
 };
 
 const DEFAULTS = {
@@ -64,7 +65,8 @@ const DEFAULTS = {
     { id:'PM-PIX', name:'PIX', code:'PIX', active:true, salesPaid:true, purchasePaid:true, creditCashOnSale:true, debitCashOnPurchase:true, autoSettle:true, eventType:'bank', modules:{ sales:true, purchases:true, pdv:true, serviceOrders:true, finance:true }, allowInstallments:false, maxInstallments:1, settlementDays:0, system:true },
     { id:'PM-CREDITO', name:'Cartão de crédito', code:'CRED', active:true, salesPaid:false, purchasePaid:false, creditCashOnSale:true, debitCashOnPurchase:true, autoSettle:false, eventType:'receivable', modules:{ sales:true, purchases:false, pdv:true, serviceOrders:true, finance:true }, allowInstallments:true, maxInstallments:18, settlementDays:30, system:true },
     { id:'PM-DEBITO', name:'Cartão de débito', code:'DEB', active:true, salesPaid:false, purchasePaid:false, creditCashOnSale:true, debitCashOnPurchase:true, autoSettle:false, eventType:'receivable', modules:{ sales:true, purchases:false, pdv:true, serviceOrders:true, finance:true }, allowInstallments:false, maxInstallments:1, settlementDays:1, system:true },
-    { id:'PM-BOLETO', name:'Boleto / crediário', code:'BOL', active:true, salesPaid:false, purchasePaid:false, creditCashOnSale:true, debitCashOnPurchase:true, autoSettle:false, eventType:'title', modules:{ sales:true, purchases:true, pdv:true, serviceOrders:true, finance:true }, allowInstallments:true, maxInstallments:36, settlementDays:0, firstDueDays:30, installmentIntervalDays:30, generatesReceivable:true, requireIdentifiedCustomer:true, requireValidDocument:true, requireCreditReceipt:true, system:true }
+    { id:'PM-BOLETO', name:'Boleto / crediário', code:'BOL', active:true, salesPaid:false, purchasePaid:false, creditCashOnSale:true, debitCashOnPurchase:true, autoSettle:false, eventType:'title', modules:{ sales:true, purchases:true, pdv:true, serviceOrders:true, finance:true }, allowInstallments:true, maxInstallments:36, settlementDays:0, firstDueDays:30, installmentIntervalDays:30, generatesReceivable:true, requireIdentifiedCustomer:true, requireValidDocument:true, requireCreditReceipt:true, system:true },
+    { id:'PM-CARTEIRA', name:'Crédito do cliente / troca', code:'CART', active:true, salesPaid:true, purchasePaid:false, creditCashOnSale:false, debitCashOnPurchase:false, autoSettle:true, eventType:'wallet', modules:{ sales:true, purchases:false, pdv:true, serviceOrders:true, finance:true }, allowInstallments:false, maxInstallments:1, settlementDays:0, generatesReceivable:false, requireIdentifiedCustomer:true, system:true }
   ],
   stores: [
     { id:'STORE-MAIN', name:'Loja principal', code:'MATRIZ', active:true, system:true }
@@ -173,6 +175,15 @@ export default class FinanceService {
 
     const methodsDb = this.readFile(CATALOGS.paymentMethods, { items:[] });
     let methodsChanged = false;
+    // Métodos de sistema adicionados em versões novas também precisam existir em bases
+    // já inicializadas. Mantém o cadastro existente e adiciona somente os ausentes.
+    for (const systemMethod of DEFAULTS.paymentMethods) {
+      if (!(methodsDb.items || []).some(item => item.id === systemMethod.id)) {
+        methodsDb.items = methodsDb.items || [];
+        methodsDb.items.push(clone(systemMethod));
+        methodsChanged = true;
+      }
+    }
     for (const method of methodsDb.items || []) {
       // V17: parâmetros independentes para Venda e para Compras/Contas a Pagar.
       // `autoSettle` permanece apenas como alias legado de "Pago na venda".

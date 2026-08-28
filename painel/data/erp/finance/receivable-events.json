@@ -2,6 +2,250 @@
   "version": "0.16.2",
   "items": [
     {
+      "id": "REV-82ab59b9-1147-4d7b-aa3d-896841ed6231",
+      "receivableId": "REC-9a434abc-4f76-4dab-948c-7ff3800938e0",
+      "action": "created",
+      "actor": "Matheus Fernando",
+      "at": "2026-08-28T19:36:32.745Z",
+      "title": {
+        "id": "REC-9a434abc-4f76-4dab-948c-7ff3800938e0",
+        "number": "000016",
+        "customerId": "CLI-1785697184598-9CK78",
+        "customerName": "Zenaira Streit de Campos",
+        "customerDocument": "93187351034",
+        "origin": "service_order",
+        "originLabel": "O.S. #96",
+        "originId": "OP-1787942402193-8M7FZ",
+        "originPaymentKey": "PAY-1787945792562-37OZX",
+        "costCenterId": "CAT-SERVICOS",
+        "accountId": "ACC-SERVICOS",
+        "paymentMethodId": "PAY-1bee6a58-8d6f-4ca7-b1c4-cd9e40ea6197",
+        "grossValue": 160,
+        "discount": 0,
+        "addition": 0,
+        "netValue": 160,
+        "openBalance": 160,
+        "status": "open",
+        "issueDate": "2026-08-28",
+        "competenceDate": "2026-08-28",
+        "firstDueDate": "2026-09-05",
+        "notes": "Gerado automaticamente pelo PDV.",
+        "installmentCount": 1,
+        "createdAt": "2026-08-28T19:36:32.735Z",
+        "createdBy": "Matheus Fernando",
+        "updatedAt": "2026-08-28T19:36:32.735Z",
+        "updatedBy": "Matheus Fernando"
+      }
+    },
+    {
+      "id": "REV-9f7b8edf-0a81-4e64-b2f2-880473c7e2fb",
+      "receivableId": "REC-3a8e309a-6b55-4067-af42-51bee70e8286",
+      "action": "received",
+      "actor": "painel",
+      "at": "2026-08-26T19:53:50.796Z",
+      "receiptId": "RCP-b5840109-4a24-42de-837f-7959e89d9526",
+      "receiptNumber": "000004",
+      "value": 20,
+      "principalValue": 20,
+      "balanceAfter": 0,
+      "allocations": [
+        {
+          "installmentId": "RIN-eecb08b2-22f9-4460-8f9f-c006b070cdaa",
+          "number": 1,
+          "value": 20,
+          "balanceAfter": 0
+        }
+      ],
+      "cashboxId": "caixa-principal",
+      "cashSessionId": "CXS-1787626802746-YHWLT",
+      "cashMovementIds": [
+        "CXM-1787774030771-5EVGH"
+      ],
+      "financeMovementIds": [
+        "FMV-b783ec78-9e42-4d13-a605-bd452ef8a4f1"
+      ]
+    },
+    {
+      "id": "REV-474b983e-bf8e-4aaf-b7a1-cc5a1ec51172",
+      "receivableId": "REC-ed950939-98af-4d71-905a-4377946ad6c2",
+      "action": "wm10_legacy_imported",
+      "actor": "painel",
+      "at": "2026-08-26T17:22:04.532Z",
+      "reference": "Crediário WM10 informado manualmente",
+      "originalTotal": 910.96,
+      "openBalance": 600.96
+    },
+    {
+      "id": "REV-f0934a49-97b3-4fc3-bf2c-7fb21956e3d5",
+      "receivableId": "REC-61c7d649-26c7-4155-99a3-c32f925f5602",
+      "action": "wm10_legacy_imported",
+      "actor": "painel",
+      "at": "2026-08-26T17:22:04.490Z",
+      "reference": "Crediário WM10 informado manualmente",
+      "originalTotal": 4992.91,
+      "openBalance": 710
+    },
+    {
+      "id": "REV-c23a725e-0839-417e-bbdf-63d372fba89b",
+      "receivableId": "REC-ee015099-10d5-454d-a76b-8857f2f27cad",
+      "action": "wm10_legacy_imported",
+      "actor": "painel",
+      "at": "2026-08-26T17:22:04.447Z",
+      "reference": "Crediário WM10 informado manualmente",
+      "originalTotal": 59.98,
+      "openBalance": 59.98
+    },
+    {
+      "id": "REV-95abdfb7-64f9-44b7-93fe-152385676487",
+      "receivableId": "REC-72fc5e85-55ed-41f7-9482-1efd59d2d7f6",
+      "action": "wm10_legacy_imported",
+      "actor": "painel",
+      "at": "2026-08-26T17:22:04.404Z",
+      "reference": "Venda WM10 #7705",
+      "originalTotal": 1629.99,
+      "openBalance": 399.99
+    },
+    {
+      "id": "REV-d3d56c43-e13e-422b-92c4-d2bce7a6578a",
+      "receivableId": "REC-5904dd4b-599f-43f8-bb7d-00f1ead24883",
+      "action": "wm10_legacy_imported",
+      "actor": "painel",
+      "at": "2026-08-26T17:22:04.358Z",
+      "reference": "Venda WM10 #21652",
+      "originalTotal": 100,
+      "openBalance": 100
+    },
+    {
+      "id": "REV-a85e7ae3-3357-4ac4-8dca-b42a593baac9",
+      "receivableId": "REC-b6d8367b-ea62-4241-a2a2-95445bfdc019",
+      "action": "wm10_legacy_imported",
+      "actor": "painel",
+      "at": "2026-08-26T17:22:04.314Z",
+      "reference": "Venda WM10 #21898",
+      "originalTotal": 180,
+      "openBalance": 120
+    },
+    {
+      "id": "REV-2117efdd-a3d5-40cd-a013-9f5e61d9cb97",
+      "receivableId": "REC-ce6f2936-b079-412d-a4d2-2ca84f8debe7",
+      "action": "wm10_legacy_imported",
+      "actor": "painel",
+      "at": "2026-08-26T17:22:04.270Z",
+      "reference": "Venda WM10 #22123",
+      "originalTotal": 139.99,
+      "openBalance": 139.99
+    },
+    {
+      "id": "REV-8e72e07c-508e-4797-8d3d-1aac21996fa5",
+      "receivableId": "REC-e51c4322-b6e6-48ff-8099-f8d131a8642e",
+      "action": "wm10_legacy_imported",
+      "actor": "painel",
+      "at": "2026-08-26T17:22:04.225Z",
+      "reference": "Venda WM10 #22106",
+      "originalTotal": 405,
+      "openBalance": 205
+    },
+    {
+      "id": "REV-c31dd72e-c4dc-49c4-858c-1db911332097",
+      "receivableId": "REC-ae9bd17c-6eda-4463-81c8-5211d54341a5",
+      "action": "received",
+      "actor": "painel",
+      "at": "2026-08-25T16:52:15.179Z",
+      "receiptId": "RCP-8533827d-3cd2-4a95-835c-2acadaabf6c4",
+      "receiptNumber": "000003",
+      "value": 49,
+      "principalValue": 49,
+      "balanceAfter": 0,
+      "allocations": [
+        {
+          "installmentId": "RIN-497a7f77-d5a8-456a-8f87-babf1735cf15",
+          "number": 1,
+          "value": 49,
+          "balanceAfter": 0
+        }
+      ],
+      "cashboxId": "caixa-principal",
+      "cashSessionId": "CXS-1787626802746-YHWLT",
+      "cashMovementIds": [
+        "CXM-1787676735155-PY0UW"
+      ],
+      "financeMovementIds": [
+        "FMV-140f30cf-9438-45e5-b818-9ee43e3d2558"
+      ]
+    },
+    {
+      "id": "REV-f0569937-dca5-4e38-b9f2-6eba46569eae",
+      "receivableId": "REC-ae9bd17c-6eda-4463-81c8-5211d54341a5",
+      "action": "created",
+      "actor": "painel",
+      "at": "2026-08-24T22:15:45.893Z",
+      "title": {
+        "id": "REC-ae9bd17c-6eda-4463-81c8-5211d54341a5",
+        "number": "000007",
+        "customerId": "CLI-1785697362600-11IRI",
+        "customerName": "Bitieli Padilha",
+        "customerDocument": "06993549000",
+        "origin": "sale",
+        "originLabel": "Venda #80",
+        "originId": "OP-1787580493485-5XADD",
+        "originPaymentKey": "PAY-1787609745700-WQB11",
+        "costCenterId": "CAT-VENDAS",
+        "accountId": "ACC-VENDAS",
+        "paymentMethodId": "PAY-1bee6a58-8d6f-4ca7-b1c4-cd9e40ea6197",
+        "grossValue": 49,
+        "discount": 0,
+        "addition": 0,
+        "netValue": 49,
+        "openBalance": 49,
+        "status": "open",
+        "issueDate": "2026-08-24",
+        "competenceDate": "2026-08-24",
+        "firstDueDate": "2026-08-24",
+        "notes": "Gerado automaticamente pelo PDV.",
+        "installmentCount": 1,
+        "createdAt": "2026-08-24T22:15:45.886Z",
+        "createdBy": "painel",
+        "updatedAt": "2026-08-24T22:15:45.886Z",
+        "updatedBy": "painel"
+      }
+    },
+    {
+      "id": "REV-9bcd4e2c-fc4b-43c6-b4ed-e8ccf87c7632",
+      "receivableId": "REC-3a8e309a-6b55-4067-af42-51bee70e8286",
+      "action": "created",
+      "actor": "painel",
+      "at": "2026-08-24T13:55:08.740Z",
+      "title": {
+        "id": "REC-3a8e309a-6b55-4067-af42-51bee70e8286",
+        "number": "000006",
+        "customerId": "CLI-1787401408676-2R3TI",
+        "customerName": "Nair Maggioni Bandeira",
+        "customerDocument": "69734127004",
+        "origin": "service_order",
+        "originLabel": "O.S. #72",
+        "originId": "OP-1787401498524-4YKRT",
+        "originPaymentKey": "PAY-1787579708555-I3KZS",
+        "costCenterId": "CAT-SERVICOS",
+        "accountId": "ACC-SERVICOS",
+        "paymentMethodId": "PAY-1bee6a58-8d6f-4ca7-b1c4-cd9e40ea6197",
+        "grossValue": 20,
+        "discount": 0,
+        "addition": 0,
+        "netValue": 20,
+        "openBalance": 20,
+        "status": "open",
+        "issueDate": "2026-08-24",
+        "competenceDate": "2026-08-24",
+        "firstDueDate": "2026-08-24",
+        "notes": "Gerado automaticamente pelo PDV.",
+        "installmentCount": 1,
+        "createdAt": "2026-08-24T13:55:08.731Z",
+        "createdBy": "painel",
+        "updatedAt": "2026-08-24T13:55:08.731Z",
+        "updatedBy": "painel"
+      }
+    },
+    {
       "id": "REV-23c385f4-036c-4e2f-81f3-959df5ff8cef",
       "receivableId": "REC-52087f06-0e63-4b52-a723-b299b4bceea9",
       "action": "received",
