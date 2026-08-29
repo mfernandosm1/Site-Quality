@@ -9412,7 +9412,262 @@
       },
       "ip": "127.0.0.1",
       "requestId": "38a49f7b-fd4d-44fd-8f1d-16c8bb7e21da"
+    },
+    {
+      "id": "AUD-00000048",
+      "at": "2026-08-29T23:38:23.960Z",
+      "module": "produtos",
+      "action": "PRODUCT_UPDATED",
+      "actor": "Matheus Fernando",
+      "entityType": "product",
+      "entityId": "1788046612147",
+      "documentId": "",
+      "reason": "Cadastro de produto atualizado",
+      "before": {
+        "name": "Limpeza Interna e Manutenção de PlayStation 4 e 5",
+        "sku": "",
+        "code": "PRD-863",
+        "barcode": "",
+        "brand": "",
+        "slug": "limpeza-interna-e-manutencao-de-playstation-4-e-5",
+        "price": null,
+        "commercial": {
+          "costPrice": null,
+          "erpPrice": null,
+          "salePrice": null,
+          "marketplacePrice": null,
+          "promotionalPrice": null,
+          "desiredMarginPercent": null,
+          "expectedProfit": null,
+          "defaultCommissionPercent": null,
+          "cashPrice": null,
+          "installmentPrice": null,
+          "minimumPrice": null,
+          "minimumMarginPercent": null,
+          "discountPolicy": "inherit",
+          "maximumDiscountPercent": null,
+          "maximumDiscountAmount": null,
+          "requiresAuthorization": false
+        },
+        "stock": 0,
+        "inventory": {
+          "itemId": "PRD-1788046612147",
+          "stockControlled": true,
+          "allowNegative": false,
+          "minimumQuantity": 0,
+          "channelAvailability": {
+            "site": {
+              "mode": "shared",
+              "enabled": true,
+              "limit": null,
+              "physicalSafety": 0
+            }
+          }
+        },
+        "image": "images/produtos/1788046631263-limpeza-interna-e-manutena-a-o-de-playstation-4-e-5.jpg",
+        "gallery": [],
+        "category": "assistencia-tecnica",
+        "subcategory": "",
+        "tags": [],
+        "relatedManualIds": [],
+        "crossSellIds": [],
+        "showPrice": false,
+        "featured": false,
+        "active": true,
+        "erp": {
+          "sku": "",
+          "internalCode": "PRD-863",
+          "supplierCode": "",
+          "searchAlias": "",
+          "barcode": "",
+          "brand": "",
+          "unit": "UN",
+          "category": "assistencia-tecnica",
+          "subcategory": "",
+          "mainSupplierId": "",
+          "preferredSupplierId": "",
+          "active": false,
+          "categoryId": "ERP-CAT-4"
+        },
+        "virtualStore": {
+          "name": "Limpeza Interna e Manutenção de PlayStation 4 e 5",
+          "price": null,
+          "active": true,
+          "seoTitle": "",
+          "seoDescription": "",
+          "channels": {
+            "lojaVirtual": {
+              "enabled": true
+            },
+            "mercadoLivre": {
+              "enabled": false
+            },
+            "shopee": {
+              "enabled": false
+            },
+            "amazon": {
+              "enabled": false
+            },
+            "magalu": {
+              "enabled": false
+            }
+          }
+        },
+        "detailsEnabled": true,
+        "showVariationsOnCard": false,
+        "descriptionShort": "Seu PlayStation está esquentando demais, fazendo muito barulho ou desligando sozinho? Poeira e sujeira acumuladas internamente podem prejudicar a refrigeração e reduzir a vida útil do console.",
+        "descriptionLong": "<p>Realizamos <strong>limpeza interna e manutenção preventiva de PlayStation 4 e PlayStation 5</strong>, com cuidado técnico em cada etapa para manter o sistema de refrigeração funcionando corretamente.</p><p>✅ Limpeza interna completa<br>✅ Remoção de poeira e resíduos<br>✅ Limpeza da ventoinha e sistema de refrigeração<br>✅ Verificação das condições internas do console<br>✅ Manutenção preventiva especializada<br>✅ PlayStation 4 e PlayStation 5</p>",
+        "variations": {
+          "enabled": false,
+          "colors": [],
+          "storage": [],
+          "ram": [],
+          "condition": [],
+          "combinations": [],
+          "labels": {},
+          "colorsText": "",
+          "storageText": "",
+          "ramText": "",
+          "conditionText": "",
+          "labelsText": "{}",
+          "combinationsText": ""
+        },
+        "id": 1788046612147,
+        "inventoryBalance": {
+          "inventoryItemId": "PRD-1788046612147",
+          "locationId": "loja-principal",
+          "physicalQuantity": 0,
+          "reservedQuantity": 0,
+          "availableQuantity": 0,
+          "minimumQuantity": 0,
+          "updatedAt": "2026-08-29T23:36:52.159Z"
+        },
+        "updatedAt": "2026-08-29T23:37:11.285Z"
+      },
+      "after": {
+        "name": "Limpeza Interna e Manutenção de PlayStation 4 e 5",
+        "sku": "",
+        "code": "PRD-863",
+        "barcode": "",
+        "brand": "",
+        "slug": "limpeza-interna-e-manutencao-de-playstation-4-e-5",
+        "price": null,
+        "commercial": {
+          "costPrice": null,
+          "erpPrice": null,
+          "salePrice": null,
+          "marketplacePrice": null,
+          "promotionalPrice": null,
+          "desiredMarginPercent": null,
+          "expectedProfit": null,
+          "defaultCommissionPercent": null,
+          "cashPrice": null,
+          "installmentPrice": null,
+          "minimumPrice": null,
+          "minimumMarginPercent": null,
+          "discountPolicy": "inherit",
+          "maximumDiscountPercent": null,
+          "maximumDiscountAmount": null,
+          "requiresAuthorization": false
+        },
+        "stock": 0,
+        "inventory": {
+          "itemId": "PRD-1788046612147",
+          "stockControlled": true,
+          "allowNegative": false,
+          "minimumQuantity": 0,
+          "channelAvailability": {
+            "site": {
+              "mode": "shared",
+              "enabled": true,
+              "limit": null,
+              "physicalSafety": 0
+            }
+          }
+        },
+        "image": "images/produtos/1788046631263-limpeza-interna-e-manutena-a-o-de-playstation-4-e-5.jpg",
+        "gallery": [],
+        "category": "assistencia-tecnica",
+        "subcategory": "",
+        "tags": [],
+        "relatedManualIds": [],
+        "crossSellIds": [],
+        "showPrice": false,
+        "featured": false,
+        "active": true,
+        "erp": {
+          "sku": "",
+          "internalCode": "PRD-863",
+          "supplierCode": "",
+          "searchAlias": "",
+          "barcode": "",
+          "brand": "",
+          "unit": "UN",
+          "category": "assistencia-tecnica",
+          "subcategory": "",
+          "mainSupplierId": "",
+          "preferredSupplierId": "",
+          "active": false,
+          "categoryId": "ERP-CAT-4"
+        },
+        "virtualStore": {
+          "name": "Limpeza Interna e Manutenção de PlayStation 4 e 5",
+          "price": null,
+          "active": true,
+          "seoTitle": "Limpeza e Manutenção de PlayStation 4 e 5 | PS4 e PS5",
+          "seoDescription": "Limpeza interna e manutenção de PlayStation 4 e PS5. Remoção de poeira, limpeza da ventoinha e sistema de refrigeração para evitar aquecimento e ruídos",
+          "channels": {
+            "lojaVirtual": {
+              "enabled": true
+            },
+            "mercadoLivre": {
+              "enabled": false
+            },
+            "shopee": {
+              "enabled": false
+            },
+            "amazon": {
+              "enabled": false
+            },
+            "magalu": {
+              "enabled": false
+            }
+          }
+        },
+        "detailsEnabled": true,
+        "showVariationsOnCard": false,
+        "descriptionShort": "Seu PlayStation está esquentando demais, fazendo muito barulho ou desligando sozinho? Poeira e sujeira acumuladas internamente podem prejudicar a refrigeração e reduzir a vida útil do console.",
+        "descriptionLong": "<p>Realizamos <strong>limpeza interna e manutenção preventiva de PlayStation 4 e PlayStation 5</strong>, com cuidado técnico em cada etapa para manter o sistema de refrigeração funcionando corretamente.</p><p>✅ Limpeza interna completa<br>✅ Remoção de poeira e resíduos<br>✅ Limpeza da ventoinha e sistema de refrigeração<br>✅ Verificação das condições internas do console<br>✅ Manutenção preventiva especializada<br>✅ PlayStation 4 e PlayStation 5</p>",
+        "variations": {
+          "enabled": false,
+          "colors": [],
+          "storage": [],
+          "ram": [],
+          "condition": [],
+          "combinations": [],
+          "labels": {},
+          "colorsText": "",
+          "storageText": "",
+          "ramText": "",
+          "conditionText": "",
+          "labelsText": "{}",
+          "combinationsText": ""
+        },
+        "id": 1788046612147,
+        "inventoryBalance": {
+          "inventoryItemId": "PRD-1788046612147",
+          "locationId": "loja-principal",
+          "physicalQuantity": 0,
+          "reservedQuantity": 0,
+          "availableQuantity": 0,
+          "minimumQuantity": 0,
+          "updatedAt": "2026-08-29T23:36:52.159Z"
+        },
+        "updatedAt": "2026-08-29T23:37:11.285Z"
+      },
+      "ip": "127.0.0.1",
+      "requestId": "494f8879-0441-4c9a-a7c1-6d25b48ea05f"
     }
   ],
-  "updatedAt": "2026-08-29T23:25:58.839Z"
+  "updatedAt": "2026-08-29T23:38:23.968Z"
 }
