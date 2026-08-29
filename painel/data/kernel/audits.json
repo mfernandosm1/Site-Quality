@@ -8641,7 +8641,262 @@
       },
       "ip": "127.0.0.1",
       "requestId": "be24b6f0-19d4-46eb-b7b2-1cc4fdf77e42"
+    },
+    {
+      "id": "AUD-00000045",
+      "at": "2026-08-29T23:02:25.994Z",
+      "module": "produtos",
+      "action": "PRODUCT_UPDATED",
+      "actor": "Matheus Fernando",
+      "entityType": "product",
+      "entityId": "1788043953914",
+      "documentId": "",
+      "reason": "Cadastro de produto atualizado",
+      "before": {
+        "name": "Limpeza e Manutenção de Notebook/Computador",
+        "sku": "",
+        "code": "PRD-862",
+        "barcode": "",
+        "brand": "",
+        "slug": "limpeza-e-manutencao-de-notebook-computador",
+        "price": null,
+        "commercial": {
+          "costPrice": null,
+          "erpPrice": null,
+          "salePrice": null,
+          "marketplacePrice": null,
+          "promotionalPrice": null,
+          "desiredMarginPercent": null,
+          "expectedProfit": null,
+          "defaultCommissionPercent": null,
+          "cashPrice": null,
+          "installmentPrice": null,
+          "minimumPrice": null,
+          "minimumMarginPercent": null,
+          "discountPolicy": "inherit",
+          "maximumDiscountPercent": null,
+          "maximumDiscountAmount": null,
+          "requiresAuthorization": false
+        },
+        "stock": 0,
+        "inventory": {
+          "itemId": "PRD-1788043953914",
+          "stockControlled": true,
+          "allowNegative": false,
+          "minimumQuantity": 0,
+          "channelAvailability": {
+            "site": {
+              "mode": "shared",
+              "enabled": true,
+              "limit": null,
+              "physicalSafety": 0
+            }
+          }
+        },
+        "image": "images/produtos/1788044234163-limpeza-e-manutena-a-o-not-pc.jpg",
+        "gallery": [],
+        "category": "assistencia-tecnica",
+        "subcategory": "",
+        "tags": [],
+        "relatedManualIds": [],
+        "crossSellIds": [],
+        "showPrice": false,
+        "featured": false,
+        "active": true,
+        "erp": {
+          "sku": "",
+          "internalCode": "PRD-862",
+          "supplierCode": "",
+          "searchAlias": "",
+          "barcode": "",
+          "brand": "",
+          "unit": "UN",
+          "category": "assistencia-tecnica",
+          "subcategory": "",
+          "mainSupplierId": "",
+          "preferredSupplierId": "",
+          "active": false,
+          "categoryId": "ERP-CAT-4"
+        },
+        "virtualStore": {
+          "name": "Limpeza e Manutenção de Notebook / Computador",
+          "price": null,
+          "active": true,
+          "seoTitle": "",
+          "seoDescription": "",
+          "channels": {
+            "lojaVirtual": {
+              "enabled": true
+            },
+            "mercadoLivre": {
+              "enabled": false
+            },
+            "shopee": {
+              "enabled": false
+            },
+            "amazon": {
+              "enabled": false
+            },
+            "magalu": {
+              "enabled": false
+            }
+          }
+        },
+        "detailsEnabled": true,
+        "showVariationsOnCard": false,
+        "descriptionShort": "",
+        "descriptionLong": "<p>💻🧹 <strong>Limpeza e Manutenção de Notebook e Computador</strong></p><p>Seu notebook ou computador está aquecendo demais, fazendo muito barulho ou acumulando poeira internamente? Realizamos <strong>limpeza física e manutenção preventiva</strong>, removendo sujeira e resíduos que podem prejudicar a refrigeração e o funcionamento do equipamento</p><p>✅ Limpeza interna de notebooks e computadores<br>✅ Remoção de poeira e resíduos<br>✅ Limpeza do sistema de refrigeração<br>✅ Manutenção preventiva<br>✅ Serviço técnico profissional e cuidadoso<br></p><p>Cuide do seu equipamento, melhore a refrigeração e ajude a prolongar sua vida útil</p>",
+        "variations": {
+          "enabled": false,
+          "colors": [],
+          "storage": [],
+          "ram": [],
+          "condition": [],
+          "combinations": [],
+          "labels": {},
+          "colorsText": "",
+          "storageText": "",
+          "ramText": "",
+          "conditionText": "",
+          "labelsText": "{}",
+          "combinationsText": ""
+        },
+        "id": 1788043953914,
+        "inventoryBalance": {
+          "inventoryItemId": "PRD-1788043953914",
+          "locationId": "loja-principal",
+          "physicalQuantity": 0,
+          "reservedQuantity": 0,
+          "availableQuantity": 0,
+          "minimumQuantity": 0,
+          "updatedAt": "2026-08-29T22:52:33.934Z"
+        },
+        "updatedAt": "2026-08-29T22:57:14.203Z"
+      },
+      "after": {
+        "name": "Limpeza e Manutenção de Notebook/Computador",
+        "sku": "",
+        "code": "PRD-862",
+        "barcode": "",
+        "brand": "",
+        "slug": "limpeza-e-manutencao-de-notebook-computador",
+        "price": null,
+        "commercial": {
+          "costPrice": null,
+          "erpPrice": null,
+          "salePrice": null,
+          "marketplacePrice": null,
+          "promotionalPrice": null,
+          "desiredMarginPercent": null,
+          "expectedProfit": null,
+          "defaultCommissionPercent": null,
+          "cashPrice": null,
+          "installmentPrice": null,
+          "minimumPrice": null,
+          "minimumMarginPercent": null,
+          "discountPolicy": "inherit",
+          "maximumDiscountPercent": null,
+          "maximumDiscountAmount": null,
+          "requiresAuthorization": false
+        },
+        "stock": 0,
+        "inventory": {
+          "itemId": "PRD-1788043953914",
+          "stockControlled": true,
+          "allowNegative": false,
+          "minimumQuantity": 0,
+          "channelAvailability": {
+            "site": {
+              "mode": "shared",
+              "enabled": true,
+              "limit": null,
+              "physicalSafety": 0
+            }
+          }
+        },
+        "image": "images/produtos/1788044234163-limpeza-e-manutena-a-o-not-pc.jpg",
+        "gallery": [],
+        "category": "assistencia-tecnica",
+        "subcategory": "",
+        "tags": [],
+        "relatedManualIds": [],
+        "crossSellIds": [],
+        "showPrice": false,
+        "featured": false,
+        "active": true,
+        "erp": {
+          "sku": "",
+          "internalCode": "PRD-862",
+          "supplierCode": "",
+          "searchAlias": "",
+          "barcode": "",
+          "brand": "",
+          "unit": "UN",
+          "category": "assistencia-tecnica",
+          "subcategory": "",
+          "mainSupplierId": "",
+          "preferredSupplierId": "",
+          "active": false,
+          "categoryId": "ERP-CAT-4"
+        },
+        "virtualStore": {
+          "name": "Limpeza e Manutenção de Notebook / Computador",
+          "price": null,
+          "active": true,
+          "seoTitle": "",
+          "seoDescription": "Limpeza interna e manutenção física de notebooks, computadores e PCs. Remoção de poeira, limpeza da refrigeração e manutenção preventiva profissional",
+          "channels": {
+            "lojaVirtual": {
+              "enabled": true
+            },
+            "mercadoLivre": {
+              "enabled": false
+            },
+            "shopee": {
+              "enabled": false
+            },
+            "amazon": {
+              "enabled": false
+            },
+            "magalu": {
+              "enabled": false
+            }
+          }
+        },
+        "detailsEnabled": true,
+        "showVariationsOnCard": false,
+        "descriptionShort": "",
+        "descriptionLong": "<p>💻🧹 <strong>Limpeza e Manutenção de Notebook e Computador</strong></p><p>Seu notebook ou computador está aquecendo demais, fazendo muito barulho ou acumulando poeira internamente? Realizamos <strong>limpeza física e manutenção preventiva</strong>, removendo sujeira e resíduos que podem prejudicar a refrigeração e o funcionamento do equipamento</p><p>✅ Limpeza interna de notebooks e computadores<br>✅ Remoção de poeira e resíduos<br>✅ Limpeza do sistema de refrigeração<br>✅ Manutenção preventiva<br>✅ Serviço técnico profissional e cuidadoso<br></p><p>Cuide do seu equipamento, melhore a refrigeração e ajude a prolongar sua vida útil</p>",
+        "variations": {
+          "enabled": false,
+          "colors": [],
+          "storage": [],
+          "ram": [],
+          "condition": [],
+          "combinations": [],
+          "labels": {},
+          "colorsText": "",
+          "storageText": "",
+          "ramText": "",
+          "conditionText": "",
+          "labelsText": "{}",
+          "combinationsText": ""
+        },
+        "id": 1788043953914,
+        "inventoryBalance": {
+          "inventoryItemId": "PRD-1788043953914",
+          "locationId": "loja-principal",
+          "physicalQuantity": 0,
+          "reservedQuantity": 0,
+          "availableQuantity": 0,
+          "minimumQuantity": 0,
+          "updatedAt": "2026-08-29T22:52:33.934Z"
+        },
+        "updatedAt": "2026-08-29T22:57:14.203Z"
+      },
+      "ip": "127.0.0.1",
+      "requestId": "7442479a-c7c5-4258-bea9-82082acf5a22"
     }
   ],
-  "updatedAt": "2026-08-29T21:08:06.390Z"
+  "updatedAt": "2026-08-29T23:02:25.999Z"
 }

@@ -1541,13 +1541,14 @@ html[data-panel-theme="light"] .quality-master-area,html[data-panel-theme="light
         <label>Código de barras<input type="text" name="barcode" inputmode="numeric"></label>
         <label>Marca<input type="text" name="brand"></label>
         <label>Categoria ERP
-          <select name="erpCategory" required>
-            <option value="">Selecione uma categoria...</option>
+          <select name="erpCategory">
+            <option value="">Sem categoria ERP</option>
             <% (erpCategorias || []).filter(c => c.active !== false).forEach(c => { %><option value="<%= c.id %>" data-category-type="<%= c.type || 'product' %>" <%= requestedWorkspaceType === 'service' && defaultServiceCategory && String(defaultServiceCategory.id) === String(c.id) ? 'selected' : '' %>><%= '— '.repeat(c.depth || 0) %><%= c.name %></option><% }) %>
           </select>
+          <small class="quality-edit-help">Obrigatória apenas quando este cadastro fizer parte do ERP. Para produto exclusivo do site, pode ficar em branco.</small>
         </label>
 <div class="quality-category-separation-note"><strong>Categoria interna</strong><small>Não altera SEO, URL ou navegação da Loja Virtual.</small></div>
-        <label class="inventory-check"><input type="checkbox" name="erpActive" value="true" checked> <%= requestedWorkspaceType === 'service' ? 'Serviço ativo no ERP' : 'Produto ativo no ERP' %></label>
+        <label class="inventory-check"><input type="hidden" name="erpActive" value="false"><input type="checkbox" name="erpActive" value="true" checked> <%= requestedWorkspaceType === 'service' ? 'Serviço ativo no ERP' : 'Produto ativo no ERP' %></label>
       </div>
       <details class="quality-master-extra">
         <summary>＋ Dados internos adicionais</summary>
@@ -1588,11 +1589,12 @@ html[data-panel-theme="light"] .quality-master-area,html[data-panel-theme="light
     <div class="field-category" data-site-category-field data-create-section="site" data-create-lv-dependent>
       <label>Categoria Loja Virtual</label>
       <select name="siteCategory" class="js-category-select" data-subcategory-target="add-product-subcategory">
-        <option value="">Sem categoria</option>
+        <option value="">Selecione uma categoria...</option>
         <% (categorias || []).forEach(c => { %>
           <option value="<%= c.slug %>" <%= listState?.category === c.slug ? 'selected' : '' %>><%= c.name %></option>
         <% }) %>
       </select>
+      <small class="quality-edit-help">Obrigatória para produto ativo na Loja Virtual. No cadastro novo, basta existir categoria no ERP ou no Site.</small>
     </div>
 
     <div class="field-category" data-site-category-field data-create-section="site" data-create-lv-dependent>
@@ -1756,13 +1758,14 @@ html[data-panel-theme="light"] .quality-master-area,html[data-panel-theme="light
       <small class="variation-help">As etiquetas aparecem no card e na página do produto. Use poucas para não poluir.</small>
     </div>
 
-    <div style="grid-column: 1 / -1;" data-create-lv-dependent>
+    <div class="add-description-editor-wrap" data-create-section="site" data-create-lv-dependent style="grid-column:1 / -1;">
+      <div style="margin-bottom:10px;">
+        <strong>📝 Descrição do produto no site</strong>
+        <small class="quality-edit-help" style="display:block;margin-top:3px;">Texto exibido na Loja Virtual e usado para apresentar melhor o produto ao cliente.</small>
+      </div>
       <label>Descrição curta</label>
       <input type="text" name="descriptionShort" placeholder="Ex.: Novo, lacrado, 128GB, garantia...">
-    </div>
-
-    <div class="add-description-editor-wrap" data-create-lv-dependent>
-      <label>Descrição completa</label>
+      <label style="display:block;margin-top:12px;">Descrição completa</label>
       <textarea name="descriptionLong" id="add-description-long-hidden" style="display:none;"></textarea>
       <div class="description-toolbar" style="margin-top:8px;">
         <button type="button" data-add-desc-cmd="bold"><b>B</b></button>
@@ -1773,7 +1776,7 @@ html[data-panel-theme="light"] .quality-master-area,html[data-panel-theme="light
         <button type="button" id="add-description-clear-format">Limpar formatação</button>
       </div>
       <div id="add-description-long-editor" class="description-rich-editor" contenteditable="true" data-placeholder="Detalhes do produto, características, garantia, conteúdo da caixa..."></div>
-      <small class="variation-help">Agora o cadastro novo também aceita negrito, títulos e listas. Ao clicar em Adicionar, o texto é salvo automaticamente.</small>
+      <small class="variation-help">Aceita negrito, títulos e listas. Ao clicar em Adicionar, o texto é salvo automaticamente.</small>
     </div>
 
     <div style="align-self:end">
@@ -2643,11 +2646,34 @@ document.addEventListener("DOMContentLoaded", () => {
   const addProductForm = document.getElementById('add-product-form');
   addProductForm?.addEventListener('submit', (event) => {
     const erpCategory = addProductForm.querySelector('select[name="erpCategory"]');
-    if (erpCategory && !erpCategory.value) {
+    const siteCategory = addProductForm.querySelector('select[name="siteCategory"]');
+    const erpActive = addProductForm.querySelector('input[name="erpActive"][type="checkbox"]');
+    const lvActive = addProductForm.querySelector('select[name="lvActive"]');
+
+    const hasErpCategory = Boolean(erpCategory?.value);
+    const hasSiteCategory = Boolean(siteCategory?.value);
+
+    if (!hasErpCategory && !hasSiteCategory) {
       event.preventDefault();
-      alert('Selecione uma categoria do ERP antes de cadastrar o produto.');
-      erpCategory.focus();
+      alert('Selecione pelo menos uma categoria: Categoria ERP ou Categoria Loja Virtual.');
+      const activeTab = lvActive?.value === 'true'
+        ? document.querySelector('.product-create-tab[data-create-tab="site"]')
+        : document.querySelector('.product-create-tab[data-create-tab="general"]');
+      activeTab?.click();
+      (lvActive?.value === 'true' ? siteCategory : erpCategory)?.focus();
+      return;
     }
+
+    if (lvActive?.value === 'true' && !hasSiteCategory) {
+      event.preventDefault();
+      alert('Para deixar o produto ativo na Loja Virtual, selecione uma Categoria Loja Virtual. Se for somente ERP, deixe a Loja Virtual como Inativa.');
+      document.querySelector('.product-create-tab[data-create-tab="site"]')?.click();
+      siteCategory?.focus();
+      return;
+    }
+
+    // Cadastro exclusivo do site: não deixa o produto ativo no ERP sem categoria interna.
+    if (!hasErpCategory && hasSiteCategory && erpActive) erpActive.checked = false;
   });
 
   document.querySelectorAll('.js-category-select').forEach(select => {

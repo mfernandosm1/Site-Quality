@@ -3686,6 +3686,28 @@
       "createdBy": "Matheus Fernando",
       "balanceBefore": null,
       "balanceAfter": null
+    },
+    {
+      "id": "CXM-1788037961879-QT79F",
+      "sessionId": "CXS-1787972404551-JLD03",
+      "cashboxId": "caixa-principal",
+      "type": "withdrawal",
+      "methodId": "PM-DINHEIRO",
+      "signedAmount": -11733.04,
+      "amount": 11733.04,
+      "description": "retirada de caixa",
+      "referenceType": "manual",
+      "referenceId": "",
+      "idempotencyKey": "",
+      "metadata": null,
+      "status": "posted",
+      "verified": false,
+      "verifiedAt": "",
+      "verifiedBy": "",
+      "createdAt": "2026-08-29T21:12:41.879Z",
+      "createdBy": "Matheus Fernando",
+      "balanceBefore": 11805.84,
+      "balanceAfter": 72.8
     }
   ]
 }

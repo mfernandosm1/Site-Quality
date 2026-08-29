@@ -198,13 +198,26 @@ export default class CommerceService {
   }
   paymentMethod(id=''){ return (this.getSettings().paymentMethods||[]).find(method=>text(method.id)===text(id))||null; }
   isCashMethod(id=''){
-    const method=this.paymentMethod(id); if(!method)return text(id)==='dinheiro';
-    const marker=text(`${method.id} ${method.code||''} ${method.name||''} ${method.kind||''} ${method.eventType||''}`).normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase();
-    return method.kind==='cash'||method.eventType==='cash'||marker.includes('dinheiro')||marker.includes(' cash');
+    const rawId=text(id);
+    const normalizedId=rawId.normalize('NFD').replace(/[\u0300-\u036f]/g,'').trim().toLowerCase();
+    if(normalizedId==='dinheiro'||normalizedId==='pm-dinheiro') return true;
+    const method=this.paymentMethod(rawId);
+    if(!method) return false;
+    const name=text(method.name).normalize('NFD').replace(/[\u0300-\u036f]/g,'').trim().toLowerCase();
+    const code=text(method.code).trim().toUpperCase();
+    // Dinheiro físico precisa ser identificado pela forma em si. Não use apenas
+    // kind/eventType="cash": formas antigas personalizadas podem ter herdado esses
+    // campos mesmo sem representar dinheiro na gaveta (ex.: convênios).
+    return name==='dinheiro'||code==='DIN'||text(method.id)==='PM-DINHEIRO';
   }
   getCashMethodId(){
     const methods=this.getSettings().paymentMethods||[];
-    const method=methods.find(item=>item.active!==false&&this.isCashMethod(item.id));
+    // Prioriza a forma sistêmica e, depois, identificadores explícitos de Dinheiro.
+    // Evita escolher uma forma personalizada que tenha kind/eventType="cash" por legado.
+    const method=methods.find(item=>item.active!==false&&text(item.id)==='PM-DINHEIRO')
+      || methods.find(item=>item.active!==false&&text(item.name).normalize('NFD').replace(/[\u0300-\u036f]/g,'').trim().toLowerCase()==='dinheiro')
+      || methods.find(item=>item.active!==false&&text(item.code).trim().toUpperCase()==='DIN')
+      || methods.find(item=>item.active!==false&&text(item.id)==='dinheiro');
     return text(method?.id)||'dinheiro';
   }
   isManualCashMovementMethod(id=''){

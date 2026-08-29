@@ -1975,7 +1975,10 @@ router.get('/', (req, res) => {
   if (req.query.saved === 'details_on') flash = '✅ Detalhes ativados nos produtos selecionados.';
   if (req.query.saved === 'details_off') flash = '✅ Detalhes desativados nos produtos selecionados.';
   if (req.query.deleted === '1') flash = '🗑️ Produto excluído com sucesso.';
-  if (req.query.error === 'erp_category') flash = '⚠️ Selecione uma categoria do ERP antes de cadastrar o produto.';
+  if (req.query.error === 'erp_category') flash = '⚠️ A Categoria ERP selecionada não é válida ou está inativa.';
+  if (req.query.error === 'site_category') flash = '⚠️ A Categoria da Loja Virtual selecionada não é válida.';
+  if (req.query.error === 'category_required') flash = '⚠️ Selecione pelo menos uma categoria: ERP ou Loja Virtual.';
+  if (req.query.error === 'site_category_required') flash = '⚠️ Para ativar o produto na Loja Virtual, selecione uma Categoria da Loja Virtual.';
 
   const cleanedLegacyServices = cleanupLegacyServiceVariations(data.items || [], erpCategorias);
   const reconciledVariationGrids = reconcileStoredVariationGrids(data.items || []);
@@ -2304,14 +2307,52 @@ router.post('/add', (req, res) => {
   if (createBody.lvActive === undefined && createBody.active === undefined && createBody.publishSite === undefined) {
     createBody.lvActive = 'false';
   }
+
+  // Cadastro exclusivo da Loja Virtual pode usar o Nome LV como nome interno de segurança.
+  // Assim o registro continua tendo identificação no banco sem obrigar o usuário a preencher
+  // um nome de ERP para um item que não participará do ERP.
+  if (!String(createBody.erpName || createBody.name || '').trim() && String(createBody.lvName || '').trim()) {
+    createBody.erpName = String(createBody.lvName).trim();
+  }
+
   const novo = productFromBody(createBody);
-  const erpCategory = validErpCategory(createBody.erpCategory, erpCategorias);
-  if (!erpCategory || erpCategory.active === false) return res.redirect('/produtos?error=erp_category');
+  const submittedErpCategory = String(createBody.erpCategory || '').trim();
+  const erpCategory = validErpCategory(submittedErpCategory, erpCategorias);
+  if (submittedErpCategory && (!erpCategory || erpCategory.active === false)) {
+    return res.redirect('/produtos?workspace=new&error=erp_category');
+  }
+
+  const submittedSiteCategory = String(createBody.siteCategory ?? createBody.category ?? '').trim();
+  const normalizedSiteCategory = submittedSiteCategory ? normalizeCategoryValue(submittedSiteCategory, categorias) : '';
+  const siteCategory = submittedSiteCategory
+    ? (categorias || []).find(category => String(category?.slug || gerarSlug(category?.name || '')) === normalizedSiteCategory)
+    : null;
+  if (submittedSiteCategory && !siteCategory) {
+    return res.redirect('/produtos?workspace=new&error=site_category');
+  }
+
+  if (!erpCategory && !siteCategory) {
+    return res.redirect('/produtos?workspace=new&error=category_required');
+  }
+
+  const requestedLvActive = booleanFromBody(createBody.lvActive ?? createBody.active ?? createBody.publishSite, false);
+  if (requestedLvActive && !siteCategory) {
+    return res.redirect('/produtos?workspace=new&error=site_category_required');
+  }
+
   novo.id = Date.now();
   novo.erp = novo.erp && typeof novo.erp === 'object' ? novo.erp : {};
-  novo.erp.categoryId = erpCategory.id;
-  novo.erp.category = erpCategory.code;
-  if (erpCategory.type === 'service') {
+  if (erpCategory) {
+    novo.erp.categoryId = erpCategory.id;
+    novo.erp.category = erpCategory.code;
+  } else {
+    // Produto exclusivo do site: não fica ativo no ERP sem classificação interna.
+    delete novo.erp.categoryId;
+    novo.erp.category = '';
+    novo.erp.active = false;
+  }
+
+  if (erpCategory?.type === 'service') {
     novo.erp.type = 'service';
     // Serviço é sempre um cadastro vendável único. Não usa grade/variações de produto.
     // Isso garante preço, histórico e seleção independentes no PDV.
@@ -2320,8 +2361,8 @@ router.post('/add', (req, res) => {
     novo.inventory = defaultInventoryPolicy(novo, { stockControlled: 'false', allowNegative: 'false', inventorySiteMode: 'disabled', minimumQuantity: 0, siteLimit: 0, physicalSafety: 0 });
   }
   else {
-    // Regra padrão do ERP: todo produto físico novo participa do controle de estoque.
-    // Serviços permanecem fora do estoque pelo bloco acima.
+    // Regra padrão do ERP: produto físico novo participa do controle de estoque.
+    // Isso também permite controlar saldo de um item exclusivo da Loja Virtual.
     novo.inventory = defaultInventoryPolicy(novo, {
       stockControlled: 'true',
       allowNegative: String(novo?.inventory?.allowNegative === true),
@@ -2333,8 +2374,17 @@ router.post('/add', (req, res) => {
   }
   novo.erp.internalCode = nextInternalProductCode(data.items);
   novo.code = novo.erp.internalCode;
-  novo.category = normalizeCategoryValue(novo.category, categorias);
+  novo.category = siteCategory ? String(siteCategory.slug || gerarSlug(siteCategory.name || '')).trim() : '';
   novo.subcategory = normalizeSubcategoryValue(novo.subcategory, novo.category, categorias, loadSubcategories(req.app));
+
+  // Sem categoria de site, o item não pode ficar publicado por acidente.
+  if (!siteCategory) {
+    novo.active = false;
+    novo.virtualStore = novo.virtualStore && typeof novo.virtualStore === 'object' ? novo.virtualStore : {};
+    novo.virtualStore.active = false;
+    novo.virtualStore.channels = novo.virtualStore.channels && typeof novo.virtualStore.channels === 'object' ? novo.virtualStore.channels : {};
+    novo.virtualStore.channels.lojaVirtual = { ...(novo.virtualStore.channels.lojaVirtual || {}), enabled: false };
+  }
 
   if (!novo.name) {
     return res.redirect('/produtos?error=name');
