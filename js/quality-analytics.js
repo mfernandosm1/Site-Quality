@@ -1,188 +1,81 @@
-/* Quality V8.3.5 - Analytics: coleta real no site
-   Coleta silenciosa: visualizações, favoritos, WhatsApp, compartilhamento, buscas e categorias.
-   Não altera layout nem comportamento do site. */
 (function(){
-  if (window.__qualityAnalyticsV835) return;
-  window.__qualityAnalyticsV835 = true;
+  if(window.__qualitySiteAnalyticsFavoriteV1) return;
+  window.__qualitySiteAnalyticsFavoriteV1 = true;
 
-  // Em localhost, usa o endpoint relativo do painel Node.
-  // No site publicado (GitHub Pages), envia para o Google Apps Script/Sheets.
-  // Pode ser sobrescrito antes deste script, se necessário:
-  // window.QUALITY_ANALYTICS_ENDPOINT = 'https://outro-endpoint/exec';
-  var DEFAULT_PUBLIC_ENDPOINT = 'https://script.google.com/macros/s/AKfycbwZQ01q5u5lRqE3Hk-nMutkTWcLA8r7127sO3Dt132Ti8L0Ci7DWoOyby5v92T_WY34/exec';
-  var IS_LOCAL = location.hostname === 'localhost' || location.hostname === '127.0.0.1';
-  var ENDPOINT = window.QUALITY_ANALYTICS_ENDPOINT || (IS_LOCAL ? '/analytics/track' : DEFAULT_PUBLIC_ENDPOINT);
-  var ANALYTICS_KEY = window.QUALITY_ANALYTICS_KEY || 'quality-analytics-v1';
-  var IS_APPS_SCRIPT = /script\.google\.com\/macros\/s\//i.test(ENDPOINT);
+  var ENDPOINT = 'https://script.google.com/macros/s/AKfycbwZQ01q5u5lRqE3Hk-nMutkTWcLA8r7127sO3Dt132Ti8L0Ci7DWoOyby5v92T_WY34/exec';
+  var KEY = 'quality-analytics-v1';
 
-  function clean(v, max){
-    return String(v == null ? '' : v).replace(/[<>]/g, '').trim().slice(0, max || 180);
-  }
-
-  function slugFromPath(){
-    try {
-      var parts = location.pathname.split('/').filter(Boolean);
-      var i = parts.indexOf('produto');
-      if (i >= 0 && parts[i + 1]) return decodeURIComponent(parts[i + 1]);
-      return '';
-    } catch(e){ return ''; }
-  }
-
-  function categoryFromPath(){
-    try {
-      var parts = location.pathname.split('/').filter(Boolean);
-      if (!parts.length) return '';
-      if (parts[0] === 'site') return '';
-      if (parts[0] === 'produto') return '';
-      if (parts[0].includes('.html')) return '';
-      return decodeURIComponent(parts[0]);
-    } catch(e){ return ''; }
-  }
-
-  function absUrl(url){
-    try { return new URL(url || location.href, location.origin).href; }
-    catch(e){ return location.href; }
-  }
-
+  function clean(v, max){ return String(v == null ? '' : v).trim().slice(0, max || 300); }
   function productFromButton(btn){
-    if (!btn) return {};
     return {
-      id: clean(btn.getAttribute('data-id') || '', 80),
-      slug: clean(btn.getAttribute('data-slug') || '', 120),
-      name: clean(btn.getAttribute('data-name') || btn.closest('.product-card,.produto-card,.produto-layout')?.querySelector('h1,h3,strong')?.textContent || 'Produto', 140),
-      image: clean(btn.getAttribute('data-image') || '', 260),
-      url: absUrl(btn.getAttribute('data-url') || location.href)
+      id: clean(btn.getAttribute('data-id') || '',120),
+      slug: clean(btn.getAttribute('data-slug') || btn.getAttribute('data-id') || '',120),
+      name: clean(btn.getAttribute('data-name') || 'Produto',140),
+      image: clean(btn.getAttribute('data-image') || '',260),
+      url: clean(btn.getAttribute('data-url') || window.location.href,300)
     };
   }
-
-  function currentProduct(){
-    var slug = slugFromPath();
-    var title = document.querySelector('.produto-info h1, #produto-detalhe h1, h1, .product-card h3, .produto-card h3');
-    var img = document.querySelector('#produto-detalhe img, .galeria-principal img, .product-card img, .produto-card img');
-    return {
-      slug: clean(slug, 120),
-      name: clean(title ? title.textContent : (slug || document.title || 'Produto'), 140),
-      image: clean(img ? (img.getAttribute('src') || '') : '', 260),
-      url: location.href
-    };
-  }
-
-  function payloadBase(extra){
-    return Object.assign({
-      url: location.href,
-      referrer: document.referrer || '',
-      language: navigator.language || '',
-      viewport: (window.innerWidth || 0) + 'x' + (window.innerHeight || 0),
-      device: /Mobi|Android|iPhone|iPad/i.test(navigator.userAgent) ? 'mobile' : 'desktop'
-    }, extra || {});
-  }
-
-  function send(type, data){
+  function deviceName(){ return /Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent || '') ? 'mobile' : 'desktop'; }
+  function directPost(type, product){
+    var body = JSON.stringify({
+      key:KEY, action:'track', type:type, event:type, Evento:type,
+      at:new Date().toISOString(), Data:new Date().toISOString(),
+      product:product,
+      slug:product.slug, name:product.name,
+      Produto:product.name, SlugProduto:product.slug,
+      url:window.location.href, Pagina:window.location.href,
+      referrer:document.referrer || '', Origem:document.referrer || '',
+      device:deviceName(), Dispositivo:deviceName(),
+      language:navigator.language || '', Idioma:navigator.language || '',
+      viewport:String(window.innerWidth || 0) + 'x' + String(window.innerHeight || 0),
+      Viewport:String(window.innerWidth || 0) + 'x' + String(window.innerHeight || 0)
+    });
     try {
-      var payload = payloadBase(Object.assign({ type: type, key: ANALYTICS_KEY }, data || {}));
-      var body = JSON.stringify(payload);
-
-      // Google Apps Script funciona melhor como requisição simples, sem preflight CORS.
-      if (IS_APPS_SCRIPT) {
-        if (navigator.sendBeacon) {
-          var blob = new Blob([body], { type: 'text/plain;charset=utf-8' });
-          if (navigator.sendBeacon(ENDPOINT, blob)) return;
-        }
-        fetch(ENDPOINT, {
-          method: 'POST',
-          mode: 'no-cors',
-          headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-          body: body,
-          keepalive: true,
-          cache: 'no-store'
-        }).catch(function(){});
-        return;
+      if(navigator.sendBeacon){
+        var blob = new Blob([body], {type:'text/plain;charset=UTF-8'});
+        if(navigator.sendBeacon(ENDPOINT, blob)) return;
       }
-
-      // Painel local Node/Express.
-      if (navigator.sendBeacon) {
-        var localBlob = new Blob([body], { type: 'application/json' });
-        if (navigator.sendBeacon(ENDPOINT, localBlob)) return;
-      }
-      fetch(ENDPOINT, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: body,
-        keepalive: true,
-        cache: 'no-store'
-      }).catch(function(){});
+    } catch(e){}
+    try {
+      fetch(ENDPOINT, {method:'POST', mode:'no-cors', keepalive:true, headers:{'Content-Type':'text/plain;charset=UTF-8'}, body:body});
     } catch(e){}
   }
-
-  window.QualityAnalyticsTrack = send;
-
-  function trackInitialPage(){
-    send('page_view', {});
-
-    var cat = categoryFromPath();
-    if (cat) {
-      send('category_view', { category: { slug: cat, name: cat, url: location.href }, slug: cat, name: cat });
-    }
-
-    if (slugFromPath()) {
-      // Espera o produto carregar por JS antes de pegar nome/imagem.
-      // Apenas um disparo para evitar duplicação de product_view.
-      setTimeout(function(){ send('product_view', { product: currentProduct() }); }, 900);
-    }
-  }
-
-  function bindClicks(){
-    document.addEventListener('click', function(ev){
-      var fav = ev.target.closest && ev.target.closest('[data-quality-fav]');
-      if (fav) {
-        send('favorite', { product: productFromButton(fav) });
+  function track(type, product){
+    try {
+      if(typeof window.qualityAnalyticsTrack === 'function'){
+        window.qualityAnalyticsTrack(type, {product:product});
         return;
       }
-
-      var share = ev.target.closest && ev.target.closest('[data-quality-share]');
-      if (share) {
-        send('share_click', { product: productFromButton(share) });
+      if(window.QualityAnalytics && typeof window.QualityAnalytics.track === 'function'){
+        window.QualityAnalytics.track(type, {product:product});
         return;
       }
-
-      var link = ev.target.closest && ev.target.closest('a[href]');
-      if (!link) return;
-      var href = link.getAttribute('href') || '';
-
-      if (/wa\.me|whatsapp\.com|api\.whatsapp\.com/i.test(href)) {
-        var product = productFromButton(link);
-        if (!product.name || product.name === 'Produto') product = currentProduct();
-        try {
-          var decoded = decodeURIComponent(href);
-          var m = decoded.match(/interesse\s+em\s+([^\n&]+)/i);
-          if (m && m[1]) product.name = clean(m[1], 140);
-        } catch(e){}
-        send('whatsapp_click', { product: product });
-        return;
-      }
-    }, true);
-
-    document.addEventListener('keydown', function(ev){
-      if (ev.key !== 'Enter') return;
-      var input = ev.target;
-      if (!input || !/(search-input|search-input-mobile)/.test(input.id || '')) return;
-      var term = clean(input.value || '', 100);
-      if (term) send('search', { term: term, query: term });
-    }, true);
-
-    document.addEventListener('click', function(ev){
-      var btn = ev.target.closest && ev.target.closest('#search-button,#search-button-mobile');
-      if (!btn) return;
-      var input = btn.id === 'search-button-mobile' ? document.getElementById('search-input-mobile') : document.getElementById('search-input');
-      var term = clean(input && input.value || '', 100);
-      if (term) send('search', { term: term, query: term });
-    }, true);
+    } catch(e){}
+    directPost(type, product);
+  }
+  function isFavoriteNow(btn, product){
+    if(btn.classList.contains('is-active')) return true;
+    try {
+      var items = JSON.parse(localStorage.getItem('quality_favoritos_v811') || '[]');
+      var key = String(product.slug || product.id || product.url || product.name || '').trim().toLowerCase();
+      return Array.isArray(items) && items.some(function(item){
+        var itemKey = String((item && (item.slug || item.id || item.url || item.name || item.nome)) || '').trim().toLowerCase();
+        return key && itemKey === key;
+      });
+    } catch(e){ return false; }
   }
 
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', function(){ bindClicks(); trackInitialPage(); });
-  } else {
-    bindClicks();
-    trackInitialPage();
-  }
+  document.addEventListener('click', function(ev){
+    var btn = ev.target && ev.target.closest ? ev.target.closest('[data-quality-fav]') : null;
+    if(!btn) return;
+    var product = productFromButton(btn);
+    window.setTimeout(function(){
+      if(!isFavoriteNow(btn, product)) return; // remoção não vira novo evento
+      var stamp = Number(btn.getAttribute('data-quality-analytics-fav-at') || 0);
+      var now = Date.now();
+      if(stamp && now - stamp < 1500) return;
+      btn.setAttribute('data-quality-analytics-fav-at', String(now));
+      track('favorite', product);
+    }, 0);
+  }, false);
 })();
