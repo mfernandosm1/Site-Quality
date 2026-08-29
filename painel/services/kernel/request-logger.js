@@ -13,6 +13,29 @@ function safeDetails(req) {
   return keys.length ? { bodyFields: keys.slice(0, 40), queryFields: Object.keys(req.query || {}).slice(0, 40) } : null;
 }
 
+function mutationDescription(req) {
+  const route=String(req.originalUrl||'').split('?')[0],method=String(req.method||'').toUpperCase();
+  const body=req.body||{};
+  const rules=[
+    [/^\/erp\/pdv\/trocas-devolucoes$/,()=>({action:body.type==='exchange'?'TROCA_REGISTRADA':'DEVOLUCAO_REGISTRADA',label:body.type==='exchange'?'Troca registrada no PDV':'Devolução registrada no PDV'})],
+    [/^\/erp\/pdv\/operacoes\/[^/]+\/finalizar$/,()=>({action:'PDV_FINALIZADO',label:'Venda ou O.S. finalizada no PDV'})],
+    [/^\/erp\/pdv\/operacoes\/[^/]+\/estornar$/,()=>({action:'OPERACAO_ESTORNADA',label:'Venda ou O.S. estornada'})],
+    [/^\/erp\/pdv\/operacoes$/,()=>({action:'OPERACAO_PDV_SALVA',label:body.type==='service_order'?'O.S. salva no PDV':'Venda salva no PDV'})],
+    [/^\/erp\/clientes\/[^/]+\/api\/carteira$/,()=>({action:body.direction==='debit'?'CREDITO_CLIENTE_UTILIZADO':'CREDITO_CLIENTE_ADICIONADO',label:body.direction==='debit'?'Débito lançado na carteira do cliente':'Crédito lançado na carteira do cliente'})],
+    [/^\/erp\/pdv\/caixa\/abrir$/,()=>({action:'CAIXA_ABERTO',label:'Caixa operacional aberto'})],
+    [/^\/erp\/pdv\/caixa\/fechar$/,()=>({action:'CAIXA_FECHADO',label:'Caixa operacional fechado'})],
+    [/^\/erp\/pdv\/caixa\/movimentar$/,()=>({action:'MOVIMENTO_CAIXA',label:'Movimentação registrada no caixa'})],
+    [/^\/produtos\/(?:update|api\/[^/]+)$/i,()=>({action:'PRODUTO_ATUALIZADO',label:'Produto atualizado'})],
+    [/^\/produtos\/(?:add|novo)/i,()=>({action:'PRODUTO_CADASTRADO',label:'Produto cadastrado'})],
+    [/^\/erp\/clientes(?:\/|$)/,()=>({action:'CLIENTE_ATUALIZADO',label:'Cadastro de cliente alterado'})],
+    [/^\/erp\/compras(?:\/|$)/,()=>({action:'COMPRA_ATUALIZADA',label:'Compra ou entrada de mercadoria alterada'})],
+    [/^\/erp\/financeiro(?:\/|$)/,()=>({action:'FINANCEIRO_ATUALIZADO',label:'Movimentação financeira registrada'})]
+  ];
+  for(const [pattern,build] of rules){if(pattern.test(route))return build();}
+  const module=moduleFromPath(route);
+  return {action:`${module.toUpperCase().replace(/[^A-Z0-9]+/g,'_')}_${method}`,label:`Alteração registrada em ${module}`};
+}
+
 export default function requestLogger(kernel) {
   return (req, res, next) => {
     if (req.path.startsWith('/public/') || req.path.startsWith('/content/') || req.path.startsWith('/images/') || req.path.startsWith('/js/')) return next();
@@ -24,9 +47,13 @@ export default function requestLogger(kernel) {
       // PAGE_VIEW e GET comum não são mais gravados. Eles geravam dezenas de
       // milhares de registros e bloqueavam a próxima navegação sem ganho operacional.
       if (!isMutation && !isError) return;
-      kernel.logs.record({ ...req.kernelContext, action:`HTTP_${req.method}`, route:req.originalUrl.split('?')[0], method:req.method,
+      // Rotas que já gravaram um log semântico (com venda, cliente, valor etc.)
+      // não recebem um segundo registro genérico de HTTP. Falhas sempre são preservadas.
+      if(req.kernelSemanticLogged && !isError) return;
+      const semantic=mutationDescription(req);
+      kernel.logs.record({ ...req.kernelContext, action:isError?`ERRO_${semantic.action}`:semantic.action, route:req.originalUrl.split('?')[0], method:req.method,
         statusCode:res.statusCode, result:isError?'error':'success', durationMs:Date.now()-started,
-        category:isError?'error':'operational', label:isError?'Falha HTTP':'Operação executada', details:safeDetails(req) });
+        category:isError?'error':'operational', label:isError?`Falha ao executar: ${semantic.label}`:semantic.label, details:safeDetails(req) });
     });
     next();
   };

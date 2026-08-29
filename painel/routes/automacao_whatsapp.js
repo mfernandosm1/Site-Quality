@@ -442,14 +442,14 @@ function keywordRulesData(app){
     modo:['contem','igual','comeca'].includes(item.modo)?item.modo:'contem',
     palavras:splitKeywordInput(item.palavras||item.keywords||[]),
     blocoId:safeText(item.blocoId||'',120),
-    ativo:item.ativo!==false,
+    ativo:item.ativo!==false && Boolean(safeText(item.blocoId||'',120)),
     execucoes:Math.max(0,Number(item.execucoes||0)),
     execucoesHistorico:(Array.isArray(item.execucoesHistorico)?item.execucoesHistorico:[]).map(hit=>({at:hit?.at||null,palavra:safeText(hit?.palavra||'',180),mensagem:safeText(hit?.mensagem||'',240)})).filter(hit=>hit.at).slice(-1200),
     criadoEm:item.criadoEm||now(),
     atualizadoEm:item.atualizadoEm||item.criadoEm||now(),
     ultimoAcionamentoEm:item.ultimoAcionamentoEm||null,
     ultimaMensagem:safeText(item.ultimaMensagem||'',300)
-  })).filter(item=>item.palavras.length && item.blocoId);
+  })).filter(item=>item.palavras.length);
   return {version:1,items};
 }
 function saveKeywordRulesData(app,data){
@@ -3095,12 +3095,14 @@ router.post('/palavras-chave/salvar',(req,res)=>{
     const blocoId=safeText(body.blocoId,120);
     const modo=['contem','igual','comeca'].includes(body.modo)?body.modo:'contem';
     if(!palavras.length) throw new Error('Informe ao menos uma palavra ou frase que deve acionar a automação.');
-    const bloco=findBlockByReference(req.app,blocoId);
-    if(!bloco) throw new Error('Selecione um bloco válido para executar.');
+    const bloco=blocoId ? findBlockByReference(req.app,blocoId) : null;
+    if(blocoId && !bloco) throw new Error('O bloco selecionado não existe mais. Atualize a lista e escolha outro bloco.');
     const existing=data.items.find(item=>item.id===id);
+    const requestedActive=body.ativo==='on'||body.ativo==='true';
     const rule={
-      id,nome:safeText(body.nome,160)||bloco.nome,modo,palavras,blocoId,
-      ativo:body.ativo==='on'||body.ativo==='true',
+      id,nome:safeText(body.nome,160)||(bloco?.nome)||'Automação sem nome',modo,palavras,blocoId,
+      // Cadastro sem bloco é permitido como rascunho, mas nunca pode ficar ativo.
+      ativo:Boolean(blocoId && bloco && requestedActive),
       execucoes:Number(existing?.execucoes||0),
       criadoEm:existing?.criadoEm||now(),atualizadoEm:now(),
       ultimoAcionamentoEm:existing?.ultimoAcionamentoEm||null,
@@ -3110,7 +3112,7 @@ router.post('/palavras-chave/salvar',(req,res)=>{
     if(index>=0) data.items[index]=rule; else data.items.push(rule);
     saveKeywordRulesData(req.app,data);
     addLog(req.app,'palavra_chave_salva',`Regra de palavra-chave salva: ${rule.nome}.`,{regraId:rule.id,blocoId:rule.blocoId,palavras:rule.palavras,modo:rule.modo,ativo:rule.ativo});
-    flash(res,'/automacao-whatsapp?tab=palavras-chave','⚡ Automação salva.');
+    flash(res,'/automacao-whatsapp?tab=palavras-chave',rule.blocoId?'⚡ Automação salva.':'⚠️ Automação salva como rascunho, sem bloco vinculado e inativa.');
   }catch(error){ flash(res,'/automacao-whatsapp?tab=palavras-chave',error.message||'Não foi possível salvar a palavra-chave.'); }
 });
 router.post('/palavras-chave/toggle/:id',(req,res)=>{
@@ -3118,6 +3120,8 @@ router.post('/palavras-chave/toggle/:id',(req,res)=>{
     const data=keywordRulesData(req.app),id=safeText(req.params.id,100);
     const rule=data.items.find(item=>item.id===id);
     if(!rule) throw new Error('Regra não encontrada.');
+    if(!rule.ativo && !rule.blocoId) throw new Error('Vincule um bloco antes de ativar esta automação.');
+    if(!rule.ativo && !findBlockByReference(req.app,rule.blocoId)) throw new Error('O bloco vinculado não existe mais. Edite a automação antes de ativá-la.');
     rule.ativo=!rule.ativo;rule.atualizadoEm=now();saveKeywordRulesData(req.app,data);
     addLog(req.app,'palavra_chave_status',`Regra ${rule.ativo?'ativada':'desativada'}: ${rule.nome}.`,{regraId:rule.id});
     flash(res,'/automacao-whatsapp?tab=palavras-chave',rule.ativo?'✅ Automação ativada.':'⏸️ Automação desativada.');
@@ -3142,6 +3146,18 @@ router.post('/palavras-chave/mover/:id',(req,res)=>{
     if(target>=0&&target<data.items.length){[data.items[index],data.items[target]]=[data.items[target],data.items[index]];saveKeywordRulesData(req.app,data);}
     flash(res,'/automacao-whatsapp?tab=palavras-chave','↕️ Prioridade da automação atualizada.');
   }catch(error){flash(res,'/automacao-whatsapp?tab=palavras-chave',error.message||'Não foi possível reordenar a regra.');}
+});
+
+router.get('/blocos/listar', (req,res)=>{
+  try {
+    const data=loadAll(req.app);
+    res.set('Cache-Control','no-store');
+    res.json({success:true,updatedAt:now(),items:(data.blocos||[]).map(b=>({
+      id:b.id,nome:b.nome,ativo:b.ativo!==false,categoria:b.categoria||'Geral',atualizadoEm:b.atualizadoEm||null
+    }))});
+  } catch(error){
+    res.status(500).json({success:false,message:error.message||'Falha ao atualizar a lista de blocos.'});
+  }
 });
 
 router.post('/blocos/salvar', (req,res)=>{

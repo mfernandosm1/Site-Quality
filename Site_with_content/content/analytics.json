@@ -1,7 +1,7 @@
 {
   "version": "8.4.0-analytics-professional",
   "createdAt": "2026-07-08T00:26:21.803Z",
-  "updatedAt": "2026-08-28T23:51:30.876Z",
+  "updatedAt": "2026-08-29T01:56:19.847Z",
   "source": "local-json",
   "counters": {
     "product_view": 82,
@@ -11,7 +11,7 @@
     "category_view": 97,
     "share_click": 1,
     "search": 24,
-    "page_view": 289
+    "page_view": 296
   },
   "products": {
     "mini-game-portatil-400-jogos": {
@@ -431,8 +431,8 @@
   "pages": {
     "http://localhost:3000/site/view/index.html": {
       "url": "http://localhost:3000/site/view/index.html",
-      "views": 123,
-      "lastAt": "2026-08-28T22:28:43.590Z"
+      "views": 130,
+      "lastAt": "2026-08-29T01:56:19.847Z"
     },
     "http://localhost:3000/smartphones/": {
       "url": "http://localhost:3000/smartphones/",
@@ -6378,6 +6378,76 @@
         "slug": "limpeza-de-virus-e-formatacao",
         "name": "Limpeza de vírus e Formatação"
       },
+      "term": ""
+    },
+    {
+      "at": "2026-08-29T00:08:31.220Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/site/view/index.html",
+      "referrer": "http://localhost:3000/assistencia-tecnica/",
+      "device": "desktop",
+      "viewport": "2049x949",
+      "language": "pt-PT",
+      "term": ""
+    },
+    {
+      "at": "2026-08-29T00:08:43.650Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/site/view/index.html",
+      "referrer": "http://localhost:3000/eletronicos/",
+      "device": "desktop",
+      "viewport": "2049x949",
+      "language": "pt-PT",
+      "term": ""
+    },
+    {
+      "at": "2026-08-29T00:09:00.920Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/site/view/index.html",
+      "referrer": "http://localhost:3000/eletronicos/",
+      "device": "desktop",
+      "viewport": "2049x949",
+      "language": "pt-PT",
+      "term": ""
+    },
+    {
+      "at": "2026-08-29T00:09:27.554Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/site/view/index.html",
+      "referrer": "http://localhost:3000/site",
+      "device": "desktop",
+      "viewport": "2049x949",
+      "language": "pt-PT",
+      "term": ""
+    },
+    {
+      "at": "2026-08-29T00:13:47.526Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/site/view/index.html",
+      "referrer": "http://localhost:3000/site",
+      "device": "desktop",
+      "viewport": "2732x1266",
+      "language": "pt-PT",
+      "term": ""
+    },
+    {
+      "at": "2026-08-29T01:55:59.319Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/site/view/index.html",
+      "referrer": "http://localhost:3000/site",
+      "device": "desktop",
+      "viewport": "1517x703",
+      "language": "pt-PT",
+      "term": ""
+    },
+    {
+      "at": "2026-08-29T01:56:19.847Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/site/view/index.html",
+      "referrer": "http://localhost:3000/site",
+      "device": "desktop",
+      "viewport": "1517x703",
+      "language": "pt-PT",
       "term": ""
     }
   ]

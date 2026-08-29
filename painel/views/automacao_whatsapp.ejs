@@ -325,7 +325,40 @@
   .qw-opportunity-reason{margin-top:6px;font-size:10px;color:var(--qw-muted)}.qw-opportunity-reason strong{color:var(--qw-text)}
   .qw-automation-kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:12px}.qw-automation-kpis>div{border:1px solid var(--qw-line);border-radius:11px;padding:10px;background:rgba(59,130,246,.04)}.qw-automation-kpis strong{display:block;font-size:22px}.qw-automation-kpis span{font-size:10px;color:var(--qw-muted)}
   .qw-automation-ranking{display:grid;gap:5px;margin-top:12px}.qw-automation-ranking>strong{font-size:11px}.qw-automation-rank{display:flex;align-items:center;justify-content:space-between;gap:10px;border-top:1px solid var(--qw-line);padding:7px 2px}.qw-automation-rank span{font-size:10px;min-width:0}.qw-automation-rank span small{display:block;color:var(--qw-muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:650px;margin-top:2px}.qw-automation-rank>strong{font-size:14px}
+
   @media(max-width:700px){.qw-automation-kpis{grid-template-columns:repeat(2,1fr)}}
+
+  /* Painel comercial compacto — sem rolagem lateral do painel */
+  .qw-wrap{max-width:100%;overflow-x:hidden}
+  .qw-commercial-layout,.qw-commercial-stack,.qw-commercial-card,.qw-commercial-main-grid,.qw-dashboard-fold-grid{min-width:0}
+  .qw-commercial-main-grid{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(430px,.9fr);gap:12px;margin-top:12px}
+  .qw-commercial-list{max-height:430px;overflow:auto;padding-right:3px}
+  .qw-dashboard-fold-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:10px}
+  .qw-dashboard-fold{border:1px solid var(--qw-line);border-radius:13px;background:var(--qw-card);min-width:0}
+  .qw-dashboard-fold>summary{list-style:none;cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 14px;font-weight:900;font-size:13px}
+  .qw-dashboard-fold>summary::-webkit-details-marker{display:none}.qw-dashboard-fold>summary:after{content:'›';font-size:20px;color:var(--qw-muted);transform:rotate(90deg);transition:.15s}
+  .qw-dashboard-fold[open]>summary:after{transform:rotate(-90deg)}.qw-dashboard-fold[open]>summary{border-bottom:1px solid var(--qw-line)}
+  .qw-dashboard-fold-body{padding:12px 14px;min-width:0}
+  .qw-inbound-daily{height:225px;overflow-x:hidden;gap:4px;padding:24px 4px 2px}
+  .qw-inbound-day{min-width:0;flex:1 1 0}.qw-inbound-bars{width:90%;max-width:28px}.qw-inbound-bars i{min-height:0}.qw-inbound-day>span{top:-18px;font-size:8px;font-weight:800}.qw-inbound-day small{font-size:8px}
+  .qw-inbound-chart-note{margin-top:8px;font-size:9px;color:var(--qw-muted);text-align:right}
+  @media(max-width:1500px){.qw-commercial-main-grid{grid-template-columns:1fr}.qw-commercial-list{max-height:340px}.qw-inbound-daily{height:210px}}
+  @media(max-width:900px){.qw-dashboard-fold-grid{grid-template-columns:1fr}.qw-inbound-daily{overflow-x:auto}.qw-inbound-day{min-width:23px}.qw-contact-kpis{grid-template-columns:repeat(3,minmax(0,1fr))}}
+  @media(max-width:620px){.qw-contact-kpis{grid-template-columns:repeat(2,minmax(0,1fr))}}
+
+  /* Automação — cadastro recolhível e regras em lista */
+  .qw-automation-create{padding:0!important;overflow:hidden}.qw-automation-create>summary{list-style:none;cursor:pointer;padding:13px 15px;display:flex;justify-content:space-between;gap:12px;align-items:center;font-weight:900}.qw-automation-create>summary::-webkit-details-marker{display:none}.qw-automation-create>summary:after{content:'Abrir';font-size:9px;color:var(--qw-muted);border:1px solid var(--qw-line);border-radius:999px;padding:4px 8px}.qw-automation-create[open]>summary{border-bottom:1px solid var(--qw-line)}.qw-automation-create[open]>summary:after{content:'Recolher'}.qw-automation-create-body{padding:14px 15px}
+  .qw-automation-workbench{display:grid;grid-template-columns:minmax(300px,.42fr) minmax(0,1fr);gap:10px}.qw-automation-workbench>.qw-card{min-width:0}
+  .qw-keyword-list-tools{display:grid;grid-template-columns:minmax(220px,1fr) 150px;gap:8px;margin:10px 0}
+  .qw-keyword-list{border:1px solid var(--qw-line);border-radius:12px;overflow:hidden}
+  .qw-keyword-list-row{position:relative;display:grid;grid-template-columns:42px minmax(190px,1.25fr) minmax(190px,1fr) 130px auto;gap:10px;align-items:center;padding:9px 10px;border-bottom:1px solid var(--qw-line);background:var(--qw-card)}
+  .qw-keyword-list-row:last-child{border-bottom:0}.qw-keyword-list-row:before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:#16a34a}.qw-keyword-list-row.is-off:before{background:#ef4444}.qw-keyword-list-row.is-off{opacity:.72}
+  .qw-keyword-order{font-size:11px;font-weight:1000;text-align:center;color:var(--qw-muted)}.qw-keyword-main{min-width:0}.qw-keyword-main strong{display:block;font-size:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.qw-keyword-main small,.qw-keyword-trigger-preview,.qw-keyword-usage{display:block;font-size:9px;color:var(--qw-muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.qw-keyword-trigger-preview{min-width:0}.qw-keyword-state{display:inline-flex;align-items:center;gap:5px;font-size:9px;font-weight:900}.qw-keyword-state:before{content:'';width:7px;height:7px;border-radius:50%;background:#16a34a;box-shadow:0 0 0 3px rgba(22,163,74,.12)}.qw-keyword-list-row.is-off .qw-keyword-state{color:#ef4444}.qw-keyword-list-row.is-off .qw-keyword-state:before{background:#ef4444;box-shadow:0 0 0 3px rgba(239,68,68,.12)}
+  .qw-keyword-list-actions{display:flex;align-items:center;justify-content:flex-end;gap:4px}.qw-keyword-list-actions form{margin:0}.qw-keyword-list-actions .qw-mini-btn{min-height:28px;padding:5px 7px}
+  .qw-keyword-list-empty{padding:18px;text-align:center;color:var(--qw-muted);font-size:10px}
+  @media(max-width:1250px){.qw-automation-workbench{grid-template-columns:1fr}.qw-keyword-list-row{grid-template-columns:36px minmax(180px,1fr) minmax(150px,.8fr) 110px auto}}
+  @media(max-width:850px){.qw-keyword-list-row{grid-template-columns:32px minmax(0,1fr) auto}.qw-keyword-trigger-preview,.qw-keyword-usage{grid-column:2/4}.qw-keyword-list-actions{grid-column:2/4;justify-content:flex-start;flex-wrap:wrap}.qw-keyword-list-tools{grid-template-columns:1fr}}
+
 
   /* 2026-08-23 — Inbox em uma tela, sem F5 visual + armazenamento */
   .qw-inbox-page{height:calc(100vh - 108px);min-height:520px;overflow:hidden;padding:8px 12px 10px}
@@ -462,74 +495,69 @@
       <div class="qw-commercial-kpi"><div class="value"><%= commercialDashboard.activePipeline || 0 %></div><div class="label">Pedem ação</div><div class="hint">Oportunidades priorizadas</div></div>
     </div>
 
-    <div class="qw-commercial-layout">
-      <div class="qw-commercial-stack">
-        <div class="qw-card qw-commercial-card">
-          <div class="qw-library-heading"><div><h2 style="margin:0">🎯 Oportunidades que pedem ação</h2><p class="sub" style="margin-top:4px">Prioriza clientes aguardando resposta, ações vencidas, pendências e negociações com interesse registrado.</p></div><span class="qw-pill"><%= commercialDashboard.opportunities.length %> na lista</span></div>
-          <div class="qw-commercial-tools">
-            <input class="qw-input" id="commercialSearch" placeholder="🔎 Buscar nome, número ou produto" oninput="filterCommercialOpportunities()">
-            <select class="qw-select" id="commercialAttentionFilter" onchange="filterCommercialOpportunities()"><option value="">Todos</option><option value="waiting">Aguardando resposta</option><option value="answered">Já respondidos</option></select>
-          </div>
-          <div class="qw-commercial-list" id="commercialOpportunityList">
-            <% if(!commercialDashboard.opportunities.length){ %><div class="qw-commercial-empty">Nenhuma conversa exige ação agora.</div><% } %>
-            <% commercialDashboard.opportunities.forEach(function(c){ const search=String((c.name||'')+' '+(c.phone||'')+' '+(c.interestProduct||'')+' '+(c.opportunityReason||'')).toLowerCase(); %>
-              <div class="qw-opportunity-row smart" data-commercial-row>
-                <a class="qw-opportunity <%= c.attentionLevel %>" href="/automacao-whatsapp?tab=inbox&conversation=<%= c.id %>" title="Abrir conversa" data-search="<%= search %>" data-status="<%= c.commercialStatus || 'new' %>" data-attention="<%= c.awaitingResponse ? 'waiting':'answered' %>">
-                  <div>
-                    <div class="qw-opportunity-name"><%= c.name || c.phone %></div>
-                    <div class="qw-opportunity-meta"><%= statusLabelsDashboard[c.commercialStatus] || 'Novo' %><% if(c.interestProduct){ %> · Interesse: <%= c.interestProduct %><% } %></div>
-                    <div class="qw-opportunity-reason"><strong><%= c.opportunityReason || 'Atendimento em andamento' %></strong><% if(c.suggestedAction){ %><span> → <%= c.suggestedAction %></span><% } %></div>
-                  </div>
-                  <div class="qw-opportunity-side"><span class="<%= c.awaitingResponse?'qw-opportunity-wait':'qw-opportunity-ok' %>"><%= c.awaitingResponse?'Responder':'Acompanhar' %></span></div>
-                </a>
-              </div>
-            <% }) %>
-          </div>
+    <div class="qw-commercial-main-grid">
+      <div class="qw-card qw-commercial-card">
+        <div class="qw-library-heading"><div><h2 style="margin:0">🎯 Oportunidades que pedem ação</h2><p class="sub" style="margin-top:4px">Fila prática para responder e acompanhar. A inteligência desta priorização ainda pode evoluir sem mudar seu fluxo.</p></div><span class="qw-pill"><%= commercialDashboard.opportunities.length %> na lista</span></div>
+        <div class="qw-commercial-tools">
+          <input class="qw-input" id="commercialSearch" placeholder="🔎 Buscar nome, número ou produto" oninput="filterCommercialOpportunities()">
+          <select class="qw-select" id="commercialAttentionFilter" onchange="filterCommercialOpportunities()"><option value="">Todos</option><option value="waiting">Aguardando resposta</option><option value="answered">Já respondidos</option></select>
         </div>
+        <div class="qw-commercial-list" id="commercialOpportunityList">
+          <% if(!commercialDashboard.opportunities.length){ %><div class="qw-commercial-empty">Nenhuma conversa exige ação agora.</div><% } %>
+          <% commercialDashboard.opportunities.forEach(function(c){ const search=String((c.name||'')+' '+(c.phone||'')+' '+(c.interestProduct||'')+' '+(c.opportunityReason||'')).toLowerCase(); %>
+            <div class="qw-opportunity-row smart" data-commercial-row>
+              <a class="qw-opportunity <%= c.attentionLevel %>" href="/automacao-whatsapp?tab=inbox&conversation=<%= c.id %>" title="Abrir conversa" data-search="<%= search %>" data-status="<%= c.commercialStatus || 'new' %>" data-attention="<%= c.awaitingResponse ? 'waiting':'answered' %>">
+                <div>
+                  <div class="qw-opportunity-name"><%= c.name || c.phone %></div>
+                  <div class="qw-opportunity-meta"><%= statusLabelsDashboard[c.commercialStatus] || 'Novo' %><% if(c.interestProduct){ %> · Interesse: <%= c.interestProduct %><% } %></div>
+                  <div class="qw-opportunity-reason"><strong><%= c.opportunityReason || 'Atendimento em andamento' %></strong><% if(c.suggestedAction){ %><span> → <%= c.suggestedAction %></span><% } %></div>
+                </div>
+                <div class="qw-opportunity-side"><span class="<%= c.awaitingResponse?'qw-opportunity-wait':'qw-opportunity-ok' %>"><%= c.awaitingResponse?'Responder':'Acompanhar' %></span></div>
+              </a>
+            </div>
+          <% }) %>
+        </div>
+      </div>
 
-        <div class="qw-card qw-commercial-card">
-          <h2>📅 Agenda / Lembretes</h2>
+      <div class="qw-card qw-commercial-card">
+        <div class="qw-library-heading"><div><h2 style="margin:0">📈 Contatos por dia</h2><p class="sub" style="margin-top:4px">Todos os dias do mês em uma única leitura, no mesmo padrão visual do Analytics.</p></div><span class="qw-info-tip" tabindex="0">i<span class="qw-info-tip-text">Conta contatos únicos em cada dia quando a primeira mensagem daquele dia veio do cliente. Selecione outro mês para comparação.</span></span></div>
+        <form class="qw-inbound-controls" method="get" action="/automacao-whatsapp">
+          <input type="hidden" name="tab" value="dashboard">
+          <label>Mês<select class="qw-select" name="contactMonth" onchange="this.form.submit()"><% (inboundMetrics?.availableMonths||[]).forEach(function(month){ %><option value="<%= month.key %>" <%= inboundMetrics?.selectedMonth===month.key?'selected':'' %>><%= month.label %></option><% }) %></select></label>
+          <label>Comparar com<select class="qw-select" name="compareMonth" onchange="this.form.submit()"><option value="none" <%= !inboundMetrics?.compareMonth?'selected':'' %>>Sem comparação</option><% (inboundMetrics?.availableMonths||[]).forEach(function(month){ %><option value="<%= month.key %>" <%= inboundMetrics?.compareMonth===month.key?'selected':'' %>><%= month.label %></option><% }) %></select></label>
+        </form>
+        <div class="qw-inbound-summary"><span class="current"><b><%= inboundMetrics?.selectedTotal||0 %></b> <%= inboundMetrics?.selectedMonthLabel||'' %></span><% if(inboundMetrics?.compareMonth){ %><span class="compare"><b><%= inboundMetrics?.compareTotal||0 %></b> <%= inboundMetrics?.compareMonthLabel||'' %></span><span class="delta <%= Number(inboundMetrics?.deltaPercent||0)>=0?'up':'down' %>"><%= inboundMetrics?.deltaPercent===null?'—':((Number(inboundMetrics.deltaPercent)>=0?'+':'')+String(inboundMetrics.deltaPercent).replace('.',',')+'%') %></span><% } %></div>
+        <div class="qw-inbound-daily"><% inboundDaily.forEach(function(item,index){ const day=String(item.date||'').slice(8,10); const compare=inboundCompareDaily[index]||{}; const total=Number(item.total||0); const compareTotal=Number(compare.total||0); const height=total>0?Math.max(5,Math.round((total/inboundDailyMax)*100)):0; const compareHeight=compareTotal>0?Math.max(5,Math.round((compareTotal/inboundDailyMax)*100)):0; %><div class="qw-inbound-day" title="<%= inboundMetrics?.selectedMonthLabel %> dia <%= day %>: <%= total %><% if(inboundMetrics?.compareMonth){ %> · <%= inboundMetrics?.compareMonthLabel %>: <%= compareTotal %><% } %>"><span><%= total || '' %></span><div class="qw-inbound-bars"><i class="current" style="height:<%= height %>%"></i><% if(inboundMetrics?.compareMonth){ %><i class="compare" style="height:<%= compareHeight %>%"></i><% } %></div><small><%= day %></small></div><% }) %></div>
+        <div class="qw-inbound-chart-note">Passe o mouse sobre uma barra para conferir o dia.</div>
+      </div>
+    </div>
+
+    <div class="qw-dashboard-fold-grid">
+      <details class="qw-dashboard-fold">
+        <summary><span>📅 Agenda / Lembretes</span><span class="qw-pill"><%= taskOverview.overdue.length + taskOverview.today.length + taskOverview.upcoming.length %></span></summary>
+        <div class="qw-dashboard-fold-body">
           <div class="qw-task-kpis"><div class="qw-task-kpi"><strong><%= taskOverview.overdue.length %></strong><span>Atrasados</span></div><div class="qw-task-kpi"><strong><%= taskOverview.today.length %></strong><span>Hoje</span></div><div class="qw-task-kpi"><strong><%= taskOverview.upcoming.length %></strong><span>Próximos</span></div></div>
-          <div class="qw-dashboard-task-grid">
-            <% [['overdue','🔴 Atrasados'],['today','🟠 Hoje'],['upcoming','🟢 Próximos']].forEach(function(group){ var list=taskOverview[group[0]]||[]; %>
-              <div class="qw-dashboard-task-col"><h3><%= group[1] %></h3><% if(!list.length){ %><div class="qw-task-empty">Nenhum lembrete.</div><% } %><% list.slice(0,5).forEach(function(task){ %><div class="qw-dashboard-task-row"><a class="qw-dashboard-task-link" href="/automacao-whatsapp?tab=inbox&conversation=<%= encodeURIComponent(task.conversationId||'') %>"><strong><%= task.title %></strong><small><%= formatDateTime(task.dueAt) %></small></a></div><% }) %></div>
-            <% }) %>
-          </div>
+          <div class="qw-dashboard-task-grid"><% [['overdue','🔴 Atrasados'],['today','🟠 Hoje'],['upcoming','🟢 Próximos']].forEach(function(group){ var list=taskOverview[group[0]]||[]; %><div class="qw-dashboard-task-col"><h3><%= group[1] %></h3><% if(!list.length){ %><div class="qw-task-empty">Nenhum lembrete.</div><% } %><% list.slice(0,5).forEach(function(task){ %><div class="qw-dashboard-task-row"><a class="qw-dashboard-task-link" href="/automacao-whatsapp?tab=inbox&conversation=<%= encodeURIComponent(task.conversationId||'') %>"><strong><%= task.title %></strong><small><%= formatDateTime(task.dueAt) %></small></a></div><% }) %></div><% }) %></div>
         </div>
+      </details>
 
-        <div class="qw-card qw-commercial-card">
-          <div class="qw-library-heading" style="justify-content:space-between"><div><h2 style="margin:0">🕘 Mensagens agendadas</h2><p class="sub" style="margin-top:4px">Próximos envios e itens que precisam de atenção.</p></div><div class="qw-schedule-list-actions"><span class="qw-pill"><%= (scheduledOverview||[]).length %></span><button type="button" onclick="clearScheduledHistoryFromDashboard()">Limpar histórico</button></div></div>
-          <div class="qw-scheduled-dashboard-list">
-            <% if(!(scheduledOverview||[]).length){ %><div class="qw-commercial-empty">Nenhuma mensagem agendada pendente.</div><% } %>
-            <% (scheduledOverview||[]).forEach(function(item){ var scheduleIcon=item.type==='video'?'🎬':item.type==='image'?'🖼️':item.type==='audio'?'🎙️':'💬'; %>
-              <div class="qw-scheduled-dashboard-row <%= item.status==='erro'?'error':'' %>" data-dashboard-schedule-id="<%= item.id %>">
-                <div class="qw-scheduled-dashboard-main"><strong><%= scheduleIcon %> <%= item.conversationName || 'Contato' %></strong><small><%= formatDateTime(item.scheduledAt) %> · <%= item.status==='erro'?'Erro — revisar':'Agendado' %><% if(item.text){ %> · <%= String(item.text).slice(0,80) %><% } %></small></div>
-                <div class="qw-scheduled-dashboard-actions"><a href="/automacao-whatsapp?tab=inbox&conversation=<%= encodeURIComponent(item.conversationId||'') %>">Abrir</a><button type="button" onclick="deleteInboxScheduledMessage('<%= item.id %>',true)">Excluir</button></div>
-              </div>
-            <% }) %>
-          </div>
+      <details class="qw-dashboard-fold">
+        <summary><span>🕘 Mensagens agendadas</span><span class="qw-pill"><%= (scheduledOverview||[]).length %></span></summary>
+        <div class="qw-dashboard-fold-body">
+          <div class="qw-schedule-list-actions" style="justify-content:flex-end;margin-bottom:8px"><button type="button" onclick="clearScheduledHistoryFromDashboard()">Limpar histórico</button></div>
+          <div class="qw-scheduled-dashboard-list"><% if(!(scheduledOverview||[]).length){ %><div class="qw-commercial-empty">Nenhuma mensagem agendada pendente.</div><% } %><% (scheduledOverview||[]).forEach(function(item){ var scheduleIcon=item.type==='video'?'🎬':item.type==='image'?'🖼️':item.type==='audio'?'🎙️':'💬'; %><div class="qw-scheduled-dashboard-row <%= item.status==='erro'?'error':'' %>" data-dashboard-schedule-id="<%= item.id %>"><div class="qw-scheduled-dashboard-main"><strong><%= scheduleIcon %> <%= item.conversationName || 'Contato' %></strong><small><%= formatDateTime(item.scheduledAt) %> · <%= item.status==='erro'?'Erro — revisar':'Agendado' %><% if(item.text){ %> · <%= String(item.text).slice(0,80) %><% } %></small></div><div class="qw-scheduled-dashboard-actions"><a href="/automacao-whatsapp?tab=inbox&conversation=<%= encodeURIComponent(item.conversationId||'') %>">Abrir</a><button type="button" onclick="deleteInboxScheduledMessage('<%= item.id %>',true)">Excluir</button></div></div><% }) %></div>
         </div>
-      </div>
-      <div class="qw-commercial-stack">
-        <div class="qw-card qw-commercial-card">
-          <div class="qw-library-heading"><h2 style="margin:0">📈 Contatos por dia</h2><span class="qw-info-tip" tabindex="0">i<span class="qw-info-tip-text">Conta contatos únicos em cada dia quando a primeira mensagem daquele dia veio do cliente. Você pode selecionar um mês e comparar com outro mês sem alterar o restante do painel.</span></span></div>
-          <form class="qw-inbound-controls" method="get" action="/automacao-whatsapp">
-            <input type="hidden" name="tab" value="dashboard">
-            <label>Mês<select class="qw-select" name="contactMonth" onchange="this.form.submit()"><% (inboundMetrics?.availableMonths||[]).forEach(function(month){ %><option value="<%= month.key %>" <%= inboundMetrics?.selectedMonth===month.key?'selected':'' %>><%= month.label %></option><% }) %></select></label>
-            <label>Comparar com<select class="qw-select" name="compareMonth" onchange="this.form.submit()"><option value="none" <%= !inboundMetrics?.compareMonth?'selected':'' %>>Sem comparação</option><% (inboundMetrics?.availableMonths||[]).forEach(function(month){ %><option value="<%= month.key %>" <%= inboundMetrics?.compareMonth===month.key?'selected':'' %>><%= month.label %></option><% }) %></select></label>
-          </form>
-          <div class="qw-inbound-summary"><span class="current"><b><%= inboundMetrics?.selectedTotal||0 %></b> <%= inboundMetrics?.selectedMonthLabel||'' %></span><% if(inboundMetrics?.compareMonth){ %><span class="compare"><b><%= inboundMetrics?.compareTotal||0 %></b> <%= inboundMetrics?.compareMonthLabel||'' %></span><span class="delta <%= Number(inboundMetrics?.deltaPercent||0)>=0?'up':'down' %>"><%= inboundMetrics?.deltaPercent===null?'—':((Number(inboundMetrics.deltaPercent)>=0?'+':'')+String(inboundMetrics.deltaPercent).replace('.',',')+'%') %></span><% } %></div>
-          <div class="qw-inbound-daily"><% inboundDaily.forEach(function(item,index){ const day=String(item.date||'').slice(8,10); const compare=inboundCompareDaily[index]||{}; const height=Math.max(3,Math.round((Number(item.total||0)/inboundDailyMax)*100)); const compareHeight=Math.max(3,Math.round((Number(compare.total||0)/inboundDailyMax)*100)); %><div class="qw-inbound-day" title="<%= inboundMetrics?.selectedMonthLabel %> dia <%= day %>: <%= item.total %><% if(inboundMetrics?.compareMonth){ %> · <%= inboundMetrics?.compareMonthLabel %>: <%= compare.total||0 %><% } %>"><span><%= item.total || '' %></span><div class="qw-inbound-bars"><i class="current" style="height:<%= height %>%"></i><% if(inboundMetrics?.compareMonth){ %><i class="compare" style="height:<%= compareHeight %>%"></i><% } %></div><small><%= day %></small></div><% }) %></div>
-        </div>
-        <div class="qw-card qw-commercial-card"><div class="qw-library-heading"><h2 style="margin:0">⏱️ Atendimento</h2><span class="qw-info-tip" tabindex="0">i<span class="qw-info-tip-text">Indicadores calculados pelas mensagens reais recentes do Inbox. “Aguardando agora” considera conversas abertas em que o cliente falou por último nos últimos 7 dias. A primeira resposta usa contatos iniciados pelo cliente nos últimos 30 dias e ignora intervalos acima de 12 horas para não distorcer a média com conversas deixadas para o dia seguinte.</span></span></div><div class="qw-smart-panel"><div class="qw-smart-metric"><strong><%= formatResponseTimeDashboard(commercialDashboard.averageFirstResponseSeconds) %></strong><span>1ª resposta média · 30d</span></div><div class="qw-smart-metric"><strong><%= commercialDashboard.awaitingResponse %></strong><span>Aguardando agora</span></div><div class="qw-smart-metric"><strong><%= commercialDashboard.waitingOver2h %></strong><span>Críticos +2h</span></div></div></div>
-        <div class="qw-card qw-commercial-card">
-          <div class="qw-library-heading"><h2 style="margin:0">🔎 Interesses detectados</h2><span class="qw-info-tip" tabindex="0">i<span class="qw-info-tip-text">Além do interesse vindo do site, o painel lê mensagens recebidas recentes e só contabiliza quando consegue relacionar o texto a um produto ou serviço realmente cadastrado no Quality ERP. Cada conversa conta no máximo uma vez por item para evitar inflar o ranking.</span></span></div>
-          <div class="qw-interest-groups">
-            <section><h3>📱 Produtos</h3><% if(!(commercialDashboard.topProductInterests||[]).length){ %><div class="qw-commercial-empty">Nenhum produto cadastrado foi identificado com segurança nas conversas.</div><% } %><% (commercialDashboard.topProductInterests||[]).forEach(function(item){ %><div class="qw-interest-row"><span><%= item.name %></span><strong><%= item.total %></strong></div><% }) %></section>
-            <section><h3>🛠️ Serviços</h3><% if(!(commercialDashboard.topServiceInterests||[]).length){ %><div class="qw-commercial-empty">Nenhum serviço cadastrado foi identificado com segurança nas conversas.</div><% } %><% (commercialDashboard.topServiceInterests||[]).forEach(function(item){ %><div class="qw-interest-row"><span><%= item.name %></span><strong><%= item.total %></strong></div><% }) %></section>
-          </div>
-        </div>
-      </div>
+      </details>
+
+      <details class="qw-dashboard-fold">
+        <summary><span>⏱️ Atendimento</span><span class="qw-pill"><%= commercialDashboard.awaitingResponse %> aguardando</span></summary>
+        <div class="qw-dashboard-fold-body"><div class="qw-smart-panel"><div class="qw-smart-metric"><strong><%= formatResponseTimeDashboard(commercialDashboard.averageFirstResponseSeconds) %></strong><span>1ª resposta média · 30d</span></div><div class="qw-smart-metric"><strong><%= commercialDashboard.awaitingResponse %></strong><span>Aguardando agora</span></div><div class="qw-smart-metric"><strong><%= commercialDashboard.waitingOver2h %></strong><span>Críticos +2h</span></div></div></div>
+      </details>
+
+      <details class="qw-dashboard-fold">
+        <summary><span>🔎 Interesses detectados</span><span class="qw-pill"><%= (commercialDashboard.topProductInterests||[]).length + (commercialDashboard.topServiceInterests||[]).length %> itens</span></summary>
+        <div class="qw-dashboard-fold-body"><div class="qw-interest-groups"><section><h3>📱 Produtos</h3><% if(!(commercialDashboard.topProductInterests||[]).length){ %><div class="qw-commercial-empty">Nenhum produto cadastrado foi identificado com segurança.</div><% } %><% (commercialDashboard.topProductInterests||[]).forEach(function(item){ %><div class="qw-interest-row"><span><%= item.name %></span><strong><%= item.total %></strong></div><% }) %></section><section><h3>🛠️ Serviços</h3><% if(!(commercialDashboard.topServiceInterests||[]).length){ %><div class="qw-commercial-empty">Nenhum serviço cadastrado foi identificado com segurança.</div><% } %><% (commercialDashboard.topServiceInterests||[]).forEach(function(item){ %><div class="qw-interest-row"><span><%= item.name %></span><strong><%= item.total %></strong></div><% }) %></section></div></div>
+      </details>
     </div>
   <% } %>
 
@@ -542,7 +570,7 @@
   %>
     <div class="qw-grid">
       <div class="qw-card qw-span-12">
-        <div class="qw-library-heading"><h2 style="margin:0">⚡ Automação</h2><span class="qw-info-tip" tabindex="0" aria-label="Como funciona a automação">i<span class="qw-info-tip-text">Quando uma mensagem recebida corresponde a uma regra ativa, o Quality executa o bloco vinculado. Se o cliente estiver no meio de um menu/opção, a resposta do fluxo tem prioridade. Para ramificar atendimentos, use a etapa Opções dentro dos blocos; hoje o menu é enviado em formato numerado/textual e a estrutura fica pronta para botões clicáveis quando o canal suportar.</span></span></div>
+        <div class="qw-library-heading"><h2 style="margin:0">⚡ Automação</h2><span class="qw-info-tip" tabindex="0" aria-label="Como funciona a automação">i<span class="qw-info-tip-text">Quando uma mensagem recebida corresponde a uma regra ativa, o Quality executa o bloco vinculado. Se o cliente estiver no meio de um menu/opção, a resposta do fluxo tem prioridade.</span></span></div>
         <div class="qw-keyword-summary">
           <span class="qw-pill green"><%= regrasAtivas.length %> ativa(s)</span>
           <span class="qw-pill"><%= (palavrasChave||[]).length === 1 ? '1 automação' : (palavrasChave||[]).length+' automações' %></span>
@@ -552,48 +580,59 @@
       </div>
 
       <div class="qw-card qw-span-12 qw-automation-metrics">
-        <div class="qw-library-heading"><h2 style="margin:0">📈 Respostas automáticas</h2><span class="qw-info-tip" tabindex="0">i<span class="qw-info-tip-text">Hoje, semana e mês passam a ser medidos pelo histórico de acionamentos desta versão em diante. O total preserva os acionamentos já existentes.</span></span></div>
+        <div class="qw-library-heading"><h2 style="margin:0">📈 Respostas automáticas</h2><span class="qw-info-tip" tabindex="0">i<span class="qw-info-tip-text">Hoje, semana e mês usam o histórico de acionamentos. O total preserva os acionamentos existentes.</span></span></div>
         <div class="qw-automation-kpis"><div><strong><%= keywordMetrics?.today || 0 %></strong><span>Hoje</span></div><div><strong><%= keywordMetrics?.week || 0 %></strong><span>Esta semana</span></div><div><strong><%= keywordMetrics?.month || 0 %></strong><span>Este mês</span></div><div><strong><%= keywordMetrics?.total || 0 %></strong><span>Total</span></div></div>
         <% if((keywordMetrics?.topTerms||[]).length){ %><div class="qw-automation-ranking"><strong>Perguntas/frases mais acionadas</strong><% (keywordMetrics.topTerms||[]).slice(0,5).forEach(function(item,index){ %><div class="qw-automation-rank"><span><b><%= index+1 %>.</b> <%= item.label %></span><strong><%= item.total %></strong></div><% }) %></div><% } else if((keywordMetrics?.top||[]).length){ %><div class="qw-automation-ranking"><strong>Automações mais usadas</strong><% (keywordMetrics.top||[]).slice(0,5).forEach(function(item,index){ %><div class="qw-automation-rank"><span><b><%= index+1 %>.</b> <%= item.nome %><small><%= item.ultimaMensagem ? 'Última: '+item.ultimaMensagem : '' %></small></span><strong><%= item.total %></strong></div><% }) %></div><% } %>
       </div>
 
-      <div class="qw-card qw-span-5">
-        <h2><%= regraAtual ? '✏️ Editar automação' : '➕ Nova automação' %></h2>
-        <form method="post" action="/automacao-whatsapp/palavras-chave/salvar">
-          <input type="hidden" name="id" value="<%= regraAtual?.id || '' %>">
-          <div class="qw-field"><label>Nome interno</label><input class="qw-input" name="nome" value="<%= regraAtual?.nome || '' %>" placeholder="Ex.: Horário de atendimento"></div>
-          <div class="qw-field"><label>Quando a mensagem...</label><select class="qw-select" name="modo"><option value="contem" <%= !regraAtual || regraAtual.modo==='contem'?'selected':'' %>>Contém uma das palavras/frases</option><option value="igual" <%= regraAtual?.modo==='igual'?'selected':'' %>>É exatamente igual</option><option value="comeca" <%= regraAtual?.modo==='comeca'?'selected':'' %>>Começa com</option></select></div>
-          <div class="qw-field"><label>Frases que acionam esta automação</label><textarea class="qw-textarea" name="palavras" rows="7" placeholder="qual horário vocês atendem&#10;horário de atendimento&#10;que horas abre"><%= (regraAtual?.palavras||[]).join('\n') %></textarea><div class="qw-keyword-form-help">Uma por linha. Também aceita vírgula ou ponto e vírgula. A busca ignora maiúsculas e acentos.</div></div>
-          <div class="qw-field"><label>Bloco que será executado</label><select class="qw-select" name="blocoId" required><option value="">Selecione...</option><% blocos.forEach(function(b){ %><option value="<%= b.id %>" <%= regraAtual?.blocoId===b.id?'selected':'' %>><%= b.nome %><%= b.ativo?'':' · inativo' %></option><% }) %></select><div class="qw-keyword-form-help">O bloco pode ter texto, áudio, imagem, pausas e ramificações por opções.</div></div>
-          <label class="qw-check"><input type="checkbox" name="ativo" <%= !regraAtual || regraAtual.ativo ? 'checked':'' %>> Automação ativa</label>
-          <div class="qw-actions" style="justify-content:flex-start;margin-top:12px"><button class="qw-btn primary" type="submit">Salvar automação</button><% if(regraAtual){ %><a class="qw-btn dark" href="/automacao-whatsapp?tab=palavras-chave">Cancelar edição</a><% } %></div>
-        </form>
-      </div>
+      <details class="qw-card qw-span-12 qw-automation-create" <%= regraAtual ? 'open':'' %>>
+        <summary><span><%= regraAtual ? '✏️ Editar automação' : '➕ Nova automação' %></span><% if (regraAtual) { %><small class="qw-muted">Edição em andamento</small><% } %></summary>
+        <div class="qw-automation-create-body">
+          <form method="post" action="/automacao-whatsapp/palavras-chave/salvar">
+            <input type="hidden" name="id" value="<%= regraAtual?.id || '' %>">
+            <div class="qw-field"><label>Nome interno</label><input class="qw-input" name="nome" value="<%= regraAtual?.nome || '' %>" placeholder="Ex.: Horário de atendimento"></div>
+            <div class="qw-field"><label>Quando a mensagem...</label><select class="qw-select" name="modo"><option value="contem" <%= !regraAtual || regraAtual.modo==='contem'?'selected':'' %>>Contém uma das palavras/frases</option><option value="igual" <%= regraAtual?.modo==='igual'?'selected':'' %>>É exatamente igual</option><option value="comeca" <%= regraAtual?.modo==='comeca'?'selected':'' %>>Começa com</option></select></div>
+            <div class="qw-field"><label>Frases que acionam esta automação</label><textarea class="qw-textarea" name="palavras" rows="6" placeholder="qual horário vocês atendem&#10;horário de atendimento&#10;que horas abre"><%= (regraAtual?.palavras||[]).join('\n') %></textarea><div class="qw-keyword-form-help">Uma por linha. Também aceita vírgula ou ponto e vírgula. A busca ignora maiúsculas e acentos.</div></div>
+            <div class="qw-field"><label>Bloco que será executado <span class="qw-muted">(opcional)</span></label><select class="qw-select" id="keywordBlockSelect" name="blocoId" onchange="syncKeywordDraftState()"><option value="">Nenhum bloco por enquanto</option><% blocos.forEach(function(b){ %><option value="<%= b.id %>" <%= regraAtual?.blocoId===b.id?'selected':'' %>><%= b.nome %><%= b.ativo?'':' · inativo' %></option><% }) %></select><div class="qw-keyword-form-help">A lista se atualiza automaticamente quando você cria ou altera blocos em outra aba. Você pode salvar sem bloco e completar depois.</div><div id="keywordNoBlockWarning" class="qw-warning" style="display:none;margin-top:8px">⚠️ Nenhum bloco selecionado. Esta automação será salva como <strong>rascunho inativo</strong> e não responderá clientes até você vincular um bloco e ativá-la.</div></div>
+            <label class="qw-check"><input id="keywordActiveCheckbox" type="checkbox" name="ativo" <%= regraAtual?.ativo ? 'checked':'' %>> Automação ativa</label>
+            <div class="qw-actions" style="justify-content:flex-start;margin-top:12px"><button class="qw-btn primary" type="submit">Salvar automação</button><% if(regraAtual){ %><a class="qw-btn dark" href="/automacao-whatsapp?tab=palavras-chave">Cancelar edição</a><% } %></div>
+          </form>
+        </div>
+      </details>
 
-      <div class="qw-card qw-span-7">
-        <h2>🧪 Testar uma mensagem</h2>
-        <p class="sub">A simulação não envia nada. Ela mostra qual regra teria prioridade.</p>
-        <input id="keywordSimulatorInput" class="qw-input" placeholder="Ex.: Qual horário vocês atendem hoje?" oninput="simulateKeywordTrigger()">
-        <div id="keywordSimulatorResult" class="qw-keyword-sim-result">Digite uma mensagem para testar.</div>
-        <div style="height:16px"></div>
-        <h2>📋 Automações cadastradas</h2>
-        <p class="sub">Se mais de uma automação combinar, a primeira da lista ganha. Use ↑ e ↓ para definir a prioridade.</p>
-        <div style="display:grid;gap:8px">
-          <% if(!(palavrasChave||[]).length){ %><div class="qw-empty">Nenhuma automação cadastrada ainda.</div><% } %>
-          <% (palavrasChave||[]).forEach(function(rule,index){ const target=blocos.find(function(b){return b.id===rule.blocoId;}); %>
-            <div class="qw-keyword-rule <%= rule.ativo?'':'is-off' %>">
-              <div class="qw-keyword-rule-head"><div><strong><%= index+1 %>. <%= rule.nome %></strong><div class="qw-keyword-priority"><%= rule.modo==='igual'?'Igual a':rule.modo==='comeca'?'Começa com':'Contém' %> · bloco: <%= target?.nome || 'Bloco não encontrado' %></div></div><span class="qw-tag <%= rule.ativo?'active':'inactive' %>"><%= rule.ativo?'Ativa':'Pausada' %></span></div>
-              <div class="qw-keyword-terms"><% (rule.palavras||[]).forEach(function(term){ %><span class="qw-keyword-term"><%= term %></span><% }) %></div>
-              <div class="qw-muted" style="font-size:9px"><%= Number(rule.execucoes||0) === 0 ? 'Nenhuma resposta ainda' : (Number(rule.execucoes||0) === 1 ? '1 resposta automática' : Number(rule.execucoes||0)+' respostas automáticas') %><%= rule.ultimoAcionamentoEm ? ' · última '+formatDateTime(rule.ultimoAcionamentoEm):'' %></div>
-              <div class="qw-keyword-actions">
-                <form method="post" action="/automacao-whatsapp/palavras-chave/mover/<%= rule.id %>"><input type="hidden" name="direction" value="up"><button class="qw-mini-btn" type="submit" title="Subir prioridade" <%= index===0?'disabled':'' %>>↑</button></form>
-                <form method="post" action="/automacao-whatsapp/palavras-chave/mover/<%= rule.id %>"><input type="hidden" name="direction" value="down"><button class="qw-mini-btn" type="submit" title="Descer prioridade" <%= index===(palavrasChave.length-1)?'disabled':'' %>>↓</button></form>
-                <a class="qw-mini-btn blue" style="text-decoration:none" href="/automacao-whatsapp?tab=palavras-chave&kwedit=<%= rule.id %>">Editar</a>
-                <form method="post" action="/automacao-whatsapp/palavras-chave/toggle/<%= rule.id %>"><button class="qw-mini-btn" type="submit"><%= rule.ativo?'Pausar':'Ativar' %></button></form>
-                <form method="post" action="/automacao-whatsapp/palavras-chave/excluir/<%= rule.id %>" onsubmit="return confirm('Excluir esta regra de palavra-chave?')"><button class="qw-mini-btn danger" type="submit">Excluir</button></form>
+      <div class="qw-span-12 qw-automation-workbench">
+        <div class="qw-card">
+          <h2>🧪 Simulador de mensagem</h2>
+
+          <input id="keywordSimulatorInput" class="qw-input" placeholder="Ex.: Qual horário vocês atendem hoje?" oninput="simulateKeywordTrigger()">
+          <div id="keywordSimulatorResult" class="qw-keyword-sim-result">Digite uma mensagem para testar.</div>
+        </div>
+
+        <div class="qw-card">
+          <div class="qw-library-heading"><div><h2 style="margin:0">📋 Automações cadastradas</h2><p class="sub" style="margin-top:4px">Lista compacta. A primeira regra compatível tem prioridade.</p></div><span class="qw-pill"><%= (palavrasChave||[]).length %></span></div>
+          <div class="qw-keyword-list-tools">
+            <input id="keywordAutomationSearch" class="qw-input" placeholder="🔎 Buscar automação, frase ou bloco" oninput="filterKeywordAutomationList()">
+            <select id="keywordAutomationState" class="qw-select" onchange="filterKeywordAutomationList()"><option value="">Ativas e inativas</option><option value="active">Somente ativas</option><option value="inactive">Somente inativas</option></select>
+          </div>
+          <div class="qw-keyword-list" id="keywordAutomationList">
+            <% if(!(palavrasChave||[]).length){ %><div class="qw-keyword-list-empty">Nenhuma automação cadastrada ainda.</div><% } %>
+            <% (palavrasChave||[]).forEach(function(rule,index){ const target=blocos.find(function(b){return b.id===rule.blocoId;}); const triggerPreview=(rule.palavras||[]).join(' · '); const searchText=String((rule.nome||'')+' '+triggerPreview+' '+(target?.nome||'')).toLowerCase(); %>
+              <div class="qw-keyword-list-row <%= rule.ativo?'':'is-off' %>" data-keyword-row data-state="<%= rule.ativo?'active':'inactive' %>" data-search="<%= searchText %>">
+                <div class="qw-keyword-order">#<%= index+1 %></div>
+                <div class="qw-keyword-main"><strong><%= rule.nome %></strong><small><%= rule.modo==='igual'?'Igual a':rule.modo==='comeca'?'Começa com':'Contém' %> · bloco: <%= target?.nome || (rule.blocoId ? 'Bloco não encontrado' : '⚠ sem bloco — rascunho') %></small></div>
+                <div class="qw-keyword-trigger-preview" title="<%= triggerPreview %>"><%= triggerPreview || 'Sem frase configurada' %></div>
+                <div><span class="qw-keyword-state"><%= rule.ativo?'Ativa':'Inativa' %></span><span class="qw-keyword-usage"><%= Number(rule.execucoes||0) %> execução(ões)<%= rule.ultimoAcionamentoEm ? ' · '+formatDateTime(rule.ultimoAcionamentoEm):'' %></span></div>
+                <div class="qw-keyword-list-actions">
+                  <form method="post" action="/automacao-whatsapp/palavras-chave/mover/<%= rule.id %>"><input type="hidden" name="direction" value="up"><button class="qw-mini-btn" type="submit" title="Subir prioridade" <%= index===0?'disabled':'' %>>↑</button></form>
+                  <form method="post" action="/automacao-whatsapp/palavras-chave/mover/<%= rule.id %>"><input type="hidden" name="direction" value="down"><button class="qw-mini-btn" type="submit" title="Descer prioridade" <%= index===(palavrasChave.length-1)?'disabled':'' %>>↓</button></form>
+                  <a class="qw-mini-btn blue" style="text-decoration:none" href="/automacao-whatsapp?tab=palavras-chave&kwedit=<%= rule.id %>">Editar</a>
+                  <form method="post" action="/automacao-whatsapp/palavras-chave/toggle/<%= rule.id %>"><button class="qw-mini-btn <%= rule.ativo?'danger':'' %>" type="submit"><%= rule.ativo?'Desativar':'Ativar' %></button></form>
+                  <form method="post" action="/automacao-whatsapp/palavras-chave/excluir/<%= rule.id %>" onsubmit="return confirm('Excluir esta automação?')"><button class="qw-mini-btn danger" type="submit">Excluir</button></form>
+                </div>
               </div>
-            </div>
-          <% }) %>
+            <% }) %>
+          </div>
+          <div id="keywordAutomationEmptySearch" class="qw-keyword-list-empty" hidden>Nenhuma automação encontrada com estes filtros.</div>
         </div>
       </div>
     </div>
@@ -1436,24 +1475,81 @@
   function normalizeKeywordAutomationText(value){
     return String(value||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/[^\p{L}\p{N}\s]/gu,' ').replace(/\s+/g,' ').trim();
   }
-  function keywordRuleMatchesClient(rule,text){
-    var normalized=normalizeKeywordAutomationText(text);if(!normalized)return false;
-    return (rule.palavras||[]).some(function(raw){
+  function keywordRuleMatchedTerm(rule,text){
+    var normalized=normalizeKeywordAutomationText(text);if(!normalized)return '';
+    return (rule.palavras||[]).find(function(raw){
       var keyword=normalizeKeywordAutomationText(raw);if(!keyword)return false;
       if(rule.modo==='igual')return normalized===keyword;
       if(rule.modo==='comeca')return normalized===keyword||normalized.indexOf(keyword+' ')===0;
       return normalized.indexOf(keyword)>=0;
-    });
+    })||'';
   }
+  function keywordRuleMatchesClient(rule,text){ return !!keywordRuleMatchedTerm(rule,text); }
   function simulateKeywordTrigger(){
     var input=document.getElementById('keywordSimulatorInput'),result=document.getElementById('keywordSimulatorResult');if(!input||!result)return;
     var text=String(input.value||'').trim();
     if(!text){result.classList.remove('match');result.textContent='Digite uma mensagem para testar.';return;}
-    var rule=(keywordRulesSalvas||[]).find(function(item){return item.ativo&&keywordRuleMatchesClient(item,text);});
-    if(!rule){result.classList.remove('match');result.innerHTML='Nenhuma regra ativa corresponde a esta mensagem.';return;}
+    var ruleIndex=(keywordRulesSalvas||[]).findIndex(function(item){return item.ativo&&item.blocoId&&keywordRuleMatchesClient(item,text);});
+    if(ruleIndex<0){result.classList.remove('match');result.innerHTML='Nenhuma automação <strong>ativa</strong> corresponde a esta mensagem. Nada seria disparado.';return;}
+    var rule=keywordRulesSalvas[ruleIndex],term=keywordRuleMatchedTerm(rule,text);
     var block=(blocosSalvos||[]).find(function(item){return item.id===rule.blocoId;});
     result.classList.add('match');
-    result.innerHTML='⚡ Acionaria <strong>'+esc(rule.nome)+'</strong> → bloco <strong>'+esc(block?block.nome:'não encontrado')+'</strong>.';
+    result.innerHTML='⚡ Regra <strong>#'+(ruleIndex+1)+' · '+esc(rule.nome)+'</strong> ganharia a prioridade.<br><small>Correspondência: “'+esc(term)+'” → bloco: <strong>'+esc(block?block.nome:'não encontrado')+'</strong>. Nenhuma mensagem foi enviada.</small>';
+  }
+  function filterKeywordAutomationList(){
+    var search=normalizeKeywordAutomationText(document.getElementById('keywordAutomationSearch')?.value||'');
+    var state=document.getElementById('keywordAutomationState')?.value||'',visible=0;
+    document.querySelectorAll('[data-keyword-row]').forEach(function(row){
+      var hay=normalizeKeywordAutomationText(row.dataset.search||'');
+      var show=(!search||hay.indexOf(search)>=0)&&(!state||row.dataset.state===state);
+      row.hidden=!show;if(show)visible++;
+    });
+    var empty=document.getElementById('keywordAutomationEmptySearch');if(empty)empty.hidden=visible!==0||!(keywordRulesSalvas||[]).length;
+  }
+
+  function syncKeywordDraftState(){
+    var select=document.getElementById('keywordBlockSelect');
+    var active=document.getElementById('keywordActiveCheckbox');
+    var warning=document.getElementById('keywordNoBlockWarning');
+    if(!select||!active)return;
+    var hasBlock=!!String(select.value||'').trim();
+    if(warning)warning.style.display=hasBlock?'none':'block';
+    active.disabled=!hasBlock;
+    if(!hasBlock)active.checked=false;
+    active.closest('.qw-check')?.classList.toggle('qw-muted',!hasBlock);
+  }
+
+  var keywordBlocksRevision='';
+  async function refreshKeywordBlocks(force){
+    var select=document.getElementById('keywordBlockSelect');
+    if(!select)return;
+    try{
+      var response=await fetch('/automacao-whatsapp/blocos/listar?_='+Date.now(),{cache:'no-store'});
+      var payload=await response.json();
+      if(!response.ok||!payload.success||!Array.isArray(payload.items))return;
+      var revision=payload.items.map(function(b){return [b.id,b.nome,b.ativo,b.atualizadoEm].join('|');}).join('§');
+      if(!force&&revision===keywordBlocksRevision)return;
+      keywordBlocksRevision=revision;
+      var selected=String(select.value||'');
+      var html='<option value="">Nenhum bloco por enquanto</option>';
+      payload.items.forEach(function(b){
+        html+='<option value="'+esc(b.id)+'">'+esc(b.nome)+(b.ativo?'':' · inativo')+'</option>';
+      });
+      select.innerHTML=html;
+      if(payload.items.some(function(b){return String(b.id)===selected;}))select.value=selected;
+      else select.value='';
+      // Nesta aba o simulador só precisa da identificação atual dos blocos.
+      blocosSalvos=payload.items.map(function(b){return Object.assign({},b);});
+      syncKeywordDraftState();
+    }catch(error){ /* Mantém a lista atual caso a atualização em segundo plano falhe. */ }
+  }
+
+  if(document.getElementById('keywordBlockSelect')){
+    syncKeywordDraftState();
+    refreshKeywordBlocks(true);
+    setInterval(function(){ if(!document.hidden)refreshKeywordBlocks(false); },5000);
+    window.addEventListener('focus',function(){refreshKeywordBlocks(false);});
+    document.addEventListener('visibilitychange',function(){if(!document.hidden)refreshKeywordBlocks(false);});
   }
 
   function uid() {

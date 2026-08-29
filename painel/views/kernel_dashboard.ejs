@@ -1,4 +1,33 @@
 <% layout('layout') -%>
+<%
+  const kernelModuleLabel = value => ({pdv:'PDV',produtos:'Produtos',clientes:'Clientes',financeiro:'Financeiro',compras:'Compras',estoque:'Estoque',site:'Site',analytics:'Analytics',kernel:'Sistema'})[String(value||'').toLowerCase()] || String(value||'Sistema');
+  const kernelActionLabel = (value,route='') => {
+    const action=String(value||''),path=String(route||'');
+    const labels={VENDA_FINALIZADA:'Venda finalizada',OS_FINALIZADA:'O.S. finalizada',TROCA_REGISTRADA:'Troca registrada',DEVOLUCAO_REGISTRADA:'Devolução registrada',CREDITO_CLIENTE_ADICIONADO:'Crédito do cliente adicionado',CREDITO_CLIENTE_UTILIZADO:'Crédito do cliente utilizado',OPERACAO_ESTORNADA:'Operação estornada',OPERACAO_PDV_SALVA:'Operação salva no PDV',CAIXA_ABERTO:'Caixa aberto',CAIXA_FECHADO:'Caixa fechado',MOVIMENTO_CAIXA:'Movimento de caixa',PRODUTO_ATUALIZADO:'Produto atualizado',PRODUTO_CADASTRADO:'Produto cadastrado',CLIENTE_ATUALIZADO:'Cliente atualizado',COMPRA_ATUALIZADA:'Compra atualizada',FINANCEIRO_ATUALIZADO:'Financeiro atualizado'};
+    if(labels[action])return labels[action];
+    if(/^ERRO_/.test(action))return 'Erro · '+kernelActionLabel(action.replace(/^ERRO_/,''),path);
+    if(/^HTTP_/.test(action)){
+      if(/\/trocas-devolucoes/.test(path))return 'Troca / devolução';
+      if(/\/finalizar$/.test(path))return 'Finalização no PDV';
+      if(/\/estornar$/.test(path))return 'Estorno';
+      if(/\/api\/carteira$/.test(path))return 'Carteira do cliente';
+      return 'Alteração registrada';
+    }
+    return action.replace(/_/g,' ').replace(/\b\w/g,c=>c.toUpperCase());
+  };
+  const kernelDescription = item => {
+    if(item?.label && item.label!=='Operação executada' && item.label!=='Falha HTTP')return item.label;
+    const route=String(item?.route||'');
+    if(/\/pdv\/trocas-devolucoes/.test(route))return 'Registro de troca ou devolução no PDV';
+    if(/\/pdv\/operacoes\/[^/]+\/finalizar/.test(route))return 'Operação finalizada no PDV';
+    if(/\/pdv\/operacoes\/[^/]+\/estornar/.test(route))return 'Operação estornada no PDV';
+    if(/\/clientes\/[^/]+\/api\/carteira/.test(route))return 'Movimentação na carteira de crédito do cliente';
+    if(/\/produtos/.test(route))return 'Alteração realizada no cadastro de produtos';
+    if(/\/financeiro/.test(route))return 'Alteração realizada no financeiro';
+    return item?.label || route || '-';
+  };
+  const kernelResultLabel = value => String(value||'')==='success'?'Sucesso':String(value||'')==='error'?'Erro':String(value||'');
+%>
 <section class="erp-hero kernel-hero">
   <div><span class="erp-kicker">QUALITY ERP · v0.15.1</span><h1>Logs e Auditoria</h1><p>Pesquisa, filtros, detalhes e exportação da atividade registrada pelo Kernel.</p></div>
   <div class="erp-status-box"><b>Kernel ativo</b><span>Rastreabilidade global</span><small>Esta área pertence à Administração do Sistema. O acesso por perfil será aplicado quando o login for implantado.</small></div>
@@ -16,9 +45,9 @@
   <div class="kernel-head"><div><h2>Atividade registrada</h2><p><%= pagination.total %> registro(s) encontrados.</p></div><a class="btn secondary" href="/kernel/export.csv?<%= new URLSearchParams(filters).toString() %>">⬇ Exportar CSV</a></div>
   <form class="kernel-filters" method="get" action="/kernel">
     <label class="kernel-search"><span>Pesquisar</span><input name="search" value="<%= filters.search || '' %>" placeholder="ID, descrição, rota, documento, IP..."></label>
-    <label><span>Módulo</span><select name="module"><option value="">Todos</option><% facets.modules.forEach(function(v){ %><option value="<%= v %>" <%= filters.module===v?'selected':'' %>><%= v %></option><% }) %></select></label>
-    <label><span>Ação</span><select name="action"><option value="">Todas</option><% facets.actions.forEach(function(v){ %><option value="<%= v %>" <%= filters.action===v?'selected':'' %>><%= v %></option><% }) %></select></label>
-    <label><span>Resultado</span><select name="result"><option value="">Todos</option><% facets.results.forEach(function(v){ %><option value="<%= v %>" <%= filters.result===v?'selected':'' %>><%= v %></option><% }) %></select></label>
+    <label><span>Módulo</span><select name="module"><option value="">Todos</option><% facets.modules.forEach(function(v){ %><option value="<%= v %>" <%= filters.module===v?'selected':'' %>><%= kernelModuleLabel(v) %></option><% }) %></select></label>
+    <label><span>Ação</span><select name="action"><option value="">Todas</option><% facets.actions.forEach(function(v){ %><option value="<%= v %>" <%= filters.action===v?'selected':'' %>><%= kernelActionLabel(v) %></option><% }) %></select></label>
+    <label><span>Resultado</span><select name="result"><option value="">Todos</option><% facets.results.forEach(function(v){ %><option value="<%= v %>" <%= filters.result===v?'selected':'' %>><%= kernelResultLabel(v) %></option><% }) %></select></label>
     <label><span>De</span><input type="date" name="from" value="<%= filters.from || '' %>"></label>
     <label><span>Até</span><input type="date" name="to" value="<%= filters.to || '' %>"></label>
     <div class="kernel-filter-actions"><button class="btn primary" type="submit">Filtrar</button><a class="btn ghost" href="/kernel">Limpar</a></div>
@@ -26,7 +55,7 @@
 
   <div class="kernel-table-wrap"><table class="kernel-table"><thead><tr><th>Data/hora</th><th>Módulo</th><th>Ação</th><th>Descrição</th><th>Usuário</th><th>Resultado</th><th>Documento</th><th></th></tr></thead><tbody>
   <% if(!logs.length){ %><tr><td colspan="8">Nenhum registro encontrado com os filtros informados.</td></tr><% } %>
-  <% logs.forEach(function(item){ %><tr class="kernel-row kernel-row-<%= item.result %>"><td><%= new Date(item.at).toLocaleString('pt-BR') %></td><td><%= item.module %></td><td><code><%= item.action %></code></td><td title="<%= item.label || item.route %>"><%= item.label || item.route || '-' %></td><td><%= item.actor %></td><td><span class="kernel-result <%= item.result %>"><%= item.result %></span></td><td><%= item.documentId || '-' %></td><td><a class="kernel-detail-link" href="/kernel?<%= new URLSearchParams({...filters,log:item.id,page:pagination.page}).toString() %>">Detalhes</a></td></tr><% }) %>
+  <% logs.forEach(function(item){ %><tr class="kernel-row kernel-row-<%= item.result %>"><td><%= new Date(item.at).toLocaleString('pt-BR') %></td><td><%= kernelModuleLabel(item.module) %></td><td><code><%= kernelActionLabel(item.action,item.route) %></code></td><td title="<%= kernelDescription(item) %>"><%= kernelDescription(item) %></td><td><%= item.actor %></td><td><span class="kernel-result <%= item.result %>"><%= kernelResultLabel(item.result) %></span></td><td><%= item.documentId || '-' %></td><td><a class="kernel-detail-link" href="/kernel?<%= new URLSearchParams({...filters,log:item.id,page:pagination.page}).toString() %>">Detalhes</a></td></tr><% }) %>
   </tbody></table></div>
 
   <nav class="kernel-pagination">
@@ -41,9 +70,9 @@
 <div class="kernel-detail-overlay"><section class="kernel-detail-panel">
   <div class="kernel-detail-head"><div><small>REGISTRO</small><h2><%= selectedLog.id %></h2></div><a class="kernel-detail-close" href="/kernel?<%= new URLSearchParams({...filters,log:''}).toString() %>">×</a></div>
   <div class="kernel-detail-grid">
-    <% [['Data/hora',new Date(selectedLog.at).toLocaleString('pt-BR')],['Módulo',selectedLog.module],['Categoria',selectedLog.category],['Ação',selectedLog.action],['Usuário',selectedLog.actor],['Resultado',selectedLog.result],['Método',selectedLog.method||'-'],['Status HTTP',selectedLog.statusCode||'-'],['Duração',selectedLog.durationMs?selectedLog.durationMs+' ms':'-'],['IP',selectedLog.ip||'-'],['Dispositivo',selectedLog.device||'-'],['Documento',selectedLog.documentId||'-'],['Entidade',selectedLog.entityId||'-'],['Rota',selectedLog.route||'-']].forEach(function(field){ %><div><span><%= field[0] %></span><strong><%= field[1] %></strong></div><% }) %>
+    <% [['Data/hora',new Date(selectedLog.at).toLocaleString('pt-BR')],['Módulo',kernelModuleLabel(selectedLog.module)],['Categoria',selectedLog.category],['Ação',kernelActionLabel(selectedLog.action,selectedLog.route)],['Usuário',selectedLog.actor],['Resultado',kernelResultLabel(selectedLog.result)],['Método',selectedLog.method||'-'],['Status HTTP',selectedLog.statusCode||'-'],['Duração',selectedLog.durationMs?selectedLog.durationMs+' ms':'-'],['IP',selectedLog.ip||'-'],['Dispositivo',selectedLog.device||'-'],['Documento',selectedLog.documentId||'-'],['Entidade',selectedLog.entityId||'-'],['Rota',selectedLog.route||'-']].forEach(function(field){ %><div><span><%= field[0] %></span><strong><%= field[1] %></strong></div><% }) %>
   </div>
-  <div class="kernel-detail-block"><span>Descrição</span><p><%= selectedLog.label || '-' %></p></div>
+  <div class="kernel-detail-block"><span>Descrição</span><p><%= kernelDescription(selectedLog) %></p></div>
   <div class="kernel-detail-block"><span>Detalhes técnicos</span><pre><%= selectedLog.details ? JSON.stringify(selectedLog.details,null,2) : 'Sem detalhes adicionais.' %></pre></div>
 </section></div>
 <% } %>

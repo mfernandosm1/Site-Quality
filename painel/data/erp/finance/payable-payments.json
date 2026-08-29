@@ -39,7 +39,9 @@
       ],
       "financeMovementIds": [
         "FMV-a1d1d2fb-16f3-4398-a8cc-e459323ba5a1"
-      ]
+      ],
+      "cashReconciledAt": "2026-08-29T18:35:44.780Z",
+      "cashReconciledBy": "Matheus Fernando"
     },
     {
       "id": "PYP-1de8becf-7a04-4bdf-85d9-256e23fef09d",
@@ -79,7 +81,9 @@
       ],
       "financeMovementIds": [
         "FMV-86689b5d-8069-4f09-b5ad-c6ffc5d8eedf"
-      ]
+      ],
+      "cashReconciledAt": "2026-08-29T18:35:44.789Z",
+      "cashReconciledBy": "Matheus Fernando"
     },
     {
       "id": "PYP-1758ca37-b15b-41b9-bcaa-6187919c70cb",
@@ -119,7 +123,9 @@
       ],
       "financeMovementIds": [
         "FMV-baef7438-ed19-4933-bc2b-843a3f95fbd4"
-      ]
+      ],
+      "cashReconciledAt": "2026-08-29T18:35:44.795Z",
+      "cashReconciledBy": "Matheus Fernando"
     },
     {
       "id": "PYP-034db71b-1e36-4d48-88db-d1284bdf6354",
@@ -159,7 +165,9 @@
       ],
       "financeMovementIds": [
         "FMV-7d11b314-5d85-476b-a470-6ea9ea0e5915"
-      ]
+      ],
+      "cashReconciledAt": "2026-08-29T18:35:44.800Z",
+      "cashReconciledBy": "Matheus Fernando"
     },
     {
       "id": "PYP-c4d28470-3da9-4f9a-a7aa-7e6a8533fe9f",
@@ -200,7 +208,7 @@
       "financeMovementIds": [
         "FMV-b7719ab1-9150-486a-93bb-6ed5d082e168"
       ],
-      "cashReconciledAt": "2026-08-27T23:34:15.286Z",
+      "cashReconciledAt": "2026-08-29T18:35:44.806Z",
       "cashReconciledBy": "Matheus Fernando"
     },
     {
@@ -242,7 +250,7 @@
       "financeMovementIds": [
         "FMV-0a989e05-dbfb-4b7f-b00f-7c22a015e8d6"
       ],
-      "cashReconciledAt": "2026-08-27T23:34:15.296Z",
+      "cashReconciledAt": "2026-08-29T18:35:44.811Z",
       "cashReconciledBy": "Matheus Fernando"
     },
     {
@@ -284,7 +292,7 @@
       "financeMovementIds": [
         "FMV-a678789b-c454-4af1-80b7-ac8dd1943457"
       ],
-      "cashReconciledAt": "2026-08-27T23:34:15.302Z",
+      "cashReconciledAt": "2026-08-29T18:35:44.815Z",
       "cashReconciledBy": "Matheus Fernando"
     },
     {
@@ -326,7 +334,7 @@
       "financeMovementIds": [
         "FMV-ecaf7341-e110-46e3-87f0-186a1142b092"
       ],
-      "cashReconciledAt": "2026-08-27T23:34:15.307Z",
+      "cashReconciledAt": "2026-08-29T18:35:44.820Z",
       "cashReconciledBy": "Matheus Fernando"
     },
     {
@@ -368,7 +376,7 @@
       "financeMovementIds": [
         "FMV-50ec2b3a-cc03-4fc7-b0ae-509c14dd47c4"
       ],
-      "cashReconciledAt": "2026-08-27T23:34:15.312Z",
+      "cashReconciledAt": "2026-08-29T18:35:44.825Z",
       "cashReconciledBy": "Matheus Fernando"
     },
     {
@@ -410,7 +418,7 @@
       "financeMovementIds": [
         "FMV-bdf53452-2a48-4daa-b1f9-15646af221ab"
       ],
-      "cashReconciledAt": "2026-08-27T23:34:15.318Z",
+      "cashReconciledAt": "2026-08-29T18:35:44.831Z",
       "cashReconciledBy": "Matheus Fernando"
     },
     {
@@ -452,7 +460,7 @@
       "financeMovementIds": [
         "FMV-eff0382e-7327-4741-9b36-b6175f4fda61"
       ],
-      "cashReconciledAt": "2026-08-27T23:34:15.324Z",
+      "cashReconciledAt": "2026-08-29T18:35:44.836Z",
       "cashReconciledBy": "Matheus Fernando"
     },
     {
@@ -494,7 +502,7 @@
       "financeMovementIds": [
         "FMV-1affda01-6374-4ea3-8763-51c751498ef0"
       ],
-      "cashReconciledAt": "2026-08-27T23:34:15.329Z",
+      "cashReconciledAt": "2026-08-29T18:35:44.840Z",
       "cashReconciledBy": "Matheus Fernando"
     },
     {
@@ -536,7 +544,7 @@
       "financeMovementIds": [
         "FMV-9c1d358a-79cc-4c80-bc77-41571b9b2924"
       ],
-      "cashReconciledAt": "2026-08-27T23:34:15.334Z",
+      "cashReconciledAt": "2026-08-29T18:35:44.845Z",
       "cashReconciledBy": "Matheus Fernando"
     },
     {
@@ -578,7 +586,7 @@
       "financeMovementIds": [
         "FMV-32a93285-a104-49e0-a925-07e4459af231"
       ],
-      "cashReconciledAt": "2026-08-27T23:34:15.339Z",
+      "cashReconciledAt": "2026-08-29T18:35:44.850Z",
       "cashReconciledBy": "Matheus Fernando"
     },
     {
@@ -620,7 +628,7 @@
       "financeMovementIds": [
         "FMV-acfcf13f-414c-4265-91a0-752e45db7d32"
       ],
-      "cashReconciledAt": "2026-08-27T23:34:15.347Z",
+      "cashReconciledAt": "2026-08-29T18:35:44.855Z",
       "cashReconciledBy": "Matheus Fernando"
     },
     {
@@ -662,7 +670,7 @@
       "financeMovementIds": [
         "FMV-ec35ce46-c1ee-4924-9fa0-56626f0f87ff"
       ],
-      "cashReconciledAt": "2026-08-27T23:34:15.352Z",
+      "cashReconciledAt": "2026-08-29T18:35:44.860Z",
       "cashReconciledBy": "Matheus Fernando"
     },
     {
@@ -704,7 +712,7 @@
       "financeMovementIds": [
         "FMV-5ba07f5a-f0f3-4a5b-8016-1bcc6054a924"
       ],
-      "cashReconciledAt": "2026-08-27T23:34:15.357Z",
+      "cashReconciledAt": "2026-08-29T18:35:44.865Z",
       "cashReconciledBy": "Matheus Fernando"
     },
     {
@@ -746,7 +754,7 @@
       "financeMovementIds": [
         "FMV-eef72a2e-f66c-4715-964f-a0da46c6b867"
       ],
-      "cashReconciledAt": "2026-08-27T23:34:15.363Z",
+      "cashReconciledAt": "2026-08-29T18:35:44.869Z",
       "cashReconciledBy": "Matheus Fernando"
     },
     {
@@ -788,7 +796,7 @@
       "financeMovementIds": [
         "FMV-88c8fd2c-3e5a-4743-bf38-5e5b36d0e3c2"
       ],
-      "cashReconciledAt": "2026-08-27T23:34:15.368Z",
+      "cashReconciledAt": "2026-08-29T18:35:44.874Z",
       "cashReconciledBy": "Matheus Fernando"
     },
     {
@@ -830,7 +838,7 @@
       "financeMovementIds": [
         "FMV-9a5d2efc-d761-478c-864b-50e5b26e127d"
       ],
-      "cashReconciledAt": "2026-08-27T23:34:15.373Z",
+      "cashReconciledAt": "2026-08-29T18:35:44.879Z",
       "cashReconciledBy": "Matheus Fernando"
     },
     {
@@ -872,7 +880,7 @@
       "financeMovementIds": [
         "FMV-6359b926-85a4-4b1e-9f68-5fa7fb58fe13"
       ],
-      "cashReconciledAt": "2026-08-27T23:34:15.378Z",
+      "cashReconciledAt": "2026-08-29T18:35:44.884Z",
       "cashReconciledBy": "Matheus Fernando"
     },
     {
@@ -914,7 +922,7 @@
       "financeMovementIds": [
         "FMV-8b5c038b-b7d2-474e-a5ec-b486163650ad"
       ],
-      "cashReconciledAt": "2026-08-27T23:34:15.384Z",
+      "cashReconciledAt": "2026-08-29T18:35:44.889Z",
       "cashReconciledBy": "Matheus Fernando"
     },
     {
@@ -956,7 +964,7 @@
       "financeMovementIds": [
         "FMV-9bbdf0f8-7aef-4131-9d57-da349a1a671c"
       ],
-      "cashReconciledAt": "2026-08-27T23:34:15.390Z",
+      "cashReconciledAt": "2026-08-29T18:35:44.895Z",
       "cashReconciledBy": "Matheus Fernando"
     },
     {
@@ -998,7 +1006,7 @@
       "financeMovementIds": [
         "FMV-e55d9c51-2c60-459a-a599-498abb455d16"
       ],
-      "cashReconciledAt": "2026-08-27T23:34:15.396Z",
+      "cashReconciledAt": "2026-08-29T18:35:44.900Z",
       "cashReconciledBy": "Matheus Fernando"
     },
     {
@@ -1040,7 +1048,7 @@
       "financeMovementIds": [
         "FMV-33facdba-e547-4e84-87dc-d1a934fdecc8"
       ],
-      "cashReconciledAt": "2026-08-27T23:34:15.401Z",
+      "cashReconciledAt": "2026-08-29T18:35:44.905Z",
       "cashReconciledBy": "Matheus Fernando"
     },
     {
@@ -1082,7 +1090,7 @@
       "financeMovementIds": [
         "FMV-d521f444-d4bd-46e8-8314-a12138e42699"
       ],
-      "cashReconciledAt": "2026-08-27T23:34:15.407Z",
+      "cashReconciledAt": "2026-08-29T18:35:44.910Z",
       "cashReconciledBy": "Matheus Fernando"
     },
     {
@@ -1124,7 +1132,7 @@
       "financeMovementIds": [
         "FMV-eac3ccf5-fc6a-49df-8774-a0b4add765e0"
       ],
-      "cashReconciledAt": "2026-08-27T23:34:15.412Z",
+      "cashReconciledAt": "2026-08-29T18:35:44.916Z",
       "cashReconciledBy": "Matheus Fernando"
     },
     {
@@ -1166,7 +1174,7 @@
       "financeMovementIds": [
         "FMV-66165d57-fa7c-4ebf-a0ff-0392009c3fea"
       ],
-      "cashReconciledAt": "2026-08-27T23:34:15.417Z",
+      "cashReconciledAt": "2026-08-29T18:35:44.920Z",
       "cashReconciledBy": "Matheus Fernando"
     },
     {
@@ -1208,7 +1216,7 @@
       "financeMovementIds": [
         "FMV-6d5726f0-ec8f-4357-9c34-4e626cf573ef"
       ],
-      "cashReconciledAt": "2026-08-27T23:34:15.422Z",
+      "cashReconciledAt": "2026-08-29T18:35:44.926Z",
       "cashReconciledBy": "Matheus Fernando"
     },
     {
@@ -1250,7 +1258,7 @@
       "financeMovementIds": [
         "FMV-305ada82-5a2e-4473-b4d5-9ec6f11d37fa"
       ],
-      "cashReconciledAt": "2026-08-27T23:34:15.428Z",
+      "cashReconciledAt": "2026-08-29T18:35:44.931Z",
       "cashReconciledBy": "Matheus Fernando"
     },
     {
@@ -1292,7 +1300,7 @@
       "financeMovementIds": [
         "FMV-7c024022-678d-4893-8d76-45a2b18fb3e0"
       ],
-      "cashReconciledAt": "2026-08-27T23:34:15.436Z",
+      "cashReconciledAt": "2026-08-29T18:35:44.936Z",
       "cashReconciledBy": "Matheus Fernando"
     },
     {
@@ -1334,7 +1342,7 @@
       "financeMovementIds": [
         "FMV-3c48b6a6-e14d-43e0-b5bb-ee4e1cc6e9bc"
       ],
-      "cashReconciledAt": "2026-08-27T23:34:15.442Z",
+      "cashReconciledAt": "2026-08-29T18:35:44.941Z",
       "cashReconciledBy": "Matheus Fernando"
     },
     {
@@ -1376,7 +1384,7 @@
       "financeMovementIds": [
         "FMV-afc22362-cb15-4159-a798-182d08389fd8"
       ],
-      "cashReconciledAt": "2026-08-27T23:34:15.447Z",
+      "cashReconciledAt": "2026-08-29T18:35:44.946Z",
       "cashReconciledBy": "Matheus Fernando"
     },
     {
@@ -1418,7 +1426,7 @@
       "financeMovementIds": [
         "FMV-e17acbf5-0615-46b5-ad0b-db95bc0043f7"
       ],
-      "cashReconciledAt": "2026-08-27T23:34:15.453Z",
+      "cashReconciledAt": "2026-08-29T18:35:44.951Z",
       "cashReconciledBy": "Matheus Fernando"
     },
     {
@@ -1460,7 +1468,7 @@
       "financeMovementIds": [
         "FMV-01b38015-db81-492f-a7b7-9efecce27fe7"
       ],
-      "cashReconciledAt": "2026-08-27T23:34:15.458Z",
+      "cashReconciledAt": "2026-08-29T18:35:44.957Z",
       "cashReconciledBy": "Matheus Fernando"
     },
     {
@@ -1502,7 +1510,7 @@
       "financeMovementIds": [
         "FMV-034de0df-0f49-427b-8411-a01bcd1a759c"
       ],
-      "cashReconciledAt": "2026-08-27T23:34:15.463Z",
+      "cashReconciledAt": "2026-08-29T18:35:44.962Z",
       "cashReconciledBy": "Matheus Fernando"
     },
     {
@@ -1544,7 +1552,7 @@
       "financeMovementIds": [
         "FMV-1d9e9c85-7b76-45ab-bab5-20279ffbfb43"
       ],
-      "cashReconciledAt": "2026-08-27T23:34:15.468Z",
+      "cashReconciledAt": "2026-08-29T18:35:44.967Z",
       "cashReconciledBy": "Matheus Fernando"
     },
     {
@@ -1586,7 +1594,7 @@
       "financeMovementIds": [
         "FMV-5216b165-16d1-414b-9a60-65da7cfdda92"
       ],
-      "cashReconciledAt": "2026-08-27T23:34:15.474Z",
+      "cashReconciledAt": "2026-08-29T18:35:44.971Z",
       "cashReconciledBy": "Matheus Fernando"
     },
     {
@@ -1628,7 +1636,7 @@
       "financeMovementIds": [
         "FMV-f0b1beec-d461-4b2d-ae7f-2cacf42eefac"
       ],
-      "cashReconciledAt": "2026-08-27T23:34:15.479Z",
+      "cashReconciledAt": "2026-08-29T18:35:44.976Z",
       "cashReconciledBy": "Matheus Fernando"
     },
     {
@@ -1670,7 +1678,7 @@
       "financeMovementIds": [
         "FMV-65eb1f04-f5c1-4807-a89a-fbb12ea0e4ff"
       ],
-      "cashReconciledAt": "2026-08-27T23:34:15.485Z",
+      "cashReconciledAt": "2026-08-29T18:35:44.981Z",
       "cashReconciledBy": "Matheus Fernando"
     },
     {
@@ -1712,7 +1720,7 @@
       "financeMovementIds": [
         "FMV-bb2d3ca8-e8d6-4453-a3b5-9149f20e0b30"
       ],
-      "cashReconciledAt": "2026-08-27T23:34:15.490Z",
+      "cashReconciledAt": "2026-08-29T18:35:44.987Z",
       "cashReconciledBy": "Matheus Fernando"
     },
     {
@@ -1754,7 +1762,7 @@
       "financeMovementIds": [
         "FMV-cc70743a-ff43-4dc4-9fdf-5590a8e235f3"
       ],
-      "cashReconciledAt": "2026-08-27T23:34:15.496Z",
+      "cashReconciledAt": "2026-08-29T18:35:44.992Z",
       "cashReconciledBy": "Matheus Fernando"
     },
     {
@@ -1796,7 +1804,7 @@
       "financeMovementIds": [
         "FMV-7a94afc1-7fd2-4d87-a48b-103ec7387b1c"
       ],
-      "cashReconciledAt": "2026-08-27T23:34:15.502Z",
+      "cashReconciledAt": "2026-08-29T18:35:44.997Z",
       "cashReconciledBy": "Matheus Fernando"
     },
     {
@@ -1838,7 +1846,7 @@
       "financeMovementIds": [
         "FMV-3469f359-7c57-428d-8fcd-1f4ae51fe41e"
       ],
-      "cashReconciledAt": "2026-08-27T23:34:15.508Z",
+      "cashReconciledAt": "2026-08-29T18:35:45.002Z",
       "cashReconciledBy": "Matheus Fernando"
     },
     {
@@ -1880,7 +1888,7 @@
       "financeMovementIds": [
         "FMV-875b7b7d-054b-4cfd-a4f5-d96c1340456f"
       ],
-      "cashReconciledAt": "2026-08-27T23:34:15.513Z",
+      "cashReconciledAt": "2026-08-29T18:35:45.008Z",
       "cashReconciledBy": "Matheus Fernando"
     },
     {
@@ -1922,7 +1930,7 @@
       "financeMovementIds": [
         "FMV-674af2e2-b673-4d7e-bfa7-d3264d21428f"
       ],
-      "cashReconciledAt": "2026-08-27T23:34:15.519Z",
+      "cashReconciledAt": "2026-08-29T18:35:45.013Z",
       "cashReconciledBy": "Matheus Fernando"
     },
     {
@@ -1970,7 +1978,7 @@
       "cashReversalMovementIds": [
         "CXM-1786568257058-W8EE8"
       ],
-      "cashReconciledAt": "2026-08-27T23:34:15.525Z",
+      "cashReconciledAt": "2026-08-29T18:35:45.018Z",
       "cashReconciledBy": "Matheus Fernando"
     },
     {
@@ -2018,7 +2026,7 @@
       "cashReversalMovementIds": [
         "CXM-1786568253280-D7SVV"
       ],
-      "cashReconciledAt": "2026-08-27T23:34:15.530Z",
+      "cashReconciledAt": "2026-08-29T18:35:45.023Z",
       "cashReconciledBy": "Matheus Fernando"
     },
     {
@@ -2066,7 +2074,7 @@
       "cashReversalMovementIds": [
         "CXM-1786568248760-PJSLQ"
       ],
-      "cashReconciledAt": "2026-08-27T23:34:15.535Z",
+      "cashReconciledAt": "2026-08-29T18:35:45.027Z",
       "cashReconciledBy": "Matheus Fernando"
     },
     {
@@ -2107,7 +2115,7 @@
       "financeMovementIds": [
         "FMV-7fee9b06-59c7-4889-93dd-c0ca21a5c19b"
       ],
-      "cashReconciledAt": "2026-08-27T23:34:15.541Z",
+      "cashReconciledAt": "2026-08-29T18:35:45.033Z",
       "cashReconciledBy": "Matheus Fernando"
     },
     {
@@ -2148,7 +2156,7 @@
       "financeMovementIds": [
         "FMV-76892bfb-490d-4ee3-99dd-4b2c84728417"
       ],
-      "cashReconciledAt": "2026-08-27T23:34:15.546Z",
+      "cashReconciledAt": "2026-08-29T18:35:45.037Z",
       "cashReconciledBy": "Matheus Fernando"
     },
     {
@@ -2189,7 +2197,7 @@
       "financeMovementIds": [
         "FMV-f4e27e5d-373b-4b4b-b867-1f5cf69bfe01"
       ],
-      "cashReconciledAt": "2026-08-27T23:34:15.553Z",
+      "cashReconciledAt": "2026-08-29T18:35:45.042Z",
       "cashReconciledBy": "Matheus Fernando"
     },
     {
@@ -2230,7 +2238,7 @@
       "financeMovementIds": [
         "FMV-059bf91d-100d-4b56-b6e9-86561ab023d0"
       ],
-      "cashReconciledAt": "2026-08-27T23:34:15.559Z",
+      "cashReconciledAt": "2026-08-29T18:35:45.047Z",
       "cashReconciledBy": "Matheus Fernando"
     },
     {
@@ -2271,7 +2279,7 @@
       "financeMovementIds": [
         "FMV-3c9b41e6-2db8-4a80-8666-9eb369439ed6"
       ],
-      "cashReconciledAt": "2026-08-27T23:34:15.565Z",
+      "cashReconciledAt": "2026-08-29T18:35:45.052Z",
       "cashReconciledBy": "Matheus Fernando"
     },
     {
@@ -2312,7 +2320,7 @@
       "financeMovementIds": [
         "FMV-7dc60554-84fa-46dc-870e-43c70604a0ed"
       ],
-      "cashReconciledAt": "2026-08-27T23:34:15.572Z",
+      "cashReconciledAt": "2026-08-29T18:35:45.061Z",
       "cashReconciledBy": "Matheus Fernando"
     },
     {
@@ -2353,7 +2361,7 @@
       "financeMovementIds": [
         "FMV-ef9c4319-23ef-4f62-96b7-2fa5d05a3102"
       ],
-      "cashReconciledAt": "2026-08-27T23:34:15.578Z",
+      "cashReconciledAt": "2026-08-29T18:35:45.066Z",
       "cashReconciledBy": "Matheus Fernando"
     },
     {
@@ -2394,7 +2402,7 @@
       "financeMovementIds": [
         "FMV-2007b0e4-ed02-44f9-b25b-49190cea2cdd"
       ],
-      "cashReconciledAt": "2026-08-27T23:34:15.583Z",
+      "cashReconciledAt": "2026-08-29T18:35:45.072Z",
       "cashReconciledBy": "Matheus Fernando"
     },
     {
@@ -2435,7 +2443,7 @@
       "financeMovementIds": [
         "FMV-f6f60d98-4d63-4458-9db8-00905e26227c"
       ],
-      "cashReconciledAt": "2026-08-27T23:34:15.590Z",
+      "cashReconciledAt": "2026-08-29T18:35:45.077Z",
       "cashReconciledBy": "Matheus Fernando"
     },
     {
@@ -2476,7 +2484,7 @@
       "financeMovementIds": [
         "FMV-81ffdafb-add7-4eeb-92b3-b522b59a8525"
       ],
-      "cashReconciledAt": "2026-08-27T23:34:15.595Z",
+      "cashReconciledAt": "2026-08-29T18:35:45.082Z",
       "cashReconciledBy": "Matheus Fernando"
     }
   ]

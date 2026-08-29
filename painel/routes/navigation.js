@@ -15,6 +15,7 @@ const AREAS = {
     key: 'site', title: 'Site', icon: '🌐', description: 'Conteúdo público, catálogo, aparência, SEO e publicação.',
     items: [
       { name: 'Produtos do Site', href: '/produtos', icon: '📦', description: 'Catálogo público atual e futura sincronização com o ERP.', permission:'site.products.view' },
+      { name: 'Analytics do Site', href: '/analytics', icon: '📊', description: 'Acessos, produtos vistos, buscas, favoritos, origem e conversões do site.', permission:'analytics.view' },
       { name: 'Categorias da Loja Virtual', href: '/categorias', icon: '🗂️', description: 'SEO, URLs, banners, ícones e navegação das categorias públicas.', permission:'site.catalog.view' },
       { name: 'Banners', href: '/banners', icon: '🖼️', description: 'Slides e campanhas visuais.', permission:'site.content.view' },
       { name: 'SEO', href: '/seo', icon: '🔎', description: 'Metadados, sitemap e estrutura para buscadores.', permission:'site.seo.view' },

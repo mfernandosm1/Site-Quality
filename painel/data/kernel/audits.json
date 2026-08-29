@@ -6461,7 +6461,2187 @@
       },
       "ip": "127.0.0.1",
       "requestId": "447535d8-76a8-4b90-9946-1e9205fedd7e"
+    },
+    {
+      "id": "AUD-00000034",
+      "at": "2026-08-29T16:53:20.665Z",
+      "module": "produtos",
+      "action": "PRODUCT_UPDATED",
+      "actor": "Matheus Fernando",
+      "entityType": "product",
+      "entityId": "1781453700789",
+      "documentId": "",
+      "reason": "Cadastro de produto atualizado",
+      "before": {
+        "name": "Película 3D Proteção Real",
+        "slug": "pelicula-3d-protecao-real",
+        "price": null,
+        "image": "images/pelicula3D.jpeg",
+        "gallery": [],
+        "category": "acessorios",
+        "showPrice": false,
+        "featured": false,
+        "active": true,
+        "detailsEnabled": true,
+        "descriptionShort": "",
+        "descriptionLong": "Proteja seu celular sem perder a elegância. A Película 3D Proteção Real oferece cobertura total da tela com um toque suave, garantindo que o brilho e a sensibilidade do seu toque permaneçam originais.\r\n\r\nCobertura Total: Bordas curvas que protegem cada centímetro da tela.\r\n\r\nToque Suave: Superfície lisa que mantém a fluidez original do seu touch.\r\n\r\nAlta Resistência: Proteção superior contra riscos, batidas e impactos do dia a dia.\r\n\r\nTransparência Máxima: Mantém as cores vivas e a nitidez do seu visor.",
+        "id": 1781453700789,
+        "erp": {
+          "internalCode": "PRD-59",
+          "categoryId": "ERP-CAT-2",
+          "category": "acessorios"
+        },
+        "code": "PRD-59",
+        "inventory": {
+          "itemId": "PRD-1781453700789",
+          "stockControlled": true,
+          "allowNegative": false,
+          "minimumQuantity": 0,
+          "channelAvailability": {
+            "site": {
+              "mode": "shared",
+              "enabled": true,
+              "limit": null,
+              "physicalSafety": 0
+            }
+          }
+        },
+        "inventoryBalance": {
+          "inventoryItemId": "PRD-1781453700789",
+          "locationId": "loja-principal",
+          "physicalQuantity": 0,
+          "reservedQuantity": 0,
+          "availableQuantity": 0,
+          "minimumQuantity": 0,
+          "updatedAt": "2026-08-16T00:18:28.078Z"
+        },
+        "stock": 0
+      },
+      "after": {
+        "name": "Película 3D Proteção Real",
+        "slug": "pelicula-3d-protecao-real",
+        "price": null,
+        "image": "images/pelicula3D.jpeg",
+        "gallery": [],
+        "category": "acessorios",
+        "showPrice": false,
+        "featured": false,
+        "active": true,
+        "detailsEnabled": true,
+        "descriptionShort": "",
+        "descriptionLong": "Proteja seu celular sem perder a elegância. A Película 3D Proteção Real oferece cobertura total da tela com um toque suave, garantindo que o brilho e a sensibilidade do seu toque permaneçam originais.\n\nCobertura Total: Bordas curvas que protegem cada centímetro da tela.\n\nToque Suave: Superfície lisa que mantém a fluidez original do seu touch.\n\nAlta Resistência: Proteção superior contra riscos, batidas e impactos do dia a dia.\n\nTransparência Máxima: Mantém as cores vivas e a nitidez do seu visor.",
+        "id": 1781453700789,
+        "erp": {
+          "internalCode": "PRD-59",
+          "categoryId": "ERP-CAT-2",
+          "category": "acessorios",
+          "sku": "",
+          "supplierCode": "",
+          "searchAlias": "",
+          "barcode": "",
+          "brand": "",
+          "unit": "UN",
+          "subcategory": "",
+          "mainSupplierId": "",
+          "preferredSupplierId": "",
+          "active": true
+        },
+        "code": "PRD-59",
+        "inventory": {
+          "itemId": "PRD-1781453700789",
+          "stockControlled": true,
+          "allowNegative": false,
+          "minimumQuantity": 0,
+          "channelAvailability": {
+            "site": {
+              "mode": "shared",
+              "enabled": true,
+              "limit": null,
+              "physicalSafety": 0
+            }
+          }
+        },
+        "inventoryBalance": {
+          "inventoryItemId": "PRD-1781453700789",
+          "locationId": "loja-principal",
+          "physicalQuantity": 0,
+          "reservedQuantity": 0,
+          "availableQuantity": 0,
+          "minimumQuantity": 0,
+          "updatedAt": "2026-08-16T00:18:28.078Z"
+        },
+        "stock": 1,
+        "sku": "",
+        "barcode": "",
+        "brand": "",
+        "commercial": {
+          "costPrice": null,
+          "erpPrice": null,
+          "salePrice": null,
+          "marketplacePrice": null,
+          "promotionalPrice": null,
+          "desiredMarginPercent": null,
+          "expectedProfit": null,
+          "defaultCommissionPercent": null,
+          "cashPrice": null,
+          "installmentPrice": null,
+          "minimumPrice": null,
+          "minimumMarginPercent": null,
+          "discountPolicy": "inherit",
+          "maximumDiscountPercent": null,
+          "maximumDiscountAmount": null,
+          "requiresAuthorization": false
+        },
+        "subcategory": "",
+        "tags": [],
+        "relatedManualIds": [],
+        "crossSellIds": [],
+        "virtualStore": {
+          "name": "Película 3D Proteção Real",
+          "price": null,
+          "active": true,
+          "seoTitle": "",
+          "seoDescription": "",
+          "channels": {
+            "lojaVirtual": {
+              "enabled": true
+            },
+            "mercadoLivre": {
+              "enabled": false
+            },
+            "shopee": {
+              "enabled": false
+            },
+            "amazon": {
+              "enabled": false
+            },
+            "magalu": {
+              "enabled": false
+            }
+          }
+        },
+        "showVariationsOnCard": false,
+        "variations": {
+          "enabled": false,
+          "colors": [],
+          "storage": [],
+          "ram": [],
+          "condition": [],
+          "combinations": [],
+          "labels": {},
+          "colorsText": "",
+          "storageText": "",
+          "ramText": "",
+          "conditionText": "",
+          "labelsText": "{}",
+          "combinationsText": ""
+        }
+      },
+      "ip": "127.0.0.1",
+      "requestId": "8f84693d-6c7a-41a7-a432-301504cc1dec"
+    },
+    {
+      "id": "AUD-00000036",
+      "at": "2026-08-29T17:07:01.792Z",
+      "module": "produtos",
+      "action": "PRODUCT_UPDATED",
+      "actor": "Matheus Fernando",
+      "entityType": "product",
+      "entityId": "1780622580515",
+      "documentId": "",
+      "reason": "Cadastro de produto atualizado",
+      "before": {
+        "id": 1780622580515,
+        "name": "Película de Privacidade 3D  Proteção Real",
+        "price": null,
+        "image": "images/Pelicula de privacidade.jpeg",
+        "category": "acessorios",
+        "showPrice": false,
+        "featured": false,
+        "active": true,
+        "gallery": [],
+        "detailsEnabled": false,
+        "descriptionShort": "",
+        "descriptionLong": "",
+        "slug": "pelicula-de-privacidade-3d-protecao-real",
+        "erp": {
+          "internalCode": "PRD-42",
+          "categoryId": "ERP-CAT-2",
+          "category": "acessorios"
+        },
+        "code": "PRD-42",
+        "inventory": {
+          "itemId": "PRD-1780622580515",
+          "stockControlled": true,
+          "allowNegative": false,
+          "minimumQuantity": 0,
+          "channelAvailability": {
+            "site": {
+              "mode": "shared",
+              "enabled": true,
+              "limit": null,
+              "physicalSafety": 0
+            }
+          }
+        },
+        "inventoryBalance": {
+          "inventoryItemId": "PRD-1780622580515",
+          "locationId": "loja-principal",
+          "physicalQuantity": 0,
+          "reservedQuantity": 0,
+          "availableQuantity": 0,
+          "minimumQuantity": 0,
+          "updatedAt": "2026-08-16T00:18:28.078Z"
+        },
+        "stock": 0
+      },
+      "after": {
+        "id": 1780622580515,
+        "name": "Película de Privacidade 3D  Proteção Real",
+        "price": null,
+        "image": "images/Pelicula de privacidade.jpeg",
+        "category": "acessorios",
+        "showPrice": false,
+        "featured": false,
+        "active": true,
+        "gallery": [],
+        "detailsEnabled": false,
+        "descriptionShort": "",
+        "descriptionLong": "",
+        "slug": "pelicula-de-privacidade-3d-protecao-real",
+        "erp": {
+          "internalCode": "PRD-42",
+          "categoryId": "ERP-CAT-2",
+          "category": "acessorios",
+          "sku": "",
+          "supplierCode": "",
+          "searchAlias": "",
+          "barcode": "",
+          "brand": "",
+          "unit": "UN",
+          "subcategory": "",
+          "mainSupplierId": "",
+          "preferredSupplierId": "",
+          "active": true
+        },
+        "code": "PRD-42",
+        "inventory": {
+          "itemId": "PRD-1780622580515",
+          "stockControlled": true,
+          "allowNegative": false,
+          "minimumQuantity": 0,
+          "channelAvailability": {
+            "site": {
+              "mode": "shared",
+              "enabled": true,
+              "limit": null,
+              "physicalSafety": 0
+            }
+          }
+        },
+        "inventoryBalance": {
+          "inventoryItemId": "PRD-1780622580515",
+          "locationId": "loja-principal",
+          "physicalQuantity": 0,
+          "reservedQuantity": 0,
+          "availableQuantity": 0,
+          "minimumQuantity": 0,
+          "updatedAt": "2026-08-16T00:18:28.078Z"
+        },
+        "stock": 1,
+        "sku": "",
+        "barcode": "",
+        "brand": "",
+        "commercial": {
+          "costPrice": null,
+          "erpPrice": null,
+          "salePrice": null,
+          "marketplacePrice": null,
+          "promotionalPrice": null,
+          "desiredMarginPercent": null,
+          "expectedProfit": null,
+          "defaultCommissionPercent": null,
+          "cashPrice": null,
+          "installmentPrice": null,
+          "minimumPrice": null,
+          "minimumMarginPercent": null,
+          "discountPolicy": "inherit",
+          "maximumDiscountPercent": null,
+          "maximumDiscountAmount": null,
+          "requiresAuthorization": false
+        },
+        "subcategory": "",
+        "tags": [],
+        "relatedManualIds": [],
+        "crossSellIds": [],
+        "virtualStore": {
+          "name": "Película de Privacidade 3D  Proteção Real",
+          "price": null,
+          "active": true,
+          "seoTitle": "",
+          "seoDescription": "",
+          "channels": {
+            "lojaVirtual": {
+              "enabled": true
+            },
+            "mercadoLivre": {
+              "enabled": false
+            },
+            "shopee": {
+              "enabled": false
+            },
+            "amazon": {
+              "enabled": false
+            },
+            "magalu": {
+              "enabled": false
+            }
+          }
+        },
+        "showVariationsOnCard": false,
+        "variations": {
+          "enabled": false,
+          "colors": [],
+          "storage": [],
+          "ram": [],
+          "condition": [],
+          "combinations": [],
+          "labels": {},
+          "colorsText": "",
+          "storageText": "",
+          "ramText": "",
+          "conditionText": "",
+          "labelsText": "{}",
+          "combinationsText": ""
+        }
+      },
+      "ip": "127.0.0.1",
+      "requestId": "5e9d7ed9-20e6-499e-a608-debfd6952364"
+    },
+    {
+      "id": "AUD-00000037",
+      "at": "2026-08-29T17:07:11.195Z",
+      "module": "produtos",
+      "action": "PRODUCT_UPDATED",
+      "actor": "Matheus Fernando",
+      "entityType": "product",
+      "entityId": "1780622580515",
+      "documentId": "",
+      "reason": "Cadastro de produto atualizado",
+      "before": {
+        "id": 1780622580515,
+        "name": "Película de Privacidade 3D  Proteção Real",
+        "price": null,
+        "image": "images/Pelicula de privacidade.jpeg",
+        "category": "acessorios",
+        "showPrice": false,
+        "featured": false,
+        "active": true,
+        "gallery": [],
+        "detailsEnabled": false,
+        "descriptionShort": "",
+        "descriptionLong": "",
+        "slug": "pelicula-de-privacidade-3d-protecao-real",
+        "erp": {
+          "internalCode": "PRD-42",
+          "categoryId": "ERP-CAT-2",
+          "category": "acessorios",
+          "sku": "",
+          "supplierCode": "",
+          "searchAlias": "",
+          "barcode": "",
+          "brand": "",
+          "unit": "UN",
+          "subcategory": "",
+          "mainSupplierId": "",
+          "preferredSupplierId": "",
+          "active": true
+        },
+        "code": "PRD-42",
+        "inventory": {
+          "itemId": "PRD-1780622580515",
+          "stockControlled": true,
+          "allowNegative": false,
+          "minimumQuantity": 0,
+          "channelAvailability": {
+            "site": {
+              "mode": "shared",
+              "enabled": true,
+              "limit": null,
+              "physicalSafety": 0
+            }
+          }
+        },
+        "inventoryBalance": {
+          "inventoryItemId": "PRD-1780622580515",
+          "locationId": "loja-principal",
+          "physicalQuantity": 0,
+          "reservedQuantity": 0,
+          "availableQuantity": 0,
+          "minimumQuantity": 0,
+          "updatedAt": "2026-08-16T00:18:28.078Z"
+        },
+        "stock": 1,
+        "sku": "",
+        "barcode": "",
+        "brand": "",
+        "commercial": {
+          "costPrice": null,
+          "erpPrice": null,
+          "salePrice": null,
+          "marketplacePrice": null,
+          "promotionalPrice": null,
+          "desiredMarginPercent": null,
+          "expectedProfit": null,
+          "defaultCommissionPercent": null,
+          "cashPrice": null,
+          "installmentPrice": null,
+          "minimumPrice": null,
+          "minimumMarginPercent": null,
+          "discountPolicy": "inherit",
+          "maximumDiscountPercent": null,
+          "maximumDiscountAmount": null,
+          "requiresAuthorization": false
+        },
+        "subcategory": "",
+        "tags": [],
+        "relatedManualIds": [],
+        "crossSellIds": [],
+        "virtualStore": {
+          "name": "Película de Privacidade 3D  Proteção Real",
+          "price": null,
+          "active": true,
+          "seoTitle": "",
+          "seoDescription": "",
+          "channels": {
+            "lojaVirtual": {
+              "enabled": true
+            },
+            "mercadoLivre": {
+              "enabled": false
+            },
+            "shopee": {
+              "enabled": false
+            },
+            "amazon": {
+              "enabled": false
+            },
+            "magalu": {
+              "enabled": false
+            }
+          }
+        },
+        "showVariationsOnCard": false,
+        "variations": {
+          "enabled": false,
+          "colors": [],
+          "storage": [],
+          "ram": [],
+          "condition": [],
+          "combinations": [],
+          "labels": {},
+          "colorsText": "",
+          "storageText": "",
+          "ramText": "",
+          "conditionText": "",
+          "labelsText": "{}",
+          "combinationsText": ""
+        }
+      },
+      "after": {
+        "id": 1780622580515,
+        "name": "Película de Privacidade 3D  Proteção Real",
+        "price": null,
+        "image": "images/Pelicula de privacidade.jpeg",
+        "category": "acessorios",
+        "showPrice": false,
+        "featured": false,
+        "active": true,
+        "gallery": [],
+        "detailsEnabled": false,
+        "descriptionShort": "",
+        "descriptionLong": "",
+        "slug": "pelicula-de-privacidade-3d-protecao-real",
+        "erp": {
+          "internalCode": "PRD-42",
+          "categoryId": "ERP-CAT-2",
+          "category": "acessorios",
+          "sku": "",
+          "supplierCode": "",
+          "searchAlias": "",
+          "barcode": "",
+          "brand": "",
+          "unit": "UN",
+          "subcategory": "",
+          "mainSupplierId": "",
+          "preferredSupplierId": "",
+          "active": true
+        },
+        "code": "PRD-42",
+        "inventory": {
+          "itemId": "PRD-1780622580515",
+          "stockControlled": true,
+          "allowNegative": false,
+          "minimumQuantity": 0,
+          "channelAvailability": {
+            "site": {
+              "mode": "shared",
+              "enabled": true,
+              "limit": null,
+              "physicalSafety": 0
+            }
+          }
+        },
+        "inventoryBalance": {
+          "inventoryItemId": "PRD-1780622580515",
+          "locationId": "loja-principal",
+          "physicalQuantity": 0,
+          "reservedQuantity": 0,
+          "availableQuantity": 0,
+          "minimumQuantity": 0,
+          "updatedAt": "2026-08-16T00:18:28.078Z"
+        },
+        "stock": 1,
+        "sku": "",
+        "barcode": "",
+        "brand": "",
+        "commercial": {
+          "costPrice": null,
+          "erpPrice": null,
+          "salePrice": null,
+          "marketplacePrice": null,
+          "promotionalPrice": null,
+          "desiredMarginPercent": null,
+          "expectedProfit": null,
+          "defaultCommissionPercent": null,
+          "cashPrice": null,
+          "installmentPrice": null,
+          "minimumPrice": null,
+          "minimumMarginPercent": null,
+          "discountPolicy": "inherit",
+          "maximumDiscountPercent": null,
+          "maximumDiscountAmount": null,
+          "requiresAuthorization": false
+        },
+        "subcategory": "",
+        "tags": [],
+        "relatedManualIds": [],
+        "crossSellIds": [],
+        "virtualStore": {
+          "name": "Película de Privacidade 3D  Proteção Real",
+          "price": null,
+          "active": true,
+          "seoTitle": "",
+          "seoDescription": "",
+          "channels": {
+            "lojaVirtual": {
+              "enabled": true
+            },
+            "mercadoLivre": {
+              "enabled": false
+            },
+            "shopee": {
+              "enabled": false
+            },
+            "amazon": {
+              "enabled": false
+            },
+            "magalu": {
+              "enabled": false
+            }
+          }
+        },
+        "showVariationsOnCard": false,
+        "variations": {
+          "enabled": false,
+          "colors": [],
+          "storage": [],
+          "ram": [],
+          "condition": [],
+          "combinations": [],
+          "labels": {},
+          "colorsText": "",
+          "storageText": "",
+          "ramText": "",
+          "conditionText": "",
+          "labelsText": "{}",
+          "combinationsText": ""
+        }
+      },
+      "ip": "127.0.0.1",
+      "requestId": "509db209-91c4-4b12-8b63-d6142bd364d9"
+    },
+    {
+      "id": "AUD-00000039",
+      "at": "2026-08-29T18:30:27.085Z",
+      "module": "produtos",
+      "action": "PRODUCT_UPDATED",
+      "actor": "Matheus Fernando",
+      "entityType": "product",
+      "entityId": "1781453700789",
+      "documentId": "",
+      "reason": "Cadastro de produto atualizado",
+      "before": {
+        "name": "Película 3D Proteção Real",
+        "slug": "pelicula-3d-protecao-real",
+        "price": null,
+        "image": "images/pelicula3D.jpeg",
+        "gallery": [],
+        "category": "acessorios",
+        "showPrice": false,
+        "featured": false,
+        "active": true,
+        "detailsEnabled": true,
+        "descriptionShort": "",
+        "descriptionLong": "Proteja seu celular sem perder a elegância. A Película 3D Proteção Real oferece cobertura total da tela com um toque suave, garantindo que o brilho e a sensibilidade do seu toque permaneçam originais.\n\nCobertura Total: Bordas curvas que protegem cada centímetro da tela.\n\nToque Suave: Superfície lisa que mantém a fluidez original do seu touch.\n\nAlta Resistência: Proteção superior contra riscos, batidas e impactos do dia a dia.\n\nTransparência Máxima: Mantém as cores vivas e a nitidez do seu visor.",
+        "id": 1781453700789,
+        "erp": {
+          "internalCode": "PRD-59",
+          "categoryId": "ERP-CAT-2",
+          "category": "acessorios",
+          "sku": "",
+          "supplierCode": "",
+          "searchAlias": "",
+          "barcode": "",
+          "brand": "",
+          "unit": "UN",
+          "subcategory": "",
+          "mainSupplierId": "",
+          "preferredSupplierId": "",
+          "active": true
+        },
+        "code": "PRD-59",
+        "inventory": {
+          "itemId": "PRD-1781453700789",
+          "stockControlled": true,
+          "allowNegative": false,
+          "minimumQuantity": 0,
+          "channelAvailability": {
+            "site": {
+              "mode": "shared",
+              "enabled": true,
+              "limit": null,
+              "physicalSafety": 0
+            }
+          }
+        },
+        "inventoryBalance": {
+          "inventoryItemId": "PRD-1781453700789",
+          "locationId": "loja-principal",
+          "physicalQuantity": 1,
+          "reservedQuantity": 0,
+          "availableQuantity": 1,
+          "minimumQuantity": 0,
+          "updatedAt": "2026-08-29T17:00:35.346Z"
+        },
+        "stock": 1,
+        "sku": "",
+        "barcode": "",
+        "brand": "",
+        "commercial": {
+          "costPrice": null,
+          "erpPrice": null,
+          "salePrice": null,
+          "marketplacePrice": null,
+          "promotionalPrice": null,
+          "desiredMarginPercent": null,
+          "expectedProfit": null,
+          "defaultCommissionPercent": null,
+          "cashPrice": null,
+          "installmentPrice": null,
+          "minimumPrice": null,
+          "minimumMarginPercent": null,
+          "discountPolicy": "inherit",
+          "maximumDiscountPercent": null,
+          "maximumDiscountAmount": null,
+          "requiresAuthorization": false
+        },
+        "subcategory": "",
+        "tags": [],
+        "relatedManualIds": [],
+        "crossSellIds": [],
+        "virtualStore": {
+          "name": "Película 3D Proteção Real",
+          "price": null,
+          "active": true,
+          "seoTitle": "",
+          "seoDescription": "",
+          "channels": {
+            "lojaVirtual": {
+              "enabled": true
+            },
+            "mercadoLivre": {
+              "enabled": false
+            },
+            "shopee": {
+              "enabled": false
+            },
+            "amazon": {
+              "enabled": false
+            },
+            "magalu": {
+              "enabled": false
+            }
+          }
+        },
+        "showVariationsOnCard": false,
+        "variations": {
+          "enabled": false,
+          "colors": [],
+          "storage": [],
+          "ram": [],
+          "condition": [],
+          "combinations": [],
+          "labels": {},
+          "colorsText": "",
+          "storageText": "",
+          "ramText": "",
+          "conditionText": "",
+          "labelsText": "{}",
+          "combinationsText": ""
+        }
+      },
+      "after": {
+        "name": "Película 3D Proteção Real",
+        "slug": "pelicula-3d-protecao-real",
+        "price": null,
+        "image": "images/pelicula3D.jpeg",
+        "gallery": [],
+        "category": "acessorios",
+        "showPrice": false,
+        "featured": false,
+        "active": true,
+        "detailsEnabled": true,
+        "descriptionShort": "",
+        "descriptionLong": "Proteja seu celular sem perder a elegância. A Película 3D Proteção Real oferece cobertura total da tela com um toque suave, garantindo que o brilho e a sensibilidade do seu toque permaneçam originais.\n\nCobertura Total: Bordas curvas que protegem cada centímetro da tela.\n\nToque Suave: Superfície lisa que mantém a fluidez original do seu touch.\n\nAlta Resistência: Proteção superior contra riscos, batidas e impactos do dia a dia.\n\nTransparência Máxima: Mantém as cores vivas e a nitidez do seu visor.",
+        "id": 1781453700789,
+        "erp": {
+          "internalCode": "PRD-59",
+          "categoryId": "ERP-CAT-2",
+          "category": "acessorios",
+          "sku": "",
+          "supplierCode": "",
+          "searchAlias": "",
+          "barcode": "",
+          "brand": "",
+          "unit": "UN",
+          "subcategory": "",
+          "mainSupplierId": "",
+          "preferredSupplierId": "",
+          "active": true
+        },
+        "code": "PRD-59",
+        "inventory": {
+          "itemId": "PRD-1781453700789",
+          "stockControlled": true,
+          "allowNegative": false,
+          "minimumQuantity": 0,
+          "channelAvailability": {
+            "site": {
+              "mode": "shared",
+              "enabled": true,
+              "limit": null,
+              "physicalSafety": 0
+            }
+          }
+        },
+        "inventoryBalance": {
+          "inventoryItemId": "PRD-1781453700789",
+          "locationId": "loja-principal",
+          "physicalQuantity": 1,
+          "reservedQuantity": 0,
+          "availableQuantity": 1,
+          "minimumQuantity": 0,
+          "updatedAt": "2026-08-29T17:00:35.346Z"
+        },
+        "stock": 0,
+        "sku": "",
+        "barcode": "",
+        "brand": "",
+        "commercial": {
+          "costPrice": null,
+          "erpPrice": null,
+          "salePrice": null,
+          "marketplacePrice": null,
+          "promotionalPrice": null,
+          "desiredMarginPercent": null,
+          "expectedProfit": null,
+          "defaultCommissionPercent": null,
+          "cashPrice": null,
+          "installmentPrice": null,
+          "minimumPrice": null,
+          "minimumMarginPercent": null,
+          "discountPolicy": "inherit",
+          "maximumDiscountPercent": null,
+          "maximumDiscountAmount": null,
+          "requiresAuthorization": false
+        },
+        "subcategory": "",
+        "tags": [],
+        "relatedManualIds": [],
+        "crossSellIds": [],
+        "virtualStore": {
+          "name": "Película 3D Proteção Real",
+          "price": null,
+          "active": true,
+          "seoTitle": "",
+          "seoDescription": "",
+          "channels": {
+            "lojaVirtual": {
+              "enabled": true
+            },
+            "mercadoLivre": {
+              "enabled": false
+            },
+            "shopee": {
+              "enabled": false
+            },
+            "amazon": {
+              "enabled": false
+            },
+            "magalu": {
+              "enabled": false
+            }
+          }
+        },
+        "showVariationsOnCard": false,
+        "variations": {
+          "enabled": false,
+          "colors": [],
+          "storage": [],
+          "ram": [],
+          "condition": [],
+          "combinations": [],
+          "labels": {},
+          "colorsText": "",
+          "storageText": "",
+          "ramText": "",
+          "conditionText": "",
+          "labelsText": "{}",
+          "combinationsText": ""
+        }
+      },
+      "ip": "127.0.0.1",
+      "requestId": "1d869d47-4bbe-463b-be2d-855a9e3a47db"
+    },
+    {
+      "id": "AUD-00000040",
+      "at": "2026-08-29T18:30:38.679Z",
+      "module": "produtos",
+      "action": "PRODUCT_UPDATED",
+      "actor": "Matheus Fernando",
+      "entityType": "product",
+      "entityId": "1780622580515",
+      "documentId": "",
+      "reason": "Cadastro de produto atualizado",
+      "before": {
+        "id": 1780622580515,
+        "name": "Película de Privacidade 3D  Proteção Real",
+        "price": null,
+        "image": "images/Pelicula de privacidade.jpeg",
+        "category": "acessorios",
+        "showPrice": false,
+        "featured": false,
+        "active": true,
+        "gallery": [],
+        "detailsEnabled": false,
+        "descriptionShort": "",
+        "descriptionLong": "",
+        "slug": "pelicula-de-privacidade-3d-protecao-real",
+        "erp": {
+          "internalCode": "PRD-42",
+          "categoryId": "ERP-CAT-2",
+          "category": "acessorios",
+          "sku": "",
+          "supplierCode": "",
+          "searchAlias": "",
+          "barcode": "",
+          "brand": "",
+          "unit": "UN",
+          "subcategory": "",
+          "mainSupplierId": "",
+          "preferredSupplierId": "",
+          "active": true
+        },
+        "code": "PRD-42",
+        "inventory": {
+          "itemId": "PRD-1780622580515",
+          "stockControlled": true,
+          "allowNegative": false,
+          "minimumQuantity": 0,
+          "channelAvailability": {
+            "site": {
+              "mode": "shared",
+              "enabled": true,
+              "limit": null,
+              "physicalSafety": 0
+            }
+          }
+        },
+        "inventoryBalance": {
+          "inventoryItemId": "PRD-1780622580515",
+          "locationId": "loja-principal",
+          "physicalQuantity": 1,
+          "reservedQuantity": 0,
+          "availableQuantity": 1,
+          "minimumQuantity": 0,
+          "updatedAt": "2026-08-29T17:09:47.602Z"
+        },
+        "stock": 1,
+        "sku": "",
+        "barcode": "",
+        "brand": "",
+        "commercial": {
+          "costPrice": null,
+          "erpPrice": null,
+          "salePrice": null,
+          "marketplacePrice": null,
+          "promotionalPrice": null,
+          "desiredMarginPercent": null,
+          "expectedProfit": null,
+          "defaultCommissionPercent": null,
+          "cashPrice": null,
+          "installmentPrice": null,
+          "minimumPrice": null,
+          "minimumMarginPercent": null,
+          "discountPolicy": "inherit",
+          "maximumDiscountPercent": null,
+          "maximumDiscountAmount": null,
+          "requiresAuthorization": false
+        },
+        "subcategory": "",
+        "tags": [],
+        "relatedManualIds": [],
+        "crossSellIds": [],
+        "virtualStore": {
+          "name": "Película de Privacidade 3D  Proteção Real",
+          "price": null,
+          "active": true,
+          "seoTitle": "",
+          "seoDescription": "",
+          "channels": {
+            "lojaVirtual": {
+              "enabled": true
+            },
+            "mercadoLivre": {
+              "enabled": false
+            },
+            "shopee": {
+              "enabled": false
+            },
+            "amazon": {
+              "enabled": false
+            },
+            "magalu": {
+              "enabled": false
+            }
+          }
+        },
+        "showVariationsOnCard": false,
+        "variations": {
+          "enabled": false,
+          "colors": [],
+          "storage": [],
+          "ram": [],
+          "condition": [],
+          "combinations": [],
+          "labels": {},
+          "colorsText": "",
+          "storageText": "",
+          "ramText": "",
+          "conditionText": "",
+          "labelsText": "{}",
+          "combinationsText": ""
+        }
+      },
+      "after": {
+        "id": 1780622580515,
+        "name": "Película de Privacidade 3D  Proteção Real",
+        "price": null,
+        "image": "images/Pelicula de privacidade.jpeg",
+        "category": "acessorios",
+        "showPrice": false,
+        "featured": false,
+        "active": true,
+        "gallery": [],
+        "detailsEnabled": false,
+        "descriptionShort": "",
+        "descriptionLong": "",
+        "slug": "pelicula-de-privacidade-3d-protecao-real",
+        "erp": {
+          "internalCode": "PRD-42",
+          "categoryId": "ERP-CAT-2",
+          "category": "acessorios",
+          "sku": "",
+          "supplierCode": "",
+          "searchAlias": "",
+          "barcode": "",
+          "brand": "",
+          "unit": "UN",
+          "subcategory": "",
+          "mainSupplierId": "",
+          "preferredSupplierId": "",
+          "active": true
+        },
+        "code": "PRD-42",
+        "inventory": {
+          "itemId": "PRD-1780622580515",
+          "stockControlled": true,
+          "allowNegative": false,
+          "minimumQuantity": 0,
+          "channelAvailability": {
+            "site": {
+              "mode": "shared",
+              "enabled": true,
+              "limit": null,
+              "physicalSafety": 0
+            }
+          }
+        },
+        "inventoryBalance": {
+          "inventoryItemId": "PRD-1780622580515",
+          "locationId": "loja-principal",
+          "physicalQuantity": 1,
+          "reservedQuantity": 0,
+          "availableQuantity": 1,
+          "minimumQuantity": 0,
+          "updatedAt": "2026-08-29T17:09:47.602Z"
+        },
+        "stock": 0,
+        "sku": "",
+        "barcode": "",
+        "brand": "",
+        "commercial": {
+          "costPrice": null,
+          "erpPrice": null,
+          "salePrice": null,
+          "marketplacePrice": null,
+          "promotionalPrice": null,
+          "desiredMarginPercent": null,
+          "expectedProfit": null,
+          "defaultCommissionPercent": null,
+          "cashPrice": null,
+          "installmentPrice": null,
+          "minimumPrice": null,
+          "minimumMarginPercent": null,
+          "discountPolicy": "inherit",
+          "maximumDiscountPercent": null,
+          "maximumDiscountAmount": null,
+          "requiresAuthorization": false
+        },
+        "subcategory": "",
+        "tags": [],
+        "relatedManualIds": [],
+        "crossSellIds": [],
+        "virtualStore": {
+          "name": "Película de Privacidade 3D  Proteção Real",
+          "price": null,
+          "active": true,
+          "seoTitle": "",
+          "seoDescription": "",
+          "channels": {
+            "lojaVirtual": {
+              "enabled": true
+            },
+            "mercadoLivre": {
+              "enabled": false
+            },
+            "shopee": {
+              "enabled": false
+            },
+            "amazon": {
+              "enabled": false
+            },
+            "magalu": {
+              "enabled": false
+            }
+          }
+        },
+        "showVariationsOnCard": false,
+        "variations": {
+          "enabled": false,
+          "colors": [],
+          "storage": [],
+          "ram": [],
+          "condition": [],
+          "combinations": [],
+          "labels": {},
+          "colorsText": "",
+          "storageText": "",
+          "ramText": "",
+          "conditionText": "",
+          "labelsText": "{}",
+          "combinationsText": ""
+        }
+      },
+      "ip": "127.0.0.1",
+      "requestId": "b97d47f2-e73d-4080-8175-951d24a1f1f3"
+    },
+    {
+      "id": "AUD-00000041",
+      "at": "2026-08-29T20:44:31.608Z",
+      "module": "produtos",
+      "action": "PRODUCT_UPDATED",
+      "actor": "Matheus Fernando",
+      "entityType": "product",
+      "entityId": "1782068543631",
+      "documentId": "",
+      "reason": "Cadastro de produto atualizado",
+      "before": {
+        "name": "Troca de Tela de Celulares",
+        "slug": "troca-de-tela-de-celulares",
+        "price": null,
+        "image": "images/Troca_de-Tela_card.png",
+        "gallery": [
+          "images/produtos/1782071417602-troca-de-bateria.png"
+        ],
+        "category": "assistencia-tecnica",
+        "showPrice": false,
+        "featured": false,
+        "active": true,
+        "detailsEnabled": true,
+        "descriptionShort": "Troca de telas para iPhone, Samsung, Motorola e Xiaomi, com serviço rápido, instalação profissional e garantia.",
+        "descriptionLong": "<p>Assistência técnica especializada em <strong>troca de tela de celulares</strong>, incluindo iPhone, Samsung, Motorola e Xiaomi Trabalhamos com peças de qualidade e realizamos a substituição com cuidado técnico para recuperar a aparência, o toque e o funcionamento do aparelho</p><p>✅ Instalação profissional<br>✅ Peças de qualidade<br>✅ Serviço rápido e seguro<br>✅ Garantia no serviço</p><br>Pronto Socorro do seu celular! Atendemos&nbsp;<strong>Saldanha Marinho e toda a região</strong>, incluindo Carazinho, Não me toque, Santa Bárbara do Sul, Colorado RS, Ibirubá, Tapera, Selbach, Quinze de Novembro, Fortaleza dos Valos, Panambi, Cruz Alta e demais cidades da região.<br><br>",
+        "variations": {
+          "enabled": true,
+          "colors": [],
+          "storage": [
+            "Troca de Entrada de Energia",
+            "Reparo na Placa",
+            "Troca de tela"
+          ],
+          "ram": [],
+          "condition": [],
+          "combinations": [
+            {
+              "color": "",
+              "storage": "Troca de Entrada de Energia",
+              "ram": "",
+              "condition": "",
+              "image": "",
+              "stock": 0,
+              "erpPrice": null,
+              "costPrice": null,
+              "desiredMarginPercent": null,
+              "inventoryItemId": "VAR-1782068543631-2"
+            },
+            {
+              "color": "",
+              "storage": "Reparo na Placa",
+              "ram": "",
+              "condition": "",
+              "image": "",
+              "stock": 0,
+              "erpPrice": null,
+              "costPrice": null,
+              "desiredMarginPercent": null,
+              "inventoryItemId": "VAR-1782068543631-3"
+            },
+            {
+              "color": "",
+              "storage": "Troca de tela",
+              "ram": "",
+              "condition": "",
+              "image": "",
+              "stock": 0,
+              "erpPrice": null,
+              "costPrice": null,
+              "desiredMarginPercent": null,
+              "inventoryItemId": "VAR-1782068543631-4"
+            }
+          ],
+          "labels": {
+            "colors": "Cor",
+            "storage": "Serviços"
+          },
+          "colorsText": "",
+          "storageText": "Troca de Entrada de Energia\nReparo na Placa\nTroca de tela",
+          "ramText": "",
+          "conditionText": "",
+          "labelsText": "{\"colors\":\"Cor\",\"storage\":\"Serviços\"}",
+          "combinationsText": "|Troca de Entrada de Energia||||0\n|Reparo na Placa||||0\n|Troca de tela||||0"
+        },
+        "id": 1782068543631,
+        "erp": {
+          "internalCode": "PRD-68",
+          "categoryId": "ERP-CAT-4",
+          "category": "assistencia-tecnica",
+          "sku": "",
+          "supplierCode": "",
+          "searchAlias": "",
+          "barcode": "",
+          "brand": "",
+          "unit": "UN",
+          "subcategory": "",
+          "mainSupplierId": "",
+          "preferredSupplierId": "",
+          "active": false
+        },
+        "code": "PRD-68",
+        "inventory": {
+          "itemId": "PRD-1782068543631",
+          "stockControlled": true,
+          "allowNegative": false,
+          "minimumQuantity": 0,
+          "channelAvailability": {
+            "site": {
+              "mode": "shared",
+              "enabled": true,
+              "limit": null,
+              "physicalSafety": 0
+            }
+          }
+        },
+        "inventoryBalance": {
+          "physicalQuantity": 0,
+          "availableQuantity": 0,
+          "reservedQuantity": 0,
+          "derivedFromVariations": true
+        },
+        "stock": 0,
+        "sku": "",
+        "barcode": "",
+        "brand": "",
+        "commercial": {
+          "costPrice": null,
+          "erpPrice": null,
+          "salePrice": null,
+          "marketplacePrice": null,
+          "promotionalPrice": null,
+          "desiredMarginPercent": null,
+          "expectedProfit": null,
+          "defaultCommissionPercent": null,
+          "cashPrice": null,
+          "installmentPrice": null,
+          "minimumPrice": null,
+          "minimumMarginPercent": null,
+          "discountPolicy": "inherit",
+          "maximumDiscountPercent": null,
+          "maximumDiscountAmount": null,
+          "requiresAuthorization": false
+        },
+        "subcategory": "",
+        "tags": [],
+        "relatedManualIds": [],
+        "crossSellIds": [],
+        "virtualStore": {
+          "name": "Troca de Tela de Celulares",
+          "price": null,
+          "active": true,
+          "seoTitle": "",
+          "seoDescription": "",
+          "channels": {
+            "lojaVirtual": {
+              "enabled": true
+            },
+            "mercadoLivre": {
+              "enabled": false
+            },
+            "shopee": {
+              "enabled": false
+            },
+            "amazon": {
+              "enabled": false
+            },
+            "magalu": {
+              "enabled": false
+            }
+          }
+        },
+        "showVariationsOnCard": false
+      },
+      "after": {
+        "name": "Troca de Tela de Celulares",
+        "slug": "troca-de-tela-de-celulares",
+        "price": null,
+        "image": "images/Troca_de-Tela_card.png",
+        "gallery": [
+          "images/produtos/1782071417602-troca-de-bateria.png"
+        ],
+        "category": "assistencia-tecnica",
+        "showPrice": false,
+        "featured": false,
+        "active": true,
+        "detailsEnabled": true,
+        "descriptionShort": "Troca de telas para iPhone, Samsung, Motorola e Xiaomi, com serviço rápido, instalação profissional e garantia.",
+        "descriptionLong": "<p>Assistência técnica especializada em <strong>troca de tela de celulares</strong>, incluindo iPhone, Samsung, Motorola e Xiaomi Trabalhamos com peças de qualidade e realizamos a substituição com cuidado técnico para recuperar a aparência, o toque e o funcionamento do aparelho</p><p>✅ Instalação profissional<br>✅ Peças de qualidade<br>✅ Serviço rápido e seguro<br>✅ Garantia no serviço</p><br>Pronto Socorro do seu celular! Atendemos&nbsp;<strong>Saldanha Marinho e toda a região</strong>, incluindo Carazinho, Não me toque, Santa Bárbara do Sul, Colorado RS, Ibirubá, Tapera, Selbach, Quinze de Novembro, Fortaleza dos Valos, Panambi, Cruz Alta e demais cidades da região.<br><br>",
+        "variations": {
+          "enabled": false,
+          "colors": [],
+          "storage": [],
+          "ram": [],
+          "condition": [],
+          "combinations": [],
+          "labels": {
+            "colors": "Cor",
+            "storage": "Serviços"
+          },
+          "colorsText": "",
+          "storageText": "",
+          "ramText": "",
+          "conditionText": "",
+          "labelsText": "{\"colors\":\"Cor\",\"storage\":\"Serviços\"}",
+          "combinationsText": ""
+        },
+        "id": 1782068543631,
+        "erp": {
+          "internalCode": "PRD-68",
+          "categoryId": "ERP-CAT-4",
+          "category": "assistencia-tecnica",
+          "sku": "",
+          "supplierCode": "",
+          "searchAlias": "",
+          "barcode": "",
+          "brand": "",
+          "unit": "UN",
+          "subcategory": "",
+          "mainSupplierId": "",
+          "preferredSupplierId": "",
+          "active": false
+        },
+        "code": "PRD-68",
+        "inventory": {
+          "itemId": "PRD-1782068543631",
+          "stockControlled": true,
+          "allowNegative": false,
+          "minimumQuantity": 0,
+          "channelAvailability": {
+            "site": {
+              "mode": "shared",
+              "enabled": true,
+              "limit": null,
+              "physicalSafety": 0
+            }
+          }
+        },
+        "inventoryBalance": {
+          "physicalQuantity": 0,
+          "availableQuantity": 0,
+          "reservedQuantity": 0,
+          "derivedFromVariations": true
+        },
+        "stock": 0,
+        "sku": "",
+        "barcode": "",
+        "brand": "",
+        "commercial": {
+          "costPrice": null,
+          "erpPrice": null,
+          "salePrice": null,
+          "marketplacePrice": null,
+          "promotionalPrice": null,
+          "desiredMarginPercent": null,
+          "expectedProfit": null,
+          "defaultCommissionPercent": null,
+          "cashPrice": null,
+          "installmentPrice": null,
+          "minimumPrice": null,
+          "minimumMarginPercent": null,
+          "discountPolicy": "inherit",
+          "maximumDiscountPercent": null,
+          "maximumDiscountAmount": null,
+          "requiresAuthorization": false
+        },
+        "subcategory": "",
+        "tags": [],
+        "relatedManualIds": [],
+        "crossSellIds": [],
+        "virtualStore": {
+          "name": "Troca de Tela de Celulares",
+          "price": null,
+          "active": true,
+          "seoTitle": "",
+          "seoDescription": "",
+          "channels": {
+            "lojaVirtual": {
+              "enabled": true
+            },
+            "mercadoLivre": {
+              "enabled": false
+            },
+            "shopee": {
+              "enabled": false
+            },
+            "amazon": {
+              "enabled": false
+            },
+            "magalu": {
+              "enabled": false
+            }
+          }
+        },
+        "showVariationsOnCard": false
+      },
+      "ip": "127.0.0.1",
+      "requestId": "1de43042-bac5-4a64-b135-8a0f354ed257"
+    },
+    {
+      "id": "AUD-00000042",
+      "at": "2026-08-29T20:44:33.191Z",
+      "module": "produtos",
+      "action": "PRODUCT_UPDATED",
+      "actor": "Matheus Fernando",
+      "entityType": "product",
+      "entityId": "1782068543631",
+      "documentId": "",
+      "reason": "Cadastro de produto atualizado",
+      "before": {
+        "name": "Troca de Tela de Celulares",
+        "slug": "troca-de-tela-de-celulares",
+        "price": null,
+        "image": "images/Troca_de-Tela_card.png",
+        "gallery": [
+          "images/produtos/1782071417602-troca-de-bateria.png"
+        ],
+        "category": "assistencia-tecnica",
+        "showPrice": false,
+        "featured": false,
+        "active": true,
+        "detailsEnabled": true,
+        "descriptionShort": "Troca de telas para iPhone, Samsung, Motorola e Xiaomi, com serviço rápido, instalação profissional e garantia.",
+        "descriptionLong": "<p>Assistência técnica especializada em <strong>troca de tela de celulares</strong>, incluindo iPhone, Samsung, Motorola e Xiaomi Trabalhamos com peças de qualidade e realizamos a substituição com cuidado técnico para recuperar a aparência, o toque e o funcionamento do aparelho</p><p>✅ Instalação profissional<br>✅ Peças de qualidade<br>✅ Serviço rápido e seguro<br>✅ Garantia no serviço</p><br>Pronto Socorro do seu celular! Atendemos&nbsp;<strong>Saldanha Marinho e toda a região</strong>, incluindo Carazinho, Não me toque, Santa Bárbara do Sul, Colorado RS, Ibirubá, Tapera, Selbach, Quinze de Novembro, Fortaleza dos Valos, Panambi, Cruz Alta e demais cidades da região.<br><br>",
+        "variations": {
+          "enabled": false,
+          "colors": [],
+          "storage": [],
+          "ram": [],
+          "condition": [],
+          "combinations": [],
+          "labels": {
+            "colors": "Cor",
+            "storage": "Serviços"
+          },
+          "colorsText": "",
+          "storageText": "",
+          "ramText": "",
+          "conditionText": "",
+          "labelsText": "{\"colors\":\"Cor\",\"storage\":\"Serviços\"}",
+          "combinationsText": ""
+        },
+        "id": 1782068543631,
+        "erp": {
+          "internalCode": "PRD-68",
+          "categoryId": "ERP-CAT-4",
+          "category": "assistencia-tecnica",
+          "sku": "",
+          "supplierCode": "",
+          "searchAlias": "",
+          "barcode": "",
+          "brand": "",
+          "unit": "UN",
+          "subcategory": "",
+          "mainSupplierId": "",
+          "preferredSupplierId": "",
+          "active": false
+        },
+        "code": "PRD-68",
+        "inventory": {
+          "itemId": "PRD-1782068543631",
+          "stockControlled": true,
+          "allowNegative": false,
+          "minimumQuantity": 0,
+          "channelAvailability": {
+            "site": {
+              "mode": "shared",
+              "enabled": true,
+              "limit": null,
+              "physicalSafety": 0
+            }
+          }
+        },
+        "inventoryBalance": {
+          "physicalQuantity": 0,
+          "availableQuantity": 0,
+          "reservedQuantity": 0,
+          "derivedFromVariations": true
+        },
+        "stock": 0,
+        "sku": "",
+        "barcode": "",
+        "brand": "",
+        "commercial": {
+          "costPrice": null,
+          "erpPrice": null,
+          "salePrice": null,
+          "marketplacePrice": null,
+          "promotionalPrice": null,
+          "desiredMarginPercent": null,
+          "expectedProfit": null,
+          "defaultCommissionPercent": null,
+          "cashPrice": null,
+          "installmentPrice": null,
+          "minimumPrice": null,
+          "minimumMarginPercent": null,
+          "discountPolicy": "inherit",
+          "maximumDiscountPercent": null,
+          "maximumDiscountAmount": null,
+          "requiresAuthorization": false
+        },
+        "subcategory": "",
+        "tags": [],
+        "relatedManualIds": [],
+        "crossSellIds": [],
+        "virtualStore": {
+          "name": "Troca de Tela de Celulares",
+          "price": null,
+          "active": true,
+          "seoTitle": "",
+          "seoDescription": "",
+          "channels": {
+            "lojaVirtual": {
+              "enabled": true
+            },
+            "mercadoLivre": {
+              "enabled": false
+            },
+            "shopee": {
+              "enabled": false
+            },
+            "amazon": {
+              "enabled": false
+            },
+            "magalu": {
+              "enabled": false
+            }
+          }
+        },
+        "showVariationsOnCard": false
+      },
+      "after": {
+        "name": "Troca de Tela de Celulares",
+        "slug": "troca-de-tela-de-celulares",
+        "price": null,
+        "image": "images/Troca_de-Tela_card.png",
+        "gallery": [
+          "images/produtos/1782071417602-troca-de-bateria.png"
+        ],
+        "category": "assistencia-tecnica",
+        "showPrice": false,
+        "featured": false,
+        "active": true,
+        "detailsEnabled": true,
+        "descriptionShort": "Troca de telas para iPhone, Samsung, Motorola e Xiaomi, com serviço rápido, instalação profissional e garantia.",
+        "descriptionLong": "<p>Assistência técnica especializada em <strong>troca de tela de celulares</strong>, incluindo iPhone, Samsung, Motorola e Xiaomi Trabalhamos com peças de qualidade e realizamos a substituição com cuidado técnico para recuperar a aparência, o toque e o funcionamento do aparelho</p><p>✅ Instalação profissional<br>✅ Peças de qualidade<br>✅ Serviço rápido e seguro<br>✅ Garantia no serviço</p><br>Pronto Socorro do seu celular! Atendemos&nbsp;<strong>Saldanha Marinho e toda a região</strong>, incluindo Carazinho, Não me toque, Santa Bárbara do Sul, Colorado RS, Ibirubá, Tapera, Selbach, Quinze de Novembro, Fortaleza dos Valos, Panambi, Cruz Alta e demais cidades da região.<br><br>",
+        "variations": {
+          "enabled": false,
+          "colors": [],
+          "storage": [],
+          "ram": [],
+          "condition": [],
+          "combinations": [],
+          "labels": {
+            "colors": "Cor",
+            "storage": "Serviços"
+          },
+          "colorsText": "",
+          "storageText": "",
+          "ramText": "",
+          "conditionText": "",
+          "labelsText": "{\"colors\":\"Cor\",\"storage\":\"Serviços\"}",
+          "combinationsText": ""
+        },
+        "id": 1782068543631,
+        "erp": {
+          "internalCode": "PRD-68",
+          "categoryId": "ERP-CAT-4",
+          "category": "assistencia-tecnica",
+          "sku": "",
+          "supplierCode": "",
+          "searchAlias": "",
+          "barcode": "",
+          "brand": "",
+          "unit": "UN",
+          "subcategory": "",
+          "mainSupplierId": "",
+          "preferredSupplierId": "",
+          "active": false
+        },
+        "code": "PRD-68",
+        "inventory": {
+          "itemId": "PRD-1782068543631",
+          "stockControlled": true,
+          "allowNegative": false,
+          "minimumQuantity": 0,
+          "channelAvailability": {
+            "site": {
+              "mode": "shared",
+              "enabled": true,
+              "limit": null,
+              "physicalSafety": 0
+            }
+          }
+        },
+        "inventoryBalance": {
+          "physicalQuantity": 0,
+          "availableQuantity": 0,
+          "reservedQuantity": 0,
+          "derivedFromVariations": true
+        },
+        "stock": 0,
+        "sku": "",
+        "barcode": "",
+        "brand": "",
+        "commercial": {
+          "costPrice": null,
+          "erpPrice": null,
+          "salePrice": null,
+          "marketplacePrice": null,
+          "promotionalPrice": null,
+          "desiredMarginPercent": null,
+          "expectedProfit": null,
+          "defaultCommissionPercent": null,
+          "cashPrice": null,
+          "installmentPrice": null,
+          "minimumPrice": null,
+          "minimumMarginPercent": null,
+          "discountPolicy": "inherit",
+          "maximumDiscountPercent": null,
+          "maximumDiscountAmount": null,
+          "requiresAuthorization": false
+        },
+        "subcategory": "",
+        "tags": [],
+        "relatedManualIds": [],
+        "crossSellIds": [],
+        "virtualStore": {
+          "name": "Troca de Tela de Celulares",
+          "price": null,
+          "active": true,
+          "seoTitle": "",
+          "seoDescription": "",
+          "channels": {
+            "lojaVirtual": {
+              "enabled": true
+            },
+            "mercadoLivre": {
+              "enabled": false
+            },
+            "shopee": {
+              "enabled": false
+            },
+            "amazon": {
+              "enabled": false
+            },
+            "magalu": {
+              "enabled": false
+            }
+          }
+        },
+        "showVariationsOnCard": false
+      },
+      "ip": "127.0.0.1",
+      "requestId": "106e2f64-5eaf-446d-a36f-4edc8f10024e"
+    },
+    {
+      "id": "AUD-00000043",
+      "at": "2026-08-29T21:07:19.814Z",
+      "module": "produtos",
+      "action": "PRODUCT_UPDATED",
+      "actor": "Matheus Fernando",
+      "entityType": "product",
+      "entityId": "1788037430480",
+      "documentId": "",
+      "reason": "Cadastro de produto atualizado",
+      "before": {
+        "name": "Celular Molhado / Reparo por Oxidação",
+        "sku": "",
+        "code": "PRD-861",
+        "barcode": "",
+        "brand": "",
+        "slug": "celular-molhado-reparo-por-oxidacao",
+        "price": null,
+        "commercial": {
+          "costPrice": null,
+          "erpPrice": null,
+          "salePrice": null,
+          "marketplacePrice": null,
+          "promotionalPrice": null,
+          "desiredMarginPercent": null,
+          "expectedProfit": null,
+          "defaultCommissionPercent": null,
+          "cashPrice": null,
+          "installmentPrice": null,
+          "minimumPrice": null,
+          "minimumMarginPercent": null,
+          "discountPolicy": "inherit",
+          "maximumDiscountPercent": null,
+          "maximumDiscountAmount": null,
+          "requiresAuthorization": false
+        },
+        "stock": 0,
+        "inventory": {
+          "itemId": "PRD-1788037430480",
+          "stockControlled": true,
+          "allowNegative": false,
+          "minimumQuantity": 0,
+          "channelAvailability": {
+            "site": {
+              "mode": "shared",
+              "enabled": true,
+              "limit": null,
+              "physicalSafety": 0
+            }
+          }
+        },
+        "image": "images/produtos/1788037449706-celular-molhado-reparo-por-oxidaa-a-o.png",
+        "gallery": [],
+        "category": "assistencia-tecnica",
+        "subcategory": "",
+        "tags": [],
+        "relatedManualIds": [],
+        "crossSellIds": [],
+        "showPrice": false,
+        "featured": false,
+        "active": true,
+        "erp": {
+          "sku": "",
+          "internalCode": "PRD-861",
+          "supplierCode": "",
+          "searchAlias": "",
+          "barcode": "",
+          "brand": "",
+          "unit": "UN",
+          "category": "assistencia-tecnica",
+          "subcategory": "",
+          "mainSupplierId": "",
+          "preferredSupplierId": "",
+          "active": false,
+          "categoryId": "ERP-CAT-4"
+        },
+        "virtualStore": {
+          "name": "Celular Molhado / Reparo por Oxidação",
+          "price": null,
+          "active": true,
+          "seoTitle": "",
+          "seoDescription": "",
+          "channels": {
+            "lojaVirtual": {
+              "enabled": true
+            },
+            "mercadoLivre": {
+              "enabled": false
+            },
+            "shopee": {
+              "enabled": false
+            },
+            "amazon": {
+              "enabled": false
+            },
+            "magalu": {
+              "enabled": false
+            }
+          }
+        },
+        "detailsEnabled": true,
+        "showVariationsOnCard": false,
+        "descriptionShort": "",
+        "descriptionLong": "",
+        "variations": {
+          "enabled": false,
+          "colors": [],
+          "storage": [],
+          "ram": [],
+          "condition": [],
+          "combinations": [],
+          "labels": {},
+          "colorsText": "",
+          "storageText": "",
+          "ramText": "",
+          "conditionText": "",
+          "labelsText": "{}",
+          "combinationsText": ""
+        },
+        "id": 1788037430480,
+        "inventoryBalance": {
+          "inventoryItemId": "PRD-1788037430480",
+          "locationId": "loja-principal",
+          "physicalQuantity": 0,
+          "reservedQuantity": 0,
+          "availableQuantity": 0,
+          "minimumQuantity": 0,
+          "updatedAt": "2026-08-29T21:03:50.494Z"
+        },
+        "updatedAt": "2026-08-29T21:04:09.762Z"
+      },
+      "after": {
+        "name": "Celular Molhado / Reparo por Oxidação",
+        "sku": "",
+        "code": "PRD-861",
+        "barcode": "",
+        "brand": "",
+        "slug": "celular-molhado-reparo-por-oxidacao",
+        "price": null,
+        "commercial": {
+          "costPrice": null,
+          "erpPrice": null,
+          "salePrice": null,
+          "marketplacePrice": null,
+          "promotionalPrice": null,
+          "desiredMarginPercent": null,
+          "expectedProfit": null,
+          "defaultCommissionPercent": null,
+          "cashPrice": null,
+          "installmentPrice": null,
+          "minimumPrice": null,
+          "minimumMarginPercent": null,
+          "discountPolicy": "inherit",
+          "maximumDiscountPercent": null,
+          "maximumDiscountAmount": null,
+          "requiresAuthorization": false
+        },
+        "stock": 0,
+        "inventory": {
+          "itemId": "PRD-1788037430480",
+          "stockControlled": true,
+          "allowNegative": false,
+          "minimumQuantity": 0,
+          "channelAvailability": {
+            "site": {
+              "mode": "shared",
+              "enabled": true,
+              "limit": null,
+              "physicalSafety": 0
+            }
+          }
+        },
+        "image": "images/produtos/1788037449706-celular-molhado-reparo-por-oxidaa-a-o.png",
+        "gallery": [],
+        "category": "assistencia-tecnica",
+        "subcategory": "",
+        "tags": [],
+        "relatedManualIds": [],
+        "crossSellIds": [],
+        "showPrice": false,
+        "featured": false,
+        "active": true,
+        "erp": {
+          "sku": "",
+          "internalCode": "PRD-861",
+          "supplierCode": "",
+          "searchAlias": "",
+          "barcode": "",
+          "brand": "",
+          "unit": "UN",
+          "category": "assistencia-tecnica",
+          "subcategory": "",
+          "mainSupplierId": "",
+          "preferredSupplierId": "",
+          "active": false,
+          "categoryId": "ERP-CAT-4"
+        },
+        "virtualStore": {
+          "name": "Celular Molhado / Reparo por Oxidação",
+          "price": null,
+          "active": true,
+          "seoTitle": "",
+          "seoDescription": "",
+          "channels": {
+            "lojaVirtual": {
+              "enabled": true
+            },
+            "mercadoLivre": {
+              "enabled": false
+            },
+            "shopee": {
+              "enabled": false
+            },
+            "amazon": {
+              "enabled": false
+            },
+            "magalu": {
+              "enabled": false
+            }
+          }
+        },
+        "detailsEnabled": true,
+        "showVariationsOnCard": false,
+        "descriptionShort": "",
+        "descriptionLong": "<p>🏥 <strong>O pronto-socorro do seu celular</strong></p><p>Seu celular molhou, caiu na água ou começou a apresentar falhas após contato com líquido? Realizamos <strong>limpeza técnica e reparo por oxidação</strong>, buscando recuperar o funcionamento do aparelho com segurança e cuidado profissional</p><p>✅ Análise técnica especializada<br>✅ Limpeza e tratamento de oxidação<br>✅ Reparo de componentes afetados<br>✅ Serviço profissional e seguro</p>",
+        "variations": {
+          "enabled": false,
+          "colors": [],
+          "storage": [],
+          "ram": [],
+          "condition": [],
+          "combinations": [],
+          "labels": {},
+          "colorsText": "",
+          "storageText": "",
+          "ramText": "",
+          "conditionText": "",
+          "labelsText": "{}",
+          "combinationsText": ""
+        },
+        "id": 1788037430480,
+        "inventoryBalance": {
+          "inventoryItemId": "PRD-1788037430480",
+          "locationId": "loja-principal",
+          "physicalQuantity": 0,
+          "reservedQuantity": 0,
+          "availableQuantity": 0,
+          "minimumQuantity": 0,
+          "updatedAt": "2026-08-29T21:03:50.494Z"
+        },
+        "updatedAt": "2026-08-29T21:04:09.762Z"
+      },
+      "ip": "127.0.0.1",
+      "requestId": "7c1da763-d706-4715-829f-6e69b2ba4bfc"
+    },
+    {
+      "id": "AUD-00000044",
+      "at": "2026-08-29T21:08:06.387Z",
+      "module": "produtos",
+      "action": "PRODUCT_UPDATED",
+      "actor": "Matheus Fernando",
+      "entityType": "product",
+      "entityId": "1788037430480",
+      "documentId": "",
+      "reason": "Cadastro de produto atualizado",
+      "before": {
+        "name": "Celular Molhado / Reparo por Oxidação",
+        "sku": "",
+        "code": "PRD-861",
+        "barcode": "",
+        "brand": "",
+        "slug": "celular-molhado-reparo-por-oxidacao",
+        "price": null,
+        "commercial": {
+          "costPrice": null,
+          "erpPrice": null,
+          "salePrice": null,
+          "marketplacePrice": null,
+          "promotionalPrice": null,
+          "desiredMarginPercent": null,
+          "expectedProfit": null,
+          "defaultCommissionPercent": null,
+          "cashPrice": null,
+          "installmentPrice": null,
+          "minimumPrice": null,
+          "minimumMarginPercent": null,
+          "discountPolicy": "inherit",
+          "maximumDiscountPercent": null,
+          "maximumDiscountAmount": null,
+          "requiresAuthorization": false
+        },
+        "stock": 0,
+        "inventory": {
+          "itemId": "PRD-1788037430480",
+          "stockControlled": true,
+          "allowNegative": false,
+          "minimumQuantity": 0,
+          "channelAvailability": {
+            "site": {
+              "mode": "shared",
+              "enabled": true,
+              "limit": null,
+              "physicalSafety": 0
+            }
+          }
+        },
+        "image": "images/produtos/1788037449706-celular-molhado-reparo-por-oxidaa-a-o.png",
+        "gallery": [],
+        "category": "assistencia-tecnica",
+        "subcategory": "",
+        "tags": [],
+        "relatedManualIds": [],
+        "crossSellIds": [],
+        "showPrice": false,
+        "featured": false,
+        "active": true,
+        "erp": {
+          "sku": "",
+          "internalCode": "PRD-861",
+          "supplierCode": "",
+          "searchAlias": "",
+          "barcode": "",
+          "brand": "",
+          "unit": "UN",
+          "category": "assistencia-tecnica",
+          "subcategory": "",
+          "mainSupplierId": "",
+          "preferredSupplierId": "",
+          "active": false,
+          "categoryId": "ERP-CAT-4"
+        },
+        "virtualStore": {
+          "name": "Celular Molhado / Reparo por Oxidação",
+          "price": null,
+          "active": true,
+          "seoTitle": "",
+          "seoDescription": "",
+          "channels": {
+            "lojaVirtual": {
+              "enabled": true
+            },
+            "mercadoLivre": {
+              "enabled": false
+            },
+            "shopee": {
+              "enabled": false
+            },
+            "amazon": {
+              "enabled": false
+            },
+            "magalu": {
+              "enabled": false
+            }
+          }
+        },
+        "detailsEnabled": true,
+        "showVariationsOnCard": false,
+        "descriptionShort": "",
+        "descriptionLong": "<p>🏥 <strong>O pronto-socorro do seu celular</strong></p><p>Seu celular molhou, caiu na água ou começou a apresentar falhas após contato com líquido? Realizamos <strong>limpeza técnica e reparo por oxidação</strong>, buscando recuperar o funcionamento do aparelho com segurança e cuidado profissional</p><p>✅ Análise técnica especializada<br>✅ Limpeza e tratamento de oxidação<br>✅ Reparo de componentes afetados<br>✅ Serviço profissional e seguro</p>",
+        "variations": {
+          "enabled": false,
+          "colors": [],
+          "storage": [],
+          "ram": [],
+          "condition": [],
+          "combinations": [],
+          "labels": {},
+          "colorsText": "",
+          "storageText": "",
+          "ramText": "",
+          "conditionText": "",
+          "labelsText": "{}",
+          "combinationsText": ""
+        },
+        "id": 1788037430480,
+        "inventoryBalance": {
+          "inventoryItemId": "PRD-1788037430480",
+          "locationId": "loja-principal",
+          "physicalQuantity": 0,
+          "reservedQuantity": 0,
+          "availableQuantity": 0,
+          "minimumQuantity": 0,
+          "updatedAt": "2026-08-29T21:03:50.494Z"
+        },
+        "updatedAt": "2026-08-29T21:04:09.762Z"
+      },
+      "after": {
+        "name": "Celular Molhado / Reparo por Oxidação",
+        "sku": "",
+        "code": "PRD-861",
+        "barcode": "",
+        "brand": "",
+        "slug": "celular-molhado-reparo-por-oxidacao",
+        "price": null,
+        "commercial": {
+          "costPrice": null,
+          "erpPrice": null,
+          "salePrice": null,
+          "marketplacePrice": null,
+          "promotionalPrice": null,
+          "desiredMarginPercent": null,
+          "expectedProfit": null,
+          "defaultCommissionPercent": null,
+          "cashPrice": null,
+          "installmentPrice": null,
+          "minimumPrice": null,
+          "minimumMarginPercent": null,
+          "discountPolicy": "inherit",
+          "maximumDiscountPercent": null,
+          "maximumDiscountAmount": null,
+          "requiresAuthorization": false
+        },
+        "stock": 0,
+        "inventory": {
+          "itemId": "PRD-1788037430480",
+          "stockControlled": true,
+          "allowNegative": false,
+          "minimumQuantity": 0,
+          "channelAvailability": {
+            "site": {
+              "mode": "shared",
+              "enabled": true,
+              "limit": null,
+              "physicalSafety": 0
+            }
+          }
+        },
+        "image": "images/produtos/1788037449706-celular-molhado-reparo-por-oxidaa-a-o.png",
+        "gallery": [],
+        "category": "assistencia-tecnica",
+        "subcategory": "",
+        "tags": [],
+        "relatedManualIds": [],
+        "crossSellIds": [],
+        "showPrice": false,
+        "featured": false,
+        "active": true,
+        "erp": {
+          "sku": "",
+          "internalCode": "PRD-861",
+          "supplierCode": "",
+          "searchAlias": "",
+          "barcode": "",
+          "brand": "",
+          "unit": "UN",
+          "category": "assistencia-tecnica",
+          "subcategory": "",
+          "mainSupplierId": "",
+          "preferredSupplierId": "",
+          "active": false,
+          "categoryId": "ERP-CAT-4"
+        },
+        "virtualStore": {
+          "name": "Celular Molhado / Reparo por Oxidação",
+          "price": null,
+          "active": true,
+          "seoTitle": "",
+          "seoDescription": "💧 Celular molhou ou caiu na água? 🏥 O pronto-socorro do seu celular! Reparo por oxidação, limpeza técnica e assistência especializada",
+          "channels": {
+            "lojaVirtual": {
+              "enabled": true
+            },
+            "mercadoLivre": {
+              "enabled": false
+            },
+            "shopee": {
+              "enabled": false
+            },
+            "amazon": {
+              "enabled": false
+            },
+            "magalu": {
+              "enabled": false
+            }
+          }
+        },
+        "detailsEnabled": true,
+        "showVariationsOnCard": false,
+        "descriptionShort": "",
+        "descriptionLong": "<p>🏥 <strong>O pronto-socorro do seu celular</strong></p><p>Seu celular molhou, caiu na água ou começou a apresentar falhas após contato com líquido? Realizamos <strong>limpeza técnica e reparo por oxidação</strong>, buscando recuperar o funcionamento do aparelho com segurança e cuidado profissional</p><p>✅ Análise técnica especializada<br>✅ Limpeza e tratamento de oxidação<br>✅ Reparo de componentes afetados<br>✅ Serviço profissional e seguro</p>",
+        "variations": {
+          "enabled": false,
+          "colors": [],
+          "storage": [],
+          "ram": [],
+          "condition": [],
+          "combinations": [],
+          "labels": {},
+          "colorsText": "",
+          "storageText": "",
+          "ramText": "",
+          "conditionText": "",
+          "labelsText": "{}",
+          "combinationsText": ""
+        },
+        "id": 1788037430480,
+        "inventoryBalance": {
+          "inventoryItemId": "PRD-1788037430480",
+          "locationId": "loja-principal",
+          "physicalQuantity": 0,
+          "reservedQuantity": 0,
+          "availableQuantity": 0,
+          "minimumQuantity": 0,
+          "updatedAt": "2026-08-29T21:03:50.494Z"
+        },
+        "updatedAt": "2026-08-29T21:04:09.762Z"
+      },
+      "ip": "127.0.0.1",
+      "requestId": "be24b6f0-19d4-46eb-b7b2-1cc4fdf77e42"
     }
   ],
-  "updatedAt": "2026-08-28T23:57:39.579Z"
+  "updatedAt": "2026-08-29T21:08:06.390Z"
 }

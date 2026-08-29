@@ -202,6 +202,19 @@ export default class CommerceService {
     const marker=text(`${method.id} ${method.code||''} ${method.name||''} ${method.kind||''} ${method.eventType||''}`).normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase();
     return method.kind==='cash'||method.eventType==='cash'||marker.includes('dinheiro')||marker.includes(' cash');
   }
+  getCashMethodId(){
+    const methods=this.getSettings().paymentMethods||[];
+    const method=methods.find(item=>item.active!==false&&this.isCashMethod(item.id));
+    return text(method?.id)||'dinheiro';
+  }
+  isManualCashMovementMethod(id=''){
+    const method=this.paymentMethod(id);
+    if(!method) return this.isCashMethod(id);
+    // Carteira/crédito de cliente é meio de pagamento da venda, não dinheiro/ativo
+    // disponível para suprimento ou sangria manual do caixa.
+    if(method.eventType==='wallet'||method.kind==='wallet'||text(method.id)==='PM-CARTEIRA') return false;
+    return method.active!==false;
+  }
   getSettings(){
     const data=this.read(this.settingsFile,{paymentMethods:[]});
     data.cashboxes=data.cashboxes&&typeof data.cashboxes==='object'?data.cashboxes:{};
@@ -306,6 +319,42 @@ export default class CommerceService {
     // Saldo da gaveta: somente dinheiro físico altera o caixa operacional.
     const movements=this.getSessionMovements(sessionId).filter(m=>this.isCashMethod(m.methodId));
     return Math.round((num(session.openingBalance)+movements.reduce((sum,m)=>sum+num(m.signedAmount),0))*100)/100;
+  }
+  getSessionMethodBalances(sessionId){
+    const session=this.read(this.sessionsFile,{items:[]}).items.find(s=>s.id===sessionId);
+    if(!session) return [];
+    const balances={};
+    const add=(methodId,value)=>{ const key=text(methodId)||'dinheiro'; balances[key]=Math.round((num(balances[key])+num(value))*100)/100; };
+    // A abertura pertence à gaveta física. Usa o ID REAL da forma Dinheiro
+    // (ex.: PM-DINHEIRO), para casar com o cadastro financeiro exibido na tela.
+    add(this.getCashMethodId(),num(session.openingBalance));
+    for(const movement of this.getSessionMovements(sessionId)) add(movement.methodId,movement.signedAmount);
+    return Object.entries(balances).map(([methodId,balance])=>({methodId,balance})).sort((a,b)=>a.methodId.localeCompare(b.methodId));
+  }
+  getSessionMethodBalance(sessionId,methodId='dinheiro'){
+    const target=text(methodId)||'dinheiro';
+    const row=this.getSessionMethodBalances(sessionId).find(item=>item.methodId===target);
+    return Math.round(num(row?.balance)*100)/100;
+  }
+  getCashboxMethodBalances(cashboxId){
+    const targetCashbox=text(cashboxId)||'caixa-principal';
+    const balances={};
+    const addBalance=(methodId,value)=>{ const key=text(methodId)||'dinheiro'; balances[key]=Math.round((num(balances[key])+num(value))*100)/100; };
+    const allMovements=this.read(this.movementsFile,{items:[]}).items||[];
+    for(const movement of allMovements){
+      if(movement.cashboxId!==targetCashbox || movement.status==='void') continue;
+      if(this.isCashMethod(movement.methodId)) continue; // dinheiro usa o saldo físico transportado do turno atual
+      addBalance(movement.methodId,movement.signedAmount);
+    }
+    const openSession=this.getOpenSession(targetCashbox);
+    const cashMethodId=this.getCashMethodId();
+    balances[cashMethodId]=openSession?this.getSessionBalance(openSession.id):this.getSuggestedOpeningBalance(targetCashbox);
+    return Object.entries(balances).map(([methodId,balance])=>({methodId,balance})).sort((a,b)=>a.methodId.localeCompare(b.methodId));
+  }
+  getCashboxMethodBalance(cashboxId,methodId='dinheiro'){
+    const target=text(methodId)||'dinheiro';
+    const row=this.getCashboxMethodBalances(cashboxId).find(item=>item.methodId===target);
+    return Math.round(num(row?.balance)*100)/100;
   }
   getCashSessionSummary(sessionId){
     const sessions=this.read(this.sessionsFile,{items:[]}).items;
@@ -547,21 +596,35 @@ export default class CommerceService {
     const reason=text(description);
     if(manual && !reason) throw new Error('Informe o motivo da movimentação.');
     const direction=['expense','withdrawal','refund'].includes(movementType)?-1:1;
-    const normalizedMethod=['supply','withdrawal'].includes(movementType)?'dinheiro':(text(methodId)||'dinheiro');
+    const normalizedMethod=text(methodId)||this.getCashMethodId();
+    if(manual && !this.isManualCashMovementMethod(normalizedMethod)) throw new Error('Esta forma de pagamento não pode ser usada em suprimento ou sangria do caixa.');
     const cashboxSettings=this.getCashboxSettings(cashboxId);
-    const balanceAvailable=this.getSessionBalance(session.id);
-    if(direction<0 && normalizedMethod==='dinheiro' && value>balanceAvailable+0.0001 && cashboxSettings.allowNegativeCash!==true){
-      throw new Error(`Saldo em dinheiro insuficiente. Disponível: R$ ${balanceAvailable.toFixed(2).replace('.',',')}. Ative a autorização de caixa negativo nas configurações deste caixa para prosseguir.`);
+    const balanceAvailable=this.getCashboxMethodBalance(cashboxId,normalizedMethod);
+    if(direction<0 && this.isCashMethod(normalizedMethod) && value>balanceAvailable+0.0001){
+      if(cashboxSettings.allowNegativeCash!==true) throw new Error(`Saldo em dinheiro insuficiente. Disponível: R$ ${balanceAvailable.toFixed(2).replace('.',',')}. Ative a autorização de caixa negativo nas configurações deste caixa para prosseguir.`);
+      if(cashboxSettings.requireNegativeReason!==false && !reason) throw new Error('Informe o motivo para autorizar o caixa negativo.');
     }
-    if(direction<0 && normalizedMethod==='dinheiro' && value>balanceAvailable+0.0001 && cashboxSettings.requireNegativeReason!==false && !reason){
-      throw new Error('Informe o motivo para autorizar o caixa negativo.');
+    if(direction<0 && manual && !this.isCashMethod(normalizedMethod) && value>balanceAvailable+0.0001){
+      throw new Error(`Saldo da forma financeira insuficiente. Disponível: R$ ${balanceAvailable.toFixed(2).replace('.',',')}.`);
     }
     const movements=this.read(this.movementsFile,{items:[]});
     const uniqueKey=text(idempotencyKey);
     if(uniqueKey){ const existing=(movements.items||[]).find(item=>item.idempotencyKey===uniqueKey); if(existing) return clone(existing); }
-    const balanceBefore=normalizedMethod==='dinheiro'?this.getSessionBalance(session.id):null;
-    const movement={id:this.id('CXM'),sessionId:session.id,cashboxId,type:movementType,methodId:normalizedMethod,signedAmount:value*direction,amount:value,description:reason,referenceType,referenceId:text(referenceId),idempotencyKey:uniqueKey,metadata:metadata?clone(metadata):null,status:'posted',createdAt:text(occurredAt)||now(),createdBy:text(createdBy)||'painel',balanceBefore,balanceAfter:balanceBefore===null?null:Math.round((balanceBefore+(value*direction))*100)/100};
+    const balanceBefore=this.getCashboxMethodBalance(cashboxId,normalizedMethod);
+    const movement={id:this.id('CXM'),sessionId:session.id,cashboxId,type:movementType,methodId:normalizedMethod,signedAmount:value*direction,amount:value,description:reason,referenceType,referenceId:text(referenceId),idempotencyKey:uniqueKey,metadata:metadata?clone(metadata):null,status:'posted',verified:false,verifiedAt:'',verifiedBy:'',createdAt:text(occurredAt)||now(),createdBy:text(createdBy)||'painel',balanceBefore,balanceAfter:balanceBefore===null?null:Math.round((balanceBefore+(value*direction))*100)/100};
     movements.items.push(movement); this.write(this.movementsFile,movements); return movement;
+  }
+
+  setCashMovementVerified(movementId,{verified=true,verifiedBy='painel'}={}){
+    const id=text(movementId); if(!id) throw new Error('Movimentação inválida.');
+    const data=this.read(this.movementsFile,{items:[]});
+    const movement=(data.items||[]).find(item=>item.id===id);
+    if(!movement) throw new Error('Movimentação não encontrada.');
+    movement.verified=verified===true;
+    movement.verifiedAt=movement.verified?now():'';
+    movement.verifiedBy=movement.verified?(text(verifiedBy)||'painel'):'';
+    this.write(this.movementsFile,data);
+    return clone(movement);
   }
 
   findCashMovementByIdempotencyKey(idempotencyKey=''){

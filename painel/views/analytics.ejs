@@ -1,86 +1,166 @@
+<% layout('layout') -%>
 <style>
   :root{
-    --qa-bg:#f6f7fb;
-    --qa-card:#ffffff;
-    --qa-text:#111827;
-    --qa-muted:#6b7280;
-    --qa-line:#e5e7eb;
-    --qa-blue:#2563eb;
+    --qa-bg:var(--bg,#f6f8fc);
+    --qa-card:var(--card,#fff);
+    --qa-soft:var(--surface-soft,color-mix(in srgb,var(--card,#fff) 94%,var(--text,#111827)));
+    --qa-hover:var(--surface-hover,color-mix(in srgb,var(--card,#fff) 88%,var(--text,#111827)));
+    --qa-text:var(--text,#111827);
+    --qa-muted:var(--muted,#6b7280);
+    --qa-line:var(--line,#e5e7eb);
+    --qa-blue:var(--blue,#2563eb);
     --qa-green:#16a34a;
     --qa-orange:#f97316;
     --qa-red:#dc2626;
     --qa-purple:#7c3aed;
-    --qa-shadow:0 10px 30px rgba(15,23,42,.07);
+    --qa-shadow:0 8px 22px var(--shadow,rgba(15,23,42,.07));
   }
-  .qa-wrap{display:block;background:var(--qa-bg);margin:-18px;padding:22px;min-height:calc(100vh - 70px);color:var(--qa-text)}
-  .qa-header{display:flex;justify-content:space-between;gap:16px;align-items:flex-start;margin-bottom:18px}
-  .qa-title h1{margin:0;font-size:28px;letter-spacing:-.03em}
-  .qa-title p{margin:7px 0 0;color:var(--qa-muted)}
-  .qa-source{display:flex;gap:10px;align-items:center;flex-wrap:wrap;justify-content:flex-end}
-  .qa-pill{border:1px solid var(--qa-line);background:#fff;border-radius:999px;padding:8px 12px;font-size:13px;color:#374151}
-  .qa-back{display:inline-flex;align-items:center;gap:7px;border:1px solid var(--qa-line);background:#111827;color:#fff;text-decoration:none;border-radius:999px;padding:9px 13px;font-size:13px;font-weight:800;box-shadow:0 8px 18px rgba(15,23,42,.12)}
-  .qa-back:hover{filter:brightness(1.08)}
-  .qa-pill strong{color:#111827}
-  .qa-flash{background:#ecfdf5;border:1px solid #bbf7d0;color:#166534;border-radius:14px;padding:12px 14px;margin-bottom:16px}
-  .qa-filters{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:18px}
-  .qa-filter{border:1px solid var(--qa-line);background:#fff;color:#374151;text-decoration:none;border-radius:12px;padding:10px 14px;font-weight:700;font-size:13px}
-  .qa-filter.active{background:#111827;color:#fff;border-color:#111827}
-  .qa-grid{display:grid;grid-template-columns:repeat(12,1fr);gap:14px}
-  .qa-card{background:var(--qa-card);border:1px solid var(--qa-line);border-radius:18px;padding:16px;box-shadow:var(--qa-shadow)}
-  .qa-kpi{grid-column:span 2;min-height:112px;position:relative;overflow:hidden}
-  .qa-kpi .icon{font-size:22px}
-  .qa-kpi .value{font-size:30px;font-weight:900;line-height:1;margin-top:12px}
-  .qa-kpi .label{color:var(--qa-muted);font-size:13px;margin-top:6px}
-  .qa-kpi .hint{font-size:12px;margin-top:10px;color:#64748b}
-  .qa-kpi:after{content:"";position:absolute;right:-28px;top:-28px;width:92px;height:92px;border-radius:999px;background:rgba(37,99,235,.08)}
-  .qa-span-8{grid-column:span 8}
-  .qa-span-7{grid-column:span 7}
-  .qa-span-6{grid-column:span 6}
-  .qa-span-5{grid-column:span 5}
-  .qa-span-4{grid-column:span 4}
-  .qa-span-3{grid-column:span 3}
-  .qa-card h2{font-size:17px;margin:0 0 12px;display:flex;align-items:center;gap:8px}
-  .qa-card .sub{color:var(--qa-muted);font-size:13px;margin:-6px 0 14px}
-  .qa-live{border-color:#fde68a;background:linear-gradient(180deg,#fff7ed,#fff);position:relative}
-  .qa-live .recommend{font-weight:800}
-  .qa-table{width:100%;border-collapse:collapse;font-size:13px}
-  .qa-table th{text-align:left;color:#6b7280;font-size:12px;padding:9px 8px;border-bottom:1px solid var(--qa-line);white-space:nowrap}
-  .qa-table td{padding:10px 8px;border-bottom:1px solid #f1f5f9;vertical-align:middle}
+
+  .qa-wrap{display:block;background:var(--qa-bg);margin:-18px;padding:16px;min-height:calc(100vh - 70px);color:var(--qa-text)}
+  .qa-header{display:flex;justify-content:space-between;gap:14px;align-items:flex-start;margin-bottom:12px}
+  .qa-title h1{margin:0;font-size:23px;letter-spacing:-.03em;line-height:1.15}
+  .qa-title p{margin:5px 0 0;color:var(--qa-muted);font-size:12px}
+  .qa-source{display:flex;gap:7px;align-items:center;flex-wrap:wrap;justify-content:flex-end}
+  .qa-pill{border:1px solid var(--qa-line);background:var(--qa-card);border-radius:999px;padding:6px 9px;font-size:11px;color:var(--qa-muted)}
+  .qa-pill strong{color:var(--qa-text)}
+  .qa-back{display:inline-flex;align-items:center;gap:6px;border:1px solid color-mix(in srgb,var(--qa-blue) 55%,var(--qa-line));background:var(--qa-blue);color:#fff;text-decoration:none;border-radius:999px;padding:7px 10px;font-size:11px;font-weight:800;box-shadow:0 5px 14px color-mix(in srgb,var(--qa-blue) 22%,transparent)}
+  .qa-back:hover{filter:brightness(1.06)}
+  .qa-flash{background:color-mix(in srgb,#22c55e 12%,var(--qa-card));border:1px solid color-mix(in srgb,#22c55e 34%,var(--qa-line));color:var(--qa-text);border-radius:12px;padding:9px 11px;margin-bottom:10px;font-size:12px}
+
+  .qa-toolbar{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:10px}
+  .qa-filters{display:flex;gap:6px;flex-wrap:wrap}
+  .qa-filter,.qa-view-btn{border:1px solid var(--qa-line);background:var(--qa-card);color:var(--qa-text);text-decoration:none;border-radius:9px;padding:7px 10px;font-weight:800;font-size:11px;cursor:pointer}
+  .qa-filter:hover,.qa-view-btn:hover{background:var(--qa-soft)}
+  .qa-filter.active{background:var(--qa-blue);color:#fff;border-color:var(--qa-blue)}
+  .qa-view-actions{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end}
+
+  .qa-kpis{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:9px;margin-bottom:10px}
+  .qa-kpi{min-width:0;background:var(--qa-card);border:1px solid var(--qa-line);border-radius:13px;padding:10px 11px;box-shadow:var(--qa-shadow);position:relative;overflow:hidden;display:grid;grid-template-columns:auto 1fr;align-items:center;gap:9px;min-height:76px}
+  .qa-kpi:after{content:"";position:absolute;right:-24px;top:-29px;width:76px;height:76px;border-radius:50%;background:color-mix(in srgb,var(--qa-blue) 8%,transparent);pointer-events:none}
+  .qa-kpi .icon{width:32px;height:32px;border-radius:10px;background:var(--qa-soft);display:grid;place-items:center;font-size:17px;position:relative;z-index:1}
+  .qa-kpi-copy{min-width:0;position:relative;z-index:1}
+  .qa-kpi .value{font-size:22px;font-weight:950;line-height:1;font-variant-numeric:tabular-nums}
+  .qa-kpi .label{color:var(--qa-text);font-size:11px;font-weight:800;margin-top:5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .qa-kpi .hint{font-size:9px;margin-top:2px;color:var(--qa-muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+
+  .qa-live{border:1px solid color-mix(in srgb,var(--qa-orange) 40%,var(--qa-line));background:color-mix(in srgb,var(--qa-orange) 8%,var(--qa-card));border-radius:13px;padding:10px 12px;margin-bottom:10px;display:grid;grid-template-columns:auto 1fr auto;gap:10px;align-items:center}
+  .qa-live-icon{width:34px;height:34px;border-radius:10px;background:color-mix(in srgb,var(--qa-orange) 15%,var(--qa-card));display:grid;place-items:center;font-size:18px}
+  .qa-live-copy{min-width:0}
+  .qa-live-title{font-size:11px;font-weight:900;color:var(--qa-muted);text-transform:uppercase;letter-spacing:.04em;margin-bottom:2px}
+  .qa-live .recommend{font-weight:800;font-size:13px;line-height:1.35}
+  .qa-small{font-size:10px;color:var(--qa-muted)}
+
+  .qa-sections{display:flex;flex-direction:column;gap:8px}
+  .qa-section{background:var(--qa-card);border:1px solid var(--qa-line);border-radius:14px;box-shadow:var(--qa-shadow);overflow:hidden}
+  .qa-section>summary{list-style:none;cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:11px 13px;user-select:none;background:var(--qa-card)}
+  .qa-section>summary::-webkit-details-marker{display:none}
+  .qa-section>summary:hover{background:var(--qa-soft)}
+  .qa-section-title{display:flex;align-items:center;gap:9px;min-width:0}
+  .qa-section-title .emoji{font-size:16px}
+  .qa-section-title b{font-size:13px;color:var(--qa-text)}
+  .qa-section-title small{display:block;color:var(--qa-muted);font-size:10px;font-weight:600;margin-top:1px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .qa-section-side{display:flex;align-items:center;gap:8px;flex:0 0 auto}
+  .qa-section-badge{font-size:10px;color:var(--qa-muted);background:var(--qa-soft);border:1px solid var(--qa-line);border-radius:999px;padding:4px 7px;font-weight:800}
+  .qa-chevron{font-size:15px;color:var(--qa-muted);transition:transform .18s ease}
+  .qa-section[open] .qa-chevron{transform:rotate(180deg)}
+  .qa-section-body{border-top:1px solid var(--qa-line);padding:10px}
+  .qa-grid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:9px}
+  .qa-span-12{grid-column:span 12}.qa-span-8{grid-column:span 8}.qa-span-7{grid-column:span 7}.qa-span-6{grid-column:span 6}.qa-span-5{grid-column:span 5}.qa-span-4{grid-column:span 4}.qa-span-3{grid-column:span 3}
+
+  .qa-card{min-width:0;background:var(--qa-card);border:1px solid var(--qa-line);border-radius:12px;padding:11px;box-shadow:none}
+  .qa-card h2{font-size:13px;margin:0 0 7px;display:flex;align-items:center;gap:6px}
+  .qa-card .sub{color:var(--qa-muted);font-size:10px;margin:-2px 0 8px;line-height:1.35}
+  .qa-stack{display:grid;gap:9px}
+  .qa-trend-shell{min-width:0}
+  .qa-trend-selector{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:7px;margin-bottom:10px}
+  .qa-trend-option{min-width:0;border:1px solid var(--qa-line);background:var(--qa-soft);color:var(--qa-text);border-radius:10px;padding:8px 9px;text-align:left;cursor:pointer;transition:.15s ease}
+  .qa-trend-option:hover{transform:translateY(-1px);background:var(--qa-hover)}
+  .qa-trend-option.active{border-color:color-mix(in srgb,var(--trend-color) 62%,var(--qa-line));background:color-mix(in srgb,var(--trend-color) 10%,var(--qa-card));box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--trend-color) 14%,transparent)}
+  .qa-trend-option-top{display:flex;align-items:center;gap:6px;font-size:10px;font-weight:850;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .qa-trend-dot{width:8px;height:8px;border-radius:999px;flex:0 0 auto;background:var(--trend-color,var(--qa-blue))}
+  .qa-trend-option strong{display:block;font-size:18px;line-height:1;margin-top:5px;font-variant-numeric:tabular-nums}
+  .qa-trend-option small{display:block;margin-top:3px;color:var(--qa-muted);font-size:8px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .qa-daily-scroll{overflow-x:auto;overflow-y:hidden;padding:1px 1px 5px;scrollbar-width:thin}
+  .qa-daily-chart{min-width:760px;border:1px solid var(--qa-line);border-radius:11px;background:var(--qa-soft);padding:10px 10px 7px}
+  .qa-daily-chart-head{display:flex;align-items:flex-end;justify-content:space-between;gap:12px;margin-bottom:8px}
+  .qa-daily-chart-title{display:flex;align-items:center;gap:7px;font-size:12px;font-weight:900}
+  .qa-daily-chart-title strong{font-size:20px;line-height:1;font-variant-numeric:tabular-nums}
+  .qa-daily-chart-meta{font-size:9px;color:var(--qa-muted);font-weight:750;text-align:right}
+  .qa-daily-bars{height:172px;display:grid;align-items:stretch;gap:3px;padding:9px 4px 0;border-radius:9px;background:repeating-linear-gradient(to top,transparent 0,transparent 41px,color-mix(in srgb,var(--qa-line) 72%,transparent) 42px,color-mix(in srgb,var(--qa-line) 72%,transparent) 43px)}
+  .qa-day{height:100%;min-width:26px;display:grid;grid-template-rows:18px minmax(0,1fr) 19px;align-items:end;text-align:center}
+  .qa-day-value{height:18px;font-size:8px;line-height:18px;font-weight:900;color:var(--qa-text);font-variant-numeric:tabular-nums}
+  .qa-day-bar-area{height:100%;display:flex;align-items:flex-end;justify-content:center;padding:0 2px}
+  .qa-day-bar{width:min(76%,20px);border-radius:5px 5px 2px 2px;background:linear-gradient(180deg,color-mix(in srgb,var(--trend-color) 72%,white),var(--trend-color));box-shadow:0 2px 7px color-mix(in srgb,var(--trend-color) 18%,transparent);min-height:0;transition:filter .12s ease,transform .12s ease}
+  .qa-day:hover .qa-day-bar{filter:brightness(1.08);transform:scaleX(1.08)}
+  .qa-day.is-clickable{cursor:pointer;border-radius:7px}
+  .qa-day.is-clickable:hover{background:color-mix(in srgb,var(--trend-color) 6%,transparent)}
+  .qa-day.is-selected{background:color-mix(in srgb,var(--trend-color) 11%,transparent);box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--trend-color) 28%,transparent)}
+  .qa-day-label{font-size:8px;line-height:19px;color:var(--qa-muted);font-weight:750;white-space:nowrap}
+  .qa-day-detail{margin-top:9px;border:1px solid var(--qa-line);border-radius:11px;background:var(--qa-soft);overflow:hidden}
+  .qa-day-detail[hidden]{display:none!important}
+  .qa-day-detail-head{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:9px 11px;border-bottom:1px solid var(--qa-line)}
+  .qa-day-detail-head>div{display:grid;gap:2px}.qa-day-detail-head strong{font-size:12px}.qa-day-detail-head small{font-size:9px;color:var(--qa-muted)}
+  .qa-day-detail-close{border:1px solid var(--qa-line);background:var(--qa-card);color:var(--qa-text);border-radius:8px;width:28px;height:28px;cursor:pointer;font-weight:900}
+  .qa-day-detail-list{display:grid;max-height:220px;overflow:auto}
+  .qa-day-detail-row{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:12px;padding:8px 11px;border-bottom:1px solid color-mix(in srgb,var(--qa-line) 70%,transparent);align-items:center}
+  .qa-day-detail-row:last-child{border-bottom:0}.qa-day-detail-row span{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:10px;font-weight:700}.qa-day-detail-row b{font-size:11px;font-variant-numeric:tabular-nums}
+  .qa-daily-axis-note{margin-top:6px;color:var(--qa-muted);font-size:9px;display:flex;justify-content:space-between;gap:10px}
+  .qa-table-wrap{max-height:285px;overflow:auto;border:1px solid var(--qa-line);border-radius:10px}
+  .qa-table{width:100%;border-collapse:collapse;font-size:11px;background:var(--qa-card)}
+  .qa-table th{position:sticky;top:0;z-index:1;text-align:left;color:var(--qa-muted);font-size:9px;padding:7px 7px;border-bottom:1px solid var(--qa-line);white-space:nowrap;background:var(--qa-soft);text-transform:uppercase;letter-spacing:.02em}
+  .qa-table td{padding:7px;border-bottom:1px solid var(--qa-line);vertical-align:middle;color:var(--qa-text)}
   .qa-table tr:last-child td{border-bottom:0}
   .qa-num{text-align:right;font-variant-numeric:tabular-nums}
-  .qa-product{font-weight:700}
+  .qa-product{font-weight:750;line-height:1.3}
   .qa-muted{color:var(--qa-muted)}
-  .qa-bar{height:9px;background:#eef2ff;border-radius:999px;overflow:hidden;min-width:80px}
-  .qa-bar span{display:block;height:100%;background:linear-gradient(90deg,#2563eb,#7c3aed);border-radius:999px}
-  .qa-mini-list{display:flex;flex-direction:column;gap:10px}
-  .qa-mini-item{display:grid;grid-template-columns:1fr auto;gap:10px;align-items:center}
-  .qa-mini-item .name{font-weight:700;font-size:13px}
-  .qa-mini-item .value{font-weight:900}
-  .qa-alert{background:#fff7ed;border:1px solid #fed7aa;border-radius:14px;padding:12px;margin-top:10px}
-  .qa-alert strong{color:#9a3412}
-  .qa-empty{color:var(--qa-muted);padding:14px;border:1px dashed #d1d5db;border-radius:14px;background:#fafafa}
-  .qa-chart{width:100%;height:260px;display:block}
-  .qa-donut{display:grid;grid-template-columns:150px 1fr;gap:18px;align-items:center}
-  .qa-donut-svg{width:150px;height:150px;transform:rotate(-90deg)}
-  .qa-legend{display:flex;flex-direction:column;gap:10px}
-  .qa-dot{display:inline-block;width:10px;height:10px;border-radius:999px;margin-right:8px;background:#2563eb}
-  .qa-event{display:flex;gap:10px;align-items:flex-start;padding:9px 0;border-bottom:1px solid #f1f5f9}
+  .qa-bar{height:6px;background:color-mix(in srgb,var(--qa-blue) 10%,var(--qa-soft));border-radius:999px;overflow:hidden;min-width:60px;margin-top:4px}
+  .qa-bar span{display:block;height:100%;background:linear-gradient(90deg,var(--qa-blue),var(--qa-purple));border-radius:999px}
+  .qa-mini-list{display:flex;flex-direction:column;gap:7px}
+  .qa-mini-item{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:9px;align-items:center}
+  .qa-mini-item .name{font-weight:750;font-size:11px;line-height:1.25;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .qa-mini-item .value{font-weight:900;font-size:11px;font-variant-numeric:tabular-nums}
+  .qa-alert{background:color-mix(in srgb,var(--qa-orange) 8%,var(--qa-card));border:1px solid color-mix(in srgb,var(--qa-orange) 28%,var(--qa-line));border-radius:10px;padding:9px;margin-top:7px;font-size:11px}
+  .qa-alert:first-child{margin-top:0}
+  .qa-alert strong{color:var(--qa-text)}
+  .qa-empty{color:var(--qa-muted);padding:10px;border:1px dashed var(--qa-line);border-radius:10px;background:var(--qa-soft);font-size:11px}
+  .qa-event-list{max-height:310px;overflow:auto;padding-right:3px}
+  .qa-event{display:flex;gap:8px;align-items:flex-start;padding:7px 2px;border-bottom:1px solid var(--qa-line);font-size:11px}
   .qa-event:last-child{border-bottom:0}
-  .qa-event .bullet{width:10px;height:10px;margin-top:5px;border-radius:999px;background:#2563eb;flex:0 0 auto}
-  .qa-actions{display:flex;justify-content:flex-end;margin-top:14px}
-  .qa-danger{border:0;background:#fee2e2;color:#991b1b;border-radius:12px;padding:10px 14px;font-weight:800;cursor:pointer}
-  .qa-small{font-size:12px;color:var(--qa-muted)}
-  @media(max-width:1100px){
-    .qa-kpi{grid-column:span 4}
-    .qa-span-8,.qa-span-7,.qa-span-6,.qa-span-5,.qa-span-4,.qa-span-3{grid-column:span 12}
+  .qa-event .bullet{width:7px;height:7px;margin-top:4px;border-radius:999px;background:var(--qa-blue);flex:0 0 auto}
+  .qa-event strong{font-size:11px}
+  .qa-actions{display:flex;justify-content:flex-end;margin-top:8px}
+  .qa-danger{border:1px solid color-mix(in srgb,var(--qa-red) 38%,var(--qa-line));background:color-mix(in srgb,var(--qa-red) 10%,var(--qa-card));color:color-mix(in srgb,var(--qa-red) 85%,var(--qa-text));border-radius:9px;padding:8px 11px;font-weight:850;font-size:11px;cursor:pointer}
+  .qa-danger:hover{background:color-mix(in srgb,var(--qa-red) 16%,var(--qa-card))}
+
+  html[data-panel-theme="oled"] .qa-wrap{background:#000}
+  html[data-panel-theme="oled"] .qa-section,
+  html[data-panel-theme="oled"] .qa-kpi,
+  html[data-panel-theme="oled"] .qa-card{box-shadow:none}
+
+  @media(max-width:1180px){
+    .qa-kpis{grid-template-columns:repeat(3,minmax(0,1fr))}
+    .qa-span-8,.qa-span-7,.qa-span-5,.qa-span-4,.qa-span-3{grid-column:span 6}
+  }
+  @media(max-width:820px){
+    .qa-trend-selector{grid-template-columns:repeat(3,minmax(0,1fr))}
+    .qa-wrap{margin:-18px -16px;padding:12px}
     .qa-header{flex-direction:column}
     .qa-source{justify-content:flex-start}
+    .qa-toolbar{align-items:flex-start;flex-direction:column}
+    .qa-view-actions{justify-content:flex-start}
+    .qa-kpis{grid-template-columns:repeat(2,minmax(0,1fr))}
+    .qa-span-12,.qa-span-8,.qa-span-7,.qa-span-6,.qa-span-5,.qa-span-4,.qa-span-3{grid-column:span 12}
+    .qa-live{grid-template-columns:auto 1fr}.qa-live>.qa-small{grid-column:2}
   }
-  @media(max-width:650px){
-    .qa-wrap{margin:-12px;padding:14px}
-    .qa-kpi{grid-column:span 6}
-    .qa-table{font-size:12px}
-    .qa-donut{grid-template-columns:1fr}
+  @media(max-width:520px){
+    .qa-trend-selector{grid-template-columns:1fr 1fr}
+    .qa-daily-chart{min-width:700px}
+    .qa-title h1{font-size:20px}
+    .qa-kpis{grid-template-columns:1fr 1fr;gap:7px}
+    .qa-kpi{padding:8px;gap:7px;min-height:69px}.qa-kpi .icon{width:29px;height:29px}.qa-kpi .value{font-size:19px}.qa-kpi .hint{display:none}
+    .qa-section-title small{display:none}
+    .qa-section-badge{display:none}
+    .qa-table{font-size:10px}
   }
 </style>
 
@@ -88,10 +168,9 @@
   <div class="qa-header">
     <div class="qa-title">
       <h1>📊 Inteligência da Loja</h1>
-      <p>Analytics próprio com Google Sheets, conversão por produto, filtros e leitura comercial.</p>
+      <p>Leitura comercial do site, organizada para bater o olho e decidir rápido.</p>
     </div>
     <div class="qa-source">
-      <a class="qa-back" href="/">← Voltar ao Dashboard</a>
       <span class="qa-pill">Fonte: <strong id="qa-source">...</strong></span>
       <span class="qa-pill">Atualizado: <strong id="qa-updated">...</strong></span>
     </div>
@@ -101,126 +180,157 @@
     <div class="qa-flash"><%= flash %></div>
   <% } %>
 
-  <div class="qa-filters">
-    <a class="qa-filter" data-period="today" href="/analytics?period=today">Hoje</a>
-    <a class="qa-filter" data-period="7d" href="/analytics?period=7d">Últimos 7 dias</a>
-    <a class="qa-filter" data-period="30d" href="/analytics?period=30d">Últimos 30 dias</a>
-    <a class="qa-filter" data-period="all" href="/analytics?period=all">Todo período</a>
+  <div class="qa-toolbar">
+    <div class="qa-filters">
+      <a class="qa-filter" data-period="today" href="/analytics?period=today">Hoje</a>
+      <a class="qa-filter" data-period="7d" href="/analytics?period=7d">7 dias</a>
+      <a class="qa-filter" data-period="30d" href="/analytics?period=30d">30 dias</a>
+      <a class="qa-filter" data-period="all" href="/analytics?period=all">Todo período</a>
+    </div>
+    <div class="qa-view-actions">
+      <button class="qa-view-btn" type="button" id="qa-refresh" title="Buscar os dados mais recentes agora">↻ Atualizar</button>
+      <button class="qa-view-btn" type="button" id="qa-open-all">Abrir detalhes</button>
+      <button class="qa-view-btn" type="button" id="qa-close-all">Recolher</button>
+    </div>
   </div>
 
-  <div class="qa-grid">
-    <div class="qa-card qa-kpi">
-      <div class="icon">👁️</div>
-      <div class="value" id="kpi-product-views">0</div>
-      <div class="label">Produtos vistos</div>
-      <div class="hint">Interesse real em itens</div>
+  <div class="qa-kpis">
+    <div class="qa-kpi" title="Interesse real em produtos">
+      <div class="icon">👁️</div><div class="qa-kpi-copy"><div class="value" id="kpi-product-views">0</div><div class="label">Produtos vistos</div><div class="hint">Interesse real em itens</div></div>
     </div>
-    <div class="qa-card qa-kpi">
-      <div class="icon">💬</div>
-      <div class="value" id="kpi-whatsapp">0</div>
-      <div class="label">Cliques WhatsApp</div>
-      <div class="hint">Intenção forte de compra</div>
+    <div class="qa-kpi" title="Cliques de clientes para iniciar conversa no WhatsApp">
+      <div class="icon">💬</div><div class="qa-kpi-copy"><div class="value" id="kpi-whatsapp">0</div><div class="label">Cliques WhatsApp</div><div class="hint">Intenção forte de compra</div></div>
     </div>
-    <div class="qa-card qa-kpi">
-      <div class="icon">📈</div>
-      <div class="value" id="kpi-conversion">0%</div>
-      <div class="label">Conversão WhatsApp</div>
-      <div class="hint">Cliques ÷ visualizações</div>
+    <div class="qa-kpi" title="Cliques no WhatsApp divididos pelas visualizações de produtos">
+      <div class="icon">📈</div><div class="qa-kpi-copy"><div class="value" id="kpi-conversion">0%</div><div class="label">Conversão</div><div class="hint">WhatsApp ÷ visualizações</div></div>
     </div>
-    <div class="qa-card qa-kpi">
-      <div class="icon">❤️</div>
-      <div class="value" id="kpi-favorites">0</div>
-      <div class="label">Favoritos</div>
-      <div class="hint">Produtos salvos</div>
+    <div class="qa-kpi" title="Produtos salvos como favoritos">
+      <div class="icon">❤️</div><div class="qa-kpi-copy"><div class="value" id="kpi-favorites">0</div><div class="label">Favoritos</div><div class="hint">Produtos salvos</div></div>
     </div>
-    <div class="qa-card qa-kpi">
-      <div class="icon">🔎</div>
-      <div class="value" id="kpi-searches">0</div>
-      <div class="label">Buscas</div>
-      <div class="hint">Desejo declarado</div>
+    <div class="qa-kpi" title="Termos pesquisados pelos clientes">
+      <div class="icon">🔎</div><div class="qa-kpi-copy"><div class="value" id="kpi-searches">0</div><div class="label">Buscas</div><div class="hint">Desejo declarado</div></div>
     </div>
-    <div class="qa-card qa-kpi">
-      <div class="icon">📂</div>
-      <div class="value" id="kpi-categories">0</div>
-      <div class="label">Categorias</div>
-      <div class="hint">Navegação do catálogo</div>
+    <div class="qa-kpi" title="Acessos às categorias do catálogo">
+      <div class="icon">📂</div><div class="qa-kpi-copy"><div class="value" id="kpi-categories">0</div><div class="label">Categorias</div><div class="hint">Navegação do catálogo</div></div>
     </div>
+  </div>
 
-    <div class="qa-card qa-live qa-span-12" style="grid-column:1/-1">
-      <h2>🔥 Ao vivo / recomendação comercial</h2>
+  <div class="qa-live">
+    <div class="qa-live-icon">🔥</div>
+    <div class="qa-live-copy">
+      <div class="qa-live-title">Recomendação comercial agora</div>
       <div id="qa-recommendation" class="recommend">Carregando inteligência...</div>
-      <div class="qa-small" id="qa-period-label"></div>
     </div>
+    <div class="qa-small" id="qa-period-label"></div>
+  </div>
 
-    <div class="qa-card qa-span-8">
-      <h2>📈 Evolução dos eventos</h2>
-      <p class="sub">Comparativo por dia: visualizações, produtos, WhatsApp e buscas.</p>
-      <svg id="qa-line-chart" class="qa-chart" viewBox="0 0 800 260" preserveAspectRatio="none" aria-label="Gráfico de eventos"></svg>
-    </div>
+  <div class="qa-sections">
+    <details class="qa-section" data-qa-section="overview" open>
+      <summary>
+        <span class="qa-section-title"><span class="emoji">📈</span><span><b>Visão geral</b><small>Tendência, dispositivos e origem dos acessos</small></span></span>
+        <span class="qa-section-side"><span class="qa-section-badge">principal</span><span class="qa-chevron">⌄</span></span>
+      </summary>
+      <div class="qa-section-body">
+        <div class="qa-grid">
+          <div class="qa-card qa-span-12">
+            <h2>📊 Evolução diária</h2>
+            <p class="sub">Escolha o indicador e veja cada dia do período em barras. Dias sem movimento continuam aparecendo com valor zero.</p>
+            <div id="qa-trends" class="qa-trend-shell" aria-label="Evolução diária dos eventos"></div>
+          </div>
+          <div class="qa-card qa-span-6">
+            <h2>📱 Dispositivos</h2>
+            <div id="qa-devices"></div>
+          </div>
+          <div class="qa-card qa-span-6">
+            <h2>🌎 Origem do acesso</h2>
+            <div id="qa-referrers"></div>
+          </div>
+        </div>
+      </div>
+    </details>
 
-    <div class="qa-card qa-span-4">
-      <h2>📱 Dispositivos</h2>
-      <p class="sub">Entenda se o cliente está comprando pelo celular ou desktop.</p>
-      <div id="qa-devices"></div>
-    </div>
+    <details class="qa-section" data-qa-section="products">
+      <summary>
+        <span class="qa-section-title"><span class="emoji">🛒</span><span><b>Produtos e conversão</b><small>O que atrai, gera clique e vira oportunidade</small></span></span>
+        <span class="qa-section-side"><span class="qa-section-badge">4 análises</span><span class="qa-chevron">⌄</span></span>
+      </summary>
+      <div class="qa-section-body">
+        <div class="qa-grid">
+          <div class="qa-card qa-span-6">
+            <h2>💬 Clique no WhatsApp</h2>
+            <p class="sub">Produtos que realmente levaram o cliente para a conversa.</p>
+            <div id="qa-whatsapp-products"></div>
+          </div>
+          <div class="qa-card qa-span-6">
+            <h2>🚦 Conversão por produto</h2>
+            <p class="sub">Visualização → clique no WhatsApp.</p>
+            <div id="qa-conversion-products"></div>
+          </div>
+          <div class="qa-card qa-span-6">
+            <h2>❤️ Favoritados</h2>
+            <p class="sub">Produtos salvos para olhar ou comprar depois.</p>
+            <div id="qa-favorite-products"></div>
+          </div>
+          <div class="qa-card qa-span-6">
+            <h2>👁️ Mais vistos</h2>
+            <div id="qa-most-viewed"></div>
+          </div>
+        </div>
+      </div>
+    </details>
 
-    <div class="qa-card qa-span-6">
-      <h2>💬 Produtos com clique no WhatsApp</h2>
-      <p class="sub">Mostra exatamente em quais produtos o cliente clicou para comprar.</p>
-      <div id="qa-whatsapp-products"></div>
-    </div>
+    <details class="qa-section" data-qa-section="demand">
+      <summary>
+        <span class="qa-section-title"><span class="emoji">🔎</span><span><b>Demanda e oportunidades</b><small>Buscas, categorias e produtos que precisam de atenção</small></span></span>
+        <span class="qa-section-side"><span class="qa-section-badge">comercial</span><span class="qa-chevron">⌄</span></span>
+      </summary>
+      <div class="qa-section-body">
+        <div class="qa-grid">
+          <div class="qa-card qa-span-4">
+            <h2>🔎 Buscas dos clientes</h2>
+            <p class="sub">Ajuda a decidir estoque, Story e oferta.</p>
+            <div id="qa-searches"></div>
+          </div>
+          <div class="qa-card qa-span-4">
+            <h2>📂 Categorias acessadas</h2>
+            <p class="sub">Mostra quais áreas do catálogo estão atraindo mais atenção.</p>
+            <div id="qa-categories"></div>
+          </div>
+          <div class="qa-card qa-span-4">
+            <h2>⚠️ Muito visto sem WhatsApp</h2>
+            <p class="sub">Pode indicar preço, foto, oferta ou chamada a melhorar.</p>
+            <div id="qa-attention"></div>
+          </div>
+        </div>
+      </div>
+    </details>
 
-    <div class="qa-card qa-span-6">
-      <h2>❤️ Produtos favoritados</h2>
-      <p class="sub">Mostra quais produtos os clientes salvaram como favoritos.</p>
-      <div id="qa-favorite-products"></div>
-    </div>
+    <details class="qa-section" data-qa-section="events">
+      <summary>
+        <span class="qa-section-title"><span class="emoji">🕒</span><span><b>Atividade recente</b><small>Últimos eventos registrados no site</small></span></span>
+        <span class="qa-section-side"><span class="qa-section-badge" id="qa-events-count">0 eventos</span><span class="qa-chevron">⌄</span></span>
+      </summary>
+      <div class="qa-section-body">
+        <div class="qa-card">
+          <div id="qa-events"></div>
+        </div>
+      </div>
+    </details>
 
-    <div class="qa-card qa-span-6">
-      <h2>🚦 Conversão por produto</h2>
-      <p class="sub">Visualização → clique no WhatsApp.</p>
-      <div id="qa-conversion-products"></div>
-    </div>
-
-    <div class="qa-card qa-span-6">
-      <h2>👁️ Mais vistos</h2>
-      <div id="qa-most-viewed"></div>
-    </div>
-
-    <div class="qa-card qa-span-6">
-      <h2>🔎 Buscas dos clientes</h2>
-      <p class="sub">Ajuda a decidir estoque, story e oferta.</p>
-      <div id="qa-searches"></div>
-    </div>
-
-    <div class="qa-card qa-span-6">
-      <h2>📂 Categorias acessadas</h2>
-      <div id="qa-categories"></div>
-    </div>
-
-    <div class="qa-card qa-span-6">
-      <h2>🌎 Origem do acesso</h2>
-      <div id="qa-referrers"></div>
-    </div>
-
-    <div class="qa-card qa-span-6">
-      <h2>⚠️ Muito visto sem WhatsApp</h2>
-      <p class="sub">Possível ajuste de preço, foto, oferta ou chamada.</p>
-      <div id="qa-attention"></div>
-    </div>
-
-    <div class="qa-card qa-span-6">
-      <h2>🕒 Últimos eventos</h2>
-      <div id="qa-events"></div>
-    </div>
-
-    <div class="qa-card" style="grid-column:1/-1">
-      <h2>🧹 Manutenção</h2>
-      <p class="sub">Zera o Analytics local e também a aba Eventos do Google Sheets, se o Apps Script estiver atualizado.</p>
-      <form class="qa-actions" method="post" action="/analytics/reset" onsubmit="return confirm('Zerar TODOS os dados do Analytics, incluindo Google Sheets? Esta ação não pode ser desfeita.')">
-        <button class="qa-danger" type="submit">Zerar analytics</button>
-      </form>
-    </div>
+    <details class="qa-section" data-qa-section="maintenance">
+      <summary>
+        <span class="qa-section-title"><span class="emoji">🧹</span><span><b>Manutenção</b><small>Ferramentas administrativas do Analytics</small></span></span>
+        <span class="qa-section-side"><span class="qa-chevron">⌄</span></span>
+      </summary>
+      <div class="qa-section-body">
+        <div class="qa-card">
+          <p class="sub">Zera o Analytics local e também a aba Eventos do Google Sheets, se o Apps Script estiver atualizado.</p>
+          <form class="qa-actions" method="post" action="/analytics/reset" onsubmit="return confirm('Zerar TODOS os dados do Analytics, incluindo Google Sheets? Esta ação não pode ser desfeita.')">
+            <button class="qa-danger" type="submit">Zerar analytics</button>
+          </form>
+        </div>
+      </div>
+    </details>
   </div>
 </div>
 
@@ -228,19 +338,23 @@
 (function(){
   var initialSummary = <%- JSON.stringify(summary || {}) %>;
   var currentPeriod = "<%= period || 'all' %>";
+  var lastSummary = initialSummary;
+  var sectionStorageKey = 'quality_analytics_sections_v2';
+  var trendStorageKey = 'quality_analytics_trend_metric_v1';
+  var activeTrendMetric = 'page_view';
+  try{ activeTrendMetric = localStorage.getItem(trendStorageKey) || activeTrendMetric; }catch(e){}
 
   function n(v){ return Number(v || 0); }
   function fmt(v){ return n(v).toLocaleString('pt-BR'); }
   function pct(v){ return (Number(v || 0)).toLocaleString('pt-BR', { maximumFractionDigits: 1 }) + '%'; }
   function el(id){ return document.getElementById(id); }
   function esc(v){ return String(v == null ? '' : v).replace(/[&<>"']/g, function(c){ return ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]); }); }
-  function periodName(p){
-    return p === 'today' ? 'Hoje' : p === '7d' ? 'Últimos 7 dias' : p === '30d' ? 'Últimos 30 dias' : 'Todo período';
+  function periodName(p){ return p === 'today' ? 'Hoje' : p === '7d' ? 'Últimos 7 dias' : p === '30d' ? 'Últimos 30 dias' : 'Todo período'; }
+  function cssVar(name, fallback){
+    try{ return getComputedStyle(document.documentElement).getPropertyValue(name).trim() || fallback; }catch(e){ return fallback; }
   }
   function setActivePeriod(){
-    document.querySelectorAll('.qa-filter').forEach(function(a){
-      a.classList.toggle('active', a.getAttribute('data-period') === currentPeriod);
-    });
+    document.querySelectorAll('.qa-filter').forEach(function(a){ a.classList.toggle('active', a.getAttribute('data-period') === currentPeriod); });
   }
   function listHtml(items, nameFn, valueFn, empty){
     if(!items || !items.length) return '<div class="qa-empty">' + esc(empty || 'Sem dados ainda.') + '</div>';
@@ -249,56 +363,100 @@
       var value = n(valueFn(item));
       var width = Math.max(4, Math.round((value / max) * 100));
       return '<div class="qa-mini-item">' +
-        '<div><div class="name">' + esc(nameFn(item)) + '</div><div class="qa-bar"><span style="width:'+width+'%"></span></div></div>' +
+        '<div><div class="name" title="'+esc(nameFn(item))+'">' + esc(nameFn(item)) + '</div><div class="qa-bar"><span style="width:'+width+'%"></span></div></div>' +
         '<div class="value">' + fmt(value) + '</div>' +
       '</div>';
     }).join('') + '</div>';
   }
   function tableProducts(items){
     if(!items || !items.length) return '<div class="qa-empty">Sem produtos ainda.</div>';
-    return '<table class="qa-table"><thead><tr><th>Produto</th><th class="qa-num">Views</th><th class="qa-num">Fav.</th><th class="qa-num">WhatsApp</th><th class="qa-num">Conv.</th></tr></thead><tbody>' +
+    return '<div class="qa-table-wrap"><table class="qa-table"><thead><tr><th>Produto</th><th class="qa-num">Views</th><th class="qa-num">Fav.</th><th class="qa-num">WhatsApp</th><th class="qa-num">Conv.</th></tr></thead><tbody>' +
       items.map(function(p){
         return '<tr><td><div class="qa-product">' + esc(p.name || p.slug || 'Produto') + '</div></td>' +
           '<td class="qa-num">' + fmt(p.views) + '</td>' +
           '<td class="qa-num">' + fmt(p.favorites) + '</td>' +
           '<td class="qa-num">' + fmt(p.whatsapp) + '</td>' +
           '<td class="qa-num"><strong>' + pct(p.conversion) + '</strong></td></tr>';
-      }).join('') + '</tbody></table>';
+      }).join('') + '</tbody></table></div>';
   }
-  function renderLineChart(summary){
-    var svg = el('qa-line-chart');
-    if(!svg) return;
+  function renderTrendCharts(summary){
+    var target = el('qa-trends');
+    if(!target) return;
     var data = summary.timeline || [];
     if(!data.length){
-      svg.innerHTML = '<text x="30" y="130" fill="#6b7280">Sem dados suficientes para gráfico.</text>';
+      target.innerHTML = '<div class="qa-empty">Sem dados suficientes para evolução.</div>';
       return;
     }
-    var W=800,H=260,pad=34;
-    var keys=['page_view','product_view','whatsapp_click','search'];
-    var labels={page_view:'Páginas',product_view:'Produtos',whatsapp_click:'WhatsApp',search:'Buscas'};
-    var max=1;
-    data.forEach(function(d){ keys.forEach(function(k){ max=Math.max(max,n(d[k])); }); });
-    function x(i){ return pad + (data.length === 1 ? 0 : i*(W-pad*2)/(data.length-1)); }
-    function y(v){ return H-pad - (n(v)*(H-pad*2)/max); }
-    var grid='';
-    for(var g=0; g<=4; g++){
-      var yy = pad + g*(H-pad*2)/4;
-      grid += '<line x1="'+pad+'" y1="'+yy+'" x2="'+(W-pad)+'" y2="'+yy+'" stroke="#e5e7eb" stroke-width="1"/>';
+    var metrics = [
+      { key:'page_view', label:'Páginas', hint:'Aberturas de páginas', color:cssVar('--qa-blue', cssVar('--blue','#2563eb')) },
+      { key:'product_view', label:'Produtos', hint:'Produtos visualizados', color:cssVar('--qa-green','#16a34a') },
+      { key:'whatsapp_click', label:'WhatsApp', hint:'Cliques para comprar', color:cssVar('--qa-orange','#f97316') },
+      { key:'search', label:'Buscas', hint:'Pesquisas realizadas', color:cssVar('--qa-purple','#7c3aed') },
+      { key:'favorite', label:'Favoritos', hint:'Produtos favoritados', color:cssVar('--qa-red','#dc2626') }
+    ];
+    var metric = metrics.find(function(item){ return item.key === activeTrendMetric; }) || metrics[0];
+    activeTrendMetric = metric.key;
+
+    var selector = '<div class="qa-trend-selector">' + metrics.map(function(item){
+      var total = data.reduce(function(sum,day){ return sum + n(day[item.key]); },0);
+      var peak = Math.max.apply(null,data.map(function(day){ return n(day[item.key]); }).concat([0]));
+      return '<button type="button" class="qa-trend-option '+(item.key===metric.key?'active':'')+'" data-trend-metric="'+esc(item.key)+'" style="--trend-color:'+item.color+'">' +
+        '<span class="qa-trend-option-top"><span class="qa-trend-dot"></span><span>'+esc(item.label)+'</span></span>' +
+        '<strong>'+fmt(total)+'</strong><small>'+esc(item.hint)+' · pico '+fmt(peak)+'</small></button>';
+    }).join('') + '</div>';
+
+    var values = data.map(function(day){ return n(day[metric.key]); });
+    var total = values.reduce(function(sum,value){ return sum + value; },0);
+    var max = Math.max.apply(null, values.concat([1]));
+    var peakIndex = 0;
+    values.forEach(function(value,index){ if(value > values[peakIndex]) peakIndex = index; });
+    var peakDay = data[peakIndex] ? data[peakIndex].day : '-';
+    var minWidth = Math.max(760, data.length * 34);
+
+    var bars = data.map(function(day,index){
+      var value = values[index];
+      var height = value > 0 ? Math.max(4, Math.round((value / max) * 100)) : 0;
+      var title = (day.day || '') + ' · ' + metric.label + ': ' + fmt(value) + (value ? ' · clique para ver os detalhes' : '');
+      return '<div class="qa-day '+(value?'is-clickable':'')+'" data-day-index="'+index+'" title="'+esc(title)+'" role="'+(value?'button':'presentation')+'" '+(value?'tabindex="0"':'')+'>' +
+        '<div class="qa-day-value">'+(value ? fmt(value) : '')+'</div>' +
+        '<div class="qa-day-bar-area"><div class="qa-day-bar" style="height:'+height+'%"></div></div>' +
+        '<div class="qa-day-label">'+esc(day.day || '')+'</div>' +
+      '</div>';
+    }).join('');
+
+    var chart = '<div class="qa-daily-scroll"><div class="qa-daily-chart" style="min-width:'+minWidth+'px;--trend-color:'+metric.color+'">' +
+      '<div class="qa-daily-chart-head"><div class="qa-daily-chart-title"><span class="qa-trend-dot"></span><span>'+esc(metric.label)+'</span><strong>'+fmt(total)+'</strong></div>' +
+      '<div class="qa-daily-chart-meta">Pico: <strong>'+fmt(Math.max.apply(null,values.concat([0])))+'</strong> em '+esc(peakDay)+'</div></div>' +
+      '<div class="qa-daily-bars" style="grid-template-columns:repeat('+data.length+',minmax(26px,1fr))">'+bars+'</div>' +
+      '</div></div>' +
+      '<div class="qa-daily-axis-note"><span>Todos os dias do período aparecem, inclusive os dias zerados.</span><span>Clique em uma barra para ver o que gerou aquele movimento.</span></div>' +
+      '<div class="qa-day-detail" id="qa-day-detail" hidden></div>';
+
+    target.innerHTML = selector + chart;
+    target.querySelectorAll('[data-trend-metric]').forEach(function(button){
+      button.addEventListener('click',function(){
+        activeTrendMetric = button.getAttribute('data-trend-metric') || 'page_view';
+        try{ localStorage.setItem(trendStorageKey,activeTrendMetric); }catch(e){}
+        renderTrendCharts(lastSummary || summary || {});
+      });
+    });
+    function openDayDetails(index){
+      var day=data[index],detail=el('qa-day-detail');
+      if(!day||!detail)return;
+      var rows=(day.details&&day.details[metric.key])||[];
+      var label=metric.key==='product_view'?'Produtos visualizados':metric.key==='whatsapp_click'?'Produtos clicados no WhatsApp':metric.key==='favorite'?'Produtos favoritados':metric.key==='search'?'Buscas realizadas':'Páginas abertas';
+      detail.innerHTML='<div class="qa-day-detail-head"><div><strong>'+esc(label)+' · '+esc(day.day||'')+'</strong><small>'+fmt(day[metric.key]||0)+' evento(s) no dia</small></div><button type="button" class="qa-day-detail-close" aria-label="Fechar detalhes">×</button></div>' +
+        '<div class="qa-day-detail-list">'+(rows.length?rows.map(function(row){return '<div class="qa-day-detail-row"><span title="'+esc(row.label||'')+'">'+esc(row.label||'Não identificado')+'</span><b>'+fmt(row.count||0)+'</b></div>';}).join(''):'<div class="qa-empty">Nenhum detalhe identificado para este dia.</div>')+'</div>';
+      detail.hidden=false;
+      target.querySelectorAll('.qa-day').forEach(function(node){node.classList.toggle('is-selected',Number(node.dataset.dayIndex)===Number(index));});
+      detail.querySelector('.qa-day-detail-close')?.addEventListener('click',function(){detail.hidden=true;target.querySelectorAll('.qa-day').forEach(function(node){node.classList.remove('is-selected');});});
+      detail.scrollIntoView({block:'nearest',behavior:'smooth'});
     }
-    var colors=['#2563eb','#16a34a','#f97316','#7c3aed'];
-    var lines=keys.map(function(k,idx){
-      var pts=data.map(function(d,i){ return x(i)+','+y(d[k]); }).join(' ');
-      return '<polyline points="'+pts+'" fill="none" stroke="'+colors[idx]+'" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>' +
-        data.map(function(d,i){ return '<circle cx="'+x(i)+'" cy="'+y(d[k])+'" r="3.5" fill="'+colors[idx]+'"><title>'+esc(d.day+' - '+labels[k]+': '+fmt(d[k]))+'</title></circle>'; }).join('');
-    }).join('');
-    var xlabels=data.map(function(d,i){
-      if(data.length > 10 && i % Math.ceil(data.length/8) !== 0 && i !== data.length-1) return '';
-      return '<text x="'+x(i)+'" y="'+(H-8)+'" text-anchor="middle" font-size="11" fill="#6b7280">'+esc(d.day)+'</text>';
-    }).join('');
-    var legend=keys.map(function(k,idx){
-      return '<circle cx="'+(pad+idx*140)+'" cy="16" r="5" fill="'+colors[idx]+'"/><text x="'+(pad+idx*140+10)+'" y="20" font-size="12" fill="#374151">'+labels[k]+'</text>';
-    }).join('');
-    svg.innerHTML = grid + lines + xlabels + legend;
+    target.querySelectorAll('.qa-day.is-clickable').forEach(function(dayNode){
+      var open=function(){openDayDetails(Number(dayNode.dataset.dayIndex));};
+      dayNode.addEventListener('click',open);
+      dayNode.addEventListener('keydown',function(event){if(event.key==='Enter'||event.key===' '){event.preventDefault();open();}});
+    });
   }
   function renderDevices(summary){
     var items = summary.devices || [];
@@ -318,27 +476,21 @@
     var hot = (summary.hot || [])[0];
     var attention = (summary.attention || [])[0];
     var search = (summary.searches || [])[0];
-
-    if(hot && n(hot.score) > 0){
-      return 'Produto em destaque agora: <strong>' + esc(hot.name || hot.slug) + '</strong> — score ' + fmt(hot.score) + '. Recomendo observar para Story/oferta.';
-    }
-    if(attention){
-      return 'Atenção: <strong>' + esc(attention.name || attention.slug) + '</strong> teve visualizações, mas nenhum clique no WhatsApp.';
-    }
-    if(search){
-      return 'Busca mais forte: <strong>' + esc(search.term) + '</strong>. Pode indicar demanda.';
-    }
-    return 'Ainda sem dados suficientes. Abra produtos, faça buscas e clique no WhatsApp para alimentar o painel.';
+    if(hot && n(hot.score) > 0){ return 'Produto em destaque: <strong>' + esc(hot.name || hot.slug) + '</strong> — score ' + fmt(hot.score) + '. Vale observar para Story/oferta.'; }
+    if(attention){ return 'Atenção em <strong>' + esc(attention.name || attention.slug) + '</strong>: teve visualizações, mas nenhum clique no WhatsApp.'; }
+    if(search){ return 'Busca mais forte: <strong>' + esc(search.term) + '</strong>. Pode indicar demanda.'; }
+    return 'Ainda sem dados suficientes. Visualizações, buscas e cliques no WhatsApp alimentam esta recomendação.';
   }
   function render(summary){
     summary = summary || {};
+    lastSummary = summary;
     var k = summary.kpis || {};
     currentPeriod = summary.period || currentPeriod || 'all';
     setActivePeriod();
 
     el('qa-source').textContent = summary.source === 'google-sheets' ? 'Google Sheets' : 'JSON local';
     el('qa-updated').textContent = summary.updatedAt ? new Date(summary.updatedAt).toLocaleString('pt-BR') : '-';
-    el('qa-period-label').textContent = 'Filtro ativo: ' + periodName(currentPeriod);
+    el('qa-period-label').textContent = periodName(currentPeriod);
 
     el('kpi-product-views').textContent = fmt(k.productViews);
     el('kpi-whatsapp').textContent = fmt(k.whatsappClicks);
@@ -348,7 +500,7 @@
     el('kpi-categories').textContent = fmt(k.categories);
 
     el('qa-recommendation').innerHTML = recommendation(summary);
-    renderLineChart(summary);
+    renderTrendCharts(summary);
     renderDevices(summary);
     renderReferrers(summary);
 
@@ -363,18 +515,56 @@
       : '<div class="qa-empty">Sem alertas ainda.</div>';
 
     var events = summary.recentEvents || [];
-    el('qa-events').innerHTML = events.length ? events.slice(0,12).map(function(ev){
+    el('qa-events-count').textContent = fmt(events.length) + (events.length === 1 ? ' evento' : ' eventos');
+    el('qa-events').innerHTML = events.length ? '<div class="qa-event-list">' + events.slice(0,20).map(function(ev){
       return '<div class="qa-event"><span class="bullet"></span><div><strong>' + esc(ev.label || ev.type) + '</strong><br><span class="qa-muted">' + esc(ev.device || '') + (ev.sourceName ? ' · ' + esc(ev.sourceName) : '') + '</span></div></div>';
-    }).join('') : '<div class="qa-empty">Sem eventos recentes.</div>';
+    }).join('') + '</div>' : '<div class="qa-empty">Sem eventos recentes.</div>';
   }
-  function refresh(){
-    fetch('/analytics/summary?period=' + encodeURIComponent(currentPeriod), { cache: 'no-store' })
+
+  function saveSections(){
+    try{
+      var state={};
+      document.querySelectorAll('[data-qa-section]').forEach(function(section){ state[section.getAttribute('data-qa-section')] = !!section.open; });
+      localStorage.setItem(sectionStorageKey,JSON.stringify(state));
+    }catch(e){}
+  }
+  function restoreSections(){
+    var saved=null;
+    try{ saved=JSON.parse(localStorage.getItem(sectionStorageKey)||'null'); }catch(e){}
+    if(!saved) return;
+    document.querySelectorAll('[data-qa-section]').forEach(function(section){
+      var key=section.getAttribute('data-qa-section');
+      if(typeof saved[key] === 'boolean') section.open=saved[key];
+    });
+  }
+  function setAllSections(open){
+    document.querySelectorAll('[data-qa-section]').forEach(function(section){ section.open=open; });
+    saveSections();
+  }
+  function refresh(force){
+    var url = '/analytics/summary?period=' + encodeURIComponent(currentPeriod) + (force ? '&fresh=1' : '');
+    fetch(url, { cache: 'no-store' })
       .then(function(r){ return r.json(); })
       .then(function(payload){ if(payload && payload.success) render(payload.summary); })
       .catch(function(){});
   }
 
+  restoreSections();
+  document.querySelectorAll('[data-qa-section]').forEach(function(section){ section.addEventListener('toggle',saveSections); });
+  if(el('qa-open-all')) el('qa-open-all').addEventListener('click',function(){ setAllSections(true); });
+  if(el('qa-close-all')) el('qa-close-all').addEventListener('click',function(){ setAllSections(false); });
+  if(el('qa-refresh')) el('qa-refresh').addEventListener('click',function(){ refresh(true); });
+
   render(initialSummary);
-  setInterval(refresh, 5000);
+
+  try{
+    new MutationObserver(function(mutations){
+      var changed=mutations.some(function(m){ return m.attributeName === 'data-panel-theme'; });
+      if(changed) requestAnimationFrame(function(){ renderTrendCharts(lastSummary || {}); });
+    }).observe(document.documentElement,{attributes:true,attributeFilter:['data-panel-theme']});
+  }catch(e){}
+
+  setTimeout(function(){ refresh(false); },1500);
+  setInterval(function(){ refresh(false); },12000);
 })();
 </script>

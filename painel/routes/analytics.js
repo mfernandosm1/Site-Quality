@@ -13,7 +13,12 @@ const SHEETS_READ_ENABLED = true;
 const SHEETS_ENDPOINT = process.env.QUALITY_ANALYTICS_SHEETS_URL || 'https://script.google.com/macros/s/AKfycbwZQ01q5u5lRqE3Hk-nMutkTWcLA8r7127sO3Dt132Ti8L0Ci7DWoOyby5v92T_WY34/exec';
 const SHEETS_KEY = process.env.QUALITY_ANALYTICS_KEY || 'quality-analytics-v1';
 const panelDataCache = { data:null, at:0, loading:null };
-const PANEL_CACHE_TTL = 2 * 60 * 1000;
+const PANEL_CACHE_TTL = 8 * 1000;
+// Se o Apps Script estiver removido/expirado, o Analytics continua usando o JSON local.
+// Evita repetir a mesma falha a cada atualização do painel e poluir o terminal.
+const SHEETS_RETRY_COOLDOWN = 5 * 60 * 1000;
+let sheetsRetryAt = 0;
+let lastSheetsWarning = '';
 
 function P(app){ return app.locals.paths; }
 function filePath(app){ return path.join(P(app).CONTENT_DIR, 'analytics.json'); }
@@ -227,11 +232,18 @@ function dataFromSheetRows(rows=[]){
 }
 async function readSheetsRows(){
   if(!SHEETS_READ_ENABLED || !SHEETS_ENDPOINT) return null;
+  if(Date.now() < sheetsRetryAt) return null;
   const url = SHEETS_ENDPOINT + (SHEETS_ENDPOINT.includes('?') ? '&' : '?') + 'key=' + encodeURIComponent(SHEETS_KEY);
   const response = await fetch(url, { method:'GET', cache:'no-store' });
-  if(!response.ok) throw new Error('Falha ao ler Google Sheets: HTTP ' + response.status);
+  if(!response.ok){
+    const error = new Error('Falha ao ler Google Sheets: HTTP ' + response.status);
+    error.status = response.status;
+    throw error;
+  }
   const payload = await response.json();
   if(!payload.success) throw new Error(payload.message || payload.error || 'Google Sheets retornou erro.');
+  sheetsRetryAt = 0;
+  lastSheetsWarning = '';
   return payload.rows || [];
 }
 async function readSheetsData(){
@@ -257,15 +269,25 @@ async function refreshPanelData(app){
     try{
       const sheets=await readSheetsData();
       if(sheets){panelDataCache.data=sheets;panelDataCache.at=Date.now();return sheets;}
-    }catch(error){console.warn('analytics sheets fallback:',error.message);}
+    }catch(error){
+      sheetsRetryAt = Date.now() + SHEETS_RETRY_COOLDOWN;
+      const warning = `${error.message}. Usando dados locais; nova tentativa automática em 5 min.`;
+      if(warning !== lastSheetsWarning){
+        console.warn('analytics sheets fallback:', warning);
+        lastSheetsWarning = warning;
+      }
+    }
     const local=readData(app);panelDataCache.data=local;panelDataCache.at=Date.now();return local;
   })().finally(()=>{panelDataCache.loading=null;});
   return panelDataCache.loading;
 }
-async function readPanelData(app){
+async function readPanelData(app, options={}){
   const fresh=panelDataCache.data && (Date.now()-panelDataCache.at)<PANEL_CACHE_TTL;
   if(fresh)return panelDataCache.data;
-  // Stale-while-revalidate: abre o painel imediatamente e atualiza a fonte externa em segundo plano.
+  if(options.waitForFresh){
+    return refreshPanelData(app);
+  }
+  // Primeira abertura continua rápida; a atualização periódica do painel espera a fonte externa.
   const fallback=panelDataCache.data||readData(app);
   refreshPanelData(app).catch(()=>{});
   return fallback;
@@ -282,16 +304,81 @@ function productConversion(products){
     score: (p.views||0)*1 + (p.favorites||0)*3 + (p.whatsapp||0)*5 + (p.shares||0)*2
   }));
 }
-function buildTimeline(events=[]){
-  const map = {};
-  for(const ev of events){
-    const label = dayLabel(ev.at);
-    map[label] = map[label] || { day: label, page_view:0, product_view:0, whatsapp_click:0, search:0, total:0 };
-    if(map[label][ev.type] !== undefined) map[label][ev.type] += 1;
-    map[label].total += 1;
-  }
-  return Object.values(map).slice(-30);
+function localDayKey(value){
+  const d = value instanceof Date ? value : parseDate(value);
+  if(!d) return '';
+  return [d.getFullYear(), String(d.getMonth()+1).padStart(2,'0'), String(d.getDate()).padStart(2,'0')].join('-');
 }
+function localDayLabel(value){
+  const d = value instanceof Date ? value : parseDate(value);
+  if(!d) return '';
+  return String(d.getDate()).padStart(2,'0') + '/' + String(d.getMonth()+1).padStart(2,'0');
+}
+function startOfLocalDay(value){
+  const d = value instanceof Date ? new Date(value) : parseDate(value);
+  if(!d) return null;
+  d.setHours(0,0,0,0);
+  return d;
+}
+function buildTimeline(events=[], period='all'){
+  const today = startOfLocalDay(new Date());
+  let start = startForPeriod(period);
+
+  if(!start){
+    const dated = events.map(eventDate).filter(Boolean).sort((a,b)=>a-b);
+    start = dated.length ? startOfLocalDay(dated[0]) : new Date(today);
+  }
+  start = startOfLocalDay(start) || new Date(today);
+  if(start > today) start = new Date(today);
+
+  const map = {};
+  for(let cursor = new Date(start); cursor <= today; cursor.setDate(cursor.getDate()+1)){
+    const key = localDayKey(cursor);
+    map[key] = {
+      date:key,
+      day:localDayLabel(cursor),
+      page_view:0,
+      product_view:0,
+      whatsapp_click:0,
+      search:0,
+      favorite:0,
+      total:0,
+      _details:{page_view:{},product_view:{},whatsapp_click:{},search:{},favorite:{}}
+    };
+  }
+
+  const detailLabel=(ev,type)=>{
+    if(type==='product_view'||type==='whatsapp_click'||type==='favorite') return safeText(ev.product?.name || ev.product?.slug || 'Produto não identificado',140);
+    if(type==='search') return safeText(ev.term || 'Busca sem termo',100);
+    if(type==='page_view') {
+      const raw=safeText(ev.url || 'Página não identificada',260);
+      try { const u=new URL(raw); return (u.pathname||'/')+(u.search||''); } catch (_) { return raw || 'Página não identificada'; }
+    }
+    return '';
+  };
+
+  for(const ev of events){
+    const d = eventDate(ev);
+    if(!d) continue;
+    const key = localDayKey(d);
+    if(!map[key]) continue;
+    if(map[key][ev.type] !== undefined) map[key][ev.type] += 1;
+    map[key].total += 1;
+    if(map[key]._details[ev.type]){
+      const label=detailLabel(ev,ev.type);
+      if(label) map[key]._details[ev.type][label]=(map[key]._details[ev.type][label]||0)+1;
+    }
+  }
+  return Object.values(map).map(day=>{
+    const details={};
+    for(const [type,items] of Object.entries(day._details||{})){
+      details[type]=Object.entries(items).map(([label,count])=>({label,count})).sort((a,b)=>b.count-a.count||a.label.localeCompare(b.label,'pt-BR'));
+    }
+    const {_details,...cleanDay}=day;
+    return {...cleanDay,details};
+  });
+}
+
 function labelEvent(ev){
   const when = hourMinute(ev.at);
   if(ev.type === 'product_view') return `${when} abriu ${ev.product?.name || 'produto'}`;
@@ -355,7 +442,7 @@ function buildSummary(data, period='all'){
     pages: pages.sort((a,b)=>(b.views||0)-(a.views||0)).slice(0,10),
     devices: devices.sort((a,b)=>(b.total||0)-(a.total||0)).map(d => ({...d, percent: pct(d.total, deviceTotal)})),
     referrers: referrers.sort((a,b)=>(b.total||0)-(a.total||0)).slice(0,10).map(r => ({...r, percent: pct(r.total, referrerTotal)})),
-    timeline: buildTimeline(filtered.events || []),
+    timeline: buildTimeline(filtered.events || [], period),
     recentEvents: (filtered.events || []).slice(-30).reverse().map(ev => ({...ev, label: labelEvent(ev)}))
   };
 }
@@ -368,7 +455,9 @@ router.get('/', async (req,res)=>{
 
 router.get('/summary', async (req,res)=> {
   const period = safeText(req.query.period || 'all', 20);
-  res.json({ success:true, summary: buildSummary(await readPanelData(req.app), period) });
+  const forceFresh = String(req.query.fresh || '') === '1';
+  const data = forceFresh ? await refreshPanelData(req.app) : await readPanelData(req.app, { waitForFresh:true });
+  res.json({ success:true, summary: buildSummary(data, period) });
 });
 router.get('/data', async (req,res)=> res.json({ success:true, data: await readPanelData(req.app) }));
 
@@ -450,6 +539,7 @@ router.post('/reset', async (req,res)=>{
     message = '⚠️ JSON local zerado, mas não foi possível zerar o Google Sheets: ' + error.message;
   }
   writeData(req.app, emptyData());
+  panelDataCache.data=null; panelDataCache.at=0; panelDataCache.loading=null;
   res.redirect('/analytics?flash=' + encodeURIComponent(message));
 });
 

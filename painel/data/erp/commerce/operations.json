@@ -1,6 +1,6 @@
 {
   "version": "0.13.3",
-  "nextNumber": 98,
+  "nextNumber": 102,
   "items": [
     {
       "id": "OP-1785809443011-M9VYO",
@@ -31149,6 +31149,294 @@
       "change": 0,
       "updatedAt": "2026-08-28T19:42:42.790Z",
       "updatedBy": "Matheus Fernando"
+    },
+    {
+      "id": "OP-1788028535748-1TVAV",
+      "number": 101,
+      "type": "sale",
+      "status": "finalized",
+      "version": 3,
+      "createdAt": "2026-08-29T18:35:35.748Z",
+      "createdBy": "Matheus Fernando",
+      "dates": {
+        "openedAt": "2026-08-29T18:35:35.748Z",
+        "updatedAt": "2026-08-29T18:35:35.921Z",
+        "finalizedAt": "2026-08-29T18:35:35.921Z",
+        "cancelledAt": null
+      },
+      "operationalStatus": "completed",
+      "financialStatus": "paid",
+      "timeline": [
+        {
+          "id": "EVT-1788028535748-GZWXI",
+          "type": "created",
+          "label": "Operação criada",
+          "at": "2026-08-29T18:35:35.748Z",
+          "actor": "Matheus Fernando"
+        },
+        {
+          "id": "EVT-1788028535904-AFOLO",
+          "type": "posted",
+          "label": "Estoque e caixa processados",
+          "at": "2026-08-29T18:35:35.904Z",
+          "actor": "Matheus Fernando"
+        },
+        {
+          "id": "EVT-1788028535921-8KS6I",
+          "type": "finalized",
+          "label": "Operação finalizada com pagamento integral",
+          "at": "2026-08-29T18:35:35.921Z",
+          "actor": "Matheus Fernando",
+          "details": {
+            "status": "finalized",
+            "financialStatus": "paid",
+            "total": 2,
+            "amountPaid": 2,
+            "change": 0
+          }
+        }
+      ],
+      "audit": [
+        {
+          "id": "EVT-1788028535748-GZWXI",
+          "type": "created",
+          "label": "Operação criada",
+          "at": "2026-08-29T18:35:35.748Z",
+          "actor": "Matheus Fernando"
+        },
+        {
+          "id": "EVT-1788028535904-AFOLO",
+          "type": "posted",
+          "label": "Estoque e caixa processados",
+          "at": "2026-08-29T18:35:35.904Z",
+          "actor": "Matheus Fernando"
+        },
+        {
+          "id": "EVT-1788028535921-8KS6I",
+          "type": "finalized",
+          "label": "Operação finalizada com pagamento integral",
+          "at": "2026-08-29T18:35:35.921Z",
+          "actor": "Matheus Fernando",
+          "details": {
+            "status": "finalized",
+            "financialStatus": "paid",
+            "total": 2,
+            "amountPaid": 2,
+            "change": 0
+          }
+        }
+      ],
+      "snapshot": {
+        "createdAt": "2026-08-29T18:35:35.921Z",
+        "customer": {
+          "id": "CLI-1786026365760-U5YI7",
+          "name": "Deisemere de almeida melo",
+          "identifier": ""
+        },
+        "seller": {
+          "id": "USR-d15976b1-a734-459f-8957-b9f42bc39ea2",
+          "name": "Matheus Fernando"
+        },
+        "items": [
+          {
+            "id": "OPI-1788028535748-XVR9G",
+            "productId": "1787315788909",
+            "inventoryItemId": "PRD-1787315788909",
+            "code": "PRD-827",
+            "sku": "PRD-827",
+            "name": "Vendas Diversas",
+            "quantity": 1,
+            "unitPrice": 2,
+            "unitCost": 0,
+            "discount": 0,
+            "discountMode": "amount",
+            "discountPercent": 0,
+            "verified": false,
+            "sellerId": "USR-d15976b1-a734-459f-8957-b9f42bc39ea2",
+            "sellerNameSnapshot": "Matheus Fernando",
+            "stockControlled": true,
+            "allowNegative": false
+          }
+        ],
+        "payments": [
+          {
+            "id": "PAY-1788028535748-AEFZ3",
+            "methodId": "PM-DINHEIRO",
+            "methodName": "Dinheiro",
+            "amount": 2,
+            "installments": 1,
+            "dueDate": "",
+            "dueDates": [],
+            "installmentAmounts": [],
+            "status": "paid",
+            "notes": ""
+          }
+        ],
+        "serviceOrder": {
+          "device": "",
+          "equipmentId": "",
+          "issue": "",
+          "technicianId": "",
+          "technicianName": "",
+          "servicePerformed": "",
+          "accessories": "",
+          "checkin": {
+            "notes": "",
+            "items": []
+          },
+          "checkout": {
+            "notes": "",
+            "items": [],
+            "customerChecked": false,
+            "accessoriesChecked": false,
+            "guidanceReceived": false
+          },
+          "attachments": [],
+          "unlockPatterns": [
+            [],
+            []
+          ],
+          "unlockPattern": []
+        },
+        "freight": {
+          "payer": "none",
+          "carrierId": "",
+          "carrierName": "",
+          "freightAmount": 0,
+          "insuranceAmount": 0,
+          "otherExpensesAmount": 0,
+          "volumeQuantity": 0,
+          "species": "",
+          "brand": "",
+          "netWeight": 0,
+          "grossWeight": 0
+        },
+        "totals": {
+          "subtotal": 2,
+          "itemDiscountTotal": 0,
+          "couponDiscount": 0,
+          "discountTotal": 0,
+          "freightTotal": 0,
+          "total": 2,
+          "amountPaid": 2,
+          "amountPending": 0,
+          "change": 0
+        }
+      },
+      "fiscal": {
+        "status": "none",
+        "documentId": null,
+        "updatedAt": null
+      },
+      "links": {
+        "originalOperationId": null,
+        "originalItemId": null,
+        "exchangeIds": [],
+        "returnIds": [],
+        "warrantyIds": []
+      },
+      "customerId": "CLI-1786026365760-U5YI7",
+      "customerNameSnapshot": "Deisemere de almeida melo",
+      "identifier": "",
+      "sellerId": "USR-d15976b1-a734-459f-8957-b9f42bc39ea2",
+      "sellerNameSnapshot": "Matheus Fernando",
+      "customStatusId": "sale-delivered",
+      "customStatusName": "VENDA ENTREGUE",
+      "notes": "impressão",
+      "details": "",
+      "serviceOrder": {
+        "device": "",
+        "equipmentId": "",
+        "issue": "",
+        "technicianId": "",
+        "technicianName": "",
+        "servicePerformed": "",
+        "accessories": "",
+        "checkin": {
+          "notes": "",
+          "items": []
+        },
+        "checkout": {
+          "notes": "",
+          "items": [],
+          "customerChecked": false,
+          "accessoriesChecked": false,
+          "guidanceReceived": false
+        },
+        "attachments": [],
+        "unlockPatterns": [
+          [],
+          []
+        ],
+        "unlockPattern": []
+      },
+      "coupon": null,
+      "freight": {
+        "payer": "none",
+        "carrierId": "",
+        "carrierName": "",
+        "freightAmount": 0,
+        "insuranceAmount": 0,
+        "otherExpensesAmount": 0,
+        "volumeQuantity": 0,
+        "species": "",
+        "brand": "",
+        "netWeight": 0,
+        "grossWeight": 0
+      },
+      "freightTotal": 0,
+      "cashboxId": "caixa-principal",
+      "items": [
+        {
+          "id": "OPI-1788028535748-XVR9G",
+          "productId": "1787315788909",
+          "inventoryItemId": "PRD-1787315788909",
+          "code": "PRD-827",
+          "sku": "PRD-827",
+          "name": "Vendas Diversas",
+          "quantity": 1,
+          "unitPrice": 2,
+          "unitCost": 0,
+          "discount": 0,
+          "discountMode": "amount",
+          "discountPercent": 0,
+          "verified": false,
+          "sellerId": "USR-d15976b1-a734-459f-8957-b9f42bc39ea2",
+          "sellerNameSnapshot": "Matheus Fernando",
+          "stockControlled": true,
+          "allowNegative": false
+        }
+      ],
+      "payments": [
+        {
+          "id": "PAY-1788028535748-AEFZ3",
+          "methodId": "PM-DINHEIRO",
+          "methodName": "Dinheiro",
+          "amount": 2,
+          "installments": 1,
+          "dueDate": "",
+          "dueDates": [],
+          "installmentAmounts": [],
+          "status": "paid",
+          "notes": ""
+        }
+      ],
+      "subtotal": 2,
+      "itemDiscountTotal": 0,
+      "couponDiscount": 0,
+      "discountTotal": 0,
+      "total": 2,
+      "amountPaid": 2,
+      "amountPending": 0,
+      "change": 0,
+      "updatedAt": "2026-08-29T18:35:35.921Z",
+      "updatedBy": "Matheus Fernando",
+      "inventoryPostedAt": "2026-08-29T18:35:35.904Z",
+      "cashPostedAt": "2026-08-29T18:35:35.904Z",
+      "receivableIds": [],
+      "walletEntryIds": [],
+      "finalizedAt": "2026-08-29T18:35:35.921Z",
+      "finalizedBy": "Matheus Fernando"
     }
   ]
 }

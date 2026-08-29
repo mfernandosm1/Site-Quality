@@ -105,7 +105,7 @@ export default class ReportService {
     const productKind=['all','product','service'].includes(text(filters.productKind))?text(filters.productKind):'all';
     const turnoverView=['all','no_sales','slow','normal','high','atypical'].includes(text(filters.turnoverView))?text(filters.turnoverView):'all';
     const inactiveDays=clamp(Math.round(num(filters.inactiveDays)||30),1,3650);
-    const customerMode=['inactive','frequency','quantity','value'].includes(text(filters.customerMode))?text(filters.customerMode):'inactive';
+    const customerMode=['inactive','frequency','quantity','value','returns'].includes(text(filters.customerMode))?text(filters.customerMode):'inactive';
     const customerWindow=['30','90','180','270','365','all'].includes(text(filters.customerWindow))?text(filters.customerWindow):'90';
     const customerInactiveRange=['30plus','30_59','60_89','90_179','180_299','300plus','never'].includes(text(filters.customerInactiveRange))?text(filters.customerInactiveRange):'30plus';
     const customerInactiveSort=['recent','oldest','purchases','value'].includes(text(filters.customerInactiveSort))?text(filters.customerInactiveSort):'recent';
@@ -728,6 +728,13 @@ export default class ReportService {
       if(!currentByCustomer.has(id)) currentByCustomer.set(id,[]);
       currentByCustomer.get(id).push({...operation,__historySource:'erp'});
     }
+    const returnsByCustomer=new Map();
+    for(const record of (this.returnService?.list?.({})||[])){
+      if(record.status!=='completed'||!text(record.customerId))continue;
+      const id=text(record.customerId);
+      if(!returnsByCustomer.has(id))returnsByCustomer.set(id,[]);
+      returnsByCustomer.get(id).push(record);
+    }
     const windowDays=f.customerWindow==='all'?null:Number(f.customerWindow||90);
     const windowFromMs=windowDays===null?null:referenceMs-(Math.max(1,windowDays)-1)*86400000;
     const rangeMatches=(days,status)=>{
@@ -751,6 +758,7 @@ export default class ReportService {
     };
     const rows=[];
     let neverBought=0,inactive=0,reactivation=0,recent=0,totalHistoricalValue=0,wm10Customers=0,erpCustomers=0,combinedCustomers=0,windowPurchases=0,windowItems=0,windowValue=0,repeatCustomers=0;
+    let returnCustomers=0,windowReturnRecords=0,windowExchangeRecords=0,windowRefundRecords=0,windowReturnUnits=0,windowReturnValue=0;
     for(const customer of customers){
       if(customer?.active===false) continue;
       const id=text(customer.id);
@@ -784,27 +792,39 @@ export default class ReportService {
       if(f.q&&!customerHay.includes(normalize(f.q))) continue;
       const windowOps=ops.filter(op=>windowFromMs===null||op.__ms>=windowFromMs);
       const windowTotal=round2(windowOps.reduce((sum,op)=>sum+op.__value,0)),windowItemCount=round2(windowOps.reduce((sum,op)=>sum+num(op.__items),0)),windowCount=windowOps.length;
+      const returnRows=(returnsByCustomer.get(id)||[]).map(record=>({...record,__ms:dateMs(record.createdAt)})).filter(record=>Number.isFinite(record.__ms)&&record.__ms<=referenceMs&&(windowFromMs===null||record.__ms>=windowFromMs));
+      const exchangeCount=returnRows.filter(record=>record.type==='exchange').length,refundCount=returnRows.filter(record=>record.type==='return').length;
+      const returnUnits=round2(returnRows.reduce((sum,record)=>sum+(record.items||[]).reduce((itemSum,item)=>itemSum+num(item.quantity),0),0));
+      const returnValue=round2(returnRows.reduce((sum,record)=>sum+num(record.totalCredit),0));
+      const lastReturn=returnRows.slice().sort((a,b)=>String(b.createdAt).localeCompare(String(a.createdAt)))[0]||null;
       if(f.customerMode==='inactive'){
         if(!rangeMatches(daysWithoutPurchase,status)) continue;
+      } else if(f.customerMode==='returns'){
+        if(!returnRows.length) continue;
       } else if(!windowCount) continue;
-      if(f.customerMode!=='inactive'){
+      if(f.customerMode!=='inactive'&&f.customerMode!=='returns'){
         windowPurchases+=windowCount;windowItems+=windowItemCount;windowValue+=windowTotal;if(windowCount>=2)repeatCustomers++;
+      }
+      if(f.customerMode==='returns'){
+        returnCustomers++;windowReturnRecords+=returnRows.length;windowExchangeRecords+=exchangeCount;windowRefundRecords+=refundCount;windowReturnUnits+=returnUnits;windowReturnValue+=returnValue;
       }
       totalHistoricalValue+=total;
       rows.push({
         id,code:text(customer.code),name:text(customer.name)||text(customer.tradeName)||'Cliente',document:text(customer.document),mobile:text(customer.mobile)||text(customer.phone),email:text(customer.email),city:text(customer.city),state:text(customer.state),
         lastPurchase:lastDate,daysWithoutPurchase,status,stage:stage.key,stageLabel:stage.label,purchases:ops.length,totalSpent:round2(total),lastValue,lastOrigin,lastNumber,lastType,wm10Purchases:wm10Count,erpPurchases:erpCount,hasWm10History:wm10Count>0,hasErpHistory:erpCount>0,
-        windowPurchases:windowCount,windowItems:windowItemCount,windowValue:windowTotal,windowTicket:windowCount?round2(windowTotal/windowCount):0,windowFirstPurchase:windowOps[0]?.__date||'',windowLastPurchase:windowOps.at(-1)?.__date||''
+        windowPurchases:windowCount,windowItems:windowItemCount,windowValue:windowTotal,windowTicket:windowCount?round2(windowTotal/windowCount):0,windowFirstPurchase:windowOps[0]?.__date||'',windowLastPurchase:windowOps.at(-1)?.__date||'',
+        windowReturnRecords:returnRows.length,windowExchangeRecords:exchangeCount,windowRefundRecords:refundCount,windowReturnUnits:returnUnits,windowReturnValue:returnValue,windowLastReturn:lastReturn?.createdAt||'',windowLastReturnNumber:lastReturn?.number||'',windowLastReturnType:lastReturn?.type||''
       });
     }
     if(f.customerMode==='frequency') rows.sort((a,b)=>b.windowPurchases-a.windowPurchases||b.windowValue-a.windowValue||a.name.localeCompare(b.name,'pt-BR'));
     else if(f.customerMode==='quantity') rows.sort((a,b)=>b.windowItems-a.windowItems||b.windowPurchases-a.windowPurchases||b.windowValue-a.windowValue||a.name.localeCompare(b.name,'pt-BR'));
     else if(f.customerMode==='value') rows.sort((a,b)=>b.windowValue-a.windowValue||b.windowPurchases-a.windowPurchases||a.name.localeCompare(b.name,'pt-BR'));
+    else if(f.customerMode==='returns') rows.sort((a,b)=>b.windowReturnRecords-a.windowReturnRecords||b.windowReturnUnits-a.windowReturnUnits||b.windowReturnValue-a.windowReturnValue||a.name.localeCompare(b.name,'pt-BR'));
     else if(f.customerInactiveSort==='oldest') rows.sort((a,b)=>(b.daysWithoutPurchase??-1)-(a.daysWithoutPurchase??-1)||b.totalSpent-a.totalSpent);
     else if(f.customerInactiveSort==='purchases') rows.sort((a,b)=>b.purchases-a.purchases||b.totalSpent-a.totalSpent||((a.daysWithoutPurchase??99999)-(b.daysWithoutPurchase??99999)));
     else if(f.customerInactiveSort==='value') rows.sort((a,b)=>b.totalSpent-a.totalSpent||b.purchases-a.purchases||((a.daysWithoutPurchase??99999)-(b.daysWithoutPurchase??99999)));
     else rows.sort((a,b)=>((a.daysWithoutPurchase??99999)-(b.daysWithoutPurchase??99999))||b.totalSpent-a.totalSpent);
-    return {filters:f,items:rows.slice(0,1000),totals:{customers:customers.filter(c=>c?.active!==false).length,inactive,reactivation,recent,neverBought,totalHistoricalValue:round2(totalHistoricalValue),shown:rows.length,wm10Customers,erpCustomers,combinedCustomers,windowPurchases,windowItems:round2(windowItems),windowValue:round2(windowValue),repeatCustomers,windowCustomers:rows.length},sellers:this.sellers(f),history:{wm10:true,erp:true},customerWindow:{days:windowDays,from:windowFromMs===null?'':isoDate(new Date(windowFromMs)),to:referenceDate}};
+    return {filters:f,items:rows.slice(0,1000),totals:{customers:customers.filter(c=>c?.active!==false).length,inactive,reactivation,recent,neverBought,totalHistoricalValue:round2(totalHistoricalValue),shown:rows.length,wm10Customers,erpCustomers,combinedCustomers,windowPurchases,windowItems:round2(windowItems),windowValue:round2(windowValue),repeatCustomers,windowCustomers:rows.length,returnCustomers,windowReturnRecords,windowExchangeRecords,windowRefundRecords,windowReturnUnits:round2(windowReturnUnits),windowReturnValue:round2(windowReturnValue)},sellers:this.sellers(f),history:{wm10:true,erp:true},customerWindow:{days:windowDays,from:windowFromMs===null?'':isoDate(new Date(windowFromMs)),to:referenceDate}};
   }
 
   financialHealth(filters={}){

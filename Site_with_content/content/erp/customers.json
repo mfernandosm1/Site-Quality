@@ -3750,6 +3750,134 @@
       "assignedTo": "",
       "createdAt": "2026-08-28T16:35:41.930Z",
       "updatedAt": "2026-08-28T16:35:41.930Z"
+    },
+    {
+      "id": "customer_mtebqk0j_yja5yj",
+      "type": "person",
+      "name": "555599552456",
+      "tradeName": "",
+      "email": "",
+      "document": {
+        "cpf": "",
+        "cnpj": ""
+      },
+      "phones": [
+        {
+          "number": "555599552456",
+          "type": "whatsapp",
+          "primary": true
+        }
+      ],
+      "addresses": [],
+      "channels": [
+        {
+          "type": "whatsapp",
+          "externalId": "178915503034422@lid",
+          "conversationId": "555599552456"
+        }
+      ],
+      "labels": [],
+      "commercialStage": "new",
+      "interestProduct": "",
+      "assignedTo": "",
+      "createdAt": "2026-08-29T11:55:39.091Z",
+      "updatedAt": "2026-08-29T11:55:39.091Z"
+    },
+    {
+      "id": "customer_mteie5tl_es2o2f",
+      "type": "person",
+      "name": "Gabriel Godoy",
+      "tradeName": "",
+      "email": "",
+      "document": {
+        "cpf": "",
+        "cnpj": ""
+      },
+      "phones": [
+        {
+          "number": "555591687231",
+          "type": "whatsapp",
+          "primary": true
+        }
+      ],
+      "addresses": [],
+      "channels": [
+        {
+          "type": "whatsapp",
+          "externalId": "147786150502402@lid",
+          "conversationId": "555591687231"
+        }
+      ],
+      "labels": [],
+      "commercialStage": "new",
+      "interestProduct": "",
+      "assignedTo": "",
+      "createdAt": "2026-08-29T15:01:58.137Z",
+      "updatedAt": "2026-08-29T15:01:58.137Z"
+    },
+    {
+      "id": "customer_mtep3nyv_l84fg1",
+      "type": "person",
+      "name": "Vitória dos Santos",
+      "tradeName": "",
+      "email": "",
+      "document": {
+        "cpf": "",
+        "cnpj": ""
+      },
+      "phones": [
+        {
+          "number": "555493563211",
+          "type": "whatsapp",
+          "primary": true
+        }
+      ],
+      "addresses": [],
+      "channels": [
+        {
+          "type": "whatsapp",
+          "externalId": "92110506209524@lid",
+          "conversationId": "555493563211"
+        }
+      ],
+      "labels": [],
+      "commercialStage": "new",
+      "interestProduct": "",
+      "assignedTo": "",
+      "createdAt": "2026-08-29T18:09:45.751Z",
+      "updatedAt": "2026-08-29T18:09:45.751Z"
+    },
+    {
+      "id": "customer_mteqkl7o_l0cl0k",
+      "type": "person",
+      "name": "Deise Melo",
+      "tradeName": "",
+      "email": "",
+      "document": {
+        "cpf": "",
+        "cnpj": ""
+      },
+      "phones": [
+        {
+          "number": "555591734755",
+          "type": "whatsapp",
+          "primary": true
+        }
+      ],
+      "addresses": [],
+      "channels": [
+        {
+          "type": "whatsapp",
+          "externalId": "184065772769517@lid",
+          "conversationId": "555591734755"
+        }
+      ],
+      "labels": [],
+      "commercialStage": "new",
+      "interestProduct": "",
+      "assignedTo": "",
+      "createdAt": "2026-08-29T18:50:54.948Z",
+      "updatedAt": "2026-08-29T18:50:54.948Z"
     }
   ]
 }

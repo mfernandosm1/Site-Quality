@@ -3663,6 +3663,29 @@
       "createdBy": "Matheus Fernando",
       "balanceBefore": null,
       "balanceAfter": null
+    },
+    {
+      "id": "CXM-1788028535896-PO88D",
+      "sessionId": "CXS-1787972404551-JLD03",
+      "cashboxId": "caixa-principal",
+      "type": "sale_receipt",
+      "methodId": "PM-DINHEIRO",
+      "signedAmount": 2,
+      "amount": 2,
+      "description": "Venda #101 — Deisemere de almeida melo",
+      "referenceType": "sale",
+      "referenceId": "OP-1788028535748-1TVAV",
+      "idempotencyKey": "",
+      "metadata": {
+        "customerId": "CLI-1786026365760-U5YI7",
+        "customerName": "Deisemere de almeida melo",
+        "coupon": null
+      },
+      "status": "posted",
+      "createdAt": "2026-08-29T18:35:35.896Z",
+      "createdBy": "Matheus Fernando",
+      "balanceBefore": null,
+      "balanceAfter": null
     }
   ]
 }

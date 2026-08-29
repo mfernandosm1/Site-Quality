@@ -1428,7 +1428,7 @@ html[data-panel-theme="light"] .quality-master-area,html[data-panel-theme="light
 
   <!-- Mensagens AJAX da própria tela. O flash do redirect é exibido uma única
        vez pelo layout global, evitando os dois avisos simultâneos. -->
-  <div id="flash-message" style="display:none; margin: 10px 0 18px 0; padding: 12px 14px; border-radius: 6px; background: #e8f7ee; border: 1px solid #b8e6c8; color: #087a31; font-weight: 600;"></div>
+  <div id="flash-message" style="display:none;position:fixed;top:92px;right:16px;z-index:1200;max-width:330px;margin:0;padding:8px 11px;border-radius:9px;background:#e8f7ee;border:1px solid #b8e6c8;color:#087a31;font-size:11px;font-weight:700;box-shadow:0 8px 24px rgba(0,0,0,.16);"></div>
 
   <%
     // Os indicadores vêm consolidados da rota e representam toda a base. O
@@ -4839,6 +4839,19 @@ document.addEventListener("DOMContentLoaded", () => {
     btn.addEventListener("click", () => openEditProductModal(btn.closest("tr")));
   });
 
+  const PRODUCT_LIST_REVALIDATE_KEY = 'quality.products.revalidate-on-return.v1';
+  window.addEventListener('pageshow', () => {
+    if (QUALITY_PRODUCT_EDITOR_MODE) return;
+    try {
+      if (sessionStorage.getItem(PRODUCT_LIST_REVALIDATE_KEY) !== '1') return;
+      sessionStorage.removeItem(PRODUCT_LIST_REVALIDATE_KEY);
+      // O navegador costuma restaurar a listagem pelo bfcache ao voltar do editor.
+      // Revalidamos uma única vez para que estoque, preço, status e demais campos
+      // reflitam exatamente o produto recém-salvo sem o usuário precisar pressionar F5.
+      window.location.reload();
+    } catch (_) {}
+  });
+
   const leaveProductEditor = () => {
     if (!QUALITY_PRODUCT_EDITOR_MODE) return closeEditProductModal();
     if (window.history.length > 1) window.history.back();
@@ -4854,6 +4867,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const saved = await saveProductRow(activeEditRow, { touchedFields });
     if (saved && !QUALITY_PRODUCT_EDITOR_MODE) closeEditProductModal();
     if (saved && QUALITY_PRODUCT_EDITOR_MODE) {
+      try { sessionStorage.setItem(PRODUCT_LIST_REVALIDATE_KEY, '1'); } catch (_) {}
       if (flashMessage) { flashMessage.textContent = '✅ Produto salvo com sucesso.'; flashMessage.style.display = 'block'; setTimeout(()=>flashMessage.style.display='none',2500); }
     }
   });
@@ -4898,7 +4912,10 @@ document.addEventListener("DOMContentLoaded", () => {
   // O layout global já exibiu o único aviso de redirect. Em Produtos ele é
   // transitório para não permanecer preso no topo da tela.
   const layoutNotice = document.querySelector('.notice');
-  if (layoutNotice) setTimeout(() => { layoutNotice.style.display = 'none'; }, 3500);
+  if (layoutNotice) {
+    Object.assign(layoutNotice.style,{position:'fixed',top:'92px',right:'16px',zIndex:'1200',maxWidth:'330px',margin:'0',padding:'8px 11px',fontSize:'11px',borderRadius:'9px',boxShadow:'0 8px 24px rgba(0,0,0,.16)'});
+    setTimeout(() => { layoutNotice.style.display = 'none'; }, 3500);
+  }
 
   if (flashMessage && flashMessage.textContent.trim()) {
     clearTimeout(window.__flashTimer);

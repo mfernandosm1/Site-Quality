@@ -686,20 +686,69 @@
     {
       "id": "CXS-1787799602731-ZU23A",
       "cashboxId": "caixa-principal",
-      "status": "open",
+      "status": "closed",
       "openingBalance": 15392.84,
       "openingBalanceSource": "previous_closing",
       "openedAt": "2026-08-27T03:00:02.731Z",
       "openedBy": "sistema",
       "openedDay": "2026-08-27",
+      "closedAt": "2026-08-29T02:59:54.543Z",
+      "closedBy": "sistema",
+      "closingBalance": 11803.84,
+      "openingMode": "automatic",
+      "automaticShiftEventKey": "2026-08-28T00:00",
+      "automaticShiftTime": "00:00",
+      "automaticCycleDay": "2026-08-28",
+      "automaticSourceSessionId": "CXS-1787626802746-YHWLT",
+      "expectedBalance": 11803.84,
+      "difference": 0,
+      "notes": "Fechamento automático para início do turno das 00:00.",
+      "closingMode": "automatic",
+      "closedDay": "2026-08-28",
+      "closingSummary": {
+        "openingBalance": 15392.84,
+        "supplies": 0,
+        "withdrawals": 3994,
+        "cashSales": 505,
+        "salesTotal": 505,
+        "byMethod": [
+          {
+            "methodId": "PAY-80aa64db-9fbf-404e-91cc-5a788c4b2880",
+            "entries": 205,
+            "exits": 0,
+            "total": 205,
+            "count": 2,
+            "reversals": 0
+          },
+          {
+            "methodId": "PM-DINHEIRO",
+            "entries": 300,
+            "exits": 100,
+            "total": 200,
+            "count": 3,
+            "reversals": 1
+          }
+        ],
+        "movementCount": 10
+      }
+    },
+    {
+      "id": "CXS-1787972404551-JLD03",
+      "cashboxId": "caixa-principal",
+      "status": "open",
+      "openingBalance": 11803.84,
+      "openingBalanceSource": "previous_closing",
+      "openedAt": "2026-08-29T03:00:04.551Z",
+      "openedBy": "sistema",
+      "openedDay": "2026-08-29",
       "closedAt": null,
       "closedBy": null,
       "closingBalance": null,
       "openingMode": "automatic",
-      "automaticShiftEventKey": "2026-08-27T00:00",
+      "automaticShiftEventKey": "2026-08-29T00:00",
       "automaticShiftTime": "00:00",
-      "automaticCycleDay": "2026-08-27",
-      "automaticSourceSessionId": "CXS-1787626802746-YHWLT"
+      "automaticCycleDay": "2026-08-29",
+      "automaticSourceSessionId": "CXS-1787799602731-ZU23A"
     }
   ]
 }

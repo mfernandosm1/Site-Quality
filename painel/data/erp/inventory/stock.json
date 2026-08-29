@@ -1511,7 +1511,7 @@
       "physicalQuantity": 0,
       "reservedQuantity": 0,
       "minimumQuantity": 0,
-      "updatedAt": "2026-08-16T00:18:28.078Z"
+      "updatedAt": "2026-08-29T18:30:38.622Z"
     },
     {
       "inventoryItemId": "PRD-1780622740979",
@@ -1647,7 +1647,7 @@
       "physicalQuantity": 0,
       "reservedQuantity": 0,
       "minimumQuantity": 0,
-      "updatedAt": "2026-08-16T00:18:28.078Z"
+      "updatedAt": "2026-08-29T18:30:27.014Z"
     },
     {
       "inventoryItemId": "PRD-1781454148301",
@@ -1695,7 +1695,7 @@
       "physicalQuantity": 0,
       "reservedQuantity": 0,
       "minimumQuantity": 0,
-      "updatedAt": "2026-08-16T00:18:28.078Z"
+      "updatedAt": "2026-08-29T20:44:33.142Z"
     },
     {
       "inventoryItemId": "PRD-1782677744401",
@@ -7780,10 +7780,10 @@
     {
       "inventoryItemId": "PRD-1787315788909",
       "locationId": "loja-principal",
-      "physicalQuantity": 9998,
+      "physicalQuantity": 9997,
       "reservedQuantity": 0,
       "minimumQuantity": 0,
-      "updatedAt": "2026-08-27T23:27:12.973Z"
+      "updatedAt": "2026-08-29T18:35:35.843Z"
     },
     {
       "inventoryItemId": "PRD-1787421862833",
@@ -8400,6 +8400,14 @@
       "reservedQuantity": 0,
       "minimumQuantity": 0,
       "updatedAt": "2026-08-28T23:56:51.942Z"
+    },
+    {
+      "inventoryItemId": "PRD-1788037430480",
+      "locationId": "loja-principal",
+      "physicalQuantity": 0,
+      "reservedQuantity": 0,
+      "minimumQuantity": 0,
+      "updatedAt": "2026-08-29T21:08:06.330Z"
     }
   ]
 }

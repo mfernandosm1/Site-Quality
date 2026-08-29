@@ -1445,7 +1445,23 @@ router.get('/clientes/:id/api/analise-credito', (req,res) => {
 });
 
 router.get('/clientes/:id/api/carteira', (req,res) => { try{return res.json({success:true,...getCustomerWalletService(req.app).summary(req.params.id)});}catch(error){return res.status(400).json({success:false,message:error.message});} });
-router.post('/clientes/:id/api/carteira', (req,res) => { try{const item=getCustomerWalletService(req.app).create(req.params.id,req.body||{},userName(req));return res.json({success:true,message:'Lançamento registrado na carteira do cliente.',item,summary:getCustomerWalletService(req.app).summary(req.params.id)});}catch(error){return res.status(400).json({success:false,message:error.message});} });
+router.post('/clientes/:id/api/carteira', (req,res) => {
+  try{
+    const wallet=getCustomerWalletService(req.app);
+    const item=wallet.create(req.params.id,req.body||{},userName(req));
+    const summary=wallet.summary(req.params.id);
+    const customer=getCustomerService(req.app).getCustomer(req.params.id);
+    const isDebit=item.direction==='debit';
+    req.app.locals.kernelService?.logs?.record?.({
+      ...(req.kernelContext||{}),module:'clientes',action:isDebit?'CREDITO_CLIENTE_UTILIZADO':'CREDITO_CLIENTE_ADICIONADO',category:'operational',result:'success',
+      entityType:'customer_wallet',entityId:item.id,documentId:String(customer?.document||''),route:req.originalUrl.split('?')[0],method:req.method,statusCode:200,
+      label:`${isDebit?'Débito':'Crédito'} de ${Number(item.value||0).toLocaleString('pt-BR',{style:'currency',currency:'BRL'})} na carteira de ${customer?.name||item.customerNameSnapshot||'cliente'}`,
+      details:{customerId:req.params.id,customerName:customer?.name||item.customerNameSnapshot||'',value:item.value,direction:item.direction,reason:item.reason||'',balanceAfter:summary.balance}
+    });
+    req.kernelSemanticLogged=true;
+    return res.json({success:true,message:'Lançamento registrado na carteira do cliente.',item,summary});
+  }catch(error){return res.status(400).json({success:false,message:error.message});}
+});
 
 
 router.get('/fornecedores', (req, res) => {
@@ -1990,9 +2006,18 @@ router.get('/pdv', (req, res) => {
       const selectedCustomerId = String(req.query.cliente || '');
       const exchangeReturnId = String(req.query.troca || '').trim();
       const selectedCustomer = selectedCustomerId ? customerService.getCustomer(selectedCustomerId) : null;
-      const reusableEmptyOperation = (forceNew || selectedCustomerId) ? null : findEmptyOpenPdvSale(commerce, selectedCashboxId);
+      const reusableEmptyOperation = forceNew ? null : findEmptyOpenPdvSale(commerce, selectedCashboxId);
       if (reusableEmptyOperation) {
-        return res.redirect(`/erp/pdv?caixa=${encodeURIComponent(selectedCashboxId)}&operacao=${encodeURIComponent(reusableEmptyOperation.id)}&rascunhoVazio=1`);
+        let operationToOpen = reusableEmptyOperation;
+        // Ao voltar de troca/devolução, reaproveita a venda vazia já aberta e apenas
+        // vincula o cliente. Evita criar vários rascunhos vazios no PDV.
+        if (selectedCustomer) {
+          operationToOpen = commerce.saveOperation({
+            id:reusableEmptyOperation.id, version:reusableEmptyOperation.version, type:'sale', cashboxId:selectedCashboxId,
+            customerId:selectedCustomer.id, customerNameSnapshot:selectedCustomer.name, items:[], payments:[]
+          }, userName(req));
+        }
+        return res.redirect(`/erp/pdv?caixa=${encodeURIComponent(selectedCashboxId)}&operacao=${encodeURIComponent(operationToOpen.id)}&rascunhoVazio=1${exchangeReturnId ? `&troca=${encodeURIComponent(exchangeReturnId)}` : ''}`);
       }
       const reservedOperation = commerce.saveOperation({
         type: 'sale',
@@ -2123,8 +2148,16 @@ router.get('/pdv/trocas-devolucoes', (req,res) => {
 router.post('/pdv/trocas-devolucoes', express.json(), (req,res) => {
   try {
     const record=getReturnService(req.app).create(req.body||{},userName(req));
-    req.app.locals.kernelService?.audits?.record?.({actor:userName(req),module:'pdv',action:record.type==='exchange'?'EXCHANGE_COMPLETED':'RETURN_COMPLETED',entityType:'return',entityId:record.id,label:`${record.type==='exchange'?'Troca':'Devolução'} ${record.number} registrada`,after:record,ip:req.ip||''});
-    return res.json({success:true,message:`${record.type==='exchange'?'Troca':'Devolução'} registrada com sucesso.`,record,wallet:getCustomerWalletService(req.app).summary(record.customerId)});
+    const kind=record.type==='exchange'?'Troca':'Devolução';
+    req.app.locals.kernelService?.audits?.record?.({actor:userName(req),module:'pdv',action:record.type==='exchange'?'EXCHANGE_COMPLETED':'RETURN_COMPLETED',entityType:'return',entityId:record.id,label:`${kind} ${record.number} registrada`,after:record,ip:req.ip||''});
+    req.app.locals.kernelService?.logs?.record?.({
+      ...(req.kernelContext||{}),module:'pdv',action:record.type==='exchange'?'TROCA_REGISTRADA':'DEVOLUCAO_REGISTRADA',category:'operational',result:'success',
+      entityType:'return',entityId:record.id,documentId:record.number,route:req.originalUrl.split('?')[0],method:req.method,statusCode:200,
+      label:`${kind} ${record.number} registrada · Venda #${record.originalOperationNumber} · ${record.customerName}`,
+      details:{type:record.type,originalOperationId:record.originalOperationId,originalOperationNumber:record.originalOperationNumber,customerId:record.customerId,customerName:record.customerName,totalCredit:record.totalCredit,reason:record.reason,items:(record.items||[]).map(item=>({name:item.name,quantity:item.quantity}))}
+    });
+    req.kernelSemanticLogged=true;
+    return res.json({success:true,message:`${kind} registrada com sucesso.`,record,wallet:getCustomerWalletService(req.app).summary(record.customerId)});
   } catch(error){return res.status(400).json({success:false,message:error.message||'Não foi possível registrar a troca/devolução.'});}
 });
 
@@ -2250,10 +2283,12 @@ router.get('/pdv/caixa', (req, res) => {
     : { receivedToday: 0, exitsToday: 0, reversalsToday: 0, netReceivedToday: 0 };
   const users = [...new Set(allMovements.map(m => m.createdBy).filter(Boolean))].sort();
   const filtersActive = Boolean(filters.startDate || filters.endDate || filters.type !== 'all' || filters.method !== 'all' || filters.user || filters.operationNumber || filters.customer);
+  const methodBalances = typeof commerce.getCashboxMethodBalances === 'function' ? commerce.getCashboxMethodBalances(selectedCashboxId) : (openSession && typeof commerce.getSessionMethodBalances === 'function' ? commerce.getSessionMethodBalances(openSession.id) : []);
+  const canVerifyMovements = String(req.user?.profileId || '') === 'administrator';
 
   return res.render('caixa', {
     cashboxes, selectedCashboxId, cashState, openSession, viewedSession, summary, liveSummary, movements,
-    paymentMethods, users, filters, filtersActive, closedSessions, selectedClosing, dailySummary
+    paymentMethods, users, filters, filtersActive, closedSessions, selectedClosing, dailySummary, methodBalances, canVerifyMovements
   });
 });
 
@@ -2282,6 +2317,17 @@ router.post('/pdv/caixa/movimentar', (req, res) => {
     const movement = commerce.addCashMovement({ cashboxId:String(req.body?.cashboxId || 'caixa-principal'), type:String(req.body?.type || 'supply'), amount:req.body?.amount, methodId:String(req.body?.methodId || 'dinheiro'), description:req.body?.description || '', createdBy:userName(req) });
     return res.json({ success:true, message:'Movimentação registrada.', movement });
   } catch (error) { return res.status(400).json({ success:false, message:error.message }); }
+});
+
+router.post('/pdv/caixa/movimentacoes/:movementId/verificar', (req, res) => {
+  try {
+    if (String(req.user?.profileId || '') !== 'administrator') return res.status(403).json({success:false,message:'Somente administradores podem marcar movimentações como conferidas.'});
+    const commerce=getCommerceService(req.app);
+    const verified=req.body?.verified !== false;
+    const movement=commerce.setCashMovementVerified(req.params.movementId,{verified,verifiedBy:userName(req)});
+    req.app.locals.kernelService?.audits?.record?.({actor:userName(req),module:'cash',action:verified?'CASH_MOVEMENT_VERIFIED':'CASH_MOVEMENT_UNVERIFIED',entityType:'cash_movement',entityId:movement.id,label:`Movimentação do caixa ${verified?'conferida':'desmarcada'} por ${userName(req)}`,details:{cashboxId:movement.cashboxId,type:movement.type,amount:movement.amount,methodId:movement.methodId}});
+    return res.json({success:true,message:verified?'Movimentação marcada como conferida.':'Conferência removida.',movement});
+  } catch(error){ return res.status(400).json({success:false,message:error.message||'Não foi possível atualizar a conferência.'}); }
 });
 
 router.post('/pdv/descontos/chave', express.json(), (req, res) => {
@@ -2510,6 +2556,14 @@ router.post('/pdv/operacoes/:id/finalizar', (req, res) => {
     }, userName(req));
     const finalized = commerce.finalizeOperation(operation.id, userName(req));
     if(finalized.coupon?.id) getCouponService(req.app).markUsed(finalized.coupon.id, finalized.id, userName(req));
+    const operationKind=finalized.type==='service_order'?'O.S.':'Venda';
+    req.app.locals.kernelService?.logs?.record?.({
+      ...(req.kernelContext||{}),module:'pdv',action:finalized.type==='service_order'?'OS_FINALIZADA':'VENDA_FINALIZADA',category:'operational',result:'success',
+      entityType:'operation',entityId:finalized.id,documentId:String(finalized.number||''),route:req.originalUrl.split('?')[0],method:req.method,statusCode:200,
+      label:`${operationKind} #${finalized.number} finalizada${finalized.customerNameSnapshot?` · ${finalized.customerNameSnapshot}`:''} · ${Number(finalized.total||0).toLocaleString('pt-BR',{style:'currency',currency:'BRL'})}`,
+      details:{type:finalized.type,customerId:finalized.customerId||'',customerName:finalized.customerNameSnapshot||'',total:finalized.total,items:(finalized.items||[]).map(item=>({name:item.name,quantity:item.quantity,subtotal:Number(item.quantity||0)*Number(item.unitPrice||0)})),paymentMethods:(finalized.payments||[]).map(payment=>payment.methodName||payment.methodId)}
+    });
+    req.kernelSemanticLogged=true;
     return res.json({ success:true, message:generatedReceivables.length ? 'Operação finalizada e Contas a Receber geradas com sucesso.' : 'Operação finalizada com sucesso.', operation:finalized, receivables:generatedReceivables });
   } catch (error) { return res.status(400).json({ success:false, message:error.message }); }
 });

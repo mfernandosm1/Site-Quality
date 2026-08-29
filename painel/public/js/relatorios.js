@@ -63,7 +63,7 @@
     else if(activeView==='health')labels.push('Leitura gerencial do Quality ERP · não substitui a contabilidade');
     else if(activeView==='turnover')labels.push('Movimentações de estoque');
     else if(activeView==='customers'){
-      const mode={inactive:'Reativação',frequency:'Mais retornam',quantity:'Mais itens comprados',value:'Maior valor'}[f.customerMode]||'Clientes';
+      const mode={inactive:'Reativação',frequency:'Mais retornam',returns:'Trocas / devoluções',quantity:'Mais itens comprados',value:'Maior valor'}[f.customerMode]||'Clientes';
       const windowLabel=f.customerWindow==='all'?'Todo o histórico':f.customerWindow==='30'?'30 dias':f.customerWindow==='90'?'3 meses':f.customerWindow==='180'?'6 meses':f.customerWindow==='270'?'9 meses':'12 meses';
       const rangeLabel={_:'', '30plus':'30+ dias','30_59':'30–59 dias','60_89':'60–89 dias','90_179':'90–179 dias','180_299':'180–299 dias','300plus':'300+ dias','never':'Nunca compraram'}[f.customerInactiveRange]||'30+ dias';
       labels.push(mode); if(f.customerMode==='inactive')labels.push(rangeLabel);else labels.push(windowLabel);
@@ -277,6 +277,15 @@
       ],rows,{wrapClass:'report-table-wrap-unbounded'});
       const note=data.totals?.shown>1000?'Mostrando os primeiros 1.000 clientes. Use a busca para refinar.':'A reativação usa todo o histórico WM10 + Quality ERP até hoje. 30–299 dias é tratado como faixa de reativação; 300+ dias fica separado como inativo antigo.';
       body.innerHTML=`<div class="report-customer-mode-note"><b>Faixa:</b> ${esc(rangeLabel)} · <b>Ordem:</b> ${esc(sortLabel)}. Para contatos mais quentes, comece por 30–59 ou 60–89 dias e use “Mais recentes primeiro”.</div>`+panel('Clientes inativos / Reativação','Priorize quem ainda tem chance de retorno sem misturar com clientes abandonados há muito tempo.',content,note);
+      return;
+    }
+    if(mode==='returns'){
+      summary.innerHTML=card('Clientes com ocorrência',number(t.returnCustomers),windowLabel,'warning')+card('Trocas',number(t.windowExchangeRecords),'Registros no período','info')+card('Devoluções',number(t.windowRefundRecords),'Registros no período','negative')+card('Total de ocorrências',number(t.windowReturnRecords),'Trocas + devoluções')+card('Itens retornados',number(t.windowReturnUnits,Number(t.windowReturnUnits)%1?1:0),'Quantidade física')+card('Crédito gerado',money(t.windowReturnValue),'Crédito das ocorrências','warning');
+      const content=table([
+        {label:'#',num:true,html:(_r,i)=>i+1},{label:'Cliente',html:r=>`<div class="report-product-cell"><a href="/erp/clientes/${encodeURIComponent(r.id)}/ficha">${esc(r.name)}</a><small>${esc([r.code,r.mobile,r.city&&r.state?`${r.city}/${r.state}`:r.city].filter(Boolean).join(' · '))}</small></div>`},
+        {label:'Trocas',num:true,html:r=>number(r.windowExchangeRecords)},{label:'Devoluções',num:true,html:r=>number(r.windowRefundRecords)},{label:'Ocorrências',num:true,html:r=>`<b>${number(r.windowReturnRecords)}</b>`},{label:'Itens retornados',num:true,html:r=>number(r.windowReturnUnits,Number(r.windowReturnUnits)%1?1:0)},{label:'Crédito gerado',num:true,html:r=>money(r.windowReturnValue)},{label:'Última ocorrência',html:r=>`<div class="report-product-cell"><b>${date(r.windowLastReturn)}</b><small>${r.windowLastReturnNumber?`${esc(r.windowLastReturnNumber)} · `:''}${r.windowLastReturnType==='exchange'?'Troca':'Devolução'}</small></div>`}
+      ],rows,{wrapClass:'report-table-wrap-unbounded'});
+      body.innerHTML=`<div class="report-customer-mode-note">Janela atual: <b>${esc(windowLabel)}</b>. Este ranking usa as trocas e devoluções registradas no Quality ERP e ajuda a identificar recorrência de pós-venda por cliente. O histórico antigo da WM10 não é inventado nem misturado quando não existe registro equivalente.</div>`+panel('Clientes que mais trocam / devolvem','Ordenado pela quantidade de ocorrências de pós-venda no período.',content,rows.length>=1000?'Mostrando os primeiros 1.000 clientes. Use a busca para refinar.':'');
       return;
     }
     const title=mode==='frequency'?'Clientes que mais retornam / compram':mode==='quantity'?'Clientes que mais compram em quantidade':'Clientes que mais compram em valor';

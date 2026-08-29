@@ -13,11 +13,21 @@
 <link rel="stylesheet" href="/public/css/painel.css">
 <link rel="stylesheet" href="/public/css/painel-theme.css">
 <script src="/public/js/search-utils.js"></script>
+<script>
+window.QUALITY_EXPORT_BRAND=<%- JSON.stringify({ name:(typeof panelCompany !== 'undefined' && panelCompany?.tradeName) || 'Quality ERP', logoUrl:(typeof panelCompany !== 'undefined' && panelCompany?.logoUrl) || '', logoVersion:(typeof panelCompany !== 'undefined' && panelCompany?.logoVersion) || 1 }).replace(/</g,'\u003c') %>;
+</script>
+<script src="/public/js/export-brand.js"></script>
 <style>
 .quality-user-chip{display:flex;align-items:center;gap:8px;border:1px solid var(--line);background:var(--card);border-radius:10px;padding:5px 7px 5px 9px;max-width:210px}.quality-user-chip__info{display:grid;min-width:0}.quality-user-chip__info b{font-size:11px;color:var(--text);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.quality-user-chip__info small{font-size:9px;color:var(--muted);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.quality-user-chip form{margin:0}.quality-user-settings{display:grid;place-items:center;width:32px;height:32px;border:1px solid var(--line);background:var(--card);color:var(--muted);font-size:21px;line-height:1;text-decoration:none;border-radius:8px;transition:.15s ease}.quality-user-settings:hover{color:var(--text);border-color:color-mix(in srgb,var(--text) 34%,var(--line));background:color-mix(in srgb,var(--text) 5%,var(--card));transform:translateY(-1px)}.quality-user-logout{display:grid;place-items:center;width:30px;height:30px;border:1px solid color-mix(in srgb,#ef4444 36%,var(--line));background:color-mix(in srgb,#ef4444 9%,var(--card));color:#ef4444;font-size:18px;line-height:1;cursor:pointer;padding:0;border-radius:8px}.quality-user-logout:hover{background:#ef4444;color:#fff;border-color:#ef4444}
 @media(max-width:900px){.quality-user-chip__info{display:none}.quality-user-chip{padding:4px}}
+.quality-universal-print-brand{display:none}
+@media print{.quality-universal-print-brand{display:flex!important;align-items:center;gap:12px;border-bottom:1px solid #bbb;padding:0 0 10px;margin:0 0 12px;color:#111;background:#fff}.quality-universal-print-brand img{width:110px;max-height:50px;object-fit:contain;object-position:left center}.quality-universal-print-brand div{display:grid}.quality-universal-print-brand strong{font-size:16px}.quality-universal-print-brand small{font-size:9px;color:#666}}
 </style>
 </head><body class='<%= typeof pageClass !== "undefined" ? pageClass : "" %>'>
+<div class="quality-universal-print-brand" aria-hidden="true">
+  <% if (typeof panelCompany !== 'undefined' && panelCompany?.logoUrl) { %><img src="<%= panelCompany.logoUrl %>?v=<%= panelCompany.logoVersion || 1 %>" alt=""><% } %>
+  <div><strong><%= (typeof panelCompany !== 'undefined' && panelCompany?.tradeName) || 'Quality ERP' %></strong><small>Quality ERP</small></div>
+</div>
 <header class="topbar quality-shell" data-quality-shell>
   <a class="brand" href="/" aria-label="Abrir painel inicial">
     <% if (typeof panelCompany !== 'undefined' && panelCompany && panelCompany.logoUrl) { %>
@@ -290,15 +300,21 @@
   var searchResults=document.querySelector('[data-global-search-results]');
   if(searchInput&&searchResults){
     var extraSearchItems=[
-      ['Caixa Operacional','/erp/pdv/caixa','Financeiro'],['Orçamentos','/orcamentos','Operação'],['Categorias ERP','/erp/categorias','ERP'],['Relatórios','/erp/relatorios','Gestão'],['Metas e Comissões','/erp/metas-comissoes','Gestão'],
+      ['Caixa Operacional','/erp/pdv/caixa','Financeiro'],['Orçamentos','/orcamentos','Operação'],['Categorias ERP','/erp/categorias','ERP'],['Relatórios','/erp/relatorios','ERP'],['Metas e Comissões','/erp/metas-comissoes','ERP'],
       ['Produtos do site','/produtos?lvStatus=true','Negócio'],['Banners','/banners','Negócio'],['SEO','/seo','Negócio'],['Configurações','/configuracoes','Sistema']
     ];
-    var navItems=Array.from(document.querySelectorAll('.quality-main-nav a[href],.quality-nav-dropdown a[href]')).map(function(a){
-      return {label:(a.querySelector('b')?.textContent||a.textContent||'').replace(/[🏠⭐⚡💼💰💬🌐🛒💵✅🧭⚙📦]/g,'').trim(),href:a.getAttribute('href'),group:a.closest('.quality-nav-menu')?.querySelector('summary')?.textContent.replace('▾','').trim()||'Menu'};
+    // A pesquisa usa somente os caminhos canônicos dos menus permanentes.
+    // Atalhos são personalizados pelo usuário e não devem aparecer como origem do resultado.
+    var navItems=Array.from(document.querySelectorAll('.quality-main-nav > a[href], .quality-nav-menu:not(.quality-shortcuts-menu) .quality-nav-dropdown a[href]')).map(function(a){
+      return {label:(a.querySelector('b')?.textContent||a.textContent||'').replace(/[🏠⭐⚡💼💰💬🌐🛒💵✅🧭⚙📦]/g,'').trim(),href:a.getAttribute('href'),group:a.closest('.quality-nav-menu')?.querySelector('summary')?.textContent.replace('▾','').trim()||'Início'};
     });
     extraSearchItems.forEach(function(item){navItems.push({label:item[0],href:item[1],group:item[2]});});
-    var seen=new Set();navItems=navItems.filter(function(item){var key=(item.label+'|'+item.href).toLowerCase();if(!item.label||!item.href||seen.has(key))return false;seen.add(key);return true;});
-    var normalize=function(v){return String(v||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase();};
+    var normalize=function(v){return String(v||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().trim();};
+    var seen=new Set();navItems=navItems.filter(function(item){
+      var key=normalize(item.label);
+      if(!key||!item.href||item.href==='#'||seen.has(key))return false;
+      seen.add(key);return true;
+    });
     var renderSearch=function(){
       var q=normalize(searchInput.value).trim();
       if(!q){searchResults.hidden=true;searchResults.innerHTML='';return;}

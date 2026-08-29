@@ -115,10 +115,10 @@
         <label>Cliente<input name="cliente" value="<%= filters.customer %>" placeholder="Nome do cliente"></label>
         <div class="cash-filter-actions"><button class="btn primary">Filtrar</button><a class="btn" href="/erp/pdv/caixa?caixa=<%= encodeURIComponent(selectedCashboxId) %><%= isClosingView ? '&fechamento='+encodeURIComponent(safeSelectedClosing.id) : '' %>">Limpar</a></div>
       </form>
-      <div class="cash-table-wrap"><table class="cash-table"><thead><tr><th>Data / hora</th><th>Tipo</th><th>Referência / descrição</th><th>Cliente</th><th>Usuário</th><th>Forma</th><th class="num">Valor</th><th class="num">Saldo</th></tr></thead><tbody>
-        <tr class="opening"><td><%= new Date(safeViewedSession.openedAt).toLocaleString('pt-BR') %></td><td><span class="cash-type-badge opening">Abertura</span></td><td>Saldo inicial do turno</td><td>—</td><td><%= safeViewedSession.openedBy %></td><td>Dinheiro</td><td class="num positive"><%= money(safeViewedSession.openingBalance) %></td><td class="num"><%= money(safeViewedSession.openingBalance) %></td></tr>
-        <% movements.forEach(m=>{ const out=Number(m.signedAmount)<0; const isSale=m.type==='sale_receipt'&&m.operationType==='sale'; const isOS=m.type==='sale_receipt'&&m.operationType==='service_order'; const label=isSale?'🛒 Venda':isOS?'🛠️ O.S.':m.type==='receivable_receipt'?'💰 Recebimento':({supply:'📥 Suprimento',withdrawal:'📤 Sangria',expense:'📤 Despesa',refund:'↩️ Estorno',payment_reversal:'↩️ Estorno'}[m.type]||m.type); const badge=isSale?'sale':isOS?'service-order':m.type; const reference=(isSale||isOS)?`${label} #${ref(m.operationNumber || '—')}`:ref(m.description||'—'); %><tr><td><%= new Date(m.createdAt).toLocaleString('pt-BR') %></td><td><span class="cash-type-badge <%= badge %>"><%= label %></span></td><td><strong><%= reference %></strong><% if ((isSale||isOS) && m.description) { %><small class="cash-row-detail"><%= ref(m.description) %></small><% } %></td><td><%= m.customerName||'—' %></td><td><%= m.createdBy||'—' %></td><td><%= methodName(m.methodId) %></td><td class="num <%= out?'negative':'positive' %>"><%= out?'− ':'+ ' %><%= money(m.amount) %></td><td class="num"><%= m.balanceAfter===null||m.balanceAfter===undefined?'—':money(m.balanceAfter) %></td></tr><% }) %>
-        <% if (!movements.length) { %><tr><td colspan="8" class="cash-empty-row">Nenhuma movimentação encontrada para os filtros selecionados.</td></tr><% } %>
+      <div class="cash-table-wrap"><table class="cash-table"><thead><tr><th class="cash-check-col">Conferido</th><th>Data / hora</th><th>Tipo</th><th>Referência / descrição</th><th>Cliente</th><th>Usuário</th><th>Forma</th><th class="num">Valor</th><th class="num">Saldo da forma</th></tr></thead><tbody>
+        <tr class="opening"><td class="cash-check-col"><span class="cash-verify-static" title="Abertura do turno">—</span></td><td><%= new Date(safeViewedSession.openedAt).toLocaleString('pt-BR') %></td><td><span class="cash-type-badge opening">Abertura</span></td><td>Saldo inicial do turno</td><td>—</td><td><%= safeViewedSession.openedBy %></td><td>Dinheiro</td><td class="num positive"><%= money(safeViewedSession.openingBalance) %></td><td class="num"><%= money(safeViewedSession.openingBalance) %></td></tr>
+        <% movements.forEach(m=>{ const out=Number(m.signedAmount)<0; const isSale=m.type==='sale_receipt'&&m.operationType==='sale'; const isOS=m.type==='sale_receipt'&&m.operationType==='service_order'; const label=isSale?'🛒 Venda':isOS?'🛠️ O.S.':m.type==='receivable_receipt'?'💰 Recebimento':({supply:'📥 Suprimento',withdrawal:'📤 Sangria',expense:'📤 Despesa',refund:'↩️ Estorno',payment_reversal:'↩️ Estorno'}[m.type]||m.type); const badge=isSale?'sale':isOS?'service-order':m.type; const reference=(isSale||isOS)?`${label} #${ref(m.operationNumber || '—')}`:ref(m.description||'—'); %><tr class="<%= m.verified?'cash-row-verified':'' %>" data-cash-movement-row="<%= m.id %>"><td class="cash-check-col"><% if(canVerifyMovements){ %><button type="button" class="cash-verify-btn <%= m.verified?'is-verified':'' %>" data-verify-movement="<%= m.id %>" data-verified="<%= m.verified?'1':'0' %>" title="<%= m.verified ? ('Conferido por '+(m.verifiedBy||'administrador')+(m.verifiedAt?' em '+new Date(m.verifiedAt).toLocaleString('pt-BR'):'')) : 'Marcar como conferido' %>"><%= m.verified?'✓':'○' %></button><% } else { %><span class="cash-verify-static <%= m.verified?'is-verified':'' %>" title="<%= m.verified ? ('Conferido por '+(m.verifiedBy||'administrador')) : 'Não conferido' %>"><%= m.verified?'✓':'—' %></span><% } %></td><td><%= new Date(m.createdAt).toLocaleString('pt-BR') %></td><td><span class="cash-type-badge <%= badge %>"><%= label %></span></td><td><strong><%= reference %></strong><% if ((isSale||isOS) && m.description) { %><small class="cash-row-detail"><%= ref(m.description) %></small><% } %></td><td><%= m.customerName||'—' %></td><td><%= m.createdBy||'—' %></td><td><%= methodName(m.methodId) %></td><td class="num <%= out?'negative':'positive' %>"><%= out?'− ':'+ ' %><%= money(m.amount) %></td><td class="num"><%= m.balanceAfter===null||m.balanceAfter===undefined?'—':money(m.balanceAfter) %></td></tr><% }) %>
+        <% if (!movements.length) { %><tr><td colspan="9" class="cash-empty-row">Nenhuma movimentação encontrada para os filtros selecionados.</td></tr><% } %>
       </tbody></table></div>
     </section>
   <% } %>
@@ -136,10 +136,127 @@
 
 <% if (openSession && !isClosingView) { %>
 <div class="pdv-modal" id="closeCashModal" hidden><div class="pdv-modal-card cash-movement-modal"><button class="pdv-close" data-close-cash>×</button><h2>Fechamento inteligente</h2><p class="pdv-modal-help">Conte apenas o dinheiro físico da gaveta. Pix, cartão e boleto aparecem no resumo, mas não compõem o valor contado.</p><div class="cash-close-breakdown"><div><span>Saldo inicial</span><b><%= money(liveSummary?.openingBalance) %></b></div><div><span>Suprimentos</span><b>+ <%= money(liveSummary?.supplies) %></b></div><div><span>Entradas em dinheiro</span><b>+ <%= money(liveSummary?.cashReceived ?? liveSummary?.cashSales) %></b><small>Vendas, O.S. e recebimentos em espécie</small></div><div><span>Sangrias / despesas</span><b>− <%= money(liveSummary?.withdrawals) %></b></div></div><div class="cash-close-summary"><span>Dinheiro esperado</span><strong><%= money(liveSummary?.expectedBalance) %></strong></div><label>Dinheiro contado<input id="countedBalance" type="number" min="0" step="0.01" value="<%= Number(liveSummary?.expectedBalance||0).toFixed(2) %>"></label><div class="cash-close-difference"><span>Diferença</span><strong id="closingDifference">R$ 0,00</strong></div><label>Observação <small id="notesRequirement">Opcional quando não houver diferença</small><textarea id="closingNotes" maxlength="240" placeholder="Explique qualquer sobra ou falta encontrada"></textarea></label><div class="cash-modal-actions"><button class="btn" data-close-cash>Cancelar</button><button class="btn danger" id="confirmCloseCash">Confirmar fechamento</button></div></div></div>
-<div class="pdv-modal" id="movementModal" hidden><div class="pdv-modal-card cash-movement-modal"><button class="pdv-close" data-close>×</button><h2 id="movementTitle">Movimentação</h2><p class="pdv-modal-help" id="movementHelp"></p><label>Valor<input id="movementAmount" type="number" min="0.01" step="0.01" placeholder="0,00"></label><label>Motivo<input id="movementDescription" maxlength="160" placeholder="Informe o motivo"></label><div class="cash-modal-actions"><button class="btn" data-close>Cancelar</button><button class="btn primary" id="saveMovement">Registrar</button></div></div></div>
+<div class="pdv-modal" id="movementModal" hidden><div class="pdv-modal-card cash-movement-modal"><button class="pdv-close" data-close>×</button><h2 id="movementTitle">Movimentação</h2><p class="pdv-modal-help" id="movementHelp"></p><label>Tipo financeiro<select id="movementMethod"><% activePaymentMethods.filter(method=>method.eventType!=='wallet' && method.kind!=='wallet' && method.id!=='PM-CARTEIRA').forEach(method=>{ const balance=(methodBalances||[]).find(item=>item.methodId===method.id)?.balance||0; const isCash=method.eventType==='cash'||method.kind==='cash'||String(method.name||'').toLowerCase().includes('dinheiro'); %><option value="<%= method.id %>" data-balance="<%= Number(balance) %>" <%= isCash?'selected':'' %>><%= method.name %> · disponível <%= money(balance) %></option><% }) %></select></label><div class="cash-method-balance-hint">Disponível nesta forma: <strong id="movementMethodBalance">R$ 0,00</strong><small>Dinheiro altera a gaveta física. Outras formas registram o ajuste na forma financeira escolhida.</small></div><label>Valor<input id="movementAmount" type="number" min="0.01" step="0.01" placeholder="0,00"></label><label>Motivo<input id="movementDescription" maxlength="160" placeholder="Informe o motivo"></label><div class="cash-modal-actions"><button class="btn" data-close>Cancelar</button><button class="btn primary" id="saveMovement">Registrar</button></div></div></div>
 <% } %>
 <script>
-(()=>{const $=s=>document.querySelector(s);const money=v=>Number(v||0).toLocaleString('pt-BR',{style:'currency',currency:'BRL'});async function api(url,body){const r=await fetch(url,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)});const j=await r.json();if(!r.ok)throw new Error(j.message||'Erro ao processar.');return j;}$('#cashboxSelector')?.addEventListener('change',e=>location.href='/erp/pdv/caixa?caixa='+encodeURIComponent(e.target.value));const modal=$('#movementModal');let type='supply';document.querySelectorAll('[data-movement]').forEach(b=>b.onclick=()=>{type=b.dataset.movement;$('#movementTitle').textContent=type==='supply'?'Registrar suprimento':'Registrar sangria';$('#movementHelp').textContent=type==='supply'?'Entrada manual de dinheiro na gaveta.':'Retirada manual de dinheiro da gaveta.';$('#movementAmount').value='';$('#movementDescription').value='';modal.hidden=false;setTimeout(()=>$('#movementAmount').focus(),50);});document.querySelectorAll('[data-close]').forEach(b=>b.onclick=()=>modal.hidden=true);const closeModal=$('#closeCashModal');const expectedBalance=Number('<%= Number(liveSummary?.expectedBalance||0) %>');const difference=()=>Math.round((Number($('#countedBalance')?.value||0)-expectedBalance)*100)/100;const updateDifference=()=>{const diff=difference(),el=$('#closingDifference'),hint=$('#notesRequirement');if(el){el.textContent=money(diff);el.classList.toggle('negative',diff<0);el.classList.toggle('positive',diff>0);el.classList.toggle('ok',diff===0);}if(hint)hint.textContent=Math.abs(diff)>=.01?'Obrigatória devido à diferença':'Opcional quando não houver diferença';};$('#openCloseCash')?.addEventListener('click',()=>{closeModal.hidden=false;updateDifference();setTimeout(()=>$('#countedBalance')?.focus(),50);});document.querySelectorAll('[data-close-cash]').forEach(b=>b.onclick=()=>closeModal.hidden=true);$('#countedBalance')?.addEventListener('input',updateDifference);$('#confirmCloseCash')?.addEventListener('click',async()=>{const countedBalance=Number($('#countedBalance').value),notes=$('#closingNotes').value.trim(),diff=difference();if(!Number.isFinite(countedBalance)||countedBalance<0)return alert('Informe um valor contado válido.');if(Math.abs(diff)>=.01&&!notes)return alert('Informe uma observação para justificar a diferença do fechamento.');if(!confirm(`Dinheiro esperado: ${money(expectedBalance)}\nDinheiro contado: ${money(countedBalance)}\nDiferença: ${money(diff)}\n\nConfirmar fechamento?`))return;try{$('#confirmCloseCash').disabled=true;const result=await api('/erp/pdv/caixa/fechar',{cashboxId:'<%= selectedCashboxId %>',countedBalance,notes});location.href=result.redirectUrl||'/erp/pdv/caixa?caixa=<%= encodeURIComponent(selectedCashboxId) %>';}catch(e){alert(e.message);$('#confirmCloseCash').disabled=false;}});$('#saveMovement')?.addEventListener('click',async()=>{const amount=Number($('#movementAmount').value||0),description=$('#movementDescription').value.trim();if(amount<=0)return alert('Informe um valor maior que zero.');if(!description)return alert('Informe o motivo da movimentação.');if(!confirm(`${type==='supply'?'Registrar suprimento':'Registrar sangria'} de ${money(amount)}?`))return;try{$('#saveMovement').disabled=true;await api('/erp/pdv/caixa/movimentar',{cashboxId:'<%= selectedCashboxId %>',type,amount,description});location.reload();}catch(e){alert(e.message);$('#saveMovement').disabled=false;}});})();
+(()=>{
+  const $=selector=>document.querySelector(selector);
+  const money=value=>Number(value||0).toLocaleString('pt-BR',{style:'currency',currency:'BRL'});
+  async function api(url,body){
+    const response=await fetch(url,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)});
+    const data=await response.json();
+    if(!response.ok) throw new Error(data.message||'Erro ao processar.');
+    return data;
+  }
+
+  $('#cashboxSelector')?.addEventListener('change',event=>{
+    location.href='/erp/pdv/caixa?caixa='+encodeURIComponent(event.target.value);
+  });
+
+  const modal=$('#movementModal');
+  const methodSelect=$('#movementMethod');
+  const methodBalance=$('#movementMethodBalance');
+  let type='supply';
+
+  const refreshMethodBalance=()=>{
+    const option=methodSelect?.selectedOptions?.[0];
+    if(methodBalance) methodBalance.textContent=money(Number(option?.dataset?.balance||0));
+  };
+  methodSelect?.addEventListener('change',refreshMethodBalance);
+  refreshMethodBalance();
+
+  document.querySelectorAll('[data-movement]').forEach(button=>{
+    button.onclick=()=>{
+      type=button.dataset.movement;
+      const isSupply=type==='supply';
+      $('#movementTitle').textContent=isSupply?'Registrar suprimento / entrada':'Registrar sangria / saída';
+      $('#movementHelp').textContent=isSupply?'Entrada manual na forma financeira escolhida.':'Retirada manual da forma financeira escolhida.';
+      $('#movementAmount').value='';
+      $('#movementDescription').value='';
+      if(methodSelect && [...methodSelect.options].some(option=>option.value==='dinheiro')) methodSelect.value='dinheiro';
+      refreshMethodBalance();
+      modal.hidden=false;
+      setTimeout(()=>$('#movementAmount').focus(),50);
+    };
+  });
+  document.querySelectorAll('[data-close]').forEach(button=>button.onclick=()=>{ if(modal) modal.hidden=true; });
+
+  const closeModal=$('#closeCashModal');
+  const expectedBalance=Number('<%= Number(liveSummary?.expectedBalance||0) %>');
+  const difference=()=>Math.round((Number($('#countedBalance')?.value||0)-expectedBalance)*100)/100;
+  const updateDifference=()=>{
+    const diff=difference(),element=$('#closingDifference'),hint=$('#notesRequirement');
+    if(element){
+      element.textContent=money(diff);
+      element.classList.toggle('negative',diff<0);
+      element.classList.toggle('positive',diff>0);
+      element.classList.toggle('ok',diff===0);
+    }
+    if(hint) hint.textContent=Math.abs(diff)>=.01?'Obrigatória devido à diferença':'Opcional quando não houver diferença';
+  };
+  $('#openCloseCash')?.addEventListener('click',()=>{
+    closeModal.hidden=false;
+    updateDifference();
+    setTimeout(()=>$('#countedBalance')?.focus(),50);
+  });
+  document.querySelectorAll('[data-close-cash]').forEach(button=>button.onclick=()=>closeModal.hidden=true);
+  $('#countedBalance')?.addEventListener('input',updateDifference);
+
+  $('#confirmCloseCash')?.addEventListener('click',async()=>{
+    const countedBalance=Number($('#countedBalance').value),notes=$('#closingNotes').value.trim(),diff=difference();
+    if(!Number.isFinite(countedBalance)||countedBalance<0) return alert('Informe um valor contado válido.');
+    if(Math.abs(diff)>=.01&&!notes) return alert('Informe uma observação para justificar a diferença do fechamento.');
+    if(!confirm(`Dinheiro esperado: ${money(expectedBalance)}\nDinheiro contado: ${money(countedBalance)}\nDiferença: ${money(diff)}\n\nConfirmar fechamento?`)) return;
+    try{
+      $('#confirmCloseCash').disabled=true;
+      const result=await api('/erp/pdv/caixa/fechar',{cashboxId:'<%= selectedCashboxId %>',countedBalance,notes});
+      location.href=result.redirectUrl||'/erp/pdv/caixa?caixa=<%= encodeURIComponent(selectedCashboxId) %>';
+    }catch(error){
+      alert(error.message);
+      $('#confirmCloseCash').disabled=false;
+    }
+  });
+
+  $('#saveMovement')?.addEventListener('click',async()=>{
+    const amount=Number($('#movementAmount').value||0);
+    const description=$('#movementDescription').value.trim();
+    const methodId=methodSelect?.value||'dinheiro';
+    const methodName=methodSelect?.selectedOptions?.[0]?.textContent?.split(' · ')[0]||'Dinheiro';
+    if(amount<=0) return alert('Informe um valor maior que zero.');
+    if(!description) return alert('Informe o motivo da movimentação.');
+    const action=type==='supply'?'Registrar entrada':'Registrar saída';
+    if(!confirm(`${action} de ${money(amount)} em ${methodName}?`)) return;
+    try{
+      $('#saveMovement').disabled=true;
+      await api('/erp/pdv/caixa/movimentar',{cashboxId:'<%= selectedCashboxId %>',type,amount,methodId,description});
+      location.reload();
+    }catch(error){
+      alert(error.message);
+      $('#saveMovement').disabled=false;
+    }
+  });
+
+  document.querySelectorAll('[data-verify-movement]').forEach(button=>{
+    button.addEventListener('click',async()=>{
+      const movementId=button.dataset.verifyMovement;
+      const next=button.dataset.verified!=='1';
+      try{
+        button.disabled=true;
+        const result=await api('/erp/pdv/caixa/movimentacoes/'+encodeURIComponent(movementId)+'/verificar',{verified:next});
+        const verified=result?.movement?.verified===true;
+        button.dataset.verified=verified?'1':'0';
+        button.textContent=verified?'✓':'○';
+        button.classList.toggle('is-verified',verified);
+        button.title=verified?'Movimentação conferida por '+(result.movement.verifiedBy||'administrador'):'Marcar como conferido';
+        document.querySelector('[data-cash-movement-row="'+CSS.escape(movementId)+'"]')?.classList.toggle('cash-row-verified',verified);
+      }catch(error){
+        alert(error.message);
+      }finally{
+        button.disabled=false;
+      }
+    });
+  });
+})();
 </script>
 
 <script>
