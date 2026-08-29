@@ -3878,6 +3878,38 @@
       "assignedTo": "",
       "createdAt": "2026-08-29T18:50:54.948Z",
       "updatedAt": "2026-08-29T18:50:54.948Z"
+    },
+    {
+      "id": "customer_mtezraut_hqm2w4",
+      "type": "person",
+      "name": "Elbio Formentini",
+      "tradeName": "",
+      "email": "",
+      "document": {
+        "cpf": "",
+        "cnpj": ""
+      },
+      "phones": [
+        {
+          "number": "555596754651",
+          "type": "whatsapp",
+          "primary": true
+        }
+      ],
+      "addresses": [],
+      "channels": [
+        {
+          "type": "whatsapp",
+          "externalId": "206789891100892@lid",
+          "conversationId": "555596754651"
+        }
+      ],
+      "labels": [],
+      "commercialStage": "new",
+      "interestProduct": "",
+      "assignedTo": "",
+      "createdAt": "2026-08-29T23:08:04.661Z",
+      "updatedAt": "2026-08-29T23:08:04.661Z"
     }
   ]
 }
