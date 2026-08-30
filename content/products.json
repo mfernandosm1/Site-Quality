@@ -12760,26 +12760,27 @@
       "slug": "iphone-14",
       "price": 0,
       "stock": 0,
-      "image": "",
+      "image": "images/produtos/1788051453166-iphone-14-usado-branco-2.jpeg",
       "gallery": [],
-      "category": "",
-      "subcategory": "",
+      "category": "smartphones",
+      "subcategory": "usados",
       "tags": [],
       "relatedManualIds": [],
       "crossSellIds": [],
       "showPrice": false,
       "featured": false,
-      "active": false,
+      "active": true,
       "commercial": {
-        "costPrice": 1,
+        "costPrice": 2150,
         "erpPrice": 0,
+        "salePrice": 0,
         "marketplacePrice": null,
         "promotionalPrice": null,
         "desiredMarginPercent": null,
         "expectedProfit": null,
         "defaultCommissionPercent": null,
-        "cashPrice": null,
-        "installmentPrice": null,
+        "cashPrice": 0,
+        "installmentPrice": 0,
         "minimumPrice": null,
         "minimumMarginPercent": null,
         "discountPolicy": "inherit",
@@ -12795,21 +12796,22 @@
         "barcode": "",
         "brand": "APPLE",
         "unit": "UN",
-        "category": "",
+        "category": "smartphones",
         "subcategory": "",
         "mainSupplierId": "",
         "preferredSupplierId": "",
-        "active": true
+        "active": true,
+        "categoryId": "ERP-CAT-1"
       },
       "virtualStore": {
         "name": "IPHONE 14",
         "price": 0,
-        "active": false,
-        "seoTitle": "",
-        "seoDescription": "",
+        "active": true,
+        "seoTitle": "iPhone 14 128GB seminovo / Usado com Garantia | Quality Celulares",
+        "seoDescription": "Compre seu iPhone 14 128GB usado/seminovo na Quality Celulares. Aparelho 100% testado, com garantia, iCloud liberado e entrega rápida. Confira nossas condições!",
         "channels": {
           "lojaVirtual": {
-            "enabled": false
+            "enabled": true
           },
           "mercadoLivre": {
             "enabled": false
@@ -12839,22 +12841,22 @@
           }
         }
       },
-      "detailsEnabled": false,
+      "detailsEnabled": true,
       "showVariationsOnCard": true,
       "descriptionShort": "",
-      "descriptionLong": "",
+      "descriptionLong": "O <b>iPhone 14 128GB</b>&nbsp;une alta performance, câmeras profissionais e excelente custo-benefício. Equipado com o rápido chip <b>A15 Bionic</b> e câmeras avançadas com <b>Modo Ação</b> e <b>Modo Cinema em 4K</b>, ele entrega fotos e vídeos incríveis em qualquer situação. Aparelho 100% testado, revisado e pronto para uso.<br><h3><b>Ficha Técnica</b></h3><ul><li><p><b>Modelo:</b> iPhone 14</p></li><li><p><b>Armazenamento:</b> 128 GB</p></li><li><p><b>Tela:</b> 6,1\" Super Retina XDR OLED</p></li><li><p><b>Processador:</b> Chip A15 Bionic</p></li><li><p><b>Câmeras Traseiras:</b> Dupla de 12 MP (Principal e Ultra-wide)</p></li><li><p><b>Câmera Frontal:</b> 12 MP TrueDepth com autofoco</p></li><li><p><b>Conectividade:</b> 5G, Wi-Fi 6, Bluetooth 5.3 e NFC (Apple Pay)</p></li></ul>",
       "variations": {
         "enabled": true,
         "colors": [
           {
-            "name": "Preto",
-            "hex": "#111111",
-            "image": ""
+            "name": "Branco",
+            "hex": "#ffffff",
+            "image": "images/Iphone 14 usado branco.jpeg"
           },
           {
-            "name": "Branco",
-            "hex": "#f8fafc",
-            "image": ""
+            "name": "Preto",
+            "hex": "#0a0a0a",
+            "image": "images/iphone 14 usado preto.jpeg"
           }
         ],
         "storage": [],
@@ -12862,33 +12864,37 @@
         "condition": [],
         "combinations": [
           {
-            "color": "Preto",
-            "storage": "",
-            "ram": "",
-            "condition": "",
-            "image": "0",
-            "stock": 0,
-            "inventoryItemId": "VAR-1786154290244-1",
-            "costPrice": 1
-          },
-          {
             "color": "Branco",
             "storage": "",
             "ram": "",
             "condition": "",
-            "image": "0",
+            "image": "",
             "stock": 0,
-            "inventoryItemId": "VAR-1786154290244-2",
-            "costPrice": 1
+            "erpPrice": null,
+            "costPrice": null,
+            "desiredMarginPercent": null,
+            "inventoryItemId": "VAR-1786154290244-1"
+          },
+          {
+            "color": "Preto",
+            "storage": "",
+            "ram": "",
+            "condition": "",
+            "image": "",
+            "stock": 0,
+            "erpPrice": null,
+            "costPrice": null,
+            "desiredMarginPercent": null,
+            "inventoryItemId": "VAR-1786154290244-2"
           }
         ],
         "labels": {},
-        "colorsText": "Preto|#111111\nBranco|#f8fafc",
+        "colorsText": "Branco|#ffffff|images/Iphone 14 usado branco.jpeg\nPreto|#0a0a0a|images/iphone 14 usado preto.jpeg",
         "storageText": "",
         "ramText": "",
         "conditionText": "",
         "labelsText": "{}",
-        "combinationsText": "Preto||||0|0||1\nBranco||||0|0||1"
+        "combinationsText": "Branco\nPreto"
       },
       "integrations": {
         "wm10": {
@@ -12978,7 +12984,8 @@
         "availableQuantity": 0,
         "reservedQuantity": 0,
         "derivedFromVariations": true
-      }
+      },
+      "updatedAt": "2026-08-30T00:57:33.187Z"
     },
     {
       "id": 1786275991518,

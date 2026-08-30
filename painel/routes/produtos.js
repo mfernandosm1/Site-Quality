@@ -1866,7 +1866,10 @@ router.post('/importar-wm10/familias/importar', async (req, res) => {
 router.get('/api/images', (req, res) => {
   try {
     const imagesDir = path.join(P(req.app).SITE_DIR, 'images');
-    return res.json({ success:true, items:getAllImagesCached(imagesDir) });
+    const forceRefresh = String(req.query?.refresh || '') === '1';
+    if (forceRefresh) imagesCache = { key:'', at:0, items:[] };
+    res.set('Cache-Control', 'no-store, no-cache, must-revalidate, proxy-revalidate');
+    return res.json({ success:true, items:getAllImagesCached(imagesDir, forceRefresh ? 0 : 30000) });
   } catch (error) {
     return res.status(500).json({ success:false, message:error.message || 'Não foi possível listar as imagens.', items:[] });
   }

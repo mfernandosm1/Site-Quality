@@ -534,10 +534,17 @@
     justify-content:space-between;
     gap:10px;
     flex-wrap:wrap;
-    margin-bottom:10px;
+    margin:0;
+    cursor:pointer;
+    list-style:none;
   }
+  .quality-ai-fill-title::-webkit-details-marker{display:none;}
   .quality-ai-fill-title strong{font-size:15px;color:#0f172a;}
   .quality-ai-fill-title small{color:#64748b;font-weight:700;}
+  .quality-ai-fill-toggle{font-size:11px;font-weight:900;color:#2563eb;}
+  .quality-ai-fill-box[open] .quality-ai-fill-title{margin-bottom:10px;}
+  .quality-ai-fill-box[open] .quality-ai-fill-toggle::before{content:"Recolher";}
+  .quality-ai-fill-box:not([open]) .quality-ai-fill-toggle::before{content:"Abrir";}
   .quality-ai-fill-row{display:grid;grid-template-columns:1fr;gap:8px;align-items:start;}
   .quality-ai-fill-row input{width:100% !important;min-height:42px !important;border-radius:12px !important;border:1px solid #bfdbfe !important;background:#fff !important;padding:10px 12px !important;}
   .quality-ai-fill-action{display:flex;align-items:center;gap:12px;flex-wrap:wrap;}
@@ -549,6 +556,21 @@
   .quality-ai-fill-status.error{display:block;color:#b91c1c;background:#fff7ed;border:1px solid #fed7aa;}
   .quality-ai-fill-status.loading{display:block;color:#2563eb;background:#eff6ff;border:1px solid #bfdbfe;}
   @media (max-width:800px){.quality-ai-fill-action .btn{width:100%;}.quality-ai-fill-help{width:100%;}}
+
+
+  /* Cadastro novo — recursos da Loja Virtual recolhidos por padrão */
+  .quality-create-collapsible{grid-column:1/-1;border:1px solid #e5e7eb;border-radius:12px;background:#fff;overflow:hidden;}
+  .quality-create-collapsible > summary{display:flex;align-items:center;justify-content:space-between;gap:10px;cursor:pointer;list-style:none;padding:11px 12px;font-size:12px;font-weight:900;}
+  .quality-create-collapsible > summary::-webkit-details-marker{display:none;}
+  .quality-create-collapsible > summary::after{content:"Abrir";font-size:10px;color:#64748b;font-weight:800;}
+  .quality-create-collapsible[open] > summary{border-bottom:1px solid #e5e7eb;}
+  .quality-create-collapsible[open] > summary::after{content:"Recolher";}
+  .quality-create-collapsible-body{padding:10px 12px 12px;}
+  .quality-create-collapsible .quality-compact-gallery,
+  .quality-create-collapsible .quality-tags-field{border:0!important;border-radius:0!important;background:transparent!important;padding:0!important;}
+  html[data-panel-theme]:not([data-panel-theme="light"]) .quality-create-collapsible{background:#101010;border-color:#2b2b2b;}
+  html[data-panel-theme]:not([data-panel-theme="light"]) .quality-create-collapsible[open] > summary{border-bottom-color:#2b2b2b;}
+  html[data-panel-theme]:not([data-panel-theme="light"]) .quality-create-collapsible > summary::after{color:#94a3b8;}
 
 
   .quality-tags-field{grid-column:1 / -1;border:1px solid #e5e7eb;background:#fff;border-radius:12px;padding:12px;}
@@ -1489,11 +1511,11 @@ html[data-panel-theme="light"] .quality-master-area,html[data-panel-theme="light
       <button type="button" class="product-create-tab" data-create-tab="site">🌐 Loja Virtual</button>
       <button type="button" class="product-create-tab" data-create-tab="variations" id="create-variations-tab" <%= requestedWorkspaceType === 'service' ? 'hidden' : '' %>>🎛️ Variações</button>
     </div>
-  <div class="quality-ai-fill-box" id="quality-ai-fill-box">
-    <div class="quality-ai-fill-title">
+  <details class="quality-ai-fill-box" id="quality-ai-fill-box">
+    <summary class="quality-ai-fill-title">
       <strong>✨ Cadastro inteligente com IA</strong>
-      <small>Digite o modelo, revise os campos e salve normalmente.</small>
-    </div>
+      <span class="quality-ai-fill-toggle" aria-hidden="true"></span>
+    </summary>
     <div class="quality-ai-fill-row">
       <input type="text" id="ai-product-query" placeholder="Ex.: Samsung Galaxy A36 5G 256GB">
       <div class="quality-ai-fill-action">
@@ -1502,7 +1524,7 @@ html[data-panel-theme="light"] .quality-master-area,html[data-panel-theme="light
       </div>
     </div>
     <div class="quality-ai-fill-status" id="ai-fill-product-status"></div>
-  </div>
+  </details>
 
   <form method="post" action="/produtos/add" class="row product-add-form" id="add-product-form">
     <div class="field-name">
@@ -1578,7 +1600,7 @@ html[data-panel-theme="light"] .quality-master-area,html[data-panel-theme="light
 
     <div class="field-image" data-create-lv-dependent>
       <label>Imagem</label>
-      <input type="text" name="image" id="add-product-image" list="imagens-list" placeholder="Selecione ou digite o nome..." onfocus="sincronizarImagensAuto()" autocomplete="off">
+      <input type="text" name="image" id="add-product-image" list="imagens-list" placeholder="Selecione ou digite o nome..." onfocus="sincronizarImagensAuto(true)" autocomplete="off">
       <datalist id="imagens-list">
         <% (imagens || []).forEach(img => { %>
           <option value="images/<%= img %>"><%= img %></option>
@@ -1637,15 +1659,20 @@ html[data-panel-theme="light"] .quality-master-area,html[data-panel-theme="light
       </select>
     </div>
 
-    <div class="quality-compact-gallery" data-create-lv-dependent style="grid-column: 1 / -1; border:1px solid #e5e7eb; border-radius:8px; padding:10px; background:#fafafa;">
-      <label>Galeria do produto <small style="font-weight:400;color:#6b7280;">(máx. 4 itens: fotos ou vídeo do YouTube)</small></label>
-      <textarea name="gallery" id="add-product-gallery" class="add-gallery-hidden-textarea"></textarea>
-      <div class="add-gallery-manager">
-        <span class="gallery-count-badge" id="add-gallery-count">📷 0 item(ns)</span>
-        <button class="btn" type="button" id="add-manage-gallery-btn">Gerenciar galeria</button>
+    <details class="quality-create-collapsible" data-create-section="site" data-create-lv-dependent>
+      <summary>🖼️ Galeria do produto</summary>
+      <div class="quality-create-collapsible-body">
+        <div class="quality-compact-gallery">
+          <label>Galeria do produto <small style="font-weight:400;color:#6b7280;">(máx. 4 itens: fotos ou vídeo do YouTube)</small></label>
+          <textarea name="gallery" id="add-product-gallery" class="add-gallery-hidden-textarea"></textarea>
+          <div class="add-gallery-manager">
+            <span class="gallery-count-badge" id="add-gallery-count">📷 0 item(ns)</span>
+            <button class="btn" type="button" id="add-manage-gallery-btn">Gerenciar galeria</button>
+          </div>
+          <small style="display:block; margin-top:6px; color:#6b7280;">Use o gerenciador para adicionar fotos ou vídeo. Depois clique em <strong>Adicionar</strong> para salvar o produto.</small>
+        </div>
       </div>
-      <small style="display:block; margin-top:6px; color:#6b7280;">Use o gerenciador para adicionar fotos ou vídeo. Depois clique em <strong>Adicionar</strong> para salvar o produto.</small>
-    </div>
+    </details>
 
     <div class="quality-variations-box" id="add-variations-box" <%= requestedWorkspaceType === 'service' ? 'hidden' : '' %>>
       <div class="quality-variations-title">
@@ -1680,7 +1707,7 @@ html[data-panel-theme="light"] .quality-master-area,html[data-panel-theme="light
           <div class="variation-form-row">
             <input type="text" class="var-color-name" placeholder="Nome: Preto">
             <input type="color" class="var-color-hex" value="#111111">
-            <input type="text" class="var-color-image quality-image-picker" list="imagens-list" placeholder="Imagem opcional" onfocus="sincronizarImagensAuto()" autocomplete="off">
+            <input type="text" class="var-color-image quality-image-picker" list="imagens-list" placeholder="Imagem opcional" onfocus="sincronizarImagensAuto(true)" autocomplete="off">
             <button class="btn add-var-color" type="button">Adicionar</button>
           </div>
           <div class="quality-var-actions">
@@ -1715,7 +1742,7 @@ html[data-panel-theme="light"] .quality-master-area,html[data-panel-theme="light
             <select class="var-combo-select" data-combo="storage"><option value="">GB</option></select>
             <select class="var-combo-select" data-combo="ram"><option value="">RAM</option></select>
             <select class="var-combo-select" data-combo="condition"><option value="">Estado</option></select>
-            <input type="text" class="var-combo-image quality-image-picker" list="imagens-list" placeholder="Imagem opcional" onfocus="sincronizarImagensAuto()" autocomplete="off">
+            <input type="text" class="var-combo-image quality-image-picker" list="imagens-list" placeholder="Imagem opcional" onfocus="sincronizarImagensAuto(true)" autocomplete="off">
             <input type="number" class="var-combo-stock stock-input-small" min="0" step="1" placeholder="Estoque">
             <input type="number" class="var-combo-price" min="0" step="0.01" placeholder="Preço ERP" title="Opcional: vazio herda o preço ERP do cadastro pai">
             <input type="number" class="var-combo-cost" min="0" step="0.01" placeholder="Preço compra" title="Opcional: vazio herda o preço de compra do cadastro pai">
@@ -1745,18 +1772,22 @@ html[data-panel-theme="light"] .quality-master-area,html[data-panel-theme="light
       <small class="commercial-note">O limite mais restritivo entre desconto, preço mínimo e margem mínima sempre prevalecerá.</small>
     </div>
 
-    <div class="quality-tags-field" data-create-lv-dependent>
-      <label>Etiquetas do produto</label>
-      <div class="quality-tags-options">
-        <% ['Lançamento','Oferta','Mais vendido','Últimas unidades','Preço Baixou','Frete grátis','Novo','Novidade','Seminovo','5G'].forEach(tag => { %>
-          <label class="quality-tag-option"><input type="checkbox" name="tags" value="<%= tag %>"> <%= tag %></label>
-        <% }) %>
+    <details class="quality-create-collapsible" data-create-section="site" data-create-lv-dependent>
+      <summary>🏷️ Etiquetas do produto</summary>
+      <div class="quality-create-collapsible-body">
+        <div class="quality-tags-field">
+          <div class="quality-tags-options">
+            <% ['Lançamento','Oferta','Mais vendido','Últimas unidades','Preço Baixou','Frete grátis','Novo','Novidade','Seminovo','5G'].forEach(tag => { %>
+              <label class="quality-tag-option"><input type="checkbox" name="tags" value="<%= tag %>"> <%= tag %></label>
+            <% }) %>
+          </div>
+          <div class="quality-tags-custom">
+            <input type="text" name="tags" placeholder="Etiquetas extras separadas por vírgula. Ex.: Pronta entrega, Premium">
+          </div>
+          <small class="variation-help">As etiquetas aparecem no card e na página do produto. Use poucas para não poluir.</small>
+        </div>
       </div>
-      <div class="quality-tags-custom">
-        <input type="text" name="tags" placeholder="Etiquetas extras separadas por vírgula. Ex.: Pronta entrega, Premium">
-      </div>
-      <small class="variation-help">As etiquetas aparecem no card e na página do produto. Use poucas para não poluir.</small>
-    </div>
+    </details>
 
     <div class="add-description-editor-wrap" data-create-section="site" data-create-lv-dependent style="grid-column:1 / -1;">
       <div style="margin-bottom:10px;">
@@ -1804,7 +1835,8 @@ html[data-panel-theme="light"] .quality-master-area,html[data-panel-theme="light
       if(el.matches?.('[data-create-section="stock"]'))return 'stock';
       if(el.matches?.('[data-create-section="site"]'))return 'site';
       if(el.classList?.contains('quality-variations-box'))return 'variations';
-      if(el.classList?.contains('quality-tags-field')||el.classList?.contains('add-description-editor-wrap')||el.querySelector?.('[name="descriptionShort"]'))return 'general';
+      if(el.classList?.contains('quality-tags-field')||el.classList?.contains('quality-compact-gallery')||el.querySelector?.('[name="gallery"]')||el.querySelector?.('[name="tags"]'))return 'site';
+      if(el.classList?.contains('add-description-editor-wrap')||el.querySelector?.('[name="descriptionShort"]'))return 'site';
       const name=el.querySelector?.('input,select,textarea')?.name||'';
       if(name==='stock')return 'stock';
       if(['showPrice','featured','active','lvActive','detailsEnabled','showVariationsOnCard','siteCategory','siteSubcategory','slug','lvName','lvPrice'].includes(name))return 'site';
@@ -2272,7 +2304,7 @@ html[data-panel-theme="light"] .quality-master-area,html[data-panel-theme="light
                 <label>Estado<input type="text" class="variation-label-input" data-label-type="condition" placeholder="Estado"></label>
               </div>
             </div>
-            <div class="quality-var-card" data-var-card="colors"><strong>🎨 Cores</strong><div class="variation-form-row"><input type="text" class="var-color-name" placeholder="Nome: Preto"><input type="color" class="var-color-hex" value="#111111"><input type="text" class="var-color-image quality-image-picker" list="imagens-list" placeholder="Imagem opcional" onfocus="sincronizarImagensAuto()" autocomplete="off"><button class="btn add-var-color" type="button">Adicionar</button></div><div class="quality-var-actions"><button class="btn var-preset" type="button" data-type="colors" data-values="Preto|#111111
+            <div class="quality-var-card" data-var-card="colors"><strong>🎨 Cores</strong><div class="variation-form-row"><input type="text" class="var-color-name" placeholder="Nome: Preto"><input type="color" class="var-color-hex" value="#111111"><input type="text" class="var-color-image quality-image-picker" list="imagens-list" placeholder="Imagem opcional" onfocus="sincronizarImagensAuto(true)" autocomplete="off"><button class="btn add-var-color" type="button">Adicionar</button></div><div class="quality-var-actions"><button class="btn var-preset" type="button" data-type="colors" data-values="Preto|#111111
 Branco|#f8fafc
 Azul|#2563eb">Preto / Branco / Azul</button><button class="btn var-preset" type="button" data-type="colors" data-values="Preto|#111111
 Verde|#22c55e
@@ -2298,7 +2330,7 @@ Com marcas de uso">Usados padrão</button></div><div class="quality-var-list" da
             <select class="var-combo-select" data-combo="storage"><option value="">GB</option></select>
             <select class="var-combo-select" data-combo="ram"><option value="">RAM</option></select>
             <select class="var-combo-select" data-combo="condition"><option value="">Estado</option></select>
-            <input type="text" class="var-combo-image quality-image-picker" list="imagens-list" placeholder="Imagem opcional" onfocus="sincronizarImagensAuto()" autocomplete="off">
+            <input type="text" class="var-combo-image quality-image-picker" list="imagens-list" placeholder="Imagem opcional" onfocus="sincronizarImagensAuto(true)" autocomplete="off">
             <input type="number" class="var-combo-stock stock-input-small" min="0" step="1" placeholder="Estoque">
             <input type="number" class="var-combo-price" min="0" step="0.01" placeholder="Preço ERP" title="Opcional: vazio herda o preço ERP do cadastro pai">
             <input type="number" class="var-combo-cost" min="0" step="0.01" placeholder="Preço compra" title="Opcional: vazio herda o preço de compra do cadastro pai">
@@ -2405,7 +2437,7 @@ Com marcas de uso">Usados padrão</button></div><div class="quality-var-list" da
           <div class="quality-edit-field"><label>Ativo no ERP</label><select id="edit-erpActive"><option value="true">Sim</option><option value="false">Não</option></select></div>
           <div class="quality-edit-field">
             <label>Imagem principal</label>
-            <input type="text" id="edit-image" list="imagens-list" class="quality-image-picker" placeholder="images/foto.jpg" onfocus="sincronizarImagensAuto()" autocomplete="off">
+            <input type="text" id="edit-image" list="imagens-list" class="quality-image-picker" placeholder="images/foto.jpg" onfocus="sincronizarImagensAuto(true)" autocomplete="off">
           </div>
         </div>
       </div>
@@ -4177,7 +4209,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     box.querySelectorAll(".quality-image-picker").forEach(el => {
-      el.addEventListener("focus", () => sincronizarImagensAuto());
+      el.addEventListener("focus", () => sincronizarImagensAuto(true));
     });
 
     syncLabelInputs(box);
@@ -4952,12 +4984,14 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 let __qualityImagesPromise = null;
-async function sincronizarImagensAuto() {
+async function sincronizarImagensAuto(force = false) {
   const dataList = document.getElementById("imagens-list");
-  if (dataList?.dataset.loaded === 'true') return [];
-  if (__qualityImagesPromise) return __qualityImagesPromise;
+  if (!force && dataList?.dataset.loaded === 'true') return [];
+  if (__qualityImagesPromise && !force) return __qualityImagesPromise;
 
-  __qualityImagesPromise = fetch('/produtos/api/images', { headers:{ 'Accept':'application/json' } })
+  if (force) __qualityImagesPromise = null;
+  const url = force ? `/produtos/api/images?refresh=1&_=${Date.now()}` : '/produtos/api/images';
+  __qualityImagesPromise = fetch(url, { cache:'no-store', headers:{ 'Accept':'application/json' } })
     .then(res => res.json())
     .then(json => {
       if (!json?.success) throw new Error(json?.message || 'Erro ao listar imagens.');
