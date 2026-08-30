@@ -8464,6 +8464,14 @@
       "reservedQuantity": 0,
       "minimumQuantity": 0,
       "updatedAt": "2026-08-30T00:00:25.333Z"
+    },
+    {
+      "inventoryItemId": "PRD-1788051985361",
+      "locationId": "loja-principal",
+      "physicalQuantity": 0,
+      "reservedQuantity": 0,
+      "minimumQuantity": 0,
+      "updatedAt": "2026-08-30T01:08:09.691Z"
     }
   ]
 }

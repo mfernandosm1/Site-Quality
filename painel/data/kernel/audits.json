@@ -20409,7 +20409,1055 @@
       },
       "ip": "127.0.0.1",
       "requestId": "7bd17ac2-8f43-4af2-80eb-db253039bb40"
+    },
+    {
+      "id": "AUD-00000071",
+      "at": "2026-08-30T01:08:04.451Z",
+      "module": "produtos",
+      "action": "PRODUCT_UPDATED",
+      "actor": "Matheus Fernando",
+      "entityType": "product",
+      "entityId": "1788051985361",
+      "documentId": "",
+      "reason": "Cadastro de produto atualizado",
+      "before": {
+        "name": "Notebook Usado Acer Aspire 3 A315-53 Intel Core i3-7020U 4GB Ram HD 1TB 15.6\" W10",
+        "sku": "",
+        "code": "PRD-865",
+        "barcode": "",
+        "brand": "",
+        "slug": "notebook-usado-acer-aspire-3-a315-53-intel-core-i3-7020u-4gb-ram-hd-1tb-15-6-w10",
+        "price": null,
+        "commercial": {
+          "costPrice": null,
+          "erpPrice": null,
+          "salePrice": null,
+          "marketplacePrice": null,
+          "promotionalPrice": null,
+          "desiredMarginPercent": null,
+          "expectedProfit": null,
+          "defaultCommissionPercent": null,
+          "cashPrice": null,
+          "installmentPrice": null,
+          "minimumPrice": null,
+          "minimumMarginPercent": null,
+          "discountPolicy": "inherit",
+          "maximumDiscountPercent": null,
+          "maximumDiscountAmount": null,
+          "requiresAuthorization": false
+        },
+        "stock": 0,
+        "inventory": {
+          "itemId": "PRD-1788051985361",
+          "stockControlled": true,
+          "allowNegative": false,
+          "minimumQuantity": 0,
+          "channelAvailability": {
+            "site": {
+              "mode": "shared",
+              "enabled": true,
+              "limit": null,
+              "physicalSafety": 0
+            }
+          }
+        },
+        "image": "images/produtos/1788052053497-notebook-acer-a315-53.png",
+        "gallery": [],
+        "category": "eletronicos",
+        "subcategory": "",
+        "tags": [],
+        "relatedManualIds": [],
+        "crossSellIds": [],
+        "showPrice": false,
+        "featured": false,
+        "active": true,
+        "erp": {
+          "sku": "",
+          "internalCode": "PRD-865",
+          "supplierCode": "",
+          "searchAlias": "",
+          "barcode": "",
+          "brand": "",
+          "unit": "UN",
+          "category": "eletronicos",
+          "subcategory": "",
+          "mainSupplierId": "",
+          "preferredSupplierId": "",
+          "active": false,
+          "categoryId": "ERP-CAT-3"
+        },
+        "virtualStore": {
+          "name": "Notebook Usado Acer Aspire 3 A315-53 Intel Core i3-7020U 4GB Ram HD 1TB 15.6\" W10",
+          "price": null,
+          "active": true,
+          "seoTitle": "",
+          "seoDescription": "",
+          "channels": {
+            "lojaVirtual": {
+              "enabled": true
+            },
+            "mercadoLivre": {
+              "enabled": false
+            },
+            "shopee": {
+              "enabled": false
+            },
+            "amazon": {
+              "enabled": false
+            },
+            "magalu": {
+              "enabled": false
+            }
+          }
+        },
+        "detailsEnabled": true,
+        "showVariationsOnCard": false,
+        "descriptionShort": "",
+        "descriptionLong": "<p>💻 <strong>Notebook Acer Aspire 3 A315-53 Usado<br></strong></p>\r\n<p>✅ Processador Intel Core i3-7020U<br>\r\n✅ 4GB de memória RAM<br>\r\n✅ HD de 1TB para arquivos, fotos e documentos<br>\r\n✅ Tela de 15,6\"<br>\r\n✅ Windows 10<br>\r\n✅ Ideal para estudos, internet, trabalhos e tarefas do dia a dia<br>\r\n✅ Notebook totalmente testado e revisado<br>\r\n✅ <strong>90 dias de garantia</strong></p>\r\n<p>Uma ótima opção para quem procura economizar e comprar um bom&nbsp;<strong>notebook</strong>, com boa capacidade de armazenamento e configuração indicada para atividades do dia a dia, estudos e trabalho.</p>",
+        "variations": {
+          "enabled": false,
+          "colors": [],
+          "storage": [],
+          "ram": [],
+          "condition": [],
+          "combinations": [],
+          "labels": {},
+          "colorsText": "",
+          "storageText": "",
+          "ramText": "",
+          "conditionText": "",
+          "labelsText": "{}",
+          "combinationsText": ""
+        },
+        "id": 1788051985361,
+        "inventoryBalance": {
+          "inventoryItemId": "PRD-1788051985361",
+          "locationId": "loja-principal",
+          "physicalQuantity": 0,
+          "reservedQuantity": 0,
+          "availableQuantity": 0,
+          "minimumQuantity": 0,
+          "updatedAt": "2026-08-30T01:06:25.370Z"
+        },
+        "updatedAt": "2026-08-30T01:07:33.520Z"
+      },
+      "after": {
+        "name": "Notebook Usado Acer Aspire 3 A315-53 Intel Core i3-7020U 4GB Ram HD 1TB 15.6\" W10",
+        "sku": "",
+        "code": "PRD-865",
+        "barcode": "",
+        "brand": "",
+        "slug": "notebook-usado-acer-aspire-3-a315-53-intel-core-i3-7020u-4gb-ram-hd-1tb-15-6-w10",
+        "price": null,
+        "commercial": {
+          "costPrice": null,
+          "erpPrice": null,
+          "salePrice": null,
+          "marketplacePrice": null,
+          "promotionalPrice": null,
+          "desiredMarginPercent": null,
+          "expectedProfit": null,
+          "defaultCommissionPercent": null,
+          "cashPrice": null,
+          "installmentPrice": null,
+          "minimumPrice": null,
+          "minimumMarginPercent": null,
+          "discountPolicy": "inherit",
+          "maximumDiscountPercent": null,
+          "maximumDiscountAmount": null,
+          "requiresAuthorization": false
+        },
+        "stock": 0,
+        "inventory": {
+          "itemId": "PRD-1788051985361",
+          "stockControlled": true,
+          "allowNegative": false,
+          "minimumQuantity": 0,
+          "channelAvailability": {
+            "site": {
+              "mode": "shared",
+              "enabled": true,
+              "limit": null,
+              "physicalSafety": 0
+            }
+          }
+        },
+        "image": "images/produtos/1788052053497-notebook-acer-a315-53.png",
+        "gallery": [
+          "images/produtos/1788052084316-notebook-acer-a315-53-1.png",
+          "images/produtos/1788052084318-notebook-acer-a315-53-2.png",
+          "images/produtos/1788052084322-notebook-acer-a315-53-3.png"
+        ],
+        "category": "eletronicos",
+        "subcategory": "",
+        "tags": [],
+        "relatedManualIds": [],
+        "crossSellIds": [],
+        "showPrice": false,
+        "featured": false,
+        "active": true,
+        "erp": {
+          "sku": "",
+          "internalCode": "PRD-865",
+          "supplierCode": "",
+          "searchAlias": "",
+          "barcode": "",
+          "brand": "",
+          "unit": "UN",
+          "category": "eletronicos",
+          "subcategory": "",
+          "mainSupplierId": "",
+          "preferredSupplierId": "",
+          "active": false,
+          "categoryId": "ERP-CAT-3"
+        },
+        "virtualStore": {
+          "name": "Notebook Usado Acer Aspire 3 A315-53 Intel Core i3-7020U 4GB Ram HD 1TB 15.6\" W10",
+          "price": null,
+          "active": true,
+          "seoTitle": "",
+          "seoDescription": "",
+          "channels": {
+            "lojaVirtual": {
+              "enabled": true
+            },
+            "mercadoLivre": {
+              "enabled": false
+            },
+            "shopee": {
+              "enabled": false
+            },
+            "amazon": {
+              "enabled": false
+            },
+            "magalu": {
+              "enabled": false
+            }
+          }
+        },
+        "detailsEnabled": true,
+        "showVariationsOnCard": false,
+        "descriptionShort": "",
+        "descriptionLong": "<p>💻 <strong>Notebook Acer Aspire 3 A315-53 Usado<br></strong></p>\n<p>✅ Processador Intel Core i3-7020U<br>\n✅ 4GB de memória RAM<br>\n✅ HD de 1TB para arquivos, fotos e documentos<br>\n✅ Tela de 15,6\"<br>\n✅ Windows 10<br>\n✅ Ideal para estudos, internet, trabalhos e tarefas do dia a dia<br>\n✅ Notebook totalmente testado e revisado<br>\n✅ <strong>90 dias de garantia</strong></p>\n<p>Uma ótima opção para quem procura economizar e comprar um bom&nbsp;<strong>notebook</strong>, com boa capacidade de armazenamento e configuração indicada para atividades do dia a dia, estudos e trabalho.</p>",
+        "variations": {
+          "enabled": false,
+          "colors": [],
+          "storage": [],
+          "ram": [],
+          "condition": [],
+          "combinations": [],
+          "labels": {},
+          "colorsText": "",
+          "storageText": "",
+          "ramText": "",
+          "conditionText": "",
+          "labelsText": "{}",
+          "combinationsText": ""
+        },
+        "id": 1788051985361,
+        "inventoryBalance": {
+          "inventoryItemId": "PRD-1788051985361",
+          "locationId": "loja-principal",
+          "physicalQuantity": 0,
+          "reservedQuantity": 0,
+          "availableQuantity": 0,
+          "minimumQuantity": 0,
+          "updatedAt": "2026-08-30T01:06:25.370Z"
+        },
+        "updatedAt": "2026-08-30T01:07:33.520Z"
+      },
+      "ip": "127.0.0.1",
+      "requestId": "1dfd3400-9383-4d47-b388-13b237842423"
+    },
+    {
+      "id": "AUD-00000072",
+      "at": "2026-08-30T01:08:07.005Z",
+      "module": "produtos",
+      "action": "PRODUCT_UPDATED",
+      "actor": "Matheus Fernando",
+      "entityType": "product",
+      "entityId": "1788051985361",
+      "documentId": "",
+      "reason": "Cadastro de produto atualizado",
+      "before": {
+        "name": "Notebook Usado Acer Aspire 3 A315-53 Intel Core i3-7020U 4GB Ram HD 1TB 15.6\" W10",
+        "sku": "",
+        "code": "PRD-865",
+        "barcode": "",
+        "brand": "",
+        "slug": "notebook-usado-acer-aspire-3-a315-53-intel-core-i3-7020u-4gb-ram-hd-1tb-15-6-w10",
+        "price": null,
+        "commercial": {
+          "costPrice": null,
+          "erpPrice": null,
+          "salePrice": null,
+          "marketplacePrice": null,
+          "promotionalPrice": null,
+          "desiredMarginPercent": null,
+          "expectedProfit": null,
+          "defaultCommissionPercent": null,
+          "cashPrice": null,
+          "installmentPrice": null,
+          "minimumPrice": null,
+          "minimumMarginPercent": null,
+          "discountPolicy": "inherit",
+          "maximumDiscountPercent": null,
+          "maximumDiscountAmount": null,
+          "requiresAuthorization": false
+        },
+        "stock": 0,
+        "inventory": {
+          "itemId": "PRD-1788051985361",
+          "stockControlled": true,
+          "allowNegative": false,
+          "minimumQuantity": 0,
+          "channelAvailability": {
+            "site": {
+              "mode": "shared",
+              "enabled": true,
+              "limit": null,
+              "physicalSafety": 0
+            }
+          }
+        },
+        "image": "images/produtos/1788052053497-notebook-acer-a315-53.png",
+        "gallery": [
+          "images/produtos/1788052084316-notebook-acer-a315-53-1.png",
+          "images/produtos/1788052084318-notebook-acer-a315-53-2.png",
+          "images/produtos/1788052084322-notebook-acer-a315-53-3.png"
+        ],
+        "category": "eletronicos",
+        "subcategory": "",
+        "tags": [],
+        "relatedManualIds": [],
+        "crossSellIds": [],
+        "showPrice": false,
+        "featured": false,
+        "active": true,
+        "erp": {
+          "sku": "",
+          "internalCode": "PRD-865",
+          "supplierCode": "",
+          "searchAlias": "",
+          "barcode": "",
+          "brand": "",
+          "unit": "UN",
+          "category": "eletronicos",
+          "subcategory": "",
+          "mainSupplierId": "",
+          "preferredSupplierId": "",
+          "active": false,
+          "categoryId": "ERP-CAT-3"
+        },
+        "virtualStore": {
+          "name": "Notebook Usado Acer Aspire 3 A315-53 Intel Core i3-7020U 4GB Ram HD 1TB 15.6\" W10",
+          "price": null,
+          "active": true,
+          "seoTitle": "",
+          "seoDescription": "",
+          "channels": {
+            "lojaVirtual": {
+              "enabled": true
+            },
+            "mercadoLivre": {
+              "enabled": false
+            },
+            "shopee": {
+              "enabled": false
+            },
+            "amazon": {
+              "enabled": false
+            },
+            "magalu": {
+              "enabled": false
+            }
+          }
+        },
+        "detailsEnabled": true,
+        "showVariationsOnCard": false,
+        "descriptionShort": "",
+        "descriptionLong": "<p>💻 <strong>Notebook Acer Aspire 3 A315-53 Usado<br></strong></p>\n<p>✅ Processador Intel Core i3-7020U<br>\n✅ 4GB de memória RAM<br>\n✅ HD de 1TB para arquivos, fotos e documentos<br>\n✅ Tela de 15,6\"<br>\n✅ Windows 10<br>\n✅ Ideal para estudos, internet, trabalhos e tarefas do dia a dia<br>\n✅ Notebook totalmente testado e revisado<br>\n✅ <strong>90 dias de garantia</strong></p>\n<p>Uma ótima opção para quem procura economizar e comprar um bom&nbsp;<strong>notebook</strong>, com boa capacidade de armazenamento e configuração indicada para atividades do dia a dia, estudos e trabalho.</p>",
+        "variations": {
+          "enabled": false,
+          "colors": [],
+          "storage": [],
+          "ram": [],
+          "condition": [],
+          "combinations": [],
+          "labels": {},
+          "colorsText": "",
+          "storageText": "",
+          "ramText": "",
+          "conditionText": "",
+          "labelsText": "{}",
+          "combinationsText": ""
+        },
+        "id": 1788051985361,
+        "inventoryBalance": {
+          "inventoryItemId": "PRD-1788051985361",
+          "locationId": "loja-principal",
+          "physicalQuantity": 0,
+          "reservedQuantity": 0,
+          "availableQuantity": 0,
+          "minimumQuantity": 0,
+          "updatedAt": "2026-08-30T01:06:25.370Z"
+        },
+        "updatedAt": "2026-08-30T01:07:33.520Z"
+      },
+      "after": {
+        "name": "Notebook Usado Acer Aspire 3 A315-53 Intel Core i3-7020U 4GB Ram HD 1TB 15.6\" W10",
+        "sku": "",
+        "code": "PRD-865",
+        "barcode": "",
+        "brand": "",
+        "slug": "notebook-usado-acer-aspire-3-a315-53-intel-core-i3-7020u-4gb-ram-hd-1tb-15-6-w10",
+        "price": null,
+        "commercial": {
+          "costPrice": null,
+          "erpPrice": null,
+          "salePrice": null,
+          "marketplacePrice": null,
+          "promotionalPrice": null,
+          "desiredMarginPercent": null,
+          "expectedProfit": null,
+          "defaultCommissionPercent": null,
+          "cashPrice": null,
+          "installmentPrice": null,
+          "minimumPrice": null,
+          "minimumMarginPercent": null,
+          "discountPolicy": "inherit",
+          "maximumDiscountPercent": null,
+          "maximumDiscountAmount": null,
+          "requiresAuthorization": false
+        },
+        "stock": 0,
+        "inventory": {
+          "itemId": "PRD-1788051985361",
+          "stockControlled": true,
+          "allowNegative": false,
+          "minimumQuantity": 0,
+          "channelAvailability": {
+            "site": {
+              "mode": "shared",
+              "enabled": true,
+              "limit": null,
+              "physicalSafety": 0
+            }
+          }
+        },
+        "image": "images/produtos/1788052053497-notebook-acer-a315-53.png",
+        "gallery": [
+          "images/produtos/1788052084316-notebook-acer-a315-53-1.png",
+          "images/produtos/1788052084318-notebook-acer-a315-53-2.png",
+          "images/produtos/1788052084322-notebook-acer-a315-53-3.png"
+        ],
+        "category": "eletronicos",
+        "subcategory": "",
+        "tags": [],
+        "relatedManualIds": [],
+        "crossSellIds": [],
+        "showPrice": false,
+        "featured": false,
+        "active": true,
+        "erp": {
+          "sku": "",
+          "internalCode": "PRD-865",
+          "supplierCode": "",
+          "searchAlias": "",
+          "barcode": "",
+          "brand": "",
+          "unit": "UN",
+          "category": "eletronicos",
+          "subcategory": "",
+          "mainSupplierId": "",
+          "preferredSupplierId": "",
+          "active": false,
+          "categoryId": "ERP-CAT-3"
+        },
+        "virtualStore": {
+          "name": "Notebook Usado Acer Aspire 3 A315-53 Intel Core i3-7020U 4GB Ram HD 1TB 15.6\" W10",
+          "price": null,
+          "active": true,
+          "seoTitle": "",
+          "seoDescription": "",
+          "channels": {
+            "lojaVirtual": {
+              "enabled": true
+            },
+            "mercadoLivre": {
+              "enabled": false
+            },
+            "shopee": {
+              "enabled": false
+            },
+            "amazon": {
+              "enabled": false
+            },
+            "magalu": {
+              "enabled": false
+            }
+          }
+        },
+        "detailsEnabled": true,
+        "showVariationsOnCard": false,
+        "descriptionShort": "",
+        "descriptionLong": "<p>💻 <strong>Notebook Acer Aspire 3 A315-53 Usado<br></strong></p>\n<p>✅ Processador Intel Core i3-7020U<br>\n✅ 4GB de memória RAM<br>\n✅ HD de 1TB para arquivos, fotos e documentos<br>\n✅ Tela de 15,6\"<br>\n✅ Windows 10<br>\n✅ Ideal para estudos, internet, trabalhos e tarefas do dia a dia<br>\n✅ Notebook totalmente testado e revisado<br>\n✅ <strong>90 dias de garantia</strong></p>\n<p>Uma ótima opção para quem procura economizar e comprar um bom&nbsp;<strong>notebook</strong>, com boa capacidade de armazenamento e configuração indicada para atividades do dia a dia, estudos e trabalho.</p>",
+        "variations": {
+          "enabled": false,
+          "colors": [],
+          "storage": [],
+          "ram": [],
+          "condition": [],
+          "combinations": [],
+          "labels": {},
+          "colorsText": "",
+          "storageText": "",
+          "ramText": "",
+          "conditionText": "",
+          "labelsText": "{}",
+          "combinationsText": ""
+        },
+        "id": 1788051985361,
+        "inventoryBalance": {
+          "inventoryItemId": "PRD-1788051985361",
+          "locationId": "loja-principal",
+          "physicalQuantity": 0,
+          "reservedQuantity": 0,
+          "availableQuantity": 0,
+          "minimumQuantity": 0,
+          "updatedAt": "2026-08-30T01:06:25.370Z"
+        },
+        "updatedAt": "2026-08-30T01:07:33.520Z"
+      },
+      "ip": "127.0.0.1",
+      "requestId": "74cb8388-b4c0-4928-9d71-c70a4bcc330f"
+    },
+    {
+      "id": "AUD-00000073",
+      "at": "2026-08-30T01:08:07.760Z",
+      "module": "produtos",
+      "action": "PRODUCT_UPDATED",
+      "actor": "Matheus Fernando",
+      "entityType": "product",
+      "entityId": "1788051985361",
+      "documentId": "",
+      "reason": "Cadastro de produto atualizado",
+      "before": {
+        "name": "Notebook Usado Acer Aspire 3 A315-53 Intel Core i3-7020U 4GB Ram HD 1TB 15.6\" W10",
+        "sku": "",
+        "code": "PRD-865",
+        "barcode": "",
+        "brand": "",
+        "slug": "notebook-usado-acer-aspire-3-a315-53-intel-core-i3-7020u-4gb-ram-hd-1tb-15-6-w10",
+        "price": null,
+        "commercial": {
+          "costPrice": null,
+          "erpPrice": null,
+          "salePrice": null,
+          "marketplacePrice": null,
+          "promotionalPrice": null,
+          "desiredMarginPercent": null,
+          "expectedProfit": null,
+          "defaultCommissionPercent": null,
+          "cashPrice": null,
+          "installmentPrice": null,
+          "minimumPrice": null,
+          "minimumMarginPercent": null,
+          "discountPolicy": "inherit",
+          "maximumDiscountPercent": null,
+          "maximumDiscountAmount": null,
+          "requiresAuthorization": false
+        },
+        "stock": 0,
+        "inventory": {
+          "itemId": "PRD-1788051985361",
+          "stockControlled": true,
+          "allowNegative": false,
+          "minimumQuantity": 0,
+          "channelAvailability": {
+            "site": {
+              "mode": "shared",
+              "enabled": true,
+              "limit": null,
+              "physicalSafety": 0
+            }
+          }
+        },
+        "image": "images/produtos/1788052053497-notebook-acer-a315-53.png",
+        "gallery": [
+          "images/produtos/1788052084316-notebook-acer-a315-53-1.png",
+          "images/produtos/1788052084318-notebook-acer-a315-53-2.png",
+          "images/produtos/1788052084322-notebook-acer-a315-53-3.png"
+        ],
+        "category": "eletronicos",
+        "subcategory": "",
+        "tags": [],
+        "relatedManualIds": [],
+        "crossSellIds": [],
+        "showPrice": false,
+        "featured": false,
+        "active": true,
+        "erp": {
+          "sku": "",
+          "internalCode": "PRD-865",
+          "supplierCode": "",
+          "searchAlias": "",
+          "barcode": "",
+          "brand": "",
+          "unit": "UN",
+          "category": "eletronicos",
+          "subcategory": "",
+          "mainSupplierId": "",
+          "preferredSupplierId": "",
+          "active": false,
+          "categoryId": "ERP-CAT-3"
+        },
+        "virtualStore": {
+          "name": "Notebook Usado Acer Aspire 3 A315-53 Intel Core i3-7020U 4GB Ram HD 1TB 15.6\" W10",
+          "price": null,
+          "active": true,
+          "seoTitle": "",
+          "seoDescription": "",
+          "channels": {
+            "lojaVirtual": {
+              "enabled": true
+            },
+            "mercadoLivre": {
+              "enabled": false
+            },
+            "shopee": {
+              "enabled": false
+            },
+            "amazon": {
+              "enabled": false
+            },
+            "magalu": {
+              "enabled": false
+            }
+          }
+        },
+        "detailsEnabled": true,
+        "showVariationsOnCard": false,
+        "descriptionShort": "",
+        "descriptionLong": "<p>💻 <strong>Notebook Acer Aspire 3 A315-53 Usado<br></strong></p>\n<p>✅ Processador Intel Core i3-7020U<br>\n✅ 4GB de memória RAM<br>\n✅ HD de 1TB para arquivos, fotos e documentos<br>\n✅ Tela de 15,6\"<br>\n✅ Windows 10<br>\n✅ Ideal para estudos, internet, trabalhos e tarefas do dia a dia<br>\n✅ Notebook totalmente testado e revisado<br>\n✅ <strong>90 dias de garantia</strong></p>\n<p>Uma ótima opção para quem procura economizar e comprar um bom&nbsp;<strong>notebook</strong>, com boa capacidade de armazenamento e configuração indicada para atividades do dia a dia, estudos e trabalho.</p>",
+        "variations": {
+          "enabled": false,
+          "colors": [],
+          "storage": [],
+          "ram": [],
+          "condition": [],
+          "combinations": [],
+          "labels": {},
+          "colorsText": "",
+          "storageText": "",
+          "ramText": "",
+          "conditionText": "",
+          "labelsText": "{}",
+          "combinationsText": ""
+        },
+        "id": 1788051985361,
+        "inventoryBalance": {
+          "inventoryItemId": "PRD-1788051985361",
+          "locationId": "loja-principal",
+          "physicalQuantity": 0,
+          "reservedQuantity": 0,
+          "availableQuantity": 0,
+          "minimumQuantity": 0,
+          "updatedAt": "2026-08-30T01:06:25.370Z"
+        },
+        "updatedAt": "2026-08-30T01:07:33.520Z"
+      },
+      "after": {
+        "name": "Notebook Usado Acer Aspire 3 A315-53 Intel Core i3-7020U 4GB Ram HD 1TB 15.6\" W10",
+        "sku": "",
+        "code": "PRD-865",
+        "barcode": "",
+        "brand": "",
+        "slug": "notebook-usado-acer-aspire-3-a315-53-intel-core-i3-7020u-4gb-ram-hd-1tb-15-6-w10",
+        "price": null,
+        "commercial": {
+          "costPrice": null,
+          "erpPrice": null,
+          "salePrice": null,
+          "marketplacePrice": null,
+          "promotionalPrice": null,
+          "desiredMarginPercent": null,
+          "expectedProfit": null,
+          "defaultCommissionPercent": null,
+          "cashPrice": null,
+          "installmentPrice": null,
+          "minimumPrice": null,
+          "minimumMarginPercent": null,
+          "discountPolicy": "inherit",
+          "maximumDiscountPercent": null,
+          "maximumDiscountAmount": null,
+          "requiresAuthorization": false
+        },
+        "stock": 0,
+        "inventory": {
+          "itemId": "PRD-1788051985361",
+          "stockControlled": true,
+          "allowNegative": false,
+          "minimumQuantity": 0,
+          "channelAvailability": {
+            "site": {
+              "mode": "shared",
+              "enabled": true,
+              "limit": null,
+              "physicalSafety": 0
+            }
+          }
+        },
+        "image": "images/produtos/1788052053497-notebook-acer-a315-53.png",
+        "gallery": [
+          "images/produtos/1788052084316-notebook-acer-a315-53-1.png",
+          "images/produtos/1788052084318-notebook-acer-a315-53-2.png",
+          "images/produtos/1788052084322-notebook-acer-a315-53-3.png"
+        ],
+        "category": "eletronicos",
+        "subcategory": "",
+        "tags": [],
+        "relatedManualIds": [],
+        "crossSellIds": [],
+        "showPrice": false,
+        "featured": false,
+        "active": true,
+        "erp": {
+          "sku": "",
+          "internalCode": "PRD-865",
+          "supplierCode": "",
+          "searchAlias": "",
+          "barcode": "",
+          "brand": "",
+          "unit": "UN",
+          "category": "eletronicos",
+          "subcategory": "",
+          "mainSupplierId": "",
+          "preferredSupplierId": "",
+          "active": false,
+          "categoryId": "ERP-CAT-3"
+        },
+        "virtualStore": {
+          "name": "Notebook Usado Acer Aspire 3 A315-53 Intel Core i3-7020U 4GB Ram HD 1TB 15.6\" W10",
+          "price": null,
+          "active": true,
+          "seoTitle": "",
+          "seoDescription": "",
+          "channels": {
+            "lojaVirtual": {
+              "enabled": true
+            },
+            "mercadoLivre": {
+              "enabled": false
+            },
+            "shopee": {
+              "enabled": false
+            },
+            "amazon": {
+              "enabled": false
+            },
+            "magalu": {
+              "enabled": false
+            }
+          }
+        },
+        "detailsEnabled": true,
+        "showVariationsOnCard": false,
+        "descriptionShort": "",
+        "descriptionLong": "<p>💻 <strong>Notebook Acer Aspire 3 A315-53 Usado<br></strong></p>\n<p>✅ Processador Intel Core i3-7020U<br>\n✅ 4GB de memória RAM<br>\n✅ HD de 1TB para arquivos, fotos e documentos<br>\n✅ Tela de 15,6\"<br>\n✅ Windows 10<br>\n✅ Ideal para estudos, internet, trabalhos e tarefas do dia a dia<br>\n✅ Notebook totalmente testado e revisado<br>\n✅ <strong>90 dias de garantia</strong></p>\n<p>Uma ótima opção para quem procura economizar e comprar um bom&nbsp;<strong>notebook</strong>, com boa capacidade de armazenamento e configuração indicada para atividades do dia a dia, estudos e trabalho.</p>",
+        "variations": {
+          "enabled": false,
+          "colors": [],
+          "storage": [],
+          "ram": [],
+          "condition": [],
+          "combinations": [],
+          "labels": {},
+          "colorsText": "",
+          "storageText": "",
+          "ramText": "",
+          "conditionText": "",
+          "labelsText": "{}",
+          "combinationsText": ""
+        },
+        "id": 1788051985361,
+        "inventoryBalance": {
+          "inventoryItemId": "PRD-1788051985361",
+          "locationId": "loja-principal",
+          "physicalQuantity": 0,
+          "reservedQuantity": 0,
+          "availableQuantity": 0,
+          "minimumQuantity": 0,
+          "updatedAt": "2026-08-30T01:06:25.370Z"
+        },
+        "updatedAt": "2026-08-30T01:07:33.520Z"
+      },
+      "ip": "127.0.0.1",
+      "requestId": "96b05b07-e8dd-4649-8c86-cd95ba9dac3f"
+    },
+    {
+      "id": "AUD-00000074",
+      "at": "2026-08-30T01:08:09.741Z",
+      "module": "produtos",
+      "action": "PRODUCT_UPDATED",
+      "actor": "Matheus Fernando",
+      "entityType": "product",
+      "entityId": "1788051985361",
+      "documentId": "",
+      "reason": "Cadastro de produto atualizado",
+      "before": {
+        "name": "Notebook Usado Acer Aspire 3 A315-53 Intel Core i3-7020U 4GB Ram HD 1TB 15.6\" W10",
+        "sku": "",
+        "code": "PRD-865",
+        "barcode": "",
+        "brand": "",
+        "slug": "notebook-usado-acer-aspire-3-a315-53-intel-core-i3-7020u-4gb-ram-hd-1tb-15-6-w10",
+        "price": null,
+        "commercial": {
+          "costPrice": null,
+          "erpPrice": null,
+          "salePrice": null,
+          "marketplacePrice": null,
+          "promotionalPrice": null,
+          "desiredMarginPercent": null,
+          "expectedProfit": null,
+          "defaultCommissionPercent": null,
+          "cashPrice": null,
+          "installmentPrice": null,
+          "minimumPrice": null,
+          "minimumMarginPercent": null,
+          "discountPolicy": "inherit",
+          "maximumDiscountPercent": null,
+          "maximumDiscountAmount": null,
+          "requiresAuthorization": false
+        },
+        "stock": 0,
+        "inventory": {
+          "itemId": "PRD-1788051985361",
+          "stockControlled": true,
+          "allowNegative": false,
+          "minimumQuantity": 0,
+          "channelAvailability": {
+            "site": {
+              "mode": "shared",
+              "enabled": true,
+              "limit": null,
+              "physicalSafety": 0
+            }
+          }
+        },
+        "image": "images/produtos/1788052053497-notebook-acer-a315-53.png",
+        "gallery": [
+          "images/produtos/1788052084316-notebook-acer-a315-53-1.png",
+          "images/produtos/1788052084318-notebook-acer-a315-53-2.png",
+          "images/produtos/1788052084322-notebook-acer-a315-53-3.png"
+        ],
+        "category": "eletronicos",
+        "subcategory": "",
+        "tags": [],
+        "relatedManualIds": [],
+        "crossSellIds": [],
+        "showPrice": false,
+        "featured": false,
+        "active": true,
+        "erp": {
+          "sku": "",
+          "internalCode": "PRD-865",
+          "supplierCode": "",
+          "searchAlias": "",
+          "barcode": "",
+          "brand": "",
+          "unit": "UN",
+          "category": "eletronicos",
+          "subcategory": "",
+          "mainSupplierId": "",
+          "preferredSupplierId": "",
+          "active": false,
+          "categoryId": "ERP-CAT-3"
+        },
+        "virtualStore": {
+          "name": "Notebook Usado Acer Aspire 3 A315-53 Intel Core i3-7020U 4GB Ram HD 1TB 15.6\" W10",
+          "price": null,
+          "active": true,
+          "seoTitle": "",
+          "seoDescription": "",
+          "channels": {
+            "lojaVirtual": {
+              "enabled": true
+            },
+            "mercadoLivre": {
+              "enabled": false
+            },
+            "shopee": {
+              "enabled": false
+            },
+            "amazon": {
+              "enabled": false
+            },
+            "magalu": {
+              "enabled": false
+            }
+          }
+        },
+        "detailsEnabled": true,
+        "showVariationsOnCard": false,
+        "descriptionShort": "",
+        "descriptionLong": "<p>💻 <strong>Notebook Acer Aspire 3 A315-53 Usado<br></strong></p>\n<p>✅ Processador Intel Core i3-7020U<br>\n✅ 4GB de memória RAM<br>\n✅ HD de 1TB para arquivos, fotos e documentos<br>\n✅ Tela de 15,6\"<br>\n✅ Windows 10<br>\n✅ Ideal para estudos, internet, trabalhos e tarefas do dia a dia<br>\n✅ Notebook totalmente testado e revisado<br>\n✅ <strong>90 dias de garantia</strong></p>\n<p>Uma ótima opção para quem procura economizar e comprar um bom&nbsp;<strong>notebook</strong>, com boa capacidade de armazenamento e configuração indicada para atividades do dia a dia, estudos e trabalho.</p>",
+        "variations": {
+          "enabled": false,
+          "colors": [],
+          "storage": [],
+          "ram": [],
+          "condition": [],
+          "combinations": [],
+          "labels": {},
+          "colorsText": "",
+          "storageText": "",
+          "ramText": "",
+          "conditionText": "",
+          "labelsText": "{}",
+          "combinationsText": ""
+        },
+        "id": 1788051985361,
+        "inventoryBalance": {
+          "inventoryItemId": "PRD-1788051985361",
+          "locationId": "loja-principal",
+          "physicalQuantity": 0,
+          "reservedQuantity": 0,
+          "availableQuantity": 0,
+          "minimumQuantity": 0,
+          "updatedAt": "2026-08-30T01:06:25.370Z"
+        },
+        "updatedAt": "2026-08-30T01:07:33.520Z"
+      },
+      "after": {
+        "name": "Notebook Usado Acer Aspire 3 A315-53 Intel Core i3-7020U 4GB Ram HD 1TB 15.6\" W10",
+        "sku": "",
+        "code": "PRD-865",
+        "barcode": "",
+        "brand": "",
+        "slug": "notebook-usado-acer-aspire-3-a315-53-intel-core-i3-7020u-4gb-ram-hd-1tb-15-6-w10",
+        "price": null,
+        "commercial": {
+          "costPrice": null,
+          "erpPrice": null,
+          "salePrice": null,
+          "marketplacePrice": null,
+          "promotionalPrice": null,
+          "desiredMarginPercent": null,
+          "expectedProfit": null,
+          "defaultCommissionPercent": null,
+          "cashPrice": null,
+          "installmentPrice": null,
+          "minimumPrice": null,
+          "minimumMarginPercent": null,
+          "discountPolicy": "inherit",
+          "maximumDiscountPercent": null,
+          "maximumDiscountAmount": null,
+          "requiresAuthorization": false
+        },
+        "stock": 0,
+        "inventory": {
+          "itemId": "PRD-1788051985361",
+          "stockControlled": true,
+          "allowNegative": false,
+          "minimumQuantity": 0,
+          "channelAvailability": {
+            "site": {
+              "mode": "shared",
+              "enabled": true,
+              "limit": null,
+              "physicalSafety": 0
+            }
+          }
+        },
+        "image": "images/produtos/1788052053497-notebook-acer-a315-53.png",
+        "gallery": [
+          "images/produtos/1788052084316-notebook-acer-a315-53-1.png",
+          "images/produtos/1788052084318-notebook-acer-a315-53-2.png",
+          "images/produtos/1788052084322-notebook-acer-a315-53-3.png"
+        ],
+        "category": "eletronicos",
+        "subcategory": "",
+        "tags": [],
+        "relatedManualIds": [],
+        "crossSellIds": [],
+        "showPrice": false,
+        "featured": false,
+        "active": true,
+        "erp": {
+          "sku": "",
+          "internalCode": "PRD-865",
+          "supplierCode": "",
+          "searchAlias": "",
+          "barcode": "",
+          "brand": "",
+          "unit": "UN",
+          "category": "eletronicos",
+          "subcategory": "",
+          "mainSupplierId": "",
+          "preferredSupplierId": "",
+          "active": false,
+          "categoryId": "ERP-CAT-3"
+        },
+        "virtualStore": {
+          "name": "Notebook Usado Acer Aspire 3 A315-53 Intel Core i3-7020U 4GB Ram HD 1TB 15.6\" W10",
+          "price": null,
+          "active": true,
+          "seoTitle": "",
+          "seoDescription": "",
+          "channels": {
+            "lojaVirtual": {
+              "enabled": true
+            },
+            "mercadoLivre": {
+              "enabled": false
+            },
+            "shopee": {
+              "enabled": false
+            },
+            "amazon": {
+              "enabled": false
+            },
+            "magalu": {
+              "enabled": false
+            }
+          }
+        },
+        "detailsEnabled": true,
+        "showVariationsOnCard": false,
+        "descriptionShort": "",
+        "descriptionLong": "<p>💻 <strong>Notebook Acer Aspire 3 A315-53 Usado<br></strong></p>\n<p>✅ Processador Intel Core i3-7020U<br>\n✅ 4GB de memória RAM<br>\n✅ HD de 1TB para arquivos, fotos e documentos<br>\n✅ Tela de 15,6\"<br>\n✅ Windows 10<br>\n✅ Ideal para estudos, internet, trabalhos e tarefas do dia a dia<br>\n✅ Notebook totalmente testado e revisado<br>\n✅ <strong>90 dias de garantia</strong></p>\n<p>Uma ótima opção para quem procura economizar e comprar um bom&nbsp;<strong>notebook</strong>, com boa capacidade de armazenamento e configuração indicada para atividades do dia a dia, estudos e trabalho.</p>",
+        "variations": {
+          "enabled": false,
+          "colors": [],
+          "storage": [],
+          "ram": [],
+          "condition": [],
+          "combinations": [],
+          "labels": {},
+          "colorsText": "",
+          "storageText": "",
+          "ramText": "",
+          "conditionText": "",
+          "labelsText": "{}",
+          "combinationsText": ""
+        },
+        "id": 1788051985361,
+        "inventoryBalance": {
+          "inventoryItemId": "PRD-1788051985361",
+          "locationId": "loja-principal",
+          "physicalQuantity": 0,
+          "reservedQuantity": 0,
+          "availableQuantity": 0,
+          "minimumQuantity": 0,
+          "updatedAt": "2026-08-30T01:06:25.370Z"
+        },
+        "updatedAt": "2026-08-30T01:07:33.520Z"
+      },
+      "ip": "127.0.0.1",
+      "requestId": "b4bc0bae-cd77-4e27-91c2-fc3f482a0c60"
     }
   ],
-  "updatedAt": "2026-08-30T00:55:17.442Z"
+  "updatedAt": "2026-08-30T01:08:09.752Z"
 }
