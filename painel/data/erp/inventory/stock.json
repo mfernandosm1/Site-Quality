@@ -519,7 +519,7 @@
       "physicalQuantity": 0,
       "reservedQuantity": 0,
       "minimumQuantity": 0,
-      "updatedAt": "2026-08-24T01:01:29.881Z"
+      "updatedAt": "2026-08-30T00:01:07.195Z"
     },
     {
       "inventoryItemId": "VAR-1786326111943-11881-2",
@@ -551,7 +551,7 @@
       "physicalQuantity": 0,
       "reservedQuantity": 0,
       "minimumQuantity": 0,
-      "updatedAt": "2026-08-24T01:01:29.885Z"
+      "updatedAt": "2026-08-30T00:01:07.201Z"
     },
     {
       "inventoryItemId": "VAR-1786326883867-4730-1",
@@ -3055,7 +3055,7 @@
       "physicalQuantity": 0,
       "reservedQuantity": 0,
       "minimumQuantity": 0,
-      "updatedAt": "2026-08-16T00:18:28.079Z"
+      "updatedAt": "2026-08-29T23:47:11.542Z"
     },
     {
       "inventoryItemId": "PRD-1786499655319",
@@ -8424,6 +8424,46 @@
       "reservedQuantity": 0,
       "minimumQuantity": 0,
       "updatedAt": "2026-08-29T23:38:23.891Z"
+    },
+    {
+      "inventoryItemId": "VAR-1786499483895-1",
+      "locationId": "loja-principal",
+      "physicalQuantity": 0,
+      "reservedQuantity": 0,
+      "minimumQuantity": 0,
+      "updatedAt": "2026-08-29T23:51:28.626Z"
+    },
+    {
+      "inventoryItemId": "VAR-1786499483895-2",
+      "locationId": "loja-principal",
+      "physicalQuantity": 0,
+      "reservedQuantity": 0,
+      "minimumQuantity": 0,
+      "updatedAt": "2026-08-29T23:51:28.630Z"
+    },
+    {
+      "inventoryItemId": "VAR-1788047530521-1",
+      "locationId": "loja-principal",
+      "physicalQuantity": 0,
+      "reservedQuantity": 0,
+      "minimumQuantity": 0,
+      "updatedAt": "2026-08-30T00:00:25.324Z"
+    },
+    {
+      "inventoryItemId": "VAR-1788047530521-2",
+      "locationId": "loja-principal",
+      "physicalQuantity": 0,
+      "reservedQuantity": 0,
+      "minimumQuantity": 0,
+      "updatedAt": "2026-08-30T00:00:25.328Z"
+    },
+    {
+      "inventoryItemId": "VAR-1788047530521-3",
+      "locationId": "loja-principal",
+      "physicalQuantity": 0,
+      "reservedQuantity": 0,
+      "minimumQuantity": 0,
+      "updatedAt": "2026-08-30T00:00:25.333Z"
     }
   ]
 }

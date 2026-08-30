@@ -17124,7 +17124,9 @@
       "price": 3399.99,
       "stock": 0,
       "image": "images/produtos/1787530543342-iphone-15-usado-pt.jpeg",
-      "gallery": [],
+      "gallery": [
+        "images/produtos/1788048065239-iphone-15-usado-azul.jpeg"
+      ],
       "category": "smartphones",
       "subcategory": "usados",
       "tags": [],
@@ -17234,8 +17236,9 @@
             "image": "",
             "stock": 0,
             "erpPrice": null,
-            "inventoryItemId": "VAR-1786326111942-11885-1",
-            "costPrice": 2900
+            "costPrice": 2900,
+            "desiredMarginPercent": null,
+            "inventoryItemId": "VAR-1786326111942-11885-1"
           },
           {
             "color": "Azul",
@@ -17245,8 +17248,9 @@
             "image": "",
             "stock": 0,
             "erpPrice": null,
-            "inventoryItemId": "VAR-1786326111943-11884-5",
-            "costPrice": 2900
+            "costPrice": 2900,
+            "desiredMarginPercent": null,
+            "inventoryItemId": "VAR-1786326111943-11884-5"
           }
         ],
         "labels": {},
@@ -30668,34 +30672,37 @@
     },
     {
       "id": 1786499483895,
-      "name": "Iphone 16 plus 128gb usado  AZUL",
+      "name": "Iphone 16 plus 128gb usado",
       "sku": "",
       "code": "PRD-242",
       "barcode": "",
       "brand": "SemMarca",
-      "slug": "iphone-16-plus-128gb-usado-azul",
+      "slug": "iphone-16-plus-128gb-usado",
       "price": 4700,
       "stock": 0,
-      "image": "",
-      "gallery": [],
-      "category": "",
-      "subcategory": "",
+      "image": "images/produtos/1788047018464-iphone-16-plus-usado.jpeg",
+      "gallery": [
+        "images/produtos/1788047484763-iphone-16-plus-preto-usado.jpeg"
+      ],
+      "category": "smartphones",
+      "subcategory": "usados",
       "tags": [],
       "relatedManualIds": [],
       "crossSellIds": [],
       "showPrice": false,
       "featured": false,
-      "active": false,
+      "active": true,
       "commercial": {
         "costPrice": 0,
         "erpPrice": 4700,
+        "salePrice": 4700,
         "marketplacePrice": null,
         "promotionalPrice": null,
         "desiredMarginPercent": null,
         "expectedProfit": null,
         "defaultCommissionPercent": null,
-        "cashPrice": null,
-        "installmentPrice": null,
+        "cashPrice": 4700,
+        "installmentPrice": 4700,
         "minimumPrice": null,
         "minimumMarginPercent": null,
         "discountPolicy": "inherit",
@@ -30710,22 +30717,23 @@
         "searchAlias": "",
         "barcode": "",
         "brand": "SemMarca",
-        "unit": "UNIDADE",
-        "category": "",
+        "unit": "UN",
+        "category": "smartphones",
         "subcategory": "",
         "mainSupplierId": "",
         "preferredSupplierId": "",
-        "active": true
+        "active": true,
+        "categoryId": "ERP-CAT-1"
       },
       "virtualStore": {
-        "name": "Iphone 16 plus 128gb usado  AZUL",
+        "name": "Iphone 16 plus 128gb usado",
         "price": 4700,
-        "active": false,
-        "seoTitle": "",
-        "seoDescription": "",
+        "active": true,
+        "seoTitle": "iPhone 16 Plus 128GB Usado em Saldanha Marinho | Quality Celulares",
+        "seoDescription": "Compre iPhone 16 Plus 128GB usado em Saldanha Marinho e região. Aparelho testado e revisado, com 90 dias de garantia na Quality Celulares",
         "channels": {
           "lojaVirtual": {
-            "enabled": false
+            "enabled": true
           },
           "mercadoLivre": {
             "enabled": false
@@ -30755,18 +30763,60 @@
           }
         }
       },
-      "detailsEnabled": false,
+      "detailsEnabled": true,
       "showVariationsOnCard": false,
       "descriptionShort": "",
-      "descriptionLong": "",
+      "descriptionLong": "<p>📱 <strong>iPhone 16 Plus 128GB Usado</strong></p>\n<p>✅ Tela Super Retina XDR OLED de 6,7\"<br>\n✅ Chip Apple A18 com excelente desempenho<br>\n✅ Câmera principal Fusion de 48 MP<br>\n✅ Câmera ultra-angular de 12 MP<br>\n✅ Face ID<br>\n✅ 5G, Wi-Fi e Bluetooth<br>\n✅ Conector USB-C<br>\n✅ Botão de Ação e Controle da Câmera<br>\n✅ 128GB de armazenamento<br>\n✅ Aparelho totalmente testado e revisado<br>\n✅ <strong>90 dias de garantia</strong></p>\n<p>Uma excelente opção para quem procura um <strong>iPhone 16 Plus usado</strong>, com tela grande, ótimo desempenho, câmeras avançadas e toda a experiência dos modelos mais recentes da Apple</p>",
       "variations": {
-        "enabled": false,
-        "colors": [],
+        "enabled": true,
+        "colors": [
+          {
+            "name": "Azul",
+            "hex": "#3330fd",
+            "image": "images/Iphone 16 plus - usado.jpeg"
+          },
+          {
+            "name": "Preto",
+            "hex": "#111111",
+            "image": "images/iphone 16 plus preto usado.jpeg"
+          }
+        ],
         "storage": [],
         "ram": [],
         "condition": [],
+        "combinations": [
+          {
+            "color": "Azul",
+            "storage": "",
+            "ram": "",
+            "condition": "",
+            "image": "",
+            "stock": 0,
+            "erpPrice": null,
+            "costPrice": null,
+            "desiredMarginPercent": null,
+            "inventoryItemId": "VAR-1786499483895-1"
+          },
+          {
+            "color": "Preto",
+            "storage": "",
+            "ram": "",
+            "condition": "",
+            "image": "",
+            "stock": 0,
+            "erpPrice": null,
+            "costPrice": null,
+            "desiredMarginPercent": null,
+            "inventoryItemId": "VAR-1786499483895-2"
+          }
+        ],
         "labels": {},
-        "combinations": []
+        "colorsText": "Azul|#3330fd|images/Iphone 16 plus - usado.jpeg\nPreto|#111111|images/iphone 16 plus preto usado.jpeg",
+        "storageText": "",
+        "ramText": "",
+        "conditionText": "",
+        "labelsText": "{}",
+        "combinationsText": "Azul|||||0\nPreto|||||0"
       },
       "integrations": {
         "wm10": {
@@ -30827,14 +30877,12 @@
         "familyImportedAt": "2026-08-12T01:37:54.639Z"
       },
       "inventoryBalance": {
-        "inventoryItemId": "PRD-1786499483895",
-        "locationId": "loja-principal",
         "physicalQuantity": 0,
-        "reservedQuantity": 0,
         "availableQuantity": 0,
-        "minimumQuantity": 0,
-        "updatedAt": "2026-08-16T00:18:28.079Z"
-      }
+        "reservedQuantity": 0,
+        "derivedFromVariations": true
+      },
+      "updatedAt": "2026-08-29T23:43:38.483Z"
     },
     {
       "id": 1786499655319,
@@ -121882,9 +121930,294 @@
         "reservedQuantity": 0,
         "availableQuantity": 0,
         "minimumQuantity": 0,
-        "updatedAt": "2026-08-29T23:36:52.159Z"
+        "updatedAt": "2026-08-29T23:38:23.891Z"
       },
       "updatedAt": "2026-08-29T23:37:11.285Z"
+    },
+    {
+      "id": 1788047530521,
+      "name": "iPhone 15 128GB Novo Lacrado",
+      "sku": "",
+      "code": "PRD-864",
+      "barcode": "",
+      "brand": "APPLE",
+      "slug": "iphone-15-128gb-novo",
+      "price": 0,
+      "stock": 0,
+      "image": "images/produtos/1787530543342-iphone-15-usado-pt.jpeg",
+      "gallery": [
+        "images/produtos/1788048002095-iphone-15-verde.jpeg",
+        "images/produtos/1788048002097-iphone-15-usado-azul.jpeg"
+      ],
+      "category": "smartphones",
+      "subcategory": "",
+      "tags": [],
+      "relatedManualIds": [],
+      "crossSellIds": [],
+      "showPrice": false,
+      "featured": false,
+      "active": true,
+      "commercial": {
+        "costPrice": 3500,
+        "erpPrice": 4100,
+        "salePrice": 4100,
+        "marketplacePrice": null,
+        "promotionalPrice": null,
+        "desiredMarginPercent": null,
+        "expectedProfit": null,
+        "defaultCommissionPercent": null,
+        "cashPrice": 4100,
+        "installmentPrice": 4100,
+        "minimumPrice": null,
+        "minimumMarginPercent": null,
+        "discountPolicy": "inherit",
+        "maximumDiscountPercent": null,
+        "maximumDiscountAmount": null,
+        "requiresAuthorization": false
+      },
+      "erp": {
+        "sku": "",
+        "internalCode": "PRD-864",
+        "supplierCode": "",
+        "searchAlias": "",
+        "barcode": "",
+        "brand": "APPLE",
+        "unit": "UN",
+        "category": "smartphones",
+        "subcategory": "",
+        "mainSupplierId": "",
+        "preferredSupplierId": "",
+        "active": true,
+        "categoryId": "ERP-CAT-1"
+      },
+      "virtualStore": {
+        "name": "iPhone 15 128GB Novo Lacrado",
+        "price": 0,
+        "active": true,
+        "seoTitle": "iPhone 15 128GB Lacrado | Novo e Original na Quality Celulares",
+        "seoDescription": "iPhone 15 128GB novo e lacrado, com procedência e atendimento especializado. Encontre seu novo iPhone na Quality Celulares em Saldanha Marinho e região",
+        "channels": {
+          "lojaVirtual": {
+            "enabled": true
+          },
+          "mercadoLivre": {
+            "enabled": false
+          },
+          "shopee": {
+            "enabled": false
+          },
+          "amazon": {
+            "enabled": false
+          },
+          "magalu": {
+            "enabled": false
+          }
+        }
+      },
+      "inventory": {
+        "itemId": "PRD-1788047530521",
+        "stockControlled": true,
+        "allowNegative": false,
+        "minimumQuantity": 0,
+        "channelAvailability": {
+          "site": {
+            "mode": "disabled",
+            "enabled": false,
+            "limit": null,
+            "physicalSafety": 0
+          }
+        }
+      },
+      "detailsEnabled": true,
+      "showVariationsOnCard": true,
+      "descriptionShort": "",
+      "descriptionLong": "<p><strong>Destaques do Produto:</strong></p><ul><li><p><strong>Tela Super Retina XDR:</strong> OLED de 6,1\" com ótima definição, brilho e cores vibrantes.</p></li><li><p><strong>Chip A16 Bionic:</strong> Excelente desempenho para aplicativos, jogos, fotos e uso diário.</p></li><li><p><strong>Câmera Principal de 48 MP:</strong> Fotos com alto nível de detalhes, além de câmera ultra-angular de 12 MP.</p></li><li><p><strong>128GB de Armazenamento:</strong> Espaço para aplicativos, fotos, vídeos e arquivos.</p></li><li><p><strong>5G, Face ID e USB-C:</strong> Conectividade rápida, desbloqueio facial seguro e novo padrão de carregamento.</p></li></ul><p><strong>Especificações Técnicas:</strong></p><ul><li><p><strong>Tela:</strong> 6,1\" Super Retina XDR OLED</p></li><li><p><strong>Processador:</strong> Apple A16 Bionic</p></li><li><p><strong>Armazenamento:</strong> 128GB</p></li><li><p><strong>Câmeras:</strong> Traseiras 48 MP + 12 MP | Frontal 12 MP</p></li><li><p><strong>Conectividade:</strong> 5G, Wi-Fi, Bluetooth e NFC</p></li><li><p><strong>Segurança:</strong> Face ID</p></li><li><p><strong>Conector:</strong> USB-C</p></li><li><p><strong>Resistência:</strong> IP68</p></li><li><p>Garantia: 1 ano de garantia.<br></p></li><li><p>Produto novo lacrado.</p></li></ul>",
+      "variations": {
+        "enabled": true,
+        "colors": [
+          {
+            "name": "Preto",
+            "hex": "#111111",
+            "image": "images/Iphone 15 usado (pt).jpeg"
+          },
+          {
+            "name": "Azul",
+            "hex": "#b4cafd",
+            "image": "images/Iphone 15 usado (azul).jpeg"
+          },
+          {
+            "name": "Verde",
+            "hex": "#37cd3a",
+            "image": "images/Iphone 15 verde.jpeg"
+          }
+        ],
+        "storage": [],
+        "ram": [],
+        "condition": [],
+        "combinations": [
+          {
+            "color": "Preto",
+            "storage": "",
+            "ram": "",
+            "condition": "",
+            "image": "",
+            "stock": 0,
+            "erpPrice": null,
+            "costPrice": 2900,
+            "desiredMarginPercent": null,
+            "inventoryItemId": "VAR-1788047530521-1"
+          },
+          {
+            "color": "Azul",
+            "storage": "",
+            "ram": "",
+            "condition": "",
+            "image": "",
+            "stock": 0,
+            "erpPrice": null,
+            "costPrice": 2900,
+            "desiredMarginPercent": null,
+            "inventoryItemId": "VAR-1788047530521-2"
+          },
+          {
+            "color": "Verde",
+            "storage": "",
+            "ram": "",
+            "condition": "",
+            "image": "",
+            "stock": 0,
+            "erpPrice": null,
+            "costPrice": null,
+            "desiredMarginPercent": null,
+            "inventoryItemId": "VAR-1788047530521-3"
+          }
+        ],
+        "labels": {},
+        "colorsText": "Preto|#111111|images/Iphone 15 usado (pt).jpeg\nAzul|#b4cafd|images/Iphone 15 usado (azul).jpeg\nVerde|#37cd3a|images/Iphone 15 verde.jpeg",
+        "storageText": "",
+        "ramText": "",
+        "conditionText": "",
+        "labelsText": "{}",
+        "combinationsText": "Preto|||||0||2900\nAzul|||||0||2900\nVerde"
+      },
+      "integrations": {
+        "wm10": {
+          "productCode": 11885,
+          "productCodes": [
+            11881,
+            11882,
+            11883,
+            11884,
+            11885
+          ],
+          "originalName": "iPhone 15 128gb Usado PRETO",
+          "barcode": "",
+          "reference": "",
+          "color": "PRETO",
+          "size": "Sem Tamanho",
+          "brand": "APPLE",
+          "collection": "Sem Coleção",
+          "sourceActive": true,
+          "sourceStock": 0,
+          "sourceCost": 2900,
+          "sourcePrice": 4500,
+          "registeredAt": "2025-07-25T17:14:08.563",
+          "updatedAt": "2026-07-17T18:03:21.613",
+          "importedAt": "2026-08-10T01:41:51.938Z",
+          "importedBy": "painel",
+          "lastSyncAt": "2026-08-10T01:41:51.938Z",
+          "lastSyncFields": [
+            "name",
+            "salePrice",
+            "cost",
+            "barcode",
+            "reference",
+            "brand",
+            "unit",
+            "active"
+          ],
+          "familyId": "fam-5e3883dc8e09",
+          "familyName": "iPhone 15 128GB USADO",
+          "sourceRecords": [
+            {
+              "code": 11881,
+              "name": "iPhone 15 128gb Usado ROSA",
+              "barcode": "",
+              "reference": "",
+              "color": "ROSA",
+              "size": "Sem Tamanho",
+              "stock": 0,
+              "price": 4500,
+              "cost": 0,
+              "active": true
+            },
+            {
+              "code": 11882,
+              "name": "iPhone 15 128gb Usado VERDE",
+              "barcode": "",
+              "reference": "",
+              "color": "VERDE",
+              "size": "Sem Tamanho",
+              "stock": 0,
+              "price": 4500,
+              "cost": 0,
+              "active": true
+            },
+            {
+              "code": 11883,
+              "name": "iPhone 15 128gb Usado BRANCO",
+              "barcode": "",
+              "reference": "",
+              "color": "BRANCO",
+              "size": "Sem Tamanho",
+              "stock": 0,
+              "price": 0,
+              "cost": 0,
+              "active": false
+            },
+            {
+              "code": 11884,
+              "name": "iPhone 15 128gb Usado AZUL",
+              "barcode": "",
+              "reference": "",
+              "color": "AZUL",
+              "size": "Sem Tamanho",
+              "stock": 0,
+              "price": 4500,
+              "cost": 2899,
+              "active": true
+            },
+            {
+              "code": 11885,
+              "name": "iPhone 15 128gb Usado PRETO",
+              "barcode": "",
+              "reference": "",
+              "color": "PRETO",
+              "size": "Sem Tamanho",
+              "stock": 0,
+              "price": 4500,
+              "cost": 2900,
+              "active": true
+            }
+          ]
+        }
+      },
+      "migration": {
+        "origin": "WM10",
+        "importedAt": "2026-08-10T01:41:51.938Z",
+        "importedBy": "painel",
+        "needsErpCategory": true,
+        "catalogKind": "product",
+        "familyId": "fam-5e3883dc8e09",
+        "familyImportedAt": "2026-08-10T01:41:51.944Z"
+      },
+      "inventoryBalance": {
+        "physicalQuantity": 0,
+        "availableQuantity": 0,
+        "reservedQuantity": 0,
+        "derivedFromVariations": true
+      },
+      "updatedAt": "2026-08-24T00:15:43.364Z"
     }
   ]
 }
