@@ -220,12 +220,6 @@
   }
 </style>
 
-<% if (flashes && flashes.length) { %>
-  <% flashes.forEach(function(msg){ %>
-    <div class="notice"><%= String(msg).startsWith('⚠️') ? '' : '✅ ' %><%= msg %></div>
-  <% }) %>
-<% } %>
-
 <div class="card banner-page">
   <div class="banner-head">
     <h3>🖼️ Banners do site</h3>
@@ -421,6 +415,19 @@
 
 <script>
 (function(){
+  // O layout global já exibe e remove o aviso temporário.
+  // Limpa as flags da URL para o aviso não reaparecer ao atualizar a página.
+  try {
+    const url = new URL(window.location.href);
+    let changed = false;
+    ['saved','deleted','imported','merged','error'].forEach(function(key){
+      if (url.searchParams.has(key)) { url.searchParams.delete(key); changed = true; }
+    });
+    if (changed) {
+      history.replaceState(null, '', url.pathname + (url.searchParams.toString() ? '?' + url.searchParams.toString() : '') + url.hash);
+    }
+  } catch (e) {}
+
   const STANDARD = {
     desktop: { width:1920, height:560, ratio:1920/560, label:'1920 × 560 px' },
     mobile: { width:1366, height:768, ratio:1366/768, label:'1366 × 768 px' }
