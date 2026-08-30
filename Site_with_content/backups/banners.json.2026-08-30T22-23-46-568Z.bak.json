@@ -1,0 +1,25 @@
+{
+  "items": [
+    {
+      "src": "images/banners/1788128442596-desktop-01-smartphones-desktop-1920x560.jpg",
+      "mobileSrc": "images/banners/1788128442601-mobile-01-smartphones-mobile-1366x768.jpg",
+      "title": "",
+      "href": "/smartphones/",
+      "order": 1
+    },
+    {
+      "src": "images/banners/1788128512227-desktop-02-iphones-desktop-1920x560.jpg",
+      "mobileSrc": "images/banners/1788128512229-mobile-02-iphones-mobile-1366x768.jpg",
+      "title": "",
+      "href": "/smartphones/",
+      "order": 2
+    },
+    {
+      "src": "images/banners/1788128586174-desktop-03-acessorios-desktop-1920x560.jpg",
+      "mobileSrc": "images/banners/1788128586175-mobile-03-acessorios-mobile-1366x768.jpg",
+      "title": "",
+      "href": "/acessorios/",
+      "order": 3
+    }
+  ]
+}

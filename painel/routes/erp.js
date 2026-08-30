@@ -103,6 +103,11 @@ function nativePrintModels(printSettings = {}) {
       content:`<div class="doc-header">{{empresa_logo}}<strong class="doc-company">${company}</strong><span>CARNÊ / COMPROVANTE DE CREDIÁRIO</span></div><hr><div style="text-align:center;font-size:10.5px;line-height:1.35"><b>{{empresa_razao}}</b><br>CNPJ: {{empresa_cnpj}}<br>{{empresa_endereco}}<br>{{empresa_cidade}}<br>Celular: {{empresa_telefone}} · {{empresa_email}}</div><hr><div><b>Venda:</b> #{{numero}}<br><b>Data:</b> {{data}}<br><b>Cliente:</b> {{cliente}}<br><b>CPF/CNPJ:</b> {{cpf}}<br><b>Telefone:</b> {{telefone}}<br><b>Endereço:</b> {{endereco}}<br><b>Total no crediário:</b> {{crediario_total}}<br><b>Parcelas:</b> {{crediario_quantidade}}</div><hr><section><h3>ITENS DA VENDA</h3>{{crediario_itens}}</section><hr><div style="font-size:11px;text-align:center">Declaro estar ciente dos valores e vencimentos informados e comprometo-me com o pagamento das parcelas nas respectivas datas.</div><hr><section><h3>OBSERVAÇÕES IMPORTANTES</h3><div>Confira seu carnê, nele consta todas as parcelas de sua compra.<br>Contas em dia não impedem novas compras e evita negativações e protestos.</div></section><div style="margin-top:12px;text-align:center"><b>Visite nossa loja virtual:</b><br>{{empresa_site}}</div><div style="margin-top:12px;text-align:center">É um privilégio ter você como nosso cliente =)<br>Quality Celulares agradece a preferência!</div><div style="margin-top:22px;text-align:center">Assinatura do cliente<br><br>__________________________________<br>{{cliente}}</div>{{crediario_canhoes}}`
     },
     {
+      id:'return-receipt', name:'Troca / Devolução — Termo com assinatura', type:'return', paper:'a4', active:true,
+      system:true, nativeKind:null, icon:'↩️', editorDriven:true,
+      content:`<div class="doc-header">{{empresa_logo}}<strong class="doc-company">{{empresa}}</strong><span>TERMO DE {{devolucao_tipo}}</span><b class="doc-status">{{devolucao_numero}}</b></div><hr><div class="doc-grid"><span><b>Data:</b> {{devolucao_data}}</span><span><b>Venda original:</b> {{venda_original}}</span><span><b>Cliente:</b> {{cliente}}</span><span><b>CPF/CNPJ:</b> {{cpf}}</span><span><b>Telefone:</b> {{telefone}}</span><span><b>E-mail:</b> {{cliente_email}}</span></div><div style="margin-top:5px"><b>Endereço:</b> {{endereco}}</div><hr><h3>MOTIVO DA {{devolucao_tipo}}</h3><div><b>Classificação:</b> {{devolucao_motivo}}<br><b>Relato:</b> {{devolucao_motivo_detalhes}}</div><hr><h3>ITENS ENVOLVIDOS</h3>{{devolucao_itens}}<div class="doc-total"><b>VALOR DO CRÉDITO / RESTITUIÇÃO</b><strong>{{devolucao_total}}</strong></div><hr><h3>DESTINAÇÃO FINANCEIRA</h3>{{devolucao_financeiro}}<hr><div style="font-size:12px;line-height:1.55">Declaro que conferi os itens, valores e informações acima e que recebi ciência sobre a forma de crédito, abatimento ou restituição registrada neste termo.</div><div style="margin-top:38px;display:grid;grid-template-columns:1fr 1fr;gap:28px;text-align:center"><div>__________________________________<br><b>{{cliente}}</b><br>Assinatura do cliente</div><div>__________________________________<br><b>{{devolucao_operador}}</b><br>Responsável pelo atendimento</div></div>`
+    },
+    {
       id:'os-entry', name:'O.S. Entrada — Padrão', type:'service_order', paper:'thermal', active:true,
       system:true, nativeKind:'os_entry', icon:'📥', editorDriven:true,
       content:`<div class="doc-header">{{empresa_logo}}<strong class="doc-company">${company}</strong><span>${entryTitle} Nº {{numero}}</span><b class="doc-status">{{status}}</b></div><hr><div class="doc-grid"><span><b>Cliente:</b> {{cliente}}</span><span><b>Equipamento:</b> {{os_aparelho}}</span><span><b>Celular:</b> {{telefone}}</span><span><b>Abertura:</b> {{os_abertura}}</span><span><b>Técnico:</b> {{os_tecnico}}</span></div>{{os_problema_bloco}}{{os_acessorios_bloco}}<hr><h3>PRODUTOS / SERVIÇOS</h3><div class="receipt-items os-receipt-items">{{itens_tabela}}</div><div class="doc-total"><b>TOTAL</b><strong>{{total}}</strong></div><hr><h3>CONDIÇÕES DE SERVIÇO</h3><div>${entryTerms}</div>{{senhas_desenho}}<div class="signature">Assinatura: ________________________________</div>`
@@ -1894,7 +1899,7 @@ router.post('/configuracoes/comprovantes/modelos', express.urlencoded({extended:
   if (req.body.visualConfig) {
     try { const parsed=JSON.parse(String(req.body.visualConfig)); if(parsed&&typeof parsed==='object') visualConfig=parsed; } catch (_) {}
   }
-  const model={id:id||`modelo-${Date.now()}`,name:String(req.body.name||'Novo modelo').trim(),type:['sale','service_order','credit_book','all'].includes(req.body.type)?req.body.type:'all',paper:req.body.paper==='thermal'?'thermal':'a4',content:String(req.body.content||'').trim(),active:req.body.active==='on',visualConfig};
+  const model={id:id||`modelo-${Date.now()}`,name:String(req.body.name||'Novo modelo').trim(),type:['sale','service_order','credit_book','return','all'].includes(req.body.type)?req.body.type:'all',paper:req.body.paper==='thermal'?'thermal':'a4',content:String(req.body.content||'').trim(),active:req.body.active==='on',visualConfig};
   const index=items.findIndex(x=>String(x.id)===model.id);
   if(index>=0){
     const previous=items[index];
@@ -2142,6 +2147,46 @@ router.get('/pdv/trocas-devolucoes', (req,res) => {
     return res.render('trocas_devolucoes',{flash:req.query.flash||null,q,sales,selected,customers:customerService.listCustomers({includeInactive:false}),reasons:RETURN_REASONS,recentReturns:returns.list({}).slice(0,30)});
   } catch(error){
     return res.status(400).render('trocas_devolucoes',{flash:error.message||'Não foi possível abrir Trocas e Devoluções.',q:String(req.query.q||''),sales:[],selected:null,customers:[],reasons:RETURN_REASONS,recentReturns:[]});
+  }
+});
+
+
+router.get('/pdv/trocas-devolucoes/:id/imprimir', (req,res) => {
+  try {
+    const returns=getReturnService(req.app),record=returns.get(String(req.params.id||'').trim());
+    if(!record) return res.status(404).send('Troca/devolução não encontrada.');
+    const customer=record.customerId?getCustomerService(req.app).getCustomer(record.customerId):null;
+    const printSettings=readJson(PRINT_SETTINGS_FILE,{}),models=ensureNativePrintModels();
+    const requestedModelId=String(req.query.modelo||'').trim();
+    const requestedModel=requestedModelId?models.find(model=>String(model.id)===requestedModelId&&model.type==='return'&&model.active!==false):null;
+    const model=requestedModel||models.find(model=>model.type==='return'&&model.active!==false)||nativePrintModels(printSettings).find(model=>model.id==='return-receipt');
+    if(!model) return res.status(500).send('Modelo de impressão de troca/devolução não encontrado.');
+
+    const money=value=>Number(value||0).toLocaleString('pt-BR',{style:'currency',currency:'BRL'});
+    const date=value=>{const parsed=new Date(value||'');return Number.isNaN(parsed.getTime())?String(value||'—'):parsed.toLocaleString('pt-BR');};
+    const safe=value=>escapePrintHtml(value||'—');
+    const customerAddress=[customer?.address?.street||customer?.street,customer?.address?.number||customer?.number,customer?.address?.complement||customer?.complement,customer?.address?.district||customer?.district,customer?.address?.city||customer?.city,customer?.address?.state||customer?.state,customer?.address?.zipCode||customer?.zipCode||customer?.postalCode].filter(Boolean).join(', ')||'—';
+    const dispositions={sellable:'Retorno ao estoque vendável',quarantine:'Quarentena / análise',discarded:'Descartado / sem retorno ao estoque',none:'Sem movimentação de estoque'};
+    const itemRows=(record.items||[]).map(item=>`<tr><td>${safe(String(item.code||'').replace(/^PRD-/i,'')||'—')}</td><td>${safe(item.name)}</td><td>${safe(item.quantity)}</td><td>${money(item.unitCredit)}</td><td>${safe(dispositions[item.disposition]||item.disposition||'—')}</td><td>${money(item.totalCredit)}</td></tr>`).join('')||'<tr><td colspan="6">Nenhum item registrado.</td></tr>';
+    const itemsTable=`<table class="document-items"><thead><tr><th>Cód.</th><th>Produto</th><th>Qtd.</th><th>Crédito un.</th><th>Destino</th><th>Total</th></tr></thead><tbody>${itemRows}</tbody></table>`;
+    const financialRows=[];
+    if(Number(record.financial?.receivableApplied||0)>0) financialRows.push(`<div class="document-row"><span>Abatimento em contas a receber</span><b>${money(record.financial.receivableApplied)}</b></div>`);
+    if(Number(record.financial?.walletCredit||0)>0) financialRows.push(`<div class="document-row"><span>Crédito na carteira do cliente</span><b>${money(record.financial.walletCredit)}</b></div>`);
+    for(const adjustment of record.financial?.receivableAdjustments||[]) financialRows.push(`<div class="document-row" style="font-size:11px;margin-left:12px"><span>Título ${safe(adjustment.number||adjustment.receivableId||'—')}</span><b>${money(adjustment.value)}</b></div>`);
+    if(!financialRows.length) financialRows.push('<div class="document-row"><span>Registro financeiro</span><b>Sem movimentação financeira vinculada</b></div>');
+    let logoUrl=String(printSettings.logoUrl||'');if(logoUrl.startsWith('/uploads/'))logoUrl=`/public${logoUrl}`;
+    const logoWidth=Math.min(100,Math.max(25,Number(printSettings.logoWidthPercent||72))),logoTop=Math.min(30,Math.max(0,Number(printSettings.logoMarginTop||0))),logoBottom=Math.min(30,Math.max(0,Number(printSettings.logoMarginBottom??7))),logoAlign=['left','center','right'].includes(printSettings.logoAlign)?printSettings.logoAlign:'center';
+    const logoMargin=logoAlign==='left'?`${logoTop}px auto ${logoBottom}px 0`:logoAlign==='right'?`${logoTop}px 0 ${logoBottom}px auto`:`${logoTop}px auto ${logoBottom}px auto`;
+    const logo=logoUrl?`<img class="document-logo" style="width:${logoWidth}%;margin:${logoMargin}" src="${escapePrintHtml(logoUrl)}" alt="Logo">`:'';
+    const variables={
+      empresa:safe(printSettings.companyName||'QUALITY CELULARES'),empresa_razao:safe(printSettings.companyLegalName||printSettings.companyName||'QUALITY CELULARES'),empresa_cnpj:safe(printSettings.companyDocument),empresa_endereco:safe(printSettings.companyAddress),empresa_cidade:safe(printSettings.companyCity),empresa_telefone:safe(printSettings.companyPhone),empresa_email:safe(printSettings.companyEmail),empresa_site:safe(printSettings.companyWebsite),empresa_logo:logo,
+      cliente:safe(customer?.name||record.customerName||'Consumidor final'),cpf:safe(customer?.documentFormatted||formatDocument(customer?.document||customer?.cpfCnpj||customer?.cpf||customer?.cnpj||'')),telefone:safe(customer?.mobileFormatted||customer?.mobile||customer?.phoneFormatted||formatPhone(customer?.phone||'')),endereco:safe(customerAddress),cliente_email:safe(customer?.email),
+      devolucao_numero:safe(record.number),devolucao_tipo:safe(record.type==='exchange'?'TROCA':'DEVOLUÇÃO'),devolucao_data:safe(date(record.createdAt)),data:safe(date(record.createdAt)),venda_original:safe(`#${record.originalOperationNumber||record.originalOperationId||'—'}`),devolucao_motivo:safe(record.reasonLabel||record.reasonCode),devolucao_motivo_detalhes:safe([record.reason,record.notes].filter(Boolean).join(' — ')||'—'),devolucao_itens:itemsTable,devolucao_total:money(record.totalCredit),devolucao_financeiro:financialRows.join(''),devolucao_operador:safe(record.createdBy||'painel')
+    };
+    return res.render('troca_devolucao_impressao',{model,variables});
+  } catch(error) {
+    console.error('Erro ao imprimir troca/devolução:',error);
+    return res.status(500).send(error.message||'Não foi possível gerar a impressão da troca/devolução.');
   }
 });
 

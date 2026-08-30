@@ -4,6 +4,7 @@ import crypto from 'crypto';
 
 const clone = value => JSON.parse(JSON.stringify(value));
 const digits = value => String(value ?? '').replace(/\D/g, '');
+const ncmCode = value => { const code=digits(value).slice(0,8); return code.length===8&&code!=='00000000'?code:''; };
 const text = value => String(value ?? '').normalize('NFC').trim();
 const number = value => Number.isFinite(Number(value)) ? Number(value) : 0;
 function escapeRegExp(value='') { return String(value).replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); }
@@ -15,6 +16,65 @@ function normalizeName(value = '') {
   return text(value).normalize('NFD').replace(/[\u0300-\u036f]/g, '').toUpperCase()
     .replace(/\b(UNIDADE|UN|UND)\b/g, ' ')
     .replace(/[^A-Z0-9]+/g, ' ').replace(/\s+/g, ' ').trim();
+}
+
+// Regras propositalmente conservadoras. Elas existem só para categorias em que o
+// nome do item identifica a mercadoria com alta confiança; itens ambíguos continuam
+// sem preenchimento automático para revisão humana.
+const NCM_TRUSTED = Object.freeze({
+  smartphone:{ code:'85171300', reason:'Telefone inteligente (smartphone)' },
+  lithiumBattery:{ code:'85076000', reason:'Acumulador de íon de lítio para aparelho móvel' },
+  charger:{ code:'85044010', reason:'Carregador de acumuladores' },
+  headphones:{ code:'85183000', reason:'Fone de ouvido, mesmo com microfone' },
+  mouse:{ code:'84716053', reason:'Indicador/apontador (mouse)' },
+  gameConsole:{ code:'95045000', reason:'Console/máquina de jogos de vídeo ou controlador reconhecível' },
+  dataCable:{ code:'85444200', reason:'Condutor elétrico isolado, munido de peças de conexão' },
+  penDrive:{ code:'85235190', reason:'Dispositivo de armazenamento não volátil (pen drive)' },
+  memoryCard:{ code:'85235110', reason:'Cartão de memória' }
+});
+const PHONE_PART_WORDS = /\b(CAPA|CASE|PELICULA|TELA|FRONTAL|DISPLAY|LCD|BATERIA|FLEX|CONECTOR|TAMPA|CARCACA|VIDRO|ARO|CAMERA|BOTAO|ALTO FALANTE|MICROFONE|CARREGADOR|FONTE|CABO|FONE|HEADPHONE|HEADSET|SUPORTE|ADESIVO|LENTE|PLACA|GAVETA|CHIP|PECA|MODULO|TOUCH|DOCK|SENSOR|AURICULAR)\b/;
+const PRIMARY_BATTERY_WORDS = /\b(PILHA|AG ?\d+|LR ?\d+|CR ?\d+|AA|AAA|AAAA|9V|ALCALINA|ZINCO)\b/;
+function trustedNcmForName(value = '') {
+  const name=normalizeName(value);
+  if(!name) return null;
+
+  if(/\bBATERIA\b/.test(name) && !PRIMARY_BATTERY_WORDS.test(name) && /\b(IPHONE|APPLE|SAMSUNG|MOTOROLA|MOTO|XIAOMI|REDMI|POCO|LG|ASUS|ZENFONE)\b/.test(name)) return NCM_TRUSTED.lithiumBattery;
+  if(/\b(CARREGADOR|FONTE)\b/.test(name) && /\b(USB|TYPE C|TIPO C|LIGHTNING|IPHONE|APPLE|SAMSUNG|MOTOROLA|XIAOMI|TURBO|PD|GAN|INDUCAO|WIRELESS)\b/.test(name) && !/\bKIT\b/.test(name)) return NCM_TRUSTED.charger;
+  if(/\b(FONE DE OUVIDO|FONE BLUETOOTH|HEADPHONE|HEADSET|EARPHONE|TWS)\b/.test(name) && !/\b(CAPA|CASE|ESTOJO|CABO|ADAPTADOR)\b/.test(name)) return NCM_TRUSTED.headphones;
+  if(/\bMOUSE\b/.test(name) && !/\b(MOUSEPAD|MOUSE PAD|KIT)\b/.test(name)) return NCM_TRUSTED.mouse;
+  if((/\b(CONSOLE|VIDEOGAME)\b/.test(name) && /\b(PLAYSTATION|PS4|PS5|XBOX)\b/.test(name)) || (/\bCONTROLE\b/.test(name) && /\b(PLAYSTATION|PS3|PS4|PS5|XBOX)\b/.test(name))) return NCM_TRUSTED.gameConsole;
+  // Cabo simples de alimentação/dados com conectores. 'Adaptador' é excluído porque
+  // pode incorporar circuito eletrônico e cair em outra classificação.
+  if(/\bCABO\b/.test(name) && /\b(USB|USB C|TYPE C|TIPO C|MICRO USB|LIGHTNING)\b/.test(name) && !/\b(ADAPTADOR|CONVERSOR|HUB|DOCK|RCA|P2|AUXILIAR|AUDIO|KIT)\b/.test(name)) return NCM_TRUSTED.dataCable;
+  if(/\b(PEN DRIVE|PENDRIVE|USB FLASH DRIVE)\b/.test(name)) return NCM_TRUSTED.penDrive;
+  if(/\b(CARTAO DE MEMORIA|CARTAO MEMORIA|MEMORY CARD|MICRO SD|MICROSD)\b/.test(name) && !/\b(ADAPTADOR|LEITOR)\b/.test(name)) return NCM_TRUSTED.memoryCard;
+
+  if(PHONE_PART_WORDS.test(name)) return null;
+  if(/\bSMARTPHONE\b/.test(name)) return NCM_TRUSTED.smartphone;
+  if(/\b(?:APPLE )?IPHONE (?:SE(?: \d{4})?|\d{1,2})(?:\b|$)/.test(name)) return NCM_TRUSTED.smartphone;
+  if(/\bSAMSUNG\b/.test(name) && /\b(?:GALAXY )?(?:A|M|S|Z) ?\d{2,3}\b/.test(name) && /\b(32|64|128|256|512|1024) ?GB\b|\b(4G|5G|USADO|NOVO|LACRADO)\b/.test(name)) return NCM_TRUSTED.smartphone;
+  if(/\bMOTOROLA\b/.test(name) && /\bMOTO [A-Z0-9]+\b/.test(name) && /\b(32|64|128|256|512) ?GB\b|\b(4G|5G|USADO|NOVO|LACRADO)\b/.test(name)) return NCM_TRUSTED.smartphone;
+  if(/\b(XIAOMI|REDMI|POCO)\b/.test(name) && /\b(32|64|128|256|512) ?GB\b|\b(4G|5G|USADO|NOVO|LACRADO)\b/.test(name)) return NCM_TRUSTED.smartphone;
+  if(/\bCELULAR\b/.test(name) && /\b(SAMSUNG|MOTOROLA|XIAOMI|REDMI|POCO)\b/.test(name) && /\b(ANDROID|4G|5G|USADO|NOVO|LACRADO|32|64|128|256|512)\b/.test(name)) return NCM_TRUSTED.smartphone;
+  return null;
+}
+function legacyNcmLooksCompatible(nameValue='', ncm='') {
+  const name=normalizeName(nameValue);
+  const code=ncmCode(ncm);
+  if(!code) return false;
+
+  // O histórico do WM10 contém classificações antigas e algumas claramente
+  // incompatíveis. Por isso o legado só é reaproveitado automaticamente quando
+  // o próprio nome confirma um grupo que conseguimos validar com alta confiança.
+  const trusted=trustedNcmForName(name);
+  if(trusted) return trusted.code===code;
+
+  // Películas só são aceitas no 3919.90.90 quando o nome deixa explícito que se
+  // trata de material plástico/autoadesivo. "Película de vidro" fica fora.
+  if(code==='39199090' && /\bPELICULA\b/.test(name) && /\b(HIDROGEL|PET|PLASTICA|PLASTICO|POLIMERO|AUTOADESIVA|AUTO ADESIVA)\b/.test(name) && !/\bVIDRO\b/.test(name)) return true;
+
+  // Fora dos casos verificados acima, não copiamos NCM legado apenas por existir.
+  return false;
 }
 function tokens(value = '') { return new Set(normalizeName(value).split(' ').filter(token => token.length > 1)); }
 function fingerprint(value = '') {
@@ -60,6 +120,7 @@ export default class Wm10ProductImportService {
     this.reportFile = path.join(this.dataDir, 'wm10-product-last-report.json');
     this.familyStateFile = path.join(this.dataDir, 'wm10-product-family-state.json');
     this.sourceCacheFile = path.join(this.dataDir, 'wm10-product-source-cache.json');
+    this.erpCategoriesFile = path.join(path.dirname(this.dataDir), 'catalog', 'categories.json');
     fs.mkdirSync(this.dataDir, { recursive:true });
     if (!fs.existsSync(this.configFile)) writeAtomic(this.configFile, {
       version:'1.0', baseUrl:'https://app.wm10.com.br/quality/sistema/api/produto/', categoryUrl:'https://app.wm10.com.br/quality/sistema/api/categoria/', cnpj:'', token:'', pageSize:500
@@ -175,7 +236,7 @@ export default class Wm10ProductImportService {
     if (!cache || !Array.isArray(cache.rows) || !cache.createdAt) return null;
     const age = Date.now() - new Date(cache.createdAt).getTime();
     if (!Number.isFinite(age) || age < 0) return null;
-    if (Number.isFinite(Number(maxAgeMs)) && Number(maxAgeMs) >= 0 && age > Number(maxAgeMs)) return null;
+    if (maxAgeMs !== null && maxAgeMs !== undefined && Number.isFinite(Number(maxAgeMs)) && Number(maxAgeMs) >= 0 && age > Number(maxAgeMs)) return null;
     if (Array.isArray(requiredCodes) && requiredCodes.length) {
       const wanted = new Set(requiredCodes.map(Number).filter(Number.isFinite));
       if (wanted.size) {
@@ -209,6 +270,7 @@ export default class Wm10ProductImportService {
     return {
       code,
       barcode:digits(row.Cod_barra ?? row.cod_barra),
+      ncm:ncmCode(row.ncm ?? row.NCM),
       name:text(row.Nome ?? row.nome) || `Produto WM10 ${code}`,
       cost:number(row.Preco_compra ?? row.preco_compra),
       price:number(row.Preco_venda ?? row.preco_venda),
@@ -460,12 +522,12 @@ export default class Wm10ProductImportService {
   normalizeFieldOptions(fields = {}, { mode='import' } = {}) {
     const source = fields && typeof fields === 'object' ? fields : {};
     const defaults = mode === 'sync'
-      ? { salePrice:false, cost:false, barcode:false, reference:false, brand:false, unit:false, active:false, stock:true, collection:false }
-      : { salePrice:true, cost:false, barcode:true, reference:true, brand:true, unit:true, active:true, stock:false, collection:false };
+      ? { salePrice:false, cost:false, barcode:false, ncm:false, reference:false, brand:false, unit:false, active:false, stock:true, collection:false }
+      : { salePrice:true, cost:false, barcode:true, ncm:true, reference:true, brand:true, unit:true, active:true, stock:false, collection:false };
     const value = key => source[key] === undefined ? defaults[key] : source[key] === true || source[key] === 'true' || source[key] === '1' || source[key] === 1;
     return {
       name:mode === 'import',
-      salePrice:value('salePrice'), cost:value('cost'), barcode:value('barcode'), reference:value('reference'),
+      salePrice:value('salePrice'), cost:value('cost'), barcode:value('barcode'), ncm:value('ncm'), reference:value('reference'),
       brand:value('brand'), unit:value('unit'), active:value('active'), stock:value('stock'), collection:value('collection')
     };
   }
@@ -496,16 +558,16 @@ export default class Wm10ProductImportService {
     return {
       id, name:item.name,
       sku:selected.reference ? (item.reference || '') : '', code:internalCode,
-      barcode:selected.barcode ? (item.barcode || '') : '', brand:selected.brand ? (item.brand || '') : '',
+      barcode:selected.barcode ? (item.barcode || '') : '', ncm:selected.ncm ? (item.ncm || '') : '', brand:selected.brand ? (item.brand || '') : '',
       slug:this.uniqueSlug(item.name, items), price:selected.salePrice ? item.price : 0, stock:selected.stock ? item.stock : 0,
       image:'', gallery:[], category:'', subcategory:'', tags:[], relatedManualIds:[], crossSellIds:[],
       showPrice:false, featured:false, active:false,
       commercial:{ costPrice:selected.cost ? item.cost : 0, erpPrice:selected.salePrice ? item.price : 0, marketplacePrice:null, promotionalPrice:null, desiredMarginPercent:null, expectedProfit:null, defaultCommissionPercent:null, cashPrice:null, installmentPrice:null, minimumPrice:null, minimumMarginPercent:null, discountPolicy:'inherit', maximumDiscountPercent:null, maximumDiscountAmount:null, requiresAuthorization:false },
-      erp:{ sku:selected.reference ? (item.reference || '') : '', internalCode, supplierCode:selected.reference ? (item.reference || '') : '', searchAlias:'', barcode:selected.barcode ? (item.barcode || '') : '', brand:selected.brand ? (item.brand || '') : '', unit:selected.unit ? (item.unit || 'UN') : 'UN', category:'', subcategory:'', mainSupplierId:'', preferredSupplierId:'', active:selected.active ? item.active : true },
+      erp:{ sku:selected.reference ? (item.reference || '') : '', internalCode, supplierCode:selected.reference ? (item.reference || '') : '', searchAlias:'', barcode:selected.barcode ? (item.barcode || '') : '', ncm:selected.ncm ? (item.ncm || '') : '', fiscal:{ncm:selected.ncm ? (item.ncm || '') : ''}, brand:selected.brand ? (item.brand || '') : '', unit:selected.unit ? (item.unit || 'UN') : 'UN', category:'', subcategory:'', mainSupplierId:'', preferredSupplierId:'', active:selected.active ? item.active : true },
       virtualStore:{ name:item.name, price:selected.salePrice ? item.price : 0, active:false, seoTitle:'', seoDescription:'', channels:{ lojaVirtual:{enabled:false}, mercadoLivre:{enabled:false}, shopee:{enabled:false}, amazon:{enabled:false}, magalu:{enabled:false} } },
       inventory:{ itemId:inventoryItemId, stockControlled:true, allowNegative:false, minimumQuantity:0, channelAvailability:{ site:{ mode:'disabled', enabled:false, limit:null, physicalSafety:0 } } },
       detailsEnabled:false, showVariationsOnCard:false, descriptionShort:'', descriptionLong:'', variations:{ enabled:false, colors:[], storage:[], ram:[], condition:[], labels:[], combinations:[] },
-      integrations:{ wm10:{ productCode:item.code, productCodes:[item.code], originalName:item.name, barcode:item.barcode, reference:item.reference, color:item.color, size:item.size, brand:item.brand, collection:item.collection, sourceActive:item.active, sourceStock:item.stock, sourceCost:item.cost, sourcePrice:item.price, registeredAt:item.registeredAt, updatedAt:item.updatedAt, importedAt, importedBy:user, lastSyncAt:importedAt, lastSyncFields:Object.keys(selected).filter(key=>selected[key]) } },
+      integrations:{ wm10:{ productCode:item.code, productCodes:[item.code], originalName:item.name, barcode:item.barcode, ncm:item.ncm, reference:item.reference, color:item.color, size:item.size, brand:item.brand, collection:item.collection, sourceActive:item.active, sourceStock:item.stock, sourceCost:item.cost, sourcePrice:item.price, registeredAt:item.registeredAt, updatedAt:item.updatedAt, importedAt, importedBy:user, lastSyncAt:importedAt, lastSyncFields:Object.keys(selected).filter(key=>selected[key]) } },
       migration:{ origin:'WM10', importedAt, importedBy:user, needsErpCategory:true }
     };
   }
@@ -514,7 +576,7 @@ export default class Wm10ProductImportService {
     const current=product.integrations.wm10||{};
     const codes=[...new Set([...(current.productCodes||[]),current.productCode,item.code].filter(v=>v!==undefined&&v!==null).map(Number).filter(Number.isFinite))];
     const now=new Date().toISOString();
-    product.integrations.wm10={...current,productCode:current.productCode??item.code,productCodes:codes,originalName:item.name,barcode:item.barcode,reference:item.reference,color:item.color,size:item.size,brand:item.brand,collection:item.collection,sourceActive:item.active,sourceStock:item.stock,sourceCost:item.cost,sourcePrice:item.price,registeredAt:item.registeredAt,updatedAt:item.updatedAt,lastSyncAt:now,lastSyncBy:user,lastSyncFields:Object.keys(fields).filter(key=>fields[key])};
+    product.integrations.wm10={...current,productCode:current.productCode??item.code,productCodes:codes,originalName:item.name,barcode:item.barcode,ncm:item.ncm,reference:item.reference,color:item.color,size:item.size,brand:item.brand,collection:item.collection,sourceActive:item.active,sourceStock:item.stock,sourceCost:item.cost,sourcePrice:item.price,registeredAt:item.registeredAt,updatedAt:item.updatedAt,lastSyncAt:now,lastSyncBy:user,lastSyncFields:Object.keys(fields).filter(key=>fields[key])};
     return now;
   }
   applySelectedFields(product, item, fields, user) {
@@ -526,6 +588,7 @@ export default class Wm10ProductImportService {
     if(selected.salePrice){ product.price=item.price; product.commercial.erpPrice=item.price; }
     if(selected.cost) product.commercial.costPrice=item.cost;
     if(selected.barcode){ product.barcode=item.barcode||''; product.erp.barcode=item.barcode||''; }
+    if(selected.ncm&&item.ncm){ product.ncm=item.ncm; product.erp.ncm=item.ncm; product.erp.fiscal=product.erp.fiscal&&typeof product.erp.fiscal==='object'?product.erp.fiscal:{}; product.erp.fiscal.ncm=item.ncm; }
     if(selected.reference){ product.sku=item.reference||''; product.erp.sku=item.reference||''; product.erp.supplierCode=item.reference||''; }
     if(selected.brand){ product.brand=item.brand||''; product.erp.brand=item.brand||''; }
     if(selected.unit) product.erp.unit=item.unit||'UN';
@@ -793,7 +856,7 @@ export default class Wm10ProductImportService {
     const product=items.find(item=>String(item?.id||'')===String(productId||'')||String(item?.code||'')===String(productCode||''));
     if(!product) throw new Error('O produto importado desta família não foi localizado no cadastro do Quality.');
 
-    const selectedFields={salePrice:true,barcode:true,reference:true,brand:true,unit:true,active:true,cost:false,stock:false,collection:false};
+    const selectedFields={salePrice:true,barcode:true,ncm:true,reference:true,brand:true,unit:true,active:true,cost:false,stock:false,collection:false};
     const backupFile=this.backupProducts();
     const previousName=product.name;
     const previousSlug=product.slug;
@@ -836,6 +899,115 @@ export default class Wm10ProductImportService {
     writeAtomic(this.reportFile,{type:'family-repair',familyId:id,productId:product.id,productCode:product.code,previousName,name:product.name,variations:structured.combos.length,backupFile,at:new Date().toISOString()});
     return {familyId:id,productId:product.id,productCode:product.code,previousName,name:product.name,slug:product.slug,variations:structured.combos.length,backupFile};
   }
+
+  backfillNcmFromCache({ user='painel' } = {}) {
+    const cache=this.loadSourceCache({maxAgeMs:null});
+    if(!cache?.rows?.length) throw new Error('O cache local de produtos WM10 não está disponível. Atualize os dados do WM10 primeiro.');
+
+    const mappedRows=cache.rows.map(row=>this.mapRow(row)).filter(item=>Number.isFinite(item.code));
+    const sourceByCode=new Map(mappedRows.map(item=>[Number(item.code),item]));
+    const sourceNcmsByName=new Map();
+    for(const item of mappedRows){
+      if(!item.ncm) continue;
+      const key=normalizeName(item.name); if(!key) continue;
+      const set=sourceNcmsByName.get(key)||new Set(); set.add(item.ncm); sourceNcmsByName.set(key,set);
+    }
+
+    const state=this.migrationState(); state.products=state.products||{};
+    const data=safeJson(this.productsFile,{version:'1.0',items:[]}); const items=Array.isArray(data)?data:(data.items||[]); if(!Array.isArray(data))data.items=items;
+    const stateCodesByProduct=new Map();
+    for(const [codeRaw,migration] of Object.entries(state.products)){
+      if(!migration||!['imported','linked'].includes(migration.status)||!migration.productId)continue;
+      const list=stateCodesByProduct.get(String(migration.productId))||[]; list.push(Number(codeRaw)); stateCodesByProduct.set(String(migration.productId),list);
+    }
+
+    const categoryData=safeJson(this.erpCategoriesFile,{items:[]});
+    const categories=Array.isArray(categoryData)?categoryData:(categoryData.items||[]);
+    const categoryByKey=new Map();
+    for(const category of categories){
+      [category?.id,category?.code].filter(Boolean).forEach(key=>categoryByKey.set(String(key),category));
+    }
+    const isServiceProduct=product=>categoryByKey.get(String(product?.erp?.categoryId||product?.erp?.category||''))?.type==='service';
+
+    let updated=0,alreadyFilled=0,withoutNcm=0,conflicts=0,serviceSkipped=0,fromWm10=0,fromExactName=0,fromTrustedRule=0,reviewExisting=0,legacySuspectSkipped=0;
+    const conflictProducts=[],reviewProducts=[],filledProducts=[];
+    const applyNcm=(product,ncm,source,reason='')=>{
+      product.ncm=ncm;
+      product.erp=product.erp&&typeof product.erp==='object'?product.erp:{};
+      product.erp.ncm=ncm;
+      product.erp.fiscal=product.erp.fiscal&&typeof product.erp.fiscal==='object'?product.erp.fiscal:{};
+      product.erp.fiscal.ncm=ncm;
+      product.integrations=product.integrations&&typeof product.integrations==='object'?product.integrations:{};
+      product.integrations.wm10={...(product.integrations.wm10||{}),ncm,lastNcmBackfillAt:new Date().toISOString(),lastNcmBackfillBy:user,ncmBackfillSource:source};
+      updated+=1;
+      if(filledProducts.length<150) filledProducts.push({id:product.id,code:product.code||'',name:product.name||'',ncm,source,reason});
+    };
+
+    for(const product of items){
+      const productName=product?.name||product?.virtualStore?.name||'';
+      const trusted=trustedNcmForName(productName);
+      const current=ncmCode(product?.erp?.fiscal?.ncm??product?.erp?.ncm??product?.ncm);
+
+      if(isServiceProduct(product)){
+        serviceSkipped+=1;
+        if(current && reviewProducts.length<150) reviewProducts.push({id:product.id,code:product.code||'',name:productName,ncm:current,reason:'Produto cadastrado como Serviço; NCM normalmente não se aplica à prestação do serviço.'});
+        continue;
+      }
+
+      if(current){
+        alreadyFilled+=1;
+        if(trusted&&trusted.code!==current){
+          reviewExisting+=1;
+          if(reviewProducts.length<150) reviewProducts.push({id:product.id,code:product.code||'',name:productName,ncm:current,suggestedNcm:trusted.code,reason:trusted.reason});
+        }
+        continue;
+      }
+
+      const integration=product?.integrations?.wm10||{};
+      const codes=[...new Set([integration.productCode,...(integration.productCodes||[]),...(stateCodesByProduct.get(String(product.id))||[])].map(Number).filter(Number.isFinite))];
+      const ncms=[...new Set(codes.map(code=>sourceByCode.get(code)?.ncm).filter(Boolean))];
+
+      // Nome inequívoco ganha da classificação antiga do WM10. Isso corrige, por
+      // exemplo, smartphones que no legado estavam em 8517.62.62/8517.14.x.
+      if(trusted){
+        applyNcm(product,trusted.code,'regra-segura',trusted.reason);
+        fromTrustedRule+=1;
+        continue;
+      }
+
+      if(ncms.length>1){
+        conflicts+=1;
+        conflictProducts.push({id:product.id,code:product.code||'',name:productName,ncms});
+        continue;
+      }
+      if(ncms.length===1){
+        if(!legacyNcmLooksCompatible(productName,ncms[0])){
+          legacySuspectSkipped+=1;
+          if(reviewProducts.length<150) reviewProducts.push({id:product.id,code:product.code||'',name:productName,ncm:ncms[0],reason:'NCM do legado WM10 parece incompatível com o tipo de peça; não foi preenchido automaticamente.'});
+          continue;
+        }
+        applyNcm(product,ncms[0],'wm10-vinculo-exato','Mesmo código de produto vinculado ao cadastro WM10.');
+        fromWm10+=1;
+        continue;
+      }
+
+      const byName=[...(sourceNcmsByName.get(normalizeName(productName))||[])];
+      if(byName.length===1 && legacyNcmLooksCompatible(productName,byName[0])){
+        applyNcm(product,byName[0],'wm10-nome-exato','Nome normalizado idêntico no cache WM10 e apenas um NCM encontrado.');
+        fromExactName+=1;
+        continue;
+      }
+
+      withoutNcm+=1;
+    }
+
+    const backupFile=updated?this.backupProducts():null;
+    if(updated)writeAtomic(this.productsFile,Array.isArray(data)?items:data);
+    const report={type:'ncm-backfill',updated,alreadyFilled,withoutNcm,conflicts,serviceSkipped,fromWm10,fromExactName,fromTrustedRule,reviewExisting,legacySuspectSkipped,conflictProducts:conflictProducts.slice(0,100),reviewProducts:reviewProducts.slice(0,150),filledProducts:filledProducts.slice(0,150),backupFile,sourceCacheAt:cache.createdAt||null,finishedAt:new Date().toISOString()};
+    writeAtomic(this.reportFile,report);
+    return report;
+  }
+
 
   async importSelected({ selectedCodes = [], fields = {}, itemKinds = {}, serviceCategory = null, user='painel' } = {}) {
     const selected=[...new Set(selectedCodes.map(Number).filter(Number.isFinite))];

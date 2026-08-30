@@ -1,90 +1,499 @@
 <% layout('layout') -%>
 
+<style>
+  .banner-page { min-width:0; overflow:hidden; }
+  .banner-page * { box-sizing:border-box; }
+  .banner-head { display:flex; align-items:center; justify-content:space-between; gap:10px; flex-wrap:wrap; }
+  .banner-head h3 { margin:0; }
+
+  .banner-help,
+  .banner-create,
+  .banner-advanced {
+    border:1px solid var(--border, #303030);
+    border-radius:10px;
+    background:rgba(255,255,255,.018);
+    overflow:hidden;
+  }
+  .banner-help { margin:10px 0; }
+  .banner-help summary,
+  .banner-create > summary,
+  .banner-advanced > summary {
+    cursor:pointer;
+    user-select:none;
+    font-weight:800;
+  }
+  .banner-help summary { padding:9px 11px; }
+  .banner-help-body { padding:0 11px 11px; display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:8px; }
+  .banner-tip {
+    position:relative;
+    border:1px solid var(--border, #303030);
+    border-radius:9px;
+    padding:10px 11px 10px 13px;
+    min-width:0;
+    overflow:hidden;
+    background:rgba(255,255,255,.018);
+  }
+  .banner-tip::before {
+    content:'';
+    position:absolute;
+    left:0;
+    top:0;
+    bottom:0;
+    width:4px;
+    background:var(--tip-color, #7c8aa0);
+  }
+  .banner-tip strong { display:block; margin-bottom:4px; color:var(--tip-color, inherit); }
+  .banner-tip small { display:block; line-height:1.4; opacity:.84; }
+  .banner-tip.desktop { --tip-color:#5bbcff; background:rgba(91,188,255,.055); }
+  .banner-tip.mobile { --tip-color:#b982ff; background:rgba(185,130,255,.055); }
+  .banner-tip.update { --tip-color:#ffbf5b; background:rgba(255,191,91,.055); }
+  .banner-tip.flow { --tip-color:#55d69e; background:rgba(85,214,158,.055); }
+  .banner-tip.file { --tip-color:#ff8e72; background:rgba(255,142,114,.055); }
+  .banner-tip.check { --tip-color:#72dc78; background:rgba(114,220,120,.055); }
+
+  .banner-create { margin:10px 0 14px; }
+  .banner-create > summary {
+    padding:10px 12px;
+    display:flex;
+    align-items:center;
+    gap:8px;
+  }
+  .banner-create[open] > summary { border-bottom:1px solid var(--border, #303030); }
+  .banner-create-form { padding:11px; }
+
+  .banner-upload-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:9px; }
+  .banner-upload-card {
+    border:1px solid var(--border, #303030);
+    border-radius:9px;
+    padding:9px;
+    min-width:0;
+    background:rgba(255,255,255,.012);
+  }
+  .banner-upload-card-head { display:flex; align-items:center; justify-content:space-between; gap:8px; margin-bottom:7px; }
+  .banner-upload-card-head strong { font-size:12px; }
+
+  .info-icon {
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    width:17px;
+    height:17px;
+    border:1px solid currentColor;
+    border-radius:50%;
+    font-size:10px;
+    line-height:1;
+    opacity:.65;
+    cursor:help;
+    flex:0 0 auto;
+  }
+
+  .banner-file-button {
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+    width:max-content;
+    max-width:100%;
+    padding:6px 9px;
+    border:1px solid var(--border, #3a3a3a);
+    border-radius:8px;
+    background:rgba(255,255,255,.04);
+    cursor:pointer;
+    font-size:11px;
+    font-weight:700;
+  }
+  .banner-file-button:hover { background:rgba(255,255,255,.075); }
+  .banner-file-button input { display:none !important; }
+  .banner-file-info { min-height:15px; margin-top:5px; font-size:10px; opacity:.72; line-height:1.3; }
+  .banner-file-info.ok { color:#79d58b; opacity:1; }
+  .banner-file-info.warn { color:#f4c56a; opacity:1; }
+
+  .banner-manual-path { margin-top:7px; }
+  .banner-manual-path summary { cursor:pointer; font-size:10px; opacity:.65; user-select:none; }
+  .banner-manual-path input { margin-top:5px; width:100%; }
+
+  .banner-meta-row {
+    display:grid;
+    grid-template-columns:minmax(160px,.9fr) minmax(220px,1.3fr) 88px auto;
+    gap:8px;
+    align-items:end;
+    margin-top:9px;
+  }
+  .banner-field { min-width:0; }
+  .banner-field label { display:flex; align-items:center; gap:5px; margin:0 0 4px; font-size:10px; opacity:.8; }
+  .banner-field input { width:100%; max-width:100%; min-width:0; height:32px; padding:6px 8px; }
+  .banner-field.order input { text-align:center; }
+
+  .banner-list-title { display:flex; align-items:center; gap:7px; margin:3px 0 8px; }
+  .banner-list { display:grid; gap:9px; }
+  .banner-item {
+    border:1px solid var(--border, #303030);
+    border-radius:11px;
+    min-width:0;
+    overflow:hidden;
+    background:rgba(255,255,255,.015);
+  }
+  .banner-item-details { min-width:0; }
+  .banner-item-summary {
+    list-style:none;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:10px;
+    padding:10px 11px;
+    cursor:pointer;
+    user-select:none;
+  }
+  .banner-item-summary::-webkit-details-marker { display:none; }
+  .banner-item-summary::before {
+    content:'▶';
+    font-size:9px;
+    opacity:.62;
+    flex:0 0 auto;
+    transition:transform .16s ease;
+  }
+  .banner-item-details[open] > .banner-item-summary::before { transform:rotate(90deg); }
+  .banner-item-details[open] > .banner-item-summary { border-bottom:1px solid var(--border, #303030); }
+  .banner-item-summary-main { display:flex; align-items:center; gap:8px; min-width:0; flex:1; }
+  .banner-item-summary-side { display:flex; align-items:center; gap:9px; min-width:0; }
+  .banner-item-body { padding:10px; }
+  .banner-number { display:flex; align-items:center; gap:7px; font-weight:800; white-space:nowrap; }
+  .banner-summary-path { font-size:10px; opacity:.55; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+  .banner-status-note { font-size:10px; opacity:.62; white-space:nowrap; }
+
+  .banner-previews { display:grid; grid-template-columns:minmax(0,1.45fr) minmax(0,1fr); gap:10px; align-items:start; }
+  .banner-preview-box { min-width:0; }
+  .banner-preview-label { display:flex; align-items:center; justify-content:space-between; gap:6px; margin:0 0 4px; font-size:10px; opacity:.74; }
+  .banner-dimension { white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .banner-dimension.ok { color:#79d58b; opacity:1; }
+  .banner-dimension.warn { color:#f4c56a; opacity:1; }
+  .banner-preview-frame {
+    width:100%;
+    aspect-ratio:1920 / 560;
+    border:1px solid var(--border, #303030);
+    border-radius:8px;
+    overflow:hidden;
+    background:
+      linear-gradient(45deg, rgba(255,255,255,.025) 25%, transparent 25%),
+      linear-gradient(-45deg, rgba(255,255,255,.025) 25%, transparent 25%),
+      linear-gradient(45deg, transparent 75%, rgba(255,255,255,.025) 75%),
+      linear-gradient(-45deg, transparent 75%, rgba(255,255,255,.025) 75%);
+    background-size:18px 18px;
+    background-position:0 0, 0 9px, 9px -9px, -9px 0;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+  }
+  .banner-preview-box.mobile .banner-preview-frame { aspect-ratio:1366 / 768; }
+  .banner-preview-frame img {
+    width:100%;
+    height:100%;
+    object-fit:contain;
+    object-position:center;
+    display:block;
+  }
+  .banner-preview-tools { display:flex; align-items:center; justify-content:space-between; gap:7px; margin-top:5px; min-height:27px; }
+  .banner-preview-tools .banner-file-info { margin:0; text-align:right; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+
+  .banner-actions { display:flex; gap:6px; justify-content:flex-end; align-items:center; flex-wrap:nowrap; }
+  .banner-actions .btn { white-space:nowrap; }
+
+  .banner-advanced { margin-top:7px; }
+  .banner-advanced > summary { padding:7px 9px; font-size:10px; opacity:.72; }
+  .banner-advanced-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:8px; padding:0 9px 9px; }
+
+  @media (max-width: 1050px) {
+    .banner-meta-row { grid-template-columns:minmax(160px,1fr) minmax(200px,1fr) 80px; }
+    .banner-actions { grid-column:1 / -1; justify-content:flex-end; }
+  }
+  @media (max-width: 900px) {
+    .banner-help-body { grid-template-columns:1fr; }
+    .banner-upload-grid, .banner-previews, .banner-advanced-grid { grid-template-columns:1fr; }
+    .banner-meta-row { grid-template-columns:1fr 1fr; }
+    .banner-field.order { max-width:100px; }
+  }
+  @media (max-width: 620px) {
+    .banner-item-summary-side .banner-status-note { display:none; }
+    .banner-summary-path { display:none; }
+    .banner-meta-row { grid-template-columns:1fr; }
+    .banner-field.order { max-width:none; }
+    .banner-actions { grid-column:auto; justify-content:flex-start; }
+  }
+</style>
+
 <% if (flashes && flashes.length) { %>
   <% flashes.forEach(function(msg){ %>
-    <div class="notice">✅ <%= msg %></div>
+    <div class="notice"><%= String(msg).startsWith('⚠️') ? '' : '✅ ' %><%= msg %></div>
   <% }) %>
 <% } %>
 
-<div class="card">
-  <h3>🖼️ Banners (CRUD)</h3>
+<div class="card banner-page">
+  <div class="banner-head">
+    <h3>🖼️ Banners do site</h3>
+    <span class="badge"><%= (items||[]).length %> banner(s)</span>
+  </div>
 
-  <form method="post" action="/banners/add" class="grid" style="grid-template-columns: 1fr 1fr; gap:12px; margin-bottom:10px;">
-    <div>
-      <label>Imagem Desktop (URL)</label>
-      <input type="text" name="src" placeholder="images/meu-banner.png">
+  <details class="banner-help">
+    <summary>ⓘ Guia rápido de banners</summary>
+    <div class="banner-help-body">
+      <div class="banner-tip desktop">
+        <strong>🖥️ Desktop: 1920 × 560 px</strong>
+        <small>Mantenha textos e elementos importantes longe das bordas para evitar cortes em telas diferentes.</small>
+      </div>
+      <div class="banner-tip mobile">
+        <strong>📱 Mobile: 1366 × 768 px</strong>
+        <small>Use uma arte própria para mobile. Evite apenas recortar a imagem desktop.</small>
+      </div>
+      <div class="banner-tip update">
+        <strong>🔄 Atualização</strong>
+        <small>Mantenha 3 a 4 banners. Troque promoções a cada 2–4 semanas ou quando a oferta deixar de valer.</small>
+      </div>
+      <div class="banner-tip flow">
+        <strong>⚡ Fluxo rápido</strong>
+        <small>Escolha a imagem aqui no ERP e salve. O caminho é preenchido automaticamente.</small>
+      </div>
+      <div class="banner-tip file">
+        <strong>🗜️ Arquivo</strong>
+        <small>JPG/WebP funcionam bem para fotos. PNG é útil quando a arte exige mais nitidez ou transparência.</small>
+      </div>
+      <div class="banner-tip check">
+        <strong>✅ Conferência</strong>
+        <small>O tamanho real aparece junto ao preview e fica destacado se sair do padrão.</small>
+      </div>
     </div>
-    <div>
-      <label>Imagem Mobile (URL)</label>
-      <input type="text" name="mobileSrc" placeholder="images/meu-banner-mobile.png">
-    </div>
-    <div>
-      <label>Título</label>
-      <input type="text" name="title" placeholder="Título do banner">
-    </div>
-    <div>
-      <label>Link</label>
-      <input type="text" name="href" placeholder="https://wa.me/...">
-    </div>
-    <div>
-      <label>Ordem</label>
-      <input type="number" name="order" value="<%= (items||[]).length %>">
-    </div>
-    <div style="display:flex; align-items:flex-end; gap:8px;">
-      <button class="btn">💾 Adicionar</button>
-    </div>
-  </form>
+  </details>
 
-  <table class="table">
-    <thead>
-      <tr>
-        <th>#</th>
-        <th>Preview</th>
-        <th>Imagem (desktop)</th>
-        <th>Imagem (mobile)</th>
-        <th>Título</th>
-        <th>Link</th>
-        <th>Ordem</th>
-        <th>Ações</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% (items||[]).forEach(function(it, idx){ %>
-        <tr>
-          <td><span class="badge"><%= idx+1 %></span></td>
-          <td>
-            <% if (it.src) { %>
-              <img src="<%= it.src %>" alt="" style="height:26px;max-width:120px;object-fit:cover;border-radius:6px;">
-            <% } %>
-          </td>
-          <td>
-            <form method="post" action="/banners/<%= idx %>/save">
-              <input type="text" name="src" value="<%- it.src||'' %>" placeholder="images/bannerX.png">
-          </td>
-          <td>
-              <input type="text" name="mobileSrc" value="<%- it.mobileSrc||'' %>" placeholder="images/bannerX-mobile.png">
-          </td>
-          <td>
-              <input type="text" name="title" value="<%- it.title||'' %>">
-          </td>
-          <td>
-              <input type="text" name="href" value="<%- it.href||'' %>" placeholder="https://...">
-          </td>
-          <td style="width:80px;">
-              <input type="number" name="order" value="<%- Number(it.order||0) %>">
-          </td>
-          <td style="white-space:nowrap;">
-              <button class="btn btn-small">💾 Salvar</button>
-            </form>
-            <form method="post" action="/banners/delete/<%= idx %>" style="display:inline;">
-              <button class="btn btn-small btn-danger" onclick="return confirm('🗑️ Deseja realmente excluir este banner?')">🗑️ Excluir</button>
-            </form>
-          </td>
-        </tr>
-      <% }) %>
-      <% if (!items || !items.length) { %>
-        <tr><td colspan="8" style="text-align:center;color:#777;">Nenhum banner cadastrado.</td></tr>
-      <% } %>
-    </tbody>
-  </table>
+  <details class="banner-create">
+    <summary>➕ Adicionar novo banner</summary>
+    <form method="post" action="/banners/add" enctype="multipart/form-data" class="banner-create-form">
+      <div class="banner-upload-grid">
+        <div class="banner-upload-card">
+          <div class="banner-upload-card-head">
+            <strong>🖥️ Imagem Desktop</strong>
+            <span class="info-icon" title="Tamanho recomendado: 1920 × 560 px. Você também pode informar um caminho/URL no modo avançado.">i</span>
+          </div>
+          <label class="banner-file-button">📁 Escolher imagem
+            <input type="file" name="desktopFile" accept="image/png,image/jpeg,image/webp" data-banner-file="desktop" data-info-target="newDesktopInfo">
+          </label>
+          <div id="newDesktopInfo" class="banner-file-info">1920 × 560 px recomendado</div>
+          <details class="banner-manual-path">
+            <summary>Usar caminho/URL</summary>
+            <input type="text" name="src" placeholder="images/meu-banner.png">
+          </details>
+        </div>
+
+        <div class="banner-upload-card">
+          <div class="banner-upload-card-head">
+            <strong>📱 Imagem Mobile</strong>
+            <span class="info-icon" title="Tamanho recomendado: 1366 × 768 px. Crie uma arte própria para telas de celular.">i</span>
+          </div>
+          <label class="banner-file-button">📁 Escolher imagem
+            <input type="file" name="mobileFile" accept="image/png,image/jpeg,image/webp" data-banner-file="mobile" data-info-target="newMobileInfo">
+          </label>
+          <div id="newMobileInfo" class="banner-file-info">1366 × 768 px recomendado</div>
+          <details class="banner-manual-path">
+            <summary>Usar caminho/URL</summary>
+            <input type="text" name="mobileSrc" placeholder="images/meu-banner-mobile.png">
+          </details>
+        </div>
+      </div>
+
+      <div class="banner-meta-row">
+        <div class="banner-field">
+          <label>Título <span class="info-icon" title="Opcional. Serve para organização interna e acessibilidade.">i</span></label>
+          <input type="text" name="title" placeholder="Ex.: Frete grátis">
+        </div>
+        <div class="banner-field">
+          <label>Link <span class="info-icon" title="Opcional. Destino ao clicar no banner, como /categoria/smartphones ou uma URL completa.">i</span></label>
+          <input type="text" name="href" placeholder="/categoria/...">
+        </div>
+        <div class="banner-field order">
+          <label>Ordem</label>
+          <input type="number" name="order" value="<%= (items||[]).length + 1 %>">
+        </div>
+        <div class="banner-actions">
+          <button class="btn">💾 Adicionar</button>
+        </div>
+      </div>
+    </form>
+  </details>
+
+  <div class="banner-list-title"><strong>📋 Banners cadastrados</strong></div>
+  <div class="banner-list">
+    <% (items||[]).forEach(function(it, idx){ %>
+      <form method="post" action="/banners/<%= idx %>/save" enctype="multipart/form-data" class="banner-item">
+        <details class="banner-item-details">
+          <summary class="banner-item-summary">
+            <div class="banner-item-summary-main">
+              <div class="banner-number"><span class="badge"><%= idx+1 %></span> Banner <%= idx+1 %></div>
+              <span class="banner-summary-path"><%= it.title ? it.title : (it.src || 'Sem título') %></span>
+            </div>
+            <div class="banner-item-summary-side">
+              <span class="banner-status-note">Ordem: <strong><%= Number(it.order||0) %></strong></span>
+              <span class="badge">Editar</span>
+            </div>
+          </summary>
+          <div class="banner-item-body">
+
+        <div class="banner-previews">
+          <div class="banner-preview-box">
+            <div class="banner-preview-label">
+              <span>🖥️ Desktop</span>
+              <span class="banner-dimension" data-dimension-for="desktop-<%= idx %>">verificando…</span>
+            </div>
+            <div class="banner-preview-frame">
+              <% if (it.src) { %>
+                <img id="desktopPreview<%= idx %>" src="<%= it.src %>" alt="Preview desktop" data-banner-preview="desktop" data-dimension-id="desktop-<%= idx %>">
+              <% } else { %>
+                <span style="opacity:.55;">Sem imagem desktop</span>
+              <% } %>
+            </div>
+            <div class="banner-preview-tools">
+              <label class="banner-file-button">📁 Trocar
+                <input type="file" name="desktopFile" accept="image/png,image/jpeg,image/webp" data-banner-file="desktop" data-info-target="desktopFileInfo<%= idx %>" data-preview-target="desktopPreview<%= idx %>">
+              </label>
+              <div id="desktopFileInfo<%= idx %>" class="banner-file-info">Manter atual</div>
+            </div>
+          </div>
+
+          <div class="banner-preview-box mobile">
+            <div class="banner-preview-label">
+              <span>📱 Mobile</span>
+              <span class="banner-dimension" data-dimension-for="mobile-<%= idx %>">verificando…</span>
+            </div>
+            <div class="banner-preview-frame">
+              <% if (it.mobileSrc) { %>
+                <img id="mobilePreview<%= idx %>" src="<%= it.mobileSrc %>" alt="Preview mobile" data-banner-preview="mobile" data-dimension-id="mobile-<%= idx %>">
+              <% } else { %>
+                <span style="opacity:.55;">Sem imagem mobile</span>
+              <% } %>
+            </div>
+            <div class="banner-preview-tools">
+              <label class="banner-file-button">📁 Trocar
+                <input type="file" name="mobileFile" accept="image/png,image/jpeg,image/webp" data-banner-file="mobile" data-info-target="mobileFileInfo<%= idx %>" data-preview-target="mobilePreview<%= idx %>">
+              </label>
+              <div id="mobileFileInfo<%= idx %>" class="banner-file-info">Manter atual</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="banner-meta-row">
+          <div class="banner-field">
+            <label>Título <span class="info-icon" title="Opcional. Serve para organização interna e acessibilidade.">i</span></label>
+            <input type="text" name="title" value="<%- it.title||'' %>" placeholder="Título curto">
+          </div>
+          <div class="banner-field">
+            <label>Link <span class="info-icon" title="Opcional. Destino ao clicar no banner.">i</span></label>
+            <input type="text" name="href" value="<%- it.href||'' %>" placeholder="/categoria/...">
+          </div>
+          <div class="banner-field order">
+            <label>Ordem</label>
+            <input type="number" name="order" value="<%- Number(it.order||0) %>">
+          </div>
+          <div class="banner-actions">
+            <button class="btn btn-small" type="submit">💾 Salvar</button>
+            <button class="btn btn-small btn-danger" type="submit" formaction="/banners/delete/<%= idx %>" formmethod="post" formenctype="application/x-www-form-urlencoded" onclick="return confirm('🗑️ Deseja realmente excluir este banner?')">🗑️ Excluir</button>
+          </div>
+        </div>
+
+        <details class="banner-advanced">
+          <summary>⚙️ Caminhos das imagens <span class="info-icon" title="Use somente se quiser informar ou corrigir manualmente o caminho/URL da imagem.">i</span></summary>
+          <div class="banner-advanced-grid">
+            <div class="banner-field">
+              <label>Desktop</label>
+              <input type="text" name="src" value="<%- it.src||'' %>" placeholder="images/banner.png">
+            </div>
+            <div class="banner-field">
+              <label>Mobile</label>
+              <input type="text" name="mobileSrc" value="<%- it.mobileSrc||'' %>" placeholder="images/banner-mobile.png">
+            </div>
+          </div>
+        </details>
+          </div>
+        </details>
+      </form>
+    <% }) %>
+
+    <% if (!items || !items.length) { %>
+      <div style="text-align:center; padding:18px; opacity:.65;">Nenhum banner cadastrado.</div>
+    <% } %>
+  </div>
 </div>
+
+<script>
+(function(){
+  const STANDARD = {
+    desktop: { width:1920, height:560, ratio:1920/560, label:'1920 × 560 px' },
+    mobile: { width:1366, height:768, ratio:1366/768, label:'1366 × 768 px' }
+  };
+
+  function assessment(type, width, height){
+    const s = STANDARD[type];
+    if (!s || !width || !height) return { ok:false, text:`${width || '?'} × ${height || '?'} px` };
+    const ratio = width / height;
+    const ratioDiff = Math.abs(ratio - s.ratio) / s.ratio;
+    const exact = width === s.width && height === s.height;
+    const compatible = ratioDiff <= 0.035;
+    return {
+      ok: exact || compatible,
+      text: `${width} × ${height} px${exact ? ' · padrão' : compatible ? ' · proporção OK' : ` · recomendado ${s.label}`}`
+    };
+  }
+
+  function updatePreviewDimension(img){
+    const type = img.getAttribute('data-banner-preview');
+    const id = img.getAttribute('data-dimension-id');
+    const target = document.querySelector(`[data-dimension-for="${id}"]`);
+    if (!target) return;
+    const result = assessment(type, img.naturalWidth, img.naturalHeight);
+    target.textContent = result.text;
+    target.classList.toggle('ok', result.ok);
+    target.classList.toggle('warn', !result.ok);
+  }
+
+  document.querySelectorAll('[data-banner-preview]').forEach(function(img){
+    function update(){ updatePreviewDimension(img); }
+    if (img.complete && img.naturalWidth) update();
+    else {
+      img.addEventListener('load', update);
+      img.addEventListener('error', function(){
+        const id = img.getAttribute('data-dimension-id');
+        const target = document.querySelector(`[data-dimension-for="${id}"]`);
+        if(target){ target.textContent='imagem não encontrada'; target.classList.add('warn'); }
+      }, { once:true });
+    }
+  });
+
+  document.querySelectorAll('[data-banner-file]').forEach(function(input){
+    input.addEventListener('change', function(){
+      const file = input.files && input.files[0];
+      const target = document.getElementById(input.getAttribute('data-info-target'));
+      if (!target || !file) return;
+
+      const url = URL.createObjectURL(file);
+      const img = new Image();
+      img.onload = function(){
+        const type = input.getAttribute('data-banner-file');
+        const result = assessment(type, img.naturalWidth, img.naturalHeight);
+        target.textContent = `${file.name} · ${result.text}`;
+        target.classList.toggle('ok', result.ok);
+        target.classList.toggle('warn', !result.ok);
+
+        const previewId = input.getAttribute('data-preview-target');
+        const preview = previewId ? document.getElementById(previewId) : null;
+        if (preview) {
+          preview.src = url;
+          preview.onload = function(){ updatePreviewDimension(preview); };
+        } else {
+          URL.revokeObjectURL(url);
+        }
+      };
+      img.onerror = function(){
+        target.textContent = 'Não foi possível conferir esta imagem.';
+        target.classList.add('warn');
+        URL.revokeObjectURL(url);
+      };
+      img.src = url;
+    });
+  });
+})();
+</script>

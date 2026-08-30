@@ -2,6 +2,18 @@
   "version": "2.0",
   "items": [
     {
+      "id": "return-receipt",
+      "name": "Troca / Devolução — Termo com assinatura",
+      "type": "return",
+      "paper": "a4",
+      "active": true,
+      "system": true,
+      "nativeKind": null,
+      "icon": "↩️",
+      "editorDriven": true,
+      "content": "<div class=\"doc-header\">{{empresa_logo}}<strong class=\"doc-company\">{{empresa}}</strong><span>TERMO DE {{devolucao_tipo}}</span><b class=\"doc-status\">{{devolucao_numero}}</b></div><hr><div class=\"doc-grid\"><span><b>Data:</b> {{devolucao_data}}</span><span><b>Venda original:</b> {{venda_original}}</span><span><b>Cliente:</b> {{cliente}}</span><span><b>CPF/CNPJ:</b> {{cpf}}</span><span><b>Telefone:</b> {{telefone}}</span><span><b>E-mail:</b> {{cliente_email}}</span></div><div style=\"margin-top:5px\"><b>Endereço:</b> {{endereco}}</div><hr><h3>MOTIVO DA {{devolucao_tipo}}</h3><div><b>Classificação:</b> {{devolucao_motivo}}<br><b>Relato:</b> {{devolucao_motivo_detalhes}}</div><hr><h3>ITENS ENVOLVIDOS</h3>{{devolucao_itens}}<div class=\"doc-total\"><b>VALOR DO CRÉDITO / RESTITUIÇÃO</b><strong>{{devolucao_total}}</strong></div><hr><h3>DESTINAÇÃO FINANCEIRA</h3>{{devolucao_financeiro}}<hr><div style=\"font-size:12px;line-height:1.55\">Declaro que conferi os itens, valores e informações acima e que recebi ciência sobre a forma de crédito, abatimento ou restituição registrada neste termo.</div><div style=\"margin-top:38px;display:grid;grid-template-columns:1fr 1fr;gap:28px;text-align:center\"><div>__________________________________<br><b>{{cliente}}</b><br>Assinatura do cliente</div><div>__________________________________<br><b>{{devolucao_operador}}</b><br>Responsável pelo atendimento</div></div>"
+    },
+    {
       "id": "credit-book",
       "name": "Carnê de Crediário — Padrão",
       "type": "credit_book",

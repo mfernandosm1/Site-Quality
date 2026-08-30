@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "updatedAt": "2026-08-18T18:47:37.106Z",
+  "updatedAt": "2026-08-30T14:59:47.729Z",
   "products": {
     "95": {
       "status": "imported",
@@ -1800,6 +1800,26 @@
         "active"
       ]
     },
+    "930": {
+      "status": "imported",
+      "productId": 1788102288578,
+      "productCode": "PRD-901",
+      "name": "Capa samsung A01 CORE ANTI IMPACTO TRANSP",
+      "at": "2026-08-30T14:59:47.353Z",
+      "by": "painel",
+      "assistedCountBatch": "WM10-COUNT-20260830-A",
+      "assistedCountMatch": "new-standalone-import"
+    },
+    "938": {
+      "status": "imported",
+      "productId": 1788102058358,
+      "productCode": "PRD-918",
+      "name": "Capa samsung A2 CORE ANTI IMPACTO TRANSP",
+      "at": "2026-08-30T14:59:47.434Z",
+      "by": "painel",
+      "assistedCountBatch": "WM10-COUNT-20260830-A",
+      "assistedCountMatch": "new-standalone-import"
+    },
     "946": {
       "status": "imported",
       "productId": 1786963551372,
@@ -1906,23 +1926,75 @@
         "active"
       ]
     },
+    "984": {
+      "status": "imported",
+      "productId": 1788102925554,
+      "productCode": "PRD-912",
+      "name": "Capa samsung A42 5G ANTI IMPACTO TRANSP",
+      "at": "2026-08-30T14:59:47.408Z",
+      "by": "painel",
+      "assistedCountBatch": "WM10-COUNT-20260830-A",
+      "assistedCountMatch": "new-standalone-import"
+    },
+    "986": {
+      "status": "imported",
+      "productId": 1788102805636,
+      "productCode": "PRD-910",
+      "name": "Capa samsung A60 ANTI IMPACTO TRANSP",
+      "at": "2026-08-30T14:59:47.399Z",
+      "by": "painel",
+      "assistedCountBatch": "WM10-COUNT-20260830-A",
+      "assistedCountMatch": "new-standalone-import"
+    },
+    "990": {
+      "status": "imported",
+      "productId": 1788102106489,
+      "productCode": "PRD-927",
+      "name": "Capa samsung A70 ANTI IMPACTO TRANSP",
+      "at": "2026-08-30T14:59:47.478Z",
+      "by": "painel",
+      "assistedCountBatch": "WM10-COUNT-20260830-A",
+      "assistedCountMatch": "new-standalone-import"
+    },
     "994": {
       "status": "imported",
       "productId": 1787009123647,
       "productCode": "PRD-788",
       "name": "Capa samsung A90 ANTI IMPACTO TRANSP",
-      "at": "2026-08-17T23:20:26.292Z",
+      "at": "2026-08-30T14:59:47.378Z",
       "by": "painel",
-      "lastSyncFields": [
-        "name",
-        "salePrice",
-        "cost",
-        "barcode",
-        "reference",
-        "brand",
-        "unit",
-        "active"
-      ]
+      "assistedCountBatch": "WM10-COUNT-20260830-A",
+      "assistedCountMatch": "migration-product"
+    },
+    "995": {
+      "status": "imported",
+      "productId": 1788102572221,
+      "productCode": "PRD-911",
+      "name": "Capa samsung A40 PRETO",
+      "at": "2026-08-30T14:59:47.403Z",
+      "by": "painel",
+      "assistedCountBatch": "WM10-COUNT-20260830-A",
+      "assistedCountMatch": "new-standalone-import"
+    },
+    "996": {
+      "status": "imported",
+      "productId": 1788102636242,
+      "productCode": "PRD-916",
+      "name": "Capa samsung A40 ANTI IMPACTO TRANSP",
+      "at": "2026-08-30T14:59:47.424Z",
+      "by": "painel",
+      "assistedCountBatch": "WM10-COUNT-20260830-A",
+      "assistedCountMatch": "new-standalone-import"
+    },
+    "998": {
+      "status": "imported",
+      "productId": 1788102794880,
+      "productCode": "PRD-907",
+      "name": "Capa samsung A41 ANTI IMPACTO TRANSP",
+      "at": "2026-08-30T14:59:47.386Z",
+      "by": "painel",
+      "assistedCountBatch": "WM10-COUNT-20260830-A",
+      "assistedCountMatch": "new-standalone-import"
     },
     "1004": {
       "status": "imported",
@@ -1941,6 +2013,56 @@
         "unit",
         "active"
       ]
+    },
+    "1017": {
+      "status": "imported",
+      "productId": 1788102080647,
+      "productCode": "PRD-934",
+      "name": "Capa samsung linha S S9 Plus PRETO",
+      "at": "2026-08-30T14:59:47.531Z",
+      "by": "painel",
+      "assistedCountBatch": "WM10-COUNT-20260830-A",
+      "assistedCountMatch": "new-standalone-import"
+    },
+    "1019": {
+      "status": "imported",
+      "productId": 1788102872865,
+      "productCode": "PRD-909",
+      "name": "Capa samsung linha S S9 ANTI IMPACTO TRANSP",
+      "at": "2026-08-30T14:59:47.394Z",
+      "by": "painel",
+      "assistedCountBatch": "WM10-COUNT-20260830-A",
+      "assistedCountMatch": "new-standalone-import"
+    },
+    "1022": {
+      "status": "imported",
+      "productId": 1788102256334,
+      "productCode": "PRD-903",
+      "name": "Capa samsung linha S S7 PRETO",
+      "at": "2026-08-30T14:59:47.367Z",
+      "by": "painel",
+      "assistedCountBatch": "WM10-COUNT-20260830-A",
+      "assistedCountMatch": "new-standalone-import"
+    },
+    "1025": {
+      "status": "imported",
+      "productId": 1788102445760,
+      "productCode": "PRD-904",
+      "name": "Capa samsung linha S S8 PRETO",
+      "at": "2026-08-30T14:59:47.373Z",
+      "by": "painel",
+      "assistedCountBatch": "WM10-COUNT-20260830-A",
+      "assistedCountMatch": "new-standalone-import"
+    },
+    "1028": {
+      "status": "imported",
+      "productId": 1788102209222,
+      "productCode": "PRD-920",
+      "name": "Capa samsung linha S S8 PLUS PRETO",
+      "at": "2026-08-30T14:59:47.444Z",
+      "by": "painel",
+      "assistedCountBatch": "WM10-COUNT-20260830-A",
+      "assistedCountMatch": "new-standalone-import"
     },
     "1033": {
       "status": "imported",
@@ -1983,18 +2105,10 @@
       "productId": 1786964571738,
       "productCode": "PRD-589",
       "name": "Capa samsung linha S S20 PLUS ANTI IMPACTO TRANSP",
-      "at": "2026-08-17T10:48:00.500Z",
+      "at": "2026-08-30T14:59:47.425Z",
       "by": "painel",
-      "lastSyncFields": [
-        "name",
-        "salePrice",
-        "cost",
-        "barcode",
-        "reference",
-        "brand",
-        "unit",
-        "active"
-      ]
+      "assistedCountBatch": "WM10-COUNT-20260830-A",
+      "assistedCountMatch": "migration-product"
     },
     "1041": {
       "status": "imported",
@@ -2086,6 +2200,16 @@
         "active"
       ]
     },
+    "1134": {
+      "status": "imported",
+      "productId": 1788102623068,
+      "productCode": "PRD-948",
+      "name": "Capa Xiaomi Redmi Note 7/Note 7 Pro ANTI IMPACTO TRANSP",
+      "at": "2026-08-30T14:59:47.620Z",
+      "by": "painel",
+      "assistedCountBatch": "WM10-COUNT-20260830-A",
+      "assistedCountMatch": "new-standalone-import"
+    },
     "1141": {
       "status": "imported",
       "productId": 1786930890658,
@@ -2140,6 +2264,16 @@
         "active"
       ]
     },
+    "1152": {
+      "status": "imported",
+      "productId": 1788102932233,
+      "productCode": "PRD-943",
+      "name": "Capa Xiaomi Redmi MI 9 ANTI IMPACTO TRANSP",
+      "at": "2026-08-30T14:59:47.592Z",
+      "by": "painel",
+      "assistedCountBatch": "WM10-COUNT-20260830-A",
+      "assistedCountMatch": "new-standalone-import"
+    },
     "1160": {
       "status": "imported",
       "productId": 1787010563787,
@@ -2157,6 +2291,16 @@
         "unit",
         "active"
       ]
+    },
+    "1162": {
+      "status": "imported",
+      "productId": 1788102164303,
+      "productCode": "PRD-946",
+      "name": "Capa Xiaomi Redmi NOTE 9 4G FUMÊ",
+      "at": "2026-08-30T14:59:47.608Z",
+      "by": "painel",
+      "assistedCountBatch": "WM10-COUNT-20260830-A",
+      "assistedCountMatch": "new-standalone-import"
     },
     "1168": {
       "status": "imported",
@@ -2194,23 +2338,35 @@
         "active"
       ]
     },
+    "1180": {
+      "status": "imported",
+      "productId": 1788102859918,
+      "productCode": "PRD-947",
+      "name": "Capa Xiaomi Redmi REDMI 7A ANTI IMPACTO TRANSP",
+      "at": "2026-08-30T14:59:47.613Z",
+      "by": "painel",
+      "assistedCountBatch": "WM10-COUNT-20260830-A",
+      "assistedCountMatch": "new-standalone-import"
+    },
     "1188": {
       "status": "imported",
       "productId": 1787011114111,
       "productCode": "PRD-819",
       "name": "Capa Xiaomi Redmi REDMI 9 ANTI IMPACTO TRANSP",
-      "at": "2026-08-17T23:45:09.492Z",
+      "at": "2026-08-30T14:59:47.627Z",
       "by": "painel",
-      "lastSyncFields": [
-        "name",
-        "salePrice",
-        "cost",
-        "barcode",
-        "reference",
-        "brand",
-        "unit",
-        "active"
-      ]
+      "assistedCountBatch": "WM10-COUNT-20260830-A",
+      "assistedCountMatch": "migration-product"
+    },
+    "1204": {
+      "status": "imported",
+      "productId": 1788102421625,
+      "productCode": "PRD-941",
+      "name": "Capa Xiaomi Redmi MI 8 MI 8 PRO ANTI IMPACTO TRANSP",
+      "at": "2026-08-30T14:59:47.581Z",
+      "by": "painel",
+      "assistedCountBatch": "WM10-COUNT-20260830-A",
+      "assistedCountMatch": "new-standalone-import"
     },
     "1208": {
       "status": "imported",
@@ -2248,6 +2404,36 @@
         "active"
       ]
     },
+    "1221": {
+      "status": "imported",
+      "productId": 1788102092658,
+      "productCode": "PRD-942",
+      "name": "Capa Xiaomi Redmi Note 8 Pro PRETO",
+      "at": "2026-08-30T14:59:47.586Z",
+      "by": "painel",
+      "assistedCountBatch": "WM10-COUNT-20260830-A",
+      "assistedCountMatch": "new-standalone-import"
+    },
+    "1233": {
+      "status": "imported",
+      "productId": 1788102000038,
+      "productCode": "PRD-945",
+      "name": "Capa Xiaomi Redmi REDMI GO PRETO",
+      "at": "2026-08-30T14:59:47.602Z",
+      "by": "painel",
+      "assistedCountBatch": "WM10-COUNT-20260830-A",
+      "assistedCountMatch": "new-standalone-import"
+    },
+    "1234": {
+      "status": "imported",
+      "productId": 1788102495390,
+      "productCode": "PRD-944",
+      "name": "Capa Xiaomi Redmi REDMI K20 REDMI 9T PRETO",
+      "at": "2026-08-30T14:59:47.597Z",
+      "by": "painel",
+      "assistedCountBatch": "WM10-COUNT-20260830-A",
+      "assistedCountMatch": "new-standalone-import"
+    },
     "1235": {
       "status": "imported",
       "productId": 1787009508078,
@@ -2265,6 +2451,146 @@
         "unit",
         "active"
       ]
+    },
+    "1237": {
+      "status": "imported",
+      "productId": 1788102895067,
+      "productCode": "PRD-950",
+      "name": "Capa Xiaomi Redmi REDMI 6 PRO PRETO",
+      "at": "2026-08-30T14:59:47.632Z",
+      "by": "painel",
+      "assistedCountBatch": "WM10-COUNT-20260830-A",
+      "assistedCountMatch": "new-standalone-import"
+    },
+    "1279": {
+      "status": "imported",
+      "productId": 1788102645160,
+      "productCode": "PRD-914",
+      "name": "Capa Samsung linha Note NOTE 10 ANTI IMPACTO TRANSP",
+      "at": "2026-08-30T14:59:47.415Z",
+      "by": "painel",
+      "assistedCountBatch": "WM10-COUNT-20260830-A",
+      "assistedCountMatch": "new-standalone-import"
+    },
+    "1281": {
+      "status": "imported",
+      "productId": 1788102077232,
+      "productCode": "PRD-925",
+      "name": "Capa Samsung linha Note NOTE 10 PLUS ANTI IMPACTO TRANSP",
+      "at": "2026-08-30T14:59:47.468Z",
+      "by": "painel",
+      "assistedCountBatch": "WM10-COUNT-20260830-A",
+      "assistedCountMatch": "new-standalone-import"
+    },
+    "1283": {
+      "status": "imported",
+      "productId": 1788102211097,
+      "productCode": "PRD-932",
+      "name": "Capa Samsung linha Note NOTE 20 PLUS ANTI IMPACTO TRANSP",
+      "at": "2026-08-30T14:59:47.514Z",
+      "by": "painel",
+      "assistedCountBatch": "WM10-COUNT-20260830-A",
+      "assistedCountMatch": "new-standalone-import"
+    },
+    "1308": {
+      "status": "imported",
+      "productId": 1788102126941,
+      "productCode": "PRD-891",
+      "name": "Capa motorola linha one MOTO ONE HYPER ANTI IMPACTO TRANSP",
+      "at": "2026-08-30T14:59:47.286Z",
+      "by": "painel",
+      "assistedCountBatch": "WM10-COUNT-20260830-A",
+      "assistedCountMatch": "new-standalone-import"
+    },
+    "1313": {
+      "status": "imported",
+      "productId": 1788102736549,
+      "productCode": "PRD-892",
+      "name": "Capa motorola linha one MOTO ONE ZOOM ANTI IMPACTO BRANCO",
+      "at": "2026-08-30T14:59:47.291Z",
+      "by": "painel",
+      "assistedCountBatch": "WM10-COUNT-20260830-A",
+      "assistedCountMatch": "new-standalone-import"
+    },
+    "1332": {
+      "status": "imported",
+      "productId": 1788102128784,
+      "productCode": "PRD-873",
+      "name": "Capa Motorola  MOTO G4/ G4 PLUS TRANSPARENTE",
+      "at": "2026-08-30T14:59:47.188Z",
+      "by": "painel",
+      "assistedCountBatch": "WM10-COUNT-20260830-A",
+      "assistedCountMatch": "new-standalone-import"
+    },
+    "1336": {
+      "status": "imported",
+      "productId": 1788102211489,
+      "productCode": "PRD-874",
+      "name": "Capa Motorola  MOTO G4/ G4 PLUS FUMÊ",
+      "at": "2026-08-30T14:59:47.194Z",
+      "by": "painel",
+      "assistedCountBatch": "WM10-COUNT-20260830-A",
+      "assistedCountMatch": "new-standalone-import"
+    },
+    "1338": {
+      "status": "imported",
+      "productId": 1788102754779,
+      "productCode": "PRD-935",
+      "name": "Capa Motorola  MOTO G4 PLAY TRANSPARENTE",
+      "at": "2026-08-30T14:59:47.540Z",
+      "by": "painel",
+      "assistedCountBatch": "WM10-COUNT-20260830-A",
+      "assistedCountMatch": "new-standalone-import"
+    },
+    "1349": {
+      "status": "imported",
+      "productId": 1788102194548,
+      "productCode": "PRD-879",
+      "name": "Capa Motorola  MOTO G6 PLUS PRETO",
+      "at": "2026-08-30T14:59:47.226Z",
+      "by": "painel",
+      "assistedCountBatch": "WM10-COUNT-20260830-A",
+      "assistedCountMatch": "new-standalone-import"
+    },
+    "1350": {
+      "status": "imported",
+      "productId": 1788102690085,
+      "productCode": "PRD-936",
+      "name": "Capa Motorola  MOTO G6 PLUS TRANSPARENTE",
+      "at": "2026-08-30T14:59:47.547Z",
+      "by": "painel",
+      "assistedCountBatch": "WM10-COUNT-20260830-A",
+      "assistedCountMatch": "new-standalone-import"
+    },
+    "1361": {
+      "status": "imported",
+      "productId": 1788102137069,
+      "productCode": "PRD-866",
+      "name": "Capa Motorola  MOTO G7/ G7 PLUS PRETO",
+      "at": "2026-08-30T14:59:47.139Z",
+      "by": "painel",
+      "assistedCountBatch": "WM10-COUNT-20260830-A",
+      "assistedCountMatch": "new-standalone-import"
+    },
+    "1363": {
+      "status": "imported",
+      "productId": 1788102085570,
+      "productCode": "PRD-867",
+      "name": "Capa Motorola  MOTO G7/ G7 PLUS ANTI IMPACTO TRANSP",
+      "at": "2026-08-30T14:59:47.145Z",
+      "by": "painel",
+      "assistedCountBatch": "WM10-COUNT-20260830-A",
+      "assistedCountMatch": "new-standalone-import"
+    },
+    "1372": {
+      "status": "imported",
+      "productId": 1788102072899,
+      "productCode": "PRD-882",
+      "name": "Capa Motorola  MOTO G7 POWER FUMÊ",
+      "at": "2026-08-30T14:59:47.240Z",
+      "by": "painel",
+      "assistedCountBatch": "WM10-COUNT-20260830-A",
+      "assistedCountMatch": "new-standalone-import"
     },
     "1381": {
       "status": "imported",
@@ -2284,6 +2610,16 @@
         "active"
       ]
     },
+    "1387": {
+      "status": "imported",
+      "productId": 1788102625884,
+      "productCode": "PRD-893",
+      "name": "Capa Motorola  MOTO G9 PLUS ANTI IMPACTO TRANSP",
+      "at": "2026-08-30T14:59:47.297Z",
+      "by": "painel",
+      "assistedCountBatch": "WM10-COUNT-20260830-A",
+      "assistedCountMatch": "new-standalone-import"
+    },
     "1393": {
       "status": "imported",
       "productId": 1787009836278,
@@ -2301,6 +2637,26 @@
         "unit",
         "active"
       ]
+    },
+    "1427": {
+      "status": "imported",
+      "productId": 1788102525587,
+      "productCode": "PRD-937",
+      "name": "Capa Motorola  MOTO G5S PLUS ANTI IMPACTO TRANSP",
+      "at": "2026-08-30T14:59:47.553Z",
+      "by": "painel",
+      "assistedCountBatch": "WM10-COUNT-20260830-A",
+      "assistedCountMatch": "new-standalone-import"
+    },
+    "1429": {
+      "status": "imported",
+      "productId": 1788102358537,
+      "productCode": "PRD-888",
+      "name": "Capa Motorola  MOTO G5S PLUS FUMÊ",
+      "at": "2026-08-30T14:59:47.269Z",
+      "by": "painel",
+      "assistedCountBatch": "WM10-COUNT-20260830-A",
+      "assistedCountMatch": "new-standalone-import"
     },
     "1432": {
       "status": "imported",
@@ -2391,6 +2747,26 @@
         "unit",
         "active"
       ]
+    },
+    "1491": {
+      "status": "imported",
+      "productId": 1788102629519,
+      "productCode": "PRD-895",
+      "name": "Capa Motorola MOTO G8 PLAY/ ONE MACRO  ANTI IMPACTO TRANSP",
+      "at": "2026-08-30T14:59:47.309Z",
+      "by": "painel",
+      "assistedCountBatch": "WM10-COUNT-20260830-A",
+      "assistedCountMatch": "new-standalone-import"
+    },
+    "1492": {
+      "status": "imported",
+      "productId": 1788102459570,
+      "productCode": "PRD-877",
+      "name": "Capa Motorola MOTO G8 PLAY/ ONE MACRO  ANTI IMPACTO PRETA",
+      "at": "2026-08-30T14:59:47.217Z",
+      "by": "painel",
+      "assistedCountBatch": "WM10-COUNT-20260830-A",
+      "assistedCountMatch": "new-standalone-import"
     },
     "1498": {
       "status": "ignored",
@@ -2547,6 +2923,16 @@
       "by": "painel",
       "familyId": "fam-e73c32892b05"
     },
+    "1747": {
+      "status": "imported",
+      "productId": 1788102258281,
+      "productCode": "PRD-875",
+      "name": "Capa Motorola Moto Edge Plus ANTI IMPACTO TRANSP",
+      "at": "2026-08-30T14:59:47.201Z",
+      "by": "painel",
+      "assistedCountBatch": "WM10-COUNT-20260830-A",
+      "assistedCountMatch": "new-standalone-import"
+    },
     "1754": {
       "status": "ignored",
       "at": "2026-08-17T13:00:05.929Z",
@@ -2685,6 +3071,66 @@
         "active"
       ]
     },
+    "1862": {
+      "status": "imported",
+      "productId": 1788102663936,
+      "productCode": "PRD-906",
+      "name": "Capa samsung linha J J2 J200 PRETO",
+      "at": "2026-08-30T14:59:47.382Z",
+      "by": "painel",
+      "assistedCountBatch": "WM10-COUNT-20260830-A",
+      "assistedCountMatch": "new-standalone-import"
+    },
+    "1868": {
+      "status": "imported",
+      "productId": 1788102399696,
+      "productCode": "PRD-966",
+      "name": "Capa samsung linha J J2 Pro 2018 PRETO",
+      "at": "2026-08-30T14:59:47.729Z",
+      "by": "painel",
+      "assistedCountBatch": "WM10-COUNT-20260830-A",
+      "assistedCountMatch": "new-standalone-import"
+    },
+    "1870": {
+      "status": "imported",
+      "productId": 1788102328724,
+      "productCode": "PRD-902",
+      "name": "Capa samsung linha J J2 Pro 2018 ANTI IMPACTO TRANSP",
+      "at": "2026-08-30T14:59:47.361Z",
+      "by": "painel",
+      "assistedCountBatch": "WM10-COUNT-20260830-A",
+      "assistedCountMatch": "new-standalone-import"
+    },
+    "1878": {
+      "status": "imported",
+      "productId": 1788102533924,
+      "productCode": "PRD-964",
+      "name": "Capa samsung linha J J4 J400 PRETO",
+      "at": "2026-08-30T14:59:47.716Z",
+      "by": "painel",
+      "assistedCountBatch": "WM10-COUNT-20260830-A",
+      "assistedCountMatch": "new-standalone-import"
+    },
+    "1880": {
+      "status": "imported",
+      "productId": 1788102896910,
+      "productCode": "PRD-963",
+      "name": "Capa samsung linha J J4 J400 ANTI IMPACTO TRANSP",
+      "at": "2026-08-30T14:59:47.709Z",
+      "by": "painel",
+      "assistedCountBatch": "WM10-COUNT-20260830-A",
+      "assistedCountMatch": "new-standalone-import"
+    },
+    "1887": {
+      "status": "imported",
+      "productId": 1788102340091,
+      "productCode": "PRD-913",
+      "name": "Capa samsung linha J J4 Plus / J4 Core ANTI IMPACTO TRANSP",
+      "at": "2026-08-30T14:59:47.412Z",
+      "by": "painel",
+      "assistedCountBatch": "WM10-COUNT-20260830-A",
+      "assistedCountMatch": "new-standalone-import"
+    },
     "1890": {
       "status": "imported",
       "productId": 1787008702107,
@@ -2708,18 +3154,10 @@
       "productId": 1787008683697,
       "productCode": "PRD-782",
       "name": "Capa samsung linha J J5 J500 PRETO",
-      "at": "2026-08-17T23:15:48.619Z",
+      "at": "2026-08-30T14:59:47.323Z",
       "by": "painel",
-      "lastSyncFields": [
-        "name",
-        "salePrice",
-        "cost",
-        "barcode",
-        "reference",
-        "brand",
-        "unit",
-        "active"
-      ]
+      "assistedCountBatch": "WM10-COUNT-20260830-A",
+      "assistedCountMatch": "migration-product"
     },
     "1898": {
       "status": "imported",
@@ -2738,6 +3176,156 @@
         "unit",
         "active"
       ]
+    },
+    "1902": {
+      "status": "imported",
+      "productId": 1788102897839,
+      "productCode": "PRD-899",
+      "name": "Capa samsung linha J J7 J700 J7 Neo PRETO",
+      "at": "2026-08-30T14:59:47.339Z",
+      "by": "painel",
+      "assistedCountBatch": "WM10-COUNT-20260830-A",
+      "assistedCountMatch": "new-standalone-import"
+    },
+    "1904": {
+      "status": "imported",
+      "productId": 1788102959537,
+      "productCode": "PRD-898",
+      "name": "Capa samsung linha J J7 J700 J7 Neo ANTI IMPACTO TRANSP",
+      "at": "2026-08-30T14:59:47.331Z",
+      "by": "painel",
+      "assistedCountBatch": "WM10-COUNT-20260830-A",
+      "assistedCountMatch": "new-standalone-import"
+    },
+    "1964": {
+      "status": "imported",
+      "productId": 1788102896046,
+      "productCode": "PRD-889",
+      "name": "Capa motorola moto Z Z3 Play PRETO",
+      "at": "2026-08-30T14:59:47.273Z",
+      "by": "painel",
+      "assistedCountBatch": "WM10-COUNT-20260830-A",
+      "assistedCountMatch": "new-standalone-import"
+    },
+    "1966": {
+      "status": "imported",
+      "productId": 1788102307066,
+      "productCode": "PRD-872",
+      "name": "Capa motorola moto Z Z3 Play ANTI IMPACTO TRANSP",
+      "at": "2026-08-30T14:59:47.179Z",
+      "by": "painel",
+      "assistedCountBatch": "WM10-COUNT-20260830-A",
+      "assistedCountMatch": "new-standalone-import"
+    },
+    "1968": {
+      "status": "imported",
+      "productId": 1788102305450,
+      "productCode": "PRD-940",
+      "name": "Capa motorola moto Z Z PRETO",
+      "at": "2026-08-30T14:59:47.574Z",
+      "by": "painel",
+      "assistedCountBatch": "WM10-COUNT-20260830-A",
+      "assistedCountMatch": "new-standalone-import"
+    },
+    "1973": {
+      "status": "imported",
+      "productId": 1788102273481,
+      "productCode": "PRD-939",
+      "name": "Capa motorola moto Z Z Play TRANSPARENTE",
+      "at": "2026-08-30T14:59:47.568Z",
+      "by": "painel",
+      "assistedCountBatch": "WM10-COUNT-20260830-A",
+      "assistedCountMatch": "new-standalone-import"
+    },
+    "1983": {
+      "status": "imported",
+      "productId": 1788102783247,
+      "productCode": "PRD-880",
+      "name": "Capa motorola moto Z Z2 Play FUMÊ",
+      "at": "2026-08-30T14:59:47.230Z",
+      "by": "painel",
+      "assistedCountBatch": "WM10-COUNT-20260830-A",
+      "assistedCountMatch": "new-standalone-import"
+    },
+    "1987": {
+      "status": "imported",
+      "productId": 1788102847807,
+      "productCode": "PRD-894",
+      "name": "Capa motorola moto E E7 Plus ANTI IMPACTO TRANSP",
+      "at": "2026-08-30T14:59:47.304Z",
+      "by": "painel",
+      "assistedCountBatch": "WM10-COUNT-20260830-A",
+      "assistedCountMatch": "new-standalone-import"
+    },
+    "1995": {
+      "status": "imported",
+      "productId": 1788102585607,
+      "productCode": "PRD-885",
+      "name": "Capa motorola moto E E6 Plus ANTI IMPACTO TRANSP",
+      "at": "2026-08-30T14:59:47.254Z",
+      "by": "painel",
+      "assistedCountBatch": "WM10-COUNT-20260830-A",
+      "assistedCountMatch": "new-standalone-import"
+    },
+    "1997": {
+      "status": "imported",
+      "productId": 1788102891986,
+      "productCode": "PRD-868",
+      "name": "Capa motorola moto E E5 Plus PRETO",
+      "at": "2026-08-30T14:59:47.151Z",
+      "by": "painel",
+      "assistedCountBatch": "WM10-COUNT-20260830-A",
+      "assistedCountMatch": "new-standalone-import"
+    },
+    "1999": {
+      "status": "imported",
+      "productId": 1788102669139,
+      "productCode": "PRD-869",
+      "name": "Capa motorola moto E E5 Plus ANTI IMPACTO TRANSP",
+      "at": "2026-08-30T14:59:47.157Z",
+      "by": "painel",
+      "assistedCountBatch": "WM10-COUNT-20260830-A",
+      "assistedCountMatch": "new-standalone-import"
+    },
+    "2003": {
+      "status": "imported",
+      "productId": 1788102427691,
+      "productCode": "PRD-887",
+      "name": "Capa motorola moto E E6 Play ANTI IMPACTO TRANSP",
+      "at": "2026-08-30T14:59:47.264Z",
+      "by": "painel",
+      "assistedCountBatch": "WM10-COUNT-20260830-A",
+      "assistedCountMatch": "new-standalone-import"
+    },
+    "2009": {
+      "status": "imported",
+      "productId": 1788102859955,
+      "productCode": "PRD-938",
+      "name": "Capa motorola moto E E3 PRETO",
+      "at": "2026-08-30T14:59:47.562Z",
+      "by": "painel",
+      "assistedCountBatch": "WM10-COUNT-20260830-A",
+      "assistedCountMatch": "new-standalone-import"
+    },
+    "2013": {
+      "status": "imported",
+      "productId": 1788102798674,
+      "productCode": "PRD-871",
+      "name": "Capa motorola moto E E5 Play PRETO",
+      "at": "2026-08-30T14:59:47.173Z",
+      "by": "painel",
+      "assistedCountBatch": "WM10-COUNT-20260830-A",
+      "assistedCountMatch": "new-standalone-import"
+    },
+    "2021": {
+      "status": "imported",
+      "productId": 1788102250710,
+      "productCode": "PRD-881",
+      "name": "Capa motorola moto  C FUMÊ",
+      "at": "2026-08-30T14:59:47.235Z",
+      "by": "painel",
+      "assistedCountBatch": "WM10-COUNT-20260830-A",
+      "assistedCountMatch": "new-standalone-import"
     },
     "2047": {
       "status": "imported",
@@ -3040,6 +3628,86 @@
         "unit",
         "active"
       ]
+    },
+    "2108": {
+      "status": "imported",
+      "productId": 1788102261284,
+      "productCode": "PRD-923",
+      "name": "Capa samsung A9 2018 PRETO",
+      "at": "2026-08-30T14:59:47.459Z",
+      "by": "painel",
+      "assistedCountBatch": "WM10-COUNT-20260830-A",
+      "assistedCountMatch": "new-standalone-import"
+    },
+    "2109": {
+      "status": "imported",
+      "productId": 1788102486472,
+      "productCode": "PRD-922",
+      "name": "Capa samsung A9 2018 ANTI IMPACTO TRANSP",
+      "at": "2026-08-30T14:59:47.453Z",
+      "by": "painel",
+      "assistedCountBatch": "WM10-COUNT-20260830-A",
+      "assistedCountMatch": "new-standalone-import"
+    },
+    "2111": {
+      "status": "imported",
+      "productId": 1788102451884,
+      "productCode": "PRD-921",
+      "name": "Capa samsung A5 2017 PRETO",
+      "at": "2026-08-30T14:59:47.448Z",
+      "by": "painel",
+      "assistedCountBatch": "WM10-COUNT-20260830-A",
+      "assistedCountMatch": "new-standalone-import"
+    },
+    "2124": {
+      "status": "imported",
+      "productId": 1788102605464,
+      "productCode": "PRD-930",
+      "name": "Capa samsung A8 2018 PLUS ANTI IMPACTO TRANSP",
+      "at": "2026-08-30T14:59:47.502Z",
+      "by": "painel",
+      "assistedCountBatch": "WM10-COUNT-20260830-A",
+      "assistedCountMatch": "new-standalone-import"
+    },
+    "2126": {
+      "status": "imported",
+      "productId": 1788102510327,
+      "productCode": "PRD-929",
+      "name": "Capa samsung A8 2018 PRETO",
+      "at": "2026-08-30T14:59:47.496Z",
+      "by": "painel",
+      "assistedCountBatch": "WM10-COUNT-20260830-A",
+      "assistedCountMatch": "new-standalone-import"
+    },
+    "2127": {
+      "status": "imported",
+      "productId": 1788102456367,
+      "productCode": "PRD-897",
+      "name": "Capa samsung A8 2018 ANTI IMPACTO TRANSP",
+      "at": "2026-08-30T14:59:47.323Z",
+      "by": "painel",
+      "assistedCountBatch": "WM10-COUNT-20260830-A",
+      "assistedCountMatch": "new-standalone-import"
+    },
+    "2138": {
+      "status": "imported",
+      "productId": 1788102706236,
+      "productCode": "PRD-924",
+      "name": "Capa samsung A7 2018 PRETO",
+      "at": "2026-08-30T14:59:47.463Z",
+      "by": "painel",
+      "assistedCountBatch": "WM10-COUNT-20260830-A",
+      "assistedCountMatch": "new-standalone-import"
+    },
+    "2139": {
+      "status": "imported",
+      "productId": 1788102721458,
+      "productCode": "PRD-915",
+      "name": "Capa samsung A7 2018 ANTI IMPACTO TRANSP",
+      "at": "2026-08-30T14:59:47.420Z",
+      "by": "painel",
+      "assistedCountBatch": "WM10-COUNT-20260830-A",
+      "assistedCountMatch": "new-standalone-import"
     },
     "2195": {
       "status": "imported",
@@ -3419,6 +4087,16 @@
         "active"
       ]
     },
+    "2372": {
+      "status": "imported",
+      "productId": 1788102709543,
+      "productCode": "PRD-926",
+      "name": "Capa samsung linha J J5 Pro ANTI IMPACTO TRANSP",
+      "at": "2026-08-30T14:59:47.473Z",
+      "by": "painel",
+      "assistedCountBatch": "WM10-COUNT-20260830-A",
+      "assistedCountMatch": "new-standalone-import"
+    },
     "2384": {
       "status": "imported",
       "productId": 1786913052398,
@@ -3435,6 +4113,16 @@
         "unit",
         "active"
       ]
+    },
+    "2389": {
+      "status": "imported",
+      "productId": 1788102140843,
+      "productCode": "PRD-928",
+      "name": "Capa case samsung note 8  PRETO",
+      "at": "2026-08-30T14:59:47.486Z",
+      "by": "painel",
+      "assistedCountBatch": "WM10-COUNT-20260830-A",
+      "assistedCountMatch": "new-standalone-import"
     },
     "2391": {
       "status": "imported",
@@ -3575,18 +4263,10 @@
       "productId": 1787008662591,
       "productCode": "PRD-781",
       "name": "Capa samsung A72 ANTI IMPACTO TRANSP",
-      "at": "2026-08-17T23:09:09.173Z",
+      "at": "2026-08-30T14:59:47.487Z",
       "by": "painel",
-      "lastSyncFields": [
-        "name",
-        "salePrice",
-        "cost",
-        "barcode",
-        "reference",
-        "brand",
-        "unit",
-        "active"
-      ]
+      "assistedCountBatch": "WM10-COUNT-20260830-A",
+      "assistedCountMatch": "migration-product"
     },
     "2593": {
       "status": "imported",
@@ -3882,10 +4562,14 @@
       ]
     },
     "2663": {
-      "status": "ignored",
-      "at": "2026-08-10T00:46:08.328Z",
+      "status": "imported",
+      "productId": 1788102612845,
+      "productCode": "PRD-919",
+      "name": "Capa samsung  A32 5G ANTI IMPACTO TRANSP",
+      "at": "2026-08-30T14:59:47.439Z",
       "by": "painel",
-      "familyId": "fam-de83e5e1d8a0"
+      "assistedCountBatch": "WM10-COUNT-20260830-A",
+      "assistedCountMatch": "new-standalone-import"
     },
     "2664": {
       "status": "ignored",
@@ -4711,6 +5395,16 @@
         "active"
       ]
     },
+    "3319": {
+      "status": "imported",
+      "productId": 1788102008474,
+      "productCode": "PRD-951",
+      "name": "Bateria Apple IPHONE 8",
+      "at": "2026-08-30T14:59:47.638Z",
+      "by": "painel",
+      "assistedCountBatch": "WM10-COUNT-20260830-A",
+      "assistedCountMatch": "new-standalone-import"
+    },
     "3320": {
       "status": "imported",
       "productId": 1786498617319,
@@ -4728,22 +5422,25 @@
         "active"
       ]
     },
+    "3321": {
+      "status": "imported",
+      "productId": 1788102164917,
+      "productCode": "PRD-952",
+      "name": "Bateria Apple IPHONE 6",
+      "at": "2026-08-30T14:59:47.644Z",
+      "by": "painel",
+      "assistedCountBatch": "WM10-COUNT-20260830-A",
+      "assistedCountMatch": "new-standalone-import"
+    },
     "3323": {
       "status": "imported",
       "productId": 1786498681877,
       "productCode": "PRD-228",
       "name": "Bateria Apple IPHONE 7",
-      "at": "2026-08-12T01:28:32.570Z",
+      "at": "2026-08-30T14:59:47.638Z",
       "by": "painel",
-      "lastSyncFields": [
-        "name",
-        "salePrice",
-        "barcode",
-        "reference",
-        "brand",
-        "unit",
-        "active"
-      ]
+      "assistedCountBatch": "WM10-COUNT-20260830-A",
+      "assistedCountMatch": "migration-product"
     },
     "3324": {
       "status": "imported",
@@ -4761,6 +5458,26 @@
         "unit",
         "active"
       ]
+    },
+    "3325": {
+      "status": "imported",
+      "productId": 1788102883066,
+      "productCode": "PRD-956",
+      "name": "Bateria Apple IPHONE 5",
+      "at": "2026-08-30T14:59:47.669Z",
+      "by": "painel",
+      "assistedCountBatch": "WM10-COUNT-20260830-A",
+      "assistedCountMatch": "new-standalone-import"
+    },
+    "3327": {
+      "status": "imported",
+      "productId": 1788102508428,
+      "productCode": "PRD-958",
+      "name": "Bateria Apple IPHONE 6 PLUS",
+      "at": "2026-08-30T14:59:47.679Z",
+      "by": "painel",
+      "assistedCountBatch": "WM10-COUNT-20260830-A",
+      "assistedCountMatch": "new-standalone-import"
     },
     "3328": {
       "status": "imported",
@@ -5034,6 +5751,16 @@
         "active"
       ]
     },
+    "3431": {
+      "status": "imported",
+      "productId": 1788102890378,
+      "productCode": "PRD-917",
+      "name": "Capa samsung M21 M21S ANTI IMPACTO TRANSP",
+      "at": "2026-08-30T14:59:47.430Z",
+      "by": "painel",
+      "assistedCountBatch": "WM10-COUNT-20260830-A",
+      "assistedCountMatch": "new-standalone-import"
+    },
     "3498": {
       "status": "ignored",
       "at": "2026-08-10T00:46:08.328Z",
@@ -5175,6 +5902,16 @@
       "at": "2026-08-10T18:11:37.486Z",
       "by": "painel",
       "familyId": "fam-d2828f2d4253"
+    },
+    "3600": {
+      "status": "imported",
+      "productId": 1788102949825,
+      "productCode": "PRD-959",
+      "name": "Tela frontal Apple iPhone 8 / SE 1ª LINHA BRANCO",
+      "at": "2026-08-30T14:59:47.683Z",
+      "by": "painel",
+      "assistedCountBatch": "WM10-COUNT-20260830-A",
+      "assistedCountMatch": "new-standalone-import"
     },
     "3621": {
       "status": "imported",
@@ -5435,6 +6172,16 @@
         "unit",
         "active"
       ]
+    },
+    "3906": {
+      "status": "imported",
+      "productId": 1788102166724,
+      "productCode": "PRD-870",
+      "name": "Capa Motorola  MOTO G7 PLAY ANTI IMPACTO TRANSP",
+      "at": "2026-08-30T14:59:47.163Z",
+      "by": "painel",
+      "assistedCountBatch": "WM10-COUNT-20260830-A",
+      "assistedCountMatch": "new-standalone-import"
     },
     "3921": {
       "status": "imported",
@@ -5796,18 +6543,30 @@
       "productId": 1786927893064,
       "productCode": "PRD-510",
       "name": "Capa Motorola Moto Edge 20 ANTI IMPACTO TRANSP",
-      "at": "2026-08-17T00:37:59.056Z",
+      "at": "2026-08-30T14:59:47.274Z",
       "by": "painel",
-      "lastSyncFields": [
-        "name",
-        "salePrice",
-        "cost",
-        "barcode",
-        "reference",
-        "brand",
-        "unit",
-        "active"
-      ]
+      "assistedCountBatch": "WM10-COUNT-20260830-A",
+      "assistedCountMatch": "migration-product"
+    },
+    "4270": {
+      "status": "imported",
+      "productId": 1788102702857,
+      "productCode": "PRD-883",
+      "name": "Capa Motorola  MOTO G 5G ANTI IMPACTO TRANSP",
+      "at": "2026-08-30T14:59:47.244Z",
+      "by": "painel",
+      "assistedCountBatch": "WM10-COUNT-20260830-A",
+      "assistedCountMatch": "new-standalone-import"
+    },
+    "4278": {
+      "status": "imported",
+      "productId": 1788102007900,
+      "productCode": "PRD-886",
+      "name": "Capa Motorola  G200 5G ANTI IMPACTO TRANSP",
+      "at": "2026-08-30T14:59:47.259Z",
+      "by": "painel",
+      "assistedCountBatch": "WM10-COUNT-20260830-A",
+      "assistedCountMatch": "new-standalone-import"
     },
     "4301": {
       "status": "imported",
@@ -5881,6 +6640,16 @@
         "active"
       ]
     },
+    "4324": {
+      "status": "imported",
+      "productId": 1788102684983,
+      "productCode": "PRD-878",
+      "name": "Capa Motorola  MOTO G50 4G ANTI IMPACTO TRANSP",
+      "at": "2026-08-30T14:59:47.222Z",
+      "by": "painel",
+      "assistedCountBatch": "WM10-COUNT-20260830-A",
+      "assistedCountMatch": "new-standalone-import"
+    },
     "4332": {
       "status": "imported",
       "productId": 1786926285116,
@@ -5904,18 +6673,10 @@
       "productId": 1787009818340,
       "productCode": "PRD-792",
       "name": "Capa Motorola  MOTO G52 / G82 5G ANTI IMPACTO TRANSP",
-      "at": "2026-08-17T23:22:45.697Z",
+      "at": "2026-08-30T14:59:47.310Z",
       "by": "painel",
-      "lastSyncFields": [
-        "name",
-        "salePrice",
-        "cost",
-        "barcode",
-        "reference",
-        "brand",
-        "unit",
-        "active"
-      ]
+      "assistedCountBatch": "WM10-COUNT-20260830-A",
+      "assistedCountMatch": "migration-product"
     },
     "4348": {
       "status": "imported",
@@ -6196,23 +6957,85 @@
         "active"
       ]
     },
+    "4455": {
+      "status": "imported",
+      "productId": 1788102872960,
+      "productCode": "PRD-954",
+      "name": "Tela frontal Apple iPhone 7G 1ª LINHA BRANCO",
+      "at": "2026-08-30T14:59:47.659Z",
+      "by": "painel",
+      "assistedCountBatch": "WM10-COUNT-20260830-A",
+      "assistedCountMatch": "new-standalone-import"
+    },
+    "4458": {
+      "status": "imported",
+      "productId": 1788102907270,
+      "productCode": "PRD-960",
+      "name": "Tela frontal Apple iPhone 6G 1ª LINHA BRANCO",
+      "at": "2026-08-30T14:59:47.689Z",
+      "by": "painel",
+      "assistedCountBatch": "WM10-COUNT-20260830-A",
+      "assistedCountMatch": "new-standalone-import"
+    },
+    "4470": {
+      "status": "imported",
+      "productId": 1788102585121,
+      "productCode": "PRD-955",
+      "name": "Tela frontal Apple iPhone 6S 1ª LINHA PRETO",
+      "at": "2026-08-30T14:59:47.664Z",
+      "by": "painel",
+      "assistedCountBatch": "WM10-COUNT-20260830-A",
+      "assistedCountMatch": "new-standalone-import"
+    },
+    "4472": {
+      "status": "imported",
+      "productId": 1788102856111,
+      "productCode": "PRD-962",
+      "name": "Tela frontal Apple iPhone 5S 1ª LINHA BRANCO",
+      "at": "2026-08-30T14:59:47.702Z",
+      "by": "painel",
+      "assistedCountBatch": "WM10-COUNT-20260830-A",
+      "assistedCountMatch": "new-standalone-import"
+    },
+    "4474": {
+      "status": "imported",
+      "productId": 1788102876597,
+      "productCode": "PRD-961",
+      "name": "Tela frontal Apple iPhone 5G 1ª LINHA BRANCO",
+      "at": "2026-08-30T14:59:47.696Z",
+      "by": "painel",
+      "assistedCountBatch": "WM10-COUNT-20260830-A",
+      "assistedCountMatch": "new-standalone-import"
+    },
+    "4479": {
+      "status": "imported",
+      "productId": 1788102834738,
+      "productCode": "PRD-957",
+      "name": "Tela frontal Apple iPhone 6S Plus 1ª LINHA BRANCO",
+      "at": "2026-08-30T14:59:47.674Z",
+      "by": "painel",
+      "assistedCountBatch": "WM10-COUNT-20260830-A",
+      "assistedCountMatch": "new-standalone-import"
+    },
+    "4480": {
+      "status": "imported",
+      "productId": 1788102448632,
+      "productCode": "PRD-953",
+      "name": "Tela frontal Apple iPhone 6S Plus 1ª LINHA PRETO",
+      "at": "2026-08-30T14:59:47.652Z",
+      "by": "painel",
+      "assistedCountBatch": "WM10-COUNT-20260830-A",
+      "assistedCountMatch": "new-standalone-import"
+    },
     "4512": {
       "status": "imported",
       "productId": 1786964540201,
       "productCode": "PRD-601",
-      "name": "Capa samsung linha S S11 E PRETO",
-      "at": "2026-08-17T10:56:36.808Z",
+      "name": "Capa samsung linha S S11E PRETO",
+      "at": "2026-08-30T14:59:47.479Z",
       "by": "painel",
-      "lastSyncFields": [
-        "name",
-        "salePrice",
-        "cost",
-        "barcode",
-        "reference",
-        "brand",
-        "unit",
-        "active"
-      ]
+      "assistedCountBatch": "WM10-COUNT-20260830-A",
+      "assistedCountMatch": "migration-product"
     },
     "4519": {
       "status": "imported",
@@ -6672,6 +7495,16 @@
         "unit",
         "active"
       ]
+    },
+    "4770": {
+      "status": "imported",
+      "productId": 1788102938679,
+      "productCode": "PRD-896",
+      "name": "Capa Motorola  MOTO G41 ANTI IMPACTO TRANSP",
+      "at": "2026-08-30T14:59:47.314Z",
+      "by": "painel",
+      "assistedCountBatch": "WM10-COUNT-20260830-A",
+      "assistedCountMatch": "new-standalone-import"
     },
     "4782": {
       "status": "imported",
@@ -7371,6 +8204,16 @@
         "unit",
         "active"
       ]
+    },
+    "5212": {
+      "status": "imported",
+      "productId": 1788102061073,
+      "productCode": "PRD-949",
+      "name": "Capa Xiaomi Redmi REDMI 10A ANTI IMPACTO TRANSP",
+      "at": "2026-08-30T14:59:47.626Z",
+      "by": "painel",
+      "assistedCountBatch": "WM10-COUNT-20260830-A",
+      "assistedCountMatch": "new-standalone-import"
     },
     "5219": {
       "status": "imported",
@@ -9728,6 +10571,46 @@
       "by": "painel",
       "familyId": "fam-771dba278067"
     },
+    "7001": {
+      "status": "imported",
+      "productId": 1788102109763,
+      "productCode": "PRD-905",
+      "name": "Capa samsung M31 TRANSPARENTE",
+      "at": "2026-08-30T14:59:47.377Z",
+      "by": "painel",
+      "assistedCountBatch": "WM10-COUNT-20260830-A",
+      "assistedCountMatch": "new-standalone-import"
+    },
+    "7010": {
+      "status": "imported",
+      "productId": 1788102581387,
+      "productCode": "PRD-908",
+      "name": "Capa samsung M30 S PRETO",
+      "at": "2026-08-30T14:59:47.390Z",
+      "by": "painel",
+      "assistedCountBatch": "WM10-COUNT-20260830-A",
+      "assistedCountMatch": "new-standalone-import"
+    },
+    "7021": {
+      "status": "imported",
+      "productId": 1788102118479,
+      "productCode": "PRD-900",
+      "name": "Capa samsung M20 TRANSPARENTE",
+      "at": "2026-08-30T14:59:47.346Z",
+      "by": "painel",
+      "assistedCountBatch": "WM10-COUNT-20260830-A",
+      "assistedCountMatch": "new-standalone-import"
+    },
+    "7022": {
+      "status": "imported",
+      "productId": 1788102443031,
+      "productCode": "PRD-933",
+      "name": "Capa samsung M20 ANTI IMPACTO TRANSP",
+      "at": "2026-08-30T14:59:47.523Z",
+      "by": "painel",
+      "assistedCountBatch": "WM10-COUNT-20260830-A",
+      "assistedCountMatch": "new-standalone-import"
+    },
     "7078": {
       "status": "imported",
       "productId": 1786837630700,
@@ -10014,6 +10897,16 @@
         "unit",
         "active"
       ]
+    },
+    "7244": {
+      "status": "imported",
+      "productId": 1788102292847,
+      "productCode": "PRD-931",
+      "name": "Capa CASE Samsung A01 CORE PRETO",
+      "at": "2026-08-30T14:59:47.507Z",
+      "by": "painel",
+      "assistedCountBatch": "WM10-COUNT-20260830-A",
+      "assistedCountMatch": "new-standalone-import"
     },
     "7261": {
       "status": "linked",
@@ -10642,6 +11535,36 @@
       "at": "2026-08-12T01:25:31.326Z",
       "by": "painel",
       "familyId": "fam-91c38aa1b3c8"
+    },
+    "7566": {
+      "status": "imported",
+      "productId": 1788102713948,
+      "productCode": "PRD-884",
+      "name": "CAPA MOTO C MOTO C ANTI IMPACTO TRANSP",
+      "at": "2026-08-30T14:59:47.249Z",
+      "by": "painel",
+      "assistedCountBatch": "WM10-COUNT-20260830-A",
+      "assistedCountMatch": "new-standalone-import"
+    },
+    "7567": {
+      "status": "imported",
+      "productId": 1788102153523,
+      "productCode": "PRD-876",
+      "name": "CAPA MOTO C MOTO C PLUS  ANTI IMPACTO TRANSP",
+      "at": "2026-08-30T14:59:47.208Z",
+      "by": "painel",
+      "assistedCountBatch": "WM10-COUNT-20260830-A",
+      "assistedCountMatch": "new-standalone-import"
+    },
+    "7583": {
+      "status": "imported",
+      "productId": 1788102949210,
+      "productCode": "PRD-890",
+      "name": "Capa Motorola  X4 PRETO",
+      "at": "2026-08-30T14:59:47.279Z",
+      "by": "painel",
+      "assistedCountBatch": "WM10-COUNT-20260830-A",
+      "assistedCountMatch": "new-standalone-import"
     },
     "7650": {
       "status": "imported",
@@ -12224,6 +13147,16 @@
         "unit",
         "active"
       ]
+    },
+    "8855": {
+      "status": "imported",
+      "productId": 1788102011068,
+      "productCode": "PRD-965",
+      "name": "Capa Iphone 15 BRANCO",
+      "at": "2026-08-30T14:59:47.722Z",
+      "by": "painel",
+      "assistedCountBatch": "WM10-COUNT-20260830-A",
+      "assistedCountMatch": "new-standalone-import"
     },
     "8856": {
       "status": "imported",

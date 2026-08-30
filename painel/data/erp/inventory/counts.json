@@ -2,6 +2,2795 @@
   "version": "0.27.0",
   "items": [
     {
+      "id": "CNT-20260830-0001",
+      "type": "partial",
+      "status": "completed",
+      "blockPdv": false,
+      "notes": "[WM10-COUNT-20260830-A] Contagem parcial assistida da conferência física de 30/08/2026.",
+      "locationId": "loja-principal",
+      "startedAt": "2026-08-30T14:59:47.108Z",
+      "createdAt": "2026-08-30T14:59:47.108Z",
+      "createdBy": "painel",
+      "updatedAt": "2026-08-30T15:02:18.483Z",
+      "items": [
+        {
+          "inventoryItemId": "PRD-1788102137069",
+          "productId": "1788102137069",
+          "selectionId": "1788102137069",
+          "name": "Capa Motorola  MOTO G7/ G7 PLUS PRETO",
+          "code": "PRD-866",
+          "sku": "PRD-866",
+          "barcode": "9711748665796",
+          "variationLabel": "",
+          "systemQuantityAtCount": 0,
+          "countedQuantity": 2,
+          "firstCountedAt": "2026-08-30T14:59:47.804Z",
+          "lastCountedAt": "2026-08-30T14:59:47.804Z"
+        },
+        {
+          "inventoryItemId": "PRD-1788102085570",
+          "productId": "1788102085570",
+          "selectionId": "1788102085570",
+          "name": "Capa Motorola  MOTO G7/ G7 PLUS ANTI IMPACTO TRANSP",
+          "code": "PRD-867",
+          "sku": "PRD-867",
+          "barcode": "4614135506144",
+          "variationLabel": "",
+          "systemQuantityAtCount": 0,
+          "countedQuantity": 4,
+          "firstCountedAt": "2026-08-30T14:59:47.845Z",
+          "lastCountedAt": "2026-08-30T14:59:47.845Z"
+        },
+        {
+          "inventoryItemId": "PRD-1788102891986",
+          "productId": "1788102891986",
+          "selectionId": "1788102891986",
+          "name": "Capa motorola moto E E5 Plus PRETO",
+          "code": "PRD-868",
+          "sku": "PRD-868",
+          "barcode": "5673541543234",
+          "variationLabel": "",
+          "systemQuantityAtCount": 0,
+          "countedQuantity": 1,
+          "firstCountedAt": "2026-08-30T14:59:47.867Z",
+          "lastCountedAt": "2026-08-30T14:59:47.867Z"
+        },
+        {
+          "inventoryItemId": "PRD-1788102669139",
+          "productId": "1788102669139",
+          "selectionId": "1788102669139",
+          "name": "Capa motorola moto E E5 Plus ANTI IMPACTO TRANSP",
+          "code": "PRD-869",
+          "sku": "PRD-869",
+          "barcode": "",
+          "variationLabel": "",
+          "systemQuantityAtCount": 0,
+          "countedQuantity": 2,
+          "firstCountedAt": "2026-08-30T14:59:47.888Z",
+          "lastCountedAt": "2026-08-30T14:59:47.888Z"
+        },
+        {
+          "inventoryItemId": "PRD-1788102166724",
+          "productId": "1788102166724",
+          "selectionId": "1788102166724",
+          "name": "Capa Motorola  MOTO G7 PLAY ANTI IMPACTO TRANSP",
+          "code": "PRD-870",
+          "sku": "PRD-870",
+          "barcode": "",
+          "variationLabel": "",
+          "systemQuantityAtCount": 0,
+          "countedQuantity": 1,
+          "firstCountedAt": "2026-08-30T14:59:47.910Z",
+          "lastCountedAt": "2026-08-30T14:59:47.910Z"
+        },
+        {
+          "inventoryItemId": "PRD-1788102798674",
+          "productId": "1788102798674",
+          "selectionId": "1788102798674",
+          "name": "Capa motorola moto E E5 Play PRETO",
+          "code": "PRD-871",
+          "sku": "PRD-871",
+          "barcode": "7395609406555",
+          "variationLabel": "",
+          "systemQuantityAtCount": 0,
+          "countedQuantity": 1,
+          "firstCountedAt": "2026-08-30T14:59:47.935Z",
+          "lastCountedAt": "2026-08-30T14:59:47.935Z"
+        },
+        {
+          "inventoryItemId": "PRD-1788102307066",
+          "productId": "1788102307066",
+          "selectionId": "1788102307066",
+          "name": "Capa motorola moto Z Z3 Play ANTI IMPACTO TRANSP",
+          "code": "PRD-872",
+          "sku": "PRD-872",
+          "barcode": "9340799212866",
+          "variationLabel": "",
+          "systemQuantityAtCount": 0,
+          "countedQuantity": 4,
+          "firstCountedAt": "2026-08-30T14:59:47.956Z",
+          "lastCountedAt": "2026-08-30T14:59:47.956Z"
+        },
+        {
+          "inventoryItemId": "PRD-1788102128784",
+          "productId": "1788102128784",
+          "selectionId": "1788102128784",
+          "name": "Capa Motorola  MOTO G4/ G4 PLUS TRANSPARENTE",
+          "code": "PRD-873",
+          "sku": "PRD-873",
+          "barcode": "9239890927246",
+          "variationLabel": "",
+          "systemQuantityAtCount": 0,
+          "countedQuantity": 1,
+          "firstCountedAt": "2026-08-30T14:59:47.980Z",
+          "lastCountedAt": "2026-08-30T14:59:47.980Z"
+        },
+        {
+          "inventoryItemId": "PRD-1788102211489",
+          "productId": "1788102211489",
+          "selectionId": "1788102211489",
+          "name": "Capa Motorola  MOTO G4/ G4 PLUS FUMÊ",
+          "code": "PRD-874",
+          "sku": "PRD-874",
+          "barcode": "8476383082360",
+          "variationLabel": "",
+          "systemQuantityAtCount": 0,
+          "countedQuantity": 4,
+          "firstCountedAt": "2026-08-30T14:59:48.005Z",
+          "lastCountedAt": "2026-08-30T14:59:48.005Z"
+        },
+        {
+          "inventoryItemId": "PRD-1788102258281",
+          "productId": "1788102258281",
+          "selectionId": "1788102258281",
+          "name": "Capa Motorola Moto Edge Plus ANTI IMPACTO TRANSP",
+          "code": "PRD-875",
+          "sku": "PRD-875",
+          "barcode": "5614836884229",
+          "variationLabel": "",
+          "systemQuantityAtCount": 0,
+          "countedQuantity": 1,
+          "firstCountedAt": "2026-08-30T14:59:48.024Z",
+          "lastCountedAt": "2026-08-30T14:59:48.024Z"
+        },
+        {
+          "inventoryItemId": "PRD-1788102153523",
+          "productId": "1788102153523",
+          "selectionId": "1788102153523",
+          "name": "CAPA MOTO C MOTO C PLUS  ANTI IMPACTO TRANSP",
+          "code": "PRD-876",
+          "sku": "PRD-876",
+          "barcode": "",
+          "variationLabel": "",
+          "systemQuantityAtCount": 0,
+          "countedQuantity": 1,
+          "firstCountedAt": "2026-08-30T14:59:48.045Z",
+          "lastCountedAt": "2026-08-30T14:59:48.045Z"
+        },
+        {
+          "inventoryItemId": "PRD-1788102459570",
+          "productId": "1788102459570",
+          "selectionId": "1788102459570",
+          "name": "Capa Motorola MOTO G8 PLAY/ ONE MACRO  ANTI IMPACTO PRETA",
+          "code": "PRD-877",
+          "sku": "PRD-877",
+          "barcode": "5309526328359",
+          "variationLabel": "",
+          "systemQuantityAtCount": 0,
+          "countedQuantity": 1,
+          "firstCountedAt": "2026-08-30T14:59:48.064Z",
+          "lastCountedAt": "2026-08-30T14:59:48.064Z"
+        },
+        {
+          "inventoryItemId": "PRD-1788102684983",
+          "productId": "1788102684983",
+          "selectionId": "1788102684983",
+          "name": "Capa Motorola  MOTO G50 4G ANTI IMPACTO TRANSP",
+          "code": "PRD-878",
+          "sku": "PRD-878",
+          "barcode": "",
+          "variationLabel": "",
+          "systemQuantityAtCount": 0,
+          "countedQuantity": 2,
+          "firstCountedAt": "2026-08-30T14:59:48.088Z",
+          "lastCountedAt": "2026-08-30T14:59:48.088Z"
+        },
+        {
+          "inventoryItemId": "PRD-1788102194548",
+          "productId": "1788102194548",
+          "selectionId": "1788102194548",
+          "name": "Capa Motorola  MOTO G6 PLUS PRETO",
+          "code": "PRD-879",
+          "sku": "PRD-879",
+          "barcode": "8264428702201",
+          "variationLabel": "",
+          "systemQuantityAtCount": 0,
+          "countedQuantity": 1,
+          "firstCountedAt": "2026-08-30T14:59:48.107Z",
+          "lastCountedAt": "2026-08-30T14:59:48.107Z"
+        },
+        {
+          "inventoryItemId": "PRD-1788102783247",
+          "productId": "1788102783247",
+          "selectionId": "1788102783247",
+          "name": "Capa motorola moto Z Z2 Play FUMÊ",
+          "code": "PRD-880",
+          "sku": "PRD-880",
+          "barcode": "5189846357051",
+          "variationLabel": "",
+          "systemQuantityAtCount": 0,
+          "countedQuantity": 1,
+          "firstCountedAt": "2026-08-30T14:59:48.125Z",
+          "lastCountedAt": "2026-08-30T14:59:48.125Z"
+        },
+        {
+          "inventoryItemId": "PRD-1788102250710",
+          "productId": "1788102250710",
+          "selectionId": "1788102250710",
+          "name": "Capa motorola moto  C FUMÊ",
+          "code": "PRD-881",
+          "sku": "PRD-881",
+          "barcode": "5964184831551",
+          "variationLabel": "",
+          "systemQuantityAtCount": 0,
+          "countedQuantity": 1,
+          "firstCountedAt": "2026-08-30T14:59:48.146Z",
+          "lastCountedAt": "2026-08-30T14:59:48.146Z"
+        },
+        {
+          "inventoryItemId": "PRD-1788102072899",
+          "productId": "1788102072899",
+          "selectionId": "1788102072899",
+          "name": "Capa Motorola  MOTO G7 POWER FUMÊ",
+          "code": "PRD-882",
+          "sku": "PRD-882",
+          "barcode": "7669440919100",
+          "variationLabel": "",
+          "systemQuantityAtCount": 0,
+          "countedQuantity": 2,
+          "firstCountedAt": "2026-08-30T14:59:48.166Z",
+          "lastCountedAt": "2026-08-30T14:59:48.166Z"
+        },
+        {
+          "inventoryItemId": "PRD-1788102702857",
+          "productId": "1788102702857",
+          "selectionId": "1788102702857",
+          "name": "Capa Motorola  MOTO G 5G ANTI IMPACTO TRANSP",
+          "code": "PRD-883",
+          "sku": "PRD-883",
+          "barcode": "",
+          "variationLabel": "",
+          "systemQuantityAtCount": 0,
+          "countedQuantity": 2,
+          "firstCountedAt": "2026-08-30T14:59:48.185Z",
+          "lastCountedAt": "2026-08-30T14:59:48.185Z"
+        },
+        {
+          "inventoryItemId": "PRD-1788102713948",
+          "productId": "1788102713948",
+          "selectionId": "1788102713948",
+          "name": "CAPA MOTO C MOTO C ANTI IMPACTO TRANSP",
+          "code": "PRD-884",
+          "sku": "PRD-884",
+          "barcode": "",
+          "variationLabel": "",
+          "systemQuantityAtCount": 0,
+          "countedQuantity": 5,
+          "firstCountedAt": "2026-08-30T14:59:48.204Z",
+          "lastCountedAt": "2026-08-30T14:59:48.204Z"
+        },
+        {
+          "inventoryItemId": "PRD-1788102585607",
+          "productId": "1788102585607",
+          "selectionId": "1788102585607",
+          "name": "Capa motorola moto E E6 Plus ANTI IMPACTO TRANSP",
+          "code": "PRD-885",
+          "sku": "PRD-885",
+          "barcode": "4445525918595",
+          "variationLabel": "",
+          "systemQuantityAtCount": 0,
+          "countedQuantity": 1,
+          "firstCountedAt": "2026-08-30T14:59:48.222Z",
+          "lastCountedAt": "2026-08-30T14:59:48.222Z"
+        },
+        {
+          "inventoryItemId": "PRD-1788102007900",
+          "productId": "1788102007900",
+          "selectionId": "1788102007900",
+          "name": "Capa Motorola  G200 5G ANTI IMPACTO TRANSP",
+          "code": "PRD-886",
+          "sku": "PRD-886",
+          "barcode": "",
+          "variationLabel": "",
+          "systemQuantityAtCount": 0,
+          "countedQuantity": 2,
+          "firstCountedAt": "2026-08-30T14:59:48.243Z",
+          "lastCountedAt": "2026-08-30T14:59:48.243Z"
+        },
+        {
+          "inventoryItemId": "PRD-1788102427691",
+          "productId": "1788102427691",
+          "selectionId": "1788102427691",
+          "name": "Capa motorola moto E E6 Play ANTI IMPACTO TRANSP",
+          "code": "PRD-887",
+          "sku": "PRD-887",
+          "barcode": "8023561728802",
+          "variationLabel": "",
+          "systemQuantityAtCount": 0,
+          "countedQuantity": 1,
+          "firstCountedAt": "2026-08-30T14:59:48.262Z",
+          "lastCountedAt": "2026-08-30T14:59:48.262Z"
+        },
+        {
+          "inventoryItemId": "PRD-1788102358537",
+          "productId": "1788102358537",
+          "selectionId": "1788102358537",
+          "name": "Capa Motorola  MOTO G5S PLUS FUMÊ",
+          "code": "PRD-888",
+          "sku": "PRD-888",
+          "barcode": "8537727834042",
+          "variationLabel": "",
+          "systemQuantityAtCount": 0,
+          "countedQuantity": 1,
+          "firstCountedAt": "2026-08-30T14:59:48.287Z",
+          "lastCountedAt": "2026-08-30T14:59:48.287Z"
+        },
+        {
+          "inventoryItemId": "PRD-1788102896046",
+          "productId": "1788102896046",
+          "selectionId": "1788102896046",
+          "name": "Capa motorola moto Z Z3 Play PRETO",
+          "code": "PRD-889",
+          "sku": "PRD-889",
+          "barcode": "6646817113089",
+          "variationLabel": "",
+          "systemQuantityAtCount": 0,
+          "countedQuantity": 1,
+          "firstCountedAt": "2026-08-30T14:59:48.308Z",
+          "lastCountedAt": "2026-08-30T14:59:48.308Z"
+        },
+        {
+          "inventoryItemId": "PRD-1786927893064",
+          "productId": "1786927893064",
+          "selectionId": "1786927893064",
+          "name": "Capa Motorola Moto Edge 20 ANTI IMPACTO TRANSP",
+          "code": "PRD-510",
+          "sku": "PRD-510",
+          "barcode": "",
+          "variationLabel": "",
+          "systemQuantityAtCount": 1,
+          "countedQuantity": 2,
+          "firstCountedAt": "2026-08-30T14:59:48.328Z",
+          "lastCountedAt": "2026-08-30T14:59:48.328Z"
+        },
+        {
+          "inventoryItemId": "PRD-1788102949210",
+          "productId": "1788102949210",
+          "selectionId": "1788102949210",
+          "name": "Capa Motorola  X4 PRETO",
+          "code": "PRD-890",
+          "sku": "PRD-890",
+          "barcode": "",
+          "variationLabel": "",
+          "systemQuantityAtCount": 0,
+          "countedQuantity": 1,
+          "firstCountedAt": "2026-08-30T14:59:48.348Z",
+          "lastCountedAt": "2026-08-30T14:59:48.348Z"
+        },
+        {
+          "inventoryItemId": "PRD-1788102126941",
+          "productId": "1788102126941",
+          "selectionId": "1788102126941",
+          "name": "Capa motorola linha one MOTO ONE HYPER ANTI IMPACTO TRANSP",
+          "code": "PRD-891",
+          "sku": "PRD-891",
+          "barcode": "",
+          "variationLabel": "",
+          "systemQuantityAtCount": 0,
+          "countedQuantity": 1,
+          "firstCountedAt": "2026-08-30T14:59:48.368Z",
+          "lastCountedAt": "2026-08-30T14:59:48.368Z"
+        },
+        {
+          "inventoryItemId": "PRD-1788102736549",
+          "productId": "1788102736549",
+          "selectionId": "1788102736549",
+          "name": "Capa motorola linha one MOTO ONE ZOOM ANTI IMPACTO BRANCO",
+          "code": "PRD-892",
+          "sku": "PRD-892",
+          "barcode": "",
+          "variationLabel": "",
+          "systemQuantityAtCount": 0,
+          "countedQuantity": 1,
+          "firstCountedAt": "2026-08-30T14:59:48.388Z",
+          "lastCountedAt": "2026-08-30T14:59:48.388Z"
+        },
+        {
+          "inventoryItemId": "PRD-1788102625884",
+          "productId": "1788102625884",
+          "selectionId": "1788102625884",
+          "name": "Capa Motorola  MOTO G9 PLUS ANTI IMPACTO TRANSP",
+          "code": "PRD-893",
+          "sku": "PRD-893",
+          "barcode": "5955372540225",
+          "variationLabel": "",
+          "systemQuantityAtCount": 0,
+          "countedQuantity": 1,
+          "firstCountedAt": "2026-08-30T14:59:48.407Z",
+          "lastCountedAt": "2026-08-30T14:59:48.407Z"
+        },
+        {
+          "inventoryItemId": "PRD-1788102847807",
+          "productId": "1788102847807",
+          "selectionId": "1788102847807",
+          "name": "Capa motorola moto E E7 Plus ANTI IMPACTO TRANSP",
+          "code": "PRD-894",
+          "sku": "PRD-894",
+          "barcode": "8694701315079",
+          "variationLabel": "",
+          "systemQuantityAtCount": 0,
+          "countedQuantity": 1,
+          "firstCountedAt": "2026-08-30T14:59:48.426Z",
+          "lastCountedAt": "2026-08-30T14:59:48.426Z"
+        },
+        {
+          "inventoryItemId": "PRD-1788102629519",
+          "productId": "1788102629519",
+          "selectionId": "1788102629519",
+          "name": "Capa Motorola MOTO G8 PLAY/ ONE MACRO  ANTI IMPACTO TRANSP",
+          "code": "PRD-895",
+          "sku": "PRD-895",
+          "barcode": "6743806251248",
+          "variationLabel": "",
+          "systemQuantityAtCount": 0,
+          "countedQuantity": 1,
+          "firstCountedAt": "2026-08-30T14:59:48.446Z",
+          "lastCountedAt": "2026-08-30T14:59:48.446Z"
+        },
+        {
+          "inventoryItemId": "PRD-1787009818340",
+          "productId": "1787009818340",
+          "selectionId": "1787009818340",
+          "name": "Capa Motorola  MOTO G52 / G82 5G ANTI IMPACTO TRANSP",
+          "code": "PRD-792",
+          "sku": "PRD-792",
+          "barcode": "",
+          "variationLabel": "",
+          "systemQuantityAtCount": 1,
+          "countedQuantity": 1,
+          "firstCountedAt": "2026-08-30T14:59:48.467Z",
+          "lastCountedAt": "2026-08-30T14:59:48.467Z"
+        },
+        {
+          "inventoryItemId": "PRD-1788102938679",
+          "productId": "1788102938679",
+          "selectionId": "1788102938679",
+          "name": "Capa Motorola  MOTO G41 ANTI IMPACTO TRANSP",
+          "code": "PRD-896",
+          "sku": "PRD-896",
+          "barcode": "",
+          "variationLabel": "",
+          "systemQuantityAtCount": 0,
+          "countedQuantity": 1,
+          "firstCountedAt": "2026-08-30T14:59:48.489Z",
+          "lastCountedAt": "2026-08-30T14:59:48.489Z"
+        },
+        {
+          "inventoryItemId": "PRD-1788102456367",
+          "productId": "1788102456367",
+          "selectionId": "1788102456367",
+          "name": "Capa samsung A8 2018 ANTI IMPACTO TRANSP",
+          "code": "PRD-897",
+          "sku": "PRD-897",
+          "barcode": "9211518914333",
+          "variationLabel": "",
+          "systemQuantityAtCount": 0,
+          "countedQuantity": 3,
+          "firstCountedAt": "2026-08-30T14:59:48.509Z",
+          "lastCountedAt": "2026-08-30T14:59:48.509Z"
+        },
+        {
+          "inventoryItemId": "PRD-1787008683697",
+          "productId": "1787008683697",
+          "selectionId": "1787008683697",
+          "name": "Capa samsung linha J J5 J500 PRETO",
+          "code": "PRD-782",
+          "sku": "PRD-782",
+          "barcode": "8805166710846",
+          "variationLabel": "",
+          "systemQuantityAtCount": 1,
+          "countedQuantity": 1,
+          "firstCountedAt": "2026-08-30T14:59:48.530Z",
+          "lastCountedAt": "2026-08-30T14:59:48.530Z"
+        },
+        {
+          "inventoryItemId": "PRD-1788102959537",
+          "productId": "1788102959537",
+          "selectionId": "1788102959537",
+          "name": "Capa samsung linha J J7 J700 J7 Neo ANTI IMPACTO TRANSP",
+          "code": "PRD-898",
+          "sku": "PRD-898",
+          "barcode": "4274225310978",
+          "variationLabel": "",
+          "systemQuantityAtCount": 0,
+          "countedQuantity": 1,
+          "firstCountedAt": "2026-08-30T14:59:48.550Z",
+          "lastCountedAt": "2026-08-30T14:59:48.550Z"
+        },
+        {
+          "inventoryItemId": "PRD-1788102897839",
+          "productId": "1788102897839",
+          "selectionId": "1788102897839",
+          "name": "Capa samsung linha J J7 J700 J7 Neo PRETO",
+          "code": "PRD-899",
+          "sku": "PRD-899",
+          "barcode": "5404965325508",
+          "variationLabel": "",
+          "systemQuantityAtCount": 0,
+          "countedQuantity": 4,
+          "firstCountedAt": "2026-08-30T14:59:48.570Z",
+          "lastCountedAt": "2026-08-30T14:59:48.570Z"
+        },
+        {
+          "inventoryItemId": "PRD-1788102118479",
+          "productId": "1788102118479",
+          "selectionId": "1788102118479",
+          "name": "Capa samsung M20 TRANSPARENTE",
+          "code": "PRD-900",
+          "sku": "PRD-900",
+          "barcode": "",
+          "variationLabel": "",
+          "systemQuantityAtCount": 0,
+          "countedQuantity": 1,
+          "firstCountedAt": "2026-08-30T14:59:48.589Z",
+          "lastCountedAt": "2026-08-30T14:59:48.589Z"
+        },
+        {
+          "inventoryItemId": "PRD-1788102288578",
+          "productId": "1788102288578",
+          "selectionId": "1788102288578",
+          "name": "Capa samsung A01 CORE ANTI IMPACTO TRANSP",
+          "code": "PRD-901",
+          "sku": "PRD-901",
+          "barcode": "6934139793530",
+          "variationLabel": "",
+          "systemQuantityAtCount": 0,
+          "countedQuantity": 4,
+          "firstCountedAt": "2026-08-30T14:59:48.608Z",
+          "lastCountedAt": "2026-08-30T14:59:48.608Z"
+        },
+        {
+          "inventoryItemId": "PRD-1788102328724",
+          "productId": "1788102328724",
+          "selectionId": "1788102328724",
+          "name": "Capa samsung linha J J2 Pro 2018 ANTI IMPACTO TRANSP",
+          "code": "PRD-902",
+          "sku": "PRD-902",
+          "barcode": "8245707228414",
+          "variationLabel": "",
+          "systemQuantityAtCount": 0,
+          "countedQuantity": 2,
+          "firstCountedAt": "2026-08-30T14:59:48.629Z",
+          "lastCountedAt": "2026-08-30T14:59:48.629Z"
+        },
+        {
+          "inventoryItemId": "PRD-1788102256334",
+          "productId": "1788102256334",
+          "selectionId": "1788102256334",
+          "name": "Capa samsung linha S S7 PRETO",
+          "code": "PRD-903",
+          "sku": "PRD-903",
+          "barcode": "4949195394241",
+          "variationLabel": "",
+          "systemQuantityAtCount": 0,
+          "countedQuantity": 1,
+          "firstCountedAt": "2026-08-30T14:59:48.651Z",
+          "lastCountedAt": "2026-08-30T14:59:48.651Z"
+        },
+        {
+          "inventoryItemId": "PRD-1788102445760",
+          "productId": "1788102445760",
+          "selectionId": "1788102445760",
+          "name": "Capa samsung linha S S8 PRETO",
+          "code": "PRD-904",
+          "sku": "PRD-904",
+          "barcode": "9270757863239",
+          "variationLabel": "",
+          "systemQuantityAtCount": 0,
+          "countedQuantity": 2,
+          "firstCountedAt": "2026-08-30T14:59:48.671Z",
+          "lastCountedAt": "2026-08-30T14:59:48.671Z"
+        },
+        {
+          "inventoryItemId": "PRD-1788102109763",
+          "productId": "1788102109763",
+          "selectionId": "1788102109763",
+          "name": "Capa samsung M31 TRANSPARENTE",
+          "code": "PRD-905",
+          "sku": "PRD-905",
+          "barcode": "",
+          "variationLabel": "",
+          "systemQuantityAtCount": 0,
+          "countedQuantity": 1,
+          "firstCountedAt": "2026-08-30T14:59:48.693Z",
+          "lastCountedAt": "2026-08-30T14:59:48.693Z"
+        },
+        {
+          "inventoryItemId": "PRD-1787009123647",
+          "productId": "1787009123647",
+          "selectionId": "1787009123647",
+          "name": "Capa samsung A90 ANTI IMPACTO TRANSP",
+          "code": "PRD-788",
+          "sku": "PRD-788",
+          "barcode": "6725847105728",
+          "variationLabel": "",
+          "systemQuantityAtCount": 0,
+          "countedQuantity": 1,
+          "firstCountedAt": "2026-08-30T14:59:48.715Z",
+          "lastCountedAt": "2026-08-30T14:59:48.715Z"
+        },
+        {
+          "inventoryItemId": "PRD-1788102663936",
+          "productId": "1788102663936",
+          "selectionId": "1788102663936",
+          "name": "Capa samsung linha J J2 J200 PRETO",
+          "code": "PRD-906",
+          "sku": "PRD-906",
+          "barcode": "8053455156961",
+          "variationLabel": "",
+          "systemQuantityAtCount": 0,
+          "countedQuantity": 1,
+          "firstCountedAt": "2026-08-30T14:59:48.738Z",
+          "lastCountedAt": "2026-08-30T14:59:48.738Z"
+        },
+        {
+          "inventoryItemId": "PRD-1788102794880",
+          "productId": "1788102794880",
+          "selectionId": "1788102794880",
+          "name": "Capa samsung A41 ANTI IMPACTO TRANSP",
+          "code": "PRD-907",
+          "sku": "PRD-907",
+          "barcode": "6512782958966",
+          "variationLabel": "",
+          "systemQuantityAtCount": 0,
+          "countedQuantity": 3,
+          "firstCountedAt": "2026-08-30T14:59:48.757Z",
+          "lastCountedAt": "2026-08-30T14:59:48.757Z"
+        },
+        {
+          "inventoryItemId": "PRD-1788102581387",
+          "productId": "1788102581387",
+          "selectionId": "1788102581387",
+          "name": "Capa samsung M30 S PRETO",
+          "code": "PRD-908",
+          "sku": "PRD-908",
+          "barcode": "",
+          "variationLabel": "",
+          "systemQuantityAtCount": 0,
+          "countedQuantity": 1,
+          "firstCountedAt": "2026-08-30T14:59:48.777Z",
+          "lastCountedAt": "2026-08-30T14:59:48.777Z"
+        },
+        {
+          "inventoryItemId": "PRD-1788102872865",
+          "productId": "1788102872865",
+          "selectionId": "1788102872865",
+          "name": "Capa samsung linha S S9 ANTI IMPACTO TRANSP",
+          "code": "PRD-909",
+          "sku": "PRD-909",
+          "barcode": "",
+          "variationLabel": "",
+          "systemQuantityAtCount": 0,
+          "countedQuantity": 3,
+          "firstCountedAt": "2026-08-30T14:59:48.797Z",
+          "lastCountedAt": "2026-08-30T14:59:48.797Z"
+        },
+        {
+          "inventoryItemId": "PRD-1788102805636",
+          "productId": "1788102805636",
+          "selectionId": "1788102805636",
+          "name": "Capa samsung A60 ANTI IMPACTO TRANSP",
+          "code": "PRD-910",
+          "sku": "PRD-910",
+          "barcode": "6214692277457",
+          "variationLabel": "",
+          "systemQuantityAtCount": 0,
+          "countedQuantity": 1,
+          "firstCountedAt": "2026-08-30T14:59:48.818Z",
+          "lastCountedAt": "2026-08-30T14:59:48.818Z"
+        },
+        {
+          "inventoryItemId": "PRD-1788102572221",
+          "productId": "1788102572221",
+          "selectionId": "1788102572221",
+          "name": "Capa samsung A40 PRETO",
+          "code": "PRD-911",
+          "sku": "PRD-911",
+          "barcode": "7647650383584",
+          "variationLabel": "",
+          "systemQuantityAtCount": 0,
+          "countedQuantity": 1,
+          "firstCountedAt": "2026-08-30T14:59:48.840Z",
+          "lastCountedAt": "2026-08-30T14:59:48.840Z"
+        },
+        {
+          "inventoryItemId": "PRD-1788102925554",
+          "productId": "1788102925554",
+          "selectionId": "1788102925554",
+          "name": "Capa samsung A42 5G ANTI IMPACTO TRANSP",
+          "code": "PRD-912",
+          "sku": "PRD-912",
+          "barcode": "1988039454737",
+          "variationLabel": "",
+          "systemQuantityAtCount": 0,
+          "countedQuantity": 3,
+          "firstCountedAt": "2026-08-30T14:59:48.862Z",
+          "lastCountedAt": "2026-08-30T14:59:48.862Z"
+        },
+        {
+          "inventoryItemId": "PRD-1788102340091",
+          "productId": "1788102340091",
+          "selectionId": "1788102340091",
+          "name": "Capa samsung linha J J4 Plus / J4 Core ANTI IMPACTO TRANSP",
+          "code": "PRD-913",
+          "sku": "PRD-913",
+          "barcode": "9649358994688",
+          "variationLabel": "",
+          "systemQuantityAtCount": 0,
+          "countedQuantity": 1,
+          "firstCountedAt": "2026-08-30T14:59:48.883Z",
+          "lastCountedAt": "2026-08-30T14:59:48.883Z"
+        },
+        {
+          "inventoryItemId": "PRD-1788102645160",
+          "productId": "1788102645160",
+          "selectionId": "1788102645160",
+          "name": "Capa Samsung linha Note NOTE 10 ANTI IMPACTO TRANSP",
+          "code": "PRD-914",
+          "sku": "PRD-914",
+          "barcode": "",
+          "variationLabel": "",
+          "systemQuantityAtCount": 0,
+          "countedQuantity": 1,
+          "firstCountedAt": "2026-08-30T14:59:48.905Z",
+          "lastCountedAt": "2026-08-30T14:59:48.905Z"
+        },
+        {
+          "inventoryItemId": "PRD-1788102721458",
+          "productId": "1788102721458",
+          "selectionId": "1788102721458",
+          "name": "Capa samsung A7 2018 ANTI IMPACTO TRANSP",
+          "code": "PRD-915",
+          "sku": "PRD-915",
+          "barcode": "6184021182977",
+          "variationLabel": "",
+          "systemQuantityAtCount": 0,
+          "countedQuantity": 1,
+          "firstCountedAt": "2026-08-30T14:59:48.926Z",
+          "lastCountedAt": "2026-08-30T14:59:48.926Z"
+        },
+        {
+          "inventoryItemId": "PRD-1788102636242",
+          "productId": "1788102636242",
+          "selectionId": "1788102636242",
+          "name": "Capa samsung A40 ANTI IMPACTO TRANSP",
+          "code": "PRD-916",
+          "sku": "PRD-916",
+          "barcode": "",
+          "variationLabel": "",
+          "systemQuantityAtCount": 0,
+          "countedQuantity": 1,
+          "firstCountedAt": "2026-08-30T14:59:48.947Z",
+          "lastCountedAt": "2026-08-30T14:59:48.947Z"
+        },
+        {
+          "inventoryItemId": "PRD-1786964571738",
+          "productId": "1786964571738",
+          "selectionId": "1786964571738",
+          "name": "Capa samsung linha S S20 PLUS ANTI IMPACTO TRANSP",
+          "code": "PRD-589",
+          "sku": "PRD-589",
+          "barcode": "5811448544002",
+          "variationLabel": "",
+          "systemQuantityAtCount": 2,
+          "countedQuantity": 1,
+          "firstCountedAt": "2026-08-30T14:59:48.970Z",
+          "lastCountedAt": "2026-08-30T14:59:48.970Z"
+        },
+        {
+          "inventoryItemId": "PRD-1788102890378",
+          "productId": "1788102890378",
+          "selectionId": "1788102890378",
+          "name": "Capa samsung M21 M21S ANTI IMPACTO TRANSP",
+          "code": "PRD-917",
+          "sku": "PRD-917",
+          "barcode": "",
+          "variationLabel": "",
+          "systemQuantityAtCount": 0,
+          "countedQuantity": 1,
+          "firstCountedAt": "2026-08-30T14:59:48.989Z",
+          "lastCountedAt": "2026-08-30T14:59:48.989Z"
+        },
+        {
+          "inventoryItemId": "PRD-1788102058358",
+          "productId": "1788102058358",
+          "selectionId": "1788102058358",
+          "name": "Capa samsung A2 CORE ANTI IMPACTO TRANSP",
+          "code": "PRD-918",
+          "sku": "PRD-918",
+          "barcode": "3010450881217",
+          "variationLabel": "",
+          "systemQuantityAtCount": 0,
+          "countedQuantity": 3,
+          "firstCountedAt": "2026-08-30T14:59:49.009Z",
+          "lastCountedAt": "2026-08-30T14:59:49.009Z"
+        },
+        {
+          "inventoryItemId": "PRD-1788102612845",
+          "productId": "1788102612845",
+          "selectionId": "1788102612845",
+          "name": "Capa samsung  A32 5G ANTI IMPACTO TRANSP",
+          "code": "PRD-919",
+          "sku": "PRD-919",
+          "barcode": "",
+          "variationLabel": "",
+          "systemQuantityAtCount": 0,
+          "countedQuantity": 3,
+          "firstCountedAt": "2026-08-30T14:59:49.032Z",
+          "lastCountedAt": "2026-08-30T14:59:49.032Z"
+        },
+        {
+          "inventoryItemId": "PRD-1788102209222",
+          "productId": "1788102209222",
+          "selectionId": "1788102209222",
+          "name": "Capa samsung linha S S8 PLUS PRETO",
+          "code": "PRD-920",
+          "sku": "PRD-920",
+          "barcode": "8305476378045",
+          "variationLabel": "",
+          "systemQuantityAtCount": 0,
+          "countedQuantity": 3,
+          "firstCountedAt": "2026-08-30T14:59:49.051Z",
+          "lastCountedAt": "2026-08-30T14:59:49.051Z"
+        },
+        {
+          "inventoryItemId": "PRD-1788102451884",
+          "productId": "1788102451884",
+          "selectionId": "1788102451884",
+          "name": "Capa samsung A5 2017 PRETO",
+          "code": "PRD-921",
+          "sku": "PRD-921",
+          "barcode": "7025889632381",
+          "variationLabel": "",
+          "systemQuantityAtCount": 0,
+          "countedQuantity": 1,
+          "firstCountedAt": "2026-08-30T14:59:49.070Z",
+          "lastCountedAt": "2026-08-30T14:59:49.070Z"
+        },
+        {
+          "inventoryItemId": "PRD-1788102486472",
+          "productId": "1788102486472",
+          "selectionId": "1788102486472",
+          "name": "Capa samsung A9 2018 ANTI IMPACTO TRANSP",
+          "code": "PRD-922",
+          "sku": "PRD-922",
+          "barcode": "6336690931381",
+          "variationLabel": "",
+          "systemQuantityAtCount": 0,
+          "countedQuantity": 2,
+          "firstCountedAt": "2026-08-30T14:59:49.089Z",
+          "lastCountedAt": "2026-08-30T14:59:49.089Z"
+        },
+        {
+          "inventoryItemId": "PRD-1788102261284",
+          "productId": "1788102261284",
+          "selectionId": "1788102261284",
+          "name": "Capa samsung A9 2018 PRETO",
+          "code": "PRD-923",
+          "sku": "PRD-923",
+          "barcode": "",
+          "variationLabel": "",
+          "systemQuantityAtCount": 0,
+          "countedQuantity": 1,
+          "firstCountedAt": "2026-08-30T14:59:49.113Z",
+          "lastCountedAt": "2026-08-30T14:59:49.113Z"
+        },
+        {
+          "inventoryItemId": "PRD-1788102706236",
+          "productId": "1788102706236",
+          "selectionId": "1788102706236",
+          "name": "Capa samsung A7 2018 PRETO",
+          "code": "PRD-924",
+          "sku": "PRD-924",
+          "barcode": "6858782279107",
+          "variationLabel": "",
+          "systemQuantityAtCount": 0,
+          "countedQuantity": 1,
+          "firstCountedAt": "2026-08-30T14:59:49.131Z",
+          "lastCountedAt": "2026-08-30T14:59:49.131Z"
+        },
+        {
+          "inventoryItemId": "PRD-1788102077232",
+          "productId": "1788102077232",
+          "selectionId": "1788102077232",
+          "name": "Capa Samsung linha Note NOTE 10 PLUS ANTI IMPACTO TRANSP",
+          "code": "PRD-925",
+          "sku": "PRD-925",
+          "barcode": "7117532829504",
+          "variationLabel": "",
+          "systemQuantityAtCount": 0,
+          "countedQuantity": 1,
+          "firstCountedAt": "2026-08-30T14:59:49.151Z",
+          "lastCountedAt": "2026-08-30T14:59:49.151Z"
+        },
+        {
+          "inventoryItemId": "PRD-1788102709543",
+          "productId": "1788102709543",
+          "selectionId": "1788102709543",
+          "name": "Capa samsung linha J J5 Pro ANTI IMPACTO TRANSP",
+          "code": "PRD-926",
+          "sku": "PRD-926",
+          "barcode": "7731743494087",
+          "variationLabel": "",
+          "systemQuantityAtCount": 0,
+          "countedQuantity": 1,
+          "firstCountedAt": "2026-08-30T14:59:49.170Z",
+          "lastCountedAt": "2026-08-30T14:59:49.170Z"
+        },
+        {
+          "inventoryItemId": "PRD-1788102106489",
+          "productId": "1788102106489",
+          "selectionId": "1788102106489",
+          "name": "Capa samsung A70 ANTI IMPACTO TRANSP",
+          "code": "PRD-927",
+          "sku": "PRD-927",
+          "barcode": "7832283135901",
+          "variationLabel": "",
+          "systemQuantityAtCount": 0,
+          "countedQuantity": 1,
+          "firstCountedAt": "2026-08-30T14:59:49.188Z",
+          "lastCountedAt": "2026-08-30T14:59:49.188Z"
+        },
+        {
+          "inventoryItemId": "PRD-1786964540201",
+          "productId": "1786964540201",
+          "selectionId": "1786964540201",
+          "name": "Capa samsung linha S S11E PRETO",
+          "code": "PRD-601",
+          "sku": "PRD-601",
+          "barcode": "",
+          "variationLabel": "",
+          "systemQuantityAtCount": 1,
+          "countedQuantity": 1,
+          "firstCountedAt": "2026-08-30T14:59:49.205Z",
+          "lastCountedAt": "2026-08-30T14:59:49.205Z"
+        },
+        {
+          "inventoryItemId": "PRD-1788102140843",
+          "productId": "1788102140843",
+          "selectionId": "1788102140843",
+          "name": "Capa case samsung note 8  PRETO",
+          "code": "PRD-928",
+          "sku": "PRD-928",
+          "barcode": "2338863502019",
+          "variationLabel": "",
+          "systemQuantityAtCount": 0,
+          "countedQuantity": 1,
+          "firstCountedAt": "2026-08-30T14:59:49.224Z",
+          "lastCountedAt": "2026-08-30T14:59:49.224Z"
+        },
+        {
+          "inventoryItemId": "PRD-1787008662591",
+          "productId": "1787008662591",
+          "selectionId": "1787008662591",
+          "name": "Capa samsung A72 ANTI IMPACTO TRANSP",
+          "code": "PRD-781",
+          "sku": "PRD-781",
+          "barcode": "",
+          "variationLabel": "",
+          "systemQuantityAtCount": 1,
+          "countedQuantity": 1,
+          "firstCountedAt": "2026-08-30T14:59:49.242Z",
+          "lastCountedAt": "2026-08-30T14:59:49.242Z"
+        },
+        {
+          "inventoryItemId": "PRD-1788102510327",
+          "productId": "1788102510327",
+          "selectionId": "1788102510327",
+          "name": "Capa samsung A8 2018 PRETO",
+          "code": "PRD-929",
+          "sku": "PRD-929",
+          "barcode": "9575494273663",
+          "variationLabel": "",
+          "systemQuantityAtCount": 0,
+          "countedQuantity": 2,
+          "firstCountedAt": "2026-08-30T14:59:49.262Z",
+          "lastCountedAt": "2026-08-30T14:59:49.262Z"
+        },
+        {
+          "inventoryItemId": "PRD-1788102605464",
+          "productId": "1788102605464",
+          "selectionId": "1788102605464",
+          "name": "Capa samsung A8 2018 PLUS ANTI IMPACTO TRANSP",
+          "code": "PRD-930",
+          "sku": "PRD-930",
+          "barcode": "9048262795969",
+          "variationLabel": "",
+          "systemQuantityAtCount": 0,
+          "countedQuantity": 1,
+          "firstCountedAt": "2026-08-30T14:59:49.280Z",
+          "lastCountedAt": "2026-08-30T14:59:49.280Z"
+        },
+        {
+          "inventoryItemId": "PRD-1788102292847",
+          "productId": "1788102292847",
+          "selectionId": "1788102292847",
+          "name": "Capa CASE Samsung A01 CORE PRETO",
+          "code": "PRD-931",
+          "sku": "PRD-931",
+          "barcode": "",
+          "variationLabel": "",
+          "systemQuantityAtCount": 0,
+          "countedQuantity": 1,
+          "firstCountedAt": "2026-08-30T14:59:49.302Z",
+          "lastCountedAt": "2026-08-30T14:59:49.302Z"
+        },
+        {
+          "inventoryItemId": "PRD-1788102211097",
+          "productId": "1788102211097",
+          "selectionId": "1788102211097",
+          "name": "Capa Samsung linha Note NOTE 20 PLUS ANTI IMPACTO TRANSP",
+          "code": "PRD-932",
+          "sku": "PRD-932",
+          "barcode": "7904396255163",
+          "variationLabel": "",
+          "systemQuantityAtCount": 0,
+          "countedQuantity": 2,
+          "firstCountedAt": "2026-08-30T14:59:49.322Z",
+          "lastCountedAt": "2026-08-30T14:59:49.322Z"
+        },
+        {
+          "inventoryItemId": "PRD-1788102443031",
+          "productId": "1788102443031",
+          "selectionId": "1788102443031",
+          "name": "Capa samsung M20 ANTI IMPACTO TRANSP",
+          "code": "PRD-933",
+          "sku": "PRD-933",
+          "barcode": "",
+          "variationLabel": "",
+          "systemQuantityAtCount": 0,
+          "countedQuantity": 1,
+          "firstCountedAt": "2026-08-30T14:59:49.342Z",
+          "lastCountedAt": "2026-08-30T14:59:49.342Z"
+        },
+        {
+          "inventoryItemId": "PRD-1788102080647",
+          "productId": "1788102080647",
+          "selectionId": "1788102080647",
+          "name": "Capa samsung linha S S9 Plus PRETO",
+          "code": "PRD-934",
+          "sku": "PRD-934",
+          "barcode": "",
+          "variationLabel": "",
+          "systemQuantityAtCount": 0,
+          "countedQuantity": 2,
+          "firstCountedAt": "2026-08-30T14:59:49.361Z",
+          "lastCountedAt": "2026-08-30T14:59:49.361Z"
+        },
+        {
+          "inventoryItemId": "PRD-1788102754779",
+          "productId": "1788102754779",
+          "selectionId": "1788102754779",
+          "name": "Capa Motorola  MOTO G4 PLAY TRANSPARENTE",
+          "code": "PRD-935",
+          "sku": "PRD-935",
+          "barcode": "6546243913850",
+          "variationLabel": "",
+          "systemQuantityAtCount": 0,
+          "countedQuantity": 1,
+          "firstCountedAt": "2026-08-30T14:59:49.381Z",
+          "lastCountedAt": "2026-08-30T14:59:49.381Z"
+        },
+        {
+          "inventoryItemId": "PRD-1788102690085",
+          "productId": "1788102690085",
+          "selectionId": "1788102690085",
+          "name": "Capa Motorola  MOTO G6 PLUS TRANSPARENTE",
+          "code": "PRD-936",
+          "sku": "PRD-936",
+          "barcode": "5798610266248",
+          "variationLabel": "",
+          "systemQuantityAtCount": 0,
+          "countedQuantity": 1,
+          "firstCountedAt": "2026-08-30T14:59:49.402Z",
+          "lastCountedAt": "2026-08-30T14:59:49.402Z"
+        },
+        {
+          "inventoryItemId": "PRD-1788102525587",
+          "productId": "1788102525587",
+          "selectionId": "1788102525587",
+          "name": "Capa Motorola  MOTO G5S PLUS ANTI IMPACTO TRANSP",
+          "code": "PRD-937",
+          "sku": "PRD-937",
+          "barcode": "6428823294972",
+          "variationLabel": "",
+          "systemQuantityAtCount": 0,
+          "countedQuantity": 1,
+          "firstCountedAt": "2026-08-30T14:59:49.421Z",
+          "lastCountedAt": "2026-08-30T14:59:49.421Z"
+        },
+        {
+          "inventoryItemId": "PRD-1788102859955",
+          "productId": "1788102859955",
+          "selectionId": "1788102859955",
+          "name": "Capa motorola moto E E3 PRETO",
+          "code": "PRD-938",
+          "sku": "PRD-938",
+          "barcode": "7245862927680",
+          "variationLabel": "",
+          "systemQuantityAtCount": 0,
+          "countedQuantity": 2,
+          "firstCountedAt": "2026-08-30T14:59:49.439Z",
+          "lastCountedAt": "2026-08-30T14:59:49.439Z"
+        },
+        {
+          "inventoryItemId": "PRD-1788102273481",
+          "productId": "1788102273481",
+          "selectionId": "1788102273481",
+          "name": "Capa motorola moto Z Z Play TRANSPARENTE",
+          "code": "PRD-939",
+          "sku": "PRD-939",
+          "barcode": "6243166465083",
+          "variationLabel": "",
+          "systemQuantityAtCount": 0,
+          "countedQuantity": 1,
+          "firstCountedAt": "2026-08-30T14:59:49.459Z",
+          "lastCountedAt": "2026-08-30T14:59:49.459Z"
+        },
+        {
+          "inventoryItemId": "PRD-1788102305450",
+          "productId": "1788102305450",
+          "selectionId": "1788102305450",
+          "name": "Capa motorola moto Z Z PRETO",
+          "code": "PRD-940",
+          "sku": "PRD-940",
+          "barcode": "5199690655807",
+          "variationLabel": "",
+          "systemQuantityAtCount": 0,
+          "countedQuantity": 2,
+          "firstCountedAt": "2026-08-30T14:59:49.481Z",
+          "lastCountedAt": "2026-08-30T14:59:49.481Z"
+        },
+        {
+          "inventoryItemId": "PRD-1788102421625",
+          "productId": "1788102421625",
+          "selectionId": "1788102421625",
+          "name": "Capa Xiaomi Redmi MI 8 MI 8 PRO ANTI IMPACTO TRANSP",
+          "code": "PRD-941",
+          "sku": "PRD-941",
+          "barcode": "",
+          "variationLabel": "",
+          "systemQuantityAtCount": 0,
+          "countedQuantity": 3,
+          "firstCountedAt": "2026-08-30T14:59:49.500Z",
+          "lastCountedAt": "2026-08-30T14:59:49.500Z"
+        },
+        {
+          "inventoryItemId": "PRD-1788102092658",
+          "productId": "1788102092658",
+          "selectionId": "1788102092658",
+          "name": "Capa Xiaomi Redmi Note 8 Pro PRETO",
+          "code": "PRD-942",
+          "sku": "PRD-942",
+          "barcode": "",
+          "variationLabel": "",
+          "systemQuantityAtCount": 0,
+          "countedQuantity": 1,
+          "firstCountedAt": "2026-08-30T14:59:49.518Z",
+          "lastCountedAt": "2026-08-30T14:59:49.518Z"
+        },
+        {
+          "inventoryItemId": "PRD-1788102932233",
+          "productId": "1788102932233",
+          "selectionId": "1788102932233",
+          "name": "Capa Xiaomi Redmi MI 9 ANTI IMPACTO TRANSP",
+          "code": "PRD-943",
+          "sku": "PRD-943",
+          "barcode": "",
+          "variationLabel": "",
+          "systemQuantityAtCount": 0,
+          "countedQuantity": 2,
+          "firstCountedAt": "2026-08-30T14:59:49.540Z",
+          "lastCountedAt": "2026-08-30T14:59:49.540Z"
+        },
+        {
+          "inventoryItemId": "PRD-1788102495390",
+          "productId": "1788102495390",
+          "selectionId": "1788102495390",
+          "name": "Capa Xiaomi Redmi REDMI K20 REDMI 9T PRETO",
+          "code": "PRD-944",
+          "sku": "PRD-944",
+          "barcode": "",
+          "variationLabel": "",
+          "systemQuantityAtCount": 0,
+          "countedQuantity": 2,
+          "firstCountedAt": "2026-08-30T14:59:49.567Z",
+          "lastCountedAt": "2026-08-30T14:59:49.567Z"
+        },
+        {
+          "inventoryItemId": "PRD-1788102000038",
+          "productId": "1788102000038",
+          "selectionId": "1788102000038",
+          "name": "Capa Xiaomi Redmi REDMI GO PRETO",
+          "code": "PRD-945",
+          "sku": "PRD-945",
+          "barcode": "",
+          "variationLabel": "",
+          "systemQuantityAtCount": 0,
+          "countedQuantity": 1,
+          "firstCountedAt": "2026-08-30T14:59:49.590Z",
+          "lastCountedAt": "2026-08-30T14:59:49.590Z"
+        },
+        {
+          "inventoryItemId": "PRD-1788102164303",
+          "productId": "1788102164303",
+          "selectionId": "1788102164303",
+          "name": "Capa Xiaomi Redmi NOTE 9 4G FUMÊ",
+          "code": "PRD-946",
+          "sku": "PRD-946",
+          "barcode": "",
+          "variationLabel": "",
+          "systemQuantityAtCount": 0,
+          "countedQuantity": 3,
+          "firstCountedAt": "2026-08-30T14:59:49.608Z",
+          "lastCountedAt": "2026-08-30T14:59:49.608Z"
+        },
+        {
+          "inventoryItemId": "PRD-1788102859918",
+          "productId": "1788102859918",
+          "selectionId": "1788102859918",
+          "name": "Capa Xiaomi Redmi REDMI 7A ANTI IMPACTO TRANSP",
+          "code": "PRD-947",
+          "sku": "PRD-947",
+          "barcode": "",
+          "variationLabel": "",
+          "systemQuantityAtCount": 0,
+          "countedQuantity": 1,
+          "firstCountedAt": "2026-08-30T14:59:49.627Z",
+          "lastCountedAt": "2026-08-30T14:59:49.627Z"
+        },
+        {
+          "inventoryItemId": "PRD-1788102623068",
+          "productId": "1788102623068",
+          "selectionId": "1788102623068",
+          "name": "Capa Xiaomi Redmi Note 7/Note 7 Pro ANTI IMPACTO TRANSP",
+          "code": "PRD-948",
+          "sku": "PRD-948",
+          "barcode": "",
+          "variationLabel": "",
+          "systemQuantityAtCount": 0,
+          "countedQuantity": 1,
+          "firstCountedAt": "2026-08-30T14:59:49.645Z",
+          "lastCountedAt": "2026-08-30T14:59:49.645Z"
+        },
+        {
+          "inventoryItemId": "PRD-1788102061073",
+          "productId": "1788102061073",
+          "selectionId": "1788102061073",
+          "name": "Capa Xiaomi Redmi REDMI 10A ANTI IMPACTO TRANSP",
+          "code": "PRD-949",
+          "sku": "PRD-949",
+          "barcode": "",
+          "variationLabel": "",
+          "systemQuantityAtCount": 0,
+          "countedQuantity": 1,
+          "firstCountedAt": "2026-08-30T14:59:49.665Z",
+          "lastCountedAt": "2026-08-30T14:59:49.665Z"
+        },
+        {
+          "inventoryItemId": "PRD-1787011114111",
+          "productId": "1787011114111",
+          "selectionId": "1787011114111",
+          "name": "Capa Xiaomi Redmi REDMI 9 ANTI IMPACTO TRANSP",
+          "code": "PRD-819",
+          "sku": "PRD-819",
+          "barcode": "",
+          "variationLabel": "",
+          "systemQuantityAtCount": 1,
+          "countedQuantity": 1,
+          "firstCountedAt": "2026-08-30T14:59:49.686Z",
+          "lastCountedAt": "2026-08-30T14:59:49.686Z"
+        },
+        {
+          "inventoryItemId": "PRD-1788102895067",
+          "productId": "1788102895067",
+          "selectionId": "1788102895067",
+          "name": "Capa Xiaomi Redmi REDMI 6 PRO PRETO",
+          "code": "PRD-950",
+          "sku": "PRD-950",
+          "barcode": "",
+          "variationLabel": "",
+          "systemQuantityAtCount": 0,
+          "countedQuantity": 1,
+          "firstCountedAt": "2026-08-30T14:59:49.705Z",
+          "lastCountedAt": "2026-08-30T14:59:49.705Z"
+        },
+        {
+          "inventoryItemId": "PRD-1788102008474",
+          "productId": "1788102008474",
+          "selectionId": "1788102008474",
+          "name": "Bateria Apple IPHONE 8",
+          "code": "PRD-951",
+          "sku": "PRD-951",
+          "barcode": "",
+          "variationLabel": "",
+          "systemQuantityAtCount": 0,
+          "countedQuantity": 7,
+          "firstCountedAt": "2026-08-30T14:59:49.723Z",
+          "lastCountedAt": "2026-08-30T14:59:49.723Z"
+        },
+        {
+          "inventoryItemId": "PRD-1786498681877",
+          "productId": "1786498681877",
+          "selectionId": "1786498681877",
+          "name": "Bateria Apple IPHONE 7",
+          "code": "PRD-228",
+          "sku": "PRD-228",
+          "barcode": "",
+          "variationLabel": "",
+          "systemQuantityAtCount": 0,
+          "countedQuantity": 5,
+          "firstCountedAt": "2026-08-30T14:59:49.741Z",
+          "lastCountedAt": "2026-08-30T14:59:49.741Z"
+        },
+        {
+          "inventoryItemId": "PRD-1788102164917",
+          "productId": "1788102164917",
+          "selectionId": "1788102164917",
+          "name": "Bateria Apple IPHONE 6",
+          "code": "PRD-952",
+          "sku": "PRD-952",
+          "barcode": "",
+          "variationLabel": "",
+          "systemQuantityAtCount": 0,
+          "countedQuantity": 3,
+          "firstCountedAt": "2026-08-30T14:59:49.759Z",
+          "lastCountedAt": "2026-08-30T14:59:49.759Z"
+        },
+        {
+          "inventoryItemId": "PRD-1788102448632",
+          "productId": "1788102448632",
+          "selectionId": "1788102448632",
+          "name": "Tela frontal Apple iPhone 6S Plus 1ª LINHA PRETO",
+          "code": "PRD-953",
+          "sku": "PRD-953",
+          "barcode": "",
+          "variationLabel": "",
+          "systemQuantityAtCount": 0,
+          "countedQuantity": 2,
+          "firstCountedAt": "2026-08-30T14:59:49.777Z",
+          "lastCountedAt": "2026-08-30T14:59:49.777Z"
+        },
+        {
+          "inventoryItemId": "PRD-1788102872960",
+          "productId": "1788102872960",
+          "selectionId": "1788102872960",
+          "name": "Tela frontal Apple iPhone 7G 1ª LINHA BRANCO",
+          "code": "PRD-954",
+          "sku": "PRD-954",
+          "barcode": "",
+          "variationLabel": "",
+          "systemQuantityAtCount": 0,
+          "countedQuantity": 3,
+          "firstCountedAt": "2026-08-30T14:59:49.796Z",
+          "lastCountedAt": "2026-08-30T14:59:49.796Z"
+        },
+        {
+          "inventoryItemId": "PRD-1788102585121",
+          "productId": "1788102585121",
+          "selectionId": "1788102585121",
+          "name": "Tela frontal Apple iPhone 6S 1ª LINHA PRETO",
+          "code": "PRD-955",
+          "sku": "PRD-955",
+          "barcode": "",
+          "variationLabel": "",
+          "systemQuantityAtCount": 0,
+          "countedQuantity": 1,
+          "firstCountedAt": "2026-08-30T14:59:49.818Z",
+          "lastCountedAt": "2026-08-30T14:59:49.818Z"
+        },
+        {
+          "inventoryItemId": "PRD-1788102883066",
+          "productId": "1788102883066",
+          "selectionId": "1788102883066",
+          "name": "Bateria Apple IPHONE 5",
+          "code": "PRD-956",
+          "sku": "PRD-956",
+          "barcode": "",
+          "variationLabel": "",
+          "systemQuantityAtCount": 0,
+          "countedQuantity": 1,
+          "firstCountedAt": "2026-08-30T14:59:49.837Z",
+          "lastCountedAt": "2026-08-30T14:59:49.837Z"
+        },
+        {
+          "inventoryItemId": "PRD-1788102834738",
+          "productId": "1788102834738",
+          "selectionId": "1788102834738",
+          "name": "Tela frontal Apple iPhone 6S Plus 1ª LINHA BRANCO",
+          "code": "PRD-957",
+          "sku": "PRD-957",
+          "barcode": "",
+          "variationLabel": "",
+          "systemQuantityAtCount": 0,
+          "countedQuantity": 1,
+          "firstCountedAt": "2026-08-30T14:59:49.857Z",
+          "lastCountedAt": "2026-08-30T14:59:49.857Z"
+        },
+        {
+          "inventoryItemId": "PRD-1788102508428",
+          "productId": "1788102508428",
+          "selectionId": "1788102508428",
+          "name": "Bateria Apple IPHONE 6 PLUS",
+          "code": "PRD-958",
+          "sku": "PRD-958",
+          "barcode": "",
+          "variationLabel": "",
+          "systemQuantityAtCount": 0,
+          "countedQuantity": 1,
+          "firstCountedAt": "2026-08-30T14:59:49.875Z",
+          "lastCountedAt": "2026-08-30T14:59:49.875Z"
+        },
+        {
+          "inventoryItemId": "PRD-1788102949825",
+          "productId": "1788102949825",
+          "selectionId": "1788102949825",
+          "name": "Tela frontal Apple iPhone 8 / SE 1ª LINHA BRANCO",
+          "code": "PRD-959",
+          "sku": "PRD-959",
+          "barcode": "",
+          "variationLabel": "",
+          "systemQuantityAtCount": 0,
+          "countedQuantity": 3,
+          "firstCountedAt": "2026-08-30T14:59:49.894Z",
+          "lastCountedAt": "2026-08-30T14:59:49.894Z"
+        },
+        {
+          "inventoryItemId": "PRD-1788102907270",
+          "productId": "1788102907270",
+          "selectionId": "1788102907270",
+          "name": "Tela frontal Apple iPhone 6G 1ª LINHA BRANCO",
+          "code": "PRD-960",
+          "sku": "PRD-960",
+          "barcode": "",
+          "variationLabel": "",
+          "systemQuantityAtCount": 0,
+          "countedQuantity": 2,
+          "firstCountedAt": "2026-08-30T14:59:49.915Z",
+          "lastCountedAt": "2026-08-30T14:59:49.915Z"
+        },
+        {
+          "inventoryItemId": "PRD-1788102876597",
+          "productId": "1788102876597",
+          "selectionId": "1788102876597",
+          "name": "Tela frontal Apple iPhone 5G 1ª LINHA BRANCO",
+          "code": "PRD-961",
+          "sku": "PRD-961",
+          "barcode": "",
+          "variationLabel": "",
+          "systemQuantityAtCount": 0,
+          "countedQuantity": 2,
+          "firstCountedAt": "2026-08-30T14:59:49.933Z",
+          "lastCountedAt": "2026-08-30T14:59:49.933Z"
+        },
+        {
+          "inventoryItemId": "PRD-1788102856111",
+          "productId": "1788102856111",
+          "selectionId": "1788102856111",
+          "name": "Tela frontal Apple iPhone 5S 1ª LINHA BRANCO",
+          "code": "PRD-962",
+          "sku": "PRD-962",
+          "barcode": "",
+          "variationLabel": "",
+          "systemQuantityAtCount": 0,
+          "countedQuantity": 1,
+          "firstCountedAt": "2026-08-30T14:59:49.952Z",
+          "lastCountedAt": "2026-08-30T14:59:49.952Z"
+        },
+        {
+          "inventoryItemId": "PRD-1788102896910",
+          "productId": "1788102896910",
+          "selectionId": "1788102896910",
+          "name": "Capa samsung linha J J4 J400 ANTI IMPACTO TRANSP",
+          "code": "PRD-963",
+          "sku": "PRD-963",
+          "barcode": "7242796887363",
+          "variationLabel": "",
+          "systemQuantityAtCount": 0,
+          "countedQuantity": 3,
+          "firstCountedAt": "2026-08-30T14:59:49.971Z",
+          "lastCountedAt": "2026-08-30T14:59:49.971Z"
+        },
+        {
+          "inventoryItemId": "PRD-1788102533924",
+          "productId": "1788102533924",
+          "selectionId": "1788102533924",
+          "name": "Capa samsung linha J J4 J400 PRETO",
+          "code": "PRD-964",
+          "sku": "PRD-964",
+          "barcode": "4564163065987",
+          "variationLabel": "",
+          "systemQuantityAtCount": 0,
+          "countedQuantity": 3,
+          "firstCountedAt": "2026-08-30T14:59:49.989Z",
+          "lastCountedAt": "2026-08-30T14:59:49.989Z"
+        },
+        {
+          "inventoryItemId": "PRD-1788102011068",
+          "productId": "1788102011068",
+          "selectionId": "1788102011068",
+          "name": "Capa Iphone 15 BRANCO",
+          "code": "PRD-965",
+          "sku": "PRD-965",
+          "barcode": "",
+          "variationLabel": "",
+          "systemQuantityAtCount": 0,
+          "countedQuantity": 1,
+          "firstCountedAt": "2026-08-30T14:59:50.010Z",
+          "lastCountedAt": "2026-08-30T14:59:50.010Z"
+        },
+        {
+          "inventoryItemId": "PRD-1788102399696",
+          "productId": "1788102399696",
+          "selectionId": "1788102399696",
+          "name": "Capa samsung linha J J2 Pro 2018 PRETO",
+          "code": "PRD-966",
+          "sku": "PRD-966",
+          "barcode": "2873969581297",
+          "variationLabel": "",
+          "systemQuantityAtCount": 0,
+          "countedQuantity": 2,
+          "firstCountedAt": "2026-08-30T14:59:50.031Z",
+          "lastCountedAt": "2026-08-30T14:59:50.031Z"
+        }
+      ],
+      "snapshot": [],
+      "events": [
+        {
+          "id": "EVT-1788101987108-uyx6i5",
+          "type": "created",
+          "actor": "painel",
+          "createdAt": "2026-08-30T14:59:47.109Z",
+          "metadata": {
+            "type": "partial",
+            "blockPdv": false,
+            "snapshotSize": 0
+          }
+        },
+        {
+          "id": "EVT-1788101987805-z7a2xq",
+          "type": "item_counted",
+          "actor": "painel",
+          "createdAt": "2026-08-30T14:59:47.805Z",
+          "metadata": {
+            "inventoryItemId": "PRD-1788102137069",
+            "quantity": 2
+          }
+        },
+        {
+          "id": "EVT-1788101987846-a73xsa",
+          "type": "item_counted",
+          "actor": "painel",
+          "createdAt": "2026-08-30T14:59:47.846Z",
+          "metadata": {
+            "inventoryItemId": "PRD-1788102085570",
+            "quantity": 4
+          }
+        },
+        {
+          "id": "EVT-1788101987868-5j621o",
+          "type": "item_counted",
+          "actor": "painel",
+          "createdAt": "2026-08-30T14:59:47.868Z",
+          "metadata": {
+            "inventoryItemId": "PRD-1788102891986",
+            "quantity": 1
+          }
+        },
+        {
+          "id": "EVT-1788101987889-fel89e",
+          "type": "item_counted",
+          "actor": "painel",
+          "createdAt": "2026-08-30T14:59:47.889Z",
+          "metadata": {
+            "inventoryItemId": "PRD-1788102669139",
+            "quantity": 2
+          }
+        },
+        {
+          "id": "EVT-1788101987911-li6asp",
+          "type": "item_counted",
+          "actor": "painel",
+          "createdAt": "2026-08-30T14:59:47.911Z",
+          "metadata": {
+            "inventoryItemId": "PRD-1788102166724",
+            "quantity": 1
+          }
+        },
+        {
+          "id": "EVT-1788101987936-jurpw6",
+          "type": "item_counted",
+          "actor": "painel",
+          "createdAt": "2026-08-30T14:59:47.936Z",
+          "metadata": {
+            "inventoryItemId": "PRD-1788102798674",
+            "quantity": 1
+          }
+        },
+        {
+          "id": "EVT-1788101987957-cvmdcl",
+          "type": "item_counted",
+          "actor": "painel",
+          "createdAt": "2026-08-30T14:59:47.957Z",
+          "metadata": {
+            "inventoryItemId": "PRD-1788102307066",
+            "quantity": 4
+          }
+        },
+        {
+          "id": "EVT-1788101987981-yk8qrt",
+          "type": "item_counted",
+          "actor": "painel",
+          "createdAt": "2026-08-30T14:59:47.981Z",
+          "metadata": {
+            "inventoryItemId": "PRD-1788102128784",
+            "quantity": 1
+          }
+        },
+        {
+          "id": "EVT-1788101988005-ouitru",
+          "type": "item_counted",
+          "actor": "painel",
+          "createdAt": "2026-08-30T14:59:48.005Z",
+          "metadata": {
+            "inventoryItemId": "PRD-1788102211489",
+            "quantity": 4
+          }
+        },
+        {
+          "id": "EVT-1788101988025-ptb0dr",
+          "type": "item_counted",
+          "actor": "painel",
+          "createdAt": "2026-08-30T14:59:48.025Z",
+          "metadata": {
+            "inventoryItemId": "PRD-1788102258281",
+            "quantity": 1
+          }
+        },
+        {
+          "id": "EVT-1788101988045-h53lqc",
+          "type": "item_counted",
+          "actor": "painel",
+          "createdAt": "2026-08-30T14:59:48.045Z",
+          "metadata": {
+            "inventoryItemId": "PRD-1788102153523",
+            "quantity": 1
+          }
+        },
+        {
+          "id": "EVT-1788101988064-9zh9kv",
+          "type": "item_counted",
+          "actor": "painel",
+          "createdAt": "2026-08-30T14:59:48.064Z",
+          "metadata": {
+            "inventoryItemId": "PRD-1788102459570",
+            "quantity": 1
+          }
+        },
+        {
+          "id": "EVT-1788101988088-r8fvg4",
+          "type": "item_counted",
+          "actor": "painel",
+          "createdAt": "2026-08-30T14:59:48.088Z",
+          "metadata": {
+            "inventoryItemId": "PRD-1788102684983",
+            "quantity": 2
+          }
+        },
+        {
+          "id": "EVT-1788101988107-i2ypqk",
+          "type": "item_counted",
+          "actor": "painel",
+          "createdAt": "2026-08-30T14:59:48.107Z",
+          "metadata": {
+            "inventoryItemId": "PRD-1788102194548",
+            "quantity": 1
+          }
+        },
+        {
+          "id": "EVT-1788101988125-h56yev",
+          "type": "item_counted",
+          "actor": "painel",
+          "createdAt": "2026-08-30T14:59:48.125Z",
+          "metadata": {
+            "inventoryItemId": "PRD-1788102783247",
+            "quantity": 1
+          }
+        },
+        {
+          "id": "EVT-1788101988146-zgdjip",
+          "type": "item_counted",
+          "actor": "painel",
+          "createdAt": "2026-08-30T14:59:48.146Z",
+          "metadata": {
+            "inventoryItemId": "PRD-1788102250710",
+            "quantity": 1
+          }
+        },
+        {
+          "id": "EVT-1788101988166-6dmwli",
+          "type": "item_counted",
+          "actor": "painel",
+          "createdAt": "2026-08-30T14:59:48.166Z",
+          "metadata": {
+            "inventoryItemId": "PRD-1788102072899",
+            "quantity": 2
+          }
+        },
+        {
+          "id": "EVT-1788101988185-1183do",
+          "type": "item_counted",
+          "actor": "painel",
+          "createdAt": "2026-08-30T14:59:48.185Z",
+          "metadata": {
+            "inventoryItemId": "PRD-1788102702857",
+            "quantity": 2
+          }
+        },
+        {
+          "id": "EVT-1788101988204-w4iyhl",
+          "type": "item_counted",
+          "actor": "painel",
+          "createdAt": "2026-08-30T14:59:48.204Z",
+          "metadata": {
+            "inventoryItemId": "PRD-1788102713948",
+            "quantity": 5
+          }
+        },
+        {
+          "id": "EVT-1788101988223-dy3btm",
+          "type": "item_counted",
+          "actor": "painel",
+          "createdAt": "2026-08-30T14:59:48.223Z",
+          "metadata": {
+            "inventoryItemId": "PRD-1788102585607",
+            "quantity": 1
+          }
+        },
+        {
+          "id": "EVT-1788101988243-6wcjcy",
+          "type": "item_counted",
+          "actor": "painel",
+          "createdAt": "2026-08-30T14:59:48.243Z",
+          "metadata": {
+            "inventoryItemId": "PRD-1788102007900",
+            "quantity": 2
+          }
+        },
+        {
+          "id": "EVT-1788101988263-l2fg69",
+          "type": "item_counted",
+          "actor": "painel",
+          "createdAt": "2026-08-30T14:59:48.263Z",
+          "metadata": {
+            "inventoryItemId": "PRD-1788102427691",
+            "quantity": 1
+          }
+        },
+        {
+          "id": "EVT-1788101988287-750qes",
+          "type": "item_counted",
+          "actor": "painel",
+          "createdAt": "2026-08-30T14:59:48.287Z",
+          "metadata": {
+            "inventoryItemId": "PRD-1788102358537",
+            "quantity": 1
+          }
+        },
+        {
+          "id": "EVT-1788101988308-mcct70",
+          "type": "item_counted",
+          "actor": "painel",
+          "createdAt": "2026-08-30T14:59:48.308Z",
+          "metadata": {
+            "inventoryItemId": "PRD-1788102896046",
+            "quantity": 1
+          }
+        },
+        {
+          "id": "EVT-1788101988329-gzubww",
+          "type": "item_counted",
+          "actor": "painel",
+          "createdAt": "2026-08-30T14:59:48.329Z",
+          "metadata": {
+            "inventoryItemId": "PRD-1786927893064",
+            "quantity": 2
+          }
+        },
+        {
+          "id": "EVT-1788101988348-5vp307",
+          "type": "item_counted",
+          "actor": "painel",
+          "createdAt": "2026-08-30T14:59:48.348Z",
+          "metadata": {
+            "inventoryItemId": "PRD-1788102949210",
+            "quantity": 1
+          }
+        },
+        {
+          "id": "EVT-1788101988368-35ctju",
+          "type": "item_counted",
+          "actor": "painel",
+          "createdAt": "2026-08-30T14:59:48.368Z",
+          "metadata": {
+            "inventoryItemId": "PRD-1788102126941",
+            "quantity": 1
+          }
+        },
+        {
+          "id": "EVT-1788101988388-sbhfeg",
+          "type": "item_counted",
+          "actor": "painel",
+          "createdAt": "2026-08-30T14:59:48.388Z",
+          "metadata": {
+            "inventoryItemId": "PRD-1788102736549",
+            "quantity": 1
+          }
+        },
+        {
+          "id": "EVT-1788101988408-xww3uj",
+          "type": "item_counted",
+          "actor": "painel",
+          "createdAt": "2026-08-30T14:59:48.408Z",
+          "metadata": {
+            "inventoryItemId": "PRD-1788102625884",
+            "quantity": 1
+          }
+        },
+        {
+          "id": "EVT-1788101988426-0ln9or",
+          "type": "item_counted",
+          "actor": "painel",
+          "createdAt": "2026-08-30T14:59:48.427Z",
+          "metadata": {
+            "inventoryItemId": "PRD-1788102847807",
+            "quantity": 1
+          }
+        },
+        {
+          "id": "EVT-1788101988446-k64bvw",
+          "type": "item_counted",
+          "actor": "painel",
+          "createdAt": "2026-08-30T14:59:48.446Z",
+          "metadata": {
+            "inventoryItemId": "PRD-1788102629519",
+            "quantity": 1
+          }
+        },
+        {
+          "id": "EVT-1788101988467-ow4g4u",
+          "type": "item_counted",
+          "actor": "painel",
+          "createdAt": "2026-08-30T14:59:48.467Z",
+          "metadata": {
+            "inventoryItemId": "PRD-1787009818340",
+            "quantity": 1
+          }
+        },
+        {
+          "id": "EVT-1788101988489-bx6a7x",
+          "type": "item_counted",
+          "actor": "painel",
+          "createdAt": "2026-08-30T14:59:48.489Z",
+          "metadata": {
+            "inventoryItemId": "PRD-1788102938679",
+            "quantity": 1
+          }
+        },
+        {
+          "id": "EVT-1788101988509-bx9blj",
+          "type": "item_counted",
+          "actor": "painel",
+          "createdAt": "2026-08-30T14:59:48.509Z",
+          "metadata": {
+            "inventoryItemId": "PRD-1788102456367",
+            "quantity": 3
+          }
+        },
+        {
+          "id": "EVT-1788101988530-z6fpkx",
+          "type": "item_counted",
+          "actor": "painel",
+          "createdAt": "2026-08-30T14:59:48.530Z",
+          "metadata": {
+            "inventoryItemId": "PRD-1787008683697",
+            "quantity": 1
+          }
+        },
+        {
+          "id": "EVT-1788101988550-nwrx0u",
+          "type": "item_counted",
+          "actor": "painel",
+          "createdAt": "2026-08-30T14:59:48.550Z",
+          "metadata": {
+            "inventoryItemId": "PRD-1788102959537",
+            "quantity": 1
+          }
+        },
+        {
+          "id": "EVT-1788101988570-qe26bb",
+          "type": "item_counted",
+          "actor": "painel",
+          "createdAt": "2026-08-30T14:59:48.570Z",
+          "metadata": {
+            "inventoryItemId": "PRD-1788102897839",
+            "quantity": 4
+          }
+        },
+        {
+          "id": "EVT-1788101988590-a7pw6b",
+          "type": "item_counted",
+          "actor": "painel",
+          "createdAt": "2026-08-30T14:59:48.590Z",
+          "metadata": {
+            "inventoryItemId": "PRD-1788102118479",
+            "quantity": 1
+          }
+        },
+        {
+          "id": "EVT-1788101988609-imfzp8",
+          "type": "item_counted",
+          "actor": "painel",
+          "createdAt": "2026-08-30T14:59:48.609Z",
+          "metadata": {
+            "inventoryItemId": "PRD-1788102288578",
+            "quantity": 4
+          }
+        },
+        {
+          "id": "EVT-1788101988629-7uedsc",
+          "type": "item_counted",
+          "actor": "painel",
+          "createdAt": "2026-08-30T14:59:48.629Z",
+          "metadata": {
+            "inventoryItemId": "PRD-1788102328724",
+            "quantity": 2
+          }
+        },
+        {
+          "id": "EVT-1788101988651-hrpjuc",
+          "type": "item_counted",
+          "actor": "painel",
+          "createdAt": "2026-08-30T14:59:48.651Z",
+          "metadata": {
+            "inventoryItemId": "PRD-1788102256334",
+            "quantity": 1
+          }
+        },
+        {
+          "id": "EVT-1788101988671-75h497",
+          "type": "item_counted",
+          "actor": "painel",
+          "createdAt": "2026-08-30T14:59:48.671Z",
+          "metadata": {
+            "inventoryItemId": "PRD-1788102445760",
+            "quantity": 2
+          }
+        },
+        {
+          "id": "EVT-1788101988693-xxbjl5",
+          "type": "item_counted",
+          "actor": "painel",
+          "createdAt": "2026-08-30T14:59:48.693Z",
+          "metadata": {
+            "inventoryItemId": "PRD-1788102109763",
+            "quantity": 1
+          }
+        },
+        {
+          "id": "EVT-1788101988715-ey7dub",
+          "type": "item_counted",
+          "actor": "painel",
+          "createdAt": "2026-08-30T14:59:48.715Z",
+          "metadata": {
+            "inventoryItemId": "PRD-1787009123647",
+            "quantity": 1
+          }
+        },
+        {
+          "id": "EVT-1788101988738-unqzfl",
+          "type": "item_counted",
+          "actor": "painel",
+          "createdAt": "2026-08-30T14:59:48.738Z",
+          "metadata": {
+            "inventoryItemId": "PRD-1788102663936",
+            "quantity": 1
+          }
+        },
+        {
+          "id": "EVT-1788101988757-xfe5wo",
+          "type": "item_counted",
+          "actor": "painel",
+          "createdAt": "2026-08-30T14:59:48.757Z",
+          "metadata": {
+            "inventoryItemId": "PRD-1788102794880",
+            "quantity": 3
+          }
+        },
+        {
+          "id": "EVT-1788101988778-tnu52f",
+          "type": "item_counted",
+          "actor": "painel",
+          "createdAt": "2026-08-30T14:59:48.778Z",
+          "metadata": {
+            "inventoryItemId": "PRD-1788102581387",
+            "quantity": 1
+          }
+        },
+        {
+          "id": "EVT-1788101988798-eo86zr",
+          "type": "item_counted",
+          "actor": "painel",
+          "createdAt": "2026-08-30T14:59:48.798Z",
+          "metadata": {
+            "inventoryItemId": "PRD-1788102872865",
+            "quantity": 3
+          }
+        },
+        {
+          "id": "EVT-1788101988819-18930v",
+          "type": "item_counted",
+          "actor": "painel",
+          "createdAt": "2026-08-30T14:59:48.819Z",
+          "metadata": {
+            "inventoryItemId": "PRD-1788102805636",
+            "quantity": 1
+          }
+        },
+        {
+          "id": "EVT-1788101988840-dvxa5l",
+          "type": "item_counted",
+          "actor": "painel",
+          "createdAt": "2026-08-30T14:59:48.840Z",
+          "metadata": {
+            "inventoryItemId": "PRD-1788102572221",
+            "quantity": 1
+          }
+        },
+        {
+          "id": "EVT-1788101988862-thh1j6",
+          "type": "item_counted",
+          "actor": "painel",
+          "createdAt": "2026-08-30T14:59:48.862Z",
+          "metadata": {
+            "inventoryItemId": "PRD-1788102925554",
+            "quantity": 3
+          }
+        },
+        {
+          "id": "EVT-1788101988883-1kn5c9",
+          "type": "item_counted",
+          "actor": "painel",
+          "createdAt": "2026-08-30T14:59:48.883Z",
+          "metadata": {
+            "inventoryItemId": "PRD-1788102340091",
+            "quantity": 1
+          }
+        },
+        {
+          "id": "EVT-1788101988906-b24c25",
+          "type": "item_counted",
+          "actor": "painel",
+          "createdAt": "2026-08-30T14:59:48.906Z",
+          "metadata": {
+            "inventoryItemId": "PRD-1788102645160",
+            "quantity": 1
+          }
+        },
+        {
+          "id": "EVT-1788101988926-1pfkus",
+          "type": "item_counted",
+          "actor": "painel",
+          "createdAt": "2026-08-30T14:59:48.926Z",
+          "metadata": {
+            "inventoryItemId": "PRD-1788102721458",
+            "quantity": 1
+          }
+        },
+        {
+          "id": "EVT-1788101988947-13t0ft",
+          "type": "item_counted",
+          "actor": "painel",
+          "createdAt": "2026-08-30T14:59:48.947Z",
+          "metadata": {
+            "inventoryItemId": "PRD-1788102636242",
+            "quantity": 1
+          }
+        },
+        {
+          "id": "EVT-1788101988970-9djmnn",
+          "type": "item_counted",
+          "actor": "painel",
+          "createdAt": "2026-08-30T14:59:48.970Z",
+          "metadata": {
+            "inventoryItemId": "PRD-1786964571738",
+            "quantity": 1
+          }
+        },
+        {
+          "id": "EVT-1788101988989-rcgjpu",
+          "type": "item_counted",
+          "actor": "painel",
+          "createdAt": "2026-08-30T14:59:48.989Z",
+          "metadata": {
+            "inventoryItemId": "PRD-1788102890378",
+            "quantity": 1
+          }
+        },
+        {
+          "id": "EVT-1788101989010-ue6nvc",
+          "type": "item_counted",
+          "actor": "painel",
+          "createdAt": "2026-08-30T14:59:49.010Z",
+          "metadata": {
+            "inventoryItemId": "PRD-1788102058358",
+            "quantity": 3
+          }
+        },
+        {
+          "id": "EVT-1788101989032-2qhukx",
+          "type": "item_counted",
+          "actor": "painel",
+          "createdAt": "2026-08-30T14:59:49.032Z",
+          "metadata": {
+            "inventoryItemId": "PRD-1788102612845",
+            "quantity": 3
+          }
+        },
+        {
+          "id": "EVT-1788101989051-iz4u7u",
+          "type": "item_counted",
+          "actor": "painel",
+          "createdAt": "2026-08-30T14:59:49.051Z",
+          "metadata": {
+            "inventoryItemId": "PRD-1788102209222",
+            "quantity": 3
+          }
+        },
+        {
+          "id": "EVT-1788101989070-nwdb9v",
+          "type": "item_counted",
+          "actor": "painel",
+          "createdAt": "2026-08-30T14:59:49.070Z",
+          "metadata": {
+            "inventoryItemId": "PRD-1788102451884",
+            "quantity": 1
+          }
+        },
+        {
+          "id": "EVT-1788101989089-t8rzum",
+          "type": "item_counted",
+          "actor": "painel",
+          "createdAt": "2026-08-30T14:59:49.089Z",
+          "metadata": {
+            "inventoryItemId": "PRD-1788102486472",
+            "quantity": 2
+          }
+        },
+        {
+          "id": "EVT-1788101989113-bkrk8l",
+          "type": "item_counted",
+          "actor": "painel",
+          "createdAt": "2026-08-30T14:59:49.113Z",
+          "metadata": {
+            "inventoryItemId": "PRD-1788102261284",
+            "quantity": 1
+          }
+        },
+        {
+          "id": "EVT-1788101989132-nbua9h",
+          "type": "item_counted",
+          "actor": "painel",
+          "createdAt": "2026-08-30T14:59:49.132Z",
+          "metadata": {
+            "inventoryItemId": "PRD-1788102706236",
+            "quantity": 1
+          }
+        },
+        {
+          "id": "EVT-1788101989151-j6cpep",
+          "type": "item_counted",
+          "actor": "painel",
+          "createdAt": "2026-08-30T14:59:49.151Z",
+          "metadata": {
+            "inventoryItemId": "PRD-1788102077232",
+            "quantity": 1
+          }
+        },
+        {
+          "id": "EVT-1788101989170-45ew8n",
+          "type": "item_counted",
+          "actor": "painel",
+          "createdAt": "2026-08-30T14:59:49.170Z",
+          "metadata": {
+            "inventoryItemId": "PRD-1788102709543",
+            "quantity": 1
+          }
+        },
+        {
+          "id": "EVT-1788101989188-ghr32v",
+          "type": "item_counted",
+          "actor": "painel",
+          "createdAt": "2026-08-30T14:59:49.188Z",
+          "metadata": {
+            "inventoryItemId": "PRD-1788102106489",
+            "quantity": 1
+          }
+        },
+        {
+          "id": "EVT-1788101989205-m7cuu1",
+          "type": "item_counted",
+          "actor": "painel",
+          "createdAt": "2026-08-30T14:59:49.206Z",
+          "metadata": {
+            "inventoryItemId": "PRD-1786964540201",
+            "quantity": 1
+          }
+        },
+        {
+          "id": "EVT-1788101989224-op8phh",
+          "type": "item_counted",
+          "actor": "painel",
+          "createdAt": "2026-08-30T14:59:49.224Z",
+          "metadata": {
+            "inventoryItemId": "PRD-1788102140843",
+            "quantity": 1
+          }
+        },
+        {
+          "id": "EVT-1788101989243-5f7ejx",
+          "type": "item_counted",
+          "actor": "painel",
+          "createdAt": "2026-08-30T14:59:49.243Z",
+          "metadata": {
+            "inventoryItemId": "PRD-1787008662591",
+            "quantity": 1
+          }
+        },
+        {
+          "id": "EVT-1788101989262-v4oxtb",
+          "type": "item_counted",
+          "actor": "painel",
+          "createdAt": "2026-08-30T14:59:49.262Z",
+          "metadata": {
+            "inventoryItemId": "PRD-1788102510327",
+            "quantity": 2
+          }
+        },
+        {
+          "id": "EVT-1788101989280-pb9vwc",
+          "type": "item_counted",
+          "actor": "painel",
+          "createdAt": "2026-08-30T14:59:49.280Z",
+          "metadata": {
+            "inventoryItemId": "PRD-1788102605464",
+            "quantity": 1
+          }
+        },
+        {
+          "id": "EVT-1788101989303-uwqd92",
+          "type": "item_counted",
+          "actor": "painel",
+          "createdAt": "2026-08-30T14:59:49.303Z",
+          "metadata": {
+            "inventoryItemId": "PRD-1788102292847",
+            "quantity": 1
+          }
+        },
+        {
+          "id": "EVT-1788101989322-km6b98",
+          "type": "item_counted",
+          "actor": "painel",
+          "createdAt": "2026-08-30T14:59:49.322Z",
+          "metadata": {
+            "inventoryItemId": "PRD-1788102211097",
+            "quantity": 2
+          }
+        },
+        {
+          "id": "EVT-1788101989342-p38hhc",
+          "type": "item_counted",
+          "actor": "painel",
+          "createdAt": "2026-08-30T14:59:49.342Z",
+          "metadata": {
+            "inventoryItemId": "PRD-1788102443031",
+            "quantity": 1
+          }
+        },
+        {
+          "id": "EVT-1788101989361-fdre99",
+          "type": "item_counted",
+          "actor": "painel",
+          "createdAt": "2026-08-30T14:59:49.361Z",
+          "metadata": {
+            "inventoryItemId": "PRD-1788102080647",
+            "quantity": 2
+          }
+        },
+        {
+          "id": "EVT-1788101989381-u65mox",
+          "type": "item_counted",
+          "actor": "painel",
+          "createdAt": "2026-08-30T14:59:49.381Z",
+          "metadata": {
+            "inventoryItemId": "PRD-1788102754779",
+            "quantity": 1
+          }
+        },
+        {
+          "id": "EVT-1788101989403-iqyg93",
+          "type": "item_counted",
+          "actor": "painel",
+          "createdAt": "2026-08-30T14:59:49.403Z",
+          "metadata": {
+            "inventoryItemId": "PRD-1788102690085",
+            "quantity": 1
+          }
+        },
+        {
+          "id": "EVT-1788101989421-8a7eks",
+          "type": "item_counted",
+          "actor": "painel",
+          "createdAt": "2026-08-30T14:59:49.421Z",
+          "metadata": {
+            "inventoryItemId": "PRD-1788102525587",
+            "quantity": 1
+          }
+        },
+        {
+          "id": "EVT-1788101989440-6ri2g1",
+          "type": "item_counted",
+          "actor": "painel",
+          "createdAt": "2026-08-30T14:59:49.440Z",
+          "metadata": {
+            "inventoryItemId": "PRD-1788102859955",
+            "quantity": 2
+          }
+        },
+        {
+          "id": "EVT-1788101989459-6ft79x",
+          "type": "item_counted",
+          "actor": "painel",
+          "createdAt": "2026-08-30T14:59:49.459Z",
+          "metadata": {
+            "inventoryItemId": "PRD-1788102273481",
+            "quantity": 1
+          }
+        },
+        {
+          "id": "EVT-1788101989481-pra5rn",
+          "type": "item_counted",
+          "actor": "painel",
+          "createdAt": "2026-08-30T14:59:49.481Z",
+          "metadata": {
+            "inventoryItemId": "PRD-1788102305450",
+            "quantity": 2
+          }
+        },
+        {
+          "id": "EVT-1788101989500-06m76y",
+          "type": "item_counted",
+          "actor": "painel",
+          "createdAt": "2026-08-30T14:59:49.500Z",
+          "metadata": {
+            "inventoryItemId": "PRD-1788102421625",
+            "quantity": 3
+          }
+        },
+        {
+          "id": "EVT-1788101989519-qug5hp",
+          "type": "item_counted",
+          "actor": "painel",
+          "createdAt": "2026-08-30T14:59:49.519Z",
+          "metadata": {
+            "inventoryItemId": "PRD-1788102092658",
+            "quantity": 1
+          }
+        },
+        {
+          "id": "EVT-1788101989540-x74uml",
+          "type": "item_counted",
+          "actor": "painel",
+          "createdAt": "2026-08-30T14:59:49.540Z",
+          "metadata": {
+            "inventoryItemId": "PRD-1788102932233",
+            "quantity": 2
+          }
+        },
+        {
+          "id": "EVT-1788101989567-kfbzt6",
+          "type": "item_counted",
+          "actor": "painel",
+          "createdAt": "2026-08-30T14:59:49.567Z",
+          "metadata": {
+            "inventoryItemId": "PRD-1788102495390",
+            "quantity": 2
+          }
+        },
+        {
+          "id": "EVT-1788101989590-28p61s",
+          "type": "item_counted",
+          "actor": "painel",
+          "createdAt": "2026-08-30T14:59:49.590Z",
+          "metadata": {
+            "inventoryItemId": "PRD-1788102000038",
+            "quantity": 1
+          }
+        },
+        {
+          "id": "EVT-1788101989608-nembix",
+          "type": "item_counted",
+          "actor": "painel",
+          "createdAt": "2026-08-30T14:59:49.608Z",
+          "metadata": {
+            "inventoryItemId": "PRD-1788102164303",
+            "quantity": 3
+          }
+        },
+        {
+          "id": "EVT-1788101989627-shxd3q",
+          "type": "item_counted",
+          "actor": "painel",
+          "createdAt": "2026-08-30T14:59:49.627Z",
+          "metadata": {
+            "inventoryItemId": "PRD-1788102859918",
+            "quantity": 1
+          }
+        },
+        {
+          "id": "EVT-1788101989646-u8912m",
+          "type": "item_counted",
+          "actor": "painel",
+          "createdAt": "2026-08-30T14:59:49.646Z",
+          "metadata": {
+            "inventoryItemId": "PRD-1788102623068",
+            "quantity": 1
+          }
+        },
+        {
+          "id": "EVT-1788101989665-d3bc6o",
+          "type": "item_counted",
+          "actor": "painel",
+          "createdAt": "2026-08-30T14:59:49.665Z",
+          "metadata": {
+            "inventoryItemId": "PRD-1788102061073",
+            "quantity": 1
+          }
+        },
+        {
+          "id": "EVT-1788101989687-lxipoc",
+          "type": "item_counted",
+          "actor": "painel",
+          "createdAt": "2026-08-30T14:59:49.687Z",
+          "metadata": {
+            "inventoryItemId": "PRD-1787011114111",
+            "quantity": 1
+          }
+        },
+        {
+          "id": "EVT-1788101989705-6i9p0p",
+          "type": "item_counted",
+          "actor": "painel",
+          "createdAt": "2026-08-30T14:59:49.706Z",
+          "metadata": {
+            "inventoryItemId": "PRD-1788102895067",
+            "quantity": 1
+          }
+        },
+        {
+          "id": "EVT-1788101989723-9tl6fr",
+          "type": "item_counted",
+          "actor": "painel",
+          "createdAt": "2026-08-30T14:59:49.723Z",
+          "metadata": {
+            "inventoryItemId": "PRD-1788102008474",
+            "quantity": 7
+          }
+        },
+        {
+          "id": "EVT-1788101989741-e52c4j",
+          "type": "item_counted",
+          "actor": "painel",
+          "createdAt": "2026-08-30T14:59:49.741Z",
+          "metadata": {
+            "inventoryItemId": "PRD-1786498681877",
+            "quantity": 5
+          }
+        },
+        {
+          "id": "EVT-1788101989759-0ddzzy",
+          "type": "item_counted",
+          "actor": "painel",
+          "createdAt": "2026-08-30T14:59:49.759Z",
+          "metadata": {
+            "inventoryItemId": "PRD-1788102164917",
+            "quantity": 3
+          }
+        },
+        {
+          "id": "EVT-1788101989778-vvxcuz",
+          "type": "item_counted",
+          "actor": "painel",
+          "createdAt": "2026-08-30T14:59:49.778Z",
+          "metadata": {
+            "inventoryItemId": "PRD-1788102448632",
+            "quantity": 2
+          }
+        },
+        {
+          "id": "EVT-1788101989797-p0wucp",
+          "type": "item_counted",
+          "actor": "painel",
+          "createdAt": "2026-08-30T14:59:49.797Z",
+          "metadata": {
+            "inventoryItemId": "PRD-1788102872960",
+            "quantity": 3
+          }
+        },
+        {
+          "id": "EVT-1788101989818-wbd59l",
+          "type": "item_counted",
+          "actor": "painel",
+          "createdAt": "2026-08-30T14:59:49.818Z",
+          "metadata": {
+            "inventoryItemId": "PRD-1788102585121",
+            "quantity": 1
+          }
+        },
+        {
+          "id": "EVT-1788101989837-gt5qt1",
+          "type": "item_counted",
+          "actor": "painel",
+          "createdAt": "2026-08-30T14:59:49.837Z",
+          "metadata": {
+            "inventoryItemId": "PRD-1788102883066",
+            "quantity": 1
+          }
+        },
+        {
+          "id": "EVT-1788101989857-66xvml",
+          "type": "item_counted",
+          "actor": "painel",
+          "createdAt": "2026-08-30T14:59:49.857Z",
+          "metadata": {
+            "inventoryItemId": "PRD-1788102834738",
+            "quantity": 1
+          }
+        },
+        {
+          "id": "EVT-1788101989875-snnxiy",
+          "type": "item_counted",
+          "actor": "painel",
+          "createdAt": "2026-08-30T14:59:49.875Z",
+          "metadata": {
+            "inventoryItemId": "PRD-1788102508428",
+            "quantity": 1
+          }
+        },
+        {
+          "id": "EVT-1788101989895-d57m93",
+          "type": "item_counted",
+          "actor": "painel",
+          "createdAt": "2026-08-30T14:59:49.895Z",
+          "metadata": {
+            "inventoryItemId": "PRD-1788102949825",
+            "quantity": 3
+          }
+        },
+        {
+          "id": "EVT-1788101989915-t2ojmt",
+          "type": "item_counted",
+          "actor": "painel",
+          "createdAt": "2026-08-30T14:59:49.915Z",
+          "metadata": {
+            "inventoryItemId": "PRD-1788102907270",
+            "quantity": 2
+          }
+        },
+        {
+          "id": "EVT-1788101989933-gzs08j",
+          "type": "item_counted",
+          "actor": "painel",
+          "createdAt": "2026-08-30T14:59:49.933Z",
+          "metadata": {
+            "inventoryItemId": "PRD-1788102876597",
+            "quantity": 2
+          }
+        },
+        {
+          "id": "EVT-1788101989952-2b97fd",
+          "type": "item_counted",
+          "actor": "painel",
+          "createdAt": "2026-08-30T14:59:49.952Z",
+          "metadata": {
+            "inventoryItemId": "PRD-1788102856111",
+            "quantity": 1
+          }
+        },
+        {
+          "id": "EVT-1788101989971-45ekha",
+          "type": "item_counted",
+          "actor": "painel",
+          "createdAt": "2026-08-30T14:59:49.971Z",
+          "metadata": {
+            "inventoryItemId": "PRD-1788102896910",
+            "quantity": 3
+          }
+        },
+        {
+          "id": "EVT-1788101989989-b7vt7x",
+          "type": "item_counted",
+          "actor": "painel",
+          "createdAt": "2026-08-30T14:59:49.989Z",
+          "metadata": {
+            "inventoryItemId": "PRD-1788102533924",
+            "quantity": 3
+          }
+        },
+        {
+          "id": "EVT-1788101990010-81ieo5",
+          "type": "item_counted",
+          "actor": "painel",
+          "createdAt": "2026-08-30T14:59:50.010Z",
+          "metadata": {
+            "inventoryItemId": "PRD-1788102011068",
+            "quantity": 1
+          }
+        },
+        {
+          "id": "EVT-1788101990032-hvetp8",
+          "type": "item_counted",
+          "actor": "painel",
+          "createdAt": "2026-08-30T14:59:50.032Z",
+          "metadata": {
+            "inventoryItemId": "PRD-1788102399696",
+            "quantity": 2
+          }
+        },
+        {
+          "id": "EVT-1788102138483-lrtz6b",
+          "type": "completed",
+          "actor": "Matheus Fernando",
+          "createdAt": "2026-08-30T15:02:18.483Z",
+          "metadata": {
+            "adjustments": 105,
+            "confirmedUncountedAsZero": false
+          }
+        }
+      ],
+      "completedAt": "2026-08-30T15:02:18.483Z",
+      "completedBy": "Matheus Fernando",
+      "divergenceCount": 105,
+      "adjustmentMovementIds": [
+        "MOV-20260830-000001",
+        "MOV-20260830-000002",
+        "MOV-20260830-000003",
+        "MOV-20260830-000004",
+        "MOV-20260830-000005",
+        "MOV-20260830-000006",
+        "MOV-20260830-000007",
+        "MOV-20260830-000008",
+        "MOV-20260830-000009",
+        "MOV-20260830-000010",
+        "MOV-20260830-000011",
+        "MOV-20260830-000012",
+        "MOV-20260830-000013",
+        "MOV-20260830-000014",
+        "MOV-20260830-000015",
+        "MOV-20260830-000016",
+        "MOV-20260830-000017",
+        "MOV-20260830-000018",
+        "MOV-20260830-000019",
+        "MOV-20260830-000020",
+        "MOV-20260830-000021",
+        "MOV-20260830-000022",
+        "MOV-20260830-000023",
+        "MOV-20260830-000024",
+        "MOV-20260830-000025",
+        "MOV-20260830-000026",
+        "MOV-20260830-000027",
+        "MOV-20260830-000028",
+        "MOV-20260830-000029",
+        "MOV-20260830-000030",
+        "MOV-20260830-000031",
+        "MOV-20260830-000032",
+        "MOV-20260830-000033",
+        "MOV-20260830-000034",
+        "MOV-20260830-000035",
+        "MOV-20260830-000036",
+        "MOV-20260830-000037",
+        "MOV-20260830-000038",
+        "MOV-20260830-000039",
+        "MOV-20260830-000040",
+        "MOV-20260830-000041",
+        "MOV-20260830-000042",
+        "MOV-20260830-000043",
+        "MOV-20260830-000044",
+        "MOV-20260830-000045",
+        "MOV-20260830-000046",
+        "MOV-20260830-000047",
+        "MOV-20260830-000048",
+        "MOV-20260830-000049",
+        "MOV-20260830-000050",
+        "MOV-20260830-000051",
+        "MOV-20260830-000052",
+        "MOV-20260830-000053",
+        "MOV-20260830-000054",
+        "MOV-20260830-000055",
+        "MOV-20260830-000056",
+        "MOV-20260830-000057",
+        "MOV-20260830-000058",
+        "MOV-20260830-000059",
+        "MOV-20260830-000060",
+        "MOV-20260830-000061",
+        "MOV-20260830-000062",
+        "MOV-20260830-000063",
+        "MOV-20260830-000064",
+        "MOV-20260830-000065",
+        "MOV-20260830-000066",
+        "MOV-20260830-000067",
+        "MOV-20260830-000068",
+        "MOV-20260830-000069",
+        "MOV-20260830-000070",
+        "MOV-20260830-000071",
+        "MOV-20260830-000072",
+        "MOV-20260830-000073",
+        "MOV-20260830-000074",
+        "MOV-20260830-000075",
+        "MOV-20260830-000076",
+        "MOV-20260830-000077",
+        "MOV-20260830-000078",
+        "MOV-20260830-000079",
+        "MOV-20260830-000080",
+        "MOV-20260830-000081",
+        "MOV-20260830-000082",
+        "MOV-20260830-000083",
+        "MOV-20260830-000084",
+        "MOV-20260830-000085",
+        "MOV-20260830-000086",
+        "MOV-20260830-000087",
+        "MOV-20260830-000088",
+        "MOV-20260830-000089",
+        "MOV-20260830-000090",
+        "MOV-20260830-000091",
+        "MOV-20260830-000092",
+        "MOV-20260830-000093",
+        "MOV-20260830-000094",
+        "MOV-20260830-000095",
+        "MOV-20260830-000096",
+        "MOV-20260830-000097",
+        "MOV-20260830-000098",
+        "MOV-20260830-000099",
+        "MOV-20260830-000100",
+        "MOV-20260830-000101",
+        "MOV-20260830-000102",
+        "MOV-20260830-000103",
+        "MOV-20260830-000104",
+        "MOV-20260830-000105"
+      ],
+      "completionBackup": "CNT-20260830-0001-pre-complete-1788102138415.json"
+    },
+    {
       "id": "CNT-20260825-0001",
       "type": "partial",
       "status": "completed",

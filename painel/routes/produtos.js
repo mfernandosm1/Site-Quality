@@ -196,6 +196,122 @@ function wantsJson(req) {
   return req.xhr || (req.headers.accept || '').includes('application/json');
 }
 
+const NCM_CLASSIF_URL = 'https://portalunico.siscomex.gov.br/classif/api/publico/nomenclatura/download/json?perfil=PUBLICO';
+const NCM_CACHE_FILE = path.join(PANEL_DIR, 'data', 'erp', 'fiscal', 'ncm-classif-cache.json');
+const WM10_PRODUCT_CACHE_FILE = path.join(PANEL_DIR, 'data', 'erp', 'products', 'wm10-product-source-cache.json');
+let ncmMemoryCache = null;
+let ncmFetchPromise = null;
+
+function normalizeNcmCode(value = '') {
+  const code = String(value ?? '').replace(/\D/g, '').slice(0, 8);
+  return code.length === 8 && code !== '00000000' ? code : '';
+}
+
+function hasValidNcmInput(value) {
+  const raw = String(value ?? '').trim();
+  if (!raw) return true;
+  // NCM é numérico; aceitamos apenas os pontos opcionais usados na apresentação
+  // (ex.: 3919.90.90) e espaços acidentais ao copiar/colar.
+  if (!/^[0-9.\s]+$/.test(raw)) return false;
+  const digits = raw.replace(/\D/g, '');
+  return digits.length === 8 && digits !== '00000000';
+}
+
+function formatNcmCode(value = '') {
+  const digits = String(value ?? '').replace(/\D/g, '').slice(0, 8);
+  if (digits.length <= 4) return digits;
+  if (digits.length <= 6) return `${digits.slice(0, 4)}.${digits.slice(4)}`;
+  return `${digits.slice(0, 4)}.${digits.slice(4, 6)}.${digits.slice(6, 8)}`;
+}
+
+function cleanNcmDescription(value = '') {
+  return String(value ?? '')
+    .replace(/<br\s*\/?\s*>/gi, ' ')
+    .replace(/<[^>]+>/g, ' ')
+    .replace(/&nbsp;/gi, ' ')
+    .replace(/&amp;/gi, '&')
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
+function extractOfficialNcmRows(payload) {
+  const candidates = Array.isArray(payload)
+    ? payload
+    : Object.values(payload && typeof payload === 'object' ? payload : {}).find(value => Array.isArray(value)) || [];
+  const rows = [];
+  for (const row of candidates) {
+    if (!row || typeof row !== 'object') continue;
+    const code = normalizeNcmCode(row.Codigo ?? row.codigo ?? row.CODIGO ?? row.NCM ?? row.ncm);
+    if (!code) continue;
+    rows.push({
+      code,
+      description:cleanNcmDescription(row.Descricao ?? row.descricao ?? row.DESCRICAO ?? ''),
+      source:'Classif'
+    });
+  }
+  return rows;
+}
+
+function loadNcmDiskCache() {
+  if (ncmMemoryCache?.rows?.length) return ncmMemoryCache;
+  try {
+    const cached = JSON.parse(fs.readFileSync(NCM_CACHE_FILE, 'utf8'));
+    if (Array.isArray(cached?.rows) && cached.rows.length) {
+      ncmMemoryCache = cached;
+      return cached;
+    }
+  } catch (_) {}
+  return null;
+}
+
+async function refreshOfficialNcmCache() {
+  if (ncmFetchPromise) return ncmFetchPromise;
+  ncmFetchPromise = (async () => {
+    const controller = new AbortController();
+    const timer = setTimeout(() => controller.abort(), 12000);
+    try {
+      const response = await fetch(NCM_CLASSIF_URL, { headers:{ Accept:'application/json' }, signal:controller.signal });
+      if (!response.ok) throw new Error(`Classif respondeu HTTP ${response.status}.`);
+      const payload = await response.json();
+      const rows = extractOfficialNcmRows(payload);
+      if (!rows.length) throw new Error('A tabela NCM oficial foi recebida sem códigos utilizáveis.');
+      const cache = { version:'1.0', source:'Receita Federal / Sistema Classif', sourceUrl:NCM_CLASSIF_URL, updatedAt:new Date().toISOString(), rows };
+      fs.mkdirSync(path.dirname(NCM_CACHE_FILE), { recursive:true });
+      const tmp = `${NCM_CACHE_FILE}.tmp`;
+      fs.writeFileSync(tmp, JSON.stringify(cache), 'utf8');
+      fs.renameSync(tmp, NCM_CACHE_FILE);
+      ncmMemoryCache = cache;
+      return cache;
+    } finally {
+      clearTimeout(timer);
+      ncmFetchPromise = null;
+    }
+  })();
+  return ncmFetchPromise;
+}
+
+function wm10NcmSuggestions(prefix = '') {
+  const wanted = String(prefix || '').replace(/\D/g, '');
+  if (!wanted) return [];
+  const raw = readJson(WM10_PRODUCT_CACHE_FILE);
+  const rows = Array.isArray(raw?.rows) ? raw.rows : [];
+  const grouped = new Map();
+  for (const row of rows) {
+    const code = normalizeNcmCode(row?.ncm ?? row?.NCM);
+    if (!code || !code.startsWith(wanted)) continue;
+    const current = grouped.get(code) || { code, description:'', source:'Histórico WM10', usage:0, examples:[] };
+    current.usage += 1;
+    const name = String(row?.Nome ?? row?.nome ?? '').trim();
+    if (name && current.examples.length < 2 && !current.examples.includes(name)) current.examples.push(name);
+    grouped.set(code, current);
+  }
+  return [...grouped.values()].sort((a,b) => b.usage - a.usage || a.code.localeCompare(b.code)).slice(0, 30);
+}
+
+function ncmFromProduct(product = {}) {
+  return normalizeNcmCode(product?.erp?.fiscal?.ncm ?? product?.erp?.ncm ?? product?.ncm ?? '');
+}
+
 function galleryFromBody(value, current = []) {
   if (value === undefined || value === null) return current || [];
 
@@ -399,6 +515,17 @@ function cleanupLegacyServiceVariations(items = [], categories = []) {
     item.erp = item.erp && typeof item.erp === 'object' ? item.erp : {};
     if (item.erp.type !== 'service') {
       item.erp.type = 'service';
+      changed = true;
+    }
+
+    // NCM classifica mercadoria. Em cadastro do tipo Serviço ele não se aplica e
+    // qualquer valor legado deve ser removido para não contaminar a emissão fiscal.
+    const hadServiceNcm = Boolean(ncmFromProduct(item));
+    if (hadServiceNcm || item.ncm || item.erp.ncm || item.erp?.fiscal?.ncm) {
+      item.ncm = '';
+      item.erp.ncm = '';
+      item.erp.fiscal = item.erp.fiscal && typeof item.erp.fiscal === 'object' ? item.erp.fiscal : {};
+      item.erp.fiscal.ncm = '';
       changed = true;
     }
 
@@ -1575,6 +1702,7 @@ function productFromBody(body, current = {}) {
     sku: (body.sku ?? current.erp?.sku ?? current.sku ?? '').toString().trim(),
     code: (current.erp?.internalCode ?? current.code ?? '').toString().trim(),
     barcode: (body.barcode ?? current.erp?.barcode ?? current.barcode ?? '').toString().trim(),
+    ncm: normalizeNcmCode(body.ncm !== undefined ? body.ncm : ncmFromProduct(current)),
     brand: (body.brand ?? current.erp?.brand ?? current.brand ?? '').toString().trim(),
     slug: gerarSlug(body.slug || current.slug || body.name || current.name || ''),
     price: priceValue,
@@ -1600,6 +1728,11 @@ function productFromBody(body, current = {}) {
       supplierCode: (body.supplierCode ?? current.erp?.supplierCode ?? '').toString().trim(),
       searchAlias: (body.searchAlias ?? current.erp?.searchAlias ?? '').toString().trim(),
       barcode: (body.barcode ?? current.erp?.barcode ?? current.barcode ?? '').toString().trim(),
+      ncm: normalizeNcmCode(body.ncm !== undefined ? body.ncm : ncmFromProduct(current)),
+      fiscal: {
+        ...(current.erp?.fiscal && typeof current.erp.fiscal === 'object' ? current.erp.fiscal : {}),
+        ncm: normalizeNcmCode(body.ncm !== undefined ? body.ncm : ncmFromProduct(current))
+      },
       brand: (body.brand ?? current.erp?.brand ?? current.brand ?? '').toString().trim(),
       unit: (body.unit ?? current.erp?.unit ?? 'UN').toString().trim() || 'UN',
       category: (body.erpCategory ?? current.erp?.category ?? '').toString().trim(),
@@ -1781,6 +1914,17 @@ router.post('/importar-wm10/sincronizar', async (req, res) => {
   }
 });
 
+router.post('/importar-wm10/ncm-cache', (req, res) => {
+  try {
+    const report = wm10ProductImportService(req.app).backfillNcmFromCache({
+      user:req.user?.displayName || req.user?.name || req.user?.email || 'painel'
+    });
+    return res.json({ success:true, message:`${report.updated} produto(s) receberam NCM do cache local do WM10.`, report });
+  } catch (error) {
+    return res.status(400).json({ success:false, message:error.message });
+  }
+});
+
 router.post('/importar-wm10/vincular', (req, res) => {
   try {
     const result = wm10ProductImportService(req.app).linkExisting({
@@ -1862,6 +2006,54 @@ router.post('/importar-wm10/familias/importar', async (req, res) => {
 });
 
 
+
+router.get('/api/ncm', async (req, res) => {
+  try {
+    const query = String(req.query.q || '').trim();
+    const prefix = query.replace(/\D/g, '').slice(0, 8);
+    if (prefix.length < 2) return res.json({ success:true, items:[] });
+
+    let cache = loadNcmDiskCache();
+    const cacheAge = cache?.updatedAt ? Date.now() - new Date(cache.updatedAt).getTime() : Infinity;
+    if (!cache || !Number.isFinite(cacheAge) || cacheAge > 30 * 24 * 60 * 60 * 1000) {
+      try { cache = await refreshOfficialNcmCache(); } catch (error) { console.warn('⚠️ Consulta NCM oficial indisponível:', error.message); }
+    }
+
+    const official = (cache?.rows || [])
+      .filter(row => String(row.code || '').startsWith(prefix))
+      .slice(0, 30)
+      .map(row => ({ code:row.code, formatted:formatNcmCode(row.code), description:row.description || '', source:'Classif' }));
+
+    const byCode = new Map(official.map(row => [row.code, row]));
+    for (const row of wm10NcmSuggestions(prefix)) {
+      if (!byCode.has(row.code)) byCode.set(row.code, { code:row.code, formatted:formatNcmCode(row.code), description:'', source:'Histórico WM10' });
+    }
+
+    const items = [...byCode.values()]
+      .sort((a,b) => a.code.localeCompare(b.code))
+      .slice(0, 30);
+    return res.json({ success:true, items, officialAvailable:Boolean(cache?.rows?.length) });
+  } catch (error) {
+    return res.status(500).json({ success:false, message:error.message || 'Não foi possível consultar NCM.' });
+  }
+});
+
+router.get('/api/seo-pendencias', (req, res) => {
+  const file = path.join(P(req.app).CONTENT_DIR, 'products.json');
+  const data = readJson(file);
+  const items = (Array.isArray(data?.items) ? data.items : []).filter(product => productLvActive(product)).map(product => {
+    const seoTitle = String(product?.virtualStore?.seoTitle || '').trim();
+    const seoDescription = String(product?.virtualStore?.seoDescription || '').trim();
+    return {
+      id:product.id,
+      code:product?.erp?.internalCode || product?.code || '',
+      name:product?.virtualStore?.name || product?.name || 'Produto sem nome',
+      missingTitle:!seoTitle,
+      missingDescription:!seoDescription
+    };
+  }).filter(row => row.missingTitle || row.missingDescription);
+  return res.json({ success:true, activeCount:(Array.isArray(data?.items) ? data.items : []).filter(product => productLvActive(product)).length, pendingCount:items.length, items });
+});
 
 router.get('/api/images', (req, res) => {
   try {
@@ -2020,6 +2212,7 @@ router.get('/', (req, res) => {
   };
 
   const listQuery = String(req.query.q || '').trim();
+  const listCategoryScope = String(req.query.categoriaTipo || 'site').trim().toLowerCase() === 'erp' ? 'erp' : 'site';
   const listCategory = String(req.query.categoria || '').trim();
   const listErpStatus = String(req.query.erpStatus || '').trim();
   // O cadastro mestre do ERP nunca aplica filtro de Loja Virtual por conta própria.
@@ -2045,9 +2238,16 @@ router.get('/', (req, res) => {
       if (!matchesSearchText(haystack, listQuery)) return false;
     }
     if (listCategory) {
-      const category = String(item?.category || '');
-      if (listCategory === '[vitrine]') { if (category) return false; }
-      else if (category !== listCategory) return false;
+      if (listCategoryScope === 'erp') {
+        const erpCategory = validErpCategory(item?.erp?.categoryId || item?.erp?.category || '', erpCategorias);
+        const erpCategoryId = String(erpCategory?.id || '');
+        if (listCategory === '[sem-categoria]') { if (erpCategoryId) return false; }
+        else if (erpCategoryId !== listCategory) return false;
+      } else {
+        const category = String(item?.category || '');
+        if (listCategory === '[vitrine]') { if (category) return false; }
+        else if (category !== listCategory) return false;
+      }
     }
     if (listErpStatus) {
       const raw = item?.erp?.active !== undefined ? item.erp.active : item.active;
@@ -2178,7 +2378,7 @@ router.get('/', (req, res) => {
     workspaceNew,
     workspaceType: String(req.query.type || 'product').toLowerCase() === 'service' ? 'service' : 'product',
     listState: {
-      query:listQuery, category:listCategory, erpStatus:listErpStatus, lvStatus:listLvStatus,
+      query:listQuery, categoryScope:listCategoryScope, category:listCategory, erpStatus:listErpStatus, lvStatus:listLvStatus,
       stockOp:listStockOp, stockQty:listStockQty, order:listOrder,
       page:currentPage, pageSize, totalFiltered, totalPages, totalItems:allItems.length
     },
@@ -2318,13 +2518,21 @@ router.post('/add', (req, res) => {
     createBody.erpName = String(createBody.lvName).trim();
   }
 
-  const novo = productFromBody(createBody);
   const submittedErpCategory = String(createBody.erpCategory || '').trim();
   const erpCategory = validErpCategory(submittedErpCategory, erpCategorias);
   if (submittedErpCategory && (!erpCategory || erpCategory.active === false)) {
     return res.redirect('/produtos?workspace=new&error=erp_category');
   }
 
+  // Serviço não usa NCM. Mesmo que algum valor venha de formulário antigo, ele é
+  // descartado antes de montar o cadastro. Produtos físicos continuam validados.
+  if (erpCategory?.type === 'service') createBody.ncm = '';
+  else if (!hasValidNcmInput(createBody.ncm)) {
+    if (wantsJson(req)) return res.status(400).json({ success:false, message:'NCM inválido. Informe 8 dígitos; pontos são opcionais.' });
+    return res.redirect('/produtos?workspace=new&error=ncm');
+  }
+
+  const novo = productFromBody(createBody);
   const submittedSiteCategory = String(createBody.siteCategory ?? createBody.category ?? '').trim();
   const normalizedSiteCategory = submittedSiteCategory ? normalizeCategoryValue(submittedSiteCategory, categorias) : '';
   const siteCategory = submittedSiteCategory
@@ -2477,6 +2685,12 @@ router.post('/update', (req, res) => {
   // A categoria ERP é obrigatória apenas no cadastro de novos produtos. Em uma
   // edição de produto legado, a ausência de categoria não pode impedir ajustes
   // independentes de estoque, status ou disponibilidade.
+  const editingAsService = erpCategory?.type === 'service' || (!erpCategory && Boolean(serviceCategoryForProduct(previousItem, erpCategorias)));
+  if (editingAsService) req.body.ncm = '';
+  else if (!hasValidNcmInput(req.body.ncm)) {
+    if (wantsJson(req)) return res.status(400).json({ success:false, message:'NCM inválido. Informe 8 dígitos; pontos são opcionais.' });
+    return res.redirect(`/produtos/${encodeURIComponent(id)}?error=ncm`);
+  }
   Object.assign(item, productFromBody(req.body, item));
   item.erp = item.erp && typeof item.erp === 'object' ? item.erp : {};
   if (erpCategory) {
@@ -2484,11 +2698,19 @@ router.post('/update', (req, res) => {
     item.erp.category = erpCategory.code;
     if (erpCategory.type === 'service') {
       item.erp.type = 'service';
+      // NCM é exclusivo de mercadoria; serviço fica sempre sem classificação NCM.
+      item.ncm = '';
+      item.erp.ncm = '';
+      item.erp.fiscal = item.erp.fiscal && typeof item.erp.fiscal === 'object' ? item.erp.fiscal : {};
+      item.erp.fiscal.ncm = '';
       // Ao converter/salvar como serviço, remove qualquer grade antiga.
       // Serviços são cadastrados individualmente e usam o preço do bloco Comercial.
       item.variations = emptyVariations();
       item.stock = null;
       item.inventory = defaultInventoryPolicy(item, { stockControlled: 'false', allowNegative: 'false', inventorySiteMode: 'disabled', minimumQuantity: 0, siteLimit: 0, physicalSafety: 0 });
+    } else if (String(item.erp.type || '').toLowerCase() === 'service') {
+      // Se um cadastro deixar de ser serviço, volta a se comportar como produto.
+      item.erp.type = 'product';
     }
   }
   item.erp.internalCode = previousItem.erp?.internalCode || previousItem.code || nextInternalProductCode(data.items);

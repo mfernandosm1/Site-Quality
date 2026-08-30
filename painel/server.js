@@ -10,6 +10,7 @@ import CommerceService from './services/commerce-service.js';
 import InventoryService from './services/inventory-service.js';
 import UserService from './services/user-service.js';
 import AuthService from './services/auth-service.js';
+import { applyOneTimeWm10CountBatch20260830 } from './services/one-time-wm10-count-batch-20260830.js';
 import { updateHeaderMenu, generateCategoryPage } from './routes/main_utils.js';
 
 const __filename = fileURLToPath(import.meta.url);
@@ -427,6 +428,11 @@ const server = app.listen(PORT, HOST, async () => {
   // subcategorias salvas deixam de depender de editar/salvar novamente.
   syncPublicCatalogArtifacts();
   ensureAllPhysicalProductsStockControlled();
+  try {
+    await applyOneTimeWm10CountBatch20260830({ app });
+  } catch (error) {
+    console.error('Falha ao aplicar a contagem assistida WM10 de 30/08/2026:', error?.message || error);
+  }
   await initializeWhatsApp(app);
 
   // Verifica o fechamento automático do caixa em intervalos curtos.

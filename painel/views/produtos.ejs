@@ -1311,6 +1311,26 @@ html[data-panel-theme="light"] .quality-master-area,html[data-panel-theme="light
   @media(max-width:1100px){.quality-filter-status-row-advanced{grid-template-columns:repeat(2,minmax(160px,1fr))!important}.quality-filter-counter{justify-content:flex-start}}
   @media(max-width:620px){.quality-filter-status-row-advanced{grid-template-columns:1fr!important}}
 
+  /* 2026-08-30 — filtros mais compactos + origem da categoria (ERP/LV). */
+  .quality-search-control-box{padding:9px 11px!important}
+  .quality-search-control-box .quality-control-title{margin-bottom:6px!important;font-size:13px!important}
+  .quality-search-row{gap:6px!important;flex-wrap:nowrap!important}
+  .quality-search-row input{min-height:34px!important;height:34px!important;padding:6px 10px!important}
+  .quality-search-row select{min-height:34px!important;height:34px!important;padding:5px 8px!important}
+  #panel-category-scope{flex:0 0 160px!important;width:160px!important}
+  #panel-category-filter{flex:0 0 205px!important;width:205px!important}
+  .quality-search-button{min-height:34px!important;height:34px!important;padding:5px 11px!important}
+  .quality-clear-filters-button{min-height:34px!important;height:34px!important;padding:5px 10px!important;white-space:nowrap}
+  .quality-ncm-service-state{opacity:.72}
+  .quality-ncm-service-state input{cursor:not-allowed!important}
+  .quality-filter-status-row-advanced{margin-top:6px!important;gap:6px!important}
+  .quality-filter-field label{margin-bottom:3px!important;font-size:9px!important}
+  .quality-filter-field select{min-height:34px!important;height:34px!important;padding:5px 8px!important}
+  .quality-stock-filter-combo select,.quality-stock-filter-combo input{min-height:34px!important;height:34px!important;padding:5px 7px!important}
+  .quality-filter-counter{min-height:34px!important;height:34px!important;padding:0 11px!important;border-radius:9px!important}
+  .quality-bulk-control-box .quality-bulk-toggle{min-height:34px!important;padding:5px 10px!important;font-size:11px!important}
+  @media(max-width:1050px){.quality-search-row{flex-wrap:wrap!important}.quality-search-row input{flex-basis:100%!important}#panel-category-scope,#panel-category-filter{flex:1 1 180px!important;width:auto!important}}
+
   /* 2026-08-26 — fechamento definitivo das larguras da listagem.
      Há regras legadas por nth-child nesta tela; este bloco usa os dois seletores
      para impedir que elas voltem a alargar ERP/Estoque ou espremer Status. */
@@ -1526,6 +1546,7 @@ html[data-panel-theme="light"] .quality-master-area,html[data-panel-theme="light
     <div class="quality-ai-fill-status" id="ai-fill-product-status"></div>
   </details>
 
+  <datalist id="ncm-suggestions"></datalist>
   <form method="post" action="/produtos/add" class="row product-add-form" id="add-product-form">
     <div class="field-name">
       <label>Nome interno ERP</label>
@@ -1561,6 +1582,7 @@ html[data-panel-theme="light"] .quality-master-area,html[data-panel-theme="light
         <label>Apelido de busca<input type="text" name="searchAlias" placeholder="Ex.: Película Note 13 Pro"></label>
         <label>SKU<input type="text" name="sku" placeholder="SKU interno"></label>
         <label>Código de barras<input type="text" name="barcode" inputmode="numeric"></label>
+        <label id="add-ncm-field" class="<%= requestedWorkspaceType === 'service' ? 'quality-ncm-service-state' : '' %>">NCM<input type="text" id="add-ncm" name="ncm" class="quality-ncm-input" list="ncm-suggestions" inputmode="numeric" maxlength="10" autocomplete="off" placeholder="0000.00.00" <%= requestedWorkspaceType === 'service' ? 'disabled' : '' %>><small class="quality-edit-help" id="add-ncm-help"><%= requestedWorkspaceType === 'service' ? 'Não se aplica a serviços.' : '8 dígitos. Pontos são opcionais; copiar e colar é permitido.' %></small></label>
         <label>Marca<input type="text" name="brand"></label>
         <label>Categoria ERP
           <select name="erpCategory">
@@ -1858,14 +1880,27 @@ html[data-panel-theme="light"] .quality-master-area,html[data-panel-theme="light
       <div class="quality-control-title">🔎 Busca e filtros</div>
       <div class="quality-search-row">
         <input type="text" id="panel-search-input" value="<%= listState?.query || '' %>" placeholder="Buscar por nome, código, SKU, barras, fornecedor ou slug...">
+        <select id="panel-category-scope" aria-label="Origem da categoria" title="Escolha se o filtro usa a categoria interna do ERP ou a categoria da Loja Virtual">
+          <option value="erp" <%= listState?.categoryScope === 'erp' ? 'selected' : '' %>>Categoria ERP</option>
+          <option value="site" <%= listState?.categoryScope !== 'erp' ? 'selected' : '' %>>Categoria Loja Virtual</option>
+        </select>
         <select id="panel-category-filter">
-          <option value="" <%= !listState?.category ? 'selected' : '' %>>Todas as Categorias</option>
-          <option value="[vitrine]" <%= listState?.category === '[vitrine]' ? 'selected' : '' %>>Início (vitrine)</option>
-          <% (categorias || []).forEach(c => { %>
-            <option value="<%= c.slug %>" <%= listState?.category === c.slug ? 'selected' : '' %>><%= c.name %></option>
-          <% }) %>
+          <% if (listState?.categoryScope === 'erp') { %>
+            <option value="" <%= !listState?.category ? 'selected' : '' %>>Todas as categorias ERP</option>
+            <option value="[sem-categoria]" <%= listState?.category === '[sem-categoria]' ? 'selected' : '' %>>Sem categoria ERP</option>
+            <% (erpCategorias || []).filter(c => c.active !== false).forEach(c => { %>
+              <option value="<%= c.id %>" <%= listState?.category === String(c.id) ? 'selected' : '' %>><%= c.parentId ? '↳ ' : '' %><%= c.name %></option>
+            <% }) %>
+          <% } else { %>
+            <option value="" <%= !listState?.category ? 'selected' : '' %>>Todas as categorias do site</option>
+            <option value="[vitrine]" <%= listState?.category === '[vitrine]' ? 'selected' : '' %>>Início (vitrine)</option>
+            <% (categorias || []).forEach(c => { %>
+              <option value="<%= c.slug %>" <%= listState?.category === c.slug ? 'selected' : '' %>><%= c.name %></option>
+            <% }) %>
+          <% } %>
         </select>
         <button class="btn primary quality-search-button" type="button" id="panel-search-button">🔎 Buscar</button>
+        <button class="btn quality-clear-filters-button" type="button" id="panel-clear-filters" title="Remover busca, categoria, status, estoque e ordenação">✕ Limpar filtros</button>
       </div>
       <div class="quality-filter-status-row quality-filter-status-row-advanced">
         <div class="quality-filter-field"><label for="panel-erp-filter">Status ERP</label><select id="panel-erp-filter"><option value="" <%= !listState?.erpStatus ? 'selected' : '' %>>Todos</option><option value="true" <%= listState?.erpStatus === 'true' ? 'selected' : '' %>>ERP Ativo</option><option value="false" <%= listState?.erpStatus === 'false' ? 'selected' : '' %>>ERP Inativo</option></select></div>
@@ -2053,7 +2088,7 @@ html[data-panel-theme="light"] .quality-master-area,html[data-panel-theme="light
         <% (items || []).forEach((p, idx) => { %>
           <% const hasStockVariations = Array.isArray(p?.variations?.combinations) && p.variations.combinations.length > 0; const stockValue = (p.stock ?? ''); const stockNum = Number(stockValue || 0); const stockClass = stockValue === '' ? 'empty' : (stockNum > 0 ? '' : 'zero'); const stockText = stockValue === '' ? 'Não informado' : (stockNum > 0 ? 'Em estoque' : 'Sem estoque'); %>
           <% const listErpRaw = p?.erp?.active !== undefined ? p.erp.active : p.active; const listErpActive = !['false','0','off','inativo'].includes(String(listErpRaw).toLowerCase()) && listErpRaw !== false; const listLvRaw = p?.virtualStore?.active !== undefined ? p.virtualStore.active : p.active; const listLvActive = !['false','0','off','inativo'].includes(String(listLvRaw).toLowerCase()) && listLvRaw !== false; %>
-          <tr class="product-row <%= !listErpActive ? 'erp-inactive' : '' %> <%= !listLvActive ? 'lv-inactive' : '' %>" data-id="<%= p.id %>" data-erp-active="<%= listErpActive ? 'true' : 'false' %>" data-lv-active="<%= listLvActive ? 'true' : 'false' %>" data-erp-category-type="<%= erpCategoryById.get(String(p?.erp?.categoryId || p?.erp?.category || ''))?.type || 'product' %>" data-stock="<%= Number(stockValue || 0) %>" data-stock-controlled="<%= p?.inventory?.stockControlled === true ? 'true' : 'false' %>">
+          <tr class="product-row <%= !listErpActive ? 'erp-inactive' : '' %> <%= !listLvActive ? 'lv-inactive' : '' %>" data-id="<%= p.id %>" data-erp-active="<%= listErpActive ? 'true' : 'false' %>" data-lv-active="<%= listLvActive ? 'true' : 'false' %>" data-erp-category="<%= p?.erp?.categoryId || p?.erp?.category || '' %>" data-site-category="<%= p?.category || '' %>" data-erp-category-type="<%= erpCategoryById.get(String(p?.erp?.categoryId || p?.erp?.category || ''))?.type || 'product' %>" data-stock="<%= Number(stockValue || 0) %>" data-stock-controlled="<%= p?.inventory?.stockControlled === true ? 'true' : 'false' %>">
             <td data-product-column="select"><input type="checkbox" class="product-check" value="<%= p.id %>"></td>
             <% const displayProductCode = String(p?.erp?.internalCode || p?.internalCode || p.id || '').replace(/\D/g, '') || String(p.id || ''); %>
             <td data-product-column="code"><span class="quality-product-code" title="Código interno <%= displayProductCode %>"><%= displayProductCode %></span></td>
@@ -2066,6 +2101,7 @@ html[data-panel-theme="light"] .quality-master-area,html[data-panel-theme="light
               <input type="hidden" name="supplierCode" value="<%= erpData.supplierCode || '' %>">
               <input type="hidden" name="searchAlias" value="<%= erpData.searchAlias || '' %>">
               <input type="hidden" name="barcode" value="<%= erpData.barcode || '' %>">
+              <input type="hidden" name="ncm" value="<%= (erpData.fiscal && erpData.fiscal.ncm) || erpData.ncm || p.ncm || '' %>">
               <input type="hidden" name="brand" value="<%= erpData.brand || '' %>">
               <input type="hidden" name="unit" value="<%= erpData.unit || 'UN' %>">
               <input type="hidden" name="erpCategory" value="<%= erpData.categoryId || erpData.category || '' %>">
@@ -2431,6 +2467,7 @@ Com marcas de uso">Usados padrão</button></div><div class="quality-var-list" da
           <div class="quality-edit-field"><label>Código interno</label><input type="text" id="edit-internalCode" readonly></div>
           <div class="quality-edit-field"><label>Código do fornecedor</label><input type="text" id="edit-supplierCode"></div>
           <div class="quality-edit-field"><label>Código de barras</label><input type="text" id="edit-barcode"></div>
+          <div class="quality-edit-field" id="edit-ncm-field"><label>NCM</label><input type="text" id="edit-ncm" class="quality-ncm-input" list="ncm-suggestions" inputmode="numeric" maxlength="10" autocomplete="off" placeholder="0000.00.00"><small class="quality-edit-help" id="edit-ncm-help">8 dígitos. Pesquise pelo início do código; o ERP consulta a tabela oficial vigente.</small></div>
           <div class="quality-edit-field"><label>Marca</label><input type="text" id="edit-brand"></div>
           <div class="quality-edit-field"><label>Unidade</label><select id="edit-unit"><option value="UN">UN</option><option value="CX">CX</option><option value="PC">PC</option><option value="KIT">KIT</option><option value="SER">SER</option></select></div>
           <div class="quality-edit-field"><label>Categoria ERP</label><select id="edit-erpCategory"><option value="">Selecione uma categoria...</option><% (erpCategorias || []).filter(c => c.active !== false).forEach(c => { %><option value="<%= c.id %>" data-category-type="<%= c.type || 'product' %>"><%= "— ".repeat(c.depth || 0) %><%= c.name %></option><% }) %></select><small class="quality-edit-help">Uso interno do ERP; independente da Loja Virtual.</small></div>
@@ -2660,6 +2697,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const QUALITY_SUBCATEGORIES = <%- JSON.stringify(subcategorias || []).replace(/</g, '\u003c') %>;
   const QUALITY_CATEGORIES = <%- JSON.stringify(categorias || []).replace(/</g, '\u003c') %>;
+  const QUALITY_ERP_CATEGORIES = <%- JSON.stringify(erpCategorias || []).replace(/</g, '\u003c') %>;
   function refreshSubcategorySelect(categorySelect, preferredValue = '') {
     if (!categorySelect) return;
     const targetId = categorySelect.dataset.subcategoryTarget;
@@ -2759,6 +2797,7 @@ document.addEventListener("DOMContentLoaded", () => {
     sync();
   });
 
+  const categoryScopeFilter = document.getElementById("panel-category-scope");
   const categoryFilter = document.getElementById("panel-category-filter");
   const erpFilter = document.getElementById("panel-erp-filter");
   const lvFilter = document.getElementById("panel-lv-filter");
@@ -2846,6 +2885,57 @@ document.addEventListener("DOMContentLoaded", () => {
       .replace(/[^a-z0-9]+/g, "-")
       .replace(/^-+|-+$/g, "");
   }
+
+  function ncmDigits(value){ return String(value || '').replace(/\D/g, '').slice(0, 8); }
+  function formatNcmInput(value){
+    const digits=ncmDigits(value);
+    if(digits.length<=4)return digits;
+    if(digits.length<=6)return `${digits.slice(0,4)}.${digits.slice(4)}`;
+    return `${digits.slice(0,4)}.${digits.slice(4,6)}.${digits.slice(6,8)}`;
+  }
+  function validateNcmInput(input){
+    if(!input)return true;
+    const digits=ncmDigits(input.value),raw=String(input.value||'').trim();
+    const valid=!raw||(digits.length===8&&digits!=='00000000');
+    input.setCustomValidity(valid?'':'Informe um NCM válido com 8 dígitos. Pontos são opcionais.');
+    return valid;
+  }
+  let ncmLookupTimer=null,ncmLookupSeq=0;
+  async function lookupNcmSuggestions(input){
+    const prefix=ncmDigits(input?.value);
+    const list=document.getElementById('ncm-suggestions');
+    if(!list||prefix.length<2)return;
+    const seq=++ncmLookupSeq;
+    try{
+      const response=await fetch(`/produtos/api/ncm?q=${encodeURIComponent(prefix)}`,{headers:{Accept:'application/json'}});
+      const data=await response.json();
+      if(seq!==ncmLookupSeq||!response.ok||data.success===false)return;
+      list.innerHTML=(data.items||[]).map(item=>{
+        const option=document.createElement('option');
+        option.value=item.formatted||formatNcmInput(item.code);
+        const details=[item.description].filter(Boolean).join(' · ');
+        if(details)option.label=details;
+        return option.outerHTML;
+      }).join('');
+    }catch(_){ }
+  }
+  function bindNcmInput(input){
+    if(!input||input.dataset.ncmBound==='1')return;
+    input.dataset.ncmBound='1';
+    input.addEventListener('input',()=>{
+      const caret=input.selectionStart,inputBefore=input.value;
+      const formatted=formatNcmInput(inputBefore);
+      if(input.value!==formatted)input.value=formatted;
+      validateNcmInput(input);
+      clearTimeout(ncmLookupTimer);
+      if(ncmDigits(input.value).length>=2)ncmLookupTimer=setTimeout(()=>lookupNcmSuggestions(input),220);
+      if(caret!==null&&input===document.activeElement){try{input.setSelectionRange(input.value.length,input.value.length);}catch(_){}}
+    });
+    input.addEventListener('blur',()=>validateNcmInput(input));
+    input.addEventListener('paste',()=>setTimeout(()=>input.dispatchEvent(new Event('input',{bubbles:true})),0));
+    if(input.value)input.value=formatNcmInput(input.value);
+  }
+  document.querySelectorAll('.quality-ncm-input').forEach(bindNcmInput);
 
   function ligarSlugAutomatico(nomeInput, slugInput) {
     if (!nomeInput || !slugInput) return;
@@ -3247,8 +3337,41 @@ document.addEventListener("DOMContentLoaded", () => {
     return queryTokens.every(token => hayTokens.some(hayToken => token.length >= 3 ? hayToken.includes(token) : hayToken.startsWith(token)));
   }
 
+  function resolvedErpCategoryId(rawValue) {
+    const raw = String(rawValue || '');
+    const found = QUALITY_ERP_CATEGORIES.find(category => String(category?.id || '') === raw || String(category?.code || '') === raw);
+    return String(found?.id || '');
+  }
+
+  function refreshPanelCategoryOptions({ resetSelection = false } = {}) {
+    if (!categoryFilter) return;
+    const scope = categoryScopeFilter?.value === 'erp' ? 'erp' : 'site';
+    const previous = resetSelection ? '' : String(categoryFilter.value || '');
+    const fragment = document.createDocumentFragment();
+    const add = (value, label) => {
+      const option = document.createElement('option');
+      option.value = value;
+      option.textContent = label;
+      fragment.appendChild(option);
+    };
+    if (scope === 'erp') {
+      add('', 'Todas as categorias ERP');
+      add('[sem-categoria]', 'Sem categoria ERP');
+      QUALITY_ERP_CATEGORIES.filter(category => category?.active !== false).forEach(category => add(String(category.id || ''), `${category.parentId ? '↳ ' : ''}${category.name || category.code || category.id}`));
+    } else {
+      add('', 'Todas as categorias do site');
+      add('[vitrine]', 'Início (vitrine)');
+      QUALITY_CATEGORIES.forEach(category => add(String(category.slug || ''), category.name || category.slug || 'Categoria'));
+    }
+    categoryFilter.innerHTML = '';
+    categoryFilter.appendChild(fragment);
+    if ([...categoryFilter.options].some(option => option.value === previous)) categoryFilter.value = previous;
+    else categoryFilter.value = '';
+  }
+
   function filterTable() {
     const searchText = searchInput?.value || "";
+    const selectedCategoryScope = categoryScopeFilter?.value === 'erp' ? 'erp' : 'site';
     const selectedCategory = categoryFilter?.value || "";
     const selectedErp = erpFilter?.value || "";
     const selectedLv = lvFilter?.value || "";
@@ -3261,13 +3384,14 @@ document.addEventListener("DOMContentLoaded", () => {
       const searchableSelectors = [
         ".prod-name-input", ".prod-slug-input",
         'input[name="internalCode"]', 'input[name="sku"]',
-        'input[name="barcode"]', 'input[name="supplierCode"]',
+        'input[name="barcode"]', 'input[name="ncm"]', 'input[name="supplierCode"]',
         'input[name="searchAlias"]'
       ];
       const searchHaystack = searchableSelectors
         .map(selector => row.querySelector(selector)?.value || "")
         .join(" ");
-      const productCategory = row.querySelector(".prod-category-select")?.value || "";
+      const productSiteCategory = row.dataset.siteCategory || row.querySelector(".prod-category-select")?.value || "";
+      const productErpCategoryId = resolvedErpCategoryId(row.dataset.erpCategory || row.querySelector('input[name="erpCategory"]')?.value || '');
       const matchesSearch = productSearchMatches(searchHaystack, searchText);
       const matchesErp = !selectedErp || row.dataset.erpActive === selectedErp;
       const matchesLv = !selectedLv || row.dataset.lvActive === selectedLv;
@@ -3288,8 +3412,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
       let matchesCategory = false;
       if (selectedCategory === "") matchesCategory = true;
-      else if (selectedCategory === "[vitrine]") matchesCategory = productCategory === "";
-      else matchesCategory = productCategory === selectedCategory;
+      else if (selectedCategoryScope === 'erp') {
+        if (selectedCategory === '[sem-categoria]') matchesCategory = productErpCategoryId === '';
+        else matchesCategory = productErpCategoryId === selectedCategory;
+      } else if (selectedCategory === "[vitrine]") matchesCategory = productSiteCategory === "";
+      else matchesCategory = productSiteCategory === selectedCategory;
 
       const visible = matchesSearch && matchesCategory && matchesErp && matchesLv && matchesStock;
       row.style.display = visible ? "" : "none";
@@ -3298,6 +3425,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (filteredProductsCount) {
       const serverStateMatches = String(searchText).trim() === String(QUALITY_LIST_STATE.query || '').trim()
+        && selectedCategoryScope === String(QUALITY_LIST_STATE.categoryScope || 'site')
         && selectedCategory === String(QUALITY_LIST_STATE.category || '')
         && selectedErp === String(QUALITY_LIST_STATE.erpStatus || '')
         && selectedLv === String(QUALITY_LIST_STATE.lvStatus || '')
@@ -3570,6 +3698,8 @@ document.addEventListener("DOMContentLoaded", () => {
       params.set('page', '1');
       const setOrDelete = (key, value) => value ? params.set(key, value) : params.delete(key);
       setOrDelete('q', searchInput?.value.trim() || '');
+      if (categoryScopeFilter?.value === 'erp') params.set('categoriaTipo', 'erp');
+      else params.delete('categoriaTipo');
       setOrDelete('categoria', categoryFilter?.value || '');
       setOrDelete('erpStatus', erpFilter?.value || '');
       setOrDelete('lvStatus', lvFilter?.value || '');
@@ -3585,10 +3715,23 @@ document.addEventListener("DOMContentLoaded", () => {
   // Busca manual: nada acontece enquanto o usuário está digitando.
   // Executa apenas ao pressionar Enter ou clicar em Buscar.
   const searchButton = document.getElementById('panel-search-button');
+  const clearFiltersButton = document.getElementById('panel-clear-filters');
+  const clearServerFilters = () => {
+    const params = new URLSearchParams(window.location.search);
+    ['workspace','type','q','categoriaTipo','categoria','erpStatus','lvStatus','stockOp','stockQty','order','page'].forEach(key => params.delete(key));
+    params.set('page','1');
+    // Mantém apenas preferências de navegação/exibição, como origem e quantidade por página.
+    window.location.href = `/produtos?${params.toString()}`;
+  };
   searchInput?.addEventListener("keydown", event => {
     if (event.key === 'Enter') { event.preventDefault(); navigateServerFilteredList(0); }
   });
   searchButton?.addEventListener('click', () => navigateServerFilteredList(0));
+  clearFiltersButton?.addEventListener('click', clearServerFilters);
+  categoryScopeFilter?.addEventListener('change', () => {
+    refreshPanelCategoryOptions({ resetSelection:true });
+    filterTable();
+  });
   categoryFilter?.addEventListener("change", () => { filterTable(); navigateServerFilteredList(0); });
   erpFilter?.addEventListener("change", () => { filterTable(); navigateServerFilteredList(0); });
   lvFilter?.addEventListener("change", () => { filterTable(); navigateServerFilteredList(0); });
@@ -4618,6 +4761,22 @@ document.addEventListener("DOMContentLoaded", () => {
     const isService=selectedErpCategoryType(select)==="service";
     document.getElementById("edit-inventory-config")?.classList.toggle("is-service",isService);
     document.getElementById("edit-stock-variation-box")?.classList.toggle("is-service",isService);
+
+    const ncmInput=document.getElementById("edit-ncm");
+    const ncmField=document.getElementById("edit-ncm-field");
+    const ncmHelp=document.getElementById("edit-ncm-help");
+    if(ncmInput){
+      ncmInput.disabled=isService;
+      if(isService){
+        ncmInput.value='';
+        ncmInput.setCustomValidity('');
+      }
+    }
+    ncmField?.classList.toggle('quality-ncm-service-state',isService);
+    if(ncmHelp) ncmHelp.textContent=isService
+      ? 'Não se aplica a serviços.'
+      : '8 dígitos. Pesquise pelo início do código; o ERP consulta a tabela oficial vigente.';
+
     if(isService){
       const controlled=document.getElementById("edit-stock-controlled");
       const negative=document.getElementById("edit-allow-negative");
@@ -4710,6 +4869,8 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("edit-internalCode").value = getRowField(row, 'input[name="internalCode"]');
     document.getElementById("edit-supplierCode").value = getRowField(row, 'input[name="supplierCode"]');
     document.getElementById("edit-barcode").value = getRowField(row, 'input[name="barcode"]');
+    document.getElementById("edit-ncm").value = formatNcmInput(getRowField(row, 'input[name="ncm"]'));
+    document.getElementById("edit-ncm").dispatchEvent(new Event('input', { bubbles:false }));
     document.getElementById("edit-brand").value = getRowField(row, 'input[name="brand"]');
     document.getElementById("edit-unit").value = getRowField(row, 'input[name="unit"]') || "UN";
     const editErpCategory = document.getElementById("edit-erpCategory");
@@ -4810,6 +4971,7 @@ document.addEventListener("DOMContentLoaded", () => {
     setRowField(row, 'input[name="internalCode"]', document.getElementById("edit-internalCode").value.trim());
     setRowField(row, 'input[name="supplierCode"]', document.getElementById("edit-supplierCode").value.trim());
     setRowField(row, 'input[name="barcode"]', document.getElementById("edit-barcode").value.trim());
+
     setRowField(row, 'input[name="brand"]', document.getElementById("edit-brand").value.trim());
     setRowField(row, 'input[name="unit"]', document.getElementById("edit-unit").value);
     setRowField(row, 'input[name="erpCategory"]', document.getElementById("edit-erpCategory").value.trim());
@@ -4848,6 +5010,7 @@ document.addEventListener("DOMContentLoaded", () => {
     setListValue(row, ".row-related-manual-ids", document.getElementById("edit-related-manual-ids")?.value || "");
     setListValue(row, ".row-cross-sell-ids", document.getElementById("edit-cross-sell-ids")?.value || "");
     const editIsService = syncEditCategoryBehavior();
+    setRowField(row, 'input[name="ncm"]', editIsService ? '' : ncmDigits(document.getElementById("edit-ncm").value));
     row.dataset.erpCategoryType = editIsService ? "service" : selectedErpCategoryType(document.getElementById("edit-erpCategory"));
     const hasVariationStock = parseComboLines(row.querySelector('.row-variation-combinations')?.value || '').length > 0;
     if (!hasVariationStock) setRowField(row, 'input[name="stock"]', document.getElementById("edit-stock").value);
@@ -5067,9 +5230,20 @@ async function sincronizarImagensAuto(force = false) {
   const createInventory=document.getElementById('add-inventory-config');
   const createVariationsTab=document.getElementById('create-variations-tab');
   const createVariationsBox=document.getElementById('add-variations-box');
+  const createNcm=document.getElementById('add-ncm');
+  const createNcmField=document.getElementById('add-ncm-field');
+  const createNcmHelp=document.getElementById('add-ncm-help');
   const syncCreateCategory=()=>{
     const isService=createCategory?.selectedOptions?.[0]?.dataset?.categoryType==='service';
     createInventory?.classList.toggle('is-service',isService);
+    if(createNcm){
+      createNcm.disabled=isService;
+      if(isService){createNcm.value='';createNcm.setCustomValidity('');}
+    }
+    createNcmField?.classList.toggle('quality-ncm-service-state',isService);
+    if(createNcmHelp) createNcmHelp.textContent=isService
+      ? 'Não se aplica a serviços.'
+      : '8 dígitos. Pontos são opcionais; copiar e colar é permitido.';
     if(createVariationsTab) createVariationsTab.hidden=isService;
     if(createVariationsBox) createVariationsBox.hidden=isService;
     if(isService){

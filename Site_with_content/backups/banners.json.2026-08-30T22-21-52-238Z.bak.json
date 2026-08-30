@@ -1,0 +1,25 @@
+{
+  "items": [
+    {
+      "src": "images/banners/1788128442596-desktop-01-smartphones-desktop-1920x560.jpg",
+      "mobileSrc": "images/banners/1788128442601-mobile-01-smartphones-mobile-1366x768.jpg",
+      "title": "",
+      "href": "/smartphones/",
+      "order": 1
+    },
+    {
+      "src": "images/banner3.png",
+      "mobileSrc": "images/banner3-mobile.png",
+      "title": "",
+      "href": "",
+      "order": 2
+    },
+    {
+      "src": "images/Bannerpdesktop.jpg",
+      "mobileSrc": "Banner-sitemobile.jpg",
+      "title": "",
+      "href": "",
+      "order": 3
+    }
+  ]
+}

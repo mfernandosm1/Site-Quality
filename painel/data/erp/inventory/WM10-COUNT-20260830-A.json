@@ -1,0 +1,1050 @@
+{
+  "batchId": "WM10-COUNT-20260830-A",
+  "status": "applied",
+  "countId": "CNT-20260830-0001",
+  "requestedUniqueProducts": 111,
+  "requestedUnits": 190,
+  "queuedUniqueProducts": 110,
+  "queuedUnits": 188,
+  "existingMatched": 9,
+  "importedNew": 101,
+  "skipped": [],
+  "unresolved": [
+    {
+      "suppliedCode": 4780,
+      "qty": 2,
+      "description": "é uma fonte",
+      "wm10Name": "Capa Motorola MOTO G8 POWER LITE ANTI IMPACTO PRETA",
+      "reason": "O código 4780 é uma capa na WM10; a descrição física informa apenas fonte, então não há identificação segura."
+    }
+  ],
+  "corrections": [
+    {
+      "from": 1365,
+      "desc": "G7/G7 Plus preta",
+      "to": 1361
+    },
+    {
+      "from": 1365,
+      "desc": "G7/G7 Plus anti impacto transp",
+      "to": 1363
+    },
+    {
+      "from": 1998,
+      "desc": "E5 Plus anti impacto transp",
+      "to": 1999
+    },
+    {
+      "name": "capa moto x4 preta",
+      "to": 7583
+    },
+    {
+      "name": "capa anti impacto transparente j2 pro",
+      "to": 1870
+    },
+    {
+      "name": "bateria iphone 5g",
+      "to": 3325
+    },
+    {
+      "name": "bateria iphone 6g",
+      "to": 3321
+    }
+  ],
+  "items": [
+    {
+      "code": 1361,
+      "qty": 2,
+      "name": "Capa Motorola  MOTO G7/ G7 PLUS PRETO",
+      "productId": 1788102137069,
+      "productCode": "PRD-866",
+      "inventoryItemId": "PRD-1788102137069",
+      "matchedBy": "new-standalone-import"
+    },
+    {
+      "code": 1363,
+      "qty": 4,
+      "name": "Capa Motorola  MOTO G7/ G7 PLUS ANTI IMPACTO TRANSP",
+      "productId": 1788102085570,
+      "productCode": "PRD-867",
+      "inventoryItemId": "PRD-1788102085570",
+      "matchedBy": "new-standalone-import"
+    },
+    {
+      "code": 1997,
+      "qty": 1,
+      "name": "Capa motorola moto E E5 Plus PRETO",
+      "productId": 1788102891986,
+      "productCode": "PRD-868",
+      "inventoryItemId": "PRD-1788102891986",
+      "matchedBy": "new-standalone-import"
+    },
+    {
+      "code": 1999,
+      "qty": 2,
+      "name": "Capa motorola moto E E5 Plus ANTI IMPACTO TRANSP",
+      "productId": 1788102669139,
+      "productCode": "PRD-869",
+      "inventoryItemId": "PRD-1788102669139",
+      "matchedBy": "new-standalone-import"
+    },
+    {
+      "code": 3906,
+      "qty": 1,
+      "name": "Capa Motorola  MOTO G7 PLAY ANTI IMPACTO TRANSP",
+      "productId": 1788102166724,
+      "productCode": "PRD-870",
+      "inventoryItemId": "PRD-1788102166724",
+      "matchedBy": "new-standalone-import"
+    },
+    {
+      "code": 2013,
+      "qty": 1,
+      "name": "Capa motorola moto E E5 Play PRETO",
+      "productId": 1788102798674,
+      "productCode": "PRD-871",
+      "inventoryItemId": "PRD-1788102798674",
+      "matchedBy": "new-standalone-import"
+    },
+    {
+      "code": 1966,
+      "qty": 4,
+      "name": "Capa motorola moto Z Z3 Play ANTI IMPACTO TRANSP",
+      "productId": 1788102307066,
+      "productCode": "PRD-872",
+      "inventoryItemId": "PRD-1788102307066",
+      "matchedBy": "new-standalone-import"
+    },
+    {
+      "code": 1332,
+      "qty": 1,
+      "name": "Capa Motorola  MOTO G4/ G4 PLUS TRANSPARENTE",
+      "productId": 1788102128784,
+      "productCode": "PRD-873",
+      "inventoryItemId": "PRD-1788102128784",
+      "matchedBy": "new-standalone-import"
+    },
+    {
+      "code": 1336,
+      "qty": 4,
+      "name": "Capa Motorola  MOTO G4/ G4 PLUS FUMÊ",
+      "productId": 1788102211489,
+      "productCode": "PRD-874",
+      "inventoryItemId": "PRD-1788102211489",
+      "matchedBy": "new-standalone-import"
+    },
+    {
+      "code": 1747,
+      "qty": 1,
+      "name": "Capa Motorola Moto Edge Plus ANTI IMPACTO TRANSP",
+      "productId": 1788102258281,
+      "productCode": "PRD-875",
+      "inventoryItemId": "PRD-1788102258281",
+      "matchedBy": "new-standalone-import"
+    },
+    {
+      "code": 7567,
+      "qty": 1,
+      "name": "CAPA MOTO C MOTO C PLUS  ANTI IMPACTO TRANSP",
+      "productId": 1788102153523,
+      "productCode": "PRD-876",
+      "inventoryItemId": "PRD-1788102153523",
+      "matchedBy": "new-standalone-import"
+    },
+    {
+      "code": 1492,
+      "qty": 1,
+      "name": "Capa Motorola MOTO G8 PLAY/ ONE MACRO  ANTI IMPACTO PRETA",
+      "productId": 1788102459570,
+      "productCode": "PRD-877",
+      "inventoryItemId": "PRD-1788102459570",
+      "matchedBy": "new-standalone-import"
+    },
+    {
+      "code": 4324,
+      "qty": 2,
+      "name": "Capa Motorola  MOTO G50 4G ANTI IMPACTO TRANSP",
+      "productId": 1788102684983,
+      "productCode": "PRD-878",
+      "inventoryItemId": "PRD-1788102684983",
+      "matchedBy": "new-standalone-import"
+    },
+    {
+      "code": 1349,
+      "qty": 1,
+      "name": "Capa Motorola  MOTO G6 PLUS PRETO",
+      "productId": 1788102194548,
+      "productCode": "PRD-879",
+      "inventoryItemId": "PRD-1788102194548",
+      "matchedBy": "new-standalone-import"
+    },
+    {
+      "code": 1983,
+      "qty": 1,
+      "name": "Capa motorola moto Z Z2 Play FUMÊ",
+      "productId": 1788102783247,
+      "productCode": "PRD-880",
+      "inventoryItemId": "PRD-1788102783247",
+      "matchedBy": "new-standalone-import"
+    },
+    {
+      "code": 2021,
+      "qty": 1,
+      "name": "Capa motorola moto  C FUMÊ",
+      "productId": 1788102250710,
+      "productCode": "PRD-881",
+      "inventoryItemId": "PRD-1788102250710",
+      "matchedBy": "new-standalone-import"
+    },
+    {
+      "code": 1372,
+      "qty": 2,
+      "name": "Capa Motorola  MOTO G7 POWER FUMÊ",
+      "productId": 1788102072899,
+      "productCode": "PRD-882",
+      "inventoryItemId": "PRD-1788102072899",
+      "matchedBy": "new-standalone-import"
+    },
+    {
+      "code": 4270,
+      "qty": 2,
+      "name": "Capa Motorola  MOTO G 5G ANTI IMPACTO TRANSP",
+      "productId": 1788102702857,
+      "productCode": "PRD-883",
+      "inventoryItemId": "PRD-1788102702857",
+      "matchedBy": "new-standalone-import"
+    },
+    {
+      "code": 7566,
+      "qty": 5,
+      "name": "CAPA MOTO C MOTO C ANTI IMPACTO TRANSP",
+      "productId": 1788102713948,
+      "productCode": "PRD-884",
+      "inventoryItemId": "PRD-1788102713948",
+      "matchedBy": "new-standalone-import"
+    },
+    {
+      "code": 1995,
+      "qty": 1,
+      "name": "Capa motorola moto E E6 Plus ANTI IMPACTO TRANSP",
+      "productId": 1788102585607,
+      "productCode": "PRD-885",
+      "inventoryItemId": "PRD-1788102585607",
+      "matchedBy": "new-standalone-import"
+    },
+    {
+      "code": 4278,
+      "qty": 2,
+      "name": "Capa Motorola  G200 5G ANTI IMPACTO TRANSP",
+      "productId": 1788102007900,
+      "productCode": "PRD-886",
+      "inventoryItemId": "PRD-1788102007900",
+      "matchedBy": "new-standalone-import"
+    },
+    {
+      "code": 2003,
+      "qty": 1,
+      "name": "Capa motorola moto E E6 Play ANTI IMPACTO TRANSP",
+      "productId": 1788102427691,
+      "productCode": "PRD-887",
+      "inventoryItemId": "PRD-1788102427691",
+      "matchedBy": "new-standalone-import"
+    },
+    {
+      "code": 1429,
+      "qty": 1,
+      "name": "Capa Motorola  MOTO G5S PLUS FUMÊ",
+      "productId": 1788102358537,
+      "productCode": "PRD-888",
+      "inventoryItemId": "PRD-1788102358537",
+      "matchedBy": "new-standalone-import"
+    },
+    {
+      "code": 1964,
+      "qty": 1,
+      "name": "Capa motorola moto Z Z3 Play PRETO",
+      "productId": 1788102896046,
+      "productCode": "PRD-889",
+      "inventoryItemId": "PRD-1788102896046",
+      "matchedBy": "new-standalone-import"
+    },
+    {
+      "code": 4267,
+      "qty": 2,
+      "name": "Capa Motorola Moto Edge 20 ANTI IMPACTO TRANSP",
+      "productId": 1786927893064,
+      "productCode": "PRD-510",
+      "inventoryItemId": "PRD-1786927893064",
+      "matchedBy": "migration-product"
+    },
+    {
+      "code": 7583,
+      "qty": 1,
+      "name": "Capa Motorola  X4 PRETO",
+      "productId": 1788102949210,
+      "productCode": "PRD-890",
+      "inventoryItemId": "PRD-1788102949210",
+      "matchedBy": "new-standalone-import"
+    },
+    {
+      "code": 1308,
+      "qty": 1,
+      "name": "Capa motorola linha one MOTO ONE HYPER ANTI IMPACTO TRANSP",
+      "productId": 1788102126941,
+      "productCode": "PRD-891",
+      "inventoryItemId": "PRD-1788102126941",
+      "matchedBy": "new-standalone-import"
+    },
+    {
+      "code": 1313,
+      "qty": 1,
+      "name": "Capa motorola linha one MOTO ONE ZOOM ANTI IMPACTO BRANCO",
+      "productId": 1788102736549,
+      "productCode": "PRD-892",
+      "inventoryItemId": "PRD-1788102736549",
+      "matchedBy": "new-standalone-import"
+    },
+    {
+      "code": 1387,
+      "qty": 1,
+      "name": "Capa Motorola  MOTO G9 PLUS ANTI IMPACTO TRANSP",
+      "productId": 1788102625884,
+      "productCode": "PRD-893",
+      "inventoryItemId": "PRD-1788102625884",
+      "matchedBy": "new-standalone-import"
+    },
+    {
+      "code": 1987,
+      "qty": 1,
+      "name": "Capa motorola moto E E7 Plus ANTI IMPACTO TRANSP",
+      "productId": 1788102847807,
+      "productCode": "PRD-894",
+      "inventoryItemId": "PRD-1788102847807",
+      "matchedBy": "new-standalone-import"
+    },
+    {
+      "code": 1491,
+      "qty": 1,
+      "name": "Capa Motorola MOTO G8 PLAY/ ONE MACRO  ANTI IMPACTO TRANSP",
+      "productId": 1788102629519,
+      "productCode": "PRD-895",
+      "inventoryItemId": "PRD-1788102629519",
+      "matchedBy": "new-standalone-import"
+    },
+    {
+      "code": 4340,
+      "qty": 1,
+      "name": "Capa Motorola  MOTO G52 / G82 5G ANTI IMPACTO TRANSP",
+      "productId": 1787009818340,
+      "productCode": "PRD-792",
+      "inventoryItemId": "PRD-1787009818340",
+      "matchedBy": "migration-product"
+    },
+    {
+      "code": 4770,
+      "qty": 1,
+      "name": "Capa Motorola  MOTO G41 ANTI IMPACTO TRANSP",
+      "productId": 1788102938679,
+      "productCode": "PRD-896",
+      "inventoryItemId": "PRD-1788102938679",
+      "matchedBy": "new-standalone-import"
+    },
+    {
+      "code": 2127,
+      "qty": 3,
+      "name": "Capa samsung A8 2018 ANTI IMPACTO TRANSP",
+      "productId": 1788102456367,
+      "productCode": "PRD-897",
+      "inventoryItemId": "PRD-1788102456367",
+      "matchedBy": "new-standalone-import"
+    },
+    {
+      "code": 1894,
+      "qty": 1,
+      "name": "Capa samsung linha J J5 J500 PRETO",
+      "productId": 1787008683697,
+      "productCode": "PRD-782",
+      "inventoryItemId": "PRD-1787008683697",
+      "matchedBy": "migration-product"
+    },
+    {
+      "code": 1904,
+      "qty": 1,
+      "name": "Capa samsung linha J J7 J700 J7 Neo ANTI IMPACTO TRANSP",
+      "productId": 1788102959537,
+      "productCode": "PRD-898",
+      "inventoryItemId": "PRD-1788102959537",
+      "matchedBy": "new-standalone-import"
+    },
+    {
+      "code": 1902,
+      "qty": 4,
+      "name": "Capa samsung linha J J7 J700 J7 Neo PRETO",
+      "productId": 1788102897839,
+      "productCode": "PRD-899",
+      "inventoryItemId": "PRD-1788102897839",
+      "matchedBy": "new-standalone-import"
+    },
+    {
+      "code": 7021,
+      "qty": 1,
+      "name": "Capa samsung M20 TRANSPARENTE",
+      "productId": 1788102118479,
+      "productCode": "PRD-900",
+      "inventoryItemId": "PRD-1788102118479",
+      "matchedBy": "new-standalone-import"
+    },
+    {
+      "code": 930,
+      "qty": 4,
+      "name": "Capa samsung A01 CORE ANTI IMPACTO TRANSP",
+      "productId": 1788102288578,
+      "productCode": "PRD-901",
+      "inventoryItemId": "PRD-1788102288578",
+      "matchedBy": "new-standalone-import"
+    },
+    {
+      "code": 1870,
+      "qty": 2,
+      "name": "Capa samsung linha J J2 Pro 2018 ANTI IMPACTO TRANSP",
+      "productId": 1788102328724,
+      "productCode": "PRD-902",
+      "inventoryItemId": "PRD-1788102328724",
+      "matchedBy": "new-standalone-import"
+    },
+    {
+      "code": 1022,
+      "qty": 1,
+      "name": "Capa samsung linha S S7 PRETO",
+      "productId": 1788102256334,
+      "productCode": "PRD-903",
+      "inventoryItemId": "PRD-1788102256334",
+      "matchedBy": "new-standalone-import"
+    },
+    {
+      "code": 1025,
+      "qty": 2,
+      "name": "Capa samsung linha S S8 PRETO",
+      "productId": 1788102445760,
+      "productCode": "PRD-904",
+      "inventoryItemId": "PRD-1788102445760",
+      "matchedBy": "new-standalone-import"
+    },
+    {
+      "code": 7001,
+      "qty": 1,
+      "name": "Capa samsung M31 TRANSPARENTE",
+      "productId": 1788102109763,
+      "productCode": "PRD-905",
+      "inventoryItemId": "PRD-1788102109763",
+      "matchedBy": "new-standalone-import"
+    },
+    {
+      "code": 994,
+      "qty": 1,
+      "name": "Capa samsung A90 ANTI IMPACTO TRANSP",
+      "productId": 1787009123647,
+      "productCode": "PRD-788",
+      "inventoryItemId": "PRD-1787009123647",
+      "matchedBy": "migration-product"
+    },
+    {
+      "code": 1862,
+      "qty": 1,
+      "name": "Capa samsung linha J J2 J200 PRETO",
+      "productId": 1788102663936,
+      "productCode": "PRD-906",
+      "inventoryItemId": "PRD-1788102663936",
+      "matchedBy": "new-standalone-import"
+    },
+    {
+      "code": 998,
+      "qty": 3,
+      "name": "Capa samsung A41 ANTI IMPACTO TRANSP",
+      "productId": 1788102794880,
+      "productCode": "PRD-907",
+      "inventoryItemId": "PRD-1788102794880",
+      "matchedBy": "new-standalone-import"
+    },
+    {
+      "code": 7010,
+      "qty": 1,
+      "name": "Capa samsung M30 S PRETO",
+      "productId": 1788102581387,
+      "productCode": "PRD-908",
+      "inventoryItemId": "PRD-1788102581387",
+      "matchedBy": "new-standalone-import"
+    },
+    {
+      "code": 1019,
+      "qty": 3,
+      "name": "Capa samsung linha S S9 ANTI IMPACTO TRANSP",
+      "productId": 1788102872865,
+      "productCode": "PRD-909",
+      "inventoryItemId": "PRD-1788102872865",
+      "matchedBy": "new-standalone-import"
+    },
+    {
+      "code": 986,
+      "qty": 1,
+      "name": "Capa samsung A60 ANTI IMPACTO TRANSP",
+      "productId": 1788102805636,
+      "productCode": "PRD-910",
+      "inventoryItemId": "PRD-1788102805636",
+      "matchedBy": "new-standalone-import"
+    },
+    {
+      "code": 995,
+      "qty": 1,
+      "name": "Capa samsung A40 PRETO",
+      "productId": 1788102572221,
+      "productCode": "PRD-911",
+      "inventoryItemId": "PRD-1788102572221",
+      "matchedBy": "new-standalone-import"
+    },
+    {
+      "code": 984,
+      "qty": 3,
+      "name": "Capa samsung A42 5G ANTI IMPACTO TRANSP",
+      "productId": 1788102925554,
+      "productCode": "PRD-912",
+      "inventoryItemId": "PRD-1788102925554",
+      "matchedBy": "new-standalone-import"
+    },
+    {
+      "code": 1887,
+      "qty": 1,
+      "name": "Capa samsung linha J J4 Plus / J4 Core ANTI IMPACTO TRANSP",
+      "productId": 1788102340091,
+      "productCode": "PRD-913",
+      "inventoryItemId": "PRD-1788102340091",
+      "matchedBy": "new-standalone-import"
+    },
+    {
+      "code": 1279,
+      "qty": 1,
+      "name": "Capa Samsung linha Note NOTE 10 ANTI IMPACTO TRANSP",
+      "productId": 1788102645160,
+      "productCode": "PRD-914",
+      "inventoryItemId": "PRD-1788102645160",
+      "matchedBy": "new-standalone-import"
+    },
+    {
+      "code": 2139,
+      "qty": 1,
+      "name": "Capa samsung A7 2018 ANTI IMPACTO TRANSP",
+      "productId": 1788102721458,
+      "productCode": "PRD-915",
+      "inventoryItemId": "PRD-1788102721458",
+      "matchedBy": "new-standalone-import"
+    },
+    {
+      "code": 996,
+      "qty": 1,
+      "name": "Capa samsung A40 ANTI IMPACTO TRANSP",
+      "productId": 1788102636242,
+      "productCode": "PRD-916",
+      "inventoryItemId": "PRD-1788102636242",
+      "matchedBy": "new-standalone-import"
+    },
+    {
+      "code": 1036,
+      "qty": 1,
+      "name": "Capa samsung linha S S20 PLUS ANTI IMPACTO TRANSP",
+      "productId": 1786964571738,
+      "productCode": "PRD-589",
+      "inventoryItemId": "PRD-1786964571738",
+      "matchedBy": "migration-product"
+    },
+    {
+      "code": 3431,
+      "qty": 1,
+      "name": "Capa samsung M21 M21S ANTI IMPACTO TRANSP",
+      "productId": 1788102890378,
+      "productCode": "PRD-917",
+      "inventoryItemId": "PRD-1788102890378",
+      "matchedBy": "new-standalone-import"
+    },
+    {
+      "code": 938,
+      "qty": 3,
+      "name": "Capa samsung A2 CORE ANTI IMPACTO TRANSP",
+      "productId": 1788102058358,
+      "productCode": "PRD-918",
+      "inventoryItemId": "PRD-1788102058358",
+      "matchedBy": "new-standalone-import"
+    },
+    {
+      "code": 2663,
+      "qty": 3,
+      "name": "Capa samsung  A32 5G ANTI IMPACTO TRANSP",
+      "productId": 1788102612845,
+      "productCode": "PRD-919",
+      "inventoryItemId": "PRD-1788102612845",
+      "matchedBy": "new-standalone-import"
+    },
+    {
+      "code": 1028,
+      "qty": 3,
+      "name": "Capa samsung linha S S8 PLUS PRETO",
+      "productId": 1788102209222,
+      "productCode": "PRD-920",
+      "inventoryItemId": "PRD-1788102209222",
+      "matchedBy": "new-standalone-import"
+    },
+    {
+      "code": 2111,
+      "qty": 1,
+      "name": "Capa samsung A5 2017 PRETO",
+      "productId": 1788102451884,
+      "productCode": "PRD-921",
+      "inventoryItemId": "PRD-1788102451884",
+      "matchedBy": "new-standalone-import"
+    },
+    {
+      "code": 2109,
+      "qty": 2,
+      "name": "Capa samsung A9 2018 ANTI IMPACTO TRANSP",
+      "productId": 1788102486472,
+      "productCode": "PRD-922",
+      "inventoryItemId": "PRD-1788102486472",
+      "matchedBy": "new-standalone-import"
+    },
+    {
+      "code": 2108,
+      "qty": 1,
+      "name": "Capa samsung A9 2018 PRETO",
+      "productId": 1788102261284,
+      "productCode": "PRD-923",
+      "inventoryItemId": "PRD-1788102261284",
+      "matchedBy": "new-standalone-import"
+    },
+    {
+      "code": 2138,
+      "qty": 1,
+      "name": "Capa samsung A7 2018 PRETO",
+      "productId": 1788102706236,
+      "productCode": "PRD-924",
+      "inventoryItemId": "PRD-1788102706236",
+      "matchedBy": "new-standalone-import"
+    },
+    {
+      "code": 1281,
+      "qty": 1,
+      "name": "Capa Samsung linha Note NOTE 10 PLUS ANTI IMPACTO TRANSP",
+      "productId": 1788102077232,
+      "productCode": "PRD-925",
+      "inventoryItemId": "PRD-1788102077232",
+      "matchedBy": "new-standalone-import"
+    },
+    {
+      "code": 2372,
+      "qty": 1,
+      "name": "Capa samsung linha J J5 Pro ANTI IMPACTO TRANSP",
+      "productId": 1788102709543,
+      "productCode": "PRD-926",
+      "inventoryItemId": "PRD-1788102709543",
+      "matchedBy": "new-standalone-import"
+    },
+    {
+      "code": 990,
+      "qty": 1,
+      "name": "Capa samsung A70 ANTI IMPACTO TRANSP",
+      "productId": 1788102106489,
+      "productCode": "PRD-927",
+      "inventoryItemId": "PRD-1788102106489",
+      "matchedBy": "new-standalone-import"
+    },
+    {
+      "code": 4512,
+      "qty": 1,
+      "name": "Capa samsung linha S S11 E PRETO",
+      "productId": 1786964540201,
+      "productCode": "PRD-601",
+      "inventoryItemId": "PRD-1786964540201",
+      "matchedBy": "migration-product"
+    },
+    {
+      "code": 2389,
+      "qty": 1,
+      "name": "Capa case samsung note 8  PRETO",
+      "productId": 1788102140843,
+      "productCode": "PRD-928",
+      "inventoryItemId": "PRD-1788102140843",
+      "matchedBy": "new-standalone-import"
+    },
+    {
+      "code": 2590,
+      "qty": 1,
+      "name": "Capa samsung A72 ANTI IMPACTO TRANSP",
+      "productId": 1787008662591,
+      "productCode": "PRD-781",
+      "inventoryItemId": "PRD-1787008662591",
+      "matchedBy": "migration-product"
+    },
+    {
+      "code": 2126,
+      "qty": 2,
+      "name": "Capa samsung A8 2018 PRETO",
+      "productId": 1788102510327,
+      "productCode": "PRD-929",
+      "inventoryItemId": "PRD-1788102510327",
+      "matchedBy": "new-standalone-import"
+    },
+    {
+      "code": 2124,
+      "qty": 1,
+      "name": "Capa samsung A8 2018 PLUS ANTI IMPACTO TRANSP",
+      "productId": 1788102605464,
+      "productCode": "PRD-930",
+      "inventoryItemId": "PRD-1788102605464",
+      "matchedBy": "new-standalone-import"
+    },
+    {
+      "code": 7244,
+      "qty": 1,
+      "name": "Capa CASE Samsung A01 CORE PRETO",
+      "productId": 1788102292847,
+      "productCode": "PRD-931",
+      "inventoryItemId": "PRD-1788102292847",
+      "matchedBy": "new-standalone-import"
+    },
+    {
+      "code": 1283,
+      "qty": 2,
+      "name": "Capa Samsung linha Note NOTE 20 PLUS ANTI IMPACTO TRANSP",
+      "productId": 1788102211097,
+      "productCode": "PRD-932",
+      "inventoryItemId": "PRD-1788102211097",
+      "matchedBy": "new-standalone-import"
+    },
+    {
+      "code": 7022,
+      "qty": 1,
+      "name": "Capa samsung M20 ANTI IMPACTO TRANSP",
+      "productId": 1788102443031,
+      "productCode": "PRD-933",
+      "inventoryItemId": "PRD-1788102443031",
+      "matchedBy": "new-standalone-import"
+    },
+    {
+      "code": 1017,
+      "qty": 2,
+      "name": "Capa samsung linha S S9 Plus PRETO",
+      "productId": 1788102080647,
+      "productCode": "PRD-934",
+      "inventoryItemId": "PRD-1788102080647",
+      "matchedBy": "new-standalone-import"
+    },
+    {
+      "code": 1338,
+      "qty": 1,
+      "name": "Capa Motorola  MOTO G4 PLAY TRANSPARENTE",
+      "productId": 1788102754779,
+      "productCode": "PRD-935",
+      "inventoryItemId": "PRD-1788102754779",
+      "matchedBy": "new-standalone-import"
+    },
+    {
+      "code": 1350,
+      "qty": 1,
+      "name": "Capa Motorola  MOTO G6 PLUS TRANSPARENTE",
+      "productId": 1788102690085,
+      "productCode": "PRD-936",
+      "inventoryItemId": "PRD-1788102690085",
+      "matchedBy": "new-standalone-import"
+    },
+    {
+      "code": 1427,
+      "qty": 1,
+      "name": "Capa Motorola  MOTO G5S PLUS ANTI IMPACTO TRANSP",
+      "productId": 1788102525587,
+      "productCode": "PRD-937",
+      "inventoryItemId": "PRD-1788102525587",
+      "matchedBy": "new-standalone-import"
+    },
+    {
+      "code": 2009,
+      "qty": 2,
+      "name": "Capa motorola moto E E3 PRETO",
+      "productId": 1788102859955,
+      "productCode": "PRD-938",
+      "inventoryItemId": "PRD-1788102859955",
+      "matchedBy": "new-standalone-import"
+    },
+    {
+      "code": 1973,
+      "qty": 1,
+      "name": "Capa motorola moto Z Z Play TRANSPARENTE",
+      "productId": 1788102273481,
+      "productCode": "PRD-939",
+      "inventoryItemId": "PRD-1788102273481",
+      "matchedBy": "new-standalone-import"
+    },
+    {
+      "code": 1968,
+      "qty": 2,
+      "name": "Capa motorola moto Z Z PRETO",
+      "productId": 1788102305450,
+      "productCode": "PRD-940",
+      "inventoryItemId": "PRD-1788102305450",
+      "matchedBy": "new-standalone-import"
+    },
+    {
+      "code": 1204,
+      "qty": 3,
+      "name": "Capa Xiaomi Redmi MI 8 MI 8 PRO ANTI IMPACTO TRANSP",
+      "productId": 1788102421625,
+      "productCode": "PRD-941",
+      "inventoryItemId": "PRD-1788102421625",
+      "matchedBy": "new-standalone-import"
+    },
+    {
+      "code": 1221,
+      "qty": 1,
+      "name": "Capa Xiaomi Redmi Note 8 Pro PRETO",
+      "productId": 1788102092658,
+      "productCode": "PRD-942",
+      "inventoryItemId": "PRD-1788102092658",
+      "matchedBy": "new-standalone-import"
+    },
+    {
+      "code": 1152,
+      "qty": 2,
+      "name": "Capa Xiaomi Redmi MI 9 ANTI IMPACTO TRANSP",
+      "productId": 1788102932233,
+      "productCode": "PRD-943",
+      "inventoryItemId": "PRD-1788102932233",
+      "matchedBy": "new-standalone-import"
+    },
+    {
+      "code": 1234,
+      "qty": 2,
+      "name": "Capa Xiaomi Redmi REDMI K20 REDMI 9T PRETO",
+      "productId": 1788102495390,
+      "productCode": "PRD-944",
+      "inventoryItemId": "PRD-1788102495390",
+      "matchedBy": "new-standalone-import"
+    },
+    {
+      "code": 1233,
+      "qty": 1,
+      "name": "Capa Xiaomi Redmi REDMI GO PRETO",
+      "productId": 1788102000038,
+      "productCode": "PRD-945",
+      "inventoryItemId": "PRD-1788102000038",
+      "matchedBy": "new-standalone-import"
+    },
+    {
+      "code": 1162,
+      "qty": 3,
+      "name": "Capa Xiaomi Redmi NOTE 9 4G FUMÊ",
+      "productId": 1788102164303,
+      "productCode": "PRD-946",
+      "inventoryItemId": "PRD-1788102164303",
+      "matchedBy": "new-standalone-import"
+    },
+    {
+      "code": 1180,
+      "qty": 1,
+      "name": "Capa Xiaomi Redmi REDMI 7A ANTI IMPACTO TRANSP",
+      "productId": 1788102859918,
+      "productCode": "PRD-947",
+      "inventoryItemId": "PRD-1788102859918",
+      "matchedBy": "new-standalone-import"
+    },
+    {
+      "code": 1134,
+      "qty": 1,
+      "name": "Capa Xiaomi Redmi Note 7/Note 7 Pro ANTI IMPACTO TRANSP",
+      "productId": 1788102623068,
+      "productCode": "PRD-948",
+      "inventoryItemId": "PRD-1788102623068",
+      "matchedBy": "new-standalone-import"
+    },
+    {
+      "code": 5212,
+      "qty": 1,
+      "name": "Capa Xiaomi Redmi REDMI 10A ANTI IMPACTO TRANSP",
+      "productId": 1788102061073,
+      "productCode": "PRD-949",
+      "inventoryItemId": "PRD-1788102061073",
+      "matchedBy": "new-standalone-import"
+    },
+    {
+      "code": 1188,
+      "qty": 1,
+      "name": "Capa Xiaomi Redmi REDMI 9 ANTI IMPACTO TRANSP",
+      "productId": 1787011114111,
+      "productCode": "PRD-819",
+      "inventoryItemId": "PRD-1787011114111",
+      "matchedBy": "migration-product"
+    },
+    {
+      "code": 1237,
+      "qty": 1,
+      "name": "Capa Xiaomi Redmi REDMI 6 PRO PRETO",
+      "productId": 1788102895067,
+      "productCode": "PRD-950",
+      "inventoryItemId": "PRD-1788102895067",
+      "matchedBy": "new-standalone-import"
+    },
+    {
+      "code": 3319,
+      "qty": 7,
+      "name": "Bateria Apple IPHONE 8",
+      "productId": 1788102008474,
+      "productCode": "PRD-951",
+      "inventoryItemId": "PRD-1788102008474",
+      "matchedBy": "new-standalone-import"
+    },
+    {
+      "code": 3323,
+      "qty": 5,
+      "name": "Bateria Apple IPHONE 7",
+      "productId": 1786498681877,
+      "productCode": "PRD-228",
+      "inventoryItemId": "PRD-1786498681877",
+      "matchedBy": "migration-product"
+    },
+    {
+      "code": 3321,
+      "qty": 3,
+      "name": "Bateria Apple IPHONE 6",
+      "productId": 1788102164917,
+      "productCode": "PRD-952",
+      "inventoryItemId": "PRD-1788102164917",
+      "matchedBy": "new-standalone-import"
+    },
+    {
+      "code": 4480,
+      "qty": 2,
+      "name": "Tela frontal Apple iPhone 6S Plus 1ª LINHA PRETO",
+      "productId": 1788102448632,
+      "productCode": "PRD-953",
+      "inventoryItemId": "PRD-1788102448632",
+      "matchedBy": "new-standalone-import"
+    },
+    {
+      "code": 4455,
+      "qty": 3,
+      "name": "Tela frontal Apple iPhone 7G 1ª LINHA BRANCO",
+      "productId": 1788102872960,
+      "productCode": "PRD-954",
+      "inventoryItemId": "PRD-1788102872960",
+      "matchedBy": "new-standalone-import"
+    },
+    {
+      "code": 4470,
+      "qty": 1,
+      "name": "Tela frontal Apple iPhone 6S 1ª LINHA PRETO",
+      "productId": 1788102585121,
+      "productCode": "PRD-955",
+      "inventoryItemId": "PRD-1788102585121",
+      "matchedBy": "new-standalone-import"
+    },
+    {
+      "code": 3325,
+      "qty": 1,
+      "name": "Bateria Apple IPHONE 5",
+      "productId": 1788102883066,
+      "productCode": "PRD-956",
+      "inventoryItemId": "PRD-1788102883066",
+      "matchedBy": "new-standalone-import"
+    },
+    {
+      "code": 4479,
+      "qty": 1,
+      "name": "Tela frontal Apple iPhone 6S Plus 1ª LINHA BRANCO",
+      "productId": 1788102834738,
+      "productCode": "PRD-957",
+      "inventoryItemId": "PRD-1788102834738",
+      "matchedBy": "new-standalone-import"
+    },
+    {
+      "code": 3327,
+      "qty": 1,
+      "name": "Bateria Apple IPHONE 6 PLUS",
+      "productId": 1788102508428,
+      "productCode": "PRD-958",
+      "inventoryItemId": "PRD-1788102508428",
+      "matchedBy": "new-standalone-import"
+    },
+    {
+      "code": 3600,
+      "qty": 3,
+      "name": "Tela frontal Apple iPhone 8 / SE 1ª LINHA BRANCO",
+      "productId": 1788102949825,
+      "productCode": "PRD-959",
+      "inventoryItemId": "PRD-1788102949825",
+      "matchedBy": "new-standalone-import"
+    },
+    {
+      "code": 4458,
+      "qty": 2,
+      "name": "Tela frontal Apple iPhone 6G 1ª LINHA BRANCO",
+      "productId": 1788102907270,
+      "productCode": "PRD-960",
+      "inventoryItemId": "PRD-1788102907270",
+      "matchedBy": "new-standalone-import"
+    },
+    {
+      "code": 4474,
+      "qty": 2,
+      "name": "Tela frontal Apple iPhone 5G 1ª LINHA BRANCO",
+      "productId": 1788102876597,
+      "productCode": "PRD-961",
+      "inventoryItemId": "PRD-1788102876597",
+      "matchedBy": "new-standalone-import"
+    },
+    {
+      "code": 4472,
+      "qty": 1,
+      "name": "Tela frontal Apple iPhone 5S 1ª LINHA BRANCO",
+      "productId": 1788102856111,
+      "productCode": "PRD-962",
+      "inventoryItemId": "PRD-1788102856111",
+      "matchedBy": "new-standalone-import"
+    },
+    {
+      "code": 1880,
+      "qty": 3,
+      "name": "Capa samsung linha J J4 J400 ANTI IMPACTO TRANSP",
+      "productId": 1788102896910,
+      "productCode": "PRD-963",
+      "inventoryItemId": "PRD-1788102896910",
+      "matchedBy": "new-standalone-import"
+    },
+    {
+      "code": 1878,
+      "qty": 3,
+      "name": "Capa samsung linha J J4 J400 PRETO",
+      "productId": 1788102533924,
+      "productCode": "PRD-964",
+      "inventoryItemId": "PRD-1788102533924",
+      "matchedBy": "new-standalone-import"
+    },
+    {
+      "code": 8855,
+      "qty": 1,
+      "name": "Capa Iphone 15 BRANCO",
+      "productId": 1788102011068,
+      "productCode": "PRD-965",
+      "inventoryItemId": "PRD-1788102011068",
+      "matchedBy": "new-standalone-import"
+    },
+    {
+      "code": 1868,
+      "qty": 2,
+      "name": "Capa samsung linha J J2 Pro 2018 PRETO",
+      "productId": 1788102399696,
+      "productCode": "PRD-966",
+      "inventoryItemId": "PRD-1788102399696",
+      "matchedBy": "new-standalone-import"
+    }
+  ],
+  "startedAt": "2026-08-30T14:59:47.115Z",
+  "finishedAt": "2026-08-30T14:59:50.039Z",
+  "productsBackup": "C:\\Site\\painel\\data\\erp\\products\\backups\\manual-count-20260830\\products-before-WM10-COUNT-20260830-A-1788101987125.json",
+  "unresolvedUnits": 2
+}
