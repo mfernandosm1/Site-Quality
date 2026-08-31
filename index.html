@@ -414,15 +414,18 @@
           ? `<p>R$ ${(Number(p.price) || 0).toFixed(2).replace('.', ',')}</p>`
           : '';
 
+        const detailUrl = `/produto/${encodeURIComponent(p.slug || p.id)}/`;
         const detalhesHTML = (p.detailsEnabled || hasGallery(p))
-          ? `<a href="/produto/${encodeURIComponent(p.slug || p.id)}/" class="btn btn-details">Ver detalhes</a>`
+          ? `<a href="${detailUrl}" class="btn btn-details">Ver detalhes</a>`
           : '';
 
         card.innerHTML = `
           <div class="quality-card-image-wrap">
             ${qualityProductActionsHtml(p, `/produto/${encodeURIComponent(p.slug || p.id)}/`)}
             ${productTagsHtml(p, 2)}
+            ${(p.detailsEnabled || hasGallery(p)) ? `<a class="quality-card-image-link" href="${detailUrl}" aria-label="Ver detalhes de ${escapeHtml(p.name || 'produto')}">` : ''}
             <img src="${escapeHtml(productImagePath(p.image || 'images/sem-imagem.png'))}" alt="${escapeHtml(p.name || '')}">
+            ${(p.detailsEnabled || hasGallery(p)) ? `</a>` : ''}
           </div>
           <h3>${escapeHtml(p.name || '')}</h3>
           ${productVariationsCardHtml(p)}
