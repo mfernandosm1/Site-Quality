@@ -1888,3 +1888,27 @@ body.quality-favorites-open { overflow: hidden; }
   line-height:1;
   font-weight:900;
 }
+
+/* V8.2.2.6 - Clique seguro em Ver detalhes e imagem do produto */
+.produto-card .btn-details,
+.product-card .btn-details,
+#produtos-container .btn-details,
+.produtos-container .btn-details,
+.carousel-track .btn-details {
+  position: relative !important;
+  z-index: 30 !important;
+  pointer-events: auto !important;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.produto-card .quality-card-image-wrap > img,
+.product-card .quality-card-image-wrap > img,
+.produto-card > img,
+.product-card > img {
+  cursor: pointer;
+  pointer-events: auto !important;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+
