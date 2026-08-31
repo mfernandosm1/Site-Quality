@@ -1912,3 +1912,34 @@ body.quality-favorites-open { overflow: hidden; }
   -webkit-tap-highlight-color: transparent;
 }
 
+
+
+/* V8.2.2.7 - Link nativo na imagem do card (mobile + desktop)
+   A imagem usa o mesmo destino do botão Ver detalhes. */
+.produto-card .quality-card-image-link,
+.product-card .quality-card-image-link {
+  display: block !important;
+  position: relative !important;
+  z-index: 1 !important;
+  width: 100%;
+  text-decoration: none !important;
+  cursor: pointer;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.produto-card .quality-card-image-link > img,
+.product-card .quality-card-image-link > img {
+  display: block !important;
+  width: 100%;
+  cursor: pointer;
+  pointer-events: auto !important;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Favoritar/compartilhar continuam acima do link da foto. */
+.produto-card .quality-card-image-wrap .quality-card-actions,
+.product-card .quality-card-image-wrap .quality-card-actions {
+  z-index: 40 !important;
+}
