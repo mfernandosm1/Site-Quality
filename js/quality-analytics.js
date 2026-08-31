@@ -1,6 +1,6 @@
 (function(){
-  if(window.__qualitySiteAnalyticsV2) return;
-  window.__qualitySiteAnalyticsV2 = true;
+  if(window.__qualitySiteAnalyticsV3) return;
+  window.__qualitySiteAnalyticsV3 = true;
 
   var ENDPOINT = 'https://script.google.com/macros/s/AKfycbwZQ01q5u5lRqE3Hk-nMutkTWcLA8r7127sO3Dt132Ti8L0Ci7DWoOyby5v92T_WY34/exec';
   var KEY = 'quality-analytics-v1';
@@ -8,8 +8,10 @@
   function clean(v, max){ return String(v == null ? '' : v).trim().slice(0, max || 300); }
   function deviceName(){ return /Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent || '') ? 'mobile' : 'desktop'; }
   function currentProductSlug(){
-    var m = String(window.location.pathname || '').match(//produto/([^/?#]+)/i);
-    return m ? decodeURIComponent(m[1]) : '';
+    var m = String(window.location.pathname || '').match(/\/produto\/([^/?#]+)/i);
+    if(m) return decodeURIComponent(m[1]);
+    try { return clean(new URLSearchParams(window.location.search).get('slug') || new URLSearchParams(window.location.search).get('id') || '',120); }
+    catch(e){ return ''; }
   }
   function productFromButton(btn){
     return {
@@ -20,15 +22,15 @@
       url: clean(btn.getAttribute('data-url') || window.location.href,300)
     };
   }
-  function productFromPageFallback(slug){
+  function productFromPage(slug){
     var h1 = document.querySelector('h1');
-    var name = clean(h1 && h1.textContent || document.title.replace(/s*[–|-]s*Quality Celulares.*$/i,'') || slug, 140);
-    var img = document.querySelector('.product-main-image img, .product-image img, main img');
+    var name = clean((h1 && h1.textContent) || document.title.replace(/\s*[–|-]\s*Quality Celulares.*$/i,'') || slug, 140);
+    var img = document.querySelector('.product-main-image img, .product-image img, .main-image img, main img');
     return {
       id: '',
       slug: clean(slug,120),
       name: name || clean(slug,140),
-      image: clean(img && img.getAttribute('src') || '',260),
+      image: clean(img && (img.currentSrc || img.getAttribute('src')) || '',260),
       url: clean(window.location.href,300)
     };
   }
@@ -44,13 +46,15 @@
       term: clean(payload.term || payload.query || '',100)
     };
   }
-  function directPost(type, payload){
+  function buildBody(type, payload){
     var data = normalizePayload(type, payload);
     var product = data.product || {};
     var category = data.category || {};
-    var body = JSON.stringify({
+    var iso = new Date().toISOString();
+    return JSON.stringify({
       key:KEY, action:'track', type:type, event:type, Evento:type,
-      at:new Date().toISOString(), Data:new Date().toISOString(),
+      at:iso, Data:iso,
+      eventId:'qa-' + Date.now() + '-' + Math.random().toString(36).slice(2,10),
       product:data.product || undefined,
       slug:clean(product.slug || product.id || '',120),
       name:clean(product.name || '',140),
@@ -67,24 +71,55 @@
       viewport:String(window.innerWidth || 0) + 'x' + String(window.innerHeight || 0),
       Viewport:String(window.innerWidth || 0) + 'x' + String(window.innerHeight || 0)
     });
+  }
+  function postAppsScript(body){
+    // Apps Script responde por redirecionamento. fetch/no-cors lida com isso de
+    // forma mais confiável que sendBeacon, que podia aceitar a fila e perder o POST.
     try {
-      if(navigator.sendBeacon){
-        var blob = new Blob([body], {type:'text/plain;charset=UTF-8'});
-        if(navigator.sendBeacon(ENDPOINT, blob)) return true;
-      }
-    } catch(e){}
+      return fetch(ENDPOINT, {
+        method:'POST',
+        mode:'no-cors',
+        credentials:'omit',
+        redirect:'follow',
+        cache:'no-store',
+        keepalive:true,
+        headers:{'Content-Type':'text/plain;charset=UTF-8'},
+        body:body
+      }).then(function(){ return true; }).catch(function(){ return false; });
+    } catch(e){ return Promise.resolve(false); }
+  }
+  function postLocalhost(type, payload){
+    if(!/^(localhost|127\.0\.0\.1)$/i.test(window.location.hostname || '')) return;
     try {
-      fetch(ENDPOINT, {method:'POST', mode:'no-cors', keepalive:true, headers:{'Content-Type':'text/plain;charset=UTF-8'}, body:body});
-      return true;
+      var data = normalizePayload(type,payload);
+      fetch('/analytics/track', {
+        method:'POST',
+        credentials:'same-origin',
+        keepalive:true,
+        headers:{'Content-Type':'application/json'},
+        body:JSON.stringify({
+          type:type,
+          product:data.product || undefined,
+          category:data.category || undefined,
+          term:data.term,
+          url:window.location.href,
+          referrer:document.referrer || '',
+          device:deviceName(),
+          language:navigator.language || '',
+          viewport:String(window.innerWidth || 0) + 'x' + String(window.innerHeight || 0)
+        })
+      }).catch(function(){});
     } catch(e){}
-    return false;
   }
   function track(type, payload){
+    type = clean(type,40);
     if(!type) return false;
-    return directPost(clean(type,40), payload || {});
+    var body = buildBody(type, payload || {});
+    postAppsScript(body);
+    postLocalhost(type, payload || {});
+    return true;
   }
 
-  // Compatibilidade com os nomes já usados em outras partes do site.
   window.qualityAnalyticsTrack = track;
   window.QualityAnalyticsTrack = track;
   window.QualityAnalytics = window.QualityAnalytics || {};
@@ -103,33 +138,18 @@
   }
 
   function trackPageAndProduct(){
-    // Uma abertura real de página deve gerar exatamente um page_view por carregamento.
-    track('page_view', {});
+    if(!window.__qualityPageViewTrackedV3){
+      window.__qualityPageViewTrackedV3 = true;
+      track('page_view', {});
+    }
 
     var slug = currentProductSlug();
-    if(!slug || window.__qualityProductViewTrackedV2) return;
-    window.__qualityProductViewTrackedV2 = true;
+    if(!slug || window.__qualityProductViewTrackedV3) return;
+    window.__qualityProductViewTrackedV3 = true;
 
-    var fallback = productFromPageFallback(slug);
-    try {
-      fetch('/content/products.json?qa=' + Date.now(), {cache:'no-store'})
-        .then(function(r){ if(!r.ok) throw new Error('products'); return r.json(); })
-        .then(function(data){
-          var items = Array.isArray(data) ? data : (Array.isArray(data && data.items) ? data.items : []);
-          var found = items.find(function(p){ return String(p && (p.slug || p.id) || '') === slug; });
-          if(!found){ track('product_view', {product:fallback}); return; }
-          track('product_view', {product:{
-            id: clean(found.id || found.code || '',120),
-            slug: clean(found.slug || slug,120),
-            name: clean((found.virtualStore && found.virtualStore.name) || found.name || fallback.name,140),
-            image: clean(found.image || fallback.image,260),
-            url: clean(window.location.href,300)
-          }});
-        })
-        .catch(function(){ track('product_view', {product:fallback}); });
-    } catch(e){
-      track('product_view', {product:fallback});
-    }
+    // Não espera products.json. A própria página já possui nome, slug e imagem.
+    // Assim product_view é disparado imediatamente em desktop e mobile.
+    track('product_view', {product:productFromPage(slug)});
   }
 
   document.addEventListener('click', function(ev){
