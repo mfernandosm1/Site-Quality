@@ -662,7 +662,10 @@ export default class PayablesService {
       return {
         paymentMethodId:method.id,
         paymentMethodName:method.name,
-        commerceMethodId:commerceMethod?.id||method.name,
+        // Preserve o ID financeiro como fallback. Usar o nome (ex.: "Boleto")
+        // fazia o Caixa tratar a forma como desconhecida quando o catálogo
+        // comercial ainda não estava sincronizado.
+        commerceMethodId:commerceMethod?.id||method.id||method.name,
         debitCash,
         value:amount(row.value)
       };

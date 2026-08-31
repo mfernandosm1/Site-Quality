@@ -1,6 +1,6 @@
 {
   "version": "0.13.3",
-  "nextNumber": 102,
+  "nextNumber": 107,
   "items": [
     {
       "id": "OP-1785809443011-M9VYO",
@@ -31436,6 +31436,1197 @@
       "receivableIds": [],
       "walletEntryIds": [],
       "finalizedAt": "2026-08-29T18:35:35.921Z",
+      "finalizedBy": "Matheus Fernando"
+    },
+    {
+      "id": "OP-1788174510779-6XYU4",
+      "number": 102,
+      "type": "service_order",
+      "status": "open",
+      "version": 2,
+      "createdAt": "2026-08-31T11:08:30.779Z",
+      "createdBy": "Matheus Fernando",
+      "dates": {
+        "openedAt": "2026-08-31T11:08:30.779Z",
+        "updatedAt": "2026-08-31T11:08:55.386Z",
+        "finalizedAt": null,
+        "cancelledAt": null,
+        "reversedAt": null
+      },
+      "operationalStatus": "in_service",
+      "financialStatus": "not_started",
+      "timeline": [
+        {
+          "id": "EVT-1788174510779-KUNDA",
+          "type": "created",
+          "label": "Operação criada",
+          "at": "2026-08-31T11:08:30.779Z",
+          "actor": "Matheus Fernando"
+        },
+        {
+          "id": "EVT-1788174535386-G29GW",
+          "type": "updated",
+          "label": "Operação atualizada: Tipo, Status personalizado, Dados da O.S.",
+          "at": "2026-08-31T11:08:55.386Z",
+          "actor": "Matheus Fernando",
+          "details": {
+            "version": 2
+          }
+        }
+      ],
+      "audit": [
+        {
+          "id": "EVT-1788174510779-KUNDA",
+          "type": "created",
+          "label": "Operação criada",
+          "at": "2026-08-31T11:08:30.779Z",
+          "actor": "Matheus Fernando"
+        },
+        {
+          "id": "EVT-1788174535386-G29GW",
+          "type": "updated",
+          "label": "Operação atualizada: Tipo, Status personalizado, Dados da O.S.",
+          "at": "2026-08-31T11:08:55.386Z",
+          "actor": "Matheus Fernando",
+          "details": {
+            "version": 2
+          }
+        }
+      ],
+      "snapshot": null,
+      "fiscal": {
+        "status": "none",
+        "documentId": null,
+        "updatedAt": null
+      },
+      "links": {
+        "originalOperationId": null,
+        "originalItemId": null,
+        "exchangeIds": [],
+        "returnIds": [],
+        "warrantyIds": []
+      },
+      "customerId": "CLI-1785697143069-RZVC1",
+      "customerNameSnapshot": "Marcos Paulo da Silva",
+      "identifier": "",
+      "sellerId": "USR-d15976b1-a734-459f-8957-b9f42bc39ea2",
+      "sellerNameSnapshot": "Matheus Fernando",
+      "customStatusId": "on-counter",
+      "customStatusName": "Na bancada",
+      "notes": "",
+      "details": "",
+      "serviceOrder": {
+        "device": "Iphone 11",
+        "equipmentId": "",
+        "issue": "Celular não liga, nenhum sinal de carregamento.",
+        "technicianId": "USR-d15976b1-a734-459f-8957-b9f42bc39ea2",
+        "technicianName": "Matheus Fernando",
+        "servicePerformed": "",
+        "accessories": "",
+        "checkin": {
+          "notes": "",
+          "items": []
+        },
+        "checkout": {
+          "notes": "",
+          "items": [],
+          "customerChecked": false,
+          "accessoriesChecked": false,
+          "guidanceReceived": false
+        },
+        "attachments": [],
+        "unlockPatterns": [
+          [],
+          []
+        ],
+        "unlockPattern": []
+      },
+      "coupon": null,
+      "freight": {
+        "payer": "none",
+        "carrierId": "",
+        "carrierName": "",
+        "freightAmount": 0,
+        "insuranceAmount": 0,
+        "otherExpensesAmount": 0,
+        "volumeQuantity": 0,
+        "species": "",
+        "brand": "",
+        "netWeight": 0,
+        "grossWeight": 0
+      },
+      "freightTotal": 0,
+      "cashboxId": "caixa-principal",
+      "items": [],
+      "payments": [],
+      "subtotal": 0,
+      "itemDiscountTotal": 0,
+      "couponDiscount": 0,
+      "discountTotal": 0,
+      "total": 0,
+      "amountPaid": 0,
+      "amountPending": 0,
+      "change": 0,
+      "updatedAt": "2026-08-31T11:08:55.386Z",
+      "updatedBy": "Matheus Fernando"
+    },
+    {
+      "id": "OP-1788177265679-VD730",
+      "number": 103,
+      "type": "sale",
+      "status": "finalized",
+      "version": 4,
+      "createdAt": "2026-08-31T11:54:25.678Z",
+      "createdBy": "Matheus Fernando",
+      "dates": {
+        "openedAt": "2026-08-31T11:54:25.678Z",
+        "updatedAt": "2026-08-31T12:07:04.717Z",
+        "finalizedAt": "2026-08-31T12:07:04.717Z",
+        "cancelledAt": null,
+        "reversedAt": null
+      },
+      "operationalStatus": "completed",
+      "financialStatus": "paid",
+      "timeline": [
+        {
+          "id": "EVT-1788177265679-OIL09",
+          "type": "created",
+          "label": "Operação criada",
+          "at": "2026-08-31T11:54:25.679Z",
+          "actor": "Matheus Fernando"
+        },
+        {
+          "id": "EVT-1788178024448-WCUKR",
+          "type": "updated",
+          "label": "Operação atualizada: Cliente, Status personalizado, Itens, Pagamentos, Dados da O.S.",
+          "at": "2026-08-31T12:07:04.448Z",
+          "actor": "Matheus Fernando",
+          "details": {
+            "version": 2
+          }
+        },
+        {
+          "id": "EVT-1788178024695-XO7JB",
+          "type": "posted",
+          "label": "Estoque e caixa processados",
+          "at": "2026-08-31T12:07:04.695Z",
+          "actor": "Matheus Fernando"
+        },
+        {
+          "id": "EVT-1788178024717-NPC5H",
+          "type": "finalized",
+          "label": "Operação finalizada com pagamento integral",
+          "at": "2026-08-31T12:07:04.717Z",
+          "actor": "Matheus Fernando",
+          "details": {
+            "status": "finalized",
+            "financialStatus": "paid",
+            "total": 53,
+            "amountPaid": 53,
+            "change": 0
+          }
+        }
+      ],
+      "audit": [
+        {
+          "id": "EVT-1788177265679-OIL09",
+          "type": "created",
+          "label": "Operação criada",
+          "at": "2026-08-31T11:54:25.679Z",
+          "actor": "Matheus Fernando"
+        },
+        {
+          "id": "EVT-1788178024448-WCUKR",
+          "type": "updated",
+          "label": "Operação atualizada: Cliente, Status personalizado, Itens, Pagamentos, Dados da O.S.",
+          "at": "2026-08-31T12:07:04.448Z",
+          "actor": "Matheus Fernando",
+          "details": {
+            "version": 2
+          }
+        },
+        {
+          "id": "EVT-1788178024695-XO7JB",
+          "type": "posted",
+          "label": "Estoque e caixa processados",
+          "at": "2026-08-31T12:07:04.695Z",
+          "actor": "Matheus Fernando"
+        },
+        {
+          "id": "EVT-1788178024717-NPC5H",
+          "type": "finalized",
+          "label": "Operação finalizada com pagamento integral",
+          "at": "2026-08-31T12:07:04.717Z",
+          "actor": "Matheus Fernando",
+          "details": {
+            "status": "finalized",
+            "financialStatus": "paid",
+            "total": 53,
+            "amountPaid": 53,
+            "change": 0
+          }
+        }
+      ],
+      "snapshot": {
+        "createdAt": "2026-08-31T12:07:04.717Z",
+        "customer": {
+          "id": "CLI-1788178006603-S20T8",
+          "name": "Carina de Oliveira Stumm",
+          "identifier": ""
+        },
+        "seller": {
+          "id": "",
+          "name": ""
+        },
+        "items": [
+          {
+            "id": "OPI-1788178024447-YR86L",
+            "productId": "PRD-1786321595898",
+            "inventoryItemId": "PRD-1786321595898",
+            "code": "PRD-118",
+            "sku": "R9984PRE",
+            "name": "Cabo Tipo C 1m Turbo KD-28C Kaidi - Preto",
+            "quantity": 1,
+            "unitPrice": 53,
+            "unitCost": 6.24,
+            "discount": 0,
+            "discountMode": "amount",
+            "discountPercent": 0,
+            "verified": false,
+            "sellerId": "",
+            "sellerNameSnapshot": "",
+            "stockControlled": true,
+            "allowNegative": false
+          }
+        ],
+        "payments": [
+          {
+            "id": "PAY-1788178024447-9D4GK",
+            "methodId": "PAY-80aa64db-9fbf-404e-91cc-5a788c4b2880",
+            "methodName": "Pix outros",
+            "amount": 53,
+            "installments": 1,
+            "dueDate": "",
+            "dueDates": [],
+            "installmentAmounts": [],
+            "status": "paid",
+            "notes": ""
+          }
+        ],
+        "serviceOrder": {
+          "device": "",
+          "equipmentId": "",
+          "issue": "",
+          "technicianId": "",
+          "technicianName": "",
+          "servicePerformed": "",
+          "accessories": "",
+          "checkin": {
+            "notes": "",
+            "items": []
+          },
+          "checkout": {
+            "notes": "",
+            "items": [],
+            "customerChecked": false,
+            "accessoriesChecked": false,
+            "guidanceReceived": false
+          },
+          "attachments": [],
+          "unlockPatterns": [
+            [],
+            []
+          ],
+          "unlockPattern": []
+        },
+        "freight": {
+          "payer": "none",
+          "carrierId": "",
+          "carrierName": "",
+          "freightAmount": 0,
+          "insuranceAmount": 0,
+          "otherExpensesAmount": 0,
+          "volumeQuantity": 0,
+          "species": "",
+          "brand": "",
+          "netWeight": 0,
+          "grossWeight": 0
+        },
+        "totals": {
+          "subtotal": 53,
+          "itemDiscountTotal": 0,
+          "couponDiscount": 0,
+          "discountTotal": 0,
+          "freightTotal": 0,
+          "total": 53,
+          "amountPaid": 53,
+          "amountPending": 0,
+          "change": 0
+        }
+      },
+      "fiscal": {
+        "status": "none",
+        "documentId": null,
+        "updatedAt": null
+      },
+      "links": {
+        "originalOperationId": null,
+        "originalItemId": null,
+        "exchangeIds": [],
+        "returnIds": [],
+        "warrantyIds": []
+      },
+      "customerId": "CLI-1788178006603-S20T8",
+      "customerNameSnapshot": "Carina de Oliveira Stumm",
+      "identifier": "",
+      "sellerId": "",
+      "sellerNameSnapshot": "",
+      "customStatusId": "sale-delivered",
+      "customStatusName": "VENDA ENTREGUE",
+      "notes": "",
+      "details": "",
+      "serviceOrder": {
+        "device": "",
+        "equipmentId": "",
+        "issue": "",
+        "technicianId": "",
+        "technicianName": "",
+        "servicePerformed": "",
+        "accessories": "",
+        "checkin": {
+          "notes": "",
+          "items": []
+        },
+        "checkout": {
+          "notes": "",
+          "items": [],
+          "customerChecked": false,
+          "accessoriesChecked": false,
+          "guidanceReceived": false
+        },
+        "attachments": [],
+        "unlockPatterns": [
+          [],
+          []
+        ],
+        "unlockPattern": []
+      },
+      "coupon": null,
+      "freight": {
+        "payer": "none",
+        "carrierId": "",
+        "carrierName": "",
+        "freightAmount": 0,
+        "insuranceAmount": 0,
+        "otherExpensesAmount": 0,
+        "volumeQuantity": 0,
+        "species": "",
+        "brand": "",
+        "netWeight": 0,
+        "grossWeight": 0
+      },
+      "freightTotal": 0,
+      "cashboxId": "caixa-principal",
+      "items": [
+        {
+          "id": "OPI-1788178024447-YR86L",
+          "productId": "PRD-1786321595898",
+          "inventoryItemId": "PRD-1786321595898",
+          "code": "PRD-118",
+          "sku": "R9984PRE",
+          "name": "Cabo Tipo C 1m Turbo KD-28C Kaidi - Preto",
+          "quantity": 1,
+          "unitPrice": 53,
+          "unitCost": 6.24,
+          "discount": 0,
+          "discountMode": "amount",
+          "discountPercent": 0,
+          "verified": false,
+          "sellerId": "",
+          "sellerNameSnapshot": "",
+          "stockControlled": true,
+          "allowNegative": false
+        }
+      ],
+      "payments": [
+        {
+          "id": "PAY-1788178024447-9D4GK",
+          "methodId": "PAY-80aa64db-9fbf-404e-91cc-5a788c4b2880",
+          "methodName": "Pix outros",
+          "amount": 53,
+          "installments": 1,
+          "dueDate": "",
+          "dueDates": [],
+          "installmentAmounts": [],
+          "status": "paid",
+          "notes": ""
+        }
+      ],
+      "subtotal": 53,
+      "itemDiscountTotal": 0,
+      "couponDiscount": 0,
+      "discountTotal": 0,
+      "total": 53,
+      "amountPaid": 53,
+      "amountPending": 0,
+      "change": 0,
+      "updatedAt": "2026-08-31T12:07:04.717Z",
+      "updatedBy": "Matheus Fernando",
+      "inventoryPostedAt": "2026-08-31T12:07:04.694Z",
+      "cashPostedAt": "2026-08-31T12:07:04.694Z",
+      "receivableIds": [],
+      "walletEntryIds": [],
+      "finalizedAt": "2026-08-31T12:07:04.717Z",
+      "finalizedBy": "Matheus Fernando"
+    },
+    {
+      "id": "OP-1788195023786-VQRZ0",
+      "number": 104,
+      "type": "sale",
+      "status": "finalized",
+      "version": 5,
+      "createdAt": "2026-08-31T16:50:23.786Z",
+      "createdBy": "Matheus Fernando",
+      "dates": {
+        "openedAt": "2026-08-31T16:50:23.786Z",
+        "updatedAt": "2026-08-31T16:52:50.229Z",
+        "finalizedAt": "2026-08-31T16:52:50.229Z",
+        "cancelledAt": null,
+        "reversedAt": null
+      },
+      "operationalStatus": "completed",
+      "financialStatus": "paid",
+      "timeline": [
+        {
+          "id": "EVT-1788195023787-SU2SO",
+          "type": "created",
+          "label": "Operação criada",
+          "at": "2026-08-31T16:50:23.787Z",
+          "actor": "Matheus Fernando"
+        },
+        {
+          "id": "EVT-1788195163307-E4832",
+          "type": "updated",
+          "label": "Operação atualizada: Itens, Pagamentos",
+          "at": "2026-08-31T16:52:43.307Z",
+          "actor": "Matheus Fernando",
+          "details": {
+            "version": 2
+          }
+        },
+        {
+          "id": "EVT-1788195169941-9TB4B",
+          "type": "updated",
+          "label": "Operação atualizada: Itens, Pagamentos",
+          "at": "2026-08-31T16:52:49.941Z",
+          "actor": "Matheus Fernando",
+          "details": {
+            "version": 3
+          }
+        },
+        {
+          "id": "EVT-1788195170210-BGH5I",
+          "type": "posted",
+          "label": "Estoque e caixa processados",
+          "at": "2026-08-31T16:52:50.210Z",
+          "actor": "Matheus Fernando"
+        },
+        {
+          "id": "EVT-1788195170229-KCOT8",
+          "type": "finalized",
+          "label": "Operação finalizada com pagamento integral",
+          "at": "2026-08-31T16:52:50.229Z",
+          "actor": "Matheus Fernando",
+          "details": {
+            "status": "finalized",
+            "financialStatus": "paid",
+            "total": 3150,
+            "amountPaid": 3150,
+            "change": 0
+          }
+        }
+      ],
+      "audit": [
+        {
+          "id": "EVT-1788195023787-SU2SO",
+          "type": "created",
+          "label": "Operação criada",
+          "at": "2026-08-31T16:50:23.787Z",
+          "actor": "Matheus Fernando"
+        },
+        {
+          "id": "EVT-1788195163307-E4832",
+          "type": "updated",
+          "label": "Operação atualizada: Itens, Pagamentos",
+          "at": "2026-08-31T16:52:43.307Z",
+          "actor": "Matheus Fernando",
+          "details": {
+            "version": 2
+          }
+        },
+        {
+          "id": "EVT-1788195169941-9TB4B",
+          "type": "updated",
+          "label": "Operação atualizada: Itens, Pagamentos",
+          "at": "2026-08-31T16:52:49.941Z",
+          "actor": "Matheus Fernando",
+          "details": {
+            "version": 3
+          }
+        },
+        {
+          "id": "EVT-1788195170210-BGH5I",
+          "type": "posted",
+          "label": "Estoque e caixa processados",
+          "at": "2026-08-31T16:52:50.210Z",
+          "actor": "Matheus Fernando"
+        },
+        {
+          "id": "EVT-1788195170229-KCOT8",
+          "type": "finalized",
+          "label": "Operação finalizada com pagamento integral",
+          "at": "2026-08-31T16:52:50.229Z",
+          "actor": "Matheus Fernando",
+          "details": {
+            "status": "finalized",
+            "financialStatus": "paid",
+            "total": 3150,
+            "amountPaid": 3150,
+            "change": 0
+          }
+        }
+      ],
+      "snapshot": {
+        "createdAt": "2026-08-31T16:52:50.229Z",
+        "customer": {
+          "id": "CLI-1785697143069-RZVC1",
+          "name": "Marcos Paulo da Silva",
+          "identifier": ""
+        },
+        "seller": {
+          "id": "USR-d15976b1-a734-459f-8957-b9f42bc39ea2",
+          "name": "Matheus Fernando"
+        },
+        "items": [
+          {
+            "id": "OPI-1788195169941-FII6K",
+            "productId": "1787533246369",
+            "inventoryItemId": "VAR-1787533246369-1",
+            "code": "PRD-834",
+            "sku": "PRD-834",
+            "name": "iPhone 15 256GB Usado · Preto",
+            "quantity": 1,
+            "unitPrice": 3729.99,
+            "unitCost": 2900,
+            "discount": 579.99,
+            "discountMode": "amount",
+            "discountPercent": 15.5494,
+            "verified": false,
+            "sellerId": "USR-d15976b1-a734-459f-8957-b9f42bc39ea2",
+            "sellerNameSnapshot": "Matheus Fernando",
+            "stockControlled": true,
+            "allowNegative": false
+          }
+        ],
+        "payments": [
+          {
+            "id": "PAY-1788195169941-9ZCNJ",
+            "methodId": "PM-DINHEIRO",
+            "methodName": "Dinheiro",
+            "amount": 3150,
+            "installments": 1,
+            "dueDate": "",
+            "dueDates": [],
+            "installmentAmounts": [],
+            "status": "paid",
+            "notes": ""
+          }
+        ],
+        "serviceOrder": {
+          "device": "",
+          "equipmentId": "",
+          "issue": "",
+          "technicianId": "",
+          "technicianName": "",
+          "servicePerformed": "",
+          "accessories": "",
+          "checkin": {
+            "notes": "",
+            "items": []
+          },
+          "checkout": {
+            "notes": "",
+            "items": [],
+            "customerChecked": false,
+            "accessoriesChecked": false,
+            "guidanceReceived": false
+          },
+          "attachments": [],
+          "unlockPatterns": [
+            [],
+            []
+          ],
+          "unlockPattern": []
+        },
+        "freight": {
+          "payer": "none",
+          "carrierId": "",
+          "carrierName": "",
+          "freightAmount": 0,
+          "insuranceAmount": 0,
+          "otherExpensesAmount": 0,
+          "volumeQuantity": 0,
+          "species": "",
+          "brand": "",
+          "netWeight": 0,
+          "grossWeight": 0
+        },
+        "totals": {
+          "subtotal": 3729.99,
+          "itemDiscountTotal": 579.99,
+          "couponDiscount": 0,
+          "discountTotal": 579.99,
+          "freightTotal": 0,
+          "total": 3150,
+          "amountPaid": 3150,
+          "amountPending": 0,
+          "change": 0
+        }
+      },
+      "fiscal": {
+        "status": "none",
+        "documentId": null,
+        "updatedAt": null
+      },
+      "links": {
+        "originalOperationId": null,
+        "originalItemId": null,
+        "exchangeIds": [],
+        "returnIds": [],
+        "warrantyIds": []
+      },
+      "customerId": "CLI-1785697143069-RZVC1",
+      "customerNameSnapshot": "Marcos Paulo da Silva",
+      "identifier": "",
+      "sellerId": "USR-d15976b1-a734-459f-8957-b9f42bc39ea2",
+      "sellerNameSnapshot": "Matheus Fernando",
+      "customStatusId": "sale-delivered",
+      "customStatusName": "VENDA ENTREGUE",
+      "notes": "",
+      "details": "",
+      "serviceOrder": {
+        "device": "",
+        "equipmentId": "",
+        "issue": "",
+        "technicianId": "",
+        "technicianName": "",
+        "servicePerformed": "",
+        "accessories": "",
+        "checkin": {
+          "notes": "",
+          "items": []
+        },
+        "checkout": {
+          "notes": "",
+          "items": [],
+          "customerChecked": false,
+          "accessoriesChecked": false,
+          "guidanceReceived": false
+        },
+        "attachments": [],
+        "unlockPatterns": [
+          [],
+          []
+        ],
+        "unlockPattern": []
+      },
+      "coupon": null,
+      "freight": {
+        "payer": "none",
+        "carrierId": "",
+        "carrierName": "",
+        "freightAmount": 0,
+        "insuranceAmount": 0,
+        "otherExpensesAmount": 0,
+        "volumeQuantity": 0,
+        "species": "",
+        "brand": "",
+        "netWeight": 0,
+        "grossWeight": 0
+      },
+      "freightTotal": 0,
+      "cashboxId": "caixa-principal",
+      "items": [
+        {
+          "id": "OPI-1788195169941-FII6K",
+          "productId": "1787533246369",
+          "inventoryItemId": "VAR-1787533246369-1",
+          "code": "PRD-834",
+          "sku": "PRD-834",
+          "name": "iPhone 15 256GB Usado · Preto",
+          "quantity": 1,
+          "unitPrice": 3729.99,
+          "unitCost": 2900,
+          "discount": 579.99,
+          "discountMode": "amount",
+          "discountPercent": 15.5494,
+          "verified": false,
+          "sellerId": "USR-d15976b1-a734-459f-8957-b9f42bc39ea2",
+          "sellerNameSnapshot": "Matheus Fernando",
+          "stockControlled": true,
+          "allowNegative": false
+        }
+      ],
+      "payments": [
+        {
+          "id": "PAY-1788195169941-9ZCNJ",
+          "methodId": "PM-DINHEIRO",
+          "methodName": "Dinheiro",
+          "amount": 3150,
+          "installments": 1,
+          "dueDate": "",
+          "dueDates": [],
+          "installmentAmounts": [],
+          "status": "paid",
+          "notes": ""
+        }
+      ],
+      "subtotal": 3729.99,
+      "itemDiscountTotal": 579.99,
+      "couponDiscount": 0,
+      "discountTotal": 579.99,
+      "total": 3150,
+      "amountPaid": 3150,
+      "amountPending": 0,
+      "change": 0,
+      "updatedAt": "2026-08-31T16:52:50.229Z",
+      "updatedBy": "Matheus Fernando",
+      "inventoryPostedAt": "2026-08-31T16:52:50.209Z",
+      "cashPostedAt": "2026-08-31T16:52:50.209Z",
+      "receivableIds": [],
+      "walletEntryIds": [],
+      "finalizedAt": "2026-08-31T16:52:50.229Z",
+      "finalizedBy": "Matheus Fernando"
+    },
+    {
+      "id": "OP-1788199531939-BGXPN",
+      "number": 105,
+      "type": "service_order",
+      "status": "open",
+      "version": 2,
+      "createdAt": "2026-08-31T18:05:31.939Z",
+      "createdBy": "Matheus Fernando",
+      "dates": {
+        "openedAt": "2026-08-31T18:05:31.939Z",
+        "updatedAt": "2026-08-31T18:05:41.672Z",
+        "finalizedAt": null,
+        "cancelledAt": null,
+        "reversedAt": null
+      },
+      "operationalStatus": "in_service",
+      "financialStatus": "not_started",
+      "timeline": [
+        {
+          "id": "EVT-1788199531939-3UX8H",
+          "type": "created",
+          "label": "Operação criada",
+          "at": "2026-08-31T18:05:31.939Z",
+          "actor": "Matheus Fernando"
+        },
+        {
+          "id": "EVT-1788199541672-GANSD",
+          "type": "updated",
+          "label": "Operação atualizada: Dados da O.S.",
+          "at": "2026-08-31T18:05:41.672Z",
+          "actor": "Matheus Fernando",
+          "details": {
+            "version": 2
+          }
+        }
+      ],
+      "audit": [
+        {
+          "id": "EVT-1788199531939-3UX8H",
+          "type": "created",
+          "label": "Operação criada",
+          "at": "2026-08-31T18:05:31.939Z",
+          "actor": "Matheus Fernando"
+        },
+        {
+          "id": "EVT-1788199541672-GANSD",
+          "type": "updated",
+          "label": "Operação atualizada: Dados da O.S.",
+          "at": "2026-08-31T18:05:41.672Z",
+          "actor": "Matheus Fernando",
+          "details": {
+            "version": 2
+          }
+        }
+      ],
+      "snapshot": null,
+      "fiscal": {
+        "status": "none",
+        "documentId": null,
+        "updatedAt": null
+      },
+      "links": {
+        "originalOperationId": null,
+        "originalItemId": null,
+        "exchangeIds": [],
+        "returnIds": [],
+        "warrantyIds": []
+      },
+      "customerId": "CLI-1785697236814-YOFY5",
+      "customerNameSnapshot": "Rodrigo Schneider",
+      "identifier": "",
+      "sellerId": "USR-d15976b1-a734-459f-8957-b9f42bc39ea2",
+      "sellerNameSnapshot": "Matheus Fernando",
+      "customStatusId": "on-counter",
+      "customStatusName": "Na bancada",
+      "notes": "",
+      "details": "",
+      "serviceOrder": {
+        "device": "Xiaomi Poco x3 pro ",
+        "equipmentId": "",
+        "issue": "celular não liga e não carrega",
+        "technicianId": "USR-d15976b1-a734-459f-8957-b9f42bc39ea2",
+        "technicianName": "Matheus Fernando",
+        "servicePerformed": "",
+        "accessories": "",
+        "checkin": {
+          "notes": "",
+          "items": []
+        },
+        "checkout": {
+          "notes": "",
+          "items": [],
+          "customerChecked": false,
+          "accessoriesChecked": false,
+          "guidanceReceived": false
+        },
+        "attachments": [],
+        "unlockPatterns": [
+          [],
+          []
+        ],
+        "unlockPattern": []
+      },
+      "coupon": null,
+      "freight": {
+        "payer": "none",
+        "carrierId": "",
+        "carrierName": "",
+        "freightAmount": 0,
+        "insuranceAmount": 0,
+        "otherExpensesAmount": 0,
+        "volumeQuantity": 0,
+        "species": "",
+        "brand": "",
+        "netWeight": 0,
+        "grossWeight": 0
+      },
+      "freightTotal": 0,
+      "cashboxId": "caixa-principal",
+      "items": [],
+      "payments": [],
+      "subtotal": 0,
+      "itemDiscountTotal": 0,
+      "couponDiscount": 0,
+      "discountTotal": 0,
+      "total": 0,
+      "amountPaid": 0,
+      "amountPending": 0,
+      "change": 0,
+      "updatedAt": "2026-08-31T18:05:41.672Z",
+      "updatedBy": "Matheus Fernando"
+    },
+    {
+      "id": "OP-1788200382134-JBJ76",
+      "number": 106,
+      "type": "sale",
+      "status": "finalized",
+      "version": 3,
+      "createdAt": "2026-08-31T18:19:42.134Z",
+      "createdBy": "Matheus Fernando",
+      "dates": {
+        "openedAt": "2026-08-31T18:19:42.134Z",
+        "updatedAt": "2026-08-31T18:19:42.387Z",
+        "finalizedAt": "2026-08-31T18:19:42.387Z",
+        "cancelledAt": null,
+        "reversedAt": null
+      },
+      "operationalStatus": "completed",
+      "financialStatus": "paid",
+      "timeline": [
+        {
+          "id": "EVT-1788200382134-RJ6AB",
+          "type": "created",
+          "label": "Operação criada",
+          "at": "2026-08-31T18:19:42.134Z",
+          "actor": "Matheus Fernando"
+        },
+        {
+          "id": "EVT-1788200382367-OAB2M",
+          "type": "posted",
+          "label": "Estoque e caixa processados",
+          "at": "2026-08-31T18:19:42.367Z",
+          "actor": "Matheus Fernando"
+        },
+        {
+          "id": "EVT-1788200382387-Y2KIO",
+          "type": "finalized",
+          "label": "Operação finalizada com pagamento integral",
+          "at": "2026-08-31T18:19:42.387Z",
+          "actor": "Matheus Fernando",
+          "details": {
+            "status": "finalized",
+            "financialStatus": "paid",
+            "total": 2241.6,
+            "amountPaid": 2241.6,
+            "change": 0
+          }
+        }
+      ],
+      "audit": [
+        {
+          "id": "EVT-1788200382134-RJ6AB",
+          "type": "created",
+          "label": "Operação criada",
+          "at": "2026-08-31T18:19:42.134Z",
+          "actor": "Matheus Fernando"
+        },
+        {
+          "id": "EVT-1788200382367-OAB2M",
+          "type": "posted",
+          "label": "Estoque e caixa processados",
+          "at": "2026-08-31T18:19:42.367Z",
+          "actor": "Matheus Fernando"
+        },
+        {
+          "id": "EVT-1788200382387-Y2KIO",
+          "type": "finalized",
+          "label": "Operação finalizada com pagamento integral",
+          "at": "2026-08-31T18:19:42.387Z",
+          "actor": "Matheus Fernando",
+          "details": {
+            "status": "finalized",
+            "financialStatus": "paid",
+            "total": 2241.6,
+            "amountPaid": 2241.6,
+            "change": 0
+          }
+        }
+      ],
+      "snapshot": {
+        "createdAt": "2026-08-31T18:19:42.387Z",
+        "customer": {
+          "id": "CLI-1785697236814-YOFY5",
+          "name": "Rodrigo Schneider",
+          "identifier": ""
+        },
+        "seller": {
+          "id": "USR-d15976b1-a734-459f-8957-b9f42bc39ea2",
+          "name": "Matheus Fernando"
+        },
+        "items": [
+          {
+            "id": "OPI-1788200382135-7PVTV",
+            "productId": "1786838719575",
+            "inventoryItemId": "VAR-1786838719575-5",
+            "code": "PRD-337",
+            "sku": "PRD-337",
+            "name": "Celular Xiaomi Redmi note 15 4G 256gb · Preto · 256GB · 8GB",
+            "quantity": 1,
+            "unitPrice": 2241.6,
+            "unitCost": 1297.2,
+            "discount": 0,
+            "discountMode": "amount",
+            "discountPercent": 0,
+            "verified": false,
+            "sellerId": "USR-d15976b1-a734-459f-8957-b9f42bc39ea2",
+            "sellerNameSnapshot": "Matheus Fernando",
+            "stockControlled": true,
+            "allowNegative": false
+          }
+        ],
+        "payments": [
+          {
+            "id": "PAY-1788200382135-8S4EF",
+            "methodId": "PM-CREDITO",
+            "methodName": "Cartão de crédito",
+            "amount": 2241.6,
+            "installments": 5,
+            "dueDate": "",
+            "dueDates": [],
+            "installmentAmounts": [],
+            "status": "paid",
+            "notes": ""
+          }
+        ],
+        "serviceOrder": {
+          "device": "",
+          "equipmentId": "",
+          "issue": "",
+          "technicianId": "",
+          "technicianName": "",
+          "servicePerformed": "",
+          "accessories": "",
+          "checkin": {
+            "notes": "",
+            "items": []
+          },
+          "checkout": {
+            "notes": "",
+            "items": [],
+            "customerChecked": false,
+            "accessoriesChecked": false,
+            "guidanceReceived": false
+          },
+          "attachments": [],
+          "unlockPatterns": [
+            [],
+            []
+          ],
+          "unlockPattern": []
+        },
+        "freight": {
+          "payer": "none",
+          "carrierId": "",
+          "carrierName": "",
+          "freightAmount": 0,
+          "insuranceAmount": 0,
+          "otherExpensesAmount": 0,
+          "volumeQuantity": 0,
+          "species": "",
+          "brand": "",
+          "netWeight": 0,
+          "grossWeight": 0
+        },
+        "totals": {
+          "subtotal": 2241.6,
+          "itemDiscountTotal": 0,
+          "couponDiscount": 0,
+          "discountTotal": 0,
+          "freightTotal": 0,
+          "total": 2241.6,
+          "amountPaid": 2241.6,
+          "amountPending": 0,
+          "change": 0
+        }
+      },
+      "fiscal": {
+        "status": "none",
+        "documentId": null,
+        "updatedAt": null
+      },
+      "links": {
+        "originalOperationId": null,
+        "originalItemId": null,
+        "exchangeIds": [],
+        "returnIds": [],
+        "warrantyIds": []
+      },
+      "customerId": "CLI-1785697236814-YOFY5",
+      "customerNameSnapshot": "Rodrigo Schneider",
+      "identifier": "",
+      "sellerId": "USR-d15976b1-a734-459f-8957-b9f42bc39ea2",
+      "sellerNameSnapshot": "Matheus Fernando",
+      "customStatusId": "sale-delivered",
+      "customStatusName": "VENDA ENTREGUE",
+      "notes": "",
+      "details": "",
+      "serviceOrder": {
+        "device": "",
+        "equipmentId": "",
+        "issue": "",
+        "technicianId": "",
+        "technicianName": "",
+        "servicePerformed": "",
+        "accessories": "",
+        "checkin": {
+          "notes": "",
+          "items": []
+        },
+        "checkout": {
+          "notes": "",
+          "items": [],
+          "customerChecked": false,
+          "accessoriesChecked": false,
+          "guidanceReceived": false
+        },
+        "attachments": [],
+        "unlockPatterns": [
+          [],
+          []
+        ],
+        "unlockPattern": []
+      },
+      "coupon": null,
+      "freight": {
+        "payer": "none",
+        "carrierId": "",
+        "carrierName": "",
+        "freightAmount": 0,
+        "insuranceAmount": 0,
+        "otherExpensesAmount": 0,
+        "volumeQuantity": 0,
+        "species": "",
+        "brand": "",
+        "netWeight": 0,
+        "grossWeight": 0
+      },
+      "freightTotal": 0,
+      "cashboxId": "caixa-principal",
+      "items": [
+        {
+          "id": "OPI-1788200382135-7PVTV",
+          "productId": "1786838719575",
+          "inventoryItemId": "VAR-1786838719575-5",
+          "code": "PRD-337",
+          "sku": "PRD-337",
+          "name": "Celular Xiaomi Redmi note 15 4G 256gb · Preto · 256GB · 8GB",
+          "quantity": 1,
+          "unitPrice": 2241.6,
+          "unitCost": 1297.2,
+          "discount": 0,
+          "discountMode": "amount",
+          "discountPercent": 0,
+          "verified": false,
+          "sellerId": "USR-d15976b1-a734-459f-8957-b9f42bc39ea2",
+          "sellerNameSnapshot": "Matheus Fernando",
+          "stockControlled": true,
+          "allowNegative": false
+        }
+      ],
+      "payments": [
+        {
+          "id": "PAY-1788200382135-8S4EF",
+          "methodId": "PM-CREDITO",
+          "methodName": "Cartão de crédito",
+          "amount": 2241.6,
+          "installments": 5,
+          "dueDate": "",
+          "dueDates": [],
+          "installmentAmounts": [],
+          "status": "paid",
+          "notes": ""
+        }
+      ],
+      "subtotal": 2241.6,
+      "itemDiscountTotal": 0,
+      "couponDiscount": 0,
+      "discountTotal": 0,
+      "total": 2241.6,
+      "amountPaid": 2241.6,
+      "amountPending": 0,
+      "change": 0,
+      "updatedAt": "2026-08-31T18:19:42.387Z",
+      "updatedBy": "Matheus Fernando",
+      "inventoryPostedAt": "2026-08-31T18:19:42.366Z",
+      "cashPostedAt": "2026-08-31T18:19:42.366Z",
+      "receivableIds": [],
+      "walletEntryIds": [],
+      "finalizedAt": "2026-08-31T18:19:42.387Z",
       "finalizedBy": "Matheus Fernando"
     }
   ]

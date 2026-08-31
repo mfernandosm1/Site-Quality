@@ -3910,6 +3910,38 @@
       "assignedTo": "",
       "createdAt": "2026-08-29T23:08:04.661Z",
       "updatedAt": "2026-08-29T23:08:04.661Z"
+    },
+    {
+      "id": "customer_mth5tofk_wn7x32",
+      "type": "person",
+      "name": "Carina",
+      "tradeName": "",
+      "email": "",
+      "document": {
+        "cpf": "",
+        "cnpj": ""
+      },
+      "phones": [
+        {
+          "number": "555491419143",
+          "type": "whatsapp",
+          "primary": true
+        }
+      ],
+      "addresses": [],
+      "channels": [
+        {
+          "type": "whatsapp",
+          "externalId": "46901311328461@lid",
+          "conversationId": "555491419143"
+        }
+      ],
+      "labels": [],
+      "commercialStage": "new",
+      "interestProduct": "",
+      "assignedTo": "",
+      "createdAt": "2026-08-31T11:33:25.616Z",
+      "updatedAt": "2026-08-31T11:33:25.616Z"
     }
   ]
 }

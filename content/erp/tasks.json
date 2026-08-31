@@ -361,10 +361,42 @@
       "description": "",
       "dueAt": "2026-08-28T08:00",
       "priority": "medium",
-      "status": "open",
+      "status": "completed",
       "createdAt": "2026-08-27T22:44:05.698Z",
-      "updatedAt": "2026-08-27T22:44:05.698Z",
-      "completedAt": null
+      "updatedAt": "2026-08-31T18:21:56.459Z",
+      "completedAt": "2026-08-31T18:21:56.459Z",
+      "updatedBy": "Matheus Fernando",
+      "history": [
+        {
+          "at": "2026-08-31T18:21:56.459Z",
+          "actor": "Matheus Fernando",
+          "action": "completed",
+          "before": {
+            "title": "Falar com contabilidade e ajustar regra de compra notebooks",
+            "description": "",
+            "dueAt": "2026-08-28T08:00",
+            "priority": "medium",
+            "type": "task",
+            "typeName": "Tarefa",
+            "customerId": "",
+            "customerName": "",
+            "owner": "Quality",
+            "status": "open"
+          },
+          "after": {
+            "title": "Falar com contabilidade e ajustar regra de compra notebooks",
+            "description": "",
+            "dueAt": "2026-08-28T08:00",
+            "priority": "medium",
+            "type": "task",
+            "typeName": "Tarefa",
+            "customerId": "",
+            "customerName": "",
+            "owner": "Quality",
+            "status": "completed"
+          }
+        }
+      ]
     },
     {
       "id": "task_mtc43lc7_qyihp6",
@@ -551,6 +583,45 @@
             "priority": "low",
             "type": "reminder",
             "typeName": "Lembrete",
+            "customerId": "",
+            "customerName": "",
+            "owner": "Quality",
+            "status": "open"
+          }
+        }
+      ]
+    },
+    {
+      "id": "task_mth1uhpc_62dk8b",
+      "customerId": "",
+      "customerName": "",
+      "conversationId": "",
+      "owner": "Quality",
+      "type": "task",
+      "typeName": "Tarefa",
+      "title": "mandar email pra pichau saber a situação do pc",
+      "description": "",
+      "dueAt": "2026-08-31T07:00",
+      "priority": "high",
+      "status": "open",
+      "createdAt": "2026-08-31T09:42:05.088Z",
+      "createdBy": "Matheus Fernando",
+      "updatedAt": "2026-08-31T09:42:05.088Z",
+      "updatedBy": "Matheus Fernando",
+      "completedAt": null,
+      "history": [
+        {
+          "at": "2026-08-31T09:42:05.088Z",
+          "actor": "Matheus Fernando",
+          "action": "created",
+          "before": null,
+          "after": {
+            "title": "mandar email pra pichau saber a situação do pc",
+            "description": "",
+            "dueAt": "2026-08-31T07:00",
+            "priority": "high",
+            "type": "task",
+            "typeName": "Tarefa",
             "customerId": "",
             "customerName": "",
             "owner": "Quality",

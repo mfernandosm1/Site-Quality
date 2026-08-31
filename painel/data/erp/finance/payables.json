@@ -2485,8 +2485,8 @@
       "interest": 0,
       "fine": 0,
       "netValue": 358.17,
-      "paidValue": 0,
-      "openBalance": 358.17,
+      "paidValue": 358.17,
+      "openBalance": 0,
       "paymentMethodId": "PM-BOLETO",
       "paymentPlan": [
         {
@@ -2504,12 +2504,12 @@
       "categoryId": "CC-IMPOSTOS",
       "storeId": "",
       "cashboxId": "caixa-principal",
-      "status": "open",
+      "status": "paid",
       "notes": "",
       "createdAt": "2026-08-14T13:00:16.343Z",
       "createdBy": "painel",
-      "updatedAt": "2026-08-14T13:00:16.343Z",
-      "updatedBy": "painel"
+      "updatedAt": "2026-08-31T12:12:10.028Z",
+      "updatedBy": "Matheus Fernando"
     },
     {
       "id": "PAY-0c4e3601-c9bd-448c-ba10-37a2e56936dc",
@@ -3997,8 +3997,8 @@
       "interest": 0,
       "fine": 0,
       "netValue": 3053.25,
-      "paidValue": 0,
-      "openBalance": 3053.25,
+      "paidValue": 110.25,
+      "openBalance": 2943,
       "paymentMethodId": "PM-BOLETO",
       "paymentPlan": [
         {
@@ -4231,12 +4231,12 @@
       "categoryId": "",
       "storeId": "",
       "cashboxId": "caixa-principal",
-      "status": "open",
+      "status": "partial",
       "notes": "",
       "createdAt": "2026-08-02T22:45:20.695Z",
       "createdBy": "painel",
-      "updatedAt": "2026-08-14T12:59:18.791Z",
-      "updatedBy": "painel"
+      "updatedAt": "2026-08-31T12:12:10.078Z",
+      "updatedBy": "Matheus Fernando"
     },
     {
       "id": "PAY-875123cb-5c0c-4caa-9b2a-1fd0ba690924",
@@ -4268,8 +4268,8 @@
       "interest": 0,
       "fine": 0,
       "netValue": 27459.5,
-      "paidValue": 0,
-      "openBalance": 27459.5,
+      "paidValue": 2745.95,
+      "openBalance": 24713.55,
       "paymentMethodId": "PM-BOLETO",
       "paymentPlan": [
         {
@@ -4358,12 +4358,12 @@
       "categoryId": "",
       "storeId": "",
       "cashboxId": "caixa-principal",
-      "status": "open",
+      "status": "partial",
       "notes": "",
       "createdAt": "2026-08-02T22:39:41.502Z",
       "createdBy": "painel",
-      "updatedAt": "2026-08-02T22:39:41.502Z",
-      "updatedBy": "painel"
+      "updatedAt": "2026-08-31T11:06:35.953Z",
+      "updatedBy": "Matheus Fernando"
     },
     {
       "id": "PAY-3baefbc5-fedf-4da3-b5b6-5675a5ef09fb",

@@ -6072,7 +6072,7 @@
       "barcode": "",
       "ncm": "85444200",
       "price": 0,
-      "stock": 19,
+      "stock": 18,
       "commercial": {
         "costPrice": 6.24,
         "erpPrice": 0,
@@ -6097,11 +6097,11 @@
       "inventoryBalance": {
         "inventoryItemId": "PRD-1786321595898",
         "locationId": "loja-principal",
-        "physicalQuantity": 19,
+        "physicalQuantity": 18,
         "reservedQuantity": 0,
-        "availableQuantity": 19,
+        "availableQuantity": 18,
         "minimumQuantity": 0,
-        "updatedAt": "2026-08-18T18:44:15.235Z"
+        "updatedAt": "2026-08-31T12:07:04.602Z"
       }
     },
     {
@@ -9334,14 +9334,28 @@
       "featured": false,
       "active": true,
       "gallery": [],
-      "detailsEnabled": false,
+      "detailsEnabled": true,
       "descriptionShort": "",
-      "descriptionLong": "",
+      "descriptionLong": "<p>📱 <strong>Samsung Galaxy A36 5G 256GB – Tecnologia e desempenho para todos os momentos</strong></p><p>Uma excelente escolha para quem busca velocidade, amplo armazenamento e uma experiência visual de alta qualidade.</p><p>São <strong>256GB de armazenamento interno e 8GB de RAM</strong>, oferecendo espaço para aplicativos, fotos, vídeos e documentos, além de desempenho fluido para as principais tarefas do dia a dia.</p><p>🔥 <strong>Principais características:</strong><br>✅ 256GB de armazenamento<br>✅ 8GB de memória RAM<br>✅ Tecnologia 5G<br>✅ Tela Super AMOLED de 6.7\"<br>✅ Taxa de atualização de até 120Hz<br>✅ Câmera principal de 50MP<br>✅ Conjunto traseiro de 50MP + 8MP + 5MP<br>✅ Câmera frontal de 12MP<br>✅ Gravação de vídeos em 4K<br>✅ Processador Octa-Core<br>✅ Dual SIM</p><p>💫 Ideal para quem procura um <strong>Samsung 5G com bastante memória, ótima tela e câmeras versáteis</strong>, pronto para acompanhar sua rotina.</p>",
       "slug": "samsung-galaxy-a36-5g-256gb-8gb-ram-tela-6-7",
       "erp": {
         "internalCode": "PRD-43",
         "categoryId": "ERP-CAT-1",
-        "category": "smartphones"
+        "category": "smartphones",
+        "sku": "",
+        "supplierCode": "",
+        "searchAlias": "",
+        "barcode": "",
+        "ncm": "",
+        "fiscal": {
+          "ncm": ""
+        },
+        "brand": "",
+        "unit": "UN",
+        "subcategory": "",
+        "mainSupplierId": "",
+        "preferredSupplierId": "",
+        "active": true
       },
       "code": "PRD-43",
       "inventory": {
@@ -9367,7 +9381,73 @@
         "minimumQuantity": 0,
         "updatedAt": "2026-08-16T00:18:28.078Z"
       },
-      "stock": 0
+      "stock": 0,
+      "sku": "",
+      "barcode": "",
+      "ncm": "",
+      "brand": "",
+      "commercial": {
+        "costPrice": null,
+        "erpPrice": null,
+        "salePrice": null,
+        "marketplacePrice": null,
+        "promotionalPrice": null,
+        "desiredMarginPercent": null,
+        "expectedProfit": null,
+        "defaultCommissionPercent": null,
+        "cashPrice": null,
+        "installmentPrice": null,
+        "minimumPrice": null,
+        "minimumMarginPercent": null,
+        "discountPolicy": "inherit",
+        "maximumDiscountPercent": null,
+        "maximumDiscountAmount": null,
+        "requiresAuthorization": false
+      },
+      "subcategory": "",
+      "tags": [],
+      "relatedManualIds": [],
+      "crossSellIds": [],
+      "virtualStore": {
+        "name": "Samsung Galaxy A36 5G 256GB 8GB RAM Tela 6.7",
+        "price": null,
+        "active": true,
+        "seoTitle": "Samsung Galaxy A36 5G 256GB 8GB RAM Tela 6.7\"",
+        "seoDescription": "Samsung Galaxy A36 5G 256GB com 8GB RAM, tela Super AMOLED 6.7\" 120Hz, câmera de 50MP e conexão 5G. Tecnologia e desempenho para o dia a dia.",
+        "channels": {
+          "lojaVirtual": {
+            "enabled": true
+          },
+          "mercadoLivre": {
+            "enabled": false
+          },
+          "shopee": {
+            "enabled": false
+          },
+          "amazon": {
+            "enabled": false
+          },
+          "magalu": {
+            "enabled": false
+          }
+        }
+      },
+      "showVariationsOnCard": true,
+      "variations": {
+        "enabled": false,
+        "colors": [],
+        "storage": [],
+        "ram": [],
+        "condition": [],
+        "combinations": [],
+        "labels": {},
+        "colorsText": "",
+        "storageText": "",
+        "ramText": "",
+        "conditionText": "",
+        "labelsText": "{}",
+        "combinationsText": ""
+      }
     },
     {
       "id": 1780623045203,
@@ -9556,12 +9636,26 @@
       "active": true,
       "detailsEnabled": true,
       "descriptionShort": "",
-      "descriptionLong": "",
+      "descriptionLong": "<p>📱 <b>Samsung Galaxy A56 5G 256GB – Potência, câmera e tela incrível<br></b>combina ótimo desempenho, muito espaço interno e recursos avançados para quem busca um smartphone completo para o dia a dia.</p><p>Com <strong>256GB de armazenamento e 8GB de RAM</strong>, oferece espaço de sobra para fotos, vídeos, aplicativos e arquivos, além de excelente fluidez para redes sociais, trabalho, jogos e multitarefas.</p><p>✨ <strong>Destaques:</strong><br>✅ 256GB de armazenamento<br>✅ 8GB de memória RAM<br>✅ Conectividade 5G<br>✅ Tela Super AMOLED de 6.7\"<br>✅ Taxa de atualização de até 120Hz<br>✅ Câmera principal de 50MP<br>✅ Câmeras traseiras de 50MP + 12MP + 5MP<br>✅ Câmera frontal de 12MP<br>✅ Gravação de vídeos em 4K<br>✅ Processador Octa-Core<br>✅ Dual SIM e suporte a eSIM</p><p>🚀 Um smartphone moderno e completo para quem procura <strong>velocidade, ótima câmera, bastante armazenamento e uma tela de alta qualidade</strong>.</p>",
       "id": 1781122138913,
       "erp": {
         "internalCode": "PRD-47",
         "categoryId": "ERP-CAT-1",
-        "category": "smartphones"
+        "category": "smartphones",
+        "sku": "",
+        "supplierCode": "",
+        "searchAlias": "",
+        "barcode": "",
+        "ncm": "",
+        "fiscal": {
+          "ncm": ""
+        },
+        "brand": "",
+        "unit": "UN",
+        "subcategory": "",
+        "mainSupplierId": "",
+        "preferredSupplierId": "",
+        "active": true
       },
       "code": "PRD-47",
       "inventory": {
@@ -9585,9 +9679,75 @@
         "reservedQuantity": 0,
         "availableQuantity": 0,
         "minimumQuantity": 0,
-        "updatedAt": "2026-08-16T00:18:28.078Z"
+        "updatedAt": "2026-08-31T19:05:15.743Z"
       },
-      "stock": 0
+      "stock": 0,
+      "sku": "",
+      "barcode": "",
+      "ncm": "",
+      "brand": "",
+      "commercial": {
+        "costPrice": null,
+        "erpPrice": null,
+        "salePrice": null,
+        "marketplacePrice": null,
+        "promotionalPrice": null,
+        "desiredMarginPercent": null,
+        "expectedProfit": null,
+        "defaultCommissionPercent": null,
+        "cashPrice": null,
+        "installmentPrice": null,
+        "minimumPrice": null,
+        "minimumMarginPercent": null,
+        "discountPolicy": "inherit",
+        "maximumDiscountPercent": null,
+        "maximumDiscountAmount": null,
+        "requiresAuthorization": false
+      },
+      "subcategory": "",
+      "tags": [],
+      "relatedManualIds": [],
+      "crossSellIds": [],
+      "virtualStore": {
+        "name": "Samsung A56 5g 256gb 8gb ram 6.7\"",
+        "price": null,
+        "active": true,
+        "seoTitle": "Samsung Galaxy A56 5G 256GB 8GB RAM Tela 6.7\"",
+        "seoDescription": "Samsung Galaxy A56 5G 256GB com 8GB RAM, tela Super AMOLED 6.7\" 120Hz, câmera de 50MP e conexão 5G. Desempenho, espaço e tecnologia.",
+        "channels": {
+          "lojaVirtual": {
+            "enabled": true
+          },
+          "mercadoLivre": {
+            "enabled": false
+          },
+          "shopee": {
+            "enabled": false
+          },
+          "amazon": {
+            "enabled": false
+          },
+          "magalu": {
+            "enabled": false
+          }
+        }
+      },
+      "showVariationsOnCard": true,
+      "variations": {
+        "enabled": false,
+        "colors": [],
+        "storage": [],
+        "ram": [],
+        "condition": [],
+        "combinations": [],
+        "labels": {},
+        "colorsText": "",
+        "storageText": "",
+        "ramText": "",
+        "conditionText": "",
+        "labelsText": "{}",
+        "combinationsText": ""
+      }
     },
     {
       "name": "Carregador Power Bank 20000mAh Kaidi Preto",
@@ -45084,7 +45244,7 @@
       "brand": "SemMarca",
       "slug": "celular-xiaomi-redmi-note-15-256gb",
       "price": 1800,
-      "stock": 2,
+      "stock": 1,
       "image": "",
       "gallery": [],
       "category": "",
@@ -45207,7 +45367,7 @@
             "ram": "8GB",
             "condition": "",
             "image": "",
-            "stock": 2,
+            "stock": 1,
             "erpPrice": 1800,
             "costPrice": 1297.2,
             "inventoryItemId": "VAR-1786838719575-5"
@@ -45295,8 +45455,8 @@
         "catalogKind": "product"
       },
       "inventoryBalance": {
-        "physicalQuantity": 2,
-        "availableQuantity": 2,
+        "physicalQuantity": 1,
+        "availableQuantity": 1,
         "reservedQuantity": 0,
         "derivedFromVariations": true
       }
@@ -118480,7 +118640,7 @@
         "ramText": "",
         "conditionText": "",
         "labelsText": "{}",
-        "combinationsText": "Preto|||||0||2900"
+        "combinationsText": "Preto|||||1||2900"
       },
       "integrations": {
         "wm10": {

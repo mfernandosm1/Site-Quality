@@ -2,6 +2,126 @@
   "version": "0.18.0",
   "items": [
     {
+      "id": "PYP-b6f41ec5-0593-4e40-9fa8-5c15d763baf5",
+      "requestKey": "bulk-1788178330281-1",
+      "paymentNumber": "PG-000062",
+      "payableId": "PAY-98832506-e0ba-487c-a011-a81849f5038b",
+      "installmentId": "PIN-d1b52af0-7ba1-4639-8858-854216d93a58",
+      "paidAt": "2026-08-31",
+      "value": 110.25,
+      "principalValue": 110.25,
+      "interest": 0,
+      "fine": 0,
+      "discount": 0,
+      "payments": [
+        {
+          "paymentMethodId": "PM-BOLETO",
+          "paymentMethodName": "Boleto",
+          "commerceMethodId": "PM-BOLETO",
+          "debitCash": true,
+          "value": 110.25
+        }
+      ],
+      "notes": "",
+      "cashboxId": "caixa-principal",
+      "cashMovementIds": [
+        "CXM-1788178330055-UWKQT"
+      ],
+      "createdAt": "2026-08-31T12:12:10.059Z",
+      "createdBy": "Matheus Fernando",
+      "balanceBefore": 110.25,
+      "balanceAfter": 0,
+      "financeEntryIds": [
+        "FEN-55254c55-7be1-4e9e-a0e4-66a5733ddb6e"
+      ],
+      "financePaymentIds": [
+        "FPY-a17f1130-22eb-4c79-aa33-fe3cd100f393"
+      ],
+      "financeMovementIds": [
+        "FMV-9e1df3ac-163f-4805-9f52-93b386f98257"
+      ]
+    },
+    {
+      "id": "PYP-85ca6d90-e21e-46bc-befa-ad392fcfce3a",
+      "requestKey": "bulk-1788178330281-0",
+      "paymentNumber": "PG-000061",
+      "payableId": "PAY-64ffa0a2-e842-45a9-b87b-fc3edf76aed7",
+      "installmentId": "PIN-4c8cf4d6-5854-4c0b-aecf-11c17615544f",
+      "paidAt": "2026-08-31",
+      "value": 358.17,
+      "principalValue": 358.17,
+      "interest": 0,
+      "fine": 0,
+      "discount": 0,
+      "payments": [
+        {
+          "paymentMethodId": "PM-BOLETO",
+          "paymentMethodName": "Boleto",
+          "commerceMethodId": "PM-BOLETO",
+          "debitCash": true,
+          "value": 358.17
+        }
+      ],
+      "notes": "",
+      "cashboxId": "caixa-principal",
+      "cashMovementIds": [
+        "CXM-1788178330003-VH77B"
+      ],
+      "createdAt": "2026-08-31T12:12:10.007Z",
+      "createdBy": "Matheus Fernando",
+      "balanceBefore": 358.17,
+      "balanceAfter": 0,
+      "financeEntryIds": [
+        "FEN-38bba42d-d7bf-4d18-8b1d-5cc479e91a10"
+      ],
+      "financePaymentIds": [
+        "FPY-3970d258-2faf-4f96-adc5-a7c9fca527e8"
+      ],
+      "financeMovementIds": [
+        "FMV-8227a8b6-e385-417c-89f5-1c0f8066bee9"
+      ]
+    },
+    {
+      "id": "PYP-d4a92f61-f00c-4128-b9e9-82a2a205653a",
+      "requestKey": "a62985c4-60ff-41ff-bfea-f990d547d97b",
+      "paymentNumber": "PG-000060",
+      "payableId": "PAY-875123cb-5c0c-4caa-9b2a-1fd0ba690924",
+      "installmentId": "PIN-38b12acb-4be5-4606-a831-d4d6529873fd",
+      "paidAt": "2026-08-31",
+      "value": 2745.95,
+      "principalValue": 2745.95,
+      "interest": 0,
+      "fine": 0,
+      "discount": 0,
+      "payments": [
+        {
+          "paymentMethodId": "PM-BOLETO",
+          "paymentMethodName": "Boleto",
+          "commerceMethodId": "PM-BOLETO",
+          "debitCash": true,
+          "value": 2745.95
+        }
+      ],
+      "notes": "",
+      "cashboxId": "caixa-principal",
+      "cashMovementIds": [
+        "CXM-1788174395915-YHI6Z"
+      ],
+      "createdAt": "2026-08-31T11:06:35.921Z",
+      "createdBy": "Matheus Fernando",
+      "balanceBefore": 2745.95,
+      "balanceAfter": 0,
+      "financeEntryIds": [
+        "FEN-85ec3e39-ac97-47ba-8ada-b04299b2bc02"
+      ],
+      "financePaymentIds": [
+        "FPY-0ef974c3-0fae-4b2f-9876-85a48c8f4588"
+      ],
+      "financeMovementIds": [
+        "FMV-fecc7ae3-b16e-4aad-bfee-cda57d69583e"
+      ]
+    },
+    {
       "id": "PYP-28346079-3b23-4003-b479-327161995249",
       "requestKey": "manual-payable-PAY-30a3b168-023c-4f49-b714-07db143fba8c-PIN-fd7ac40a-91b6-4a35-934d-1a1948e10763",
       "paymentNumber": "PG-000059",

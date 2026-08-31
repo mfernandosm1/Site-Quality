@@ -605,7 +605,11 @@ export default class CommerceService {
     const session=this.getOpenSession(cashboxId); if(!session) throw new Error('Abra o caixa antes de movimentar valores.');
     const movementType=text(type)||'supply';
     const value=Math.round(Math.abs(num(amount))*100)/100; if(value<=0) throw new Error('Informe um valor maior que zero.');
-    const manual=['supply','withdrawal','expense'].includes(movementType);
+    // Apenas movimentações lançadas manualmente pelo operador devem obedecer
+    // às restrições de suprimento/sangria. Pagamentos de Contas a Pagar também
+    // usam type='expense', mas são saídas financeiras operacionais, não uma
+    // sangria manual do caixa.
+    const manual=['supply','withdrawal'].includes(movementType) || (movementType==='expense' && text(referenceType)==='manual');
     const reason=text(description);
     if(manual && !reason) throw new Error('Informe o motivo da movimentação.');
     const direction=['expense','withdrawal','refund'].includes(movementType)?-1:1;

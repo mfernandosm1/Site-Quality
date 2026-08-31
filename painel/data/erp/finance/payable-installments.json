@@ -768,11 +768,13 @@
       "dueDate": "2026-08-30",
       "paymentMethodId": "PM-BOLETO",
       "originalValue": 2745.95,
-      "paidValue": 0,
-      "openBalance": 2745.95,
-      "status": "open",
+      "paidValue": 2745.95,
+      "openBalance": 0,
+      "status": "paid",
       "createdAt": "2026-08-02T22:39:41.502Z",
-      "createdBy": "painel"
+      "createdBy": "painel",
+      "updatedAt": "2026-08-31T11:06:35.948Z",
+      "updatedBy": "Matheus Fernando"
     },
     {
       "id": "PIN-9f09a093-7b8f-4fea-b4c0-05aba9ff1f41",
@@ -948,14 +950,14 @@
       "dueDate": "2026-08-30",
       "paymentMethodId": "PM-BOLETO",
       "originalValue": 110.25,
-      "paidValue": 0,
-      "openBalance": 110.25,
-      "status": "open",
+      "paidValue": 110.25,
+      "openBalance": 0,
+      "status": "paid",
       "createdAt": "2026-08-02T22:45:20.695Z",
       "createdBy": "painel",
       "notes": "",
-      "updatedAt": "2026-08-14T12:59:18.771Z",
-      "updatedBy": "painel"
+      "updatedAt": "2026-08-31T12:12:10.074Z",
+      "updatedBy": "Matheus Fernando"
     },
     {
       "id": "PIN-fc851ade-d0af-463c-8060-767d0bd67d24",
@@ -2960,11 +2962,13 @@
       "dueDate": "2026-08-31",
       "paymentMethodId": "PM-BOLETO",
       "originalValue": 358.17,
-      "paidValue": 0,
-      "openBalance": 358.17,
-      "status": "open",
+      "paidValue": 358.17,
+      "openBalance": 0,
+      "status": "paid",
       "createdAt": "2026-08-14T13:00:16.343Z",
-      "createdBy": "painel"
+      "createdBy": "painel",
+      "updatedAt": "2026-08-31T12:12:10.024Z",
+      "updatedBy": "Matheus Fernando"
     },
     {
       "id": "PIN-6f24b93b-b0e0-41fd-84fc-acdf3e7d15fc",

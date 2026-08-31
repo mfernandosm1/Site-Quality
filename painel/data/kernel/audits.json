@@ -33326,7 +33326,2113 @@
       },
       "ip": "127.0.0.1",
       "requestId": "d36a0076-3a67-492b-8f7d-d2c481e719ac"
+    },
+    {
+      "id": "AUD-00000098",
+      "at": "2026-08-31T09:42:05.096Z",
+      "module": "agenda",
+      "action": "TASK_CREATED",
+      "actor": "Matheus Fernando",
+      "entityType": "agenda_task",
+      "entityId": "task_mth1uhpc_62dk8b",
+      "documentId": "",
+      "reason": "",
+      "before": null,
+      "after": {
+        "id": "task_mth1uhpc_62dk8b",
+        "customerId": "",
+        "customerName": "",
+        "conversationId": "",
+        "owner": "Quality",
+        "type": "task",
+        "typeName": "Tarefa",
+        "title": "mandar email pra pichau saber a situação do pc",
+        "description": "",
+        "dueAt": "2026-08-31T07:00",
+        "priority": "high",
+        "status": "open",
+        "createdAt": "2026-08-31T09:42:05.088Z",
+        "createdBy": "Matheus Fernando",
+        "updatedAt": "2026-08-31T09:42:05.088Z",
+        "updatedBy": "Matheus Fernando",
+        "completedAt": null,
+        "history": [
+          {
+            "at": "2026-08-31T09:42:05.088Z",
+            "actor": "Matheus Fernando",
+            "action": "created",
+            "before": null,
+            "after": {
+              "title": "mandar email pra pichau saber a situação do pc",
+              "description": "",
+              "dueAt": "2026-08-31T07:00",
+              "priority": "high",
+              "type": "task",
+              "typeName": "Tarefa",
+              "customerId": "",
+              "customerName": "",
+              "owner": "Quality",
+              "status": "open"
+            }
+          }
+        ]
+      },
+      "ip": "127.0.0.1",
+      "requestId": ""
+    },
+    {
+      "id": "AUD-00000099",
+      "at": "2026-08-31T16:51:34.196Z",
+      "module": "produtos",
+      "action": "PRODUCT_UPDATED",
+      "actor": "Matheus Fernando",
+      "entityType": "product",
+      "entityId": "1787533246369",
+      "documentId": "",
+      "reason": "Cadastro de produto atualizado",
+      "before": {
+        "id": 1787533246369,
+        "name": "iPhone 15 256GB Usado",
+        "sku": "",
+        "code": "PRD-834",
+        "barcode": "",
+        "brand": "APPLE",
+        "slug": "iphone-15-256gb-usado",
+        "price": 3399.99,
+        "stock": 0,
+        "image": "images/produtos/1787530543342-iphone-15-usado-pt.jpeg",
+        "gallery": [],
+        "category": "smartphones",
+        "subcategory": "usados",
+        "tags": [],
+        "relatedManualIds": [],
+        "crossSellIds": [],
+        "showPrice": false,
+        "featured": false,
+        "active": true,
+        "commercial": {
+          "costPrice": 2900,
+          "erpPrice": 3499.99,
+          "salePrice": 3499.99,
+          "marketplacePrice": null,
+          "promotionalPrice": null,
+          "desiredMarginPercent": null,
+          "expectedProfit": null,
+          "defaultCommissionPercent": null,
+          "cashPrice": 3499.99,
+          "installmentPrice": 3499.99,
+          "minimumPrice": null,
+          "minimumMarginPercent": null,
+          "discountPolicy": "inherit",
+          "maximumDiscountPercent": null,
+          "maximumDiscountAmount": null,
+          "requiresAuthorization": false
+        },
+        "erp": {
+          "sku": "",
+          "internalCode": "PRD-834",
+          "supplierCode": "",
+          "searchAlias": "",
+          "barcode": "",
+          "brand": "APPLE",
+          "unit": "UN",
+          "category": "smartphones",
+          "subcategory": "",
+          "mainSupplierId": "",
+          "preferredSupplierId": "",
+          "active": true,
+          "categoryId": "ERP-CAT-1",
+          "ncm": "",
+          "fiscal": {
+            "ncm": ""
+          }
+        },
+        "virtualStore": {
+          "name": "iPhone 15 usado 256GB",
+          "price": 3399.99,
+          "active": true,
+          "seoTitle": "",
+          "seoDescription": "iPhone 15 256GB usado, totalmente testado e revisado, com 90 dias de garantia. Desempenho rápido, câmera de alta qualidade e condições facilitadas na Quality Celulares.",
+          "channels": {
+            "lojaVirtual": {
+              "enabled": true
+            },
+            "mercadoLivre": {
+              "enabled": false
+            },
+            "shopee": {
+              "enabled": false
+            },
+            "amazon": {
+              "enabled": false
+            },
+            "magalu": {
+              "enabled": false
+            }
+          }
+        },
+        "inventory": {
+          "itemId": "PRD-1787533246369",
+          "stockControlled": true,
+          "allowNegative": false,
+          "minimumQuantity": 0,
+          "channelAvailability": {
+            "site": {
+              "mode": "disabled",
+              "enabled": false,
+              "limit": null,
+              "physicalSafety": 0
+            }
+          }
+        },
+        "detailsEnabled": true,
+        "showVariationsOnCard": true,
+        "descriptionShort": "",
+        "descriptionLong": "<p><strong>Destaques do Produto:</strong></p><ul><li><p><strong>Tela Super Retina XDR:</strong> OLED de 6,1\" com ótima definição, brilho e cores vibrantes.</p></li><li><p><strong>Chip A16 Bionic:</strong> Excelente desempenho para aplicativos, jogos, fotos e uso diário.</p></li><li><p><strong>Câmera Principal de 48 MP:</strong> Fotos com alto nível de detalhes, além de câmera ultra-angular de 12 MP.</p></li><li><p><strong>256GB de Armazenamento:</strong> Espaço para aplicativos, fotos, vídeos e arquivos.</p></li><li><p><strong>5G, Face ID e USB-C:</strong> Conectividade rápida, desbloqueio facial seguro e novo padrão de carregamento.</p></li></ul><p><strong>Especificações Técnicas:</strong></p><ul><li><p><strong>Tela:</strong> 6,1\" Super Retina XDR OLED</p></li><li><p><strong>Processador:</strong> Apple A16 Bionic</p></li><li><p><strong>Armazenamento:</strong>&nbsp;256GB</p></li><li><p><strong>Câmeras:</strong> Traseiras 48 MP + 12 MP | Frontal 12 MP</p></li><li><p><strong>Conectividade:</strong> 5G, Wi-Fi, Bluetooth e NFC</p></li><li><p><strong>Segurança:</strong> Face ID</p></li><li><p><strong>Conector:</strong> USB-C</p></li><li><p><strong>Resistência:</strong> IP68</p></li><li><p>Usado, Testado e Revisado: Aparelho totalmente testado funcionando 100%.<br></p></li><li><p>Garantia: 90 dias de garantia.</p></li></ul>",
+        "variations": {
+          "enabled": true,
+          "colors": [
+            {
+              "name": "Preto",
+              "hex": "#111111",
+              "image": "images/Iphone 15 usado (pt).jpeg"
+            }
+          ],
+          "storage": [],
+          "ram": [],
+          "condition": [],
+          "combinations": [
+            {
+              "color": "Preto",
+              "storage": "",
+              "ram": "",
+              "condition": "",
+              "image": "",
+              "stock": 0,
+              "erpPrice": null,
+              "costPrice": 2900,
+              "desiredMarginPercent": null,
+              "inventoryItemId": "VAR-1787533246369-1"
+            }
+          ],
+          "labels": {},
+          "colorsText": "Preto|#111111|images/Iphone 15 usado (pt).jpeg",
+          "storageText": "",
+          "ramText": "",
+          "conditionText": "",
+          "labelsText": "{}",
+          "combinationsText": "Preto|||||0||2900"
+        },
+        "integrations": {
+          "wm10": {
+            "productCode": 11885,
+            "productCodes": [
+              11881,
+              11882,
+              11883,
+              11884,
+              11885
+            ],
+            "originalName": "iPhone 15 128gb Usado PRETO",
+            "barcode": "",
+            "reference": "",
+            "color": "PRETO",
+            "size": "Sem Tamanho",
+            "brand": "APPLE",
+            "collection": "Sem Coleção",
+            "sourceActive": true,
+            "sourceStock": 0,
+            "sourceCost": 2900,
+            "sourcePrice": 4500,
+            "registeredAt": "2025-07-25T17:14:08.563",
+            "updatedAt": "2026-07-17T18:03:21.613",
+            "importedAt": "2026-08-10T01:41:51.938Z",
+            "importedBy": "painel",
+            "lastSyncAt": "2026-08-10T01:41:51.938Z",
+            "lastSyncFields": [
+              "name",
+              "salePrice",
+              "cost",
+              "barcode",
+              "reference",
+              "brand",
+              "unit",
+              "active"
+            ],
+            "familyId": "fam-5e3883dc8e09",
+            "familyName": "iPhone 15 128GB USADO",
+            "sourceRecords": [
+              {
+                "code": 11881,
+                "name": "iPhone 15 128gb Usado ROSA",
+                "barcode": "",
+                "reference": "",
+                "color": "ROSA",
+                "size": "Sem Tamanho",
+                "stock": 0,
+                "price": 4500,
+                "cost": 0,
+                "active": true
+              },
+              {
+                "code": 11882,
+                "name": "iPhone 15 128gb Usado VERDE",
+                "barcode": "",
+                "reference": "",
+                "color": "VERDE",
+                "size": "Sem Tamanho",
+                "stock": 0,
+                "price": 4500,
+                "cost": 0,
+                "active": true
+              },
+              {
+                "code": 11883,
+                "name": "iPhone 15 128gb Usado BRANCO",
+                "barcode": "",
+                "reference": "",
+                "color": "BRANCO",
+                "size": "Sem Tamanho",
+                "stock": 0,
+                "price": 0,
+                "cost": 0,
+                "active": false
+              },
+              {
+                "code": 11884,
+                "name": "iPhone 15 128gb Usado AZUL",
+                "barcode": "",
+                "reference": "",
+                "color": "AZUL",
+                "size": "Sem Tamanho",
+                "stock": 0,
+                "price": 4500,
+                "cost": 2899,
+                "active": true
+              },
+              {
+                "code": 11885,
+                "name": "iPhone 15 128gb Usado PRETO",
+                "barcode": "",
+                "reference": "",
+                "color": "PRETO",
+                "size": "Sem Tamanho",
+                "stock": 0,
+                "price": 4500,
+                "cost": 2900,
+                "active": true
+              }
+            ]
+          }
+        },
+        "migration": {
+          "origin": "WM10",
+          "importedAt": "2026-08-10T01:41:51.938Z",
+          "importedBy": "painel",
+          "needsErpCategory": true,
+          "catalogKind": "product",
+          "familyId": "fam-5e3883dc8e09",
+          "familyImportedAt": "2026-08-10T01:41:51.944Z"
+        },
+        "inventoryBalance": {
+          "physicalQuantity": 0,
+          "availableQuantity": 0,
+          "reservedQuantity": 0,
+          "derivedFromVariations": true
+        },
+        "updatedAt": "2026-08-24T00:15:43.364Z",
+        "ncm": ""
+      },
+      "after": {
+        "id": 1787533246369,
+        "name": "iPhone 15 256GB Usado",
+        "sku": "",
+        "code": "PRD-834",
+        "barcode": "",
+        "brand": "APPLE",
+        "slug": "iphone-15-256gb-usado",
+        "price": 3399.99,
+        "stock": 1,
+        "image": "images/produtos/1787530543342-iphone-15-usado-pt.jpeg",
+        "gallery": [],
+        "category": "smartphones",
+        "subcategory": "usados",
+        "tags": [],
+        "relatedManualIds": [],
+        "crossSellIds": [],
+        "showPrice": false,
+        "featured": false,
+        "active": true,
+        "commercial": {
+          "costPrice": 2900,
+          "erpPrice": 3499.99,
+          "salePrice": 3499.99,
+          "marketplacePrice": null,
+          "promotionalPrice": null,
+          "desiredMarginPercent": null,
+          "expectedProfit": null,
+          "defaultCommissionPercent": null,
+          "cashPrice": 3499.99,
+          "installmentPrice": 3499.99,
+          "minimumPrice": null,
+          "minimumMarginPercent": null,
+          "discountPolicy": "inherit",
+          "maximumDiscountPercent": null,
+          "maximumDiscountAmount": null,
+          "requiresAuthorization": false
+        },
+        "erp": {
+          "sku": "",
+          "internalCode": "PRD-834",
+          "supplierCode": "",
+          "searchAlias": "",
+          "barcode": "",
+          "brand": "APPLE",
+          "unit": "UN",
+          "category": "smartphones",
+          "subcategory": "",
+          "mainSupplierId": "",
+          "preferredSupplierId": "",
+          "active": true,
+          "categoryId": "ERP-CAT-1",
+          "ncm": "",
+          "fiscal": {
+            "ncm": ""
+          }
+        },
+        "virtualStore": {
+          "name": "iPhone 15 usado 256GB",
+          "price": 3399.99,
+          "active": true,
+          "seoTitle": "",
+          "seoDescription": "iPhone 15 256GB usado, totalmente testado e revisado, com 90 dias de garantia. Desempenho rápido, câmera de alta qualidade e condições facilitadas na Quality Celulares.",
+          "channels": {
+            "lojaVirtual": {
+              "enabled": true
+            },
+            "mercadoLivre": {
+              "enabled": false
+            },
+            "shopee": {
+              "enabled": false
+            },
+            "amazon": {
+              "enabled": false
+            },
+            "magalu": {
+              "enabled": false
+            }
+          }
+        },
+        "inventory": {
+          "itemId": "PRD-1787533246369",
+          "stockControlled": true,
+          "allowNegative": false,
+          "minimumQuantity": 0,
+          "channelAvailability": {
+            "site": {
+              "mode": "disabled",
+              "enabled": false,
+              "limit": null,
+              "physicalSafety": 0
+            }
+          }
+        },
+        "detailsEnabled": true,
+        "showVariationsOnCard": true,
+        "descriptionShort": "",
+        "descriptionLong": "<p><strong>Destaques do Produto:</strong></p><ul><li><p><strong>Tela Super Retina XDR:</strong> OLED de 6,1\" com ótima definição, brilho e cores vibrantes.</p></li><li><p><strong>Chip A16 Bionic:</strong> Excelente desempenho para aplicativos, jogos, fotos e uso diário.</p></li><li><p><strong>Câmera Principal de 48 MP:</strong> Fotos com alto nível de detalhes, além de câmera ultra-angular de 12 MP.</p></li><li><p><strong>256GB de Armazenamento:</strong> Espaço para aplicativos, fotos, vídeos e arquivos.</p></li><li><p><strong>5G, Face ID e USB-C:</strong> Conectividade rápida, desbloqueio facial seguro e novo padrão de carregamento.</p></li></ul><p><strong>Especificações Técnicas:</strong></p><ul><li><p><strong>Tela:</strong> 6,1\" Super Retina XDR OLED</p></li><li><p><strong>Processador:</strong> Apple A16 Bionic</p></li><li><p><strong>Armazenamento:</strong>&nbsp;256GB</p></li><li><p><strong>Câmeras:</strong> Traseiras 48 MP + 12 MP | Frontal 12 MP</p></li><li><p><strong>Conectividade:</strong> 5G, Wi-Fi, Bluetooth e NFC</p></li><li><p><strong>Segurança:</strong> Face ID</p></li><li><p><strong>Conector:</strong> USB-C</p></li><li><p><strong>Resistência:</strong> IP68</p></li><li><p>Usado, Testado e Revisado: Aparelho totalmente testado funcionando 100%.<br></p></li><li><p>Garantia: 90 dias de garantia.</p></li></ul>",
+        "variations": {
+          "enabled": true,
+          "colors": [
+            {
+              "name": "Preto",
+              "hex": "#111111",
+              "image": "images/Iphone 15 usado (pt).jpeg"
+            }
+          ],
+          "storage": [],
+          "ram": [],
+          "condition": [],
+          "combinations": [
+            {
+              "color": "Preto",
+              "storage": "",
+              "ram": "",
+              "condition": "",
+              "image": "",
+              "stock": 1,
+              "erpPrice": null,
+              "costPrice": 2900,
+              "desiredMarginPercent": null,
+              "inventoryItemId": "VAR-1787533246369-1"
+            }
+          ],
+          "labels": {},
+          "colorsText": "Preto|#111111|images/Iphone 15 usado (pt).jpeg",
+          "storageText": "",
+          "ramText": "",
+          "conditionText": "",
+          "labelsText": "{}",
+          "combinationsText": "Preto|||||1||2900"
+        },
+        "integrations": {
+          "wm10": {
+            "productCode": 11885,
+            "productCodes": [
+              11881,
+              11882,
+              11883,
+              11884,
+              11885
+            ],
+            "originalName": "iPhone 15 128gb Usado PRETO",
+            "barcode": "",
+            "reference": "",
+            "color": "PRETO",
+            "size": "Sem Tamanho",
+            "brand": "APPLE",
+            "collection": "Sem Coleção",
+            "sourceActive": true,
+            "sourceStock": 0,
+            "sourceCost": 2900,
+            "sourcePrice": 4500,
+            "registeredAt": "2025-07-25T17:14:08.563",
+            "updatedAt": "2026-07-17T18:03:21.613",
+            "importedAt": "2026-08-10T01:41:51.938Z",
+            "importedBy": "painel",
+            "lastSyncAt": "2026-08-10T01:41:51.938Z",
+            "lastSyncFields": [
+              "name",
+              "salePrice",
+              "cost",
+              "barcode",
+              "reference",
+              "brand",
+              "unit",
+              "active"
+            ],
+            "familyId": "fam-5e3883dc8e09",
+            "familyName": "iPhone 15 128GB USADO",
+            "sourceRecords": [
+              {
+                "code": 11881,
+                "name": "iPhone 15 128gb Usado ROSA",
+                "barcode": "",
+                "reference": "",
+                "color": "ROSA",
+                "size": "Sem Tamanho",
+                "stock": 0,
+                "price": 4500,
+                "cost": 0,
+                "active": true
+              },
+              {
+                "code": 11882,
+                "name": "iPhone 15 128gb Usado VERDE",
+                "barcode": "",
+                "reference": "",
+                "color": "VERDE",
+                "size": "Sem Tamanho",
+                "stock": 0,
+                "price": 4500,
+                "cost": 0,
+                "active": true
+              },
+              {
+                "code": 11883,
+                "name": "iPhone 15 128gb Usado BRANCO",
+                "barcode": "",
+                "reference": "",
+                "color": "BRANCO",
+                "size": "Sem Tamanho",
+                "stock": 0,
+                "price": 0,
+                "cost": 0,
+                "active": false
+              },
+              {
+                "code": 11884,
+                "name": "iPhone 15 128gb Usado AZUL",
+                "barcode": "",
+                "reference": "",
+                "color": "AZUL",
+                "size": "Sem Tamanho",
+                "stock": 0,
+                "price": 4500,
+                "cost": 2899,
+                "active": true
+              },
+              {
+                "code": 11885,
+                "name": "iPhone 15 128gb Usado PRETO",
+                "barcode": "",
+                "reference": "",
+                "color": "PRETO",
+                "size": "Sem Tamanho",
+                "stock": 0,
+                "price": 4500,
+                "cost": 2900,
+                "active": true
+              }
+            ]
+          }
+        },
+        "migration": {
+          "origin": "WM10",
+          "importedAt": "2026-08-10T01:41:51.938Z",
+          "importedBy": "painel",
+          "needsErpCategory": true,
+          "catalogKind": "product",
+          "familyId": "fam-5e3883dc8e09",
+          "familyImportedAt": "2026-08-10T01:41:51.944Z"
+        },
+        "inventoryBalance": {
+          "physicalQuantity": 0,
+          "availableQuantity": 0,
+          "reservedQuantity": 0,
+          "derivedFromVariations": true
+        },
+        "updatedAt": "2026-08-24T00:15:43.364Z",
+        "ncm": ""
+      },
+      "ip": "100.99.15.27",
+      "requestId": "ec20fa18-290f-4db9-b01c-cde99b4fa060"
+    },
+    {
+      "id": "AUD-00000100",
+      "at": "2026-08-31T16:52:43.250Z",
+      "module": "pdv",
+      "action": "DISCOUNT_APPROVAL_KEY_CREATED",
+      "actor": "Matheus Fernando",
+      "entityType": "discount_approval",
+      "entityId": "DAP-6b884270-b4b8-4c6d-be91-d2a5c32f5b49",
+      "documentId": "",
+      "reason": "",
+      "before": null,
+      "after": {
+        "id": "DAP-6b884270-b4b8-4c6d-be91-d2a5c32f5b49",
+        "code": "******",
+        "issuerName": "Matheus Fernando",
+        "issuedAt": "2026-08-31T16:52:43.241Z",
+        "expiresAt": "2026-08-31T16:57:43.241Z",
+        "ttlMinutes": 5
+      },
+      "ip": "",
+      "requestId": ""
+    },
+    {
+      "id": "AUD-00000101",
+      "at": "2026-08-31T16:52:43.327Z",
+      "module": "pdv",
+      "action": "DISCOUNT_ABOVE_LIMIT_AUTHORIZED",
+      "actor": "Matheus Fernando",
+      "entityType": "operation",
+      "entityId": "OP-1788195023786-VQRZ0",
+      "documentId": "",
+      "reason": "",
+      "before": null,
+      "after": null,
+      "ip": "",
+      "requestId": ""
+    },
+    {
+      "id": "AUD-00000102",
+      "at": "2026-08-31T18:21:56.467Z",
+      "module": "agenda",
+      "action": "TASK_COMPLETED",
+      "actor": "Matheus Fernando",
+      "entityType": "agenda_task",
+      "entityId": "task_mtc40r7m_zqeftb",
+      "documentId": "",
+      "reason": "",
+      "before": {
+        "id": "task_mtc40r7m_zqeftb",
+        "customerId": "",
+        "customerName": "",
+        "conversationId": "",
+        "owner": "Quality",
+        "type": "task",
+        "typeName": "Tarefa",
+        "title": "Falar com contabilidade e ajustar regra de compra notebooks",
+        "description": "",
+        "dueAt": "2026-08-28T08:00",
+        "priority": "medium",
+        "status": "open",
+        "createdAt": "2026-08-27T22:44:05.698Z",
+        "updatedAt": "2026-08-27T22:44:05.698Z",
+        "completedAt": null
+      },
+      "after": {
+        "id": "task_mtc40r7m_zqeftb",
+        "customerId": "",
+        "customerName": "",
+        "conversationId": "",
+        "owner": "Quality",
+        "type": "task",
+        "typeName": "Tarefa",
+        "title": "Falar com contabilidade e ajustar regra de compra notebooks",
+        "description": "",
+        "dueAt": "2026-08-28T08:00",
+        "priority": "medium",
+        "status": "completed",
+        "createdAt": "2026-08-27T22:44:05.698Z",
+        "updatedAt": "2026-08-31T18:21:56.459Z",
+        "completedAt": "2026-08-31T18:21:56.459Z",
+        "updatedBy": "Matheus Fernando",
+        "history": [
+          {
+            "at": "2026-08-31T18:21:56.459Z",
+            "actor": "Matheus Fernando",
+            "action": "completed",
+            "before": {
+              "title": "Falar com contabilidade e ajustar regra de compra notebooks",
+              "description": "",
+              "dueAt": "2026-08-28T08:00",
+              "priority": "medium",
+              "type": "task",
+              "typeName": "Tarefa",
+              "customerId": "",
+              "customerName": "",
+              "owner": "Quality",
+              "status": "open"
+            },
+            "after": {
+              "title": "Falar com contabilidade e ajustar regra de compra notebooks",
+              "description": "",
+              "dueAt": "2026-08-28T08:00",
+              "priority": "medium",
+              "type": "task",
+              "typeName": "Tarefa",
+              "customerId": "",
+              "customerName": "",
+              "owner": "Quality",
+              "status": "completed"
+            }
+          }
+        ]
+      },
+      "ip": "127.0.0.1",
+      "requestId": ""
+    },
+    {
+      "id": "AUD-00000103",
+      "at": "2026-08-31T19:04:28.367Z",
+      "module": "produtos",
+      "action": "PRODUCT_UPDATED",
+      "actor": "Matheus Fernando",
+      "entityType": "product",
+      "entityId": "1781122138913",
+      "documentId": "",
+      "reason": "Cadastro de produto atualizado",
+      "before": {
+        "name": "Samsung A56 5g 256gb 8gb ram 6.7\"",
+        "slug": "samsung-a56-5g-256gb",
+        "price": null,
+        "image": "images/Samsung-A56-Preto.jpeg",
+        "gallery": [],
+        "category": "smartphones",
+        "showPrice": false,
+        "featured": false,
+        "active": true,
+        "detailsEnabled": true,
+        "descriptionShort": "",
+        "descriptionLong": "",
+        "id": 1781122138913,
+        "erp": {
+          "internalCode": "PRD-47",
+          "categoryId": "ERP-CAT-1",
+          "category": "smartphones"
+        },
+        "code": "PRD-47",
+        "inventory": {
+          "itemId": "PRD-1781122138913",
+          "stockControlled": true,
+          "allowNegative": false,
+          "minimumQuantity": 0,
+          "channelAvailability": {
+            "site": {
+              "mode": "shared",
+              "enabled": true,
+              "limit": null,
+              "physicalSafety": 0
+            }
+          }
+        },
+        "inventoryBalance": {
+          "inventoryItemId": "PRD-1781122138913",
+          "locationId": "loja-principal",
+          "physicalQuantity": 0,
+          "reservedQuantity": 0,
+          "availableQuantity": 0,
+          "minimumQuantity": 0,
+          "updatedAt": "2026-08-16T00:18:28.078Z"
+        },
+        "stock": 0
+      },
+      "after": {
+        "name": "Samsung A56 5g 256gb 8gb ram 6.7\"",
+        "slug": "samsung-a56-5g-256gb",
+        "price": null,
+        "image": "images/Samsung-A56-Preto.jpeg",
+        "gallery": [],
+        "category": "smartphones",
+        "showPrice": false,
+        "featured": false,
+        "active": true,
+        "detailsEnabled": true,
+        "descriptionShort": "",
+        "descriptionLong": "",
+        "id": 1781122138913,
+        "erp": {
+          "internalCode": "PRD-47",
+          "categoryId": "ERP-CAT-1",
+          "category": "smartphones",
+          "sku": "",
+          "supplierCode": "",
+          "searchAlias": "",
+          "barcode": "",
+          "ncm": "",
+          "fiscal": {
+            "ncm": ""
+          },
+          "brand": "",
+          "unit": "UN",
+          "subcategory": "",
+          "mainSupplierId": "",
+          "preferredSupplierId": "",
+          "active": true
+        },
+        "code": "PRD-47",
+        "inventory": {
+          "itemId": "PRD-1781122138913",
+          "stockControlled": true,
+          "allowNegative": false,
+          "minimumQuantity": 0,
+          "channelAvailability": {
+            "site": {
+              "mode": "shared",
+              "enabled": true,
+              "limit": null,
+              "physicalSafety": 0
+            }
+          }
+        },
+        "inventoryBalance": {
+          "inventoryItemId": "PRD-1781122138913",
+          "locationId": "loja-principal",
+          "physicalQuantity": 0,
+          "reservedQuantity": 0,
+          "availableQuantity": 0,
+          "minimumQuantity": 0,
+          "updatedAt": "2026-08-16T00:18:28.078Z"
+        },
+        "stock": 0,
+        "sku": "",
+        "barcode": "",
+        "ncm": "",
+        "brand": "",
+        "commercial": {
+          "costPrice": null,
+          "erpPrice": null,
+          "salePrice": null,
+          "marketplacePrice": null,
+          "promotionalPrice": null,
+          "desiredMarginPercent": null,
+          "expectedProfit": null,
+          "defaultCommissionPercent": null,
+          "cashPrice": null,
+          "installmentPrice": null,
+          "minimumPrice": null,
+          "minimumMarginPercent": null,
+          "discountPolicy": "inherit",
+          "maximumDiscountPercent": null,
+          "maximumDiscountAmount": null,
+          "requiresAuthorization": false
+        },
+        "subcategory": "",
+        "tags": [],
+        "relatedManualIds": [],
+        "crossSellIds": [],
+        "virtualStore": {
+          "name": "Samsung A56 5g 256gb 8gb ram 6.7\"",
+          "price": null,
+          "active": true,
+          "seoTitle": "Samsung Galaxy A56 5G 256GB 8GB RAM Tela 6.7\"",
+          "seoDescription": "Samsung Galaxy A56 5G 256GB com 8GB RAM, tela Super AMOLED 6.7\" 120Hz, câmera de 50MP e conexão 5G. Desempenho, espaço e tecnologia.",
+          "channels": {
+            "lojaVirtual": {
+              "enabled": true
+            },
+            "mercadoLivre": {
+              "enabled": false
+            },
+            "shopee": {
+              "enabled": false
+            },
+            "amazon": {
+              "enabled": false
+            },
+            "magalu": {
+              "enabled": false
+            }
+          }
+        },
+        "showVariationsOnCard": true,
+        "variations": {
+          "enabled": false,
+          "colors": [],
+          "storage": [],
+          "ram": [],
+          "condition": [],
+          "combinations": [],
+          "labels": {},
+          "colorsText": "",
+          "storageText": "",
+          "ramText": "",
+          "conditionText": "",
+          "labelsText": "{}",
+          "combinationsText": ""
+        }
+      },
+      "ip": "127.0.0.1",
+      "requestId": "58adebcc-ebca-4c8b-88c9-d06613e402c7"
+    },
+    {
+      "id": "AUD-00000104",
+      "at": "2026-08-31T19:05:13.617Z",
+      "module": "produtos",
+      "action": "PRODUCT_UPDATED",
+      "actor": "Matheus Fernando",
+      "entityType": "product",
+      "entityId": "1781122138913",
+      "documentId": "",
+      "reason": "Cadastro de produto atualizado",
+      "before": {
+        "name": "Samsung A56 5g 256gb 8gb ram 6.7\"",
+        "slug": "samsung-a56-5g-256gb",
+        "price": null,
+        "image": "images/Samsung-A56-Preto.jpeg",
+        "gallery": [],
+        "category": "smartphones",
+        "showPrice": false,
+        "featured": false,
+        "active": true,
+        "detailsEnabled": true,
+        "descriptionShort": "",
+        "descriptionLong": "",
+        "id": 1781122138913,
+        "erp": {
+          "internalCode": "PRD-47",
+          "categoryId": "ERP-CAT-1",
+          "category": "smartphones",
+          "sku": "",
+          "supplierCode": "",
+          "searchAlias": "",
+          "barcode": "",
+          "ncm": "",
+          "fiscal": {
+            "ncm": ""
+          },
+          "brand": "",
+          "unit": "UN",
+          "subcategory": "",
+          "mainSupplierId": "",
+          "preferredSupplierId": "",
+          "active": true
+        },
+        "code": "PRD-47",
+        "inventory": {
+          "itemId": "PRD-1781122138913",
+          "stockControlled": true,
+          "allowNegative": false,
+          "minimumQuantity": 0,
+          "channelAvailability": {
+            "site": {
+              "mode": "shared",
+              "enabled": true,
+              "limit": null,
+              "physicalSafety": 0
+            }
+          }
+        },
+        "inventoryBalance": {
+          "inventoryItemId": "PRD-1781122138913",
+          "locationId": "loja-principal",
+          "physicalQuantity": 0,
+          "reservedQuantity": 0,
+          "availableQuantity": 0,
+          "minimumQuantity": 0,
+          "updatedAt": "2026-08-16T00:18:28.078Z"
+        },
+        "stock": 0,
+        "sku": "",
+        "barcode": "",
+        "ncm": "",
+        "brand": "",
+        "commercial": {
+          "costPrice": null,
+          "erpPrice": null,
+          "salePrice": null,
+          "marketplacePrice": null,
+          "promotionalPrice": null,
+          "desiredMarginPercent": null,
+          "expectedProfit": null,
+          "defaultCommissionPercent": null,
+          "cashPrice": null,
+          "installmentPrice": null,
+          "minimumPrice": null,
+          "minimumMarginPercent": null,
+          "discountPolicy": "inherit",
+          "maximumDiscountPercent": null,
+          "maximumDiscountAmount": null,
+          "requiresAuthorization": false
+        },
+        "subcategory": "",
+        "tags": [],
+        "relatedManualIds": [],
+        "crossSellIds": [],
+        "virtualStore": {
+          "name": "Samsung A56 5g 256gb 8gb ram 6.7\"",
+          "price": null,
+          "active": true,
+          "seoTitle": "Samsung Galaxy A56 5G 256GB 8GB RAM Tela 6.7\"",
+          "seoDescription": "Samsung Galaxy A56 5G 256GB com 8GB RAM, tela Super AMOLED 6.7\" 120Hz, câmera de 50MP e conexão 5G. Desempenho, espaço e tecnologia.",
+          "channels": {
+            "lojaVirtual": {
+              "enabled": true
+            },
+            "mercadoLivre": {
+              "enabled": false
+            },
+            "shopee": {
+              "enabled": false
+            },
+            "amazon": {
+              "enabled": false
+            },
+            "magalu": {
+              "enabled": false
+            }
+          }
+        },
+        "showVariationsOnCard": true,
+        "variations": {
+          "enabled": false,
+          "colors": [],
+          "storage": [],
+          "ram": [],
+          "condition": [],
+          "combinations": [],
+          "labels": {},
+          "colorsText": "",
+          "storageText": "",
+          "ramText": "",
+          "conditionText": "",
+          "labelsText": "{}",
+          "combinationsText": ""
+        }
+      },
+      "after": {
+        "name": "Samsung A56 5g 256gb 8gb ram 6.7\"",
+        "slug": "samsung-a56-5g-256gb",
+        "price": null,
+        "image": "images/Samsung-A56-Preto.jpeg",
+        "gallery": [],
+        "category": "smartphones",
+        "showPrice": false,
+        "featured": false,
+        "active": true,
+        "detailsEnabled": true,
+        "descriptionShort": "",
+        "descriptionLong": "<p>📱 <b>Samsung Galaxy A56 5G 256GB – Potência, câmera e tela incrível<br></b>combina ótimo desempenho, muito espaço interno e recursos avançados para quem busca um smartphone completo para o dia a dia.</p><p>Com <strong>256GB de armazenamento e 8GB de RAM</strong>, oferece espaço de sobra para fotos, vídeos, aplicativos e arquivos, além de excelente fluidez para redes sociais, trabalho, jogos e multitarefas.</p><p>✨ <strong>Destaques:</strong><br>✅ 256GB de armazenamento<br>✅ 8GB de memória RAM<br>✅ Conectividade 5G<br>✅ Tela Super AMOLED de 6.7\"<br>✅ Taxa de atualização de até 120Hz<br>✅ Câmera principal de 50MP<br>✅ Câmeras traseiras de 50MP + 12MP + 5MP<br>✅ Câmera frontal de 12MP<br>✅ Gravação de vídeos em 4K<br>✅ Processador Octa-Core<br>✅ Dual SIM e suporte a eSIM</p><p>🚀 Um smartphone moderno e completo para quem procura <strong>velocidade, ótima câmera, bastante armazenamento e uma tela de alta qualidade</strong>.</p>",
+        "id": 1781122138913,
+        "erp": {
+          "internalCode": "PRD-47",
+          "categoryId": "ERP-CAT-1",
+          "category": "smartphones",
+          "sku": "",
+          "supplierCode": "",
+          "searchAlias": "",
+          "barcode": "",
+          "ncm": "",
+          "fiscal": {
+            "ncm": ""
+          },
+          "brand": "",
+          "unit": "UN",
+          "subcategory": "",
+          "mainSupplierId": "",
+          "preferredSupplierId": "",
+          "active": true
+        },
+        "code": "PRD-47",
+        "inventory": {
+          "itemId": "PRD-1781122138913",
+          "stockControlled": true,
+          "allowNegative": false,
+          "minimumQuantity": 0,
+          "channelAvailability": {
+            "site": {
+              "mode": "shared",
+              "enabled": true,
+              "limit": null,
+              "physicalSafety": 0
+            }
+          }
+        },
+        "inventoryBalance": {
+          "inventoryItemId": "PRD-1781122138913",
+          "locationId": "loja-principal",
+          "physicalQuantity": 0,
+          "reservedQuantity": 0,
+          "availableQuantity": 0,
+          "minimumQuantity": 0,
+          "updatedAt": "2026-08-16T00:18:28.078Z"
+        },
+        "stock": 0,
+        "sku": "",
+        "barcode": "",
+        "ncm": "",
+        "brand": "",
+        "commercial": {
+          "costPrice": null,
+          "erpPrice": null,
+          "salePrice": null,
+          "marketplacePrice": null,
+          "promotionalPrice": null,
+          "desiredMarginPercent": null,
+          "expectedProfit": null,
+          "defaultCommissionPercent": null,
+          "cashPrice": null,
+          "installmentPrice": null,
+          "minimumPrice": null,
+          "minimumMarginPercent": null,
+          "discountPolicy": "inherit",
+          "maximumDiscountPercent": null,
+          "maximumDiscountAmount": null,
+          "requiresAuthorization": false
+        },
+        "subcategory": "",
+        "tags": [],
+        "relatedManualIds": [],
+        "crossSellIds": [],
+        "virtualStore": {
+          "name": "Samsung A56 5g 256gb 8gb ram 6.7\"",
+          "price": null,
+          "active": true,
+          "seoTitle": "Samsung Galaxy A56 5G 256GB 8GB RAM Tela 6.7\"",
+          "seoDescription": "Samsung Galaxy A56 5G 256GB com 8GB RAM, tela Super AMOLED 6.7\" 120Hz, câmera de 50MP e conexão 5G. Desempenho, espaço e tecnologia.",
+          "channels": {
+            "lojaVirtual": {
+              "enabled": true
+            },
+            "mercadoLivre": {
+              "enabled": false
+            },
+            "shopee": {
+              "enabled": false
+            },
+            "amazon": {
+              "enabled": false
+            },
+            "magalu": {
+              "enabled": false
+            }
+          }
+        },
+        "showVariationsOnCard": true,
+        "variations": {
+          "enabled": false,
+          "colors": [],
+          "storage": [],
+          "ram": [],
+          "condition": [],
+          "combinations": [],
+          "labels": {},
+          "colorsText": "",
+          "storageText": "",
+          "ramText": "",
+          "conditionText": "",
+          "labelsText": "{}",
+          "combinationsText": ""
+        }
+      },
+      "ip": "127.0.0.1",
+      "requestId": "0fe233af-1bff-4051-95ea-79c4e4a55d44"
+    },
+    {
+      "id": "AUD-00000105",
+      "at": "2026-08-31T19:05:15.795Z",
+      "module": "produtos",
+      "action": "PRODUCT_UPDATED",
+      "actor": "Matheus Fernando",
+      "entityType": "product",
+      "entityId": "1781122138913",
+      "documentId": "",
+      "reason": "Cadastro de produto atualizado",
+      "before": {
+        "name": "Samsung A56 5g 256gb 8gb ram 6.7\"",
+        "slug": "samsung-a56-5g-256gb",
+        "price": null,
+        "image": "images/Samsung-A56-Preto.jpeg",
+        "gallery": [],
+        "category": "smartphones",
+        "showPrice": false,
+        "featured": false,
+        "active": true,
+        "detailsEnabled": true,
+        "descriptionShort": "",
+        "descriptionLong": "<p>📱 <b>Samsung Galaxy A56 5G 256GB – Potência, câmera e tela incrível<br></b>combina ótimo desempenho, muito espaço interno e recursos avançados para quem busca um smartphone completo para o dia a dia.</p><p>Com <strong>256GB de armazenamento e 8GB de RAM</strong>, oferece espaço de sobra para fotos, vídeos, aplicativos e arquivos, além de excelente fluidez para redes sociais, trabalho, jogos e multitarefas.</p><p>✨ <strong>Destaques:</strong><br>✅ 256GB de armazenamento<br>✅ 8GB de memória RAM<br>✅ Conectividade 5G<br>✅ Tela Super AMOLED de 6.7\"<br>✅ Taxa de atualização de até 120Hz<br>✅ Câmera principal de 50MP<br>✅ Câmeras traseiras de 50MP + 12MP + 5MP<br>✅ Câmera frontal de 12MP<br>✅ Gravação de vídeos em 4K<br>✅ Processador Octa-Core<br>✅ Dual SIM e suporte a eSIM</p><p>🚀 Um smartphone moderno e completo para quem procura <strong>velocidade, ótima câmera, bastante armazenamento e uma tela de alta qualidade</strong>.</p>",
+        "id": 1781122138913,
+        "erp": {
+          "internalCode": "PRD-47",
+          "categoryId": "ERP-CAT-1",
+          "category": "smartphones",
+          "sku": "",
+          "supplierCode": "",
+          "searchAlias": "",
+          "barcode": "",
+          "ncm": "",
+          "fiscal": {
+            "ncm": ""
+          },
+          "brand": "",
+          "unit": "UN",
+          "subcategory": "",
+          "mainSupplierId": "",
+          "preferredSupplierId": "",
+          "active": true
+        },
+        "code": "PRD-47",
+        "inventory": {
+          "itemId": "PRD-1781122138913",
+          "stockControlled": true,
+          "allowNegative": false,
+          "minimumQuantity": 0,
+          "channelAvailability": {
+            "site": {
+              "mode": "shared",
+              "enabled": true,
+              "limit": null,
+              "physicalSafety": 0
+            }
+          }
+        },
+        "inventoryBalance": {
+          "inventoryItemId": "PRD-1781122138913",
+          "locationId": "loja-principal",
+          "physicalQuantity": 0,
+          "reservedQuantity": 0,
+          "availableQuantity": 0,
+          "minimumQuantity": 0,
+          "updatedAt": "2026-08-16T00:18:28.078Z"
+        },
+        "stock": 0,
+        "sku": "",
+        "barcode": "",
+        "ncm": "",
+        "brand": "",
+        "commercial": {
+          "costPrice": null,
+          "erpPrice": null,
+          "salePrice": null,
+          "marketplacePrice": null,
+          "promotionalPrice": null,
+          "desiredMarginPercent": null,
+          "expectedProfit": null,
+          "defaultCommissionPercent": null,
+          "cashPrice": null,
+          "installmentPrice": null,
+          "minimumPrice": null,
+          "minimumMarginPercent": null,
+          "discountPolicy": "inherit",
+          "maximumDiscountPercent": null,
+          "maximumDiscountAmount": null,
+          "requiresAuthorization": false
+        },
+        "subcategory": "",
+        "tags": [],
+        "relatedManualIds": [],
+        "crossSellIds": [],
+        "virtualStore": {
+          "name": "Samsung A56 5g 256gb 8gb ram 6.7\"",
+          "price": null,
+          "active": true,
+          "seoTitle": "Samsung Galaxy A56 5G 256GB 8GB RAM Tela 6.7\"",
+          "seoDescription": "Samsung Galaxy A56 5G 256GB com 8GB RAM, tela Super AMOLED 6.7\" 120Hz, câmera de 50MP e conexão 5G. Desempenho, espaço e tecnologia.",
+          "channels": {
+            "lojaVirtual": {
+              "enabled": true
+            },
+            "mercadoLivre": {
+              "enabled": false
+            },
+            "shopee": {
+              "enabled": false
+            },
+            "amazon": {
+              "enabled": false
+            },
+            "magalu": {
+              "enabled": false
+            }
+          }
+        },
+        "showVariationsOnCard": true,
+        "variations": {
+          "enabled": false,
+          "colors": [],
+          "storage": [],
+          "ram": [],
+          "condition": [],
+          "combinations": [],
+          "labels": {},
+          "colorsText": "",
+          "storageText": "",
+          "ramText": "",
+          "conditionText": "",
+          "labelsText": "{}",
+          "combinationsText": ""
+        }
+      },
+      "after": {
+        "name": "Samsung A56 5g 256gb 8gb ram 6.7\"",
+        "slug": "samsung-a56-5g-256gb",
+        "price": null,
+        "image": "images/Samsung-A56-Preto.jpeg",
+        "gallery": [],
+        "category": "smartphones",
+        "showPrice": false,
+        "featured": false,
+        "active": true,
+        "detailsEnabled": true,
+        "descriptionShort": "",
+        "descriptionLong": "<p>📱 <b>Samsung Galaxy A56 5G 256GB – Potência, câmera e tela incrível<br></b>combina ótimo desempenho, muito espaço interno e recursos avançados para quem busca um smartphone completo para o dia a dia.</p><p>Com <strong>256GB de armazenamento e 8GB de RAM</strong>, oferece espaço de sobra para fotos, vídeos, aplicativos e arquivos, além de excelente fluidez para redes sociais, trabalho, jogos e multitarefas.</p><p>✨ <strong>Destaques:</strong><br>✅ 256GB de armazenamento<br>✅ 8GB de memória RAM<br>✅ Conectividade 5G<br>✅ Tela Super AMOLED de 6.7\"<br>✅ Taxa de atualização de até 120Hz<br>✅ Câmera principal de 50MP<br>✅ Câmeras traseiras de 50MP + 12MP + 5MP<br>✅ Câmera frontal de 12MP<br>✅ Gravação de vídeos em 4K<br>✅ Processador Octa-Core<br>✅ Dual SIM e suporte a eSIM</p><p>🚀 Um smartphone moderno e completo para quem procura <strong>velocidade, ótima câmera, bastante armazenamento e uma tela de alta qualidade</strong>.</p>",
+        "id": 1781122138913,
+        "erp": {
+          "internalCode": "PRD-47",
+          "categoryId": "ERP-CAT-1",
+          "category": "smartphones",
+          "sku": "",
+          "supplierCode": "",
+          "searchAlias": "",
+          "barcode": "",
+          "ncm": "",
+          "fiscal": {
+            "ncm": ""
+          },
+          "brand": "",
+          "unit": "UN",
+          "subcategory": "",
+          "mainSupplierId": "",
+          "preferredSupplierId": "",
+          "active": true
+        },
+        "code": "PRD-47",
+        "inventory": {
+          "itemId": "PRD-1781122138913",
+          "stockControlled": true,
+          "allowNegative": false,
+          "minimumQuantity": 0,
+          "channelAvailability": {
+            "site": {
+              "mode": "shared",
+              "enabled": true,
+              "limit": null,
+              "physicalSafety": 0
+            }
+          }
+        },
+        "inventoryBalance": {
+          "inventoryItemId": "PRD-1781122138913",
+          "locationId": "loja-principal",
+          "physicalQuantity": 0,
+          "reservedQuantity": 0,
+          "availableQuantity": 0,
+          "minimumQuantity": 0,
+          "updatedAt": "2026-08-16T00:18:28.078Z"
+        },
+        "stock": 0,
+        "sku": "",
+        "barcode": "",
+        "ncm": "",
+        "brand": "",
+        "commercial": {
+          "costPrice": null,
+          "erpPrice": null,
+          "salePrice": null,
+          "marketplacePrice": null,
+          "promotionalPrice": null,
+          "desiredMarginPercent": null,
+          "expectedProfit": null,
+          "defaultCommissionPercent": null,
+          "cashPrice": null,
+          "installmentPrice": null,
+          "minimumPrice": null,
+          "minimumMarginPercent": null,
+          "discountPolicy": "inherit",
+          "maximumDiscountPercent": null,
+          "maximumDiscountAmount": null,
+          "requiresAuthorization": false
+        },
+        "subcategory": "",
+        "tags": [],
+        "relatedManualIds": [],
+        "crossSellIds": [],
+        "virtualStore": {
+          "name": "Samsung A56 5g 256gb 8gb ram 6.7\"",
+          "price": null,
+          "active": true,
+          "seoTitle": "Samsung Galaxy A56 5G 256GB 8GB RAM Tela 6.7\"",
+          "seoDescription": "Samsung Galaxy A56 5G 256GB com 8GB RAM, tela Super AMOLED 6.7\" 120Hz, câmera de 50MP e conexão 5G. Desempenho, espaço e tecnologia.",
+          "channels": {
+            "lojaVirtual": {
+              "enabled": true
+            },
+            "mercadoLivre": {
+              "enabled": false
+            },
+            "shopee": {
+              "enabled": false
+            },
+            "amazon": {
+              "enabled": false
+            },
+            "magalu": {
+              "enabled": false
+            }
+          }
+        },
+        "showVariationsOnCard": true,
+        "variations": {
+          "enabled": false,
+          "colors": [],
+          "storage": [],
+          "ram": [],
+          "condition": [],
+          "combinations": [],
+          "labels": {},
+          "colorsText": "",
+          "storageText": "",
+          "ramText": "",
+          "conditionText": "",
+          "labelsText": "{}",
+          "combinationsText": ""
+        }
+      },
+      "ip": "127.0.0.1",
+      "requestId": "552736b6-4b7a-4c60-8c96-b2961be72a8a"
+    },
+    {
+      "id": "AUD-00000106",
+      "at": "2026-08-31T19:05:48.393Z",
+      "module": "produtos",
+      "action": "PRODUCT_UPDATED",
+      "actor": "Matheus Fernando",
+      "entityType": "product",
+      "entityId": "1780622740979",
+      "documentId": "",
+      "reason": "Cadastro de produto atualizado",
+      "before": {
+        "id": 1780622740979,
+        "name": "Samsung Galaxy A36 5G 256GB 8GB RAM Tela 6.7",
+        "price": null,
+        "image": "images/Samsung A36.jpeg",
+        "category": "smartphones",
+        "showPrice": false,
+        "featured": false,
+        "active": true,
+        "gallery": [],
+        "detailsEnabled": false,
+        "descriptionShort": "",
+        "descriptionLong": "",
+        "slug": "samsung-galaxy-a36-5g-256gb-8gb-ram-tela-6-7",
+        "erp": {
+          "internalCode": "PRD-43",
+          "categoryId": "ERP-CAT-1",
+          "category": "smartphones"
+        },
+        "code": "PRD-43",
+        "inventory": {
+          "itemId": "PRD-1780622740979",
+          "stockControlled": true,
+          "allowNegative": false,
+          "minimumQuantity": 0,
+          "channelAvailability": {
+            "site": {
+              "mode": "shared",
+              "enabled": true,
+              "limit": null,
+              "physicalSafety": 0
+            }
+          }
+        },
+        "inventoryBalance": {
+          "inventoryItemId": "PRD-1780622740979",
+          "locationId": "loja-principal",
+          "physicalQuantity": 0,
+          "reservedQuantity": 0,
+          "availableQuantity": 0,
+          "minimumQuantity": 0,
+          "updatedAt": "2026-08-16T00:18:28.078Z"
+        },
+        "stock": 0
+      },
+      "after": {
+        "id": 1780622740979,
+        "name": "Samsung Galaxy A36 5G 256GB 8GB RAM Tela 6.7",
+        "price": null,
+        "image": "images/Samsung A36.jpeg",
+        "category": "smartphones",
+        "showPrice": false,
+        "featured": false,
+        "active": true,
+        "gallery": [],
+        "detailsEnabled": false,
+        "descriptionShort": "",
+        "descriptionLong": "",
+        "slug": "samsung-galaxy-a36-5g-256gb-8gb-ram-tela-6-7",
+        "erp": {
+          "internalCode": "PRD-43",
+          "categoryId": "ERP-CAT-1",
+          "category": "smartphones",
+          "sku": "",
+          "supplierCode": "",
+          "searchAlias": "",
+          "barcode": "",
+          "ncm": "",
+          "fiscal": {
+            "ncm": ""
+          },
+          "brand": "",
+          "unit": "UN",
+          "subcategory": "",
+          "mainSupplierId": "",
+          "preferredSupplierId": "",
+          "active": true
+        },
+        "code": "PRD-43",
+        "inventory": {
+          "itemId": "PRD-1780622740979",
+          "stockControlled": true,
+          "allowNegative": false,
+          "minimumQuantity": 0,
+          "channelAvailability": {
+            "site": {
+              "mode": "shared",
+              "enabled": true,
+              "limit": null,
+              "physicalSafety": 0
+            }
+          }
+        },
+        "inventoryBalance": {
+          "inventoryItemId": "PRD-1780622740979",
+          "locationId": "loja-principal",
+          "physicalQuantity": 0,
+          "reservedQuantity": 0,
+          "availableQuantity": 0,
+          "minimumQuantity": 0,
+          "updatedAt": "2026-08-16T00:18:28.078Z"
+        },
+        "stock": 0,
+        "sku": "",
+        "barcode": "",
+        "ncm": "",
+        "brand": "",
+        "commercial": {
+          "costPrice": null,
+          "erpPrice": null,
+          "salePrice": null,
+          "marketplacePrice": null,
+          "promotionalPrice": null,
+          "desiredMarginPercent": null,
+          "expectedProfit": null,
+          "defaultCommissionPercent": null,
+          "cashPrice": null,
+          "installmentPrice": null,
+          "minimumPrice": null,
+          "minimumMarginPercent": null,
+          "discountPolicy": "inherit",
+          "maximumDiscountPercent": null,
+          "maximumDiscountAmount": null,
+          "requiresAuthorization": false
+        },
+        "subcategory": "",
+        "tags": [],
+        "relatedManualIds": [],
+        "crossSellIds": [],
+        "virtualStore": {
+          "name": "Samsung Galaxy A36 5G 256GB 8GB RAM Tela 6.7",
+          "price": null,
+          "active": true,
+          "seoTitle": "Samsung Galaxy A36 5G 256GB 8GB RAM Tela 6.7\"",
+          "seoDescription": "Samsung Galaxy A36 5G 256GB com 8GB RAM, tela Super AMOLED 6.7\" 120Hz, câmera de 50MP e conexão 5G. Tecnologia e desempenho para o dia a dia.",
+          "channels": {
+            "lojaVirtual": {
+              "enabled": true
+            },
+            "mercadoLivre": {
+              "enabled": false
+            },
+            "shopee": {
+              "enabled": false
+            },
+            "amazon": {
+              "enabled": false
+            },
+            "magalu": {
+              "enabled": false
+            }
+          }
+        },
+        "showVariationsOnCard": false,
+        "variations": {
+          "enabled": false,
+          "colors": [],
+          "storage": [],
+          "ram": [],
+          "condition": [],
+          "combinations": [],
+          "labels": {},
+          "colorsText": "",
+          "storageText": "",
+          "ramText": "",
+          "conditionText": "",
+          "labelsText": "{}",
+          "combinationsText": ""
+        }
+      },
+      "ip": "127.0.0.1",
+      "requestId": "2f5ddf4c-b9a6-4854-ab7e-7128d543b5bb"
+    },
+    {
+      "id": "AUD-00000107",
+      "at": "2026-08-31T19:06:18.709Z",
+      "module": "produtos",
+      "action": "PRODUCT_UPDATED",
+      "actor": "Matheus Fernando",
+      "entityType": "product",
+      "entityId": "1780622740979",
+      "documentId": "",
+      "reason": "Cadastro de produto atualizado",
+      "before": {
+        "id": 1780622740979,
+        "name": "Samsung Galaxy A36 5G 256GB 8GB RAM Tela 6.7",
+        "price": null,
+        "image": "images/Samsung A36.jpeg",
+        "category": "smartphones",
+        "showPrice": false,
+        "featured": false,
+        "active": true,
+        "gallery": [],
+        "detailsEnabled": false,
+        "descriptionShort": "",
+        "descriptionLong": "",
+        "slug": "samsung-galaxy-a36-5g-256gb-8gb-ram-tela-6-7",
+        "erp": {
+          "internalCode": "PRD-43",
+          "categoryId": "ERP-CAT-1",
+          "category": "smartphones",
+          "sku": "",
+          "supplierCode": "",
+          "searchAlias": "",
+          "barcode": "",
+          "ncm": "",
+          "fiscal": {
+            "ncm": ""
+          },
+          "brand": "",
+          "unit": "UN",
+          "subcategory": "",
+          "mainSupplierId": "",
+          "preferredSupplierId": "",
+          "active": true
+        },
+        "code": "PRD-43",
+        "inventory": {
+          "itemId": "PRD-1780622740979",
+          "stockControlled": true,
+          "allowNegative": false,
+          "minimumQuantity": 0,
+          "channelAvailability": {
+            "site": {
+              "mode": "shared",
+              "enabled": true,
+              "limit": null,
+              "physicalSafety": 0
+            }
+          }
+        },
+        "inventoryBalance": {
+          "inventoryItemId": "PRD-1780622740979",
+          "locationId": "loja-principal",
+          "physicalQuantity": 0,
+          "reservedQuantity": 0,
+          "availableQuantity": 0,
+          "minimumQuantity": 0,
+          "updatedAt": "2026-08-16T00:18:28.078Z"
+        },
+        "stock": 0,
+        "sku": "",
+        "barcode": "",
+        "ncm": "",
+        "brand": "",
+        "commercial": {
+          "costPrice": null,
+          "erpPrice": null,
+          "salePrice": null,
+          "marketplacePrice": null,
+          "promotionalPrice": null,
+          "desiredMarginPercent": null,
+          "expectedProfit": null,
+          "defaultCommissionPercent": null,
+          "cashPrice": null,
+          "installmentPrice": null,
+          "minimumPrice": null,
+          "minimumMarginPercent": null,
+          "discountPolicy": "inherit",
+          "maximumDiscountPercent": null,
+          "maximumDiscountAmount": null,
+          "requiresAuthorization": false
+        },
+        "subcategory": "",
+        "tags": [],
+        "relatedManualIds": [],
+        "crossSellIds": [],
+        "virtualStore": {
+          "name": "Samsung Galaxy A36 5G 256GB 8GB RAM Tela 6.7",
+          "price": null,
+          "active": true,
+          "seoTitle": "Samsung Galaxy A36 5G 256GB 8GB RAM Tela 6.7\"",
+          "seoDescription": "Samsung Galaxy A36 5G 256GB com 8GB RAM, tela Super AMOLED 6.7\" 120Hz, câmera de 50MP e conexão 5G. Tecnologia e desempenho para o dia a dia.",
+          "channels": {
+            "lojaVirtual": {
+              "enabled": true
+            },
+            "mercadoLivre": {
+              "enabled": false
+            },
+            "shopee": {
+              "enabled": false
+            },
+            "amazon": {
+              "enabled": false
+            },
+            "magalu": {
+              "enabled": false
+            }
+          }
+        },
+        "showVariationsOnCard": false,
+        "variations": {
+          "enabled": false,
+          "colors": [],
+          "storage": [],
+          "ram": [],
+          "condition": [],
+          "combinations": [],
+          "labels": {},
+          "colorsText": "",
+          "storageText": "",
+          "ramText": "",
+          "conditionText": "",
+          "labelsText": "{}",
+          "combinationsText": ""
+        }
+      },
+      "after": {
+        "id": 1780622740979,
+        "name": "Samsung Galaxy A36 5G 256GB 8GB RAM Tela 6.7",
+        "price": null,
+        "image": "images/Samsung A36.jpeg",
+        "category": "smartphones",
+        "showPrice": false,
+        "featured": false,
+        "active": true,
+        "gallery": [],
+        "detailsEnabled": false,
+        "descriptionShort": "",
+        "descriptionLong": "<p>📱 <strong>Samsung Galaxy A36 5G 256GB – Tecnologia e desempenho para todos os momentos</strong></p><p>Uma excelente escolha para quem busca velocidade, amplo armazenamento e uma experiência visual de alta qualidade.</p><p>São <strong>256GB de armazenamento interno e 8GB de RAM</strong>, oferecendo espaço para aplicativos, fotos, vídeos e documentos, além de desempenho fluido para as principais tarefas do dia a dia.</p><p>🔥 <strong>Principais características:</strong><br>✅ 256GB de armazenamento<br>✅ 8GB de memória RAM<br>✅ Tecnologia 5G<br>✅ Tela Super AMOLED de 6.7\"<br>✅ Taxa de atualização de até 120Hz<br>✅ Câmera principal de 50MP<br>✅ Conjunto traseiro de 50MP + 8MP + 5MP<br>✅ Câmera frontal de 12MP<br>✅ Gravação de vídeos em 4K<br>✅ Processador Octa-Core<br>✅ Dual SIM</p><p>💫 Ideal para quem procura um <strong>Samsung 5G com bastante memória, ótima tela e câmeras versáteis</strong>, pronto para acompanhar sua rotina.</p>",
+        "slug": "samsung-galaxy-a36-5g-256gb-8gb-ram-tela-6-7",
+        "erp": {
+          "internalCode": "PRD-43",
+          "categoryId": "ERP-CAT-1",
+          "category": "smartphones",
+          "sku": "",
+          "supplierCode": "",
+          "searchAlias": "",
+          "barcode": "",
+          "ncm": "",
+          "fiscal": {
+            "ncm": ""
+          },
+          "brand": "",
+          "unit": "UN",
+          "subcategory": "",
+          "mainSupplierId": "",
+          "preferredSupplierId": "",
+          "active": true
+        },
+        "code": "PRD-43",
+        "inventory": {
+          "itemId": "PRD-1780622740979",
+          "stockControlled": true,
+          "allowNegative": false,
+          "minimumQuantity": 0,
+          "channelAvailability": {
+            "site": {
+              "mode": "shared",
+              "enabled": true,
+              "limit": null,
+              "physicalSafety": 0
+            }
+          }
+        },
+        "inventoryBalance": {
+          "inventoryItemId": "PRD-1780622740979",
+          "locationId": "loja-principal",
+          "physicalQuantity": 0,
+          "reservedQuantity": 0,
+          "availableQuantity": 0,
+          "minimumQuantity": 0,
+          "updatedAt": "2026-08-16T00:18:28.078Z"
+        },
+        "stock": 0,
+        "sku": "",
+        "barcode": "",
+        "ncm": "",
+        "brand": "",
+        "commercial": {
+          "costPrice": null,
+          "erpPrice": null,
+          "salePrice": null,
+          "marketplacePrice": null,
+          "promotionalPrice": null,
+          "desiredMarginPercent": null,
+          "expectedProfit": null,
+          "defaultCommissionPercent": null,
+          "cashPrice": null,
+          "installmentPrice": null,
+          "minimumPrice": null,
+          "minimumMarginPercent": null,
+          "discountPolicy": "inherit",
+          "maximumDiscountPercent": null,
+          "maximumDiscountAmount": null,
+          "requiresAuthorization": false
+        },
+        "subcategory": "",
+        "tags": [],
+        "relatedManualIds": [],
+        "crossSellIds": [],
+        "virtualStore": {
+          "name": "Samsung Galaxy A36 5G 256GB 8GB RAM Tela 6.7",
+          "price": null,
+          "active": true,
+          "seoTitle": "Samsung Galaxy A36 5G 256GB 8GB RAM Tela 6.7\"",
+          "seoDescription": "Samsung Galaxy A36 5G 256GB com 8GB RAM, tela Super AMOLED 6.7\" 120Hz, câmera de 50MP e conexão 5G. Tecnologia e desempenho para o dia a dia.",
+          "channels": {
+            "lojaVirtual": {
+              "enabled": true
+            },
+            "mercadoLivre": {
+              "enabled": false
+            },
+            "shopee": {
+              "enabled": false
+            },
+            "amazon": {
+              "enabled": false
+            },
+            "magalu": {
+              "enabled": false
+            }
+          }
+        },
+        "showVariationsOnCard": false,
+        "variations": {
+          "enabled": false,
+          "colors": [],
+          "storage": [],
+          "ram": [],
+          "condition": [],
+          "combinations": [],
+          "labels": {},
+          "colorsText": "",
+          "storageText": "",
+          "ramText": "",
+          "conditionText": "",
+          "labelsText": "{}",
+          "combinationsText": ""
+        }
+      },
+      "ip": "127.0.0.1",
+      "requestId": "a99d0b5a-859a-4634-b9fd-d4bbe88c5dd2"
+    },
+    {
+      "id": "AUD-00000108",
+      "at": "2026-08-31T19:06:28.729Z",
+      "module": "produtos",
+      "action": "PRODUCT_UPDATED",
+      "actor": "Matheus Fernando",
+      "entityType": "product",
+      "entityId": "1780622740979",
+      "documentId": "",
+      "reason": "Cadastro de produto atualizado",
+      "before": {
+        "id": 1780622740979,
+        "name": "Samsung Galaxy A36 5G 256GB 8GB RAM Tela 6.7",
+        "price": null,
+        "image": "images/Samsung A36.jpeg",
+        "category": "smartphones",
+        "showPrice": false,
+        "featured": false,
+        "active": true,
+        "gallery": [],
+        "detailsEnabled": false,
+        "descriptionShort": "",
+        "descriptionLong": "<p>📱 <strong>Samsung Galaxy A36 5G 256GB – Tecnologia e desempenho para todos os momentos</strong></p><p>Uma excelente escolha para quem busca velocidade, amplo armazenamento e uma experiência visual de alta qualidade.</p><p>São <strong>256GB de armazenamento interno e 8GB de RAM</strong>, oferecendo espaço para aplicativos, fotos, vídeos e documentos, além de desempenho fluido para as principais tarefas do dia a dia.</p><p>🔥 <strong>Principais características:</strong><br>✅ 256GB de armazenamento<br>✅ 8GB de memória RAM<br>✅ Tecnologia 5G<br>✅ Tela Super AMOLED de 6.7\"<br>✅ Taxa de atualização de até 120Hz<br>✅ Câmera principal de 50MP<br>✅ Conjunto traseiro de 50MP + 8MP + 5MP<br>✅ Câmera frontal de 12MP<br>✅ Gravação de vídeos em 4K<br>✅ Processador Octa-Core<br>✅ Dual SIM</p><p>💫 Ideal para quem procura um <strong>Samsung 5G com bastante memória, ótima tela e câmeras versáteis</strong>, pronto para acompanhar sua rotina.</p>",
+        "slug": "samsung-galaxy-a36-5g-256gb-8gb-ram-tela-6-7",
+        "erp": {
+          "internalCode": "PRD-43",
+          "categoryId": "ERP-CAT-1",
+          "category": "smartphones",
+          "sku": "",
+          "supplierCode": "",
+          "searchAlias": "",
+          "barcode": "",
+          "ncm": "",
+          "fiscal": {
+            "ncm": ""
+          },
+          "brand": "",
+          "unit": "UN",
+          "subcategory": "",
+          "mainSupplierId": "",
+          "preferredSupplierId": "",
+          "active": true
+        },
+        "code": "PRD-43",
+        "inventory": {
+          "itemId": "PRD-1780622740979",
+          "stockControlled": true,
+          "allowNegative": false,
+          "minimumQuantity": 0,
+          "channelAvailability": {
+            "site": {
+              "mode": "shared",
+              "enabled": true,
+              "limit": null,
+              "physicalSafety": 0
+            }
+          }
+        },
+        "inventoryBalance": {
+          "inventoryItemId": "PRD-1780622740979",
+          "locationId": "loja-principal",
+          "physicalQuantity": 0,
+          "reservedQuantity": 0,
+          "availableQuantity": 0,
+          "minimumQuantity": 0,
+          "updatedAt": "2026-08-16T00:18:28.078Z"
+        },
+        "stock": 0,
+        "sku": "",
+        "barcode": "",
+        "ncm": "",
+        "brand": "",
+        "commercial": {
+          "costPrice": null,
+          "erpPrice": null,
+          "salePrice": null,
+          "marketplacePrice": null,
+          "promotionalPrice": null,
+          "desiredMarginPercent": null,
+          "expectedProfit": null,
+          "defaultCommissionPercent": null,
+          "cashPrice": null,
+          "installmentPrice": null,
+          "minimumPrice": null,
+          "minimumMarginPercent": null,
+          "discountPolicy": "inherit",
+          "maximumDiscountPercent": null,
+          "maximumDiscountAmount": null,
+          "requiresAuthorization": false
+        },
+        "subcategory": "",
+        "tags": [],
+        "relatedManualIds": [],
+        "crossSellIds": [],
+        "virtualStore": {
+          "name": "Samsung Galaxy A36 5G 256GB 8GB RAM Tela 6.7",
+          "price": null,
+          "active": true,
+          "seoTitle": "Samsung Galaxy A36 5G 256GB 8GB RAM Tela 6.7\"",
+          "seoDescription": "Samsung Galaxy A36 5G 256GB com 8GB RAM, tela Super AMOLED 6.7\" 120Hz, câmera de 50MP e conexão 5G. Tecnologia e desempenho para o dia a dia.",
+          "channels": {
+            "lojaVirtual": {
+              "enabled": true
+            },
+            "mercadoLivre": {
+              "enabled": false
+            },
+            "shopee": {
+              "enabled": false
+            },
+            "amazon": {
+              "enabled": false
+            },
+            "magalu": {
+              "enabled": false
+            }
+          }
+        },
+        "showVariationsOnCard": false,
+        "variations": {
+          "enabled": false,
+          "colors": [],
+          "storage": [],
+          "ram": [],
+          "condition": [],
+          "combinations": [],
+          "labels": {},
+          "colorsText": "",
+          "storageText": "",
+          "ramText": "",
+          "conditionText": "",
+          "labelsText": "{}",
+          "combinationsText": ""
+        }
+      },
+      "after": {
+        "id": 1780622740979,
+        "name": "Samsung Galaxy A36 5G 256GB 8GB RAM Tela 6.7",
+        "price": null,
+        "image": "images/Samsung A36.jpeg",
+        "category": "smartphones",
+        "showPrice": false,
+        "featured": false,
+        "active": true,
+        "gallery": [],
+        "detailsEnabled": true,
+        "descriptionShort": "",
+        "descriptionLong": "<p>📱 <strong>Samsung Galaxy A36 5G 256GB – Tecnologia e desempenho para todos os momentos</strong></p><p>Uma excelente escolha para quem busca velocidade, amplo armazenamento e uma experiência visual de alta qualidade.</p><p>São <strong>256GB de armazenamento interno e 8GB de RAM</strong>, oferecendo espaço para aplicativos, fotos, vídeos e documentos, além de desempenho fluido para as principais tarefas do dia a dia.</p><p>🔥 <strong>Principais características:</strong><br>✅ 256GB de armazenamento<br>✅ 8GB de memória RAM<br>✅ Tecnologia 5G<br>✅ Tela Super AMOLED de 6.7\"<br>✅ Taxa de atualização de até 120Hz<br>✅ Câmera principal de 50MP<br>✅ Conjunto traseiro de 50MP + 8MP + 5MP<br>✅ Câmera frontal de 12MP<br>✅ Gravação de vídeos em 4K<br>✅ Processador Octa-Core<br>✅ Dual SIM</p><p>💫 Ideal para quem procura um <strong>Samsung 5G com bastante memória, ótima tela e câmeras versáteis</strong>, pronto para acompanhar sua rotina.</p>",
+        "slug": "samsung-galaxy-a36-5g-256gb-8gb-ram-tela-6-7",
+        "erp": {
+          "internalCode": "PRD-43",
+          "categoryId": "ERP-CAT-1",
+          "category": "smartphones",
+          "sku": "",
+          "supplierCode": "",
+          "searchAlias": "",
+          "barcode": "",
+          "ncm": "",
+          "fiscal": {
+            "ncm": ""
+          },
+          "brand": "",
+          "unit": "UN",
+          "subcategory": "",
+          "mainSupplierId": "",
+          "preferredSupplierId": "",
+          "active": true
+        },
+        "code": "PRD-43",
+        "inventory": {
+          "itemId": "PRD-1780622740979",
+          "stockControlled": true,
+          "allowNegative": false,
+          "minimumQuantity": 0,
+          "channelAvailability": {
+            "site": {
+              "mode": "shared",
+              "enabled": true,
+              "limit": null,
+              "physicalSafety": 0
+            }
+          }
+        },
+        "inventoryBalance": {
+          "inventoryItemId": "PRD-1780622740979",
+          "locationId": "loja-principal",
+          "physicalQuantity": 0,
+          "reservedQuantity": 0,
+          "availableQuantity": 0,
+          "minimumQuantity": 0,
+          "updatedAt": "2026-08-16T00:18:28.078Z"
+        },
+        "stock": 0,
+        "sku": "",
+        "barcode": "",
+        "ncm": "",
+        "brand": "",
+        "commercial": {
+          "costPrice": null,
+          "erpPrice": null,
+          "salePrice": null,
+          "marketplacePrice": null,
+          "promotionalPrice": null,
+          "desiredMarginPercent": null,
+          "expectedProfit": null,
+          "defaultCommissionPercent": null,
+          "cashPrice": null,
+          "installmentPrice": null,
+          "minimumPrice": null,
+          "minimumMarginPercent": null,
+          "discountPolicy": "inherit",
+          "maximumDiscountPercent": null,
+          "maximumDiscountAmount": null,
+          "requiresAuthorization": false
+        },
+        "subcategory": "",
+        "tags": [],
+        "relatedManualIds": [],
+        "crossSellIds": [],
+        "virtualStore": {
+          "name": "Samsung Galaxy A36 5G 256GB 8GB RAM Tela 6.7",
+          "price": null,
+          "active": true,
+          "seoTitle": "Samsung Galaxy A36 5G 256GB 8GB RAM Tela 6.7\"",
+          "seoDescription": "Samsung Galaxy A36 5G 256GB com 8GB RAM, tela Super AMOLED 6.7\" 120Hz, câmera de 50MP e conexão 5G. Tecnologia e desempenho para o dia a dia.",
+          "channels": {
+            "lojaVirtual": {
+              "enabled": true
+            },
+            "mercadoLivre": {
+              "enabled": false
+            },
+            "shopee": {
+              "enabled": false
+            },
+            "amazon": {
+              "enabled": false
+            },
+            "magalu": {
+              "enabled": false
+            }
+          }
+        },
+        "showVariationsOnCard": true,
+        "variations": {
+          "enabled": false,
+          "colors": [],
+          "storage": [],
+          "ram": [],
+          "condition": [],
+          "combinations": [],
+          "labels": {},
+          "colorsText": "",
+          "storageText": "",
+          "ramText": "",
+          "conditionText": "",
+          "labelsText": "{}",
+          "combinationsText": ""
+        }
+      },
+      "ip": "127.0.0.1",
+      "requestId": "764e14c5-d39f-490b-86e3-b7a30a29c950"
     }
   ],
-  "updatedAt": "2026-08-31T00:16:31.381Z"
+  "updatedAt": "2026-08-31T19:06:28.743Z"
 }

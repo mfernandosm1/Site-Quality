@@ -25,7 +25,6 @@
   .qa-pill strong{color:var(--qa-text)}
   .qa-back{display:inline-flex;align-items:center;gap:6px;border:1px solid color-mix(in srgb,var(--qa-blue) 55%,var(--qa-line));background:var(--qa-blue);color:#fff;text-decoration:none;border-radius:999px;padding:7px 10px;font-size:11px;font-weight:800;box-shadow:0 5px 14px color-mix(in srgb,var(--qa-blue) 22%,transparent)}
   .qa-back:hover{filter:brightness(1.06)}
-  .qa-flash{background:color-mix(in srgb,#22c55e 12%,var(--qa-card));border:1px solid color-mix(in srgb,#22c55e 34%,var(--qa-line));color:var(--qa-text);border-radius:12px;padding:9px 11px;margin-bottom:10px;font-size:12px}
 
   .qa-toolbar{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:10px}
   .qa-filters{display:flex;gap:6px;flex-wrap:wrap}
@@ -176,9 +175,6 @@
     </div>
   </div>
 
-  <% if (flash) { %>
-    <div class="qa-flash"><%= flash %></div>
-  <% } %>
 
   <div class="qa-toolbar">
     <div class="qa-filters">

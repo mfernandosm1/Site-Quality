@@ -2,6 +2,42 @@
   "version": "0.18.0",
   "items": [
     {
+      "id": "PEV-68aba874-e081-4967-b2e5-e7d8a6eea27f",
+      "payableId": "PAY-98832506-e0ba-487c-a011-a81849f5038b",
+      "action": "partial_payment",
+      "at": "2026-08-31T12:12:10.082Z",
+      "actor": "Matheus Fernando",
+      "paymentId": "PYP-b6f41ec5-0593-4e40-9fa8-5c15d763baf5",
+      "installmentId": "PIN-d1b52af0-7ba1-4639-8858-854216d93a58",
+      "value": 110.25,
+      "principalValue": 110.25,
+      "balanceAfter": 2943
+    },
+    {
+      "id": "PEV-2c489b51-dd88-452b-9728-b5a9e6156ea8",
+      "payableId": "PAY-64ffa0a2-e842-45a9-b87b-fc3edf76aed7",
+      "action": "paid",
+      "at": "2026-08-31T12:12:10.032Z",
+      "actor": "Matheus Fernando",
+      "paymentId": "PYP-85ca6d90-e21e-46bc-befa-ad392fcfce3a",
+      "installmentId": "PIN-4c8cf4d6-5854-4c0b-aecf-11c17615544f",
+      "value": 358.17,
+      "principalValue": 358.17,
+      "balanceAfter": 0
+    },
+    {
+      "id": "PEV-78cd3e44-46e7-4de8-b458-89dcd2207775",
+      "payableId": "PAY-875123cb-5c0c-4caa-9b2a-1fd0ba690924",
+      "action": "partial_payment",
+      "at": "2026-08-31T11:06:35.958Z",
+      "actor": "Matheus Fernando",
+      "paymentId": "PYP-d4a92f61-f00c-4128-b9e9-82a2a205653a",
+      "installmentId": "PIN-38b12acb-4be5-4606-a831-d4d6529873fd",
+      "value": 2745.95,
+      "principalValue": 2745.95,
+      "balanceAfter": 24713.55
+    },
+    {
       "id": "PEV-6b63d59c-060b-4c44-8d87-563f52026614",
       "payableId": "PAY-70cb0965-cb5b-49b9-8848-228d9cefa5bf",
       "action": "cash_reconciled",

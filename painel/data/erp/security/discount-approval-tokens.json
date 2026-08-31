@@ -2,34 +2,19 @@
   "version": "1.0",
   "items": [
     {
-      "id": "DAP-a6337e67-b110-4c7f-ade8-6b5b664b83d2",
-      "codeHash": "514f14b8929bd093ff6133acc940a81668575141b4d71d4aa77bfdd84e73d10f",
-      "salt": "8328c50c3bff95532513a019",
+      "id": "DAP-6b884270-b4b8-4c6d-be91-d2a5c32f5b49",
+      "codeHash": "67471413607e59a093c52a1514ef4cc1f028ae1671c603d2f1adb388182f110a",
+      "salt": "d8606b5972fdf9be38a3008b",
       "issuerId": "USR-d15976b1-a734-459f-8957-b9f42bc39ea2",
       "issuerName": "Matheus Fernando",
       "cashboxId": "caixa-principal",
-      "issuedAt": "2026-08-27T23:31:32.495Z",
-      "expiresAt": "2026-08-27T23:36:32.495Z",
-      "usedAt": null,
-      "usedById": null,
-      "usedByName": null,
-      "operationId": null,
-      "requestedPercent": null
-    },
-    {
-      "id": "DAP-bca7c3bf-35eb-41dd-87ac-905b92429fa9",
-      "codeHash": "b0d7594797ae68cac8709a2c3954a09d13e11288822bf311fd2af8202fb133c5",
-      "salt": "4e10250605a145ba8b00b8ae",
-      "issuerId": "USR-d15976b1-a734-459f-8957-b9f42bc39ea2",
-      "issuerName": "Matheus Fernando",
-      "cashboxId": "caixa-principal",
-      "issuedAt": "2026-08-27T23:31:53.160Z",
-      "expiresAt": "2026-08-27T23:36:53.160Z",
-      "usedAt": null,
-      "usedById": null,
-      "usedByName": null,
-      "operationId": null,
-      "requestedPercent": null
+      "issuedAt": "2026-08-31T16:52:43.241Z",
+      "expiresAt": "2026-08-31T16:57:43.241Z",
+      "usedAt": "2026-08-31T16:52:43.304Z",
+      "usedById": "USR-d15976b1-a734-459f-8957-b9f42bc39ea2",
+      "usedByName": "Matheus Fernando",
+      "operationId": "OP-1788195023786-VQRZ0",
+      "requestedPercent": 15.54937144603605
     }
   ]
 }

@@ -1,6 +1,6 @@
 {
   "version": "0.12.0",
-  "nextCode": 2992,
+  "nextCode": 2993,
   "items": [
     {
       "id": "CLI-1785107913792-ZXBKD",
@@ -95612,7 +95612,7 @@
       "motherName": "",
       "creditLimit": 0,
       "phone": "",
-      "mobile": "",
+      "mobile": "55996851749",
       "email": "",
       "zipCode": "98250000",
       "street": "RUA BARÃO DE SÃO JACOB",
@@ -95632,9 +95632,9 @@
         "serviceOrderIds": []
       },
       "createdAt": "2026-08-02T19:00:36.814Z",
-      "updatedAt": "2026-08-02T19:00:36.853Z",
+      "updatedAt": "2026-08-31T18:05:07.194Z",
       "createdBy": "painel",
-      "updatedBy": "painel",
+      "updatedBy": "Matheus Fernando",
       "integrations": {
         "wm10": {
           "customerCode": 1368,
@@ -209753,6 +209753,52 @@
       },
       "createdAt": "2026-08-27T22:39:19.029Z",
       "updatedAt": "2026-08-27T22:39:19.029Z",
+      "createdBy": "Matheus Fernando",
+      "updatedBy": "Matheus Fernando"
+    },
+    {
+      "id": "CLI-1788178006603-S20T8",
+      "code": "002992",
+      "companyId": "quality-principal",
+      "personType": "pf",
+      "name": "Carina de Oliveira Stumm",
+      "tradeName": "",
+      "document": "01210007029",
+      "stateRegistration": "",
+      "companyStatus": "",
+      "openingDate": "",
+      "legalNature": "",
+      "companySize": "",
+      "primaryCnae": "",
+      "birthDate": "1987-09-08",
+      "monthlyIncome": 0,
+      "profession": "",
+      "spouseName": "",
+      "fatherName": "",
+      "motherName": "",
+      "creditLimit": 0,
+      "phone": "",
+      "mobile": "54991419143",
+      "email": "",
+      "zipCode": "99470000",
+      "street": "Rua Flamboyant",
+      "number": "201",
+      "complement": "",
+      "district": "Jardim",
+      "city": "Não-Me-Toque",
+      "state": "RS",
+      "classificationId": "none",
+      "origin": "",
+      "notes": "",
+      "active": true,
+      "links": {
+        "whatsappIds": [],
+        "quoteIds": [],
+        "saleIds": [],
+        "serviceOrderIds": []
+      },
+      "createdAt": "2026-08-31T12:06:46.603Z",
+      "updatedAt": "2026-08-31T12:06:46.603Z",
       "createdBy": "Matheus Fernando",
       "updatedBy": "Matheus Fernando"
     }
