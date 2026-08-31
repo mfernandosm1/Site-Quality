@@ -382,15 +382,172 @@ function registrarPublishJSON(){
   }catch(e){ console.warn(`⚠️ publish.json: ${e.message}`); }
 }
 
+const GITHUB_SAFE_FILE_LIMIT = 95 * 1024 * 1024; // margem abaixo do limite rígido de 100 MB
+
+function isArquivoLocalNaoPublicavel(relativePath){
+  const rel = String(relativePath || "").replace(/\\/g, "/");
+  const base = path.posix.basename(rel).toLowerCase();
+  const ext = path.posix.extname(base).toLowerCase();
+
+  // Pacotes/arquivos usados para transportar ou guardar cópias locais nunca fazem parte do site publicado.
+  if ([".rar", ".zip", ".7z", ".tar", ".gz", ".tgz"].includes(ext)) return true;
+  if (/^(backup|backups)(\/|$)/i.test(rel)) return true;
+  if (/^site_with_content\/(backup|backups)(\/|$)/i.test(rel)) return true;
+
+  // Dados locais do WhatsApp/cache não devem ser enviados ao repositório.
+  if (/^site_with_content\/content\/automacao_whatsapp(\/|$)/i.test(rel)) return true;
+  if (/^painel\/\.wwebjs_cache(\/|$)/i.test(rel)) return true;
+  return false;
+}
+
+function garantirExclusoesLocaisGit(){
+  try {
+    const infoDir = path.join(REPO_DIR, ".git", "info");
+    const excludeFile = path.join(infoDir, "exclude");
+    if (!fs.existsSync(infoDir)) return;
+
+    const markerStart = "# QUALITY-PUBLISH-LOCAL-EXCLUDES START";
+    const markerEnd = "# QUALITY-PUBLISH-LOCAL-EXCLUDES END";
+    const block = [
+      markerStart,
+      "Backup/",
+      "backups/",
+      "*.rar",
+      "*.zip",
+      "*.7z",
+      "*.tar",
+      "*.tar.gz",
+      "*.tgz",
+      "Site_with_content/content/automacao_whatsapp/",
+      "painel/.wwebjs_cache/",
+      markerEnd
+    ].join("\n");
+
+    let current = fs.existsSync(excludeFile) ? fs.readFileSync(excludeFile, "utf-8") : "";
+    const rx = new RegExp(`${markerStart.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}[\\s\\S]*?${markerEnd.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}`, "m");
+    if (rx.test(current)) current = current.replace(rx, block);
+    else current = `${current.replace(/\s*$/, "")}\n${block}\n`;
+
+    fs.writeFileSync(excludeFile, current, "utf-8");
+  } catch (e) {
+    console.warn(`⚠️ Não foi possível atualizar .git/info/exclude: ${e.message}`);
+  }
+}
+
+async function retirarArquivosBloqueadosDoStage(git){
+  let staged = [];
+  try {
+    staged = String(await git.raw(["diff", "--cached", "--name-only", "--diff-filter=ACMR"]))
+      .split(/\r?\n/)
+      .map(v => v.trim())
+      .filter(Boolean);
+  } catch {
+    return;
+  }
+
+  for (const rel of staged.filter(isArquivoLocalNaoPublicavel)) {
+    try {
+      await git.raw(["reset", "-q", "HEAD", "--", rel]);
+      console.warn(`🔒 Ignorado no Git: ${rel}`);
+    } catch (e) {
+      console.warn(`⚠️ Não foi possível retirar ${rel} do stage: ${e.message}`);
+    }
+  }
+}
+
+async function recuperarCommitsLocaisComArquivoBloqueado(git){
+  const remoteRef = `origin/${BRANCH}`;
+
+  // Atualiza a referência remota quando possível, mas não bloqueia uma publicação offline/local por isso.
+  try { await git.fetch("origin", BRANCH); }
+  catch (e) { console.warn(`⚠️ Não foi possível atualizar ${remoteRef} antes da checagem: ${e.message}`); }
+
+  try {
+    await git.raw(["rev-parse", "--verify", remoteRef]);
+  } catch {
+    return;
+  }
+
+  let ahead = 0;
+  try {
+    ahead = Number(String(await git.raw(["rev-list", "--count", `${remoteRef}..HEAD`])).trim() || 0);
+  } catch {
+    return;
+  }
+  if (!ahead) return;
+
+  let changed = [];
+  try {
+    changed = String(await git.raw(["diff", "--name-only", remoteRef, "HEAD"]))
+      .split(/\r?\n/)
+      .map(v => v.trim())
+      .filter(Boolean);
+  } catch {
+    return;
+  }
+
+  const bloqueados = changed.filter(isArquivoLocalNaoPublicavel);
+  if (!bloqueados.length) return;
+
+  // Um push rejeitado deixa o commit ruim apenas no computador local. Voltamos o HEAD para
+  // origin/main mantendo TODOS os arquivos/alterações no working tree; em seguida o fluxo normal
+  // recria um único commit limpo, sem o RAR/ZIP que causou o bloqueio.
+  console.warn(`🧹 Detectado(s) ${ahead} commit(s) local(is) ainda não publicado(s) contendo arquivo(s) que não devem ir ao GitHub:`);
+  bloqueados.forEach(f => console.warn(`   - ${f}`));
+  await git.raw(["reset", "--mixed", remoteRef]);
+  console.log("✅ Commit local rejeitado limpo; alterações válidas foram preservadas para nova publicação.");
+}
+
+async function retirarArquivosGrandesDoStage(git){
+  let staged = [];
+  try {
+    staged = String(await git.raw(["diff", "--cached", "--name-only", "--diff-filter=ACMR"]))
+      .split(/\r?\n/)
+      .map(v => v.trim())
+      .filter(Boolean);
+  } catch {
+    return;
+  }
+
+  for (const rel of staged) {
+    const full = path.join(REPO_DIR, rel);
+    try {
+      if (!fs.existsSync(full) || !fs.statSync(full).isFile()) continue;
+      const size = fs.statSync(full).size;
+      if (size < GITHUB_SAFE_FILE_LIMIT) continue;
+
+      await git.raw(["reset", "--", rel]);
+      console.warn(`🔒 Arquivo grande ignorado no Git: ${rel} (${(size / 1024 / 1024).toFixed(2)} MB)`);
+    } catch (e) {
+      console.warn(`⚠️ Não foi possível validar o tamanho de ${rel}: ${e.message}`);
+    }
+  }
+}
+
 async function gitCommitPush(){
   const git = simpleGit({ baseDir: REPO_DIR });
   try{ await git.raw(["config","--global","--add","safe.directory", REPO_DIR]); }catch{}
-  await git.add([
-    ".",
-    ":!Site_with_content/content/automacao_whatsapp/**",
-    ":!painel/.wwebjs_cache/**"
-  ]);
-  await git.commit(`chore: publish (${nowSP().date.toISOString()})`);
+
+  await recuperarCommitsLocaisComArquivoBloqueado(git);
+
+  // Não passamos diretórios ignorados como pathspec do `git add`, pois no Git para Windows
+  // isso pode fazer o comando retornar erro (ex.: Backup já presente no .gitignore).
+  // As exclusões locais são registradas em .git/info/exclude e o stage é saneado logo depois.
+  garantirExclusoesLocaisGit();
+  await git.raw(["add", "-A"]);
+
+  // Barreiras após o stage: removem arquivos que nunca devem ser publicados e também
+  // qualquer arquivo grande que poderia disparar GH001 no GitHub.
+  await retirarArquivosBloqueadosDoStage(git);
+  await retirarArquivosGrandesDoStage(git);
+
+  const staged = String(await git.raw(["diff", "--cached", "--name-only"])).trim();
+  if (staged) {
+    await git.commit(`chore: publish (${nowSP().date.toISOString()})`);
+  } else {
+    console.log("ℹ️ Nenhuma nova alteração para commit; verificando apenas o push pendente.");
+  }
+
   await git.push("origin", BRANCH);
 }
 

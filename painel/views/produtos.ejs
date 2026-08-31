@@ -641,15 +641,24 @@
   .variation-labels-grid input{width:100% !important;min-height:36px !important;}
   .variation-help{display:block;margin-top:5px;color:#6b7280;font-size:11px;}
   .quality-combo-card{grid-column:1 / -1;background:#fff;border:1px solid #dbeafe !important;}
-  .variation-combo-row{display:grid;grid-template-columns:1fr 1fr 1fr 1fr 1.15fr .65fr .8fr .8fr .8fr auto;gap:6px;align-items:end;}
-  .quality-combo-list{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px;}
-  .quality-variation-inline-price{display:inline-flex;align-items:center;gap:5px;margin-left:8px;padding-left:8px;border-left:1px solid #d1d5db}.quality-variation-inline-price small{font-size:10px;opacity:.72}.quality-variation-inline-price input{width:92px;padding:5px 7px;border:1px solid #cbd5e1;border-radius:7px;background:transparent;color:inherit}
-  .quality-combo-pill{display:inline-flex;align-items:center;gap:6px;border:1px solid #bfdbfe;background:#eff6ff;border-radius:999px;padding:5px 8px;font-size:11px;font-weight:800;}
+  .variation-combo-row{display:grid;grid-template-columns:1fr 1fr 1fr 1fr 1.55fr auto;gap:6px;align-items:end;}
+  .quality-combo-list{display:flex;flex-direction:column;gap:7px;margin-top:10px;}
+  .quality-var-pill .variation-pill-order{color:#64748b;font-weight:900;min-width:14px;line-height:1;}
+  .quality-var-pill .variation-pill-order:hover{color:#f59e0b;}
+  .quality-var-pill .variation-pill-order:disabled{opacity:.28;cursor:not-allowed;color:#94a3b8;}
+  .quality-var-pill .variation-pill-edit{color:#2563eb;font-weight:900;}
+  .quality-var-pill .variation-pill-remove{color:#991b1b;font-weight:900;}
+  .quality-combo-pill{display:grid;grid-template-columns:minmax(170px,1fr) minmax(220px,1.35fr) auto;align-items:center;gap:8px;border:1px solid #bfdbfe;background:#eff6ff;border-radius:10px;padding:7px 9px;font-size:11px;font-weight:800;}
   .quality-combo-pill button{border:none;background:transparent;color:#991b1b;cursor:pointer;font-weight:900;}
-  .quality-combo-price-inline,.quality-combo-cost-inline{width:92px!important;min-height:28px!important;height:28px!important;padding:3px 7px!important;border-radius:8px!important;font-size:11px!important;background:#fff!important;}
-  .quality-combo-price-label,.quality-combo-cost-label{font-size:10px;color:#64748b;font-weight:700;}
+  .quality-combo-image-inline{width:100%!important;min-height:32px!important;height:32px!important;padding:5px 8px!important;border-radius:8px!important;font-size:11px!important;}
+  .commercial-variation-box{margin-top:12px;border:1px solid #dbeafe;border-radius:13px;padding:12px;background:#f8fafc;}
+  .quality-commercial-variation-list{display:flex;flex-direction:column;gap:7px;margin-top:9px;}
+  .quality-commercial-variation-row{display:grid;grid-template-columns:minmax(180px,1.25fr) repeat(3,minmax(110px,.75fr));gap:8px;align-items:end;background:#fff;border:1px solid #e5e7eb;border-radius:10px;padding:9px;}
+  .quality-commercial-variation-row>strong{font-size:11px;line-height:1.25;margin:0;}
+  .quality-commercial-variation-row label{font-size:10px;font-weight:800;color:#64748b;}
+  .quality-commercial-variation-row input{margin-top:4px;min-height:34px!important;padding:6px 8px!important;}
 
-  @media (max-width:1000px){.quality-variations-grid,.variation-modal-grid{grid-template-columns:1fr;}.variation-form-row,.variation-simple-row,.variation-combo-row{grid-template-columns:1fr;}}
+  @media (max-width:1000px){.quality-variations-grid,.variation-modal-grid{grid-template-columns:1fr;}.variation-form-row,.variation-simple-row,.variation-combo-row,.quality-commercial-variation-row,.quality-combo-pill{grid-template-columns:1fr;}}
 
 
   /* V3.1 - tabela mais limpa: corrige largura após adicionar estoque e deixa tudo visível sem rolar para a direita */
@@ -929,6 +938,8 @@
   html[data-panel-theme]:not([data-panel-theme="light"]) .quality-edit-grid,
   html[data-panel-theme]:not([data-panel-theme="light"]) .quality-edit-field,
   html[data-panel-theme]:not([data-panel-theme="light"]) .quality-stock-variation-box,
+  html[data-panel-theme]:not([data-panel-theme="light"]) .commercial-variation-box,
+  html[data-panel-theme]:not([data-panel-theme="light"]) .quality-commercial-variation-row,
   html[data-panel-theme]:not([data-panel-theme="light"]) .quality-stock-variation-list,
   html[data-panel-theme]:not([data-panel-theme="light"]) .variation-labels-box,
   html[data-panel-theme]:not([data-panel-theme="light"]) .quality-var-card,
@@ -1007,6 +1018,8 @@
   html[data-panel-theme="oled"] .quality-edit-grid,
   html[data-panel-theme="oled"] .quality-edit-field,
   html[data-panel-theme="oled"] .quality-stock-variation-box,
+  html[data-panel-theme="oled"] .commercial-variation-box,
+  html[data-panel-theme="oled"] .quality-commercial-variation-row,
   html[data-panel-theme="oled"] .quality-stock-variation-list,
   html[data-panel-theme="oled"] .variation-labels-box,
   html[data-panel-theme="oled"] .quality-var-card,
@@ -1758,17 +1771,13 @@ html[data-panel-theme="light"] .quality-master-area,html[data-panel-theme="light
         </div>
         <div class="quality-var-card quality-combo-card" data-var-card="combinations">
           <strong>🧩 Grade de combinações</strong>
-          <small class="variation-help">Cada combinação é um item vendável. Preço de venda, preço de compra e margem alvo podem ser próprios; quando vazios, herdam as regras/valores do cadastro pai.</small>
+          <small class="variation-help">Aqui ficam apenas a estrutura e as imagens das combinações. <strong>Preço e margem ficam em Comercial</strong>; quantidades ficam em Estoque.</small>
           <div class="variation-combo-row">
             <select class="var-combo-select" data-combo="color"><option value="">Cor</option></select>
             <select class="var-combo-select" data-combo="storage"><option value="">GB</option></select>
             <select class="var-combo-select" data-combo="ram"><option value="">RAM</option></select>
             <select class="var-combo-select" data-combo="condition"><option value="">Estado</option></select>
-            <input type="text" class="var-combo-image quality-image-picker" list="imagens-list" placeholder="Imagem opcional" onfocus="sincronizarImagensAuto(true)" autocomplete="off">
-            <input type="number" class="var-combo-stock stock-input-small" min="0" step="1" placeholder="Estoque">
-            <input type="number" class="var-combo-price" min="0" step="0.01" placeholder="Preço ERP" title="Opcional: vazio herda o preço ERP do cadastro pai">
-            <input type="number" class="var-combo-cost" min="0" step="0.01" placeholder="Preço compra" title="Opcional: vazio herda o preço de compra do cadastro pai">
-            <input type="number" class="var-combo-margin" min="0" step="0.01" placeholder="Margem alvo %" title="Opcional: margem sobre custo específica desta variação">
+            <input type="text" class="var-combo-image quality-image-picker" list="imagens-list" placeholder="Imagem da combinação (opcional)" onfocus="sincronizarImagensAuto(true)" autocomplete="off">
             <button class="btn add-var-combo" type="button">Adicionar</button>
           </div>
           <div class="quality-combo-list" data-var-list="combinations"></div>
@@ -2332,7 +2341,7 @@ html[data-panel-theme="light"] .quality-master-area,html[data-panel-theme="light
           <div class="quality-variations-grid">
             <div class="variation-labels-box">
               <strong>🏷️ Nome dos grupos</strong>
-              <small class="variation-help">Os grupos organizam opções vendáveis. Em serviços, use um único grupo como <strong>Tipo de serviço</strong> e cadastre cada serviço como uma opção separada.</small>
+              <small class="variation-help">Os grupos organizam as opções vendáveis. Use ↑ ↓ para ordenar as opções e o lápis para editar sem apagar e recriar; em cores, a imagem também pode ser trocada diretamente.</small>
               <div class="variation-labels-grid">
                 <label>Cor<input type="text" class="variation-label-input" data-label-type="colors" placeholder="Cor"></label>
                 <label>Armazenamento<input type="text" class="variation-label-input" data-label-type="storage" placeholder="Armazenamento"></label>
@@ -2360,17 +2369,13 @@ Com marcas de uso">Usados padrão</button></div><div class="quality-var-list" da
             
         <div class="quality-var-card quality-combo-card" data-var-card="combinations">
           <strong>🧩 Grade de combinações</strong>
-          <small class="variation-help">Cada combinação é um item vendável. Para serviços, use um grupo como <strong>Tipo de serviço</strong>; para produtos, Cor/GB/RAM/etc. Preço de venda, preço de compra e margem alvo podem ser próprios ou herdados do pai.</small>
+          <small class="variation-help">Aqui ficam apenas a estrutura e as imagens das combinações. <strong>Preços e margem ficam na aba Comercial</strong>; estoque fica na aba Estoque.</small>
           <div class="variation-combo-row">
             <select class="var-combo-select" data-combo="color"><option value="">Cor</option></select>
             <select class="var-combo-select" data-combo="storage"><option value="">GB</option></select>
             <select class="var-combo-select" data-combo="ram"><option value="">RAM</option></select>
             <select class="var-combo-select" data-combo="condition"><option value="">Estado</option></select>
-            <input type="text" class="var-combo-image quality-image-picker" list="imagens-list" placeholder="Imagem opcional" onfocus="sincronizarImagensAuto(true)" autocomplete="off">
-            <input type="number" class="var-combo-stock stock-input-small" min="0" step="1" placeholder="Estoque">
-            <input type="number" class="var-combo-price" min="0" step="0.01" placeholder="Preço ERP" title="Opcional: vazio herda o preço ERP do cadastro pai">
-            <input type="number" class="var-combo-cost" min="0" step="0.01" placeholder="Preço compra" title="Opcional: vazio herda o preço de compra do cadastro pai">
-            <input type="number" class="var-combo-margin" min="0" step="0.01" placeholder="Margem alvo %" title="Opcional: margem sobre custo específica desta variação">
+            <input type="text" class="var-combo-image quality-image-picker" list="imagens-list" placeholder="Imagem da combinação (opcional)" onfocus="sincronizarImagensAuto(true)" autocomplete="off">
             <button class="btn add-var-combo" type="button">Adicionar</button>
           </div>
           <div class="quality-combo-list" data-var-list="combinations"></div>
@@ -2522,6 +2527,11 @@ Com marcas de uso">Usados padrão</button></div><div class="quality-var-list" da
             <label>Exigir autorização<select id="edit-requiresAuthorization"><option value="false">Não</option><option value="true">Sim</option></select></label>
           </div>
           <small class="commercial-note">O sistema usará sempre o limite mais restritivo entre desconto máximo, preço mínimo e margem mínima.</small>
+        </div>
+        <div class="commercial-variation-box" id="edit-commercial-variation-box">
+          <strong>🎛️ Preços por variação</strong>
+          <small class="quality-edit-help" style="display:block;margin-top:4px;">Edite aqui preço ERP, preço de compra e margem de cada combinação. Campo vazio = herda o valor do produto pai.</small>
+          <div id="edit-commercial-variation-list" class="quality-commercial-variation-list"></div>
         </div>
       </div>
 
@@ -3956,16 +3966,79 @@ document.addEventListener("DOMContentLoaded", () => {
           dot.style.background = parts[1] || "#e5e7eb";
           pill.appendChild(dot);
           pill.appendChild(document.createTextNode(parts[0] || line));
+          if (parts[2]) {
+            const imageMark = document.createElement('span');
+            imageMark.textContent = ' 🖼️';
+            imageMark.title = parts[2];
+            pill.appendChild(imageMark);
+          }
         } else {
-          pill.textContent = line;
+          pill.appendChild(document.createTextNode(line));
         }
+
+        const moveUp = document.createElement("button");
+        moveUp.type = "button";
+        moveUp.className = "variation-pill-order variation-pill-up";
+        moveUp.textContent = "↑";
+        moveUp.title = "Mover para cima / antes";
+        moveUp.disabled = index === 0;
+        moveUp.addEventListener("click", () => moveVariationOption(box, type, index, -1));
+        pill.appendChild(moveUp);
+
+        const moveDown = document.createElement("button");
+        moveDown.type = "button";
+        moveDown.className = "variation-pill-order variation-pill-down";
+        moveDown.textContent = "↓";
+        moveDown.title = "Mover para baixo / depois";
+        moveDown.disabled = index === lines.length - 1;
+        moveDown.addEventListener("click", () => moveVariationOption(box, type, index, 1));
+        pill.appendChild(moveDown);
+
+        const edit = document.createElement("button");
+        edit.type = "button";
+        edit.className = "variation-pill-edit";
+        edit.textContent = "✎";
+        edit.title = type === 'colors' ? 'Editar nome, cor ou imagem' : 'Editar esta opção';
+        edit.addEventListener("click", () => {
+          if (type === 'colors') {
+            const nameInput = box.querySelector('.var-color-name');
+            const hexInput = box.querySelector('.var-color-hex');
+            const imageInput = box.querySelector('.var-color-image');
+            const addBtn = box.querySelector('.add-var-color');
+            if (nameInput) nameInput.value = parts[0] || '';
+            if (hexInput && parts[1]) hexInput.value = parts[1];
+            if (imageInput) imageInput.value = parts[2] || '';
+            if (addBtn) {
+              addBtn.dataset.editIndex = String(index);
+              addBtn.dataset.editOriginal = parts[0] || '';
+              addBtn.dataset.editOriginalImage = parts[2] || '';
+              addBtn.textContent = 'Salvar';
+            }
+            (imageInput || nameInput)?.focus();
+          } else {
+            const custom = box.querySelector(`.var-simple-custom[data-type="${type}"]`);
+            const addBtn = box.querySelector(`.add-var-simple[data-type="${type}"]`);
+            if (custom) custom.value = line;
+            if (addBtn) {
+              addBtn.dataset.editIndex = String(index);
+              addBtn.dataset.editOriginal = line;
+              addBtn.textContent = 'Salvar';
+            }
+            custom?.focus();
+          }
+        });
+        pill.appendChild(edit);
+
         const remove = document.createElement("button");
         remove.type = "button";
+        remove.className = "variation-pill-remove";
         remove.textContent = "×";
+        remove.title = 'Remover opção';
         remove.addEventListener("click", () => {
           const updated = parseLines(textarea.value).filter((_, i) => i !== index);
           textarea.value = updated.join("\n");
           textarea.dispatchEvent(new Event("input", { bubbles:true }));
+          resetVariationOptionEditor(box, type);
           renderVariationBox(box);
         });
         pill.appendChild(remove);
@@ -3983,6 +4056,89 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function colorNameFromLine(line) { return (line || '').split('|')[0].trim(); }
+
+  function reorderCombinationLinesByDimensionOrder(box) {
+    const comboTextarea = getVarTextarea(box, 'combinations');
+    if (!comboTextarea) return;
+    const lines = parseLines(comboTextarea.value);
+    if (lines.length < 2) return;
+
+    const dimensionValues = {
+      colors: parseLines(getVarTextarea(box, 'colors')?.value).map(colorNameFromLine).filter(Boolean),
+      storage: parseLines(getVarTextarea(box, 'storage')?.value),
+      ram: parseLines(getVarTextarea(box, 'ram')?.value),
+      condition: parseLines(getVarTextarea(box, 'condition')?.value)
+    };
+    const fieldTypes = ['colors', 'storage', 'ram', 'condition'];
+    const orderMaps = fieldTypes.map(type => new Map(dimensionValues[type].map((value, index) => [String(value), index])));
+
+    const ranked = lines.map((line, originalIndex) => {
+      const parts = String(line || '').split('|').map(v => v.trim());
+      while (parts.length < 9) parts.push('');
+      const rank = fieldTypes.map((type, fieldIndex) => {
+        const value = parts[fieldIndex] || '';
+        if (!value) return -1;
+        const knownIndex = orderMaps[fieldIndex].get(value);
+        return knownIndex === undefined ? Number.MAX_SAFE_INTEGER : knownIndex;
+      });
+      return { line, originalIndex, rank };
+    });
+
+    ranked.sort((a, b) => {
+      for (let i = 0; i < a.rank.length; i += 1) {
+        if (a.rank[i] !== b.rank[i]) return a.rank[i] - b.rank[i];
+      }
+      return a.originalIndex - b.originalIndex;
+    });
+    comboTextarea.value = ranked.map(item => item.line).join('\n');
+  }
+
+  function moveVariationOption(box, type, index, direction) {
+    const textarea = getVarTextarea(box, type);
+    if (!textarea) return;
+    const list = parseLines(textarea.value);
+    const targetIndex = index + direction;
+    if (index < 0 || index >= list.length || targetIndex < 0 || targetIndex >= list.length) return;
+
+    [list[index], list[targetIndex]] = [list[targetIndex], list[index]];
+    textarea.value = list.join('\n');
+    reorderCombinationLinesByDimensionOrder(box);
+    resetVariationOptionEditor(box, type);
+    textarea.dispatchEvent(new Event('input', { bubbles:true }));
+  }
+
+  function resetVariationOptionEditor(box, type) {
+    if (!box) return;
+    if (type === 'colors') {
+      const btn = box.querySelector('.add-var-color');
+      if (btn) { delete btn.dataset.editIndex; delete btn.dataset.editOriginal; delete btn.dataset.editOriginalImage; btn.textContent = 'Adicionar'; }
+    } else {
+      const btn = box.querySelector(`.add-var-simple[data-type="${type}"]`);
+      if (btn) { delete btn.dataset.editIndex; delete btn.dataset.editOriginal; btn.textContent = 'Adicionar'; }
+    }
+  }
+
+  function updateCombinationDimension(box, type, oldValue, newValue, oldImage = '', newImage = '') {
+    const comboTextarea = getVarTextarea(box, 'combinations');
+    if (!comboTextarea || !oldValue) return;
+    const fieldIndex = { colors:0, storage:1, ram:2, condition:3 }[type];
+    if (fieldIndex === undefined) return;
+    const updated = parseLines(comboTextarea.value).map(line => {
+      const parts = line.split('|').map(v => v.trim());
+      while (parts.length < 9) parts.push('');
+      if ((parts[fieldIndex] || '') === oldValue) {
+        parts[fieldIndex] = newValue;
+        // Se a combinação usava a imagem herdada/anterior da cor, acompanha a nova imagem.
+        // Imagem específica da combinação é preservada.
+        if (type === 'colors' && (!parts[4] || parts[4] === oldImage)) parts[4] = newImage || '';
+      }
+      return parts.join('|').replace(/\|+$/,'');
+    });
+    // Não dispara render aqui: o textarea da dimensão é atualizado logo em seguida.
+    // Renderizar antes disso faria a reconciliação enxergar o nome novo como órfão
+    // e poderia descartar estoque/preço/identidade da combinação.
+    comboTextarea.value = updated.join('\n');
+  }
 
   function setSelectOptions(select, values, placeholder) {
     if (!select) return;
@@ -4072,184 +4228,51 @@ document.addEventListener("DOMContentLoaded", () => {
     const comboList = box.querySelector('[data-var-list="combinations"]');
     if (!comboTextarea || !comboList) return;
 
-    // Reconciliamos as opções com a grade de estoque. Isso evita o caso em que
-    // uma nova variação aparece visualmente, mas fica fora de "Estoque por variação".
-    // Combinações já existentes mantêm estoque/preço; opções removidas deixam de
-    // gerar combinações e novas opções recebem as combinações que faltam.
+    // Mantém identidade, estoque e dados comerciais das combinações já existentes.
+    // O modal de Variações altera somente estrutura/imagem; preço/margem ficam no Comercial
+    // e quantidade fica no Estoque.
     const dimensions = [
       ['color', colors], ['storage', storage], ['ram', ram], ['condition', condition]
     ].filter(([, values]) => values.length);
-    let comboLines = reconcileVariationCombinationLines(box, dimensions, comboTextarea);
+    const comboLines = reconcileVariationCombinationLines(box, dimensions, comboTextarea);
 
-    // Quando há somente um grupo, a opção já é a própria variação vendável.
-    // Nesse caso o preço pertence visualmente à opção (Cor/Tipo de serviço/etc.),
-    // e não à Grade de combinações. A grade continua sendo usada internamente
-    // para manter identidade, preço e compatibilidade com PDV/estoque.
     const comboCard = box.querySelector('[data-var-card="combinations"]');
-    if (dimensions.length === 1) {
-      if (comboCard) comboCard.style.display = 'none';
-      const [field, values] = dimensions[0];
-      const typeByField = { color:'colors', storage:'storage', ram:'ram', condition:'condition' };
-      const fieldIndex = { color:0, storage:1, ram:2, condition:3 }[field];
-      const listBox = box.querySelector(`[data-var-list="${typeByField[field]}"]`);
-      const pills = listBox ? Array.from(listBox.querySelectorAll('.quality-var-pill')) : [];
-      values.forEach((value, optionIndex) => {
-        const pill = pills[optionIndex];
-        if (!pill) return;
-        const comboIndex = comboLines.findIndex(line => {
-          const parts = line.split('|').map(v => v.trim());
-          return (parts[fieldIndex] || '') === value;
-        });
-        if (comboIndex < 0) return;
-        const parts = comboLines[comboIndex].split('|').map(v => v.trim());
-        while (parts.length < 9) parts.push('');
-        const wrap = document.createElement('span');
-        wrap.className = 'quality-variation-inline-price';
-        const label = document.createElement('small');
-        label.textContent = 'Preço ERP';
-        const input = document.createElement('input');
-        input.type = 'number'; input.min = '0'; input.step = '0.01';
-        input.placeholder = 'Herdar pai'; input.value = parts[6] || '';
-        input.title = 'Vazio = usa o Preço de venda ERP do cadastro pai';
-        input.addEventListener('click', e => e.stopPropagation());
-        input.addEventListener('change', () => {
-          const current = parseLines(comboTextarea.value);
-          const currentIndex = current.findIndex(line => {
-            const p = line.split('|').map(v => v.trim());
-            return (p[fieldIndex] || '') === value;
-          });
-          if (currentIndex < 0) return;
-          const cp = current[currentIndex].split('|').map(v => v.trim());
-          while (cp.length < 9) cp.push('');
-          cp[6] = input.value.trim();
-          current[currentIndex] = cp.join('|').replace(/\|+$/,'');
-          comboTextarea.value = current.join('\n');
-          comboTextarea.dispatchEvent(new Event('input', { bubbles:true }));
-        });
-        wrap.appendChild(label); wrap.appendChild(input);
-        const costLabel = document.createElement('small');
-        costLabel.textContent = 'Preço compra';
-        const costInput = document.createElement('input');
-        costInput.type = 'number'; costInput.min = '0'; costInput.step = '0.01';
-        costInput.placeholder = 'Herdar pai'; costInput.value = parts[7] || '';
-        costInput.title = 'Vazio = usa o preço de compra do cadastro pai';
-        costInput.addEventListener('click', e => e.stopPropagation());
-        costInput.addEventListener('change', () => {
-          const current = parseLines(comboTextarea.value);
-          const currentIndex = current.findIndex(line => {
-            const p = line.split('|').map(v => v.trim());
-            return (p[fieldIndex] || '') === value;
-          });
-          if (currentIndex < 0) return;
-          const cp = current[currentIndex].split('|').map(v => v.trim());
-          while (cp.length < 9) cp.push('');
-          cp[7] = costInput.value.trim();
-          current[currentIndex] = cp.join('|').replace(/\|+$/,'');
-          comboTextarea.value = current.join('\n');
-          comboTextarea.dispatchEvent(new Event('input', { bubbles:true }));
-        });
-        wrap.appendChild(costLabel); wrap.appendChild(costInput);
-        const marginLabel = document.createElement('small');
-        marginLabel.textContent = 'Margem alvo %';
-        const marginInput = document.createElement('input');
-        marginInput.type = 'number'; marginInput.min = '0'; marginInput.step = '0.01';
-        marginInput.placeholder = 'Herdar'; marginInput.value = parts[8] || '';
-        marginInput.title = 'Margem sobre custo específica da variação. Vazio = herda produto/categoria.';
-        marginInput.addEventListener('click', e => e.stopPropagation());
-        marginInput.addEventListener('change', () => {
-          const current = parseLines(comboTextarea.value);
-          const currentIndex = current.findIndex(line => { const p = line.split('|').map(v => v.trim()); return (p[fieldIndex] || '') === value; });
-          if (currentIndex < 0) return;
-          const cp = current[currentIndex].split('|').map(v => v.trim());
-          while (cp.length < 9) cp.push('');
-          cp[8] = marginInput.value.trim();
-          current[currentIndex] = cp.join('|').replace(/\|+$/,'');
-          comboTextarea.value = current.join('\n');
-          comboTextarea.dispatchEvent(new Event('input', { bubbles:true }));
-        });
-        wrap.appendChild(marginLabel); wrap.appendChild(marginInput);
-        const removeBtn = pill.querySelector('button');
-        pill.insertBefore(wrap, removeBtn || null);
-      });
-    } else if (comboCard) {
-      comboCard.style.display = '';
-    }
+    if (comboCard) comboCard.style.display = dimensions.length <= 1 ? 'none' : '';
 
     comboList.innerHTML = '';
     comboLines.forEach((line, index) => {
       const parts = line.split('|').map(v => v.trim());
       while (parts.length < 9) parts.push('');
-      const pill = document.createElement('span');
+      const pill = document.createElement('div');
       pill.className = 'quality-combo-pill';
+
       const text = document.createElement('span');
       text.textContent = [parts[0], parts[1], parts[2], parts[3]].filter(Boolean).join(' + ') || `Variação ${index + 1}`;
       pill.appendChild(text);
-      const priceLabel = document.createElement('span');
-      priceLabel.className = 'quality-combo-price-label';
-      priceLabel.textContent = 'Preço ERP';
-      pill.appendChild(priceLabel);
-      const priceInput = document.createElement('input');
-      priceInput.type = 'number';
-      priceInput.min = '0';
-      priceInput.step = '0.01';
-      priceInput.placeholder = 'Herdar pai';
-      priceInput.className = 'quality-combo-price-inline';
-      priceInput.value = parts[6] || '';
-      priceInput.title = 'Vazio = usa o Preço de venda ERP do cadastro pai';
-      priceInput.addEventListener('change', () => {
+
+      const imageInput = document.createElement('input');
+      imageInput.type = 'text';
+      imageInput.className = 'quality-combo-image-inline quality-image-picker';
+      imageInput.setAttribute('list', 'imagens-list');
+      imageInput.placeholder = 'Imagem específica (opcional)';
+      imageInput.value = parts[4] || '';
+      imageInput.title = 'Vazio = usa a imagem da cor ou a imagem principal do produto';
+      imageInput.addEventListener('focus', () => sincronizarImagensAuto(true));
+      imageInput.addEventListener('change', () => {
         const current = parseLines(comboTextarea.value);
-        const currentParts = (current[index] || line).split('|').map(v => v.trim());
-        while (currentParts.length < 9) currentParts.push('');
-        currentParts[6] = priceInput.value.trim();
-        current[index] = currentParts.join('|').replace(/\|+$/,'');
+        const cp = (current[index] || line).split('|').map(v => v.trim());
+        while (cp.length < 9) cp.push('');
+        cp[4] = imageInput.value.trim();
+        current[index] = cp.join('|').replace(/\|+$/,'');
         comboTextarea.value = current.join('\n');
         comboTextarea.dispatchEvent(new Event('input', { bubbles:true }));
       });
-      pill.appendChild(priceInput);
-      const costLabel = document.createElement('span');
-      costLabel.className = 'quality-combo-cost-label';
-      costLabel.textContent = 'Preço compra';
-      pill.appendChild(costLabel);
-      const costInput = document.createElement('input');
-      costInput.type = 'number';
-      costInput.min = '0';
-      costInput.step = '0.01';
-      costInput.placeholder = 'Herdar pai';
-      costInput.className = 'quality-combo-cost-inline';
-      costInput.value = parts[7] || '';
-      costInput.title = 'Vazio = usa o preço de compra do cadastro pai';
-      costInput.addEventListener('change', () => {
-        const current = parseLines(comboTextarea.value);
-        const currentParts = (current[index] || line).split('|').map(v => v.trim());
-        while (currentParts.length < 9) currentParts.push('');
-        currentParts[7] = costInput.value.trim();
-        current[index] = currentParts.join('|').replace(/\|+$/,'');
-        comboTextarea.value = current.join('\n');
-        comboTextarea.dispatchEvent(new Event('input', { bubbles:true }));
-      });
-      pill.appendChild(costInput);
-      const marginLabel = document.createElement('span');
-      marginLabel.className = 'quality-combo-margin-label';
-      marginLabel.textContent = 'Margem alvo %';
-      pill.appendChild(marginLabel);
-      const marginInput = document.createElement('input');
-      marginInput.type = 'number'; marginInput.min = '0'; marginInput.step = '0.01';
-      marginInput.placeholder = 'Herdar'; marginInput.className = 'quality-combo-margin-inline';
-      marginInput.value = parts[8] || '';
-      marginInput.title = 'Margem sobre custo específica desta variação. Vazio = herda produto/categoria.';
-      marginInput.addEventListener('change', () => {
-        const current = parseLines(comboTextarea.value);
-        const currentParts = (current[index] || line).split('|').map(v => v.trim());
-        while (currentParts.length < 9) currentParts.push('');
-        currentParts[8] = marginInput.value.trim();
-        current[index] = currentParts.join('|').replace(/\|+$/,'');
-        comboTextarea.value = current.join('\n');
-        comboTextarea.dispatchEvent(new Event('input', { bubbles:true }));
-      });
-      pill.appendChild(marginInput);
+      pill.appendChild(imageInput);
+
       const remove = document.createElement('button');
       remove.type = 'button';
       remove.textContent = '×';
+      remove.title = 'Remover combinação';
       remove.addEventListener('click', () => {
         const updated = parseLines(comboTextarea.value).filter((_, i) => i !== index);
         comboTextarea.value = updated.join('\n');
@@ -4261,6 +4284,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
+
   function initVariationBox(box) {
     if (!box || box.dataset.variationReady === "1") return;
     box.dataset.variationReady = "1";
@@ -4271,13 +4295,29 @@ document.addEventListener("DOMContentLoaded", () => {
         const hexInput = box.querySelector(".var-color-hex");
         const imageInput = box.querySelector(".var-color-image");
         const name = (nameInput?.value || "").trim();
+        const hex = (hexInput?.value || "").trim();
+        const image = (imageInput?.value || "").trim();
         if (!name) return alert("Digite o nome da cor.");
-        const line = [name, (hexInput?.value || "").trim(), (imageInput?.value || "").trim()].filter(Boolean).join("|");
+        const line = [name, hex, image].join('|').replace(/\|+$/,'');
         const textarea = getVarTextarea(box, "colors");
         const list = parseLines(textarea.value);
-        uniquePush(list, line);
+        const editIndex = btn.dataset.editIndex !== undefined ? Number(btn.dataset.editIndex) : -1;
+        if (Number.isInteger(editIndex) && editIndex >= 0 && editIndex < list.length) {
+          const oldParts = list[editIndex].split('|').map(v => v.trim());
+          const oldName = btn.dataset.editOriginal || oldParts[0] || '';
+          const oldImage = btn.dataset.editOriginalImage || oldParts[2] || '';
+          if (list.some((item, i) => i !== editIndex && colorNameFromLine(item).toLowerCase() === name.toLowerCase())) {
+            return alert('Já existe uma cor com esse nome.');
+          }
+          list[editIndex] = line;
+          updateCombinationDimension(box, 'colors', oldName, name, oldImage, image);
+        } else {
+          if (list.some(item => colorNameFromLine(item).toLowerCase() === name.toLowerCase())) return alert('Essa cor já existe. Use o lápis para editá-la.');
+          list.push(line);
+        }
         textarea.value = list.join("\n");
         textarea.dispatchEvent(new Event("input", { bubbles:true }));
+        resetVariationOptionEditor(box, 'colors');
         if (nameInput) nameInput.value = "";
         if (imageInput) imageInput.value = "";
         renderVariationBox(box);
@@ -4294,9 +4334,19 @@ document.addEventListener("DOMContentLoaded", () => {
         if (!value) return alert("Informe a variação que deseja adicionar.");
         const textarea = getVarTextarea(box, type);
         const list = parseLines(textarea.value);
-        uniquePush(list, value);
+        const editIndex = btn.dataset.editIndex !== undefined ? Number(btn.dataset.editIndex) : -1;
+        if (Number.isInteger(editIndex) && editIndex >= 0 && editIndex < list.length) {
+          const oldValue = btn.dataset.editOriginal || list[editIndex] || '';
+          if (list.some((item, i) => i !== editIndex && item.toLowerCase() === value.toLowerCase())) return alert('Essa opção já existe.');
+          list[editIndex] = value;
+          updateCombinationDimension(box, type, oldValue, value);
+        } else {
+          if (list.some(item => item.toLowerCase() === value.toLowerCase())) return alert('Essa opção já existe. Use o lápis para editá-la.');
+          list.push(value);
+        }
         textarea.value = list.join("\n");
         textarea.dispatchEvent(new Event("input", { bubbles:true }));
+        resetVariationOptionEditor(box, type);
         if (custom) custom.value = "";
         renderVariationBox(box);
       });
@@ -4309,27 +4359,18 @@ document.addEventListener("DOMContentLoaded", () => {
         const ram = box.querySelector('.var-combo-select[data-combo="ram"]')?.value || '';
         const condition = box.querySelector('.var-combo-select[data-combo="condition"]')?.value || '';
         const image = (box.querySelector('.var-combo-image')?.value || '').trim();
-        const stock = (box.querySelector('.var-combo-stock')?.value || '').trim();
-        const price = (box.querySelector('.var-combo-price')?.value || '').trim();
-        const cost = (box.querySelector('.var-combo-cost')?.value || '').trim();
-        const margin = (box.querySelector('.var-combo-margin')?.value || '').trim();
         if (!color && !storage && !ram && !condition) return alert('Escolha pelo menos uma opção para a combinação.');
-        const line = [color, storage, ram, condition, image, stock, price, cost, margin].join('|').replace(/\|+$/,'');
+        const line = [color, storage, ram, condition, image].join('|').replace(/\|+$/,'');
         const textarea = getVarTextarea(box, 'combinations');
         const list = parseLines(textarea.value);
-        uniquePush(list, line);
+        const key = [color, storage, ram, condition].join('|');
+        const exists = list.some(item => item.split('|').slice(0,4).map(v => v.trim()).join('|') === key);
+        if (exists) return alert('Essa combinação já existe. Edite a imagem diretamente na linha abaixo.');
+        list.push(line);
         textarea.value = list.join("\n");
         textarea.dispatchEvent(new Event("input", { bubbles:true }));
         const imageInput = box.querySelector('.var-combo-image');
-        const stockInput = box.querySelector('.var-combo-stock');
-        const priceInput = box.querySelector('.var-combo-price');
-        const costInput = box.querySelector('.var-combo-cost');
-        const marginInput = box.querySelector('.var-combo-margin');
         if (imageInput) imageInput.value = '';
-        if (stockInput) stockInput.value = '';
-        if (priceInput) priceInput.value = '';
-        if (costInput) costInput.value = '';
-        if (marginInput) marginInput.value = '';
         renderVariationBox(box);
       });
     });
@@ -4422,8 +4463,14 @@ document.addEventListener("DOMContentLoaded", () => {
   variationModal?.addEventListener("click", e => { if (e.target === variationModal) closeVariationModal(); });
   variationModalSave?.addEventListener("click", async () => {
     if (!activeVariationRow) return;
-    copyModalVariationsToRow(activeVariationRow);
-    await saveProductRow(activeVariationRow);
+    const row = activeVariationRow;
+    copyModalVariationsToRow(row);
+    await saveProductRow(row);
+    if (activeEditRow === row) {
+      renderEditCommercialVariations(row);
+      renderEditVariationStock(row);
+      syncEditStockArchitecture(row);
+    }
     closeVariationModal();
   });
 
@@ -4699,6 +4746,8 @@ document.addEventListener("DOMContentLoaded", () => {
   const editProductCode = document.getElementById("edit-product-code");
   const editProductThumb = document.getElementById("edit-product-thumb");
   const editVariationStockList = document.getElementById("edit-variation-stock-list");
+  const editCommercialVariationList = document.getElementById("edit-commercial-variation-list");
+  const editCommercialVariationBox = document.getElementById("edit-commercial-variation-box");
   let activeEditRow = null;
   let activeEditTouchedFields = new Set();
   const editProtectedLvFields = new Map([
@@ -4801,6 +4850,41 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function comboLabel(c){
     return [c.color, c.storage, c.ram, c.condition].filter(Boolean).join(" + ") || "Combinação";
+  }
+
+  function renderEditCommercialVariations(row){
+    if (!editCommercialVariationList) return;
+    const combosEl = row?.querySelector('.row-variation-combinations');
+    const combos = parseComboLines(combosEl?.value || '');
+    editCommercialVariationList.innerHTML = '';
+    if (editCommercialVariationBox) editCommercialVariationBox.style.display = combos.length ? '' : 'none';
+    if (!combos.length) return;
+
+    combos.forEach((combo, index) => {
+      const item = document.createElement('div');
+      item.className = 'quality-commercial-variation-row';
+      const title = document.createElement('strong');
+      title.textContent = comboLabel(combo);
+      item.appendChild(title);
+
+      [
+        ['erpPrice', 'Preço ERP', 'Herdar pai'],
+        ['costPrice', 'Preço compra', 'Herdar pai'],
+        ['desiredMarginPercent', 'Margem alvo %', 'Herdar']
+      ].forEach(([field, labelText, placeholder]) => {
+        const label = document.createElement('label');
+        label.textContent = labelText;
+        const input = document.createElement('input');
+        input.type = 'number'; input.min = '0'; input.step = '0.01';
+        input.placeholder = placeholder;
+        input.value = combo[field] || '';
+        input.dataset.comboCommercialIndex = String(index);
+        input.dataset.comboCommercialField = field;
+        label.appendChild(input);
+        item.appendChild(label);
+      });
+      editCommercialVariationList.appendChild(item);
+    });
   }
 
   function renderEditVariationStock(row){
@@ -4915,6 +4999,7 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("edit-seo-title").value = getRowField(row, 'input[name="seoTitle"]') || name;
     document.getElementById("edit-slug").value = getRowField(row, ".prod-slug-input");
     document.getElementById("edit-seo-description").value = getRowField(row, 'input[name="seoDescription"]') || getRowField(row, ".row-description-short");
+    renderEditCommercialVariations(row);
     renderEditVariationStock(row);
     syncEditStockArchitecture(row);
     syncEditCategoryBehavior();
@@ -5025,9 +5110,14 @@ document.addEventListener("DOMContentLoaded", () => {
     if (seoSlug) setRowField(row, ".prod-slug-input", gerarSlugPainel(seoSlug));
 
     const combosEl = row.querySelector(".row-variation-combinations");
-    if (combosEl && editVariationStockList) {
+    if (combosEl) {
       const combos = parseComboLines(combosEl.value);
-      editVariationStockList.querySelectorAll("[data-combo-stock-index]").forEach(input => {
+      editCommercialVariationList?.querySelectorAll("[data-combo-commercial-index]").forEach(input => {
+        const idx = Number(input.dataset.comboCommercialIndex);
+        const field = input.dataset.comboCommercialField;
+        if (combos[idx] && ['erpPrice','costPrice','desiredMarginPercent'].includes(field)) combos[idx][field] = input.value;
+      });
+      editVariationStockList?.querySelectorAll("[data-combo-stock-index]").forEach(input => {
         const idx = Number(input.dataset.comboStockIndex);
         if (combos[idx]) combos[idx].stock = input.value;
       });
@@ -5097,7 +5187,7 @@ document.addEventListener("DOMContentLoaded", () => {
   document.getElementById('editor-open-description')?.addEventListener('click',()=>editorRow()?.querySelector('.manage-description-btn')?.click());
   document.getElementById('editor-open-gallery')?.addEventListener('click',()=>editorRow()?.querySelector('.manage-gallery-btn')?.click());
   document.getElementById('editor-open-tags')?.addEventListener('click',()=>editorRow()?.querySelector('.manage-tags-btn')?.click());
-  document.getElementById('editor-open-variations')?.addEventListener('click',()=>editorRow()?.querySelector('.manage-variations-btn')?.click());
+  document.getElementById('editor-open-variations')?.addEventListener('click',()=>{ const row=editorRow(); if(!row) return; applyEditModalToRow(row); row.querySelector('.manage-variations-btn')?.click(); });
   document.getElementById('editor-open-history')?.addEventListener('click',()=>editorRow()?.querySelector('.quality-history-btn')?.click());
 
   if (QUALITY_PRODUCT_EDITOR_MODE) {

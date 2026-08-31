@@ -2039,6 +2039,7 @@ function stripHtmlText(value){
 
 function productSeoDescription(product){
   const custom = stripHtmlText(
+    product?.virtualStore?.seoDescription ||
     product?.seoDescription ||
     product?.metaDescription ||
     product?.descriptionShort ||
@@ -2055,7 +2056,7 @@ function productSeoDescription(product){
 }
 
 function productSeoTitle(product){
-  const custom = stripHtmlText(product?.seoTitle || product?.metaTitle || '');
+  const custom = stripHtmlText(product?.virtualStore?.seoTitle || product?.seoTitle || product?.metaTitle || '');
   const name = stripHtmlText(product?.name || product?.nome || 'Produto');
   return custom || `${name} | Quality Celulares`;
 }

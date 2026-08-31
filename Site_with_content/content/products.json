@@ -29705,24 +29705,29 @@
     },
     {
       "id": 1786499321068,
-      "name": "iPhone 17 256GB USADO",
+      "name": "iPhone 17 256GB Usado",
       "sku": "PRETO",
       "code": "PRD-238",
       "barcode": "",
-      "brand": "SemMarca",
+      "brand": "APPLE",
       "slug": "iphone-17-256gb-usado",
       "price": 4700,
       "stock": 0,
-      "image": "",
-      "gallery": [],
-      "category": "",
-      "subcategory": "",
+      "image": "images/iphone-17-usado-branco.jpeg",
+      "gallery": [
+        "images/iphone-17-usado-preto.jpeg",
+        "images/iphone-17-usado-azul-nevoa.jpeg",
+        "images/iphone-17-usado-salvia.jpeg",
+        "images/iphone-17-usado-lavanda.jpeg"
+      ],
+      "category": "smartphones",
+      "subcategory": "usados",
       "tags": [],
       "relatedManualIds": [],
       "crossSellIds": [],
       "showPrice": false,
       "featured": false,
-      "active": false,
+      "active": true,
       "commercial": {
         "costPrice": 0,
         "erpPrice": 4700,
@@ -29746,23 +29751,24 @@
         "supplierCode": "PRETO",
         "searchAlias": "",
         "barcode": "",
-        "brand": "SemMarca",
-        "unit": "UNIDADE",
-        "category": "",
+        "brand": "APPLE",
+        "unit": "UN",
+        "category": "smartphones",
         "subcategory": "",
         "mainSupplierId": "",
         "preferredSupplierId": "",
-        "active": true
+        "active": true,
+        "categoryId": "ERP-CAT-1"
       },
       "virtualStore": {
-        "name": "iPhone 17 256GB USADO",
+        "name": "iPhone 17 256GB Usado",
         "price": 4700,
-        "active": false,
-        "seoTitle": "",
-        "seoDescription": "",
+        "active": true,
+        "seoTitle": "iPhone 17 256GB Usado | Quality Celulares",
+        "seoDescription": "iPhone 17 256GB usado, testado e revisado, com 90 dias de garantia. Chip A19, tela ProMotion de 6,3\", câmeras Fusion de 48 MP e 5G.",
         "channels": {
           "lojaVirtual": {
-            "enabled": false
+            "enabled": true
           },
           "mercadoLivre": {
             "enabled": false
@@ -29785,44 +29791,85 @@
         "minimumQuantity": 0,
         "channelAvailability": {
           "site": {
-            "mode": "disabled",
-            "enabled": false,
+            "mode": "shared",
+            "enabled": true,
             "limit": null,
             "physicalSafety": 0
           }
         }
       },
-      "detailsEnabled": false,
+      "detailsEnabled": true,
       "showVariationsOnCard": true,
-      "descriptionShort": "",
-      "descriptionLong": "",
+      "descriptionShort": "iPhone 17 usado, testado e revisado, com chip A19, câmeras Fusion de 48 MP e 90 dias de garantia.",
+      "descriptionLong": "<p><strong>Destaques do Produto:</strong></p><ul><li><p><strong>Tela Super Retina XDR de 6,3\":</strong> Painel OLED com ProMotion de até 120 Hz para navegação mais fluida.</p></li><li><p><strong>Chip A19:</strong> Alto desempenho e eficiência para aplicativos, jogos, fotos e tarefas do dia a dia.</p></li><li><p><strong>Sistema de Câmera Dual Fusion:</strong> Câmera principal de 48 MP e ultra-angular de 48 MP para fotos detalhadas e versáteis.</p></li><li><p><strong>Dynamic Island e Tela Sempre Ativa:</strong> Informações e atividades importantes com acesso rápido.</p></li><li><p><strong>5G, Face ID e USB-C:</strong> Conectividade rápida, desbloqueio facial seguro e conector USB-C.</p></li></ul><p><strong>Especificações Técnicas:</strong></p><ul><li><p><strong>Tela:</strong> 6,3\" Super Retina XDR OLED com ProMotion de até 120 Hz</p></li><li><p><strong>Processador:</strong> Apple A19</p></li><li><p><strong>Armazenamento:</strong> 256GB ou 512GB, conforme a variação</p></li><li><p><strong>Câmeras traseiras:</strong> 48 MP + 48 MP</p></li><li><p><strong>Conectividade:</strong> 5G, Wi-Fi, Bluetooth e NFC</p></li><li><p><strong>Segurança:</strong> Face ID</p></li><li><p><strong>Conector:</strong> USB-C</p></li><li><p><strong>Resistência:</strong> IP68</p></li><li><p><strong>Usado, Testado e Revisado:</strong> Aparelho totalmente testado e revisado antes da venda.</p></li><li><p><strong>Garantia:</strong> 90 dias de garantia.</p></li></ul>",
       "variations": {
         "enabled": true,
         "colors": [
           {
-            "name": "PRETO",
-            "hex": "",
-            "image": ""
+            "name": "Branco",
+            "hex": "#F5F5F5",
+            "image": "images/iphone-17-usado-branco.jpeg"
           },
           {
-            "name": "AZUL",
-            "hex": "",
-            "image": ""
+            "name": "Preto",
+            "hex": "#0D0D0D",
+            "image": "images/iphone-17-usado-preto.jpeg"
+          },
+          {
+            "name": "Azul-névoa",
+            "hex": "#AFC7DF",
+            "image": "images/iphone-17-usado-azul-nevoa.jpeg"
+          },
+          {
+            "name": "Sálvia",
+            "hex": "#B4C59A",
+            "image": "images/iphone-17-usado-salvia.jpeg"
+          },
+          {
+            "name": "Lavanda",
+            "hex": "#D8C4E7",
+            "image": "images/iphone-17-usado-lavanda.jpeg"
           }
         ],
-        "storage": [],
+        "storage": [
+          "256GB",
+          "512GB"
+        ],
         "ram": [],
         "condition": [],
-        "labels": {},
         "combinations": [
           {
-            "color": "PRETO",
-            "storage": "",
+            "color": "Branco",
+            "storage": "256GB",
+            "ram": "",
+            "condition": "",
+            "image": "",
+            "stock": 0,
+            "erpPrice": null,
+            "costPrice": null,
+            "desiredMarginPercent": null,
+            "inventoryItemId": "VAR-1786499321068-CAT-1"
+          },
+          {
+            "color": "Branco",
+            "storage": "512GB",
+            "ram": "",
+            "condition": "",
+            "image": "",
+            "stock": 0,
+            "erpPrice": null,
+            "costPrice": null,
+            "desiredMarginPercent": null,
+            "inventoryItemId": "VAR-1786499321068-CAT-2"
+          },
+          {
+            "color": "Preto",
+            "storage": "256GB",
             "ram": "",
             "condition": "",
             "size": "",
             "voltage": "",
-            "label": "PRETO",
+            "label": "Preto / 256GB",
             "image": "",
             "stock": 0,
             "erpPrice": 4700,
@@ -29839,13 +29886,25 @@
             "sourceCost": 4498.99
           },
           {
-            "color": "AZUL",
-            "storage": "",
+            "color": "Preto",
+            "storage": "512GB",
+            "ram": "",
+            "condition": "",
+            "image": "",
+            "stock": 0,
+            "erpPrice": null,
+            "costPrice": null,
+            "desiredMarginPercent": null,
+            "inventoryItemId": "VAR-1786499321068-CAT-4"
+          },
+          {
+            "color": "Azul-névoa",
+            "storage": "256GB",
             "ram": "",
             "condition": "",
             "size": "",
             "voltage": "",
-            "label": "AZUL",
+            "label": "Azul-névoa / 256GB",
             "image": "",
             "stock": 0,
             "erpPrice": 0.01,
@@ -29860,8 +29919,75 @@
             "sourceStock": 0,
             "sourcePrice": 0.01,
             "sourceCost": 0
+          },
+          {
+            "color": "Azul-névoa",
+            "storage": "512GB",
+            "ram": "",
+            "condition": "",
+            "image": "",
+            "stock": 0,
+            "erpPrice": null,
+            "costPrice": null,
+            "desiredMarginPercent": null,
+            "inventoryItemId": "VAR-1786499321068-CAT-6"
+          },
+          {
+            "color": "Sálvia",
+            "storage": "256GB",
+            "ram": "",
+            "condition": "",
+            "image": "",
+            "stock": 0,
+            "erpPrice": null,
+            "costPrice": null,
+            "desiredMarginPercent": null,
+            "inventoryItemId": "VAR-1786499321068-CAT-7"
+          },
+          {
+            "color": "Sálvia",
+            "storage": "512GB",
+            "ram": "",
+            "condition": "",
+            "image": "",
+            "stock": 0,
+            "erpPrice": null,
+            "costPrice": null,
+            "desiredMarginPercent": null,
+            "inventoryItemId": "VAR-1786499321068-CAT-8"
+          },
+          {
+            "color": "Lavanda",
+            "storage": "256GB",
+            "ram": "",
+            "condition": "",
+            "image": "",
+            "stock": 0,
+            "erpPrice": null,
+            "costPrice": null,
+            "desiredMarginPercent": null,
+            "inventoryItemId": "VAR-1786499321068-CAT-9"
+          },
+          {
+            "color": "Lavanda",
+            "storage": "512GB",
+            "ram": "",
+            "condition": "",
+            "image": "",
+            "stock": 0,
+            "erpPrice": null,
+            "costPrice": null,
+            "desiredMarginPercent": null,
+            "inventoryItemId": "VAR-1786499321068-CAT-10"
           }
-        ]
+        ],
+        "labels": {},
+        "colorsText": "Branco|#F5F5F5|images/iphone-17-usado-branco.jpeg\nPreto|#0D0D0D|images/iphone-17-usado-preto.jpeg\nAzul-névoa|#AFC7DF|images/iphone-17-usado-azul-nevoa.jpeg\nSálvia|#B4C59A|images/iphone-17-usado-salvia.jpeg\nLavanda|#D8C4E7|images/iphone-17-usado-lavanda.jpeg",
+        "storageText": "256GB\n512GB",
+        "ramText": "",
+        "conditionText": "",
+        "labelsText": "{}",
+        "combinationsText": "Branco|256GB||||0\nBranco|512GB||||0\nPreto|256GB||||0|4700\nPreto|512GB||||0\nAzul-névoa|256GB||||0|0.01\nAzul-névoa|512GB||||0\nSálvia|256GB||||0\nSálvia|512GB||||0\nLavanda|256GB||||0\nLavanda|512GB||||0"
       },
       "integrations": {
         "wm10": {
@@ -29929,7 +30055,7 @@
         "origin": "WM10",
         "importedAt": "2026-08-12T01:37:54.632Z",
         "importedBy": "painel",
-        "needsErpCategory": true,
+        "needsErpCategory": false,
         "catalogKind": "product",
         "familyId": "fam-fba6e83b28e1",
         "familyImportedAt": "2026-08-12T01:37:54.635Z"
@@ -32894,34 +33020,39 @@
     },
     {
       "id": 1786499932138,
-      "name": "Iphone 14 pro 128gb usado preto",
+      "name": "iPhone 14 Pro 128GB Usado",
       "sku": "",
       "code": "PRD-256",
       "barcode": "",
-      "brand": "SemMarca",
-      "slug": "iphone-14-pro-128gb-usado-preto",
+      "brand": "APPLE",
+      "slug": "iphone-14-pro-128gb-usado",
       "price": 3399,
       "stock": 0,
-      "image": "",
-      "gallery": [],
-      "category": "",
-      "subcategory": "",
+      "image": "images/produtos/1788134530471-iphone-14-pro-roxo-profundo.jpeg",
+      "gallery": [
+        "images/produtos/1788134472713-iphone-14-pro-dourado.jpeg",
+        "images/produtos/1788134472715-iphone-14-pro-roxo-profundo.jpeg",
+        "images/produtos/1788134472719-iphone-14-pro-usado-prateado.jpeg"
+      ],
+      "category": "smartphones",
+      "subcategory": "usados",
       "tags": [],
       "relatedManualIds": [],
       "crossSellIds": [],
       "showPrice": false,
       "featured": false,
-      "active": false,
+      "active": true,
       "commercial": {
         "costPrice": 0,
         "erpPrice": 3399,
+        "salePrice": 3399,
         "marketplacePrice": null,
         "promotionalPrice": null,
         "desiredMarginPercent": null,
         "expectedProfit": null,
         "defaultCommissionPercent": null,
-        "cashPrice": null,
-        "installmentPrice": null,
+        "cashPrice": 3399,
+        "installmentPrice": 3399,
         "minimumPrice": null,
         "minimumMarginPercent": null,
         "discountPolicy": "inherit",
@@ -32935,23 +33066,28 @@
         "supplierCode": "",
         "searchAlias": "",
         "barcode": "",
-        "brand": "SemMarca",
-        "unit": "UNIDADE",
-        "category": "",
+        "brand": "APPLE",
+        "unit": "UN",
+        "category": "smartphones",
         "subcategory": "",
         "mainSupplierId": "",
         "preferredSupplierId": "",
-        "active": true
+        "active": true,
+        "categoryId": "ERP-CAT-1",
+        "ncm": "",
+        "fiscal": {
+          "ncm": ""
+        }
       },
       "virtualStore": {
-        "name": "Iphone 14 pro 128gb usado preto",
+        "name": "iPhone 14 Pro 128GB Usado",
         "price": 3399,
-        "active": false,
-        "seoTitle": "",
-        "seoDescription": "",
+        "active": true,
+        "seoTitle": "iPhone 14 Pro 128GB Usado | Quality Celulares",
+        "seoDescription": "iPhone 14 Pro 128GB usado, testado e revisado, com 90 dias de garantia. Tela ProMotion de 6,1\", chip A16 Bionic, câmera principal de 48 MP e 5G.",
         "channels": {
           "lojaVirtual": {
-            "enabled": false
+            "enabled": true
           },
           "mercadoLivre": {
             "enabled": false
@@ -32974,25 +33110,101 @@
         "minimumQuantity": 0,
         "channelAvailability": {
           "site": {
-            "mode": "disabled",
-            "enabled": false,
+            "mode": "shared",
+            "enabled": true,
             "limit": null,
             "physicalSafety": 0
           }
         }
       },
-      "detailsEnabled": false,
-      "showVariationsOnCard": false,
-      "descriptionShort": "",
-      "descriptionLong": "",
+      "detailsEnabled": true,
+      "showVariationsOnCard": true,
+      "descriptionShort": "iPhone 14 Pro 128GB usado, testado e revisado, com tela ProMotion, câmera de 48 MP e 90 dias de garantia.",
+      "descriptionLong": "<p><strong>Destaques do Produto:</strong></p><ul><li><p><strong>Tela Super Retina XDR de 6,1\":</strong> Painel OLED com ProMotion de até 120 Hz e Tela Sempre Ativa.</p></li><li><p><strong>Chip A16 Bionic:</strong> Excelente desempenho para aplicativos, jogos, fotos e vídeos.</p></li><li><p><strong>Sistema de Câmeras Pro:</strong> Câmera principal de 48 MP, ultra-angular de 12 MP e teleobjetiva de 12 MP.</p></li><li><p><strong>Dynamic Island:</strong> Interações e alertas integrados de forma prática à tela.</p></li><li><p><strong>5G e Face ID:</strong> Conectividade rápida e desbloqueio facial seguro.</p></li></ul><p><strong>Especificações Técnicas:</strong></p><ul><li><p><strong>Tela:</strong> 6,1\" Super Retina XDR OLED com ProMotion de até 120 Hz</p></li><li><p><strong>Processador:</strong> Apple A16 Bionic</p></li><li><p><strong>Armazenamento:</strong> 128GB</p></li><li><p><strong>Câmeras:</strong> Traseiras 48 MP + 12 MP + 12 MP | Frontal 12 MP</p></li><li><p><strong>Conectividade:</strong> 5G, Wi‑Fi, Bluetooth e NFC</p></li><li><p><strong>Segurança:</strong> Face ID</p></li><li><p><strong>Conector:</strong> Lightning</p></li><li><p><strong>Resistência:</strong> IP68</p></li><li><p><strong>Usado, Testado e Revisado:</strong> Aparelho totalmente testado e revisado antes da venda.</p></li><li><p><strong>Garantia:</strong> 90 dias de garantia.</p></li></ul>",
       "variations": {
-        "enabled": false,
-        "colors": [],
+        "enabled": true,
+        "colors": [
+          {
+            "name": "Roxo-profundo",
+            "hex": "#60566f",
+            "image": "images/Iphone 14 pro roxo profundo.jpeg"
+          },
+          {
+            "name": "Preto-espacial",
+            "hex": "#2d2d2b",
+            "image": "images/iphone 14 pro preto.jpeg"
+          },
+          {
+            "name": "Prateado",
+            "hex": "#F2F1EC",
+            "image": "images/iphone-14-pro-usado-prateado.jpeg"
+          },
+          {
+            "name": "Dourado",
+            "hex": "#e8d7b6",
+            "image": "images/Iphone 14 pro dourado.jpeg"
+          }
+        ],
         "storage": [],
         "ram": [],
         "condition": [],
-        "labels": [],
-        "combinations": []
+        "combinations": [
+          {
+            "color": "Roxo-profundo",
+            "storage": "",
+            "ram": "",
+            "condition": "",
+            "image": "",
+            "stock": 0,
+            "erpPrice": null,
+            "costPrice": null,
+            "desiredMarginPercent": null,
+            "inventoryItemId": "VAR-1786499932138-1"
+          },
+          {
+            "color": "Preto-espacial",
+            "storage": "",
+            "ram": "",
+            "condition": "",
+            "image": "",
+            "stock": 0,
+            "erpPrice": null,
+            "costPrice": null,
+            "desiredMarginPercent": null,
+            "inventoryItemId": "VAR-1786499932138-2"
+          },
+          {
+            "color": "Prateado",
+            "storage": "",
+            "ram": "",
+            "condition": "",
+            "image": "",
+            "stock": 0,
+            "erpPrice": null,
+            "costPrice": null,
+            "desiredMarginPercent": null,
+            "inventoryItemId": "VAR-1786499932138-3"
+          },
+          {
+            "color": "Dourado",
+            "storage": "",
+            "ram": "",
+            "condition": "",
+            "image": "",
+            "stock": 0,
+            "erpPrice": null,
+            "costPrice": null,
+            "desiredMarginPercent": null,
+            "inventoryItemId": "VAR-1786499932138-4"
+          }
+        ],
+        "labels": {},
+        "colorsText": "Roxo-profundo|#60566f|images/Iphone 14 pro roxo profundo.jpeg\nPreto-espacial|#2d2d2b|images/iphone 14 pro preto.jpeg\nPrateado|#F2F1EC|images/iphone-14-pro-usado-prateado.jpeg\nDourado|#e8d7b6|images/Iphone 14 pro dourado.jpeg",
+        "storageText": "",
+        "ramText": "",
+        "conditionText": "",
+        "labelsText": "{}",
+        "combinationsText": "Roxo-profundo\nPreto-espacial\nPrateado\nDourado"
       },
       "integrations": {
         "wm10": {
@@ -33035,14 +33247,13 @@
         "catalogKind": "product"
       },
       "inventoryBalance": {
-        "inventoryItemId": "PRD-1786499932138",
-        "locationId": "loja-principal",
         "physicalQuantity": 0,
-        "reservedQuantity": 0,
         "availableQuantity": 0,
-        "minimumQuantity": 0,
-        "updatedAt": "2026-08-16T00:18:28.079Z"
-      }
+        "reservedQuantity": 0,
+        "derivedFromVariations": true
+      },
+      "updatedAt": "2026-08-31T00:02:10.489Z",
+      "ncm": ""
     },
     {
       "id": 1786499794654,
@@ -138432,6 +138643,986 @@
         "availableQuantity": 2,
         "minimumQuantity": 0,
         "updatedAt": "2026-08-30T15:02:18.427Z"
+      }
+    },
+    {
+      "id": 1788131571839,
+      "name": "iPhone 15 Pro Max 256GB Usado",
+      "sku": "",
+      "code": "PRD-967",
+      "barcode": "",
+      "ncm": "",
+      "brand": "APPLE",
+      "slug": "iphone-15-pro-max-256gb-usado",
+      "price": null,
+      "stock": 0,
+      "image": "images/produtos/1788134924311-15-pro-max-titanio-azul.jpeg",
+      "gallery": [
+        "images/produtos/1788135095727-15-pro-max-natural-titanio.jpeg",
+        "images/produtos/1788135095729-15-pro-max-titanio-branco.jpeg",
+        "images/produtos/1788135095732-15-pro-max-titanio-preto.jpeg"
+      ],
+      "category": "smartphones",
+      "subcategory": "usados",
+      "tags": [],
+      "relatedManualIds": [],
+      "crossSellIds": [],
+      "showPrice": false,
+      "featured": false,
+      "active": true,
+      "commercial": {
+        "costPrice": null,
+        "erpPrice": null,
+        "salePrice": null,
+        "marketplacePrice": null,
+        "promotionalPrice": null,
+        "desiredMarginPercent": null,
+        "expectedProfit": null,
+        "defaultCommissionPercent": null,
+        "cashPrice": null,
+        "installmentPrice": null,
+        "minimumPrice": null,
+        "minimumMarginPercent": null,
+        "discountPolicy": "inherit",
+        "maximumDiscountPercent": null,
+        "maximumDiscountAmount": null,
+        "requiresAuthorization": false
+      },
+      "erp": {
+        "sku": "",
+        "internalCode": "PRD-967",
+        "supplierCode": "",
+        "searchAlias": "",
+        "barcode": "",
+        "ncm": "",
+        "fiscal": {
+          "ncm": ""
+        },
+        "brand": "APPLE",
+        "unit": "UN",
+        "category": "smartphones",
+        "subcategory": "",
+        "mainSupplierId": "",
+        "preferredSupplierId": "",
+        "active": true,
+        "categoryId": "ERP-CAT-1"
+      },
+      "virtualStore": {
+        "name": "iPhone 15 Pro Max 256GB Usado",
+        "price": null,
+        "active": true,
+        "seoTitle": "iPhone 15 Pro Max 256GB Usado | Quality Celulares",
+        "seoDescription": "iPhone 15 Pro Max usado, testado e revisado, com 90 dias de garantia. Chip A17 Pro, tela ProMotion de 6,7\", câmera de 48 MP e 5G.",
+        "channels": {
+          "lojaVirtual": {
+            "enabled": true
+          },
+          "mercadoLivre": {
+            "enabled": false
+          },
+          "shopee": {
+            "enabled": false
+          },
+          "amazon": {
+            "enabled": false
+          },
+          "magalu": {
+            "enabled": false
+          }
+        }
+      },
+      "inventory": {
+        "itemId": "PRD-1788131571839",
+        "stockControlled": true,
+        "allowNegative": false,
+        "minimumQuantity": 0,
+        "channelAvailability": {
+          "site": {
+            "mode": "shared",
+            "enabled": true,
+            "limit": null,
+            "physicalSafety": 0
+          }
+        }
+      },
+      "detailsEnabled": true,
+      "showVariationsOnCard": true,
+      "descriptionShort": "iPhone 15 Pro Max usado, testado e revisado, com desempenho premium, câmeras Pro e 90 dias de garantia.",
+      "descriptionLong": "<p><strong>Destaques do Produto:</strong></p><ul><li><p><strong>Tela Super Retina XDR de 6,7\":</strong> Painel OLED com ProMotion de até 120 Hz, excelente brilho e fluidez.</p></li><li><p><strong>Chip A17 Pro:</strong> Alto desempenho para aplicativos, jogos, fotos, vídeos e tarefas exigentes.</p></li><li><p><strong>Sistema de Câmeras Pro:</strong> Câmera principal de 48 MP, ultra-angular de 12 MP e teleobjetiva de 12 MP com zoom óptico de 5x.</p></li><li><p><strong>Estrutura em Titânio:</strong> Construção premium, resistente e mais leve.</p></li><li><p><strong>5G, Face ID e USB-C:</strong> Conectividade rápida, desbloqueio facial seguro e conector USB-C.</p></li></ul><p><strong>Especificações Técnicas:</strong></p><ul><li><p><strong>Tela:</strong> 6,7\" Super Retina XDR OLED com ProMotion de até 120 Hz</p></li><li><p><strong>Processador:</strong> Apple A17 Pro</p></li><li><p><strong>Armazenamento:</strong> 256GB, 512GB ou 1TB, conforme a variação</p></li><li><p><strong>Câmeras:</strong> Traseiras 48 MP + 12 MP + 12 MP | Frontal 12 MP</p></li><li><p><strong>Conectividade:</strong> 5G, Wi-Fi, Bluetooth e NFC</p></li><li><p><strong>Segurança:</strong> Face ID</p></li><li><p><strong>Conector:</strong> USB-C</p></li><li><p><strong>Resistência:</strong> IP68</p></li><li><p><strong>Usado, Testado e Revisado:</strong> Aparelho totalmente testado e revisado antes da venda.</p></li><li><p><strong>Garantia:</strong> 90 dias de garantia.</p></li></ul>",
+      "variations": {
+        "enabled": true,
+        "colors": [
+          {
+            "name": "Titânio Azul",
+            "hex": "#4b5663",
+            "image": "images/15 pro max titanio azul.jpeg"
+          },
+          {
+            "name": "Titânio Preto",
+            "hex": "#2f2f2f",
+            "image": "images/15 pro max titanio preto.jpeg"
+          },
+          {
+            "name": "Titânio Natural",
+            "hex": "#b8b0a6",
+            "image": "images/15 pro max natural titanio.jpeg"
+          },
+          {
+            "name": "Titânio Branco",
+            "hex": "#f2f0eb",
+            "image": "images/15 pro max titanio branco.jpeg"
+          }
+        ],
+        "storage": [
+          "256GB",
+          "512GB",
+          "1TB"
+        ],
+        "ram": [],
+        "condition": [],
+        "combinations": [
+          {
+            "color": "Titânio Azul",
+            "storage": "256GB",
+            "ram": "",
+            "condition": "",
+            "image": "images/15 pro max titanio azul.jpeg",
+            "stock": 0,
+            "erpPrice": null,
+            "costPrice": null,
+            "desiredMarginPercent": null,
+            "inventoryItemId": "VAR-1788131571839-1"
+          },
+          {
+            "color": "Titânio Azul",
+            "storage": "512GB",
+            "ram": "",
+            "condition": "",
+            "image": "images/15 pro max titanio azul.jpeg",
+            "stock": 0,
+            "erpPrice": null,
+            "costPrice": null,
+            "desiredMarginPercent": null,
+            "inventoryItemId": "VAR-1788131571839-2"
+          },
+          {
+            "color": "Titânio Azul",
+            "storage": "1TB",
+            "ram": "",
+            "condition": "",
+            "image": "images/15 pro max titanio azul.jpeg",
+            "stock": 0,
+            "erpPrice": null,
+            "costPrice": null,
+            "desiredMarginPercent": null,
+            "inventoryItemId": "VAR-1788131571839-3"
+          },
+          {
+            "color": "Titânio Preto",
+            "storage": "256GB",
+            "ram": "",
+            "condition": "",
+            "image": "images/15 pro max titanio preto.jpeg",
+            "stock": 0,
+            "erpPrice": null,
+            "costPrice": null,
+            "desiredMarginPercent": null,
+            "inventoryItemId": "VAR-1788131571839-7"
+          },
+          {
+            "color": "Titânio Preto",
+            "storage": "512GB",
+            "ram": "",
+            "condition": "",
+            "image": "images/15 pro max titanio preto.jpeg",
+            "stock": 0,
+            "erpPrice": null,
+            "costPrice": null,
+            "desiredMarginPercent": null,
+            "inventoryItemId": "VAR-1788131571839-8"
+          },
+          {
+            "color": "Titânio Preto",
+            "storage": "1TB",
+            "ram": "",
+            "condition": "",
+            "image": "images/15 pro max titanio preto.jpeg",
+            "stock": 0,
+            "erpPrice": null,
+            "costPrice": null,
+            "desiredMarginPercent": null,
+            "inventoryItemId": "VAR-1788131571839-9"
+          },
+          {
+            "color": "Titânio Natural",
+            "storage": "256GB",
+            "ram": "",
+            "condition": "",
+            "image": "images/15 pro max natural titanio.jpeg",
+            "stock": 0,
+            "erpPrice": null,
+            "costPrice": null,
+            "desiredMarginPercent": null,
+            "inventoryItemId": "VAR-1788131571839-4"
+          },
+          {
+            "color": "Titânio Natural",
+            "storage": "512GB",
+            "ram": "",
+            "condition": "",
+            "image": "images/15 pro max natural titanio.jpeg",
+            "stock": 0,
+            "erpPrice": null,
+            "costPrice": null,
+            "desiredMarginPercent": null,
+            "inventoryItemId": "VAR-1788131571839-5"
+          },
+          {
+            "color": "Titânio Natural",
+            "storage": "1TB",
+            "ram": "",
+            "condition": "",
+            "image": "images/15 pro max natural titanio.jpeg",
+            "stock": 0,
+            "erpPrice": null,
+            "costPrice": null,
+            "desiredMarginPercent": null,
+            "inventoryItemId": "VAR-1788131571839-6"
+          },
+          {
+            "color": "Titânio Branco",
+            "storage": "256GB",
+            "ram": "",
+            "condition": "",
+            "image": "images/15 pro max titanio branco.jpeg",
+            "stock": 0,
+            "erpPrice": null,
+            "costPrice": null,
+            "desiredMarginPercent": null,
+            "inventoryItemId": "VAR-1788131571839-10"
+          },
+          {
+            "color": "Titânio Branco",
+            "storage": "512GB",
+            "ram": "",
+            "condition": "",
+            "image": "images/15 pro max titanio branco.jpeg",
+            "stock": 0,
+            "erpPrice": null,
+            "costPrice": null,
+            "desiredMarginPercent": null,
+            "inventoryItemId": "VAR-1788131571839-11"
+          },
+          {
+            "color": "Titânio Branco",
+            "storage": "1TB",
+            "ram": "",
+            "condition": "",
+            "image": "images/15 pro max titanio branco.jpeg",
+            "stock": 0,
+            "erpPrice": null,
+            "costPrice": null,
+            "desiredMarginPercent": null,
+            "inventoryItemId": "VAR-1788131571839-12"
+          }
+        ],
+        "labels": {},
+        "colorsText": "Titânio Azul|#4b5663|images/15 pro max titanio azul.jpeg\nTitânio Preto|#2f2f2f|images/15 pro max titanio preto.jpeg\nTitânio Natural|#b8b0a6|images/15 pro max natural titanio.jpeg\nTitânio Branco|#f2f0eb|images/15 pro max titanio branco.jpeg",
+        "storageText": "256GB\n512GB\n1TB",
+        "ramText": "",
+        "conditionText": "",
+        "labelsText": "{}",
+        "combinationsText": "Titânio Azul|256GB|||images/15 pro max titanio azul.jpeg|0\nTitânio Azul|512GB|||images/15 pro max titanio azul.jpeg|0\nTitânio Azul|1TB|||images/15 pro max titanio azul.jpeg|0\nTitânio Preto|256GB|||images/15 pro max titanio preto.jpeg|0\nTitânio Preto|512GB|||images/15 pro max titanio preto.jpeg|0\nTitânio Preto|1TB|||images/15 pro max titanio preto.jpeg|0\nTitânio Natural|256GB|||images/15 pro max natural titanio.jpeg|0\nTitânio Natural|512GB|||images/15 pro max natural titanio.jpeg|0\nTitânio Natural|1TB|||images/15 pro max natural titanio.jpeg|0\nTitânio Branco|256GB|||images/15 pro max titanio branco.jpeg|0\nTitânio Branco|512GB|||images/15 pro max titanio branco.jpeg|0\nTitânio Branco|1TB|||images/15 pro max titanio branco.jpeg|0"
+      },
+      "inventoryBalance": {
+        "physicalQuantity": 0,
+        "availableQuantity": 0,
+        "reservedQuantity": 0,
+        "derivedFromVariations": true
+      },
+      "updatedAt": "2026-08-31T00:08:44.336Z"
+    },
+    {
+      "id": 1788131571840,
+      "name": "iPhone 16 128GB Usado",
+      "sku": "",
+      "code": "PRD-968",
+      "barcode": "",
+      "ncm": "",
+      "brand": "APPLE",
+      "slug": "iphone-16-128gb-usado",
+      "price": null,
+      "stock": 0,
+      "image": "images/iphone-16-usado-branco.jpeg",
+      "gallery": [
+        "images/iphone-16-usado-preto.jpeg",
+        "images/iphone-16-usado-ultramarino.jpeg",
+        "images/iphone-16-usado-rosa.jpeg",
+        "images/iphone-16-usado-verde-acinzentado.jpeg"
+      ],
+      "category": "smartphones",
+      "subcategory": "usados",
+      "tags": [],
+      "relatedManualIds": [],
+      "crossSellIds": [],
+      "showPrice": false,
+      "featured": false,
+      "active": true,
+      "commercial": {
+        "costPrice": null,
+        "erpPrice": null,
+        "salePrice": null,
+        "marketplacePrice": null,
+        "promotionalPrice": null,
+        "desiredMarginPercent": null,
+        "expectedProfit": null,
+        "defaultCommissionPercent": null,
+        "cashPrice": null,
+        "installmentPrice": null,
+        "minimumPrice": null,
+        "minimumMarginPercent": null,
+        "discountPolicy": "inherit",
+        "maximumDiscountPercent": null,
+        "maximumDiscountAmount": null,
+        "requiresAuthorization": false
+      },
+      "erp": {
+        "sku": "",
+        "internalCode": "PRD-968",
+        "supplierCode": "",
+        "searchAlias": "",
+        "barcode": "",
+        "ncm": "",
+        "fiscal": {
+          "ncm": ""
+        },
+        "brand": "APPLE",
+        "unit": "UN",
+        "category": "smartphones",
+        "subcategory": "",
+        "mainSupplierId": "",
+        "preferredSupplierId": "",
+        "active": true,
+        "categoryId": "ERP-CAT-1"
+      },
+      "virtualStore": {
+        "name": "iPhone 16 128GB Usado",
+        "price": null,
+        "active": true,
+        "seoTitle": "iPhone 16 128GB Usado com Garantia | Quality Celulares",
+        "seoDescription": "iPhone 16 usado, testado e revisado, com 90 dias de garantia. Chip A18, câmera Fusion de 48 MP, tela OLED de 6,1\" e 5G.",
+        "channels": {
+          "lojaVirtual": {
+            "enabled": true
+          },
+          "mercadoLivre": {
+            "enabled": false
+          },
+          "shopee": {
+            "enabled": false
+          },
+          "amazon": {
+            "enabled": false
+          },
+          "magalu": {
+            "enabled": false
+          }
+        }
+      },
+      "inventory": {
+        "itemId": "PRD-1788131571840",
+        "stockControlled": true,
+        "allowNegative": false,
+        "minimumQuantity": 0,
+        "channelAvailability": {
+          "site": {
+            "mode": "shared",
+            "enabled": true,
+            "limit": null,
+            "physicalSafety": 0
+          }
+        }
+      },
+      "detailsEnabled": true,
+      "showVariationsOnCard": true,
+      "descriptionShort": "iPhone 16 usado, testado e revisado, com chip A18, câmera de 48 MP e 90 dias de garantia.",
+      "descriptionLong": "<p><strong>Destaques do Produto:</strong></p><ul><li><p><strong>Tela Super Retina XDR de 6,1\":</strong> Painel OLED com ótima definição, brilho e cores vibrantes.</p></li><li><p><strong>Chip A18:</strong> Desempenho rápido e eficiente para aplicativos, jogos, fotos e uso diário.</p></li><li><p><strong>Câmera Fusion de 48 MP:</strong> Registros detalhados, acompanhada de câmera ultra-angular de 12 MP.</p></li><li><p><strong>Dynamic Island:</strong> Acesso prático a alertas e atividades em andamento.</p></li><li><p><strong>5G, Face ID e USB-C:</strong> Conectividade rápida, desbloqueio facial seguro e padrão USB-C.</p></li></ul><p><strong>Especificações Técnicas:</strong></p><ul><li><p><strong>Tela:</strong> 6,1\" Super Retina XDR OLED</p></li><li><p><strong>Processador:</strong> Apple A18</p></li><li><p><strong>Armazenamento:</strong> 128GB, 256GB ou 512GB, conforme a variação</p></li><li><p><strong>Câmeras:</strong> Traseiras 48 MP + 12 MP | Frontal 12 MP</p></li><li><p><strong>Conectividade:</strong> 5G, Wi-Fi, Bluetooth e NFC</p></li><li><p><strong>Segurança:</strong> Face ID</p></li><li><p><strong>Conector:</strong> USB-C</p></li><li><p><strong>Resistência:</strong> IP68</p></li><li><p><strong>Usado, Testado e Revisado:</strong> Aparelho totalmente testado e revisado antes da venda.</p></li><li><p><strong>Garantia:</strong> 90 dias de garantia.</p></li></ul>",
+      "variations": {
+        "enabled": true,
+        "colors": [
+          {
+            "name": "Branco",
+            "hex": "#FFFFFF",
+            "image": "images/iphone-16-usado-branco.jpeg"
+          },
+          {
+            "name": "Preto",
+            "hex": "#111111",
+            "image": "images/iphone-16-usado-preto.jpeg"
+          },
+          {
+            "name": "Ultramarino",
+            "hex": "#2730B0",
+            "image": "images/iphone-16-usado-ultramarino.jpeg"
+          },
+          {
+            "name": "Rosa",
+            "hex": "#F4A8C8",
+            "image": "images/iphone-16-usado-rosa.jpeg"
+          },
+          {
+            "name": "Verde-acinzentado",
+            "hex": "#8FAF9D",
+            "image": "images/iphone-16-usado-verde-acinzentado.jpeg"
+          }
+        ],
+        "storage": [
+          "128GB",
+          "256GB",
+          "512GB"
+        ],
+        "ram": [],
+        "condition": [],
+        "combinations": [
+          {
+            "color": "Branco",
+            "storage": "128GB",
+            "ram": "",
+            "condition": "",
+            "image": "",
+            "stock": 0,
+            "erpPrice": null,
+            "costPrice": null,
+            "desiredMarginPercent": null,
+            "inventoryItemId": "VAR-1788131571840-1"
+          },
+          {
+            "color": "Branco",
+            "storage": "256GB",
+            "ram": "",
+            "condition": "",
+            "image": "",
+            "stock": 0,
+            "erpPrice": null,
+            "costPrice": null,
+            "desiredMarginPercent": null,
+            "inventoryItemId": "VAR-1788131571840-2"
+          },
+          {
+            "color": "Branco",
+            "storage": "512GB",
+            "ram": "",
+            "condition": "",
+            "image": "",
+            "stock": 0,
+            "erpPrice": null,
+            "costPrice": null,
+            "desiredMarginPercent": null,
+            "inventoryItemId": "VAR-1788131571840-3"
+          },
+          {
+            "color": "Preto",
+            "storage": "128GB",
+            "ram": "",
+            "condition": "",
+            "image": "",
+            "stock": 0,
+            "erpPrice": null,
+            "costPrice": null,
+            "desiredMarginPercent": null,
+            "inventoryItemId": "VAR-1788131571840-4"
+          },
+          {
+            "color": "Preto",
+            "storage": "256GB",
+            "ram": "",
+            "condition": "",
+            "image": "",
+            "stock": 0,
+            "erpPrice": null,
+            "costPrice": null,
+            "desiredMarginPercent": null,
+            "inventoryItemId": "VAR-1788131571840-5"
+          },
+          {
+            "color": "Preto",
+            "storage": "512GB",
+            "ram": "",
+            "condition": "",
+            "image": "",
+            "stock": 0,
+            "erpPrice": null,
+            "costPrice": null,
+            "desiredMarginPercent": null,
+            "inventoryItemId": "VAR-1788131571840-6"
+          },
+          {
+            "color": "Ultramarino",
+            "storage": "128GB",
+            "ram": "",
+            "condition": "",
+            "image": "",
+            "stock": 0,
+            "erpPrice": null,
+            "costPrice": null,
+            "desiredMarginPercent": null,
+            "inventoryItemId": "VAR-1788131571840-7"
+          },
+          {
+            "color": "Ultramarino",
+            "storage": "256GB",
+            "ram": "",
+            "condition": "",
+            "image": "",
+            "stock": 0,
+            "erpPrice": null,
+            "costPrice": null,
+            "desiredMarginPercent": null,
+            "inventoryItemId": "VAR-1788131571840-8"
+          },
+          {
+            "color": "Ultramarino",
+            "storage": "512GB",
+            "ram": "",
+            "condition": "",
+            "image": "",
+            "stock": 0,
+            "erpPrice": null,
+            "costPrice": null,
+            "desiredMarginPercent": null,
+            "inventoryItemId": "VAR-1788131571840-9"
+          },
+          {
+            "color": "Rosa",
+            "storage": "128GB",
+            "ram": "",
+            "condition": "",
+            "image": "",
+            "stock": 0,
+            "erpPrice": null,
+            "costPrice": null,
+            "desiredMarginPercent": null,
+            "inventoryItemId": "VAR-1788131571840-10"
+          },
+          {
+            "color": "Rosa",
+            "storage": "256GB",
+            "ram": "",
+            "condition": "",
+            "image": "",
+            "stock": 0,
+            "erpPrice": null,
+            "costPrice": null,
+            "desiredMarginPercent": null,
+            "inventoryItemId": "VAR-1788131571840-11"
+          },
+          {
+            "color": "Rosa",
+            "storage": "512GB",
+            "ram": "",
+            "condition": "",
+            "image": "",
+            "stock": 0,
+            "erpPrice": null,
+            "costPrice": null,
+            "desiredMarginPercent": null,
+            "inventoryItemId": "VAR-1788131571840-12"
+          },
+          {
+            "color": "Verde-acinzentado",
+            "storage": "128GB",
+            "ram": "",
+            "condition": "",
+            "image": "",
+            "stock": 0,
+            "erpPrice": null,
+            "costPrice": null,
+            "desiredMarginPercent": null,
+            "inventoryItemId": "VAR-1788131571840-13"
+          },
+          {
+            "color": "Verde-acinzentado",
+            "storage": "256GB",
+            "ram": "",
+            "condition": "",
+            "image": "",
+            "stock": 0,
+            "erpPrice": null,
+            "costPrice": null,
+            "desiredMarginPercent": null,
+            "inventoryItemId": "VAR-1788131571840-14"
+          },
+          {
+            "color": "Verde-acinzentado",
+            "storage": "512GB",
+            "ram": "",
+            "condition": "",
+            "image": "",
+            "stock": 0,
+            "erpPrice": null,
+            "costPrice": null,
+            "desiredMarginPercent": null,
+            "inventoryItemId": "VAR-1788131571840-15"
+          }
+        ],
+        "labels": {},
+        "colorsText": "Branco|#FFFFFF|images/iphone-16-usado-branco.jpeg\nPreto|#111111|images/iphone-16-usado-preto.jpeg\nUltramarino|#2730B0|images/iphone-16-usado-ultramarino.jpeg\nRosa|#F4A8C8|images/iphone-16-usado-rosa.jpeg\nVerde-acinzentado|#8FAF9D|images/iphone-16-usado-verde-acinzentado.jpeg",
+        "storageText": "128GB\n256GB\n512GB",
+        "ramText": "",
+        "conditionText": "",
+        "labelsText": "{}",
+        "combinationsText": "Branco|128GB||||0\nBranco|256GB||||0\nBranco|512GB||||0\nPreto|128GB||||0\nPreto|256GB||||0\nPreto|512GB||||0\nUltramarino|128GB||||0\nUltramarino|256GB||||0\nUltramarino|512GB||||0\nRosa|128GB||||0\nRosa|256GB||||0\nRosa|512GB||||0\nVerde-acinzentado|128GB||||0\nVerde-acinzentado|256GB||||0\nVerde-acinzentado|512GB||||0"
+      },
+      "inventoryBalance": {
+        "physicalQuantity": 0,
+        "availableQuantity": 0,
+        "reservedQuantity": 0,
+        "derivedFromVariations": true
+      }
+    },
+    {
+      "id": 1788131571841,
+      "name": "iPhone 14 Pro 256GB Usado",
+      "sku": "",
+      "code": "PRD-969",
+      "barcode": "",
+      "ncm": "",
+      "brand": "APPLE",
+      "slug": "iphone-14-pro-256gb-usado",
+      "price": null,
+      "stock": 0,
+      "image": "images/iphone-14-pro-usado-prateado.jpeg",
+      "gallery": [
+        "images/produtos/1788135293159-iphone-14-pro-dourado.jpeg",
+        "images/produtos/1788135293161-iphone-14-pro-roxo-profundo.jpeg",
+        "images/produtos/1788135293164-iphone-14-pro-preto.jpeg"
+      ],
+      "category": "smartphones",
+      "subcategory": "usados",
+      "tags": [],
+      "relatedManualIds": [],
+      "crossSellIds": [],
+      "showPrice": false,
+      "featured": false,
+      "active": true,
+      "commercial": {
+        "costPrice": null,
+        "erpPrice": null,
+        "salePrice": null,
+        "marketplacePrice": null,
+        "promotionalPrice": null,
+        "desiredMarginPercent": null,
+        "expectedProfit": null,
+        "defaultCommissionPercent": null,
+        "cashPrice": null,
+        "installmentPrice": null,
+        "minimumPrice": null,
+        "minimumMarginPercent": null,
+        "discountPolicy": "inherit",
+        "maximumDiscountPercent": null,
+        "maximumDiscountAmount": null,
+        "requiresAuthorization": false
+      },
+      "erp": {
+        "sku": "",
+        "internalCode": "PRD-969",
+        "supplierCode": "",
+        "searchAlias": "",
+        "barcode": "",
+        "ncm": "",
+        "fiscal": {
+          "ncm": ""
+        },
+        "brand": "APPLE",
+        "unit": "UN",
+        "category": "smartphones",
+        "subcategory": "",
+        "mainSupplierId": "",
+        "preferredSupplierId": "",
+        "active": true,
+        "categoryId": "ERP-CAT-1"
+      },
+      "virtualStore": {
+        "name": "iPhone 14 Pro 256GB Usado",
+        "price": null,
+        "active": true,
+        "seoTitle": "iPhone 14 Pro 256GB Usado | Quality Celulares",
+        "seoDescription": "iPhone 14 Pro usado, testado e revisado, com 90 dias de garantia. Tela ProMotion de 6,1\", chip A16 Bionic, câmera principal de 48 MP e 5G",
+        "channels": {
+          "lojaVirtual": {
+            "enabled": true
+          },
+          "mercadoLivre": {
+            "enabled": false
+          },
+          "shopee": {
+            "enabled": false
+          },
+          "amazon": {
+            "enabled": false
+          },
+          "magalu": {
+            "enabled": false
+          }
+        }
+      },
+      "inventory": {
+        "itemId": "PRD-1788131571841",
+        "stockControlled": true,
+        "allowNegative": false,
+        "minimumQuantity": 0,
+        "channelAvailability": {
+          "site": {
+            "mode": "shared",
+            "enabled": true,
+            "limit": null,
+            "physicalSafety": 0
+          }
+        }
+      },
+      "detailsEnabled": true,
+      "showVariationsOnCard": true,
+      "descriptionShort": "iPhone 14 Pro usado, testado e revisado, com tela ProMotion, câmera de 48 MP e 90 dias de garantia.",
+      "descriptionLong": "<p><strong>Destaques do Produto:</strong></p><ul><li><p><strong>Tela Super Retina XDR de 6,1\":</strong> Painel OLED com ProMotion de até 120 Hz e Tela Sempre Ativa.</p></li><li><p><strong>Chip A16 Bionic:</strong> Excelente desempenho para aplicativos, jogos, fotos e vídeos.</p></li><li><p><strong>Sistema de Câmeras Pro:</strong> Câmera principal de 48 MP, ultra-angular de 12 MP e teleobjetiva de 12 MP.</p></li><li><p><strong>Dynamic Island:</strong> Interações e alertas integrados de forma prática à tela.</p></li><li><p><strong>5G e Face ID:</strong> Conectividade rápida e desbloqueio facial seguro.</p></li></ul><p><strong>Especificações Técnicas:</strong></p><ul><li><p><strong>Tela:</strong> 6,1\" Super Retina XDR OLED com ProMotion de até 120 Hz</p></li><li><p><strong>Processador:</strong> Apple A16 Bionic</p></li><li><p><strong>Armazenamento:</strong> 128GB, 256GB, 512GB ou 1TB, conforme a variação</p></li><li><p><strong>Câmeras:</strong> Traseiras 48 MP + 12 MP + 12 MP | Frontal 12 MP</p></li><li><p><strong>Conectividade:</strong> 5G, Wi-Fi, Bluetooth e NFC</p></li><li><p><strong>Segurança:</strong> Face ID</p></li><li><p><strong>Conector:</strong> Lightning</p></li><li><p><strong>Resistência:</strong> IP68</p></li><li><p><strong>Usado, Testado e Revisado:</strong> Aparelho totalmente testado e revisado antes da venda.</p></li><li><p><strong>Garantia:</strong> 90 dias de garantia.</p></li></ul>",
+      "variations": {
+        "enabled": true,
+        "colors": [
+          {
+            "name": "Roxo-profundo",
+            "hex": "#60566f",
+            "image": "images/Iphone 14 pro roxo profundo.jpeg"
+          },
+          {
+            "name": "Preto-espacial",
+            "hex": "#2d2d2b",
+            "image": "images/iphone 14 pro preto.jpeg"
+          },
+          {
+            "name": "Prateado",
+            "hex": "#f2f1ec",
+            "image": "images/produtos/1788134472719-iphone-14-pro-usado-prateado.jpeg"
+          },
+          {
+            "name": "Dourado",
+            "hex": "#e8d7b6",
+            "image": "images/Iphone 14 pro dourado.jpeg"
+          }
+        ],
+        "storage": [
+          "128GB",
+          "256GB",
+          "512GB",
+          "1TB"
+        ],
+        "ram": [],
+        "condition": [],
+        "combinations": [
+          {
+            "color": "Roxo-profundo",
+            "storage": "128GB",
+            "ram": "",
+            "condition": "",
+            "image": "images/Iphone 14 pro roxo profundo.jpeg",
+            "stock": 0,
+            "erpPrice": null,
+            "costPrice": null,
+            "desiredMarginPercent": null,
+            "inventoryItemId": "VAR-1788131571841-1"
+          },
+          {
+            "color": "Roxo-profundo",
+            "storage": "256GB",
+            "ram": "",
+            "condition": "",
+            "image": "images/Iphone 14 pro roxo profundo.jpeg",
+            "stock": 0,
+            "erpPrice": null,
+            "costPrice": null,
+            "desiredMarginPercent": null,
+            "inventoryItemId": "VAR-1788131571841-2"
+          },
+          {
+            "color": "Roxo-profundo",
+            "storage": "512GB",
+            "ram": "",
+            "condition": "",
+            "image": "images/Iphone 14 pro roxo profundo.jpeg",
+            "stock": 0,
+            "erpPrice": null,
+            "costPrice": null,
+            "desiredMarginPercent": null,
+            "inventoryItemId": "VAR-1788131571841-3"
+          },
+          {
+            "color": "Roxo-profundo",
+            "storage": "1TB",
+            "ram": "",
+            "condition": "",
+            "image": "images/Iphone 14 pro roxo profundo.jpeg",
+            "stock": 0,
+            "erpPrice": null,
+            "costPrice": null,
+            "desiredMarginPercent": null,
+            "inventoryItemId": "VAR-1788131571841-4"
+          },
+          {
+            "color": "Preto-espacial",
+            "storage": "128GB",
+            "ram": "",
+            "condition": "",
+            "image": "images/iphone 14 pro preto.jpeg",
+            "stock": 0,
+            "erpPrice": null,
+            "costPrice": null,
+            "desiredMarginPercent": null,
+            "inventoryItemId": "VAR-1788131571841-5"
+          },
+          {
+            "color": "Preto-espacial",
+            "storage": "256GB",
+            "ram": "",
+            "condition": "",
+            "image": "images/iphone 14 pro preto.jpeg",
+            "stock": 0,
+            "erpPrice": null,
+            "costPrice": null,
+            "desiredMarginPercent": null,
+            "inventoryItemId": "VAR-1788131571841-6"
+          },
+          {
+            "color": "Preto-espacial",
+            "storage": "512GB",
+            "ram": "",
+            "condition": "",
+            "image": "images/iphone 14 pro preto.jpeg",
+            "stock": 0,
+            "erpPrice": null,
+            "costPrice": null,
+            "desiredMarginPercent": null,
+            "inventoryItemId": "VAR-1788131571841-7"
+          },
+          {
+            "color": "Preto-espacial",
+            "storage": "1TB",
+            "ram": "",
+            "condition": "",
+            "image": "images/iphone 14 pro preto.jpeg",
+            "stock": 0,
+            "erpPrice": null,
+            "costPrice": null,
+            "desiredMarginPercent": null,
+            "inventoryItemId": "VAR-1788131571841-8"
+          },
+          {
+            "color": "Prateado",
+            "storage": "128GB",
+            "ram": "",
+            "condition": "",
+            "image": "images/produtos/1788134472719-iphone-14-pro-usado-prateado.jpeg",
+            "stock": 0,
+            "erpPrice": null,
+            "costPrice": null,
+            "desiredMarginPercent": null,
+            "inventoryItemId": "VAR-1788131571841-9"
+          },
+          {
+            "color": "Prateado",
+            "storage": "256GB",
+            "ram": "",
+            "condition": "",
+            "image": "images/produtos/1788134472719-iphone-14-pro-usado-prateado.jpeg",
+            "stock": 0,
+            "erpPrice": null,
+            "costPrice": null,
+            "desiredMarginPercent": null,
+            "inventoryItemId": "VAR-1788131571841-10"
+          },
+          {
+            "color": "Prateado",
+            "storage": "512GB",
+            "ram": "",
+            "condition": "",
+            "image": "images/produtos/1788134472719-iphone-14-pro-usado-prateado.jpeg",
+            "stock": 0,
+            "erpPrice": null,
+            "costPrice": null,
+            "desiredMarginPercent": null,
+            "inventoryItemId": "VAR-1788131571841-11"
+          },
+          {
+            "color": "Prateado",
+            "storage": "1TB",
+            "ram": "",
+            "condition": "",
+            "image": "images/produtos/1788134472719-iphone-14-pro-usado-prateado.jpeg",
+            "stock": 0,
+            "erpPrice": null,
+            "costPrice": null,
+            "desiredMarginPercent": null,
+            "inventoryItemId": "VAR-1788131571841-12"
+          },
+          {
+            "color": "Dourado",
+            "storage": "128GB",
+            "ram": "",
+            "condition": "",
+            "image": "images/Iphone 14 pro dourado.jpeg",
+            "stock": 0,
+            "erpPrice": null,
+            "costPrice": null,
+            "desiredMarginPercent": null,
+            "inventoryItemId": "VAR-1788131571841-13"
+          },
+          {
+            "color": "Dourado",
+            "storage": "256GB",
+            "ram": "",
+            "condition": "",
+            "image": "images/Iphone 14 pro dourado.jpeg",
+            "stock": 0,
+            "erpPrice": null,
+            "costPrice": null,
+            "desiredMarginPercent": null,
+            "inventoryItemId": "VAR-1788131571841-14"
+          },
+          {
+            "color": "Dourado",
+            "storage": "512GB",
+            "ram": "",
+            "condition": "",
+            "image": "images/Iphone 14 pro dourado.jpeg",
+            "stock": 0,
+            "erpPrice": null,
+            "costPrice": null,
+            "desiredMarginPercent": null,
+            "inventoryItemId": "VAR-1788131571841-15"
+          },
+          {
+            "color": "Dourado",
+            "storage": "1TB",
+            "ram": "",
+            "condition": "",
+            "image": "images/Iphone 14 pro dourado.jpeg",
+            "stock": 0,
+            "erpPrice": null,
+            "costPrice": null,
+            "desiredMarginPercent": null,
+            "inventoryItemId": "VAR-1788131571841-16"
+          }
+        ],
+        "labels": {},
+        "colorsText": "Roxo-profundo|#60566f|images/Iphone 14 pro roxo profundo.jpeg\nPreto-espacial|#2d2d2b|images/iphone 14 pro preto.jpeg\nPrateado|#f2f1ec|images/produtos/1788134472719-iphone-14-pro-usado-prateado.jpeg\nDourado|#e8d7b6|images/Iphone 14 pro dourado.jpeg",
+        "storageText": "128GB\n256GB\n512GB\n1TB",
+        "ramText": "",
+        "conditionText": "",
+        "labelsText": "{}",
+        "combinationsText": "Roxo-profundo|128GB|||images/Iphone 14 pro roxo profundo.jpeg|0\nRoxo-profundo|256GB|||images/Iphone 14 pro roxo profundo.jpeg|0\nRoxo-profundo|512GB|||images/Iphone 14 pro roxo profundo.jpeg|0\nRoxo-profundo|1TB|||images/Iphone 14 pro roxo profundo.jpeg|0\nPreto-espacial|128GB|||images/iphone 14 pro preto.jpeg|0\nPreto-espacial|256GB|||images/iphone 14 pro preto.jpeg|0\nPreto-espacial|512GB|||images/iphone 14 pro preto.jpeg|0\nPreto-espacial|1TB|||images/iphone 14 pro preto.jpeg|0\nPrateado|128GB|||images/produtos/1788134472719-iphone-14-pro-usado-prateado.jpeg|0\nPrateado|256GB|||images/produtos/1788134472719-iphone-14-pro-usado-prateado.jpeg|0\nPrateado|512GB|||images/produtos/1788134472719-iphone-14-pro-usado-prateado.jpeg|0\nPrateado|1TB|||images/produtos/1788134472719-iphone-14-pro-usado-prateado.jpeg|0\nDourado|128GB|||images/Iphone 14 pro dourado.jpeg|0\nDourado|256GB|||images/Iphone 14 pro dourado.jpeg|0\nDourado|512GB|||images/Iphone 14 pro dourado.jpeg|0\nDourado|1TB|||images/Iphone 14 pro dourado.jpeg|0"
+      },
+      "inventoryBalance": {
+        "physicalQuantity": 0,
+        "availableQuantity": 0,
+        "reservedQuantity": 0,
+        "derivedFromVariations": true
       }
     }
   ]
