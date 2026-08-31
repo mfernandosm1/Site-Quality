@@ -277,3 +277,69 @@ function initSwiper() {
     effect: "slide",
   });
 }
+
+// ----------------------------
+// Navegação dos cards de produto - Ver detalhes + clique na imagem
+// ----------------------------
+// V8.2.2.6 - Corrige toque no "Ver detalhes" no mobile e torna a foto clicável.
+(function initQualityProductCardNavigation(){
+  if (window.__qualityProductCardNavigationV8226) return;
+  window.__qualityProductCardNavigationV8226 = true;
+
+  const CARD_SELECTOR = '.produto-card, .product-card';
+  const IMAGE_SELECTOR = [
+    '.produto-card .quality-card-image-wrap > img',
+    '.product-card .quality-card-image-wrap > img',
+    '.produto-card > img',
+    '.product-card > img'
+  ].join(',');
+
+  function safeProductUrl(raw){
+    const value = String(raw || '').trim();
+    if (!value || value === '#' || /^javascript:/i.test(value)) return '';
+    try {
+      const url = new URL(value, window.location.href);
+      // O clique da foto deve abrir apenas páginas de produto do próprio site.
+      if (url.origin !== window.location.origin) return '';
+      if (!/\/produto\//i.test(url.pathname)) return '';
+      return url.href;
+    } catch (_) {
+      return '';
+    }
+  }
+
+  function detailUrlFromCard(card){
+    if (!card) return '';
+    const detailLink = card.querySelector('a.btn-details[href], a[href*="/produto/"]');
+    if (!detailLink) return '';
+    return safeProductUrl(detailLink.getAttribute('href'));
+  }
+
+  function navigate(url){
+    if (!url) return;
+    window.location.assign(url);
+  }
+
+  // Usa captura para funcionar mesmo se algum outro script do card tratar o clique depois.
+  document.addEventListener('click', function(event){
+    const detailLink = event.target.closest && event.target.closest('a.btn-details[href]');
+    if (detailLink) {
+      const url = safeProductUrl(detailLink.getAttribute('href'));
+      if (!url) return;
+      event.preventDefault();
+      navigate(url);
+      return;
+    }
+
+    const image = event.target.closest && event.target.closest(IMAGE_SELECTOR);
+    if (!image) return;
+
+    const card = image.closest(CARD_SELECTOR);
+    const url = detailUrlFromCard(card);
+    if (!url) return;
+
+    event.preventDefault();
+    navigate(url);
+  }, true);
+})();
+
