@@ -16131,7 +16131,36 @@
         "version": "0.15.2",
         "port": 3000
       }
+    },
+    {
+      "id": "EVT-00001113",
+      "at": "2026-08-31T01:39:32.183Z",
+      "name": "SYSTEM_SHUTDOWN",
+      "module": "system",
+      "actor": "sistema",
+      "entityType": "",
+      "entityId": "",
+      "documentId": "",
+      "correlationId": "",
+      "data": {
+        "signal": "SIGINT"
+      }
+    },
+    {
+      "id": "EVT-00001114",
+      "at": "2026-08-31T01:40:13.103Z",
+      "name": "SYSTEM_STARTED",
+      "module": "system",
+      "actor": "sistema",
+      "entityType": "",
+      "entityId": "",
+      "documentId": "",
+      "correlationId": "",
+      "data": {
+        "version": "0.15.2",
+        "port": 3000
+      }
     }
   ],
-  "updatedAt": "2026-08-31T01:22:06.045Z"
+  "updatedAt": "2026-08-31T01:40:13.107Z"
 }
