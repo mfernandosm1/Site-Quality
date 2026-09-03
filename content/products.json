@@ -140675,7 +140675,7 @@
       "tags": [],
       "relatedManualIds": [],
       "crossSellIds": [],
-      "showPrice": true,
+      "showPrice": false,
       "featured": false,
       "active": true,
       "erp": {
@@ -141007,7 +141007,16 @@
         "labelsText": "{}",
         "combinationsText": ""
       },
-      "id": 1788472160616
+      "id": 1788472160616,
+      "inventoryBalance": {
+        "inventoryItemId": "PRD-1788472160616",
+        "locationId": "loja-principal",
+        "physicalQuantity": 0,
+        "reservedQuantity": 0,
+        "availableQuantity": 0,
+        "minimumQuantity": 0,
+        "updatedAt": "2026-09-03T21:49:20.618Z"
+      }
     }
   ]
 }

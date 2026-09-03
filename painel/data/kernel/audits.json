@@ -39501,7 +39501,304 @@
       },
       "ip": "127.0.0.1",
       "requestId": "f7895d58-583c-44f8-8ba5-ccc77e808751"
+    },
+    {
+      "id": "AUD-00000128",
+      "at": "2026-09-03T22:06:56.304Z",
+      "module": "produtos",
+      "action": "PRODUCT_UPDATED",
+      "actor": "Matheus Fernando",
+      "entityType": "product",
+      "entityId": "1788433593777",
+      "documentId": "",
+      "reason": "Cadastro de produto atualizado",
+      "before": {
+        "name": "Celular Usado Samsung S23 Fe 128gb 8gb ram",
+        "sku": "",
+        "code": "PRD-977",
+        "barcode": "",
+        "ncm": "85171300",
+        "brand": "",
+        "slug": "celular-usado-samsung-s23-fe-128gb",
+        "price": null,
+        "commercial": {
+          "costPrice": 700,
+          "erpPrice": null,
+          "salePrice": null,
+          "marketplacePrice": null,
+          "promotionalPrice": null,
+          "desiredMarginPercent": null,
+          "expectedProfit": null,
+          "defaultCommissionPercent": null,
+          "cashPrice": null,
+          "installmentPrice": null,
+          "minimumPrice": null,
+          "minimumMarginPercent": null,
+          "discountPolicy": "inherit",
+          "maximumDiscountPercent": null,
+          "maximumDiscountAmount": null,
+          "requiresAuthorization": false
+        },
+        "stock": 1,
+        "inventory": {
+          "itemId": "PRD-1788433593777",
+          "stockControlled": true,
+          "allowNegative": false,
+          "minimumQuantity": 0,
+          "channelAvailability": {
+            "site": {
+              "mode": "shared",
+              "enabled": true,
+              "limit": null,
+              "physicalSafety": 0
+            }
+          }
+        },
+        "image": "images/produtos/1788471293520-s23-fe-usado-preto.jpg",
+        "gallery": [],
+        "category": "smartphones",
+        "subcategory": "usados",
+        "tags": [],
+        "relatedManualIds": [],
+        "crossSellIds": [],
+        "showPrice": true,
+        "featured": false,
+        "active": true,
+        "erp": {
+          "sku": "",
+          "internalCode": "PRD-977",
+          "supplierCode": "",
+          "searchAlias": "",
+          "barcode": "",
+          "ncm": "85171300",
+          "fiscal": {
+            "ncm": "85171300"
+          },
+          "brand": "",
+          "unit": "UN",
+          "category": "smartphones",
+          "subcategory": "",
+          "mainSupplierId": "",
+          "preferredSupplierId": "",
+          "active": true,
+          "categoryId": "ERP-CAT-1"
+        },
+        "virtualStore": {
+          "name": "Celular Usado Samsung S23 Fe 5G 128gb",
+          "price": null,
+          "active": true,
+          "seoTitle": "Samsung Galaxy S23 FE 128GB 8GB RAM 5G Usado",
+          "seoDescription": "Samsung Galaxy S23 FE usado 128GB com 8GB RAM, 5G, tela AMOLED 120Hz e câmera de 50MP. Smartphone premium Samsung com ótimo desempenho.",
+          "channels": {
+            "lojaVirtual": {
+              "enabled": true
+            },
+            "mercadoLivre": {
+              "enabled": false
+            },
+            "shopee": {
+              "enabled": false
+            },
+            "amazon": {
+              "enabled": false
+            },
+            "magalu": {
+              "enabled": false
+            }
+          }
+        },
+        "detailsEnabled": true,
+        "showVariationsOnCard": true,
+        "descriptionShort": "",
+        "descriptionLong": "<p>📱<strong>Samsung Galaxy S23 FE 128GB Usado – Desempenho Premium e Câmera de 50MP</strong></p><p>🚀 Com <strong>128GB de armazenamento e 8GB de RAM</strong>, oferece ótimo desempenho para redes sociais, aplicativos, vídeos, jogos e multitarefas no dia a dia</p><p>🔥 <strong>Principais destaques:</strong><br>✅ 128GB de armazenamento<br>✅ 8GB de memória RAM<br>✅ Conectividade 5G<br>✅ Tela Dynamic AMOLED 2X de 6.4\"<br>✅ Taxa de atualização de até 120Hz<br>✅ Processador Exynos 2200<br>✅ Câmera principal de 50MP com estabilização óptica<br>✅ Câmeras traseiras de 50MP + 12MP + 8MP<br>✅ Câmera frontal de 10MP<br>✅ Zoom óptico de 3x<br>✅ Gravação de vídeos em até 8K<br>✅ Bateria de 4.500mAh<br>✅ Resistência à água e poeira IP68<br>✅ Dual SIM com suporte a eSIM</p><p><strong>Aparelho usado</strong>, uma excelente opção para quem deseja toda a qualidade da linha Galaxy S com melhor custo-benefício<br><br>🛡️ <strong>Compra com mais segurança:</strong> este aparelho conta com <strong>90 dias de garantia</strong></p><p><br></p>",
+        "variations": {
+          "enabled": true,
+          "colors": [
+            {
+              "name": "Preto",
+              "hex": "#111111",
+              "image": ""
+            }
+          ],
+          "storage": [],
+          "ram": [],
+          "condition": [],
+          "combinations": [
+            {
+              "color": "Preto",
+              "storage": "",
+              "ram": "",
+              "condition": "",
+              "image": "",
+              "stock": 1,
+              "erpPrice": null,
+              "costPrice": null,
+              "desiredMarginPercent": null,
+              "inventoryItemId": "VAR-1788433593777-1"
+            }
+          ],
+          "labels": {},
+          "colorsText": "Preto|#111111",
+          "storageText": "",
+          "ramText": "",
+          "conditionText": "",
+          "labelsText": "{}",
+          "combinationsText": "Preto|||||1"
+        },
+        "id": 1788433593777,
+        "inventoryBalance": {
+          "physicalQuantity": 1,
+          "availableQuantity": 1,
+          "reservedQuantity": 0,
+          "derivedFromVariations": true
+        },
+        "updatedAt": "2026-09-03T21:34:53.530Z"
+      },
+      "after": {
+        "name": "Celular Usado Samsung S23 Fe 128gb 8gb ram",
+        "sku": "",
+        "code": "PRD-977",
+        "barcode": "",
+        "ncm": "85171300",
+        "brand": "",
+        "slug": "celular-usado-samsung-s23-fe-128gb",
+        "price": null,
+        "commercial": {
+          "costPrice": 700,
+          "erpPrice": null,
+          "salePrice": null,
+          "marketplacePrice": null,
+          "promotionalPrice": null,
+          "desiredMarginPercent": null,
+          "expectedProfit": null,
+          "defaultCommissionPercent": null,
+          "cashPrice": null,
+          "installmentPrice": null,
+          "minimumPrice": null,
+          "minimumMarginPercent": null,
+          "discountPolicy": "inherit",
+          "maximumDiscountPercent": null,
+          "maximumDiscountAmount": null,
+          "requiresAuthorization": false
+        },
+        "stock": 1,
+        "inventory": {
+          "itemId": "PRD-1788433593777",
+          "stockControlled": true,
+          "allowNegative": false,
+          "minimumQuantity": 0,
+          "channelAvailability": {
+            "site": {
+              "mode": "shared",
+              "enabled": true,
+              "limit": null,
+              "physicalSafety": 0
+            }
+          }
+        },
+        "image": "images/produtos/1788471293520-s23-fe-usado-preto.jpg",
+        "gallery": [],
+        "category": "smartphones",
+        "subcategory": "usados",
+        "tags": [],
+        "relatedManualIds": [],
+        "crossSellIds": [],
+        "showPrice": false,
+        "featured": false,
+        "active": true,
+        "erp": {
+          "sku": "",
+          "internalCode": "PRD-977",
+          "supplierCode": "",
+          "searchAlias": "",
+          "barcode": "",
+          "ncm": "85171300",
+          "fiscal": {
+            "ncm": "85171300"
+          },
+          "brand": "",
+          "unit": "UN",
+          "category": "smartphones",
+          "subcategory": "",
+          "mainSupplierId": "",
+          "preferredSupplierId": "",
+          "active": true,
+          "categoryId": "ERP-CAT-1"
+        },
+        "virtualStore": {
+          "name": "Celular Usado Samsung S23 Fe 5G 128gb",
+          "price": null,
+          "active": true,
+          "seoTitle": "Samsung Galaxy S23 FE 128GB 8GB RAM 5G Usado",
+          "seoDescription": "Samsung Galaxy S23 FE usado 128GB com 8GB RAM, 5G, tela AMOLED 120Hz e câmera de 50MP. Smartphone premium Samsung com ótimo desempenho.",
+          "channels": {
+            "lojaVirtual": {
+              "enabled": true
+            },
+            "mercadoLivre": {
+              "enabled": false
+            },
+            "shopee": {
+              "enabled": false
+            },
+            "amazon": {
+              "enabled": false
+            },
+            "magalu": {
+              "enabled": false
+            }
+          }
+        },
+        "detailsEnabled": true,
+        "showVariationsOnCard": true,
+        "descriptionShort": "",
+        "descriptionLong": "<p>📱<strong>Samsung Galaxy S23 FE 128GB Usado – Desempenho Premium e Câmera de 50MP</strong></p><p>🚀 Com <strong>128GB de armazenamento e 8GB de RAM</strong>, oferece ótimo desempenho para redes sociais, aplicativos, vídeos, jogos e multitarefas no dia a dia</p><p>🔥 <strong>Principais destaques:</strong><br>✅ 128GB de armazenamento<br>✅ 8GB de memória RAM<br>✅ Conectividade 5G<br>✅ Tela Dynamic AMOLED 2X de 6.4\"<br>✅ Taxa de atualização de até 120Hz<br>✅ Processador Exynos 2200<br>✅ Câmera principal de 50MP com estabilização óptica<br>✅ Câmeras traseiras de 50MP + 12MP + 8MP<br>✅ Câmera frontal de 10MP<br>✅ Zoom óptico de 3x<br>✅ Gravação de vídeos em até 8K<br>✅ Bateria de 4.500mAh<br>✅ Resistência à água e poeira IP68<br>✅ Dual SIM com suporte a eSIM</p><p><strong>Aparelho usado</strong>, uma excelente opção para quem deseja toda a qualidade da linha Galaxy S com melhor custo-benefício<br><br>🛡️ <strong>Compra com mais segurança:</strong> este aparelho conta com <strong>90 dias de garantia</strong></p><p><br></p>",
+        "variations": {
+          "enabled": true,
+          "colors": [
+            {
+              "name": "Preto",
+              "hex": "#111111",
+              "image": ""
+            }
+          ],
+          "storage": [],
+          "ram": [],
+          "condition": [],
+          "combinations": [
+            {
+              "color": "Preto",
+              "storage": "",
+              "ram": "",
+              "condition": "",
+              "image": "",
+              "stock": 1,
+              "erpPrice": null,
+              "costPrice": null,
+              "desiredMarginPercent": null,
+              "inventoryItemId": "VAR-1788433593777-1"
+            }
+          ],
+          "labels": {},
+          "colorsText": "Preto|#111111",
+          "storageText": "",
+          "ramText": "",
+          "conditionText": "",
+          "labelsText": "{}",
+          "combinationsText": "Preto|||||1"
+        },
+        "id": 1788433593777,
+        "inventoryBalance": {
+          "physicalQuantity": 1,
+          "availableQuantity": 1,
+          "reservedQuantity": 0,
+          "derivedFromVariations": true
+        },
+        "updatedAt": "2026-09-03T21:34:53.530Z"
+      },
+      "ip": "127.0.0.1",
+      "requestId": "db464391-7705-4a0b-9015-cb35ea61b1c8"
     }
   ],
-  "updatedAt": "2026-09-03T21:40:15.798Z"
+  "updatedAt": "2026-09-03T22:06:56.312Z"
 }
