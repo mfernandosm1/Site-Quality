@@ -1,5 +1,6 @@
 import fs from 'fs/promises';
 import path from 'path';
+import { businessDate, addBusinessDays } from '../utils/date-time.js';
 
 const round2 = value => Math.round((Number(value || 0) + Number.EPSILON) * 100) / 100;
 const text = value => String(value ?? '').trim();
@@ -11,11 +12,7 @@ async function readJson(file, fallback = { items: [] }) {
 }
 
 function localDateKey(value = new Date()) {
-  const date = value instanceof Date ? value : new Date(value);
-  if (Number.isNaN(date.getTime())) return '';
-  return new Intl.DateTimeFormat('en-CA', {
-    timeZone: 'America/Sao_Paulo', year: 'numeric', month: '2-digit', day: '2-digit'
-  }).format(date);
+  return businessDate(value);
 }
 
 function parseDateKey(key) {
@@ -25,10 +22,7 @@ function parseDateKey(key) {
 }
 
 function addDays(key, amount) {
-  const date = parseDateKey(key);
-  if (!date) return key;
-  date.setDate(date.getDate() + Number(amount || 0));
-  return `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}`;
+  return addBusinessDays(key, amount);
 }
 
 function periodRange(preset = 'today', referenceKey = localDateKey()) {

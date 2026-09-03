@@ -2,6 +2,955 @@
   "version": "0.19.0",
   "items": [
     {
+      "id": "PUR-738ab27b-6ed2-4672-810c-fe934e5c5766",
+      "number": "COM-000024",
+      "status": "completed",
+      "createdAt": "2026-09-03T11:05:39.119Z",
+      "createdBy": "Matheus Fernando",
+      "supplierId": "FOR-1788433508863-8JVKS",
+      "supplierName": "Paulina Ledis Muller",
+      "supplierDocument": "94464596053",
+      "items": [
+        {
+          "id": "1788433319796",
+          "selectionId": "1788433319796",
+          "productId": "1788433319796",
+          "productName": "Celular Usado Samsung A12 A127m 64gb 4gb ram",
+          "baseProductName": "Celular Usado Samsung A12 A127m 64gb 4gb ram",
+          "variationLabel": "",
+          "productCode": "PRD-976",
+          "sku": "PRD-976",
+          "barcode": "",
+          "reference": "",
+          "brand": "",
+          "model": "",
+          "inventoryItemId": "PRD-1788433319796",
+          "stockControlled": true,
+          "quantity": 1,
+          "unitCost": 150,
+          "salePrice": 430,
+          "discount": 0,
+          "total": 150,
+          "targetMarginPercent": 0,
+          "pricingRuleSource": "Produto",
+          "fiscal": {
+            "supplierCode": "",
+            "ean": "",
+            "ncm": "",
+            "cest": "",
+            "cfop": "",
+            "unit": "",
+            "taxes": {}
+          }
+        }
+      ],
+      "productsTotal": 150,
+      "freight": 0,
+      "otherExpenses": 0,
+      "discount": 0,
+      "total": 150,
+      "invoiceNumber": "",
+      "invoiceSeries": "",
+      "accessKey": "",
+      "issueDate": "",
+      "entryDate": "2026-09-03",
+      "notes": "",
+      "accountId": "ACC-10-01",
+      "costCenterId": "CC-CMV",
+      "cashboxId": "caixa-principal",
+      "paymentPlan": [
+        {
+          "paymentMethodId": "PM-DINHEIRO",
+          "value": 150,
+          "installmentCount": 1,
+          "firstDueDate": "2026-09-03",
+          "installmentDueDates": [
+            "2026-09-03"
+          ]
+        }
+      ],
+      "fiscalDocument": {
+        "model": "55",
+        "xmlVersion": "4.00",
+        "protocol": "",
+        "issuer": null,
+        "taxes": {},
+        "relatedDocuments": []
+      },
+      "updatedAt": "2026-09-03T11:05:39.236Z",
+      "updatedBy": "Matheus Fernando",
+      "inventoryEffects": [
+        {
+          "itemId": "1788433319796",
+          "productId": "1788433319796",
+          "inventoryItemId": "PRD-1788433319796",
+          "quantity": 1,
+          "movement": {
+            "id": "MOV-20260903-000006",
+            "inventoryItemId": "PRD-1788433319796",
+            "locationId": "loja-principal",
+            "type": "entrada_inicial",
+            "direction": "entrada",
+            "quantity": 1,
+            "signedQuantity": 1,
+            "previousPhysicalQuantity": 0,
+            "newPhysicalQuantity": 1,
+            "reservedQuantity": 0,
+            "availableQuantity": 1,
+            "origin": "estoque_operacao_manual",
+            "referenceType": "product",
+            "referenceId": "PUR-738ab27b-6ed2-4672-810c-fe934e5c5766",
+            "reason": "Compra COM-000024 · Paulina Ledis Muller",
+            "reasonCode": "PURCHASE",
+            "classification": "purchase",
+            "createdBy": "Matheus Fernando",
+            "createdAt": "2026-09-03T11:05:39.139Z"
+          }
+        }
+      ],
+      "payableId": "PAY-2f8df8ef-d99d-405f-b9b9-6abf5b5c152f",
+      "immediatePaymentIds": [
+        "PYP-91d56f1a-cbb3-4fce-bea8-eff1a09922c3"
+      ],
+      "completedAt": "2026-09-03T11:05:39.236Z",
+      "completedBy": "Matheus Fernando"
+    },
+    {
+      "id": "PUR-659e964c-e702-4b75-a695-cf7fd43e8ea0",
+      "number": "COM-000023",
+      "status": "completed",
+      "createdAt": "2026-09-03T10:54:51.891Z",
+      "createdBy": "Matheus Fernando",
+      "supplierId": "FOR-1788432827304-SEQFM",
+      "supplierName": "kyx comercio produtos LTDA",
+      "supplierDocument": "65446941000107",
+      "items": [
+        {
+          "id": "PRD-1788432848210",
+          "selectionId": "PRD-1788432848210",
+          "productId": "PRD-1788432848210",
+          "productName": "Tampa Traseira Compativel Com A36 5g A366 Preto",
+          "baseProductName": "Tampa Traseira Compativel Com A36 5g A366 Preto",
+          "variationLabel": "",
+          "productCode": "MLB4190712917",
+          "sku": "MLB4190712917",
+          "barcode": "",
+          "reference": "",
+          "brand": "",
+          "model": "",
+          "inventoryItemId": "PRD-1788432848210",
+          "stockControlled": true,
+          "quantity": 1,
+          "unitCost": 46.72,
+          "salePrice": 0,
+          "discount": 0,
+          "total": 46.72,
+          "targetMarginPercent": 0,
+          "pricingRuleSource": "Regra geral",
+          "fiscal": {
+            "supplierCode": "MLB4190712917",
+            "ean": "",
+            "ncm": "85176262",
+            "cest": "",
+            "cfop": "6108",
+            "unit": "UN",
+            "taxes": {
+              "raw": "present"
+            }
+          }
+        }
+      ],
+      "productsTotal": 46.72,
+      "freight": 0,
+      "otherExpenses": 0,
+      "discount": 0,
+      "total": 46.72,
+      "invoiceNumber": "158301",
+      "invoiceSeries": "3",
+      "accessKey": "35260865446941000107550030001583011965185851",
+      "issueDate": "2026-08-25",
+      "entryDate": "2026-08-25",
+      "notes": "Importada da NF-e 158301 · Chave 35260865446941000107550030001583011965185851",
+      "accountId": "ACC-10-06",
+      "costCenterId": "CC-CMV",
+      "cashboxId": "caixa-principal",
+      "paymentPlan": [
+        {
+          "paymentMethodId": "PAY-f67a5400-9f7b-4b8b-af7a-adff277d9169",
+          "value": 46.72,
+          "installmentCount": 2,
+          "firstDueDate": "2026-09-23",
+          "installmentDueDates": [
+            "2026-09-23",
+            "2026-10-23"
+          ]
+        }
+      ],
+      "fiscalDocument": {
+        "model": "55",
+        "xmlVersion": "4.00",
+        "protocol": "135263528307504",
+        "issuer": {
+          "document": "65446941000107",
+          "name": "kyx comercio produtos LTDA",
+          "tradeName": "",
+          "stateRegistration": "158425496113",
+          "phone": "0000000000",
+          "zipCode": "03016000",
+          "street": "Rua Oriente",
+          "number": "553",
+          "complement": "",
+          "district": "Bras",
+          "city": "Sao Paulo",
+          "state": "SP",
+          "country": "Brasil"
+        },
+        "taxes": {},
+        "relatedDocuments": []
+      },
+      "updatedAt": "2026-09-03T10:54:51.986Z",
+      "updatedBy": "Matheus Fernando",
+      "inventoryEffects": [
+        {
+          "itemId": "PRD-1788432848210",
+          "productId": "PRD-1788432848210",
+          "inventoryItemId": "PRD-1788432848210",
+          "quantity": 1,
+          "movement": {
+            "id": "MOV-20260903-000004",
+            "inventoryItemId": "PRD-1788432848210",
+            "locationId": "loja-principal",
+            "type": "entrada_inicial",
+            "direction": "entrada",
+            "quantity": 1,
+            "signedQuantity": 1,
+            "previousPhysicalQuantity": 0,
+            "newPhysicalQuantity": 1,
+            "reservedQuantity": 0,
+            "availableQuantity": 1,
+            "origin": "estoque_operacao_manual",
+            "referenceType": "product",
+            "referenceId": "PUR-659e964c-e702-4b75-a695-cf7fd43e8ea0",
+            "reason": "Compra COM-000023 · kyx comercio produtos LTDA",
+            "reasonCode": "PURCHASE",
+            "classification": "purchase",
+            "createdBy": "Matheus Fernando",
+            "createdAt": "2026-09-03T10:54:51.912Z"
+          }
+        }
+      ],
+      "payableId": "PAY-33e0e76e-3b9c-46b5-9527-6d6e9df0161e",
+      "immediatePaymentIds": [],
+      "completedAt": "2026-09-03T10:54:51.986Z",
+      "completedBy": "Matheus Fernando"
+    },
+    {
+      "id": "PUR-f773ad7b-602d-4dbb-90f9-9f1c6e834fea",
+      "number": "COM-000022",
+      "status": "completed",
+      "createdAt": "2026-09-03T10:03:47.202Z",
+      "createdBy": "Matheus Fernando",
+      "supplierId": "FOR-1788429770759-K6AV6",
+      "supplierName": "Joao Victor de Oliveira kunz",
+      "supplierDocument": "04641179093",
+      "items": [
+        {
+          "id": "1788429651970",
+          "selectionId": "1788429651970",
+          "productId": "1788429651970",
+          "productName": "PC Gamer Usado completo com monitor samsung - Ryzen 5 3500x, RTX 2060 6gb, 16gb de ram, SSD 480 NVME, Fonte MSI 650w",
+          "baseProductName": "PC Gamer Usado completo com monitor samsung - Ryzen 5 3500x, RTX 2060 6gb, 16gb de ram, SSD 480 NVME, Fonte MSI 650w",
+          "variationLabel": "",
+          "productCode": "PRD-973",
+          "sku": "PRD-973",
+          "barcode": "",
+          "reference": "",
+          "brand": "",
+          "model": "",
+          "inventoryItemId": "PRD-1788429651970",
+          "stockControlled": true,
+          "quantity": 1,
+          "unitCost": 1500,
+          "salePrice": 0,
+          "discount": 0,
+          "total": 1500,
+          "targetMarginPercent": 0,
+          "pricingRuleSource": "Produto",
+          "fiscal": {
+            "supplierCode": "",
+            "ean": "",
+            "ncm": "",
+            "cest": "",
+            "cfop": "",
+            "unit": "",
+            "taxes": {}
+          }
+        }
+      ],
+      "productsTotal": 1500,
+      "freight": 35,
+      "otherExpenses": 0,
+      "discount": 0,
+      "total": 1535,
+      "invoiceNumber": "",
+      "invoiceSeries": "",
+      "accessKey": "",
+      "issueDate": "",
+      "entryDate": "2026-09-03",
+      "notes": "",
+      "accountId": "",
+      "costCenterId": "",
+      "cashboxId": "caixa-principal",
+      "paymentPlan": [
+        {
+          "paymentMethodId": "PM-DINHEIRO",
+          "value": 1535,
+          "installmentCount": 1,
+          "firstDueDate": "2026-09-03",
+          "installmentDueDates": [
+            "2026-09-03"
+          ]
+        }
+      ],
+      "fiscalDocument": {
+        "model": "55",
+        "xmlVersion": "4.00",
+        "protocol": "",
+        "issuer": null,
+        "taxes": {},
+        "relatedDocuments": []
+      },
+      "updatedAt": "2026-09-03T10:03:47.334Z",
+      "updatedBy": "Matheus Fernando",
+      "inventoryEffects": [
+        {
+          "itemId": "1788429651970",
+          "productId": "1788429651970",
+          "inventoryItemId": "PRD-1788429651970",
+          "quantity": 1,
+          "movement": {
+            "id": "MOV-20260903-000001",
+            "inventoryItemId": "PRD-1788429651970",
+            "locationId": "loja-principal",
+            "type": "entrada_inicial",
+            "direction": "entrada",
+            "quantity": 1,
+            "signedQuantity": 1,
+            "previousPhysicalQuantity": 0,
+            "newPhysicalQuantity": 1,
+            "reservedQuantity": 0,
+            "availableQuantity": 1,
+            "origin": "estoque_operacao_manual",
+            "referenceType": "product",
+            "referenceId": "PUR-f773ad7b-602d-4dbb-90f9-9f1c6e834fea",
+            "reason": "Compra COM-000022 · Joao Victor de Oliveira kunz",
+            "reasonCode": "PURCHASE",
+            "classification": "purchase",
+            "createdBy": "Matheus Fernando",
+            "createdAt": "2026-09-03T10:03:47.225Z"
+          }
+        }
+      ],
+      "payableId": "PAY-a36e8a6c-f1af-4bad-b1fd-a3d8d8f3dbdf",
+      "immediatePaymentIds": [
+        "PYP-7333876b-d20f-43ad-9277-b60f37b5ac1e"
+      ],
+      "completedAt": "2026-09-03T10:03:47.334Z",
+      "completedBy": "Matheus Fernando"
+    },
+    {
+      "id": "PUR-5166b328-659e-4a04-911c-6656e9ef0db8",
+      "number": "COM-000021",
+      "status": "completed",
+      "createdAt": "2026-09-01T16:44:06.207Z",
+      "createdBy": "Matheus Fernando",
+      "supplierId": "FOR-1787847948229-S8E6V",
+      "supplierName": "Fornecedores Diversos",
+      "supplierDocument": "",
+      "items": [
+        {
+          "id": "1786499862209",
+          "selectionId": "1786499862209",
+          "productId": "1786499862209",
+          "productName": "Figurinhas da copa",
+          "baseProductName": "Figurinhas da copa",
+          "variationLabel": "",
+          "productCode": "PRD-261",
+          "sku": "PRD-261",
+          "barcode": "7897653549146",
+          "reference": "",
+          "brand": "SemMarca",
+          "model": "",
+          "inventoryItemId": "PRD-1786499862209",
+          "stockControlled": true,
+          "quantity": 24,
+          "unitCost": 4.03,
+          "salePrice": 10,
+          "discount": 0,
+          "total": 96.72,
+          "targetMarginPercent": 0,
+          "pricingRuleSource": "Produto",
+          "fiscal": {
+            "supplierCode": "",
+            "ean": "",
+            "ncm": "",
+            "cest": "",
+            "cfop": "",
+            "unit": "",
+            "taxes": {}
+          }
+        }
+      ],
+      "productsTotal": 96.72,
+      "freight": 0,
+      "otherExpenses": 0,
+      "discount": 0,
+      "total": 96.72,
+      "invoiceNumber": "",
+      "invoiceSeries": "",
+      "accessKey": "",
+      "issueDate": "",
+      "entryDate": "2026-09-01",
+      "notes": "Cartão Nu 12",
+      "accountId": "ACC-10-03",
+      "costCenterId": "CC-CMV",
+      "cashboxId": "caixa-principal",
+      "paymentPlan": [
+        {
+          "paymentMethodId": "PM-BOLETO",
+          "value": 96.72,
+          "installmentCount": 1,
+          "firstDueDate": "2026-09-12",
+          "installmentDueDates": [
+            "2026-09-12"
+          ]
+        }
+      ],
+      "fiscalDocument": {
+        "model": "55",
+        "xmlVersion": "4.00",
+        "protocol": "",
+        "issuer": null,
+        "taxes": {},
+        "relatedDocuments": []
+      },
+      "updatedAt": "2026-09-01T16:44:06.438Z",
+      "updatedBy": "Matheus Fernando",
+      "inventoryEffects": [
+        {
+          "itemId": "1786499862209",
+          "productId": "1786499862209",
+          "inventoryItemId": "PRD-1786499862209",
+          "quantity": 24,
+          "movement": {
+            "id": "MOV-20260901-000004",
+            "inventoryItemId": "PRD-1786499862209",
+            "locationId": "loja-principal",
+            "type": "entrada_inicial",
+            "direction": "entrada",
+            "quantity": 24,
+            "signedQuantity": 24,
+            "previousPhysicalQuantity": 0,
+            "newPhysicalQuantity": 24,
+            "reservedQuantity": 0,
+            "availableQuantity": 24,
+            "origin": "estoque_operacao_manual",
+            "referenceType": "product",
+            "referenceId": "PUR-5166b328-659e-4a04-911c-6656e9ef0db8",
+            "reason": "Compra COM-000021 · Fornecedores Diversos",
+            "reasonCode": "PURCHASE",
+            "classification": "purchase",
+            "createdBy": "Matheus Fernando",
+            "createdAt": "2026-09-01T16:44:06.257Z"
+          }
+        }
+      ],
+      "payableId": "PAY-0884d103-4fa5-4287-95b5-d37021c95940",
+      "immediatePaymentIds": [],
+      "completedAt": "2026-09-01T16:44:06.438Z",
+      "completedBy": "Matheus Fernando"
+    },
+    {
+      "id": "PUR-51854599-0312-41aa-be3f-c67c4245dab5",
+      "number": "COM-000020",
+      "status": "completed",
+      "createdAt": "2026-09-01T00:30:01.044Z",
+      "createdBy": "Matheus Fernando",
+      "supplierId": "FOR-1788222552149-7APIU",
+      "supplierName": "GOLLDEN STORE LTDA",
+      "supplierDocument": "49199499000105",
+      "items": [
+        {
+          "id": "PRD-1788222564961",
+          "selectionId": "PRD-1788222564961",
+          "productId": "PRD-1788222564961",
+          "productName": "Mouse Sem Fio Recarregavel Bluetooth Wireless Ergonomico",
+          "baseProductName": "Mouse Sem Fio Recarregavel Bluetooth Wireless Ergonomico",
+          "variationLabel": "",
+          "productCode": "mouse",
+          "sku": "mouse",
+          "barcode": "7895875887787",
+          "reference": "",
+          "brand": "",
+          "model": "",
+          "inventoryItemId": "PRD-1788222564961",
+          "stockControlled": true,
+          "quantity": 1,
+          "unitCost": 19.99,
+          "salePrice": 0,
+          "discount": 0,
+          "total": 19.99,
+          "targetMarginPercent": 0,
+          "pricingRuleSource": "Regra geral",
+          "fiscal": {
+            "supplierCode": "mouse",
+            "ean": "7895875887787",
+            "ncm": "84716053",
+            "cest": "2103100",
+            "cfop": "6106",
+            "unit": "UN",
+            "taxes": {
+              "raw": "present"
+            }
+          }
+        }
+      ],
+      "productsTotal": 19.99,
+      "freight": 0,
+      "otherExpenses": 0,
+      "discount": 0,
+      "total": 19.99,
+      "invoiceNumber": "526132",
+      "invoiceSeries": "2",
+      "accessKey": "35260849199499000105550020005261321685381736",
+      "issueDate": "2026-08-27",
+      "entryDate": "2026-08-27",
+      "notes": "Importada da NF-e 526132 · Chave 35260849199499000105550020005261321685381736",
+      "accountId": "",
+      "costCenterId": "",
+      "cashboxId": "caixa-principal",
+      "paymentPlan": [
+        {
+          "paymentMethodId": "PAY-f67a5400-9f7b-4b8b-af7a-adff277d9169",
+          "value": 19.99,
+          "installmentCount": 1,
+          "firstDueDate": "2026-09-23",
+          "installmentDueDates": [
+            "2026-09-23"
+          ]
+        }
+      ],
+      "fiscalDocument": {
+        "model": "55",
+        "xmlVersion": "4.00",
+        "protocol": "135263554778478",
+        "issuer": {
+          "document": "49199499000105",
+          "name": "GOLLDEN STORE LTDA",
+          "tradeName": "",
+          "stateRegistration": "156433162115",
+          "phone": "00011943221622",
+          "zipCode": "13205150",
+          "street": "R Ricardo Cesar Favaro",
+          "number": "1104",
+          "complement": "Nao consta",
+          "district": "Parque Residencial Sao Miguel",
+          "city": "Jundiai",
+          "state": "SP",
+          "country": "Brasil"
+        },
+        "taxes": {},
+        "relatedDocuments": []
+      },
+      "updatedAt": "2026-09-01T00:30:01.252Z",
+      "updatedBy": "Matheus Fernando",
+      "inventoryEffects": [
+        {
+          "itemId": "PRD-1788222564961",
+          "productId": "PRD-1788222564961",
+          "inventoryItemId": "PRD-1788222564961",
+          "quantity": 1,
+          "movement": {
+            "id": "MOV-20260831-000009",
+            "inventoryItemId": "PRD-1788222564961",
+            "locationId": "loja-principal",
+            "type": "entrada_inicial",
+            "direction": "entrada",
+            "quantity": 1,
+            "signedQuantity": 1,
+            "previousPhysicalQuantity": 0,
+            "newPhysicalQuantity": 1,
+            "reservedQuantity": 0,
+            "availableQuantity": 1,
+            "origin": "estoque_operacao_manual",
+            "referenceType": "product",
+            "referenceId": "PUR-51854599-0312-41aa-be3f-c67c4245dab5",
+            "reason": "Compra COM-000020 · GOLLDEN STORE LTDA",
+            "reasonCode": "PURCHASE",
+            "classification": "purchase",
+            "createdBy": "Matheus Fernando",
+            "createdAt": "2026-09-01T00:30:01.090Z"
+          }
+        }
+      ],
+      "payableId": "PAY-ee116757-c1b1-4db8-ac68-1e9f5a99c198",
+      "immediatePaymentIds": [],
+      "completedAt": "2026-09-01T00:30:01.252Z",
+      "completedBy": "Matheus Fernando"
+    },
+    {
+      "id": "PUR-a0583c50-4a7a-470f-9ae0-52d87ce444d6",
+      "number": "COM-000019",
+      "status": "completed",
+      "createdAt": "2026-09-01T00:28:07.355Z",
+      "createdBy": "Matheus Fernando",
+      "supplierId": "FOR-1787847948229-S8E6V",
+      "supplierName": "Fornecedores Diversos",
+      "supplierDocument": "",
+      "items": [
+        {
+          "id": "1788222458461",
+          "selectionId": "1788222458461",
+          "productId": "1788222458461",
+          "productName": "Notebook Usado LG S460 Core i3 6gb ram SSD 240gb",
+          "baseProductName": "Notebook Usado LG S460 Core i3 6gb ram SSD 240gb",
+          "variationLabel": "",
+          "productCode": "PRD-970",
+          "sku": "PRD-970",
+          "barcode": "",
+          "reference": "",
+          "brand": "",
+          "model": "",
+          "inventoryItemId": "PRD-1788222458461",
+          "stockControlled": true,
+          "quantity": 1,
+          "unitCost": 400,
+          "salePrice": 0,
+          "discount": 0,
+          "total": 400,
+          "targetMarginPercent": 0,
+          "pricingRuleSource": "Produto",
+          "fiscal": {
+            "supplierCode": "",
+            "ean": "",
+            "ncm": "",
+            "cest": "",
+            "cfop": "",
+            "unit": "",
+            "taxes": {}
+          }
+        }
+      ],
+      "productsTotal": 400,
+      "freight": 0,
+      "otherExpenses": 0,
+      "discount": 0,
+      "total": 400,
+      "invoiceNumber": "",
+      "invoiceSeries": "",
+      "accessKey": "",
+      "issueDate": "",
+      "entryDate": "2026-08-31",
+      "notes": "",
+      "accountId": "",
+      "costCenterId": "",
+      "cashboxId": "caixa-principal",
+      "paymentPlan": [
+        {
+          "paymentMethodId": "PM-DINHEIRO",
+          "value": 400,
+          "installmentCount": 1,
+          "firstDueDate": "2026-08-31",
+          "installmentDueDates": [
+            "2026-08-31"
+          ]
+        }
+      ],
+      "fiscalDocument": {
+        "model": "55",
+        "xmlVersion": "4.00",
+        "protocol": "",
+        "issuer": null,
+        "taxes": {},
+        "relatedDocuments": []
+      },
+      "updatedAt": "2026-09-01T00:28:07.631Z",
+      "updatedBy": "Matheus Fernando",
+      "inventoryEffects": [
+        {
+          "itemId": "1788222458461",
+          "productId": "1788222458461",
+          "inventoryItemId": "PRD-1788222458461",
+          "quantity": 1,
+          "movement": {
+            "id": "MOV-20260831-000008",
+            "inventoryItemId": "PRD-1788222458461",
+            "locationId": "loja-principal",
+            "type": "entrada_inicial",
+            "direction": "entrada",
+            "quantity": 1,
+            "signedQuantity": 1,
+            "previousPhysicalQuantity": 0,
+            "newPhysicalQuantity": 1,
+            "reservedQuantity": 0,
+            "availableQuantity": 1,
+            "origin": "estoque_operacao_manual",
+            "referenceType": "product",
+            "referenceId": "PUR-a0583c50-4a7a-470f-9ae0-52d87ce444d6",
+            "reason": "Compra COM-000019 · Fornecedores Diversos",
+            "reasonCode": "PURCHASE",
+            "classification": "purchase",
+            "createdBy": "Matheus Fernando",
+            "createdAt": "2026-09-01T00:28:07.406Z"
+          }
+        }
+      ],
+      "payableId": "PAY-1864b6b5-c53c-4134-ba83-3a872e2bd55c",
+      "immediatePaymentIds": [
+        "PYP-647aaad9-0f90-45c7-8684-3cafa9933d19"
+      ],
+      "completedAt": "2026-09-01T00:28:07.631Z",
+      "completedBy": "Matheus Fernando"
+    },
+    {
+      "id": "PUR-569ce150-2e78-4d29-94d5-e3286491c7c8",
+      "number": "COM-000018",
+      "status": "completed",
+      "createdAt": "2026-09-01T00:22:51.901Z",
+      "createdBy": "Matheus Fernando",
+      "supplierId": "FOR-1787847948229-S8E6V",
+      "supplierName": "Fornecedores Diversos",
+      "supplierDocument": "",
+      "items": [
+        {
+          "id": "1788051985361",
+          "selectionId": "1788051985361",
+          "productId": "1788051985361",
+          "productName": "Notebook Usado Acer Aspire 3 A315-53 Intel Core i3-7020U 4GB Ram HD 1TB 15.6\" W10",
+          "baseProductName": "Notebook Usado Acer Aspire 3 A315-53 Intel Core i3-7020U 4GB Ram HD 1TB 15.6\" W10",
+          "variationLabel": "",
+          "productCode": "PRD-865",
+          "sku": "PRD-865",
+          "barcode": "",
+          "reference": "",
+          "brand": "",
+          "model": "",
+          "inventoryItemId": "PRD-1788051985361",
+          "stockControlled": true,
+          "quantity": 1,
+          "unitCost": 250,
+          "salePrice": 1599,
+          "discount": 0,
+          "total": 250,
+          "targetMarginPercent": 0,
+          "pricingRuleSource": "Produto",
+          "fiscal": {
+            "supplierCode": "",
+            "ean": "",
+            "ncm": "",
+            "cest": "",
+            "cfop": "",
+            "unit": "",
+            "taxes": {}
+          }
+        }
+      ],
+      "productsTotal": 250,
+      "freight": 0,
+      "otherExpenses": 0,
+      "discount": 0,
+      "total": 250,
+      "invoiceNumber": "",
+      "invoiceSeries": "",
+      "accessKey": "",
+      "issueDate": "",
+      "entryDate": "2026-08-31",
+      "notes": "",
+      "accountId": "ACC-10-07",
+      "costCenterId": "CC-CMV",
+      "cashboxId": "caixa-principal",
+      "paymentPlan": [
+        {
+          "paymentMethodId": "PM-DINHEIRO",
+          "value": 250,
+          "installmentCount": 1,
+          "firstDueDate": "2026-08-31",
+          "installmentDueDates": [
+            "2026-08-31"
+          ]
+        }
+      ],
+      "fiscalDocument": {
+        "model": "55",
+        "xmlVersion": "4.00",
+        "protocol": "",
+        "issuer": null,
+        "taxes": {},
+        "relatedDocuments": []
+      },
+      "updatedAt": "2026-09-01T00:22:52.179Z",
+      "updatedBy": "Matheus Fernando",
+      "inventoryEffects": [
+        {
+          "itemId": "1788051985361",
+          "productId": "1788051985361",
+          "inventoryItemId": "PRD-1788051985361",
+          "quantity": 1,
+          "movement": {
+            "id": "MOV-20260831-000007",
+            "inventoryItemId": "PRD-1788051985361",
+            "locationId": "loja-principal",
+            "type": "entrada_inicial",
+            "direction": "entrada",
+            "quantity": 1,
+            "signedQuantity": 1,
+            "previousPhysicalQuantity": 0,
+            "newPhysicalQuantity": 1,
+            "reservedQuantity": 0,
+            "availableQuantity": 1,
+            "origin": "estoque_operacao_manual",
+            "referenceType": "product",
+            "referenceId": "PUR-569ce150-2e78-4d29-94d5-e3286491c7c8",
+            "reason": "Compra COM-000018 · Fornecedores Diversos",
+            "reasonCode": "PURCHASE",
+            "classification": "purchase",
+            "createdBy": "Matheus Fernando",
+            "createdAt": "2026-09-01T00:22:51.951Z"
+          }
+        }
+      ],
+      "payableId": "PAY-ee32bc98-6ba5-4938-be2d-1b33450ed0f5",
+      "immediatePaymentIds": [
+        "PYP-1d367595-d237-4303-828c-b527ff62d051"
+      ],
+      "completedAt": "2026-09-01T00:22:52.179Z",
+      "completedBy": "Matheus Fernando"
+    },
+    {
+      "id": "PUR-e8b59cc3-a0c6-40c5-86ec-e82f9a8c7e2f",
+      "number": "COM-000017",
+      "status": "completed",
+      "createdAt": "2026-09-01T00:20:57.033Z",
+      "createdBy": "Matheus Fernando",
+      "supplierId": "FOR-1788221985383-E66C3",
+      "supplierName": "vitoria silveira de souza",
+      "supplierDocument": "05307912005",
+      "items": [
+        {
+          "id": "1786327066434::VAR-1786326111943-11884-5",
+          "selectionId": "1786327066434::VAR-1786326111943-11884-5",
+          "productId": "1786327066434",
+          "productName": "iPhone 15 128GB Usado · Azul",
+          "baseProductName": "iPhone 15 128GB Usado",
+          "variationLabel": "Azul",
+          "productCode": "PRD-155",
+          "sku": "PRD-155",
+          "barcode": "",
+          "reference": "",
+          "brand": "APPLE",
+          "model": "",
+          "inventoryItemId": "VAR-1786326111943-11884-5",
+          "stockControlled": true,
+          "quantity": 1,
+          "unitCost": 2550,
+          "salePrice": 3499.99,
+          "discount": 0,
+          "total": 2550,
+          "targetMarginPercent": 0,
+          "pricingRuleSource": "Variação",
+          "fiscal": {
+            "supplierCode": "",
+            "ean": "",
+            "ncm": "",
+            "cest": "",
+            "cfop": "",
+            "unit": "",
+            "taxes": {}
+          }
+        }
+      ],
+      "productsTotal": 2550,
+      "freight": 0,
+      "otherExpenses": 0,
+      "discount": 0,
+      "total": 2550,
+      "invoiceNumber": "",
+      "invoiceSeries": "",
+      "accessKey": "",
+      "issueDate": "",
+      "entryDate": "2026-08-31",
+      "notes": "",
+      "accountId": "ACC-10-02",
+      "costCenterId": "CC-CMV",
+      "cashboxId": "caixa-principal",
+      "paymentPlan": [
+        {
+          "paymentMethodId": "PM-PIX",
+          "value": 2000,
+          "installmentCount": 1,
+          "firstDueDate": "2026-08-31",
+          "installmentDueDates": [
+            "2026-08-31"
+          ]
+        },
+        {
+          "paymentMethodId": "PM-DINHEIRO",
+          "value": 550,
+          "installmentCount": 1,
+          "firstDueDate": "2026-08-31",
+          "installmentDueDates": [
+            "2026-08-31"
+          ]
+        }
+      ],
+      "fiscalDocument": {
+        "model": "55",
+        "xmlVersion": "4.00",
+        "protocol": "",
+        "issuer": null,
+        "taxes": {},
+        "relatedDocuments": []
+      },
+      "updatedAt": "2026-09-01T00:20:57.382Z",
+      "updatedBy": "Matheus Fernando",
+      "inventoryEffects": [
+        {
+          "itemId": "1786327066434::VAR-1786326111943-11884-5",
+          "productId": "1786327066434",
+          "inventoryItemId": "VAR-1786326111943-11884-5",
+          "quantity": 1,
+          "movement": {
+            "id": "MOV-20260831-000006",
+            "inventoryItemId": "VAR-1786326111943-11884-5",
+            "locationId": "loja-principal",
+            "type": "entrada_inicial",
+            "direction": "entrada",
+            "quantity": 1,
+            "signedQuantity": 1,
+            "previousPhysicalQuantity": 0,
+            "newPhysicalQuantity": 1,
+            "reservedQuantity": 0,
+            "availableQuantity": 1,
+            "origin": "estoque_operacao_manual",
+            "referenceType": "product",
+            "referenceId": "PUR-e8b59cc3-a0c6-40c5-86ec-e82f9a8c7e2f",
+            "reason": "Compra COM-000017 · vitoria silveira de souza",
+            "reasonCode": "PURCHASE",
+            "classification": "purchase",
+            "createdBy": "Matheus Fernando",
+            "createdAt": "2026-09-01T00:20:57.089Z"
+          }
+        }
+      ],
+      "payableId": "PAY-fa54ac4f-8e7f-49b2-9d45-422b247cf8a2",
+      "immediatePaymentIds": [
+        "PYP-0aa0e30d-0668-42ea-bd4a-7fac754e7286",
+        "PYP-8f752f4a-7354-4108-80b5-18e4d8459957"
+      ],
+      "completedAt": "2026-09-01T00:20:57.382Z",
+      "completedBy": "Matheus Fernando"
+    },
+    {
       "id": "PUR-386f4d35-c690-4b63-85fb-879c744ca776",
       "number": "COM-000016",
       "status": "completed",

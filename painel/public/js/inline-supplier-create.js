@@ -38,6 +38,7 @@
       .quality-inline-supplier__body{padding:16px 18px}.quality-inline-supplier__section{border:1px solid var(--line,#e5e7eb);border-radius:11px;padding:12px;margin-bottom:12px}.quality-inline-supplier__section-title{font-size:10px;font-weight:900;text-transform:uppercase;letter-spacing:.04em;margin:0 0 10px;color:var(--muted,#6b7280)}
       .quality-inline-supplier__grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.quality-inline-supplier__grid label{display:grid;gap:5px;font-size:10px;font-weight:800;color:var(--muted,#6b7280)}
       .quality-inline-supplier__grid input,.quality-inline-supplier__grid select{width:100%;box-sizing:border-box;min-height:39px;padding:9px;border:1px solid var(--line,#e5e7eb);border-radius:9px;background:var(--surface-soft,var(--card,#fff));color:var(--text,#111827)}
+      .quality-inline-supplier [hidden]{display:none!important}
       .quality-inline-supplier__full{grid-column:1/-1}.quality-inline-supplier__docrow,.quality-inline-supplier__ceprow{display:grid;grid-template-columns:1fr auto;gap:8px}.quality-inline-supplier__lookup{white-space:nowrap;min-height:39px}
       .quality-inline-supplier__hint{font-size:10px;color:var(--muted,#6b7280);margin-top:5px}.quality-inline-supplier__message{margin:10px 0 0;padding:9px 10px;border-radius:8px;font-size:11px;background:rgba(180,83,9,.12);color:var(--text,#111827)}.quality-inline-supplier__message.success{background:rgba(22,163,74,.12)}.quality-inline-supplier__message[hidden]{display:none}
       .quality-inline-supplier__actions{display:flex;justify-content:flex-end;gap:8px;padding:14px 18px;border-top:1px solid var(--line,#e5e7eb);position:sticky;bottom:0;background:var(--card,#fff);z-index:2}
@@ -52,7 +53,7 @@
         <label class="quality-inline-supplier__full"><span id="inlineSupplierDocumentLabel">CNPJ</span><div class="quality-inline-supplier__docrow"><input id="inlineSupplierDocument" inputmode="numeric" autocomplete="off" maxlength="18"><button type="button" class="btn quality-inline-supplier__lookup" id="inlineSupplierCnpjLookup">Consultar CNPJ</button></div><span class="quality-inline-supplier__hint" id="inlineSupplierDocumentHint">Informe um CNPJ válido para preencher os dados automaticamente.</span></label>
         <label><span id="inlineSupplierNameLabel">Razão social *</span><input id="inlineSupplierName" maxlength="160" required></label>
         <label id="inlineSupplierTradeWrap">Nome fantasia<input id="inlineSupplierTradeName" maxlength="160"></label>
-        <label>Inscrição estadual / RG<input id="inlineSupplierStateRegistration"></label>
+        <label><span id="inlineSupplierStateRegistrationLabel">Inscrição estadual</span><input id="inlineSupplierStateRegistration"></label>
         <label>Celular / WhatsApp<input id="inlineSupplierMobile" inputmode="tel"></label>
         <label>Telefone<input id="inlineSupplierPhone" inputmode="tel"></label>
         <label>E-mail<input id="inlineSupplierEmail" type="email"></label>
@@ -94,8 +95,12 @@
     const pf=document.getElementById('inlineSupplierPersonType').value==='pf';
     document.getElementById('inlineSupplierDocumentLabel').textContent=pf?'CPF':'CNPJ';
     document.getElementById('inlineSupplierNameLabel').textContent=pf?'Nome completo *':'Razão social *';
-    document.getElementById('inlineSupplierTradeWrap').hidden=pf;
-    document.getElementById('inlineSupplierCnpjLookup').hidden=pf;
+    document.getElementById('inlineSupplierStateRegistrationLabel').textContent=pf?'RG':'Inscrição estadual';
+    const tradeWrap=document.getElementById('inlineSupplierTradeWrap');
+    const cnpjLookup=document.getElementById('inlineSupplierCnpjLookup');
+    tradeWrap.hidden=pf;
+    cnpjLookup.hidden=pf;
+    if(pf)document.getElementById('inlineSupplierTradeName').value='';
     document.getElementById('inlineSupplierDocumentHint').textContent=pf?'Informe o CPF do fornecedor.':'Informe um CNPJ válido para preencher os dados automaticamente.';
     lastLookedUpCnpj=''; onDocumentInput();
   }
@@ -163,7 +168,8 @@
   async function save(e){
     e.preventDefault();const btn=document.getElementById('inlineSupplierSave');btn.disabled=true;setMessage();
     try{
-      const payload={personType:document.getElementById('inlineSupplierPersonType').value,originType:document.getElementById('inlineSupplierOriginType').value,document:onlyDigits(document.getElementById('inlineSupplierDocument').value),name:document.getElementById('inlineSupplierName').value,tradeName:document.getElementById('inlineSupplierTradeName').value,stateRegistration:document.getElementById('inlineSupplierStateRegistration').value,mobile:onlyDigits(document.getElementById('inlineSupplierMobile').value),phone:onlyDigits(document.getElementById('inlineSupplierPhone').value),email:document.getElementById('inlineSupplierEmail').value,zipCode:onlyDigits(document.getElementById('inlineSupplierZipCode').value),street:document.getElementById('inlineSupplierStreet').value,number:document.getElementById('inlineSupplierNumber').value,complement:document.getElementById('inlineSupplierComplement').value,district:document.getElementById('inlineSupplierDistrict').value,city:document.getElementById('inlineSupplierCity').value,state:document.getElementById('inlineSupplierState').value,active:true};
+      const personType=document.getElementById('inlineSupplierPersonType').value;
+      const payload={personType,originType:document.getElementById('inlineSupplierOriginType').value,document:onlyDigits(document.getElementById('inlineSupplierDocument').value),name:document.getElementById('inlineSupplierName').value,tradeName:personType==='pj'?document.getElementById('inlineSupplierTradeName').value:'',stateRegistration:document.getElementById('inlineSupplierStateRegistration').value,mobile:onlyDigits(document.getElementById('inlineSupplierMobile').value),phone:onlyDigits(document.getElementById('inlineSupplierPhone').value),email:document.getElementById('inlineSupplierEmail').value,zipCode:onlyDigits(document.getElementById('inlineSupplierZipCode').value),street:document.getElementById('inlineSupplierStreet').value,number:document.getElementById('inlineSupplierNumber').value,complement:document.getElementById('inlineSupplierComplement').value,district:document.getElementById('inlineSupplierDistrict').value,city:document.getElementById('inlineSupplierCity').value,state:document.getElementById('inlineSupplierState').value,active:true};
       const r=await fetch('/erp/fornecedores',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)}),j=await r.json().catch(()=>({}));
       if(!r.ok||j.success===false)throw new Error(j.message||'Não foi possível cadastrar o fornecedor.');
       const target=activeSelect;addSupplierEverywhere(j.supplier);if(target){target.value=j.supplier.id;target.dataset.inlineSupplierPrevious=j.supplier.id;target.dispatchEvent(new Event('change',{bubbles:true}));}

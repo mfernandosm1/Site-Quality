@@ -1,6 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 import crypto from 'crypto';
+import { businessDate } from '../utils/date-time.js';
 
 function text(value=''){ return String(value ?? '').trim(); }
 function base64url(value){ return Buffer.from(value).toString('base64url'); }
@@ -35,10 +36,7 @@ function minutesFromTime(value='00:00'){
   const [h,m]=String(value||'00:00').split(':').map(Number);
   return (Number.isFinite(h)?h:0)*60+(Number.isFinite(m)?m:0);
 }
-function localDateKey(date=new Date()){
-  const y=date.getFullYear(),m=String(date.getMonth()+1).padStart(2,'0'),d=String(date.getDate()).padStart(2,'0');
-  return `${y}-${m}-${d}`;
-}
+function localDateKey(date=new Date()){ return businessDate(date); }
 
 export default class AuthService {
   constructor({ dataDir, userService, permissionService, cookieName='quality_erp_auth', ttlHours=1 }={}){

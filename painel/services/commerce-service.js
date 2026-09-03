@@ -1,5 +1,6 @@
 import fs from 'fs';
 import path from 'path';
+import { businessDate, businessDateParts } from '../utils/date-time.js';
 
 function clone(value){ return JSON.parse(JSON.stringify(value)); }
 function now(){ return new Date().toISOString(); }
@@ -24,20 +25,11 @@ function normalizeFreight(value={}){
 }
 function freightTotal(value={}){const freight=normalizeFreight(value);return Math.round((freight.freightAmount+freight.insuranceAmount+freight.otherExpensesAmount)*100)/100;}
 function same(a,b){ return JSON.stringify(a ?? null) === JSON.stringify(b ?? null); }
-function localDay(value=new Date()){
-  const date=value instanceof Date?value:new Date(value);
-  try{return new Intl.DateTimeFormat('en-CA',{timeZone:'America/Sao_Paulo',year:'numeric',month:'2-digit',day:'2-digit'}).format(date);}
-  catch(_){return date.toISOString().slice(0,10);}
-}
+function localDay(value=new Date()){ return businessDate(value); }
 
 function localDateParts(value=new Date()){
-  const date=value instanceof Date?value:new Date(value);
-  try{
-    const parts=new Intl.DateTimeFormat('en-CA',{timeZone:'America/Sao_Paulo',year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit',second:'2-digit',hourCycle:'h23'}).formatToParts(date);
-    return Object.fromEntries(parts.filter(part=>part.type!=='literal').map(part=>[part.type,part.value]));
-  }catch(_){
-    return {year:String(date.getFullYear()),month:String(date.getMonth()+1).padStart(2,'0'),day:String(date.getDate()).padStart(2,'0'),hour:String(date.getHours()).padStart(2,'0'),minute:String(date.getMinutes()).padStart(2,'0'),second:String(date.getSeconds()).padStart(2,'0')};
-  }
+  const parts=businessDateParts(value);
+  return parts || {year:'',month:'',day:'',hour:'00',minute:'00',second:'00'};
 }
 function localMinute(value=new Date()){
   const part=localDateParts(value);
@@ -155,7 +147,7 @@ export default class CommerceService {
     return {
       cashboxId, closingMode:'manual', automaticClosingTime:'23:59', automaticShiftsEnabled:false, automaticShiftTimes:['08:00'], allowNegativeCash:false,
       requireNegativeReason:true, isDefault:cashboxId==='caixa-principal', requireItemVerification:false,
-      requireSeller:false, useLoggedUserAsSeller:true, defaultSeller:'', defaultInstallments:1, firstDueDays:30, defaultOperationType:'sale',
+      requireSeller:true, useLoggedUserAsSeller:true, defaultSeller:'', defaultInstallments:1, firstDueDays:30, defaultOperationType:'sale',
       discountApprovalEnabled:true, discountApprovalTtlMinutes:5,
       visibleColumns:{reference:true,serial:false,color:false,size:false,seller:true,discount:true,commission:false,internalCode:false},
       enabledPaymentMethods:['dinheiro','pix','cartao-credito','cartao-debito','boleto-crediario'],
@@ -263,7 +255,7 @@ export default class CommerceService {
       automaticShiftsEnabled:automatic,
       automaticShiftTimes:normalizeTimes(payload.automaticShiftTimes, current.automaticShiftTimes||['08:00']),
       allowNegativeCash:payload.allowNegativeCash===true,requireNegativeReason:payload.requireNegativeReason!==false,
-      isDefault:payload.isDefault===true,requireItemVerification:payload.requireItemVerification===true,requireSeller:payload.requireSeller===true,
+      isDefault:payload.isDefault===true,requireItemVerification:payload.requireItemVerification===true,requireSeller:true,
       useLoggedUserAsSeller:payload.useLoggedUserAsSeller!==false,defaultSeller:text(payload.defaultSeller),defaultInstallments:Math.max(1,Math.round(num(payload.defaultInstallments)||1)),
       firstDueDays:Math.max(0,Math.round(num(payload.firstDueDays)||0)),defaultOperationType:payload.defaultOperationType==='service_order'?'service_order':'sale',
       discountApprovalEnabled:payload.discountApprovalEnabled!==false,
@@ -760,7 +752,7 @@ export default class CommerceService {
     }
 
     const cashboxSettings=this.getCashboxSettings(op.cashboxId);
-    if(cashboxSettings.requireSeller===true && !text(op.sellerNameSnapshot)) throw new Error('Informe o vendedor antes de finalizar.');
+    if(op.type==='sale' && !text(op.sellerNameSnapshot)) throw new Error('Selecione o vendedor antes de finalizar.');
     if(cashboxSettings.requireItemVerification===true && items.some(item=>item.verified!==true)) throw new Error('Confira e marque todos os produtos como verificados antes de finalizar.');
     const allowedMethods=new Set(cashboxSettings.enabledPaymentMethods||[]);
     const total=Math.round(num(op.total)*100)/100;

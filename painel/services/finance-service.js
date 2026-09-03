@@ -1,6 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 import crypto from 'crypto';
+import { businessDate, addBusinessDays } from '../utils/date-time.js';
 
 const CATALOGS = {
   accounts: 'chart-of-accounts.json',
@@ -394,7 +395,7 @@ export default class FinanceService {
       return { duplicated:true, entries, payments, movements:existingMovements };
     }
 
-    const receivedAt = clean(receipt.receivedAt) || now().slice(0,10);
+    const receivedAt = clean(receipt.receivedAt) || businessDate();
     const common = {
       receiptId:receipt.id, receiptNumber:receipt.receiptNumber, receivableId:title.id,
       installmentId:clean(receipt.installmentId), operationId:clean(title.originId),
@@ -483,7 +484,7 @@ export default class FinanceService {
       const payments = (this.readFile('payments.json', { items:[] }).items || []).filter(item => item.payablePaymentId === payment.id || item.idempotencyKey === requestKey);
       return { duplicated:true, entries, payments, movements:existingMovements };
     }
-    const paidAt=clean(payment.paidAt)||now().slice(0,10);
+    const paidAt=clean(payment.paidAt)||businessDate();
     const common={ payablePaymentId:payment.id, payableId:title.id, installmentId:clean(payment.installmentId), supplierId:clean(title.supplierId), supplierName:title.supplierName,
       idempotencyKey:requestKey, occurredAt:payment.createdAt||now(), movementDate:paidAt, competenceDate:title.competenceDate||title.issueDate||paidAt,
       status:'posted', source:'payable_payment', reversible:true, operator:clean(actor)||'painel' };
@@ -525,13 +526,13 @@ export default class FinanceService {
   }
 
   financialDashboardSummary(referenceDate='') {
-    const date = clean(referenceDate) || new Date().toISOString().slice(0,10);
+    const date = clean(referenceDate) || businessDate();
     const month = date.slice(0,7);
     const movements = (this.readFile('movements.json', { items:[] }).items || []).filter(item => !['reversed','cancelled','void'].includes(clean(item.status).toLowerCase()) && clean(item.reversalStatus).toLowerCase() !== 'reversed');
     const income = movements.filter(item => item.direction === 'entrada');
     const expense = movements.filter(item => item.direction === 'saida');
     const sum = items => Math.round(items.reduce((total,item)=>total+Number(item.openBalance ?? item.value ?? 0),0)*100)/100;
-    const addDays = (value, days) => { const d = new Date(`${value}T12:00:00`); d.setDate(d.getDate()+days); return d.toISOString().slice(0,10); };
+    const addDays = (value, days) => addBusinessDays(value, days);
     const current = new Date(`${date}T12:00:00`);
     const mondayOffset = (current.getDay()+6)%7;
     const weekStart = addDays(date, -mondayOffset);

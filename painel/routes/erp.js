@@ -30,6 +30,7 @@ import PricingService from '../services/pricing-service.js';
 import ReturnService, { RETURN_REASONS } from '../services/return-service.js';
 import { listWhatsAppConversations, sendWhatsAppMediaToConversation } from './automacao_whatsapp.js';
 import { matchesSearchText } from '../utils/search.js';
+import { businessDate, businessMonthStart, businessMonthEnd } from '../utils/date-time.js';
 import { listTasks, getTask, createTask, updateTask, completeTask, deleteTask, getTaskOverview, listTaskOwners, listAgendaOwners, createAgendaOwner, deleteAgendaOwner, listAgendaTypes, createAgendaType, deleteAgendaType, getAgendaAnalytics } from '../services/erp_tasks.js';
 
 const router = express.Router();
@@ -982,12 +983,12 @@ router.get('/clientes', (req, res) => {
   const classifications = service.listClassifications();
   const classificationMap = new Map(classifications.map(item => [String(item.id), item.name]));
   const allCustomers = service.listCustomers({ includeInactive: true });
-  const now = new Date();
+  const currentMonthKey = businessDate().slice(0, 7);
   const summary = allCustomers.reduce((acc, customer) => {
     acc.total += 1;
     if (customer.active === false) acc.inactive += 1; else acc.active += 1;
-    const created = new Date(customer.createdAt || 0);
-    if (!Number.isNaN(created.getTime()) && created.getFullYear() === now.getFullYear() && created.getMonth() === now.getMonth()) acc.newThisMonth += 1;
+    const createdKey = businessDate(customer.createdAt || '');
+    if (/^\d{4}-\d{2}-\d{2}$/.test(createdKey) && createdKey.slice(0, 7) === currentMonthKey) acc.newThisMonth += 1;
     return acc;
   }, { total:0, active:0, inactive:0, newThisMonth:0 });
 
@@ -1417,12 +1418,12 @@ router.get('/clientes/:id/api/analise-credito', (req,res) => {
     const operations=commerce.listOperations({status:'all'}).filter(op=>(String(op.customerId||'')===String(customer.id)||(!op.customerId&&normalize(op.customerNameSnapshot)===normalize(customer.name)))&&op.status==='finalized');
     const receivables=getReceivablesService(req.app); const credit=receivables.customerCreditSummary(customer.id);
     const titles=receivables.list({customerId:customer.id}); const installments=titles.flatMap(t=>(t.installments||[]).map(i=>({...i,title:t})));
-    const today=new Date().toISOString().slice(0,10);
+    const today=businessDate();
     const activeInstallments=installments.filter(i=>!['cancelled','reversed'].includes(i.status));
     const paid=activeInstallments.filter(i=>Number(i.openBalance||0)<=0);
     const open=activeInstallments.filter(i=>Number(i.openBalance||0)>0);
     const overdue=open.filter(i=>i.dueDate&&i.dueDate<today);
-    const delays=paid.map(i=>{const paidDate=String(i.paidAt||i.receivedAt||i.updatedAt||'').slice(0,10);if(!paidDate||!i.dueDate)return 0;return Math.max(0,Math.round((new Date(paidDate)-new Date(i.dueDate))/86400000));});
+    const delays=paid.map(i=>{const paidDate=businessDate(i.paidAt||i.receivedAt||i.updatedAt||'');if(!paidDate||!i.dueDate)return 0;return Math.max(0,Math.round((new Date(paidDate)-new Date(i.dueDate))/86400000));});
     const totals=operations.map(op=>Number(op.total||0)); const totalSales=totals.reduce((a,b)=>a+b,0);
     const creditOperationIds=new Set(titles.map(t=>String(t.operationId||t.originId||t.referenceId||'')));
     const creditSales=operations.filter(op=>creditOperationIds.has(String(op.id))||titles.some(t=>String(t.originLabel||'').includes(`#${op.number}`)));
@@ -1433,8 +1434,8 @@ router.get('/clientes/:id/api/analise-credito', (req,res) => {
     const profitabilityByMonth=new Map();
     let totalKnownCost=0, totalProfit=0, itemsWithoutCost=0;
     for(const op of operations){
-      const at=String(op.dates?.finalizedAt||op.dates?.openedAt||op.createdAt||'');
-      const month=at.slice(0,7)||'sem-data';
+      const at=op.dates?.finalizedAt||op.dates?.openedAt||op.createdAt||'';
+      const month=businessDate(at).slice(0,7)||'sem-data';
       if(!profitabilityByMonth.has(month)) profitabilityByMonth.set(month,{month,revenue:0,cost:0,profit:0,itemsWithoutCost:0});
       const row=profitabilityByMonth.get(month);
       for(const item of (op.items||[])){
@@ -1472,7 +1473,7 @@ router.post('/clientes/:id/api/carteira', (req,res) => {
 router.get('/fornecedores', (req, res) => {
   const service = getSupplierService(req.app);
   const suppliersRaw = service.listSuppliers({ includeInactive: true });
-  const now = new Date();
+  const currentMonthKey = businessDate().slice(0, 7);
 
   const suppliers = suppliersRaw.map(supplier => ({
     ...supplier,
@@ -1486,8 +1487,8 @@ router.get('/fornecedores', (req, res) => {
   const summary = suppliersRaw.reduce((acc, supplier) => {
     acc.total += 1;
     if (supplier.active === false) acc.inactive += 1; else acc.active += 1;
-    const created = new Date(supplier.createdAt || 0);
-    if (!Number.isNaN(created.getTime()) && created.getFullYear() === now.getFullYear() && created.getMonth() === now.getMonth()) acc.newThisMonth += 1;
+    const createdKey = businessDate(supplier.createdAt || '');
+    if (/^\d{4}-\d{2}-\d{2}$/.test(createdKey) && createdKey.slice(0, 7) === currentMonthKey) acc.newThisMonth += 1;
     return acc;
   }, { total: 0, active: 0, inactive: 0, newThisMonth: 0 });
 
@@ -1944,6 +1945,21 @@ router.get('/pdv/catalogo', (req, res) => {
   }
 });
 
+
+router.get('/pdv/operacoes-abertas', (req, res) => {
+  try {
+    // A lista exibida no modal do PDV precisa refletir alterações feitas em outros
+    // computadores/abas sem depender do carregamento inicial da página.
+    res.set('Cache-Control', 'no-store, no-cache, must-revalidate, proxy-revalidate');
+    res.set('Pragma', 'no-cache');
+    res.set('Expires', '0');
+    const operations = getCommerceService(req.app).listOperations({ status:'open' });
+    return res.json({ success:true, operations, updatedAt:new Date().toISOString() });
+  } catch (error) {
+    return res.status(500).json({ success:false, message:error.message || 'Não foi possível atualizar as operações em aberto.' });
+  }
+});
+
 function pdvOperationHasUserContent(operation = {}) {
   const hasText = value => String(value ?? '').trim().length > 0;
   const hasArray = value => Array.isArray(value) && value.length > 0;
@@ -2251,8 +2267,8 @@ router.get('/pdv/caixa', (req, res) => {
 
   // Ao abrir um fechamento histórico, isola automaticamente o período daquele turno.
   if (selectedClosing && !filters.startDate && !filters.endDate) {
-    filters.startDate = String(selectedClosing.openedAt || '').slice(0, 10);
-    filters.endDate = String(selectedClosing.closedAt || selectedClosing.openedAt || '').slice(0, 10);
+    filters.startDate = businessDate(selectedClosing.openedAt || '');
+    filters.endDate = businessDate(selectedClosing.closedAt || selectedClosing.openedAt || '');
   }
 
   const allMovements = viewedSession ? commerce.getSessionMovements(viewedSession.id) : [];
@@ -3184,7 +3200,7 @@ router.get('/compras', (req, res) => {
   });
 });
 router.get('/compras/api', (req,res)=>{try{const service=getPurchaseService(req.app);return res.json({success:true,items:service.list(req.query||{})});}catch(error){return res.status(400).json({success:false,message:error.message});}});
-router.get('/compras/api/produtos', (req,res)=>{try{return res.json({success:true,items:getPurchaseService(req.app).searchProducts(req.query.q||'')});}catch(error){return res.status(400).json({success:false,message:error.message});}});
+router.get('/compras/api/produtos', (req,res)=>{try{res.set('Cache-Control','no-store, no-cache, must-revalidate, proxy-revalidate');res.set('Pragma','no-cache');res.set('Expires','0');const q=String(req.query.q||'').trim();const items=getPurchaseService(req.app).searchProducts(q,{forceRefresh:true,limit:200});return res.json({success:true,items});}catch(error){return res.status(400).json({success:false,message:error.message});}});
 router.post('/compras/api/xml/conferir', express.json({limit:'8mb'}), (req,res)=>{try{const conference=getPurchaseService(req.app).parseXml(req.body?.xml||'');return res.json({success:true,conference});}catch(error){return res.status(400).json({success:false,message:error.message});}});
 router.post('/compras/api/xml/vinculos', (req,res)=>{try{const result=getPurchaseService(req.app).saveXmlLinks(req.body||{},userName(req));return res.json({success:true,message:'Vínculos do XML gravados para as próximas importações.',result});}catch(error){return res.status(400).json({success:false,message:error.message});}});
 router.post('/compras/api/xml/vinculos/esquecer', (req,res)=>{try{const result=getPurchaseService(req.app).forgetXmlLink(req.body||{});return res.json({success:true,message:result.removed?'Vínculo aprendido removido.':'Nenhum vínculo aprendido foi encontrado para este item.',result});}catch(error){return res.status(400).json({success:false,message:error.message});}});
@@ -3341,7 +3357,7 @@ router.get('/financeiro/dre', (req,res) => {
 router.get('/financeiro/api/dre',(req,res)=>{try{return res.json({success:true,...getDreService(req.app).query(req.query||{})});}catch(error){return res.status(400).json({success:false,message:error.message});}});
 
 router.get('/financeiro/fluxo-de-caixa', (req,res) => {
-  const today=new Date(); const start=String(req.query.start||new Date(today.getFullYear(),today.getMonth(),1).toISOString().slice(0,10)); const end=String(req.query.end||new Date(today.getFullYear(),today.getMonth()+1,0).toISOString().slice(0,10));
+  const today=new Date(); const start=String(req.query.start||businessMonthStart(today)); const end=String(req.query.end||businessMonthEnd(today));
   const asList=value=>Array.isArray(value)?value.map(String).filter(Boolean):(String(value||'').trim()?[String(value).trim()]:[]);
   const classifications=asList(req.query.classification);
   const legacyCostCenterIds=asList(req.query.costCenterId); const legacyAccountIds=asList(req.query.accountId);
@@ -3493,7 +3509,7 @@ router.get('/financeiro/contas-a-pagar', (req, res) => {
 router.get('/financeiro/api/contas-a-pagar',(req,res)=>{try{const reconciliation=getPurchaseService(req.app).reconcileReversedFinancials(userName(req));const service=getPayablesService(req.app);const filters=req.query||{};return res.json({success:true,items:service.list(filters),summary:service.dashboardSummary(filters),counts:{all:service.list({view:'all'}).length,active:service.list({view:'active'}).length,paid:service.list({view:'paid'}).length,reversed:service.list({view:'reversed'}).length},reconciliation});}catch(error){return res.status(400).json({success:false,message:error.message});}});
 router.get('/financeiro/api/contas-a-pagar/sugestao-classificacao',(req,res)=>{try{const suggestion=getPayablesService(req.app).suggestClassification({supplierId:req.query.supplierId,description:req.query.description});return res.json({success:true,suggestion});}catch(error){return res.status(400).json({success:false,message:error.message});}});
 router.get('/financeiro/api/contas-a-pagar/:id',(req,res)=>{try{const service=getPayablesService(req.app);const item=service.get(req.params.id);if(!item)return res.status(404).json({success:false,message:'Conta a pagar não encontrada.'});return res.json({success:true,item,supplier:item.supplierId?getSupplierService(req.app).getSupplier(item.supplierId):null,payments:service.payments(req.params.id),events:service.events(req.params.id)});}catch(error){return res.status(400).json({success:false,message:error.message});}});
-router.post('/financeiro/api/contas-a-pagar',(req,res)=>{try{const service=getPayablesService(req.app);const payload=req.body||{};const paymentPlan=Array.isArray(payload.paymentPlan)&&payload.paymentPlan.length?payload.paymentPlan:[{paymentMethodId:payload.paymentMethodId}];const cashboxId=String(payload.cashboxId||'caixa-principal');service.validateImmediatePaymentPlan(paymentPlan,cashboxId);const created=service.create(payload,userName(req));const immediatePayments=service.payImmediatePlan(created.id,{cashboxId,paidAt:payload.paidAt||payload.issueDate||new Date().toISOString().slice(0,10),requestPrefix:`manual-payable-${created.id}`},userName(req));const item=service.get(created.id);const immediateTotal=immediatePayments.reduce((sum,payment)=>sum+Number(payment.value||payment.principalValue||0),0);return res.json({success:true,message:immediatePayments.length?`Conta a pagar cadastrada e baixada automaticamente${immediateTotal>0?` (R$ ${immediateTotal.toFixed(2).replace('.',',')})`:''}.`:'Conta a pagar cadastrada com sucesso.',item,immediatePayments,summary:service.dashboardSummary(),financialDashboard:getFinanceService(req.app).financialDashboardSummary()});}catch(error){return res.status(400).json({success:false,message:error.message});}});
+router.post('/financeiro/api/contas-a-pagar',(req,res)=>{try{const service=getPayablesService(req.app);const payload=req.body||{};const paymentPlan=Array.isArray(payload.paymentPlan)&&payload.paymentPlan.length?payload.paymentPlan:[{paymentMethodId:payload.paymentMethodId}];const cashboxId=String(payload.cashboxId||'caixa-principal');service.validateImmediatePaymentPlan(paymentPlan,cashboxId);const created=service.create(payload,userName(req));const immediatePayments=service.payImmediatePlan(created.id,{cashboxId,paidAt:payload.paidAt||payload.issueDate||businessDate(),requestPrefix:`manual-payable-${created.id}`},userName(req));const item=service.get(created.id);const immediateTotal=immediatePayments.reduce((sum,payment)=>sum+Number(payment.value||payment.principalValue||0),0);return res.json({success:true,message:immediatePayments.length?`Conta a pagar cadastrada e baixada automaticamente${immediateTotal>0?` (R$ ${immediateTotal.toFixed(2).replace('.',',')})`:''}.`:'Conta a pagar cadastrada com sucesso.',item,immediatePayments,summary:service.dashboardSummary(),financialDashboard:getFinanceService(req.app).financialDashboardSummary()});}catch(error){return res.status(400).json({success:false,message:error.message});}});
 router.post('/financeiro/api/contas-a-pagar/:id/classificacao',(req,res)=>{try{const service=getPayablesService(req.app);const item=service.updateClassification(req.params.id,req.body||{},userName(req));return res.json({success:true,message:'Classificação atualizada.',item,summary:service.dashboardSummary()});}catch(error){return res.status(400).json({success:false,message:error.message});}});
 router.post('/financeiro/api/contas-a-pagar/:id/parcelas/:installmentId/forma-pagamento',(req,res)=>{try{const service=getPayablesService(req.app);const item=service.updateInstallmentPaymentMethod(req.params.id,req.params.installmentId,req.body?.paymentMethodId,userName(req));return res.json({success:true,message:'Forma de pagamento da parcela atualizada.',item});}catch(error){return res.status(400).json({success:false,message:error.message});}});
 router.post('/financeiro/api/contas-a-pagar/:id/parcelas/atualizar-em-massa',(req,res)=>{try{const service=getPayablesService(req.app);const item=service.updateInstallmentsBulk(req.params.id,req.body||{},userName(req));return res.json({success:true,message:'Parcelas atualizadas em massa.',item,summary:service.dashboardSummary()});}catch(error){return res.status(400).json({success:false,message:error.message});}});
@@ -3545,6 +3561,7 @@ router.get('/modulo/:key', (req, res) => {
   if (!module) return res.status(404).send('Módulo ERP não encontrado.');
   if (module.key === 'clientes') return res.redirect('/erp/clientes');
   if (module.key === 'produtos') return res.redirect('/erp/produtos');
+  if (module.key === 'precificacao') return res.redirect('/erp/precificacao');
   if (module.key === 'fornecedores') return res.redirect('/erp/fornecedores');
   if (module.key === 'orcamentos') return res.redirect('/orcamentos');
   if (module.key === 'estoque') return res.redirect('/erp/estoque');

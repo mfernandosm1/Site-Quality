@@ -185,8 +185,8 @@ function parseWhatsAppBlocks(raw){
     // ao marcador monetário para não juntar o número do modelo com o preço
     // como se fosse separador de milhar ("15 204,75" => 15.204,75).
     const marked=[];
-    const beforeMarker=/(\d+(?:[.,]\d{1,2})?)\s*(R\$|US\$|USD|U\$|\$)/gi;
-    const afterMarker=/(R\$|US\$|USD|U\$|\$)\s*(\d+(?:[.,]\d{1,2})?)/gi;
+    const beforeMarker=/(\d{1,3}(?:\.\d{3})+(?:,\d{1,2})?|\d+(?:[.,]\d{1,2})?)\s*(R\$|US\$|USD|U\$|\$)/gi;
+    const afterMarker=/(R\$|US\$|USD|U\$|\$)\s*(\d{1,3}(?:\.\d{3})+(?:,\d{1,2})?|\d+(?:[.,]\d{1,2})?)/gi;
     let mm;
     while((mm=beforeMarker.exec(text))){
       const raw=mm[1],marker=mm[2],start=mm.index;

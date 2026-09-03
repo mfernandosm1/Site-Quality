@@ -13,6 +13,7 @@
 <link rel="stylesheet" href="/public/css/painel.css">
 <link rel="stylesheet" href="/public/css/painel-theme.css">
 <script src="/public/js/search-utils.js"></script>
+<script src="/public/js/date-utils.js?v=1.0.0"></script>
 <script>
 window.QUALITY_EXPORT_BRAND=<%- JSON.stringify({ name:(typeof panelCompany !== 'undefined' && panelCompany?.tradeName) || 'Quality ERP', logoUrl:(typeof panelCompany !== 'undefined' && panelCompany?.logoUrl) || '', logoVersion:(typeof panelCompany !== 'undefined' && panelCompany?.logoVersion) || 1 }).replace(/</g,'\u003c') %>;
 </script>
@@ -59,16 +60,20 @@ window.QUALITY_EXPORT_BRAND=<%- JSON.stringify({ name:(typeof panelCompany !== '
         <a href="/erp/clientes" data-shell-link data-global-shortcut="clientes"><b>👥 Clientes</b><small>Cadastro e histórico</small></a>
         <a href="/erp/compras" data-shell-link data-global-shortcut="compras"><b>🚚 Compras</b><small>XML e entradas</small></a>
         <a href="/erp/estoque" data-shell-link data-global-shortcut="estoque"><b>📚 Estoque</b><small>Saldos e contagens</small></a>
+        <a href="/erp/estoque/contagens" data-shell-link data-global-shortcut="contagem"><b>📋 Contagem de Estoque</b><small>Conferência física do estoque</small></a>
         <a href="/orcamentos" data-shell-link data-global-shortcut="orcamentos"><b>📝 Orçamentos</b><small>Propostas e cotações</small></a>
         <a href="/erp/produtos" data-shell-link data-global-shortcut="produtos"><b>📦 Produtos</b><small>Cadastro e preços</small></a>
+        <a href="/erp/categorias" data-shell-link data-global-shortcut="categorias-erp"><b>🗂️ Categorias ERP</b><small>Organização interna dos produtos</small></a>
         <a href="/erp/precificacao" data-shell-link data-global-shortcut="precificacao"><b>🏷️ Precificação</b><small>Margens e preços sugeridos</small></a>
         <a href="/erp/fornecedores" data-shell-link data-global-shortcut="fornecedores"><b>🏭 Fornecedores</b><small>Cadastro de parceiros</small></a>
+        <a href="/erp/financeiro" data-shell-link data-global-shortcut="financeiro"><b>💰 Financeiro</b><small>Visão geral financeira</small></a>
         <a href="/erp/financeiro/contas-a-receber" data-shell-link data-global-shortcut="receber"><b>📥 Contas a Receber</b><small>Baixas e recebimentos</small></a>
         <a href="/erp/financeiro/contas-a-pagar" data-shell-link data-global-shortcut="pagar"><b>📤 Contas a Pagar</b><small>Despesas e pagamentos</small></a>
         <a href="/erp/financeiro/fluxo-de-caixa" data-shell-link data-global-shortcut="fluxo"><b>📈 Fluxo de Caixa</b><small>Realizado e previsto</small></a>
         <a href="/erp/financeiro/dre" data-shell-link data-global-shortcut="dre"><b>📊 DRE</b><small>Resultado do negócio</small></a>
         <a href="/erp/relatorios" data-shell-link data-global-shortcut="relatorios"><b>📋 Relatórios</b><small>Vendas, giro e desempenho</small></a>
         <a href="/erp/metas-comissoes" data-shell-link data-global-shortcut="metas-comissoes"><b>🎯 Metas e Comissões</b><small>Equipe, metas e apuração</small></a>
+        <a href="/erp/historico" data-shell-link data-global-shortcut="historico"><b>🕘 Histórico ERP</b><small>Eventos e rastreabilidade</small></a>
         <a href="/site" data-shell-link data-global-shortcut="site"><b>🌐 Site</b><small>Conteúdo e vitrine</small></a>
         <a href="/produtos?lvStatus=true" data-shell-link data-global-shortcut="produtos-site"><b>🛍️ Produtos do site</b><small>Loja virtual ativa</small></a>
         <a href="/analytics" data-shell-link data-global-shortcut="analytics"><b>📊 Analytics</b><small>Métricas e indicadores</small></a>
@@ -91,15 +96,32 @@ window.QUALITY_EXPORT_BRAND=<%- JSON.stringify({ name:(typeof panelCompany !== '
 
     <details class="quality-nav-menu" data-shell-menu>
       <summary>💼 ERP <span>▾</span></summary>
-      <div class="quality-nav-dropdown">
-        <a href="/erp" data-shell-link><b>Visão do ERP</b><small>Todos os módulos</small></a>
-        <a href="/erp/clientes" data-shell-link><b>Clientes</b><small>Cadastro e histórico</small></a>
-        <a href="/erp/produtos" data-shell-link><b>Produtos</b><small>Catálogo e preços</small></a>
-        <a href="/erp/precificacao" data-shell-link><b>Precificação Inteligente</b><small>Margens por categoria, produto e variação</small></a>
-        <a href="/erp/categorias" data-shell-link><b>Categorias ERP</b><small>Estrutura interna</small></a>
-        <a href="/erp/fornecedores" data-shell-link><b>Fornecedores</b><small>Cadastro de parceiros</small></a>
-        <a href="/erp/relatorios" data-shell-link><b>Relatórios</b><small>Vendas, produtos, estoque e gestão</small></a>
-        <a href="/erp/metas-comissoes" data-shell-link><b>Metas e Comissões</b><small>Metas da loja, vendedores e financeiro</small></a>
+      <div class="quality-nav-dropdown quality-erp-dropdown">
+        <a class="quality-erp-overview" href="/erp" data-shell-link><b>Visão do ERP</b><small>Todos os módulos em um só lugar</small></a>
+        <div class="quality-erp-menu-group">
+          <span class="quality-erp-menu-title">Operação e cadastros</span>
+          <a href="/erp/clientes" data-shell-link><b>Clientes</b><small>Cadastro e histórico</small></a>
+          <a href="/erp/produtos" data-shell-link><b>Produtos</b><small>Catálogo e preços</small></a>
+          <a href="/erp/categorias" data-shell-link><b>Categorias ERP</b><small>Estrutura interna</small></a>
+          <a href="/erp/fornecedores" data-shell-link><b>Fornecedores</b><small>Cadastro de parceiros</small></a>
+          <a href="/erp/estoque" data-shell-link><b>Estoque</b><small>Saldos, movimentos e contagens</small></a>
+          <a href="/erp/compras" data-shell-link><b>Compras</b><small>Entradas, XML e fornecedores</small></a>
+          <a href="/erp/pdv" data-shell-link><b>PDV</b><small>Vendas, pagamentos e caixa</small></a>
+          <a href="/orcamentos" data-shell-link><b>Orçamentos</b><small>Propostas e cotações</small></a>
+          <a href="/erp/centro-operacoes" data-shell-link><b>Centro de Operações</b><small>Vendas, O.S. e histórico</small></a>
+          <a href="/erp/modulo/ordens-servico" data-shell-link><b>Ordens de Serviço</b><small>Assistência e garantias · planejado</small></a>
+        </div>
+        <div class="quality-erp-menu-group">
+          <span class="quality-erp-menu-title">Gestão</span>
+          <a href="/erp/precificacao" data-shell-link><b>Precificação Inteligente</b><small>Margens por categoria, produto e variação</small></a>
+          <a href="/erp/financeiro" data-shell-link><b>Financeiro</b><small>Visão geral e cadastros financeiros</small></a>
+          <a href="/erp/financeiro/fluxo-de-caixa" data-shell-link><b>Fluxo de Caixa</b><small>Realizado e previsto</small></a>
+          <a href="/erp/financeiro/dre" data-shell-link><b>DRE Inteligente</b><small>Resultado gerencial</small></a>
+          <a href="/erp/modulo/dfc" data-shell-link><b>DFC</b><small>Demonstração dos fluxos · planejado</small></a>
+          <a href="/erp/relatorios" data-shell-link><b>Relatórios</b><small>Vendas, produtos, estoque e gestão</small></a>
+          <a href="/erp/metas-comissoes" data-shell-link><b>Metas e Comissões</b><small>Metas, equipe e apuração</small></a>
+          <a href="/kernel" data-shell-link><b>Centro de Inteligência</b><small>Logs, eventos, auditoria e documentos</small></a>
+        </div>
       </div>
     </details>
 
@@ -167,16 +189,20 @@ window.QUALITY_EXPORT_BRAND=<%- JSON.stringify({ name:(typeof panelCompany !== '
       <label><input type="checkbox" value="clientes"> 👥 Clientes</label>
       <label><input type="checkbox" value="compras"> 🚚 Compras</label>
       <label><input type="checkbox" value="estoque"> 📚 Estoque</label>
+      <label><input type="checkbox" value="contagem"> 📋 Contagem de Estoque</label>
       <label><input type="checkbox" value="orcamentos"> 📝 Orçamentos</label>
       <label><input type="checkbox" value="produtos"> 📦 Produtos</label>
+      <label><input type="checkbox" value="categorias-erp"> 🗂️ Categorias ERP</label>
       <label><input type="checkbox" value="precificacao"> 🏷️ Precificação</label>
       <label><input type="checkbox" value="fornecedores"> 🏭 Fornecedores</label>
+      <label><input type="checkbox" value="financeiro"> 💰 Financeiro</label>
       <label><input type="checkbox" value="receber"> 📥 Contas a Receber</label>
       <label><input type="checkbox" value="pagar"> 📤 Contas a Pagar</label>
       <label><input type="checkbox" value="fluxo"> 📈 Fluxo de Caixa</label>
       <label><input type="checkbox" value="dre"> 📊 DRE</label>
       <label><input type="checkbox" value="relatorios"> 📋 Relatórios</label>
       <label><input type="checkbox" value="metas-comissoes"> 🎯 Metas e Comissões</label>
+      <label><input type="checkbox" value="historico"> 🕘 Histórico ERP</label>
       <label><input type="checkbox" value="site"> 🌐 Site</label>
       <label><input type="checkbox" value="produtos-site"> 🛍️ Produtos do site</label>
       <label><input type="checkbox" value="analytics"> 📊 Analytics</label>
@@ -242,7 +268,7 @@ window.QUALITY_EXPORT_BRAND=<%- JSON.stringify({ name:(typeof panelCompany !== '
   if(authBoot.user){
     document.querySelectorAll('a[href]').forEach(function(link){var permission=permissionForHref(link.getAttribute('href'));if(permission&&!authCan(permission))link.remove();});
     document.querySelectorAll('[data-auth-permission]').forEach(function(el){if(!authCan(el.getAttribute('data-auth-permission')))el.remove();});
-    var shortcutPermissions={pdv:'pdv.view',caixa:'cash.view',agenda:'agenda.view',inbox:'crm.inbox.view',centro:'operations.view',clientes:'customers.view',compras:'purchases.view',estoque:'inventory.view',orcamentos:'quotes.view',produtos:'products.view',precificacao:'products.view',fornecedores:'suppliers.view',receber:'finance.view',pagar:'finance.view',fluxo:'finance.view',dre:'finance.view',relatorios:'reports.view','metas-comissoes':'commissions.view',site:'site.view','produtos-site':'site.products.view',analytics:'analytics.view',marketing:'marketing.view',configuracoes:'settings.manage'};
+    var shortcutPermissions={pdv:'pdv.view',caixa:'cash.view',agenda:'agenda.view',inbox:'crm.inbox.view',centro:'operations.view',clientes:'customers.view',compras:'purchases.view',estoque:'inventory.view',contagem:'inventory.view',orcamentos:'quotes.view',produtos:'products.view','categorias-erp':'products.view',precificacao:'products.view',fornecedores:'suppliers.view',financeiro:'finance.view',receber:'finance.view',pagar:'finance.view',fluxo:'finance.view',dre:'finance.view',relatorios:'reports.view','metas-comissoes':'commissions.view',historico:'audit.view',site:'site.view','produtos-site':'site.products.view',analytics:'analytics.view',marketing:'marketing.view',configuracoes:'settings.manage'};
     document.querySelectorAll('[data-global-shortcuts-modal] label').forEach(function(label){var box=label.querySelector('input[value]');var permission=box&&shortcutPermissions[box.value];if(permission&&!authCan(permission))label.remove();});
     document.querySelectorAll('[data-shell-menu]').forEach(function(menu){if(!menu.querySelector('a'))menu.remove();});
   }

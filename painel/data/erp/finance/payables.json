@@ -2,6 +2,410 @@
   "version": "0.18.0",
   "items": [
     {
+      "id": "PAY-2f8df8ef-d99d-405f-b9b9-6abf5b5c152f",
+      "number": "CP-000079",
+      "supplierId": "FOR-1788433508863-8JVKS",
+      "supplierName": "Paulina Ledis Muller",
+      "entryType": "purchase",
+      "supplierDocument": "94464596053",
+      "description": "Compra COM-000024 · Paulina Ledis Muller",
+      "documentNumber": "COM-000024",
+      "origin": "purchase",
+      "originId": "PUR-738ab27b-6ed2-4672-810c-fe934e5c5766",
+      "issueDate": "2026-09-03",
+      "competenceDate": "2026-09-01",
+      "competencies": [
+        "2026-09"
+      ],
+      "grossValue": 150,
+      "discount": 0,
+      "interest": 0,
+      "fine": 0,
+      "netValue": 150,
+      "paidValue": 150,
+      "openBalance": 0,
+      "paymentMethodId": "PM-DINHEIRO",
+      "paymentPlan": [
+        {
+          "id": "PPL-5184243e-c9d7-4502-b829-37d5ea917d00",
+          "paymentMethodId": "PM-DINHEIRO",
+          "value": 150,
+          "installmentCount": 1,
+          "firstDueDate": "2026-09-03",
+          "installmentDueDates": [
+            "2026-09-03"
+          ],
+          "intervalMonths": 1
+        }
+      ],
+      "accountId": "ACC-10-01",
+      "costCenterId": "CC-CMV",
+      "categoryId": "CC-CMV",
+      "storeId": "",
+      "cashboxId": "caixa-principal",
+      "status": "paid",
+      "notes": "Gerado automaticamente pela compra COM-000024.",
+      "createdAt": "2026-09-03T11:05:39.150Z",
+      "createdBy": "Matheus Fernando",
+      "updatedAt": "2026-09-03T11:05:39.184Z",
+      "updatedBy": "Matheus Fernando"
+    },
+    {
+      "id": "PAY-33e0e76e-3b9c-46b5-9527-6d6e9df0161e",
+      "number": "CP-000078",
+      "supplierId": "FOR-1788432827304-SEQFM",
+      "supplierName": "kyx comercio produtos LTDA",
+      "entryType": "purchase",
+      "supplierDocument": "65446941000107",
+      "description": "Compra COM-000023 · kyx comercio produtos LTDA",
+      "documentNumber": "158301",
+      "origin": "purchase",
+      "originId": "PUR-659e964c-e702-4b75-a695-cf7fd43e8ea0",
+      "issueDate": "2026-08-25",
+      "competenceDate": "2026-08-01",
+      "competencies": [
+        "2026-08"
+      ],
+      "grossValue": 46.72,
+      "discount": 0,
+      "interest": 0,
+      "fine": 0,
+      "netValue": 46.72,
+      "paidValue": 0,
+      "openBalance": 46.72,
+      "paymentMethodId": "PAY-f67a5400-9f7b-4b8b-af7a-adff277d9169",
+      "paymentPlan": [
+        {
+          "id": "PPL-b9e472c4-bebc-413e-90f2-9a630d02fc0c",
+          "paymentMethodId": "PAY-f67a5400-9f7b-4b8b-af7a-adff277d9169",
+          "value": 46.72,
+          "installmentCount": 2,
+          "firstDueDate": "2026-09-23",
+          "installmentDueDates": [
+            "2026-09-23",
+            "2026-10-23"
+          ],
+          "intervalMonths": 1
+        }
+      ],
+      "accountId": "ACC-10-06",
+      "costCenterId": "CC-CMV",
+      "categoryId": "CC-CMV",
+      "storeId": "",
+      "cashboxId": "caixa-principal",
+      "status": "open",
+      "notes": "Gerado automaticamente pela compra COM-000023.",
+      "createdAt": "2026-09-03T10:54:51.921Z",
+      "createdBy": "Matheus Fernando",
+      "updatedAt": "2026-09-03T10:54:51.921Z",
+      "updatedBy": "Matheus Fernando"
+    },
+    {
+      "id": "PAY-a36e8a6c-f1af-4bad-b1fd-a3d8d8f3dbdf",
+      "number": "CP-000077",
+      "supplierId": "FOR-1788429770759-K6AV6",
+      "supplierName": "Joao Victor de Oliveira kunz",
+      "entryType": "purchase",
+      "supplierDocument": "04641179093",
+      "description": "Compra COM-000022 · Joao Victor de Oliveira kunz",
+      "documentNumber": "COM-000022",
+      "origin": "purchase",
+      "originId": "PUR-f773ad7b-602d-4dbb-90f9-9f1c6e834fea",
+      "issueDate": "2026-09-03",
+      "competenceDate": "2026-09-01",
+      "competencies": [
+        "2026-09"
+      ],
+      "grossValue": 1535,
+      "discount": 0,
+      "interest": 0,
+      "fine": 0,
+      "netValue": 1535,
+      "paidValue": 1535,
+      "openBalance": 0,
+      "paymentMethodId": "PM-DINHEIRO",
+      "paymentPlan": [
+        {
+          "id": "PPL-1d0874c4-d7ea-410e-b323-f618f15ec473",
+          "paymentMethodId": "PM-DINHEIRO",
+          "value": 1535,
+          "installmentCount": 1,
+          "firstDueDate": "2026-09-03",
+          "installmentDueDates": [
+            "2026-09-03"
+          ],
+          "intervalMonths": 1
+        }
+      ],
+      "accountId": "",
+      "costCenterId": "",
+      "categoryId": "",
+      "storeId": "",
+      "cashboxId": "caixa-principal",
+      "status": "paid",
+      "notes": "Gerado automaticamente pela compra COM-000022.",
+      "createdAt": "2026-09-03T10:03:47.233Z",
+      "createdBy": "Matheus Fernando",
+      "updatedAt": "2026-09-03T10:03:47.276Z",
+      "updatedBy": "Matheus Fernando"
+    },
+    {
+      "id": "PAY-0884d103-4fa5-4287-95b5-d37021c95940",
+      "number": "CP-000076",
+      "supplierId": "FOR-1787847948229-S8E6V",
+      "supplierName": "Fornecedores Diversos",
+      "entryType": "purchase",
+      "supplierDocument": "",
+      "description": "Compra COM-000021 · Fornecedores Diversos",
+      "documentNumber": "COM-000021",
+      "origin": "purchase",
+      "originId": "PUR-5166b328-659e-4a04-911c-6656e9ef0db8",
+      "issueDate": "2026-09-01",
+      "competenceDate": "2026-09-01",
+      "competencies": [
+        "2026-09"
+      ],
+      "grossValue": 96.72,
+      "discount": 0,
+      "interest": 0,
+      "fine": 0,
+      "netValue": 96.72,
+      "paidValue": 0,
+      "openBalance": 96.72,
+      "paymentMethodId": "PM-BOLETO",
+      "paymentPlan": [
+        {
+          "id": "PPL-c31082f2-a72c-47bd-a0b6-c9d3f75f27eb",
+          "paymentMethodId": "PM-BOLETO",
+          "value": 96.72,
+          "installmentCount": 1,
+          "firstDueDate": "2026-09-12",
+          "installmentDueDates": [
+            "2026-09-12"
+          ],
+          "intervalMonths": 1
+        }
+      ],
+      "accountId": "ACC-10-03",
+      "costCenterId": "CC-CMV",
+      "categoryId": "CC-CMV",
+      "storeId": "",
+      "cashboxId": "caixa-principal",
+      "status": "open",
+      "notes": "Gerado automaticamente pela compra COM-000021.",
+      "createdAt": "2026-09-01T16:44:06.280Z",
+      "createdBy": "Matheus Fernando",
+      "updatedAt": "2026-09-01T16:44:06.280Z",
+      "updatedBy": "Matheus Fernando"
+    },
+    {
+      "id": "PAY-ee116757-c1b1-4db8-ac68-1e9f5a99c198",
+      "number": "CP-000075",
+      "supplierId": "FOR-1788222552149-7APIU",
+      "supplierName": "GOLLDEN STORE LTDA",
+      "entryType": "purchase",
+      "supplierDocument": "49199499000105",
+      "description": "Compra COM-000020 · GOLLDEN STORE LTDA",
+      "documentNumber": "526132",
+      "origin": "purchase",
+      "originId": "PUR-51854599-0312-41aa-be3f-c67c4245dab5",
+      "issueDate": "2026-08-27",
+      "competenceDate": "2026-08-01",
+      "competencies": [
+        "2026-08"
+      ],
+      "grossValue": 19.99,
+      "discount": 0,
+      "interest": 0,
+      "fine": 0,
+      "netValue": 19.99,
+      "paidValue": 0,
+      "openBalance": 19.99,
+      "paymentMethodId": "PAY-f67a5400-9f7b-4b8b-af7a-adff277d9169",
+      "paymentPlan": [
+        {
+          "id": "PPL-2ebd3bad-fd19-4e91-9c62-0c0566ce308f",
+          "paymentMethodId": "PAY-f67a5400-9f7b-4b8b-af7a-adff277d9169",
+          "value": 19.99,
+          "installmentCount": 1,
+          "firstDueDate": "2026-09-23",
+          "installmentDueDates": [
+            "2026-09-23"
+          ],
+          "intervalMonths": 1
+        }
+      ],
+      "accountId": "",
+      "costCenterId": "",
+      "categoryId": "",
+      "storeId": "",
+      "cashboxId": "caixa-principal",
+      "status": "open",
+      "notes": "Gerado automaticamente pela compra COM-000020.",
+      "createdAt": "2026-09-01T00:30:01.106Z",
+      "createdBy": "Matheus Fernando",
+      "updatedAt": "2026-09-01T00:30:01.106Z",
+      "updatedBy": "Matheus Fernando"
+    },
+    {
+      "id": "PAY-1864b6b5-c53c-4134-ba83-3a872e2bd55c",
+      "number": "CP-000074",
+      "supplierId": "FOR-1787847948229-S8E6V",
+      "supplierName": "Fornecedores Diversos",
+      "entryType": "purchase",
+      "supplierDocument": "",
+      "description": "Compra COM-000019 · Fornecedores Diversos",
+      "documentNumber": "COM-000019",
+      "origin": "purchase",
+      "originId": "PUR-a0583c50-4a7a-470f-9ae0-52d87ce444d6",
+      "issueDate": "2026-08-31",
+      "competenceDate": "2026-08-31",
+      "competencies": [
+        "2026-08"
+      ],
+      "grossValue": 400,
+      "discount": 0,
+      "interest": 0,
+      "fine": 0,
+      "netValue": 400,
+      "paidValue": 400,
+      "openBalance": 0,
+      "paymentMethodId": "PM-DINHEIRO",
+      "paymentPlan": [
+        {
+          "id": "PPL-4a1a2243-a4a4-4731-b2e3-3581391835b0",
+          "paymentMethodId": "PM-DINHEIRO",
+          "value": 400,
+          "installmentCount": 1,
+          "firstDueDate": "2026-08-31",
+          "installmentDueDates": [
+            "2026-08-31"
+          ],
+          "intervalMonths": 1
+        }
+      ],
+      "accountId": "",
+      "costCenterId": "",
+      "categoryId": "",
+      "storeId": "",
+      "cashboxId": "caixa-principal",
+      "status": "paid",
+      "notes": "Gerado automaticamente pela compra COM-000019.",
+      "createdAt": "2026-09-01T00:28:07.425Z",
+      "createdBy": "Matheus Fernando",
+      "updatedAt": "2026-09-01T00:28:07.510Z",
+      "updatedBy": "Matheus Fernando"
+    },
+    {
+      "id": "PAY-ee32bc98-6ba5-4938-be2d-1b33450ed0f5",
+      "number": "CP-000073",
+      "supplierId": "FOR-1787847948229-S8E6V",
+      "supplierName": "Fornecedores Diversos",
+      "entryType": "purchase",
+      "supplierDocument": "",
+      "description": "Compra COM-000018 · Fornecedores Diversos",
+      "documentNumber": "COM-000018",
+      "origin": "purchase",
+      "originId": "PUR-569ce150-2e78-4d29-94d5-e3286491c7c8",
+      "issueDate": "2026-08-31",
+      "competenceDate": "2026-08-31",
+      "competencies": [
+        "2026-08"
+      ],
+      "grossValue": 250,
+      "discount": 0,
+      "interest": 0,
+      "fine": 0,
+      "netValue": 250,
+      "paidValue": 250,
+      "openBalance": 0,
+      "paymentMethodId": "PM-DINHEIRO",
+      "paymentPlan": [
+        {
+          "id": "PPL-84e698cf-5ce3-4493-8dda-8b78c3b0ff16",
+          "paymentMethodId": "PM-DINHEIRO",
+          "value": 250,
+          "installmentCount": 1,
+          "firstDueDate": "2026-08-31",
+          "installmentDueDates": [
+            "2026-08-31"
+          ],
+          "intervalMonths": 1
+        }
+      ],
+      "accountId": "ACC-10-07",
+      "costCenterId": "CC-CMV",
+      "categoryId": "CC-CMV",
+      "storeId": "",
+      "cashboxId": "caixa-principal",
+      "status": "paid",
+      "notes": "Gerado automaticamente pela compra COM-000018.",
+      "createdAt": "2026-09-01T00:22:51.973Z",
+      "createdBy": "Matheus Fernando",
+      "updatedAt": "2026-09-01T00:22:52.049Z",
+      "updatedBy": "Matheus Fernando"
+    },
+    {
+      "id": "PAY-fa54ac4f-8e7f-49b2-9d45-422b247cf8a2",
+      "number": "CP-000072",
+      "supplierId": "FOR-1788221985383-E66C3",
+      "supplierName": "vitoria silveira de souza",
+      "entryType": "purchase",
+      "supplierDocument": "05307912005",
+      "description": "Compra COM-000017 · vitoria silveira de souza",
+      "documentNumber": "COM-000017",
+      "origin": "purchase",
+      "originId": "PUR-e8b59cc3-a0c6-40c5-86ec-e82f9a8c7e2f",
+      "issueDate": "2026-08-31",
+      "competenceDate": "2026-08-31",
+      "competencies": [
+        "2026-08"
+      ],
+      "grossValue": 2550,
+      "discount": 0,
+      "interest": 0,
+      "fine": 0,
+      "netValue": 2550,
+      "paidValue": 2550,
+      "openBalance": 0,
+      "paymentMethodId": "PM-PIX",
+      "paymentPlan": [
+        {
+          "id": "PPL-76eed2ae-79e8-4c72-b490-115a63850d76",
+          "paymentMethodId": "PM-PIX",
+          "value": 2000,
+          "installmentCount": 1,
+          "firstDueDate": "2026-08-31",
+          "installmentDueDates": [
+            "2026-08-31"
+          ],
+          "intervalMonths": 1
+        },
+        {
+          "id": "PPL-0d5846dd-8443-4303-bd0f-0fa4ea50b096",
+          "paymentMethodId": "PM-DINHEIRO",
+          "value": 550,
+          "installmentCount": 1,
+          "firstDueDate": "2026-08-31",
+          "installmentDueDates": [
+            "2026-08-31"
+          ],
+          "intervalMonths": 1
+        }
+      ],
+      "accountId": "ACC-10-02",
+      "costCenterId": "CC-CMV",
+      "categoryId": "CC-CMV",
+      "storeId": "",
+      "cashboxId": "caixa-principal",
+      "status": "paid",
+      "notes": "Gerado automaticamente pela compra COM-000017.",
+      "createdAt": "2026-09-01T00:20:57.120Z",
+      "createdBy": "Matheus Fernando",
+      "updatedAt": "2026-09-01T00:20:57.256Z",
+      "updatedBy": "Matheus Fernando"
+    },
+    {
       "id": "PAY-30a3b168-023c-4f49-b714-07db143fba8c",
       "number": "CP-000071",
       "supplierId": "FOR-1787876357527-SGZSU",
@@ -4426,8 +4830,8 @@
       "notes": "",
       "createdAt": "2026-08-02T22:36:57.846Z",
       "createdBy": "painel",
-      "updatedAt": "2026-08-21T01:30:02.856Z",
-      "updatedBy": "painel"
+      "updatedAt": "2026-09-03T16:56:32.204Z",
+      "updatedBy": "Matheus Fernando"
     },
     {
       "id": "PAY-7eeebb45-41f4-4288-ab1e-e533af80ce53",

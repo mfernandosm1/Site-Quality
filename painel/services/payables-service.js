@@ -2,17 +2,17 @@ import fs from 'fs';
 import path from 'path';
 import crypto from 'crypto';
 import { matchesSearchText } from '../utils/search.js';
+import { businessDate, addBusinessDays, addBusinessMonths, businessMonthEnd } from '../utils/date-time.js';
 
 const clone = value => JSON.parse(JSON.stringify(value));
 const now = () => new Date().toISOString();
-const businessDate = (date=new Date()) => new Intl.DateTimeFormat('en-CA',{timeZone:'America/Sao_Paulo',year:'numeric',month:'2-digit',day:'2-digit'}).format(date);
 const clean = value => String(value ?? '').trim();
 const amount = value => Math.round((Number(value) || 0) * 100) / 100;
 const filterValues = value => {
   const source = Array.isArray(value) ? value : (value === undefined || value === null || value === '' ? [] : [value]);
   return [...new Set(source.map(clean).filter(Boolean))];
 };
-const dateOnly = value => clean(value) || businessDate();
+const dateOnly = value => clean(value) ? businessDate(value) : businessDate();
 const normalizeText = value => clean(value).normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/[^a-z0-9]+/g,' ').trim();
 const entryTypeOf = item => {
   const explicit = clean(item?.entryType).toLowerCase();
@@ -35,21 +35,9 @@ function normalizeCompetencies(payload={}) {
   return values.length?values:[businessDate().slice(0,7)];
 }
 
-function addDays(value, days) {
-  const date = new Date(`${dateOnly(value)}T12:00:00`);
-  date.setDate(date.getDate() + Number(days || 0));
-  return date.toISOString().slice(0, 10);
-}
+function addDays(value, days) { return addBusinessDays(dateOnly(value), days); }
 
-function addMonths(value, months) {
-  const date = new Date(`${dateOnly(value)}T12:00:00`);
-  const originalDay = date.getDate();
-  date.setDate(1);
-  date.setMonth(date.getMonth() + Number(months || 0));
-  const lastDay = new Date(date.getFullYear(), date.getMonth() + 1, 0).getDate();
-  date.setDate(Math.min(originalDay, lastDay));
-  return date.toISOString().slice(0, 10);
-}
+function addMonths(value, months) { return addBusinessMonths(dateOnly(value), months); }
 
 export default class PayablesService {
   constructor({ dataDir, financeService, supplierService, commerceService }) {
@@ -158,7 +146,7 @@ export default class PayablesService {
     const term=clean(filters.search);
     const today=businessDate();
     const monthStart=`${today.slice(0,7)}-01`;
-    const monthEnd=new Date(`${monthStart}T12:00:00`); monthEnd.setMonth(monthEnd.getMonth()+1); monthEnd.setDate(0);
+    const monthEnd=businessMonthEnd(today);
     return withCurrentSupplier.filter(item=>{
       const rows=installments.filter(row=>row.payableId===item.id);
       const itemPayments=payments.filter(row=>row.payableId===item.id&&row.status!=='reversed');
@@ -184,9 +172,9 @@ export default class PayablesService {
       if (paymentMethodIds.length && !paymentMethodIds.includes(clean(item.paymentMethodId)) && !installments.some(row=>row.payableId===item.id&&paymentMethodIds.includes(clean(row.paymentMethodId)))) return false;
       if (costCenterIds.length && !costCenterIds.includes(clean(item.costCenterId))) return false;
       if (accountIds.length && !accountIds.includes(clean(item.accountId))) return false;
-      const paymentDates=itemPayments.map(row=>clean(row.paidAt||row.createdAt).slice(0,10)).filter(Boolean);
+      const paymentDates=itemPayments.map(row=>row.paidAt?businessDate(row.paidAt):businessDate(row.createdAt)).filter(Boolean);
       const openDates=rows.filter(row=>Number(row.openBalance||0)>0).map(row=>row.dueDate).filter(Boolean);
-      const allDueDates=rows.filter(row=>!['cancelled','reversed'].includes(clean(row.status).toLowerCase())).map(row=>clean(row.dueDate).slice(0,10)).filter(Boolean);
+      const allDueDates=rows.filter(row=>!['cancelled','reversed'].includes(clean(row.status).toLowerCase())).map(row=>businessDate(row.dueDate)).filter(Boolean);
       const filterByPaymentDate=filters.status==='paid'||filters.view==='paid';
       const relevantDates=filterByPaymentDate?paymentDates:(filters.view==='all'?[...paymentDates,...openDates]:openDates);
       if (filters.status==='overdue' && !openDates.some(value=>value<today)) return false;
@@ -195,11 +183,11 @@ export default class PayablesService {
       if (filters.duePreset==='today' && !relevantDates.includes(today)) return false;
       if (filters.duePreset==='overdue' && !openDates.some(value=>value<today)) return false;
       if (filters.duePreset==='next7' && !relevantDates.some(value=>value>=today&&value<=addDays(today,7))) return false;
-      if (filters.duePreset==='month' && !relevantDates.some(value=>value>=monthStart&&value<=monthEnd.toISOString().slice(0,10))) return false;
+      if (filters.duePreset==='month' && !relevantDates.some(value=>value>=monthStart&&value<=monthEnd)) return false;
       if (filters.duePreset==='nextMonth') {
-        const nextStart=new Date(`${monthStart}T12:00:00`); nextStart.setMonth(nextStart.getMonth()+1);
-        const nextEnd=new Date(nextStart); nextEnd.setMonth(nextEnd.getMonth()+1); nextEnd.setDate(0);
-        if (!relevantDates.some(value=>value>=nextStart.toISOString().slice(0,10)&&value<=nextEnd.toISOString().slice(0,10))) return false;
+        const nextStart=addBusinessMonths(monthStart,1).slice(0,7)+'-01';
+        const nextEnd=businessMonthEnd(nextStart);
+        if (!relevantDates.some(value=>value>=nextStart&&value<=nextEnd)) return false;
       }
       if (filters.duePreset==='thisWeek' && !relevantDates.some(value=>value>=today&&value<=addDays(today,7))) return false;
       if (!matchesSearchText([item.number,item.supplierName,item.description,item.documentNumber].join(' '),term)) return false;
@@ -209,14 +197,14 @@ export default class PayablesService {
       const itemInstallments=installments.filter(row=>row.payableId===item.id&&!['cancelled','reversed'].includes(clean(row.status).toLowerCase()));
       const latestPayment=[...itemPayments].sort((a,b)=>String(b.paidAt||b.createdAt||'').localeCompare(String(a.paidAt||a.createdAt||'')))[0];
       const matchesDate=date=>{
-        const value=clean(date).slice(0,10); if(!value) return false;
+        const value=businessDate(date); if(!value) return false;
         if(filters.dueFrom&&value<filters.dueFrom) return false;
         if(filters.dueTo&&value>filters.dueTo) return false;
         if(filters.duePreset==='today'&&value!==today) return false;
         if(filters.duePreset==='overdue'&&value>=today) return false;
         if((filters.duePreset==='next7'||filters.duePreset==='thisWeek')&&(value<today||value>addDays(today,7))) return false;
-        if(filters.duePreset==='month'&&(value<monthStart||value>monthEnd.toISOString().slice(0,10))) return false;
-        if(filters.duePreset==='nextMonth') { const a=new Date(`${monthStart}T12:00:00`);a.setMonth(a.getMonth()+1);const b=new Date(a);b.setMonth(b.getMonth()+1);b.setDate(0);if(value<a.toISOString().slice(0,10)||value>b.toISOString().slice(0,10))return false; }
+        if(filters.duePreset==='month'&&(value<monthStart||value>monthEnd)) return false;
+        if(filters.duePreset==='nextMonth') { const a=addBusinessMonths(monthStart,1).slice(0,7)+'-01';const b=businessMonthEnd(a);if(value<a||value>b)return false; }
         return true;
       };
       const hasDateFilter=Boolean(filters.dueFrom||filters.dueTo||filters.duePreset);
@@ -252,7 +240,7 @@ export default class PayablesService {
       const displayInstallments=(filters.view==='active'&&hasDateFilter)
         ? itemInstallments.filter(row=>Number(row.openBalance||0)>0&&matchesDate(row.dueDate))
         : itemInstallments;
-      return { ...item, installments:displayInstallments, latestPaymentDate:clean(latestPayment?.paidAt||latestPayment?.createdAt).slice(0,10), paymentCount:itemPayments.length, visibleValue, visibleInstallmentCount };
+      return { ...item, installments:displayInstallments, latestPaymentDate:latestPayment?(latestPayment.paidAt?businessDate(latestPayment.paidAt):businessDate(latestPayment.createdAt)):'', paymentCount:itemPayments.length, visibleValue, visibleInstallmentCount };
     })
       .sort((a,b)=>String(b.createdAt).localeCompare(String(a.createdAt)));
   }
@@ -297,21 +285,21 @@ export default class PayablesService {
     const activeIds=new Set(eligibleTitles.filter(item=>['open','partial'].includes(item.status)).map(item=>item.id));
 
     const monthStart=`${today.slice(0,7)}-01`;
-    const monthEndDate=new Date(`${monthStart}T12:00:00`); monthEndDate.setMonth(monthEndDate.getMonth()+1); monthEndDate.setDate(0);
+    const monthEndDate=businessMonthEnd(today);
     let periodFrom=clean(filters.dueFrom), periodTo=clean(filters.dueTo);
     if (!periodFrom && !periodTo) {
       if (filters.duePreset==='today') periodFrom=periodTo=today;
       else if (filters.duePreset==='overdue') periodTo=addDays(today,-1);
       else if (filters.duePreset==='next7' || filters.duePreset==='thisWeek') { periodFrom=today; periodTo=addDays(today,7); }
-      else if (filters.duePreset==='month') { periodFrom=monthStart; periodTo=monthEndDate.toISOString().slice(0,10); }
+      else if (filters.duePreset==='month') { periodFrom=monthStart; periodTo=monthEndDate; }
       else if (filters.duePreset==='nextMonth') {
-        const nextStart=new Date(`${monthStart}T12:00:00`); nextStart.setMonth(nextStart.getMonth()+1);
-        const nextEnd=new Date(nextStart); nextEnd.setMonth(nextEnd.getMonth()+1); nextEnd.setDate(0);
-        periodFrom=nextStart.toISOString().slice(0,10); periodTo=nextEnd.toISOString().slice(0,10);
+        const nextStart=addBusinessMonths(monthStart,1).slice(0,7)+'-01';
+        const nextEnd=businessMonthEnd(nextStart);
+        periodFrom=nextStart; periodTo=nextEnd;
       }
     }
     const inPeriod=date=>{
-      const value=clean(date).slice(0,10);
+      const value=businessDate(date);
       if (!value) return false;
       if (periodFrom && value<periodFrom) return false;
       if (periodTo && value>periodTo) return false;
@@ -323,7 +311,7 @@ export default class PayablesService {
     // Sem filtro de período, "Pagos no período" usa o mês corrente. Com um filtro
     // ativo, usa exatamente a mesma janela selecionada pelo operador.
     const paymentRows=validPayments.filter(row=>{
-      const paidDate=clean(row.paidAt||row.createdAt).slice(0,10);
+      const paidDate=row.paidAt?businessDate(row.paidAt):businessDate(row.createdAt);
       return hasPeriod ? inPeriod(paidDate) : paidDate.slice(0,7)===today.slice(0,7);
     });
     // Total do período = tudo que efetivamente pertence ao período operacional:
@@ -331,9 +319,9 @@ export default class PayablesService {
     // (2) parcelas ainda em aberto com vencimento dentro da janela.
     // Usamos o installmentId para não duplicar uma parcela parcialmente paga.
     const totalPeriodFrom=hasPeriod?periodFrom:monthStart;
-    const totalPeriodTo=hasPeriod?periodTo:monthEndDate.toISOString().slice(0,10);
+    const totalPeriodTo=hasPeriod?periodTo:monthEndDate;
     const inTotalPeriod=date=>{
-      const value=clean(date).slice(0,10);
+      const value=businessDate(date);
       if(!value)return false;
       if(totalPeriodFrom&&value<totalPeriodFrom)return false;
       if(totalPeriodTo&&value>totalPeriodTo)return false;

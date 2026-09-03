@@ -1,6 +1,158 @@
 {
   "items": [
     {
+      "id": "PRD-1788432848210",
+      "name": "Tampa Traseira Compativel Com A36 5g A366 Preto",
+      "slug": "tampa-traseira-compativel-com-a36-5g-a366-preto",
+      "active": false,
+      "siteEnabled": false,
+      "erp": {
+        "active": true,
+        "categoryId": "ERP-CAT-4",
+        "category": "assistencia-tecnica",
+        "categoryName": "Assistência Técnica",
+        "ncm": "85176262",
+        "fiscal": {
+          "ncm": "85176262"
+        },
+        "internalCode": "PRD-975"
+      },
+      "virtualStore": {
+        "name": "Tampa Traseira Compativel Com A36 5g A366 Preto",
+        "price": 0,
+        "active": false,
+        "channels": {
+          "lojaVirtual": {
+            "enabled": false
+          },
+          "mercadoLivre": {
+            "enabled": false
+          },
+          "shopee": {
+            "enabled": false
+          },
+          "amazon": {
+            "enabled": false
+          },
+          "magalu": {
+            "enabled": false
+          }
+        }
+      },
+      "code": "PRD-975",
+      "sku": "MLB4190712917",
+      "barcode": "",
+      "ncm": "85176262",
+      "price": 0,
+      "stock": 0,
+      "commercial": {
+        "costPrice": 46.72,
+        "erpPrice": 0,
+        "salePrice": 0,
+        "cashPrice": 0,
+        "installmentPrice": 0
+      },
+      "inventory": {
+        "itemId": "PRD-1788432848210",
+        "stockControlled": true,
+        "allowNegative": false,
+        "minimumQuantity": 0,
+        "channelAvailability": {
+          "site": {
+            "mode": "disabled",
+            "enabled": false,
+            "limit": null,
+            "physicalSafety": 0
+          }
+        }
+      },
+      "inventoryBalance": {
+        "inventoryItemId": "PRD-1788432848210",
+        "locationId": "loja-principal",
+        "physicalQuantity": 0,
+        "reservedQuantity": 0,
+        "availableQuantity": 0,
+        "minimumQuantity": 0,
+        "updatedAt": "2026-09-03T10:56:04.050Z"
+      }
+    },
+    {
+      "id": "PRD-1788222564961",
+      "name": "Mouse Sem Fio Recarregavel Bluetooth Wireless Ergonomico",
+      "slug": "mouse-sem-fio-recarregavel-bluetooth-wireless-ergonomico",
+      "active": false,
+      "siteEnabled": false,
+      "erp": {
+        "active": true,
+        "categoryId": "ERP-CAT-2",
+        "category": "acessorios",
+        "categoryName": "Acessórios",
+        "ncm": "84716053",
+        "fiscal": {
+          "ncm": "84716053"
+        },
+        "internalCode": "PRD-971"
+      },
+      "virtualStore": {
+        "name": "Mouse Sem Fio Recarregavel Bluetooth Wireless Ergonomico",
+        "price": 0,
+        "active": false,
+        "channels": {
+          "lojaVirtual": {
+            "enabled": false
+          },
+          "mercadoLivre": {
+            "enabled": false
+          },
+          "shopee": {
+            "enabled": false
+          },
+          "amazon": {
+            "enabled": false
+          },
+          "magalu": {
+            "enabled": false
+          }
+        }
+      },
+      "code": "PRD-971",
+      "sku": "mouse",
+      "barcode": "7895875887787",
+      "ncm": "84716053",
+      "price": 0,
+      "stock": 0,
+      "commercial": {
+        "costPrice": 19.99,
+        "erpPrice": 0,
+        "salePrice": 0,
+        "cashPrice": 0,
+        "installmentPrice": 0
+      },
+      "inventory": {
+        "itemId": "PRD-1788222564961",
+        "stockControlled": true,
+        "allowNegative": false,
+        "minimumQuantity": 0,
+        "channelAvailability": {
+          "site": {
+            "mode": "disabled",
+            "enabled": false,
+            "limit": null,
+            "physicalSafety": 0
+          }
+        }
+      },
+      "inventoryBalance": {
+        "inventoryItemId": "PRD-1788222564961",
+        "locationId": "loja-principal",
+        "physicalQuantity": 0,
+        "reservedQuantity": 0,
+        "availableQuantity": 0,
+        "minimumQuantity": 0,
+        "updatedAt": "2026-09-01T00:32:11.394Z"
+      }
+    },
+    {
       "id": "PRD-1787424502292",
       "name": "Cabo Tipo C 1m CB-C100WH C3 Tech - Branco",
       "slug": "cabo-tipo-c-1m-cb-c100wh-c3-tech-branco",
@@ -138,7 +290,7 @@
         "reservedQuantity": 0,
         "availableQuantity": 0,
         "minimumQuantity": 0,
-        "updatedAt": "2026-08-24T13:57:26.823Z"
+        "updatedAt": "2026-09-01T01:14:15.030Z"
       }
     },
     {
@@ -7118,7 +7270,7 @@
       "tags": [],
       "relatedManualIds": [],
       "crossSellIds": [],
-      "showVariationsOnCard": false,
+      "showVariationsOnCard": true,
       "variations": {
         "enabled": true,
         "colors": [
@@ -7160,6 +7312,8 @@
             "image": "",
             "stock": 0,
             "erpPrice": null,
+            "costPrice": null,
+            "desiredMarginPercent": null,
             "inventoryItemId": "VAR-1763504404711-1"
           },
           {
@@ -7170,6 +7324,8 @@
             "image": "",
             "stock": 0,
             "erpPrice": null,
+            "costPrice": null,
+            "desiredMarginPercent": null,
             "inventoryItemId": "VAR-1763504404711-2"
           },
           {
@@ -7180,6 +7336,8 @@
             "image": "",
             "stock": 0,
             "erpPrice": null,
+            "costPrice": null,
+            "desiredMarginPercent": null,
             "inventoryItemId": "VAR-1763504404711-3"
           },
           {
@@ -7190,6 +7348,8 @@
             "image": "",
             "stock": 0,
             "erpPrice": null,
+            "costPrice": null,
+            "desiredMarginPercent": null,
             "inventoryItemId": "VAR-1763504404711-4"
           },
           {
@@ -7200,6 +7360,8 @@
             "image": "",
             "stock": 0,
             "erpPrice": null,
+            "costPrice": null,
+            "desiredMarginPercent": null,
             "inventoryItemId": "VAR-1763504404711-5"
           }
         ],
@@ -7209,12 +7371,26 @@
         "ramText": "",
         "conditionText": "",
         "labelsText": "{}",
-        "combinationsText": "Preto\nBranco\nUltramarine\nRosa\nVerde Acizentado"
+        "combinationsText": "Preto|||||0\nBranco|||||0\nUltramarine|||||0\nRosa|||||0\nVerde Acizentado|||||0"
       },
       "erp": {
         "internalCode": "PRD-11",
         "categoryId": "ERP-CAT-1",
-        "category": "smartphones"
+        "category": "smartphones",
+        "sku": "",
+        "supplierCode": "",
+        "searchAlias": "",
+        "barcode": "",
+        "ncm": "",
+        "fiscal": {
+          "ncm": ""
+        },
+        "brand": "",
+        "unit": "UN",
+        "subcategory": "",
+        "mainSupplierId": "",
+        "preferredSupplierId": "",
+        "active": true
       },
       "code": "PRD-11",
       "inventory": {
@@ -7236,6 +7412,53 @@
         "availableQuantity": 0,
         "reservedQuantity": 0,
         "derivedFromVariations": true
+      },
+      "sku": "",
+      "barcode": "",
+      "ncm": "",
+      "brand": "",
+      "commercial": {
+        "costPrice": null,
+        "erpPrice": null,
+        "salePrice": null,
+        "marketplacePrice": null,
+        "promotionalPrice": null,
+        "desiredMarginPercent": null,
+        "expectedProfit": null,
+        "defaultCommissionPercent": null,
+        "cashPrice": null,
+        "installmentPrice": null,
+        "minimumPrice": null,
+        "minimumMarginPercent": null,
+        "discountPolicy": "inherit",
+        "maximumDiscountPercent": null,
+        "maximumDiscountAmount": null,
+        "requiresAuthorization": false
+      },
+      "subcategory": "",
+      "virtualStore": {
+        "name": "Iphone 16 128gb novo lacrado",
+        "price": null,
+        "active": true,
+        "seoTitle": "",
+        "seoDescription": "",
+        "channels": {
+          "lojaVirtual": {
+            "enabled": true
+          },
+          "mercadoLivre": {
+            "enabled": false
+          },
+          "shopee": {
+            "enabled": false
+          },
+          "amazon": {
+            "enabled": false
+          },
+          "magalu": {
+            "enabled": false
+          }
+        }
       }
     },
     {
@@ -9379,7 +9602,7 @@
         "reservedQuantity": 0,
         "availableQuantity": 0,
         "minimumQuantity": 0,
-        "updatedAt": "2026-08-16T00:18:28.078Z"
+        "updatedAt": "2026-08-31T19:06:28.676Z"
       },
       "stock": 0,
       "sku": "",
@@ -11848,7 +12071,7 @@
       "name": "Chip Vivo Pré Pago",
       "slug": "chip-vivo-pre-pago",
       "price": null,
-      "stock": 31,
+      "stock": 29,
       "image": "images/Chip_vivo.jpeg",
       "gallery": [],
       "category": "acessorios",
@@ -11957,11 +12180,11 @@
       "inventoryBalance": {
         "inventoryItemId": "PRD-1783337681331",
         "locationId": "loja-principal",
-        "physicalQuantity": 31,
+        "physicalQuantity": 29,
         "reservedQuantity": 0,
-        "availableQuantity": 31,
+        "availableQuantity": 29,
         "minimumQuantity": 0,
-        "updatedAt": "2026-08-18T18:52:22.290Z"
+        "updatedAt": "2026-09-03T10:46:45.847Z"
       }
     },
     {
@@ -17289,7 +17512,7 @@
       "brand": "APPLE",
       "slug": "iphone-15-128gb-usado",
       "price": 3399.99,
-      "stock": 0,
+      "stock": 1,
       "image": "images/produtos/1787530543342-iphone-15-usado-pt.jpeg",
       "gallery": [
         "images/produtos/1788048065239-iphone-15-usado-azul.jpeg"
@@ -17413,9 +17636,9 @@
             "ram": "",
             "condition": "",
             "image": "",
-            "stock": 0,
-            "erpPrice": null,
-            "costPrice": 2900,
+            "stock": 1,
+            "erpPrice": 3499.99,
+            "costPrice": 2550,
             "desiredMarginPercent": null,
             "inventoryItemId": "VAR-1786326111943-11884-5"
           }
@@ -17426,7 +17649,7 @@
         "ramText": "",
         "conditionText": "",
         "labelsText": "{}",
-        "combinationsText": "Preto|||||0||2900\nAzul|||||0||2900"
+        "combinationsText": "Preto|||||0||2900\nAzul|||||1|3499.99|2550"
       },
       "integrations": {
         "wm10": {
@@ -17540,8 +17763,8 @@
         "familyImportedAt": "2026-08-10T01:41:51.944Z"
       },
       "inventoryBalance": {
-        "physicalQuantity": 0,
-        "availableQuantity": 0,
+        "physicalQuantity": 1,
+        "availableQuantity": 1,
         "reservedQuantity": 0,
         "derivedFromVariations": true
       },
@@ -34032,7 +34255,7 @@
       "brand": "SemMarca",
       "slug": "figurinhas-da-copa",
       "price": 10,
-      "stock": 2,
+      "stock": 23,
       "image": "",
       "gallery": [],
       "category": "",
@@ -34044,21 +34267,22 @@
       "featured": false,
       "active": false,
       "commercial": {
-        "costPrice": 0,
+        "costPrice": 4.03,
         "erpPrice": 10,
         "marketplacePrice": null,
         "promotionalPrice": null,
         "desiredMarginPercent": null,
         "expectedProfit": null,
         "defaultCommissionPercent": null,
-        "cashPrice": null,
-        "installmentPrice": null,
+        "cashPrice": 10,
+        "installmentPrice": 10,
         "minimumPrice": null,
         "minimumMarginPercent": null,
         "discountPolicy": "inherit",
         "maximumDiscountPercent": null,
         "maximumDiscountAmount": null,
-        "requiresAuthorization": false
+        "requiresAuthorization": false,
+        "salePrice": 10
       },
       "erp": {
         "sku": "",
@@ -34168,11 +34392,11 @@
       "inventoryBalance": {
         "inventoryItemId": "PRD-1786499862209",
         "locationId": "loja-principal",
-        "physicalQuantity": 2,
+        "physicalQuantity": 23,
         "reservedQuantity": 0,
-        "availableQuantity": 2,
+        "availableQuantity": 23,
         "minimumQuantity": 0,
-        "updatedAt": "2026-08-25T19:05:37.468Z"
+        "updatedAt": "2026-09-01T16:44:39.153Z"
       }
     },
     {
@@ -35591,7 +35815,7 @@
       "brand": "XIAOMI",
       "slug": "pelicula-xiaomi-redmi-13c",
       "price": 51.99,
-      "stock": 8,
+      "stock": 7,
       "image": "",
       "gallery": [],
       "category": "",
@@ -35710,7 +35934,7 @@
             "ram": "",
             "condition": "",
             "image": "0",
-            "stock": 8,
+            "stock": 7,
             "erpPrice": null,
             "inventoryItemId": "VAR-1786635812504-9804-2"
           }
@@ -35795,8 +36019,8 @@
         "familyImportedAt": "2026-08-13T15:43:32.505Z"
       },
       "inventoryBalance": {
-        "physicalQuantity": 8,
-        "availableQuantity": 8,
+        "physicalQuantity": 7,
+        "availableQuantity": 7,
         "reservedQuantity": 0,
         "derivedFromVariations": true
       }
@@ -50857,7 +51081,7 @@
       "brand": "KAPBOM",
       "slug": "cabo-usb-kapbom-v8-1m",
       "price": 27.99,
-      "stock": 25,
+      "stock": 24,
       "image": "",
       "gallery": [],
       "category": "",
@@ -50994,11 +51218,11 @@
       "inventoryBalance": {
         "inventoryItemId": "PRD-1786891729664",
         "locationId": "loja-principal",
-        "physicalQuantity": 25,
+        "physicalQuantity": 24,
         "reservedQuantity": 0,
-        "availableQuantity": 25,
+        "availableQuantity": 24,
         "minimumQuantity": 0,
-        "updatedAt": "2026-08-24T14:08:10.811Z"
+        "updatedAt": "2026-09-02T20:10:37.139Z"
       }
     },
     {
@@ -51902,7 +52126,7 @@
       "brand": "Sem Marca",
       "slug": "fonte-usb-a-gold-30w",
       "price": 64.99,
-      "stock": 1,
+      "stock": 0,
       "image": "",
       "gallery": [],
       "category": "",
@@ -52046,11 +52270,11 @@
       "inventoryBalance": {
         "inventoryItemId": "PRD-1786892708212",
         "locationId": "loja-principal",
-        "physicalQuantity": 1,
+        "physicalQuantity": 0,
         "reservedQuantity": 0,
-        "availableQuantity": 1,
+        "availableQuantity": 0,
         "minimumQuantity": 0,
-        "updatedAt": "2026-08-22T18:46:23.078Z"
+        "updatedAt": "2026-09-02T20:10:37.128Z"
       }
     },
     {
@@ -69548,7 +69772,7 @@
       "brand": "MOTOROLA",
       "slug": "capa-motorola-moto-g54-anti-impacto-transp",
       "price": 39.99,
-      "stock": 2,
+      "stock": 1,
       "image": "",
       "gallery": [],
       "category": "",
@@ -69685,11 +69909,11 @@
       "inventoryBalance": {
         "inventoryItemId": "PRD-1786927467534",
         "locationId": "loja-principal",
-        "physicalQuantity": 2,
+        "physicalQuantity": 1,
         "reservedQuantity": 0,
-        "availableQuantity": 2,
+        "availableQuantity": 1,
         "minimumQuantity": 0,
-        "updatedAt": "2026-08-18T00:31:03.516Z"
+        "updatedAt": "2026-09-03T18:53:25.930Z"
       }
     },
     {
@@ -89949,7 +90173,7 @@
         "maximumDiscountAmount": null,
         "requiresAuthorization": false
       },
-      "stock": 1,
+      "stock": 0,
       "inventory": {
         "itemId": "PRD-1786976538972",
         "stockControlled": true,
@@ -90036,11 +90260,11 @@
       "inventoryBalance": {
         "inventoryItemId": "PRD-1786976538972",
         "locationId": "loja-principal",
-        "physicalQuantity": 1,
+        "physicalQuantity": 0,
         "reservedQuantity": 0,
-        "availableQuantity": 1,
+        "availableQuantity": 0,
         "minimumQuantity": 0,
-        "updatedAt": "2026-08-18T00:31:03.517Z"
+        "updatedAt": "2026-09-03T15:01:43.843Z"
       }
     },
     {
@@ -93723,7 +93947,7 @@
       "brand": "APPLE",
       "slug": "pelicula-apple-iphone-15-pro-3d-preta",
       "price": 49.99,
-      "stock": 1,
+      "stock": 0,
       "image": "",
       "gallery": [],
       "category": "",
@@ -93859,11 +94083,11 @@
       "inventoryBalance": {
         "inventoryItemId": "PRD-1786982896669",
         "locationId": "loja-principal",
-        "physicalQuantity": 1,
+        "physicalQuantity": 0,
         "reservedQuantity": 0,
-        "availableQuantity": 1,
+        "availableQuantity": 0,
         "minimumQuantity": 0,
-        "updatedAt": "2026-08-18T00:31:03.517Z"
+        "updatedAt": "2026-09-03T15:01:43.836Z"
       }
     },
     {
@@ -118415,7 +118639,7 @@
         "maximumDiscountAmount": null,
         "requiresAuthorization": false
       },
-      "stock": 9997,
+      "stock": 9996,
       "inventory": {
         "itemId": "PRD-1787315788909",
         "stockControlled": true,
@@ -118502,11 +118726,11 @@
       "inventoryBalance": {
         "inventoryItemId": "PRD-1787315788909",
         "locationId": "loja-principal",
-        "physicalQuantity": 9997,
+        "physicalQuantity": 9996,
         "reservedQuantity": 0,
-        "availableQuantity": 9997,
+        "availableQuantity": 9996,
         "minimumQuantity": 0,
-        "updatedAt": "2026-08-29T18:35:35.843Z"
+        "updatedAt": "2026-09-03T10:46:45.856Z"
       }
     },
     {
@@ -122630,16 +122854,16 @@
       "slug": "notebook-usado-acer-aspire-3-a315-53-intel-core-i3-7020u-4gb-ram-hd-1tb-15-6-w10",
       "price": null,
       "commercial": {
-        "costPrice": null,
-        "erpPrice": null,
-        "salePrice": null,
+        "costPrice": 250,
+        "erpPrice": 1599,
+        "salePrice": 1599,
         "marketplacePrice": null,
         "promotionalPrice": null,
         "desiredMarginPercent": null,
         "expectedProfit": null,
         "defaultCommissionPercent": null,
-        "cashPrice": null,
-        "installmentPrice": null,
+        "cashPrice": 1599,
+        "installmentPrice": 1599,
         "minimumPrice": null,
         "minimumMarginPercent": null,
         "discountPolicy": "inherit",
@@ -122647,7 +122871,7 @@
         "maximumDiscountAmount": null,
         "requiresAuthorization": false
       },
-      "stock": 0,
+      "stock": 1,
       "inventory": {
         "itemId": "PRD-1788051985361",
         "stockControlled": true,
@@ -122688,7 +122912,7 @@
         "subcategory": "",
         "mainSupplierId": "",
         "preferredSupplierId": "",
-        "active": false,
+        "active": true,
         "categoryId": "ERP-CAT-3"
       },
       "virtualStore": {
@@ -122738,11 +122962,11 @@
       "inventoryBalance": {
         "inventoryItemId": "PRD-1788051985361",
         "locationId": "loja-principal",
-        "physicalQuantity": 0,
+        "physicalQuantity": 1,
         "reservedQuantity": 0,
-        "availableQuantity": 0,
+        "availableQuantity": 1,
         "minimumQuantity": 0,
-        "updatedAt": "2026-08-30T01:08:09.691Z"
+        "updatedAt": "2026-09-01T00:22:51.949Z"
       },
       "updatedAt": "2026-08-30T01:07:33.520Z"
     },
@@ -139784,6 +140008,1006 @@
         "reservedQuantity": 0,
         "derivedFromVariations": true
       }
+    },
+    {
+      "name": "Notebook Usado LG S460 Core i3 6gb ram SSD 240gb",
+      "sku": "",
+      "code": "PRD-970",
+      "barcode": "",
+      "ncm": "84713012",
+      "brand": "",
+      "slug": "notebook-usado-lg-s460-core-i3-6gb-ram-ssd-240gb",
+      "price": null,
+      "commercial": {
+        "costPrice": 400,
+        "erpPrice": 0,
+        "salePrice": 0,
+        "marketplacePrice": null,
+        "promotionalPrice": null,
+        "desiredMarginPercent": null,
+        "expectedProfit": null,
+        "defaultCommissionPercent": null,
+        "cashPrice": 0,
+        "installmentPrice": 0,
+        "minimumPrice": null,
+        "minimumMarginPercent": null,
+        "discountPolicy": "inherit",
+        "maximumDiscountPercent": null,
+        "maximumDiscountAmount": null,
+        "requiresAuthorization": false
+      },
+      "stock": 1,
+      "inventory": {
+        "itemId": "PRD-1788222458461",
+        "stockControlled": true,
+        "allowNegative": false,
+        "minimumQuantity": 0,
+        "channelAvailability": {
+          "site": {
+            "mode": "shared",
+            "enabled": true,
+            "limit": null,
+            "physicalSafety": 0
+          }
+        }
+      },
+      "image": "",
+      "gallery": [],
+      "category": "",
+      "subcategory": "",
+      "tags": [],
+      "relatedManualIds": [],
+      "crossSellIds": [],
+      "showPrice": true,
+      "featured": false,
+      "active": false,
+      "erp": {
+        "sku": "",
+        "internalCode": "PRD-970",
+        "supplierCode": "",
+        "searchAlias": "",
+        "barcode": "",
+        "ncm": "84713012",
+        "fiscal": {
+          "ncm": "84713012"
+        },
+        "brand": "",
+        "unit": "UN",
+        "category": "eletronicos",
+        "subcategory": "",
+        "mainSupplierId": "",
+        "preferredSupplierId": "",
+        "active": true,
+        "categoryId": "ERP-CAT-3"
+      },
+      "virtualStore": {
+        "name": "",
+        "price": null,
+        "active": false,
+        "seoTitle": "",
+        "seoDescription": "",
+        "channels": {
+          "lojaVirtual": {
+            "enabled": false
+          },
+          "mercadoLivre": {
+            "enabled": false
+          },
+          "shopee": {
+            "enabled": false
+          },
+          "amazon": {
+            "enabled": false
+          },
+          "magalu": {
+            "enabled": false
+          }
+        }
+      },
+      "detailsEnabled": false,
+      "showVariationsOnCard": false,
+      "descriptionShort": "",
+      "descriptionLong": "",
+      "variations": {
+        "enabled": false,
+        "colors": [],
+        "storage": [],
+        "ram": [],
+        "condition": [],
+        "combinations": [],
+        "labels": {},
+        "colorsText": "",
+        "storageText": "",
+        "ramText": "",
+        "conditionText": "",
+        "labelsText": "{}",
+        "combinationsText": ""
+      },
+      "id": 1788222458461,
+      "inventoryBalance": {
+        "inventoryItemId": "PRD-1788222458461",
+        "locationId": "loja-principal",
+        "physicalQuantity": 1,
+        "reservedQuantity": 0,
+        "availableQuantity": 1,
+        "minimumQuantity": 0,
+        "updatedAt": "2026-09-01T00:28:07.404Z"
+      }
+    },
+    {
+      "name": "Power Bank 20.000mah Carregador Portátil Maxnova",
+      "sku": "",
+      "code": "PRD-972",
+      "barcode": "",
+      "ncm": "",
+      "brand": "",
+      "slug": "power-bank-20-000mah-carregador-portatil-maxnova",
+      "price": null,
+      "commercial": {
+        "costPrice": 75,
+        "erpPrice": null,
+        "salePrice": null,
+        "marketplacePrice": null,
+        "promotionalPrice": null,
+        "desiredMarginPercent": null,
+        "expectedProfit": null,
+        "defaultCommissionPercent": null,
+        "cashPrice": null,
+        "installmentPrice": null,
+        "minimumPrice": null,
+        "minimumMarginPercent": null,
+        "discountPolicy": "inherit",
+        "maximumDiscountPercent": null,
+        "maximumDiscountAmount": null,
+        "requiresAuthorization": false
+      },
+      "stock": 0,
+      "inventory": {
+        "itemId": "PRD-1788270348187",
+        "stockControlled": true,
+        "allowNegative": false,
+        "minimumQuantity": 0,
+        "channelAvailability": {
+          "site": {
+            "mode": "shared",
+            "enabled": true,
+            "limit": null,
+            "physicalSafety": 0
+          }
+        }
+      },
+      "image": "",
+      "gallery": [],
+      "category": "",
+      "subcategory": "",
+      "tags": [],
+      "relatedManualIds": [],
+      "crossSellIds": [],
+      "showPrice": true,
+      "featured": false,
+      "active": false,
+      "erp": {
+        "sku": "",
+        "internalCode": "PRD-972",
+        "supplierCode": "",
+        "searchAlias": "",
+        "barcode": "",
+        "ncm": "",
+        "fiscal": {
+          "ncm": ""
+        },
+        "brand": "",
+        "unit": "UN",
+        "category": "acessorios",
+        "subcategory": "",
+        "mainSupplierId": "",
+        "preferredSupplierId": "",
+        "active": true,
+        "categoryId": "ERP-CAT-2"
+      },
+      "virtualStore": {
+        "name": "",
+        "price": null,
+        "active": false,
+        "seoTitle": "",
+        "seoDescription": "",
+        "channels": {
+          "lojaVirtual": {
+            "enabled": false
+          },
+          "mercadoLivre": {
+            "enabled": false
+          },
+          "shopee": {
+            "enabled": false
+          },
+          "amazon": {
+            "enabled": false
+          },
+          "magalu": {
+            "enabled": false
+          }
+        }
+      },
+      "detailsEnabled": false,
+      "showVariationsOnCard": false,
+      "descriptionShort": "",
+      "descriptionLong": "",
+      "variations": {
+        "enabled": false,
+        "colors": [],
+        "storage": [],
+        "ram": [],
+        "condition": [],
+        "combinations": [],
+        "labels": {},
+        "colorsText": "",
+        "storageText": "",
+        "ramText": "",
+        "conditionText": "",
+        "labelsText": "{}",
+        "combinationsText": ""
+      },
+      "id": 1788270348187,
+      "inventoryBalance": {
+        "inventoryItemId": "PRD-1788270348187",
+        "locationId": "loja-principal",
+        "physicalQuantity": 0,
+        "reservedQuantity": 0,
+        "availableQuantity": 0,
+        "minimumQuantity": 0,
+        "updatedAt": "2026-09-01T16:40:31.272Z"
+      }
+    },
+    {
+      "name": "PC Gamer Usado completo com monitor samsung - Ryzen 5 3500x, RTX 2060 6gb, 16gb de ram, SSD 480 NVME, Fonte MSI 650w",
+      "sku": "",
+      "code": "PRD-973",
+      "barcode": "",
+      "ncm": "84715010",
+      "brand": "",
+      "slug": "pc-gamer-usado-completo-com-monitor-samsung-ryzen-5-3500x-rtx-2060-6gb-16gb-de-ram-ssd-480-nvme-fonte-msi-650w",
+      "price": null,
+      "commercial": {
+        "costPrice": 1500,
+        "erpPrice": 0,
+        "salePrice": 0,
+        "marketplacePrice": null,
+        "promotionalPrice": null,
+        "desiredMarginPercent": null,
+        "expectedProfit": null,
+        "defaultCommissionPercent": null,
+        "cashPrice": 0,
+        "installmentPrice": 0,
+        "minimumPrice": null,
+        "minimumMarginPercent": null,
+        "discountPolicy": "inherit",
+        "maximumDiscountPercent": null,
+        "maximumDiscountAmount": null,
+        "requiresAuthorization": false
+      },
+      "stock": 1,
+      "inventory": {
+        "itemId": "PRD-1788429651970",
+        "stockControlled": true,
+        "allowNegative": false,
+        "minimumQuantity": 0,
+        "channelAvailability": {
+          "site": {
+            "mode": "shared",
+            "enabled": true,
+            "limit": null,
+            "physicalSafety": 0
+          }
+        }
+      },
+      "image": "",
+      "gallery": [],
+      "category": "",
+      "subcategory": "",
+      "tags": [],
+      "relatedManualIds": [],
+      "crossSellIds": [],
+      "showPrice": true,
+      "featured": false,
+      "active": false,
+      "erp": {
+        "sku": "",
+        "internalCode": "PRD-973",
+        "supplierCode": "",
+        "searchAlias": "",
+        "barcode": "",
+        "ncm": "84715010",
+        "fiscal": {
+          "ncm": "84715010"
+        },
+        "brand": "",
+        "unit": "UN",
+        "category": "eletronicos",
+        "subcategory": "",
+        "mainSupplierId": "",
+        "preferredSupplierId": "",
+        "active": true,
+        "categoryId": "ERP-CAT-3"
+      },
+      "virtualStore": {
+        "name": "",
+        "price": null,
+        "active": false,
+        "seoTitle": "",
+        "seoDescription": "",
+        "channels": {
+          "lojaVirtual": {
+            "enabled": false
+          },
+          "mercadoLivre": {
+            "enabled": false
+          },
+          "shopee": {
+            "enabled": false
+          },
+          "amazon": {
+            "enabled": false
+          },
+          "magalu": {
+            "enabled": false
+          }
+        }
+      },
+      "detailsEnabled": false,
+      "showVariationsOnCard": false,
+      "descriptionShort": "",
+      "descriptionLong": "",
+      "variations": {
+        "enabled": false,
+        "colors": [],
+        "storage": [],
+        "ram": [],
+        "condition": [],
+        "combinations": [],
+        "labels": {},
+        "colorsText": "",
+        "storageText": "",
+        "ramText": "",
+        "conditionText": "",
+        "labelsText": "{}",
+        "combinationsText": ""
+      },
+      "id": 1788429651970,
+      "inventoryBalance": {
+        "inventoryItemId": "PRD-1788429651970",
+        "locationId": "loja-principal",
+        "physicalQuantity": 1,
+        "reservedQuantity": 0,
+        "availableQuantity": 1,
+        "minimumQuantity": 0,
+        "updatedAt": "2026-09-03T10:03:47.221Z"
+      }
+    },
+    {
+      "name": "Cadastro e ativação de chip pré pago",
+      "sku": "",
+      "code": "PRD-974",
+      "barcode": "",
+      "ncm": "",
+      "brand": "",
+      "slug": "cadastro-e-ativacao-de-chip-pre-pago",
+      "price": null,
+      "commercial": {
+        "costPrice": null,
+        "erpPrice": 60,
+        "salePrice": 60,
+        "marketplacePrice": null,
+        "promotionalPrice": null,
+        "desiredMarginPercent": null,
+        "expectedProfit": null,
+        "defaultCommissionPercent": null,
+        "cashPrice": 60,
+        "installmentPrice": 60,
+        "minimumPrice": null,
+        "minimumMarginPercent": null,
+        "discountPolicy": "inherit",
+        "maximumDiscountPercent": null,
+        "maximumDiscountAmount": null,
+        "requiresAuthorization": false
+      },
+      "stock": null,
+      "inventory": {
+        "itemId": "PRD-1788432308117",
+        "stockControlled": false,
+        "allowNegative": false,
+        "minimumQuantity": 0,
+        "channelAvailability": {
+          "site": {
+            "mode": "disabled",
+            "enabled": false,
+            "limit": null,
+            "physicalSafety": 0
+          }
+        }
+      },
+      "image": "",
+      "gallery": [],
+      "category": "",
+      "subcategory": "",
+      "tags": [],
+      "relatedManualIds": [],
+      "crossSellIds": [],
+      "showPrice": true,
+      "featured": false,
+      "active": false,
+      "erp": {
+        "sku": "",
+        "internalCode": "PRD-974",
+        "supplierCode": "",
+        "searchAlias": "",
+        "barcode": "",
+        "ncm": "",
+        "fiscal": {
+          "ncm": ""
+        },
+        "brand": "",
+        "unit": "SER",
+        "category": "servicos",
+        "subcategory": "",
+        "mainSupplierId": "",
+        "preferredSupplierId": "",
+        "active": true,
+        "categoryId": "ERP-CAT-6",
+        "type": "service"
+      },
+      "virtualStore": {
+        "name": "",
+        "price": null,
+        "active": false,
+        "seoTitle": "",
+        "seoDescription": "",
+        "channels": {
+          "lojaVirtual": {
+            "enabled": false
+          },
+          "mercadoLivre": {
+            "enabled": false
+          },
+          "shopee": {
+            "enabled": false
+          },
+          "amazon": {
+            "enabled": false
+          },
+          "magalu": {
+            "enabled": false
+          }
+        }
+      },
+      "detailsEnabled": false,
+      "showVariationsOnCard": false,
+      "descriptionShort": "",
+      "descriptionLong": "",
+      "variations": {
+        "enabled": false,
+        "colors": [],
+        "storage": [],
+        "ram": [],
+        "condition": [],
+        "combinations": [],
+        "labels": {},
+        "colorsText": "",
+        "storageText": "",
+        "ramText": "",
+        "conditionText": "",
+        "labelsText": "",
+        "combinationsText": ""
+      },
+      "id": 1788432308117
+    },
+    {
+      "name": "Celular Usado Samsung A12 A127m 64gb 4gb ram",
+      "sku": "",
+      "code": "PRD-976",
+      "barcode": "",
+      "ncm": "85171300",
+      "brand": "",
+      "slug": "celular-usado-samsung-a12-a127m-64gb",
+      "price": null,
+      "commercial": {
+        "costPrice": 150,
+        "erpPrice": 430,
+        "salePrice": 430,
+        "marketplacePrice": null,
+        "promotionalPrice": null,
+        "desiredMarginPercent": null,
+        "expectedProfit": null,
+        "defaultCommissionPercent": null,
+        "cashPrice": 430,
+        "installmentPrice": 430,
+        "minimumPrice": null,
+        "minimumMarginPercent": null,
+        "discountPolicy": "inherit",
+        "maximumDiscountPercent": null,
+        "maximumDiscountAmount": null,
+        "requiresAuthorization": false
+      },
+      "stock": 1,
+      "inventory": {
+        "itemId": "PRD-1788433319796",
+        "stockControlled": true,
+        "allowNegative": false,
+        "minimumQuantity": 0,
+        "channelAvailability": {
+          "site": {
+            "mode": "shared",
+            "enabled": true,
+            "limit": null,
+            "physicalSafety": 0
+          }
+        }
+      },
+      "image": "",
+      "gallery": [],
+      "category": "",
+      "subcategory": "",
+      "tags": [],
+      "relatedManualIds": [],
+      "crossSellIds": [],
+      "showPrice": true,
+      "featured": false,
+      "active": false,
+      "erp": {
+        "sku": "",
+        "internalCode": "PRD-976",
+        "supplierCode": "",
+        "searchAlias": "",
+        "barcode": "",
+        "ncm": "85171300",
+        "fiscal": {
+          "ncm": "85171300"
+        },
+        "brand": "",
+        "unit": "UN",
+        "category": "smartphones",
+        "subcategory": "",
+        "mainSupplierId": "",
+        "preferredSupplierId": "",
+        "active": true,
+        "categoryId": "ERP-CAT-1"
+      },
+      "virtualStore": {
+        "name": "",
+        "price": null,
+        "active": false,
+        "seoTitle": "",
+        "seoDescription": "",
+        "channels": {
+          "lojaVirtual": {
+            "enabled": false
+          },
+          "mercadoLivre": {
+            "enabled": false
+          },
+          "shopee": {
+            "enabled": false
+          },
+          "amazon": {
+            "enabled": false
+          },
+          "magalu": {
+            "enabled": false
+          }
+        }
+      },
+      "detailsEnabled": false,
+      "showVariationsOnCard": false,
+      "descriptionShort": "",
+      "descriptionLong": "",
+      "variations": {
+        "enabled": true,
+        "colors": [],
+        "storage": [],
+        "ram": [],
+        "condition": [],
+        "combinations": [],
+        "labels": {},
+        "colorsText": "",
+        "storageText": "",
+        "ramText": "",
+        "conditionText": "",
+        "labelsText": "{}",
+        "combinationsText": ""
+      },
+      "id": 1788433319796,
+      "inventoryBalance": {
+        "inventoryItemId": "PRD-1788433319796",
+        "locationId": "loja-principal",
+        "physicalQuantity": 1,
+        "reservedQuantity": 0,
+        "availableQuantity": 1,
+        "minimumQuantity": 0,
+        "updatedAt": "2026-09-03T11:05:39.138Z"
+      }
+    },
+    {
+      "name": "Celular Usado Samsung S23 Fe 128gb 8gb ram",
+      "sku": "",
+      "code": "PRD-977",
+      "barcode": "",
+      "ncm": "85171300",
+      "brand": "",
+      "slug": "celular-usado-samsung-s23-fe-128gb",
+      "price": null,
+      "commercial": {
+        "costPrice": 700,
+        "erpPrice": null,
+        "salePrice": null,
+        "marketplacePrice": null,
+        "promotionalPrice": null,
+        "desiredMarginPercent": null,
+        "expectedProfit": null,
+        "defaultCommissionPercent": null,
+        "cashPrice": null,
+        "installmentPrice": null,
+        "minimumPrice": null,
+        "minimumMarginPercent": null,
+        "discountPolicy": "inherit",
+        "maximumDiscountPercent": null,
+        "maximumDiscountAmount": null,
+        "requiresAuthorization": false
+      },
+      "stock": 1,
+      "inventory": {
+        "itemId": "PRD-1788433593777",
+        "stockControlled": true,
+        "allowNegative": false,
+        "minimumQuantity": 0,
+        "channelAvailability": {
+          "site": {
+            "mode": "shared",
+            "enabled": true,
+            "limit": null,
+            "physicalSafety": 0
+          }
+        }
+      },
+      "image": "images/produtos/1788471293520-s23-fe-usado-preto.jpg",
+      "gallery": [],
+      "category": "smartphones",
+      "subcategory": "usados",
+      "tags": [],
+      "relatedManualIds": [],
+      "crossSellIds": [],
+      "showPrice": true,
+      "featured": false,
+      "active": true,
+      "erp": {
+        "sku": "",
+        "internalCode": "PRD-977",
+        "supplierCode": "",
+        "searchAlias": "",
+        "barcode": "",
+        "ncm": "85171300",
+        "fiscal": {
+          "ncm": "85171300"
+        },
+        "brand": "",
+        "unit": "UN",
+        "category": "smartphones",
+        "subcategory": "",
+        "mainSupplierId": "",
+        "preferredSupplierId": "",
+        "active": true,
+        "categoryId": "ERP-CAT-1"
+      },
+      "virtualStore": {
+        "name": "Celular Usado Samsung S23 Fe 5G 128gb",
+        "price": null,
+        "active": true,
+        "seoTitle": "Samsung Galaxy S23 FE 128GB 8GB RAM 5G Usado",
+        "seoDescription": "Samsung Galaxy S23 FE usado 128GB com 8GB RAM, 5G, tela AMOLED 120Hz e câmera de 50MP. Smartphone premium Samsung com ótimo desempenho.",
+        "channels": {
+          "lojaVirtual": {
+            "enabled": true
+          },
+          "mercadoLivre": {
+            "enabled": false
+          },
+          "shopee": {
+            "enabled": false
+          },
+          "amazon": {
+            "enabled": false
+          },
+          "magalu": {
+            "enabled": false
+          }
+        }
+      },
+      "detailsEnabled": true,
+      "showVariationsOnCard": true,
+      "descriptionShort": "",
+      "descriptionLong": "<p>📱<strong>Samsung Galaxy S23 FE 128GB Usado – Desempenho Premium e Câmera de 50MP</strong></p><p>🚀 Com <strong>128GB de armazenamento e 8GB de RAM</strong>, oferece ótimo desempenho para redes sociais, aplicativos, vídeos, jogos e multitarefas no dia a dia</p><p>🔥 <strong>Principais destaques:</strong><br>✅ 128GB de armazenamento<br>✅ 8GB de memória RAM<br>✅ Conectividade 5G<br>✅ Tela Dynamic AMOLED 2X de 6.4\"<br>✅ Taxa de atualização de até 120Hz<br>✅ Processador Exynos 2200<br>✅ Câmera principal de 50MP com estabilização óptica<br>✅ Câmeras traseiras de 50MP + 12MP + 8MP<br>✅ Câmera frontal de 10MP<br>✅ Zoom óptico de 3x<br>✅ Gravação de vídeos em até 8K<br>✅ Bateria de 4.500mAh<br>✅ Resistência à água e poeira IP68<br>✅ Dual SIM com suporte a eSIM</p><p><strong>Aparelho usado</strong>, uma excelente opção para quem deseja toda a qualidade da linha Galaxy S com melhor custo-benefício<br><br>🛡️ <strong>Compra com mais segurança:</strong> este aparelho conta com <strong>90 dias de garantia</strong></p><p><br></p>",
+      "variations": {
+        "enabled": true,
+        "colors": [
+          {
+            "name": "Preto",
+            "hex": "#111111",
+            "image": ""
+          }
+        ],
+        "storage": [],
+        "ram": [],
+        "condition": [],
+        "combinations": [
+          {
+            "color": "Preto",
+            "storage": "",
+            "ram": "",
+            "condition": "",
+            "image": "",
+            "stock": 1,
+            "erpPrice": null,
+            "costPrice": null,
+            "desiredMarginPercent": null,
+            "inventoryItemId": "VAR-1788433593777-1"
+          }
+        ],
+        "labels": {},
+        "colorsText": "Preto|#111111",
+        "storageText": "",
+        "ramText": "",
+        "conditionText": "",
+        "labelsText": "{}",
+        "combinationsText": "Preto|||||1"
+      },
+      "id": 1788433593777,
+      "inventoryBalance": {
+        "physicalQuantity": 1,
+        "availableQuantity": 1,
+        "reservedQuantity": 0,
+        "derivedFromVariations": true
+      },
+      "updatedAt": "2026-09-03T21:34:53.530Z"
+    },
+    {
+      "name": "Pelicula Ceramica Xiaomi redmi note 15 4G e 5G",
+      "sku": "",
+      "code": "PRD-978",
+      "barcode": "",
+      "ncm": "",
+      "brand": "",
+      "slug": "pelicula-ceramica-xiaomi-redmi-note-15-4g-e-5g",
+      "price": null,
+      "commercial": {
+        "costPrice": null,
+        "erpPrice": null,
+        "salePrice": null,
+        "marketplacePrice": null,
+        "promotionalPrice": null,
+        "desiredMarginPercent": null,
+        "expectedProfit": null,
+        "defaultCommissionPercent": null,
+        "cashPrice": null,
+        "installmentPrice": null,
+        "minimumPrice": null,
+        "minimumMarginPercent": null,
+        "discountPolicy": "inherit",
+        "maximumDiscountPercent": null,
+        "maximumDiscountAmount": null,
+        "requiresAuthorization": false
+      },
+      "stock": 0,
+      "inventory": {
+        "itemId": "PRD-1788454751071",
+        "stockControlled": true,
+        "allowNegative": false,
+        "minimumQuantity": 0,
+        "channelAvailability": {
+          "site": {
+            "mode": "shared",
+            "enabled": true,
+            "limit": null,
+            "physicalSafety": 0
+          }
+        }
+      },
+      "image": "",
+      "gallery": [],
+      "category": "",
+      "subcategory": "",
+      "tags": [],
+      "relatedManualIds": [],
+      "crossSellIds": [],
+      "showPrice": true,
+      "featured": false,
+      "active": false,
+      "erp": {
+        "sku": "",
+        "internalCode": "PRD-978",
+        "supplierCode": "",
+        "searchAlias": "",
+        "barcode": "",
+        "ncm": "",
+        "fiscal": {
+          "ncm": ""
+        },
+        "brand": "",
+        "unit": "UN",
+        "category": "acessorios",
+        "subcategory": "",
+        "mainSupplierId": "",
+        "preferredSupplierId": "",
+        "active": true,
+        "categoryId": "ERP-CAT-2"
+      },
+      "virtualStore": {
+        "name": "",
+        "price": null,
+        "active": false,
+        "seoTitle": "",
+        "seoDescription": "",
+        "channels": {
+          "lojaVirtual": {
+            "enabled": false
+          },
+          "mercadoLivre": {
+            "enabled": false
+          },
+          "shopee": {
+            "enabled": false
+          },
+          "amazon": {
+            "enabled": false
+          },
+          "magalu": {
+            "enabled": false
+          }
+        }
+      },
+      "detailsEnabled": false,
+      "showVariationsOnCard": false,
+      "descriptionShort": "",
+      "descriptionLong": "",
+      "variations": {
+        "enabled": false,
+        "colors": [],
+        "storage": [],
+        "ram": [],
+        "condition": [],
+        "combinations": [],
+        "labels": {},
+        "colorsText": "",
+        "storageText": "",
+        "ramText": "",
+        "conditionText": "",
+        "labelsText": "{}",
+        "combinationsText": ""
+      },
+      "id": 1788454751071,
+      "inventoryBalance": {
+        "inventoryItemId": "PRD-1788454751071",
+        "locationId": "loja-principal",
+        "physicalQuantity": 0,
+        "reservedQuantity": 0,
+        "availableQuantity": 0,
+        "minimumQuantity": 0,
+        "updatedAt": "2026-09-03T16:59:11.072Z"
+      }
+    },
+    {
+      "name": "Celular Usado Samsung A03 core 32gb 2gb ram",
+      "sku": "",
+      "code": "PRD-979",
+      "barcode": "",
+      "ncm": "85171300",
+      "brand": "",
+      "slug": "celular-usado-samsung-a03-core-32gb-2gb-ram",
+      "price": null,
+      "commercial": {
+        "costPrice": 130,
+        "erpPrice": 300,
+        "salePrice": 300,
+        "marketplacePrice": null,
+        "promotionalPrice": null,
+        "desiredMarginPercent": null,
+        "expectedProfit": null,
+        "defaultCommissionPercent": null,
+        "cashPrice": 300,
+        "installmentPrice": 300,
+        "minimumPrice": null,
+        "minimumMarginPercent": null,
+        "discountPolicy": "inherit",
+        "maximumDiscountPercent": null,
+        "maximumDiscountAmount": null,
+        "requiresAuthorization": false
+      },
+      "stock": 0,
+      "inventory": {
+        "itemId": "PRD-1788472160616",
+        "stockControlled": true,
+        "allowNegative": false,
+        "minimumQuantity": 0,
+        "channelAvailability": {
+          "site": {
+            "mode": "shared",
+            "enabled": true,
+            "limit": null,
+            "physicalSafety": 0
+          }
+        }
+      },
+      "image": "",
+      "gallery": [],
+      "category": "",
+      "subcategory": "",
+      "tags": [],
+      "relatedManualIds": [],
+      "crossSellIds": [],
+      "showPrice": true,
+      "featured": false,
+      "active": false,
+      "erp": {
+        "sku": "",
+        "internalCode": "PRD-979",
+        "supplierCode": "",
+        "searchAlias": "",
+        "barcode": "",
+        "ncm": "85171300",
+        "fiscal": {
+          "ncm": "85171300"
+        },
+        "brand": "",
+        "unit": "UN",
+        "category": "smartphones",
+        "subcategory": "",
+        "mainSupplierId": "",
+        "preferredSupplierId": "",
+        "active": true,
+        "categoryId": "ERP-CAT-1"
+      },
+      "virtualStore": {
+        "name": "",
+        "price": null,
+        "active": false,
+        "seoTitle": "",
+        "seoDescription": "",
+        "channels": {
+          "lojaVirtual": {
+            "enabled": false
+          },
+          "mercadoLivre": {
+            "enabled": false
+          },
+          "shopee": {
+            "enabled": false
+          },
+          "amazon": {
+            "enabled": false
+          },
+          "magalu": {
+            "enabled": false
+          }
+        }
+      },
+      "detailsEnabled": false,
+      "showVariationsOnCard": false,
+      "descriptionShort": "",
+      "descriptionLong": "",
+      "variations": {
+        "enabled": false,
+        "colors": [],
+        "storage": [],
+        "ram": [],
+        "condition": [],
+        "combinations": [],
+        "labels": {},
+        "colorsText": "",
+        "storageText": "",
+        "ramText": "",
+        "conditionText": "",
+        "labelsText": "{}",
+        "combinationsText": ""
+      },
+      "id": 1788472160616
     }
   ]
 }

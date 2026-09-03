@@ -1,7 +1,7 @@
 {
   "version": "8.4.0-analytics-professional",
   "createdAt": "2026-08-31T01:45:14.531Z",
-  "updatedAt": "2026-08-31T09:41:30.412Z",
+  "updatedAt": "2026-09-03T21:32:38.712Z",
   "source": "local-json",
   "counters": {
     "product_view": 0,
@@ -11,7 +11,7 @@
     "category_view": 0,
     "share_click": 0,
     "search": 0,
-    "page_view": 1
+    "page_view": 4
   },
   "products": {},
   "categories": {},
@@ -19,8 +19,18 @@
   "pages": {
     "http://localhost:3000/site/view/index.html": {
       "url": "http://localhost:3000/site/view/index.html",
+      "views": 2,
+      "lastAt": "2026-09-03T21:32:31.028Z"
+    },
+    "http://localhost:3000/smartphones/": {
+      "url": "http://localhost:3000/smartphones/",
       "views": 1,
-      "lastAt": "2026-08-31T09:41:30.411Z"
+      "lastAt": "2026-09-03T21:32:34.432Z"
+    },
+    "http://localhost:3000/smartphones/?subcategoria=usados": {
+      "url": "http://localhost:3000/smartphones/?subcategoria=usados",
+      "views": 1,
+      "lastAt": "2026-09-03T21:32:38.712Z"
     }
   },
   "devices": {},
@@ -34,6 +44,36 @@
       "device": "desktop",
       "viewport": "1707x791",
       "language": "pt-PT",
+      "term": ""
+    },
+    {
+      "at": "2026-09-03T21:32:31.028Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/site/view/index.html",
+      "referrer": "http://localhost:3000/site",
+      "device": "desktop",
+      "viewport": "1920x869",
+      "language": "pt-BR",
+      "term": ""
+    },
+    {
+      "at": "2026-09-03T21:32:34.432Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/smartphones/",
+      "referrer": "http://localhost:3000/site/view/index.html",
+      "device": "desktop",
+      "viewport": "1920x869",
+      "language": "pt-BR",
+      "term": ""
+    },
+    {
+      "at": "2026-09-03T21:32:38.712Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/smartphones/?subcategoria=usados",
+      "referrer": "http://localhost:3000/smartphones/",
+      "device": "desktop",
+      "viewport": "1920x869",
+      "language": "pt-BR",
       "term": ""
     }
   ]

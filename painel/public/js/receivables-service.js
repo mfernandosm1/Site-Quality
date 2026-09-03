@@ -1,6 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 import crypto from 'crypto';
+import { businessDate, addBusinessDays, businessMonthEnd } from '../../utils/date-time.js';
 
 const clone = value => JSON.parse(JSON.stringify(value));
 const now = () => new Date().toISOString();
@@ -9,9 +10,7 @@ const amount = value => Math.round((Number(value) || 0) * 100) / 100;
 const onlyDigits = value => String(value || '').replace(/\D/g, '');
 
 function addDays(dateValue, days) {
-  const date = dateValue ? new Date(`${dateValue}T12:00:00`) : new Date();
-  date.setDate(date.getDate() + Number(days || 0));
-  return date.toISOString().slice(0, 10);
+  return addBusinessDays(dateValue || businessDate(), days);
 }
 
 export default class ReceivablesService {
@@ -49,12 +48,9 @@ export default class ReceivablesService {
     const titles = this.read('receivables.json').items || [];
     const installments = this.read('receivable-installments.json').items || [];
     const term = clean(search);
-    const today = new Date().toISOString().slice(0,10);
+    const today = businessDate();
     const monthStart = `${today.slice(0,7)}-01`;
-    const monthEndDate = new Date(`${monthStart}T12:00:00`);
-    monthEndDate.setMonth(monthEndDate.getMonth()+1);
-    monthEndDate.setDate(0);
-    const monthEnd = monthEndDate.toISOString().slice(0,10);
+    const monthEnd = businessMonthEnd(monthStart);
     const plusDays = days => addDays(today, days);
     const currentCustomers = new Map((this.customerService?.listCustomers({ includeInactive:true }) || []).map(customer => [String(customer.id), customer]));
     return titles.map(item => {
@@ -83,7 +79,7 @@ export default class ReceivablesService {
   get(id) { return this.list().find(item => item.id === id) || null; }
 
   dashboardSummary(referenceDate='') {
-    const today = clean(referenceDate) || new Date().toISOString().slice(0,10);
+    const today = clean(referenceDate) || businessDate();
     const monthKey = today.slice(0,7);
     const titles = this.list();
     const active = titles.filter(item => !['cancelled','reversed'].includes(item.status));
@@ -111,7 +107,7 @@ export default class ReceivablesService {
   }
   customerCreditSummary(customerId='') {
     const titles=this.list({ customerId });
-    const today=new Date().toISOString().slice(0,10);
+    const today=businessDate();
     const installments=titles.flatMap(title=>(title.installments||[]).map(item=>({ ...item, receivableId:title.id, titleNumber:title.number })));
     const openInstallments=installments.filter(item=>Number(item.openBalance||0)>0 && !['cancelled','reversed'].includes(item.status));
     const overdue=openInstallments.filter(item=>item.dueDate && item.dueDate<today);
@@ -190,7 +186,7 @@ export default class ReceivablesService {
     const rows=this.validateOperation(operation);
     return rows.map(({payment,method})=>this.create({
       customerId:operation.customerId, customerNameSnapshot:operation.customerNameSnapshot, paymentMethodId:method.id, grossValue:payment.amount, discount:0, addition:0,
-      installmentCount:payment.installments||1, issueDate:(operation.dates?.finalizedAt||new Date().toISOString()).slice(0,10),
+      installmentCount:payment.installments||1, issueDate:businessDate(operation.dates?.finalizedAt||new Date()),
       firstDueDate:clean(payment.dueDate), installmentDueDates:Array.isArray(payment.dueDates)?payment.dueDates:[], installmentAmounts:Array.isArray(payment.installmentAmounts)?payment.installmentAmounts:[],
       origin:operation.type==='service_order'?'service_order':'sale',
       originLabel:`${operation.type==='service_order'?'O.S.':'Venda'} #${operation.number}`, originId:operation.id,
@@ -258,7 +254,7 @@ export default class ReceivablesService {
     const netValue = amount(grossValue - discount + addition);
     if (netValue <= 0) throw new Error('O valor líquido deve ser maior que zero.');
     const count = Math.max(1, Math.min(Number(payload.installmentCount || 1), Number(paymentMethod.maxInstallments || 1)));
-    const issueDate = clean(payload.issueDate) || new Date().toISOString().slice(0,10);
+    const issueDate = clean(payload.issueDate) || businessDate();
     const firstDueDate = clean(payload.firstDueDate) || addDays(issueDate, paymentMethod.firstDueDays || 0);
     const customDueDates=(Array.isArray(payload.installmentDueDates)?payload.installmentDueDates:[]).map(clean).filter(Boolean);
     if(customDueDates.length && customDueDates.length!==count) throw new Error(`Configure os ${count} vencimentos do parcelamento.`);
@@ -373,7 +369,7 @@ export default class ReceivablesService {
         installmentId:selectedInstallmentId || '', allocations, payments,
         value, principalValue:appliedToPrincipal, interest, fine, discount,
         paymentMethodId:payments[0]?.paymentMethodId || title.paymentMethodId,
-        receivedAt:clean(payload.receivedAt)||new Date().toISOString().slice(0,10),
+        receivedAt:clean(payload.receivedAt)||businessDate(),
         receivedDateTime:now(), notes:clean(payload.notes), balanceAfter:title.openBalance,
         cashboxId:openCash.cashbox.id, cashboxName:openCash.cashbox.name, cashSessionId:openCash.session.id,
         operationId:title.originId || '', operationType:title.origin || '', customerId:title.customerId,

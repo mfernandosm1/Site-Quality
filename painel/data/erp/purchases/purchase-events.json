@@ -304,6 +304,225 @@
         ]
       },
       "createdAt": "2026-08-27T17:52:33.118Z"
+    },
+    {
+      "id": "PUE-af745da6-154c-4ac4-9433-13061b1f2509",
+      "purchaseId": "PUR-e8b59cc3-a0c6-40c5-86ec-e82f9a8c7e2f",
+      "type": "created",
+      "actor": "Matheus Fernando",
+      "details": {
+        "status": "open",
+        "total": 2550,
+        "itemCount": 1
+      },
+      "createdAt": "2026-09-01T00:20:57.049Z"
+    },
+    {
+      "id": "PUE-b39c7bee-0562-41ff-bdcd-120dd44c1ddd",
+      "purchaseId": "PUR-e8b59cc3-a0c6-40c5-86ec-e82f9a8c7e2f",
+      "type": "completed",
+      "actor": "Matheus Fernando",
+      "details": {
+        "payableId": "PAY-fa54ac4f-8e7f-49b2-9d45-422b247cf8a2",
+        "paymentIds": [
+          "PYP-0aa0e30d-0668-42ea-bd4a-7fac754e7286",
+          "PYP-8f752f4a-7354-4108-80b5-18e4d8459957"
+        ],
+        "inventoryMovements": [
+          "MOV-20260831-000006"
+        ]
+      },
+      "createdAt": "2026-09-01T00:20:57.404Z"
+    },
+    {
+      "id": "PUE-74a5d0ea-3c4f-440c-b8f3-596ab83e050f",
+      "purchaseId": "PUR-569ce150-2e78-4d29-94d5-e3286491c7c8",
+      "type": "created",
+      "actor": "Matheus Fernando",
+      "details": {
+        "status": "open",
+        "total": 250,
+        "itemCount": 1
+      },
+      "createdAt": "2026-09-01T00:22:51.916Z"
+    },
+    {
+      "id": "PUE-63ad6402-1b26-42fd-999f-eff28631843f",
+      "purchaseId": "PUR-569ce150-2e78-4d29-94d5-e3286491c7c8",
+      "type": "completed",
+      "actor": "Matheus Fernando",
+      "details": {
+        "payableId": "PAY-ee32bc98-6ba5-4938-be2d-1b33450ed0f5",
+        "paymentIds": [
+          "PYP-1d367595-d237-4303-828c-b527ff62d051"
+        ],
+        "inventoryMovements": [
+          "MOV-20260831-000007"
+        ]
+      },
+      "createdAt": "2026-09-01T00:22:52.194Z"
+    },
+    {
+      "id": "PUE-dec4f91e-5154-4ef2-ac91-76e867651115",
+      "purchaseId": "PUR-a0583c50-4a7a-470f-9ae0-52d87ce444d6",
+      "type": "created",
+      "actor": "Matheus Fernando",
+      "details": {
+        "status": "open",
+        "total": 400,
+        "itemCount": 1
+      },
+      "createdAt": "2026-09-01T00:28:07.365Z"
+    },
+    {
+      "id": "PUE-9061e50c-bf98-41a7-b23c-6fa7884b9feb",
+      "purchaseId": "PUR-a0583c50-4a7a-470f-9ae0-52d87ce444d6",
+      "type": "completed",
+      "actor": "Matheus Fernando",
+      "details": {
+        "payableId": "PAY-1864b6b5-c53c-4134-ba83-3a872e2bd55c",
+        "paymentIds": [
+          "PYP-647aaad9-0f90-45c7-8684-3cafa9933d19"
+        ],
+        "inventoryMovements": [
+          "MOV-20260831-000008"
+        ]
+      },
+      "createdAt": "2026-09-01T00:28:07.639Z"
+    },
+    {
+      "id": "PUE-138a772c-3f0f-4098-b7ab-87dee6a39082",
+      "purchaseId": "PUR-51854599-0312-41aa-be3f-c67c4245dab5",
+      "type": "created",
+      "actor": "Matheus Fernando",
+      "details": {
+        "status": "open",
+        "total": 19.99,
+        "itemCount": 1
+      },
+      "createdAt": "2026-09-01T00:30:01.054Z"
+    },
+    {
+      "id": "PUE-41573441-2c57-4008-b80c-c11385d7cc22",
+      "purchaseId": "PUR-51854599-0312-41aa-be3f-c67c4245dab5",
+      "type": "completed",
+      "actor": "Matheus Fernando",
+      "details": {
+        "payableId": "PAY-ee116757-c1b1-4db8-ac68-1e9f5a99c198",
+        "paymentIds": [],
+        "inventoryMovements": [
+          "MOV-20260831-000009"
+        ]
+      },
+      "createdAt": "2026-09-01T00:30:01.260Z"
+    },
+    {
+      "id": "PUE-ff3a0120-1b0e-4bc9-881b-ddd1abae47dd",
+      "purchaseId": "PUR-5166b328-659e-4a04-911c-6656e9ef0db8",
+      "type": "created",
+      "actor": "Matheus Fernando",
+      "details": {
+        "status": "open",
+        "total": 96.72,
+        "itemCount": 1
+      },
+      "createdAt": "2026-09-01T16:44:06.224Z"
+    },
+    {
+      "id": "PUE-814420d4-fed2-485c-813d-2ea80004c1ce",
+      "purchaseId": "PUR-5166b328-659e-4a04-911c-6656e9ef0db8",
+      "type": "completed",
+      "actor": "Matheus Fernando",
+      "details": {
+        "payableId": "PAY-0884d103-4fa5-4287-95b5-d37021c95940",
+        "paymentIds": [],
+        "inventoryMovements": [
+          "MOV-20260901-000004"
+        ]
+      },
+      "createdAt": "2026-09-01T16:44:06.453Z"
+    },
+    {
+      "id": "PUE-6c7505d3-4e59-4f76-a53a-42b3dd0afbe0",
+      "purchaseId": "PUR-f773ad7b-602d-4dbb-90f9-9f1c6e834fea",
+      "type": "created",
+      "actor": "Matheus Fernando",
+      "details": {
+        "status": "open",
+        "total": 1535,
+        "itemCount": 1
+      },
+      "createdAt": "2026-09-03T10:03:47.207Z"
+    },
+    {
+      "id": "PUE-dd7e68b1-75de-46c1-8303-6cb891165a1e",
+      "purchaseId": "PUR-f773ad7b-602d-4dbb-90f9-9f1c6e834fea",
+      "type": "completed",
+      "actor": "Matheus Fernando",
+      "details": {
+        "payableId": "PAY-a36e8a6c-f1af-4bad-b1fd-a3d8d8f3dbdf",
+        "paymentIds": [
+          "PYP-7333876b-d20f-43ad-9277-b60f37b5ac1e"
+        ],
+        "inventoryMovements": [
+          "MOV-20260903-000001"
+        ]
+      },
+      "createdAt": "2026-09-03T10:03:47.336Z"
+    },
+    {
+      "id": "PUE-71f99128-145d-43df-bcb2-305086059beb",
+      "purchaseId": "PUR-659e964c-e702-4b75-a695-cf7fd43e8ea0",
+      "type": "created",
+      "actor": "Matheus Fernando",
+      "details": {
+        "status": "open",
+        "total": 46.72,
+        "itemCount": 1
+      },
+      "createdAt": "2026-09-03T10:54:51.897Z"
+    },
+    {
+      "id": "PUE-b2633062-f88b-4adc-9d49-d589daf716c8",
+      "purchaseId": "PUR-659e964c-e702-4b75-a695-cf7fd43e8ea0",
+      "type": "completed",
+      "actor": "Matheus Fernando",
+      "details": {
+        "payableId": "PAY-33e0e76e-3b9c-46b5-9527-6d6e9df0161e",
+        "paymentIds": [],
+        "inventoryMovements": [
+          "MOV-20260903-000004"
+        ]
+      },
+      "createdAt": "2026-09-03T10:54:51.988Z"
+    },
+    {
+      "id": "PUE-00a78c04-a167-4de5-b9df-32b90619907e",
+      "purchaseId": "PUR-738ab27b-6ed2-4672-810c-fe934e5c5766",
+      "type": "created",
+      "actor": "Matheus Fernando",
+      "details": {
+        "status": "open",
+        "total": 150,
+        "itemCount": 1
+      },
+      "createdAt": "2026-09-03T11:05:39.125Z"
+    },
+    {
+      "id": "PUE-2276e810-e41f-44cd-9909-cd9f7632da4e",
+      "purchaseId": "PUR-738ab27b-6ed2-4672-810c-fe934e5c5766",
+      "type": "completed",
+      "actor": "Matheus Fernando",
+      "details": {
+        "payableId": "PAY-2f8df8ef-d99d-405f-b9b9-6abf5b5c152f",
+        "paymentIds": [
+          "PYP-91d56f1a-cbb3-4fce-bea8-eff1a09922c3"
+        ],
+        "inventoryMovements": [
+          "MOV-20260903-000006"
+        ]
+      },
+      "createdAt": "2026-09-03T11:05:39.242Z"
     }
   ]
 }

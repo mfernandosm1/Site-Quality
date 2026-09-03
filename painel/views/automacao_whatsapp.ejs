@@ -6,6 +6,7 @@
       var date = new Date(value);
       if (Number.isNaN(date.getTime())) return '—';
       return new Intl.DateTimeFormat('pt-BR', {
+        timeZone: 'America/Sao_Paulo',
         day: '2-digit',
         month: '2-digit',
         hour: '2-digit',
@@ -13,6 +14,30 @@
       }).format(date);
     } catch (error) {
       return '—';
+    }
+  }
+
+  function formatDateTimeLocalInput(value) {
+    if (!value) return '';
+    try {
+      var date = new Date(value);
+      if (Number.isNaN(date.getTime())) return '';
+      var parts = new Intl.DateTimeFormat('en-US', {
+        timeZone: 'America/Sao_Paulo',
+        year: 'numeric',
+        month: '2-digit',
+        day: '2-digit',
+        hour: '2-digit',
+        minute: '2-digit',
+        hourCycle: 'h23'
+      }).formatToParts(date);
+      var map = {};
+      parts.forEach(function (part) {
+        if (part.type !== 'literal') map[part.type] = part.value;
+      });
+      return map.year + '-' + map.month + '-' + map.day + 'T' + map.hour + ':' + map.minute;
+    } catch (error) {
+      return '';
     }
   }
 %>
@@ -763,7 +788,7 @@
                   <div class="qw-field"><label>Origem</label><select class="qw-select" name="origin"><% Object.entries(originLabels).forEach(function(entry){ %><option value="<%= entry[0] %>" <%= selectedConversation.origin===entry[0]?'selected':'' %>><%= entry[1] %></option><% }) %></select></div>
                   <div class="qw-field wide"><label>Produto de interesse</label><input class="qw-input" name="interestProduct" value="<%= customer.interestProduct||selectedConversation.interestProduct||'' %>" placeholder="Ex: Redmi Note 15"></div>
                   <div class="qw-field"><label>Tipo de pendência</label><select class="qw-select" name="pendingType"><% [['none','Nenhuma'],['send_quote','Enviar orçamento'],['send_photo','Enviar foto/vídeo'],['check_stock','Verificar estoque'],['customer_reply','Aguardar cliente'],['supplier_reply','Aguardar fornecedor'],['payment','Pagamento'],['technical','Questão técnica'],['other','Outra']].forEach(function(item){ %><option value="<%= item[0] %>" <%= (selectedConversation.pendingType||'none')===item[0]?'selected':'' %>><%= item[1] %></option><% }) %></select></div>
-                  <div class="qw-field"><label>Prazo da próxima ação</label><input class="qw-input" type="datetime-local" name="nextActionDueAt" value="<%= selectedConversation.nextActionDueAt ? new Date(selectedConversation.nextActionDueAt).toISOString().slice(0,16) : '' %>"></div>
+                  <div class="qw-field"><label>Prazo da próxima ação</label><input class="qw-input" type="datetime-local" name="nextActionDueAt" value="<%= formatDateTimeLocalInput(selectedConversation.nextActionDueAt) %>"></div>
                   <div class="qw-field wide"><label>Detalhe da pendência</label><input class="qw-input" name="pendingNote" value="<%= selectedConversation.pendingNote||'' %>" placeholder="Ex: cliente pediu foto da cor preta"></div>
                   <div class="qw-field wide"><label>Próxima ação do atendimento</label><input class="qw-input" name="nextAction" value="<%= selectedConversation.nextAction||'' %>" placeholder="Ex: enviar orçamento atualizado e confirmar troca"></div>
                   <div class="qw-field wide"><label>Responsável futuro</label><input class="qw-input" name="assignedTo" value="<%= customer.assignedTo||'' %>" placeholder="Opcional — preparado para multiusuário"></div>

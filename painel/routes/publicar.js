@@ -3,6 +3,7 @@ import fs from "fs";
 import path from "path";
 import archiver from "archiver";
 import simpleGit from "simple-git";
+import { spawnSync } from "child_process";
 import { generateCategoryPage, updateHeaderMenu, convertOldCategoryFiles, generateSeoFiles, loadSeoConfig, generateFriendlyUrlPages,
   syncGeneratedHeaderIntoIndex
 } from "./main_utils.js";
@@ -15,6 +16,80 @@ const BACKUP_DIR= path.join(REPO_DIR, 'Backup');
 const BRANCH    = process.env.GIT_BRANCH || "main";
 const TZ        = 'America/Sao_Paulo';
 const KEEP_BACKUPS = 5;
+
+// Localiza o Git de forma robusta no Windows. O painel pode ter sido iniciado por um
+// Visual Studio/terminal que ainda não recebeu a atualização do PATH após instalar o Git.
+function gitExecutavelFunciona(binary){
+  if (!binary) return false;
+  try {
+    const result = spawnSync(binary, ["--version"], {
+      encoding: "utf-8",
+      windowsHide: true,
+      timeout: 5000
+    });
+    return !result.error && result.status === 0;
+  } catch {
+    return false;
+  }
+}
+
+function localizarGitExecutavel(){
+  const configured = String(process.env.GIT_BINARY || "").trim();
+  const candidates = [];
+  const add = value => {
+    const v = String(value || "").trim();
+    if (v && !candidates.includes(v)) candidates.push(v);
+  };
+
+  // 1) configuração explícita, se houver; 2) PATH atual do processo.
+  add(configured);
+  add("git");
+
+  if (process.platform === "win32") {
+    const programFiles = process.env.ProgramFiles || "C:\\Program Files";
+    const programFilesX86 = process.env["ProgramFiles(x86)"] || "C:\\Program Files (x86)";
+    const localAppData = process.env.LOCALAPPDATA || "";
+
+    // Instalações mais comuns do Git for Windows.
+    add(path.join(programFiles, "Git", "cmd", "git.exe"));
+    add(path.join(programFiles, "Git", "bin", "git.exe"));
+    add(path.join(programFilesX86, "Git", "cmd", "git.exe"));
+    add(path.join(programFilesX86, "Git", "bin", "git.exe"));
+    if (localAppData) {
+      add(path.join(localAppData, "Programs", "Git", "cmd", "git.exe"));
+      add(path.join(localAppData, "Programs", "Git", "bin", "git.exe"));
+
+      // Git empacotado pelo GitHub Desktop, caso seja a única instalação disponível.
+      const githubDesktop = path.join(localAppData, "GitHubDesktop");
+      try {
+        if (fs.existsSync(githubDesktop)) {
+          const appDirs = fs.readdirSync(githubDesktop, { withFileTypes: true })
+            .filter(ent => ent.isDirectory() && /^app-/i.test(ent.name))
+            .map(ent => ent.name)
+            .sort()
+            .reverse();
+          for (const appDir of appDirs) {
+            add(path.join(githubDesktop, appDir, "resources", "app", "git", "cmd", "git.exe"));
+          }
+        }
+      } catch {}
+    }
+  }
+
+  for (const binary of candidates) {
+    if (gitExecutavelFunciona(binary)) {
+      console.log(`🔧 Git localizado: ${binary}`);
+      return binary;
+    }
+  }
+
+  const error = new Error(
+    "Git não foi localizado neste computador. Instale o Git for Windows ou defina a variável GIT_BINARY com o caminho completo do git.exe. " +
+    "Se o Git acabou de ser instalado, esta correção já tenta os caminhos padrão sem exigir reiniciar o Visual Studio."
+  );
+  error.code = "GIT_NOT_FOUND";
+  throw error;
+}
 
 // Caminhos de manutenção
 const MAINT_FLAG = path.join(SITE_DIR, 'maintenance.flag');
@@ -524,7 +599,31 @@ async function retirarArquivosGrandesDoStage(git){
   }
 }
 
-async function gitCommitPush(){
+function garantirGitNoPathDoProcesso(gitBinary){
+  if (!gitBinary || String(gitBinary).toLowerCase() === "git") return;
+
+  const gitDir = path.dirname(gitBinary);
+  const pathKey = Object.keys(process.env).find(k => k.toLowerCase() === "path") || "Path";
+  const currentPath = String(process.env[pathKey] || "");
+  const entries = currentPath.split(path.delimiter).filter(Boolean);
+  const normalizar = value => {
+    try { return path.resolve(value).toLowerCase(); }
+    catch { return String(value || "").toLowerCase(); }
+  };
+
+  if (!entries.some(entry => normalizar(entry) === normalizar(gitDir))) {
+    process.env[pathKey] = currentPath
+      ? `${gitDir}${path.delimiter}${currentPath}`
+      : gitDir;
+    console.log(`🔧 Pasta do Git adicionada ao PATH do painel: ${gitDir}`);
+  }
+}
+
+async function gitCommitPush(gitBinary = localizarGitExecutavel()){
+  // O simple-git restringe caminhos customizados contendo espaços (ex.: C:\Program Files\...).
+  // Em vez de passar o caminho absoluto como `binary`, adicionamos sua pasta ao PATH deste
+  // processo e deixamos o simple-git chamar o executável padrão "git".
+  garantirGitNoPathDoProcesso(gitBinary);
   const git = simpleGit({ baseDir: REPO_DIR });
   try{ await git.raw(["config","--global","--add","safe.directory", REPO_DIR]); }catch{}
 
@@ -554,6 +653,10 @@ async function gitCommitPush(){
 router.post("/", async (req,res)=>{
   try{
     console.log("🚀 Publicação iniciada…");
+
+    // Pré-checagem: evita gerar backup/sincronizar arquivos se este computador não
+    // tiver um Git utilizável para concluir a publicação.
+    const gitBinary = localizarGitExecutavel();
     
     // Executa a montagem do rodapé dinâmico antes de sincronizar as pastas
     aplicarDadosNoFooterHTML();
@@ -572,7 +675,7 @@ router.post("/", async (req,res)=>{
       const cnameSite = path.join(SITE_DIR, "CNAME");
       const cnameRepo = path.join(REPO_DIR, "CNAME");
       try { if (fs.existsSync(cnameSite)) fs.copyFileSync(cnameSite, cnameRepo); } catch (e) { console.warn("⚠️ CNAME: ", e.message); }
-      await gitCommitPush();
+      await gitCommitPush(gitBinary);
       console.log("✅ Publicação (modo manutenção) concluída.");
       return res.redirect(`/?flash=${encodeURIComponent("✅ Publicado em modo manutenção (index & 404 atualizados).")}`);
     }
@@ -585,7 +688,7 @@ router.post("/", async (req,res)=>{
     gerarHtmlEstaticoCategoriasPremium();
     limparArquivosCategoriasAntigos(SITE_DIR, REPO_DIR);
     syncDirContents(SITE_DIR, REPO_DIR);
-    await gitCommitPush();
+    await gitCommitPush(gitBinary);
 
     console.log("✅ Publicação concluída.");
     res.redirect(`/?flash=${encodeURIComponent("✅ Conteúdo atualizado, categorias antigas limpas e push realizado.")}`);
@@ -597,7 +700,10 @@ router.post("/", async (req,res)=>{
     console.error("Caminho:", err?.path);
     console.error("Destino:", err?.dest);
     console.error("Erro completo:", err);
-    res.redirect(`/?flash=${encodeURIComponent("❌ Erro ao publicar site. Verifique o console.")}`);
+    const mensagemUsuario = err?.code === "GIT_NOT_FOUND"
+      ? `❌ ${err.message}`
+      : "❌ Erro ao publicar site. Verifique o console.";
+    res.redirect(`/?flash=${encodeURIComponent(mensagemUsuario)}`);
   }
 });
 

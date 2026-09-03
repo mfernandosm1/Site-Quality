@@ -1,3 +1,5 @@
+process.env.TZ = process.env.QUALITY_TIME_ZONE || 'America/Sao_Paulo';
+
 import express from 'express';
 import path from 'path';
 import { fileURLToPath } from 'url';

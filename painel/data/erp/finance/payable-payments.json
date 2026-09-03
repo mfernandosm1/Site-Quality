@@ -2,6 +2,246 @@
   "version": "0.18.0",
   "items": [
     {
+      "id": "PYP-91d56f1a-cbb3-4fce-bea8-eff1a09922c3",
+      "requestKey": "purchase-PUR-738ab27b-6ed2-4672-810c-fe934e5c5766-PIN-f1c043d5-0aba-4e65-a330-b5f9e8b64782",
+      "paymentNumber": "PG-000068",
+      "payableId": "PAY-2f8df8ef-d99d-405f-b9b9-6abf5b5c152f",
+      "installmentId": "PIN-f1c043d5-0aba-4e65-a330-b5f9e8b64782",
+      "paidAt": "2026-09-03",
+      "value": 150,
+      "principalValue": 150,
+      "interest": 0,
+      "fine": 0,
+      "discount": 0,
+      "payments": [
+        {
+          "paymentMethodId": "PM-DINHEIRO",
+          "paymentMethodName": "Dinheiro",
+          "commerceMethodId": "PM-DINHEIRO",
+          "debitCash": true,
+          "value": 150
+        }
+      ],
+      "notes": "Pagamento automático conforme parâmetros de Compras / Contas a Pagar da forma de pagamento.",
+      "cashboxId": "caixa-principal",
+      "cashMovementIds": [
+        "CXM-1788433539172-SNR3Q"
+      ],
+      "createdAt": "2026-09-03T11:05:39.175Z",
+      "createdBy": "Matheus Fernando",
+      "balanceBefore": 150,
+      "balanceAfter": 0,
+      "financeEntryIds": [
+        "FEN-2ffe0f80-a07a-4def-a4aa-98e98fbfde80"
+      ],
+      "financePaymentIds": [
+        "FPY-c12dd285-37eb-4330-8869-cbc2a88eabbb"
+      ],
+      "financeMovementIds": [
+        "FMV-92d5e951-5b32-4b1d-b580-fbea256028d7"
+      ]
+    },
+    {
+      "id": "PYP-7333876b-d20f-43ad-9277-b60f37b5ac1e",
+      "requestKey": "purchase-PUR-f773ad7b-602d-4dbb-90f9-9f1c6e834fea-PIN-636546c4-30d1-4219-ae12-4d0229debfd6",
+      "paymentNumber": "PG-000067",
+      "payableId": "PAY-a36e8a6c-f1af-4bad-b1fd-a3d8d8f3dbdf",
+      "installmentId": "PIN-636546c4-30d1-4219-ae12-4d0229debfd6",
+      "paidAt": "2026-09-03",
+      "value": 1535,
+      "principalValue": 1535,
+      "interest": 0,
+      "fine": 0,
+      "discount": 0,
+      "payments": [
+        {
+          "paymentMethodId": "PM-DINHEIRO",
+          "paymentMethodName": "Dinheiro",
+          "commerceMethodId": "PM-DINHEIRO",
+          "debitCash": true,
+          "value": 1535
+        }
+      ],
+      "notes": "Pagamento automático conforme parâmetros de Compras / Contas a Pagar da forma de pagamento.",
+      "cashboxId": "caixa-principal",
+      "cashMovementIds": [
+        "CXM-1788429827264-KCTXO"
+      ],
+      "createdAt": "2026-09-03T10:03:47.266Z",
+      "createdBy": "Matheus Fernando",
+      "balanceBefore": 1535,
+      "balanceAfter": 0,
+      "financeEntryIds": [
+        "FEN-e701d8f6-c4a2-4810-b9de-68aecacb4a3e"
+      ],
+      "financePaymentIds": [
+        "FPY-54e0c964-5a98-489e-837a-e27ff3faa93a"
+      ],
+      "financeMovementIds": [
+        "FMV-2df1794d-170b-4c9d-855e-6534703d4159"
+      ]
+    },
+    {
+      "id": "PYP-647aaad9-0f90-45c7-8684-3cafa9933d19",
+      "requestKey": "purchase-PUR-a0583c50-4a7a-470f-9ae0-52d87ce444d6-PIN-d702d25f-c967-48f5-9f17-c90de8de583f",
+      "paymentNumber": "PG-000066",
+      "payableId": "PAY-1864b6b5-c53c-4134-ba83-3a872e2bd55c",
+      "installmentId": "PIN-d702d25f-c967-48f5-9f17-c90de8de583f",
+      "paidAt": "2026-08-31",
+      "value": 400,
+      "principalValue": 400,
+      "interest": 0,
+      "fine": 0,
+      "discount": 0,
+      "payments": [
+        {
+          "paymentMethodId": "PM-DINHEIRO",
+          "paymentMethodName": "Dinheiro",
+          "commerceMethodId": "PM-DINHEIRO",
+          "debitCash": true,
+          "value": 400
+        }
+      ],
+      "notes": "Pagamento automático conforme parâmetros de Compras / Contas a Pagar da forma de pagamento.",
+      "cashboxId": "caixa-principal",
+      "cashMovementIds": [
+        "CXM-1788222487481-A5L40"
+      ],
+      "createdAt": "2026-09-01T00:28:07.485Z",
+      "createdBy": "Matheus Fernando",
+      "balanceBefore": 400,
+      "balanceAfter": 0,
+      "financeEntryIds": [
+        "FEN-8247ed21-f71a-439b-91bc-1a745e00be86"
+      ],
+      "financePaymentIds": [
+        "FPY-34904703-bed4-494b-a47e-2030b11813d6"
+      ],
+      "financeMovementIds": [
+        "FMV-b3f1d746-dce6-4203-a5db-ca0b670ee71d"
+      ]
+    },
+    {
+      "id": "PYP-1d367595-d237-4303-828c-b527ff62d051",
+      "requestKey": "purchase-PUR-569ce150-2e78-4d29-94d5-e3286491c7c8-PIN-ab6180d3-65bf-4b2e-a7cd-7ba5a4c22cbd",
+      "paymentNumber": "PG-000065",
+      "payableId": "PAY-ee32bc98-6ba5-4938-be2d-1b33450ed0f5",
+      "installmentId": "PIN-ab6180d3-65bf-4b2e-a7cd-7ba5a4c22cbd",
+      "paidAt": "2026-08-31",
+      "value": 250,
+      "principalValue": 250,
+      "interest": 0,
+      "fine": 0,
+      "discount": 0,
+      "payments": [
+        {
+          "paymentMethodId": "PM-DINHEIRO",
+          "paymentMethodName": "Dinheiro",
+          "commerceMethodId": "PM-DINHEIRO",
+          "debitCash": true,
+          "value": 250
+        }
+      ],
+      "notes": "Pagamento automático conforme parâmetros de Compras / Contas a Pagar da forma de pagamento.",
+      "cashboxId": "caixa-principal",
+      "cashMovementIds": [
+        "CXM-1788222172022-JYGL0"
+      ],
+      "createdAt": "2026-09-01T00:22:52.027Z",
+      "createdBy": "Matheus Fernando",
+      "balanceBefore": 250,
+      "balanceAfter": 0,
+      "financeEntryIds": [
+        "FEN-7f3b29c5-d4b3-471b-b9ee-5b3f624c2c0c"
+      ],
+      "financePaymentIds": [
+        "FPY-a2909eac-bb7f-466e-b9ba-d98dd34dac1d"
+      ],
+      "financeMovementIds": [
+        "FMV-5d4e7c87-18ed-43ce-ae46-d58d7fd9f490"
+      ]
+    },
+    {
+      "id": "PYP-8f752f4a-7354-4108-80b5-18e4d8459957",
+      "requestKey": "purchase-PUR-e8b59cc3-a0c6-40c5-86ec-e82f9a8c7e2f-PIN-5efcd156-aa2a-4845-b772-11726f21a8e3",
+      "paymentNumber": "PG-000064",
+      "payableId": "PAY-fa54ac4f-8e7f-49b2-9d45-422b247cf8a2",
+      "installmentId": "PIN-5efcd156-aa2a-4845-b772-11726f21a8e3",
+      "paidAt": "2026-08-31",
+      "value": 550,
+      "principalValue": 550,
+      "interest": 0,
+      "fine": 0,
+      "discount": 0,
+      "payments": [
+        {
+          "paymentMethodId": "PM-DINHEIRO",
+          "paymentMethodName": "Dinheiro",
+          "commerceMethodId": "PM-DINHEIRO",
+          "debitCash": true,
+          "value": 550
+        }
+      ],
+      "notes": "Pagamento automático conforme parâmetros de Compras / Contas a Pagar da forma de pagamento.",
+      "cashboxId": "caixa-principal",
+      "cashMovementIds": [
+        "CXM-1788222057231-8HN3U"
+      ],
+      "createdAt": "2026-09-01T00:20:57.235Z",
+      "createdBy": "Matheus Fernando",
+      "balanceBefore": 550,
+      "balanceAfter": 0,
+      "financeEntryIds": [
+        "FEN-b04d082f-1687-4a1f-8d8d-bcb278578171"
+      ],
+      "financePaymentIds": [
+        "FPY-f30cb296-ebd7-4319-b191-c42a35cada23"
+      ],
+      "financeMovementIds": [
+        "FMV-7cbbad4e-b82d-453b-a23f-622a3ba24520"
+      ]
+    },
+    {
+      "id": "PYP-0aa0e30d-0668-42ea-bd4a-7fac754e7286",
+      "requestKey": "purchase-PUR-e8b59cc3-a0c6-40c5-86ec-e82f9a8c7e2f-PIN-81442771-4736-4be1-9962-d95e9a37ba13",
+      "paymentNumber": "PG-000063",
+      "payableId": "PAY-fa54ac4f-8e7f-49b2-9d45-422b247cf8a2",
+      "installmentId": "PIN-81442771-4736-4be1-9962-d95e9a37ba13",
+      "paidAt": "2026-08-31",
+      "value": 2000,
+      "principalValue": 2000,
+      "interest": 0,
+      "fine": 0,
+      "discount": 0,
+      "payments": [
+        {
+          "paymentMethodId": "PM-PIX",
+          "paymentMethodName": "PIX Sicredi",
+          "commerceMethodId": "PM-PIX",
+          "debitCash": true,
+          "value": 2000
+        }
+      ],
+      "notes": "Pagamento automático conforme parâmetros de Compras / Contas a Pagar da forma de pagamento.",
+      "cashboxId": "caixa-principal",
+      "cashMovementIds": [
+        "CXM-1788222057168-RBPQY"
+      ],
+      "createdAt": "2026-09-01T00:20:57.175Z",
+      "createdBy": "Matheus Fernando",
+      "balanceBefore": 2000,
+      "balanceAfter": 0,
+      "financeEntryIds": [
+        "FEN-6bc04c32-0041-4e56-99d5-eb8f00dae70f"
+      ],
+      "financePaymentIds": [
+        "FPY-cfda8d57-2206-479f-b695-3471c03d689e"
+      ],
+      "financeMovementIds": [
+        "FMV-ed783c52-dee5-41bc-8b1b-d4109d971dd2"
+      ]
+    },
+    {
       "id": "PYP-b6f41ec5-0593-4e40-9fa8-5c15d763baf5",
       "requestKey": "bulk-1788178330281-1",
       "paymentNumber": "PG-000062",

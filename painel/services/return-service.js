@@ -1,5 +1,6 @@
 import fs from 'fs';
 import path from 'path';
+import { businessDate } from '../utils/date-time.js';
 import crypto from 'crypto';
 
 const clone=value=>JSON.parse(JSON.stringify(value));
@@ -33,7 +34,7 @@ export default class ReturnService{
   list({q='',type='',customerId='',operationId='',from='',to=''}={}){
     const term=normalize(q);return (this.read().items||[]).filter(item=>{
       if(type&&item.type!==type)return false;if(customerId&&item.customerId!==customerId)return false;if(operationId&&item.originalOperationId!==operationId)return false;
-      const day=clean(item.createdAt).slice(0,10);if(from&&day<from)return false;if(to&&day>to)return false;
+      const day=businessDate(item.createdAt);if(from&&day<from)return false;if(to&&day>to)return false;
       if(term&&!normalize([item.number,item.customerName,item.originalOperationNumber,item.reasonLabel,item.reason,item.notes,...(item.items||[]).flatMap(row=>[row.name,row.code,row.variationLabel,row.sourceSupplierName])].join(' ')).includes(term))return false;
       return true;
     }).sort((a,b)=>String(b.createdAt).localeCompare(String(a.createdAt)));

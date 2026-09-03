@@ -35432,7 +35432,4076 @@
       },
       "ip": "127.0.0.1",
       "requestId": "764e14c5-d39f-490b-86e3-b7a30a29c950"
+    },
+    {
+      "id": "AUD-00000109",
+      "at": "2026-09-01T16:39:33.468Z",
+      "module": "produtos",
+      "action": "PRODUCT_UPDATED",
+      "actor": "Matheus Fernando",
+      "entityType": "product",
+      "entityId": "1788270348187",
+      "documentId": "",
+      "reason": "Cadastro de produto atualizado",
+      "before": {
+        "name": "Power Bank 20.000mah Carregador Portátil Maxnova",
+        "sku": "",
+        "code": "PRD-972",
+        "barcode": "",
+        "ncm": "",
+        "brand": "",
+        "slug": "power-bank-20-000mah-carregador-portatil-maxnova",
+        "price": null,
+        "commercial": {
+          "costPrice": null,
+          "erpPrice": null,
+          "salePrice": null,
+          "marketplacePrice": null,
+          "promotionalPrice": null,
+          "desiredMarginPercent": null,
+          "expectedProfit": null,
+          "defaultCommissionPercent": null,
+          "cashPrice": null,
+          "installmentPrice": null,
+          "minimumPrice": null,
+          "minimumMarginPercent": null,
+          "discountPolicy": "inherit",
+          "maximumDiscountPercent": null,
+          "maximumDiscountAmount": null,
+          "requiresAuthorization": false
+        },
+        "stock": 0,
+        "inventory": {
+          "itemId": "PRD-1788270348187",
+          "stockControlled": true,
+          "allowNegative": false,
+          "minimumQuantity": 0,
+          "channelAvailability": {
+            "site": {
+              "mode": "shared",
+              "enabled": true,
+              "limit": null,
+              "physicalSafety": 0
+            }
+          }
+        },
+        "image": "",
+        "gallery": [],
+        "category": "",
+        "subcategory": "",
+        "tags": [],
+        "relatedManualIds": [],
+        "crossSellIds": [],
+        "showPrice": true,
+        "featured": false,
+        "active": false,
+        "erp": {
+          "sku": "",
+          "internalCode": "PRD-972",
+          "supplierCode": "",
+          "searchAlias": "",
+          "barcode": "",
+          "ncm": "",
+          "fiscal": {
+            "ncm": ""
+          },
+          "brand": "",
+          "unit": "UN",
+          "category": "acessorios",
+          "subcategory": "",
+          "mainSupplierId": "",
+          "preferredSupplierId": "",
+          "active": true,
+          "categoryId": "ERP-CAT-2"
+        },
+        "virtualStore": {
+          "name": "",
+          "price": null,
+          "active": false,
+          "seoTitle": "",
+          "seoDescription": "",
+          "channels": {
+            "lojaVirtual": {
+              "enabled": false
+            },
+            "mercadoLivre": {
+              "enabled": false
+            },
+            "shopee": {
+              "enabled": false
+            },
+            "amazon": {
+              "enabled": false
+            },
+            "magalu": {
+              "enabled": false
+            }
+          }
+        },
+        "detailsEnabled": false,
+        "showVariationsOnCard": false,
+        "descriptionShort": "",
+        "descriptionLong": "",
+        "variations": {
+          "enabled": false,
+          "colors": [],
+          "storage": [],
+          "ram": [],
+          "condition": [],
+          "combinations": [],
+          "labels": {},
+          "colorsText": "",
+          "storageText": "",
+          "ramText": "",
+          "conditionText": "",
+          "labelsText": "{}",
+          "combinationsText": ""
+        },
+        "id": 1788270348187,
+        "inventoryBalance": {
+          "inventoryItemId": "PRD-1788270348187",
+          "locationId": "loja-principal",
+          "physicalQuantity": 0,
+          "reservedQuantity": 0,
+          "availableQuantity": 0,
+          "minimumQuantity": 0,
+          "updatedAt": "2026-09-01T13:45:48.203Z"
+        }
+      },
+      "after": {
+        "name": "Power Bank 20.000mah Carregador Portátil Maxnova",
+        "sku": "",
+        "code": "PRD-972",
+        "barcode": "",
+        "ncm": "",
+        "brand": "",
+        "slug": "power-bank-20-000mah-carregador-portatil-maxnova",
+        "price": null,
+        "commercial": {
+          "costPrice": 75,
+          "erpPrice": null,
+          "salePrice": null,
+          "marketplacePrice": null,
+          "promotionalPrice": null,
+          "desiredMarginPercent": null,
+          "expectedProfit": null,
+          "defaultCommissionPercent": null,
+          "cashPrice": null,
+          "installmentPrice": null,
+          "minimumPrice": null,
+          "minimumMarginPercent": null,
+          "discountPolicy": "inherit",
+          "maximumDiscountPercent": null,
+          "maximumDiscountAmount": null,
+          "requiresAuthorization": false
+        },
+        "stock": 1,
+        "inventory": {
+          "itemId": "PRD-1788270348187",
+          "stockControlled": true,
+          "allowNegative": false,
+          "minimumQuantity": 0,
+          "channelAvailability": {
+            "site": {
+              "mode": "shared",
+              "enabled": true,
+              "limit": null,
+              "physicalSafety": 0
+            }
+          }
+        },
+        "image": "",
+        "gallery": [],
+        "category": "",
+        "subcategory": "",
+        "tags": [],
+        "relatedManualIds": [],
+        "crossSellIds": [],
+        "showPrice": true,
+        "featured": false,
+        "active": false,
+        "erp": {
+          "sku": "",
+          "internalCode": "PRD-972",
+          "supplierCode": "",
+          "searchAlias": "",
+          "barcode": "",
+          "ncm": "",
+          "fiscal": {
+            "ncm": ""
+          },
+          "brand": "",
+          "unit": "UN",
+          "category": "acessorios",
+          "subcategory": "",
+          "mainSupplierId": "",
+          "preferredSupplierId": "",
+          "active": true,
+          "categoryId": "ERP-CAT-2"
+        },
+        "virtualStore": {
+          "name": "",
+          "price": null,
+          "active": false,
+          "seoTitle": "",
+          "seoDescription": "",
+          "channels": {
+            "lojaVirtual": {
+              "enabled": false
+            },
+            "mercadoLivre": {
+              "enabled": false
+            },
+            "shopee": {
+              "enabled": false
+            },
+            "amazon": {
+              "enabled": false
+            },
+            "magalu": {
+              "enabled": false
+            }
+          }
+        },
+        "detailsEnabled": false,
+        "showVariationsOnCard": false,
+        "descriptionShort": "",
+        "descriptionLong": "",
+        "variations": {
+          "enabled": false,
+          "colors": [],
+          "storage": [],
+          "ram": [],
+          "condition": [],
+          "combinations": [],
+          "labels": {},
+          "colorsText": "",
+          "storageText": "",
+          "ramText": "",
+          "conditionText": "",
+          "labelsText": "{}",
+          "combinationsText": ""
+        },
+        "id": 1788270348187,
+        "inventoryBalance": {
+          "inventoryItemId": "PRD-1788270348187",
+          "locationId": "loja-principal",
+          "physicalQuantity": 0,
+          "reservedQuantity": 0,
+          "availableQuantity": 0,
+          "minimumQuantity": 0,
+          "updatedAt": "2026-09-01T13:45:48.203Z"
+        }
+      },
+      "ip": "127.0.0.1",
+      "requestId": "cf43dd44-e3dd-4098-81e3-1ad35310a9d1"
+    },
+    {
+      "id": "AUD-00000110",
+      "at": "2026-09-01T17:42:10.635Z",
+      "module": "agenda",
+      "action": "TASK_COMPLETED",
+      "actor": "Matheus Fernando",
+      "entityType": "agenda_task",
+      "entityId": "task_mt6fvgw7_ounoho",
+      "documentId": "",
+      "reason": "",
+      "before": {
+        "id": "task_mt6fvgw7_ounoho",
+        "customerId": "",
+        "customerName": "",
+        "conversationId": "",
+        "owner": "Quality",
+        "type": "task",
+        "typeName": "Tarefa",
+        "title": "fazer a compra dos notebooks no sistema e emitir nota na wm também",
+        "description": "",
+        "dueAt": "2026-08-24T12:00",
+        "priority": "medium",
+        "status": "open",
+        "createdAt": "2026-08-23T23:29:17.383Z",
+        "updatedAt": "2026-08-23T23:29:17.383Z",
+        "completedAt": null
+      },
+      "after": {
+        "id": "task_mt6fvgw7_ounoho",
+        "customerId": "",
+        "customerName": "",
+        "conversationId": "",
+        "owner": "Quality",
+        "type": "task",
+        "typeName": "Tarefa",
+        "title": "fazer a compra dos notebooks no sistema e emitir nota na wm também",
+        "description": "",
+        "dueAt": "2026-08-24T12:00",
+        "priority": "medium",
+        "status": "completed",
+        "createdAt": "2026-08-23T23:29:17.383Z",
+        "updatedAt": "2026-09-01T17:42:10.625Z",
+        "completedAt": "2026-09-01T17:42:10.625Z",
+        "updatedBy": "Matheus Fernando",
+        "history": [
+          {
+            "at": "2026-09-01T17:42:10.625Z",
+            "actor": "Matheus Fernando",
+            "action": "completed",
+            "before": {
+              "title": "fazer a compra dos notebooks no sistema e emitir nota na wm também",
+              "description": "",
+              "dueAt": "2026-08-24T12:00",
+              "priority": "medium",
+              "type": "task",
+              "typeName": "Tarefa",
+              "customerId": "",
+              "customerName": "",
+              "owner": "Quality",
+              "status": "open"
+            },
+            "after": {
+              "title": "fazer a compra dos notebooks no sistema e emitir nota na wm também",
+              "description": "",
+              "dueAt": "2026-08-24T12:00",
+              "priority": "medium",
+              "type": "task",
+              "typeName": "Tarefa",
+              "customerId": "",
+              "customerName": "",
+              "owner": "Quality",
+              "status": "completed"
+            }
+          }
+        ]
+      },
+      "ip": "127.0.0.1",
+      "requestId": ""
+    },
+    {
+      "id": "AUD-00000111",
+      "at": "2026-09-01T17:42:21.719Z",
+      "module": "agenda",
+      "action": "TASK_COMPLETED",
+      "actor": "Matheus Fernando",
+      "entityType": "agenda_task",
+      "entityId": "task_mtdk18nk_sym8ga",
+      "documentId": "",
+      "reason": "",
+      "before": {
+        "id": "task_mtdk18nk_sym8ga",
+        "customerId": "",
+        "customerName": "",
+        "conversationId": "",
+        "owner": "Quality",
+        "type": "task",
+        "typeName": "Tarefa",
+        "title": "testar devolução / troca no pdv.\nao cadastrar um produto, se eu selecionar uma categoria do site, ele não precisa exigir uma categoria do erp também.",
+        "description": "",
+        "dueAt": "2026-08-29T20:00",
+        "priority": "medium",
+        "status": "open",
+        "createdAt": "2026-08-28T23:00:08.335Z",
+        "createdBy": "Matheus Fernando",
+        "updatedAt": "2026-08-28T23:00:08.335Z",
+        "updatedBy": "Matheus Fernando",
+        "completedAt": null,
+        "history": [
+          {
+            "at": "2026-08-28T23:00:08.335Z",
+            "actor": "Matheus Fernando",
+            "action": "created",
+            "before": null,
+            "after": {
+              "title": "testar devolução / troca no pdv.\nao cadastrar um produto, se eu selecionar uma categoria do site, ele não precisa exigir uma categoria do erp também.",
+              "description": "",
+              "dueAt": "2026-08-29T20:00",
+              "priority": "medium",
+              "type": "task",
+              "typeName": "Tarefa",
+              "customerId": "",
+              "customerName": "",
+              "owner": "Quality",
+              "status": "open"
+            }
+          }
+        ]
+      },
+      "after": {
+        "id": "task_mtdk18nk_sym8ga",
+        "customerId": "",
+        "customerName": "",
+        "conversationId": "",
+        "owner": "Quality",
+        "type": "task",
+        "typeName": "Tarefa",
+        "title": "testar devolução / troca no pdv.\nao cadastrar um produto, se eu selecionar uma categoria do site, ele não precisa exigir uma categoria do erp também.",
+        "description": "",
+        "dueAt": "2026-08-29T20:00",
+        "priority": "medium",
+        "status": "completed",
+        "createdAt": "2026-08-28T23:00:08.335Z",
+        "createdBy": "Matheus Fernando",
+        "updatedAt": "2026-09-01T17:42:21.714Z",
+        "updatedBy": "Matheus Fernando",
+        "completedAt": "2026-09-01T17:42:21.714Z",
+        "history": [
+          {
+            "at": "2026-09-01T17:42:21.714Z",
+            "actor": "Matheus Fernando",
+            "action": "completed",
+            "before": {
+              "title": "testar devolução / troca no pdv.\nao cadastrar um produto, se eu selecionar uma categoria do site, ele não precisa exigir uma categoria do erp também.",
+              "description": "",
+              "dueAt": "2026-08-29T20:00",
+              "priority": "medium",
+              "type": "task",
+              "typeName": "Tarefa",
+              "customerId": "",
+              "customerName": "",
+              "owner": "Quality",
+              "status": "open"
+            },
+            "after": {
+              "title": "testar devolução / troca no pdv.\nao cadastrar um produto, se eu selecionar uma categoria do site, ele não precisa exigir uma categoria do erp também.",
+              "description": "",
+              "dueAt": "2026-08-29T20:00",
+              "priority": "medium",
+              "type": "task",
+              "typeName": "Tarefa",
+              "customerId": "",
+              "customerName": "",
+              "owner": "Quality",
+              "status": "completed"
+            }
+          },
+          {
+            "at": "2026-08-28T23:00:08.335Z",
+            "actor": "Matheus Fernando",
+            "action": "created",
+            "before": null,
+            "after": {
+              "title": "testar devolução / troca no pdv.\nao cadastrar um produto, se eu selecionar uma categoria do site, ele não precisa exigir uma categoria do erp também.",
+              "description": "",
+              "dueAt": "2026-08-29T20:00",
+              "priority": "medium",
+              "type": "task",
+              "typeName": "Tarefa",
+              "customerId": "",
+              "customerName": "",
+              "owner": "Quality",
+              "status": "open"
+            }
+          }
+        ]
+      },
+      "ip": "127.0.0.1",
+      "requestId": ""
+    },
+    {
+      "id": "AUD-00000112",
+      "at": "2026-09-01T17:42:24.181Z",
+      "module": "agenda",
+      "action": "TASK_COMPLETED",
+      "actor": "Matheus Fernando",
+      "entityType": "agenda_task",
+      "entityId": "task_mth1uhpc_62dk8b",
+      "documentId": "",
+      "reason": "",
+      "before": {
+        "id": "task_mth1uhpc_62dk8b",
+        "customerId": "",
+        "customerName": "",
+        "conversationId": "",
+        "owner": "Quality",
+        "type": "task",
+        "typeName": "Tarefa",
+        "title": "mandar email pra pichau saber a situação do pc",
+        "description": "",
+        "dueAt": "2026-08-31T07:00",
+        "priority": "high",
+        "status": "open",
+        "createdAt": "2026-08-31T09:42:05.088Z",
+        "createdBy": "Matheus Fernando",
+        "updatedAt": "2026-08-31T09:42:05.088Z",
+        "updatedBy": "Matheus Fernando",
+        "completedAt": null,
+        "history": [
+          {
+            "at": "2026-08-31T09:42:05.088Z",
+            "actor": "Matheus Fernando",
+            "action": "created",
+            "before": null,
+            "after": {
+              "title": "mandar email pra pichau saber a situação do pc",
+              "description": "",
+              "dueAt": "2026-08-31T07:00",
+              "priority": "high",
+              "type": "task",
+              "typeName": "Tarefa",
+              "customerId": "",
+              "customerName": "",
+              "owner": "Quality",
+              "status": "open"
+            }
+          }
+        ]
+      },
+      "after": {
+        "id": "task_mth1uhpc_62dk8b",
+        "customerId": "",
+        "customerName": "",
+        "conversationId": "",
+        "owner": "Quality",
+        "type": "task",
+        "typeName": "Tarefa",
+        "title": "mandar email pra pichau saber a situação do pc",
+        "description": "",
+        "dueAt": "2026-08-31T07:00",
+        "priority": "high",
+        "status": "completed",
+        "createdAt": "2026-08-31T09:42:05.088Z",
+        "createdBy": "Matheus Fernando",
+        "updatedAt": "2026-09-01T17:42:24.175Z",
+        "updatedBy": "Matheus Fernando",
+        "completedAt": "2026-09-01T17:42:24.175Z",
+        "history": [
+          {
+            "at": "2026-09-01T17:42:24.175Z",
+            "actor": "Matheus Fernando",
+            "action": "completed",
+            "before": {
+              "title": "mandar email pra pichau saber a situação do pc",
+              "description": "",
+              "dueAt": "2026-08-31T07:00",
+              "priority": "high",
+              "type": "task",
+              "typeName": "Tarefa",
+              "customerId": "",
+              "customerName": "",
+              "owner": "Quality",
+              "status": "open"
+            },
+            "after": {
+              "title": "mandar email pra pichau saber a situação do pc",
+              "description": "",
+              "dueAt": "2026-08-31T07:00",
+              "priority": "high",
+              "type": "task",
+              "typeName": "Tarefa",
+              "customerId": "",
+              "customerName": "",
+              "owner": "Quality",
+              "status": "completed"
+            }
+          },
+          {
+            "at": "2026-08-31T09:42:05.088Z",
+            "actor": "Matheus Fernando",
+            "action": "created",
+            "before": null,
+            "after": {
+              "title": "mandar email pra pichau saber a situação do pc",
+              "description": "",
+              "dueAt": "2026-08-31T07:00",
+              "priority": "high",
+              "type": "task",
+              "typeName": "Tarefa",
+              "customerId": "",
+              "customerName": "",
+              "owner": "Quality",
+              "status": "open"
+            }
+          }
+        ]
+      },
+      "ip": "127.0.0.1",
+      "requestId": ""
+    },
+    {
+      "id": "AUD-00000113",
+      "at": "2026-09-02T16:47:54.867Z",
+      "module": "produtos",
+      "action": "PRODUCT_UPDATED",
+      "actor": "Matheus Fernando",
+      "entityType": "product",
+      "entityId": "1763504404711",
+      "documentId": "",
+      "reason": "Cadastro de produto atualizado",
+      "before": {
+        "id": 1763504404711,
+        "name": "Iphone 16 128gb novo lacrado",
+        "price": null,
+        "image": "images/Iphone 16 preto.jpeg",
+        "category": "smartphones",
+        "showPrice": false,
+        "featured": false,
+        "active": true,
+        "gallery": [
+          "images/produtos/1783216405845-iphone-16-verde.jpeg",
+          "images/produtos/1783216405848-iphone-16-azul.jpeg",
+          "images/produtos/1783216405853-iphone-16-rosa.jpeg",
+          "images/produtos/1783216405858-iphone-16-branco.jpeg"
+        ],
+        "detailsEnabled": true,
+        "descriptionShort": "O iPhone 16 combina potência avançada e praticidade no tamanho ideal. Equipado com o novo chip A18, ele entrega desempenho ultraveloz com excelente economia de bateria. O grande destaque desta geração é o botão Controle da Câmera, que facilita o acesso instantâneo às suas fotos e vídeos. Perfeito para o dia a dia, jogos e redes sociais",
+        "descriptionLong": "<p><b>Destaques do Produto:</b></p><ul><li><p><b>Controle da Câmera:</b> Botão físico tátil para abrir, dar zoom e tirar fotos instantaneamente</p></li><li><p><b>Desempenho Inovador:</b> Processador A18, ultraveloz para jogos, tarefas pesadas e inteligência artificial</p></li><li><p><b>Fotos Profissionais:</b> Câmera de 48 MP com zoom óptico de 2x e lente macro integrada</p></li><li><p><b>Botão de Ação:</b> Atalho prático e personalizável para ativar suas funções favoritas num clique</p></li><li><p><b>Design de Ponta:</b> Acabamento em alumínio aeroespacial altamente resistente a quedas e riscos</p></li></ul><p><b>Especificações Técnicas:</b></p><ul><li><p><b>Tela:</b> 6,1\" Super Retina XDR OLED</p></li><li><p><b>Processador:</b> Apple A18 Chip</p></li><li><p><b>Armazenamento:</b> 128GB</p></li><li><p><b>Câmeras Traseiras:</b> 48 MP (Principal) + 12 MP (Ultrawide)</p></li><li><p><b>Conectividade:</b> USB-C, Wi-Fi 7 e 5G</p></li><li><p><b>Resistência:</b> Certificação IP68 (à prova d'água e poeira)</p></li></ul><p><b>Conteúdo da Embalagem:</b>\niPhone 16 128GB, Cabo USB-C para Recarga e Manuais</p>",
+        "slug": "iphone-16-128gb-novo-lacrado",
+        "stock": 0,
+        "tags": [],
+        "relatedManualIds": [],
+        "crossSellIds": [],
+        "showVariationsOnCard": false,
+        "variations": {
+          "enabled": true,
+          "colors": [
+            {
+              "name": "Preto",
+              "hex": "#111111",
+              "image": "images/Iphone 16 preto.jpeg"
+            },
+            {
+              "name": "Branco",
+              "hex": "#ffffff",
+              "image": "images/Iphone 16 (branco).jpeg"
+            },
+            {
+              "name": "Ultramarine",
+              "hex": "#2730b0",
+              "image": "images/Iphone 16 (azul).jpeg"
+            },
+            {
+              "name": "Rosa",
+              "hex": "#f934f2",
+              "image": "images/Iphone 16 (rosa).jpeg"
+            },
+            {
+              "name": "Verde Acizentado",
+              "hex": "#39a24b",
+              "image": "images/Iphone 16 (verde).jpeg"
+            }
+          ],
+          "storage": [],
+          "ram": [],
+          "condition": [],
+          "combinations": [
+            {
+              "color": "Preto",
+              "storage": "",
+              "ram": "",
+              "condition": "",
+              "image": "",
+              "stock": 0,
+              "erpPrice": null,
+              "inventoryItemId": "VAR-1763504404711-1"
+            },
+            {
+              "color": "Branco",
+              "storage": "",
+              "ram": "",
+              "condition": "",
+              "image": "",
+              "stock": 0,
+              "erpPrice": null,
+              "inventoryItemId": "VAR-1763504404711-2"
+            },
+            {
+              "color": "Ultramarine",
+              "storage": "",
+              "ram": "",
+              "condition": "",
+              "image": "",
+              "stock": 0,
+              "erpPrice": null,
+              "inventoryItemId": "VAR-1763504404711-3"
+            },
+            {
+              "color": "Rosa",
+              "storage": "",
+              "ram": "",
+              "condition": "",
+              "image": "",
+              "stock": 0,
+              "erpPrice": null,
+              "inventoryItemId": "VAR-1763504404711-4"
+            },
+            {
+              "color": "Verde Acizentado",
+              "storage": "",
+              "ram": "",
+              "condition": "",
+              "image": "",
+              "stock": 0,
+              "erpPrice": null,
+              "inventoryItemId": "VAR-1763504404711-5"
+            }
+          ],
+          "labels": {},
+          "colorsText": "Preto|#111111|images/Iphone 16 preto.jpeg\nBranco|#ffffff|images/Iphone 16 (branco).jpeg\nUltramarine|#2730b0|images/Iphone 16 (azul).jpeg\nRosa|#f934f2|images/Iphone 16 (rosa).jpeg\nVerde Acizentado|#39a24b|images/Iphone 16 (verde).jpeg",
+          "storageText": "",
+          "ramText": "",
+          "conditionText": "",
+          "labelsText": "{}",
+          "combinationsText": "Preto\nBranco\nUltramarine\nRosa\nVerde Acizentado"
+        },
+        "erp": {
+          "internalCode": "PRD-11",
+          "categoryId": "ERP-CAT-1",
+          "category": "smartphones"
+        },
+        "code": "PRD-11",
+        "inventory": {
+          "itemId": "PRD-1763504404711",
+          "stockControlled": true,
+          "allowNegative": false,
+          "minimumQuantity": 0,
+          "channelAvailability": {
+            "site": {
+              "mode": "shared",
+              "enabled": true,
+              "limit": null,
+              "physicalSafety": 0
+            }
+          }
+        },
+        "inventoryBalance": {
+          "physicalQuantity": 0,
+          "availableQuantity": 0,
+          "reservedQuantity": 0,
+          "derivedFromVariations": true
+        }
+      },
+      "after": {
+        "id": 1763504404711,
+        "name": "Iphone 16 128gb novo lacrado",
+        "price": null,
+        "image": "images/Iphone 16 preto.jpeg",
+        "category": "smartphones",
+        "showPrice": false,
+        "featured": false,
+        "active": true,
+        "gallery": [
+          "images/produtos/1783216405845-iphone-16-verde.jpeg",
+          "images/produtos/1783216405848-iphone-16-azul.jpeg",
+          "images/produtos/1783216405853-iphone-16-rosa.jpeg",
+          "images/produtos/1783216405858-iphone-16-branco.jpeg"
+        ],
+        "detailsEnabled": true,
+        "descriptionShort": "O iPhone 16 combina potência avançada e praticidade no tamanho ideal. Equipado com o novo chip A18, ele entrega desempenho ultraveloz com excelente economia de bateria. O grande destaque desta geração é o botão Controle da Câmera, que facilita o acesso instantâneo às suas fotos e vídeos. Perfeito para o dia a dia, jogos e redes sociais",
+        "descriptionLong": "<p><b>Destaques do Produto:</b></p><ul><li><p><b>Controle da Câmera:</b> Botão físico tátil para abrir, dar zoom e tirar fotos instantaneamente</p></li><li><p><b>Desempenho Inovador:</b> Processador A18, ultraveloz para jogos, tarefas pesadas e inteligência artificial</p></li><li><p><b>Fotos Profissionais:</b> Câmera de 48 MP com zoom óptico de 2x e lente macro integrada</p></li><li><p><b>Botão de Ação:</b> Atalho prático e personalizável para ativar suas funções favoritas num clique</p></li><li><p><b>Design de Ponta:</b> Acabamento em alumínio aeroespacial altamente resistente a quedas e riscos</p></li></ul><p><b>Especificações Técnicas:</b></p><ul><li><p><b>Tela:</b> 6,1\" Super Retina XDR OLED</p></li><li><p><b>Processador:</b> Apple A18 Chip</p></li><li><p><b>Armazenamento:</b> 128GB</p></li><li><p><b>Câmeras Traseiras:</b> 48 MP (Principal) + 12 MP (Ultrawide)</p></li><li><p><b>Conectividade:</b> USB-C, Wi-Fi 7 e 5G</p></li><li><p><b>Resistência:</b> Certificação IP68 (à prova d'água e poeira)</p></li></ul><p><b>Conteúdo da Embalagem:</b>\niPhone 16 128GB, Cabo USB-C para Recarga e Manuais</p>",
+        "slug": "iphone-16-128gb-novo-lacrado",
+        "stock": 0,
+        "tags": [],
+        "relatedManualIds": [],
+        "crossSellIds": [],
+        "showVariationsOnCard": true,
+        "variations": {
+          "enabled": true,
+          "colors": [
+            {
+              "name": "Preto",
+              "hex": "#111111",
+              "image": "images/Iphone 16 preto.jpeg"
+            },
+            {
+              "name": "Branco",
+              "hex": "#ffffff",
+              "image": "images/Iphone 16 (branco).jpeg"
+            },
+            {
+              "name": "Ultramarine",
+              "hex": "#2730b0",
+              "image": "images/Iphone 16 (azul).jpeg"
+            },
+            {
+              "name": "Rosa",
+              "hex": "#f934f2",
+              "image": "images/Iphone 16 (rosa).jpeg"
+            },
+            {
+              "name": "Verde Acizentado",
+              "hex": "#39a24b",
+              "image": "images/Iphone 16 (verde).jpeg"
+            }
+          ],
+          "storage": [],
+          "ram": [],
+          "condition": [],
+          "combinations": [
+            {
+              "color": "Preto",
+              "storage": "",
+              "ram": "",
+              "condition": "",
+              "image": "",
+              "stock": 0,
+              "erpPrice": null,
+              "costPrice": null,
+              "desiredMarginPercent": null,
+              "inventoryItemId": "VAR-1763504404711-1"
+            },
+            {
+              "color": "Branco",
+              "storage": "",
+              "ram": "",
+              "condition": "",
+              "image": "",
+              "stock": 0,
+              "erpPrice": null,
+              "costPrice": null,
+              "desiredMarginPercent": null,
+              "inventoryItemId": "VAR-1763504404711-2"
+            },
+            {
+              "color": "Ultramarine",
+              "storage": "",
+              "ram": "",
+              "condition": "",
+              "image": "",
+              "stock": 0,
+              "erpPrice": null,
+              "costPrice": null,
+              "desiredMarginPercent": null,
+              "inventoryItemId": "VAR-1763504404711-3"
+            },
+            {
+              "color": "Rosa",
+              "storage": "",
+              "ram": "",
+              "condition": "",
+              "image": "",
+              "stock": 0,
+              "erpPrice": null,
+              "costPrice": null,
+              "desiredMarginPercent": null,
+              "inventoryItemId": "VAR-1763504404711-4"
+            },
+            {
+              "color": "Verde Acizentado",
+              "storage": "",
+              "ram": "",
+              "condition": "",
+              "image": "",
+              "stock": 0,
+              "erpPrice": null,
+              "costPrice": null,
+              "desiredMarginPercent": null,
+              "inventoryItemId": "VAR-1763504404711-5"
+            }
+          ],
+          "labels": {},
+          "colorsText": "Preto|#111111|images/Iphone 16 preto.jpeg\nBranco|#ffffff|images/Iphone 16 (branco).jpeg\nUltramarine|#2730b0|images/Iphone 16 (azul).jpeg\nRosa|#f934f2|images/Iphone 16 (rosa).jpeg\nVerde Acizentado|#39a24b|images/Iphone 16 (verde).jpeg",
+          "storageText": "",
+          "ramText": "",
+          "conditionText": "",
+          "labelsText": "{}",
+          "combinationsText": "Preto|||||0\nBranco|||||0\nUltramarine|||||0\nRosa|||||0\nVerde Acizentado|||||0"
+        },
+        "erp": {
+          "internalCode": "PRD-11",
+          "categoryId": "ERP-CAT-1",
+          "category": "smartphones",
+          "sku": "",
+          "supplierCode": "",
+          "searchAlias": "",
+          "barcode": "",
+          "ncm": "",
+          "fiscal": {
+            "ncm": ""
+          },
+          "brand": "",
+          "unit": "UN",
+          "subcategory": "",
+          "mainSupplierId": "",
+          "preferredSupplierId": "",
+          "active": true
+        },
+        "code": "PRD-11",
+        "inventory": {
+          "itemId": "PRD-1763504404711",
+          "stockControlled": true,
+          "allowNegative": false,
+          "minimumQuantity": 0,
+          "channelAvailability": {
+            "site": {
+              "mode": "shared",
+              "enabled": true,
+              "limit": null,
+              "physicalSafety": 0
+            }
+          }
+        },
+        "inventoryBalance": {
+          "physicalQuantity": 0,
+          "availableQuantity": 0,
+          "reservedQuantity": 0,
+          "derivedFromVariations": true
+        },
+        "sku": "",
+        "barcode": "",
+        "ncm": "",
+        "brand": "",
+        "commercial": {
+          "costPrice": null,
+          "erpPrice": null,
+          "salePrice": null,
+          "marketplacePrice": null,
+          "promotionalPrice": null,
+          "desiredMarginPercent": null,
+          "expectedProfit": null,
+          "defaultCommissionPercent": null,
+          "cashPrice": null,
+          "installmentPrice": null,
+          "minimumPrice": null,
+          "minimumMarginPercent": null,
+          "discountPolicy": "inherit",
+          "maximumDiscountPercent": null,
+          "maximumDiscountAmount": null,
+          "requiresAuthorization": false
+        },
+        "subcategory": "",
+        "virtualStore": {
+          "name": "Iphone 16 128gb novo lacrado",
+          "price": null,
+          "active": true,
+          "seoTitle": "",
+          "seoDescription": "",
+          "channels": {
+            "lojaVirtual": {
+              "enabled": true
+            },
+            "mercadoLivre": {
+              "enabled": false
+            },
+            "shopee": {
+              "enabled": false
+            },
+            "amazon": {
+              "enabled": false
+            },
+            "magalu": {
+              "enabled": false
+            }
+          }
+        }
+      },
+      "ip": "127.0.0.1",
+      "requestId": "b3c0f6a4-4dda-45ba-ab40-b6ccccf57783"
+    },
+    {
+      "id": "AUD-00000114",
+      "at": "2026-09-03T10:48:25.039Z",
+      "module": "agenda",
+      "action": "TASK_CREATED",
+      "actor": "Matheus Fernando",
+      "entityType": "agenda_task",
+      "entityId": "task_mtlejcng_l1yov0",
+      "documentId": "",
+      "reason": "",
+      "before": null,
+      "after": {
+        "id": "task_mtlejcng_l1yov0",
+        "customerId": "",
+        "customerName": "",
+        "conversationId": "",
+        "owner": "Quality",
+        "type": "task",
+        "typeName": "Tarefa",
+        "title": "organizar formas de pagamento erp",
+        "description": "",
+        "dueAt": "2026-09-04T12:00",
+        "priority": "medium",
+        "status": "open",
+        "createdAt": "2026-09-03T10:48:25.036Z",
+        "createdBy": "Matheus Fernando",
+        "updatedAt": "2026-09-03T10:48:25.036Z",
+        "updatedBy": "Matheus Fernando",
+        "completedAt": null,
+        "history": [
+          {
+            "at": "2026-09-03T10:48:25.036Z",
+            "actor": "Matheus Fernando",
+            "action": "created",
+            "before": null,
+            "after": {
+              "title": "organizar formas de pagamento erp",
+              "description": "",
+              "dueAt": "2026-09-04T12:00",
+              "priority": "medium",
+              "type": "task",
+              "typeName": "Tarefa",
+              "customerId": "",
+              "customerName": "",
+              "owner": "Quality",
+              "status": "open"
+            }
+          }
+        ]
+      },
+      "ip": "127.0.0.1",
+      "requestId": ""
+    },
+    {
+      "id": "AUD-00000115",
+      "at": "2026-09-03T11:02:22.849Z",
+      "module": "produtos",
+      "action": "PRODUCT_UPDATED",
+      "actor": "Matheus Fernando",
+      "entityType": "product",
+      "entityId": "1788433319796",
+      "documentId": "",
+      "reason": "Cadastro de produto atualizado",
+      "before": {
+        "name": "Celular Usado Samsung A12 A127m 64gb",
+        "sku": "",
+        "code": "PRD-976",
+        "barcode": "",
+        "ncm": "85171300",
+        "brand": "",
+        "slug": "celular-usado-samsung-a12-a127m-64gb",
+        "price": null,
+        "commercial": {
+          "costPrice": null,
+          "erpPrice": 430,
+          "salePrice": 430,
+          "marketplacePrice": null,
+          "promotionalPrice": null,
+          "desiredMarginPercent": null,
+          "expectedProfit": null,
+          "defaultCommissionPercent": null,
+          "cashPrice": 430,
+          "installmentPrice": 430,
+          "minimumPrice": null,
+          "minimumMarginPercent": null,
+          "discountPolicy": "inherit",
+          "maximumDiscountPercent": null,
+          "maximumDiscountAmount": null,
+          "requiresAuthorization": false
+        },
+        "stock": 0,
+        "inventory": {
+          "itemId": "PRD-1788433319796",
+          "stockControlled": true,
+          "allowNegative": false,
+          "minimumQuantity": 0,
+          "channelAvailability": {
+            "site": {
+              "mode": "shared",
+              "enabled": true,
+              "limit": null,
+              "physicalSafety": 0
+            }
+          }
+        },
+        "image": "",
+        "gallery": [],
+        "category": "",
+        "subcategory": "",
+        "tags": [],
+        "relatedManualIds": [],
+        "crossSellIds": [],
+        "showPrice": true,
+        "featured": false,
+        "active": false,
+        "erp": {
+          "sku": "",
+          "internalCode": "PRD-976",
+          "supplierCode": "",
+          "searchAlias": "",
+          "barcode": "",
+          "ncm": "85171300",
+          "fiscal": {
+            "ncm": "85171300"
+          },
+          "brand": "",
+          "unit": "UN",
+          "category": "smartphones",
+          "subcategory": "",
+          "mainSupplierId": "",
+          "preferredSupplierId": "",
+          "active": true,
+          "categoryId": "ERP-CAT-1"
+        },
+        "virtualStore": {
+          "name": "",
+          "price": null,
+          "active": false,
+          "seoTitle": "",
+          "seoDescription": "",
+          "channels": {
+            "lojaVirtual": {
+              "enabled": false
+            },
+            "mercadoLivre": {
+              "enabled": false
+            },
+            "shopee": {
+              "enabled": false
+            },
+            "amazon": {
+              "enabled": false
+            },
+            "magalu": {
+              "enabled": false
+            }
+          }
+        },
+        "detailsEnabled": false,
+        "showVariationsOnCard": false,
+        "descriptionShort": "",
+        "descriptionLong": "",
+        "variations": {
+          "enabled": true,
+          "colors": [],
+          "storage": [],
+          "ram": [],
+          "condition": [],
+          "combinations": [],
+          "labels": {},
+          "colorsText": "",
+          "storageText": "",
+          "ramText": "",
+          "conditionText": "",
+          "labelsText": "{}",
+          "combinationsText": ""
+        },
+        "id": 1788433319796,
+        "inventoryBalance": {
+          "inventoryItemId": "PRD-1788433319796",
+          "locationId": "loja-principal",
+          "physicalQuantity": 0,
+          "reservedQuantity": 0,
+          "availableQuantity": 0,
+          "minimumQuantity": 0,
+          "updatedAt": "2026-09-03T11:01:59.799Z"
+        }
+      },
+      "after": {
+        "name": "Celular Usado Samsung A12 A127m 64gb 4gb ram",
+        "sku": "",
+        "code": "PRD-976",
+        "barcode": "",
+        "ncm": "85171300",
+        "brand": "",
+        "slug": "celular-usado-samsung-a12-a127m-64gb",
+        "price": null,
+        "commercial": {
+          "costPrice": null,
+          "erpPrice": 430,
+          "salePrice": 430,
+          "marketplacePrice": null,
+          "promotionalPrice": null,
+          "desiredMarginPercent": null,
+          "expectedProfit": null,
+          "defaultCommissionPercent": null,
+          "cashPrice": 430,
+          "installmentPrice": 430,
+          "minimumPrice": null,
+          "minimumMarginPercent": null,
+          "discountPolicy": "inherit",
+          "maximumDiscountPercent": null,
+          "maximumDiscountAmount": null,
+          "requiresAuthorization": false
+        },
+        "stock": 0,
+        "inventory": {
+          "itemId": "PRD-1788433319796",
+          "stockControlled": true,
+          "allowNegative": false,
+          "minimumQuantity": 0,
+          "channelAvailability": {
+            "site": {
+              "mode": "shared",
+              "enabled": true,
+              "limit": null,
+              "physicalSafety": 0
+            }
+          }
+        },
+        "image": "",
+        "gallery": [],
+        "category": "",
+        "subcategory": "",
+        "tags": [],
+        "relatedManualIds": [],
+        "crossSellIds": [],
+        "showPrice": true,
+        "featured": false,
+        "active": false,
+        "erp": {
+          "sku": "",
+          "internalCode": "PRD-976",
+          "supplierCode": "",
+          "searchAlias": "",
+          "barcode": "",
+          "ncm": "85171300",
+          "fiscal": {
+            "ncm": "85171300"
+          },
+          "brand": "",
+          "unit": "UN",
+          "category": "smartphones",
+          "subcategory": "",
+          "mainSupplierId": "",
+          "preferredSupplierId": "",
+          "active": true,
+          "categoryId": "ERP-CAT-1"
+        },
+        "virtualStore": {
+          "name": "",
+          "price": null,
+          "active": false,
+          "seoTitle": "",
+          "seoDescription": "",
+          "channels": {
+            "lojaVirtual": {
+              "enabled": false
+            },
+            "mercadoLivre": {
+              "enabled": false
+            },
+            "shopee": {
+              "enabled": false
+            },
+            "amazon": {
+              "enabled": false
+            },
+            "magalu": {
+              "enabled": false
+            }
+          }
+        },
+        "detailsEnabled": false,
+        "showVariationsOnCard": false,
+        "descriptionShort": "",
+        "descriptionLong": "",
+        "variations": {
+          "enabled": true,
+          "colors": [],
+          "storage": [],
+          "ram": [],
+          "condition": [],
+          "combinations": [],
+          "labels": {},
+          "colorsText": "",
+          "storageText": "",
+          "ramText": "",
+          "conditionText": "",
+          "labelsText": "{}",
+          "combinationsText": ""
+        },
+        "id": 1788433319796,
+        "inventoryBalance": {
+          "inventoryItemId": "PRD-1788433319796",
+          "locationId": "loja-principal",
+          "physicalQuantity": 0,
+          "reservedQuantity": 0,
+          "availableQuantity": 0,
+          "minimumQuantity": 0,
+          "updatedAt": "2026-09-03T11:01:59.799Z"
+        }
+      },
+      "ip": "127.0.0.1",
+      "requestId": "bf95f30a-f16d-46ac-a122-34cb71fc5431"
+    },
+    {
+      "id": "AUD-00000116",
+      "at": "2026-09-03T11:07:48.373Z",
+      "module": "produtos",
+      "action": "PRODUCT_UPDATED",
+      "actor": "Matheus Fernando",
+      "entityType": "product",
+      "entityId": "1788433593777",
+      "documentId": "",
+      "reason": "Cadastro de produto atualizado",
+      "before": {
+        "name": "Celular Usado Samsung S23 Fe 128gb",
+        "sku": "",
+        "code": "PRD-977",
+        "barcode": "",
+        "ncm": "85171300",
+        "brand": "",
+        "slug": "celular-usado-samsung-s23-fe-128gb",
+        "price": null,
+        "commercial": {
+          "costPrice": 700,
+          "erpPrice": null,
+          "salePrice": null,
+          "marketplacePrice": null,
+          "promotionalPrice": null,
+          "desiredMarginPercent": null,
+          "expectedProfit": null,
+          "defaultCommissionPercent": null,
+          "cashPrice": null,
+          "installmentPrice": null,
+          "minimumPrice": null,
+          "minimumMarginPercent": null,
+          "discountPolicy": "inherit",
+          "maximumDiscountPercent": null,
+          "maximumDiscountAmount": null,
+          "requiresAuthorization": false
+        },
+        "stock": 0,
+        "inventory": {
+          "itemId": "PRD-1788433593777",
+          "stockControlled": true,
+          "allowNegative": false,
+          "minimumQuantity": 0,
+          "channelAvailability": {
+            "site": {
+              "mode": "shared",
+              "enabled": true,
+              "limit": null,
+              "physicalSafety": 0
+            }
+          }
+        },
+        "image": "",
+        "gallery": [],
+        "category": "",
+        "subcategory": "",
+        "tags": [],
+        "relatedManualIds": [],
+        "crossSellIds": [],
+        "showPrice": true,
+        "featured": false,
+        "active": false,
+        "erp": {
+          "sku": "",
+          "internalCode": "PRD-977",
+          "supplierCode": "",
+          "searchAlias": "",
+          "barcode": "",
+          "ncm": "85171300",
+          "fiscal": {
+            "ncm": "85171300"
+          },
+          "brand": "",
+          "unit": "UN",
+          "category": "smartphones",
+          "subcategory": "",
+          "mainSupplierId": "",
+          "preferredSupplierId": "",
+          "active": true,
+          "categoryId": "ERP-CAT-1"
+        },
+        "virtualStore": {
+          "name": "",
+          "price": null,
+          "active": false,
+          "seoTitle": "",
+          "seoDescription": "",
+          "channels": {
+            "lojaVirtual": {
+              "enabled": false
+            },
+            "mercadoLivre": {
+              "enabled": false
+            },
+            "shopee": {
+              "enabled": false
+            },
+            "amazon": {
+              "enabled": false
+            },
+            "magalu": {
+              "enabled": false
+            }
+          }
+        },
+        "detailsEnabled": false,
+        "showVariationsOnCard": false,
+        "descriptionShort": "",
+        "descriptionLong": "",
+        "variations": {
+          "enabled": false,
+          "colors": [],
+          "storage": [],
+          "ram": [],
+          "condition": [],
+          "combinations": [],
+          "labels": {},
+          "colorsText": "",
+          "storageText": "",
+          "ramText": "",
+          "conditionText": "",
+          "labelsText": "{}",
+          "combinationsText": ""
+        },
+        "id": 1788433593777,
+        "inventoryBalance": {
+          "inventoryItemId": "PRD-1788433593777",
+          "locationId": "loja-principal",
+          "physicalQuantity": 0,
+          "reservedQuantity": 0,
+          "availableQuantity": 0,
+          "minimumQuantity": 0,
+          "updatedAt": "2026-09-03T11:06:33.779Z"
+        }
+      },
+      "after": {
+        "name": "Celular Usado Samsung S23 Fe 128gb 8gb ram",
+        "sku": "",
+        "code": "PRD-977",
+        "barcode": "",
+        "ncm": "85171300",
+        "brand": "",
+        "slug": "celular-usado-samsung-s23-fe-128gb",
+        "price": null,
+        "commercial": {
+          "costPrice": 700,
+          "erpPrice": null,
+          "salePrice": null,
+          "marketplacePrice": null,
+          "promotionalPrice": null,
+          "desiredMarginPercent": null,
+          "expectedProfit": null,
+          "defaultCommissionPercent": null,
+          "cashPrice": null,
+          "installmentPrice": null,
+          "minimumPrice": null,
+          "minimumMarginPercent": null,
+          "discountPolicy": "inherit",
+          "maximumDiscountPercent": null,
+          "maximumDiscountAmount": null,
+          "requiresAuthorization": false
+        },
+        "stock": 0,
+        "inventory": {
+          "itemId": "PRD-1788433593777",
+          "stockControlled": true,
+          "allowNegative": false,
+          "minimumQuantity": 0,
+          "channelAvailability": {
+            "site": {
+              "mode": "shared",
+              "enabled": true,
+              "limit": null,
+              "physicalSafety": 0
+            }
+          }
+        },
+        "image": "",
+        "gallery": [],
+        "category": "",
+        "subcategory": "",
+        "tags": [],
+        "relatedManualIds": [],
+        "crossSellIds": [],
+        "showPrice": true,
+        "featured": false,
+        "active": false,
+        "erp": {
+          "sku": "",
+          "internalCode": "PRD-977",
+          "supplierCode": "",
+          "searchAlias": "",
+          "barcode": "",
+          "ncm": "85171300",
+          "fiscal": {
+            "ncm": "85171300"
+          },
+          "brand": "",
+          "unit": "UN",
+          "category": "smartphones",
+          "subcategory": "",
+          "mainSupplierId": "",
+          "preferredSupplierId": "",
+          "active": true,
+          "categoryId": "ERP-CAT-1"
+        },
+        "virtualStore": {
+          "name": "Celular Usado Samsung S23 Fe 128gb",
+          "price": null,
+          "active": false,
+          "seoTitle": "Celular Usado Samsung S23 Fe 128gb",
+          "seoDescription": "",
+          "channels": {
+            "lojaVirtual": {
+              "enabled": false
+            },
+            "mercadoLivre": {
+              "enabled": false
+            },
+            "shopee": {
+              "enabled": false
+            },
+            "amazon": {
+              "enabled": false
+            },
+            "magalu": {
+              "enabled": false
+            }
+          }
+        },
+        "detailsEnabled": false,
+        "showVariationsOnCard": false,
+        "descriptionShort": "",
+        "descriptionLong": "",
+        "variations": {
+          "enabled": true,
+          "colors": [
+            {
+              "name": "Preto",
+              "hex": "#111111",
+              "image": ""
+            }
+          ],
+          "storage": [],
+          "ram": [],
+          "condition": [],
+          "combinations": [
+            {
+              "color": "Preto",
+              "storage": "",
+              "ram": "",
+              "condition": "",
+              "image": "",
+              "stock": 0,
+              "erpPrice": null,
+              "costPrice": null,
+              "desiredMarginPercent": null,
+              "inventoryItemId": "VAR-1788433593777-1"
+            }
+          ],
+          "labels": {},
+          "colorsText": "Preto|#111111",
+          "storageText": "",
+          "ramText": "",
+          "conditionText": "",
+          "labelsText": "{}",
+          "combinationsText": "Preto"
+        },
+        "id": 1788433593777,
+        "inventoryBalance": {
+          "inventoryItemId": "PRD-1788433593777",
+          "locationId": "loja-principal",
+          "physicalQuantity": 0,
+          "reservedQuantity": 0,
+          "availableQuantity": 0,
+          "minimumQuantity": 0,
+          "updatedAt": "2026-09-03T11:06:33.779Z"
+        }
+      },
+      "ip": "127.0.0.1",
+      "requestId": "5ce4351d-89af-4c29-b4c6-d5c3ecbb6ec9"
+    },
+    {
+      "id": "AUD-00000117",
+      "at": "2026-09-03T11:07:51.177Z",
+      "module": "produtos",
+      "action": "PRODUCT_UPDATED",
+      "actor": "Matheus Fernando",
+      "entityType": "product",
+      "entityId": "1788433593777",
+      "documentId": "",
+      "reason": "Cadastro de produto atualizado",
+      "before": {
+        "name": "Celular Usado Samsung S23 Fe 128gb 8gb ram",
+        "sku": "",
+        "code": "PRD-977",
+        "barcode": "",
+        "ncm": "85171300",
+        "brand": "",
+        "slug": "celular-usado-samsung-s23-fe-128gb",
+        "price": null,
+        "commercial": {
+          "costPrice": 700,
+          "erpPrice": null,
+          "salePrice": null,
+          "marketplacePrice": null,
+          "promotionalPrice": null,
+          "desiredMarginPercent": null,
+          "expectedProfit": null,
+          "defaultCommissionPercent": null,
+          "cashPrice": null,
+          "installmentPrice": null,
+          "minimumPrice": null,
+          "minimumMarginPercent": null,
+          "discountPolicy": "inherit",
+          "maximumDiscountPercent": null,
+          "maximumDiscountAmount": null,
+          "requiresAuthorization": false
+        },
+        "stock": 0,
+        "inventory": {
+          "itemId": "PRD-1788433593777",
+          "stockControlled": true,
+          "allowNegative": false,
+          "minimumQuantity": 0,
+          "channelAvailability": {
+            "site": {
+              "mode": "shared",
+              "enabled": true,
+              "limit": null,
+              "physicalSafety": 0
+            }
+          }
+        },
+        "image": "",
+        "gallery": [],
+        "category": "",
+        "subcategory": "",
+        "tags": [],
+        "relatedManualIds": [],
+        "crossSellIds": [],
+        "showPrice": true,
+        "featured": false,
+        "active": false,
+        "erp": {
+          "sku": "",
+          "internalCode": "PRD-977",
+          "supplierCode": "",
+          "searchAlias": "",
+          "barcode": "",
+          "ncm": "85171300",
+          "fiscal": {
+            "ncm": "85171300"
+          },
+          "brand": "",
+          "unit": "UN",
+          "category": "smartphones",
+          "subcategory": "",
+          "mainSupplierId": "",
+          "preferredSupplierId": "",
+          "active": true,
+          "categoryId": "ERP-CAT-1"
+        },
+        "virtualStore": {
+          "name": "Celular Usado Samsung S23 Fe 128gb",
+          "price": null,
+          "active": false,
+          "seoTitle": "Celular Usado Samsung S23 Fe 128gb",
+          "seoDescription": "",
+          "channels": {
+            "lojaVirtual": {
+              "enabled": false
+            },
+            "mercadoLivre": {
+              "enabled": false
+            },
+            "shopee": {
+              "enabled": false
+            },
+            "amazon": {
+              "enabled": false
+            },
+            "magalu": {
+              "enabled": false
+            }
+          }
+        },
+        "detailsEnabled": false,
+        "showVariationsOnCard": false,
+        "descriptionShort": "",
+        "descriptionLong": "",
+        "variations": {
+          "enabled": true,
+          "colors": [
+            {
+              "name": "Preto",
+              "hex": "#111111",
+              "image": ""
+            }
+          ],
+          "storage": [],
+          "ram": [],
+          "condition": [],
+          "combinations": [
+            {
+              "color": "Preto",
+              "storage": "",
+              "ram": "",
+              "condition": "",
+              "image": "",
+              "stock": 0,
+              "erpPrice": null,
+              "costPrice": null,
+              "desiredMarginPercent": null,
+              "inventoryItemId": "VAR-1788433593777-1"
+            }
+          ],
+          "labels": {},
+          "colorsText": "Preto|#111111",
+          "storageText": "",
+          "ramText": "",
+          "conditionText": "",
+          "labelsText": "{}",
+          "combinationsText": "Preto"
+        },
+        "id": 1788433593777,
+        "inventoryBalance": {
+          "inventoryItemId": "PRD-1788433593777",
+          "locationId": "loja-principal",
+          "physicalQuantity": 0,
+          "reservedQuantity": 0,
+          "availableQuantity": 0,
+          "minimumQuantity": 0,
+          "updatedAt": "2026-09-03T11:06:33.779Z"
+        }
+      },
+      "after": {
+        "name": "Celular Usado Samsung S23 Fe 128gb 8gb ram",
+        "sku": "",
+        "code": "PRD-977",
+        "barcode": "",
+        "ncm": "85171300",
+        "brand": "",
+        "slug": "celular-usado-samsung-s23-fe-128gb",
+        "price": null,
+        "commercial": {
+          "costPrice": 700,
+          "erpPrice": null,
+          "salePrice": null,
+          "marketplacePrice": null,
+          "promotionalPrice": null,
+          "desiredMarginPercent": null,
+          "expectedProfit": null,
+          "defaultCommissionPercent": null,
+          "cashPrice": null,
+          "installmentPrice": null,
+          "minimumPrice": null,
+          "minimumMarginPercent": null,
+          "discountPolicy": "inherit",
+          "maximumDiscountPercent": null,
+          "maximumDiscountAmount": null,
+          "requiresAuthorization": false
+        },
+        "stock": 0,
+        "inventory": {
+          "itemId": "PRD-1788433593777",
+          "stockControlled": true,
+          "allowNegative": false,
+          "minimumQuantity": 0,
+          "channelAvailability": {
+            "site": {
+              "mode": "shared",
+              "enabled": true,
+              "limit": null,
+              "physicalSafety": 0
+            }
+          }
+        },
+        "image": "",
+        "gallery": [],
+        "category": "",
+        "subcategory": "",
+        "tags": [],
+        "relatedManualIds": [],
+        "crossSellIds": [],
+        "showPrice": true,
+        "featured": false,
+        "active": false,
+        "erp": {
+          "sku": "",
+          "internalCode": "PRD-977",
+          "supplierCode": "",
+          "searchAlias": "",
+          "barcode": "",
+          "ncm": "85171300",
+          "fiscal": {
+            "ncm": "85171300"
+          },
+          "brand": "",
+          "unit": "UN",
+          "category": "smartphones",
+          "subcategory": "",
+          "mainSupplierId": "",
+          "preferredSupplierId": "",
+          "active": true,
+          "categoryId": "ERP-CAT-1"
+        },
+        "virtualStore": {
+          "name": "Celular Usado Samsung S23 Fe 128gb",
+          "price": null,
+          "active": false,
+          "seoTitle": "Celular Usado Samsung S23 Fe 128gb",
+          "seoDescription": "",
+          "channels": {
+            "lojaVirtual": {
+              "enabled": false
+            },
+            "mercadoLivre": {
+              "enabled": false
+            },
+            "shopee": {
+              "enabled": false
+            },
+            "amazon": {
+              "enabled": false
+            },
+            "magalu": {
+              "enabled": false
+            }
+          }
+        },
+        "detailsEnabled": false,
+        "showVariationsOnCard": false,
+        "descriptionShort": "",
+        "descriptionLong": "",
+        "variations": {
+          "enabled": true,
+          "colors": [
+            {
+              "name": "Preto",
+              "hex": "#111111",
+              "image": ""
+            }
+          ],
+          "storage": [],
+          "ram": [],
+          "condition": [],
+          "combinations": [
+            {
+              "color": "Preto",
+              "storage": "",
+              "ram": "",
+              "condition": "",
+              "image": "",
+              "stock": 0,
+              "erpPrice": null,
+              "costPrice": null,
+              "desiredMarginPercent": null,
+              "inventoryItemId": "VAR-1788433593777-1"
+            }
+          ],
+          "labels": {},
+          "colorsText": "Preto|#111111",
+          "storageText": "",
+          "ramText": "",
+          "conditionText": "",
+          "labelsText": "{}",
+          "combinationsText": "Preto"
+        },
+        "id": 1788433593777,
+        "inventoryBalance": {
+          "inventoryItemId": "PRD-1788433593777",
+          "locationId": "loja-principal",
+          "physicalQuantity": 0,
+          "reservedQuantity": 0,
+          "availableQuantity": 0,
+          "minimumQuantity": 0,
+          "updatedAt": "2026-09-03T11:06:33.779Z"
+        }
+      },
+      "ip": "127.0.0.1",
+      "requestId": "08a3b0a2-5f01-4c41-8a93-5127338f79ef"
+    },
+    {
+      "id": "AUD-00000118",
+      "at": "2026-09-03T11:08:13.282Z",
+      "module": "produtos",
+      "action": "PRODUCT_UPDATED",
+      "actor": "Matheus Fernando",
+      "entityType": "product",
+      "entityId": "1788433593777",
+      "documentId": "",
+      "reason": "Cadastro de produto atualizado",
+      "before": {
+        "name": "Celular Usado Samsung S23 Fe 128gb 8gb ram",
+        "sku": "",
+        "code": "PRD-977",
+        "barcode": "",
+        "ncm": "85171300",
+        "brand": "",
+        "slug": "celular-usado-samsung-s23-fe-128gb",
+        "price": null,
+        "commercial": {
+          "costPrice": 700,
+          "erpPrice": null,
+          "salePrice": null,
+          "marketplacePrice": null,
+          "promotionalPrice": null,
+          "desiredMarginPercent": null,
+          "expectedProfit": null,
+          "defaultCommissionPercent": null,
+          "cashPrice": null,
+          "installmentPrice": null,
+          "minimumPrice": null,
+          "minimumMarginPercent": null,
+          "discountPolicy": "inherit",
+          "maximumDiscountPercent": null,
+          "maximumDiscountAmount": null,
+          "requiresAuthorization": false
+        },
+        "stock": 0,
+        "inventory": {
+          "itemId": "PRD-1788433593777",
+          "stockControlled": true,
+          "allowNegative": false,
+          "minimumQuantity": 0,
+          "channelAvailability": {
+            "site": {
+              "mode": "shared",
+              "enabled": true,
+              "limit": null,
+              "physicalSafety": 0
+            }
+          }
+        },
+        "image": "",
+        "gallery": [],
+        "category": "",
+        "subcategory": "",
+        "tags": [],
+        "relatedManualIds": [],
+        "crossSellIds": [],
+        "showPrice": true,
+        "featured": false,
+        "active": false,
+        "erp": {
+          "sku": "",
+          "internalCode": "PRD-977",
+          "supplierCode": "",
+          "searchAlias": "",
+          "barcode": "",
+          "ncm": "85171300",
+          "fiscal": {
+            "ncm": "85171300"
+          },
+          "brand": "",
+          "unit": "UN",
+          "category": "smartphones",
+          "subcategory": "",
+          "mainSupplierId": "",
+          "preferredSupplierId": "",
+          "active": true,
+          "categoryId": "ERP-CAT-1"
+        },
+        "virtualStore": {
+          "name": "Celular Usado Samsung S23 Fe 128gb",
+          "price": null,
+          "active": false,
+          "seoTitle": "Celular Usado Samsung S23 Fe 128gb",
+          "seoDescription": "",
+          "channels": {
+            "lojaVirtual": {
+              "enabled": false
+            },
+            "mercadoLivre": {
+              "enabled": false
+            },
+            "shopee": {
+              "enabled": false
+            },
+            "amazon": {
+              "enabled": false
+            },
+            "magalu": {
+              "enabled": false
+            }
+          }
+        },
+        "detailsEnabled": false,
+        "showVariationsOnCard": false,
+        "descriptionShort": "",
+        "descriptionLong": "",
+        "variations": {
+          "enabled": true,
+          "colors": [
+            {
+              "name": "Preto",
+              "hex": "#111111",
+              "image": ""
+            }
+          ],
+          "storage": [],
+          "ram": [],
+          "condition": [],
+          "combinations": [
+            {
+              "color": "Preto",
+              "storage": "",
+              "ram": "",
+              "condition": "",
+              "image": "",
+              "stock": 0,
+              "erpPrice": null,
+              "costPrice": null,
+              "desiredMarginPercent": null,
+              "inventoryItemId": "VAR-1788433593777-1"
+            }
+          ],
+          "labels": {},
+          "colorsText": "Preto|#111111",
+          "storageText": "",
+          "ramText": "",
+          "conditionText": "",
+          "labelsText": "{}",
+          "combinationsText": "Preto"
+        },
+        "id": 1788433593777,
+        "inventoryBalance": {
+          "inventoryItemId": "PRD-1788433593777",
+          "locationId": "loja-principal",
+          "physicalQuantity": 0,
+          "reservedQuantity": 0,
+          "availableQuantity": 0,
+          "minimumQuantity": 0,
+          "updatedAt": "2026-09-03T11:06:33.779Z"
+        }
+      },
+      "after": {
+        "name": "Celular Usado Samsung S23 Fe 128gb 8gb ram",
+        "sku": "",
+        "code": "PRD-977",
+        "barcode": "",
+        "ncm": "85171300",
+        "brand": "",
+        "slug": "celular-usado-samsung-s23-fe-128gb",
+        "price": null,
+        "commercial": {
+          "costPrice": 700,
+          "erpPrice": null,
+          "salePrice": null,
+          "marketplacePrice": null,
+          "promotionalPrice": null,
+          "desiredMarginPercent": null,
+          "expectedProfit": null,
+          "defaultCommissionPercent": null,
+          "cashPrice": null,
+          "installmentPrice": null,
+          "minimumPrice": null,
+          "minimumMarginPercent": null,
+          "discountPolicy": "inherit",
+          "maximumDiscountPercent": null,
+          "maximumDiscountAmount": null,
+          "requiresAuthorization": false
+        },
+        "stock": 0,
+        "inventory": {
+          "itemId": "PRD-1788433593777",
+          "stockControlled": true,
+          "allowNegative": false,
+          "minimumQuantity": 0,
+          "channelAvailability": {
+            "site": {
+              "mode": "shared",
+              "enabled": true,
+              "limit": null,
+              "physicalSafety": 0
+            }
+          }
+        },
+        "image": "",
+        "gallery": [],
+        "category": "",
+        "subcategory": "",
+        "tags": [],
+        "relatedManualIds": [],
+        "crossSellIds": [],
+        "showPrice": true,
+        "featured": false,
+        "active": false,
+        "erp": {
+          "sku": "",
+          "internalCode": "PRD-977",
+          "supplierCode": "",
+          "searchAlias": "",
+          "barcode": "",
+          "ncm": "85171300",
+          "fiscal": {
+            "ncm": "85171300"
+          },
+          "brand": "",
+          "unit": "UN",
+          "category": "smartphones",
+          "subcategory": "",
+          "mainSupplierId": "",
+          "preferredSupplierId": "",
+          "active": true,
+          "categoryId": "ERP-CAT-1"
+        },
+        "virtualStore": {
+          "name": "Celular Usado Samsung S23 Fe 128gb",
+          "price": null,
+          "active": false,
+          "seoTitle": "Celular Usado Samsung S23 Fe 128gb",
+          "seoDescription": "",
+          "channels": {
+            "lojaVirtual": {
+              "enabled": false
+            },
+            "mercadoLivre": {
+              "enabled": false
+            },
+            "shopee": {
+              "enabled": false
+            },
+            "amazon": {
+              "enabled": false
+            },
+            "magalu": {
+              "enabled": false
+            }
+          }
+        },
+        "detailsEnabled": false,
+        "showVariationsOnCard": false,
+        "descriptionShort": "",
+        "descriptionLong": "",
+        "variations": {
+          "enabled": true,
+          "colors": [
+            {
+              "name": "Preto",
+              "hex": "#111111",
+              "image": ""
+            }
+          ],
+          "storage": [],
+          "ram": [],
+          "condition": [],
+          "combinations": [
+            {
+              "color": "Preto",
+              "storage": "",
+              "ram": "",
+              "condition": "",
+              "image": "",
+              "stock": 0,
+              "erpPrice": null,
+              "costPrice": null,
+              "desiredMarginPercent": null,
+              "inventoryItemId": "VAR-1788433593777-1"
+            }
+          ],
+          "labels": {},
+          "colorsText": "Preto|#111111",
+          "storageText": "",
+          "ramText": "",
+          "conditionText": "",
+          "labelsText": "{}",
+          "combinationsText": "Preto"
+        },
+        "id": 1788433593777,
+        "inventoryBalance": {
+          "inventoryItemId": "PRD-1788433593777",
+          "locationId": "loja-principal",
+          "physicalQuantity": 0,
+          "reservedQuantity": 0,
+          "availableQuantity": 0,
+          "minimumQuantity": 0,
+          "updatedAt": "2026-09-03T11:06:33.779Z"
+        }
+      },
+      "ip": "127.0.0.1",
+      "requestId": "25a3d859-7f67-4bf5-a22f-3c0c46c38816"
+    },
+    {
+      "id": "AUD-00000119",
+      "at": "2026-09-03T11:08:47.804Z",
+      "module": "produtos",
+      "action": "PRODUCT_UPDATED",
+      "actor": "Matheus Fernando",
+      "entityType": "product",
+      "entityId": "1788433593777",
+      "documentId": "",
+      "reason": "Cadastro de produto atualizado",
+      "before": {
+        "name": "Celular Usado Samsung S23 Fe 128gb 8gb ram",
+        "sku": "",
+        "code": "PRD-977",
+        "barcode": "",
+        "ncm": "85171300",
+        "brand": "",
+        "slug": "celular-usado-samsung-s23-fe-128gb",
+        "price": null,
+        "commercial": {
+          "costPrice": 700,
+          "erpPrice": null,
+          "salePrice": null,
+          "marketplacePrice": null,
+          "promotionalPrice": null,
+          "desiredMarginPercent": null,
+          "expectedProfit": null,
+          "defaultCommissionPercent": null,
+          "cashPrice": null,
+          "installmentPrice": null,
+          "minimumPrice": null,
+          "minimumMarginPercent": null,
+          "discountPolicy": "inherit",
+          "maximumDiscountPercent": null,
+          "maximumDiscountAmount": null,
+          "requiresAuthorization": false
+        },
+        "stock": 0,
+        "inventory": {
+          "itemId": "PRD-1788433593777",
+          "stockControlled": true,
+          "allowNegative": false,
+          "minimumQuantity": 0,
+          "channelAvailability": {
+            "site": {
+              "mode": "shared",
+              "enabled": true,
+              "limit": null,
+              "physicalSafety": 0
+            }
+          }
+        },
+        "image": "",
+        "gallery": [],
+        "category": "",
+        "subcategory": "",
+        "tags": [],
+        "relatedManualIds": [],
+        "crossSellIds": [],
+        "showPrice": true,
+        "featured": false,
+        "active": false,
+        "erp": {
+          "sku": "",
+          "internalCode": "PRD-977",
+          "supplierCode": "",
+          "searchAlias": "",
+          "barcode": "",
+          "ncm": "85171300",
+          "fiscal": {
+            "ncm": "85171300"
+          },
+          "brand": "",
+          "unit": "UN",
+          "category": "smartphones",
+          "subcategory": "",
+          "mainSupplierId": "",
+          "preferredSupplierId": "",
+          "active": true,
+          "categoryId": "ERP-CAT-1"
+        },
+        "virtualStore": {
+          "name": "Celular Usado Samsung S23 Fe 128gb",
+          "price": null,
+          "active": false,
+          "seoTitle": "Celular Usado Samsung S23 Fe 128gb",
+          "seoDescription": "",
+          "channels": {
+            "lojaVirtual": {
+              "enabled": false
+            },
+            "mercadoLivre": {
+              "enabled": false
+            },
+            "shopee": {
+              "enabled": false
+            },
+            "amazon": {
+              "enabled": false
+            },
+            "magalu": {
+              "enabled": false
+            }
+          }
+        },
+        "detailsEnabled": false,
+        "showVariationsOnCard": false,
+        "descriptionShort": "",
+        "descriptionLong": "",
+        "variations": {
+          "enabled": true,
+          "colors": [
+            {
+              "name": "Preto",
+              "hex": "#111111",
+              "image": ""
+            }
+          ],
+          "storage": [],
+          "ram": [],
+          "condition": [],
+          "combinations": [
+            {
+              "color": "Preto",
+              "storage": "",
+              "ram": "",
+              "condition": "",
+              "image": "",
+              "stock": 0,
+              "erpPrice": null,
+              "costPrice": null,
+              "desiredMarginPercent": null,
+              "inventoryItemId": "VAR-1788433593777-1"
+            }
+          ],
+          "labels": {},
+          "colorsText": "Preto|#111111",
+          "storageText": "",
+          "ramText": "",
+          "conditionText": "",
+          "labelsText": "{}",
+          "combinationsText": "Preto"
+        },
+        "id": 1788433593777,
+        "inventoryBalance": {
+          "physicalQuantity": 0,
+          "availableQuantity": 0,
+          "reservedQuantity": 0,
+          "derivedFromVariations": true
+        }
+      },
+      "after": {
+        "name": "Celular Usado Samsung S23 Fe 128gb 8gb ram",
+        "sku": "",
+        "code": "PRD-977",
+        "barcode": "",
+        "ncm": "85171300",
+        "brand": "",
+        "slug": "celular-usado-samsung-s23-fe-128gb",
+        "price": null,
+        "commercial": {
+          "costPrice": 700,
+          "erpPrice": null,
+          "salePrice": null,
+          "marketplacePrice": null,
+          "promotionalPrice": null,
+          "desiredMarginPercent": null,
+          "expectedProfit": null,
+          "defaultCommissionPercent": null,
+          "cashPrice": null,
+          "installmentPrice": null,
+          "minimumPrice": null,
+          "minimumMarginPercent": null,
+          "discountPolicy": "inherit",
+          "maximumDiscountPercent": null,
+          "maximumDiscountAmount": null,
+          "requiresAuthorization": false
+        },
+        "stock": 1,
+        "inventory": {
+          "itemId": "PRD-1788433593777",
+          "stockControlled": true,
+          "allowNegative": false,
+          "minimumQuantity": 0,
+          "channelAvailability": {
+            "site": {
+              "mode": "shared",
+              "enabled": true,
+              "limit": null,
+              "physicalSafety": 0
+            }
+          }
+        },
+        "image": "",
+        "gallery": [],
+        "category": "",
+        "subcategory": "",
+        "tags": [],
+        "relatedManualIds": [],
+        "crossSellIds": [],
+        "showPrice": true,
+        "featured": false,
+        "active": false,
+        "erp": {
+          "sku": "",
+          "internalCode": "PRD-977",
+          "supplierCode": "",
+          "searchAlias": "",
+          "barcode": "",
+          "ncm": "85171300",
+          "fiscal": {
+            "ncm": "85171300"
+          },
+          "brand": "",
+          "unit": "UN",
+          "category": "smartphones",
+          "subcategory": "",
+          "mainSupplierId": "",
+          "preferredSupplierId": "",
+          "active": true,
+          "categoryId": "ERP-CAT-1"
+        },
+        "virtualStore": {
+          "name": "Celular Usado Samsung S23 Fe 128gb",
+          "price": null,
+          "active": false,
+          "seoTitle": "Celular Usado Samsung S23 Fe 128gb",
+          "seoDescription": "",
+          "channels": {
+            "lojaVirtual": {
+              "enabled": false
+            },
+            "mercadoLivre": {
+              "enabled": false
+            },
+            "shopee": {
+              "enabled": false
+            },
+            "amazon": {
+              "enabled": false
+            },
+            "magalu": {
+              "enabled": false
+            }
+          }
+        },
+        "detailsEnabled": false,
+        "showVariationsOnCard": false,
+        "descriptionShort": "",
+        "descriptionLong": "",
+        "variations": {
+          "enabled": true,
+          "colors": [
+            {
+              "name": "Preto",
+              "hex": "#111111",
+              "image": ""
+            }
+          ],
+          "storage": [],
+          "ram": [],
+          "condition": [],
+          "combinations": [
+            {
+              "color": "Preto",
+              "storage": "",
+              "ram": "",
+              "condition": "",
+              "image": "",
+              "stock": 1,
+              "erpPrice": null,
+              "costPrice": null,
+              "desiredMarginPercent": null,
+              "inventoryItemId": "VAR-1788433593777-1"
+            }
+          ],
+          "labels": {},
+          "colorsText": "Preto|#111111",
+          "storageText": "",
+          "ramText": "",
+          "conditionText": "",
+          "labelsText": "{}",
+          "combinationsText": "Preto|||||1"
+        },
+        "id": 1788433593777,
+        "inventoryBalance": {
+          "physicalQuantity": 0,
+          "availableQuantity": 0,
+          "reservedQuantity": 0,
+          "derivedFromVariations": true
+        }
+      },
+      "ip": "127.0.0.1",
+      "requestId": "23a35bf9-b173-43a4-b44c-d24c7ca69f4a"
+    },
+    {
+      "id": "AUD-00000120",
+      "at": "2026-09-03T16:51:46.166Z",
+      "module": "agenda",
+      "action": "TASK_CREATED",
+      "actor": "Matheus Fernando",
+      "entityType": "agenda_task",
+      "entityId": "task_mtlrimib_zx7wd8",
+      "documentId": "",
+      "reason": "",
+      "before": null,
+      "after": {
+        "id": "task_mtlrimib_zx7wd8",
+        "customerId": "",
+        "customerName": "",
+        "conversationId": "",
+        "owner": "Quality",
+        "type": "task",
+        "typeName": "Tarefa",
+        "title": "remover numero 54999288481 do face e do insta",
+        "description": "",
+        "dueAt": "2026-09-03T20:00",
+        "priority": "medium",
+        "status": "open",
+        "createdAt": "2026-09-03T16:51:46.163Z",
+        "createdBy": "Matheus Fernando",
+        "updatedAt": "2026-09-03T16:51:46.163Z",
+        "updatedBy": "Matheus Fernando",
+        "completedAt": null,
+        "history": [
+          {
+            "at": "2026-09-03T16:51:46.163Z",
+            "actor": "Matheus Fernando",
+            "action": "created",
+            "before": null,
+            "after": {
+              "title": "remover numero 54999288481 do face e do insta",
+              "description": "",
+              "dueAt": "2026-09-03T20:00",
+              "priority": "medium",
+              "type": "task",
+              "typeName": "Tarefa",
+              "customerId": "",
+              "customerName": "",
+              "owner": "Quality",
+              "status": "open"
+            }
+          }
+        ]
+      },
+      "ip": "127.0.0.1",
+      "requestId": ""
+    },
+    {
+      "id": "AUD-00000121",
+      "at": "2026-09-03T16:52:06.681Z",
+      "module": "agenda",
+      "action": "TASK_DELETED",
+      "actor": "Matheus Fernando",
+      "entityType": "agenda_task",
+      "entityId": "task_mtbjkymz_5kvx9o",
+      "documentId": "",
+      "reason": "",
+      "before": {
+        "id": "task_mtbjkymz_5kvx9o",
+        "customerId": "",
+        "customerName": "",
+        "conversationId": "",
+        "owner": "Matheus",
+        "type": "task",
+        "typeName": "Tarefa",
+        "title": "Fazer pedido RE",
+        "description": "",
+        "dueAt": "2026-08-27T16:00",
+        "priority": "medium",
+        "status": "open",
+        "createdAt": "2026-08-27T13:11:56.507Z",
+        "updatedAt": "2026-08-27T13:11:56.507Z",
+        "completedAt": null
+      },
+      "after": null,
+      "ip": "127.0.0.1",
+      "requestId": ""
+    },
+    {
+      "id": "AUD-00000122",
+      "at": "2026-09-03T16:52:29.178Z",
+      "module": "agenda",
+      "action": "TASK_CREATED",
+      "actor": "Matheus Fernando",
+      "entityType": "agenda_task",
+      "entityId": "task_mtlrjjp4_se606s",
+      "documentId": "",
+      "reason": "",
+      "before": null,
+      "after": {
+        "id": "task_mtlrjjp4_se606s",
+        "customerId": "",
+        "customerName": "",
+        "conversationId": "",
+        "owner": "Quality",
+        "type": "task",
+        "typeName": "Tarefa",
+        "title": "Fazer pedido RE",
+        "description": "",
+        "dueAt": "2026-09-03T14:00",
+        "priority": "medium",
+        "status": "open",
+        "createdAt": "2026-09-03T16:52:29.176Z",
+        "createdBy": "Matheus Fernando",
+        "updatedAt": "2026-09-03T16:52:29.176Z",
+        "updatedBy": "Matheus Fernando",
+        "completedAt": null,
+        "history": [
+          {
+            "at": "2026-09-03T16:52:29.176Z",
+            "actor": "Matheus Fernando",
+            "action": "created",
+            "before": null,
+            "after": {
+              "title": "Fazer pedido RE",
+              "description": "",
+              "dueAt": "2026-09-03T14:00",
+              "priority": "medium",
+              "type": "task",
+              "typeName": "Tarefa",
+              "customerId": "",
+              "customerName": "",
+              "owner": "Quality",
+              "status": "open"
+            }
+          }
+        ]
+      },
+      "ip": "127.0.0.1",
+      "requestId": ""
+    },
+    {
+      "id": "AUD-00000123",
+      "at": "2026-09-03T21:36:10.703Z",
+      "module": "produtos",
+      "action": "PRODUCT_UPDATED",
+      "actor": "Matheus Fernando",
+      "entityType": "product",
+      "entityId": "1788433593777",
+      "documentId": "",
+      "reason": "Cadastro de produto atualizado",
+      "before": {
+        "name": "Celular Usado Samsung S23 Fe 128gb 8gb ram",
+        "sku": "",
+        "code": "PRD-977",
+        "barcode": "",
+        "ncm": "85171300",
+        "brand": "",
+        "slug": "celular-usado-samsung-s23-fe-128gb",
+        "price": null,
+        "commercial": {
+          "costPrice": 700,
+          "erpPrice": null,
+          "salePrice": null,
+          "marketplacePrice": null,
+          "promotionalPrice": null,
+          "desiredMarginPercent": null,
+          "expectedProfit": null,
+          "defaultCommissionPercent": null,
+          "cashPrice": null,
+          "installmentPrice": null,
+          "minimumPrice": null,
+          "minimumMarginPercent": null,
+          "discountPolicy": "inherit",
+          "maximumDiscountPercent": null,
+          "maximumDiscountAmount": null,
+          "requiresAuthorization": false
+        },
+        "stock": 1,
+        "inventory": {
+          "itemId": "PRD-1788433593777",
+          "stockControlled": true,
+          "allowNegative": false,
+          "minimumQuantity": 0,
+          "channelAvailability": {
+            "site": {
+              "mode": "shared",
+              "enabled": true,
+              "limit": null,
+              "physicalSafety": 0
+            }
+          }
+        },
+        "image": "images/produtos/1788471293520-s23-fe-usado-preto.jpg",
+        "gallery": [],
+        "category": "",
+        "subcategory": "",
+        "tags": [],
+        "relatedManualIds": [],
+        "crossSellIds": [],
+        "showPrice": true,
+        "featured": false,
+        "active": false,
+        "erp": {
+          "sku": "",
+          "internalCode": "PRD-977",
+          "supplierCode": "",
+          "searchAlias": "",
+          "barcode": "",
+          "ncm": "85171300",
+          "fiscal": {
+            "ncm": "85171300"
+          },
+          "brand": "",
+          "unit": "UN",
+          "category": "smartphones",
+          "subcategory": "",
+          "mainSupplierId": "",
+          "preferredSupplierId": "",
+          "active": true,
+          "categoryId": "ERP-CAT-1"
+        },
+        "virtualStore": {
+          "name": "Celular Usado Samsung S23 Fe 128gb",
+          "price": null,
+          "active": false,
+          "seoTitle": "Celular Usado Samsung S23 Fe 128gb",
+          "seoDescription": "",
+          "channels": {
+            "lojaVirtual": {
+              "enabled": false
+            },
+            "mercadoLivre": {
+              "enabled": false
+            },
+            "shopee": {
+              "enabled": false
+            },
+            "amazon": {
+              "enabled": false
+            },
+            "magalu": {
+              "enabled": false
+            }
+          }
+        },
+        "detailsEnabled": false,
+        "showVariationsOnCard": false,
+        "descriptionShort": "",
+        "descriptionLong": "",
+        "variations": {
+          "enabled": true,
+          "colors": [
+            {
+              "name": "Preto",
+              "hex": "#111111",
+              "image": ""
+            }
+          ],
+          "storage": [],
+          "ram": [],
+          "condition": [],
+          "combinations": [
+            {
+              "color": "Preto",
+              "storage": "",
+              "ram": "",
+              "condition": "",
+              "image": "",
+              "stock": 1,
+              "erpPrice": null,
+              "costPrice": null,
+              "desiredMarginPercent": null,
+              "inventoryItemId": "VAR-1788433593777-1"
+            }
+          ],
+          "labels": {},
+          "colorsText": "Preto|#111111",
+          "storageText": "",
+          "ramText": "",
+          "conditionText": "",
+          "labelsText": "{}",
+          "combinationsText": "Preto|||||1"
+        },
+        "id": 1788433593777,
+        "inventoryBalance": {
+          "physicalQuantity": 1,
+          "availableQuantity": 1,
+          "reservedQuantity": 0,
+          "derivedFromVariations": true
+        },
+        "updatedAt": "2026-09-03T21:34:53.530Z"
+      },
+      "after": {
+        "name": "Celular Usado Samsung S23 Fe 128gb 8gb ram",
+        "sku": "",
+        "code": "PRD-977",
+        "barcode": "",
+        "ncm": "85171300",
+        "brand": "",
+        "slug": "celular-usado-samsung-s23-fe-128gb",
+        "price": null,
+        "commercial": {
+          "costPrice": 700,
+          "erpPrice": null,
+          "salePrice": null,
+          "marketplacePrice": null,
+          "promotionalPrice": null,
+          "desiredMarginPercent": null,
+          "expectedProfit": null,
+          "defaultCommissionPercent": null,
+          "cashPrice": null,
+          "installmentPrice": null,
+          "minimumPrice": null,
+          "minimumMarginPercent": null,
+          "discountPolicy": "inherit",
+          "maximumDiscountPercent": null,
+          "maximumDiscountAmount": null,
+          "requiresAuthorization": false
+        },
+        "stock": 1,
+        "inventory": {
+          "itemId": "PRD-1788433593777",
+          "stockControlled": true,
+          "allowNegative": false,
+          "minimumQuantity": 0,
+          "channelAvailability": {
+            "site": {
+              "mode": "shared",
+              "enabled": true,
+              "limit": null,
+              "physicalSafety": 0
+            }
+          }
+        },
+        "image": "images/produtos/1788471293520-s23-fe-usado-preto.jpg",
+        "gallery": [],
+        "category": "",
+        "subcategory": "",
+        "tags": [],
+        "relatedManualIds": [],
+        "crossSellIds": [],
+        "showPrice": true,
+        "featured": false,
+        "active": false,
+        "erp": {
+          "sku": "",
+          "internalCode": "PRD-977",
+          "supplierCode": "",
+          "searchAlias": "",
+          "barcode": "",
+          "ncm": "85171300",
+          "fiscal": {
+            "ncm": "85171300"
+          },
+          "brand": "",
+          "unit": "UN",
+          "category": "smartphones",
+          "subcategory": "",
+          "mainSupplierId": "",
+          "preferredSupplierId": "",
+          "active": true,
+          "categoryId": "ERP-CAT-1"
+        },
+        "virtualStore": {
+          "name": "Celular Usado Samsung S23 Fe 5G 128gb",
+          "price": null,
+          "active": false,
+          "seoTitle": "Celular Usado Samsung S23 Fe 128gb",
+          "seoDescription": "",
+          "channels": {
+            "lojaVirtual": {
+              "enabled": false
+            },
+            "mercadoLivre": {
+              "enabled": false
+            },
+            "shopee": {
+              "enabled": false
+            },
+            "amazon": {
+              "enabled": false
+            },
+            "magalu": {
+              "enabled": false
+            }
+          }
+        },
+        "detailsEnabled": false,
+        "showVariationsOnCard": false,
+        "descriptionShort": "",
+        "descriptionLong": "",
+        "variations": {
+          "enabled": true,
+          "colors": [
+            {
+              "name": "Preto",
+              "hex": "#111111",
+              "image": ""
+            }
+          ],
+          "storage": [],
+          "ram": [],
+          "condition": [],
+          "combinations": [
+            {
+              "color": "Preto",
+              "storage": "",
+              "ram": "",
+              "condition": "",
+              "image": "",
+              "stock": 1,
+              "erpPrice": null,
+              "costPrice": null,
+              "desiredMarginPercent": null,
+              "inventoryItemId": "VAR-1788433593777-1"
+            }
+          ],
+          "labels": {},
+          "colorsText": "Preto|#111111",
+          "storageText": "",
+          "ramText": "",
+          "conditionText": "",
+          "labelsText": "{}",
+          "combinationsText": "Preto|||||1"
+        },
+        "id": 1788433593777,
+        "inventoryBalance": {
+          "physicalQuantity": 1,
+          "availableQuantity": 1,
+          "reservedQuantity": 0,
+          "derivedFromVariations": true
+        },
+        "updatedAt": "2026-09-03T21:34:53.530Z"
+      },
+      "ip": "127.0.0.1",
+      "requestId": "239a8f9f-186a-4db8-a0eb-9d3d8bfe6a9d"
+    },
+    {
+      "id": "AUD-00000124",
+      "at": "2026-09-03T21:36:57.939Z",
+      "module": "produtos",
+      "action": "PRODUCT_UPDATED",
+      "actor": "Matheus Fernando",
+      "entityType": "product",
+      "entityId": "1788433593777",
+      "documentId": "",
+      "reason": "Cadastro de produto atualizado",
+      "before": {
+        "name": "Celular Usado Samsung S23 Fe 128gb 8gb ram",
+        "sku": "",
+        "code": "PRD-977",
+        "barcode": "",
+        "ncm": "85171300",
+        "brand": "",
+        "slug": "celular-usado-samsung-s23-fe-128gb",
+        "price": null,
+        "commercial": {
+          "costPrice": 700,
+          "erpPrice": null,
+          "salePrice": null,
+          "marketplacePrice": null,
+          "promotionalPrice": null,
+          "desiredMarginPercent": null,
+          "expectedProfit": null,
+          "defaultCommissionPercent": null,
+          "cashPrice": null,
+          "installmentPrice": null,
+          "minimumPrice": null,
+          "minimumMarginPercent": null,
+          "discountPolicy": "inherit",
+          "maximumDiscountPercent": null,
+          "maximumDiscountAmount": null,
+          "requiresAuthorization": false
+        },
+        "stock": 1,
+        "inventory": {
+          "itemId": "PRD-1788433593777",
+          "stockControlled": true,
+          "allowNegative": false,
+          "minimumQuantity": 0,
+          "channelAvailability": {
+            "site": {
+              "mode": "shared",
+              "enabled": true,
+              "limit": null,
+              "physicalSafety": 0
+            }
+          }
+        },
+        "image": "images/produtos/1788471293520-s23-fe-usado-preto.jpg",
+        "gallery": [],
+        "category": "",
+        "subcategory": "",
+        "tags": [],
+        "relatedManualIds": [],
+        "crossSellIds": [],
+        "showPrice": true,
+        "featured": false,
+        "active": false,
+        "erp": {
+          "sku": "",
+          "internalCode": "PRD-977",
+          "supplierCode": "",
+          "searchAlias": "",
+          "barcode": "",
+          "ncm": "85171300",
+          "fiscal": {
+            "ncm": "85171300"
+          },
+          "brand": "",
+          "unit": "UN",
+          "category": "smartphones",
+          "subcategory": "",
+          "mainSupplierId": "",
+          "preferredSupplierId": "",
+          "active": true,
+          "categoryId": "ERP-CAT-1"
+        },
+        "virtualStore": {
+          "name": "Celular Usado Samsung S23 Fe 5G 128gb",
+          "price": null,
+          "active": false,
+          "seoTitle": "Celular Usado Samsung S23 Fe 128gb",
+          "seoDescription": "",
+          "channels": {
+            "lojaVirtual": {
+              "enabled": false
+            },
+            "mercadoLivre": {
+              "enabled": false
+            },
+            "shopee": {
+              "enabled": false
+            },
+            "amazon": {
+              "enabled": false
+            },
+            "magalu": {
+              "enabled": false
+            }
+          }
+        },
+        "detailsEnabled": false,
+        "showVariationsOnCard": false,
+        "descriptionShort": "",
+        "descriptionLong": "",
+        "variations": {
+          "enabled": true,
+          "colors": [
+            {
+              "name": "Preto",
+              "hex": "#111111",
+              "image": ""
+            }
+          ],
+          "storage": [],
+          "ram": [],
+          "condition": [],
+          "combinations": [
+            {
+              "color": "Preto",
+              "storage": "",
+              "ram": "",
+              "condition": "",
+              "image": "",
+              "stock": 1,
+              "erpPrice": null,
+              "costPrice": null,
+              "desiredMarginPercent": null,
+              "inventoryItemId": "VAR-1788433593777-1"
+            }
+          ],
+          "labels": {},
+          "colorsText": "Preto|#111111",
+          "storageText": "",
+          "ramText": "",
+          "conditionText": "",
+          "labelsText": "{}",
+          "combinationsText": "Preto|||||1"
+        },
+        "id": 1788433593777,
+        "inventoryBalance": {
+          "physicalQuantity": 1,
+          "availableQuantity": 1,
+          "reservedQuantity": 0,
+          "derivedFromVariations": true
+        },
+        "updatedAt": "2026-09-03T21:34:53.530Z"
+      },
+      "after": {
+        "name": "Celular Usado Samsung S23 Fe 128gb 8gb ram",
+        "sku": "",
+        "code": "PRD-977",
+        "barcode": "",
+        "ncm": "85171300",
+        "brand": "",
+        "slug": "celular-usado-samsung-s23-fe-128gb",
+        "price": null,
+        "commercial": {
+          "costPrice": 700,
+          "erpPrice": null,
+          "salePrice": null,
+          "marketplacePrice": null,
+          "promotionalPrice": null,
+          "desiredMarginPercent": null,
+          "expectedProfit": null,
+          "defaultCommissionPercent": null,
+          "cashPrice": null,
+          "installmentPrice": null,
+          "minimumPrice": null,
+          "minimumMarginPercent": null,
+          "discountPolicy": "inherit",
+          "maximumDiscountPercent": null,
+          "maximumDiscountAmount": null,
+          "requiresAuthorization": false
+        },
+        "stock": 1,
+        "inventory": {
+          "itemId": "PRD-1788433593777",
+          "stockControlled": true,
+          "allowNegative": false,
+          "minimumQuantity": 0,
+          "channelAvailability": {
+            "site": {
+              "mode": "shared",
+              "enabled": true,
+              "limit": null,
+              "physicalSafety": 0
+            }
+          }
+        },
+        "image": "images/produtos/1788471293520-s23-fe-usado-preto.jpg",
+        "gallery": [],
+        "category": "smartphones",
+        "subcategory": "usados",
+        "tags": [],
+        "relatedManualIds": [],
+        "crossSellIds": [],
+        "showPrice": true,
+        "featured": false,
+        "active": false,
+        "erp": {
+          "sku": "",
+          "internalCode": "PRD-977",
+          "supplierCode": "",
+          "searchAlias": "",
+          "barcode": "",
+          "ncm": "85171300",
+          "fiscal": {
+            "ncm": "85171300"
+          },
+          "brand": "",
+          "unit": "UN",
+          "category": "smartphones",
+          "subcategory": "",
+          "mainSupplierId": "",
+          "preferredSupplierId": "",
+          "active": true,
+          "categoryId": "ERP-CAT-1"
+        },
+        "virtualStore": {
+          "name": "Celular Usado Samsung S23 Fe 5G 128gb",
+          "price": null,
+          "active": false,
+          "seoTitle": "Samsung Galaxy S23 FE 128GB 8GB RAM 5G Usado",
+          "seoDescription": "Samsung Galaxy S23 FE usado 128GB com 8GB RAM, 5G, tela AMOLED 120Hz e câmera de 50MP. Smartphone premium Samsung com ótimo desempenho.",
+          "channels": {
+            "lojaVirtual": {
+              "enabled": false
+            },
+            "mercadoLivre": {
+              "enabled": false
+            },
+            "shopee": {
+              "enabled": false
+            },
+            "amazon": {
+              "enabled": false
+            },
+            "magalu": {
+              "enabled": false
+            }
+          }
+        },
+        "detailsEnabled": true,
+        "showVariationsOnCard": true,
+        "descriptionShort": "",
+        "descriptionLong": "",
+        "variations": {
+          "enabled": true,
+          "colors": [
+            {
+              "name": "Preto",
+              "hex": "#111111",
+              "image": ""
+            }
+          ],
+          "storage": [],
+          "ram": [],
+          "condition": [],
+          "combinations": [
+            {
+              "color": "Preto",
+              "storage": "",
+              "ram": "",
+              "condition": "",
+              "image": "",
+              "stock": 1,
+              "erpPrice": null,
+              "costPrice": null,
+              "desiredMarginPercent": null,
+              "inventoryItemId": "VAR-1788433593777-1"
+            }
+          ],
+          "labels": {},
+          "colorsText": "Preto|#111111",
+          "storageText": "",
+          "ramText": "",
+          "conditionText": "",
+          "labelsText": "{}",
+          "combinationsText": "Preto|||||1"
+        },
+        "id": 1788433593777,
+        "inventoryBalance": {
+          "physicalQuantity": 1,
+          "availableQuantity": 1,
+          "reservedQuantity": 0,
+          "derivedFromVariations": true
+        },
+        "updatedAt": "2026-09-03T21:34:53.530Z"
+      },
+      "ip": "127.0.0.1",
+      "requestId": "0c6f1606-f5da-43fc-b72e-dafea1642ca8"
+    },
+    {
+      "id": "AUD-00000125",
+      "at": "2026-09-03T21:40:04.578Z",
+      "module": "produtos",
+      "action": "PRODUCT_UPDATED",
+      "actor": "Matheus Fernando",
+      "entityType": "product",
+      "entityId": "1788433593777",
+      "documentId": "",
+      "reason": "Cadastro de produto atualizado",
+      "before": {
+        "name": "Celular Usado Samsung S23 Fe 128gb 8gb ram",
+        "sku": "",
+        "code": "PRD-977",
+        "barcode": "",
+        "ncm": "85171300",
+        "brand": "",
+        "slug": "celular-usado-samsung-s23-fe-128gb",
+        "price": null,
+        "commercial": {
+          "costPrice": 700,
+          "erpPrice": null,
+          "salePrice": null,
+          "marketplacePrice": null,
+          "promotionalPrice": null,
+          "desiredMarginPercent": null,
+          "expectedProfit": null,
+          "defaultCommissionPercent": null,
+          "cashPrice": null,
+          "installmentPrice": null,
+          "minimumPrice": null,
+          "minimumMarginPercent": null,
+          "discountPolicy": "inherit",
+          "maximumDiscountPercent": null,
+          "maximumDiscountAmount": null,
+          "requiresAuthorization": false
+        },
+        "stock": 1,
+        "inventory": {
+          "itemId": "PRD-1788433593777",
+          "stockControlled": true,
+          "allowNegative": false,
+          "minimumQuantity": 0,
+          "channelAvailability": {
+            "site": {
+              "mode": "shared",
+              "enabled": true,
+              "limit": null,
+              "physicalSafety": 0
+            }
+          }
+        },
+        "image": "images/produtos/1788471293520-s23-fe-usado-preto.jpg",
+        "gallery": [],
+        "category": "smartphones",
+        "subcategory": "usados",
+        "tags": [],
+        "relatedManualIds": [],
+        "crossSellIds": [],
+        "showPrice": true,
+        "featured": false,
+        "active": false,
+        "erp": {
+          "sku": "",
+          "internalCode": "PRD-977",
+          "supplierCode": "",
+          "searchAlias": "",
+          "barcode": "",
+          "ncm": "85171300",
+          "fiscal": {
+            "ncm": "85171300"
+          },
+          "brand": "",
+          "unit": "UN",
+          "category": "smartphones",
+          "subcategory": "",
+          "mainSupplierId": "",
+          "preferredSupplierId": "",
+          "active": true,
+          "categoryId": "ERP-CAT-1"
+        },
+        "virtualStore": {
+          "name": "Celular Usado Samsung S23 Fe 5G 128gb",
+          "price": null,
+          "active": false,
+          "seoTitle": "Samsung Galaxy S23 FE 128GB 8GB RAM 5G Usado",
+          "seoDescription": "Samsung Galaxy S23 FE usado 128GB com 8GB RAM, 5G, tela AMOLED 120Hz e câmera de 50MP. Smartphone premium Samsung com ótimo desempenho.",
+          "channels": {
+            "lojaVirtual": {
+              "enabled": false
+            },
+            "mercadoLivre": {
+              "enabled": false
+            },
+            "shopee": {
+              "enabled": false
+            },
+            "amazon": {
+              "enabled": false
+            },
+            "magalu": {
+              "enabled": false
+            }
+          }
+        },
+        "detailsEnabled": true,
+        "showVariationsOnCard": true,
+        "descriptionShort": "",
+        "descriptionLong": "",
+        "variations": {
+          "enabled": true,
+          "colors": [
+            {
+              "name": "Preto",
+              "hex": "#111111",
+              "image": ""
+            }
+          ],
+          "storage": [],
+          "ram": [],
+          "condition": [],
+          "combinations": [
+            {
+              "color": "Preto",
+              "storage": "",
+              "ram": "",
+              "condition": "",
+              "image": "",
+              "stock": 1,
+              "erpPrice": null,
+              "costPrice": null,
+              "desiredMarginPercent": null,
+              "inventoryItemId": "VAR-1788433593777-1"
+            }
+          ],
+          "labels": {},
+          "colorsText": "Preto|#111111",
+          "storageText": "",
+          "ramText": "",
+          "conditionText": "",
+          "labelsText": "{}",
+          "combinationsText": "Preto|||||1"
+        },
+        "id": 1788433593777,
+        "inventoryBalance": {
+          "physicalQuantity": 1,
+          "availableQuantity": 1,
+          "reservedQuantity": 0,
+          "derivedFromVariations": true
+        },
+        "updatedAt": "2026-09-03T21:34:53.530Z"
+      },
+      "after": {
+        "name": "Celular Usado Samsung S23 Fe 128gb 8gb ram",
+        "sku": "",
+        "code": "PRD-977",
+        "barcode": "",
+        "ncm": "85171300",
+        "brand": "",
+        "slug": "celular-usado-samsung-s23-fe-128gb",
+        "price": null,
+        "commercial": {
+          "costPrice": 700,
+          "erpPrice": null,
+          "salePrice": null,
+          "marketplacePrice": null,
+          "promotionalPrice": null,
+          "desiredMarginPercent": null,
+          "expectedProfit": null,
+          "defaultCommissionPercent": null,
+          "cashPrice": null,
+          "installmentPrice": null,
+          "minimumPrice": null,
+          "minimumMarginPercent": null,
+          "discountPolicy": "inherit",
+          "maximumDiscountPercent": null,
+          "maximumDiscountAmount": null,
+          "requiresAuthorization": false
+        },
+        "stock": 1,
+        "inventory": {
+          "itemId": "PRD-1788433593777",
+          "stockControlled": true,
+          "allowNegative": false,
+          "minimumQuantity": 0,
+          "channelAvailability": {
+            "site": {
+              "mode": "shared",
+              "enabled": true,
+              "limit": null,
+              "physicalSafety": 0
+            }
+          }
+        },
+        "image": "images/produtos/1788471293520-s23-fe-usado-preto.jpg",
+        "gallery": [],
+        "category": "smartphones",
+        "subcategory": "usados",
+        "tags": [],
+        "relatedManualIds": [],
+        "crossSellIds": [],
+        "showPrice": true,
+        "featured": false,
+        "active": false,
+        "erp": {
+          "sku": "",
+          "internalCode": "PRD-977",
+          "supplierCode": "",
+          "searchAlias": "",
+          "barcode": "",
+          "ncm": "85171300",
+          "fiscal": {
+            "ncm": "85171300"
+          },
+          "brand": "",
+          "unit": "UN",
+          "category": "smartphones",
+          "subcategory": "",
+          "mainSupplierId": "",
+          "preferredSupplierId": "",
+          "active": true,
+          "categoryId": "ERP-CAT-1"
+        },
+        "virtualStore": {
+          "name": "Celular Usado Samsung S23 Fe 5G 128gb",
+          "price": null,
+          "active": false,
+          "seoTitle": "Samsung Galaxy S23 FE 128GB 8GB RAM 5G Usado",
+          "seoDescription": "Samsung Galaxy S23 FE usado 128GB com 8GB RAM, 5G, tela AMOLED 120Hz e câmera de 50MP. Smartphone premium Samsung com ótimo desempenho.",
+          "channels": {
+            "lojaVirtual": {
+              "enabled": false
+            },
+            "mercadoLivre": {
+              "enabled": false
+            },
+            "shopee": {
+              "enabled": false
+            },
+            "amazon": {
+              "enabled": false
+            },
+            "magalu": {
+              "enabled": false
+            }
+          }
+        },
+        "detailsEnabled": true,
+        "showVariationsOnCard": true,
+        "descriptionShort": "",
+        "descriptionLong": "<p>📱<strong>Samsung Galaxy S23 FE 128GB Usado – Desempenho Premium e Câmera de 50MP</strong></p><p>🚀 Com <strong>128GB de armazenamento e 8GB de RAM</strong>, oferece ótimo desempenho para redes sociais, aplicativos, vídeos, jogos e multitarefas no dia a dia</p><p>🔥 <strong>Principais destaques:</strong><br>✅ 128GB de armazenamento<br>✅ 8GB de memória RAM<br>✅ Conectividade 5G<br>✅ Tela Dynamic AMOLED 2X de 6.4\"<br>✅ Taxa de atualização de até 120Hz<br>✅ Processador Exynos 2200<br>✅ Câmera principal de 50MP com estabilização óptica<br>✅ Câmeras traseiras de 50MP + 12MP + 8MP<br>✅ Câmera frontal de 10MP<br>✅ Zoom óptico de 3x<br>✅ Gravação de vídeos em até 8K<br>✅ Bateria de 4.500mAh<br>✅ Resistência à água e poeira IP68<br>✅ Dual SIM com suporte a eSIM</p><p><strong>Aparelho usado</strong>, uma excelente opção para quem deseja toda a qualidade da linha Galaxy S com melhor custo-benefício<br><br>🛡️ <strong>Compra com mais segurança:</strong> este aparelho conta com <strong>90 dias de garantia</strong></p><p><br></p>",
+        "variations": {
+          "enabled": true,
+          "colors": [
+            {
+              "name": "Preto",
+              "hex": "#111111",
+              "image": ""
+            }
+          ],
+          "storage": [],
+          "ram": [],
+          "condition": [],
+          "combinations": [
+            {
+              "color": "Preto",
+              "storage": "",
+              "ram": "",
+              "condition": "",
+              "image": "",
+              "stock": 1,
+              "erpPrice": null,
+              "costPrice": null,
+              "desiredMarginPercent": null,
+              "inventoryItemId": "VAR-1788433593777-1"
+            }
+          ],
+          "labels": {},
+          "colorsText": "Preto|#111111",
+          "storageText": "",
+          "ramText": "",
+          "conditionText": "",
+          "labelsText": "{}",
+          "combinationsText": "Preto|||||1"
+        },
+        "id": 1788433593777,
+        "inventoryBalance": {
+          "physicalQuantity": 1,
+          "availableQuantity": 1,
+          "reservedQuantity": 0,
+          "derivedFromVariations": true
+        },
+        "updatedAt": "2026-09-03T21:34:53.530Z"
+      },
+      "ip": "127.0.0.1",
+      "requestId": "92c8e8be-854a-44f8-a91d-6df9324d33aa"
+    },
+    {
+      "id": "AUD-00000126",
+      "at": "2026-09-03T21:40:06.302Z",
+      "module": "produtos",
+      "action": "PRODUCT_UPDATED",
+      "actor": "Matheus Fernando",
+      "entityType": "product",
+      "entityId": "1788433593777",
+      "documentId": "",
+      "reason": "Cadastro de produto atualizado",
+      "before": {
+        "name": "Celular Usado Samsung S23 Fe 128gb 8gb ram",
+        "sku": "",
+        "code": "PRD-977",
+        "barcode": "",
+        "ncm": "85171300",
+        "brand": "",
+        "slug": "celular-usado-samsung-s23-fe-128gb",
+        "price": null,
+        "commercial": {
+          "costPrice": 700,
+          "erpPrice": null,
+          "salePrice": null,
+          "marketplacePrice": null,
+          "promotionalPrice": null,
+          "desiredMarginPercent": null,
+          "expectedProfit": null,
+          "defaultCommissionPercent": null,
+          "cashPrice": null,
+          "installmentPrice": null,
+          "minimumPrice": null,
+          "minimumMarginPercent": null,
+          "discountPolicy": "inherit",
+          "maximumDiscountPercent": null,
+          "maximumDiscountAmount": null,
+          "requiresAuthorization": false
+        },
+        "stock": 1,
+        "inventory": {
+          "itemId": "PRD-1788433593777",
+          "stockControlled": true,
+          "allowNegative": false,
+          "minimumQuantity": 0,
+          "channelAvailability": {
+            "site": {
+              "mode": "shared",
+              "enabled": true,
+              "limit": null,
+              "physicalSafety": 0
+            }
+          }
+        },
+        "image": "images/produtos/1788471293520-s23-fe-usado-preto.jpg",
+        "gallery": [],
+        "category": "smartphones",
+        "subcategory": "usados",
+        "tags": [],
+        "relatedManualIds": [],
+        "crossSellIds": [],
+        "showPrice": true,
+        "featured": false,
+        "active": false,
+        "erp": {
+          "sku": "",
+          "internalCode": "PRD-977",
+          "supplierCode": "",
+          "searchAlias": "",
+          "barcode": "",
+          "ncm": "85171300",
+          "fiscal": {
+            "ncm": "85171300"
+          },
+          "brand": "",
+          "unit": "UN",
+          "category": "smartphones",
+          "subcategory": "",
+          "mainSupplierId": "",
+          "preferredSupplierId": "",
+          "active": true,
+          "categoryId": "ERP-CAT-1"
+        },
+        "virtualStore": {
+          "name": "Celular Usado Samsung S23 Fe 5G 128gb",
+          "price": null,
+          "active": false,
+          "seoTitle": "Samsung Galaxy S23 FE 128GB 8GB RAM 5G Usado",
+          "seoDescription": "Samsung Galaxy S23 FE usado 128GB com 8GB RAM, 5G, tela AMOLED 120Hz e câmera de 50MP. Smartphone premium Samsung com ótimo desempenho.",
+          "channels": {
+            "lojaVirtual": {
+              "enabled": false
+            },
+            "mercadoLivre": {
+              "enabled": false
+            },
+            "shopee": {
+              "enabled": false
+            },
+            "amazon": {
+              "enabled": false
+            },
+            "magalu": {
+              "enabled": false
+            }
+          }
+        },
+        "detailsEnabled": true,
+        "showVariationsOnCard": true,
+        "descriptionShort": "",
+        "descriptionLong": "<p>📱<strong>Samsung Galaxy S23 FE 128GB Usado – Desempenho Premium e Câmera de 50MP</strong></p><p>🚀 Com <strong>128GB de armazenamento e 8GB de RAM</strong>, oferece ótimo desempenho para redes sociais, aplicativos, vídeos, jogos e multitarefas no dia a dia</p><p>🔥 <strong>Principais destaques:</strong><br>✅ 128GB de armazenamento<br>✅ 8GB de memória RAM<br>✅ Conectividade 5G<br>✅ Tela Dynamic AMOLED 2X de 6.4\"<br>✅ Taxa de atualização de até 120Hz<br>✅ Processador Exynos 2200<br>✅ Câmera principal de 50MP com estabilização óptica<br>✅ Câmeras traseiras de 50MP + 12MP + 8MP<br>✅ Câmera frontal de 10MP<br>✅ Zoom óptico de 3x<br>✅ Gravação de vídeos em até 8K<br>✅ Bateria de 4.500mAh<br>✅ Resistência à água e poeira IP68<br>✅ Dual SIM com suporte a eSIM</p><p><strong>Aparelho usado</strong>, uma excelente opção para quem deseja toda a qualidade da linha Galaxy S com melhor custo-benefício<br><br>🛡️ <strong>Compra com mais segurança:</strong> este aparelho conta com <strong>90 dias de garantia</strong></p><p><br></p>",
+        "variations": {
+          "enabled": true,
+          "colors": [
+            {
+              "name": "Preto",
+              "hex": "#111111",
+              "image": ""
+            }
+          ],
+          "storage": [],
+          "ram": [],
+          "condition": [],
+          "combinations": [
+            {
+              "color": "Preto",
+              "storage": "",
+              "ram": "",
+              "condition": "",
+              "image": "",
+              "stock": 1,
+              "erpPrice": null,
+              "costPrice": null,
+              "desiredMarginPercent": null,
+              "inventoryItemId": "VAR-1788433593777-1"
+            }
+          ],
+          "labels": {},
+          "colorsText": "Preto|#111111",
+          "storageText": "",
+          "ramText": "",
+          "conditionText": "",
+          "labelsText": "{}",
+          "combinationsText": "Preto|||||1"
+        },
+        "id": 1788433593777,
+        "inventoryBalance": {
+          "physicalQuantity": 1,
+          "availableQuantity": 1,
+          "reservedQuantity": 0,
+          "derivedFromVariations": true
+        },
+        "updatedAt": "2026-09-03T21:34:53.530Z"
+      },
+      "after": {
+        "name": "Celular Usado Samsung S23 Fe 128gb 8gb ram",
+        "sku": "",
+        "code": "PRD-977",
+        "barcode": "",
+        "ncm": "85171300",
+        "brand": "",
+        "slug": "celular-usado-samsung-s23-fe-128gb",
+        "price": null,
+        "commercial": {
+          "costPrice": 700,
+          "erpPrice": null,
+          "salePrice": null,
+          "marketplacePrice": null,
+          "promotionalPrice": null,
+          "desiredMarginPercent": null,
+          "expectedProfit": null,
+          "defaultCommissionPercent": null,
+          "cashPrice": null,
+          "installmentPrice": null,
+          "minimumPrice": null,
+          "minimumMarginPercent": null,
+          "discountPolicy": "inherit",
+          "maximumDiscountPercent": null,
+          "maximumDiscountAmount": null,
+          "requiresAuthorization": false
+        },
+        "stock": 1,
+        "inventory": {
+          "itemId": "PRD-1788433593777",
+          "stockControlled": true,
+          "allowNegative": false,
+          "minimumQuantity": 0,
+          "channelAvailability": {
+            "site": {
+              "mode": "shared",
+              "enabled": true,
+              "limit": null,
+              "physicalSafety": 0
+            }
+          }
+        },
+        "image": "images/produtos/1788471293520-s23-fe-usado-preto.jpg",
+        "gallery": [],
+        "category": "smartphones",
+        "subcategory": "usados",
+        "tags": [],
+        "relatedManualIds": [],
+        "crossSellIds": [],
+        "showPrice": true,
+        "featured": false,
+        "active": false,
+        "erp": {
+          "sku": "",
+          "internalCode": "PRD-977",
+          "supplierCode": "",
+          "searchAlias": "",
+          "barcode": "",
+          "ncm": "85171300",
+          "fiscal": {
+            "ncm": "85171300"
+          },
+          "brand": "",
+          "unit": "UN",
+          "category": "smartphones",
+          "subcategory": "",
+          "mainSupplierId": "",
+          "preferredSupplierId": "",
+          "active": true,
+          "categoryId": "ERP-CAT-1"
+        },
+        "virtualStore": {
+          "name": "Celular Usado Samsung S23 Fe 5G 128gb",
+          "price": null,
+          "active": false,
+          "seoTitle": "Samsung Galaxy S23 FE 128GB 8GB RAM 5G Usado",
+          "seoDescription": "Samsung Galaxy S23 FE usado 128GB com 8GB RAM, 5G, tela AMOLED 120Hz e câmera de 50MP. Smartphone premium Samsung com ótimo desempenho.",
+          "channels": {
+            "lojaVirtual": {
+              "enabled": false
+            },
+            "mercadoLivre": {
+              "enabled": false
+            },
+            "shopee": {
+              "enabled": false
+            },
+            "amazon": {
+              "enabled": false
+            },
+            "magalu": {
+              "enabled": false
+            }
+          }
+        },
+        "detailsEnabled": true,
+        "showVariationsOnCard": true,
+        "descriptionShort": "",
+        "descriptionLong": "<p>📱<strong>Samsung Galaxy S23 FE 128GB Usado – Desempenho Premium e Câmera de 50MP</strong></p><p>🚀 Com <strong>128GB de armazenamento e 8GB de RAM</strong>, oferece ótimo desempenho para redes sociais, aplicativos, vídeos, jogos e multitarefas no dia a dia</p><p>🔥 <strong>Principais destaques:</strong><br>✅ 128GB de armazenamento<br>✅ 8GB de memória RAM<br>✅ Conectividade 5G<br>✅ Tela Dynamic AMOLED 2X de 6.4\"<br>✅ Taxa de atualização de até 120Hz<br>✅ Processador Exynos 2200<br>✅ Câmera principal de 50MP com estabilização óptica<br>✅ Câmeras traseiras de 50MP + 12MP + 8MP<br>✅ Câmera frontal de 10MP<br>✅ Zoom óptico de 3x<br>✅ Gravação de vídeos em até 8K<br>✅ Bateria de 4.500mAh<br>✅ Resistência à água e poeira IP68<br>✅ Dual SIM com suporte a eSIM</p><p><strong>Aparelho usado</strong>, uma excelente opção para quem deseja toda a qualidade da linha Galaxy S com melhor custo-benefício<br><br>🛡️ <strong>Compra com mais segurança:</strong> este aparelho conta com <strong>90 dias de garantia</strong></p><p><br></p>",
+        "variations": {
+          "enabled": true,
+          "colors": [
+            {
+              "name": "Preto",
+              "hex": "#111111",
+              "image": ""
+            }
+          ],
+          "storage": [],
+          "ram": [],
+          "condition": [],
+          "combinations": [
+            {
+              "color": "Preto",
+              "storage": "",
+              "ram": "",
+              "condition": "",
+              "image": "",
+              "stock": 1,
+              "erpPrice": null,
+              "costPrice": null,
+              "desiredMarginPercent": null,
+              "inventoryItemId": "VAR-1788433593777-1"
+            }
+          ],
+          "labels": {},
+          "colorsText": "Preto|#111111",
+          "storageText": "",
+          "ramText": "",
+          "conditionText": "",
+          "labelsText": "{}",
+          "combinationsText": "Preto|||||1"
+        },
+        "id": 1788433593777,
+        "inventoryBalance": {
+          "physicalQuantity": 1,
+          "availableQuantity": 1,
+          "reservedQuantity": 0,
+          "derivedFromVariations": true
+        },
+        "updatedAt": "2026-09-03T21:34:53.530Z"
+      },
+      "ip": "127.0.0.1",
+      "requestId": "db9979bf-0446-4f96-a1ac-f4b85c82482b"
+    },
+    {
+      "id": "AUD-00000127",
+      "at": "2026-09-03T21:40:15.790Z",
+      "module": "produtos",
+      "action": "PRODUCT_UPDATED",
+      "actor": "Matheus Fernando",
+      "entityType": "product",
+      "entityId": "1788433593777",
+      "documentId": "",
+      "reason": "Cadastro de produto atualizado",
+      "before": {
+        "name": "Celular Usado Samsung S23 Fe 128gb 8gb ram",
+        "sku": "",
+        "code": "PRD-977",
+        "barcode": "",
+        "ncm": "85171300",
+        "brand": "",
+        "slug": "celular-usado-samsung-s23-fe-128gb",
+        "price": null,
+        "commercial": {
+          "costPrice": 700,
+          "erpPrice": null,
+          "salePrice": null,
+          "marketplacePrice": null,
+          "promotionalPrice": null,
+          "desiredMarginPercent": null,
+          "expectedProfit": null,
+          "defaultCommissionPercent": null,
+          "cashPrice": null,
+          "installmentPrice": null,
+          "minimumPrice": null,
+          "minimumMarginPercent": null,
+          "discountPolicy": "inherit",
+          "maximumDiscountPercent": null,
+          "maximumDiscountAmount": null,
+          "requiresAuthorization": false
+        },
+        "stock": 1,
+        "inventory": {
+          "itemId": "PRD-1788433593777",
+          "stockControlled": true,
+          "allowNegative": false,
+          "minimumQuantity": 0,
+          "channelAvailability": {
+            "site": {
+              "mode": "shared",
+              "enabled": true,
+              "limit": null,
+              "physicalSafety": 0
+            }
+          }
+        },
+        "image": "images/produtos/1788471293520-s23-fe-usado-preto.jpg",
+        "gallery": [],
+        "category": "smartphones",
+        "subcategory": "usados",
+        "tags": [],
+        "relatedManualIds": [],
+        "crossSellIds": [],
+        "showPrice": true,
+        "featured": false,
+        "active": false,
+        "erp": {
+          "sku": "",
+          "internalCode": "PRD-977",
+          "supplierCode": "",
+          "searchAlias": "",
+          "barcode": "",
+          "ncm": "85171300",
+          "fiscal": {
+            "ncm": "85171300"
+          },
+          "brand": "",
+          "unit": "UN",
+          "category": "smartphones",
+          "subcategory": "",
+          "mainSupplierId": "",
+          "preferredSupplierId": "",
+          "active": true,
+          "categoryId": "ERP-CAT-1"
+        },
+        "virtualStore": {
+          "name": "Celular Usado Samsung S23 Fe 5G 128gb",
+          "price": null,
+          "active": false,
+          "seoTitle": "Samsung Galaxy S23 FE 128GB 8GB RAM 5G Usado",
+          "seoDescription": "Samsung Galaxy S23 FE usado 128GB com 8GB RAM, 5G, tela AMOLED 120Hz e câmera de 50MP. Smartphone premium Samsung com ótimo desempenho.",
+          "channels": {
+            "lojaVirtual": {
+              "enabled": false
+            },
+            "mercadoLivre": {
+              "enabled": false
+            },
+            "shopee": {
+              "enabled": false
+            },
+            "amazon": {
+              "enabled": false
+            },
+            "magalu": {
+              "enabled": false
+            }
+          }
+        },
+        "detailsEnabled": true,
+        "showVariationsOnCard": true,
+        "descriptionShort": "",
+        "descriptionLong": "<p>📱<strong>Samsung Galaxy S23 FE 128GB Usado – Desempenho Premium e Câmera de 50MP</strong></p><p>🚀 Com <strong>128GB de armazenamento e 8GB de RAM</strong>, oferece ótimo desempenho para redes sociais, aplicativos, vídeos, jogos e multitarefas no dia a dia</p><p>🔥 <strong>Principais destaques:</strong><br>✅ 128GB de armazenamento<br>✅ 8GB de memória RAM<br>✅ Conectividade 5G<br>✅ Tela Dynamic AMOLED 2X de 6.4\"<br>✅ Taxa de atualização de até 120Hz<br>✅ Processador Exynos 2200<br>✅ Câmera principal de 50MP com estabilização óptica<br>✅ Câmeras traseiras de 50MP + 12MP + 8MP<br>✅ Câmera frontal de 10MP<br>✅ Zoom óptico de 3x<br>✅ Gravação de vídeos em até 8K<br>✅ Bateria de 4.500mAh<br>✅ Resistência à água e poeira IP68<br>✅ Dual SIM com suporte a eSIM</p><p><strong>Aparelho usado</strong>, uma excelente opção para quem deseja toda a qualidade da linha Galaxy S com melhor custo-benefício<br><br>🛡️ <strong>Compra com mais segurança:</strong> este aparelho conta com <strong>90 dias de garantia</strong></p><p><br></p>",
+        "variations": {
+          "enabled": true,
+          "colors": [
+            {
+              "name": "Preto",
+              "hex": "#111111",
+              "image": ""
+            }
+          ],
+          "storage": [],
+          "ram": [],
+          "condition": [],
+          "combinations": [
+            {
+              "color": "Preto",
+              "storage": "",
+              "ram": "",
+              "condition": "",
+              "image": "",
+              "stock": 1,
+              "erpPrice": null,
+              "costPrice": null,
+              "desiredMarginPercent": null,
+              "inventoryItemId": "VAR-1788433593777-1"
+            }
+          ],
+          "labels": {},
+          "colorsText": "Preto|#111111",
+          "storageText": "",
+          "ramText": "",
+          "conditionText": "",
+          "labelsText": "{}",
+          "combinationsText": "Preto|||||1"
+        },
+        "id": 1788433593777,
+        "inventoryBalance": {
+          "physicalQuantity": 1,
+          "availableQuantity": 1,
+          "reservedQuantity": 0,
+          "derivedFromVariations": true
+        },
+        "updatedAt": "2026-09-03T21:34:53.530Z"
+      },
+      "after": {
+        "name": "Celular Usado Samsung S23 Fe 128gb 8gb ram",
+        "sku": "",
+        "code": "PRD-977",
+        "barcode": "",
+        "ncm": "85171300",
+        "brand": "",
+        "slug": "celular-usado-samsung-s23-fe-128gb",
+        "price": null,
+        "commercial": {
+          "costPrice": 700,
+          "erpPrice": null,
+          "salePrice": null,
+          "marketplacePrice": null,
+          "promotionalPrice": null,
+          "desiredMarginPercent": null,
+          "expectedProfit": null,
+          "defaultCommissionPercent": null,
+          "cashPrice": null,
+          "installmentPrice": null,
+          "minimumPrice": null,
+          "minimumMarginPercent": null,
+          "discountPolicy": "inherit",
+          "maximumDiscountPercent": null,
+          "maximumDiscountAmount": null,
+          "requiresAuthorization": false
+        },
+        "stock": 1,
+        "inventory": {
+          "itemId": "PRD-1788433593777",
+          "stockControlled": true,
+          "allowNegative": false,
+          "minimumQuantity": 0,
+          "channelAvailability": {
+            "site": {
+              "mode": "shared",
+              "enabled": true,
+              "limit": null,
+              "physicalSafety": 0
+            }
+          }
+        },
+        "image": "images/produtos/1788471293520-s23-fe-usado-preto.jpg",
+        "gallery": [],
+        "category": "smartphones",
+        "subcategory": "usados",
+        "tags": [],
+        "relatedManualIds": [],
+        "crossSellIds": [],
+        "showPrice": true,
+        "featured": false,
+        "active": true,
+        "erp": {
+          "sku": "",
+          "internalCode": "PRD-977",
+          "supplierCode": "",
+          "searchAlias": "",
+          "barcode": "",
+          "ncm": "85171300",
+          "fiscal": {
+            "ncm": "85171300"
+          },
+          "brand": "",
+          "unit": "UN",
+          "category": "smartphones",
+          "subcategory": "",
+          "mainSupplierId": "",
+          "preferredSupplierId": "",
+          "active": true,
+          "categoryId": "ERP-CAT-1"
+        },
+        "virtualStore": {
+          "name": "Celular Usado Samsung S23 Fe 5G 128gb",
+          "price": null,
+          "active": true,
+          "seoTitle": "Samsung Galaxy S23 FE 128GB 8GB RAM 5G Usado",
+          "seoDescription": "Samsung Galaxy S23 FE usado 128GB com 8GB RAM, 5G, tela AMOLED 120Hz e câmera de 50MP. Smartphone premium Samsung com ótimo desempenho.",
+          "channels": {
+            "lojaVirtual": {
+              "enabled": true
+            },
+            "mercadoLivre": {
+              "enabled": false
+            },
+            "shopee": {
+              "enabled": false
+            },
+            "amazon": {
+              "enabled": false
+            },
+            "magalu": {
+              "enabled": false
+            }
+          }
+        },
+        "detailsEnabled": true,
+        "showVariationsOnCard": true,
+        "descriptionShort": "",
+        "descriptionLong": "<p>📱<strong>Samsung Galaxy S23 FE 128GB Usado – Desempenho Premium e Câmera de 50MP</strong></p><p>🚀 Com <strong>128GB de armazenamento e 8GB de RAM</strong>, oferece ótimo desempenho para redes sociais, aplicativos, vídeos, jogos e multitarefas no dia a dia</p><p>🔥 <strong>Principais destaques:</strong><br>✅ 128GB de armazenamento<br>✅ 8GB de memória RAM<br>✅ Conectividade 5G<br>✅ Tela Dynamic AMOLED 2X de 6.4\"<br>✅ Taxa de atualização de até 120Hz<br>✅ Processador Exynos 2200<br>✅ Câmera principal de 50MP com estabilização óptica<br>✅ Câmeras traseiras de 50MP + 12MP + 8MP<br>✅ Câmera frontal de 10MP<br>✅ Zoom óptico de 3x<br>✅ Gravação de vídeos em até 8K<br>✅ Bateria de 4.500mAh<br>✅ Resistência à água e poeira IP68<br>✅ Dual SIM com suporte a eSIM</p><p><strong>Aparelho usado</strong>, uma excelente opção para quem deseja toda a qualidade da linha Galaxy S com melhor custo-benefício<br><br>🛡️ <strong>Compra com mais segurança:</strong> este aparelho conta com <strong>90 dias de garantia</strong></p><p><br></p>",
+        "variations": {
+          "enabled": true,
+          "colors": [
+            {
+              "name": "Preto",
+              "hex": "#111111",
+              "image": ""
+            }
+          ],
+          "storage": [],
+          "ram": [],
+          "condition": [],
+          "combinations": [
+            {
+              "color": "Preto",
+              "storage": "",
+              "ram": "",
+              "condition": "",
+              "image": "",
+              "stock": 1,
+              "erpPrice": null,
+              "costPrice": null,
+              "desiredMarginPercent": null,
+              "inventoryItemId": "VAR-1788433593777-1"
+            }
+          ],
+          "labels": {},
+          "colorsText": "Preto|#111111",
+          "storageText": "",
+          "ramText": "",
+          "conditionText": "",
+          "labelsText": "{}",
+          "combinationsText": "Preto|||||1"
+        },
+        "id": 1788433593777,
+        "inventoryBalance": {
+          "physicalQuantity": 1,
+          "availableQuantity": 1,
+          "reservedQuantity": 0,
+          "derivedFromVariations": true
+        },
+        "updatedAt": "2026-09-03T21:34:53.530Z"
+      },
+      "ip": "127.0.0.1",
+      "requestId": "f7895d58-583c-44f8-8ba5-ccc77e808751"
     }
   ],
-  "updatedAt": "2026-08-31T19:06:28.743Z"
+  "updatedAt": "2026-09-03T21:40:15.798Z"
 }

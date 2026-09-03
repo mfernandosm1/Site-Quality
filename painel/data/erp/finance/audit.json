@@ -2,6 +2,78 @@
   "version": "0.16.0",
   "items": [
     {
+      "id": "AUD-b35fa36c-ffc1-4a00-8288-3ce56ea4403e",
+      "action": "payable_payment_posted",
+      "at": "2026-09-03T11:05:39.180Z",
+      "payablePaymentId": "PYP-91d56f1a-cbb3-4fce-bea8-eff1a09922c3",
+      "payableId": "PAY-2f8df8ef-d99d-405f-b9b9-6abf5b5c152f",
+      "entryId": "FEN-2ffe0f80-a07a-4def-a4aa-98e98fbfde80",
+      "movementIds": [
+        "FMV-92d5e951-5b32-4b1d-b580-fbea256028d7"
+      ],
+      "actor": "Matheus Fernando"
+    },
+    {
+      "id": "AUD-7f2232d1-28e1-4df9-b366-6801b0095ce5",
+      "action": "payable_payment_posted",
+      "at": "2026-09-03T10:03:47.272Z",
+      "payablePaymentId": "PYP-7333876b-d20f-43ad-9277-b60f37b5ac1e",
+      "payableId": "PAY-a36e8a6c-f1af-4bad-b1fd-a3d8d8f3dbdf",
+      "entryId": "FEN-e701d8f6-c4a2-4810-b9de-68aecacb4a3e",
+      "movementIds": [
+        "FMV-2df1794d-170b-4c9d-855e-6534703d4159"
+      ],
+      "actor": "Matheus Fernando"
+    },
+    {
+      "id": "AUD-999a0d1a-77ab-44db-96e5-c7cb0a1ceede",
+      "action": "payable_payment_posted",
+      "at": "2026-09-01T00:28:07.497Z",
+      "payablePaymentId": "PYP-647aaad9-0f90-45c7-8684-3cafa9933d19",
+      "payableId": "PAY-1864b6b5-c53c-4134-ba83-3a872e2bd55c",
+      "entryId": "FEN-8247ed21-f71a-439b-91bc-1a745e00be86",
+      "movementIds": [
+        "FMV-b3f1d746-dce6-4203-a5db-ca0b670ee71d"
+      ],
+      "actor": "Matheus Fernando"
+    },
+    {
+      "id": "AUD-bfe3b51c-8e43-4c69-8837-61a06e75d3ad",
+      "action": "payable_payment_posted",
+      "at": "2026-09-01T00:22:52.038Z",
+      "payablePaymentId": "PYP-1d367595-d237-4303-828c-b527ff62d051",
+      "payableId": "PAY-ee32bc98-6ba5-4938-be2d-1b33450ed0f5",
+      "entryId": "FEN-7f3b29c5-d4b3-471b-b9ee-5b3f624c2c0c",
+      "movementIds": [
+        "FMV-5d4e7c87-18ed-43ce-ae46-d58d7fd9f490"
+      ],
+      "actor": "Matheus Fernando"
+    },
+    {
+      "id": "AUD-8f155f03-2593-4968-a43a-9aed3283ef11",
+      "action": "payable_payment_posted",
+      "at": "2026-09-01T00:20:57.245Z",
+      "payablePaymentId": "PYP-8f752f4a-7354-4108-80b5-18e4d8459957",
+      "payableId": "PAY-fa54ac4f-8e7f-49b2-9d45-422b247cf8a2",
+      "entryId": "FEN-b04d082f-1687-4a1f-8d8d-bcb278578171",
+      "movementIds": [
+        "FMV-7cbbad4e-b82d-453b-a23f-622a3ba24520"
+      ],
+      "actor": "Matheus Fernando"
+    },
+    {
+      "id": "AUD-323c70c2-e39e-4d2c-b6cd-07c7a5ff34a1",
+      "action": "payable_payment_posted",
+      "at": "2026-09-01T00:20:57.186Z",
+      "payablePaymentId": "PYP-0aa0e30d-0668-42ea-bd4a-7fac754e7286",
+      "payableId": "PAY-fa54ac4f-8e7f-49b2-9d45-422b247cf8a2",
+      "entryId": "FEN-6bc04c32-0041-4e56-99d5-eb8f00dae70f",
+      "movementIds": [
+        "FMV-ed783c52-dee5-41bc-8b1b-d4109d971dd2"
+      ],
+      "actor": "Matheus Fernando"
+    },
+    {
       "id": "AUD-85d67b10-8435-4f27-b221-aa0151f5ca76",
       "action": "payable_payment_posted",
       "at": "2026-08-31T12:12:10.067Z",

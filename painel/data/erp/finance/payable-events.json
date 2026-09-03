@@ -2,6 +2,301 @@
   "version": "0.18.0",
   "items": [
     {
+      "id": "PEV-c3a7cd02-6ff9-404d-a3f5-a58a20fe4659",
+      "payableId": "PAY-3baefbc5-fedf-4da3-b5b6-5675a5ef09fb",
+      "action": "installment_updated",
+      "at": "2026-09-03T16:56:32.208Z",
+      "actor": "Matheus Fernando",
+      "installmentId": "PIN-54b93a73-f5ec-4052-8883-8b278d241c76",
+      "installmentNumber": 2,
+      "previous": {
+        "value": 178.31,
+        "dueDate": "2026-09-20",
+        "paymentMethodId": "PM-BOLETO",
+        "notes": ""
+      },
+      "current": {
+        "value": 178.31,
+        "dueDate": "2026-09-18",
+        "paymentMethodId": "PM-BOLETO",
+        "notes": ""
+      }
+    },
+    {
+      "id": "PEV-09e22701-717c-408a-ae0f-69a77bf3d636",
+      "payableId": "PAY-2f8df8ef-d99d-405f-b9b9-6abf5b5c152f",
+      "action": "paid",
+      "at": "2026-09-03T11:05:39.185Z",
+      "actor": "Matheus Fernando",
+      "paymentId": "PYP-91d56f1a-cbb3-4fce-bea8-eff1a09922c3",
+      "installmentId": "PIN-f1c043d5-0aba-4e65-a330-b5f9e8b64782",
+      "value": 150,
+      "principalValue": 150,
+      "balanceAfter": 0
+    },
+    {
+      "id": "PEV-49edffe7-7e9b-4a8c-aa3d-a018b9b14f46",
+      "payableId": "PAY-2f8df8ef-d99d-405f-b9b9-6abf5b5c152f",
+      "action": "created",
+      "at": "2026-09-03T11:05:39.153Z",
+      "actor": "Matheus Fernando",
+      "value": 150,
+      "installmentCount": 1,
+      "competencies": [
+        "2026-09"
+      ],
+      "cashboxId": "caixa-principal",
+      "paymentPlan": [
+        {
+          "paymentMethodId": "PM-DINHEIRO",
+          "value": 150,
+          "installmentCount": 1,
+          "firstDueDate": "2026-09-03",
+          "installmentDueDates": [
+            "2026-09-03"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "PEV-aa60a624-1039-438a-add7-963e5a2162cc",
+      "payableId": "PAY-33e0e76e-3b9c-46b5-9527-6d6e9df0161e",
+      "action": "created",
+      "at": "2026-09-03T10:54:51.928Z",
+      "actor": "Matheus Fernando",
+      "value": 46.72,
+      "installmentCount": 2,
+      "competencies": [
+        "2026-08"
+      ],
+      "cashboxId": "caixa-principal",
+      "paymentPlan": [
+        {
+          "paymentMethodId": "PAY-f67a5400-9f7b-4b8b-af7a-adff277d9169",
+          "value": 46.72,
+          "installmentCount": 2,
+          "firstDueDate": "2026-09-23",
+          "installmentDueDates": [
+            "2026-09-23",
+            "2026-10-23"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "PEV-de2bbdcf-0eb9-42fc-8009-e307397a17e4",
+      "payableId": "PAY-a36e8a6c-f1af-4bad-b1fd-a3d8d8f3dbdf",
+      "action": "paid",
+      "at": "2026-09-03T10:03:47.278Z",
+      "actor": "Matheus Fernando",
+      "paymentId": "PYP-7333876b-d20f-43ad-9277-b60f37b5ac1e",
+      "installmentId": "PIN-636546c4-30d1-4219-ae12-4d0229debfd6",
+      "value": 1535,
+      "principalValue": 1535,
+      "balanceAfter": 0
+    },
+    {
+      "id": "PEV-5e679ca8-4614-427f-bd51-1cfeb968d7ea",
+      "payableId": "PAY-a36e8a6c-f1af-4bad-b1fd-a3d8d8f3dbdf",
+      "action": "created",
+      "at": "2026-09-03T10:03:47.241Z",
+      "actor": "Matheus Fernando",
+      "value": 1535,
+      "installmentCount": 1,
+      "competencies": [
+        "2026-09"
+      ],
+      "cashboxId": "caixa-principal",
+      "paymentPlan": [
+        {
+          "paymentMethodId": "PM-DINHEIRO",
+          "value": 1535,
+          "installmentCount": 1,
+          "firstDueDate": "2026-09-03",
+          "installmentDueDates": [
+            "2026-09-03"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "PEV-1b1e633b-f769-42d4-8f7c-966249433db2",
+      "payableId": "PAY-0884d103-4fa5-4287-95b5-d37021c95940",
+      "action": "created",
+      "at": "2026-09-01T16:44:06.302Z",
+      "actor": "Matheus Fernando",
+      "value": 96.72,
+      "installmentCount": 1,
+      "competencies": [
+        "2026-09"
+      ],
+      "cashboxId": "caixa-principal",
+      "paymentPlan": [
+        {
+          "paymentMethodId": "PM-BOLETO",
+          "value": 96.72,
+          "installmentCount": 1,
+          "firstDueDate": "2026-09-12",
+          "installmentDueDates": [
+            "2026-09-12"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "PEV-64b9d120-99f4-4693-9c8d-c3662d3ae791",
+      "payableId": "PAY-ee116757-c1b1-4db8-ac68-1e9f5a99c198",
+      "action": "created",
+      "at": "2026-09-01T00:30:01.116Z",
+      "actor": "Matheus Fernando",
+      "value": 19.99,
+      "installmentCount": 1,
+      "competencies": [
+        "2026-08"
+      ],
+      "cashboxId": "caixa-principal",
+      "paymentPlan": [
+        {
+          "paymentMethodId": "PAY-f67a5400-9f7b-4b8b-af7a-adff277d9169",
+          "value": 19.99,
+          "installmentCount": 1,
+          "firstDueDate": "2026-09-23",
+          "installmentDueDates": [
+            "2026-09-23"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "PEV-a7553256-44aa-4084-bb50-3d7a7576798d",
+      "payableId": "PAY-1864b6b5-c53c-4134-ba83-3a872e2bd55c",
+      "action": "paid",
+      "at": "2026-09-01T00:28:07.514Z",
+      "actor": "Matheus Fernando",
+      "paymentId": "PYP-647aaad9-0f90-45c7-8684-3cafa9933d19",
+      "installmentId": "PIN-d702d25f-c967-48f5-9f17-c90de8de583f",
+      "value": 400,
+      "principalValue": 400,
+      "balanceAfter": 0
+    },
+    {
+      "id": "PEV-ad737dfa-3299-485e-88a6-5c8d7b7c6648",
+      "payableId": "PAY-1864b6b5-c53c-4134-ba83-3a872e2bd55c",
+      "action": "created",
+      "at": "2026-09-01T00:28:07.435Z",
+      "actor": "Matheus Fernando",
+      "value": 400,
+      "installmentCount": 1,
+      "competencies": [
+        "2026-08"
+      ],
+      "cashboxId": "caixa-principal",
+      "paymentPlan": [
+        {
+          "paymentMethodId": "PM-DINHEIRO",
+          "value": 400,
+          "installmentCount": 1,
+          "firstDueDate": "2026-08-31",
+          "installmentDueDates": [
+            "2026-08-31"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "PEV-c02f373b-b462-4373-8461-59dd22427ba3",
+      "payableId": "PAY-ee32bc98-6ba5-4938-be2d-1b33450ed0f5",
+      "action": "paid",
+      "at": "2026-09-01T00:22:52.054Z",
+      "actor": "Matheus Fernando",
+      "paymentId": "PYP-1d367595-d237-4303-828c-b527ff62d051",
+      "installmentId": "PIN-ab6180d3-65bf-4b2e-a7cd-7ba5a4c22cbd",
+      "value": 250,
+      "principalValue": 250,
+      "balanceAfter": 0
+    },
+    {
+      "id": "PEV-ca4c2237-2c83-4df5-8cc9-040b65784c4f",
+      "payableId": "PAY-ee32bc98-6ba5-4938-be2d-1b33450ed0f5",
+      "action": "created",
+      "at": "2026-09-01T00:22:51.983Z",
+      "actor": "Matheus Fernando",
+      "value": 250,
+      "installmentCount": 1,
+      "competencies": [
+        "2026-08"
+      ],
+      "cashboxId": "caixa-principal",
+      "paymentPlan": [
+        {
+          "paymentMethodId": "PM-DINHEIRO",
+          "value": 250,
+          "installmentCount": 1,
+          "firstDueDate": "2026-08-31",
+          "installmentDueDates": [
+            "2026-08-31"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "PEV-fdaa3db1-c54c-4471-a105-a4300b37d1e3",
+      "payableId": "PAY-fa54ac4f-8e7f-49b2-9d45-422b247cf8a2",
+      "action": "paid",
+      "at": "2026-09-01T00:20:57.260Z",
+      "actor": "Matheus Fernando",
+      "paymentId": "PYP-8f752f4a-7354-4108-80b5-18e4d8459957",
+      "installmentId": "PIN-5efcd156-aa2a-4845-b772-11726f21a8e3",
+      "value": 550,
+      "principalValue": 550,
+      "balanceAfter": 0
+    },
+    {
+      "id": "PEV-accccf64-4cf2-4095-acb2-9f1f2a2e31a2",
+      "payableId": "PAY-fa54ac4f-8e7f-49b2-9d45-422b247cf8a2",
+      "action": "partial_payment",
+      "at": "2026-09-01T00:20:57.201Z",
+      "actor": "Matheus Fernando",
+      "paymentId": "PYP-0aa0e30d-0668-42ea-bd4a-7fac754e7286",
+      "installmentId": "PIN-81442771-4736-4be1-9962-d95e9a37ba13",
+      "value": 2000,
+      "principalValue": 2000,
+      "balanceAfter": 550
+    },
+    {
+      "id": "PEV-e17a5414-23c4-46f4-bd83-fbd598cfb80d",
+      "payableId": "PAY-fa54ac4f-8e7f-49b2-9d45-422b247cf8a2",
+      "action": "created",
+      "at": "2026-09-01T00:20:57.131Z",
+      "actor": "Matheus Fernando",
+      "value": 2550,
+      "installmentCount": 2,
+      "competencies": [
+        "2026-08"
+      ],
+      "cashboxId": "caixa-principal",
+      "paymentPlan": [
+        {
+          "paymentMethodId": "PM-PIX",
+          "value": 2000,
+          "installmentCount": 1,
+          "firstDueDate": "2026-08-31",
+          "installmentDueDates": [
+            "2026-08-31"
+          ]
+        },
+        {
+          "paymentMethodId": "PM-DINHEIRO",
+          "value": 550,
+          "installmentCount": 1,
+          "firstDueDate": "2026-08-31",
+          "installmentDueDates": [
+            "2026-08-31"
+          ]
+        }
+      ]
+    },
+    {
       "id": "PEV-68aba874-e081-4967-b2e5-e7d8a6eea27f",
       "payableId": "PAY-98832506-e0ba-487c-a011-a81849f5038b",
       "action": "partial_payment",

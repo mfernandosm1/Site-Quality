@@ -1,9 +1,10 @@
 import fs from 'fs';
 import path from 'path';
+import { businessDate, businessMonthStart, businessMonthEnd } from '../utils/date-time.js';
 
 const clean = value => String(value ?? '').trim();
 const num = value => Number.isFinite(Number(value)) ? Number(value) : 0;
-const dateOnly = value => clean(value).slice(0, 10);
+const dateOnly = value => businessDate(value);
 const monthKey = value => dateOnly(value).slice(0, 7);
 const isFinanciallyActive = item => !['reversed', 'cancelled', 'void'].includes(clean(item?.status).toLowerCase()) && clean(item?.reversalStatus).toLowerCase() !== 'reversed';
 
@@ -408,8 +409,8 @@ export default class DreService {
 
   query(filters = {}) {
     const today = new Date();
-    const start = dateOnly(filters.start) || new Date(today.getFullYear(), today.getMonth(), 1).toISOString().slice(0, 10);
-    const end = dateOnly(filters.end) || new Date(today.getFullYear(), today.getMonth() + 1, 0).toISOString().slice(0, 10);
+    const start = dateOnly(filters.start) || businessMonthStart(today);
+    const end = dateOnly(filters.end) || businessMonthEnd(today);
     const basis = clean(filters.basis) === 'cash' ? 'cash' : 'competence';
     const classification = clean(filters.classification);
     let accountId = clean(filters.accountId);

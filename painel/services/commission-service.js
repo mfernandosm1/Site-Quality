@@ -1,6 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 import crypto from 'crypto';
+import { businessDate, addBusinessDays, businessMonthEnd } from '../utils/date-time.js';
 
 const clone=value=>JSON.parse(JSON.stringify(value));
 const text=value=>String(value ?? '').trim();
@@ -13,25 +14,18 @@ const bool=(value,fallback=false)=>{
   if(typeof value==='boolean')return value;
   return ['1','true','on','yes','sim'].includes(norm(value));
 };
-const dateOnly=value=>{
-  const raw=text(value);
-  if(!raw)return '';
-  const parsed=new Date(raw);
-  if(Number.isNaN(parsed.getTime()))return raw.slice(0,10);
-  return parsed.toISOString().slice(0,10);
-};
+const dateOnly=value=>businessDate(value);
 const inRange=(date,from,to)=>date&&date>=from&&date<=to;
 
 function mondayOf(value){
-  const raw=/^\d{4}-\d{2}-\d{2}$/.test(text(value))?text(value):new Date().toISOString().slice(0,10);
-  const d=new Date(`${raw}T12:00:00`);
-  const day=d.getDay();
-  const delta=day===0?-6:1-day;
-  d.setDate(d.getDate()+delta);
-  return d.toISOString().slice(0,10);
+  const raw=/^\d{4}-\d{2}-\d{2}$/.test(text(value))?text(value):businessDate();
+  const [year,month,day]=raw.split('-').map(Number);
+  const weekday=new Date(Date.UTC(year,month-1,day,12)).getUTCDay();
+  const delta=weekday===0?-6:1-weekday;
+  return addBusinessDays(raw,delta);
 }
-function addDays(value,days){const d=new Date(`${value}T12:00:00`);d.setDate(d.getDate()+Number(days||0));return d.toISOString().slice(0,10);}
-function lastDayOfMonth(month){const [y,m]=String(month).split('-').map(Number);return new Date(y,m,0,12).toISOString().slice(0,10);}
+function addDays(value,days){return addBusinessDays(value,days);}
+function lastDayOfMonth(month){return businessMonthEnd(`${month}-01`);}
 
 export default class CommissionService {
   constructor({dataDir,contentDir,commerceService,receivablesService,payablesService,financeService,userService}={}){
@@ -68,9 +62,9 @@ export default class CommissionService {
     if(mode==='monthly'){
       if(/^\d{4}-\d{2}$/.test(raw))return raw;
       if(/^\d{4}-\d{2}-\d{2}$/.test(raw))return raw.slice(0,7);
-      return new Date().toISOString().slice(0,7);
+      return businessDate().slice(0,7);
     }
-    return mondayOf(raw||new Date().toISOString().slice(0,10));
+    return mondayOf(raw||businessDate());
   }
   periodBounds(periodicity,key=''){
     const mode=this.normalizePeriodicity(periodicity),periodKey=this.normalizePeriodKey(mode,key);
@@ -336,7 +330,7 @@ export default class CommissionService {
     const period=this.periodBounds(settlement.periodicity,settlement.periodKey),description=`Comissão ${user?.name||settlement.snapshot?.user?.name||'Vendedor'} · ${this.periodLabel(settlement.periodicity,settlement.periodKey)}`;
     const payable=this.payablesService.create({
       description,supplierName:user?.name||settlement.snapshot?.user?.name||'Colaborador',entryType:'expense',origin:'commission_settlement',originId:settlement.id,
-      issueDate:new Date().toISOString().slice(0,10),competenceDate:period.from,grossValue:settlement.amount,paymentMethodId,dueDate,firstDueDate:dueDate,accountId:account.id,costCenterId:account.costCenterId||account.categoryId||'',notes:`Apuração de comissão fechada em ${settlement.closedAt}. Regra e detalhamento preservados no módulo Metas e Comissões.`
+      issueDate:businessDate(),competenceDate:period.from,grossValue:settlement.amount,paymentMethodId,dueDate,firstDueDate:dueDate,accountId:account.id,costCenterId:account.costCenterId||account.categoryId||'',notes:`Apuração de comissão fechada em ${settlement.closedAt}. Regra e detalhamento preservados no módulo Metas e Comissões.`
     },this.actor(actor));
     settlement.status='posted';settlement.financePayableId=payable.id;settlement.financePayableNumber=payable.number||'';settlement.postedAt=now();settlement.postedBy=this.actor(actor);settlement.updatedAt=now();settlement.updatedBy=this.actor(actor);db.items[index]=settlement;this.write('settlements.json',db);
     return {settlement:clone(settlement),payable,duplicated:false};

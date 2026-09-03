@@ -1,31 +1,28 @@
 import fs from 'fs';
 import path from 'path';
+import { businessDate, businessMonthStart, businessDayStartMs, businessDayEndMs, businessWallTimeMs } from '../utils/date-time.js';
 
 function text(value=''){ return String(value ?? '').trim(); }
 function num(value=0){ const n=Number(value); return Number.isFinite(n) ? n : 0; }
 function round2(value=0){ return Math.round((num(value)+Number.EPSILON)*100)/100; }
 function clamp(value,min,max){ return Math.max(min,Math.min(max,value)); }
-function isoDate(value=''){
-  if(!value) return '';
-  const date = value instanceof Date ? value : new Date(value);
-  if(Number.isNaN(date.getTime())) return String(value).slice(0,10);
-  return date.toISOString().slice(0,10);
-}
+function isoDate(value=''){ return value ? businessDate(value) : ''; }
 function dateMs(value=''){
   const valueText=text(value);
   if(!valueText) return NaN;
+  if(/^\d{4}-\d{2}-\d{2}$/.test(valueText)) return businessWallTimeMs(valueText,'12:00:00.000');
   const direct=new Date(valueText).getTime();
   if(Number.isFinite(direct)) return direct;
-  const local=new Date(`${valueText.slice(0,10)}T12:00:00`).getTime();
-  return local;
+  const key=businessDate(valueText);
+  return /^\d{4}-\d{2}-\d{2}$/.test(key)?businessWallTimeMs(key,'12:00:00.000'):NaN;
 }
 function startOfDayMs(value=''){
-  const d=text(value)||new Date().toISOString().slice(0,10);
-  return new Date(`${d.slice(0,10)}T00:00:00`).getTime();
+  const d=text(value)||businessDate();
+  return businessDayStartMs(d);
 }
 function endOfDayMs(value=''){
-  const d=text(value)||new Date().toISOString().slice(0,10);
-  return new Date(`${d.slice(0,10)}T23:59:59.999`).getTime();
+  const d=text(value)||businessDate();
+  return businessDayEndMs(d);
 }
 function monthKey(value=''){
   const d=isoDate(value);
@@ -87,8 +84,8 @@ export default class ReportService {
 
   defaultFilters(){
     const now=new Date();
-    const to=now.toISOString().slice(0,10);
-    const from=new Date(now.getFullYear(),now.getMonth(),1,12).toISOString().slice(0,10);
+    const to=businessDate(now);
+    const from=businessMonthStart(now);
     return { from,to,type:'all',seller:'all',q:'',top:50,staleDays:90,productSort:'quantity',productKind:'all',turnoverView:'all',inactiveDays:30,customerMode:'inactive',customerWindow:'90',customerInactiveRange:'30plus',customerInactiveSort:'recent' };
   }
 
@@ -308,7 +305,7 @@ export default class ReportService {
       const [year,month]=dates[0].split('-').map(Number);
       if(!year||!month)return '';
       const cutoff=new Date(year,month-1,0,12,0,0,0);
-      return cutoff.toISOString().slice(0,10);
+      return businessDate(cutoff);
     }catch(_){return '';}
   }
 
@@ -718,7 +715,7 @@ export default class ReportService {
 
 
   customerInactivity(filters={}){
-    const f=this.normalizeFilters(filters),referenceDate=new Date().toISOString().slice(0,10),referenceMs=endOfDayMs(referenceDate);
+    const f=this.normalizeFilters(filters),referenceDate=businessDate(),referenceMs=endOfDayMs(referenceDate);
     const customers=itemsOf(readJson(path.join(this.panelDir,'data','erp','customers','customers.json'),{items:[]}));
     const wm10History=readJson(path.join(this.panelDir,'data','erp','customers','wm10-customer-history.json'),{customers:{}})?.customers||{};
     const currentOps=(this.commerceService?.listOperations?.({status:'all'})||[]).filter(operation=>operation.status==='finalized'&&text(operation.customerId));
@@ -833,7 +830,7 @@ export default class ReportService {
     const s=dre.summary||{};
     const receivableInstallments=itemsOf(readJson(path.join(financeDir,'receivable-installments.json'),{items:[]}));
     const payableInstallments=itemsOf(readJson(path.join(financeDir,'payable-installments.json'),{items:[]}));
-    const today=new Date().toISOString().slice(0,10),horizon30=isoDate(new Date(Date.now()+30*86400000));
+    const today=businessDate(),horizon30=businessDate(new Date(Date.now()+30*86400000));
     const liveRows=rows=>rows.filter(row=>!['reversed','cancelled','canceled','void'].includes(normalize(row.status))&&num(row.openBalance)>0);
     const receivablesOpenRows=liveRows(receivableInstallments),payablesOpenRows=liveRows(payableInstallments);
     const receivablesOpen=round2(receivablesOpenRows.reduce((sum,row)=>sum+num(row.openBalance),0));

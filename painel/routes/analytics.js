@@ -1,6 +1,7 @@
 import express from 'express';
 import fs from 'fs';
 import path from 'path';
+import { businessDate, businessDateParts, addBusinessDays, businessDayStartMs } from '../utils/date-time.js';
 
 const router = express.Router();
 
@@ -89,17 +90,10 @@ function eventDate(event){
   return parseDate(event.at) || parseDate(event.Data) || null;
 }
 function startForPeriod(period){
-  const d = new Date();
-  d.setHours(0,0,0,0);
-  if(period === 'today') return d;
-  if(period === '7d'){
-    d.setDate(d.getDate() - 6);
-    return d;
-  }
-  if(period === '30d'){
-    d.setDate(d.getDate() - 29);
-    return d;
-  }
+  const today = businessDate();
+  if(period === 'today') return new Date(businessDayStartMs(today));
+  if(period === '7d') return new Date(businessDayStartMs(addBusinessDays(today, -6)));
+  if(period === '30d') return new Date(businessDayStartMs(addBusinessDays(today, -29)));
   return null;
 }
 function filterEvents(events=[], period='all'){
@@ -113,12 +107,14 @@ function filterEvents(events=[], period='all'){
 function dayLabel(dateValue){
   const d = parseDate(dateValue);
   if(!d) return 'Sem data';
-  return String(d.getDate()).padStart(2,'0') + '/' + String(d.getMonth()+1).padStart(2,'0');
+  const key=businessDate(d),[,month,day]=key.split('-');
+  return day&&month ? `${day}/${month}` : 'Sem data';
 }
 function hourMinute(dateValue){
   const d = parseDate(dateValue);
   if(!d) return '';
-  return String(d.getHours()).padStart(2,'0') + ':' + String(d.getMinutes()).padStart(2,'0');
+  const parts=businessDateParts(d);
+  return parts ? `${parts.hour}:${parts.minute}` : '';
 }
 function referrerSource(url=''){
   const v = String(url || '').toLowerCase();
@@ -306,19 +302,19 @@ function productConversion(products){
 }
 function localDayKey(value){
   const d = value instanceof Date ? value : parseDate(value);
-  if(!d) return '';
-  return [d.getFullYear(), String(d.getMonth()+1).padStart(2,'0'), String(d.getDate()).padStart(2,'0')].join('-');
+  return d ? businessDate(d) : '';
 }
 function localDayLabel(value){
-  const d = value instanceof Date ? value : parseDate(value);
-  if(!d) return '';
-  return String(d.getDate()).padStart(2,'0') + '/' + String(d.getMonth()+1).padStart(2,'0');
+  const key=localDayKey(value);
+  if(!key) return '';
+  const [,month,day]=key.split('-');
+  return day&&month ? `${day}/${month}` : '';
 }
 function startOfLocalDay(value){
-  const d = value instanceof Date ? new Date(value) : parseDate(value);
+  const d = value instanceof Date ? value : parseDate(value);
   if(!d) return null;
-  d.setHours(0,0,0,0);
-  return d;
+  const ms=businessDayStartMs(d);
+  return Number.isFinite(ms) ? new Date(ms) : null;
 }
 function buildTimeline(events=[], period='all'){
   const today = startOfLocalDay(new Date());

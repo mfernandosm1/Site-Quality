@@ -1,10 +1,11 @@
 import fs from 'fs';
 import path from 'path';
+import { businessDate } from '../utils/date-time.js';
 
 const readJson=(file,fallback={items:[]})=>{try{return JSON.parse(fs.readFileSync(file,'utf8'));}catch(_){return fallback;}};
 const text=v=>String(v??'').trim();
 const num=v=>Math.round((Number(v)||0)*100)/100;
-const day=v=>text(v).slice(0,10);
+const day=v=>businessDate(v);
 const ts=v=>{const n=Date.parse(v||'');return Number.isFinite(n)?n:0;};
 const bool=v=>['1','true','on','yes','sim'].includes(text(v).toLowerCase());
 const list=v=>Array.isArray(v)?v.map(text).filter(Boolean):text(v)?text(v).split(',').map(text).filter(Boolean):[];

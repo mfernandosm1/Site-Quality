@@ -244,10 +244,42 @@
       "description": "",
       "dueAt": "2026-08-24T12:00",
       "priority": "medium",
-      "status": "open",
+      "status": "completed",
       "createdAt": "2026-08-23T23:29:17.383Z",
-      "updatedAt": "2026-08-23T23:29:17.383Z",
-      "completedAt": null
+      "updatedAt": "2026-09-01T17:42:10.625Z",
+      "completedAt": "2026-09-01T17:42:10.625Z",
+      "updatedBy": "Matheus Fernando",
+      "history": [
+        {
+          "at": "2026-09-01T17:42:10.625Z",
+          "actor": "Matheus Fernando",
+          "action": "completed",
+          "before": {
+            "title": "fazer a compra dos notebooks no sistema e emitir nota na wm também",
+            "description": "",
+            "dueAt": "2026-08-24T12:00",
+            "priority": "medium",
+            "type": "task",
+            "typeName": "Tarefa",
+            "customerId": "",
+            "customerName": "",
+            "owner": "Quality",
+            "status": "open"
+          },
+          "after": {
+            "title": "fazer a compra dos notebooks no sistema e emitir nota na wm também",
+            "description": "",
+            "dueAt": "2026-08-24T12:00",
+            "priority": "medium",
+            "type": "task",
+            "typeName": "Tarefa",
+            "customerId": "",
+            "customerName": "",
+            "owner": "Quality",
+            "status": "completed"
+          }
+        }
+      ]
     },
     {
       "id": "task_mtabm56t_uu203b",
@@ -282,23 +314,6 @@
       "createdAt": "2026-08-27T13:11:37.119Z",
       "updatedAt": "2026-08-27T22:11:29.503Z",
       "completedAt": "2026-08-27T22:11:29.503Z"
-    },
-    {
-      "id": "task_mtbjkymz_5kvx9o",
-      "customerId": "",
-      "customerName": "",
-      "conversationId": "",
-      "owner": "Matheus",
-      "type": "task",
-      "typeName": "Tarefa",
-      "title": "Fazer pedido RE",
-      "description": "",
-      "dueAt": "2026-08-27T16:00",
-      "priority": "medium",
-      "status": "open",
-      "createdAt": "2026-08-27T13:11:56.507Z",
-      "updatedAt": "2026-08-27T13:11:56.507Z",
-      "completedAt": null
     },
     {
       "id": "task_mtc3pty4_krx6cj",
@@ -525,13 +540,42 @@
       "description": "",
       "dueAt": "2026-08-29T20:00",
       "priority": "medium",
-      "status": "open",
+      "status": "completed",
       "createdAt": "2026-08-28T23:00:08.335Z",
       "createdBy": "Matheus Fernando",
-      "updatedAt": "2026-08-28T23:00:08.335Z",
+      "updatedAt": "2026-09-01T17:42:21.714Z",
       "updatedBy": "Matheus Fernando",
-      "completedAt": null,
+      "completedAt": "2026-09-01T17:42:21.714Z",
       "history": [
+        {
+          "at": "2026-09-01T17:42:21.714Z",
+          "actor": "Matheus Fernando",
+          "action": "completed",
+          "before": {
+            "title": "testar devolução / troca no pdv.\nao cadastrar um produto, se eu selecionar uma categoria do site, ele não precisa exigir uma categoria do erp também.",
+            "description": "",
+            "dueAt": "2026-08-29T20:00",
+            "priority": "medium",
+            "type": "task",
+            "typeName": "Tarefa",
+            "customerId": "",
+            "customerName": "",
+            "owner": "Quality",
+            "status": "open"
+          },
+          "after": {
+            "title": "testar devolução / troca no pdv.\nao cadastrar um produto, se eu selecionar uma categoria do site, ele não precisa exigir uma categoria do erp também.",
+            "description": "",
+            "dueAt": "2026-08-29T20:00",
+            "priority": "medium",
+            "type": "task",
+            "typeName": "Tarefa",
+            "customerId": "",
+            "customerName": "",
+            "owner": "Quality",
+            "status": "completed"
+          }
+        },
         {
           "at": "2026-08-28T23:00:08.335Z",
           "actor": "Matheus Fernando",
@@ -603,13 +647,42 @@
       "description": "",
       "dueAt": "2026-08-31T07:00",
       "priority": "high",
-      "status": "open",
+      "status": "completed",
       "createdAt": "2026-08-31T09:42:05.088Z",
       "createdBy": "Matheus Fernando",
-      "updatedAt": "2026-08-31T09:42:05.088Z",
+      "updatedAt": "2026-09-01T17:42:24.175Z",
       "updatedBy": "Matheus Fernando",
-      "completedAt": null,
+      "completedAt": "2026-09-01T17:42:24.175Z",
       "history": [
+        {
+          "at": "2026-09-01T17:42:24.175Z",
+          "actor": "Matheus Fernando",
+          "action": "completed",
+          "before": {
+            "title": "mandar email pra pichau saber a situação do pc",
+            "description": "",
+            "dueAt": "2026-08-31T07:00",
+            "priority": "high",
+            "type": "task",
+            "typeName": "Tarefa",
+            "customerId": "",
+            "customerName": "",
+            "owner": "Quality",
+            "status": "open"
+          },
+          "after": {
+            "title": "mandar email pra pichau saber a situação do pc",
+            "description": "",
+            "dueAt": "2026-08-31T07:00",
+            "priority": "high",
+            "type": "task",
+            "typeName": "Tarefa",
+            "customerId": "",
+            "customerName": "",
+            "owner": "Quality",
+            "status": "completed"
+          }
+        },
         {
           "at": "2026-08-31T09:42:05.088Z",
           "actor": "Matheus Fernando",
@@ -620,6 +693,123 @@
             "description": "",
             "dueAt": "2026-08-31T07:00",
             "priority": "high",
+            "type": "task",
+            "typeName": "Tarefa",
+            "customerId": "",
+            "customerName": "",
+            "owner": "Quality",
+            "status": "open"
+          }
+        }
+      ]
+    },
+    {
+      "id": "task_mtlejcng_l1yov0",
+      "customerId": "",
+      "customerName": "",
+      "conversationId": "",
+      "owner": "Quality",
+      "type": "task",
+      "typeName": "Tarefa",
+      "title": "organizar formas de pagamento erp",
+      "description": "",
+      "dueAt": "2026-09-04T12:00",
+      "priority": "medium",
+      "status": "open",
+      "createdAt": "2026-09-03T10:48:25.036Z",
+      "createdBy": "Matheus Fernando",
+      "updatedAt": "2026-09-03T10:48:25.036Z",
+      "updatedBy": "Matheus Fernando",
+      "completedAt": null,
+      "history": [
+        {
+          "at": "2026-09-03T10:48:25.036Z",
+          "actor": "Matheus Fernando",
+          "action": "created",
+          "before": null,
+          "after": {
+            "title": "organizar formas de pagamento erp",
+            "description": "",
+            "dueAt": "2026-09-04T12:00",
+            "priority": "medium",
+            "type": "task",
+            "typeName": "Tarefa",
+            "customerId": "",
+            "customerName": "",
+            "owner": "Quality",
+            "status": "open"
+          }
+        }
+      ]
+    },
+    {
+      "id": "task_mtlrimib_zx7wd8",
+      "customerId": "",
+      "customerName": "",
+      "conversationId": "",
+      "owner": "Quality",
+      "type": "task",
+      "typeName": "Tarefa",
+      "title": "remover numero 54999288481 do face e do insta",
+      "description": "",
+      "dueAt": "2026-09-03T20:00",
+      "priority": "medium",
+      "status": "open",
+      "createdAt": "2026-09-03T16:51:46.163Z",
+      "createdBy": "Matheus Fernando",
+      "updatedAt": "2026-09-03T16:51:46.163Z",
+      "updatedBy": "Matheus Fernando",
+      "completedAt": null,
+      "history": [
+        {
+          "at": "2026-09-03T16:51:46.163Z",
+          "actor": "Matheus Fernando",
+          "action": "created",
+          "before": null,
+          "after": {
+            "title": "remover numero 54999288481 do face e do insta",
+            "description": "",
+            "dueAt": "2026-09-03T20:00",
+            "priority": "medium",
+            "type": "task",
+            "typeName": "Tarefa",
+            "customerId": "",
+            "customerName": "",
+            "owner": "Quality",
+            "status": "open"
+          }
+        }
+      ]
+    },
+    {
+      "id": "task_mtlrjjp4_se606s",
+      "customerId": "",
+      "customerName": "",
+      "conversationId": "",
+      "owner": "Quality",
+      "type": "task",
+      "typeName": "Tarefa",
+      "title": "Fazer pedido RE",
+      "description": "",
+      "dueAt": "2026-09-03T14:00",
+      "priority": "medium",
+      "status": "open",
+      "createdAt": "2026-09-03T16:52:29.176Z",
+      "createdBy": "Matheus Fernando",
+      "updatedAt": "2026-09-03T16:52:29.176Z",
+      "updatedBy": "Matheus Fernando",
+      "completedAt": null,
+      "history": [
+        {
+          "at": "2026-09-03T16:52:29.176Z",
+          "actor": "Matheus Fernando",
+          "action": "created",
+          "before": null,
+          "after": {
+            "title": "Fazer pedido RE",
+            "description": "",
+            "dueAt": "2026-09-03T14:00",
+            "priority": "medium",
             "type": "task",
             "typeName": "Tarefa",
             "customerId": "",

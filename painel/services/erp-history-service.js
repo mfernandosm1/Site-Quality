@@ -1,4 +1,5 @@
 import { matchesSearchText } from '../utils/search.js';
+import { businessDate, businessDayStartMs, businessDayEndMs } from '../utils/date-time.js';
 function text(value = '') {
   return String(value ?? '').trim();
 }
@@ -9,8 +10,8 @@ function normalize(value = '') {
 
 function parseDateBoundary(value, endOfDay = false) {
   if (!value) return null;
-  const date = new Date(`${value}T${endOfDay ? '23:59:59.999' : '00:00:00'}`);
-  return Number.isNaN(date.getTime()) ? null : date;
+  const ms=endOfDay?businessDayEndMs(value):businessDayStartMs(value);
+  return Number.isFinite(ms) ? new Date(ms) : null;
 }
 
 function sourceLabel(source) {
@@ -130,8 +131,8 @@ export default class ErpHistoryService {
     const start = (page - 1) * pageSize;
     const items = filtered.slice(start, start + pageSize);
 
-    const todayKey = new Date().toLocaleDateString('en-CA');
-    const today = filtered.filter(item => new Date(item.at).toLocaleDateString('en-CA') === todayKey).length;
+    const todayKey = businessDate();
+    const today = filtered.filter(item => businessDate(item.at) === todayKey).length;
     const errors = filtered.filter(item => item.result === 'error').length;
     const critical = filtered.filter(item => item.source === 'audit').length;
 

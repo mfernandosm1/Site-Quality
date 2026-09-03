@@ -14,7 +14,7 @@
   const money=value=>Number(value||0).toLocaleString('pt-BR',{style:'currency',currency:'BRL'});
   const number=(value,digits=0)=>Number(value||0).toLocaleString('pt-BR',{minimumFractionDigits:digits,maximumFractionDigits:digits});
   const pct=value=>`${number(value,1)}%`;
-  const date=value=>{if(!value)return '—';const [y,m,d]=String(value).slice(0,10).split('-');return y&&m&&d?`${d}/${m}/${y}`:String(value)};
+  const date=value=>{if(!value)return '—';const key=window.QualityDate?.dateKey?window.QualityDate.dateKey(value):String(value).slice(0,10);const [y,m,d]=key.split('-');return y&&m&&d?`${d}/${m}/${y}`:String(value)};
   const typeLabel=value=>value==='service_order'?'O.S.':'Venda';
   const statusLabel=value=>({atypical:'Estoque atípico',stale:'Sem giro',no_sales:'Sem venda no período',slow:'Baixo giro',high:'Giro alto',normal:'Giro regular',empty:'Sem estoque / sem movimento'})[value]||value||'Giro regular';
   const currentFilters=()=>{

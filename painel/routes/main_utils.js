@@ -1,6 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 import * as cheerio from 'cheerio';
+import { businessDate } from '../utils/date-time.js';
 
 /* =========================================================
    🧱 FUNÇÕES BASE GERAIS (usadas por paginas.js)
@@ -1798,7 +1799,7 @@ export function generateSeoFiles(siteDir, seoConfig = null) {
     const contentDir = path.join(siteDir, 'content');
     const categories = readJsonSafe(path.join(contentDir, 'categories.json'), { items: [] }).items || [];
     const products = readJsonSafe(path.join(contentDir, 'products.json'), { items: [] }).items || [];
-    const now = new Date().toISOString().split('T')[0];
+    const now = businessDate();
 
     const urls = [];
 

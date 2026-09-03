@@ -1,4 +1,5 @@
 import express from 'express';
+import { businessDate } from '../utils/date-time.js';
 
 const router = express.Router();
 function kernel(req) { return req.app.locals.kernelService; }
@@ -24,7 +25,7 @@ router.get('/export.csv', (req, res) => {
   const rows = result.items.map(x => [x.id,x.at,x.module,x.category,x.action,x.label,x.actor,x.result,x.route,x.documentId,x.ip]);
   const csv = '\uFEFF' + [header, ...rows].map(row => row.map(csvCell).join(';')).join('\r\n');
   res.setHeader('Content-Type','text/csv; charset=utf-8');
-  res.setHeader('Content-Disposition',`attachment; filename="quality-logs-${new Date().toISOString().slice(0,10)}.csv"`);
+  res.setHeader('Content-Disposition',`attachment; filename="quality-logs-${businessDate()}.csv"`);
   res.send(csv);
 });
 

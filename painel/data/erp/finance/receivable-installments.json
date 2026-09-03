@@ -216,6 +216,18 @@
       "paidValue": 0,
       "status": "open",
       "createdAt": "2026-08-28T19:36:32.741Z"
+    },
+    {
+      "id": "RIN-168c3a57-6cb7-4084-a9f6-4c2333bafaf3",
+      "receivableId": "REC-f324af18-0417-4c9b-a485-1ec9025bbfd8",
+      "number": 1,
+      "total": 1,
+      "dueDate": "2026-09-04",
+      "originalValue": 160,
+      "openBalance": 160,
+      "paidValue": 0,
+      "status": "open",
+      "createdAt": "2026-09-03T10:42:05.502Z"
     }
   ]
 }

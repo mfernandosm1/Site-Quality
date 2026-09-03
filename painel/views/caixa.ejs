@@ -268,7 +268,7 @@
   const start=form?.querySelector('[name="dataInicial"]');
   const end=form?.querySelector('[name="dataFinal"]');
   if(!form||!start||!end)return;
-  const iso=d=>{const y=d.getFullYear(),m=String(d.getMonth()+1).padStart(2,'0'),day=String(d.getDate()).padStart(2,'0');return `${y}-${m}-${day}`;};
+  const iso=d=>window.QualityDate?.dateKey?.(d)||(()=>{const y=d.getFullYear(),m=String(d.getMonth()+1).padStart(2,'0'),day=String(d.getDate()).padStart(2,'0');return `${y}-${m}-${day}`;})();
   const submit=()=>form.requestSubmit ? form.requestSubmit() : form.submit();
   document.querySelectorAll('[data-quick-periods] [data-period]').forEach(button=>button.addEventListener('click',()=>{
     const now=new Date(); let from=new Date(now),to=new Date(now);

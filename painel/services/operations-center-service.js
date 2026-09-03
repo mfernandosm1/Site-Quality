@@ -1,5 +1,6 @@
 import fs from 'fs';
 import path from 'path';
+import { businessDate } from '../utils/date-time.js';
 
 function readJson(file, fallback = { items: [] }) {
   try { return JSON.parse(fs.readFileSync(file, 'utf8')); }
@@ -25,12 +26,7 @@ function dateKey(value) {
 
   // Timestamps ISO são convertidos para a data local do painel. Ex.: 2026-07-28T00:49Z
   // corresponde a 27/07/2026 no horário local e deve aparecer no filtro de 27/07.
-  const parsed = new Date(raw);
-  if (Number.isNaN(parsed.getTime())) return '';
-  const year = parsed.getFullYear();
-  const month = String(parsed.getMonth() + 1).padStart(2, '0');
-  const day = String(parsed.getDate()).padStart(2, '0');
-  return `${year}-${month}-${day}`;
+  return businessDate(raw);
 }
 
 export default class OperationsCenterService {

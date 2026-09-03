@@ -1,5 +1,6 @@
 import fs from 'fs';
 import path from 'path';
+import { businessDate } from '../utils/date-time.js';
 
 
 const MOVEMENT_REASON_DEFINITIONS = Object.freeze({
@@ -274,12 +275,7 @@ export default class InventoryService {
   }
 
   createMovementId(movements = []) {
-    const now = new Date();
-    const dateKey = [
-      now.getFullYear(),
-      String(now.getMonth() + 1).padStart(2, '0'),
-      String(now.getDate()).padStart(2, '0')
-    ].join('');
+    const dateKey = businessDate().replace(/-/g,'');
 
     const prefix = `MOV-${dateKey}-`;
     const lastSequence = (movements || []).reduce((highest, movement) => {
@@ -322,8 +318,7 @@ export default class InventoryService {
       const entryLocationId = String(entry.locationId || effectiveLocationId);
       stockByKey.set(`${String(entry.inventoryItemId || '')}@@${entryLocationId}`, entry);
     }
-    const date = new Date();
-    const dateKey = `${date.getFullYear()}${String(date.getMonth()+1).padStart(2,'0')}${String(date.getDate()).padStart(2,'0')}`;
+    const dateKey = businessDate().replace(/-/g,'');
     const movementPrefix = `MOV-${dateKey}-`;
     let movementSequence = (movements.items || []).reduce((highest, movement) => {
       const id = String(movement?.id || '');
