@@ -1,5 +1,5 @@
 {
-  "version": "0.23.0",
+  "version": "0.26.0",
   "fields": [
     {
       "key": "personType",
@@ -10,11 +10,15 @@
       "required": true,
       "order": 10,
       "personType": "",
-      "displayLabel": "Tipo de pessoa"
+      "displayLabel": "Tipo de pessoa",
+      "displayLabelPf": "",
+      "displayLabelPj": ""
     },
     {
       "key": "document",
       "label": "CPF / CNPJ",
+      "displayLabelPf": "CPF",
+      "displayLabelPj": "CNPJ",
       "section": "main",
       "enabled": true,
       "required": true,
@@ -26,6 +30,8 @@
     {
       "key": "name",
       "label": "Nome / Razão social",
+      "displayLabelPf": "Nome",
+      "displayLabelPj": "Razão social",
       "section": "main",
       "locked": true,
       "enabled": true,
@@ -43,11 +49,15 @@
       "required": false,
       "order": 40,
       "locked": false,
-      "displayLabel": "Nome fantasia"
+      "displayLabel": "Nome fantasia",
+      "displayLabelPf": "",
+      "displayLabelPj": ""
     },
     {
       "key": "stateRegistration",
       "label": "RG / Inscrição estadual",
+      "displayLabelPf": "RG",
+      "displayLabelPj": "Inscrição estadual",
       "section": "main",
       "enabled": true,
       "required": false,
@@ -65,7 +75,9 @@
       "required": false,
       "order": 60,
       "locked": false,
-      "displayLabel": "Situação cadastral"
+      "displayLabel": "Situação cadastral",
+      "displayLabelPf": "",
+      "displayLabelPj": ""
     },
     {
       "key": "openingDate",
@@ -76,7 +88,9 @@
       "required": false,
       "order": 70,
       "locked": false,
-      "displayLabel": "Data de abertura"
+      "displayLabel": "Data de abertura",
+      "displayLabelPf": "",
+      "displayLabelPj": ""
     },
     {
       "key": "legalNature",
@@ -87,7 +101,9 @@
       "required": false,
       "order": 80,
       "locked": false,
-      "displayLabel": "Natureza jurídica"
+      "displayLabel": "Natureza jurídica",
+      "displayLabelPf": "",
+      "displayLabelPj": ""
     },
     {
       "key": "companySize",
@@ -98,7 +114,9 @@
       "required": false,
       "order": 90,
       "locked": false,
-      "displayLabel": "Porte"
+      "displayLabel": "Porte",
+      "displayLabelPf": "",
+      "displayLabelPj": ""
     },
     {
       "key": "primaryCnae",
@@ -109,7 +127,9 @@
       "required": false,
       "order": 100,
       "locked": false,
-      "displayLabel": "Atividade principal (CNAE)"
+      "displayLabel": "Atividade principal (CNAE)",
+      "displayLabelPf": "",
+      "displayLabelPj": ""
     },
     {
       "key": "birthDate",
@@ -120,7 +140,9 @@
       "required": false,
       "order": 110,
       "locked": false,
-      "displayLabel": "Data de nascimento"
+      "displayLabel": "Data de nascimento",
+      "displayLabelPf": "",
+      "displayLabelPj": ""
     },
     {
       "key": "monthlyIncome",
@@ -131,7 +153,9 @@
       "required": false,
       "order": 112,
       "displayLabel": "Renda mensal",
-      "locked": false
+      "locked": false,
+      "displayLabelPf": "",
+      "displayLabelPj": ""
     },
     {
       "key": "profession",
@@ -142,7 +166,9 @@
       "required": false,
       "order": 114,
       "displayLabel": "Profissão",
-      "locked": false
+      "locked": false,
+      "displayLabelPf": "",
+      "displayLabelPj": ""
     },
     {
       "key": "spouseName",
@@ -153,7 +179,9 @@
       "required": false,
       "order": 116,
       "displayLabel": "Cônjuge",
-      "locked": false
+      "locked": false,
+      "displayLabelPf": "",
+      "displayLabelPj": ""
     },
     {
       "key": "fatherName",
@@ -164,7 +192,9 @@
       "required": false,
       "order": 117,
       "displayLabel": "Nome do pai",
-      "locked": false
+      "locked": false,
+      "displayLabelPf": "",
+      "displayLabelPj": ""
     },
     {
       "key": "motherName",
@@ -175,7 +205,9 @@
       "required": false,
       "order": 118,
       "displayLabel": "Nome da mãe",
-      "locked": false
+      "locked": false,
+      "displayLabelPf": "",
+      "displayLabelPj": ""
     },
     {
       "key": "creditLimit",
@@ -186,7 +218,9 @@
       "order": 5,
       "displayLabel": "Limite de crédito",
       "personType": "",
-      "locked": false
+      "locked": false,
+      "displayLabelPf": "",
+      "displayLabelPj": ""
     },
     {
       "key": "mobile",
@@ -197,7 +231,9 @@
       "order": 120,
       "personType": "",
       "locked": false,
-      "displayLabel": "Celular / WhatsApp"
+      "displayLabel": "Celular / WhatsApp",
+      "displayLabelPf": "",
+      "displayLabelPj": ""
     },
     {
       "key": "phone",
@@ -208,7 +244,9 @@
       "order": 130,
       "personType": "",
       "locked": false,
-      "displayLabel": "Telefone"
+      "displayLabel": "Telefone",
+      "displayLabelPf": "",
+      "displayLabelPj": ""
     },
     {
       "key": "email",
@@ -219,7 +257,9 @@
       "order": 140,
       "personType": "",
       "locked": false,
-      "displayLabel": "E-mail"
+      "displayLabel": "E-mail",
+      "displayLabelPf": "",
+      "displayLabelPj": ""
     },
     {
       "key": "zipCode",
@@ -230,7 +270,9 @@
       "order": 10,
       "personType": "",
       "locked": false,
-      "displayLabel": "CEP"
+      "displayLabel": "CEP",
+      "displayLabelPf": "",
+      "displayLabelPj": ""
     },
     {
       "key": "state",
@@ -241,7 +283,9 @@
       "order": 20,
       "personType": "",
       "locked": false,
-      "displayLabel": "Estado"
+      "displayLabel": "Estado",
+      "displayLabelPf": "",
+      "displayLabelPj": ""
     },
     {
       "key": "street",
@@ -252,7 +296,9 @@
       "order": 30,
       "personType": "",
       "locked": false,
-      "displayLabel": "Endereço"
+      "displayLabel": "Endereço",
+      "displayLabelPf": "",
+      "displayLabelPj": ""
     },
     {
       "key": "number",
@@ -263,7 +309,9 @@
       "order": 40,
       "personType": "",
       "locked": false,
-      "displayLabel": "Número"
+      "displayLabel": "Número",
+      "displayLabelPf": "",
+      "displayLabelPj": ""
     },
     {
       "key": "complement",
@@ -274,7 +322,9 @@
       "order": 50,
       "personType": "",
       "locked": false,
-      "displayLabel": "Complemento"
+      "displayLabel": "Complemento",
+      "displayLabelPf": "",
+      "displayLabelPj": ""
     },
     {
       "key": "district",
@@ -285,7 +335,9 @@
       "order": 60,
       "personType": "",
       "locked": false,
-      "displayLabel": "Bairro"
+      "displayLabel": "Bairro",
+      "displayLabelPf": "",
+      "displayLabelPj": ""
     },
     {
       "key": "city",
@@ -296,7 +348,9 @@
       "order": 70,
       "personType": "",
       "locked": false,
-      "displayLabel": "Cidade"
+      "displayLabel": "Cidade",
+      "displayLabelPf": "",
+      "displayLabelPj": ""
     },
     {
       "key": "classificationId",
@@ -307,7 +361,9 @@
       "order": 10,
       "personType": "",
       "locked": false,
-      "displayLabel": "Classificação"
+      "displayLabel": "Classificação",
+      "displayLabelPf": "",
+      "displayLabelPj": ""
     },
     {
       "key": "origin",
@@ -318,7 +374,9 @@
       "order": 20,
       "personType": "",
       "locked": false,
-      "displayLabel": "Origem do cliente"
+      "displayLabel": "Origem do cliente",
+      "displayLabelPf": "",
+      "displayLabelPj": ""
     },
     {
       "key": "active",
@@ -329,7 +387,9 @@
       "order": 30,
       "personType": "",
       "locked": false,
-      "displayLabel": "Situação"
+      "displayLabel": "Situação",
+      "displayLabelPf": "",
+      "displayLabelPj": ""
     },
     {
       "key": "notes",
@@ -340,7 +400,9 @@
       "order": 40,
       "personType": "",
       "locked": false,
-      "displayLabel": "Observações"
+      "displayLabel": "Observações",
+      "displayLabelPf": "",
+      "displayLabelPj": ""
     }
   ]
 }

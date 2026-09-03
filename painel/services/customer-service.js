@@ -20,10 +20,10 @@ function onlyDigits(value = '') {
 
 const CUSTOMER_FIELD_DEFINITIONS = [
   { key:'personType', label:'Tipo de pessoa', section:'main', locked:true, enabled:true, required:true, order:10 },
-  { key:'document', label:'CPF / CNPJ', section:'main', enabled:true, required:false, order:20 },
-  { key:'name', label:'Nome / Razão social', section:'main', locked:true, enabled:true, required:true, order:30 },
+  { key:'document', label:'CPF / CNPJ', displayLabelPf:'CPF', displayLabelPj:'CNPJ', section:'main', enabled:true, required:false, order:20 },
+  { key:'name', label:'Nome / Razão social', displayLabelPf:'Nome', displayLabelPj:'Razão social', section:'main', locked:true, enabled:true, required:true, order:30 },
   { key:'tradeName', label:'Nome fantasia', section:'main', personType:'pj', enabled:true, required:false, order:40 },
-  { key:'stateRegistration', label:'RG / Inscrição estadual', section:'main', enabled:true, required:false, order:50 },
+  { key:'stateRegistration', label:'RG / Inscrição estadual', displayLabelPf:'RG', displayLabelPj:'Inscrição estadual', section:'main', enabled:true, required:false, order:50 },
   { key:'companyStatus', label:'Situação cadastral', section:'main', personType:'pj', enabled:true, required:false, order:60 },
   { key:'openingDate', label:'Data de abertura', section:'main', personType:'pj', enabled:true, required:false, order:70 },
   { key:'legalNature', label:'Natureza jurídica', section:'main', personType:'pj', enabled:true, required:false, order:80 },
@@ -113,7 +113,7 @@ export default class CustomerService {
       ]
     });
     this.ensureJsonFile(this.settingsFile, {
-      version: '0.23.0',
+      version: '0.26.0',
       fields: defaultCustomerFieldSettings()
     });
     this.migrateFieldSettings();
@@ -158,9 +158,16 @@ export default class CustomerService {
       const saved = byKey.get(definition.key) || {};
       const enabled = definition.locked ? true : (saved.enabled !== undefined ? saved.enabled !== false : (legacyVisible ? legacyVisible.includes(definition.key) : definition.enabled));
       const required = definition.locked ? true : (saved.required !== undefined ? saved.required === true : legacyRequired.includes(definition.key));
-      return { ...definition, ...saved, key:definition.key, label:definition.label, displayLabel:String(definition.key === 'street' && normalizeText(saved.displayLabel) === 'rua' ? definition.label : (saved.displayLabel || definition.label)).trim() || definition.label, section:definition.section, personType:definition.personType || '', locked:Boolean(definition.locked), enabled, required: enabled && required, order:Number(saved.order || definition.order) };
+      const displayLabel = String(definition.key === 'street' && normalizeText(saved.displayLabel) === 'rua' ? definition.label : (saved.displayLabel || definition.label)).trim() || definition.label;
+      const displayLabelPf = definition.displayLabelPf
+        ? String(saved.displayLabelPf || definition.displayLabelPf).trim().slice(0, 80) || definition.displayLabelPf
+        : '';
+      const displayLabelPj = definition.displayLabelPj
+        ? String(saved.displayLabelPj || definition.displayLabelPj).trim().slice(0, 80) || definition.displayLabelPj
+        : '';
+      return { ...definition, ...saved, key:definition.key, label:definition.label, displayLabel, displayLabelPf, displayLabelPj, section:definition.section, personType:definition.personType || '', locked:Boolean(definition.locked), enabled, required: enabled && required, order:Number(saved.order || definition.order) };
     });
-    const normalized = { version:'0.23.0', fields };
+    const normalized = { version:'0.26.0', fields };
     if (JSON.stringify(current) !== JSON.stringify(normalized)) this.writeJsonAtomic(this.settingsFile, normalized);
     return normalized;
   }
@@ -179,15 +186,21 @@ export default class CustomerService {
       const required = definition.locked ? true : enabled && (input.required === true || input.required === 'true');
       const order = Math.max(1, Number.parseInt(input.order, 10) || definition.order || 1);
       const displayLabel = String(input.displayLabel || definition.displayLabel || definition.label).trim().slice(0, 80) || definition.label;
-      return { ...definition, displayLabel, enabled, required, order };
+      const displayLabelPf = definition.displayLabelPf
+        ? String(input.displayLabelPf || definition.displayLabelPf).trim().slice(0, 80) || definition.displayLabelPf
+        : '';
+      const displayLabelPj = definition.displayLabelPj
+        ? String(input.displayLabelPj || definition.displayLabelPj).trim().slice(0, 80) || definition.displayLabelPj
+        : '';
+      return { ...definition, displayLabel, displayLabelPf, displayLabelPj, enabled, required, order };
     });
-    const result = { version:'0.23.0', fields };
+    const result = { version:'0.26.0', fields };
     this.writeJsonAtomic(this.settingsFile, result);
     return clone(result);
   }
 
   resetFieldSettings() {
-    const result = { version:'0.23.0', fields:defaultCustomerFieldSettings() };
+    const result = { version:'0.26.0', fields:defaultCustomerFieldSettings() };
     this.writeJsonAtomic(this.settingsFile, result);
     return clone(result);
   }

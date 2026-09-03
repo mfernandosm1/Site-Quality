@@ -1,6 +1,6 @@
 {
   "version": "0.12.5",
-  "nextCode": 33,
+  "nextCode": 34,
   "items": [
     {
       "id": "FOR-1785107952037-ZF045",
@@ -1919,6 +1919,66 @@
       },
       "createdAt": "2026-09-03T16:57:41.423Z",
       "updatedAt": "2026-09-03T16:57:41.423Z",
+      "createdBy": "Matheus Fernando",
+      "updatedBy": "Matheus Fernando"
+    },
+    {
+      "id": "FOR-1788475812293-EHXG1",
+      "code": "000033",
+      "companyId": "quality-principal",
+      "personType": "pf",
+      "originType": "national",
+      "name": "Yuri Gras Mello Oliveira",
+      "tradeName": "",
+      "document": "04273233045",
+      "stateRegistration": "",
+      "municipalRegistration": "",
+      "contactName": "",
+      "birthDate": "",
+      "phone": "",
+      "mobile": "55984145744",
+      "email": "",
+      "website": "",
+      "zipCode": "99072100",
+      "street": "Rua Padre Valentim",
+      "number": "134",
+      "complement": "",
+      "district": "Lucas Araújo",
+      "city": "Passo Fundo",
+      "state": "RS",
+      "defaultMarkup": 0,
+      "averageDeliveryDays": 0,
+      "minimumOrderQuantity": 0,
+      "minimumOrderValue": 0,
+      "orderDays": "",
+      "freightNotes": "",
+      "paymentTerms": "",
+      "preferredPaymentMethod": "",
+      "currency": "BRL",
+      "suppliedCategories": [],
+      "shippingMethods": [],
+      "contacts": [],
+      "internalAlert": "",
+      "notes": "",
+      "active": true,
+      "externalLookup": {
+        "source": "",
+        "status": "",
+        "consultedAt": ""
+      },
+      "links": {
+        "productIds": [],
+        "purchaseOrderIds": [],
+        "payableIds": []
+      },
+      "statistics": {
+        "linkedProducts": 0,
+        "activeProducts": 0,
+        "totalPurchased": 0,
+        "lastPurchaseAt": ""
+      },
+      "createdAt": "2026-09-03T22:50:12.293Z",
+      "updatedAt": "2026-09-03T22:50:12.293Z",
       "createdBy": "Matheus Fernando",
       "updatedBy": "Matheus Fernando"
     }

@@ -70,26 +70,40 @@ function escapeAttr(value){
     .replace(/'/g, '&#039;');
 }
 
+function cleanSeoPlainText(value){
+  return String(value || '')
+    .replace(/<script[\s\S]*?<\/script>/gi, ' ')
+    .replace(/<style[\s\S]*?<\/style>/gi, ' ')
+    .replace(/<[^>]*>/g, ' ')
+    .replace(/<[^>]*$/g, ' ')
+    .replace(/&nbsp;/gi, ' ')
+    .replace(/&amp;/gi, '&')
+    .replace(/&quot;/gi, '"')
+    .replace(/&#039;|&apos;/gi, "'")
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
 function categorySeoDescription(cat){
-  const custom = String(cat?.seoDescription || cat?.seo_description || cat?.descriptionSeo || cat?.metaDescription || '').trim();
+  const custom = cleanSeoPlainText(cat?.seoDescription || cat?.seo_description || cat?.descriptionSeo || cat?.metaDescription || '');
   if (custom) return custom;
   const name = String(cat?.name || 'produtos').trim();
   return `Confira ${name} na Quality Celulares. Produtos novos e seminovos com garantia, frete grátis e atendimento especializado.`;
 }
 
 function categorySeoTitle(cat){
-  const custom = String(cat?.seoTitle || cat?.seo_title || cat?.titleSeo || '').trim();
+  const custom = cleanSeoPlainText(cat?.seoTitle || cat?.seo_title || cat?.titleSeo || '');
   if (custom) return custom;
   const name = String(cat?.name || 'Categoria').trim();
   return `${name} | Quality Celulares`;
 }
 
 function categoryOgTitle(cat){
-  return String(cat?.ogTitle || cat?.og_title || '').trim() || categorySeoTitle(cat);
+  return cleanSeoPlainText(cat?.ogTitle || cat?.og_title || '') || categorySeoTitle(cat);
 }
 
 function categoryOgDescription(cat){
-  return String(cat?.ogDescription || cat?.og_description || '').trim() || categorySeoDescription(cat);
+  return cleanSeoPlainText(cat?.ogDescription || cat?.og_description || '') || categorySeoDescription(cat);
 }
 
 function categoryOgImage(cat){
@@ -647,10 +661,10 @@ router.post('/add', (req,res)=>{
   const slug = uniqueSlug(req.body.slug || name, data.items);
   const order = Number(req.body.order || data.items.length + 1);
   const icon = (req.body.icon || '').trim();
-  const seoTitle = (req.body.seoTitle || '').trim() || categorySeoTitle({ name });
-  const seoDescription = (req.body.seoDescription || '').trim() || categorySeoDescription({ name });
-  const ogTitle = (req.body.ogTitle || '').trim() || seoTitle;
-  const ogDescription = (req.body.ogDescription || '').trim() || seoDescription;
+  const seoTitle = cleanSeoPlainText(req.body.seoTitle) || categorySeoTitle({ name });
+  const seoDescription = cleanSeoPlainText(req.body.seoDescription) || categorySeoDescription({ name });
+  const ogTitle = cleanSeoPlainText(req.body.ogTitle) || seoTitle;
+  const ogDescription = cleanSeoPlainText(req.body.ogDescription) || seoDescription;
   const ogImage = (req.body.ogImage || '').trim();
   const newCat = { id: Date.now(), name, slug, order, icon, seoTitle, seoDescription, ogTitle, ogDescription, ogImage };
   data.items.push(newCat);
@@ -685,10 +699,10 @@ router.post('/update', (req,res)=>{
     it.slug = uniqueSlug(slugInput || newName || it.slug, data.items, it.id);
     it.order = Number(req.body.order || it.order || 1);
     it.icon = (req.body.icon || '').trim();
-    it.seoTitle = (req.body.seoTitle || '').trim() || categorySeoTitle(it);
-    it.seoDescription = (req.body.seoDescription || '').trim() || categorySeoDescription(it);
-    it.ogTitle = (req.body.ogTitle || '').trim() || it.seoTitle;
-    it.ogDescription = (req.body.ogDescription || '').trim() || it.seoDescription;
+    it.seoTitle = cleanSeoPlainText(req.body.seoTitle) || categorySeoTitle(it);
+    it.seoDescription = cleanSeoPlainText(req.body.seoDescription) || categorySeoDescription(it);
+    it.ogTitle = cleanSeoPlainText(req.body.ogTitle) || it.seoTitle;
+    it.ogDescription = cleanSeoPlainText(req.body.ogDescription) || it.seoDescription;
     it.ogImage = (req.body.ogImage || '').trim();
   }
 

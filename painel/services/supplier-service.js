@@ -70,12 +70,20 @@ export default class SupplierService {
 
 
   defaultFieldSettings() {
+    const personTypeByKey = {
+      tradeName:'pj', municipalRegistration:'pj', contactName:'pj', website:'pj', birthDate:'pf'
+    };
+    const dynamicLabels = {
+      document:{ pf:'CPF', pj:'CNPJ' },
+      name:{ pf:'Nome', pj:'Razão social' },
+      stateRegistration:{ pf:'RG', pj:'Inscrição estadual' }
+    };
     const fields = [
       ['personType','Tipo de pessoa',true,true],['originType','Origem',true,true],
-      ['document','CPF/CNPJ',true,true],['name','Nome/Razão social',true,true],
-      ['tradeName','Nome fantasia',true,false],['stateRegistration','Inscrição estadual/RG',true,false],
+      ['document','CPF / CNPJ',true,true],['name','Nome / Razão social',true,true],
+      ['tradeName','Nome fantasia',true,false],['stateRegistration','RG / Inscrição estadual',true,false],
       ['municipalRegistration','Inscrição municipal',true,false],['birthDate','Data de nascimento',true,false],
-      ['contactName','Pessoa de contato',true,false],['mobile','Celular/WhatsApp',true,false],
+      ['contactName','Pessoa de contato',true,false],['mobile','Celular / WhatsApp',true,false],
       ['phone','Telefone',true,false],['email','E-mail',true,false],['website','Website',true,false],
       ['zipCode','CEP',true,false],['state','Estado',true,false],['street','Endereço',true,false],
       ['number','Número',true,false],['complement','Complemento',true,false],['district','Bairro',true,false],
@@ -84,8 +92,11 @@ export default class SupplierService {
       ['minimumOrderValue','Valor mínimo',true,false],['orderDays','Dias de pedido',true,false],
       ['paymentTerms','Condição de pagamento',true,false],['preferredPaymentMethod','Forma de pagamento',true,false],
       ['freightNotes','Observações de frete',true,false],['internalAlert','Alerta interno',true,false],['notes','Observações',true,false]
-    ].map(([key,label,visible,required], index) => ({ key,label,visible,required,order:index+1 }));
-    return { version:'0.25.9', cnpjLookupEnabled:true, allowDocumentEdit:false, fields };
+    ].map(([key,label,visible,required], index) => ({
+      key,label,visible,required,order:index+1,personType:personTypeByKey[key] || '',
+      labelPf:dynamicLabels[key]?.pf || '', labelPj:dynamicLabels[key]?.pj || ''
+    }));
+    return { version:'0.26.0', cnpjLookupEnabled:true, allowDocumentEdit:false, fields };
   }
 
   getFieldSettings() {
@@ -93,7 +104,14 @@ export default class SupplierService {
     const stored = this.readJson(this.settingsFile, defaults);
     if (Array.isArray(stored.fields)) {
       const byKey = new Map(stored.fields.map(item => [String(item.key), item]));
-      return { ...defaults, ...stored, fields:defaults.fields.map(field => { const saved=byKey.get(field.key)||{}; const merged={ ...field, ...saved }; if(field.key==='street' && normalizeText(merged.label)==='rua') merged.label='Endereço'; return merged; }) };
+      return { ...defaults, ...stored, version:'0.26.0', fields:defaults.fields.map(field => {
+        const saved=byKey.get(field.key)||{};
+        const merged={ ...field, ...saved, personType:field.personType || '' };
+        if(field.key==='street' && normalizeText(merged.label)==='rua') merged.label='Endereço';
+        if(field.labelPf) merged.labelPf=String(saved.labelPf || field.labelPf).trim().slice(0,80) || field.labelPf;
+        if(field.labelPj) merged.labelPj=String(saved.labelPj || field.labelPj).trim().slice(0,80) || field.labelPj;
+        return merged;
+      }) };
     }
     const required = new Set(stored.requiredFields || ['name','document']);
     const visible = new Set(stored.visibleFields || defaults.fields.map(field => field.key));
@@ -106,14 +124,17 @@ export default class SupplierService {
     const byKey = new Map(incoming.map(item => [String(item.key), item]));
     const protectedKeys = new Set(['personType','originType','name']);
     const settings = {
-      version:'0.25.9',
+      version:'0.26.0',
       cnpjLookupEnabled: payload.cnpjLookupEnabled !== false,
       allowDocumentEdit: payload.allowDocumentEdit === true,
       fields: defaults.fields.map((field,index) => {
         const item = byKey.get(field.key) || {};
         const visible = protectedKeys.has(field.key) ? true : item.visible !== false;
         const required = field.key === 'name' ? true : Boolean(item.required) && visible;
-        return { ...field, label:field.key==='street' ? 'Endereço' : (String(item.label || field.label).trim() || field.label), visible, required, order:index+1 };
+        const label = field.key==='street' ? 'Endereço' : (String(item.label || field.label).trim().slice(0,80) || field.label);
+        const labelPf = field.labelPf ? (String(item.labelPf || field.labelPf).trim().slice(0,80) || field.labelPf) : '';
+        const labelPj = field.labelPj ? (String(item.labelPj || field.labelPj).trim().slice(0,80) || field.labelPj) : '';
+        return { ...field, label, labelPf, labelPj, visible, required, order:index+1, personType:field.personType || '' };
       })
     };
     this.writeJsonAtomic(this.settingsFile, settings);
@@ -263,7 +284,6 @@ export default class SupplierService {
     // Pessoa física não carrega campos exclusivamente empresariais.
     if (personType === 'pf') {
       supplier.tradeName = '';
-      supplier.stateRegistration = '';
       supplier.municipalRegistration = '';
       supplier.contactName = '';
       supplier.website = '';
@@ -275,14 +295,14 @@ export default class SupplierService {
   validate(supplier) {
     const settings = this.getFieldSettings();
     const required = new Set(settings.fields.filter(field => field.visible !== false && field.required).map(field => field.key));
-    const labels = new Map(settings.fields.map(field => [field.key, field.label]));
-    const corporateOnly = new Set(['tradeName','stateRegistration','municipalRegistration','contactName','website']);
+    const settingsByKey = new Map(settings.fields.map(field => [field.key, field]));
     for (const key of required) {
-      if (supplier.personType === 'pf' && corporateOnly.has(key)) continue;
-      if (supplier.personType === 'pj' && key === 'birthDate') continue;
+      const setting = settingsByKey.get(key) || {};
+      if (setting.personType && setting.personType !== supplier.personType) continue;
       const value = supplier[key];
       if (value === undefined || value === null || String(value).trim() === '') {
-        throw new Error(`${labels.get(key) || key} é obrigatório.`);
+        const dynamicLabel = supplier.personType === 'pj' ? setting.labelPj : setting.labelPf;
+        throw new Error(`${dynamicLabel || setting.label || key} é obrigatório.`);
       }
     }
 

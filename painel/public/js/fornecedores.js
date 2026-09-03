@@ -28,9 +28,16 @@
     const idMap = {personType:'supplierPersonType',originType:'supplierOriginType',document:'supplierDocument',name:'supplierName',tradeName:'supplierTradeName',stateRegistration:'supplierStateRegistration',municipalRegistration:'supplierMunicipalRegistration',birthDate:'supplierBirthDate',contactName:'supplierContactName',mobile:'supplierMobile',phone:'supplierPhone',email:'supplierEmail',website:'supplierWebsite',zipCode:'supplierZipCode',state:'supplierState',street:'supplierStreet',number:'supplierNumber',complement:'supplierComplement',district:'supplierDistrict',city:'supplierCity',defaultMarkup:'supplierDefaultMarkup',currency:'supplierCurrency',averageDeliveryDays:'supplierAverageDeliveryDays',minimumOrderQuantity:'supplierMinimumOrderQuantity',minimumOrderValue:'supplierMinimumOrderValue',orderDays:'supplierOrderDays',paymentTerms:'supplierPaymentTerms',preferredPaymentMethod:'supplierPreferredPaymentMethod',freightNotes:'supplierFreightNotes',internalAlert:'supplierInternalAlert',notes:'supplierNotes'};
     for (const [key,id] of Object.entries(idMap)) {
       const input=byId(id), setting=supplierFieldMap.get(key); if(!input||!setting) continue;
-      const wrapper=input.closest('.supplier-field'); if(wrapper) wrapper.hidden=setting.visible===false;
-      input.required=Boolean(setting.required && setting.visible!==false);
-      const label=wrapper?.querySelector('label'); if(label && setting.label) label.textContent=`${setting.label}${input.required?' *':''}`;
+      const wrapper=input.closest('.supplier-field');
+      const matchesPerson=!setting.personType||setting.personType===personType.value;
+      if(wrapper) wrapper.hidden=setting.visible===false||!matchesPerson;
+      input.required=Boolean(setting.required && setting.visible!==false && matchesPerson);
+      const label=wrapper?.querySelector('label');
+      if(label && setting.label){
+        const dynamicFallback={document:{pf:'CPF',pj:'CNPJ'},name:{pf:'Nome',pj:'Razão social'},stateRegistration:{pf:'RG',pj:'Inscrição estadual'}}[key];
+        const personLabel=personType.value==='pj'?setting.labelPj:setting.labelPf;
+        label.textContent=`${personLabel||dynamicFallback?.[personType.value]||setting.label}${input.required?' *':''}`;
+      }
     }
     cnpjLookup.hidden = personType.value === 'pf' || supplierFieldSettings.cnpjLookupEnabled === false || supplierFieldMap.get('document')?.visible === false;
   }
@@ -101,9 +108,11 @@
     });
 
     const nameSetting=supplierFieldMap.get('name');
-    byId('supplierNameLabel').textContent = `${isPf ? 'Nome completo' : (nameSetting?.label || 'Razão social')}${fieldRequired('name')?' *':''}`;
-    byId('supplierDocumentLabel').textContent = `${isPf ? 'CPF' : 'CNPJ'}${fieldRequired('document')?' *':''}`;
-    byId('supplierRegistrationLabel').textContent = 'Inscrição estadual';
+    const documentSetting=supplierFieldMap.get('document');
+    const registrationSetting=supplierFieldMap.get('stateRegistration');
+    byId('supplierNameLabel').textContent = `${isPf ? (nameSetting?.labelPf || 'Nome') : (nameSetting?.labelPj || 'Razão social')}${fieldRequired('name')?' *':''}`;
+    byId('supplierDocumentLabel').textContent = `${isPf ? (documentSetting?.labelPf || 'CPF') : (documentSetting?.labelPj || 'CNPJ')}${fieldRequired('document')?' *':''}`;
+    byId('supplierRegistrationLabel').textContent = `${isPf ? (registrationSetting?.labelPf || 'RG') : (registrationSetting?.labelPj || 'Inscrição estadual')}${fieldRequired('stateRegistration')?' *':''}`;
     documentInput.maxLength = isPf ? 14 : 18;
     documentInput.setAttribute('aria-label', isPf ? 'CPF' : 'CNPJ');
     cnpjLookup.hidden = isPf || supplierFieldSettings.cnpjLookupEnabled === false || supplierFieldMap.get('document')?.visible === false;

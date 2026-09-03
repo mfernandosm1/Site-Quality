@@ -39798,7 +39798,1902 @@
       },
       "ip": "127.0.0.1",
       "requestId": "db464391-7705-4a0b-9015-cb35ea61b1c8"
+    },
+    {
+      "id": "AUD-00000129",
+      "at": "2026-09-03T22:31:15.782Z",
+      "module": "produtos",
+      "action": "PRODUCT_UPDATED",
+      "actor": "Matheus Fernando",
+      "entityType": "product",
+      "entityId": "1788474639660",
+      "documentId": "",
+      "reason": "Cadastro de produto atualizado",
+      "before": {
+        "name": "Celular Usado Moto Z3 Play 64GB 4GB RAM 4G NFC",
+        "sku": "",
+        "code": "PRD-980",
+        "barcode": "",
+        "ncm": "",
+        "brand": "",
+        "slug": "celular-usado-moto-z3-play-64gb-4gb-ram-4g-nfc",
+        "price": null,
+        "commercial": {
+          "costPrice": 80,
+          "erpPrice": null,
+          "salePrice": null,
+          "marketplacePrice": null,
+          "promotionalPrice": null,
+          "desiredMarginPercent": null,
+          "expectedProfit": null,
+          "defaultCommissionPercent": null,
+          "cashPrice": null,
+          "installmentPrice": null,
+          "minimumPrice": null,
+          "minimumMarginPercent": null,
+          "discountPolicy": "inherit",
+          "maximumDiscountPercent": null,
+          "maximumDiscountAmount": null,
+          "requiresAuthorization": false
+        },
+        "stock": 0,
+        "inventory": {
+          "itemId": "PRD-1788474639660",
+          "stockControlled": true,
+          "allowNegative": false,
+          "minimumQuantity": 0,
+          "channelAvailability": {
+            "site": {
+              "mode": "shared",
+              "enabled": true,
+              "limit": null,
+              "physicalSafety": 0
+            }
+          }
+        },
+        "image": "",
+        "gallery": [],
+        "category": "smartphones",
+        "subcategory": "usados",
+        "tags": [],
+        "relatedManualIds": [],
+        "crossSellIds": [],
+        "showPrice": false,
+        "featured": false,
+        "active": true,
+        "erp": {
+          "sku": "",
+          "internalCode": "PRD-980",
+          "supplierCode": "",
+          "searchAlias": "",
+          "barcode": "",
+          "ncm": "",
+          "fiscal": {
+            "ncm": ""
+          },
+          "brand": "",
+          "unit": "UN",
+          "category": "smartphones",
+          "subcategory": "",
+          "mainSupplierId": "",
+          "preferredSupplierId": "",
+          "active": true,
+          "categoryId": "ERP-CAT-1"
+        },
+        "virtualStore": {
+          "name": "Celular Usado Moto Z3 Play 64GB 4GB RAM 4G NFC",
+          "price": null,
+          "active": true,
+          "seoTitle": "",
+          "seoDescription": "",
+          "channels": {
+            "lojaVirtual": {
+              "enabled": true
+            },
+            "mercadoLivre": {
+              "enabled": false
+            },
+            "shopee": {
+              "enabled": false
+            },
+            "amazon": {
+              "enabled": false
+            },
+            "magalu": {
+              "enabled": false
+            }
+          }
+        },
+        "detailsEnabled": true,
+        "showVariationsOnCard": false,
+        "descriptionShort": "",
+        "descriptionLong": "<p>📱 <strong>Motorola Moto Z3 Play 64GB Usado – Tela AMOLED, NFC e Bom Desempenho</strong></p><p>É uma ótima opção para quem busca um smartphone usado com bom desempenho para as tarefas do dia a dia, tela de alta qualidade e recursos como <strong>NFC e conectividade 4G</strong>.</p><p>Com <strong>64GB de armazenamento e 4GB de memória RAM</strong>, atende bem para WhatsApp, redes sociais, aplicativos, vídeos, navegação e uso cotidiano.<br><br></p><p>🔥 <strong>Principais destaques:</strong><br>✅ 64GB de armazenamento<br>✅ 4GB de memória RAM<br>✅ Conectividade 4G<br>✅ NFC para pagamentos por aproximação<br>✅ Tela Super AMOLED de aproximadamente 6\"<br>✅ Resolução Full HD+<br>✅ Processador Snapdragon 636 Octa-Core<br>✅ Câmera traseira dupla de 12MP + 5MP<br>✅ Câmera frontal de 8MP<br>✅ Gravação de vídeos em até 4K<br>✅ Bluetooth 5.0<br>✅ USB-C<br>✅ Compatível com Moto Snaps<br></p><p>🛡️ <strong>Mais segurança na compra:</strong> aparelho com <strong>90 dias de garantia</strong>.</p>",
+        "variations": {
+          "enabled": false,
+          "colors": [],
+          "storage": [],
+          "ram": [],
+          "condition": [],
+          "combinations": [],
+          "labels": {},
+          "colorsText": "",
+          "storageText": "",
+          "ramText": "",
+          "conditionText": "",
+          "labelsText": "{}",
+          "combinationsText": ""
+        },
+        "id": 1788474639660,
+        "inventoryBalance": {
+          "inventoryItemId": "PRD-1788474639660",
+          "locationId": "loja-principal",
+          "physicalQuantity": 0,
+          "reservedQuantity": 0,
+          "availableQuantity": 0,
+          "minimumQuantity": 0,
+          "updatedAt": "2026-09-03T22:30:39.662Z"
+        }
+      },
+      "after": {
+        "name": "Celular Usado Moto Z3 Play 64GB 4GB RAM 4G NFC",
+        "sku": "",
+        "code": "PRD-980",
+        "barcode": "",
+        "ncm": "",
+        "brand": "",
+        "slug": "celular-usado-moto-z3-play-64gb-4gb-ram-4g-nfc",
+        "price": null,
+        "commercial": {
+          "costPrice": 80,
+          "erpPrice": null,
+          "salePrice": null,
+          "marketplacePrice": null,
+          "promotionalPrice": null,
+          "desiredMarginPercent": null,
+          "expectedProfit": null,
+          "defaultCommissionPercent": null,
+          "cashPrice": null,
+          "installmentPrice": null,
+          "minimumPrice": null,
+          "minimumMarginPercent": null,
+          "discountPolicy": "inherit",
+          "maximumDiscountPercent": null,
+          "maximumDiscountAmount": null,
+          "requiresAuthorization": false
+        },
+        "stock": 0,
+        "inventory": {
+          "itemId": "PRD-1788474639660",
+          "stockControlled": true,
+          "allowNegative": false,
+          "minimumQuantity": 0,
+          "channelAvailability": {
+            "site": {
+              "mode": "shared",
+              "enabled": true,
+              "limit": null,
+              "physicalSafety": 0
+            }
+          }
+        },
+        "image": "",
+        "gallery": [],
+        "category": "smartphones",
+        "subcategory": "usados",
+        "tags": [],
+        "relatedManualIds": [],
+        "crossSellIds": [],
+        "showPrice": false,
+        "featured": false,
+        "active": true,
+        "erp": {
+          "sku": "",
+          "internalCode": "PRD-980",
+          "supplierCode": "",
+          "searchAlias": "",
+          "barcode": "",
+          "ncm": "",
+          "fiscal": {
+            "ncm": ""
+          },
+          "brand": "",
+          "unit": "UN",
+          "category": "smartphones",
+          "subcategory": "",
+          "mainSupplierId": "",
+          "preferredSupplierId": "",
+          "active": true,
+          "categoryId": "ERP-CAT-1"
+        },
+        "virtualStore": {
+          "name": "Celular Usado Moto Z3 Play 64GB 4GB RAM 4G NFC",
+          "price": null,
+          "active": true,
+          "seoTitle": "",
+          "seoDescription": "Moto Z3 Play usado 64GB com 4GB RAM, 4G, NFC, tela Super AMOLED e câmera dupla. Motorola com bom desempenho e ótimo custo-benefício.",
+          "channels": {
+            "lojaVirtual": {
+              "enabled": true
+            },
+            "mercadoLivre": {
+              "enabled": false
+            },
+            "shopee": {
+              "enabled": false
+            },
+            "amazon": {
+              "enabled": false
+            },
+            "magalu": {
+              "enabled": false
+            }
+          }
+        },
+        "detailsEnabled": true,
+        "showVariationsOnCard": false,
+        "descriptionShort": "",
+        "descriptionLong": "<p>📱 <strong>Motorola Moto Z3 Play 64GB Usado – Tela AMOLED, NFC e Bom Desempenho</strong></p><p>É uma ótima opção para quem busca um smartphone usado com bom desempenho para as tarefas do dia a dia, tela de alta qualidade e recursos como <strong>NFC e conectividade 4G</strong>.</p><p>Com <strong>64GB de armazenamento e 4GB de memória RAM</strong>, atende bem para WhatsApp, redes sociais, aplicativos, vídeos, navegação e uso cotidiano.<br><br></p><p>🔥 <strong>Principais destaques:</strong><br>✅ 64GB de armazenamento<br>✅ 4GB de memória RAM<br>✅ Conectividade 4G<br>✅ NFC para pagamentos por aproximação<br>✅ Tela Super AMOLED de aproximadamente 6\"<br>✅ Resolução Full HD+<br>✅ Processador Snapdragon 636 Octa-Core<br>✅ Câmera traseira dupla de 12MP + 5MP<br>✅ Câmera frontal de 8MP<br>✅ Gravação de vídeos em até 4K<br>✅ Bluetooth 5.0<br>✅ USB-C<br>✅ Compatível com Moto Snaps<br></p><p>🛡️ <strong>Mais segurança na compra:</strong> aparelho com <strong>90 dias de garantia</strong>.</p>",
+        "variations": {
+          "enabled": false,
+          "colors": [],
+          "storage": [],
+          "ram": [],
+          "condition": [],
+          "combinations": [],
+          "labels": {},
+          "colorsText": "",
+          "storageText": "",
+          "ramText": "",
+          "conditionText": "",
+          "labelsText": "{}",
+          "combinationsText": ""
+        },
+        "id": 1788474639660,
+        "inventoryBalance": {
+          "inventoryItemId": "PRD-1788474639660",
+          "locationId": "loja-principal",
+          "physicalQuantity": 0,
+          "reservedQuantity": 0,
+          "availableQuantity": 0,
+          "minimumQuantity": 0,
+          "updatedAt": "2026-09-03T22:30:39.662Z"
+        }
+      },
+      "ip": "127.0.0.1",
+      "requestId": "6f2c31c9-78c4-4e57-864f-013133e5c4bb"
+    },
+    {
+      "id": "AUD-00000130",
+      "at": "2026-09-03T22:40:45.803Z",
+      "module": "produtos",
+      "action": "PRODUCT_UPDATED",
+      "actor": "Matheus Fernando",
+      "entityType": "product",
+      "entityId": "1788474639660",
+      "documentId": "",
+      "reason": "Cadastro de produto atualizado",
+      "before": {
+        "name": "Celular Usado Moto Z3 Play 64GB 4GB RAM 4G NFC",
+        "sku": "",
+        "code": "PRD-980",
+        "barcode": "",
+        "ncm": "",
+        "brand": "",
+        "slug": "celular-usado-moto-z3-play-64gb-4gb-ram-4g-nfc",
+        "price": null,
+        "commercial": {
+          "costPrice": 80,
+          "erpPrice": null,
+          "salePrice": null,
+          "marketplacePrice": null,
+          "promotionalPrice": null,
+          "desiredMarginPercent": null,
+          "expectedProfit": null,
+          "defaultCommissionPercent": null,
+          "cashPrice": null,
+          "installmentPrice": null,
+          "minimumPrice": null,
+          "minimumMarginPercent": null,
+          "discountPolicy": "inherit",
+          "maximumDiscountPercent": null,
+          "maximumDiscountAmount": null,
+          "requiresAuthorization": false
+        },
+        "stock": 0,
+        "inventory": {
+          "itemId": "PRD-1788474639660",
+          "stockControlled": true,
+          "allowNegative": false,
+          "minimumQuantity": 0,
+          "channelAvailability": {
+            "site": {
+              "mode": "shared",
+              "enabled": true,
+              "limit": null,
+              "physicalSafety": 0
+            }
+          }
+        },
+        "image": "images/produtos/1788474846997-z3-play-usado.jpg",
+        "gallery": [],
+        "category": "smartphones",
+        "subcategory": "usados",
+        "tags": [],
+        "relatedManualIds": [],
+        "crossSellIds": [],
+        "showPrice": false,
+        "featured": false,
+        "active": true,
+        "erp": {
+          "sku": "",
+          "internalCode": "PRD-980",
+          "supplierCode": "",
+          "searchAlias": "",
+          "barcode": "",
+          "ncm": "",
+          "fiscal": {
+            "ncm": ""
+          },
+          "brand": "",
+          "unit": "UN",
+          "category": "smartphones",
+          "subcategory": "",
+          "mainSupplierId": "",
+          "preferredSupplierId": "",
+          "active": true,
+          "categoryId": "ERP-CAT-1"
+        },
+        "virtualStore": {
+          "name": "Celular Usado Moto Z3 Play 64GB 4GB RAM 4G NFC",
+          "price": null,
+          "active": true,
+          "seoTitle": "",
+          "seoDescription": "Moto Z3 Play usado 64GB com 4GB RAM, 4G, NFC, tela Super AMOLED e câmera dupla. Motorola com bom desempenho e ótimo custo-benefício.",
+          "channels": {
+            "lojaVirtual": {
+              "enabled": true
+            },
+            "mercadoLivre": {
+              "enabled": false
+            },
+            "shopee": {
+              "enabled": false
+            },
+            "amazon": {
+              "enabled": false
+            },
+            "magalu": {
+              "enabled": false
+            }
+          }
+        },
+        "detailsEnabled": true,
+        "showVariationsOnCard": false,
+        "descriptionShort": "",
+        "descriptionLong": "<p>📱 <strong>Motorola Moto Z3 Play 64GB Usado – Tela AMOLED, NFC e Bom Desempenho</strong></p><p>É uma ótima opção para quem busca um smartphone usado com bom desempenho para as tarefas do dia a dia, tela de alta qualidade e recursos como <strong>NFC e conectividade 4G</strong>.</p><p>Com <strong>64GB de armazenamento e 4GB de memória RAM</strong>, atende bem para WhatsApp, redes sociais, aplicativos, vídeos, navegação e uso cotidiano.<br><br></p><p>🔥 <strong>Principais destaques:</strong><br>✅ 64GB de armazenamento<br>✅ 4GB de memória RAM<br>✅ Conectividade 4G<br>✅ NFC para pagamentos por aproximação<br>✅ Tela Super AMOLED de aproximadamente 6\"<br>✅ Resolução Full HD+<br>✅ Processador Snapdragon 636 Octa-Core<br>✅ Câmera traseira dupla de 12MP + 5MP<br>✅ Câmera frontal de 8MP<br>✅ Gravação de vídeos em até 4K<br>✅ Bluetooth 5.0<br>✅ USB-C<br>✅ Compatível com Moto Snaps<br></p><p>🛡️ <strong>Mais segurança na compra:</strong> aparelho com <strong>90 dias de garantia</strong>.</p>",
+        "variations": {
+          "enabled": false,
+          "colors": [],
+          "storage": [],
+          "ram": [],
+          "condition": [],
+          "combinations": [],
+          "labels": {},
+          "colorsText": "",
+          "storageText": "",
+          "ramText": "",
+          "conditionText": "",
+          "labelsText": "{}",
+          "combinationsText": ""
+        },
+        "id": 1788474639660,
+        "inventoryBalance": {
+          "inventoryItemId": "PRD-1788474639660",
+          "locationId": "loja-principal",
+          "physicalQuantity": 0,
+          "reservedQuantity": 0,
+          "availableQuantity": 0,
+          "minimumQuantity": 0,
+          "updatedAt": "2026-09-03T22:31:15.756Z"
+        },
+        "updatedAt": "2026-09-03T22:34:07.010Z"
+      },
+      "after": {
+        "name": "Celular Usado Moto Z3 Play 64GB 4GB RAM 4G NFC",
+        "sku": "",
+        "code": "PRD-980",
+        "barcode": "",
+        "ncm": "",
+        "brand": "",
+        "slug": "celular-usado-moto-z3-play-64gb-4gb-ram-4g-nfc",
+        "price": null,
+        "commercial": {
+          "costPrice": 80,
+          "erpPrice": null,
+          "salePrice": null,
+          "marketplacePrice": null,
+          "promotionalPrice": null,
+          "desiredMarginPercent": null,
+          "expectedProfit": null,
+          "defaultCommissionPercent": null,
+          "cashPrice": null,
+          "installmentPrice": null,
+          "minimumPrice": null,
+          "minimumMarginPercent": null,
+          "discountPolicy": "inherit",
+          "maximumDiscountPercent": null,
+          "maximumDiscountAmount": null,
+          "requiresAuthorization": false
+        },
+        "stock": 0,
+        "inventory": {
+          "itemId": "PRD-1788474639660",
+          "stockControlled": true,
+          "allowNegative": false,
+          "minimumQuantity": 0,
+          "channelAvailability": {
+            "site": {
+              "mode": "shared",
+              "enabled": true,
+              "limit": null,
+              "physicalSafety": 0
+            }
+          }
+        },
+        "image": "images/produtos/1788474846997-z3-play-usado.jpg",
+        "gallery": [],
+        "category": "smartphones",
+        "subcategory": "usados",
+        "tags": [],
+        "relatedManualIds": [],
+        "crossSellIds": [],
+        "showPrice": false,
+        "featured": false,
+        "active": true,
+        "erp": {
+          "sku": "",
+          "internalCode": "PRD-980",
+          "supplierCode": "",
+          "searchAlias": "",
+          "barcode": "",
+          "ncm": "",
+          "fiscal": {
+            "ncm": ""
+          },
+          "brand": "",
+          "unit": "UN",
+          "category": "smartphones",
+          "subcategory": "",
+          "mainSupplierId": "",
+          "preferredSupplierId": "",
+          "active": true,
+          "categoryId": "ERP-CAT-1"
+        },
+        "virtualStore": {
+          "name": "Celular Usado Moto Z3 Play 64GB 4GB RAM 4G NFC",
+          "price": null,
+          "active": true,
+          "seoTitle": "",
+          "seoDescription": "Moto Z3 Play usado 64GB com 4GB RAM, 4G, NFC, tela Super AMOLED e câmera dupla. Motorola com bom desempenho e ótimo custo-benefício.",
+          "channels": {
+            "lojaVirtual": {
+              "enabled": true
+            },
+            "mercadoLivre": {
+              "enabled": false
+            },
+            "shopee": {
+              "enabled": false
+            },
+            "amazon": {
+              "enabled": false
+            },
+            "magalu": {
+              "enabled": false
+            }
+          }
+        },
+        "detailsEnabled": true,
+        "showVariationsOnCard": false,
+        "descriptionShort": "",
+        "descriptionLong": "<p>📱 <strong>Motorola Moto Z3 Play 64GB Usado – Tela AMOLED, NFC e Bom Desempenho</strong></p><p>É uma ótima opção para quem busca um smartphone usado com bom desempenho para as tarefas do dia a dia, tela de alta qualidade e recursos como <strong>NFC e conectividade 4G</strong>.</p><p>Com <strong>64GB de armazenamento e 4GB de memória RAM</strong>, atende bem para WhatsApp, redes sociais, aplicativos, vídeos, navegação e uso cotidiano.<br><br></p><p>🔥 <strong>Principais destaques:</strong><br>✅ 64GB de armazenamento<br>✅ 4GB de memória RAM<br>✅ Conectividade 4G<br>✅ NFC para pagamentos por aproximação<br>✅ Tela Super AMOLED de aproximadamente 6\"<br>✅ Resolução Full HD+<br>✅ Processador Snapdragon 636 Octa-Core<br>✅ Câmera traseira dupla de 12MP + 5MP<br>✅ Câmera frontal de 8MP<br>✅ Gravação de vídeos em até 4K<br>✅ Bluetooth 5.0<br>✅ USB-C<br>✅ Compatível com Moto Snaps<br></p><p>🛡️ <strong>Mais segurança na compra:</strong> aparelho com <strong>90 dias de garantia</strong>.</p>",
+        "variations": {
+          "enabled": false,
+          "colors": [],
+          "storage": [],
+          "ram": [],
+          "condition": [],
+          "combinations": [],
+          "labels": {},
+          "colorsText": "",
+          "storageText": "",
+          "ramText": "",
+          "conditionText": "",
+          "labelsText": "{}",
+          "combinationsText": ""
+        },
+        "id": 1788474639660,
+        "inventoryBalance": {
+          "inventoryItemId": "PRD-1788474639660",
+          "locationId": "loja-principal",
+          "physicalQuantity": 0,
+          "reservedQuantity": 0,
+          "availableQuantity": 0,
+          "minimumQuantity": 0,
+          "updatedAt": "2026-09-03T22:31:15.756Z"
+        },
+        "updatedAt": "2026-09-03T22:34:07.010Z"
+      },
+      "ip": "127.0.0.1",
+      "requestId": "21c18ca9-6188-4034-9df7-24d17c817d43"
+    },
+    {
+      "id": "AUD-00000131",
+      "at": "2026-09-03T22:41:00.320Z",
+      "module": "produtos",
+      "action": "PRODUCT_UPDATED",
+      "actor": "Matheus Fernando",
+      "entityType": "product",
+      "entityId": "1788474639660",
+      "documentId": "",
+      "reason": "Cadastro de produto atualizado",
+      "before": {
+        "name": "Celular Usado Moto Z3 Play 64GB 4GB RAM 4G NFC",
+        "sku": "",
+        "code": "PRD-980",
+        "barcode": "",
+        "ncm": "",
+        "brand": "",
+        "slug": "celular-usado-moto-z3-play-64gb-4gb-ram-4g-nfc",
+        "price": null,
+        "commercial": {
+          "costPrice": 80,
+          "erpPrice": null,
+          "salePrice": null,
+          "marketplacePrice": null,
+          "promotionalPrice": null,
+          "desiredMarginPercent": null,
+          "expectedProfit": null,
+          "defaultCommissionPercent": null,
+          "cashPrice": null,
+          "installmentPrice": null,
+          "minimumPrice": null,
+          "minimumMarginPercent": null,
+          "discountPolicy": "inherit",
+          "maximumDiscountPercent": null,
+          "maximumDiscountAmount": null,
+          "requiresAuthorization": false
+        },
+        "stock": 0,
+        "inventory": {
+          "itemId": "PRD-1788474639660",
+          "stockControlled": true,
+          "allowNegative": false,
+          "minimumQuantity": 0,
+          "channelAvailability": {
+            "site": {
+              "mode": "shared",
+              "enabled": true,
+              "limit": null,
+              "physicalSafety": 0
+            }
+          }
+        },
+        "image": "images/produtos/1788474846997-z3-play-usado.jpg",
+        "gallery": [],
+        "category": "smartphones",
+        "subcategory": "usados",
+        "tags": [],
+        "relatedManualIds": [],
+        "crossSellIds": [],
+        "showPrice": false,
+        "featured": false,
+        "active": true,
+        "erp": {
+          "sku": "",
+          "internalCode": "PRD-980",
+          "supplierCode": "",
+          "searchAlias": "",
+          "barcode": "",
+          "ncm": "",
+          "fiscal": {
+            "ncm": ""
+          },
+          "brand": "",
+          "unit": "UN",
+          "category": "smartphones",
+          "subcategory": "",
+          "mainSupplierId": "",
+          "preferredSupplierId": "",
+          "active": true,
+          "categoryId": "ERP-CAT-1"
+        },
+        "virtualStore": {
+          "name": "Celular Usado Moto Z3 Play 64GB 4GB RAM 4G NFC",
+          "price": null,
+          "active": true,
+          "seoTitle": "",
+          "seoDescription": "Moto Z3 Play usado 64GB com 4GB RAM, 4G, NFC, tela Super AMOLED e câmera dupla. Motorola com bom desempenho e ótimo custo-benefício.",
+          "channels": {
+            "lojaVirtual": {
+              "enabled": true
+            },
+            "mercadoLivre": {
+              "enabled": false
+            },
+            "shopee": {
+              "enabled": false
+            },
+            "amazon": {
+              "enabled": false
+            },
+            "magalu": {
+              "enabled": false
+            }
+          }
+        },
+        "detailsEnabled": true,
+        "showVariationsOnCard": false,
+        "descriptionShort": "",
+        "descriptionLong": "<p>📱 <strong>Motorola Moto Z3 Play 64GB Usado – Tela AMOLED, NFC e Bom Desempenho</strong></p><p>É uma ótima opção para quem busca um smartphone usado com bom desempenho para as tarefas do dia a dia, tela de alta qualidade e recursos como <strong>NFC e conectividade 4G</strong>.</p><p>Com <strong>64GB de armazenamento e 4GB de memória RAM</strong>, atende bem para WhatsApp, redes sociais, aplicativos, vídeos, navegação e uso cotidiano.<br><br></p><p>🔥 <strong>Principais destaques:</strong><br>✅ 64GB de armazenamento<br>✅ 4GB de memória RAM<br>✅ Conectividade 4G<br>✅ NFC para pagamentos por aproximação<br>✅ Tela Super AMOLED de aproximadamente 6\"<br>✅ Resolução Full HD+<br>✅ Processador Snapdragon 636 Octa-Core<br>✅ Câmera traseira dupla de 12MP + 5MP<br>✅ Câmera frontal de 8MP<br>✅ Gravação de vídeos em até 4K<br>✅ Bluetooth 5.0<br>✅ USB-C<br>✅ Compatível com Moto Snaps<br></p><p>🛡️ <strong>Mais segurança na compra:</strong> aparelho com <strong>90 dias de garantia</strong>.</p>",
+        "variations": {
+          "enabled": false,
+          "colors": [],
+          "storage": [],
+          "ram": [],
+          "condition": [],
+          "combinations": [],
+          "labels": {},
+          "colorsText": "",
+          "storageText": "",
+          "ramText": "",
+          "conditionText": "",
+          "labelsText": "{}",
+          "combinationsText": ""
+        },
+        "id": 1788474639660,
+        "inventoryBalance": {
+          "inventoryItemId": "PRD-1788474639660",
+          "locationId": "loja-principal",
+          "physicalQuantity": 0,
+          "reservedQuantity": 0,
+          "availableQuantity": 0,
+          "minimumQuantity": 0,
+          "updatedAt": "2026-09-03T22:31:15.756Z"
+        },
+        "updatedAt": "2026-09-03T22:34:07.010Z"
+      },
+      "after": {
+        "name": "Celular Usado Moto Z3 Play 64GB 4GB RAM 4G NFC",
+        "sku": "",
+        "code": "PRD-980",
+        "barcode": "",
+        "ncm": "",
+        "brand": "",
+        "slug": "celular-usado-moto-z3-play-64gb-4gb-ram-4g-nfc",
+        "price": null,
+        "commercial": {
+          "costPrice": 80,
+          "erpPrice": null,
+          "salePrice": null,
+          "marketplacePrice": null,
+          "promotionalPrice": null,
+          "desiredMarginPercent": null,
+          "expectedProfit": null,
+          "defaultCommissionPercent": null,
+          "cashPrice": null,
+          "installmentPrice": null,
+          "minimumPrice": null,
+          "minimumMarginPercent": null,
+          "discountPolicy": "inherit",
+          "maximumDiscountPercent": null,
+          "maximumDiscountAmount": null,
+          "requiresAuthorization": false
+        },
+        "stock": 0,
+        "inventory": {
+          "itemId": "PRD-1788474639660",
+          "stockControlled": true,
+          "allowNegative": false,
+          "minimumQuantity": 0,
+          "channelAvailability": {
+            "site": {
+              "mode": "shared",
+              "enabled": true,
+              "limit": null,
+              "physicalSafety": 0
+            }
+          }
+        },
+        "image": "images/produtos/1788474846997-z3-play-usado.jpg",
+        "gallery": [],
+        "category": "smartphones",
+        "subcategory": "usados",
+        "tags": [],
+        "relatedManualIds": [],
+        "crossSellIds": [],
+        "showPrice": false,
+        "featured": false,
+        "active": true,
+        "erp": {
+          "sku": "",
+          "internalCode": "PRD-980",
+          "supplierCode": "",
+          "searchAlias": "",
+          "barcode": "",
+          "ncm": "",
+          "fiscal": {
+            "ncm": ""
+          },
+          "brand": "",
+          "unit": "UN",
+          "category": "smartphones",
+          "subcategory": "",
+          "mainSupplierId": "",
+          "preferredSupplierId": "",
+          "active": true,
+          "categoryId": "ERP-CAT-1"
+        },
+        "virtualStore": {
+          "name": "Celular Usado Moto Z3 Play 64GB 4GB RAM 4G NFC",
+          "price": null,
+          "active": true,
+          "seoTitle": "",
+          "seoDescription": "Moto Z3 Play usado 64GB com 4GB RAM, 4G, NFC, tela Super AMOLED e câmera dupla. Motorola com bom desempenho e ótimo custo-benefício.",
+          "channels": {
+            "lojaVirtual": {
+              "enabled": true
+            },
+            "mercadoLivre": {
+              "enabled": false
+            },
+            "shopee": {
+              "enabled": false
+            },
+            "amazon": {
+              "enabled": false
+            },
+            "magalu": {
+              "enabled": false
+            }
+          }
+        },
+        "detailsEnabled": true,
+        "showVariationsOnCard": false,
+        "descriptionShort": "",
+        "descriptionLong": "<p>📱 <strong>Motorola Moto Z3 Play 64GB Usado – Tela AMOLED, NFC e Bom Desempenho</strong></p><p>É uma ótima opção para quem busca um smartphone usado com bom desempenho para as tarefas do dia a dia, tela de alta qualidade e recursos como <strong>NFC e conectividade 4G</strong>.</p><p>Com <strong>64GB de armazenamento e 4GB de memória RAM</strong>, atende bem para WhatsApp, redes sociais, aplicativos, vídeos, navegação e uso cotidiano.<br><br></p><p>🔥 <strong>Principais destaques:</strong><br>✅ 64GB de armazenamento<br>✅ 4GB de memória RAM<br>✅ Conectividade 4G<br>✅ NFC para pagamentos por aproximação<br>✅ Tela Super AMOLED de aproximadamente 6\"<br>✅ Resolução Full HD+<br>✅ Processador Snapdragon 636 Octa-Core<br>✅ Câmera traseira dupla de 12MP + 5MP<br>✅ Câmera frontal de 8MP<br>✅ Gravação de vídeos em até 4K<br>✅ Bluetooth 5.0<br>✅ USB-C<br>✅ Compatível com Moto Snaps<br></p><p>🛡️ <strong>Mais segurança na compra:</strong> aparelho com <strong>90 dias de garantia</strong>.</p>",
+        "variations": {
+          "enabled": false,
+          "colors": [],
+          "storage": [],
+          "ram": [],
+          "condition": [],
+          "combinations": [],
+          "labels": {},
+          "colorsText": "",
+          "storageText": "",
+          "ramText": "",
+          "conditionText": "",
+          "labelsText": "{}",
+          "combinationsText": ""
+        },
+        "id": 1788474639660,
+        "inventoryBalance": {
+          "inventoryItemId": "PRD-1788474639660",
+          "locationId": "loja-principal",
+          "physicalQuantity": 0,
+          "reservedQuantity": 0,
+          "availableQuantity": 0,
+          "minimumQuantity": 0,
+          "updatedAt": "2026-09-03T22:31:15.756Z"
+        },
+        "updatedAt": "2026-09-03T22:34:07.010Z"
+      },
+      "ip": "127.0.0.1",
+      "requestId": "87eb3cfa-fe8f-43ee-8c5e-bab65ecacbd3"
+    },
+    {
+      "id": "AUD-00000132",
+      "at": "2026-09-03T23:03:19.955Z",
+      "module": "produtos",
+      "action": "PRODUCT_UPDATED",
+      "actor": "Matheus Fernando",
+      "entityType": "product",
+      "entityId": "1788476565281",
+      "documentId": "",
+      "reason": "Cadastro de produto atualizado",
+      "before": {
+        "name": "Motorola Moto Z3 Play 64GB 4GB RAM 4G NFC Usado",
+        "sku": "",
+        "code": "PRD-979",
+        "barcode": "",
+        "ncm": "85171300",
+        "brand": "",
+        "slug": "motorola-moto-z3-play-64gb-4gb-ram-4g-nfc-usado",
+        "price": null,
+        "commercial": {
+          "costPrice": null,
+          "erpPrice": null,
+          "salePrice": null,
+          "marketplacePrice": null,
+          "promotionalPrice": null,
+          "desiredMarginPercent": null,
+          "expectedProfit": null,
+          "defaultCommissionPercent": null,
+          "cashPrice": null,
+          "installmentPrice": null,
+          "minimumPrice": null,
+          "minimumMarginPercent": null,
+          "discountPolicy": "inherit",
+          "maximumDiscountPercent": null,
+          "maximumDiscountAmount": null,
+          "requiresAuthorization": false
+        },
+        "stock": 0,
+        "inventory": {
+          "itemId": "PRD-1788476565281",
+          "stockControlled": true,
+          "allowNegative": false,
+          "minimumQuantity": 0,
+          "channelAvailability": {
+            "site": {
+              "mode": "shared",
+              "enabled": true,
+              "limit": null,
+              "physicalSafety": 0
+            }
+          }
+        },
+        "image": "images/produtos/1788476583391-z3-play-usado.jpg",
+        "gallery": [],
+        "category": "smartphones",
+        "subcategory": "usados",
+        "tags": [],
+        "relatedManualIds": [],
+        "crossSellIds": [],
+        "showPrice": false,
+        "featured": false,
+        "active": true,
+        "erp": {
+          "sku": "",
+          "internalCode": "PRD-979",
+          "supplierCode": "",
+          "searchAlias": "",
+          "barcode": "",
+          "ncm": "85171300",
+          "fiscal": {
+            "ncm": "85171300"
+          },
+          "brand": "",
+          "unit": "UN",
+          "category": "smartphones",
+          "subcategory": "",
+          "mainSupplierId": "",
+          "preferredSupplierId": "",
+          "active": true,
+          "categoryId": "ERP-CAT-1"
+        },
+        "virtualStore": {
+          "name": "Motorola Moto Z3 Play 64GB 4GB RAM 4G NFC Usado",
+          "price": null,
+          "active": true,
+          "seoTitle": "",
+          "seoDescription": "",
+          "channels": {
+            "lojaVirtual": {
+              "enabled": true
+            },
+            "mercadoLivre": {
+              "enabled": false
+            },
+            "shopee": {
+              "enabled": false
+            },
+            "amazon": {
+              "enabled": false
+            },
+            "magalu": {
+              "enabled": false
+            }
+          }
+        },
+        "detailsEnabled": true,
+        "showVariationsOnCard": false,
+        "descriptionShort": "",
+        "descriptionLong": "",
+        "variations": {
+          "enabled": false,
+          "colors": [],
+          "storage": [],
+          "ram": [],
+          "condition": [],
+          "combinations": [],
+          "labels": {},
+          "colorsText": "",
+          "storageText": "",
+          "ramText": "",
+          "conditionText": "",
+          "labelsText": "{}",
+          "combinationsText": ""
+        },
+        "id": 1788476565281,
+        "inventoryBalance": {
+          "inventoryItemId": "PRD-1788476565281",
+          "locationId": "loja-principal",
+          "physicalQuantity": 0,
+          "reservedQuantity": 0,
+          "availableQuantity": 0,
+          "minimumQuantity": 0,
+          "updatedAt": "2026-09-03T23:02:45.283Z"
+        },
+        "updatedAt": "2026-09-03T23:03:03.399Z"
+      },
+      "after": {
+        "name": "Motorola Moto Z3 Play 64GB 4GB RAM 4G NFC Usado",
+        "sku": "",
+        "code": "PRD-979",
+        "barcode": "",
+        "ncm": "85171300",
+        "brand": "",
+        "slug": "motorola-moto-z3-play-64gb-4gb-ram-4g-nfc-usado",
+        "price": null,
+        "commercial": {
+          "costPrice": null,
+          "erpPrice": null,
+          "salePrice": null,
+          "marketplacePrice": null,
+          "promotionalPrice": null,
+          "desiredMarginPercent": null,
+          "expectedProfit": null,
+          "defaultCommissionPercent": null,
+          "cashPrice": null,
+          "installmentPrice": null,
+          "minimumPrice": null,
+          "minimumMarginPercent": null,
+          "discountPolicy": "inherit",
+          "maximumDiscountPercent": null,
+          "maximumDiscountAmount": null,
+          "requiresAuthorization": false
+        },
+        "stock": 0,
+        "inventory": {
+          "itemId": "PRD-1788476565281",
+          "stockControlled": true,
+          "allowNegative": false,
+          "minimumQuantity": 0,
+          "channelAvailability": {
+            "site": {
+              "mode": "shared",
+              "enabled": true,
+              "limit": null,
+              "physicalSafety": 0
+            }
+          }
+        },
+        "image": "images/produtos/1788476583391-z3-play-usado.jpg",
+        "gallery": [
+          "images/produtos/1788476599884-z3-play-usado2.jpg"
+        ],
+        "category": "smartphones",
+        "subcategory": "usados",
+        "tags": [],
+        "relatedManualIds": [],
+        "crossSellIds": [],
+        "showPrice": false,
+        "featured": false,
+        "active": true,
+        "erp": {
+          "sku": "",
+          "internalCode": "PRD-979",
+          "supplierCode": "",
+          "searchAlias": "",
+          "barcode": "",
+          "ncm": "85171300",
+          "fiscal": {
+            "ncm": "85171300"
+          },
+          "brand": "",
+          "unit": "UN",
+          "category": "smartphones",
+          "subcategory": "",
+          "mainSupplierId": "",
+          "preferredSupplierId": "",
+          "active": true,
+          "categoryId": "ERP-CAT-1"
+        },
+        "virtualStore": {
+          "name": "Motorola Moto Z3 Play 64GB 4GB RAM 4G NFC Usado",
+          "price": null,
+          "active": true,
+          "seoTitle": "",
+          "seoDescription": "",
+          "channels": {
+            "lojaVirtual": {
+              "enabled": true
+            },
+            "mercadoLivre": {
+              "enabled": false
+            },
+            "shopee": {
+              "enabled": false
+            },
+            "amazon": {
+              "enabled": false
+            },
+            "magalu": {
+              "enabled": false
+            }
+          }
+        },
+        "detailsEnabled": true,
+        "showVariationsOnCard": false,
+        "descriptionShort": "",
+        "descriptionLong": "",
+        "variations": {
+          "enabled": false,
+          "colors": [],
+          "storage": [],
+          "ram": [],
+          "condition": [],
+          "combinations": [],
+          "labels": {},
+          "colorsText": "",
+          "storageText": "",
+          "ramText": "",
+          "conditionText": "",
+          "labelsText": "{}",
+          "combinationsText": ""
+        },
+        "id": 1788476565281,
+        "inventoryBalance": {
+          "inventoryItemId": "PRD-1788476565281",
+          "locationId": "loja-principal",
+          "physicalQuantity": 0,
+          "reservedQuantity": 0,
+          "availableQuantity": 0,
+          "minimumQuantity": 0,
+          "updatedAt": "2026-09-03T23:02:45.283Z"
+        },
+        "updatedAt": "2026-09-03T23:03:03.399Z"
+      },
+      "ip": "127.0.0.1",
+      "requestId": "cd515d92-a9ab-480d-bc19-ead6a28e0be2"
+    },
+    {
+      "id": "AUD-00000133",
+      "at": "2026-09-03T23:03:56.665Z",
+      "module": "produtos",
+      "action": "PRODUCT_UPDATED",
+      "actor": "Matheus Fernando",
+      "entityType": "product",
+      "entityId": "1788476565281",
+      "documentId": "",
+      "reason": "Cadastro de produto atualizado",
+      "before": {
+        "name": "Motorola Moto Z3 Play 64GB 4GB RAM 4G NFC Usado",
+        "sku": "",
+        "code": "PRD-979",
+        "barcode": "",
+        "ncm": "85171300",
+        "brand": "",
+        "slug": "motorola-moto-z3-play-64gb-4gb-ram-4g-nfc-usado",
+        "price": null,
+        "commercial": {
+          "costPrice": null,
+          "erpPrice": null,
+          "salePrice": null,
+          "marketplacePrice": null,
+          "promotionalPrice": null,
+          "desiredMarginPercent": null,
+          "expectedProfit": null,
+          "defaultCommissionPercent": null,
+          "cashPrice": null,
+          "installmentPrice": null,
+          "minimumPrice": null,
+          "minimumMarginPercent": null,
+          "discountPolicy": "inherit",
+          "maximumDiscountPercent": null,
+          "maximumDiscountAmount": null,
+          "requiresAuthorization": false
+        },
+        "stock": 0,
+        "inventory": {
+          "itemId": "PRD-1788476565281",
+          "stockControlled": true,
+          "allowNegative": false,
+          "minimumQuantity": 0,
+          "channelAvailability": {
+            "site": {
+              "mode": "shared",
+              "enabled": true,
+              "limit": null,
+              "physicalSafety": 0
+            }
+          }
+        },
+        "image": "images/produtos/1788476583391-z3-play-usado.jpg",
+        "gallery": [
+          "images/produtos/1788476599884-z3-play-usado2.jpg"
+        ],
+        "category": "smartphones",
+        "subcategory": "usados",
+        "tags": [],
+        "relatedManualIds": [],
+        "crossSellIds": [],
+        "showPrice": false,
+        "featured": false,
+        "active": true,
+        "erp": {
+          "sku": "",
+          "internalCode": "PRD-979",
+          "supplierCode": "",
+          "searchAlias": "",
+          "barcode": "",
+          "ncm": "85171300",
+          "fiscal": {
+            "ncm": "85171300"
+          },
+          "brand": "",
+          "unit": "UN",
+          "category": "smartphones",
+          "subcategory": "",
+          "mainSupplierId": "",
+          "preferredSupplierId": "",
+          "active": true,
+          "categoryId": "ERP-CAT-1"
+        },
+        "virtualStore": {
+          "name": "Motorola Moto Z3 Play 64GB 4GB RAM 4G NFC Usado",
+          "price": null,
+          "active": true,
+          "seoTitle": "",
+          "seoDescription": "",
+          "channels": {
+            "lojaVirtual": {
+              "enabled": true
+            },
+            "mercadoLivre": {
+              "enabled": false
+            },
+            "shopee": {
+              "enabled": false
+            },
+            "amazon": {
+              "enabled": false
+            },
+            "magalu": {
+              "enabled": false
+            }
+          }
+        },
+        "detailsEnabled": true,
+        "showVariationsOnCard": false,
+        "descriptionShort": "",
+        "descriptionLong": "",
+        "variations": {
+          "enabled": false,
+          "colors": [],
+          "storage": [],
+          "ram": [],
+          "condition": [],
+          "combinations": [],
+          "labels": {},
+          "colorsText": "",
+          "storageText": "",
+          "ramText": "",
+          "conditionText": "",
+          "labelsText": "{}",
+          "combinationsText": ""
+        },
+        "id": 1788476565281,
+        "inventoryBalance": {
+          "inventoryItemId": "PRD-1788476565281",
+          "locationId": "loja-principal",
+          "physicalQuantity": 0,
+          "reservedQuantity": 0,
+          "availableQuantity": 0,
+          "minimumQuantity": 0,
+          "updatedAt": "2026-09-03T23:02:45.283Z"
+        },
+        "updatedAt": "2026-09-03T23:03:03.399Z"
+      },
+      "after": {
+        "name": "Motorola Moto Z3 Play 64GB 4GB RAM 4G NFC Usado",
+        "sku": "",
+        "code": "PRD-979",
+        "barcode": "",
+        "ncm": "85171300",
+        "brand": "",
+        "slug": "motorola-moto-z3-play-64gb-4gb-ram-4g-nfc-usado",
+        "price": null,
+        "commercial": {
+          "costPrice": null,
+          "erpPrice": null,
+          "salePrice": null,
+          "marketplacePrice": null,
+          "promotionalPrice": null,
+          "desiredMarginPercent": null,
+          "expectedProfit": null,
+          "defaultCommissionPercent": null,
+          "cashPrice": null,
+          "installmentPrice": null,
+          "minimumPrice": null,
+          "minimumMarginPercent": null,
+          "discountPolicy": "inherit",
+          "maximumDiscountPercent": null,
+          "maximumDiscountAmount": null,
+          "requiresAuthorization": false
+        },
+        "stock": 0,
+        "inventory": {
+          "itemId": "PRD-1788476565281",
+          "stockControlled": true,
+          "allowNegative": false,
+          "minimumQuantity": 0,
+          "channelAvailability": {
+            "site": {
+              "mode": "shared",
+              "enabled": true,
+              "limit": null,
+              "physicalSafety": 0
+            }
+          }
+        },
+        "image": "images/produtos/1788476583391-z3-play-usado.jpg",
+        "gallery": [
+          "images/produtos/1788476599884-z3-play-usado2.jpg"
+        ],
+        "category": "smartphones",
+        "subcategory": "usados",
+        "tags": [],
+        "relatedManualIds": [],
+        "crossSellIds": [],
+        "showPrice": false,
+        "featured": false,
+        "active": true,
+        "erp": {
+          "sku": "",
+          "internalCode": "PRD-979",
+          "supplierCode": "",
+          "searchAlias": "",
+          "barcode": "",
+          "ncm": "85171300",
+          "fiscal": {
+            "ncm": "85171300"
+          },
+          "brand": "",
+          "unit": "UN",
+          "category": "smartphones",
+          "subcategory": "",
+          "mainSupplierId": "",
+          "preferredSupplierId": "",
+          "active": true,
+          "categoryId": "ERP-CAT-1"
+        },
+        "virtualStore": {
+          "name": "Motorola Moto Z3 Play 64GB 4GB RAM 4G NFC Usado",
+          "price": null,
+          "active": true,
+          "seoTitle": "",
+          "seoDescription": "",
+          "channels": {
+            "lojaVirtual": {
+              "enabled": true
+            },
+            "mercadoLivre": {
+              "enabled": false
+            },
+            "shopee": {
+              "enabled": false
+            },
+            "amazon": {
+              "enabled": false
+            },
+            "magalu": {
+              "enabled": false
+            }
+          }
+        },
+        "detailsEnabled": true,
+        "showVariationsOnCard": false,
+        "descriptionShort": "",
+        "descriptionLong": "<p>📱 <strong>Motorola Moto Z3 Play 64GB Usado – Tela AMOLED, NFC e Bom Desempenho</strong></p><p>É uma ótima opção para quem busca um smartphone usado com bom desempenho para as tarefas do dia a dia, tela de alta qualidade e recursos como <strong>NFC e conectividade 4G</strong>.</p><p>Com <strong>64GB de armazenamento e 4GB de memória RAM</strong>, atende bem para WhatsApp, redes sociais, aplicativos, vídeos, navegação e uso cotidiano.</p><p>🔥 <strong>Principais destaques:</strong><br>✅ 64GB de armazenamento<br>✅ 4GB de memória RAM<br>✅ Conectividade 4G<br>✅ NFC para pagamentos por aproximação<br>✅ Tela Super AMOLED de aproximadamente 6\"<br>✅ Resolução Full HD+<br>✅ Processador Snapdragon 636 Octa-Core<br>✅ Câmera traseira dupla de 12MP + 5MP<br>✅ Câmera frontal de 8MP<br>✅ Gravação de vídeos em até 4K<br>✅ Bluetooth 5.0<br>✅ USB-C<br>✅ Compatível com Moto Snaps<br></p><p>🛡️ <strong>Mais segurança na compra:</strong> aparelho com <strong>90 dias de garantia</strong>.</p>",
+        "variations": {
+          "enabled": false,
+          "colors": [],
+          "storage": [],
+          "ram": [],
+          "condition": [],
+          "combinations": [],
+          "labels": {},
+          "colorsText": "",
+          "storageText": "",
+          "ramText": "",
+          "conditionText": "",
+          "labelsText": "{}",
+          "combinationsText": ""
+        },
+        "id": 1788476565281,
+        "inventoryBalance": {
+          "inventoryItemId": "PRD-1788476565281",
+          "locationId": "loja-principal",
+          "physicalQuantity": 0,
+          "reservedQuantity": 0,
+          "availableQuantity": 0,
+          "minimumQuantity": 0,
+          "updatedAt": "2026-09-03T23:02:45.283Z"
+        },
+        "updatedAt": "2026-09-03T23:03:03.399Z"
+      },
+      "ip": "127.0.0.1",
+      "requestId": "6f0e6e84-b8d2-4c72-ba21-84b24733702c"
+    },
+    {
+      "id": "AUD-00000134",
+      "at": "2026-09-03T23:04:09.768Z",
+      "module": "produtos",
+      "action": "PRODUCT_UPDATED",
+      "actor": "Matheus Fernando",
+      "entityType": "product",
+      "entityId": "1788476565281",
+      "documentId": "",
+      "reason": "Cadastro de produto atualizado",
+      "before": {
+        "name": "Motorola Moto Z3 Play 64GB 4GB RAM 4G NFC Usado",
+        "sku": "",
+        "code": "PRD-979",
+        "barcode": "",
+        "ncm": "85171300",
+        "brand": "",
+        "slug": "motorola-moto-z3-play-64gb-4gb-ram-4g-nfc-usado",
+        "price": null,
+        "commercial": {
+          "costPrice": null,
+          "erpPrice": null,
+          "salePrice": null,
+          "marketplacePrice": null,
+          "promotionalPrice": null,
+          "desiredMarginPercent": null,
+          "expectedProfit": null,
+          "defaultCommissionPercent": null,
+          "cashPrice": null,
+          "installmentPrice": null,
+          "minimumPrice": null,
+          "minimumMarginPercent": null,
+          "discountPolicy": "inherit",
+          "maximumDiscountPercent": null,
+          "maximumDiscountAmount": null,
+          "requiresAuthorization": false
+        },
+        "stock": 0,
+        "inventory": {
+          "itemId": "PRD-1788476565281",
+          "stockControlled": true,
+          "allowNegative": false,
+          "minimumQuantity": 0,
+          "channelAvailability": {
+            "site": {
+              "mode": "shared",
+              "enabled": true,
+              "limit": null,
+              "physicalSafety": 0
+            }
+          }
+        },
+        "image": "images/produtos/1788476583391-z3-play-usado.jpg",
+        "gallery": [
+          "images/produtos/1788476599884-z3-play-usado2.jpg"
+        ],
+        "category": "smartphones",
+        "subcategory": "usados",
+        "tags": [],
+        "relatedManualIds": [],
+        "crossSellIds": [],
+        "showPrice": false,
+        "featured": false,
+        "active": true,
+        "erp": {
+          "sku": "",
+          "internalCode": "PRD-979",
+          "supplierCode": "",
+          "searchAlias": "",
+          "barcode": "",
+          "ncm": "85171300",
+          "fiscal": {
+            "ncm": "85171300"
+          },
+          "brand": "",
+          "unit": "UN",
+          "category": "smartphones",
+          "subcategory": "",
+          "mainSupplierId": "",
+          "preferredSupplierId": "",
+          "active": true,
+          "categoryId": "ERP-CAT-1"
+        },
+        "virtualStore": {
+          "name": "Motorola Moto Z3 Play 64GB 4GB RAM 4G NFC Usado",
+          "price": null,
+          "active": true,
+          "seoTitle": "",
+          "seoDescription": "",
+          "channels": {
+            "lojaVirtual": {
+              "enabled": true
+            },
+            "mercadoLivre": {
+              "enabled": false
+            },
+            "shopee": {
+              "enabled": false
+            },
+            "amazon": {
+              "enabled": false
+            },
+            "magalu": {
+              "enabled": false
+            }
+          }
+        },
+        "detailsEnabled": true,
+        "showVariationsOnCard": false,
+        "descriptionShort": "",
+        "descriptionLong": "<p>📱 <strong>Motorola Moto Z3 Play 64GB Usado – Tela AMOLED, NFC e Bom Desempenho</strong></p><p>É uma ótima opção para quem busca um smartphone usado com bom desempenho para as tarefas do dia a dia, tela de alta qualidade e recursos como <strong>NFC e conectividade 4G</strong>.</p><p>Com <strong>64GB de armazenamento e 4GB de memória RAM</strong>, atende bem para WhatsApp, redes sociais, aplicativos, vídeos, navegação e uso cotidiano.</p><p>🔥 <strong>Principais destaques:</strong><br>✅ 64GB de armazenamento<br>✅ 4GB de memória RAM<br>✅ Conectividade 4G<br>✅ NFC para pagamentos por aproximação<br>✅ Tela Super AMOLED de aproximadamente 6\"<br>✅ Resolução Full HD+<br>✅ Processador Snapdragon 636 Octa-Core<br>✅ Câmera traseira dupla de 12MP + 5MP<br>✅ Câmera frontal de 8MP<br>✅ Gravação de vídeos em até 4K<br>✅ Bluetooth 5.0<br>✅ USB-C<br>✅ Compatível com Moto Snaps<br></p><p>🛡️ <strong>Mais segurança na compra:</strong> aparelho com <strong>90 dias de garantia</strong>.</p>",
+        "variations": {
+          "enabled": false,
+          "colors": [],
+          "storage": [],
+          "ram": [],
+          "condition": [],
+          "combinations": [],
+          "labels": {},
+          "colorsText": "",
+          "storageText": "",
+          "ramText": "",
+          "conditionText": "",
+          "labelsText": "{}",
+          "combinationsText": ""
+        },
+        "id": 1788476565281,
+        "inventoryBalance": {
+          "inventoryItemId": "PRD-1788476565281",
+          "locationId": "loja-principal",
+          "physicalQuantity": 0,
+          "reservedQuantity": 0,
+          "availableQuantity": 0,
+          "minimumQuantity": 0,
+          "updatedAt": "2026-09-03T23:02:45.283Z"
+        },
+        "updatedAt": "2026-09-03T23:03:03.399Z"
+      },
+      "after": {
+        "name": "Motorola Moto Z3 Play 64GB 4GB RAM 4G NFC Usado",
+        "sku": "",
+        "code": "PRD-979",
+        "barcode": "",
+        "ncm": "85171300",
+        "brand": "",
+        "slug": "motorola-moto-z3-play-64gb-4gb-ram-4g-nfc-usado",
+        "price": null,
+        "commercial": {
+          "costPrice": null,
+          "erpPrice": null,
+          "salePrice": null,
+          "marketplacePrice": null,
+          "promotionalPrice": null,
+          "desiredMarginPercent": null,
+          "expectedProfit": null,
+          "defaultCommissionPercent": null,
+          "cashPrice": null,
+          "installmentPrice": null,
+          "minimumPrice": null,
+          "minimumMarginPercent": null,
+          "discountPolicy": "inherit",
+          "maximumDiscountPercent": null,
+          "maximumDiscountAmount": null,
+          "requiresAuthorization": false
+        },
+        "stock": 0,
+        "inventory": {
+          "itemId": "PRD-1788476565281",
+          "stockControlled": true,
+          "allowNegative": false,
+          "minimumQuantity": 0,
+          "channelAvailability": {
+            "site": {
+              "mode": "shared",
+              "enabled": true,
+              "limit": null,
+              "physicalSafety": 0
+            }
+          }
+        },
+        "image": "images/produtos/1788476583391-z3-play-usado.jpg",
+        "gallery": [
+          "images/produtos/1788476599884-z3-play-usado2.jpg"
+        ],
+        "category": "smartphones",
+        "subcategory": "usados",
+        "tags": [],
+        "relatedManualIds": [],
+        "crossSellIds": [],
+        "showPrice": false,
+        "featured": false,
+        "active": true,
+        "erp": {
+          "sku": "",
+          "internalCode": "PRD-979",
+          "supplierCode": "",
+          "searchAlias": "",
+          "barcode": "",
+          "ncm": "85171300",
+          "fiscal": {
+            "ncm": "85171300"
+          },
+          "brand": "",
+          "unit": "UN",
+          "category": "smartphones",
+          "subcategory": "",
+          "mainSupplierId": "",
+          "preferredSupplierId": "",
+          "active": true,
+          "categoryId": "ERP-CAT-1"
+        },
+        "virtualStore": {
+          "name": "Motorola Moto Z3 Play 64GB 4GB RAM 4G NFC Usado",
+          "price": null,
+          "active": true,
+          "seoTitle": "",
+          "seoDescription": "Moto Z3 Play usado 64GB com 4GB RAM, 4G, NFC, tela Super AMOLED e câmera dupla. Motorola com bom desempenho e ótimo custo-benefício.",
+          "channels": {
+            "lojaVirtual": {
+              "enabled": true
+            },
+            "mercadoLivre": {
+              "enabled": false
+            },
+            "shopee": {
+              "enabled": false
+            },
+            "amazon": {
+              "enabled": false
+            },
+            "magalu": {
+              "enabled": false
+            }
+          }
+        },
+        "detailsEnabled": true,
+        "showVariationsOnCard": false,
+        "descriptionShort": "",
+        "descriptionLong": "<p>📱 <strong>Motorola Moto Z3 Play 64GB Usado – Tela AMOLED, NFC e Bom Desempenho</strong></p><p>É uma ótima opção para quem busca um smartphone usado com bom desempenho para as tarefas do dia a dia, tela de alta qualidade e recursos como <strong>NFC e conectividade 4G</strong>.</p><p>Com <strong>64GB de armazenamento e 4GB de memória RAM</strong>, atende bem para WhatsApp, redes sociais, aplicativos, vídeos, navegação e uso cotidiano.</p><p>🔥 <strong>Principais destaques:</strong><br>✅ 64GB de armazenamento<br>✅ 4GB de memória RAM<br>✅ Conectividade 4G<br>✅ NFC para pagamentos por aproximação<br>✅ Tela Super AMOLED de aproximadamente 6\"<br>✅ Resolução Full HD+<br>✅ Processador Snapdragon 636 Octa-Core<br>✅ Câmera traseira dupla de 12MP + 5MP<br>✅ Câmera frontal de 8MP<br>✅ Gravação de vídeos em até 4K<br>✅ Bluetooth 5.0<br>✅ USB-C<br>✅ Compatível com Moto Snaps<br></p><p>🛡️ <strong>Mais segurança na compra:</strong> aparelho com <strong>90 dias de garantia</strong>.</p>",
+        "variations": {
+          "enabled": false,
+          "colors": [],
+          "storage": [],
+          "ram": [],
+          "condition": [],
+          "combinations": [],
+          "labels": {},
+          "colorsText": "",
+          "storageText": "",
+          "ramText": "",
+          "conditionText": "",
+          "labelsText": "{}",
+          "combinationsText": ""
+        },
+        "id": 1788476565281,
+        "inventoryBalance": {
+          "inventoryItemId": "PRD-1788476565281",
+          "locationId": "loja-principal",
+          "physicalQuantity": 0,
+          "reservedQuantity": 0,
+          "availableQuantity": 0,
+          "minimumQuantity": 0,
+          "updatedAt": "2026-09-03T23:02:45.283Z"
+        },
+        "updatedAt": "2026-09-03T23:03:03.399Z"
+      },
+      "ip": "127.0.0.1",
+      "requestId": "ada1180e-3235-4381-9ab1-1c359970dedf"
+    },
+    {
+      "id": "AUD-00000135",
+      "at": "2026-09-03T23:05:33.599Z",
+      "module": "produtos",
+      "action": "PRODUCT_UPDATED",
+      "actor": "Matheus Fernando",
+      "entityType": "product",
+      "entityId": "1788433593777",
+      "documentId": "",
+      "reason": "Cadastro de produto atualizado",
+      "before": {
+        "name": "Celular Usado Samsung S23 Fe 128gb 8gb ram",
+        "sku": "",
+        "code": "PRD-977",
+        "barcode": "",
+        "ncm": "85171300",
+        "brand": "",
+        "slug": "celular-usado-samsung-s23-fe-128gb",
+        "price": null,
+        "commercial": {
+          "costPrice": 700,
+          "erpPrice": null,
+          "salePrice": null,
+          "marketplacePrice": null,
+          "promotionalPrice": null,
+          "desiredMarginPercent": null,
+          "expectedProfit": null,
+          "defaultCommissionPercent": null,
+          "cashPrice": null,
+          "installmentPrice": null,
+          "minimumPrice": null,
+          "minimumMarginPercent": null,
+          "discountPolicy": "inherit",
+          "maximumDiscountPercent": null,
+          "maximumDiscountAmount": null,
+          "requiresAuthorization": false
+        },
+        "stock": 1,
+        "inventory": {
+          "itemId": "PRD-1788433593777",
+          "stockControlled": true,
+          "allowNegative": false,
+          "minimumQuantity": 0,
+          "channelAvailability": {
+            "site": {
+              "mode": "shared",
+              "enabled": true,
+              "limit": null,
+              "physicalSafety": 0
+            }
+          }
+        },
+        "image": "images/produtos/1788471293520-s23-fe-usado-preto.jpg",
+        "gallery": [],
+        "category": "smartphones",
+        "subcategory": "usados",
+        "tags": [],
+        "relatedManualIds": [],
+        "crossSellIds": [],
+        "showPrice": true,
+        "featured": false,
+        "active": true,
+        "erp": {
+          "sku": "",
+          "internalCode": "PRD-977",
+          "supplierCode": "",
+          "searchAlias": "",
+          "barcode": "",
+          "ncm": "85171300",
+          "fiscal": {
+            "ncm": "85171300"
+          },
+          "brand": "",
+          "unit": "UN",
+          "category": "smartphones",
+          "subcategory": "",
+          "mainSupplierId": "",
+          "preferredSupplierId": "",
+          "active": true,
+          "categoryId": "ERP-CAT-1"
+        },
+        "virtualStore": {
+          "name": "Celular Usado Samsung S23 Fe 5G 128gb",
+          "price": null,
+          "active": true,
+          "seoTitle": "Samsung Galaxy S23 FE 128GB 8GB RAM 5G Usado",
+          "seoDescription": "Samsung Galaxy S23 FE usado 128GB com 8GB RAM, 5G, tela AMOLED 120Hz e câmera de 50MP. Smartphone premium Samsung com ótimo desempenho.",
+          "channels": {
+            "lojaVirtual": {
+              "enabled": true
+            },
+            "mercadoLivre": {
+              "enabled": false
+            },
+            "shopee": {
+              "enabled": false
+            },
+            "amazon": {
+              "enabled": false
+            },
+            "magalu": {
+              "enabled": false
+            }
+          }
+        },
+        "detailsEnabled": true,
+        "showVariationsOnCard": true,
+        "descriptionShort": "Samsung Galaxy S23 FE usado 128GB com 8GB RAM, 5G, tela AMOLED 120Hz e câmera de 50MP. Smartphone premium Samsung com ótimo desempenho.",
+        "descriptionLong": "<p>📱<strong>Samsung Galaxy S23 FE 128GB Usado – Desempenho Premium e Câmera de 50MP</strong></p><p>🚀 Com <strong>128GB de armazenamento e 8GB de RAM</strong>, oferece ótimo desempenho para redes sociais, aplicativos, vídeos, jogos e multitarefas no dia a dia</p><p>🔥 <strong>Principais destaques:</strong><br>✅ 128GB de armazenamento<br>✅ 8GB de memória RAM<br>✅ Conectividade 5G<br>✅ Tela Dynamic AMOLED 2X de 6.4\"<br>✅ Taxa de atualização de até 120Hz<br>✅ Processador Exynos 2200<br>✅ Câmera principal de 50MP com estabilização óptica<br>✅ Câmeras traseiras de 50MP + 12MP + 8MP<br>✅ Câmera frontal de 10MP<br>✅ Zoom óptico de 3x<br>✅ Gravação de vídeos em até 8K<br>✅ Bateria de 4.500mAh<br>✅ Resistência à água e poeira IP68<br>✅ Dual SIM com suporte a eSIM</p><p><strong>Aparelho usado</strong>, uma excelente opção para quem deseja toda a qualidade da linha Galaxy S com melhor custo-benefício<br><br>🛡️ <strong>Compra com mais segurança:</strong> este aparelho conta com <strong>90 dias de garantia</strong></p><p><br></p>",
+        "variations": {
+          "enabled": true,
+          "colors": [
+            {
+              "name": "Preto",
+              "hex": "#111111",
+              "image": ""
+            }
+          ],
+          "storage": [],
+          "ram": [],
+          "condition": [],
+          "combinations": [
+            {
+              "color": "Preto",
+              "storage": "",
+              "ram": "",
+              "condition": "",
+              "image": "",
+              "stock": 1,
+              "erpPrice": null,
+              "costPrice": null,
+              "desiredMarginPercent": null,
+              "inventoryItemId": "VAR-1788433593777-1"
+            }
+          ],
+          "labels": {},
+          "colorsText": "Preto|#111111",
+          "storageText": "",
+          "ramText": "",
+          "conditionText": "",
+          "labelsText": "{}",
+          "combinationsText": "Preto|||||1"
+        },
+        "id": 1788433593777,
+        "inventoryBalance": {
+          "physicalQuantity": 1,
+          "availableQuantity": 1,
+          "reservedQuantity": 0,
+          "derivedFromVariations": true
+        },
+        "updatedAt": "2026-09-03T21:34:53.530Z"
+      },
+      "after": {
+        "name": "Celular Usado Samsung S23 Fe 128gb 8gb ram",
+        "sku": "",
+        "code": "PRD-977",
+        "barcode": "",
+        "ncm": "85171300",
+        "brand": "",
+        "slug": "celular-usado-samsung-s23-fe-128gb",
+        "price": null,
+        "commercial": {
+          "costPrice": 700,
+          "erpPrice": null,
+          "salePrice": null,
+          "marketplacePrice": null,
+          "promotionalPrice": null,
+          "desiredMarginPercent": null,
+          "expectedProfit": null,
+          "defaultCommissionPercent": null,
+          "cashPrice": null,
+          "installmentPrice": null,
+          "minimumPrice": null,
+          "minimumMarginPercent": null,
+          "discountPolicy": "inherit",
+          "maximumDiscountPercent": null,
+          "maximumDiscountAmount": null,
+          "requiresAuthorization": false
+        },
+        "stock": 1,
+        "inventory": {
+          "itemId": "PRD-1788433593777",
+          "stockControlled": true,
+          "allowNegative": false,
+          "minimumQuantity": 0,
+          "channelAvailability": {
+            "site": {
+              "mode": "shared",
+              "enabled": true,
+              "limit": null,
+              "physicalSafety": 0
+            }
+          }
+        },
+        "image": "images/produtos/1788471293520-s23-fe-usado-preto.jpg",
+        "gallery": [],
+        "category": "smartphones",
+        "subcategory": "usados",
+        "tags": [],
+        "relatedManualIds": [],
+        "crossSellIds": [],
+        "showPrice": false,
+        "featured": false,
+        "active": true,
+        "erp": {
+          "sku": "",
+          "internalCode": "PRD-977",
+          "supplierCode": "",
+          "searchAlias": "",
+          "barcode": "",
+          "ncm": "85171300",
+          "fiscal": {
+            "ncm": "85171300"
+          },
+          "brand": "",
+          "unit": "UN",
+          "category": "smartphones",
+          "subcategory": "",
+          "mainSupplierId": "",
+          "preferredSupplierId": "",
+          "active": true,
+          "categoryId": "ERP-CAT-1"
+        },
+        "virtualStore": {
+          "name": "Celular Usado Samsung S23 Fe 5G 128gb",
+          "price": null,
+          "active": true,
+          "seoTitle": "Samsung Galaxy S23 FE 128GB 8GB RAM 5G Usado",
+          "seoDescription": "Samsung Galaxy S23 FE usado 128GB com 8GB RAM, 5G, tela AMOLED 120Hz e câmera de 50MP. Smartphone premium Samsung com ótimo desempenho.",
+          "channels": {
+            "lojaVirtual": {
+              "enabled": true
+            },
+            "mercadoLivre": {
+              "enabled": false
+            },
+            "shopee": {
+              "enabled": false
+            },
+            "amazon": {
+              "enabled": false
+            },
+            "magalu": {
+              "enabled": false
+            }
+          }
+        },
+        "detailsEnabled": true,
+        "showVariationsOnCard": true,
+        "descriptionShort": "Samsung Galaxy S23 FE usado 128GB com 8GB RAM, 5G, tela AMOLED 120Hz e câmera de 50MP. Smartphone premium Samsung com ótimo desempenho.",
+        "descriptionLong": "<p>📱<strong>Samsung Galaxy S23 FE 128GB Usado – Desempenho Premium e Câmera de 50MP</strong></p><p>🚀 Com <strong>128GB de armazenamento e 8GB de RAM</strong>, oferece ótimo desempenho para redes sociais, aplicativos, vídeos, jogos e multitarefas no dia a dia</p><p>🔥 <strong>Principais destaques:</strong><br>✅ 128GB de armazenamento<br>✅ 8GB de memória RAM<br>✅ Conectividade 5G<br>✅ Tela Dynamic AMOLED 2X de 6.4\"<br>✅ Taxa de atualização de até 120Hz<br>✅ Processador Exynos 2200<br>✅ Câmera principal de 50MP com estabilização óptica<br>✅ Câmeras traseiras de 50MP + 12MP + 8MP<br>✅ Câmera frontal de 10MP<br>✅ Zoom óptico de 3x<br>✅ Gravação de vídeos em até 8K<br>✅ Bateria de 4.500mAh<br>✅ Resistência à água e poeira IP68<br>✅ Dual SIM com suporte a eSIM</p><p><strong>Aparelho usado</strong>, uma excelente opção para quem deseja toda a qualidade da linha Galaxy S com melhor custo-benefício<br><br>🛡️ <strong>Compra com mais segurança:</strong> este aparelho conta com <strong>90 dias de garantia</strong></p><p><br></p>",
+        "variations": {
+          "enabled": true,
+          "colors": [
+            {
+              "name": "Preto",
+              "hex": "#111111",
+              "image": ""
+            }
+          ],
+          "storage": [],
+          "ram": [],
+          "condition": [],
+          "combinations": [
+            {
+              "color": "Preto",
+              "storage": "",
+              "ram": "",
+              "condition": "",
+              "image": "",
+              "stock": 1,
+              "erpPrice": null,
+              "costPrice": null,
+              "desiredMarginPercent": null,
+              "inventoryItemId": "VAR-1788433593777-1"
+            }
+          ],
+          "labels": {},
+          "colorsText": "Preto|#111111",
+          "storageText": "",
+          "ramText": "",
+          "conditionText": "",
+          "labelsText": "{}",
+          "combinationsText": "Preto|||||1"
+        },
+        "id": 1788433593777,
+        "inventoryBalance": {
+          "physicalQuantity": 1,
+          "availableQuantity": 1,
+          "reservedQuantity": 0,
+          "derivedFromVariations": true
+        },
+        "updatedAt": "2026-09-03T21:34:53.530Z"
+      },
+      "ip": "127.0.0.1",
+      "requestId": "3d0dfd3c-cf81-4a12-8703-6e33942364d9"
     }
   ],
-  "updatedAt": "2026-09-03T22:06:56.312Z"
+  "updatedAt": "2026-09-03T23:05:33.606Z"
 }

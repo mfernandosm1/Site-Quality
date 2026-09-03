@@ -94,7 +94,7 @@
   function syncType(){
     const pf=document.getElementById('inlineSupplierPersonType').value==='pf';
     document.getElementById('inlineSupplierDocumentLabel').textContent=pf?'CPF':'CNPJ';
-    document.getElementById('inlineSupplierNameLabel').textContent=pf?'Nome completo *':'Razão social *';
+    document.getElementById('inlineSupplierNameLabel').textContent=pf?'Nome *':'Razão social *';
     document.getElementById('inlineSupplierStateRegistrationLabel').textContent=pf?'RG':'Inscrição estadual';
     const tradeWrap=document.getElementById('inlineSupplierTradeWrap');
     const cnpjLookup=document.getElementById('inlineSupplierCnpjLookup');

@@ -352,7 +352,14 @@
       control.required = setting.required === true && matchesPerson && setting.enabled !== false;
       const label = wrapper.querySelector('label');
       if (label) {
-        const base = String(setting.displayLabel || setting.label || label.textContent).replace(/\s*\*\s*$/, '').trim();
+        const type = personTypeField?.value === 'pj' ? 'pj' : 'pf';
+        const dynamicFallback = {
+          document:{ pf:'CPF', pj:'CNPJ' },
+          name:{ pf:'Nome', pj:'Razão social' },
+          stateRegistration:{ pf:'RG', pj:'Inscrição estadual' }
+        }[setting.key];
+        const personLabel = type === 'pj' ? setting.displayLabelPj : setting.displayLabelPf;
+        const base = String(personLabel || dynamicFallback?.[type] || setting.displayLabel || setting.label || label.textContent).replace(/\s*\*\s*$/, '').trim();
         label.textContent = `${base}${control.required ? ' *' : ''}`;
       }
     });

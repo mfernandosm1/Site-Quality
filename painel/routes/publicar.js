@@ -256,24 +256,38 @@ function escapeAttr(value){
     .replace(/'/g, '&#039;');
 }
 
+function cleanSeoPlainText(value){
+  return String(value || '')
+    .replace(/<script[\s\S]*?<\/script>/gi, ' ')
+    .replace(/<style[\s\S]*?<\/style>/gi, ' ')
+    .replace(/<[^>]*>/g, ' ')
+    .replace(/<[^>]*$/g, ' ')
+    .replace(/&nbsp;/gi, ' ')
+    .replace(/&amp;/gi, '&')
+    .replace(/&quot;/gi, '"')
+    .replace(/&#039;|&apos;/gi, "'")
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
 function categorySeoTitle(cat){
-  const custom = String(cat?.seoTitle || cat?.seo_title || cat?.titleSeo || '').trim();
+  const custom = cleanSeoPlainText(cat?.seoTitle || cat?.seo_title || cat?.titleSeo || '');
   if (custom) return custom;
   return `${String(cat?.name || 'Categoria').trim()} | Quality Celulares`;
 }
 
 function categorySeoDescription(cat){
-  const custom = String(cat?.seoDescription || cat?.seo_description || cat?.descriptionSeo || cat?.metaDescription || '').trim();
+  const custom = cleanSeoPlainText(cat?.seoDescription || cat?.seo_description || cat?.descriptionSeo || cat?.metaDescription || '');
   if (custom) return custom;
   return `Confira ${String(cat?.name || 'produtos').trim()} na Quality Celulares. Produtos novos e seminovos com garantia, frete grátis e atendimento especializado.`;
 }
 
 function categoryOgTitle(cat){
-  return String(cat?.ogTitle || cat?.og_title || '').trim() || categorySeoTitle(cat);
+  return cleanSeoPlainText(cat?.ogTitle || cat?.og_title || '') || categorySeoTitle(cat);
 }
 
 function categoryOgDescription(cat){
-  return String(cat?.ogDescription || cat?.og_description || '').trim() || categorySeoDescription(cat);
+  return cleanSeoPlainText(cat?.ogDescription || cat?.og_description || '') || categorySeoDescription(cat);
 }
 
 function categoryOgImage(cat){

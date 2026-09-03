@@ -2120,6 +2120,7 @@ function stripHtmlText(value){
     .replace(/<script[\s\S]*?<\/script>/gi, ' ')
     .replace(/<style[\s\S]*?<\/style>/gi, ' ')
     .replace(/<[^>]+>/g, ' ')
+    .replace(/<[^>]*$/g, ' ')
     .replace(/&nbsp;/gi, ' ')
     .replace(/&amp;/gi, '&')
     .replace(/&quot;/gi, '"')
@@ -2130,6 +2131,7 @@ function stripHtmlText(value){
 
 function productSeoDescription(product){
   const custom = stripHtmlText(
+    product?.virtualStore?.seoDescription ||
     product?.seoDescription ||
     product?.metaDescription ||
     product?.descriptionShort ||
@@ -2137,7 +2139,7 @@ function productSeoDescription(product){
     ''
   );
 
-  const name = stripHtmlText(product?.name || product?.nome || 'produto');
+  const name = stripHtmlText(product?.virtualStore?.name || product?.name || product?.nome || 'produto');
   const fallback = `Confira ${name} na Quality Celulares. Consulte disponibilidade, garantia e condições pelo WhatsApp.`;
   const text = custom || fallback;
 
@@ -2146,8 +2148,8 @@ function productSeoDescription(product){
 }
 
 function productSeoTitle(product){
-  const custom = stripHtmlText(product?.seoTitle || product?.metaTitle || '');
-  const name = stripHtmlText(product?.name || product?.nome || 'Produto');
+  const custom = stripHtmlText(product?.virtualStore?.seoTitle || product?.seoTitle || product?.metaTitle || '');
+  const name = stripHtmlText(product?.virtualStore?.name || product?.name || product?.nome || 'Produto');
   return custom || `${name} | Quality Celulares`;
 }
 

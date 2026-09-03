@@ -1,36 +1,138 @@
 {
   "version": "8.4.0-analytics-professional",
   "createdAt": "2026-08-31T01:45:14.531Z",
-  "updatedAt": "2026-09-03T21:32:38.712Z",
+  "updatedAt": "2026-09-03T23:05:18.428Z",
   "source": "local-json",
   "counters": {
-    "product_view": 0,
+    "product_view": 6,
     "favorite": 0,
     "favorite_click": 0,
     "whatsapp_click": 0,
     "category_view": 0,
     "share_click": 0,
     "search": 0,
-    "page_view": 4
+    "page_view": 21
   },
-  "products": {},
+  "products": {
+    "fonte-original-apple-usb-c-20w": {
+      "slug": "fonte-original-apple-usb-c-20w",
+      "name": "Produto",
+      "image": "",
+      "url": "http://localhost:3000/produto/fonte-original-apple-usb-c-20w/",
+      "views": 1,
+      "favorites": 0,
+      "whatsapp": 0,
+      "shares": 0,
+      "lastAt": "2026-09-03T23:00:32.442Z"
+    },
+    "motorola-moto-g55-5g-256gb-16gb-8gb-ram-8gb-ram-boost": {
+      "slug": "motorola-moto-g55-5g-256gb-16gb-8gb-ram-8gb-ram-boost",
+      "name": "Produto",
+      "image": "",
+      "url": "http://localhost:3000/produto/motorola-moto-g55-5g-256gb-16gb-8gb-ram-8gb-ram-boost/",
+      "views": 1,
+      "favorites": 0,
+      "whatsapp": 0,
+      "shares": 0,
+      "lastAt": "2026-09-03T23:00:45.308Z"
+    },
+    "motorola-edge-70-5g-256gb-24gbram": {
+      "slug": "motorola-edge-70-5g-256gb-24gbram",
+      "name": "Produto",
+      "image": "",
+      "url": "http://localhost:3000/produto/motorola-edge-70-5g-256gb-24gbram/",
+      "views": 1,
+      "favorites": 0,
+      "whatsapp": 0,
+      "shares": 0,
+      "lastAt": "2026-09-03T23:00:51.262Z"
+    },
+    "celular-usado-samsung-s23-fe-128gb": {
+      "slug": "celular-usado-samsung-s23-fe-128gb",
+      "name": "Produto",
+      "image": "",
+      "url": "http://localhost:3000/produto/celular-usado-samsung-s23-fe-128gb/",
+      "views": 1,
+      "favorites": 0,
+      "whatsapp": 0,
+      "shares": 0,
+      "lastAt": "2026-09-03T23:01:01.653Z"
+    },
+    "playstation-5-digital-1tb": {
+      "slug": "playstation-5-digital-1tb",
+      "name": "Produto",
+      "image": "",
+      "url": "http://localhost:3000/produto/playstation-5-digital-1tb/",
+      "views": 1,
+      "favorites": 0,
+      "whatsapp": 0,
+      "shares": 0,
+      "lastAt": "2026-09-03T23:01:30.079Z"
+    },
+    "motorola-moto-z3-play-64gb-4gb-ram-4g-nfc-usado": {
+      "slug": "motorola-moto-z3-play-64gb-4gb-ram-4g-nfc-usado",
+      "name": "Produto",
+      "image": "",
+      "url": "http://localhost:3000/produto/motorola-moto-z3-play-64gb-4gb-ram-4g-nfc-usado/",
+      "views": 1,
+      "favorites": 0,
+      "whatsapp": 0,
+      "shares": 0,
+      "lastAt": "2026-09-03T23:05:16.064Z"
+    }
+  },
   "categories": {},
   "searches": {},
   "pages": {
     "http://localhost:3000/site/view/index.html": {
       "url": "http://localhost:3000/site/view/index.html",
-      "views": 2,
-      "lastAt": "2026-09-03T21:32:31.028Z"
+      "views": 5,
+      "lastAt": "2026-09-03T23:05:06.665Z"
     },
     "http://localhost:3000/smartphones/": {
       "url": "http://localhost:3000/smartphones/",
-      "views": 1,
-      "lastAt": "2026-09-03T21:32:34.432Z"
+      "views": 5,
+      "lastAt": "2026-09-03T23:01:06.501Z"
     },
     "http://localhost:3000/smartphones/?subcategoria=usados": {
       "url": "http://localhost:3000/smartphones/?subcategoria=usados",
-      "views": 1,
-      "lastAt": "2026-09-03T21:32:38.712Z"
+      "views": 3,
+      "lastAt": "2026-09-03T23:05:18.427Z"
+    },
+    "http://localhost:3000/produto/fonte-original-apple-usb-c-20w/": {
+      "url": "http://localhost:3000/produto/fonte-original-apple-usb-c-20w/",
+      "views": 2,
+      "lastAt": "2026-09-03T23:00:32.442Z"
+    },
+    "http://localhost:3000/produto/motorola-moto-g55-5g-256gb-16gb-8gb-ram-8gb-ram-boost/": {
+      "url": "http://localhost:3000/produto/motorola-moto-g55-5g-256gb-16gb-8gb-ram-8gb-ram-boost/",
+      "views": 2,
+      "lastAt": "2026-09-03T23:00:45.308Z"
+    },
+    "http://localhost:3000/produto/motorola-edge-70-5g-256gb-24gbram/": {
+      "url": "http://localhost:3000/produto/motorola-edge-70-5g-256gb-24gbram/",
+      "views": 2,
+      "lastAt": "2026-09-03T23:00:51.262Z"
+    },
+    "http://localhost:3000/produto/celular-usado-samsung-s23-fe-128gb/": {
+      "url": "http://localhost:3000/produto/celular-usado-samsung-s23-fe-128gb/",
+      "views": 2,
+      "lastAt": "2026-09-03T23:01:01.653Z"
+    },
+    "http://localhost:3000/eletronicos/": {
+      "url": "http://localhost:3000/eletronicos/",
+      "views": 2,
+      "lastAt": "2026-09-03T23:01:32.223Z"
+    },
+    "http://localhost:3000/produto/playstation-5-digital-1tb/": {
+      "url": "http://localhost:3000/produto/playstation-5-digital-1tb/",
+      "views": 2,
+      "lastAt": "2026-09-03T23:01:30.079Z"
+    },
+    "http://localhost:3000/produto/motorola-moto-z3-play-64gb-4gb-ram-4g-nfc-usado/": {
+      "url": "http://localhost:3000/produto/motorola-moto-z3-play-64gb-4gb-ram-4g-nfc-usado/",
+      "views": 2,
+      "lastAt": "2026-09-03T23:05:16.064Z"
     }
   },
   "devices": {},
@@ -73,6 +175,260 @@
       "referrer": "http://localhost:3000/smartphones/",
       "device": "desktop",
       "viewport": "1920x869",
+      "language": "pt-BR",
+      "term": ""
+    },
+    {
+      "at": "2026-09-03T23:00:28.985Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/site/view/index.html",
+      "referrer": "http://localhost:3000/site",
+      "device": "desktop",
+      "viewport": "1536x695",
+      "language": "pt-BR",
+      "term": ""
+    },
+    {
+      "at": "2026-09-03T23:00:32.437Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/produto/fonte-original-apple-usb-c-20w/",
+      "referrer": "http://localhost:3000/site/view/index.html",
+      "device": "desktop",
+      "viewport": "1536x695",
+      "language": "pt-BR",
+      "term": ""
+    },
+    {
+      "at": "2026-09-03T23:00:32.442Z",
+      "type": "product_view",
+      "url": "http://localhost:3000/produto/fonte-original-apple-usb-c-20w/",
+      "referrer": "http://localhost:3000/site/view/index.html",
+      "device": "desktop",
+      "viewport": "1536x695",
+      "language": "pt-BR",
+      "product": {
+        "slug": "fonte-original-apple-usb-c-20w",
+        "name": "Produto"
+      },
+      "term": ""
+    },
+    {
+      "at": "2026-09-03T23:00:42.969Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/smartphones/",
+      "referrer": "http://localhost:3000/produto/fonte-original-apple-usb-c-20w/",
+      "device": "desktop",
+      "viewport": "1536x695",
+      "language": "pt-BR",
+      "term": ""
+    },
+    {
+      "at": "2026-09-03T23:00:45.304Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/produto/motorola-moto-g55-5g-256gb-16gb-8gb-ram-8gb-ram-boost/",
+      "referrer": "http://localhost:3000/smartphones/",
+      "device": "desktop",
+      "viewport": "1536x695",
+      "language": "pt-BR",
+      "term": ""
+    },
+    {
+      "at": "2026-09-03T23:00:45.308Z",
+      "type": "product_view",
+      "url": "http://localhost:3000/produto/motorola-moto-g55-5g-256gb-16gb-8gb-ram-8gb-ram-boost/",
+      "referrer": "http://localhost:3000/smartphones/",
+      "device": "desktop",
+      "viewport": "1536x695",
+      "language": "pt-BR",
+      "product": {
+        "slug": "motorola-moto-g55-5g-256gb-16gb-8gb-ram-8gb-ram-boost",
+        "name": "Produto"
+      },
+      "term": ""
+    },
+    {
+      "at": "2026-09-03T23:00:49.226Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/smartphones/",
+      "referrer": "http://localhost:3000/produto/fonte-original-apple-usb-c-20w/",
+      "device": "desktop",
+      "viewport": "1536x695",
+      "language": "pt-BR",
+      "term": ""
+    },
+    {
+      "at": "2026-09-03T23:00:51.258Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/produto/motorola-edge-70-5g-256gb-24gbram/",
+      "referrer": "http://localhost:3000/smartphones/",
+      "device": "desktop",
+      "viewport": "1536x695",
+      "language": "pt-BR",
+      "term": ""
+    },
+    {
+      "at": "2026-09-03T23:00:51.262Z",
+      "type": "product_view",
+      "url": "http://localhost:3000/produto/motorola-edge-70-5g-256gb-24gbram/",
+      "referrer": "http://localhost:3000/smartphones/",
+      "device": "desktop",
+      "viewport": "1536x695",
+      "language": "pt-BR",
+      "product": {
+        "slug": "motorola-edge-70-5g-256gb-24gbram",
+        "name": "Produto"
+      },
+      "term": ""
+    },
+    {
+      "at": "2026-09-03T23:00:54.456Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/smartphones/",
+      "referrer": "http://localhost:3000/produto/fonte-original-apple-usb-c-20w/",
+      "device": "desktop",
+      "viewport": "1536x695",
+      "language": "pt-BR",
+      "term": ""
+    },
+    {
+      "at": "2026-09-03T23:01:01.648Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/produto/celular-usado-samsung-s23-fe-128gb/",
+      "referrer": "http://localhost:3000/smartphones/",
+      "device": "desktop",
+      "viewport": "1536x695",
+      "language": "pt-BR",
+      "term": ""
+    },
+    {
+      "at": "2026-09-03T23:01:01.653Z",
+      "type": "product_view",
+      "url": "http://localhost:3000/produto/celular-usado-samsung-s23-fe-128gb/",
+      "referrer": "http://localhost:3000/smartphones/",
+      "device": "desktop",
+      "viewport": "1536x695",
+      "language": "pt-BR",
+      "product": {
+        "slug": "celular-usado-samsung-s23-fe-128gb",
+        "name": "Produto"
+      },
+      "term": ""
+    },
+    {
+      "at": "2026-09-03T23:01:06.501Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/smartphones/",
+      "referrer": "http://localhost:3000/produto/fonte-original-apple-usb-c-20w/",
+      "device": "desktop",
+      "viewport": "1536x695",
+      "language": "pt-BR",
+      "term": ""
+    },
+    {
+      "at": "2026-09-03T23:01:22.809Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/site/view/index.html",
+      "referrer": "http://localhost:3000/smartphones/",
+      "device": "desktop",
+      "viewport": "1536x695",
+      "language": "pt-BR",
+      "term": ""
+    },
+    {
+      "at": "2026-09-03T23:01:23.727Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/eletronicos/",
+      "referrer": "http://localhost:3000/site/view/index.html",
+      "device": "desktop",
+      "viewport": "1536x695",
+      "language": "pt-BR",
+      "term": ""
+    },
+    {
+      "at": "2026-09-03T23:01:30.074Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/produto/playstation-5-digital-1tb/",
+      "referrer": "http://localhost:3000/eletronicos/",
+      "device": "desktop",
+      "viewport": "1536x695",
+      "language": "pt-BR",
+      "term": ""
+    },
+    {
+      "at": "2026-09-03T23:01:30.079Z",
+      "type": "product_view",
+      "url": "http://localhost:3000/produto/playstation-5-digital-1tb/",
+      "referrer": "http://localhost:3000/eletronicos/",
+      "device": "desktop",
+      "viewport": "1536x695",
+      "language": "pt-BR",
+      "product": {
+        "slug": "playstation-5-digital-1tb",
+        "name": "Produto"
+      },
+      "term": ""
+    },
+    {
+      "at": "2026-09-03T23:01:32.223Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/eletronicos/",
+      "referrer": "http://localhost:3000/site/view/index.html",
+      "device": "desktop",
+      "viewport": "1536x695",
+      "language": "pt-BR",
+      "term": ""
+    },
+    {
+      "at": "2026-09-03T23:05:06.665Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/site/view/index.html",
+      "referrer": "http://localhost:3000/site",
+      "device": "desktop",
+      "viewport": "1536x695",
+      "language": "pt-BR",
+      "term": ""
+    },
+    {
+      "at": "2026-09-03T23:05:08.294Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/smartphones/?subcategoria=usados",
+      "referrer": "http://localhost:3000/site/view/index.html",
+      "device": "desktop",
+      "viewport": "1536x695",
+      "language": "pt-BR",
+      "term": ""
+    },
+    {
+      "at": "2026-09-03T23:05:16.055Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/produto/motorola-moto-z3-play-64gb-4gb-ram-4g-nfc-usado/",
+      "referrer": "http://localhost:3000/smartphones/?subcategoria=usados",
+      "device": "desktop",
+      "viewport": "1536x695",
+      "language": "pt-BR",
+      "term": ""
+    },
+    {
+      "at": "2026-09-03T23:05:16.064Z",
+      "type": "product_view",
+      "url": "http://localhost:3000/produto/motorola-moto-z3-play-64gb-4gb-ram-4g-nfc-usado/",
+      "referrer": "http://localhost:3000/smartphones/?subcategoria=usados",
+      "device": "desktop",
+      "viewport": "1536x695",
+      "language": "pt-BR",
+      "product": {
+        "slug": "motorola-moto-z3-play-64gb-4gb-ram-4g-nfc-usado",
+        "name": "Produto"
+      },
+      "term": ""
+    },
+    {
+      "at": "2026-09-03T23:05:18.428Z",
+      "type": "page_view",
+      "url": "http://localhost:3000/smartphones/?subcategoria=usados",
+      "referrer": "http://localhost:3000/site/view/index.html",
+      "device": "desktop",
+      "viewport": "1536x695",
       "language": "pt-BR",
       "term": ""
     }
