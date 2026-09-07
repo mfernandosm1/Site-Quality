@@ -1,0 +1,74 @@
+# Quality Celulares — hardening e performance de produção
+# Regras conservadoras: não alteram rotas da loja nem a navegação.
+
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+
+  # Conteúdo operacional/interno nunca deve ser servido pelo site público.
+  RewriteRule ^backups(?:/|$) - [R=404,L,NC]
+  RewriteRule ^content/erp(?:/|$) - [R=404,L,NC]
+  RewriteRule ^content/(?:analytics|publish|personalizacao-history|panel-theme)\.json$ - [R=404,L,NC]
+
+  # Arquivos de desenvolvimento/backup comuns.
+  RewriteRule (^|/)(?:\.env|\.git|\.svn)(?:/|$) - [R=404,L,NC]
+  RewriteRule \.(?:bak|backup|old|orig|sql|sqlite|log|map|zip|tar|tgz|gz|7z)$ - [R=404,L,NC]
+</IfModule>
+
+<IfModule mod_headers.c>
+  # Headers que aumentam segurança sem interferir nos scripts atuais.
+  Header always set X-Content-Type-Options "nosniff"
+  Header always set X-Frame-Options "SAMEORIGIN"
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+  Header always set Permissions-Policy "camera=(), microphone=(), geolocation=(), payment=(), usb=()"
+  Header always unset X-Powered-By
+
+  # HTML deve revalidar para publicar mudanças imediatamente.
+  <FilesMatch "\.(?:html?|php)$">
+    Header set Cache-Control "no-cache, must-revalidate"
+  </FilesMatch>
+
+  # Catálogo e configurações mudam com frequência; cache curto e revalidação.
+  <FilesMatch "\.json$">
+    Header set Cache-Control "public, max-age=60, must-revalidate"
+  </FilesMatch>
+
+  # Assets versionados podem ficar mais tempo no navegador.
+  <FilesMatch "\.(?:css|js)$">
+    Header set Cache-Control "public, max-age=604800, stale-while-revalidate=86400"
+  </FilesMatch>
+
+  <FilesMatch "\.(?:png|jpe?g|gif|webp|avif|svg|ico|woff2?|ttf)$">
+    Header set Cache-Control "public, max-age=2592000, stale-while-revalidate=604800"
+  </FilesMatch>
+</IfModule>
+
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/plain text/html text/css text/javascript application/javascript application/json application/ld+json application/xml image/svg+xml
+</IfModule>
+
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresDefault "access plus 5 minutes"
+  ExpiresByType text/html "access plus 0 seconds"
+  ExpiresByType application/json "access plus 1 minute"
+  ExpiresByType text/css "access plus 7 days"
+  ExpiresByType application/javascript "access plus 7 days"
+  ExpiresByType image/jpeg "access plus 30 days"
+  ExpiresByType image/png "access plus 30 days"
+  ExpiresByType image/webp "access plus 30 days"
+  ExpiresByType image/avif "access plus 30 days"
+  ExpiresByType image/svg+xml "access plus 30 days"
+  ExpiresByType image/x-icon "access plus 30 days"
+  ExpiresByType font/woff2 "access plus 30 days"
+</IfModule>
+
+# Fallback sem mod_rewrite: bloqueia arquivos de backup/desenvolvimento por extensão.
+<FilesMatch "(?i)\.(?:bak|backup|old|orig|sql|sqlite|log|map|zip|tar|tgz|gz|7z)$">
+  <IfModule mod_authz_core.c>
+    Require all denied
+  </IfModule>
+  <IfModule !mod_authz_core.c>
+    Order allow,deny
+    Deny from all
+  </IfModule>
+</FilesMatch>

@@ -971,7 +971,7 @@
           '<div class="quality-card-image-wrap">' +
           qualityProductActionsHtml(p, productSlug ? '/produto/' + encodeURIComponent(productSlug) + '/' : '#') +
           (hasDetailsPage ? '<a class="quality-card-image-link" href="' + detailUrl + '" aria-label="Ver detalhes de ' + escapeHtml(productName || 'produto') + '">' : '') +
-          '<img src="' + escapeHtml(productImage) + '" onerror="this.onerror=null;this.src=\'' + escapeHtml(productImageFallback) + '\';" alt="' + escapeHtml(productName) + '">' +
+          '<img src="' + escapeHtml(productImage) + '" onerror="this.onerror=null;this.src=\'' + escapeHtml(productImageFallback) + '\';" alt="' + escapeHtml(productName) + '" loading="lazy" decoding="async">' +
           (hasDetailsPage ? '</a>' : '') +
           productTagsHtml(p) +
           '</div>' +
