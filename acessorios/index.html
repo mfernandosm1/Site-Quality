@@ -21,9 +21,6 @@
     .product-card-color-dot{width:16px;height:16px;border-radius:50%;border:1px solid #cbd5e1;box-shadow:0 0 0 1px #fff inset;}
     .product-card-variation-tags{display:flex;justify-content:center;gap:5px;flex-wrap:wrap;}
     .product-card-variation-tags span{border:1px solid #e5e7eb;background:#f9fafb;border-radius:999px;padding:3px 7px;font-size:11px;font-weight:700;color:#374151;}
-    #menu-toggle,#menu-close,#menu-overlay,#mobile-menu a,.btn-details,.quality-card-image-link{touch-action:manipulation;-webkit-tap-highlight-color:transparent;}
-    #menu-toggle,#menu-close,#menu-overlay{cursor:pointer;}
-    /* 20260907 category mobile interactions */
   </style>
 </head>
 <body>
@@ -351,7 +348,7 @@
 })();
 </script>
 
-<!-- O menu de categorias é sincronizado exclusivamente por /js/catalog-menu.js. -->
+<!-- Menu de categorias estático nesta página; evita mutação do DOM durante interações mobile. -->
 <script>
 (function(){
   var isLocalPreview = window.location.hostname === 'localhost' && window.location.port === '3000';
@@ -941,7 +938,7 @@
   });
 })();
 </script>
-<script src="/js/category-ui.js?v=20260907-4"></script>
+<script src="/js/category-ui.js?v=20260907-5"></script>
 
 <script>
 /* Quality V8.2.2.4 - Menu Favoritos global + remover todos */

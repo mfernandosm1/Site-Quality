@@ -1,8 +1,8 @@
 (function(){
   'use strict';
 
-  if (window.__qualityCategoryUIV1) return;
-  window.__qualityCategoryUIV1 = true;
+  if (window.__qualityCategoryUIV3) return;
+  window.__qualityCategoryUIV3 = true;
 
   function closest(target, selector){
     return target && target.closest ? target.closest(selector) : null;
@@ -11,7 +11,9 @@
   function getMenuParts(){
     return {
       menu: document.getElementById('mobile-menu'),
-      overlay: document.getElementById('menu-overlay')
+      overlay: document.getElementById('menu-overlay'),
+      open: document.getElementById('menu-toggle'),
+      close: document.getElementById('menu-close')
     };
   }
 
@@ -20,10 +22,7 @@
     if (!parts.menu) return;
     parts.menu.classList.add('open');
     parts.menu.setAttribute('aria-hidden', 'false');
-    if (parts.overlay) {
-      parts.overlay.classList.add('active');
-      parts.overlay.classList.add('show');
-    }
+    if (parts.overlay) parts.overlay.classList.add('active');
   }
 
   function closeMenu(){
@@ -31,58 +30,32 @@
     if (!parts.menu) return;
     parts.menu.classList.remove('open');
     parts.menu.setAttribute('aria-hidden', 'true');
-    if (parts.overlay) {
-      parts.overlay.classList.remove('active');
-      parts.overlay.classList.remove('show');
-    }
+    if (parts.overlay) parts.overlay.classList.remove('active');
   }
 
-  var lastPointerHandledAt = 0;
-  var lastPointerTarget = null;
-
-  function menuActionFromTarget(target){
-    if (closest(target, '#menu-toggle')) return 'open';
-    if (closest(target, '#menu-close')) return 'close';
-    if (closest(target, '#menu-overlay')) return 'close';
-    if (closest(target, '#mobile-menu a')) return 'link';
-    return '';
+  /*
+   * Header mobile: somente os três controles do menu recebem JavaScript.
+   * Links continuam sendo links nativos; não fechamos o menu em pointerup,
+   * porque mover o painel antes do click pode cancelar a navegação em mobile.
+   */
+  function bindMenu(){
+    var parts = getMenuParts();
+    if (parts.open) parts.open.addEventListener('click', function(ev){
+      ev.preventDefault();
+      openMenu();
+    });
+    if (parts.close) parts.close.addEventListener('click', function(ev){
+      ev.preventDefault();
+      closeMenu();
+    });
+    if (parts.overlay) parts.overlay.addEventListener('click', function(ev){
+      ev.preventDefault();
+      closeMenu();
+    });
+    document.addEventListener('keydown', function(ev){
+      if (ev.key === 'Escape') closeMenu();
+    });
   }
-
-  function runMenuAction(action){
-    if (action === 'open') openMenu();
-    else if (action === 'close' || action === 'link') closeMenu();
-  }
-
-  // Pointerup responde imediatamente ao toque em Chrome/Opera mobile.
-  // O click continua como fallback para teclado e navegadores sem Pointer Events.
-  document.addEventListener('pointerup', function(ev){
-    var action = menuActionFromTarget(ev.target);
-    if (!action) return;
-    lastPointerHandledAt = Date.now();
-    lastPointerTarget = ev.target;
-    runMenuAction(action);
-    if (action === 'open' || action === 'close') ev.preventDefault();
-  }, false);
-
-  document.addEventListener('click', function(ev){
-    var action = menuActionFromTarget(ev.target);
-    if (!action) return;
-
-    // Evita executar duas vezes quando o mesmo toque já foi tratado em pointerup.
-    if (lastPointerTarget && Date.now() - lastPointerHandledAt < 700) {
-      if (action === 'open' || action === 'close') ev.preventDefault();
-      lastPointerTarget = null;
-      return;
-    }
-
-    runMenuAction(action);
-    if (action === 'open' || action === 'close') ev.preventDefault();
-  }, false);
-
-  // Escape fecha o menu em desktop/teclado e não interfere no mobile.
-  document.addEventListener('keydown', function(ev){
-    if (ev.key === 'Escape') closeMenu();
-  });
 
   function normalizeSearch(value){
     return (value || '')
@@ -119,7 +92,8 @@
 
     var found = false;
     cards.forEach(function(card){
-      var title = normalizeSearch((card.querySelector('h3') || {}).textContent || '');
+      var titleNode = card.querySelector('h3');
+      var title = normalizeSearch(titleNode ? titleNode.textContent : '');
       var match = title.indexOf(term) !== -1;
       card.style.display = match ? 'flex' : 'none';
       if (match) found = true;
@@ -143,7 +117,7 @@
       });
       if (product) {
         var slug = product.slug || product.id;
-        if (slug) window.location.href = '/produto/' + encodeURIComponent(slug) + '/';
+        if (slug) window.location.assign('/produto/' + encodeURIComponent(slug) + '/');
         return;
       }
       var category = categories.find(function(c){
@@ -151,7 +125,7 @@
                normalizeSearch(c.slug || '').indexOf(term) !== -1;
       });
       if (category && category.slug) {
-        window.location.href = '/' + encodeURIComponent(category.slug) + '/';
+        window.location.assign('/' + encodeURIComponent(category.slug) + '/');
         return;
       }
       showSearchMessage('Nenhum produto encontrado.');
@@ -176,21 +150,120 @@
     if (mobileButton && mobileInput) {
       mobileButton.addEventListener('click', function(){
         doSearch(mobileInput.value);
-        closeMenu();
       });
       mobileInput.addEventListener('keydown', function(ev){
-        if (ev.key === 'Enter') {
-          doSearch(mobileInput.value);
-          closeMenu();
-        }
+        if (ev.key === 'Enter') doSearch(mobileInput.value);
       });
     }
   }
 
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', bindSearch, {once:true});
-  } else {
+  /*
+   * Fallback defensivo para navegação interna nas categorias.
+   * Não substitui o comportamento nativo do <a>. Apenas garante que um toque
+   * válido em logo/categoria/produto navegue mesmo se outro script cancelar o click.
+   */
+  var touchNav = null;
+  var NAV_SELECTOR = [
+    'a[data-home-link]',
+    '#nav-desktop a.cat-link',
+    '#nav-desktop a.cat-sub-link',
+    '#nav-mobile a.cat-link',
+    '#nav-mobile a.cat-sub-link',
+    'a.btn-details[href*="/produto/"]',
+    'a.quality-card-image-link[href*="/produto/"]'
+  ].join(',');
+
+  function safeInternalUrl(anchor){
+    if (!anchor) return '';
+    var raw = anchor.getAttribute('href') || '';
+    if (!raw || raw.charAt(0) === '#' || /^javascript:/i.test(raw)) return '';
+    try {
+      var url = new URL(raw, window.location.href);
+      if (url.origin !== window.location.origin) return '';
+      return url.href;
+    } catch (_) {
+      return '';
+    }
+  }
+
+  function navAnchorFromTarget(target){
+    return closest(target, NAV_SELECTOR);
+  }
+
+  function bindNavigationFallback(){
+    document.addEventListener('pointerdown', function(ev){
+      if (ev.pointerType !== 'touch' && ev.pointerType !== 'pen') return;
+      var anchor = navAnchorFromTarget(ev.target);
+      var url = safeInternalUrl(anchor);
+      if (!url) return;
+      touchNav = {
+        pointerId: ev.pointerId,
+        x: ev.clientX,
+        y: ev.clientY,
+        url: url,
+        moved: false
+      };
+    }, true);
+
+    document.addEventListener('pointermove', function(ev){
+      if (!touchNav || touchNav.pointerId !== ev.pointerId) return;
+      if (Math.abs(ev.clientX - touchNav.x) > 12 || Math.abs(ev.clientY - touchNav.y) > 12) {
+        touchNav.moved = true;
+      }
+    }, true);
+
+    document.addEventListener('pointercancel', function(ev){
+      if (touchNav && touchNav.pointerId === ev.pointerId) touchNav = null;
+    }, true);
+
+    document.addEventListener('pointerup', function(ev){
+      if (!touchNav || touchNav.pointerId !== ev.pointerId) return;
+      var pending = touchNav;
+      touchNav = null;
+      if (pending.moved) return;
+
+      var anchor = navAnchorFromTarget(ev.target);
+      var url = safeInternalUrl(anchor);
+      if (!url || url !== pending.url) return;
+
+      // Navega no pointerup para não depender do click sintetizado do navegador.
+      ev.preventDefault();
+      window.location.assign(url);
+    }, true);
+
+    document.addEventListener('click', function(ev){
+      if (ev.defaultPrevented) {
+        var preventedAnchor = navAnchorFromTarget(ev.target);
+        var preventedUrl = safeInternalUrl(preventedAnchor);
+        if (preventedUrl) window.location.assign(preventedUrl);
+        return;
+      }
+
+      var anchor = navAnchorFromTarget(ev.target);
+      var url = safeInternalUrl(anchor);
+      if (!url) return;
+      if (ev.button !== undefined && ev.button !== 0) return;
+      if (ev.metaKey || ev.ctrlKey || ev.shiftKey || ev.altKey) return;
+
+      // O link nativo continua responsável pela navegação. Se algum listener
+      // cancelar o evento depois deste ponto, o microtask de segurança assume.
+      var before = window.location.href;
+      setTimeout(function(){
+        if (window.location.href === before) window.location.assign(url);
+      }, 0);
+    }, true);
+  }
+
+  function init(){
+    bindMenu();
     bindSearch();
+    bindNavigationFallback();
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init, {once:true});
+  } else {
+    init();
   }
 
   window.qualityCategoryCloseMenu = closeMenu;
