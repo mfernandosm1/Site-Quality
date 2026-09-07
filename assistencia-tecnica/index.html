@@ -39,14 +39,11 @@
 @media(max-width:850px){.nav-desktop .cat-menu-group{display:none}}
 </style>
 <style>
-/* QUALITY_CATEGORY_MOBILE_MENU_V4: controle CSS puro, sem dependência de eventos JS. */
-.mobile-menu-state{position:fixed;width:1px;height:1px;opacity:0;pointer-events:none;left:-9999px;top:-9999px}
-.mobile-menu-state:checked ~ .mobile-menu{transform:translateX(0)}
-.mobile-menu-state:checked ~ .menu-overlay{display:block}
+/* QUALITY_CATEGORY_MOBILE_MENU_V5: usa a mesma mecânica funcional do index. */
 @media(max-width:991px){
   .menu-toggle,.menu-close{
-    min-width:44px;min-height:44px;display:flex;align-items:center;justify-content:center;
-    cursor:pointer;touch-action:manipulation;-webkit-tap-highlight-color:transparent;user-select:none;-webkit-user-select:none;
+    min-width:48px;min-height:48px;display:flex;align-items:center;justify-content:center;
+    cursor:pointer;touch-action:manipulation;-webkit-tap-highlight-color:transparent;
   }
   .menu-toggle{position:relative;z-index:2201}
   .menu-close{position:relative;z-index:2202}
@@ -359,6 +356,51 @@
   } else {
     protectMenu();
   }
+})();
+</script>
+
+<script>
+/* QUALITY_CATEGORY_MENU_V5
+   Somente abre/fecha o menu. Links e produtos continuam 100% nativos. */
+(function(){
+  if (window.__qualityCategoryMenuV5) return;
+  window.__qualityCategoryMenuV5 = true;
+
+  var menuToggle = document.getElementById('menu-toggle');
+  var menuClose = document.getElementById('menu-close');
+  var mobileMenu = document.getElementById('mobile-menu');
+  var overlay = document.getElementById('menu-overlay');
+  if (!menuToggle || !menuClose || !mobileMenu || !overlay) return;
+
+  function openMenu(){
+    mobileMenu.classList.add('open');
+    mobileMenu.setAttribute('aria-hidden', 'false');
+    overlay.classList.add('active');
+    menuToggle.setAttribute('aria-expanded', 'true');
+  }
+
+  function closeMenu(){
+    mobileMenu.classList.remove('open');
+    mobileMenu.setAttribute('aria-hidden', 'true');
+    overlay.classList.remove('active');
+    menuToggle.setAttribute('aria-expanded', 'false');
+  }
+
+  menuToggle.addEventListener('click', function(ev){
+    ev.preventDefault();
+    openMenu();
+  });
+  menuClose.addEventListener('click', function(ev){
+    ev.preventDefault();
+    closeMenu();
+  });
+  overlay.addEventListener('click', function(ev){
+    ev.preventDefault();
+    closeMenu();
+  });
+  document.addEventListener('keydown', function(ev){
+    if (ev.key === 'Escape') closeMenu();
+  });
 })();
 </script>
 
