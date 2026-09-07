@@ -1,61 +1,18 @@
 (function(){
   'use strict';
 
-  if (window.__qualityCategoryUIV3) return;
-  window.__qualityCategoryUIV3 = true;
+  if (window.__qualityCategoryUIV4) return;
+  window.__qualityCategoryUIV4 = true;
 
   function closest(target, selector){
     return target && target.closest ? target.closest(selector) : null;
   }
 
-  function getMenuParts(){
-    return {
-      menu: document.getElementById('mobile-menu'),
-      overlay: document.getElementById('menu-overlay'),
-      open: document.getElementById('menu-toggle'),
-      close: document.getElementById('menu-close')
-    };
-  }
-
-  function openMenu(){
-    var parts = getMenuParts();
-    if (!parts.menu) return;
-    parts.menu.classList.add('open');
-    parts.menu.setAttribute('aria-hidden', 'false');
-    if (parts.overlay) parts.overlay.classList.add('active');
-  }
-
-  function closeMenu(){
-    var parts = getMenuParts();
-    if (!parts.menu) return;
-    parts.menu.classList.remove('open');
-    parts.menu.setAttribute('aria-hidden', 'true');
-    if (parts.overlay) parts.overlay.classList.remove('active');
-  }
-
   /*
-   * Header mobile: somente os três controles do menu recebem JavaScript.
-   * Links continuam sendo links nativos; não fechamos o menu em pointerup,
-   * porque mover o painel antes do click pode cancelar a navegação em mobile.
+   * O menu mobile das categorias é controlado por CSS/checkbox no HTML.
+   * Não registramos listeners de abrir/fechar aqui: isso elimina diferenças
+   * de click/pointer entre Safari e navegadores Chromium no iPhone.
    */
-  function bindMenu(){
-    var parts = getMenuParts();
-    if (parts.open) parts.open.addEventListener('click', function(ev){
-      ev.preventDefault();
-      openMenu();
-    });
-    if (parts.close) parts.close.addEventListener('click', function(ev){
-      ev.preventDefault();
-      closeMenu();
-    });
-    if (parts.overlay) parts.overlay.addEventListener('click', function(ev){
-      ev.preventDefault();
-      closeMenu();
-    });
-    document.addEventListener('keydown', function(ev){
-      if (ev.key === 'Escape') closeMenu();
-    });
-  }
 
   function normalizeSearch(value){
     return (value || '')
@@ -255,7 +212,6 @@
   }
 
   function init(){
-    bindMenu();
     bindSearch();
     bindNavigationFallback();
   }
@@ -266,5 +222,4 @@
     init();
   }
 
-  window.qualityCategoryCloseMenu = closeMenu;
 })();

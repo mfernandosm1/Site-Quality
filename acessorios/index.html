@@ -39,6 +39,20 @@
 @media(max-width:850px){.nav-desktop .cat-menu-group{display:none}}
 </style>
 <style>
+/* QUALITY_CATEGORY_MOBILE_MENU_V4: controle CSS puro, sem dependência de eventos JS. */
+.mobile-menu-state{position:fixed;width:1px;height:1px;opacity:0;pointer-events:none;left:-9999px;top:-9999px}
+.mobile-menu-state:checked ~ .mobile-menu{transform:translateX(0)}
+.mobile-menu-state:checked ~ .menu-overlay{display:block}
+@media(max-width:991px){
+  .menu-toggle,.menu-close{
+    min-width:44px;min-height:44px;display:flex;align-items:center;justify-content:center;
+    cursor:pointer;touch-action:manipulation;-webkit-tap-highlight-color:transparent;user-select:none;-webkit-user-select:none;
+  }
+  .menu-toggle{position:relative;z-index:2201}
+  .menu-close{position:relative;z-index:2202}
+}
+</style>
+<style>
 .cat-menu-group{position:relative;display:inline-flex;align-items:center;align-self:stretch}
 .cat-menu-group>.cat-link{display:flex;align-items:center;height:100%;white-space:nowrap}
 .cat-menu-caret{font-size:10px;margin-left:3px;opacity:.8}
@@ -938,7 +952,7 @@
   });
 })();
 </script>
-<script src="/js/category-ui.js?v=20260907-5"></script>
+<script src="/js/category-ui.js?v=20260907-6"></script>
 
 <script>
 /* Quality V8.2.2.4 - Menu Favoritos global + remover todos */
