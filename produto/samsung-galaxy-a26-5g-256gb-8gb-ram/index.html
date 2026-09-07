@@ -2,14 +2,14 @@
   <base href="/">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Samsung Galaxy A26 5g 256gb 8gb Ram | Quality Celulares</title>
+  <title>Samsung Galaxy A26 5G 256GB 8GB RAM | Quality</title>
   <link rel="icon" href="/images/favicon_otimizado.ico?v=3">
 <link rel="shortcut icon" href="/images/favicon_otimizado.ico?v=3">
-  <meta name="description" content="Confira Samsung Galaxy A26 5g 256gb 8gb Ram na Quality Celulares. Consulte disponibilidade, garantia e condições pelo WhatsApp.">
+  <meta name="description" content="Galaxy A26 5G 256GB com 8GB RAM, tela Super AMOLED 6,7” 120Hz, câmera 50MP com OIS, bateria 5.000mAh e IP67. Confira na Quality.">
   <meta name="robots" content="index, follow">
   <meta property="og:type" content="product">
-  <meta property="og:title" content="Samsung Galaxy A26 5g 256gb 8gb Ram | Quality Celulares">
-  <meta property="og:description" content="Confira Samsung Galaxy A26 5g 256gb 8gb Ram na Quality Celulares. Consulte disponibilidade, garantia e condições pelo WhatsApp.">
+  <meta property="og:title" content="Samsung Galaxy A26 5G 256GB 8GB RAM | Quality">
+  <meta property="og:description" content="Galaxy A26 5G 256GB com 8GB RAM, tela Super AMOLED 6,7” 120Hz, câmera 50MP com OIS, bateria 5.000mAh e IP67. Confira na Quality.">
   <meta property="og:image" content="https://www.qualitycel.com.br/images/Samsung a26.jpeg">
   <meta property="og:url" content="https://www.qualitycel.com.br/produto/samsung-galaxy-a26-5g-256gb-8gb-ram/">
   <meta name="twitter:card" content="summary_large_image">
@@ -332,7 +332,7 @@
     gtag('js', new Date());
     gtag('config', 'G-9HPD9XCELH');
   </script>
-<meta property="og:image:alt" content="Samsung Galaxy A26 5g 256gb 8gb Ram"><meta name="twitter:title" content="Samsung Galaxy A26 5g 256gb 8gb Ram | Quality Celulares"><meta name="twitter:description" content="Confira Samsung Galaxy A26 5g 256gb 8gb Ram na Quality Celulares. Consulte disponibilidade, garantia e condições pelo WhatsApp."><meta name="twitter:image" content="https://www.qualitycel.com.br/images/Samsung a26.jpeg"></head>
+<meta property="og:image:alt" content="Samsung Galaxy A26 5g 256gb 8gb Ram"><meta name="twitter:title" content="Samsung Galaxy A26 5G 256GB 8GB RAM | Quality"><meta name="twitter:description" content="Galaxy A26 5G 256GB com 8GB RAM, tela Super AMOLED 6,7” 120Hz, câmera 50MP com OIS, bateria 5.000mAh e IP67. Confira na Quality."><meta name="twitter:image" content="https://www.qualitycel.com.br/images/Samsung a26.jpeg"></head>
 <body>
 <div id="header"></div>
 
@@ -1026,15 +1026,19 @@
 
   function applyProductSeo(product, name, image, priceValue, showPrice, seoConfig){
     const seo = Object.assign(defaultSeoConfig(), seoConfig || {});
+    const storeSeo = product.virtualStore || {};
     const description = stripHtml(product.descriptionShort || product.descriptionLong || ('Confira ' + name + ' na Quality Celulares.'));
+    const configuredTitle = stripHtml(storeSeo.seoTitle || product.seoTitle || '').trim();
+    const configuredDescription = stripHtml(storeSeo.seoDescription || product.seoDescription || '').trim();
+    const pageTitle = configuredTitle || (name + ' – Quality Celulares');
     const productSlug = product.slug || product.id;
     const canonicalUrl = productSlug
       ? window.location.origin + '/produto/' + encodeURIComponent(productSlug) + '/'
       : window.location.origin + window.location.pathname + '?id=' + encodeURIComponent(product.id);
     const absoluteImage = absoluteUrl(image);
-    const safeDescription = description.slice(0, 160);
+    const safeDescription = (configuredDescription || description).slice(0, 160);
 
-    document.title = name + ' – Quality Celulares';
+    document.title = pageTitle;
     setMetaTag('description', safeDescription);
 
     if (seo.enableCanonical !== false) {
@@ -1043,12 +1047,12 @@
 
     if (seo.enableOpenGraph !== false) {
       setOg('og:type', 'product');
-      setOg('og:title', name + ' – Quality Celulares');
+      setOg('og:title', pageTitle);
       setOg('og:description', safeDescription);
       setOg('og:image', absoluteImage);
       setOg('og:url', canonicalUrl);
       setTwitter('twitter:card', 'summary_large_image');
-      setTwitter('twitter:title', name + ' – Quality Celulares');
+      setTwitter('twitter:title', pageTitle);
       setTwitter('twitter:description', safeDescription);
       setTwitter('twitter:image', absoluteImage);
     }
@@ -1096,6 +1100,9 @@
         logo: absoluteUrl(seo.defaultOgImage || 'images/logo.png'),
         description: seo.siteDescription || 'Loja especializada em smartphones e acessórios.'
       };
+      if (Array.isArray(seo.areaServed) && seo.areaServed.length) {
+        org.areaServed = seo.areaServed.filter(Boolean);
+      }
       setJsonLd('organization-schema-jsonld', org);
     }
 
