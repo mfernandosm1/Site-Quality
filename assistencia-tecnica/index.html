@@ -13,8 +13,7 @@
   <meta property="og:url" content="https://www.qualitycel.com.br/assistencia-tecnica/">
   <meta name="twitter:card" content="summary_large_image">
   <link rel="canonical" href="https://www.qualitycel.com.br/assistencia-tecnica/">
-  <link rel="stylesheet" href="/css/style.css">
-  <link rel="stylesheet" href="/site/css/style.css">
+  <link rel="stylesheet" href="/css/style.css?v=20260907-4">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
     .product-card-variations{display:flex;flex-direction:column;align-items:center;gap:6px;margin:7px 0 10px;}
@@ -22,6 +21,9 @@
     .product-card-color-dot{width:16px;height:16px;border-radius:50%;border:1px solid #cbd5e1;box-shadow:0 0 0 1px #fff inset;}
     .product-card-variation-tags{display:flex;justify-content:center;gap:5px;flex-wrap:wrap;}
     .product-card-variation-tags span{border:1px solid #e5e7eb;background:#f9fafb;border-radius:999px;padding:3px 7px;font-size:11px;font-weight:700;color:#374151;}
+    #menu-toggle,#menu-close,#menu-overlay,#mobile-menu a,.btn-details,.quality-card-image-link{touch-action:manipulation;-webkit-tap-highlight-color:transparent;}
+    #menu-toggle,#menu-close,#menu-overlay{cursor:pointer;}
+    /* 20260907 category mobile interactions */
   </style>
 </head>
 <body>
@@ -939,8 +941,7 @@
   });
 })();
 </script>
-<script src="/js/main.js"></script>
-<script src="/site/js/main.js"></script>
+<script src="/js/category-ui.js?v=20260907-4"></script>
 
 <script>
 /* Quality V8.2.2.4 - Menu Favoritos global + remover todos */
