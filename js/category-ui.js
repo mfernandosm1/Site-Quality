@@ -1,18 +1,8 @@
 (function(){
   'use strict';
 
-  if (window.__qualityCategoryUIV5) return;
-  window.__qualityCategoryUIV5 = true;
-
-  function closest(target, selector){
-    return target && target.closest ? target.closest(selector) : null;
-  }
-
-  /*
-   * O menu mobile das categorias é controlado por CSS/checkbox no HTML.
-   * Não registramos listeners de abrir/fechar aqui: isso elimina diferenças
-   * de click/pointer entre Safari e navegadores Chromium no iPhone.
-   */
+  if (window.__qualityCategoryUIV6) return;
+  window.__qualityCategoryUIV6 = true;
 
   function normalizeSearch(value){
     return (value || '')
@@ -38,6 +28,7 @@
     if (term && window.QualityAnalyticsTrack) {
       try { window.QualityAnalyticsTrack('search', {term: term}); } catch (_) {}
     }
+
     var cards = document.querySelectorAll('.product-card');
     var message = document.getElementById('no-results');
 
@@ -104,39 +95,28 @@
     });
   }
 
+  function bindPair(input, button){
+    if (!input || !button) return;
+    if (button.dataset.qualityCategorySearchBound === '1') return;
+    button.dataset.qualityCategorySearchBound = '1';
+
+    button.addEventListener('click', function(){ doSearch(input.value); });
+    input.addEventListener('keydown', function(ev){
+      if (ev.key === 'Enter') doSearch(input.value);
+    });
+  }
+
   function bindSearch(){
-    var desktopInput = document.getElementById('search-input');
-    var desktopButton = document.getElementById('search-button');
-    var mobileInput = document.getElementById('search-input-mobile');
-    var mobileButton = document.getElementById('search-button-mobile');
-
-    if (desktopButton && desktopInput) {
-      desktopButton.addEventListener('click', function(){ doSearch(desktopInput.value); });
-      desktopInput.addEventListener('keydown', function(ev){
-        if (ev.key === 'Enter') doSearch(desktopInput.value);
-      });
-    }
-
-    if (mobileButton && mobileInput) {
-      mobileButton.addEventListener('click', function(){
-        doSearch(mobileInput.value);
-      });
-      mobileInput.addEventListener('keydown', function(ev){
-        if (ev.key === 'Enter') doSearch(mobileInput.value);
-      });
-    }
+    bindPair(document.getElementById('search-input'), document.getElementById('search-button'));
+    bindPair(document.getElementById('search-input-mobile'), document.getElementById('search-button-mobile'));
   }
 
-  // Links de logo, categorias e produtos usam navegação nativa do navegador.
-
-  function init(){
-    bindSearch();
-  }
+  // O header agora é compartilhado com a home e chega de forma assíncrona.
+  document.addEventListener('quality:category-header-ready', bindSearch);
 
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', init, {once:true});
+    document.addEventListener('DOMContentLoaded', bindSearch, {once:true});
   } else {
-    init();
+    bindSearch();
   }
-
 })();
