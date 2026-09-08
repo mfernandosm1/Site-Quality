@@ -61,8 +61,21 @@
       return;
     }
 
+    function fetchFirstJson(urls){
+      var index = 0;
+      function next(){
+        if (index >= urls.length) return Promise.resolve({items:[]});
+        var url = urls[index++];
+        return fetch(url, {cache:'no-store'}).then(function(r){
+          if (!r.ok) throw new Error('Falha ao carregar ' + url);
+          return r.json();
+        }).catch(next);
+      }
+      return next();
+    }
+
     Promise.all([
-      fetch('/content/products.json', {cache:'no-store'}).then(function(r){ return r.ok ? r.json() : {items:[]}; }).catch(function(){ return {items:[]}; }),
+      fetchFirstJson(['/content/catalog-public.json', '/site/content/catalog-public.json', '/content/products.json', '/site/content/products.json']),
       fetch('/content/categories.json', {cache:'no-store'}).then(function(r){ return r.ok ? r.json() : {items:[]}; }).catch(function(){ return {items:[]}; })
     ]).then(function(all){
       var products = all[0].items || [];
