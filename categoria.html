@@ -13,7 +13,7 @@
   <meta property="og:url" content="https://www.qualitycel.com.br/categoria.html">
   <meta name="twitter:card" content="summary_large_image">
   <link rel="canonical" href="https://www.qualitycel.com.br/categoria.html">
-  <link rel="stylesheet" href="/css/style.css?v=20260907-4">
+  <link rel="stylesheet" href="/css/style.css?v=20260908-2">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
     .product-card-variations{display:flex;flex-direction:column;align-items:center;gap:6px;margin:7px 0 10px;}
@@ -29,8 +29,9 @@
 .cat-menu-group{position:relative;display:inline-flex;align-items:center;align-self:stretch}
 .cat-menu-group>.cat-link{display:flex;align-items:center;height:100%;white-space:nowrap}
 .cat-menu-caret{font-size:10px;margin-left:3px;opacity:.8}
-.cat-submenu{position:absolute;top:calc(100% - 1px);left:0;min-width:185px;background:#fff;border:1px solid rgba(0,0,0,.10);border-radius:0 0 10px 10px;box-shadow:0 12px 28px rgba(0,0,0,.16);padding:7px;display:none;z-index:1000}
-.cat-menu-group:hover .cat-submenu,.cat-menu-group:focus-within .cat-submenu{display:grid;gap:2px}
+.cat-menu-group::after{content:"";position:absolute;left:0;right:0;top:100%;height:10px}
+.cat-submenu{position:absolute;top:calc(100% + 6px);left:0;min-width:185px;background:#fff;border:1px solid rgba(0,0,0,.10);border-radius:0 0 10px 10px;box-shadow:0 12px 28px rgba(0,0,0,.16);padding:7px;display:grid;gap:2px;z-index:2300;opacity:0;visibility:hidden;pointer-events:none;transform:translateY(-2px);transition:opacity .12s ease,transform .12s ease,visibility .12s ease}
+.cat-menu-group:hover .cat-submenu,.cat-menu-group:focus-within .cat-submenu{opacity:1;visibility:visible;pointer-events:auto;transform:translateY(0)}
 .cat-submenu .cat-sub-link{display:block!important;height:auto!important;padding:9px 11px!important;border-radius:7px;color:#222!important;text-decoration:none!important;white-space:nowrap}
 .cat-submenu .cat-sub-link:hover{background:#f3f4f6;color:#c90000!important}
 .cat-mobile-group{display:block}
@@ -359,50 +360,6 @@
 })();
 </script>
 
-<script>
-/* QUALITY_CATEGORY_MENU_V5
-   Somente abre/fecha o menu. Links e produtos continuam 100% nativos. */
-(function(){
-  if (window.__qualityCategoryMenuV5) return;
-  window.__qualityCategoryMenuV5 = true;
-
-  var menuToggle = document.getElementById('menu-toggle');
-  var menuClose = document.getElementById('menu-close');
-  var mobileMenu = document.getElementById('mobile-menu');
-  var overlay = document.getElementById('menu-overlay');
-  if (!menuToggle || !menuClose || !mobileMenu || !overlay) return;
-
-  function openMenu(){
-    mobileMenu.classList.add('open');
-    mobileMenu.setAttribute('aria-hidden', 'false');
-    overlay.classList.add('active');
-    menuToggle.setAttribute('aria-expanded', 'true');
-  }
-
-  function closeMenu(){
-    mobileMenu.classList.remove('open');
-    mobileMenu.setAttribute('aria-hidden', 'true');
-    overlay.classList.remove('active');
-    menuToggle.setAttribute('aria-expanded', 'false');
-  }
-
-  menuToggle.addEventListener('click', function(ev){
-    ev.preventDefault();
-    openMenu();
-  });
-  menuClose.addEventListener('click', function(ev){
-    ev.preventDefault();
-    closeMenu();
-  });
-  overlay.addEventListener('click', function(ev){
-    ev.preventDefault();
-    closeMenu();
-  });
-  document.addEventListener('keydown', function(ev){
-    if (ev.key === 'Escape') closeMenu();
-  });
-})();
-</script>
 
 <!-- Menu de categorias estático nesta página; evita mutação do DOM durante interações mobile. -->
 <script>
@@ -994,7 +951,8 @@
   });
 })();
 </script>
-<script src="/js/category-ui.js?v=20260908-1"></script>
+<script src="/js/header-menu.js?v=20260908-2"></script>
+<script src="/js/category-ui.js?v=20260908-2"></script>
 
 <script>
 /* Quality V8.2.2.4 - Menu Favoritos global + remover todos */

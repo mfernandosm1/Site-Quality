@@ -1,8 +1,8 @@
 (function(){
   'use strict';
 
-  if (window.__qualityCategoryUIV4) return;
-  window.__qualityCategoryUIV4 = true;
+  if (window.__qualityCategoryUIV5) return;
+  window.__qualityCategoryUIV5 = true;
 
   function closest(target, selector){
     return target && target.closest ? target.closest(selector) : null;
@@ -127,106 +127,10 @@
     }
   }
 
-  /*
-   * Fallback defensivo para navegação interna nas categorias.
-   * Não substitui o comportamento nativo do <a>. Apenas garante que um toque
-   * válido em logo/categoria/produto navegue mesmo se outro script cancelar o click.
-   */
-  var touchNav = null;
-  var NAV_SELECTOR = [
-    'a[data-home-link]',
-    '#nav-desktop a.cat-link',
-    '#nav-desktop a.cat-sub-link',
-    '#nav-mobile a.cat-link',
-    '#nav-mobile a.cat-sub-link',
-    'a.btn-details[href*="/produto/"]',
-    'a.quality-card-image-link[href*="/produto/"]'
-  ].join(',');
-
-  function safeInternalUrl(anchor){
-    if (!anchor) return '';
-    var raw = anchor.getAttribute('href') || '';
-    if (!raw || raw.charAt(0) === '#' || /^javascript:/i.test(raw)) return '';
-    try {
-      var url = new URL(raw, window.location.href);
-      if (url.origin !== window.location.origin) return '';
-      return url.href;
-    } catch (_) {
-      return '';
-    }
-  }
-
-  function navAnchorFromTarget(target){
-    return closest(target, NAV_SELECTOR);
-  }
-
-  function bindNavigationFallback(){
-    document.addEventListener('pointerdown', function(ev){
-      if (ev.pointerType !== 'touch' && ev.pointerType !== 'pen') return;
-      var anchor = navAnchorFromTarget(ev.target);
-      var url = safeInternalUrl(anchor);
-      if (!url) return;
-      touchNav = {
-        pointerId: ev.pointerId,
-        x: ev.clientX,
-        y: ev.clientY,
-        url: url,
-        moved: false
-      };
-    }, true);
-
-    document.addEventListener('pointermove', function(ev){
-      if (!touchNav || touchNav.pointerId !== ev.pointerId) return;
-      if (Math.abs(ev.clientX - touchNav.x) > 12 || Math.abs(ev.clientY - touchNav.y) > 12) {
-        touchNav.moved = true;
-      }
-    }, true);
-
-    document.addEventListener('pointercancel', function(ev){
-      if (touchNav && touchNav.pointerId === ev.pointerId) touchNav = null;
-    }, true);
-
-    document.addEventListener('pointerup', function(ev){
-      if (!touchNav || touchNav.pointerId !== ev.pointerId) return;
-      var pending = touchNav;
-      touchNav = null;
-      if (pending.moved) return;
-
-      var anchor = navAnchorFromTarget(ev.target);
-      var url = safeInternalUrl(anchor);
-      if (!url || url !== pending.url) return;
-
-      // Navega no pointerup para não depender do click sintetizado do navegador.
-      ev.preventDefault();
-      window.location.assign(url);
-    }, true);
-
-    document.addEventListener('click', function(ev){
-      if (ev.defaultPrevented) {
-        var preventedAnchor = navAnchorFromTarget(ev.target);
-        var preventedUrl = safeInternalUrl(preventedAnchor);
-        if (preventedUrl) window.location.assign(preventedUrl);
-        return;
-      }
-
-      var anchor = navAnchorFromTarget(ev.target);
-      var url = safeInternalUrl(anchor);
-      if (!url) return;
-      if (ev.button !== undefined && ev.button !== 0) return;
-      if (ev.metaKey || ev.ctrlKey || ev.shiftKey || ev.altKey) return;
-
-      // O link nativo continua responsável pela navegação. Se algum listener
-      // cancelar o evento depois deste ponto, o microtask de segurança assume.
-      var before = window.location.href;
-      setTimeout(function(){
-        if (window.location.href === before) window.location.assign(url);
-      }, 0);
-    }, true);
-  }
+  // Links de logo, categorias e produtos usam navegação nativa do navegador.
 
   function init(){
     bindSearch();
-    bindNavigationFallback();
   }
 
   if (document.readyState === 'loading') {

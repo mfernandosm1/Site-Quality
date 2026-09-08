@@ -8,7 +8,9 @@ document.addEventListener("DOMContentLoaded", () => {
       .then(data => {
         headerContainer.innerHTML = data;
         corrigirLinksHomePreview();
-        carregarCategoriasNoHeader();
+        // O header publicado já contém a árvore categoria/subcategoria.
+        // Só usa o carregamento legado se um header antigo realmente não tiver essa estrutura.
+        if (!document.querySelector("#nav-desktop .cat-menu-group")) carregarCategoriasNoHeader();
         initHeaderEvents();
       });
   } else {
