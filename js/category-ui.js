@@ -1,8 +1,8 @@
 (function(){
   'use strict';
 
-  if (window.__qualityCategoryUIV7) return;
-  window.__qualityCategoryUIV7 = true;
+  if (window.__qualityCategoryUIV8) return;
+  window.__qualityCategoryUIV8 = true;
 
   function normalizeSearch(value){
     return (value || '')
@@ -23,6 +23,21 @@
     }
   }
 
+  function fetchFirstJson(urls){
+    var index = 0;
+    function next(){
+      if (index >= urls.length) return Promise.resolve({items:[]});
+      var url = urls[index++];
+      return fetch(url, {cache:'no-store'}).then(function(r){
+        if (!r.ok) throw new Error('Falha ao carregar ' + url);
+        var type = String(r.headers.get('content-type') || '').toLowerCase();
+        if (type && type.indexOf('json') < 0) throw new Error('Resposta não JSON em ' + url);
+        return r.json();
+      }).catch(next);
+    }
+    return next();
+  }
+
   function doSearch(query){
     var term = normalizeSearch(query);
     if (term && window.QualityAnalyticsTrack) {
@@ -31,7 +46,6 @@
 
     var cards = document.querySelectorAll('.product-card');
     var message = document.getElementById('no-results');
-
     if (!term) {
       cards.forEach(function(card){ card.style.display = 'flex'; });
       if (message) message.style.display = 'none';
@@ -50,19 +64,6 @@
     if (found) {
       if (message) message.style.display = 'none';
       return;
-    }
-
-    function fetchFirstJson(urls){
-      var index = 0;
-      function next(){
-        if (index >= urls.length) return Promise.resolve({items:[]});
-        var url = urls[index++];
-        return fetch(url, {cache:'no-store'}).then(function(r){
-          if (!r.ok) throw new Error('Falha ao carregar ' + url);
-          return r.json();
-        }).catch(next);
-      }
-      return next();
     }
 
     Promise.all([
@@ -96,10 +97,8 @@
   }
 
   function bindPair(input, button){
-    if (!input || !button) return;
-    if (button.dataset.qualityCategorySearchBound === '1') return;
+    if (!input || !button || button.dataset.qualityCategorySearchBound === '1') return;
     button.dataset.qualityCategorySearchBound = '1';
-
     button.addEventListener('click', function(){ doSearch(input.value); });
     input.addEventListener('keydown', function(ev){
       if (ev.key === 'Enter') doSearch(input.value);
@@ -111,10 +110,56 @@
     bindPair(document.getElementById('search-input-mobile'), document.getElementById('search-button-mobile'));
   }
 
-  // Header estático nas categorias: apenas liga os controles de busca.
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', bindSearch, {once:true});
-  } else {
+  function bindMenu(){
+    var toggle = document.getElementById('menu-toggle');
+    var close = document.getElementById('menu-close');
+    var menu = document.getElementById('mobile-menu');
+    var overlay = document.getElementById('menu-overlay');
+    if (!toggle || !close || !menu || !overlay) return;
+
+    var lastPointerAction = 0;
+
+    function setOpen(open){
+      open = !!open;
+      menu.classList.toggle('open', open);
+      menu.setAttribute('aria-hidden', open ? 'false' : 'true');
+      overlay.classList.toggle('active', open);
+      overlay.setAttribute('aria-hidden', open ? 'false' : 'true');
+      toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+      document.body.classList.toggle('quality-category-menu-open', open);
+    }
+
+    function bindControl(el, fn){
+      el.addEventListener('pointerup', function(ev){
+        if (ev.pointerType !== 'touch' && ev.pointerType !== 'pen') return;
+        lastPointerAction = Date.now();
+        fn();
+      });
+      el.addEventListener('click', function(){
+        if (Date.now() - lastPointerAction < 500) return;
+        fn();
+      });
+    }
+
+    setOpen(false);
+    bindControl(toggle, function(){ setOpen(true); });
+    bindControl(close, function(){ setOpen(false); });
+    bindControl(overlay, function(){ setOpen(false); });
+
+    document.addEventListener('keydown', function(ev){
+      if (ev.key === 'Escape') setOpen(false);
+    });
+    window.addEventListener('pageshow', function(){ setOpen(false); });
+  }
+
+  function init(){
+    bindMenu();
     bindSearch();
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init, {once:true});
+  } else {
+    init();
   }
 })();
