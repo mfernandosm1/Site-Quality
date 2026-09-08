@@ -1,8 +1,8 @@
 (function(){
   'use strict';
 
-  if (window.__qualityCategoryUIV6) return;
-  window.__qualityCategoryUIV6 = true;
+  if (window.__qualityCategoryUIV7) return;
+  window.__qualityCategoryUIV7 = true;
 
   function normalizeSearch(value){
     return (value || '')
@@ -111,9 +111,7 @@
     bindPair(document.getElementById('search-input-mobile'), document.getElementById('search-button-mobile'));
   }
 
-  // O header agora é compartilhado com a home e chega de forma assíncrona.
-  document.addEventListener('quality:category-header-ready', bindSearch);
-
+  // Header estático nas categorias: apenas liga os controles de busca.
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', bindSearch, {once:true});
   } else {
