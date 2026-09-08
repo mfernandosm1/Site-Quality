@@ -13,7 +13,7 @@
   <meta property="og:url" content="https://www.qualitycel.com.br/categoria.html">
   <meta name="twitter:card" content="summary_large_image">
   <link rel="canonical" href="https://www.qualitycel.com.br/categoria.html">
-  <link rel="stylesheet" href="/css/style.css?v=20260908-menu8">
+  <link rel="stylesheet" href="/css/style.css?v=20260908-menu9">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
     .product-card-variations{display:flex;flex-direction:column;align-items:center;gap:6px;margin:7px 0 10px;}
@@ -25,28 +25,34 @@
 </head>
 <body>
 <!-- QUALITY_CATEGORY_TEMPLATE_V2_SUBCATEGORIES -->
-<style id="quality-category-menu-v8">
-/* Desktop: submenu encostado no item pai, sem gap, animação ou JS de hover. */
+<style id="quality-category-menu-v9">
+/* V9: navegação das categorias sem mutação de DOM e com alvos estáveis. */
 .cat-menu-group{position:relative;display:inline-flex;align-items:center;align-self:stretch}
 .cat-menu-group>.cat-link{display:flex;align-items:center;height:100%;white-space:nowrap}
 .cat-menu-caret{font-size:10px;margin-left:3px;opacity:.8}
-.cat-submenu{position:absolute;top:calc(100% - 2px);left:0;min-width:185px;background:#fff;border:1px solid rgba(0,0,0,.10);border-radius:0 0 10px 10px;box-shadow:0 12px 28px rgba(0,0,0,.16);padding:8px 7px 7px;display:none;gap:2px;z-index:3000}
-.cat-menu-group:hover>.cat-submenu,.cat-menu-group:focus-within>.cat-submenu,.cat-submenu:hover{display:grid}
-.cat-submenu .cat-sub-link{display:block!important;height:auto!important;padding:9px 11px!important;border-radius:7px;color:#222!important;text-decoration:none!important;white-space:nowrap}
+.cat-submenu{position:absolute;top:calc(100% + 4px);left:0;min-width:185px;background:#fff;border:1px solid rgba(0,0,0,.10);border-radius:0 0 10px 10px;box-shadow:0 12px 28px rgba(0,0,0,.16);padding:8px 7px 7px;display:none;gap:2px;z-index:3002}
+.cat-menu-group:hover>.cat-submenu,.cat-menu-group:focus-within>.cat-submenu,.cat-menu-group.is-open>.cat-submenu,.cat-submenu:hover{display:grid}
+.cat-menu-group::after{content:"";position:absolute;left:0;right:0;top:100%;height:12px;z-index:3001}
+.cat-submenu .cat-sub-link{display:block!important;height:auto!important;padding:9px 11px!important;border-radius:7px;color:#222!important;text-decoration:none!important;white-space:nowrap;position:relative;z-index:3003}
 .cat-submenu .cat-sub-link:hover{background:#f3f4f6;color:#c90000!important}
 .cat-mobile-group{display:block}
 .cat-mobile-submenu{display:grid;gap:2px;padding:0 0 6px 18px}
 .mobile-nav .cat-sub-link-mobile{font-size:.92em;opacity:.9;padding-top:7px!important;padding-bottom:7px!important}
 @media(max-width:850px){.nav-desktop .cat-menu-group{display:none}}
 
-/* Mobile: quando fechado, drawer e overlay saem totalmente da área clicável. */
+@media(min-width:992px){
+  .nav-desktop>a[href],.nav-desktop .cat-menu-group>a[href],.cat-submenu>a[href]{position:relative;z-index:3003;pointer-events:auto!important}
+}
+
+/* Mobile: drawer e overlay não recebem toque quando o menu está fechado. */
 @media(max-width:991px){
   .menu-toggle,.menu-close{min-width:48px!important;min-height:48px!important;display:flex!important;align-items:center!important;justify-content:center!important;cursor:pointer!important;touch-action:manipulation!important;-webkit-tap-highlight-color:transparent!important;user-select:none!important}
-  .menu-toggle{position:relative!important;z-index:3201!important}
+  .menu-toggle{position:relative!important;z-index:3401!important}
   .mobile-menu{display:none!important;transform:none!important;visibility:hidden!important;pointer-events:none!important}
-  .mobile-menu.open{display:block!important;transform:none!important;visibility:visible!important;pointer-events:auto!important;z-index:3200!important;overflow-y:auto!important;-webkit-overflow-scrolling:touch!important}
+  .mobile-menu.open{display:block!important;transform:none!important;visibility:visible!important;pointer-events:auto!important;z-index:3400!important;overflow-y:auto!important;-webkit-overflow-scrolling:touch!important}
+  .mobile-menu.open .mobile-nav,.mobile-menu.open .mobile-nav a{position:relative;z-index:3401;pointer-events:auto!important;touch-action:manipulation!important;-webkit-tap-highlight-color:transparent!important}
   .menu-overlay{display:none!important;visibility:hidden!important;pointer-events:none!important}
-  .menu-overlay.active{display:block!important;visibility:visible!important;pointer-events:auto!important;z-index:3100!important}
+  .menu-overlay.active{display:block!important;visibility:visible!important;pointer-events:auto!important;z-index:3300!important}
 }
 </style>
 <style>
@@ -948,7 +954,7 @@
   });
 })();
 </script>
-<script src="/js/category-ui.js?v=20260908-menu8"></script>
+<script src="/js/category-ui.js?v=20260908-menu9"></script>
 
 <script>
 /* Quality V8.2.2.4 - Menu Favoritos global + remover todos */
@@ -957,7 +963,6 @@
   window.__qualityFavoritesMenuGlobalV8224 = true;
 
   var KEY = 'quality_favoritos_v811';
-  var refreshTimers = [];
 
   function productKey(item){
     return String((item && (item.slug || item.id || item.url || item.name || item.nome)) || '').trim().toLowerCase();
@@ -1014,38 +1019,12 @@
   function ensureMenu(){
     var items = readFavorites();
     var count = items.length;
-
     document.querySelectorAll('[data-quality-open-favorites-menu]').forEach(function(link){
-      if (!count) link.remove();
+      link.hidden = !count;
+      link.style.display = count ? '' : 'none';
+      if (count) link.innerHTML = menuHtml(count);
     });
-
-    if (!count) {
-      closePanel();
-      return;
-    }
-
-    ['nav-desktop','nav-mobile'].forEach(function(id){
-      var nav = document.getElementById(id);
-      if (!nav) return;
-
-      var link = nav.querySelector('[data-quality-open-favorites-menu]');
-      if (!link) {
-        link = document.createElement('a');
-        link.href = '#favoritos';
-        link.className = 'quality-favorites-menu-link';
-        link.setAttribute('data-quality-open-favorites-menu', '1');
-        link.setAttribute('aria-label', 'Abrir favoritos');
-      }
-
-      // V8.2.2.6: padroniza a posição do Favoritos.
-      // Mesmo que o menu da home carregue categorias depois, cada atualização move o link
-      // para o final do menu, imediatamente antes da busca no desktop.
-      var search = findSearchInside(nav);
-      if (search && search.parentNode === nav) nav.insertBefore(link, search);
-      else nav.appendChild(link);
-
-      link.innerHTML = menuHtml(count);
-    });
+    if (!count) closePanel();
   }
 
   function itemHtml(item){
@@ -1111,14 +1090,7 @@
     document.body.classList.remove('quality-favorites-open');
   }
 
-  function refreshSoon(){
-    refreshTimers.forEach(clearTimeout);
-    refreshTimers = [
-      setTimeout(ensureMenu, 60),
-      setTimeout(ensureMenu, 220),
-      setTimeout(ensureMenu, 700)
-    ];
-  }
+  function refreshSoon(){ setTimeout(ensureMenu, 60); }
 
   document.addEventListener('click', function(ev){
     var open = ev.target.closest('[data-quality-open-favorites-menu]');
@@ -1157,13 +1129,10 @@
   }, true);
 
   window.addEventListener('storage', ensureMenu);
-  document.addEventListener('DOMContentLoaded', function(){ ensureMenu(); refreshSoon(); });
+  document.addEventListener('DOMContentLoaded', ensureMenu);
   window.qualityRefreshFavoritesMenu = ensureMenu;
 
   ensureMenu();
-  setTimeout(ensureMenu, 300);
-  setTimeout(ensureMenu, 1000);
-  setTimeout(ensureMenu, 2000);
 })();
 </script>
 
