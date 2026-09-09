@@ -1,0 +1,1 @@
+(function(){var p=(location.pathname||'/').replace(/\/+$/,'')||'/';if(['/smartphones','/acessorios','/eletronicos','/assistencia-tecnica'].indexOf(p)!==-1)window.__QUALITY_STATIC_CATEGORY_PAGE__=true;})();
