@@ -1,8 +1,8 @@
 (function(){
   'use strict';
 
-  if (window.__qualityCategoryUIV16) return;
-  window.__qualityCategoryUIV16 = true;
+  if (window.__qualityCategoryUIV17Clean) return;
+  window.__qualityCategoryUIV17Clean = true;
 
   function normalizeSearch(value){
     return (value || '').toString().normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().trim();
@@ -94,18 +94,30 @@
    * Isso é intencional: href do navegador é a fonte única de navegação.
    */
   function bindMenu(){
-    var toggle=document.getElementById('menu-toggle'), close=document.getElementById('menu-close'), menu=document.getElementById('mobile-menu'), overlay=document.getElementById('menu-overlay');
+    var toggle=document.getElementById('menu-toggle');
+    var close=document.getElementById('menu-close');
+    var menu=document.getElementById('mobile-menu');
+    var overlay=document.getElementById('menu-overlay');
     if(!toggle||!close||!menu||!overlay) return;
+    if(toggle.dataset.qualityMenuBound === '1') return;
+    toggle.dataset.qualityMenuBound = '1';
+
     function setOpen(open){
-      menu.classList.toggle('open',open); overlay.classList.toggle('active',open);
-      menu.setAttribute('aria-hidden',open?'false':'true'); overlay.setAttribute('aria-hidden',open?'false':'true'); toggle.setAttribute('aria-expanded',open?'true':'false');
+      if (!open && menu.contains(document.activeElement)) {
+        try { toggle.focus({preventScroll:true}); } catch (_) { try { toggle.focus(); } catch(__){} }
+      }
+      menu.classList.toggle('open',open);
+      overlay.classList.toggle('active',open);
+      menu.setAttribute('aria-hidden',open?'false':'true');
+      overlay.setAttribute('aria-hidden',open?'false':'true');
+      toggle.setAttribute('aria-expanded',open?'true':'false');
     }
     setOpen(false);
-    toggle.addEventListener('click',function(){setOpen(true)});
-    close.addEventListener('click',function(){setOpen(false)});
-    overlay.addEventListener('click',function(){setOpen(false)});
-    document.addEventListener('keydown',function(ev){if(ev.key==='Escape')setOpen(false)});
-    window.addEventListener('pageshow',function(){setOpen(false)});
+    toggle.addEventListener('click',function(){ setOpen(true); });
+    close.addEventListener('click',function(){ setOpen(false); });
+    overlay.addEventListener('click',function(){ setOpen(false); });
+    document.addEventListener('keydown',function(ev){ if(ev.key==='Escape') setOpen(false); });
+    window.addEventListener('pageshow',function(){ setOpen(false); });
   }
 
   function init(){
