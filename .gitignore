@@ -46,6 +46,7 @@ desktop.ini
 # historico de conversa com ia##
 painel/data/marketing-chat-history.json
 
-# Conteúdo interno que não pertence ao site público
+# Dados locais da automacao WhatsApp (nao fazem parte do site/GitHub Pages)
 content/automacao_whatsapp/
 Site_with_content/content/automacao_whatsapp/
+painel/.wwebjs_cache/

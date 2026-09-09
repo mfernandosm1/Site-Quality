@@ -1,5 +1,6 @@
 (function(){
   'use strict';
+  if (window.__QUALITY_STATIC_CATEGORY_PAGE__) return;
   var observer = null;
   var renderTimer = null;
   var rendering = false;
