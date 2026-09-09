@@ -1,8 +1,8 @@
 (function(){
   'use strict';
 
-  if (window.__qualityCategoryUIV11) return;
-  window.__qualityCategoryUIV11 = true;
+  if (window.__qualityCategoryUIV12) return;
+  window.__qualityCategoryUIV12 = true;
 
   function normalizeSearch(value){
     return (value || '').toString().normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().trim();
@@ -143,92 +143,89 @@
     } catch (_) { return ''; }
   }
 
-  /* Desktop: conserva a navegação que funcionou na V9 e dá uma janela maior
-     para alcançar Smartphones > Usados sem o submenu desaparecer. */
+  function go(anchor){
+    var url = safeInternalUrl(anchor);
+    if (!url) return false;
+    window.location.href = url;
+    return true;
+  }
+
+  /* Desktop V12:
+     - submenu não fecha por cronômetro enquanto o usuário vai até "Usados";
+     - removemos a antiga área invisível de ponte que podia capturar ponteiro;
+     - links continuam com href normal e recebem um fallback direto no mouse. */
   function bindDesktopNavigation(){
     var nav = document.getElementById('nav-desktop');
     if (!nav) return;
     var group = nav.querySelector('.cat-menu-group');
-    var closeTimer = null;
-    function openGroup(){
-      if (!group) return;
-      clearTimeout(closeTimer);
-      group.classList.add('is-open');
-    }
-    function closeGroupSoon(){
-      if (!group) return;
-      clearTimeout(closeTimer);
-      closeTimer = setTimeout(function(){
-        var sub = group.querySelector('.cat-submenu');
-        var pointerStillInside = false;
-        try { pointerStillInside = group.matches(':hover') || !!(sub && sub.matches(':hover')); } catch (_) {}
-        if (!pointerStillInside && !group.contains(document.activeElement)) group.classList.remove('is-open');
-      }, 1200);
-    }
+
+    function openGroup(){ if (group) group.classList.add('is-open'); }
+    function closeGroup(){ if (group) group.classList.remove('is-open'); }
+
     if (group) {
       group.addEventListener('mouseenter', openGroup);
-      group.addEventListener('mouseleave', closeGroupSoon);
       group.addEventListener('focusin', openGroup);
-      group.addEventListener('focusout', closeGroupSoon);
-      var sub = group.querySelector('.cat-submenu');
-      if (sub) { sub.addEventListener('mouseenter', openGroup); sub.addEventListener('mouseleave', closeGroupSoon); }
+      /* O grupo permanece aberto durante todo o trajeto parent -> submenu.
+         Só fecha quando o ponteiro entra em outra opção de nível principal ou sai do nav. */
+      Array.prototype.forEach.call(nav.children, function(child){
+        if (child === group || !child || !child.addEventListener) return;
+        child.addEventListener('mouseenter', closeGroup);
+      });
+      nav.addEventListener('mouseleave', closeGroup);
+      nav.addEventListener('focusout', function(ev){
+        if (!group.contains(ev.relatedTarget)) closeGroup();
+      });
     }
 
-    function forceDesktopNav(ev){
-      if (ev.pointerType && ev.pointerType !== 'mouse') return;
-      if (ev.button !== undefined && ev.button !== 0) return;
-      if (ev.metaKey || ev.ctrlKey || ev.shiftKey || ev.altKey) return;
-      var a = ev.target && ev.target.closest ? ev.target.closest('a[href]') : null;
-      if (!a || !nav.contains(a) || a.hasAttribute('data-quality-open-favorites-menu')) return;
-      var url = safeInternalUrl(a);
-      if (!url) return;
-      window.location.assign(url);
-    }
-    if (window.PointerEvent) nav.addEventListener('pointerdown', forceDesktopNav, true);
-    else nav.addEventListener('mousedown', forceDesktopNav, true);
+    Array.prototype.forEach.call(nav.querySelectorAll('a[href]'), function(a){
+      if (a.hasAttribute('data-quality-open-favorites-menu')) return;
+      a.addEventListener('pointerdown', function(ev){
+        if (ev.pointerType && ev.pointerType !== 'mouse') return;
+        if (ev.button !== undefined && ev.button !== 0) return;
+        if (ev.metaKey || ev.ctrlKey || ev.shiftKey || ev.altKey) return;
+        go(a);
+      });
+    });
   }
 
-  /* Mobile: navega no pointerup quando for toque real, sem fechar o drawer antes
-     da troca de página. O click normal permanece nativo como fallback. */
+  /* Mobile V12:
+     Links recebem listeners diretamente, sem delegação e sem depender do alvo final
+     do pointerup. Isso evita o toque perdido ao trocar de categoria em Chrome/Opera.
+     O drawer NÃO é fechado antes da navegação. */
   function bindMobileNavigation(){
     var nav = document.getElementById('nav-mobile');
     if (!nav) return;
-    var pending = null;
-    var lastForcedAt = 0;
 
-    nav.addEventListener('pointerdown', function(ev){
-      if (ev.pointerType !== 'touch' && ev.pointerType !== 'pen') return;
-      var a = ev.target && ev.target.closest ? ev.target.closest('a[href]') : null;
-      var url = safeInternalUrl(a);
-      if (!a || !url) return;
-      pending = { id:ev.pointerId, x:ev.clientX, y:ev.clientY, url:url, anchor:a, moved:false };
-    }, true);
+    Array.prototype.forEach.call(nav.querySelectorAll('a[href]'), function(a){
+      if (a.hasAttribute('data-quality-open-favorites-menu')) return;
+      var touch = null;
+      var navigatedAt = 0;
 
-    nav.addEventListener('pointermove', function(ev){
-      if (!pending || pending.id !== ev.pointerId) return;
-      if (Math.abs(ev.clientX - pending.x) > 12 || Math.abs(ev.clientY - pending.y) > 12) pending.moved = true;
-    }, true);
+      a.addEventListener('touchstart', function(ev){
+        if (!ev.touches || ev.touches.length !== 1) { touch = null; return; }
+        var t = ev.touches[0];
+        touch = {x:t.clientX, y:t.clientY};
+      }, {passive:true});
 
-    nav.addEventListener('pointercancel', function(ev){ if (pending && pending.id === ev.pointerId) pending = null; }, true);
+      a.addEventListener('touchend', function(ev){
+        if (!touch) return;
+        var t = ev.changedTouches && ev.changedTouches[0];
+        var start = touch; touch = null;
+        if (!t) return;
+        if (Math.abs(t.clientX - start.x) > 40 || Math.abs(t.clientY - start.y) > 40) return;
+        navigatedAt = Date.now();
+        ev.preventDefault();
+        go(a);
+      }, {passive:false});
 
-    nav.addEventListener('pointerup', function(ev){
-      if (!pending || pending.id !== ev.pointerId) return;
-      var p = pending; pending = null;
-      if (p.moved) return;
-      var a = ev.target && ev.target.closest ? ev.target.closest('a[href]') : null;
-      if (!a || a !== p.anchor || safeInternalUrl(a) !== p.url) return;
-      lastForcedAt = Date.now();
-      /* Não esconder o drawer antes da navegação: em Chrome/Opera mobile isso pode
-         remover o alvo do toque antes da ação padrão terminar. */
-      ev.preventDefault();
-      window.location.assign(p.url);
-    }, true);
+      a.addEventListener('touchcancel', function(){ touch = null; }, {passive:true});
 
-    nav.addEventListener('click', function(ev){
-      /* Após uma navegação forçada no pointerup, suprime apenas o click duplicado.
-         Fora disso, o <a href> navega nativamente e o menu não é escondido antes. */
-      if (Date.now() - lastForcedAt < 700) { ev.preventDefault(); return; }
-    }, true);
+      a.addEventListener('click', function(ev){
+        if (Date.now() - navigatedAt < 900) { ev.preventDefault(); return; }
+        ev.preventDefault();
+        go(a);
+      });
+    });
   }
 
   function init(){

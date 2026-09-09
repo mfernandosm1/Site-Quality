@@ -25,14 +25,13 @@
 </head>
 <body>
 <!-- QUALITY_CATEGORY_TEMPLATE_V2_SUBCATEGORIES -->
-<style id="quality-category-menu-v9">
+<style id="quality-category-menu-v12">
 /* V9: navegação das categorias sem mutação de DOM e com alvos estáveis. */
-.cat-menu-group{position:relative;display:inline-flex;align-items:center;align-self:stretch}
+.cat-menu-group{position:relative;display:inline-flex;align-items:center;align-self:stretch;z-index:3002}
 .cat-menu-group>.cat-link{display:flex;align-items:center;height:100%;white-space:nowrap}
 .cat-menu-caret{font-size:10px;margin-left:3px;opacity:.8}
-.cat-submenu{position:absolute;top:calc(100% - 2px);left:0;min-width:185px;background:#fff;border:1px solid rgba(0,0,0,.10);border-radius:0 0 10px 10px;box-shadow:0 12px 28px rgba(0,0,0,.16);padding:8px 7px 7px;display:none;gap:2px;z-index:3002}
+.cat-submenu{position:absolute;top:calc(100% - 1px);left:0;min-width:185px;background:#fff;border:1px solid rgba(0,0,0,.10);border-radius:0 0 10px 10px;box-shadow:0 12px 28px rgba(0,0,0,.16);padding:8px 7px 7px;display:none;gap:2px;z-index:3002}
 .cat-menu-group:hover>.cat-submenu,.cat-menu-group:focus-within>.cat-submenu,.cat-menu-group.is-open>.cat-submenu,.cat-submenu:hover{display:grid}
-.cat-menu-group::after{content:"";position:absolute;left:-8px;right:-8px;top:calc(100% - 2px);height:22px;z-index:3001;pointer-events:auto}
 .cat-submenu .cat-sub-link{display:block!important;height:auto!important;padding:9px 11px!important;border-radius:7px;color:#222!important;text-decoration:none!important;white-space:nowrap;position:relative;z-index:3003}
 .cat-submenu .cat-sub-link:hover{background:#f3f4f6;color:#c90000!important}
 .nav-desktop>.cat-link,.nav-desktop .cat-menu-group>.cat-link,.cat-submenu .cat-sub-link{text-decoration:none!important}
@@ -955,7 +954,7 @@
   });
 })();
 </script>
-<script src="/js/category-ui.js?v=20260908-menu11"></script>
+<script src="/js/category-ui.js?v=20260908-menu12"></script>
 
 <script>
 /* Quality V8.2.2.4 - Menu Favoritos global + remover todos */
