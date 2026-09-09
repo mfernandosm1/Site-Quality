@@ -954,7 +954,7 @@
   });
 })();
 </script>
-<script src="/js/category-ui.js?v=20260908-menu12"></script>
+<script src="/js/category-ui.js?v=20260908-menu14"></script>
 
 <script>
 /* Quality V8.2.2.4 - Menu Favoritos global + remover todos */
@@ -1019,11 +1019,24 @@
   function ensureMenu(){
     var items = readFavorites();
     var count = items.length;
+    var countKey = String(count);
+
     document.querySelectorAll('[data-quality-open-favorites-menu]').forEach(function(link){
-      link.hidden = !count;
-      link.style.display = count ? '' : 'none';
-      if (count) link.innerHTML = menuHtml(count);
+      // V14: atualização idempotente. Se a quantidade não mudou, não tocamos no DOM.
+      // Isso elimina o ciclo de milhares de mutações observado em nav-desktop/nav-mobile.
+      if (link.getAttribute('data-quality-fav-rendered-count') === countKey) return;
+
+      if (count) {
+        link.hidden = false;
+        link.style.display = '';
+        link.innerHTML = menuHtml(count);
+      } else {
+        link.hidden = true;
+        link.style.display = 'none';
+      }
+      link.setAttribute('data-quality-fav-rendered-count', countKey);
     });
+
     if (!count) closePanel();
   }
 
@@ -1135,8 +1148,6 @@
   ensureMenu();
 })();
 </script>
-
-<script src="/js/menu-debug.js?v=20260908-debug1"></script>
 
 <script src="/js/catalog-menu.js?v=20260823-1"></script>
 
