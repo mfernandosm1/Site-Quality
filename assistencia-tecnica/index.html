@@ -13,7 +13,8 @@
   <meta property="og:url" content="https://www.qualitycel.com.br/assistencia-tecnica/">
   <meta name="twitter:card" content="summary_large_image">
   <link rel="canonical" href="https://www.qualitycel.com.br/assistencia-tecnica/">
-  <link rel="stylesheet" href="/css/style.css?v=20260909-catfix1">
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/site/css/style.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
     .product-card-variations{display:flex;flex-direction:column;align-items:center;gap:6px;margin:7px 0 10px;}
@@ -25,20 +26,6 @@
 </head>
 <body>
 <!-- QUALITY_CATEGORY_TEMPLATE_V2_SUBCATEGORIES -->
-<style>
-.cat-menu-group{position:relative;display:inline-flex;align-items:center;align-self:stretch}
-.cat-menu-group>.cat-link{display:flex;align-items:center;height:100%;white-space:nowrap}
-.cat-menu-caret{font-size:10px;margin-left:3px;opacity:.8}
-.cat-submenu{position:absolute;top:calc(100% - 1px);left:0;min-width:185px;background:#fff;border:1px solid rgba(0,0,0,.10);border-radius:0 0 10px 10px;box-shadow:0 12px 28px rgba(0,0,0,.16);padding:7px;display:none;z-index:1000}
-.cat-menu-group:hover .cat-submenu,.cat-menu-group:focus-within .cat-submenu{display:grid;gap:2px}
-.cat-submenu .cat-sub-link{display:block!important;height:auto!important;padding:9px 11px!important;border-radius:7px;color:#222!important;text-decoration:none!important;white-space:nowrap}
-.cat-submenu .cat-sub-link:hover{background:#f3f4f6;color:#c90000!important}
-.cat-mobile-group{display:block}
-.cat-mobile-submenu{display:grid;gap:2px;padding:0 0 6px 18px}
-.mobile-nav .cat-sub-link-mobile{font-size:.92em;opacity:.9;padding-top:7px!important;padding-bottom:7px!important}
-@media(max-width:850px){.nav-desktop .cat-menu-group{display:none}}
-</style>
-
 <style>
 .cat-menu-group{position:relative;display:inline-flex;align-items:center;align-self:stretch}
 .cat-menu-group>.cat-link{display:flex;align-items:center;height:100%;white-space:nowrap}
@@ -348,8 +335,6 @@
   }
 })();
 </script>
-
-
 <main class="main">
   <h1 id="categoria-titulo" style="text-align:center;margin-top:30px;display:flex;justify-content:center;align-items:center;gap:10px;flex-wrap:wrap;">Categoria</h1>
   <div class="quality-category-toolbar">
@@ -422,6 +407,9 @@
       .replace(/"/g, '&quot;')
       .replace(/'/g, '&#039;');
   }
+
+
+
 
 
   /* V8.1.1 - Favoritos e Compartilhar sem login */
@@ -685,6 +673,7 @@
   }
 
 
+
   function shouldShowVariationsOnCard(p){
     const raw = p.showVariationsOnCard ?? p.mostrarVariacoesNoCard ?? p.show_variations_on_card ?? false;
     if (raw === true) return true;
@@ -899,9 +888,7 @@
         card.innerHTML =
           '<div class="quality-card-image-wrap">' +
           qualityProductActionsHtml(p, productSlug ? '/produto/' + encodeURIComponent(productSlug) + '/' : '#') +
-          (productSlug ? '<a href="/produto/' + encodeURIComponent(productSlug) + '/" class="quality-card-product-link" style="display:block">' : '') +
           '<img src="' + escapeHtml(productImage) + '" onerror="this.onerror=null;this.src=\'' + escapeHtml(productImageFallback) + '\';" alt="' + escapeHtml(productName) + '">' +
-          (productSlug ? '</a>' : '') +
           productTagsHtml(p) +
           '</div>' +
          '<h3>' + escapeHtml(productName) + '</h3>' +
@@ -923,7 +910,225 @@
   });
 })();
 </script>
-<script src="/js/category-ui.js?v=20260909-catfix1"></script>
+<script src="/js/main.js"></script>
+<script src="/site/js/main.js"></script>
+
+<script>
+/* Quality V8.2.2.4 - Menu Favoritos global + remover todos */
+(function(){
+  if (window.__qualityFavoritesMenuGlobalV8224) return;
+  window.__qualityFavoritesMenuGlobalV8224 = true;
+
+  var KEY = 'quality_favoritos_v811';
+  var refreshTimers = [];
+
+  function productKey(item){
+    return String((item && (item.slug || item.id || item.url || item.name || item.nome)) || '').trim().toLowerCase();
+  }
+
+  function readFavorites(){
+    try {
+      var raw = JSON.parse(localStorage.getItem(KEY) || '[]');
+      if (!Array.isArray(raw)) return [];
+      var seen = {};
+      return raw.filter(function(item){
+        var k = productKey(item);
+        if (!k || seen[k]) return false;
+        seen[k] = true;
+        return true;
+      });
+    } catch(e){ return []; }
+  }
+
+  function writeFavorites(items){
+    try { localStorage.setItem(KEY, JSON.stringify(items || [])); } catch(e){}
+  }
+
+  function esc(v){
+    return String(v || '')
+      .replace(/&/g,'&amp;')
+      .replace(/</g,'&lt;')
+      .replace(/>/g,'&gt;')
+      .replace(/"/g,'&quot;')
+      .replace(/'/g,'&#039;');
+  }
+
+  function productUrl(item){
+    var u = item && item.url ? item.url : (item && item.slug ? '/produto/' + encodeURIComponent(item.slug) + '/' : '#');
+    try { return new URL(u, window.location.origin).href; } catch(e){ return '#'; }
+  }
+
+  function productImg(item){
+    var p = String((item && (item.image || item.imagem)) || '').trim();
+    if (!p) return '/images/sem-imagem.png';
+    if (/^https?:///i.test(p)) return p;
+    return '/' + p.replace(/^/+/, '').replace(/^site//, '');
+  }
+
+  function menuHtml(count){
+    return '<i class="fa-solid fa-heart"></i><span>Favoritos</span><span class="quality-favorites-count">' + count + '</span>';
+  }
+
+  function findSearchInside(nav){
+    if (!nav) return null;
+    return nav.querySelector('.search-wrapper, .search-wrapper-mobile');
+  }
+
+  function ensureMenu(){
+    var items = readFavorites();
+    var count = items.length;
+
+    document.querySelectorAll('[data-quality-open-favorites-menu]').forEach(function(link){
+      if (!count) link.remove();
+    });
+
+    if (!count) {
+      closePanel();
+      return;
+    }
+
+    ['nav-desktop','nav-mobile'].forEach(function(id){
+      var nav = document.getElementById(id);
+      if (!nav) return;
+
+      var link = nav.querySelector('[data-quality-open-favorites-menu]');
+      if (!link) {
+        link = document.createElement('a');
+        link.href = '#favoritos';
+        link.className = 'quality-favorites-menu-link';
+        link.setAttribute('data-quality-open-favorites-menu', '1');
+        link.setAttribute('aria-label', 'Abrir favoritos');
+      }
+
+      // V8.2.2.6: padroniza a posição do Favoritos.
+      // Mesmo que o menu da home carregue categorias depois, cada atualização move o link
+      // para o final do menu, imediatamente antes da busca no desktop.
+      var search = findSearchInside(nav);
+      if (search && search.parentNode === nav) nav.insertBefore(link, search);
+      else nav.appendChild(link);
+
+      link.innerHTML = menuHtml(count);
+    });
+  }
+
+  function itemHtml(item){
+    var name = (item && (item.name || item.nome)) || 'Produto';
+    var u = productUrl(item);
+    var k = productKey(item);
+    return '<div class="quality-favorites-panel-item">' +
+      '<a class="quality-favorites-panel-img" href="' + esc(u) + '"><img src="' + esc(productImg(item)) + '" alt="' + esc(name) + '" onerror="this.onerror=null;this.src='/images/sem-imagem.png';"></a>' +
+      '<div class="quality-favorites-panel-info">' +
+        '<a class="quality-favorites-panel-name" href="' + esc(u) + '">' + esc(name) + '</a>' +
+        '<div class="quality-favorites-panel-actions">' +
+          '<a href="' + esc(u) + '" class="btn-details quality-favorites-see">Ver detalhes</a>' +
+          '<button type="button" class="quality-favorites-remove" data-quality-remove-favorite-menu="' + esc(k) + '">Remover</button>' +
+        '</div>' +
+      '</div>' +
+    '</div>';
+  }
+
+  function panelShell(){
+    var panel = document.querySelector('.quality-favorites-panel-global');
+    if (!panel) {
+      panel = document.createElement('div');
+      panel.className = 'quality-favorites-panel quality-favorites-panel-global';
+      panel.innerHTML =
+        '<div class="quality-favorites-panel-backdrop" data-quality-close-favorites-menu></div>' +
+        '<aside class="quality-favorites-panel-box" aria-label="Meus favoritos">' +
+          '<div class="quality-favorites-panel-head">' +
+            '<strong>❤️ Meus favoritos</strong>' +
+            '<button type="button" data-quality-close-favorites-menu aria-label="Fechar">×</button>' +
+          '</div>' +
+          '<div class="quality-favorites-panel-top"></div>' +
+          '<div class="quality-favorites-panel-body"></div>' +
+        '</aside>';
+      document.body.appendChild(panel);
+    }
+    return panel;
+  }
+
+  function openPanel(){
+    var panel = panelShell();
+    var items = readFavorites();
+    var top = panel.querySelector('.quality-favorites-panel-top');
+    var body = panel.querySelector('.quality-favorites-panel-body');
+
+    top.innerHTML = items.length
+      ? '<button type="button" class="quality-favorites-clear-all" data-quality-clear-favorites-menu><i class="fa-regular fa-trash-can"></i> Remover todos</button>'
+      : '';
+
+    body.innerHTML = items.length
+      ? items.map(itemHtml).join('')
+      : '<p class="quality-favorites-empty">Você ainda não favoritou nenhum produto.</p>';
+
+    panel.classList.add('is-open');
+    panel.classList.add('show');
+    document.body.classList.add('quality-favorites-open');
+  }
+
+  function closePanel(){
+    document.querySelectorAll('.quality-favorites-panel').forEach(function(panel){
+      panel.classList.remove('is-open');
+      panel.classList.remove('show');
+    });
+    document.body.classList.remove('quality-favorites-open');
+  }
+
+  function refreshSoon(){
+    refreshTimers.forEach(clearTimeout);
+    refreshTimers = [
+      setTimeout(ensureMenu, 60),
+      setTimeout(ensureMenu, 220),
+      setTimeout(ensureMenu, 700)
+    ];
+  }
+
+  document.addEventListener('click', function(ev){
+    var open = ev.target.closest('[data-quality-open-favorites-menu]');
+    if (open) { ev.preventDefault(); openPanel(); return; }
+
+    if (ev.target.closest('[data-quality-close-favorites-menu]')) {
+      ev.preventDefault();
+      closePanel();
+      return;
+    }
+
+    var clear = ev.target.closest('[data-quality-clear-favorites-menu]');
+    if (clear) {
+      ev.preventDefault();
+      if (confirm('Remover todos os favoritos deste navegador?')) {
+        writeFavorites([]);
+        ensureMenu();
+        closePanel();
+        if (window.qualityUpdateFavoriteButtons) { try { window.qualityUpdateFavoriteButtons(); } catch(e){} }
+      }
+      return;
+    }
+
+    var remove = ev.target.closest('[data-quality-remove-favorite-menu]');
+    if (remove) {
+      ev.preventDefault();
+      var k = remove.getAttribute('data-quality-remove-favorite-menu') || '';
+      writeFavorites(readFavorites().filter(function(item){ return productKey(item) !== k; }));
+      ensureMenu();
+      if (readFavorites().length) openPanel(); else closePanel();
+      if (window.qualityUpdateFavoriteButtons) { try { window.qualityUpdateFavoriteButtons(); } catch(e){} }
+      return;
+    }
+
+    if (ev.target.closest('[data-quality-fav]')) refreshSoon();
+  }, true);
+
+  window.addEventListener('storage', ensureMenu);
+  document.addEventListener('DOMContentLoaded', function(){ ensureMenu(); refreshSoon(); });
+  window.qualityRefreshFavoritesMenu = ensureMenu;
+
+  ensureMenu();
+  setTimeout(ensureMenu, 300);
+  setTimeout(ensureMenu, 1000);
+  setTimeout(ensureMenu, 2000);
+})();
+</script>
 
 <script src="/js/catalog-menu.js?v=20260823-1"></script>
 
