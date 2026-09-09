@@ -1,8 +1,8 @@
 (function(){
   'use strict';
 
-  if (window.__qualityCategoryUIV15) return;
-  window.__qualityCategoryUIV15 = true;
+  if (window.__qualityCategoryUIV16) return;
+  window.__qualityCategoryUIV16 = true;
 
   function normalizeSearch(value){
     return (value || '').toString().normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().trim();
@@ -94,40 +94,18 @@
    * Isso é intencional: href do navegador é a fonte única de navegação.
    */
   function bindMenu(){
-    var toggle = document.getElementById('menu-toggle');
-    var close = document.getElementById('menu-close');
-    var menu = document.getElementById('mobile-menu');
-    var overlay = document.getElementById('menu-overlay');
-    if (!toggle || !close || !menu || !overlay) return;
-
-    function openMenu(){
-      menu.classList.add('open');
-      menu.setAttribute('aria-hidden', 'false');
-      overlay.classList.add('active');
-      overlay.classList.add('show');
-      overlay.setAttribute('aria-hidden', 'false');
-      toggle.setAttribute('aria-expanded', 'true');
+    var toggle=document.getElementById('menu-toggle'), close=document.getElementById('menu-close'), menu=document.getElementById('mobile-menu'), overlay=document.getElementById('menu-overlay');
+    if(!toggle||!close||!menu||!overlay) return;
+    function setOpen(open){
+      menu.classList.toggle('open',open); overlay.classList.toggle('active',open);
+      menu.setAttribute('aria-hidden',open?'false':'true'); overlay.setAttribute('aria-hidden',open?'false':'true'); toggle.setAttribute('aria-expanded',open?'true':'false');
     }
-
-    function closeMenu(){
-      menu.classList.remove('open');
-      menu.setAttribute('aria-hidden', 'true');
-      overlay.classList.remove('active');
-      overlay.classList.remove('show');
-      overlay.setAttribute('aria-hidden', 'true');
-      toggle.setAttribute('aria-expanded', 'false');
-    }
-
-    closeMenu();
-    toggle.addEventListener('click', openMenu);
-    close.addEventListener('click', closeMenu);
-    overlay.addEventListener('click', closeMenu);
-    document.addEventListener('keydown', function(ev){ if (ev.key === 'Escape') closeMenu(); });
-    window.addEventListener('pageshow', closeMenu);
-
-    /* Fecha visualmente após o click, sem cancelar nem substituir o href. */
-    var links = menu.querySelectorAll('.mobile-nav a[href]');
-    links.forEach(function(link){ link.addEventListener('click', closeMenu); });
+    setOpen(false);
+    toggle.addEventListener('click',function(){setOpen(true)});
+    close.addEventListener('click',function(){setOpen(false)});
+    overlay.addEventListener('click',function(){setOpen(false)});
+    document.addEventListener('keydown',function(ev){if(ev.key==='Escape')setOpen(false)});
+    window.addEventListener('pageshow',function(){setOpen(false)});
   }
 
   function init(){
