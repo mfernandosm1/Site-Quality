@@ -14,7 +14,6 @@
   <meta name="twitter:card" content="summary_large_image">
   <link rel="canonical" href="https://www.qualitycel.com.br/assistencia-tecnica/">
   <link rel="stylesheet" href="/css/style.css">
-  <link rel="stylesheet" href="/site/css/style.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
     .product-card-variations{display:flex;flex-direction:column;align-items:center;gap:6px;margin:7px 0 10px;}
@@ -25,7 +24,7 @@
   </style>
 </head>
 <body>
-<!-- QUALITY_NAVFIX_20260909_2 -->
+<!-- QUALITY_GENERATOR_FIX_20260909_1 -->
 <script>window.__QUALITY_STATIC_CATEGORY_PAGE__=true;</script>
 <!-- QUALITY_CATEGORY_TEMPLATE_V2_SUBCATEGORIES -->
 <style>
@@ -41,7 +40,6 @@
 .mobile-nav .cat-sub-link-mobile{font-size:.92em;opacity:.9;padding-top:7px!important;padding-bottom:7px!important}
 @media(max-width:850px){.nav-desktop .cat-menu-group{display:none}}
 </style>
-
 <style>
 .cat-menu-group{position:relative;display:inline-flex;align-items:center;align-self:stretch}
 .cat-menu-group>.cat-link{display:flex;align-items:center;height:100%;white-space:nowrap}
@@ -351,6 +349,8 @@
   }
 })();
 </script>
+
+
 
 
 <main class="main">
@@ -928,202 +928,8 @@
   });
 })();
 </script>
-<script>
-/* Quality V8.2.2.4 - Menu Favoritos global + remover todos */
-(function(){
-  if (window.__qualityFavoritesMenuGlobalV8224) return;
-  window.__qualityFavoritesMenuGlobalV8224 = true;
 
-  var KEY = 'quality_favoritos_v811';
-  var refreshTimers = [];
-
-  function productKey(item){
-    return String((item && (item.slug || item.id || item.url || item.name || item.nome)) || '').trim().toLowerCase();
-  }
-
-  function readFavorites(){
-    try {
-      var raw = JSON.parse(localStorage.getItem(KEY) || '[]');
-      if (!Array.isArray(raw)) return [];
-      var seen = {};
-      return raw.filter(function(item){
-        var k = productKey(item);
-        if (!k || seen[k]) return false;
-        seen[k] = true;
-        return true;
-      });
-    } catch(e){ return []; }
-  }
-
-  function writeFavorites(items){
-    try { localStorage.setItem(KEY, JSON.stringify(items || [])); } catch(e){}
-  }
-
-  function esc(v){
-    return String(v || '')
-      .replace(/&/g,'&amp;')
-      .replace(/</g,'&lt;')
-      .replace(/>/g,'&gt;')
-      .replace(/"/g,'&quot;')
-      .replace(/'/g,'&#039;');
-  }
-
-  function productUrl(item){
-    var u = item && item.url ? item.url : (item && item.slug ? '/produto/' + encodeURIComponent(item.slug) + '/' : '#');
-    try { return new URL(u, window.location.origin).href; } catch(e){ return '#'; }
-  }
-
-  function productImg(item){
-    var p = String((item && (item.image || item.imagem)) || '').trim();
-    if (!p) return '/images/sem-imagem.png';
-    if (/^https?:///i.test(p)) return p;
-    return '/' + p.replace(/^/+/, '').replace(/^site//, '');
-  }
-
-  function menuHtml(count){
-    return '<i class="fa-solid fa-heart"></i><span>Favoritos</span><span class="quality-favorites-count">' + count + '</span>';
-  }
-
-  function findSearchInside(nav){
-    if (!nav) return null;
-    return nav.querySelector('.search-wrapper, .search-wrapper-mobile');
-  }
-
-  function ensureMenu(){
-    var count = readFavorites().length;
-    document.querySelectorAll('[data-quality-open-favorites-menu]').forEach(function(link){
-      var shouldHide = !count;
-      if (link.hidden !== shouldHide) link.hidden = shouldHide;
-      if (!count) return;
-      var countKey = String(count);
-      if (link.getAttribute('data-quality-favorites-count') !== countKey) {
-        link.setAttribute('data-quality-favorites-count', countKey);
-        link.innerHTML = menuHtml(count);
-      }
-    });
-    if (!count) closePanel();
-  }
-
-  function itemHtml(item){
-    var name = (item && (item.name || item.nome)) || 'Produto';
-    var u = productUrl(item);
-    var k = productKey(item);
-    return '<div class="quality-favorites-panel-item">' +
-      '<a class="quality-favorites-panel-img" href="' + esc(u) + '"><img src="' + esc(productImg(item)) + '" alt="' + esc(name) + '" onerror="this.onerror=null;this.src='/images/sem-imagem.png';"></a>' +
-      '<div class="quality-favorites-panel-info">' +
-        '<a class="quality-favorites-panel-name" href="' + esc(u) + '">' + esc(name) + '</a>' +
-        '<div class="quality-favorites-panel-actions">' +
-          '<a href="' + esc(u) + '" class="btn-details quality-favorites-see">Ver detalhes</a>' +
-          '<button type="button" class="quality-favorites-remove" data-quality-remove-favorite-menu="' + esc(k) + '">Remover</button>' +
-        '</div>' +
-      '</div>' +
-    '</div>';
-  }
-
-  function panelShell(){
-    var panel = document.querySelector('.quality-favorites-panel-global');
-    if (!panel) {
-      panel = document.createElement('div');
-      panel.className = 'quality-favorites-panel quality-favorites-panel-global';
-      panel.innerHTML =
-        '<div class="quality-favorites-panel-backdrop" data-quality-close-favorites-menu></div>' +
-        '<aside class="quality-favorites-panel-box" aria-label="Meus favoritos">' +
-          '<div class="quality-favorites-panel-head">' +
-            '<strong>❤️ Meus favoritos</strong>' +
-            '<button type="button" data-quality-close-favorites-menu aria-label="Fechar">×</button>' +
-          '</div>' +
-          '<div class="quality-favorites-panel-top"></div>' +
-          '<div class="quality-favorites-panel-body"></div>' +
-        '</aside>';
-      document.body.appendChild(panel);
-    }
-    return panel;
-  }
-
-  function openPanel(){
-    var panel = panelShell();
-    var items = readFavorites();
-    var top = panel.querySelector('.quality-favorites-panel-top');
-    var body = panel.querySelector('.quality-favorites-panel-body');
-
-    top.innerHTML = items.length
-      ? '<button type="button" class="quality-favorites-clear-all" data-quality-clear-favorites-menu><i class="fa-regular fa-trash-can"></i> Remover todos</button>'
-      : '';
-
-    body.innerHTML = items.length
-      ? items.map(itemHtml).join('')
-      : '<p class="quality-favorites-empty">Você ainda não favoritou nenhum produto.</p>';
-
-    panel.classList.add('is-open');
-    panel.classList.add('show');
-    document.body.classList.add('quality-favorites-open');
-  }
-
-  function closePanel(){
-    document.querySelectorAll('.quality-favorites-panel').forEach(function(panel){
-      panel.classList.remove('is-open');
-      panel.classList.remove('show');
-    });
-    document.body.classList.remove('quality-favorites-open');
-  }
-
-  function refreshSoon(){
-    refreshTimers.forEach(clearTimeout);
-    refreshTimers = [
-      setTimeout(ensureMenu, 60),
-      setTimeout(ensureMenu, 220),
-      setTimeout(ensureMenu, 700)
-    ];
-  }
-
-  document.addEventListener('click', function(ev){
-    var open = ev.target.closest('[data-quality-open-favorites-menu]');
-    if (open) { ev.preventDefault(); openPanel(); return; }
-
-    if (ev.target.closest('[data-quality-close-favorites-menu]')) {
-      ev.preventDefault();
-      closePanel();
-      return;
-    }
-
-    var clear = ev.target.closest('[data-quality-clear-favorites-menu]');
-    if (clear) {
-      ev.preventDefault();
-      if (confirm('Remover todos os favoritos deste navegador?')) {
-        writeFavorites([]);
-        ensureMenu();
-        closePanel();
-        if (window.qualityUpdateFavoriteButtons) { try { window.qualityUpdateFavoriteButtons(); } catch(e){} }
-      }
-      return;
-    }
-
-    var remove = ev.target.closest('[data-quality-remove-favorite-menu]');
-    if (remove) {
-      ev.preventDefault();
-      var k = remove.getAttribute('data-quality-remove-favorite-menu') || '';
-      writeFavorites(readFavorites().filter(function(item){ return productKey(item) !== k; }));
-      ensureMenu();
-      if (readFavorites().length) openPanel(); else closePanel();
-      if (window.qualityUpdateFavoriteButtons) { try { window.qualityUpdateFavoriteButtons(); } catch(e){} }
-      return;
-    }
-
-    if (ev.target.closest('[data-quality-fav]')) refreshSoon();
-  }, true);
-
-  window.addEventListener('storage', ensureMenu);
-  document.addEventListener('DOMContentLoaded', function(){ ensureMenu(); refreshSoon(); });
-  window.qualityRefreshFavoritesMenu = ensureMenu;
-
-  ensureMenu();
-  setTimeout(ensureMenu, 300);
-  setTimeout(ensureMenu, 1000);
-  setTimeout(ensureMenu, 2000);
-})();
-</script>
-
-<script src="/js/category-ui.js?v=20260909-navfix2"></script>
+<script src="/js/category-ui.js?v=20260909-generatorfix1"></script>
 
 <script src="/js/catalog-menu.js?v=20260823-1"></script>
 

@@ -1,8 +1,8 @@
 (function(){
   'use strict';
 
-  if (window.__qualityCategoryUINavFix2) return;
-  window.__qualityCategoryUINavFix2 = true;
+  if (window.__qualityCategoryUIGeneratorFix1) return;
+  window.__qualityCategoryUIGeneratorFix1 = true;
 
   function normalizeSearch(value){
     return (value || '').toString().normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().trim();
@@ -89,7 +89,7 @@
   }
 
   /*
-   * ROOTFIX1: category links stay native; this script only opens/closes menu and handles search.
+   * GENERATORFIX1: category links stay native; this script only opens/closes menu and handles search.
    * Nenhum listener é registrado nos links de categoria/subcategoria/produto.
    * Isso é intencional: href do navegador é a fonte única de navegação.
    */
