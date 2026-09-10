@@ -50,3 +50,36 @@ painel/data/marketing-chat-history.json
 content/automacao_whatsapp/
 Site_with_content/content/automacao_whatsapp/
 painel/.wwebjs_cache/
+
+# ==========================
+# Segurança do repositório público
+# Não publicar código interno, fonte de trabalho ou dados operacionais.
+# ==========================
+painel/
+Site_with_content/
+_tools/
+backups/
+Backup/
+content/erp/
+content/analytics.json
+content/publish.json
+content/personalizacao-history.json
+content/panel-theme.json
+
+# ==========================
+# Segurança ampliada — Etapa 4C
+# Conteúdo interno que nunca deve entrar no repositório/site público.
+# ==========================
+node_modules/
+docs/
+docs antigo/
+admin/
+Backup site/
+Copia de segurança/
+Painel_Quality_*/
+Painel_Admin_*/
+WhatsApp_Lab_v*/
+AI_START_HERE.md
+APLICAR_REMOCAO_AUTOMACAO_WHATSAPP.ps1
+Ideias e melhorias.xlsx
+*.bundle
