@@ -2285,3 +2285,58 @@ img{
   .quality-home-brand-copy small{font-size:9.5px}
   .quality-home-personalized{padding:17px 10px 8px;border-radius:14px}
 }
+
+
+/* V1.4.3 - refinamentos mobile e página de produto */
+.quality-home-main{
+  box-sizing:border-box;
+  max-width:min(1540px,100%);
+}
+
+.quality-product-buybox .quality-product-whatsapp-primary,
+.quality-product-buybox .quality-product-interest-primary{
+  box-sizing:border-box;
+}
+
+@media(max-width:850px){
+  /* Evita que a home inteira deslize horizontalmente no mobile; carrosséis continuam rolando internamente. */
+  body:has(.quality-home-main){overflow-x:hidden}
+  .quality-home-main{
+    width:100%;
+    max-width:100%;
+    overflow-x:clip;
+  }
+  .quality-home-main .quality-home-section,
+  .quality-home-main .quality-home-category-grid,
+  .quality-home-main .quality-home-brand-grid,
+  .quality-home-main .quality-home-carousel,
+  .quality-home-main .carousel-container{
+    min-width:0;
+    max-width:100%;
+  }
+  .quality-home-main .carousel-container{overflow:hidden}
+
+  /* No celular o CTA continua destacado, sem ocupar praticamente toda a largura do card. */
+  .quality-product-buybox .quality-product-whatsapp-primary{
+    width:min(100%,320px)!important;
+    max-width:320px!important;
+    min-height:46px!important;
+    margin:16px auto 9px!important;
+    padding:10px 14px!important;
+    font-size:14px!important;
+  }
+  .quality-product-buybox .quality-product-interest-primary{
+    width:min(100%,320px)!important;
+    max-width:320px!important;
+    margin-left:auto!important;
+    margin-right:auto!important;
+  }
+}
+
+@media(max-width:560px){
+  .quality-product-buybox .quality-product-whatsapp-primary,
+  .quality-product-buybox .quality-product-interest-primary{
+    width:min(100%,300px)!important;
+    max-width:300px!important;
+  }
+}

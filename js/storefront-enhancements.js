@@ -674,7 +674,7 @@
     if (highlights.length && !info.querySelector('.quality-product-highlights')) {
       var block = document.createElement('section');
       block.className = 'quality-product-highlights';
-      block.innerHTML = '<h2>O que você precisa saber sobre este produto</h2><ul>' + highlights.map(function(item){ return '<li>' + esc(item) + '</li>'; }).join('') + '</ul>';
+      block.innerHTML = '<h2>Resumo do produto</h2><ul>' + highlights.map(function(item){ return '<li>' + esc(item) + '</li>'; }).join('') + '</ul>';
       info.appendChild(block);
     }
 
