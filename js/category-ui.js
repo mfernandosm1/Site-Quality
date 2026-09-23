@@ -117,3 +117,13 @@
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init, {once:true});
   else init();
 })();
+
+// Quality Storefront Experience V1 - filtros, busca e lista de interesse nas categorias físicas.
+(function loadQualityStorefrontExperienceV1(){
+  if (window.__qualityStorefrontLoaderV1) return;
+  window.__qualityStorefrontLoaderV1 = true;
+  var script = document.createElement('script');
+  script.src = '/js/storefront-enhancements.js?v=20260922-2';
+  script.defer = true;
+  document.head.appendChild(script);
+})();

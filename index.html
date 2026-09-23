@@ -7,7 +7,7 @@
 <link rel="shortcut icon" href="/images/favicon_otimizado.ico?v=3">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
-  <link rel="stylesheet" href="/css/style.css?v=20260705">
+  <link rel="stylesheet" href="/css/style.css?v=20260922-home14">
   <script async="" src="https://www.googletagmanager.com/gtag/js?id=G-9HPD9XCELH"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -81,24 +81,79 @@
     </div>
   </section>
 
-  <main class="main">
-    <h2 style="text-align:center; margin-top: 40px;">Produtos em Destaque</h2>
+  <main class="main quality-home-main" data-home-categories-enabled="true" data-home-brands-enabled="true" data-home-brands-limit="8" data-home-featured-enabled="true" data-home-featured-limit="12" data-home-new-enabled="true" data-home-new-limit="10" data-home-smartphones-enabled="false" data-home-smartphones-limit="10" data-home-accessories-enabled="false" data-home-accessories-limit="10" data-home-electronics-enabled="false" data-home-electronics-limit="10" data-home-trust-enabled="true" data-home-recommended-enabled="true" data-home-recommended-limit="10" data-home-recent-enabled="true" data-home-recent-limit="8">
+    <section class="quality-home-section quality-home-categories" data-home-section="categories">
+      <div class="quality-home-heading">
+        <div><h2 id="home-categories-title">Encontre o que procura</h2><p>Acesse rapidamente as principais áreas da Quality</p></div>
+      </div>
+      <div class="quality-home-category-grid">
+        <a href="/smartphones/" class="quality-home-category-card"><span class="quality-home-category-icon"><i class="fa-solid fa-mobile-screen-button"></i></span><span><strong>Smartphones</strong><small>Novos e usados</small></span><i class="fa-solid fa-chevron-right quality-home-category-arrow"></i></a>
+        <a href="/acessorios/" class="quality-home-category-card"><span class="quality-home-category-icon"><i class="fa-solid fa-headphones"></i></span><span><strong>Acessórios</strong><small>Para o seu dia a dia</small></span><i class="fa-solid fa-chevron-right quality-home-category-arrow"></i></a>
+        <a href="/eletronicos/" class="quality-home-category-card"><span class="quality-home-category-icon"><i class="fa-solid fa-laptop"></i></span><span><strong>Eletrônicos</strong><small>Tecnologia e entretenimento</small></span><i class="fa-solid fa-chevron-right quality-home-category-arrow"></i></a>
+        <a href="/assistencia-tecnica/" class="quality-home-category-card"><span class="quality-home-category-icon"><i class="fa-solid fa-screwdriver-wrench"></i></span><span><strong>Assistência técnica</strong><small>Suporte especializado</small></span><i class="fa-solid fa-chevron-right quality-home-category-arrow"></i></a>
+      </div>
+    </section>
 
-    <div class="carousel-container">
-      <button class="carousel-arrow left" onclick="scrollCarousel(-1)">❮</button>
-      <div class="carousel-track" id="carousel1"></div>
-      <button class="carousel-arrow right" onclick="scrollCarousel(1)">❯</button>
-    </div>
+    <section class="quality-home-section quality-home-brands" data-home-section="brands" hidden>
+      <div class="quality-home-heading">
+        <div><h2 id="home-brands-title">Encontre por marca</h2><p>Vá direto para as marcas que você procura</p></div>
+      </div>
+      <div class="quality-home-brand-grid" id="home-brands-grid"></div>
+    </section>
 
-    <p id="no-results" class="em-breve" style="display:none; text-align:center; margin-top:20px;">
-      Nenhum produto na vitrine ainda.
-    </p>
+    <section class="quality-home-section" data-home-section="featured">
+      <div class="quality-home-heading"><div><h2 id="home-featured-title">Produtos em destaque</h2><p>Uma seleção da Quality para você conferir</p></div></div>
+      <div class="carousel-container quality-home-carousel">
+        <button class="carousel-arrow left" onclick="scrollCarousel(-1)" aria-label="Anterior">❮</button>
+        <div class="carousel-track" id="carousel1"></div>
+        <button class="carousel-arrow right" onclick="scrollCarousel(1)" aria-label="Próximo">❯</button>
+      </div>
+      <p id="no-results" class="em-breve" style="display:none; text-align:center; margin-top:20px;">Nenhum produto na vitrine ainda.</p>
+    </section>
+
+    <section class="quality-home-section" data-home-section="new" hidden>
+      <div class="quality-home-heading"><div><h2 id="home-new-title">Novidades na Quality</h2><p>Produtos adicionados recentemente à nossa loja virtual</p></div></div>
+      <div class="carousel-container quality-home-carousel"><button class="carousel-arrow left" onclick="qualityHomeScroll('home-new-track',-1)" aria-label="Anterior">❮</button><div class="carousel-track" id="home-new-track"></div><button class="carousel-arrow right" onclick="qualityHomeScroll('home-new-track',1)" aria-label="Próximo">❯</button></div>
+    </section>
+
+    <section class="quality-home-section" data-home-section="smartphones" hidden>
+      <div class="quality-home-heading"><div><h2 id="home-smartphones-title">Smartphones</h2><p>Veja mais opções disponíveis em nossa loja virtual</p></div><a href="/smartphones/" class="quality-home-see-all">Ver todos →</a></div>
+      <div class="carousel-container quality-home-carousel"><button class="carousel-arrow left" onclick="qualityHomeScroll('home-smartphones-track',-1)" aria-label="Anterior">❮</button><div class="carousel-track" id="home-smartphones-track"></div><button class="carousel-arrow right" onclick="qualityHomeScroll('home-smartphones-track',1)" aria-label="Próximo">❯</button></div>
+    </section>
+
+    <section class="quality-home-section" data-home-section="accessories" hidden>
+      <div class="quality-home-heading"><div><h2 id="home-accessories-title">Acessórios</h2><p>Itens para proteger, conectar e aproveitar melhor seus aparelhos</p></div><a href="/acessorios/" class="quality-home-see-all">Ver todos →</a></div>
+      <div class="carousel-container quality-home-carousel"><button class="carousel-arrow left" onclick="qualityHomeScroll('home-accessories-track',-1)" aria-label="Anterior">❮</button><div class="carousel-track" id="home-accessories-track"></div><button class="carousel-arrow right" onclick="qualityHomeScroll('home-accessories-track',1)" aria-label="Próximo">❯</button></div>
+    </section>
+
+    <section class="quality-home-section" data-home-section="electronics" hidden>
+      <div class="quality-home-heading"><div><h2 id="home-electronics-title">Eletrônicos</h2><p>Tecnologia para casa, trabalho e diversão</p></div><a href="/eletronicos/" class="quality-home-see-all">Ver todos →</a></div>
+      <div class="carousel-container quality-home-carousel"><button class="carousel-arrow left" onclick="qualityHomeScroll('home-electronics-track',-1)" aria-label="Anterior">❮</button><div class="carousel-track" id="home-electronics-track"></div><button class="carousel-arrow right" onclick="qualityHomeScroll('home-electronics-track',1)" aria-label="Próximo">❯</button></div>
+    </section>
+
+    <section class="quality-home-section quality-home-trust" data-home-section="trust">
+      <div class="quality-home-trust-grid">
+        <div><i class="fa-solid fa-store"></i><span><strong>Loja física</strong><small>Atendimento de uma empresa real</small></span></div>
+        <div><i class="fa-solid fa-comments"></i><span><strong>Atendimento humano</strong><small>Fale direto com nossa equipe</small></span></div>
+        <div><i class="fa-solid fa-shield-halved"></i><span><strong>Garantia e procedência</strong><small>Informações claras antes de comprar</small></span></div>
+        <div><i class="fa-brands fa-whatsapp"></i><span><strong>Compra orientada</strong><small>Tire dúvidas e consulte condições</small></span></div>
+      </div>
+    </section>
+
+    <section class="quality-home-section quality-home-personalized" data-home-section="recommended" hidden>
+      <div class="quality-home-heading"><div><h2 id="home-recommended-title">Você pode gostar</h2><p>Selecionados a partir do que você viu na Quality</p></div></div>
+      <div class="carousel-container quality-home-carousel"><button class="carousel-arrow left" onclick="qualityHomeScroll('home-recommended-track',-1)" aria-label="Anterior">❮</button><div class="carousel-track" id="home-recommended-track"></div><button class="carousel-arrow right" onclick="qualityHomeScroll('home-recommended-track',1)" aria-label="Próximo">❯</button></div>
+    </section>
+
+    <section class="quality-home-section" data-home-section="recent" hidden>
+      <div class="quality-home-heading"><div><h2 id="home-recent-title">Vistos recentemente</h2><p>Continue de onde parou</p></div></div>
+      <div class="carousel-container quality-home-carousel"><button class="carousel-arrow left" onclick="qualityHomeScroll('home-recent-track',-1)" aria-label="Anterior">❮</button><div class="carousel-track" id="home-recent-track"></div><button class="carousel-arrow right" onclick="qualityHomeScroll('home-recent-track',1)" aria-label="Próximo">❯</button></div>
+    </section>
   </main>
-
   <div id="footer"></div>
 
   <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-  <script src="/js/main.js?v=20260908-menu1"></script>
+  <script src="/js/main.js?v=20260922-protect1"></script>
 
   <script>
   function scrollCarousel(dir) {
@@ -395,11 +450,14 @@
   }
 
 
-  fetch('/content/products.json')
-    .then(r => r.json())
+  window.__qualityHomeCatalogPromise = window.__qualityHomeCatalogPromise || fetch('/content/catalog-public.json', {cache:'no-store'}).then(r => { if(!r.ok) throw new Error('catalog'); return r.json(); }).catch(() => fetch('/content/products.json').then(r => r.json()));
+  window.__qualityHomeCatalogPromise
     .then(data => {
       const track = document.getElementById('carousel1');
-      const produtos = (data.items || []).filter(p => p.active !== false && p.featured === true);
+      const homeMain = document.querySelector('.quality-home-main');
+      const featuredEnabled = homeMain?.dataset.homeFeaturedEnabled !== 'false';
+      const featuredLimit = Math.max(1, Number(homeMain?.dataset.homeFeaturedLimit || 12));
+      const produtos = featuredEnabled ? (data.items || []).filter(p => p.active !== false && p.featured === true).slice(0, featuredLimit) : [];
 
       if (!track || produtos.length === 0) {
         document.getElementById('no-results').style.display = 'block';
@@ -432,7 +490,7 @@
           ${precoHTML}
           ${detalhesHTML}
           <a href="https://wa.me/5555991407824?text=Olá!%20Vim%20através%20do%20site%20e%20tenho%20interesse%20em%20${encodeURIComponent(p.name || 'produto')}"
-             class="btn" target="_blank">
+             class="btn" target="_blank" rel="noopener noreferrer">
              <i class="fa-brands fa-whatsapp"></i> Comprar no Whatsapp
           </a>
         `;
@@ -444,6 +502,97 @@
       document.getElementById('no-results').style.display = 'block';
     });
   </script>
+
+  <script>
+  // Home modular: seções configuráveis pelo painel sem duplicar cadastro de produto.
+  (function(){
+    const main = document.querySelector('.quality-home-main');
+    if (!main) return;
+    const enabled = key => main.dataset['home' + key.charAt(0).toUpperCase() + key.slice(1) + 'Enabled'] !== 'false';
+    const limit = (key, fallback) => Math.max(1, Number(main.dataset['home' + key.charAt(0).toUpperCase() + key.slice(1) + 'Limit'] || fallback));
+    const section = key => main.querySelector(`[data-home-section="${key}"]`);
+    const setVisible = (key, visible) => { const el=section(key); if(el) el.hidden = !visible; };
+
+    setVisible('categories', enabled('categories'));
+    setVisible('featured', enabled('featured'));
+    setVisible('smartphones', enabled('smartphones'));
+    setVisible('accessories', enabled('accessories'));
+    setVisible('electronics', enabled('electronics'));
+    setVisible('trust', enabled('trust'));
+
+    window.qualityHomeScroll = function(id, dir){ const track=document.getElementById(id); if(track) track.scrollBy({left:dir*320,behavior:'smooth'}); };
+
+    function normalizeCategory(value){
+      return String(value || '').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');
+    }
+    function activeProduct(p){
+      const lv = p?.virtualStore?.active !== undefined ? p.virtualStore.active : p?.active;
+      return lv !== false;
+    }
+    function homeCard(p){
+      const slug = p.slug || p.id || '';
+      const detailUrl = `/produto/${encodeURIComponent(slug)}/`;
+      const canOpen = p.detailsEnabled || hasGallery(p);
+      const priceHtml = shouldShowPrice(p) ? `<p>R$ ${(Number(p.price)||0).toFixed(2).replace('.',',')}</p>` : '';
+      const imageOpen = canOpen ? `<a class="quality-card-image-link" href="${detailUrl}" aria-label="Ver detalhes de ${escapeHtml(p.name || 'produto')}">` : '';
+      const imageClose = canOpen ? '</a>' : '';
+      const detailHtml = canOpen ? `<a href="${detailUrl}" class="btn btn-details">Ver detalhes</a>` : '';
+      return `<div class="produto-card product-card">
+        <div class="quality-card-image-wrap">
+          ${qualityProductActionsHtml(p, detailUrl)}
+          ${productTagsHtml(p, 2)}
+          ${imageOpen}<img src="${escapeHtml(productImagePath(p.image || 'images/sem-imagem.png'))}" alt="${escapeHtml(p.name || '')}">${imageClose}
+        </div>
+        <h3>${escapeHtml(p.name || '')}</h3>${productVariationsCardHtml(p)}${priceHtml}${detailHtml}
+        <a href="https://wa.me/5555991407824?text=${encodeURIComponent('Olá! Vim através do site e tenho interesse em ' + (p.name || 'produto'))}" class="btn" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-whatsapp"></i> Comprar no WhatsApp</a>
+      </div>`;
+    }
+    function renderTrack(id, products){
+      const track=document.getElementById(id); if(!track) return 0;
+      track.innerHTML=products.map(homeCard).join('');
+      if (window.qualityBindProductActions) try{ qualityBindProductActions(); }catch(_){}
+      if (window.qualityEnhanceStorefront) try{ window.qualityEnhanceStorefront(); }catch(_){}
+      return products.length;
+    }
+    function byCategory(items, wanted, max){
+      const accepted = new Set(wanted.map(normalizeCategory));
+      return items.filter(p => activeProduct(p) && accepted.has(normalizeCategory(p.category || p.virtualStore?.category || ''))).slice(0,max);
+    }
+
+    const promise = window.__qualityHomeCatalogPromise || fetch('/content/catalog-public.json', {cache:'no-store'}).then(r=>r.json());
+    promise.then(data => {
+      const items = Array.isArray(data?.items) ? data.items : [];
+      if (enabled('smartphones')) {
+        const count=renderTrack('home-smartphones-track', byCategory(items,['smartphones','smartphone'],limit('smartphones',10)));
+        setVisible('smartphones', count>0);
+      }
+      if (enabled('accessories')) {
+        const count=renderTrack('home-accessories-track', byCategory(items,['acessorios','acessorio'],limit('accessories',10)));
+        setVisible('accessories', count>0);
+      }
+      if (enabled('electronics')) {
+        const count=renderTrack('home-electronics-track', byCategory(items,['eletronicos','eletronico'],limit('electronics',10)));
+        setVisible('electronics', count>0);
+      }
+
+      if (enabled('recent')) {
+        let recent=[];
+        try { recent=JSON.parse(localStorage.getItem('quality_vistos_recentemente_v811') || '[]'); } catch(_) {}
+        const byKey=new Map(items.map(p=>[qualityProductKey(p),p]));
+        const selected=[];
+        for(const saved of recent){
+          const key=qualityProductKey(saved); const full=byKey.get(key);
+          if(full && activeProduct(full) && !selected.some(x=>qualityProductKey(x)===key)) selected.push(full);
+          if(selected.length>=limit('recent',8)) break;
+        }
+        const count=renderTrack('home-recent-track',selected);
+        setVisible('recent',count>0);
+      } else setVisible('recent',false);
+    }).catch(()=>{ setVisible('smartphones',false);setVisible('accessories',false);setVisible('electronics',false);setVisible('recent',false); });
+  })();
+  </script>
+
+  <script src="/js/home-marketplace.js?v=20260922-home14"></script>
 
   <script>
   // V8.0.1 - Busca reforçada na Home sem mexer no main.js
@@ -500,7 +649,7 @@
       }
 
       Promise.all([
-        fetchJson(['/content/products.json', '/site/content/products.json']).catch(function(){ return { items: [] }; }),
+        fetchJson(['/content/catalog-public.json', '/site/content/catalog-public.json', '/content/products.json', '/site/content/products.json']).catch(function(){ return { items: [] }; }),
         fetchJson(['/content/categories.json', '/site/content/categories.json']).catch(function(){ return { items: [] }; })
       ]).then(function(results){
         const products = results[0].items || [];

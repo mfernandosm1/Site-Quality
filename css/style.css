@@ -1943,3 +1943,345 @@ body.quality-favorites-open { overflow: hidden; }
 .product-card .quality-card-image-wrap .quality-card-actions {
   z-index: 40 !important;
 }
+
+/* =====================================================================
+   Quality Storefront Experience V1 - 2026-09-22
+   Marketplace UX: produto, lista de interesse, busca e filtros.
+===================================================================== */
+.quality-storefront-toast {
+  position: fixed;
+  left: 50%;
+  bottom: 28px;
+  transform: translate(-50%, 18px);
+  background: #111827;
+  color: #fff;
+  padding: 11px 16px;
+  border-radius: 999px;
+  font-weight: 700;
+  font-size: 14px;
+  box-shadow: 0 12px 32px rgba(0,0,0,.28);
+  opacity: 0;
+  pointer-events: none;
+  transition: .2s ease;
+  z-index: 12000;
+}
+.quality-storefront-toast.show { opacity: 1; transform: translate(-50%,0); }
+
+/* Minha lista */
+.quality-interest-nav {
+  border: 0;
+  background: transparent;
+  color: inherit;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  font: inherit;
+  white-space: nowrap;
+  padding: 7px 9px;
+  border-radius: 7px;
+}
+.quality-interest-nav:hover { background: rgba(255,255,255,.12); }
+.quality-interest-nav b {
+  min-width: 20px;
+  height: 20px;
+  padding: 0 5px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  background: rgba(255,255,255,.2);
+  font-size: 11px;
+}
+.quality-interest-nav.has-items b { background: #25d366; color: #fff; }
+.quality-interest-nav-mobile { width: 100%; justify-content: flex-start; padding: 12px 0; }
+.quality-interest-panel { position: fixed; inset: 0; display: none; z-index: 11000; }
+.quality-interest-panel.is-open { display: block; }
+.quality-interest-backdrop { position: absolute; inset: 0; background: rgba(17,24,39,.48); }
+.quality-interest-box {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: min(430px, 94vw);
+  height: 100%;
+  background: #fff;
+  box-shadow: -20px 0 45px rgba(15,23,42,.22);
+  display: flex;
+  flex-direction: column;
+}
+.quality-interest-head {
+  padding: 20px;
+  border-bottom: 1px solid #e5e7eb;
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  align-items: flex-start;
+}
+.quality-interest-head > div { display: flex; flex-direction: column; gap: 3px; }
+.quality-interest-head strong { font-size: 21px; color: #111827; }
+.quality-interest-head span { font-size: 13px; color: #6b7280; }
+.quality-interest-head button { border: 0; background: #f3f4f6; width: 38px; height: 38px; border-radius: 50%; cursor: pointer; font-size: 25px; }
+.quality-interest-body { flex: 1 1 auto; overflow: auto; padding: 10px 20px; }
+.quality-interest-item { display: grid; grid-template-columns: 72px 1fr; gap: 12px; padding: 14px 0; border-bottom: 1px solid #eee; }
+.quality-interest-item img { width: 72px; height: 72px; object-fit: contain; border-radius: 8px; border: 1px solid #eee; background: #fff; }
+.quality-interest-item-info { min-width: 0; display: flex; flex-direction: column; gap: 5px; align-items: flex-start; }
+.quality-interest-item-info > a { color: #111827; text-decoration: none; font-weight: 700; line-height: 1.25; }
+.quality-interest-item-info small { color: #6b7280; line-height: 1.35; }
+.quality-interest-item-info button { border: 0; background: none; color: #c90000; padding: 0; cursor: pointer; font-weight: 700; font-size: 12px; }
+.quality-interest-empty { min-height: 60vh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; color: #6b7280; padding: 30px; }
+.quality-interest-empty i { font-size: 42px; color: #d1d5db; margin-bottom: 14px; }
+.quality-interest-empty strong { color: #111827; font-size: 18px; }
+.quality-interest-empty p { max-width: 300px; line-height: 1.45; }
+.quality-interest-footer { padding: 16px 20px 22px; border-top: 1px solid #e5e7eb; display: grid; gap: 10px; }
+.quality-interest-whatsapp { min-height: 48px; border-radius: 8px; background: #25d366; color: #fff !important; text-decoration: none !important; display: flex; align-items: center; justify-content: center; gap: 8px; font-weight: 800; }
+.quality-interest-whatsapp:hover { background: #1ebe5d; }
+.quality-interest-clear { border: 0; background: transparent; color: #6b7280; cursor: pointer; font-weight: 700; }
+body.quality-interest-open { overflow: hidden; }
+.quality-interest-card-btn.is-added { color: #fff !important; background: #111827 !important; }
+
+/* Autocomplete */
+.quality-search-host { position: relative !important; }
+.quality-search-suggestions {
+  display: none;
+  position: absolute;
+  top: calc(100% + 7px);
+  right: 0;
+  width: min(430px, 82vw);
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  box-shadow: 0 18px 42px rgba(15,23,42,.18);
+  overflow: hidden;
+  z-index: 5000;
+  text-align: left;
+}
+.quality-search-suggestions.is-open { display: block; }
+.quality-search-suggestion { display: grid !important; grid-template-columns: 54px 1fr; gap: 10px; align-items: center; min-height: 68px !important; padding: 7px 10px !important; color: #111827 !important; text-decoration: none !important; background: #fff; border-bottom: 1px solid #f1f5f9; }
+.quality-search-suggestion:last-child { border-bottom: 0; }
+.quality-search-suggestion:hover { background: #f8fafc !important; color: #111827 !important; }
+.quality-search-suggestion img { width: 54px; height: 54px; object-fit: contain; border-radius: 7px; background: #fff; }
+.quality-search-suggestion span { min-width: 0; display: flex; flex-direction: column; gap: 3px; }
+.quality-search-suggestion strong { font-size: 13px; line-height: 1.25; }
+.quality-search-suggestion small { font-size: 11px; color: #6b7280; }
+.quality-search-empty { padding: 14px; color: #6b7280; font-size: 13px; }
+
+/* Categoria - filtros estilo marketplace */
+.quality-category-layout {
+  width: min(1380px, calc(100% - 32px));
+  margin: 0 auto 34px;
+  display: grid;
+  grid-template-columns: 220px minmax(0,1fr);
+  gap: 24px;
+  align-items: start;
+}
+.quality-category-layout > #produtos-container,
+.quality-category-layout > .products,
+.quality-category-layout > .produtos-container {
+  width: 100%;
+  margin-top: 0 !important;
+  padding-top: 0;
+  justify-content: flex-start;
+}
+.quality-category-filters {
+  position: sticky;
+  top: 18px;
+  border-right: 1px solid #e5e7eb;
+  padding: 4px 22px 12px 0;
+  min-width: 0;
+}
+.quality-filter-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 13px; }
+.quality-filter-head strong { font-size: 18px; color: #111827; }
+.quality-filter-head button { display: none; }
+.quality-filter-body { display: block; }
+.quality-filter-group { border: 0; padding: 0 0 18px; margin: 0 0 18px; border-bottom: 1px solid #eee; }
+.quality-filter-group legend { font-weight: 800; margin-bottom: 10px; color: #111827; font-size: 14px; }
+.quality-filter-group label { display: flex; align-items: center; gap: 8px; padding: 5px 0; cursor: pointer; color: #374151; font-size: 14px; }
+.quality-filter-group input { accent-color: #2563eb; width: 16px; height: 16px; }
+.quality-filter-clear { border: 0; background: transparent; padding: 0; color: #2563eb; font-weight: 700; cursor: pointer; }
+.quality-filter-result { margin-top: 12px; font-size: 12px; color: #6b7280; font-weight: 700; }
+.quality-filter-hidden { display: none !important; }
+
+/* Produto estilo marketplace */
+body.quality-marketplace-ready .quality-product-detail-shell {
+  max-width: 1380px !important;
+  margin: 22px auto 42px !important;
+  padding: 0 24px !important;
+}
+.quality-product-breadcrumb { display: flex; align-items: center; gap: 8px; min-width: 0; margin: 0 0 18px; font-size: 12px; color: #6b7280; overflow: hidden; white-space: nowrap; }
+.quality-product-breadcrumb a { color: #4b5563; text-decoration: none; }
+.quality-product-breadcrumb a:hover { color: #2563eb; }
+.quality-product-breadcrumb i { font-size: 8px; color: #9ca3af; }
+.quality-product-breadcrumb span { overflow: hidden; text-overflow: ellipsis; }
+body.quality-marketplace-ready .produto-layout {
+  display: grid !important;
+  grid-template-columns: minmax(390px, 1.05fr) minmax(360px, .95fr) minmax(300px, 360px) !important;
+  gap: 30px !important;
+  align-items: start !important;
+}
+body.quality-marketplace-ready .produto-galeria { grid-template-columns: 72px minmax(0,1fr) !important; gap: 12px !important; }
+body.quality-marketplace-ready .galeria-principal { min-height: 500px !important; padding: 16px !important; border: 1px solid #f1f5f9; }
+body.quality-marketplace-ready .galeria-principal img { max-height: 500px !important; }
+body.quality-marketplace-ready .produto-info { min-width: 0; padding-top: 4px; }
+body.quality-marketplace-ready .produto-info h1 { font-size: clamp(24px,2vw,31px) !important; line-height: 1.15; margin: 8px 0 10px !important; color: #111827; }
+.quality-product-eyebrow { min-height: 26px; display: flex; align-items: center; flex-wrap: wrap; gap: 9px; font-size: 12px; color: #6b7280; }
+.quality-product-eyebrow a { color: #2563eb; text-decoration: none; }
+.quality-condition-badge { display: inline-flex; align-items: center; min-height: 25px; padding: 4px 8px; border-radius: 6px; background: #f3f4f6; color: #374151; font-weight: 800; text-transform: uppercase; font-size: 10px; letter-spacing: .04em; }
+.quality-detail-actions-marketplace { margin: 12px 0 14px !important; }
+.quality-detail-actions-marketplace .quality-detail-action { min-height: 36px; padding: 7px 10px; font-size: 12px; box-shadow: none; border: 1px solid #e5e7eb; }
+.quality-product-short-description { color: #4b5563; font-size: 15px !important; line-height: 1.55 !important; margin: 12px 0 18px !important; }
+.quality-product-highlights { margin: 24px 0 4px; padding-top: 20px; border-top: 1px solid #e5e7eb; }
+.quality-product-highlights h2 { font-size: 18px; margin: 0 0 12px; color: #111827; }
+.quality-product-highlights ul { margin: 0; padding-left: 19px; display: grid; gap: 8px; color: #374151; font-size: 14px; line-height: 1.4; }
+.quality-product-buybox { border: 1px solid #e5e7eb; border-radius: 12px; padding: 20px; background: #fff; box-shadow: 0 4px 16px rgba(15,23,42,.06); position: sticky; top: 18px; }
+.quality-product-buybox-title { font-size: 13px; color: #6b7280; margin-bottom: 7px; }
+.quality-product-availability { display: flex; align-items: center; gap: 7px; font-size: 18px; font-weight: 800; color: #111827; margin-bottom: 17px; }
+.quality-product-availability.is-available i { color: #16a34a; }
+.quality-product-availability.is-consult i { color: #d97706; }
+.quality-product-availability.is-unavailable i { color: #dc2626; }
+.quality-product-buybox .produto-variacoes-box { margin: 12px 0 18px !important; padding-top: 15px; border-top: 1px solid #eee; }
+.quality-product-buybox .produto-variacao-titulo { font-size: 13px; }
+.quality-product-buybox .produto-variacao-btn { min-height: 39px; background: #fff; border-radius: 7px; font-size: 12px; }
+.quality-product-buybox .produto-variacao-btn.ativa { border-color: #2563eb; box-shadow: 0 0 0 1px #2563eb; }
+.quality-product-price { font-size: 25px !important; margin: 10px 0 12px !important; }
+.quality-product-trust { border-top: 1px solid #eee; margin-top: 4px; padding-top: 14px; display: grid; gap: 13px; }
+.quality-product-trust > div { display: grid; grid-template-columns: 25px 1fr; gap: 9px; align-items: start; }
+.quality-product-trust i { color: #2563eb; margin-top: 2px; }
+.quality-product-trust span { display: flex; flex-direction: column; gap: 2px; }
+.quality-product-trust strong { font-size: 13px; color: #111827; }
+.quality-product-trust small { color: #6b7280; font-size: 11px; line-height: 1.35; }
+.quality-product-buybox .quality-product-whatsapp-primary { display: flex !important; width: min(100%, 280px) !important; min-height: 44px; margin: 18px auto 8px !important; border-radius: 8px !important; font-size: 13px !important; padding: 10px 16px !important; justify-content: center; }
+.quality-product-interest-primary { width: min(100%, 280px); min-height: 42px; margin: 0 auto; border: 1px solid #2563eb; border-radius: 8px; background: #fff; color: #2563eb; font-weight: 800; cursor: pointer; display: flex; justify-content: center; align-items: center; gap: 8px; }
+.quality-product-interest-primary:hover { background: #eff6ff; }
+.quality-product-interest-primary.is-added { border-color: #111827; color: #111827; background: #f9fafb; }
+.quality-product-description-section { margin: 34px 0 0; padding-top: 28px; border-top: 1px solid #e5e7eb; }
+.quality-product-description-section .produto-descricao-box { margin: 0 !important; padding: 0 !important; background: transparent !important; max-width: 900px; color: #374151; line-height: 1.65; }
+.quality-product-description-section .produto-descricao-box h2 { font-size: 24px !important; color: #111827; margin-bottom: 18px !important; }
+body.quality-marketplace-ready .produtos-relacionados { max-width: 1332px; }
+body.quality-marketplace-ready .quality-section-heading h2 { font-size: 20px; }
+body.quality-marketplace-ready .quality-section-heading p { font-size: 12px; }
+
+/* A terceira ação de card fica compacta e coerente com favorito/compartilhar. */
+.quality-card-actions .quality-interest-card-btn { color: #2563eb; }
+.quality-card-actions .quality-interest-card-btn:hover { background: #eff6ff; }
+
+@media (max-width: 1120px) {
+  body.quality-marketplace-ready .produto-layout { grid-template-columns: minmax(360px,1fr) minmax(330px,.95fr) !important; }
+  body.quality-marketplace-ready .quality-product-buybox { grid-column: 2; position: static; }
+  body.quality-marketplace-ready .produto-info { grid-column: 2; }
+  body.quality-marketplace-ready .produto-galeria { grid-row: 1 / span 2; }
+}
+
+@media (max-width: 850px) {
+  .quality-product-buybox .quality-product-whatsapp-primary,
+  .quality-product-buybox .quality-product-interest-primary { width: 100% !important; max-width: none !important; }
+  .quality-interest-nav-desktop { display: none; }
+  .quality-search-suggestions { left: 0; right: auto; width: min(430px, calc(100vw - 34px)); }
+  .quality-category-layout { width: calc(100% - 24px); grid-template-columns: 1fr; gap: 12px; }
+  .quality-category-filters { position: static; border-right: 0; border: 1px solid #e5e7eb; border-radius: 10px; padding: 12px 14px; background: #fff; }
+  .quality-filter-head { margin-bottom: 0; }
+  .quality-filter-head button { display: inline-flex; align-items: center; gap: 7px; border: 1px solid #d1d5db; background: #fff; min-height: 36px; padding: 0 11px; border-radius: 7px; font-weight: 700; cursor: pointer; }
+  .quality-filter-body { display: none; padding-top: 16px; }
+  .quality-category-filters.is-open .quality-filter-body { display: block; }
+  .quality-filter-result { position: absolute; pointer-events: none; opacity: 0; }
+  .quality-category-layout > #produtos-container { justify-content: center; }
+
+  body.quality-marketplace-ready .quality-product-detail-shell { padding: 0 14px !important; margin-top: 14px !important; }
+  body.quality-marketplace-ready .produto-layout { grid-template-columns: 1fr !important; gap: 18px !important; }
+  body.quality-marketplace-ready .produto-galeria,
+  body.quality-marketplace-ready .produto-info,
+  body.quality-marketplace-ready .quality-product-buybox { grid-column: 1 !important; grid-row: auto !important; }
+  body.quality-marketplace-ready .produto-galeria { grid-template-columns: 1fr !important; }
+  body.quality-marketplace-ready .galeria-miniaturas { flex-direction: row !important; max-height: none !important; overflow-x: auto !important; order: 2; }
+  body.quality-marketplace-ready .galeria-principal { min-height: 330px !important; order: 1; }
+  body.quality-marketplace-ready .galeria-principal img { max-height: 330px !important; }
+  body.quality-marketplace-ready .produto-info h1 { font-size: 23px !important; }
+  .quality-product-buybox { position: static; padding: 16px; }
+  .quality-product-description-section { margin-top: 26px; }
+  .quality-product-breadcrumb { margin-bottom: 10px; }
+}
+
+@media (max-width: 560px) {
+  .quality-interest-box { width: 100%; }
+  .quality-interest-nav-mobile { font-size: 15px; }
+  body.quality-marketplace-ready .quality-product-detail-shell { padding: 0 10px !important; }
+  body.quality-marketplace-ready .galeria-principal { min-height: 300px !important; padding: 8px !important; }
+  .quality-product-eyebrow { gap: 7px; }
+  .quality-product-highlights h2 { font-size: 17px; }
+  .quality-product-highlights ul { font-size: 13px; }
+}
+
+/* Ajustes finos Storefront V1 */
+.nav-desktop .quality-interest-nav { color: #fff; }
+.mobile-nav .quality-interest-nav { color: #222; }
+.search-wrapper.quality-search-host,
+.search-wrapper-mobile.quality-search-host { overflow: visible !important; }
+.quality-category-filters { top: 100px; }
+.quality-product-buybox { top: 100px; }
+
+@media (max-width: 1240px) and (min-width: 851px) {
+  body.quality-marketplace-ready .produto-layout { grid-template-columns: minmax(360px,1fr) minmax(330px,.95fr) !important; }
+  body.quality-marketplace-ready .quality-product-buybox { grid-column: 2; position: static; }
+  body.quality-marketplace-ready .produto-info { grid-column: 2; }
+  body.quality-marketplace-ready .produto-galeria { grid-row: 1 / span 2; }
+}
+
+/* V1.3 - Home modular / experiência estilo marketplace */
+.quality-home-main{max-width:1440px;margin:0 auto;padding:0 26px 42px}.quality-home-section{margin-top:34px}.quality-home-section[hidden]{display:none!important}.quality-home-heading{display:flex;align-items:flex-end;justify-content:space-between;gap:18px;margin-bottom:16px}.quality-home-heading h2{margin:0;font-size:25px;line-height:1.15;color:#111827}.quality-home-heading p{margin:5px 0 0;color:#6b7280;font-size:13px}.quality-home-see-all{color:#2563eb;text-decoration:none;font-weight:800;font-size:13px;white-space:nowrap}.quality-home-see-all:hover{text-decoration:underline}.quality-home-category-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}.quality-home-category-card{display:flex;align-items:center;gap:13px;min-height:86px;padding:16px 18px;border:1px solid #e5e7eb;border-radius:14px;background:#fff;text-decoration:none;color:#111827;box-shadow:0 3px 12px rgba(15,23,42,.05);transition:transform .16s ease,border-color .16s ease,box-shadow .16s ease}.quality-home-category-card:hover{transform:translateY(-2px);border-color:#cbd5e1;box-shadow:0 7px 20px rgba(15,23,42,.09)}.quality-home-category-icon{display:grid;place-items:center;width:46px;height:46px;flex:0 0 46px;border-radius:50%;background:#f8fafc;font-size:22px}.quality-home-category-card strong{display:block;font-size:14px}.quality-home-category-card small{display:block;margin-top:3px;color:#6b7280;font-size:11px}.quality-home-carousel{margin-top:0}.quality-home-carousel .carousel-track{padding-top:4px;padding-bottom:8px}.quality-home-trust{border:1px solid #e5e7eb;border-radius:15px;background:#fff;box-shadow:0 3px 12px rgba(15,23,42,.04)}.quality-home-trust-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr))}.quality-home-trust-grid>div{display:flex;align-items:center;gap:11px;padding:19px 18px;border-right:1px solid #eef0f3}.quality-home-trust-grid>div:last-child{border-right:0}.quality-home-trust-grid i{font-size:22px;color:#2563eb;width:28px;text-align:center}.quality-home-trust-grid span{min-width:0}.quality-home-trust-grid strong,.quality-home-trust-grid small{display:block}.quality-home-trust-grid strong{font-size:12px;color:#111827}.quality-home-trust-grid small{margin-top:3px;font-size:10.5px;color:#6b7280;line-height:1.3}
+@media(max-width:900px){.quality-home-main{padding-left:16px;padding-right:16px}.quality-home-category-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.quality-home-trust-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.quality-home-trust-grid>div:nth-child(2){border-right:0}.quality-home-trust-grid>div:nth-child(-n+2){border-bottom:1px solid #eef0f3}.quality-home-heading h2{font-size:22px}}
+@media(max-width:560px){.quality-home-main{padding-left:12px;padding-right:12px}.quality-home-section{margin-top:25px}.quality-home-category-grid{grid-template-columns:1fr 1fr;gap:9px}.quality-home-category-card{min-height:74px;padding:12px 11px;gap:8px}.quality-home-category-icon{width:38px;height:38px;flex-basis:38px;font-size:18px}.quality-home-category-card strong{font-size:12px}.quality-home-category-card small{font-size:9px}.quality-home-trust-grid{grid-template-columns:1fr}.quality-home-trust-grid>div{border-right:0!important;border-bottom:1px solid #eef0f3!important;padding:14px 15px}.quality-home-trust-grid>div:last-child{border-bottom:0!important}.quality-home-heading{align-items:center}.quality-home-heading h2{font-size:20px}.quality-home-heading p{font-size:11px}.quality-home-see-all{font-size:11px}}
+
+/* V1.4 - Home estilo marketplace: marcas, novidades e personalização */
+.quality-home-main{max-width:1540px;width:100%;padding-left:30px;padding-right:30px}
+.quality-home-category-card{position:relative;min-height:96px;padding:18px 20px;overflow:hidden}
+.quality-home-category-card>span:nth-child(2){min-width:0;flex:1}
+.quality-home-category-icon{width:52px;height:52px;flex-basis:52px;border-radius:14px;background:linear-gradient(145deg,#f8fafc,#eef2f7);color:#dc0000;font-size:21px;border:1px solid #eef0f3}
+.quality-home-category-arrow{margin-left:auto;color:#c4c9d0;font-size:11px;transition:transform .16s ease,color .16s ease}
+.quality-home-category-card:hover .quality-home-category-arrow{transform:translateX(2px);color:#2563eb}
+.quality-home-category-card strong{font-size:15px}
+.quality-home-category-card small{font-size:11.5px;line-height:1.35}
+
+.quality-home-brand-grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px}
+.quality-home-brand-card{display:flex;align-items:center;gap:12px;min-height:82px;padding:14px 15px;border:1px solid #e5e7eb;border-radius:14px;background:#fff;color:#111827;text-decoration:none;box-shadow:0 3px 12px rgba(15,23,42,.045);transition:transform .16s ease,border-color .16s ease,box-shadow .16s ease}
+.quality-home-brand-card:hover{transform:translateY(-2px);border-color:#cbd5e1;box-shadow:0 7px 20px rgba(15,23,42,.09)}
+.quality-home-brand-mark{display:grid;place-items:center;width:48px;height:48px;flex:0 0 48px;border-radius:50%;background:#f8fafc;border:1px solid #e8ebef;color:#111827;font-size:22px;font-weight:900;letter-spacing:-.04em}
+.quality-home-brand-mark i{font-size:26px}
+.quality-home-brand-mark span{font-size:15px}
+.quality-home-brand-copy{display:flex;flex-direction:column;min-width:0;gap:3px;flex:1}
+.quality-home-brand-copy strong{font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.quality-home-brand-copy small{font-size:10.5px;color:#6b7280}
+.quality-home-brand-card>.fa-chevron-right{font-size:10px;color:#c4c9d0}
+.quality-home-brand-card:hover>.fa-chevron-right{color:#2563eb}
+
+.quality-home-personalized{padding:22px 22px 12px;border-radius:18px;background:linear-gradient(180deg,#f8fafc 0%,#fff 100%);border:1px solid #edf0f4}
+.quality-home-personalized .quality-home-heading{margin-bottom:8px}
+.quality-home-personalized .quality-home-carousel{margin-bottom:0}
+
+/* Dificulta cópia casual de imagens sem quebrar links, zoom ou a galeria. */
+img{
+  -webkit-user-drag:none;
+  user-select:none;
+  -webkit-user-select:none;
+  -webkit-touch-callout:none;
+}
+
+@media(max-width:1180px){
+  .quality-home-brand-grid{grid-template-columns:repeat(4,minmax(0,1fr))}
+}
+@media(max-width:900px){
+  .quality-home-main{padding-left:16px;padding-right:16px}
+  .quality-home-brand-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .quality-home-category-card{min-height:88px;padding:15px 16px}
+}
+@media(max-width:560px){
+  .quality-home-main{padding-left:12px;padding-right:12px}
+  .quality-home-category-card{min-height:82px;padding:12px 11px}
+  .quality-home-category-icon{width:42px;height:42px;flex-basis:42px;border-radius:12px;font-size:17px}
+  .quality-home-category-arrow{display:none}
+  .quality-home-brand-grid{grid-template-columns:1fr 1fr;gap:9px}
+  .quality-home-brand-card{min-height:70px;padding:10px 11px;gap:9px}
+  .quality-home-brand-mark{width:40px;height:40px;flex-basis:40px;font-size:17px}
+  .quality-home-brand-mark i{font-size:21px}
+  .quality-home-brand-copy strong{font-size:12px}
+  .quality-home-brand-copy small{font-size:9.5px}
+  .quality-home-personalized{padding:17px 10px 8px;border-radius:14px}
+}

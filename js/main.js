@@ -232,7 +232,7 @@ function doSearch(query) {
 
   // Se não encontrou na página, procura no catálogo inteiro e redireciona
   Promise.all([
-    fetch("/content/products.json").then(r => r.json()).catch(() => ({ items: [] })),
+    fetch("/content/catalog-public.json", { cache: "no-store" }).then(r => r.json()).catch(() => ({ items: [] })),
     fetch("/content/categories.json").then(r => r.json()).catch(() => ({ items: [] }))
   ]).then(([productsData, categoriesData]) => {
     const produtos = productsData.items || [];
@@ -351,3 +351,13 @@ function initSwiper() {
   }, true);
 })();
 
+
+// Quality Storefront Experience V1 - recursos compartilhados da loja pública.
+(function loadQualityStorefrontExperienceV1(){
+  if (window.__qualityStorefrontLoaderV1) return;
+  window.__qualityStorefrontLoaderV1 = true;
+  var script = document.createElement('script');
+  script.src = '/js/storefront-enhancements.js?v=20260922-2';
+  script.defer = true;
+  document.head.appendChild(script);
+})();
