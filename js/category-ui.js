@@ -128,7 +128,7 @@
   if (window.__qualityStorefrontLoaderV1) return;
   window.__qualityStorefrontLoaderV1 = true;
   var script = document.createElement('script');
-  script.src = '/js/storefront-enhancements.js?v=20260922-2';
+  script.src = '/js/storefront-enhancements.js?v=20260925-commerce1';
   script.defer = true;
   document.head.appendChild(script);
 })();

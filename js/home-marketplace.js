@@ -1,7 +1,7 @@
-(function qualityHomeMarketplaceV14(){
+(function qualityHomeMarketplaceV15(){
   'use strict';
-  if (window.__qualityHomeMarketplaceV14) return;
-  window.__qualityHomeMarketplaceV14 = true;
+  if (window.__qualityHomeMarketplaceV15) return;
+  window.__qualityHomeMarketplaceV15 = true;
 
   var main = document.querySelector('.quality-home-main');
   if (!main) return;
@@ -37,7 +37,7 @@
     var k = norm(source).replace(/[^a-z0-9]/g,'');
     var known = {
       apple:'Apple', samsung:'Samsung', motorola:'Motorola', xiaomi:'Xiaomi', jbl:'JBL',
-      amazfit:'Amazfit', nintendo:'Nintendo', sony:'Sony', kaidi:'Kaidi', c3tech:'C3Tech',
+      amazfit:'Xiaomi', nintendo:'Nintendo', sony:'Sony', kaidi:'Kaidi', c3tech:'C3Tech',
       sandisk:'SanDisk', intelbras:'Intelbras', epson:'Epson', hp:'HP', lenovo:'Lenovo', acer:'Acer', lg:'LG', wap:'WAP'
     };
     return known[k] || source.replace(/\b\w/g,function(c){ return c.toUpperCase(); });
@@ -52,7 +52,7 @@
     // Fabricantes presentes no próprio nome têm prioridade sobre compatibilidades como “para iPhone”.
     var direct = [
       [/\bkaidi\b/,'Kaidi'], [/\bc3\s*tech\b|\bc3tech\b/,'C3Tech'], [/\bsandisk\b/,'SanDisk'],
-      [/\bjbl\b/,'JBL'], [/\bamazfit\b/,'Amazfit'], [/\bnintendo\b/,'Nintendo'], [/\bintelbras\b/,'Intelbras'],
+      [/\bjbl\b/,'JBL'], [/\bamazfit\b/,'Xiaomi'], [/\bnintendo\b/,'Nintendo'], [/\bintelbras\b/,'Intelbras'],
       [/\bepson\b/,'Epson'], [/\blenovo\b/,'Lenovo'], [/\bacer\b/,'Acer'], [/\bwap\b/,'WAP'], [/\bsony\b/,'Sony']
     ];
     for (var i=0;i<direct.length;i++) if (direct[i][0].test(name)) return direct[i][1];
@@ -146,14 +146,36 @@
       var ai=preferred.indexOf(a), bi=preferred.indexOf(b);
       if(ai!==-1 || bi!==-1){ if(ai===-1)return 1;if(bi===-1)return -1;return ai-bi; }
       return groups.get(b).length-groups.get(a).length || a.localeCompare(b,'pt-BR');
-    }).slice(0,limit('brands',8));
-    host.innerHTML=brands.map(function(brand){
+    });
+    var initialLimit=limit('brands',8);
+    host.innerHTML=brands.map(function(brand,index){
       var list=groups.get(brand); var cat=dominantCategory(list);
-      return '<a class="quality-home-brand-card" href="' + esc(categoryHref(cat,brand)) + '">' +
+      return '<a class="quality-home-brand-card" href="' + esc(categoryHref(cat,brand)) + '"' + (index>=initialLimit?' hidden':'') + '>' +
         '<span class="quality-home-brand-mark">' + brandMark(brand) + '</span>' +
         '<span class="quality-home-brand-copy"><strong>' + esc(brand) + '</strong><small>' + list.length + (list.length===1?' produto':' produtos') + '</small></span>' +
         '<i class="fa-solid fa-chevron-right"></i></a>';
     }).join('');
+
+    var sectionEl=section('brands');
+    if(sectionEl){
+      var oldToggle=sectionEl.querySelector('[data-quality-brands-toggle]');
+      if(oldToggle) oldToggle.remove();
+      if(brands.length>initialLimit){
+        var toggle=document.createElement('button');
+        toggle.type='button';
+        toggle.setAttribute('data-quality-brands-toggle','');
+        toggle.setAttribute('aria-expanded','false');
+        toggle.textContent='Ver todas as marcas (' + brands.length + ')';
+        toggle.style.cssText='display:block;margin:14px auto 0;border:1px solid #d7dce3;background:#fff;color:#111827;border-radius:999px;padding:9px 16px;font:inherit;font-size:12px;font-weight:800;cursor:pointer;box-shadow:0 3px 10px rgba(15,23,42,.05)';
+        toggle.addEventListener('click',function(){
+          var expanded=toggle.getAttribute('aria-expanded')==='true';
+          host.querySelectorAll('.quality-home-brand-card').forEach(function(card,index){ if(index>=initialLimit) card.hidden=expanded; });
+          toggle.setAttribute('aria-expanded',expanded?'false':'true');
+          toggle.textContent=expanded?'Ver todas as marcas (' + brands.length + ')':'Mostrar menos marcas';
+        });
+        host.insertAdjacentElement('afterend',toggle);
+      }
+    }
     visible('brands',brands.length>0);
   }
   function productNumber(product){
@@ -248,7 +270,7 @@
     visible('recommended',count>0);
   }
 
-  var promise=window.__qualityHomeCatalogPromise || fetch('/content/products.json',{cache:'no-store'}).then(function(r){return r.json();});
+  var promise=window.__qualityHomeCatalogPromise || fetch('/content/catalog-public.json',{cache:'no-store'}).then(function(r){if(!r.ok)throw new Error('catalog-public');return r.json();}).catch(function(){return fetch('/content/products.json',{cache:'no-store'}).then(function(r){return r.json();});});
   promise.then(function(data){
     var items=Array.isArray(data && data.items)?data.items:[];
     renderBrands(items);

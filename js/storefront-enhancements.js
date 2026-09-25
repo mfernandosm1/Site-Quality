@@ -12,7 +12,7 @@
   var WHATSAPP_NUMBER = '5555991407824';
   var INTEREST_KEY = 'quality_interest_list_v1';
   var CATALOG_URLS = ['/content/catalog-public.json', '/site/content/catalog-public.json'];
-  var PRODUCTS_URLS = ['/content/products.json', '/site/content/products.json'];
+  var PRODUCTS_URLS = ['/content/catalog-public.json', '/site/content/catalog-public.json', '/content/products.json', '/site/content/products.json'];
   var catalogPromise = null;
   var productsPromise = null;
   var globalObserver = null;
@@ -90,7 +90,7 @@
     var explicit = String((product && (product.brand || (product.erp && product.erp.brand))) || '').trim();
     if (explicit && normalize(explicit) !== 'semmarca' && normalize(explicit) !== 'sem marca') {
       var brandKey = normalize(explicit);
-      var known = {apple:'Apple', samsung:'Samsung', xiaomi:'Xiaomi', motorola:'Motorola', jbl:'JBL', hp:'HP', lg:'LG', wap:'WAP', epson:'Epson', lenovo:'Lenovo', acer:'Acer', nintendo:'Nintendo', sony:'Sony', intelbras:'Intelbras', kaidi:'Kaidi', sandisk:'SanDisk', c3tech:'C3Tech', amazfit:'Amazfit'};
+      var known = {apple:'Apple', samsung:'Samsung', xiaomi:'Xiaomi', motorola:'Motorola', jbl:'JBL', hp:'HP', lg:'LG', wap:'WAP', epson:'Epson', lenovo:'Lenovo', acer:'Acer', nintendo:'Nintendo', sony:'Sony', intelbras:'Intelbras', kaidi:'Kaidi', sandisk:'SanDisk', c3tech:'C3Tech', amazfit:'Xiaomi'};
       if (known[brandKey]) return known[brandKey];
       return explicit.toLowerCase().replace(/\b\w/g, function(c){ return c.toUpperCase(); });
     }
@@ -101,7 +101,7 @@
       [/motorola|\bmoto\b/, 'Motorola'],
       [/xiaomi|redmi|poco/, 'Xiaomi'],
       [/\bjbl\b/, 'JBL'],
-      [/amazfit/, 'Amazfit'],
+      [/amazfit/, 'Xiaomi'],
       [/\bepson\b/, 'Epson'],
       [/\bhp\b|hewlett/, 'HP'],
       [/\blenovo\b/, 'Lenovo'],

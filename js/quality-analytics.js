@@ -1,6 +1,6 @@
 (function(){
-  if(window.__qualitySiteAnalyticsV5) return;
-  window.__qualitySiteAnalyticsV5 = true;
+  if(window.__qualitySiteAnalyticsV7) return;
+  window.__qualitySiteAnalyticsV7 = true;
 
   var ENDPOINT = 'https://script.google.com/macros/s/AKfycbwZQ01q5u5lRqE3Hk-nMutkTWcLA8r7127sO3Dt132Ti8L0Ci7DWoOyby5v92T_WY34/exec';
   var KEY = 'quality-analytics-v1';
@@ -10,6 +10,9 @@
   var currentProductCache = null;
   var lastSearchTerm = '';
   var lastNoResultTerm = '';
+  var engagementVisibleSince = document.visibilityState === 'visible' ? Date.now() : 0;
+  var engagementPendingMs = 0;
+  var pageVisitId = 'pv-' + Date.now() + '-' + Math.random().toString(36).slice(2,9);
 
   function clean(v, max){ return String(v == null ? '' : v).trim().slice(0, max || 300); }
   function normalize(v){ return clean(v,160).normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().trim(); }
@@ -24,7 +27,8 @@
   }
   function currentCategorySlug(){
     try {
-      var q = new URLSearchParams(window.location.search).get('slug');
+      var params = new URLSearchParams(window.location.search);
+      var q = params.get('slug') || params.get('cat') || params.get('categoria');
       if(q) return clean(q,120);
     } catch(e){}
     var path = String(window.location.pathname || '').replace(/^\/+|\/+$/g,'');
@@ -134,7 +138,9 @@
       term: clean(payload.term || payload.query || '',100).toLowerCase(),
       context: clean(payload.context || surface(),80),
       resultCount: Number.isFinite(Number(payload.resultCount)) ? Number(payload.resultCount) : undefined,
-      searchStatus: clean(payload.searchStatus || '',40)
+      searchStatus: clean(payload.searchStatus || '',40),
+      durationSeconds: Number.isFinite(Number(payload.durationSeconds)) ? Math.max(0, Math.round(Number(payload.durationSeconds))) : undefined,
+      pageVisitId: clean(payload.pageVisitId || pageVisitId || '',80)
     };
   }
   function dedupeKey(type,data){
@@ -142,6 +148,7 @@
     return [type,clean(p.slug||p.id||p.name,120),clean(c.slug||c.name,120),data.term,data.searchStatus].join('|').toLowerCase();
   }
   function isDuplicate(type,data){
+    if(type === 'page_engagement') return false;
     var key = dedupeKey(type,data), t = Date.now(), last = Number(recent[key] || 0);
     recent[key] = t;
     return last && (t-last) < 1800;
@@ -159,6 +166,8 @@
       context:data.context, Contexto:data.context,
       resultCount:data.resultCount, Resultados:data.resultCount,
       searchStatus:data.searchStatus, ResultadoBusca:data.searchStatus,
+      durationSeconds:data.durationSeconds, TempoSegundos:data.durationSeconds,
+      pageVisitId:data.pageVisitId, VisitaPagina:data.pageVisitId,
       url:window.location.href, Pagina:window.location.href,
       referrer:document.referrer||'', Origem:document.referrer||'',
       device:deviceName(), Dispositivo:deviceName(), language:navigator.language||'', Idioma:navigator.language||'',
@@ -210,6 +219,24 @@
       return Array.isArray(items)&&items.some(function(item){var k=String(item&&(item.slug||item.id||item.url||item.name||item.nome)||'').trim().toLowerCase();return key&&k===key;});
     } catch(e){return false;}
   }
+
+  function accumulateEngagement(){
+    if(engagementVisibleSince){
+      engagementPendingMs += Math.max(0, Date.now() - engagementVisibleSince);
+      engagementVisibleSince = 0;
+    }
+  }
+  function resumeEngagement(){
+    if(!engagementVisibleSince && document.visibilityState === 'visible') engagementVisibleSince = Date.now();
+  }
+  function flushEngagement(reason){
+    accumulateEngagement();
+    var seconds = Math.round(engagementPendingMs / 1000);
+    engagementPendingMs = 0;
+    if(seconds < 2) return false;
+    return track('page_engagement',{durationSeconds:seconds,pageVisitId:pageVisitId,context:surface(),reason:reason||''});
+  }
+
   function trackInitial(){
     if(!window.__qualityPageViewTrackedV4){ window.__qualityPageViewTrackedV4=true; track('page_view',{context:surface()}); }
     var slug=currentProductSlug();
@@ -291,6 +318,12 @@
     node.__qualityAnalyticsObserved=true;
     try{ new MutationObserver(function(){window.setTimeout(checkNoResults,20);}).observe(node,{attributes:true,childList:true,subtree:true,characterData:true}); }catch(e){}
   }
+
+  document.addEventListener('visibilitychange',function(){
+    if(document.visibilityState === 'hidden') flushEngagement('hidden'); else resumeEngagement();
+  });
+  window.addEventListener('pagehide',function(){ flushEngagement('pagehide'); });
+  window.addEventListener('beforeunload',function(){ flushEngagement('beforeunload'); });
 
   function start(){ trackInitial(); observeNoResults(); window.setTimeout(observeNoResults,600); window.setTimeout(observeNoResults,1600); }
   if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',start,{once:true}); else start();

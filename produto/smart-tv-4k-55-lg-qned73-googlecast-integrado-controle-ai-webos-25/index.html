@@ -15,6 +15,12 @@
   <meta name="twitter:card" content="summary_large_image">
   <link rel="canonical" href="https://www.qualitycel.com.br/produto/smart-tv-4k-55-lg-qned73-googlecast-integrado-controle-ai-webos-25/">
   <link rel="stylesheet" href="/css/style.css?v=20260922-home14">
+    <!-- QUALITY_PERFORMANCE_MOBILE_V1: antecipa os webfonts dos ícones no mobile -->
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin="">
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin="">
+  <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/webfonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin="">
+  <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/webfonts/fa-regular-400.woff2" as="font" type="font/woff2" crossorigin="">
+  <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/webfonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin="">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   
   <style>
@@ -347,7 +353,7 @@
 </main>
 
 <div id="footer"></div>
-<script src="/js/main.js?v=20260922-protect1"></script>
+<script src="/js/main.js?v=20260925-commerce1"></script>
 <script>
 (function(){
   function escapeHtml(value){
@@ -611,7 +617,7 @@
     const n = normalizeText(p?.name || p?.nome || '');
     if (n.includes('iphone') || n.includes('apple')) return 'apple';
     if (n.includes('samsung') || n.includes('galaxy')) return 'samsung';
-    if (n.includes('xiaomi') || n.includes('redmi') || n.includes('poco')) return 'xiaomi';
+    if (n.includes('xiaomi') || n.includes('redmi') || n.includes('poco') || n.includes('amazfit')) return 'xiaomi';
     if (n.includes('motorola') || n.includes('moto ')) return 'motorola';
     if (n.includes('jbl')) return 'jbl';
     if (n.includes('alexa') || n.includes('echo')) return 'amazon';
@@ -1820,5 +1826,5 @@
 })();
 </script>
 
-<script src="/js/quality-analytics.js?v=20260924-5"></script>
+<script src="/js/quality-analytics.js?v=20260925-7"></script>
 </body></html>
