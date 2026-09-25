@@ -102,7 +102,7 @@
     return '<div class="produto-card product-card" data-home-product="' + esc(key(product)) + '">' +
       '<div class="quality-card-image-wrap">' + actions + tags +
       (canOpen ? '<a class="quality-card-image-link" href="' + esc(detailUrl) + '" aria-label="Ver detalhes de ' + esc(name) + '">' : '') +
-      '<img src="' + esc(assetPath(product.image || product.imagem)) + '" alt="' + esc(name) + '" loading="lazy" draggable="false" onerror="this.onerror=null;this.src=\'/images/sem-imagem.png\';">' +
+      '<img src="' + esc(assetPath(product.image || product.imagem)) + '" alt="' + esc(name) + '" loading="lazy" decoding="async" draggable="false" onerror="this.onerror=null;this.src=\'/images/sem-imagem.png\';">' +
       (canOpen ? '</a>' : '') + '</div>' +
       '<h3>' + esc(name) + '</h3>' + variations + price +
       (canOpen ? '<a href="' + esc(detailUrl) + '" class="btn btn-details">Ver detalhes</a>' : '') +

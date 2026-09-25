@@ -240,7 +240,7 @@
       var key = interestItemKey(item);
       var detail = variationText(item.variation || {});
       return '<div class="quality-interest-item">' +
-        '<a href="' + esc(item.url || '#') + '"><img src="' + esc(assetPath(item.image)) + '" alt="' + esc(item.name) + '" onerror="this.onerror=null;this.src=\'/images/sem-imagem.png\';"></a>' +
+        '<a href="' + esc(item.url || '#') + '"><img src="' + esc(assetPath(item.image)) + '" alt="' + esc(item.name) + '" loading="lazy" decoding="async" onerror="this.onerror=null;this.src=\'/images/sem-imagem.png\';"></a>' +
         '<div class="quality-interest-item-info"><a href="' + esc(item.url || '#') + '">' + esc(item.name || 'Produto') + '</a>' +
           (detail ? '<small>' + esc(detail) + '</small>' : '') +
           '<button type="button" data-quality-remove-interest="' + esc(key) + '">Remover</button></div>' +
@@ -444,7 +444,7 @@
           popup.innerHTML = matches.map(function(product){
             var brand = brandOf(product);
             return '<a class="quality-search-suggestion" role="option" href="' + esc(productUrl(product)) + '">' +
-              '<img src="' + esc(assetPath(product.image || product.imagem)) + '" alt="" onerror="this.onerror=null;this.src=\'/images/sem-imagem.png\';">' +
+              '<img src="' + esc(assetPath(product.image || product.imagem)) + '" alt="" loading="lazy" decoding="async" onerror="this.onerror=null;this.src=\'/images/sem-imagem.png\';">' +
               '<span><strong>' + esc(product.name || product.nome || 'Produto') + '</strong>' +
               (brand ? '<small>' + esc(brand) + '</small>' : '') + '</span></a>';
           }).join('');
@@ -827,7 +827,7 @@
     var name = product.name || product.nome || 'Produto';
     return '<a class="produto-relacionado-card" href="' + esc(productUrl(product)) + '">' +
       '<div class="quality-card-image-wrap related-image-wrap">' + cardActions(product) +
-      '<img src="' + esc(assetPath(product.image || product.imagem)) + '" alt="' + esc(name) + '" onerror="this.onerror=null;this.src=\'/images/sem-imagem.png\';"></div>' +
+      '<img src="' + esc(assetPath(product.image || product.imagem)) + '" alt="' + esc(name) + '" loading="lazy" decoding="async" onerror="this.onerror=null;this.src=\'/images/sem-imagem.png\';"></div>' +
       '<strong>' + esc(name) + '</strong></a>';
   }
 

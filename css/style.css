@@ -2340,3 +2340,70 @@ img{
     max-width:300px!important;
   }
 }
+
+/* =========================================================
+   QUALITY WATERMARK V1 - marca d'agua visual dos produtos
+   A imagem original permanece intacta. A marca e aplicada na
+   camada de exibicao e vale para produtos atuais e futuros.
+========================================================= */
+.quality-card-image-wrap::after,
+.galeria-principal::after,
+.quality-gallery-viewer-stage::after {
+  content: "";
+  position: absolute;
+  right: 12px;
+  bottom: 12px;
+  width: clamp(54px, 24%, 118px);
+  aspect-ratio: 1 / 1;
+  background: url('/images/logo.png') center / contain no-repeat;
+  opacity: .22;
+  pointer-events: none;
+  user-select: none;
+  z-index: 8;
+}
+
+.quality-card-image-wrap,
+.galeria-principal,
+.quality-gallery-viewer-stage {
+  position: relative;
+}
+
+/* Na foto principal a marca pode ser um pouco maior, sem encobrir o produto. */
+.galeria-principal::after {
+  right: 18px;
+  bottom: 18px;
+  width: clamp(72px, 20%, 150px);
+  opacity: .20;
+}
+
+/* Mantem navegacao/controles do visualizador acima da marca. */
+.quality-gallery-viewer-stage::after {
+  right: 18px;
+  bottom: 18px;
+  width: clamp(72px, 18%, 140px);
+  opacity: .20;
+  z-index: 2;
+}
+.quality-gallery-viewer-stage .quality-gallery-viewer-image {
+  position: relative;
+  z-index: 1;
+}
+.quality-gallery-viewer-stage .quality-gallery-viewer-nav {
+  z-index: 3;
+}
+
+@media (max-width: 767px) {
+  .quality-card-image-wrap::after {
+    right: 9px;
+    bottom: 9px;
+    width: clamp(46px, 23%, 86px);
+    opacity: .20;
+  }
+  .galeria-principal::after,
+  .quality-gallery-viewer-stage::after {
+    right: 12px;
+    bottom: 12px;
+    width: clamp(62px, 22%, 110px);
+    opacity: .19;
+  }
+}

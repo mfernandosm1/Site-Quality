@@ -332,7 +332,11 @@
     gtag('js', new Date());
     gtag('config', 'G-9HPD9XCELH');
   </script>
-<meta property="og:image:alt" content="Fone Bluetooth JBL Tune 530BT"><meta name="twitter:title" content="Fone JBL Tune 530BT Bluetooth | Quality Celulares"><meta name="twitter:description" content="JBL Tune 530BT com conexão Bluetooth e formato confortável para ouvir músicas, vídeos e chamadas sem fio no dia a dia."><meta name="twitter:image" content="https://www.qualitycel.com.br/images/Fone_JBL-tune530bt.jpeg"></head>
+  <meta name="google-site-verification" content="GEU0kUI8OgPN8QxoDv8tGZPGnBYKmB4EAWo3Xe-5xz8">
+  <meta name="twitter:title" content="Fone JBL Tune 530BT Bluetooth | Quality Celulares">
+  <meta name="twitter:description" content="JBL Tune 530BT com conexão Bluetooth e formato confortável para ouvir músicas, vídeos e chamadas sem fio no dia a dia.">
+  <meta name="twitter:image" content="https://www.qualitycel.com.br/images/Fone_JBL-tune530bt.jpeg">
+<meta property="og:image:alt" content="Fone Bluetooth JBL Tune 530BT"><script type="application/ld+json" id="product-schema-jsonld">{"@context":"https://schema.org","@type":"Product","name":"Fone Bluetooth JBL Tune 530BT","image":["https://www.qualitycel.com.br/images/Fone_JBL-tune530bt.jpeg"],"description":"JBL Tune 530BT com conexão Bluetooth e formato confortável para ouvir músicas, vídeos e chamadas sem fio no dia a dia.","sku":"1781454148301","brand":{"@type":"Brand","name":"Fone"}}</script><script type="application/ld+json" id="organization-schema-jsonld">{"@context":"https://schema.org","@type":"Store","name":"Quality Celulares","url":"https://www.qualitycel.com.br","logo":"https://www.qualitycel.com.br/images/logo.png","description":"Loja especializada em smartphones, acessórios, notebooks, games e eletrônicos com atendimento pelo WhatsApp.","areaServed":["Saldanha Marinho, RS","Santa Bárbara do Sul, RS","Cruz Alta, RS","Carazinho, RS","Ibirubá, RS","Quinze de Novembro, RS","Tapera, RS","Selbach, RS","Colorado, RS","Panambi, RS","Fortaleza dos Valos, RS","Não-Me-Toque, RS"]}</script><script type="application/ld+json" id="breadcrumb-schema-jsonld">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Início","item":"https://www.qualitycel.com.br/"},{"@type":"ListItem","position":2,"name":"acessorios","item":"https://www.qualitycel.com.br/acessorios/"},{"@type":"ListItem","position":3,"name":"Fone Bluetooth JBL Tune 530BT","item":"https://www.qualitycel.com.br/produto/fone-bluetooth-jbl-tune-530bt/"}]}</script></head>
 <body>
 <div id="header"></div>
 
@@ -1116,7 +1120,7 @@
             '@type': 'ListItem',
             position: 1,
             name: 'Início',
-            item: window.location.origin + '/index.html'
+            item: window.location.origin + '/'
           },
           {
             '@type': 'ListItem',
@@ -1147,8 +1151,21 @@
     return;
   }
 
+  function fetchProductCatalog(){
+    const urls = ['/content/catalog-public.json', '/site/content/catalog-public.json', '/content/products.json', '/site/content/products.json'];
+    let index = 0;
+    function next(){
+      if (index >= urls.length) return Promise.resolve({ items: [] });
+      const url = urls[index++];
+      return fetch(url, { cache: 'no-store' })
+        .then(r => { if (!r.ok) throw new Error('Falha ao carregar ' + url); return r.json(); })
+        .catch(next);
+    }
+    return next();
+  }
+
   Promise.all([
-    fetch('/content/products.json').then(r => r.json()),
+    fetchProductCatalog(),
     fetch('/content/seo.json').then(r => r.json()).catch(() => ({}))
   ])
     .then(([data, seoConfig]) => {
@@ -1190,7 +1207,7 @@
 
         return `
           <button class="galeria-thumb ${index === 0 ? 'ativa' : ''}" type="button" data-media="${escapeHtml(media)}">
-            <img src="${escapeHtml(media)}" alt="${escapeHtml(name)}">
+            <img src="${escapeHtml(media)}" alt="${escapeHtml(name)}" loading="lazy" decoding="async">
           </button>
         `;
       }).join('');
@@ -1210,7 +1227,7 @@
             </div>
 
             <div class="galeria-principal" id="galeria-principal">
-              <img src="${escapeHtml(medias[0] || image)}" alt="${escapeHtml(name)}">
+              <img src="${escapeHtml(medias[0] || image)}" alt="${escapeHtml(name)}" decoding="async" fetchpriority="high">
             </div>
           </div>
 
@@ -1258,7 +1275,7 @@
           imageVariation = medias[colorIndex] || '';
         }
         if (imageVariation) {
-          principal.innerHTML = `<img src="${escapeHtml(imageVariation)}" alt="${escapeHtml(name)}">`;
+          principal.innerHTML = `<img src="${escapeHtml(imageVariation)}" alt="${escapeHtml(name)}" decoding="async" fetchpriority="high">`;
           document.querySelectorAll('.galeria-thumb').forEach((thumb, thumbIndex) => {
             thumb.classList.toggle('ativa', medias[thumbIndex] === imageVariation);
           });
@@ -1319,7 +1336,7 @@
               ? `<iframe src="${escapeHtml(embed)}" allowfullscreen></iframe>`
               : '<p>Vídeo inválido.</p>';
           } else {
-            principal.innerHTML = `<img src="${escapeHtml(media)}" alt="${escapeHtml(name)}">`;
+            principal.innerHTML = `<img src="${escapeHtml(media)}" alt="${escapeHtml(name)}" decoding="async" fetchpriority="high">`;
           }
         });
       });
@@ -1803,6 +1820,5 @@
 })();
 </script>
 
-
-<script src="/js/quality-analytics.js?v=20260830-3"></script>
+<script src="/js/quality-analytics.js?v=20260924-4"></script>
 </body></html>
