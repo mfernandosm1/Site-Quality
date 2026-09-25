@@ -1,8 +1,9 @@
 /*
- * Quality Storefront Experience V1 - 2026-09-22
+ * Quality Storefront Experience V1.1 - 2026-09-25
  * Marketplace-style UX without checkout/prices dependency.
  * Features: product detail 3-column layout, intelligent related products,
- * interest list -> WhatsApp, search autocomplete, Brand/Condition filters.
+ * interest list -> WhatsApp, search autocomplete, Brand/Condition filters,
+ * smartphone comparison with up to 3 products.
  */
 (function(){
   'use strict';
@@ -11,12 +12,15 @@
 
   var WHATSAPP_NUMBER = '5555991407824';
   var INTEREST_KEY = 'quality_interest_list_v1';
+  var COMPARE_KEY = 'quality_compare_smartphones_v1';
+  var COMPARE_MAX = 3;
   var CATALOG_URLS = ['/content/catalog-public.json', '/site/content/catalog-public.json'];
   var PRODUCTS_URLS = ['/content/catalog-public.json', '/site/content/catalog-public.json', '/content/products.json', '/site/content/products.json'];
   var catalogPromise = null;
   var productsPromise = null;
   var globalObserver = null;
   var productEnhanceTimer = null;
+  var compareTrayRequestSeq = 0;
 
   function normalize(value){
     return String(value || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().trim();
@@ -313,6 +317,756 @@
     }) || null;
   }
 
+  function isSmartphone(product){
+    return categoryOf(product) === 'smartphones';
+  }
+
+  function readCompareSlugs(){
+    try {
+      var parsed = JSON.parse(localStorage.getItem(COMPARE_KEY) || '[]');
+      if (!Array.isArray(parsed)) return [];
+      var out = [];
+      parsed.forEach(function(value){
+        var slug = String(value || '').trim();
+        if (slug && !out.some(function(x){ return normalize(x) === normalize(slug); })) out.push(slug);
+      });
+      return out.slice(0,COMPARE_MAX);
+    } catch (_) { return []; }
+  }
+
+  function writeCompareSlugs(slugs){
+    var clean = [];
+    (slugs || []).forEach(function(value){
+      var slug = String(value || '').trim();
+      if (slug && !clean.some(function(x){ return normalize(x) === normalize(slug); })) clean.push(slug);
+    });
+    clean = clean.slice(0,COMPARE_MAX);
+    try { localStorage.setItem(COMPARE_KEY, JSON.stringify(clean)); } catch (_) {}
+    setComparePageUrl(clean);
+    refreshCompareUI();
+    return clean;
+  }
+
+  function comparePageUrl(slugs){
+    var path = (window.location.hostname === 'localhost' && window.location.port === '3000') ? '/site/view/comparar.html' : '/comparar.html';
+    var values = (slugs || readCompareSlugs()).filter(Boolean);
+    return path + (values.length ? '?p=' + encodeURIComponent(values.join(',')) : '');
+  }
+
+  function compareFromUrl(){
+    if (!document.getElementById('quality-compare-root')) return null;
+    try {
+      var raw = new URLSearchParams(window.location.search).get('p') || '';
+      if (!raw) return null;
+      var values = raw.split(',').map(function(x){ return decodeURIComponent(x).trim(); }).filter(Boolean).slice(0,COMPARE_MAX);
+      if (values.length) {
+        try { localStorage.setItem(COMPARE_KEY, JSON.stringify(values)); } catch (_) {}
+        return values;
+      }
+    } catch (_) {}
+    return null;
+  }
+
+  function setComparePageUrl(slugs){
+    if (!document.getElementById('quality-compare-root') || !window.history || !history.replaceState) return;
+    try { history.replaceState(null,'',comparePageUrl(slugs)); } catch (_) {}
+  }
+
+  function injectCompareStyles(){
+    if (document.querySelector('link[data-quality-compare-css]')) return;
+    var link = document.createElement('link');
+    link.rel = 'stylesheet';
+    link.href = '/css/commerce-compare.css?v=20260925-2';
+    link.setAttribute('data-quality-compare-css','1');
+    document.head.appendChild(link);
+  }
+
+  function compareNotice(message){
+    var toast = document.querySelector('.quality-compare-notice');
+    if (!toast) {
+      toast = document.createElement('div');
+      toast.className = 'quality-compare-notice';
+      document.body.appendChild(toast);
+    }
+    toast.textContent = message;
+    toast.classList.add('is-visible');
+    clearTimeout(toast.__qualityTimer);
+    toast.__qualityTimer = setTimeout(function(){ toast.classList.remove('is-visible'); },2200);
+  }
+
+  function toggleCompareSlug(slug){
+    if (!slug) return false;
+    var items = readCompareSlugs();
+    var index = items.findIndex(function(x){ return normalize(x) === normalize(slug); });
+    if (index >= 0) {
+      items.splice(index,1);
+      writeCompareSlugs(items);
+      return false;
+    }
+    if (items.length >= COMPARE_MAX) {
+      compareNotice('Você pode comparar até 3 celulares por vez.');
+      return null;
+    }
+    items.push(slug);
+    writeCompareSlugs(items);
+    return true;
+  }
+
+  function refreshCompareButtons(){
+    var selected = readCompareSlugs().map(normalize);
+    document.querySelectorAll('[data-quality-compare]').forEach(function(button){
+      var slug = button.getAttribute('data-quality-compare') || '';
+      var active = selected.includes(normalize(slug));
+      var state = active ? '1' : '0';
+      button.classList.toggle('is-selected',active);
+      button.setAttribute('aria-pressed',active?'true':'false');
+
+      // Importante: não reescrever o conteúdo a cada passagem do MutationObserver.
+      // innerHTML, mesmo com o mesmo valor, gera uma nova mutação e pode criar loop infinito.
+      if (button.dataset.qualityCompareState === state) return;
+      button.dataset.qualityCompareState = state;
+      if (button.classList.contains('quality-compare-card-btn')) {
+        button.innerHTML = active ? '<i class="fa-solid fa-check"></i>' : '<i class="fa-solid fa-code-compare"></i>';
+        button.setAttribute('title', active ? 'Remover da comparação' : 'Comparar celular');
+        button.setAttribute('aria-label', active ? 'Remover celular da comparação' : 'Adicionar celular à comparação');
+      } else if (button.classList.contains('quality-product-compare-primary')) {
+        button.innerHTML = active ? '<i class="fa-solid fa-check"></i> Na comparação — escolher outro' : '<i class="fa-solid fa-code-compare"></i> Comparar com outro celular';
+      }
+    });
+  }
+
+  function compareSlugSignature(slugs){
+    return (slugs || []).map(normalize).join('|');
+  }
+
+  function bindCompareTrayControls(tray){
+    if (!tray || tray.dataset.qualityCompareControlsBound === '1') return;
+    tray.dataset.qualityCompareControlsBound = '1';
+    // Captura os dois comandos críticos diretamente na bandeja. Isso evita que
+    // páginas restauradas pelo botão Voltar (bfcache) deixem X/Limpar sem resposta.
+    tray.addEventListener('click', function(event){
+      var remove = event.target.closest && event.target.closest('[data-quality-compare-remove]');
+      if (remove) {
+        event.preventDefault();
+        event.stopPropagation();
+        var removeSlug = remove.getAttribute('data-quality-compare-remove') || '';
+        writeCompareSlugs(readCompareSlugs().filter(function(x){ return normalize(x) !== normalize(removeSlug); }));
+        return;
+      }
+      var clear = event.target.closest && event.target.closest('[data-quality-compare-clear]');
+      if (clear) {
+        event.preventDefault();
+        event.stopPropagation();
+        writeCompareSlugs([]);
+      }
+    }, true);
+  }
+
+  function ensureCompareTray(){
+    var requestSeq = ++compareTrayRequestSeq;
+    if (document.getElementById('quality-compare-root')) {
+      var existingOnPage = document.querySelector('.quality-compare-tray');
+      if (existingOnPage) existingOnPage.remove();
+      return;
+    }
+    var slugs = readCompareSlugs();
+    var requestedSignature = compareSlugSignature(slugs);
+    var tray = document.querySelector('.quality-compare-tray');
+    if (!slugs.length) {
+      if (tray) {
+        tray.hidden = true;
+        tray.dataset.qualityCompareSignature = '';
+      }
+      return;
+    }
+    getCatalog().then(function(items){
+      // Uma leitura antiga do catálogo pode terminar depois de o cliente clicar
+      // em X/Limpar. Nunca deixe essa resposta assíncrona restaurar a seleção antiga.
+      if (requestSeq !== compareTrayRequestSeq) return;
+      var currentSlugs = readCompareSlugs();
+      if (compareSlugSignature(currentSlugs) !== requestedSignature) return;
+
+      var products = currentSlugs.map(function(slug){ return productBySlug(items,slug); }).filter(function(p){ return p && isVisibleProduct(p) && isSmartphone(p); });
+      if (!products.length) {
+        if (tray) { tray.hidden = true; tray.dataset.qualityCompareSignature = ''; }
+        return;
+      }
+      if (!tray) {
+        tray = document.createElement('div');
+        tray.className = 'quality-compare-tray';
+        tray.setAttribute('role','region');
+        tray.setAttribute('aria-label','Celulares selecionados para comparar');
+        document.body.appendChild(tray);
+      }
+      bindCompareTrayControls(tray);
+      tray.hidden = false;
+      var traySignature = products.map(function(product){ return product.slug || product.id || ''; }).join('|');
+      if (tray.dataset.qualityCompareSignature === traySignature) return;
+      tray.dataset.qualityCompareSignature = traySignature;
+      var slots = [];
+      for (var i=0;i<COMPARE_MAX;i++) {
+        var product = products[i];
+        if (product) {
+          var slug = product.slug || product.id || '';
+          slots.push('<div class="quality-compare-tray-chip is-filled"><img src="' + esc(assetPath(product.image || product.imagem)) + '" alt=""><span>' + esc(product.name || product.nome || 'Celular') + '</span><button type="button" data-quality-compare-remove="' + esc(slug) + '" aria-label="Remover da comparação"><i class="fa-solid fa-xmark"></i></button></div>');
+        } else {
+          slots.push('<a class="quality-compare-tray-chip is-empty" href="/comparar.html" aria-label="Adicionar outro celular"><i class="fa-solid fa-plus"></i><span>Adicionar</span></a>');
+        }
+      }
+      var ready = products.length > 1;
+      tray.innerHTML =
+        '<div class="quality-compare-tray-title"><i class="fa-solid fa-code-compare"></i><span>Comparar celulares</span><b>' + products.length + '/' + COMPARE_MAX + '</b></div>' +
+        '<div class="quality-compare-tray-items">' + slots.join('') + '</div>' +
+        '<div class="quality-compare-tray-actions"><button type="button" class="quality-compare-tray-clear" data-quality-compare-clear>Limpar</button><a class="quality-compare-tray-go' + (ready?'':' is-waiting') + '" href="' + esc(ready ? comparePageUrl(products.map(function(p){return p.slug || p.id;})) : '/comparar.html') + '">' + (ready ? 'Comparar (' + products.length + ')' : 'Escolher outro') + '</a></div>';
+    });
+  }
+
+  function decorateCompareCards(){
+    if (document.getElementById('quality-compare-root')) return;
+    var cards = document.querySelectorAll('.produto-card, .product-card');
+    if (!cards.length) { refreshCompareButtons(); ensureCompareTray(); return; }
+    getCatalog().then(function(items){
+      cards.forEach(function(card){
+        var link = card.querySelector('a[href*="/produto/"]');
+        var slug = link ? slugFromUrl(link.getAttribute('href')) : '';
+        if (!slug) return;
+        var product = productBySlug(items,slug);
+        var old = card.querySelector('.quality-compare-card-btn');
+        if (!product || !isVisibleProduct(product) || !isSmartphone(product)) {
+          if (old) old.remove();
+          var oldActions = card.querySelector('.quality-card-actions');
+          if (oldActions) oldActions.classList.remove('has-quality-compare');
+          return;
+        }
+        var actions = card.querySelector('.quality-card-actions');
+        if (!actions) {
+          var imageWrap = card.querySelector('.quality-card-image-wrap') || card;
+          actions = document.createElement('div');
+          actions.className = 'quality-card-actions quality-card-actions-generated';
+          imageWrap.appendChild(actions);
+        }
+        actions.classList.add('has-quality-compare');
+        if (!old) {
+          old = document.createElement('button');
+          old.type = 'button';
+          old.className = 'quality-card-action quality-compare-card-btn';
+          old.setAttribute('data-quality-compare',slug);
+          actions.appendChild(old);
+        } else {
+          old.classList.add('quality-card-action');
+          old.setAttribute('data-quality-compare',slug);
+          if (old.parentElement !== actions) actions.appendChild(old);
+        }
+      });
+      refreshCompareButtons();
+      ensureCompareTray();
+    });
+  }
+
+  function addProductCompareButton(product, buybox){
+    if (!product || !buybox || !isSmartphone(product) || buybox.querySelector('.quality-product-compare-primary')) return;
+    var slug = product.slug || product.id || '';
+    if (!slug) return;
+    var button = document.createElement('button');
+    button.type = 'button';
+    button.className = 'quality-product-compare-primary';
+    button.setAttribute('data-quality-compare',slug);
+    button.setAttribute('data-quality-compare-open','1');
+    button.innerHTML = '<i class="fa-solid fa-code-compare"></i> Comparar com outro celular';
+    buybox.appendChild(button);
+    refreshCompareButtons();
+  }
+
+  function ensureCompareCategoryLink(){
+    var path = normalize(window.location.pathname || '');
+    var query = normalize(window.location.search || '');
+    var title = normalize((document.getElementById('categoria-titulo') || {}).textContent || '');
+    var smartphonePage = path.indexOf('/smartphones') >= 0 || query.indexOf('smartphones') >= 0 || title.indexOf('smartphone') >= 0;
+    if (!smartphonePage) return;
+    var toolbar = document.querySelector('.quality-category-toolbar');
+    if (!toolbar || toolbar.querySelector('[data-quality-open-comparator]')) return;
+    var link = document.createElement('a');
+    link.href = comparePageUrl();
+    link.className = 'quality-compare-category-link';
+    link.setAttribute('data-quality-open-comparator','1');
+    link.innerHTML = '<i class="fa-solid fa-code-compare"></i> Comparar celulares';
+    toolbar.appendChild(link);
+  }
+
+  function specPairs(product){
+    var html = String(product && (product.descriptionLong || product.description || product.descricao) || '');
+    if (!html) return [];
+    var holder = document.createElement('div');
+    holder.innerHTML = html;
+    var pairs = [];
+    holder.querySelectorAll('li').forEach(function(li){
+      var strong = li.querySelector('strong,b');
+      if (!strong) return;
+      var label = String(strong.textContent || '').replace(/:\s*$/,'').trim();
+      if (!label) return;
+      var full = String(li.textContent || '').replace(/\s+/g,' ').trim();
+      var value = full.replace(new RegExp('^' + label.replace(/[.*+?^${}()|[\]\\]/g,'\\$&') + '\\s*:?\\s*','i'),'').trim();
+      if (value) pairs.push({label:label,value:value});
+    });
+    return pairs;
+  }
+
+  function pickSpec(product, patterns){
+    var pairs = specPairs(product);
+    for (var i=0;i<patterns.length;i++) {
+      var re = patterns[i];
+      var found = pairs.find(function(pair){ return re.test(normalize(pair.label)); });
+      if (found && found.value) return found.value;
+    }
+    return '';
+  }
+
+  function capacityFallback(name, kind){
+    var text = String(name || '');
+    if (kind === 'ram') {
+      var ram = text.match(/(\d{1,2})\s*GB\s*(?:de\s*)?(?:RAM|ram)\b/);
+      if (ram) return ram[1] + 'GB';
+    }
+    var matches = [];
+    text.replace(/(\d{1,4})\s*(GB|TB)\b/gi,function(_,num,unit){ matches.push({num:Number(num),unit:unit.toUpperCase()}); return _; });
+    if (kind === 'storage') {
+      var tb = matches.find(function(x){ return x.unit === 'TB'; });
+      if (tb) return tb.num + 'TB';
+      var gb = matches.filter(function(x){ return x.unit === 'GB' && x.num >= 64; }).sort(function(a,b){return b.num-a.num;})[0];
+      if (gb) return gb.num + 'GB';
+    }
+    return '';
+  }
+
+  function compareSpecs(product){
+    var variations = product && product.variations ? product.variations : {};
+    var colors = Array.isArray(variations.colors) ? variations.colors.map(function(c){return typeof c === 'string' ? c : c && c.name;}).filter(Boolean) : [];
+    var name = product && (product.name || product.nome) || '';
+    var screen = pickSpec(product,[/^tela$/, /^display$/, /tela/]);
+    var processor = pickSpec(product,[/^processador$/, /^plataforma$/, /^chipset$/, /^chip$/]);
+    var ram = pickSpec(product,[/^memoria ram$/, /^memoria$/, /\bram\b/]) || capacityFallback(name,'ram');
+    var storage = pickSpec(product,[/^armazenamento$/, /memoria interna/, /armazenamento/]) || capacityFallback(name,'storage');
+    var cameras = pickSpec(product,[/^cameras$/, /^cameras traseiras$/, /^camera traseira$/, /^camera principal$/, /sistema de cameras/]);
+    var front = pickSpec(product,[/^camera frontal$/]);
+    if (front && cameras && normalize(cameras).indexOf(normalize(front)) < 0) cameras += ' • Frontal: ' + front;
+    else if (front && !cameras) cameras = 'Frontal: ' + front;
+    var battery = pickSpec(product,[/^bateria$/, /bateria/, /autonomia/]);
+    var charging = pickSpec(product,[/^carregamento$/, /recarga/, /carga rapida/]);
+    if (charging && battery && normalize(battery).indexOf(normalize(charging)) < 0) battery += ' • ' + charging;
+    var connectivity = pickSpec(product,[/^conectividade$/, /^rede$/, /5g.*wifi/, /5g/]);
+    if (!connectivity) {
+      if (/\b5g\b/i.test(name)) connectivity = '5G';
+      else if (/\b4g\b/i.test(name)) connectivity = '4G';
+    }
+    var protection = pickSpec(product,[/^protecao$/, /^resistencia$/, /certificacao/]);
+    var security = pickSpec(product,[/^seguranca$/, /face id/, /biometr/]);
+    var audio = pickSpec(product,[/^audio$/, /alto-falante/]);
+    var connector = pickSpec(product,[/^conector$/, /^conexoes$/]);
+    var system = pickSpec(product,[/^sistema operacional$/, /^sistema$/, /^software$/]);
+    var warranty = pickSpec(product,[/^garantia$/]) || String(product && product.logistics && product.logistics.warranty || '').trim();
+    return {
+      brand: brandOf(product) || '—',
+      condition: conditionOf(product) || '—',
+      screen: screen || '—',
+      processor: processor || '—',
+      ram: ram || '—',
+      storage: storage || '—',
+      cameras: cameras || '—',
+      battery: battery || '—',
+      connectivity: connectivity || '—',
+      connector: connector || '—',
+      protection: protection || '—',
+      security: security || '—',
+      audio: audio || '—',
+      system: system || '—',
+      colors: colors.length ? colors.join(', ') : '—',
+      warranty: warranty || '—'
+    };
+  }
+
+  var COMPARE_SECTIONS = [
+    {title:'Informações gerais', rows:[['brand','Marca'],['condition','Condição'],['colors','Cores disponíveis']]},
+    {title:'Tela e multimídia', rows:[['screen','Tela'],['cameras','Câmeras'],['audio','Áudio']]},
+    {title:'Desempenho', rows:[['processor','Processador'],['ram','Memória RAM'],['storage','Armazenamento'],['system','Sistema operacional']]},
+    {title:'Construção e segurança', rows:[['protection','Proteção / resistência'],['security','Segurança']]},
+    {title:'Energia e autonomia', rows:[['battery','Bateria e carregamento']]},
+    {title:'Conectividade', rows:[['connectivity','Rede / conectividade'],['connector','Conector']]},
+    {title:'Pós-venda', rows:[['warranty','Garantia']]}
+  ];
+
+  function compareProductHeader(product){
+    var name = product.name || product.nome || 'Celular';
+    return '<div class="quality-compare-col-head"><img src="' + esc(assetPath(product.image || product.imagem)) + '" alt=""><div><strong>' + esc(name) + '</strong><a href="' + esc(productUrl(product)) + '">Ver produto</a></div></div>';
+  }
+
+  function compareWhatsAppUrl(product){
+    var name = product.name || product.nome || 'este celular';
+    return 'https://wa.me/' + WHATSAPP_NUMBER + '?text=' + encodeURIComponent('Olá! Vim através do comparador do site da Quality Celulares e tenho interesse em ' + name);
+  }
+
+
+  function compareShareRows(){
+    return [
+      {group:'Informações gerais', items:[['Marca','brand'],['Condição','condition'],['Cores disponíveis','colors']]},
+      {group:'Tela e multimídia', items:[['Tela','screen'],['Câmeras','cameras'],['Áudio','audio']]},
+      {group:'Desempenho', items:[['Processador','processor'],['Memória RAM','ram'],['Armazenamento','storage'],['Sistema operacional','system']]},
+      {group:'Construção e segurança', items:[['Proteção / resistência','protection'],['Segurança','security']]},
+      {group:'Energia e autonomia', items:[['Bateria e carregamento','battery']]},
+      {group:'Conectividade', items:[['Rede / conectividade','connectivity'],['Conector','connector']]}
+    ];
+  }
+
+  function loadCanvasImage(src){
+    return new Promise(function(resolve){
+      if (!src) return resolve(null);
+      var img = new Image();
+      img.crossOrigin = 'anonymous';
+      img.onload = function(){ resolve(img); };
+      img.onerror = function(){ resolve(null); };
+      img.src = src;
+    });
+  }
+
+  function roundedRect(ctx, x, y, w, h, r){
+    var radius = Math.min(r, w/2, h/2);
+    ctx.beginPath();
+    ctx.moveTo(x + radius, y);
+    ctx.arcTo(x + w, y, x + w, y + h, radius);
+    ctx.arcTo(x + w, y + h, x, y + h, radius);
+    ctx.arcTo(x, y + h, x, y, radius);
+    ctx.arcTo(x, y, x + w, y, radius);
+    ctx.closePath();
+  }
+
+  function canvasTextLines(ctx, text, maxWidth){
+    var words = String(text || '—').replace(/\s+/g,' ').trim().split(' ');
+    if (!words.length || !words[0]) return ['—'];
+    var lines = [];
+    var line = words[0];
+    for (var i=1;i<words.length;i++) {
+      var test = line + ' ' + words[i];
+      if (ctx.measureText(test).width <= maxWidth) line = test;
+      else { lines.push(line); line = words[i]; }
+    }
+    lines.push(line);
+    return lines;
+  }
+
+  function drawCanvasText(ctx, text, x, y, maxWidth, lineHeight, maxLines){
+    var lines = canvasTextLines(ctx, text, maxWidth);
+    var visible = typeof maxLines === 'number' ? lines.slice(0, maxLines) : lines;
+    if (typeof maxLines === 'number' && lines.length > maxLines && visible.length) {
+      var last = visible[visible.length - 1];
+      while (last.length > 3 && ctx.measureText(last + '…').width > maxWidth) last = last.slice(0, -1);
+      visible[visible.length - 1] = last + '…';
+    }
+    visible.forEach(function(line, idx){ ctx.fillText(line, x, y + idx * lineHeight); });
+    return visible.length;
+  }
+
+  function compareShareFileName(products){
+    var slugs = products.map(function(product){ return (product.slug || product.id || 'celular').toString().replace(/[^a-z0-9-]+/gi,'-'); });
+    return 'quality-comparacao-' + slugs.join('-') + '.png';
+  }
+
+  function createCompareShareBlob(products){
+    var specs = products.map(compareSpecs);
+    var groups = compareShareRows();
+    var width = 1600;
+    var margin = 56;
+    var gap = 18;
+    var labelWidth = 270;
+    var cols = Math.max(products.length, 2);
+    var colWidth = Math.floor((width - margin * 2 - labelWidth - gap * (cols - 1)) / cols);
+    var visibleGroups = groups.map(function(group){
+      var items = group.items.filter(function(item){
+        return specs.some(function(spec){ return (spec[item[1]] || '—') !== '—'; });
+      });
+      return { group: group.group, items: items };
+    }).filter(function(group){ return group.items.length; });
+
+    var headerH = 132;
+    var heroH = 76;
+    var cardH = 230;
+    var tableTop = headerH + heroH + cardH + 36;
+    var groupHeaderH = 44;
+    var rowHeights = [];
+    var totalRowsH = 0;
+
+    var measurer = document.createElement('canvas').getContext('2d');
+    visibleGroups.forEach(function(group){
+      totalRowsH += groupHeaderH;
+      group.items.forEach(function(item){
+        measurer.font = '600 22px Arial';
+        var labelLines = canvasTextLines(measurer, item[0], labelWidth - 30).length;
+        var maxLines = labelLines;
+        specs.forEach(function(spec){
+          measurer.font = '500 20px Arial';
+          var count = canvasTextLines(measurer, spec[item[1]] || '—', colWidth - 24).length;
+          if (count > maxLines) maxLines = count;
+        });
+        var rowH = Math.max(54, 26 + maxLines * 24);
+        rowHeights.push({ key: item[1], label: item[0], height: rowH, group: group.group });
+        totalRowsH += rowH;
+      });
+    });
+    var footerH = 92;
+    var height = tableTop + totalRowsH + footerH;
+
+    return Promise.all([
+      loadCanvasImage('/images/logo.png'),
+      Promise.all(products.map(function(product){ return loadCanvasImage(assetPath(product.image || product.imagem)); }))
+    ]).then(function(result){
+      var logo = result[0];
+      var productImages = result[1];
+      var canvas = document.createElement('canvas');
+      canvas.width = width;
+      canvas.height = height;
+      var ctx = canvas.getContext('2d');
+      ctx.fillStyle = '#f5f7fb';
+      ctx.fillRect(0,0,width,height);
+
+      ctx.save();
+      ctx.globalAlpha = 0.05;
+      ctx.translate(width * 0.54, height * 0.58);
+      ctx.rotate(-0.23);
+      ctx.fillStyle = '#dc2626';
+      ctx.font = '900 120px Arial';
+      ctx.textAlign = 'center';
+      ctx.fillText('Quality Celulares', 0, 0);
+      ctx.restore();
+
+      ctx.fillStyle = '#d30000';
+      ctx.fillRect(0,0,width,headerH);
+      if (logo) ctx.drawImage(logo, margin, 24, 190, 72);
+      ctx.fillStyle = '#ffffff';
+      ctx.font = '900 42px Arial';
+      ctx.fillText('Comparativo de smartphones', margin + 230, 58);
+      ctx.font = '500 20px Arial';
+      ctx.fillText("Quality Celulares · material comparativo com marca d'água", margin + 230, 92);
+      ctx.font = '600 18px Arial';
+      ctx.textAlign = 'right';
+      ctx.fillText(new Date().toLocaleDateString('pt-BR'), width - margin, 58);
+      ctx.fillText('qualitycel.com.br', width - margin, 86);
+      ctx.textAlign = 'left';
+
+      ctx.fillStyle = '#0f172a';
+      ctx.font = '800 34px Arial';
+      ctx.fillText('Compare lado a lado', margin, headerH + 40);
+      ctx.fillStyle = '#475569';
+      ctx.font = '500 18px Arial';
+      ctx.fillText('Informações organizadas de forma clara para facilitar sua escolha.', margin, headerH + 68);
+
+      var cardsY = headerH + heroH;
+      products.forEach(function(product, idx){
+        var x = margin + labelWidth + idx * (colWidth + gap);
+        roundedRect(ctx, x, cardsY, colWidth, cardH, 18);
+        ctx.fillStyle = '#ffffff';
+        ctx.fill();
+        ctx.strokeStyle = '#dbe2ea';
+        ctx.lineWidth = 2;
+        ctx.stroke();
+        var img = productImages[idx];
+        if (img) ctx.drawImage(img, x + 18, cardsY + 16, 92, 112);
+        ctx.fillStyle = '#0f172a';
+        ctx.font = '800 22px Arial';
+        drawCanvasText(ctx, product.name || product.nome || 'Celular', x + 124, cardsY + 42, colWidth - 142, 25, 3);
+        ctx.fillStyle = '#64748b';
+        ctx.font = '600 16px Arial';
+        var meta = [brandOf(product), conditionOf(product)].filter(Boolean).join(' · ') || 'Smartphone';
+        drawCanvasText(ctx, meta, x + 124, cardsY + 120, colWidth - 142, 20, 2);
+        ctx.fillStyle = '#22c55e';
+        roundedRect(ctx, x + 18, cardsY + cardH - 44, colWidth - 36, 28, 10);
+        ctx.fill();
+        ctx.fillStyle = '#ffffff';
+        ctx.font = '800 15px Arial';
+        ctx.textAlign = 'center';
+        ctx.fillText('Consulte a Quality no WhatsApp', x + colWidth / 2, cardsY + cardH - 25);
+        ctx.textAlign = 'left';
+      });
+
+      ctx.fillStyle = '#0f172a';
+      ctx.font = '800 24px Arial';
+      ctx.fillText('Especificações', margin, cardsY + 30);
+      ctx.fillStyle = '#475569';
+      ctx.font = '500 16px Arial';
+      ctx.fillText(products.length + ' modelos selecionados', margin, cardsY + 58);
+
+      var y = tableTop;
+      var rowCursor = 0;
+      visibleGroups.forEach(function(group){
+        roundedRect(ctx, margin, y, width - margin*2, groupHeaderH, 12);
+        ctx.fillStyle = '#334155';
+        ctx.fill();
+        ctx.fillStyle = '#ffffff';
+        ctx.font = '800 21px Arial';
+        ctx.fillText(group.group, margin + 18, y + 28);
+        y += groupHeaderH;
+        group.items.forEach(function(item, itemIndex){
+          var info = rowHeights[rowCursor++];
+          ctx.fillStyle = (itemIndex % 2 === 0) ? '#ffffff' : '#f8fafc';
+          ctx.fillRect(margin, y, width - margin*2, info.height);
+          ctx.fillStyle = '#f8fafc';
+          ctx.fillRect(margin, y, labelWidth, info.height);
+          ctx.strokeStyle = '#e5e7eb';
+          ctx.lineWidth = 1;
+          ctx.beginPath();
+          ctx.moveTo(margin, y + info.height);
+          ctx.lineTo(width - margin, y + info.height);
+          ctx.stroke();
+          ctx.fillStyle = '#0f172a';
+          ctx.font = '800 18px Arial';
+          drawCanvasText(ctx, item[0], margin + 16, y + 28, labelWidth - 28, 21, 3);
+          products.forEach(function(product, idx){
+            var cellX = margin + labelWidth + idx * (colWidth + gap);
+            ctx.fillStyle = '#111827';
+            ctx.font = '500 18px Arial';
+            drawCanvasText(ctx, specs[idx][item[1]] || '—', cellX + 10, y + 28, colWidth - 20, 22, 4);
+          });
+          y += info.height;
+        });
+      });
+
+      ctx.fillStyle = '#475569';
+      ctx.font = '600 17px Arial';
+      ctx.fillText('Em caso de dúvida, confirme os detalhes com nossa equipe antes da compra.', margin, height - 48);
+      ctx.fillStyle = '#94a3b8';
+      ctx.font = '500 14px Arial';
+      ctx.fillText('Arquivo visual gerado automaticamente pelo comparador da Quality Celulares.', margin, height - 22);
+      ctx.textAlign = 'right';
+      ctx.fillStyle = '#c2410c';
+      ctx.font = '800 14px Arial';
+      ctx.fillText("Com marca d'água Quality Celulares", width - margin, height - 22);
+      ctx.textAlign = 'left';
+
+      return new Promise(function(resolve, reject){
+        canvas.toBlob(function(blob){
+          if (blob) resolve(blob);
+          else reject(new Error('Não foi possível gerar a imagem.'));
+        }, 'image/png');
+      });
+    });
+  }
+
+  function shareCompareAsImage(products){
+    if (products.length < 2) {
+      compareNotice('Escolha pelo menos 2 celulares para compartilhar.');
+      return;
+    }
+    compareNotice('Gerando imagem da comparação...');
+    createCompareShareBlob(products).then(function(blob){
+      var file = new File([blob], compareShareFileName(products), { type: 'image/png' });
+      if (navigator.share && navigator.canShare && navigator.canShare({ files: [file] })) {
+        navigator.share({
+          title: 'Comparativo Quality Celulares',
+          text: 'Comparativo gerado pela Quality Celulares',
+          files: [file]
+        }).catch(function(){});
+        return;
+      }
+      var url = URL.createObjectURL(blob);
+      var link = document.createElement('a');
+      link.href = url;
+      link.download = compareShareFileName(products);
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
+      setTimeout(function(){ URL.revokeObjectURL(url); }, 4000);
+      compareNotice('Imagem da comparação baixada.');
+    }).catch(function(){
+      compareNotice('Não foi possível gerar a imagem agora.');
+    });
+  }
+
+  function renderCompareTable(products, onlyDifferences){
+    if (products.length < 2) {
+      return '<div class="quality-compare-hint"><i class="fa-solid fa-mobile-screen-button"></i><strong>Escolha pelo menos 2 celulares</strong><span>Use os campos acima para montar a comparação.</span></div>';
+    }
+    var specs = products.map(compareSpecs);
+    var html = '<div class="quality-compare-table-shell"><div class="quality-compare-table-scroll"><table class="quality-compare-table"><thead><tr><th>Especificação</th>' +
+      products.map(compareProductHeader).map(function(value){return '<th>'+value+'</th>';}).join('') + '</tr></thead><tbody>';
+    COMPARE_SECTIONS.forEach(function(section){
+      var sectionRows = '';
+      section.rows.forEach(function(row){
+        var key=row[0], label=row[1];
+        var values=specs.map(function(spec){return spec[key] || '—';});
+        if (values.every(function(v){return v==='—';})) return;
+        var normValues=values.map(function(v){return normalize(v);});
+        var same=normValues.every(function(v){return v===normValues[0];});
+        sectionRows += '<tr data-same="' + (same?'1':'0') + '" class="' + (!same?'quality-compare-row-different ':'') + (onlyDifferences && same?'is-hidden-same':'') + '"><td>' + esc(label) + '</td>' +
+          values.map(function(value){return '<td class="' + (value==='—'?'quality-compare-value-missing':'') + '">' + esc(value) + '</td>';}).join('') + '</tr>';
+      });
+      if (sectionRows) html += '<tr class="quality-compare-section-row"><th colspan="' + (products.length+1) + '">' + esc(section.title) + '</th></tr>' + sectionRows;
+    });
+    html += '</tbody></table><div class="quality-compare-cta-row" style="grid-template-columns:180px repeat(' + products.length + ',minmax(0,1fr));min-width:720px"><div class="quality-compare-cta-label">Falar com a Quality</div>' +
+      products.map(function(product){return '<div class="quality-compare-cta"><a href="' + esc(compareWhatsAppUrl(product)) + '" target="_blank" rel="noopener"><i class="fa-brands fa-whatsapp"></i> Consultar</a></div>';}).join('') +
+      '</div></div></div>';
+    return html;
+  }
+
+  function compareSelectorSlot(index, product){
+    if (product) {
+      return '<div class="quality-compare-slot is-filled" data-quality-compare-slot="' + index + '"><div class="quality-compare-product-head"><img src="' + esc(assetPath(product.image || product.imagem)) + '" alt="' + esc(product.name || 'Celular') + '"><div><strong>' + esc(product.name || product.nome || 'Celular') + '</strong><small>' + esc(brandOf(product) || '') + (conditionOf(product)?' · '+esc(conditionOf(product)):'') + '</small></div><button type="button" class="quality-compare-remove" data-quality-compare-remove-page="' + esc(product.slug || product.id || '') + '" aria-label="Remover celular"><i class="fa-solid fa-xmark"></i></button></div></div>';
+    }
+    return '<div class="quality-compare-slot" data-quality-compare-slot="' + index + '"><label class="quality-compare-add-label">Adicionar celular</label><input type="search" class="quality-compare-search" data-quality-compare-search="' + index + '" placeholder="Digite modelo ou marca…" autocomplete="off"><div class="quality-compare-results" data-quality-compare-results="' + index + '"></div></div>';
+  }
+
+  function updateCompareSearch(input, smartphones, selected){
+    var index = input.getAttribute('data-quality-compare-search');
+    var popup = document.querySelector('[data-quality-compare-results="' + index + '"]');
+    if (!popup) return;
+    var term = normalize(input.value);
+    if (term.length < 2) { popup.classList.remove('is-open'); popup.innerHTML=''; return; }
+    var selectedNorm = selected.map(normalize);
+    var matches = smartphones.filter(function(product){
+      var slug = product.slug || product.id || '';
+      if (selectedNorm.includes(normalize(slug))) return false;
+      var hay = normalize((product.name || product.nome || '') + ' ' + brandOf(product));
+      return hay.includes(term);
+    }).slice(0,8);
+    popup.innerHTML = matches.length ? matches.map(function(product){
+      return '<button type="button" class="quality-compare-result" data-quality-compare-pick="' + esc(product.slug || product.id || '') + '"><img src="' + esc(assetPath(product.image || product.imagem)) + '" alt=""><span><strong>' + esc(product.name || product.nome || 'Celular') + '</strong><small>' + esc(brandOf(product) || '') + '</small></span></button>';
+    }).join('') : '<div class="quality-compare-empty-result">Nenhum celular encontrado.</div>';
+    popup.classList.add('is-open');
+  }
+
+  function renderComparePage(){
+    var root = document.getElementById('quality-compare-root');
+    if (!root) return;
+    var fromUrl = compareFromUrl();
+    var selected = fromUrl || readCompareSlugs();
+    getCatalog().then(function(items){
+      var smartphones = items.filter(function(p){return isVisibleProduct(p) && isSmartphone(p);});
+      selected = selected.filter(function(slug){return !!productBySlug(smartphones,slug);}).slice(0,COMPARE_MAX);
+      try { localStorage.setItem(COMPARE_KEY,JSON.stringify(selected)); } catch (_) {}
+      setComparePageUrl(selected);
+      var products = selected.map(function(slug){return productBySlug(smartphones,slug);}).filter(Boolean);
+      var onlyDifferences = root.getAttribute('data-only-differences') === '1';
+      var slots = [];
+      for (var i=0;i<COMPARE_MAX;i++) slots.push(compareSelectorSlot(i,products[i] || null));
+      root.innerHTML =
+        '<section class="quality-compare-selector-wrap"><div class="quality-compare-selectors">' + slots.join('') + '</div></section>' +
+        '<div class="quality-compare-toolbar"><label><input type="checkbox" data-quality-only-differences ' + (onlyDifferences?'checked':'') + '> Mostrar apenas diferenças</label></div>' +
+        renderCompareTable(products,onlyDifferences) +
+        '<p class="quality-compare-disclaimer">Em caso de dúvida, confirme os detalhes com nossa equipe antes da compra.</p>';
+
+      document.querySelectorAll('[data-quality-compare-search]').forEach(function(input){
+        input.addEventListener('input',function(){updateCompareSearch(input,smartphones,selected);});
+        input.addEventListener('focus',function(){if(normalize(input.value).length>=2) updateCompareSearch(input,smartphones,selected);});
+      });
+
+      var share = document.querySelector('[data-quality-compare-share]');
+      if (share) share.hidden = products.length < 2;
+      refreshCompareButtons();
+    });
+  }
+
+  function refreshCompareUI(){
+    refreshCompareButtons();
+    ensureCompareTray();
+    if (document.getElementById('quality-compare-root')) renderComparePage();
+  }
+
   function selectedVariationFromDom(){
     var result = {};
     document.querySelectorAll('.produto-variacao-btn.ativa[data-var-type]').forEach(function(button){
@@ -351,6 +1105,65 @@
     window.__qualityStorefrontEventsV1 = true;
     bindImageProtection();
     document.addEventListener('click', function(event){
+      var compare = event.target.closest && event.target.closest('[data-quality-compare]');
+      if (compare) {
+        event.preventDefault();
+        event.stopPropagation();
+        var compareSlug = compare.getAttribute('data-quality-compare') || '';
+        var active = toggleCompareSlug(compareSlug);
+        if (compare.getAttribute('data-quality-compare-open') === '1' && active !== null) {
+          if (active === false) writeCompareSlugs([compareSlug]);
+          window.location.href = comparePageUrl(readCompareSlugs());
+        }
+        return;
+      }
+      var compareRemove = event.target.closest && event.target.closest('[data-quality-compare-remove]');
+      if (compareRemove) {
+        event.preventDefault();
+        var removeSlug = compareRemove.getAttribute('data-quality-compare-remove') || '';
+        writeCompareSlugs(readCompareSlugs().filter(function(x){ return normalize(x) !== normalize(removeSlug); }));
+        return;
+      }
+      if (event.target.closest && event.target.closest('[data-quality-compare-clear]')) {
+        event.preventDefault();
+        writeCompareSlugs([]);
+        return;
+      }
+      var pageRemove = event.target.closest && event.target.closest('[data-quality-compare-remove-page]');
+      if (pageRemove) {
+        event.preventDefault();
+        var pageSlug = pageRemove.getAttribute('data-quality-compare-remove-page') || '';
+        writeCompareSlugs(readCompareSlugs().filter(function(x){return normalize(x)!==normalize(pageSlug);}));
+        return;
+      }
+      var pick = event.target.closest && event.target.closest('[data-quality-compare-pick]');
+      if (pick) {
+        event.preventDefault();
+        var pickSlug = pick.getAttribute('data-quality-compare-pick') || '';
+        var current = readCompareSlugs();
+        if (current.length < COMPARE_MAX && !current.some(function(x){return normalize(x)===normalize(pickSlug);})) current.push(pickSlug);
+        writeCompareSlugs(current);
+        return;
+      }
+      var shareCompare = event.target.closest && event.target.closest('[data-quality-compare-share]');
+      if (shareCompare) {
+        event.preventDefault();
+        getCatalog().then(function(items){
+          var smartphones = items.filter(function(p){ return isVisibleProduct(p) && isSmartphone(p); });
+          var selected = (compareFromUrl() || readCompareSlugs()).filter(function(slug){ return !!productBySlug(smartphones, slug); }).slice(0, COMPARE_MAX);
+          var products = selected.map(function(slug){ return productBySlug(smartphones, slug); }).filter(Boolean);
+          shareCompareAsImage(products);
+        });
+        return;
+      }
+      var differences = event.target.closest && event.target.closest('[data-quality-only-differences]');
+      if (differences) {
+        var root = document.getElementById('quality-compare-root');
+        if (root) root.setAttribute('data-only-differences',differences.checked?'1':'0');
+        renderComparePage();
+        return;
+      }
+
       var open = event.target.closest && event.target.closest('[data-quality-open-interest]');
       if (open) { event.preventDefault(); openInterest(); return; }
       if (event.target.closest && event.target.closest('[data-quality-close-interest]')) { event.preventDefault(); closeInterest(); return; }
@@ -372,7 +1185,16 @@
       }
     });
     document.addEventListener('keydown', function(event){ if (event.key === 'Escape') closeInterest(); });
-    window.addEventListener('storage', function(event){ if (event.key === INTEREST_KEY) refreshInterestUI(); });
+    window.addEventListener('storage', function(event){
+      if (event.key === INTEREST_KEY) refreshInterestUI();
+      if (event.key === COMPARE_KEY) refreshCompareUI();
+    });
+    window.addEventListener('pageshow', function(){
+      // O navegador pode restaurar a Home inteira do cache ao voltar do comparador.
+      // Sincronize a bandeja com o localStorage em vez de confiar no DOM congelado.
+      compareTrayRequestSeq++;
+      refreshCompareUI();
+    });
   }
 
   function decorateProductCards(){
@@ -707,6 +1529,7 @@
     interest.setAttribute('data-product-slug', product.slug || product.id || '');
     interest.innerHTML = '<i class="fa-solid fa-list-check"></i> Adicionar à minha lista';
     buybox.appendChild(interest);
+    addProductCompareButton(product,buybox);
 
     layout.appendChild(buybox);
 
@@ -889,35 +1712,51 @@
     }, 20);
   }
 
+  var observerRefreshScheduled = false;
+  function runObservedEnhancements(){
+    observerRefreshScheduled = false;
+    ensureInterestNav();
+    ensureAutocomplete();
+    decorateProductCards();
+    decorateCompareCards();
+    ensureCompareCategoryLink();
+    buildCategoryFilters();
+    var productBox = document.getElementById('produto-detalhe');
+    if (productBox) {
+      var layout = productBox.querySelector('.produto-layout');
+      var needsLayout = layout && layout.dataset.qualityMarketplaceReady !== '1';
+      var related = document.querySelector('.quality-recommendation-block');
+      var cross = document.querySelector('.quality-cross-sell-block');
+      var needsRelated = (related && related.dataset.qualitySmartRelated !== '1') || (cross && cross.dataset.qualitySmartRelated !== '1');
+      if (needsLayout || needsRelated) enhanceCurrentProduct();
+    }
+  }
+
   function initObservers(){
     if (globalObserver) return;
     globalObserver = new MutationObserver(function(){
-      ensureInterestNav();
-      ensureAutocomplete();
-      decorateProductCards();
-      buildCategoryFilters();
-      var productBox = document.getElementById('produto-detalhe');
-      if (productBox) {
-        var layout = productBox.querySelector('.produto-layout');
-        var needsLayout = layout && layout.dataset.qualityMarketplaceReady !== '1';
-        var related = document.querySelector('.quality-recommendation-block');
-        var cross = document.querySelector('.quality-cross-sell-block');
-        var needsRelated = (related && related.dataset.qualitySmartRelated !== '1') || (cross && cross.dataset.qualitySmartRelated !== '1');
-        if (needsLayout || needsRelated) enhanceCurrentProduct();
-      }
+      if (observerRefreshScheduled) return;
+      observerRefreshScheduled = true;
+      if (window.requestAnimationFrame) window.requestAnimationFrame(runObservedEnhancements);
+      else setTimeout(runObservedEnhancements, 16);
     });
     globalObserver.observe(document.documentElement, {childList:true, subtree:true});
   }
 
   function init(){
+    injectCompareStyles();
     eventBindings();
     ensureInterestNav();
     ensureAutocomplete();
     decorateProductCards();
+    decorateCompareCards();
+    ensureCompareCategoryLink();
     buildCategoryFilters();
     if (document.getElementById('produto-detalhe')) enhanceCurrentProduct();
+    if (document.getElementById('quality-compare-root')) renderComparePage();
     initObservers();
     refreshInterestUI();
+    refreshCompareUI();
   }
 
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init, {once:true});
