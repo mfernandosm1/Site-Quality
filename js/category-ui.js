@@ -73,6 +73,11 @@
       });
       if (category && category.slug) { window.location.assign('/' + encodeURIComponent(category.slug) + '/'); return; }
       showSearchMessage('Nenhum produto encontrado.');
+      if (window.QualityAnalytics && typeof window.QualityAnalytics.searchNoResult === 'function') {
+        window.QualityAnalytics.searchNoResult(term);
+      } else if (window.QualityAnalyticsTrack) {
+        window.QualityAnalyticsTrack('search_no_result', {term:term, searchStatus:'sem_resultado', resultCount:0});
+      }
     }).catch(function(){ showSearchMessage('Erro ao buscar produto.'); });
   }
 

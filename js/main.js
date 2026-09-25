@@ -263,6 +263,11 @@ function doSearch(query) {
     }
 
     showSearchMessage("Nenhum produto encontrado.");
+    if (window.QualityAnalytics && typeof window.QualityAnalytics.searchNoResult === "function") {
+      window.QualityAnalytics.searchNoResult(termo);
+    } else if (window.QualityAnalyticsTrack) {
+      window.QualityAnalyticsTrack("search_no_result", { term: termo, searchStatus: "sem_resultado", resultCount: 0 });
+    }
   }).catch(() => {
     showSearchMessage("Erro ao buscar produto.");
   });

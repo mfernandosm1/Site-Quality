@@ -1,6 +1,6 @@
 (function(){
-  if(window.__qualitySiteAnalyticsV4) return;
-  window.__qualitySiteAnalyticsV4 = true;
+  if(window.__qualitySiteAnalyticsV5) return;
+  window.__qualitySiteAnalyticsV5 = true;
 
   var ENDPOINT = 'https://script.google.com/macros/s/AKfycbwZQ01q5u5lRqE3Hk-nMutkTWcLA8r7127sO3Dt132Ti8L0Ci7DWoOyby5v92T_WY34/exec';
   var KEY = 'quality-analytics-v1';
@@ -124,7 +124,7 @@
   function normalizePayload(type, payload){
     payload = payload && typeof payload === 'object' ? payload : {};
     var product = payload.product && typeof payload.product === 'object' ? payload.product : null;
-    if(!product && (type === 'product_view' || type === 'favorite' || type === 'whatsapp_click' || type === 'share_click')){
+    if(!product && (type === 'product_view' || type === 'favorite' || type === 'favorite_remove' || type === 'whatsapp_click' || type === 'share_click')){
       if(payload.slug || payload.name || payload.id) product = payload;
     }
     var category = payload.category && typeof payload.category === 'object' ? payload.category : null;
@@ -194,6 +194,13 @@
   window.QualityAnalyticsTrack = track;
   window.QualityAnalytics = window.QualityAnalytics || {};
   window.QualityAnalytics.track = track;
+  window.QualityAnalytics.searchNoResult = function(term,context){
+    term=clean(term||lastSearchTerm,100).toLowerCase();
+    if(!term) return false;
+    lastSearchTerm=term;
+    lastNoResultTerm=term;
+    return track('search_no_result',{term:term,searchStatus:'sem_resultado',resultCount:0,context:context||surface()});
+  };
 
   function isFavoriteNow(btn,product){
     if(btn && btn.classList.contains('is-active')) return true;
@@ -245,7 +252,12 @@
     var fav=target.closest('[data-quality-fav]');
     if(fav){
       var fp=productFromButton(fav);
-      window.setTimeout(function(){if(isFavoriteNow(fav,fp)) track('favorite',{product:fp,context:surface()});},0);
+      // O handler dos favoritos do site roda em capture e interrompe a propagacao.
+      // Este listener tambem usa capture; apos o toggle, lemos o estado real salvo.
+      window.setTimeout(function(){
+        var active=isFavoriteNow(fav,fp);
+        track(active?'favorite':'favorite_remove',{product:fp,context:surface()});
+      },0);
       return;
     }
 
@@ -262,7 +274,7 @@
 
     var sb=target.closest('#search-button,#search-button-mobile');
     if(sb){ var term=searchTermForControl(sb); if(term) track('search',{term:term,context:surface()}); window.setTimeout(checkNoResults,450); window.setTimeout(checkNoResults,1100); }
-  },false);
+  },true);
 
   document.addEventListener('keydown',function(ev){
     if(ev.key!=='Enter') return;
