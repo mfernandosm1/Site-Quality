@@ -643,6 +643,33 @@
       });
     }
 
+    function trackHomeSearch(term) {
+      if (!term) return;
+      try {
+        if (window.QualityAnalytics && typeof window.QualityAnalytics.track === 'function') {
+          window.QualityAnalytics.track('search', { term: term, context: 'Home' });
+        } else if (typeof window.QualityAnalyticsTrack === 'function') {
+          window.QualityAnalyticsTrack('search', { term: term, context: 'Home' });
+        }
+      } catch (_) {}
+    }
+
+    function trackHomeSearchNoResult(term) {
+      if (!term) return;
+      try {
+        if (window.QualityAnalytics && typeof window.QualityAnalytics.searchNoResult === 'function') {
+          window.QualityAnalytics.searchNoResult(term, 'Home');
+        } else if (typeof window.QualityAnalyticsTrack === 'function') {
+          window.QualityAnalyticsTrack('search_no_result', {
+            term: term,
+            context: 'Home',
+            searchStatus: 'sem_resultado',
+            resultCount: 0
+          });
+        }
+      } catch (_) {}
+    }
+
     function qualityHomeSearch(query) {
       const termo = normalizeSearch(query);
       const noResults = document.getElementById('no-results');
@@ -653,6 +680,8 @@
         if (noResults) noResults.style.display = 'none';
         return;
       }
+
+      trackHomeSearch(termo);
 
       Promise.all([
         fetchJson(['/content/catalog-public.json', '/site/content/catalog-public.json', '/content/products.json', '/site/content/products.json']).catch(function(){ return { items: [] }; }),
@@ -700,6 +729,7 @@
         }
 
         showSearchMessage('Nenhum produto encontrado.');
+        trackHomeSearchNoResult(termo);
       }).catch(function(){
         showSearchMessage('Erro ao buscar produto.');
       });
