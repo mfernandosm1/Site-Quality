@@ -1,5 +1,5 @@
 /*
- * Quality Storefront Experience V1.1 - 2026-09-25
+ * Quality Storefront Experience V1.1.1 - 2026-09-26
  * Marketplace-style UX without checkout/prices dependency.
  * Features: product detail 3-column layout, intelligent related products,
  * interest list -> WhatsApp, search autocomplete, Brand/Condition filters,
@@ -21,6 +21,7 @@
   var globalObserver = null;
   var productEnhanceTimer = null;
   var compareTrayRequestSeq = 0;
+  var comparePageRequestSeq = 0;
 
   function normalize(value){
     return String(value || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().trim();
@@ -341,6 +342,7 @@
       if (slug && !clean.some(function(x){ return normalize(x) === normalize(slug); })) clean.push(slug);
     });
     clean = clean.slice(0,COMPARE_MAX);
+    comparePageRequestSeq++;
     try { localStorage.setItem(COMPARE_KEY, JSON.stringify(clean)); } catch (_) {}
     setComparePageUrl(clean);
     refreshCompareUI();
@@ -1250,9 +1252,11 @@
   function renderComparePage(){
     var root = document.getElementById('quality-compare-root');
     if (!root) return;
+    var requestSeq = ++comparePageRequestSeq;
     var fromUrl = compareFromUrl();
     var selected = fromUrl || readCompareSlugs();
     getCatalog().then(function(items){
+      if (requestSeq !== comparePageRequestSeq) return;
       var smartphones = items.filter(function(p){return isVisibleProduct(p) && isSmartphone(p);});
       selected = selected.filter(function(slug){return !!productBySlug(smartphones,slug);}).slice(0,COMPARE_MAX);
       try { localStorage.setItem(COMPARE_KEY,JSON.stringify(selected)); } catch (_) {}
