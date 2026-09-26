@@ -1258,13 +1258,12 @@
       try { localStorage.setItem(COMPARE_KEY,JSON.stringify(selected)); } catch (_) {}
       setComparePageUrl(selected);
       var products = selected.map(function(slug){return productBySlug(smartphones,slug);}).filter(Boolean);
-      var onlyDifferences = root.getAttribute('data-only-differences') === '1';
+      var onlyDifferences = false;
       var slots = [];
       for (var i=0;i<COMPARE_MAX;i++) slots.push(compareSelectorSlot(i,products[i] || null));
       root.innerHTML =
         '<section class="quality-compare-selector-wrap"><div class="quality-compare-selectors">' + slots.join('') + '</div></section>' +
-        '<div class="quality-compare-toolbar"><label><input type="checkbox" data-quality-only-differences ' + (onlyDifferences?'checked':'') + '> Mostrar apenas diferenças</label></div>' +
-        renderCompareTable(products,onlyDifferences) +
+        renderCompareTable(products,false) +
         '<p class="quality-compare-disclaimer">Em caso de dúvida, confirme os detalhes com nossa equipe antes da compra.</p>';
 
       document.querySelectorAll('[data-quality-compare-search]').forEach(function(input){
@@ -1371,13 +1370,6 @@
           var products = selected.map(function(slug){ return productBySlug(smartphones, slug); }).filter(Boolean);
           shareCompareAsImage(products);
         });
-        return;
-      }
-      var differences = event.target.closest && event.target.closest('[data-quality-only-differences]');
-      if (differences) {
-        var root = document.getElementById('quality-compare-root');
-        if (root) root.setAttribute('data-only-differences',differences.checked?'1':'0');
-        renderComparePage();
         return;
       }
 
