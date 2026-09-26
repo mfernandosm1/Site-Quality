@@ -147,7 +147,7 @@
   .quality-compare-tray-title span{display:none}.quality-compare-tray-title{gap:4px}.quality-compare-tray-title b{min-width:22px;padding:0 5px}
   .quality-compare-tray-items{gap:4px;grid-template-columns:repeat(3,42px);justify-content:start;overflow:hidden}
   .quality-compare-tray-chip{width:42px;height:42px;padding:3px;justify-content:center}.quality-compare-tray-chip span{display:none}.quality-compare-tray-chip img{width:34px;height:34px}.quality-compare-tray-chip.is-empty i{font-size:12px}.quality-compare-tray-chip button{right:-2px;top:-2px}
-  .quality-compare-tray-clear{display:none}.quality-compare-tray-go{padding:9px 10px;font-size:10.5px}
+  .quality-compare-tray-clear{display:inline-flex;align-items:center;justify-content:center;color:#64748b;font-size:9.5px;padding:6px 3px}.quality-compare-tray-go{padding:9px 10px;font-size:10.5px}
   .quality-compare-page{padding:25px 12px 48px}.quality-compare-hero{align-items:flex-start;flex-direction:column;gap:11px}.quality-compare-hero h1{font-size:24px}.quality-compare-hero p{font-size:12px}
   .quality-compare-selectors{grid-template-columns:1fr;gap:8px}.quality-compare-slot{min-height:108px}.quality-compare-product-head{flex-direction:row;justify-content:flex-start;text-align:left;padding:5px 28px 5px 4px}.quality-compare-product-head img{width:64px;height:78px;flex-basis:64px}.quality-compare-toolbar{align-items:flex-start;flex-direction:column}.quality-compare-toolbar-note{text-align:left}
   .quality-compare-table{min-width:660px}.quality-compare-table th:first-child,.quality-compare-table td:first-child{width:135px;padding-left:10px;padding-right:10px}.quality-compare-table th,.quality-compare-table td{font-size:11px;padding:10px}
@@ -158,3 +158,49 @@
 .quality-compare-category-link{margin-left:auto;display:inline-flex;align-items:center;gap:6px;border:1px solid #cbd5e1;border-radius:9px;background:#fff;color:#334155;text-decoration:none;padding:8px 10px;font-size:11px;font-weight:900;white-space:nowrap}
 .quality-compare-category-link:hover{border-color:#2563eb;color:#1d4ed8;background:#eff6ff}
 @media(max-width:760px){.quality-compare-category-link{width:100%;justify-content:center;margin-left:0}}
+
+
+/* Marca d'água visual também na página do comparador, inclusive em screenshots. */
+.quality-compare-body .quality-compare-page{position:relative;isolation:isolate}
+.quality-compare-body .quality-compare-page::after{
+  content:"";position:absolute;inset:0;z-index:40;pointer-events:none;
+  background-image:url('/images/logo.png');background-repeat:repeat;background-size:250px 250px;background-position:30px 20px;
+  opacity:.035;mix-blend-mode:multiply
+}
+.quality-compare-body .quality-compare-page>*{position:relative;z-index:2}
+.quality-compare-mobile{display:none}
+
+@media(max-width:760px){
+  .quality-compare-desktop{display:none!important}
+  .quality-compare-mobile{display:block;margin-top:2px}
+  .quality-compare-mobile-products{display:grid;grid-template-columns:repeat(var(--quality-compare-mobile-cols,2),minmax(0,1fr));gap:7px;margin-bottom:9px}
+  .quality-compare-mobile-cols-2 .quality-compare-mobile-products{--quality-compare-mobile-cols:2}
+  .quality-compare-mobile-cols-3 .quality-compare-mobile-products{--quality-compare-mobile-cols:3}
+  .quality-compare-mobile-product{position:relative;min-width:0;border:1px solid #dbe2ea;border-radius:12px;background:#fff;padding:8px 6px;text-align:center;box-shadow:0 2px 9px rgba(15,23,42,.04)}
+  .quality-compare-mobile-product img{width:52px;height:62px;object-fit:contain;display:block;margin:0 auto 5px}
+  .quality-compare-mobile-product strong{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;font-size:10px;line-height:1.22;color:#0f172a}
+  .quality-compare-mobile-num{position:absolute;left:6px;top:6px;width:20px;height:20px;border-radius:50%;background:#2563eb;color:#fff;font-size:10px;font-weight:900;display:grid;place-items:center}
+  .quality-compare-mobile-section{border:1px solid #e2e8f0;border-radius:12px;overflow:hidden;background:#fff;margin-bottom:9px}
+  .quality-compare-mobile-section h3{margin:0;background:#334155;color:#fff;padding:10px 12px;font-size:15px;line-height:1.2;font-weight:900}
+  .quality-compare-mobile-row{border-top:1px solid #eef2f7}
+  .quality-compare-mobile-row:first-of-type{border-top:0}
+  .quality-compare-mobile-label{background:#f8fafc;color:#334155;font-size:11px;font-weight:900;padding:8px 10px;border-bottom:1px solid #eef2f7}
+  .quality-compare-mobile-values{display:grid;grid-template-columns:repeat(var(--quality-compare-mobile-cols),minmax(0,1fr));gap:0}
+  .quality-compare-mobile-value{position:relative;min-width:0;padding:9px 8px 10px;border-right:1px solid #eef2f7;background:#fffdf7}
+  .quality-compare-mobile-value:last-child{border-right:0}
+  .quality-compare-mobile-value>span{display:inline-grid;place-items:center;width:18px;height:18px;border-radius:50%;background:#eff6ff;color:#1d4ed8;font-size:9px;font-weight:900;margin-bottom:5px}
+  .quality-compare-mobile-value p{margin:0;font-size:11.5px;line-height:1.35;color:#111827;overflow-wrap:anywhere}
+  .quality-compare-mobile-value.is-missing p{color:#94a3b8}
+  .quality-compare-mobile-row.is-different .quality-compare-mobile-value{background:#fffaf0}
+  .quality-compare-mobile-actions{display:grid;grid-template-columns:repeat(var(--quality-compare-mobile-cols,2),minmax(0,1fr));gap:7px;margin-top:10px}
+  .quality-compare-mobile-cols-2 .quality-compare-mobile-actions{--quality-compare-mobile-cols:2}
+  .quality-compare-mobile-cols-3 .quality-compare-mobile-actions{--quality-compare-mobile-cols:3}
+  .quality-compare-mobile-actions a{display:flex;align-items:center;justify-content:center;gap:5px;min-width:0;padding:9px 5px;border-radius:9px;background:#22c55e;color:#fff;text-decoration:none;font-size:10px;font-weight:900}
+  .quality-compare-mobile-actions a span{width:17px;height:17px;border-radius:50%;background:rgba(255,255,255,.2);display:grid;place-items:center;font-size:9px}
+  .quality-compare-mobile-cols-3 .quality-compare-mobile-product img{width:44px;height:54px}
+  .quality-compare-mobile-cols-3 .quality-compare-mobile-product strong{font-size:9px}
+  .quality-compare-mobile-cols-3 .quality-compare-mobile-value{padding:8px 5px}
+  .quality-compare-mobile-cols-3 .quality-compare-mobile-value p{font-size:10.5px}
+  .quality-compare-tray-items{grid-template-columns:repeat(3,38px)}
+  .quality-compare-tray-chip{width:38px;height:40px}.quality-compare-tray-chip img{width:31px;height:32px}
+}

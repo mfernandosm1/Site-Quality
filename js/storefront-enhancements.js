@@ -376,7 +376,7 @@
     if (document.querySelector('link[data-quality-compare-css]')) return;
     var link = document.createElement('link');
     link.rel = 'stylesheet';
-    link.href = '/css/commerce-compare.css?v=20260925-2';
+    link.href = '/css/commerce-compare.css?v=20260925-6';
     link.setAttribute('data-quality-compare-css','1');
     document.head.appendChild(link);
   }
@@ -827,13 +827,37 @@
       ctx.fillRect(0,0,width,height);
 
       ctx.save();
-      ctx.globalAlpha = 0.05;
-      ctx.translate(width * 0.54, height * 0.58);
-      ctx.rotate(-0.23);
-      ctx.fillStyle = '#dc2626';
+      ctx.globalAlpha = 0.08;
+      ctx.translate(width * 0.52, height * 0.56);
+      ctx.rotate(-0.22);
+      if (logo) {
+        ctx.drawImage(logo, -300, -140, 600, 230);
+      }
+      ctx.fillStyle = '#b91c1c';
       ctx.font = '900 120px Arial';
       ctx.textAlign = 'center';
-      ctx.fillText('Quality Celulares', 0, 0);
+      ctx.fillText('Quality Celulares', 0, 120);
+      ctx.restore();
+
+      ctx.save();
+      ctx.rotate(-0.24);
+      ctx.textAlign = 'center';
+      for (var wx = -width; wx < width * 1.8; wx += 420) {
+        for (var wy = 120; wy < height * 1.8; wy += 230) {
+          ctx.globalAlpha = 0.045;
+          if (logo) {
+            ctx.drawImage(logo, wx - 110, wy - 30, 220, 84);
+          }
+          ctx.globalAlpha = 0.035;
+          ctx.fillStyle = '#dc2626';
+          ctx.font = '800 48px Arial';
+          ctx.fillText('Quality Celulares', wx + 70, wy + 34);
+          ctx.globalAlpha = 0.028;
+          ctx.font = '700 22px Arial';
+          ctx.fillStyle = '#64748b';
+          ctx.fillText('Comparativo oficial', wx + 70, wy + 68);
+        }
+      }
       ctx.restore();
 
       ctx.fillStyle = '#d30000';
@@ -939,6 +963,30 @@
       ctx.fillText("Com marca d'água Quality Celulares", width - margin, height - 22);
       ctx.textAlign = 'left';
 
+      // Marca d'água final por cima de todo o comparativo. Isso dificulta recortes
+      // que removam apenas o cabeçalho e mantém a identidade da Quality no conteúdo.
+      ctx.save();
+      ctx.rotate(-0.20);
+      ctx.textAlign = 'center';
+      for (var ox = -width; ox < width * 1.9; ox += 360) {
+        for (var oy = 40; oy < height * 1.7; oy += 210) {
+          ctx.globalAlpha = 0.075;
+          if (logo) ctx.drawImage(logo, ox - 100, oy - 36, 200, 76);
+          ctx.globalAlpha = 0.065;
+          ctx.fillStyle = '#dc2626';
+          ctx.font = '800 34px Arial';
+          ctx.fillText('Quality Celulares', ox + 54, oy + 44);
+        }
+      }
+      ctx.restore();
+
+      ctx.save();
+      ctx.globalAlpha = 0.105;
+      ctx.translate(width * 0.52, height * 0.58);
+      ctx.rotate(-0.18);
+      if (logo) ctx.drawImage(logo, -260, -105, 520, 198);
+      ctx.restore();
+
       return new Promise(function(resolve, reject){
         canvas.toBlob(function(blob){
           if (blob) resolve(blob);
@@ -972,10 +1020,49 @@
       link.click();
       link.remove();
       setTimeout(function(){ URL.revokeObjectURL(url); }, 4000);
-      compareNotice('Imagem da comparação baixada.');
+      compareNotice('Comparação pronta para compartilhar.');
     }).catch(function(){
       compareNotice('Não foi possível gerar a imagem agora.');
     });
+  }
+
+
+  function renderCompareMobile(products, onlyDifferences){
+    if (products.length < 2) return '';
+    var specs = products.map(compareSpecs);
+    var count = products.length;
+    var html = '<div class="quality-compare-mobile quality-compare-mobile-cols-' + count + '">';
+    html += '<div class="quality-compare-mobile-products">';
+    products.forEach(function(product, idx){
+      var name = product.name || product.nome || 'Celular';
+      html += '<div class="quality-compare-mobile-product"><span class="quality-compare-mobile-num">' + (idx + 1) + '</span><img src="' + esc(assetPath(product.image || product.imagem)) + '" alt=""><strong>' + esc(name) + '</strong></div>';
+    });
+    html += '</div>';
+
+    COMPARE_SECTIONS.forEach(function(section){
+      var rows = '';
+      section.rows.forEach(function(row){
+        var key = row[0], label = row[1];
+        var values = specs.map(function(spec){ return spec[key] || '—'; });
+        if (values.every(function(v){ return v === '—'; })) return;
+        var normalized = values.map(function(v){ return normalize(v); });
+        var same = normalized.every(function(v){ return v === normalized[0]; });
+        if (onlyDifferences && same) return;
+        rows += '<div class="quality-compare-mobile-row' + (!same ? ' is-different' : '') + '"><div class="quality-compare-mobile-label">' + esc(label) + '</div><div class="quality-compare-mobile-values" style="--quality-compare-mobile-cols:' + count + '">';
+        values.forEach(function(value, idx){
+          rows += '<div class="quality-compare-mobile-value' + (value === '—' ? ' is-missing' : '') + '"><span>' + (idx + 1) + '</span><p>' + esc(value) + '</p></div>';
+        });
+        rows += '</div></div>';
+      });
+      if (rows) html += '<section class="quality-compare-mobile-section"><h3>' + esc(section.title) + '</h3>' + rows + '</section>';
+    });
+
+    html += '<div class="quality-compare-mobile-actions">';
+    products.forEach(function(product, idx){
+      html += '<a href="' + esc(compareWhatsAppUrl(product)) + '" target="_blank" rel="noopener"><span>' + (idx + 1) + '</span><i class="fa-brands fa-whatsapp"></i> Consultar</a>';
+    });
+    html += '</div></div>';
+    return html;
   }
 
   function renderCompareTable(products, onlyDifferences){
@@ -1001,7 +1088,7 @@
     html += '</tbody></table><div class="quality-compare-cta-row" style="grid-template-columns:180px repeat(' + products.length + ',minmax(0,1fr));min-width:720px"><div class="quality-compare-cta-label">Falar com a Quality</div>' +
       products.map(function(product){return '<div class="quality-compare-cta"><a href="' + esc(compareWhatsAppUrl(product)) + '" target="_blank" rel="noopener"><i class="fa-brands fa-whatsapp"></i> Consultar</a></div>';}).join('') +
       '</div></div></div>';
-    return html;
+    return '<div class="quality-compare-desktop">' + html + '</div>' + renderCompareMobile(products, onlyDifferences);
   }
 
   function compareSelectorSlot(index, product){
