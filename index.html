@@ -168,7 +168,7 @@
   <div id="footer"></div>
 
   <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-  <script src="/js/main.js?v=20260926-compare9"></script>
+  <script src="/js/main.js?v=20260926-health11"></script>
 
   <script>
   function scrollCarousel(dir) {
@@ -624,6 +624,23 @@
         .trim();
     }
 
+    function compactSearch(value){ return normalizeSearch(value).replace(/[^a-z0-9]+/g,''); }
+    function searchTokens(value){ return normalizeSearch(value).replace(/[^a-z0-9]+/g,' ').split(/\s+/).filter(Boolean); }
+    function editDistance(a,b){
+      a=String(a||'');b=String(b||'');if(a===b)return 0;if(!a.length)return b.length;if(!b.length)return a.length;
+      const prev=Array.from({length:b.length+1},(_,i)=>i);
+      for(let i=1;i<=a.length;i++){let left=i,diag=i-1;for(let j=1;j<=b.length;j++){const up=prev[j],cost=a[i-1]===b[j-1]?0:1;const next=Math.min(up+1,left+1,diag+cost);diag=up;prev[j]=next;left=next;}}
+      return prev[b.length];
+    }
+    function fuzzySearchScore(textValue,query){
+      const hay=normalizeSearch(textValue),term=normalizeSearch(query);if(!hay||!term)return 0;if(hay===term)return 1000;if(hay.includes(term))return 820;
+      const ch=compactSearch(hay),ct=compactSearch(term);if(ct&&ch.includes(ct))return 790;
+      const qt=searchTokens(term),ht=searchTokens(hay);let total=0,matched=0;
+      qt.forEach(q=>{let best=0;ht.forEach(h=>{if(q===h)best=Math.max(best,120);else if(h.startsWith(q)||q.startsWith(h))best=Math.max(best,100);else if(h.includes(q)||q.includes(h))best=Math.max(best,82);else if(q.length>=4&&h.length>=4){const d=editDistance(q,h);if(d===1)best=Math.max(best,72);else if(d===2&&Math.max(q.length,h.length)>=6)best=Math.max(best,56);}});if(best){matched++;total+=best;}});
+      const coverage=qt.length?matched/qt.length:0;return coverage>=.6?Math.round(total*coverage+(matched===qt.length?80:0)):0;
+    }
+    function bestSearchMatch(items,query,getText,minScore){let winner=null,best=0;(items||[]).forEach(item=>{const score=fuzzySearchScore(getText(item),query);if(score>best){winner=item;best=score;}});return best>=(minScore||90)?winner:null;}
+
     function showSearchMessage(text) {
       const noResults = document.getElementById('no-results');
       if (noResults) {
@@ -699,14 +716,9 @@
         const products = results[0].items || [];
         const categories = results[1].items || [];
 
-        const product = products.find(function(p){
-          if (!p || p.active === false) return false;
-          const haystack = normalizeSearch([
-            p.name, p.nome, p.slug, p.category, p.categoria,
-            p.descriptionShort, p.descriptionLong
-          ].filter(Boolean).join(' '));
-          return haystack.includes(termo);
-        });
+        const product = bestSearchMatch(products.filter(function(p){ return p && p.active !== false; }), termo, function(p){
+          return [p.name,p.nome,p.slug,p.brand,p.category,p.categoria,p.descriptionShort].filter(Boolean).join(' ');
+        },90);
 
         if (product) {
           const slug = product.slug || product.id;
@@ -714,10 +726,7 @@
           return;
         }
 
-        const category = categories.find(function(c){
-          const haystack = normalizeSearch([c.name, c.nome, c.slug, c.id].filter(Boolean).join(' '));
-          return haystack.includes(termo);
-        });
+        const category = bestSearchMatch(categories, termo, function(c){ return [c.name,c.nome,c.slug,c.id].filter(Boolean).join(' '); },95);
 
         if (category && category.slug) {
           window.location.href = '/' + encodeURIComponent(category.slug) + '/';
@@ -726,8 +735,8 @@
 
         let foundOnPage = false;
         cards.forEach(function(card){
-          const title = normalizeSearch(card.querySelector('h3')?.textContent || card.textContent || '');
-          const match = title.includes(termo);
+          const title = card.querySelector('h3')?.textContent || card.textContent || '';
+          const match = fuzzySearchScore(title,termo) >= 90;
           card.style.display = match ? 'flex' : 'none';
           if (match) foundOnPage = true;
         });
@@ -996,5 +1005,5 @@
 })();
 </script>
 
-<script src="/js/quality-analytics.js?v=20260925-7"></script>
+<script src="/js/quality-analytics.js?v=20260926-11"></script>
 </body></html>

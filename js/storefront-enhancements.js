@@ -22,9 +22,39 @@
   var productEnhanceTimer = null;
   var compareTrayRequestSeq = 0;
   var comparePageRequestSeq = 0;
+  var compareAnalyticsSignature = '';
 
   function normalize(value){
     return String(value || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().trim();
+  }
+
+  function emitAnalytics(type,payload){
+    try {
+      var fn=window.qualityAnalyticsTrack||window.QualityAnalyticsTrack||(window.QualityAnalytics&&window.QualityAnalytics.track);
+      if(typeof fn==='function'){ fn(type,payload||{}); return; }
+      window.setTimeout(function(){
+        try { var retry=window.qualityAnalyticsTrack||window.QualityAnalyticsTrack||(window.QualityAnalytics&&window.QualityAnalytics.track); if(typeof retry==='function') retry(type,payload||{}); } catch (_) {}
+      },250);
+    } catch (_) {}
+  }
+
+  function trackCompareEvent(type, slugs, actionSlug){
+    var list=(slugs||readCompareSlugs()).filter(Boolean).slice(0,COMPARE_MAX);
+    getCatalog().then(function(items){
+      var products=list.map(function(slug){return productBySlug(items,slug);}).filter(Boolean);
+      var action=actionSlug?productBySlug(items,actionSlug):null;
+      emitAnalytics(type,{
+        product:action?{id:action.id||'',slug:action.slug||action.id||'',name:action.name||action.nome||'',image:action.image||action.imagem||''}:undefined,
+        comparison:{
+          slugs:products.map(function(product){return product.slug||product.id||'';}).filter(Boolean),
+          names:products.map(function(product){return product.name||product.nome||product.slug||product.id||'Celular';}),
+          count:products.length,
+          actionSlug:actionSlug||''
+        }
+      });
+    }).catch(function(){
+      emitAnalytics(type,{comparison:{slugs:list,names:[],count:list.length,actionSlug:actionSlug||''}});
+    });
   }
 
   function esc(value){
@@ -1191,7 +1221,7 @@
 
     html += '<div class="quality-compare-mobile-actions">';
     products.forEach(function(product, idx){
-      html += '<a href="' + esc(compareWhatsAppUrl(product)) + '" target="_blank" rel="noopener"><span>' + (idx + 1) + '</span><i class="fa-brands fa-whatsapp"></i> Consultar</a>';
+      html += '<a href="' + esc(compareWhatsAppUrl(product)) + '" target="_blank" rel="noopener" data-quality-compare-whatsapp="' + esc(product.slug || product.id || '') + '"><span>' + (idx + 1) + '</span><i class="fa-brands fa-whatsapp"></i> Consultar</a>';
     });
     html += '</div></div>';
     return html;
@@ -1218,7 +1248,7 @@
       if (sectionRows) html += '<tr class="quality-compare-section-row"><th colspan="' + (products.length+1) + '">' + esc(section.title) + '</th></tr>' + sectionRows;
     });
     html += '</tbody></table><div class="quality-compare-cta-row" style="grid-template-columns:180px repeat(' + products.length + ',minmax(0,1fr));min-width:720px"><div class="quality-compare-cta-label">Falar com a Quality</div>' +
-      products.map(function(product){return '<div class="quality-compare-cta"><a href="' + esc(compareWhatsAppUrl(product)) + '" target="_blank" rel="noopener"><i class="fa-brands fa-whatsapp"></i> Consultar</a></div>';}).join('') +
+      products.map(function(product){return '<div class="quality-compare-cta"><a href="' + esc(compareWhatsAppUrl(product)) + '" target="_blank" rel="noopener" data-quality-compare-whatsapp="' + esc(product.slug || product.id || '') + '"><i class="fa-brands fa-whatsapp"></i> Consultar</a></div>';}).join('') +
       '</div></div></div>';
     return '<div class="quality-compare-desktop">' + html + '</div>' + renderCompareMobile(products, onlyDifferences);
   }
@@ -1262,6 +1292,15 @@
       try { localStorage.setItem(COMPARE_KEY,JSON.stringify(selected)); } catch (_) {}
       setComparePageUrl(selected);
       var products = selected.map(function(slug){return productBySlug(smartphones,slug);}).filter(Boolean);
+      if(products.length >= 2){
+        var analyticsSignature=products.map(function(product){return normalize(product.slug||product.id||'');}).filter(Boolean).sort().join('|');
+        if(analyticsSignature && analyticsSignature!==compareAnalyticsSignature){
+          compareAnalyticsSignature=analyticsSignature;
+          trackCompareEvent('compare_view',selected,'');
+        }
+      } else {
+        compareAnalyticsSignature='';
+      }
       var onlyDifferences = false;
       var slots = [];
       for (var i=0;i<COMPARE_MAX;i++) slots.push(compareSelectorSlot(i,products[i] || null));
@@ -1331,6 +1370,7 @@
         event.stopPropagation();
         var compareSlug = compare.getAttribute('data-quality-compare') || '';
         var active = toggleCompareSlug(compareSlug);
+        if(active !== null) trackCompareEvent(active?'compare_add':'compare_remove',readCompareSlugs(),compareSlug);
         if (compare.getAttribute('data-quality-compare-open') === '1' && active !== null) {
           if (active === false) writeCompareSlugs([compareSlug]);
           window.location.href = comparePageUrl(readCompareSlugs());
@@ -1341,19 +1381,23 @@
       if (compareRemove) {
         event.preventDefault();
         var removeSlug = compareRemove.getAttribute('data-quality-compare-remove') || '';
-        writeCompareSlugs(readCompareSlugs().filter(function(x){ return normalize(x) !== normalize(removeSlug); }));
+        var afterRemove=writeCompareSlugs(readCompareSlugs().filter(function(x){ return normalize(x) !== normalize(removeSlug); }));
+        trackCompareEvent('compare_remove',afterRemove,removeSlug);
         return;
       }
       if (event.target.closest && event.target.closest('[data-quality-compare-clear]')) {
         event.preventDefault();
+        var beforeClear=readCompareSlugs();
         writeCompareSlugs([]);
+        trackCompareEvent('compare_clear',beforeClear,'');
         return;
       }
       var pageRemove = event.target.closest && event.target.closest('[data-quality-compare-remove-page]');
       if (pageRemove) {
         event.preventDefault();
         var pageSlug = pageRemove.getAttribute('data-quality-compare-remove-page') || '';
-        writeCompareSlugs(readCompareSlugs().filter(function(x){return normalize(x)!==normalize(pageSlug);}));
+        var afterPageRemove=writeCompareSlugs(readCompareSlugs().filter(function(x){return normalize(x)!==normalize(pageSlug);}));
+        trackCompareEvent('compare_remove',afterPageRemove,pageSlug);
         return;
       }
       var pick = event.target.closest && event.target.closest('[data-quality-compare-pick]');
@@ -1361,8 +1405,10 @@
         event.preventDefault();
         var pickSlug = pick.getAttribute('data-quality-compare-pick') || '';
         var current = readCompareSlugs();
-        if (current.length < COMPARE_MAX && !current.some(function(x){return normalize(x)===normalize(pickSlug);})) current.push(pickSlug);
-        writeCompareSlugs(current);
+        var added=false;
+        if (current.length < COMPARE_MAX && !current.some(function(x){return normalize(x)===normalize(pickSlug);})) { current.push(pickSlug); added=true; }
+        var afterPick=writeCompareSlugs(current);
+        if(added) trackCompareEvent('compare_add',afterPick,pickSlug);
         return;
       }
       var shareCompare = event.target.closest && event.target.closest('[data-quality-compare-share]');
@@ -1372,9 +1418,16 @@
           var smartphones = items.filter(function(p){ return isVisibleProduct(p) && isSmartphone(p); });
           var selected = (compareFromUrl() || readCompareSlugs()).filter(function(slug){ return !!productBySlug(smartphones, slug); }).slice(0, COMPARE_MAX);
           var products = selected.map(function(slug){ return productBySlug(smartphones, slug); }).filter(Boolean);
+          trackCompareEvent('compare_share',selected,'');
           shareCompareAsImage(products);
         });
         return;
+      }
+
+      var compareWhatsapp = event.target.closest && event.target.closest('[data-quality-compare-whatsapp]');
+      if(compareWhatsapp){
+        var compareWhatsappSlug=compareWhatsapp.getAttribute('data-quality-compare-whatsapp')||'';
+        trackCompareEvent('compare_whatsapp',readCompareSlugs(),compareWhatsappSlug);
       }
 
       var open = event.target.closest && event.target.closest('[data-quality-open-interest]');

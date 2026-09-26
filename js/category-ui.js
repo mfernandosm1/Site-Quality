@@ -8,6 +8,23 @@
     return (value || '').toString().normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().trim();
   }
 
+  function compactSearch(value){ return normalizeSearch(value).replace(/[^a-z0-9]+/g,''); }
+  function searchTokens(value){ return normalizeSearch(value).replace(/[^a-z0-9]+/g,' ').split(/\s+/).filter(Boolean); }
+  function editDistance(a,b){
+    a=String(a||'');b=String(b||'');if(a===b)return 0;if(!a.length)return b.length;if(!b.length)return a.length;
+    var prev=Array.from({length:b.length+1},function(_,i){return i;});
+    for(var i=1;i<=a.length;i++){var left=i,diag=i-1;for(var j=1;j<=b.length;j++){var up=prev[j],cost=a[i-1]===b[j-1]?0:1,next=Math.min(up+1,left+1,diag+cost);diag=up;prev[j]=next;left=next;}}
+    return prev[b.length];
+  }
+  function fuzzySearchScore(textValue,query){
+    var hay=normalizeSearch(textValue),term=normalizeSearch(query);if(!hay||!term)return 0;if(hay===term)return 1000;if(hay.indexOf(term)!==-1)return 820;
+    var ch=compactSearch(hay),ct=compactSearch(term);if(ct&&ch.indexOf(ct)!==-1)return 790;
+    var qt=searchTokens(term),ht=searchTokens(hay),total=0,matched=0;
+    qt.forEach(function(q){var best=0;ht.forEach(function(h){if(q===h)best=Math.max(best,120);else if(h.indexOf(q)===0||q.indexOf(h)===0)best=Math.max(best,100);else if(h.indexOf(q)!==-1||q.indexOf(h)!==-1)best=Math.max(best,82);else if(q.length>=4&&h.length>=4){var d=editDistance(q,h);if(d===1)best=Math.max(best,72);else if(d===2&&Math.max(q.length,h.length)>=6)best=Math.max(best,56);}});if(best){matched++;total+=best;}});
+    var coverage=qt.length?matched/qt.length:0;return coverage>=.6?Math.round(total*coverage+(matched===qt.length?80:0)):0;
+  }
+  function bestSearchMatch(items,query,getText,minScore){var winner=null,best=0;(items||[]).forEach(function(item){var score=fuzzySearchScore(getText(item),query);if(score>best){winner=item;best=score;}});return best>=(minScore||90)?winner:null;}
+
   function showSearchMessage(text){
     var message = document.getElementById('no-results');
     if (message) { message.textContent = text; message.style.display = 'block'; }
@@ -46,8 +63,8 @@
     var found = false;
     cards.forEach(function(card){
       var titleNode = card.querySelector('h3');
-      var title = normalizeSearch(titleNode ? titleNode.textContent : '');
-      var match = title.indexOf(term) !== -1;
+      var title = titleNode ? titleNode.textContent : '';
+      var match = fuzzySearchScore(title,term) >= 90;
       card.style.display = match ? 'flex' : 'none';
       if (match) found = true;
     });
@@ -59,18 +76,13 @@
     ]).then(function(all){
       var products = all[0].items || [];
       var categories = all[1].items || [];
-      var product = products.find(function(item){
-        if (!item || item.active === false) return false;
-        return normalizeSearch(item.name || item.nome || '').indexOf(term) !== -1 || normalizeSearch(item.slug || '').indexOf(term) !== -1;
-      });
+      var product = bestSearchMatch(products.filter(function(item){return item && item.active !== false;}),term,function(item){return [item.name,item.nome,item.slug,item.brand,item.category,item.categoria,item.descriptionShort].filter(Boolean).join(' ');},90);
       if (product) {
         var slug = product.slug || product.id;
         if (slug) window.location.assign('/produto/' + encodeURIComponent(slug) + '/');
         return;
       }
-      var category = categories.find(function(item){
-        return normalizeSearch(item.name || item.nome || '').indexOf(term) !== -1 || normalizeSearch(item.slug || '').indexOf(term) !== -1;
-      });
+      var category = bestSearchMatch(categories,term,function(item){return [item.name,item.nome,item.slug,item.id].filter(Boolean).join(' ');},95);
       if (category && category.slug) { window.location.assign('/' + encodeURIComponent(category.slug) + '/'); return; }
       showSearchMessage('Nenhum produto encontrado.');
       if (window.QualityAnalytics && typeof window.QualityAnalytics.searchNoResult === 'function') {

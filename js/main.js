@@ -189,6 +189,64 @@ function normalizeSearch(value) {
     .trim();
 }
 
+function searchTokens(value) {
+  return normalizeSearch(value).replace(/[^a-z0-9]+/g, " ").split(/\s+/).filter(Boolean);
+}
+function compactSearch(value) {
+  return normalizeSearch(value).replace(/[^a-z0-9]+/g, "");
+}
+function editDistance(a, b) {
+  a = String(a || ""); b = String(b || "");
+  if (a === b) return 0;
+  if (!a.length) return b.length; if (!b.length) return a.length;
+  const prev = Array.from({length:b.length + 1}, (_,i) => i);
+  for (let i=1;i<=a.length;i++) {
+    let left=i, diag=i-1;
+    for (let j=1;j<=b.length;j++) {
+      const up=prev[j], cost=a[i-1]===b[j-1]?0:1;
+      const next=Math.min(up+1,left+1,diag+cost);
+      diag=up; prev[j]=next; left=next;
+    }
+  }
+  return prev[b.length];
+}
+function fuzzySearchScore(text, query) {
+  const hay = normalizeSearch(text), term = normalizeSearch(query);
+  if (!hay || !term) return 0;
+  if (hay === term) return 1000;
+  if (hay.includes(term)) return 820;
+  const compactHay=compactSearch(hay), compactTerm=compactSearch(term);
+  if (compactTerm && compactHay.includes(compactTerm)) return 790;
+  const qTokens=searchTokens(term), hTokens=searchTokens(hay);
+  if (!qTokens.length || !hTokens.length) return 0;
+  let total=0, matched=0;
+  qTokens.forEach(q => {
+    let best=0;
+    hTokens.forEach(h => {
+      if (q===h) best=Math.max(best,120);
+      else if (h.startsWith(q) || q.startsWith(h)) best=Math.max(best,100);
+      else if (h.includes(q) || q.includes(h)) best=Math.max(best,82);
+      else if (q.length>=4 && h.length>=4) {
+        const dist=editDistance(q,h);
+        if (dist===1) best=Math.max(best,72);
+        else if (dist===2 && Math.max(q.length,h.length)>=6) best=Math.max(best,56);
+      }
+    });
+    if (best){ matched++; total+=best; }
+  });
+  const coverage=matched/qTokens.length;
+  if (coverage < 0.6) return 0;
+  return Math.round(total*coverage + (matched===qTokens.length?80:0));
+}
+function bestSearchMatch(items, query, textGetter, minScore=90) {
+  let winner=null, winnerScore=0;
+  (items || []).forEach(item => {
+    const score=fuzzySearchScore(textGetter(item),query);
+    if (score>winnerScore){ winner=item; winnerScore=score; }
+  });
+  return winnerScore>=minScore ? winner : null;
+}
+
 function showSearchMessage(text) {
   const noResults = document.getElementById("no-results");
   if (noResults) {
@@ -215,8 +273,8 @@ function doSearch(query) {
   let foundOnPage = false;
   if (productsOnPage.length) {
     productsOnPage.forEach(card => {
-      const title = normalizeSearch(card.querySelector("h3")?.textContent || "");
-      if (title.includes(termo)) {
+      const title = card.querySelector("h3")?.textContent || "";
+      if (fuzzySearchScore(title, termo) >= 90) {
         card.style.display = "flex";
         foundOnPage = true;
       } else {
@@ -238,12 +296,9 @@ function doSearch(query) {
     const produtos = productsData.items || [];
     const categorias = categoriesData.items || [];
 
-    const produto = produtos.find(p => {
-      if (!p || p.active === false) return false;
-      const name = normalizeSearch(p.name || p.nome || "");
-      const slug = normalizeSearch(p.slug || "");
-      return name.includes(termo) || slug.includes(termo);
-    });
+    const produto = bestSearchMatch(produtos.filter(p => p && p.active !== false), termo, p => [
+      p.name, p.nome, p.slug, p.brand, p.category, p.categoria, p.descriptionShort
+    ].filter(Boolean).join(" "), 90);
 
     if (produto) {
       const slug = produto.slug || produto.id;
@@ -251,11 +306,7 @@ function doSearch(query) {
       return;
     }
 
-    const categoria = categorias.find(c => {
-      const name = normalizeSearch(c.name || c.nome || "");
-      const slug = normalizeSearch(c.slug || "");
-      return name.includes(termo) || slug.includes(termo);
-    });
+    const categoria = bestSearchMatch(categorias, termo, c => [c.name,c.nome,c.slug,c.id].filter(Boolean).join(" "), 95);
 
     if (categoria && categoria.slug) {
       window.location.href = `/${encodeURIComponent(categoria.slug)}/`;
