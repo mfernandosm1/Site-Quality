@@ -162,12 +162,21 @@
 
 /* Marca d'água visual também na página do comparador, inclusive em screenshots. */
 .quality-compare-body .quality-compare-page{position:relative;isolation:isolate}
+.quality-compare-body .quality-compare-page::before{
+  content:"";position:absolute;inset:15% 8% 12%;z-index:39;pointer-events:none;
+  background:url('/images/logo.png') center 48% / min(720px,62vw) auto no-repeat;
+  opacity:.045;mix-blend-mode:multiply
+}
 .quality-compare-body .quality-compare-page::after{
   content:"";position:absolute;inset:0;z-index:40;pointer-events:none;
-  background-image:url('/images/logo.png');background-repeat:repeat;background-size:250px 250px;background-position:30px 20px;
-  opacity:.035;mix-blend-mode:multiply
+  background-image:url('/images/logo.png');background-repeat:repeat;background-size:205px 205px;background-position:18px 12px;
+  opacity:.052;mix-blend-mode:multiply
 }
 .quality-compare-body .quality-compare-page>*{position:relative;z-index:2}
+@media(max-width:760px){
+  .quality-compare-body .quality-compare-page::before{opacity:.028;background-size:420px auto;inset:12% 2% 8%}
+  .quality-compare-body .quality-compare-page::after{opacity:.035;background-size:250px 250px;background-position:30px 20px}
+}
 .quality-compare-mobile{display:none}
 
 @media(max-width:760px){

@@ -638,32 +638,162 @@
     return '';
   }
 
+  function specificationListItems(product){
+    var html = String(product && (product.descriptionLong || product.description || product.descricao) || '');
+    if (!html) return [];
+    var holder = document.createElement('div');
+    holder.innerHTML = html;
+    var marker = Array.prototype.slice.call(holder.querySelectorAll('strong,b')).find(function(node){
+      return /especificacoes/.test(normalize(node.textContent || ''));
+    });
+    var list = null;
+    if (marker) {
+      var base = marker.closest('p,div,h2,h3,h4,h5') || marker.parentElement;
+      var next = base && base.nextElementSibling;
+      var guard = 0;
+      while (next && guard < 4) {
+        if (/^(UL|OL)$/i.test(next.tagName || '')) { list = next; break; }
+        next = next.nextElementSibling;
+        guard++;
+      }
+    }
+    var nodes = list ? list.querySelectorAll(':scope > li') : holder.querySelectorAll('li');
+    return Array.prototype.slice.call(nodes).map(function(li){
+      return String(li.textContent || '').replace(/\s+/g,' ').trim();
+    }).filter(Boolean);
+  }
+
+  function specIndex(product){
+    var index = {};
+    function set(label, value){
+      var key = normalize(label).replace(/:\s*$/,'');
+      var clean = String(value || '').replace(/\s+/g,' ').trim().replace(/^[-–—:\s]+/,'').trim();
+      if (key && clean && !index[key]) index[key] = clean;
+    }
+    specificationListItems(product).forEach(function(text){
+      var colon = text.match(/^([^:]{2,48}):\s*(.+)$/);
+      if (colon) {
+        set(colon[1], colon[2]);
+        return;
+      }
+      var match;
+      if ((match = text.match(/^Tela\s+(.+)$/i))) set('Tela', match[1]);
+      else if ((match = text.match(/^Processador\s+(.+)$/i))) set('Processador', match[1]);
+      else if ((match = text.match(/^(\d{1,2})\s*GB\s+de\s+RAM\b/i))) set('Memória RAM', match[1] + 'GB');
+      else if ((match = text.match(/^(\d{2,4})\s*GB\s+de\s+armazenamento\b/i))) set('Armazenamento', match[1] + 'GB');
+      else if ((match = text.match(/^C[aâ]mera\s+principal\s+(.+)$/i))) set('Câmera principal', match[1].replace(/^de\s+/i,''));
+      else if ((match = text.match(/^C[aâ]mera\s+frontal\s+(.+)$/i))) set('Câmera frontal', match[1].replace(/^de\s+/i,''));
+      else if ((match = text.match(/^Bateria\s+(.+)$/i))) set('Bateria', match[1].replace(/^de\s+/i,''));
+      else if (/^(Bluetooth|Wi-?Fi|Wi‑Fi|5G|4G)\b/i.test(text)) set('Conectividade', text);
+    });
+    return index;
+  }
+
+  function firstIndexed(index, keys){
+    for (var i=0;i<keys.length;i++) {
+      var value = index[normalize(keys[i])];
+      if (value) return value;
+    }
+    return '';
+  }
+
+  function uniqueJoin(values, separator){
+    var seen = [];
+    values.filter(Boolean).forEach(function(value){
+      var clean = String(value).trim();
+      var norm = normalize(clean);
+      if (!norm) return;
+      if (!seen.some(function(existing){ return normalize(existing) === norm || normalize(existing).indexOf(norm) >= 0 || norm.indexOf(normalize(existing)) >= 0; })) seen.push(clean);
+    });
+    return seen.join(separator || ' • ');
+  }
+
+  function ramFromMemory(value){
+    var text = String(value || '');
+    if (!text) return '';
+    if (!/armazenamento|memoria interna/i.test(normalize(text))) return text;
+    var boost = text.match(/(\d{1,2}\s*GB\s*RAM(?:\s*f[ií]sica)?(?:\s*\+\s*(?:at[eé]\s*)?\d{1,2}\s*GB\s*RAM\s*Boost)?)/i);
+    if (boost) return boost[1].replace(/\s+/g,' ').trim();
+    var simple = text.match(/(\d{1,2})\s*GB\s*RAM\b/i);
+    return simple ? simple[1] + 'GB RAM' : '';
+  }
+
+  function storageFromMemory(value){
+    var text = String(value || '');
+    if (!text) return '';
+    var matches = [];
+    text.replace(/(\d{2,4})\s*(GB|TB)\b/gi,function(_,num,unit){
+      var n = Number(num);
+      if (unit.toUpperCase() === 'TB' || n >= 64) matches.push(num + unit.toUpperCase());
+      return _;
+    });
+    return matches.length ? matches[matches.length - 1] : '';
+  }
+
+  function systemFromText(value){
+    var text = String(value || '');
+    var match = text.match(/\b(HyperOS\s*[\d.]+|Android\s*\d+(?:\s+[A-Za-z0-9.]+)?|iOS\s*\d+(?:\.\d+)?)\b/i);
+    return match ? match[1] : '';
+  }
+
+  function connectorFromText(value){
+    var text = String(value || '');
+    var match = text.match(/\b(USB\s*-?\s*C|Lightning)\b/i);
+    return match ? match[1].replace(/\s+/g,'').replace(/USBC/i,'USB-C') : '';
+  }
+
+  function protectionFromDescription(product){
+    var html = String(product && (product.descriptionLong || product.description || product.descricao) || '');
+    if (!html) return '';
+    var holder = document.createElement('div');
+    holder.innerHTML = html;
+    var text = String(holder.textContent || '').replace(/\s+/g,' ');
+    var match = text.match(/\b(IP\d{2}(?:\s*\/\s*IP\d{2})?)\b/i);
+    return match ? match[1].replace(/\s+/g,'') : '';
+  }
+
   function compareSpecs(product){
     var variations = product && product.variations ? product.variations : {};
     var colors = Array.isArray(variations.colors) ? variations.colors.map(function(c){return typeof c === 'string' ? c : c && c.name;}).filter(Boolean) : [];
     var name = product && (product.name || product.nome) || '';
-    var screen = pickSpec(product,[/^tela$/, /^display$/, /tela/]);
-    var processor = pickSpec(product,[/^processador$/, /^plataforma$/, /^chipset$/, /^chip$/]);
-    var ram = pickSpec(product,[/^memoria ram$/, /^memoria$/, /\bram\b/]) || capacityFallback(name,'ram');
-    var storage = pickSpec(product,[/^armazenamento$/, /memoria interna/, /armazenamento/]) || capacityFallback(name,'storage');
-    var cameras = pickSpec(product,[/^cameras$/, /^cameras traseiras$/, /^camera traseira$/, /^camera principal$/, /sistema de cameras/]);
-    var front = pickSpec(product,[/^camera frontal$/]);
+    var idx = specIndex(product);
+
+    var screen = firstIndexed(idx,['Tela','Display']) || pickSpec(product,[/^tela$/, /^display$/]);
+    var processor = firstIndexed(idx,['Processador','Plataforma','Chipset','Chip']) || pickSpec(product,[/^processador$/, /^plataforma$/, /^chipset$/, /^chip$/]);
+
+    var memory = firstIndexed(idx,['Memória','Memoria']);
+    var ram = firstIndexed(idx,['Memória RAM','Memoria RAM','RAM']) || ramFromMemory(memory) || capacityFallback(name,'ram');
+    var storage = firstIndexed(idx,['Armazenamento','Opções de Armazenamento','Opcoes de Armazenamento','Memória Interna','Memoria Interna']) || storageFromMemory(memory) || capacityFallback(name,'storage');
+
+    var rear = firstIndexed(idx,['Câmeras','Cameras','Câmeras Traseiras','Cameras Traseiras','Câmera Traseira','Camera Traseira','Câmera principal','Camera principal']);
+    var front = firstIndexed(idx,['Câmera Frontal','Camera Frontal']);
+    var cameras = rear;
     if (front && cameras && normalize(cameras).indexOf(normalize(front)) < 0) cameras += ' • Frontal: ' + front;
     else if (front && !cameras) cameras = 'Frontal: ' + front;
-    var battery = pickSpec(product,[/^bateria$/, /bateria/, /autonomia/]);
-    var charging = pickSpec(product,[/^carregamento$/, /recarga/, /carga rapida/]);
+    if (!cameras) cameras = pickSpec(product,[/^cameras$/, /^cameras traseiras$/, /^camera traseira$/, /^camera principal$/]);
+
+    var battery = firstIndexed(idx,['Bateria']) || pickSpec(product,[/^bateria$/]);
+    var charging = firstIndexed(idx,['Carregamento','Recarga']);
     if (charging && battery && normalize(battery).indexOf(normalize(charging)) < 0) battery += ' • ' + charging;
-    var connectivity = pickSpec(product,[/^conectividade$/, /^rede$/, /5g.*wifi/, /5g/]);
+
+    var network = firstIndexed(idx,['Rede']);
+    var connectivityDirect = firstIndexed(idx,['Conectividade']);
+    var connectivity = uniqueJoin([network,connectivityDirect],' • ');
     if (!connectivity) {
       if (/\b5g\b/i.test(name)) connectivity = '5G';
       else if (/\b4g\b/i.test(name)) connectivity = '4G';
     }
-    var protection = pickSpec(product,[/^protecao$/, /^resistencia$/, /certificacao/]);
-    var security = pickSpec(product,[/^seguranca$/, /face id/, /biometr/]);
-    var audio = pickSpec(product,[/^audio$/, /alto-falante/]);
-    var connector = pickSpec(product,[/^conector$/, /^conexoes$/]);
-    var system = pickSpec(product,[/^sistema operacional$/, /^sistema$/, /^software$/]);
-    var warranty = pickSpec(product,[/^garantia$/]) || String(product && product.logistics && product.logistics.warranty || '').trim();
+
+    var protection = firstIndexed(idx,['Proteção','Protecao','Resistência','Resistencia']) || protectionFromDescription(product);
+    var security = firstIndexed(idx,['Segurança','Seguranca']) || pickSpec(product,[/^seguranca$/]);
+    var audio = firstIndexed(idx,['Áudio','Audio']) || pickSpec(product,[/^audio$/]);
+    var connector = firstIndexed(idx,['Conector','Conexões','Conexoes']) || connectorFromText(connectivity);
+    var system = firstIndexed(idx,['Sistema operacional','Sistema','Software']) || systemFromText(connectivity);
+    if (system && connectivity) {
+      connectivity = connectivity.replace(new RegExp('(?:,?\\s*(?:e\\s*)?)?' + system.replace(/[.*+?^${}()|[\]\\]/g,'\\$&') + '\\s*$','i'),'').replace(/[\s,•-]+$/,'').trim();
+    }
+    var warranty = firstIndexed(idx,['Garantia']) || pickSpec(product,[/^garantia$/]) || String(product && product.logistics && product.logistics.warranty || '').trim();
+
     return {
       brand: brandOf(product) || '—',
       condition: conditionOf(product) || '—',
