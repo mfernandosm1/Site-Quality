@@ -166,7 +166,7 @@
   function normalizePayload(type, payload){
     payload = payload && typeof payload === 'object' ? payload : {};
     var product = payload.product && typeof payload.product === 'object' ? payload.product : null;
-    if(!product && (type === 'product_view' || type === 'favorite' || type === 'favorite_remove' || type === 'whatsapp_click' || type === 'share_click')){
+    if(!product && (type === 'product_view' || type === 'favorite' || type === 'favorite_remove' || type === 'list_add' || type === 'list_remove' || type === 'whatsapp_click' || type === 'share_click')){
       if(payload.slug || payload.name || payload.id) product = payload;
     }
     var category = payload.category && typeof payload.category === 'object' ? payload.category : null;
@@ -315,6 +315,106 @@
       var key=String(product && (product.slug||product.id||product.url||product.name)||'').trim().toLowerCase();
       return Array.isArray(items)&&items.some(function(item){var k=String(item&&(item.slug||item.id||item.url||item.name||item.nome)||'').trim().toLowerCase();return key&&k===key;});
     } catch(e){return false;}
+  }
+
+
+  /* Minha lista: captura tanto botoes explicitos quanto listas persistidas no navegador.
+     O scanner serve como fallback para o site legado, sem depender do nome exato do botao. */
+  var interestListSnapshots = Object.create(null);
+  var interestListTimer = null;
+
+  function listProductKey(item){
+    item = item && typeof item === 'object' ? item : {};
+    var nested = item.product && typeof item.product === 'object' ? item.product : {};
+    return clean(item.slug || item.productSlug || nested.slug || item.id || nested.id || item.url || nested.url || item.name || item.nome || nested.name || nested.nome || '',160).toLowerCase();
+  }
+  function listProductPayload(item){
+    item = item && typeof item === 'object' ? item : {};
+    var nested = item.product && typeof item.product === 'object' ? item.product : {};
+    var slug = clean(item.slug || item.productSlug || nested.slug || item.id || nested.id || '',120);
+    var url = clean(item.url || nested.url || (slug ? '/produto/' + encodeURIComponent(slug) + '/' : ''),300);
+    return {
+      id: clean(item.id || nested.id || '',120),
+      slug: slug,
+      name: clean(item.name || item.nome || item.productName || nested.name || nested.nome || slug || 'Produto',140),
+      image: clean(item.image || item.imagem || nested.image || nested.imagem || '',260),
+      url: url
+    };
+  }
+  function isInterestListStorageKey(key){
+    var normalized = normalize(key || '');
+    if(!normalized) return false;
+    if(/favorit|recent|analytics|compare|comparacao|session|visitor/.test(normalized)) return false;
+    return /(?:^|[^a-z])(lista|list|wishlist|interesse|interest)(?:[^a-z]|$)/.test(normalized) || /minhalista|interestlist|wishlist/.test(normalized);
+  }
+  function storageListItems(storage,key){
+    try{
+      var raw = storage.getItem(key);
+      if(!raw) return [];
+      var parsed = JSON.parse(raw);
+      var items = Array.isArray(parsed) ? parsed : (parsed && Array.isArray(parsed.items) ? parsed.items : (parsed && Array.isArray(parsed.products) ? parsed.products : []));
+      return items.filter(function(item){
+        if(!item || typeof item !== 'object') return false;
+        var nested = item.product && typeof item.product === 'object' ? item.product : {};
+        var url = String(item.url || nested.url || '');
+        return !!(item.slug || item.productSlug || nested.slug || /\/produto\//i.test(url));
+      });
+    }catch(e){ return []; }
+  }
+  function scanInterestStorage(storage,prefix,emit){
+    if(!storage) return;
+    try{
+      for(var i=0;i<storage.length;i++){
+        var key = storage.key(i);
+        if(!isInterestListStorageKey(key)) continue;
+        var items = storageListItems(storage,key);
+        var current = Object.create(null);
+        items.forEach(function(item){
+          var itemKey = listProductKey(item);
+          if(itemKey) current[itemKey] = listProductPayload(item);
+        });
+        var snapKey = prefix + ':' + key;
+        var previous = interestListSnapshots[snapKey];
+        if(emit && previous){
+          Object.keys(current).forEach(function(itemKey){
+            if(!previous[itemKey]) track('list_add',{product:current[itemKey],context:surface()});
+          });
+          Object.keys(previous).forEach(function(itemKey){
+            if(!current[itemKey]) track('list_remove',{product:previous[itemKey],context:surface()});
+          });
+        }
+        interestListSnapshots[snapKey] = current;
+      }
+    }catch(e){}
+  }
+  function scanInterestLists(emit){
+    scanInterestStorage(window.localStorage,'local',emit);
+    scanInterestStorage(window.sessionStorage,'session',emit);
+  }
+  function actionMarker(el){
+    if(!el) return '';
+    var parts = [
+      el.id, el.className, el.getAttribute && el.getAttribute('data-action'),
+      el.getAttribute && el.getAttribute('data-list-action'),
+      el.getAttribute && el.getAttribute('data-interest-action'),
+      el.getAttribute && el.getAttribute('aria-label'),
+      el.getAttribute && el.getAttribute('title'),
+      el.textContent
+    ];
+    return normalize(parts.filter(Boolean).join(' '));
+  }
+  function explicitListAction(target){
+    var el = target && target.closest ? target.closest('button,a,[role="button"],input[type="button"],input[type="submit"]') : null;
+    if(!el) return null;
+    var marker = actionMarker(el);
+    var listLike = /lista|wishlist|interesse|interest/.test(marker) ||
+      !!el.closest('[data-quality-list],[data-quality-list-add],[data-quality-interest],[data-wishlist],.quality-list-action,.interest-list-action,.wishlist-action');
+    if(!listLike) return null;
+    if(/remov|exclu|delete|tirar/.test(marker)) return {type:'list_remove',el:el};
+    var addLike = /adicion|incluir|salvar|guardar|\badd\b|wishlist|interesse/.test(marker);
+    if(!addLike && el.closest('header,nav,.header,.navbar,.quality-header')) return null;
+    if(!addLike && /^(minha )?lista$/.test(marker)) return null;
+    return {type:'list_add',el:el};
   }
 
   function supportedPerfType(type){
@@ -468,8 +568,26 @@
       return;
     }
 
-    var share=target.closest('[data-quality-share]');
-    if(share){ track('share_click',{product:productFromButton(share),context:surface()}); return; }
+    var listAction=explicitListAction(target);
+    if(listAction){
+      var lp=productFromElement(listAction.el);
+      if(lp) track(listAction.type,{product:lp,context:surface()});
+      else resolveCurrentProduct().then(function(p){ if(p) track(listAction.type,{product:p,context:surface()}); });
+      window.setTimeout(function(){scanInterestLists(true);},120);
+      return;
+    }
+
+    var share=target.closest('[data-quality-share],[data-share-product],.quality-share-btn,.btn-share,.share-product');
+    if(!share){
+      var clickable=target.closest('button,a,[role="button"]');
+      if(clickable && /compartilh|share/.test(actionMarker(clickable))) share=clickable;
+    }
+    if(share){
+      var sp=productFromElement(share) || productFromButton(share);
+      if(sp) track('share_click',{product:sp,context:surface()});
+      else resolveCurrentProduct().then(function(p){if(p)track('share_click',{product:p,context:surface()});});
+      return;
+    }
 
     var wa=target.closest('a.btn-whatsapp,a[href*="wa.me"],a[href*="api.whatsapp.com"]');
     if(wa){
@@ -524,6 +642,11 @@
   window.addEventListener('pagehide',function(){ flushEngagement('pagehide'); sendWebVitals('pagehide'); });
   window.addEventListener('beforeunload',function(){ flushEngagement('beforeunload'); sendWebVitals('beforeunload'); });
 
-  function start(){ trackInitial(); observeNoResults(); initPerformanceObservers(); window.setTimeout(observeNoResults,600); window.setTimeout(observeNoResults,1600); window.setTimeout(function(){sendWebVitals('10s');},10000); }
+  function start(){
+    trackInitial(); observeNoResults(); initPerformanceObservers();
+    scanInterestLists(false);
+    if(!interestListTimer) interestListTimer=window.setInterval(function(){scanInterestLists(true);},700);
+    window.setTimeout(observeNoResults,600); window.setTimeout(observeNoResults,1600); window.setTimeout(function(){sendWebVitals('10s');},10000);
+  }
   if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',start,{once:true}); else start();
 })();
