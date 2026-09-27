@@ -47,12 +47,12 @@
   var perfLastSignature = '';
 
   function clean(v, max){ return String(v == null ? '' : v).trim().slice(0, max || 300); }
-  function normalize(v){ return clean(v,160).normalize('NFD').replace(/[̀-ͯ]/g,'').toLowerCase().trim(); }
-  function isLocal(){ return /^(localhost|127.0.0.1)$/i.test(window.location.hostname || ''); }
+  function normalize(v){ return clean(v,160).normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().trim(); }
+  function isLocal(){ return /^(localhost|127\.0\.0\.1)$/i.test(window.location.hostname || ''); }
   function deviceName(){ return /Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent || '') ? 'mobile' : 'desktop'; }
   function viewport(){ return String(window.innerWidth || 0) + 'x' + String(window.innerHeight || 0); }
   function currentProductSlug(){
-    var m = String(window.location.pathname || '').match(//produto/([^/?#]+)/i);
+    var m = String(window.location.pathname || '').match(/\/produto\/([^/?#]+)/i);
     if(m) return decodeURIComponent(m[1]);
     try { return clean(new URLSearchParams(window.location.search).get('slug') || new URLSearchParams(window.location.search).get('id') || '',120); }
     catch(e){ return ''; }
@@ -63,17 +63,17 @@
       var q = params.get('slug') || params.get('cat') || params.get('categoria');
       if(q) return clean(q,120);
     } catch(e){}
-    var path = String(window.location.pathname || '').replace(/^/+|/+$/g,'');
+    var path = String(window.location.pathname || '').replace(/^\/+|\/+$/g,'');
     var first = path.split('/')[0] || '';
-    if(!first || /^(site|produto|index.html|categoria.html|comparar.html|sobre.html|formas-de-pagamento.html)$/i.test(first)) return '';
+    if(!first || /^(site|produto|index\.html|categoria\.html|comparar\.html|sobre\.html|formas-de-pagamento\.html)$/i.test(first)) return '';
     return clean(first,120);
   }
   function surface(){
     var p = String(window.location.pathname || '').toLowerCase();
-    if(/comparar.html/.test(p)) return 'Comparador';
-    if(currentProductSlug() || //produto//.test(p) || /produto.html/.test(p)) return 'Página do produto';
-    if(currentCategorySlug() || /categoria.html/.test(p)) return 'Categoria';
-    if(p === '/' || /(?:^|/)index.html$/.test(p) || //site/view/?$/.test(p) || //site/view/index.html$/.test(p)) return 'Home';
+    if(/comparar\.html/.test(p)) return 'Comparador';
+    if(currentProductSlug() || /\/produto\//.test(p) || /produto\.html/.test(p)) return 'Página do produto';
+    if(currentCategorySlug() || /categoria\.html/.test(p)) return 'Categoria';
+    if(p === '/' || /(?:^|\/)index\.html$/.test(p) || /\/site\/view\/?$/.test(p) || /\/site\/view\/index\.html$/.test(p)) return 'Home';
     return 'Outra página';
   }
   function fetchFirstJson(urls){
@@ -128,19 +128,24 @@
       if(data) return productFromButton(data);
       var link = card.querySelector('a[href*="/produto/"]');
       if(link){
-        var m = String(link.getAttribute('href') || '').match(//produto/([^/?#]+)/i);
+        var m = String(link.getAttribute('href') || '').match(/\/produto\/([^/?#]+)/i);
         var nameNode = card.querySelector('h3,.product-title');
         return {id:'',slug:m?decodeURIComponent(m[1]):'',name:clean(nameNode && nameNode.textContent || '',140),image:'',url:clean(link.getAttribute('href')||'',300)};
       }
     }
-    return currentProductCache;
+    if(currentProductCache) return currentProductCache;
+    // No celular o WhatsApp pode assumir a tela imediatamente após o clique.
+    // Não dependemos de uma busca assíncrona no catálogo para registrar o evento:
+    // a própria página já possui slug, nome e imagem suficientes.
+    var currentSlug=currentProductSlug();
+    return currentSlug ? productFromDom(currentSlug) : null;
   }
   function productFromDom(slug){
     var h1 = document.querySelector('h1');
     var img = document.querySelector('.product-main-image img, .product-image img, .main-image img, #produto-detalhe img, main img');
     return {
       id:'', slug:clean(slug,120),
-      name:clean((h1 && h1.textContent) || document.title.replace(/s*[–|-]s*Quality Celulares.*$/i,'') || slug,140),
+      name:clean((h1 && h1.textContent) || document.title.replace(/\s*[–|-]\s*Quality Celulares.*$/i,'') || slug,140),
       image:clean(img && (img.currentSrc || img.getAttribute('src')) || '',260),
       url:clean(window.location.href,300)
     };
@@ -359,9 +364,9 @@
         var kb=bytes/1024; result.transferKb+=kb;
         var type=String(entry.initiatorType||'').toLowerCase();
         var name=String(entry.name||'').toLowerCase();
-        var image=type==='img'||/.(?:png|jpe?g|webp|avif|gif|svg)(?:?|$)/.test(name);
-        var script=type==='script'||/.js(?:?|$)/.test(name);
-        var style=type==='css'||type==='link'&&/.css(?:?|$)/.test(name)||/.css(?:?|$)/.test(name);
+        var image=type==='img'||/\.(?:png|jpe?g|webp|avif|gif|svg)(?:\?|$)/.test(name);
+        var script=type==='script'||/\.js(?:\?|$)/.test(name);
+        var style=type==='css'||type==='link'&&/\.css(?:\?|$)/.test(name)||/\.css(?:\?|$)/.test(name);
         if(image){ result.imageKb+=kb; if(kb>=300) result.heavyImages+=1; }
         if(script){ result.jsKb+=kb; if(kb>=180) result.heavyScripts+=1; }
         if(style){ result.cssKb+=kb; if(kb>=120) result.heavyStyles+=1; }
@@ -410,7 +415,14 @@
     var slug=currentProductSlug();
     if(slug && !window.__qualityProductViewTrackedV4){
       window.__qualityProductViewTrackedV4=true;
-      resolveCurrentProduct().then(function(product){ if(product) track('product_view',{product:product,context:'Página do produto'}); });
+      // Registra imediatamente. Antes este evento esperava a leitura do catálogo;
+      // em Safari/iPhone e em visitas rápidas o usuário podia abrir o WhatsApp
+      // antes da Promise terminar e o product_view simplesmente se perdia.
+      var immediateProduct=productFromDom(slug);
+      if(immediateProduct){
+        currentProductCache=immediateProduct;
+        track('product_view',{product:immediateProduct,context:'Página do produto'});
+      }
     }
     var catSlug=currentCategorySlug();
     if(catSlug && !window.__qualityCategoryViewTrackedV4){
