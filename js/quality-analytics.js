@@ -1,6 +1,6 @@
 (function(){
-  if(window.__qualitySiteAnalyticsV12) return;
-  window.__qualitySiteAnalyticsV12 = true;
+  if(window.__qualitySiteAnalyticsV13) return;
+  window.__qualitySiteAnalyticsV13 = true;
 
   var ENDPOINT = 'https://script.google.com/macros/s/AKfycbwZQ01q5u5lRqE3Hk-nMutkTWcLA8r7127sO3Dt132Ti8L0Ci7DWoOyby5v92T_WY34/exec';
   var KEY = 'quality-analytics-v1';
@@ -15,7 +15,11 @@
   var pageVisitId = 'pv-' + Date.now() + '-' + Math.random().toString(36).slice(2,9);
   var VISITOR_KEY = 'quality-analytics-visitor-v2';
   var SESSION_KEY = 'quality-analytics-session-v2';
+  var GEO_KEY = 'quality-analytics-geo-v1';
   var SESSION_TIMEOUT_MS = 30 * 60 * 1000;
+  var GEO_RETRY_MS = 5 * 60 * 1000;
+  var geoState = null;
+  var geoPromise = null;
   function randomAnalyticsId(prefix){
     return prefix + '-' + Date.now().toString(36) + '-' + Math.random().toString(36).slice(2,10);
   }
@@ -23,6 +27,22 @@
     try { var value=localStorage.getItem(key); return value ? JSON.parse(value) : null; } catch(e){ return null; }
   }
   function safeStorageSet(key,value){ try { localStorage.setItem(key,JSON.stringify(value)); } catch(e){} }
+  function safeSessionGet(key){
+    try { var value=sessionStorage.getItem(key); return value ? JSON.parse(value) : null; } catch(e){ return null; }
+  }
+  function safeSessionSet(key,value){ try { sessionStorage.setItem(key,JSON.stringify(value)); } catch(e){} }
+  function campaignFromUrl(){
+    var result={utmSource:'',utmMedium:'',utmCampaign:'',utmContent:'',utmTerm:''};
+    try{
+      var params=new URLSearchParams(window.location.search||'');
+      result.utmSource=clean(params.get('utm_source')||'',100);
+      result.utmMedium=clean(params.get('utm_medium')||'',100);
+      result.utmCampaign=clean(params.get('utm_campaign')||'',160);
+      result.utmContent=clean(params.get('utm_content')||'',160);
+      result.utmTerm=clean(params.get('utm_term')||'',160);
+    }catch(e){}
+    return result;
+  }
   function ensureAudienceState(){
     var nowMs=Date.now();
     var visitor=safeStorageGet(VISITOR_KEY);
@@ -31,10 +51,17 @@
     var expired=!session || !session.id || session.visitorId!==visitor.id || !session.lastActivity || (nowMs-Number(session.lastActivity))>SESSION_TIMEOUT_MS;
     if(expired){
       visitor.sessionCount=Math.max(0,Number(visitor.sessionCount)||0)+1;
-      session={id:randomAnalyticsId('s'),visitorId:visitor.id,startedAt:nowMs,lastActivity:nowMs,number:visitor.sessionCount};
+      var campaign=campaignFromUrl();
+      session={
+        id:randomAnalyticsId('s'),visitorId:visitor.id,startedAt:nowMs,lastActivity:nowMs,number:visitor.sessionCount,
+        landingPage:clean(window.location.href||'',500),sessionReferrer:clean(document.referrer||'',500),campaign:campaign
+      };
     } else {
       session.lastActivity=nowMs;
       if(!session.number) session.number=Math.max(1,Number(visitor.sessionCount)||1);
+      if(!session.landingPage) session.landingPage=clean(window.location.href||'',500);
+      if(!session.sessionReferrer) session.sessionReferrer=clean(document.referrer||'',500);
+      if(!session.campaign) session.campaign=campaignFromUrl();
       visitor.sessionCount=Math.max(Number(visitor.sessionCount)||0,Number(session.number)||1);
     }
     visitor.lastSeen=nowMs;
@@ -197,6 +224,13 @@
       errorMessage: clean(payload.errorMessage || '',220),
       resourceUrl: clean(payload.resourceUrl || '',300),
       reason: clean(payload.reason || '',80),
+      errorLine: Number.isFinite(Number(payload.errorLine)) ? Math.max(0,Math.round(Number(payload.errorLine))) : undefined,
+      errorColumn: Number.isFinite(Number(payload.errorColumn)) ? Math.max(0,Math.round(Number(payload.errorColumn))) : undefined,
+      location: payload.location && typeof payload.location === 'object' ? {
+        city:clean(payload.location.city||'',100), region:clean(payload.location.region||'',100), regionCode:clean(payload.location.regionCode||'',20),
+        country:clean(payload.location.country||'',100), countryCode:clean(payload.location.countryCode||'',10), source:clean(payload.location.source||'',30)
+      } : null,
+      campaign: payload.campaign && typeof payload.campaign === 'object' ? payload.campaign : null,
       comparison: {
         slugs: comparisonSlugs,
         names: comparisonNames,
@@ -239,6 +273,14 @@
     var compatErrorName = errorCompatLabel(type,data);
     var aud=touchAudienceState(), visitor=aud.visitor||{}, session=aud.session||{};
     var visitorType=Number(session.number||1)>1?'recorrente':'novo';
+    var location=data.location||geoState||{};
+    var sessionCampaign=session.campaign&&typeof session.campaign==='object'?session.campaign:{};
+    var campaign=data.campaign||{
+      landingPage:clean(session.landingPage||'',500),sessionReferrer:clean(session.sessionReferrer||'',500),
+      utmSource:clean(sessionCampaign.utmSource||'',100),utmMedium:clean(sessionCampaign.utmMedium||'',100),utmCampaign:clean(sessionCampaign.utmCampaign||'',160),
+      utmContent:clean(sessionCampaign.utmContent||'',160),utmTerm:clean(sessionCampaign.utmTerm||'',160)
+    };
+    var timezone='';try{timezone=clean(Intl.DateTimeFormat().resolvedOptions().timeZone||'',80);}catch(e){}
     return {
       key:KEY, action:'track', type:type, event:type, Evento:type,
       at:iso, Data:iso, eventId:'qa-'+Date.now()+'-'+Math.random().toString(36).slice(2,10),
@@ -257,8 +299,23 @@
       visitorType:visitorType, TipoVisitante:visitorType,
       sessionNumber:Number(session.number||data.sessionNumber||1), NumeroSessao:Number(session.number||data.sessionNumber||1),
       sessionStartedAt:Number(session.startedAt||data.sessionStartedAt||Date.now()), InicioSessao:Number(session.startedAt||data.sessionStartedAt||Date.now()),
+      location:location,
+      city:clean(location.city||'',100), Cidade:clean(location.city||'',100),
+      region:clean(location.region||'',100), Estado:clean(location.region||'',100),
+      regionCode:clean(location.regionCode||'',20), UF:clean(location.regionCode||'',20),
+      country:clean(location.country||'',100), Pais:clean(location.country||'',100),
+      countryCode:clean(location.countryCode||'',10), PaisCodigo:clean(location.countryCode||'',10),
+      geoSource:clean(location.source||'',30), FonteLocalizacao:clean(location.source||'',30),
+      campaign:campaign,
+      landingPage:clean(campaign.landingPage||'',500), LandingPage:clean(campaign.landingPage||'',500),
+      sessionReferrer:clean(campaign.sessionReferrer||'',500), OrigemSessao:clean(campaign.sessionReferrer||'',500),
+      utmSource:clean(campaign.utmSource||'',100), UTMSource:clean(campaign.utmSource||'',100),
+      utmMedium:clean(campaign.utmMedium||'',100), UTMMedium:clean(campaign.utmMedium||'',100),
+      utmCampaign:clean(campaign.utmCampaign||'',160), UTMCampaign:clean(campaign.utmCampaign||'',160),
+      utmContent:clean(campaign.utmContent||'',160), UTMContent:clean(campaign.utmContent||'',160),
+      utmTerm:clean(campaign.utmTerm||'',160), UTMTerm:clean(campaign.utmTerm||'',160),
       errorMessage:data.errorMessage, Erro:data.errorMessage, resourceUrl:data.resourceUrl, Recurso:data.resourceUrl,
-      reason:data.reason, Motivo:data.reason,
+      reason:data.reason, Motivo:data.reason, errorLine:data.errorLine, Linha:data.errorLine, errorColumn:data.errorColumn, Coluna:data.errorColumn,
       comparison:data.comparison,
       comparisonSlugs:(data.comparison.slugs||[]).join(','), ComparacaoSlugs:(data.comparison.slugs||[]).join(','),
       comparisonNames:(data.comparison.names||[]).join('||'), ComparacaoNomes:(data.comparison.names||[]).join('||'),
@@ -282,9 +339,11 @@
       resourceCount:data.performance.resourceCount, Recursos:data.performance.resourceCount,
       connectionType:data.performance.connectionType, Conexao:data.performance.connectionType,
       url:window.location.href, Pagina:window.location.href,
+      pageTitle:clean(document.title||'',220), TituloPagina:clean(document.title||'',220),
+      path:clean((window.location.pathname||'/')+(window.location.search||''),300), Caminho:clean((window.location.pathname||'/')+(window.location.search||''),300),
       referrer:document.referrer||'', Origem:document.referrer||'',
       device:deviceName(), Dispositivo:deviceName(), language:navigator.language||'', Idioma:navigator.language||'',
-      viewport:viewport(), Viewport:viewport()
+      viewport:viewport(), Viewport:viewport(), timezone:timezone, Timezone:timezone
     };
   }
   function postAppsScript(obj){
@@ -310,6 +369,40 @@
     postAppsScript(obj);
     postLocalhost(obj);
     return true;
+  }
+
+  function normalizeGeoResponse(data){
+    if(!data||data.error) return null;
+    var city=clean(data.city||'',100), region=clean(data.region||'',100), regionCode=clean(data.region_code||data.regionCode||'',20);
+    var country=clean(data.country_name||data.countryName||'',100), countryCode=clean(data.country_code||data.country||'',10);
+    if(!city&&!region&&!country) return null;
+    return {city:city,region:region,regionCode:regionCode,country:country,countryCode:countryCode,source:'ip-aproximado'};
+  }
+  function initApproxLocation(){
+    if(isLocal()) return Promise.resolve(null);
+    var aud=touchAudienceState(), session=aud.session||{};
+    var cached=safeSessionGet(GEO_KEY);
+    if(cached&&cached.sessionId===session.id&&cached.location){
+      geoState=cached.location;
+      return Promise.resolve(geoState);
+    }
+    if(cached&&cached.sessionId===session.id&&cached.failedAt&&(Date.now()-Number(cached.failedAt))<GEO_RETRY_MS) return Promise.resolve(null);
+    if(geoPromise) return geoPromise;
+    var controller=typeof AbortController!=='undefined'?new AbortController():null;
+    var timer=controller?window.setTimeout(function(){try{controller.abort();}catch(e){}},2800):null;
+    geoPromise=fetch('https://ipapi.co/json/',{method:'GET',mode:'cors',credentials:'omit',cache:'no-store',signal:controller?controller.signal:undefined})
+      .then(function(r){if(!r.ok)throw new Error('geo http '+r.status);return r.json();})
+      .then(function(data){
+        var location=normalizeGeoResponse(data);
+        if(!location) throw new Error('geo sem dados');
+        geoState=location;
+        safeSessionSet(GEO_KEY,{sessionId:session.id,location:location,updatedAt:Date.now(),reported:true});
+        track('session_geo',{location:location,context:'Sessão'});
+        return location;
+      })
+      .catch(function(){safeSessionSet(GEO_KEY,{sessionId:session.id,failedAt:Date.now()});return null;})
+      .finally(function(){if(timer)window.clearTimeout(timer);geoPromise=null;});
+    return geoPromise;
   }
 
   window.qualityAnalyticsTrack = track;
@@ -642,9 +735,8 @@
         return;
       }
       var line=Number(ev&&ev.lineno||0), col=Number(ev&&ev.colno||0);
-      var message=clean(ev&&ev.message||'Erro JavaScript',190);
-      if(line) message=clean(message+' · linha '+line+(col?':'+col:''),220);
-      track('client_error',{errorMessage:message,resourceUrl:clean(ev&&ev.filename||'',300),context:surface(),reason:'javascript'});
+      var message=clean(ev&&ev.message||'Erro JavaScript',220);
+      track('client_error',{errorMessage:message,resourceUrl:clean(ev&&ev.filename||'',300),errorLine:line||undefined,errorColumn:col||undefined,context:surface(),reason:'javascript'});
     }catch(e){}
   },true);
   window.addEventListener('unhandledrejection',function(ev){
@@ -662,6 +754,7 @@
 
   function start(){
     trackInitial(); observeNoResults(); initPerformanceObservers();
+    initApproxLocation();
     scanInterestLists(false);
     if(!interestListTimer) interestListTimer=window.setInterval(function(){scanInterestLists(true);},700);
     window.setTimeout(observeNoResults,600); window.setTimeout(observeNoResults,1600); window.setTimeout(function(){sendWebVitals('10s');},10000);
