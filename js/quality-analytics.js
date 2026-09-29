@@ -1,6 +1,6 @@
 (function(){
-  if(window.__qualitySiteAnalyticsV11) return;
-  window.__qualitySiteAnalyticsV11 = true;
+  if(window.__qualitySiteAnalyticsV12) return;
+  window.__qualitySiteAnalyticsV12 = true;
 
   var ENDPOINT = 'https://script.google.com/macros/s/AKfycbwZQ01q5u5lRqE3Hk-nMutkTWcLA8r7127sO3Dt132Ti8L0Ci7DWoOyby5v92T_WY34/exec';
   var KEY = 'quality-analytics-v1';
@@ -58,14 +58,19 @@
     catch(e){ return ''; }
   }
   function currentCategorySlug(){
+    var pathname = String(window.location.pathname || '');
+    var normalizedPath = pathname.toLowerCase();
+    // Produto antigo usa produto.html?slug=...; esse slug nunca é categoria.
+    if(/\/produto\//i.test(pathname) || /(?:^|\/)produto\.html$/i.test(normalizedPath)) return '';
     try {
       var params = new URLSearchParams(window.location.search);
-      var q = params.get('slug') || params.get('cat') || params.get('categoria');
+      var q = params.get('cat') || params.get('categoria');
+      if(!q && /(?:^|\/)categoria\.html$/i.test(normalizedPath)) q = params.get('slug');
       if(q) return clean(q,120);
     } catch(e){}
-    var path = String(window.location.pathname || '').replace(/^\/+|\/+$/g,'');
+    var path = pathname.replace(/^\/+|\/+$/g,'');
     var first = path.split('/')[0] || '';
-    if(!first || /^(site|produto|index\.html|categoria\.html|comparar\.html|sobre\.html|formas-de-pagamento\.html)$/i.test(first)) return '';
+    if(!first || /^(site|view|produto|produto\.html|index\.html|categoria\.html|comparar\.html|sobre\.html|formas-de-pagamento\.html)$/i.test(first)) return '';
     return clean(first,120);
   }
   function surface(){
@@ -211,7 +216,10 @@
   function dedupeKey(type,data){
     var p = data.product || {}, c = data.category || {};
     var comp=(data.comparison&&data.comparison.slugs||[]).join(',');
-    return [type,clean(p.slug||p.id||p.name,120),clean(c.slug||c.name,120),data.term,data.searchStatus,comp].join('|').toLowerCase();
+    var errorKey = (type === 'client_error' || type === 'resource_error')
+      ? [clean(data.errorMessage,120),clean(data.resourceUrl,180),clean(data.reason,50)].join('|')
+      : '';
+    return [type,clean(p.slug||p.id||p.name,120),clean(c.slug||c.name,120),data.term,data.searchStatus,comp,errorKey].join('|').toLowerCase();
   }
   function isDuplicate(type,data){
     if(type === 'page_engagement' || type === 'web_vitals') return false;
@@ -219,16 +227,24 @@
     recent[key] = t;
     return last && (t-last) < 1800;
   }
+  function errorCompatLabel(type,data){
+    // O endpoint antigo do Sheets pode descartar Erro/Recurso/Motivo. Para não
+    // perder o diagnóstico, replica um resumo técnico em Produto só nos erros.
+    if(type === 'resource_error') return clean('__QAERR_RESOURCE__|' + clean(data.reason||'recurso',24) + '|' + clean(data.resourceUrl||'',100),140);
+    if(type === 'client_error') return clean('__QAERR_JS__|' + clean(data.errorMessage||'Erro JavaScript',88) + '|' + clean(data.resourceUrl||'',40),140);
+    return '';
+  }
   function payloadObject(type,payload){
     var data = normalizePayload(type,payload), product=data.product||{}, category=data.category||{}, iso=new Date().toISOString();
+    var compatErrorName = errorCompatLabel(type,data);
     var aud=touchAudienceState(), visitor=aud.visitor||{}, session=aud.session||{};
     var visitorType=Number(session.number||1)>1?'recorrente':'novo';
     return {
       key:KEY, action:'track', type:type, event:type, Evento:type,
       at:iso, Data:iso, eventId:'qa-'+Date.now()+'-'+Math.random().toString(36).slice(2,10),
       product:data.product||undefined,
-      slug:clean(product.slug||product.id||'',120), name:clean(product.name||'',140),
-      Produto:clean(product.name||'',140), SlugProduto:clean(product.slug||product.id||'',120),
+      slug:clean(product.slug||product.id||'',120), name:clean(product.name||compatErrorName,140),
+      Produto:clean(product.name||compatErrorName,140), SlugProduto:clean(product.slug||product.id||'',120),
       category:data.category||undefined, Categoria:clean(category.name||category.slug||'',100),
       term:data.term, Busca:data.term,
       context:data.context, Contexto:data.context,
@@ -625,7 +641,9 @@
         if(src) track('resource_error',{resourceUrl:src,errorMessage:'Falha ao carregar recurso',context:surface(),reason:String(target.tagName||'recurso').toLowerCase()});
         return;
       }
-      var message=clean(ev&&ev.message||'Erro JavaScript',220);
+      var line=Number(ev&&ev.lineno||0), col=Number(ev&&ev.colno||0);
+      var message=clean(ev&&ev.message||'Erro JavaScript',190);
+      if(line) message=clean(message+' · linha '+line+(col?':'+col:''),220);
       track('client_error',{errorMessage:message,resourceUrl:clean(ev&&ev.filename||'',300),context:surface(),reason:'javascript'});
     }catch(e){}
   },true);
