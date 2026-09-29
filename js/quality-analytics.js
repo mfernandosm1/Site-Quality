@@ -15,9 +15,11 @@
   var pageVisitId = 'pv-' + Date.now() + '-' + Math.random().toString(36).slice(2,9);
   var VISITOR_KEY = 'quality-analytics-visitor-v2';
   var SESSION_KEY = 'quality-analytics-session-v2';
-  var GEO_KEY = 'quality-analytics-geo-v1';
+  var GEO_KEY = 'quality-analytics-geo-v2';
   var SESSION_TIMEOUT_MS = 30 * 60 * 1000;
-  var GEO_RETRY_MS = 5 * 60 * 1000;
+  var GEO_RETRY_MS = 30 * 1000;
+  var GEO_PROVIDER_TIMEOUT_MS = 5500;
+  var GEO_MAX_ATTEMPTS_PER_SESSION = 3;
   var geoState = null;
   var geoPromise = null;
   function randomAnalyticsId(prefix){
@@ -371,14 +373,56 @@
     return true;
   }
 
-  function normalizeGeoResponse(data){
-    if(!data||data.error) return null;
+  function normalizeGeoResponse(data,provider){
+    if(!data || data.error || data.success === false) return null;
+    provider=clean(provider||'',30).toLowerCase();
     var city=clean(data.city||'',100), region=clean(data.region||'',100), regionCode=clean(data.region_code||data.regionCode||'',20);
-    var country=clean(data.country_name||data.countryName||'',100), countryCode=clean(data.country_code||data.country||'',10);
+    var rawCountry=clean(data.country||'',100), rawCountryCode=clean(data.country_code||data.countryCode||'',10);
+    var country='', countryCode='';
+    if(provider === 'ipwho'){
+      country=rawCountry;
+      countryCode=rawCountryCode;
+    } else {
+      country=clean(data.country_name||data.countryName||((rawCountry.length>2)?rawCountry:''),100);
+      countryCode=clean(rawCountryCode||((rawCountry.length===2)?rawCountry:''),10);
+    }
     if(!city&&!region&&!country) return null;
-    return {city:city,region:region,regionCode:regionCode,country:country,countryCode:countryCode,source:'ip-aproximado'};
+    return {city:city,region:region,regionCode:regionCode,country:country,countryCode:countryCode,source:'ip-'+(provider||'aproximado')};
   }
-  function initApproxLocation(){
+  function fetchGeoProvider(provider,url){
+    return new Promise(function(resolve,reject){
+      var controller=typeof AbortController!=='undefined'?new AbortController():null;
+      var finished=false;
+      var timer=window.setTimeout(function(){
+        if(finished)return;
+        finished=true;
+        try{if(controller)controller.abort();}catch(e){}
+        reject(new Error('geo timeout '+provider));
+      },GEO_PROVIDER_TIMEOUT_MS);
+      fetch(url,{method:'GET',mode:'cors',credentials:'omit',cache:'no-store',signal:controller?controller.signal:undefined})
+        .then(function(r){if(!r.ok)throw new Error('geo '+provider+' http '+r.status);return r.json();})
+        .then(function(data){
+          if(finished)return;
+          var location=normalizeGeoResponse(data,provider);
+          if(!location)throw new Error('geo '+provider+' sem dados');
+          finished=true;window.clearTimeout(timer);resolve(location);
+        })
+        .catch(function(err){if(finished)return;finished=true;window.clearTimeout(timer);reject(err);});
+    });
+  }
+  function resolveApproxLocation(){
+    var providers=[
+      {name:'ipwho',url:'https://ipwho.is/'},
+      {name:'ipapi',url:'https://ipapi.co/json/'}
+    ];
+    function tryAt(index,lastError){
+      if(index>=providers.length) return Promise.reject(lastError||new Error('geolocalização indisponível'));
+      var item=providers[index];
+      return fetchGeoProvider(item.name,item.url).catch(function(err){return tryAt(index+1,err);});
+    }
+    return tryAt(0,null);
+  }
+  function initApproxLocation(forceRetry){
     if(isLocal()) return Promise.resolve(null);
     var aud=touchAudienceState(), session=aud.session||{};
     var cached=safeSessionGet(GEO_KEY);
@@ -386,22 +430,26 @@
       geoState=cached.location;
       return Promise.resolve(geoState);
     }
-    if(cached&&cached.sessionId===session.id&&cached.failedAt&&(Date.now()-Number(cached.failedAt))<GEO_RETRY_MS) return Promise.resolve(null);
+    var attempts=(cached&&cached.sessionId===session.id)?Math.max(0,Number(cached.attempts)||0):0;
+    if(!forceRetry&&cached&&cached.sessionId===session.id&&cached.failedAt&&(Date.now()-Number(cached.failedAt))<GEO_RETRY_MS) return Promise.resolve(null);
+    if(attempts>=GEO_MAX_ATTEMPTS_PER_SESSION) return Promise.resolve(null);
     if(geoPromise) return geoPromise;
-    var controller=typeof AbortController!=='undefined'?new AbortController():null;
-    var timer=controller?window.setTimeout(function(){try{controller.abort();}catch(e){}},2800):null;
-    geoPromise=fetch('https://ipapi.co/json/',{method:'GET',mode:'cors',credentials:'omit',cache:'no-store',signal:controller?controller.signal:undefined})
-      .then(function(r){if(!r.ok)throw new Error('geo http '+r.status);return r.json();})
-      .then(function(data){
-        var location=normalizeGeoResponse(data);
-        if(!location) throw new Error('geo sem dados');
+    geoPromise=resolveApproxLocation()
+      .then(function(location){
         geoState=location;
-        safeSessionSet(GEO_KEY,{sessionId:session.id,location:location,updatedAt:Date.now(),reported:true});
+        safeSessionSet(GEO_KEY,{sessionId:session.id,location:location,updatedAt:Date.now(),attempts:attempts+1});
         track('session_geo',{location:location,context:'Sessão'});
         return location;
       })
-      .catch(function(){safeSessionSet(GEO_KEY,{sessionId:session.id,failedAt:Date.now()});return null;})
-      .finally(function(){if(timer)window.clearTimeout(timer);geoPromise=null;});
+      .catch(function(){
+        var nextAttempts=attempts+1;
+        safeSessionSet(GEO_KEY,{sessionId:session.id,failedAt:Date.now(),attempts:nextAttempts});
+        if(nextAttempts<GEO_MAX_ATTEMPTS_PER_SESSION){
+          window.setTimeout(function(){initApproxLocation(true);},GEO_RETRY_MS+500);
+        }
+        return null;
+      })
+      .finally(function(){geoPromise=null;});
     return geoPromise;
   }
 
