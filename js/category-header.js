@@ -7,7 +7,8 @@
   var HEADER_URL = '/header.html?v=20260908-menu3';
 
   function fixLocalPreviewLinks(root){
-    var isLocalPreview = window.location.hostname === 'localhost' && window.location.port === '3000';
+    var host = String(window.location.hostname || '');
+    var isLocalPreview = /^(localhost|127\.)/i.test(host) || /^10\./.test(host) || /^192\.168\./.test(host) || /^172\.(1[6-9]|2\d|3[01])\./.test(host) || String(window.location.pathname || '').indexOf('/site/') === 0;
     if (!isLocalPreview || !root) return;
     root.querySelectorAll('[data-home-link]').forEach(function(link){
       link.setAttribute('href', '/site/view/index.html');

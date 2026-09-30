@@ -77,7 +77,7 @@
 
   function clean(v, max){ return String(v == null ? '' : v).trim().slice(0, max || 300); }
   function normalize(v){ return clean(v,160).normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().trim(); }
-  function isLocal(){ return /^(localhost|127\.0\.0\.1)$/i.test(window.location.hostname || ''); }
+  function isLocal(){ var h=String(window.location.hostname||''); return /^(localhost|127\.)/i.test(h)||/^10\./.test(h)||/^192\.168\./.test(h)||/^172\.(1[6-9]|2\d|3[01])\./.test(h)||String(window.location.pathname||'').indexOf('/site/')===0; }
   function deviceName(){ return /Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent || '') ? 'mobile' : 'desktop'; }
   function viewport(){ return String(window.innerWidth || 0) + 'x' + String(window.innerHeight || 0); }
   function currentProductSlug(){

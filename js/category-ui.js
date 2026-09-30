@@ -140,7 +140,7 @@
   if (window.__qualityStorefrontLoaderV1) return;
   window.__qualityStorefrontLoaderV1 = true;
   var script = document.createElement('script');
-  script.src = '/js/storefront-enhancements.js?v=20260926-compare9';
+  script.src = '/js/storefront-enhancements.js?v=20260929-search2b';
   script.defer = true;
   document.head.appendChild(script);
 })();

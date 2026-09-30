@@ -41,9 +41,13 @@ document.addEventListener("DOMContentLoaded", () => {
 // Corrige links do preview local
 // ----------------------------
 function corrigirLinksHomePreview() {
+  const host = String(window.location.hostname || "");
   const isLocalPreview =
-    window.location.hostname === "localhost" &&
-    window.location.port === "3000";
+    /^(localhost|127\.)/i.test(host) ||
+    /^10\./.test(host) ||
+    /^192\.168\./.test(host) ||
+    /^172\.(1[6-9]|2\d|3[01])\./.test(host) ||
+    String(window.location.pathname || "").startsWith("/site/");
 
   if (!isLocalPreview) return;
 
@@ -413,7 +417,7 @@ function initSwiper() {
   if (window.__qualityStorefrontLoaderV1) return;
   window.__qualityStorefrontLoaderV1 = true;
   var script = document.createElement('script');
-  script.src = '/js/storefront-enhancements.js?v=20260926-compare9';
+  script.src = '/js/storefront-enhancements.js?v=20260929-search2';
   script.defer = true;
   document.head.appendChild(script);
 })();

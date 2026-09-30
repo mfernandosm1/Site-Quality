@@ -1,8 +1,8 @@
 /*
- * Quality Storefront Experience V1.1.1 - 2026-09-26
+ * Quality Storefront Experience V1.2.0 - 2026-09-29
  * Marketplace-style UX without checkout/prices dependency.
  * Features: product detail 3-column layout, intelligent related products,
- * interest list -> WhatsApp, search autocomplete, Brand/Condition filters,
+ * interest list -> WhatsApp, Search 2.0 with fuzzy matching and dynamic filters,
  * smartphone comparison with up to 3 products.
  */
 (function(){
@@ -175,6 +175,435 @@
     var map = {smartphones:'Smartphones', acessorios:'Acessórios', eletronicos:'Eletrônicos', 'assistencia-tecnica':'Assistência Técnica'};
     return map[slug] || String(product && (product.category || product.categoria) || '').trim();
   }
+
+  /* =========================================================
+     QUALITY SEARCH 2.0
+     Busca tolerante a erros, sinônimos, atributos e resultados globais.
+  ========================================================= */
+  var SEARCH_PARAM = 'busca';
+  var SEARCH_STOPWORDS = new Set(['a','o','as','os','de','da','do','das','dos','e','em','no','na','nos','nas','para','pra','por','com','um','uma','uns','umas','bom','boa','bons','boas','quero','queria','procuro','procurando']);
+  var SEARCH_SYNONYMS = {
+    celular:['smartphone','telefone'], smartphone:['celular','telefone'], telefone:['celular','smartphone'],
+    capinha:['capa'], capas:['capa'], case:['capa'],
+    pelicula:['pelicula','protecao','vidro'], privacy:['privacidade'], privacidade:['privacy'],
+    carregador:['fonte','carregamento'], fonte:['carregador'],
+    powerbank:['power bank','bateria portatil'],
+    fone:['headset','auricular'], headset:['fone'],
+    notebook:['laptop'], laptop:['notebook'],
+    usado:['seminovo'], seminovo:['usado'],
+    lacrado:['novo'],
+    playstation:['ps'], ps4:['playstation4','playstation 4'], ps5:['playstation5','playstation 5'],
+    televisao:['tv'], tv:['televisao'],
+    aifone:['iphone'], iphone:['aifone'], moto:['motorola']
+  };
+
+  function stripHtml(value){
+    var holder=document.createElement('div');
+    holder.innerHTML=String(value||'');
+    return String(holder.textContent||holder.innerText||'').replace(/\s+/g,' ').trim();
+  }
+
+  function uniqueValues(values){
+    var out=[];
+    (values||[]).forEach(function(value){
+      var text=String(value==null?'':value).trim();
+      if(!text) return;
+      if(!out.some(function(existing){return normalize(existing)===normalize(text);})){ out.push(text); }
+    });
+    return out;
+  }
+
+  function variationList(product,key){
+    var v=product&&product.variations?product.variations:{};
+    var out=[];
+    var direct=v&&v[key];
+    if(Array.isArray(direct)) direct.forEach(function(item){
+      if(item&&typeof item==='object') item=item.name||item.value||item.label||'';
+      if(item) out.push(String(item));
+    });
+    var text=v&&v[key+'Text'];
+    if(text) String(text).split(/[\n,;]+/).forEach(function(item){if(item.trim())out.push(item.trim());});
+    if(Array.isArray(v&&v.combinations)) v.combinations.forEach(function(combo){if(combo&&combo[key])out.push(String(combo[key]));});
+    return uniqueValues(out);
+  }
+
+  function storageValues(product){
+    var explicit=variationList(product,'storage');
+    if(explicit.length) return explicit;
+    function extractStorage(source){
+      var values=[];
+      var re=/(\d+(?:[.,]\d+)?)\s*(TB|GB)\b/gi,match;
+      while((match=re.exec(String(source||'')))!==null){
+        var raw=(match[1]+' '+match[2]).replace(/\s+/g,'').toUpperCase().replace(',','.');
+        var before=String(source||'').slice(Math.max(0,match.index-18),match.index).toLowerCase();
+        var after=String(source||'').slice(re.lastIndex,Math.min(String(source||'').length,re.lastIndex+18)).toLowerCase();
+        if(/ram\s*$/.test(before)||/^\s*(?:de\s*)?ram\b/.test(after)||/ram\s*boost/.test(after)) continue;
+        values.push(raw);
+      }
+      return uniqueValues(values);
+    }
+    var fromName=extractStorage(String(product&&(product.name||product.nome)||''));
+    if(fromName.length) return fromName;
+    var description=stripHtml([product&&product.descriptionShort,product&&product.descriptionLong].filter(Boolean).join(' ')).slice(0,1800);
+    var fromDescription=extractStorage(description);
+    if(!fromDescription.length) return [];
+    fromDescription.sort(function(a,b){
+      function mb(v){var n=parseFloat(v)||0;return /TB/i.test(v)?n*1024:n;}
+      return mb(b)-mb(a);
+    });
+    return [fromDescription[0]];
+  }
+
+  function ramValues(product){
+    var values=variationList(product,'ram');
+    var source=(String(product&&(product.name||product.nome)||'')+' '+stripHtml([product&&product.descriptionShort,product&&product.descriptionLong].filter(Boolean).join(' '))).slice(0,2600);
+    var patterns=[/(\d+(?:[.,]\d+)?)\s*GB\s*(?:de\s*)?RAM\b/gi,/RAM\s*(?:f[ií]sica\s*)?(?:de\s*)?(\d+(?:[.,]\d+)?)\s*GB\b/gi];
+    patterns.forEach(function(re){var m;while((m=re.exec(source))!==null)values.push(String(m[1]).replace(',','.')+'GB');});
+    return uniqueValues(values);
+  }
+
+  function colorValues(product){
+    var colors=variationList(product,'colors');
+    if(colors.length) return colors;
+    var v=product&&product.variations?product.variations:{};
+    if(Array.isArray(v.colors)){
+      v.colors.forEach(function(item){var name=item&&typeof item==='object'?(item.name||item.value):item;if(name)colors.push(String(name));});
+    }
+    return uniqueValues(colors);
+  }
+
+  function networkValues(product){
+    var name=normalize(product&&(product.name||product.nome));
+    var short=normalize(product&&product.descriptionShort);
+    var source=name+' '+short;
+    if(/(^|[^a-z0-9])5g([^a-z0-9]|$)/.test(source)) return ['5G'];
+    if(/(^|[^a-z0-9])4g([^a-z0-9]|$)|\blte\b/.test(source)) return ['4G'];
+    return [];
+  }
+
+  function productSearchFields(product){
+    var brand=brandOf(product);
+    var category=displayCategory(product);
+    var condition=conditionOf(product);
+    var attributes=[];
+    attributes=attributes.concat(storageValues(product),ramValues(product),colorValues(product),networkValues(product));
+    if(condition) attributes.push(condition);
+    if(categoryOf(product)==='smartphones') attributes.push('smartphone','celular','telefone');
+    var tags=Array.isArray(product&&product.tags)?product.tags:String(product&&product.tags||'').split(/[\n,;]+/);
+    var variations=product&&product.variations?product.variations:{};
+    var comboText=Array.isArray(variations.combinations)?variations.combinations.map(function(combo){return [combo&&combo.color,combo&&combo.storage,combo&&combo.ram,combo&&combo.condition].filter(Boolean).join(' ');}).join(' '):'';
+    return [
+      {text:product&&(product.name||product.nome)||'',weight:4.5,primary:true},
+      {text:brand,weight:3.5,primary:true},
+      {text:[product&&product.category,product&&product.categoria,category].filter(Boolean).join(' '),weight:2.2,primary:true},
+      {text:attributes.join(' '),weight:3.2,primary:true},
+      {text:tags.join(' '),weight:2,primary:true},
+      {text:comboText,weight:2.4,primary:true},
+      {text:product&&product.slug||'',weight:1.8,primary:true},
+      {text:product&&product.descriptionShort||'',weight:1.35,primary:false},
+      {text:stripHtml(product&&product.descriptionLong||'').slice(0,2200),weight:.72,primary:false},
+      {text:product&&product.virtualStore&&[product.virtualStore.name,product.virtualStore.seoTitle,product.virtualStore.seoDescription].filter(Boolean).join(' ')||'',weight:1.1,primary:false}
+    ].filter(function(field){return String(field.text||'').trim();});
+  }
+
+  function searchQueryTokens(query){
+    return normalize(query).replace(/[^a-z0-9]+/g,' ').split(/\s+/).filter(Boolean).filter(function(token){return !SEARCH_STOPWORDS.has(token);});
+  }
+
+  function tokenVariants(token){
+    var out=[token];
+    (SEARCH_SYNONYMS[token]||[]).forEach(function(value){
+      normalize(value).split(/\s+/).filter(Boolean).forEach(function(part){if(!out.includes(part))out.push(part);});
+    });
+    return out;
+  }
+
+  function editDistanceSearch(a,b){
+    a=String(a||'');b=String(b||'');
+    if(a===b)return 0;if(!a.length)return b.length;if(!b.length)return a.length;
+    var prev=Array.from({length:b.length+1},function(_,i){return i;});
+    for(var i=1;i<=a.length;i++){
+      var left=i,diag=i-1;
+      for(var j=1;j<=b.length;j++){
+        var up=prev[j],cost=a[i-1]===b[j-1]?0:1;
+        var next=Math.min(up+1,left+1,diag+cost);
+        diag=up;prev[j]=next;left=next;
+      }
+    }
+    return prev[b.length];
+  }
+
+  function tokenMatchScore(queryToken,hayToken){
+    if(!queryToken||!hayToken)return 0;
+    var best=0;
+    tokenVariants(queryToken).forEach(function(q){
+      var minLen=Math.min(q.length,hayToken.length);
+      var lengthGap=Math.abs(q.length-hayToken.length);
+      var numeric=/\d/.test(q);
+      if(q===hayToken)best=Math.max(best,100);
+      else if(minLen>=2&&lengthGap<=3&&(hayToken.indexOf(q)===0||q.indexOf(hayToken)===0))best=Math.max(best,88);
+      else if(!numeric&&minLen>=4&&lengthGap<=4&&(hayToken.indexOf(q)!==-1||q.indexOf(hayToken)!==-1))best=Math.max(best,74);
+      else if(!numeric&&q.length>=4&&hayToken.length>=4){
+        var distance=editDistanceSearch(q,hayToken);
+        if(distance===1)best=Math.max(best,72);
+        else if(distance===2&&Math.max(q.length,hayToken.length)>=6)best=Math.max(best,57);
+        else if(distance===3&&Math.max(q.length,hayToken.length)>=9)best=Math.max(best,42);
+      }
+    });
+    return best;
+  }
+
+  function searchHasAccessoryIntent(tokens){
+    var accessory=['capa','capinha','pelicula','privacidade','privacy','carregador','fonte','powerbank','fone','headset','cabo','case'];
+    return (tokens||[]).some(function(token){
+      if(token==='iphone'||token==='aifone')return false;
+      return accessory.some(function(intent){return tokenMatchScore(token,intent)>=57;});
+    });
+  }
+
+  function searchBrandIntent(tokens){
+    var brands=[
+      {name:'Apple',aliases:['apple','iphone','aifone']},
+      {name:'Samsung',aliases:['samsung']},
+      {name:'Motorola',aliases:['motorola','moto']},
+      {name:'Xiaomi',aliases:['xiaomi','redmi','poco']},
+      {name:'JBL',aliases:['jbl']},
+      {name:'HP',aliases:['hp']},
+      {name:'LG',aliases:['lg']},
+      {name:'Epson',aliases:['epson']},
+      {name:'Lenovo',aliases:['lenovo']},
+      {name:'Acer',aliases:['acer']},
+      {name:'Nintendo',aliases:['nintendo']},
+      {name:'Sony',aliases:['sony','playstation','ps4','ps5']},
+      {name:'Intelbras',aliases:['intelbras']},
+      {name:'Kaidi',aliases:['kaidi']},
+      {name:'SanDisk',aliases:['sandisk']},
+      {name:'C3Tech',aliases:['c3tech']},
+      {name:'WAP',aliases:['wap']}
+    ];
+    var winner='',best=0;
+    (tokens||[]).forEach(function(token){
+      brands.forEach(function(brand){
+        brand.aliases.forEach(function(alias){
+          var score=tokenMatchScore(token,alias);
+          if(score>best){best=score;winner=brand.name;}
+        });
+      });
+    });
+    return best>=57?winner:'';
+  }
+
+  function productSearchScore(product,query){
+    if(!product||!isVisibleProduct(product))return 0;
+    var raw=normalize(query);
+    var tokens=searchQueryTokens(raw);
+    if(!tokens.length)return 0;
+    var accessoryIntent=searchHasAccessoryIntent(tokens);
+    var smartphoneIntent=!accessoryIntent&&tokens.some(function(token){return ['celular','smartphone','telefone'].indexOf(token)!==-1;});
+    if(smartphoneIntent&&categoryOf(product)!=='smartphones')return 0;
+    var brandIntent=!accessoryIntent?searchBrandIntent(tokens):'';
+    if(brandIntent&&normalize(brandOf(product))!==normalize(brandIntent))return 0;
+    var iphoneIntent=!accessoryIntent&&tokens.some(function(token){return token==='iphone'||token==='aifone';});
+    if(iphoneIntent&&normalize(product.name||product.nome||'').indexOf('iphone')===-1)return 0;
+    if(accessoryIntent){
+      var primarySource=normalize([product.name||product.nome||'',product.slug||'',displayCategory(product),(Array.isArray(product.tags)?product.tags.join(' '):product.tags||'')].join(' '));
+      var primaryTokens=primarySource.replace(/[^a-z0-9]+/g,' ').split(/\s+/).filter(Boolean);
+      var strongAccessory=tokens.some(function(token){
+        if(!searchHasAccessoryIntent([token]))return false;
+        return primaryTokens.some(function(hay){return tokenMatchScore(token,hay)>=74;});
+      });
+      if(!strongAccessory)return 0;
+    }
+    var fields=productSearchFields(product).map(function(field,index){
+      return {weight:field.weight,primary:field.primary!==false,text:normalize(field.text),tokens:normalize(field.text).replace(/[^a-z0-9]+/g,' ').split(/\s+/).filter(Boolean)};
+    });
+    var matched=0,total=0,numericMiss=false;
+    tokens.forEach(function(token){
+      var tokenBest=0,rawTokenBest=0,rawPrimaryBest=0;
+      fields.forEach(function(field){
+        var local=0;
+        field.tokens.forEach(function(hay){local=Math.max(local,tokenMatchScore(token,hay));});
+        rawTokenBest=Math.max(rawTokenBest,local);
+        if(field.primary)rawPrimaryBest=Math.max(rawPrimaryBest,local);
+        tokenBest=Math.max(tokenBest,local*field.weight);
+      });
+      if(/\d/.test(token)&&rawPrimaryBest<88)numericMiss=true;
+      if(tokenBest>=42){matched++;total+=tokenBest;}
+    });
+    var coverage=matched/tokens.length;
+    var modelFallback=accessoryIntent&&tokens.length===2&&matched===1&&total>=300&&tokens.some(function(token){return /\d/.test(token);});
+    if(numericMiss&&!modelFallback)return 0;
+    if(coverage<0.66&&!modelFallback)return 0;
+    if(modelFallback)total*=0.78;
+    var name=normalize(product.name||product.nome||'');
+    var compactName=name.replace(/[^a-z0-9]+/g,'');
+    var compactQuery=raw.replace(/[^a-z0-9]+/g,'');
+    var bonus=0;
+    if(name===raw)bonus+=650;
+    else if(name.indexOf(raw)===0)bonus+=420;
+    else if(name.indexOf(raw)!==-1)bonus+=300;
+    if(compactQuery&&compactName.indexOf(compactQuery)!==-1)bonus+=220;
+    if(normalize(brandOf(product))===raw)bonus+=180;
+    if(normalize(displayCategory(product))===raw)bonus+=100;
+    if(product.featured)bonus+=8;
+    return Math.round(total*coverage+bonus);
+  }
+
+  function searchCatalog(items,query,options){
+    options=options||{};
+    var minScore=Number(options.minScore==null?90:options.minScore);
+    var limit=Number(options.limit||0);
+    var ranked=(items||[]).filter(isVisibleProduct).map(function(product){return {product:product,score:productSearchScore(product,query)};})
+      .filter(function(entry){return entry.score>=minScore;})
+      .sort(function(a,b){
+        if(b.score!==a.score)return b.score-a.score;
+        return String(a.product.name||a.product.nome||'').localeCompare(String(b.product.name||b.product.nome||''),'pt-BR');
+      });
+    return limit>0?ranked.slice(0,limit):ranked;
+  }
+
+  function isLocalPreviewHost(){
+    var host=String(window.location.hostname||'');
+    var path=String(window.location.pathname||'');
+    return /^(localhost|127\.)/i.test(host)||/^10\./.test(host)||/^192\.168\./.test(host)||/^172\.(1[6-9]|2\d|3[01])\./.test(host)||path.indexOf('/site/')===0;
+  }
+
+  function searchResultsUrl(query){
+    var base=isLocalPreviewHost()?'/site/view/categoria.html':'/categoria.html';
+    return base+'?'+SEARCH_PARAM+'='+encodeURIComponent(String(query||'').trim());
+  }
+
+  function securityPageUrl(){ return isLocalPreviewHost()?'/site/seguranca.html':'/seguranca.html'; }
+
+  function trackSearch(term,context){
+    if(!term)return;
+    emitAnalytics('search',{term:String(term),context:context||'Busca'});
+  }
+
+  function performSearch(query,context){
+    var raw=String(query||'').trim();
+    if(!raw)return false;
+    trackSearch(raw,context||'Busca global');
+    window.location.assign(searchResultsUrl(raw));
+    return true;
+  }
+
+  function searchFacetLabel(product){
+    var parts=[];
+    var brand=brandOf(product),condition=conditionOf(product),storage=storageValues(product)[0],network=networkValues(product)[0];
+    if(brand)parts.push(brand);if(condition)parts.push(condition);if(storage)parts.push(storage);if(network)parts.push(network);
+    return parts.join(' · ');
+  }
+
+  function searchResultCardHtml(product,score){
+    var name=product.name||product.nome||'Produto';
+    var url=productUrl(product);
+    var image=assetPath(product.image||product.imagem);
+    var meta=searchFacetLabel(product);
+    var whatsapp='https://wa.me/'+WHATSAPP_NUMBER+'?text='+encodeURIComponent('Olá! Vim através do site da Quality Celulares e tenho interesse em '+name);
+    return '<div class="produto-card product-card quality-search-result-card" data-quality-search-score="'+esc(score||0)+'">'+
+      '<div class="quality-card-image-wrap">'+cardActions(product)+'<a href="'+esc(url)+'" class="quality-card-image-link" aria-label="Ver detalhes de '+esc(name)+'"><img src="'+esc(image)+'" alt="'+esc(name)+'" loading="lazy" decoding="async" onerror="this.onerror=null;this.src=\'/images/sem-imagem.png\';"></a></div>'+
+      '<h3><a href="'+esc(url)+'" class="quality-card-native-title-link">'+esc(name)+'</a></h3>'+
+      (meta?'<div class="quality-search-result-meta">'+esc(meta)+'</div>':'')+
+      '<a href="'+esc(url)+'" class="btn btn-details">Ver detalhes</a>'+
+      '<a href="'+esc(whatsapp)+'" class="btn btn-whatsapp" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-whatsapp"></i> Comprar no WhatsApp</a>'+
+    '</div>';
+  }
+
+  function closestBrandForQuery(items,query){
+    var brands=uniqueValues((items||[]).map(brandOf).filter(Boolean));
+    var qTokens=searchQueryTokens(query);
+    var winner='',best=0;
+    brands.forEach(function(brand){
+      var bt=normalize(brand);
+      qTokens.forEach(function(q){var score=tokenMatchScore(q,bt);if(score>best){best=score;winner=brand;}});
+    });
+    return best>=57?winner:'';
+  }
+
+  function renderNoSearchResults(container,items,query){
+    var brand=closestBrandForQuery(items,query);
+    var alternatives=brand?(items||[]).filter(function(product){return isVisibleProduct(product)&&normalize(brandOf(product))===normalize(brand);}).slice(0,4):[];
+    var whatsapp='https://wa.me/'+WHATSAPP_NUMBER+'?text='+encodeURIComponent('Olá! Procurei por "'+query+'" no site da Quality Celulares e não encontrei. Vocês conseguem me ajudar?');
+    container.innerHTML='<section class="quality-search-recovery">'+
+      '<div class="quality-search-recovery-icon"><i class="fa-solid fa-magnifying-glass"></i></div>'+
+      '<h2>Não encontramos exatamente “'+esc(query)+'”</h2>'+
+      '<p>Tente remover algum termo, conferir a escrita ou fale com nossa equipe para localizar o produto certo.</p>'+
+      '<div class="quality-search-recovery-actions"><a href="/smartphones/">Ver smartphones</a><a class="is-whatsapp" href="'+esc(whatsapp)+'" target="_blank" rel="noopener"><i class="fa-brands fa-whatsapp"></i> Perguntar no WhatsApp</a></div>'+
+      (alternatives.length?'<div class="quality-search-alternatives"><strong>Outros produtos '+esc(brand)+'</strong><div class="quality-search-alternative-grid">'+alternatives.map(function(product){return '<a href="'+esc(productUrl(product))+'"><img src="'+esc(assetPath(product.image||product.imagem))+'" alt=""><span>'+esc(product.name||product.nome||'Produto')+'</span></a>';}).join('')+'</div></div>':'')+
+    '</section>';
+    emitAnalytics('search_no_result',{term:query,searchStatus:'sem_resultado',resultCount:0,context:'Resultados de busca'});
+  }
+
+  function initSearchResultsPage(){
+    var params=new URLSearchParams(window.location.search||'');
+    var query=String(params.get(SEARCH_PARAM)||params.get('q')||'').trim();
+    if(!query)return false;
+    var container=document.getElementById('produtos-container');
+    var title=document.getElementById('categoria-titulo');
+    if(!container||!title)return false;
+    document.body.classList.add('quality-search-results-page');
+    title.textContent='Resultados para “'+query+'”';
+    document.title='Busca por '+query+' | Quality Celulares';
+    var oldMessage=document.getElementById('no-results');if(oldMessage){oldMessage.style.display='none';oldMessage.textContent='';}
+    var robots=document.querySelector('meta[name="robots"]');if(!robots){robots=document.createElement('meta');robots.setAttribute('name','robots');document.head.appendChild(robots);}robots.setAttribute('content','noindex, follow');
+    var canonical=document.querySelector('link[rel="canonical"]');if(canonical)canonical.setAttribute('href','https://www.qualitycel.com.br/');
+    var toolbar=document.querySelector('.quality-category-toolbar');
+    var sort=toolbar&&toolbar.querySelector('#quality-category-sort');
+    if(sort&&!sort.querySelector('option[value="relevance"]')){var option=document.createElement('option');option.value='relevance';option.textContent='🔎 Relevância';sort.insertBefore(option,sort.firstChild);}if(sort)sort.value='relevance';
+    var summary=document.createElement('div');summary.className='quality-search-summary';summary.innerHTML='<span>Buscando no catálogo inteiro…</span><button type="button" data-quality-new-search>Nova busca</button>';
+    title.insertAdjacentElement('afterend',summary);
+    summary.addEventListener('click',function(event){if(event.target.closest('[data-quality-new-search]')){var input=document.getElementById('search-input')||document.getElementById('search-input-mobile');if(input){input.focus();input.select();}}});
+
+    getCatalog().then(function(items){
+      var ranked=searchCatalog(items,query,{minScore:90});
+      if(!ranked.length){summary.querySelector('span').textContent='Nenhum resultado encontrado';renderNoSearchResults(container,items,query);return;}
+      summary.querySelector('span').textContent=ranked.length+(ranked.length===1?' produto encontrado':' produtos encontrados');
+      container.dataset.qualitySearchResults='1';
+      var base=ranked.slice();
+      function sortedEntries(mode){
+        var entries=base.slice();
+        if(mode==='az')entries.sort(function(a,b){return String(a.product.name||'').localeCompare(String(b.product.name||''),'pt-BR');});
+        else if(mode==='za')entries.sort(function(a,b){return String(b.product.name||'').localeCompare(String(a.product.name||''),'pt-BR');});
+        else if(mode==='launch')entries.sort(function(a,b){return Number(b.product.id||0)-Number(a.product.id||0);});
+        else entries.sort(function(a,b){return b.score-a.score;});
+        return entries;
+      }
+      function render(mode){
+        container.innerHTML=sortedEntries(mode||'relevance').map(function(entry){return searchResultCardHtml(entry.product,entry.score);}).join('');
+        decorateProductCards();decorateCompareCards();refreshInterestUI();refreshCompareUI();buildCategoryFilters();
+        if(window.qualityUpdateFavoriteButtons)try{window.qualityUpdateFavoriteButtons();}catch(_){}
+      }
+      render(sort?sort.value:'relevance');
+      if(sort&&!sort.dataset.qualitySearchSortBound){sort.dataset.qualitySearchSortBound='1';sort.addEventListener('change',function(){render(sort.value);});}
+    }).catch(function(){summary.querySelector('span').textContent='Não foi possível carregar a busca';container.innerHTML='<div class="quality-search-recovery"><h2>Não foi possível carregar os produtos.</h2><p>Tente novamente em instantes.</p></div>';});
+    return true;
+  }
+
+  function bindSearchSubmitOverride(){
+    if(window.__qualitySearch2SubmitBound)return;window.__qualitySearch2SubmitBound=true;
+    document.addEventListener('click',function(event){
+      var button=event.target&&event.target.closest?event.target.closest('#search-button,#search-button-mobile'):null;
+      if(!button)return;
+      var input=document.getElementById(button.id==='search-button-mobile'?'search-input-mobile':'search-input');
+      if(!input||!String(input.value||'').trim())return;
+      event.preventDefault();event.stopImmediatePropagation();performSearch(input.value,'Busca pelo cabeçalho');
+    },true);
+    document.addEventListener('keydown',function(event){
+      var input=event.target&&event.target.matches&&event.target.matches('#search-input,#search-input-mobile')?event.target:null;
+      if(!input||event.key!=='Enter')return;
+      var wrapper=input.closest('.quality-search-host');
+      var active=wrapper&&wrapper.querySelector('.quality-search-suggestion.is-active');
+      if(active){event.preventDefault();event.stopImmediatePropagation();window.location.assign(active.getAttribute('href'));return;}
+      if(!String(input.value||'').trim())return;
+      event.preventDefault();event.stopImmediatePropagation();performSearch(input.value,'Busca pelo cabeçalho');
+    },true);
+  }
+
+  window.QualitySearch2={
+    version:'2.0',perform:performSearch,search:function(query,limit){return getCatalog().then(function(items){return searchCatalog(items,query,{minScore:90,limit:limit||0});});},
+    score:productSearchScore,resultsUrl:searchResultsUrl,securityUrl:securityPageUrl
+  };
 
   function readInterest(){
     try {
@@ -380,7 +809,9 @@
   }
 
   function comparePageUrl(slugs){
-    var path = (window.location.hostname === 'localhost' && window.location.port === '3000') ? '/site/view/comparar.html' : '/comparar.html';
+    var host = String(window.location.hostname || '');
+    var isLocalPreview = /^(localhost|127\.)/i.test(host) || /^10\./.test(host) || /^192\.168\./.test(host) || /^172\.(1[6-9]|2\d|3[01])\./.test(host) || String(window.location.pathname || '').indexOf('/site/') === 0;
+    var path = isLocalPreview ? '/site/view/comparar.html' : '/comparar.html';
     var values = (slugs || readCompareSlugs()).filter(Boolean);
     return path + (values.length ? '?p=' + encodeURIComponent(values.join(',')) : '');
   }
@@ -1494,20 +1925,6 @@
     });
   }
 
-  function scoreSearch(product, term){
-    var name = normalize(product.name || product.nome);
-    var slug = normalize(product.slug);
-    var brand = normalize(brandOf(product));
-    if (!name.includes(term) && !slug.includes(term) && !brand.includes(term)) return -1;
-    var score = 0;
-    if (name === term) score += 100;
-    if (name.startsWith(term)) score += 60;
-    if (name.includes(term)) score += 35;
-    if (brand === term) score += 30;
-    if (product.featured) score += 8;
-    return score;
-  }
-
   function bindAutocompleteInput(input){
     if (!input || input.dataset.qualityAutocompleteBound === '1') return;
     input.dataset.qualityAutocompleteBound = '1';
@@ -1519,30 +1936,55 @@
     popup.setAttribute('role','listbox');
     wrapper.appendChild(popup);
     var timer = null;
-    function close(){ popup.classList.remove('is-open'); popup.innerHTML = ''; }
+    var activeIndex = -1;
+
+    function options(){ return Array.from(popup.querySelectorAll('.quality-search-suggestion')); }
+    function setActive(index){
+      var list=options();
+      if(!list.length){activeIndex=-1;return;}
+      activeIndex=(index+list.length)%list.length;
+      list.forEach(function(item,i){item.classList.toggle('is-active',i===activeIndex);item.setAttribute('aria-selected',i===activeIndex?'true':'false');});
+      if(list[activeIndex]&&list[activeIndex].scrollIntoView)list[activeIndex].scrollIntoView({block:'nearest'});
+    }
+    function close(){ popup.classList.remove('is-open'); popup.innerHTML = ''; activeIndex=-1; }
+    function render(items,term){
+      var ranked=searchCatalog(items,term,{minScore:90,limit:6});
+      if(!ranked.length){
+        var whatsapp='https://wa.me/'+WHATSAPP_NUMBER+'?text='+encodeURIComponent('Olá! Procurei por "'+term+'" no site da Quality Celulares e não encontrei. Vocês conseguem me ajudar?');
+        popup.innerHTML='<div class="quality-search-suggestion-head">Não encontramos uma correspondência clara</div>'+
+          '<a class="quality-search-footer-link" href="'+esc(searchResultsUrl(term))+'"><i class="fa-solid fa-magnifying-glass"></i><span>Buscar mesmo assim por “'+esc(term)+'”</span></a>'+
+          '<a class="quality-search-footer-link is-whatsapp" href="'+esc(whatsapp)+'" target="_blank" rel="noopener"><i class="fa-brands fa-whatsapp"></i><span>Perguntar para a Quality</span></a>';
+        popup.classList.add('is-open');
+        activeIndex=-1;
+        return;
+      }
+      popup.innerHTML='<div class="quality-search-suggestion-head">Produtos</div>'+ranked.map(function(entry){
+        var product=entry.product,brand=brandOf(product),meta=searchFacetLabel(product);
+        return '<a class="quality-search-suggestion" role="option" aria-selected="false" href="' + esc(productUrl(product)) + '">' +
+          '<img src="' + esc(assetPath(product.image || product.imagem)) + '" alt="" loading="lazy" decoding="async" onerror="this.onerror=null;this.src=\'/images/sem-imagem.png\';">' +
+          '<span><strong>' + esc(product.name || product.nome || 'Produto') + '</strong>' +
+          '<small>' + esc(meta || brand || displayCategory(product)) + '</small></span></a>';
+      }).join('')+'<a class="quality-search-all" href="'+esc(searchResultsUrl(term))+'"><span>Ver todos os resultados para “'+esc(term)+'”</span><i class="fa-solid fa-arrow-right"></i></a>';
+      popup.classList.add('is-open');
+      activeIndex=-1;
+    }
+
     input.addEventListener('input', function(){
       clearTimeout(timer);
-      var term = normalize(input.value);
-      if (term.length < 2) { close(); return; }
-      timer = setTimeout(function(){
-        getCatalog().then(function(items){
-          var matches = items.filter(isVisibleProduct).map(function(product){ return {product:product, score:scoreSearch(product, term)}; })
-            .filter(function(x){ return x.score >= 0; }).sort(function(a,b){ return b.score-a.score; }).slice(0,6).map(function(x){return x.product;});
-          if (!matches.length) { popup.innerHTML = '<div class="quality-search-empty">Nenhum produto encontrado</div>'; popup.classList.add('is-open'); return; }
-          popup.innerHTML = matches.map(function(product){
-            var brand = brandOf(product);
-            return '<a class="quality-search-suggestion" role="option" href="' + esc(productUrl(product)) + '">' +
-              '<img src="' + esc(assetPath(product.image || product.imagem)) + '" alt="" loading="lazy" decoding="async" onerror="this.onerror=null;this.src=\'/images/sem-imagem.png\';">' +
-              '<span><strong>' + esc(product.name || product.nome || 'Produto') + '</strong>' +
-              (brand ? '<small>' + esc(brand) + '</small>' : '') + '</span></a>';
-          }).join('');
-          popup.classList.add('is-open');
-        });
-      }, 100);
+      var term = String(input.value||'').trim();
+      if (normalize(term).length < 2) { close(); return; }
+      timer = setTimeout(function(){ getCatalog().then(function(items){ render(items,term); }); }, 90);
     });
     input.addEventListener('focus', function(){ if (normalize(input.value).length >= 2 && popup.innerHTML) popup.classList.add('is-open'); });
     document.addEventListener('click', function(event){ if (!wrapper.contains(event.target)) close(); });
-    input.addEventListener('keydown', function(event){ if (event.key === 'Escape') close(); });
+    input.addEventListener('keydown', function(event){
+      if(event.key==='Escape'){close();return;}
+      if(!popup.classList.contains('is-open'))return;
+      var list=options();
+      if(event.key==='ArrowDown'&&list.length){event.preventDefault();setActive(activeIndex+1);}
+      else if(event.key==='ArrowUp'&&list.length){event.preventDefault();setActive(activeIndex-1);}
+      else if(event.key==='Enter'&&activeIndex>=0&&list[activeIndex]){event.preventDefault();event.stopImmediatePropagation();window.location.assign(list[activeIndex].getAttribute('href'));}
+    });
   }
 
   function ensureAutocomplete(){
@@ -1559,103 +2001,194 @@
     return link ? slugFromUrl(link.getAttribute('href')) : '';
   }
 
+  function facetSort(key,values){
+    function capacityMb(value){var m=String(value||'').match(/([0-9.]+)\s*(TB|GB)/i);if(!m)return 0;var n=parseFloat(m[1])||0;return /TB/i.test(m[2])?n*1024:n;}
+    if(key==='storage'||key==='ram') return values.sort(function(a,b){return capacityMb(a.label)-capacityMb(b.label);});
+    if(key==='network') return values.sort(function(a,b){return String(b.label).localeCompare(String(a.label),'pt-BR',{numeric:true});});
+    return values.sort(function(a,b){return String(a.label).localeCompare(String(b.label),'pt-BR');});
+  }
+
   function buildCategoryFilters(){
     var container = document.getElementById('produtos-container');
-    if (!container || document.querySelector('.quality-category-filters')) return;
-    var cards = Array.from(container.querySelectorAll('.produto-card, .product-card'));
-    if (!cards.length) return;
-    var pathParts = window.location.pathname.split('/').filter(Boolean);
-    var categorySlug = normalize(pathParts[pathParts.length-1] || new URLSearchParams(location.search).get('slug') || '');
-    if (!categorySlug || categorySlug === 'categoria.html') categorySlug = normalize(new URLSearchParams(location.search).get('slug') || new URLSearchParams(location.search).get('cat') || '');
+    if (!container) return;
+
+    function currentCards(){
+      return Array.from(container.querySelectorAll(':scope > .produto-card, :scope > .product-card'));
+    }
+    function cardSignature(cards){
+      if (!cards.length) return '';
+      return [cards.length, cardProductSlug(cards[0]) || '', cardProductSlug(cards[cards.length - 1]) || ''].join('|');
+    }
+    function filterNodes(){
+      return Array.from(document.querySelectorAll('.quality-category-filters'));
+    }
+    function removeDuplicateFilters(keep){
+      filterNodes().forEach(function(node){ if (!keep || node !== keep) node.remove(); });
+    }
+
+    var cards = currentCards();
+    if (!cards.length) {
+      removeDuplicateFilters(null);
+      container.__qualityFilterSignature = '';
+      return;
+    }
+
+    var signature = cardSignature(cards);
+    var existingFilters = filterNodes();
+
+    // Evita corrida entre o init e o MutationObserver enquanto o catálogo
+    // ainda está sendo carregado. Sem esta trava, dois painéis podiam ser
+    // inseridos lado a lado na mesma categoria.
+    if (container.__qualityFilterBuilding) {
+      container.__qualityFilterRebuildQueued = true;
+      return;
+    }
+
+    // Saneia qualquer duplicação já presente no DOM.
+    if (existingFilters.length > 1) {
+      existingFilters.slice(1).forEach(function(node){ node.remove(); });
+      existingFilters = existingFilters.slice(0, 1);
+    }
+
+    var existing = existingFilters[0] || null;
+    if (existing && container.__qualityFilterSignature === signature) return;
+    if (existing) existing.remove();
+
+    container.__qualityFilterBuilding = true;
+    container.__qualityFilterRebuildQueued = false;
+
+    var isSearchPage = container.dataset.qualitySearchResults === '1' || !!new URLSearchParams(location.search).get(SEARCH_PARAM);
 
     getCatalog().then(function(items){
+      // Reconsulta os cards após a etapa assíncrona para considerar produtos
+      // que terminaram de renderizar enquanto o catálogo carregava.
+      cards = currentCards();
+      if (!cards.length) {
+        removeDuplicateFilters(null);
+        container.__qualityFilterSignature = '';
+        return;
+      }
+      signature = cardSignature(cards);
+
       var bySlug = {};
-      items.filter(isVisibleProduct).forEach(function(product){ bySlug[normalize(product.slug)] = product; });
-      var pageProducts = [];
+      items.filter(isVisibleProduct).forEach(function(product){ bySlug[normalize(product.slug)] = product; bySlug[String(product.id||'')] = product; });
+      var pageEntries = [];
       cards.forEach(function(card){
         var slug = cardProductSlug(card);
-        var product = bySlug[normalize(slug)];
+        var product = bySlug[normalize(slug)] || bySlug[String(slug||'')];
         if (!product) return;
-        var brand = brandOf(product);
-        var condition = conditionOf(product);
-        card.dataset.qualityBrand = normalize(brand);
-        card.dataset.qualityCondition = normalize(condition);
-        pageProducts.push(product);
+        var facets = {
+          brand: brandOf(product) ? [brandOf(product)] : [],
+          category: displayCategory(product) ? [displayCategory(product)] : [],
+          condition: conditionOf(product) ? [conditionOf(product)] : [],
+          storage: storageValues(product),
+          ram: ramValues(product),
+          network: networkValues(product),
+          color: colorValues(product)
+        };
+        Object.keys(facets).forEach(function(key){ card.dataset['qualityFacet'+key.charAt(0).toUpperCase()+key.slice(1)] = facets[key].map(normalize).join('||'); });
+        pageEntries.push({product:product,card:card,facets:facets});
       });
-      if (!pageProducts.length) return;
-
-      var brands = Array.from(new Set(pageProducts.map(brandOf).filter(Boolean))).sort(function(a,b){ return a.localeCompare(b,'pt-BR'); });
-      var conditions = Array.from(new Set(pageProducts.map(conditionOf).filter(Boolean))).sort(function(a,b){ return a.localeCompare(b,'pt-BR'); });
-      if (!brands.length && conditions.length < 2) return;
-
-      var shell = document.createElement('div');
-      shell.className = 'quality-category-layout';
-      var aside = document.createElement('aside');
-      aside.className = 'quality-category-filters';
-      var toolbar = document.querySelector('.quality-category-toolbar');
-      if (toolbar && toolbar.parentNode) toolbar.parentNode.insertBefore(shell, toolbar.nextSibling);
-      else container.parentNode.insertBefore(shell, container);
-      shell.appendChild(aside);
-      shell.appendChild(container);
-
-      var selectedBrands = filterParamValues('marca');
-      var selectedConditions = filterParamValues('condicao');
-
-      function checkboxGroup(title, key, values, selected){
-        if (!values.length || (key === 'condition' && values.length < 2)) return '';
-        return '<fieldset class="quality-filter-group"><legend>' + esc(title) + '</legend>' + values.map(function(value){
-          var normalized = normalize(value);
-          return '<label><input type="checkbox" data-quality-filter="' + key + '" value="' + esc(normalized) + '"' + (selected.includes(normalized) ? ' checked' : '') + '><span>' + esc(value) + '</span></label>';
-        }).join('') + '</fieldset>';
+      if (!pageEntries.length) {
+        removeDuplicateFilters(null);
+        container.__qualityFilterSignature = signature;
+        return;
       }
 
-      aside.innerHTML = '<div class="quality-filter-head"><strong>Filtros</strong><button type="button" data-quality-toggle-filters aria-expanded="false"><i class="fa-solid fa-sliders"></i> Filtrar</button></div>' +
-        '<div class="quality-filter-body">' +
-          checkboxGroup('Marca','brand',brands,selectedBrands) +
-          checkboxGroup('Condição','condition',conditions,selectedConditions) +
-          '<button type="button" class="quality-filter-clear" data-quality-clear-filters>Limpar filtros</button>' +
-        '</div>' +
-        '<div class="quality-filter-result" aria-live="polite"></div>';
+      var defs = [
+        {key:'brand',title:'Marca',param:'marca'},
+        {key:'category',title:'Categoria',param:'categoria',searchOnly:true},
+        {key:'condition',title:'Condição',param:'condicao'},
+        {key:'storage',title:'Armazenamento',param:'armazenamento'},
+        {key:'ram',title:'Memória RAM',param:'ram'},
+        {key:'network',title:'Rede',param:'rede'},
+        {key:'color',title:'Cor',param:'cor'}
+      ];
+      var groups=[];
+      defs.forEach(function(def){
+        if(def.searchOnly&&!isSearchPage)return;
+        var map={};
+        pageEntries.forEach(function(entry){
+          (entry.facets[def.key]||[]).forEach(function(label){
+            var value=normalize(label);if(!value)return;
+            if(!map[value])map[value]={value:value,label:String(label),count:0};
+            map[value].count++;
+          });
+        });
+        var values=facetSort(def.key,Object.keys(map).map(function(key){return map[key];}));
+        if(values.length<2)return;
+        groups.push({def:def,values:values,selected:filterParamValues(def.param)});
+      });
 
-      function chosen(type){ return Array.from(aside.querySelectorAll('input[data-quality-filter="' + type + '"]:checked')).map(function(input){ return normalize(input.value); }); }
+      if(!groups.length){
+        removeDuplicateFilters(null);
+        container.__qualityFilterSignature = signature;
+        return;
+      }
+
+      var shell = container.parentElement && container.parentElement.classList.contains('quality-category-layout') ? container.parentElement : null;
+      if(!shell){
+        shell=document.createElement('div');shell.className='quality-category-layout';
+        var toolbar=document.querySelector('.quality-category-toolbar');
+        if(toolbar&&toolbar.parentNode)toolbar.parentNode.insertBefore(shell,toolbar.nextSibling);else container.parentNode.insertBefore(shell,container);
+        shell.appendChild(container);
+      }
+
+      // Garante a invariável: somente um painel de filtros por página.
+      removeDuplicateFilters(null);
+
+      var aside=document.createElement('aside');aside.className='quality-category-filters';shell.insertBefore(aside,container);
+
+      function checkboxGroup(group,index){
+        var cls=group.values.length>8?' quality-filter-options-scroll':'';
+        return '<fieldset class="quality-filter-group" data-quality-filter-group="'+esc(group.def.key)+'"><legend>'+esc(group.def.title)+'</legend><div class="quality-filter-options'+cls+'">'+group.values.map(function(item){
+          return '<label><input type="checkbox" data-quality-filter="'+esc(group.def.key)+'" data-quality-param="'+esc(group.def.param)+'" value="'+esc(item.value)+'"'+(group.selected.includes(item.value)?' checked':'')+'><span>'+esc(item.label)+'</span><small>'+item.count+'</small></label>';
+        }).join('')+'</div></fieldset>';
+      }
+
+      aside.innerHTML='<div class="quality-filter-head"><strong>Filtros</strong><button type="button" data-quality-toggle-filters aria-expanded="false"><i class="fa-solid fa-sliders"></i> <span>Filtrar</span><b data-quality-filter-active-count></b></button></div>'+        '<div class="quality-filter-body">'+groups.map(checkboxGroup).join('')+'<button type="button" class="quality-filter-clear" data-quality-clear-filters>Limpar filtros</button></div><div class="quality-filter-result" aria-live="polite"></div>';
+
+      function chosen(type){ return Array.from(aside.querySelectorAll('input[data-quality-filter="'+type+'"]:checked')).map(function(input){return normalize(input.value);}); }
+      function cardValues(card,key){var attr='qualityFacet'+key.charAt(0).toUpperCase()+key.slice(1);return String(card.dataset[attr]||'').split('||').filter(Boolean);}
       function syncUrl(){
-        var url = new URL(window.location.href);
-        var bs = chosen('brand');
-        var cs = chosen('condition');
-        if (bs.length) url.searchParams.set('marca', bs.join(',')); else url.searchParams.delete('marca');
-        if (cs.length) url.searchParams.set('condicao', cs.join(',')); else url.searchParams.delete('condicao');
-        history.replaceState(null,'',url.pathname + (url.searchParams.toString() ? '?' + url.searchParams.toString() : '') + url.hash);
+        var url=new URL(window.location.href);
+        groups.forEach(function(group){var values=chosen(group.def.key);if(values.length)url.searchParams.set(group.def.param,values.join(','));else url.searchParams.delete(group.def.param);});
+        history.replaceState(null,'',url.pathname+(url.searchParams.toString()?'?'+url.searchParams.toString():'')+url.hash);
       }
       function applyFilters(){
-        var bs = chosen('brand');
-        var cs = chosen('condition');
-        var visible = 0;
+        var selections={};groups.forEach(function(group){selections[group.def.key]=chosen(group.def.key);});
+        var visible=0;
         cards.forEach(function(card){
-          var brand = normalize(card.dataset.qualityBrand || '');
-          var condition = normalize(card.dataset.qualityCondition || '');
-          var matchBrand = !bs.length || bs.includes(brand);
-          var matchCondition = !cs.length || cs.includes(condition);
-          var show = matchBrand && matchCondition;
-          card.classList.toggle('quality-filter-hidden', !show);
-          if (show) visible++;
+          var show=groups.every(function(group){
+            var selected=selections[group.def.key];if(!selected.length)return true;
+            var values=cardValues(card,group.def.key);return selected.some(function(value){return values.includes(value);});
+          });
+          card.classList.toggle('quality-filter-hidden',!show);if(show)visible++;
         });
-        var result = aside.querySelector('.quality-filter-result');
-        if (result) result.textContent = visible + (visible === 1 ? ' produto' : ' produtos');
+        var active=Object.keys(selections).reduce(function(total,key){return total+selections[key].length;},0);
+        var badge=aside.querySelector('[data-quality-filter-active-count]');if(badge){badge.textContent=active?String(active):'';badge.hidden=!active;}
+        var result=aside.querySelector('.quality-filter-result');if(result)result.textContent=visible+(visible===1?' produto':' produtos');
+        aside.classList.toggle('has-active-filters',active>0);
         syncUrl();
       }
-      aside.addEventListener('change', function(event){ if (event.target.matches('input[data-quality-filter]')) applyFilters(); });
-      aside.addEventListener('click', function(event){
-        var toggle = event.target.closest('[data-quality-toggle-filters]');
-        if (toggle) {
-          var open = aside.classList.toggle('is-open');
-          toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
-        }
-        if (event.target.closest('[data-quality-clear-filters]')) {
-          aside.querySelectorAll('input[data-quality-filter]').forEach(function(input){ input.checked = false; });
-          applyFilters();
-        }
+      aside.addEventListener('change',function(event){if(event.target.matches('input[data-quality-filter]'))applyFilters();});
+      aside.addEventListener('click',function(event){
+        var toggle=event.target.closest('[data-quality-toggle-filters]');
+        if(toggle){var open=aside.classList.toggle('is-open');toggle.setAttribute('aria-expanded',open?'true':'false');}
+        if(event.target.closest('[data-quality-clear-filters]')){aside.querySelectorAll('input[data-quality-filter]').forEach(function(input){input.checked=false;});applyFilters();}
       });
+
+      container.__qualityFilterSignature = signature;
       applyFilters();
+    }).catch(function(err){
+      console.warn('[Quality Search] Falha ao montar filtros da categoria:', err);
+    }).finally(function(){
+      container.__qualityFilterBuilding = false;
+      if (container.__qualityFilterRebuildQueued) {
+        container.__qualityFilterRebuildQueued = false;
+        if (window.requestAnimationFrame) window.requestAnimationFrame(buildCategoryFilters);
+        else setTimeout(buildCategoryFilters, 0);
+      }
     });
   }
 
@@ -1780,8 +2313,8 @@
     var trust = document.createElement('div');
     trust.className = 'quality-product-trust';
     var warranty = String(product && product.logistics && product.logistics.warranty || '').trim();
-    trust.innerHTML = '<div><i class="fa-solid fa-store"></i><span><strong>Quality Celulares</strong><small>Atendimento direto com nossa equipe</small></span></div>' +
-      '<div><i class="fa-solid fa-shield-halved"></i><span><strong>Atendimento personalizado</strong><small>Consulte condições e tire suas dúvidas com nossa equipe</small></span></div>' +
+    trust.innerHTML = '<div><i class="fa-solid fa-store"></i><span><strong>Quality Celulares · desde 2014</strong><small>Atendimento humano direto com nossa equipe</small></span></div>' +
+      '<div><i class="fa-solid fa-shield-halved"></i><span><strong>Compra segura</strong><small>Confira nossos cuidados e canais oficiais. <a href="' + esc(securityPageUrl()) + '">Saiba mais</a></small></span></div>' +
       (warranty ? '<div><i class="fa-solid fa-certificate"></i><span><strong>Garantia</strong><small>' + esc(warranty) + '</small></span></div>' : '');
     buybox.appendChild(trust);
 
@@ -2012,6 +2545,8 @@
   function init(){
     injectCompareStyles();
     eventBindings();
+    bindSearchSubmitOverride();
+    initSearchResultsPage();
     ensureInterestNav();
     ensureAutocomplete();
     decorateProductCards();
