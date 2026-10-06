@@ -778,6 +778,7 @@
     try{
       var target=ev&&ev.target;
       if(target&&target!==window&&target.tagName){
+        if(String(target.tagName||'').toUpperCase()==='IMG' && target.dataset && target.dataset.qualityImageManaged==='1') return;
         var src=target.currentSrc||target.src||target.href||'';
         if(src) track('resource_error',{resourceUrl:src,errorMessage:'Falha ao carregar recurso',context:surface(),reason:String(target.tagName||'recurso').toLowerCase()});
         return;

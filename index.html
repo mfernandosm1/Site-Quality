@@ -168,7 +168,7 @@
   <div id="footer"></div>
 
   <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-  <script src="/js/image-resilience.js?v=20261005-1"></script>
+  <script src="/js/image-resilience.js?v=20261005-2"></script>
   <script src="/js/main.js?v=20260929-search2"></script>
 
   <script>
@@ -498,7 +498,7 @@
             ${qualityProductActionsHtml(p, `/produto/${encodeURIComponent(p.slug || p.id)}/`)}
             ${productTagsHtml(p, 2)}
             ${(p.detailsEnabled || hasGallery(p)) ? `<a class="quality-card-image-link" href="${detailUrl}" aria-label="Ver detalhes de ${escapeHtml(p.name || 'produto')}">` : ''}
-            <img src="${escapeHtml(productImagePath(p.image || 'images/sem-imagem.png'))}" alt="${escapeHtml(p.name || '')}" loading="${imageIndex < 4 ? 'eager' : 'lazy'}" fetchpriority="${imageIndex < 2 ? 'high' : 'auto'}" decoding="async" data-quality-product-image="1">
+            <img src="${escapeHtml(productImagePath(p.optimizedImage || p.image || 'images/sem-imagem.png'))}"${p.optimizedImage && p.image ? ` data-quality-original-src="${escapeHtml(productImagePath(p.image))}"` : ''} alt="${escapeHtml(p.name || '')}" loading="${imageIndex < 4 ? 'eager' : 'lazy'}" fetchpriority="${imageIndex < 2 ? 'high' : 'auto'}" decoding="async" data-quality-product-image="1">
             ${(p.detailsEnabled || hasGallery(p)) ? `</a>` : ''}
           </div>
           <h3>${escapeHtml(p.name || '')}</h3>
@@ -557,7 +557,7 @@
         <div class="quality-card-image-wrap">
           ${qualityProductActionsHtml(p, detailUrl)}
           ${productTagsHtml(p, 2)}
-          ${imageOpen}<img src="${escapeHtml(productImagePath(p.image || 'images/sem-imagem.png'))}" alt="${escapeHtml(p.name || '')}" loading="lazy" decoding="async">${imageClose}
+          ${imageOpen}<img src="${escapeHtml(productImagePath(p.optimizedImage || p.image || 'images/sem-imagem.png'))}"${p.optimizedImage && p.image ? ` data-quality-original-src="${escapeHtml(productImagePath(p.image))}"` : ''} alt="${escapeHtml(p.name || '')}" loading="lazy" decoding="async">${imageClose}
         </div>
         <h3>${escapeHtml(p.name || '')}</h3>${productVariationsCardHtml(p)}${priceHtml}${detailHtml}
         <a href="https://wa.me/5555991407824?text=${encodeURIComponent('Olá! Vim através do site e tenho interesse em ' + (p.name || 'produto'))}" class="btn" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-whatsapp"></i> Comprar no WhatsApp</a>
@@ -608,7 +608,7 @@
   })();
   </script>
 
-  <script src="/js/home-marketplace.js?v=20260925-marquee1"></script>
+  <script src="/js/home-marketplace.js?v=20261005-imgopt1"></script>
 
   <script>
   // V8.0.1 - Busca reforçada na Home sem mexer no main.js

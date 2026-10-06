@@ -70,6 +70,17 @@
     return '/' + raw.replace(/^\/+/, '').replace(/^site\//i, '');
   }
 
+  function productImageAsset(product){
+    return assetPath(product && (product.optimizedImage || product.image || product.imagem));
+  }
+
+  function productImageOriginalAttr(product){
+    var optimized = product && product.optimizedImage;
+    var original = product && (product.image || product.imagem);
+    if (!optimized || !original) return '';
+    return ' data-quality-original-src="' + esc(assetPath(original)) + '"';
+  }
+
   function fetchFirstJson(urls){
     var index = 0;
     function next(){
@@ -498,11 +509,12 @@
   function searchResultCardHtml(product,score){
     var name=product.name||product.nome||'Produto';
     var url=productUrl(product);
-    var image=assetPath(product.image||product.imagem);
+    var image=productImageAsset(product);
+    var imageOriginalAttr=productImageOriginalAttr(product);
     var meta=searchFacetLabel(product);
     var whatsapp='https://wa.me/'+WHATSAPP_NUMBER+'?text='+encodeURIComponent('Olá! Vim através do site da Quality Celulares e tenho interesse em '+name);
     return '<div class="produto-card product-card quality-search-result-card" data-quality-search-score="'+esc(score||0)+'">'+
-      '<div class="quality-card-image-wrap">'+cardActions(product)+'<a href="'+esc(url)+'" class="quality-card-image-link" aria-label="Ver detalhes de '+esc(name)+'"><img src="'+esc(image)+'" alt="'+esc(name)+'" loading="lazy" decoding="async" onerror="this.onerror=null;this.src=\'/images/sem-imagem.png\';"></a></div>'+
+      '<div class="quality-card-image-wrap">'+cardActions(product)+'<a href="'+esc(url)+'" class="quality-card-image-link" aria-label="Ver detalhes de '+esc(name)+'"><img src="'+esc(image)+'"'+imageOriginalAttr+' alt="'+esc(name)+'" loading="lazy" decoding="async" onerror="this.onerror=null;this.src=\'/images/sem-imagem.png\';"></a></div>'+
       '<h3><a href="'+esc(url)+'" class="quality-card-native-title-link">'+esc(name)+'</a></h3>'+
       (meta?'<div class="quality-search-result-meta">'+esc(meta)+'</div>':'')+
       '<a href="'+esc(url)+'" class="btn btn-details">Ver detalhes</a>'+
@@ -530,7 +542,7 @@
       '<h2>Não encontramos exatamente “'+esc(query)+'”</h2>'+
       '<p>Tente remover algum termo, conferir a escrita ou fale com nossa equipe para localizar o produto certo.</p>'+
       '<div class="quality-search-recovery-actions"><a href="/smartphones/">Ver smartphones</a><a class="is-whatsapp" href="'+esc(whatsapp)+'" target="_blank" rel="noopener"><i class="fa-brands fa-whatsapp"></i> Perguntar no WhatsApp</a></div>'+
-      (alternatives.length?'<div class="quality-search-alternatives"><strong>Outros produtos '+esc(brand)+'</strong><div class="quality-search-alternative-grid">'+alternatives.map(function(product){return '<a href="'+esc(productUrl(product))+'"><img src="'+esc(assetPath(product.image||product.imagem))+'" alt=""><span>'+esc(product.name||product.nome||'Produto')+'</span></a>';}).join('')+'</div></div>':'')+
+      (alternatives.length?'<div class="quality-search-alternatives"><strong>Outros produtos '+esc(brand)+'</strong><div class="quality-search-alternative-grid">'+alternatives.map(function(product){return '<a href="'+esc(productUrl(product))+'"><img src="'+esc(productImageAsset(product))+'" alt=""><span>'+esc(product.name||product.nome||'Produto')+'</span></a>';}).join('')+'</div></div>':'')+
     '</section>';
     emitAnalytics('search_no_result',{term:query,searchStatus:'sem_resultado',resultCount:0,context:'Resultados de busca'});
   }
@@ -971,7 +983,7 @@
         var product = products[i];
         if (product) {
           var slug = product.slug || product.id || '';
-          slots.push('<div class="quality-compare-tray-chip is-filled"><img src="' + esc(assetPath(product.image || product.imagem)) + '" alt=""><span>' + esc(product.name || product.nome || 'Celular') + '</span><button type="button" data-quality-compare-remove="' + esc(slug) + '" aria-label="Remover da comparação"><i class="fa-solid fa-xmark"></i></button></div>');
+          slots.push('<div class="quality-compare-tray-chip is-filled"><img src="' + esc(productImageAsset(product)) + '" alt=""><span>' + esc(product.name || product.nome || 'Celular') + '</span><button type="button" data-quality-compare-remove="' + esc(slug) + '" aria-label="Remover da comparação"><i class="fa-solid fa-xmark"></i></button></div>');
         } else {
           slots.push('<a class="quality-compare-tray-chip is-empty" href="/comparar.html" aria-label="Adicionar outro celular"><i class="fa-solid fa-plus"></i><span>Adicionar</span></a>');
         }
@@ -1289,7 +1301,7 @@
 
   function compareProductHeader(product){
     var name = product.name || product.nome || 'Celular';
-    return '<div class="quality-compare-col-head"><img src="' + esc(assetPath(product.image || product.imagem)) + '" alt=""><div><strong>' + esc(name) + '</strong><a href="' + esc(productUrl(product)) + '">Ver produto</a></div></div>';
+    return '<div class="quality-compare-col-head"><img src="' + esc(productImageAsset(product)) + '" alt=""><div><strong>' + esc(name) + '</strong><a href="' + esc(productUrl(product)) + '">Ver produto</a></div></div>';
   }
 
   function compareWhatsAppUrl(product){
@@ -1408,7 +1420,7 @@
 
     return Promise.all([
       loadCanvasImage('/images/logo.png'),
-      Promise.all(products.map(function(product){ return loadCanvasImage(assetPath(product.image || product.imagem)); }))
+      Promise.all(products.map(function(product){ return loadCanvasImage(productImageAsset(product)); }))
     ]).then(function(result){
       var logo = result[0];
       var productImages = result[1];
@@ -1628,7 +1640,7 @@
     html += '<div class="quality-compare-mobile-products">';
     products.forEach(function(product, idx){
       var name = product.name || product.nome || 'Celular';
-      html += '<div class="quality-compare-mobile-product"><span class="quality-compare-mobile-num">' + (idx + 1) + '</span><img src="' + esc(assetPath(product.image || product.imagem)) + '" alt=""><strong>' + esc(name) + '</strong></div>';
+      html += '<div class="quality-compare-mobile-product"><span class="quality-compare-mobile-num">' + (idx + 1) + '</span><img src="' + esc(productImageAsset(product)) + '" alt=""><strong>' + esc(name) + '</strong></div>';
     });
     html += '</div>';
 
@@ -1686,7 +1698,7 @@
 
   function compareSelectorSlot(index, product){
     if (product) {
-      return '<div class="quality-compare-slot is-filled" data-quality-compare-slot="' + index + '"><div class="quality-compare-product-head"><img src="' + esc(assetPath(product.image || product.imagem)) + '" alt="' + esc(product.name || 'Celular') + '"><div><strong>' + esc(product.name || product.nome || 'Celular') + '</strong><small>' + esc(brandOf(product) || '') + (conditionOf(product)?' · '+esc(conditionOf(product)):'') + '</small></div><button type="button" class="quality-compare-remove" data-quality-compare-remove-page="' + esc(product.slug || product.id || '') + '" aria-label="Remover celular"><i class="fa-solid fa-xmark"></i></button></div></div>';
+      return '<div class="quality-compare-slot is-filled" data-quality-compare-slot="' + index + '"><div class="quality-compare-product-head"><img src="' + esc(productImageAsset(product)) + '" alt="' + esc(product.name || 'Celular') + '"><div><strong>' + esc(product.name || product.nome || 'Celular') + '</strong><small>' + esc(brandOf(product) || '') + (conditionOf(product)?' · '+esc(conditionOf(product)):'') + '</small></div><button type="button" class="quality-compare-remove" data-quality-compare-remove-page="' + esc(product.slug || product.id || '') + '" aria-label="Remover celular"><i class="fa-solid fa-xmark"></i></button></div></div>';
     }
     return '<div class="quality-compare-slot" data-quality-compare-slot="' + index + '"><label class="quality-compare-add-label">Adicionar celular</label><input type="search" class="quality-compare-search" data-quality-compare-search="' + index + '" placeholder="Digite modelo ou marca…" autocomplete="off"><div class="quality-compare-results" data-quality-compare-results="' + index + '"></div></div>';
   }
@@ -1705,7 +1717,7 @@
       return hay.includes(term);
     }).slice(0,8);
     popup.innerHTML = matches.length ? matches.map(function(product){
-      return '<button type="button" class="quality-compare-result" data-quality-compare-pick="' + esc(product.slug || product.id || '') + '"><img src="' + esc(assetPath(product.image || product.imagem)) + '" alt=""><span><strong>' + esc(product.name || product.nome || 'Celular') + '</strong><small>' + esc(brandOf(product) || '') + '</small></span></button>';
+      return '<button type="button" class="quality-compare-result" data-quality-compare-pick="' + esc(product.slug || product.id || '') + '"><img src="' + esc(productImageAsset(product)) + '" alt=""><span><strong>' + esc(product.name || product.nome || 'Celular') + '</strong><small>' + esc(brandOf(product) || '') + '</small></span></button>';
     }).join('') : '<div class="quality-compare-empty-result">Nenhum celular encontrado.</div>';
     popup.classList.add('is-open');
   }
@@ -1961,7 +1973,7 @@
       popup.innerHTML='<div class="quality-search-suggestion-head">Produtos</div>'+ranked.map(function(entry){
         var product=entry.product,brand=brandOf(product),meta=searchFacetLabel(product);
         return '<a class="quality-search-suggestion" role="option" aria-selected="false" href="' + esc(productUrl(product)) + '">' +
-          '<img src="' + esc(assetPath(product.image || product.imagem)) + '" alt="" loading="lazy" decoding="async" onerror="this.onerror=null;this.src=\'/images/sem-imagem.png\';">' +
+          '<img src="' + esc(productImageAsset(product)) + '" alt="" loading="lazy" decoding="async" onerror="this.onerror=null;this.src=\'/images/sem-imagem.png\';">' +
           '<span><strong>' + esc(product.name || product.nome || 'Produto') + '</strong>' +
           '<small>' + esc(meta || brand || displayCategory(product)) + '</small></span></a>';
       }).join('')+'<a class="quality-search-all" href="'+esc(searchResultsUrl(term))+'"><span>Ver todos os resultados para “'+esc(term)+'”</span><i class="fa-solid fa-arrow-right"></i></a>';
@@ -2449,7 +2461,7 @@
     var name = product.name || product.nome || 'Produto';
     return '<a class="produto-relacionado-card" href="' + esc(productUrl(product)) + '">' +
       '<div class="quality-card-image-wrap related-image-wrap">' + cardActions(product) +
-      '<img src="' + esc(assetPath(product.image || product.imagem)) + '" alt="' + esc(name) + '" loading="lazy" decoding="async" onerror="this.onerror=null;this.src=\'/images/sem-imagem.png\';"></div>' +
+      '<img src="' + esc(productImageAsset(product)) + '"' + productImageOriginalAttr(product) + ' alt="' + esc(name) + '" loading="lazy" decoding="async" onerror="this.onerror=null;this.src=\'/images/sem-imagem.png\';"></div>' +
       '<strong>' + esc(name) + '</strong></a>';
   }
 

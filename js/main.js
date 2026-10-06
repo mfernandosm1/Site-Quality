@@ -417,7 +417,7 @@ function initSwiper() {
   if (window.__qualityStorefrontLoaderV1) return;
   window.__qualityStorefrontLoaderV1 = true;
   var script = document.createElement('script');
-  script.src = '/js/storefront-enhancements.js?v=20260929-search2';
+  script.src = '/js/storefront-enhancements.js?v=20261005-imgopt1';
   script.defer = true;
   document.head.appendChild(script);
 })();

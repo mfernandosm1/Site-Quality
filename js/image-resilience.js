@@ -1,12 +1,12 @@
 /*
- * Quality Image Resilience V1.0.0 - 2026-10-05
+ * Quality Image Resilience V1.1.0 - 2026-10-05
  * Recupera falhas transitórias de imagens de produtos sem exigir F5.
  * Escopo conservador: cards de produto/relacionados/favoritos.
  */
 (function(){
   'use strict';
-  if (window.__qualityImageResilienceV1) return;
-  window.__qualityImageResilienceV1 = true;
+  if (window.__qualityImageResilienceV11) return;
+  window.__qualityImageResilienceV11 = true;
 
   var SELECTOR = '.produto-card img, .product-card img, .produto-relacionado-card img, .quality-favorites-panel-item img';
   var FALLBACK = '/images/sem-imagem.png';
@@ -103,6 +103,17 @@
     }
   }
 
+  function useOriginalFallback(img){
+    if (!img || img.dataset.qualityOptimizedFallback === '1') return false;
+    var original = img.getAttribute('data-quality-original-src') || '';
+    var current = img.getAttribute('src') || img.currentSrc || '';
+    if (!original || !current || isFallback(original) || cleanUrl(original) === cleanUrl(current)) return false;
+    img.dataset.qualityOptimizedFallback = '1';
+    img.removeAttribute('srcset');
+    img.src = original;
+    return true;
+  }
+
   function setFallback(img){
     if (!img || img.dataset.qualityImageFallback === '1') return;
     img.dataset.qualityImageFallback = '1';
@@ -186,6 +197,9 @@
     if (!eligible(img)) return;
     prepare(img);
     try { img.onerror = null; } catch (_) {}
+    // Se a copia WebP otimizada falhar, volta primeiro para a foto original.
+    // So depois disso entram as tentativas automaticas da camada de resiliencia.
+    if (useOriginalFallback(img)) return;
     scheduleRetry(img);
   }, true);
 
