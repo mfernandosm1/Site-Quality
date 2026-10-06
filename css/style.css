@@ -2444,3 +2444,32 @@ img{
 /* Página Compra Segura */
 .quality-security-page{width:min(1120px,calc(100% - 32px));margin:34px auto 58px;color:#111827}.quality-security-hero{display:grid;grid-template-columns:72px 1fr;gap:20px;align-items:center;padding:30px;border:1px solid #e5e7eb;border-radius:18px;background:linear-gradient(135deg,#fff,#f8fafc);box-shadow:0 6px 22px rgba(15,23,42,.05)}.quality-security-icon{display:grid;place-items:center;width:68px;height:68px;border-radius:18px;background:#eff6ff;color:#2563eb;font-size:30px}.quality-security-kicker{display:block;margin-bottom:5px;color:#2563eb;font-size:11px;font-weight:900;text-transform:uppercase;letter-spacing:.08em}.quality-security-hero h1,.quality-security-official h2{margin:0;color:#111827}.quality-security-hero h1{font-size:32px}.quality-security-hero p,.quality-security-official p{margin:8px 0 0;color:#6b7280;line-height:1.55}.quality-security-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin-top:18px}.quality-security-grid article{padding:22px;border:1px solid #e5e7eb;border-radius:14px;background:#fff}.quality-security-grid article>i{font-size:22px;color:#2563eb;margin-bottom:13px}.quality-security-grid h2{margin:0 0 7px;font-size:17px}.quality-security-grid p{margin:0;color:#6b7280;font-size:13px;line-height:1.55}.quality-security-official{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:26px;align-items:center;margin-top:18px;padding:26px 28px;border:1px solid #e5e7eb;border-radius:16px;background:#fff}.quality-security-actions{display:grid;gap:8px;min-width:220px}.quality-security-actions a{display:flex;align-items:center;justify-content:center;gap:8px;min-height:44px;border-radius:8px;text-decoration:none;font-size:12px;font-weight:900}.quality-security-whatsapp{background:#25d366;color:#fff}.quality-security-secondary{border:1px solid #d1d5db;color:#111827;background:#fff}.quality-security-alert{display:flex;gap:12px;align-items:flex-start;margin-top:18px;padding:17px 19px;border:1px solid #fde68a;border-radius:12px;background:#fffbeb}.quality-security-alert>i{color:#d97706;margin-top:2px}.quality-security-alert strong{font-size:13px}.quality-security-alert p{margin:3px 0 0;color:#6b7280;font-size:12px;line-height:1.45}
 @media(max-width:760px){.quality-security-page{width:calc(100% - 24px);margin-top:22px}.quality-security-hero{grid-template-columns:1fr;padding:22px}.quality-security-icon{width:54px;height:54px;border-radius:14px;font-size:24px}.quality-security-hero h1{font-size:25px}.quality-security-grid{grid-template-columns:1fr}.quality-security-official{grid-template-columns:1fr;padding:22px}.quality-security-actions{min-width:0}}
+
+
+/* =========================================================
+   QUALITY_LAYOUT_STABILITY_V1 - 2026-10-05
+   Reserva espaco antes das imagens/dados assincronos chegarem,
+   reduzindo CLS sem esconder overflow ou alterar o conteudo.
+========================================================= */
+@media (min-width: 768px) {
+  /* Banners desktop publicados em 1920x560 (24:7).
+     O min-height reproduz a altura atual, limitada aos 400px ja usados pelo site. */
+  .banner .swiper {
+    min-height: min(400px, 29.1667vw);
+  }
+  .banner-img {
+    aspect-ratio: 24 / 7;
+  }
+}
+
+/* Enquanto o JSON do produto e carregado, mantem o rodape fora da area visivel.
+   A classe e removida assim que o produto (ou erro) e renderizado. */
+#produto-detalhe.quality-product-loading {
+  min-height: 560px;
+}
+
+@media (max-width: 850px) {
+  #produto-detalhe.quality-product-loading {
+    min-height: 420px;
+  }
+}

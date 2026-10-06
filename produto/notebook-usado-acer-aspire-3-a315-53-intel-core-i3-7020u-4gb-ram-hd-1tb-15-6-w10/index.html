@@ -14,7 +14,7 @@
   <meta property="og:url" content="https://www.qualitycel.com.br/produto/notebook-usado-acer-aspire-3-a315-53-intel-core-i3-7020u-4gb-ram-hd-1tb-15-6-w10/">
   <meta name="twitter:card" content="summary_large_image">
   <link rel="canonical" href="https://www.qualitycel.com.br/produto/notebook-usado-acer-aspire-3-a315-53-intel-core-i3-7020u-4gb-ram-hd-1tb-15-6-w10/">
-  <link rel="stylesheet" href="/css/style.css?v=20260922-home14">
+  <link rel="stylesheet" href="/css/style.css?v=20261005-perf3">
     <!-- QUALITY_PERFORMANCE_MOBILE_V1: antecipa os webfonts dos ícones no mobile -->
   <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin="">
   <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin="">
@@ -347,12 +347,13 @@
 <div id="header"></div>
 
 <main class="main">
-  <section id="produto-detalhe" style="max-width:1100px;margin:35px auto;padding:0 16px;">
+  <section id="produto-detalhe" class="quality-product-loading" style="max-width:1100px;margin:35px auto;padding:0 16px;">
     <p class="em-breve" style="text-align:center;">Carregando produto...</p>
   </section>
 </main>
 
 <div id="footer"></div>
+<script src="/js/image-resilience.js?v=20261005-3"></script>
 <script src="/js/main.js?v=20260929-search2"></script>
 <script>
 (function(){
@@ -645,12 +646,17 @@
 
   function productMiniCardHtml(p){
     const n = p.name || p.nome || 'Produto';
-    const img = assetPath(p.image || p.imagem || 'images/sem-imagem.png');
+    const imgOriginal = assetPath(p.image || p.imagem || 'images/sem-imagem.png');
+    const imgOptimized = p.optimizedImage ? assetPath(p.optimizedImage) : '';
+    const img = imgOptimized || imgOriginal;
+    const originalAttr = imgOptimized && imgOriginal
+      ? ` data-quality-original-src="${escapeHtml(imgOriginal)}"`
+      : '';
     return `
       <a class="produto-relacionado-card" href="${productUrl(p)}">
         <div class="quality-card-image-wrap related-image-wrap">
           ${qualityProductActionsHtml(p, productUrl(p))}
-          <img src="${escapeHtml(img)}" alt="${escapeHtml(n)}" onerror="this.onerror=null;this.src='/images/sem-imagem.png';">
+          <img src="${escapeHtml(img)}"${originalAttr} alt="${escapeHtml(n)}" loading="lazy" decoding="async">
           ${productTagsHtml(p, 1, 'overlay')}
         </div>
         <strong>${escapeHtml(n)}</strong>
@@ -1153,6 +1159,7 @@
   const box = document.getElementById('produto-detalhe');
 
   if (!productKey) {
+    box.classList.remove('quality-product-loading');
     box.innerHTML = '<p class="em-breve" style="text-align:center;">Produto não informado.</p>';
     return;
   }
@@ -1182,12 +1189,18 @@
       });
 
       if (!product || product.active === false) {
+        box.classList.remove('quality-product-loading');
         box.innerHTML = '<p class="em-breve" style="text-align:center;">Produto não encontrado.</p>';
         return;
       }
 
       const name = product.name || 'Produto';
-      const image = assetPath(product.image || 'images/sem-imagem.png');
+      const imageOriginal = assetPath(product.image || 'images/sem-imagem.png');
+      const imageOptimized = product.optimizedImage ? assetPath(product.optimizedImage) : '';
+      const image = imageOptimized || imageOriginal;
+      const primaryOriginalAttr = imageOptimized && imageOriginal
+        ? ` data-quality-original-src="${escapeHtml(imageOriginal)}"`
+        : '';
       const gallery = Array.isArray(product.gallery) ? product.gallery.map(assetPath) : [];
       const medias = [image, ...gallery].filter(Boolean);
 
@@ -1199,7 +1212,7 @@
       const variacoesHtml = variationsHtml(product);
       const variacoesNormalizadas = normalizeVariations(product);
 
-      applyProductSeo(product, name, image, product.price, showPrice, seoConfig);
+      applyProductSeo(product, name, imageOriginal, product.price, showPrice, seoConfig);
       qualitySaveRecent({ id: product.id || product.slug || '', slug: product.slug || product.id || '', name, image: product.image || '', url: '/produto/' + encodeURIComponent(product.slug || product.id || '') + '/' });
 
       const thumbsHtml = medias.map((media, index) => {
@@ -1211,9 +1224,10 @@
           `;
         }
 
+        const thumbOriginalAttr = index === 0 ? primaryOriginalAttr : '';
         return `
           <button class="galeria-thumb ${index === 0 ? 'ativa' : ''}" type="button" data-media="${escapeHtml(media)}">
-            <img src="${escapeHtml(media)}" alt="${escapeHtml(name)}" loading="lazy" decoding="async">
+            <img src="${escapeHtml(media)}"${thumbOriginalAttr} alt="${escapeHtml(name)}" loading="lazy" decoding="async">
           </button>
         `;
       }).join('');
@@ -1225,6 +1239,7 @@
         </div>
       ` : '';
 
+      box.classList.remove('quality-product-loading');
       box.innerHTML = `
         <div class="produto-layout">
           <div class="produto-galeria">
@@ -1233,7 +1248,7 @@
             </div>
 
             <div class="galeria-principal" id="galeria-principal">
-              <img src="${escapeHtml(medias[0] || image)}" alt="${escapeHtml(name)}" decoding="async" fetchpriority="high">
+              <img src="${escapeHtml(medias[0] || image)}"${primaryOriginalAttr} alt="${escapeHtml(name)}" decoding="async" fetchpriority="high">
             </div>
           </div>
 
@@ -1281,7 +1296,8 @@
           imageVariation = medias[colorIndex] || '';
         }
         if (imageVariation) {
-          principal.innerHTML = `<img src="${escapeHtml(imageVariation)}" alt="${escapeHtml(name)}" decoding="async" fetchpriority="high">`;
+          const variationOriginalAttr = imageVariation === image ? primaryOriginalAttr : '';
+          principal.innerHTML = `<img src="${escapeHtml(imageVariation)}"${variationOriginalAttr} alt="${escapeHtml(name)}" decoding="async" fetchpriority="high">`;
           document.querySelectorAll('.galeria-thumb').forEach((thumb, thumbIndex) => {
             thumb.classList.toggle('ativa', medias[thumbIndex] === imageVariation);
           });
@@ -1342,7 +1358,8 @@
               ? `<iframe src="${escapeHtml(embed)}" allowfullscreen></iframe>`
               : '<p>Vídeo inválido.</p>';
           } else {
-            principal.innerHTML = `<img src="${escapeHtml(media)}" alt="${escapeHtml(name)}" decoding="async" fetchpriority="high">`;
+            const mediaOriginalAttr = media === image ? primaryOriginalAttr : '';
+            principal.innerHTML = `<img src="${escapeHtml(media)}"${mediaOriginalAttr} alt="${escapeHtml(name)}" decoding="async" fetchpriority="high">`;
           }
         });
       });
@@ -1555,7 +1572,10 @@
           if (!sources.length) return;
           viewerIndex = (index + sources.length) % sources.length;
           resetViewerTransform();
-          viewerImg.src = sources[viewerIndex];
+          const viewerSource = sources[viewerIndex];
+          if (viewerSource === image && imageOptimized && imageOriginal) viewerImg.setAttribute('data-quality-original-src', imageOriginal);
+          else viewerImg.removeAttribute('data-quality-original-src');
+          viewerImg.src = viewerSource;
           viewerCounter.textContent = (viewerIndex + 1) + ' / ' + sources.length;
           const showNav = sources.length > 1;
           viewer.querySelectorAll('.quality-gallery-viewer-nav').forEach(btn => btn.style.display = showNav ? 'inline-flex' : 'none');
@@ -1604,6 +1624,7 @@
 
     })
     .catch(() => {
+      box.classList.remove('quality-product-loading');
       box.innerHTML = '<p class="em-breve" style="text-align:center;">Erro ao carregar produto.</p>';
     });
 })();
@@ -1825,8 +1846,6 @@
   setTimeout(ensureMenu, 2000);
 })();
 </script>
-
-<script src="/js/image-resilience.js?v=20261005-1"></script>
 
 <script src="/js/quality-analytics.js?v=20260929-15"></script>
 </body></html>
