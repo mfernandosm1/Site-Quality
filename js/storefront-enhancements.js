@@ -1,9 +1,10 @@
 /*
- * Quality Storefront Experience V1.2.0 - 2026-09-29
+ * Quality Storefront Experience V1.2.1 - 2026-10-06
  * Marketplace-style UX without checkout/prices dependency.
  * Features: product detail 3-column layout, intelligent related products,
  * interest list -> WhatsApp, Search 2.0 with fuzzy matching and dynamic filters,
  * smartphone comparison with up to 3 products.
+ * V1.2.1: browsing continuity and contextual mobile WhatsApp CTA.
  */
 (function(){
   'use strict';
@@ -23,6 +24,10 @@
   var compareTrayRequestSeq = 0;
   var comparePageRequestSeq = 0;
   var compareAnalyticsSignature = '';
+  var BROWSE_CONTEXT_KEY = 'quality_browse_context_v1';
+  var BROWSE_RESTORE_KEY = 'quality_browse_restore_v1';
+  var BROWSE_CONTEXT_TTL = 45 * 60 * 1000;
+  var mobileProductCtaObserver = null;
 
   function normalize(value){
     return String(value || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().trim();
@@ -130,6 +135,192 @@
     if (fromPath) return fromPath;
     var params = new URLSearchParams(window.location.search);
     return params.get('slug') || params.get('id') || '';
+  }
+
+  function internalPath(raw){
+    try {
+      var url = new URL(raw || window.location.href, window.location.href);
+      if (url.origin !== window.location.origin) return '';
+      return url.pathname + url.search + url.hash;
+    } catch (_) { return ''; }
+  }
+
+  function readBrowseContext(){
+    try {
+      var parsed = JSON.parse(sessionStorage.getItem(BROWSE_CONTEXT_KEY) || 'null');
+      if (!parsed || !parsed.source || !parsed.at) return null;
+      if ((Date.now() - Number(parsed.at || 0)) > BROWSE_CONTEXT_TTL) {
+        sessionStorage.removeItem(BROWSE_CONTEXT_KEY);
+        sessionStorage.removeItem(BROWSE_RESTORE_KEY);
+        return null;
+      }
+      return parsed;
+    } catch (_) { return null; }
+  }
+
+  function captureBrowseContext(destination){
+    var target = internalPath(destination);
+    if (!target || !/\/produto\//i.test(target)) return;
+    // Não troca a origem por outra página de produto. A continuidade é pensada
+    // para voltar à vitrine/listagem em que o cliente estava pesquisando.
+    if (currentProductSlug()) return;
+    var source = internalPath(window.location.href);
+    if (!source || /\/produto\//i.test(source)) return;
+    var context = {
+      source: source,
+      scrollY: Math.max(0, Math.round(window.scrollY || window.pageYOffset || 0)),
+      product: slugFromUrl(target),
+      at: Date.now()
+    };
+    try { sessionStorage.setItem(BROWSE_CONTEXT_KEY, JSON.stringify(context)); } catch (_) {}
+  }
+
+  function browseSourceLabel(source){
+    try {
+      var url = new URL(source, window.location.origin);
+      var path = url.pathname.toLowerCase();
+      if (/^\/smartphones\/?$/.test(path)) return 'Smartphones';
+      if (/^\/acessorios\/?$/.test(path)) return 'Acessórios';
+      if (/^\/eletronicos\/?$/.test(path)) return 'Eletrônicos';
+      if (/^\/assistencia-tecnica\/?$/.test(path)) return 'Assistência Técnica';
+      if (path === '/' || /\/index\.html$/.test(path)) return 'Home';
+      return 'resultados';
+    } catch (_) { return 'resultados'; }
+  }
+
+  function ensureReturnToResultsLink(){
+    var box = document.getElementById('produto-detalhe');
+    if (!box || box.querySelector('.quality-return-results')) return;
+    var context = readBrowseContext();
+    var slug = currentProductSlug();
+    if (!context || (context.product && slug && normalize(context.product) !== normalize(slug))) return;
+    var source = internalPath(context.source);
+    if (!source || /\/produto\//i.test(source)) return;
+    var link = document.createElement('a');
+    link.className = 'quality-return-results';
+    link.href = source;
+    link.innerHTML = '<i class="fa-solid fa-arrow-left"></i><span>Voltar para ' + esc(browseSourceLabel(source)) + '</span>';
+    link.addEventListener('click', function(){
+      try { sessionStorage.setItem(BROWSE_RESTORE_KEY, JSON.stringify({source:source, at:Date.now()})); } catch (_) {}
+    });
+    var breadcrumb = box.querySelector('.quality-product-breadcrumb');
+    if (breadcrumb) box.insertBefore(link, breadcrumb); else box.insertBefore(link, box.firstChild);
+  }
+
+  function restoreBrowsePosition(){
+    if (currentProductSlug()) return;
+    var context = readBrowseContext();
+    if (!context || !context.source) return;
+    var current = internalPath(window.location.href);
+    if (!current || current !== internalPath(context.source)) return;
+
+    var explicit = false;
+    try {
+      var restore = JSON.parse(sessionStorage.getItem(BROWSE_RESTORE_KEY) || 'null');
+      explicit = !!(restore && restore.source && internalPath(restore.source) === current && (Date.now() - Number(restore.at || 0)) < BROWSE_CONTEXT_TTL);
+      if (explicit) sessionStorage.removeItem(BROWSE_RESTORE_KEY);
+    } catch (_) {}
+
+    var backForward = false;
+    try {
+      var nav = performance.getEntriesByType && performance.getEntriesByType('navigation')[0];
+      backForward = !!(nav && nav.type === 'back_forward');
+    } catch (_) {}
+    if (!explicit && !backForward) return;
+
+    var target = Math.max(0, Number(context.scrollY || 0));
+    if (!target) return;
+    var attempts = 0;
+    function apply(){
+      attempts++;
+      // Se o próprio navegador já restaurou praticamente no ponto certo, não briga com ele.
+      if (Math.abs((window.scrollY || 0) - target) <= 8) return;
+      var maxScroll = Math.max(0, document.documentElement.scrollHeight - window.innerHeight);
+      if (maxScroll >= target - 24 || attempts >= 18) {
+        window.scrollTo(0, Math.min(target, maxScroll));
+        return;
+      }
+      window.setTimeout(apply, 90);
+    }
+    window.setTimeout(apply, 40);
+  }
+
+  function bindBrowseContinuity(){
+    if (window.__qualityBrowseContinuityV1) return;
+    window.__qualityBrowseContinuityV1 = true;
+    function captureFromEvent(event){
+      var link = event.target && event.target.closest && event.target.closest('a[href*="/produto/"]');
+      if (!link) return;
+      captureBrowseContext(link.getAttribute('href'));
+    }
+    document.addEventListener('pointerdown', captureFromEvent, true);
+    document.addEventListener('click', captureFromEvent, true);
+    window.QualityStorefrontNavigation = window.QualityStorefrontNavigation || {};
+    window.QualityStorefrontNavigation.capture = captureBrowseContext;
+    window.addEventListener('pageshow', function(){ window.setTimeout(restoreBrowsePosition, 0); });
+    restoreBrowsePosition();
+  }
+
+  function syncMobileProductCta(product, href){
+    var bar = document.querySelector('.quality-mobile-product-cta');
+    if (!bar) return;
+    var link = bar.querySelector('a');
+    if (link && href) link.href = href;
+    var label = bar.querySelector('[data-quality-mobile-cta-label]');
+    if (label) label.textContent = 'Atendimento da Quality';
+  }
+
+  function ensureMobileProductCta(product){
+    var primary = document.querySelector('.quality-product-whatsapp-primary');
+    if (!primary) return;
+    var bar = document.querySelector('.quality-mobile-product-cta');
+    if (!bar) {
+      bar = document.createElement('div');
+      bar.className = 'quality-mobile-product-cta';
+      bar.setAttribute('aria-hidden','true');
+      bar.innerHTML = '<div class="quality-mobile-product-cta-copy"><small data-quality-mobile-cta-label>Atendimento da Quality</small><strong>Falar sobre este produto</strong></div>' +
+        '<a target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-whatsapp"></i><span>WhatsApp</span></a>';
+      document.body.appendChild(bar);
+    }
+    syncMobileProductCta(product, primary.href);
+    if (bar.dataset.qualityCtaBound === '1') return;
+    bar.dataset.qualityCtaBound = '1';
+
+    function setVisible(primaryVisible){
+      var mobile = window.matchMedia ? window.matchMedia('(max-width: 850px)').matches : window.innerWidth <= 850;
+      var enoughScroll = (window.scrollY || 0) > 180;
+      var blocked = document.body.classList.contains('quality-gallery-viewer-open') || document.body.classList.contains('quality-interest-open') || document.body.classList.contains('quality-favorites-open');
+      var show = mobile && enoughScroll && !primaryVisible && !blocked;
+      bar.classList.toggle('is-visible', show);
+      bar.setAttribute('aria-hidden', show ? 'false' : 'true');
+      document.body.classList.toggle('quality-mobile-cta-active', show);
+    }
+
+    if (mobileProductCtaObserver) try { mobileProductCtaObserver.disconnect(); } catch (_) {}
+    if ('IntersectionObserver' in window) {
+      mobileProductCtaObserver = new IntersectionObserver(function(entries){
+        var entry = entries && entries[0];
+        setVisible(!!(entry && entry.isIntersecting && entry.intersectionRatio > .12));
+      }, {threshold:[0,.12,.5,1]});
+      mobileProductCtaObserver.observe(primary);
+    } else {
+      var fallback = function(){
+        var rect = primary.getBoundingClientRect();
+        setVisible(rect.bottom > 0 && rect.top < window.innerHeight);
+      };
+      window.addEventListener('scroll', fallback, {passive:true});
+      window.addEventListener('resize', fallback);
+      fallback();
+    }
+    window.addEventListener('scroll', function(){
+      if (!mobileProductCtaObserver) return;
+      var rect = primary.getBoundingClientRect();
+      setVisible(rect.bottom > 0 && rect.top < window.innerHeight);
+    }, {passive:true});
+    window.addEventListener('resize', function(){
+      var rect = primary.getBoundingClientRect();
+      setVisible(rect.bottom > 0 && rect.top < window.innerHeight);
+    });
   }
 
   function brandOf(product){
@@ -2250,6 +2441,7 @@
       var message = 'Olá! Vim através do site da Quality Celulares e tenho interesse em ' + (product.name || product.nome || 'este produto') + (detail ? ' — ' + detail : '');
       whatsapp.href = 'https://wa.me/' + WHATSAPP_NUMBER + '?text=' + encodeURIComponent(message);
       whatsapp.innerHTML = '<i class="fa-brands fa-whatsapp"></i> Comprar no WhatsApp';
+      syncMobileProductCta(product, whatsapp.href);
     }
   }
 
@@ -2269,6 +2461,8 @@
     var layout = box && box.querySelector('.produto-layout');
     if (!box || !layout) return false;
     if (layout.dataset.qualityMarketplaceReady === '1') {
+      ensureReturnToResultsLink();
+      ensureMobileProductCta(product);
       updateProductCommercialCard(product);
       return true;
     }
@@ -2281,6 +2475,7 @@
     if (!gallery || !info) return false;
 
     if (!box.querySelector('.quality-product-breadcrumb')) box.insertAdjacentHTML('afterbegin', productBreadcrumb(product));
+    ensureReturnToResultsLink();
 
     var name = product.name || product.nome || 'Produto';
     var brand = brandOf(product);
@@ -2343,6 +2538,7 @@
     addProductCompareButton(product,buybox);
 
     layout.appendChild(buybox);
+    ensureMobileProductCta(product);
 
     var description = info.querySelector('.produto-descricao-box');
     if (description) {
@@ -2555,6 +2751,7 @@
   }
 
   function init(){
+    bindBrowseContinuity();
     injectCompareStyles();
     eventBindings();
     bindSearchSubmitOverride();

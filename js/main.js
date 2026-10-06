@@ -385,6 +385,11 @@ function initSwiper() {
 
   function navigate(url){
     if (!url) return;
+    try {
+      if (window.QualityStorefrontNavigation && typeof window.QualityStorefrontNavigation.capture === 'function') {
+        window.QualityStorefrontNavigation.capture(url);
+      }
+    } catch (_) {}
     window.location.assign(url);
   }
 
@@ -417,7 +422,7 @@ function initSwiper() {
   if (window.__qualityStorefrontLoaderV1) return;
   window.__qualityStorefrontLoaderV1 = true;
   var script = document.createElement('script');
-  script.src = '/js/storefront-enhancements.js?v=20261005-imgopt1';
+  script.src = '/js/storefront-enhancements.js?v=20261006-nav1';
   script.defer = true;
   document.head.appendChild(script);
 })();

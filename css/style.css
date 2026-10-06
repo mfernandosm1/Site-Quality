@@ -2473,3 +2473,113 @@ img{
     min-height: 420px;
   }
 }
+
+/* =====================================================================
+   Quality Rodada 4 - continuidade de navegação + CTA móvel
+   - preserva o ponto da vitrine ao abrir/voltar de um produto
+   - mantém o mesmo WhatsApp acessível no mobile somente quando necessário
+===================================================================== */
+.quality-return-results{
+  display:inline-flex;
+  align-items:center;
+  gap:7px;
+  min-height:34px;
+  margin:0 0 9px;
+  padding:0 3px;
+  color:#4b5563;
+  text-decoration:none;
+  font-size:13px;
+  font-weight:700;
+}
+.quality-return-results i{font-size:11px;color:#6b7280;transition:transform .16s ease}
+.quality-return-results:hover{color:#111827;text-decoration:none}
+.quality-return-results:hover i{transform:translateX(-2px)}
+
+.quality-mobile-product-cta{display:none}
+
+@media(max-width:850px){
+  .quality-return-results{
+    min-height:38px;
+    margin-bottom:6px;
+    font-size:12px;
+  }
+
+  .quality-mobile-product-cta{
+    position:fixed;
+    left:10px;
+    right:10px;
+    bottom:calc(10px + env(safe-area-inset-bottom,0px));
+    z-index:1400;
+    box-sizing:border-box;
+    display:grid;
+    grid-template-columns:minmax(0,1fr) auto;
+    align-items:center;
+    gap:12px;
+    min-height:60px;
+    padding:8px 9px 8px 13px;
+    border:1px solid rgba(17,24,39,.10);
+    border-radius:14px;
+    background:rgba(255,255,255,.97);
+    box-shadow:0 10px 32px rgba(15,23,42,.18);
+    -webkit-backdrop-filter:blur(10px);
+    backdrop-filter:blur(10px);
+    opacity:0;
+    pointer-events:none;
+    transform:translateY(18px);
+    transition:opacity .18s ease,transform .18s ease;
+  }
+  .quality-mobile-product-cta.is-visible{
+    opacity:1;
+    pointer-events:auto;
+    transform:translateY(0);
+  }
+  .quality-mobile-product-cta-copy{
+    min-width:0;
+    display:flex;
+    flex-direction:column;
+    gap:2px;
+  }
+  .quality-mobile-product-cta-copy small{
+    color:#6b7280;
+    font-size:10px;
+    line-height:1.2;
+  }
+  .quality-mobile-product-cta-copy strong{
+    overflow:hidden;
+    color:#111827;
+    font-size:12px;
+    line-height:1.25;
+    white-space:nowrap;
+    text-overflow:ellipsis;
+  }
+  .quality-mobile-product-cta>a{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    gap:7px;
+    min-height:43px;
+    padding:0 14px;
+    border-radius:10px;
+    background:#25d366;
+    color:#fff!important;
+    text-decoration:none!important;
+    font-size:13px;
+    font-weight:800;
+    white-space:nowrap;
+  }
+  .quality-mobile-product-cta>a:active{transform:translateY(1px)}
+  body.quality-mobile-cta-active{padding-bottom:calc(78px + env(safe-area-inset-bottom,0px))}
+  body.quality-gallery-viewer-open .quality-mobile-product-cta,
+  body.quality-interest-open .quality-mobile-product-cta,
+  body.quality-favorites-open .quality-mobile-product-cta{
+    opacity:0!important;
+    pointer-events:none!important;
+    transform:translateY(18px)!important;
+  }
+}
+
+@media(max-width:380px){
+  .quality-mobile-product-cta{left:7px;right:7px;gap:8px;padding-left:10px}
+  .quality-mobile-product-cta>a{padding:0 11px;font-size:12px}
+  .quality-mobile-product-cta-copy strong{font-size:11px}
+}
