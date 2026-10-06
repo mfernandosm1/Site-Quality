@@ -2082,6 +2082,18 @@ body.quality-interest-open { overflow: hidden; }
   padding-top: 0;
   justify-content: flex-start;
 }
+
+/* QUALITY_MOBILE_CATEGORY_OVERFLOW_FIX_V1
+   Corrige overflow horizontal nas categorias quando o painel de filtros envolve
+   o container de produtos. width:100% + padding agora permanece dentro da coluna. */
+.quality-category-layout,
+.quality-category-layout > #produtos-container,
+.quality-category-layout > .products,
+.quality-category-layout > .produtos-container {
+  box-sizing: border-box;
+  min-width: 0;
+  max-width: 100%;
+}
 .quality-category-filters {
   position: sticky;
   top: 18px;
