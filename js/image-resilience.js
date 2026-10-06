@@ -1,12 +1,12 @@
 /*
- * Quality Image Resilience V1.1.0 - 2026-10-05
+ * Quality Image Resilience V1.2.0 - 2026-10-06
  * Recupera falhas transitórias de imagens de produtos sem exigir F5.
  * Escopo conservador: cards de produto/relacionados/favoritos.
  */
 (function(){
   'use strict';
-  if (window.__qualityImageResilienceV11) return;
-  window.__qualityImageResilienceV11 = true;
+  if (window.__qualityImageResilienceV12) return;
+  window.__qualityImageResilienceV12 = true;
 
   var SELECTOR = '.produto-card img, .product-card img, .produto-relacionado-card img, .quality-favorites-panel-item img';
   var FALLBACK = '/images/sem-imagem.png';
@@ -160,6 +160,16 @@
     }, RETRY_DELAYS[Math.min(attempt - 1, RETRY_DELAYS.length - 1)]);
   }
 
+  function isRendered(img, rect){
+    try {
+      if (!img || !img.isConnected) return false;
+      if (img.closest && img.closest('[hidden]')) return false;
+      if (img.getClientRects && img.getClientRects().length === 0) return false;
+      rect = rect || img.getBoundingClientRect();
+      return !!(rect && rect.width > 1 && rect.height > 1);
+    } catch (_) { return false; }
+  }
+
   function prepare(img){
     if (!eligible(img) || img.dataset.qualityImageManaged === '1') return;
     img.dataset.qualityImageManaged = '1';
@@ -168,22 +178,35 @@
 
     try {
       var rect = img.getBoundingClientRect();
-      var nearViewport = rect.bottom >= -80 && rect.top <= (window.innerHeight || 800) * 1.20;
-      if (nearViewport) {
-        img.loading = 'eager';
-        if (priorityBudget > 0 && rect.top < (window.innerHeight || 800)) {
-          img.setAttribute('fetchpriority', 'high');
-          priorityBudget -= 1;
+      var rendered = isRendered(img, rect);
+      var viewportH = window.innerHeight || 800;
+      var viewportW = window.innerWidth || 1280;
+      var nearVertically = rendered && rect.bottom >= -80 && rect.top <= viewportH * 1.20;
+      var nearHorizontally = rendered && rect.right >= -120 && rect.left <= viewportW * 1.20;
+      var nearViewport = nearVertically && nearHorizontally;
+      var explicitLoading = String(img.getAttribute('loading') || '').toLowerCase();
+
+      // Importante: blocos ocultos e cards que ainda estao fora do carrossel visivel
+      // nunca devem virar eager. Na Home isso fazia dezenas de imagens iniciarem juntas.
+      if (!rendered || !nearViewport) {
+        if (!explicitLoading || explicitLoading !== 'eager') img.loading = 'lazy';
+        if (!img.getAttribute('fetchpriority')) img.setAttribute('fetchpriority', 'low');
+      } else {
+        // Respeita prioridades explicitas do HTML (ex.: primeiras imagens da vitrine).
+        if (!explicitLoading) img.loading = 'eager';
+        if (priorityBudget > 0 && rect.top < viewportH && rect.bottom > 0 && rect.left < viewportW && rect.right > 0) {
+          if (!img.getAttribute('fetchpriority') || img.getAttribute('fetchpriority') === 'auto') {
+            img.setAttribute('fetchpriority', 'high');
+            priorityBudget -= 1;
+          }
         } else if (!img.getAttribute('fetchpriority')) {
-          img.setAttribute('fetchpriority', 'auto');
+          img.setAttribute('fetchpriority', explicitLoading === 'lazy' ? 'low' : 'auto');
         }
-      } else if (!img.getAttribute('loading')) {
-        img.loading = 'lazy';
       }
     } catch (_) {}
 
     // O fallback inline antigo impediria o retry. A partir daqui esta rotina assume o tratamento.
-    try { img.onerror = null; } catch (_) {}
+    try { img.onerror = null; img.removeAttribute('onerror'); } catch (_) {}
   }
 
   function scan(root){
@@ -196,7 +219,7 @@
     var img = ev && ev.target;
     if (!eligible(img)) return;
     prepare(img);
-    try { img.onerror = null; } catch (_) {}
+    try { img.onerror = null; img.removeAttribute('onerror'); } catch (_) {}
     // Se a copia WebP otimizada falhar, volta primeiro para a foto original.
     // So depois disso entram as tentativas automaticas da camada de resiliencia.
     if (useOriginalFallback(img)) return;

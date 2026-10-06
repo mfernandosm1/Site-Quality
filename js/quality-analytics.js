@@ -1,6 +1,6 @@
 (function(){
-  if(window.__qualitySiteAnalyticsV13) return;
-  window.__qualitySiteAnalyticsV13 = true;
+  if(window.__qualitySiteAnalyticsV14) return;
+  window.__qualitySiteAnalyticsV14 = true;
 
   var ENDPOINT = 'https://script.google.com/macros/s/AKfycbwZQ01q5u5lRqE3Hk-nMutkTWcLA8r7127sO3Dt132Ti8L0Ci7DWoOyby5v92T_WY34/exec';
   var KEY = 'quality-analytics-v1';
@@ -348,10 +348,24 @@
       viewport:viewport(), Viewport:viewport(), timezone:timezone, Timezone:timezone
     };
   }
-  function postAppsScript(obj){
+  function isCriticalEvent(type){
+    return type === 'whatsapp_click' || type === 'product_view' || type === 'favorite' || type === 'list_add' || type === 'share_click';
+  }
+  function postAppsScript(obj,type){
     if(isLocal()) return Promise.resolve(false);
+    var body='';
+    try { body=JSON.stringify(obj); } catch(e) { return Promise.resolve(false); }
+
+    // Cliques de intencao de compra precisam sobreviver a troca de aba/app.
+    // sendBeacon entrega o POST ao navegador antes de abrir o WhatsApp; se o
+    // navegador nao aceitar a fila, cai no fetch keepalive usado anteriormente.
+    if(isCriticalEvent(type) && navigator.sendBeacon){
+      try {
+        if(navigator.sendBeacon(ENDPOINT, body)) return Promise.resolve(true);
+      } catch(e){}
+    }
     try {
-      return fetch(ENDPOINT,{method:'POST',mode:'no-cors',credentials:'omit',redirect:'follow',cache:'no-store',keepalive:true,headers:{'Content-Type':'text/plain;charset=UTF-8'},body:JSON.stringify(obj)})
+      return fetch(ENDPOINT,{method:'POST',mode:'no-cors',credentials:'omit',redirect:'follow',cache:'no-store',keepalive:true,headers:{'Content-Type':'text/plain;charset=UTF-8'},body:body})
         .then(function(){return true;}).catch(function(){return false;});
     } catch(e){ return Promise.resolve(false); }
   }
@@ -368,7 +382,7 @@
     if(type === 'search' && data.term) lastSearchTerm = data.term;
     if(isDuplicate(type,data)) return false;
     var obj = payloadObject(type,data);
-    postAppsScript(obj);
+    postAppsScript(obj,type);
     postLocalhost(obj);
     return true;
   }
