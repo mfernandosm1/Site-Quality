@@ -109,6 +109,13 @@
       </div>
     </section>
 
+    <section class="quality-home-section quality-home-brands" data-home-section="brands" hidden="">
+      <div class="quality-home-heading">
+        <div><h2 id="home-brands-title">Encontre por marca</h2><p>Vá direto para as marcas que você procura</p></div>
+      </div>
+      <div class="quality-home-brand-grid" id="home-brands-grid"></div>
+    </section>
+
     <section class="quality-home-section" data-home-section="featured">
       <div class="quality-home-heading"><div><h2 id="home-featured-title">Produtos em destaque</h2><p>Uma seleção da Quality para você conferir</p></div></div>
       <div class="carousel-container quality-home-carousel">
@@ -117,23 +124,6 @@
         <button class="carousel-arrow right" onclick="scrollCarousel(1)" aria-label="Próximo">❯</button>
       </div>
       <p id="no-results" class="em-breve" style="display:none; text-align:center; margin-top:20px;">Nenhum produto na vitrine ainda.</p>
-    </section>
-
-    <section class="quality-home-section" data-home-section="recent" hidden="">
-      <div class="quality-home-heading"><div><h2 id="home-recent-title">Vistos recentemente</h2><p>Continue de onde parou</p></div></div>
-      <div class="carousel-container quality-home-carousel"><button class="carousel-arrow left" onclick="qualityHomeScroll('home-recent-track',-1)" aria-label="Anterior">❮</button><div class="carousel-track" id="home-recent-track"></div><button class="carousel-arrow right" onclick="qualityHomeScroll('home-recent-track',1)" aria-label="Próximo">❯</button></div>
-    </section>
-
-    <section class="quality-home-section quality-home-personalized" data-home-section="recommended" hidden="">
-      <div class="quality-home-heading"><div><h2 id="home-recommended-title">Você pode gostar</h2><p>Selecionados a partir do que você viu na Quality</p></div></div>
-      <div class="carousel-container quality-home-carousel"><button class="carousel-arrow left" onclick="qualityHomeScroll('home-recommended-track',-1)" aria-label="Anterior">❮</button><div class="carousel-track" id="home-recommended-track"></div><button class="carousel-arrow right" onclick="qualityHomeScroll('home-recommended-track',1)" aria-label="Próximo">❯</button></div>
-    </section>
-
-    <section class="quality-home-section quality-home-brands" data-home-section="brands" hidden="">
-      <div class="quality-home-heading">
-        <div><h2 id="home-brands-title">Encontre por marca</h2><p>Vá direto para as marcas que você procura</p></div>
-      </div>
-      <div class="quality-home-brand-grid" id="home-brands-grid"></div>
     </section>
 
     <section class="quality-home-section" data-home-section="new" hidden="">
@@ -162,10 +152,20 @@
 <section class="quality-home-section quality-home-trust" data-home-section="trust">
       <div class="quality-home-trust-grid">
         <div><i class="fa-solid fa-calendar-check"></i><span><strong>Desde 2014</strong><small>Experiência e atendimento próximo</small></span></div>
-        <div><i class="fa-solid fa-store"></i><span><strong>Loja física</strong><small>Empresa real em Saldanha Marinho (RS)</small></span></div>
+        <div><i class="fa-solid fa-store"></i><span><strong>Loja física e online</strong><small>Atendimento online e ponto físico em Saldanha Marinho (RS)</small></span></div>
         <div><i class="fa-solid fa-comments"></i><span><strong>Atendimento humano</strong><small>Fale direto com nossa equipe</small></span></div>
         <div><i class="fa-solid fa-shield-halved"></i><span><strong>Compra segura</strong><small><a href="seguranca.html">Confira nossos cuidados e canais oficiais</a></small></span></div>
       </div>
+    </section>
+
+    <section class="quality-home-section quality-home-personalized" data-home-section="recommended" hidden="">
+      <div class="quality-home-heading"><div><h2 id="home-recommended-title">Você pode gostar</h2><p>Selecionados a partir do que você viu na Quality</p></div></div>
+      <div class="carousel-container quality-home-carousel"><button class="carousel-arrow left" onclick="qualityHomeScroll('home-recommended-track',-1)" aria-label="Anterior">❮</button><div class="carousel-track" id="home-recommended-track"></div><button class="carousel-arrow right" onclick="qualityHomeScroll('home-recommended-track',1)" aria-label="Próximo">❯</button></div>
+    </section>
+
+    <section class="quality-home-section" data-home-section="recent" hidden="">
+      <div class="quality-home-heading"><div><h2 id="home-recent-title">Vistos recentemente</h2><p>Continue de onde parou</p></div></div>
+      <div class="carousel-container quality-home-carousel"><button class="carousel-arrow left" onclick="qualityHomeScroll('home-recent-track',-1)" aria-label="Anterior">❮</button><div class="carousel-track" id="home-recent-track"></div><button class="carousel-arrow right" onclick="qualityHomeScroll('home-recent-track',1)" aria-label="Próximo">❯</button></div>
     </section>
   </main>
   <div id="footer"></div>
@@ -610,7 +610,7 @@
   })();
   </script>
 
-  <script src="/js/home-marketplace.js?v=20261006-home1"></script>
+  <script src="/js/home-marketplace.js?v=20261005-imgopt1"></script>
 
   <script>
   // V8.0.1 - Busca reforçada na Home sem mexer no main.js
