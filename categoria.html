@@ -11,7 +11,7 @@
   <meta property="og:url" content="https://www.qualitycel.com.br/categoria.html">
   <meta name="twitter:card" content="summary_large_image">
   <link rel="canonical" href="https://www.qualitycel.com.br/categoria.html">
-  <link rel="stylesheet" href="/css/style.css?v=20261006-nav1">
+  <link rel="stylesheet" href="/css/style.css?v=20261008-guidehome1">
     <!-- QUALITY_PERFORMANCE_MOBILE_V1: antecipa os webfonts dos ícones no mobile -->
   <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin="">
   <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin="">
@@ -57,6 +57,23 @@
 .mobile-nav .cat-sub-link-mobile{font-size:.92em;opacity:.9;padding-top:7px!important;padding-bottom:7px!important}
 @media(max-width:850px){.nav-desktop .cat-menu-group{display:none}}
 </style>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -258,28 +275,14 @@
   </div>
   <div id="produtos-container" class="products" style="margin-top:40px;"></div>
 </main>
-<footer class="footer bg-gray-900 text-gray-300 py-8 mt-12">
-  <div class="footer-container max-w-6xl mx-auto px-4">
-    <div class="footer-links">
-      <a href="sobre.html">Sobre nós</a>
-      <a href="formas-de-pagamento.html">Formas de pagamento e envio</a>
-    </div>
-
-    <div class="footer-copy">
-      <span class="nobreak">© 2014 - 2026 Quality Celulares. Todos os direitos reservados.</span><br>
-      CNPJ: 20.375.910/0001-66
-    </div>
-
-    
-    <div class="footer-socials">
-      <a href="https://www.facebook.com/share/17KnAHN57D/?mibextid=wwXIfr" class="facebook" aria-label="Facebook" target="_blank" title="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
-      <a href="https://www.instagram.com/qualitycelulares_ibi/" class="instagram" aria-label="Instagram ibiruba" target="_blank" title="Instagram ibiruba"><i class="fa-brands fa-instagram"></i></a>
-      <a href="https://www.instagram.com/quality_celulares/" class="instagram" aria-label="Instagram Saldanha" target="_blank" title="Instagram Saldanha"><i class="fa-brands fa-instagram"></i></a>
-      <a href="https://www.tiktok.com/@quality_celulares?lang=en" class="tiktok" aria-label="Tiktok" target="_blank" title="Tiktok"><i class="fa-brands fa-tiktok"></i></a>
-      <a href="https://www.google.com/maps/place/Quality+Celulares/@-28.3998065,-53.0951354,17z/data=!3m1!4b1!4m6!3m5!1s0x94fd142bd7e83fcf:0x28cba94eec608ef!8m2!3d-28.3998065!4d-53.0951354!16s%2Fg%2F11hcz_j2q3?entry=ttu&amp;g_ep=EgoyMDI2MDYwMS4wIKXMDSoASAFQAw%3D%3D" class="location" aria-label="Localização" target="_blank" title="Localização"><i class="fa-solid fa-location-dot"></i></a>
-    </div>
-  </div>
-</footer>
+<div id="footer"></div>
+<script data-quality-footer-loader="">
+(function(){
+  fetch('/footer.html').then(function(r){ if(!r.ok) throw new Error('footer'); return r.text(); }).then(function(html){
+    var el=document.getElementById('footer'); if(el) el.innerHTML=html;
+  }).catch(function(){});
+})();
+</script>
 <script>
 (function(){
   function normalizeText(v){
@@ -1068,5 +1071,5 @@
 
 <script src="/js/image-resilience.js?v=20261006-fix1"></script>
 
-<script src="/js/quality-analytics.js?v=20261006-fix1"></script>
+<script src="/js/quality-analytics.js?v=20261006-fix2"></script>
 </body></html>

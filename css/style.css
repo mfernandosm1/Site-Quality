@@ -2442,8 +2442,6 @@ img{
 @media(max-width:560px){.quality-search-suggestions{width:min(430px,calc(100vw - 18px));max-height:min(70vh,540px);overflow:auto}.quality-search-summary{font-size:11px}.quality-search-recovery{padding:26px 16px}.quality-search-recovery h2{font-size:19px}.quality-search-recovery-actions{display:grid}.quality-search-recovery-actions a{width:100%}.quality-search-alternative-grid{grid-template-columns:1fr}.quality-search-alternative-grid a{min-height:62px}}
 
 /* Página Compra Segura */
-.quality-security-page{width:min(1120px,calc(100% - 32px));margin:34px auto 58px;color:#111827}.quality-security-hero{display:grid;grid-template-columns:72px 1fr;gap:20px;align-items:center;padding:30px;border:1px solid #e5e7eb;border-radius:18px;background:linear-gradient(135deg,#fff,#f8fafc);box-shadow:0 6px 22px rgba(15,23,42,.05)}.quality-security-icon{display:grid;place-items:center;width:68px;height:68px;border-radius:18px;background:#eff6ff;color:#2563eb;font-size:30px}.quality-security-kicker{display:block;margin-bottom:5px;color:#2563eb;font-size:11px;font-weight:900;text-transform:uppercase;letter-spacing:.08em}.quality-security-hero h1,.quality-security-official h2{margin:0;color:#111827}.quality-security-hero h1{font-size:32px}.quality-security-hero p,.quality-security-official p{margin:8px 0 0;color:#6b7280;line-height:1.55}.quality-security-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin-top:18px}.quality-security-grid article{padding:22px;border:1px solid #e5e7eb;border-radius:14px;background:#fff}.quality-security-grid article>i{font-size:22px;color:#2563eb;margin-bottom:13px}.quality-security-grid h2{margin:0 0 7px;font-size:17px}.quality-security-grid p{margin:0;color:#6b7280;font-size:13px;line-height:1.55}.quality-security-official{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:26px;align-items:center;margin-top:18px;padding:26px 28px;border:1px solid #e5e7eb;border-radius:16px;background:#fff}.quality-security-actions{display:grid;gap:8px;min-width:220px}.quality-security-actions a{display:flex;align-items:center;justify-content:center;gap:8px;min-height:44px;border-radius:8px;text-decoration:none;font-size:12px;font-weight:900}.quality-security-whatsapp{background:#25d366;color:#fff}.quality-security-secondary{border:1px solid #d1d5db;color:#111827;background:#fff}.quality-security-alert{display:flex;gap:12px;align-items:flex-start;margin-top:18px;padding:17px 19px;border:1px solid #fde68a;border-radius:12px;background:#fffbeb}.quality-security-alert>i{color:#d97706;margin-top:2px}.quality-security-alert strong{font-size:13px}.quality-security-alert p{margin:3px 0 0;color:#6b7280;font-size:12px;line-height:1.45}
-@media(max-width:760px){.quality-security-page{width:calc(100% - 24px);margin-top:22px}.quality-security-hero{grid-template-columns:1fr;padding:22px}.quality-security-icon{width:54px;height:54px;border-radius:14px;font-size:24px}.quality-security-hero h1{font-size:25px}.quality-security-grid{grid-template-columns:1fr}.quality-security-official{grid-template-columns:1fr;padding:22px}.quality-security-actions{min-width:0}}
 
 
 /* =========================================================
@@ -2583,3 +2581,308 @@ img{
   .quality-mobile-product-cta>a{padding:0 11px;font-size:12px}
   .quality-mobile-product-cta-copy strong{font-size:11px}
 }
+
+
+/* =========================================================
+   QUALITY HOME V1.5 - Rodada 5 / descoberta mais objetiva
+   - marcas compactas no mobile, sem ticker automático
+   - confiança em 2x2 no celular para reduzir rolagem
+========================================================= */
+@media (max-width:560px){
+  .quality-home-brands .quality-home-heading{margin-bottom:10px}
+  .quality-home-brand-grid{
+    display:flex;
+    grid-template-columns:none;
+    gap:9px;
+    overflow-x:auto;
+    overflow-y:hidden;
+    margin:0 -12px;
+    padding:2px 12px 8px;
+    scroll-snap-type:x proximity;
+    overscroll-behavior-x:contain;
+    -webkit-overflow-scrolling:touch;
+    scrollbar-width:none;
+  }
+  .quality-home-brand-grid::-webkit-scrollbar{display:none}
+  .quality-home-brand-card{
+    flex:0 0 min(70vw,230px);
+    width:min(70vw,230px);
+    min-height:66px;
+    padding:10px 12px;
+    scroll-snap-align:start;
+  }
+  .quality-home-brand-mark{width:40px;height:40px;flex-basis:40px}
+
+  .quality-home-trust-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .quality-home-trust-grid>div{
+    min-width:0;
+    padding:12px 10px!important;
+    align-items:flex-start;
+    border-right:1px solid #eef0f3!important;
+    border-bottom:1px solid #eef0f3!important;
+  }
+  .quality-home-trust-grid>div:nth-child(2n){border-right:0!important}
+  .quality-home-trust-grid>div:nth-last-child(-n+2){border-bottom:0!important}
+  .quality-home-trust-grid i{font-size:18px;width:22px;flex:0 0 22px}
+  .quality-home-trust-grid strong{font-size:11.5px}
+  .quality-home-trust-grid small{font-size:9.5px;line-height:1.35}
+}
+
+/* =========================================================
+   GUIA QUALITY · Home + rodapé editorial (2026-10)
+========================================================= */
+.quality-guide-home-grid{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:14px;
+  min-width:0;
+}
+.quality-guide-home-card{
+  display:grid;
+  grid-template-columns:116px minmax(0,1fr);
+  gap:12px;
+  align-items:center;
+  border:1px solid #e5e7eb;
+  border-radius:16px;
+  background:#fff;
+  color:#111827;
+  text-decoration:none;
+  padding:10px;
+  min-width:0;
+  box-sizing:border-box;
+  transition:transform .18s ease,border-color .18s ease,box-shadow .18s ease;
+}
+.quality-guide-home-card.no-cover{grid-template-columns:minmax(0,1fr);align-content:start}
+.quality-guide-home-card:hover{transform:translateY(-2px);border-color:#d1d5db;box-shadow:0 8px 24px rgba(15,23,42,.08)}
+.quality-guide-home-cover{height:94px;border-radius:12px;background:#f8fafc;display:flex;align-items:center;justify-content:center;overflow:hidden;min-width:0}
+.quality-guide-home-cover img{width:100%;height:100%;object-fit:contain}
+.quality-guide-home-copy{display:grid;gap:5px;min-width:0;align-content:start}
+.quality-guide-home-copy small{font-size:9px;text-transform:uppercase;letter-spacing:.06em;font-weight:900;color:#c90000}
+.quality-guide-home-copy strong{
+  font-size:13px;
+  line-height:1.3;
+  overflow:hidden;
+  display:-webkit-box;
+  -webkit-box-orient:vertical;
+  -webkit-line-clamp:3;
+}
+.quality-guide-home-copy em{font-size:11px;font-style:normal;color:#64748b;font-weight:700}
+@media(max-width:900px) and (min-width:641px){
+  .quality-guide-home-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .quality-guide-home-card{grid-template-columns:96px minmax(0,1fr)}
+  .quality-guide-home-card.no-cover{grid-template-columns:minmax(0,1fr)}
+  .quality-guide-home-cover{height:82px}
+}
+@media(max-width:640px){
+  .quality-guide-home{min-width:0;overflow:hidden}
+  .quality-guide-home-grid{
+    display:flex;
+    gap:12px;
+    width:100%;
+    max-width:100%;
+    min-width:0;
+    overflow-x:auto;
+    overflow-y:hidden;
+    padding:2px 18% 12px 1px;
+    box-sizing:border-box;
+    scroll-snap-type:x mandatory;
+    scroll-padding-inline:1px;
+    overscroll-behavior-inline:contain;
+    -webkit-overflow-scrolling:touch;
+    scrollbar-width:none;
+    touch-action:pan-x pan-y;
+  }
+  .quality-guide-home-grid::-webkit-scrollbar{display:none}
+  .quality-guide-home-card{
+    flex:0 0 82%;
+    width:82%;
+    max-width:310px;
+    min-height:132px;
+    grid-template-columns:82px minmax(0,1fr);
+    gap:10px;
+    padding:12px;
+    border-radius:16px;
+    scroll-snap-align:start;
+    scroll-snap-stop:normal;
+  }
+  .quality-guide-home-card:only-child{flex-basis:100%;width:100%;max-width:none}
+  .quality-guide-home-card.no-cover{
+    grid-template-columns:minmax(0,1fr);
+    min-height:132px;
+  }
+  .quality-guide-home-cover{height:78px;border-radius:10px}
+  .quality-guide-home-copy{gap:6px}
+  .quality-guide-home-copy small{font-size:10px;line-height:1.25}
+  .quality-guide-home-copy strong{font-size:15px;line-height:1.28;-webkit-line-clamp:3}
+  .quality-guide-home-copy em{font-size:12px;margin-top:2px}
+}
+.footer{padding:28px 20px}.footer-container.footer-container-guide{display:grid;grid-template-columns:minmax(260px,1.35fr) minmax(150px,.8fr) minmax(190px,1fr) minmax(150px,.8fr);gap:28px;align-items:start;text-align:left}.footer-nav-group{display:grid;gap:8px;align-content:start}.footer-nav-group strong{font-size:12px;text-transform:uppercase;letter-spacing:.05em;color:#fff}.footer-nav-group a{color:#cbd5e1;text-decoration:none;font-size:13px;line-height:1.3}.footer-nav-group a:hover{color:#fff}.footer-brand-block{display:grid;gap:10px}.footer-brand-block .footer-copy{order:unset;text-align:left;font-size:12px}.footer-socials.footer-socials-guide{order:unset;justify-content:flex-start;gap:8px}.footer-socials.footer-socials-guide a{width:40px;height:40px;font-size:17px}
+@media(max-width:900px){.footer-container.footer-container-guide{grid-template-columns:repeat(2,minmax(0,1fr));gap:22px}.footer-brand-block{grid-column:1/-1}.footer-socials.footer-socials-guide{justify-content:flex-start}}
+@media(max-width:600px){.footer{padding:24px 18px}.footer-container.footer-container-guide{grid-template-columns:repeat(2,minmax(0,1fr));grid-template-areas:"brand brand" "quality attendance" "services services";gap:20px 16px}.footer-brand-block{grid-area:brand}.footer-nav-quality{grid-area:quality}.footer-nav-attendance{grid-area:attendance}.footer-nav-services{grid-area:services;grid-template-columns:repeat(2,minmax(0,1fr));column-gap:14px}.footer-nav-services strong{grid-column:1/-1}.footer-nav-group strong{font-size:11px}.footer-nav-group a{font-size:12px}.footer-copy span.nobreak{white-space:normal}}
+@media(max-width:390px){.footer-container.footer-container-guide{grid-template-columns:1fr;grid-template-areas:"brand" "quality" "attendance" "services"}.footer-nav-services{grid-template-columns:1fr}.footer-nav-services strong{grid-column:auto}}
+
+
+/* Quality · Rodapé institucional v2 + páginas de outros serviços */
+.footer-container.footer-container-guide{max-width:1220px}
+.footer-nav-group{min-width:0}
+.footer-nav-group strong{display:block;margin-bottom:2px}
+.footer-nav-group a{width:max-content;max-width:100%}
+@media(max-width:600px){
+  .footer{padding:24px 14px}
+  .footer-container.footer-container-guide{
+    grid-template-columns:minmax(0,1fr) minmax(0,1fr);
+    grid-template-areas:"brand brand" "quality attendance" "services services";
+    gap:24px 22px;
+  }
+  .footer-brand-block{gap:12px}
+  .footer-brand-block .footer-copy{font-size:11px;line-height:1.5}
+  .footer-socials.footer-socials-guide{gap:10px;flex-wrap:wrap}
+  .footer-socials.footer-socials-guide a{width:42px;height:42px;font-size:17px}
+  .footer-nav-group{gap:9px}
+  .footer-nav-group strong{font-size:11px;letter-spacing:.07em}
+  .footer-nav-group a{font-size:13px;line-height:1.35}
+  .footer-nav-services{grid-template-columns:1fr!important;column-gap:0!important}
+  .footer-nav-services strong{grid-column:auto!important}
+}
+@media(max-width:360px){
+  .footer-container.footer-container-guide{
+    grid-template-columns:1fr;
+    grid-template-areas:"brand" "quality" "attendance" "services";
+  }
+}
+
+.quality-service-page{max-width:980px;margin:0 auto;padding:132px 20px 64px;color:#111827}
+.quality-service-hero{text-align:center;max-width:760px;margin:0 auto 30px}
+.quality-service-kicker{display:inline-flex;align-items:center;gap:8px;font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#b91c1c;background:#fef2f2;border:1px solid #fecaca;border-radius:999px;padding:7px 11px;margin-bottom:14px}
+.quality-service-hero h1{font-size:clamp(30px,5vw,44px);line-height:1.08;margin:0 0 12px;font-weight:850}
+.quality-service-hero p{margin:0;color:#64748b;font-size:16px;line-height:1.65}
+.quality-service-card{background:#fff;border:1px solid #e5e7eb;border-radius:20px;box-shadow:0 12px 35px rgba(15,23,42,.07);padding:28px}
+.quality-service-status{display:flex;align-items:center;gap:14px}
+.quality-service-status-icon{width:52px;height:52px;border-radius:16px;display:grid;place-items:center;background:#eff6ff;color:#2563eb;font-size:22px;flex:0 0 auto}
+.quality-service-status h2{margin:0 0 4px;font-size:20px}
+.quality-service-status p{margin:0;color:#64748b;line-height:1.55}
+.quality-service-actions{display:flex;justify-content:center;margin-top:24px}
+.quality-service-back{display:inline-flex;align-items:center;gap:8px;color:#334155;text-decoration:none;font-weight:750;border:1px solid #cbd5e1;border-radius:12px;padding:11px 16px;background:#fff}
+.quality-service-back:hover{background:#f8fafc}
+.quality-supplier-intro{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:22px}
+.quality-supplier-intro article{background:#f8fafc;border:1px solid #e2e8f0;border-radius:14px;padding:16px}
+.quality-supplier-intro strong{display:block;margin-bottom:5px}
+.quality-supplier-intro p{margin:0;color:#64748b;font-size:13px;line-height:1.5}
+.quality-supplier-form{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.quality-supplier-field{display:grid;gap:7px}
+.quality-supplier-field.full{grid-column:1/-1}
+.quality-supplier-field label,.quality-supplier-field legend{font-size:13px;font-weight:800;color:#334155}
+.quality-supplier-field input,.quality-supplier-field textarea,.quality-supplier-field select{width:100%;border:1px solid #cbd5e1;border-radius:11px;padding:11px 12px;background:#fff;color:#111827;font:inherit;box-sizing:border-box}
+.quality-supplier-field textarea{min-height:118px;resize:vertical}
+.quality-supplier-field input:focus,.quality-supplier-field textarea:focus,.quality-supplier-field select:focus{outline:3px solid rgba(37,99,235,.12);border-color:#2563eb}
+.quality-supplier-checks{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px}
+.quality-supplier-checks label{display:flex;align-items:center;gap:8px;border:1px solid #e2e8f0;border-radius:10px;padding:9px 10px;font-size:13px;font-weight:650;background:#fff}
+.quality-supplier-checks input{width:auto}
+.quality-supplier-consent{display:flex;align-items:flex-start;gap:9px;color:#64748b;font-size:12px;line-height:1.45}
+.quality-supplier-consent input{margin-top:3px}
+.quality-supplier-actions{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.quality-supplier-submit{border:0;border-radius:12px;background:#dc2626;color:#fff;font-weight:850;padding:12px 17px;cursor:pointer;display:inline-flex;align-items:center;gap:8px}
+.quality-supplier-submit:hover{background:#b91c1c}
+.quality-supplier-copy{border:1px solid #cbd5e1;border-radius:12px;background:#fff;color:#334155;font-weight:750;padding:11px 14px;cursor:pointer}
+.quality-supplier-feedback{font-size:13px;color:#475569;min-height:20px}
+.quality-supplier-note{margin:18px 0 0;padding-top:16px;border-top:1px solid #e5e7eb;color:#64748b;font-size:12px;line-height:1.55}
+@media(max-width:720px){
+  .quality-service-page{padding:112px 14px 46px}
+  .quality-service-card{padding:20px;border-radius:17px}
+  .quality-service-status{align-items:flex-start}
+  .quality-supplier-intro,.quality-supplier-form{grid-template-columns:1fr}
+  .quality-supplier-field.full{grid-column:auto}
+  .quality-supplier-checks{grid-template-columns:1fr 1fr}
+}
+@media(max-width:420px){
+  .quality-supplier-checks{grid-template-columns:1fr}
+  .quality-supplier-actions{align-items:stretch}
+  .quality-supplier-submit,.quality-supplier-copy{justify-content:center;width:100%}
+}
+
+/* Quality · refinamento mobile do rodapé + fornecedor na plataforma (2026-10-07) */
+.quality-supplier-honeypot{position:absolute!important;left:-10000px!important;top:auto!important;width:1px!important;height:1px!important;overflow:hidden!important;opacity:0!important;pointer-events:none!important}
+.quality-supplier-submit:disabled{opacity:.65;cursor:wait}
+.quality-supplier-feedback.success{color:#15803d;font-weight:750}
+.quality-supplier-feedback.error{color:#b91c1c;font-weight:750}
+@media(max-width:680px){
+  .footer{padding:28px 18px}
+  .footer-container.footer-container-guide{
+    width:100%;max-width:560px;margin:0 auto;
+    grid-template-columns:minmax(0,1fr) minmax(0,1fr)!important;
+    grid-template-areas:"brand brand" "quality attendance" "services services"!important;
+    gap:28px 18px!important;
+    align-items:start;
+  }
+  .footer-brand-block{grid-area:brand!important;justify-items:center;text-align:center;gap:14px}
+  .footer-brand-block .footer-copy{text-align:center!important;font-size:12px!important;line-height:1.55;margin:0 auto}
+  .footer-socials.footer-socials-guide{justify-content:center!important;align-items:center;gap:12px!important;width:100%}
+  .footer-socials.footer-socials-guide a{width:44px;height:44px}
+  .footer-nav-quality{grid-area:quality!important}
+  .footer-nav-attendance{grid-area:attendance!important}
+  .footer-nav-services{grid-area:services!important;grid-template-columns:1fr!important}
+  .footer-nav-group{justify-items:center!important;text-align:center!important;gap:10px!important}
+  .footer-nav-group strong{font-size:11px!important;letter-spacing:.09em;margin-bottom:3px!important}
+  .footer-nav-group a{font-size:13px!important;line-height:1.4;width:auto!important;max-width:100%;text-align:center}
+}
+@media(max-width:360px){
+  .footer-container.footer-container-guide{
+    max-width:360px;
+    grid-template-columns:1fr!important;
+    grid-template-areas:"brand" "quality" "attendance" "services"!important;
+    gap:26px!important;
+  }
+  .footer-nav-group{width:100%}
+  .footer-socials.footer-socials-guide{gap:10px!important}
+  .footer-socials.footer-socials-guide a{width:42px;height:42px}
+}
+@media(max-width:420px){
+  .quality-supplier-actions{justify-content:stretch}
+  .quality-supplier-submit{justify-content:center;width:100%}
+}
+
+
+/* Quality · refinamento visual fornecedor + rodapé mobile v4 (2026-10-07) */
+.quality-supplier-consent-row{display:block!important}
+.quality-supplier-consent{display:inline-flex!important;align-items:flex-start!important;gap:8px!important;max-width:760px;color:#475569!important;font-size:12px!important;line-height:1.45!important;font-weight:650!important;cursor:pointer}
+.quality-supplier-consent input[type="checkbox"]{width:17px!important;height:17px!important;min-width:17px!important;flex:0 0 17px!important;margin:1px 0 0!important;padding:0!important;border-radius:4px!important;accent-color:#dc2626}
+.quality-supplier-consent span{display:block;min-width:0}
+
+@media(max-width:680px){
+  .footer{padding:22px 16px 20px!important}
+  .footer-container.footer-container-guide{
+    max-width:520px!important;
+    grid-template-columns:minmax(0,1fr) minmax(0,1fr)!important;
+    grid-template-areas:"brand brand" "quality attendance" "services services"!important;
+    gap:18px 14px!important;
+  }
+  .footer-brand-block{gap:9px!important}
+  .footer-brand-block .footer-copy{font-size:11px!important;line-height:1.45!important;max-width:390px}
+  .footer-socials.footer-socials-guide{gap:8px!important;margin-top:2px}
+  .footer-socials.footer-socials-guide a{width:39px!important;height:39px!important;font-size:16px!important}
+  .footer-nav-group{gap:6px!important}
+  .footer-nav-group strong{font-size:10.5px!important;letter-spacing:.08em!important;margin-bottom:1px!important}
+  .footer-nav-group a{font-size:12px!important;line-height:1.32!important}
+  .footer-nav-services{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:6px 12px!important;width:100%!important;max-width:430px!important;margin:0 auto!important}
+  .footer-nav-services strong{grid-column:1/-1!important}
+  .footer-nav-services a{justify-self:center!important}
+}
+@media(max-width:350px){
+  .footer-container.footer-container-guide{grid-template-columns:1fr!important;grid-template-areas:"brand" "quality" "attendance" "services"!important;gap:16px!important}
+  .footer-nav-services{grid-template-columns:1fr!important}
+  .footer-nav-services strong{grid-column:auto!important}
+}
+@media(max-width:420px){
+  .quality-supplier-consent{font-size:11.5px!important;line-height:1.4!important}
+}
+
+
+/* Quality · Compra Segura v2 (2026-10-07) */
+.quality-security-page{width:min(1080px,calc(100% - 32px));margin:34px auto 58px;color:#111827}.quality-security-hero{display:grid;grid-template-columns:68px 1fr;gap:20px;align-items:center;padding:28px 30px;border:1px solid #e5e7eb;border-radius:18px;background:linear-gradient(135deg,#fff,#f8fafc);box-shadow:0 6px 22px rgba(15,23,42,.05)}.quality-security-icon{display:grid;place-items:center;width:64px;height:64px;border-radius:18px;background:#eff6ff;color:#2563eb;font-size:28px}.quality-security-kicker{display:block;margin-bottom:5px;color:#2563eb;font-size:10px;font-weight:900;text-transform:uppercase;letter-spacing:.1em}.quality-security-hero h1{margin:0;color:#111827;font-size:30px;line-height:1.15}.quality-security-hero p{margin:8px 0 0;color:#64748b;line-height:1.55}.quality-security-check,.quality-security-official-channels{margin-top:18px;padding:24px 26px;border:1px solid #e5e7eb;border-radius:16px;background:#fff}.quality-security-section-head h2{margin:0;font-size:20px;color:#111827}.quality-security-section-head>p{margin:6px 0 0;color:#64748b;font-size:13px;line-height:1.5}.quality-security-steps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:18px}.quality-security-steps article{display:flex;gap:12px;align-items:flex-start;padding:16px;border:1px solid #e2e8f0;border-radius:13px;background:#f8fafc}.quality-security-steps article>span{display:grid;place-items:center;width:30px;height:30px;flex:0 0 30px;border-radius:50%;background:#2563eb;color:#fff;font-weight:900;font-size:12px}.quality-security-steps strong{display:block;font-size:13px;margin:1px 0 5px}.quality-security-steps p{margin:0;color:#64748b;font-size:12px;line-height:1.5}.quality-security-channel-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:16px}.quality-security-channel{display:grid;grid-template-columns:38px minmax(0,1fr) 16px;gap:11px;align-items:center;padding:13px 14px;border:1px solid #e2e8f0;border-radius:12px;background:#fff;color:#111827;text-decoration:none;transition:border-color .18s ease,transform .18s ease,box-shadow .18s ease}.quality-security-channel:hover{transform:translateY(-1px);border-color:#cbd5e1;box-shadow:0 6px 18px rgba(15,23,42,.06)}.quality-security-channel>i:first-child{display:grid;place-items:center;width:38px;height:38px;border-radius:10px;background:#f1f5f9;color:#2563eb;font-size:18px}.quality-security-channel.whatsapp>i:first-child{background:#ecfdf3;color:#16a34a}.quality-security-channel span{display:grid;gap:2px;min-width:0}.quality-security-channel strong{font-size:13px}.quality-security-channel small{color:#64748b;font-size:11px}.quality-security-channel>i:last-child{color:#94a3b8;font-size:11px}.quality-security-company{display:grid;grid-template-columns:54px minmax(0,1fr) auto;gap:18px;align-items:center;margin-top:18px;padding:22px 24px;border:1px solid #e5e7eb;border-radius:16px;background:#fff}.quality-security-company-icon{display:grid;place-items:center;width:52px;height:52px;border-radius:14px;background:#f8fafc;color:#2563eb;font-size:21px}.quality-security-company h2{margin:0;font-size:20px}.quality-security-company dl{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px 20px;margin:12px 0 0}.quality-security-company dl>div{display:flex;gap:7px;min-width:0}.quality-security-company dt{color:#64748b;font-size:11px;font-weight:800}.quality-security-company dd{margin:0;color:#111827;font-size:11px;font-weight:750}.quality-security-map{display:inline-flex;align-items:center;justify-content:center;gap:7px;min-height:42px;padding:0 15px;border:1px solid #d1d5db;border-radius:10px;background:#fff;color:#111827;text-decoration:none;font-size:12px;font-weight:850}.quality-security-alert-v2{display:flex;gap:12px;align-items:flex-start;margin-top:18px;padding:16px 18px;border:1px solid #fed7aa;border-radius:12px;background:#fff7ed}.quality-security-alert-v2>i{color:#ea580c}.quality-security-alert-v2 strong{font-size:13px}.quality-security-alert-v2 p{margin:3px 0 0;color:#64748b;font-size:12px;line-height:1.45}
+@media(max-width:760px){.quality-security-page{width:calc(100% - 24px);margin:22px auto 42px}.quality-security-hero{grid-template-columns:52px 1fr;gap:14px;padding:20px}.quality-security-icon{width:50px;height:50px;border-radius:14px;font-size:22px}.quality-security-hero h1{font-size:23px}.quality-security-hero p{font-size:13px}.quality-security-check,.quality-security-official-channels{padding:20px}.quality-security-steps{grid-template-columns:1fr}.quality-security-channel-grid{grid-template-columns:1fr}.quality-security-company{grid-template-columns:46px minmax(0,1fr);padding:20px}.quality-security-company-icon{width:44px;height:44px}.quality-security-company dl{grid-template-columns:1fr;gap:6px}.quality-security-map{grid-column:1/-1;width:100%;box-sizing:border-box}.quality-security-alert-v2{padding:15px 16px}}
+
+/* Quality · Rodapé v6: sem bloco Atendimento */
+.footer-container.footer-container-guide{grid-template-columns:minmax(270px,1.4fr) minmax(180px,.85fr) minmax(180px,.85fr)!important;gap:34px!important;max-width:1120px!important}.footer-nav-attendance{display:none!important}.footer-nav-quality,.footer-nav-services{justify-items:start}.footer-nav-services{grid-template-columns:1fr!important}.footer-nav-services strong{grid-column:auto!important}
+@media(max-width:680px){.footer{padding:22px 16px 20px!important}.footer-container.footer-container-guide{max-width:520px!important;grid-template-columns:minmax(0,1fr) minmax(0,1fr)!important;grid-template-areas:"brand brand" "quality services"!important;gap:18px 18px!important}.footer-brand-block{grid-area:brand!important}.footer-nav-quality{grid-area:quality!important}.footer-nav-services{grid-area:services!important}.footer-nav-quality,.footer-nav-services{justify-items:center!important;text-align:center!important}.footer-nav-services{display:grid!important;grid-template-columns:1fr!important;gap:6px!important;width:100%!important;margin:0!important}.footer-nav-services strong{grid-column:auto!important}.footer-nav-services a{justify-self:center!important}}
+@media(max-width:370px){.footer-container.footer-container-guide{grid-template-columns:1fr!important;grid-template-areas:"brand" "quality" "services"!important;gap:16px!important}.footer-nav-group{width:100%!important}}
+

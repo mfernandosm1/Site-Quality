@@ -1,0 +1,196 @@
+<!DOCTYPE html><html lang="pt-BR"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Seja nosso fornecedor | Quality Celulares</title>
+  <meta name="description" content="Apresente sua empresa, marcas e produtos para avaliação comercial da Quality Celulares.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://www.qualitycel.com.br/seja-nosso-fornecedor.html">
+  <link rel="icon" href="/images/favicon_otimizado.ico?v=3">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <link rel="stylesheet" href="/css/style.css?v=20261008-guidehome1">
+<meta name="google-site-verification" content="GEU0kUI8OgPN8QxoDv8tGZPGnBYKmB4EAWo3Xe-5xz8"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Seja nosso fornecedor | Quality Celulares"><meta name="twitter:description" content="Apresente sua empresa, marcas e produtos para avaliação comercial da Quality Celulares."><meta name="twitter:image" content="https://www.qualitycel.com.br/images/logo.png"><script async="" src="https://www.googletagmanager.com/gtag/js?id=G-9HPD9XCELH"></script><script data-quality-ga="1">window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-9HPD9XCELH');</script></head>
+<body>
+  <div id="header"></div>
+  <main class="quality-service-page">
+    <section class="quality-service-hero">
+      <span class="quality-service-kicker"><i class="fa-solid fa-boxes-stacked"></i> Parcerias comerciais</span>
+      <h1>Seja nosso fornecedor</h1>
+      <p>Preencha os dados abaixo.</p>
+    </section>
+
+    <section class="quality-service-card">
+      <form id="quality-supplier-form" class="quality-supplier-form" novalidate="">
+        <div class="quality-supplier-field quality-supplier-honeypot" aria-hidden="true">
+          <label for="supplier-website-confirm">Website</label>
+          <input id="supplier-website-confirm" name="websiteConfirm" tabindex="-1" autocomplete="off">
+        </div>
+        <div class="quality-supplier-field">
+          <label for="supplier-company">Empresa / nome comercial *</label>
+          <input id="supplier-company" name="company" autocomplete="organization" maxlength="120" required="">
+        </div>
+        <div class="quality-supplier-field">
+          <label for="supplier-cnpj">CNPJ</label>
+          <input id="supplier-cnpj" name="cnpj" inputmode="numeric" maxlength="24" placeholder="Opcional">
+        </div>
+        <div class="quality-supplier-field">
+          <label for="supplier-contact">Nome do contato *</label>
+          <input id="supplier-contact" name="contact" autocomplete="name" maxlength="100" required="">
+        </div>
+        <div class="quality-supplier-field">
+          <label for="supplier-email">E-mail *</label>
+          <input id="supplier-email" name="email" type="email" autocomplete="email" maxlength="140" required="">
+        </div>
+        <div class="quality-supplier-field">
+          <label for="supplier-phone">Telefone / WhatsApp *</label>
+          <input id="supplier-phone" name="phone" autocomplete="tel" maxlength="30" required="">
+        </div>
+        <div class="quality-supplier-field">
+          <label for="supplier-city">Cidade / UF *</label>
+          <input id="supplier-city" name="city" autocomplete="address-level2" maxlength="100" placeholder="Ex.: Passo Fundo / RS" required="">
+        </div>
+        <div class="quality-supplier-field full">
+          <label>O que sua empresa fornece? *</label>
+          <div class="quality-supplier-checks">
+            <label><input type="checkbox" name="segments" value="Smartphones"> Smartphones</label>
+            <label><input type="checkbox" name="segments" value="Acessórios"> Acessórios</label>
+            <label><input type="checkbox" name="segments" value="Informática"> Informática</label>
+            <label><input type="checkbox" name="segments" value="Peças / assistência"> Peças / assistência</label>
+            <label><input type="checkbox" name="segments" value="Eletrônicos"> Eletrônicos</label>
+            <label><input type="checkbox" name="segments" value="Outros"> Outros</label>
+          </div>
+        </div>
+        <div class="quality-supplier-field full">
+          <label for="supplier-brands">Marcas, linhas ou produtos principais *</label>
+          <textarea id="supplier-brands" name="brands" maxlength="700" required="" placeholder="Ex.: marcas representadas, linhas disponíveis, distribuição, produtos de maior giro..."></textarea>
+        </div>
+        <div class="quality-supplier-field">
+          <label for="supplier-site">Site / catálogo / Instagram</label>
+          <input id="supplier-site" name="site" maxlength="240" placeholder="https://...">
+        </div>
+        <div class="quality-supplier-field">
+          <label for="supplier-region">Região atendida</label>
+          <input id="supplier-region" name="region" maxlength="120" placeholder="Ex.: Rio Grande do Sul">
+        </div>
+        <div class="quality-supplier-field full">
+          <label for="supplier-message">Condições comerciais / observações</label>
+          <textarea id="supplier-message" name="message" maxlength="900" placeholder="Pedido mínimo, prazo, frete, formas de pagamento, diferenciais ou outras informações relevantes."></textarea>
+        </div>
+        <div class="quality-supplier-field full quality-supplier-consent-row">
+          <label class="quality-supplier-consent"><input id="supplier-consent" type="checkbox" required=""> <span>Autorizo o uso destes dados exclusivamente para análise comercial e eventual contato da Quality Celulares sobre esta proposta.</span></label>
+        </div>
+        <div class="quality-supplier-field full">
+          <div class="quality-supplier-actions">
+            <button class="quality-supplier-submit" id="quality-supplier-submit" type="submit"><i class="fa-solid fa-paper-plane"></i> Enviar proposta</button>
+          </div>
+          <div class="quality-supplier-feedback" id="quality-supplier-feedback" aria-live="polite"></div>
+        </div>
+      </form>
+    </section>
+  </main>
+  <div id="footer"></div>
+
+  <script>
+  (function(){
+    var form=document.getElementById('quality-supplier-form');
+    var feedback=document.getElementById('quality-supplier-feedback');
+    var submit=document.getElementById('quality-supplier-submit');
+    var draftKey='quality-supplier-form-draft-v2';
+    var openedAt=Date.now();
+    function values(){
+      var data=new FormData(form);
+      return {
+        id:'sup-'+Date.now()+'-'+Math.random().toString(36).slice(2,10),
+        receivedAt:new Date().toISOString(),
+        company:String(data.get('company')||'').trim(),
+        cnpj:String(data.get('cnpj')||'').trim(),
+        contact:String(data.get('contact')||'').trim(),
+        email:String(data.get('email')||'').trim(),
+        phone:String(data.get('phone')||'').trim(),
+        city:String(data.get('city')||'').trim(),
+        segments:Array.from(form.querySelectorAll('input[name="segments"]:checked')).map(function(el){return el.value;}),
+        brands:String(data.get('brands')||'').trim(),
+        site:String(data.get('site')||'').trim(),
+        region:String(data.get('region')||'').trim(),
+        message:String(data.get('message')||'').trim()
+      };
+    }
+    function saveDraft(){
+      try{var v=values();delete v.id;delete v.receivedAt;localStorage.setItem(draftKey,JSON.stringify(v));}catch(_){}
+    }
+    function restoreDraft(){
+      try{
+        var v=JSON.parse(localStorage.getItem(draftKey)||'null'); if(!v)return;
+        ['company','cnpj','contact','email','phone','city','brands','site','region','message'].forEach(function(name){var el=form.elements[name];if(el&&v[name])el.value=v[name];});
+        (v.segments||[]).forEach(function(segment){form.querySelectorAll('input[name="segments"]').forEach(function(el){if(el.value===segment)el.checked=true;});});
+      }catch(_){}
+    }
+    function validate(){
+      feedback.className='quality-supplier-feedback'; feedback.textContent='';
+      if(!form.reportValidity())return false;
+      if(!form.querySelector('input[name="segments"]:checked')){feedback.textContent='Selecione pelo menos uma categoria de fornecimento.';var first=form.querySelector('input[name="segments"]');if(first)first.focus();return false;}
+      return true;
+    }
+    function bytesToB64(bytes){var binary='';for(var i=0;i<bytes.length;i++)binary+=String.fromCharCode(bytes[i]);return btoa(binary);}
+    function b64ToBytes(value){var binary=atob(String(value||'')),bytes=new Uint8Array(binary.length);for(var i=0;i<binary.length;i++)bytes[i]=binary.charCodeAt(i);return bytes;}
+    async function encryptLead(lead,spkiB64){
+      if(!window.crypto||!crypto.subtle)throw new Error('Seu navegador não oferece a proteção necessária para enviar este formulário.');
+      var publicKey=await crypto.subtle.importKey('spki',b64ToBytes(spkiB64),{name:'RSA-OAEP',hash:'SHA-256'},false,['encrypt']);
+      var aes=await crypto.subtle.generateKey({name:'AES-GCM',length:256},true,['encrypt']);
+      var rawKey=new Uint8Array(await crypto.subtle.exportKey('raw',aes));
+      var iv=crypto.getRandomValues(new Uint8Array(12));
+      var plain=new TextEncoder().encode(JSON.stringify(lead));
+      var encryptedData=new Uint8Array(await crypto.subtle.encrypt({name:'AES-GCM',iv:iv},aes,plain));
+      var encryptedKey=new Uint8Array(await crypto.subtle.encrypt({name:'RSA-OAEP'},publicKey,rawKey));
+      return '__QSUP1__'+JSON.stringify({v:1,k:bytesToB64(encryptedKey),i:bytesToB64(iv),d:bytesToB64(encryptedData)});
+    }
+    async function loadConfig(){
+      var r=await fetch('/supplier-form-public.json?_='+Date.now(),{cache:'no-store'}); if(!r.ok)throw new Error('Configuração do formulário indisponível.');
+      var j=await r.json(); if(!j.publicKey||!j.endpoint||!j.writeKey)throw new Error('Configuração do formulário incompleta.'); return j;
+    }
+    function isLocal(){return /^(localhost|127\.0\.0\.1|10\.|192\.168\.|172\.(1[6-9]|2\d|3[01])\.)/i.test(location.hostname||'');}
+    async function sendLocalLead(lead){
+      var eventId='qsup-'+lead.id;
+      var local=await fetch('/fornecedores-interessados/public-submit',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({eventId:eventId,lead:lead})});
+      var localJson=await local.json().catch(function(){return {};});
+      if(!local.ok||localJson.success===false)throw new Error(localJson.message||'Não foi possível salvar a proposta no painel local.');
+      return true;
+    }
+    async function sendProductionLead(lead,envelope,config){
+      var eventId='qsup-'+lead.id;
+      var payload={key:config.writeKey,action:'track',type:config.eventType||'supplier_lead_secure',event:config.eventType||'supplier_lead_secure',Evento:config.eventType||'supplier_lead_secure',at:new Date().toISOString(),Data:new Date().toISOString(),eventId:eventId,EventId:eventId,Produto:envelope,SlugProduto:lead.id,Categoria:'Fornecedor',Busca:'',Pagina:location.href,Dispositivo:/Mobi|Android|iPhone|iPad/i.test(navigator.userAgent||'')?'mobile':'desktop',Origem:document.referrer||'',Idioma:navigator.language||'',Viewport:window.innerWidth+'x'+window.innerHeight};
+      await fetch(config.endpoint,{method:'POST',mode:'no-cors',credentials:'omit',redirect:'follow',cache:'no-store',keepalive:true,headers:{'Content-Type':'text/plain;charset=UTF-8'},body:JSON.stringify(payload)});
+      return true;
+    }
+    form.addEventListener('input',saveDraft); form.addEventListener('change',saveDraft);
+    form.addEventListener('submit',async function(e){
+      e.preventDefault(); if(!validate())return;
+      if(String(form.elements.websiteConfirm&&form.elements.websiteConfirm.value||'').trim())return;
+      if(Date.now()-openedAt<1500){feedback.textContent='Aguarde um instante e tente novamente.';return;}
+      submit.disabled=true; submit.innerHTML='<i class="fa-solid fa-circle-notch fa-spin"></i> Enviando...'; feedback.textContent='';
+      try{
+        var lead=values();
+        if(isLocal()){
+          // O preview por IP local pode não oferecer WebCrypto por usar HTTP. Nesse caso
+          // os dados ficam na própria rede/painel e não saem para serviços externos.
+          await sendLocalLead(lead);
+        }else{
+          var config=await loadConfig(),envelope=await encryptLead(lead,config.publicKey);
+          await sendProductionLead(lead,envelope,config);
+        }
+        try{if(window.qualityAnalyticsTrack)window.qualityAnalyticsTrack('supplier_form_submit',{context:'Seja nosso fornecedor'});}catch(_){}
+        localStorage.removeItem(draftKey); form.reset(); feedback.className='quality-supplier-feedback success'; feedback.textContent='Proposta recebida. A Quality vai analisar seus dados.';
+      }catch(error){feedback.className='quality-supplier-feedback error';feedback.textContent=error&&error.message?error.message:'Não foi possível enviar agora. Tente novamente em alguns instantes.';}
+      finally{submit.disabled=false;submit.innerHTML='<i class="fa-solid fa-paper-plane"></i> Enviar proposta';}
+    });
+    restoreDraft();
+  })();
+  </script>
+  <script>
+    Promise.all([fetch('/header.html').then(function(r){return r.text();}),fetch('/footer.html').then(function(r){return r.text();})]).then(function(parts){var header=document.getElementById('header'),footer=document.getElementById('footer');if(header)header.innerHTML=parts[0];if(footer)footer.innerHTML=parts[1];if(window.initHeaderEvents)window.initHeaderEvents();}).catch(function(){});
+  </script>
+  <script src="/js/main.js?v=20261006-nav1"></script>
+
+<script src="/js/image-resilience.js?v=20261006-fix1"></script>
+
+<script src="/js/quality-analytics.js?v=20261006-fix2"></script>
+</body></html>

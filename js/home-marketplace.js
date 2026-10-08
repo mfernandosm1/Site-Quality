@@ -1,7 +1,7 @@
-(function qualityHomeMarketplaceV17(){
+(function qualityHomeMarketplaceV18(){
   'use strict';
-  if (window.__qualityHomeMarketplaceV17) return;
-  window.__qualityHomeMarketplaceV17 = true;
+  if (window.__qualityHomeMarketplaceV18) return;
+  window.__qualityHomeMarketplaceV18 = true;
 
   var main = document.querySelector('.quality-home-main');
   if (!main) return;
@@ -141,70 +141,6 @@
     var short = brand.length <= 4 ? brand : brand.slice(0,1);
     return '<span>' + esc(short) + '</span>';
   }
-  function setupBrandTicker(host){
-    if (!host) return;
-    var previous = host.__qualityBrandTickerState;
-    if (previous && previous.frame) cancelAnimationFrame(previous.frame);
-    if (previous && previous.resumeTimer) clearTimeout(previous.resumeTimer);
-
-    // Clones apenas visuais criam uma volta contínua, sem nova linha nem salto.
-    host.querySelectorAll('[data-quality-brand-clone="1"]').forEach(function(node){ node.remove(); });
-    var originals = Array.from(host.querySelectorAll('.quality-home-brand-card:not([data-quality-brand-clone])'));
-    if (originals.length < 2) return;
-    originals.forEach(function(card){
-      var clone = card.cloneNode(true);
-      clone.setAttribute('data-quality-brand-clone','1');
-      clone.setAttribute('aria-hidden','true');
-      clone.tabIndex = -1;
-      host.appendChild(clone);
-    });
-
-    var state = {frame:0,last:0,cycleWidth:0,paused:false,resumeTimer:0};
-    host.__qualityBrandTickerState = state;
-
-    function pause(){
-      state.paused = true;
-      if (state.resumeTimer) { clearTimeout(state.resumeTimer); state.resumeTimer = 0; }
-    }
-    function resume(delay){
-      if (state.resumeTimer) clearTimeout(state.resumeTimer);
-      state.resumeTimer = setTimeout(function(){ state.paused = false; state.last = performance.now(); }, delay == null ? 700 : delay);
-    }
-
-    if (host.dataset.qualityBrandTickerBound !== '1') {
-      host.dataset.qualityBrandTickerBound = '1';
-      host.addEventListener('mouseenter', function(){ var st=host.__qualityBrandTickerState; if(st) st.paused=true; });
-      host.addEventListener('mouseleave', function(){ var st=host.__qualityBrandTickerState; if(st){ if(st.resumeTimer) clearTimeout(st.resumeTimer); st.resumeTimer=setTimeout(function(){st.paused=false;st.last=performance.now();},600); } });
-      host.addEventListener('focusin', function(){ var st=host.__qualityBrandTickerState; if(st) st.paused=true; });
-      host.addEventListener('focusout', function(){ var st=host.__qualityBrandTickerState; if(st){ if(st.resumeTimer) clearTimeout(st.resumeTimer); st.resumeTimer=setTimeout(function(){st.paused=false;st.last=performance.now();},800); } });
-      host.addEventListener('pointerdown', function(){ var st=host.__qualityBrandTickerState; if(st) st.paused=true; }, {passive:true});
-      host.addEventListener('pointerup', function(){ var st=host.__qualityBrandTickerState; if(st){ if(st.resumeTimer) clearTimeout(st.resumeTimer); st.resumeTimer=setTimeout(function(){st.paused=false;st.last=performance.now();},1800); } }, {passive:true});
-      host.addEventListener('pointercancel', function(){ var st=host.__qualityBrandTickerState; if(st){ st.paused=false;st.last=performance.now(); } }, {passive:true});
-    }
-
-    if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-
-    requestAnimationFrame(function(){
-      var firstClone = host.querySelector('[data-quality-brand-clone="1"]');
-      var firstOriginal = originals[0];
-      if (!firstClone || !firstOriginal) return;
-      state.cycleWidth = firstClone.offsetLeft - firstOriginal.offsetLeft;
-      if (!(state.cycleWidth > host.clientWidth + 20)) return;
-      state.last = performance.now();
-      function tick(now){
-        if (host.__qualityBrandTickerState !== state) return;
-        var delta = Math.min(50, Math.max(0, now - state.last));
-        state.last = now;
-        if (!state.paused && !document.hidden) {
-          // ~24 px/s: movimento visível, porém calmo para não competir com os produtos.
-          host.scrollLeft += 24 * delta / 1000;
-          if (state.cycleWidth && host.scrollLeft >= state.cycleWidth) host.scrollLeft -= state.cycleWidth;
-        }
-        state.frame = requestAnimationFrame(tick);
-      }
-      state.frame = requestAnimationFrame(tick);
-    });
-  }
   function renderBrands(items){
     var host=document.getElementById('home-brands-grid');
     if (!host || !enabled('brands')) { visible('brands',false); return; }
@@ -219,7 +155,7 @@
       var ai=preferred.indexOf(a), bi=preferred.indexOf(b);
       if(ai!==-1 || bi!==-1){ if(ai===-1)return 1;if(bi===-1)return -1;return ai-bi; }
       return groups.get(b).length-groups.get(a).length || a.localeCompare(b,'pt-BR');
-    });
+    }).slice(0,limit('brands',8));
     host.innerHTML=brands.map(function(brand){
       var list=groups.get(brand); var cat=dominantCategory(list);
       return '<a class="quality-home-brand-card" href="' + esc(categoryHref(cat,brand)) + '">' +
@@ -235,7 +171,14 @@
       var controls=sectionEl.querySelector('.quality-home-brand-controls');
       if(controls) controls.remove();
     }
-    setupBrandTicker(host);
+    // Rodada 5: marcas continuam navegáveis, mas sem movimento automático/clones.
+    // Isso reduz distração, trabalho contínuo no navegador e o tamanho visual da Home.
+    var tickerState = host.__qualityBrandTickerState;
+    if (tickerState && tickerState.frame) cancelAnimationFrame(tickerState.frame);
+    if (tickerState && tickerState.resumeTimer) clearTimeout(tickerState.resumeTimer);
+    host.__qualityBrandTickerState = null;
+    host.querySelectorAll('[data-quality-brand-clone="1"]').forEach(function(node){ node.remove(); });
+    host.scrollLeft = 0;
     visible('brands',brands.length>0);
   }
   function productNumber(product){
