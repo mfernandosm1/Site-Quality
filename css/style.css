@@ -2886,3 +2886,271 @@ img{
 @media(max-width:680px){.footer{padding:22px 16px 20px!important}.footer-container.footer-container-guide{max-width:520px!important;grid-template-columns:minmax(0,1fr) minmax(0,1fr)!important;grid-template-areas:"brand brand" "quality services"!important;gap:18px 18px!important}.footer-brand-block{grid-area:brand!important}.footer-nav-quality{grid-area:quality!important}.footer-nav-services{grid-area:services!important}.footer-nav-quality,.footer-nav-services{justify-items:center!important;text-align:center!important}.footer-nav-services{display:grid!important;grid-template-columns:1fr!important;gap:6px!important;width:100%!important;margin:0!important}.footer-nav-services strong{grid-column:auto!important}.footer-nav-services a{justify-self:center!important}}
 @media(max-width:370px){.footer-container.footer-container-guide{grid-template-columns:1fr!important;grid-template-areas:"brand" "quality" "services"!important;gap:16px!important}.footer-nav-group{width:100%!important}}
 
+
+/* QUALITY_CONVERSAO_ESTABILIDADE_20261009 */
+.quality-product-load-error{max-width:560px;margin:3rem auto;padding:1.5rem;text-align:center;border:1px solid #e5e7eb;border-radius:14px;background:#fff;color:#1f2937}
+.quality-product-load-error strong{display:block;font-size:1.1rem}
+.quality-product-load-error p{line-height:1.5;color:#4b5563}
+.quality-product-load-error button,.quality-catalog-retry{display:inline-flex;align-items:center;justify-content:center;margin:12px auto;padding:11px 20px;border:0;border-radius:9px;background:#b91c1c;color:#fff;font-weight:700;cursor:pointer}
+.quality-product-load-error button:disabled{opacity:.6;cursor:progress}
+.quality-catalog-retry{display:flex;width:max-content;max-width:100%}
+.quality-mobile-product-cta-copy{min-width:0}
+.quality-mobile-product-cta-copy small{display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+@media(max-width:850px){.quality-product-load-error{margin:1rem 10px;padding:1.1rem}.quality-mobile-product-cta-copy{flex:1 1 auto}.quality-mobile-product-cta-copy strong{white-space:nowrap}}
+
+
+/* QUALITY_UX_FIX_20261009_R2 — Desktop: navegação clara, busca centralizada. */
+@media (min-width: 992px){
+  body{padding-top:108px}
+  .header{padding:9px 20px 8px;min-height:108px}
+  .header-container{max-width:1500px;position:relative;margin:auto;min-height:91px;display:flex;align-items:flex-end;justify-content:center}
+  .header-container > .logo-wrapper{position:absolute;top:4px;left:8px;z-index:1;align-self:flex-start}
+  .header-container > .logo-wrapper img{max-height:48px;max-width:175px;object-fit:contain}
+  .header-container .nav-desktop{display:flex;justify-content:center;align-items:center;flex-wrap:wrap;gap:10px 23px;min-height:30px;padding:58px 3px 0}
+  .header-container .nav-desktop>a,.header-container .nav-desktop>.cat-menu-group{font-size:13px;white-space:nowrap}
+  .header-container .nav-desktop .search-wrapper{position:absolute;top:4px;left:50%;transform:translateX(-50%);width:min(540px,49vw);height:43px;border-radius:10px;box-shadow:0 3px 14px rgba(0,0,0,.12);z-index:4}
+  .header-container .nav-desktop .search-wrapper input{flex:1;min-width:0;width:100%;font-size:15px;padding:10px 14px}
+  .header-container .nav-desktop .search-wrapper button{min-width:48px;background:#fff;color:#b8000a;font-size:17px}
+}
+@media (min-width:992px) and (max-width:1120px){
+  .header-container .nav-desktop{gap:9px 14px}
+  .header-container .nav-desktop>a,.header-container .nav-desktop>.cat-menu-group{font-size:12px}
+  .header-container .nav-desktop .search-wrapper{left:50%;width:min(440px,43vw)}
+}
+.quality-search-suggested-term{display:flex;gap:13px;align-items:center;width:100%;min-height:44px;padding:10px 14px;border:0;border-bottom:1px solid #f1f2f4;background:#fff;color:#394150;text-align:left;font-size:13px;cursor:pointer}
+.quality-search-suggested-term:hover,.quality-search-suggested-term:focus{background:#faf3f3;color:#ac0b13}
+.quality-search-suggested-term i{font-size:12px;color:#8f98a5}
+
+/* Filtros compactos com rolagem independente: todas as seções permanecem acessíveis. */
+@media (min-width:851px){
+  .quality-category-filters{top:120px;max-height:calc(100dvh - 138px);overflow-y:auto;overscroll-behavior:contain;scrollbar-width:thin;padding:8px 13px 12px 1px}
+  .quality-filter-head{margin-bottom:8px}
+  .quality-filter-head strong{font-size:16px}
+  .quality-filter-group{margin-bottom:11px;padding-bottom:10px}
+  .quality-filter-group legend{font-size:12px;margin-bottom:5px}
+  .quality-filter-group label{gap:7px;padding:3px 0;font-size:12px;line-height:1.2;min-height:24px}
+  .quality-filter-group input{width:14px;height:14px;flex:0 0 14px}
+  .quality-filter-options-scroll{max-height:125px}
+  .quality-filter-result{margin-top:7px}
+  .quality-category-layout{grid-template-columns:200px minmax(0,1fr);gap:19px}
+}
+
+
+/* QUALITY_HEADER_UXPERF3 — desktop: busca realmente centralizada + menu lateral compartilhado. */
+@media (min-width: 992px) {
+  body { padding-top: 118px; }
+  .header { min-height: 118px; padding: 9px max(18px, calc((100vw - 1580px) / 2)) 8px; }
+  .header .header-container {
+    display: grid; grid-template-columns: minmax(175px, 230px) minmax(0, 1fr) minmax(100px, 180px);
+    grid-template-rows: 62px 34px; gap: 4px 16px;
+    width: 100%; max-width: 1540px; margin-inline: auto; min-height: 0;
+    align-items: center; justify-content: initial; position: relative;
+  }
+  .header .header-container > .logo-wrapper {
+    grid-area: 1 / 1 / 2 / 2; position: static; z-index: 1;
+    display:flex;align-items:center;justify-content:flex-start;align-self:center;min-width:0;
+  }
+  .header .header-container > .logo-wrapper img.logo {
+    height: 58px; max-height: 58px; width: auto; max-width: 225px; object-fit: contain;
+  }
+  .header .header-container > .search-wrapper {
+    grid-area: 1 / 2 / 2 / 3; position: relative; inset: auto;
+    transform: none; width: min(100%, 580px); justify-self: center;
+    height: 46px; min-width: 0; box-sizing: border-box; display:flex;
+    border-radius: 11px; box-shadow: 0 4px 14px rgba(0,0,0,.12); z-index: 10;
+    background: white;
+  }
+  .header .header-container > .search-wrapper input {
+    width: 100%; min-width: 0; flex: 1 1 auto; font-size: 15px; padding: 11px 15px;
+    background: transparent; border:0; outline:0; box-sizing: border-box;
+  }
+  .header .header-container > .search-wrapper button {
+    flex: 0 0 50px; background: white; color: #bb090e; border:0;
+    font-size: 18px; border-radius: 0 11px 11px 0;
+  }
+  .header .header-container > .menu-toggle {
+    grid-area: 2 / 1 / 3 / 2; display: inline-flex; width: max-content;
+    align-items: center; gap: 10px; color:#fff; font-size: 15px;
+    padding: 5px 8px; cursor: pointer; line-height: 1.1;
+  }
+  .header .header-container > .menu-toggle::after {content:'Categorias'; font-weight: 650;}
+  .header .header-container > .nav-desktop {
+    grid-area: 2 / 2 / 3 / 4; display: flex; flex-wrap: nowrap;
+    align-items: center; justify-content: center; gap: clamp(9px, 1.75vw, 24px);
+    padding: 0; margin: 0; min-height: 0; max-width: 100%; min-width: 0;
+  }
+  .header .header-container > .nav-desktop a,
+  .header .header-container > .nav-desktop > .cat-menu-group { font-size: clamp(12px, .85vw, 14px); white-space: nowrap; }
+  .header #mobile-menu { width: min(330px, 84vw); box-sizing: border-box; }
+  .header .mobile-menu { overflow-y: auto; }
+}
+@media (min-width: 992px) and (max-width: 1160px) {
+  .header .header-container { grid-template-columns: 175px minmax(0, 1fr) 85px; column-gap: 10px; }
+  .header .header-container > .logo-wrapper img.logo { height: 52px; max-height: 52px; }
+  .header .header-container > .nav-desktop { gap: 9px; }
+}
+/* Elimina saltos de layout na Home, nos filtros e na vitrine no celular. */
+@media (max-width: 850px) {
+  .quality-home-section { content-visibility: auto; contain-intrinsic-size: auto 380px; }
+  .quality-home-categories {content-visibility: visible;}
+  .produto-card img[data-quality-product-image] { max-width: 100%; }
+}
+
+/* Logo original preservada; somente no desktop usa cópia recortada das margens transparentes. */
+@media (min-width: 992px) {
+  .header .header-container > .logo-wrapper .quality-desktop-logo-picture{display:block;line-height:0;max-width:100%;}
+  .header .header-container > .logo-wrapper .quality-desktop-logo-picture img.logo{
+    display:block;width:auto;height:57px;max-height:57px;max-width:220px;object-fit:contain;
+  }
+}
+@media (min-width:992px) and (max-width:1160px){
+  .header .header-container > .logo-wrapper .quality-desktop-logo-picture img.logo{height:50px;max-height:50px;max-width:172px;}
+}
+
+
+/* QUALITY_DESKTOP_NAV_ALIGN_V4 — centro da busca e das opções alinhado na mesma coluna. */
+@media(min-width:1161px){
+ .header .header-container > .nav-desktop {grid-area:2 / 2 / 3 / 3;justify-content:center}
+}
+@media(min-width:992px) and (max-width:1160px){
+ .header .header-container > .nav-desktop {grid-area:2 / 2 / 3 / 4;justify-content:flex-start}
+}
+/* A Home não depende do CSS remoto do Swiper para preservar o tamanho do banner.
+   Isso impede empilhamento de banners caso o CDN demore no celular. */
+.banner .swiper-wrapper { display:flex; width:100%; box-sizing:border-box }
+.banner .swiper-slide { width:100%; flex:0 0 100%; min-width:0; overflow:hidden }
+.banner .swiper-slide img.banner-img { display:block; width:100% }
+
+/* QUALITY_BUSCA_FILTROS_20261010: sugestões imediatamente abaixo da barra, sobrepondo a navegação sem deslocar layout. */
+@media(min-width:992px){
+  .header .header-container > .search-wrapper:focus-within{z-index:50;}
+  .header .header-container > .search-wrapper .quality-search-suggestions{
+    left:0;right:0;top:calc(100% + 7px);width:100%;max-height:min(52vh,500px);
+    overflow-y:auto;box-sizing:border-box;z-index:5050;
+  }
+}
+.quality-filter-matched-storage{display:block;align-self:center;text-align:center;
+  max-width:calc(100% - 16px);margin:0 auto 7px;padding:4px 8px;
+  border:1px solid #cbdaf5;background:#eff6ff;border-radius:7px;
+  color:#1d4ed8;font-size:11px;font-weight:700;line-height:1.3;}
+
+
+/* ===================
+   V20261010-tag-mobile1 - Etiquetas seguras no mobile
+   Reserva espaço real para as ações do card e evita sobreposição.
+=================== */
+@media (max-width: 767px) {
+  .produto-card .quality-card-image-wrap,
+  .product-card .quality-card-image-wrap,
+  .produto-relacionado-card .quality-card-image-wrap,
+  .produto-relacionado-card.related-image-wrap,
+  .related-image-wrap {
+    padding-top: 56px !important;
+  }
+
+  .produto-card .quality-card-image-wrap .premium-card-tags,
+  .product-card .quality-card-image-wrap .premium-card-tags,
+  .produto-relacionado-card .quality-card-image-wrap .premium-card-tags,
+  .related-image-wrap .premium-card-tags {
+    top: 10px !important;
+    left: 10px !important;
+    right: 128px !important;
+    width: auto !important;
+    max-width: calc(100% - 138px) !important;
+    min-width: 0 !important;
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: nowrap !important;
+    align-items: center !important;
+    gap: 4px !important;
+    overflow: hidden !important;
+    z-index: 15 !important;
+  }
+
+  .produto-card .quality-card-image-wrap .premium-card-tags .quality-product-tag,
+  .product-card .quality-card-image-wrap .premium-card-tags .quality-product-tag,
+  .produto-relacionado-card .quality-card-image-wrap .premium-card-tags .quality-product-tag,
+  .related-image-wrap .premium-card-tags .quality-product-tag {
+    display: inline-flex !important;
+    align-items: center !important;
+    width: auto !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    white-space: nowrap !important;
+    font-size: 9px !important;
+    line-height: 1 !important;
+    letter-spacing: 0 !important;
+    padding: 5px 7px !important;
+    border-radius: 8px !important;
+  }
+
+  .produto-card .quality-card-image-wrap .premium-card-tags .quality-product-tag i,
+  .product-card .quality-card-image-wrap .premium-card-tags .quality-product-tag i,
+  .produto-relacionado-card .quality-card-image-wrap .premium-card-tags .quality-product-tag i,
+  .related-image-wrap .premium-card-tags .quality-product-tag i {
+    font-size: 8px !important;
+    margin-right: 3px !important;
+    flex: 0 0 auto !important;
+  }
+
+  .produto-card .quality-card-image-wrap .quality-card-actions,
+  .product-card .quality-card-image-wrap .quality-card-actions,
+  .produto-relacionado-card .quality-card-image-wrap .quality-card-actions,
+  .related-image-wrap .quality-card-actions {
+    top: 9px !important;
+    right: 10px !important;
+    width: 114px !important;
+    min-width: 114px !important;
+    justify-content: flex-end !important;
+    gap: 4px !important;
+    z-index: 18 !important;
+  }
+
+  .produto-card .quality-card-image-wrap .quality-card-action,
+  .product-card .quality-card-image-wrap .quality-card-action,
+  .produto-relacionado-card .quality-card-image-wrap .quality-card-action,
+  .related-image-wrap .quality-card-action {
+    width: 27px !important;
+    height: 27px !important;
+    min-width: 27px !important;
+    font-size: 12px !important;
+  }
+}
+
+
+/* QUALITY_MOBILE_TAGS_TWO_ROWS_20261010
+   Etiqueta completa em linha independente, 4 ações logo abaixo.
+   Desktop intocado. */
+@media(max-width:767px){
+ .produto-card .quality-card-image-wrap,
+ .product-card .quality-card-image-wrap,
+ .produto-relacionado-card .quality-card-image-wrap,
+ .produto-relacionado-card.related-image-wrap,
+ .related-image-wrap{padding-top:84px!important}
+ .produto-card .quality-card-image-wrap .premium-card-tags,
+ .product-card .quality-card-image-wrap .premium-card-tags,
+ .produto-relacionado-card .quality-card-image-wrap .premium-card-tags,
+ .related-image-wrap .premium-card-tags{
+   top:9px!important;left:10px!important;right:10px!important;
+   width:auto!important;max-width:calc(100% - 20px)!important;
+   display:flex!important;flex-wrap:nowrap!important;overflow:visible!important;z-index:15!important
+ }
+ .produto-card .quality-card-image-wrap .premium-card-tags .quality-product-tag,
+ .product-card .quality-card-image-wrap .premium-card-tags .quality-product-tag,
+ .produto-relacionado-card .quality-card-image-wrap .premium-card-tags .quality-product-tag,
+ .related-image-wrap .premium-card-tags .quality-product-tag{
+   display:inline-flex!important;align-items:center!important;flex:0 0 auto!important;
+   white-space:nowrap!important;overflow:visible!important;text-overflow:clip!important;
+   max-width:100%!important;width:auto!important;font-size:9.5px!important;
+   letter-spacing:0!important;line-height:1!important;padding:6px 8px!important
+ }
+ .produto-card .quality-card-image-wrap .quality-card-actions,
+ .product-card .quality-card-image-wrap .quality-card-actions,
+ .produto-relacionado-card .quality-card-image-wrap .quality-card-actions,
+ .related-image-wrap .quality-card-actions{
+   top:48px!important;right:10px!important;width:auto!important;min-width:0!important;
+   gap:5px!important;z-index:18!important
+ }
+}

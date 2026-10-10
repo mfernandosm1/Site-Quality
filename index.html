@@ -1,5 +1,6 @@
 <!DOCTYPE html><html lang="pt-BR"><head>
   <meta charset="UTF-8">
+  <script src="/js/catalog-runtime.js?v=20261010-uxperf3"></script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Quality Celulares</title>
   <meta name="description" content="Celulares, eletrônicos, videogames e acessórios com ótimos preços. Parcelamento em até 60x no boleto e frete grátis no RS acima de R$120.">
@@ -10,12 +11,9 @@
   <!-- QUALITY_PERFORMANCE_MOBILE_V1: antecipa os webfonts dos ícones no mobile -->
   <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin="">
   <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin="">
-  <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/webfonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin="">
-  <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/webfonts/fa-regular-400.woff2" as="font" type="font/woff2" crossorigin="">
-  <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/webfonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin="">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
-  <link rel="stylesheet" href="/css/style.css?v=20261008-guidehome1">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></noscript>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"></noscript>
+  <link rel="stylesheet" href="/css/style.css?v=20261010-busca-mobile4">
   <link rel="stylesheet" href="/css/commerce-compare.css?v=20260925-7">
   <script async="" src="https://www.googletagmanager.com/gtag/js?id=G-9HPD9XCELH"></script>
   <script>
@@ -41,7 +39,7 @@
   <meta name="twitter:image" content="https://www.qualitycel.com.br/images/logo.png">
   <script type="application/ld+json" id="organization-schema-jsonld">{"@context":"https://schema.org","@type":"Store","name":"Quality Celulares","url":"https://www.qualitycel.com.br","logo":"https://www.qualitycel.com.br/images/logo.png","description":"Loja especializada em smartphones, acessórios, notebooks, games e eletrônicos com atendimento pelo WhatsApp."}</script>
   <meta name="robots" content="index, follow">
-</head>
+<script>if(new URLSearchParams(location.search).get('qualityPerf')==='1'){var s=document.createElement('script');s.src='/js/diagnostico-carregamento.js?v=20261010-1';document.head.appendChild(s)}</script></head>
 
 <body>
   <div id="header"></div>
@@ -170,8 +168,8 @@
   </main>
   <div id="footer"></div>
 
-  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-  <script src="/js/main.js?v=20261006-nav1"></script>
+  <script async="" src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js" onload="if(typeof initSwiper === 'function') initSwiper()"></script>
+  <script src="/js/main.js?v=20261010-navfix1"></script>
 
   <script>
   function scrollCarousel(dir) {
@@ -468,7 +466,7 @@
   }
 
 
-  window.__qualityHomeCatalogPromise = window.__qualityHomeCatalogPromise || fetch('/content/catalog-public.json', {cache:'no-store'}).then(r => { if(!r.ok) throw new Error('catalog'); return r.json(); }).catch(() => fetch('/content/products.json').then(r => r.json()));
+  window.__qualityHomeCatalogPromise = window.__qualityHomeCatalogPromise || window.QualityPublicCatalog.load();
   window.__qualityHomeCatalogPromise
     .then(data => {
       const track = document.getElementById('carousel1');
@@ -500,7 +498,7 @@
             ${qualityProductActionsHtml(p, `/produto/${encodeURIComponent(p.slug || p.id)}/`)}
             ${productTagsHtml(p, 2)}
             ${(p.detailsEnabled || hasGallery(p)) ? `<a class="quality-card-image-link" href="${detailUrl}" aria-label="Ver detalhes de ${escapeHtml(p.name || 'produto')}">` : ''}
-            <img src="${escapeHtml(productImagePath(p.optimizedImage || p.image || 'images/sem-imagem.png'))}"${p.optimizedImage && p.image ? ` data-quality-original-src="${escapeHtml(productImagePath(p.image))}"` : ''} alt="${escapeHtml(p.name || '')}" loading="${imageIndex < 4 ? 'eager' : 'lazy'}" fetchpriority="${imageIndex < 2 ? 'high' : 'auto'}" decoding="async" data-quality-product-image="1">
+            <img src="${escapeHtml(productImagePath(p.optimizedImage || p.image || 'images/sem-imagem.png'))}"${p.optimizedImage && p.image ? ` data-quality-original-src="${escapeHtml(productImagePath(p.image))}"` : ''} alt="${escapeHtml(p.name || '')}" loading="${imageIndex < 2 ? 'eager' : 'lazy'}" fetchpriority="${imageIndex < 2 ? 'high' : 'auto'}" decoding="async" data-quality-product-image="1">
             ${(p.detailsEnabled || hasGallery(p)) ? `</a>` : ''}
           </div>
           <h3>${escapeHtml(p.name || '')}</h3>
@@ -517,7 +515,16 @@
       qualityBindProductActions();
     })
     .catch(() => {
-      document.getElementById('no-results').style.display = 'block';
+      const result = document.getElementById('no-results');
+      if (!result) return;
+      result.style.display = 'block';
+      result.textContent = 'Não foi possível carregar a vitrine. Verifique sua conexão.';
+      const retry = document.createElement('button');
+      retry.type = 'button';
+      retry.className = 'quality-catalog-retry';
+      retry.textContent = 'Tentar novamente';
+      retry.addEventListener('click', () => window.location.reload());
+      result.appendChild(retry);
     });
   </script>
 
@@ -577,7 +584,7 @@
       return items.filter(p => activeProduct(p) && accepted.has(normalizeCategory(p.category || p.virtualStore?.category || ''))).slice(0,max);
     }
 
-    const promise = window.__qualityHomeCatalogPromise || fetch('/content/catalog-public.json', {cache:'no-store'}).then(r=>r.json());
+    const promise = window.__qualityHomeCatalogPromise || window.QualityPublicCatalog.load();
     promise.then(data => {
       const items = Array.isArray(data?.items) ? data.items : [];
       if (enabled('smartphones')) {
@@ -610,7 +617,7 @@
   })();
   </script>
 
-  <script src="/js/home-marketplace.js?v=20261005-imgopt1"></script>
+  <script src="/js/home-marketplace.js?v=20261009-conversao1"></script>
 
   <script>
   // V8.0.1 - Busca reforçada na Home sem mexer no main.js
@@ -656,9 +663,9 @@
 
     function fetchJson(paths) {
       let lastError = null;
-      return paths.reduce(function(promise, url){
+      return (/^\/site\//.test(location.pathname) ? [...paths].reverse() : paths).reduce(function(promise, url){
         return promise.catch(function(){
-          return fetch(url, { cache: 'no-store' }).then(function(res){
+          return fetch(url, { cache: 'default' }).then(function(res){
             if (!res.ok) throw new Error('Falha ao carregar ' + url);
             return res.json();
           }).catch(function(err){
@@ -713,7 +720,7 @@
       trackHomeSearch(termo);
 
       Promise.all([
-        fetchJson(['/content/catalog-public.json', '/site/content/catalog-public.json', '/content/products.json', '/site/content/products.json']).catch(function(){ return { items: [] }; }),
+        window.QualityPublicCatalog.load().catch(function(){ return { items: [] }; }),
         fetchJson(['/content/categories.json', '/site/content/categories.json']).catch(function(){ return { items: [] }; })
       ]).then(function(results){
         const products = results[0].items || [];
@@ -1010,5 +1017,5 @@
 
 <script src="/js/image-resilience.js?v=20261006-fix1"></script>
 
-<script src="/js/quality-analytics.js?v=20261006-fix2"></script>
+<script src="/js/quality-analytics.js?v=20261009-conversao1"></script>
 </body></html>

@@ -294,7 +294,7 @@ function doSearch(query) {
 
   // Se não encontrou na página, procura no catálogo inteiro e redireciona
   Promise.all([
-    fetch("/content/catalog-public.json", { cache: "no-store" }).then(r => r.json()).catch(() => ({ items: [] })),
+    (window.QualityPublicCatalog ? window.QualityPublicCatalog.load() : fetch("/content/catalog-public.json", { cache: "no-cache" }).then(r => r.json())).catch(() => ({ items: [] })),
     fetch("/content/categories.json").then(r => r.json()).catch(() => ({ items: [] }))
   ]).then(([productsData, categoriesData]) => {
     const produtos = productsData.items || [];
@@ -333,7 +333,8 @@ function doSearch(query) {
 // ----------------------------
 function initSwiper() {
   if (typeof Swiper === "undefined") return;
-  if (!document.querySelector(".swiper")) return;
+  if (!document.querySelector(".swiper") || window.__qualitySwiperReady) return;
+  window.__qualitySwiperReady = true;
 
   new Swiper(".swiper", {
     loop: true,
@@ -422,7 +423,7 @@ function initSwiper() {
   if (window.__qualityStorefrontLoaderV1) return;
   window.__qualityStorefrontLoaderV1 = true;
   var script = document.createElement('script');
-  script.src = '/js/storefront-enhancements.js?v=20261006-nav1';
+  script.src = '/js/storefront-enhancements.js?v=20261010-navfix1';
   script.defer = true;
   document.head.appendChild(script);
 })();

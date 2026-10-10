@@ -123,7 +123,10 @@
     return next();
   }
   function loadCatalog(){
-    if(!catalogPromise) catalogPromise = fetchFirstJson(['/content/catalog-public.json','/site/content/catalog-public.json','/content/products.json','/site/content/products.json']);
+    if(!catalogPromise) {
+      var source = window.QualityPublicCatalog ? window.QualityPublicCatalog.load() : fetchFirstJson(['/content/catalog-public.json','/site/content/catalog-public.json']);
+      catalogPromise = source.catch(function(){ catalogPromise = null; return {items:[]}; });
+    }
     return catalogPromise;
   }
   function loadCategories(){

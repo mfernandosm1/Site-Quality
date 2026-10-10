@@ -273,7 +273,7 @@
     visible('recommended',count>0);
   }
 
-  var promise=window.__qualityHomeCatalogPromise || fetch('/content/catalog-public.json',{cache:'no-store'}).then(function(r){if(!r.ok)throw new Error('catalog-public');return r.json();}).catch(function(){return fetch('/content/products.json',{cache:'no-store'}).then(function(r){return r.json();});});
+  var promise=window.__qualityHomeCatalogPromise || (window.QualityPublicCatalog ? window.QualityPublicCatalog.load() : Promise.reject(new Error('Catálogo indisponível')));
   promise.then(function(data){
     var items=Array.isArray(data && data.items)?data.items:[];
     renderBrands(items);

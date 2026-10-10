@@ -71,7 +71,7 @@
     if (found) { if (message) message.style.display = 'none'; return; }
 
     Promise.all([
-      fetchFirstJson(['/content/catalog-public.json', '/site/content/catalog-public.json', '/content/products.json', '/site/content/products.json']),
+      window.QualityPublicCatalog ? window.QualityPublicCatalog.load() : fetchFirstJson(['/content/catalog-public.json', '/site/content/catalog-public.json']),
       fetch('/content/categories.json', {cache:'no-store'}).then(function(r){ return r.ok ? r.json() : {items:[]}; }).catch(function(){ return {items:[]}; })
     ]).then(function(all){
       var products = all[0].items || [];
@@ -140,7 +140,7 @@
   if (window.__qualityStorefrontLoaderV1) return;
   window.__qualityStorefrontLoaderV1 = true;
   var script = document.createElement('script');
-  script.src = '/js/storefront-enhancements.js?v=20261006-nav1';
+  script.src = '/js/storefront-enhancements.js?v=20261010-navfix1';
   script.defer = true;
   document.head.appendChild(script);
 })();

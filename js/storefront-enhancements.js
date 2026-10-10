@@ -100,13 +100,17 @@
   }
 
   function getCatalog(){
-    if (!catalogPromise) catalogPromise = fetchFirstJson(CATALOG_URLS).then(function(data){ return Array.isArray(data.items) ? data.items : []; });
+    if (!catalogPromise) {
+      var source = window.QualityPublicCatalog ? window.QualityPublicCatalog.load() : fetchFirstJson(CATALOG_URLS);
+      catalogPromise = source.then(function(data){ return Array.isArray(data.items) ? data.items : []; })
+        .catch(function(error){ catalogPromise = null; throw error; });
+    }
     return catalogPromise;
   }
 
   function getProducts(){
-    if (!productsPromise) productsPromise = fetchFirstJson(PRODUCTS_URLS).then(function(data){ return Array.isArray(data.items) ? data.items : []; });
-    return productsPromise;
+    // Recomendações e comparador usam exatamente o mesmo catálogo público.
+    return getCatalog();
   }
 
   function isVisibleProduct(product){
@@ -429,39 +433,76 @@
     return uniqueValues(out);
   }
 
+  // A vitrine não deve transformar capacidade de RAM, RAM Boost, velocidade ou
+  // capacidades mencionadas no texto promocional em opções de armazenamento.
   function storageValues(product){
     var explicit=variationList(product,'storage');
-    if(explicit.length) return explicit;
-    function extractStorage(source){
-      var values=[];
-      var re=/(\d+(?:[.,]\d+)?)\s*(TB|GB)\b/gi,match;
-      while((match=re.exec(String(source||'')))!==null){
-        var raw=(match[1]+' '+match[2]).replace(/\s+/g,'').toUpperCase().replace(',','.');
-        var before=String(source||'').slice(Math.max(0,match.index-18),match.index).toLowerCase();
-        var after=String(source||'').slice(re.lastIndex,Math.min(String(source||'').length,re.lastIndex+18)).toLowerCase();
-        if(/ram\s*$/.test(before)||/^\s*(?:de\s*)?ram\b/.test(after)||/ram\s*boost/.test(after)) continue;
-        values.push(raw);
-      }
-      return uniqueValues(values);
+    var category=categoryOf(product);
+    var smartphone=category==='smartphones';
+    var name=String(product&&(product.name||product.nome)||'');
+    var clean=normalize(name);
+    // Outros eletrônicos podem trazer GB de RAM, RAM virtual ou memória de vídeos
+    // sem possuírem capacidade de armazenamento comercialmente selecionável.
+    var storageDevice=smartphone || /\b(notebook|laptop|macbook|tablet|ipad|playstation|console|ps4|ps5|switch|pc\s*gamer|computador|ssd|hd\s*(externo|interno)?|pen\s*drive|micro\s*sd|cartao\s*de\s*memoria)\b/i.test(clean);
+    function valid(raw){
+      var m=String(raw||'').trim().match(/^(\d+(?:[.,]\d+)?)\s*(TB|GB)$/i);
+      if(!m) return '';
+      var number=Number(m[1].replace(',','.'));
+      var gb=m[2].toUpperCase()==='TB'?number*1024:number;
+      if(!Number.isFinite(gb) || gb<=0 || gb>8192 || (smartphone && gb<64))return '';
+      return String(number)+m[2].toUpperCase();
     }
-    var fromName=extractStorage(String(product&&(product.name||product.nome)||''));
-    if(fromName.length) return fromName;
-    var description=stripHtml([product&&product.descriptionShort,product&&product.descriptionLong].filter(Boolean).join(' ')).slice(0,1800);
-    var fromDescription=extractStorage(description);
-    if(!fromDescription.length) return [];
-    fromDescription.sort(function(a,b){
-      function mb(v){var n=parseFloat(v)||0;return /TB/i.test(v)?n*1024:n;}
-      return mb(b)-mb(a);
-    });
-    return [fromDescription[0]];
+    var listed=uniqueValues(explicit.map(valid).filter(Boolean));
+    if(listed.length) return listed;
+    if(!storageDevice)return [];
+    var out=[];var m;
+    var re=/(\d+(?:[.,]\d+)?)\s*(TB|GB)\b/gi;
+    while((m=re.exec(name))!==null){
+      var before=name.slice(Math.max(0,m.index-18),m.index).toLowerCase();
+      var after=name.slice(re.lastIndex,re.lastIndex+35).toLowerCase();
+      var number=Number(m[1].replace(',','.'));
+      // Valores baixos sem rotulagem de armazenamento são RAM física / DDR, nunca SSD.
+      if(number<32 && m[2].toUpperCase()==='GB')continue;
+      if(/ram\s*$|boost\s*$|\+\s*$/.test(before) && /ram/.test(before))continue;
+      if(/^\s*(?:de\s*)?(?:ram|ram\s*boost|ddr\d?|mem[oó]ria\s*(?:ram|virtual|unificada))\b/i.test(after))continue;
+      // 16GB + 8GB RAM / velocidade e capacidade de Wi-Fi não são armazenamento.
+      var value=valid(m[1]+m[2]); if(value)out.push(value);
+    }
+    var suffix=/(\d{2,4})\s*(?:GB\s*)?(?:SSD|HD)\b/gi;
+    while((m=suffix.exec(name))!==null){if(Number(m[1])<32)continue;var keyedValue=valid(m[1]+'GB');if(keyedValue)out.push(keyedValue);}
+    if(out.length) return uniqueValues(out);
+    // Descrição só vale se a capacidade estiver explicitamente rotulada.
+    var detail=stripHtml([product&&product.descriptionShort,product&&product.descriptionLong].filter(Boolean).join(' ')).slice(0,2000);
+    var keyed=/(?:armazenamento|mem[oó]ria interna|capacidade interna|ssd|hd interno)\s*[:\-–]?\s*(\d+(?:[.,]\d+)?)\s*(TB|GB)\b/i.exec(detail);
+    return keyed && valid(keyed[1]+keyed[2]) ? [valid(keyed[1]+keyed[2])] : [];
   }
 
   function ramValues(product){
-    var values=variationList(product,'ram');
-    var source=(String(product&&(product.name||product.nome)||'')+' '+stripHtml([product&&product.descriptionShort,product&&product.descriptionLong].filter(Boolean).join(' '))).slice(0,2600);
+    var name=String(product&&(product.name||product.nome)||'');
+    var category=categoryOf(product);
+    if(category!=='smartphones' && !/\b(notebook|laptop|macbook|tablet|ipad|pc\s*gamer|computador)\b/i.test(normalize(name))) return [];
+    var source=name+' '+stripHtml([product&&product.descriptionShort].filter(Boolean).join(' ')).slice(0,800);
+    var explicit=variationList(product,'ram');
+    var collected=[];
+    function add(raw){
+      var m=String(raw||'').trim().match(/^(\d+(?:[.,]\d+)?)\s*GB$/i);
+      if(!m)return;
+      var value=Number(m[1].replace(',','.'));
+      if(value>=2 && value<=32 && Number.isInteger(value))collected.push(value+'GB');
+    }
+    explicit.forEach(add);
     var patterns=[/(\d+(?:[.,]\d+)?)\s*GB\s*(?:de\s*)?RAM\b/gi,/RAM\s*(?:f[ií]sica\s*)?(?:de\s*)?(\d+(?:[.,]\d+)?)\s*GB\b/gi];
-    patterns.forEach(function(re){var m;while((m=re.exec(source))!==null)values.push(String(m[1]).replace(',','.')+'GB');});
-    return uniqueValues(values);
+    patterns.forEach(function(re){var m;while((m=re.exec(source))!==null){
+      // RAM Boost/virtual não equivale à memória física do smartphone.
+      var nearby=source.slice(Math.max(0,m.index-20),Math.min(source.length,re.lastIndex+15));
+      if(/ram\s*boost|ram\s*virtual|mem[oó]ria\s*virtual/i.test(nearby) && !/ram\s*\+/i.test(nearby))continue;
+      add(m[1]+'GB');
+    }});
+    // A soma divulgada no título (ex.: 12GB = 4GB RAM + 8GB Boost)
+    // não corresponde à RAM física. Prefira sempre o valor explícito do grupo.
+    var physical=/(\d{1,2})\s*GB\s*RAM\s*\+\s*\d{1,2}\s*GB\s*RAM\s*Boost/i.exec(name);
+    if(physical) return [physical[1]+'GB'];
+    return uniqueValues(collected);
   }
 
   function colorValues(product){
@@ -475,12 +516,17 @@
   }
 
   function networkValues(product){
+    if(categoryOf(product)!=='smartphones') return [];
     var name=normalize(product&&(product.name||product.nome));
-    var short=normalize(product&&product.descriptionShort);
-    var source=name+' '+short;
-    if(/(^|[^a-z0-9])5g([^a-z0-9]|$)/.test(source)) return ['5G'];
-    if(/(^|[^a-z0-9])4g([^a-z0-9]|$)|\blte\b/.test(source)) return ['4G'];
-    return [];
+    var spec=normalize(product&&product.descriptionShort).slice(0,350);
+    var has5=/(^|[^a-z0-9])5g([^a-z0-9]|$)/.test(name);
+    var has4=/(^|[^a-z0-9])4g([^a-z0-9]|$)|\blte\b/.test(name);
+    if(has5) return ['5G'];
+    if(has4) return ['4G'];
+    // Texto curto não determina geração se mencionar as duas redes; é
+    // necessário conhecer a variante específica anunciada.
+    var match=spec.match(/(?:rede|conectividade|tecnologia)\s*[:\-]?\s*(4g|5g|lte)\b/);
+    return match?[match[1]==='lte'?'4G':match[1].toUpperCase()]:[];
   }
 
   function productSearchFields(product){
@@ -2134,6 +2180,9 @@
     var wrapper = input.closest('.search-wrapper, .search-wrapper-mobile') || input.parentElement;
     if (!wrapper) return;
     wrapper.classList.add('quality-search-host');
+    // Evita sugestões nativas do navegador por cima do autocomplete da Quality.
+    input.setAttribute('autocomplete', 'off');
+    input.setAttribute('spellcheck', 'false');
     var popup = document.createElement('div');
     popup.className = 'quality-search-suggestions';
     popup.setAttribute('role','listbox');
@@ -2172,13 +2221,28 @@
       activeIndex=-1;
     }
 
+    function showSuggested(){
+      if(String(input.value||'').trim()) return;
+      popup.innerHTML='<div class="quality-search-suggestion-head">Sugestões de busca</div>'+
+        ['iPhone 16','Redmi Note 15','Samsung Galaxy','Motorola Moto'].map(function(term){
+          return '<button type="button" class="quality-search-suggested-term" data-quality-suggested-term="'+esc(term)+'"><i class="fa-solid fa-magnifying-glass"></i> '+esc(term)+'</button>';
+        }).join('');
+      popup.classList.add('is-open');
+      activeIndex=-1;
+    }
+    popup.addEventListener('click',function(event){
+      var button=event.target.closest('[data-quality-suggested-term]');
+      if(!button)return;
+      var term=button.getAttribute('data-quality-suggested-term');
+      input.value=term;close();performSearch(term,'Sugestão de busca');
+    });
     input.addEventListener('input', function(){
       clearTimeout(timer);
       var term = String(input.value||'').trim();
-      if (normalize(term).length < 2) { close(); return; }
+      if (normalize(term).length < 2) { if(!term)showSuggested();else close(); return; }
       timer = setTimeout(function(){ getCatalog().then(function(items){ render(items,term); }); }, 90);
     });
-    input.addEventListener('focus', function(){ if (normalize(input.value).length >= 2 && popup.innerHTML) popup.classList.add('is-open'); });
+    input.addEventListener('focus', function(){ if (!normalize(input.value).length)showSuggested();else if (normalize(input.value).length >= 2 && popup.innerHTML) popup.classList.add('is-open'); });
     document.addEventListener('click', function(event){ if (!wrapper.contains(event.target)) close(); });
     input.addEventListener('keydown', function(event){
       if(event.key==='Escape'){close();return;}
@@ -2254,7 +2318,7 @@
     }
 
     var existing = existingFilters[0] || null;
-    if (existing && container.__qualityFilterSignature === signature) return;
+    if (existing && container.__qualityFilterSignature === signature && container.__qualityFilterFirstCard === cards[0]) return;
     if (existing) existing.remove();
 
     container.__qualityFilterBuilding = true;
@@ -2358,6 +2422,68 @@
         groups.forEach(function(group){var values=chosen(group.def.key);if(values.length)url.searchParams.set(group.def.param,values.join(','));else url.searchParams.delete(group.def.param);});
         history.replaceState(null,'',url.pathname+(url.searchParams.toString()?'?'+url.searchParams.toString():'')+url.hash);
       }
+      function contextualizeStorage(card, chosenStorage){
+        // Uma família pode ter título 256GB e variações reais de 1TB/2TB.
+        // O card precisa identificar qual variação satisfaz o filtro, sem
+        // editar os dados originais ou sugerir estoque que não está cadastrado.
+        var title=card.querySelector('h3');
+        if(!title)return;
+        if(!title.dataset.qualityOriginalTitle)title.dataset.qualityOriginalTitle=title.textContent.trim();
+        var original=title.dataset.qualityOriginalTitle;
+        var originalStorage=cardValues(card,'storage');
+        var matches=chosenStorage.filter(function(value){return originalStorage.includes(value);});
+        var variationLabel=card.querySelector('.quality-filter-matched-storage');
+        var hrefNodes=Array.from(card.querySelectorAll('a[href*="/produto/"]'));
+        hrefNodes.forEach(function(link){
+          if(!link.dataset.qualityOriginalHref)link.dataset.qualityOriginalHref=link.getAttribute('href')||'';
+          var originalHref=link.dataset.qualityOriginalHref;
+          if(!originalHref)return;
+          try {
+            var url=new URL(originalHref,document.baseURI);
+            if(matches.length===1)url.searchParams.set('armazenamento',matches[0]);
+            else url.searchParams.delete('armazenamento');
+            link.setAttribute('href',url.pathname+url.search+url.hash);
+          }catch(_){link.setAttribute('href',originalHref);}
+        });
+        var whatsapp=card.querySelector('a.btn-whatsapp[href]');
+        if(whatsapp){
+          if(!whatsapp.dataset.qualityOriginalHref)whatsapp.dataset.qualityOriginalHref=whatsapp.getAttribute('href')||'';
+          try {
+            var waUrl=new URL(whatsapp.dataset.qualityOriginalHref);
+            if(matches.length===1){
+              var base=waUrl.searchParams.get('text')||'';
+              waUrl.searchParams.set('text',base+'\nArmazenamento de interesse: '+matches[0].toUpperCase());
+            }
+            whatsapp.setAttribute('href',waUrl.toString());
+          }catch(_){whatsapp.setAttribute('href',whatsapp.dataset.qualityOriginalHref);}
+        }
+        var titleLink=title.querySelector('a.quality-card-native-title-link');
+        var text=original;
+        var selected=matches.length===1?matches[0]:'';
+        var isDifferent=false;
+        if(selected){
+          var caps=/(\d+(?:[.,]\d+)?\s*(?:TB|GB))\b/gi,found;
+          while((found=caps.exec(original))!==null){
+            var normalizedCap=normalize(found[1]);
+            if(originalStorage.includes(normalizedCap) && normalizedCap!==selected){
+              text=original.slice(0,found.index)+selected.toUpperCase()+original.slice(found.index+found[1].length);
+              isDifferent=true;break;
+            }
+          }
+        }
+        if(titleLink)titleLink.textContent=text;
+        else title.textContent=text;
+        // Rótulo visível para deixar claro que o filtro selecionou uma opção
+        // da variação, e não necessariamente a configuração do título-base.
+        if(matches.length && (isDifferent || matches.length>1)){
+          if(!variationLabel){
+            variationLabel=document.createElement('span');
+            variationLabel.className='quality-filter-matched-storage';
+            title.insertAdjacentElement('afterend',variationLabel);
+          }
+          variationLabel.textContent=(matches.length===1?'Variação: ':'Opções: ')+matches.map(function(x){return x.toUpperCase();}).join(' / ');
+        }else if(variationLabel)variationLabel.remove();
+      }
       function applyFilters(){
         var selections={};groups.forEach(function(group){selections[group.def.key]=chosen(group.def.key);});
         var visible=0;
@@ -2366,6 +2492,7 @@
             var selected=selections[group.def.key];if(!selected.length)return true;
             var values=cardValues(card,group.def.key);return selected.some(function(value){return values.includes(value);});
           });
+          contextualizeStorage(card,show?selections.storage||[]:[]);
           card.classList.toggle('quality-filter-hidden',!show);if(show)visible++;
         });
         var active=Object.keys(selections).reduce(function(total,key){return total+selections[key].length;},0);
@@ -2382,6 +2509,7 @@
       });
 
       container.__qualityFilterSignature = signature;
+      container.__qualityFilterFirstCard = cards[0];
       applyFilters();
     }).catch(function(err){
       console.warn('[Quality Search] Falha ao montar filtros da categoria:', err);
@@ -2438,10 +2566,25 @@
     var whatsapp = card.querySelector('.btn-whatsapp');
     if (whatsapp) {
       var detail = variationText(variation);
-      var message = 'Olá! Vim através do site da Quality Celulares e tenho interesse em ' + (product.name || product.nome || 'este produto') + (detail ? ' — ' + detail : '');
+      var unavailable = availability.available === false;
+      var consult = availability.available === null;
+      var title = product.name || product.nome || 'este produto';
+      var selected = detail ? ' (' + detail + ')' : '';
+      var link = new URL(productUrl(product), window.location.origin).href;
+      var message = unavailable
+        ? 'Olá! Vi ' + title + selected + ' no site da Quality Celulares, mas está indisponível. Vocês possuem uma alternativa?'
+        : 'Olá! Vim através do site da Quality Celulares e tenho interesse em ' + title + selected + (consult ? '. Gostaria de confirmar a disponibilidade.' : '.');
+      message += '\nProduto: ' + link;
       whatsapp.href = 'https://wa.me/' + WHATSAPP_NUMBER + '?text=' + encodeURIComponent(message);
-      whatsapp.innerHTML = '<i class="fa-brands fa-whatsapp"></i> Comprar no WhatsApp';
+      whatsapp.innerHTML = '<i class="fa-brands fa-whatsapp"></i> ' + (unavailable ? 'Consultar alternativas' : consult ? 'Consultar no WhatsApp' : 'Comprar no WhatsApp');
       syncMobileProductCta(product, whatsapp.href);
+      var mobileBar = document.querySelector('.quality-mobile-product-cta');
+      if (mobileBar) {
+        var mobileLabel = mobileBar.querySelector('[data-quality-mobile-cta-label]');
+        if (mobileLabel) mobileLabel.textContent = detail || (unavailable ? 'Consultar alternativas' : 'Atendimento da Quality');
+        var mobileText = mobileBar.querySelector('.quality-mobile-product-cta-copy strong');
+        if (mobileText) mobileText.textContent = unavailable ? 'Outras opções disponíveis' : 'Falar sobre este produto';
+      }
     }
   }
 
@@ -2719,11 +2862,26 @@
     }, 20);
   }
 
+  function applyLinkedStorageSelection(){
+    // O filtro pode apontar para uma variação real sem alterar o cadastro.
+    // O HTML de produto é assíncrono: aguarda a montagem dos botões e seus eventos.
+    if(window.__qualityStorageLinkApplied)return;
+    var requested=new URLSearchParams(location.search).get('armazenamento');
+    if(!requested || !document.getElementById('produto-detalhe'))return;
+    var buttons=Array.from(document.querySelectorAll('.produto-variacao-btn[data-var-type="storage"]'));
+    if(!buttons.length)return;
+    var normalizedRequested=normalize(requested);
+    var found=buttons.find(function(button){return normalize(button.getAttribute('data-var-value')||button.textContent)===normalizedRequested;});
+    window.__qualityStorageLinkApplied=true;
+    if(found && !found.classList.contains('ativa'))found.click();
+  }
+
   var observerRefreshScheduled = false;
   function runObservedEnhancements(){
     observerRefreshScheduled = false;
     ensureInterestNav();
     ensureAutocomplete();
+    applyLinkedStorageSelection();
     decorateProductCards();
     decorateCompareCards();
     ensureCompareCategoryLink();
@@ -2758,6 +2916,7 @@
     initSearchResultsPage();
     ensureInterestNav();
     ensureAutocomplete();
+    applyLinkedStorageSelection();
     decorateProductCards();
     decorateCompareCards();
     ensureCompareCategoryLink();
@@ -2771,4 +2930,28 @@
 
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init, {once:true});
   else init();
+})();
+
+
+/* Mobile Navigation Quality — carregado após os recursos de conversão existentes. */
+(function loadQualityMobileNavigationV1(){
+  if(window.__qualityMobileNavigationLoaderV1) return;
+  window.__qualityMobileNavigationLoaderV1 = true;
+  var stylesheet = document.createElement('link');
+  stylesheet.rel = 'stylesheet';
+  // A prévia do ERP também serve categorias em /smartphones/, /eletronicos/ etc.
+  // No servidor principal /css/ tem rotas seletivas, mas /site/css/ serve todo o CSS.
+  var localHost = /^(localhost|127\.|10\.|192\.168\.|172\.(1[6-9]|2[0-9]|3[01])\.)/i.test(location.hostname);
+  var publicBase = (localHost || location.pathname.indexOf('/site/') === 0) ? '/site/' : '/';
+  stylesheet.href = publicBase + 'css/mobile-navigation.css?v=20261010-navfix1';
+  // Proteção contra vazamento visual da navegação mobile no desktop.
+  var protection = document.createElement('style');
+  protection.textContent = '@media(min-width:851px){#quality-mobile-shell{display:none!important}}';
+  document.head.appendChild(protection);
+  var script = document.createElement('script');
+  script.src = publicBase + 'js/mobile-navigation.js?v=20261010-navfix1';
+  script.defer = true;
+  stylesheet.addEventListener('load', function(){ document.head.appendChild(script); }, {once:true});
+  stylesheet.addEventListener('error', function(){console.warn('[Quality] Não foi possível carregar o layout mobile; navegação original preservada.');}, {once:true});
+  document.head.appendChild(stylesheet);
 })();

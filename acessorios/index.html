@@ -1,5 +1,6 @@
 <!DOCTYPE html><html lang="pt-BR"><head>
   <meta charset="UTF-8">
+  <script src="/js/catalog-runtime.js?v=20261010-uxperf3"></script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Acessórios | Quality Celulares</title>
   <meta name="description" content="Encontre acessórios para celular, notebook e eletrônicos na Quality Celulares. Capas, películas, carregadores, cabos, fones, suportes e muito mais com...">
@@ -11,14 +12,14 @@
   <meta property="og:url" content="https://www.qualitycel.com.br/acessorios/">
   <meta name="twitter:card" content="summary_large_image">
   <link rel="canonical" href="https://www.qualitycel.com.br/acessorios/">
-  <link rel="stylesheet" href="/css/style.css?v=20261008-guidehome1">
+  <link rel="stylesheet" href="/css/style.css?v=20261010-busca-mobile4">
     <!-- QUALITY_PERFORMANCE_MOBILE_V1: antecipa os webfonts dos ícones no mobile -->
   <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin="">
   <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin="">
   <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/webfonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin="">
   <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/webfonts/fa-regular-400.woff2" as="font" type="font/woff2" crossorigin="">
   <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/webfonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin="">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></noscript>
   <style>
     .product-card-variations{display:flex;flex-direction:column;align-items:center;gap:6px;margin:7px 0 10px;}
     .product-card-variation-colors{display:flex;justify-content:center;gap:6px;flex-wrap:wrap;}
@@ -37,7 +38,7 @@
     gtag('js', new Date());
     gtag('config', 'G-9HPD9XCELH');
   </script>
-  <script type="application/ld+json" id="breadcrumb-schema-jsonld">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Início","item":"https://www.qualitycel.com.br/"},{"@type":"ListItem","position":2,"name":"Acessórios","item":"https://www.qualitycel.com.br/acessorios/"}]}</script>
+<script>if(new URLSearchParams(location.search).get('qualityPerf')==='1'){var s=document.createElement('script');s.src='/js/diagnostico-carregamento.js?v=20261010-1';document.head.appendChild(s)}</script>  <script type="application/ld+json" id="breadcrumb-schema-jsonld">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Início","item":"https://www.qualitycel.com.br/"},{"@type":"ListItem","position":2,"name":"Acessórios","item":"https://www.qualitycel.com.br/acessorios/"}]}</script>
 </head>
 <body>
 <!-- QUALITY_ROOTFIX_20260909_1 -->
@@ -211,11 +212,21 @@
 
 
 
+
+
+
+
+
 <header class="header">
   <div class="header-container">
     <a href="/" class="logo-wrapper" data-home-link="">
-      <img src="/images/logo.png" alt="Quality Celulares" class="logo">
+<picture class="quality-desktop-logo-picture"><source media="(min-width: 992px)" srcset="/images/logo-header.png"><img src="/images/logo.png" alt="Quality Celulares" class="logo"></picture>
     </a>
+
+      <div class="search-wrapper">
+        <input type="text" id="search-input" placeholder="Buscar...">
+        <button id="search-button" aria-label="Buscar"><i class="fa fa-search"></i></button>
+      </div>
 
     <nav class="nav-desktop" id="nav-desktop">
       <a href="/" data-home-link="">Início</a>
@@ -226,13 +237,10 @@
           <a href="/acessorios/" class="cat-link">Acessórios</a>
           <a href="/eletronicos/" class="cat-link">Eletrônicos</a>
           <a href="/assistencia-tecnica/" class="cat-link">Assistência Técnica</a>
-      <div class="search-wrapper">
-        <input type="text" id="search-input" placeholder="Buscar...">
-        <button id="search-button" aria-label="Buscar"><i class="fa fa-search"></i></button>
-      </div>
+
     </nav>
 
-    <button id="menu-toggle" class="menu-toggle" aria-label="Abrir menu" aria-controls="mobile-menu" aria-expanded="false">
+    <button id="menu-toggle" class="menu-toggle" aria-label="Abrir menu de categorias" aria-controls="mobile-menu" aria-expanded="false">
       <i class="fa-solid fa-bars"></i>
     </button>
   </div>
@@ -573,9 +581,9 @@
 
   async function fetchJson(paths){
     let lastError = null;
-    for (const url of paths) {
+    for (const url of (/^\/site\//.test(location.pathname) ? [...paths].reverse() : paths)) {
       try {
-        const res = await fetch(url, { cache: 'no-store' });
+        const res = await fetch(url, { cache: 'default' });
         if (res.ok) return await res.json();
       } catch (err) {
         lastError = err;
@@ -650,9 +658,18 @@
 
   Promise.all([
     fetchJson(['/content/categories.json', '/site/content/categories.json']).catch(() => ({ items: [] })),
-    fetchJson(['/content/catalog-public.json', '/site/content/catalog-public.json', '/content/products.json', '/site/content/products.json']).catch(() => ({ items: [] })),
+    window.QualityPublicCatalog.load().catch(() => ({ items: [], __qualityCatalogFailed: true })),
     fetchJson(['/content/subcategories.json', '/site/content/subcategories.json']).catch(() => ({ items: [] }))
   ]).then(([categoriesData, productsData, subcategoriesData]) => {
+    if (productsData.__qualityCatalogFailed) {
+      showMessage('Não foi possível carregar os produtos. Verifique sua conexão e tente novamente.');
+      const retry = document.createElement('button');
+      retry.type = 'button'; retry.className = 'btn quality-catalog-retry';
+      retry.textContent = 'Tentar novamente';
+      retry.addEventListener('click', function(){ window.location.reload(); });
+      document.getElementById('produtos-container')?.appendChild(retry);
+      return;
+    }
     const categories = categoriesData.items || [];
     const subcategories = subcategoriesData.items || [];
     const category = categories.find(c =>
@@ -776,7 +793,8 @@
     const sortSelect = document.getElementById('quality-category-sort');
 
     function renderProducts(mode){
-      container.innerHTML = '';
+      container.replaceChildren();
+      const productFragment = document.createDocumentFragment();
       sortProducts(products, mode || 'featured').forEach((p, imageIndex) => {
         const priceStr = shouldShowPrice(p) ? formatPrice(p.price ?? p.preco) : '';
         const productName = p.name || p.nome || '';
@@ -785,7 +803,7 @@
         const productImageOriginal = assetUrl(productImageOriginalRaw);
         const productImage = assetUrl(productImageOptimizedRaw || productImageOriginalRaw);
         const imageOriginalAttr = productImageOptimizedRaw && productImageOriginal ? ' data-quality-original-src="' + escapeHtml(productImageOriginal) + '"' : '';
-        const imageLoading = imageIndex < 4 ? 'eager' : 'lazy';
+        const imageLoading = imageIndex < 2 ? 'eager' : 'lazy';
         const imagePriority = imageIndex < 2 ? 'high' : 'auto';
         const whatsappText = encodeURIComponent('Olá! Vim através do site e tenho interesse em ' + (productName || 'produto'));
         const hasGallery = Array.isArray(p.gallery) && p.gallery.filter(Boolean).length > 0;
@@ -821,8 +839,9 @@
 			detalhesHTML +
           '<a href="https://wa.me/5555991407824?text=' + whatsappText + '" class="btn btn-whatsapp" target="_blank" rel="noopener noreferrer">' +
           '<i class="fa-brands fa-whatsapp"></i> Comprar no WhatsApp</a>';
-        container.appendChild(card);
+        productFragment.appendChild(card);
       });
+      container.appendChild(productFragment);
       qualityBindProductActions();
     }
 
@@ -1070,9 +1089,9 @@
 })();
 </script>
 
-<script src="/js/category-ui.js?v=20261006-nav1"></script>
+<script src="/js/category-ui.js?v=20261010-navfix1"></script>
 
 <script src="/js/image-resilience.js?v=20261006-fix1"></script>
 
-<script src="/js/quality-analytics.js?v=20261006-fix2"></script>
+<script src="/js/quality-analytics.js?v=20261009-conversao1"></script>
 </body></html>

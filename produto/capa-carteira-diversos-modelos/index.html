@@ -1,6 +1,7 @@
 <!DOCTYPE html><html lang="pt-BR"><head>
   <base href="/">
   <meta charset="UTF-8">
+  <script src="/js/catalog-runtime.js?v=20261010-uxperf3"></script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Capa Carteira para Celular Diversos Modelos | Quality</title>
   <link rel="icon" href="/images/favicon_otimizado.ico?v=3">
@@ -14,7 +15,7 @@
   <meta property="og:url" content="https://www.qualitycel.com.br/produto/capa-carteira-diversos-modelos/">
   <meta name="twitter:card" content="summary_large_image">
   <link rel="canonical" href="https://www.qualitycel.com.br/produto/capa-carteira-diversos-modelos/">
-  <link rel="stylesheet" href="/css/style.css?v=20261008-guidehome1">
+  <link rel="stylesheet" href="/css/style.css?v=20261010-busca-mobile4">
     <!-- QUALITY_PERFORMANCE_MOBILE_V1: antecipa os webfonts dos ícones no mobile -->
   <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin="">
   <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin="">
@@ -353,7 +354,7 @@
 </main>
 
 <div id="footer"></div>
-<script src="/js/main.js?v=20261006-nav1"></script>
+<script src="/js/main.js?v=20261010-navfix1"></script>
 <script>
 (function(){
   function escapeHtml(value){
@@ -1164,16 +1165,19 @@
   }
 
   function fetchProductCatalog(){
-    const urls = ['/content/catalog-public.json', '/site/content/catalog-public.json', '/content/products.json', '/site/content/products.json'];
-    let index = 0;
-    function next(){
-      if (index >= urls.length) return Promise.resolve({ items: [] });
-      const url = urls[index++];
-      return fetch(url, { cache: 'no-store' })
-        .then(r => { if (!r.ok) throw new Error('Falha ao carregar ' + url); return r.json(); })
-        .catch(next);
-    }
-    return next();
+    return window.QualityPublicCatalog.load();
+  }
+
+  function showProductLoadingError(){
+    box.classList.remove('quality-product-loading');
+    box.innerHTML = '<div class="quality-product-load-error" role="alert"><strong>Não foi possível carregar este produto.</strong><p>Confira sua conexão e tente novamente. Suas escolhas não foram perdidas.</p><button type="button" id="quality-product-retry">Tentar novamente</button></div>';
+    const retry = document.getElementById('quality-product-retry');
+    retry?.addEventListener('click', async function(){
+      retry.disabled = true;
+      retry.textContent = 'Carregando…';
+      try { await window.QualityPublicCatalog.retry(); window.location.reload(); }
+      catch (_) { retry.disabled = false; retry.textContent = 'Tentar novamente'; }
+    });
   }
 
   Promise.all([
@@ -1622,10 +1626,7 @@
       initQualityProductGalleryZoom();
 
     })
-    .catch(() => {
-      box.classList.remove('quality-product-loading');
-      box.innerHTML = '<p class="em-breve" style="text-align:center;">Erro ao carregar produto.</p>';
-    });
+    .catch(showProductLoadingError);
 })();
 </script>
 
@@ -1848,5 +1849,5 @@
 
 <script src="/js/image-resilience.js?v=20261006-fix1"></script>
 
-<script src="/js/quality-analytics.js?v=20261006-fix2"></script>
+<script src="/js/quality-analytics.js?v=20261009-conversao1"></script>
 </body></html>

@@ -1,0 +1,141 @@
+/* Quality Celulares — App-like mobile shell V1. Restringe todo o layout ao celular.
+   O desktop mantém seu cabeçalho, menu e rodapé anteriores. */
+#quality-mobile-shell{display:none}
+@media(max-width:850px){
+  body.quality-mobile-app{padding-top:121px!important;padding-bottom:calc(79px + env(safe-area-inset-bottom,0px))!important;}
+  body.quality-mobile-app .header{display:none!important}
+  body.quality-mobile-app footer.footer{display:none!important}
+  body.quality-mobile-app.quality-mobile-cta-active{padding-bottom:calc(158px + env(safe-area-inset-bottom,0px))!important}
+  body.quality-mobile-sheet-open,body.quality-mobile-drawer-open{overflow:hidden!important}
+  #quality-mobile-shell{display:block;font-family:Arial,sans-serif;color:#202329}
+  #quality-mobile-shell *{box-sizing:border-box}
+  #quality-mobile-shell button{font-family:inherit;cursor:pointer}
+  #quality-mobile-shell .quality-mobile-topbar{position:fixed;top:0;left:0;right:0;z-index:1600;background:#fff;border-bottom:1px solid #eceef1;padding:env(safe-area-inset-top,0px) 14px 9px;box-shadow:0 3px 15px rgba(20,24,32,.06)}
+  #quality-mobile-shell .quality-mobile-brand{height:55px;display:flex;align-items:center;justify-content:space-between;gap:10px}
+  #quality-mobile-shell .quality-mobile-brand a{display:inline-flex;align-items:center;min-width:0;margin-right:auto}
+  #quality-mobile-shell .quality-mobile-menu-trigger{border:0;background:#f5f5f6;border-radius:10px;width:42px;height:42px;flex:0 0 42px;font-size:20px;color:#b00714}
+  #quality-mobile-shell .quality-mobile-brand img{height:45px;width:auto;max-width:170px;object-fit:contain}
+  #quality-mobile-shell .quality-mobile-brand span{color:#74777c;font-size:10px;white-space:nowrap;font-weight:600;letter-spacing:.005em}
+  #quality-mobile-shell .quality-mobile-search-form{height:43px;display:flex;align-items:center;background:#f5f6f8;border:1px solid #e1e3e8;border-radius:12px;overflow:hidden}
+  #quality-mobile-shell .quality-mobile-search-label{position:absolute;clip:rect(0 0 0 0);width:1px;height:1px;overflow:hidden;white-space:nowrap}
+  #quality-mobile-shell .quality-mobile-search-form:focus-within{border-color:#b60a14;box-shadow:0 0 0 2px rgba(198,5,18,.12)}
+  #quality-mobile-shell .quality-mobile-search-form input{flex:1;min-width:0;width:100%;height:100%;border:0!important;background:transparent;outline:none;font:normal 16px Arial,sans-serif;padding:0 12px;color:#222}
+  #quality-mobile-shell .quality-mobile-search-form input::placeholder{color:#777e86;opacity:1}
+  #quality-mobile-shell .quality-mobile-search-form button{align-self:stretch;flex:0 0 46px;border:0;background:transparent;color:#a20a13;font-size:18px}
+  #quality-mobile-shell .quality-mobile-search-suggestions{display:none;position:absolute;top:calc(100% - 2px);left:14px;right:14px;background:#fff;border:1px solid #e7e9ed;border-radius:0 0 14px 14px;box-shadow:0 14px 26px rgba(15,23,42,.14);max-height:min(48vh,380px);overflow:auto;z-index:1610}
+  #quality-mobile-shell .quality-mobile-search-suggestions.is-open{display:block}
+  #quality-mobile-shell .quality-mobile-suggestion-term{display:block;width:100%;padding:13px 16px;border:0;background:white;text-align:left;border-bottom:1px solid #f2f3f4;font-size:14px;color:#374151}
+  #quality-mobile-shell .quality-mobile-suggestion-term:before{content:"⌕";color:#9299a3;padding-right:12px;font-size:18px}
+  #quality-mobile-shell .quality-mobile-suggestion-heading{font-size:11px;font-weight:700;color:#777e86;margin:10px 12px 4px}
+  #quality-mobile-shell .quality-mobile-suggestion{display:block;padding:12px;color:#202329;border-bottom:1px solid #f0f1f3;text-decoration:none;font-size:13px;line-height:1.3}
+  #quality-mobile-shell .quality-mobile-suggestion.is-active,#quality-mobile-shell .quality-mobile-suggestion:active{background:#fff3f4;color:#ad0712}
+  #quality-mobile-shell .quality-mobile-suggestion-more{display:block;width:100%;border:0;background:#fff;padding:13px;text-align:center;color:#b80914;font-size:12px;font-weight:700}
+  #quality-mobile-shell .quality-mobile-bottom-nav{position:fixed;z-index:2300;bottom:0;left:0;right:0;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));align-items:start;min-height:calc(64px + env(safe-area-inset-bottom,0px));padding:7px 3px calc(5px + env(safe-area-inset-bottom,0px));border-top:1px solid #e7e8eb;background:#fff;box-shadow:0 -4px 20px rgba(20,24,32,.07)}
+  #quality-mobile-shell .quality-mobile-tab{min-width:0;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:5px;padding:5px 1px;color:#6b7280;background:transparent;border:0;border-radius:10px;min-height:49px;font-size:10.5px;font-weight:600;line-height:1.1}
+  #quality-mobile-shell .quality-mobile-tab i{font-size:19px;height:21px;display:flex;align-items:center}
+  #quality-mobile-shell .quality-mobile-tab span{white-space:nowrap}
+  #quality-mobile-shell .quality-mobile-tab:active{background:#f7f7f7}
+  #quality-mobile-shell .quality-mobile-tab.is-current{color:#bb0713}
+  #quality-mobile-shell .quality-mobile-drawer{position:fixed;inset:0;z-index:2800;display:none}
+  #quality-mobile-shell .quality-mobile-drawer.is-open{display:block}
+  #quality-mobile-shell .quality-mobile-drawer-shade{position:absolute;inset:0;background:rgba(14,19,28,.55)}
+  #quality-mobile-shell .quality-mobile-drawer-panel{position:absolute;top:0;bottom:0;left:0;width:min(320px,88vw);background:#f7f8fa;box-shadow:8px 0 28px rgba(0,0,0,.2);display:flex;flex-direction:column;overflow-y:auto;overscroll-behavior:contain}
+  #quality-mobile-shell .quality-mobile-drawer-head{display:flex;align-items:center;justify-content:space-between;padding:21px 18px;background:#fff;border-bottom:1px solid #e9ebee;font-size:18px}
+  #quality-mobile-shell .quality-mobile-drawer-head button{border:0;background:#f2f3f5;border-radius:50%;width:36px;height:36px;color:#424954}
+  #quality-mobile-shell .quality-mobile-drawer-links{display:grid;margin:13px 12px 8px;background:#fff;border-radius:13px;overflow:hidden}
+  #quality-mobile-shell .quality-mobile-drawer-links a,#quality-mobile-shell .quality-mobile-drawer-aux button{display:flex;align-items:center;gap:13px;padding:15px 17px;border:0;border-bottom:1px solid #f0f1f3;text-decoration:none;color:#2d333b;background:#fff;text-align:left;font-size:14px;font-weight:600}
+  #quality-mobile-shell .quality-mobile-drawer-links i,#quality-mobile-shell .quality-mobile-drawer-aux i{width:21px;text-align:center;color:#77808c;font-size:17px}
+  #quality-mobile-shell .quality-mobile-drawer-aux{display:grid;margin:0 12px 22px;background:#fff;border-radius:13px;overflow:hidden}
+  #quality-mobile-shell .quality-mobile-sheet{position:fixed;inset:0;z-index:2600;opacity:0;pointer-events:none;transition:opacity .18s ease}
+  #quality-mobile-shell .quality-mobile-sheet.is-open{opacity:1;pointer-events:auto}
+  #quality-mobile-shell .quality-mobile-sheet-backdrop{position:absolute;inset:0;background:rgba(22,26,34,.50)}
+  #quality-mobile-shell .quality-mobile-sheet-card{position:absolute;left:0;right:0;bottom:0;display:flex;flex-direction:column;max-height:calc(92dvh - env(safe-area-inset-top,0px));padding-bottom:env(safe-area-inset-bottom,0px);border-radius:22px 22px 0 0;background:#f7f8fa;box-shadow:0 -12px 35px rgba(0,0,0,.17);transform:translateY(16px);transition:transform .2s ease}
+  #quality-mobile-shell .quality-mobile-sheet.is-open .quality-mobile-sheet-card{transform:translateY(0)}
+  #quality-mobile-shell .quality-mobile-sheet-head{min-height:65px;display:flex;align-items:center;justify-content:space-between;padding:14px 20px;border-bottom:1px solid #e8eaed;background:#fff;border-radius:22px 22px 0 0}
+  #quality-mobile-shell .quality-mobile-sheet-title{font-size:19px;font-weight:800;line-height:1.2;color:#222;margin:0}
+  #quality-mobile-shell .quality-mobile-sheet-close{display:flex;align-items:center;justify-content:center;background:#f2f3f5;border:0;width:35px;height:35px;border-radius:50%;font-size:17px;color:#53565a}
+  #quality-mobile-shell .quality-mobile-sheet-content{padding:14px 16px 26px;overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch}
+  #quality-mobile-shell .quality-mobile-sheet-intro{font-size:13px;color:#666c75;margin:4px 4px 15px}
+  #quality-mobile-shell .quality-mobile-categories{display:grid;gap:8px}
+  #quality-mobile-shell a.quality-mobile-category{display:grid;grid-template-columns:44px minmax(0,1fr) 14px;align-items:center;gap:11px;min-height:74px;text-decoration:none;color:#202329;background:#fff;padding:12px 14px;border:1px solid #e9eaee;border-radius:14px}
+  #quality-mobile-shell .quality-mobile-category-icon{display:grid;place-items:center;width:42px;height:42px;border-radius:12px;background:#fff1f2;color:#b40915;font-size:20px}
+  #quality-mobile-shell .quality-mobile-category strong{display:block;font-size:14px;margin-bottom:3px}
+  #quality-mobile-shell .quality-mobile-category small{display:block;font-size:11px;color:#69717b}
+  #quality-mobile-shell .quality-mobile-category>.fa-chevron-right{color:#9ca3af;font-size:12px}
+  #quality-mobile-shell .quality-mobile-sheet-subtitle{margin:20px 5px 9px;color:#4b525c;font-size:12px;letter-spacing:.02em;font-weight:800}
+  #quality-mobile-shell .quality-mobile-info-link{display:flex;align-items:center;gap:12px;padding:13px 15px;background:#fff;border:1px solid #eceef1;border-radius:10px;margin-bottom:7px;text-decoration:none;color:#24292f;font-size:13px;font-weight:600}
+  #quality-mobile-shell .quality-mobile-info-link>.fa-chevron-right{margin-left:auto;font-size:11px;color:#a1a4aa}
+  #quality-mobile-shell .quality-mobile-info-link>:first-child{color:#be121e;width:18px}
+  #quality-mobile-shell .quality-mobile-sheet-section{background:#fff;border:1px solid #e7e9ec;border-radius:14px;overflow:hidden}
+  #quality-mobile-shell .quality-mobile-sheet-section a{display:flex;align-items:center;gap:12px;min-height:54px;padding:12px 16px;border-bottom:1px solid #eeeff0;color:#32383e;text-decoration:none;font-size:13px;font-weight:600}
+  #quality-mobile-shell .quality-mobile-sheet-section a:last-child{border-bottom:0}
+  #quality-mobile-shell .quality-mobile-sheet-section a>i:first-child{font-size:17px;width:22px;text-align:center;color:#6b7280}
+  #quality-mobile-shell .quality-mobile-sheet-section a>.fa-chevron-right{margin-left:auto;font-size:11px;color:#aab0b7}
+  #quality-mobile-shell .quality-mobile-socials{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+  #quality-mobile-shell .quality-mobile-socials a{display:flex;justify-content:center;align-items:center;gap:10px;padding:15px 10px;border-radius:12px;background:#fff;border:1px solid #e9ebee;color:#252b32;text-decoration:none;font-weight:700;font-size:13px}
+  #quality-mobile-shell .quality-mobile-legal{text-align:center;color:#8d929b;line-height:1.5;font-size:11px;margin:19px 5px 0}
+  body.quality-mobile-app .quality-mobile-product-cta{bottom:calc(75px + env(safe-area-inset-bottom,0px))!important;z-index:1650!important}
+  body.quality-mobile-app.quality-mobile-sheet-open .quality-mobile-product-cta{opacity:0!important;pointer-events:none!important}
+  body.quality-mobile-app.quality-interest-open .quality-mobile-bottom-nav,
+  body.quality-mobile-app.quality-favorites-open .quality-mobile-bottom-nav{z-index:950}
+  body.quality-gallery-viewer-open .quality-mobile-bottom-nav,
+  body.quality-gallery-viewer-open .quality-mobile-topbar{display:none!important}
+  body.quality-mobile-app .quality-interest-panel,
+  body.quality-mobile-app .quality-favorites-panel{z-index:3000}
+}
+@media(max-width:370px){
+ #quality-mobile-shell .quality-mobile-brand span{font-size:9px}
+ #quality-mobile-shell .quality-mobile-brand img{max-width:145px}
+ #quality-mobile-shell .quality-mobile-tab{font-size:9.5px}
+}
+@media(min-width:851px){
+ body.quality-mobile-app{padding-top:80px}
+}
+@media(prefers-reduced-motion:reduce){
+ #quality-mobile-shell .quality-mobile-sheet,#quality-mobile-shell .quality-mobile-sheet-card{transition:none!important}
+}
+
+
+/* QUALITY_SEARCH_MOBILE_FULLSCREEN_20261010
+   Busca ocupa quase toda a largura do celular; ao focar abre tela limpa.
+   O viewport mantém scale=1 porque o input usa 16px ou mais. */
+@media(max-width:850px){
+  #quality-mobile-shell .quality-mobile-search-row{display:flex;align-items:center;gap:0;width:100%}
+  #quality-mobile-shell .quality-mobile-search-row .quality-mobile-search-form{flex:1;min-width:0;width:100%}
+  #quality-mobile-shell .quality-mobile-search-back{display:none}
+  #quality-mobile-shell .quality-mobile-search-form input{
+    font-size:16px!important;line-height:normal!important;-webkit-text-size-adjust:100%;
+    appearance:none;-webkit-appearance:none;transform:none!important;zoom:1!important
+  }
+  body.quality-mobile-search-open{overflow:hidden!important}
+  body.quality-mobile-search-open #quality-mobile-shell .quality-mobile-topbar{
+    inset:0 0 0 0;z-index:4000;display:flex;flex-direction:column;
+    height:100vh;height:100dvh;padding:calc(env(safe-area-inset-top,0px) + 10px) 14px env(safe-area-inset-bottom,0px);
+    background:#fff;box-shadow:none;border:0;overflow:hidden
+  }
+  body.quality-mobile-search-open #quality-mobile-shell .quality-mobile-brand{display:none!important}
+  body.quality-mobile-search-open #quality-mobile-shell .quality-mobile-search-row{gap:10px;flex:0 0 auto}
+  body.quality-mobile-search-open #quality-mobile-shell .quality-mobile-search-back{
+    display:grid;place-items:center;flex:0 0 34px;width:34px;height:44px;padding:0;
+    border:0;background:transparent;font-size:20px;color:#a60713
+  }
+  body.quality-mobile-search-open #quality-mobile-shell .quality-mobile-search-form{
+    width:auto;flex:1;height:46px;border-radius:12px;background:#f6f7f9
+  }
+  body.quality-mobile-search-open #quality-mobile-shell .quality-mobile-search-suggestions{
+    display:block!important;position:relative!important;inset:auto!important;
+    flex:1 1 auto;min-height:0;max-height:none;overflow-y:auto;
+    background:white;border:0;border-radius:0;box-shadow:none;margin:16px -14px 0
+  }
+  body.quality-mobile-search-open #quality-mobile-shell .quality-mobile-suggestion-heading{
+    padding:12px 22px 10px;margin:0;font-size:14px;font-weight:800;color:#232a34
+  }
+  body.quality-mobile-search-open #quality-mobile-shell .quality-mobile-suggestion-term{
+    padding:17px 22px;min-height:55px;border-bottom:1px solid #eceef1;font-size:16px
+  }
+  body.quality-mobile-search-open #quality-mobile-shell .quality-mobile-suggestion{
+    padding:16px 23px;font-size:15px
+  }
+  body.quality-mobile-search-open #quality-mobile-shell .quality-mobile-bottom-nav,
+  body.quality-mobile-search-open .quality-mobile-product-cta{display:none!important}
+}
