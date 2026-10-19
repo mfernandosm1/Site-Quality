@@ -5,6 +5,14 @@ function qualityIsStaticCategoryPage(){
 
 // Aguarda DOM estar pronto
 document.addEventListener("DOMContentLoaded", () => {
+  // Ferramentas de conta, favoritos e carrinho: carregamento não bloqueante.
+  if (!window.__qualityCommerceHeaderRequested) {
+    window.__qualityCommerceHeaderRequested = true;
+    const commerceHeader = document.createElement('script');
+    commerceHeader.src = '/js/quality-header-commerce.js?v=20261018-v29';
+    commerceHeader.defer = true;
+    document.head.appendChild(commerceHeader);
+  }
   // Carregar header
   const headerContainer = document.getElementById("header");
   if (headerContainer) {
@@ -72,7 +80,8 @@ function carregarCategoriasNoHeader() {
       navDesktop.querySelectorAll("a.cat-link").forEach(a => a.remove());
       navMobile.querySelectorAll("a.cat-link").forEach(a => a.remove());
 
-      const searchWrapper = navDesktop.querySelector(".search-wrapper");
+      const desktopActions = document.querySelector('.quality-desktop-actions');
+      const insertBeforeNode = desktopActions || navDesktop.querySelector('.quality-account-nav-link') || null;
 
       categorias
         .filter(cat => cat && cat.slug)
@@ -93,7 +102,7 @@ function carregarCategoriasNoHeader() {
           }
           linkD.appendChild(document.createTextNode(nome));
 
-          if (searchWrapper) navDesktop.insertBefore(linkD, searchWrapper);
+          if (insertBeforeNode) navDesktop.insertBefore(linkD, insertBeforeNode);
           else navDesktop.appendChild(linkD);
 
           const linkM = document.createElement("a");
@@ -423,7 +432,16 @@ function initSwiper() {
   if (window.__qualityStorefrontLoaderV1) return;
   window.__qualityStorefrontLoaderV1 = true;
   var script = document.createElement('script');
-  script.src = '/js/storefront-enhancements.js?v=20261010-navfix1';
+  script.src = '/js/storefront-enhancements.js?v=20261018-v30';
   script.defer = true;
+  document.head.appendChild(script);
+})();
+
+
+// Perguntas e respostas: ativa também nas páginas amigáveis já geradas antes de uma nova publicação.
+(function loadQualityQuestionsOnProduct(){
+  if(!/(?:^|\/)produto(?:\/|\.html)/i.test(location.pathname||''))return;
+  if(document.querySelector('script[src*="quality-product-questions.js"]'))return;
+  var script=document.createElement('script');script.src='/js/quality-product-questions.js?v=20261018v28';script.defer=true;
   document.head.appendChild(script);
 })();

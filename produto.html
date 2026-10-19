@@ -354,6 +354,7 @@
 
 <div id="footer"></div>
 <script src="/js/main.js?v=20261010-navfix1"></script>
+<script src="/js/quality-product-questions.js?v=20261018v28"></script>
 <script>
 (function(){
   function escapeHtml(value){
@@ -1274,6 +1275,7 @@
       document.querySelectorAll('.produtos-relacionados').forEach(el => el.remove());
       box.insertAdjacentHTML('afterend', relatedProductsHtml(product, data.items || []) + crossSellProductsHtml(product, data.items || []) + favoriteProductsHtml(product, data.items || []) + recentlyViewedProductsHtml(product, data.items || []));
       qualityBindProductActions();
+      if(window.QualityProductQuestions) window.QualityProductQuestions.mount(product,box);
 
       const principal = document.getElementById('galeria-principal');
 

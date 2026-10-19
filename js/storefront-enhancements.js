@@ -13,6 +13,7 @@
 
   var WHATSAPP_NUMBER = '5555991407824';
   var INTEREST_KEY = 'quality_interest_list_v1';
+  var currentDetailCartProduct = null;
   var COMPARE_KEY = 'quality_compare_smartphones_v1';
   var COMPARE_MAX = 3;
   var CATALOG_URLS = ['/content/catalog-public.json', '/site/content/catalog-public.json'];
@@ -864,6 +865,8 @@
   function writeInterest(items){
     try { localStorage.setItem(INTEREST_KEY, JSON.stringify(items || [])); } catch (_) {}
     refreshInterestUI();
+    // O badge do cabeçalho deve refletir a gravação no mesmo clique, sem polling.
+    window.dispatchEvent(new Event('quality:cart-changed'));
   }
 
   function variationText(variation){
@@ -894,7 +897,7 @@
     var items = readInterest().filter(function(existing){ return interestItemKey(existing) !== key; });
     items.unshift(item);
     writeInterest(items.slice(0, 40));
-    toast('Adicionado à sua lista');
+    toast('Produto adicionado ao carrinho');
   }
 
   function removeInterest(key){
@@ -914,11 +917,28 @@
     window.__qualityStorefrontToastTimer = setTimeout(function(){ el.classList.remove('show'); }, 1800);
   }
 
+  // O título-base pode mencionar 128 GB, mesmo quando a variação escolhida é 256 GB.
+  // Corrigir SOMENTE a apresentação, preservando nome, código e variações cadastrados.
+  function nameForChosenVariation(name,variation){
+    var title=String(name||'Produto'),storage=String(variation&&variation.storage||'').trim();
+    var selected=/^(\d+(?:[.,]\d+)?)\s*(GB|TB)$/i.exec(storage);
+    if(!selected)return title;
+    var desired=selected[1].replace(',', '.')+selected[2].toUpperCase();
+    var pattern=/\b(\d+(?:[.,]\d+)?)\s*(GB|TB)\b/gi,match;
+    while((match=pattern.exec(title))!==null){
+      // Não substituir a capacidade de RAM quando há mais de uma memória no título.
+      var before=title.slice(Math.max(0,match.index-16),match.index);
+      if(/(?:\bRAM|\bmem[oó]ria\s+RAM)\s*[:\-]?\s*$/i.test(before))continue;
+      if(match[0].replace(/\s+/g,'').toUpperCase()===desired.toUpperCase())return title;
+      return title.slice(0,match.index)+desired+title.slice(match.index+match[0].length);
+    }
+    return title; // sem capacidade identificável: detalhe da variação permanece explícito.
+  }
   function interestMessage(items){
-    var lines = ['Olá! Vim através do site da Quality Celulares e tenho interesse em:'];
+    var lines = ['Olá! Quero comprar os seguintes produtos que selecionei no site da Quality Celulares:'];
     items.forEach(function(item){
       var detail = variationText(item.variation || {});
-      lines.push('• ' + (item.name || 'Produto') + (detail ? ' — ' + detail : ''));
+      lines.push('• ' + nameForChosenVariation(item.name,item.variation||{}) + (detail ? ' — ' + detail : ''));
     });
     return lines.join('\n');
   }
@@ -930,8 +950,8 @@
     panel.className = 'quality-interest-panel';
     panel.innerHTML =
       '<div class="quality-interest-backdrop" data-quality-close-interest></div>' +
-      '<aside class="quality-interest-box" aria-label="Minha lista de interesse">' +
-        '<div class="quality-interest-head"><div><strong>Minha lista</strong><span>Produtos que você quer consultar</span></div><button type="button" data-quality-close-interest aria-label="Fechar">×</button></div>' +
+      '<aside class="quality-interest-box" aria-label="Meu carrinho">' +
+        '<div class="quality-interest-head"><div><strong>Meu carrinho</strong><span>Revise os produtos antes de continuar</span></div><button type="button" data-quality-close-interest aria-label="Fechar">×</button></div>' +
         '<div class="quality-interest-body"></div>' +
         '<div class="quality-interest-footer"></div>' +
       '</aside>';
@@ -945,7 +965,7 @@
     var footer = panel.querySelector('.quality-interest-footer');
     var items = readInterest();
     if (!items.length) {
-      body.innerHTML = '<div class="quality-interest-empty"><i class="fa-solid fa-list-check"></i><strong>Sua lista está vazia</strong><p>Adicione produtos enquanto navega e envie tudo junto pelo WhatsApp.</p></div>';
+      body.innerHTML = '<div class="quality-interest-empty"><i class="fa-solid fa-list-check"></i><strong>Seu carrinho está vazio</strong><p>Escolha seus produtos e finalize o atendimento pelo WhatsApp.</p></div>';
       footer.innerHTML = '';
       return;
     }
@@ -953,16 +973,19 @@
       var key = interestItemKey(item);
       var detail = variationText(item.variation || {});
       return '<div class="quality-interest-item">' +
-        '<a href="' + esc(item.url || '#') + '"><img src="' + esc(assetPath(item.image)) + '" alt="' + esc(item.name) + '" loading="lazy" decoding="async" onerror="this.onerror=null;this.src=\'/images/sem-imagem.png\';"></a>' +
-        '<div class="quality-interest-item-info"><a href="' + esc(item.url || '#') + '">' + esc(item.name || 'Produto') + '</a>' +
+        '<a href="' + esc(item.url || '#') + '"><img src="' + esc(assetPath(item.image)) + '" alt="' + esc(nameForChosenVariation(item.name,item.variation||{})) + '" loading="lazy" decoding="async" onerror="this.onerror=null;this.src=\'/images/sem-imagem.png\';"></a>' +
+        '<div class="quality-interest-item-info"><a href="' + esc(item.url || '#') + '">' + esc(nameForChosenVariation(item.name,item.variation||{})) + '</a>' +
           (detail ? '<small>' + esc(detail) + '</small>' : '') +
           '<button type="button" data-quality-remove-interest="' + esc(key) + '">Remover</button></div>' +
       '</div>';
     }).join('');
     var href = 'https://wa.me/' + WHATSAPP_NUMBER + '?text=' + encodeURIComponent(interestMessage(items));
-    footer.innerHTML = '<a class="quality-interest-whatsapp" href="' + href + '" target="_blank" rel="noopener"><i class="fa-brands fa-whatsapp"></i> Consultar ' + items.length + (items.length === 1 ? ' produto' : ' produtos') + '</a>' +
-      '<button type="button" class="quality-interest-clear" data-quality-clear-interest>Limpar lista</button>';
+    footer.innerHTML = '<a class="quality-interest-whatsapp" href="' + href + '" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-whatsapp"></i> Consultar pelo WhatsApp · ' + items.length + (items.length === 1 ? ' produto' : ' produtos') + '</a>' +
+      '<p class="quality-interest-note">Sua seleção será enviada pelo WhatsApp. Preços e disponibilidade serão confirmados no atendimento. Nenhuma compra é concluída automaticamente.</p>' +
+      '<button type="button" class="quality-interest-clear" data-quality-clear-interest>Esvaziar carrinho</button>';
   }
+
+  // Vitrine publica: sem solicitacoes vinculadas a contas; atendimento pelo WhatsApp.
 
   function openInterest(){
     var panel = interestPanel();
@@ -976,10 +999,18 @@
     document.body.classList.remove('quality-interest-open');
   }
 
+  // Entrada interna usada pelas ações globais do cabeçalho e da conta.
+  window.qualityOpenInterestPanel = openInterest;
+
   function ensureInterestNav(){
     var count = readInterest().length;
     var desktop = document.getElementById('nav-desktop');
-    if (desktop && !desktop.querySelector('[data-quality-open-interest]')) {
+    var headerCart = !!document.querySelector('.header .quality-desktop-actions [data-quality-header-cart]');
+    if (desktop && headerCart) {
+      var obsolete = desktop.querySelector('[data-quality-open-interest]');
+      if (obsolete) obsolete.remove();
+    }
+    if (desktop && !headerCart && !desktop.querySelector('[data-quality-open-interest]')) {
       var button = document.createElement('button');
       button.type = 'button';
       button.className = 'quality-interest-nav quality-interest-nav-desktop';
@@ -988,7 +1019,12 @@
       if (search) desktop.insertBefore(button, search); else desktop.appendChild(button);
     }
     var mobile = document.getElementById('nav-mobile');
-    if (mobile && !mobile.querySelector('[data-quality-open-interest]')) {
+    var mobileHeaderCart = !!document.querySelector('.header #nav-mobile [data-quality-header-cart]');
+    if (mobile && mobileHeaderCart) {
+      var obsoleteMobile = mobile.querySelector('[data-quality-open-interest]');
+      if (obsoleteMobile) obsoleteMobile.remove();
+    }
+    if (mobile && !mobileHeaderCart && !mobile.querySelector('[data-quality-open-interest]')) {
       var mobileButton = document.createElement('button');
       mobileButton.type = 'button';
       mobileButton.className = 'quality-interest-nav quality-interest-nav-mobile';
@@ -999,10 +1035,10 @@
       var countKey = String(count);
       if (button.getAttribute('data-quality-interest-count') !== countKey) {
         button.setAttribute('data-quality-interest-count', countKey);
-        button.innerHTML = '<i class="fa-solid fa-list-check"></i><span>Minha lista</span><b>' + count + '</b>';
+        button.innerHTML = '<i class="fa-solid fa-cart-shopping"></i><span>Meu carrinho</span><b>' + count + '</b>';
       }
       button.classList.toggle('has-items', count > 0);
-      button.setAttribute('aria-label', 'Minha lista de interesse com ' + count + ' produto(s)');
+      button.setAttribute('aria-label', 'Meu carrinho com ' + count + ' produto(s)');
     });
   }
 
@@ -1014,7 +1050,7 @@
       var has = readInterest().some(function(item){ return normalize(item.slug) === normalize(slug); });
       button.classList.toggle('is-added', has);
       if (button.classList.contains('quality-product-interest-primary')) {
-        button.innerHTML = has ? '<i class="fa-solid fa-check"></i> Na minha lista' : '<i class="fa-solid fa-list-check"></i> Adicionar à minha lista';
+        button.innerHTML = has ? '<i class="fa-solid fa-check"></i> No meu carrinho' : '<i class="fa-solid fa-cart-shopping"></i> Adicionar ao carrinho';
       }
     });
   }
@@ -1088,7 +1124,7 @@
     if (document.querySelector('link[data-quality-compare-css]')) return;
     var link = document.createElement('link');
     link.rel = 'stylesheet';
-    link.href = '/css/commerce-compare.css?v=20260925-6';
+    link.href = '/css/commerce-compare.css?v=20261018-carrinho30';
     link.setAttribute('data-quality-compare-css','1');
     document.head.appendChild(link);
   }
@@ -2121,11 +2157,19 @@
         event.preventDefault();
         event.stopPropagation();
         var slug = add.getAttribute('data-product-slug') || slugFromUrl(add.getAttribute('data-product-url') || '') || currentProductSlug();
+        var isDetailButton = add.classList.contains('quality-product-interest-primary');
+        var variation = isDetailButton ? selectedVariationFromDom() : {};
+        // O produto já foi carregado para montar a página: incluir no carrinho
+        // imediatamente, sem esperar uma consulta assíncrona ao catálogo.
+        if (isDetailButton && currentDetailCartProduct &&
+            (normalize(currentDetailCartProduct.slug) === normalize(slug) ||
+             String(currentDetailCartProduct.id || '') === String(slug))) {
+          addInterest(currentDetailCartProduct, variation);
+          return;
+        }
         getCatalog().then(function(items){
           var product = productBySlug(items, slug);
-          if (!product) return;
-          var variation = add.classList.contains('quality-product-interest-primary') ? selectedVariationFromDom() : {};
-          addInterest(product, variation);
+          if (product) addInterest(product, variation);
         });
         return;
       }
@@ -2143,34 +2187,13 @@
     });
   }
 
+  // O carrinho é incluído APENAS na página de detalhes. Remover atalhos
+  // legados dos cards, inclusive nos carrosséis montados dinamicamente.
   function decorateProductCards(){
-    var cards = document.querySelectorAll('.produto-card, .product-card, .produto-relacionado-card');
-    if (!cards.length) return;
-    cards.forEach(function(card){
-      if (card.dataset.qualityInterestDecorated === '1') return;
-      var link = card.querySelector('a[href*="/produto/"]');
-      var slug = link ? slugFromUrl(link.getAttribute('href')) : '';
-      if (!slug) return;
-      card.dataset.qualityInterestDecorated = '1';
-      var actions = card.querySelector('.quality-card-actions');
-      if (!actions) {
-        var imageWrap = card.querySelector('.quality-card-image-wrap') || card;
-        actions = document.createElement('div');
-        actions.className = 'quality-card-actions quality-card-actions-generated';
-        imageWrap.appendChild(actions);
-      }
-      if (!actions.querySelector('[data-quality-add-interest]')) {
-        var button = document.createElement('button');
-        button.type = 'button';
-        button.className = 'quality-card-action quality-interest-card-btn';
-        button.setAttribute('data-quality-add-interest','');
-        button.setAttribute('data-product-slug', slug);
-        button.setAttribute('data-product-url', productUrl({slug:slug}));
-        button.setAttribute('aria-label','Adicionar à minha lista');
-        button.setAttribute('title','Adicionar à minha lista');
-        button.innerHTML = '<i class="fa-solid fa-list-check"></i>';
-        actions.appendChild(button);
-      }
+    document.querySelectorAll('.produto-card, .product-card, .produto-relacionado-card, .quality-card-actions').forEach(function(card){
+      card.querySelectorAll('.quality-interest-card-btn, .quality-card-actions [data-quality-add-interest]').forEach(function(button){
+        button.remove();
+      });
     });
   }
 
@@ -2568,7 +2591,7 @@
       var detail = variationText(variation);
       var unavailable = availability.available === false;
       var consult = availability.available === null;
-      var title = product.name || product.nome || 'este produto';
+      var title = nameForChosenVariation(product.name || product.nome || 'este produto',variation);
       var selected = detail ? ' (' + detail + ')' : '';
       var link = new URL(productUrl(product), window.location.origin).href;
       var message = unavailable
@@ -2603,6 +2626,7 @@
     var box = document.getElementById('produto-detalhe');
     var layout = box && box.querySelector('.produto-layout');
     if (!box || !layout) return false;
+    currentDetailCartProduct = product;
     if (layout.dataset.qualityMarketplaceReady === '1') {
       ensureReturnToResultsLink();
       ensureMobileProductCta(product);
@@ -2676,7 +2700,7 @@
     interest.className = 'quality-product-interest-primary';
     interest.setAttribute('data-quality-add-interest','');
     interest.setAttribute('data-product-slug', product.slug || product.id || '');
-    interest.innerHTML = '<i class="fa-solid fa-list-check"></i> Adicionar à minha lista';
+    interest.innerHTML = '<i class="fa-solid fa-cart-shopping"></i> Adicionar ao carrinho';
     buybox.appendChild(interest);
     addProductCompareButton(product,buybox);
 
@@ -2792,7 +2816,6 @@
     return '<div class="quality-card-actions">' +
       '<button type="button" class="quality-card-action quality-favorite-btn" data-quality-fav data-id="' + esc(product.id || slug) + '" data-slug="' + esc(slug) + '" data-name="' + esc(product.name || product.nome || 'Produto') + '" data-image="' + esc(product.image || product.imagem || '') + '" data-url="' + esc(url) + '" aria-label="Favoritar produto" title="Favoritar"><i class="fa-regular fa-heart"></i></button>' +
       '<button type="button" class="quality-card-action quality-share-btn" data-quality-share data-id="' + esc(product.id || slug) + '" data-slug="' + esc(slug) + '" data-name="' + esc(product.name || product.nome || 'Produto') + '" data-image="' + esc(product.image || product.imagem || '') + '" data-url="' + esc(url) + '" aria-label="Compartilhar produto" title="Compartilhar"><i class="fa-solid fa-share-nodes"></i></button>' +
-      '<button type="button" class="quality-card-action quality-interest-card-btn" data-quality-add-interest data-product-slug="' + esc(slug) + '" data-product-url="' + esc(url) + '" aria-label="Adicionar à minha lista" title="Adicionar à minha lista"><i class="fa-solid fa-list-check"></i></button>' +
     '</div>';
   }
 
@@ -2926,6 +2949,13 @@
     initObservers();
     refreshInterestUI();
     refreshCompareUI();
+    try {
+      var pendingPanel = sessionStorage.getItem('quality_open_after_navigation');
+      if (pendingPanel === 'cart') {
+        sessionStorage.removeItem('quality_open_after_navigation');
+        setTimeout(openInterest, 250);
+      }
+    } catch (_) {}
   }
 
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init, {once:true});
@@ -2943,13 +2973,13 @@
   // No servidor principal /css/ tem rotas seletivas, mas /site/css/ serve todo o CSS.
   var localHost = /^(localhost|127\.|10\.|192\.168\.|172\.(1[6-9]|2[0-9]|3[01])\.)/i.test(location.hostname);
   var publicBase = (localHost || location.pathname.indexOf('/site/') === 0) ? '/site/' : '/';
-  stylesheet.href = publicBase + 'css/mobile-navigation.css?v=20261010-navfix1';
+  stylesheet.href = publicBase + 'css/mobile-navigation.css?v=20261018-v28';
   // Proteção contra vazamento visual da navegação mobile no desktop.
   var protection = document.createElement('style');
   protection.textContent = '@media(min-width:851px){#quality-mobile-shell{display:none!important}}';
   document.head.appendChild(protection);
   var script = document.createElement('script');
-  script.src = publicBase + 'js/mobile-navigation.js?v=20261010-navfix1';
+  script.src = publicBase + 'js/mobile-navigation.js?v=20261018-v28';
   script.defer = true;
   stylesheet.addEventListener('load', function(){ document.head.appendChild(script); }, {once:true});
   stylesheet.addEventListener('error', function(){console.warn('[Quality] Não foi possível carregar o layout mobile; navegação original preservada.');}, {once:true});

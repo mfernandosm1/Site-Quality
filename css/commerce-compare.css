@@ -54,7 +54,8 @@
 .quality-compare-card-btn i{font-size:12px!important}
 
 .quality-product-compare-primary{
-  width:100%;border:1px solid #cbd5e1;background:#fff;color:#0f172a;border-radius:10px;padding:11px 13px;
+  box-sizing:border-box;width:calc(100% - 12px);margin:9px auto 0;
+  border:1px solid #cbd5e1;background:#fff;color:#0f172a;border-radius:10px;padding:10px 12px;
   font:inherit;font-size:13px;font-weight:800;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px
 }
 .quality-product-compare-primary:hover{border-color:#2563eb;color:#1d4ed8;background:#eff6ff}

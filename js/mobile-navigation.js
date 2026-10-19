@@ -1,14 +1,11 @@
-/* Quality Celulares — navegação mobile V1, 09/10/2026
- * Site institucional/comercial: sem checkout/login. Usa Favoritos e Minha lista existentes.
- * O shell não altera os dados do catálogo, apenas disponibiliza sua navegação.
- */
+/* Quality Celulares — navegação mobile V5, 12/10/2026 */
 (function () {
   'use strict';
   if (window.__qualityMobileNavigationV1) return;
   window.__qualityMobileNavigationV1 = true;
   var mq = window.matchMedia('(max-width: 850px)');
   var SEARCH_SUGGESTED = ['iPhone 16','Redmi Note 15','Samsung Galaxy','Motorola Moto'];
-  var root = null, modal = null, lastFocus = null;
+  var root = null, modal = null, lastFocus = null, toastTimer = null;
   var icon = function (name) { return '<i class="fa-solid fa-' + name + '" aria-hidden="true"></i>'; };
   var safeLinks = [
     { title:'Smartphones', url:'/smartphones/', icon:'mobile-screen-button', text:'Celulares novos e seminovos' },
@@ -37,12 +34,23 @@
   function openDialog(view, btn){
     if (!modal) return;
     lastFocus = btn || document.activeElement;
-    modal.querySelector('.quality-mobile-sheet-title').textContent = view === 'categories' ? 'Categorias' : 'Mais opções';
+    modal.querySelector('.quality-mobile-sheet-title').textContent = view === 'categories' ? 'Categorias' : 'Mais';
+    modal.classList.toggle('quality-mobile-sheet-more',view==='more');
+    modal.classList.toggle('quality-mobile-sheet-categories',view==='categories');
     modal.querySelector('.quality-mobile-sheet-content').innerHTML = view === 'categories' ? categoriesContent() : moreContent();
     modal.classList.add('is-open');
     modal.setAttribute('aria-hidden','false');
     document.body.classList.add('quality-mobile-sheet-open');
-    modal.querySelector('.quality-mobile-sheet-close').focus({preventScroll:true});
+    var focusTarget=view==='more'?modal.querySelector('.quality-mobile-more-close'):modal.querySelector('.quality-mobile-sheet-close');
+    if(focusTarget)focusTarget.focus({preventScroll:true});
+  }
+  function showToast(message){
+    var toast = root && root.querySelector('.quality-mobile-toast');
+    if (!toast) return;
+    clearTimeout(toastTimer);
+    toast.textContent = message || '';
+    toast.classList.add('is-visible');
+    toastTimer = setTimeout(function(){ toast.classList.remove('is-visible'); }, 2200);
   }
   function categoriesContent(){
     return '<div class="quality-mobile-sheet-intro">O que você procura hoje?</div>' +
@@ -55,7 +63,21 @@
       '<a class="quality-mobile-info-link" href="/comparar.html">'+icon('scale-balanced')+' Comparar celulares '+icon('chevron-right')+'</a>';
   }
   function moreContent(){
-    return '<div class="quality-mobile-sheet-intro">Tudo sobre a Quality, em um só lugar.</div>' +
+    return '<div class="quality-mobile-account-hero">' +
+      '<button type="button" class="quality-mobile-more-close" data-quality-sheet-close aria-label="Fechar menu">'+icon('xmark')+'</button>' +
+      '<div class="quality-mobile-account-hero-main">' +
+      '<span class="quality-mobile-account-avatar">'+icon('store')+'</span>' +
+      '<span class="quality-mobile-account-hero-copy"><strong>Quality Celulares</strong><small>Loja física e online</small></span></div>' +
+      '</div>' +
+      '<div class="quality-mobile-sheet-subtitle">Navegar pela loja</div>' +
+      '<div class="quality-mobile-sheet-section">' +
+      '<a href="'+homeUrl()+'">'+icon('house')+' Início '+icon('chevron-right')+'</a>' +
+      '<a href="/smartphones/">'+icon('mobile-screen')+' Smartphones '+icon('chevron-right')+'</a>' +
+      '<a href="/acessorios/">'+icon('headphones')+' Acessórios '+icon('chevron-right')+'</a>' +
+      '<a href="/eletronicos/">'+icon('laptop')+' Eletrônicos '+icon('chevron-right')+'</a>' +
+      '<a href="/smartphones/?subcategoria=usados">'+icon('rotate')+' Seminovos '+icon('chevron-right')+'</a>' +
+      '<a href="/comparar.html">'+icon('scale-balanced')+' Comparar celulares '+icon('chevron-right')+'</a>' +
+      '</div>' +
       '<div class="quality-mobile-sheet-subtitle">Atendimento e compras</div>' +
       '<div class="quality-mobile-sheet-section">' +
       '<a href="/formas-de-pagamento.html">'+icon('credit-card')+' Pagamento e envio '+icon('chevron-right')+'</a>' +
@@ -71,14 +93,15 @@
       '</div>' +
       '<div class="quality-mobile-sheet-subtitle">Redes sociais</div>' +
       '<div class="quality-mobile-socials">' +
-      '<a href="https://www.instagram.com/quality_celulares/" target="_blank" rel="noopener noreferrer" aria-label="Instagram Quality Saldanha Marinho"><i class="fa-brands fa-instagram" aria-hidden="true"></i> Instagram</a>' +
+      '<a href="https://www.instagram.com/quality_celulares/" target="_blank" rel="noopener noreferrer" aria-label="Instagram Quality Saldanha Marinho"><i class="fa-brands fa-instagram" aria-hidden="true"></i> Instagram · Saldanha</a>' +
+      '<a href="https://www.instagram.com/qualitycelulares_ibi/" target="_blank" rel="noopener noreferrer" aria-label="Instagram Quality Ibirubá"><i class="fa-brands fa-instagram" aria-hidden="true"></i> Instagram · Ibirubá</a>' +
       '<a href="https://www.facebook.com/share/17KnAHN57D/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer" aria-label="Facebook Quality Celulares"><i class="fa-brands fa-facebook-f" aria-hidden="true"></i> Facebook</a>' +
+      '<a href="https://www.tiktok.com/@quality_celulares?lang=en" target="_blank" rel="noopener noreferrer" aria-label="TikTok Quality Celulares"><i class="fa-brands fa-tiktok" aria-hidden="true"></i> TikTok</a>' +
       '</div>' +
-      '<p class="quality-mobile-legal">Quality Celulares · Loja física e online<br>CNPJ: 20.375.910/0001-66</p>';
+      '<p class="quality-mobile-legal">Quality Celulares<br>CNPJ: 20.375.910/0001-66</p>';
   }
   function dynamicClick(attribute){
-    // Aciona a funcionalidade existente sem reimplementar sua lógica nem criar dados paralelos.
-    var existing = document.querySelector('#nav-mobile ['+attribute+'], #nav-desktop ['+attribute+']');
+    var existing = document.querySelector('#nav-mobile ['+attribute+'], #nav-desktop ['+attribute+'], .quality-desktop-actions ['+attribute+']');
     if (existing) { existing.click(); return; }
     var fallback = document.createElement('button');
     fallback.type = 'button'; fallback.style.display = 'none'; fallback.setAttribute(attribute,'');
@@ -112,7 +135,10 @@
   function routePanelAction(action, button){
     if(root) setDrawer(false);
     if(action === 'home'){ location.assign(homeUrl()); }
-    else if(action === 'categories' || action === 'more'){openDialog(action,button);}
+    else if(action === 'categories' || action === 'more'){
+      if(modal.classList.contains('is-open') && modal.classList.contains('quality-mobile-sheet-'+action)) closeDialog(false);
+      else openDialog(action,button);
+    }
     else if(action === 'favorites') {closeDialog(false); dynamicClick('data-quality-open-favorites-menu');}
     else if(action === 'interest') {closeDialog(false); dynamicClick('data-quality-open-interest');}
   }
@@ -120,7 +146,7 @@
     if(!root)return;
     var el=root.querySelector('.quality-mobile-drawer');if(!el)return;
     el.classList.toggle('is-open',!!open);el.setAttribute('aria-hidden',open?'false':'true');
-    root.querySelector('[data-quality-drawer-open]').setAttribute('aria-expanded',open?'true':'false');
+    var openButton=root.querySelector('[data-quality-drawer-open]');if(openButton)openButton.setAttribute('aria-expanded',open?'true':'false');
     document.body.classList.toggle('quality-mobile-drawer-open',!!open);
     if(open){closeSuggestions();el.querySelector('[data-quality-drawer-close]').focus({preventScroll:true});}
   }
@@ -154,7 +180,6 @@
       document.body.classList.add('quality-mobile-search-open');
       suggestionsOnFocus();
     });
-
     input.addEventListener('input',function(){
       clearTimeout(timer);
       var term = input.value.trim();
@@ -207,31 +232,34 @@
     root = document.createElement('div'); root.id = 'quality-mobile-shell';
     root.innerHTML =
       '<div class="quality-mobile-topbar" role="banner">' +
-        '<div class="quality-mobile-brand"><button type="button" class="quality-mobile-menu-trigger" data-quality-drawer-open aria-label="Abrir menu de navegação" aria-expanded="false">'+icon('bars')+'</button><a href="' + homeUrl() + '" aria-label="Quality Celulares — início"><img src="/images/logo.png" alt="Quality Celulares"></a>' +
-        '<span>Loja física e online</span></div>' +
-        '<div class="quality-mobile-search-row"><button type="button" class="quality-mobile-search-back" aria-label="Voltar à loja">'+icon('arrow-left')+'</button>' +
-      '<form id="quality-mobile-search-form" class="quality-mobile-search-form" role="search">' +
-        '<label class="quality-mobile-search-label" for="quality-mobile-search">Buscar produtos na Quality</label>' +
-        '<input id="quality-mobile-search" type="search" placeholder="O que você está procurando?" autocomplete="off" enterkeyhint="search" />' +
-        '<button type="submit" aria-label="Buscar produtos">'+icon('magnifying-glass')+'</button></form></div>' +
-      '<div class="quality-mobile-search-suggestions" role="listbox" aria-label="Sugestões de produtos"></div>' +
+        '<div class="quality-mobile-search-row">' +
+          
+          '<button type="button" class="quality-mobile-search-back" aria-label="Voltar à loja">'+icon('arrow-left')+'</button>' +
+          '<form id="quality-mobile-search-form" class="quality-mobile-search-form" role="search">' +
+            '<label class="quality-mobile-search-label" for="quality-mobile-search">Buscar produtos na Quality</label>' +
+            '<input id="quality-mobile-search" type="search" placeholder="O que você está procurando?" autocomplete="off" enterkeyhint="search" />' +
+            '<button type="submit" aria-label="Buscar produtos">'+icon('magnifying-glass')+'</button>' +
+          '</form>' +
+        '</div>' +
+        '<div class="quality-mobile-search-suggestions" role="listbox" aria-label="Sugestões de produtos"></div>' +
       '</div>' +
       '<nav class="quality-mobile-bottom-nav" aria-label="Navegação principal mobile">' +
-      '<button type="button" class="quality-mobile-tab" data-quality-tab="home">'+icon('house')+'<span>Início</span></button>' +
-      '<button type="button" class="quality-mobile-tab" data-quality-tab="categories">'+icon('grip')+'<span>Categorias</span></button>' +
-      '<button type="button" class="quality-mobile-tab" data-quality-tab="favorites">'+icon('heart')+'<span>Favoritos</span></button>' +
-      '<button type="button" class="quality-mobile-tab" data-quality-tab="interest">'+icon('list-check')+'<span>Minha lista</span></button>' +
-      '<button type="button" class="quality-mobile-tab" data-quality-tab="more">'+icon('ellipsis')+'<span>Mais</span></button>' +
+        '<button type="button" class="quality-mobile-tab" data-quality-tab="home">'+icon('house')+'<span>Início</span></button>' +
+        '<button type="button" class="quality-mobile-tab" data-quality-tab="categories">'+icon('grip')+'<span>Categorias</span></button>' +
+        '<button type="button" class="quality-mobile-tab" data-quality-tab="favorites">'+icon('heart')+'<span>Favoritos</span></button>' +
+        '<button type="button" class="quality-mobile-tab" data-quality-tab="interest">'+icon('cart-shopping')+'<span>Carrinho</span></button>' +
+        '<button type="button" class="quality-mobile-tab" data-quality-tab="more">'+icon('ellipsis')+'<span>Mais</span></button>' +
       '</nav>' +
-      '<div class="quality-mobile-drawer" aria-hidden="true"><div class="quality-mobile-drawer-shade" data-quality-drawer-close></div><nav class="quality-mobile-drawer-panel" aria-label="Menu lateral"><div class="quality-mobile-drawer-head"><strong>Menu Quality</strong><button type="button" data-quality-drawer-close aria-label="Fechar menu">'+icon('xmark')+'</button></div><div class="quality-mobile-drawer-links">'+
-        '<a href="'+homeUrl()+'">'+icon('house')+' Início</a>'+safeLinks.map(function(x){return '<a href="'+x.url+'">'+icon(x.icon)+' '+x.title+'</a>';}).join('')+'<a href="/smartphones/?subcategoria=usados">'+icon('rotate')+' Seminovos</a><a href="/comparar.html">'+icon('scale-balanced')+' Comparar celulares</a></div><div class="quality-mobile-drawer-aux"><button type="button" data-quality-tab="favorites">'+icon('heart')+' Favoritos</button><button type="button" data-quality-tab="interest">'+icon('list-check')+' Minha lista</button><button type="button" data-quality-tab="more">'+icon('circle-info')+' Sobre a Quality</button></div></nav></div>' +
+      '<div class="quality-mobile-drawer" aria-hidden="true"><div class="quality-mobile-drawer-shade" data-quality-drawer-close></div><nav class="quality-mobile-drawer-panel" aria-label="Menu lateral"><div class="quality-mobile-drawer-head"><a href="'+homeUrl()+'" class="quality-mobile-drawer-head-logo" aria-label="Quality Celulares — início"><img src="/images/logo-header.png" alt="Quality Celulares"></a><button type="button" data-quality-drawer-close aria-label="Fechar menu">'+icon('xmark')+'</button></div><div class="quality-mobile-drawer-links">'+
+        '<a href="'+homeUrl()+'">'+icon('house')+' Início</a>'+safeLinks.map(function(x){return '<a href="'+x.url+'">'+icon(x.icon)+' '+x.title+'</a>';}).join('')+'<a href="/smartphones/?subcategoria=usados">'+icon('rotate')+' Seminovos</a><a href="/comparar.html">'+icon('scale-balanced')+' Comparar celulares</a></div><div class="quality-mobile-drawer-aux"><button type="button" data-quality-tab="favorites">'+icon('heart')+' Favoritos</button><button type="button" data-quality-tab="interest">'+icon('cart-shopping')+' Meu carrinho</button><button type="button" data-quality-tab="more">'+icon('circle-info')+' Sobre a Quality</button></div></nav></div>' +
       '<div class="quality-mobile-sheet" role="presentation" aria-hidden="true">' +
         '<div class="quality-mobile-sheet-backdrop" data-quality-sheet-close></div>' +
         '<section class="quality-mobile-sheet-card" role="dialog" aria-modal="true" aria-labelledby="quality-mobile-sheet-title">' +
           '<div class="quality-mobile-sheet-head"><h2 id="quality-mobile-sheet-title" class="quality-mobile-sheet-title">Categorias</h2>' +
           '<button class="quality-mobile-sheet-close" data-quality-sheet-close type="button" aria-label="Fechar">'+icon('xmark')+'</button></div>' +
           '<div class="quality-mobile-sheet-content"></div>' +
-        '</section></div>';
+        '</section></div>' +
+      '<div class="quality-mobile-toast" role="status" aria-live="polite"></div>';
     document.body.appendChild(root);
     modal = root.querySelector('.quality-mobile-sheet');
     root.querySelector('#quality-mobile-search-form').addEventListener('submit',function(event){

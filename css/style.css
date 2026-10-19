@@ -3426,3 +3426,195 @@ img{
     max-height: 166px !important;
   }
 }
+
+/* Quality V3 — cabeçalho comercial, conta, favoritos e carrinho (sem alterar o fluxo legado). */
+.nav-desktop .quality-account-nav-link{display:inline-flex!important;align-items:center;gap:9px;color:#fff!important;text-decoration:none!important;white-space:nowrap;line-height:1.17;padding:4px 3px}
+.quality-account-nav-link>i{color:#fff;font-size:26px;line-height:1}
+.quality-account-nav-copy{display:flex;flex-direction:column;gap:3px;align-items:flex-start;font-size:12px}
+.quality-account-nav-copy strong{font-size:12px;font-weight:700}
+.quality-account-nav-copy small{color:rgba(255,255,255,.87);font-size:11px}
+.nav-desktop .quality-header-icon-action{position:relative;color:#fff;background:transparent;border:0;padding:9px;display:inline-flex;justify-content:center;align-items:center;cursor:pointer;font-size:25px;min-width:38px;min-height:38px;transition:transform .15s ease}
+.nav-desktop .quality-header-icon-action:hover{transform:translateY(-2px);background:rgba(255,255,255,.12);border-radius:9px}
+.quality-header-action-count{position:absolute;top:1px;right:0;min-width:17px;height:17px;display:grid;place-items:center;border-radius:99px;background:#fff;color:#c90000;font-weight:800;font-size:10px;padding:0 3px}
+.quality-header-action-count[hidden]{display:none!important}
+.nav-desktop:has([data-quality-header-cart]) > .quality-interest-nav,
+.nav-desktop:has([data-quality-header-favorites]) > .quality-favorites-menu-link,
+.mobile-nav:has([data-quality-header-cart]) > .quality-interest-nav,
+.mobile-nav:has([data-quality-header-favorites]) > .quality-favorites-menu-link{display:none!important}
+.mobile-nav .quality-header-mobile-action{background:none;border:0;color:#222;font:inherit;font-weight:600;text-align:left;display:flex;align-items:center;gap:10px;cursor:pointer;padding:0}
+.mobile-nav .quality-header-mobile-action span{margin-left:auto;background:#f5e5e5;color:#c90000;border-radius:30px;padding:2px 7px}
+.mobile-nav .quality-account-mobile-link{display:flex;align-items:center;gap:10px}
+.mobile-nav .quality-account-mobile-link i,.mobile-nav .quality-header-mobile-action i{font-size:18px;color:#c90000;width:20px;text-align:center}
+@media(min-width:992px){.nav-desktop{gap:clamp(9px,1.1vw,19px)!important}}
+@media(min-width:992px) and (max-width:1150px){.quality-account-nav-copy strong{font-size:11px}.quality-account-nav-copy small{font-size:10px}.nav-desktop .quality-header-icon-action{padding:6px}}
+
+.quality-interest-note{font-size:12px!important;line-height:1.45;color:#6b7280;text-align:center;margin:0 0 2px}
+
+
+/* QUALITY_V5_HEADER_ACCOUNT_MOBILE — 12/10/2026 */
+@media (min-width: 992px) {
+  body { padding-top: 118px; }
+  .header { min-height: 118px; padding: 9px max(18px, calc((100vw - 1580px) / 2)) 8px; }
+  .header .header-container {
+    display: grid;
+    grid-template-columns: minmax(175px, 230px) minmax(0, 1fr) minmax(240px, 310px);
+    grid-template-rows: 62px 34px;
+    grid-template-areas:
+      'logo search actions'
+      'menu nav nav';
+    gap: 4px 16px;
+    width: 100%; max-width: 1540px; margin-inline: auto; min-height: 0;
+    align-items: center; position: relative;
+  }
+  .header .header-container > .logo-wrapper { grid-area: logo; position: static; z-index: 1; display:flex; align-items:center; justify-content:flex-start; min-width:0; }
+  .header .header-container > .logo-wrapper .quality-desktop-logo-picture,
+  .header .header-container > .logo-wrapper .quality-desktop-logo-picture img.logo { display:block; }
+  .header .header-container > .logo-wrapper img.logo { height: 57px; max-height: 57px; width:auto; max-width:220px; object-fit:contain; }
+  .header .header-container > .search-wrapper {
+    grid-area: search; position: relative; inset: auto; transform: none; width: 100%; max-width: none; justify-self: stretch;
+    height: 46px; min-width: 0; box-sizing: border-box; display:flex; border-radius: 11px;
+    box-shadow: 0 4px 14px rgba(0,0,0,.12); z-index: 10; background:#fff;
+  }
+  .header .header-container > .search-wrapper input {
+    width:100%; min-width:0; flex:1 1 auto; font-size:15px; padding:11px 15px; background:transparent; border:0; outline:0; box-sizing:border-box;
+  }
+  .header .header-container > .search-wrapper button { flex:0 0 50px; background:#fff; color:#bb090e; border:0; font-size:18px; border-radius:0 11px 11px 0; }
+  .header .header-container > .quality-desktop-actions {
+    grid-area: actions; display:flex; align-items:center; justify-content:flex-end; gap:8px; min-width:0;
+  }
+  .header .header-container > .menu-toggle {
+    grid-area: menu; display:inline-flex; width:max-content; align-items:center; gap:10px; color:#fff; font-size:15px;
+    padding: 5px 8px; cursor:pointer; line-height:1.1;
+  }
+  .header .header-container > .menu-toggle::after { content:'Categorias'; font-weight:650; }
+  .header .header-container > .nav-desktop {
+    grid-area: nav; display:flex; flex-wrap:nowrap; align-items:center; justify-content:flex-start; gap:clamp(10px, 1.4vw, 24px);
+    padding:0; margin:0; min-height:0; max-width:100%; min-width:0; overflow-x:auto; scrollbar-width:none;
+  }
+  .header .header-container > .nav-desktop::-webkit-scrollbar { display:none; }
+  .header .header-container > .nav-desktop a,
+  .header .header-container > .nav-desktop > .cat-menu-group { font-size: clamp(12px, .85vw, 14px); white-space: nowrap; flex:0 0 auto; }
+  .header .header-container > .nav-desktop .quality-account-nav-link,
+  .header .header-container > .nav-desktop .quality-header-icon-action,
+  .header .header-container > .nav-desktop .quality-account-menu { display:none !important; }
+  .header .quality-desktop-actions .quality-account-nav-link{display:inline-flex!important;align-items:center;gap:9px;color:#fff!important;text-decoration:none!important;white-space:nowrap;line-height:1.15;padding:5px 3px;}
+  .header .quality-desktop-actions .quality-account-nav-link>i{color:#fff;font-size:26px;line-height:1}
+  .header .quality-desktop-actions .quality-account-nav-copy{display:flex;flex-direction:column;gap:2px;align-items:flex-start}
+  .header .quality-desktop-actions .quality-account-nav-copy small{color:rgba(255,255,255,.92);font-size:11px;font-weight:600}
+  .header .quality-desktop-actions .quality-account-nav-copy strong{font-size:12px;font-weight:800;color:#fff}
+  .header .quality-desktop-actions .quality-header-icon-action{position:relative;color:#fff;background:transparent;border:0;padding:8px;display:inline-flex;justify-content:center;align-items:center;cursor:pointer;font-size:25px;min-width:38px;min-height:38px;transition:transform .15s ease}
+  .header .quality-desktop-actions .quality-header-icon-action:hover,
+  .header .quality-desktop-actions .quality-account-nav-link:hover,
+  .header .quality-desktop-actions .quality-account-nav-link:focus-visible{transform:translateY(-1px);background:rgba(255,255,255,.12);border-radius:10px;outline:none}
+  .header .quality-desktop-actions .quality-account-menu{position:relative}
+  .header .quality-desktop-actions .quality-account-menu-trigger{border:0;background:transparent;cursor:pointer;font:inherit}
+  .header .quality-desktop-actions .quality-account-menu-trigger[aria-expanded="true"]{background:rgba(255,255,255,.12);border-radius:10px}
+  .header .quality-desktop-actions .quality-account-dropdown{position:absolute;top:calc(100% + 12px);right:0;width:min(290px, 86vw);background:#fff;border:1px solid rgba(15,23,42,.08);border-radius:16px;box-shadow:0 22px 44px rgba(15,23,42,.18);padding:10px;z-index:60}
+  .header .quality-desktop-actions .quality-account-dropdown[hidden]{display:none!important}
+  .header .quality-desktop-actions .quality-account-dropdown-head{padding:6px 8px 10px;border-bottom:1px solid #eef0f3;margin-bottom:4px}
+  .header .quality-desktop-actions .quality-account-dropdown-head strong{display:block;font-size:15px;color:#131722;margin-bottom:2px}
+  .header .quality-desktop-actions .quality-account-dropdown-head small{display:block;color:#6b7280;font-size:12px;word-break:break-word}
+  .header .quality-desktop-actions .quality-account-dropdown-link,
+  .header .quality-desktop-actions .quality-account-dropdown-action{display:flex;align-items:center;gap:12px;width:100%;min-height:46px;padding:0 11px;border:0;background:#fff;border-radius:11px;color:#1f2937;text-decoration:none;font:600 13px/1.2 Arial,sans-serif;text-align:left;cursor:pointer}
+  .header .quality-desktop-actions .quality-account-dropdown-link i,
+  .header .quality-desktop-actions .quality-account-dropdown-action i{width:18px;text-align:center;color:#6b7280}
+  .header .quality-desktop-actions .quality-account-dropdown-link:hover,
+  .header .quality-desktop-actions .quality-account-dropdown-action:hover{background:#f6f7f9;color:#ba0a15}
+}
+@media (min-width: 992px) and (max-width: 1250px) {
+  .header .header-container { grid-template-columns: 175px minmax(0, 1fr) minmax(205px, 255px); column-gap: 10px; }
+  .header .header-container > .logo-wrapper img.logo { height: 50px; max-height:50px; max-width:172px; }
+  .header .quality-desktop-actions .quality-account-nav-copy strong{font-size:11px}
+  .header .quality-desktop-actions .quality-account-nav-copy small{font-size:10px}
+}
+
+
+/* QUALITY_V6_20261012: cabeçalho consistente e conta sem duplicidades. */
+@media (min-width: 992px) {
+  /* Restaura a medida central da V4, deixando favoritos e conta no topo. */
+  .header .header-container > .search-wrapper {
+    width: min(100%, 580px);
+    max-width: 580px;
+    justify-self: center;
+  }
+  /* Menus de carrinho/favoritos legados não ocupam uma segunda linha. */
+  .header .header-container > .nav-desktop > .quality-interest-nav-desktop,
+  .header .header-container > .nav-desktop > .quality-favorites-menu-link {
+    display: none !important;
+  }
+  .header .quality-desktop-actions .quality-account-menu {
+    position: relative;
+    flex: 0 0 auto;
+    min-width: 0;
+    z-index: 20;
+  }
+  .header .quality-desktop-actions .quality-account-menu-trigger {
+    appearance: none;
+    -webkit-appearance: none;
+    min-height: 46px;
+  }
+  .header .quality-desktop-actions .quality-account-dropdown {
+    position: absolute;
+    top: calc(100% + 8px);
+    right: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    box-sizing: border-box;
+    width: 290px;
+    max-width: min(290px, 90vw);
+    overflow: hidden;
+    background: #fff;
+    border: 1px solid #e6e8eb;
+    border-radius: 15px;
+    padding: 9px;
+    z-index: 1900;
+  }
+  .header .quality-desktop-actions .quality-account-dropdown[hidden] { display: none !important; }
+  .header .quality-desktop-actions .quality-account-dropdown-link,
+  .header .quality-desktop-actions .quality-account-dropdown-action {
+    position: static;
+    flex: 0 0 auto;
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
+    border: 0;
+    box-shadow: none;
+    outline-offset: -2px;
+    justify-content: flex-start;
+    white-space: normal;
+    line-height: 1.25;
+  }
+  .header .quality-desktop-actions .quality-account-dropdown-link:focus-visible,
+  .header .quality-desktop-actions .quality-account-dropdown-action:focus-visible,
+  .header .quality-desktop-actions .quality-account-menu-trigger:focus-visible {
+    outline: 2px solid #e23445;
+  }
+  .header .quality-desktop-actions .quality-account-dropdown-head {
+    box-sizing: border-box;
+    max-width: 100%;
+    overflow-wrap: anywhere;
+  }
+}
+/* Fallback para páginas geradas antes da V5. */
+@media(min-width: 992px) {
+  .header .quality-desktop-actions ~ .nav-desktop .quality-interest-nav-desktop,
+  .header .quality-desktop-actions ~ .nav-desktop .quality-favorites-menu-link { display:none !important; }
+}
+
+/* QUALITY V7 — alinhamento de categorias com a busca no desktop. */
+@media(min-width:992px){
+  .header .header-container > .search-wrapper{height:50px;max-width:610px;width:min(100%,610px);justify-self:center}
+  .header .header-container > .nav-desktop{padding-left:0;gap:clamp(9px,1.2vw,22px);box-sizing:border-box;overflow:visible}
+  .header .header-container > .nav-desktop a,.header .header-container > .nav-desktop > .cat-menu-group{font-size:clamp(12px,.83vw,14px)}
+  .header .header-container > .search-wrapper input{font-size:15px}
+  .header .header-container > .nav-desktop{padding-left:0;margin-left:clamp(0px,13%,165px);max-width:calc(100% - clamp(0px,13%,165px));}
+}
+@media(min-width:992px) and (max-width:1250px){
+ .header .header-container > .search-wrapper{width:min(100%,610px)}
+ .header .header-container > .nav-desktop{margin-left:0;max-width:100%}
+}
+
+/* QUALITY V8: alinhar discretamente as categorias à esquerda da busca no desktop. */
+@media(min-width:1251px){.header .header-container > .nav-desktop{transform:translateX(17px);max-width:calc(100% - clamp(0px,13%,165px) - 17px)}}

@@ -135,12 +135,16 @@
   else init();
 })();
 
+// A navegação de categorias usa HTML estático, mas as ações são compartilhadas.
+(function(){if(window.__qualityCommerceHeaderRequested)return;window.__qualityCommerceHeaderRequested=true;
+var s=document.createElement('script');s.src='/js/quality-header-commerce.js?v=20261018-v28';s.defer=true;document.head.appendChild(s);})();
+
 // Quality Storefront Experience V1 - filtros, busca e lista de interesse nas categorias físicas.
 (function loadQualityStorefrontExperienceV1(){
   if (window.__qualityStorefrontLoaderV1) return;
   window.__qualityStorefrontLoaderV1 = true;
   var script = document.createElement('script');
-  script.src = '/js/storefront-enhancements.js?v=20261010-navfix1';
+  script.src = '/js/storefront-enhancements.js?v=20261018-v28';
   script.defer = true;
   document.head.appendChild(script);
 })();

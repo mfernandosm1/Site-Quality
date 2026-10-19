@@ -177,6 +177,13 @@
     ['nav-desktop','nav-mobile'].forEach(function(id){
       var nav = document.getElementById(id);
       if (!nav) return;
+      var hasHeaderAction = !!document.querySelector('.header .quality-desktop-actions [data-quality-header-favorites]');
+      if (id === 'nav-mobile') hasHeaderAction = !!nav.querySelector('[data-quality-header-favorites]');
+      if (hasHeaderAction) {
+        var oldLink = nav.querySelector('[data-quality-open-favorites-menu]');
+        if (oldLink) oldLink.remove();
+        return;
+      }
       var link = nav.querySelector('[data-quality-open-favorites-menu]');
       if (!link) {
         link = document.createElement('a');
@@ -348,4 +355,10 @@
   window.qualityRefreshFavoritesMenu = refresh;
   window.qualityUpdateFavoriteButtons = updateHeartButtons;
   window.qualityOpenFavoritesPanel = openPanel;
+  try {
+    if (sessionStorage.getItem('quality_open_after_navigation') === 'favorites') {
+      sessionStorage.removeItem('quality_open_after_navigation');
+      setTimeout(openPanel, 250);
+    }
+  } catch (_) {}
 })();

@@ -221,6 +221,67 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 <header class="header">
   <div class="header-container">
     <a href="/" class="logo-wrapper" data-home-link="">
@@ -228,9 +289,14 @@
     </a>
 
       <div class="search-wrapper">
-        <input type="text" id="search-input" placeholder="Buscar...">
+        <input type="text" id="search-input" placeholder="O que você está procurando?">
         <button id="search-button" aria-label="Buscar"><i class="fa fa-search"></i></button>
       </div>
+
+    <div class="quality-desktop-actions" aria-label="Favoritos, carrinho e navegação rápida">
+      <button type="button" class="quality-header-icon-action" data-quality-header-favorites="" aria-label="Abrir meus favoritos" title="Favoritos"><i class="fa-regular fa-heart" aria-hidden="true"></i><span class="quality-header-action-count" data-quality-favorites-total="" hidden="">0</span></button>
+      <button type="button" class="quality-header-icon-action quality-header-cart-action" data-quality-header-cart="" aria-label="Abrir meu carrinho" title="Meu carrinho"><i class="fa-solid fa-cart-shopping" aria-hidden="true"></i><span class="quality-header-action-count" data-quality-cart-total="">0</span></button>
+    </div>
 
     <nav class="nav-desktop" id="nav-desktop">
       <a href="/" data-home-link="">Início</a>
@@ -241,7 +307,6 @@
           <a href="/acessorios/" class="cat-link">Acessórios</a>
           <a href="/eletronicos/" class="cat-link">Eletrônicos</a>
           <a href="/assistencia-tecnica/" class="cat-link">Assistência Técnica</a>
-
     </nav>
 
     <button id="menu-toggle" class="menu-toggle" aria-label="Abrir menu de categorias" aria-controls="mobile-menu" aria-expanded="false">
@@ -258,7 +323,7 @@
     </div>
 
     <div class="search-wrapper-mobile">
-      <input type="text" id="search-input-mobile" placeholder="Buscar...">
+      <input type="text" id="search-input-mobile" placeholder="O que você está procurando?">
       <button id="search-button-mobile" aria-label="Buscar"><i class="fa fa-search"></i></button>
     </div>
 
@@ -271,6 +336,8 @@
           <a href="/acessorios/" class="cat-link">Acessórios</a>
           <a href="/eletronicos/" class="cat-link">Eletrônicos</a>
           <a href="/assistencia-tecnica/" class="cat-link">Assistência Técnica</a>
+      <button type="button" class="quality-header-mobile-action" data-quality-header-favorites=""><i class="fa-regular fa-heart" aria-hidden="true"></i> Favoritos</button>
+      <button type="button" class="quality-header-mobile-action" data-quality-header-cart=""><i class="fa-solid fa-cart-shopping" aria-hidden="true"></i> Meu carrinho <span data-quality-cart-total="">0</span></button>
     </nav>
   </div>
   <div id="menu-overlay" class="menu-overlay"></div>
@@ -1093,7 +1160,7 @@
 })();
 </script>
 
-<script src="/js/category-ui.js?v=20261010-navfix1"></script>
+<script src="/js/category-ui.js?v=20261018-v28"></script>
 
 <script src="/js/image-resilience.js?v=20261006-fix1"></script>
 
