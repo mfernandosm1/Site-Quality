@@ -22,9 +22,182 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - name: Validar e preparar somente arquivos publicos
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import json
+          import re
+          import shutil
+          import subprocess
+          import sys
+
+          repo = Path.cwd().resolve()
+          output = repo / '_quality_public_only'
+          if output.exists():
+              shutil.rmtree(output)
+          output.mkdir()
+
+          # Lista conservadora: nao publicar novas categorias de arquivo automaticamente.
+          root_files = {
+              'index.html', '404.html', 'header.html', 'footer.html',
+              'categoria.html', 'produto.html', 'comparar.html',
+              'sobre.html', 'seguranca.html', 'formas-de-pagamento.html',
+              'seja-nosso-fornecedor.html', 'trabalhe-conosco.html',
+              'maintenance.html', 'robots.txt', 'sitemap.xml',
+              'favorite-menu.js', 'supplier-form-public.json',
+              'CNAME', '.nojekyll',
+          }
+          public_content = {
+              'products.json', 'catalog-public.json', 'categories.json',
+              'subcategories.json', 'banners.json', 'footer.json',
+              'maintenance.json', 'seo.json', 'theme.json',
+              'organization.schema.json', 'quality-knowledge-public.json',
+              'quality-product-faq.json',
+          }
+          public_js = {
+              'catalog-menu.js', 'catalog-runtime.js', 'category-header.js',
+              'category-static-guard.js', 'category-trace.js', 'category-ui.js',
+              'diagnostico-carregamento.js', 'footer-runtime.js',
+              'header-menu.js', 'header-runtime.js', 'home-marketplace.js',
+              'image-resilience.js', 'main.js', 'menu-debug.js',
+              'menu-only.js', 'menu.js', 'site-shell.js',
+              'mobile-navigation.js', 'quality-analytics.js',
+              'quality-header-commerce.js', 'quality-product-questions.js',
+              'storefront-enhancements.js',
+          }
+          public_css = {
+              'commerce-compare.css', 'guide-quality.css',
+              'mobile-navigation.css', 'style.css', 'theme-overrides.css',
+          }
+          image_extensions = {'.png', '.jpg', '.jpeg', '.webp', '.gif', '.ico', '.avif'}
+          max_bytes = 18 * 1024 * 1024
+
+          # Segredos de alta confianca; nao imprimir nenhum valor encontrado.
+          secrets = [
+              re.compile(p) for p in (
+                  r'-----BEGIN (?:RSA |EC |DSA |OPENSSH )?PRIVATE KEY-----',
+                  r'\bgh[pousr]_[A-Za-z0-9]{20,}\b',
+                  r'\bgithub_pat_[A-Za-z0-9_]{20,}\b',
+                  r'\bAKIA[0-9A-Z]{16}\b',
+                  r'\bAIza[0-9A-Za-z_-]{35}\b',
+                  r'\bxox[baprs]-[A-Za-z0-9-]{10,}\b',
+                  r'\bsk-(?:proj-)?[A-Za-z0-9_-]{20,}\b',
+              )
+          ]
+          def abort(message):
+              sys.exit('PUBLICACAO BLOQUEADA: ' + message)
+
+          tracked = subprocess.check_output(['git', 'ls-files', '-z']).decode('utf-8', 'surrogateescape').split('\0')
+          tracked = [name for name in tracked if name]
+          forbidden_exact = {
+              'content/compatibility.json', 'content/analytics.json',
+              'content/publish.json', 'content/panel-theme.json',
+              'content/personalizacao-history.json',
+          }
+          forbidden_names = {'.env', '.env.local', '.env.production', 'id_rsa', 'id_ed25519'}
+          forbidden_extensions = {'.pem', '.p12', '.pfx', '.key', '.sqlite', '.db'}
+
+          # OBS: arquivos no repositorio GitHub sao publicos MESMO se nao forem enviados ao Pages.
+          readable_extensions = {'.html', '.js', '.json', '.css', '.xml', '.txt', '.svg', '.md', '.yml', '.yaml', '.py', '.sh', '.toml', '.ini'}
+          for relative in tracked:
+              rel = Path(relative)
+              parts_lower = [s.lower() for s in rel.parts]
+              if (relative.lower() in forbidden_exact
+                      or set(parts_lower).intersection({'backups', 'backup', 'painel', 'private', 'secrets', 'clientes', 'customers', 'sessions'})
+                      or rel.name.lower() in forbidden_names
+                      or rel.suffix.lower() in forbidden_extensions):
+                  abort(f'arquivo privado ainda rastreado no Git: {relative}; remova apenas do indice com git rm --cached')
+              if rel.parts[0].lower() in {'data', 'uploads', 'logs', 'tmp'}:
+                  abort(f'pasta interna rastreada no Git: {relative}')
+              if rel.parts[0].lower() == 'content' and len(rel.parts) == 2 and rel.name not in public_content and rel.name != '.htaccess':
+                  abort(f'conteudo nao autorizado rastreado no Git: {relative}')
+              src = repo / rel
+              if src.is_file() and not src.is_symlink() and src.suffix.lower() in readable_extensions:
+                  if src.stat().st_size > max_bytes:
+                      abort(f'arquivo textual rastreado acima do limite de verificacao: {relative}')
+                  txt = src.read_text('utf-8', errors='replace')
+                  if any(p.search(txt) for p in secrets):
+                      abort(f'possivel credencial em arquivo rastreado: {relative}')
+
+          def allowed(parts, src):
+              if len(parts) == 1:
+                  return parts[0] in root_files
+              if len(parts) == 2 and parts[0] == 'content':
+                  return parts[1] in public_content
+              if len(parts) == 2 and parts[0] == 'js':
+                  return parts[1] in public_js
+              if len(parts) == 2 and parts[0] == 'css':
+                  return parts[1] in public_css
+              if parts[0] == 'images':
+                  return src.suffix.lower() in image_extensions
+              if len(parts) == 2 and parts[0] in {'smartphones', 'eletronicos', 'assistencia-tecnica'}:
+                  return parts[1] == 'index.html' or (parts[0] == 'smartphones' and parts[1] == 'formas-de-pagamento.html')
+              if len(parts) == 2 and parts[0] == 'acessorios':
+                  return parts[1] in {'index.html', 'formas-de-pagamento.html'}
+              if parts[0] == 'blog':
+                  return (len(parts) == 2 and parts[1] == 'index.html') or (len(parts) == 3 and parts[2] == 'index.html')
+              if parts[0] == 'produto':
+                  return (len(parts) == 2 and parts[1] == 'index.html') or (len(parts) == 3 and parts[2] == 'index.html')
+              if parts[0] == 'site':
+                  return parts == ('site', 'index.html') or parts == ('site', 'js', 'main.js')
+              return False
+
+          copied = []
+          for relative in tracked:
+              rel = Path(relative)
+              src = repo / rel
+              if not src.is_file() or src.is_symlink():
+                  continue
+              if not allowed(rel.parts, src):
+                  continue
+              if src.stat().st_size > max_bytes:
+                  abort(f'arquivo publico maior que o limite previsto: {relative}')
+              if src.suffix.lower() in {'.html', '.js', '.json', '.css', '.xml', '.txt', '.svg'}:
+                  txt = src.read_text('utf-8', errors='replace')
+                  if any(p.search(txt) for p in secrets):
+                      abort(f'possivel credencial encontrada em {relative}')
+              dst = output / rel
+              dst.parent.mkdir(parents=True, exist_ok=True)
+              shutil.copy2(src, dst)
+              copied.append(relative)
+
+          required = (
+              'index.html', 'header.html', 'produto.html', 'categoria.html',
+              'content/products.json', 'content/catalog-public.json',
+              'js/catalog-runtime.js', 'js/main.js', 'js/storefront-enhancements.js',
+          )
+          for name in required:
+              if not (output / name).is_file():
+                  abort(f'arquivo essencial nao encontrado: {name}')
+
+          one = (output / 'content/products.json').read_bytes()
+          two = (output / 'content/catalog-public.json').read_bytes()
+          if one != two:
+              abort('catalogo publico divergente; publique primeiro pelo ERP para gerar arquivos filtrados')
+          catalog = json.loads(one.decode('utf-8'))
+          if not isinstance(catalog.get('items'), list):
+              abort('formato invalido do catalogo')
+          forbidden_fields = {
+              'costprice', 'purchaseprice', 'profitmargin', 'supplierprice',
+              'stock', 'customer', 'customers', 'cpf', 'password', 'privatekey',
+          }
+          def validate_data(item):
+              if isinstance(item, dict):
+                  for key, value in item.items():
+                      if str(key).lower() in forbidden_fields:
+                          abort(f'campo interno no catalogo: {key}')
+                      validate_data(value)
+              elif isinstance(item, list):
+                  for value in item:
+                      validate_data(value)
+          validate_data(catalog)
+          print(f'Quality: {len(copied)} arquivos publicos permitidos; {len(catalog["items"])} produtos. Nenhum arquivo interno enviado ao Pages.')
+          PY
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:
-          path: '.'          # publica a RAIZ do repo
+          path: '_quality_public_only'  # antes era '.', que publicava toda a raiz
       - id: deployment
         uses: actions/deploy-pages@v4

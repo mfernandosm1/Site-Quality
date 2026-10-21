@@ -160,8 +160,9 @@
     async function sendProductionLead(lead,envelope,config){
       var eventId='qsup-'+lead.id;
       var payload={key:config.writeKey,action:'track',type:config.eventType||'supplier_lead_secure',event:config.eventType||'supplier_lead_secure',Evento:config.eventType||'supplier_lead_secure',at:new Date().toISOString(),Data:new Date().toISOString(),eventId:eventId,EventId:eventId,Produto:envelope,SlugProduto:lead.id,Categoria:'Fornecedor',Busca:'',Pagina:location.href,Dispositivo:/Mobi|Android|iPhone|iPad/i.test(navigator.userAgent||'')?'mobile':'desktop',Origem:document.referrer||'',Idioma:navigator.language||'',Viewport:window.innerWidth+'x'+window.innerHeight};
+      // no-cors produz resposta opaca: o navegador NAO consegue confirmar o recebimento.
       await fetch(config.endpoint,{method:'POST',mode:'no-cors',credentials:'omit',redirect:'follow',cache:'no-store',keepalive:true,headers:{'Content-Type':'text/plain;charset=UTF-8'},body:JSON.stringify(payload)});
-      return true;
+      return {confirmed:false};
     }
     function updateSubmitButton(message,loading){
       submit.textContent='';
@@ -187,7 +188,9 @@
           await sendProductionLead(lead,envelope,config);
         }
         try{if(window.qualityAnalyticsTrack)window.qualityAnalyticsTrack('supplier_form_submit',{context:'Seja nosso fornecedor'});}catch(_){}
-        localStorage.removeItem(draftKey); form.reset(); feedback.className='quality-supplier-feedback success'; feedback.textContent=form.getAttribute('data-quality-success')||'Proposta recebida.';
+        localStorage.removeItem(draftKey); form.reset(); feedback.className='quality-supplier-feedback success';
+        feedback.textContent=isLocal() ? (form.getAttribute('data-quality-success')||'Proposta recebida.') :
+          'Solicitação de envio realizada. A confirmação do recebimento depende do serviço externo; se necessário, entre em contato com a Quality pelo WhatsApp.';
       }catch(error){feedback.className='quality-supplier-feedback error';feedback.textContent=error&&error.message?error.message:'Não foi possível enviar agora. Tente novamente em alguns instantes.';}
       finally{submit.disabled=false;updateSubmitButton(form.getAttribute('data-quality-submit')||'Enviar proposta',false);}
     });

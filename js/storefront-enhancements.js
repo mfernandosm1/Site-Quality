@@ -882,8 +882,64 @@
     return normalize(item.slug || item.id || item.name) + '|' + normalize(variationText(item.variation || {}));
   }
 
+  function isProductUnavailable(product){
+    return !!product && availabilityFor(product).available === false;
+  }
+
+  // Só recomenda alternativas presentes no catálogo público, no mesmo segmento e
+  // na MESMA condição comercial (usado/novo). A marca é critério de preferência.
+  function availableAlternatives(source, products){
+    if (!source) return [];
+    var segment = categoryOf(source);
+    var condition = conditionOf(source);
+    var brand = normalize(brandOf(source));
+    return (products || []).filter(function(candidate){
+      return isVisibleProduct(candidate) && !isProductUnavailable(candidate) &&
+        !sameProduct(source, candidate) && categoryOf(candidate) === segment &&
+        // Nunca oferecer um usado para quem consultou um novo, nem vice-versa.
+        conditionOf(candidate) === condition;
+    }).map(function(candidate){
+      var score = similarScore(source,candidate);
+      if (brand && normalize(brandOf(candidate)) === brand) score += 120;
+      return {product:candidate,score:score};
+    }).sort(function(a,b){return b.score-a.score;}).slice(0,3).map(function(x){return x.product;});
+  }
+
+  function showUnavailableAlternatives(product){
+    if (!product) return;
+    toast('Este produto não está mais disponível. Veja outras opções.');
+    var box = document.querySelector('.quality-product-buybox');
+    if (!box) return;
+    var container = box.querySelector('.quality-unavailable-alternatives');
+    if (!container) {
+      container = document.createElement('div');
+      container.className = 'quality-unavailable-alternatives';
+      container.setAttribute('role','status');
+      container.setAttribute('aria-live','polite');
+      var interestButton = box.querySelector('.quality-product-interest-primary');
+      (interestButton || box).insertAdjacentElement(interestButton ? 'afterend' : 'beforeend',container);
+    }
+    container.innerHTML = '<strong>Produto indisponível</strong><p>Estamos buscando opções semelhantes no mesmo segmento e condição.</p>';
+    getCatalog().then(function(items){
+      var alternatives = availableAlternatives(product,items);
+      if (!container.isConnected) return;
+      if (!alternatives.length) {
+        container.innerHTML = '<strong>Produto indisponível</strong><p>Não encontramos outra opção equivalente disponível neste momento. Use “Consultar alternativas” para falar com a Quality.</p>';
+        return;
+      }
+      container.innerHTML = '<strong>Outras opções disponíveis</strong><p>Selecionamos alternativas ' +
+        esc(conditionOf(product) === 'Usado' ? 'usadas' : conditionOf(product) === 'Novo' ? 'novas' : 'da mesma categoria') + ' para você:</p>' +
+        '<div class="quality-unavailable-options">' + alternatives.map(function(item){
+          return '<a href="' + esc(productUrl(item)) + '"><img src="' + esc(productImageAsset(item)) + '" alt="" loading="lazy"><span>' + esc(item.name || item.nome || 'Produto') + '</span><i class="fa-solid fa-chevron-right"></i></a>';
+        }).join('') + '</div>';
+    }).catch(function(){
+      container.innerHTML = '<strong>Produto indisponível</strong><p>Não foi possível consultar outras opções agora. Clique em “Consultar alternativas” para falar com a Quality.</p>';
+    });
+  }
+
   function addInterest(product, variation){
     if (!product) return;
+    if (isProductUnavailable(product)) { showUnavailableAlternatives(product); return; }
     var item = {
       id: product.id || product.slug || '',
       slug: product.slug || product.id || '',
@@ -1050,6 +1106,7 @@
       var has = readInterest().some(function(item){ return normalize(item.slug) === normalize(slug); });
       button.classList.toggle('is-added', has);
       if (button.classList.contains('quality-product-interest-primary')) {
+        if (button.classList.contains('quality-unavailable-cart-action')) return;
         button.innerHTML = has ? '<i class="fa-solid fa-check"></i> No meu carrinho' : '<i class="fa-solid fa-cart-shopping"></i> Adicionar ao carrinho';
       }
     });
@@ -2159,6 +2216,10 @@
         var slug = add.getAttribute('data-product-slug') || slugFromUrl(add.getAttribute('data-product-url') || '') || currentProductSlug();
         var isDetailButton = add.classList.contains('quality-product-interest-primary');
         var variation = isDetailButton ? selectedVariationFromDom() : {};
+        if (isDetailButton && currentDetailCartProduct && isProductUnavailable(currentDetailCartProduct)) {
+          showUnavailableAlternatives(currentDetailCartProduct);
+          return;
+        }
         // O produto já foi carregado para montar a página: incluir no carrinho
         // imediatamente, sem esperar uma consulta assíncrona ao catálogo.
         if (isDetailButton && currentDetailCartProduct &&
@@ -2586,6 +2647,19 @@
       status.className = 'quality-product-availability ' + availabilityClass;
       status.innerHTML = '<i class="fa-solid ' + availabilityIcon + '"></i> ' + esc(availability.label);
     }
+    var cartButton = card.querySelector('.quality-product-interest-primary');
+    if (cartButton) {
+      var off = availability.available === false;
+      cartButton.classList.toggle('quality-unavailable-cart-action', off);
+      cartButton.setAttribute('aria-label',off ? 'Indisponível — consultar alternativas' : 'Adicionar ao carrinho');
+      if (off) {
+        cartButton.innerHTML = '<i class="fa-solid fa-circle-info"></i> Ver alternativas';
+      } else {
+        // Não sobrescrever a marcação de um produto já adicionado.
+        var inCart = readInterest().some(function(item){return normalize(item.slug)===normalize(product.slug || product.id);});
+        cartButton.innerHTML = inCart ? '<i class="fa-solid fa-check"></i> No meu carrinho' : '<i class="fa-solid fa-cart-shopping"></i> Adicionar ao carrinho';
+      }
+    }
     var whatsapp = card.querySelector('.btn-whatsapp');
     if (whatsapp) {
       var detail = variationText(variation);
@@ -2702,6 +2776,16 @@
     interest.setAttribute('data-product-slug', product.slug || product.id || '');
     interest.innerHTML = '<i class="fa-solid fa-cart-shopping"></i> Adicionar ao carrinho';
     buybox.appendChild(interest);
+    if (!document.querySelector('style[data-quality-unavailable-alternatives]')) {
+      var altStyles = document.createElement('style');
+      altStyles.setAttribute('data-quality-unavailable-alternatives','');
+      altStyles.textContent = '.quality-unavailable-cart-action{border-color:#d97706!important;color:#92400e!important;background:#fffbeb!important}' +
+        '.quality-unavailable-alternatives{margin-top:12px;padding:12px;border:1px solid #fde68a;border-radius:12px;background:#fffbeb;color:#713f12;font-size:13px;line-height:1.45}' +
+        '.quality-unavailable-alternatives>strong{display:block;font-size:14px}.quality-unavailable-alternatives p{margin:5px 0 10px}' +
+        '.quality-unavailable-options{display:grid;gap:7px}.quality-unavailable-options a{display:flex;align-items:center;gap:9px;background:white;color:#111827;text-decoration:none;border:1px solid #e5e7eb;border-radius:9px;padding:6px;font-weight:600}' +
+        '.quality-unavailable-options img{width:42px;height:42px;object-fit:contain;border-radius:5px}.quality-unavailable-options span{flex:1}.quality-unavailable-options i{font-size:10px;color:#64748b}';
+      document.head.appendChild(altStyles);
+    }
     addProductCompareButton(product,buybox);
 
     layout.appendChild(buybox);
