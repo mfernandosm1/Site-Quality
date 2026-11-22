@@ -24,22 +24,3 @@ body.qc-page{margin:0;background:#f6f7f9;color:#171c27;font-family:Arial,Helveti
 .qc-page .qc-button{display:inline-flex;align-items:center;justify-content:center;gap:8px;border-radius:9px;background:#bd111d;color:white;font-size:13px;font-weight:800;padding:12px 15px;min-height:40px}
 .qc-page .qc-product:hover .qc-button{background:#9e1018}
 @media(max-width:560px){.qc-page .qc-main{padding:22px 15px 60px}.qc-page .qc-intro{padding:28px 23px}.qc-page .qc-grid{grid-template-columns:1fr}.qc-page .qc-photo{height:285px}.qc-page .qc-summary h2{font-size:20px}}
-
-
-/* Correção de proporção: a foto fica contida no card, sem cobrir textos. */
-body.qc-page .qc-product {min-width:0;max-width:310px;}
-body.qc-page .qc-product-link {display:flex;flex-direction:column;min-width:0;}
-body.qc-page .qc-photo {
-  display:block!important;
-  flex:0 0 230px!important;
-  width:100%!important;
-  height:230px!important;
-  min-height:230px!important;
-  max-height:230px!important;
-  padding:0!important;
-  overflow:hidden!important;
-  background:#fff url('/images/quality-club/pelicula-3d-original.png') center center / auto 210px no-repeat!important;
-}
-body.qc-page .qc-product-info {position:relative;z-index:1;background:#fff;min-width:0;}
-body.qc-page .qc-product-info h3, body.qc-page .qc-product-info p {position:relative;z-index:1;overflow-wrap:anywhere;}
-@media(max-width:560px){body.qc-page .qc-photo{height:240px!important;min-height:240px!important;max-height:240px!important;flex-basis:240px!important;background-size:auto 214px!important;}}
