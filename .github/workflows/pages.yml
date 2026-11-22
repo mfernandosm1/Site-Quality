@@ -52,7 +52,7 @@ jobs:
           public_content = {
               'products.json', 'catalog-public.json', 'categories.json',
               'subcategories.json', 'banners.json', 'footer.json',
-              'maintenance.json', 'seo.json', 'theme.json',
+              'maintenance.json', 'maintenance-page.json', 'seo.json', 'theme.json',
               'organization.schema.json', 'quality-knowledge-public.json',
               'quality-product-faq.json',
           }
