@@ -24,3 +24,50 @@ body.qc-page{margin:0;background:#f6f7f9;color:#171c27;font-family:Arial,Helveti
 .qc-page .qc-button{display:inline-flex;align-items:center;justify-content:center;gap:8px;border-radius:9px;background:#bd111d;color:white;font-size:13px;font-weight:800;padding:12px 15px;min-height:40px}
 .qc-page .qc-product:hover .qc-button{background:#9e1018}
 @media(max-width:560px){.qc-page .qc-main{padding:22px 15px 60px}.qc-page .qc-intro{padding:28px 23px}.qc-page .qc-grid{grid-template-columns:1fr}.qc-page .qc-photo{height:285px}.qc-page .qc-summary h2{font-size:20px}}
+
+
+/* QUALITY_CLUB_CARD_PHOTO_FIX_20261122
+ * Imagem vertical preservada; nunca ultrapassa o espaço da foto.
+ * Escopo exclusivo do catálogo Quality Club.
+ */
+.qc-page .qc-product{min-width:0;max-width:100%}
+.qc-page .qc-product-link{min-width:0}
+.qc-page .qc-product .qc-photo{
+  position:relative!important;
+  height:228px!important;
+  min-height:228px!important;
+  max-height:228px!important;
+  overflow:hidden!important;
+  padding:14px 18px!important;
+  display:flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  background:#f9fafb!important;
+  border-bottom:1px solid #edf0f3!important;
+}
+.qc-page .qc-product .qc-photo > img{
+  display:block!important;
+  position:static!important;
+  width:auto!important;
+  height:198px!important;
+  max-width:100%!important;
+  max-height:198px!important;
+  min-width:0!important;
+  margin:0 auto!important;
+  padding:0!important;
+  object-fit:contain!important;
+  object-position:center!important;
+  flex:0 1 auto!important;
+  transform:none!important;
+}
+.qc-page .qc-product .qc-product-info{
+  position:relative;
+  z-index:1;
+  min-width:0;
+  width:100%;
+  background:#fff;
+}
+@media(max-width:560px){
+  .qc-page .qc-product .qc-photo{height:220px!important;min-height:220px!important;max-height:220px!important}
+  .qc-page .qc-product .qc-photo > img{height:190px!important;max-height:190px!important}
+}
