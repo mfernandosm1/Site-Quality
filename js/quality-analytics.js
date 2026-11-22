@@ -1,4 +1,58 @@
 (function(){
+  // Consentimento explícito compartilhado apenas entre os subdomínios da Quality.
+  function qaChoice(){
+    var hit=document.cookie.match(/(?:^|;\s*)quality_analytics_consent=(yes|no)(?:;|$)/);
+    if(hit)return hit[1];
+    try{return localStorage.getItem('quality_analytics_consent')||'';}catch(e){return '';}
+  }
+  function qaSave(choice){
+    try{localStorage.setItem('quality_analytics_consent',choice);}catch(e){}
+    var domain=/(^|\.)qualitycel\.com\.br$/.test(location.hostname)?'; Domain=.qualitycel.com.br':'';
+    document.cookie='quality_analytics_consent='+choice+'; Path=/; Max-Age=15552000; SameSite=Lax'+(location.protocol==='https:'?'; Secure':'')+domain;
+  }
+  function qaChoices(){
+    if(document.getElementById('qa-consent-prompt'))return;
+    if(!document.getElementById('quality-cookie-banner-styles')){
+      var style=document.createElement('style');style.id='quality-cookie-banner-styles';
+      style.textContent="#qa-consent-prompt{position:fixed;z-index:2147483000;right:0;bottom:0;left:0;box-sizing:border-box;padding:14px 22px calc(14px + env(safe-area-inset-bottom, 0px));background:#fff;color:#303030;border-top:1px solid #e4e4e4;box-shadow:0 -3px 18px rgba(0,0,0,.12);font:14px/1.5 Arial,system-ui,sans-serif;text-align:left}\n#qa-consent-prompt,#qa-consent-prompt *{box-sizing:border-box}\n#qa-consent-prompt .qcookie-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:24px}\n#qa-consent-prompt .qcookie-copy{margin:0;min-width:0;flex:1 1 auto;color:#3b3b3b;font:inherit}\n#qa-consent-prompt .qcookie-copy a{color:#ba0000;text-decoration:underline;text-underline-offset:2px;font-weight:600}\n#qa-consent-prompt .qcookie-actions{display:flex;align-items:center;justify-content:flex-end;gap:10px;flex:0 0 auto}\n#qa-consent-prompt .qcookie-actions button{appearance:none;min-width:106px;min-height:40px;padding:8px 16px;border:1px solid #c50000;border-radius:6px;background:#c50000;color:#fff;cursor:pointer;font:600 13px/1.3 Arial,system-ui,sans-serif;box-shadow:none;white-space:nowrap}\n#qa-consent-prompt .qcookie-actions button[data-choice=\"no\"]{background:#fff;color:#4a4a4a;border-color:#bfc0c4}\n#qa-consent-prompt .qcookie-actions button:hover{filter:brightness(.96)}\n#qa-consent-prompt .qcookie-actions button:focus-visible,#qa-consent-prompt .qcookie-copy a:focus-visible{outline:3px solid #222;outline-offset:3px}\n@media(max-width:760px){#qa-consent-prompt{padding:12px 16px calc(12px + env(safe-area-inset-bottom, 0px));font-size:13px}#qa-consent-prompt .qcookie-inner{display:block}#qa-consent-prompt .qcookie-actions{justify-content:flex-end;margin-top:10px}#qa-consent-prompt .qcookie-actions button{flex:1 1 auto;min-width:0;max-width:200px}}";
+      document.head.appendChild(style);
+    }
+    var el=document.createElement('section');el.id='qa-consent-prompt';
+    el.setAttribute('role','region');el.setAttribute('aria-label','Aviso sobre cookies');
+    var inner=document.createElement('div');inner.className='qcookie-inner';
+    var message=document.createElement('p');message.className='qcookie-copy';
+    message.appendChild(document.createTextNode('Utilizamos cookies para melhorar sua experiência de navegação. Com sua permissão, também analisamos o uso do site. Saiba mais em nossa '));
+    var policy=document.createElement('a');policy.href="/privacidade-clientes.html";policy.textContent='Política de Privacidade';
+    message.appendChild(policy);message.appendChild(document.createTextNode('.'));
+    inner.appendChild(message);
+    var actions=document.createElement('div');actions.className='qcookie-actions';
+    [['Aceitar','yes'],['Recusar','no']].forEach(function(choice){
+      var button=document.createElement('button');button.type='button';button.textContent=choice[0];
+      button.setAttribute('data-choice',choice[1]);
+      button.addEventListener('click',function(){qaSave(choice[1]);el.remove();location.reload();});
+      actions.appendChild(button);
+    });
+    inner.appendChild(actions);el.appendChild(inner);document.body.appendChild(el);
+  }
+  function qaPrivacyFooter(){
+    if(document.getElementById('qa-consent-reopen'))return;
+    var a=document.createElement('button');a.type='button';a.id='qa-consent-reopen';a.textContent='Preferências de privacidade';a.style.cssText='margin:8px 12px;padding:5px;border:0;text-decoration:underline;background:transparent;color:inherit;font:12px system-ui;cursor:pointer';
+    a.addEventListener('click',qaChoices);var footer=document.querySelector('footer')||document.body;footer.appendChild(a);
+    if(!qaChoice())qaChoices();
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',qaPrivacyFooter,{once:true});else qaPrivacyFooter();
+  if(qaChoice()!=='yes')return;
+  // GA4 carrega apenas depois do consentimento; o ID vem do SEO configurado.
+  function qaStartGa(){
+    fetch('/content/seo.json',{cache:'no-store'}).then(function(r){return r.ok?r.json():null}).catch(function(){return null}).then(function(cfg){
+      var id=cfg&&typeof cfg.analyticsId==='string'?cfg.analyticsId:'G-9HPD9XCELH';
+      if(!/^G-[A-Z0-9]+$/i.test(id)||document.querySelector('script[data-quality-consented-ga]'))return;
+      window.dataLayer=window.dataLayer||[];window.gtag=window.gtag||function(){window.dataLayer.push(arguments);};
+      window.gtag('js',new Date());window.gtag('config',id,{send_page_view:false,page_location:location.origin+location.pathname,anonymize_ip:true,allow_google_signals:false,allow_ad_personalization_signals:false});window.gtag('event','page_view',{page_location:location.origin+location.pathname,page_title:document.title.slice(0,120)});
+      var s=document.createElement('script');s.async=true;s.dataset.qualityConsentedGa='1';s.src='https://www.googletagmanager.com/gtag/js?id='+encodeURIComponent(id);document.head.appendChild(s);
+    });
+  }
+  qaStartGa();
   if(window.__qualitySiteAnalyticsV14) return;
   window.__qualitySiteAnalyticsV14 = true;
 
@@ -275,6 +329,9 @@
   }
   function payloadObject(type,payload){
     var data = normalizePayload(type,payload), product=data.product||{}, category=data.category||{}, iso=new Date().toISOString();
+    function noPersonal(v){return clean(v,300).replace(/[\w.+-]+@[\w.-]+\.[a-z]{2,}/gi,'[email]').replace(/(?:\d\D*){10,}/g,'[numero]');}
+    data.errorMessage=noPersonal(data.errorMessage);
+    data.resourceUrl=(function(){try{var u=new URL(data.resourceUrl,location.origin);return u.origin+u.pathname;}catch(e){return ''}})();
     var compatErrorName = errorCompatLabel(type,data);
     var aud=touchAudienceState(), visitor=aud.visitor||{}, session=aud.session||{};
     var visitorType=Number(session.number||1)>1?'recorrente':'novo';
@@ -343,10 +400,11 @@
       heavyStyles:data.performance.heavyStyles, EstilosPesados:data.performance.heavyStyles,
       resourceCount:data.performance.resourceCount, Recursos:data.performance.resourceCount,
       connectionType:data.performance.connectionType, Conexao:data.performance.connectionType,
-      url:window.location.href, Pagina:window.location.href,
+      // URLs sem query ou hash para não registrar tokens de recuperação e dados sensíveis.
+      url:window.location.origin+window.location.pathname, Pagina:window.location.origin+window.location.pathname,
       pageTitle:clean(document.title||'',220), TituloPagina:clean(document.title||'',220),
-      path:clean((window.location.pathname||'/')+(window.location.search||''),300), Caminho:clean((window.location.pathname||'/')+(window.location.search||''),300),
-      referrer:document.referrer||'', Origem:document.referrer||'',
+      path:clean(window.location.pathname||'/',300), Caminho:clean(window.location.pathname||'/',300),
+      referrer:(function(){try{return document.referrer?new URL(document.referrer).origin:''}catch(e){return ''}})(), Origem:(function(){try{return document.referrer?new URL(document.referrer).origin:''}catch(e){return ''}})(),
       device:deviceName(), Dispositivo:deviceName(), language:navigator.language||'', Idioma:navigator.language||'',
       viewport:viewport(), Viewport:viewport(), timezone:timezone, Timezone:timezone
     };
@@ -379,14 +437,21 @@
     } catch(e){}
   }
   function track(type,payload){
+    if(qaChoice()!=='yes')return false;
     type = clean(type,40);
     if(!type) return false;
     var data = normalizePayload(type,payload||{});
+    // Nunca envie buscas que pareçam CPF, telefone ou e-mail.
+    if((type==='search'||type==='search_no_result') && (/@/.test(data.term||'')||/\d{3}\.?\d{3}\.?\d{3}[- ]?\d{2}/.test(data.term||'')||/(?:\d\D*){10,}/.test(data.term||'')))return false;
     if(type === 'search' && data.term) lastSearchTerm = data.term;
     if(isDuplicate(type,data)) return false;
     var obj = payloadObject(type,data);
     postAppsScript(obj,type);
     postLocalhost(obj);
+    // GA4 acompanha a conversão sem e-mail, CPF, sessão privada ou parâmetros da URL.
+    if(typeof window.gtag==='function'&&['site_signup_complete','whatsapp_click','search','product_view'].includes(type)){
+      window.gtag('event',type==='site_signup_complete'?'sign_up':type,{page_location:location.origin+location.pathname,event_category:'quality_site'});
+    }
     return true;
   }
 
