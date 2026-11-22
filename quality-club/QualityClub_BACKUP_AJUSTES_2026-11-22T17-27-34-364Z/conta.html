@@ -1,0 +1,408 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="color-scheme" content="dark"><meta name="theme-color" content="#120809">
+<meta name="robots" content="noindex,nofollow">
+<title>Minha conta | Quality Club</title>
+<style>
+:root{color-scheme:dark;--bg:#120809;--surface:#1d1012;--panel:#241214;--line:#6b3136;--text:#fff3f1;--muted:#d8bbb7;--lime:#ff6b72;--limeDeep:#4a171c;--warn:#ffe2a8;--red:#ffd1cb;font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif}
+*{box-sizing:border-box}body{margin:0;color:var(--text);background:radial-gradient(ellipse at 50% -10%,#3b171b 0,transparent 42%),var(--bg);line-height:1.5}button,input,select{font:inherit}button,a{touch-action:manipulation}button{cursor:pointer}a{color:inherit;text-decoration:none}.topbar{position:sticky;top:0;z-index:10;background:#15090bf2;backdrop-filter:blur(14px);border-bottom:1px solid #5c2a30}.topinner{max-width:1230px;margin:auto;display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:70px;padding:0 24px}.brand{font-weight:850;font-size:21px;letter-spacing:-.04em;display:flex;align-items:center;gap:10px}.mark{display:grid;place-items:center;background:var(--lime);color:#2c0e12;border-radius:10px;width:35px;height:35px;font-weight:1000;letter-spacing:-.06em}.topright{display:flex;align-items:center;gap:16px;font-size:13px;color:#e5c1be}.topright a:hover{text-decoration:underline}.shell{max-width:1230px;margin:0 auto;padding:32px 24px 68px;display:grid;grid-template-columns:230px minmax(0,1fr);gap:28px}.sidebar{position:sticky;top:94px;height:max-content}.sidegroup{border:1px solid var(--line);background:#160b0d;border-radius:17px;padding:13px}.sidetitle{font-size:11px;letter-spacing:.12em;text-transform:uppercase;font-weight:850;color:#e3a9a5;margin:7px 9px 12px}.navlink{display:flex;gap:10px;align-items:center;width:100%;padding:12px 11px;color:#efd6d4;background:transparent;border:0;border-radius:10px;text-align:left;font-size:14px;font-weight:650}.navlink.active,.navlink:hover{background:#61292f;color:#fff6f4}.sidestat{margin-top:15px;font-size:12px;color:#aebfae;padding:0 11px}.content{min-width:0}.heading{display:flex;justify-content:space-between;gap:20px;align-items:end;margin-bottom:26px}.eyebrow{text-transform:uppercase;letter-spacing:.14em;color:#ff9fa4;font-size:11px;font-weight:900}.heading h1{font-size:clamp(28px,4.5vw,42px);letter-spacing:-.058em;line-height:1.15;margin:6px 0 7px}.heading p{color:var(--muted);margin:0;font-size:14px}.surface{background:linear-gradient(170deg,#251316,#180c0e);border:1px solid var(--line);border-radius:20px;padding:24px;margin-bottom:17px;box-shadow:0 7px 28px #00000012}.surface h2{font-size:19px;letter-spacing:-.035em;margin:0 0 5px}.muted{color:var(--muted);font-size:13px}.desc{color:var(--muted);font-size:13px;margin:0 0 19px}.statgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:18px 0}.stat{border:1px solid #704148;border-radius:12px;background:#34191d;padding:16px;min-width:0}.stat small{display:block;font-size:12px;color:#f1d2cf}.stat strong{display:block;font-size:19px;font-weight:820;letter-spacing:-.03em;overflow-wrap:anywhere;margin-top:5px}.strip{border:1px solid #845057;border-radius:11px;background:#371b20;color:#ffe0dc;padding:14px 16px;font-size:13px;margin:15px 0}.strip.warn{background:#443820;border-color:#866b36;color:var(--warn)}.strip.error{background:#42271f;border-color:#a46158;color:var(--red)}.strip[hidden],.hidden,[hidden]{display:none!important}.row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}.btn{border:1px solid #9a5d65;color:#eff9ee;background:#3a1c20;padding:11px 15px;border-radius:11px;font-size:13px;font-weight:800;min-height:43px}.btn:hover{background:#5a252c}.btn:focus-visible,select:focus-visible,input:focus-visible{outline:2px solid var(--lime);outline-offset:2px}.btn.primary{color:#163017;background:var(--lime);border-color:var(--lime)}.btn.primary:hover{background:#ff8b92}.btn.danger{border-color:#9e6158;color:#ffe1db;background:#42291f}.btn:disabled{opacity:.5;cursor:not-allowed}.tag{font-size:11px;font-weight:850;letter-spacing:.04em;background:#4d1b22;color:#ffd5d3;border:1px solid #965159;border-radius:99px;padding:6px 11px;white-space:nowrap}.tag.off{background:#4b2420;color:#ffdaaa;border-color:#8b5d46}.block{margin-top:18px}.subhead{font-size:13px;font-weight:850;margin:20px 0 8px}.inlineform{display:flex;gap:10px;align-items:center;flex-wrap:wrap}input,select{min-width:0;border:1px solid #855159;background:#13090a;color:#f7fff3;border-radius:11px;padding:12px 13px;min-height:46px}input::placeholder{color:#b88c88}.searchbar input{flex:1;min-width:200px}.choices{display:flex;align-items:center;gap:10px;flex-wrap:wrap}.choices select{flex:1;min-width:220px}.divider{height:1px;background:#613037;margin:21px 0}.item{border:1px solid #35533d;background:#241316;padding:15px 18px;border-radius:13px;margin-top:11px}.item h3{font-size:16px;margin:0 0 4px}.item small{color:#a6bea9}.item h4{font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:#bbd0b8;margin:15px 0 4px}.item p{margin:0;font-size:13px;overflow-wrap:anywhere}.hist{width:100%;border-collapse:collapse;font-size:13px}.hist th,.hist td{padding:13px 10px;text-align:left;border-bottom:1px solid #5a2c32}.hist th{font-size:11px;letter-spacing:.07em;color:#dfbfbb;text-transform:uppercase}.hist td{overflow-wrap:anywhere}.accprofile{display:grid;grid-template-columns:1fr 1fr;gap:12px}.keyval{background:#2e171b;border:1px solid #774148;border-radius:12px;padding:15px}.keyval small{color:#debbb7;display:block;font-size:12px}.keyval strong{font-size:14px;overflow-wrap:anywhere}.empty{padding:25px;text-align:center;color:#adbfad;border:1px dashed #85565d;border-radius:12px;background:#1a0d10}.foot{max-width:1230px;margin:0 auto;border-top:1px solid #5e2d34;padding:18px 24px 35px;display:flex;gap:20px;flex-wrap:wrap;justify-content:space-between;color:#d3b5b2;font-size:12px}.loading{color:#eac4c1}.loginbox{max-width:480px;margin:45px auto 80px}.loginbox label{font-size:12px;display:block;margin-top:14px;margin-bottom:6px}.loginbox input{width:100%}.loginbox .btn{width:100%;margin-top:15px}.subgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.subgrid .item{margin:0}.section-anchor{scroll-margin-top:95px}@media(max-width:900px){.shell{grid-template-columns:1fr}.sidebar{position:static}.sidegroup{display:flex;flex-wrap:wrap;gap:4px;align-items:center}.sidetitle,.sidestat{display:none}.navlink{width:auto;flex:1;min-width:115px;justify-content:center;padding:11px}.heading{margin-top:0}}@media(max-width:580px){.topinner{padding:0 16px}.shell{padding:22px 14px 42px;gap:17px}.heading{display:block}.surface{padding:18px;border-radius:16px}.statgrid,.accprofile,.subgrid{grid-template-columns:1fr}.row .btn{flex:1}.hist th,.hist td{padding:11px 6px}.choices select,.choices .btn{width:100%}.topright{gap:9px}.topright .smallsite{display:none}.navlink{font-size:12px;min-width:100px}}
+
+/* Etapa 11: cadastro do comprador em blocos compactos, responsivos e acessiveis. */
+.profileform{margin-top:20px}.profilefields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.profilefield{display:flex;flex-direction:column;gap:5px;min-width:0}
+.profilefield label{font-size:12px;font-weight:750;color:#cce0ca}
+.profilefield input,.profilefield select{width:100%;min-height:46px}
+.profilefield.wide{grid-column:1/-1}.profileform .row{margin-top:17px}
+.profilehelp{margin:7px 0;color:#b8cbb7;font-size:12px}
+@media(max-width:580px){.profilefields{grid-template-columns:1fr}.profilefield.wide{grid-column:auto}}
+/* Etapas 14/15: alvos tocáveis, histórico sem rolagem do documento e quebra segura. */
+#paymentsHistory{max-width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch}
+#paymentsHistory .hist{min-width:320px}
+.navlink,.btn{min-height:44px}
+.content,.surface{overflow-wrap:anywhere}
+@media(max-width:580px){.topinner{min-height:60px}.shell{padding-bottom:68px}.topright .tag{display:none}.choices{align-items:stretch}.hist{font-size:12px}.stat strong{font-size:18px}}
+</style>
+<link rel="stylesheet" href="./quality-club-theme.css?v=18-3">
+</head>
+<body>
+<header class="topbar"><div class="topinner"><a class="brand" href="/"><span class="mark">Q</span>Quality Club</a><div class="topright"><span class="tag" id="envTag">Área do assinante</span><a class="smallsite" href="/planos.html">Planos</a><a class="smallsite" href="/">Ver site</a><button class="btn" type="button" id="logout" hidden>Sair</button></div></div></header>
+<section id="loginSection" class="loginbox surface" hidden><div class="eyebrow">Acesso reservado</div><h1>Entre na sua conta</h1><p class="desc">Use seu cadastro do Quality Club. Seus dados e assinaturas são individuais.</p><form id="loginForm"><label for="loginEmail">E-mail</label><input id="loginEmail" autocomplete="email" type="email" required><label for="loginPassword">Senha</label><input id="loginPassword" type="password" autocomplete="current-password" required minlength="8"><button class="btn primary" id="loginSubmit" type="submit">Entrar no Quality Club</button></form><p class="muted">Ainda não tem cadastro? <a href="/?entrar=1">Criar conta no site</a></p><p id="loginError" class="strip error" hidden role="alert"></p></section>
+<div id="app" class="shell" hidden>
+<aside class="sidebar"><nav class="sidegroup" aria-label="Navegação da conta"><div class="sidetitle">Meu Quality Club</div><a class="navlink active" href="#resumo">◈ Resumo</a><a class="navlink" href="#pesquisa">⌕ Pesquisar</a><a class="navlink" href="#assinatura">▤ Assinatura</a><a class="navlink" href="#perfil">◯ Perfil</a><div class="sidestat">Uma ferramenta da Quality Celulares.</div></nav></aside>
+<main class="content">
+<div class="heading section-anchor" id="resumo"><div><span class="eyebrow">Área exclusiva do assinante</span><h1>Minha conta</h1><p id="welcomeText">Seu espaço para consultar, acompanhar e gerenciar o Quality Club.</p></div><span id="accountStatus" class="tag off">Conferindo acesso…</span></div>
+<div id="globalNotice" class="strip warn" hidden role="status" aria-live="polite"></div>
+<section class="surface" aria-labelledby="overviewTitle"><h2 id="overviewTitle">Seu acesso, em um só lugar</h2><p class="desc">Plano e pagamentos são verificados no servidor; não dependem de informações da tela do checkout.</p><div class="statgrid"><div class="stat"><small>Plano contratado</small><strong id="planText">Conferindo…</strong></div><div class="stat"><small>Acesso VIP até</small><strong id="expiryText">—</strong></div><div class="stat"><small>Valor da assinatura</small><strong id="priceText">—</strong></div><div class="stat"><small>Renovação</small><strong id="renewalText">—</strong></div></div><div id="paymentNotice" class="strip" hidden aria-live="polite"></div><div class="row"><button id="refresh" class="btn" type="button">Atualizar dados</button><a class="btn primary" href="#pesquisa">Consultar compatibilidades</a></div></section>
+<section class="surface section-anchor" id="pesquisa"><h2>Consultar compatibilidades</h2><p class="desc">Encontre películas e capas compatíveis com cada aparelho. A consulta é exclusiva de assinantes com acesso ativo.</p><div id="searchLock" class="strip warn">Conferindo seu acesso…</div><form id="searchForm" class="inlineform searchbar" hidden><label for="searchTerm" class="hidden">Modelo do aparelho</label><input id="searchTerm" type="search" placeholder="Digite o modelo: iPhone 13, Galaxy A15…" minlength="2" maxlength="64" required><button class="btn primary" type="submit" id="searchBtn">Pesquisar</button></form><p id="searchNotice" class="muted" role="status" aria-live="polite"></p><div id="searchResults" aria-live="polite"></div></section>
+<section class="surface section-anchor" id="assinatura"><h2>Minha assinatura</h2><p class="desc">Confira seus pagamentos e gerencie as renovações. O vencimento do VIP pode incluir dias bônus de upgrades.</p><div id="billingNotice" class="strip warn" hidden role="status"></div><div id="profileGate" class="strip warn" hidden role="status"></div><div id="billingLoading" class="loading">Consultando assinaturas…</div><div id="subscriptionContent" hidden><p id="subscriptionInfo" class="muted"></p><div class="row block" id="renewalButtons" hidden><button type="button" class="btn" id="checkRenewal">Consultar renovação</button><button type="button" class="btn danger" id="stopRenewal" hidden>Interromper renovação</button><button type="button" class="btn" id="resumeRenewal" hidden>Reativar renovação</button><button type="button" class="btn" id="auditLegacy" hidden>Conferir plano anterior</button></div><p class="muted" id="managementNotice" aria-live="polite"></p><div class="divider"></div><h3 class="subhead" id="checkoutTitle">Escolha um plano</h3><p class="desc" id="checkoutDescription">Selecione o período desejado para iniciar uma assinatura de teste.</p><div class="choices"><select id="checkoutPlan" aria-label="Plano desejado"><option value="mensal">Mensal · R$ 14,90</option><option value="trimestral">Trimestral · R$ 39,90</option><option value="semestral">Semestral · R$ 74,90</option><option value="anual">Anual · R$ 139,90</option></select><button type="button" class="btn primary" id="checkoutBtn">Continuar para pagamento</button><button type="button" class="btn primary" id="resumeBtn" hidden>Retomar checkout</button><button type="button" class="btn" id="reviewBtn" hidden>Conferir tentativa sem cobrar</button></div><p class="muted" id="checkoutNote"></p></div><div class="divider"></div><h3 class="subhead" id="historyTitle">Histórico de pagamentos</h3><div id="paymentsHistory" class="empty">Nenhum pagamento confirmado registrado nesta conta.</div><p class="muted block">O acesso só é concedido após aprovação conferida no Mercado Pago. Seus dados financeiros não ficam públicos.</p></section>
+<section class="surface section-anchor" id="perfil"><h2>Dados da conta</h2>
+<p class="desc">Complete seus dados antes de contratar qualquer plano. Eles ficam vinculados à sua conta e não são exibidos a outros assinantes.</p>
+<div class="accprofile"><div class="keyval"><small>Nome</small><strong id="profileName">—</strong></div><div class="keyval"><small>E-mail</small><strong id="profileEmail">—</strong></div><div class="keyval"><small>Cadastro realizado em</small><strong id="profileCreated">—</strong></div><div class="keyval"><small>Verificação do e-mail</small><strong id="profileVerified">—</strong></div></div>
+<div id="profileStatus" class="strip warn" role="status" aria-live="polite">Conferindo dados do comprador…</div>
+<form id="profileForm" class="profileform" autocomplete="on">
+<div class="profilefields">
+ <div class="profilefield wide"><label for="pName">Nome completo *</label><input id="pName" name="name" autocomplete="name" maxlength="120" required placeholder="Nome e sobrenome"></div>
+ <div class="profilefield"><label for="pCpf">CPF *</label><input id="pCpf" name="cpf" inputmode="numeric" autocomplete="off" maxlength="14" placeholder="000.000.000-00" required></div>
+ <div class="profilefield"><label for="pCep">CEP *</label><input id="pCep" name="postal-code" inputmode="numeric" autocomplete="postal-code" maxlength="9" placeholder="00000-000" required></div>
+ <div class="profilefield wide"><label for="pStreet">Rua / Avenida *</label><input id="pStreet" name="address-line1" autocomplete="address-line1" maxlength="120" required></div>
+ <div class="profilefield"><label for="pNumber">Número *</label><input id="pNumber" maxlength="20" required placeholder="Ex.: 123 ou S/N"></div>
+ <div class="profilefield"><label for="pComplement">Complemento (opcional)</label><input id="pComplement" name="address-line2" autocomplete="address-line2" maxlength="80" placeholder="Casa, sala, apartamento…"></div>
+ <div class="profilefield"><label for="pNeighborhood">Bairro *</label><input id="pNeighborhood" maxlength="80" required></div>
+ <div class="profilefield"><label for="pCity">Cidade *</label><input id="pCity" autocomplete="address-level2" maxlength="80" required></div>
+ <div class="profilefield"><label for="pState">Estado (UF) *</label><select id="pState" autocomplete="address-level1" required><option value="">Selecione…</option><option>AC</option><option>AL</option><option>AP</option><option>AM</option><option>BA</option><option>CE</option><option>DF</option><option>ES</option><option>GO</option><option>MA</option><option>MT</option><option>MS</option><option>MG</option><option>PA</option><option>PB</option><option>PR</option><option>PE</option><option>PI</option><option>RJ</option><option>RN</option><option>RS</option><option>RO</option><option>RR</option><option>SC</option><option>SP</option><option>SE</option><option>TO</option></select></div>
+</div><p class="profilehelp">* Campos obrigatórios. Validação do CPF e do cadastro realizada no servidor. Não compartilhe dados falsos de clientes.</p>
+<div class="row"><button class="btn primary" type="submit" id="saveProfile">Salvar meus dados</button><span class="muted" id="saveProfileNotice" role="status" aria-live="polite"></span></div>
+</form>
+<div class="divider"></div><div class="row block"><button type="button" class="btn" id="resetPassword">Enviar link para trocar senha</button><a class="btn" href="/">Voltar ao site</a></div><p class="muted" id="profileNotice" aria-live="polite"></p></section>
+</main></div><footer class="foot"><span>© Quality Club — Quality Celulares</span><span>Suporte: Quality Celulares</span><span>Pagamentos verificados no servidor. Renovações podem ser canceladas na área do assinante.</span></footer>
+<script type="module">
+import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm';
+import { SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY } from './app-config.js';
+const $=id=>document.getElementById(id);
+const defined=typeof SUPABASE_PUBLISHABLE_KEY==='string' && (/^sb_publishable_[A-Za-z0-9_-]+$/.test(SUPABASE_PUBLISHABLE_KEY)||/^eyJ[A-Za-z0-9_-]+\./.test(SUPABASE_PUBLISHABLE_KEY));
+const client=defined?createClient(SUPABASE_URL,SUPABASE_PUBLISHABLE_KEY,{auth:{persistSession:true,autoRefreshToken:true,detectSessionInUrl:true}}):null;
+const planLabels={mensal:'Mensal',trimestral:'Trimestral',semestral:'Semestral',anual:'Anual'},priceLabels={mensal:'R$ 14,90',trimestral:'R$ 39,90',semestral:'R$ 74,90',anual:'R$ 139,90'};
+const renewalLabels={active:'Automática ativa',authorized:'Automática ativa',paused:'Interrompida',canceled:'Cancelada',unknown:'A conferir'};
+const date=v=>v&&Number.isFinite(Date.parse(v))?new Date(v).toLocaleDateString('pt-BR',{day:'2-digit',month:'2-digit',year:'numeric'}):'—';
+const money=c=>Number.isFinite(Number(c))?(Number(c)/100).toLocaleString('pt-BR',{style:'currency',currency:'BRL'}):'—';
+let user=null, billing=null, vip=null, commerce=null, working=false, pollId=null, syncBusy=false, lastSyncAttempt=0, refreshSerial=0, profileDirty=false, renewalAutoUser=null, initialPlan=new URLSearchParams(location.search).get('plano')||sessionStorage.getItem('qc_selected_plan')||'';
+function announce(text,error=false){const el=$('globalNotice');el.hidden=!text;el.classList.toggle('error',error);el.classList.toggle('warn',!error);el.textContent=text||'';}
+function errorMessage(data,error,fallback){if(typeof data?.message==='string')return data.message;if(error?.context){return error.context.clone().json().then(x=>x?.message||fallback).catch(()=>fallback)}return fallback;}
+async function invoke(action,params={}){if(!client)throw new Error('Chave pública do Supabase ainda não configurada.');const {data,error}=await client.functions.invoke('quality-club-billing',{body:{action,...params}});if(error||!data?.ok)throw new Error(await errorMessage(data,error,'Não foi possível concluir esta operação.'));return data;}
+function safeCheckout(url){try{const u=new URL(url);return u.protocol==='https:'&&/(^|\.)mercadopago\.com(\.br)?$/.test(u.hostname)}catch{return false}}
+function startCheckout(url){if(!safeCheckout(url))throw new Error('O Mercado Pago não retornou um link seguro.');location.assign(url)}
+function showAuthenticated(u){commerce=null;if(!user||user.id!==u.id){profileDirty=false;$('profileForm').reset();}user=u;billing=null;vip=null;$('app').hidden=false;$('loginSection').hidden=true;$('logout').hidden=false;$('profileEmail').textContent=u.email||'—';$('profileName').textContent=u.user_metadata?.full_name||u.user_metadata?.name||'Não informado';$('profileCreated').textContent=date(u.created_at);$('profileVerified').textContent=u.email_confirmed_at?'Confirmado':'Aguardando confirmação';$('welcomeText').textContent=`Olá! ${u.email||''} — seus serviços e assinaturas em um só lugar.`;$('pName').value=u.user_metadata?.full_name||u.user_metadata?.name||'';refreshData().then(()=>{
+ if(!user||user.id!==u.id)return;
+ const commercialPending=commerce?.subscription?.status==='pending';
+ const legacyPending=!commerce?.subscription && (billing?.subscriptions||[]).some(s=>s.status==='pending');
+ const returned=new URLSearchParams(location.search).has('retorno');
+ if(commercialPending || (returned && commerce?.subscription?.status==='pending') || (!vip?.active&&legacyPending))startPolling();
+}).catch(()=>{})}
+function showGuest(){++refreshSerial;renewalAutoUser=null;profileDirty=false;$('profileForm').reset();user=null;billing=null;vip=null;commerce=null;$('app').hidden=true;$('loginSection').hidden=false;$('logout').hidden=true;if(!defined){$('loginError').hidden=false;$('loginError').textContent='Chave pública pendente no arquivo app-config.js.'}}
+async function refreshData(){if(!user||!client)return;const serial=++refreshSerial;const results=await Promise.allSettled([client.functions.invoke('quality-club-search',{body:{action:'status'}}),client.functions.invoke('quality-club-billing',{body:{action:'status'}}),client.functions.invoke('quality-club-commerce',{body:{action:'status'}})]);
+  if(serial!==refreshSerial || !user)return;
+  const a=results[0].status==='fulfilled'?results[0].value:null;vip=a&&!a.error&&a.data?.ok?a.data:null;const c=results[2].status==='fulfilled'?results[2].value:null;const lastCommerce=commerce;commerce=c&&!c.error&&c.data?.ok?c.data:lastCommerce?{...lastCommerce,enabled:false,unavailable:true}:{enabled:false,unavailable:true,subscription:null,payments:[]};
+  $('searchLock').hidden=!!vip?.active;$('searchForm').hidden=!vip?.active;
+  $('searchLock').textContent=vip?'Seu VIP ainda não está ativo. Quando o pagamento for confirmado pela API, a pesquisa será liberada automaticamente.':'Não foi possível conferir o VIP agora. Tente atualizar seus dados.';
+  if(isPilotRecorded()){
+    announce(isPilotVerified()
+      ? (vip.pilot.renewal==='canceled'
+        ? 'Piloto real de R$ 1,00 confirmado. Renovação cancelada. As assinaturas anteriores são simulações.'
+        : 'Piloto real confirmado, mas a renovação ainda precisa de conferência na homologação.')
+      : 'Piloto real registrado, mas a verificação recente do pagamento está pendente. Se a pesquisa ainda funcionar por testes simulados, isso não confirma o piloto real.');
+  }
+  const comercialVigente=!!commerce?.subscription&&['active','canceled'].includes(commerce.subscription.status)&&!!commerce.subscription.accessUntil&&Date.parse(commerce.subscription.accessUntil)>Date.now();
+  $('accountStatus').textContent=!vip?'VIP a conferir':comercialVigente&&vip.commercialActive===true?'VIP comercial ativo':comercialVigente?'VIP comercial a conferir':vip.pilotActive===true?'VIP piloto ativo':isPilotRecorded()&&!isPilotVerified()&&vip.active?'VIP de teste':vip.active?'VIP ativo':'Sem VIP ativo';$('accountStatus').classList.toggle('off',!vip?.active);
+  const b=results[1].status==='fulfilled'?results[1].value:null;billing=b&&!b.error&&b.data?.ok?b.data:null;
+  if(!billing){$('profileStatus').textContent='Não foi possível conferir seu cadastro no servidor. Tente Atualizar dados.';
+    if(commerce){commerce={...commerce,enabled:false,unavailable:true};$('billingLoading').hidden=true;$('subscriptionContent').hidden=false;renderBilling();renderHistory();return;}
+    $('billingLoading').hidden=false;$('billingLoading').textContent='O serviço de assinaturas está temporariamente indisponível. Seu cadastro continua salvo.';$('subscriptionContent').hidden=true;return;}
+  $('billingLoading').hidden=true;$('subscriptionContent').hidden=false;
+  renderProfile(billing.profile);renderBilling();renderHistory();
+  // Uma unica consulta silenciosa por sessao da pagina para planos legados
+  // com renovacao desconhecida. O servidor limita repeticoes a 60 segundos.
+  if(!commerce?.subscription&&!isPilotRecorded() && billing.activePlan && billing.renewal?.state==='unknown' && renewalAutoUser!==user.id){
+    renewalAutoUser=user.id;
+    invoke('renewal_refresh').then(()=>{if(user)refreshData()}).catch(()=>{});
+  }
+  if(!billing.profile?.completed&&!billing.activePlan&&!(billing.subscriptions||[]).length&&!location.hash&&!new URLSearchParams(location.search).has('retorno'))location.hash='perfil';
+}
+const profileIds={full_name:'pName',cpf:'pCpf',cep:'pCep',street:'pStreet',
+  number:'pNumber',complement:'pComplement',neighborhood:'pNeighborhood',
+  city:'pCity',state:'pState'};
+const digits=s=>String(s||'').replace(/\D/g,'');
+function formatCpf(v){const s=digits(v).slice(0,11);return s.length===11?s.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/,'$1.$2.$3-$4'):s;}
+function formatCep(v){const s=digits(v).slice(0,8);return s.length===8?s.slice(0,5)+'-'+s.slice(5):s;}
+function isPilotRecorded(){
+ if(commerce?.subscription&&(['creating','pending','active','review'].includes(commerce.subscription.status)||
+     (commerce.subscription.accessUntil&&Date.parse(commerce.subscription.accessUntil)>Date.now())))return false;
+ const p=vip?.pilot;
+ return !!p && ['paid','canceled'].includes(p.status);
+}
+function isPilotVerified(){return isPilotRecorded() && vip?.pilotActive===true;}
+function isProfileComplete(){return billing?.profile?.completed===true;}
+function focusProfile(){location.hash='perfil';$('profileStatus').hidden=false;
+  $('profileStatus').textContent='Preencha e salve o cadastro para continuar com sua assinatura.';
+  const missing=Object.entries(profileIds).filter(([k])=>k!=='complement').find(([,id])=>!$(id).value.trim());
+  (missing?$(missing[1]):$('pName')).focus({preventScroll:true});}
+function renderProfile(profile){
+  const completed=profile?.completed===true;
+  if(!profileDirty){
+    for(const [key,id] of Object.entries(profileIds)){
+      const val=profile?.[key]||((key==='full_name')?(user?.user_metadata?.full_name||''):'');
+      $(id).value=key==='cpf'?formatCpf(val):key==='cep'?formatCep(val):val;
+    }
+  }
+  $('profileName').textContent=profile?.full_name||user?.user_metadata?.full_name||'Não informado';
+  $('profileStatus').classList.toggle('warn',!completed);
+  $('profileStatus').classList.toggle('error',false);
+  $('profileStatus').textContent=completed?'Cadastro completo e salvo. Você pode atualizar seus dados quando precisar.':
+    'Cadastro incompleto. Nome, CPF e endereço são obrigatórios antes de comprar.';
+  $('profileGate').hidden=completed;
+  $('profileGate').textContent=completed?'':'Antes de contratar um plano, complete seu cadastro em Dados da conta.';
+}
+for(const id of Object.values(profileIds))$(id).addEventListener('input',()=>{profileDirty=true});
+$('pCpf').addEventListener('blur',()=>{$('pCpf').value=formatCpf($('pCpf').value)});
+$('pCep').addEventListener('blur',()=>{$('pCep').value=formatCep($('pCep').value)});
+$('profileForm').addEventListener('submit',async ev=>{
+  ev.preventDefault();if(!user||working)return;
+  const button=$('saveProfile');button.disabled=true;working=true;
+  $('saveProfileNotice').textContent='Salvando…';
+  const data={};for(const [key,id] of Object.entries(profileIds))data[key]=$(id).value.trim();
+  try{
+    const result=await invoke('profile_save',{profile:data});
+    profileDirty=false;
+    $('saveProfileNotice').textContent=result.message||'Cadastro salvo.';
+    if(billing){billing.profile=result.profile;renderProfile(result.profile);renderBilling()}
+    else await refreshData();
+    location.hash='assinatura';
+  }catch(e){$('saveProfileNotice').textContent=e.message||'Falha ao salvar cadastro.';}
+  finally{working=false;button.disabled=false}
+});
+// Etapa 17: assinaturas comerciais isoladas do ambiente de simulação.
+async function invokeCommerce(action,params={}){
+  const {data,error}=await client.functions.invoke('quality-club-commerce',{body:{action,...params}});
+  if(error||!data?.ok)throw new Error(await errorMessage(data,error,'A operação comercial não pôde ser confirmada. Não repita uma cobrança.'));
+  return data;
+}
+function renderCommerce(){
+  const sub=commerce?.subscription||null,open=sub&&['pending','creating','review'].includes(sub.status);
+  const live=sub&&['active','canceled'].includes(sub.status)&&sub.accessUntil&&Date.parse(sub.accessUntil)>Date.now();
+  // O piloto pago continua visível mesmo quando a tentativa comercial está arquivada.
+  const hasPilot=vip?.pilotActive===true;
+  $('planText').textContent=live?`${planLabels[sub.plan]||sub.plan} · real`:
+    sub?.status==='review'?(hasPilot?'Piloto VIP ativo · compra em revisão':'Criação comercial em revisão'):
+    open?'Pagamento em conferência':hasPilot?'Piloto VIP ativo':'Nenhum plano comercial ativo';
+  $('expiryText').textContent=live?date(sub.accessUntil):hasPilot?date(vip.pilot?.accessUntil):'—';
+  $('priceText').textContent=live&&sub&&commerce?.plans?.[sub.plan]?money(commerce.plans[sub.plan].centavos):
+    hasPilot?'R$ 1,00 (piloto real)':sub&&commerce?.plans?.[sub.plan]?money(commerce.plans[sub.plan].centavos):'—';
+  $('renewalText').textContent=live?(renewalLabels[sub.renewal]||'A conferir'):
+    hasPilot?(renewalLabels[vip.pilot?.renewal]||'Piloto em conferência'):'Sem renovação comercial';
+  $('subscriptionInfo').textContent=live?`Plano ${planLabels[sub.plan]||sub.plan} confirmado no Mercado Pago. Período pago até ${date(sub.accessUntil)}.`:
+    sub?.status==='review'?'A criação comercial foi interrompida antes de salvar um contrato ou checkout. Investigação sem cobrança disponível. Não gere outra compra.':open?'Existe um checkout/contrato real em conferência. Não gere outra assinatura.':'Escolha um plano recorrente para começar.';
+  $('paymentNotice').hidden=!open&&!(live&&vip?.commercialActive!==true);$('paymentNotice').textContent=live&&vip===null?'Pagamento comercial confirmado. A consulta do VIP está temporariamente indisponível; não pague novamente.':live&&vip?.commercialActive!==true?'Contrato e pagamento reconhecidos; VIP comercial aguardando validação no servidor. Não pague novamente.':sub?.status==='review'?'Tentativa de criação em revisão. Nenhuma nova compra é permitida antes da conferência.':open?'Assinatura em conferência. Se você já pagou, NÃO pague novamente.':' ';
+  $('renewalButtons').hidden=!live;
+  $('stopRenewal').textContent='Cancelar renovação automática';
+  $('stopRenewal').hidden=!live||sub.renewal==='canceled';
+  $('resumeRenewal').hidden=true;$('auditLegacy').hidden=true;
+  $('managementNotice').textContent=live?'A renovação futura pode ser cancelada sem apagar o período já pago.':
+    'Pagamentos e renovações comerciais são verificados diretamente no Mercado Pago.';
+  // Apenas assinatura cancelada, renovação cancelada e período já vencido pode ser substituída.
+  const canceledAndFinished=Boolean(sub?.status==='canceled'&&sub.renewal==='canceled'&&
+    (!sub.accessUntil||Date.parse(sub.accessUntil)<=Date.now()));
+  const blocked=Boolean(sub&&!canceledAndFinished);
+  const keys=['mensal','trimestral','semestral','anual'];const sel=$('checkoutPlan');
+  const wanted=initialPlan||sel.value;initialPlan='';sel.replaceChildren();
+  for(const k of keys){const option=document.createElement('option');option.value=k;
+    option.textContent=`${planLabels[k]} · ${priceLabels[k]}`;sel.append(option)}
+  if(keys.includes(wanted))sel.value=wanted;
+  $('checkoutTitle').textContent=live?'Assinatura comercial ativa':'Contratar assinatura comercial';
+  $('checkoutDescription').textContent=live?(sub.renewal==='canceled'?'Sua renovação foi cancelada. O acesso continua válido até o fim do período já pago.':'Seu plano já está pago. Nenhuma nova compra é necessária; acompanhe a renovação nesta página.'):'Pagamento real recorrente. A cobrança do plano escolhido se repete a cada período até o cancelamento. Os valores são informados antes da confirmação no Mercado Pago.';
+  $('checkoutPlan').hidden=blocked||!commerce.enabled;
+  $('checkoutBtn').hidden=blocked;$('checkoutBtn').disabled=blocked||!commerce.enabled||commerce.unavailable;
+  $('checkoutBtn').textContent=isProfileComplete()?'Continuar para pagamento real':'Completar cadastro para contratar';
+  $('resumeBtn').hidden=!(sub?.status==='pending'&&sub?.checkoutUrl);
+  $('reviewBtn').hidden=!(sub?.status==='review');
+  $('resumeBtn').dataset.mode='commercial';
+  if(commerce.pilotOverlapAllowed&&!live){
+    [...sel.options].forEach(o=>{if(o.value!=='mensal')o.remove()});sel.value='mensal';
+    $('checkoutDescription').textContent='Teste comercial privado: uma compra REAL mensal de R$ 14,90, com recorrência. O piloto de R$ 1,00 permanece separado e não gera crédito ou dias adicionais; cancele a nova renovação após validar.';
+    $('subscriptionInfo').textContent=(live?'Plano comercial real confirmado. ':
+      sub?.status==='review'?'Tentativa comercial incerta. Nova cobrança bloqueada. ':
+      open?'Checkout comercial em conferência. ':'')+
+      'Piloto de R$ 1,00 preservado até '+date(vip?.pilot?.accessUntil)+', renovação do piloto cancelada.';
+  }
+  $('checkoutNote').textContent=commerce.unavailable?'Não foi possível conferir a configuração comercial. Nenhuma nova cobrança será iniciada.':
+    sub?.status==='review'?'Nenhum checkout foi salvo. Clique em Conferir tentativa sem cobrar. Não faça outra compra.':
+    open?'Não faça outra compra. Aguarde a conferência do contrato já criado.':
+    !commerce.enabled?'Assinaturas comerciais ainda não liberadas para venda.':
+    !isProfileComplete()?'Preencha e salve seus dados antes da compra.':
+    live?'Seu plano já está pago até o vencimento exibido.':
+    commerce.archivedAttempt?'A tentativa anterior foi arquivada após revisão administrativa. Nova compra depende das autorizações do servidor.':
+    'A cobrança será real e recorrente; confirme somente se concordar.';
+}
+function renderCommercialHistory(){
+  $('historyTitle').textContent='Pagamentos reais';const target=$('paymentsHistory');target.replaceChildren();
+  const data=Array.isArray(commerce?.payments)?commerce.payments:[];
+  if(vip?.pilot?.status==='paid'){
+    const item=document.createElement('div');item.className='item';
+    const h=document.createElement('h3');h.textContent='Piloto real anterior — R$ 1,00';
+    const p=document.createElement('p');p.textContent='Renovação: '+(renewalLabels[vip.pilot.renewal]||'a conferir')+'. Acesso até '+date(vip.pilot.accessUntil)+'. Este período não é somado à assinatura comercial.';
+    item.append(h,p);target.append(item);
+  }
+  if(!data.length){if(!vip?.pilot){target.className='empty';target.textContent='Nenhum pagamento real confirmado nesta assinatura.';}return;}
+  target.className='';const table=document.createElement('table');table.className='hist';
+  const head=document.createElement('thead');head.innerHTML='<tr><th>Data</th><th>Plano</th><th>Valor</th><th>Situação</th></tr>';table.append(head);
+  const body=document.createElement('tbody');for(const p of data){
+    const tr=document.createElement('tr');for(const v of [date(p.approvedAt),planLabels[commerce.subscription?.plan]||'—',money(p.amountCents),p.status==='approved'?'Aprovado':'Estornado']){
+      const td=document.createElement('td');td.textContent=v;tr.append(td)}body.append(tr)}table.append(body);target.append(table);
+}
+function renderBilling(){
+ // Falha da API comercial: exibir apenas dados em leitura, nunca oferecer compra ou controles financeiros.
+ if(commerce?.unavailable){
+   renderCommerce();
+   $('renewalButtons').hidden=true;$('checkoutPlan').hidden=true;$('checkoutBtn').hidden=true;
+   $('resumeBtn').hidden=true;$('reviewBtn').hidden=true;
+   $('billingNotice').hidden=false;
+   $('billingNotice').textContent='A consulta das assinaturas está temporariamente indisponível. Nenhuma nova cobrança pode ser iniciada. Atualize os dados mais tarde.';
+   $('checkoutTitle').textContent='Assinaturas temporariamente indisponíveis';
+   $('checkoutDescription').textContent='Se você já pagou, não faça outra compra.';
+   $('checkoutNote').textContent='Seu histórico e o acesso já concedido não são alterados por esta indisponibilidade.';
+   return;
+ }
+ $('billingNotice').hidden=true;
+ // Em conta com piloto real registrado, NUNCA apresentar planos ficticios
+ // como o plano financeiro vigente. A funcao protegida de busca determina
+ // se o comprovante real ainda esta validado para conceder acesso VIP.
+ if(isPilotRecorded()&&!commerce?.pilotOverlapAllowed){
+   const p=vip.pilot;
+   const verified=isPilotVerified();
+   $('planText').textContent=verified?'Piloto real ativo':'Piloto real em conferência';
+   $('expiryText').textContent=verified?date(p.accessUntil):'Aguardando validação';
+   $('priceText').textContent='R$ 1,00 (piloto real)';
+   $('renewalText').textContent=renewalLabels[p.renewal]||'A conferir';
+   $('paymentNotice').hidden=p.renewal==='canceled'&&verified;
+   $('paymentNotice').textContent=!verified
+     ?'O servidor ainda precisa revalidar o comprovante do piloto. O cadastro e os pagamentos simulados nao concedem acesso real automaticamente.'
+     :'Cancelamento da recorrência ainda não confirmado. Confira no Mercado Pago e na homologação.';
+   $('subscriptionInfo').textContent=verified
+     ?`Piloto privado de R$ 1,00 confirmado. Acesso até ${date(p.accessUntil)}. Renovação: ${renewalLabels[p.renewal]||'a conferir'}.`
+     :'O pagamento de R$ 1,00 consta no piloto, mas a autorização VIP precisa de nova conferência do servidor.';
+   $('renewalButtons').hidden=true;
+   $('managementNotice').textContent='Gerencie este piloto exclusivamente na página de homologação; os controles dos planos simulados estão ocultos.'+
+     (commerce?.archivedAttempt?' Tentativa comercial anterior arquivada no histórico, sem alterar o piloto.':'');
+   $('checkoutTitle').textContent='Piloto real — gerenciamento';
+   $('checkoutDescription').textContent='Assinaturas comerciais ainda não habilitadas. Os planos antigos desta conta pertencem aos testes simulados.';
+   $('checkoutPlan').hidden=true;
+   $('checkoutBtn').hidden=true;
+   $('resumeBtn').hidden=true;
+   $('reviewBtn').hidden=true;
+   $('checkoutNote').replaceChildren();
+   const a=document.createElement('a');a.href='/homologacao.html';a.className='btn';
+   a.textContent='Consultar piloto real';$('checkoutNote').append(a);
+   return;
+ }
+ if(commerce){renderCommerce();return;}
+ $('reviewBtn').hidden=true;
+ $('stopRenewal').textContent='Interromper renovação';
+ const subs=Array.isArray(billing.subscriptions)?billing.subscriptions:[];
+ const active=billing.activePlan?subs.find(s=>s.plan===billing.activePlan && s.status==='authorized'):null;
+ const pending=subs.find(s=>s.status==='pending'||s.status==='creating');
+ const up=billing.upgrade && ['creating','pending','processing','needs_review'].includes(billing.upgrade.status)?billing.upgrade:null;
+ $('planText').textContent=billing.activePlan?`${planLabels[billing.activePlan]||billing.activePlan} ativo`:(pending?'Pagamento em conferência':'Nenhum plano ativo');
+ $('expiryText').textContent=date(vip?.expiresAt||billing.activeUntil);
+ $('priceText').textContent=active?money(billing.activePriceCents):'—';
+ $('renewalText').textContent=active?(renewalLabels[billing.renewal?.state]||'A conferir'):'Sem renovação';
+ const pendingUnpaid=!vip?.active && !!pending;
+ $('paymentNotice').hidden=!(pendingUnpaid||up);$('paymentNotice').textContent=up?'Mudança de plano em conferência. Não contrate outro plano enquanto aguardamos o Mercado Pago.':pendingUnpaid?'Pagamento em conferência automática. Se já pagou, NÃO pague novamente; o sistema verifica a operação periodicamente.':'';
+ $('subscriptionInfo').textContent=active?`Seu plano ${planLabels[active.plan]||active.plan} está vinculado a esta conta. Vencimento do VIP: ${date(vip?.expiresAt||billing.activeUntil)}.`:pending?'Existe uma solicitação de assinatura em aberto.':'Você ainda não tem assinatura ativa.';
+ $('renewalButtons').hidden=!active;
+ $('stopRenewal').hidden=!active||billing.renewal?.state==='paused'||billing.renewal?.state==='canceled';
+ $('resumeRenewal').hidden=!active||billing.renewal?.state!=='paused';$('auditLegacy').hidden=!active||!billing.renewal?.hasOldPlan;
+ const options=active?(billing.availableUpgrades||[]):Object.keys(planLabels);
+ const sel=$('checkoutPlan');const remembered=initialPlan||sel.value;initialPlan='';sel.replaceChildren();for(const k of options){const o=document.createElement('option');o.value=k;o.textContent=`${planLabels[k]||k} · ${priceLabels[k]||''}`;sel.append(o)}if(options.includes(remembered))sel.value=remembered;
+ $('checkoutTitle').textContent=active?'Alterar meu plano':'Contratar assinatura';
+ $('checkoutDescription').textContent=active?'Você pode escolher um período superior. O novo plano é cobrado integralmente; dias não utilizados viram crédito em dias de acesso, sem reembolso automático.':'Escolha um período. Pagamentos em ambiente fictício: não utilize dinheiro real.';
+ const locked=!!pending || !!up || (active&&options.length===0);
+ $('checkoutBtn').hidden=locked;$('checkoutBtn').disabled=locked||options.length===0;
+ $('checkoutBtn').textContent=isProfileComplete()?'Continuar para pagamento':'Completar cadastro para contratar';
+ $('resumeBtn').hidden=!(pending && !active) && !up;
+ $('checkoutPlan').hidden=locked||options.length===0;
+ $('checkoutNote').textContent=!isProfileComplete()?'Preencha e salve seus dados abaixo. O pagamento só será iniciado depois de validar o cadastro.':!billing.testEnabled?'Planos disponíveis para escolha. Checkout fictício reservado aos e-mails de teste autorizados; esta conta ainda não tem permissão.':up?'Upgrade em andamento. Utilize o mesmo checkout ou aguarde a confirmação.':pending?'Existe uma compra pendente: retome apenas se não tiver pago.':active&&options.length===0?'Você já está no plano de maior duração.':'Nenhuma cobrança real está habilitada neste ambiente.';
+ $('resumeBtn').dataset.mode=up?'upgrade_resume':'checkout_resume';
+}
+function renderHistory(){if(commerce?.unavailable){if(commerce.subscription){renderCommercialHistory();}else{$('paymentsHistory').className='empty';$('paymentsHistory').textContent='Histórico temporariamente indisponível. Nenhum pagamento será iniciado.';}return;}if(commerce&&(!isPilotRecorded()||commerce.pilotOverlapAllowed)){renderCommercialHistory();return;}const list=Array.isArray(billing.payments)?billing.payments:[];const target=$('paymentsHistory');target.replaceChildren();
+ $('historyTitle').textContent=isPilotRecorded()?'Pagamentos: piloto real e testes simulados':'Histórico de pagamentos';
+ if(isPilotRecorded()){
+   const real=document.createElement('div');real.className='item';
+   const h=document.createElement('h3');h.textContent='Pagamento real — piloto privado';
+   const p=document.createElement('p');
+   p.textContent=isPilotVerified()
+     ?`R$ 1,00 aprovado, comprovante verificado no servidor. VIP até ${date(vip.pilot.accessUntil)}. Renovação: ${renewalLabels[vip.pilot.renewal]||'a conferir'}.`
+     :'R$ 1,00 registrado no piloto. Revalidação do comprovante pendente; não considere o VIP confirmado.';
+   real.append(h,p);target.append(real);
+   const label=document.createElement('h4');label.className='subhead';
+   label.textContent='Registros anteriores — ambiente simulado (não são novas cobranças reais)';
+   target.append(label);
+ }
+if(!list.length){if(!isPilotRecorded()){target.className='empty';target.textContent='Nenhum pagamento confirmado registrado nesta conta.';}else{target.className='';const none=document.createElement('p');none.className='muted';none.textContent='Nenhum pagamento simulado anterior.';target.append(none);}return}target.className='';const table=document.createElement('table');table.className='hist';const head=document.createElement('thead');head.innerHTML='<tr><th>Data</th><th>Plano</th><th>Valor</th><th>Situação</th></tr>';table.append(head);const body=document.createElement('tbody');for(const p of list){const tr=document.createElement('tr');for(const val of [date(p.approvedAt),planLabels[p.plan]||'—',money(p.amountCents),isPilotRecorded()?(p.status==='approved'?'Simulado aprovado':'Simulado em conferência'):(p.status==='approved'?'Aprovado':'Em conferência')]){const td=document.createElement('td');td.textContent=val;tr.append(td)}body.append(tr)}table.append(body);target.append(table)}
+function item(label,value){const el=document.createElement('div');el.className='item';const h=document.createElement('h3');h.textContent=label;const p=document.createElement('p');p.textContent=value;el.append(h,p);return el}
+$('searchForm').addEventListener('submit',async ev=>{ev.preventDefault();const q=$('searchTerm').value.trim();if(q.length<2)return;const btn=$('searchBtn');btn.disabled=true;$('searchNotice').textContent='Pesquisando…';$('searchResults').replaceChildren();try{const {data,error}=await client.functions.invoke('quality-club-search',{body:{action:'search',q}});if(error||!data?.ok)throw new Error(data?.message||'Consulta indisponível');$('searchNotice').textContent=`${(data.results||[]).length} resultado(s) encontrado(s).`;for(const r of data.results||[]){const wrap=document.createElement('div');wrap.className='item';const h=document.createElement('h3');h.textContent=r.name||'Modelo';const small=document.createElement('small');small.textContent=r.brand||'';wrap.append(h,small);for(const [key,title] of [['screens','Películas compatíveis'],['cases','Capas compatíveis']]){const caption=document.createElement('h4');caption.textContent=title;const text=document.createElement('p');text.textContent=Array.isArray(r[key])&&r[key].length?r[key].join(' · '):'Nenhuma relação cadastrada';wrap.append(caption,text)}$('searchResults').append(wrap)}}catch(e){$('searchNotice').textContent=e.message||'Não foi possível pesquisar.'}finally{btn.disabled=false}});
+async function action(name,notice=$('managementNotice')){if(working)return;working=true;notice.textContent='Consultando Mercado Pago…';try{const x=await invoke(name);notice.textContent=x.message||'Operação concluída.';await refreshData()}catch(e){notice.textContent=e.message||'Falha. Consulte a assinatura antes de tentar novamente.'}finally{working=false}}
+$('checkRenewal').onclick=()=>action('renewal_refresh');$('auditLegacy').onclick=()=>action('renewal_audit_legacy');
+$('stopRenewal').onclick=()=>{if(commerce&&(!isPilotRecorded()||commerce.pilotOverlapAllowed)){if(confirm('Cancelar a renovação automática real no Mercado Pago? O período já pago continua até o vencimento.'))actionCommerce('cancel');return;}if(confirm('Interromper a renovação futura? Seu acesso já pago continua até o vencimento exibido. Pausar não significa cancelar definitivamente.'))action('renewal_stop')};
+$('resumeRenewal').onclick=()=>{if(confirm('Reativar a renovação automática? Novas cobranças poderão ocorrer na próxima data prevista pelo Mercado Pago.'))action('renewal_resume')};
+$('checkoutPlan').addEventListener('change',()=>{sessionStorage.setItem('qc_selected_plan',$('checkoutPlan').value)});
+async function actionCommerce(name){if(working)return;working=true;$('managementNotice').textContent='Confirmando no Mercado Pago…';
+  try{const result=await invokeCommerce(name);$('managementNotice').textContent=result.message||'Operação confirmada.';await refreshData()}
+  catch(e){$('managementNotice').textContent=e.message||'Consulte a operação antes de tentar novamente.'}
+  finally{working=false}}
+async function buyCommercial(){
+  if(working||!commerce?.enabled||!isProfileComplete()){if(!isProfileComplete())focusProfile();return}
+  const plan=$('checkoutPlan').value;if(!['mensal','trimestral','semestral','anual'].includes(plan))return;
+  if(!confirm(`Contratar plano ${planLabels[plan]} por ${priceLabels[plan]} com cobrança REAL automática a cada período, até o cancelamento?`))return;
+  working=true;$('checkoutBtn').disabled=true;$('checkoutNote').textContent='Criando checkout seguro…';
+  try{const ret=await invokeCommerce('create',{plan});startCheckout(ret.checkoutUrl)}
+  catch(e){$('checkoutNote').textContent=e.message||'Criação não confirmada. Não tente novamente.';await refreshData()}
+  finally{working=false}
+}
+$('reviewBtn').onclick=async()=>{
+  if(working||commerce?.subscription?.status!=='review')return;
+  working=true;$('reviewBtn').disabled=true;$('managementNotice').textContent='Pesquisando a tentativa original no Mercado Pago, sem criar cobrança…';
+  try{
+    const result=await invokeCommerce('review_check');
+    await refreshData();
+    $('managementNotice').textContent=result.message||'Pesquisa concluída. Nenhuma nova compra foi iniciada.';
+  }catch(e){$('managementNotice').textContent=e.message||'Não foi possível consultar o Mercado Pago. Bloqueio mantido.';}
+  finally{working=false;$('reviewBtn').disabled=false;}
+};
+$('checkoutBtn').onclick=async()=>{if(working)return;if(commerce&&(!isPilotRecorded()||commerce.pilotOverlapAllowed)){await buyCommercial();return;}if(!billing)return;if(!isProfileComplete()){focusProfile();return;}if(!billing.testEnabled){$('checkoutNote').textContent='Esta conta ainda não está autorizada para o checkout fictício. O responsável pelos testes precisa cadastrar o e-mail no segredo do Supabase; nenhuma cobrança real está disponível.';return;}const hasActive=!!billing.activePlan;const plan=$('checkoutPlan').value;if(!plan)return;const msg=hasActive?`Upgrade para ${planLabels[plan]}: cobrança integral no ambiente fictício, com bônus proporcional do plano anterior. Confirmar?`:`Iniciar assinatura ${planLabels[plan]} no ambiente fictício?`;if(!confirm(msg))return;working=true;$('checkoutBtn').disabled=true;$('checkoutNote').textContent='Criando checkout seguro…';try{const res=await invoke(hasActive?'upgrade_create':'create',{plan});startCheckout(res.checkoutUrl)}catch(e){const msg=e.message||'Não foi possível criar checkout. Não repita sem conferir a operação.';await refreshData();$('checkoutNote').textContent=msg}finally{working=false}};
+$('resumeBtn').onclick=async()=>{if(working||!billing)return;if(commerce&&(!isPilotRecorded()||commerce.pilotOverlapAllowed)){if(!confirm('Retomar o checkout existente? Não confirme outro pagamento caso já tenha pago.'))return;try{startCheckout((await invokeCommerce('resume')).checkoutUrl)}catch(e){$('checkoutNote').textContent=e.message}return;}if(!isProfileComplete()){focusProfile();return;}if(!billing.testEnabled){$('checkoutNote').textContent='Retomada de checkout fictício restrita ao e-mail autorizado. Se já pagou, não pague novamente; a conferência do servidor continua ativa.';return;}if(!confirm('Retomar somente se NÃO pagou. Se a compra já foi aprovada, aguarde a confirmação automática.'))return;working=true;try{const data=await invoke($('resumeBtn').dataset.mode);startCheckout(data.checkoutUrl)}catch(e){const msg=e.message||'Não foi possível retomar o checkout';await refreshData();$('checkoutNote').textContent=msg}finally{working=false}};
+// Apenas consulta o contrato que JA existe. NUNCA chama 'create', 'resume' ou inicia checkout.
+async function syncCommercialPayment(force=false){
+ if(!user||!commerce?.subscription||!['pending','active','expired'].includes(commerce.subscription.status)||syncBusy)return false;
+ if(!force&&Date.now()-lastSyncAttempt<65000)return false;
+ syncBusy=true;lastSyncAttempt=Date.now();
+ try {await invokeCommerce('refresh');return true;}
+ catch(e){announce((e?.message||'Conciliação temporariamente indisponível.')+' Não efetue outra compra.',true);return false;}
+ finally {syncBusy=false;}
+}
+$('refresh').onclick=async()=>{announce('Conferindo contrato e pagamento sem gerar cobranças…');if(commerce?.subscription?.status==='pending')await syncCommercialPayment(true);await refreshData();if(commerce?.subscription?.status==='pending')announce('Pagamento ainda em conciliação. Não faça outra compra.');else if(commerce?.subscription?.status==='active'&&vip?.commercialActive===true)announce('Pagamento e VIP comercial confirmados pelo servidor.');};
+$('logout').onclick=async()=>{if(client)await client.auth.signOut();location.assign('/')};
+$('resetPassword').onclick=async()=>{if(!client||!user)return;const {error}=await client.auth.resetPasswordForEmail(user.email,{redirectTo:location.origin+'/?modo=recuperar'});$('profileNotice').textContent=error?'Não foi possível solicitar o link. Tente novamente.':'Se a conta estiver ativa, você receberá um e-mail com o link para redefinir a senha.'};
+$('loginForm').addEventListener('submit',async ev=>{ev.preventDefault();if(!client)return;const btn=$('loginSubmit');btn.disabled=true;$('loginError').hidden=true;try{const email=$('loginEmail').value.trim().toLowerCase(),password=$('loginPassword').value;const {data,error}=await client.auth.signInWithPassword({email,password});if(error)throw error;if(data.user)showAuthenticated(data.user)}catch(e){$('loginError').hidden=false;$('loginError').textContent=/invalid login credentials/i.test(e.message||'')?'E-mail ou senha incorretos.':(e.message||'Falha no login.')}finally{btn.disabled=false}});
+function startPolling(){
+ let ticks=0, running=false;
+ announce('Assinatura em conferência. Não faça outra compra. Acompanharemos o pagamento já realizado.');
+ if(pollId)clearInterval(pollId);
+ const tick=async()=>{
+   if(running)return;running=true;
+   try {
+   if(!user){if(pollId)clearInterval(pollId);pollId=null;return;}
+   // Após retorno do Mercado Pago consulta já existente imediatamente;
+   // demais consultas financeiras, no máximo uma a cada 65 segundos por aba.
+   if(commerce?.subscription?.status==='pending')await syncCommercialPayment();
+   await refreshData();ticks++;
+   const commercial=commerce?.subscription;
+   const commercialConfirmed=!!commercial&&['active','canceled'].includes(commercial.status)&&
+     !!commercial.accessUntil&&Date.parse(commercial.accessUntil)>Date.now()&&vip?.commercialActive===true;
+   const legacyConfirmed=!commercial&&isPilotVerified()&&vip?.active===true;
+   if(commercialConfirmed||legacyConfirmed){
+     if(pollId)clearInterval(pollId);pollId=null;
+     announce(commercialConfirmed?'Assinatura comercial e VIP confirmados pelo servidor.':'Pagamento anterior confirmado.');
+     history.replaceState(null,'','/conta.html');
+   }else if(ticks>=40){
+     if(pollId)clearInterval(pollId);pollId=null;
+     announce('A assinatura permanece em conferência. Não pague novamente. Se persistir, solicite suporte com o comprovante do Mercado Pago.');
+   }
+   } finally {running=false;}
+ };
+ // Inicia já no retorno, sem depender exclusivamente dos webhooks ou do cron.
+ void tick();pollId=setInterval(()=>{void tick()},12000);
+}
+function updateNav(){document.querySelectorAll('.navlink').forEach(a=>a.addEventListener('click',()=>{document.querySelectorAll('.navlink').forEach(x=>x.classList.remove('active'));a.classList.add('active')}))};updateNav();
+(async()=>{if(!client){showGuest();return}const {data:{user:u}}=await client.auth.getUser();if(u)showAuthenticated(u);else showGuest();client.auth.onAuthStateChange((ev,session)=>{if(ev==='SIGNED_OUT')showGuest()})})();
+</script>
+</body></html>

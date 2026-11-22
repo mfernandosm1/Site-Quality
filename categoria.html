@@ -1,4 +1,9 @@
 <!DOCTYPE html><html lang="pt-BR"><head>
+<script>(function(){
+var p=(location.pathname||'').replace(/\/+$/,'').toLowerCase();
+var to=p==='/quality-club'?'/quality-club.html':p==='/quality-club/peliculas-3d'?'/quality-club-peliculas-3d.html':'';
+if(to)location.replace(to+location.search+location.hash);
+})();</script>
   <meta charset="UTF-8">
   <script src="/js/catalog-runtime.js?v=20261010-uxperf3"></script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -310,6 +315,41 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 <header class="header">
   <div class="header-container">
     <a href="/" class="logo-wrapper" data-home-link="">
@@ -335,6 +375,7 @@
           <a href="/acessorios/" class="cat-link">Acessórios</a>
           <a href="/eletronicos/" class="cat-link">Eletrônicos</a>
           <a href="/assistencia-tecnica/" class="cat-link">Assistência Técnica</a>
+      <a href="/quality-club.html" class="cat-link">Quality Club</a>
     </nav>
 
     <button id="menu-toggle" class="menu-toggle" aria-label="Abrir menu de categorias" aria-controls="mobile-menu" aria-expanded="false">
@@ -364,6 +405,7 @@
           <a href="/acessorios/" class="cat-link">Acessórios</a>
           <a href="/eletronicos/" class="cat-link">Eletrônicos</a>
           <a href="/assistencia-tecnica/" class="cat-link">Assistência Técnica</a>
+      <a href="/quality-club.html" class="cat-link">Quality Club</a>
       <button type="button" class="quality-header-mobile-action" data-quality-header-favorites=""><i class="fa-regular fa-heart" aria-hidden="true"></i> Favoritos</button>
       <button type="button" class="quality-header-mobile-action" data-quality-header-cart=""><i class="fa-solid fa-cart-shopping" aria-hidden="true"></i> Meu carrinho <span data-quality-cart-total="">0</span></button>
     </nav>
@@ -1189,6 +1231,7 @@
 </script>
 
 <script src="/js/category-ui.js?v=20261018-v28"></script>
+<script defer="" src="/js/quality-club-menu.js?v=20261122-3"></script>
 
 <script src="/js/image-resilience.js?v=20261006-fix1"></script>
 

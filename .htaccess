@@ -7,6 +7,8 @@
   # Conteúdo operacional/interno nunca deve ser servido pelo site público.
   RewriteRule ^backups(?:/|$) - [R=404,L,NC]
   RewriteRule ^content/erp(?:/|$) - [R=404,L,NC]
+  # Tabela de películas é um produto VIP: não expor arquivo canônico.
+  RewriteRule ^content/compatibility\.json$ - [R=404,L,NC]
   RewriteRule ^content/(?:analytics|publish|personalizacao-history|panel-theme)\.json$ - [R=404,L,NC]
 
   # Arquivos de desenvolvimento/backup comuns.

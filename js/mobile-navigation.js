@@ -77,6 +77,7 @@
       '<a href="/eletronicos/">'+icon('laptop')+' Eletrônicos '+icon('chevron-right')+'</a>' +
       '<a href="/smartphones/?subcategoria=usados">'+icon('rotate')+' Seminovos '+icon('chevron-right')+'</a>' +
       '<a href="/comparar.html">'+icon('scale-balanced')+' Comparar celulares '+icon('chevron-right')+'</a>' +
+      '<a href="/quality-club.html">'+icon('star')+' Quality Club '+icon('chevron-right')+'</a>' +
       '</div>' +
       '<div class="quality-mobile-sheet-subtitle">Atendimento e compras</div>' +
       '<div class="quality-mobile-sheet-section">' +
@@ -251,7 +252,7 @@
         '<button type="button" class="quality-mobile-tab" data-quality-tab="more">'+icon('ellipsis')+'<span>Mais</span></button>' +
       '</nav>' +
       '<div class="quality-mobile-drawer" aria-hidden="true"><div class="quality-mobile-drawer-shade" data-quality-drawer-close></div><nav class="quality-mobile-drawer-panel" aria-label="Menu lateral"><div class="quality-mobile-drawer-head"><a href="'+homeUrl()+'" class="quality-mobile-drawer-head-logo" aria-label="Quality Celulares — início"><img src="/images/logo-header.png" alt="Quality Celulares"></a><button type="button" data-quality-drawer-close aria-label="Fechar menu">'+icon('xmark')+'</button></div><div class="quality-mobile-drawer-links">'+
-        '<a href="'+homeUrl()+'">'+icon('house')+' Início</a>'+safeLinks.map(function(x){return '<a href="'+x.url+'">'+icon(x.icon)+' '+x.title+'</a>';}).join('')+'<a href="/smartphones/?subcategoria=usados">'+icon('rotate')+' Seminovos</a><a href="/comparar.html">'+icon('scale-balanced')+' Comparar celulares</a></div><div class="quality-mobile-drawer-aux"><button type="button" data-quality-tab="favorites">'+icon('heart')+' Favoritos</button><button type="button" data-quality-tab="interest">'+icon('cart-shopping')+' Meu carrinho</button><button type="button" data-quality-tab="more">'+icon('circle-info')+' Sobre a Quality</button></div></nav></div>' +
+        '<a href="'+homeUrl()+'">'+icon('house')+' Início</a>'+safeLinks.map(function(x){return '<a href="'+x.url+'">'+icon(x.icon)+' '+x.title+'</a>';}).join('')+'<a href="/smartphones/?subcategoria=usados">'+icon('rotate')+' Seminovos</a><a href="/comparar.html">'+icon('scale-balanced')+' Comparar celulares</a><a href="/quality-club.html">'+icon('star')+' Quality Club</a></div><div class="quality-mobile-drawer-aux"><button type="button" data-quality-tab="favorites">'+icon('heart')+' Favoritos</button><button type="button" data-quality-tab="interest">'+icon('cart-shopping')+' Meu carrinho</button><button type="button" data-quality-tab="more">'+icon('circle-info')+' Sobre a Quality</button></div></nav></div>' +
       '<div class="quality-mobile-sheet" role="presentation" aria-hidden="true">' +
         '<div class="quality-mobile-sheet-backdrop" data-quality-sheet-close></div>' +
         '<section class="quality-mobile-sheet-card" role="dialog" aria-modal="true" aria-labelledby="quality-mobile-sheet-title">' +

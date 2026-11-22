@@ -1,0 +1,24 @@
+/* Only the new live search replaces the home-page illustration. */
+body:has(#homeHero) .qc-live-visual{transform:none!important;min-width:0;align-self:start}
+body:has(#homeHero) .qc-live-visual .mockbox{padding:18px}
+body:has(#homeHero) .qc-public-form{display:flex;gap:8px;margin-top:12px;flex-wrap:wrap}
+body:has(#homeHero) #qc-public-input{flex:1 1 230px;min-width:0;height:45px;border:1px solid #555862;background:#1c1e24;color:#f7f7f8;border-radius:11px;padding:0 13px;font-size:14px}
+body:has(#homeHero) #qc-public-input:focus{outline:2px solid #ff7682;outline-offset:2px}
+body:has(#homeHero) .qc-public-form button{min-height:45px}
+body:has(#homeHero) #qc-public-results{max-height:400px;overflow-y:auto;margin-top:14px;scrollbar-color:#51535d transparent}
+body:has(#homeHero) .qc-public-table{display:grid;gap:0;border:1px solid #484b55;border-radius:11px;overflow:hidden;background:#15171c}
+body:has(#homeHero) .qc-public-table-head,body:has(#homeHero) .qc-public-table-row{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:0;align-items:stretch}
+body:has(#homeHero) .qc-public-table-head{background:#292b32;font-size:11px;text-transform:uppercase;font-weight:800;color:#e8e8ed;letter-spacing:.04em}
+body:has(#homeHero) .qc-public-table-head span,body:has(#homeHero) .qc-public-table-row span{padding:11px 10px;overflow-wrap:anywhere;line-height:1.4}
+body:has(#homeHero) .qc-public-table-head span+span,body:has(#homeHero) .qc-public-table-row span+span{border-left:1px solid #363941}
+body:has(#homeHero) .qc-public-table-row{font-size:12px;color:#e6e8eb;border-top:1px solid #363941}
+body:has(#homeHero) .qc-public-table-row:nth-child(odd){background:#1c1e24}
+body:has(#homeHero) .qc-public-model{font-weight:750}
+body:has(#homeHero) .qc-public-free{color:#b7e8c8}
+body:has(#homeHero) .qc-public-locked{color:#ffb8c1;font-weight:700}
+body:has(#homeHero) .qc-public-loading,body:has(#homeHero) .qc-public-empty{color:#c5c7ce;font-size:13px;line-height:1.6;padding:12px}
+body:has(#homeHero) .qc-hero-try{cursor:pointer}
+body:has(#homeHero) #vantagens .section-head{display:block}
+body:has(#homeHero) #planos .section-head{display:block}
+body:has(#homeHero) #quem-somos .about{display:block;max-width:900px}
+@media(max-width:640px){body:has(#homeHero) .qc-public-form button{width:100%}}
