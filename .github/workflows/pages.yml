@@ -42,7 +42,7 @@ jobs:
           # Lista conservadora: nao publicar novas categorias de arquivo automaticamente.
           root_files = {
               'index.html', '404.html', 'header.html', 'footer.html',
-              'categoria.html', 'produto.html', 'comparar.html',
+              'categoria.html', 'produto.html', 'quality-club.html', 'comparar.html',
               'sobre.html', 'seguranca.html', 'formas-de-pagamento.html',
               'seja-nosso-fornecedor.html', 'trabalhe-conosco.html',
               'maintenance.html', 'robots.txt', 'sitemap.xml',
@@ -52,12 +52,12 @@ jobs:
           public_content = {
               'products.json', 'catalog-public.json', 'categories.json',
               'subcategories.json', 'banners.json', 'footer.json',
-              'maintenance.json', 'seo.json', 'theme.json',
+              'maintenance.json', 'maintenance-page.json', 'seo.json', 'theme.json',
               'organization.schema.json', 'quality-knowledge-public.json',
               'quality-product-faq.json',
           }
           public_js = {
-              'catalog-menu.js', 'catalog-runtime.js', 'category-header.js',
+              'catalog-menu.js', 'catalog-runtime.js', 'quality-club-menu.js', 'category-header.js',
               'category-static-guard.js', 'category-trace.js', 'category-ui.js',
               'diagnostico-carregamento.js', 'footer-runtime.js',
               'header-menu.js', 'header-runtime.js', 'home-marketplace.js',
@@ -68,7 +68,7 @@ jobs:
               'storefront-enhancements.js',
           }
           public_css = {
-              'commerce-compare.css', 'guide-quality.css',
+              'commerce-compare.css', 'quality-club.css', 'guide-quality.css',
               'mobile-navigation.css', 'style.css', 'theme-overrides.css',
           }
           image_extensions = {'.png', '.jpg', '.jpeg', '.webp', '.gif', '.ico', '.avif'}
