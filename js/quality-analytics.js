@@ -6,7 +6,18 @@
     try{return localStorage.getItem('quality_analytics_consent')||'';}catch(e){return '';}
   }
   function qaSave(choice){
-    try{localStorage.setItem('quality_analytics_consent',choice);}catch(e){}
+    try{
+      localStorage.setItem('quality_analytics_consent',choice);
+      // Revogação: apaga os identificadores analíticos antigos, não os dados
+      // comerciais do cliente (carrinho/favoritos/autenticação).
+      if(choice!=='yes'){
+        localStorage.removeItem('quality-analytics-visitor-v2');
+        localStorage.removeItem('quality-analytics-session-v2');
+        sessionStorage.removeItem('quality-analytics-geo-v2');
+        sessionStorage.removeItem('quality-analytics-search-submit-v1');
+        sessionStorage.removeItem('quality-analytics-search-results-v1');
+      }
+    }catch(e){}
     var domain=/(^|\.)qualitycel\.com\.br$/.test(location.hostname)?'; Domain=.qualitycel.com.br':'';
     document.cookie='quality_analytics_consent='+choice+'; Path=/; Max-Age=15552000; SameSite=Lax'+(location.protocol==='https:'?'; Secure':'')+domain;
   }
@@ -21,7 +32,7 @@
     el.setAttribute('role','region');el.setAttribute('aria-label','Aviso sobre cookies');
     var inner=document.createElement('div');inner.className='qcookie-inner';
     var message=document.createElement('p');message.className='qcookie-copy';
-    message.appendChild(document.createTextNode('Utilizamos cookies para melhorar sua experiência de navegação. Com sua permissão, também analisamos o uso do site. Saiba mais em nossa '));
+    message.appendChild(document.createTextNode('Usamos estatísticas básicas de acesso sem identificadores de visitantes. Se você aceitar, ativamos análise detalhada com cookies e Google Analytics. Saiba mais em nossa '));
     var policy=document.createElement('a');policy.href="/privacidade-clientes.html";policy.textContent='Política de Privacidade';
     message.appendChild(policy);message.appendChild(document.createTextNode('.'));
     inner.appendChild(message);
@@ -41,7 +52,8 @@
     if(!qaChoice())qaChoices();
   }
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',qaPrivacyFooter,{once:true});else qaPrivacyFooter();
-  if(qaChoice()!=='yes')return;
+  // A coleta básica não depende de consentimento; a identificação de visitantes,
+  // geolocalização por IP e serviços de terceiros dependem de aceite explícito.
   // GA4 carrega apenas depois do consentimento; o ID vem do SEO configurado.
   function qaStartGa(){
     fetch('/content/seo.json',{cache:'no-store'}).then(function(r){return r.ok?r.json():null}).catch(function(){return null}).then(function(cfg){
@@ -52,9 +64,9 @@
       var s=document.createElement('script');s.async=true;s.dataset.qualityConsentedGa='1';s.src='https://www.googletagmanager.com/gtag/js?id='+encodeURIComponent(id);document.head.appendChild(s);
     });
   }
-  qaStartGa();
-  if(window.__qualitySiteAnalyticsV14) return;
-  window.__qualitySiteAnalyticsV14 = true;
+  if(qaChoice()==='yes')qaStartGa();
+  if(window.__qualitySiteAnalyticsV15) return;
+  window.__qualitySiteAnalyticsV15 = true;
 
   var ENDPOINT = 'https://script.google.com/macros/s/AKfycbwZQ01q5u5lRqE3Hk-nMutkTWcLA8r7127sO3Dt132Ti8L0Ci7DWoOyby5v92T_WY34/exec';
   var KEY = 'quality-analytics-v1';
@@ -126,8 +138,12 @@
     safeStorageSet(VISITOR_KEY,visitor); safeStorageSet(SESSION_KEY,session);
     return {visitor:visitor,session:session};
   }
-  var audienceState = ensureAudienceState();
-  function touchAudienceState(){ audienceState=ensureAudienceState(); return audienceState; }
+  // Sem aceite: não ler/criar visitorId, sessionId, cookies ou storage analítico.
+  var audienceState = qaChoice()==='yes' ? ensureAudienceState() : null;
+  function touchAudienceState(){
+    if(qaChoice()!=='yes')return {visitor:{},session:{}};
+    audienceState=ensureAudienceState();return audienceState;
+  }
   var perfState = { lcp:0, cls:0, clsSessionValue:0, clsSessionStart:0, clsSessionLast:0, interactions:Object.create(null) };
   var perfLastSignature = '';
 
@@ -420,6 +436,78 @@
       viewport:viewport(), Viewport:viewport(), timezone:timezone, Timezone:timezone
     };
   }
+  // Estatística básica sem consentimento: somente eventos públicos, sem IDs,
+  // busca digitada, cookies, sessão, fingerprint ou geolocalização por IP.
+  // O Google Apps Script atua como operador dos eventos minimizados; não confundir
+  // este modo com medição de pessoas/sessões ou anonimato da camada de transporte.
+  var BASIC_EVENTS={page_view:1,product_view:1,category_view:1,search:1,
+    search_no_result:1,whatsapp_click:1,share_click:1,favorite:1,
+    favorite_remove:1,list_add:1,list_remove:1,page_engagement:1,web_vitals:1};
+  function basicPublicPath(){
+    var raw=String(window.location.pathname||'/');
+    var path='';try{path=decodeURIComponent(raw);}catch(e){return '';}
+    path=path.toLowerCase().replace(/\/{2,}/g,'/');
+    if(/\/(?:conta|minha-conta|cadastro|completar-cadastro|entrar|login|checkout|pagamento|assinatura|perfil|pedido|recuperar-senha|admin|painel)(?:\/|\.|$)/.test(path))return '';
+    if(path==='/'||path==='/index.html')return '/';
+    if(/^\/(?:site\/)?(?:categoria|produto|comparar|sobre|formas-de-pagamento|seguranca|trabalhe-conosco|seja-nosso-fornecedor|quality-club|privacidade-clientes)\.html$/.test(path))return path;
+    if(/^\/(?:smartphones|acessorios|eletronicos|assistencia-tecnica|quality-club)\/(?:index\.html)?$/.test(path))return path;
+    if(/^\/produto\/[a-z0-9_-]{1,100}\/(?:index\.html)?$/.test(path))return path;
+    if(/^\/categoria\/[a-z0-9_-]{1,100}\/(?:index\.html)?$/.test(path))return path;
+    return '';
+  }
+  function basicReferrer(){
+    try{
+      var host=new URL(document.referrer).hostname.toLowerCase();
+      if(/(^|\.)google\.[a-z.]+$/.test(host))return 'https://www.google.com/';
+      if(/(^|\.)instagram\.com$/.test(host))return 'https://www.instagram.com/';
+      if(/(^|\.)facebook\.com$/.test(host))return 'https://www.facebook.com/';
+      if(host==='wa.me'||/(^|\.)whatsapp\.com$/.test(host))return 'https://www.whatsapp.com/';
+    }catch(e){}
+    return '';
+  }
+  function basicAnalyticsPayload(type,data){
+    var path=basicPublicPath();
+    if(!BASIC_EVENTS[type]||!path)return null;
+    // Evita que caminhos, títulos e campos livres incluam dados de conta/busca.
+    var prodSlug=clean(data.product&&(data.product.slug||data.product.id)||'',100).toLowerCase();
+    var catSlug=clean(data.category&&data.category.slug||'',100).toLowerCase();
+    if(!/^[a-z0-9_-]{1,100}$/.test(prodSlug))prodSlug='';
+    if(!/^[a-z0-9_-]{1,100}$/.test(catSlug))catSlug='';
+    // Arredondamento em intervalos de uma hora e nenhum identificador de página.
+    var hour=new Date(Math.floor(Date.now()/3600000)*3600000).toISOString();
+    var source=basicReferrer();
+    var obj={key:KEY,action:'track',type:type,event:type,Evento:type,
+      at:hour,Data:hour,eventId:randomAnalyticsId('qa-basic'),
+      privacyMode:'basic-no-identifiers',
+      url:window.location.origin+path,Pagina:window.location.origin+path,
+      path:path,Caminho:path,pageTitle:'Página pública',TituloPagina:'Página pública',
+      context:surface(),Contexto:surface(),device:deviceName(),Dispositivo:deviceName(),
+      referrer:source,Origem:source,
+      // Campo de pesquisa intencionalmente ausente: até uma busca pode conter
+      // CPF, dados de saúde ou nome pessoal.
+      term:'',Busca:'',
+      visitorId:'',VisitanteId:'',sessionId:'',SessaoId:'',
+      pageVisitId:'',VisitaPagina:'',
+      city:'',Cidade:'',region:'',Estado:'',regionCode:'',UF:'',
+      country:'',Pais:'',campaign:null};
+    if(prodSlug){obj.slug=prodSlug;obj.SlugProduto=prodSlug;}
+    if(catSlug){obj.category={slug:catSlug};obj.Categoria=catSlug;}
+    if(type==='page_engagement'){
+      var seconds=Math.max(0,Number(data.durationSeconds)||0);
+      obj.durationSeconds=Math.min(300,Math.ceil(seconds/15)*15);
+      obj.TempoSegundos=obj.durationSeconds;
+    }
+    if(type==='web_vitals'){
+      var perf=data.performance||{}, metrics={};
+      ['lcpMs','inpMs','fcpMs','ttfbMs'].forEach(function(k){
+        var value=Number(perf[k]);if(Number.isFinite(value)&&value>0)metrics[k]=Math.min(30000,Math.round(value/100)*100);
+      });
+      if(Number.isFinite(Number(perf.cls)))metrics.cls=Math.round(Number(perf.cls)*10)/10;
+      obj.performance=metrics;
+      obj.LCP=metrics.lcpMs;obj.INP=metrics.inpMs;obj.CLS=metrics.cls;
+    }
+    return obj;
+  }
   function isCriticalEvent(type){
     return type === 'whatsapp_click' || type === 'product_view' || type === 'favorite' || type === 'list_add' || type === 'share_click' || type === 'search' || type === 'search_no_result';
   }
@@ -448,22 +536,23 @@
     } catch(e){}
   }
   function track(type,payload){
-    if(qaChoice()!=='yes')return false;
-    type = clean(type,40);
-    if(!type) return false;
-    var data = normalizePayload(type,payload||{});
-    // Nunca envie buscas que pareçam CPF, telefone ou e-mail.
-    if((type==='search'||type==='search_no_result') && (/@/.test(data.term||'')||/\d{3}\.?\d{3}\.?\d{3}[- ]?\d{2}/.test(data.term||'')||/(?:\d\D*){10,}/.test(data.term||'')))return false;
-    if(type === 'search' && data.term) lastSearchTerm = data.term;
-    if(isDuplicate(type,data)) return false;
-    var obj = payloadObject(type,data);
-    // O site pode navegar instantaneamente após a busca. Registramos a intenção
-    // na sessão para recuperar resultados acessados diretamente, sem dupla contagem.
-    if(type==='search' && data.term) safeSessionSet(SEARCH_MARKER_KEY,{term:data.term,at:Date.now()});
+    type=clean(type,40);if(!type)return false;
+    var granted=qaChoice()==='yes';
+    // Em páginas privadas ou sem consentimento fora da lista pública, não mede.
+    if(!granted && (!BASIC_EVENTS[type] || !basicPublicPath()))return false;
+    var data=normalizePayload(type,payload||{});
+    if(type==='search'&&data.term)lastSearchTerm=data.term;
+    // Termo detalhado somente com consentimento, mesmo no caso de CPF/e-mail.
+    if(granted&&(type==='search'||type==='search_no_result') &&
+      (/@/.test(data.term||'')||/\d{3}\.?\d{3}\.?\d{3}[- ]?\d{2}/.test(data.term||'')||/(?:\d\D*){10,}/.test(data.term||'')))return false;
+    if(isDuplicate(type,data))return false;
+    var obj=granted?payloadObject(type,data):basicAnalyticsPayload(type,data);
+    if(!obj)return false;
+    // Não usar sessionStorage sem consentimento.
+    if(granted && type==='search'&&data.term)safeSessionSet(SEARCH_MARKER_KEY,{term:data.term,at:Date.now()});
     postAppsScript(obj,type);
     postLocalhost(obj);
-    // GA4 acompanha a conversão sem e-mail, CPF, sessão privada ou parâmetros da URL.
-    if(typeof window.gtag==='function'&&['site_signup_complete','whatsapp_click','search','product_view'].includes(type)){
+    if(granted && typeof window.gtag==='function'&&['site_signup_complete','whatsapp_click','search','product_view'].includes(type)){
       window.gtag('event',type==='site_signup_complete'?'sign_up':type,{page_location:location.origin+location.pathname,event_category:'quality_site'});
     }
     return true;
@@ -562,11 +651,16 @@
   };
 
   function isFavoriteNow(btn,product){
-    if(btn && btn.classList.contains('is-active')) return true;
+    // A lista salva é a fonte da verdade. Ícones podem estar defasados.
     try {
       var items=JSON.parse(localStorage.getItem('quality_favoritos_v811')||'[]');
-      var key=String(product && (product.slug||product.id||product.url||product.name)||'').trim().toLowerCase();
-      return Array.isArray(items)&&items.some(function(item){var k=String(item&&(item.slug||item.id||item.url||item.name||item.nome)||'').trim().toLowerCase();return key&&k===key;});
+      if(!Array.isArray(items)) return false;
+      var keys=[product&&product.slug,product&&product.id,product&&product.url,product&&product.name]
+        .filter(Boolean).map(function(v){return String(v).trim().toLowerCase();});
+      return items.some(function(item){
+        return [item&&item.slug,item&&item.id,item&&item.url,item&&item.name,item&&item.nome]
+          .some(function(v){return v && keys.indexOf(String(v).trim().toLowerCase())!==-1;});
+      });
     } catch(e){return false;}
   }
 
@@ -790,8 +884,9 @@
     }
   }
   function recoverDirectSearch(){
-    // Resultados abertos diretamente, sugestões e integrações antigas podem
-    // navegar sem passar pelos botões do cabeçalho. Conta somente com consentimento.
+    // Sem consentimento, não usa sessionStorage nem registra a URL de busca;
+    // o clique no botão é contado antes da navegação, sem guardar o termo.
+    if(qaChoice()!=='yes')return;
     var pathname=String(window.location.pathname||'').toLowerCase();
     if(!/(?:^|\/)categoria\.html$/.test(pathname))return;
     var term='';try{term=clean(new URLSearchParams(window.location.search).get('busca')||'',100).toLowerCase();}catch(e){}
@@ -827,21 +922,32 @@
     }
   }
 
+  // O listener da vitrine usa capture + stopPropagation. O evento deve ser
+  // observado no window ANTES do handler da vitrine, nunca depois dele.
+  window.addEventListener('click',function(ev){
+    var fav=ev.target&&ev.target.closest&&ev.target.closest('[data-quality-fav]');
+    if(!fav) return;
+    var product=productFromButton(fav);
+    var before=isFavoriteNow(fav,product);
+    window.setTimeout(function(){
+      var after=isFavoriteNow(fav,product);
+      if(after===before) return; // Não registrar clique que não salvou favorito
+      track(after?'favorite':'favorite_remove',{product:product,context:surface()});
+    },0);
+  },true);
+
+  // O compartilhamento só conta após confirmação nativa ou cópia do link.
+  window.addEventListener('quality:product-shared',function(ev){
+    var detail=ev&&ev.detail||{};
+    var product=detail.product;
+    if(product) track('share_click',{product:product,context:surface()});
+  });
+
   document.addEventListener('click',function(ev){
     var target=ev.target&&ev.target.closest?ev.target:null;
     if(!target) return;
-
-    var fav=target.closest('[data-quality-fav]');
-    if(fav){
-      var fp=productFromButton(fav);
-      // O handler dos favoritos do site roda em capture e interrompe a propagacao.
-      // Este listener tambem usa capture; apos o toggle, lemos o estado real salvo.
-      window.setTimeout(function(){
-        var active=isFavoriteNow(fav,fp);
-        track(active?'favorite':'favorite_remove',{product:fp,context:surface()});
-      },0);
-      return;
-    }
+    // Ações da vitrine usam um evento de sucesso, não contagem pelo clique.
+    if(target.closest('[data-quality-fav],[data-quality-share]')) return;
 
     var listAction=explicitListAction(target);
     if(listAction){
@@ -921,9 +1027,11 @@
 
   function start(){
     trackInitial(); recoverDirectSearch(); observeNoResults(); initPerformanceObservers();
-    initApproxLocation();
-    scanInterestLists(false);
-    if(!interestListTimer) interestListTimer=window.setInterval(function(){scanInterestLists(true);},700);
+    if(qaChoice()==='yes'){
+      initApproxLocation();
+      scanInterestLists(false);
+      if(!interestListTimer)interestListTimer=window.setInterval(function(){scanInterestLists(true);},700);
+    }
     window.setTimeout(observeNoResults,600); window.setTimeout(observeNoResults,1600); window.setTimeout(function(){sendWebVitals('10s');},10000);
   }
   if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',start,{once:true}); else start();

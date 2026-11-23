@@ -482,15 +482,34 @@
     const title = product.name || 'Produto Quality Celulares';
     const url = qualityCleanUrl(product.url || '');
     const text = 'Olha este produto da Quality Celulares: ' + title;
-    if (navigator.share) {
-      try { await navigator.share({ title, text, url }); return; } catch (e) { if (e && e.name === 'AbortError') return; }
+    function notifyShare(method){
+      // Analytics mede apenas uma ação que concluiu a partilha ou a cópia,
+      // não o clique de um botão que pode não estar funcionando.
+      try { window.dispatchEvent(new CustomEvent('quality:product-shared', {
+        detail: { product: product, method: method }
+      })); } catch (_) {}
+    }
+    if (typeof navigator.share === 'function') {
+      try {
+        await navigator.share({ title, text, url });
+        notifyShare('native');
+        return;
+      } catch (e) {
+        if (e && e.name === 'AbortError') return; // visitante cancelou
+      }
     }
     try {
-      await navigator.clipboard.writeText(url);
-      alert('Link do produto copiado!');
-    } catch {
-      window.prompt('Copie o link do produto:', url);
-    }
+      if (navigator.clipboard && typeof navigator.clipboard.writeText === 'function') {
+        await navigator.clipboard.writeText(url);
+        notifyShare('clipboard');
+        qualityToast('Link do produto copiado! Compartilhe onde desejar.');
+        return;
+      }
+    } catch (_) {}
+    // Em navegadores antigos ou com a área de transferência bloqueada,
+    // não deixar o clique sem resposta.
+    const manual = window.prompt('Copie o link do produto:', url);
+    if (manual !== null) qualityToast('Selecione e copie o link para compartilhar.');
   }
 
   function qualityProductActionsHtml(p, url){
@@ -505,6 +524,21 @@
     '</div>';
   }
 
+  function qualitySyncFavoritesUi(){
+    const count = qualityReadStorage(qualityFavoriteKey()).length;
+    document.querySelectorAll('[data-quality-favorites-total]').forEach(el => {
+      el.textContent = String(count);
+      el.hidden = !count;
+    });
+    try { window.dispatchEvent(new Event('quality:favorites-changed')); } catch (_) {}
+    if (typeof window.qualityRefreshFavoritesMenu === 'function') {
+      try { window.qualityRefreshFavoritesMenu(); } catch (_) {}
+    }
+    if (typeof window.qualityRefreshHeaderCounts === 'function') {
+      try { window.qualityRefreshHeaderCounts(); } catch (_) {}
+    }
+  }
+
   function qualityBindProductActions(){
     if (window.__qualityProductActionsBoundV8112) { qualityUpdateFavoriteButtons(); return; }
     window.__qualityProductActionsBoundV8112 = true;
@@ -517,8 +551,16 @@
       const btn = fav || share;
       const product = qualityProductPayloadFromButton(btn);
       if (fav) {
-        const active = qualityToggleFavorite(product);
+        const probe = product.slug || product.id || product.url || product.name;
+        const before = qualityIsFavorite(probe);
+        qualityToggleFavorite(product);
+        const active = qualityIsFavorite(probe);
         qualityUpdateFavoriteButtons();
+        if (active === before) {
+          qualityToast('Não foi possível salvar o favorito. Verifique o armazenamento do navegador.');
+          return;
+        }
+        qualitySyncFavoritesUi();
         btn.classList.add('quality-action-pulse');
         qualityToast(active ? 'Produto adicionado aos favoritos ❤️' : 'Produto removido dos favoritos');
         setTimeout(() => btn.classList.remove('quality-action-pulse'), 260);
@@ -1812,6 +1854,8 @@
         ensureMenu();
         closePanel();
         if (window.qualityUpdateFavoriteButtons) { try { window.qualityUpdateFavoriteButtons(); } catch(e){} }
+        document.querySelectorAll('[data-quality-favorites-total]').forEach(function(el){ var n=readFavorites().length; el.textContent=String(n); el.hidden=!n; });
+        try { window.dispatchEvent(new Event('quality:favorites-changed')); } catch(_) {}
       }
       return;
     }
@@ -1843,5 +1887,5 @@
 
 <script src="/js/image-resilience.js?v=20261006-fix1"></script>
 
-<script src="/js/quality-analytics.js?v=20261123-coleta-v1"></script>
+<script src="/js/quality-analytics.js?v=20261123-favoritos-compartilhar-v3"></script>
 </body></html>
