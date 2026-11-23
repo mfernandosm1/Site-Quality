@@ -71,3 +71,13 @@ body.qc-page{margin:0;background:#f6f7f9;color:#171c27;font-family:Arial,Helveti
   .qc-page .qc-product .qc-photo{height:220px!important;min-height:220px!important;max-height:220px!important}
   .qc-page .qc-product .qc-photo > img{height:190px!important;max-height:190px!important}
 }
+
+/* Quality Club: conteúdo contextual para busca orgânica. */
+.qc-page .qc-seo-content{margin:42px 0 12px;padding:27px 30px;border:1px solid #e5e7eb;border-radius:16px;background:#fff}
+.qc-page .qc-seo-content h2{margin:0 0 9px;font-size:21px;color:#171c27}
+.qc-page .qc-seo-content>p{margin:0 0 22px;font-size:14px;line-height:1.75;color:#505b6b}
+.qc-page .qc-faq{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
+.qc-page .qc-faq h3{margin:0 0 6px;font-size:14px;color:#171c27}
+.qc-page .qc-faq p{margin:0;font-size:13px;line-height:1.6;color:#566273}
+.qc-page .qc-faq a{color:#b5000d;text-decoration:underline;text-underline-offset:2px}
+@media(max-width:720px){.qc-page .qc-seo-content{padding:22px 20px}.qc-page .qc-faq{grid-template-columns:1fr;gap:17px}}

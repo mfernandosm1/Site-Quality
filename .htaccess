@@ -4,6 +4,9 @@
 <IfModule mod_rewrite.c>
   RewriteEngine On
 
+  # Antigo endereco publico: redirecionamento permanente para URL amigavel.
+  RewriteRule ^quality-club\.html$ /quality-club/ [R=301,L,NC,NE]
+
   # Conteúdo operacional/interno nunca deve ser servido pelo site público.
   RewriteRule ^backups(?:/|$) - [R=404,L,NC]
   RewriteRule ^content/erp(?:/|$) - [R=404,L,NC]

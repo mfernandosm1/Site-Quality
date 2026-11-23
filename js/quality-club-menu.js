@@ -3,7 +3,7 @@
   'use strict';
   if (window.__qualityClubMenuPatch) return;
   window.__qualityClubMenuPatch=true;
-  var url='/quality-club.html';
+  var url='/quality-club/';
   function isClubLink(a){
     var text=(a.textContent||'').replace(/\s+/g,' ').trim();
     return /^(?:tabela\s+vip|quality\s+club)$/i.test(text) || a.classList.contains('quality-club-nav-link');
