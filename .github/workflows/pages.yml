@@ -136,6 +136,10 @@ jobs:
                   return parts[1] == 'index.html' or (parts[0] == 'smartphones' and parts[1] == 'formas-de-pagamento.html')
               if len(parts) == 2 and parts[0] == 'acessorios':
                   return parts[1] in {'index.html', 'formas-de-pagamento.html'}
+              # Pagina de apresentacao do Quality Club no site principal.
+              # Nunca publicar dados de compatibilidade VIP nesta pasta.
+              if parts == ('quality-club', 'index.html'):
+                  return True
               if parts[0] == 'blog':
                   return (len(parts) == 2 and parts[1] == 'index.html') or (len(parts) == 3 and parts[2] == 'index.html')
               if parts[0] == 'produto':
@@ -167,6 +171,7 @@ jobs:
               'index.html', 'header.html', 'produto.html', 'categoria.html',
               'content/products.json', 'content/catalog-public.json',
               'js/catalog-runtime.js', 'js/main.js', 'js/storefront-enhancements.js',
+              'quality-club/index.html',
           )
           for name in required:
               if not (output / name).is_file():
