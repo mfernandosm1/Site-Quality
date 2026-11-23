@@ -71,6 +71,8 @@
   var SESSION_KEY = 'quality-analytics-session-v2';
   var GEO_KEY = 'quality-analytics-geo-v2';
   var SESSION_TIMEOUT_MS = 30 * 60 * 1000;
+  var SEARCH_MARKER_KEY = 'quality-analytics-search-submit-v1';
+  var SEARCH_RESULTS_KEY = 'quality-analytics-search-results-v1';
   var GEO_RETRY_MS = 30 * 1000;
   var GEO_PROVIDER_TIMEOUT_MS = 5500;
   var GEO_MAX_ATTEMPTS_PER_SESSION = 3;
@@ -151,15 +153,22 @@
       if(!q && /(?:^|\/)categoria\.html$/i.test(normalizedPath)) q = params.get('slug');
       if(q) return clean(q,120);
     } catch(e){}
-    var path = pathname.replace(/^\/+|\/+$/g,'');
-    var first = path.split('/')[0] || '';
-    if(!first || /^(site|view|produto|produto\.html|index\.html|categoria\.html|comparar\.html|sobre\.html|formas-de-pagamento\.html)$/i.test(first)) return '';
-    return clean(first,120);
+    // Páginas de conteúdo e resultados de busca não são categorias.
+    // A regra antiga classificava quality-club.html, sobre.html e outros HTMLs
+    // como categorias, inflando indevidamente a métrica de category_view.
+    var parts=pathname.split('/').filter(Boolean);
+    if(parts[0]&&parts[0].toLowerCase()==='categoria'&&parts[1])return clean(parts[1],120);
+    var first=(parts[0]||'').toLowerCase();
+    if(/^(smartphones|acessorios|eletronicos)$/.test(first))return clean(first,120);
+    return '';
   }
   function surface(){
     var p = String(window.location.pathname || '').toLowerCase();
     if(/comparar\.html/.test(p)) return 'Comparador';
     if(currentProductSlug() || /\/produto\//.test(p) || /produto\.html/.test(p)) return 'Página do produto';
+    if(/(?:^|\/)categoria\.html$/.test(p)){
+      try { if(new URLSearchParams(window.location.search).has('busca'))return 'Resultados de busca'; } catch(e){}
+    }
     if(currentCategorySlug() || /categoria\.html/.test(p)) return 'Categoria';
     if(p === '/' || /(?:^|\/)index\.html$/.test(p) || /\/site\/view\/?$/.test(p) || /\/site\/view\/index\.html$/.test(p)) return 'Home';
     return 'Outra página';
@@ -318,7 +327,9 @@
     if(type === 'page_engagement' || type === 'web_vitals') return false;
     var key = dedupeKey(type,data), t = Date.now(), last = Number(recent[key] || 0);
     recent[key] = t;
-    return last && (t-last) < 1800;
+    // Duplo disparo de scripts deve ser filtrado, mas uma nova busca feita
+    // intencionalmente logo em seguida continua contando.
+    return last && (t-last) < (type==='search' ? 500 : 1800);
   }
   function errorCompatLabel(type,data){
     // O endpoint antigo do Sheets pode descartar Erro/Recurso/Motivo. Para não
@@ -410,7 +421,7 @@
     };
   }
   function isCriticalEvent(type){
-    return type === 'whatsapp_click' || type === 'product_view' || type === 'favorite' || type === 'list_add' || type === 'share_click';
+    return type === 'whatsapp_click' || type === 'product_view' || type === 'favorite' || type === 'list_add' || type === 'share_click' || type === 'search' || type === 'search_no_result';
   }
   function postAppsScript(obj,type){
     if(isLocal()) return Promise.resolve(false);
@@ -446,6 +457,9 @@
     if(type === 'search' && data.term) lastSearchTerm = data.term;
     if(isDuplicate(type,data)) return false;
     var obj = payloadObject(type,data);
+    // O site pode navegar instantaneamente após a busca. Registramos a intenção
+    // na sessão para recuperar resultados acessados diretamente, sem dupla contagem.
+    if(type==='search' && data.term) safeSessionSet(SEARCH_MARKER_KEY,{term:data.term,at:Date.now()});
     postAppsScript(obj,type);
     postLocalhost(obj);
     // GA4 acompanha a conversão sem e-mail, CPF, sessão privada ou parâmetros da URL.
@@ -727,7 +741,9 @@
     var perf=collectPerformancePayload();
     if(!perf.lcpMs && !perf.fcpMs && !perf.ttfbMs) return false;
     var signature=[perf.lcpMs,perf.inpMs,perf.cls,perf.transferKb,perf.resourceCount].join('|');
-    if(signature===perfLastSignature && reason!=='pagehide') return false;
+    // visibilitychange, pagehide e beforeunload podem ocorrer juntos.
+    // Não enviar o mesmo pacote três vezes: evita inflar a planilha.
+    if(signature===perfLastSignature) return false;
     perfLastSignature=signature;
     return track('web_vitals',{performance:perf,pageVisitId:pageVisitId,context:surface(),reason:reason||'sample'});
   }
@@ -772,6 +788,26 @@
         track('category_view',{category:{slug:catSlug,name:clean(found&&(found.name||found.nome)||catSlug,100),url:window.location.href},context:'Categoria'});
       }).catch(function(){track('category_view',{category:{slug:catSlug,name:catSlug,url:window.location.href},context:'Categoria'});});
     }
+  }
+  function recoverDirectSearch(){
+    // Resultados abertos diretamente, sugestões e integrações antigas podem
+    // navegar sem passar pelos botões do cabeçalho. Conta somente com consentimento.
+    var pathname=String(window.location.pathname||'').toLowerCase();
+    if(!/(?:^|\/)categoria\.html$/.test(pathname))return;
+    var term='';try{term=clean(new URLSearchParams(window.location.search).get('busca')||'',100).toLowerCase();}catch(e){}
+    if(!term)return;
+    var nowMs=Date.now();
+    var marker=safeSessionGet(SEARCH_MARKER_KEY);
+    var seen=safeSessionGet(SEARCH_RESULTS_KEY);
+    var searchUrl=pathname+'?busca='+term;
+    // Se a busca já foi registrada na página anterior, não a conta novamente.
+    if(marker&&marker.term===term&&nowMs-Number(marker.at||0)<10000){
+      safeSessionSet(SEARCH_RESULTS_KEY,{url:searchUrl,at:nowMs});return;
+    }
+    // Refresh da mesma página de resultados não é uma nova pesquisa.
+    if(seen&&seen.url===searchUrl&&nowMs-Number(seen.at||0)<10*60*1000)return;
+    safeSessionSet(SEARCH_RESULTS_KEY,{url:searchUrl,at:nowMs});
+    track('search',{term:term,context:'Resultados de busca'});
   }
   function searchTermForControl(control){
     if(!control) return '';
@@ -884,7 +920,7 @@
   window.addEventListener('beforeunload',function(){ flushEngagement('beforeunload'); sendWebVitals('beforeunload'); });
 
   function start(){
-    trackInitial(); observeNoResults(); initPerformanceObservers();
+    trackInitial(); recoverDirectSearch(); observeNoResults(); initPerformanceObservers();
     initApproxLocation();
     scanInterestLists(false);
     if(!interestListTimer) interestListTimer=window.setInterval(function(){scanInterestLists(true);},700);
