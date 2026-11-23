@@ -46,9 +46,34 @@
     inner.appendChild(actions);el.appendChild(inner);document.body.appendChild(el);
   }
   function qaPrivacyFooter(){
-    if(document.getElementById('qa-consent-reopen'))return;
-    var a=document.createElement('button');a.type='button';a.id='qa-consent-reopen';a.textContent='Preferências de privacidade';a.style.cssText='margin:8px 12px;padding:5px;border:0;text-decoration:underline;background:transparent;color:inherit;font:12px system-ui;cursor:pointer';
-    a.addEventListener('click',qaChoices);var footer=document.querySelector('footer')||document.body;footer.appendChild(a);
+    // O rodapé é carregado de forma assíncrona em #footer pelo main.js.
+    // O controle nunca deve ser colocado diretamente no body (faixa branca fora do rodapé).
+    function mount(){
+      var footer=document.querySelector('#footer footer, footer.footer, footer');
+      if(!footer)return false;
+      var nav=footer.querySelector('.footer-nav-quality')||footer.querySelector('.footer-container')||footer;
+      var button=document.getElementById('qa-consent-reopen');
+      if(button&&button.parentNode!==nav){button.remove();button=null;}
+      if(!button){
+        button=document.createElement('button');button.type='button';button.id='qa-consent-reopen';
+        button.textContent='Preferências de privacidade';
+        button.style.cssText='display:block;margin:7px 0 0;padding:0;border:0;background:transparent;color:#cbd5e1;font:12px/1.5 system-ui,Arial,sans-serif;text-align:left;cursor:pointer';
+        button.addEventListener('click',qaChoices);
+        nav.appendChild(button);
+      }
+      return true;
+    }
+    var slot=document.getElementById('footer');
+    if(slot){
+      // Se o main.js substituir o conteúdo do slot, reinserir o controle no rodapé novo.
+      var observer=new MutationObserver(function(){mount();});
+      observer.observe(slot,{childList:true,subtree:true});
+      mount();
+    }else if(!mount()){
+      // Páginas que injetam o footer sem #footer: aguardar apenas até ele surgir.
+      var later=new MutationObserver(function(){if(mount())later.disconnect();});
+      later.observe(document.body,{childList:true,subtree:true});
+    }
     if(!qaChoice())qaChoices();
   }
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',qaPrivacyFooter,{once:true});else qaPrivacyFooter();
